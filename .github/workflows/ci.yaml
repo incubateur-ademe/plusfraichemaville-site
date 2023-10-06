@@ -41,4 +41,4 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
           known-host: ssh.osc-fr1.scalingo.com
-          app-name:  ${{ vars.SCALINGO_APP_NAME }}
+          app-name: ${{ vars.SCALINGO_APP_NAME }}
