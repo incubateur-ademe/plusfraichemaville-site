@@ -31,3 +31,14 @@ jobs:
 
       - name: Build
         run: pnpm run build
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.ref == 'refs/heads/prod'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: kolok/deploy-to-scalingo@v1
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          known-host: ssh.osc-fr1.scalingo.com
+          app-name:  ${{ vars.SCALINGO_APP_NAME }}
