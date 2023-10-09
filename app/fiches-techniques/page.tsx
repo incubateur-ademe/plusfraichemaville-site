@@ -11,7 +11,7 @@ export default async function Posts() {
           <Link href={`/fiches-techniques/${ficheTechnique.id}`}>{ficheTechnique.titre}</Link>
         </div>
       ))}
-      <Link href="/">Back to home</Link>
+      <Link href="/">Retour à l{`'`}accueil</Link>
     </>
   );
 }
