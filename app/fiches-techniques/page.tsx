@@ -8,7 +8,7 @@ export default async function Posts() {
       <h1>Toutes les fiches techniques</h1>
       {allFichesTechniques.map((ficheTechnique) => (
         <div key={ficheTechnique.id}>
-          <Link href={`/directus/fiches-techniques/${ficheTechnique.id}`}>{ficheTechnique.titre}</Link>
+          <Link href={`/fiches-techniques/${ficheTechnique.id}`}>{ficheTechnique.titre}</Link>
         </div>
       ))}
       <Link href="/">Back to home</Link>
