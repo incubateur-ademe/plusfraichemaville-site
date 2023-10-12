@@ -1,3 +1,26 @@
+export type AideDecisionEtape = {
+  date_created?: string | null;
+  date_updated?: string | null;
+  description?: string | null;
+  etape_parente_id?: number | AideDecisionEtape | null;
+  fiche_technique_id: any[] | AideDecisionEtapeFicheTechnique[];
+  id: number;
+  image?: string | DirectusFiles | null;
+  nom?: string | null;
+  question_suivante?: string | null;
+  slug?: string | null;
+  type_espace_id?: number | TypeEspace | null;
+  user_created?: string | DirectusUsers | null;
+  user_updated?: string | DirectusUsers | null;
+};
+
+export type AideDecisionEtapeFicheTechnique = {
+  aide_decision_etape_id?: number | AideDecisionEtape | null;
+  fiche_technique_id?: number | FicheTechnique | null;
+  id: number;
+  ordre?: number | null;
+};
+
 export type DirectusActivity = {
   action: string;
   collection: string;
@@ -328,7 +351,7 @@ export type FicheTechnique = {
   date_created?: string | null;
   date_updated?: string | null;
   description?: string | null;
-  etapes_mise_en_oeuvre: any[] | FicheTechniqueEtapeMiseEnOeuvre[] | null;
+  etapes_mise_en_oeuvre: any[] | FicheTechniqueEtapeMiseEnOeuvre[];
   id: number;
   image_principale?: string | DirectusFiles | null;
   sort?: number | null;
@@ -339,13 +362,28 @@ export type FicheTechnique = {
 };
 
 export type FicheTechniqueEtapeMiseEnOeuvre = {
-  etape_mise_en_oeuvre_id?: number | EtapeMiseEnOeuvre;
-  fiche_technique_id?: number | FicheTechnique;
+  etape_mise_en_oeuvre_id?: number | EtapeMiseEnOeuvre | null;
+  fiche_technique_id?: number | FicheTechnique | null;
   id: number;
   order_etape_mise_en_oeuvre?: number | null;
 };
 
+export type TypeEspace = {
+  date_created?: string | null;
+  date_updated?: string | null;
+  icone?: string | DirectusFiles | null;
+  id: number;
+  nom: string;
+  question_suivante?: string | null;
+  slug?: string | null;
+  sort?: number | null;
+  user_created?: string | DirectusUsers | null;
+  user_updated?: string | DirectusUsers | null;
+};
+
 export type CustomDirectusTypes = {
+  aide_decision_etape: AideDecisionEtape[];
+  aide_decision_etape_fiche_technique: AideDecisionEtapeFicheTechnique[];
   directus_activity: DirectusActivity[];
   directus_collections: DirectusCollections[];
   directus_dashboards: DirectusDashboards[];
@@ -371,4 +409,5 @@ export type CustomDirectusTypes = {
   etape_mise_en_oeuvre: EtapeMiseEnOeuvre[];
   fiche_technique: FicheTechnique[];
   fiche_technique_etape_mise_en_oeuvre: FicheTechniqueEtapeMiseEnOeuvre[];
+  type_espace: TypeEspace[];
 };
