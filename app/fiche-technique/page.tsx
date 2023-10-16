@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getFichesTechniques } from "@/lib/directus/queries/fichesTechniques";
+import { getFichesTechniques } from "@/lib/directus/queries/fichesTechniquesQueries";
 
 export default async function Posts() {
   const allFichesTechniques = await getFichesTechniques();

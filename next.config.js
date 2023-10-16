@@ -7,6 +7,22 @@ const nextConfig = {
     });
     return config;
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "http",
+        hostname: "0.0.0.0",
+        port: "8055",
+        pathname: "/assets/**",
+      },
+      {
+        protocol: "https",
+        hostname: "pfmv-cms.osc-fr1.scalingo.io",
+        port: "",
+        pathname: "/assets/**",
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

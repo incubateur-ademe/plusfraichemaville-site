@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getAllTypeEspace } from "@/lib/directus/queries/aideDecision";
+import { getAllTypeEspace } from "@/lib/directus/queries/aideDecisionQueries";
 
 export default async function Posts() {
   const allTypeEspace = await getAllTypeEspace();
@@ -8,7 +8,7 @@ export default async function Posts() {
       <h1>Sur quel espace voulez-vous agir ?</h1>
       {allTypeEspace.map((typeEspace) => (
         <div key={typeEspace.id}>
-          <Link href={`/type-espace/${typeEspace.slug}`}>{typeEspace.nom}</Link>
+          <Link href={`/aide-decision/${typeEspace.slug}`}>{typeEspace.nom}</Link>
         </div>
       ))}
     </>
