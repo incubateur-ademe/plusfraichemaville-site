@@ -354,6 +354,7 @@ export type FicheTechnique = {
   etapes_mise_en_oeuvre: any[] | FicheTechniqueEtapeMiseEnOeuvre[];
   id: number;
   image_principale?: string | DirectusFiles | null;
+  slug: string;
   sort?: number | null;
   status: string;
   titre?: string | null;

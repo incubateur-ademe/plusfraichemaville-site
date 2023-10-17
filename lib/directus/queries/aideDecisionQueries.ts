@@ -20,7 +20,7 @@ export const GET_ALL_TYPE_ESPACE_QUERY = `query {
 }`;
 
 export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: DirectusCompleteFilter) => `query {
-    aide_decision_etape ${filterAideDecisionEtape?.completeFilter}  {
+    aide_decision_etape ${filterAideDecisionEtape}  {
       id
       nom
       description
@@ -41,7 +41,7 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
         slug
         question_suivante
       }
-      fiche_technique_id ${contrusctAndFilters([getAideDecisionFicheTechniqueStatusFilter()]).completeFilter} {
+      fiche_technique_id ${contrusctAndFilters([getAideDecisionFicheTechniqueStatusFilter()])} {
         fiche_technique_id{
           titre
           description
@@ -58,25 +58,19 @@ export async function getAllTypeEspace(): Promise<TypeEspace[]> {
 }
 
 export async function getAideDecisionEtapeByTypeEspaceSlug(typeEspaceSlug: string): Promise<AideDecisionEtape[]> {
-  const filter: DirectusCompleteFilter = {
-    completeFilter: ` (filter: {type_espace_id: {slug:{_eq: "${typeEspaceSlug}"}}})`,
-  };
+  const filter: DirectusCompleteFilter = ` (filter: {type_espace_id: {slug:{_eq: "${typeEspaceSlug}"}}})`;
   const apiResponse = await directusGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter));
   return apiResponse?.aide_decision_etape || [];
 }
 
 export async function getAideDecisionEtapeByEtapeParentSlug(etapeParenteSlug: string): Promise<AideDecisionEtape[]> {
-  const filter: DirectusCompleteFilter = {
-    completeFilter: ` (filter: {etape_parente_id: {slug:{_eq: "${etapeParenteSlug}"}}})`,
-  };
+  const filter: DirectusCompleteFilter = ` (filter: {etape_parente_id: {slug:{_eq: "${etapeParenteSlug}"}}})`;
   const apiResponse = await directusGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter));
   return apiResponse?.aide_decision_etape || [];
 }
 
 export async function getAideDecisionEtapeBySlug(aideDecisionEtapeSlug: string): Promise<AideDecisionEtape | null> {
-  const filter: DirectusCompleteFilter = {
-    completeFilter: ` (filter: {slug:{_eq: "${aideDecisionEtapeSlug}"}})`,
-  };
+  const filter: DirectusCompleteFilter = ` (filter: {slug:{_eq: "${aideDecisionEtapeSlug}"}})`;
   const apiResponse = await directusGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter));
   return apiResponse.aide_decision_etape?.length > 0 ? apiResponse.aide_decision_etape[0] : null;
 }

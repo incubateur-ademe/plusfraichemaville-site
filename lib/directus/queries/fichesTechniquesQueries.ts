@@ -10,13 +10,12 @@ import {
 } from "@/lib/directus/queries/commonFilters";
 
 export const GET_ALL_FICHES_TECHNIQUES_QUERY = (filterStatus?: DirectusCompleteFilter) => `query {
-    fiche_technique ${filterStatus?.completeFilter} {
+    fiche_technique ${filterStatus} {
         id
         titre
         description
         status
         image_principale
-        
     }
 }`;
 
@@ -28,7 +27,7 @@ export async function getFichesTechniques(): Promise<FicheTechnique[]> {
 }
 
 export async function getFicheTechniqueBySlug(slug: string): Promise<FicheTechnique | null> {
-  const filterSlug: DirectusSingleFilter = { filter: ` {slug:{_eq: "${slug}"}}` };
+  const filterSlug: DirectusSingleFilter = ` {slug:{_eq: "${slug}"}}`;
   const filter = contrusctAndFilters([getFicheTechniqueStatusFilter(), filterSlug]);
   const apiResponse = await directusGraphQLCall(GET_ALL_FICHES_TECHNIQUES_QUERY(filter));
   return apiResponse?.fiche_technique?.length > 0 ? apiResponse.fiche_technique[0] : null;
