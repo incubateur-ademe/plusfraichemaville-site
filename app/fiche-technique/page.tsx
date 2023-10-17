@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getFichesTechniques } from "@/lib/directus/queries/fichesTechniques";
+import { getFichesTechniques } from "@/lib/directus/queries/fichesTechniquesQueries";
 
 export default async function Posts() {
   const allFichesTechniques = await getFichesTechniques();
@@ -11,7 +11,6 @@ export default async function Posts() {
           <Link href={`/fiches-techniques/${ficheTechnique.id}`}>{ficheTechnique.titre}</Link>
         </div>
       ))}
-      <Link href="/">Retour à l{`'`}accueil</Link>
     </>
   );
 }

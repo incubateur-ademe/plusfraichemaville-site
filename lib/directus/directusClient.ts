@@ -1,3 +1,5 @@
+import * as Sentry from "@sentry/nextjs";
+
 export const DIRECTUS_URL = process.env.DIRECTUS_URL || "http://127.0.0.1/";
 export const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN || "";
 export const DIRECTUS_ASSET_URL = DIRECTUS_URL + "/assets/";
@@ -19,13 +21,18 @@ export const directusGraphQLCall = async (query: String, variables?: any) => {
       .then((res) => res.json())
       .then((res) => {
         if (!res.data && res.errors) {
-          console.log("API returned an error", res.errors);
+          Sentry.captureMessage(
+            `Directus error : ${res.errors[0].extensions.code} : ${res.errors[0].extensions.errors[0].message}`,
+            "error",
+          );
         } else {
           return res.data;
         }
       })
-      .catch((err) => console.log("error in directusGraphQlCall ", err));
+      .catch((err) => {
+        Sentry.captureException(err);
+      });
   } catch (err) {
-    console.log("ERROR in directusGraphQlCall ", err);
+    Sentry.captureException(err);
   }
 };
