@@ -3,7 +3,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main>
-      <h1>Page d accueil</h1>
       <h3>
         <Link href="/aide-decision/">Module d{"'"}aide à la décision</Link>
       </h3>

@@ -2,7 +2,7 @@ import { AideDecisionEtapeHistory } from "@/lib/directus/queries/commonFilters";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
 
 export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionEtape) {
-  const history: AideDecisionEtapeHistory[] = [];
+  const history: AideDecisionEtapeHistory[] = [new AideDecisionEtapeHistory("Choix de l'espace", "/aide-decision")];
   let etapeParente: AideDecisionEtape | null | undefined = <AideDecisionEtape | null | undefined>(
     aideDecisionEtape.etape_parente_id
   );

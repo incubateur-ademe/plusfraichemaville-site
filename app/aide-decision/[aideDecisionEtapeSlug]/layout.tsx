@@ -1,5 +1,5 @@
 import { PropsWithChildren } from "react";
-import Stepper from "@codegouvfr/react-dsfr/Breadcrumb";
+import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 
 export default async function Layout({
@@ -11,7 +11,7 @@ export default async function Layout({
   if (etapeCourante && historique) {
     return (
       <>
-        <Stepper currentPageLabel={etapeCourante.nom} segments={historique} homeLinkProps={{ href: "/" }} />
+        <Breadcrumb currentPageLabel={etapeCourante.nom} segments={historique} homeLinkProps={{ href: "/" }} />
         {children}
       </>
     );
