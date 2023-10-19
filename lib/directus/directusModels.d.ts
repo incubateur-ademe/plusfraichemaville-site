@@ -9,7 +9,6 @@ export type AideDecisionEtape = {
   nom?: string | null;
   question_suivante?: string | null;
   slug?: string | null;
-  type_espace_id?: number | TypeEspace | null;
   user_created?: string | DirectusUsers | null;
   user_updated?: string | DirectusUsers | null;
 };
@@ -351,6 +350,7 @@ export type FicheTechnique = {
   date_created?: string | null;
   date_updated?: string | null;
   description?: string | null;
+  description_courte?: string | null;
   etapes_mise_en_oeuvre: any[] | FicheTechniqueEtapeMiseEnOeuvre[];
   id: number;
   image_principale?: string | DirectusFiles | null;

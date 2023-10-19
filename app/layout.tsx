@@ -8,6 +8,7 @@ import React, { ReactElement } from "react";
 import { Header } from "@codegouvfr/react-dsfr/Header";
 import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import Footer from "@codegouvfr/react-dsfr/Footer";
+import "./globals.css";
 
 export default function RootLayout({ children }: { children: ReactElement | null }) {
   const lang = "fr";
