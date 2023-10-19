@@ -14,6 +14,7 @@ export const GET_ALL_FICHES_TECHNIQUES_QUERY = (filterStatus?: DirectusCompleteF
         id
         titre
         description
+        description_courte
         status
         image_principale
     }
