@@ -1,23 +1,14 @@
 import "server-only";
 
 import { directusGraphQLCall } from "@/lib/directus/directusClient";
-import { AideDecisionEtape, TypeEspace } from "@/lib/directus/directusModels";
+import { AideDecisionEtape } from "@/lib/directus/directusModels";
 import {
+  AideDecisionEtapeHistory,
   contrusctAndFilters,
   DirectusCompleteFilter,
   getAideDecisionFicheTechniqueStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
-
-export const GET_ALL_TYPE_ESPACE_QUERY = `query {
-    type_espace {
-        id
-        nom
-        icone
-        sort
-        slug
-        question_suivante
-    }
-}`;
+import { getHistoryFromAideDecisionEtape } from "@/lib/directus/helpers/getHistoryFromAideDecision";
 
 export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: DirectusCompleteFilter) => `query {
     aide_decision_etape ${filterAideDecisionEtape}  {
@@ -26,13 +17,6 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
       description
       image
       slug
-      type_espace_id {
-        id
-        nom
-        icone
-        slug
-        question_suivante
-      }
       etape_parente_id {
         id
         nom
@@ -52,13 +36,30 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
     }
 }`;
 
-export async function getAllTypeEspace(): Promise<TypeEspace[]> {
-  const apiResponse = await directusGraphQLCall(GET_ALL_TYPE_ESPACE_QUERY);
-  return apiResponse?.type_espace || [];
-}
+export const GET_AIDE_DECISION_ETAPE_HISTORY = (aideDecisionEtapeSlug: string) => `query {
+  aide_decision_etape (filter: {slug:{_eq: "${aideDecisionEtapeSlug}"}})  {
+    slug
+    etape_parente_id {
+      nom
+      slug
+      etape_parente_id{
+        nom
+        slug
+        etape_parente_id{
+          nom
+          slug
+          etape_parente_id{
+            nom
+            slug
+          }
+        }
+      }
+    }
+  }
+}`;
 
-export async function getAideDecisionEtapeByTypeEspaceSlug(typeEspaceSlug: string): Promise<AideDecisionEtape[]> {
-  const filter: DirectusCompleteFilter = ` (filter: {type_espace_id: {slug:{_eq: "${typeEspaceSlug}"}}})`;
+export async function getAideDecisionFirstSteps(): Promise<AideDecisionEtape[]> {
+  const filter: DirectusCompleteFilter = ` (filter: {etape_parente_id: {id:{_null:true}}})`;
   const apiResponse = await directusGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter));
   return apiResponse?.aide_decision_etape || [];
 }
@@ -73,4 +74,15 @@ export async function getAideDecisionEtapeBySlug(aideDecisionEtapeSlug: string):
   const filter: DirectusCompleteFilter = ` (filter: {slug:{_eq: "${aideDecisionEtapeSlug}"}})`;
   const apiResponse = await directusGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter));
   return apiResponse.aide_decision_etape?.length > 0 ? apiResponse.aide_decision_etape[0] : null;
+}
+
+export async function getAideDecisionHistoryBySlug(
+  aideDecisionEtapeSlug: string,
+): Promise<AideDecisionEtapeHistory[] | null> {
+  const apiResponse = await directusGraphQLCall(GET_AIDE_DECISION_ETAPE_HISTORY(aideDecisionEtapeSlug));
+  if (apiResponse.aide_decision_etape?.length > 0) {
+    return getHistoryFromAideDecisionEtape(apiResponse.aide_decision_etape[0]);
+  } else {
+    return null;
+  }
 }
