@@ -6,7 +6,7 @@ import {
   isFicheTechniquesBookmarked,
   unBookmarkFicheTechniques,
 } from "@/lib/favorites/anonymousFavorite";
-import Button from "@codegouvfr/react-dsfr/Button";
+import Tag from "@codegouvfr/react-dsfr/Tag";
 
 export default function FicheTechniqueCardWithUserInfo({
   ficheTechnique,
@@ -29,9 +29,15 @@ export default function FicheTechniqueCardWithUserInfo({
   return (
     <div className={"flex flex-col"}>
       {children}
-      <Button className={"grow-0"} onClick={changeFavorite}>
+      <Tag
+        iconId="fr-icon-bookmark-line"
+        dismissible={isBookmarked}
+        nativeButtonProps={{
+          onClick: changeFavorite,
+        }}
+      >
         {isBookmarked ? "Retirer des favoris" : "Mettre en favori"}
-      </Button>
+      </Tag>
     </div>
   );
 }
