@@ -8,6 +8,22 @@ import React, { ReactElement } from "react";
 import "./globals.css";
 import AppHeader from "@/components/layout/AppHeader";
 import AppFooter from "@/components/layout/AppFooter";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Plus fraîche ma ville",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon/apple-touch-icon.png",
+    other: {
+      rel: "icon",
+      url: "/favicon/favicon.svg",
+      type: "image/svg+xml",
+    },
+  },
+  description: "Plus fraîche ma ville",
+  manifest: "/favicon/manifest.webmanifest",
+};
 
 export default function RootLayout({ children }: { children: ReactElement | null }) {
   const lang = "fr";
