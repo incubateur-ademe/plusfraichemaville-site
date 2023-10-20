@@ -1,5 +1,6 @@
 import { getAideDecisionEtapeBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 import FicheTechniqueCard from "@/components/aideDecision/ficheTechniqueCard";
+import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/ficheTechniqueCardWithUserInfo";
 
 type Props = {
   aideDecisionEtapeSlug: string;
@@ -14,7 +15,9 @@ export default async function AideDecisionResult({ aideDecisionEtapeSlug }: Prop
         <ul className="flex list-none flex-wrap justify-center p-0">
           {aideDecisionEtape.fiche_technique_id.map((ficheTechnique) => (
             <li key={ficheTechnique.fiche_technique_id.id} className="m-2 w-72 flex">
-              <FicheTechniqueCard ficheTechnique={ficheTechnique.fiche_technique_id} />
+              <FicheTechniqueCardWithUserInfo ficheTechnique={ficheTechnique.fiche_technique_id}>
+                <FicheTechniqueCard ficheTechnique={ficheTechnique.fiche_technique_id} />
+              </FicheTechniqueCardWithUserInfo>
             </li>
           ))}
         </ul>

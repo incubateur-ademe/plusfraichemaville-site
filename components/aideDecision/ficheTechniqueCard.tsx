@@ -5,7 +5,7 @@ import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
 export default function FicheTechniqueCard({ ficheTechnique }: { ficheTechnique: FicheTechnique }) {
   return (
     <Card
-      className={"flex-1"}
+      className={"flex-1 grow"}
       background
       border
       enlargeLink
