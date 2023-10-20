@@ -2,7 +2,7 @@ import { AideDecisionEtapeHistory } from "@/lib/directus/queries/commonFilters";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
 
 export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionEtape) {
-  const history: AideDecisionEtapeHistory[] = [new AideDecisionEtapeHistory("Choix de l'espace", "/aide-decision")];
+  const history: AideDecisionEtapeHistory[] = [];
   let etapeParente: AideDecisionEtape | null | undefined = <AideDecisionEtape | null | undefined>(
     aideDecisionEtape.etape_parente_id
   );
@@ -10,5 +10,6 @@ export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionE
     history.unshift(new AideDecisionEtapeHistory(<string>etapeParente.nom, <string>etapeParente.slug));
     etapeParente = <AideDecisionEtape | null | undefined>etapeParente.etape_parente_id;
   }
+  history.unshift(new AideDecisionEtapeHistory("Choix de l'espace", "/aide-decision"));
   return history;
 }
