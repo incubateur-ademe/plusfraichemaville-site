@@ -27,6 +27,7 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
       }
       fiche_technique_id ${contrusctAndFilters([getAideDecisionFicheTechniqueStatusFilter()])} {
         fiche_technique_id{
+          id
           titre
           description_courte
           image_principale
