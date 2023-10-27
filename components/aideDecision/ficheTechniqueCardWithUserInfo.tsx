@@ -36,7 +36,7 @@ export default function FicheTechniqueCardWithUserInfo({
           onClick: changeFavorite,
         }}
       >
-        {null}
+        {isBookmarked ? "Retirer des favoris" : "Mettre en favori"}
       </Tag>
     </div>
   );
