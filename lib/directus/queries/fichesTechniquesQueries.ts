@@ -12,6 +12,7 @@ import {
 export const GET_ALL_FICHES_TECHNIQUES_QUERY = (filterStatus?: DirectusCompleteFilter) => `query {
     fiche_technique ${filterStatus} {
         id
+        slug
         titre
         description
         description_courte
