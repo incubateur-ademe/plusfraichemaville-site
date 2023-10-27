@@ -6,6 +6,7 @@ export const DIRECTUS_ASSET_URL = DIRECTUS_URL + "/assets/";
 
 export const directusGraphQLCall = async (query: String, variables?: any) => {
   try {
+    console.log("directusGraphQLCall");
     return await fetch(DIRECTUS_URL + "/graphql", {
       method: "POST",
       headers: {
@@ -16,7 +17,7 @@ export const directusGraphQLCall = async (query: String, variables?: any) => {
         query: query,
         variables: variables,
       }),
-      next: { revalidate: +(process.env.DIRECTUS_CACHE_TTL || 0) || false },
+      next: { revalidate: +(process.env.DIRECTUS_CACHE_TTL || 0) || 1 },
     })
       .then((res) => res.json())
       .then((res) => {
@@ -26,6 +27,7 @@ export const directusGraphQLCall = async (query: String, variables?: any) => {
             "error",
           );
         } else {
+          console.log("res.data", res.data);
           return res.data;
         }
       })

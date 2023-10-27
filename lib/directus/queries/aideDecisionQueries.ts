@@ -60,6 +60,7 @@ export const GET_AIDE_DECISION_ETAPE_HISTORY = (aideDecisionEtapeSlug: string) =
 }`;
 
 export async function getAideDecisionFirstSteps(): Promise<AideDecisionEtape[]> {
+  console.log("getAideDecisionFirstSteps");
   const filter: DirectusCompleteFilter = ` (filter: {etape_parente_id: {id:{_null:true}}})`;
   const apiResponse = await directusGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter));
   return apiResponse?.aide_decision_etape || [];
