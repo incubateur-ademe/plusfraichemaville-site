@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   title: "Plus fraîche ma ville",
   icons: {
     icon: "/favicon.ico",
-    shortcut: "/favicon.ico",
+    shortcut: "/favicon/favicon.ico",
     apple: "/favicon/apple-touch-icon.png",
     other: {
       rel: "icon",

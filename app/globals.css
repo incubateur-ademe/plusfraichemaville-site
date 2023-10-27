@@ -33,7 +33,7 @@
     @apply font-bold;
   }
 
-  h3 {
+  h4 {
     @apply text-base;
     @apply md:text-lg;
     @apply mb-4;
