@@ -16,7 +16,7 @@ export const directusGraphQLCall = async (query: String, variables?: any) => {
         query: query,
         variables: variables,
       }),
-      next: { revalidate: +(process.env.DIRECTUS_CACHE_TTL || 0) || false },
+      next: { revalidate: +(process.env.DIRECTUS_CACHE_TTL || 0) || 1 },
     })
       .then((res) => res.json())
       .then((res) => {

@@ -1,4 +1,3 @@
-import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 import { DsfrProvider } from "@codegouvfr/react-dsfr/next-appdir/DsfrProvider";
 import { getHtmlAttributes } from "@codegouvfr/react-dsfr/next-appdir/getHtmlAttributes";
 import { StartDsfr } from "./StartDsfr";
@@ -9,6 +8,7 @@ import "./globals.css";
 import AppHeader from "@/components/layout/AppHeader";
 import AppFooter from "@/components/layout/AppFooter";
 import { Metadata } from "next";
+import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 
 export const metadata: Metadata = {
   title: "Plus fraîche ma ville",

@@ -1,3 +1,5 @@
+// Has to put force-dynamic while https://github.com/vercel/next.js/issues/56018 is not fixed
+export const dynamic = "force-dynamic";
 import { getAideDecisionFirstSteps } from "@/lib/directus/queries/aideDecisionQueries";
 import AideDecisionEtapeCard from "@/components/aideDecision/aideDecisionEtapeCard";
 import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";

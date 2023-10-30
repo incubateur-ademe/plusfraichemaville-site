@@ -1,3 +1,5 @@
+// Has to put force-dynamic while https://github.com/vercel/next.js/issues/56018 is not fixed
+export const dynamic = "force-dynamic";
 import Link from "next/link";
 
 export default function Home() {
