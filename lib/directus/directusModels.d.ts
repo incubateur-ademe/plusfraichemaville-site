@@ -2,20 +2,20 @@ export type AideDecisionEtape = {
   date_created?: string | null;
   date_updated?: string | null;
   description?: string | null;
-  etape_parente_id?: number | AideDecisionEtape | null;
-  fiche_technique_id: any[] | AideDecisionEtapeFicheTechnique[];
+  etape_parente_id?: (number & AideDecisionEtape) | null;
+  fiche_technique_id: any[] & AideDecisionEtapeFicheTechnique[];
   id: number;
-  image?: string | DirectusFiles | null;
+  image?: (string & DirectusFiles) | null;
   nom?: string | null;
   question_suivante?: string | null;
   slug?: string | null;
-  user_created?: string | DirectusUsers | null;
-  user_updated?: string | DirectusUsers | null;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
 };
 
 export type AideDecisionEtapeFicheTechnique = {
-  aide_decision_etape_id?: number | AideDecisionEtape | null;
-  fiche_technique_id?: number | FicheTechnique | null;
+  aide_decision_etape_id?: (number & AideDecisionEtape) | null;
+  fiche_technique_id?: (number & FicheTechnique) | null;
   id: number;
   ordre?: number | null;
 };
@@ -28,9 +28,9 @@ export type DirectusActivity = {
   ip?: string | null;
   item: string;
   origin?: string | null;
-  revisions: any[] | DirectusRevisions[];
+  revisions: any[] & DirectusRevisions[];
   timestamp: string;
-  user?: string | DirectusUsers | null;
+  user?: (string & DirectusUsers) | null;
   user_agent?: string | null;
 };
 
@@ -43,7 +43,7 @@ export type DirectusCollections = {
   collection: string;
   color?: string | null;
   display_template?: string | null;
-  group?: string | DirectusCollections | null;
+  group?: (string & DirectusCollections) | null;
   hidden: boolean;
   icon?: string | null;
   item_duplication_fields?: unknown | null;
@@ -63,17 +63,17 @@ export type DirectusDashboards = {
   id: string;
   name: string;
   note?: string | null;
-  panels: any[] | DirectusPanels[];
-  user_created?: string | DirectusUsers | null;
+  panels: any[] & DirectusPanels[];
+  user_created?: (string & DirectusUsers) | null;
 };
 
 export type DirectusFields = {
-  collection: string | DirectusCollections;
+  collection: string & DirectusCollections;
   conditions?: unknown | null;
   display?: string | null;
   display_options?: unknown | null;
   field: string;
-  group?: string | DirectusFields | null;
+  group?: (string & DirectusFields) | null;
   hidden: boolean;
   id: number;
   interface?: string | null;
@@ -97,18 +97,18 @@ export type DirectusFiles = {
   filename_disk?: string | null;
   filename_download: string;
   filesize?: number | null;
-  folder?: string | DirectusFolders | null;
+  folder?: (string & DirectusFolders) | null;
   height?: number | null;
   id: string;
   location?: string | null;
   metadata?: unknown | null;
-  modified_by?: string | DirectusUsers | null;
+  modified_by?: (string & DirectusUsers) | null;
   modified_on: string;
   storage: string;
   tags?: unknown | null;
   title?: string | null;
   type?: string | null;
-  uploaded_by?: string | DirectusUsers | null;
+  uploaded_by?: (string & DirectusUsers) | null;
   uploaded_on: string;
   width?: number | null;
 };
@@ -121,18 +121,18 @@ export type DirectusFlows = {
   icon?: string | null;
   id: string;
   name: string;
-  operation?: string | DirectusOperations | null;
-  operations: any[] | DirectusOperations[];
+  operation?: (string & DirectusOperations) | null;
+  operations: any[] & DirectusOperations[];
   options?: unknown | null;
   status: string;
   trigger?: string | null;
-  user_created?: string | DirectusUsers | null;
+  user_created?: (string & DirectusUsers) | null;
 };
 
 export type DirectusFolders = {
   id: string;
   name: string;
-  parent?: string | DirectusFolders | null;
+  parent?: (string & DirectusFolders) | null;
 };
 
 export type DirectusMigrations = {
@@ -146,8 +146,8 @@ export type DirectusNotifications = {
   id: number;
   item?: string | null;
   message?: string | null;
-  recipient: string | DirectusUsers;
-  sender?: string | DirectusUsers | null;
+  recipient: string & DirectusUsers;
+  sender?: (string & DirectusUsers) | null;
   status?: string | null;
   subject: string;
   timestamp?: string | null;
@@ -155,22 +155,22 @@ export type DirectusNotifications = {
 
 export type DirectusOperations = {
   date_created?: string | null;
-  flow: string | DirectusFlows;
+  flow: string & DirectusFlows;
   id: string;
   key: string;
   name?: string | null;
   options?: unknown | null;
   position_x: number;
   position_y: number;
-  reject?: string | DirectusOperations | null;
-  resolve?: string | DirectusOperations | null;
+  reject?: (string & DirectusOperations) | null;
+  resolve?: (string & DirectusOperations) | null;
   type: string;
-  user_created?: string | DirectusUsers | null;
+  user_created?: (string & DirectusUsers) | null;
 };
 
 export type DirectusPanels = {
   color?: string | null;
-  dashboard: string | DirectusDashboards;
+  dashboard: string & DirectusDashboards;
   date_created?: string | null;
   height: number;
   icon?: string | null;
@@ -182,7 +182,7 @@ export type DirectusPanels = {
   position_y: number;
   show_header: boolean;
   type: string;
-  user_created?: string | DirectusUsers | null;
+  user_created?: (string & DirectusUsers) | null;
   width: number;
 };
 
@@ -193,7 +193,7 @@ export type DirectusPermissions = {
   id: number;
   permissions?: unknown | null;
   presets?: unknown | null;
-  role?: string | DirectusRoles | null;
+  role?: (string & DirectusRoles) | null;
   validation?: unknown | null;
 };
 
@@ -208,9 +208,9 @@ export type DirectusPresets = {
   layout_options?: unknown | null;
   layout_query?: unknown | null;
   refresh_interval?: number | null;
-  role?: string | DirectusRoles | null;
+  role?: (string & DirectusRoles) | null;
   search?: string | null;
-  user?: string | DirectusUsers | null;
+  user?: (string & DirectusUsers) | null;
 };
 
 export type DirectusRelations = {
@@ -227,13 +227,13 @@ export type DirectusRelations = {
 };
 
 export type DirectusRevisions = {
-  activity: number | DirectusActivity;
+  activity: number & DirectusActivity;
   collection: string;
   data?: unknown | null;
   delta?: unknown | null;
   id: number;
   item: string;
-  parent?: number | DirectusRevisions | null;
+  parent?: (number & DirectusRevisions) | null;
 };
 
 export type DirectusRoles = {
@@ -245,16 +245,16 @@ export type DirectusRoles = {
   id: string;
   ip_access?: unknown | null;
   name: string;
-  users: any[] | DirectusUsers[];
+  users: any[] & DirectusUsers[];
 };
 
 export type DirectusSessions = {
   expires: string;
   ip?: string | null;
   origin?: string | null;
-  share?: string | DirectusShares | null;
+  share?: (string & DirectusShares) | null;
   token: string;
-  user?: string | DirectusUsers | null;
+  user?: (string & DirectusUsers) | null;
   user_agent?: string | null;
 };
 
@@ -270,19 +270,19 @@ export type DirectusSettings = {
   module_bar?: unknown | null;
   project_color?: string | null;
   project_descriptor?: string | null;
-  project_logo?: string | DirectusFiles | null;
+  project_logo?: (string & DirectusFiles) | null;
   project_name: string;
   project_url?: string | null;
-  public_background?: string | DirectusFiles | null;
-  public_foreground?: string | DirectusFiles | null;
+  public_background?: (string & DirectusFiles) | null;
+  public_foreground?: (string & DirectusFiles) | null;
   public_note?: string | null;
   storage_asset_presets?: unknown | null;
   storage_asset_transform?: string | null;
-  storage_default_folder?: string | DirectusFolders | null;
+  storage_default_folder?: (string & DirectusFolders) | null;
 };
 
 export type DirectusShares = {
-  collection: string | DirectusCollections;
+  collection: string & DirectusCollections;
   date_created?: string | null;
   date_end?: string | null;
   date_start?: string | null;
@@ -291,9 +291,9 @@ export type DirectusShares = {
   max_uses?: number | null;
   name?: string | null;
   password?: string | null;
-  role?: string | DirectusRoles | null;
+  role?: (string & DirectusRoles) | null;
   times_used?: number | null;
-  user_created?: string | DirectusUsers | null;
+  user_created?: (string & DirectusUsers) | null;
 };
 
 export type DirectusTranslations = {
@@ -305,7 +305,7 @@ export type DirectusTranslations = {
 
 export type DirectusUsers = {
   auth_data?: unknown | null;
-  avatar?: string | DirectusFiles | null;
+  avatar?: (string & DirectusFiles) | null;
   description?: string | null;
   email?: string | null;
   email_notifications?: boolean | null;
@@ -319,7 +319,7 @@ export type DirectusUsers = {
   location?: string | null;
   password?: string | null;
   provider: string;
-  role?: string | DirectusRoles | null;
+  role?: (string & DirectusRoles) | null;
   status: string;
   tags?: unknown | null;
   tfa_secret?: string | null;
@@ -351,20 +351,21 @@ export type FicheTechnique = {
   date_updated?: string | null;
   description?: string | null;
   description_courte?: string | null;
-  etapes_mise_en_oeuvre: any[] | FicheTechniqueEtapeMiseEnOeuvre[];
+  etapes_mise_en_oeuvre: any[] & FicheTechniqueEtapeMiseEnOeuvre[];
   id: number;
-  image_principale?: string | DirectusFiles | null;
+  image_principale?: (string & DirectusFiles) | null;
+  potentiel_rafraichissement?: number | null;
   slug: string;
   sort?: number | null;
   status: string;
   titre?: string | null;
-  user_created?: string | DirectusUsers | null;
-  user_updated?: string | DirectusUsers | null;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
 };
 
 export type FicheTechniqueEtapeMiseEnOeuvre = {
-  etape_mise_en_oeuvre_id?: number | EtapeMiseEnOeuvre | null;
-  fiche_technique_id?: number | FicheTechnique | null;
+  etape_mise_en_oeuvre_id?: (number & EtapeMiseEnOeuvre) | null;
+  fiche_technique_id?: (number & FicheTechnique) | null;
   id: number;
   order_etape_mise_en_oeuvre?: number | null;
 };
@@ -372,14 +373,14 @@ export type FicheTechniqueEtapeMiseEnOeuvre = {
 export type TypeEspace = {
   date_created?: string | null;
   date_updated?: string | null;
-  icone?: string | DirectusFiles | null;
+  icone?: (string & DirectusFiles) | null;
   id: number;
   nom: string;
   question_suivante?: string | null;
   slug?: string | null;
   sort?: number | null;
-  user_created?: string | DirectusUsers | null;
-  user_updated?: string | DirectusUsers | null;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
 };
 
 export type CustomDirectusTypes = {
