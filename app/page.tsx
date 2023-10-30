@@ -1,16 +1,36 @@
 // Has to put force-dynamic while https://github.com/vercel/next.js/issues/56018 is not fixed
+import Image from "next/image";
+import Button from "@codegouvfr/react-dsfr/Button";
+
 export const dynamic = "force-dynamic";
-import Link from "next/link";
 
 export default function Home() {
   return (
     <main>
-      <h3>
-        <Link href="/aide-decision/">Module d{"'"}aide à la décision</Link>
-      </h3>
-      <h3>
-        <Link href="/fiche-technique/">Voir la liste des fiches techniques du CMS</Link>
-      </h3>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4" dir={"rtl"}>
+        <div className={"h-80 relative"}>
+          <Image
+            src={"/images/homepage/carrousel1.jpg"}
+            alt={"Image de rafraîchissement urbain"}
+            fill={true}
+            className={"object-cover"}
+          />
+        </div>
+        <div className={"text-left mt-10"}>
+          <h4 className={"text-pfmv-light-blue"}>Rafraîchissez efficacement votre collectivité</h4>
+          <p className={"text-pfmv-dark-blue"}>
+            L’outil d’aide à la décision que vous co-construisez avec nous, pour vous accompagner dans le choix de
+            solutions de rafraîchissement urbain pérennes et durables
+          </p>
+          <Button
+            linkProps={{
+              href: "/aide-decision",
+            }}
+          >
+            Aide à la décision
+          </Button>
+        </div>
+      </div>{" "}
     </main>
   );
 }
