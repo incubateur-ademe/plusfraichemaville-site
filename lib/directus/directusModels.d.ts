@@ -354,6 +354,7 @@ export type FicheTechnique = {
   etapes_mise_en_oeuvre: any[] & FicheTechniqueEtapeMiseEnOeuvre[];
   id: number;
   image_principale?: (string & DirectusFiles) | null;
+  odd: any[] & FicheTechniqueObjectifDeveloppementDurable[];
   potentiel_rafraichissement?: number | null;
   slug: string;
   sort?: number | null;
@@ -370,17 +371,17 @@ export type FicheTechniqueEtapeMiseEnOeuvre = {
   order_etape_mise_en_oeuvre?: number | null;
 };
 
-export type TypeEspace = {
-  date_created?: string | null;
-  date_updated?: string | null;
-  icone?: (string & DirectusFiles) | null;
+export type FicheTechniqueObjectifDeveloppementDurable = {
+  fiche_technique_id?: (number & FicheTechnique) | null;
   id: number;
-  nom: string;
-  question_suivante?: string | null;
-  slug?: string | null;
+  objectif_developpement_durable_id?: (number & ObjectifDeveloppementDurable) | null;
+};
+
+export type ObjectifDeveloppementDurable = {
+  description?: string | null;
+  id: number;
+  numero_odd?: number | null;
   sort?: number | null;
-  user_created?: (string & DirectusUsers) | null;
-  user_updated?: (string & DirectusUsers) | null;
 };
 
 export type CustomDirectusTypes = {
@@ -411,5 +412,6 @@ export type CustomDirectusTypes = {
   etape_mise_en_oeuvre: EtapeMiseEnOeuvre[];
   fiche_technique: FicheTechnique[];
   fiche_technique_etape_mise_en_oeuvre: FicheTechniqueEtapeMiseEnOeuvre[];
-  type_espace: TypeEspace[];
+  fiche_technique_objectif_developpement_durable: FicheTechniqueObjectifDeveloppementDurable[];
+  objectif_developpement_durable: ObjectifDeveloppementDurable[];
 };

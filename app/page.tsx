@@ -27,7 +27,7 @@ export default function Home() {
               href: "/aide-decision",
             }}
           >
-            Aide à la décision
+            Trouvez votre solution adaptée et durable
           </Button>
         </div>
       </div>{" "}

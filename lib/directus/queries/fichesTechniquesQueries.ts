@@ -18,6 +18,13 @@ export const GET_ALL_FICHES_TECHNIQUES_QUERY = (filterStatus?: DirectusCompleteF
         description_courte
         status
         image_principale
+        odd {
+            id
+            objectif_developpement_durable_id {
+                numero_odd
+                description
+            }
+        }
         etapes_mise_en_oeuvre(sort: [ "order_etape_mise_en_oeuvre" ]) {
             id
             etape_mise_en_oeuvre_id {
