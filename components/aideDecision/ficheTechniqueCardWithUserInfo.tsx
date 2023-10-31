@@ -1,12 +1,9 @@
 "use client";
 import { FicheTechnique } from "@/lib/directus/directusModels";
-import React, { useState } from "react";
-import {
-  bookmarkFicheTechniques,
-  isFicheTechniquesBookmarked,
-  unBookmarkFicheTechniques,
-} from "@/lib/favorites/anonymousFavorite";
+import React, { useEffect, useState } from "react";
 import Tag from "@codegouvfr/react-dsfr/Tag";
+import { useLocalStorageBookmarkedFT } from "@/hooks/useLocalStorage";
+import { SpinnerCircularFixed } from "spinners-react";
 
 export default function FicheTechniqueCardWithUserInfo({
   ficheTechnique,
@@ -15,29 +12,47 @@ export default function FicheTechniqueCardWithUserInfo({
   ficheTechnique: FicheTechnique;
   children: React.ReactNode;
 }) {
-  const [isBookmarked, setIsBookmarked] = useState(isFicheTechniquesBookmarked(ficheTechnique.slug));
+  const [isClient, setIsClient] = useState(false);
+  const { isFicheTechniqueBookmarked, bookmarkFicheTechnique, unBookmarkFicheTechnique } =
+    useLocalStorageBookmarkedFT();
+  useEffect(() => {
+    setIsClient(true);
+    setIsBookmarked(isFicheTechniqueBookmarked(ficheTechnique.slug));
+  }, [ficheTechnique.slug, isFicheTechniqueBookmarked]);
+  const [isBookmarked, setIsBookmarked] = useState(false);
 
   const changeFavorite = () => {
     if (isBookmarked) {
-      unBookmarkFicheTechniques(ficheTechnique.slug);
+      unBookmarkFicheTechnique(ficheTechnique.slug);
       setIsBookmarked(false);
     } else {
-      bookmarkFicheTechniques(ficheTechnique.slug);
+      bookmarkFicheTechnique(ficheTechnique.slug);
       setIsBookmarked(true);
     }
   };
   return (
     <div className={"relative flex grow"}>
       {children}
-      <Tag
-        className={"absolute top-2 right-2 z-40"}
-        iconId={isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}
-        nativeButtonProps={{
-          onClick: changeFavorite,
-        }}
-      >
-        {isBookmarked ? "Retirer des favoris" : "Mettre en favori"}
-      </Tag>
+      {isClient ? (
+        <Tag
+          className={"absolute top-2 right-2 z-40"}
+          iconId={isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}
+          nativeButtonProps={{
+            onClick: changeFavorite,
+          }}
+        >
+          {isBookmarked ? "Retirer des favoris" : "Mettre en favori"}
+        </Tag>
+      ) : (
+        <Tag
+          className={"absolute top-2 right-2 z-40"}
+          nativeButtonProps={{
+            onClick: () => {},
+          }}
+        >
+          <SpinnerCircularFixed size={20} color="var(--text-label-blue-france)" />
+        </Tag>
+      )}
     </div>
   );
 }

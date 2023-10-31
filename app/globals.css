@@ -1,3 +1,4 @@
+@import "~spinners-react/lib/SpinnerCircularFixed.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -33,7 +34,7 @@
     @apply font-bold;
   }
 
-  h3 {
+  h4 {
     @apply text-base;
     @apply md:text-lg;
     @apply mb-4;
