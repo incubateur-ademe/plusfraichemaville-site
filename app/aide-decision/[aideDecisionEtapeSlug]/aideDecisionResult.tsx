@@ -1,4 +1,4 @@
-import { getAideDecisionEtapeBySlug } from "@/lib/directus/queries/aideDecisionQueries";
+import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 import FicheTechniqueCard from "@/components/aideDecision/ficheTechniqueCard";
 import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/ficheTechniqueCardWithUserInfo";
 
@@ -8,6 +8,7 @@ type Props = {
 
 export default async function AideDecisionResult({ aideDecisionEtapeSlug }: Props) {
   const aideDecisionEtape = await getAideDecisionEtapeBySlug(aideDecisionEtapeSlug);
+  const historique = await getAideDecisionHistoryBySlug(aideDecisionEtapeSlug);
   if (aideDecisionEtape) {
     return (
       <>
@@ -15,7 +16,10 @@ export default async function AideDecisionResult({ aideDecisionEtapeSlug }: Prop
         <ul className="flex list-none flex-wrap justify-center p-0">
           {aideDecisionEtape.fiche_technique_id.map((ficheTechnique) => (
             <li key={ficheTechnique.fiche_technique_id.id} className="m-2 w-72 flex">
-              <FicheTechniqueCardWithUserInfo ficheTechnique={ficheTechnique.fiche_technique_id}>
+              <FicheTechniqueCardWithUserInfo
+                ficheTechnique={ficheTechnique.fiche_technique_id}
+                aideDecisionFirstStepName={(historique && historique[1].label) || ""}
+              >
                 <FicheTechniqueCard ficheTechnique={ficheTechnique.fiche_technique_id} />
               </FicheTechniqueCardWithUserInfo>
             </li>

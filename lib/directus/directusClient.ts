@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/nextjs";
 
-export const DIRECTUS_URL = process.env.DIRECTUS_URL || "http://127.0.0.1/";
+export const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || "http://127.0.0.1/";
 export const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN || "";
 export const DIRECTUS_ASSET_URL = DIRECTUS_URL + "/assets/";
 

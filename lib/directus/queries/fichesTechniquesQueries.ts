@@ -1,3 +1,4 @@
+"use server";
 import "server-only";
 
 import { directusGraphQLCall } from "@/lib/directus/directusClient";
@@ -48,4 +49,11 @@ export async function getFicheTechniqueBySlug(slug: string): Promise<FicheTechni
   const filter = contrusctAndFilters([getFicheTechniqueStatusFilter(), filterSlug]);
   const apiResponse = await directusGraphQLCall(GET_ALL_FICHES_TECHNIQUES_QUERY(filter));
   return apiResponse?.fiche_technique?.length > 0 ? apiResponse.fiche_technique[0] : null;
+}
+
+export async function getFicheTechniqueBySlugs(slugs: string[]): Promise<FicheTechnique[]> {
+  const filterSlug: DirectusSingleFilter = ` {slug:{_in: ${JSON.stringify(slugs)}}}`;
+  const filter = contrusctAndFilters([getFicheTechniqueStatusFilter(), filterSlug]);
+  const apiResponse = await directusGraphQLCall(GET_ALL_FICHES_TECHNIQUES_QUERY(filter));
+  return apiResponse?.fiche_technique || [];
 }

@@ -12,7 +12,7 @@ export default function FicheTechniqueCard({ ficheTechnique }: { ficheTechnique:
       title={ficheTechnique.titre}
       desc={ficheTechnique.description_courte}
       imageAlt={ficheTechnique.titre || ""}
-      imageUrl={DIRECTUS_ASSET_URL + ficheTechnique.image_principale}
+      imageUrl={DIRECTUS_ASSET_URL + ficheTechnique.image_principale + "?key=fiche-technique-card"}
       linkProps={{
         href: `/fiche-technique/${ficheTechnique.slug}`,
       }}
