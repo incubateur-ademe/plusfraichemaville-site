@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getFicheTechniqueBySlugs } from "@/lib/directus/queries/fichesTechniquesQueries";
+import { getFicheTechniqueByIds } from "@/lib/directus/queries/fichesTechniquesQueries";
 
 export async function GET(request: NextRequest) {
-  const slugs = request.nextUrl.searchParams.get("ficheTechniqueSlugs");
+  const ficheTechniqueIds = request.nextUrl.searchParams.get("ficheTechniqueIds");
 
-  if (slugs) {
-    return NextResponse.json(await getFicheTechniqueBySlugs(<string[]>JSON.parse(slugs)));
+  if (ficheTechniqueIds) {
+    return NextResponse.json(await getFicheTechniqueByIds(<number[]>JSON.parse(ficheTechniqueIds)));
   } else {
     return NextResponse.json("[]");
   }

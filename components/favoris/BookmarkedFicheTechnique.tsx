@@ -5,17 +5,17 @@ import { FicheTechnique } from "@/lib/directus/directusModels";
 
 export default function BookmarkedFicheTechniqueByProject({
   projectName,
-  ficheTechniqueSlugs,
+  ficheTechniqueIds,
 }: {
   projectName: string;
-  ficheTechniqueSlugs: string[];
+  ficheTechniqueIds: number[];
 }) {
   const [ficheTechniques, setFicheTechniques] = useState<FicheTechnique[]>([]);
   useEffect(() => {
-    fetch(`/api/get-fiches-techniques?ficheTechniqueSlugs=${JSON.stringify(ficheTechniqueSlugs)}`)
+    fetch(`/api/get-fiches-techniques?ficheTechniqueIds=${JSON.stringify(ficheTechniqueIds)}`)
       .then((res) => res.json())
       .then((fichesTechniques) => setFicheTechniques(fichesTechniques));
-  }, [ficheTechniqueSlugs]);
+  }, [ficheTechniqueIds]);
   if (ficheTechniques?.length > 0) {
     return (
       <>

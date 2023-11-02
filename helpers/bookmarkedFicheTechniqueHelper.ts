@@ -1,43 +1,43 @@
-export const BOOKMARK_FT_KEY = "bookmark-ft";
+export const BOOKMARK_FT_KEY = "bookmark-ft-id";
 
 export type ProjectBookmarks = {
   projectName: string;
-  ficheTechniqueIds: string[];
+  ficheTechniqueIds: number[];
 };
 
 export const isFicheTechniqueBookmarked = (
   currentBookmarks: ProjectBookmarks[],
-  ficheTechniqueSlug: string,
+  ficheTechniqueId: number,
   projectName: string,
 ) => {
   const projectBookmarks = currentBookmarks?.find((b) => b.projectName === projectName);
-  return projectBookmarks && projectBookmarks.ficheTechniqueIds.includes(ficheTechniqueSlug);
+  return projectBookmarks && projectBookmarks.ficheTechniqueIds.includes(ficheTechniqueId);
 };
 
 export const addFicheTechniqueBookmark = (
   currentBookmarks: ProjectBookmarks[],
-  ficheTechniqueSlug: string,
+  ficheTechniqueId: number,
   projectName: string,
 ) => {
   const projectBookmarks = currentBookmarks.find((b) => b.projectName === projectName);
   if (projectBookmarks) {
-    if (!projectBookmarks.ficheTechniqueIds.includes(ficheTechniqueSlug)) {
-      projectBookmarks.ficheTechniqueIds.push(ficheTechniqueSlug);
+    if (!projectBookmarks.ficheTechniqueIds.includes(ficheTechniqueId)) {
+      projectBookmarks.ficheTechniqueIds.push(ficheTechniqueId);
     }
   } else {
-    currentBookmarks.push({ projectName: projectName, ficheTechniqueIds: [ficheTechniqueSlug] });
+    currentBookmarks.push({ projectName: projectName, ficheTechniqueIds: [ficheTechniqueId] });
   }
   return currentBookmarks;
 };
 
 export const unBookmarkFicheTechnique = (
   currentBookmarks: ProjectBookmarks[],
-  ficheTechniqueSlug: string,
+  ficheTechniqueId: number,
   projectName: string,
 ) => {
   const projectBookmarks = currentBookmarks.find((b) => b.projectName === projectName);
   if (projectBookmarks) {
-    const index = projectBookmarks.ficheTechniqueIds.indexOf(ficheTechniqueSlug);
+    const index = projectBookmarks.ficheTechniqueIds.indexOf(ficheTechniqueId);
     if (index > -1) {
       projectBookmarks.ficheTechniqueIds.splice(index, 1);
     }

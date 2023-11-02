@@ -29,7 +29,7 @@ export default function FicheTechniqueCardWithUserInfo({
   );
 
   const [isBookmarked, setIsBookmarked] = useState(
-    isFicheTechniqueBookmarked(bookmarkedFichesTechniques, ficheTechnique.slug, aideDecisionFirstStepName),
+    isFicheTechniqueBookmarked(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
   );
 
   useEffect(() => {
@@ -39,12 +39,12 @@ export default function FicheTechniqueCardWithUserInfo({
   const changeFavorite = () => {
     if (isBookmarked) {
       setBookmarkedFichesTechniques(
-        unBookmarkFicheTechnique(bookmarkedFichesTechniques, ficheTechnique.slug, aideDecisionFirstStepName),
+        unBookmarkFicheTechnique(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
       );
       setIsBookmarked(false);
     } else {
       setBookmarkedFichesTechniques(
-        addFicheTechniqueBookmark(bookmarkedFichesTechniques, ficheTechnique.slug, aideDecisionFirstStepName),
+        addFicheTechniqueBookmark(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
       );
       setIsBookmarked(true);
     }

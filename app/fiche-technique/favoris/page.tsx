@@ -20,7 +20,7 @@ export default function Page() {
             <BookmarkedFicheTechniqueByProject
               key={pb.projectName}
               projectName={pb.projectName}
-              ficheTechniqueSlugs={pb.ficheTechniqueIds}
+              ficheTechniqueIds={pb.ficheTechniqueIds}
             />
           ))
         )}
