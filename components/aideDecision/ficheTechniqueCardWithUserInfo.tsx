@@ -2,31 +2,50 @@
 import { FicheTechnique } from "@/lib/directus/directusModels";
 import React, { useEffect, useState } from "react";
 import Tag from "@codegouvfr/react-dsfr/Tag";
-import { useLocalStorageBookmarkedFT } from "@/hooks/useLocalStorage";
 import { SpinnerCircularFixed } from "spinners-react";
+import { useLocalStorage } from "usehooks-ts";
+import {
+  addFicheTechniqueBookmark,
+  BOOKMARK_FT_KEY,
+  isFicheTechniqueBookmarked,
+  ProjectBookmarks,
+  unBookmarkFicheTechnique,
+} from "@/helpers/bookmarkedFicheTechniqueHelper";
 
 export default function FicheTechniqueCardWithUserInfo({
   ficheTechnique,
+  aideDecisionFirstStepName,
   children,
 }: {
   ficheTechnique: FicheTechnique;
+  aideDecisionFirstStepName: string;
   children: React.ReactNode;
 }) {
   const [isClient, setIsClient] = useState(false);
-  const { isFicheTechniqueBookmarked, bookmarkFicheTechnique, unBookmarkFicheTechnique } =
-    useLocalStorageBookmarkedFT();
+
+  const [bookmarkedFichesTechniques, setBookmarkedFichesTechniques] = useLocalStorage<ProjectBookmarks[]>(
+    BOOKMARK_FT_KEY,
+    [],
+  );
+
+  const [isBookmarked, setIsBookmarked] = useState(
+    isFicheTechniqueBookmarked(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
+  );
+
   useEffect(() => {
     setIsClient(true);
-    setIsBookmarked(isFicheTechniqueBookmarked(ficheTechnique.slug));
-  }, [ficheTechnique.slug, isFicheTechniqueBookmarked]);
-  const [isBookmarked, setIsBookmarked] = useState(false);
+  }, []);
 
   const changeFavorite = () => {
     if (isBookmarked) {
-      unBookmarkFicheTechnique(ficheTechnique.slug);
+      setBookmarkedFichesTechniques(
+        unBookmarkFicheTechnique(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
+      );
       setIsBookmarked(false);
     } else {
-      bookmarkFicheTechnique(ficheTechnique.slug);
+      setBookmarkedFichesTechniques(
+        addFicheTechniqueBookmark(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
+      );
       setIsBookmarked(true);
     }
   };
@@ -50,7 +69,7 @@ export default function FicheTechniqueCardWithUserInfo({
             onClick: () => {},
           }}
         >
-          <SpinnerCircularFixed size={20} color="var(--text-label-blue-france)" />
+          <SpinnerCircularFixed size={20} color="dsfr-text-label-blue-france" />
         </Tag>
       )}
     </div>

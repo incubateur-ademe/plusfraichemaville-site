@@ -18,9 +18,18 @@ export default function NavigationMenu() {
           isActive: pathname.startsWith("/aide-decision"),
         },
         {
-          linkProps: { href: "/fiche-technique", target: "_self" },
           text: "Fiches techniques",
           isActive: pathname.startsWith("/fiche-technique"),
+          menuLinks: [
+            {
+              linkProps: { href: "/fiche-technique", target: "_self" },
+              text: "Toutes les fiches techniques",
+            },
+            {
+              linkProps: { href: "/fiche-technique/favoris", target: "_self" },
+              text: "Ma sélection de fiches techniques",
+            },
+          ],
         },
       ]}
     />

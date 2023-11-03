@@ -11,7 +11,7 @@ export default function AideDecisionEtapeCard({ aideDecisionEtape }: { aideDecis
       title={aideDecisionEtape.nom}
       desc={aideDecisionEtape.description}
       imageAlt={aideDecisionEtape.nom || ""}
-      imageUrl={DIRECTUS_ASSET_URL + aideDecisionEtape.image}
+      imageUrl={DIRECTUS_ASSET_URL + aideDecisionEtape.image + "?key=aide-decision-card"}
       linkProps={{
         href: `/aide-decision/${aideDecisionEtape.slug}`,
       }}
