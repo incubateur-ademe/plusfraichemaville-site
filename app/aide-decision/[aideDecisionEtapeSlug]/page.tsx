@@ -3,7 +3,7 @@ import {
   getAideDecisionEtapeBySlug,
 } from "@/lib/directus/queries/aideDecisionQueries";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
-import AideDecisionResult from "@/app/aide-decision/[aideDecisionEtapeSlug]/aideDecisionResult";
+import AideDecisionResult from "@/app/aide-decision/[aideDecisionEtapeSlug]/AideDecisionResult";
 import AideDecisionEtapeCard from "@/components/aideDecision/aideDecisionEtapeCard";
 
 export default async function Page({ params }: { params: { aideDecisionEtapeSlug: string } }) {

@@ -1,6 +1,6 @@
 import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
-import FicheTechniqueCard from "@/components/aideDecision/ficheTechniqueCard";
 import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/ficheTechniqueCardWithUserInfo";
+import FicheTechniqueFullCard from "@/components/ficheTechnique/FicheTechniqueFullCard";
 
 type Props = {
   aideDecisionEtapeSlug: string;
@@ -20,7 +20,7 @@ export default async function AideDecisionResult({ aideDecisionEtapeSlug }: Prop
                 ficheTechnique={ficheTechnique.fiche_technique_id}
                 aideDecisionFirstStepName={(historique && historique[1].label) || ""}
               >
-                <FicheTechniqueCard ficheTechnique={ficheTechnique.fiche_technique_id} />
+                <FicheTechniqueFullCard ficheTechnique={ficheTechnique.fiche_technique_id} />
               </FicheTechniqueCardWithUserInfo>
             </li>
           ))}

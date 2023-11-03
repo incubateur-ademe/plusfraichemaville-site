@@ -54,7 +54,7 @@ export default function FicheTechniqueCardWithUserInfo({
       {children}
       {isClient ? (
         <Tag
-          className={"absolute top-2 right-2 z-40"}
+          className={"absolute top-2 right-2 z-1000"}
           iconId={isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}
           nativeButtonProps={{
             onClick: changeFavorite,
@@ -64,7 +64,7 @@ export default function FicheTechniqueCardWithUserInfo({
         </Tag>
       ) : (
         <Tag
-          className={"absolute top-2 right-2 z-40"}
+          className={"absolute top-2 right-2 z-1000"}
           nativeButtonProps={{
             onClick: () => {},
           }}
