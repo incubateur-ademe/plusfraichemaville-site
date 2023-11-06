@@ -1,7 +1,7 @@
 import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/ficheTechniqueCardWithUserInfo";
 import FicheTechniqueCard from "@/components/aideDecision/ficheTechniqueCard";
-import { useEffect, useState } from "react";
 import { FicheTechnique } from "@/lib/directus/directusModels";
+import { useApi } from "@/hooks/useApi";
 
 export default function BookmarkedFicheTechniqueByProject({
   projectName,
@@ -10,13 +10,10 @@ export default function BookmarkedFicheTechniqueByProject({
   projectName: string;
   ficheTechniqueIds: number[];
 }) {
-  const [ficheTechniques, setFicheTechniques] = useState<FicheTechnique[]>([]);
-  useEffect(() => {
-    fetch(`/api/get-fiches-techniques?ficheTechniqueIds=${JSON.stringify(ficheTechniqueIds)}`)
-      .then((res) => res.json())
-      .then((fichesTechniques) => setFicheTechniques(fichesTechniques));
-  }, [ficheTechniqueIds]);
-  if (ficheTechniques?.length > 0) {
+  const { data: ficheTechniques } = useApi<FicheTechnique[]>(
+    `/api/get-fiches-techniques?ficheTechniqueIds=${JSON.stringify(ficheTechniqueIds)}`,
+  );
+  if (ficheTechniques && ficheTechniques?.length > 0) {
     return (
       <>
         <h3 className={"mt-8"}>{`Mes solutions pour ma recherche "${projectName}"`}</h3>
