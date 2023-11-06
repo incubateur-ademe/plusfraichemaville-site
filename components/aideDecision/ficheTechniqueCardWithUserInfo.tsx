@@ -2,7 +2,6 @@
 import { FicheTechnique } from "@/lib/directus/directusModels";
 import React, { useEffect, useState } from "react";
 import Tag from "@codegouvfr/react-dsfr/Tag";
-import { SpinnerCircularFixed } from "spinners-react";
 import { useLocalStorage } from "usehooks-ts";
 import {
   addFicheTechniqueBookmark,
@@ -11,6 +10,7 @@ import {
   ProjectBookmarks,
   unBookmarkFicheTechnique,
 } from "@/helpers/bookmarkedFicheTechniqueHelper";
+import { Oval } from "react-loader-spinner";
 
 export default function FicheTechniqueCardWithUserInfo({
   ficheTechnique,
@@ -69,7 +69,16 @@ export default function FicheTechniqueCardWithUserInfo({
             onClick: () => {},
           }}
         >
-          <SpinnerCircularFixed size={20} color="dsfr-text-label-blue-france" />
+          <Oval
+            height={20}
+            width={20}
+            color="var(--text-label-blue-france)"
+            visible={true}
+            ariaLabel="oval-loading"
+            secondaryColor="grey"
+            strokeWidth={3}
+            strokeWidthSecondary={3}
+          />
         </Tag>
       )}
     </div>
