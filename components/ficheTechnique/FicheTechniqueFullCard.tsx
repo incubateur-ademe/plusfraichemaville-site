@@ -17,7 +17,7 @@ export default async function FicheTechniqueFullCard({ ficheTechnique }: { fiche
             Solution verte
           </div>
           <h3 className="fr-card__title">
-            <a className="!text-dsfr-text-color-green fr-text--bold" href={`/fiche-technique/${ficheTechnique.slug}`}>
+            <a className="!text-dsfr-text-color-green font-xtraBold" href={`/fiche-technique/${ficheTechnique.slug}`}>
               {ficheTechnique.titre}
             </a>
           </h3>

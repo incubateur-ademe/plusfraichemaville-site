@@ -6,6 +6,9 @@ module.exports = {
       zIndex: {
         1000: "1000",
       },
+      fontFamily: {
+        xtraBold: ["var(--font-xtra-bold)"],
+      },
     },
     colors: {
       "pfmv-light-blue": "#0080C2",
