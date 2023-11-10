@@ -17,7 +17,7 @@ export default function Home() {
           />
         </div>
         <div className={"text-left mt-10"}>
-          <h4 className={"text-pfmv-light-blue"}>Rafraîchissez efficacement votre collectivité</h4>
+          <h1 className={"!text-pfmv-light-blue fr-h4"}>Rafraîchissez efficacement votre collectivité</h1>
           <p className={"text-dsfr-text-label-blue-france"}>
             L’outil d’aide à la décision que vous co-construisez avec nous, pour vous accompagner dans le choix de
             solutions de rafraîchissement urbain pérennes et durables
