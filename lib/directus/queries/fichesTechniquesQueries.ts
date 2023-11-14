@@ -7,7 +7,7 @@ import {
   contrusctAndFilters,
   DirectusCompleteFilter,
   DirectusSingleFilter,
-  getFicheTechniqueStatusFilter,
+  getStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
 
 export const GET_ALL_FICHES_TECHNIQUES_QUERY = (filterStatus?: DirectusCompleteFilter) => `query {
@@ -39,21 +39,21 @@ export const GET_ALL_FICHES_TECHNIQUES_QUERY = (filterStatus?: DirectusCompleteF
 
 export async function getFichesTechniques(): Promise<FicheTechnique[]> {
   const apiResponse = await directusGraphQLCall(
-    GET_ALL_FICHES_TECHNIQUES_QUERY(contrusctAndFilters([getFicheTechniqueStatusFilter()])),
+    GET_ALL_FICHES_TECHNIQUES_QUERY(contrusctAndFilters([getStatusFilter()])),
   );
   return apiResponse?.fiche_technique || [];
 }
 
 export async function getFicheTechniqueBySlug(slug: string): Promise<FicheTechnique | null> {
   const filterSlug: DirectusSingleFilter = ` {slug:{_eq: "${slug}"}}`;
-  const filter = contrusctAndFilters([getFicheTechniqueStatusFilter(), filterSlug]);
+  const filter = contrusctAndFilters([getStatusFilter(), filterSlug]);
   const apiResponse = await directusGraphQLCall(GET_ALL_FICHES_TECHNIQUES_QUERY(filter));
   return apiResponse?.fiche_technique?.length > 0 ? apiResponse.fiche_technique[0] : null;
 }
 
 export async function getFicheTechniqueByIds(ficheTechniqueIds: number[]): Promise<FicheTechnique[]> {
   const filterSlug: DirectusSingleFilter = ` {id:{_in: ${JSON.stringify(ficheTechniqueIds)}}}`;
-  const filter = contrusctAndFilters([getFicheTechniqueStatusFilter(), filterSlug]);
+  const filter = contrusctAndFilters([getStatusFilter(), filterSlug]);
   const apiResponse = await directusGraphQLCall(GET_ALL_FICHES_TECHNIQUES_QUERY(filter));
   return apiResponse?.fiche_technique || [];
 }

@@ -6,6 +6,7 @@
     "predev": "only-include-used-icons",
     "prebuild": "only-include-used-icons",
     "dev": "next dev",
+    "clean": "rm -rf ./.next && rm -rf ./node_modules",
     "build": "next build",
     "start": "next start",
     "localAsProd": "rm -rf ./.next && next build && next start",

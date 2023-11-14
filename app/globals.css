@@ -48,5 +48,7 @@
 
   p {
     @apply mb-4;
+    font-size: inherit;
+    line-height: inherit;
   }
 }
