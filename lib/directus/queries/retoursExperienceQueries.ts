@@ -26,6 +26,7 @@ export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (rexFilter?: DirectusComplete
         }
         solutions {
             solution_retour_experience_id {
+                id
                 titre
                 description
                 image

@@ -3,6 +3,7 @@ import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
 import { getRetourExperienceBySlug } from "@/lib/directus/queries/retoursExperienceQueries";
 import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
 import SituationRetourExperienceCard from "@/components/retourExperience/SituationRetourExperienceCard";
+import SolutionRetourExperienceCard from "@/components/retourExperience/SolutionRetourExperienceCard";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -30,7 +31,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
             <br />
           </div>
           <div className="flex-1 md:pl-4">
-            <h1 className={"mt-8"}>{retourExperience.titre}</h1>
+            <h1 className={"text-4xl mt-8"}>{retourExperience.titre}</h1>
             <div
               className="text-xl leading-8"
               dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}
@@ -44,22 +45,34 @@ export default async function RetourExperience({ params }: { params: { retourExp
                   className="mt-12"
                 />
               ))}
-            <div className="flex flex-col md:flex-row mt-4">
+            <div className="flex flex-col md:flex-row mt-10">
               {retourExperience.situation_avant && (
                 <SituationRetourExperienceCard
                   titre="Avant le projet"
                   situation={retourExperience.situation_avant}
-                  className="m-3 flex-1 bg-dsfr-background-grey"
+                  className="mr-3 flex-1 bg-dsfr-background-grey"
                 />
               )}
               {retourExperience.situation_apres && (
                 <SituationRetourExperienceCard
                   titre="Après le projet"
                   situation={retourExperience.situation_apres}
-                  className="m-3 flex-1 bg-dsfr-background-blue-cumulus"
+                  className="ml-3 flex-1 bg-dsfr-background-blue-cumulus"
                 />
               )}
             </div>
+            {retourExperience.solutions?.length > 0 && (
+              <>
+                <h2 className="text-3xl mt-10 mb-6">Solutions réalisées</h2>
+                {retourExperience.solutions.map((solution) => (
+                  <SolutionRetourExperienceCard
+                    solution={solution.solution_retour_experience_id}
+                    key={solution.solution_retour_experience_id.id}
+                    className="mb-4"
+                  />
+                ))}
+              </>
+            )}
           </div>
         </div>
       </>

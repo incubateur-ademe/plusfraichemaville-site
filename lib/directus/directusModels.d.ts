@@ -452,11 +452,11 @@ export type SituationRetourExperience = {
 export type SolutionRetourExperience = {
   date_created?: string | null;
   date_updated?: string | null;
-  description?: string | null;
+  description: string;
   fiche_technique?: (number & FicheTechnique) | null;
   id: number;
   image: string & DirectusFiles;
-  titre?: string | null;
+  titre: string;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;
 };
