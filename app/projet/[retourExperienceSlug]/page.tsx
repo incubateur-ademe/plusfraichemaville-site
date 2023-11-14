@@ -2,6 +2,7 @@ import Image from "next/image";
 import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
 import { getRetourExperienceBySlug } from "@/lib/directus/queries/retoursExperienceQueries";
 import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
+import SituationRetourExperience from "@/components/retourExperience/SituationRetourExperience";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -43,6 +44,24 @@ export default async function RetourExperience({ params }: { params: { retourExp
                   className="mt-12"
                 />
               ))}
+            <div className="flex flex-col md:flex-row mt-4">
+              {retourExperience.situation_avant && (
+                <SituationRetourExperience
+                  texte={retourExperience.situation_avant.description}
+                  image={retourExperience.situation_avant.image}
+                  titre="Avant le projet"
+                  className="m-3 flex-1 bg-dsfr-background-grey"
+                />
+              )}
+              {retourExperience.situation_apres && (
+                <SituationRetourExperience
+                  texte={retourExperience.situation_apres.description}
+                  image={retourExperience.situation_apres.image}
+                  titre="Après le projet"
+                  className="m-3 flex-1 bg-dsfr-background-blue-cumulus"
+                />
+              )}
+            </div>
           </div>
         </div>
       </>

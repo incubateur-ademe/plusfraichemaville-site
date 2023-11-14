@@ -51,4 +51,8 @@
     font-size: inherit;
     line-height: inherit;
   }
+
+  ul {
+    list-style: inside;
+  }
 }

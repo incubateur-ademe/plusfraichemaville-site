@@ -441,9 +441,9 @@ export type RetourExperienceUndefined = {
 export type SituationRetourExperience = {
   date_created?: string | null;
   date_updated?: string | null;
-  description?: string | null;
+  description: string;
   id: number;
-  image?: (string & DirectusFiles) | null;
+  image: string & DirectusFiles;
   sort?: number | null;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;
