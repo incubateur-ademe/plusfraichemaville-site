@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
 import { getRetourExperienceBySlug } from "@/lib/directus/queries/retoursExperienceQueries";
+import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -33,6 +34,15 @@ export default async function RetourExperience({ params }: { params: { retourExp
               className="text-xl leading-8"
               dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}
             ></div>
+            {retourExperience.citation?.length > 0 &&
+              retourExperience.citation.map((citation) => (
+                <CustomDSFRQuote
+                  key={citation.auteur}
+                  texte={citation.texte}
+                  auteur={citation.auteur}
+                  className="mt-12"
+                />
+              ))}
           </div>
         </div>
       </>
