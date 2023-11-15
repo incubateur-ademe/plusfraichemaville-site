@@ -11,7 +11,7 @@ export default async function RetourExperienceExtraInfoPanel({
 }) {
   return (
     <div
-      className={`md:flex-none md:w-64 bg-dsfr-background-yellow
+      className={`flex-wrap md:flex-none md:w-64 bg-dsfr-background-yellow
       pl-6 pt-6 text-dsfr-text-label-blue-france text-sm ${className}`}
     >
       <ItemRetourExperienceExtraInfo title="Solutions" content={retourExperience.types_solution?.join(" · ")} />
@@ -20,8 +20,8 @@ export default async function RetourExperienceExtraInfoPanel({
       <ItemRetourExperienceExtraInfo title="Climat actuel" content={retourExperience.climat_actuel} />
       <ItemRetourExperienceExtraInfo title="Climat futur" content={retourExperience.climat_futur} />
       <ItemRetourExperienceExtraInfo title="Coût global" content={retourExperience.cout} />
-      <ItemRetourExperienceExtraInfo title="Porteur du projet" content={retourExperience.porteur} />
       <ItemRetourExperienceExtraInfo title="Contact" content={retourExperience.contact} />
+      <ItemRetourExperienceExtraInfo title="Porteur du projet" content={retourExperience.porteur} />
       <ObjectifsDeveloppementDurable objectifs={retourExperience.odd} imageSize={65} className={"font-bold"} />
     </div>
   );

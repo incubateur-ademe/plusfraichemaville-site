@@ -8,7 +8,7 @@ export default async function ItemRetourExperienceExtraInfo({
   className?: "string";
 }) {
   return !content ? null : (
-    <div className={`mb-3 ${className}`}>
+    <div className={`basis-1/2 md:basis-auto mb-3 ${className}`}>
       <div className="font-bold">{title}</div>
       <div dangerouslySetInnerHTML={{ __html: content }} />
     </div>
