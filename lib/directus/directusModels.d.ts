@@ -1,3 +1,5 @@
+import { CitationRetourExperience, EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
+
 export type AideDecisionEtape = {
   date_created?: string | null;
   date_updated?: string | null;
@@ -384,6 +386,83 @@ export type ObjectifDeveloppementDurable = {
   sort?: number | null;
 };
 
+export type RetourExperience = {
+  calendrier?: EtapeCalendrierRetourExperience[] | null;
+  citation?: CitationRetourExperience[] | null;
+  climat_actuel?: string | null;
+  climat_futur?: string | null;
+  contact?: string | null;
+  cout?: string | null;
+  credits?: string | null;
+  date_created?: string | null;
+  date_updated?: string | null;
+  description?: string | null;
+  difficultes?: string | null;
+  echelle?: string | null;
+  financement?: string | null;
+  id: number;
+  image_principale?: (string & DirectusFiles) | null;
+  odd: any[] & RetourExperienceObjectifDeveloppementDurable[];
+  partenaires?: string | null;
+  porteur?: string | null;
+  ressources?: string | null;
+  situation_apres?: (number & SituationRetourExperience) | null;
+  situation_avant?: (number & SituationRetourExperience) | null;
+  slug?: string | null;
+  solutions: any[] & RetourExperienceSolutionRetourExperience[];
+  sort?: number | null;
+  status: string;
+  temporalite?: string | null;
+  titre?: string | null;
+  types_espace?: unknown | null;
+  types_solution?: string[] | null;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
+};
+
+export type RetourExperienceObjectifDeveloppementDurable = {
+  id: number;
+  objectif_developpement_durable_id?: (number & ObjectifDeveloppementDurable) | null;
+  retour_experience_id?: (number & RetourExperience) | null;
+};
+
+export type RetourExperienceSolutionRetourExperience = {
+  id: number;
+  retour_experience_id?: (number & RetourExperience) | null;
+  solution_retour_experience_id?: (number & SolutionRetourExperience) | null;
+  sort?: number | null;
+};
+
+export type RetourExperienceUndefined = {
+  collection?: string | null;
+  id: number;
+  item?: string | null;
+  retour_experience_id?: number | null;
+};
+
+export type SituationRetourExperience = {
+  date_created?: string | null;
+  date_updated?: string | null;
+  description: string;
+  id: number;
+  image: string & DirectusFiles;
+  sort?: number | null;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
+};
+
+export type SolutionRetourExperience = {
+  date_created?: string | null;
+  date_updated?: string | null;
+  description: string;
+  fiche_technique?: (number & FicheTechnique) | null;
+  id: number;
+  image: string & DirectusFiles;
+  titre: string;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
+};
+
 export type CustomDirectusTypes = {
   aide_decision_etape: AideDecisionEtape[];
   aide_decision_etape_fiche_technique: AideDecisionEtapeFicheTechnique[];
@@ -414,4 +493,10 @@ export type CustomDirectusTypes = {
   fiche_technique_etape_mise_en_oeuvre: FicheTechniqueEtapeMiseEnOeuvre[];
   fiche_technique_objectif_developpement_durable: FicheTechniqueObjectifDeveloppementDurable[];
   objectif_developpement_durable: ObjectifDeveloppementDurable[];
+  retour_experience: RetourExperience[];
+  retour_experience_objectif_developpement_durable: RetourExperienceObjectifDeveloppementDurable[];
+  retour_experience_solution_retour_experience: RetourExperienceSolutionRetourExperience[];
+  retour_experience_undefined: RetourExperienceUndefined[];
+  situation_retour_experience: SituationRetourExperience[];
+  solution_retour_experience: SolutionRetourExperience[];
 };

@@ -14,7 +14,7 @@ export class AideDecisionEtapeHistory {
   }
 }
 
-export function getFicheTechniqueStatusFilter(): DirectusSingleFilter {
+export function getStatusFilter(): DirectusSingleFilter {
   const statusToShow = (process.env.DIRECTUS_FICHES_TECHNIQUES_SHOW_STATUSES || "published")
     .split(",")
     .map((s) => '"' + s + '"');
@@ -22,7 +22,7 @@ export function getFicheTechniqueStatusFilter(): DirectusSingleFilter {
 }
 
 export function getAideDecisionFicheTechniqueStatusFilter(): DirectusSingleFilter {
-  return ` {fiche_technique_id: ${getFicheTechniqueStatusFilter()}}`;
+  return ` {fiche_technique_id: ${getStatusFilter()}}`;
 }
 
 export function contrusctAndFilters(filters: DirectusSingleFilter[]): DirectusCompleteFilter {
