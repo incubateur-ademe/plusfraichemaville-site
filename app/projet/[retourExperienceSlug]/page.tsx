@@ -5,7 +5,8 @@ import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
 import SituationRetourExperienceCard from "@/components/retourExperience/SituationRetourExperienceCard";
 import SolutionRetourExperienceCard from "@/components/retourExperience/SolutionRetourExperienceCard";
 import CalendrierRetourExperienceAccordion from "@/components/retourExperience/CalendrierRetourExperienceAccordion";
-import { EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
+import { CitationRetourExperience, EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
+import ItemRetourExperience from "@/components/retourExperience/ItemRetourExperience";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -39,29 +40,20 @@ export default async function RetourExperience({ params }: { params: { retourExp
               dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}
             ></div>
             {retourExperience.citation?.length > 0 &&
-              retourExperience.citation.map((citation) => (
-                <CustomDSFRQuote
-                  key={citation.auteur}
-                  texte={citation.texte}
-                  auteur={citation.auteur}
-                  className="mt-12"
-                />
+              retourExperience.citation.map((citation: CitationRetourExperience) => (
+                <CustomDSFRQuote key={citation.auteur} citation={citation} className="mt-12" />
               ))}
             <div className="flex flex-col md:flex-row mt-10">
-              {retourExperience.situation_avant && (
-                <SituationRetourExperienceCard
-                  titre="Avant le projet"
-                  situation={retourExperience.situation_avant}
-                  className="mr-3 flex-1 bg-dsfr-background-grey"
-                />
-              )}
-              {retourExperience.situation_apres && (
-                <SituationRetourExperienceCard
-                  titre="Après le projet"
-                  situation={retourExperience.situation_apres}
-                  className="ml-3 flex-1 bg-dsfr-background-blue-cumulus"
-                />
-              )}
+              <SituationRetourExperienceCard
+                titre="Avant le projet"
+                situation={retourExperience.situation_avant}
+                className="mr-3 flex-1 bg-dsfr-background-grey"
+              />
+              <SituationRetourExperienceCard
+                titre="Après le projet"
+                situation={retourExperience.situation_apres}
+                className="ml-3 flex-1 bg-dsfr-background-blue-cumulus"
+              />
             </div>
             {retourExperience.solutions?.length > 0 && (
               <>
@@ -82,6 +74,28 @@ export default async function RetourExperience({ params }: { params: { retourExp
                   etapes={retourExperience.calendrier as EtapeCalendrierRetourExperience[]}
                 />
               </div>
+            )}
+            <ItemRetourExperience
+              title="Budget et financements"
+              content={retourExperience.financement || ""}
+              level="title"
+            />
+            <ItemRetourExperience
+              title="Difficultés rencontrées"
+              content={retourExperience.difficultes || ""}
+              level="title"
+            />
+            {(retourExperience.partenaires || retourExperience.ressources || retourExperience.credits) && (
+              <>
+                <h2 className="text-3xl mt-10 mb-4">Pour en savoir plus</h2>
+                <ItemRetourExperience
+                  title="Partenaires"
+                  content={retourExperience.partenaires || ""}
+                  level="subtitle"
+                />
+                <ItemRetourExperience title="Ressources" content={retourExperience.ressources || ""} level="subtitle" />
+                <ItemRetourExperience title="Crédits" content={retourExperience.credits || ""} level="subtitle" />
+              </>
             )}
           </div>
         </div>

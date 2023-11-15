@@ -3,3 +3,8 @@ export type EtapeCalendrierRetourExperience = {
   titre: string;
   description: string;
 };
+
+export type CitationRetourExperience = {
+  auteur: string;
+  texte: string;
+};

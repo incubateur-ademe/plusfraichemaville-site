@@ -7,10 +7,13 @@ export default async function SituationRetourExperienceCard({
   titre,
   className,
 }: {
-  situation: SituationRetourExperience;
+  situation?: SituationRetourExperience | null;
   titre: string;
   className?: string;
 }) {
+  if (!situation) {
+    return null;
+  }
   return (
     <div className={`fr-card fr-card--no-border fr-card--shadow rounded-2xl ${className} max-w-md`}>
       <div className="fr-card__body">
