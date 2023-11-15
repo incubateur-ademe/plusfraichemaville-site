@@ -1,3 +1,5 @@
+import { CitationRetourExperience, EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
+
 export type AideDecisionEtape = {
   date_created?: string | null;
   date_updated?: string | null;
@@ -385,8 +387,8 @@ export type ObjectifDeveloppementDurable = {
 };
 
 export type RetourExperience = {
-  calendrier?: unknown | null;
-  citation?: unknown | null;
+  calendrier?: EtapeCalendrierRetourExperience[] | null;
+  citation?: CitationRetourExperience[] | null;
   climat_actuel?: string | null;
   climat_futur?: string | null;
   contact?: string | null;
@@ -413,7 +415,7 @@ export type RetourExperience = {
   temporalite?: string | null;
   titre?: string | null;
   types_espace?: unknown | null;
-  types_solution?: unknown | null;
+  types_solution?: string[] | null;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;
 };

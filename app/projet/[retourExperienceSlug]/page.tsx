@@ -5,7 +5,7 @@ import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
 import SituationRetourExperienceCard from "@/components/retourExperience/SituationRetourExperienceCard";
 import SolutionRetourExperienceCard from "@/components/retourExperience/SolutionRetourExperienceCard";
 import CalendrierRetourExperienceAccordion from "@/components/retourExperience/CalendrierRetourExperienceAccordion";
-import { CitationRetourExperience, EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
+import { EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
 import ItemRetourExperience from "@/components/retourExperience/ItemRetourExperience";
 import RetourExperienceExtraInfoPanel from "@/components/retourExperience/RetourExperienceExtraInfoPanel";
 
@@ -31,8 +31,9 @@ export default async function RetourExperience({ params }: { params: { retourExp
               className="text-xl leading-8 mt-10"
               dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}
             ></div>
-            {retourExperience.citation?.length > 0 &&
-              retourExperience.citation.map((citation: CitationRetourExperience) => (
+            {retourExperience.citation &&
+              retourExperience.citation.length > 0 &&
+              retourExperience.citation.map((citation) => (
                 <CustomDSFRQuote key={citation.auteur} citation={citation} className="mt-12" />
               ))}
             <div className="flex flex-col md:flex-row mt-10">
@@ -59,7 +60,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
                 ))}
               </>
             )}
-            {retourExperience.calendrier?.length > 0 && (
+            {retourExperience.calendrier && retourExperience.calendrier.length > 0 && (
               <div className="fr-accordions-group">
                 <h2 className="text-3xl mt-10 mb-6">Calendrier</h2>
                 <CalendrierRetourExperienceAccordion
