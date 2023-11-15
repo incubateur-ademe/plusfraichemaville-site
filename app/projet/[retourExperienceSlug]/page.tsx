@@ -4,6 +4,8 @@ import { getRetourExperienceBySlug } from "@/lib/directus/queries/retoursExperie
 import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
 import SituationRetourExperienceCard from "@/components/retourExperience/SituationRetourExperienceCard";
 import SolutionRetourExperienceCard from "@/components/retourExperience/SolutionRetourExperienceCard";
+import CalendrierRetourExperienceAccordion from "@/components/retourExperience/CalendrierRetourExperienceAccordion";
+import { EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -31,9 +33,9 @@ export default async function RetourExperience({ params }: { params: { retourExp
             <br />
           </div>
           <div className="flex-1 md:pl-4">
-            <h1 className={"text-4xl mt-8"}>{retourExperience.titre}</h1>
+            <h1 className={"text-3xl md:text-[40px] mt-7"}>{retourExperience.titre}</h1>
             <div
-              className="text-xl leading-8"
+              className="text-xl leading-8 mt-10"
               dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}
             ></div>
             {retourExperience.citation?.length > 0 &&
@@ -72,6 +74,14 @@ export default async function RetourExperience({ params }: { params: { retourExp
                   />
                 ))}
               </>
+            )}
+            {retourExperience.calendrier?.length > 0 && (
+              <div className="fr-accordions-group">
+                <h2 className="text-3xl mt-10 mb-6">Calendrier</h2>
+                <CalendrierRetourExperienceAccordion
+                  etapes={retourExperience.calendrier as EtapeCalendrierRetourExperience[]}
+                />
+              </div>
             )}
           </div>
         </div>

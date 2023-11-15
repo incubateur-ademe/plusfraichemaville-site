@@ -24,28 +24,5 @@ export default async function SolutionRetourExperienceCard({
         <div dangerouslySetInnerHTML={{ __html: solution.description }} />
       </div>
     </div>
-    // <div className={`fr-card fr-card--no-border fr-card--shadow rounded-2xl ${className} max-w-md`}>
-    //   <div className="fr-card__body">
-    //     <div className="fr-card__content">
-    //       <h3 className="fr-card__title">{solution.titre}</h3>
-    //       <div className="fr-card__desc h-full">
-    //         <div className={"flex justify-between flex-col h-full"}>
-    //           <div dangerouslySetInnerHTML={{ __html: solution.description }} />
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="fr-card__header">
-    //     <div className="fr-card__img">
-    //       <Image
-    //         width={600}
-    //         height={300}
-    //         className="w-full h-52 object-cover rounded-t-2xl"
-    //         src={DIRECTUS_ASSET_URL + solution.image + "?key=fiche-technique-card"}
-    //         alt={solution.titre || ""}
-    //       />
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
