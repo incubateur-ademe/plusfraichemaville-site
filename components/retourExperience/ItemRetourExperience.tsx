@@ -4,7 +4,7 @@ export default async function ItemRetourExperience({
   level,
 }: {
   title: string;
-  content?: string;
+  content?: string | null;
   level: "title" | "subtitle";
 }) {
   const TitleTag = level === "title" ? "h2" : "h3";

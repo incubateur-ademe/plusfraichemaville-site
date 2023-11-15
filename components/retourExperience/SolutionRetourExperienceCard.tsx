@@ -11,7 +11,7 @@ export default async function SolutionRetourExperienceCard({
 }) {
   return (
     <div className={`max-w-3xl flex ${className}`}>
-      <div className="relative h-36 w-36 flex-none">
+      <div className="relative h-32 w-32 flex-none">
         <Image
           fill={true}
           className="rounded-full"

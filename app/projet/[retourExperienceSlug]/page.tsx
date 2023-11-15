@@ -7,6 +7,7 @@ import SolutionRetourExperienceCard from "@/components/retourExperience/Solution
 import CalendrierRetourExperienceAccordion from "@/components/retourExperience/CalendrierRetourExperienceAccordion";
 import { CitationRetourExperience, EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
 import ItemRetourExperience from "@/components/retourExperience/ItemRetourExperience";
+import RetourExperienceExtraInfoPanel from "@/components/retourExperience/RetourExperienceExtraInfoPanel";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -23,16 +24,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
           />
         </div>
         <div className="flex flex-col md:flex-row">
-          <div className="md:flex-none md:w-64 bg-dsfr-background-yellow">
-            BLABLA
-            <br />
-            BLABLA
-            <br />
-            BLABLA
-            <br />
-            BLABLA
-            <br />
-          </div>
+          <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
           <div className="flex-1 md:pl-4">
             <h1 className={"text-3xl md:text-[40px] mt-7"}>{retourExperience.titre}</h1>
             <div
@@ -75,26 +67,18 @@ export default async function RetourExperience({ params }: { params: { retourExp
                 />
               </div>
             )}
-            <ItemRetourExperience
-              title="Budget et financements"
-              content={retourExperience.financement || ""}
-              level="title"
-            />
+            <ItemRetourExperience title="Budget et financements" content={retourExperience.financement} level="title" />
             <ItemRetourExperience
               title="Difficultés rencontrées"
-              content={retourExperience.difficultes || ""}
+              content={retourExperience.difficultes}
               level="title"
             />
             {(retourExperience.partenaires || retourExperience.ressources || retourExperience.credits) && (
               <>
                 <h2 className="text-3xl mt-10 mb-4">Pour en savoir plus</h2>
-                <ItemRetourExperience
-                  title="Partenaires"
-                  content={retourExperience.partenaires || ""}
-                  level="subtitle"
-                />
-                <ItemRetourExperience title="Ressources" content={retourExperience.ressources || ""} level="subtitle" />
-                <ItemRetourExperience title="Crédits" content={retourExperience.credits || ""} level="subtitle" />
+                <ItemRetourExperience title="Partenaires" content={retourExperience.partenaires} level="subtitle" />
+                <ItemRetourExperience title="Ressources" content={retourExperience.ressources} level="subtitle" />
+                <ItemRetourExperience title="Crédits" content={retourExperience.credits} level="subtitle" />
               </>
             )}
           </div>

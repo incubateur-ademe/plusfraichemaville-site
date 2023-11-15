@@ -49,6 +49,7 @@ export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (rexFilter?: DirectusComplete
         odd {
             objectif_developpement_durable_id {
                 numero_odd
+                description
             }
         }
     }
