@@ -31,6 +31,11 @@ export default function NavigationMenu() {
             },
           ],
         },
+        {
+          linkProps: { href: "/projet", target: "_self" },
+          text: "Projets réalisés",
+          isActive: pathname.startsWith("/projet"),
+        },
       ]}
     />
   );
