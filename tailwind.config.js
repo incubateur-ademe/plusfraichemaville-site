@@ -14,6 +14,7 @@ module.exports = {
       "dsfr-background-yellow": "var(--background-contrast-yellow-moutarde)",
       "dsfr-background-blue-cumulus": "var(--background-action-low-blue-cumulus)",
       "dsfr-background-grey": "var(--background-default-grey-active)",
+      "dsfr-text-mention-grey": "var(--text-mention-grey)",
     },
   },
   plugins: [],
