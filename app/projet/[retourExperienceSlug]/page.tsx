@@ -8,6 +8,7 @@ import CalendrierRetourExperienceAccordion from "@/components/retourExperience/C
 import { EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
 import ItemRetourExperience from "@/components/retourExperience/ItemRetourExperience";
 import RetourExperienceExtraInfoPanel from "@/components/retourExperience/RetourExperienceExtraInfoPanel";
+import { notFound } from "next/navigation";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -87,10 +88,6 @@ export default async function RetourExperience({ params }: { params: { retourExp
       </>
     );
   } else {
-    return (
-      <>
-        <h1>Projet non trouvé...</h1>
-      </>
-    );
+    notFound();
   }
 }

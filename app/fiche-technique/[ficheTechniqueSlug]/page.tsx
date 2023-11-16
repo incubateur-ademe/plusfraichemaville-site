@@ -3,6 +3,7 @@ import Image from "next/image";
 import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
 import EtapeMiseEnOeuvre from "@/components/ficheTechnique/EtapesMiseEnOeuvre";
 import ObjectifsDeveloppementDurable from "@/components/ficheTechnique/ObjectifsDeveloppementDurable";
+import { notFound } from "next/navigation";
 
 export default async function FicheTechnique({ params }: { params: { ficheTechniqueSlug: string } }) {
   const ficheTechnique = await getFicheTechniqueBySlug(params.ficheTechniqueSlug);
@@ -23,10 +24,6 @@ export default async function FicheTechnique({ params }: { params: { ficheTechni
       </>
     );
   } else {
-    return (
-      <>
-        <h1>Fiche technique non trouvée...</h1>
-      </>
-    );
+    notFound();
   }
 }
