@@ -10,7 +10,7 @@ export default async function ItemRetourExperienceExtraInfo({
   return !content ? null : (
     <div className={`basis-1/2 md:basis-auto mb-3 ${className}`}>
       <div className="font-bold">{title}</div>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: content }} />
     </div>
   );
 }

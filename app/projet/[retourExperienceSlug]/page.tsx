@@ -29,7 +29,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
           <div className="flex-1 md:pl-4">
             <h1 className={"text-3xl md:text-[40px] mt-7"}>{retourExperience.titre}</h1>
             <div
-              className="text-xl leading-8 mt-10"
+              className="text-xl leading-8 mt-10 cmsRichText"
               dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}
             ></div>
             {retourExperience.citation &&

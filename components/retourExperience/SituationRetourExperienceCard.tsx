@@ -21,7 +21,7 @@ export default async function SituationRetourExperienceCard({
           <h3 className="fr-card__title">{titre}</h3>
           <div className="fr-card__desc h-full">
             <div className={"flex justify-between flex-col h-full"}>
-              <div dangerouslySetInnerHTML={{ __html: situation.description }} />
+              <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: situation.description }} />
             </div>
           </div>
         </div>

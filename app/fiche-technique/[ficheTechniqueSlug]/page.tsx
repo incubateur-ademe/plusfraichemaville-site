@@ -18,7 +18,7 @@ export default async function FicheTechnique({ params }: { params: { ficheTechni
           alt={ficheTechnique?.titre || "image titre"}
         />
         <h1 className={"mt-8"}>{ficheTechnique.titre}</h1>
-        <div dangerouslySetInnerHTML={{ __html: ficheTechnique.description || "" }}></div>
+        <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: ficheTechnique.description || "" }}></div>
         <ObjectifsDeveloppementDurable objectifs={ficheTechnique.odd} />
         <EtapeMiseEnOeuvre etapesMOE={ficheTechnique.etapes_mise_en_oeuvre} />
       </>

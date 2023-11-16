@@ -9,7 +9,10 @@ export default async function EtapeMiseEnOeuvre({ etapesMOE }: { etapesMOE: Fich
         <div className={"fr-accordions-group"}>
           {etapesMOE.map((etape) => (
             <Accordion key={etape.id} label={etape.etape_mise_en_oeuvre_id?.titre}>
-              <div dangerouslySetInnerHTML={{ __html: etape.etape_mise_en_oeuvre_id?.description || "" }}></div>
+              <div
+                className="cmsRichText"
+                dangerouslySetInnerHTML={{ __html: etape.etape_mise_en_oeuvre_id?.description || "" }}
+              ></div>
             </Accordion>
           ))}
         </div>

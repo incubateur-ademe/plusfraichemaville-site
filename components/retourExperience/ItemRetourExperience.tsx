@@ -13,7 +13,7 @@ export default async function ItemRetourExperience({
   return !content ? null : (
     <>
       <TitleTag className={titleClasses}>{title}</TitleTag>
-      <div dangerouslySetInnerHTML={{ __html: content }} />
+      <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: content }} />
     </>
   );
 }

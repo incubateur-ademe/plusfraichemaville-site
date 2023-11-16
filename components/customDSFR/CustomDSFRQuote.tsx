@@ -10,7 +10,7 @@ export default async function CustomDSFRQuote({
   return (
     <figure className={`fr-quote ${className}`}>
       <blockquote>
-        <div dangerouslySetInnerHTML={{ __html: `${citation.texte}` }} />
+        <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: `${citation.texte}` }} />
       </blockquote>
       <figcaption>
         <div className="fr-quote__author">{citation.auteur}</div>

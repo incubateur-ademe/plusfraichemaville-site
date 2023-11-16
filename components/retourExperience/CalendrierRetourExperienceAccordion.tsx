@@ -18,7 +18,7 @@ export default async function CalendrierRetourExperienceAccordion({
         </div>
       }
     >
-      <div dangerouslySetInnerHTML={{ __html: etape.description }} />
+      <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: etape.description }} />
     </Accordion>
   ));
 }

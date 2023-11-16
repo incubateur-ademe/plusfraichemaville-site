@@ -51,8 +51,10 @@
     font-size: inherit;
     line-height: inherit;
   }
+}
 
-  ul {
+.cmsRichText {
+  & ul {
     list-style: outside;
     margin-left: 1rem;
   }
