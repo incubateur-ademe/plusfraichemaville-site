@@ -55,9 +55,27 @@ export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (rexFilter?: DirectusComplete
     }
 }`;
 
+export const GET_RETOUR_EXPERIENCE_CARD_DATA = (rexFilter?: DirectusCompleteFilter) => `query {
+    retour_experience ${rexFilter} {
+        id
+        titre
+        image_principale
+        climat_actuel
+        climat_futur
+        types_espace
+        slug
+    }
+}`;
+
 export async function getRetourExperienceBySlug(slug: string): Promise<RetourExperience | null> {
   const filterSlug: DirectusSingleFilter = ` {slug:{_eq: "${slug}"}}`;
   const filter = contrusctAndFilters([getStatusFilter(), filterSlug]);
   const apiResponse = await directusGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter));
   return apiResponse?.retour_experience?.length > 0 ? apiResponse.retour_experience[0] : null;
+}
+
+export async function getRetoursExperiencesByFilter(): Promise<RetourExperience[]> {
+  const filter = contrusctAndFilters([getStatusFilter()]);
+  const apiResponse = await directusGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter));
+  return apiResponse?.retour_experience || [];
 }
