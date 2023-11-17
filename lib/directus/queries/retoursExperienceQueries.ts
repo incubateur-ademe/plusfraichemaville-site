@@ -74,7 +74,7 @@ export async function getRetourExperienceBySlug(slug: string): Promise<RetourExp
   return apiResponse?.retour_experience?.length > 0 ? apiResponse.retour_experience[0] : null;
 }
 
-export async function getRetoursExperiencesByFilter(): Promise<RetourExperience[]> {
+export async function getRetoursExperiences(): Promise<RetourExperience[]> {
   const filter = contrusctAndFilters([getStatusFilter()]);
   const apiResponse = await directusGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter));
   return apiResponse?.retour_experience || [];
