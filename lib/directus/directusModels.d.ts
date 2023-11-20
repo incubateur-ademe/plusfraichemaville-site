@@ -414,7 +414,7 @@ export type RetourExperience = {
   status: string;
   temporalite?: string | null;
   titre?: string | null;
-  types_espace?: unknown | null;
+  types_espace?: string[] | null;
   types_solution?: string[] | null;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;
