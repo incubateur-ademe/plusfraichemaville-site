@@ -26,7 +26,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
         </div>
         <div className="flex flex-col md:flex-row">
           <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
-          <div className="flex-1 md:pl-4">
+          <div className="flex-1 md:pl-12">
             <h1 className={"text-3xl md:text-[40px] mt-7"}>{retourExperience.titre}</h1>
             <div
               className="text-xl leading-8 mt-10 cmsRichText"

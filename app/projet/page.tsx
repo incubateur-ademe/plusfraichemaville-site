@@ -14,7 +14,7 @@ export default async function RetoursExperience({
 
   return (
     <>
-      <TypeEspaceFilter className="justify-center mb-8" />
+      <TypeEspaceFilter className="justify-center mb-8 mt-8" />
       <ul className="flex list-none flex-wrap justify-center p-0">
         {filteredRetoursExperiences.map((retourExperience) => (
           <li key={retourExperience.id} className="m-2 w-80 flex">

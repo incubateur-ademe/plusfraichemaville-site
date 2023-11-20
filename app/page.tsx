@@ -6,7 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
-    <main>
+    <main className="mt-8">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4" dir={"rtl"}>
         <div className={"h-80 relative"}>
           <Image

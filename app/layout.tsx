@@ -44,7 +44,7 @@ export default function RootLayout({ children }: { children: ReactElement | null
       <body>
         <DsfrProvider lang={lang}>
           <AppHeader />
-          <div className={`fr-container mt-8 mb-12 ${xtra_bold.variable}`}>{children}</div>
+          <div className={`fr-container mb-12 ${xtra_bold.variable}`}>{children}</div>
           <AppFooter />
         </DsfrProvider>
       </body>

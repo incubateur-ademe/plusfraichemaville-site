@@ -66,7 +66,7 @@ export default function TypeEspaceFilter({ className }: { className?: string }) 
         <Link
           key={espace.code}
           href={pathname + "?" + createQueryString(TYPE_ESPACE_FILTER_NAME, espace.code)}
-          className={`bg-none ${linkStyle(espace.code)}`}
+          className={`!bg-none ${linkStyle(espace.code)}`}
         >
           <div className={"w-28 flex flex-col items-center"}>
             <Image width={50} height={50} src={`/images/espaces/${espace.icon}`} alt={espace.label} />
