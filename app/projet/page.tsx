@@ -1,27 +1,34 @@
 import { getRetoursExperiences } from "@/lib/directus/queries/retoursExperienceQueries";
 import RetourExperienceCustomCard from "@/components/retourExperience/RetourExperienceCustomCard";
 import TypeEspaceFilter from "@/components/filters/TypeEspaceFilter";
+import RegionFilter from "@/components/filters/RegionFilter";
 
 export default async function RetoursExperience({
   searchParams,
 }: {
-  searchParams: { espaceFilter: string | undefined };
+  searchParams: { espaceFilter: string | undefined; regionFilter: string | undefined };
 }) {
   const allRetoursExperiences = await getRetoursExperiences();
   const filteredRetoursExperiences = allRetoursExperiences.filter(
     (re) => !searchParams.espaceFilter || re.types_espace?.includes(searchParams.espaceFilter),
   );
+  console.log("searchParams", searchParams);
 
   return (
     <>
       <TypeEspaceFilter className="justify-center mb-8 mt-8" />
-      <ul className="flex list-none flex-wrap justify-center p-0">
-        {filteredRetoursExperiences.map((retourExperience) => (
-          <li key={retourExperience.id} className="m-2 w-80 flex">
-            <RetourExperienceCustomCard retourExperience={retourExperience} />
-          </li>
-        ))}
-      </ul>
+      <div className="flex flex-col md:flex-row">
+        <RegionFilter className="w-46" />
+        <div className="grow list-none flex-wrap justify-center p-0">
+          <ul className="flex grow list-none flex-wrap justify-center p-0">
+            {filteredRetoursExperiences.map((retourExperience) => (
+              <li key={retourExperience.id} className="m-2 w-80 flex">
+                <RetourExperienceCustomCard retourExperience={retourExperience} />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
     </>
   );
 }

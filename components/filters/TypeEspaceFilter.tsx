@@ -4,7 +4,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import Link from "next/link";
 
-export const TYPE_ESPACE_FILTER_NAME = "espaceFilter";
+const TYPE_ESPACE_FILTER_NAME = "espaceFilter";
 
 type TypeEspace = {
   label: string;
@@ -57,9 +57,9 @@ export default function TypeEspaceFilter({ className }: { className?: string }) 
   return (
     <div className={`flex flex-row flex-wrap ${className}`}>
       <Link className={`bg-none ${linkStyle()}`} href={pathname + "?" + removeEspaceFilterQueryString()}>
-        <div className={"w-28 flex flex-col items-center"}>
+        <div className={"w-16 md:w-28 flex flex-col items-center"}>
           <Image width={50} height={50} src="/images/espaces/espace-icone-tous-espaces.svg" alt="Tous espaces" />
-          <div className={"text-sm"}>Tous espaces</div>
+          <div className={"text-sm text-center"}>Tous espaces</div>
         </div>
       </Link>
       {ALL_ESPACES.map((espace) => (
@@ -68,9 +68,9 @@ export default function TypeEspaceFilter({ className }: { className?: string }) 
           href={pathname + "?" + createQueryString(TYPE_ESPACE_FILTER_NAME, espace.code)}
           className={`!bg-none ${linkStyle(espace.code)}`}
         >
-          <div className={"w-28 flex flex-col items-center"}>
+          <div className={"w-16 md:w-28 flex flex-col items-center"}>
             <Image width={50} height={50} src={`/images/espaces/${espace.icon}`} alt={espace.label} />
-            <div className={"text-sm"}>{espace.label}</div>
+            <div className={"text-sm text-center"}>{espace.label}</div>
           </div>
         </Link>
       ))}
