@@ -1,10 +1,6 @@
 "use client";
 import Image from "next/image";
-import { usePathname, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
-import Link from "next/link";
-
-const TYPE_ESPACE_FILTER_NAME = "espaceFilter";
+import { useTypeEspaceFilter } from "@/hooks/useTypeEspaceFilter";
 
 type TypeEspace = {
   label: string;
@@ -23,56 +19,31 @@ const ALL_ESPACES: TypeEspace[] = [
 ];
 
 export default function TypeEspaceFilter({ className }: { className?: string }) {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
+  const { setTypeEspaceFilter, clearTypeEspaceFilter, isTypeEspaceSelected } = useTypeEspaceFilter();
 
-  const createQueryString = useCallback(
-    (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams);
-      params.set(name, value);
-
-      return params.toString();
-    },
-    [searchParams],
-  );
-
-  const removeEspaceFilterQueryString = () => {
-    const params = new URLSearchParams(searchParams);
-    params.delete(TYPE_ESPACE_FILTER_NAME);
-    return params.toString();
-  };
-
-  const espaceFilter = searchParams.get(TYPE_ESPACE_FILTER_NAME);
-
-  const linkStyle = (typeEspace?: string) => {
-    if (typeEspace && espaceFilter === typeEspace) {
-      return " border-b ";
-    } else if (!typeEspace && !espaceFilter) {
-      return " border-b ";
-    } else {
-      return " hover:border-b ";
-    }
+  const buttonStyle = (typeEspace?: string) => {
+    return isTypeEspaceSelected(typeEspace) ? " border-b border-l-0 border-t-0 border-r-0 border-solid " : "";
   };
 
   return (
     <div className={`flex flex-row flex-wrap ${className}`}>
-      <Link className={`bg-none ${linkStyle()}`} href={pathname + "?" + removeEspaceFilterQueryString()}>
+      <button className={`bg-none ${buttonStyle()}`} onClick={() => clearTypeEspaceFilter()}>
         <div className={"w-16 md:w-28 flex flex-col items-center"}>
           <Image width={50} height={50} src="/images/espaces/espace-icone-tous-espaces.svg" alt="Tous espaces" />
           <div className={"text-sm text-center"}>Tous espaces</div>
         </div>
-      </Link>
+      </button>
       {ALL_ESPACES.map((espace) => (
-        <Link
+        <button
           key={espace.code}
-          href={pathname + "?" + createQueryString(TYPE_ESPACE_FILTER_NAME, espace.code)}
-          className={`!bg-none ${linkStyle(espace.code)}`}
+          onClick={() => setTypeEspaceFilter(espace.code)}
+          className={`!bg-none ${buttonStyle(espace.code)}`}
         >
           <div className={"w-16 md:w-28 flex flex-col items-center"}>
             <Image width={50} height={50} src={`/images/espaces/${espace.icon}`} alt={espace.label} />
             <div className={"text-sm text-center"}>{espace.label}</div>
           </div>
-        </Link>
+        </button>
       ))}
     </div>
   );

@@ -8,7 +8,7 @@ export const useRegionFilter = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const changeRegionFilterQueryString = useCallback(
+  const changeRegionFilter = useCallback(
     (regionCode: string) => {
       const params = new URLSearchParams(searchParams);
       const currentRegionsParam = params.get(REGION_FILTER_NAME);
@@ -29,14 +29,14 @@ export const useRegionFilter = () => {
     [searchParams, pathname, router],
   );
 
-  const clearRegionFilterQueryString = () => {
+  const clearRegionFilter = useCallback(() => {
     const params = new URLSearchParams(searchParams);
     params.delete(REGION_FILTER_NAME);
     router.push(pathname + "?" + params.toString(), { scroll: false });
-  };
+  }, [pathname, router, searchParams]);
 
   const isRegionSelected = (regionCode: string) =>
     searchParams.get(REGION_FILTER_NAME)?.split(",").includes(regionCode);
 
-  return { changeRegionFilterQueryString, clearRegionFilterQueryString, isRegionSelected };
+  return { changeRegionFilter, clearRegionFilter, isRegionSelected };
 };
