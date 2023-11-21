@@ -405,6 +405,7 @@ export type RetourExperience = {
   odd: any[] & RetourExperienceObjectifDeveloppementDurable[];
   partenaires?: string | null;
   porteur?: string | null;
+  region?: string | null;
   ressources?: string | null;
   situation_apres?: (number & SituationRetourExperience) | null;
   situation_avant?: (number & SituationRetourExperience) | null;

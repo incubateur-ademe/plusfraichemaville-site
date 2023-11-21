@@ -63,6 +63,7 @@ export const GET_RETOUR_EXPERIENCE_CARD_DATA = (rexFilter?: DirectusCompleteFilt
         climat_actuel
         climat_futur
         types_espace
+        region
         slug
     }
 }`;

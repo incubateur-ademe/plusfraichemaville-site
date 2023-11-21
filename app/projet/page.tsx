@@ -3,16 +3,17 @@ import RetourExperienceCustomCard from "@/components/retourExperience/RetourExpe
 import TypeEspaceFilter from "@/components/filters/TypeEspaceFilter";
 import RegionFilter from "@/components/filters/RegionFilter";
 
-export default async function RetoursExperience({
+export default async function RetoursExperiences({
   searchParams,
 }: {
   searchParams: { espaceFilter: string | undefined; regionFilter: string | undefined };
 }) {
   const allRetoursExperiences = await getRetoursExperiences();
-  const filteredRetoursExperiences = allRetoursExperiences.filter(
-    (re) => !searchParams.espaceFilter || re.types_espace?.includes(searchParams.espaceFilter),
-  );
-  console.log("searchParams", searchParams);
+  const filteredRetoursExperiences = allRetoursExperiences
+    .filter((re) => !searchParams.espaceFilter || re.types_espace?.includes(searchParams.espaceFilter))
+    .filter(
+      (re) => !searchParams.regionFilter || (re.region && searchParams.regionFilter?.split(",").includes(re.region)),
+    );
 
   return (
     <>
