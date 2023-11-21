@@ -1,6 +1,6 @@
 import { FicheTechnique } from "@/lib/directus/directusModels";
 import Card from "@codegouvfr/react-dsfr/Card";
-import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
+import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 
 export default function FicheTechniqueCard({ ficheTechnique }: { ficheTechnique: FicheTechnique }) {
   return (
@@ -12,7 +12,7 @@ export default function FicheTechniqueCard({ ficheTechnique }: { ficheTechnique:
       title={ficheTechnique.titre}
       desc={ficheTechnique.description_courte}
       imageAlt={ficheTechnique.titre || ""}
-      imageUrl={DIRECTUS_ASSET_URL + ficheTechnique.image_principale + "?key=fiche-technique-card"}
+      imageUrl={getDirectusImageUrl(ficheTechnique.image_principale, DIRECTUS_IMAGE_KEY_SIZE.ficheTechniqueCard)}
       linkProps={{
         href: `/fiche-technique/${ficheTechnique.slug}`,
       }}

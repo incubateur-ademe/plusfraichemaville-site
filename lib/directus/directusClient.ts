@@ -2,7 +2,20 @@ import * as Sentry from "@sentry/nextjs";
 
 export const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || "http://127.0.0.1/";
 export const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN || "";
-export const DIRECTUS_ASSET_URL = DIRECTUS_URL + "/assets/";
+const DIRECTUS_ASSET_URL = DIRECTUS_URL + "/assets/";
+
+export enum DIRECTUS_IMAGE_KEY_SIZE {
+  aideDecisionCard = "aide-decision-card",
+  ficheTechniqueCard = "fiche-technique-card",
+  retourExperienceCard = "retour-experience-card",
+}
+
+export const getDirectusImageUrl = (imageId?: string | null, customSizeKey?: DIRECTUS_IMAGE_KEY_SIZE) => {
+  if (!imageId) {
+    return "/images/placeholder.svg";
+  }
+  return customSizeKey ? `${DIRECTUS_ASSET_URL}${imageId}?key=${customSizeKey}` : `${DIRECTUS_ASSET_URL}${imageId}`;
+};
 
 export const directusGraphQLCall = async (query: String, variables?: any) => {
   try {

@@ -1,4 +1,4 @@
-import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
+import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import { SolutionRetourExperience } from "@/lib/directus/directusModels";
 
@@ -15,7 +15,7 @@ export default async function SolutionRetourExperienceCard({
         <Image
           fill={true}
           className="rounded-full"
-          src={DIRECTUS_ASSET_URL + solution.image + "?key=fiche-technique-card"}
+          src={getDirectusImageUrl(solution.image, DIRECTUS_IMAGE_KEY_SIZE.ficheTechniqueCard)}
           alt={solution.titre || ""}
         />
       </div>

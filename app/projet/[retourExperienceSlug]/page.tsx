@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
+import { getDirectusImageUrl } from "@/lib/directus/directusClient";
 import { getRetourExperienceBySlug } from "@/lib/directus/queries/retoursExperienceQueries";
 import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
 import SituationRetourExperienceCard from "@/components/retourExperience/SituationRetourExperienceCard";
@@ -20,7 +20,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
             width={1200}
             height={500}
             className="w-full max-h-64 object-cover block"
-            src={DIRECTUS_ASSET_URL + retourExperience.image_principale}
+            src={getDirectusImageUrl(retourExperience.image_principale)}
             alt={retourExperience?.titre || "image titre"}
           />
         </div>

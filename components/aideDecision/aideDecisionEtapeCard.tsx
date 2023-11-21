@@ -1,6 +1,6 @@
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
 import Card from "@codegouvfr/react-dsfr/Card";
-import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
+import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 
 export default function AideDecisionEtapeCard({ aideDecisionEtape }: { aideDecisionEtape: AideDecisionEtape }) {
   return (
@@ -11,7 +11,7 @@ export default function AideDecisionEtapeCard({ aideDecisionEtape }: { aideDecis
       title={aideDecisionEtape.nom}
       desc={aideDecisionEtape.description}
       imageAlt={aideDecisionEtape.nom || ""}
-      imageUrl={DIRECTUS_ASSET_URL + aideDecisionEtape.image + "?key=aide-decision-card"}
+      imageUrl={getDirectusImageUrl(aideDecisionEtape.image, DIRECTUS_IMAGE_KEY_SIZE.aideDecisionCard)}
       linkProps={{
         href: `/aide-decision/${aideDecisionEtape.slug}`,
       }}

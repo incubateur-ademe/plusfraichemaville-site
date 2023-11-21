@@ -1,4 +1,4 @@
-import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
+import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import { SituationRetourExperience } from "@/lib/directus/directusModels";
 
@@ -32,7 +32,7 @@ export default async function SituationRetourExperienceCard({
             width={600}
             height={300}
             className="w-full h-52 object-cover rounded-t-2xl"
-            src={DIRECTUS_ASSET_URL + situation.image + "?key=fiche-technique-card"}
+            src={getDirectusImageUrl(situation.image, DIRECTUS_IMAGE_KEY_SIZE.ficheTechniqueCard)}
             alt={titre}
           />
         </div>

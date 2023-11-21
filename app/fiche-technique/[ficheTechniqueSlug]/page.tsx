@@ -1,6 +1,6 @@
 import { getFicheTechniqueBySlug } from "@/lib/directus/queries/fichesTechniquesQueries";
 import Image from "next/image";
-import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
+import { getDirectusImageUrl } from "@/lib/directus/directusClient";
 import EtapeMiseEnOeuvre from "@/components/ficheTechnique/EtapesMiseEnOeuvre";
 import ObjectifsDeveloppementDurable from "@/components/ficheTechnique/ObjectifsDeveloppementDurable";
 import { notFound } from "next/navigation";
@@ -14,7 +14,7 @@ export default async function FicheTechnique({ params }: { params: { ficheTechni
           width={1200}
           height={500}
           className="w-full max-h-64 object-cover"
-          src={DIRECTUS_ASSET_URL + ficheTechnique.image_principale}
+          src={getDirectusImageUrl(ficheTechnique.image_principale)}
           alt={ficheTechnique?.titre || "image titre"}
         />
         <h1 className={"mt-8"}>{ficheTechnique.titre}</h1>

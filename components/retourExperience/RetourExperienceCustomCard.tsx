@@ -1,5 +1,5 @@
 import { RetourExperience } from "@/lib/directus/directusModels";
-import { DIRECTUS_ASSET_URL } from "@/lib/directus/directusClient";
+import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 
@@ -39,7 +39,7 @@ export default function RetourExperienceCustomCard({ retourExperience }: { retou
             width={600}
             height={300}
             className="w-full h-52 object-cover rounded-t-2xl"
-            src={DIRECTUS_ASSET_URL + retourExperience.image_principale + "?key=retour-experience-card"}
+            src={getDirectusImageUrl(retourExperience.image_principale, DIRECTUS_IMAGE_KEY_SIZE.retourExperienceCard)}
             alt={retourExperience?.titre || "image titre"}
           />
         </div>
