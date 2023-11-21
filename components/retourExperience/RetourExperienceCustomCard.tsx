@@ -17,8 +17,8 @@ export default function RetourExperienceCustomCard({ retourExperience }: { retou
             <Link href={`/projet/${retourExperience.slug}`}>{retourExperience.titre}</Link>
           </h3>
           <div className="fr-card__desc h-full">
-            <div className={"flex justify-between flex-col h-full"}>
-              <div className="mt-4">
+            <div className={"flex justify-between flex-col h-full pt-4"}>
+              <div className="mt-auto">
                 <Tag>{getRegionLabelFromCode(retourExperience.region)}</Tag>
                 <div className="mt-6 grid grid-rows-2 grid-flow-col gap-0">
                   <div className="text-sm text-dsfr-text-mention-grey">Climat actuel</div>
