@@ -4,14 +4,15 @@ export const DIRECTUS_URL = process.env.NEXT_PUBLIC_DIRECTUS_URL || "http://127.
 export const DIRECTUS_TOKEN = process.env.DIRECTUS_TOKEN || "";
 const DIRECTUS_ASSET_URL = DIRECTUS_URL + "/assets/";
 
-export enum DIRECTUS_IMAGE_KEY_SIZE {
-  aideDecisionCard = "aide-decision-card",
-  ficheTechniqueCard = "fiche-technique-card",
-  retourExperienceCard = "retour-experience-card",
-  retourExperiencePage = "retour-experience-page",
-}
+export const DIRECTUS_IMAGE_KEY_SIZE = {
+  aideDecisionCard: "aide-decision-card",
+  ficheTechniqueCard: "fiche-technique-card",
+  retourExperienceCard: "retour-experience-card",
+  retourExperiencePage: "retour-experience-page",
+} as const;
+export type DIRECTUS_IMAGE_KEY_SIZE_TYPE = (typeof DIRECTUS_IMAGE_KEY_SIZE)[keyof typeof DIRECTUS_IMAGE_KEY_SIZE];
 
-export const getDirectusImageUrl = (imageId?: string | null, customSizeKey?: DIRECTUS_IMAGE_KEY_SIZE) => {
+export const getDirectusImageUrl = (imageId?: string | null, customSizeKey?: DIRECTUS_IMAGE_KEY_SIZE_TYPE) => {
   if (!imageId) {
     return "/images/placeholder.svg";
   }
