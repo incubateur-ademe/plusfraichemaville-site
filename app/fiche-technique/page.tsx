@@ -4,7 +4,7 @@ import FicheTechniqueCard from "@/components/aideDecision/ficheTechniqueCard";
 export default async function Posts() {
   const allFichesTechniques = await getFichesTechniques();
   return (
-    <>
+    <div className="fr-container">
       <ul className="flex list-none flex-wrap justify-center p-0">
         {allFichesTechniques.map((ficheTechnique) => (
           <li key={ficheTechnique.id} className="m-2 w-80 flex">
@@ -12,6 +12,6 @@ export default async function Posts() {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 }

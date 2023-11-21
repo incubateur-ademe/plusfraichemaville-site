@@ -8,6 +8,7 @@ export enum DIRECTUS_IMAGE_KEY_SIZE {
   aideDecisionCard = "aide-decision-card",
   ficheTechniqueCard = "fiche-technique-card",
   retourExperienceCard = "retour-experience-card",
+  retourExperiencePage = "retour-experience-page",
 }
 
 export const getDirectusImageUrl = (imageId?: string | null, customSizeKey?: DIRECTUS_IMAGE_KEY_SIZE) => {

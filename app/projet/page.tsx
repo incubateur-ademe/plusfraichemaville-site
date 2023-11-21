@@ -16,7 +16,7 @@ export default async function RetoursExperiences({
     );
 
   return (
-    <>
+    <div className="fr-container">
       <TypeEspaceFilter className="justify-center mb-8 mt-8" />
       <div className="flex flex-col md:flex-row">
         <RegionFilter className="w-46" />
@@ -30,6 +30,6 @@ export default async function RetoursExperiences({
           </ul>
         </div>
       </div>
-    </>
+    </div>
   );
 }

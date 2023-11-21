@@ -12,7 +12,7 @@ export default function Page() {
   const [bookmarkedFichesTechniques] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FT_KEY, []);
   return (
     isClient && (
-      <div>
+      <div className="fr-container">
         {bookmarkedFichesTechniques.length <= 0 ? (
           <div className={"text-xl font-bold"}>{"Vous n'avez pas encore sélectionné de fiches techniques"}</div>
         ) : (

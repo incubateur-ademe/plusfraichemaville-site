@@ -19,7 +19,7 @@ export default async function SolutionRetourExperienceCard({
           alt={solution.titre || ""}
         />
       </div>
-      <div className="grow md:ml-12">
+      <div className="grow ml-4 md:ml-12">
         <div className="text-xl font-bold">{solution.titre}</div>
         <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: solution.description }} />
       </div>
