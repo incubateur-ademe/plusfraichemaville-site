@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
+import { getDirectusImageUrl } from "@/lib/directus/directusClient";
 import { getRetourExperienceBySlug } from "@/lib/directus/queries/retoursExperienceQueries";
 import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
 import SituationRetourExperienceCard from "@/components/retourExperience/SituationRetourExperienceCard";
@@ -20,14 +20,14 @@ export default async function RetourExperience({ params }: { params: { retourExp
             width={1920}
             height={384}
             className="w-full max-h-40 md:max-h-96 object-cover block"
-            src={getDirectusImageUrl(retourExperience.image_principale, DIRECTUS_IMAGE_KEY_SIZE.retourExperiencePage)}
+            src={getDirectusImageUrl(retourExperience.image_principale)}
             alt={retourExperience?.titre || "image titre"}
           />
         </div>
         <div className="flex flex-col md:flex-row fr-container">
           <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
           <div className="flex-1 md:pl-12">
-            <h1 className={"text-3xl md:text-[40px] mt-7"}>{retourExperience.titre}</h1>
+            <h1 className={"text-3xl md:text-[40px] md:leading-[3rem] mt-7"}>{retourExperience.titre}</h1>
             <div
               className="text-xl leading-8 mt-10 cmsRichText"
               dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}

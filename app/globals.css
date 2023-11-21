@@ -59,3 +59,7 @@
     margin-left: 1rem;
   }
 }
+
+.fr-card__title a[href] {
+  color: var(--text-action-high-grey);
+}

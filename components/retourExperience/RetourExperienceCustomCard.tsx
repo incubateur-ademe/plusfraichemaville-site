@@ -3,6 +3,7 @@ import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/dir
 import Image from "next/image";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getRegionLabelFromCode } from "@/helpers/regions";
+import Link from "next/link";
 
 export default function RetourExperienceCustomCard({ retourExperience }: { retourExperience: RetourExperience }) {
   return (
@@ -13,9 +14,7 @@ export default function RetourExperienceCustomCard({ retourExperience }: { retou
       <div className="fr-card__body">
         <div className="fr-card__content pt-4">
           <h3 className="fr-card__title">
-            <a className="" href={`/projet/${retourExperience.slug}`}>
-              {retourExperience.titre}
-            </a>
+            <Link href={`/projet/${retourExperience.slug}`}>{retourExperience.titre}</Link>
           </h3>
           <div className="fr-card__desc h-full">
             <div className={"flex justify-between flex-col h-full"}>
