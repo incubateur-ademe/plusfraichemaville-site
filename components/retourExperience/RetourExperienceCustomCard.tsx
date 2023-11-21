@@ -2,6 +2,7 @@ import { RetourExperience } from "@/lib/directus/directusModels";
 import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import Tag from "@codegouvfr/react-dsfr/Tag";
+import { getRegionLabelFromCode } from "@/helpers/regions";
 
 export default function RetourExperienceCustomCard({ retourExperience }: { retourExperience: RetourExperience }) {
   return (
@@ -19,7 +20,7 @@ export default function RetourExperienceCustomCard({ retourExperience }: { retou
           <div className="fr-card__desc h-full">
             <div className={"flex justify-between flex-col h-full"}>
               <div className="mt-4">
-                <Tag>Île de France</Tag>
+                <Tag>{getRegionLabelFromCode(retourExperience.region)}</Tag>
                 <div className="mt-6 grid grid-rows-2 grid-flow-col gap-0">
                   <div className="text-sm text-dsfr-text-mention-grey">Climat actuel</div>
                   <div>{retourExperience.climat_actuel}</div>
