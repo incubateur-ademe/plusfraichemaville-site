@@ -27,7 +27,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
         <div className="flex flex-col md:flex-row fr-container">
           <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
           <div className="flex-1 md:pl-12">
-            <h1 className={"text-3xl md:text-[40px] md:leading-[3rem] mt-7"}>{retourExperience.titre}</h1>
+            <h1 className={"text-3xl md:text-[40px] md:leading-[3rem] mt-4"}>{retourExperience.titre}</h1>
             <div
               className="text-xl leading-8 mt-10 cmsRichText"
               dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}

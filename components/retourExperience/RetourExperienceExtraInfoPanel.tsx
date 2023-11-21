@@ -11,8 +11,8 @@ export default async function RetourExperienceExtraInfoPanel({
 }) {
   return (
     <div
-      className={`flex flex-wrap md:block md:w-64
-      pl-6 pt-6 text-dsfr-text-label-blue-france text-sm ${className}`}
+      className={`flex flex-wrap md:block md:w-56 ml-6 lg:ml-0
+      mt-6 text-dsfr-text-label-blue-france text-sm ${className}`}
     >
       <ItemRetourExperienceExtraInfo title="Solutions" content={retourExperience.types_solution?.join(" · ")} />
       <hr className="pb-4" />
