@@ -25,6 +25,8 @@ export function getAideDecisionFicheTechniqueStatusFilter(): DirectusSingleFilte
   return ` {fiche_technique_id: ${getStatusFilter()}}`;
 }
 
-export function contrusctAndFilters(filters: DirectusSingleFilter[]): DirectusCompleteFilter {
-  return ` (filter: {_and: [${filters.map((filter) => filter).join(",")}]})`;
+export function contrusctAndFilters(filters: DirectusSingleFilter[], sortField?: string): DirectusCompleteFilter {
+  const filterArgument = `filter: {_and: [${filters.map((filter) => filter).join(",")}]}`;
+  const sortArgument = sortField ? ` sort: "${sortField}" ` : "";
+  return ` (${[filterArgument, sortArgument].filter(Boolean).join(",")})`;
 }

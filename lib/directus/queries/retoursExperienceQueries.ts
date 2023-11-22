@@ -88,7 +88,7 @@ export async function getRetourExperienceBySlug(slug: string): Promise<RetourExp
 }
 
 export async function getRetoursExperiences(): Promise<RetourExperience[]> {
-  const filter = contrusctAndFilters([getStatusFilter()]);
+  const filter = contrusctAndFilters([getStatusFilter()], "sort");
   const apiResponse = await directusGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter));
   return apiResponse?.retour_experience || [];
 }
