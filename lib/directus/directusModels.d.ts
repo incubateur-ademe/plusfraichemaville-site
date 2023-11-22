@@ -56,6 +56,7 @@ export type DirectusCollections = {
   sort_field?: string | null;
   translations?: unknown | null;
   unarchive_value?: string | null;
+  versioning: boolean;
 };
 
 export type DirectusDashboards = {
@@ -67,6 +68,11 @@ export type DirectusDashboards = {
   note?: string | null;
   panels: any[] & DirectusPanels[];
   user_created?: (string & DirectusUsers) | null;
+};
+
+export type DirectusExtensions = {
+  enabled: boolean;
+  name: string;
 };
 
 export type DirectusFields = {
@@ -236,6 +242,7 @@ export type DirectusRevisions = {
   id: number;
   item: string;
   parent?: (number & DirectusRevisions) | null;
+  version?: (string & DirectusVersions) | null;
 };
 
 export type DirectusRoles = {
@@ -266,21 +273,28 @@ export type DirectusSettings = {
   basemaps?: unknown | null;
   custom_aspect_ratios?: unknown | null;
   custom_css?: string | null;
+  default_appearance: string;
   default_language: string;
+  default_theme_dark?: string | null;
+  default_theme_light?: string | null;
   id: number;
   mapbox_key?: string | null;
   module_bar?: unknown | null;
-  project_color?: string | null;
+  project_color: string;
   project_descriptor?: string | null;
   project_logo?: (string & DirectusFiles) | null;
   project_name: string;
   project_url?: string | null;
   public_background?: (string & DirectusFiles) | null;
+  public_favicon?: string | null;
   public_foreground?: (string & DirectusFiles) | null;
   public_note?: string | null;
   storage_asset_presets?: unknown | null;
   storage_asset_transform?: string | null;
   storage_default_folder?: (string & DirectusFolders) | null;
+  theme_dark_overrides?: unknown | null;
+  theme_light_overrides?: unknown | null;
+  theming_group: string;
 };
 
 export type DirectusShares = {
@@ -306,6 +320,7 @@ export type DirectusTranslations = {
 };
 
 export type DirectusUsers = {
+  appearance?: string | null;
   auth_data?: unknown | null;
   avatar?: (string & DirectusFiles) | null;
   description?: string | null;
@@ -325,9 +340,25 @@ export type DirectusUsers = {
   status: string;
   tags?: unknown | null;
   tfa_secret?: string | null;
-  theme?: string | null;
+  theme_dark?: string | null;
+  theme_dark_overrides?: unknown | null;
+  theme_light?: string | null;
+  theme_light_overrides?: unknown | null;
   title?: string | null;
   token?: string | null;
+};
+
+export type DirectusVersions = {
+  collection: string & DirectusCollections;
+  date_created?: string | null;
+  date_updated?: string | null;
+  hash?: string | null;
+  id: string;
+  item: string;
+  key: string;
+  name?: string | null;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
 };
 
 export type DirectusWebhooks = {
@@ -407,6 +438,7 @@ export type RetourExperience = {
   porteur?: string | null;
   region?: string | null;
   ressources?: string | null;
+  retours_experience_lies: any[] & RetourExperienceRetourExperience[];
   situation_apres?: (number & SituationRetourExperience) | null;
   situation_avant?: (number & SituationRetourExperience) | null;
   slug?: string | null;
@@ -427,18 +459,18 @@ export type RetourExperienceObjectifDeveloppementDurable = {
   retour_experience_id?: (number & RetourExperience) | null;
 };
 
+export type RetourExperienceRetourExperience = {
+  id: number;
+  related_retour_experience_id?: (number & RetourExperience) | null;
+  retour_experience_id?: (number & RetourExperience) | null;
+  sort?: number | null;
+};
+
 export type RetourExperienceSolutionRetourExperience = {
   id: number;
   retour_experience_id?: (number & RetourExperience) | null;
   solution_retour_experience_id?: (number & SolutionRetourExperience) | null;
   sort?: number | null;
-};
-
-export type RetourExperienceUndefined = {
-  collection?: string | null;
-  id: number;
-  item?: string | null;
-  retour_experience_id?: number | null;
 };
 
 export type SituationRetourExperience = {
@@ -470,6 +502,7 @@ export type CustomDirectusTypes = {
   directus_activity: DirectusActivity[];
   directus_collections: DirectusCollections[];
   directus_dashboards: DirectusDashboards[];
+  directus_extensions: DirectusExtensions[];
   directus_fields: DirectusFields[];
   directus_files: DirectusFiles[];
   directus_flows: DirectusFlows[];
@@ -488,6 +521,7 @@ export type CustomDirectusTypes = {
   directus_shares: DirectusShares[];
   directus_translations: DirectusTranslations[];
   directus_users: DirectusUsers[];
+  directus_versions: DirectusVersions[];
   directus_webhooks: DirectusWebhooks[];
   etape_mise_en_oeuvre: EtapeMiseEnOeuvre[];
   fiche_technique: FicheTechnique[];
@@ -496,8 +530,8 @@ export type CustomDirectusTypes = {
   objectif_developpement_durable: ObjectifDeveloppementDurable[];
   retour_experience: RetourExperience[];
   retour_experience_objectif_developpement_durable: RetourExperienceObjectifDeveloppementDurable[];
+  retour_experience_retour_experience: RetourExperienceRetourExperience[];
   retour_experience_solution_retour_experience: RetourExperienceSolutionRetourExperience[];
-  retour_experience_undefined: RetourExperienceUndefined[];
   situation_retour_experience: SituationRetourExperience[];
   solution_retour_experience: SolutionRetourExperience[];
 };

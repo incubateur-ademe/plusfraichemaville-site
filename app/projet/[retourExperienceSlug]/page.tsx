@@ -9,6 +9,7 @@ import { EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomMo
 import ItemRetourExperience from "@/components/retourExperience/ItemRetourExperience";
 import RetourExperienceExtraInfoPanel from "@/components/retourExperience/RetourExperienceExtraInfoPanel";
 import { notFound } from "next/navigation";
+import RetourExperienceCustomCard from "@/components/retourExperience/RetourExperienceCustomCard";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -81,6 +82,18 @@ export default async function RetourExperience({ params }: { params: { retourExp
                 <ItemRetourExperience title="Partenaires" content={retourExperience.partenaires} level="subtitle" />
                 <ItemRetourExperience title="Ressources" content={retourExperience.ressources} level="subtitle" />
                 <ItemRetourExperience title="Crédits" content={retourExperience.credits} level="subtitle" />
+              </>
+            )}
+            {retourExperience.retours_experience_lies?.length > 0 && (
+              <>
+                <h2 className="text-3xl mt-10 mb-3">Découvrir d{"'"}autres projets réalisés</h2>
+                <ul className="flex grow list-none flex-wrap p-0">
+                  {retourExperience.retours_experience_lies.map((rex) => (
+                    <li key={rex.related_retour_experience_id.id} className="m-2 w-80 flex">
+                      <RetourExperienceCustomCard retourExperience={rex.related_retour_experience_id} />
+                    </li>
+                  ))}
+                </ul>
               </>
             )}
           </div>

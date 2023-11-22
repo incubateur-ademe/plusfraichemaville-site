@@ -52,6 +52,18 @@ export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (rexFilter?: DirectusComplete
                 description
             }
         }
+        retours_experience_lies (sort:"sort")  {
+            related_retour_experience_id {
+                id
+                titre
+                image_principale
+                climat_actuel
+                climat_futur
+                types_espace
+                region
+                slug
+            }
+        }
     }
 }`;
 
