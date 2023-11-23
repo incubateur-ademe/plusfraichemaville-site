@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@codegouvfr/react-dsfr':
-    specifier: ^0.75.1
-    version: 0.75.8
+    specifier: ^1.0.0
+    version: 1.0.0
   '@directus/sdk':
     specifier: ^12.0.1
     version: 12.0.1
@@ -314,8 +314,8 @@ packages:
       to-fast-properties: 2.0.0
     dev: false
 
-  /@codegouvfr/react-dsfr@0.75.8:
-    resolution: {integrity: sha512-PhAciu4KaNTYjQQgjBE1EZnypqdc+qHurZFMuepC97KeARhxKW3Kl7sQkXDvqr+FKFgXkYn+jkFISwlbSh8kYQ==}
+  /@codegouvfr/react-dsfr@1.0.0:
+    resolution: {integrity: sha512-dHLzlpXNhSJ1hP53OkzgmkKer8fw5vzmbAzlqCr5p2L2vcspA17J/8LVZKLvPD1DJy3u9ydSZGNHeVygMsrJRQ==}
     hasBin: true
     dependencies:
       tsafe: 1.6.5

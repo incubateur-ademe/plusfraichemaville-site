@@ -39,7 +39,7 @@ export default function RootLayout({ children }: { children: ReactElement | null
       <head>
         <title>Plus fraîche ma ville</title>
         <StartDsfr />
-        <DsfrHead Link={Link} />
+        <DsfrHead Link={Link} doDisableFavicon={true} />
       </head>
       <body>
         <DsfrProvider lang={lang}>

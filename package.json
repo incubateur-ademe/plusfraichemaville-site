@@ -14,7 +14,7 @@
     "prettier": "npx prettier --check . --ignore-path .prettierignore"
   },
   "dependencies": {
-    "@codegouvfr/react-dsfr": "^0.75.1",
+    "@codegouvfr/react-dsfr": "^1.0.0",
     "@directus/sdk": "^12.0.1",
     "@sentry/nextjs": "^7.76.0",
     "next": "14.0.1",
