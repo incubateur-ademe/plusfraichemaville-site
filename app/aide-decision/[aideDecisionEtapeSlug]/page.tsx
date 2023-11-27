@@ -24,10 +24,10 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
           alt={currentStep.question_suivante || ""}
           className="pt-7 m-auto"
         />
-        <h1 className={"mb-10 text-center fr-h4"}>{currentStep.question_suivante}</h1>
+        <h1 className={"mb-10 text-center text-xl"}>{currentStep.question_suivante}</h1>
         <ul className="flex list-none flex-wrap justify-center p-0">
           {aideDecisionEtapes.map((aideDecision) => (
-            <li key={aideDecision.id} className="m-2 w-80 flex">
+            <li key={aideDecision.id} className="m-3 w-56 flex">
               <AideDecisionEtapeCard aideDecisionEtape={aideDecision} />
             </li>
           ))}

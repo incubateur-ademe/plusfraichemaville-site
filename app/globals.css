@@ -61,8 +61,8 @@
 
 .aide-decision-first-step-card:hover {
   background: #fff !important;
-  border: 1px solid var(--light-background-action-high-blue-france, #000091);
-  border-radius: 0.9375rem;
+  outline: 1px solid var(--light-background-action-high-blue-france, #000091);
+  outline-offset: 0px;
   color: var(--light-background-action-high-blue-france, #000091);
 
   .svg-blue-hover {
