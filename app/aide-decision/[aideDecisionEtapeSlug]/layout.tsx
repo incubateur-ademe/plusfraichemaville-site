@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 
 export default async function Layout({
