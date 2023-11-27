@@ -9,12 +9,7 @@ export default async function Layout({
   const etapeCourante = await getAideDecisionEtapeBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (etapeCourante && historique) {
-    return (
-      <>
-        <Breadcrumb currentPageLabel={etapeCourante.nom} segments={historique} homeLinkProps={{ href: "/" }} />
-        {children}
-      </>
-    );
+    return <>{children}</>;
   } else {
     return null;
   }

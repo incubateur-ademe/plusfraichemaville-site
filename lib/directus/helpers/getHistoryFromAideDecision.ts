@@ -7,9 +7,15 @@ export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionE
     aideDecisionEtape.etape_parente_id
   );
   while (etapeParente) {
-    history.unshift(new AideDecisionEtapeHistory(<string>etapeParente.nom, <string>etapeParente.slug));
+    history.unshift(
+      new AideDecisionEtapeHistory(
+        <string>etapeParente.nom,
+        <string>etapeParente.slug,
+        <string | null>etapeParente.image,
+      ),
+    );
     etapeParente = <AideDecisionEtape | null | undefined>etapeParente.etape_parente_id;
   }
-  history.unshift(new AideDecisionEtapeHistory("Choix de l'espace", "/aide-decision"));
+  history.unshift(new AideDecisionEtapeHistory("Choix de l'espace", "/aide-decision", null));
   return history;
 }

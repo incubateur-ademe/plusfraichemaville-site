@@ -8,7 +8,7 @@ export default async function Posts() {
   const aideDecisionFirstSteps = await getAideDecisionFirstSteps();
   return (
     <div className={"fr-container"}>
-      <h1 className={"mb-12 pt-14 text-center fr-h4"}>Sur quel espace voulez-vous agir ?</h1>
+      <h1 className={"mb-12 pt-20 text-center fr-h4"}>Sur quel espace voulez-vous agir ?</h1>
       <div className="max-w-2xl m-auto">
         <ul className="flex list-none flex-wrap justify-center pb-36">
           {aideDecisionFirstSteps.map((aideDecision) => (

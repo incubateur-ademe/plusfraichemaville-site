@@ -8,9 +8,11 @@ export type DirectusCompleteFilter = string;
 export class AideDecisionEtapeHistory {
   label: string;
   linkProps: Omit<LinkProps & { href: Route }, "children">;
-  constructor(label: string, slug: string) {
+  image: string | null;
+  constructor(label: string, slug: string, image: string | null) {
     this.label = label;
     this.linkProps = { href: slug };
+    this.image = image;
   }
 }
 
