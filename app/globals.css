@@ -53,6 +53,35 @@
   }
 }
 
+.aide-decision-first-step-card {
+  border-radius: 0.9375rem;
+  background: #fff;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 145, 0.2);
+}
+
+.aide-decision-first-step-card:hover {
+  background: #fff !important;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 145, 0.3);
+  outline: 1px solid var(--light-background-action-high-blue-france, #000091);
+  outline-offset: 0px;
+  color: var(--light-background-action-high-blue-france, #000091);
+
+  .svg-blue-hover {
+    filter: invert(16%) sepia(71%) saturate(3750%) hue-rotate(236deg) brightness(66%) contrast(139%);
+  }
+}
+
+.aide-decision-background {
+  background: linear-gradient(180deg, #f4f4ff 59.71%, #64aafd 143.4%);
+}
+
+.cmsRichText {
+  & ul {
+    list-style: outside;
+    margin-left: 1rem;
+  }
+}
+
 .cmsRichText {
   & ul {
     list-style: outside;

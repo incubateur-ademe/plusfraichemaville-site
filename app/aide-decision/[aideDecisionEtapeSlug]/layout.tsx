@@ -1,5 +1,4 @@
 import { PropsWithChildren } from "react";
-import { Breadcrumb } from "@codegouvfr/react-dsfr/Breadcrumb";
 import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 
 export default async function Layout({
@@ -9,12 +8,7 @@ export default async function Layout({
   const etapeCourante = await getAideDecisionEtapeBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (etapeCourante && historique) {
-    return (
-      <>
-        <Breadcrumb currentPageLabel={etapeCourante.nom} segments={historique} homeLinkProps={{ href: "/" }} />
-        {children}
-      </>
-    );
+    return <>{children}</>;
   } else {
     return null;
   }

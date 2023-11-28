@@ -4,6 +4,7 @@ import Footer from "@codegouvfr/react-dsfr/Footer";
 export default function AppFooter() {
   return (
     <Footer
+      className="pt-6"
       accessibility={"fully compliant"}
       operatorLogo={{
         alt: "ADEME",

@@ -43,15 +43,19 @@ export const GET_AIDE_DECISION_ETAPE_HISTORY = (aideDecisionEtapeSlug: string) =
     etape_parente_id {
       nom
       slug
+      image
       etape_parente_id{
         nom
         slug
+        image
         etape_parente_id{
           nom
           slug
+          image
           etape_parente_id{
             nom
             slug
+            image
           }
         }
       }

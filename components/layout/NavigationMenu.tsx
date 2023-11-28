@@ -8,33 +8,29 @@ export default function NavigationMenu() {
     <MainNavigation
       items={[
         {
-          linkProps: { href: "/", target: "_self" },
-          text: "Accueil",
-          isActive: pathname === "/",
-        },
-        {
           linkProps: { href: "/aide-decision", target: "_self" },
           text: "Aide à la décision",
-          isActive: pathname.startsWith("/aide-decision"),
+          isActive: pathname?.startsWith("/aide-decision"),
         },
         {
           text: "Fiches techniques",
-          isActive: pathname.startsWith("/fiche-technique"),
-          menuLinks: [
-            {
-              linkProps: { href: "/fiche-technique", target: "_self" },
-              text: "Toutes les fiches techniques",
-            },
-            {
-              linkProps: { href: "/fiche-technique/favoris", target: "_self" },
-              text: "Ma sélection de fiches techniques",
-            },
-          ],
+          isActive: pathname?.startsWith("/fiche-technique"),
+          linkProps: { href: "/fiche-technique", target: "_self" },
         },
         {
           linkProps: { href: "/projet", target: "_self" },
           text: "Projets réalisés",
-          isActive: pathname.startsWith("/projet"),
+          isActive: pathname?.startsWith("/projet"),
+        },
+        {
+          linkProps: { href: "/fiche-technique/favoris", target: "_self" },
+          text: "Mon projet",
+          isActive: pathname?.startsWith("/fiche-technique/favoris"),
+        },
+        {
+          linkProps: { href: "/projet", target: "_self" },
+          text: "Contact",
+          isActive: pathname?.startsWith("/contact"),
         },
       ]}
     />
