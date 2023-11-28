@@ -4,7 +4,7 @@ import {
   getAideDecisionHistoryBySlug,
 } from "@/lib/directus/queries/aideDecisionQueries";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
-import AideDecisionEtapeCard from "@/components/aideDecision/aideDecisionEtapeCard";
+import AideDecisionEtapeCard from "@/components/aideDecision/AideDecisionEtapeCard";
 import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import Link from "next/link";

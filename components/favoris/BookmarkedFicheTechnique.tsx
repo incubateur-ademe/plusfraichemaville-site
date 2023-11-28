@@ -1,5 +1,5 @@
-import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/ficheTechniqueCardWithUserInfo";
-import FicheTechniqueCard from "@/components/aideDecision/ficheTechniqueCard";
+import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/FicheTechniqueCardWithUserInfo";
+import FicheTechniqueCard from "@/components/aideDecision/FicheTechniqueCard";
 import { FicheTechnique } from "@/lib/directus/directusModels";
 import { useApi } from "@/hooks/useApi";
 

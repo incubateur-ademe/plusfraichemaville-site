@@ -1,6 +1,6 @@
 import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
-import FicheTechniqueCard from "@/components/aideDecision/ficheTechniqueCard";
-import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/ficheTechniqueCardWithUserInfo";
+import FicheTechniqueCard from "@/components/aideDecision/FicheTechniqueCard";
+import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/FicheTechniqueCardWithUserInfo";
 
 type Props = {
   aideDecisionEtapeSlug: string;
