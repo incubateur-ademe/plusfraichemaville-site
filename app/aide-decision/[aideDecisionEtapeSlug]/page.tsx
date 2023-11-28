@@ -4,10 +4,12 @@ import {
   getAideDecisionHistoryBySlug,
 } from "@/lib/directus/queries/aideDecisionQueries";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
-import AideDecisionResult from "@/app/aide-decision/[aideDecisionEtapeSlug]/aideDecisionResult";
-import AideDecisionEtapeCard from "@/components/aideDecision/aideDecisionEtapeCard";
+import AideDecisionEtapeCard from "@/components/aideDecision/AideDecisionEtapeCard";
 import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
 
 export default async function Page({ params }: { params: { aideDecisionEtapeSlug: string } }) {
   const aideDecisionEtapes = await getAideDecisionEtapeByEtapeParentSlug(params.aideDecisionEtapeSlug);
@@ -15,6 +17,7 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
   if (aideDecisionEtapes.length > 0) {
     const currentStep = aideDecisionEtapes[0].etape_parente_id as AideDecisionEtape;
     const firstStep = historique && historique[1] ? historique[1] : currentStep;
+    const previousStep = historique && historique[historique.length - 1] ? historique[historique.length - 1] : null;
     return (
       <div className={"fr-container"}>
         <Image
@@ -27,11 +30,21 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
         <h1 className={"mb-10 text-center text-xl"}>{currentStep.question_suivante}</h1>
         <ul className="flex list-none flex-wrap justify-center p-0">
           {aideDecisionEtapes.map((aideDecision) => (
-            <li key={aideDecision.id} className="m-3 w-56 flex">
+            <li key={aideDecision.id} className="m-3 w-96 md:w-56 flex">
               <AideDecisionEtapeCard aideDecisionEtape={aideDecision} />
             </li>
           ))}
         </ul>
+        {previousStep && (
+          <div className="mt-8 text-center md:text-left">
+            <Link
+              className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
+              href={`/aide-decision/${previousStep.slug}`}
+            >
+              Retour
+            </Link>
+          </div>
+        )}
       </div>
     );
   } else {
@@ -39,11 +52,7 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
     if (aideDecisionEtape) {
       return <AideDecisionResult aideDecisionEtapeSlug={params.aideDecisionEtapeSlug} />;
     } else {
-      return (
-        <>
-          <h1>Page non trouvée...</h1>
-        </>
-      );
+      notFound();
     }
   }
 }

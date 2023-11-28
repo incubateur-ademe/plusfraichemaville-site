@@ -1,5 +1,5 @@
 import { getFichesTechniques } from "@/lib/directus/queries/fichesTechniquesQueries";
-import FicheTechniqueCard from "@/components/aideDecision/ficheTechniqueCard";
+import FicheTechniqueCard from "@/components/aideDecision/FicheTechniqueCard";
 
 export default async function Posts() {
   const allFichesTechniques = await getFichesTechniques();
