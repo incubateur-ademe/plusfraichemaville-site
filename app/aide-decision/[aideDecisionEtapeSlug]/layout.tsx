@@ -1,5 +1,6 @@
 import { PropsWithChildren } from "react";
 import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
+import { notFound } from "next/navigation";
 
 export default async function Layout({
   params,
@@ -10,6 +11,6 @@ export default async function Layout({
   if (etapeCourante && historique) {
     return <>{children}</>;
   } else {
-    return null;
+    notFound();
   }
 }

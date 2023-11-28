@@ -1,14 +1,13 @@
 import {
   getAideDecisionEtapeByEtapeParentSlug,
-  getAideDecisionEtapeBySlug,
   getAideDecisionHistoryBySlug,
 } from "@/lib/directus/queries/aideDecisionQueries";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
-import AideDecisionResult from "@/app/aide-decision/[aideDecisionEtapeSlug]/aideDecisionResult";
 import AideDecisionEtapeCard from "@/components/aideDecision/aideDecisionEtapeCard";
 import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { aideDecisionEtapeSlug: string } }) {
   const aideDecisionEtapes = await getAideDecisionEtapeByEtapeParentSlug(params.aideDecisionEtapeSlug);
@@ -45,15 +44,6 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
       </div>
     );
   } else {
-    const aideDecisionEtape = await getAideDecisionEtapeBySlug(params.aideDecisionEtapeSlug);
-    if (aideDecisionEtape) {
-      return <AideDecisionResult aideDecisionEtapeSlug={params.aideDecisionEtapeSlug} />;
-    } else {
-      return (
-        <>
-          <h1>Page non trouvée...</h1>
-        </>
-      );
-    }
+    notFound();
   }
 }
