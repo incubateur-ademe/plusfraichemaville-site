@@ -9,7 +9,7 @@ import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/dir
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import AideDecisionResult from "@/app/aide-decision/[aideDecisionEtapeSlug]/aideDecisionResult";
+import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
 
 export default async function Page({ params }: { params: { aideDecisionEtapeSlug: string } }) {
   const aideDecisionEtapes = await getAideDecisionEtapeByEtapeParentSlug(params.aideDecisionEtapeSlug);
