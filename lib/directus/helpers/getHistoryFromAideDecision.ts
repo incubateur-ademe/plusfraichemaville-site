@@ -16,6 +16,6 @@ export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionE
     );
     etapeParente = <AideDecisionEtape | null | undefined>etapeParente.etape_parente_id;
   }
-  history.unshift(new AideDecisionEtapeHistory("Choix de l'espace", "/aide-decision", null));
+  history.unshift(new AideDecisionEtapeHistory("Choix de l'espace", "", null));
   return history;
 }

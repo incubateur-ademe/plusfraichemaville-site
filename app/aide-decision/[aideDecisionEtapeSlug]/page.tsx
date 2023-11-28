@@ -8,6 +8,7 @@ import AideDecisionResult from "@/app/aide-decision/[aideDecisionEtapeSlug]/aide
 import AideDecisionEtapeCard from "@/components/aideDecision/aideDecisionEtapeCard";
 import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
+import Link from "next/link";
 
 export default async function Page({ params }: { params: { aideDecisionEtapeSlug: string } }) {
   const aideDecisionEtapes = await getAideDecisionEtapeByEtapeParentSlug(params.aideDecisionEtapeSlug);
@@ -15,6 +16,7 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
   if (aideDecisionEtapes.length > 0) {
     const currentStep = aideDecisionEtapes[0].etape_parente_id as AideDecisionEtape;
     const firstStep = historique && historique[1] ? historique[1] : currentStep;
+    const previousStep = historique && historique[historique.length - 1] ? historique[historique.length - 1] : null;
     return (
       <div className={"fr-container"}>
         <Image
@@ -32,6 +34,14 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
             </li>
           ))}
         </ul>
+        {previousStep && (
+          <Link
+            className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
+            href={`/aide-decision/${previousStep.slug}`}
+          >
+            Retour
+          </Link>
+        )}
       </div>
     );
   } else {
