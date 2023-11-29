@@ -29,6 +29,10 @@ export function getAideDecisionFicheTechniqueStatusFilter(): DirectusSingleFilte
   return ` {fiche_technique_id: ${getStatusFilter()}}`;
 }
 
+export function getAideDecisionFicheSolutionStatusFilter(): DirectusSingleFilter {
+  return ` {fiche_solution_id: ${getStatusFilter()}}`;
+}
+
 export function contrusctAndFilters(filters: DirectusSingleFilter[], sortField?: string): DirectusCompleteFilter {
   const filterArgument = `filter: {_and: [${filters.map((filter) => filter).join(",")}]}`;
   const sortArgument = sortField ? ` sort: "${sortField}" ` : "";
