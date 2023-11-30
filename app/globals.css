@@ -64,10 +64,13 @@
   box-shadow: 0 0 20px 0 rgba(0, 0, 145, 0.3);
   outline: 1px solid var(--light-background-action-high-blue-france, #000091);
   outline-offset: 0px;
-  color: var(--light-background-action-high-blue-france, #000091);
 
   .svg-blue-hover {
     filter: invert(16%) sepia(71%) saturate(3750%) hue-rotate(236deg) brightness(66%) contrast(139%);
+  }
+
+  .text-blue-hover {
+    color: var(--text-label-blue-france);
   }
 }
 

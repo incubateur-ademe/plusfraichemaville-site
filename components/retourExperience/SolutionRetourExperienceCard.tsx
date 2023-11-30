@@ -15,7 +15,7 @@ export default async function SolutionRetourExperienceCard({
         <Image
           fill={true}
           className="rounded-full"
-          src={getDirectusImageUrl(solution.image, DIRECTUS_IMAGE_KEY_SIZE.ficheTechniqueCard)}
+          src={getDirectusImageUrl(solution.image, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
           alt={solution.titre || ""}
         />
       </div>

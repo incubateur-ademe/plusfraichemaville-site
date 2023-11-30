@@ -13,7 +13,7 @@ export default function AideDecisionFirstStepEtapeCard({
       className="bg-none w-32 h-32 flex flex-col items-center aide-decision-first-step-card"
       href={`/aide-decision/${aideDecisionEtape.slug}`}
     >
-      <div className={"text-sm text-center"}>&nbsp;</div>
+      <div className={"text-sm text-center text-pfmv-light-grey"}>&nbsp;</div>
       <div>
         <Image
           width={80}

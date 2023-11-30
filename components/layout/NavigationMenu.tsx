@@ -13,9 +13,9 @@ export default function NavigationMenu() {
           isActive: pathname?.startsWith("/aide-decision"),
         },
         {
-          text: "Fiches techniques",
-          isActive: pathname?.startsWith("/fiche-technique"),
-          linkProps: { href: "/fiche-technique", target: "_self" },
+          text: "Fiches solutions",
+          isActive: pathname?.startsWith("/fiche-solution"),
+          linkProps: { href: "/fiche-solution", target: "_self" },
         },
         {
           linkProps: { href: "/projet", target: "_self" },
@@ -23,9 +23,9 @@ export default function NavigationMenu() {
           isActive: pathname?.startsWith("/projet"),
         },
         {
-          linkProps: { href: "/fiche-technique/favoris", target: "_self" },
+          linkProps: { href: "/mon-projet/favoris", target: "_self" },
           text: "Mon projet",
-          isActive: pathname?.startsWith("/fiche-technique/favoris"),
+          isActive: pathname?.startsWith("/mon-projet/favoris"),
         },
         {
           linkProps: { href: "/projet", target: "_self" },

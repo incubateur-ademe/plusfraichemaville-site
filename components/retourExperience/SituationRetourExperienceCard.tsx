@@ -32,7 +32,7 @@ export default async function SituationRetourExperienceCard({
             width={600}
             height={300}
             className="w-full h-52 object-cover rounded-t-2xl"
-            src={getDirectusImageUrl(situation.image, DIRECTUS_IMAGE_KEY_SIZE.ficheTechniqueCard)}
+            src={getDirectusImageUrl(situation.image, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
             alt={titre}
           />
         </div>

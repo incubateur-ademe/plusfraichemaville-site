@@ -7,7 +7,6 @@ import {
   contrusctAndFilters,
   DirectusCompleteFilter,
   getAideDecisionFicheSolutionStatusFilter,
-  getAideDecisionFicheTechniqueStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
 import { getHistoryFromAideDecisionEtape } from "@/lib/directus/helpers/getHistoryFromAideDecision";
 
@@ -36,15 +35,6 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
           baisse_temperature
           delai_travaux
           cout
-          slug
-        }
-      }
-      fiche_technique_id ${contrusctAndFilters([getAideDecisionFicheTechniqueStatusFilter()])} {
-        fiche_technique_id{
-          id
-          titre
-          description_courte
-          image_principale
           slug
         }
       }

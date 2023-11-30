@@ -1,4 +1,4 @@
-import { FicheTechniqueObjectifDeveloppementDurable } from "@/lib/directus/directusModels";
+import { RetourExperienceObjectifDeveloppementDurable } from "@/lib/directus/directusModels";
 import Image from "next/image";
 
 export default async function ObjectifsDeveloppementDurable({
@@ -6,7 +6,7 @@ export default async function ObjectifsDeveloppementDurable({
   imageSize = 100,
   className,
 }: {
-  objectifs: FicheTechniqueObjectifDeveloppementDurable[];
+  objectifs: RetourExperienceObjectifDeveloppementDurable[];
   imageSize?: number;
   className?: string;
 }) {

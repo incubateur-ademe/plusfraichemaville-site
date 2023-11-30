@@ -22,13 +22,13 @@ export default function FicheSolutionCardWithUserInfo({
 }) {
   const [isClient, setIsClient] = useState(false);
 
-  const [bookmarkedFichesTechniques, setBookmarkedFichesTechniques] = useLocalStorage<ProjectBookmarks[]>(
+  const [bookmarkedFichesSolutions, setBookmarkedFichesSolutions] = useLocalStorage<ProjectBookmarks[]>(
     BOOKMARK_FS_KEY,
     [],
   );
 
   const [isBookmarked, setIsBookmarked] = useState(
-    isFicheSolutionBookmarked(bookmarkedFichesTechniques, ficheSolution.id, aideDecisionFirstStepName),
+    isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolution.id, aideDecisionFirstStepName),
   );
 
   useEffect(() => {
@@ -37,13 +37,13 @@ export default function FicheSolutionCardWithUserInfo({
 
   const changeFavorite = () => {
     if (isBookmarked) {
-      setBookmarkedFichesTechniques(
-        unBookmarkFicheSolution(bookmarkedFichesTechniques, ficheSolution.id, aideDecisionFirstStepName),
+      setBookmarkedFichesSolutions(
+        unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolution.id, aideDecisionFirstStepName),
       );
       setIsBookmarked(false);
     } else {
-      setBookmarkedFichesTechniques(
-        addFicheSolutionBookmark(bookmarkedFichesTechniques, ficheSolution.id, aideDecisionFirstStepName),
+      setBookmarkedFichesSolutions(
+        addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolution.id, aideDecisionFirstStepName),
       );
       setIsBookmarked(true);
     }

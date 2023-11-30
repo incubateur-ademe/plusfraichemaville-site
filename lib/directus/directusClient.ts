@@ -6,7 +6,7 @@ const DIRECTUS_ASSET_URL = DIRECTUS_URL + "/assets/";
 
 export const DIRECTUS_IMAGE_KEY_SIZE = {
   aideDecisionCard: "aide-decision-card",
-  ficheTechniqueCard: "fiche-technique-card",
+  ficheSolutionCard: "fiche-solution-card",
   retourExperienceCard: "retour-experience-card",
   retourExperiencePage: "retour-experience-page",
 } as const;

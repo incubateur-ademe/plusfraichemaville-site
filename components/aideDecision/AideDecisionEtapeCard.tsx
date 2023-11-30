@@ -20,7 +20,7 @@ export default function AideDecisionEtapeCard({ aideDecisionEtape }: { aideDecis
         />
       </div>
       <div className="m-4 max-w-[11rem]">
-        <div className={"font-bold"}>{aideDecisionEtape.nom}</div>
+        <div className={"font-bold text-blue-hover"}>{aideDecisionEtape.nom}</div>
         <div className={"hidden md:block fr-text text-dsfr-text-mention-grey mt-4"}>
           {aideDecisionEtape.description}
         </div>

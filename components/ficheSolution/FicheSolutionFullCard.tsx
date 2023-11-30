@@ -7,7 +7,7 @@ import React from "react";
 import { getDelaiTravauxFicheSolutionFromCode } from "@/helpers/delaiTravauxFicheSolution";
 import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
 
-export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSolution: FicheSolution }) {
+export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution: FicheSolution }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
   const delaiTravaux = getDelaiTravauxFicheSolutionFromCode(ficheSolution.delai_travaux);
   const cout = getCoutFicheSolutionFromCode(ficheSolution.cout);
@@ -21,7 +21,7 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
         <Image
           width={450}
           height={300}
-          src={getDirectusImageUrl(ficheSolution.image_principale, DIRECTUS_IMAGE_KEY_SIZE.ficheTechniqueCard)}
+          src={getDirectusImageUrl(ficheSolution.image_principale, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
           alt={ficheSolution.titre}
           className={"w-full object-cover rounded-t-2xl"}
         />
@@ -35,7 +35,7 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
             </div>
           </>
         )}
-        <div className={"text-xl font-bold text-dsfr-text-little-grey text- xl"}>{ficheSolution.titre}</div>
+        <div className={"text-xl font-bold text-dsfr-text-little-grey text-blue-hover"}>{ficheSolution.titre}</div>
         <div className={"text-sm text-dsfr-text-little-grey mt-4"}>{ficheSolution.description_courte}</div>
         <div className={"mt-auto"}>
           <div>

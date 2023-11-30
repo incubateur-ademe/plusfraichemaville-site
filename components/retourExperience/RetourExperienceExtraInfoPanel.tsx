@@ -1,6 +1,6 @@
 import { RetourExperience } from "@/lib/directus/directusModels";
 import ItemRetourExperienceExtraInfo from "@/components/retourExperience/ItemRetourExperienceExtraInfo";
-import ObjectifsDeveloppementDurable from "@/components/ficheTechnique/ObjectifsDeveloppementDurable";
+import ObjectifsDeveloppementDurable from "@/components/common/ObjectifsDeveloppementDurable";
 
 export default async function RetourExperienceExtraInfoPanel({
   retourExperience,
