@@ -33,6 +33,7 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
           description_courte
           image_principale
           type_solution
+          baisse_temperature
           slug
         }
       }

@@ -31,13 +31,19 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
             </div>
           </>
         )}
-        <div className={"font-bold text-dsfr-text-little-grey text- xl"}>{ficheSolution.titre}</div>
-        <div className={"fr-text text-dsfr-text-little-grey mt-4"}>{ficheSolution.description_courte}</div>
+        <div className={"text-xl font-bold text-dsfr-text-little-grey text- xl"}>{ficheSolution.titre}</div>
+        <div className={"text-sm text-dsfr-text-little-grey mt-4"}>{ficheSolution.description_courte}</div>
         <div className={"mt-auto"}>
           <div>
-            <div className="mt-6 mb-2 text-right">
-              <div className="fr-text--bold text-4xl text-dsfr-text-color-green">-1,5 °</div>
-              <div className="text-xs text-dsfr-text-color-grey">Température locale</div>
+            <div className="flex flex-row justify-between w-full mt-6 mb-2">
+              <div className="mr-4 text-dsfr-text-mention-grey text-xs">
+                Baisse maximale de la température de l{"'"}air
+              </div>
+              <div className="float-right text-right">
+                <div className="fr-text--bold text-4xl text-dsfr-text-label-blue-france">
+                  -{`${ficheSolution.baisse_temperature}°C`}
+                </div>
+              </div>
             </div>
             <hr className="pb-1" />
             <div className="text-dsfr-text-color-grey">
