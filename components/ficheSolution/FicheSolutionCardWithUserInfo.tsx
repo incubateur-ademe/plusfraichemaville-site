@@ -54,7 +54,7 @@ export default function FicheSolutionCardWithUserInfo({
       {isClient ? (
         <div
           className="flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france
-        w-8 h-8 text-white rounded-2xl absolute cursor-pointer top-2 right-2 z-40"
+        w-8 h-8 text-white rounded-2xl absolute cursor-pointer top-2 right-6 z-40"
           onClick={changeFavorite}
         >
           <span
@@ -65,7 +65,7 @@ export default function FicheSolutionCardWithUserInfo({
       ) : (
         <div
           className="flex justify-center items-center bg-dsfr-text-label-blue-france
-        w-8 h-8 text-white rounded-2xl absolute cursor-pointer top-2 right-2 z-40"
+        w-8 h-8 text-white rounded-2xl absolute cursor-pointer top-2 right-6 z-40"
         >
           <Oval
             height={20}

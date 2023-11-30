@@ -14,7 +14,7 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
   return (
     <Link
       className="flex w-[17.5rem] flex-col
-      aide-decision-first-step-card mr-4 ml-4 md:mr-0 md:ml-0"
+      aide-decision-first-step-card mr-4 ml-4"
       href={`/fiche-solution/${ficheSolution.slug}`}
     >
       <div className="flex w-full h-52">
@@ -72,7 +72,7 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
               </>
             )}
             <div className="text-center mt-4">
-              <div className={`fr-btn fr-btn--tertiary rounded-3xl hover:bg-dsfr-background-grey px-9`}>
+              <div className={`fr-btn fr-btn--tertiary rounded-3xl px-9`}>
                 {"J'explore la solution"}
               </div>
             </div>

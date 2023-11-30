@@ -1,6 +1,6 @@
 import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
-import FicheSolutionCardWithUserInfo from "@/components/aideDecision/FicheSolutionCardWithUserInfo";
+import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 
 type Props = {
