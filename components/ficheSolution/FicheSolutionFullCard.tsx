@@ -4,9 +4,11 @@ import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/dir
 import Link from "next/link";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
+import { getDelaTravauxFromCode } from "@/helpers/delaiTravaux";
 
 export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSolution: FicheSolution }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
+  const delaiTravaux = getDelaTravauxFromCode(ficheSolution.delai_travaux);
   return (
     <Link
       className="flex w-[17.5rem] flex-col
@@ -26,7 +28,7 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
         {typeSolution && (
           <>
             <div className="flex flex-row text-xs mb-2 text-dsfr-text-mention-grey">
-              {typeSolution.icon("fr-icon--xs mb-auto")}
+              {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           </>
@@ -36,50 +38,40 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
         <div className={"mt-auto"}>
           <div>
             <div className="flex flex-row justify-between w-full mt-6 mb-2">
-              <div className="mr-4 text-dsfr-text-mention-grey text-xs">
+              <div className="mr-4 mt-auto text-dsfr-text-mention-grey text-xs">
                 Baisse maximale de la température de l{"'"}air
               </div>
               <div className="float-right text-right">
                 <div className="fr-text--bold text-4xl text-dsfr-text-label-blue-france">
-                  -{`${ficheSolution.baisse_temperature}°C`}
+                  {`-${ficheSolution.baisse_temperature}°C`}
                 </div>
               </div>
+            </div>
+            <hr className="pb-2" />
+            {delaiTravaux && (
+              <>
+                <div className="text-xs text-dsfr-text-mention-grey">Délai des travaux</div>
+                <div className="inline-block w-full">
+                  <div className="float-left">
+                    {delaiTravaux.icons()}
+                  </div>
+                  <div className="float-right text-xs text-dsfr-text-mention-grey mt-1">{delaiTravaux.label}</div>
+                </div>
+                <hr className="pb-2" />
+              </>
+            )}
+            <div className="fr-text--bold text-xs">Coût</div>
+            <div className="inline-block w-full">
+              <div className="float-left">
+                <span className={"fr-icon-money-euro-circle-fill fr-icon--sm text-dsfr-text-color-green"}></span>
+                <span className={"fr-icon-money-euro-circle-fill fr-icon--sm text-dsfr-text-color-green"}></span>
+                <span
+                  className={"fr-icon-money-euro-circle-fill fr-icon--sm text-dsfr-text-color-grey opacity-50"}
+                ></span>
+              </div>
+              <div className="float-right text-xs mt-1">de 3000 € à 10 000 €</div>
             </div>
             <hr className="pb-1" />
-            <div className="text-dsfr-text-color-grey">
-              <div className="fr-text--bold text-xs text-dsfr-text-color-grey">Rapidité effective</div>
-              <div className="inline-block w-full">
-                <div className="float-left">
-                  <span className={"ri-hourglass-2-fill fr-icon--sm text-dsfr-text-color-green"}></span>
-                  <span className={"ri-hourglass-2-fill fr-icon--sm text-dsfr-text-color-grey opacity-50"}></span>
-                  <span className={"ri-hourglass-2-fill fr-icon--sm text-dsfr-text-color-grey opacity-50"}></span>
-                </div>
-                <div className="float-right text-xs mt-1">de 6 mois à un an</div>
-              </div>
-              <hr className="pb-1" />
-              <div className="fr-text--bold text-xs">Pérénnité</div>
-              <div className="inline-block w-full">
-                <div className="float-left">
-                  <span className={"ri-shining-2-fill fr-icon--sm text-dsfr-text-color-green"}></span>
-                  <span className={"ri-shining-2-fill fr-icon--sm text-dsfr-text-color-green"}></span>
-                  <span className={"ri-shining-2-fill fr-icon--sm text-dsfr-text-color-grey opacity-50"}></span>
-                </div>
-                <div className="float-right text-xs mt-1">de 6 mois à un an</div>
-              </div>
-              <hr className="pb-1" />
-              <div className="fr-text--bold text-xs">Coût</div>
-              <div className="inline-block w-full">
-                <div className="float-left">
-                  <span className={"fr-icon-money-euro-circle-line fr-icon--sm text-dsfr-text-color-green"}></span>
-                  <span className={"fr-icon-money-euro-circle-line fr-icon--sm text-dsfr-text-color-green"}></span>
-                  <span
-                    className={"fr-icon-money-euro-circle-line fr-icon--sm text-dsfr-text-color-grey opacity-50"}
-                  ></span>
-                </div>
-                <div className="float-right text-xs mt-1">de 3000 € à 10 000 €</div>
-              </div>
-              <hr className="pb-1" />
-            </div>
           </div>
         </div>
       </div>

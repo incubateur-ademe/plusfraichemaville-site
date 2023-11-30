@@ -34,6 +34,7 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
           image_principale
           type_solution
           baisse_temperature
+          delai_travaux
           slug
         }
       }
