@@ -1,7 +1,7 @@
 import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
-import FicheTechniqueCard from "@/components/aideDecision/FicheTechniqueCard";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
 import FicheSolutionCardWithUserInfo from "@/components/aideDecision/FicheSolutionCardWithUserInfo";
+import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 
 type Props = {
   aideDecisionEtape: AideDecisionEtape;
@@ -11,8 +11,8 @@ export default async function AideDecisionResult({ aideDecisionEtape }: Props) {
   const historique = await getAideDecisionHistoryBySlug(aideDecisionEtape.slug);
   if (aideDecisionEtape.fiches_solutions.length > 0) {
     return (
-      <>
-        <h1 className={"mb-4 text-center"}>Les solutions possibles</h1>
+      <div className={"fr-container"}>
+        <h1 className={"mb-4 pt-10 fr-h4"}>Découvrez les solutions proposées pour votre recherche</h1>
         <ul className="flex list-none flex-wrap justify-center p-0">
           {aideDecisionEtape.fiches_solutions.map((ficheSolution) => (
             <li key={ficheSolution.fiche_solution_id.id} className="m-2 w-72 flex">
@@ -20,12 +20,12 @@ export default async function AideDecisionResult({ aideDecisionEtape }: Props) {
                 ficheSolution={ficheSolution.fiche_solution_id}
                 aideDecisionFirstStepName={(historique && historique[1].label) || ""}
               >
-                <FicheTechniqueCard ficheTechnique={ficheSolution.fiche_solution_id} />
+                <FicheSolutionFullCard ficheSolution={ficheSolution.fiche_solution_id} />
               </FicheSolutionCardWithUserInfo>
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   } else {
     return (

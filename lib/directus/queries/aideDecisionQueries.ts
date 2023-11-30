@@ -5,8 +5,9 @@ import { AideDecisionEtape } from "@/lib/directus/directusModels";
 import {
   AideDecisionEtapeHistory,
   contrusctAndFilters,
-  DirectusCompleteFilter, getAideDecisionFicheSolutionStatusFilter,
-  getAideDecisionFicheTechniqueStatusFilter
+  DirectusCompleteFilter,
+  getAideDecisionFicheSolutionStatusFilter,
+  getAideDecisionFicheTechniqueStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
 import { getHistoryFromAideDecisionEtape } from "@/lib/directus/helpers/getHistoryFromAideDecision";
 
@@ -31,6 +32,7 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
           titre
           description_courte
           image_principale
+          type_solution
           slug
         }
       }

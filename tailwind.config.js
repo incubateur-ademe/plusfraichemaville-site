@@ -8,7 +8,7 @@ module.exports = {
       },
     },
     colors: {
-      "white": "#FFF",
+      white: "#FFF",
       "pfmv-light-blue": "#0080C2",
       "pfmv-dark-blue": "#292A82",
       "dsfr-text-label-blue-france": "var(--text-label-blue-france)",
@@ -16,6 +16,7 @@ module.exports = {
       "dsfr-background-blue-cumulus": "var(--background-action-low-blue-cumulus)",
       "dsfr-background-grey": "var(--background-default-grey-active)",
       "dsfr-text-mention-grey": "var(--text-mention-grey)",
+      "dsfr-text-little-grey": "var(--text-title-grey)",
     },
   },
   plugins: [],

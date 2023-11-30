@@ -49,7 +49,7 @@ export default function FicheSolutionCardWithUserInfo({
     }
   };
   return (
-    <div className={"relative flex grow"}>
+    <div className={"relative flex"}>
       {children}
       {isClient ? (
         <div
