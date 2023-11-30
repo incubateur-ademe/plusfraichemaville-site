@@ -49,33 +49,33 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
                 </div>
               </div>
             </div>
-            <hr className="pb-2" />
             {delaiTravaux && (
               <>
+                <hr className="pb-2" />
                 <div className="text-xs text-dsfr-text-mention-grey">Délai des travaux</div>
                 <div className="inline-block w-full">
-                  <div className="float-left">
-                    {delaiTravaux.icons("fr-icon--sm")}
-                  </div>
+                  <div className="float-left">{delaiTravaux.icons("fr-icon--sm")}</div>
                   <div className="float-right text-xs text-dsfr-text-mention-grey mt-1">{delaiTravaux.label}</div>
                 </div>
-                <hr className="pb-2" />
               </>
             )}
             {cout && (
               <>
+                <hr className="pb-1" />
                 <div className="text-xs text-dsfr-text-mention-grey">Coût</div>
                 <div className="inline-block w-full">
                   <div className="float-left">
-                    <div className="float-left">
-                      {cout.icons("fr-icon--sm")}
-                    </div>
+                    <div className="float-left">{cout.icons("fr-icon--sm")}</div>
                   </div>
                   <div className="float-right text-xs text-dsfr-text-mention-grey mt-1">{cout.label}</div>
                 </div>
-                <hr className="pb-1" />
               </>
             )}
+            <div className="text-center mt-4">
+              <div className={`fr-btn fr-btn--tertiary rounded-3xl hover:bg-dsfr-background-grey px-9`}>
+                {"J'explore la solution"}
+              </div>
+            </div>
           </div>
         </div>
       </div>
