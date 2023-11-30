@@ -1,36 +1,36 @@
-import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
-import FicheTechniqueCard from "@/components/aideDecision/FicheTechniqueCard";
-import FicheTechniqueCardWithUserInfo from "@/components/aideDecision/FicheTechniqueCardWithUserInfo";
+import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
+import { AideDecisionEtape } from "@/lib/directus/directusModels";
+import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 
 type Props = {
-  aideDecisionEtapeSlug: string;
+  aideDecisionEtape: AideDecisionEtape;
 };
 
-export default async function AideDecisionResult({ aideDecisionEtapeSlug }: Props) {
-  const aideDecisionEtape = await getAideDecisionEtapeBySlug(aideDecisionEtapeSlug);
-  const historique = await getAideDecisionHistoryBySlug(aideDecisionEtapeSlug);
-  if (aideDecisionEtape) {
+export default async function AideDecisionResult({ aideDecisionEtape }: Props) {
+  const historique = await getAideDecisionHistoryBySlug(aideDecisionEtape.slug);
+  if (aideDecisionEtape.fiches_solutions.length > 0) {
     return (
-      <>
-        <h1 className={"mb-4 text-center"}>Les solutions possibles</h1>
+      <div className={"fr-container"}>
+        <h1 className={"mb-4 pt-10 fr-h4"}>Découvrez les solutions proposées pour votre recherche</h1>
         <ul className="flex list-none flex-wrap justify-center p-0">
-          {aideDecisionEtape.fiche_technique_id.map((ficheTechnique) => (
-            <li key={ficheTechnique.fiche_technique_id.id} className="m-2 w-72 flex">
-              <FicheTechniqueCardWithUserInfo
-                ficheTechnique={ficheTechnique.fiche_technique_id}
+          {aideDecisionEtape.fiches_solutions.map((ficheSolution) => (
+            <li key={ficheSolution.fiche_solution_id.id} className="m-2 w-72 flex">
+              <FicheSolutionCardWithUserInfo
+                ficheSolution={ficheSolution.fiche_solution_id}
                 aideDecisionFirstStepName={(historique && historique[1].label) || ""}
               >
-                <FicheTechniqueCard ficheTechnique={ficheTechnique.fiche_technique_id} />
-              </FicheTechniqueCardWithUserInfo>
+                <FicheSolutionFullCard ficheSolution={ficheSolution.fiche_solution_id} />
+              </FicheSolutionCardWithUserInfo>
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   } else {
     return (
       <>
-        <h1>Aucune fiche technique ne correspond à vos critères...</h1>
+        <h1 className={"mb-4 pt-10 text-center"}>Aucune Fiche Solution ne correspond à vos critères...</h1>
       </>
     );
   }

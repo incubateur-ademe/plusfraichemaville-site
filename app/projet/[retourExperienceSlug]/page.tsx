@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { getDirectusImageUrl } from "@/lib/directus/directusClient";
 import { getRetourExperienceBySlug } from "@/lib/directus/queries/retoursExperienceQueries";
-import CustomDSFRQuote from "@/components/customDSFR/CustomDSFRQuote";
+import CustomDSFRQuote from "@/components/common/CustomDSFRQuote";
 import SituationRetourExperienceCard from "@/components/retourExperience/SituationRetourExperienceCard";
 import SolutionRetourExperienceCard from "@/components/retourExperience/SolutionRetourExperienceCard";
 import CalendrierRetourExperienceAccordion from "@/components/retourExperience/CalendrierRetourExperienceAccordion";

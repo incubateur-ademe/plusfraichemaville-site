@@ -1,7 +1,6 @@
 "use client";
-import { FicheTechnique } from "@/lib/directus/directusModels";
+import { FicheSolution } from "@/lib/directus/directusModels";
 import React, { useEffect, useState } from "react";
-import Tag from "@codegouvfr/react-dsfr/Tag";
 import { useLocalStorage } from "usehooks-ts";
 import {
   addFicheSolutionBookmark,
@@ -12,12 +11,12 @@ import {
 } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { Oval } from "react-loader-spinner";
 
-export default function FicheTechniqueCardWithUserInfo({
-  ficheTechnique,
+export default function FicheSolutionCardWithUserInfo({
+  ficheSolution,
   aideDecisionFirstStepName,
   children,
 }: {
-  ficheTechnique: FicheTechnique;
+  ficheSolution: FicheSolution;
   aideDecisionFirstStepName: string;
   children: React.ReactNode;
 }) {
@@ -29,7 +28,7 @@ export default function FicheTechniqueCardWithUserInfo({
   );
 
   const [isBookmarked, setIsBookmarked] = useState(
-    isFicheSolutionBookmarked(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
+    isFicheSolutionBookmarked(bookmarkedFichesTechniques, ficheSolution.id, aideDecisionFirstStepName),
   );
 
   useEffect(() => {
@@ -39,47 +38,46 @@ export default function FicheTechniqueCardWithUserInfo({
   const changeFavorite = () => {
     if (isBookmarked) {
       setBookmarkedFichesTechniques(
-        unBookmarkFicheSolution(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
+        unBookmarkFicheSolution(bookmarkedFichesTechniques, ficheSolution.id, aideDecisionFirstStepName),
       );
       setIsBookmarked(false);
     } else {
       setBookmarkedFichesTechniques(
-        addFicheSolutionBookmark(bookmarkedFichesTechniques, ficheTechnique.id, aideDecisionFirstStepName),
+        addFicheSolutionBookmark(bookmarkedFichesTechniques, ficheSolution.id, aideDecisionFirstStepName),
       );
       setIsBookmarked(true);
     }
   };
   return (
-    <div className={"relative flex grow"}>
+    <div className={"relative flex"}>
       {children}
       {isClient ? (
-        <Tag
-          className={"absolute top-2 right-2 z-40"}
-          iconId={isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}
-          nativeButtonProps={{
-            onClick: changeFavorite,
-          }}
+        <div
+          className="flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france
+        w-8 h-8 text-white rounded-2xl absolute cursor-pointer top-2 right-6 z-40"
+          onClick={changeFavorite}
         >
-          {isBookmarked ? "Retirer des favoris" : "Mettre en favori"}
-        </Tag>
+          <span
+            className={`fr-icon--sm ${isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}`}
+            aria-hidden="true"
+          />
+        </div>
       ) : (
-        <Tag
-          className={"absolute top-2 right-2 z-40"}
-          nativeButtonProps={{
-            onClick: () => {},
-          }}
+        <div
+          className="flex justify-center items-center bg-dsfr-text-label-blue-france
+        w-8 h-8 text-white rounded-2xl absolute cursor-pointer top-2 right-6 z-40"
         >
           <Oval
             height={20}
             width={20}
-            color="var(--text-label-blue-france)"
+            color="white"
             visible={true}
             ariaLabel="oval-loading"
             secondaryColor="grey"
             strokeWidth={3}
             strokeWidthSecondary={3}
           />
-        </Tag>
+        </div>
       )}
     </div>
   );

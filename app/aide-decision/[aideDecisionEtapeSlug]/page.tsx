@@ -1,5 +1,5 @@
 import {
-  getAideDecisionEtapeByEtapeParentSlug,
+  getAideDecisionEtapesByEtapeParentSlug,
   getAideDecisionEtapeBySlug,
   getAideDecisionHistoryBySlug,
 } from "@/lib/directus/queries/aideDecisionQueries";
@@ -12,7 +12,7 @@ import { notFound } from "next/navigation";
 import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
 
 export default async function Page({ params }: { params: { aideDecisionEtapeSlug: string } }) {
-  const aideDecisionEtapes = await getAideDecisionEtapeByEtapeParentSlug(params.aideDecisionEtapeSlug);
+  const aideDecisionEtapes = await getAideDecisionEtapesByEtapeParentSlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (aideDecisionEtapes.length > 0) {
     const currentStep = aideDecisionEtapes[0].etape_parente_id as AideDecisionEtape;
@@ -50,7 +50,7 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
   } else {
     const aideDecisionEtape = await getAideDecisionEtapeBySlug(params.aideDecisionEtapeSlug);
     if (aideDecisionEtape) {
-      return <AideDecisionResult aideDecisionEtapeSlug={params.aideDecisionEtapeSlug} />;
+      return <AideDecisionResult aideDecisionEtape={aideDecisionEtape} />;
     } else {
       notFound();
     }

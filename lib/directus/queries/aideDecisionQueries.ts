@@ -6,6 +6,7 @@ import {
   AideDecisionEtapeHistory,
   contrusctAndFilters,
   DirectusCompleteFilter,
+  getAideDecisionFicheSolutionStatusFilter,
   getAideDecisionFicheTechniqueStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
 import { getHistoryFromAideDecisionEtape } from "@/lib/directus/helpers/getHistoryFromAideDecision";
@@ -24,6 +25,19 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
         image
         slug
         question_suivante
+      }
+      fiches_solutions ${contrusctAndFilters([getAideDecisionFicheSolutionStatusFilter()])} {
+        fiche_solution_id{
+          id
+          titre
+          description_courte
+          image_principale
+          type_solution
+          baisse_temperature
+          delai_travaux
+          cout
+          slug
+        }
       }
       fiche_technique_id ${contrusctAndFilters([getAideDecisionFicheTechniqueStatusFilter()])} {
         fiche_technique_id{
@@ -69,7 +83,7 @@ export async function getAideDecisionFirstSteps(): Promise<AideDecisionEtape[]> 
   return apiResponse?.aide_decision_etape || [];
 }
 
-export async function getAideDecisionEtapeByEtapeParentSlug(etapeParenteSlug: string): Promise<AideDecisionEtape[]> {
+export async function getAideDecisionEtapesByEtapeParentSlug(etapeParenteSlug: string): Promise<AideDecisionEtape[]> {
   const filter: DirectusCompleteFilter = ` (filter: {etape_parente_id: {slug:{_eq: "${etapeParenteSlug}"}}})`;
   const apiResponse = await directusGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter));
   return apiResponse?.aide_decision_etape || [];

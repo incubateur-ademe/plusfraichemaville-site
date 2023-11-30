@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from "react";
 import BookmarkedFicheTechniqueByProject from "@/components/favoris/BookmarkedFicheTechnique";
 import { useLocalStorage } from "usehooks-ts";
-import { BOOKMARK_FT_KEY, ProjectBookmarks } from "@/helpers/bookmarkedFicheTechniqueHelper";
+import { BOOKMARK_FS_KEY, ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
-  const [bookmarkedFichesTechniques] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FT_KEY, []);
+  const [bookmarkedFichesTechniques] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
   return (
     isClient && (
       <div className="fr-container">
@@ -20,7 +20,7 @@ export default function Page() {
             <BookmarkedFicheTechniqueByProject
               key={pb.projectName}
               projectName={pb.projectName}
-              ficheTechniqueIds={pb.ficheTechniqueIds}
+              ficheTechniqueIds={pb.ficheSolutionIds}
             />
           ))
         )}

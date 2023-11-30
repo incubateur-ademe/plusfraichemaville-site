@@ -6,13 +6,22 @@ export type AideDecisionEtape = {
   description?: string | null;
   etape_parente_id?: (number & AideDecisionEtape) | null;
   fiche_technique_id: any[] & AideDecisionEtapeFicheTechnique[];
+  fiches_solutions: any[] & AideDecisionEtapeFicheSolution[];
   id: number;
   image?: (string & DirectusFiles) | null;
   nom?: string | null;
   question_suivante?: string | null;
-  slug?: string | null;
+  slug: string;
+  sort?: number | null;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;
+};
+
+export type AideDecisionEtapeFicheSolution = {
+  aide_decision_etape_id?: (number & AideDecisionEtape) | null;
+  fiche_solution_id?: (number & FicheSolution) | null;
+  id: number;
+  sort?: number | null;
 };
 
 export type AideDecisionEtapeFicheTechnique = {
@@ -379,6 +388,24 @@ export type EtapeMiseEnOeuvre = {
   titre?: string | null;
 };
 
+export type FicheSolution = {
+  baisse_temperature: number;
+  cout?: number | null;
+  date_created?: string | null;
+  date_updated?: string | null;
+  delai_travaux?: number | null;
+  description_courte: string;
+  id: number;
+  image_principale?: (string & DirectusFiles) | null;
+  slug: string;
+  sort?: number | null;
+  status: string;
+  titre: string;
+  type_solution?: string | null;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
+};
+
 export type FicheTechnique = {
   date_created?: string | null;
   date_updated?: string | null;
@@ -498,6 +525,7 @@ export type SolutionRetourExperience = {
 
 export type CustomDirectusTypes = {
   aide_decision_etape: AideDecisionEtape[];
+  aide_decision_etape_fiche_solution: AideDecisionEtapeFicheSolution[];
   aide_decision_etape_fiche_technique: AideDecisionEtapeFicheTechnique[];
   directus_activity: DirectusActivity[];
   directus_collections: DirectusCollections[];
@@ -524,6 +552,7 @@ export type CustomDirectusTypes = {
   directus_versions: DirectusVersions[];
   directus_webhooks: DirectusWebhooks[];
   etape_mise_en_oeuvre: EtapeMiseEnOeuvre[];
+  fiche_solution: FicheSolution[];
   fiche_technique: FicheTechnique[];
   fiche_technique_etape_mise_en_oeuvre: FicheTechniqueEtapeMiseEnOeuvre[];
   fiche_technique_objectif_developpement_durable: FicheTechniqueObjectifDeveloppementDurable[];
