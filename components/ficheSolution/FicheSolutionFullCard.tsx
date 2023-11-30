@@ -72,9 +72,7 @@ export default async function FicheSolutionFullCard({ ficheSolution }: { ficheSo
               </>
             )}
             <div className="text-center mt-4">
-              <div className={`fr-btn fr-btn--tertiary rounded-3xl px-9`}>
-                {"J'explore la solution"}
-              </div>
+              <div className={`fr-btn fr-btn--tertiary rounded-3xl px-9`}>{"J'explore la solution"}</div>
             </div>
           </div>
         </div>

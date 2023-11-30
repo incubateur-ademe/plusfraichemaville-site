@@ -39,7 +39,6 @@ export const ALL_DELAIS_TRAVAUX_FICHE_SOLUTION: DelaiTravauxFicheSolution[] = [
       </>
     ),
   },
-
 ];
 
 export const getDelaiTravauxFicheSolutionFromCode = (delaiTravauxCode?: number | null) =>
