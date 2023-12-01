@@ -12,7 +12,7 @@ export default async function Posts() {
       <div className="max-w-2xl m-auto">
         <ul className="flex list-none flex-wrap justify-center pb-36">
           {aideDecisionFirstSteps.map((aideDecision) => (
-            <li key={aideDecision.id} className="m-2 w-36 flex">
+            <li key={aideDecision.id} className="m-2 w-36 flex justify-center">
               <AideDecisionFirstStepEtapeCard aideDecisionEtape={aideDecision} />
             </li>
           ))}
