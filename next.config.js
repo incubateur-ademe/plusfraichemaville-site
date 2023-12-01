@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
   webpack: (config) => {
     config.module.rules.push({
@@ -39,6 +39,9 @@ module.exports = withSentryConfig(
   {
     // For all available options, see:
     // https://github.com/getsentry/sentry-webpack-plugin#options
+    errorHandler: (err, invokeErr, compilation) => {
+      compilation.warnings.push("Sentry CLI Plugin: " + err.message);
+    },
 
     // Suppresses source map uploading logs during build
     silent: true,

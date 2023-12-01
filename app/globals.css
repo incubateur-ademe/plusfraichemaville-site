@@ -53,15 +53,31 @@
   }
 }
 
-.aide-decision-first-step-card {
+.pfmv-card,
+.fiche-solution-small-vertical-card {
   border-radius: 0.9375rem;
   background: #fff;
+}
+
+.pfmv-card {
   box-shadow: 0 0 20px 0 rgba(0, 0, 145, 0.2);
 }
 
-.aide-decision-first-step-card:hover {
-  background: #fff !important;
+.pfmv-card:hover {
   box-shadow: 0 0 20px 0 rgba(0, 0, 145, 0.3);
+}
+
+.fiche-solution-small-vertical-card {
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 145, 0.2);
+}
+
+.fiche-solution-small-vertical-card:hover {
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 145, 0.3);
+}
+
+.pfmv-card:hover,
+.fiche-solution-small-vertical-card:hover {
+  background: #fff !important;
   outline: 1px solid var(--light-background-action-high-blue-france, #000091);
   outline-offset: 0px;
 
