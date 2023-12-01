@@ -11,7 +11,8 @@
     "start": "next start",
     "localAsProd": "rm -rf ./.next && next build && next start",
     "lint": "next lint",
-    "prettier": "npx prettier --check . --ignore-path .prettierignore"
+    "prettier": "npx prettier --check . --ignore-path .prettierignore",
+    "fixPrettier": "prettier . --write"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.0.0",
