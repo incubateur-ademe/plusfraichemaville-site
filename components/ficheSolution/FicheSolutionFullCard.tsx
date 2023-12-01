@@ -12,11 +12,7 @@ export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution
   const delaiTravaux = getDelaiTravauxFicheSolutionFromCode(ficheSolution.delai_travaux);
   const cout = getCoutFicheSolutionFromCode(ficheSolution.cout);
   return (
-    <Link
-      className="flex w-[17.5rem] flex-col
-      aide-decision-first-step-card mr-4 ml-4"
-      href={`/fiche-solution/${ficheSolution.slug}`}
-    >
+    <Link className="flex w-[17.5rem] flex-col pfmv-card mr-4 ml-4" href={`/fiche-solution/${ficheSolution.slug}`}>
       <div className="flex w-full h-52">
         <Image
           width={450}

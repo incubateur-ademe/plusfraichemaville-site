@@ -6,8 +6,7 @@ import Image from "next/image";
 export default function AideDecisionEtapeCard({ aideDecisionEtape }: { aideDecisionEtape: AideDecisionEtape }) {
   return (
     <Link
-      className="flex w-96 md:w-56 flex-row md:flex-col items-center
-      aide-decision-first-step-card mr-4 ml-4 md:mr-0 md:ml-0"
+      className="flex w-96 md:w-56 flex-row md:flex-col items-center pfmv-card mr-4 ml-4 md:mr-0 md:ml-0"
       href={`/aide-decision/${aideDecisionEtape.slug}`}
     >
       <div className="flex w-32 md:w-full h-full md:h-36">
