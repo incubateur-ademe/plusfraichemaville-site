@@ -53,13 +53,19 @@
   }
 }
 
+.fiche-solution-small-vertical-card {
+  border-radius: 0.9375rem;
+  background: #fff;
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 145, 0.2);
+}
+
 .aide-decision-first-step-card {
   border-radius: 0.9375rem;
   background: #fff;
   box-shadow: 0 0 20px 0 rgba(0, 0, 145, 0.2);
 }
 
-.aide-decision-first-step-card:hover {
+.aide-decision-first-step-card:hover, .fiche-solution-small-vertical-card:hover {
   background: #fff !important;
   box-shadow: 0 0 20px 0 rgba(0, 0, 145, 0.3);
   outline: 1px solid var(--light-background-action-high-blue-france, #000091);

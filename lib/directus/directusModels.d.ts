@@ -515,6 +515,7 @@ export type SolutionRetourExperience = {
   date_created?: string | null;
   date_updated?: string | null;
   description: string;
+  fiche_solution?: (number & FicheSolution) | null;
   fiche_technique?: (number & FicheTechnique) | null;
   id: number;
   image: string & DirectusFiles;

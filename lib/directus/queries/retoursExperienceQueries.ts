@@ -30,6 +30,12 @@ export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (rexFilter?: DirectusComplete
                 titre
                 description
                 image
+                fiche_solution {
+                    titre
+                    image_principale
+                    cout
+                    slug
+                }
             }
         }
         calendrier
