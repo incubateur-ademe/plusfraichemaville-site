@@ -11,25 +11,22 @@ export default function AideDecisionBreadcrumbs({
   className?: string;
 }) {
   return (
-    <div className={`w-40 mt-60 ${className}`}>
+    <div className={`w-52 mt-60 ${className}`}>
       {historique.map((step, index) => (
         <div className={`${styles.step}`} key={index}>
-          <div>
-            <div className={`${styles.circle}`}>{index + 1}</div>
+          <div className={`${styles.vStepper}`}>
+            <div className={`${styles.circle} text-xs text-center`}>{index + 1}</div>
+            <div className={`${styles.line}`}/>
           </div>
-          <div>
-            {/*<div className={`${styles.title}`}>{step.label}</div>*/}
-            <div className={`${styles.title}`}>FRFRE FRE REF FRE FRE RFE RFE RE RFE FRE FRE</div>
-          </div>
+          <div className={`${styles.content}`}>{step.label}</div>
         </div>
       ))}
       <div className={`${styles.step}`}>
-        <div>
-          <div className={`${styles.circle}`}>{historique.length + 1}</div>
+        <div className={`${styles.vStepper}`}>
+          <div className={`${styles.circle} text-xs text-center`}>{historique.length + 1}</div>
+          <div className={`${styles.line}`}/>
         </div>
-        <div>
-          <div className={`${styles.title} font-bold`}>{currentPageLabel}</div>
-        </div>
+        <div className={`${styles.content} font-bold`}>{currentPageLabel}</div>
       </div>
     </div>
   );
