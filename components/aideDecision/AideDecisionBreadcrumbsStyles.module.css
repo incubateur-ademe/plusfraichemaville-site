@@ -1,0 +1,60 @@
+/* -------------------------------------------------------------------------
+  VERTICAL STEPPERS
+-------------------------------------------------------------------------- */
+
+.step {
+    position: relative;
+    min-height: 1rem;
+    color: var(--text-label-blue-france);
+    z-index: 8;
+}
+.step + .step {
+    margin-top: 1.5rem
+}
+.step > div:first-child {
+    position: static;
+    height: 0;
+}
+.step > div:not(:first-child) {
+    margin-left: 1.5em;
+    padding-left: 1em;
+}
+
+.circle {
+    background: var(--text-label-blue-france);
+    position: relative;
+    width: 1.725em;
+    height: 1.725em;
+    line-height: 1.725em;
+    border-radius: 100%;
+    font-size:0.875rem;
+    color: #fff;
+    text-align: center;
+    z-index: 10;
+}
+
+/* Vertical Line */
+.circle:after {
+    content: ' ';
+    position: absolute;
+    display: block;
+    top: 1px;
+    bottom: 1px;
+    left: 0.65rem;
+    height: 100%;
+    width: 4px;
+    transform: scale(1, 2);
+    transform-origin: 50% -100%;
+    /*background-color: var(--background-open-blue-france);*/
+    background-color: red;
+    z-index: -1;
+}
+.step:last-child .circle:after {
+    display: none
+}
+
+/* Stepper Titles */
+.title {
+    line-height: 1.5em;
+    font-size: 0.75rem;
+}

@@ -92,6 +92,7 @@
 
 .aide-decision-background {
   background: linear-gradient(180deg, #f4f4ff 59.71%, #64aafd 143.4%);
+  z-index: -1000;
 }
 
 .cmsRichText {

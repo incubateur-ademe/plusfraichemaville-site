@@ -9,8 +9,8 @@ export class AideDecisionEtapeHistory {
   label: string;
   slug: string;
   linkProps: Omit<LinkProps & { href: Route }, "children">;
-  image: string | null;
-  constructor(label: string, slug: string, image: string | null) {
+  image: string | null | undefined;
+  constructor(label: string, slug: string, image?: string | null) {
     this.label = label;
     this.linkProps = { href: slug };
     this.image = image;
