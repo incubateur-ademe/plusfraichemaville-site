@@ -1,5 +1,6 @@
 import { AideDecisionEtapeHistory } from "@/lib/directus/queries/commonFilters";
 import styles from "./AideDecisionBreadcrumbsStyles.module.css";
+import Link from "next/link";
 
 export default function AideDecisionBreadcrumbs({
   historique,
@@ -18,7 +19,7 @@ export default function AideDecisionBreadcrumbs({
             <div className={`${styles.circle} text-xs text-center`}>{index + 1}</div>
             <div className={`${styles.line}`}/>
           </div>
-          <div className={`${styles.content}`}>{step.label}</div>
+          <Link className={`${styles.content} bg-none hover:underline`} href={step.slug}>{step.label}</Link>
         </div>
       ))}
       <div className={`${styles.step}`}>
