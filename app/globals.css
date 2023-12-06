@@ -88,6 +88,11 @@
   .text-blue-hover {
     color: var(--text-label-blue-france);
   }
+
+  .fr-btn--tertiary:hover {
+    background: var(--hover-tint);
+  }
+
 }
 
 .aide-decision-background {
