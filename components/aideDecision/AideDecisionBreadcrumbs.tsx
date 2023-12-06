@@ -8,7 +8,7 @@ export default function AideDecisionBreadcrumbs({
   className,
 }: {
   historique: AideDecisionEtapeHistory[];
-  currentPageLabel: string;
+  currentPageLabel?: string | null;
   className?: string;
 }) {
   return (
@@ -22,13 +22,15 @@ export default function AideDecisionBreadcrumbs({
           <Link className={`${styles.content} bg-none hover:underline`} href={step.slug}>{step.label}</Link>
         </div>
       ))}
-      <div className={`${styles.step}`}>
-        <div className={`${styles.vStepper}`}>
-          <div className={`${styles.circle} text-xs text-center`}>{historique.length + 1}</div>
-          <div className={`${styles.line}`}/>
+      {currentPageLabel && (
+        <div className={`${styles.step}`}>
+          <div className={`${styles.vStepper}`}>
+            <div className={`${styles.circle} text-xs text-center`}>{historique.length + 1}</div>
+            <div className={`${styles.line}`}/>
+          </div>
+          <div className={`${styles.content} font-bold`}>{currentPageLabel}</div>
         </div>
-        <div className={`${styles.content} font-bold`}>{currentPageLabel}</div>
-      </div>
+      )}
     </div>
   );
 }

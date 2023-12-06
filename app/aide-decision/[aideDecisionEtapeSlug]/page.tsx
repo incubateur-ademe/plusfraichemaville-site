@@ -23,7 +23,11 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
       <div className={"fr-container"}>
         <div className="flex flex-row justify-items-center">
           {historique && (
-            <AideDecisionBreadcrumbs currentPageLabel={currentStep.nom} historique={historique} className="hidden md:block" />
+            <AideDecisionBreadcrumbs
+              currentPageLabel={currentStep.nom}
+              historique={historique}
+              className="hidden md:block"
+            />
           )}
           <div className="grow">
             <Image
