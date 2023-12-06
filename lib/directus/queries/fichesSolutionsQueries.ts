@@ -19,7 +19,8 @@ export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFi
           type_solution
           baisse_temperature
           delai_travaux
-          cout
+          cout_minimum
+          cout_maximum
           slug
     }
 }`;

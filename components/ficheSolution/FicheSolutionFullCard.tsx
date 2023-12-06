@@ -10,7 +10,7 @@ import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
 export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution: FicheSolution }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
   const delaiTravaux = getDelaiTravauxFicheSolutionFromCode(ficheSolution.delai_travaux);
-  const cout = getCoutFicheSolutionFromCode(ficheSolution.cout);
+  const cout = getCoutFicheSolutionFromCode(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
   return (
     <Link
       className="flex w-[17.5rem] flex-col pfmv-card mr-4 ml-4 md:ml-0"
@@ -66,7 +66,9 @@ export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution
                   <div className="float-left">
                     <div className="float-left">{cout.icons("fr-icon--sm")}</div>
                   </div>
-                  <div className="float-right text-xs text-dsfr-text-mention-grey mt-1">{cout.label}</div>
+                  <div className="float-right text-xs text-dsfr-text-mention-grey mt-1">
+                    {`de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € / m²`}
+                  </div>
                 </div>
               </>
             )}

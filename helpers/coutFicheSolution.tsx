@@ -2,14 +2,14 @@ import React from "react";
 
 type CoutFicheSolution = {
   code: number;
-  label: string;
+  coutMax: number;
   shortLabel: string;
   icons: (_?: string) => React.ReactNode;
 };
 export const ALL_COUTS_FICHE_SOLUTION: CoutFicheSolution[] = [
   {
     code: 1,
-    label: "de 0 à 5000 €",
+    coutMax: 500,
     shortLabel: "Peu coûteux",
     icons: (extraClasses?) => (
       <>
@@ -21,7 +21,7 @@ export const ALL_COUTS_FICHE_SOLUTION: CoutFicheSolution[] = [
   },
   {
     code: 2,
-    label: "moins de 5000 €",
+    coutMax: 2000,
     shortLabel: "Peu coûteux",
     icons: (extraClasses?) => (
       <>
@@ -33,7 +33,7 @@ export const ALL_COUTS_FICHE_SOLUTION: CoutFicheSolution[] = [
   },
   {
     code: 3,
-    label: "plus de 5000 €",
+    coutMax: Number.MAX_SAFE_INTEGER,
     shortLabel: "Coûteux",
     icons: (extraClasses?) => (
       <>
@@ -45,5 +45,5 @@ export const ALL_COUTS_FICHE_SOLUTION: CoutFicheSolution[] = [
   },
 ];
 
-export const getCoutFicheSolutionFromCode = (coutCode?: number | null) =>
-  coutCode ? ALL_COUTS_FICHE_SOLUTION.find((r) => r.code === coutCode) : null;
+export const getCoutFicheSolutionFromCode = (coutMin: number, coutMax: number) =>
+  ALL_COUTS_FICHE_SOLUTION.find((cout) => cout.coutMax >= (coutMax - coutMin) / 2);

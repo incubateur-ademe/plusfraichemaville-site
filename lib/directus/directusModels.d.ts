@@ -391,6 +391,8 @@ export type EtapeMiseEnOeuvre = {
 export type FicheSolution = {
   baisse_temperature: number;
   cout?: number | null;
+  cout_maximum: number;
+  cout_minimum: number;
   date_created?: string | null;
   date_updated?: string | null;
   delai_travaux?: number | null;
