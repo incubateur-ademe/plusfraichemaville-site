@@ -1,53 +1,50 @@
 .step {
-    padding: 10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
 }
 
 .vStepper {
-    position: relative;
-    /*   visibility: visible; */
+  position: relative;
 }
-
 
 /* regular step */
 .step .circle {
-    color: #fff;
-    border: 2px solid var(--background-open-blue-france);
-    border-radius: 100%;
-    width: 23px;    /* +6 for border */
-    height: 23px;
-    display: inline-block;
-    line-height: 1.25rem;
+  color: #fff;
+  border: 2px solid var(--background-open-blue-france);
+  border-radius: 100%;
+  width: 23px; /* +6 for border */
+  height: 23px;
+  display: inline-block;
+  line-height: 1.25rem;
 }
 
 .step .line {
-    top: 25px;
-    left: 9px;
-    /*   height: 120px; */
-    height: 100%;
-    position: absolute;
+  top: 25px;
+  left: 9px;
+  /*   height: 120px; */
+  height: 100%;
+  position: absolute;
 }
 
 .step .circle {
-    visibility: visible;
-    background: var(--text-label-blue-france);
-    border-color: var(--background-open-blue-france);
+  visibility: visible;
+  background: var(--text-label-blue-france);
+  border-color: var(--background-open-blue-france);
 }
 
 .step .line {
-    border-left: 6px solid var(--background-open-blue-france);
+  border-left: 6px solid var(--background-open-blue-france);
 }
 
 .step:last-child .line {
-    border-left: 3px solid white;
-    z-index: -1; /* behind the circle to completely hide */
+  border-left: 3px solid white;
+  z-index: -1; /* behind the circle to completely hide */
 }
 
 .content {
-    color: var(--text-label-blue-france);
-    margin-left: 20px;
-    display: inline-block;
+  color: var(--text-label-blue-france);
+  margin-left: 20px;
+  display: inline-block;
 }
