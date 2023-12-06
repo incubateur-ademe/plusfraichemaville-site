@@ -21,7 +21,7 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
     const previousStep = historique && historique[historique.length - 1] ? historique[historique.length - 1] : null;
     return (
       <div className={"fr-container"}>
-        <div className="flex flex-row justify-items-center">
+        <div className="block md:flex flex-row justify-items-center">
           {historique && (
             <AideDecisionBreadcrumbs
               currentPageLabel={currentStep.nom}

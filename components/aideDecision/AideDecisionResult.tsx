@@ -3,6 +3,7 @@ import { AideDecisionEtape } from "@/lib/directus/directusModels";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
+import AideDecisionSortFilter from "@/components/filters/AideDecisionSortFilter";
 
 type Props = {
   aideDecisionEtape: AideDecisionEtape;
@@ -25,6 +26,7 @@ export default async function AideDecisionResult({ aideDecisionEtape }: Props) {
             <h1 className={"mb-4 pt-10 fr-h4 text-center md:text-left"}>
               Découvrez les solutions proposées pour votre recherche
             </h1>
+            <AideDecisionSortFilter />
             <ul className="flex list-none flex-wrap justify-center md:justify-start p-0">
               {aideDecisionEtape.fiches_solutions.map((ficheSolution) => (
                 <li key={ficheSolution.fiche_solution_id.id} className="m-2 flex">
