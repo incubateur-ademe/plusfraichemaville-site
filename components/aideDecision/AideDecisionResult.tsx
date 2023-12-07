@@ -4,14 +4,20 @@ import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolut
 import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import AideDecisionSortFilter from "@/components/filters/AideDecisionSortFilter";
+import { getAideDecisionSortFieldFromCode } from "@/helpers/aideDecisionSortFilter";
 
 type Props = {
   aideDecisionEtape: AideDecisionEtape;
+  searchParams: { tri: string | undefined };
 };
 
-export default async function AideDecisionResult({ aideDecisionEtape }: Props) {
+export default async function AideDecisionResult({ aideDecisionEtape, searchParams }: Props) {
   const historique = await getAideDecisionHistoryBySlug(aideDecisionEtape.slug);
+
   if (aideDecisionEtape.fiches_solutions.length > 0) {
+    const sortBy = getAideDecisionSortFieldFromCode(searchParams?.tri);
+    const sortedFichesSolutions = aideDecisionEtape.fiches_solutions.sort(sortBy.sortFn).slice(0, sortBy.maxItem);
+
     return (
       <div className={"fr-container"}>
         <div className="flex flex-row justify-items-center">
@@ -28,7 +34,7 @@ export default async function AideDecisionResult({ aideDecisionEtape }: Props) {
             </h1>
             <AideDecisionSortFilter />
             <ul className="flex list-none flex-wrap justify-center md:justify-start p-0">
-              {aideDecisionEtape.fiches_solutions.map((ficheSolution) => (
+              {sortedFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.fiche_solution_id.id} className="m-2 flex">
                   <FicheSolutionCardWithUserInfo
                     ficheSolution={ficheSolution.fiche_solution_id}

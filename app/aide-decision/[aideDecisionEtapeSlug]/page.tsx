@@ -12,7 +12,13 @@ import { notFound } from "next/navigation";
 import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 
-export default async function Page({ params }: { params: { aideDecisionEtapeSlug: string } }) {
+export default async function Page({
+  params,
+  searchParams,
+}: {
+  params: { aideDecisionEtapeSlug: string };
+  searchParams: { tri: string | undefined };
+}) {
   const aideDecisionEtapes = await getAideDecisionEtapesByEtapeParentSlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (aideDecisionEtapes.length > 0) {
@@ -62,7 +68,7 @@ export default async function Page({ params }: { params: { aideDecisionEtapeSlug
   } else {
     const aideDecisionEtape = await getAideDecisionEtapeBySlug(params.aideDecisionEtapeSlug);
     if (aideDecisionEtape) {
-      return <AideDecisionResult aideDecisionEtape={aideDecisionEtape} />;
+      return <AideDecisionResult searchParams={searchParams} aideDecisionEtape={aideDecisionEtape} />;
     } else {
       notFound();
     }

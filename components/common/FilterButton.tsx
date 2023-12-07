@@ -13,11 +13,11 @@ export default function FilterButton({
 }) {
   const buttonStyle = (code: string) => {
     const baseStyle =
-      " rounded-3xl px-4 py-2 bg-white mr-2 md:mr-4 mb-3 outline-dsfr-text-label-blue-france " +
+      " rounded-3xl px-4 py-2 bg-white mr-2 md:mr-4 mb-3 " +
       " border-solid border-white border-[1px] hover:text-dsfr-text-label-blue-france " +
       " hover:border-dsfr-text-label-blue-france hover:!bg-white ";
     return isSelected(code)
-      ? " text-dsfr-text-label-blue-france border-2 border-dsfr-text-label-blue-france " + baseStyle
+      ? " text-dsfr-text-label-blue-france !border-dsfr-text-label-blue-france " + baseStyle
       : baseStyle;
   };
   return (
