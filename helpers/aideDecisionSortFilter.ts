@@ -10,8 +10,7 @@ type AideDecisionSortFilter = {
 const SORT_TEMPERATURE: AideDecisionSortFilter = {
   code: "",
   label: "Les plus fraîches",
-  sortFn: (fs1, fs2) =>
-    fs1.baisse_temperature < fs2.baisse_temperature ? 1 : -1,
+  sortFn: (fs1, fs2) => (fs1.baisse_temperature < fs2.baisse_temperature ? 1 : -1),
   maxItem: 3,
 };
 
@@ -19,18 +18,14 @@ const SORT_PRICE: AideDecisionSortFilter = {
   code: "abordable",
   label: "les plus abordables",
   sortFn: (fs1, fs2) =>
-    (fs1.cout_maximum - fs1.cout_minimum) / 2 >
-    (fs2.cout_maximum - fs2.cout_minimum) / 2
-      ? 1
-      : -1,
+    (fs1.cout_maximum - fs1.cout_minimum) / 2 > (fs2.cout_maximum - fs2.cout_minimum) / 2 ? 1 : -1,
   maxItem: 3,
 };
 
 const SORT_SPEED: AideDecisionSortFilter = {
   code: "rapide",
   label: "les plus rapides",
-  sortFn: (fs1, fs2) =>
-    (fs1.delai_travaux || 1) > (fs2.delai_travaux || 1) ? 1 : -1,
+  sortFn: (fs1, fs2) => ((fs1.delai_travaux || 1) > (fs2.delai_travaux || 1) ? 1 : -1),
   maxItem: 3,
 };
 

@@ -54,11 +54,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
               <>
                 <h2 className="text-3xl mt-10 mb-6">Solutions réalisées</h2>
                 {retourExperience.solutions.map((solution) => (
-                  <SolutionRetourExperienceCard
-                    solution={solution}
-                    key={solution.id}
-                    className="mb-4"
-                  />
+                  <SolutionRetourExperienceCard solution={solution} key={solution.id} className="mb-4" />
                 ))}
               </>
             )}

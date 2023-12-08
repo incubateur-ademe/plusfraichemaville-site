@@ -476,7 +476,7 @@ export type RetourExperience = {
   sort?: number | null;
   status: string;
   temporalite?: string | null;
-  titre?: string | null;
+  titre: string;
   types_espace?: string[] | null;
   types_solution?: string[] | null;
   user_created?: (string & DirectusUsers) | null;
