@@ -37,6 +37,19 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
           cout_minimum
           cout_maximum
           slug
+            solution_retour_experience {
+                id
+                retour_experience {
+                    id
+                    titre
+                    image_principale
+                    climat_actuel
+                    climat_futur
+                    types_espace
+                    region
+                    slug
+                }
+            }
         }
       }
     }

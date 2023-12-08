@@ -400,6 +400,7 @@ export type FicheSolution = {
   id: number;
   image_principale?: (string & DirectusFiles) | null;
   slug: string;
+  solution_retour_experience: any[] & SolutionRetourExperience[];
   sort?: number | null;
   status: string;
   titre: string;
@@ -456,7 +457,7 @@ export type RetourExperience = {
   credits?: string | null;
   date_created?: string | null;
   date_updated?: string | null;
-  description?: string | null;
+  description: string;
   difficultes?: string | null;
   echelle?: string | null;
   financement?: string | null;
@@ -471,11 +472,11 @@ export type RetourExperience = {
   situation_apres?: (number & SituationRetourExperience) | null;
   situation_avant?: (number & SituationRetourExperience) | null;
   slug?: string | null;
-  solutions: any[] & RetourExperienceSolutionRetourExperience[];
+  solutions: any[] & SolutionRetourExperience[];
   sort?: number | null;
   status: string;
   temporalite?: string | null;
-  titre?: string | null;
+  titre: string;
   types_espace?: string[] | null;
   types_solution?: string[] | null;
   user_created?: (string & DirectusUsers) | null;
@@ -507,7 +508,7 @@ export type SituationRetourExperience = {
   date_updated?: string | null;
   description: string;
   id: number;
-  image: string & DirectusFiles;
+  image?: (string & DirectusFiles) | null;
   sort?: number | null;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;
@@ -518,9 +519,10 @@ export type SolutionRetourExperience = {
   date_updated?: string | null;
   description: string;
   fiche_solution?: (number & FicheSolution) | null;
-  fiche_technique?: (number & FicheTechnique) | null;
   id: number;
-  image: string & DirectusFiles;
+  image?: (string & DirectusFiles) | null;
+  retour_experience?: (number & RetourExperience) | null;
+  sort?: number | null;
   titre: string;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;

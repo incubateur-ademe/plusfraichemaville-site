@@ -13,7 +13,7 @@ export default function FicheSolutionSmallVerticalCard({
   ficheSolution: FicheSolution;
   className?: string;
 }) {
-  const cout = getCoutFicheSolutionFromCode(ficheSolution.cout);
+  const cout = getCoutFicheSolutionFromCode(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
   return (
     <Link
       className={`flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row
@@ -31,7 +31,7 @@ export default function FicheSolutionSmallVerticalCard({
       </div>
       <div className="m-4 max-w-[18rem]">
         <div className={"font-bold text-blue-hover"}>{ficheSolution.titre}</div>
-        <Tag className="mt-4">{cout?.shortLabel}</Tag>
+        <Tag className="mt-4">{cout.shortLabel}</Tag>
       </div>
     </Link>
   );

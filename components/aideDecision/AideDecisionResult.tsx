@@ -1,16 +1,34 @@
 import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
-import { AideDecisionEtape } from "@/lib/directus/directusModels";
+import { AideDecisionEtape, FicheSolution, RetourExperience } from "@/lib/directus/directusModels";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
+import AideDecisionSortFilter from "@/components/filters/AideDecisionSortFilter";
+import { getAideDecisionSortFieldFromCode } from "@/helpers/aideDecisionSortFilter";
+import RetourExperienceReducedVerticalCard from "@/components/retourExperience/RetourExperienceReducedVerticalCard";
+import Link from "next/link";
 
 type Props = {
   aideDecisionEtape: AideDecisionEtape;
+  searchParams: { tri: string | undefined };
 };
 
-export default async function AideDecisionResult({ aideDecisionEtape }: Props) {
+export default async function AideDecisionResult({ aideDecisionEtape, searchParams }: Props) {
   const historique = await getAideDecisionHistoryBySlug(aideDecisionEtape.slug);
+  const previousStep = historique && historique[historique.length - 1] ? historique[historique.length - 1] : null;
+
   if (aideDecisionEtape.fiches_solutions.length > 0) {
+    const sortBy = getAideDecisionSortFieldFromCode(searchParams?.tri);
+    const sortedFichesSolutions: FicheSolution[] = aideDecisionEtape.fiches_solutions
+      .map((fs) => fs.fiche_solution_id)
+      .sort(sortBy.sortFn)
+      .slice(0, sortBy.maxItem);
+
+    const relatedRetourExperiences: RetourExperience[] = sortedFichesSolutions
+      .flatMap((fs) => fs.solution_retour_experience?.map((sol) => sol.retour_experience))
+      .filter((v, i, a) => a.findIndex((v2) => v2.id === v.id) === i)
+      .slice(0, 4);
+
     return (
       <div className={"fr-container"}>
         <div className="flex flex-row justify-items-center">
@@ -21,22 +39,47 @@ export default async function AideDecisionResult({ aideDecisionEtape }: Props) {
               className="hidden md:block"
             />
           )}
-          <div className="grow">
+          <div className="grow overflow-x-auto">
+            {previousStep && (
+              <div className="mt-8 text-center md:text-left hidden md:block">
+                <Link
+                  className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
+                  href={`/aide-decision/${previousStep.slug}`}
+                >
+                  Retour
+                </Link>
+              </div>
+            )}
             <h1 className={"mb-4 pt-10 fr-h4 text-center md:text-left"}>
               Découvrez les solutions proposées pour votre recherche
             </h1>
+            <AideDecisionSortFilter />
             <ul className="flex list-none flex-wrap justify-center md:justify-start p-0">
-              {aideDecisionEtape.fiches_solutions.map((ficheSolution) => (
-                <li key={ficheSolution.fiche_solution_id.id} className="m-2 flex">
+              {sortedFichesSolutions.map((ficheSolution) => (
+                <li key={ficheSolution.id} className="m-2 flex">
                   <FicheSolutionCardWithUserInfo
-                    ficheSolution={ficheSolution.fiche_solution_id}
+                    ficheSolution={ficheSolution}
                     aideDecisionFirstStepName={(historique && historique[1].label) || ""}
                   >
-                    <FicheSolutionFullCard ficheSolution={ficheSolution.fiche_solution_id} />
+                    <FicheSolutionFullCard ficheSolution={ficheSolution} />
                   </FicheSolutionCardWithUserInfo>
                 </li>
               ))}
             </ul>
+            {relatedRetourExperiences.length > 0 && (
+              <>
+                <h1 className={"mb-4 mt-16 fr-h4 text-center md:text-left"}>
+                  Découvrez les projets réalisés pour les solutions proposées
+                </h1>
+                <ul className="flex list-none overflow-x-auto md:justify-start p-0">
+                  {relatedRetourExperiences.map((rex) => (
+                    <li key={rex.id} className="m-2 flex">
+                      <RetourExperienceReducedVerticalCard retourExperience={rex} />
+                    </li>
+                  ))}
+                </ul>
+              </>
+            )}
           </div>
         </div>
       </div>
