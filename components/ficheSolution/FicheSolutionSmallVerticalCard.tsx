@@ -13,7 +13,7 @@ export default function FicheSolutionSmallVerticalCard({
   ficheSolution: FicheSolution;
   className?: string;
 }) {
-  const cout = getCoutFicheSolutionFromCode(ficheSolution.cout);
+  const cout = getCoutFicheSolutionFromCode(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
   return (
     <Link
       className={`flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row
