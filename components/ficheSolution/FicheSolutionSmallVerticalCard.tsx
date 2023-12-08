@@ -31,7 +31,7 @@ export default function FicheSolutionSmallVerticalCard({
       </div>
       <div className="m-4 max-w-[18rem]">
         <div className={"font-bold text-blue-hover"}>{ficheSolution.titre}</div>
-        <Tag className="mt-4">{cout?.shortLabel}</Tag>
+        <Tag className="mt-4">{cout.shortLabel}</Tag>
       </div>
     </Link>
   );

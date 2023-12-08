@@ -1,5 +1,5 @@
 import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
-import { AideDecisionEtape } from "@/lib/directus/directusModels";
+import { AideDecisionEtape, FicheSolution } from "@/lib/directus/directusModels";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
@@ -16,7 +16,10 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
 
   if (aideDecisionEtape.fiches_solutions.length > 0) {
     const sortBy = getAideDecisionSortFieldFromCode(searchParams?.tri);
-    const sortedFichesSolutions = aideDecisionEtape.fiches_solutions.sort(sortBy.sortFn).slice(0, sortBy.maxItem);
+    const sortedFichesSolutions: FicheSolution[] = aideDecisionEtape.fiches_solutions
+      .map((fs) => fs.fiche_solution_id)
+      .sort(sortBy.sortFn)
+      .slice(0, sortBy.maxItem);
 
     return (
       <div className={"fr-container"}>
@@ -35,12 +38,12 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
             <AideDecisionSortFilter />
             <ul className="flex list-none flex-wrap justify-center md:justify-start p-0">
               {sortedFichesSolutions.map((ficheSolution) => (
-                <li key={ficheSolution.fiche_solution_id.id} className="m-2 flex">
+                <li key={ficheSolution.id} className="m-2 flex">
                   <FicheSolutionCardWithUserInfo
-                    ficheSolution={ficheSolution.fiche_solution_id}
+                    ficheSolution={ficheSolution}
                     aideDecisionFirstStepName={(historique && historique[1].label) || ""}
                   >
-                    <FicheSolutionFullCard ficheSolution={ficheSolution.fiche_solution_id} />
+                    <FicheSolutionFullCard ficheSolution={ficheSolution} />
                   </FicheSolutionCardWithUserInfo>
                 </li>
               ))}
