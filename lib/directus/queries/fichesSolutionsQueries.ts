@@ -33,6 +33,9 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
               description
             }
         }
+      contexte_titre
+      contexte_description
+      rafraichissement_attendu_description
     }
 }`;
 
