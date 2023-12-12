@@ -1,11 +1,7 @@
 import { FicheSolution } from "@/lib/directus/directusModels";
 import Image from "next/image";
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
-import Link from "next/link";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
-import { getDelaiTravauxFicheSolutionFromCode } from "@/helpers/delaiTravauxFicheSolution";
-import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
 import CmsRichText from "@/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 
@@ -33,8 +29,23 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
             className={"text-sm"}
           />
           <hr className="pb-2 mt-1" />
+          {ficheSolution.cobenefices.map((cobenefice) => (
+            <div key={cobenefice.cobenefice_id.id} className="flex flex-row mt-3">
+              <Image
+                width={50}
+                height={50}
+                src={`/images/cobenefices/${cobenefice.cobenefice_id.icone || "cobenefice-blank"}.svg`}
+                className="mr-4"
+                alt={cobenefice.cobenefice_id.description}
+              />
+              <div className="text-dsfr-text-mention-grey flex items-center">
+                {cobenefice.cobenefice_id.description}
+              </div>
+            </div>
+          ))}
         </div>
       </div>
+      <hr className="pb-2 mt-6" />
     </div>
   );
 }

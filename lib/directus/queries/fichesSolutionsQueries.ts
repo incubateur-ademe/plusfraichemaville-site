@@ -16,7 +16,23 @@ export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFi
   query {
     fiche_solution ${filterStatus} {
       ...FicheSolutionCardInfo
+    }
+}`;
+
+
+export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusCompleteFilter) => `
+  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
+  query {
+    fiche_solution ${filterStatus} {
+      ...FicheSolutionCardInfo
       description
+        cobenefices {
+            cobenefice_id {
+              id
+              icone
+              description
+            }
+        }
     }
 }`;
 
@@ -30,7 +46,7 @@ export async function getAllFichesSolutions(): Promise<FicheSolution[]> {
 export async function getFicheSolutionBySlug(slug: string): Promise<FicheSolution | null> {
   const filterSlug: DirectusSingleFilter = ` {slug:{_eq: "${slug}"}}`;
   const filter = contrusctAndFilters([getStatusFilter(), filterSlug]);
-  const apiResponse = await directusGraphQLCall(GET_ALL_FICHES_SOLUTIONS_QUERY(filter));
+  const apiResponse = await directusGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter));
   return apiResponse?.fiche_solution?.length > 0 ? apiResponse.fiche_solution[0] : null;
 }
 
