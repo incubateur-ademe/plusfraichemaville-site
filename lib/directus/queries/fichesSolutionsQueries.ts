@@ -9,7 +9,10 @@ import {
   DirectusSingleFilter,
   getStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
-import { FICHE_SOLUTION_CARD_INFO_FRAGMENT } from "@/lib/directus/queries/cmsFragments";
+import {
+  FICHE_SOLUTION_CARD_INFO_FRAGMENT,
+  RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT
+} from "@/lib/directus/queries/cmsFragments";
 
 export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFilter) => `
   ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
@@ -21,7 +24,7 @@ export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFi
 
 
 export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusCompleteFilter) => `
-  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
+  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT}
   query {
     fiche_solution ${filterStatus} {
       ...FicheSolutionCardInfo
@@ -36,6 +39,11 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
       contexte_titre
       contexte_description
       rafraichissement_attendu_description
+        solution_retour_experience {
+            retour_experience {
+              ...RetourExperienceCardInfo
+            }
+        }
     }
 }`;
 

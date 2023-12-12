@@ -4,6 +4,7 @@ import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
 import CmsRichText from "@/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
+import RetourExperienceReducedVerticalCard from "@/components/retourExperience/RetourExperienceReducedVerticalCard";
 
 export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolution: FicheSolution }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
@@ -65,6 +66,28 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
           </div>
         )}
       </div>
+      <hr className="pb-2 mt-6" />
+      {ficheSolution.solution_retour_experience.length > 0 && (
+        <div className="flex flex-row ">
+          <div className="w-72 flex-none mt-6 ">
+            <div className="text-dsfr-text-little-grey font-bold text-[1.375rem] mb-4">
+              Découvrir les projets réalisés
+            </div>
+            <div className="text-dsfr-text-little-grey">
+              Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
+            </div>
+          </div>
+          <div className="flex flex-row pl-12 gap-8 overflow-x-auto">
+            {ficheSolution.solution_retour_experience.map((rex) => (
+              <RetourExperienceReducedVerticalCard
+                key={rex.retour_experience.id}
+                retourExperience={rex.retour_experience}
+                className={"w-60 flex-none mt-8 mb-12"}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
