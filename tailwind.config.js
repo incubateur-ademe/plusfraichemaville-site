@@ -15,9 +15,11 @@ module.exports = {
       "dsfr-text-label-blue-france": "var(--text-label-blue-france)",
       "dsfr-hover-blue-sun": "var(--background-action-high-blue-france-hover)",
       "dsfr-background-blue-cumulus": "var(--background-action-low-blue-cumulus)",
+      "dsfr-background-alt-blue-france": "var(--background-alt-blue-france)",
       "dsfr-background-grey": "var(--background-default-grey-active)",
       "dsfr-text-mention-grey": "var(--text-mention-grey)",
       "dsfr-text-little-grey": "var(--text-title-grey)",
+      "tab-hover" : "rgba(66, 17, 170, 0.10)!important"
     },
   },
   plugins: [],
