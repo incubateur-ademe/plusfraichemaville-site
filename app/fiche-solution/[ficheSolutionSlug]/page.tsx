@@ -51,8 +51,6 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
             </div>
           </div>
         </div>
-        <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: ficheSolution.description_courte || "" }}></div>
-        <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: ficheSolution.description_courte || "" }}></div>
       </>
     );
   } else {

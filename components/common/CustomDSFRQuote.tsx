@@ -1,4 +1,5 @@
 import { CitationRetourExperience } from "@/lib/directus/directusCustomModels";
+import CmsRichText from "@/components/common/CmsRichText";
 
 export default async function CustomDSFRQuote({
   citation,
@@ -10,7 +11,7 @@ export default async function CustomDSFRQuote({
   return (
     <figure className={`fr-quote ${className}`}>
       <blockquote>
-        <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: `${citation.texte}` }} />
+        <CmsRichText label={citation.texte}/>
       </blockquote>
       <figcaption>
         <div className="fr-quote__author">{citation.auteur}</div>

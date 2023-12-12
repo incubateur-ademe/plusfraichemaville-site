@@ -2,6 +2,7 @@ import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/dir
 import Image from "next/image";
 import { SolutionRetourExperience } from "@/lib/directus/directusModels";
 import FicheSolutionSmallVerticalCard from "@/components/ficheSolution/FicheSolutionSmallVerticalCard";
+import CmsRichText from "@/components/common/CmsRichText";
 
 export default async function SolutionRetourExperienceCard({
   solution,
@@ -23,7 +24,7 @@ export default async function SolutionRetourExperienceCard({
         </div>
         <div className="grow ml-4 md:ml-12">
           <div className="text-xl font-bold">{solution.titre}</div>
-          <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: solution.description }} />
+          <CmsRichText label={solution.description}/>
           {solution.fiche_solution && (
             <FicheSolutionSmallVerticalCard ficheSolution={solution.fiche_solution} className={"mb-4 hidden md:flex"} />
           )}

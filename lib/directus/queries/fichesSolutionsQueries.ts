@@ -16,6 +16,7 @@ export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFi
   query {
     fiche_solution ${filterStatus} {
       ...FicheSolutionCardInfo
+      description
     }
 }`;
 

@@ -19,6 +19,7 @@ module.exports = {
       "dsfr-background-grey": "var(--background-default-grey-active)",
       "dsfr-text-mention-grey": "var(--text-mention-grey)",
       "dsfr-text-little-grey": "var(--text-title-grey)",
+      "dsfr-border-default-grey": "var(--border-default-grey)",
       "tab-hover" : "rgba(66, 17, 170, 0.10)!important"
     },
   },

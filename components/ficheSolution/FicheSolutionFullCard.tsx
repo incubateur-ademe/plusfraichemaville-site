@@ -6,6 +6,7 @@ import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
 import { getDelaiTravauxFicheSolutionFromCode } from "@/helpers/delaiTravauxFicheSolution";
 import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
+import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 
 export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution: FicheSolution }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
@@ -38,40 +39,7 @@ export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution
         <div className={"text-sm text-dsfr-text-little-grey mt-4"}>{ficheSolution.description_courte}</div>
         <div className={"mt-auto"}>
           <div>
-            <div className="flex flex-row justify-between w-full mt-6 mb-2">
-              <div className="mr-4 mt-auto text-dsfr-text-mention-grey text-xs">
-                Baisse maximale de la température de l{"'"}air
-              </div>
-              <div className="float-right text-right">
-                <div className="fr-text--bold text-4xl text-dsfr-text-label-blue-france">
-                  {`-${ficheSolution.baisse_temperature}°C`}
-                </div>
-              </div>
-            </div>
-            {delaiTravaux && (
-              <>
-                <hr className="pb-2" />
-                <div className="text-xs text-dsfr-text-mention-grey">Délai des travaux</div>
-                <div className="inline-block w-full">
-                  <div className="float-left">{delaiTravaux.icons("fr-icon--sm")}</div>
-                  <div className="float-right text-xs text-dsfr-text-mention-grey mt-1">{delaiTravaux.label}</div>
-                </div>
-              </>
-            )}
-            {cout && (
-              <>
-                <hr className="pb-1" />
-                <div className="text-xs text-dsfr-text-mention-grey">Coût</div>
-                <div className="inline-block w-full">
-                  <div className="float-left">
-                    <div className="float-left">{cout.icons("fr-icon--sm")}</div>
-                  </div>
-                  <div className="float-right text-xs text-dsfr-text-mention-grey mt-1">
-                    {`de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € / m²`}
-                  </div>
-                </div>
-              </>
-            )}
+            <FicheSolutionInfoComparatif temperatureClass="text-4xl" ficheSolution={ficheSolution} className={"text-xs"}/>
             <div className="text-center mt-4">
               <div className={`fr-btn fr-btn--tertiary rounded-3xl px-9`}>{"J'explore la solution"}</div>
             </div>
