@@ -9,19 +9,13 @@ import {
   DirectusSingleFilter,
   getStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
+import { FICHE_SOLUTION_CARD_INFO_FRAGMENT } from "@/lib/directus/queries/cmsFragments";
 
-export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFilter) => `query {
+export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFilter) => `
+  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
+  query {
     fiche_solution ${filterStatus} {
-          id
-          titre
-          description_courte
-          image_principale
-          type_solution
-          baisse_temperature
-          delai_travaux
-          cout_minimum
-          cout_maximum
-          slug
+      ...FicheSolutionCardInfo
     }
 }`;
 

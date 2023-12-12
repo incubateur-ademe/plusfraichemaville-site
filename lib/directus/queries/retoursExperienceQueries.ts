@@ -9,8 +9,14 @@ import {
   DirectusSingleFilter,
   getStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
+import {
+  FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT,
+  RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
+} from "@/lib/directus/queries/cmsFragments";
 
-export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (rexFilter?: DirectusCompleteFilter) => `query {
+export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (
+  rexFilter?: DirectusCompleteFilter,
+) => ` ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT}  query {
     retour_experience ${rexFilter} {
         titre
         description
@@ -30,11 +36,7 @@ export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (rexFilter?: DirectusComplete
             description
             image
             fiche_solution {
-                titre
-                image_principale
-                cout_minimum
-                cout_maximum
-                slug
+              ...FicheSolutionSmallCardInfo
             }
         }
         calendrier
@@ -59,29 +61,17 @@ export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (rexFilter?: DirectusComplete
         }
         retours_experience_lies (sort:"sort")  {
             related_retour_experience_id {
-                id
-                titre
-                image_principale
-                climat_actuel
-                climat_futur
-                types_espace
-                region
-                slug
+              ...RetourExperienceCardInfo
             }
         }
     }
 }`;
 
-export const GET_RETOUR_EXPERIENCE_CARD_DATA = (rexFilter?: DirectusCompleteFilter) => `query {
+export const GET_RETOUR_EXPERIENCE_CARD_DATA = (
+  rexFilter?: DirectusCompleteFilter,
+) => `${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
     retour_experience ${rexFilter} {
-        id
-        titre
-        image_principale
-        climat_actuel
-        climat_futur
-        types_espace
-        region
-        slug
+      ...RetourExperienceCardInfo
     }
 }`;
 

@@ -31,6 +31,18 @@ export type AideDecisionEtapeFicheTechnique = {
   ordre?: number | null;
 };
 
+export type Cobenefice = {
+  date_created?: string | null;
+  date_updated?: string | null;
+  description: string;
+  fiches_solutions: any[] & FicheSolutionCobenefice[];
+  icone?: string | null;
+  id: number;
+  status: string;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
+};
+
 export type DirectusActivity = {
   action: string;
   collection: string;
@@ -390,15 +402,31 @@ export type EtapeMiseEnOeuvre = {
 
 export type FicheSolution = {
   baisse_temperature: number;
-  cout?: number | null;
+  cobenefices: any[] & FicheSolutionCobenefice[];
+  contexte_description?: string | null;
+  contexte_titre?: string | null;
   cout_maximum: number;
+  cout_maximum_entretien?: number | null;
   cout_minimum: number;
+  cout_minimum_entretien?: number | null;
   date_created?: string | null;
   date_updated?: string | null;
   delai_travaux?: number | null;
+  description: string;
   description_courte: string;
+  etapes_diagnostic?: unknown | null;
+  etapes_entretien?: unknown | null;
+  etapes_mise_en_oeuvre?: unknown | null;
+  fiches_solutions_complementaires: any[] & FicheSolutionFicheSolution[];
   id: number;
   image_principale?: (string & DirectusFiles) | null;
+  lien_aide_territoire?: string | null;
+  lien_fond_vert?: string | null;
+  logo_partenaire?: (string & DirectusFiles) | null;
+  materiaux: any[] & FicheSolutionMateriau[];
+  oups: any[] & Oups[];
+  point_vigilance?: string | null;
+  rafraichissement_attendu_description?: string | null;
   slug: string;
   solution_retour_experience: any[] & SolutionRetourExperience[];
   sort?: number | null;
@@ -407,6 +435,27 @@ export type FicheSolution = {
   type_solution?: string | null;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;
+};
+
+export type FicheSolutionCobenefice = {
+  cobenefice_id?: (number & Cobenefice) | null;
+  fiche_solution_id?: (number & FicheSolution) | null;
+  id: number;
+  sort?: number | null;
+};
+
+export type FicheSolutionFicheSolution = {
+  fiche_solution_id?: (number & FicheSolution) | null;
+  id: number;
+  related_fiche_solution_id?: (number & FicheSolution) | null;
+  sort?: number | null;
+};
+
+export type FicheSolutionMateriau = {
+  fiche_solution_id?: (number & FicheSolution) | null;
+  id: number;
+  materiau_id?: (number & Materiau) | null;
+  sort?: number | null;
 };
 
 export type FicheTechnique = {
@@ -440,6 +489,22 @@ export type FicheTechniqueObjectifDeveloppementDurable = {
   objectif_developpement_durable_id?: (number & ObjectifDeveloppementDurable) | null;
 };
 
+export type Materiau = {
+  cout_maximum_fourniture?: number | null;
+  cout_minimum_fourniture?: number | null;
+  cout_unite?: string | null;
+  date_created?: string | null;
+  date_updated?: string | null;
+  description: string;
+  fiche_solution: any[] & FicheSolutionMateriau[];
+  id: number;
+  sort?: number | null;
+  status: string;
+  titre: string;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
+};
+
 export type ObjectifDeveloppementDurable = {
   description?: string | null;
   id: number;
@@ -447,7 +512,28 @@ export type ObjectifDeveloppementDurable = {
   sort?: number | null;
 };
 
+export type Oups = {
+  date_created?: string | null;
+  date_updated?: string | null;
+  description: string;
+  fiche_solution?: (number & FicheSolution) | null;
+  id: number;
+  solutions_reparatrices: any[] & OupsFicheSolution[];
+  status: string;
+  titre: string;
+  user_created?: (string & DirectusUsers) | null;
+  user_updated?: (string & DirectusUsers) | null;
+};
+
+export type OupsFicheSolution = {
+  fiche_solution_id?: (number & FicheSolution) | null;
+  id: number;
+  oups_id?: (number & Oups) | null;
+  sort?: number | null;
+};
+
 export type RetourExperience = {
+  aides_regionales?: unknown | null;
   calendrier?: EtapeCalendrierRetourExperience[] | null;
   citation?: CitationRetourExperience[] | null;
   climat_actuel?: string | null;
@@ -518,10 +604,10 @@ export type SolutionRetourExperience = {
   date_created?: string | null;
   date_updated?: string | null;
   description: string;
-  fiche_solution?: (number & FicheSolution) | null;
+  fiche_solution: number & FicheSolution;
   id: number;
   image?: (string & DirectusFiles) | null;
-  retour_experience?: (number & RetourExperience) | null;
+  retour_experience: number & RetourExperience;
   sort?: number | null;
   titre: string;
   user_created?: (string & DirectusUsers) | null;
@@ -532,6 +618,7 @@ export type CustomDirectusTypes = {
   aide_decision_etape: AideDecisionEtape[];
   aide_decision_etape_fiche_solution: AideDecisionEtapeFicheSolution[];
   aide_decision_etape_fiche_technique: AideDecisionEtapeFicheTechnique[];
+  cobenefice: Cobenefice[];
   directus_activity: DirectusActivity[];
   directus_collections: DirectusCollections[];
   directus_dashboards: DirectusDashboards[];
@@ -558,10 +645,16 @@ export type CustomDirectusTypes = {
   directus_webhooks: DirectusWebhooks[];
   etape_mise_en_oeuvre: EtapeMiseEnOeuvre[];
   fiche_solution: FicheSolution[];
+  fiche_solution_cobenefice: FicheSolutionCobenefice[];
+  fiche_solution_fiche_solution: FicheSolutionFicheSolution[];
+  fiche_solution_materiau: FicheSolutionMateriau[];
   fiche_technique: FicheTechnique[];
   fiche_technique_etape_mise_en_oeuvre: FicheTechniqueEtapeMiseEnOeuvre[];
   fiche_technique_objectif_developpement_durable: FicheTechniqueObjectifDeveloppementDurable[];
+  materiau: Materiau[];
   objectif_developpement_durable: ObjectifDeveloppementDurable[];
+  oups: Oups[];
+  oups_fiche_solution: OupsFicheSolution[];
   retour_experience: RetourExperience[];
   retour_experience_objectif_developpement_durable: RetourExperienceObjectifDeveloppementDurable[];
   retour_experience_retour_experience: RetourExperienceRetourExperience[];
