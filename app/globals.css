@@ -118,23 +118,24 @@
 }
 
 .greenSolutionBanner {
-  background: linear-gradient(180deg, rgba(12, 114, 65, 0.00) 26.27%, rgba(16, 58, 35, 0.80) 100%);
+  background: linear-gradient(180deg, rgba(12, 114, 65, 0) 26.27%, rgba(16, 58, 35, 0.8) 100%);
 }
 
 .blueSolutionBanner {
-  background: linear-gradient(180deg, rgba(24, 19, 81, 0.00) 26.27%, rgba(15, 76, 168, 0.80) 100%);
+  background: linear-gradient(180deg, rgba(24, 19, 81, 0) 26.27%, rgba(15, 76, 168, 0.8) 100%);
 }
 
 .graySolutionBanner {
-  background: linear-gradient(180deg, rgba(33, 35, 34, 0.00) 26.27%, rgba(33, 35, 34, 0.80) 100%);
+  background: linear-gradient(180deg, rgba(33, 35, 34, 0) 26.27%, rgba(33, 35, 34, 0.8) 100%);
 }
 
 .softSolutionBanner {
-  background: linear-gradient(180deg, rgba(97, 74, 13, 0.00) 26.27%, rgba(97, 74, 13, 0.80) 100%);
+  background: linear-gradient(180deg, rgba(97, 74, 13, 0) 26.27%, rgba(97, 74, 13, 0.8) 100%);
 }
 
-.customTab[aria-selected="true"], .customTab:hover {
-  background-color: rgba(66, 17, 170, 0.10)!important;
+.customTab[aria-selected="true"],
+.customTab:hover {
+  background-color: rgba(66, 17, 170, 0.1) !important;
   color: var(--text-label-blue-france);
 }
 
@@ -147,7 +148,7 @@
 }
 
 .customPanel {
-  padding: 3rem 0 3rem 0!important;
+  padding: 3rem 0 3rem 0 !important;
 }
 
 .typeSolutionGreenIcon {

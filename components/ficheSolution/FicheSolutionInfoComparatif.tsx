@@ -17,9 +17,7 @@ export default function FicheSolutionInfoComparatif({
   return (
     <div className={`${className}`}>
       <div className="flex flex-row justify-between w-full mt-6 mb-2">
-        <div className="mr-4 mt-auto text-dsfr-text-mention-grey">
-          Baisse maximale de la température de l{"'"}air
-        </div>
+        <div className="mr-4 mt-auto text-dsfr-text-mention-grey">Baisse maximale de la température de l{"'"}air</div>
         <div className="float-right text-right">
           <div className={`fr-text--bold text-dsfr-text-label-blue-france ${temperatureClass}`}>
             {`-${ficheSolution.baisse_temperature}°C`}

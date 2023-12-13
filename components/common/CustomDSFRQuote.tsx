@@ -11,7 +11,7 @@ export default async function CustomDSFRQuote({
   return (
     <figure className={`fr-quote ${className}`}>
       <blockquote>
-        <CmsRichText label={citation.texte}/>
+        <CmsRichText label={citation.texte} />
       </blockquote>
       <figcaption>
         <div className="fr-quote__author">{citation.auteur}</div>

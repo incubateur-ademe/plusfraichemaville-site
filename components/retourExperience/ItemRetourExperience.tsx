@@ -15,7 +15,7 @@ export default async function ItemRetourExperience({
   return !content ? null : (
     <>
       <TitleTag className={titleClasses}>{title}</TitleTag>
-      <CmsRichText label={content}/>
+      <CmsRichText label={content} />
     </>
   );
 }

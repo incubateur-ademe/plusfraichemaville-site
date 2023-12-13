@@ -11,7 +11,7 @@ import {
 } from "@/lib/directus/queries/commonFilters";
 import {
   FICHE_SOLUTION_CARD_INFO_FRAGMENT,
-  RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT
+  RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
 } from "@/lib/directus/queries/cmsFragments";
 
 export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFilter) => `
@@ -21,7 +21,6 @@ export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFi
       ...FicheSolutionCardInfo
     }
 }`;
-
 
 export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusCompleteFilter) => `
   ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT}

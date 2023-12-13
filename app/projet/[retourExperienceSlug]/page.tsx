@@ -30,7 +30,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
           <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
           <div className="flex-1 md:pl-12">
             <h1 className={"text-3xl md:text-[40px] md:leading-[3rem] mt-4"}>{retourExperience.titre}</h1>
-            <CmsRichText label={retourExperience.description} className={"text-xl leading-8 mt-10"}/>
+            <CmsRichText label={retourExperience.description} className={"text-xl leading-8 mt-10"} />
             {retourExperience.citation &&
               retourExperience.citation.length > 0 &&
               retourExperience.citation.map((citation) => (

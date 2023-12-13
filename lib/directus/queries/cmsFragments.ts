@@ -19,7 +19,6 @@ export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSm
   slug
 }`;
 
-
 export const RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT = `fragment RetourExperienceCardInfo on retour_experience {
   id
   titre
