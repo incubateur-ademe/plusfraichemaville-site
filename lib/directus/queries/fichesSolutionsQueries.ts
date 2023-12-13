@@ -49,6 +49,7 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
               ...FicheSolutionCardInfo
           }
       }
+      logo_partenaire
     }
 }`;
 

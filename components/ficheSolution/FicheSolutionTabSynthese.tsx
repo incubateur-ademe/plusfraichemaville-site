@@ -7,6 +7,7 @@ import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutio
 import RetourExperienceReducedVerticalCard from "@/components/retourExperience/RetourExperienceReducedVerticalCard";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
+import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 
 export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolution: FicheSolution }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
@@ -106,6 +107,22 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
             ))}
           </div>
         </div>
+      )}
+      {ficheSolution.logo_partenaire && (
+        <>
+          <hr className="pb-12 mt-12" />
+          <div className={"flex flex-row"}>
+            <div className="text-lg mr-5 text-dsfr-text-mention-grey flex items-center">Partenaire</div>
+            <div className="h-28 w-52 flex items-center relative">
+              <Image
+                fill
+                src={getDirectusImageUrl(ficheSolution.logo_partenaire, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
+                alt={ficheSolution.titre}
+                className={"h-full object-contain"}
+              />
+            </div>
+          </div>
+        </>
       )}
     </div>
   );
