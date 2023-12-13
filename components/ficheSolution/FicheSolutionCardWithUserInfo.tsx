@@ -14,10 +14,12 @@ import { Oval } from "react-loader-spinner";
 export default function FicheSolutionCardWithUserInfo({
   ficheSolution,
   aideDecisionFirstStepName,
+  className,
   children,
 }: {
   ficheSolution: FicheSolution;
   aideDecisionFirstStepName: string;
+  className?: string;
   children: React.ReactNode;
 }) {
   const [isClient, setIsClient] = useState(false);
@@ -49,7 +51,7 @@ export default function FicheSolutionCardWithUserInfo({
     }
   };
   return (
-    <div className={"relative flex"}>
+    <div className={`relative flex ${className}`}>
       {children}
       {isClient ? (
         <div

@@ -39,11 +39,16 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
       contexte_titre
       contexte_description
       rafraichissement_attendu_description
-        solution_retour_experience {
-            retour_experience {
-              ...RetourExperienceCardInfo
-            }
-        }
+      solution_retour_experience {
+          retour_experience {
+            ...RetourExperienceCardInfo
+          }
+      }
+      fiches_solutions_complementaires {
+          related_fiche_solution_id {
+              ...FicheSolutionCardInfo
+          }
+      }
     }
 }`;
 

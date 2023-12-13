@@ -21,20 +21,24 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
             alt={ficheSolution?.titre || "image titre"}
           />
           <div className="fr-container">
-            <h1 className={"mt-8 absolute text-[2.625rem] text-white md:left-[25%] bottom-4 font-bold leading-normal"}>
+            <h1
+              className={
+                "mt-8 fr-container absolute text-[2.625rem] text-white md:ml-[11rem] bottom-4 font-bold leading-normal"
+              }
+            >
               {ficheSolution.titre}
             </h1>
           </div>
         </div>
         <div className="h-14 w-full bg-dsfr-background-alt-blue-france absolute" />
         <div className="fr-container">
-          <div className="fr-tabs before:!shadow-none !shadow-none md:ml-[10rem]">
+          <div className="fr-tabs before:!shadow-none !shadow-none md:ml-[12rem]">
             <ul className="fr-tabs__list m-0 p-0 h-14" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
                 <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" />
               </li>
               <li role="presentation">
-                <CustomTabButton label="Matériaux et coûts" isSelected={false} contentId="tabpanel-405-panel" />
+                <CustomTabButton label="Matériaux et coûts" isSelected={false} contentId="materiaux-panel" />
               </li>
               <li role="presentation">
                 <CustomTabButton label="Mise en œuvre" isSelected={false} contentId="tabpanel-406-panel" />
@@ -48,6 +52,9 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
             </ul>
             <div id="synthese-panel" className="fr-tabs__panel customPanel fr-tabs__panel--selected" role="tabpanel">
               <FicheSolutionTabSynthese ficheSolution={ficheSolution} />
+            </div>
+            <div id="materiaux-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+              Onglet Matériaux
             </div>
           </div>
         </div>

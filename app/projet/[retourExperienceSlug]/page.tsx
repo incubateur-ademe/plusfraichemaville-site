@@ -40,12 +40,12 @@ export default async function RetourExperience({ params }: { params: { retourExp
               <SituationRetourExperienceCard
                 titre="Avant le projet"
                 situation={retourExperience.situation_avant}
-                className="mb-4 md:mb-0 md:mr-3 flex-1 bg-dsfr-background-grey"
+                className="mb-4 md:mb-0 md:mr-3 flex-1 bg-dsfr-background-alt-grey"
               />
               <SituationRetourExperienceCard
                 titre="Après le projet"
                 situation={retourExperience.situation_apres}
-                className="md:ml-3 flex-1 bg-dsfr-background-blue-cumulus"
+                className="md:ml-3 flex-1 bg-dsfr-background-alt-blue-france"
               />
             </div>
             {retourExperience.solutions?.length > 0 && (
