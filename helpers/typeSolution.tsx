@@ -22,21 +22,28 @@ export const ALL_TYPES_SOLUTION: TypeSolution[] = [
     label: "Solution bleue",
     bannerClass: " blueSolutionBanner ",
     icon: (extraClasses?) => <i className={`ri-drop-fill ${extraClasses}`} />,
-    coloredIcon: (extraClasses?) => <i className={`ri-drop-fill ${extraClasses}`} />,
+    coloredIcon: (extraClasses?) => <i className={`ri-drop-fill typeSolutionBlueIcon ${extraClasses}`} />,
   },
   {
     code: "grise",
     label: "Solution grise",
     bannerClass: " graySolutionBanner ",
     icon: (extraClasses?) => <i className={`ri-home-fill ${extraClasses}`} />,
-    coloredIcon: (extraClasses?) => <i className={`ri-home-fill ${extraClasses}`} />,
+    coloredIcon: (extraClasses?) => <i className={`ri-home-fill typeSolutionSoftIcon ${extraClasses}`} />,
   },
   {
     code: "douce",
     label: "Solution douce",
     bannerClass: " softSolutionBanner ",
     icon: (extraClasses?) => <Image src={solutionDouceIcon} className={extraClasses} alt="Solution douce" />,
-    coloredIcon: (extraClasses?) => <Image src={solutionDouceIcon} className={extraClasses} alt="Solution douce" />,
+    coloredIcon: (extraClasses?) => (
+      <Image
+        src={solutionDouceIcon}
+        width={15}
+        className={`${extraClasses} typeSolutionGrayIcon`}
+        alt="Solution douce"
+      />
+    ),
   },
 ];
 

@@ -152,5 +152,17 @@
 }
 
 .typeSolutionGreenIcon {
-  color: var(--text-default-success);
+  color: var(--border-default-green-emeraude);
+}
+
+.typeSolutionBlueIcon {
+  color: var(--background-action-high-info-hover);
+}
+
+.typeSolutionSoftIcon {
+  color: #d6a23e;
+}
+
+.typeSolutionGrayIcon {
+  color: var(--text-disabled-grey);
 }
