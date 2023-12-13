@@ -10,6 +10,7 @@ export const DIRECTUS_IMAGE_KEY_SIZE = {
   retourExperienceCard: "retour-experience-card",
   retourExperiencePage: "retour-experience-page",
   retourExperienceSolutionThumbnail: "rex-solution-thumb",
+  ficheSolutionLogoPartenaire: "fiche-solution-logo-partenaire",
 } as const;
 export type DIRECTUS_IMAGE_KEY_SIZE_TYPE = (typeof DIRECTUS_IMAGE_KEY_SIZE)[keyof typeof DIRECTUS_IMAGE_KEY_SIZE];
 

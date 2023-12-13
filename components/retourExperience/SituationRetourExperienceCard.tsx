@@ -1,6 +1,7 @@
 import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import { SituationRetourExperience } from "@/lib/directus/directusModels";
+import CmsRichText from "@/components/common/CmsRichText";
 
 export default async function SituationRetourExperienceCard({
   situation,
@@ -21,7 +22,7 @@ export default async function SituationRetourExperienceCard({
           <h3 className="fr-card__title">{titre}</h3>
           <div className="fr-card__desc h-full">
             <div className={"flex justify-between flex-col h-full"}>
-              <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: situation.description }} />
+              <CmsRichText label={situation.description} />
             </div>
           </div>
         </div>

@@ -9,19 +9,46 @@ import {
   DirectusSingleFilter,
   getStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
+import {
+  FICHE_SOLUTION_CARD_INFO_FRAGMENT,
+  RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
+} from "@/lib/directus/queries/cmsFragments";
 
-export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFilter) => `query {
+export const GET_ALL_FICHES_SOLUTIONS_QUERY = (filterStatus?: DirectusCompleteFilter) => `
+  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
+  query {
     fiche_solution ${filterStatus} {
-          id
-          titre
-          description_courte
-          image_principale
-          type_solution
-          baisse_temperature
-          delai_travaux
-          cout_minimum
-          cout_maximum
-          slug
+      ...FicheSolutionCardInfo
+    }
+}`;
+
+export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusCompleteFilter) => `
+  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT}
+  query {
+    fiche_solution ${filterStatus} {
+      ...FicheSolutionCardInfo
+      description
+        cobenefices {
+            cobenefice_id {
+              id
+              icone
+              description
+            }
+        }
+      contexte_titre
+      contexte_description
+      rafraichissement_attendu_description
+      solution_retour_experience {
+          retour_experience {
+            ...RetourExperienceCardInfo
+          }
+      }
+      fiches_solutions_complementaires {
+          related_fiche_solution_id {
+              ...FicheSolutionCardInfo
+          }
+      }
+      logo_partenaire
     }
 }`;
 
@@ -35,7 +62,7 @@ export async function getAllFichesSolutions(): Promise<FicheSolution[]> {
 export async function getFicheSolutionBySlug(slug: string): Promise<FicheSolution | null> {
   const filterSlug: DirectusSingleFilter = ` {slug:{_eq: "${slug}"}}`;
   const filter = contrusctAndFilters([getStatusFilter(), filterSlug]);
-  const apiResponse = await directusGraphQLCall(GET_ALL_FICHES_SOLUTIONS_QUERY(filter));
+  const apiResponse = await directusGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter));
   return apiResponse?.fiche_solution?.length > 0 ? apiResponse.fiche_solution[0] : null;
 }
 

@@ -9,8 +9,11 @@ import {
   getAideDecisionFicheSolutionStatusFilter,
 } from "@/lib/directus/queries/commonFilters";
 import { getHistoryFromAideDecisionEtape } from "@/lib/directus/helpers/getHistoryFromAideDecision";
+import { FICHE_SOLUTION_CARD_INFO_FRAGMENT } from "@/lib/directus/queries/cmsFragments";
 
-export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: DirectusCompleteFilter) => `query {
+export const GET_FILTERED_AIDE_DECISION_ETAPE = (
+  filterAideDecisionEtape?: DirectusCompleteFilter,
+) => ` ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} query {
     aide_decision_etape ${filterAideDecisionEtape}  {
       id
       nom
@@ -27,29 +30,20 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (filterAideDecisionEtape?: Direc
       }
       fiches_solutions ${contrusctAndFilters([getAideDecisionFicheSolutionStatusFilter()])} {
         fiche_solution_id{
-          id
-          titre
-          description_courte
-          image_principale
-          type_solution
-          baisse_temperature
-          delai_travaux
-          cout_minimum
-          cout_maximum
-          slug
-            solution_retour_experience {
+          ...FicheSolutionCardInfo
+          solution_retour_experience {
+            id
+            retour_experience {
                 id
-                retour_experience {
-                    id
-                    titre
-                    image_principale
-                    climat_actuel
-                    climat_futur
-                    types_espace
-                    region
-                    slug
-                }
+                titre
+                image_principale
+                climat_actuel
+                climat_futur
+                types_espace
+                region
+                slug
             }
+          }
         }
       }
     }

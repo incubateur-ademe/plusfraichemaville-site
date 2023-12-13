@@ -10,6 +10,7 @@ import ItemRetourExperience from "@/components/retourExperience/ItemRetourExperi
 import RetourExperienceExtraInfoPanel from "@/components/retourExperience/RetourExperienceExtraInfoPanel";
 import { notFound } from "next/navigation";
 import RetourExperienceCustomCard from "@/components/retourExperience/RetourExperienceCustomCard";
+import CmsRichText from "@/components/common/CmsRichText";
 
 export default async function RetourExperience({ params }: { params: { retourExperienceSlug: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
@@ -29,10 +30,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
           <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
           <div className="flex-1 md:pl-12">
             <h1 className={"text-3xl md:text-[40px] md:leading-[3rem] mt-4"}>{retourExperience.titre}</h1>
-            <div
-              className="text-xl leading-8 mt-10 cmsRichText"
-              dangerouslySetInnerHTML={{ __html: retourExperience.description || "" }}
-            ></div>
+            <CmsRichText label={retourExperience.description} className={"text-xl leading-8 mt-10"} />
             {retourExperience.citation &&
               retourExperience.citation.length > 0 &&
               retourExperience.citation.map((citation) => (
@@ -42,12 +40,12 @@ export default async function RetourExperience({ params }: { params: { retourExp
               <SituationRetourExperienceCard
                 titre="Avant le projet"
                 situation={retourExperience.situation_avant}
-                className="mb-4 md:mb-0 md:mr-3 flex-1 bg-dsfr-background-grey"
+                className="mb-4 md:mb-0 md:mr-3 flex-1 bg-dsfr-background-alt-grey"
               />
               <SituationRetourExperienceCard
                 titre="Après le projet"
                 situation={retourExperience.situation_apres}
-                className="md:ml-3 flex-1 bg-dsfr-background-blue-cumulus"
+                className="md:ml-3 flex-1 bg-dsfr-background-alt-blue-france"
               />
             </div>
             {retourExperience.solutions?.length > 0 && (

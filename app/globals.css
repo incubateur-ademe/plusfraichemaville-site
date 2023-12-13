@@ -116,3 +116,53 @@
 .fr-card__title a[href] {
   color: var(--text-action-high-grey);
 }
+
+.greenSolutionBanner {
+  background: linear-gradient(180deg, rgba(12, 114, 65, 0) 26.27%, rgba(16, 58, 35, 0.8) 100%);
+}
+
+.blueSolutionBanner {
+  background: linear-gradient(180deg, rgba(24, 19, 81, 0) 26.27%, rgba(15, 76, 168, 0.8) 100%);
+}
+
+.graySolutionBanner {
+  background: linear-gradient(180deg, rgba(33, 35, 34, 0) 26.27%, rgba(33, 35, 34, 0.8) 100%);
+}
+
+.softSolutionBanner {
+  background: linear-gradient(180deg, rgba(97, 74, 13, 0) 26.27%, rgba(97, 74, 13, 0.8) 100%);
+}
+
+.customTab[aria-selected="true"],
+.customTab:hover {
+  background-color: rgba(66, 17, 170, 0.1) !important;
+  color: var(--text-label-blue-france);
+}
+
+.customTab {
+  margin: 0;
+  height: 100%;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  font-size: 0.875rem;
+  text-wrap: nowrap;
+}
+
+.customPanel {
+  padding: 3rem 0 3rem 0 !important;
+}
+
+.typeSolutionGreenIcon {
+  color: var(--border-default-green-emeraude);
+}
+
+.typeSolutionBlueIcon {
+  color: var(--background-action-high-info-hover);
+}
+
+.typeSolutionSoftIcon {
+  color: #d6a23e;
+}
+
+.typeSolutionGrayIcon {
+  color: var(--text-disabled-grey);
+}

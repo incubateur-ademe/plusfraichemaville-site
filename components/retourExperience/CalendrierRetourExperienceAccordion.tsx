@@ -1,5 +1,6 @@
 import { EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
 import Accordion from "@codegouvfr/react-dsfr/Accordion";
+import CmsRichText from "@/components/common/CmsRichText";
 
 export default async function CalendrierRetourExperienceAccordion({
   etapes,
@@ -18,7 +19,7 @@ export default async function CalendrierRetourExperienceAccordion({
         </div>
       }
     >
-      <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: etape.description }} />
+      <CmsRichText label={etape.description} />
     </Accordion>
   ));
 }

@@ -1,3 +1,5 @@
+import CmsRichText from "@/components/common/CmsRichText";
+
 export default async function ItemRetourExperienceExtraInfo({
   title,
   content,
@@ -10,7 +12,7 @@ export default async function ItemRetourExperienceExtraInfo({
   return !content ? null : (
     <div className={`basis-1/2 md:basis-auto mb-3 ${className}`}>
       <div className="font-bold">{title}</div>
-      <div className="cmsRichText" dangerouslySetInnerHTML={{ __html: content }} />
+      <CmsRichText label={content} />
     </div>
   );
 }
