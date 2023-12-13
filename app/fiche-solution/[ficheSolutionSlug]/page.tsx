@@ -12,18 +12,19 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
     const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
     return (
       <>
-        <div className={"relative h-96 greenSolutionBanner"}>
+        <div className={"relative h-48 md:h-96 greenSolutionBanner"}>
           <Image
             width={1200}
             height={500}
-            className={`w-full h-96 object-cover relative -z-10 ${typeSolution?.bannerClass}`}
+            className={`w-full h-48 md:h-96 object-cover relative -z-10 ${typeSolution?.bannerClass}`}
             src={getDirectusImageUrl(ficheSolution.image_principale)}
             alt={ficheSolution?.titre || "image titre"}
           />
           <div className="fr-container">
             <h1
               className={
-                "mt-8 fr-container absolute text-[2.625rem] text-white md:ml-[11rem] bottom-4 font-bold leading-normal"
+                "mt-8 md:fr-container absolute text-white text-[1.375rem] md:text-[2.625rem] " +
+                " md:ml-[11rem] bottom-0 md:bottom-4 font-bold leading-normal"
               }
             >
               {ficheSolution.titre}

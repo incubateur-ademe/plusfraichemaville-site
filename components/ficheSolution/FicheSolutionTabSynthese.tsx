@@ -26,7 +26,7 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
           </div>
           <CmsRichText label={ficheSolution.description} className="text-dsfr-text-little-grey" />
         </div>
-        <div className="w-72 flex-none md:border-l border-dsfr-border-default-grey md:pl-6 ">
+        <div className="w-full md:w-72 flex-none md:border-l border-dsfr-border-default-grey md:pl-6 ">
           <FicheSolutionInfoComparatif
             temperatureClass="text-[3.125rem]"
             ficheSolution={ficheSolution}
@@ -49,8 +49,8 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
           ))}
         </div>
       </div>
-      <hr className="pb-2 mt-6" />
-      <div className="flex flex-col md:flex-row md:mt-8 gap-8">
+      <hr className="pb-6 mt-6 md:pb-8 md:mt-12" />
+      <div className="flex flex-col md:flex-row gap-8">
         {ficheSolution.contexte_description && (
           <div>
             <div className="text-dsfr-text-little-grey font-bold text-[1.375rem] mb-4">
@@ -59,6 +59,7 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
             <CmsRichText label={ficheSolution.contexte_description} className="text-dsfr-text-little-grey" />
           </div>
         )}
+        <hr className="pb-1 mt-1 md:hidden" />
         {ficheSolution.rafraichissement_attendu_description && (
           <div>
             <div className="text-dsfr-text-little-grey font-bold text-[1.375rem] mb-4">Rafraîchissement attendu</div>
@@ -110,17 +111,19 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
       )}
       {ficheSolution.logo_partenaire && (
         <>
-          <hr className="pb-12 mt-12" />
-          <div className={"flex flex-row"}>
-            <div className="text-lg mr-5 text-dsfr-text-mention-grey flex items-center">Partenaire</div>
-            <div className="h-28 w-52 flex items-center relative">
-              <Image
-                fill
-                src={getDirectusImageUrl(ficheSolution.logo_partenaire, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
-                alt={ficheSolution.titre}
-                className={"h-full object-contain"}
-              />
-            </div>
+          <hr className="pb-8 mt-12" />
+          <div className={"flex flex-col md:flex-row  ml-4"}>
+            <div className="text-lg mr-5 text-dsfr-text-mention-grey flex items-center mb-2">Partenaire</div>
+            <Image
+              width={110}
+              height={110}
+              src={getDirectusImageUrl(
+                ficheSolution.logo_partenaire,
+                DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionLogoPartenaire,
+              )}
+              alt={ficheSolution.titre}
+              className={"h-full "}
+            />
           </div>
         </>
       )}

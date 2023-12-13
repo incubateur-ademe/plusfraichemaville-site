@@ -4,14 +4,10 @@ import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/dir
 import Link from "next/link";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
-import { getDelaiTravauxFicheSolutionFromCode } from "@/helpers/delaiTravauxFicheSolution";
-import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 
 export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution: FicheSolution }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
-  const delaiTravaux = getDelaiTravauxFicheSolutionFromCode(ficheSolution.delai_travaux);
-  const cout = getCoutFicheSolutionFromCode(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
   return (
     <Link
       className="flex w-[17.5rem] flex-col pfmv-card mr-4 ml-4 md:ml-0"
@@ -39,7 +35,11 @@ export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution
         <div className={"text-sm text-dsfr-text-little-grey mt-4"}>{ficheSolution.description_courte}</div>
         <div className={"mt-auto"}>
           <div>
-            <FicheSolutionInfoComparatif temperatureClass="text-4xl" ficheSolution={ficheSolution} className={"text-xs"}/>
+            <FicheSolutionInfoComparatif
+              temperatureClass="text-4xl"
+              ficheSolution={ficheSolution}
+              className={"text-xs"}
+            />
             <div className="text-center mt-4">
               <div className={`fr-btn fr-btn--tertiary rounded-3xl px-9`}>{"J'explore la solution"}</div>
             </div>
