@@ -162,3 +162,7 @@
 .typeSolutionGrayIcon {
   color: var(--text-disabled-grey);
 }
+
+.bigIconAccordion::after {
+  --icon-size: 1.5rem;
+}

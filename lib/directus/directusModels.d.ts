@@ -1,4 +1,8 @@
-import { CitationRetourExperience, EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
+import {
+  CitationRetourExperience,
+  EtapeCalendrierRetourExperience,
+  EtapeMiseEnOeuvreFicheSolution,
+} from "@/lib/directus/directusCustomModels";
 
 export type AideDecisionEtape = {
   date_created?: string | null;
@@ -414,9 +418,9 @@ export type FicheSolution = {
   delai_travaux?: number | null;
   description: string;
   description_courte: string;
-  etapes_diagnostic?: unknown | null;
-  etapes_entretien?: unknown | null;
-  etapes_mise_en_oeuvre?: unknown | null;
+  etapes_diagnostic?: EtapeMiseEnOeuvreFicheSolution[] | null;
+  etapes_entretien?: EtapeMiseEnOeuvreFicheSolution[] | null;
+  etapes_mise_en_oeuvre?: EtapeMiseEnOeuvreFicheSolution[] | null;
   fiches_solutions_complementaires: any[] & FicheSolutionFicheSolution[];
   id: number;
   image_principale?: (string & DirectusFiles) | null;

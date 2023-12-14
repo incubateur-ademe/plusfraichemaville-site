@@ -8,3 +8,8 @@ export type CitationRetourExperience = {
   auteur: string;
   texte: string;
 };
+
+export type EtapeMiseEnOeuvreFicheSolution = {
+  titre: string;
+  description: string;
+};
