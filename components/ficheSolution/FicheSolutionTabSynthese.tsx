@@ -100,7 +100,7 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
               <FicheSolutionCardWithUserInfo
                 ficheSolution={fs.related_fiche_solution_id}
                 key={fs.related_fiche_solution_id.id}
-                className={"w-72 flex-none mt-8 mb-12"}
+                className={"w-72 flex-none mt-8 mb-12 ml-1"}
                 aideDecisionFirstStepName={""}
               >
                 <FicheSolutionFullCard ficheSolution={fs.related_fiche_solution_id} />

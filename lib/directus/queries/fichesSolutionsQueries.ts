@@ -49,6 +49,17 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
           }
       }
       logo_partenaire
+      materiaux {
+        materiau_id {
+          id
+          titre
+          image
+          description
+          cout_minimum_fourniture
+          cout_maximum_fourniture
+          cout_unite
+        }
+      }
     }
 }`;
 

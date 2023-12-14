@@ -493,6 +493,7 @@ export type Materiau = {
   cout_maximum_fourniture?: number | null;
   cout_minimum_fourniture?: number | null;
   cout_unite?: string | null;
+  image?: (string & DirectusFiles) | null;
   date_created?: string | null;
   date_updated?: string | null;
   description: string;
