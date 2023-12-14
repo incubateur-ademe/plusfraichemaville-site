@@ -60,6 +60,8 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
           cout_unite
         }
       }
+      cout_minimum_entretien
+      cout_maximum_entretien
     }
 }`;
 

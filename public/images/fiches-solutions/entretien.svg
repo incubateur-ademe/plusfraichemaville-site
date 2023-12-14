@@ -1,0 +1,11 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 103 103" width="103" height="103">
+	<title>Nouveau projet</title>
+	<defs>
+		<image width="103" height="102" id="img1" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAzIiBoZWlnaHQ9IjEwMiIgdmlld0JveD0iMCAwIDEwMyAxMDIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHg9IjAuNzc2MzY3IiB3aWR0aD0iMTAxLjg5OCIgaGVpZ2h0PSIxMDEuODk4IiByeD0iMTAiIGZpbGw9IiNFM0UzRkQiLz4KPC9zdmc+Cg=="/>
+		<image width="52" height="68" id="img2" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTIiIGhlaWdodD0iNjgiIHZpZXdCb3g9IjAgMCA1MiA2OCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwXzcyOF8zMTQyNSkiPgo8cGF0aCBkPSJNMjguODIzNSAwLjg3MTA5NEgyMy43Mjg2TDguOTc2NTYgNTkuODU4MUg0My41NzU1TDI4LjgyMzUgMC44NzEwOTRaIiBmaWxsPSIjRkY5NzAwIi8+CjxwYXRoIGQ9Ik01MS43NzY0IDU5LjY1MjNIMC43NzYzNjdWNjcuODcwNkg1MS43NzY0VjU5LjY1MjNaIiBmaWxsPSIjRkZCQjYxIi8+CjxwYXRoIGQ9Ik00MC42Nzc2IDQ4LjI3NTRMMzcuOTkzNCAzNy41MzUySDE0LjU2MDJMMTEuODc2IDQ4LjI3NTRINDAuNjc3NloiIGZpbGw9IndoaXRlIi8+CjxwYXRoIGQ9Ik0zMy4yNTMzIDE4LjU2OTVMMzEuMDQyMyA5LjcyMDdIMjEuNTE4MkwxOS4yOTk4IDE4LjU2OTVIMzMuMjUzM1oiIGZpbGw9IndoaXRlIi8+CjwvZz4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcDBfNzI4XzMxNDI1Ij4KPHJlY3Qgd2lkdGg9IjUxIiBoZWlnaHQ9IjY3IiBmaWxsPSJ3aGl0ZSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC43NzYzNjcgMC44NzEwOTQpIi8+CjwvY2xpcFBhdGg+CjwvZGVmcz4KPC9zdmc+Cg=="/>
+	</defs>
+	<style>
+	</style>
+	<use id="1x1 - Images et vidéos" href="#img1" transform="matrix(1,0,0,1,0,1)"/>
+	<use id="Objects" href="#img2" transform="matrix(1,0,0,1,26,18)"/>
+</svg>

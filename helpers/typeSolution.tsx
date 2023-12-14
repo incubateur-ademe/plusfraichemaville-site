@@ -1,6 +1,6 @@
 import React from "react";
-import solutionDouceIcon from "../public/images/solution-douce.svg";
-import coloredSolutionDouceIcon from "../public/images/solution-douce-colored.svg";
+import solutionDouceIcon from "../public/images/fiches-solutions/solution-douce.svg";
+import coloredSolutionDouceIcon from "../public/images/fiches-solutions/solution-douce-colored.svg";
 import Image from "next/image";
 
 type TypeSolution = {
