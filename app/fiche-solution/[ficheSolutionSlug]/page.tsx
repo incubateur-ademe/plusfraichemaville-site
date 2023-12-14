@@ -6,6 +6,7 @@ import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import CustomTabButton from "@/components/common/CustomTabButton";
 import FicheSolutionTabSynthese from "@/components/ficheSolution/FicheSolutionTabSynthese";
 import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionTabMateriaux";
+import FicheSolutionTabMiseEnOeuvre from "@/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
 
 export default async function FicheSolution({ params }: { params: { ficheSolutionSlug: string } }) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
@@ -43,7 +44,7 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
                 <CustomTabButton label="Matériaux et coûts" isSelected={false} contentId="materiaux-panel" />
               </li>
               <li role="presentation">
-                <CustomTabButton label="Mise en œuvre" isSelected={false} contentId="tabpanel-406-panel" />
+                <CustomTabButton label="Mise en œuvre" isSelected={false} contentId="mise-en-oeuvre-panel" />
               </li>
               <li role="presentation">
                 <CustomTabButton label="Financements" isSelected={false} contentId="tabpanel-407-panel" />
@@ -57,6 +58,9 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
             </div>
             <div id="materiaux-panel" className="fr-tabs__panel customPanel" role="tabpanel">
               <FicheSolutionTabMateriaux ficheSolution={ficheSolution} />
+            </div>
+            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+              <FicheSolutionTabMiseEnOeuvre ficheSolution={ficheSolution} />
             </div>
           </div>
         </div>

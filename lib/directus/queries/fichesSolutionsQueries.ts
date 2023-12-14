@@ -62,6 +62,10 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
       }
       cout_minimum_entretien
       cout_maximum_entretien
+      etapes_diagnostic
+      etapes_mise_en_oeuvre
+      etapes_entretien
+      point_vigilance
     }
 }`;
 
