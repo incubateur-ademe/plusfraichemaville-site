@@ -38,12 +38,7 @@ export const ALL_TYPES_SOLUTION: TypeSolution[] = [
     bannerClass: " softSolutionBanner ",
     icon: (extraClasses?) => <Image src={solutionDouceIcon} className={extraClasses} alt="Solution douce" />,
     coloredIcon: (extraClasses?) => (
-      <Image
-        src={coloredSolutionDouceIcon}
-        width={15}
-        className={`${extraClasses}`}
-        alt="Solution douce"
-      />
+      <Image src={coloredSolutionDouceIcon} width={15} className={`${extraClasses}`} alt="Solution douce" />
     ),
   },
 ];

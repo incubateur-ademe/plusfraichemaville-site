@@ -72,9 +72,7 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
       </div>
       {ficheSolution.solution_retour_experience.length > 0 && (
         <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">
-          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
-            Découvrir les projets réalisés
-          </div>
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Découvrir les projets réalisés</div>
           <div className="text-dsfr-text-title-grey">
             Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
           </div>
