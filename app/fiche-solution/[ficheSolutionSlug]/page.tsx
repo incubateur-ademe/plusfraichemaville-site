@@ -7,6 +7,8 @@ import CustomTabButton from "@/components/common/CustomTabButton";
 import FicheSolutionTabSynthese from "@/components/ficheSolution/FicheSolutionTabSynthese";
 import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionTabMateriaux";
 import FicheSolutionTabMiseEnOeuvre from "@/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
+import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
+import ButtonShareFicheSolution from "@/components/ficheSolution/ButtonShareFicheSolution";
 
 export default async function FicheSolution({ params }: { params: { ficheSolutionSlug: string } }) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
@@ -34,8 +36,17 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
           </div>
         </div>
         <div className="h-14 w-full bg-dsfr-background-alt-blue-france absolute" />
-        <div className="fr-container">
-          <div className="fr-tabs before:!shadow-none !shadow-none md:ml-[12rem]">
+        <div className="fr-container flex flex-row">
+          <div className="hidden md:block flex-none w-56 mt-[6.5rem]">
+            <ButtonShareFicheSolution className={"mb-4"}/>
+            <ButtonSaveFicheSolution
+              ficheSolution={ficheSolution}
+              projectName=""
+              className=""
+              label={true}
+            />
+          </div>
+          <div className="fr-tabs before:!shadow-none !shadow-none">
             <ul className="fr-tabs__list m-0 p-0 h-14" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
                 <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" />
