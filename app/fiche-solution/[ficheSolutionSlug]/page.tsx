@@ -5,6 +5,7 @@ import { getFicheSolutionBySlug } from "@/lib/directus/queries/fichesSolutionsQu
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import CustomTabButton from "@/components/common/CustomTabButton";
 import FicheSolutionTabSynthese from "@/components/ficheSolution/FicheSolutionTabSynthese";
+import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionTabMateriaux";
 
 export default async function FicheSolution({ params }: { params: { ficheSolutionSlug: string } }) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
@@ -55,7 +56,7 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
               <FicheSolutionTabSynthese ficheSolution={ficheSolution} />
             </div>
             <div id="materiaux-panel" className="fr-tabs__panel customPanel" role="tabpanel">
-              Onglet Matériaux
+              <FicheSolutionTabMateriaux ficheSolution={ficheSolution} />
             </div>
           </div>
         </div>

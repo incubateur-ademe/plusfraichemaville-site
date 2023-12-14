@@ -31,8 +31,8 @@ export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution
             </div>
           </>
         )}
-        <div className={"text-xl font-bold text-dsfr-text-little-grey text-blue-hover"}>{ficheSolution.titre}</div>
-        <div className={"text-sm text-dsfr-text-little-grey mt-4"}>{ficheSolution.description_courte}</div>
+        <div className={"text-xl font-bold text-dsfr-text-title-grey text-blue-hover"}>{ficheSolution.titre}</div>
+        <div className={"text-sm text-dsfr-text-title-grey mt-4"}>{ficheSolution.description_courte}</div>
         <div className={"mt-auto"}>
           <div>
             <FicheSolutionInfoComparatif

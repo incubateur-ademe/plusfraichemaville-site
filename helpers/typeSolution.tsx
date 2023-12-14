@@ -1,5 +1,6 @@
 import React from "react";
-import solutionDouceIcon from "../public/images/solution-douce.svg";
+import solutionDouceIcon from "../public/images/fiches-solutions/solution-douce.svg";
+import coloredSolutionDouceIcon from "../public/images/fiches-solutions/solution-douce-colored.svg";
 import Image from "next/image";
 
 type TypeSolution = {
@@ -29,7 +30,7 @@ export const ALL_TYPES_SOLUTION: TypeSolution[] = [
     label: "Solution grise",
     bannerClass: " graySolutionBanner ",
     icon: (extraClasses?) => <i className={`ri-home-fill ${extraClasses}`} />,
-    coloredIcon: (extraClasses?) => <i className={`ri-home-fill typeSolutionSoftIcon ${extraClasses}`} />,
+    coloredIcon: (extraClasses?) => <i className={`ri-home-fill typeSolutionGrayIcon ${extraClasses}`} />,
   },
   {
     code: "douce",
@@ -37,12 +38,7 @@ export const ALL_TYPES_SOLUTION: TypeSolution[] = [
     bannerClass: " softSolutionBanner ",
     icon: (extraClasses?) => <Image src={solutionDouceIcon} className={extraClasses} alt="Solution douce" />,
     coloredIcon: (extraClasses?) => (
-      <Image
-        src={solutionDouceIcon}
-        width={15}
-        className={`${extraClasses} typeSolutionGrayIcon`}
-        alt="Solution douce"
-      />
+      <Image src={coloredSolutionDouceIcon} width={15} className={`${extraClasses}`} alt="Solution douce" />
     ),
   },
 ];

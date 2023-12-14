@@ -15,7 +15,7 @@ export default function RetourExperienceReducedVerticalCard({
 }) {
   return (
     <Link
-      className={`flex w-52 flex-col pfmv-card mr-4 ml-4 md:ml-0 ${className}`}
+      className={`flex w-52 flex-col pfmv-card mr-4 ml-4 md:ml-1 ${className}`}
       href={`/projet/${retourExperience.slug}`}
     >
       <div className="flex w-full h-36">
@@ -28,7 +28,7 @@ export default function RetourExperienceReducedVerticalCard({
         />
       </div>
       <div className="px-3 pt-6 pb-4 flex flex-col grow">
-        <div className={"text-sm font-bold text-dsfr-text-little-grey text-blue-hover mb-4"}>
+        <div className={"text-sm font-bold text-dsfr-text-title-grey text-blue-hover mb-4"}>
           {retourExperience.titre}
         </div>
         <div className={"mt-auto"}>
