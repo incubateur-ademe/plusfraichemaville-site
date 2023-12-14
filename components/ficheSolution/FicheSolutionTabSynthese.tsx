@@ -21,10 +21,10 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           )}
-          <div className="text-dsfr-text-little-grey font-bold text-[1.375rem] mb-4">
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
             {ficheSolution.description_courte}
           </div>
-          <CmsRichText label={ficheSolution.description} className="text-dsfr-text-little-grey" />
+          <CmsRichText label={ficheSolution.description} className="text-dsfr-text-title-grey" />
         </div>
         <div className="w-full md:w-72 flex-none md:border-l border-dsfr-border-default-grey md:pl-6 ">
           <FicheSolutionInfoComparatif
@@ -53,29 +53,29 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
       <div className="flex flex-col md:flex-row gap-8">
         {ficheSolution.contexte_description && (
           <div>
-            <div className="text-dsfr-text-little-grey font-bold text-[1.375rem] mb-4">
+            <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
               {ficheSolution.contexte_titre}
             </div>
-            <CmsRichText label={ficheSolution.contexte_description} className="text-dsfr-text-little-grey" />
+            <CmsRichText label={ficheSolution.contexte_description} className="text-dsfr-text-title-grey" />
           </div>
         )}
         <hr className="pb-1 mt-1 md:hidden" />
         {ficheSolution.rafraichissement_attendu_description && (
           <div>
-            <div className="text-dsfr-text-little-grey font-bold text-[1.375rem] mb-4">Rafraîchissement attendu</div>
+            <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Rafraîchissement attendu</div>
             <CmsRichText
               label={ficheSolution.rafraichissement_attendu_description}
-              className="text-dsfr-text-little-grey"
+              className="text-dsfr-text-title-grey"
             />
           </div>
         )}
       </div>
       {ficheSolution.solution_retour_experience.length > 0 && (
         <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">
-          <div className="text-dsfr-text-little-grey font-bold text-[1.375rem] mb-4">
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
             Découvrir les projets réalisés
           </div>
-          <div className="text-dsfr-text-little-grey">
+          <div className="text-dsfr-text-title-grey">
             Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
           </div>
           <div className="flex flex-row gap-8 overflow-x-auto">
@@ -91,8 +91,8 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
       )}
       {ficheSolution.fiches_solutions_complementaires.length > 0 && (
         <div className="bg-dsfr-background-alt-blue-france rounded-2xl pl-6 pt-10 mt-12">
-          <div className="text-dsfr-text-little-grey font-bold text-[1.375rem] mb-4">Solutions complémentaires</div>
-          <div className="text-dsfr-text-little-grey">
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Solutions complémentaires</div>
+          <div className="text-dsfr-text-title-grey">
             Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
           </div>
           <div className="flex flex-row gap-8 overflow-x-auto">

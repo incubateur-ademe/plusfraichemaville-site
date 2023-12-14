@@ -9,7 +9,7 @@ import entretienIcon from "../../public/images/fiches-solutions/entretien.svg";
 export default function FicheSolutionTabMateriaux({ ficheSolution }: { ficheSolution: FicheSolution }) {
   return (
     <div>
-      <div className="text-dsfr-text-little-grey font-bold text-[1.75rem] mb-8">Matériaux et coûts</div>
+      <div className="text-dsfr-text-title-grey font-bold text-[1.75rem] mb-8">Matériaux et coûts</div>
       {ficheSolution.materiaux.length > 0 ? (
         <>
           <hr className="p-0 h-[1px]" />
@@ -24,7 +24,7 @@ export default function FicheSolutionTabMateriaux({ ficheSolution }: { ficheSolu
                     className={"object-cover rounded-2xl"}
                   />
                 </div>
-                <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-little-grey">
+                <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-title-grey">
                   <div className="flex items-center gap-6 mb-4">
                     <div className="w-28 h-28 relative flex md:hidden flex-none">
                       <Image
@@ -55,7 +55,7 @@ export default function FicheSolutionTabMateriaux({ ficheSolution }: { ficheSolu
           ))}
         </>
       ) : (
-        <div className="text-dsfr-text-little-grey   mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
+        <div className="text-dsfr-text-title-grey   mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
       )}
       {ficheSolution.cout_minimum_entretien && ficheSolution.cout_maximum_entretien && (
         <>
@@ -64,7 +64,7 @@ export default function FicheSolutionTabMateriaux({ ficheSolution }: { ficheSolu
             <div className="w-28 h-28 relative hidden md:flex flex-none mt-8 mb-8">
               <Image fill src={entretienIcon} alt="Coût d'entretien" />
             </div>
-            <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-little-grey flex flex-col grow">
+            <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-title-grey flex flex-col grow">
               <div className="flex items-center gap-6 mb-4">
                 <div className="w-28 h-28 relative flex md:hidden flex-none">
                   <Image fill src={entretienIcon} alt="Coût d'entretien" />

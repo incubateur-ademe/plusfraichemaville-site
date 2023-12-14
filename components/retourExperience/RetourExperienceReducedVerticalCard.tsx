@@ -28,7 +28,7 @@ export default function RetourExperienceReducedVerticalCard({
         />
       </div>
       <div className="px-3 pt-6 pb-4 flex flex-col grow">
-        <div className={"text-sm font-bold text-dsfr-text-little-grey text-blue-hover mb-4"}>
+        <div className={"text-sm font-bold text-dsfr-text-title-grey text-blue-hover mb-4"}>
           {retourExperience.titre}
         </div>
         <div className={"mt-auto"}>
