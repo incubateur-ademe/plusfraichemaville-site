@@ -36,7 +36,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
             <AideDecisionBreadcrumbs
               currentPageLabel={aideDecisionEtape.nom}
               historique={historique}
-              className="hidden md:block"
+              className="hidden md:block md:mt-60"
             />
           )}
           <div className="grow overflow-x-auto">
@@ -61,7 +61,10 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                     ficheSolution={ficheSolution}
                     aideDecisionFirstStepName={(historique && historique[1].label) || ""}
                   >
-                    <FicheSolutionFullCard ficheSolution={ficheSolution} />
+                    <FicheSolutionFullCard
+                      ficheSolution={ficheSolution}
+                      extraUrlParams={[{ param : "etapeAideDecision", value: aideDecisionEtape.slug }]}
+                    />
                   </FicheSolutionCardWithUserInfo>
                 </li>
               ))}

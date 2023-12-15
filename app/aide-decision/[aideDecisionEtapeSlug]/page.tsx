@@ -32,7 +32,7 @@ export default async function Page({
             <AideDecisionBreadcrumbs
               currentPageLabel={currentStep.nom}
               historique={historique}
-              className="hidden md:block"
+              className="hidden md:block md:mt-60"
             />
           )}
           <div className="grow">

@@ -6,13 +6,18 @@ import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 
-export default function FicheSolutionFullCard({ ficheSolution }: { ficheSolution: FicheSolution }) {
+export default function FicheSolutionFullCard({
+  ficheSolution,
+  extraUrlParams,
+}: {
+  ficheSolution: FicheSolution;
+  extraUrlParams?: { param: string; value: string }[];
+}) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
+  let url = `/fiche-solution/${ficheSolution.slug}`;
+  url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
   return (
-    <Link
-      className="flex w-[17.5rem] flex-col pfmv-card mr-4 ml-4 md:ml-0"
-      href={`/fiche-solution/${ficheSolution.slug}`}
-    >
+    <Link className="flex w-[17.5rem] flex-col pfmv-card mr-4 ml-4 md:ml-0" href={url}>
       <div className="flex w-full h-52">
         <Image
           width={450}

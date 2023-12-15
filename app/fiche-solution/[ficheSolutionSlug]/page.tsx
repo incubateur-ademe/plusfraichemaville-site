@@ -9,9 +9,18 @@ import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionT
 import FicheSolutionTabMiseEnOeuvre from "@/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
 import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
 import ButtonShareFicheSolution from "@/components/ficheSolution/ButtonShareFicheSolution";
+import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
+import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 
-export default async function FicheSolution({ params }: { params: { ficheSolutionSlug: string } }) {
+export default async function FicheSolution({
+  params,
+  searchParams,
+}: {
+  params: { ficheSolutionSlug: string };
+  searchParams: { etapeAideDecision: string | undefined };
+}) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
+  const historique = await getAideDecisionHistoryBySlug(searchParams?.etapeAideDecision, true);
   if (ficheSolution) {
     const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
     return (
@@ -38,10 +47,17 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
         <div className="h-14 w-full bg-dsfr-background-alt-blue-france absolute" />
         <div className="fr-container flex flex-row">
           <div className="hidden md:block flex-none w-56 mt-[6.5rem]">
-            <ButtonShareFicheSolution className={"mb-4"}/>
+            {historique && (
+              <AideDecisionBreadcrumbs
+                historique={historique}
+                className="mb-16 -mt-2"
+                currentPageLabel={ficheSolution.titre}
+              />
+            )}
+            <ButtonShareFicheSolution className={"mb-4"} />
             <ButtonSaveFicheSolution
               ficheSolution={ficheSolution}
-              projectName=""
+              projectName={(historique && historique[1].label) || ""}
               className=""
               label={true}
             />

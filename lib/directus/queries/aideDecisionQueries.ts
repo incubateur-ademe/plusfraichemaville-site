@@ -51,7 +51,9 @@ export const GET_FILTERED_AIDE_DECISION_ETAPE = (
 
 export const GET_AIDE_DECISION_ETAPE_HISTORY = (aideDecisionEtapeSlug: string) => `query {
   aide_decision_etape (filter: {slug:{_eq: "${aideDecisionEtapeSlug}"}})  {
+    nom
     slug
+    image
     etape_parente_id {
       nom
       slug
@@ -94,12 +96,13 @@ export async function getAideDecisionEtapeBySlug(aideDecisionEtapeSlug: string):
 }
 
 export async function getAideDecisionHistoryBySlug(
-  aideDecisionEtapeSlug: string,
+  aideDecisionEtapeSlug?: string, includeCurrentStep = false
 ): Promise<AideDecisionEtapeHistory[] | null> {
-  const apiResponse = await directusGraphQLCall(GET_AIDE_DECISION_ETAPE_HISTORY(aideDecisionEtapeSlug));
-  if (apiResponse.aide_decision_etape?.length > 0) {
-    return getHistoryFromAideDecisionEtape(apiResponse.aide_decision_etape[0]);
-  } else {
-    return null;
+  if (aideDecisionEtapeSlug) {
+    const apiResponse = await directusGraphQLCall(GET_AIDE_DECISION_ETAPE_HISTORY(aideDecisionEtapeSlug));
+    if (apiResponse.aide_decision_etape?.length > 0) {
+      return getHistoryFromAideDecisionEtape(apiResponse.aide_decision_etape[0], includeCurrentStep);
+    }
   }
+  return null;
 }

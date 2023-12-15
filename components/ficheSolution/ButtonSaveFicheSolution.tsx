@@ -62,7 +62,7 @@ export default function ButtonSaveFicheSolution({
           ) : (
             <div
               className="flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france
-        w-8 h-8 text-white rounded-2xl absolute cursor-pointer top-2 right-6 z-40"
+         text-white rounded-2xl cursor-pointer w-8 h-8"
               onClick={changeFavorite}
             >
               <span
@@ -75,7 +75,7 @@ export default function ButtonSaveFicheSolution({
       ) : (
         <div
           className={`flex justify-center items-center bg-dsfr-text-label-blue-france ` +
-            ` h-8 text-white rounded-2xl cursor-pointer ${label && " w-32 "}`}
+            ` h-8 text-white rounded-2xl ${label ? " w-32 " : "w-8 h-8"}`}
         >
           <Oval
             height={20}
