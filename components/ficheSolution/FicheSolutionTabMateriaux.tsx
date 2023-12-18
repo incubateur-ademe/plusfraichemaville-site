@@ -77,7 +77,8 @@ export default function FicheSolutionTabMateriaux({ ficheSolution }: { ficheSolu
             </div>
             <div
               className={
-                "md:w-60 flex flex-col flex-none bg-dsfr-background-alt-blue-france text-dsfr-text-mention-grey p-6"
+                "md:w-60 flex flex-col flex-none bg-dsfr-background-action-low-blue-france " +
+                " text-dsfr-text-mention-grey p-6"
               }
             >
               <div>
