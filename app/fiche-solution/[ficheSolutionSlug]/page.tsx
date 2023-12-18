@@ -12,6 +12,7 @@ import ButtonShareFicheSolution from "@/components/ficheSolution/ButtonShareFich
 import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import FicheSolutionTabFinancements from "@/components/ficheSolution/FicheSolutionTabFinancements";
+import FicheSolutionTabOups from "@/components/ficheSolution/FicheSolutionTabOups";
 
 export default async function FicheSolution({
   params,
@@ -78,7 +79,7 @@ export default async function FicheSolution({
                 <CustomTabButton label="Financements" isSelected={false} contentId="financements-panel" />
               </li>
               <li role="presentation">
-                <CustomTabButton label="Oups" isSelected={false} contentId="tabpanel-407-panel" />
+                <CustomTabButton label="Oups !" isSelected={false} contentId="oups-panel" />
               </li>
             </ul>
             <div id="synthese-panel" className="fr-tabs__panel customPanel fr-tabs__panel--selected" role="tabpanel">
@@ -92,6 +93,9 @@ export default async function FicheSolution({
             </div>
             <div id="financements-panel" className="fr-tabs__panel customPanel" role="tabpanel">
               <FicheSolutionTabFinancements ficheSolution={ficheSolution} />
+            </div>
+            <div id="oups-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+              <FicheSolutionTabOups ficheSolution={ficheSolution} />
             </div>
           </div>
         </div>
