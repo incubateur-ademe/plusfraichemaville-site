@@ -63,7 +63,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                   >
                     <FicheSolutionFullCard
                       ficheSolution={ficheSolution}
-                      extraUrlParams={[{ param : "etapeAideDecision", value: aideDecisionEtape.slug }]}
+                      extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtape.slug }]}
                     />
                   </FicheSolutionCardWithUserInfo>
                 </li>

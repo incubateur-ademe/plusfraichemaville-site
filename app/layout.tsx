@@ -45,7 +45,7 @@ export default function RootLayout({ children }: { children: ReactElement | null
       <body>
         <DsfrProvider lang={lang}>
           <AppHeader />
-          <Toaster position="bottom-left"  />
+          <Toaster position="bottom-left" />
           <div className={`${xtra_bold.variable}`}>{children}</div>
 
           <AppFooter />

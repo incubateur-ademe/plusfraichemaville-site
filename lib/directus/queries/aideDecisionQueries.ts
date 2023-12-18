@@ -96,7 +96,8 @@ export async function getAideDecisionEtapeBySlug(aideDecisionEtapeSlug: string):
 }
 
 export async function getAideDecisionHistoryBySlug(
-  aideDecisionEtapeSlug?: string, includeCurrentStep = false
+  aideDecisionEtapeSlug?: string,
+  includeCurrentStep = false,
 ): Promise<AideDecisionEtapeHistory[] | null> {
   if (aideDecisionEtapeSlug) {
     const apiResponse = await directusGraphQLCall(GET_AIDE_DECISION_ETAPE_HISTORY(aideDecisionEtapeSlug));

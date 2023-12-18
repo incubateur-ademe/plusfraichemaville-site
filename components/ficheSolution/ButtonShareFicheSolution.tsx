@@ -11,11 +11,10 @@ export default function ButtonShareFicheSolution({ className }: { className?: st
 
   const copyCurrentUrlToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
-    toast.success('Le lien vers cette page a été copié dans votre presse papier.',{
-      id: 'clipboard',
-      duration: 5000
+    toast.success("Le lien vers cette page a été copié dans votre presse papier.", {
+      id: "clipboard",
+      duration: 5000,
     });
-
   };
   return (
     <div className={`${className}`}>

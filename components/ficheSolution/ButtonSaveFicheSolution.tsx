@@ -74,8 +74,10 @@ export default function ButtonSaveFicheSolution({
         </>
       ) : (
         <div
-          className={`flex justify-center items-center bg-dsfr-text-label-blue-france ` +
-            ` h-8 text-white rounded-2xl ${label ? " w-32 " : "w-8 h-8"}`}
+          className={
+            `flex justify-center items-center bg-dsfr-text-label-blue-france ` +
+            ` h-8 text-white rounded-2xl ${label ? " w-32 " : "w-8 h-8"}`
+          }
         >
           <Oval
             height={20}
