@@ -66,6 +66,9 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
       etapes_mise_en_oeuvre
       etapes_entretien
       point_vigilance
+      lien_aide_territoire
+      lien_fond_vert
+      aides_regionales
     }
 }`;
 

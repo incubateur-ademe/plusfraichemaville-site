@@ -13,3 +13,8 @@ export type EtapeMiseEnOeuvreFicheSolution = {
   titre: string;
   description: string;
 };
+
+export type AideRegionale = {
+  region: string;
+  description: string;
+};

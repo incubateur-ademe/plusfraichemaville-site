@@ -57,7 +57,7 @@ export default function FicheSolutionTabMiseEnOeuvre({ ficheSolution }: { ficheS
         )}
       </div>
       {ficheSolution.point_vigilance && (
-        <div className="bg-dsfr-background-alt-blue-france rounded-2xl mt-12 px-12 py-6">
+        <div className="bg-dsfr-background-action-low-blue-france rounded-2xl mt-12 px-12 py-6">
           <div className="text-lg font-bold text-dsfr-text-title-grey mb-6">Points de vigilance</div>
           <CmsRichText label={ficheSolution.point_vigilance} />
         </div>

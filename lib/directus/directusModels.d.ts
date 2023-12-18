@@ -1,4 +1,5 @@
 import {
+  AideRegionale,
   CitationRetourExperience,
   EtapeCalendrierRetourExperience,
   EtapeMiseEnOeuvreFicheSolution,
@@ -429,6 +430,7 @@ export type FicheSolution = {
   logo_partenaire?: (string & DirectusFiles) | null;
   materiaux: any[] & FicheSolutionMateriau[];
   oups: any[] & Oups[];
+  aides_regionales?: AideRegionale[] | null;
   point_vigilance?: string | null;
   rafraichissement_attendu_description?: string | null;
   slug: string;
