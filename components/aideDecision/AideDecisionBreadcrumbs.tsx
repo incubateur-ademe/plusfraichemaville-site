@@ -12,14 +12,14 @@ export default function AideDecisionBreadcrumbs({
   className?: string;
 }) {
   return (
-    <div className={`max-w-[13rem] mt-60 ${className}`}>
+    <div className={`max-w-[13rem] ${className}`}>
       {historique.map((step, index) => (
         <div className={`${styles.step}`} key={index}>
           <div className={`${styles.vStepper}`}>
             <div className={`${styles.circle} text-xs text-center`}>{index + 1}</div>
             <div className={`${styles.line}`} />
           </div>
-          <Link className={`${styles.content} bg-none hover:underline`} href={`/aide-decision/${step.slug}`}>
+          <Link className={`${styles.content} !bg-none hover:underline`} href={`/aide-decision/${step.slug}`}>
             {step.label}
           </Link>
         </div>

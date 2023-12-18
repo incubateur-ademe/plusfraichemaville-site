@@ -10,6 +10,7 @@ import { Metadata } from "next";
 import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 import localFont from "next/font/local";
 import "./globals.css";
+import { Toaster } from "react-hot-toast";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -44,7 +45,9 @@ export default function RootLayout({ children }: { children: ReactElement | null
       <body>
         <DsfrProvider lang={lang}>
           <AppHeader />
+          <Toaster position="bottom-left" />
           <div className={`${xtra_bold.variable}`}>{children}</div>
+
           <AppFooter />
         </DsfrProvider>
       </body>

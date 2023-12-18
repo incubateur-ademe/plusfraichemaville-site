@@ -10,7 +10,7 @@ export default function AideDecisionFirstStepEtapeCard({
 }) {
   return (
     <Link
-      className="bg-none w-32 h-32 flex flex-col items-center pfmv-card"
+      className="!bg-none w-32 h-32 flex flex-col items-center pfmv-card"
       href={`/aide-decision/${aideDecisionEtape.slug}`}
     >
       <div className={"text-sm text-center text-pfmv-light-grey"}>&nbsp;</div>

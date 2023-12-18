@@ -1,10 +1,10 @@
 import { AideDecisionEtapeHistory } from "@/lib/directus/queries/commonFilters";
 import { AideDecisionEtape } from "@/lib/directus/directusModels";
 
-export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionEtape) {
+export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionEtape, includeCurrentStep = false) {
   const history: AideDecisionEtapeHistory[] = [];
   let etapeParente: AideDecisionEtape | null | undefined = <AideDecisionEtape | null | undefined>(
-    aideDecisionEtape.etape_parente_id
+    (includeCurrentStep ? aideDecisionEtape : aideDecisionEtape.etape_parente_id)
   );
   while (etapeParente) {
     history.unshift(

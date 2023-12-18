@@ -27,7 +27,7 @@ export default function TypeEspaceFilter({ className }: { className?: string }) 
 
   return (
     <div className={`flex flex-row flex-wrap ${className}`}>
-      <button className={`bg-none ${buttonStyle()}`} onClick={() => clearTypeEspaceFilter()}>
+      <button className={`!bg-none ${buttonStyle()}`} onClick={() => clearTypeEspaceFilter()}>
         <div className={"w-16 md:w-28 flex flex-col items-center"}>
           <Image width={50} height={50} src="/images/espaces/espace-icone-tous-espaces.svg" alt="Tous espaces" />
           <div className={"text-sm text-center"}>Tous espaces</div>

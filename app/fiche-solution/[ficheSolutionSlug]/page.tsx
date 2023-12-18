@@ -7,18 +7,29 @@ import CustomTabButton from "@/components/common/CustomTabButton";
 import FicheSolutionTabSynthese from "@/components/ficheSolution/FicheSolutionTabSynthese";
 import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionTabMateriaux";
 import FicheSolutionTabMiseEnOeuvre from "@/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
+import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
+import ButtonShareFicheSolution from "@/components/ficheSolution/ButtonShareFicheSolution";
+import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
+import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 
-export default async function FicheSolution({ params }: { params: { ficheSolutionSlug: string } }) {
+export default async function FicheSolution({
+  params,
+  searchParams,
+}: {
+  params: { ficheSolutionSlug: string };
+  searchParams: { etapeAideDecision: string | undefined };
+}) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
+  const historique = await getAideDecisionHistoryBySlug(searchParams?.etapeAideDecision, true);
   if (ficheSolution) {
     const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
     return (
       <>
-        <div className={"relative h-48 md:h-96 greenSolutionBanner"}>
+        <div className={`relative h-48 md:h-96 ${typeSolution?.bannerClass}`}>
           <Image
             width={1200}
             height={500}
-            className={`w-full h-48 md:h-96 object-cover relative -z-10 ${typeSolution?.bannerClass}`}
+            className={`w-full h-48 md:h-96 object-cover relative -z-10 `}
             src={getDirectusImageUrl(ficheSolution.image_principale)}
             alt={ficheSolution?.titre || "image titre"}
           />
@@ -34,8 +45,24 @@ export default async function FicheSolution({ params }: { params: { ficheSolutio
           </div>
         </div>
         <div className="h-14 w-full bg-dsfr-background-alt-blue-france absolute" />
-        <div className="fr-container">
-          <div className="fr-tabs before:!shadow-none !shadow-none md:ml-[12rem]">
+        <div className="fr-container flex flex-row">
+          <div className="hidden md:block flex-none w-56 mt-[6.5rem]">
+            {historique && (
+              <AideDecisionBreadcrumbs
+                historique={historique}
+                className="mb-16 -mt-2"
+                currentPageLabel={ficheSolution.titre}
+              />
+            )}
+            <ButtonShareFicheSolution className={"mb-4"} />
+            <ButtonSaveFicheSolution
+              ficheSolution={ficheSolution}
+              projectName={(historique && historique[1].label) || ""}
+              className=""
+              label={true}
+            />
+          </div>
+          <div className="fr-tabs before:!shadow-none !shadow-none">
             <ul className="fr-tabs__list m-0 p-0 h-14" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
                 <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" />
