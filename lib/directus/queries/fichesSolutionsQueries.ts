@@ -69,6 +69,17 @@ export const GET_FICHE_SOLUTION_COMPLETE_DATA = (filterStatus?: DirectusComplete
       lien_aide_territoire
       lien_fond_vert
       aides_regionales
+      oups {
+        id
+        titre
+        description
+        solutions_reparatrices {
+          id
+          fiche_solution_id {
+            ...FicheSolutionCardInfo
+          }
+        }
+      }
     }
 }`;
 
