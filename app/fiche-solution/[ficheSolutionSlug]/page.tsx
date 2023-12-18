@@ -25,11 +25,11 @@ export default async function FicheSolution({
     const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
     return (
       <>
-        <div className={"relative h-48 md:h-96 greenSolutionBanner"}>
+        <div className={`relative h-48 md:h-96 ${typeSolution?.bannerClass}`}>
           <Image
             width={1200}
             height={500}
-            className={`w-full h-48 md:h-96 object-cover relative -z-10 ${typeSolution?.bannerClass}`}
+            className={`w-full h-48 md:h-96 object-cover relative -z-10 `}
             src={getDirectusImageUrl(ficheSolution.image_principale)}
             alt={ficheSolution?.titre || "image titre"}
           />
