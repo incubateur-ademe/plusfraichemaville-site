@@ -20,9 +20,7 @@ export default function BookmarkedFicheSolutionByProject({
         <ul className="flex list-none flex-wrap justify-center p-0">
           {ficheSolutions.map((ficheSolution) => (
             <li key={ficheSolution.id} className="m-2 w-72 flex">
-              <FicheSolutionCardWithUserInfo ficheSolution={ficheSolution} aideDecisionFirstStepName={projectName}>
-                <FicheSolutionFullCard ficheSolution={ficheSolution} />
-              </FicheSolutionCardWithUserInfo>
+              <FicheSolutionCardWithUserInfo ficheSolution={ficheSolution} projectName={projectName} />
             </li>
           ))}
         </ul>

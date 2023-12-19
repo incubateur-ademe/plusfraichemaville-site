@@ -1,25 +1,29 @@
 import { FicheSolution } from "@/lib/directus/directusModels";
 import React from "react";
 import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
+import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 
 export default function FicheSolutionCardWithUserInfo({
   ficheSolution,
-  aideDecisionFirstStepName,
+  projectName,
+  extraUrlParams,
   className,
-  children,
 }: {
   ficheSolution: FicheSolution;
-  aideDecisionFirstStepName: string;
+  projectName: string;
+  extraUrlParams?: { param: string; value: string }[];
   className?: string;
-  children: React.ReactNode;
 }) {
   return (
     <div className={`relative flex ${className}`}>
-      {children}
+      <FicheSolutionFullCard
+        ficheSolution={ficheSolution}
+        extraUrlParams={extraUrlParams}
+      />
       <ButtonSaveFicheSolution
         ficheSolution={ficheSolution}
         label={false}
-        projectName={aideDecisionFirstStepName}
+        projectName={projectName}
         className={"flex justify-center items-center absolute top-2 right-6 z-40"}
       />
     </div>

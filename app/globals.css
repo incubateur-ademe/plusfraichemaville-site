@@ -56,7 +56,7 @@
 .pfmv-card,
 .fiche-solution-small-vertical-card {
   border-radius: 0.9375rem;
-  background: #fff;
+  background: #fff !important;
 }
 
 .pfmv-card {

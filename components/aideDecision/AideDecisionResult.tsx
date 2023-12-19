@@ -1,7 +1,6 @@
 import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 import { AideDecisionEtape, FicheSolution, RetourExperience } from "@/lib/directus/directusModels";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import AideDecisionSortFilter from "@/components/filters/AideDecisionSortFilter";
 import { getAideDecisionSortFieldFromCode } from "@/helpers/aideDecisionSortFilter";
@@ -59,13 +58,9 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                 <li key={ficheSolution.id} className="m-2 flex">
                   <FicheSolutionCardWithUserInfo
                     ficheSolution={ficheSolution}
-                    aideDecisionFirstStepName={(historique && historique[1].label) || ""}
-                  >
-                    <FicheSolutionFullCard
-                      ficheSolution={ficheSolution}
-                      extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtape.slug }]}
-                    />
-                  </FicheSolutionCardWithUserInfo>
+                    projectName={(historique && historique[1].label) || ""}
+                    extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtape.slug }]}
+                  />
                 </li>
               ))}
             </ul>

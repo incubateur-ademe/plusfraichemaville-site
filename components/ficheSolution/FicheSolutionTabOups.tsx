@@ -5,7 +5,6 @@ import Image from "next/image";
 import Highlight from "@codegouvfr/react-dsfr/Highlight";
 import CmsRichText from "@/components/common/CmsRichText";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 
 export default function FicheSolutionTabOups({ ficheSolution }: { ficheSolution: FicheSolution }) {
   return (
@@ -37,10 +36,8 @@ export default function FicheSolutionTabOups({ ficheSolution }: { ficheSolution:
                           ficheSolution={fs}
                           key={fs.id}
                           className={"flex-none mb-12"}
-                          aideDecisionFirstStepName={""}
-                        >
-                          <FicheSolutionFullCard ficheSolution={fs} />
-                        </FicheSolutionCardWithUserInfo>
+                          projectName=""
+                        />
                       </li>
                     ))}
                   </ul>
