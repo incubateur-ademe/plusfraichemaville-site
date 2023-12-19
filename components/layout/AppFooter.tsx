@@ -5,7 +5,7 @@ export default function AppFooter() {
   return (
     <Footer
       className="pt-6"
-      accessibility={"fully compliant"}
+      accessibility={"non compliant"}
       operatorLogo={{
         alt: "ADEME",
         imgUrl: "/images/logo-ademe.png",
