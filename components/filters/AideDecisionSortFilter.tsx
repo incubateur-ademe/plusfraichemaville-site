@@ -7,7 +7,7 @@ export default function AideDecisionSortFilter({ className }: { className?: stri
   const { setAideDecisionSortField, isAideDecisionSortFieldSelected } = useAideDecisionSortFilter();
 
   return (
-    <div className={`flex flex-row flex-wrap shrink justify-center md:justify-start ${className}`}>
+    <div className={`flex flex-row flex-wrap shrink justify-center md:justify-start gap-6 ${className}`}>
       {ALL_AIDE_DECISION_SORT_FIELD.map((sortField) => (
         <FilterButton
           key={sortField.code}

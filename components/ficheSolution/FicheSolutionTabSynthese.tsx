@@ -6,7 +6,6 @@ import CmsRichText from "@/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 import RetourExperienceReducedVerticalCard from "@/components/retourExperience/RetourExperienceReducedVerticalCard";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 
 export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolution: FicheSolution }) {
@@ -28,7 +27,7 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
         </div>
         <div className="w-full md:w-72 flex-none md:border-l border-dsfr-border-default-grey md:pl-6 ">
           <FicheSolutionInfoComparatif
-            temperatureClass="text-[3.125rem]"
+            temperatureClass="text-[2.5rem] leading-[2.5rem] "
             ficheSolution={ficheSolution}
             className={"text-sm"}
           />
@@ -76,12 +75,12 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
           <div className="text-dsfr-text-title-grey">
             Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
           </div>
-          <div className="flex flex-row gap-8 overflow-x-auto">
+          <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
             {ficheSolution.solution_retour_experience.map((rex) => (
               <RetourExperienceReducedVerticalCard
                 key={rex.retour_experience.id}
                 retourExperience={rex.retour_experience}
-                className={"w-[17rem] flex-none mt-8 mb-12"}
+                className={"w-72 flex-none mt-8 mb-12"}
               />
             ))}
           </div>
@@ -93,12 +92,12 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
           <div className="text-dsfr-text-title-grey">
             Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
           </div>
-          <div className="flex flex-row gap-8 overflow-x-auto">
+          <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
             {ficheSolution.fiches_solutions_complementaires.map((fs) => (
               <FicheSolutionCardWithUserInfo
                 ficheSolution={fs.related_fiche_solution_id}
                 key={fs.related_fiche_solution_id.id}
-                className={"w-72 flex-none mt-8 mb-12 ml-1"}
+                className={"flex-none mt-8 mb-12"}
                 projectName=""
               />
             ))}

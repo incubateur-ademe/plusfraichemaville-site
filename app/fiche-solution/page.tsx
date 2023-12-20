@@ -7,7 +7,7 @@ export default async function Posts() {
     <div className="fr-container">
       <ul className="flex list-none flex-wrap justify-center p-0">
         {allFichesSolutions.map((ficheSolution) => (
-          <li key={ficheSolution.id} className="m-2 w-80 flex">
+          <li key={ficheSolution.id} className="flex">
             <FicheSolutionFullCard ficheSolution={ficheSolution} />
           </li>
         ))}

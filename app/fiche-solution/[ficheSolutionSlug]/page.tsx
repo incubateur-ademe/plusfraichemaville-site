@@ -39,7 +39,7 @@ export default async function FicheSolution({
             <h1
               className={
                 "mt-8 md:fr-container absolute text-white text-[1.375rem] md:text-[2.625rem] " +
-                " md:ml-[11rem] bottom-0 md:bottom-4 font-bold leading-normal"
+                " md:ml-56 bottom-0 md:bottom-4 font-bold leading-normal"
               }
             >
               {ficheSolution.titre}

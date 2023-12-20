@@ -15,10 +15,10 @@ export default function RetourExperienceReducedVerticalCard({
 }) {
   return (
     <Link
-      className={`flex w-52 flex-col pfmv-card mr-4 ml-4 md:ml-1 min-h-[26rem] ${className}`}
+      className={`flex w-52 flex-col pfmv-card min-h-[26rem] ${className}`}
       href={`/projet/${retourExperience.slug}`}
     >
-      <div className="flex w-full h-36">
+      <div className="flex w-full h-40">
         <Image
           width={450}
           height={300}
@@ -27,18 +27,18 @@ export default function RetourExperienceReducedVerticalCard({
           className={"w-full object-cover rounded-t-2xl"}
         />
       </div>
-      <div className="px-3 pt-6 pb-4 flex flex-col grow">
-        <div className={"text-sm font-bold text-dsfr-text-title-grey text-blue-hover mb-4"}>
+      <div className="p-6 flex flex-col grow">
+        <div className={"text-lg font-bold text-dsfr-text-title-grey text-blue-hover mb-3"}>
           {retourExperience.titre}
         </div>
-        <div className={"mt-auto"}>
-          <Tag small={true} className={"mb-8"}>
-            {getRegionLabelFromCode(retourExperience.region)}
-          </Tag>
-          <div className="text-dsfr-text-mention-grey text-[0.625rem]">
+        <Tag small={true} className={"mb-8"}>
+          {getRegionLabelFromCode(retourExperience.region)}
+        </Tag>
+        <div className={"mt-auto text-dsfr-text-mention-grey text-xs"}>
+          <div>
             Climat actuel : <b>{retourExperience.climat_actuel}</b>
           </div>
-          <div className="text-dsfr-text-mention-grey text-[0.625rem]">
+          <div>
             Climat futur : <b>{retourExperience.climat_futur}</b>
           </div>
         </div>

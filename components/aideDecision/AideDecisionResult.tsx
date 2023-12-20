@@ -52,10 +52,10 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
             <h1 className={"mb-4 pt-10 fr-h4 text-center md:text-left"}>
               Découvrez les solutions proposées pour votre recherche
             </h1>
-            <AideDecisionSortFilter />
-            <ul className="flex list-none flex-wrap justify-center md:justify-start p-0">
+            <AideDecisionSortFilter className="mb-9"/>
+            <ul className="flex list-none flex-wrap justify-center md:justify-start p-0 gap-6">
               {sortedFichesSolutions.map((ficheSolution) => (
-                <li key={ficheSolution.id} className="m-2 flex">
+                <li key={ficheSolution.id} className="flex">
                   <FicheSolutionCardWithUserInfo
                     ficheSolution={ficheSolution}
                     projectName={(historique && historique[1].label) || ""}

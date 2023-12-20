@@ -29,9 +29,9 @@ export default function FicheSolutionTabOups({ ficheSolution }: { ficheSolution:
               {oups.solutions_reparatrices.length > 0 && (
                 <>
                   <div className="text-[1.375rem] font-bold mb-4 mt-8">Fiches associées</div>
-                  <ul className="flex list-none flex-wrap justify-center md:justify-start p-0">
+                  <ul className="flex list-none flex-wrap justify-center md:justify-start pl-2 gap-6">
                     {oups.solutions_reparatrices.slice(0, 2).map(({ fiche_solution_id: fs }) => (
-                      <li key={fs.id} className="mx-3 flex">
+                      <li key={fs.id} className="flex">
                         <FicheSolutionCardWithUserInfo
                           ficheSolution={fs}
                           key={fs.id}

@@ -13,7 +13,7 @@ export default function FilterButton({
 }) {
   const buttonStyle = (code: string) => {
     const baseStyle =
-      " rounded-3xl px-4 py-2 bg-white mr-2 md:mr-4 mb-3 " +
+      " rounded-3xl px-4 py-2 bg-white " +
       " border-solid border-white border-[1px] hover:text-dsfr-text-label-blue-france " +
       " hover:border-dsfr-text-label-blue-france hover:!bg-white ";
     return isSelected(code)

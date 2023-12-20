@@ -17,7 +17,7 @@ export default function FicheSolutionFullCard({
   let url = `/fiche-solution/${ficheSolution.slug}`;
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
   return (
-    <Link className="flex w-[17.5rem] flex-col pfmv-card mr-4 ml-4 md:ml-0" href={url}>
+    <Link className="flex w-72 flex-col pfmv-card md:ml-0" href={url}>
       <div className="flex w-full h-52">
         <Image
           width={450}
@@ -41,7 +41,7 @@ export default function FicheSolutionFullCard({
         <div className={"mt-auto"}>
           <div>
             <FicheSolutionInfoComparatif
-              temperatureClass="text-4xl"
+              temperatureClass="text-[2rem] leading-8"
               ficheSolution={ficheSolution}
               className={"text-xs"}
             />

@@ -144,7 +144,8 @@
   height: 100%;
   padding: 1rem 1.5rem 1rem 1.5rem;
   font-size: 0.875rem;
-  text-wrap: nowrap;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .customPanel {
