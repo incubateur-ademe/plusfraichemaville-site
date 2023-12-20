@@ -1,7 +1,6 @@
 import { FicheSolution } from "@/lib/directus/directusModels";
 import { useApi } from "@/hooks/useApi";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 
 export default function BookmarkedFicheSolutionByProject({
   projectName,

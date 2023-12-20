@@ -16,10 +16,7 @@ export default function FicheSolutionCardWithUserInfo({
 }) {
   return (
     <div className={`relative flex ${className}`}>
-      <FicheSolutionFullCard
-        ficheSolution={ficheSolution}
-        extraUrlParams={extraUrlParams}
-      />
+      <FicheSolutionFullCard ficheSolution={ficheSolution} extraUrlParams={extraUrlParams} />
       <ButtonSaveFicheSolution
         ficheSolution={ficheSolution}
         label={false}

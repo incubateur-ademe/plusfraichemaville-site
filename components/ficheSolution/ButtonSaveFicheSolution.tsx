@@ -86,17 +86,13 @@ export default function ButtonSaveFicheSolution({
           >
             <div>Retrouvez toutes vos solutions mises en favoris dans votre espace Projet.</div>
             <div className="mt-6">
-              <Button
-                className={`rounded-3xl text-sm mr-6`}
-                onClick={() => modal.close()}
-                size="small"
-              >
+              <Button className={`rounded-3xl text-sm mr-6`} onClick={() => modal.close()} size="small">
                 Continuer ma lecture
               </Button>
               <Button
                 priority="secondary"
                 className={`rounded-3xl text-sm`}
-                linkProps={ { href: "/mon-projet/favoris", target: "_self" }}
+                linkProps={{ href: "/mon-projet/favoris", target: "_self" }}
                 size="small"
               >
                 Aller sur mon espace projet
