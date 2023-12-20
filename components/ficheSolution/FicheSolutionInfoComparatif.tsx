@@ -20,7 +20,7 @@ export default function FicheSolutionInfoComparatif({
         <div className="mr-4 mt-auto text-dsfr-text-mention-grey">Baisse maximale de la température de l{"'"}air</div>
         <div className="float-right text-right">
           <div className={`fr-text--bold text-dsfr-text-label-blue-france ${temperatureClass}`}>
-            {`-${ficheSolution.baisse_temperature}°C`}
+            {`-${ficheSolution.baisse_temperature?.toLocaleString("fr")}°C`}
           </div>
         </div>
       </div>
