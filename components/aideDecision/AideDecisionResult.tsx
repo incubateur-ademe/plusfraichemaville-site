@@ -26,7 +26,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
     const relatedRetourExperiences: RetourExperience[] = sortedFichesSolutions
       .flatMap((fs) => fs.solution_retour_experience?.map((sol) => sol.retour_experience))
       .filter((v, i, a) => a.findIndex((v2) => v2.id === v.id) === i)
-      .slice(0, 4);
+      .slice(0, 3);
 
     return (
       <div className={"fr-container"}>
@@ -53,7 +53,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
               Découvrez les solutions proposées pour votre recherche
             </h1>
             <AideDecisionSortFilter className="mb-9"/>
-            <ul className="flex list-none flex-wrap justify-center md:justify-start p-0 gap-6">
+            <ul className="flex list-none flex-wrap justify-center md:justify-start gap-6 pl-2">
               {sortedFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.id} className="flex">
                   <FicheSolutionCardWithUserInfo
@@ -66,12 +66,12 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
             </ul>
             {relatedRetourExperiences.length > 0 && (
               <>
-                <h1 className={"mb-4 mt-16 fr-h4 text-center md:text-left"}>
+                <h1 className={"mb-6 mt-16 fr-h4 text-center md:text-left"}>
                   Découvrez les projets réalisés pour les solutions proposées
                 </h1>
-                <ul className="flex list-none overflow-x-auto md:justify-start p-0">
+                <ul className="flex list-none overflow-x-auto md:justify-start pt-2 gap-6 pl-2">
                   {relatedRetourExperiences.map((rex) => (
-                    <li key={rex.id} className="m-2 flex">
+                    <li key={rex.id} className="flex">
                       <RetourExperienceReducedVerticalCard retourExperience={rex} />
                     </li>
                   ))}

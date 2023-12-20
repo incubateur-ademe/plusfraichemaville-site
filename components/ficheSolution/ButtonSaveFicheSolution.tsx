@@ -11,6 +11,12 @@ import {
 } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { Oval } from "react-loader-spinner";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { createModal } from "@codegouvfr/react-dsfr/Modal";
+
+const modal = createModal({
+  id: "bookmark-modal",
+  isOpenedByDefault: false,
+});
 
 export default function ButtonSaveFicheSolution({
   ficheSolution,
@@ -45,8 +51,10 @@ export default function ButtonSaveFicheSolution({
     } else {
       setBookmarkedFichesSolutions(addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolution.id, projectName));
       setIsBookmarked(true);
+      modal.open();
     }
   };
+
   return (
     <div className={`${className}`}>
       {isClient ? (
@@ -71,6 +79,30 @@ export default function ButtonSaveFicheSolution({
               />
             </div>
           )}
+          <modal.Component
+            title="Solution sauvegardée dans mon espace Projet"
+            iconId="fr-icon-arrow-right-line"
+            size="large"
+          >
+            <div>Retrouvez toutes vos solutions mises en favoris dans votre espace Projet.</div>
+            <div className="mt-6">
+              <Button
+                className={`rounded-3xl text-sm mr-6`}
+                onClick={() => modal.close()}
+                size="small"
+              >
+                Continuer ma lecture
+              </Button>
+              <Button
+                priority="secondary"
+                className={`rounded-3xl text-sm`}
+                linkProps={ { href: "/mon-projet/favoris", target: "_self" }}
+                size="small"
+              >
+                Aller sur mon espace projet
+              </Button>
+            </div>
+          </modal.Component>
         </>
       ) : (
         <div
