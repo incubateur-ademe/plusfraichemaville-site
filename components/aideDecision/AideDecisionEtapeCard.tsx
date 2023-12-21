@@ -15,7 +15,7 @@ export default function AideDecisionEtapeCard({ aideDecisionEtape }: { aideDecis
           height={300}
           src={getDirectusImageUrl(aideDecisionEtape.image, DIRECTUS_IMAGE_KEY_SIZE.aideDecisionCard)}
           alt={aideDecisionEtape.nom || ""}
-          className={"w-full object-cover rounded-l-2xl md:rounded-bl-none md:rounded-t-2xl"}
+          className={"w-full h-full object-cover rounded-l-2xl md:rounded-bl-none md:rounded-t-2xl"}
         />
       </div>
       <div className="m-4 max-w-[11rem]">

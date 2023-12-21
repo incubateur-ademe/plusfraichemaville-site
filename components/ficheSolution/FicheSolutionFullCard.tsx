@@ -24,7 +24,7 @@ export default function FicheSolutionFullCard({
           height={300}
           src={getDirectusImageUrl(ficheSolution.image_principale, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
           alt={ficheSolution.titre}
-          className={"w-full object-cover rounded-t-2xl"}
+          className={"w-full h-full object-cover rounded-t-2xl"}
         />
       </div>
       <div className="px-6 pt-6 pb-4 flex flex-col grow">
