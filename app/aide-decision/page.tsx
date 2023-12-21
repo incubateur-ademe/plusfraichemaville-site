@@ -1,9 +1,6 @@
-// Has to put force-dynamic while https://github.com/vercel/next.js/issues/56018 is not fixed
 import AideDecisionFirstStepEtapeCard from "@/components/aideDecision/AideDecisionFirstStepCard";
 import { getAideDecisionFirstSteps } from "@/lib/directus/queries/aideDecisionQueries";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
-
-export const dynamic = "force-dynamic";
 
 export default async function Posts() {
   const aideDecisionFirstSteps = await getAideDecisionFirstSteps();

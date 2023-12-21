@@ -1,8 +1,5 @@
-// Has to put force-dynamic while https://github.com/vercel/next.js/issues/56018 is not fixed
 import Image from "next/image";
 import Button from "@codegouvfr/react-dsfr/Button";
-
-export const dynamic = "force-dynamic";
 
 export default function Home() {
   return (
