@@ -13,8 +13,13 @@ import { Oval } from "react-loader-spinner";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 
-const modal = createModal({
+const modalFromIcon = createModal({
   id: "bookmark-modal",
+  isOpenedByDefault: false,
+});
+
+const modalFromButton = createModal({
+  id: "bookmark-label-modal",
   isOpenedByDefault: false,
 });
 
@@ -43,6 +48,8 @@ export default function ButtonSaveFicheSolution({
   useEffect(() => {
     setIsClient(true);
   }, []);
+
+  const modal = label ? modalFromButton : modalFromIcon;
 
   const changeFavorite = () => {
     if (isBookmarked) {
