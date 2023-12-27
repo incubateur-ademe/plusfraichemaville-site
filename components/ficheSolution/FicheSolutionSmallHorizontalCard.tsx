@@ -6,7 +6,7 @@ import React from "react";
 import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 
-export default function FicheSolutionSmallVerticalCard({
+export default function FicheSolutionSmallHorizontalCard({
   ficheSolution,
   className,
 }: {

@@ -6,7 +6,7 @@ import { getRegionLabelFromCode } from "@/helpers/regions";
 import Link from "next/link";
 import React from "react";
 
-export default function RetourExperienceReducedVerticalCard({
+export default function RetourExperienceCard({
   retourExperience,
   className,
 }: {
