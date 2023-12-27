@@ -14,6 +14,7 @@ export default function TypeSolutionFilter({ className }: { className?: string }
 
   return (
     <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink ${className}`}>
+      <div className="text-sm text-dsfr-text-mention-grey mb-4">Types de solution</div>
       {ALL_TYPES_SOLUTION.map((typeSolution) => (
         <button
           key={typeSolution.code}
