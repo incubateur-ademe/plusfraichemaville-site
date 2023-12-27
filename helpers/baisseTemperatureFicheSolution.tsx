@@ -1,5 +1,5 @@
 type BaisseTemperatureFicheSolution = {
-  code:string;
+  code: string;
   threshold: number;
   label: string;
 };

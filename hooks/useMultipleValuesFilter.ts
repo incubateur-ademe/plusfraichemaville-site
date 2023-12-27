@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-export const useMultipleValuesFilter = (filterName : string) => {
+export const useMultipleValuesFilter = (filterName: string) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -33,8 +33,7 @@ export const useMultipleValuesFilter = (filterName : string) => {
     router.push(pathname + "?" + params.toString(), { scroll: false });
   }, [pathname, router, searchParams]);
 
-  const isFilterCodeSelected = (filterCode: string) =>
-    searchParams.get(filterName)?.split(",").includes(filterCode);
+  const isFilterCodeSelected = (filterCode: string) => searchParams.get(filterName)?.split(",").includes(filterCode);
 
   return { changeFilter, clearFilter, isFilterCodeSelected };
 };
