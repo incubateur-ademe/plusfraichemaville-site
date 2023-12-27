@@ -1,9 +1,9 @@
 import { getAllFichesSolutions } from "@/lib/directus/queries/fichesSolutionsQueries";
-import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
 import TypeEspaceFilter from "@/components/filters/TypeEspaceFilter";
 import TypeSolutionFilter from "@/components/filters/TypeSolutionFilter";
 import BaisseTemperatureFilter from "@/components/filters/BaisseTemperatureFilter";
 import { getBaisseTemperatureFicheSolutionFromTemperature } from "@/helpers/baisseTemperatureFicheSolution";
+import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 
 export default async function FichesSolutions({
   searchParams,
@@ -42,7 +42,7 @@ export default async function FichesSolutions({
           <ul className="flex flex-wrap justify-center gap-6">
             {filteredFichesSolutions.map((ficheSolution) => (
               <li key={ficheSolution.id} className="flex">
-                <FicheSolutionFullCard ficheSolution={ficheSolution} />
+                <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution} />
               </li>
             ))}
           </ul>
