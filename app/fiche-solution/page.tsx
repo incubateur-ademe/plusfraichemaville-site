@@ -6,12 +6,20 @@ import TypeSolutionFilter from "@/components/filters/TypeSolutionFilter";
 export default async function FichesSolutions({
   searchParams,
 }: {
-  searchParams: { espaceFilter: string | undefined; potentielRafraichissement: string | undefined };
+  searchParams: {
+    espaceFilter: string | undefined;
+    typeSolutionFilter: string | undefined;
+    potentielRafraichissement: string | undefined;
+  };
 }) {
   const allFichesSolutions = await getAllFichesSolutions();
-  const filteredFichesSolutions = allFichesSolutions.filter(
-    (fs) => !searchParams.espaceFilter || fs.types_espace?.includes(searchParams.espaceFilter),
-  );
+  const filteredFichesSolutions = allFichesSolutions
+    .filter((fs) => !searchParams.espaceFilter || fs.types_espace?.includes(searchParams.espaceFilter))
+    .filter(
+      (fs) =>
+        !searchParams.typeSolutionFilter ||
+        (fs.type_solution && searchParams.typeSolutionFilter?.split(",").includes(fs.type_solution)),
+    );
   return (
     <div className="fr-container">
       <TypeEspaceFilter className="justify-center mb-8 mt-8" />
