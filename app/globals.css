@@ -164,6 +164,10 @@
   color: var(--text-disabled-grey);
 }
 
+.typeSolutionSoftIcon {
+  color: #D6A23E;
+}
+
 .bigIconAccordion::after {
   --icon-size: 1.5rem;
 }

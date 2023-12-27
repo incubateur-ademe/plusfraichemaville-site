@@ -1,7 +1,4 @@
 import React from "react";
-import solutionDouceIcon from "../public/images/fiches-solutions/solution-douce.svg";
-import coloredSolutionDouceIcon from "../public/images/fiches-solutions/solution-douce-colored.svg";
-import Image from "next/image";
 
 type TypeSolution = {
   label: string;
@@ -36,10 +33,8 @@ export const ALL_TYPES_SOLUTION: TypeSolution[] = [
     code: "douce",
     label: "Solution douce",
     bannerClass: " softSolutionBanner ",
-    icon: (extraClasses?) => <Image src={solutionDouceIcon} className={extraClasses} alt="Solution douce" />,
-    coloredIcon: (extraClasses?) => (
-      <Image src={coloredSolutionDouceIcon} width={15} className={`${extraClasses}`} alt="Solution douce" />
-    ),
+    icon: (extraClasses?) => <i className={`ri-user-voice-fill ${extraClasses}`} />,
+    coloredIcon: (extraClasses?) => <i className={`ri-user-voice-fill typeSolutionSoftIcon ${extraClasses}`} />,
   },
 ];
 
