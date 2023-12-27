@@ -8,6 +8,7 @@ export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo
   delai_travaux
   cout_minimum
   cout_maximum
+  types_espace
   slug
 }`;
 

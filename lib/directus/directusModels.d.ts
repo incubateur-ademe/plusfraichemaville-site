@@ -439,6 +439,7 @@ export type FicheSolution = {
   status: string;
   titre: string;
   type_solution?: string | null;
+  types_espace?: string[] | null;
   user_created?: (string & DirectusUsers) | null;
   user_updated?: (string & DirectusUsers) | null;
 };
