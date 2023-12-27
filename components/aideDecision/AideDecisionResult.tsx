@@ -4,7 +4,7 @@ import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolut
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import AideDecisionSortFilter from "@/components/filters/AideDecisionSortFilter";
 import { getAideDecisionSortFieldFromCode } from "@/helpers/aideDecisionSortFilter";
-import RetourExperienceReducedVerticalCard from "@/components/retourExperience/RetourExperienceReducedVerticalCard";
+import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
 import Link from "next/link";
 
 type Props = {
@@ -72,7 +72,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                 <ul className="flex list-none overflow-x-auto md:justify-start pt-2 gap-6 pl-2">
                   {relatedRetourExperiences.map((rex) => (
                     <li key={rex.id} className="flex">
-                      <RetourExperienceReducedVerticalCard retourExperience={rex} />
+                      <RetourExperienceCard retourExperience={rex} />
                     </li>
                   ))}
                 </ul>

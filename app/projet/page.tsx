@@ -1,7 +1,7 @@
 import { getRetoursExperiences } from "@/lib/directus/queries/retoursExperienceQueries";
-import RetourExperienceCustomCard from "@/components/retourExperience/RetourExperienceCustomCard";
 import TypeEspaceFilter from "@/components/filters/TypeEspaceFilter";
 import RegionFilter from "@/components/filters/RegionFilter";
+import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
 
 export default async function RetoursExperiences({
   searchParams,
@@ -21,10 +21,10 @@ export default async function RetoursExperiences({
       <div className="flex flex-col md:flex-row">
         <RegionFilter className="md:w-[13rem]" />
         <div className="grow list-none flex-wrap justify-center p-0">
-          <ul className="flex grow list-none flex-wrap justify-center p-0">
+          <ul className="flex grow list-none flex-wrap justify-center p-0 gap-6">
             {filteredRetoursExperiences.map((retourExperience) => (
-              <li key={retourExperience.id} className="m-2 w-[19rem] flex">
-                <RetourExperienceCustomCard retourExperience={retourExperience} />
+              <li key={retourExperience.id}>
+                <RetourExperienceCard retourExperience={retourExperience} />
               </li>
             ))}
           </ul>

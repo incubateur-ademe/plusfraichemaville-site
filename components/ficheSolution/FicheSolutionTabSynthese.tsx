@@ -4,7 +4,7 @@ import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
 import CmsRichText from "@/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
-import RetourExperienceReducedVerticalCard from "@/components/retourExperience/RetourExperienceReducedVerticalCard";
+import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 
@@ -77,7 +77,7 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
           </div>
           <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
             {ficheSolution.solution_retour_experience.map((rex) => (
-              <RetourExperienceReducedVerticalCard
+              <RetourExperienceCard
                 key={rex.retour_experience.id}
                 retourExperience={rex.retour_experience}
                 className={"w-72 flex-none mt-8 mb-12"}
