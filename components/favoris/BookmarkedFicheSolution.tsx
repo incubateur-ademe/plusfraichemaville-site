@@ -14,16 +14,23 @@ export default function BookmarkedFicheSolutionByProject({
   );
   if (ficheSolutions && ficheSolutions?.length > 0) {
     return (
-      <>
-        <h3 className={"mt-8"}>{`Mes solutions pour ma recherche "${projectName}"`}</h3>
-        <ul className="flex list-none flex-wrap justify-center p-0">
+      <div className="text-dsfr-text-title-grey">
+        <div className={"fr-h3"}>
+          {projectName ? `Mon projet « ${projectName} »` : "Mes autres solutions mises en favoris"}
+        </div>
+        <div className="mb-6">
+          {projectName
+            ? `Vous avez sauvegardé ces solutions pour l'espace  « ${projectName} »`
+            : "Vous avez sauvegardé ces solutions"}
+        </div>
+        <ul className="flex list-none flex-wrap justify-center md:justify-normal p-0 gap-6">
           {ficheSolutions.map((ficheSolution) => (
-            <li key={ficheSolution.id} className="m-2 w-72 flex">
+            <li key={ficheSolution.id} className="flex">
               <FicheSolutionCardWithUserInfo ficheSolution={ficheSolution} projectName={projectName} />
             </li>
           ))}
         </ul>
-      </>
+      </div>
     );
   }
 }

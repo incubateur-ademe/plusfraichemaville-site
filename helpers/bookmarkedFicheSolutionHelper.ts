@@ -42,5 +42,5 @@ export const unBookmarkFicheSolution = (
       projectBookmarks.ficheSolutionIds.splice(index, 1);
     }
   }
-  return currentBookmarks;
+  return currentBookmarks.filter((projectBookmarks) => projectBookmarks.ficheSolutionIds.length > 0);
 };
