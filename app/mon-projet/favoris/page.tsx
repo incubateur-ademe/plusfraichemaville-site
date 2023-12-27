@@ -11,7 +11,6 @@ export default function Page() {
     setIsClient(true);
   }, []);
   const [bookmarkedFichesSolutions] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
-  console.log("bookmarkedFichesSolutions", bookmarkedFichesSolutions);
   return (
     isClient && (
       <div className="fr-container text-dsfr-text-title-grey pt-8">
