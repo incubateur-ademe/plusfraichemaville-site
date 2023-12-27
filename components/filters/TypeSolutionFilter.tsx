@@ -13,17 +13,19 @@ export default function TypeSolutionFilter({ className }: { className?: string }
   };
 
   return (
-    <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink ${className}`}>
-      <div className="text-sm text-dsfr-text-mention-grey mb-4">Types de solution</div>
-      {ALL_TYPES_SOLUTION.map((typeSolution) => (
-        <button
-          key={typeSolution.code}
-          onClick={() => changeFilter(typeSolution.code)}
-          className={linkStyle(typeSolution.code)}
-        >
-          {typeSolution.icon("fr-icon--sm mr-2 ")} {typeSolution.label}
-        </button>
-      ))}
+    <div>
+      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-4">Types de solution</div>
+      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink ${className}`}>
+        {ALL_TYPES_SOLUTION.map((typeSolution) => (
+          <button
+            key={typeSolution.code}
+            onClick={() => changeFilter(typeSolution.code)}
+            className={linkStyle(typeSolution.code)}
+          >
+            {typeSolution.icon("fr-icon--sm mr-2 ")} {typeSolution.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }

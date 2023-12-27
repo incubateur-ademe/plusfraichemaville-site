@@ -13,16 +13,18 @@ export default function RegionFilter({ className }: { className?: string }) {
   };
 
   return (
-    <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink ${className}`}>
-      <div className="text-sm text-dsfr-text-mention-grey mb-4">Régions</div>
-      <button className="fr-tag fr-text--xs mb-3" onClick={() => clearFilter()}>
-        Toutes régions
-      </button>
-      {ALL_REGIONS.map((region) => (
-        <button key={region.code} onClick={() => changeFilter(region.code)} className={linkStyle(region.code)}>
-          {region.label}
+    <div>
+      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-4">Régions</div>
+      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink ${className}`}>
+        <button className="fr-tag fr-text--xs mb-3" onClick={() => clearFilter()}>
+          Toutes régions
         </button>
-      ))}
+        {ALL_REGIONS.map((region) => (
+          <button key={region.code} onClick={() => changeFilter(region.code)} className={linkStyle(region.code)}>
+            {region.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
