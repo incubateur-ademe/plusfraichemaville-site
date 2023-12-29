@@ -960,7 +960,7 @@ export interface ApiRetourExperienceRetourExperience
           versioned: true;
         };
       }>;
-    types_solution: string[] | null;
+    types_solutions: string[] | null;
     citations: Attribute.Component<'common.citation', true> &
       Attribute.SetPluginOptions<{
         versions: {
