@@ -4,6 +4,8 @@ import Footer from "@codegouvfr/react-dsfr/Footer";
 export default function AppFooter() {
   return (
     <Footer
+      brandTop={<>République <br/>Française</>}
+      homeLinkProps={{ href: "/", title: "Accueil - ADEME" }}
       className="pt-6"
       accessibility={"non compliant"}
       operatorLogo={{
