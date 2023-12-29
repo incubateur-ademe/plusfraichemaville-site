@@ -93,7 +93,7 @@ export default function ButtonSaveFicheSolution({
           >
             <div>Retrouvez toutes vos solutions mises en favoris dans votre espace Projet.</div>
             <div className="mt-6">
-              <Button className={`rounded-3xl text-sm mr-6`} onClick={() => modal.close()} size="small">
+              <Button className={`rounded-3xl text-sm mr-6 mb-2`} onClick={() => modal.close()} size="small">
                 Continuer ma lecture
               </Button>
               <Button

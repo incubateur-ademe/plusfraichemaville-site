@@ -16,7 +16,7 @@ export default function BookmarkedFicheSolutionByProject({
     return (
       <div className="text-dsfr-text-title-grey">
         <div className={"fr-h3"}>
-          {projectName ? `Mon projet « ${projectName} »` : "Mes autres solutions mises en favoris"}
+          {projectName ? `Mon projet « ${projectName} »` : "Mes solutions mises en favoris"}
         </div>
         <div className="mb-6">
           {projectName
