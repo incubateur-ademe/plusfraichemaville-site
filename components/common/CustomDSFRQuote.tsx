@@ -1,11 +1,11 @@
-import { CitationRetourExperience } from "@/lib/directus/directusCustomModels";
 import CmsRichText from "@/components/common/CmsRichText";
+import { GetValues } from "@/lib/strapi/types/types";
 
 export default async function CustomDSFRQuote({
   citation,
   className,
 }: {
-  citation: CitationRetourExperience;
+  citation: GetValues<"common.citation">;
   className?: string;
 }) {
   return (

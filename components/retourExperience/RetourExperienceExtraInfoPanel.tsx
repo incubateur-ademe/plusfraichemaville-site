@@ -1,12 +1,12 @@
-import { RetourExperience } from "@/lib/directus/directusModels";
 import ItemRetourExperienceExtraInfo from "@/components/retourExperience/ItemRetourExperienceExtraInfo";
 import ObjectifsDeveloppementDurable from "@/components/common/ObjectifsDeveloppementDurable";
+import { APIResponseData } from "@/lib/strapi/types/types";
 
 export default async function RetourExperienceExtraInfoPanel({
   retourExperience,
   className,
 }: {
-  retourExperience: RetourExperience;
+  retourExperience: APIResponseData<"api::retour-experience.retour-experience">;
   className?: string;
 }) {
   return (
@@ -14,23 +14,26 @@ export default async function RetourExperienceExtraInfoPanel({
       className={`flex flex-wrap md:block md:w-56 ml-6 lg:ml-0
       mt-6 text-dsfr-text-label-blue-france text-sm ${className}`}
     >
-      <ItemRetourExperienceExtraInfo title="Solutions" content={retourExperience.types_solution?.join(" · ")} />
+      <ItemRetourExperienceExtraInfo
+        title="Solutions"
+        content={retourExperience.attributes.types_solutions?.join(" · ")}
+      />
       <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Échelle du projet" content={retourExperience.echelle} />
+      <ItemRetourExperienceExtraInfo title="Échelle du projet" content={retourExperience.attributes.echelle} />
       <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Temporalité du projet" content={retourExperience.temporalite} />
+      <ItemRetourExperienceExtraInfo title="Temporalité du projet" content={retourExperience.attributes.temporalite} />
       <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Climat actuel" content={retourExperience.climat_actuel} />
+      <ItemRetourExperienceExtraInfo title="Climat actuel" content={retourExperience.attributes.climat_actuel} />
       <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Climat futur" content={retourExperience.climat_futur} />
+      <ItemRetourExperienceExtraInfo title="Climat futur" content={retourExperience.attributes.climat_futur} />
       <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Coût global" content={retourExperience.cout} />
+      <ItemRetourExperienceExtraInfo title="Coût global" content={retourExperience.attributes.cout} />
       <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Contact" content={retourExperience.contact} />
+      <ItemRetourExperienceExtraInfo title="Contact" content={retourExperience.attributes.contact} />
       <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Porteur du projet" content={retourExperience.porteur} />
+      <ItemRetourExperienceExtraInfo title="Porteur du projet" content={retourExperience.attributes.porteur} />
       <hr className="pb-4" />
-      <ObjectifsDeveloppementDurable objectifs={retourExperience.odd} imageSize={65} className={"font-bold"} />
+      <ObjectifsDeveloppementDurable objectifs={retourExperience.attributes.odds?.data} imageSize={65} />
     </div>
   );
 }

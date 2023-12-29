@@ -1,14 +1,14 @@
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
-import { SituationRetourExperience } from "@/lib/directus/directusModels";
 import CmsRichText from "@/components/common/CmsRichText";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { GetValues } from "@/lib/strapi/types/types";
 
 export default async function SituationRetourExperienceCard({
   situation,
   titre,
   className,
 }: {
-  situation?: SituationRetourExperience | null;
+  situation?: GetValues<"retour-experience.situation">;
   titre: string;
   className?: string;
 }) {
@@ -33,7 +33,7 @@ export default async function SituationRetourExperienceCard({
             width={600}
             height={300}
             className="w-full h-52 object-cover rounded-t-2xl"
-            src={getDirectusImageUrl(situation.image, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
+            src={getStrapiImageUrl(situation.image, STRAPI_IMAGE_KEY_SIZE.small)}
             alt={titre}
           />
         </div>
