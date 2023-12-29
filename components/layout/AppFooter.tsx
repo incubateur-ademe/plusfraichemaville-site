@@ -1,30 +1,83 @@
 import React from "react";
-import Footer from "@codegouvfr/react-dsfr/Footer";
+import AdemeAMFLogo from "@/public/images/logo-ademe-amf.jpg";
+import Image from "next/image";
 
 export default function AppFooter() {
   return (
-    <Footer
-      brandTop={<>République <br/>Française</>}
-      homeLinkProps={{ href: "/", title: "Accueil - ADEME" }}
-      className="pt-6"
-      accessibility={"non compliant"}
-      operatorLogo={{
-        alt: "ADEME",
-        imgUrl: "/images/logo-ademe.png",
-        orientation: "vertical",
-      }}
-      contentDescription={
-        "Plus fraîche ma ville est une startup d'État portée par l’Agence pour la Transition Écologique (ADEME). " +
-        "Notre mission : aider les collectivités dans le choix de solutions de rafraîchissement " +
-        "urbain pérennes et durables. "
-      }
-      partnersLogos={{
-        main: {
-          alt: "Association des maires de France",
-          href: "#",
-          imgUrl: "/images/logo-amf.jpg",
-        },
-      }}
-    />
+    <footer className="fr-footer !pt-0 !mt-0 !shadow-none" role="contentinfo" id="footer">
+      <hr className="pb-6" />
+      <div className="fr-container">
+        <div className="fr-footer__body">
+          <div className="fr-footer__brand fr-enlarge-link">
+            <p className="fr-logo">
+              République
+              <br />
+              Française
+            </p>
+            <a
+              className="fr-footer__brand-link"
+              href="/"
+              title="Retour à l’accueil du site - Plus fraîche ma ville - République Française"
+            >
+              <Image className="fr-footer__logo" height={90} src={AdemeAMFLogo} alt={"ADEME - Plus fraîche ma ville"} />
+            </a>
+          </div>
+          <div className="fr-footer__content">
+            <p className="fr-footer__content-desc">
+              {"Plus fraîche ma ville est une startup d'État portée par l’Agence pour la Transition " +
+                "Écologique (ADEME). Notre mission : aider les collectivités dans le choix de solutions " +
+                "de rafraîchissement urbain pérennes et durables."}
+            </p>
+            <ul className="fr-footer__content-list">
+              <li className="fr-footer__content-item">
+                <a
+                  className="fr-footer__content-link"
+                  target="_blank"
+                  rel="noopener external"
+                  title="ADEME - nouvelle fenêtre"
+                  href="https://www.ademe.fr"
+                >
+                  ademe.fr
+                </a>
+              </li>
+              <li className="fr-footer__content-item">
+                <a
+                  className="fr-footer__content-link"
+                  target="_blank"
+                  rel="noopener external"
+                  title="Beta Gouv - nouvelle fenêtre"
+                  href="https://beta.gouv.fr"
+                >
+                  beta.gouv.fr
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div className="fr-footer__bottom">
+          <ul className="fr-footer__bottom-list">
+            <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href="#">
+                Accessibilité : non conforme
+              </a>
+            </li>
+          </ul>
+          <div className="fr-footer__bottom-copy">
+            <p>
+              Sauf mention explicite de propriété intellectuelle détenue par des tiers, les contenus de ce site sont
+              proposés sous{" "}
+              <a
+                href="https://github.com/etalab/licence-ouverte/blob/master/LO.md"
+                rel="noopener external"
+                title="Voir la licence Etalab 2.0 - nouvelle fenêtre"
+                target="_blank"
+              >
+                licence etalab-2.0
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 }
