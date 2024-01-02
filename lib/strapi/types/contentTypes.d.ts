@@ -719,6 +719,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         }
       >;
     baisse_temperature: Attribute.Decimal &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;

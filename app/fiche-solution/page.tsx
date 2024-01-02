@@ -27,7 +27,6 @@ export default async function FichesSolutions({
     .filter(
       (fs) =>
         !searchParams.baisseTemperatureFilter ||
-        !fs.attributes.baisse_temperature ||
         searchParams.baisseTemperatureFilter
           .split(",")
           .includes(getBaisseTemperatureFicheSolutionFromTemperature(fs.attributes.baisse_temperature).code),
