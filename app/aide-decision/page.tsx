@@ -11,7 +11,7 @@ export default async function Posts() {
         <div className="grow">
           <h1 className={"mb-12 pt-[4.5rem] text-center text-xl"}>Sur quel espace voulez-vous agir ?</h1>
           <div className="max-w-2xl m-auto">
-            <ul className="flex list-none flex-wrap justify-center pb-36 gap-6 ">
+            <ul className="flex list-none flex-wrap justify-center gap-6 ">
               {aideDecisionFirstSteps.map((aideDecision) => (
                 <li key={aideDecision.id} className="p-0 flex justify-center">
                   <AideDecisionFirstStepEtapeCard aideDecisionEtape={aideDecision} />
