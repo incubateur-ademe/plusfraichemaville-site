@@ -28,6 +28,7 @@ export interface FicheSolutionAideRegionale extends Schema.Component {
   attributes: {
     region: Attribute.Relation<"fiche-solution.aide-regionale", "oneToOne", "api::region.region">;
     description: Attribute.RichText &
+      Attribute.Required &
       Attribute.CustomField<
         "plugin::ckeditor.CKEditor",
         {
@@ -65,6 +66,7 @@ export interface FicheSolutionEtapeEntretien extends Schema.Component {
   attributes: {
     titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
+      Attribute.Required &
       Attribute.CustomField<
         "plugin::ckeditor.CKEditor",
         {
@@ -109,7 +111,7 @@ export interface FicheSolutionOups extends Schema.Component {
           preset: "rich";
         }
       >;
-    titre: Attribute.String;
+    titre: Attribute.String & Attribute.Required;
     solutions_reparatrices: Attribute.Relation<
       "fiche-solution.oups",
       "oneToMany",

@@ -1,7 +1,5 @@
 import Image from "next/image";
-import { getDirectusImageUrl } from "@/lib/directus/directusClient";
 import { notFound } from "next/navigation";
-import { getFicheSolutionBySlug } from "@/lib/directus/queries/fichesSolutionsQueries";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import CustomTabButton from "@/components/common/CustomTabButton";
 import FicheSolutionTabSynthese from "@/components/ficheSolution/FicheSolutionTabSynthese";
@@ -13,6 +11,8 @@ import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisio
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import FicheSolutionTabFinancements from "@/components/ficheSolution/FicheSolutionTabFinancements";
 import FicheSolutionTabOups from "@/components/ficheSolution/FicheSolutionTabOups";
+import { getFicheSolutionBySlug } from "@/lib/strapi/queries/fichesSolutionsQueries";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
 export default async function FicheSolution({
   params,
@@ -24,7 +24,7 @@ export default async function FicheSolution({
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
   const historique = await getAideDecisionHistoryBySlug(searchParams?.etapeAideDecision, true);
   if (ficheSolution) {
-    const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
+    const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
     return (
       <>
         <div className={`relative h-48 md:h-96 ${typeSolution?.bannerClass}`}>
@@ -32,8 +32,8 @@ export default async function FicheSolution({
             width={1200}
             height={500}
             className={`w-full h-48 md:h-96 object-cover relative -z-10 `}
-            src={getDirectusImageUrl(ficheSolution.image_principale)}
-            alt={ficheSolution?.titre || "image titre"}
+            src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
+            alt={ficheSolution.attributes.titre}
           />
           <div className="fr-container">
             <h1
@@ -42,7 +42,7 @@ export default async function FicheSolution({
                 " md:ml-56 bottom-0 md:bottom-4 font-bold leading-normal"
               }
             >
-              {ficheSolution.titre}
+              {ficheSolution.attributes.titre}
             </h1>
           </div>
         </div>
@@ -53,12 +53,12 @@ export default async function FicheSolution({
               <AideDecisionBreadcrumbs
                 historique={historique}
                 className="mb-16 -mt-2"
-                currentPageLabel={ficheSolution.titre}
+                currentPageLabel={ficheSolution.attributes.titre}
               />
             )}
             <ButtonShareFicheSolution className={"mb-4"} />
             <ButtonSaveFicheSolution
-              ficheSolution={ficheSolution}
+              ficheSolution={ficheSolution.attributes}
               projectName={(historique && historique[1].label) || ""}
               className=""
               label={true}
@@ -83,19 +83,19 @@ export default async function FicheSolution({
               </li>
             </ul>
             <div id="synthese-panel" className="fr-tabs__panel customPanel fr-tabs__panel--selected" role="tabpanel">
-              <FicheSolutionTabSynthese ficheSolution={ficheSolution} />
+              <FicheSolutionTabSynthese ficheSolution={ficheSolution.attributes} />
             </div>
             <div id="materiaux-panel" className="fr-tabs__panel customPanel" role="tabpanel">
-              <FicheSolutionTabMateriaux ficheSolution={ficheSolution} />
+              <FicheSolutionTabMateriaux ficheSolution={ficheSolution.attributes} />
             </div>
             <div id="mise-en-oeuvre-panel" className="fr-tabs__panel customPanel" role="tabpanel">
-              <FicheSolutionTabMiseEnOeuvre ficheSolution={ficheSolution} />
+              <FicheSolutionTabMiseEnOeuvre ficheSolution={ficheSolution.attributes} />
             </div>
             <div id="financements-panel" className="fr-tabs__panel customPanel" role="tabpanel">
-              <FicheSolutionTabFinancements ficheSolution={ficheSolution} />
+              <FicheSolutionTabFinancements ficheSolution={ficheSolution.attributes} />
             </div>
             <div id="oups-panel" className="fr-tabs__panel customPanel" role="tabpanel">
-              <FicheSolutionTabOups ficheSolution={ficheSolution} />
+              <FicheSolutionTabOups ficheSolution={ficheSolution.attributes} />
             </div>
           </div>
         </div>

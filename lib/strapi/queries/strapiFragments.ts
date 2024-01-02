@@ -2,14 +2,13 @@ export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo
   attributes {
     vuid
     titre
+    type_solution
+    description_courte
     image_principale {
       ...ImageInfo
     }
     cout_minimum
     cout_maximum
-    titre
-    description_courte
-    type_solution
     baisse_temperature
     delai_travaux
     types_espace
@@ -19,6 +18,7 @@ export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo
 
 export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSmallCardInfo on FicheSolutionEntity {
   attributes {
+    vuid
     titre
     image_principale {
       ...ImageInfo
@@ -41,6 +41,7 @@ export const STRAPI_IMAGE_FRAGMENT = `fragment ImageInfo on UploadFileEntityResp
 export const RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT = `fragment RetourExperienceCardInfo on RetourExperienceEntity {
   id
     attributes {
+      vuid
       titre
       climat_actuel
       climat_futur

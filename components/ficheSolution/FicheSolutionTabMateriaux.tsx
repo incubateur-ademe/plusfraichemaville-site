@@ -1,25 +1,29 @@
-import { FicheSolution } from "@/lib/directus/directusModels";
 import React from "react";
 import Image from "next/image";
 import CmsRichText from "@/components/common/CmsRichText";
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import { getUniteCoutMateriauFromCode } from "@/helpers/coutMateriau";
 import entretienIcon from "../../public/images/fiches-solutions/entretien.svg";
+import { GetValues } from "@/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
-export default function FicheSolutionTabMateriaux({ ficheSolution }: { ficheSolution: FicheSolution }) {
+export default function FicheSolutionTabMateriaux({
+  ficheSolution,
+}: {
+  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+}) {
   return (
     <div>
       <div className="text-dsfr-text-title-grey font-bold text-[1.75rem] mb-8">Matériaux et coûts</div>
-      {ficheSolution.materiaux.length > 0 ? (
+      {ficheSolution.materiaux?.data && ficheSolution.materiaux.data.length > 0 ? (
         <>
           <hr className="p-0 h-[1px]" />
-          {ficheSolution.materiaux.map(({ materiau_id: mat }) => (
-            <div key={mat.id}>
+          {ficheSolution.materiaux.data.map(({ attributes: mat }) => (
+            <div key={mat.vuid}>
               <div className={"flex flex-col md:flex-row gap-1 md:gap-6"}>
                 <div className="w-28 h-28 relative hidden md:flex flex-none mt-8">
                   <Image
                     fill
-                    src={getDirectusImageUrl(mat.image, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
+                    src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
                     alt={mat.titre}
                     className={"object-cover rounded-2xl"}
                   />
@@ -29,7 +33,7 @@ export default function FicheSolutionTabMateriaux({ ficheSolution }: { ficheSolu
                     <div className="w-28 h-28 relative flex md:hidden flex-none">
                       <Image
                         fill
-                        src={getDirectusImageUrl(mat.image, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
+                        src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
                         alt={mat.titre}
                         className={"object-cover rounded-2xl"}
                       />

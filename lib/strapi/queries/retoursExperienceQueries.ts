@@ -93,7 +93,7 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
 
 export const GET_RETOUR_EXPERIENCE_CARD_DATA = (
   strapiFilter: StrapiFilter,
-) => `${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
+) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
     retourExperiences ${strapiFilter.wholeFilterString()} {
       data {
         ...RetourExperienceCardInfo

@@ -946,6 +946,7 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         min: 0;
       }>;
     cout_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite"]> &
+      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
