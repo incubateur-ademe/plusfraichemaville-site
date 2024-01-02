@@ -1,10 +1,11 @@
 import Image from "next/image";
 import Button from "@codegouvfr/react-dsfr/Button";
+import AppFooter from "@/components/layout/AppFooter";
 
 export default function Home() {
   return (
     <main className="fr-container mt-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4" dir={"rtl"}>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pb-40" dir={"rtl"}>
         <div className={"h-80 relative"}>
           <Image
             src={"/images/homepage/carrousel1.jpg"}
@@ -27,7 +28,8 @@ export default function Home() {
             Trouvez votre solution adaptée et durable
           </Button>
         </div>
-      </div>{" "}
+      </div>
+      <AppFooter />
     </main>
   );
 }
