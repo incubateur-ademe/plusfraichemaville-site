@@ -4,14 +4,15 @@ import { StrapiFilter } from "@/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
-  STRAPI_IMAGE_FRAGMENT
+  STRAPI_IMAGE_FRAGMENT,
 } from "@/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
 import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
 
 export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,
-) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
+) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT}
+${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
   retourExperiences ${strapiFilter.wholeFilterString()} {
     data {
       id

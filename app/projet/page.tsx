@@ -14,7 +14,7 @@ export default async function RetoursExperiences({
     .filter(
       (re) =>
         !searchParams.regionFilter ||
-        (re.attributes.region?.data?.attributes.code &&
+        (re.attributes.region?.data.attributes.code &&
           searchParams.regionFilter?.split(",").includes(re.attributes.region.data.attributes.code)),
     );
 

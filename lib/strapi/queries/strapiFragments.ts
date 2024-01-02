@@ -24,7 +24,6 @@ export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSm
   }
 }`;
 
-
 export const STRAPI_IMAGE_FRAGMENT = `fragment ImageInfo on UploadFileEntityResponse {
   data {
     attributes {

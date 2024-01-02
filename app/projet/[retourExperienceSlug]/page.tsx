@@ -50,7 +50,7 @@ export default async function RetourExperience({ params }: { params: { retourExp
                 className="md:ml-3 flex-1 bg-dsfr-background-alt-blue-france"
               />
             </div>
-            {(solutions && solutions.length > 0) && (
+            {solutions && solutions.length > 0 && (
               <>
                 <h2 className="text-3xl mt-10 mb-6">Solutions réalisées</h2>
                 {solutions.map((solution) => (

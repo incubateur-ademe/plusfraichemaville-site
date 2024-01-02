@@ -1,4 +1,3 @@
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import FicheSolutionSmallHorizontalCard from "@/components/ficheSolution/FicheSolutionSmallHorizontalCard";
 import CmsRichText from "@/components/common/CmsRichText";
@@ -35,7 +34,10 @@ export default async function SolutionRetourExperienceCard({
         </div>
       </div>
       {solution.attributes.fiche_solution && (
-        <FicheSolutionSmallHorizontalCard ficheSolution={solution.attributes.fiche_solution} className={"mb-9 block md:hidden"} />
+        <FicheSolutionSmallHorizontalCard
+          ficheSolution={solution.attributes.fiche_solution}
+          className={"mb-9 block md:hidden"}
+        />
       )}
     </div>
   );

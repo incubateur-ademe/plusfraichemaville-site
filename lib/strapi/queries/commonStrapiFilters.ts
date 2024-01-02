@@ -12,10 +12,7 @@ export class StrapiFilter {
   includePublicationState: boolean;
   andFilters: (StrapiEqFilter | StrapiInFilter)[];
 
-  constructor(
-    includePublicationState: boolean,
-    andFilters: (StrapiEqFilter | StrapiInFilter)[],
-  ) {
+  constructor(includePublicationState: boolean, andFilters: (StrapiEqFilter | StrapiInFilter)[]) {
     this.includePublicationState = includePublicationState;
     this.andFilters = andFilters;
   }
@@ -28,8 +25,8 @@ export class StrapiFilter {
     const filterString =
       this.andFilters.length > 0
         ? `filters:{and: [${this.andFilters
-          .map((f) => ` {${f.attribute}: {${f.operator}: ${JSON.stringify(f.value)}}} `)
-          .join(",")}]}`
+            .map((f) => ` {${f.attribute}: {${f.operator}: ${JSON.stringify(f.value)}}} `)
+            .join(",")}]}`
         : null;
     const publicationStateString = this.includePublicationState
       ? `publicationState: ${process.env.STRAPI_SHOW_STATUSES || "LIVE"}`

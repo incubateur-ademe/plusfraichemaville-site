@@ -5,7 +5,11 @@ import NavigationMenu from "@/components/layout/NavigationMenu";
 export default function AppHeader() {
   return (
     <Header
-      brandTop={<>République <br/> française</>}
+      brandTop={
+        <>
+          République <br /> française
+        </>
+      }
       homeLinkProps={{ href: "/", title: "Accueil - ADEME" }}
       operatorLogo={{
         alt: "Plus fraîche ma ville",
