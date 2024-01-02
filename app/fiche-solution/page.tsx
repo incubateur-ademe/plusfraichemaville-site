@@ -43,7 +43,7 @@ export default async function FichesSolutions({
         <div className="grow list-none justify-center p-0">
           <ul className="flex flex-wrap justify-center gap-6">
             {filteredFichesSolutions.map((ficheSolution) => (
-              <li key={ficheSolution.id} className="flex">
+              <li key={ficheSolution.attributes.vuid} className="flex">
                 <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution.attributes} />
               </li>
             ))}
