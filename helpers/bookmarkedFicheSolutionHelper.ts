@@ -2,23 +2,29 @@ export const BOOKMARK_FS_KEY = "bookmark-fs-id";
 
 export type ProjectBookmarks = {
   projectName: string;
-  ficheSolutionIds: number[];
+  ficheSolutionIds: string[];
 };
 
 export const isFicheSolutionBookmarked = (
   currentBookmarks: ProjectBookmarks[],
-  ficheSolutionId: number,
+  ficheSolutionId: string | undefined,
   projectName: string,
 ) => {
+  if (!ficheSolutionId) {
+    return false;
+  }
   const projectBookmarks = currentBookmarks?.find((b) => b.projectName === projectName);
   return projectBookmarks && projectBookmarks.ficheSolutionIds.includes(ficheSolutionId);
 };
 
 export const addFicheSolutionBookmark = (
   currentBookmarks: ProjectBookmarks[],
-  ficheSolutionId: number,
+  ficheSolutionId: string | undefined,
   projectName: string,
 ) => {
+  if (!ficheSolutionId) {
+    return currentBookmarks;
+  }
   const projectBookmarks = currentBookmarks.find((b) => b.projectName === projectName);
   if (projectBookmarks) {
     if (!projectBookmarks.ficheSolutionIds.includes(ficheSolutionId)) {
@@ -32,9 +38,12 @@ export const addFicheSolutionBookmark = (
 
 export const unBookmarkFicheSolution = (
   currentBookmarks: ProjectBookmarks[],
-  ficheSolutionId: number,
+  ficheSolutionId: string | undefined,
   projectName: string,
 ) => {
+  if (!ficheSolutionId) {
+    return currentBookmarks;
+  }
   const projectBookmarks = currentBookmarks.find((b) => b.projectName === projectName);
   if (projectBookmarks) {
     const index = projectBookmarks.ficheSolutionIds.indexOf(ficheSolutionId);

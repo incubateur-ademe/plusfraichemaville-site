@@ -1,15 +1,20 @@
-export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo on fiche_solution {
-  id
-  titre
-  description_courte
-  image_principale
-  type_solution
-  baisse_temperature
-  delai_travaux
-  cout_minimum
-  cout_maximum
-  types_espace
-  slug
+export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo on FicheSolutionEntity {
+  attributes {
+    vuid
+    titre
+    image_principale {
+      ...ImageInfo
+    }
+    cout_minimum
+    cout_maximum
+    titre
+    description_courte
+    type_solution
+    baisse_temperature
+    delai_travaux
+    types_espace
+    slug
+  }
 }`;
 
 export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSmallCardInfo on FicheSolutionEntity {

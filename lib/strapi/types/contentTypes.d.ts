@@ -1,4 +1,4 @@
-import type { Attribute, Schema } from "@strapi/strapi";
+import type { Schema, Attribute } from "@strapi/strapi";
 
 export interface AdminPermission extends Schema.CollectionType {
   collectionName: "admin_permissions";
@@ -581,6 +581,52 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
+  collectionName: "cobenefices";
+  info: {
+    singularName: "cobenefice";
+    pluralName: "cobenefices";
+    displayName: "Cobenefice";
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    versions: {
+      versioned: true;
+    };
+  };
+  attributes: {
+    description: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    icone: Attribute.Enumeration<["icone1", "icone2"]> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    fiches_solutions: Attribute.Relation<
+      "api::cobenefice.cobenefice",
+      "manyToMany",
+      "api::fiche-solution.fiche-solution"
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::cobenefice.cobenefice", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::cobenefice.cobenefice", "oneToOne", "admin::user"> & Attribute.Private;
+    versions: Attribute.Relation<"api::cobenefice.cobenefice", "manyToMany", "api::cobenefice.cobenefice">;
+    vuid: Attribute.String;
+    versionNumber: Attribute.Integer & Attribute.DefaultTo<1>;
+    versionComment: Attribute.String;
+    isVisibleInListView: Attribute.Boolean & Attribute.DefaultTo<true>;
+  };
+}
+
 export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
   collectionName: "fiche_solutions";
   info: {
@@ -607,7 +653,6 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       }>;
     slug: Attribute.String &
       Attribute.Required &
-      Attribute.Unique &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -651,6 +696,162 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           versioned: true;
         };
       }>;
+    type_solution: Attribute.Enumeration<["bleue", "verte", "grise", "douce"]> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    description_courte: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "rich";
+        }
+      >;
+    baisse_temperature: Attribute.Decimal &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    contexte_titre: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.DefaultTo<"Pourquoi choisir cette solution ?">;
+    contexte_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "rich";
+        }
+      >;
+    rafraichissement_attendu_description: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "rich";
+        }
+      >;
+    logo_partenaire: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    cout_minimum_entretien: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_maximum_entretien: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    etapes_mise_en_oeuvre: Attribute.Component<"fiche-solution.etape-mise-en-oeuvre", true> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    etapes_entretien: Attribute.Component<"fiche-solution.etape-entretien", true> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    point_vigilance: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "rich";
+        }
+      >;
+    lien_aide_territoire: Attribute.String &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    lien_fond_vert: Attribute.String &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    types_espace: Attribute.JSON &
+      Attribute.CustomField<
+        "plugin::multi-select.multi-select",
+        [
+          "Rond-point:rondpoint",
+          "B\u00E2timent:batiment",
+          "Parking:parking",
+          "Rue:rue",
+          "Place:place",
+          "Cour d'\u00E9cole:ecole",
+          "Parc et jardin:parc",
+        ]
+      >;
+    etapes_diagnostic: Attribute.Component<"fiche-solution.etape-diagnostic", true> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    aides_regionales: Attribute.Component<"fiche-solution.aide-regionale", true> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    rank: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    materiaux: Attribute.Relation<"api::fiche-solution.fiche-solution", "manyToMany", "api::materiau.materiau">;
+    fiches_solutions_complementaires: Attribute.Relation<
+      "api::fiche-solution.fiche-solution",
+      "oneToMany",
+      "api::fiche-solution.fiche-solution"
+    >;
+    cobenefices: Attribute.Relation<"api::fiche-solution.fiche-solution", "manyToMany", "api::cobenefice.cobenefice">;
+    oups: Attribute.Component<"fiche-solution.oups", true> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -661,6 +862,100 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       "manyToMany",
       "api::fiche-solution.fiche-solution"
     >;
+    vuid: Attribute.String;
+    versionNumber: Attribute.Integer & Attribute.DefaultTo<1>;
+    versionComment: Attribute.String;
+    isVisibleInListView: Attribute.Boolean & Attribute.DefaultTo<true>;
+  };
+}
+
+export interface ApiMateriauMateriau extends Schema.CollectionType {
+  collectionName: "materiaux";
+  info: {
+    singularName: "materiau";
+    pluralName: "materiaux";
+    displayName: "Materiau";
+    description: "";
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    versions: {
+      versioned: true;
+    };
+  };
+  attributes: {
+    titre: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    image: Attribute.Media &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "rich";
+        }
+      >;
+    cout_minimum_fourniture: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_maximum_fourniture: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_minimum_entretien: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_maximum_entretien: Attribute.Integer &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }> &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite"]> &
+      Attribute.SetPluginOptions<{
+        versions: {
+          versioned: true;
+        };
+      }>;
+    fiches_solution: Attribute.Relation<"api::materiau.materiau", "manyToMany", "api::fiche-solution.fiche-solution">;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::materiau.materiau", "oneToOne", "admin::user"> & Attribute.Private;
+    updatedBy: Attribute.Relation<"api::materiau.materiau", "oneToOne", "admin::user"> & Attribute.Private;
+    versions: Attribute.Relation<"api::materiau.materiau", "manyToMany", "api::materiau.materiau">;
     vuid: Attribute.String;
     versionNumber: Attribute.Integer & Attribute.DefaultTo<1>;
     versionComment: Attribute.String;
@@ -761,7 +1056,8 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
           versioned: true;
         };
       }>;
-    types_solutions: string[] | null;
+    types_solutions: Attribute.JSON &
+      Attribute.CustomField<"plugin::multi-select.multi-select", ["bleue", "douce", "verte", "grise"]>;
     citations: Attribute.Component<"common.citation", true> &
       Attribute.SetPluginOptions<{
         versions: {
@@ -803,7 +1099,19 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
           versioned: true;
         };
       }>;
-    types_espaces: string[] | null;
+    types_espaces: Attribute.JSON &
+      Attribute.CustomField<
+        "plugin::multi-select.multi-select",
+        [
+          "Rond-point:rondpoint",
+          "B\u00E2timent:batiment",
+          "Parking:parking",
+          "Rue:rue",
+          "Place:place",
+          "Cour d'\u00E9cole:ecole",
+          "Parc et jardin:parc",
+        ]
+      >;
     retour_experiences: Attribute.Relation<
       "api::retour-experience.retour-experience",
       "oneToMany",
@@ -994,8 +1302,9 @@ declare module "@strapi/types" {
       "plugin::users-permissions.permission": PluginUsersPermissionsPermission;
       "plugin::users-permissions.role": PluginUsersPermissionsRole;
       "plugin::users-permissions.user": PluginUsersPermissionsUser;
-      "plugin::multi-select.multi-select": string[] | null;
+      "api::cobenefice.cobenefice": ApiCobeneficeCobenefice;
       "api::fiche-solution.fiche-solution": ApiFicheSolutionFicheSolution;
+      "api::materiau.materiau": ApiMateriauMateriau;
       "api::objectif-developpement-durable.objectif-developpement-durable": ApiObjectifDeveloppementDurableObjectifDeveloppementDurable;
       "api::region.region": ApiRegionRegion;
       "api::retour-experience.retour-experience": ApiRetourExperienceRetourExperience;

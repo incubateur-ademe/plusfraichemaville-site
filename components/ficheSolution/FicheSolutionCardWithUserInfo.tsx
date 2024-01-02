@@ -1,7 +1,7 @@
-import { FicheSolution } from "@/lib/directus/directusModels";
 import React from "react";
 import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
 import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullCard";
+import { GetValues } from "@/lib/strapi/types/types";
 
 export default function FicheSolutionCardWithUserInfo({
   ficheSolution,
@@ -9,7 +9,7 @@ export default function FicheSolutionCardWithUserInfo({
   extraUrlParams,
   className,
 }: {
-  ficheSolution: FicheSolution;
+  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
   projectName: string;
   extraUrlParams?: { param: string; value: string }[];
   className?: string;

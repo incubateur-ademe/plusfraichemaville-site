@@ -1,5 +1,4 @@
 "use client";
-import { FicheSolution } from "@/lib/directus/directusModels";
 import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import {
@@ -12,6 +11,7 @@ import {
 import { Oval } from "react-loader-spinner";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
+import { GetValues } from "@/lib/strapi/types/types";
 
 const modalFromIcon = createModal({
   id: "bookmark-modal",
@@ -29,7 +29,7 @@ export default function ButtonSaveFicheSolution({
   label,
   className,
 }: {
-  ficheSolution: FicheSolution;
+  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
   label: boolean;
   projectName: string;
   className?: string;
@@ -42,7 +42,7 @@ export default function ButtonSaveFicheSolution({
   );
 
   const [isBookmarked, setIsBookmarked] = useState(
-    isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolution.id, projectName),
+    isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolution.vuid, projectName),
   );
 
   useEffect(() => {
@@ -53,10 +53,12 @@ export default function ButtonSaveFicheSolution({
 
   const changeFavorite = () => {
     if (isBookmarked) {
-      setBookmarkedFichesSolutions(unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolution.id, projectName));
+      setBookmarkedFichesSolutions(unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolution.vuid, projectName));
       setIsBookmarked(false);
     } else {
-      setBookmarkedFichesSolutions(addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolution.id, projectName));
+      setBookmarkedFichesSolutions(
+        addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolution.vuid, projectName),
+      );
       setIsBookmarked(true);
       modal.open();
     }

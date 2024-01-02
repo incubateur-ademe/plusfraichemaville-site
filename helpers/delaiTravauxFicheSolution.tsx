@@ -1,13 +1,13 @@
 import React from "react";
 
 type DelaiTravauxFicheSolution = {
-  code: number;
+  code: string;
   label: string;
   icons: (_?: string) => React.ReactNode;
 };
 export const ALL_DELAIS_TRAVAUX_FICHE_SOLUTION: DelaiTravauxFicheSolution[] = [
   {
-    code: 1,
+    code: "court",
     label: "moins de 6 mois",
     icons: (extraClasses?) => (
       <>
@@ -18,7 +18,7 @@ export const ALL_DELAIS_TRAVAUX_FICHE_SOLUTION: DelaiTravauxFicheSolution[] = [
     ),
   },
   {
-    code: 2,
+    code: "moyen",
     label: "moins de 1 an",
     icons: (extraClasses?) => (
       <>
@@ -29,7 +29,7 @@ export const ALL_DELAIS_TRAVAUX_FICHE_SOLUTION: DelaiTravauxFicheSolution[] = [
     ),
   },
   {
-    code: 3,
+    code: "long",
     label: "plus de 1 an",
     icons: (extraClasses?) => (
       <>
@@ -41,5 +41,5 @@ export const ALL_DELAIS_TRAVAUX_FICHE_SOLUTION: DelaiTravauxFicheSolution[] = [
   },
 ];
 
-export const getDelaiTravauxFicheSolutionFromCode = (delaiTravauxCode?: number | null) =>
+export const getDelaiTravauxFicheSolutionFromCode = (delaiTravauxCode?: string | null) =>
   delaiTravauxCode ? ALL_DELAIS_TRAVAUX_FICHE_SOLUTION.find((r) => r.code === delaiTravauxCode) : null;

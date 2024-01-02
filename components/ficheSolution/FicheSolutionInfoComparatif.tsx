@@ -1,14 +1,14 @@
-import { FicheSolution } from "@/lib/directus/directusModels";
 import React from "react";
 import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
 import { getDelaiTravauxFicheSolutionFromCode } from "@/helpers/delaiTravauxFicheSolution";
+import { GetValues } from "@/lib/strapi/types/types";
 
 export default function FicheSolutionInfoComparatif({
   ficheSolution,
   className,
   temperatureClass,
 }: {
-  ficheSolution: FicheSolution;
+  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
   className?: string;
   temperatureClass?: string;
 }) {
