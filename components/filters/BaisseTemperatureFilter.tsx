@@ -8,14 +8,14 @@ export default function BaisseTemperatureFilter({ className }: { className?: str
   const { changeFilter, isFilterCodeSelected } = useMultipleValuesFilter(FILTER_NAME);
 
   const linkStyle = (codeBaisseTemperature: string) => {
-    const baseStyle = " fr-tag fr-text--xs mb-3 whitespace-nowrap ";
+    const baseStyle = " fr-tag fr-text--xs whitespace-nowrap ";
     return isFilterCodeSelected(codeBaisseTemperature) ? "fr-tag--dismiss " + baseStyle : baseStyle;
   };
 
   return (
     <div>
-      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-4">Baisse de la température</div>
-      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink ${className}`}>
+      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-3">Baisse de la température</div>
+      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink gap-4 ${className}`}>
         {ALL_BAISSES_TEMPERATURE_FICHE_SOLUTION.map((baisseTemperature) => (
           <button
             key={baisseTemperature.code}

@@ -8,21 +8,21 @@ export default function TypeSolutionFilter({ className }: { className?: string }
   const { changeFilter, isFilterCodeSelected } = useMultipleValuesFilter(FILTER_NAME);
 
   const linkStyle = (codeRegion: string) => {
-    const baseStyle = " fr-tag fr-text--xs mb-3 whitespace-nowrap ";
+    const baseStyle = " fr-tag fr-text--xs whitespace-nowrap ";
     return isFilterCodeSelected(codeRegion) ? "fr-tag--dismiss " + baseStyle : baseStyle;
   };
 
   return (
     <div>
-      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-4">Types de solution</div>
-      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink ${className}`}>
+      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-3">Types de solution</div>
+      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink gap-4 ${className}`}>
         {ALL_TYPES_SOLUTION.map((typeSolution) => (
           <button
             key={typeSolution.code}
             onClick={() => changeFilter(typeSolution.code)}
             className={linkStyle(typeSolution.code)}
           >
-            {typeSolution.icon("fr-icon--sm mr-2 ")} {typeSolution.label}
+            {typeSolution.coloredIcon("fr-icon--sm mr-2 ")} {typeSolution.label}
           </button>
         ))}
       </div>

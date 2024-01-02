@@ -8,15 +8,15 @@ export default function RegionFilter({ className }: { className?: string }) {
   const { changeFilter, clearFilter, isFilterCodeSelected } = useMultipleValuesFilter(FILTER_NAME);
 
   const linkStyle = (codeRegion: string) => {
-    const baseStyle = " fr-tag fr-text--xs mb-3 whitespace-nowrap ";
+    const baseStyle = " fr-tag fr-text--xs whitespace-nowrap ";
     return isFilterCodeSelected(codeRegion) ? "fr-tag--dismiss " + baseStyle : baseStyle;
   };
 
   return (
-    <div>
-      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-4">Régions</div>
-      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink ${className}`}>
-        <button className="fr-tag fr-text--xs mb-3" onClick={() => clearFilter()}>
+    <div className={className}>
+      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-3">Régions</div>
+      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink gap-3`}>
+        <button className="fr-tag fr-text--xs" onClick={() => clearFilter()}>
           Toutes régions
         </button>
         {ALL_REGIONS.map((region) => (

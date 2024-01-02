@@ -27,8 +27,8 @@ export default function TypeEspaceFilter({ className }: { className?: string }) 
 
   return (
     <div className={`flex flex-row flex-wrap ${className}`}>
-      <button className={`!bg-none ${buttonStyle()}`} onClick={() => clearTypeEspaceFilter()}>
-        <div className={"w-16 md:w-28 flex flex-col items-center"}>
+      <button className={`!bg-none w-20 md:w-28 ${buttonStyle()}`} onClick={() => clearTypeEspaceFilter()}>
+        <div className={"flex flex-col items-center"}>
           <Image width={50} height={50} src="/images/espaces/espace-icone-tous-espaces.svg" alt="Tous espaces" />
           <div className={"text-sm text-center"}>Tous espaces</div>
         </div>
@@ -37,9 +37,9 @@ export default function TypeEspaceFilter({ className }: { className?: string }) 
         <button
           key={espace.code}
           onClick={() => setTypeEspaceFilter(espace.code)}
-          className={`!bg-none ${buttonStyle(espace.code)}`}
+          className={`!bg-none w-20 md:w-28 ${buttonStyle(espace.code)}`}
         >
-          <div className={"w-16 md:w-28 flex flex-col items-center"}>
+          <div className={"flex flex-col items-center"}>
             <Image width={50} height={50} src={`/images/espaces/${espace.icon}`} alt={espace.label} />
             <div className={"text-sm text-center"}>{espace.label}</div>
           </div>

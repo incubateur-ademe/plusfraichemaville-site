@@ -20,11 +20,11 @@ export default async function RetoursExperiences({
 
   return (
     <div className="fr-container">
-      <TypeEspaceFilter className="justify-center mb-8 mt-8" />
+      <TypeEspaceFilter className="mb-8 mt-8 md:ml-52 flex justify-center md:justify-normal" />
       <div className="flex flex-col md:flex-row">
-        <RegionFilter className="md:w-[13rem]" />
+        <RegionFilter className="md:min-w-[13rem] mb-6" />
         <div className="grow list-none flex-wrap justify-center p-0">
-          <ul className="flex grow list-none flex-wrap justify-center p-0 gap-6">
+          <ul className="flex grow list-none flex-wrap p-0 gap-6 justify-center md:justify-normal">
             {filteredRetoursExperiences.map((retourExperience) => (
               <li key={retourExperience.id}>
                 <RetourExperienceCard retourExperience={retourExperience} />

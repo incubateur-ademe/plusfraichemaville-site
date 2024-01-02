@@ -33,14 +33,14 @@ export default async function FichesSolutions({
     );
   return (
     <div className="fr-container">
-      <TypeEspaceFilter className="justify-center mb-8 mt-8" />
+      <TypeEspaceFilter className="mb-8 mt-8 md:ml-52 flex justify-center md:justify-normal" />
       <div className="flex flex-col md:flex-row">
-        <div className="md:w-[13rem]">
+        <div className="md:min-w-[13rem]">
           <TypeSolutionFilter className="mb-6" />
           <BaisseTemperatureFilter className="mb-6" />
         </div>
-        <div className="grow list-none justify-center p-0">
-          <ul className="flex flex-wrap justify-center gap-6">
+        <div className="grow list-none p-0">
+          <ul className="flex flex-wrap gap-6 justify-center md:justify-normal">
             {filteredFichesSolutions.map((ficheSolution) => (
               <li key={ficheSolution.attributes.vuid} className="flex">
                 <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution.attributes} />
