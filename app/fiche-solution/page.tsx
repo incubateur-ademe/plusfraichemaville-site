@@ -16,7 +16,9 @@ export default async function FichesSolutions({
 }) {
   const allFichesSolutions = await getAllFichesSolutions();
 
+  // @ts-ignore
   const filteredFichesSolutions = allFichesSolutions
+    // @ts-ignore
     .filter((fs) => !searchParams.espaceFilter || fs.attributes.types_espace?.includes(searchParams.espaceFilter))
     .filter(
       (fs) =>
