@@ -1307,7 +1307,8 @@ declare module "@strapi/types" {
       "api::cobenefice.cobenefice": ApiCobeneficeCobenefice;
       "api::fiche-solution.fiche-solution": ApiFicheSolutionFicheSolution;
       "api::materiau.materiau": ApiMateriauMateriau;
-      "api::objectif-developpement-durable.objectif-developpement-durable": ApiObjectifDeveloppementDurableObjectifDeveloppementDurable;
+      "api::objectif-developpement-durable.objectif-developpement-durable":
+        ApiObjectifDeveloppementDurableObjectifDeveloppementDurable;
       "api::region.region": ApiRegionRegion;
       "api::retour-experience.retour-experience": ApiRetourExperienceRetourExperience;
       "api::solution-retour-experience.solution-retour-experience": ApiSolutionRetourExperienceSolutionRetourExperience;
