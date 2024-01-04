@@ -1,32 +1,25 @@
 "use client";
-import { Slide } from "react-slideshow-image";
-import "react-slideshow-image/dist/styles.css";
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from "react-image-gallery";
 
-const slideImages = [
-  {
-    url: "/images/homepage/carrousel1.jpg",
-    caption: "Slide 1",
-  },
-  {
-    url: "/images/homepage/carrousel1.jpg",
-    caption: "Slide 2",
-  },
-  {
-    url: "/images/homepage/carrousel1.jpg",
-    caption: "Slide 3",
-  },
+const images = [
+  { original: "/images/homepage/carrousel1.jpg", originalAlt:"Image de rafraichissement urbain" },
+  { original: "/images/homepage/carrousel1.jpg", originalAlt:"Image de rafraichissement urbain" },
+  { original: "/images/homepage/carrousel1.jpg", originalAlt:"Image de rafraichissement urbain" },
 ];
 
 export const HomeImageSlider = () => {
   return (
-    <div className="slide-container">
-      <Slide>
-        {slideImages.map((slideImage, index) => (
-          <div key={index}>
-            <div style={{'backgroundImage': `url(${slideImage.url})` }} className="flex justify-center items-center bg-cover h-96">
-            </div>
-          </div>
-        ))}
-      </Slide>
-    </div>)
-}
+    <ImageGallery
+      items={images}
+      showFullscreenButton={false}
+      showThumbnails={false}
+      showBullets={true}
+      autoPlay={true}
+      showPlayButton={false}
+      showNav={false}
+      slideDuration={900}
+      slideInterval={5000}
+    />
+  );
+};

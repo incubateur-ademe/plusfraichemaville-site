@@ -1,4 +1,3 @@
-import "react-slideshow-image/dist/styles.css";
 import Image from "next/image";
 import Button from "@codegouvfr/react-dsfr/Button";
 import React from "react";
