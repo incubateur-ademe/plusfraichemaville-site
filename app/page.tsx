@@ -66,7 +66,7 @@ export default function Home() {
         >
           Différents types de solutions à combiner pour lutter contre la surchauffe urbaine
         </div>
-        <div className="fr-container flex mt-12 gap-6 flex-wrap justify-center mb-12">
+        <div className="fr-container !max-w-[80rem] flex mt-12 gap-6 flex-wrap justify-center mb-12">
           <HomeSolutionExplanationCard typeSolution={TYPE_SOLUTION_VERTE} />
           <HomeSolutionExplanationCard typeSolution={TYPE_SOLUTION_BLEUE} />
           <HomeSolutionExplanationCard typeSolution={TYPE_SOLUTION_GRISE} />

@@ -5,7 +5,7 @@ import { TypeSolution } from "@/helpers/typeSolution";
 
 export const HomeSolutionExplanationCard = ({ typeSolution }: { typeSolution: TypeSolution }) => {
   return (
-    <div className="flex w-[17.5rem] flex-col items-center bg-dsfr-background-default-grey rounded-2xl">
+    <div className="flex w-72 flex-col items-center bg-dsfr-background-default-grey rounded-2xl">
       <div className="flex w-full h-40">
         <Image
           width={450}
