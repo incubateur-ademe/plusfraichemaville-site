@@ -15,7 +15,7 @@ export const HomeActionPresentation = ({
 }) => {
   return (
     <div className="flex flex-col items-center max-w-[18rem]">
-      <Image src={image} alt={buttonLabel} width={308} height={241} />
+      <Image src={image} alt={buttonLabel} width={308} height={236} />
       <div className="mt-6 text-dsfr-text-label-blue-france text-lg font-bold text-center">{label}</div>
       <Button className="rounded-3xl mt-6" linkProps={{ href: link }}>
         {buttonLabel}

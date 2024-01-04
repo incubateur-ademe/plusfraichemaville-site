@@ -3,6 +3,13 @@ import AppFooter from "@/components/layout/AppFooter";
 import { HomeImageSlider } from "@/components/homepage/HomeImageSlider";
 import React from "react";
 import { HomeActionPresentation } from "@/components/homepage/HomeActionPresentation";
+import { HomeSolutionExplanationCard } from "@/components/homepage/HomeSolutionExplanationCard";
+import {
+  TYPE_SOLUTION_BLEUE,
+  TYPE_SOLUTION_DOUCE,
+  TYPE_SOLUTION_GRISE,
+  TYPE_SOLUTION_VERTE,
+} from "@/helpers/typeSolution";
 
 export default function Home() {
   return (
@@ -50,6 +57,20 @@ export default function Home() {
             buttonLabel="Découvrir les projets réalisés"
             label="Je m’inspire des projets réalisés par d’autres collectivités"
           />
+        </div>
+      </div>
+      <div className="bg-dsfr-background-action-low-blue-france flex flex-col justify-center items-center">
+        <div
+          className="text-dsfr-text-label-blue-france font-bold text-[1.375rem] 
+        mt-12 max-w-md m-x-auto text-center leading-normal"
+        >
+          Différents types de solutions à combiner pour lutter contre la surchauffe urbaine
+        </div>
+        <div className="fr-container flex mt-12 gap-6 flex-wrap justify-center mb-12">
+          <HomeSolutionExplanationCard typeSolution={TYPE_SOLUTION_VERTE} />
+          <HomeSolutionExplanationCard typeSolution={TYPE_SOLUTION_BLEUE} />
+          <HomeSolutionExplanationCard typeSolution={TYPE_SOLUTION_GRISE} />
+          <HomeSolutionExplanationCard typeSolution={TYPE_SOLUTION_DOUCE} />
         </div>
       </div>
       <AppFooter />
