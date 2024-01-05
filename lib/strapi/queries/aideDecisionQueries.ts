@@ -42,7 +42,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
             }
           }
         }
-        etapes_suivantes {
+        etapes_suivantes ${strapiFilter.publicationStateString()} {
           data {
             id
             attributes {
@@ -68,4 +68,14 @@ export async function getAideDecisionFirstSteps(): Promise<
     ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
   return apiResponse?.data || [];
 }
+
+export async function getAideDecisionBySlug(slug: string): Promise<
+  APIResponseData<"api::aide-decision-etape.aide-decision-etape"> | null
+> {
+  const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value:slug, relation: false }]);
+  const apiResponse = (await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter)))
+    ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+  return apiResponse?.data?.length > 0 ? apiResponse.data[0] : null;
+}
+
 
