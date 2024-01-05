@@ -104,7 +104,7 @@ export const GET_RETOUR_EXPERIENCE_CARD_DATA = (
 export async function getRetourExperienceBySlug(
   slug: string,
 ): Promise<APIResponseData<"api::retour-experience.retour-experience"> | null> {
-  const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug }]);
+  const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter)))
     ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return apiResponse?.data?.length > 0 ? apiResponse.data[0] : null;

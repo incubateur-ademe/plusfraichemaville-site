@@ -768,6 +768,57 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAideDecisionEtapeAideDecisionEtape
+  extends Schema.CollectionType {
+  collectionName: 'aide_decision_etapes';
+  info: {
+    singularName: 'aide-decision-etape';
+    pluralName: 'aide-decision-etapes';
+    displayName: 'Aide D\u00E9cision Etape';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nom: Attribute.String & Attribute.Required;
+    description: Attribute.String;
+    question_suivante: Attribute.String;
+    image: Attribute.Media;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    fiches_solutions: Attribute.Relation<
+      'api::aide-decision-etape.aide-decision-etape',
+      'oneToMany',
+      'api::fiche-solution.fiche-solution'
+    >;
+    etapes_suivantes: Attribute.Relation<
+      'api::aide-decision-etape.aide-decision-etape',
+      'oneToMany',
+      'api::aide-decision-etape.aide-decision-etape'
+    >;
+    etape_precedente: Attribute.Relation<
+      'api::aide-decision-etape.aide-decision-etape',
+      'manyToOne',
+      'api::aide-decision-etape.aide-decision-etape'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::aide-decision-etape.aide-decision-etape',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::aide-decision-etape.aide-decision-etape',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
   collectionName: 'cobenefices';
   info: {
@@ -1542,6 +1593,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::aide-decision-etape.aide-decision-etape': ApiAideDecisionEtapeAideDecisionEtape;
       'api::cobenefice.cobenefice': ApiCobeneficeCobenefice;
       'api::fiche-solution.fiche-solution': ApiFicheSolutionFicheSolution;
       'api::materiau.materiau': ApiMateriauMateriau;
