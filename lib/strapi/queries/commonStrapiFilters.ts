@@ -1,5 +1,4 @@
-import { LinkProps } from "next/link";
-import { Route } from "next";
+import { APIResponse } from "@/lib/strapi/types/types";
 
 export type StrapiSingleFilter = string;
 
@@ -53,28 +52,11 @@ export class StrapiFilter {
 export class AideDecisionEtapeHistory {
   label: string;
   slug: string;
-  linkProps: Omit<LinkProps & { href: Route }, "children">;
-  image: string | null | undefined;
+  image: APIResponse<"plugin::upload.file"> | null | undefined;
 
-  constructor(label: string, slug: string, image?: string | null) {
+  constructor(label: string, slug: string, image?: APIResponse<"plugin::upload.file"> | null) {
     this.label = label;
-    this.linkProps = { href: slug };
     this.image = image;
     this.slug = slug;
   }
-}
-
-export function getStatusFilter(): StrapiSingleFilter {
-  const statusToShow = process.env.STRAPI_SHOW_STATUSES || "PREVIEW";
-  return ` publicationState: ${statusToShow}} `;
-}
-
-export function getAideDecisionFicheSolutionStatusFilter(): StrapiSingleFilter {
-  return ` {fiche_solution_id: ${getStatusFilter()}}`;
-}
-
-export function contructAndFilters(filters: StrapiSingleFilter[], sortField?: string): StrapiCompleteFilter {
-  const filterArgument = `filters: {_and: [${filters.map((filter) => filter).join(",")}]}`;
-  const sortArgument = sortField ? ` sort: "${sortField}" ` : "";
-  return ` (${[filterArgument, sortArgument].filter(Boolean).join(",")})`;
 }

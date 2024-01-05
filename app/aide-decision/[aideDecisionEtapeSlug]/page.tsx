@@ -1,11 +1,10 @@
-import { getAideDecisionEtapeBySlug, getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 import AideDecisionEtapeCard from "@/components/aideDecision/AideDecisionEtapeCard";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
-import { getAideDecisionBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
+import { getAideDecisionBySlug, getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
 export default async function Page({
@@ -18,8 +17,8 @@ export default async function Page({
   const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
-    const firstStep = historique && historique[1] ? historique[1] : currentStep;
-    const previousStep = historique && historique[historique.length - 1] ? historique[historique.length - 1] : null;
+    const firstStep = historique && historique[1] ? historique[1] : currentStep.attributes;
+    const previousStep = currentStep.attributes.etape_precedente;
     return (
       <div className={"fr-container"}>
         <div className="block md:flex flex-row justify-items-center">
@@ -34,7 +33,7 @@ export default async function Page({
             <Image
               width={46}
               height={46}
-              src={getStrapiImageUrl(firstStep.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+              src={getStrapiImageUrl(firstStep.image, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={currentStep.attributes.question_suivante || "Etape suivante"}
               className="pt-7 m-auto"
             />
@@ -46,11 +45,11 @@ export default async function Page({
                 </li>
               ))}
             </ul>
-            {previousStep && (
+            {previousStep?.data && (
               <div className="mt-8 text-center md:text-left">
                 <Link
                   className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
-                  href={`/aide-decision/${previousStep.slug}`}
+                  href={`/aide-decision/${previousStep.data.attributes.slug}`}
                 >
                   Retour
                 </Link>
@@ -61,9 +60,9 @@ export default async function Page({
       </div>
     );
   } else {
-    const aideDecisionEtape = await getAideDecisionEtapeBySlug(params.aideDecisionEtapeSlug);
+    const aideDecisionEtape = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
     if (aideDecisionEtape) {
-      return <AideDecisionResult searchParams={searchParams} aideDecisionEtape={aideDecisionEtape} />;
+      return <AideDecisionResult searchParams={searchParams} aideDecisionEtape={aideDecisionEtape.attributes} />;
     } else {
       notFound();
     }

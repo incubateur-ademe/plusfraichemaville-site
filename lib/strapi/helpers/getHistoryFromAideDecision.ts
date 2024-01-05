@@ -1,5 +1,5 @@
-import { AideDecisionEtapeHistory } from "@/lib/directus/queries/commonFilters";
-import { GetValues } from "@/lib/strapi/types/types";
+import { APIResponse, GetValues } from "@/lib/strapi/types/types";
+import { AideDecisionEtapeHistory } from "@/lib/strapi/queries/commonStrapiFilters";
 
 export function getHistoryFromAideDecisionEtape(
   aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">,
@@ -14,7 +14,7 @@ export function getHistoryFromAideDecisionEtape(
       new AideDecisionEtapeHistory(
         <string>etapeParente.nom,
         <string>etapeParente.slug,
-        <string | null>etapeParente.image,
+        <APIResponse<"plugin::upload.file"> | null>etapeParente.image,
       ),
     );
     etapeParente = <GetValues<"api::aide-decision-etape.aide-decision-etape"> | null | undefined>(

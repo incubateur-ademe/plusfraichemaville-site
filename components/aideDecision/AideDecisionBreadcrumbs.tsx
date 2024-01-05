@@ -1,6 +1,6 @@
-import { AideDecisionEtapeHistory } from "@/lib/directus/queries/commonFilters";
 import styles from "./AideDecisionBreadcrumbsStyles.module.css";
 import Link from "next/link";
+import { AideDecisionEtapeHistory } from "@/lib/strapi/queries/commonStrapiFilters";
 
 export default function AideDecisionBreadcrumbs({
   historique,
