@@ -18,7 +18,7 @@ export default function FicheSolutionTabMateriaux({
         <>
           <hr className="p-0 h-[1px]" />
           {ficheSolution.materiaux.data.map(({ attributes: mat }) => (
-            <div key={mat.vuid}>
+            <div key={mat.titre}>
               <div className={"flex flex-col md:flex-row gap-1 md:gap-6"}>
                 <div className="w-28 h-28 relative hidden md:flex flex-none mt-8">
                   <Image

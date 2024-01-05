@@ -11,7 +11,6 @@ import {
 import { Oval } from "react-loader-spinner";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
-import { GetValues } from "@/lib/strapi/types/types";
 
 const modalFromIcon = createModal({
   id: "bookmark-modal",
@@ -24,12 +23,12 @@ const modalFromButton = createModal({
 });
 
 export default function ButtonSaveFicheSolution({
-  ficheSolution,
+  ficheSolutionId,
   projectName,
   label,
   className,
 }: {
-  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+  ficheSolutionId: number;
   label: boolean;
   projectName: string;
   className?: string;
@@ -42,7 +41,7 @@ export default function ButtonSaveFicheSolution({
   );
 
   const [isBookmarked, setIsBookmarked] = useState(
-    isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolution.vuid, projectName),
+    isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolutionId, projectName),
   );
 
   useEffect(() => {
@@ -53,11 +52,11 @@ export default function ButtonSaveFicheSolution({
 
   const changeFavorite = () => {
     if (isBookmarked) {
-      setBookmarkedFichesSolutions(unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolution.vuid, projectName));
+      setBookmarkedFichesSolutions(unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolutionId, projectName));
       setIsBookmarked(false);
     } else {
       setBookmarkedFichesSolutions(
-        addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolution.vuid, projectName),
+        addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolutionId, projectName),
       );
       setIsBookmarked(true);
       modal.open();

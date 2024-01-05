@@ -16,7 +16,6 @@ export default async function FichesSolutions({
 }) {
   const allFichesSolutions = await getAllFichesSolutions();
 
-  // @ts-ignore
   const filteredFichesSolutions = allFichesSolutions
     // @ts-ignore
     .filter((fs) => !searchParams.espaceFilter || fs.attributes.types_espace?.includes(searchParams.espaceFilter))
@@ -44,8 +43,8 @@ export default async function FichesSolutions({
         <div className="grow list-none p-0">
           <ul className="flex flex-wrap gap-6 justify-center md:justify-normal">
             {filteredFichesSolutions.map((ficheSolution) => (
-              <li key={ficheSolution.attributes.vuid} className="flex">
-                <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution.attributes} />
+              <li key={ficheSolution.id} className="flex">
+                <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution} />
               </li>
             ))}
           </ul>

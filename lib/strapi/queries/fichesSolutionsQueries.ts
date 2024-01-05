@@ -17,7 +17,6 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
     data {
       id
       attributes {
-        vuid
         titre
         type_solution
         description_courte

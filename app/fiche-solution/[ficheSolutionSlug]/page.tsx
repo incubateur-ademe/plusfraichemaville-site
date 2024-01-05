@@ -58,7 +58,7 @@ export default async function FicheSolution({
             )}
             <ButtonShareFicheSolution className={"mb-4"} />
             <ButtonSaveFicheSolution
-              ficheSolution={ficheSolution.attributes}
+              ficheSolutionId={ficheSolution.id}
               projectName={(historique && historique[1].label) || ""}
               className=""
               label={true}

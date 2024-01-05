@@ -83,7 +83,7 @@ export default function FicheSolutionTabSynthese({
           <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
             {ficheSolution.solution_retour_experiences.data.map((rex) => (
               <RetourExperienceCard
-                key={rex.attributes.retour_experience?.data.attributes.vuid}
+                key={rex.attributes.retour_experience?.data.id}
                 retourExperience={
                     rex.attributes.retour_experience
                       ?.data as APIResponseData<"api::retour-experience.retour-experience">
@@ -104,8 +104,8 @@ export default function FicheSolutionTabSynthese({
           <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
             {ficheSolution.fiches_solutions_complementaires.data.map((fs) => (
               <FicheSolutionCardWithUserInfo
-                ficheSolution={fs.attributes}
-                key={fs.attributes.vuid}
+                ficheSolution={fs}
+                key={fs.id}
                 className={"flex-none mt-8 mb-12"}
                 projectName=""
               />
