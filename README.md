@@ -6,4 +6,4 @@ Ce repository concerne la V2 du site web http://plusfraichemaville.fr.
 
 La partie Front et Back de ce site est implémenté en NextJS.
 
-Elle fait également appel au CMS Directus, dont le repository est ici : https://github.com/incubateur-ademe/plusfraichemaville-cms
+Elle fait également appel au CMS Strapi, dont le repository est ici : https://github.com/incubateur-ademe/plusfraichemaville-cms

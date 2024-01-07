@@ -8,6 +8,7 @@ import {
 } from "@/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
 import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
+import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
 
 export const GET_FICHE_SOLUTION_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,
@@ -143,12 +144,28 @@ export async function getFicheSolutionBySlug(
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
     ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
-  return apiResponse?.data?.length > 0 ? apiResponse.data[0] : null;
+  return safeReturnStrapiEntity(apiResponse);
 }
 
 export async function getAllFichesSolutions(): Promise<APIResponseData<"api::fiche-solution.fiche-solution">[]> {
   const filter = new StrapiFilter(true, []);
   const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter)))
     ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
-  return apiResponse?.data || [];
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getFicheSolutionByIds(
+  ficheSolutionIds: number[],
+): Promise<APIResponseData<"api::fiche-solution.fiche-solution">[]> {
+  const filter = new StrapiFilter(true, [
+    {
+      attribute: "id",
+      operator: "in",
+      value: ficheSolutionIds,
+      relation: false,
+    },
+  ]);
+  const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter)))
+    ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  return safeReturnStrapiEntities(apiResponse);
 }

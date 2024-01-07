@@ -5,7 +5,7 @@ export type StrapiSingleFilter = string;
 export type StrapiCompleteFilter = string;
 
 type StrapiEqFilter = { attribute: string; value: string; operator: "eq"; relation: false };
-type StrapiInFilter = { attribute: string; value: string; operator: "in"; relation: false };
+type StrapiInFilter = { attribute: string; value: string[] | number[]; operator: "in"; relation: false };
 type StrapiRelationFilter = { attribute: string; operator: "null" | "notNull"; relation: true };
 
 export class StrapiFilter {

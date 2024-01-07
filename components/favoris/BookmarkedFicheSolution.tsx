@@ -1,6 +1,6 @@
-import { FicheSolution } from "@/lib/directus/directusModels";
 import { useApi } from "@/hooks/useApi";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import { APIResponseData } from "@/lib/strapi/types/types";
 
 export default function BookmarkedFicheSolutionByProject({
   projectName,
@@ -9,7 +9,7 @@ export default function BookmarkedFicheSolutionByProject({
   projectName: string;
   ficheSolutionIds: number[];
 }) {
-  const { data: ficheSolutions } = useApi<FicheSolution[]>(
+  const { data: ficheSolutions } = useApi<APIResponseData<"api::fiche-solution.fiche-solution">[]>(
     `/api/get-fiches-solutions?ficheSolutionIds=${JSON.stringify(ficheSolutionIds)}`,
   );
   if (ficheSolutions && ficheSolutions?.length > 0) {

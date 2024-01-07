@@ -7,12 +7,12 @@ import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionT
 import FicheSolutionTabMiseEnOeuvre from "@/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
 import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
 import ButtonShareFicheSolution from "@/components/ficheSolution/ButtonShareFicheSolution";
-import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import FicheSolutionTabFinancements from "@/components/ficheSolution/FicheSolutionTabFinancements";
 import FicheSolutionTabOups from "@/components/ficheSolution/FicheSolutionTabOups";
 import { getFicheSolutionBySlug } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
 
 export default async function FicheSolution({
   params,

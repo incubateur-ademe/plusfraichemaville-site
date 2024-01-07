@@ -9,6 +9,7 @@ import {
 import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
 import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
 import { getHistoryFromAideDecisionEtape } from "@/lib/strapi/helpers/getHistoryFromAideDecision";
+import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
 
 export const GET_FILTERED_AIDE_DECISION_ETAPE = (
   strapiFilter: StrapiFilter,
@@ -123,7 +124,7 @@ export async function getAideDecisionFirstSteps(): Promise<
   const filter = new StrapiFilter(true, [{ attribute: "etape_precedente", operator: "null", relation: true }]);
   const apiResponse = (await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter)))
     ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
-  return apiResponse?.data || [];
+  return safeReturnStrapiEntities(apiResponse);
 }
 
 export async function getAideDecisionBySlug(
@@ -132,7 +133,7 @@ export async function getAideDecisionBySlug(
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter)))
     ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
-  return apiResponse?.data?.length > 0 ? apiResponse.data[0] : null;
+  return safeReturnStrapiEntity(apiResponse);
 }
 
 export async function getAideDecisionHistoryBySlug(

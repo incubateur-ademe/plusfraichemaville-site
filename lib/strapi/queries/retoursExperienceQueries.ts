@@ -8,6 +8,7 @@ import {
 } from "@/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
 import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
+import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
 
 export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,
@@ -107,12 +108,12 @@ export async function getRetourExperienceBySlug(
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter)))
     ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
-  return apiResponse?.data?.length > 0 ? apiResponse.data[0] : null;
+  return safeReturnStrapiEntity(apiResponse);
 }
 
 export async function getRetoursExperiences(): Promise<APIResponseData<"api::retour-experience.retour-experience">[]> {
   const filter = new StrapiFilter(true, []);
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter)))
     ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
-  return apiResponse?.data || [];
+  return safeReturnStrapiEntities(apiResponse);
 }
