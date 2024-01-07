@@ -55,9 +55,7 @@ export default function ButtonSaveFicheSolution({
       setBookmarkedFichesSolutions(unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolutionId, projectName));
       setIsBookmarked(false);
     } else {
-      setBookmarkedFichesSolutions(
-        addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolutionId, projectName),
-      );
+      setBookmarkedFichesSolutions(addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolutionId, projectName));
       setIsBookmarked(true);
       modal.open();
     }

@@ -73,47 +73,47 @@ export default function FicheSolutionTabSynthese({
       </div>
       {!!ficheSolution.solution_retour_experiences?.data?.length &&
         ficheSolution.solution_retour_experiences?.data?.length > 0 && (
-        <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">
-          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
+          <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">
+            <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
               Découvrir les projets réalisés
-          </div>
-          <div className="text-dsfr-text-title-grey">
+            </div>
+            <div className="text-dsfr-text-title-grey">
               Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
-          </div>
-          <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
-            {ficheSolution.solution_retour_experiences.data.map((rex) => (
-              <RetourExperienceCard
-                key={rex.attributes.retour_experience?.data.id}
-                retourExperience={
+            </div>
+            <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
+              {ficheSolution.solution_retour_experiences.data.map((rex) => (
+                <RetourExperienceCard
+                  key={rex.attributes.retour_experience?.data.id}
+                  retourExperience={
                     rex.attributes.retour_experience
                       ?.data as APIResponseData<"api::retour-experience.retour-experience">
-                }
-                className={"w-72 flex-none mt-8 mb-12"}
-              />
-            ))}
+                  }
+                  className={"w-72 flex-none mt-8 mb-12"}
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
       {!!ficheSolution.fiches_solutions_complementaires?.data.length &&
         ficheSolution.fiches_solutions_complementaires.data.length > 0 && (
-        <div className="bg-dsfr-background-alt-blue-france rounded-2xl pl-6 pt-10 mt-12">
-          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Solutions complémentaires</div>
-          <div className="text-dsfr-text-title-grey">
+          <div className="bg-dsfr-background-alt-blue-france rounded-2xl pl-6 pt-10 mt-12">
+            <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Solutions complémentaires</div>
+            <div className="text-dsfr-text-title-grey">
               Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
+            </div>
+            <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
+              {ficheSolution.fiches_solutions_complementaires.data.map((fs) => (
+                <FicheSolutionCardWithUserInfo
+                  ficheSolution={fs}
+                  key={fs.id}
+                  className={"flex-none mt-8 mb-12"}
+                  projectName=""
+                />
+              ))}
+            </div>
           </div>
-          <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
-            {ficheSolution.fiches_solutions_complementaires.data.map((fs) => (
-              <FicheSolutionCardWithUserInfo
-                ficheSolution={fs}
-                key={fs.id}
-                className={"flex-none mt-8 mb-12"}
-                projectName=""
-              />
-            ))}
-          </div>
-        </div>
-      )}
-      {ficheSolution.logo_partenaire && (
+        )}
+      {ficheSolution.logo_partenaire && !!ficheSolution.logo_partenaire.data && (
         <>
           <hr className="pb-8 mt-12" />
           <div className={"flex flex-col md:flex-row  ml-4"}>

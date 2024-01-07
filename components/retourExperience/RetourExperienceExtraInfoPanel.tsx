@@ -16,6 +16,7 @@ export default async function RetourExperienceExtraInfoPanel({
     >
       <ItemRetourExperienceExtraInfo
         title="Solutions"
+        // @ts-ignore
         content={retourExperience.attributes.types_solutions?.join(" · ")}
       />
       <hr className="pb-4" />

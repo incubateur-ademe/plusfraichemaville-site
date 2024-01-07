@@ -65,7 +65,7 @@ export default async function FicheSolution({
             />
           </div>
           <div className="fr-tabs before:!shadow-none !shadow-none">
-            <ul className="fr-tabs__list m-0 p-0 h-14" role="tablist" aria-label="Menu fiche solution">
+            <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
                 <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" />
               </li>

@@ -19,14 +19,11 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
 
   if (!!aideDecisionEtape.fiches_solutions?.data && aideDecisionEtape.fiches_solutions.data.length > 0) {
     const sortBy = getAideDecisionSortFieldFromCode(searchParams?.tri);
-    const sortedFichesSolutions = aideDecisionEtape.fiches_solutions.data
-      .sort(sortBy.sortFn)
-      .slice(0, sortBy.maxItem);
-
+    const sortedFichesSolutions = aideDecisionEtape.fiches_solutions.data.sort(sortBy.sortFn).slice(0, sortBy.maxItem);
 
     const relatedRetourExperiences = sortedFichesSolutions
       .flatMap((fs) => fs.attributes.solution_retour_experiences?.data.map((sol) => sol.attributes.retour_experience))
-      .filter(v => v?.data)
+      .filter((v) => v?.data)
       .filter(notEmpty)
       .filter((v, i, a) => a.findIndex((v2) => v2.data?.id === v?.data?.id) === i)
       .slice(0, 3);

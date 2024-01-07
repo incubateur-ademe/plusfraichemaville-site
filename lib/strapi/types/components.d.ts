@@ -1,137 +1,133 @@
-import type { Schema, Attribute } from '@strapi/strapi';
+import type { Schema, Attribute } from "@strapi/strapi";
 
 export interface CommonCitation extends Schema.Component {
-  collectionName: 'components_common_citations';
+  collectionName: "components_common_citations";
   info: {
-    displayName: 'citation';
-    description: '';
+    displayName: "citation";
+    description: "";
   };
   attributes: {
     auteur: Attribute.String & Attribute.Required;
     texte: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        "plugin::ckeditor.CKEditor",
         {
-          output: 'HTML';
-          preset: 'rich';
+          output: "HTML";
+          preset: "rich";
         }
       >;
   };
 }
 
 export interface FicheSolutionAideRegionale extends Schema.Component {
-  collectionName: 'components_fiche_solution_aide_regionales';
+  collectionName: "components_fiche_solution_aide_regionales";
   info: {
-    displayName: 'aide_regionale';
-    description: '';
+    displayName: "aide_regionale";
+    description: "";
   };
   attributes: {
-    region: Attribute.Relation<
-      'fiche-solution.aide-regionale',
-      'oneToOne',
-      'api::region.region'
-    >;
+    region: Attribute.Relation<"fiche-solution.aide-regionale", "oneToOne", "api::region.region">;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        "plugin::ckeditor.CKEditor",
         {
-          output: 'HTML';
-          preset: 'rich';
+          output: "HTML";
+          preset: "rich";
         }
       >;
   };
 }
 
 export interface FicheSolutionEtapeDiagnostic extends Schema.Component {
-  collectionName: 'components_fiche_solution_etape_diagnostics';
+  collectionName: "components_fiche_solution_etape_diagnostics";
   info: {
-    displayName: 'etape_diagnostic';
+    displayName: "etape_diagnostic";
   };
   attributes: {
     titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        "plugin::ckeditor.CKEditor",
         {
-          output: 'HTML';
-          preset: 'rich';
+          output: "HTML";
+          preset: "rich";
         }
       >;
   };
 }
 
 export interface FicheSolutionEtapeEntretien extends Schema.Component {
-  collectionName: 'components_fiche_solution_etape_entretiens';
+  collectionName: "components_fiche_solution_etape_entretiens";
   info: {
-    displayName: 'etape_entretien';
-    description: '';
+    displayName: "etape_entretien";
+    description: "";
   };
   attributes: {
     titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        "plugin::ckeditor.CKEditor",
         {
-          output: 'HTML';
-          preset: 'rich';
+          output: "HTML";
+          preset: "rich";
         }
       >;
   };
 }
 
 export interface FicheSolutionEtapeMiseEnOeuvre extends Schema.Component {
-  collectionName: 'components_fiche_solution_etape_mise_en_oeuvres';
+  collectionName: "components_fiche_solution_etape_mise_en_oeuvres";
   info: {
-    displayName: 'etape_mise_en_oeuvre';
+    displayName: "etape_mise_en_oeuvre";
   };
   attributes: {
     titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        "plugin::ckeditor.CKEditor",
         {
-          output: 'HTML';
-          preset: 'rich';
+          output: "HTML";
+          preset: "rich";
         }
       >;
   };
 }
 
 export interface FicheSolutionOups extends Schema.Component {
-  collectionName: 'components_fiche_solution_oups';
+  collectionName: "components_fiche_solution_oups";
   info: {
-    displayName: 'oups';
-    description: '';
+    displayName: "oups";
+    description: "";
   };
   attributes: {
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        "plugin::ckeditor.CKEditor",
         {
-          output: 'HTML';
-          preset: 'rich';
+          output: "HTML";
+          preset: "rich";
         }
       >;
     titre: Attribute.String & Attribute.Required;
     solutions_reparatrices: Attribute.Relation<
-      'fiche-solution.oups',
-      'oneToMany',
-      'api::fiche-solution.fiche-solution'
+      "fiche-solution.oups",
+      "oneToMany",
+      "api::fiche-solution.fiche-solution"
     >;
   };
 }
 
 export interface RetourExperienceCalendrier extends Schema.Component {
-  collectionName: 'components_retour_experience_calendriers';
+  collectionName: "components_retour_experience_calendriers";
   info: {
-    displayName: 'Calendrier';
-    description: '';
+    displayName: "Calendrier";
+    description: "";
   };
   attributes: {
     date: Attribute.String & Attribute.Required;
@@ -139,46 +135,46 @@ export interface RetourExperienceCalendrier extends Schema.Component {
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        "plugin::ckeditor.CKEditor",
         {
-          output: 'HTML';
-          preset: 'rich';
+          output: "HTML";
+          preset: "rich";
         }
       >;
   };
 }
 
 export interface RetourExperienceSituation extends Schema.Component {
-  collectionName: 'components_retour_experience_situations';
+  collectionName: "components_retour_experience_situations";
   info: {
-    displayName: 'Situation';
-    description: '';
+    displayName: "Situation";
+    description: "";
   };
   attributes: {
     image: Attribute.Media;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
-        'plugin::ckeditor.CKEditor',
+        "plugin::ckeditor.CKEditor",
         {
-          output: 'HTML';
-          preset: 'rich';
+          output: "HTML";
+          preset: "rich";
         }
       >;
   };
 }
 
-declare module '@strapi/types' {
+declare module "@strapi/types" {
   export module Shared {
     export interface Components {
-      'common.citation': CommonCitation;
-      'fiche-solution.aide-regionale': FicheSolutionAideRegionale;
-      'fiche-solution.etape-diagnostic': FicheSolutionEtapeDiagnostic;
-      'fiche-solution.etape-entretien': FicheSolutionEtapeEntretien;
-      'fiche-solution.etape-mise-en-oeuvre': FicheSolutionEtapeMiseEnOeuvre;
-      'fiche-solution.oups': FicheSolutionOups;
-      'retour-experience.calendrier': RetourExperienceCalendrier;
-      'retour-experience.situation': RetourExperienceSituation;
+      "common.citation": CommonCitation;
+      "fiche-solution.aide-regionale": FicheSolutionAideRegionale;
+      "fiche-solution.etape-diagnostic": FicheSolutionEtapeDiagnostic;
+      "fiche-solution.etape-entretien": FicheSolutionEtapeEntretien;
+      "fiche-solution.etape-mise-en-oeuvre": FicheSolutionEtapeMiseEnOeuvre;
+      "fiche-solution.oups": FicheSolutionOups;
+      "retour-experience.calendrier": RetourExperienceCalendrier;
+      "retour-experience.situation": RetourExperienceSituation;
     }
   }
 }
