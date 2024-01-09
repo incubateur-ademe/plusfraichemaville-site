@@ -19,6 +19,7 @@ export default async function Page({
   // @ts-ignore
   if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
     const firstStep = historique && historique[1] ? historique[1] : currentStep.attributes;
+    // @ts-ignore
     const previousStep = currentStep.attributes.etape_precedente;
     return (
       <div className={"fr-container"}>
