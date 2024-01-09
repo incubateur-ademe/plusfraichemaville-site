@@ -1,14 +1,15 @@
-import { getAideDecisionHistoryBySlug } from "@/lib/directus/queries/aideDecisionQueries";
-import { AideDecisionEtape, FicheSolution, RetourExperience } from "@/lib/directus/directusModels";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import AideDecisionSortFilter from "@/components/filters/AideDecisionSortFilter";
 import { getAideDecisionSortFieldFromCode } from "@/helpers/aideDecisionSortFilter";
 import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
 import Link from "next/link";
+import { GetValues } from "@/lib/strapi/types/types";
+import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
+import { notEmpty } from "@/helpers/listUtils";
 
 type Props = {
-  aideDecisionEtape: AideDecisionEtape;
+  aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">;
   searchParams: { tri: string | undefined };
 };
 
@@ -16,16 +17,15 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
   const historique = await getAideDecisionHistoryBySlug(aideDecisionEtape.slug);
   const previousStep = historique && historique[historique.length - 1] ? historique[historique.length - 1] : null;
 
-  if (aideDecisionEtape.fiches_solutions.length > 0) {
+  if (!!aideDecisionEtape.fiches_solutions?.data && aideDecisionEtape.fiches_solutions.data.length > 0) {
     const sortBy = getAideDecisionSortFieldFromCode(searchParams?.tri);
-    const sortedFichesSolutions: FicheSolution[] = aideDecisionEtape.fiches_solutions
-      .map((fs) => fs.fiche_solution_id)
-      .sort(sortBy.sortFn)
-      .slice(0, sortBy.maxItem);
+    const sortedFichesSolutions = aideDecisionEtape.fiches_solutions.data.sort(sortBy.sortFn).slice(0, sortBy.maxItem);
 
-    const relatedRetourExperiences: RetourExperience[] = sortedFichesSolutions
-      .flatMap((fs) => fs.solution_retour_experience?.map((sol) => sol.retour_experience))
-      .filter((v, i, a) => a.findIndex((v2) => v2.id === v.id) === i)
+    const relatedRetourExperiences = sortedFichesSolutions
+      .flatMap((fs) => fs.attributes.solution_retour_experiences?.data.map((sol) => sol.attributes.retour_experience))
+      .filter((v) => v?.data)
+      .filter(notEmpty)
+      .filter((v, i, a) => a.findIndex((v2) => v2.data?.id === v?.data?.id) === i)
       .slice(0, 3);
 
     return (
@@ -58,7 +58,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                 <li key={ficheSolution.id} className="flex">
                   <FicheSolutionCardWithUserInfo
                     ficheSolution={ficheSolution}
-                    projectName={(historique && historique[1].label) || ""}
+                    projectName={(historique && historique[1]?.label) || ""}
                     extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtape.slug }]}
                   />
                 </li>
@@ -71,8 +71,8 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                 </h1>
                 <ul className="flex list-none overflow-x-auto md:justify-start pt-2 gap-6 pl-2">
                   {relatedRetourExperiences.map((rex) => (
-                    <li key={rex.id} className="flex">
-                      <RetourExperienceCard retourExperience={rex} />
+                    <li key={rex?.data.id} className="flex">
+                      <RetourExperienceCard retourExperience={rex?.data} />
                     </li>
                   ))}
                 </ul>

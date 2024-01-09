@@ -1,12 +1,12 @@
-import { AideDecisionEtape } from "@/lib/directus/directusModels";
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Link from "next/link";
 import Image from "next/image";
+import { GetValues } from "@/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
 export default function AideDecisionFirstStepEtapeCard({
   aideDecisionEtape,
 }: {
-  aideDecisionEtape: AideDecisionEtape;
+  aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">;
 }) {
   return (
     <Link
@@ -18,7 +18,7 @@ export default function AideDecisionFirstStepEtapeCard({
         <Image
           width={80}
           height={80}
-          src={getDirectusImageUrl(aideDecisionEtape.image, DIRECTUS_IMAGE_KEY_SIZE.aideDecisionCard)}
+          src={getStrapiImageUrl(aideDecisionEtape.image, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={aideDecisionEtape.nom || ""}
           className={"svg-blue-hover"}
         />

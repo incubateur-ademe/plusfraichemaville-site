@@ -1,12 +1,16 @@
-import { FicheSolution } from "@/lib/directus/directusModels";
 import React from "react";
 import aidesTerittoiresLogo from "../../public/images/fiches-solutions/aides-territoires.svg";
 import Link from "next/link";
 import Image from "next/image";
 import { getRegionLabelFromCode } from "@/helpers/regions";
 import CmsRichText from "@/components/common/CmsRichText";
+import { GetValues } from "@/lib/strapi/types/types";
 
-export default function FicheSolutionTabFinancements({ ficheSolution }: { ficheSolution: FicheSolution }) {
+export default function FicheSolutionTabFinancements({
+  ficheSolution,
+}: {
+  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+}) {
   return (
     <div className="text-dsfr-text-title-grey">
       <div className="font-bold text-[1.75rem] mb-8">Financements</div>
@@ -42,13 +46,15 @@ export default function FicheSolutionTabFinancements({ ficheSolution }: { ficheS
       {ficheSolution.aides_regionales && ficheSolution.aides_regionales.length > 0 && (
         <>
           <div className="font-bold text-[1.375rem] mb-4 mt-10">Aides spécifiques par régions</div>
-          {ficheSolution.aides_regionales.map((aide) => (
-            <div key={aide.region} className="mt-2 mb-10">
+          {ficheSolution.aides_regionales.map((aideRegionale) => (
+            <div key={aideRegionale.region?.data?.attributes.code} className="mt-2 mb-10">
               <div className="flex">
                 <span className="fr-icon-map-pin-2-fill fr-icon--sm mr-2" />
-                <div className="text-lg  font-bold mb-1">{getRegionLabelFromCode(aide.region)}</div>
+                <div className="text-lg  font-bold mb-1">
+                  {getRegionLabelFromCode(aideRegionale.region?.data?.attributes.code)}
+                </div>
               </div>
-              <CmsRichText label={aide.description} />
+              <CmsRichText label={aideRegionale.description} />
             </div>
           ))}
         </>

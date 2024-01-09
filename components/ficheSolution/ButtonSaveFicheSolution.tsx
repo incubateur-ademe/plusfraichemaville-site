@@ -1,5 +1,4 @@
 "use client";
-import { FicheSolution } from "@/lib/directus/directusModels";
 import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import {
@@ -24,12 +23,12 @@ const modalFromButton = createModal({
 });
 
 export default function ButtonSaveFicheSolution({
-  ficheSolution,
+  ficheSolutionId,
   projectName,
   label,
   className,
 }: {
-  ficheSolution: FicheSolution;
+  ficheSolutionId: number;
   label: boolean;
   projectName: string;
   className?: string;
@@ -42,7 +41,7 @@ export default function ButtonSaveFicheSolution({
   );
 
   const [isBookmarked, setIsBookmarked] = useState(
-    isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolution.id, projectName),
+    isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolutionId, projectName),
   );
 
   useEffect(() => {
@@ -53,10 +52,10 @@ export default function ButtonSaveFicheSolution({
 
   const changeFavorite = () => {
     if (isBookmarked) {
-      setBookmarkedFichesSolutions(unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolution.id, projectName));
+      setBookmarkedFichesSolutions(unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolutionId, projectName));
       setIsBookmarked(false);
     } else {
-      setBookmarkedFichesSolutions(addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolution.id, projectName));
+      setBookmarkedFichesSolutions(addFicheSolutionBookmark(bookmarkedFichesSolutions, ficheSolutionId, projectName));
       setIsBookmarked(true);
       modal.open();
     }

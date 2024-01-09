@@ -1,4 +1,3 @@
-import { FicheSolution } from "@/lib/directus/directusModels";
 import Image from "next/image";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
@@ -6,9 +5,14 @@ import CmsRichText from "@/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
+import { APIResponseData, GetValues } from "@/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
-export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolution: FicheSolution }) {
+export default function FicheSolutionTabSynthese({
+  ficheSolution,
+}: {
+  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+}) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
   return (
     <div>
@@ -32,18 +36,16 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
             className={"text-sm"}
           />
           <hr className="pb-2 mt-1" />
-          {ficheSolution.cobenefices.map((cobenefice) => (
-            <div key={cobenefice.cobenefice_id.id} className="flex flex-row mt-3">
+          {ficheSolution.cobenefices?.data.map((cobenefice) => (
+            <div key={cobenefice.id} className="flex flex-row mt-3">
               <Image
                 width={50}
                 height={50}
-                src={`/images/cobenefices/${cobenefice.cobenefice_id.icone || "cobenefice-blank"}.svg`}
+                src={`/images/cobenefices/${cobenefice.attributes.icone || "cobenefice-blank"}.svg`}
                 className="mr-4 flex-none"
-                alt={cobenefice.cobenefice_id.description}
+                alt={cobenefice.attributes.description}
               />
-              <div className="text-dsfr-text-mention-grey flex items-center">
-                {cobenefice.cobenefice_id.description}
-              </div>
+              <div className="text-dsfr-text-mention-grey flex items-center">{cobenefice.attributes.description}</div>
             </div>
           ))}
         </div>
@@ -69,42 +71,49 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
           </div>
         )}
       </div>
-      {ficheSolution.solution_retour_experience.length > 0 && (
-        <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">
-          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Découvrir les projets réalisés</div>
-          <div className="text-dsfr-text-title-grey">
-            Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
+      {!!ficheSolution.solution_retour_experiences?.data?.length &&
+        ficheSolution.solution_retour_experiences?.data?.length > 0 && (
+          <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">
+            <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
+              Découvrir les projets réalisés
+            </div>
+            <div className="text-dsfr-text-title-grey">
+              Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
+            </div>
+            <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
+              {ficheSolution.solution_retour_experiences.data.map((rex) => (
+                <RetourExperienceCard
+                  key={rex.attributes.retour_experience?.data.id}
+                  retourExperience={
+                    rex.attributes.retour_experience
+                      ?.data as APIResponseData<"api::retour-experience.retour-experience">
+                  }
+                  className={"w-72 flex-none mt-8 mb-12"}
+                />
+              ))}
+            </div>
           </div>
-          <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
-            {ficheSolution.solution_retour_experience.map((rex) => (
-              <RetourExperienceCard
-                key={rex.retour_experience.id}
-                retourExperience={rex.retour_experience}
-                className={"w-72 flex-none mt-8 mb-12"}
-              />
-            ))}
+        )}
+      {!!ficheSolution.fiches_solutions_complementaires?.data.length &&
+        ficheSolution.fiches_solutions_complementaires.data.length > 0 && (
+          <div className="bg-dsfr-background-alt-blue-france rounded-2xl pl-6 pt-10 mt-12">
+            <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Solutions complémentaires</div>
+            <div className="text-dsfr-text-title-grey">
+              Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
+            </div>
+            <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
+              {ficheSolution.fiches_solutions_complementaires.data.map((fs) => (
+                <FicheSolutionCardWithUserInfo
+                  ficheSolution={fs}
+                  key={fs.id}
+                  className={"flex-none mt-8 mb-12"}
+                  projectName=""
+                />
+              ))}
+            </div>
           </div>
-        </div>
-      )}
-      {ficheSolution.fiches_solutions_complementaires.length > 0 && (
-        <div className="bg-dsfr-background-alt-blue-france rounded-2xl pl-6 pt-10 mt-12">
-          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Solutions complémentaires</div>
-          <div className="text-dsfr-text-title-grey">
-            Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
-          </div>
-          <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
-            {ficheSolution.fiches_solutions_complementaires.map((fs) => (
-              <FicheSolutionCardWithUserInfo
-                ficheSolution={fs.related_fiche_solution_id}
-                key={fs.related_fiche_solution_id.id}
-                className={"flex-none mt-8 mb-12"}
-                projectName=""
-              />
-            ))}
-          </div>
-        </div>
-      )}
-      {ficheSolution.logo_partenaire && (
+        )}
+      {ficheSolution.logo_partenaire && !!ficheSolution.logo_partenaire.data && (
         <>
           <hr className="pb-8 mt-12" />
           <div className={"flex flex-col md:flex-row  ml-4"}>
@@ -112,10 +121,7 @@ export default function FicheSolutionTabSynthese({ ficheSolution }: { ficheSolut
             <Image
               width={110}
               height={110}
-              src={getDirectusImageUrl(
-                ficheSolution.logo_partenaire,
-                DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionLogoPartenaire,
-              )}
+              src={getStrapiImageUrl(ficheSolution.logo_partenaire, STRAPI_IMAGE_KEY_SIZE.small)}
               alt={ficheSolution.titre}
               className={"h-full "}
             />

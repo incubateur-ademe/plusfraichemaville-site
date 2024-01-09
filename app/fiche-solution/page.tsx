@@ -1,9 +1,9 @@
-import { getAllFichesSolutions } from "@/lib/directus/queries/fichesSolutionsQueries";
 import TypeEspaceFilter from "@/components/filters/TypeEspaceFilter";
 import TypeSolutionFilter from "@/components/filters/TypeSolutionFilter";
 import BaisseTemperatureFilter from "@/components/filters/BaisseTemperatureFilter";
 import { getBaisseTemperatureFicheSolutionFromTemperature } from "@/helpers/baisseTemperatureFicheSolution";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import { getAllFichesSolutions } from "@/lib/strapi/queries/fichesSolutionsQueries";
 
 export default async function FichesSolutions({
   searchParams,
@@ -17,18 +17,20 @@ export default async function FichesSolutions({
   const allFichesSolutions = await getAllFichesSolutions();
 
   const filteredFichesSolutions = allFichesSolutions
-    .filter((fs) => !searchParams.espaceFilter || fs.types_espace?.includes(searchParams.espaceFilter))
+    // @ts-ignore
+    .filter((fs) => !searchParams.espaceFilter || fs.attributes.types_espace?.includes(searchParams.espaceFilter))
     .filter(
       (fs) =>
         !searchParams.typeSolutionFilter ||
-        (fs.type_solution && searchParams.typeSolutionFilter?.split(",").includes(fs.type_solution)),
+        (fs.attributes.type_solution &&
+          searchParams.typeSolutionFilter?.split(",").includes(fs.attributes.type_solution)),
     )
     .filter(
       (fs) =>
         !searchParams.baisseTemperatureFilter ||
         searchParams.baisseTemperatureFilter
           .split(",")
-          .includes(getBaisseTemperatureFicheSolutionFromTemperature(fs.baisse_temperature).code),
+          .includes(getBaisseTemperatureFicheSolutionFromTemperature(fs.attributes.baisse_temperature).code),
     );
   return (
     <div className="fr-container">

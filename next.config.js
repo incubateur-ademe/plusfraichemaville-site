@@ -21,6 +21,12 @@ const nextConfig = {
         port: "",
         pathname: "/assets/**",
       },
+      {
+        protocol: "https",
+        hostname: "plusfraichemaville.s3.fr-par.scw.cloud",
+        port: "",
+        pathname: "/**",
+      },
     ],
     dangerouslyAllowSVG: true,
     contentDispositionType: "attachment",
@@ -31,7 +37,6 @@ const nextConfig = {
 module.exports = nextConfig;
 
 // Injected content via Sentry wizard below
-
 const { withSentryConfig } = require("@sentry/nextjs");
 
 module.exports = withSentryConfig(
@@ -67,5 +72,11 @@ module.exports = withSentryConfig(
 
     // Automatically tree-shake Sentry logger statements to reduce bundle size
     disableLogger: true,
+
+    // Enables automatic instrumentation of Vercel Cron Monitors.
+    // See the following for more information:
+    // https://docs.sentry.io/product/crons/
+    // https://vercel.com/docs/cron-jobs
+    automaticVercelMonitors: true,
   },
 );

@@ -1,12 +1,12 @@
-import { EtapeCalendrierRetourExperience } from "@/lib/directus/directusCustomModels";
 import Accordion from "@codegouvfr/react-dsfr/Accordion";
 import CmsRichText from "@/components/common/CmsRichText";
+import { GetValues } from "@/lib/strapi/types/types";
 
 export default async function CalendrierRetourExperienceAccordion({
   etapes,
   className,
 }: {
-  etapes: EtapeCalendrierRetourExperience[];
+  etapes: GetValues<"retour-experience.calendrier">[];
   className?: string;
 }) {
   return etapes.map((etape) => (

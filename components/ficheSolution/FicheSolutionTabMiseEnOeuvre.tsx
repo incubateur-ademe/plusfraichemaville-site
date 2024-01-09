@@ -1,10 +1,14 @@
-import { FicheSolution } from "@/lib/directus/directusModels";
 import React from "react";
 import CmsRichText from "@/components/common/CmsRichText";
 import CustomAccordion from "@/components/common/CustomAccordion";
 import CustomTodoStep from "@/components/common/CustomTodoStep";
+import { GetValues } from "@/lib/strapi/types/types";
 
-export default function FicheSolutionTabMiseEnOeuvre({ ficheSolution }: { ficheSolution: FicheSolution }) {
+export default function FicheSolutionTabMiseEnOeuvre({
+  ficheSolution,
+}: {
+  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+}) {
   const diagStepToShow = !!(ficheSolution.etapes_diagnostic?.length && ficheSolution.etapes_diagnostic?.length > 0);
   const meoStepToShow = !!(
     ficheSolution.etapes_mise_en_oeuvre?.length && ficheSolution.etapes_mise_en_oeuvre?.length > 0

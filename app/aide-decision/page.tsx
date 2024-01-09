@@ -1,6 +1,6 @@
 import AideDecisionFirstStepEtapeCard from "@/components/aideDecision/AideDecisionFirstStepCard";
-import { getAideDecisionFirstSteps } from "@/lib/directus/queries/aideDecisionQueries";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
+import { getAideDecisionFirstSteps } from "@/lib/strapi/queries/aideDecisionQueries";
 
 export default async function Posts() {
   const aideDecisionFirstSteps = await getAideDecisionFirstSteps();
@@ -14,7 +14,7 @@ export default async function Posts() {
             <ul className="flex list-none flex-wrap justify-center gap-6 ">
               {aideDecisionFirstSteps.map((aideDecision) => (
                 <li key={aideDecision.id} className="p-0 flex justify-center">
-                  <AideDecisionFirstStepEtapeCard aideDecisionEtape={aideDecision} />
+                  <AideDecisionFirstStepEtapeCard aideDecisionEtape={aideDecision.attributes} />
                 </li>
               ))}
             </ul>

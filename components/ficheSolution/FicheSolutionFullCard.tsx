@@ -1,16 +1,16 @@
-import { FicheSolution } from "@/lib/directus/directusModels";
 import Image from "next/image";
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Link from "next/link";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React from "react";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
+import { GetValues } from "@/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
 export default function FicheSolutionFullCard({
   ficheSolution,
   extraUrlParams,
 }: {
-  ficheSolution: FicheSolution;
+  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
   extraUrlParams?: { param: string; value: string }[];
 }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
@@ -22,7 +22,7 @@ export default function FicheSolutionFullCard({
         <Image
           width={450}
           height={300}
-          src={getDirectusImageUrl(ficheSolution.image_principale, DIRECTUS_IMAGE_KEY_SIZE.ficheSolutionCard)}
+          src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
           alt={ficheSolution.titre}
           className={"w-full h-full object-cover rounded-t-2xl"}
         />

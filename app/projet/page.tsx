@@ -1,7 +1,7 @@
-import { getRetoursExperiences } from "@/lib/directus/queries/retoursExperienceQueries";
 import TypeEspaceFilter from "@/components/filters/TypeEspaceFilter";
 import RegionFilter from "@/components/filters/RegionFilter";
 import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
+import { getRetoursExperiences } from "@/lib/strapi/queries/retoursExperienceQueries";
 
 export default async function RetoursExperiences({
   searchParams,
@@ -10,9 +10,13 @@ export default async function RetoursExperiences({
 }) {
   const allRetoursExperiences = await getRetoursExperiences();
   const filteredRetoursExperiences = allRetoursExperiences
-    .filter((re) => !searchParams.espaceFilter || re.types_espace?.includes(searchParams.espaceFilter))
+    // @ts-ignore
+    .filter((re) => !searchParams.espaceFilter || re.attributes.types_espaces?.includes(searchParams.espaceFilter))
     .filter(
-      (re) => !searchParams.regionFilter || (re.region && searchParams.regionFilter?.split(",").includes(re.region)),
+      (re) =>
+        !searchParams.regionFilter ||
+        (re.attributes.region?.data.attributes.code &&
+          searchParams.regionFilter?.split(",").includes(re.attributes.region.data.attributes.code)),
     );
 
   return (

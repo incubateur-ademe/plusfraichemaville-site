@@ -1,45 +1,45 @@
-import { RetourExperience } from "@/lib/directus/directusModels";
-import { DIRECTUS_IMAGE_KEY_SIZE, getDirectusImageUrl } from "@/lib/directus/directusClient";
 import Image from "next/image";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getRegionLabelFromCode } from "@/helpers/regions";
 import Link from "next/link";
 import React from "react";
+import { APIResponseData } from "@/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
 export default function RetourExperienceCard({
   retourExperience,
   className,
 }: {
-  retourExperience: RetourExperience;
+  retourExperience: APIResponseData<"api::retour-experience.retour-experience">;
   className?: string;
 }) {
   return (
     <Link
       className={`flex w-72 flex-col pfmv-card min-h-[26rem] ${className}`}
-      href={`/projet/${retourExperience.slug}`}
+      href={`/projet/${retourExperience.attributes.slug}`}
     >
       <div className="flex w-full h-40">
         <Image
           width={450}
           height={300}
-          src={getDirectusImageUrl(retourExperience.image_principale, DIRECTUS_IMAGE_KEY_SIZE.retourExperienceCard)}
-          alt={retourExperience.titre}
+          src={getStrapiImageUrl(retourExperience.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
+          alt={retourExperience.attributes.titre}
           className={"w-full object-cover rounded-t-2xl"}
         />
       </div>
       <div className="p-6 flex flex-col grow">
         <div className={"text-lg font-bold text-dsfr-text-title-grey text-blue-hover mb-3"}>
-          {retourExperience.titre}
+          {retourExperience.attributes.titre}
         </div>
         <Tag small={true} className={"mb-8"}>
-          {getRegionLabelFromCode(retourExperience.region)}
+          {getRegionLabelFromCode(retourExperience.attributes.region?.data?.attributes.code)}
         </Tag>
         <div className={"mt-auto text-dsfr-text-mention-grey text-xs"}>
           <div>
-            Climat actuel : <b>{retourExperience.climat_actuel}</b>
+            Climat actuel : <b>{retourExperience.attributes.climat_actuel}</b>
           </div>
           <div>
-            Climat futur : <b>{retourExperience.climat_futur}</b>
+            Climat futur : <b>{retourExperience.attributes.climat_futur}</b>
           </div>
         </div>
       </div>

@@ -1,14 +1,12 @@
 import React from "react";
 
 type CoutFicheSolution = {
-  code: number;
   coutMax: number;
   shortLabel: string;
   icons: (_?: string) => React.ReactNode;
 };
 
 const COUT_CHEAP: CoutFicheSolution = {
-  code: 1,
   coutMax: 500,
   shortLabel: "Peu coûteux",
   icons: (extraClasses?) => (
@@ -21,7 +19,6 @@ const COUT_CHEAP: CoutFicheSolution = {
 };
 
 const COUT_AVERAGE: CoutFicheSolution = {
-  code: 2,
   coutMax: 2000,
   shortLabel: "Peu coûteux",
   icons: (extraClasses?) => (
@@ -34,7 +31,6 @@ const COUT_AVERAGE: CoutFicheSolution = {
 };
 
 const COUT_EXPENSIVE: CoutFicheSolution = {
-  code: 3,
   coutMax: Number.MAX_SAFE_INTEGER,
   shortLabel: "Coûteux",
   icons: (extraClasses?) => (
