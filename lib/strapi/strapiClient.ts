@@ -40,15 +40,20 @@ export const strapiGraphQLCall = async (query: String, variables?: any) => {
       }),
       next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1 },
     })
-      .then((res) => res.json())
+      .then((res) =>
+        res.json().catch((err) => {
+          console.log("Error when transforming Strapi response to JSON", err, res);
+          throw new Error("Error when transforming Strapi response to JSON " + err);
+        }),
+      )
       .then((res) => {
-        if (!res.data && res.errors) {
+        if (!res?.data && res?.errors) {
           Sentry.captureMessage(
             `Strapi error : ${res.errors[0].extensions.code} : ${res.errors[0].extensions.errors[0].message}`,
             "error",
           );
         } else {
-          return res.data;
+          return res?.data;
         }
       })
       .catch((err) => {
