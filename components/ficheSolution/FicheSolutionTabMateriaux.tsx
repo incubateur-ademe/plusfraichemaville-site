@@ -75,9 +75,11 @@ export default function FicheSolutionTabMateriaux({
                 </div>
                 <div className="text-2xl font-bold mb-2">{"Coût d'entretien"}</div>
               </div>
-              <div className="text-sm flex grow">
-                {"Main - d’œuvre ou sous-traitance, hors consommations d’eau et d’électricité"}
-              </div>
+              {ficheSolution.cout_entretien_description && (
+                <div className="text-sm flex grow">
+                  <CmsRichText label={ficheSolution.cout_entretien_description} />
+                </div>
+              )}
             </div>
             <div
               className={

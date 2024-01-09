@@ -743,7 +743,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     baisse_temperature: Attribute.Decimal &
@@ -770,7 +770,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     rafraichissement_attendu_description: Attribute.RichText &
@@ -778,7 +778,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     logo_partenaire: Attribute.Media &
@@ -822,7 +822,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     lien_aide_territoire: Attribute.String &
@@ -881,6 +881,14 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           versioned: true;
         };
       }>;
+    cout_entretien_description: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -920,7 +928,7 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     cout_minimum_fourniture: Attribute.Integer &
@@ -1073,17 +1081,13 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         };
       }>;
     region: Attribute.Relation<"api::retour-experience.retour-experience", "oneToOne", "api::region.region">;
-    climat_actuel: Attribute.Enumeration<
-      ["Oc\u00E9anique", "M\u00E9diterran\u00E9en", "Semi-aride", "Semi-continental"]
-    > &
+    climat_actuel: Attribute.Enumeration<["oceanique", "mediterraneen", "semi-aride", "semi-continental"]> &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    climat_futur: Attribute.Enumeration<
-      ["Oc\u00E9anique", "M\u00E9diterran\u00E9en", "Semi-aride", "Semi-continental"]
-    > &
+    climat_futur: Attribute.Enumeration<["oceanique", "mediterraneen", "semi-aride", "semi-continental"]> &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1159,7 +1163,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     porteur: Attribute.RichText &
@@ -1167,7 +1171,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     contact: Attribute.RichText &
@@ -1175,7 +1179,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     financement: Attribute.RichText &
@@ -1183,7 +1187,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     difficultes: Attribute.RichText &
@@ -1191,7 +1195,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     partenaires: Attribute.RichText &
@@ -1199,7 +1203,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     ressources: Attribute.RichText &
@@ -1207,7 +1211,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     credits: Attribute.RichText &
@@ -1215,7 +1219,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     rank: Attribute.Integer &
@@ -1263,7 +1267,7 @@ export interface ApiSolutionRetourExperienceSolutionRetourExperience extends Sch
         "plugin::ckeditor.CKEditor",
         {
           output: "HTML";
-          preset: "rich";
+          preset: "light";
         }
       >;
     createdAt: Attribute.DateTime;
