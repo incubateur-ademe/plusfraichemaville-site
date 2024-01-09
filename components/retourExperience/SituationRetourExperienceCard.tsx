@@ -33,7 +33,7 @@ export default async function SituationRetourExperienceCard({
             width={600}
             height={300}
             className="w-full h-52 object-cover rounded-t-2xl"
-            src={getStrapiImageUrl(situation.image, STRAPI_IMAGE_KEY_SIZE.small)}
+            src={getStrapiImageUrl(situation.image, STRAPI_IMAGE_KEY_SIZE.medium)}
             alt={titre}
           />
         </div>

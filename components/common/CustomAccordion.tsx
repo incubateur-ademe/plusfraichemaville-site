@@ -14,7 +14,7 @@ export default async function CustomAccordion({
   children: React.ReactNode;
 }) {
   return (
-    <section className={`fr-accordion before:shadow-none ${className}`}>
+    <section className={`fr-accordion before:!shadow-none ${className}`}>
       <h3 className="mb-0">
         <button
           className={

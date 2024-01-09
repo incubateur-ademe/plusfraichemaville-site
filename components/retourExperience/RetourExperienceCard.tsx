@@ -22,7 +22,7 @@ export default function RetourExperienceCard({
         <Image
           width={450}
           height={300}
-          src={getStrapiImageUrl(retourExperience.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
+          src={getStrapiImageUrl(retourExperience.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={retourExperience.attributes.titre}
           className={"w-full object-cover rounded-t-2xl"}
         />

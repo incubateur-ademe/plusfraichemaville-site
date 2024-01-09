@@ -22,7 +22,7 @@ export default function FicheSolutionFullCard({
         <Image
           width={450}
           height={300}
-          src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
+          src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={ficheSolution.titre}
           className={"w-full h-full object-cover rounded-t-2xl"}
         />
