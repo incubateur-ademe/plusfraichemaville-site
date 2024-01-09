@@ -717,13 +717,6 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       Attribute.SetMinMax<{
         min: 0;
       }>;
-    delai_travaux: Attribute.Enumeration<["court", "moyen", "long"]> &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        versions: {
-          versioned: true;
-        };
-      }>;
     type_solution: Attribute.Enumeration<["bleue", "verte", "grise", "douce"]> &
       Attribute.SetPluginOptions<{
         versions: {
@@ -889,6 +882,16 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: "light";
         }
       >;
+    delai_travaux_minimum: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    delai_travaux_maximum: Attribute.Integer &
+      Attribute.Required &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

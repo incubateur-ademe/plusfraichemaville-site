@@ -12,7 +12,10 @@ export default function FicheSolutionInfoComparatif({
   className?: string;
   temperatureClass?: string;
 }) {
-  const delaiTravaux = getDelaiTravauxFicheSolutionFromCode(ficheSolution.delai_travaux);
+  const delaiTravaux = getDelaiTravauxFicheSolutionFromCode(
+    ficheSolution.delai_travaux_minimum,
+    ficheSolution.delai_travaux_maximum,
+  );
   const cout = getCoutFicheSolutionFromCode(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
   return (
     <div className={`${className}`}>
@@ -30,7 +33,9 @@ export default function FicheSolutionInfoComparatif({
           <div className="text-dsfr-text-mention-grey">Délai des travaux</div>
           <div className="inline-block w-full">
             <div className="float-left text-base">{delaiTravaux.icons("fr-icon--sm")}</div>
-            <div className="float-right text-dsfr-text-mention-grey mt-1">{delaiTravaux.label}</div>
+            <div className="float-right text-dsfr-text-mention-grey mt-1">
+              {`de ${ficheSolution.delai_travaux_minimum} à ${ficheSolution.delai_travaux_maximum} mois`}
+            </div>
           </div>
         </>
       )}

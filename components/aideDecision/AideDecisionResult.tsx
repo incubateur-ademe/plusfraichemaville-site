@@ -58,7 +58,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                 <li key={ficheSolution.id} className="flex">
                   <FicheSolutionCardWithUserInfo
                     ficheSolution={ficheSolution}
-                    projectName={(historique && historique[1].label) || ""}
+                    projectName={(historique && historique[1]?.label) || ""}
                     extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtape.slug }]}
                   />
                 </li>

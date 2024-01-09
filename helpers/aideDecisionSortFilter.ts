@@ -31,7 +31,11 @@ const SORT_PRICE: AideDecisionSortFilter = {
 const SORT_SPEED: AideDecisionSortFilter = {
   code: "rapide",
   label: "les plus rapides",
-  sortFn: (fs1, fs2) => ((fs1.attributes.delai_travaux || 1) > (fs2.attributes.delai_travaux || 1) ? 1 : -1),
+  sortFn: (fs1, fs2) =>
+    (fs1.attributes.delai_travaux_maximum - fs1.attributes.delai_travaux_minimum) / 2 >
+    (fs2.attributes.delai_travaux_maximum - fs2.attributes.delai_travaux_minimum) / 2
+      ? 1
+      : -1,
   maxItem: 3,
 };
 

@@ -12,5 +12,6 @@ export function safeReturnStrapiEntities<T extends Common.UID.ContentType>(apiRe
 }
 
 export function safeReturnStrapiEntity<T extends Common.UID.ContentType>(apiResponse: APIResponseCollection<T>) {
-  return apiResponse?.data?.length > 0 ? apiResponse.data[0] : null;
+  const notNullEntities = safeReturnStrapiEntities(apiResponse);
+  return notNullEntities.length > 0 ? notNullEntities[0] : null;
 }

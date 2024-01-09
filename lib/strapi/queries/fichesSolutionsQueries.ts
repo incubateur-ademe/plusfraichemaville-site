@@ -27,7 +27,8 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
         cout_minimum
         cout_maximum
         baisse_temperature
-        delai_travaux
+        delai_travaux_minimum
+        delai_travaux_maximum
         types_espace
         slug
         description
@@ -145,6 +146,7 @@ export async function getFicheSolutionBySlug(
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
     ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  console.log("safeReturnStrapiEntity(apiResponse)", safeReturnStrapiEntity(apiResponse))
   return safeReturnStrapiEntity(apiResponse);
 }
 
