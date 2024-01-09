@@ -146,7 +146,6 @@ export async function getFicheSolutionBySlug(
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
     ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
-  console.log("safeReturnStrapiEntity(apiResponse)", safeReturnStrapiEntity(apiResponse))
   return safeReturnStrapiEntity(apiResponse);
 }
 

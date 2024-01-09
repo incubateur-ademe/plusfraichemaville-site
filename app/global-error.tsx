@@ -13,7 +13,10 @@ export default function GlobalError({ error }: { error: Error & { digest?: strin
       <body>
         <main role="main" id="content">
           <div className="fr-container">
-            <div className="fr-my-7w fr-mt-md-12w fr-mb-md-10w fr-grid-row fr-grid-row--gutters fr-grid-row--middle fr-grid-row--center">
+            <div
+              className="fr-my-7w fr-mt-md-12w fr-mb-md-10w fr-grid-row
+              fr-grid-row--gutters fr-grid-row--middle fr-grid-row--center"
+            >
               <div className="fr-py-0 fr-col-12 fr-col-md-6">
                 <h1>Erreur inattendue</h1>
                 <p className="fr-text--sm fr-mb-3w">Erreur 500</p>

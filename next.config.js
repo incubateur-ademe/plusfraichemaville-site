@@ -52,7 +52,7 @@ module.exports = withSentryConfig(
     silent: true,
     org: "betagouv",
     project: "plusfraichemaville",
-    url: "https://sentry.incubateur.net/"
+    url: "https://sentry.incubateur.net/",
   },
   {
     // For all available options, see:
@@ -78,5 +78,5 @@ module.exports = withSentryConfig(
     // https://docs.sentry.io/product/crons/
     // https://vercel.com/docs/cron-jobs
     automaticVercelMonitors: true,
-  }
+  },
 );
