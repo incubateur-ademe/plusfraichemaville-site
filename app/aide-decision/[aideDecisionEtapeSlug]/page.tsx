@@ -16,6 +16,7 @@ export default async function Page({
 }) {
   const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
+  // eslint-disable-next-line max-len
   if (!!currentStep?.attributes?.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
     const firstStep = historique && historique[1] ? historique[1] : currentStep.attributes;
     const previousStep = currentStep.attributes.etape_precedente;
