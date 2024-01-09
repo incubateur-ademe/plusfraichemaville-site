@@ -16,8 +16,8 @@ export default async function Page({
 }) {
   const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
-  // eslint-disable-next-line
-  if (!!currentStep?.attributes?.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
+  // @ts-ignore
+  if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
     const firstStep = historique && historique[1] ? historique[1] : currentStep.attributes;
     const previousStep = currentStep.attributes.etape_precedente;
     return (
