@@ -6,8 +6,6 @@ import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import { getAideDecisionBySlug, getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { APIResponseData } from "@/lib/strapi/types/types";
-import { AideDecisionEtapeHistory } from "@/lib/strapi/queries/commonStrapiFilters";
 
 export default async function Page({
   params,
@@ -16,15 +14,10 @@ export default async function Page({
   params: { aideDecisionEtapeSlug: string };
   searchParams: { tri: string | undefined };
 }) {
-  const currentStep: APIResponseData<"api::aide-decision-etape.aide-decision-etape"> | null =
-    await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
-  const historique: AideDecisionEtapeHistory[] | null = await getAideDecisionHistoryBySlug(
-    params.aideDecisionEtapeSlug,
-  );
-  // @ts-ignore
+  const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
+  const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
     const firstStep = historique && historique[1] ? historique[1] : currentStep.attributes;
-    // @ts-ignore
     const previousStep = currentStep.attributes.etape_precedente;
     return (
       <div className={"fr-container"}>
