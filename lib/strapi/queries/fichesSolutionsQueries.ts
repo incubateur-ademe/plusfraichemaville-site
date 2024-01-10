@@ -150,7 +150,7 @@ export async function getFicheSolutionBySlug(
 }
 
 export async function getAllFichesSolutions(): Promise<APIResponseData<"api::fiche-solution.fiche-solution">[]> {
-  const filter = new StrapiFilter(true, []);
+  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter)))
     ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntities(apiResponse);

@@ -47,14 +47,11 @@ export const strapiGraphQLCall = async (query: String, variables?: any) => {
         }),
       )
       .then((res) => {
-        if (!res?.data && res?.errors) {
-          Sentry.captureMessage(
-            `Strapi error : ${res.errors[0].extensions.code} : ${res.errors[0].extensions.errors[0].message}`,
-            "error",
-          );
-        } else {
-          return res?.data;
+        if (res?.errors) {
+          console.log("errors", res?.errors);
+          Sentry.captureMessage("Some Strapi error occured", "error");
         }
+        return res?.data;
       })
       .catch((err) => {
         Sentry.captureException(err);

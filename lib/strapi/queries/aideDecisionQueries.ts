@@ -121,7 +121,17 @@ export const GET_AIDE_DECISION_ETAPE_HISTORY = (strapiFilter: StrapiFilter) => `
 export async function getAideDecisionFirstSteps(): Promise<
   APIResponseData<"api::aide-decision-etape.aide-decision-etape">[]
 > {
-  const filter = new StrapiFilter(true, [{ attribute: "etape_precedente", operator: "null", relation: true }]);
+  const filter = new StrapiFilter(
+    true,
+    [
+      {
+        attribute: "etape_precedente",
+        operator: "null",
+        relation: true,
+      },
+    ],
+    { attribute: "rank", order: "asc" },
+  );
   const apiResponse = (await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter)))
     ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
   return safeReturnStrapiEntities(apiResponse);

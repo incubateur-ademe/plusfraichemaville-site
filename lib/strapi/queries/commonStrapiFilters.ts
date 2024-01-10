@@ -1,23 +1,23 @@
 import { APIResponse } from "@/lib/strapi/types/types";
 
-export type StrapiSingleFilter = string;
-
-export type StrapiCompleteFilter = string;
-
 type StrapiEqFilter = { attribute: string; value: string; operator: "eq"; relation: false };
 type StrapiInFilter = { attribute: string; value: string[] | number[]; operator: "in"; relation: false };
 type StrapiRelationFilter = { attribute: string; operator: "null" | "notNull"; relation: true };
+type StrapiSortFilter = { attribute: string; order: "asc" | "desc" };
 
 export class StrapiFilter {
   includePublicationState: boolean;
   andFilters: (StrapiEqFilter | StrapiInFilter | StrapiRelationFilter)[];
+  sortFilter?: StrapiSortFilter | undefined;
 
   constructor(
     includePublicationState: boolean,
     andFilters: (StrapiEqFilter | StrapiInFilter | StrapiRelationFilter)[],
+    sortFilter?: StrapiSortFilter,
   ) {
     this.includePublicationState = includePublicationState;
     this.andFilters = andFilters;
+    this.sortFilter = sortFilter;
   }
 
   publicationStateString(): string {
@@ -41,8 +41,9 @@ export class StrapiFilter {
     const publicationStateString = this.includePublicationState
       ? `publicationState: ${process.env.STRAPI_SHOW_STATUSES || "LIVE"}`
       : null;
-    if (publicationStateString || filterString) {
-      return `( ${[publicationStateString, filterString].filter(Boolean).join(",")} ) `;
+    const sortString = this.sortFilter ? `sort: "${this.sortFilter.attribute}:${this.sortFilter.order}"` : null;
+    if (publicationStateString || filterString || sortString) {
+      return `( ${[publicationStateString, filterString, sortString].filter(Boolean).join(",")} ) `;
     } else {
       return "";
     }

@@ -613,6 +613,7 @@ export interface ApiAideDecisionEtapeAideDecisionEtape extends Schema.Collection
       "manyToOne",
       "api::aide-decision-etape.aide-decision-etape"
     >;
+    rank: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1084,13 +1085,13 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         };
       }>;
     region: Attribute.Relation<"api::retour-experience.retour-experience", "oneToOne", "api::region.region">;
-    climat_actuel: Attribute.Enumeration<["oceanique", "mediterraneen", "semi-aride", "semi-continental"]> &
+    climat_actuel: Attribute.Enumeration<["oceanique", "mediterraneen", "semi_aride", "semi_continental"]> &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    climat_futur: Attribute.Enumeration<["oceanique", "mediterraneen", "semi-aride", "semi-continental"]> &
+    climat_futur: Attribute.Enumeration<["oceanique", "mediterraneen", "semi_aride", "semi_continental"]> &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1102,7 +1103,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
           versioned: true;
         };
       }>;
-    temporalite: Attribute.Enumeration<["Court terme", "Moyen terme", "Long terme"]> &
+    temporalite: Attribute.Enumeration<["court_terme", "moyen_terme", "long_terme"]> &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
