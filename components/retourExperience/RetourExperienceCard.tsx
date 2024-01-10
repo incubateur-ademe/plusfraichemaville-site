@@ -5,6 +5,7 @@ import Link from "next/link";
 import React from "react";
 import { APIResponseData } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getClimatLabelFromCode } from "@/helpers/retourExperience/climatRetourExperience";
 
 export default function RetourExperienceCard({
   retourExperience,
@@ -36,10 +37,10 @@ export default function RetourExperienceCard({
         </Tag>
         <div className={"mt-auto text-dsfr-text-mention-grey text-xs"}>
           <div>
-            Climat actuel : <b>{retourExperience.attributes.climat_actuel}</b>
+            Climat actuel : <b>{getClimatLabelFromCode(retourExperience.attributes.climat_actuel)}</b>
           </div>
           <div>
-            Climat futur : <b>{retourExperience.attributes.climat_futur}</b>
+            Climat futur : <b>{getClimatLabelFromCode(retourExperience.attributes.climat_futur)}</b>
           </div>
         </div>
       </div>

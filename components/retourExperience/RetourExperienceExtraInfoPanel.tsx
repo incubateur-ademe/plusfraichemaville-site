@@ -1,6 +1,8 @@
 import ItemRetourExperienceExtraInfo from "@/components/retourExperience/ItemRetourExperienceExtraInfo";
 import ObjectifsDeveloppementDurable from "@/components/common/ObjectifsDeveloppementDurable";
 import { APIResponseData } from "@/lib/strapi/types/types";
+import { getClimatLabelFromCode } from "@/helpers/retourExperience/climatRetourExperience";
+import { getTemporaliteLabelFromCode } from "@/helpers/retourExperience/temporaliteRetourExperience";
 
 export default async function RetourExperienceExtraInfoPanel({
   retourExperience,
@@ -19,21 +21,22 @@ export default async function RetourExperienceExtraInfoPanel({
         // @ts-ignore
         content={retourExperience.attributes.types_solutions?.join(" · ")}
       />
-      <hr className="pb-4" />
       <ItemRetourExperienceExtraInfo title="Échelle du projet" content={retourExperience.attributes.echelle} />
-      <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Temporalité du projet" content={retourExperience.attributes.temporalite} />
-      <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Climat actuel" content={retourExperience.attributes.climat_actuel} />
-      <hr className="pb-4" />
-      <ItemRetourExperienceExtraInfo title="Climat futur" content={retourExperience.attributes.climat_futur} />
-      <hr className="pb-4" />
+      <ItemRetourExperienceExtraInfo
+        title="Temporalité du projet"
+        content={getTemporaliteLabelFromCode(retourExperience.attributes.temporalite)}
+      />
+      <ItemRetourExperienceExtraInfo
+        title="Climat actuel"
+        content={getClimatLabelFromCode(retourExperience.attributes.climat_actuel)}
+      />
+      <ItemRetourExperienceExtraInfo
+        title="Climat futur"
+        content={getClimatLabelFromCode(retourExperience.attributes.climat_futur)}
+      />
       <ItemRetourExperienceExtraInfo title="Coût global" content={retourExperience.attributes.cout} />
-      <hr className="pb-4" />
       <ItemRetourExperienceExtraInfo title="Contact" content={retourExperience.attributes.contact} />
-      <hr className="pb-4" />
       <ItemRetourExperienceExtraInfo title="Porteur du projet" content={retourExperience.attributes.porteur} />
-      <hr className="pb-4" />
       <ObjectifsDeveloppementDurable objectifs={retourExperience.attributes.odds?.data} imageSize={65} />
     </div>
   );
