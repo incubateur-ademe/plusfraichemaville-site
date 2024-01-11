@@ -9,5 +9,5 @@ export default function useTrackPageView() {
     // @ts-ignore
     const url = `${pathname}${[...searchParams.keys()].length ? "?" + searchParams : ""}`;
     trackPageView(url);
-  }, [pathname, searchParams]);
+  }, [pathname]);
 }
