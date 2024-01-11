@@ -28,7 +28,7 @@ export default function NavigationMenu() {
           isActive: pathname?.startsWith("/mon-projet/favoris"),
         },
         {
-          linkProps: { href: "/projet", target: "_self" },
+          linkProps: { href: "/contact", target: "_self" },
           text: "Contact",
           isActive: pathname?.startsWith("/contact"),
         },
