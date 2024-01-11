@@ -1,4 +1,3 @@
-import { DsfrProvider } from "@codegouvfr/react-dsfr/next-appdir/DsfrProvider";
 import { getHtmlAttributes } from "@codegouvfr/react-dsfr/next-appdir/getHtmlAttributes";
 import { StartDsfr } from "./StartDsfr";
 import { defaultColorScheme } from "./defaultColorScheme";
@@ -10,6 +9,8 @@ import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 import localFont from "next/font/local";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
+import MatomoScript from "@/components/matomo/MatomoScript";
+import MainLayoutProviders from "@/components/layout/MainLayoutProviders";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -40,13 +41,14 @@ export default function RootLayout({ children }: { children: ReactElement | null
         <title>Plus fraîche ma ville</title>
         <StartDsfr />
         <DsfrHead Link={Link} doDisableFavicon={true} />
+        <MatomoScript />
       </head>
       <body>
-        <DsfrProvider lang={lang}>
+        <MainLayoutProviders lang={lang}>
           <AppHeader />
           <Toaster position="bottom-left" />
           <div className={`${xtra_bold.variable}`}>{children}</div>
-        </DsfrProvider>
+        </MainLayoutProviders>
       </body>
     </html>
   );
