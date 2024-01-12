@@ -16,14 +16,17 @@ export default function Home() {
   return (
     <main className="">
       <div className="bg-dsfr-background-action-low-blue-france flex justify-center">
-        <div className="flex flex-col md:flex-row max-w-[90rem] gap-x-16 justify-center items-center ">
+        <div className="flex flex-col md:flex-row max-w-[90rem] gap-x-16 justify-center items-center">
           <div className={"basis-1/3  md:text-left mx-6 "}>
             <div className="text-dsfr-text-label-blue-france text-[1.75rem] leading-normal font-bold mt-8">
-              Un outil d’aide à la décision pour accompagner les collectivités dans le choix de solutions de
-              rafraîchissement urbain
+              Rafraîchissez efficacement votre collectivité.
+            </div>
+            <div className="text-dsfr-text-label-blue-france text-lg font-bold mt-4">
+              {"Plus fraîche ma ville, l'outil qui accompagne les élus et les agents dans le" +
+                " choix de solutions durables face aux vagues de chaleur."}
             </div>
             <Button className="rounded-3xl mt-8 mb-8" linkProps={{ href: "/aide-decision" }}>
-              Découvrir les solutions
+              Trouver une solution adaptée
             </Button>
           </div>
           <div className={"basis-2/3"}>
@@ -69,7 +72,7 @@ export default function Home() {
       </div>
       <div className="fr-container flex flex-col items-center pt-12 pb-20">
         <div className="text-[1.375rem] text-dsfr-text-title-grey font-bold text-center mb-6">
-          Vous aider à passer à l’action pour protéger les villes des canicules estivales
+          Comment fonctionne Plus fraîche ma ville ?
         </div>
         <div className="text-lg text-dsfr-text-title-grey text-center max-w-[38rem] m-auto">
           Des solutions techniques documentées pour vous guider pas à pas depuis le choix des solutions jusqu’à leur
@@ -80,19 +83,19 @@ export default function Home() {
             image="/images/homepage/perso-aide-decision.svg"
             link="/aide-decision"
             buttonLabel="Trouver une solution adaptée"
-            label="Je découvre les solutions qui correspondent à mon projet"
+            label="1. Je sélectionne les solutions qui correspondent à mon besoin"
           />
           <HomeActionPresentation
             image="/images/homepage/perso-fs.svg"
             link="/fiche-solution"
             buttonLabel="Explorer les fiches solutions"
-            label="Je bénéficie d’informations techniques précises"
+            label="2. Je bénéficie d’informations techniques précises"
           />
           <HomeActionPresentation
             image="/images/homepage/perso-rex.svg"
             link="/projet"
             buttonLabel="Découvrir les projets réalisés"
-            label="Je m’inspire des projets réalisés par d’autres collectivités"
+            label="3. Je m’inspire des projets réalisés par d’autres collectivités"
           />
         </div>
       </div>
@@ -122,7 +125,7 @@ export default function Home() {
                       "de nos webinaires et parlez-nous de vos projets."}
                   </p>
                 </div>
-                <div className="fr-btns-group fr-btns-group--inline-md">
+                <div>
                   <Link className="fr-btn rounded-3xl" href={`/contact`}>
                     Nous contacter
                   </Link>
