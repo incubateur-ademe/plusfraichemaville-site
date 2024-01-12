@@ -33,7 +33,7 @@ export default function Home() {
       </div>
       <div className="bg-dsfr-background-alt-blue-france flex justify-center pt-12 pb-20">
         <div className="fr-container flex flex-col items-center">
-          <div className="text-[1.375rem] text-dsfr-text-title-grey max-w-[35rem] font-bold text-center mb-6">
+          <div className="text-[1.375rem] text-dsfr-text-title-grey max-w-[35rem] font-bold text-center mb-8">
             Comprendre le phénomène d’îlot de chaleur urbain et comment y remédier
           </div>
           <div className="flex flex-col md:flex-row md:gap-16 ">

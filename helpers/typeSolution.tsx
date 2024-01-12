@@ -6,6 +6,7 @@ export type TypeSolution = {
   bannerClass: string;
   colorClass: string;
   explanation: string;
+  cardImage: string;
   icon: (_?: string) => React.ReactNode;
   coloredIcon: (_?: string) => React.ReactNode;
 };
@@ -17,6 +18,7 @@ export const TYPE_SOLUTION_VERTE: TypeSolution = {
   colorClass: " typeSolutionGreenIcon ",
   explanation:
     "Une solution verte est une solution de végétalisation qui fonctionne grâce à l’action conjointe de l’évapotranspiration et de l’ombrage.",
+  cardImage: "/images/homepage/solution-verte.jpg",
   icon: (extraClasses?) => <i className={`fr-icon-leaf-fill ${extraClasses}`} />,
   coloredIcon: (extraClasses?) => <i className={`fr-icon-leaf-fill typeSolutionGreenIcon ${extraClasses}`} />,
 };
@@ -27,7 +29,8 @@ export const TYPE_SOLUTION_BLEUE: TypeSolution = {
   bannerClass: " blueSolutionBanner ",
   colorClass: " typeSolutionBlueIcon ",
   explanation:
-    "Une solution bleue est liée à la gestion de l’eau en ville, elle constitue un ensemble de solutions au fort potentiel rafraîchissant.",
+    "Une solution bleue est liée à la présence et à la gestion de l'eau en ville qui amplifie l'effet de rafraîchissement des espaces végétalisés.",
+  cardImage: "/images/homepage/solution-bleue.jpg",
   icon: (extraClasses?) => <i className={`ri-drop-fill ${extraClasses}`} />,
   coloredIcon: (extraClasses?) => <i className={`ri-drop-fill typeSolutionBlueIcon ${extraClasses}`} />,
 };
@@ -38,7 +41,8 @@ export const TYPE_SOLUTION_GRISE: TypeSolution = {
   bannerClass: " graySolutionBanner ",
   colorClass: " typeSolutionGrayIcon ",
   explanation:
-    "Les solutions grises regroupent l’action sur les matériaux utilisés dans la construction de la voirie et des bâtiments.",
+    "Une solution grise agit sur lesmatériaux utilisés dans la construction de la voirie, des bâtiments et sur les morphologies urbaines.",
+  cardImage: "/images/homepage/solution-grise.jpg",
   icon: (extraClasses?) => <i className={`ri-home-fill ${extraClasses}`} />,
   coloredIcon: (extraClasses?) => <i className={`ri-home-fill typeSolutionGrayIcon ${extraClasses}`} />,
 };
@@ -49,7 +53,8 @@ export const TYPE_SOLUTION_DOUCE: TypeSolution = {
   bannerClass: " softSolutionBanner ",
   colorClass: " typeSolutionSoftIcon ",
   explanation:
-    "Une solution douces désigne l’accompagnement des changements de comportement, d’usages et de pratiques de l’humain en ville.",
+    "Une solution douce désigne l’accompagnement des changements de comportement, d’usages et de pratiques face aux fortes chaleurs.",
+  cardImage: "/images/homepage/solution-douce.jpg",
   icon: (extraClasses?) => <i className={`ri-user-voice-fill ${extraClasses}`} />,
   coloredIcon: (extraClasses?) => <i className={`ri-user-voice-fill typeSolutionSoftIcon ${extraClasses}`} />,
 };
