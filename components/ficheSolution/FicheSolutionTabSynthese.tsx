@@ -53,7 +53,7 @@ export default function FicheSolutionTabSynthese({
       <hr className="pb-6 mt-6 md:pb-8 md:mt-12" />
       <div className="flex flex-col md:flex-row gap-8">
         {ficheSolution.contexte_description && (
-          <div>
+          <div className="basis-1/2">
             <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
               {ficheSolution.contexte_titre}
             </div>
@@ -62,7 +62,7 @@ export default function FicheSolutionTabSynthese({
         )}
         <hr className="pb-1 mt-1 md:hidden" />
         {ficheSolution.rafraichissement_attendu_description && (
-          <div>
+          <div className="basis-1/2">
             <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Rafraîchissement attendu</div>
             <CmsRichText
               label={ficheSolution.rafraichissement_attendu_description}
