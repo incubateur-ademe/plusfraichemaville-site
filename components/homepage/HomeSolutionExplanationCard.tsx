@@ -1,7 +1,6 @@
 import Image from "next/image";
 import React from "react";
 import { TypeSolution } from "@/helpers/typeSolution";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
 export const HomeSolutionExplanationCard = ({ typeSolution }: { typeSolution: TypeSolution }) => {
   return (
@@ -10,7 +9,7 @@ export const HomeSolutionExplanationCard = ({ typeSolution }: { typeSolution: Ty
         <Image
           width={450}
           height={300}
-          src={getStrapiImageUrl(null, STRAPI_IMAGE_KEY_SIZE.medium)}
+          src={typeSolution.cardImage}
           alt={typeSolution.label}
           className={"w-full h-full object-cover rounded-t-2xl"}
         />
