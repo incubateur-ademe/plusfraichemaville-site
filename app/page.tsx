@@ -30,6 +30,42 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div className="bg-dsfr-background-alt-blue-france flex justify-center">
+        <div className="fr-container my-10 flex flex-col items-center">
+          <div className="text-[1.375rem] text-dsfr-text-title-grey max-w-[35rem] font-bold text-center mb-6">
+            Comprendre le phénomène d’îlot de chaleur urbain et comment y remédier
+          </div>
+          <div className="flex flex-col md:flex-row md:gap-16 ">
+            <div className="basis-2/3 flex max-w-[50rem] shrink ">
+              <video
+                className="!cursor-pointer"
+                controls
+                preload="metadata"
+                poster="/images/homepage/video-poster.jpg"
+                src="/videos/homepage/video-homepage.mp4"
+              />
+            </div>
+            <div className="basis-1/3 mt-8">
+              <div className="text-lg font-bold">Quelques chiffres</div>
+              <div className="mt-6">
+                <span className="text-lg font-bold text-dsfr-text-label-blue-france">+ 2°C à + 5°C </span> d’ici à la
+                fin du siècle selon les scénarii du 6ème rapport du GIEC (2023)
+              </div>
+              <div className="mt-6">
+                <span className="text-lg font-bold text-dsfr-text-label-blue-france">
+                  2 fois plus de vagues de chaleur
+                </span>{" "}
+                en France d’ici 2050, plus intenses et prolongées (Météo-France, 2023)
+              </div>
+              <div className="mt-6">
+                <span className="text-lg font-bold text-dsfr-text-label-blue-france">En moyenne 2 à 3 °C</span> de
+                différence de température en ville par rapport à la campagne, et jusqu’à 10 °C pendant les périodes de
+                canicule (Ademe, 2023)
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className="fr-container my-10 flex flex-col items-center">
         <div className="text-[1.375rem] text-dsfr-text-title-grey font-bold text-center mb-6">
           Vous aider à passer à l’action pour protéger les villes des canicules estivales
@@ -59,9 +95,10 @@ export default function Home() {
           />
         </div>
       </div>
+      ;
       <div className="bg-dsfr-background-action-low-blue-france flex flex-col justify-center items-center">
         <div
-          className="text-dsfr-text-label-blue-france font-bold text-[1.375rem] 
+          className="text-dsfr-text-label-blue-france font-bold text-[1.375rem]
         mt-12 max-w-md m-x-auto text-center leading-normal"
         >
           Différents types de solutions à combiner pour lutter contre la surchauffe urbaine
@@ -73,7 +110,8 @@ export default function Home() {
           <HomeSolutionExplanationCard typeSolution={TYPE_SOLUTION_DOUCE} />
         </div>
       </div>
-      <AppFooter />
+      ;
+      <AppFooter />;
     </main>
   );
 }
