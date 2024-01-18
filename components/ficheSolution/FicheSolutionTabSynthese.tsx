@@ -30,11 +30,7 @@ export default function FicheSolutionTabSynthese({
           <CmsRichText label={ficheSolution.description} className="text-dsfr-text-title-grey" />
         </div>
         <div className="w-full md:w-72 flex-none md:border-l border-dsfr-border-default-grey md:pl-6 ">
-          <FicheSolutionInfoComparatif
-            temperatureFormat="large"
-            ficheSolution={ficheSolution}
-            className={"text-sm"}
-          />
+          <FicheSolutionInfoComparatif temperatureFormat="large" ficheSolution={ficheSolution} className={"text-sm"} />
           <hr className="pb-2 mt-1" />
           {ficheSolution.cobenefices?.data.map((cobenefice) => (
             <div key={cobenefice.id} className="flex flex-row mt-3">
