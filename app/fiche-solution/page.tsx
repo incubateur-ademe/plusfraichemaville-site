@@ -30,7 +30,7 @@ export default async function FichesSolutions({
         !searchParams.baisseTemperatureFilter ||
         searchParams.baisseTemperatureFilter
           .split(",")
-          .includes(getBaisseTemperatureFicheSolutionFromTemperature(fs.attributes.baisse_temperature).code),
+          .includes(getBaisseTemperatureFicheSolutionFromTemperature(fs.attributes.baisse_temperature || 0).code),
     );
   return (
     <div className="fr-container">

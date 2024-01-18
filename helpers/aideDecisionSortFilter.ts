@@ -13,7 +13,7 @@ type AideDecisionSortFilter = {
 const SORT_TEMPERATURE: AideDecisionSortFilter = {
   code: "",
   label: "Les plus fraîches",
-  sortFn: (fs1, fs2) => (fs1.attributes.baisse_temperature < fs2.attributes.baisse_temperature ? 1 : -1),
+  sortFn: (fs1, fs2) => ((fs1.attributes.baisse_temperature || 0) < (fs2.attributes.baisse_temperature || 0) ? 1 : -1),
   maxItem: 3,
 };
 
