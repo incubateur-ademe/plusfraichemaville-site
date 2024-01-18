@@ -10,6 +10,7 @@ export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo
       cout_minimum
       cout_maximum
       baisse_temperature
+      portee_baisse_temperature
       delai_travaux_minimum
       delai_travaux_maximum
       types_espace

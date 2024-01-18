@@ -16,7 +16,7 @@ export default function FicheSolutionTabSynthese({
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
   return (
     <div>
-      <div className="flex flex-col md:flex-row ">
+      <div className="flex flex-col md:flex-row justify-between">
         <div className="md:pr-9">
           {typeSolution && (
             <div className="flex flex-row mb-4 text-dsfr-text-mention-grey">
@@ -31,7 +31,7 @@ export default function FicheSolutionTabSynthese({
         </div>
         <div className="w-full md:w-72 flex-none md:border-l border-dsfr-border-default-grey md:pl-6 ">
           <FicheSolutionInfoComparatif
-            temperatureClass="text-[2.5rem] leading-[2.5rem] "
+            temperatureFormat="large"
             ficheSolution={ficheSolution}
             className={"text-sm"}
           />

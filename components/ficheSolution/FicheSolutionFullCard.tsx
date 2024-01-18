@@ -41,7 +41,7 @@ export default function FicheSolutionFullCard({
         <div className={"mt-auto"}>
           <div>
             <FicheSolutionInfoComparatif
-              temperatureClass="text-[2rem] leading-8"
+              temperatureFormat="small"
               ficheSolution={ficheSolution}
               className={"text-xs"}
             />

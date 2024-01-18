@@ -134,7 +134,6 @@ export interface RetourExperienceCalendrier extends Schema.Component {
     date: Attribute.String & Attribute.Required;
     titre: Attribute.String & Attribute.Required;
     description: Attribute.RichText &
-      Attribute.Required &
       Attribute.CustomField<
         "plugin::ckeditor.CKEditor",
         {

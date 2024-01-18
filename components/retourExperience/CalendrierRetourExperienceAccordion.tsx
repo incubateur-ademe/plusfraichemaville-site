@@ -19,7 +19,7 @@ export default async function CalendrierRetourExperienceAccordion({
         </div>
       }
     >
-      <CmsRichText label={etape.description} />
+      <CmsRichText label={etape.description || ""} />
     </Accordion>
   ));
 }

@@ -741,7 +741,6 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         }
       >;
     baisse_temperature: Attribute.Decimal &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -893,6 +892,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       Attribute.SetMinMax<{
         min: 0;
       }>;
+    portee_baisse_temperature: Attribute.Enumeration<["air", "surface", "interieur"]>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1085,13 +1085,17 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         };
       }>;
     region: Attribute.Relation<"api::retour-experience.retour-experience", "oneToOne", "api::region.region">;
-    climat_actuel: Attribute.Enumeration<["oceanique", "mediterraneen", "semi_aride", "semi_continental"]> &
+    climat_actuel: Attribute.Enumeration<
+      ["oceanique", "mediterraneen", "semi_aride", "semi_continental", "equatorial"]
+    > &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }>;
-    climat_futur: Attribute.Enumeration<["oceanique", "mediterraneen", "semi_aride", "semi_continental"]> &
+    climat_futur: Attribute.Enumeration<
+      ["oceanique", "mediterraneen", "semi_aride", "semi_continental", "equatorial"]
+    > &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
