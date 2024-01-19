@@ -1,5 +1,5 @@
 import React from "react";
-import AdemeAMFLogo from "@/public/images/logo-ademe-amf.jpg";
+import AdemeAMFLogo from "@/public/images/logo-ademe-amf.webp";
 import Image from "next/image";
 
 export default function AppFooter() {
@@ -9,7 +9,7 @@ export default function AppFooter() {
       <div className="fr-container">
         <div className="fr-footer__body">
           <div className="fr-footer__brand fr-enlarge-link">
-            <p className="fr-logo">
+            <p className="fr-logo !text-[1rem]">
               République
               <br />
               Française
@@ -19,7 +19,7 @@ export default function AppFooter() {
               href="/"
               title="Retour à l’accueil du site - Plus fraîche ma ville - République Française"
             >
-              <Image className="fr-footer__logo" height={90} src={AdemeAMFLogo} alt={"ADEME - Plus fraîche ma ville"} />
+              <Image className="fr-footer__logo" height={80} src={AdemeAMFLogo} alt={"ADEME - Plus fraîche ma ville"} />
             </a>
           </div>
           <div className="fr-footer__content">
