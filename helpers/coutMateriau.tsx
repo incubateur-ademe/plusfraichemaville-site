@@ -27,5 +27,5 @@ export const ALL_UNITES_COUT_MATERIAU: UniteCoutMateriau[] = [
   UNITE_COUT_MATERIAU_UNITE,
 ];
 
-export const getUniteCoutMateriauFromCode = (code: string) =>
-  ALL_UNITES_COUT_MATERIAU.find((cout) => cout.code === code);
+export const getUniteCoutMateriauFromCode = (code?: string) =>
+  ALL_UNITES_COUT_MATERIAU.find((cout) => cout.code === code) || UNITE_COUT_MATERIAU_METRE_CARRE;

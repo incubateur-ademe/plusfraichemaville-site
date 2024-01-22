@@ -893,6 +893,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         min: 0;
       }>;
     portee_baisse_temperature: Attribute.Enumeration<["air", "surface", "interieur"]>;
+    cout_entretien_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite"]>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

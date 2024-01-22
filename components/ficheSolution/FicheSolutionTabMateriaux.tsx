@@ -49,7 +49,7 @@ export default function FicheSolutionTabMateriaux({
                 >
                   <div>
                     <b>{`${mat.cout_minimum_fourniture} - ${mat.cout_maximum_fourniture} € `}</b>HT /{" "}
-                    {getUniteCoutMateriauFromCode(mat.cout_unite)?.unitLabel}
+                    {getUniteCoutMateriauFromCode(mat.cout_unite).unitLabel}
                   </div>
                   <div className="text-sm ">(fourniture et pose)</div>
                 </div>
@@ -90,7 +90,7 @@ export default function FicheSolutionTabMateriaux({
               <div>
                 <b>{`${ficheSolution.cout_minimum_entretien} - 
                 ${ficheSolution.cout_maximum_entretien} € `}</b>
-                HT / m²{" "}
+                HT / {getUniteCoutMateriauFromCode(ficheSolution.cout_entretien_unite).unitLabel}{" "}
               </div>
               <div className="text-sm ">par an</div>
             </div>

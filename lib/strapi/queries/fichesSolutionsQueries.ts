@@ -85,6 +85,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
         }
         cout_minimum_entretien
         cout_maximum_entretien
+        cout_entretien_unite
         cout_entretien_description
         etapes_diagnostic {
           id
