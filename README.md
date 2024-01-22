@@ -10,10 +10,12 @@ Elle fait également appel au CMS Strapi, dont le repository est ici : https://g
 Pour la partie contenu du site, nous avons autant que possible utilisé des Server Components.
 
 ## Variable d'environnement
+
 Vous pouvez trouver un fichier d'exemple des variables d'environnement à configurer [ici.](./.env.dist)
 Vous pouvez copier ce fichier à la racine du projet et le renommer en .env.local pour qu'il soit pris en compte.
 
 ## Utilisation du CMS
+
 Toute la partie "contenu" du site est récupéré à partir du [CMS Strapi](https://github.com/incubateur-ademe/plusfraichemaville-cms).
 Avant de démarrer le serveur en local, assurez vous que les variables d'environnement liées à Strapi sont bien configurées.
 
@@ -26,7 +28,7 @@ npm run develop
 ```
 
 Pour lancer le serveur en local en simulant l'environnement de production, utiliser la commande suivante :
+
 ```shell
 npm run localAsProd
 ```
-
