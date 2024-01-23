@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/nextjs";
 import { APIResponse } from "@/lib/strapi/types/types";
 
-export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "http://127.0.0.1/";
+export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 export const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
 
 export const STRAPI_IMAGE_KEY_SIZE = {
