@@ -19,7 +19,7 @@ export default function FicheSolutionTabMateriaux({
           <hr className="p-0 h-[1px]" />
           {ficheSolution.materiaux.data.map(({ attributes: mat }) => (
             <div key={mat.titre}>
-              <div className={"flex flex-col md:flex-row gap-1 md:gap-6"}>
+              <div className={"flex flex-col md:flex-row gap-1 md:gap-6 justify-between"}>
                 <div className="w-28 h-28 relative hidden md:flex flex-none mt-8">
                   <Image
                     fill
@@ -28,7 +28,7 @@ export default function FicheSolutionTabMateriaux({
                     className={"object-cover rounded-2xl"}
                   />
                 </div>
-                <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-title-grey">
+                <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-title-grey grow">
                   <div className="flex items-center gap-6 mb-4">
                     <div className="w-28 h-28 relative flex md:hidden flex-none">
                       <Image
