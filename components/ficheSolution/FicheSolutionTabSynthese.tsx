@@ -67,6 +67,13 @@ export default function FicheSolutionTabSynthese({
           </div>
         )}
       </div>
+      {!!ficheSolution.en_savoir_plus && (
+        <>
+          <hr className="pb-6 mt-6 md:pb-8 " />
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">En savoir plus</div>
+          <CmsRichText label={ficheSolution.en_savoir_plus} className="text-dsfr-text-title-grey" />
+        </>
+      )}
       {!!ficheSolution.solution_retour_experiences?.data?.length &&
         ficheSolution.solution_retour_experiences?.data?.length > 0 && (
           <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">

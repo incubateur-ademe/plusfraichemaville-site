@@ -33,6 +33,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
         types_espace
         slug
         description
+        en_savoir_plus
         cobenefices {
           data {
             id
