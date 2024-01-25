@@ -19,6 +19,9 @@ export default async function Page({
   if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
     const firstStep = historique && historique[1] ? historique[1] : currentStep.attributes;
     const previousStep = currentStep.attributes.etape_precedente;
+    const previsousStepSlug = previousStep?.data?.attributes?.slug
+      ? `/aide-decision/${previousStep.data.attributes.slug}`
+      : "/aide-decision";
     return (
       <div className={"fr-container"}>
         <div className="block md:flex flex-row justify-items-center">
@@ -45,16 +48,11 @@ export default async function Page({
                 </li>
               ))}
             </ul>
-            {previousStep?.data && (
-              <div className="mt-8 text-center md:text-left">
-                <Link
-                  className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
-                  href={`/aide-decision/${previousStep.data.attributes.slug}`}
-                >
-                  Retour
-                </Link>
-              </div>
-            )}
+            <div className="mt-8 text-center md:text-left">
+              <Link className="fr-link fr-icon-arrow-left-line fr-link--icon-left" href={previsousStepSlug}>
+                Retour
+              </Link>
+            </div>
           </div>
         </div>
       </div>
