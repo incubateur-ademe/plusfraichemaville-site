@@ -11,6 +11,9 @@ import {
   TYPE_SOLUTION_VERTE,
 } from "@/helpers/typeSolution";
 import Link from "next/link";
+import { ALL_REX_FOR_HOMEPAGE } from "@/components/homepage/HomepageRetourExperienceList";
+import RetourExperienceCardForHomepage from "@/components/homepage/RetourExperienceCardForHomepage";
+import Image from "next/image";
 
 export default function Home() {
   return (
@@ -135,6 +138,49 @@ export default function Home() {
           </div>
         </div>
       </div>
+      <div className="flex flex-col justify-center items-center pt-12 pb-20">
+        <div className="font-bold text-[1.375rem] text-center leading-normal">
+          {"Ces collectivités qui sont passées à l'action"}
+        </div>
+        <div>
+          <div className="fr-container !max-w-[80rem] flex mt-8 mb-16 gap-6 flex-wrap justify-center">
+            {ALL_REX_FOR_HOMEPAGE.map((rex) => (
+              <RetourExperienceCardForHomepage key={rex.slug} retourExperience={rex} />
+            ))}
+          </div>
+          <hr className="pb-10 mt-3" />
+          <div className="fr-container flex flex-col gap-8 md:gap-0 md:flex-row text-start w-full md:items-center">
+            <div className="max-w-sm text-sm">Plus fraîche ma ville répond aux Objectifs de Développement Durable</div>
+            <div className={"flex flex-row"}>
+              <Image
+                src={`/images/odd/odd3.svg`}
+                alt="Bonne santé et bien être"
+                title="Bonne santé et bien être"
+                width={70}
+                height={70}
+                className={"mr-2"}
+              />
+              <Image
+                src={`/images/odd/odd13.svg`}
+                alt="Mesure relatives à la lutte contre les changements climatiques"
+                title="Mesure relatives à la lutte contre les changements climatiques"
+                width={70}
+                height={70}
+                className={"mr-2"}
+              />
+              <Image
+                src={`/images/odd/odd11.svg`}
+                alt="Ville et communauté durable"
+                title="Ville et communauté durable"
+                width={70}
+                height={70}
+                className={"mr-2"}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
       <AppFooter />
     </main>
   );
