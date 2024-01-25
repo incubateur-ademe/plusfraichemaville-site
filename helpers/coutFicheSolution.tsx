@@ -7,7 +7,7 @@ type CoutFicheSolution = {
 };
 
 const COUT_CHEAP: CoutFicheSolution = {
-  coutMax: 500,
+  coutMax: 400,
   shortLabel: "Peu coûteux",
   icons: (extraClasses?) => (
     <>
@@ -19,7 +19,7 @@ const COUT_CHEAP: CoutFicheSolution = {
 };
 
 const COUT_AVERAGE: CoutFicheSolution = {
-  coutMax: 2000,
+  coutMax: 1000,
   shortLabel: "Peu coûteux",
   icons: (extraClasses?) => (
     <>
