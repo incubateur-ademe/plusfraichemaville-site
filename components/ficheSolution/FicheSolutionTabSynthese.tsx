@@ -14,6 +14,19 @@ export default function FicheSolutionTabSynthese({
   ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
 }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
+
+  const uniqueRetourExperienceList =
+    ficheSolution?.solution_retour_experiences?.data.reduce((accumulator, rex) => {
+      if (
+        !accumulator.find(
+          (item) => item.attributes.retour_experience?.data.id === rex.attributes.retour_experience?.data.id,
+        )
+      ) {
+        accumulator.push(rex);
+      }
+      return accumulator;
+    }, [] as APIResponseData<"api::solution-retour-experience.solution-retour-experience">[]) || [];
+
   return (
     <div>
       <div className="flex flex-col md:flex-row justify-between">
@@ -74,29 +87,25 @@ export default function FicheSolutionTabSynthese({
           <CmsRichText label={ficheSolution.en_savoir_plus} className="text-dsfr-text-title-grey" />
         </>
       )}
-      {!!ficheSolution.solution_retour_experiences?.data?.length &&
-        ficheSolution.solution_retour_experiences?.data?.length > 0 && (
-          <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">
-            <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
-              Découvrir les projets réalisés
-            </div>
-            <div className="text-dsfr-text-title-grey">
-              Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
-            </div>
-            <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
-              {ficheSolution.solution_retour_experiences.data.map((rex) => (
-                <RetourExperienceCard
-                  key={rex.attributes.retour_experience?.data.id}
-                  retourExperience={
-                    rex.attributes.retour_experience
-                      ?.data as APIResponseData<"api::retour-experience.retour-experience">
-                  }
-                  className={"w-72 flex-none mt-8 mb-12"}
-                />
-              ))}
-            </div>
+      {uniqueRetourExperienceList.length > 0 && (
+        <div className="bg-dsfr-background-alt-grey rounded-2xl pl-6 pt-10 mt-12">
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Découvrir les projets réalisés</div>
+          <div className="text-dsfr-text-title-grey">
+            Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
           </div>
-        )}
+          <div className="flex flex-row gap-6 pl-2 overflow-x-auto">
+            {uniqueRetourExperienceList.map((rex) => (
+              <RetourExperienceCard
+                key={rex.attributes.retour_experience?.data.id}
+                retourExperience={
+                  rex.attributes.retour_experience?.data as APIResponseData<"api::retour-experience.retour-experience">
+                }
+                className={"w-72 flex-none mt-8 mb-12"}
+              />
+            ))}
+          </div>
+        </div>
+      )}
       {!!ficheSolution.fiches_solutions_complementaires?.data.length &&
         ficheSolution.fiches_solutions_complementaires.data.length > 0 && (
           <div className="bg-dsfr-background-alt-blue-france rounded-2xl pl-6 pt-10 mt-12">
