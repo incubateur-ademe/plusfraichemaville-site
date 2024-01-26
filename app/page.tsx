@@ -20,19 +20,20 @@ export default function Home() {
     <main className="">
       <div className="bg-dsfr-background-action-low-blue-france flex justify-center">
         <div className="flex flex-col md:flex-row max-w-[90rem] gap-x-16 justify-center items-center">
-          <div className={"basis-1/3  md:text-left mx-6 2xl:ml-[7.5rem]"}>
+          <div className={"basis-2/5  md:text-left mx-6 2xl:ml-[7.5rem]"}>
             <div className="text-dsfr-text-label-blue-france text-[1.75rem] leading-normal font-bold mt-8">
-              Rafraîchissez efficacement votre collectivité.
+              {"N’attendez pas"}
+              <br /> {"la prochaine vague."}
             </div>
             <div className="text-dsfr-text-label-blue-france text-lg font-bold mt-4">
-              {"Plus fraîche ma ville, l'outil qui accompagne les élus et les agents dans le" +
-                " choix de solutions durables face aux vagues de chaleur."}
+              {"Plus fraîche ma ville, le service numérique des élus et des agents qui agissent pour" +
+                " lutter durablement contre la surchauffe urbaine."}
             </div>
             <Button className="rounded-3xl mt-8 mb-8" linkProps={{ href: "/aide-decision" }}>
               Trouver une solution adaptée
             </Button>
           </div>
-          <div className={"basis-2/3"}>
+          <div className={"basis-3/5"}>
             <HomeImageSlider />
           </div>
         </div>
