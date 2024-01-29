@@ -39,6 +39,7 @@ export default function ButtonSaveFicheSolution({
     BOOKMARK_FS_KEY,
     [],
   );
+  console.log("bookmarkedFichesSolutions", bookmarkedFichesSolutions);
 
   const [isBookmarked, setIsBookmarked] = useState(
     isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolutionId, projectName),
