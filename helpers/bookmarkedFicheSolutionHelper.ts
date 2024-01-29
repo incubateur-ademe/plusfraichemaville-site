@@ -14,7 +14,7 @@ export const isFicheSolutionBookmarked = (
     return false;
   }
   const projectBookmarks = currentBookmarks?.find((b) => b.projectName === projectName);
-  return projectBookmarks && projectBookmarks.ficheSolutionIds.includes(ficheSolutionId);
+  return !!projectBookmarks && projectBookmarks.ficheSolutionIds.includes(ficheSolutionId);
 };
 
 export const addFicheSolutionBookmark = (

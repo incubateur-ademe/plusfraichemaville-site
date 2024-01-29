@@ -48,6 +48,10 @@ export default function ButtonSaveFicheSolution({
     setIsClient(true);
   }, []);
 
+  useEffect(() => {
+    setIsBookmarked(isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolutionId, projectName));
+  }, [bookmarkedFichesSolutions, ficheSolutionId, projectName]);
+
   const modal = label ? modalFromButton : modalFromIcon;
 
   const changeFavorite = () => {
