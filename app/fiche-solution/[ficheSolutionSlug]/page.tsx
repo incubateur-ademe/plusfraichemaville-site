@@ -82,8 +82,16 @@ export default async function FicheSolution({
                 <CustomTabButton label="Oups !" isSelected={false} contentId="oups-panel" />
               </li>
             </ul>
-            <div id="synthese-panel" className="fr-tabs__panel customPanel fr-tabs__panel--selected" role="tabpanel">
-              <FicheSolutionTabSynthese ficheSolution={ficheSolution.attributes} />
+            <div
+              id="synthese-panel"
+              className="fr-tabs__panel fr-tabs__panel--selected customPanel !pt-0"
+              role="tabpanel"
+            >
+              <FicheSolutionTabSynthese
+                ficheSolutionId={ficheSolution.id}
+                projectName={(historique && historique[1].label) || ""}
+                ficheSolution={ficheSolution.attributes}
+              />
             </div>
             <div id="materiaux-panel" className="fr-tabs__panel customPanel" role="tabpanel">
               <FicheSolutionTabMateriaux ficheSolution={ficheSolution.attributes} />
