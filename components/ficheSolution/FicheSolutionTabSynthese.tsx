@@ -46,8 +46,8 @@ export default function FicheSolutionTabSynthese({
             <ButtonSaveFicheSolution
               ficheSolutionId={ficheSolutionId}
               projectName={projectName}
-              className="md:hidden"
-              label={true}
+              className="md:hidden mr-2"
+              label={false}
             />
           </div>
           <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
