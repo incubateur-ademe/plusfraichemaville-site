@@ -11,7 +11,7 @@ export const isFicheSolutionBookmarked = (
   projectName: string,
 ) => {
   console.log("ficheSolutionId", ficheSolutionId);
-  console.log("currentBookmarks", ficheSolutionId);
+  console.log("currentBookmarks", currentBookmarks);
   console.log("projectName", projectName);
   if (!ficheSolutionId) {
     return false;
@@ -20,9 +20,9 @@ export const isFicheSolutionBookmarked = (
   console.log("projectBookmarks", projectBookmarks);
   console.log(
     "isFicheSolutionBookmarked",
-    projectBookmarks && projectBookmarks.ficheSolutionIds.includes(ficheSolutionId),
+    !!projectBookmarks && projectBookmarks.ficheSolutionIds.includes(ficheSolutionId),
   );
-  return projectBookmarks && projectBookmarks.ficheSolutionIds.includes(ficheSolutionId);
+  return !!projectBookmarks && projectBookmarks.ficheSolutionIds.includes(ficheSolutionId);
 };
 
 export const addFicheSolutionBookmark = (

@@ -44,6 +44,8 @@ export default function ButtonSaveFicheSolution({
   const [isBookmarked, setIsBookmarked] = useState(
     isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolutionId, projectName),
   );
+  console.log("ficheSolutionId dans Button", ficheSolutionId);
+  console.log("isBookmarked dans Button", isBookmarked);
 
   useEffect(() => {
     setIsClient(true);
