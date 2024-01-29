@@ -7,10 +7,15 @@ import RetourExperienceCard from "@/components/retourExperience/RetourExperience
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import { APIResponseData, GetValues } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
 
 export default function FicheSolutionTabSynthese({
+  ficheSolutionId,
+  projectName,
   ficheSolution,
 }: {
+  ficheSolutionId: number;
+  projectName: string;
   ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
 }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
@@ -31,12 +36,20 @@ export default function FicheSolutionTabSynthese({
     <div>
       <div className="flex flex-col md:flex-row justify-between">
         <div className="md:pr-9">
-          {typeSolution && (
-            <div className="flex flex-row mb-4 text-dsfr-text-mention-grey">
-              {typeSolution.coloredIcon("fr-icon mr-4 mb-auto")}
-              <span className="mt-[1px]">{typeSolution.label}</span>
-            </div>
-          )}
+          <div className="flex flex-row justify-between items-center mb-4">
+            {typeSolution && (
+              <div className="flex flex-row text-dsfr-text-mention-grey">
+                {typeSolution.coloredIcon("fr-icon mr-4 mb-auto")}
+                <span className="mt-[1px]">{typeSolution.label}</span>
+              </div>
+            )}
+            <ButtonSaveFicheSolution
+              ficheSolutionId={ficheSolutionId}
+              projectName={projectName}
+              className="md:hidden"
+              label={true}
+            />
+          </div>
           <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
             {ficheSolution.description_courte}
           </div>
