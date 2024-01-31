@@ -1,6 +1,6 @@
 "use client";
 import { useMultipleValuesFilter } from "@/hooks/useMultipleValuesFilter";
-import { ALL_TYPES_SOLUTION } from "@/helpers/typeSolution";
+import { TYPE_SOLUTION_FILTERS } from "@/helpers/typeSolution";
 
 export default function TypeSolutionFilter({ className }: { className?: string }) {
   const FILTER_NAME = "typeSolutionFilter";
@@ -16,7 +16,7 @@ export default function TypeSolutionFilter({ className }: { className?: string }
     <div>
       <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-3">Types de solution</div>
       <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink gap-4 ${className}`}>
-        {ALL_TYPES_SOLUTION.map((typeSolution) => (
+        {TYPE_SOLUTION_FILTERS.map((typeSolution) => (
           <button
             key={typeSolution.code}
             onClick={() => changeFilter(typeSolution.code)}
