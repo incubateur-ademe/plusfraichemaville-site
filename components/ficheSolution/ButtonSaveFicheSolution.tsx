@@ -84,10 +84,7 @@ export default function ButtonSaveFicheSolution({
          text-white rounded-2xl cursor-pointer w-8 h-8"
               onClick={changeFavorite}
             >
-              <span
-                className={"fr-icon--sm fr-icon-bookmark-line"}
-                aria-hidden="true"
-              />
+              <span className={"fr-icon--sm fr-icon-bookmark-line"} aria-hidden="true" />
             </div>
           )}
           <modal.Component

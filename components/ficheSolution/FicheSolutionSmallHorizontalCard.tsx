@@ -12,7 +12,6 @@ export default function FicheSolutionSmallHorizontalCard({
   ficheSolution: APIResponse<"api::fiche-solution.fiche-solution">;
   className?: string;
 }) {
-
   const typeSolution = getTypeSolutionFromCode(ficheSolution.data.attributes.type_solution);
   return (
     <Link
