@@ -24,9 +24,12 @@ export default function AppFooter() {
           </div>
           <div className="fr-footer__content">
             <p className="fr-footer__content-desc">
-              {"Plus fraîche ma ville est une startup d'État portée par l’Agence pour la Transition " +
-                "Écologique (ADEME). Notre mission : aider les collectivités dans le choix de solutions " +
-                "de rafraîchissement urbain pérennes et durables."}
+              {"Plus fraîche ma ville est une startup d'État portée par l’Agence de la Transition " +
+                "Écologique (ADEME), en partenariat avec l'association des maires de France (AMF)."}
+              <br />
+              {"Notre mission : aider les collectivités dans le choix de solutions " +
+                "de rafraîchissement urbain pérennes et durables. Plus fraîche ma ville" +
+                " est la 4ème action du plan de gestion des vagues de chaleur."}
             </p>
             <ul className="fr-footer__content-list">
               <li className="fr-footer__content-item">

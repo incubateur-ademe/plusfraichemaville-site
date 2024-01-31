@@ -69,11 +69,12 @@ export default function ButtonSaveFicheSolution({
     <div className={`${className}`}>
       {isClient ? (
         <>
-          {label ? (
+          {label || isBookmarked ? (
             <Button
               className={`fr-icon--sm rounded-3xl text-sm`}
               iconId={isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}
               onClick={changeFavorite}
+              size="small"
             >
               {isBookmarked ? "Sauvegardé" : "Sauvegarder"}
             </Button>
@@ -83,10 +84,7 @@ export default function ButtonSaveFicheSolution({
          text-white rounded-2xl cursor-pointer w-8 h-8"
               onClick={changeFavorite}
             >
-              <span
-                className={`fr-icon--sm ${isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}`}
-                aria-hidden="true"
-              />
+              <span className={"fr-icon--sm fr-icon-bookmark-line"} aria-hidden="true" />
             </div>
           )}
           <modal.Component

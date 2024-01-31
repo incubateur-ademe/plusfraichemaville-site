@@ -16,7 +16,7 @@ export default function Page() {
       <div className="fr-container text-dsfr-text-title-grey pt-8">
         {bookmarkedFichesSolutions.length === 0 ? (
           <>
-            <div className="fr-h3">Mon projet</div>
+            <div className="fr-h3">Ma sélection</div>
             <div>{"Retrouvez ici vos solutions sauvegardées."}</div>
             <div>{"Vous n'avez pas encore sélectionné de fiches solutions."}</div>
             <Button
