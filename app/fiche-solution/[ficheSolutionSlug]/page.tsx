@@ -48,19 +48,19 @@ export default async function FicheSolution({
         </div>
         <div className="h-14 w-full bg-dsfr-background-alt-blue-france absolute" />
         <div className="fr-container flex flex-row">
-          <div className="hidden md:block flex-none w-56 mt-[6.5rem]">
+          <div className="flex-none md:w-56 md:mt-[6.5rem]">
             {historique && (
               <AideDecisionBreadcrumbs
                 historique={historique}
-                className="mb-16 -mt-2"
+                className="hidden md:block mb-16 -mt-2"
                 currentPageLabel={ficheSolution.attributes.titre}
               />
             )}
-            <ButtonShareFicheSolution className={"mb-4"} />
+            <ButtonShareFicheSolution className={"hidden md:block mb-4"} />
             <ButtonSaveFicheSolution
               ficheSolutionId={ficheSolution.id}
               projectName={(historique && historique[1].label) || ""}
-              className=""
+              className="hidden md:block"
               label={true}
             />
           </div>

@@ -12,13 +12,8 @@ import { Oval } from "react-loader-spinner";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 
-const modalFromIcon = createModal({
+const modal = createModal({
   id: "bookmark-modal",
-  isOpenedByDefault: false,
-});
-
-const modalFromButton = createModal({
-  id: "bookmark-label-modal",
   isOpenedByDefault: false,
 });
 
@@ -52,8 +47,6 @@ export default function ButtonSaveFicheSolution({
     setIsBookmarked(isFicheSolutionBookmarked(bookmarkedFichesSolutions, ficheSolutionId, projectName));
   }, [bookmarkedFichesSolutions, ficheSolutionId, projectName]);
 
-  const modal = label ? modalFromButton : modalFromIcon;
-
   const changeFavorite = () => {
     if (isBookmarked) {
       setBookmarkedFichesSolutions(unBookmarkFicheSolution(bookmarkedFichesSolutions, ficheSolutionId, projectName));
@@ -66,27 +59,29 @@ export default function ButtonSaveFicheSolution({
   };
 
   return (
-    <div className={`${className}`}>
+    <div>
       {isClient ? (
         <>
-          {label || isBookmarked ? (
-            <Button
-              className={`fr-icon--sm rounded-3xl text-sm`}
-              iconId={isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}
-              onClick={changeFavorite}
-              size="small"
-            >
-              {isBookmarked ? "Sauvegardé" : "Sauvegarder"}
-            </Button>
-          ) : (
-            <div
-              className="flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france
+          <div className={`${className}`}>
+            {label || isBookmarked ? (
+              <Button
+                className={`fr-icon--sm rounded-3xl text-sm`}
+                iconId={isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}
+                onClick={changeFavorite}
+                size="small"
+              >
+                {isBookmarked ? "Sauvegardé" : "Sauvegarder"}
+              </Button>
+            ) : (
+              <div
+                className="flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france
          text-white rounded-2xl cursor-pointer w-8 h-8"
-              onClick={changeFavorite}
-            >
-              <span className={"fr-icon--sm fr-icon-bookmark-line"} aria-hidden="true" />
-            </div>
-          )}
+                onClick={changeFavorite}
+              >
+                <span className={"fr-icon--sm fr-icon-bookmark-line"} aria-hidden="true" />
+              </div>
+            )}
+          </div>
           <modal.Component
             title="Solution sauvegardée dans mon espace Projet"
             iconId="fr-icon-arrow-right-line"
@@ -111,7 +106,7 @@ export default function ButtonSaveFicheSolution({
       ) : (
         <div
           className={
-            `flex justify-center items-center bg-dsfr-text-label-blue-france ` +
+            `${className} flex justify-center items-center bg-dsfr-text-label-blue-france ` +
             ` h-8 text-white rounded-2xl ${label ? " w-32 " : "w-8 h-8"}`
           }
         >
