@@ -38,7 +38,7 @@ export const strapiGraphQLCall = async (query: String, variables?: any) => {
         query: query,
         variables: variables,
       }),
-      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1 },
+      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags: ["strapi"] },
     })
       .then((res) =>
         res.json().catch((err) => {

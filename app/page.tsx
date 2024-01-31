@@ -26,13 +26,10 @@ export default function Home() {
               <br /> {"la prochaine vague"}
             </div>
             <div className="text-dsfr-text-label-blue-france text-lg font-bold mt-4">
-              {"Le service numérique dédié aux agents et aux élus qui rafraichissent durablement leur collectivité."}
+              {"Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité."}
             </div>
-            <Button
-              className="rounded-3xl mt-8 mb-8 max-w-[14rem] md:max-w-none"
-              linkProps={{ href: "/aide-decision" }}
-            >
-              Trouver une solution de rafraîchissement
+            <Button className="rounded-3xl mt-8 mb-8" linkProps={{ href: "/aide-decision" }}>
+              Trouver une solution adaptée
             </Button>
           </div>
           <div className={"basis-3/5"}>
