@@ -21,7 +21,7 @@ export default function FicheSolutionCardWithUserInfo({
         ficheSolutionId={ficheSolution.id}
         label={false}
         projectName={projectName}
-        className={"flex justify-center items-center absolute top-2 right-6"}
+        className={"flex justify-center items-center absolute top-2 right-2"}
       />
     </div>
   );
