@@ -98,7 +98,7 @@ export default function ButtonSaveFicheSolution({
                 linkProps={{ href: "/mon-projet/favoris", target: "_self" }}
                 size="small"
               >
-                Aller sur mon espace projet
+                Ma sélection
               </Button>
             </div>
           </modal.Component>
