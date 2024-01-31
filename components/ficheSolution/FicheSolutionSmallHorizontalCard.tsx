@@ -33,7 +33,7 @@ export default function FicheSolutionSmallHorizontalCard({
         <div className={"font-bold text-blue-hover"}>{ficheSolution.data.attributes.titre}</div>
         {typeSolution && (
           <div className="flex flex-row text-dsfr-text-mention-grey mt-4">
-            {typeSolution.coloredIcon("fr-icon--sm mr-2 mb-auto")}
+            {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
             <span className="mt-[2px] text-sm">{typeSolution.label}</span>
           </div>
         )}
