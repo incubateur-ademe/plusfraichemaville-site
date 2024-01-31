@@ -25,8 +25,7 @@ export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSm
       image_principale {
         ...ImageInfo
       }
-      cout_minimum
-      cout_maximum
+      type_solution
       slug
     }
 }`;

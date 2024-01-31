@@ -1,10 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
-import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
-import Tag from "@codegouvfr/react-dsfr/Tag";
 import { APIResponse } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 
 export default function FicheSolutionSmallHorizontalCard({
   ficheSolution,
@@ -13,10 +12,8 @@ export default function FicheSolutionSmallHorizontalCard({
   ficheSolution: APIResponse<"api::fiche-solution.fiche-solution">;
   className?: string;
 }) {
-  const cout = getCoutFicheSolutionFromCode(
-    ficheSolution.data.attributes.cout_minimum,
-    ficheSolution.data.attributes.cout_maximum,
-  );
+
+  const typeSolution = getTypeSolutionFromCode(ficheSolution.data.attributes.type_solution);
   return (
     <Link
       className={`flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row
@@ -34,7 +31,12 @@ export default function FicheSolutionSmallHorizontalCard({
       </div>
       <div className="m-4 max-w-[18rem]">
         <div className={"font-bold text-blue-hover"}>{ficheSolution.data.attributes.titre}</div>
-        <Tag className="mt-4">{cout.shortLabel}</Tag>
+        {typeSolution && (
+          <div className="flex flex-row text-dsfr-text-mention-grey mt-4">
+            {typeSolution.coloredIcon("fr-icon--sm mr-2 mb-auto")}
+            <span className="mt-[2px] text-sm">{typeSolution.label}</span>
+          </div>
+        )}
       </div>
     </Link>
   );
