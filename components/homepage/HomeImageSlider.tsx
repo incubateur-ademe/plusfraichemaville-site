@@ -6,7 +6,6 @@ const images = [
   { original: "/images/homepage/carrousel1.jpg", originalAlt: "Image de rafraichissement urbain", originalHeight: 100 },
   { original: "/images/homepage/carrousel2.jpg", originalAlt: "Image de rafraichissement urbain", originalHeight: 100 },
   { original: "/images/homepage/carrousel3.jpg", originalAlt: "Image de rafraichissement urbain", originalHeight: 100 },
-  { original: "/images/homepage/carrousel4.jpg", originalAlt: "Image de rafraichissement urbain", originalHeight: 100 },
 ];
 
 export const HomeImageSlider = () => {
