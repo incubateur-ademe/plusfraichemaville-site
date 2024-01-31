@@ -1,5 +1,19 @@
 /** @type {import("next").NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: "/fiches-techniques",
+        destination: "/fiche-solution",
+        permanent: true,
+      },
+      {
+        source: "/projets-realises",
+        destination: "/projet",
+        permanent: true,
+      },
+    ];
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.woff2$/,
