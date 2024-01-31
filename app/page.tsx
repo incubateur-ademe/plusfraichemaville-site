@@ -26,8 +26,7 @@ export default function Home() {
               <br /> {"la prochaine vague"}
             </div>
             <div className="text-dsfr-text-label-blue-france text-lg font-bold mt-4">
-              {"Plus fraîche ma ville, le service numérique des élus et des agents qui agissent pour" +
-                " lutter durablement contre la surchauffe urbaine."}
+              {"Le service numérique dédié aux agents et aux élus qui rafraichissent durablement leur collectivité."}
             </div>
             <Button
               className="rounded-3xl mt-8 mb-8 max-w-[14rem] md:max-w-none"
@@ -101,6 +100,12 @@ export default function Home() {
                 <span className="text-lg font-bold text-dsfr-text-label-blue-france">En moyenne 2 à 3 °C</span> de
                 différence de température en ville par rapport à la campagne, et jusqu’à 10 °C pendant les périodes de
                 canicule (Ademe, 2023)
+              </div>
+              <div className="mt-6">
+                <span className="text-lg font-bold text-dsfr-text-label-blue-france">
+                  Plus fraîche ma ville est la 4ème action
+                </span>{" "}
+                du plan de gestion des vagues de chaleur
               </div>
             </div>
           </div>

@@ -24,7 +24,7 @@ export default function NavigationMenu() {
         },
         {
           linkProps: { href: "/mon-projet/favoris", target: "_self" },
-          text: "Mon projet",
+          text: "Ma sélection",
           isActive: pathname?.startsWith("/mon-projet/favoris"),
         },
         {
