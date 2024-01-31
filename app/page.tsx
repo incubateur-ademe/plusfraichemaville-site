@@ -28,10 +28,7 @@ export default function Home() {
             <div className="text-dsfr-text-label-blue-france text-lg font-bold mt-4">
               {"Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité."}
             </div>
-            <Button
-              className="rounded-3xl mt-8 mb-8"
-              linkProps={{ href: "/aide-decision" }}
-            >
+            <Button className="rounded-3xl mt-8 mb-8" linkProps={{ href: "/aide-decision" }}>
               Trouver une solution adaptée
             </Button>
           </div>

@@ -66,11 +66,7 @@ export const ALL_TYPES_SOLUTION: TypeSolution[] = [
   TYPE_SOLUTION_DOUCE,
 ];
 
-export const TYPE_SOLUTION_FILTERS: TypeSolution[] = [
-  TYPE_SOLUTION_VERTE,
-  TYPE_SOLUTION_BLEUE,
-  TYPE_SOLUTION_GRISE,
-];
+export const TYPE_SOLUTION_FILTERS: TypeSolution[] = [TYPE_SOLUTION_VERTE, TYPE_SOLUTION_BLEUE, TYPE_SOLUTION_GRISE];
 
 export const getTypeSolutionFromCode = (typeSolutionCode?: string | null) =>
   typeSolutionCode ? ALL_TYPES_SOLUTION.find((r) => r.code === typeSolutionCode) : null;
