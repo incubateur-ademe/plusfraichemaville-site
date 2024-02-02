@@ -41,7 +41,7 @@ export default function FicheSolutionInfoComparatif({
       {!ficheSolution.baisse_temperature && (
         <div className="flex flex-row justify-between w-full mt-6 mb-2">
           <div className="mr-4 mt-auto text-dsfr-text-mention-grey">{ficheSolution.libelle_avantage_solution}</div>
-          <div className="float-right text-right">
+          <div className="float-right text-right flex-none">
             <Image
               className={temperatureFormat === "large" ? "w-12 h-12" : "w-10 h-10"}
               src={baisseICUIcon}
