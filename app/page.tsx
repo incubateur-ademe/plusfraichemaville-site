@@ -100,7 +100,7 @@ export default function Home() {
               </div>
               <div className="mt-6">
                 <span className="text-lg font-bold text-dsfr-text-label-blue-france">
-                  Plus fraîche ma ville est la 4ème action
+                  Plus fraîche ma ville est la 4<sup>ème</sup> action
                 </span>{" "}
                 du plan de gestion des vagues de chaleur
               </div>
