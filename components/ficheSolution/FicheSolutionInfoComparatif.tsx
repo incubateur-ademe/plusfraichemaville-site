@@ -1,9 +1,9 @@
 import React from "react";
-import { getCoutFicheSolutionFromCode } from "@/helpers/coutFicheSolution";
-import { getDelaiTravauxFicheSolutionFromCode } from "@/helpers/delaiTravauxFicheSolution";
+import { getCoutFicheSolution } from "@/helpers/coutFicheSolution";
+import { getDelaiTravauxFicheSolution } from "@/helpers/delaiTravauxFicheSolution";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getPorteeBaisseTemperatureLabelFromCode } from "@/helpers/porteeBaisseTemperatureFicheSolution";
-import baisseICUIcon from "../../public/images/fiches-solutions/baisse-icu-nuit-icone.svg";
+import baisseICUIcon from "../../public/images/fiches-solutions/picto-thermometre.svg";
 import Image from "next/image";
 
 export default function FicheSolutionInfoComparatif({
@@ -15,11 +15,11 @@ export default function FicheSolutionInfoComparatif({
   className?: string;
   temperatureFormat: "large" | "small";
 }) {
-  const delaiTravaux = getDelaiTravauxFicheSolutionFromCode(
+  const delaiTravaux = getDelaiTravauxFicheSolution(
     ficheSolution.delai_travaux_minimum,
     ficheSolution.delai_travaux_maximum,
   );
-  const cout = getCoutFicheSolutionFromCode(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
+  const cout = getCoutFicheSolution(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
   return (
     <div className={`${className}`}>
       {!!ficheSolution.baisse_temperature && (
@@ -40,7 +40,7 @@ export default function FicheSolutionInfoComparatif({
       )}
       {!ficheSolution.baisse_temperature && (
         <div className="flex flex-row justify-between w-full mt-6 mb-2">
-          <div className="mr-4 mt-auto text-dsfr-text-mention-grey">{"Contribue à réduire l'effet d'ICU"}</div>
+          <div className="mr-4 mt-auto text-dsfr-text-mention-grey">{ficheSolution.libelle_avantage_solution}</div>
           <div className="float-right text-right">
             <Image
               className={temperatureFormat === "large" ? "w-12 h-12" : "w-10 h-10"}
@@ -50,32 +50,28 @@ export default function FicheSolutionInfoComparatif({
           </div>
         </div>
       )}
-      {delaiTravaux && (
-        <>
-          <hr className="pb-2 mt-3" />
-          <div className="text-dsfr-text-mention-grey">Délai des travaux</div>
-          <div className="inline-block w-full">
-            <div className="float-left text-base">{delaiTravaux.icons("fr-icon--sm")}</div>
-            <div className="float-right text-dsfr-text-mention-grey mt-1">
-              {`de ${ficheSolution.delai_travaux_minimum} à ${ficheSolution.delai_travaux_maximum} mois`}
-            </div>
+      <div className={`${!delaiTravaux ? " invisible " : ""}`}>
+        <hr className="pb-2 mt-3" />
+        <div className="text-dsfr-text-mention-grey">Délai des travaux</div>
+        <div className="inline-block w-full">
+          <div className="float-left text-base">{delaiTravaux?.icons("fr-icon--sm")}</div>
+          <div className="float-right text-dsfr-text-mention-grey mt-1">
+            {`de ${ficheSolution.delai_travaux_minimum} à ${ficheSolution.delai_travaux_maximum} mois`}
           </div>
-        </>
-      )}
-      {cout && (
-        <>
-          <hr className="pb-2 mt-1" />
-          <div className="text-dsfr-text-mention-grey">Coût</div>
-          <div className="inline-block w-full">
-            <div className="float-left">
-              <div className="float-left text-base">{cout.icons("fr-icon--sm")}</div>
-            </div>
-            <div className="float-right text-dsfr-text-mention-grey mt-1">
-              {`de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € / m²`}
-            </div>
+        </div>
+      </div>
+      <div className={`${!cout ? " invisible " : ""}`}>
+        <hr className="pb-2 mt-1" />
+        <div className="text-dsfr-text-mention-grey">Coût</div>
+        <div className="inline-block w-full">
+          <div className="float-left">
+            <div className="float-left text-base">{cout?.icons("fr-icon--sm")}</div>
           </div>
-        </>
-      )}
+          <div className="float-right text-dsfr-text-mention-grey mt-1">
+            {`de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € / m²`}
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

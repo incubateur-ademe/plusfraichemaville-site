@@ -44,5 +44,7 @@ const COUT_EXPENSIVE: CoutFicheSolution = {
 
 export const ALL_COUTS_FICHE_SOLUTION: CoutFicheSolution[] = [COUT_CHEAP, COUT_AVERAGE, COUT_EXPENSIVE];
 
-export const getCoutFicheSolutionFromCode = (coutMin: number, coutMax: number) =>
-  ALL_COUTS_FICHE_SOLUTION.find((cout) => cout.coutMax >= (coutMax + coutMin) / 2) || COUT_EXPENSIVE;
+export const getCoutFicheSolution = (coutMin?: number, coutMax?: number) =>
+  coutMin == undefined || coutMax == undefined
+    ? null
+    : ALL_COUTS_FICHE_SOLUTION.find((cout) => cout.coutMax >= (coutMax + coutMin) / 2) || COUT_EXPENSIVE;

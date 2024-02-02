@@ -699,7 +699,6 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       "api::solution-retour-experience.solution-retour-experience"
     >;
     cout_minimum: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -709,7 +708,6 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         min: 0;
       }>;
     cout_maximum: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -883,12 +881,10 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         }
       >;
     delai_travaux_minimum: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetMinMax<{
         min: 0;
       }>;
     delai_travaux_maximum: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetMinMax<{
         min: 0;
       }>;
@@ -902,6 +898,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: "light";
         }
       >;
+    libelle_avantage_solution: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

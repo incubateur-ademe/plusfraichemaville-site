@@ -21,8 +21,8 @@ const SORT_PRICE: AideDecisionSortFilter = {
   code: "abordable",
   label: "les plus abordables",
   sortFn: (fs1, fs2) =>
-    (fs1.attributes.cout_maximum - fs1.attributes.cout_minimum) / 2 >
-    (fs2.attributes.cout_maximum - fs2.attributes.cout_minimum) / 2
+    ((fs1.attributes.cout_maximum || 0) - (fs1.attributes.cout_minimum || 0)) / 2 >
+    ((fs2.attributes.cout_maximum || 0) - (fs2.attributes.cout_minimum || 0)) / 2
       ? 1
       : -1,
   maxItem: 3,
@@ -32,8 +32,8 @@ const SORT_SPEED: AideDecisionSortFilter = {
   code: "rapide",
   label: "les plus rapides",
   sortFn: (fs1, fs2) =>
-    (fs1.attributes.delai_travaux_maximum - fs1.attributes.delai_travaux_minimum) / 2 >
-    (fs2.attributes.delai_travaux_maximum - fs2.attributes.delai_travaux_minimum) / 2
+    ((fs1.attributes.delai_travaux_maximum || 0) - (fs1.attributes.delai_travaux_minimum || 0)) / 2 >
+    ((fs2.attributes.delai_travaux_maximum || 0) - (fs2.attributes.delai_travaux_minimum || 0)) / 2
       ? 1
       : -1,
   maxItem: 3,

@@ -44,6 +44,8 @@ export const ALL_DELAIS_TRAVAUX_FICHE_SOLUTION: DelaiTravauxFicheSolution[] = [
   DELAI_TRAVAUX_SLOW,
 ];
 
-export const getDelaiTravauxFicheSolutionFromCode = (delaiMin: number, delaiMax: number) =>
-  ALL_DELAIS_TRAVAUX_FICHE_SOLUTION.find((delaiTravaux) => delaiTravaux.delaiMax >= (delaiMax + delaiMin) / 2) ||
-  DELAI_TRAVAUX_SLOW;
+export const getDelaiTravauxFicheSolution = (delaiMin?: number, delaiMax?: number) =>
+  delaiMin == undefined || delaiMax == undefined
+    ? null
+    : ALL_DELAIS_TRAVAUX_FICHE_SOLUTION.find((delaiTravaux) => delaiTravaux.delaiMax >= (delaiMax + delaiMin) / 2) ||
+      DELAI_TRAVAUX_SLOW;
