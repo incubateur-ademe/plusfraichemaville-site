@@ -29,7 +29,9 @@ export default function AppFooter() {
               <br />
               {"Notre mission : aider les collectivités dans le choix de solutions " +
                 "de rafraîchissement urbain pérennes et durables. Plus fraîche ma ville" +
-                " est la 4"} + <sup>ème</sup> + {" action du plan de gestion des vagues de chaleur."}
+                " est la 4"}
+              <sup>ème</sup>
+              {" action du plan de gestion des vagues de chaleur."}
             </p>
             <ul className="fr-footer__content-list">
               <li className="fr-footer__content-item">
