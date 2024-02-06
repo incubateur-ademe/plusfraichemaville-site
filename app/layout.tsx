@@ -31,6 +31,7 @@ export const metadata: Metadata = {
   },
   description: "Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité.",
   manifest: "/favicon/manifest.webmanifest",
+  metadataBase: new URL("https://plusfraichemaville.fr"),
   openGraph: {
     title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
     type: "website",
