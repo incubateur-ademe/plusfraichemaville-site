@@ -35,9 +35,8 @@ export const metadata: Metadata = {
     title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
     type: "website",
     description: "Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité.",
-    images: "/favicon/apple-touch-icon.png"
-
-  }
+    images: "/favicon/apple-touch-icon.png",
+  },
 };
 
 export default function RootLayout({ children }: { children: ReactElement | null }) {
