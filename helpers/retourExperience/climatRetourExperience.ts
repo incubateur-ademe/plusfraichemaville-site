@@ -3,23 +3,23 @@ type ClimatRetourExperience = {
   label: string;
 };
 
-const CLIMAT_MEDITERRANEEN: ClimatRetourExperience = {
+export const CLIMAT_MEDITERRANEEN: ClimatRetourExperience = {
   code: "mediterraneen",
   label: "Méditerranéen",
 };
-const CLIMAT_OCEANIQUE: ClimatRetourExperience = {
+export const CLIMAT_OCEANIQUE: ClimatRetourExperience = {
   code: "oceanique",
   label: "Océanique",
 };
-const CLIMAT_SEMI_ARIDE: ClimatRetourExperience = {
+export const CLIMAT_SEMI_ARIDE: ClimatRetourExperience = {
   code: "semi_aride",
   label: "Semi-aride",
 };
-const CLIMAT_SEMI_CONTINENTAL: ClimatRetourExperience = {
+export const CLIMAT_SEMI_CONTINENTAL: ClimatRetourExperience = {
   code: "semi_continental",
   label: "Semi-continental",
 };
-const CLIMAT_EQUATORIAL: ClimatRetourExperience = {
+export const CLIMAT_EQUATORIAL: ClimatRetourExperience = {
   code: "equatorial",
   label: "Équatorial",
 };
