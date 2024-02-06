@@ -4,7 +4,10 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt", // Use JSON Web Tokens (JWT) for session management
   },
-  secret: process.env.NEXT_PUBLIC_SECRET,
+  pages: {
+    signIn: process.env.NEXTAUTH_URL
+  },
+  // secret: process.env.NEXT_PUBLIC_SECRET,
   providers: [
     {
       id: "agentconnect",
