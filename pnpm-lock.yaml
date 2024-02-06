@@ -76,6 +76,9 @@ devDependencies:
   prettier:
     specifier: 3.1.1
     version: 3.1.1
+  prisma:
+    specifier: ^5.9.1
+    version: 5.9.1
   sass:
     specifier: ^1.69.0
     version: 1.69.0
@@ -1559,6 +1562,38 @@ packages:
 
   /@polka/url@1.0.0-next.24:
     resolution: {integrity: sha512-2LuNTFBIO0m7kKIQvvPHN6UE63VjpmL9rnEEaOOaiSPbZK+zUOYIzBAWcED+3XYzhYsd/0mD57VdxAEqqV52CQ==}
+    dev: true
+
+  /@prisma/debug@5.9.1:
+    resolution: {integrity: sha512-yAHFSFCg8KVoL0oRUno3m60GAjsUKYUDkQ+9BA2X2JfVR3kRVSJFc/GpQ2fSORi4pSHZR9orfM4UC9OVXIFFTA==}
+    dev: true
+
+  /@prisma/engines-version@5.9.0-32.23fdc5965b1e05fc54e5f26ed3de66776b93de64:
+    resolution: {integrity: sha512-HFl7275yF0FWbdcNvcSRbbu9JCBSLMcurYwvWc8WGDnpu7APxQo2ONtZrUggU3WxLxUJ2uBX+0GOFIcJeVeOOQ==}
+    dev: true
+
+  /@prisma/engines@5.9.1:
+    resolution: {integrity: sha512-gkdXmjxQ5jktxWNdDA5aZZ6R8rH74JkoKq6LD5mACSvxd2vbqWeWIOV0Py5wFC8vofOYShbt6XUeCIUmrOzOnQ==}
+    requiresBuild: true
+    dependencies:
+      '@prisma/debug': 5.9.1
+      '@prisma/engines-version': 5.9.0-32.23fdc5965b1e05fc54e5f26ed3de66776b93de64
+      '@prisma/fetch-engine': 5.9.1
+      '@prisma/get-platform': 5.9.1
+    dev: true
+
+  /@prisma/fetch-engine@5.9.1:
+    resolution: {integrity: sha512-l0goQOMcNVOJs1kAcwqpKq3ylvkD9F04Ioe1oJoCqmz05mw22bNAKKGWuDd3zTUoUZr97va0c/UfLNru+PDmNA==}
+    dependencies:
+      '@prisma/debug': 5.9.1
+      '@prisma/engines-version': 5.9.0-32.23fdc5965b1e05fc54e5f26ed3de66776b93de64
+      '@prisma/get-platform': 5.9.1
+    dev: true
+
+  /@prisma/get-platform@5.9.1:
+    resolution: {integrity: sha512-6OQsNxTyhvG+T2Ksr8FPFpuPeL4r9u0JF0OZHUBI/Uy9SS43sPyAIutt4ZEAyqWQt104ERh70EZedkHZKsnNbg==}
+    dependencies:
+      '@prisma/debug': 5.9.1
     dev: true
 
   /@radix-ui/number@1.0.1:
@@ -9467,6 +9502,15 @@ packages:
   /pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
     dev: false
+
+  /prisma@5.9.1:
+    resolution: {integrity: sha512-Hy/8KJZz0ELtkw4FnG9MS9rNWlXcJhf98Z2QMqi0QiVMoS8PzsBkpla0/Y5hTlob8F3HeECYphBjqmBxrluUrQ==}
+    engines: {node: '>=16.13'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 5.9.1
+    dev: true
 
   /process-nextick-args@2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}
