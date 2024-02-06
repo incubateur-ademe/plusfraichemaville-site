@@ -18,7 +18,7 @@ const xtra_bold = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Plus fraîche ma ville",
+  title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",
@@ -29,8 +29,15 @@ export const metadata: Metadata = {
       type: "image/svg+xml",
     },
   },
-  description: "Plus fraîche ma ville",
+  description: "Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité.",
   manifest: "/favicon/manifest.webmanifest",
+  openGraph: {
+    title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
+    type: "website",
+    description: "Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité.",
+    images: "/favicon/apple-touch-icon.png"
+
+  }
 };
 
 export default function RootLayout({ children }: { children: ReactElement | null }) {
@@ -38,7 +45,6 @@ export default function RootLayout({ children }: { children: ReactElement | null
   return (
     <html {...getHtmlAttributes({ defaultColorScheme, lang })}>
       <head>
-        <title>Plus fraîche ma ville</title>
         <StartDsfr />
         <DsfrHead Link={Link} doDisableFavicon={true} />
         <MatomoScript />

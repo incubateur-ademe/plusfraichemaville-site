@@ -19,7 +19,7 @@ const SORT_TEMPERATURE: AideDecisionSortFilter = {
 
 const SORT_PRICE: AideDecisionSortFilter = {
   code: "abordable",
-  label: "les plus abordables",
+  label: "Les plus abordables",
   sortFn: (fs1, fs2) =>
     ((fs1.attributes.cout_maximum || 0) - (fs1.attributes.cout_minimum || 0)) / 2 >
     ((fs2.attributes.cout_maximum || 0) - (fs2.attributes.cout_minimum || 0)) / 2
@@ -30,7 +30,7 @@ const SORT_PRICE: AideDecisionSortFilter = {
 
 const SORT_SPEED: AideDecisionSortFilter = {
   code: "rapide",
-  label: "les plus rapides",
+  label: "Les plus rapides",
   sortFn: (fs1, fs2) =>
     ((fs1.attributes.delai_travaux_maximum || 0) - (fs1.attributes.delai_travaux_minimum || 0)) / 2 >
     ((fs2.attributes.delai_travaux_maximum || 0) - (fs2.attributes.delai_travaux_minimum || 0)) / 2

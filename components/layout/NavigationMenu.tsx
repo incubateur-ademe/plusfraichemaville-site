@@ -9,17 +9,17 @@ export default function NavigationMenu() {
       items={[
         {
           linkProps: { href: "/aide-decision", target: "_self" },
-          text: "Aide à la décision",
+          text: "Découvrir",
           isActive: pathname?.startsWith("/aide-decision"),
         },
         {
-          text: "Fiches solutions",
+          text: "Passer à l'action",
           isActive: pathname?.startsWith("/fiche-solution"),
           linkProps: { href: "/fiche-solution", target: "_self" },
         },
         {
           linkProps: { href: "/projet", target: "_self" },
-          text: "Projets réalisés",
+          text: "S'inspirer",
           isActive: pathname?.startsWith("/projet"),
         },
         {
@@ -29,7 +29,7 @@ export default function NavigationMenu() {
         },
         {
           linkProps: { href: "/contact", target: "_self" },
-          text: "Contact",
+          text: "Nous contacter",
           isActive: pathname?.startsWith("/contact"),
         },
       ]}
