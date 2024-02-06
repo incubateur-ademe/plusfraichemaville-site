@@ -1,9 +1,9 @@
 import { signIn } from "next-auth/react";
 import React from "react";
 
-export default function SignInCard({ callbackUrl }: { callbackUrl: string }) {
+export default function SignInCard({ callbackUrl }: { callbackUrl?: string }) {
   return (
-    <div className="bg-dsfr-background-alt-grey rounded-2xl px-12 py-9 mt-12  max-w-xl">
+    <div className="bg-dsfr-background-alt-grey rounded-2xl px-12 py-9 max-w-xl">
       <div className="text-xl font-bold text-dsfr-text-title-grey">
         Connectez-vous et créez votre projet pour faire votre simulation budgétaire et accéder à de nombreuses
         recommandations.

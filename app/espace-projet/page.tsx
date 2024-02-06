@@ -8,7 +8,7 @@ export default function EspaceProjet() {
   const callbackUrl = searchParams.get("callbackUrl") || "/api/auth/callback";
   return (
     <div className="fr-container pt-8">
-      <h1 className="fr-h3">Espace projet</h1>
+      <h1 className="fr-h3 mb-12">Espace projet</h1>
       <SignInCard callbackUrl={callbackUrl} />
     </div>
   );
