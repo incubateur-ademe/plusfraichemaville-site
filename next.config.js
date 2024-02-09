@@ -4,12 +4,12 @@ const nextConfig = {
     return [
       {
         source: "/fiches-techniques",
-        destination: PFMV_ROUTES.FICHES_SOLUTIONS,
+        destination: "/fiche-solution",
         permanent: true,
       },
       {
         source: "/projets-realises",
-        destination: PFMV_ROUTES.RETOURS_EXPERIENCE,
+        destination: "/projet",
         permanent: true,
       },
     ];
@@ -40,7 +40,6 @@ module.exports = nextConfig;
 
 // Injected content via Sentry wizard below
 const { withSentryConfig } = require("@sentry/nextjs");
-const { PFMV_ROUTES } = require("./helpers/routes");
 
 module.exports = withSentryConfig(
   module.exports,
