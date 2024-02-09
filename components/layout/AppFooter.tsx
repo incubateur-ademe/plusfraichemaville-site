@@ -66,6 +66,15 @@ export default function AppFooter() {
                 Accessibilité : non conforme
               </a>
             </li>
+            <li className="fr-footer__bottom-item">
+              <a
+                className="fr-footer__bottom-link"
+                href="https://github.com/incubateur-ademe/plusfraichemaville-site"
+                target="_blank"
+              >
+                Code source
+              </a>
+            </li>
           </ul>
           <div className="fr-footer__bottom-copy">
             <p>

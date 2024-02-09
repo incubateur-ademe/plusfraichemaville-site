@@ -24,15 +24,19 @@ export default async function RetoursExperiences({
       <TypeEspaceFilter className="mb-8 mt-8 md:ml-52 flex justify-center md:justify-normal" />
       <div className="flex flex-col md:flex-row">
         <RegionFilter className="md:min-w-[13rem] mb-6" />
-        <div className="grow list-none flex-wrap justify-center p-0">
-          <ul className="flex grow list-none flex-wrap p-0 gap-6 justify-center md:justify-normal">
-            {filteredRetoursExperiences.map((retourExperience) => (
-              <li key={retourExperience.id}>
-                <RetourExperienceCard retourExperience={retourExperience} />
-              </li>
-            ))}
-          </ul>
-        </div>
+        {filteredRetoursExperiences.length === 0 ? (
+          <div className="text-xl font-bold">{"Aucun retour d'expérience ne correspond à vos critères."}</div>
+        ) : (
+          <div className="grow list-none flex-wrap justify-center p-0">
+            <ul className="flex grow list-none flex-wrap p-0 gap-6 justify-center md:justify-normal">
+              {filteredRetoursExperiences.map((retourExperience) => (
+                <li key={retourExperience.id}>
+                  <RetourExperienceCard retourExperience={retourExperience} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
