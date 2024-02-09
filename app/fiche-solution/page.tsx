@@ -40,15 +40,19 @@ export default async function FichesSolutions({
           <TypeSolutionFilter className="mb-6" />
           <BaisseTemperatureFilter className="mb-6" />
         </div>
-        <div className="grow list-none p-0">
-          <ul className="flex flex-wrap gap-6 justify-center md:justify-normal">
-            {filteredFichesSolutions.map((ficheSolution) => (
-              <li key={ficheSolution.id} className="flex">
-                <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution} />
-              </li>
-            ))}
-          </ul>
-        </div>
+        {filteredFichesSolutions.length === 0 ? (
+          <div className="text-xl font-bold">Aucune fiche solution ne correspond à vos critères.</div>
+        ) : (
+          <div className="grow list-none p-0">
+            <ul className="flex flex-wrap gap-6 justify-center md:justify-normal">
+              {filteredFichesSolutions.map((ficheSolution) => (
+                <li key={ficheSolution.id} className="flex">
+                  <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
