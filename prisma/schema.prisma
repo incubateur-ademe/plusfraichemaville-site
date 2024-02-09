@@ -1,5 +1,5 @@
 generator client {
-  provider        = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
@@ -7,20 +7,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?  @db.Text
-  access_token       String?  @db.Text
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?  @db.Text
-  session_state      String?
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
@@ -44,24 +43,22 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-
 model utilisateur {
-  id                    BigInt                        @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
+  id                    BigInt                     @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
   nom                   String?
   prenom                String?
-  email                 String?
-  agent_connect_id      String
-  agent_connect_info    Json
+  email                 String?                    @unique
+  agent_connect_id      String?
+  agent_connect_info    Json?
   created_at            DateTime                   @default(now())
   collectivites_created collectivite[]             @relation(name: "collectivite_creator")
   projets_created       projet[]
   simulations_created   simulation[]
   collectivites         utilisateur_collectivite[] @relation(name: "collectivite_belonging")
-
 }
 
 model collectivite {
-  id           BigInt                        @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
+  id           BigInt                     @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
   nom          String
   code_postal  String?
   adresse_info Json?
@@ -70,27 +67,25 @@ model collectivite {
   created_by   BigInt
   creator      utilisateur                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
   created_at   DateTime                   @default(now())
-
 }
 
 enum RoleCollectivite {
   ADMIN
-
 }
 
 model utilisateur_collectivite {
   utilisateur_id  BigInt
   collectivite_id BigInt
-  utilisateur     utilisateur      @relation(name: "collectivite_belonging", fields: [utilisateur_id], references: [id])
-  collectivite    collectivite     @relation(name: "utilisateurs_in_collectivite", fields: [collectivite_id], references: [id])
+  utilisateur     utilisateur  @relation(name: "collectivite_belonging", fields: [utilisateur_id], references: [id])
+  collectivite    collectivite @relation(name: "utilisateurs_in_collectivite", fields: [collectivite_id], references: [id])
   poste           String?
-  created_at      DateTime         @default(now())
+  created_at      DateTime     @default(now())
 
   @@id([utilisateur_id, collectivite_id])
 }
 
 model projet {
-  id                  BigInt          @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
+  id                  BigInt       @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
   created_by          BigInt
   creator             utilisateur  @relation(fields: [created_by], references: [id])
   created_at          DateTime     @default(now())
@@ -102,11 +97,10 @@ model projet {
   date_echeance       DateTime?
   fiches_solutions_id Int[]
   simulations         simulation[]
-
 }
 
 model simulation {
-  id                      BigInt         @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
+  id                      BigInt      @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
   created_by              BigInt
   creator                 utilisateur @relation(fields: [created_by], references: [id])
   created_at              DateTime    @default(now())
