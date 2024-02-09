@@ -5,6 +5,7 @@ import { BOOKMARK_FS_KEY, ProjectBookmarks } from "@/helpers/bookmarkedFicheSolu
 import BookmarkedFicheSolutionByProject from "@/components/favoris/BookmarkedFicheSolution";
 import Button from "@codegouvfr/react-dsfr/Button";
 import SignInCard from "@/components/signin/SignInCard";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -27,7 +28,7 @@ export default function Page() {
             <div>{"Vous n'avez pas encore sélectionné de fiches solutions."}</div>
             <Button
               linkProps={{
-                href: "/fiche-solution",
+                href: PFMV_ROUTES.FICHES_SOLUTIONS,
               }}
               className={`rounded-3xl mt-8`}
             >

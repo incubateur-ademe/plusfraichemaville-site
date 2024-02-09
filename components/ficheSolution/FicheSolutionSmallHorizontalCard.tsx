@@ -4,6 +4,7 @@ import React from "react";
 import { APIResponse } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default function FicheSolutionSmallHorizontalCard({
   ficheSolution,
@@ -17,7 +18,7 @@ export default function FicheSolutionSmallHorizontalCard({
     <Link
       className={`flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row
       items-center fiche-solution-small-vertical-card ${className}`}
-      href={`/fiche-solution/${ficheSolution.data.attributes.slug}`}
+      href={`${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheSolution.data.attributes.slug}`}
     >
       <div className="flex w-40 h-full">
         <Image

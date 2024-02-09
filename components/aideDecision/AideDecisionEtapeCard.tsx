@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default function AideDecisionEtapeCard({
   aideDecisionEtape,
@@ -11,7 +12,7 @@ export default function AideDecisionEtapeCard({
   return (
     <Link
       className="flex w-96 md:w-56 flex-row md:flex-col items-center pfmv-card mr-4 ml-4 md:mr-0 md:ml-0"
-      href={`/aide-decision/${aideDecisionEtape.slug}`}
+      href={`${PFMV_ROUTES.AIDE_DECISION}/${aideDecisionEtape.slug}`}
     >
       <div className="flex w-32 md:w-full h-full md:h-36">
         <Image
