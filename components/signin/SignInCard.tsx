@@ -1,5 +1,7 @@
+"use client";
 import { signIn } from "next-auth/react";
 import React from "react";
+import { SignInEmailForm } from "@/components/signin/SignInEmailForm";
 
 export default function SignInCard({ callbackUrl }: { callbackUrl?: string }) {
   return (
@@ -27,6 +29,8 @@ export default function SignInCard({ callbackUrl }: { callbackUrl?: string }) {
           </a>
         </p>
       </div>
+      <hr className="pb-12 mt-12" />
+      <SignInEmailForm />
     </div>
   );
 }

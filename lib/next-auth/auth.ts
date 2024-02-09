@@ -1,13 +1,23 @@
-import type { NextAuthOptions } from "next-auth";
+import { getServerSession, NextAuthOptions } from "next-auth";
+import EmailProvider from "next-auth/providers/email";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import { PrismaClient } from "@prisma/client";
+import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
+import { PFMV_ROUTES } from "@/helpers/routes";
+
+const prisma = new PrismaClient();
 
 export const authOptions: NextAuthOptions = {
+  // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493
+  // @ts-expect-error
+  adapter: PrismaAdapter(prisma),
+  
   session: {
     strategy: "jwt", // Use JSON Web Tokens (JWT) for session management
   },
   pages: {
-    signIn: process.env.NEXTAUTH_URL
+    signIn: PFMV_ROUTES.CONNEXION,
   },
-  // secret: process.env.NEXT_PUBLIC_SECRET,
   providers: [
     {
       id: "agentconnect",
@@ -18,7 +28,7 @@ export const authOptions: NextAuthOptions = {
         params: {
           scope: "openid",
           acr_values: "eidas1",
-          redirect_uri: "http://test.localhost:3000/api/auth/callback/agentconnect",
+          redirect_uri: process.env.NEXT_PUBLIC_URL_SITE + "/api/auth/callback/agentconnect",
           nonce: "1234564",
         },
       },
@@ -30,9 +40,19 @@ export const authOptions: NextAuthOptions = {
           id: profile.sub,
           name: profile.name,
           email: profile.email,
-          image: profile.picture,
         };
       },
     },
+    EmailProvider({
+      server: process.env.EMAIL_SERVER,
+      from: process.env.EMAIL_FROM,
+    }),
   ],
 };
+
+// Use it in server contexts
+export function auth(
+  ...args: [GetServerSidePropsContext["req"], GetServerSidePropsContext["res"]] | [NextApiRequest, NextApiResponse] | []
+) {
+  return getServerSession(...args, authOptions);
+}
