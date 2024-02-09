@@ -33,6 +33,14 @@ model User {
   emailVerified DateTime?
   image         String?
   accounts      Account[]
+
+  nom                   String?
+  prenom                String?
+  created_at            DateTime            @default(now())
+  collectivites_created collectivite[]      @relation(name: "collectivite_creator")
+  projets_created       projet[]
+  simulations_created   simulation[]
+  collectivites         user_collectivite[] @relation(name: "collectivite_belonging")
 }
 
 model VerificationToken {
@@ -43,51 +51,37 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
-model utilisateur {
-  id                    BigInt                     @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
-  nom                   String?
-  prenom                String?
-  email                 String?                    @unique
-  agent_connect_id      String?
-  agent_connect_info    Json?
-  created_at            DateTime                   @default(now())
-  collectivites_created collectivite[]             @relation(name: "collectivite_creator")
-  projets_created       projet[]
-  simulations_created   simulation[]
-  collectivites         utilisateur_collectivite[] @relation(name: "collectivite_belonging")
-}
-
 model collectivite {
-  id           BigInt                     @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
+  id           BigInt              @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
   nom          String
   code_postal  String?
   adresse_info Json?
   siren        String?
-  utilisateurs utilisateur_collectivite[] @relation(name: "utilisateurs_in_collectivite")
-  created_by   BigInt
-  creator      utilisateur                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
-  created_at   DateTime                   @default(now())
+  users        user_collectivite[] @relation(name: "users_in_collectivite")
+  created_by   String
+  creator      User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
+  created_at   DateTime            @default(now())
 }
 
 enum RoleCollectivite {
   ADMIN
 }
 
-model utilisateur_collectivite {
-  utilisateur_id  BigInt
+model user_collectivite {
+  user_id         String
   collectivite_id BigInt
-  utilisateur     utilisateur  @relation(name: "collectivite_belonging", fields: [utilisateur_id], references: [id])
-  collectivite    collectivite @relation(name: "utilisateurs_in_collectivite", fields: [collectivite_id], references: [id])
+  user            User         @relation(name: "collectivite_belonging", fields: [user_id], references: [id])
+  collectivite    collectivite @relation(name: "users_in_collectivite", fields: [collectivite_id], references: [id])
   poste           String?
   created_at      DateTime     @default(now())
 
-  @@id([utilisateur_id, collectivite_id])
+  @@id([user_id, collectivite_id])
 }
 
 model projet {
   id                  BigInt       @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
-  created_by          BigInt
-  creator             utilisateur  @relation(fields: [created_by], references: [id])
+  created_by          String
+  creator             User         @relation(fields: [created_by], references: [id])
   created_at          DateTime     @default(now())
   nom                 String
   type_espace         String?
@@ -100,12 +94,12 @@ model projet {
 }
 
 model simulation {
-  id                      BigInt      @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
-  created_by              BigInt
-  creator                 utilisateur @relation(fields: [created_by], references: [id])
-  created_at              DateTime    @default(now())
+  id                      BigInt   @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
+  created_by              String
+  creator                 User     @relation(fields: [created_by], references: [id])
+  created_at              DateTime @default(now())
   projet_id               BigInt
-  projet                  projet      @relation(fields: [projet_id], references: [id])
+  projet                  projet   @relation(fields: [projet_id], references: [id])
   fiches_solutions_id     Int[]
   materiaux               Json?
   cout_min_investissement Int
