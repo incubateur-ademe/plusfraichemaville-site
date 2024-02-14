@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
       checks: ["nonce", "state"],
       authorization: {
         params: {
-          scope: "openid profile uid given_name usual_name email siren",
+          scope: "openid uid given_name usual_name email siren belonging_population",
           acr_values: "eidas1",
           redirect_uri: process.env.NEXT_PUBLIC_URL_SITE + "/api/auth/callback/agentconnect",
           nonce: uuidv4(),
@@ -69,10 +69,11 @@ export const authOptions: NextAuthOptions = {
       profile: async (profile) => {
         return {
           id: profile.sub,
-          name: `${profile.given_name} ${profile.usual_name}`,
           prenom: profile.given_name,
           nom: profile.usual_name,
           email: profile.email,
+          poste: profile.belonging_population,
+          agentconnect_info: profile,
         };
       },
     },

@@ -27,15 +27,16 @@ model Account {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
+  id                String    @id @default(cuid())
+  email             String?   @unique
+  emailVerified     DateTime?
+  image             String?
+  accounts          Account[]
+  agentconnect_info Json?
 
   nom                   String?
   prenom                String?
+  poste                 String?
   created_at            DateTime            @default(now())
   collectivites_created collectivite[]      @relation(name: "collectivite_creator")
   projets_created       projet[]
@@ -72,7 +73,6 @@ model user_collectivite {
   collectivite_id BigInt
   user            User         @relation(name: "collectivite_belonging", fields: [user_id], references: [id])
   collectivite    collectivite @relation(name: "users_in_collectivite", fields: [collectivite_id], references: [id])
-  poste           String?
   created_at      DateTime     @default(now())
 
   @@id([user_id, collectivite_id])
