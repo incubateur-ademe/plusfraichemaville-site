@@ -643,7 +643,26 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
           versioned: true;
         };
       }>;
-    icone: Attribute.Enumeration<["icone1", "icone2"]> &
+    icone: Attribute.Enumeration<
+      [
+        "abriter_biodiversite",
+        "ameliorer_bien_etre_sante",
+        "ameliorer_qualite_air",
+        "creer_lien_social",
+        "faire_economies_eau_potable",
+        "filtrer_pollutions_preserver_qualite_eaux",
+        "gerer_eaux_pluviales",
+        "prevenir_risques_innondation",
+        "prolongee_durabilite_equipement",
+        "reduide_place_voiture_en_ville",
+        "reduire_consommations_energetiques",
+        "reduire_nuisances_sonores",
+        "rendre_espaces_publics_plus_accueillants",
+        "rendre_ville_plus_ludique",
+        "sensibiliser_vivant_nature",
+        "sequestrer_du_carbone",
+      ]
+    > &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
