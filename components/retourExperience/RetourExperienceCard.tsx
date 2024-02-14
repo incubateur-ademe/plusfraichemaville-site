@@ -6,6 +6,7 @@ import React from "react";
 import { APIResponseData } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getClimatLabelFromCode } from "@/helpers/retourExperience/climatRetourExperience";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default function RetourExperienceCard({
   retourExperience,
@@ -17,7 +18,7 @@ export default function RetourExperienceCard({
   return (
     <Link
       className={`flex w-72 flex-col pfmv-card min-h-[26rem] ${className}`}
-      href={`/projet/${retourExperience.attributes.slug}`}
+      href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${retourExperience.attributes.slug}`}
     >
       <div className="flex w-full h-40">
         <Image
