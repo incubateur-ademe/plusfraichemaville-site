@@ -34,14 +34,15 @@ model User {
   accounts          Account[]
   agentconnect_info Json?
 
-  nom                   String?
-  prenom                String?
-  poste                 String?
-  created_at            DateTime            @default(now())
-  collectivites_created collectivite[]      @relation(name: "collectivite_creator")
-  projets_created       projet[]
-  simulations_created   simulation[]
-  collectivites         user_collectivite[] @relation(name: "collectivite_belonging")
+  nom                        String?
+  prenom                     String?
+  poste                      String?
+  created_at                 DateTime            @default(now())
+  collectivites_created      collectivite[]      @relation(name: "collectivite_creator")
+  projets_created            projet[]
+  estimations_created        estimation[]
+  collectivites              user_collectivite[] @relation(name: "collectivite_belonging")
+  selection_fiches_solutions Json?
 }
 
 model VerificationToken {
@@ -62,6 +63,7 @@ model collectivite {
   created_by   String
   creator      User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
   created_at   DateTime            @default(now())
+  projet       projet[]
 }
 
 enum RoleCollectivite {
@@ -71,6 +73,7 @@ enum RoleCollectivite {
 model user_collectivite {
   user_id         String
   collectivite_id BigInt
+  verified        Boolean      @default(false)
   user            User         @relation(name: "collectivite_belonging", fields: [user_id], references: [id])
   collectivite    collectivite @relation(name: "users_in_collectivite", fields: [collectivite_id], references: [id])
   created_at      DateTime     @default(now())
@@ -79,21 +82,29 @@ model user_collectivite {
 }
 
 model projet {
-  id                  BigInt       @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
-  created_by          String
-  creator             User         @relation(fields: [created_by], references: [id])
-  created_at          DateTime     @default(now())
-  nom                 String
-  type_espace         String?
-  adresse             String?
-  code_postal         String?
-  adresse_info        Json?
-  date_echeance       DateTime?
-  fiches_solutions_id Int[]
-  simulations         simulation[]
+  id                         BigInt       @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
+  created_by                 String
+  creator                    User         @relation(fields: [created_by], references: [id])
+  created_at                 DateTime     @default(now())
+  nom                        String
+  type_espace                String?
+  adresse                    String?
+  code_postal                String?
+  adresse_info               Json?
+  date_echeance              DateTime?
+  fiches_solutions_id        Int[]
+  fiches_solutions_validated Boolean      @default(false)
+  estimations                estimation[]
+  collectiviteId             BigInt
+  collectivite               collectivite @relation(fields: [collectiviteId], references: [id])
 }
 
-model simulation {
+enum StatusEstimation {
+  en_cours
+  validee
+}
+
+model estimation {
   id                      BigInt   @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
   created_by              String
   creator                 User     @relation(fields: [created_by], references: [id])
@@ -106,4 +117,5 @@ model simulation {
   cout_max_investissement Int
   cout_min_entretien      Int
   cout_max_entretien      Int
+  status                  StatusEstimation
 }
