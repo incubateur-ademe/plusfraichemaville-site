@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default async function Connexion() {
-
   const session = await auth();
   if (session) {
     redirect(PFMV_ROUTES.ESPACE_PROJET);

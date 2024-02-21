@@ -1,25 +1,23 @@
 import { getServerSession, NextAuthOptions } from "next-auth";
 import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
 import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { v4 as uuidv4 } from "uuid";
 import * as Sentry from "@sentry/nextjs";
-
-const prisma = new PrismaClient();
+import { prismaClient } from "@/lib/prisma/prismaClient";
 
 export const authOptions: NextAuthOptions = {
   // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493
   // @ts-expect-error
-  adapter: PrismaAdapter(prisma),
+  adapter: PrismaAdapter(prismaClient),
 
   session: {
     strategy: "jwt", // Use JSON Web Tokens (JWT) for session management
   },
   pages: {
     signIn: PFMV_ROUTES.CONNEXION,
-    signOut: PFMV_ROUTES.DECONNEXION
+    signOut: PFMV_ROUTES.DECONNEXION,
   },
   callbacks: {
     async jwt({ token, account }) {
