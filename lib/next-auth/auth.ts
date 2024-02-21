@@ -19,6 +19,19 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: PFMV_ROUTES.CONNEXION,
+    signOut: PFMV_ROUTES.DECONNEXION
+  },
+  callbacks: {
+    async jwt({ token, account }) {
+      if (account) {
+        token.id_token = account.id_token;
+        token.provider = account.provider;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      return { ...session, id_token: token.id_token, provider: token.provider };
+    },
   },
   providers: [
     {

@@ -2,11 +2,14 @@
 
 import Button from "@codegouvfr/react-dsfr/Button";
 import React from "react";
-import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 const SignoutButton = () => {
+  const router = useRouter();
+
   const onLogout = async () => {
-    await signOut({ redirect: true, callbackUrl: "/" });
+    router.push(PFMV_ROUTES.DECONNEXION_AGENT_CONNECT);
   };
 
   return (
