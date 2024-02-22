@@ -28,7 +28,7 @@ model Account {
 
 model User {
   id                String    @id @default(cuid())
-  email             String?   @unique
+  email             String    @unique
   emailVerified     DateTime?
   image             String?
   accounts          Account[]
@@ -105,12 +105,12 @@ enum StatusEstimation {
 }
 
 model estimation {
-  id                      BigInt   @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
+  id                      BigInt           @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
   created_by              String
-  creator                 User     @relation(fields: [created_by], references: [id])
-  created_at              DateTime @default(now())
+  creator                 User             @relation(fields: [created_by], references: [id])
+  created_at              DateTime         @default(now())
   projet_id               BigInt
-  projet                  projet   @relation(fields: [projet_id], references: [id])
+  projet                  projet           @relation(fields: [projet_id], references: [id])
   fiches_solutions_id     Int[]
   materiaux               Json?
   cout_min_investissement Int
