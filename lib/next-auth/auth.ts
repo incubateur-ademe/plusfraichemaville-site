@@ -17,18 +17,19 @@ export const authOptions: NextAuthOptions = {
   },
   pages: {
     signIn: PFMV_ROUTES.CONNEXION,
-    signOut: PFMV_ROUTES.DECONNEXION,
   },
   callbacks: {
-    async jwt({ token, account }) {
+    async jwt({ token, account , user}) {
       if (account) {
         token.id_token = account.id_token;
         token.provider = account.provider;
+        token.user_id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
-      return { ...session, id_token: token.id_token, provider: token.provider };
+      session.user.id = token.user_id;
+      return { ...session, id_token: token.id_token, provider: token.provider, user_id: token.user_id };
     },
   },
   providers: [
@@ -44,7 +45,7 @@ export const authOptions: NextAuthOptions = {
       checks: ["nonce", "state"],
       authorization: {
         params: {
-          scope: "openid uid given_name usual_name email siren belonging_population",
+          scope: "openid uid given_name usual_name email siret",
           acr_values: "eidas1",
           redirect_uri: process.env.NEXT_PUBLIC_URL_SITE + "/api/auth/callback/agentconnect",
           nonce: uuidv4(),

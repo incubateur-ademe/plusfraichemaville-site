@@ -9,6 +9,9 @@ import { DefaultSession } from "next-auth";
 declare module "next-auth" {
   // eslint-disable-next-line no-unused-vars
   interface Session extends DefaultSession {
+    user: {
+      id: string;
+    } & DefaultSession['user'];
     id_token?: string;
     provider?: string;
   }
@@ -17,6 +20,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   // eslint-disable-next-line no-unused-vars
   interface JWT {
+    user_id: string;
     id_token?: string;
     provider?: string;
   }
