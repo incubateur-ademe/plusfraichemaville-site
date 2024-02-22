@@ -9,9 +9,12 @@ module.exports = {
     },
     colors: {
       white: "#FFF",
+      black: "#000",
       "pfmv-light-blue": "#0080C2",
       "pfmv-dark-blue": "#292A82",
       "pfmv-light-grey": "#CECECE",
+      "dsfr-blue-france-sun-113": "#000091",
+      "dsfr-grey-975": "#f6f6f6",
       "dsfr-text-label-blue-france": "var(--text-label-blue-france)",
       "dsfr-hover-blue-sun": "var(--background-action-high-blue-france-hover)",
       "dsfr-background-alt-blue-france": "var(--background-alt-blue-france)",
