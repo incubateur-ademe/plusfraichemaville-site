@@ -14,7 +14,7 @@ export default function SignInCard({ callbackUrl }: { callbackUrl?: string }) {
         Vous n’avez jamais utilisé AgentConnect? Renseignez simplement votre adresse professionnelle.
       </div>
       <div className="fr-connect-group">
-        <button className="fr-connect" onClick={() => signIn("agentconnect", { callbackUrl })}>
+        <button className="fr-connect" onClick={() => signIn("agentconnect", { callbackUrl: callbackUrl })}>
           <span className="fr-connect__login">S’identifier avec</span>{" "}
           <span className="fr-connect__brand">AgentConnect</span>
         </button>
