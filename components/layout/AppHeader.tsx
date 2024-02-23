@@ -3,7 +3,7 @@ import NavigationMenu from "@/components/layout/NavigationMenu";
 import Image from "next/image";
 import AdemePFMVLogo from "../../public/images/logo-ademe-pfmv.svg";
 
-import { EspaceProjetConnectButtonWithModal } from "../common/modals/EspaceProjectConnect";
+import { EspaceProjetConnectButton } from "../common/buttons/EspaceProjectConnectButton";
 
 export default function AppHeader() {
   return (
@@ -40,6 +40,7 @@ export default function AppHeader() {
                   </div>
                 </div>
               </div>
+              <EspaceProjetConnectButton>Mon espace projet</EspaceProjetConnectButton>
             </div>
           </div>
         </div>
@@ -52,9 +53,6 @@ export default function AppHeader() {
           </div>
         </div>
       </header>
-      <EspaceProjetConnectButtonWithModal
-        button={{ iconId: "ri-dashboard-fill", label: "Mon espace projet", id: "connect-modal", priority: "tertiary" }}
-      />
     </>
   );
 }
