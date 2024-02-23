@@ -12,7 +12,7 @@ export default async function Connexion() {
   return (
     <div className="fr-container pt-8">
       <h1 className="fr-h3 mb-12">Espace projet</h1>
-      <SignInCard />
+      <SignInCard message="connect" />
     </div>
   );
 }

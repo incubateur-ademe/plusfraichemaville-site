@@ -20,7 +20,7 @@ export default function Page() {
        flex-[0_1_100%] order-1 flex-row-reverse [&>*:not(:nth-child(2))]:w-full [&>*:nth-child(2)]:grow items-start
        place-content-center"
       >
-        <SignInCard />
+        <SignInCard message="save" />
         {bookmarkedFichesSolutions.length === 0 ? (
           <div>
             <div className="fr-h3">Mes solutions sauvegardées</div>
