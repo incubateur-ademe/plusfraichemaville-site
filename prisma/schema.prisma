@@ -58,7 +58,7 @@ model collectivite {
   nom          String
   code_postal  String?
   adresse_info Json?
-  siren        String?
+  siret        String?             @unique
   users        user_collectivite[] @relation(name: "users_in_collectivite")
   created_by   String
   creator      User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
@@ -78,7 +78,7 @@ model user_collectivite {
   collectivite    collectivite @relation(name: "users_in_collectivite", fields: [collectivite_id], references: [id])
   created_at      DateTime     @default(now())
 
-  @@id([user_id, collectivite_id])
+  @@id(name: "userCollectiviteId", [user_id, collectivite_id])
 }
 
 model projet {

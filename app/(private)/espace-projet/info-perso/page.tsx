@@ -1,12 +1,12 @@
 import React from "react";
 import { auth } from "@/lib/next-auth/auth";
-import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserInfoForm } from "@/forms/user/UserInfoForm";
 import UserNotFoundError from "@/components/error/UserNotFoundError";
+import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 
 export default async function InfoPerso() {
   const session = await auth();
-  const user = await prismaClient.user.findUnique({ where: { email: session?.user?.email ?? undefined } });
+  const user = session && (await getUserWithCollectivites(session.user.id));
   if (!user) {
     return <UserNotFoundError />;
   }

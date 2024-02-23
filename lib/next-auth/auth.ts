@@ -6,12 +6,30 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { v4 as uuidv4 } from "uuid";
 import * as Sentry from "@sentry/nextjs";
 import { prismaClient } from "@/lib/prisma/prismaClient";
+import { getEntityInfoFromSiret } from "@/lib/siren/fetch";
+import { getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
+import { attachUserToCollectivite } from "@/lib/prisma/prismaUserCollectiviteQueries";
+import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 
 export const authOptions: NextAuthOptions = {
   // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493
   // @ts-expect-error
   adapter: PrismaAdapter(prismaClient),
-
+  events: {
+    createUser: async ({ user }) => {
+      const prismaUser = await getUserWithCollectivites(user.id);
+      const siret = prismaUser?.agentconnect_info?.siret;
+      if (siret) {
+        const entityInfo = await getEntityInfoFromSiret(siret);
+        const codePostal = entityInfo?.etablissement?.adresseEtablissement.codePostalEtablissement;
+        const entityName = entityInfo?.etablissement?.uniteLegale.denominationUniteLegale;
+        if (entityName && codePostal) {
+          const collectivite = await getOrCreateCollectivite(siret, entityName, codePostal, prismaUser);
+          await attachUserToCollectivite(prismaUser, collectivite, true);
+        }
+      }
+    },
+  },
   session: {
     strategy: "jwt", // Use JSON Web Tokens (JWT) for session management
   },
@@ -19,7 +37,7 @@ export const authOptions: NextAuthOptions = {
     signIn: PFMV_ROUTES.CONNEXION,
   },
   callbacks: {
-    async jwt({ token, account , user}) {
+    async jwt({ token, account, user }) {
       if (account) {
         token.id_token = account.id_token;
         token.provider = account.provider;
@@ -45,7 +63,7 @@ export const authOptions: NextAuthOptions = {
       checks: ["nonce", "state"],
       authorization: {
         params: {
-          scope: "openid uid given_name usual_name email siret",
+          scope: "openid uid given_name usual_name email siret chorusdt phone organizational_unit siren",
           acr_values: "eidas1",
           redirect_uri: process.env.NEXT_PUBLIC_URL_SITE + "/api/auth/callback/agentconnect",
           nonce: uuidv4(),

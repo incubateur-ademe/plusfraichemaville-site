@@ -3,8 +3,9 @@
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
 import { auth } from "@/lib/next-auth/auth";
 import { hasPermissionToUpdateUser } from "@/forms/permission/userInfoPermission";
-import { prismaClient } from "@/lib/prisma/prismaClient";
 import { captureError } from "@/lib/sentry/sentryCustomMessage";
+import { createOrUpdateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
+import { getUserWithCollectivites, updateUser } from "@/lib/prisma/prismaUserQueries";
 
 export async function editUserInfoAction(data: UserInfoFormData & { userId: string }) {
   const session = await auth();
@@ -22,16 +23,24 @@ export async function editUserInfoAction(data: UserInfoFormData & { userId: stri
   }
 
   if (parseParamResult.success) {
-    const updateUser = await prismaClient.user.update({
-      where: {
-        id: data.userId,
-      },
-      data: {
-        nom: data.nom,
-        prenom: data.prenom,
-        poste: data.poste,
-      },
+    const prismaUser = await getUserWithCollectivites(data.userId);
+    if (prismaUser?.collectivites[0] && prismaUser?.collectivites[0].collectivite.siret !== data.siret) {
+      return { success: false, error: "Vous n'avez pas la possibilité de changer de collectivité" };
+    }
+    const collectivite = await createOrUpdateCollectivite(
+      data.siret,
+      data.collectivite,
+      data.codePostal,
+      session.user.id,
+    );
+    const updatedUser = await updateUser({
+      userId: data.userId,
+      userPrenom: data.prenom,
+      userNom: data.nom,
+      userPoste: data.poste,
+      collectiviteId: collectivite.id,
     });
-    return { success: true, data: updateUser };
+
+    return { success: true, data: updatedUser };
   }
 }
