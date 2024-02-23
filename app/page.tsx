@@ -14,6 +14,7 @@ import Link from "next/link";
 import { ALL_REX_FOR_HOMEPAGE } from "@/components/homepage/HomepageRetourExperienceList";
 import RetourExperienceCardForHomepage from "@/components/homepage/RetourExperienceCardForHomepage";
 import Image from "next/image";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default function Home() {
   return (
@@ -28,7 +29,7 @@ export default function Home() {
             <div className="text-dsfr-text-label-blue-france text-lg font-bold mt-4">
               {"Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité."}
             </div>
-            <Button className="rounded-3xl mt-8 mb-8" linkProps={{ href: "/aide-decision" }}>
+            <Button className="rounded-3xl mt-8 mb-8" linkProps={{ href: PFMV_ROUTES.AIDE_DECISION }}>
               Trouver une solution adaptée
             </Button>
           </div>
@@ -48,19 +49,19 @@ export default function Home() {
         <div className="flex mt-12 gap-14 flex-wrap justify-center">
           <HomeActionPresentation
             image="/images/homepage/perso-aide-decision.svg"
-            link="/aide-decision"
+            link={PFMV_ROUTES.AIDE_DECISION}
             buttonLabel="Trouver une solution adaptée"
             label="1. Je sélectionne les solutions qui correspondent à mon besoin"
           />
           <HomeActionPresentation
             image="/images/homepage/perso-fs.svg"
-            link="/fiche-solution"
+            link={PFMV_ROUTES.FICHES_SOLUTIONS}
             buttonLabel="Explorer les fiches solutions"
             label="2. Je bénéficie d’informations techniques précises"
           />
           <HomeActionPresentation
             image="/images/homepage/perso-rex.svg"
-            link="/projet"
+            link={PFMV_ROUTES.RETOURS_EXPERIENCE}
             buttonLabel="Découvrir les projets réalisés"
             label="3. Je m’inspire des projets réalisés par d’autres collectivités"
           />

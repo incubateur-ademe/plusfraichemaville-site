@@ -6,6 +6,7 @@ import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import { getAideDecisionBySlug, getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default async function Page({
   params,
@@ -20,8 +21,8 @@ export default async function Page({
     const firstStep = historique && historique[1] ? historique[1] : currentStep.attributes;
     const previousStep = currentStep.attributes.etape_precedente;
     const previsousStepSlug = previousStep?.data?.attributes?.slug
-      ? `/aide-decision/${previousStep.data.attributes.slug}`
-      : "/aide-decision";
+      ? `${PFMV_ROUTES.AIDE_DECISION}/${previousStep.data.attributes.slug}`
+      : PFMV_ROUTES.AIDE_DECISION;
     return (
       <div className={"fr-container"}>
         <div className="block md:flex flex-row justify-items-center">

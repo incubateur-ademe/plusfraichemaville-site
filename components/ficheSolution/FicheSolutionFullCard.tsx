@@ -5,6 +5,7 @@ import React from "react";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default function FicheSolutionFullCard({
   ficheSolution,
@@ -14,7 +15,7 @@ export default function FicheSolutionFullCard({
   extraUrlParams?: { param: string; value: string }[];
 }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
-  let url = `/fiche-solution/${ficheSolution.slug}`;
+  let url = `${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheSolution.slug}`;
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
   return (
     <Link className="flex w-72 flex-col pfmv-card md:ml-0" href={url}>
