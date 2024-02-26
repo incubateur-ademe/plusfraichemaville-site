@@ -1,12 +1,15 @@
 "use client";
 
-import { useUserStore } from "@/stores/user";
-
 import { Connected } from "./EspaceProjetButtonConnected";
 import { Disconnected } from "./EspaceProjetButtonDisconnected";
+import { useSession } from "next-auth/react";
 
-export const EspaceProjetButton = () => {
-  const session = useUserStore((state) => state.session);
+export const EspaceProjetButton = ({ hiddenOnMobile }: { hiddenOnMobile?: boolean }) => {
+  const { status } = useSession();
 
-  return session ? <Connected /> : <Disconnected />;
+  return (
+    <div className={`${hiddenOnMobile && "hidden lg:block"}`}>
+      {status === "authenticated" ? <Connected /> : <Disconnected />}
+    </div>
+  );
 };

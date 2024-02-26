@@ -12,8 +12,8 @@ import "@codegouvfr/react-dsfr/dsfr/utility/icons/icons.css";
 import { Toaster } from "react-hot-toast";
 import MatomoScript from "@/components/matomo/MatomoScript";
 import MainLayoutProviders from "@/components/layout/MainLayoutProviders";
-import { auth } from "@/lib/next-auth/auth";
 import { UserClient } from "@/components/user";
+import SessionProvider from "@/components/authentication/SessionProvider";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -45,7 +45,6 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactElement | null }) {
   const lang = "fr";
-  const session = await auth();
 
   return (
     <html {...getHtmlAttributes({ defaultColorScheme, lang })}>
@@ -56,10 +55,12 @@ export default async function RootLayout({ children }: { children: ReactElement 
       </head>
       <body>
         <MainLayoutProviders lang={lang}>
-          <UserClient session={session} />
-          <AppHeader />
-          <Toaster position="bottom-left" />
-          <div className={`${xtra_bold.variable}`}>{children}</div>
+          <SessionProvider>
+            <UserClient />
+            <AppHeader />
+            <Toaster position="bottom-left" />
+            <div className={`${xtra_bold.variable}`}>{children}</div>
+          </SessionProvider>
         </MainLayoutProviders>
       </body>
     </html>
