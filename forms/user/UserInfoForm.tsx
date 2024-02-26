@@ -9,7 +9,7 @@ import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormS
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import toast from "react-hot-toast";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCurtomTypes";
+import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
 export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
   const router = useRouter();

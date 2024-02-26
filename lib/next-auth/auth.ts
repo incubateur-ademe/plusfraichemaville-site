@@ -10,6 +10,7 @@ import { getEntityInfoFromSiret } from "@/lib/siren/fetch";
 import { getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { attachUserToCollectivite } from "@/lib/prisma/prismaUserCollectiviteQueries";
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
+import { AgentConnectInfo } from "@/lib/prisma/prismaCustomTypes";
 
 export const authOptions: NextAuthOptions = {
   // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493
@@ -18,14 +19,17 @@ export const authOptions: NextAuthOptions = {
   events: {
     createUser: async ({ user }) => {
       const prismaUser = await getUserWithCollectivites(user.id);
-      const siret = prismaUser?.agentconnect_info?.siret;
-      if (siret) {
-        const entityInfo = await getEntityInfoFromSiret(siret);
-        const codePostal = entityInfo?.etablissement?.adresseEtablissement.codePostalEtablissement;
-        const entityName = entityInfo?.etablissement?.uniteLegale.denominationUniteLegale;
-        if (entityName && codePostal) {
-          const collectivite = await getOrCreateCollectivite(siret, entityName, codePostal, prismaUser);
-          await attachUserToCollectivite(prismaUser, collectivite, true);
+      if (prismaUser) {
+        const agentConnectInfo = prismaUser.agentconnect_info as AgentConnectInfo;
+        const siret = agentConnectInfo.siret;
+        if (siret) {
+          const entityInfo = await getEntityInfoFromSiret(siret);
+          const codePostal = entityInfo?.etablissement?.adresseEtablissement.codePostalEtablissement;
+          const entityName = entityInfo?.etablissement?.uniteLegale.denominationUniteLegale;
+          if (entityName && codePostal) {
+            const collectivite = await getOrCreateCollectivite(siret, entityName, codePostal, prismaUser);
+            await attachUserToCollectivite(prismaUser, collectivite, true);
+          }
         }
       }
     },

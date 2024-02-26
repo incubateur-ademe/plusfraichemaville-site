@@ -1,5 +1,5 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCurtomTypes";
+import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.findUnique({
