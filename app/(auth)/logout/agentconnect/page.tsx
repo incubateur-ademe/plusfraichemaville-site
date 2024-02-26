@@ -9,6 +9,5 @@ export default async function Logout() {
   // TODO : Changer la conf de l'url chez AgentConnect pour mettre directement /logout
   logOutUrl.searchParams.set("post_logout_redirect_uri", process.env.NEXTAUTH_URL + "/api/auth/signout");
   logOutUrl.searchParams.set("state", uuidv4());
-  // TODO Si on conserve le login par email, rediriger directement vers /logout
   redirect(logOutUrl.toString());
 }

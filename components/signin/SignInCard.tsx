@@ -29,8 +29,6 @@ export default function SignInCard({ callbackUrl }: { callbackUrl?: string }) {
           </a>
         </p>
       </div>
-      <hr className="pb-12 mt-12" />
-      <SignInEmailForm />
     </div>
   );
 }
