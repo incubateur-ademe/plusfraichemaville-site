@@ -12,14 +12,14 @@ type BaseProps = {
   children?: ReactNode;
 };
 
-type EspaceProjetConnectButtonWithModalProps = {
+type EspaceProjetButtonWithModalProps = {
   button: PickedButtonProps & BaseProps;
 };
 
 /**
  * Bouton qui déclenche l'affichage d'une modal de login au clic.
  */
-export function EspaceProjetConnectButtonWithModal({ button }: EspaceProjetConnectButtonWithModalProps) {
+export function EspaceProjetButtonWithModal({ button }: EspaceProjetButtonWithModalProps) {
   const modal = createModal({
     id: button.id,
     isOpenedByDefault: false,

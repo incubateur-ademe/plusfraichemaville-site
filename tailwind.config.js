@@ -7,6 +7,9 @@ module.exports = {
         xtraBold: ["var(--font-xtra-bold)"],
       },
     },
+    boxShadow: {
+      "pfmv-card-shadow": "0px 4px 20px 0px rgba(0, 0, 0, 0.10)",
+    },
     colors: {
       white: "#FFF",
       black: "#000",
@@ -15,6 +18,7 @@ module.exports = {
       "pfmv-light-grey": "#CECECE",
       "dsfr-blue-france-sun-113": "#000091",
       "dsfr-grey-975": "#f6f6f6",
+      "dsfr-blue-france-925": "#e3e3fd",
       "dsfr-text-label-blue-france": "var(--text-label-blue-france)",
       "dsfr-hover-blue-sun": "var(--background-action-high-blue-france-hover)",
       "dsfr-background-alt-blue-france": "var(--background-alt-blue-france)",
