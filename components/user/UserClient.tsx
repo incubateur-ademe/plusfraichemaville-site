@@ -1,19 +1,16 @@
 "use client";
 
 import { useUserStore } from "@/stores/user";
-import { Session } from "next-auth";
+import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 
-type UserClientProps = {
-  session: Session | null;
-};
+export const UserClient = () => {
+  const { data } = useSession();
 
-export const UserClient = ({ session }: UserClientProps) => {
-  const setSession = useUserStore((state) => state.setSession);
-
+  const setUserInfos = useUserStore((state) => state.setUserInfos);
   useEffect(() => {
-    setSession(session);
-  }, [session, setSession]);
+    setUserInfos(data?.user);
+  }, [data?.user, setUserInfos]);
 
   return null;
 };
