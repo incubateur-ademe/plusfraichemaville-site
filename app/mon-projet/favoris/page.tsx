@@ -17,8 +17,8 @@ export default function Page() {
     isClient && (
       <div
         className="fr-container text-dsfr-text-title-grey pt-8 flex flex-row flex-wrap first:flex-[1_0_50%] gap-8
-       flex-[0_1_100%] order-1 flex-row-reverse [&>*:not(:nth-child(2))]:w-full [&>*:nth-child(2)]:grow items-start
-       place-content-center"
+          flex-[0_1_100%] order-1 [&>*:not(:nth-child(2))]:w-full [&>*:nth-child(2)]:grow items-start
+          place-content-center"
       >
         <SignInCard message="save" />
         {bookmarkedFichesSolutions.length === 0 ? (
@@ -30,7 +30,7 @@ export default function Page() {
               linkProps={{
                 href: PFMV_ROUTES.FICHES_SOLUTIONS,
               }}
-              className={`rounded-3xl mt-8`}
+              className={"rounded-3xl mt-8"}
             >
               Découvrir les solutions
             </Button>

@@ -34,7 +34,7 @@ export const SignInEmailForm = () => {
         stateRelatedMessage={form.formState.errors.email?.message}
         nativeInputProps={{ ...form.register("email") }}
       />
-      <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
+      <Button className={"rounded-3xl text-sm"} type="submit" disabled={disabled}>
         Recevoir le lien de connexion
       </Button>
     </form>
