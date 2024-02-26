@@ -5,7 +5,9 @@ import { SignInEmailForm } from "@/components/signin/SignInEmailForm";
 
 const messages = {
   connect:
+    // eslint-disable-next-line max-len
     "Connectez-vous et créez votre projet pour faire votre simulation budgétaire et accéder à de nombreuses recommandations.",
+  // eslint-disable-next-line max-len
   save: "Connectez-vous pour sauvegarder vos solutions, faire une estimation budgétaire de votre projet et accéder à de nombreuses recommandations.",
 };
 
