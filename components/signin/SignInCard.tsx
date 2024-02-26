@@ -1,7 +1,6 @@
 "use client";
 import { signIn } from "next-auth/react";
 import React from "react";
-import { SignInEmailForm } from "@/components/signin/SignInEmailForm";
 
 export default function SignInCard({ callbackUrl }: { callbackUrl?: string }) {
   return (
