@@ -10,6 +10,7 @@ export default function NavigationMenu() {
 
   return (
     <MainNavigation
+      className="nav-main-navigation"
       items={[
         {
           linkProps: { href: PFMV_ROUTES.AIDE_DECISION, target: "_self" },
