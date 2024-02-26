@@ -1,6 +1,7 @@
 "use client";
 import Image from "next/image";
 import { useTypeEspaceFilter } from "@/hooks/useTypeEspaceFilter";
+import { SelectOption } from "@/components/common/SelectFormField";
 
 type TypeEspace = {
   label: string;
@@ -16,6 +17,16 @@ const ALL_ESPACES: TypeEspace[] = [
   { label: "Place", code: "place", icon: "espace-icone-place.svg" },
   { label: "Cour d'école", code: "ecole", icon: "espace-icone-cour-ecole.svg" },
   { label: "Parc et jardin", code: "parc", icon: "espace-icone-cour-parc-jardin.svg" },
+];
+
+export const typeEspaceOptions: SelectOption[] = [
+  {
+    name: "Selectionnez un type d'espace",
+    value: "",
+    disabled: true,
+    hidden: true,
+  },
+  ...ALL_ESPACES.map((espace) => ({ name: espace.label, value: espace.code })),
 ];
 
 export default function TypeEspaceFilter({ className }: { className?: string }) {
