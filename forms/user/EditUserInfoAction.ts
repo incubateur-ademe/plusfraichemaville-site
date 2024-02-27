@@ -2,10 +2,11 @@
 
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
 import { auth } from "@/lib/next-auth/auth";
-import { hasPermissionToUpdateUser } from "@/forms/permission/userInfoPermission";
+
 import { captureError } from "@/lib/sentry/sentryCustomMessage";
 import { createOrUpdateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { getUserWithCollectivites, updateUser } from "@/lib/prisma/prismaUserQueries";
+import { hasPermissionToUpdateUser } from "@/helpers/permissions";
 
 export async function editUserInfoAction(data: UserInfoFormData & { userId: string }) {
   const session = await auth();
