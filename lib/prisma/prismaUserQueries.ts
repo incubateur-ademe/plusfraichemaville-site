@@ -1,5 +1,48 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithNomCollectivite, UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+
+export const deleteUserProjet = (userId: string, projetId: number) => {
+  return prismaClient.projet.delete({
+    where: {
+      id: projetId,
+      created_by: userId,
+    },
+  });
+};
+
+export const getUserProjets = async (userId: string) => {
+  return prismaClient.projet.findMany({
+    where: {
+      created_by: userId,
+    },
+    include: {
+      collectivite: {
+        select: {
+          nom: true,
+        },
+      },
+    },
+  });
+};
+
+export const getProjetsByUserCollectivites = async (userId: string): Promise<ProjetWithNomCollectivite[]> => {
+  const userWithCollectivites = await prismaClient.user.findUnique({
+    where: { id: userId },
+    include: { collectivites: { include: { collectivite: { include: { projet: true } } } } },
+  });
+
+  if (!userWithCollectivites) return [];
+
+  const projets = userWithCollectivites.collectivites.reduce((acc, { collectivite }) => {
+    const collectiviteProjets = collectivite.projet.map((projet) => ({
+      ...projet,
+      collectivite: { nom: collectivite.nom },
+    }));
+    return acc.concat(collectiviteProjets);
+  }, [] as ProjetWithNomCollectivite[]);
+
+  return projets;
+};
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.findUnique({
@@ -21,7 +64,7 @@ export const updateUser = async ({
   userNom: string;
   userPrenom: string;
   userPoste: string;
-  collectiviteId: bigint;
+  collectiviteId: number;
 }): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.update({
     where: {
