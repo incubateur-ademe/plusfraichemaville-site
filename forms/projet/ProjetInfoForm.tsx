@@ -13,6 +13,7 @@ import { typeEspaceOptions } from "@/components/filters/TypeEspaceFilter";
 import { monthDateToString } from "@/helpers/dateUtils";
 import { editProjetInfoAction } from "@/forms/projet/EditProjetInfoAction";
 import toast from "react-hot-toast";
+import { niveauxMaturiteProjetOptions } from "@/helpers/maturiteProjet";
 
 export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
   const router = useRouter();
@@ -23,6 +24,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
       projetId: projet?.id,
       nom: projet?.nom ?? "",
       typeEspace: projet?.type_espace ?? "",
+      niveauMaturite: projet?.niveau_maturite ?? "",
       adresse: projet?.adresse || undefined,
       dateEcheance: monthDateToString(projet?.date_echeance),
     },
@@ -66,6 +68,13 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
         asterisk={true}
         type="month"
         placeholder="YYYY-MM"
+      />
+      <SelectFormField
+        control={form.control}
+        path="niveauMaturite"
+        label="Niveau de maturité du projet"
+        asterisk={true}
+        options={niveauxMaturiteProjetOptions}
       />
       <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
         {"Valider"}

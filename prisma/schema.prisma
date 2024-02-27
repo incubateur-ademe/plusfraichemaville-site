@@ -89,7 +89,7 @@ model projet {
   nom                        String
   type_espace                String?
   adresse                    String?
-  code_postal                String?
+  niveau_maturite            String?
   adresse_info               Json?
   date_echeance              DateTime?
   fiches_solutions_id        Int[]

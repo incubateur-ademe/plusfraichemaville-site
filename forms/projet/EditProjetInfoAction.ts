@@ -33,6 +33,7 @@ export async function editProjetInfoAction(data: ProjetInfoFormData) {
         nomProjet: data.nom,
         typeEspace: data.typeEspace,
         adresse: data.adresse || undefined,
+        niveauMaturite: data.niveauMaturite,
         dateEcheance: data.dateEcheance,
         collectiviteId: user.collectivites[0].collectivite_id,
         userId: user.id,

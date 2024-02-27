@@ -5,6 +5,7 @@ export const ProjetInfoFormSchema = z.object({
   nom: z.string().min(1, { message: "Veuillez renseigner le nom du projet" }),
   typeEspace: z.string().min(1, { message: "Veuillez renseigner l'espace sur lequel vous souhaitez agir" }),
   adresse: z.string().optional(),
+  niveauMaturite: z.string().min(1, {message: "Veuillez sélectionner le niveau de maturité de votre projet"}),
   dateEcheance: z
     .string()
     .min(1, { message: "Veuillez renseigner la date d'échéance souhaitée" })

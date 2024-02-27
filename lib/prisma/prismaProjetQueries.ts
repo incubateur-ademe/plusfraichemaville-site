@@ -15,6 +15,7 @@ export const createOrUpdateProjet = async ({
   adresse,
   dateEcheance,
   typeEspace,
+  niveauMaturite,
   userId,
   collectiviteId,
 }: {
@@ -23,6 +24,7 @@ export const createOrUpdateProjet = async ({
   typeEspace: string;
   adresse?: string;
   dateEcheance: string;
+  niveauMaturite: string;
   userId: string;
   collectiviteId: bigint;
 }) => {
@@ -34,6 +36,7 @@ export const createOrUpdateProjet = async ({
       nom: nomProjet,
       type_espace: typeEspace,
       adresse,
+      niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
       created_by: userId,
@@ -42,6 +45,7 @@ export const createOrUpdateProjet = async ({
       nom: nomProjet,
       type_espace: typeEspace,
       adresse,
+      niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
     },
   });
