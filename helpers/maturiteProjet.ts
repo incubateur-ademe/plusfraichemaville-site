@@ -29,11 +29,5 @@ const ALL_NIVEAU_MATURITE: NiveauMaturite[] = [
 ];
 
 export const niveauxMaturiteProjetOptions: SelectOption[] = [
-  {
-    name: "Selectionnez un niveau de maturité",
-    value: "",
-    disabled: true,
-    hidden: true,
-  },
   ...ALL_NIVEAU_MATURITE.map((niveau) => ({ name: niveau.label, value: niveau.code })),
 ];

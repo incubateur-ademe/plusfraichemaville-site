@@ -56,6 +56,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
         label="Sur quel espace souhaitez vous agir ?"
         asterisk={true}
         options={typeEspaceOptions}
+        placeholder="Selectionnez un type d'espace"
       />
       <InputFormField
         control={form.control}
@@ -76,6 +77,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
         label="Niveau de maturité du projet"
         asterisk={true}
         options={niveauxMaturiteProjetOptions}
+        placeholder="Selectionnez un niveau de maturité"
       />
       <CollectiviteInputFormField
         control={form.control}

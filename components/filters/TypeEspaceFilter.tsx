@@ -20,12 +20,6 @@ const ALL_ESPACES: TypeEspace[] = [
 ];
 
 export const typeEspaceOptions: SelectOption[] = [
-  {
-    name: "Selectionnez un type d'espace",
-    value: "",
-    disabled: true,
-    hidden: true,
-  },
   ...ALL_ESPACES.map((espace) => ({ name: espace.label, value: espace.code })),
 ];
 

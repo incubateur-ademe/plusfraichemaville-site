@@ -19,6 +19,7 @@ export type SelectFormFieldProps<T extends FieldValues> = {
   hint?: string;
   valid?: string;
   asterisk?: boolean;
+  placeholder?: string;
 };
 
 const SelectFormField = <T extends FieldValues>({
@@ -31,6 +32,7 @@ const SelectFormField = <T extends FieldValues>({
   valid,
   asterisk,
   className,
+  placeholder,
 }: SelectFormFieldProps<T>) => {
   const id = `select-form-field__${path}`;
 
@@ -76,6 +78,11 @@ const SelectFormField = <T extends FieldValues>({
               ref={ref}
               value={value || ""}
             >
+              {placeholder && (
+                <option value="" disabled hidden>
+                  {placeholder}
+                </option>
+              )}
               {options.map((option) => (
                 <option key={option.value} value={option.value} disabled={option.disabled} hidden={option.hidden}>
                   {option.name}
