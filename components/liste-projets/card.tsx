@@ -21,10 +21,10 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
   return (
     <div className={`pfmv-card p-5 pb-10 rounded-xl flex mb-5 ${disabledText}`}>
       <div className="mr-6">
-        <PictoEspaceSelector pictoId="place" />
+        <PictoEspaceSelector pictoId="place" withBackground />
       </div>
       <div>
-        <h3 className="text-xl text-dsfr-text-label-blue-france mb-2">{projet.nom}</h3>
+        <h3 className="text-xl text-dsfr-text-label-blue-france mb-1">{projet.nom}</h3>
         <h4 className="text-dsfr-text-label-blue-france mb-4 text-base">
           <i className="ri-map-pin-line before:!w-4 mr-1"></i>
           {projet.collectivite.nom}
