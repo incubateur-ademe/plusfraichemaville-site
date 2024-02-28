@@ -1,4 +1,4 @@
-import classNames from "classnames";
+import clsx from "clsx";
 import React, { ReactNode } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/components/common/RedAsterisk";
@@ -48,7 +48,7 @@ const SelectFormField = <T extends FieldValues>({
 
         return (
           <div
-            className={classNames(
+            className={clsx(
               "fr-select-group",
               {
                 "fr-select-group--error": error,
@@ -63,7 +63,7 @@ const SelectFormField = <T extends FieldValues>({
               {hint ? <span className="fr-hint-text">{hint}</span> : null}
             </label>
             <select
-              className={classNames("fr-select", {
+              className={clsx("fr-select", {
                 "fr-select--error": error,
                 "fr-select--valid": isDirty && !invalid,
               })}

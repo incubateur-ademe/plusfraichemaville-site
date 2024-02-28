@@ -1,5 +1,4 @@
 "use client";
-import classNames from "classnames";
 import React, { Fragment, ReactNode, useEffect, useState } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/components/common/RedAsterisk";
@@ -8,6 +7,7 @@ import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite"
 import { debounce } from "lodash";
 import { Oval } from "react-loader-spinner";
 import { AddressCollectivite } from "@/lib/adresseApi/types";
+import clsx from "clsx";
 
 type CommonProps<T extends FieldValues> = {
   className?: string;
@@ -146,7 +146,7 @@ const CollectiviteInputFormField = <T extends FieldValues>({
         );
         return (
           <div
-            className={classNames(
+            className={clsx(
               "fr-input-group",
               {
                 "fr-input-group--error": error,
@@ -167,12 +167,12 @@ const CollectiviteInputFormField = <T extends FieldValues>({
               </p>
             )}
             {error && (
-              <p id={`${id}__error`} className={classNames("fr-error-text", { "fr-mt-1v": !!info })}>
+              <p id={`${id}__error`} className={clsx("fr-error-text", { "fr-mt-1v": !!info })}>
                 {error.message}
               </p>
             )}
             {valid && isTouched && !invalid && (
-              <p id={`${id}__valid`} className={classNames("fr-valid-text", { "fr-mt-1v": !!info })}>
+              <p id={`${id}__valid`} className={clsx("fr-valid-text", { "fr-mt-1v": !!info })}>
                 {valid}
               </p>
             )}
