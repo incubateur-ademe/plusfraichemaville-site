@@ -3,7 +3,7 @@
   "version": "1.0.3",
   "private": true,
   "scripts": {
-    "predev": "only-include-used-icons",
+    "predev:start": "only-include-used-icons",
     "prebuild": "only-include-used-icons",
     "dev:db:migrate": "prisma migrate dev",
     "dev:db:push": "prisma db push",
@@ -25,7 +25,7 @@
     "@hookform/resolvers": "^3.3.4",
     "@prisma/client": "^5.9.1",
     "@sentry/nextjs": "7.77.0",
-    "classnames": "^2.5.1",
+    "clsx": "^2.1.0",
     "lodash": "^4.17.21",
     "next": "14.0.4",
     "next-auth": "^4.24.5",
