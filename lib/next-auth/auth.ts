@@ -33,7 +33,7 @@ export const authOptions: NextAuthOptions = {
               (address) => address.codeInsee === codeInsee && address.codePostal === codePostal,
             );
             if (collectiviteToUse) {
-              const collectivite = await getOrCreateCollectivite(collectiviteToUse, prismaUser);
+              const collectivite = await getOrCreateCollectivite(collectiviteToUse, prismaUser.id);
               await attachUserToCollectivite(prismaUser, collectivite, true);
             }
           }
