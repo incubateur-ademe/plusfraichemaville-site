@@ -24,9 +24,13 @@ const config = {
   },
 };
 
-export const apiFetcher = (url: FetchURLType, body: {} = {}) => {
-  return fetch(PFMV_ROUTES_API[url], {
+export const apiFetcher = async <T>(url: FetchURLType, body: {} = {}): Promise<T> => {
+  return fetch(url, {
     ...config,
-    body: body ? JSON.stringify(body) : undefined,
-  });
+    body: JSON.stringify(body),
+  })
+    .then((response) => {
+      return response.json();
+    })
+    .then((data) => data as T);
 };

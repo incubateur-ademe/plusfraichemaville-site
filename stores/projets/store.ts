@@ -1,11 +1,11 @@
-import { projet } from "@prisma/client";
+import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
 
 interface ProjetsState {
-  projets: projet[];
+  projets: ProjetWithNomCollectivite[];
 }
 export type ProjetsActions = {
-  setProjets: (_projets: projet[]) => void;
+  setProjets: (_projets: ProjetWithNomCollectivite[]) => void;
 };
 
 export type ProjetsStore = ProjetsState & ProjetsActions;
@@ -21,6 +21,6 @@ export const initProjetsStore = (): ProjetsState => {
 export const createProjetStore = (initState: ProjetsState = defaultInitState) => {
   return createStore<ProjetsStore>()((set) => ({
     ...initState,
-    setProjets: (projets: projet[]) => set(() => ({ projets })),
+    setProjets: (projets: ProjetWithNomCollectivite[]) => set(() => ({ projets })),
   }));
 };
