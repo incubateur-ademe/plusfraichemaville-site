@@ -12,8 +12,6 @@ export const captureError = (message: string, data?: any) => {
   );
 };
 
-
-
 export const customCaptureException = (message: string, exception?: any) => {
   console.log(message, exception);
   Sentry.captureException(exception, (scope) =>

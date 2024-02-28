@@ -17,12 +17,12 @@ export const mapAddressApiToCollectiviteAddress = (
 export const mapDBCollectiviteToCollectiviteAddress = (dbCollectivite?: collectivite): AddressCollectivite | null => {
   return dbCollectivite
     ? {
-      banId: dbCollectivite.ban_id ?? "",
-      nomCollectivite: dbCollectivite.nom ?? "",
-      codeInsee: dbCollectivite.code_insee ?? "",
-      codePostal: dbCollectivite.code_postal ?? "",
-      long: dbCollectivite.longitude,
-      lat: dbCollectivite.latitude,
-    }
+        banId: dbCollectivite.ban_id ?? "",
+        nomCollectivite: dbCollectivite.nom ?? "",
+        codeInsee: dbCollectivite.code_insee ?? "",
+        codePostal: dbCollectivite.code_postal ?? "",
+        long: dbCollectivite.longitude,
+        lat: dbCollectivite.latitude,
+      }
     : null;
 };
