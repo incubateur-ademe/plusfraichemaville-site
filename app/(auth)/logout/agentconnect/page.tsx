@@ -9,6 +9,5 @@ export default async function Logout() {
   logOutUrl.searchParams.set("id_token_hint", session?.id_token || "");
   logOutUrl.searchParams.set("post_logout_redirect_uri", process.env.NEXTAUTH_URL + PFMV_ROUTES.DECONNEXION);
   logOutUrl.searchParams.set("state", uuidv4());
-  // TODO Si on conserve le login par email, rediriger directement vers /logout
   redirect(logOutUrl.toString());
 }
