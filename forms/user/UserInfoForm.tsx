@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import toast from "react-hot-toast";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import CollectiviteInputFormField from "@/components/common/CollectiviteInputFormField";
+import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
 
 export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
   const router = useRouter();
@@ -22,9 +24,7 @@ export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
       prenom: user.prenom ?? "",
       email: user.email,
       poste: user.poste ?? "",
-      siret: userCollectivite?.collectivite.siret ?? "",
-      collectivite: userCollectivite?.collectivite.nom ?? "",
-      codePostal: userCollectivite?.collectivite.code_postal ?? "",
+      collectivite: mapDBCollectiviteToCollectiviteAddress(userCollectivite?.collectivite) ?? undefined,
     },
   });
 
@@ -47,26 +47,12 @@ export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
       <InputFormField control={form.control} path="nom" label="Nom" asterisk={true} />
       <InputFormField control={form.control} path="prenom" label="Prénom" asterisk={true} />
       <InputFormField control={form.control} path="email" label="Email" asterisk={true} disabled={!!user.email} />
-      <InputFormField
+      <CollectiviteInputFormField
         control={form.control}
-        path="siret"
-        label="Siret de votre collectivité"
-        asterisk={true}
-        disabled={!!userCollectivite}
-      />
-      <InputFormField
-        control={form.control}
-        path="collectivite"
+        path={"collectivite"}
         label="Collectivité à laquelle je suis rattaché"
         asterisk={true}
-        disabled={!!userCollectivite?.collectivite.nom}
-      />
-      <InputFormField
-        control={form.control}
-        path="codePostal"
-        label="Code postal de votre collectivité"
-        asterisk={true}
-        disabled={!!userCollectivite?.collectivite.code_postal}
+        disabled={!!userCollectivite}
       />
       <InputFormField control={form.control} path="poste" label="Mon poste dans la collectivité" asterisk={true} />
       <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>

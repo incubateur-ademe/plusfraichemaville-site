@@ -1,50 +1,31 @@
-import { User } from "@prisma/client";
 import { prismaClient } from "@/lib/prisma/prismaClient";
+import { AddressCollectivite } from "@/lib/adresseApi/types";
 
-export const getOrCreateCollectivite = async (siret: string, nom: string, codePostal: string, createdBy: User) => {
-  const collectivite = await prismaClient.collectivite.findUnique({
-    where: {
-      siret: siret,
-    },
-  });
-  if (collectivite) {
-    return collectivite;
-  } else {
-    return prismaClient.collectivite.create({
-      data: {
-        siret: siret,
-        nom: nom,
-        code_postal: codePostal,
-        created_by: createdBy.id,
-      },
-    });
-  }
-};
-
-export const createOrUpdateCollectivite = async (
-  siret: string,
-  nom: string,
-  codePostal: string,
-  userCreatorId: string,
-) => {
-  const collectivite = await prismaClient.collectivite.findUnique({
-    where: {
-      siret,
-    },
-  });
+export const getOrCreateCollectivite = async (data: AddressCollectivite, creatorUserId: string) => {
   return prismaClient.collectivite.upsert({
     where: {
-      siret,
+      code_insee: data.codeInsee,
     },
     create: {
-      siret,
-      nom,
-      code_postal: codePostal,
-      created_by: userCreatorId,
+      nom: data.nomCollectivite,
+      code_postal: data.codePostal,
+      code_insee: data.codeInsee,
+      ban_id: data.banId,
+      adresse_info: data.banInfo?.toString(),
+      latitude: data.lat,
+      longitude: data.long,
+      created_by: creatorUserId,
     },
-    update: {
-      nom: collectivite?.nom ?? nom,
-      code_postal: collectivite?.code_postal ?? codePostal,
-    },
+    update: {},
   });
+};
+
+export const createCollectiviteByName = async (collectiviteName: string, creatorUserId: string) => {
+  return prismaClient.collectivite.create( {
+    data: {
+      nom: collectiviteName,
+      created_by: creatorUserId
+    }
+  });
+
 };

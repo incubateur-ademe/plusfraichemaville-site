@@ -4,8 +4,9 @@ import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormS
 import { auth } from "@/lib/next-auth/auth";
 import { hasPermissionToUpdateUser } from "@/forms/permission/userInfoPermission";
 import { captureError } from "@/lib/sentry/sentryCustomMessage";
-import { createOrUpdateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
+import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { getUserWithCollectivites, updateUser } from "@/lib/prisma/prismaUserQueries";
+import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
 
 export async function editUserInfoAction(data: UserInfoFormData & { userId: string }) {
   const session = await auth();
@@ -24,15 +25,14 @@ export async function editUserInfoAction(data: UserInfoFormData & { userId: stri
 
   if (parseParamResult.success) {
     const prismaUser = await getUserWithCollectivites(data.userId);
-    if (prismaUser?.collectivites[0] && prismaUser?.collectivites[0].collectivite.siret !== data.siret) {
+    if (prismaUser?.collectivites[0] && prismaUser?.collectivites[0].collectivite.ban_id !== data.collectivite.banId) {
       return { success: false, error: "Vous n'avez pas la possibilité de changer de collectivité" };
     }
-    const collectivite = await createOrUpdateCollectivite(
-      data.siret,
-      data.collectivite,
-      data.codePostal,
-      session.user.id,
-    );
+    const entitiesFromBan = await fetchCollectiviteFromBanApi(data.collectivite.codeInsee, 50);
+    let collectiviteToUse = entitiesFromBan.find((address) => address.banId === data.collectivite.banId);
+    const collectivite = collectiviteToUse
+      ? await getOrCreateCollectivite(collectiviteToUse, session.user.id)
+      : await createCollectiviteByName(data.collectivite.nomCollectivite, session.user.id);
     const updatedUser = await updateUser({
       userId: data.userId,
       userPrenom: data.prenom,
@@ -40,7 +40,6 @@ export async function editUserInfoAction(data: UserInfoFormData & { userId: stri
       userPoste: data.poste,
       collectiviteId: collectivite.id,
     });
-
     return { success: true, data: updatedUser };
   }
 }

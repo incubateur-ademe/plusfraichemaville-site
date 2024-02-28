@@ -6,11 +6,12 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { v4 as uuidv4 } from "uuid";
 import * as Sentry from "@sentry/nextjs";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { getEntityInfoFromSiret } from "@/lib/siren/fetch";
+import { fetchEntrepriseFromSirenApi } from "@/lib/siren/fetch";
 import { getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { attachUserToCollectivite } from "@/lib/prisma/prismaUserCollectiviteQueries";
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { AgentConnectInfo } from "@/lib/prisma/prismaCustomTypes";
+import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
 
 export const authOptions: NextAuthOptions = {
   // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493
@@ -23,12 +24,18 @@ export const authOptions: NextAuthOptions = {
         const agentConnectInfo = prismaUser.agentconnect_info as AgentConnectInfo;
         const siret = agentConnectInfo.siret;
         if (siret) {
-          const entityInfo = await getEntityInfoFromSiret(siret);
-          const codePostal = entityInfo?.etablissement?.adresseEtablissement.codePostalEtablissement;
-          const entityName = entityInfo?.etablissement?.uniteLegale.denominationUniteLegale;
-          if (entityName && codePostal) {
-            const collectivite = await getOrCreateCollectivite(siret, entityName, codePostal, prismaUser);
-            await attachUserToCollectivite(prismaUser, collectivite, true);
+          const entityFromSiren = await fetchEntrepriseFromSirenApi(siret);
+          const codeInsee = entityFromSiren?.etablissement?.adresseEtablissement.codeCommuneEtablissement;
+          const codePostal = entityFromSiren?.etablissement?.adresseEtablissement.codePostalEtablissement;
+          if (codePostal && codeInsee) {
+            const entitiesFromBan = await fetchCollectiviteFromBanApi(codeInsee);
+            const collectiviteToUse = entitiesFromBan.find(
+              (address) => address.codeInsee === codeInsee && address.codePostal === codePostal,
+            );
+            if (collectiviteToUse) {
+              const collectivite = await getOrCreateCollectivite(collectiviteToUse, prismaUser);
+              await attachUserToCollectivite(prismaUser, collectivite, true);
+            }
           }
         }
       }

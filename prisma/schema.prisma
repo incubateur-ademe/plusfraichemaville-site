@@ -56,9 +56,12 @@ model VerificationToken {
 model collectivite {
   id           BigInt              @id @default(dbgenerated("CAST(1000000000 + floor(random() * 9000000000) AS bigint)"))
   nom          String
+  code_insee   String?             @unique
   code_postal  String?
   adresse_info Json?
-  siret        String?             @unique
+  ban_id       String?             @unique
+  latitude     Float?
+  longitude    Float?
   users        user_collectivite[] @relation(name: "users_in_collectivite")
   created_by   String
   creator      User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])

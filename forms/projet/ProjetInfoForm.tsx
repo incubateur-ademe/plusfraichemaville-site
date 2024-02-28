@@ -14,6 +14,7 @@ import { monthDateToString } from "@/helpers/dateUtils";
 import { editProjetInfoAction } from "@/forms/projet/EditProjetInfoAction";
 import toast from "react-hot-toast";
 import { niveauxMaturiteProjetOptions } from "@/helpers/maturiteProjet";
+import CollectiviteInputFormField from "@/components/common/CollectiviteInputFormField";
 
 export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
   const router = useRouter();
@@ -27,6 +28,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
       niveauMaturite: projet?.niveau_maturite ?? "",
       adresse: projet?.adresse || undefined,
       dateEcheance: monthDateToString(projet?.date_echeance),
+      collectivite: undefined,
     },
   });
 
@@ -45,7 +47,6 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
   };
 
   const disabled = form.formState.isSubmitting;
-
   return (
     <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
       <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} />
@@ -75,6 +76,12 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
         label="Niveau de maturité du projet"
         asterisk={true}
         options={niveauxMaturiteProjetOptions}
+      />
+      <CollectiviteInputFormField
+        control={form.control}
+        path="collectivite"
+        label="Collectivité du projet"
+        asterisk={true}
       />
       <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
         {"Valider"}
