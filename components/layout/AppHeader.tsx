@@ -39,7 +39,7 @@ export default function AppHeader() {
                   </div>
                 </div>
               </div>
-              <EspaceProjetButton hiddenOnMobile />
+              <EspaceProjetButton />
             </div>
           </div>
         </div>

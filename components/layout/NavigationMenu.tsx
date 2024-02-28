@@ -69,6 +69,7 @@ export default function NavigationMenu() {
                   },
                 ],
           text: "Mon Espace Projet",
+          className: "lg:hidden",
         },
       ]}
     />

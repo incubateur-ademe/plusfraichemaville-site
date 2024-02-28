@@ -8,7 +8,6 @@ import { Metadata } from "next";
 import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 import localFont from "next/font/local";
 import "./globals.css";
-import "@codegouvfr/react-dsfr/dsfr/utility/icons/icons.css";
 import { Toaster } from "react-hot-toast";
 import MatomoScript from "@/components/matomo/MatomoScript";
 import MainLayoutProviders from "@/components/layout/MainLayoutProviders";
