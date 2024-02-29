@@ -24,6 +24,7 @@ yarn-error.log*
 
 # local env files
 .env.local
+.env.dist
 .env
 
 # typescript
@@ -34,3 +35,5 @@ next-env.d.ts
 
 # Sentry Config File
 .sentryclirc
+
+yarn.lock

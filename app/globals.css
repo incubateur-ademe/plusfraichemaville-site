@@ -53,6 +53,16 @@
   }
 }
 
+@layer components {
+  .nav-main-navigation {
+    ul {
+      li:last-child {
+        @apply lg:hidden;
+      }
+    }
+  }
+}
+
 .pfmv-card,
 .fiche-solution-small-vertical-card {
   border-radius: 0.9375rem;

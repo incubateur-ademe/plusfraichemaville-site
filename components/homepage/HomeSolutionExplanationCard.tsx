@@ -19,7 +19,7 @@ export const HomeSolutionExplanationCard = ({ typeSolution }: { typeSolution: Ty
         <div
           className={`text-xl font-bold mt-2 ${typeSolution.colorClass}`}
         >{`Qu'est ce qu'une ${typeSolution.label.toLowerCase()} ?`}</div>
-        <div className={`mt-4 text-dsfr-text-default-grey`}>{typeSolution.explanation}</div>
+        <div className={"mt-4 text-dsfr-text-default-grey"}>{typeSolution.explanation}</div>
       </div>
     </div>
   );
