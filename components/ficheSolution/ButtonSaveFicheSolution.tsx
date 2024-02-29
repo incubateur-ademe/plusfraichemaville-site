@@ -65,7 +65,7 @@ export default function ButtonSaveFicheSolution({
           <div className={`${className}`}>
             {label || isBookmarked ? (
               <Button
-                className={`fr-icon--sm rounded-3xl text-sm`}
+                className={"fr-icon--sm rounded-3xl text-sm"}
                 iconId={isBookmarked ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line"}
                 onClick={changeFavorite}
                 size="small"
@@ -74,8 +74,9 @@ export default function ButtonSaveFicheSolution({
               </Button>
             ) : (
               <div
-                className="flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france
-         text-white rounded-2xl cursor-pointer w-8 h-8"
+                // eslint-disable-next-line max-len
+                className="flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france text-white rounded-2xl
+                  cursor-pointer w-8 h-8"
                 onClick={changeFavorite}
               >
                 <span className={"fr-icon--sm fr-icon-bookmark-line"} aria-hidden="true" />
@@ -89,12 +90,12 @@ export default function ButtonSaveFicheSolution({
           >
             <div>Retrouvez toutes vos solutions mises en favoris dans votre espace Projet.</div>
             <div className="mt-6">
-              <Button className={`rounded-3xl text-sm mr-6 mb-2`} onClick={() => modal.close()} size="small">
+              <Button className={"rounded-3xl text-sm mr-6 mb-2"} onClick={() => modal.close()} size="small">
                 Continuer ma lecture
               </Button>
               <Button
                 priority="secondary"
-                className={`rounded-3xl text-sm`}
+                className={"rounded-3xl text-sm"}
                 linkProps={{ href: "/mon-projet/favoris", target: "_self" }}
                 size="small"
               >

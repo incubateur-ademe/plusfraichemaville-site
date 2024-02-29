@@ -1,6 +1,5 @@
 import { PFMV_ROUTES } from "@/helpers/routes";
 import Link from "next/link";
-import { SeedButton } from "../common/SeedButton";
 
 export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) => {
   return (
@@ -20,7 +19,6 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
         <Link href={PFMV_ROUTES.INFO_PROJET} className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl">
           Créer un projet
         </Link>
-        <SeedButton />
       </div>
     </div>
   );

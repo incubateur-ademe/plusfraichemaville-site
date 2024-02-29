@@ -8,4 +8,5 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET: "/espace-projet",
   INFO_PROJET: "/espace-projet/info-projet",
   LISTE_PROJETS: "/espace-projet/liste-projets",
+  MON_PROFIL: "/mon-profil",
 };

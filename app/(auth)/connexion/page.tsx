@@ -12,7 +12,7 @@ export default async function Connexion({ searchParams }: { searchParams: { call
   return (
     <div className="fr-container pt-8">
       <h1 className="fr-h3 mb-12">Espace projet</h1>
-      <SignInCard callbackUrl={searchParams.callbackUrl} />
+      <SignInCard message="connect" callbackUrl={searchParams.callbackUrl} />
     </div>
   );
 }
