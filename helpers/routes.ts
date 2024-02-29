@@ -6,5 +6,5 @@ export const PFMV_ROUTES = {
   DECONNEXION: "/logout",
   DECONNEXION_AGENT_CONNECT: "/logout/agentconnect",
   ESPACE_PROJET: "/espace-projet",
-  MON_PROFIL: "/mon-profil",
+  MON_PROFIL: "/espace-projet/info-perso",
 };

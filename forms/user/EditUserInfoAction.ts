@@ -7,6 +7,8 @@ import { captureError } from "@/lib/sentry/sentryCustomMessage";
 import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { getUserWithCollectivites, updateUser } from "@/lib/prisma/prismaUserQueries";
 import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
+import { revalidatePath } from "next/cache";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export async function editUserInfoAction(data: UserInfoFormData & { userId: string }) {
   const session = await auth();
@@ -40,6 +42,7 @@ export async function editUserInfoAction(data: UserInfoFormData & { userId: stri
       userPoste: data.poste,
       collectiviteId: collectivite.id,
     });
+    revalidatePath(PFMV_ROUTES.MON_PROFIL);
     return { success: true, data: updatedUser };
   }
 }
