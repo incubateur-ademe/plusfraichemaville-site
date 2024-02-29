@@ -3,15 +3,15 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import React from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { editUserInfoAction } from "@/forms/user/EditUserInfoAction";
 import InputFormField from "@/components/common/InputFormField";
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
-import toast from "react-hot-toast";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import CollectiviteInputFormField from "@/components/common/CollectiviteInputFormField";
 import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
+import { editUserInfoAction } from "@/actions/users/edit-user-info-action";
+import { notifications } from "@/components/common/notifications";
 
 export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
   const router = useRouter();
@@ -30,14 +30,11 @@ export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
 
   const onSubmit: SubmitHandler<UserInfoFormData> = async (data) => {
     const result = await editUserInfoAction({ ...data, userId: user.id });
+    notifications(result.type, result.message);
 
-    if (!result || result.error) {
-      toast.error(result?.error ?? "Une erreur s'est produite");
-      return;
+    if (result.type === "success") {
+      router.push(PFMV_ROUTES.ESPACE_PROJET);
     }
-
-    toast.success("Vos informations ont bien été enregistrées.");
-    router.push(PFMV_ROUTES.ESPACE_PROJET);
   };
 
   const disabled = form.formState.isSubmitting;

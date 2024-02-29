@@ -21,7 +21,6 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
   return (
     <div className={`pfmv-card p-5 pb-10 rounded-xl flex mb-5 ${disabledText}`}>
       <div className="mr-6">
-        {/* TODO: changer le schema prisma pour un typage plus fort */}
         <PictoEspaceSelector pictoId={projet.type_espace as PictoId} withBackground />
       </div>
       <div>

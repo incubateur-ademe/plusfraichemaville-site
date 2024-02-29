@@ -1,7 +1,7 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { projet } from "@prisma/client";
 
-export const getProjetById = async (projetId: bigint): Promise<projet | null> => {
+export const getProjetById = async (projetId: number): Promise<projet | null> => {
   return prismaClient.projet.findUnique({
     where: {
       id: projetId,
@@ -19,14 +19,14 @@ export const createOrUpdateProjet = async ({
   userId,
   collectiviteId,
 }: {
-  projetId?: bigint;
+  projetId?: number;
   nomProjet: string;
   typeEspace: string;
   adresse?: string;
   dateEcheance: string;
   niveauMaturite: string;
   userId: string;
-  collectiviteId: bigint;
+  collectiviteId: number;
 }) => {
   return prismaClient.projet.upsert({
     where: {
@@ -48,5 +48,8 @@ export const createOrUpdateProjet = async ({
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
     },
+    include: {
+      collectivite: {select: {nom: true}}
+    }
   });
 };

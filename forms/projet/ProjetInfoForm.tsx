@@ -11,13 +11,15 @@ import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/forms/projet/ProjetI
 import SelectFormField from "@/components/common/SelectFormField";
 import { typeEspaceOptions } from "@/components/filters/TypeEspaceFilter";
 import { monthDateToString } from "@/helpers/dateUtils";
-import { editProjetInfoAction } from "@/forms/projet/EditProjetInfoAction";
-import toast from "react-hot-toast";
 import { niveauxMaturiteProjetOptions } from "@/helpers/maturiteProjet";
 import CollectiviteInputFormField from "@/components/common/CollectiviteInputFormField";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { upsertProjetAction } from "@/actions/projets/upsert-projet-action";
+import { notifications } from "@/components/common/notifications";
 
 export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
   const router = useRouter();
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
 
   const form = useForm<ProjetInfoFormData>({
     resolver: zodResolver(ProjetInfoFormSchema),
@@ -33,17 +35,17 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
   });
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
-    const result = await editProjetInfoAction({
+    const result = await upsertProjetAction({
       ...data,
     });
+    notifications(result.type, result.message);
 
-    if (!result || result.error) {
-      toast.error(result?.error ?? "Une erreur s'est produite");
-      return;
+    if (result.type === "success") {
+      if (result.updatedProjet) {
+        addOrUpdateProjet(result.updatedProjet);
+      }
+      router.push(PFMV_ROUTES.LISTE_PROJETS);
     }
-
-    toast.success("Les informations du projet ont bien été enregistrées.");
-    router.push(PFMV_ROUTES.ESPACE_PROJET);
   };
 
   const disabled = form.formState.isSubmitting;

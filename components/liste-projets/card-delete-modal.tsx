@@ -13,12 +13,6 @@ type ListeProjetsCardDeleteModalProps = {
 };
 
 export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjetsCardDeleteModalProps) {
-  const session = useSession();
-  const userId = session.data?.user.id;
-
-  if (!userId) {
-    return null;
-  }
 
   const modal = createModal({
     id: `delete-projet-modal-${projetId}`,
@@ -46,7 +40,7 @@ export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjet
             className: "rounded-3xl !min-h-fit !text-sm mr-4",
 
             onClick: async () => {
-              const res = await deleteProjetAction(userId, projetId);
+              const res = await deleteProjetAction(projetId);
               notifications(res.type, res.message);
             },
           },

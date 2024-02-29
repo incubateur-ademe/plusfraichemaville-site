@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const ProjetInfoFormSchema = z.object({
-  projetId: z.bigint().optional(),
+  projetId: z.number().optional(),
   nom: z.string().min(1, { message: "Veuillez renseigner le nom du projet" }),
   typeEspace: z.string().min(1, { message: "Veuillez renseigner l'espace sur lequel vous souhaitez agir" }),
   adresse: z.string().optional(),

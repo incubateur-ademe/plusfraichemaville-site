@@ -1,33 +1,37 @@
 "use server";
 
 import { auth } from "@/lib/next-auth/auth";
-import { captureError } from "@/lib/sentry/sentryCustomMessage";
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
+import { ResponseAction } from "../actions-types";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/forms/projet/ProjetInfoFormSchema";
-import { hasPermissionToUpdateProjet } from "@/forms/permission/projetInfoPermission";
-import { createOrUpdateProjet } from "@/lib/prisma/prismaProjetQueries";
-import { captureException } from "@sentry/core";
+import { captureError } from "@/lib/sentry/sentryCustomMessage";
 import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
 import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
+import { createOrUpdateProjet } from "@/lib/prisma/prismaProjetQueries";
+import { captureException } from "@sentry/core";
+import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 
-export async function editProjetInfoAction(data: ProjetInfoFormData) {
+export const upsertProjetAction = async (
+  data: ProjetInfoFormData,
+): Promise<ResponseAction<{ updatedProjet?: ProjetWithNomCollectivite }>> => {
   const session = await auth();
   if (!session) {
-    return { success: false, error: "Vous devez être authentifié pour faire cette requête" };
+    return { type: "error", message: "UNAUTHENTICATED" };
   }
   const user = await getUserWithCollectivites(session?.user.id);
   if (!user || !user.collectivites[0]) {
-    return { success: false, error: "Erreur d'authentification" };
+    return { type: "error", message: "UNAUTHENTICATED" };
   }
 
   if (data.projetId && !(await hasPermissionToUpdateProjet(data.projetId, session.user.id))) {
-    return { success: false, error: "Vous n'avez pas les droits de modification sur ce projet" };
+    return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 
   const parseParamResult = ProjetInfoFormSchema.safeParse(data);
   if (!parseParamResult.success) {
     captureError("EditProjetInfoAction format errors", parseParamResult.error.flatten());
-    return { success: false, error: "Erreur de validation des données envoyées" };
+    return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
       const entitiesFromBan = await fetchCollectiviteFromBanApi(data.collectivite.codeInsee, 50);
@@ -45,11 +49,11 @@ export async function editProjetInfoAction(data: ProjetInfoFormData) {
         collectiviteId: collectivite.id,
         userId: user.id,
       });
-      return { success: true, data: updatedProjet };
+      return { type: "success", message: "PROJET_UPSERTED", updatedProjet };
     } catch (e) {
       console.log("Error in EditProjetInfoAction DB call", e);
       captureException(e);
-      return { success: false, error: "Erreur technique, veuillez réessayer ultérieurement" };
+      return { type: "error", message: "TECHNICAL_ERROR" };
     }
   }
-}
+};
