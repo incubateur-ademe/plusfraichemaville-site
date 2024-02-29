@@ -1,10 +1,10 @@
 "use client";
-import React, { Fragment, ReactNode, useEffect, useState } from "react";
+import { Fragment, ReactNode, useEffect, useState } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/components/common/RedAsterisk";
 import { Combobox, Transition } from "@headlessui/react";
 import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
-import { debounce } from "lodash";
+import debounce from "lodash/debounce";
 import { Oval } from "react-loader-spinner";
 import { AddressCollectivite } from "@/lib/adresseApi/types";
 import clsx from "clsx";

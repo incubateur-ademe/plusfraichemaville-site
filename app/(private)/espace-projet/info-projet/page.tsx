@@ -1,4 +1,3 @@
-import React from "react";
 import { ProjetInfoForm } from "@/forms/projet/ProjetInfoForm";
 
 export default async function InfoProjet() {

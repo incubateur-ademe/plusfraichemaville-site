@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import React, { ReactNode } from "react";
+import { ReactNode } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/components/common/RedAsterisk";
 
