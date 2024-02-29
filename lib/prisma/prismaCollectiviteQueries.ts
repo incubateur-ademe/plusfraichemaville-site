@@ -11,7 +11,7 @@ export const getOrCreateCollectivite = async (data: AddressCollectivite, creator
       code_postal: data.codePostal,
       code_insee: data.codeInsee,
       ban_id: data.banId,
-      adresse_info: data.banInfo?.toString(),
+      adresse_info: JSON.stringify(data.banInfo),
       latitude: data.lat,
       longitude: data.long,
       created_by: creatorUserId,

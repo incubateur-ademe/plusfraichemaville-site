@@ -4,11 +4,10 @@ import { auth } from "@/lib/next-auth/auth";
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/forms/projet/ProjetInfoFormSchema";
-import { captureError } from "@/lib/sentry/sentryCustomMessage";
+import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
 import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { createOrUpdateProjet } from "@/lib/prisma/prismaProjetQueries";
-import { captureException } from "@sentry/core";
 import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 
@@ -34,7 +33,7 @@ export const upsertProjetAction = async (
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      const entitiesFromBan = await fetchCollectiviteFromBanApi(data.collectivite.codeInsee, 50);
+      const entitiesFromBan = await fetchCollectiviteFromBanApi(data.collectivite.nomCollectivite, 50);
       let collectiviteToUse = entitiesFromBan.find((address) => address.banId === data.collectivite.banId);
       const collectivite = collectiviteToUse
         ? await getOrCreateCollectivite(collectiviteToUse, session.user.id)
@@ -51,8 +50,7 @@ export const upsertProjetAction = async (
       });
       return { type: "success", message: "PROJET_UPSERTED", updatedProjet };
     } catch (e) {
-      console.log("Error in EditProjetInfoAction DB call", e);
-      captureException(e);
+      customCaptureException("Error in EditProjetInfoAction DB call", e);
       return { type: "error", message: "TECHNICAL_ERROR" };
     }
   }

@@ -3,7 +3,6 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { v4 as uuidv4 } from "uuid";
-import * as Sentry from "@sentry/nextjs";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { fetchEntrepriseFromSirenApi } from "@/lib/siren/fetch";
 import { getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
@@ -11,6 +10,7 @@ import { attachUserToCollectivite } from "@/lib/prisma/prismaUserCollectiviteQue
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { AgentConnectInfo } from "@/lib/prisma/prismaCustomTypes";
 import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
+import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const authOptions: NextAuthOptions = {
   // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493
@@ -100,8 +100,7 @@ export const authOptions: NextAuthOptions = {
             });
             return JSON.parse(Buffer.from(userInfo.split(".")[1], "base64").toString());
           } catch (err: any) {
-            console.log("Error while getting info from AgentConnect", err);
-            Sentry.captureException(err);
+            customCaptureException("Error while getting info from AgentConnect", err);
             throw new Error(err);
           }
         },
