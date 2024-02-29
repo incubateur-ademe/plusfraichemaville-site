@@ -3,10 +3,10 @@ import Image from "next/image";
 import { useTypeEspaceFilter } from "@/hooks/useTypeEspaceFilter";
 import { SelectOption } from "@/components/common/SelectFormField";
 
-type TypeEspace = {
+export type TypeEspace = {
   label: string;
   icon: string;
-  code: string;
+  code: "rondpoint" | "batiment" | "parking" | "rue" | "place" | "ecole" | "parc";
 };
 
 const ALL_ESPACES: TypeEspace[] = [

@@ -6,7 +6,7 @@
         <clipPath id="_clip1">
             <rect x="0" y="0" width="69" height="69"/>
         </clipPath>
-        <g clip-path="url(#_clip1)">
+        <g clipPath="url(#_clip1)">
             <g id="ODD1" transform="matrix(1.01378,0,0,1.01471,0.0628545,0.125594)">
                 <rect x="0" y="0" width="68" height="67.876" style="fill:none;"/>
                 <g transform="matrix(1.00274,0,0,1.00182,-0.062,-0.123773)">

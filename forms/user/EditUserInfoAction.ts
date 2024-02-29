@@ -2,13 +2,14 @@
 
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
 import { auth } from "@/lib/next-auth/auth";
-import { hasPermissionToUpdateUser } from "@/forms/permission/userInfoPermission";
+
 import { captureError } from "@/lib/sentry/sentryCustomMessage";
 import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { getUserWithCollectivites, updateUser } from "@/lib/prisma/prismaUserQueries";
 import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
 import { revalidatePath } from "next/cache";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { hasPermissionToUpdateUser } from "@/helpers/permissions";
 
 export async function editUserInfoAction(data: UserInfoFormData & { userId: string }) {
   const session = await auth();
