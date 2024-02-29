@@ -6,7 +6,7 @@ import { getUserProjets } from "@/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { hasPermissionToViewUserProjet } from "@/helpers/permissions";
+import { hasPermissionToViewUserProjet } from "@/actions/projets/permissions";
 
 export const getUserProjetsAction = async (
   userId: string,
