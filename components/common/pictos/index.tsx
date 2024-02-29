@@ -12,13 +12,15 @@ const pictos: Record<TypeEspace["code"], string> = {
   parc: "espace-icone-cour-parc-jardin.svg",
 };
 
+export type PictoId = keyof typeof pictos;
+
 export const PictoEspaceSelector = ({
   pictoId,
   withBackground,
   width = 65,
   height = 65,
 }: {
-  pictoId: keyof typeof pictos;
+  pictoId: PictoId;
   withBackground?: boolean;
   width?: number;
   height?: number;
@@ -28,7 +30,7 @@ export const PictoEspaceSelector = ({
   return (
     <div className={`w-[75px] h-[75px] relative flex justify-center items-center`}>
       {withBackground && (
-        <div className="absolute inset-0 w-full h-full -z-1 rounded-lg bg-[var(--blue-france-850-200)]"></div>
+        <div className="absolute inset-0 w-full h-full -z-1 rounded-lg bg-dsfr-background-action-low-blue-france"></div>
       )}
       <div className="z-10">
         <Image width={width} height={height} alt={`pictogramme ${pictoId}`} src={`/images/espaces/${selectedPicto}`} />

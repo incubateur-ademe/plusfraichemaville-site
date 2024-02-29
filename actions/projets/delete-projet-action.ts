@@ -7,17 +7,17 @@ import { deleteUserProjet } from "@/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 
-export const deleteProjetAction = async (createdBy: string, projetId: number): Promise<ResponseAction<{}>> => {
+export const deleteProjetAction = async (userId: string, projetId: number): Promise<ResponseAction<{}>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  if (!hasPermissionToUpdateProjet(session.user.id, createdBy)) {
+  if (!hasPermissionToUpdateProjet(session.user.id, userId)) {
     return { type: "error", message: "PROJET_DELETE_UNAUTHORIZED" };
   }
 
-  await deleteUserProjet(session.user.id, projetId);
+  await deleteUserProjet(projetId);
 
   revalidatePath(PFMV_ROUTES.LISTE_PROJETS);
 

@@ -12,7 +12,6 @@ import { Toaster } from "react-hot-toast";
 import MatomoScript from "@/components/matomo/MatomoScript";
 import MainLayoutProviders from "@/components/layout/MainLayoutProviders";
 import { ProjetStoreServer } from "@/stores/projets/server";
-import { ProjetsStoreProvider } from "@/stores/projets/provider";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -53,14 +52,12 @@ export default async function RootLayout({ children }: { children: ReactElement 
         <MatomoScript />
       </head>
       <body>
-        <ProjetsStoreProvider>
-          <MainLayoutProviders lang={lang}>
-            <ProjetStoreServer />
-            <AppHeader />
-            <Toaster position="bottom-left" />
-            <div className={`${xtra_bold.variable}`}>{children}</div>
-          </MainLayoutProviders>
-        </ProjetsStoreProvider>
+        <MainLayoutProviders lang={lang}>
+          <ProjetStoreServer />
+          <AppHeader />
+          <Toaster position="bottom-left" />
+          <div className={`${xtra_bold.variable}`}>{children}</div>
+        </MainLayoutProviders>
       </body>
     </html>
   );

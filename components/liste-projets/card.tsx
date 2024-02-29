@@ -1,4 +1,4 @@
-import { PictoEspaceSelector } from "../common/pictos";
+import { PictoEspaceSelector, PictoId } from "../common/pictos";
 
 import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { ListeProjetsCardDeleteModal } from "./card-delete-modal";
@@ -21,7 +21,8 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
   return (
     <div className={`pfmv-card p-5 pb-10 rounded-xl flex mb-5 ${disabledText}`}>
       <div className="mr-6">
-        <PictoEspaceSelector pictoId="place" withBackground />
+        {/* TODO: changer le schema prisma pour un typage plus fort */}
+        <PictoEspaceSelector pictoId={projet.type_espace as PictoId} withBackground />
       </div>
       <div>
         <h3 className="text-xl text-dsfr-text-label-blue-france mb-1">{projet.nom}</h3>
@@ -37,7 +38,7 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
           >
             Accéder au projet
           </Link>
-          <ListeProjetsCardDeleteModal projetId={projet.id} projetNom={projet.nom} createdBy={projet.created_by} />
+          <ListeProjetsCardDeleteModal projetId={projet.id} projetNom={projet.nom} />
         </div>
       </div>
     </div>

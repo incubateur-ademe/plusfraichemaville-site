@@ -21,6 +21,6 @@ export const initProjetsStore = (): ProjetsState => {
 export const createProjetStore = (initState: ProjetsState = defaultInitState) => {
   return createStore<ProjetsStore>()((set) => ({
     ...initState,
-    setProjets: (projets: ProjetWithNomCollectivite[]) => set(() => ({ projets })),
+    setProjets: (projets) => set(() => ({ projets })),
   }));
 };
