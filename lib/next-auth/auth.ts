@@ -1,5 +1,4 @@
 import { getServerSession, NextAuthOptions } from "next-auth";
-import EmailProvider from "next-auth/providers/email";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
 import { PFMV_ROUTES } from "@/helpers/routes";
@@ -118,10 +117,6 @@ export const authOptions: NextAuthOptions = {
         };
       },
     },
-    EmailProvider({
-      server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM,
-    }),
   ],
 };
 

@@ -59,7 +59,7 @@ export default function FicheSolutionTabMateriaux({
           ))}
         </>
       ) : (
-        <div className="text-dsfr-text-title-grey   mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
+        <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
       )}
       {ficheSolution.cout_minimum_entretien && ficheSolution.cout_maximum_entretien && (
         <>

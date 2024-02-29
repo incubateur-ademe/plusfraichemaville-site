@@ -24,13 +24,13 @@ export default function ButtonShareFicheSolution({ className }: { className?: st
             className="flex flex-row mb-4 text-dsfr-text-mention-grey cursor-pointer"
             onClick={copyCurrentUrlToClipboard}
           >
-            <i className={`ri-share-forward-fill text-dsfr-text-label-blue-france mr-2`} />
+            <i className={"ri-share-forward-fill text-dsfr-text-label-blue-france mr-2"} />
             <span className="mt-[1px] text-dsfr-text-label-blue-france text-sm font-bold">Partager</span>
           </div>
         </>
       ) : (
         <div className="flex flex-row mb-4 text-dsfr-text-mention-grey">
-          <i className={`ri-share-forward-fill text-dsfr-text-label-blue-france mr-2`} />
+          <i className={"ri-share-forward-fill text-dsfr-text-label-blue-france mr-2"} />
           <span className="mt-[1px] text-dsfr-text-label-blue-france text-sm font-bold">Partager</span>
         </div>
       )}
