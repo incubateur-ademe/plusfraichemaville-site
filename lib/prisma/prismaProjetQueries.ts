@@ -49,7 +49,7 @@ export const createOrUpdateProjet = async ({
       date_echeance: new Date(dateEcheance),
     },
     include: {
-      collectivite: {select: {nom: true}}
-    }
+      collectivite: { select: { nom: true } },
+    },
   });
 };

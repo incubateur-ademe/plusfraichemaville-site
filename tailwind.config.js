@@ -11,7 +11,7 @@ module.exports = {
       "pfmv-card-shadow": "0px 4px 20px 0px rgba(0, 0, 0, 0.10)",
     },
     colors: {
-      "white": "#FFF",
+      white: "#FFF",
       "pfmv-light-blue": "#0080C2",
       "pfmv-dark-blue": "#292A82",
       "pfmv-light-grey": "#CECECE",

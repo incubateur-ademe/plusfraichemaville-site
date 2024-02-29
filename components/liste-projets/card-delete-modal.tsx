@@ -5,7 +5,6 @@ import { Button } from "@codegouvfr/react-dsfr/Button";
 import { projet } from "@prisma/client";
 import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
 import { notifications } from "../common/notifications";
-import { useSession } from "next-auth/react";
 
 type ListeProjetsCardDeleteModalProps = {
   projetNom: projet["nom"];
@@ -13,7 +12,6 @@ type ListeProjetsCardDeleteModalProps = {
 };
 
 export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjetsCardDeleteModalProps) {
-
   const modal = createModal({
     id: `delete-projet-modal-${projetId}`,
     isOpenedByDefault: false,

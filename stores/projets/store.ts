@@ -25,6 +25,6 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
   return createStore<ProjetsStore>()((set) => ({
     ...initState,
     setProjets: (projets) => set(() => ({ projets })),
-    addOrUpdateProjet: (_projet) => set((state) => ({projets: upsert(state.projets, _projet)}))
+    addOrUpdateProjet: (_projet) => set((state) => ({ projets: upsert(state.projets, _projet) })),
   }));
 };
