@@ -20,8 +20,6 @@ export const upsertProjetAction = async (
   }
   const user = await getUserWithCollectivites(session?.user.id);
   if (!user || !user.collectivites[0]) {
-    console.log(user);
-
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
