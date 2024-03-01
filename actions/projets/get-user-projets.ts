@@ -6,7 +6,7 @@ import { getUserProjets } from "@/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { hasPermissionToViewUserProjet } from "@/helpers/permissions";
+import { hasPermissionToViewUserProjet } from "@/actions/projets/permissions";
 
 export const getUserProjetsAction = async (
   userId: string,
@@ -21,7 +21,7 @@ export const getUserProjetsAction = async (
   }
   const projets = await getUserProjets(userId);
 
-  revalidatePath(PFMV_ROUTES.LISTE_PROJETS);
+  revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
 
   return { type: "success", message: "PROJETS_LOADED", projets };
 };

@@ -7,8 +7,9 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 export default async function Connexion({ searchParams }: { searchParams: { callbackUrl: string | undefined } }) {
   const session = await auth();
   if (session) {
-    redirect(PFMV_ROUTES.ESPACE_PROJET);
+    redirect(PFMV_ROUTES.ESPACE_PROJET_LISTE);
   }
+
   return (
     <div className="fr-container pt-8">
       <h1 className="fr-h3 mb-12">Espace projet</h1>

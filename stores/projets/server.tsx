@@ -6,6 +6,7 @@ import { getUserProjetsAction } from "@/actions/projets/get-user-projets";
 export const ProjetStoreServer = async () => {
   const session = await auth();
   const userId = session?.user.id;
+  console.log("userId", userId);
 
   if (!userId) {
     return null;

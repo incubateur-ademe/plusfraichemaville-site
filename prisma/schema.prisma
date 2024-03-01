@@ -56,9 +56,12 @@ model VerificationToken {
 model collectivite {
   id           Int              @id @default(dbgenerated("CAST(10000000 + floor(random() * 90000000) AS int)"))
   nom          String
+  code_insee   String?             @unique
   code_postal  String?
   adresse_info Json?
-  siret        String?             @unique
+  ban_id       String?             @unique
+  latitude     Float?
+  longitude    Float?
   users        user_collectivite[] @relation(name: "users_in_collectivite")
   created_by   String
   creator      User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
@@ -89,7 +92,7 @@ model projet {
   nom                        String
   type_espace                String?
   adresse                    String?
-  code_postal                String?
+  niveau_maturite            String?
   adresse_info               Json?
   date_echeance              DateTime?
   fiches_solutions_id        Int[]

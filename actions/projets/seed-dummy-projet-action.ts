@@ -17,7 +17,6 @@ export const seedDummyProjetAction = async () => {
       nom: "Collectivité de Brest",
       code_postal: "75001",
       adresse_info: JSON.stringify({ rue: "8 rue de Bretagne", ville: "Brest" }),
-      siret: `${Math.floor(Math.random() * 1000000) + 1}`,
       created_by: session.user.id,
       created_at: new Date(),
     },
@@ -30,7 +29,6 @@ export const seedDummyProjetAction = async () => {
         nom: "Ajout d'une fontaine à eau",
         type_espace: "place",
         adresse: "19 rue du commerce",
-        code_postal: "75001",
         adresse_info: JSON.stringify({ rue: "19 rue du commerce", ville: "Brest" }),
         date_echeance: new Date("2024-12-31T23:59:59Z"),
         fiches_solutions_id: [1, 2, 3],
@@ -42,7 +40,6 @@ export const seedDummyProjetAction = async () => {
         nom: "Changement du sol de la cour",
         type_espace: "ecole",
         adresse: "19 rue du commerce",
-        code_postal: "75001",
         adresse_info: JSON.stringify({ rue: "19 rue du commerce", ville: "Brest" }),
         date_echeance: new Date("2024-12-31T23:59:59Z"),
         fiches_solutions_id: [1, 2, 3],
@@ -54,7 +51,6 @@ export const seedDummyProjetAction = async () => {
         nom: "Plantation d'arbres",
         type_espace: "parc",
         adresse: "19 rue du commerce",
-        code_postal: "75001",
         adresse_info: JSON.stringify({ rue: "19 rue du commerce", ville: "Brest" }),
         date_echeance: new Date("2024-12-31T23:59:59Z"),
         fiches_solutions_id: [1, 2, 3],
@@ -64,7 +60,7 @@ export const seedDummyProjetAction = async () => {
     ],
   });
 
-  revalidatePath(PFMV_ROUTES.LISTE_PROJETS);
+  revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
 
   return { projet, success: true, revalidated: true };
 };

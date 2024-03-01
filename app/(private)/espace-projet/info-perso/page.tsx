@@ -1,4 +1,3 @@
-import React from "react";
 import { auth } from "@/lib/next-auth/auth";
 import { UserInfoForm } from "@/forms/user/UserInfoForm";
 import UserNotFoundError from "@/components/error/UserNotFoundError";

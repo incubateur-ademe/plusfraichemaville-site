@@ -37,7 +37,7 @@ export const Connected = () => {
         // eslint-disable-next-line max-len
         className={
           // eslint-disable-next-line max-len
-          "fr-btn fr-btn--tertiary ri-dashboard-fill fr-btn--icon-left !text-sm !bg-dsfr-blue-france-925 !shadow-none z-10 relative"
+          "fr-btn fr-btn--tertiary ri-dashboard-fill fr-btn--icon-left !text-sm !bg-dsfr-background-action-low-blue-france !shadow-none z-10 relative"
         }
       >
         Mon espace projet

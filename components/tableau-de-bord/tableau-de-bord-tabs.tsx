@@ -30,7 +30,7 @@ export const TableauDeBordTabs = () => {
           <TableauDeBordTab active={activeTab === 0}>
             <TableauDeBordSuivi />
           </TableauDeBordTab>
-          <TableauDeBordTab active={activeTab === 1}>Recommandation</TableauDeBordTab>
+          <TableauDeBordTab active={activeTab === 1}>Recommandations</TableauDeBordTab>
           <TableauDeBordTab active={activeTab === 2}>Option de partage</TableauDeBordTab>
         </div>
       </div>

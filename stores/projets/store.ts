@@ -1,15 +1,18 @@
 import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
+import { upsert } from "@/helpers/listUtils";
 
 interface ProjetsState {
   projets: ProjetWithNomCollectivite[];
   currentProjetId: number | null;
 }
+
 export type ProjetsActions = {
   setProjets: (_projets: ProjetWithNomCollectivite[]) => void;
   setCurrentProjetId: (_currentProjetId: number) => void;
   getCurrentProjet: () => ProjetWithNomCollectivite | undefined;
   getProjetById: (_projetId: number) => ProjetWithNomCollectivite | undefined;
+  addOrUpdateProjet: (_projet: ProjetWithNomCollectivite) => void;
 };
 
 export type ProjetsStore = ProjetsState & ProjetsActions;
@@ -36,5 +39,6 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
       const { projets } = get();
       return projets.find((projet) => projet.id === projetId);
     },
+    addOrUpdateProjet: (_projet) => set((state) => ({ projets: upsert(state.projets, _projet) })),
   }));
 };
