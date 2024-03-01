@@ -2,13 +2,15 @@
 import { useState } from "react";
 
 import { TableauDeBordSuivi, TableauDeBordTab } from ".";
+import clsx from "clsx";
 
 const tabs = ["Tableau de suivi", "Recommandations", "Option de partage"];
 
 const getButtonTabClassName = (index: number, activeTab: number) =>
-  `px-6 py-4 text-sm ${
-    index === activeTab && "bg-dsfr-border-action-low-blue-france text-dsfr-background-flat-blue-france"
-  } hover:!bg-dsfr-border-action-low-blue-france hover:!text-dsfr-background-flat-blue-france`;
+  clsx(
+    "px-6 py-4 text-sm hover:!bg-dsfr-border-action-low-blue-france hover:!text-dsfr-background-flat-blue-france",
+    index === activeTab && "bg-dsfr-border-action-low-blue-france text-dsfr-background-flat-blue-france",
+  );
 
 export const TableauDeBordTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
