@@ -166,17 +166,17 @@ export default function Home() {
                 className={"mr-2"}
               />
               <Image
-                src={`/images/odd/odd13.svg`}
-                alt="Mesure relatives à la lutte contre les changements climatiques"
-                title="Mesure relatives à la lutte contre les changements climatiques"
+                src={`/images/odd/odd11.svg`}
+                alt="Ville et communauté durable"
+                title="Ville et communauté durable"
                 width={70}
                 height={70}
                 className={"mr-2"}
               />
               <Image
-                src={`/images/odd/odd11.svg`}
-                alt="Ville et communauté durable"
-                title="Ville et communauté durable"
+                src={`/images/odd/odd13.svg`}
+                alt="Mesure relatives à la lutte contre les changements climatiques"
+                title="Mesure relatives à la lutte contre les changements climatiques"
                 width={70}
                 height={70}
                 className={"mr-2"}

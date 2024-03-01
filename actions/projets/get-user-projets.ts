@@ -21,7 +21,7 @@ export const getUserProjetsAction = async (
   }
   const projets = await getUserProjets(userId);
 
-  revalidatePath(PFMV_ROUTES.LISTE_PROJETS);
+  revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
 
   return { type: "success", message: "PROJETS_LOADED", projets };
 };

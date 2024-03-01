@@ -38,7 +38,7 @@ export const seedDummyProjetAction = async () => {
       {
         created_by: session.user.id,
         nom: "Changement du sol de la cour",
-        type_espace: "place",
+        type_espace: "ecole",
         adresse: "19 rue du commerce",
         adresse_info: JSON.stringify({ rue: "19 rue du commerce", ville: "Brest" }),
         date_echeance: new Date("2024-12-31T23:59:59Z"),
@@ -49,7 +49,7 @@ export const seedDummyProjetAction = async () => {
       {
         created_by: session.user.id,
         nom: "Plantation d'arbres",
-        type_espace: "place",
+        type_espace: "parc",
         adresse: "19 rue du commerce",
         adresse_info: JSON.stringify({ rue: "19 rue du commerce", ville: "Brest" }),
         date_echeance: new Date("2024-12-31T23:59:59Z"),
@@ -60,7 +60,7 @@ export const seedDummyProjetAction = async () => {
     ],
   });
 
-  revalidatePath(PFMV_ROUTES.LISTE_PROJETS);
+  revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
 
   return { projet, success: true, revalidated: true };
 };
