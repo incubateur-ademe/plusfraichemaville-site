@@ -1,5 +1,6 @@
 import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bord";
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
+
 import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
 import { TableauDeBordSuiviCardWithList } from "./tableau-de-bord-suivi-card-with-list";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
@@ -20,6 +21,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     index: 1,
     progress: "0",
     disabled: true,
+    type: "diagnostic",
     picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
     children: (
       <TableauDeBordSuiviWithText>
@@ -32,15 +34,16 @@ const cards: TableauDeBordSuiviCardProps[] = [
     index: 2,
     progress: "100",
     disabled: false,
+    type: "renseignement",
     picto: <PictoTableauDeBordSelector pictoId="renseignement" className="w-28" />,
     children: <TableauDeBordSuiviCardWithList />,
   },
   {
     title: "Je choisis mes solutions de rafraîchissement",
     index: 3,
-
     progress: "50",
     disabled: false,
+    type: "solution",
     picto: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,
     children: <TableauDeBordSuiviWithFichesSolutions />,
   },
@@ -49,6 +52,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     index: 4,
     progress: "0",
     disabled: false,
+    type: "estimation",
     picto: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,
     children: (
       <TableauDeBordSuiviWithText>
@@ -61,6 +65,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     index: 5,
     progress: "0",
     disabled: true,
+    type: "financement",
     picto: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
     children: (
       <TableauDeBordSuiviWithText>
@@ -73,6 +78,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     index: 6,
     progress: "0",
     disabled: true,
+    type: "lancement",
     picto: <PictoTableauDeBordSelector pictoId="lancement" className="w-20" />,
     children: (
       <TableauDeBordSuiviWithText>
