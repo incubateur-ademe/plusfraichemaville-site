@@ -21,7 +21,7 @@ export const PictoEspaceSelector = ({ pictoId, withBackground, width = 65, heigh
   const selectedPicto = pictos[pictoId];
 
   return (
-    <div className={`w-[75px] h-[75px] relative flex justify-center items-center`}>
+    <div className={`p-[5px] relative flex justify-center items-center`}>
       {withBackground && (
         <div className="absolute inset-0 w-full h-full -z-1 rounded-lg bg-dsfr-background-action-low-blue-france"></div>
       )}
