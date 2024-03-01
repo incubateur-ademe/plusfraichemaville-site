@@ -141,7 +141,7 @@ export default function FicheSolutionTabSynthese({
       {ficheSolution.logo_partenaire && !!ficheSolution.logo_partenaire.data && (
         <>
           <hr className="pb-8 mt-12" />
-          <div className={"flex flex-col md:flex-row  ml-4"}>
+          <div className={"flex flex-col md:flex-row ml-4"}>
             <div className="text-lg mr-5 text-dsfr-text-mention-grey flex items-center mb-2">Partenaire</div>
             <Image
               width={110}

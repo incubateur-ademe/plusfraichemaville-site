@@ -13,8 +13,8 @@ export default async function RetourExperienceExtraInfoPanel({
 }) {
   return (
     <div
-      className={`flex flex-wrap md:block md:w-56 ml-6 lg:ml-0
-      mt-6 text-dsfr-text-label-blue-france text-sm ${className}`}
+      // eslint-disable-next-line max-len
+      className={`flex flex-wrap md:block md:w-56 ml-6 lg:ml-0 mt-6 text-dsfr-text-label-blue-france text-sm ${className}`}
     >
       <ItemRetourExperienceExtraInfo
         title="Solutions"

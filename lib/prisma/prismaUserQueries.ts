@@ -1,11 +1,10 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { ProjetWithNomCollectivite, UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
-export const deleteUserProjet = (userId: string, projetId: number) => {
+export const deleteUserProjet = (projetId: number) => {
   return prismaClient.projet.delete({
     where: {
       id: projetId,
-      created_by: userId,
     },
   });
 };

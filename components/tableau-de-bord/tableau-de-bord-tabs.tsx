@@ -1,7 +1,8 @@
 "use client";
 import { useState } from "react";
-import { TableauDeBordSuivi } from "./tableau-de-bord-suivi";
-import { TableauDeBordTab } from "./tableau-de-bord-tab";
+
+import { TableauDeBordSuivi, TableauDeBordTab } from ".";
+
 const tabs = ["Tableau de suivi", "Recommandations", "Option de partage"];
 
 const getButtonTabClassName = (index: number, activeTab: number) =>

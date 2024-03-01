@@ -2,6 +2,10 @@ export const hasPermissionToUpdateUser = (userIdToUpdate: string, userIdUpdating
   return userIdToUpdate === userIdUpdating;
 };
 
-export const hasPermissionToUpdateProjet = (userId: string, createdByUserId: string) => {
-  return userId === createdByUserId;
+export const hasPermissionToUpdateProjet = (authenticatedUserId: string, updaterUserId: string) => {
+  return authenticatedUserId === updaterUserId;
+};
+
+export const hasPermissionToViewUserProjet = (authenticatedUserId: string, userId: string) => {
+  return authenticatedUserId === userId;
 };

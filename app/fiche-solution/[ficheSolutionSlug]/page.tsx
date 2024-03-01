@@ -31,7 +31,7 @@ export default async function FicheSolution({
           <Image
             width={1200}
             height={500}
-            className={`w-full h-48 md:h-96 object-cover relative -z-10 `}
+            className={"w-full h-48 md:h-96 object-cover relative -z-10 "}
             src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
             alt={ficheSolution.attributes.titre}
           />

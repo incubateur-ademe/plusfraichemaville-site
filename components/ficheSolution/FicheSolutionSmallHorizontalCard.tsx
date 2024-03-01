@@ -16,8 +16,8 @@ export default function FicheSolutionSmallHorizontalCard({
   const typeSolution = getTypeSolutionFromCode(ficheSolution.data.attributes.type_solution);
   return (
     <Link
-      className={`flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row
-      items-center fiche-solution-small-vertical-card ${className}`}
+      // eslint-disable-next-line max-len
+      className={`flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row items-center fiche-solution-small-vertical-card ${className}`}
       href={`${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheSolution.data.attributes.slug}`}
     >
       <div className="flex w-40 h-full">

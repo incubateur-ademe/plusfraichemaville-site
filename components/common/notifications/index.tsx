@@ -12,5 +12,5 @@ export type NotificationsMessage = keyof typeof messages;
 export const notifications = (type?: NotificationsType, message?: NotificationsMessage) => {
   !type || !message
     ? console.warn("Notifications: le type et le message ne sont pas définis dans la réponse de la serveur action.")
-    : type && message && toast[type](messages[message]);
+    : toast[type](messages[message]);
 };

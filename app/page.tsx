@@ -21,7 +21,7 @@ export default function Home() {
     <main className="">
       <div className="bg-dsfr-background-action-low-blue-france flex justify-center">
         <div className="flex flex-col md:flex-row max-w-[90rem] gap-x-8 justify-center items-center">
-          <div className={"basis-2/5  md:text-left mx-6 2xl:ml-[7.5rem]"}>
+          <div className={"basis-2/5 md:text-left mx-6 2xl:ml-[7.5rem]"}>
             <div className="text-dsfr-text-label-blue-france text-[1.75rem] leading-normal font-bold mt-8">
               {"N’attendez pas"}
               <br /> {"la prochaine vague"}
@@ -110,10 +110,8 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-dsfr-background-action-low-blue-france flex flex-col justify-center items-center pt-12 pb-20">
-        <div
-          className="text-dsfr-text-label-blue-france font-bold text-[1.375rem]
-          max-w-md m-x-auto text-center leading-normal"
-        >
+        {/* eslint-disable-next-line max-len */}
+        <div className="text-dsfr-text-label-blue-france font-bold text-[1.375rem] max-w-md m-x-auto text-center leading-normal">
           Différents types de solutions à combiner pour lutter contre la surchauffe urbaine
         </div>
         <div className="fr-container !max-w-[80rem] flex mt-12 gap-6 flex-wrap justify-center">

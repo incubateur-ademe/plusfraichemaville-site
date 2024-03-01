@@ -1,8 +1,9 @@
-import { PictoEspaceSelector } from "../common/pictos";
-
 import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { ListeProjetsCardDeleteModal } from "./card-delete-modal";
 import Link from "next/link";
+import { PictoEspaceSelector } from "../common/pictos";
+import { PictoId } from "../common/pictos/picto-espace-selector";
+import clsx from "clsx";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -19,26 +20,39 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
   };
 
   return (
-    <div className={`pfmv-card p-5 pb-10 rounded-xl flex mb-5 ${disabledText}`}>
+    <div className={`pfmv-card p-5 pb-10 rounded-xl flex mb-5 relative ${disabledText}`}>
       <div className="mr-6">
-        <PictoEspaceSelector pictoId="place" withBackground />
+        {/* TODO: changer le schema prisma pour un typage plus fort */}
+        <PictoEspaceSelector pictoId={projet.type_espace as PictoId} withBackground />
       </div>
       <div>
-        <h3 className="text-xl text-dsfr-text-label-blue-france mb-1">{projet.nom}</h3>
-        <h4 className="text-dsfr-text-label-blue-france mb-4 text-base">
-          <i className="ri-map-pin-line before:!w-4 mr-1"></i>
-          {projet.collectivite.nom}
-        </h4>
+        <Link href={`/espace-projet/${projet.id}/tableau-de-bord`}>
+          <h3 className="text-xl text-dsfr-text-label-blue-france mb-1">{projet.nom}</h3>
+          <h4 className="text-dsfr-text-label-blue-france mb-4 text-base">
+            <i className="ri-map-pin-line before:!w-4 mr-1"></i>
+            {projet.collectivite.nom}
+          </h4>
+        </Link>
         <div className="flex items-center">
           <Link
             href={`/espace-projet/${projet.id}/tableau-de-bord`}
-            className="fr-btn fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
+            // className="fr-btn fr-btn--secondary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
+            className="fr-btn fr-btn fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
             style={{ ...disabledButton }}
           >
             Accéder au projet
           </Link>
-          <ListeProjetsCardDeleteModal projetId={projet.id} projetNom={projet.nom} createdBy={projet.created_by} />
+          <ListeProjetsCardDeleteModal projetId={projet.id} projetNom={projet.nom} />
         </div>
+      </div>
+      <div
+        className={clsx(
+          "absolute top-5 right-5 text-sm",
+          "before:inline-block before:w-[10px] before:h-[10px] before:mr-2",
+          "before:bg-dsfr-background-action-high-success-hover before:rounded-full",
+        )}
+      >
+        En cours
       </div>
     </div>
   );
