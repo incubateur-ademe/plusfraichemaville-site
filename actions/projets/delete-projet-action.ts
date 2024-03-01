@@ -19,7 +19,7 @@ export const deleteProjetAction = async (projetId: number): Promise<ResponseActi
 
   await deleteUserProjet(projetId);
 
-  revalidatePath(PFMV_ROUTES.LISTE_PROJETS);
+  revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
 
   return { type: "success", message: "PROJET_DELETE" };
 };

@@ -9,7 +9,7 @@ import { useState } from "react";
 const links = [
   {
     label: "Accéder à mes projets",
-    url: PFMV_ROUTES.LISTE_PROJETS,
+    url: PFMV_ROUTES.ESPACE_PROJET_LISTE,
   },
   {
     label: "Mon profil",

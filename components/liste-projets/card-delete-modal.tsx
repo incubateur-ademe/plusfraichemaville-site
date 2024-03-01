@@ -24,8 +24,10 @@ export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjet
         priority="secondary"
         nativeButtonProps={modal.buttonProps}
         className="fr-btn fr-btn--icon-left rounded-3xl"
+        // className="fr-btn fr-btn--icon-left rounded-[50%] relative !w-8 flex justify-center items-center"
       >
         Supprimer
+        {/* <i className="ri-delete-bin-fill before:!w-4"></i> */}
       </Button>
       <modal.Component
         title=""

@@ -44,7 +44,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
       if (result.updatedProjet) {
         addOrUpdateProjet(result.updatedProjet);
       }
-      router.push(PFMV_ROUTES.LISTE_PROJETS);
+      router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE);
     }
   };
 
