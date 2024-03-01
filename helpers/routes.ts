@@ -10,4 +10,5 @@ export const PFMV_ROUTES = {
   MON_PROFIL: "/espace-projet/info-perso",
   INFO_PROJET: "/espace-projet/info-projet",
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord`,
+  ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions`,
 };
