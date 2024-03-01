@@ -18,7 +18,7 @@ export const TableauDeBordTabs = () => {
   return (
     <>
       <div className="bg-dsfr-background-alt-blue-france">
-        <div className="tabs-btns flex fr-container">
+        <div className="flex fr-container">
           {tabs.map((tab, index) => (
             <button className={getButtonTabClassName(index, activeTab)} onClick={() => setActiveTab(index)} key={index}>
               {tab}

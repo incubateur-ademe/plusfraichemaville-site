@@ -26,7 +26,7 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
         <PictoEspaceSelector pictoId={projet.type_espace as PictoId} withBackground />
       </div>
       <div>
-        <Link href={`/espace-projet/${projet.id}/tableau-de-bord`}>
+        <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>
           <h3 className="text-xl text-dsfr-text-label-blue-france mb-1">{projet.nom}</h3>
           <h4 className="text-dsfr-text-label-blue-france mb-4 text-base">
             <i className="ri-map-pin-line before:!w-4 mr-1"></i>
@@ -35,7 +35,6 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
         </Link>
         <div className="flex items-center">
           <Link
-            // className="fr-btn fr-btn--secondary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
             className="fr-btn fr-btn fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
             href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}
             style={{ ...disabledButton }}
