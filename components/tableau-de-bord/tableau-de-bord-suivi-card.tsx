@@ -40,7 +40,7 @@ export const TableauDeBordSuiviCard = ({
       <div
         className={clsx(
           "h-1/2 !rounded-t-2xl flex justify-center items-center relative",
-          disabled ? "bg-dsfr-grey-975" : " bg-dsfr-border-default-blue-france",
+          disabled ? "bg-dsfr-background-alt-grey" : " bg-dsfr-border-default-blue-france",
         )}
       >
         <small

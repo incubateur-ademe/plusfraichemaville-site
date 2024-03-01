@@ -30,7 +30,7 @@ export const TableauDeBordSuiviCardProgress = ({ progress }: TableauDeBordSuiviC
         ></div>
         <div className={`w-full h-2 relative bg-dsfr-border-default-grey rounded-3xl`}></div>
       </div>
-      {progress !== "0" && (
+      {progress == "100" && (
         <i className="ri-checkbox-circle-fill ml-2 text-dsfr-background-action-high-success-hover"></i>
       )}
       <span className="text-xs ml-2 text-dsfr-background-action-high-success-hover font-medium">{label}</span>

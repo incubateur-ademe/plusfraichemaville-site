@@ -6,7 +6,7 @@ import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-te
 
 export const TableauDeBordSuivi = () => {
   return (
-    <div className="justify-between flex-wrap max-w-[1120px] flex">
+    <div className="gap-8 flex-wrap flex">
       {cards.map((card, index) => (
         <TableauDeBordSuiviCard {...card} key={index} />
       ))}
