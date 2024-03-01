@@ -9,5 +9,10 @@ export default function Layout({ children }: { children: ReactElement | null }) 
   const setCurrentProjetId = useProjetsStore((state) => state.setCurrentProjetId);
   setCurrentProjetId(+projetId);
 
-  return <><BannerProjet />{children}</>;
+  return (
+    <>
+      <BannerProjet />
+      {children}
+    </>
+  );
 }
