@@ -47,9 +47,10 @@ export const createOrUpdateProjet = async ({
       adresse,
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
+      collectiviteId: collectiviteId,
     },
     include: {
-      collectivite: { select: { nom: true } },
+      collectivite: true,
     },
   });
 };

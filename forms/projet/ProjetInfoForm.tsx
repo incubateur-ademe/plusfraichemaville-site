@@ -6,7 +6,6 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import InputFormField from "@/components/common/InputFormField";
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
-import { projet } from "@prisma/client";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/forms/projet/ProjetInfoFormSchema";
 import SelectFormField from "@/components/common/SelectFormField";
 import { typeEspaceOptions } from "@/components/filters/TypeEspaceFilter";
@@ -17,39 +16,31 @@ import { upsertProjetAction } from "@/actions/projets/upsert-projet-action";
 import { notifications } from "@/components/common/notifications";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
+import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
+import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
-export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
+export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithCollectivite }) => {
   const router = useRouter();
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
-  const getCurrentProjet = useProjetsStore(useShallow((state) => state.getCurrentProjet));
-  const projetToUpdate = projet ?? getCurrentProjet();
 
   const form = useForm<ProjetInfoFormData>({
     resolver: zodResolver(ProjetInfoFormSchema),
     defaultValues: {
-      projetId: projetToUpdate?.id,
-      nom: projetToUpdate?.nom ?? "",
-      typeEspace: projetToUpdate?.type_espace ?? "",
-      niveauMaturite: projetToUpdate?.niveau_maturite ?? "",
-      adresse: projetToUpdate?.adresse || undefined,
-      dateEcheance: monthDateToString(projetToUpdate?.date_echeance),
-      collectivite: undefined,
-      // collectivite:  collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
-    },
+      collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
+    }
   });
 
   useEffect(() => {
     form.reset({
-      projetId: projetToUpdate?.id,
-      nom: projetToUpdate?.nom ?? "",
-      typeEspace: projetToUpdate?.type_espace ?? "",
-      niveauMaturite: projetToUpdate?.niveau_maturite ?? "",
-      adresse: projetToUpdate?.adresse || undefined,
-      dateEcheance: monthDateToString(projetToUpdate?.date_echeance),
-      collectivite: undefined,
-      // collectivite:  collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
+      projetId: projet?.id,
+      nom: projet?.nom ?? "",
+      typeEspace: projet?.type_espace ?? "",
+      niveauMaturite: projet?.niveau_maturite ?? "",
+      adresse: projet?.adresse || undefined,
+      dateEcheance: monthDateToString(projet?.date_echeance),
+      collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
     });
-  }, [projetToUpdate]);
+  }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
     const result = await upsertProjetAction({

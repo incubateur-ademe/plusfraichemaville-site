@@ -5,12 +5,12 @@ import { auth } from "@/lib/next-auth/auth";
 import { getUserProjets } from "@/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
-import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToViewUserProjet } from "@/actions/projets/permissions";
 
 export const getUserProjetsAction = async (
   userId: string,
-): Promise<ResponseAction<{ projets: ProjetWithNomCollectivite[] }>> => {
+): Promise<ResponseAction<{ projets: ProjetWithCollectivite[] }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", projets: [] };

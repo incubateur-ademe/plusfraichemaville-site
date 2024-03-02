@@ -5,15 +5,14 @@ import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/forms/projet/ProjetInfoFormSchema";
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
-import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { createOrUpdateProjet } from "@/lib/prisma/prismaProjetQueries";
-import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
+import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/helpers";
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
-): Promise<ResponseAction<{ updatedProjet?: ProjetWithNomCollectivite }>> => {
+): Promise<ResponseAction<{ updatedProjet?: ProjetWithCollectivite }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -33,11 +32,7 @@ export const upsertProjetAction = async (
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      const entitiesFromBan = await fetchCollectiviteFromBanApi(data.collectivite.nomCollectivite, 50);
-      let collectiviteToUse = entitiesFromBan.find((address) => address.banId === data.collectivite.banId);
-      const collectivite = collectiviteToUse
-        ? await getOrCreateCollectivite(collectiviteToUse, session.user.id)
-        : await createCollectiviteByName(data.collectivite.nomCollectivite, session.user.id);
+      const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
       const updatedProjet = await createOrUpdateProjet({
         projetId: data.projetId,
         nomProjet: data.nom,
@@ -45,7 +40,7 @@ export const upsertProjetAction = async (
         adresse: data.adresse || undefined,
         niveauMaturite: data.niveauMaturite,
         dateEcheance: data.dateEcheance,
-        collectiviteId: collectivite.id,
+        collectiviteId: collectiviteId,
         userId: user.id,
       });
       return { type: "success", message: "PROJET_UPSERTED", updatedProjet };
