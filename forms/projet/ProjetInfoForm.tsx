@@ -1,7 +1,7 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import { useEffect } from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import InputFormField from "@/components/common/InputFormField";
 import { useRouter } from "next/navigation";
@@ -13,26 +13,43 @@ import { typeEspaceOptions } from "@/components/filters/TypeEspaceFilter";
 import { monthDateToString } from "@/helpers/dateUtils";
 import { niveauxMaturiteProjetOptions } from "@/helpers/maturiteProjet";
 import CollectiviteInputFormField from "@/components/common/CollectiviteInputFormField";
-import { useProjetsStore } from "@/stores/projets/provider";
 import { upsertProjetAction } from "@/actions/projets/upsert-projet-action";
 import { notifications } from "@/components/common/notifications";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { useShallow } from "zustand/react/shallow";
 
 export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
   const router = useRouter();
-  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+  const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
+  const getCurrentProjet = useProjetsStore(useShallow((state) => state.getCurrentProjet));
+  const projetToUpdate = projet ?? getCurrentProjet();
 
   const form = useForm<ProjetInfoFormData>({
     resolver: zodResolver(ProjetInfoFormSchema),
     defaultValues: {
-      projetId: projet?.id,
-      nom: projet?.nom ?? "",
-      typeEspace: projet?.type_espace ?? "",
-      niveauMaturite: projet?.niveau_maturite ?? "",
-      adresse: projet?.adresse || undefined,
-      dateEcheance: monthDateToString(projet?.date_echeance),
+      projetId: projetToUpdate?.id,
+      nom: projetToUpdate?.nom ?? "",
+      typeEspace: projetToUpdate?.type_espace ?? "",
+      niveauMaturite: projetToUpdate?.niveau_maturite ?? "",
+      adresse: projetToUpdate?.adresse || undefined,
+      dateEcheance: monthDateToString(projetToUpdate?.date_echeance),
       collectivite: undefined,
+      // collectivite:  collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      projetId: projetToUpdate?.id,
+      nom: projetToUpdate?.nom ?? "",
+      typeEspace: projetToUpdate?.type_espace ?? "",
+      niveauMaturite: projetToUpdate?.niveau_maturite ?? "",
+      adresse: projetToUpdate?.adresse || undefined,
+      dateEcheance: monthDateToString(projetToUpdate?.date_echeance),
+      collectivite: undefined,
+      // collectivite:  collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
+    });
+  }, [projetToUpdate]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
     const result = await upsertProjetAction({
@@ -43,12 +60,15 @@ export const ProjetInfoForm = ({ projet }: { projet?: projet }) => {
     if (result.type === "success") {
       if (result.updatedProjet) {
         addOrUpdateProjet(result.updatedProjet);
+        router.push(PFMV_ROUTES.TABLEAU_DE_BORD(result.updatedProjet.id));
+      } else {
+        router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE);
       }
-      router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE);
     }
   };
 
   const disabled = form.formState.isSubmitting;
+
   return (
     <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
       <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} />

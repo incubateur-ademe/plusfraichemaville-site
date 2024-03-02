@@ -1,13 +1,12 @@
 "use client";
 import { ReactElement } from "react";
-import { useParams } from "next/navigation";
-import { useProjetsStore } from "@/stores/projets/provider";
 import BannerProjet from "@/components/monEspaceProjet/banner-projet";
+import { useProjetsStore } from "@/stores/projets/provider";
 
-export default function Layout({ children }: { children: ReactElement | null }) {
-  const { projetId } = useParams();
+export default function Layout({ children, params }: { children: ReactElement | null; params: { projetId: string } }) {
   const setCurrentProjetId = useProjetsStore((state) => state.setCurrentProjetId);
-  setCurrentProjetId(+projetId);
+
+  setCurrentProjetId(+params.projetId);
 
   return (
     <>

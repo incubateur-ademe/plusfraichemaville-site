@@ -16,7 +16,7 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
         )}
       </div>
       <div className="shrink-0">
-        <Link href={PFMV_ROUTES.INFO_PROJET} className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl">
+        <Link href={PFMV_ROUTES.CREATE_PROJET} className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl">
           Créer un projet
         </Link>
       </div>

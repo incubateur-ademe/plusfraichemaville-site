@@ -8,7 +8,8 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET: "/espace-projet",
   ESPACE_PROJET_LISTE: "/espace-projet/liste-projets",
   MON_PROFIL: "/espace-projet/info-perso",
-  INFO_PROJET: "/espace-projet/info-projet",
+  CREATE_PROJET: "/espace-projet/creation-projet",
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions`,
+  ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
 };

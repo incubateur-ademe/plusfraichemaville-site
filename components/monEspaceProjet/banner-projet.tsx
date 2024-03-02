@@ -2,12 +2,11 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { PictoEspaceSelector } from "@/components/common/pictos";
 import { PictoId } from "@/components/common/pictos/picto-espace-selector";
-import { useShallow } from "zustand/react/shallow";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import Link from "next/link";
 
 export default function BannerProjet({ className }: { className?: string }) {
-  const { getCurrentProjet } = useProjetsStore(useShallow((state) => state));
+  const { getCurrentProjet } = useProjetsStore((state) => state);
   const currentProjet = getCurrentProjet();
   if (!currentProjet) {
     return null;

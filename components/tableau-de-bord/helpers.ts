@@ -7,5 +7,5 @@ export const makeUrl: Record<TableauDeBordCardType, (_: number) => string> = {
   estimation: (projetId: number) => PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projetId),
   financement: (projetId: number) => PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projetId),
   lancement: (projetId: number) => PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projetId),
-  renseignement: (projetId: number) => PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projetId),
+  renseignement: (projetId: number) => PFMV_ROUTES.ESPACE_PROJET_INFO_PROJET(projetId),
 };
