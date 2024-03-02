@@ -3,6 +3,8 @@ import { useState } from "react";
 
 import { TableauDeBordSuivi, TableauDeBordTab } from ".";
 import clsx from "clsx";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { useParams } from "next/navigation";
 
 const tabs = ["Tableau de suivi", "Recommandations", "Option de partage"];
 
@@ -14,6 +16,9 @@ const getButtonTabClassName = (index: number, activeTab: number) =>
 
 export const TableauDeBordTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const { projetId } = useParams();
+  const setCurrentProjetId = useProjetsStore((state) => state.setCurrentProjetId);
+  setCurrentProjetId(+projetId);
 
   return (
     <>
