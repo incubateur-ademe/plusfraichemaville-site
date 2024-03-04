@@ -27,7 +27,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithCollectivite }) 
     resolver: zodResolver(ProjetInfoFormSchema),
     defaultValues: {
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
-    }
+    },
   });
 
   useEffect(() => {

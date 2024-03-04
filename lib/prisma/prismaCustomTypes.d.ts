@@ -5,7 +5,7 @@ export type UserWithCollectivite = Prisma.UserGetPayload<{
 }>;
 
 export interface ProjetWithCollectivite extends projet {
-  collectivite: collectivite
+  collectivite: collectivite;
 }
 
 export type AgentConnectInfo = { siret: string };
