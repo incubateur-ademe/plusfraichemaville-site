@@ -69,6 +69,11 @@
   background: #fff !important;
 }
 
+.pfmv-strong-card {
+  border-radius: 10px;
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 145, 0.20);
+}
+
 .pfmv-card {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
 }
