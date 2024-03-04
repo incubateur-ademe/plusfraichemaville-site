@@ -1,6 +1,6 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
-import React from "react";
+import { useState } from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { notifications } from "@/components/common/notifications";
 import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
@@ -24,6 +24,17 @@ export const EstimationInfoForm = ({
   const { data: ficheSolutions } = useApi<APIResponseData<"api::fiche-solution.fiche-solution">[]>(
     `/api/get-fiches-solutions?ficheSolutionIds=${JSON.stringify(projet.fiches_solutions_id)}`,
   );
+  const handleFicheSolutionChange = (ficheSolutionId: string) => {
+    const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
+    if (currentFicheSolutionIds.indexOf(ficheSolutionId) === -1)
+      form.setValue("ficheSolutionIds", [...currentFicheSolutionIds, ficheSolutionId]);
+    else {
+      form.setValue(
+        "ficheSolutionIds",
+        currentFicheSolutionIds.filter((id) => id !== ficheSolutionId),
+      );
+    }
+  };
 
   const form = useForm<EstimationFormData>({
     resolver: zodResolver(EstimationFormSchema),
@@ -49,7 +60,11 @@ export const EstimationInfoForm = ({
         <div className="mb-6 text-lg">{"Choisissez les solutions à estimer pour votre simulation"}</div>
         <div className={clsx("flex flex-wrap gap-6 mb-12")}>
           {ficheSolutions?.map((fs) => (
-            <FicheSolutionEstimationCard key={fs.id} ficheSolution={fs}>
+            <FicheSolutionEstimationCard
+              key={fs.id}
+              ficheSolution={fs}
+              onClick={() => handleFicheSolutionChange(fs.id.toString())}
+            >
               <Checkbox
                 className="m-auto"
                 {...form.register("ficheSolutionIds")}
@@ -57,7 +72,8 @@ export const EstimationInfoForm = ({
                   {
                     label: null,
                     nativeInputProps: {
-                      value: fs.id,
+                      value: fs.id.toString(),
+                      onChange: () => handleFicheSolutionChange(fs.id.toString()),
                     },
                   },
                 ]}

@@ -8,12 +8,14 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiCli
 export default function FicheSolutionEstimationCard({
   ficheSolution,
   children,
+  onClick,
 }: {
   ficheSolution: APIResponseData<"api::fiche-solution.fiche-solution">;
+  onClick?: () => void;
 } & PropsWithChildren) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
   return (
-    <div className="flex w-60 flex-col pfmv-card md:ml-0 cursor-pointer relative">
+    <div className="flex w-60 flex-col pfmv-card md:ml-0 cursor-pointer relative" onClick={onClick}>
       <div className="flex w-full h-32">
         <Image
           width={450}
