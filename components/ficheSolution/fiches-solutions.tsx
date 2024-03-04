@@ -2,8 +2,8 @@ import TypeEspaceFilter from "@/components/filters/TypeEspaceFilter";
 import TypeSolutionFilter from "@/components/filters/TypeSolutionFilter";
 import BaisseTemperatureFilter from "@/components/filters/BaisseTemperatureFilter";
 import { getBaisseTemperatureFicheSolutionFromTemperature } from "@/helpers/baisseTemperatureFicheSolution";
-import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import { getAllFichesSolutions } from "@/lib/strapi/queries/fichesSolutionsQueries";
+import { FichesSolutionsCardsContainer } from "./fiches-solution-card-container";
 
 type FichesSolutionsProps = {
   searchParams: {
@@ -43,15 +43,7 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
         {filteredFichesSolutions.length === 0 ? (
           <div className="text-xl font-bold">Aucune fiche solution ne correspond à vos critères.</div>
         ) : (
-          <div className="grow list-none p-0">
-            <ul className="flex flex-wrap gap-6 justify-center md:justify-normal">
-              {filteredFichesSolutions.map((ficheSolution) => (
-                <li key={ficheSolution.id} className="flex">
-                  <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution} />
-                </li>
-              ))}
-            </ul>
-          </div>
+          <FichesSolutionsCardsContainer fichesSolutions={filteredFichesSolutions} />
         )}
       </div>
     </div>

@@ -3,8 +3,6 @@ import { useState } from "react";
 
 import { TableauDeBordSuivi, TableauDeBordTab } from ".";
 import clsx from "clsx";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { useParams } from "next/navigation";
 
 const tabs = ["Tableau de suivi", "Recommandations", "Option de partage"];
 
@@ -16,16 +14,17 @@ const getButtonTabClassName = (index: number, activeTab: number) =>
 
 export const TableauDeBordTabs = () => {
   const [activeTab, setActiveTab] = useState(0);
-  const { projetId } = useParams();
-  const setCurrentProjetId = useProjetsStore((state) => state.setCurrentProjetId);
-  setCurrentProjetId(+projetId);
 
   return (
     <>
       <div className="bg-dsfr-background-alt-blue-france">
         <div className="flex fr-container">
           {tabs.map((tab, index) => (
-            <button className={getButtonTabClassName(index, activeTab)} onClick={() => setActiveTab(index)} key={index}>
+            <button
+              className={getButtonTabClassName(index, activeTab)}
+              onClick={() => setActiveTab(index)}
+              key={`button-tab-${index}`}
+            >
               {tab}
             </button>
           ))}

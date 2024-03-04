@@ -1,10 +1,36 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { projet } from "@prisma/client";
 
+export const updateFichesSolutionsProjet = (projetId: number, fichesSolutionsId: number[]) => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+    },
+    data: {
+      fiches_solutions_id: fichesSolutionsId,
+    },
+  });
+};
+
 export const getProjetById = async (projetId: number): Promise<projet | null> => {
   return prismaClient.projet.findUnique({
     where: {
       id: projetId,
+    },
+  });
+};
+
+export const getUserProjetById = async (projetId: number) => {
+  return prismaClient.projet.findUnique({
+    where: {
+      id: projetId,
+    },
+    include: {
+      collectivite: {
+        select: {
+          nom: true,
+        },
+      },
     },
   });
 };

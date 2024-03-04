@@ -13,12 +13,13 @@ import FicheSolutionTabOups from "@/components/ficheSolution/FicheSolutionTabOup
 import { getFicheSolutionBySlug } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
+import { ButtonSaveFicheSolutionInProjet } from "./button-save-fiche-solution-in-projet";
 
 export async function FicheSolution({
   params,
   searchParams,
 }: {
-  params: { ficheSolutionSlug: string };
+  params: { ficheSolutionSlug: string; projetId: string };
   searchParams: { etapeAideDecision: string | undefined };
 }) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
@@ -57,14 +58,21 @@ export async function FicheSolution({
               />
             )}
             <ButtonShareFicheSolution className={"hidden md:block mb-4"} />
-            <ButtonSaveFicheSolution
-              ficheSolutionId={ficheSolution.id}
-              projectName={(historique && historique[1].label) || ""}
-              className="hidden md:block"
-              label={true}
-            />
+            {params.projetId ? (
+              // TODO: créer un button-save-selector => select entre bouton dans fiche projet / fiche globale
+              <div className="relative [&>button]:right-auto">
+                <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} />
+              </div>
+            ) : (
+              <ButtonSaveFicheSolution
+                ficheSolutionId={ficheSolution.id}
+                label={true}
+                projectName={(historique && historique[1].label) || ""}
+                className={"hidden md:block"}
+              />
+            )}
           </div>
-          <div className="fr-tabs before:!shadow-none !shadow-none">
+          <div className="fr-tabs before:!shadow-none">
             <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
                 <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" />

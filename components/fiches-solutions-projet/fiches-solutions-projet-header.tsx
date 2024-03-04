@@ -9,15 +9,12 @@ type FichesSolutionsProjetHeaderProps = {
 };
 
 export const FichesSolutionsProjetHeader = ({ projetId, projetNom }: FichesSolutionsProjetHeaderProps) => {
-  if (!projetId || !projetNom) {
-    return null;
-  }
   return (
     <div className="mb-8">
       <div className="text-3xl font-bold mb-6">Je choisis mes solutions de rafraîchissement</div>
       <span className="block">
         Mes solutions sélectionnées pour mon projet{" "}
-        <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projetId)} className="font-semibold">
+        <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projetId!)} className="font-semibold">
           {projetNom}
         </Link>
         .
