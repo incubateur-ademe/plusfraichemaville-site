@@ -6,6 +6,7 @@ import BookmarkedFicheSolutionByProject from "@/components/favoris/BookmarkedFic
 import Button from "@codegouvfr/react-dsfr/Button";
 import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { useSavedProjets } from "@/hooks/use-saved-projets";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -13,6 +14,7 @@ export default function Page() {
     setIsClient(true);
   }, []);
   const [bookmarkedFichesSolutions] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
+  useSavedProjets();
   return (
     isClient && (
       <div

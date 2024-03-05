@@ -30,6 +30,15 @@ export const getUserProjets = async (userId: string) => {
   });
 };
 
+export const saveFicheSolutionsByUser = (userId: string) => {
+  return prismaClient.user.findUnique({
+    where: { id: userId },
+    select: {
+      selection_fiches_solutions: true,
+    },
+  });
+};
+
 export const getProjetsByUserCollectivites = async (userId: string): Promise<ProjetWithNomCollectivite[]> => {
   const userWithCollectivites = await prismaClient.user.findUnique({
     where: { id: userId },
