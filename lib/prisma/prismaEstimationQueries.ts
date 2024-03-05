@@ -11,7 +11,7 @@ export const createEstimation = async (
       projet_id: projetId,
       fiches_solutions_id: fichesSolutionId,
       created_by: createdBy,
-      status: "en_cours"
+      status: "en_cours",
     },
   });
 };

@@ -1,8 +1,6 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useState } from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { notifications } from "@/components/common/notifications";
 import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { estimation } from "@prisma/client";
 import clsx from "clsx";
@@ -21,6 +19,7 @@ export const EstimationInfoForm = ({
   projet: ProjetWithCollectivite;
   estimation?: estimation;
 }) => {
+  // TODO : utiliser swr de manière cohérente avec ce qui est fait pour le rajout de fiche solution
   const { data: ficheSolutions } = useApi<APIResponseData<"api::fiche-solution.fiche-solution">[]>(
     `/api/get-fiches-solutions?ficheSolutionIds=${JSON.stringify(projet.fiches_solutions_id)}`,
   );
@@ -45,10 +44,10 @@ export const EstimationInfoForm = ({
     const result = await createEstimationAction(projet.id, {
       ...data,
     });
-    notifications(result.type, result.message);
 
     if (result.type === "success") {
       // TODO : rediriger vers la page d'estimation des matériaux
+      // TODO : mettre à jour le store de manière cohérente avec ce qui est fait pour le rajout de fiche solution
     }
   };
 
