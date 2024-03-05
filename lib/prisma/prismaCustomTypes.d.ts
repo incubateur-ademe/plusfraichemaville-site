@@ -8,8 +8,4 @@ export interface ProjetWithCollectivite extends projet {
   collectivite: collectivite;
 }
 
-export interface ProjetWithCollectivite extends projet {
-  collectivite: collectivite;
-}
-
 export type AgentConnectInfo = { siret: string };
