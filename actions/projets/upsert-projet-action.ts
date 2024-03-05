@@ -8,7 +8,7 @@ import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomM
 import { createOrUpdateProjet } from "@/lib/prisma/prismaProjetQueries";
 import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
-import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/helpers";
+import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
