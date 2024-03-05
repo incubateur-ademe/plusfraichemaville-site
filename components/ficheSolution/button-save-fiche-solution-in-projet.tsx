@@ -10,9 +10,13 @@ import { useSession } from "next-auth/react";
 
 type ButtonSaveFicheSolutionInProjetProps = {
   ficheSolutionId: FicheSolutionResponse["id"];
+  className?: string;
 };
 
-export const ButtonSaveFicheSolutionInProjet = ({ ficheSolutionId }: ButtonSaveFicheSolutionInProjetProps) => {
+export const ButtonSaveFicheSolutionInProjet = ({
+  ficheSolutionId,
+  className = "right-2",
+}: ButtonSaveFicheSolutionInProjetProps) => {
   const { projetId } = useParams();
   const userId = useSession().data?.user.id;
   const projet = useProjetsStore((state) => state.getProjetById(+projetId));
@@ -39,6 +43,7 @@ export const ButtonSaveFicheSolutionInProjet = ({ ficheSolutionId }: ButtonSaveF
         className={clsx(
           "!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0",
           "flex justify-center items-center absolute top-2 right-2",
+          className,
         )}
       >
         <i className={clsx(`fr-icon--sm`, isAlreadySaved ? "ri-add-circle-fill mr-1" : "ri-add-circle-line")}></i>
