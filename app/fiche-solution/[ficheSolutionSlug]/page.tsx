@@ -4,7 +4,7 @@ export default async function FicheSolutionPage({
   params,
   searchParams,
 }: {
-  params: { ficheSolutionSlug: string };
+  params: { ficheSolutionSlug: string; projetId: string };
   searchParams: { etapeAideDecision: string | undefined };
 }) {
   return <FicheSolution params={params} searchParams={searchParams} />;
