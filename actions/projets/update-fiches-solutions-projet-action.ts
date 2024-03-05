@@ -18,10 +18,9 @@ export const updateFichesSolutionsProjetAction = async (
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  if (!hasPermissionToUpdateProjet(projetId, userId)) {
+  if (!hasPermissionToUpdateProjet(projetId, session.user.id)) {
     return { type: "error", message: "UNAUTHORIZED" };
   }
-  console.log("from action ", fichesSolutionsId);
 
   await updateFichesSolutionsProjet(projetId, fichesSolutionsId);
 

@@ -1,5 +1,5 @@
 import { FichesSolutionsProjetEmpty } from ".";
-import Button from "@codegouvfr/react-dsfr/Button";
+
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
 import clsx from "clsx";
@@ -38,13 +38,10 @@ export const FichesSolutionsProjetsSelected = ({
           <span className="text-white text-center">Ajouter des solutions</span>
         </Link>
       </div>
-      {!selectedFichesSolutionsIds ? (
-        <Link className="fr-btn rounded-3xl" href={tableauDeBordUrl}>
-          Retour au tableau de bord
-        </Link>
-      ) : (
-        <Button className="rounded-3xl">Valider ma sélection</Button>
-      )}
+
+      <Link className="fr-btn rounded-3xl" href={tableauDeBordUrl}>
+        Retour au tableau de bord
+      </Link>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getRegionLabelFromCode } from "@/helpers/regions";
@@ -7,6 +9,7 @@ import { APIResponseData } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getClimatLabelFromCode } from "@/helpers/retourExperience/climatRetourExperience";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { useParams } from "next/navigation";
 
 export default function RetourExperienceCard({
   retourExperience,
@@ -15,11 +18,13 @@ export default function RetourExperienceCard({
   retourExperience: APIResponseData<"api::retour-experience.retour-experience">;
   className?: string;
 }) {
+  const { projetId } = useParams();
+  let url = projetId
+    ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_REX(+projetId, retourExperience.attributes.slug)
+    : `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${retourExperience.attributes.slug}`;
+
   return (
-    <Link
-      className={`flex w-72 flex-col pfmv-card min-h-[26rem] ${className}`}
-      href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${retourExperience.attributes.slug}`}
-    >
+    <Link className={`flex w-72 flex-col pfmv-card min-h-[26rem] ${className}`} href={url}>
       <div className="flex w-full h-40">
         <Image
           width={450}

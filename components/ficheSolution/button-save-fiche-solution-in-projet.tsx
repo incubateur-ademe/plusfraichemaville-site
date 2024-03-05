@@ -1,6 +1,6 @@
 "use client";
 
-import { updateFichesSolutionsProjetAction } from "@/actions/projets/update-projet-action";
+import { updateFichesSolutionsProjetAction } from "@/actions/projets/update-fiches-solutions-projet-action";
 import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
 import { FicheSolutionResponse } from "./type";
@@ -27,17 +27,19 @@ export const ButtonSaveFicheSolutionInProjet = ({ ficheSolutionId }: ButtonSaveF
   }
 
   return (
-    <Button
-      onClick={() => {
-        updateFichesSolutionsProjetAction(userId!, projet.id, fichesSolutionsUpdated);
-      }}
-      className={clsx(
-        "!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0",
-        "flex justify-center items-center absolute top-2 right-2",
-      )}
-    >
-      <i className={clsx(`fr-icon--sm ri-add-circle-${isAlreadySaved ? "fill mr-1" : "line"}`)}></i>
-      {isAlreadySaved && "Ajoutée au projet"}
-    </Button>
+    <div>
+      <Button
+        onClick={() => {
+          updateFichesSolutionsProjetAction(userId!, projet.id, fichesSolutionsUpdated);
+        }}
+        className={clsx(
+          "!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0",
+          "flex justify-center items-center absolute top-2 right-2",
+        )}
+      >
+        <i className={clsx(`fr-icon--sm`, isAlreadySaved ? "ri-add-circle-fill mr-1" : "ri-add-circle-line")}></i>
+        {isAlreadySaved && "Ajoutée au projet"}
+      </Button>
+    </div>
   );
 };

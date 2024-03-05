@@ -9,12 +9,6 @@ export const deleteUserProjet = (projetId: number) => {
   });
 };
 
-export const getUserById = async (projetId: number) => {
-  return prismaClient.projet.findUnique({
-    where: { id: projetId },
-  });
-};
-
 export const getUserProjets = async (userId: string) => {
   return prismaClient.projet.findMany({
     where: {
