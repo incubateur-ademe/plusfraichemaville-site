@@ -35,10 +35,7 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
       const { projets, currentProjetId } = get();
       return projets.find((projet) => projet.id === currentProjetId);
     },
-    getProjetById: (projetId) => {
-      const { projets } = get();
-      return projets.find((projet) => projet.id === projetId);
-    },
+    getProjetById: (projetId) => get().projets.find((projet) => projet.id === projetId),
     addOrUpdateProjet: (_projet) => set((state) => ({ projets: upsert(state.projets, _projet) })),
   }));
 };

@@ -1,3 +1,5 @@
-export default function ProjetFichesSolutionsPage() {
-  return <div>Fiches solutions du projet </div>;
+import { FichesSolutionsProjet } from "@/components/fiches-solutions-projet";
+
+export default function FichesSolutionsProjetPage() {
+  return <FichesSolutionsProjet />;
 }

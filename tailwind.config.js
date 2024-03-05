@@ -15,6 +15,8 @@ module.exports = {
       "pfmv-light-blue": "#0080C2",
       "pfmv-dark-blue": "#292A82",
       "pfmv-light-grey": "#CECECE",
+      "pfmv-grey-dashed": "#A6A6A6",
+      "dsfr-background-default-grey-hover": "var(--background-default-grey-hover)",
       "dsfr-background-action-high-success-hover": "var(--background-action-high-success-hover)",
       "dsfr-border-default-blue-france": "var(--border-default-blue-france)",
       "dsfr-background-flat-blue-france": "var(--background-flat-blue-france)",
