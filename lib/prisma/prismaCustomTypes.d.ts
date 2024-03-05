@@ -4,8 +4,8 @@ export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
 }>;
 
-export interface ProjetWithNomCollectivite extends projet {
-  collectivite: { nom: collectivite["nom"] };
+export interface ProjetWithCollectivite extends projet {
+  collectivite: collectivite;
 }
 
 export interface ProjetWithCollectivite extends projet {

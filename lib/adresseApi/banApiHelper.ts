@@ -17,6 +17,7 @@ export const mapAddressApiToCollectiviteAddress = (
 export const mapDBCollectiviteToCollectiviteAddress = (dbCollectivite?: collectivite): AddressCollectivite | null => {
   return dbCollectivite
     ? {
+        id: dbCollectivite.id,
         banId: dbCollectivite.ban_id ?? "",
         nomCollectivite: dbCollectivite.nom ?? "",
         codeInsee: dbCollectivite.code_insee ?? "",

@@ -1,4 +1,5 @@
 import z from "zod";
+import { CollectiviteFormSchema } from "@/forms/collectivite/collectivite-form-schema";
 
 export const ProjetInfoFormSchema = z.object({
   projetId: z.number().optional(),
@@ -10,16 +11,6 @@ export const ProjetInfoFormSchema = z.object({
     .string()
     .min(1, { message: "Veuillez renseigner la date d'échéance souhaitée" })
     .regex(new RegExp("[0-9]{4}-(0?[1-9]|1[012])$"), { message: "Veuillez rentrer une date au format YYYY-MM" }),
-  collectivite: z.object(
-    {
-      banId: z.string(),
-      nomCollectivite: z.string(),
-      codeInsee: z.string(),
-    },
-    {
-      invalid_type_error: "Collectivité renseignée non reconnue",
-      required_error: "Veuillez renseigner la collectivité du projet",
-    },
-  ),
+  collectivite: CollectiviteFormSchema,
 });
 export type ProjetInfoFormData = z.infer<typeof ProjetInfoFormSchema>;
