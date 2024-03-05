@@ -33,7 +33,7 @@ export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
     notifications(result.type, result.message);
 
     if (result.type === "success") {
-      router.push(PFMV_ROUTES.ESPACE_PROJET);
+      router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE);
     }
   };
 

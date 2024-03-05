@@ -2,9 +2,9 @@
 
 import { useProjetsStore } from "./provider";
 import { useLayoutEffect } from "react";
-import { ProjetWithNomCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
-export const ProjetStoreClient = ({ projets }: { projets: ProjetWithNomCollectivite[] }) => {
+export const ProjetStoreClient = ({ projets }: { projets: ProjetWithCollectivite[] }) => {
   const setProjets = useProjetsStore((state) => state.setProjets);
 
   useLayoutEffect(() => {
