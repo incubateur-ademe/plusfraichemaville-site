@@ -20,25 +20,6 @@ export const getUserProjets = async (userId: string) => {
   });
 };
 
-// export const getProjetsByUserCollectivites = async (userId: string): Promise<ProjetWithCollectivite[]> => {
-//   const userWithCollectivites = await prismaClient.user.findUnique({
-//     where: { id: userId },
-//     include: { collectivites: { include: { collectivite: { include: { projet: true } } } } },
-//   });
-//
-//   if (!userWithCollectivites) return [];
-//
-//   const projets = userWithCollectivites.collectivites.reduce((acc, { collectivite }) => {
-//     const collectiviteProjets = collectivite.projet.map((projet) => ({
-//       ...projet,
-//       collectivite: true,
-//     }));
-//     return acc.concat(collectiviteProjets);
-//   }, [] as ProjetWithCollectivite[]);
-//
-//   return projets;
-// };
-
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.findUnique({
     where: {

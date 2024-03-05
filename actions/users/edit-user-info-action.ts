@@ -9,7 +9,7 @@ import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
 import { captureError } from "@/lib/sentry/sentryCustomMessage";
-import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/helpers";
+import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },
