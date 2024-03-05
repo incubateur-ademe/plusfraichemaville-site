@@ -16,6 +16,7 @@ export const ButtonSaveFicheSolutionInProjet = ({ ficheSolutionId }: ButtonSaveF
   const { projetId } = useParams();
   const userId = useSession().data?.user.id;
   const projet = useProjetsStore((state) => state.getProjetById(+projetId));
+  const updateStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const fichesSolutionsIdSaved = projet?.fiches_solutions_id || [];
   const isAlreadySaved = fichesSolutionsIdSaved.includes(+ficheSolutionId);
   const fichesSolutionsUpdated = isAlreadySaved
@@ -29,8 +30,11 @@ export const ButtonSaveFicheSolutionInProjet = ({ ficheSolutionId }: ButtonSaveF
   return (
     <div>
       <Button
-        onClick={() => {
-          updateFichesSolutionsProjetAction(userId!, projet.id, fichesSolutionsUpdated);
+        onClick={async () => {
+          const updatedProjet = await updateFichesSolutionsProjetAction(projet.id, fichesSolutionsUpdated);
+          if (updatedProjet.projet) {
+            updateStore(updatedProjet.projet);
+          }
         }}
         className={clsx(
           "!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0",

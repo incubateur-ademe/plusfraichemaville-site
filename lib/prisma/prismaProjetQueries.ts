@@ -1,13 +1,20 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { projet } from "@prisma/client";
+import { ProjetWithCollectivite } from "./prismaCustomTypes";
 
-export const updateFichesSolutionsProjet = (projetId: number, fichesSolutionsId: number[]) => {
+export const updateFichesSolutionsProjet = (
+  projetId: number,
+  fichesSolutionsId: number[],
+): Promise<ProjetWithCollectivite | null> => {
   return prismaClient.projet.update({
     where: {
       id: projetId,
     },
     data: {
       fiches_solutions_id: fichesSolutionsId,
+    },
+    include: {
+      collectivite: true,
     },
   });
 };
