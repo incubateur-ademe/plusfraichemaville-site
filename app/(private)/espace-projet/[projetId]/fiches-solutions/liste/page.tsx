@@ -1,6 +1,6 @@
 import { FichesSolutions } from "@/components/ficheSolution/fiches-solutions";
 
-export default async function FichesSolutionsPage({
+export default async function FichesSolutionsListePage({
   searchParams,
 }: {
   searchParams: {
