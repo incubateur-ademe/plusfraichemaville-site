@@ -2,17 +2,24 @@
 import Image from "next/image";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React, { PropsWithChildren } from "react";
-import { APIResponseData } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
+import useSWR from "swr";
 
 export default function FicheSolutionEstimationCard({
-  ficheSolution,
+  ficheSolutionId,
   children,
   onClick,
 }: {
-  ficheSolution: APIResponseData<"api::fiche-solution.fiche-solution">;
+  ficheSolutionId: number;
   onClick?: () => void;
 } & PropsWithChildren) {
+  const swrKey = `ficheSolution-${ficheSolutionId}`;
+  const fetcher = () => getFicheSolutionById(`${ficheSolutionId}`);
+  const { data: ficheSolution } = useSWR(swrKey, fetcher);
+  if (!ficheSolution) {
+    return null;
+  }
   const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
   return (
     <div className="flex w-60 flex-col pfmv-card md:ml-0 cursor-pointer relative" onClick={onClick}>

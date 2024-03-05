@@ -1,14 +1,12 @@
 "use client";
 import { useProjetsStore } from "@/stores/projets/provider";
-import { useShallow } from "zustand/react/shallow";
 import { EstimationInfoForm } from "@/forms/estimation/EstimationInfoForm";
 import Button from "@codegouvfr/react-dsfr/Button";
 import React from "react";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default function CreateEstimationPage() {
-  const { getCurrentProjet } = useProjetsStore(useShallow((state) => state));
-  const currentProjet = getCurrentProjet();
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   if (!currentProjet) {
     return null;
   }
