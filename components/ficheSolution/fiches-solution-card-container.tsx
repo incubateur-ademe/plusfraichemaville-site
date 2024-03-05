@@ -23,7 +23,7 @@ export const FichesSolutionsCardsContainer = ({ fichesSolutions }: { fichesSolut
                 <ButtonSaveFicheSolution
                   ficheSolutionId={ficheSolution.id}
                   label={false}
-                  projectName={projet?.nom!}
+                  projectName={projet?.nom ?? ""}
                   className={"flex justify-center items-center absolute top-2 right-2"}
                 />
               )}

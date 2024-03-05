@@ -6,15 +6,15 @@ import BookmarkedFicheSolutionByProject from "@/components/favoris/BookmarkedFic
 import Button from "@codegouvfr/react-dsfr/Button";
 import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
-import { useSavedProjets } from "@/hooks/use-saved-projets";
+import { UseSavedProjets } from "@/hooks/use-saved-projets/use-saved-projets";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
+  // useSavedProjets();
   const [bookmarkedFichesSolutions] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
-  useSavedProjets();
   return (
     isClient && (
       <div
@@ -23,6 +23,7 @@ export default function Page() {
           place-content-center"
       >
         <SignInCard message="save" />
+        <UseSavedProjets />
         {bookmarkedFichesSolutions.length === 0 ? (
           <div>
             <div className="fr-h3">Mes solutions sauvegardées</div>

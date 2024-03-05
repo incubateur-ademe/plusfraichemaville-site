@@ -1,4 +1,5 @@
 export const success = {
+  BOOKMARKED_SAVED_IN_DB: "Les fiches solutions ont bien été sauvegardées.",
   PROJET_DELETE: "Votre projet a bien été supprimé.",
   PROJETS_LOADED: "Les projets ont été chargés.",
   PROJET_UPSERTED: "Les informations du projet ont bien été enregistrées.",
