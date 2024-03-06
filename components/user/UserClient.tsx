@@ -16,7 +16,7 @@ export const UserClient = () => {
       if (data) {
         try {
           const fs = await getBookmarkedFichesSolutionsAction(data?.user.id);
-          setBookmarkedFichesSolutions(fs.savedBookmarkedFichesSolutions);
+          setBookmarkedFichesSolutions(fs.savedBookmarkedFichesSolutions ?? []);
         } catch (error) {
           console.log(error);
         }

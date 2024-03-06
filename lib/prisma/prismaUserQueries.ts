@@ -62,7 +62,19 @@ export const saveBookmarkedFicheSolutionsByUser = async (
     newBookmarkedFichesSolutions,
   );
 
-  const updateBookmarkedFichesSolution = await prismaClient.user.update({
+  const updateBookmarkedFichesSolution = await updateBookmarkedFichesSolutions(
+    userId,
+    updatedBookMarkedFichesSolutions,
+  );
+
+  return updateBookmarkedFichesSolution;
+};
+
+export const updateBookmarkedFichesSolutions = async (
+  userId: string,
+  updatedBookMarkedFichesSolutions: ProjectBookmarks[],
+) => {
+  const updated = await prismaClient.user.update({
     where: {
       id: userId,
     },
@@ -70,8 +82,7 @@ export const saveBookmarkedFicheSolutionsByUser = async (
       selection_fiches_solutions: updatedBookMarkedFichesSolutions,
     },
   });
-
-  return updateBookmarkedFichesSolution.selection_fiches_solutions;
+  return updated.selection_fiches_solutions as ProjectBookmarks[];
 };
 
 export const getProjetsByUserCollectivites = async (userId: string): Promise<ProjetWithNomCollectivite[]> => {
