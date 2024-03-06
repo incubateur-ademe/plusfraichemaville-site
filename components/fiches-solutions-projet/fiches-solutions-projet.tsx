@@ -3,12 +3,10 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { FichesSolutionsProjetHeader } from ".";
 import { FichesSolutionsProjetsSelected } from "./fiches-solutions-projet-selected";
-import { useParams } from "next/navigation";
 import { AllSolutionsBoard } from "../common/all-solutions-board";
 
 export const FichesSolutionsProjet = () => {
-  const { projetId } = useParams();
-  const projet = useProjetsStore((state) => state.getProjetById(+projetId));
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
   const selectedFichesSolutionsIds = projet?.fiches_solutions_id;
 
   return (

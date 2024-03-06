@@ -5,16 +5,13 @@ import {
   unBookmarkFicheSolution,
   addFicheSolutionBookmark,
 } from "@/helpers/bookmarkedFicheSolutionHelper";
+
 import { useUserStore } from "@/stores/user";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
-export const useConnectedSaveBookmarksButton = (
-  ficheSolutionId: number,
-  projectName: string,
-  openModal: () => void,
-) => {
+export const useSaveBookmarksButton = (ficheSolutionId: number, projectName: string, openModal: () => void) => {
   const session = useSession();
   const isAuthenticated = session.status === "authenticated";
 
@@ -57,5 +54,5 @@ export const useConnectedSaveBookmarksButton = (
     }
   };
 
-  return { isBookmarked, changeFavorite };
+  return { isBookmarked, changeFavorite, isAuthenticated };
 };
