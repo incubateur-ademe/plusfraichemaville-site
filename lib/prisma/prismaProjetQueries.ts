@@ -1,11 +1,11 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { projet } from "@prisma/client";
-import { ProjetWithCollectivite } from "./prismaCustomTypes";
+import { ProjetWithRelations } from "./prismaCustomTypes";
 
 export const updateFichesSolutionsProjet = (
   projetId: number,
   fichesSolutionsId: number[],
-): Promise<ProjetWithCollectivite | null> => {
+): Promise<ProjetWithRelations | null> => {
   return prismaClient.projet.update({
     where: {
       id: projetId,
@@ -15,6 +15,7 @@ export const updateFichesSolutionsProjet = (
     },
     include: {
       collectivite: true,
+      estimations: true,
     },
   });
 };
@@ -23,21 +24,6 @@ export const getProjetById = async (projetId: number): Promise<projet | null> =>
   return prismaClient.projet.findUnique({
     where: {
       id: projetId,
-    },
-  });
-};
-
-export const getUserProjetById = async (projetId: number) => {
-  return prismaClient.projet.findUnique({
-    where: {
-      id: projetId,
-    },
-    include: {
-      collectivite: {
-        select: {
-          nom: true,
-        },
-      },
     },
   });
 };
@@ -84,6 +70,7 @@ export const createOrUpdateProjet = async ({
     },
     include: {
       collectivite: true,
+      estimations: true,
     },
   });
 };

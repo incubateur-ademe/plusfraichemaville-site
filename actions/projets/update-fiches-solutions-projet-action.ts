@@ -7,12 +7,12 @@ import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { updateFichesSolutionsProjet } from "@/lib/prisma/prismaProjetQueries";
-import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 
 export const updateFichesSolutionsProjetAction = async (
   projetId: number,
   fichesSolutionsId: number[],
-): Promise<ResponseAction<{ projet: ProjetWithCollectivite | null }>> => {
+): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", projet: null };

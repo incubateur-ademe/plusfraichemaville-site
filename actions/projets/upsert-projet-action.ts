@@ -6,13 +6,13 @@ import { ResponseAction } from "../actions-types";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/forms/projet/ProjetInfoFormSchema";
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { createOrUpdateProjet } from "@/lib/prisma/prismaProjetQueries";
-import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
-): Promise<ResponseAction<{ updatedProjet?: ProjetWithCollectivite }>> => {
+): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };

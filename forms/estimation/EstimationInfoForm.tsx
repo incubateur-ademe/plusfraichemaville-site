@@ -1,7 +1,7 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { estimation } from "@prisma/client";
 import clsx from "clsx";
 import FicheSolutionEstimationCard from "@/components/ficheSolution/FicheSolutionEstimationCard";
@@ -10,7 +10,7 @@ import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { createEstimationAction } from "@/actions/estimation/create-estimation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-export const EstimationInfoForm = ({ projet }: { projet: ProjetWithCollectivite; estimation?: estimation }) => {
+export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
     if (currentFicheSolutionIds.indexOf(ficheSolutionId) === -1)
