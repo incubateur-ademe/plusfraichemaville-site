@@ -1,7 +1,7 @@
 import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper";
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { ProjetWithNomCollectivite, UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
 export const deleteUserProjet = (projetId: number) => {
   return prismaClient.projet.delete({
@@ -11,23 +11,13 @@ export const deleteUserProjet = (projetId: number) => {
   });
 };
 
-export const getUserById = async (projetId: number) => {
-  return prismaClient.projet.findUnique({
-    where: { id: projetId },
-  });
-};
-
 export const getUserProjets = async (userId: string) => {
   return prismaClient.projet.findMany({
     where: {
       created_by: userId,
     },
     include: {
-      collectivite: {
-        select: {
-          nom: true,
-        },
-      },
+      collectivite: true,
     },
   });
 };
@@ -83,25 +73,6 @@ export const updateBookmarkedFichesSolutions = async (
     },
   });
   return updated.selection_fiches_solutions as ProjectBookmarks[];
-};
-
-export const getProjetsByUserCollectivites = async (userId: string): Promise<ProjetWithNomCollectivite[]> => {
-  const userWithCollectivites = await prismaClient.user.findUnique({
-    where: { id: userId },
-    include: { collectivites: { include: { collectivite: { include: { projet: true } } } } },
-  });
-
-  if (!userWithCollectivites) return [];
-
-  const projets = userWithCollectivites.collectivites.reduce((acc, { collectivite }) => {
-    const collectiviteProjets = collectivite.projet.map((projet) => ({
-      ...projet,
-      collectivite: { nom: collectivite.nom },
-    }));
-    return acc.concat(collectiviteProjets);
-  }, [] as ProjetWithNomCollectivite[]);
-
-  return projets;
 };
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {

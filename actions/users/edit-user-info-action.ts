@@ -9,8 +9,7 @@ import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
 import { captureError } from "@/lib/sentry/sentryCustomMessage";
-import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
-import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
+import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },
@@ -32,17 +31,13 @@ export const editUserInfoAction = async (
     if (prismaUser?.collectivites[0] && prismaUser?.collectivites[0].collectivite.ban_id !== data.collectivite.banId) {
       return { type: "error", message: "CHANGE_COLLECTIVITE_ERROR" };
     }
-    const entitiesFromBan = await fetchCollectiviteFromBanApi(data.collectivite.codeInsee, 50);
-    let collectiviteToUse = entitiesFromBan.find((address) => address.banId === data.collectivite.banId);
-    const collectivite = collectiviteToUse
-      ? await getOrCreateCollectivite(collectiviteToUse, session.user.id)
-      : await createCollectiviteByName(data.collectivite.nomCollectivite, session.user.id);
+    const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
     const updatedUser = await updateUser({
       userId: data.userId,
       userPrenom: data.prenom,
       userNom: data.nom,
       userPoste: data.poste,
-      collectiviteId: collectivite.id,
+      collectiviteId: collectiviteId,
     });
     revalidatePath(PFMV_ROUTES.MON_PROFIL);
     return { type: "success", message: "USER_UPDATED", updatedUser };

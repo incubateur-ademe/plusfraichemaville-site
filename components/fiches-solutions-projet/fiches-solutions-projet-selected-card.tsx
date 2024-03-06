@@ -1,8 +1,7 @@
 import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import useSWR from "swr";
-import FicheSolutionFullCard from "../ficheSolution/FicheSolutionFullCard";
-import { ButtonSaveFicheSolutionInProjet } from "../ficheSolution/button-save-fiche-solution-in-projet";
 import { FicheSolutionResponse } from "../ficheSolution/type";
+import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
 
 export const FichesSolutionsProjetsSelectedCard = ({
   ficheSolutionId,
@@ -16,10 +15,5 @@ export const FichesSolutionsProjetsSelectedCard = ({
   if (!data) {
     return null;
   }
-  return (
-    <div className="relative">
-      <FicheSolutionFullCard ficheSolution={data.attributes} />
-      <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolutionId} />
-    </div>
-  );
+  return <FicheSolutionCardWithUserInfo ficheSolution={data} projectName="" />;
 };
