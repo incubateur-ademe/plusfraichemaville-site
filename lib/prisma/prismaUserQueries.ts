@@ -32,6 +32,19 @@ export const getUserProjets = async (userId: string) => {
   });
 };
 
+export const getBookmarkedFichesSolutions = async (userId: string): Promise<ProjectBookmarks[] | undefined> => {
+  const user = await prismaClient.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      selection_fiches_solutions: true,
+    },
+  });
+
+  return user?.selection_fiches_solutions as ProjectBookmarks[];
+};
+
 export const saveBookmarkedFicheSolutionsByUser = async (
   userId: string,
   newBookmarkedFichesSolutions: ProjectBookmarks[],
@@ -42,18 +55,19 @@ export const saveBookmarkedFicheSolutionsByUser = async (
       selection_fiches_solutions: true,
     },
   });
-
-  const alreadySavedBookmarFichesSolutions =
-    currentSavedFichesSolutions?.selection_fiches_solutions as ProjectBookmarks[];
+  const oldSavedBookmarFichesSolutions =
+    (currentSavedFichesSolutions?.selection_fiches_solutions as ProjectBookmarks[]) ?? [];
+  const updatedBookMarkedFichesSolutions = mergeBookmarkedFichesSolutions(
+    oldSavedBookmarFichesSolutions,
+    newBookmarkedFichesSolutions,
+  );
 
   const updateBookmarkedFichesSolution = await prismaClient.user.update({
     where: {
       id: userId,
     },
     data: {
-      selection_fiches_solutions: alreadySavedBookmarFichesSolutions
-        ? mergeBookmarkedFichesSolutions(alreadySavedBookmarFichesSolutions, newBookmarkedFichesSolutions)
-        : newBookmarkedFichesSolutions,
+      selection_fiches_solutions: updatedBookMarkedFichesSolutions,
     },
   });
 

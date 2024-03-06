@@ -5,23 +5,25 @@ import { saveBookmarkedFichesSolutionsProjetAction } from "@/actions/users/save-
 import { useSession } from "next-auth/react";
 import { convertBookmarkIdsToNumbers } from "@/app/mon-projet/favoris/helper";
 import { useEffect } from "react";
+import { useUserStore } from "@/stores/user";
 
-// let init = false;
+let init = false;
 
-export const useSavedProjets = () => {
+export const useBookmarkedFichesSolutions = () => {
   const session = useSession();
-
+  const setBookmarkedFichesSolutions = useUserStore((state) => state.setBookmarkedFichesSolutions);
   useEffect(() => {
     const fetchAndSaveBookmarks = async () => {
       if (typeof window !== "undefined") {
         const storedBookmarks = localStorage.getItem(BOOKMARK_FS_KEY);
-        if (!storedBookmarks) {
-          return null;
-        } else if (storedBookmarks && session.data && session.status === "authenticated") {
+        if (storedBookmarks && session.data && session.status === "authenticated" && !init) {
           const parsedBookmarks = convertBookmarkIdsToNumbers(JSON.parse(storedBookmarks));
           try {
             const saved = await saveBookmarkedFichesSolutionsProjetAction(session.data?.user.id, parsedBookmarks);
-            if (saved.updatedBookmarkedFichesSolutions?.length) {
+            init = true;
+
+            if (saved.updatedBookmarkedFichesSolutions && saved.updatedBookmarkedFichesSolutions?.length > 0) {
+              setBookmarkedFichesSolutions(saved.updatedBookmarkedFichesSolutions);
               localStorage.clear();
             }
           } catch (error) {
@@ -32,10 +34,10 @@ export const useSavedProjets = () => {
     };
 
     fetchAndSaveBookmarks();
-  }, [session]);
+  }, [session, setBookmarkedFichesSolutions]);
 };
 
-export const UseSavedProjets = () => {
-  useSavedProjets();
+export const UseBookmarkedFichesSolutions = () => {
+  useBookmarkedFichesSolutions();
   return null;
 };

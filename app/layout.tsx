@@ -13,6 +13,8 @@ import MatomoScript from "@/components/matomo/MatomoScript";
 import MainLayoutProviders from "@/components/layout/MainLayoutProviders";
 import { ProjetStoreServer } from "@/stores/projets/server";
 
+import { UserClient } from "@/components/user";
+
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
   variable: "--font-xtra-bold",
@@ -54,6 +56,8 @@ export default async function RootLayout({ children }: { children: ReactElement 
       <body>
         <MainLayoutProviders lang={lang}>
           <ProjetStoreServer />
+          <UserClient />
+
           <AppHeader />
           <Toaster position="bottom-left" />
           <div className={`${xtra_bold.variable}`}>{children}</div>

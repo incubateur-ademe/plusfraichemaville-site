@@ -6,15 +6,21 @@ import BookmarkedFicheSolutionByProject from "@/components/favoris/BookmarkedFic
 import Button from "@codegouvfr/react-dsfr/Button";
 import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
-import { UseSavedProjets } from "@/hooks/use-saved-projets/use-saved-projets";
+import { useUserStore } from "@/stores/user";
+import { useSession } from "next-auth/react";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
     setIsClient(true);
   }, []);
-  // useSavedProjets();
-  const [bookmarkedFichesSolutions] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
+  const session = useSession();
+  const userBookmarkedFichesSolutions = useUserStore((state) => state.bookmarkedFichesSolutions);
+  const [bookmarkedFichesSolutionsInLocalStorage] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
+
+  const bookmarkedFichesSolutions =
+    session.status === "authenticated" ? userBookmarkedFichesSolutions : bookmarkedFichesSolutionsInLocalStorage;
+
   return (
     isClient && (
       <div
@@ -23,8 +29,7 @@ export default function Page() {
           place-content-center"
       >
         <SignInCard message="save" />
-        <UseSavedProjets />
-        {bookmarkedFichesSolutions.length === 0 ? (
+        {bookmarkedFichesSolutions && bookmarkedFichesSolutions.length === 0 ? (
           <div>
             <div className="fr-h3">Mes solutions sauvegardées</div>
             <div>{"Retrouvez ici vos solutions sauvegardées."}</div>
@@ -39,6 +44,7 @@ export default function Page() {
             </Button>
           </div>
         ) : (
+          bookmarkedFichesSolutions &&
           bookmarkedFichesSolutions
             .sort((a, b) => b.projectName.localeCompare(a.projectName))
             .map((pb) => (
