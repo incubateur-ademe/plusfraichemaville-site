@@ -16,11 +16,11 @@ export const useConnectedSaveBookmarksButton = (
   openModal: () => void,
 ) => {
   const session = useSession();
+  const isAuthenticated = session.status === "authenticated";
+
   const [disconnectedBookmarkedFichesSolutions, setDisconnectedBookmarkedFichesSolutions] = useLocalStorage<
     ProjectBookmarks[]
   >(BOOKMARK_FS_KEY, []);
-
-  const isAuthenticated = session.status === "authenticated";
 
   const ficheSolutionIdConverted = isAuthenticated ? +ficheSolutionId : ficheSolutionId;
 
