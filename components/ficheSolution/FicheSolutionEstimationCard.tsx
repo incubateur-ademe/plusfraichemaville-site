@@ -10,9 +10,11 @@ export default function FicheSolutionEstimationCard({
   ficheSolutionId,
   children,
   onClick,
+  className,
 }: {
   ficheSolutionId: number;
   onClick?: () => void;
+  className?: string;
 } & PropsWithChildren) {
   const swrKey = `ficheSolution-${ficheSolutionId}`;
   const fetcher = () => getFicheSolutionById(`${ficheSolutionId}`);
@@ -22,7 +24,7 @@ export default function FicheSolutionEstimationCard({
   }
   const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
   return (
-    <div className="flex w-60 flex-col pfmv-card md:ml-0 cursor-pointer relative" onClick={onClick}>
+    <div className={`flex w-60 flex-col md:ml-0 relative ${className}`} onClick={onClick}>
       <div className="flex w-full h-32">
         <Image
           width={450}
@@ -46,7 +48,7 @@ export default function FicheSolutionEstimationCard({
         </div>
         <div className={"text-sm text-dsfr-text-title-grey mt-4"}>{ficheSolution.attributes.description_courte}</div>
         <div className={"mt-auto"}>
-          <div className="mt-4 flex place-content-center">{children}</div>
+          {children}
         </div>
       </div>
     </div>

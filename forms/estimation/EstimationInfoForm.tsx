@@ -47,26 +47,29 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
         <div className="mb-6 text-lg">{"Choisissez les solutions à estimer pour votre simulation"}</div>
         <div className={clsx("flex flex-wrap gap-6 mb-12")}>
           {projet.fiches_solutions_id?.map((ficheSolutionId) => (
-            <FicheSolutionEstimationCard
-              key={ficheSolutionId}
-              ficheSolutionId={ficheSolutionId}
-              onClick={() => handleFicheSolutionChange(ficheSolutionId.toString())}
-            >
-              <Checkbox
-                className="m-auto"
-                {...form.register("ficheSolutionIds")}
-                options={[
-                  {
-                    label: null,
-                    nativeInputProps: {
-                      value: ficheSolutionId.toString(),
-                      onChange: () => handleFicheSolutionChange(ficheSolutionId.toString()),
-                    },
-                  },
-                ]}
-              />
-            </FicheSolutionEstimationCard>
-          ))}
+              <FicheSolutionEstimationCard
+                  key={ficheSolutionId}
+                  ficheSolutionId={ficheSolutionId}
+                  onClick={() => handleFicheSolutionChange(ficheSolutionId.toString())}
+                  className="pfmv-card cursor-pointer"
+              >
+                <div className="mt-4 flex place-content-center">
+                  <Checkbox
+                      className="m-auto"
+                      {...form.register("ficheSolutionIds")}
+                      options={[
+                        {
+                          label: null,
+                          nativeInputProps: {
+                            value: ficheSolutionId.toString(),
+                            onChange: () => handleFicheSolutionChange(ficheSolutionId.toString()),
+                          },
+                        },
+                      ]}
+                  />
+                </div>
+              </FicheSolutionEstimationCard>
+            ))}
         </div>
         <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
           {"Faire une estimation"}
