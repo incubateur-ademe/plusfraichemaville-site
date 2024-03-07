@@ -47,9 +47,7 @@ export default function FicheSolutionEstimationCard({
           {ficheSolution.attributes.titre}
         </div>
         <div className={"text-sm text-dsfr-text-title-grey mt-4"}>{ficheSolution.attributes.description_courte}</div>
-        <div className={"mt-auto"}>
-          {children}
-        </div>
+        <div className={"mt-auto"}>{children}</div>
       </div>
     </div>
   );

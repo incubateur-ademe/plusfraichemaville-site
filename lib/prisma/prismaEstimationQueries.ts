@@ -1,6 +1,22 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { estimation } from "@prisma/client";
 
+export const getEstimationById = async (estimationId: number): Promise<estimation | null> => {
+  return prismaClient.estimation.findUnique({
+    where: {
+      id: estimationId,
+    },
+  });
+};
+
+export const deleteEstimation = (estimationId: number) => {
+  return prismaClient.estimation.delete({
+    where: {
+      id: estimationId,
+    },
+  });
+};
+
 export const createEstimation = async (
   projetId: number,
   fichesSolutionId: number[],
