@@ -1,6 +1,7 @@
 import { useUserStore } from "@/stores/user";
 import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { FichesSolutionProjetBookmarksConatiner } from "./fiches-solutions-projet-bookmarks-container";
+
 const codeToLabelMap: { [code: string]: string } = {
   rondpoint: "Rond point",
   batiment: "Bâtiment",
