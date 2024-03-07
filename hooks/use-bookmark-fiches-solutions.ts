@@ -2,24 +2,26 @@
 
 import { BOOKMARK_FS_KEY } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { saveBookmarkedFichesSolutionsUserAction } from "@/actions/users/save-bookmarked-fs-action";
-import { useSession } from "next-auth/react";
 import { convertBookmarkIdsToNumbers } from "@/app/mon-projet/favoris/helper";
 import { useEffect } from "react";
 import { useUserStore } from "@/stores/user/provider";
+import { getBookmarkedFichesSolutionsAction } from "@/actions/users/get-bookmarked-fs-action";
 
 let init = false;
 
 export const useBookmarkedFichesSolutions = () => {
-  const session = useSession();
+  const user = useUserStore((state) => state.userInfos);
+
   const setBookmarkedFichesSolutions = useUserStore((state) => state.setBookmarkedFichesSolutions);
   useEffect(() => {
     const fetchAndSaveBookmarks = async () => {
       if (typeof window !== "undefined") {
         const storedBookmarks = localStorage.getItem(BOOKMARK_FS_KEY);
-        if (storedBookmarks && session.data && session.status === "authenticated" && !init) {
+
+        if (storedBookmarks && user?.id && !init) {
           const parsedBookmarks = convertBookmarkIdsToNumbers(JSON.parse(storedBookmarks));
           try {
-            const saved = await saveBookmarkedFichesSolutionsUserAction(session.data?.user.id, parsedBookmarks);
+            const saved = await saveBookmarkedFichesSolutionsUserAction(user.id, parsedBookmarks);
             init = true;
 
             if (saved.updatedBookmarkedFichesSolutions && saved.updatedBookmarkedFichesSolutions?.length > 0) {
@@ -29,15 +31,27 @@ export const useBookmarkedFichesSolutions = () => {
           } catch (error) {
             console.warn(error);
           }
+        } else {
+          if (user?.id) {
+            try {
+              const savedBookmarks = await getBookmarkedFichesSolutionsAction(user.id);
+              if (savedBookmarks.savedBookmarkedFichesSolutions) {
+                setBookmarkedFichesSolutions(savedBookmarks.savedBookmarkedFichesSolutions);
+              }
+            } catch (error) {
+              console.warn(error);
+            }
+          }
         }
       }
     };
 
     fetchAndSaveBookmarks();
-  }, [session, setBookmarkedFichesSolutions]);
+  }, [user, setBookmarkedFichesSolutions]);
 };
 
 export const UseBookmarkedFichesSolutions = () => {
   useBookmarkedFichesSolutions();
+
   return null;
 };
