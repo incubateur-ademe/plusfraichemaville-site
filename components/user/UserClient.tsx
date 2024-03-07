@@ -1,7 +1,7 @@
 "use client";
 
 import { getBookmarkedFichesSolutionsAction } from "@/actions/users/get-bookmarked-fs-action";
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 

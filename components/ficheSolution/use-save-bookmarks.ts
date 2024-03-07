@@ -5,14 +5,14 @@ import {
   unBookmarkFicheSolution,
   addFicheSolutionBookmark,
 } from "@/helpers/bookmarkedFicheSolutionHelper";
-
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 export const useSaveBookmarksButton = (ficheSolutionId: number, projectName: string, openModal: () => void) => {
   const session = useSession();
+
   const isAuthenticated = session.status === "authenticated";
 
   const [disconnectedBookmarkedFichesSolutions, setDisconnectedBookmarkedFichesSolutions] = useLocalStorage<

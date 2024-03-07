@@ -6,7 +6,7 @@ import BookmarkedFicheSolutionByProject from "@/components/favoris/BookmarkedFic
 import Button from "@codegouvfr/react-dsfr/Button";
 import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
 
 export default function Page() {
