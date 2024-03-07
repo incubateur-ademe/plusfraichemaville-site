@@ -1,7 +1,7 @@
 "use client";
 
 import { useProjetsStore } from "@/stores/projets/provider";
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from "@/stores/user/provider";
 import { useParams } from "next/navigation";
 
 export const TableauDeBordSuiviCardWithList = () => {

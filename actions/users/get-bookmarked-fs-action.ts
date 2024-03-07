@@ -1,8 +1,6 @@
 "use server";
 
-import { PFMV_ROUTES } from "@/helpers/routes";
 import { auth } from "@/lib/next-auth/auth";
-import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { getBookmarkedFichesSolutions } from "@/lib/prisma/prismaUserQueries";
@@ -21,6 +19,5 @@ export const getBookmarkedFichesSolutionsAction = async (
 
   const savedBookmarkedFichesSolutions = await getBookmarkedFichesSolutions(userId);
 
-  revalidatePath(PFMV_ROUTES.MON_PROFIL);
-  return { type: "success", message: "USER_UPDATED", savedBookmarkedFichesSolutions };
+  return { savedBookmarkedFichesSolutions };
 };
