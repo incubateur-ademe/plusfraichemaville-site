@@ -4,13 +4,19 @@ import React from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 
-import { useConnectedSaveBookmarksButton } from "./use-save-bookmarks";
+import { useSaveBookmarksButton } from "./use-save-bookmarks";
+import { ModalSaveFicheSolutionDisconnected } from "./modals/modal-save-fiche-solution-disconnected";
+import { ModalSaveFichesSolutionsConnected } from "./modals/modal-save-fiche-solution-connected";
 
 const modal = createModal({
   id: "bookmark-modal",
   isOpenedByDefault: false,
 });
 
+export type ModalSaveFicheSolutionProps = {
+  modal: typeof modal;
+  ficheSolutionId?: number;
+};
 export default function ButtonSaveFicheSolution({
   ficheSolutionId,
   projectName,
@@ -22,7 +28,11 @@ export default function ButtonSaveFicheSolution({
   projectName: string;
   className?: string;
 }) {
-  const { isBookmarked, changeFavorite } = useConnectedSaveBookmarksButton(ficheSolutionId, projectName, modal.open);
+  const { isBookmarked, changeFavorite, isAuthenticated } = useSaveBookmarksButton(
+    ficheSolutionId,
+    projectName,
+    modal.open,
+  );
 
   return (
     <div>
@@ -48,26 +58,11 @@ export default function ButtonSaveFicheSolution({
             </div>
           )}
         </div>
-        <modal.Component
-          title="Solution sauvegardée dans mon espace Projet"
-          iconId="fr-icon-arrow-right-line"
-          size="large"
-        >
-          <div>Retrouvez toutes vos solutions mises en favoris dans votre espace Projet.</div>
-          <div className="mt-6">
-            <Button className={"rounded-3xl text-sm mr-6 mb-2"} onClick={() => modal.close()} size="small">
-              Continuer ma lecture
-            </Button>
-            <Button
-              priority="secondary"
-              className={"rounded-3xl text-sm"}
-              linkProps={{ href: "/mon-projet/favoris", target: "_self" }}
-              size="small"
-            >
-              Ma sélection
-            </Button>
-          </div>
-        </modal.Component>
+        {isAuthenticated ? (
+          <ModalSaveFichesSolutionsConnected ficheSolutionId={ficheSolutionId} modal={modal} />
+        ) : (
+          <ModalSaveFicheSolutionDisconnected modal={modal} />
+        )}
       </>
     </div>
   );
