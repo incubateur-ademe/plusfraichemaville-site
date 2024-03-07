@@ -14,6 +14,7 @@ import MainLayoutProviders from "@/components/layout/MainLayoutProviders";
 import { ProjetStoreServer } from "@/stores/projets/server";
 
 import { UserStoreServer } from "@/stores/user/server";
+import { UseBookmarkedFichesSolutions } from "@/hooks/use-bookmark-fiches-solutions";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -57,6 +58,7 @@ export default async function RootLayout({ children }: { children: ReactElement 
         <MainLayoutProviders lang={lang}>
           <ProjetStoreServer />
           <UserStoreServer />
+          <UseBookmarkedFichesSolutions />
 
           <AppHeader />
           <Toaster position="bottom-left" />
