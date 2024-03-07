@@ -9,6 +9,7 @@ import { EstimationFormData, EstimationFormSchema } from "@/forms/estimation/Est
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { createEstimationAction } from "@/actions/estimation/create-estimation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FicheSolutionSmallCardContainer } from "@/components/ficheSolution/fiche-solution-small-card-container";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithCollectivite; estimation?: estimation }) => {
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
@@ -43,8 +44,11 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithCollectivite;
 
   return (
     <form id="create-estimation" onSubmit={form.handleSubmit(onSubmit)}>
-      <div className={clsx("pfmv-strong-card pt-12 pb-12 px-12")}>
-        <div className="mb-6 text-lg">{"Choisissez les solutions à estimer pour votre simulation"}</div>
+      <FicheSolutionSmallCardContainer
+        title="Estimation 1"
+        subtitle="Choisissez les solutions à estimer pour votre simulation"
+        className="pfmv-strong-card "
+      >
         <div className={clsx("flex flex-wrap gap-6 mb-12")}>
           {projet.fiches_solutions_id?.map((ficheSolutionId) => (
             <FicheSolutionEstimationCard
@@ -71,7 +75,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithCollectivite;
         <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
           {"Faire une estimation"}
         </Button>
-      </div>
+      </FicheSolutionSmallCardContainer>
     </form>
   );
 };

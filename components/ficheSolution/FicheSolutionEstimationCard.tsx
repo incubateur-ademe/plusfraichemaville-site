@@ -1,10 +1,7 @@
 "use client";
-import Image from "next/image";
-import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
+
 import React, { PropsWithChildren } from "react";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
-import useSWR from "swr";
+import { FicheSolutionSmallCard } from "./fiche-solution-small-card";
 
 export default function FicheSolutionEstimationCard({
   ficheSolutionId,
@@ -14,41 +11,9 @@ export default function FicheSolutionEstimationCard({
   ficheSolutionId: number;
   onClick?: () => void;
 } & PropsWithChildren) {
-  const swrKey = `ficheSolution-${ficheSolutionId}`;
-  const fetcher = () => getFicheSolutionById(`${ficheSolutionId}`);
-  const { data: ficheSolution } = useSWR(swrKey, fetcher);
-  if (!ficheSolution) {
-    return null;
-  }
-  const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
   return (
-    <div className="flex w-60 flex-col pfmv-card md:ml-0 cursor-pointer relative" onClick={onClick}>
-      <div className="flex w-full h-32">
-        <Image
-          width={450}
-          height={300}
-          src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={ficheSolution.attributes.titre}
-          className={"w-full h-full object-cover rounded-t-2xl"}
-        />
-      </div>
-      <div className="px-6 pt-6 pb-4 flex flex-col grow">
-        {typeSolution && (
-          <>
-            <div className="flex flex-row text-xs mb-2 text-dsfr-text-mention-grey">
-              {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
-              <span className="mt-[1px]">{typeSolution.label}</span>
-            </div>
-          </>
-        )}
-        <div className={"text-lg font-bold text-dsfr-text-title-grey text-blue-hover"}>
-          {ficheSolution.attributes.titre}
-        </div>
-        <div className={"text-sm text-dsfr-text-title-grey mt-4"}>{ficheSolution.attributes.description_courte}</div>
-        <div className={"mt-auto"}>
-          <div className="mt-4 flex place-content-center">{children}</div>
-        </div>
-      </div>
-    </div>
+    <FicheSolutionSmallCard ficheSolutionId={ficheSolutionId} onClick={onClick}>
+      {children}
+    </FicheSolutionSmallCard>
   );
 }

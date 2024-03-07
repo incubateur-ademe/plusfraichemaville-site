@@ -9,7 +9,7 @@ export type TypeEspace = {
   code: "rondpoint" | "batiment" | "parking" | "rue" | "place" | "ecole" | "parc";
 };
 
-const ALL_ESPACES: TypeEspace[] = [
+export const ALL_ESPACES: TypeEspace[] = [
   { label: "Rond-point", code: "rondpoint", icon: "espace-icone-rond-point.svg" },
   { label: "Bâtiment", code: "batiment", icon: "espace-icone-batiment.svg" },
   { label: "Parking", code: "parking", icon: "espace-icone-parking.svg" },
