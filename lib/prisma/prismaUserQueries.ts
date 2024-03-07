@@ -39,14 +39,8 @@ export const saveBookmarkedFicheSolutionsByUser = async (
   userId: string,
   newBookmarkedFichesSolutions: ProjectBookmarks[],
 ) => {
-  const currentSavedFichesSolutions = await prismaClient.user.findUnique({
-    where: { id: userId },
-    select: {
-      selection_fiches_solutions: true,
-    },
-  });
-  const oldSavedBookmarFichesSolutions =
-    (currentSavedFichesSolutions?.selection_fiches_solutions as ProjectBookmarks[]) ?? [];
+  const currentSavedFichesSolutions = await getBookmarkedFichesSolutions(userId);
+  const oldSavedBookmarFichesSolutions = (currentSavedFichesSolutions as ProjectBookmarks[]) ?? [];
   const updatedBookMarkedFichesSolutions = mergeBookmarkedFichesSolutions(
     oldSavedBookmarFichesSolutions,
     newBookmarkedFichesSolutions,

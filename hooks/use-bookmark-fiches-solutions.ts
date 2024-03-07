@@ -1,11 +1,11 @@
 "use client";
 
 import { BOOKMARK_FS_KEY } from "@/helpers/bookmarkedFicheSolutionHelper";
-import { saveBookmarkedFichesSolutionsProjetAction } from "@/actions/users/save-bookmarked-fs-action";
+import { saveBookmarkedFichesSolutionsUserAction } from "@/actions/users/save-bookmarked-fs-action";
 import { useSession } from "next-auth/react";
 import { convertBookmarkIdsToNumbers } from "@/app/mon-projet/favoris/helper";
 import { useEffect } from "react";
-import { useUserStore } from "@/stores/user";
+import { useUserStore } from "@/stores/user/provider";
 
 let init = false;
 
@@ -19,7 +19,7 @@ export const useBookmarkedFichesSolutions = () => {
         if (storedBookmarks && session.data && session.status === "authenticated" && !init) {
           const parsedBookmarks = convertBookmarkIdsToNumbers(JSON.parse(storedBookmarks));
           try {
-            const saved = await saveBookmarkedFichesSolutionsProjetAction(session.data?.user.id, parsedBookmarks);
+            const saved = await saveBookmarkedFichesSolutionsUserAction(session.data?.user.id, parsedBookmarks);
             init = true;
 
             if (saved.updatedBookmarkedFichesSolutions && saved.updatedBookmarkedFichesSolutions?.length > 0) {

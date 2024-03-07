@@ -7,7 +7,7 @@ import { saveBookmarkedFicheSolutionsByUser } from "@/lib/prisma/prismaUserQueri
 
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 
-export const saveBookmarkedFichesSolutionsProjetAction = async (
+export const saveBookmarkedFichesSolutionsUserAction = async (
   userId: string,
   savedFichesSolutionsIds: ProjectBookmarks[],
 ): Promise<ResponseAction<{ updatedBookmarkedFichesSolutions: ProjectBookmarks[] | null }>> => {
