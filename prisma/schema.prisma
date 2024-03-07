@@ -116,9 +116,5 @@ model estimation {
   projet                  projet           @relation(fields: [projet_id], references: [id])
   fiches_solutions_id     Int[]
   materiaux               Json?
-  cout_min_investissement Int?
-  cout_max_investissement Int?
-  cout_min_entretien      Int?
-  cout_max_entretien      Int?
   status                  StatusEstimation
 }
