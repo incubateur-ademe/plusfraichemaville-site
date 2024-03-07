@@ -9,13 +9,13 @@ import { ChangeEvent, useState } from "react";
 import { ModalSaveFicheSolutionProps } from "../ButtonSaveFicheSolution";
 
 export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: ModalSaveFicheSolutionProps) => {
-  const [currentId, setCurrentId] = useState(-1);
+  const [selectedProjetId, setSelectedProjetId] = useState(-1);
   const projets = useProjetsStore((state) => state.projets);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
 
   const validate = async () => {
-    if (currentId > 0 && ficheSolutionId) {
-      const update = await updateFichesSolutionsProjetAction(currentId, [ficheSolutionId]);
+    if (selectedProjetId > 0 && ficheSolutionId) {
+      const update = await updateFichesSolutionsProjetAction(selectedProjetId, [+ficheSolutionId]);
       if (update.projet) {
         addOrUpdateProjet(update.projet);
       }
@@ -23,7 +23,7 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
   };
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
-    setCurrentId(+event.target.value);
+    setSelectedProjetId(+event.target.value);
   };
 
   return (
@@ -42,12 +42,10 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
           className="w-96"
           nativeSelectProps={{
             onChange: handleChange,
-            value: currentId,
+            value: selectedProjetId,
           }}
         >
-          <option value="" hidden>
-            Selectionnez un projet
-          </option>
+          <option value={0}>Selectionnez un projet</option>
           {projets.map((projet, index) => {
             return (
               <option value={projet.id} key={index}>
@@ -55,9 +53,6 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
               </option>
             );
           })}
-          <option value={0} className="ml-20 mb-4 relative cursor-pointer">
-            à aucun projet
-          </option>
         </Select>
         <Button className="rounded-3xl !h-fit !min-h-fit !text-sm !mb-3" onClick={validate}>
           Ajouter au projet
