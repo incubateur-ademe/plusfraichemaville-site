@@ -1,3 +1,5 @@
+import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper";
+import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
@@ -18,6 +20,53 @@ export const getUserProjets = async (userId: string) => {
       collectivite: true,
     },
   });
+};
+
+export const getBookmarkedFichesSolutions = async (userId: string): Promise<ProjectBookmarks[] | undefined> => {
+  const user = await prismaClient.user.findUnique({
+    where: {
+      id: userId,
+    },
+    select: {
+      selection_fiches_solutions: true,
+    },
+  });
+
+  return user?.selection_fiches_solutions as ProjectBookmarks[];
+};
+
+export const saveBookmarkedFicheSolutionsByUser = async (
+  userId: string,
+  newBookmarkedFichesSolutions: ProjectBookmarks[],
+) => {
+  const currentSavedFichesSolutions = await getBookmarkedFichesSolutions(userId);
+  const oldSavedBookmarFichesSolutions = (currentSavedFichesSolutions as ProjectBookmarks[]) ?? [];
+  const updatedBookMarkedFichesSolutions = mergeBookmarkedFichesSolutions(
+    oldSavedBookmarFichesSolutions,
+    newBookmarkedFichesSolutions,
+  );
+
+  const updateBookmarkedFichesSolution = await updateBookmarkedFichesSolutions(
+    userId,
+    updatedBookMarkedFichesSolutions,
+  );
+
+  return updateBookmarkedFichesSolution;
+};
+
+export const updateBookmarkedFichesSolutions = async (
+  userId: string,
+  updatedBookMarkedFichesSolutions: ProjectBookmarks[],
+) => {
+  const updated = await prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      selection_fiches_solutions: updatedBookMarkedFichesSolutions,
+    },
+  });
+  return updated.selection_fiches_solutions as ProjectBookmarks[];
 };
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {
