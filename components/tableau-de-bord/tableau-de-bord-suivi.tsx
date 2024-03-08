@@ -4,6 +4,7 @@ import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-d
 import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
 import { TableauDeBordSuiviCardWithList } from "./tableau-de-bord-suivi-card-with-list";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -41,7 +42,8 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je choisis mes solutions de rafraîchissement",
     index: 3,
-    progress: "50",
+    progress: ({ fiches_solutions_id, fiches_solutions_validated }: ProjetWithRelations) =>
+      fiches_solutions_validated ? "100" : fiches_solutions_id.length ? "50" : "0",
     disabled: false,
     type: "solution",
     picto: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,
