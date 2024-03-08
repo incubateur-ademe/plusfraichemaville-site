@@ -45,7 +45,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithCollectivite;
   return (
     <form id="create-estimation" onSubmit={form.handleSubmit(onSubmit)}>
       <FicheSolutionSmallCardContainer
-        title="Estimation 1"
+        title=""
         subtitle="Choisissez les solutions à estimer pour votre simulation"
         className="pfmv-strong-card "
       >

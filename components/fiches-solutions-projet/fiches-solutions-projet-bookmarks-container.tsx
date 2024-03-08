@@ -6,7 +6,7 @@ import { ChangeEvent, useRef } from "react";
 import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { updateFichesSolutionsProjetAction } from "@/actions/projets/update-fiches-solutions-projet-action";
 
-export const FichesSolutionProjetBookmarksConatiner = ({
+export const FichesSolutionProjetBookmarksContainer = ({
   projetsFichesSolutionsIds,
   updateStore,
   projetId,
@@ -24,17 +24,19 @@ export const FichesSolutionProjetBookmarksConatiner = ({
   subtitle: string;
 }) => {
   const addedFichesSolutionsIds = useRef<number[]>([]);
+  const checkbox = useRef<HTMLInputElement[] | null>([]);
+
+  const updateAddedFichesSolutionsIds = (value: number) =>
+    (addedFichesSolutionsIds.current = addedFichesSolutionsIds.current.includes(value)
+      ? addedFichesSolutionsIds.current.filter((id) => id !== value)
+      : [...addedFichesSolutionsIds.current, value]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const value = Number(event.target.value);
-
-    addedFichesSolutionsIds.current = addedFichesSolutionsIds.current.includes(value)
-      ? addedFichesSolutionsIds.current.filter((id) => id !== value)
-      : [...addedFichesSolutionsIds.current, value];
+    updateAddedFichesSolutionsIds(value);
   };
 
   const update = async () => {
-    console.log(addedFichesSolutionsIds);
     if (projetId && addedFichesSolutionsIds.current.length > 0) {
       const merged = Array.from(new Set([...addedFichesSolutionsIds.current, ...projetsFichesSolutionsIds]));
       const updatedProjet = await updateFichesSolutionsProjetAction(projetId, merged);
@@ -51,8 +53,17 @@ export const FichesSolutionProjetBookmarksConatiner = ({
       className="bg-dsfr-background-alt-blue-france rounded-xl mt-10"
     >
       <div className="flex flex-wrap gap-8 mb-8">
-        {bookmarksIds?.map((ficheSolutionId) => (
-          <FicheSolutionEstimationCard ficheSolutionId={ficheSolutionId} key={ficheSolutionId}>
+        {bookmarksIds?.map((ficheSolutionId, index) => (
+          <FicheSolutionEstimationCard
+            ficheSolutionId={ficheSolutionId}
+            key={ficheSolutionId}
+            onClick={() => {
+              if (checkbox.current) {
+                checkbox.current[index].checked = !checkbox.current[index].checked;
+                updateAddedFichesSolutionsIds(+ficheSolutionId);
+              }
+            }}
+          >
             <Checkbox
               className="mx-auto"
               options={[
@@ -60,6 +71,11 @@ export const FichesSolutionProjetBookmarksConatiner = ({
                   label: null,
                   nativeInputProps: {
                     value: ficheSolutionId.toString(),
+                    ref: (element) => {
+                      if (checkbox.current && element) {
+                        checkbox.current[index] = element;
+                      }
+                    },
                     onChange: handleChange,
                   },
                 },
