@@ -10,6 +10,7 @@ import CustomDSFRModal from "@/components/common/CustomDSFRModal";
 import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import useSWR from "swr";
 import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form";
+import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;
@@ -20,6 +21,7 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
   const getProjetById = useProjetsStore((state) => state.getProjetById);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
 
+  const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const fetcher = (fsId: number) => getFicheSolutionById(`${fsId}`);
   const { data: currentFicheSolution } = useSWR(
     `ficheSolution-${estimation.fiches_solutions_id[estimationStep - 1]}`,
@@ -36,9 +38,15 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     [currentFicheSolution],
   );
   const stepperNextTitle = useMemo(
-    () => `Estimation pour la solution ${nextFicheSolution?.attributes.titre}`,
+    () =>
+      nextFicheSolution
+        ? `Estimation pour la solution ${nextFicheSolution?.attributes.titre}`
+        : "Résumé de l'estimation",
     [nextFicheSolution],
   );
+  const currentEstimationMateriaux = useMemo(() => {
+    return estimationMateriaux?.find((em) => em.ficheSolutionId == currentFicheSolution?.id);
+  }, [currentFicheSolution, estimationMateriaux]);
   const modal = createModal({
     id: `estimation-materiaux-modal-${estimation.id}`,
     isOpenedByDefault: false,
@@ -55,12 +63,16 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
           nextTitle={stepperNextTitle}
           stepCount={estimation.fiches_solutions_id.length + 1}
           title={stepperTitle}
+          className="max-w-[40rem]"
         />
         {currentFicheSolution && (
           <>
             <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre},
              vous aurez besoin de choisir parmi les matériaux et systèmes suivants :`}</div>
-            <EstimationMateriauForm ficheSolution={currentFicheSolution?.attributes} />
+            <EstimationMateriauForm
+              ficheSolution={currentFicheSolution}
+              estimationMateriaux={currentEstimationMateriaux}
+            />
           </>
         )}
       </CustomDSFRModal>

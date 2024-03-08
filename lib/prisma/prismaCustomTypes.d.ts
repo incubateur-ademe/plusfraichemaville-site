@@ -11,7 +11,7 @@ export interface ProjetWithRelations extends projet {
 
 export type EstimationMateriauxFicheSolution = {
   ficheSolutionId: number;
-  estimationMateriaux: { materiauId: number; quantite: number };
+  estimationMateriaux: [{ materiauId: string; quantite: number }];
   coutMinInvestissement: number;
   coutMaxInvestissement: number;
   coutMinEntretien: number;

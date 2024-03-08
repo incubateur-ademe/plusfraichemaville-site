@@ -5,7 +5,6 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { redirect } from "next/navigation";
 import { EstimationOverviewCard } from "@/components/estimation/estimation-overview-card";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { EstimationMateriauModal } from "@/components/estimation/estimation-materiau-modal";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
