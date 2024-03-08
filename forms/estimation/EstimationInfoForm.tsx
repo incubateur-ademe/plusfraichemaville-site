@@ -4,13 +4,14 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { estimation } from "@prisma/client";
 import clsx from "clsx";
-import FicheSolutionEstimationCard from "@/components/ficheSolution/FicheSolutionEstimationCard";
+
 import { EstimationFormData, EstimationFormSchema } from "@/forms/estimation/EstimationFormSchema";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { createEstimationAction } from "@/actions/estimation/create-estimation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { FicheSolutionSmallCardContainer } from "@/components/ficheSolution/fiche-solution-small-card-container";
+import { FicheSolutionSmallCard } from "@/components/ficheSolution/fiche-solution-small-card";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -56,7 +57,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
       >
         <div className={clsx("flex flex-wrap gap-6 mb-12")}>
           {projet.fiches_solutions_id?.map((ficheSolutionId) => (
-            <FicheSolutionEstimationCard
+            <FicheSolutionSmallCard
               key={ficheSolutionId}
               ficheSolutionId={ficheSolutionId}
               onClick={() => handleFicheSolutionChange(ficheSolutionId.toString())}
@@ -77,7 +78,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
                   ]}
                 />
               </div>
-            </FicheSolutionEstimationCard>
+            </FicheSolutionSmallCard>
           ))}
         </div>
         <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>

@@ -1,10 +1,11 @@
 import { FicheSolutionSmallCardContainer } from "../ficheSolution/fiche-solution-small-card-container";
-import FicheSolutionEstimationCard from "../ficheSolution/FicheSolutionEstimationCard";
+
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ChangeEvent, useRef } from "react";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { updateFichesSolutionsProjetAction } from "@/actions/projets/update-fiches-solutions-projet-action";
+import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
 
 export const FichesSolutionProjetBookmarksContainer = ({
   projetsFichesSolutionsIds,
@@ -54,7 +55,7 @@ export const FichesSolutionProjetBookmarksContainer = ({
     >
       <div className="flex flex-wrap gap-8 mb-8">
         {bookmarksIds?.map((ficheSolutionId, index) => (
-          <FicheSolutionEstimationCard
+          <FicheSolutionSmallCard
             ficheSolutionId={ficheSolutionId}
             key={ficheSolutionId}
             onClick={() => {
@@ -81,7 +82,7 @@ export const FichesSolutionProjetBookmarksContainer = ({
                 },
               ]}
             />
-          </FicheSolutionEstimationCard>
+          </FicheSolutionSmallCard>
         ))}
       </div>
       <Button className="rounded-3xl" onClick={update}>
