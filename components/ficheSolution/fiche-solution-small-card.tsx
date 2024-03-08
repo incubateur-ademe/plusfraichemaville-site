@@ -10,9 +10,11 @@ export function FicheSolutionSmallCard({
   ficheSolutionId,
   children,
   onClick,
+  className = " pfmv-card cursor-pointer ",
 }: {
   ficheSolutionId: number;
   onClick?: () => void;
+  className?: string;
 } & PropsWithChildren) {
   const swrKey = `ficheSolution-${ficheSolutionId}`;
   const fetcher = () => getFicheSolutionById(`${ficheSolutionId}`);
@@ -22,7 +24,7 @@ export function FicheSolutionSmallCard({
   }
   const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
   return (
-    <div className="flex w-60 flex-col pfmv-card md:ml-0 cursor-pointer relative" onClick={onClick}>
+    <div className={`flex w-60 flex-col md:ml-0 relative ${className}`} onClick={onClick}>
       <div className="flex w-full h-32">
         <Image
           width={450}

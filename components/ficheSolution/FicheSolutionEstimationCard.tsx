@@ -7,12 +7,14 @@ export default function FicheSolutionEstimationCard({
   ficheSolutionId,
   children,
   onClick,
+  className,
 }: {
   ficheSolutionId: number;
   onClick?: () => void;
+  className?: string;
 } & PropsWithChildren) {
   return (
-    <FicheSolutionSmallCard ficheSolutionId={ficheSolutionId} onClick={onClick}>
+    <FicheSolutionSmallCard ficheSolutionId={ficheSolutionId} onClick={onClick} className={className}>
       {children}
     </FicheSolutionSmallCard>
   );

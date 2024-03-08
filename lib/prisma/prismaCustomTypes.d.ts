@@ -1,11 +1,21 @@
-import { Prisma, collectivite, projet } from "@prisma/client";
+import { Prisma, collectivite, projet, estimation } from "@prisma/client";
 
 export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
 }>;
 
-export interface ProjetWithCollectivite extends projet {
+export interface ProjetWithRelations extends projet {
   collectivite: collectivite;
+  estimations: estimation[];
 }
+
+export type EstimationMateriauxFicheSolution = {
+  ficheSolutionId: number;
+  estimationMateriaux: { materiauId: number; quantite: number };
+  coutMinInvestissement: number;
+  coutMaxInvestissement: number;
+  coutMinEntretien: number;
+  coutMaxEntretien: number;
+};
 
 export type AgentConnectInfo = { siret: string };

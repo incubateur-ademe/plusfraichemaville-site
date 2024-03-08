@@ -1,7 +1,7 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { estimation } from "@prisma/client";
 import clsx from "clsx";
 import FicheSolutionEstimationCard from "@/components/ficheSolution/FicheSolutionEstimationCard";
@@ -9,9 +9,11 @@ import { EstimationFormData, EstimationFormSchema } from "@/forms/estimation/Est
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { createEstimationAction } from "@/actions/estimation/create-estimation";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useProjetsStore } from "@/stores/projets/provider";
 import { FicheSolutionSmallCardContainer } from "@/components/ficheSolution/fiche-solution-small-card-container";
 
-export const EstimationInfoForm = ({ projet }: { projet: ProjetWithCollectivite; estimation?: estimation }) => {
+export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
+  const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
     if (currentFicheSolutionIds.indexOf(ficheSolutionId) === -1)
@@ -35,9 +37,12 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithCollectivite;
     });
 
     if (result.type === "success") {
-      // TODO : rediriger vers la page d'estimation des matériaux
-      // TODO : mettre à jour le store de manière cohérente avec ce qui est fait pour le rajout de fiche solution
+      if (result.estimation) {
+        updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
+      }
     }
+    // TODO : rediriger vers la page d'estimation des matériaux
+    // TODO : mettre à jour le store de manière cohérente avec ce qui est fait pour le rajout de fiche solution
   };
 
   const disabled = form.formState.isSubmitting;
@@ -55,20 +60,23 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithCollectivite;
               key={ficheSolutionId}
               ficheSolutionId={ficheSolutionId}
               onClick={() => handleFicheSolutionChange(ficheSolutionId.toString())}
+              className="pfmv-card cursor-pointer"
             >
-              <Checkbox
-                className="m-auto"
-                {...form.register("ficheSolutionIds")}
-                options={[
-                  {
-                    label: null,
-                    nativeInputProps: {
-                      value: ficheSolutionId.toString(),
-                      onChange: () => handleFicheSolutionChange(ficheSolutionId.toString()),
+              <div className="mt-4 flex place-content-center">
+                <Checkbox
+                  className="m-auto"
+                  {...form.register("ficheSolutionIds")}
+                  options={[
+                    {
+                      label: null,
+                      nativeInputProps: {
+                        value: ficheSolutionId.toString(),
+                        onChange: () => handleFicheSolutionChange(ficheSolutionId.toString()),
+                      },
                     },
-                  },
-                ]}
-              />
+                  ]}
+                />
+              </div>
             </FicheSolutionEstimationCard>
           ))}
         </div>

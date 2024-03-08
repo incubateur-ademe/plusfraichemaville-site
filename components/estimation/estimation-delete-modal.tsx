@@ -2,18 +2,21 @@
 
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { projet } from "@prisma/client";
-import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
+import { estimation } from "@prisma/client";
 import { notifications } from "../common/notifications";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { deleteEstimationAction } from "@/actions/estimation/delete-estimation-action";
 
 type ListeProjetsCardDeleteModalProps = {
-  projetNom: projet["nom"];
-  projetId: projet["id"];
+  estimation: estimation;
 };
 
-export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjetsCardDeleteModalProps) {
+export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModalProps) {
+  const getProjetById = useProjetsStore((state) => state.getProjetById);
+  const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
+
   const modal = createModal({
-    id: `delete-projet-modal-${projetId}`,
+    id: `delete-estimation-modal-${estimation.id}`,
     isOpenedByDefault: false,
   });
 
@@ -38,8 +41,15 @@ export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjet
             className: "rounded-3xl !min-h-fit !text-sm mr-4",
 
             onClick: async () => {
-              const res = await deleteProjetAction(projetId);
+              const res = await deleteEstimationAction(estimation.id);
               notifications(res.type, res.message);
+              const impactedProjet = getProjetById(estimation.projet_id);
+              if (res.type === "success" && impactedProjet) {
+                updateProjetInStore({
+                  ...impactedProjet,
+                  estimations: impactedProjet.estimations?.filter((es) => es.id !== estimation.id),
+                });
+              }
             },
           },
           {
@@ -52,10 +62,7 @@ export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjet
       >
         <div className="flex items-center">
           <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
-          <span className="text-2xl font-bold">
-            Êtes-vous certain de vouloir supprimer le projet <br />
-            <span className="text-dsfr-text-label-blue-france">{projetNom} ?</span>
-          </span>
+          <span className="text-2xl font-bold">Êtes-vous certain de vouloir supprimer cette estimation ?</span>
         </div>
       </modal.Component>
     </>

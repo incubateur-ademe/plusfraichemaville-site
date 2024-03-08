@@ -18,6 +18,7 @@ export const getUserProjets = async (userId: string) => {
     },
     include: {
       collectivite: true,
+      estimations: true,
     },
   });
 };

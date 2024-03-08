@@ -1,4 +1,4 @@
-import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { ListeProjetsCardDeleteModal } from "./card-delete-modal";
 import Link from "next/link";
 import { PictoEspaceSelector } from "../common/pictos";
@@ -8,7 +8,7 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
-  projet: ProjetWithCollectivite;
+  projet: ProjetWithRelations;
 };
 
 export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) => {

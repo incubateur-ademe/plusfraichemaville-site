@@ -17,9 +17,9 @@ import { notifications } from "@/components/common/notifications";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
 import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
-import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 
-export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithCollectivite }) => {
+export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => {
   const router = useRouter();
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
 
