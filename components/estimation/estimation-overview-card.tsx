@@ -6,9 +6,8 @@ import { EstimationCardPriceInfo } from "@/components/estimation/estimation-card
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import sumBy from "lodash/sumBy";
 import React, { useMemo } from "react";
-import Button from "@codegouvfr/react-dsfr/Button";
-import { PFMV_ROUTES } from "@/helpers/routes";
 import { EstimationDeleteModal } from "@/components/estimation/estimation-delete-modal";
+import { EstimationMateriauModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal";
 
 export const EstimationOverviewCard = ({ estimation, projetId }: { estimation: estimation; projetId: number }) => {
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
@@ -67,12 +66,7 @@ export const EstimationOverviewCard = ({ estimation, projetId }: { estimation: e
         </div>
       </div>
       <div className="float-right flex flex-row gap-6 mt-12">
-        <Button
-          className="rounded-3xl"
-          linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(projetId), target: "_self" }}
-        >
-          Modifier
-        </Button>
+        <EstimationMateriauModal estimation={estimation} />
         <EstimationDeleteModal estimation={estimation} />
       </div>
     </div>
