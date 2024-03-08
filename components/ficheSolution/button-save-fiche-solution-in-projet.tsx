@@ -29,6 +29,7 @@ export const ButtonSaveFicheSolutionInProjet = ({
   const userId = useSession().data?.user.id;
   const projet = useProjetsStore((state) => state.getProjetById(+projetId));
   const updateStore = useProjetsStore((state) => state.addOrUpdateProjet);
+
   const fichesSolutionsIdSaved = projet?.fiches_solutions_id || [];
   const isAlreadySaved = fichesSolutionsIdSaved.includes(+ficheSolutionId);
   const fichesSolutionsUpdated = isAlreadySaved
