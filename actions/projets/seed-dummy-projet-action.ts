@@ -1,5 +1,6 @@
 "use server";
 
+import { generateRandomId } from "@/helpers/common";
 import { error } from "@/helpers/messages";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { auth } from "@/lib/next-auth/auth";
@@ -15,6 +16,7 @@ export const seedDummyProjetAction = async () => {
   const collectivite = await prismaClient.collectivite.create({
     data: {
       nom: "Collectivité de Brest",
+      id: generateRandomId(),
       code_postal: "75001",
       adresse_info: JSON.stringify({ rue: "8 rue de Bretagne", ville: "Brest" }),
       created_by: session.user.id,
@@ -27,6 +29,7 @@ export const seedDummyProjetAction = async () => {
       {
         created_by: session.user.id,
         nom: "Ajout d'une fontaine à eau",
+        id: generateRandomId(),
         type_espace: "place",
         adresse: "19 rue du commerce",
         adresse_info: JSON.stringify({ rue: "19 rue du commerce", ville: "Brest" }),
@@ -38,6 +41,7 @@ export const seedDummyProjetAction = async () => {
       {
         created_by: session.user.id,
         nom: "Changement du sol de la cour",
+        id: generateRandomId(),
         type_espace: "ecole",
         adresse: "19 rue du commerce",
         adresse_info: JSON.stringify({ rue: "19 rue du commerce", ville: "Brest" }),
@@ -49,6 +53,7 @@ export const seedDummyProjetAction = async () => {
       {
         created_by: session.user.id,
         nom: "Plantation d'arbres",
+        id: generateRandomId(),
         type_espace: "parc",
         adresse: "19 rue du commerce",
         adresse_info: JSON.stringify({ rue: "19 rue du commerce", ville: "Brest" }),
