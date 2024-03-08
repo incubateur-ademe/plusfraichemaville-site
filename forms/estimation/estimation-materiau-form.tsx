@@ -1,4 +1,4 @@
-import React from "react";
+import { useMemo } from "react";
 import Image from "next/image";
 import CmsRichText from "@/components/common/CmsRichText";
 import {
@@ -18,8 +18,6 @@ import {
 } from "@/forms/estimation/estimation-materiau-form-schema";
 import { FicheSolutionResponse, MateriauResponse } from "@/components/ficheSolution/type";
 import InputFormField from "@/components/common/InputFormField";
-import { EstimationFormData } from "@/forms/estimation/EstimationFormSchema";
-import { createEstimationAction } from "@/actions/estimation/create-estimation";
 
 export default function EstimationMateriauForm({
   ficheSolution,
@@ -52,13 +50,33 @@ export default function EstimationMateriauForm({
   });
   const watchAllFields = form.watch();
 
-  const onSubmit: SubmitHandler<EstimationMateriauxFormData> = async (data) => {
-  };
+  const onSubmit: SubmitHandler<EstimationMateriauxFormData> = async (data) => {};
 
   const { fields } = useFieldArray({
     control: form.control,
     name: "estimationMateriaux",
   });
+
+  const globalPrice = useMemo(() => {
+    return ficheSolution.attributes.materiaux?.data.reduce(
+      (acc, materiauCMS) => {
+        const materiauField = watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +materiauCMS.id);
+        return {
+          entretien: {
+            min:
+              (materiauField?.quantite || 0) * (materiauCMS.attributes.cout_minimum_entretien || 0) + acc.entretien.min,
+            max:
+              (materiauField?.quantite || 0) * (materiauCMS.attributes.cout_maximum_entretien || 0) + acc.entretien.max,
+          },
+          fourniture: {
+            min: (materiauField?.quantite || 0) * materiauCMS.attributes.cout_minimum_fourniture + acc.fourniture.min,
+            max: (materiauField?.quantite || 0) * materiauCMS.attributes.cout_maximum_fourniture + acc.fourniture.max,
+          },
+        };
+      },
+      { entretien: { min: 0, max: 0 }, fourniture: { min: 0, max: 0 } },
+    );
+  }, [ficheSolution, watchAllFields]);
 
   return (
     <form id={`estimation-fiche-solution-${ficheSolution.id}`} onSubmit={form.handleSubmit(onSubmit)}>
@@ -78,9 +96,7 @@ export default function EstimationMateriauForm({
                 </div>
                 <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-title-grey grow">
                   <div className="flex items-center gap-6 mb-4">
-                    <div className="text-2xl font-bold">
-                      {mat.titre} - {materiauId}
-                    </div>
+                    <div className="text-[1.375rem] font-bold">{mat.titre}</div>
                   </div>
                   <CmsRichText label={mat.description} className="text-sm" />
                   <div className="text-dsfr-text-mention-grey text-sm">
@@ -115,6 +131,19 @@ export default function EstimationMateriauForm({
               <hr className="p-0 h-[1px] mb-4" />
             </div>
           ))}
+          <div className="mt-8 text-[1.375rem] font-bold">{`Estimation pour ${ficheSolution.attributes.titre}`}</div>
+          <div className="mt-8 text-[1.375rem] font-bold flex flex-row justify-between max-w-[30rem] ml-auto mr-0">
+            <div>Investissement :</div>
+            <div>
+              <strong>{`${globalPrice?.fourniture.min} - ${globalPrice?.fourniture.max} € `}</strong>HT
+            </div>
+          </div>
+          <div className="mt-2 text-lg flex flex-row justify-between max-w-[30rem] ml-auto mr-0">
+            <div>Entretien :</div>
+            <div>
+              <strong>{`${globalPrice?.entretien.min} - ${globalPrice?.entretien.max} € `}</strong>HT par an
+            </div>
+          </div>
         </>
       ) : (
         <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
