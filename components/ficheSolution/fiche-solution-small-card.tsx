@@ -10,7 +10,7 @@ export function FicheSolutionSmallCard({
   ficheSolutionId,
   children,
   onClick,
-  className = " pfmv-card cursor-pointer "
+  className = " pfmv-card cursor-pointer ",
 }: {
   ficheSolutionId: number;
   onClick?: () => void;
