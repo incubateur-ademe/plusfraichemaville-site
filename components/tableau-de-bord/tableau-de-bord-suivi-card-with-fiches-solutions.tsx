@@ -8,6 +8,8 @@ import Image from "next/image";
 import { useParams } from "next/navigation";
 import useSWR from "swr";
 
+const IMAGE_SLICE_INDEX = 5;
+
 export const TableauDeBordSuiviWithFichesSolutions = () => {
   const { projetId } = useParams();
   const getProjetById = useProjetsStore((state) => state.getProjetById);
@@ -19,17 +21,17 @@ export const TableauDeBordSuiviWithFichesSolutions = () => {
 
   return (
     <div className="flex">
-      {selectedFichesSolutions.slice(0, 5).map((ficheSolutionid, index) => {
+      {selectedFichesSolutions.slice(0, IMAGE_SLICE_INDEX).map((ficheSolutionid, index) => {
         return <TableauDeBordSuiviWithFichesSolutionsImage ficheSolutionId={ficheSolutionid.toString()} key={index} />;
       })}
-      {selectedFichesSolutions.length > 5 && (
+      {selectedFichesSolutions.length > IMAGE_SLICE_INDEX && (
         <div
           className={clsx(
             "w-10 h-10 rounded-[50%] overflow-hidden mr-2 shrink-0",
             "flex justify-center items-center bg-dsfr-border-default-blue-france text-white",
           )}
         >
-          +{selectedFichesSolutions.length - 5}
+          +{selectedFichesSolutions.length - IMAGE_SLICE_INDEX}
         </div>
       )}
     </div>

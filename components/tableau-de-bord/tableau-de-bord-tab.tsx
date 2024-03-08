@@ -1,3 +1,4 @@
+import clsx from "clsx";
 import { PropsWithChildren } from "react";
 
 type TabProps = {
@@ -5,8 +6,5 @@ type TabProps = {
 } & PropsWithChildren;
 
 export const TableauDeBordTab = ({ active, children }: TabProps) => {
-  if (!active) {
-    return null;
-  }
-  return <>{children}</>;
+  return <div className={clsx(active ? "block" : "hidden")}>{children}</div>;
 };
