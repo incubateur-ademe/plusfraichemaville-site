@@ -42,8 +42,11 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je choisis mes solutions de rafraîchissement",
     index: 3,
-    progress: ({ fiches_solutions_id, fiches_solutions_validated }: ProjetWithRelations) =>
-      fiches_solutions_validated ? "100" : fiches_solutions_id.length ? "50" : "0",
+    progress: (projet: ProjetWithRelations) => {
+      if (projet) {
+        return projet.fiches_solutions_validated ? "100" : projet.fiches_solutions_id.length ? "50" : "0";
+      } else return "0";
+    },
     disabled: false,
     type: "solution",
     picto: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,

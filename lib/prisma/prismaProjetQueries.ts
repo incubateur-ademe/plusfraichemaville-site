@@ -1,6 +1,7 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { projet } from "@prisma/client";
 import { ProjetWithRelations } from "./prismaCustomTypes";
+import { generateRandomId } from "@/helpers/common";
 
 export const updateFichesSolutionsProjet = (
   projetId: number,
@@ -59,6 +60,7 @@ export const createOrUpdateProjet = async ({
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
       created_by: userId,
+      id: generateRandomId(),
     },
     update: {
       nom: nomProjet,

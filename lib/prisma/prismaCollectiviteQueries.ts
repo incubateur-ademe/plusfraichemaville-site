@@ -1,6 +1,7 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { AddressCollectivite } from "@/lib/adresseApi/types";
 import { Prisma } from "@prisma/client";
+import { generateRandomId } from "@/helpers/common";
 
 export const getCollectivite = async (collectiviteId: number) => {
   return prismaClient.collectivite.findUnique({
@@ -24,6 +25,7 @@ export const getOrCreateCollectivite = async (data: AddressCollectivite, creator
       latitude: data.lat,
       longitude: data.long,
       created_by: creatorUserId,
+      id: generateRandomId(),
     },
     update: {},
   });
