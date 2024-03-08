@@ -1,5 +1,5 @@
 import { useUserStore } from "@/stores/user/provider";
-import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { FichesSolutionProjetBookmarksContainer } from "./fiches-solutions-projet-bookmarks-container";
 
 export const FichesSolutionProjetBookmarksAll = ({
@@ -10,7 +10,7 @@ export const FichesSolutionProjetBookmarksAll = ({
 }: {
   projetNom: string;
   projetsFichesSolutionsIds: number[];
-  updateStore: (_projet: ProjetWithCollectivite) => void;
+  updateStore: (_projet: ProjetWithRelations) => void;
   projetId?: number;
 }) => {
   const bookmarkedFichesSolutionsIds = useUserStore((state) => state.bookmarkedFichesSolutions);

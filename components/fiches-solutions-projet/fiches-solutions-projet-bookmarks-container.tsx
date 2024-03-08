@@ -3,7 +3,7 @@ import FicheSolutionEstimationCard from "../ficheSolution/FicheSolutionEstimatio
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ChangeEvent, useRef } from "react";
-import { ProjetWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { updateFichesSolutionsProjetAction } from "@/actions/projets/update-fiches-solutions-projet-action";
 
 export const FichesSolutionProjetBookmarksContainer = ({
@@ -16,7 +16,7 @@ export const FichesSolutionProjetBookmarksContainer = ({
 }: {
   projetNom: string;
   projetsFichesSolutionsIds: number[];
-  updateStore: (_projet: ProjetWithCollectivite) => void;
+  updateStore: (_projet: ProjetWithRelations) => void;
   projetId?: number;
   bookmarksIds: number[];
   projetTypeEspace?: string;
