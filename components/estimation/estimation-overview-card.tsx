@@ -5,7 +5,7 @@ import FicheSolutionEstimationCard from "@/components/ficheSolution/FicheSolutio
 import { EstimationCardPriceInfo } from "@/components/estimation/estimation-card-price-info";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import sumBy from "lodash/sumBy";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { EstimationDeleteModal } from "@/components/estimation/estimation-delete-modal";
