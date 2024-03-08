@@ -1,17 +1,25 @@
 import React from "react";
 import Image from "next/image";
 import CmsRichText from "@/components/common/CmsRichText";
-import { getLabelCoutEntretien, getLabelCoutFourniture, getUniteCoutMateriauFromCode } from "@/helpers/coutMateriau";
+import {
+  getLabelCoutEntretien,
+  getLabelCoutEntretienByQuantite,
+  getLabelCoutFourniture,
+  getLabelCoutFournitureByQuantite,
+  getUniteCoutMateriauFromCode,
+} from "@/helpers/coutMateriau";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
-import { useFieldArray, useForm } from "react-hook-form";
+import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   EstimationMateriauxFormData,
   EstimationMateriauxFormSchema,
 } from "@/forms/estimation/estimation-materiau-form-schema";
-import Input from "@codegouvfr/react-dsfr/Input";
 import { FicheSolutionResponse, MateriauResponse } from "@/components/ficheSolution/type";
+import InputFormField from "@/components/common/InputFormField";
+import { EstimationFormData } from "@/forms/estimation/EstimationFormSchema";
+import { createEstimationAction } from "@/actions/estimation/create-estimation";
 
 export default function EstimationMateriauForm({
   ficheSolution,
@@ -40,13 +48,20 @@ export default function EstimationMateriauForm({
         estimationMateriaux,
       ),
     },
+    mode: "onBlur",
   });
+  const watchAllFields = form.watch();
+
+  const onSubmit: SubmitHandler<EstimationMateriauxFormData> = async (data) => {
+  };
+
   const { fields } = useFieldArray({
     control: form.control,
     name: "estimationMateriaux",
   });
+
   return (
-    <div>
+    <form id={`estimation-fiche-solution-${ficheSolution.id}`} onSubmit={form.handleSubmit(onSubmit)}>
       {ficheSolution.attributes.materiaux?.data && ficheSolution.attributes.materiaux.data.length > 0 ? (
         <>
           {ficheSolution.attributes.materiaux.data.map(({ attributes: mat, id: materiauId }) => (
@@ -74,16 +89,27 @@ export default function EstimationMateriauForm({
                   </div>
                 </div>
                 <div className={"md:w-60 flex flex-col flex-none bg-dsfr-contrast-grey p-6"}>
-                  <Input
+                  <InputFormField
                     label={getUniteCoutMateriauFromCode(mat.cout_unite).estimationLabel}
-                    nativeInputProps={{
-                      key: fields.find((f) => +f.materiauId === +materiauId)?.id,
-                      ...form.register(
-                        `estimationMateriaux.${fields.findIndex((f) => +f.materiauId === +materiauId)}.quantite`,
-                      ),
-                      style: { background: "white" },
-                    }}
+                    type="number"
+                    control={form.control}
+                    path={`estimationMateriaux.${fields.findIndex((f) => +f.materiauId === +materiauId)}.quantite`}
+                    whiteBackground
                   />
+                  <div>Investissement</div>
+                  <div className="font-bold mb-2">
+                    {getLabelCoutFournitureByQuantite(
+                      mat,
+                      watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +materiauId)?.quantite || 0,
+                    )}
+                  </div>
+                  <div>Entretien</div>
+                  <div className="font-bold mb-2">
+                    {getLabelCoutEntretienByQuantite(
+                      mat,
+                      watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +materiauId)?.quantite || 0,
+                    )}
+                  </div>
                 </div>
               </div>
               <hr className="p-0 h-[1px] mb-4" />
@@ -93,6 +119,6 @@ export default function EstimationMateriauForm({
       ) : (
         <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
       )}
-    </div>
+    </form>
   );
 }

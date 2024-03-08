@@ -44,9 +44,20 @@ export const getLabelCoutFourniture = (materiau: GetValues<"api::materiau.materi
       }`
     : "NA";
 
+export const getLabelCoutFournitureByQuantite = (materiau: GetValues<"api::materiau.materiau">, quantite: number) =>
+  (materiau.cout_minimum_fourniture != null && materiau.cout_maximum_fourniture != null)
+    ? `${materiau.cout_minimum_fourniture * quantite} - ${materiau.cout_maximum_fourniture * quantite} €`
+    : "0 €";
+
 export const getLabelCoutEntretien = (materiau: GetValues<"api::materiau.materiau">) =>
   (materiau.cout_minimum_entretien != null && materiau.cout_maximum_entretien != null)
     ? `${materiau.cout_minimum_entretien} - ${materiau.cout_maximum_entretien} € HT / ${
         getUniteCoutMateriauFromCode(materiau.cout_unite).unitLabel
       } / an`
     : "NA";
+
+export const getLabelCoutEntretienByQuantite = (materiau: GetValues<"api::materiau.materiau">, quantite: number) =>
+  (materiau.cout_minimum_entretien != null && materiau.cout_maximum_entretien != null)
+    ? `${materiau.cout_minimum_entretien * quantite} - ${materiau.cout_maximum_entretien * quantite} € / an`
+    : "0 € / an";
+
