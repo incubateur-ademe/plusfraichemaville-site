@@ -18,7 +18,7 @@ export const FichesSolutionsProjetsSelected = ({
 
   return (
     <div>
-      <div className="flex flex-wrap gap-8  mb-10">
+      <div className="flex flex-wrap gap-8 mb-10">
         {selectedFichesSolutionsIds && selectedFichesSolutionsIds.length === 0 ? (
           <FichesSolutionsProjetEmpty />
         ) : (
@@ -39,7 +39,7 @@ export const FichesSolutionsProjetsSelected = ({
         </Link>
       </div>
 
-      <Link className="fr-btn rounded-3xl" href={tableauDeBordUrl}>
+      <Link className="fr-btn rounded-3xl mb-10" href={tableauDeBordUrl}>
         Retour au tableau de bord
       </Link>
     </div>

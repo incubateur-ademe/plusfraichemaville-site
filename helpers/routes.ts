@@ -1,6 +1,7 @@
 export const PFMV_ROUTES = {
   AIDE_DECISION: "/aide-decision",
   FICHES_SOLUTIONS: "/fiche-solution",
+  MES_FICHES_SOLUTIONS: "/mon-projet/favoris",
   RETOURS_EXPERIENCE: "/projet",
   CONNEXION: "/connexion",
   DECONNEXION: "/logout",

@@ -9,6 +9,7 @@ export default function BookmarkedFicheSolutionByProject({
   projectName: string;
   ficheSolutionIds: number[];
 }) {
+  // TODO: revoir la logique pour fetcher par route + useSWR
   const { data: ficheSolutions } = useApi<APIResponseData<"api::fiche-solution.fiche-solution">[]>(
     `/api/get-fiches-solutions?ficheSolutionIds=${JSON.stringify(ficheSolutionIds)}`,
   );
