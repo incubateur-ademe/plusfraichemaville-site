@@ -34,6 +34,7 @@ export const getOrCreateCollectivite = async (data: AddressCollectivite, creator
 export const createCollectiviteByName = async (collectiviteName: string, creatorUserId: string) => {
   return prismaClient.collectivite.create({
     data: {
+      id: generateRandomId(),
       nom: collectiviteName,
       created_by: creatorUserId,
     },

@@ -54,7 +54,7 @@ model VerificationToken {
 }
 
 model collectivite {
-  id           Int              @id @default(dbgenerated("CAST(10000000 + floor(random() * 90000000) AS int)"))
+  id           Int              @id
   nom          String
   code_insee   String?             @unique
   code_postal  String?
@@ -85,7 +85,7 @@ model user_collectivite {
 }
 
 model projet {
-  id                         Int       @id @default(dbgenerated("CAST(10000000 + floor(random() * 90000000) AS int)"))
+  id                         Int       @id
   created_by                 String
   creator                    User         @relation(fields: [created_by], references: [id])
   created_at                 DateTime     @default(now())
@@ -108,7 +108,7 @@ enum StatusEstimation {
 }
 
 model estimation {
-  id                      Int           @id @default(dbgenerated("CAST(10000000 + floor(random() * 90000000) AS int)"))
+  id                      Int           @id 
   created_by              String
   creator                 User             @relation(fields: [created_by], references: [id])
   created_at              DateTime         @default(now())

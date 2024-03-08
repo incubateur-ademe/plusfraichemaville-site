@@ -6,6 +6,7 @@ import { ChangeEvent, useRef } from "react";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { updateFichesSolutionsProjetAction } from "@/actions/projets/update-fiches-solutions-projet-action";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
+import { notifications } from "../common/notifications";
 
 export const FichesSolutionProjetBookmarksContainer = ({
   projetsFichesSolutionsIds,
@@ -43,6 +44,7 @@ export const FichesSolutionProjetBookmarksContainer = ({
       const updatedProjet = await updateFichesSolutionsProjetAction(projetId, merged);
       if (updatedProjet.projet) {
         updateStore(updatedProjet.projet);
+        notifications(updatedProjet.type, updatedProjet.message);
       }
     }
   };

@@ -26,5 +26,5 @@ export const updateFichesSolutionsProjetAction = async (
 
   revalidatePath(PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(projetId));
 
-  return { type: "success", message: "PROJETS_LOADED", projet };
+  return { type: "success", message: "FICHE_SOLUTION_ADDED_TO_PROJET", projet };
 };
