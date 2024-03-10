@@ -24,7 +24,7 @@ const UNITE_COUT_MATERIAU_METRE_CUBE: UniteCoutMateriau = {
 const UNITE_COUT_MATERIAU_UNITE: UniteCoutMateriau = {
   code: "unite",
   unitLabel: "unité",
-  estimationLabel: "Nombre d'unité'",
+  estimationLabel: "Nombre d'unité",
 };
 
 export const ALL_UNITES_COUT_MATERIAU: UniteCoutMateriau[] = [
@@ -44,8 +44,11 @@ export const getLabelCoutFourniture = (materiau: GetValues<"api::materiau.materi
       }`
     : "NA";
 
-export const getLabelCoutFournitureByQuantite = (materiau: GetValues<"api::materiau.materiau">, quantite: number) =>
-  materiau.cout_minimum_fourniture && materiau.cout_maximum_fourniture && quantite
+export const getLabelCoutFournitureByQuantite = (
+  materiau: GetValues<"api::materiau.materiau"> | undefined,
+  quantite: number,
+) =>
+  materiau && materiau.cout_minimum_fourniture && materiau.cout_maximum_fourniture && quantite
     ? `${materiau.cout_minimum_fourniture * quantite} - ${materiau.cout_maximum_fourniture * quantite} €`
     : "0 €";
 
@@ -56,7 +59,10 @@ export const getLabelCoutEntretien = (materiau: GetValues<"api::materiau.materia
       } / an`
     : "NA";
 
-export const getLabelCoutEntretienByQuantite = (materiau: GetValues<"api::materiau.materiau">, quantite: number) =>
-  materiau.cout_minimum_entretien && materiau.cout_maximum_entretien && quantite
+export const getLabelCoutEntretienByQuantite = (
+  materiau: GetValues<"api::materiau.materiau"> | undefined,
+  quantite: number,
+) =>
+  materiau && materiau.cout_minimum_entretien && materiau.cout_maximum_entretien && quantite
     ? `${materiau.cout_minimum_entretien * quantite} - ${materiau.cout_maximum_entretien * quantite} € / an`
     : "0 € / an";

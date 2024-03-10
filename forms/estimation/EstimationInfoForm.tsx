@@ -76,7 +76,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
             </FicheSolutionEstimationCard>
           ))}
         </div>
-        <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
+        <Button className={`rounded-3xl`} type="submit" disabled={disabled}>
           {"Faire une estimation"}
         </Button>
       </div>

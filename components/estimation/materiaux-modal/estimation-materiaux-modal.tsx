@@ -3,7 +3,6 @@
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { estimation } from "@prisma/client";
-import { useProjetsStore } from "@/stores/projets/provider";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useMemo, useState } from "react";
 import CustomDSFRModal from "@/components/common/CustomDSFRModal";
@@ -18,8 +17,6 @@ type EstimationCardDeleteModalProps = {
 
 export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModalProps) {
   let [estimationStep, setEstimationStep] = useState(1);
-  const getProjetById = useProjetsStore((state) => state.getProjetById);
-  const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
 
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const fetcher = (fsId: number) => getFicheSolutionById(`${fsId}`);
@@ -70,8 +67,11 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
             <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre},
              vous aurez besoin de choisir parmi les matériaux et systèmes suivants :`}</div>
             <EstimationMateriauForm
+              estimationId={estimation.id}
               ficheSolution={currentFicheSolution}
               estimationMateriaux={currentEstimationMateriaux}
+              onClose={modal.close}
+              onNext={() => setEstimationStep(estimationStep + 1)}
             />
           </>
         )}

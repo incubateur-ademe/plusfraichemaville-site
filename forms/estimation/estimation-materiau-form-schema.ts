@@ -1,10 +1,10 @@
 import z from "zod";
 
 export const EstimationMateriauxFormSchema = z.object({
-  projetId: z.number(),
   ficheSolutionId: z.number(),
   estimationMateriaux: z
     .object({
+      estimationId: z.number(),
       materiauId: z.string().min(1),
       quantite: z
         .number({ invalid_type_error: "Veuillez rentrer une valeur pour la quantité." })
