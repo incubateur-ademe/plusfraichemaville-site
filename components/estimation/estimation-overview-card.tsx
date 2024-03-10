@@ -1,15 +1,16 @@
 "use client";
 import { estimation } from "@prisma/client";
 import clsx from "clsx";
-import FicheSolutionEstimationCard from "@/components/ficheSolution/FicheSolutionEstimationCard";
+
 import { EstimationCardPriceInfo } from "@/components/estimation/estimation-card-price-info";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import sumBy from "lodash/sumBy";
 import React, { useMemo } from "react";
 import { EstimationDeleteModal } from "@/components/estimation/estimation-delete-modal";
 import { EstimationMateriauModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal";
+import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
 
-export const EstimationOverviewCard = ({ estimation, projetId }: { estimation: estimation; projetId: number }) => {
+export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const coutMinInvestissement = useMemo(
     () => sumBy(estimationMateriaux, "coutMinInvestissement"),
@@ -37,7 +38,7 @@ export const EstimationOverviewCard = ({ estimation, projetId }: { estimation: e
       <div className="mb-6 text-lg">{"Votre simulation pour ces solutions et matériaux choisis pour chacune."}</div>
       <div className={clsx("flex flex-wrap gap-6 mb-12")}>
         {estimation.fiches_solutions_id.map((ficheSolutionId) => (
-          <FicheSolutionEstimationCard
+          <FicheSolutionSmallCard
             key={ficheSolutionId}
             ficheSolutionId={ficheSolutionId}
             className="border-[1px] border-dsfr-border-default-grey rounded-2xl"
@@ -48,7 +49,7 @@ export const EstimationOverviewCard = ({ estimation, projetId }: { estimation: e
                 estimationInfo={estimationMateriaux?.find((em) => em.ficheSolutionId === ficheSolutionId)}
               />
             </div>
-          </FicheSolutionEstimationCard>
+          </FicheSolutionSmallCard>
         ))}
       </div>
       <div className={clsx("text-lg", estimation.status !== "validee" && "text-dsfr-text-disabled-grey")}>

@@ -6,11 +6,11 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiCli
 import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import useSWR from "swr";
 
-export default function FicheSolutionEstimationCard({
+export function FicheSolutionSmallCard({
   ficheSolutionId,
   children,
   onClick,
-  className,
+  className = " pfmv-card cursor-pointer ",
 }: {
   ficheSolutionId: number;
   onClick?: () => void;
@@ -47,7 +47,9 @@ export default function FicheSolutionEstimationCard({
           {ficheSolution.attributes.titre}
         </div>
         <div className={"text-sm text-dsfr-text-title-grey mt-4"}>{ficheSolution.attributes.description_courte}</div>
-        <div className={"mt-auto"}>{children}</div>
+        <div className={"mt-auto"}>
+          <div className="mt-4 flex place-content-center">{children}</div>
+        </div>
       </div>
     </div>
   );
