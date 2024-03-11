@@ -45,7 +45,7 @@ export const TableauDeBordTabs = () => {
             <Link
               href={PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(+projetId, tab.filter)}
               data-tab={tab.filter}
-              data-index="o"
+              data-index=""
               className={clsx(
                 getButtonTabClassName(currentTab === tab.filter),
                 "!bg-none relative",
