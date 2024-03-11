@@ -33,9 +33,9 @@ export default function NavigationMenu() {
           isActive: pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE),
         },
         {
-          linkProps: { href: "/mon-projet/favoris", target: "_self", onClick: cancelCurrentProjet },
+          linkProps: { href: PFMV_ROUTES.MES_FICHES_SOLUTIONS, target: "_self", onClick: cancelCurrentProjet },
           text: "Ma sélection",
-          isActive: pathname?.startsWith("/mon-projet/favoris"),
+          isActive: pathname?.startsWith(PFMV_ROUTES.MES_FICHES_SOLUTIONS),
         },
         {
           linkProps: { href: "/contact", target: "_self", onClick: cancelCurrentProjet },
