@@ -5,7 +5,6 @@ import { FichesSolutionsProjetHeader } from ".";
 import { FichesSolutionsProjetsSelected } from "./fiches-solutions-projet-selected";
 import { AllSolutionsBoard } from "../common/all-solutions-board";
 import { FichesSolutionProjetBookmarksByEspace } from "./fiches-solutions-projet-bookmarks-by-espace";
-import { FichesSolutionProjetBookmarksAll } from "./fiches-solutions-projet-bookmarks-all";
 
 export const FichesSolutionsProjet = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -27,8 +26,9 @@ export const FichesSolutionsProjet = () => {
           updateStore={updateStore}
           projetId={projet?.id}
         />
-        <FichesSolutionProjetBookmarksAll
+        <FichesSolutionProjetBookmarksByEspace
           projetNom={projet?.nom ?? ""}
+          projetTypeEspace={""}
           projetsFichesSolutionsIds={selectedFichesSolutionsIds ?? []}
           updateStore={updateStore}
           projetId={projet?.id}
