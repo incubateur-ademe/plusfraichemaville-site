@@ -1,5 +1,6 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ModalSaveFicheSolutionProps } from "../ButtonSaveFicheSolution";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export const ModalSaveFicheSolutionDisconnected = ({ modal }: ModalSaveFicheSolutionProps) => {
   return (
@@ -12,7 +13,7 @@ export const ModalSaveFicheSolutionDisconnected = ({ modal }: ModalSaveFicheSolu
         <Button
           priority="secondary"
           className={"rounded-3xl text-sm"}
-          linkProps={{ href: "/mon-projet/favoris", target: "_self" }}
+          linkProps={{ href: PFMV_ROUTES.MES_FICHES_SOLUTIONS, target: "_self" }}
           size="small"
         >
           Ma sélection

@@ -51,7 +51,7 @@ export const TableauDeBordSuiviWithFichesSolutionsImage = ({ ficheSolutionId }: 
         width={48}
         height={48}
         sizes="3vw"
-        src={getStrapiImageUrl(data?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
+        src={getStrapiImageUrl(data?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
       />
     </div>
   );

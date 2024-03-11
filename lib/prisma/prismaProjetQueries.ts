@@ -21,6 +21,21 @@ export const updateFichesSolutionsProjet = (
   });
 };
 
+export const updateFichesSolutionsProjetValidated = (projetId: number): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+    },
+    data: {
+      fiches_solutions_validated: true,
+    },
+    include: {
+      collectivite: true,
+      estimations: true,
+    },
+  });
+};
+
 export const getProjetById = async (projetId: number): Promise<projet | null> => {
   return prismaClient.projet.findUnique({
     where: {
