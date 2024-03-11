@@ -20,7 +20,7 @@ export const customCaptureException = (message: string, exception?: any) => {
       category: "error",
       level: "error",
       data: exception,
-      message
+      message,
     }),
   );
 };

@@ -9,7 +9,10 @@ type EstimationMateriauFieldProps = {
   materiau?: MateriauResponse;
 };
 
-export default function EstimationMateriauField({ materiau, children }: EstimationMateriauFieldProps & PropsWithChildren) {
+export default function EstimationMateriauField({
+  materiau,
+  children,
+}: EstimationMateriauFieldProps & PropsWithChildren) {
   if (!materiau) {
     return null;
   }

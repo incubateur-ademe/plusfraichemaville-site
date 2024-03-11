@@ -43,7 +43,7 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
             ficheSolutionId={ficheSolutionId}
             className="border-[1px] border-dsfr-border-default-grey rounded-2xl"
           >
-            <div>
+            <div className="w-full">
               <hr className="mt-6 pb-4" />
               <EstimationCardPriceInfo
                 estimationInfo={estimationMateriaux?.find((em) => em.ficheSolutionId === ficheSolutionId)}

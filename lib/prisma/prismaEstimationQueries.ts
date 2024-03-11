@@ -39,10 +39,10 @@ export const updateEstimationMateriaux = async (
 ): Promise<estimation> => {
   return prismaClient.estimation.update({
     where: {
-      id: estimationId
+      id: estimationId,
     },
     data: {
-      materiaux: estimationMateriaux as Prisma.JsonArray
+      materiaux: estimationMateriaux as Prisma.JsonArray,
     },
   });
 };

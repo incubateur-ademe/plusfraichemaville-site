@@ -29,6 +29,5 @@ export default function EstimationMateriauGlobalPriceFooter({
         </div>
       </div>
     </>
-
   );
 }

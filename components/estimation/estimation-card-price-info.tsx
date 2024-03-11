@@ -10,7 +10,7 @@ export const EstimationCardPriceInfo = ({ estimationInfo }: { estimationInfo?: E
       <div>
         <strong>{`${estimationInfo.coutMinInvestissement} - ${estimationInfo.coutMaxInvestissement} `}</strong> HT
       </div>
-      <div className="fr-text-mention--grey">
+      <div className="text-dsfr-text-mention-grey">
         {`${estimationInfo.coutMinEntretien} - ${estimationInfo.coutMaxEntretien} HT / an`}
       </div>
     </div>

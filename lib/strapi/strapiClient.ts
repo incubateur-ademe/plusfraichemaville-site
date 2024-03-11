@@ -1,4 +1,3 @@
-import * as Sentry from "@sentry/nextjs";
 import { APIResponse } from "@/lib/strapi/types/types";
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 

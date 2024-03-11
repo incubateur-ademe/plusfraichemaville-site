@@ -76,7 +76,7 @@ const InputFormField = <T extends FieldValues>({
         const input =
           type === "textarea" ? (
             <textarea
-              className={clsx("fr-input", {"!bg-white":whiteBackground})}
+              className={clsx("fr-input", { "!bg-white": whiteBackground })}
               aria-describedby={ariaDescribedBy}
               disabled={disabled}
               id={id}
@@ -89,7 +89,7 @@ const InputFormField = <T extends FieldValues>({
             />
           ) : (
             <input
-              className={clsx("fr-input", {"!bg-white":whiteBackground})}
+              className={clsx("fr-input", { "!bg-white": whiteBackground })}
               aria-describedby={ariaDescribedBy}
               disabled={disabled}
               type={type}
