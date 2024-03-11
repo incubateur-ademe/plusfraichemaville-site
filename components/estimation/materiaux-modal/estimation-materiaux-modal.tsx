@@ -10,6 +10,8 @@ import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQuerie
 import useSWR from "swr";
 import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { upsert } from "@/helpers/listUtils";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;
@@ -17,6 +19,9 @@ type EstimationCardDeleteModalProps = {
 
 export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModalProps) {
   let [estimationStep, setEstimationStep] = useState(1);
+
+  const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
+  const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
 
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const fetcher = (fsId: number) => getFicheSolutionById(`${fsId}`);
@@ -49,6 +54,28 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     isOpenedByDefault: false,
   });
 
+  const updateEstimationInStore = (estimation: estimation) => {
+    const currentProject = getCurrentProjet();
+    if (currentProject) {
+      updateProjetInStore({
+        ...currentProject,
+        estimations: upsert(currentProject.estimations, estimation),
+      });
+    }
+  };
+
+  const goToNextStep = () => {
+    setEstimationStep(estimationStep + 1);
+  };
+
+  const goToPreviousStep = () => {
+    if (estimationStep > 1) {
+      setEstimationStep(estimationStep - 1);
+    } else {
+      modal.close();
+    }
+  };
+
   return (
     <>
       <Button nativeButtonProps={modal.buttonProps} className="rounded-3xl">
@@ -71,7 +98,9 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
               ficheSolution={currentFicheSolution}
               estimationMateriaux={currentEstimationMateriaux}
               onClose={modal.close}
-              onNext={() => setEstimationStep(estimationStep + 1)}
+              onPrevious={goToPreviousStep}
+              onNext={goToNextStep}
+              onUpdateEstimation={updateEstimationInStore}
             />
           </>
         )}

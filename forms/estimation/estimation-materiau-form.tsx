@@ -5,17 +5,21 @@ import {
   getUniteCoutMateriauFromCode,
 } from "@/helpers/coutMateriau";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
-import { SubmitHandler, useFieldArray, useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   EstimationMateriauxFormData,
   EstimationMateriauxFormSchema,
 } from "@/forms/estimation/estimation-materiau-form-schema";
-import { FicheSolutionResponse, MateriauResponse } from "@/components/ficheSolution/type";
+import { FicheSolutionResponse } from "@/components/ficheSolution/type";
 import InputFormField from "@/components/common/InputFormField";
 import Button from "@codegouvfr/react-dsfr/Button";
 import EstimationMateriauField from "@/forms/estimation/estimation-materiau-field";
 import EstimationMateriauGlobalPriceFooter from "@/forms/estimation/estimation-materiau-global-price-footer";
+import { updateEstimationMateriauxAction } from "@/actions/estimation/update-estimation-materiaux-action";
+import { notifications } from "@/components/common/notifications";
+import { estimation } from "@prisma/client";
+import { mapStrapiEstimationMateriauxToFormValues } from "@/lib/prisma/prismaCustomTypesHelper";
 
 export default function EstimationMateriauForm({
   ficheSolution,
@@ -24,28 +28,18 @@ export default function EstimationMateriauForm({
   onNext,
   onPrevious,
   onClose,
+  onUpdateEstimation,
 }: {
   ficheSolution: FicheSolutionResponse;
   estimationMateriaux?: EstimationMateriauxFicheSolution;
   estimationId: number;
   onNext: () => void;
-  onPrevious?: () => void;
+  onPrevious: () => void;
   onClose: () => void;
+  onUpdateEstimation: (_: estimation) => void;
 }) {
-  const mapStrapiEstimationMateriauxToFormValues = (
-    ficheSolutionMateriaux: MateriauResponse[] | undefined,
-    defaultEstimationMateriaux: EstimationMateriauxFicheSolution | undefined,
-  ) => {
-    return ficheSolutionMateriaux?.map((materiau) => ({
-      materiauId: `${materiau.id}`,
-      quantite:
-        defaultEstimationMateriaux?.estimationMateriaux?.find((e) => +e.materiauId == +materiau.id)?.quantite || 0,
-    }));
-  };
-
   const initialValues = useMemo(
     () => ({
-      estimationId,
       ficheSolutionId: +ficheSolution.id,
       estimationMateriaux: mapStrapiEstimationMateriauxToFormValues(
         ficheSolution.attributes.materiaux?.data,
@@ -68,10 +62,24 @@ export default function EstimationMateriauForm({
 
   const watchAllFields = form.watch();
 
-  const onSubmit: SubmitHandler<EstimationMateriauxFormData> = async (data) => {
-    onNext();
-  };
+  const onSubmitAndNext = async (data: EstimationMateriauxFormData) => onSubmit(data, onNext);
+  const onSubmitAndClose = async (data: EstimationMateriauxFormData) => onSubmit(data, onClose);
+  const onSubmitAndPrevious = async (data: EstimationMateriauxFormData) => onSubmit(data, onPrevious);
 
+  const onSubmit = async (data: EstimationMateriauxFormData, callback?: () => void) => {
+    data.globalPrice = globalPrice;
+    const actionResult = await updateEstimationMateriauxAction(estimationId, data);
+    if (actionResult.type !== "success") {
+      notifications(actionResult.type, actionResult.message);
+    } else {
+      if (actionResult.updatedEstimation) {
+        onUpdateEstimation(actionResult.updatedEstimation);
+      }
+      if (callback) {
+        callback();
+      }
+    }
+  };
   const { fields } = useFieldArray({
     control: form.control,
     name: "estimationMateriaux",
@@ -105,10 +113,13 @@ export default function EstimationMateriauForm({
   );
 
   return (
-    <form id={`estimation-fiche-solution-${ficheSolution.id}`} onSubmit={form.handleSubmit(onSubmit)}>
-      <>
-        {ficheSolution.attributes.materiaux?.data && ficheSolution.attributes.materiaux.data.length > 0 ? (
-          <>
+    <>
+      {ficheSolution.attributes.materiaux?.data && ficheSolution.attributes.materiaux.data.length > 0 ? (
+        <>
+          <form
+            id={`estimation-fiche-solution-${ficheSolution.id}`}
+            onSubmit={form.handleSubmit((data) => onSubmit(data))}
+          >
             {fields.map((field, index) => (
               <EstimationMateriauField materiau={getMateriauFromId(+field.materiauId)} key={field.materiauId}>
                 <InputFormField
@@ -144,27 +155,30 @@ export default function EstimationMateriauForm({
               entretienMin={globalPrice?.entretien.min}
               entretienMax={globalPrice?.entretien.max}
             />
-            <Button className={`rounded-3xl mr-4`} onClick={() => form.handleSubmit(onSubmit)} disabled={disabled}>
+            <Button className={`rounded-3xl mr-4`} onClick={form.handleSubmit(onSubmitAndNext)} disabled={disabled}>
               {"Suivant"}
             </Button>
-            <Button className={`rounded-3xl mr-4`} onClick={() => onClose()} disabled={disabled} priority="secondary">
+            <Button
+              className={`rounded-3xl mr-4`}
+              onClick={form.handleSubmit(onSubmitAndClose)}
+              disabled={disabled}
+              priority="secondary"
+            >
               {"Enregistrer et finir plus tard"}
             </Button>
-            {onPrevious && (
-              <Button
-                className={`rounded-3xl mr-4`}
-                onClick={() => onPrevious()}
-                disabled={disabled}
-                priority="tertiary"
-              >
-                {"Précédent"}
-              </Button>
-            )}
-          </>
-        ) : (
-          <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
-        )}{" "}
-      </>
-    </form>
+            <Button
+              className={`rounded-3xl mr-4`}
+              onClick={form.handleSubmit(onSubmitAndPrevious)}
+              disabled={disabled}
+              priority="tertiary"
+            >
+              {"Précédent"}
+            </Button>
+          </form>
+        </>
+      ) : (
+        <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
+      )}{" "}
+    </>
   );
 }
