@@ -10,6 +10,7 @@ export default function NavigationMenu() {
   const { status } = useSession();
 
   const setCurrentProjetId = useProjetsStore((state) => state.setCurrentProjetId);
+
   const cancelCurrentProjet = () => setCurrentProjetId(null);
 
   return (
