@@ -7,13 +7,17 @@ import clsx from "clsx";
 
 import { EstimationFormData, EstimationFormSchema } from "@/forms/estimation/EstimationFormSchema";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
-import { createEstimationAction } from "@/actions/estimation/create-estimation";
+import { createEstimationAction } from "@/actions/estimation/create-estimation-action";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { FicheSolutionSmallCardContainer } from "@/components/ficheSolution/fiche-solution-small-card-container";
 import { FicheSolutionSmallCard } from "@/components/ficheSolution/fiche-solution-small-card";
+import { PFMV_ROUTES } from "@/helpers/routes";
+import { useRouter } from "next/navigation";
+import { notifications } from "@/components/common/notifications";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
+  const router = useRouter();
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
@@ -36,14 +40,14 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     const result = await createEstimationAction(projet.id, {
       ...data,
     });
-
+    notifications(result.type, result.message);
     if (result.type === "success") {
       if (result.estimation) {
+        // TODO : rediriger vers la page d'estimation des matériaux en ouvrant la modif de l'estimation nouvellement créée
         updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
+        router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id));
       }
     }
-    // TODO : rediriger vers la page d'estimation des matériaux
-    // TODO : mettre à jour le store de manière cohérente avec ce qui est fait pour le rajout de fiche solution
   };
 
   const disabled = form.formState.isSubmitting;
@@ -81,7 +85,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
             </FicheSolutionSmallCard>
           ))}
         </div>
-        <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
+        <Button className={`rounded-3xl`} type="submit" disabled={disabled}>
           {"Faire une estimation"}
         </Button>
       </FicheSolutionSmallCardContainer>

@@ -1,6 +1,10 @@
 /** @type {import("tailwindcss").Config} */
 module.exports = {
-  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}", "./components/**/*.{js,ts,jsx,tsx,mdx}"],
+  content: [
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./forms/**/*.{js,ts,jsx,tsx,mdx}",
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -36,6 +40,8 @@ module.exports = {
       "dsfr-border-default-grey": "var(--border-default-grey)",
       "dsfr-text-default-grey": "var(--text-default-grey)",
       "dsfr-text-error": "var(--text-default-error)",
+      "dsfr-contrast-grey": "var(--background-contrast-grey)",
+
       "tab-hover": "rgba(66, 17, 170, 0.10)!important",
     },
   },

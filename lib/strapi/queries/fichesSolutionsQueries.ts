@@ -81,6 +81,8 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
               description
               cout_maximum_fourniture
               cout_minimum_fourniture
+              cout_minimum_entretien
+              cout_maximum_entretien
               cout_unite
             }
           }

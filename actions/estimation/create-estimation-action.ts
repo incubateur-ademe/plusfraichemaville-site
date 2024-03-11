@@ -33,7 +33,7 @@ export const createEstimationAction = async (
   } else {
     try {
       const estimation = await createEstimation(projetId, data.ficheSolutionIds.map(Number), session.user.id);
-      return { type: "success", estimation };
+      return { type: "success", message: "ESTIMATION_CREATED", estimation };
     } catch (e) {
       customCaptureException("Error in EditProjetInfoAction DB call", e);
       return { type: "error", message: "TECHNICAL_ERROR" };
