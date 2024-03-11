@@ -6,7 +6,7 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import clsx from "clsx";
 import Image from "next/image";
 import { useParams } from "next/navigation";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 const IMAGE_SLICE_INDEX = 5;
 
@@ -39,7 +39,9 @@ export const TableauDeBordSuiviWithFichesSolutions = () => {
 };
 
 export const TableauDeBordSuiviWithFichesSolutionsImage = ({ ficheSolutionId }: { ficheSolutionId: string }) => {
-  const { data } = useSWR(ficheSolutionId, () => getFicheSolutionById(ficheSolutionId.toString()));
+  const { data } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
+    getFicheSolutionById(ficheSolutionId.toString()),
+  );
 
   return (
     <div className="w-10 h-10 rounded-[50%] overflow-hidden mr-2 shrink-0">

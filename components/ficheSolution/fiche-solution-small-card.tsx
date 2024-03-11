@@ -4,7 +4,7 @@ import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React, { PropsWithChildren } from "react";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 
 export function FicheSolutionSmallCard({
   ficheSolutionId,
@@ -16,9 +16,9 @@ export function FicheSolutionSmallCard({
   onClick?: () => void;
   className?: string;
 } & PropsWithChildren) {
-  const swrKey = `ficheSolution-${ficheSolutionId}`;
-  const fetcher = () => getFicheSolutionById(`${ficheSolutionId}`);
-  const { data: ficheSolution } = useSWR(swrKey, fetcher);
+  const { data: ficheSolution } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
+    getFicheSolutionById(ficheSolutionId.toString()),
+  );
   if (!ficheSolution) {
     return null;
   }

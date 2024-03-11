@@ -1,9 +1,8 @@
 import { useProjetsStore } from "@/stores/projets/provider";
-
-import useSWR from "swr";
 import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
 import { useCallback, useEffect, useState } from "react";
+import useSWRImmutable from "swr/immutable";
 
 type FicheCounterState = {
   count: number;
@@ -49,7 +48,9 @@ const TableauDeBordRecommandationItem = ({
   ficheSolutionId: number;
   addCount: (_count: number) => void;
 }) => {
-  const { data } = useSWR(ficheSolutionId.toString(), () => getFicheSolutionById(ficheSolutionId.toString()));
+  const { data } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
+    getFicheSolutionById(ficheSolutionId.toString()),
+  );
   useEffect(() => {
     if (data?.attributes.fiches_solutions_complementaires?.data) {
       addCount(data.attributes.fiches_solutions_complementaires.data.length);
