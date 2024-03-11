@@ -61,7 +61,7 @@ export async function FicheSolution({
             {params.projetId ? (
               // TODO: créer un button-save-selector => select entre bouton dans fiche projet / fiche globale
               <div className="relative [&>button]:right-auto">
-                <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} />
+                <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} label />
               </div>
             ) : (
               <ButtonSaveFicheSolution

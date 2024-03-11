@@ -19,11 +19,13 @@ const modal = createModal({
 type ButtonSaveFicheSolutionInProjetProps = {
   ficheSolutionId: FicheSolutionResponse["id"];
   className?: string;
+  label?: boolean;
 };
 
 export const ButtonSaveFicheSolutionInProjet = ({
   ficheSolutionId,
   className = "right-2",
+  label = false,
 }: ButtonSaveFicheSolutionInProjetProps) => {
   const { projetId } = useParams();
   const userId = useSession().data?.user.id;
@@ -75,7 +77,14 @@ export const ButtonSaveFicheSolutionInProjet = ({
           className,
         )}
       >
-        <i className={clsx(`fr-icon--sm`, isAlreadySaved ? "ri-add-circle-fill mr-1" : "ri-add-circle-line")}></i>
+        <i
+          className={clsx(
+            `fr-icon--sm`,
+            isAlreadySaved ? "ri-add-circle-fill" : "ri-add-circle-line",
+            (isAlreadySaved || label) && "mr-1",
+          )}
+        ></i>
+        {!isAlreadySaved && label && "Ajouter au projet"}
         {isAlreadySaved && "Ajoutée au projet"}
       </Button>
     </>
