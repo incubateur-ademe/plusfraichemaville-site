@@ -14,7 +14,7 @@ export const FichesSolutionsProjetsSelected = ({
 }) => {
   const pathname = usePathname();
   const { projetId } = useParams();
-  const tableauDeBordUrl = pathname.replace("/fiches-solutions", "/tableau-de-bord");
+  const tableauDeBordUrl = pathname.replace("/fiches-solutions", "/tableau-de-bord?tab=tableau-de-suivi");
 
   return (
     <div>

@@ -16,7 +16,7 @@ const tabs = [
   },
   {
     label: "Recommandations",
-    filter: "recommendation",
+    filter: "recommandation",
     component: <TableauDeBordRecommandation />,
   },
   {
@@ -44,8 +44,20 @@ export const TableauDeBordTabs = () => {
           {tabs.map((tab, index) => (
             <Link
               href={PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(+projetId, tab.filter)}
-              data-index={index}
-              className={clsx(getButtonTabClassName(currentTab === tab.filter), "!bg-none")}
+              data-tab={tab.filter}
+              data-index="o"
+              className={clsx(
+                getButtonTabClassName(currentTab === tab.filter),
+                "!bg-none relative",
+                tab.filter === "recommandation" && `after:content-[attr(data-index)]`,
+                tab.filter !== "recommandation" && "after:bg-none",
+                tab.filter === "recommandation" &&
+                  "after:absolute after:top-1 after:text-[10px] after:bg-dsfr-background-flat-blue-france",
+                tab.filter === "recommandation" &&
+                  "after:text-white after:rounded-full after:w-[20px] after:h-[20px] after:flex after:justify-center",
+                tab.filter === "recommandation" && "after:items-center",
+                tab.filter === "recommandation" && "after:right-2",
+              )}
               key={`button-tab-${index}`}
             >
               {tab.label}
