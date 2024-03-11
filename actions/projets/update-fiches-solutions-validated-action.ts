@@ -1,14 +1,14 @@
 "use server";
 
 import { auth } from "@/lib/next-auth/auth";
+
 import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
-import { updateFichesSolutionsProjet } from "@/lib/prisma/prismaProjetQueries";
+import { updateFichesSolutionsProjetValidated } from "@/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 
-export const updateFichesSolutionsProjetAction = async (
+export const updateFichesSolutionsValidatedAction = async (
   projetId: number,
-  fichesSolutionsId: number[],
 ): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
@@ -19,7 +19,7 @@ export const updateFichesSolutionsProjetAction = async (
     return { type: "error", message: "UNAUTHORIZED", projet: null };
   }
 
-  const projet = await updateFichesSolutionsProjet(projetId, fichesSolutionsId);
+  const projet = await updateFichesSolutionsProjetValidated(projetId);
 
-  return { type: "success", message: "FICHE_SOLUTION_ADDED_TO_PROJET", projet };
+  return { type: "success", message: "FICHES_SOLUTIONS_VALIDATED", projet };
 };

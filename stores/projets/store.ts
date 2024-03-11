@@ -9,7 +9,7 @@ interface ProjetsState {
 
 export type ProjetsActions = {
   setProjets: (_projets: ProjetWithRelations[]) => void;
-  setCurrentProjetId: (_currentProjetId: number) => void;
+  setCurrentProjetId: (_currentProjetId: number | null) => void;
   getCurrentProjet: () => ProjetWithRelations | undefined;
   getProjetById: (_projetId: number) => ProjetWithRelations | undefined;
   addOrUpdateProjet: (_projet: ProjetWithRelations) => void;
