@@ -18,6 +18,10 @@ export const TableauDeBordRecommandation = () => {
   }, []);
 
   useEffect(() => {
+    setFichesCounter([]);
+  }, [projet]);
+
+  useEffect(() => {
     const q = document.querySelector<HTMLAnchorElement>('[data-tab="recommandation"]');
     if (fichesCounter.length === projet?.fiches_solutions_id.length) {
       const totalCount = fichesCounter.reduce((acc, obj) => acc + obj.count, 0);
@@ -25,10 +29,6 @@ export const TableauDeBordRecommandation = () => {
       q?.setAttribute("data-index", `${totalCount}`);
     }
   }, [fichesCounter, projet?.fiches_solutions_id.length]);
-
-  useEffect(() => {
-    setFichesCounter([]);
-  }, [projet]);
 
   if (!projet) {
     return null;

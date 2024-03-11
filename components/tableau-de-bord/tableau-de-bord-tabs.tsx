@@ -8,24 +8,6 @@ import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useParams, useSearchParams } from "next/navigation";
 
-const tabs = [
-  {
-    label: "Tableau de suivi",
-    filter: "tableau-de-suivi",
-    component: <TableauDeBordSuivi />,
-  },
-  {
-    label: "Recommandations",
-    filter: "recommandation",
-    component: <TableauDeBordRecommandation />,
-  },
-  {
-    label: "Option de partage",
-    filter: "option-de-partage",
-    component: <>Option de partage</>,
-  },
-];
-
 const getButtonTabClassName = (active: boolean) =>
   clsx(
     "px-6 py-4 text-sm hover:!bg-dsfr-border-action-low-blue-france hover:!text-dsfr-background-flat-blue-france",
@@ -36,6 +18,24 @@ export const TableauDeBordTabs = () => {
   const { projetId } = useParams();
   const params = useSearchParams();
   const currentTab = params.get("tab");
+
+  const tabs = [
+    {
+      label: "Tableau de suivi",
+      filter: "tableau-de-suivi",
+      component: <TableauDeBordSuivi />,
+    },
+    {
+      label: "Recommandations",
+      filter: "recommandation",
+      component: <TableauDeBordRecommandation />,
+    },
+    {
+      label: "Option de partage",
+      filter: "option-de-partage",
+      component: <>Option de partage</>,
+    },
+  ];
 
   return (
     <>
@@ -50,13 +50,11 @@ export const TableauDeBordTabs = () => {
                 getButtonTabClassName(currentTab === tab.filter),
                 "!bg-none relative",
                 tab.filter === "recommandation" && `after:content-[attr(data-index)]`,
-                tab.filter !== "recommandation" && "after:bg-none",
                 tab.filter === "recommandation" &&
                   "after:absolute after:top-1 after:text-[10px] after:bg-dsfr-background-flat-blue-france",
                 tab.filter === "recommandation" &&
                   "after:text-white after:rounded-full after:w-[20px] after:h-[20px] after:flex after:justify-center",
-                tab.filter === "recommandation" && "after:items-center",
-                tab.filter === "recommandation" && "after:right-2",
+                tab.filter === "recommandation" && "after:items-center after:right-2",
               )}
               key={`button-tab-${index}`}
             >
