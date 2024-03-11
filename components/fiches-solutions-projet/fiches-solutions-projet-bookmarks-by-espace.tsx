@@ -3,8 +3,7 @@ import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { FichesSolutionProjetBookmarksContainer } from "./fiches-solutions-projet-bookmarks-container";
 import { ALL_ESPACES } from "../filters/TypeEspaceFilter";
 
-const getLabelFromCode = (code: string): string =>
-  ALL_ESPACES.find((espace) => espace.code === code)?.label || "";
+const getLabelFromCode = (code: string): string => ALL_ESPACES.find((espace) => espace.code === code)?.label || "";
 
 export const FichesSolutionProjetBookmarksByEspace = ({
   projetNom,
