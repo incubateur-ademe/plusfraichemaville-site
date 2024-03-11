@@ -1,11 +1,15 @@
 import clsx from "clsx";
 import { TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
+import { useProjetsStore } from "@/stores/projets/provider";
 
 type TableauDeBordSuiviCardProgressProps = {
   progress: TableauDeBordSuiviCardProps["progress"];
 };
 
-const progressState = (progress: TableauDeBordSuiviCardProps["progress"]) => {
+const progressState = (progress?: "0" | "50" | "100") => {
+  if (!progress) {
+    return { label: "non commencé", widthClass: "w-0" };
+  }
   const state = {
     "0": { label: "non commencé", widthClass: "w-0" },
     "50": { label: "en cours", widthClass: "w-1/2" },
@@ -16,7 +20,9 @@ const progressState = (progress: TableauDeBordSuiviCardProps["progress"]) => {
 };
 
 export const TableauDeBordSuiviCardProgress = ({ progress }: TableauDeBordSuiviCardProgressProps) => {
-  const { label, widthClass } = progressState(progress);
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  const p = typeof progress === "function" ? progress(currentProjet!) : progress;
+  const { label, widthClass } = progressState(p);
 
   return (
     <>

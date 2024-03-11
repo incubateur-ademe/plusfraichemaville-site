@@ -1,3 +1,4 @@
+import { generateRandomId } from "@/helpers/common";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { estimation } from "@prisma/client";
 
@@ -28,6 +29,7 @@ export const createEstimation = async (
       fiches_solutions_id: fichesSolutionId,
       created_by: createdBy,
       status: "en_cours",
+      id: generateRandomId(),
     },
   });
 };

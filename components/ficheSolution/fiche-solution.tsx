@@ -14,6 +14,7 @@ import { getFicheSolutionBySlug } from "@/lib/strapi/queries/fichesSolutionsQuer
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
 import { ButtonSaveFicheSolutionInProjet } from "./button-save-fiche-solution-in-projet";
+import clsx from "clsx";
 
 export async function FicheSolution({
   params,
@@ -38,10 +39,10 @@ export async function FicheSolution({
           />
           <div className="fr-container">
             <h1
-              className={
-                "mt-8 md:fr-container absolute text-white text-[1.375rem] md:text-[2.625rem] " +
-                " md:ml-56 bottom-0 md:bottom-4 font-bold leading-normal"
-              }
+              className={clsx(
+                "mt-8 md:fr-container absolute text-white text-[1.375rem] md:text-[2.625rem]",
+                "md:ml-56 bottom-0 md:bottom-4 font-bold leading-normal",
+              )}
             >
               {ficheSolution.attributes.titre}
             </h1>

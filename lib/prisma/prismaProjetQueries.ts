@@ -1,6 +1,7 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { projet } from "@prisma/client";
 import { ProjetWithRelations } from "./prismaCustomTypes";
+import { generateRandomId } from "@/helpers/common";
 
 export const updateFichesSolutionsProjet = (
   projetId: number,
@@ -12,6 +13,21 @@ export const updateFichesSolutionsProjet = (
     },
     data: {
       fiches_solutions_id: fichesSolutionsId,
+    },
+    include: {
+      collectivite: true,
+      estimations: true,
+    },
+  });
+};
+
+export const updateFichesSolutionsProjetValidated = (projetId: number): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+    },
+    data: {
+      fiches_solutions_validated: true,
     },
     include: {
       collectivite: true,
@@ -59,6 +75,7 @@ export const createOrUpdateProjet = async ({
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
       created_by: userId,
+      id: generateRandomId(),
     },
     update: {
       nom: nomProjet,

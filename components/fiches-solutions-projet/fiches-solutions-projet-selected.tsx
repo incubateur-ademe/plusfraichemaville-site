@@ -7,14 +7,32 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 
 import { FichesSolutionsProjetsSelectedCard } from "./fiches-solutions-projet-selected-card";
 
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { updateFichesSolutionsValidatedAction } from "@/actions/projets/update-fiches-solutions-validated-action";
+import { notifications } from "../common/notifications";
+
+type FichesSolutionsProjetsSelectedProps = {
+  selectedFichesSolutionsIds?: number[];
+  isValidated: boolean | undefined;
+  updateStore: (_projet: ProjetWithRelations) => void;
+};
+
 export const FichesSolutionsProjetsSelected = ({
   selectedFichesSolutionsIds,
-}: {
-  selectedFichesSolutionsIds?: number[];
-}) => {
+  isValidated,
+  updateStore,
+}: FichesSolutionsProjetsSelectedProps) => {
   const pathname = usePathname();
   const { projetId } = useParams();
   const tableauDeBordUrl = pathname.replace("/fiches-solutions", "/tableau-de-bord");
+
+  const validateFichesSolutionsToProjet = async () => {
+    const updatedProjet = await updateFichesSolutionsValidatedAction(+projetId);
+    if (updatedProjet.projet) {
+      updateStore(updatedProjet.projet);
+      notifications();
+    }
+  };
 
   return (
     <div>
@@ -38,10 +56,13 @@ export const FichesSolutionsProjetsSelected = ({
           <span className="text-white text-center">Ajouter des solutions</span>
         </Link>
       </div>
-
-      <Link className="fr-btn rounded-3xl mb-10" href={tableauDeBordUrl}>
-        Retour au tableau de bord
-      </Link>
+      {isValidated ? (
+        <Link className="fr-btn rounded-3xl mb-10" href={tableauDeBordUrl}>
+          Retour au tableau de bord
+        </Link>
+      ) : (
+        <button onClick={validateFichesSolutionsToProjet}>Valider</button>
+      )}
     </div>
   );
 };

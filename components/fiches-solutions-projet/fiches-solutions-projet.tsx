@@ -14,7 +14,11 @@ export const FichesSolutionsProjet = () => {
     <>
       <div className="fr-container py-10">
         <FichesSolutionsProjetHeader projetId={projet?.id} projetNom={projet?.nom} />
-        <FichesSolutionsProjetsSelected selectedFichesSolutionsIds={selectedFichesSolutionsIds} />
+        <FichesSolutionsProjetsSelected
+          selectedFichesSolutionsIds={selectedFichesSolutionsIds}
+          isValidated={projet?.fiches_solutions_validated}
+          updateStore={updateStore}
+        />
         <FichesSolutionProjetBookmarksByEspace
           projetNom={projet?.nom ?? ""}
           projetTypeEspace={projet?.type_espace ?? ""}
