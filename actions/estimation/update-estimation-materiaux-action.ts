@@ -32,7 +32,7 @@ export const updateEstimationMateriauxAction = async (
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      const currentMateriauxEstimation = estimation.materiaux as EstimationMateriauxFicheSolution[] || [];
+      const currentMateriauxEstimation = (estimation.materiaux as EstimationMateriauxFicheSolution[]) || [];
       const newMateriauxEstimation: EstimationMateriauxFicheSolution = {
         ficheSolutionId: data.ficheSolutionId,
         estimationMateriaux: data.estimationMateriaux,
