@@ -10,6 +10,7 @@ export const TableauDeBordRecommandation = () => {
   if (!projet) {
     return null;
   }
+
   return (
     <div className="flex flex-wrap gap-8">
       <p>
