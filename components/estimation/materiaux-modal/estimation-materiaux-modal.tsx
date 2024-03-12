@@ -1,4 +1,5 @@
 "use client";
+import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { Button } from "@codegouvfr/react-dsfr/Button";
@@ -79,12 +80,14 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     }
   };
 
+  const modalIsOpen = useIsModalOpen(modal);
+
   return (
     <>
       <Button nativeButtonProps={modal.buttonProps} className="rounded-3xl">
         Modifier
       </Button>
-      <CustomDSFRModal modalId={`estimation-materiaux-modal-${estimation.id}`}>
+      <CustomDSFRModal modalId={`estimation-materiaux-modal-${estimation.id}`} isModalOpen={modalIsOpen}>
         <Stepper
           currentStep={estimationStep}
           nextTitle={stepperNextTitle}

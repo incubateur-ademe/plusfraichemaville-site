@@ -18,6 +18,7 @@ import { notifications } from "@/components/common/notifications";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
   const router = useRouter();
+
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");

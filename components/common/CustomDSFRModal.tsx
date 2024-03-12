@@ -1,11 +1,19 @@
+import clsx from "clsx";
 import { PropsWithChildren } from "react";
 
-export default function CustomDSFRModal({ modalId, children }: { modalId: string } & PropsWithChildren) {
+export default function CustomDSFRModal({
+  modalId,
+  children,
+  isModalOpen,
+}: { modalId: string; isModalOpen?: boolean } & PropsWithChildren) {
   return (
     <dialog
       role="dialog"
       id={modalId}
-      className="fr-modal before:!flex-none before:!h-[5vh] after:!flex-none after:!h-[5vh]"
+      className={clsx(
+        "fr-modal before:!flex-none before:!h-[5vh] after:!flex-none after:!h-[5vh]",
+        isModalOpen && "fr-modal--opened",
+      )}
     >
       <div className="fr-container fr-container--fluid fr-container-md">
         <div className="fr-grid-row fr-grid-row--center">
