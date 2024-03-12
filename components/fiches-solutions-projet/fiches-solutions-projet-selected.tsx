@@ -1,7 +1,7 @@
 import { FichesSolutionsProjetEmpty } from ".";
 
 import Link from "next/link";
-import { useParams, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
@@ -10,30 +10,42 @@ import { FichesSolutionsProjetsSelectedCard } from "./fiches-solutions-projet-se
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { updateFichesSolutionsValidatedAction } from "@/actions/projets/update-fiches-solutions-validated-action";
 import { notifications } from "../common/notifications";
+import Button from "@codegouvfr/react-dsfr/Button";
+import React from "react";
 
 type FichesSolutionsProjetsSelectedProps = {
   selectedFichesSolutionsIds?: number[];
   isValidated: boolean | undefined;
   updateStore: (_projet: ProjetWithRelations) => void;
+  projetId?: number
 };
 
 export const FichesSolutionsProjetsSelected = ({
   selectedFichesSolutionsIds,
   isValidated,
   updateStore,
+  projetId
 }: FichesSolutionsProjetsSelectedProps) => {
-  const pathname = usePathname();
-  const { projetId } = useParams();
-  const tableauDeBordUrl = pathname.replace("/fiches-solutions", "/tableau-de-bord");
+  const router = useRouter();
 
   const validateFichesSolutionsToProjet = async () => {
-    const updatedProjet = await updateFichesSolutionsValidatedAction(+projetId);
-    if (updatedProjet.projet) {
-      updateStore(updatedProjet.projet);
-      notifications();
+    if (isValidated && projetId) {
+      notifications("success", "FICHES_SOLUTIONS_VALIDATED");
+      router.push(PFMV_ROUTES.TABLEAU_DE_BORD(projetId));
+
+    } else if (projetId) {
+      const updatedProjet = await updateFichesSolutionsValidatedAction(projetId);
+      notifications(updatedProjet.type, updatedProjet.message);
+      if (updatedProjet.projet) {
+        updateStore(updatedProjet.projet);
+        router.push(PFMV_ROUTES.TABLEAU_DE_BORD(projetId));
+      }
     }
   };
 
+  if (!projetId) {
+    return null;
+  }
   return (
     <div>
       <div className="flex flex-wrap gap-8 mb-10">
@@ -56,13 +68,9 @@ export const FichesSolutionsProjetsSelected = ({
           <span className="text-white text-center">Ajouter des solutions</span>
         </Link>
       </div>
-      {isValidated ? (
-        <Link className="fr-btn rounded-3xl mb-10" href={tableauDeBordUrl}>
-          Retour au tableau de bord
-        </Link>
-      ) : (
-        <button onClick={validateFichesSolutionsToProjet}>Valider</button>
-      )}
+      <Button className="rounded-3xl" type="button" onClick={validateFichesSolutionsToProjet}>
+        Valider
+      </Button>
     </div>
   );
 };
