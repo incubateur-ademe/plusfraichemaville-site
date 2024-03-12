@@ -9,7 +9,7 @@ export const TableauDeBordSuiviCardWithList = () => {
     <span className="text-sm">
       <strong>Espace:</strong> <span className="capitalize">{current?.type_espace}</span>
       <br />
-      <strong>Référent:</strong> {current?.created_by ?? "Christophe Roméro"} <br />
+      <strong>Référent:</strong> {current?.created_by} <br />
     </span>
   );
 };
