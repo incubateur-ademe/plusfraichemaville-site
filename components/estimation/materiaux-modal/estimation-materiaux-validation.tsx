@@ -4,20 +4,31 @@ import { EstimationMateriauxFicheSolutionRecap } from "@/components/estimation/m
 import { useMemo } from "react";
 import EstimationMateriauGlobalPriceFooter from "@/forms/estimation/estimation-materiau-global-price-footer";
 import { computeGlobalFicheSolutionPrice } from "@/helpers/coutMateriau";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { notifications } from "@/components/common/notifications";
 
 type EstimationMateriauxValidationProps = {
   estimationsFicheSolution: EstimationMateriauxFicheSolution[];
   goToFicheSolutionStep: (_: number) => void;
+  onClose: () => void;
+  onPrevious: () => void;
 };
 
 export function EstimationMateriauxValidation({
   estimationsFicheSolution,
   goToFicheSolutionStep,
+  onClose,
+  onPrevious,
 }: EstimationMateriauxValidationProps) {
   const globalPrice = useMemo(
     () => computeGlobalFicheSolutionPrice(estimationsFicheSolution),
     [estimationsFicheSolution],
   );
+  const validateEstimation = () => {
+    notifications("success", "ESTIMATION_VALIDATED");
+    onClose();
+  };
+
   return (
     <>
       {estimationsFicheSolution.map((ficheSolutionEstimation) => (
@@ -41,6 +52,12 @@ export function EstimationMateriauxValidation({
         entretienMin={globalPrice.entretien.min}
         entretienMax={globalPrice.entretien.max}
       />
+      <Button className={`rounded-3xl mr-4`} type="button" onClick={validateEstimation}>
+        {"Valider l'estimation"}
+      </Button>
+      <Button className={`rounded-3xl`} type="button" onClick={onPrevious} priority="secondary">
+        Précédent
+      </Button>
     </>
   );
 }

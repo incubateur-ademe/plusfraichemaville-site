@@ -121,6 +121,8 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
           <EstimationMateriauxValidation
             estimationsFicheSolution={estimationMateriaux}
             goToFicheSolutionStep={goToSpecificFicheSolutionStep}
+            onClose={modal.close}
+            onPrevious={goToPreviousStep}
           />
         )}
       </CustomDSFRModal>
