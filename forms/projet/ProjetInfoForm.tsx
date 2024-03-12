@@ -18,17 +18,9 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
 import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { useUserStore } from "@/stores/user/provider";
-import { UserInfos } from "@/stores/user/store";
-import clsx from "clsx";
-import Link from "next/link";
-
-const hasAllRequiredFieldsSet = (user?: UserInfos) =>
-  user && user.nom && user.prenom && user.email && user.collectivites[0].collectivite_id && user.poste;
 
 export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => {
   const router = useRouter();
-  const user = useUserStore((state) => state.userInfos);
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
 
   const form = useForm<ProjetInfoFormData>({
@@ -51,9 +43,6 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
   }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
-    if (!hasAllRequiredFieldsSet(user)) {
-      return null;
-    }
     const result = await upsertProjetAction({
       ...data,
     });
@@ -73,19 +62,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
 
   return (
     <>
-      {!hasAllRequiredFieldsSet(user) && (
-        <p className="my-10">
-          Pour créer ou modifier un projet, vous dever{" "}
-          <Link href={PFMV_ROUTES.MON_PROFIL} className="font-bold">
-            compléter votre profil
-          </Link>
-        </p>
-      )}
-      <form
-        id="user-info"
-        onSubmit={form.handleSubmit(onSubmit)}
-        className={clsx(!hasAllRequiredFieldsSet(user) && "opacity-50 pointer-events-none")}
-      >
+      <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
         <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} />
         <SelectFormField
           control={form.control}
