@@ -1,10 +1,10 @@
+import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bord";
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
 
 import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
 import { TableauDeBordSuiviCardWithList } from "./tableau-de-bord-suivi-card-with-list";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 
 export const TableauDeBordSuivi = () => {
   return (

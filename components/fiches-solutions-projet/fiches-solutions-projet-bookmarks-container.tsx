@@ -59,7 +59,7 @@ export const FichesSolutionProjetBookmarksContainer = ({
         {bookmarksIds?.map((ficheSolutionId, index) => (
           <FicheSolutionSmallCard
             ficheSolutionId={ficheSolutionId}
-            key={ficheSolutionId}
+            key={index}
             onClick={() => {
               if (checkbox.current) {
                 checkbox.current[index].checked = !checkbox.current[index].checked;

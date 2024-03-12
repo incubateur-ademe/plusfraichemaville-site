@@ -24,7 +24,7 @@ export const FichesSolutionsProjetsSelected = ({
 }: FichesSolutionsProjetsSelectedProps) => {
   const pathname = usePathname();
   const { projetId } = useParams();
-  const tableauDeBordUrl = pathname.replace("/fiches-solutions", "/tableau-de-bord");
+  const tableauDeBordUrl = pathname.replace("/fiches-solutions", "/tableau-de-bord?tab=tableau-de-suivi");
 
   const validateFichesSolutionsToProjet = async () => {
     const updatedProjet = await updateFichesSolutionsValidatedAction(+projetId);
@@ -61,7 +61,9 @@ export const FichesSolutionsProjetsSelected = ({
           Retour au tableau de bord
         </Link>
       ) : (
-        <button onClick={validateFichesSolutionsToProjet}>Valider</button>
+        <button className="fr-btn rounded-3xl mb-10" onClick={validateFichesSolutionsToProjet}>
+          Valider
+        </button>
       )}
     </div>
   );

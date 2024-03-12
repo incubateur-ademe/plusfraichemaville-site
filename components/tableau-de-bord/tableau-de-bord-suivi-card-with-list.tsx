@@ -2,16 +2,10 @@
 
 import { useProjetsStore } from "@/stores/projets/provider";
 import { useUserStore } from "@/stores/user/provider";
-import { useParams } from "next/navigation";
 
 export const TableauDeBordSuiviCardWithList = () => {
   const currentUser = useUserStore((state) => state.userInfos);
-
-  // on récupère tout le state pour souscrire aux changements des projets
-  // Les projets peuvent ne pas être chargés à l'arrivée sur cette page
-  const { getProjetById } = useProjetsStore((state) => state);
-  const { projetId } = useParams();
-  const current = getProjetById(+projetId);
+  const current = useProjetsStore((state) => state.getCurrentProjet());
 
   return (
     <span className="text-sm">
