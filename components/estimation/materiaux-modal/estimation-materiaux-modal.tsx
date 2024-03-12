@@ -12,6 +12,7 @@ import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form"
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { upsert } from "@/helpers/listUtils";
+import { EstimationMateriauxValidation } from "@/components/estimation/materiaux-modal/estimation-materiaux-validation";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;
@@ -36,8 +37,11 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     () => fetcher(estimation.fiches_solutions_id[estimationStep]),
   );
   const stepperTitle = useMemo(
-    () => `Estimation pour la solution ${currentFicheSolution?.attributes.titre}`,
-    [currentFicheSolution],
+    () =>
+      estimationStep === estimation.fiches_solutions_id.length + 1
+        ? "Résumé de l'estimation"
+        : `Estimation pour la solution ${currentFicheSolution?.attributes.titre}`,
+    [currentFicheSolution?.attributes.titre, estimation.fiches_solutions_id.length, estimationStep],
   );
   const stepperNextTitle = useMemo(
     () =>
@@ -103,6 +107,9 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
               onUpdateEstimation={updateEstimationInStore}
             />
           </>
+        )}
+        {estimationStep === estimation.fiches_solutions_id.length + 1 && estimationMateriaux && (
+          <EstimationMateriauxValidation estimationsFicheSolution={estimationMateriaux} />
         )}
       </CustomDSFRModal>
     </>
