@@ -31,11 +31,11 @@ export function EstimationMateriauxFicheSolutionRecap({
   return (
     <div className="text-dsfr-text-title-grey">
       <hr className="p-0 h-[1px] mb-4" />
-      <div className={"flex flex-row gap-6 justify-between items-center my-2 basis-full"}>
-        <div className="text-[1.375rem] mb-6 font-bold">{ficheSolution.attributes.titre}</div>
+      <div className={"flex flex-row gap-6 justify-between items-center mb-6"}>
+        <div className="text-[1.375rem] font-bold">{ficheSolution.attributes.titre}</div>
         <span
           onClick={() => goToFicheSolutionStep(ficheSolution.id)}
-          className="fr-icon-edit-box-fill fr-icon--lg dsfr-text-label-blue-france cursor-pointer"
+          className="fr-icon-edit-box-line text-dsfr-text-label-blue-france cursor-pointer"
           aria-hidden="true"
         ></span>
       </div>
@@ -93,7 +93,6 @@ export function EstimationMateriauxFicheSolutionRecap({
           </div>
         </div>
       </div>
-      <hr className="p-0 h-[1px] mb-2" />
     </div>
   );
 }
