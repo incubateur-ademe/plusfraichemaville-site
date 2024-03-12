@@ -5,13 +5,12 @@ import clsx from "clsx";
 import { EstimationCardPriceInfo } from "@/components/estimation/estimation-card-price-info";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import sumBy from "lodash/sumBy";
-import { useMemo } from "react";
-import Button from "@codegouvfr/react-dsfr/Button";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import React, { useMemo } from "react";
 import { EstimationDeleteModal } from "@/components/estimation/estimation-delete-modal";
+import { EstimationMateriauModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
 
-export const EstimationOverviewCard = ({ estimation, projetId }: { estimation: estimation; projetId: number }) => {
+export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const coutMinInvestissement = useMemo(
     () => sumBy(estimationMateriaux, "coutMinInvestissement"),
@@ -44,7 +43,7 @@ export const EstimationOverviewCard = ({ estimation, projetId }: { estimation: e
             ficheSolutionId={ficheSolutionId}
             className="border-[1px] border-dsfr-border-default-grey rounded-2xl"
           >
-            <div>
+            <div className="w-full">
               <hr className="mt-6 pb-4" />
               <EstimationCardPriceInfo
                 estimationInfo={estimationMateriaux?.find((em) => em.ficheSolutionId === ficheSolutionId)}
@@ -68,12 +67,7 @@ export const EstimationOverviewCard = ({ estimation, projetId }: { estimation: e
         </div>
       </div>
       <div className="float-right flex flex-row gap-6 mt-12">
-        <Button
-          className="rounded-3xl"
-          linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(projetId), target: "_self" }}
-        >
-          Modifier
-        </Button>
+        <EstimationMateriauModal estimation={estimation} />
         <EstimationDeleteModal estimation={estimation} />
       </div>
     </div>

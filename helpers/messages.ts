@@ -1,5 +1,6 @@
 export const success = {
   ESTIMATION_DELETE: "Votre estimation a bien été supprimée.",
+  ESTIMATION_CREATED: "Votre estimation a bien été créée.",
   BOOKMARKED_SAVED_IN_DB: "Les fiches solutions ont bien été sauvegardées.",
   FICHE_SOLUTION_ADDED_TO_PROJET: "Les fiches solutions ont bien été ajoutées au projet en cours.",
   PROJET_DELETE: "Votre projet a bien été supprimé.",

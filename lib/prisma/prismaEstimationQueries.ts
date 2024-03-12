@@ -1,6 +1,7 @@
 import { generateRandomId } from "@/helpers/common";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { estimation } from "@prisma/client";
+import { estimation, Prisma } from "@prisma/client";
+import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 
 export const getEstimationById = async (estimationId: number): Promise<estimation | null> => {
   return prismaClient.estimation.findUnique({
@@ -30,6 +31,20 @@ export const createEstimation = async (
       created_by: createdBy,
       status: "en_cours",
       id: generateRandomId(),
+    },
+  });
+};
+
+export const updateEstimationMateriaux = async (
+  estimationId: number,
+  estimationMateriaux: EstimationMateriauxFicheSolution[],
+): Promise<estimation> => {
+  return prismaClient.estimation.update({
+    where: {
+      id: estimationId,
+    },
+    data: {
+      materiaux: estimationMateriaux as Prisma.JsonArray,
     },
   });
 };
