@@ -5,15 +5,13 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiCli
 import { useProjetsStore } from "@/stores/projets/provider";
 import clsx from "clsx";
 import Image from "next/image";
-import { useParams } from "next/navigation";
 import useSWRImmutable from "swr/immutable";
 
 const IMAGE_SLICE_INDEX = 5;
 
 export const TableauDeBordSuiviWithFichesSolutions = () => {
-  const { projetId } = useParams();
-  const getProjetById = useProjetsStore((state) => state.getProjetById);
-  const selectedFichesSolutions = getProjetById(+projetId)?.fiches_solutions_id;
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const selectedFichesSolutions = projet?.fiches_solutions_id;
 
   if (!selectedFichesSolutions) {
     return null;

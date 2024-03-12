@@ -61,7 +61,9 @@ export const FichesSolutionsProjetsSelected = ({
           Retour au tableau de bord
         </Link>
       ) : (
-        <button onClick={validateFichesSolutionsToProjet}>Valider</button>
+        <button className="fr-btn rounded-3xl mb-10" onClick={validateFichesSolutionsToProjet}>
+          Valider
+        </button>
       )}
     </div>
   );
