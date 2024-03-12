@@ -8,10 +8,12 @@ import useSWRImmutable from "swr/immutable";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationMateriauxFicheSolution;
+  goToFicheSolutionStep: (_: number) => void;
 };
 
 export function EstimationMateriauxFicheSolutionRecap({
   ficheSolutionEstimation,
+  goToFicheSolutionStep,
 }: EstimationMateriauxFicheSolutionRecapProps) {
   const { data: ficheSolution } = useSWRImmutable(`ficheSolution-${ficheSolutionEstimation.ficheSolutionId}`, () =>
     getFicheSolutionById(`${ficheSolutionEstimation.ficheSolutionId}`),
@@ -29,10 +31,17 @@ export function EstimationMateriauxFicheSolutionRecap({
   return (
     <div className="text-dsfr-text-title-grey">
       <hr className="p-0 h-[1px] mb-4" />
-      <div className="text-[1.375rem] mb-6 font-bold">{ficheSolution.attributes.titre}</div>
+      <div className={"flex flex-row gap-6 justify-between items-center my-2 basis-full"}>
+        <div className="text-[1.375rem] mb-6 font-bold">{ficheSolution.attributes.titre}</div>
+        <span
+          onClick={() => goToFicheSolutionStep(ficheSolution.id)}
+          className="fr-icon-edit-box-fill fr-icon--lg dsfr-text-label-blue-france cursor-pointer"
+          aria-hidden="true"
+        ></span>
+      </div>
       {ficheSolution.attributes.materiaux.data.map((materiau) => (
         <div key={materiau.id}>
-          <div className={"flex flex-row gap-6 justify-between  items-center my-2 basis-full"}>
+          <div className={"flex flex-row gap-6 justify-between items-center my-2 basis-full"}>
             <div className="flex flex-row items-center">
               <div className="w-16 h-16 relative flex flex-none mr-6">
                 <Image
@@ -45,14 +54,20 @@ export function EstimationMateriauxFicheSolutionRecap({
               <div>{materiau.attributes.titre}</div>
             </div>
             <div>
-              <div className="">Inv.<strong>{` ${getLabelCoutFournitureByQuantite(
-                materiau.attributes,
-                getQuantiteByMateriauId(materiau.id),
-              )}`}</strong></div>
-              <div className="text-dsfr-text-mention-grey text-sm">Ent.<strong>{` ${getLabelCoutEntretienByQuantite(
-                materiau.attributes,
-                getQuantiteByMateriauId(materiau.id),
-              )}`}</strong></div>
+              <div className="">
+                Inv.
+                <strong>{` ${getLabelCoutFournitureByQuantite(
+                  materiau.attributes,
+                  getQuantiteByMateriauId(materiau.id),
+                )}`}</strong>
+              </div>
+              <div className="text-dsfr-text-mention-grey text-sm">
+                Ent.
+                <strong>{` ${getLabelCoutEntretienByQuantite(
+                  materiau.attributes,
+                  getQuantiteByMateriauId(materiau.id),
+                )}`}</strong>
+              </div>
             </div>
           </div>
         </div>

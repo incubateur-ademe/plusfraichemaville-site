@@ -80,6 +80,13 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     }
   };
 
+  const goToSpecificFicheSolutionStep = (ficheSolutionId: number) => {
+    const index = estimation.fiches_solutions_id.findIndex((id) => +id === +ficheSolutionId);
+    if (index != -1) {
+      setEstimationStep(index + 1);
+    }
+  };
+
   return (
     <>
       <Button nativeButtonProps={modal.buttonProps} className="rounded-3xl">
@@ -109,7 +116,10 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
           </>
         )}
         {estimationStep === estimation.fiches_solutions_id.length + 1 && estimationMateriaux && (
-          <EstimationMateriauxValidation estimationsFicheSolution={estimationMateriaux} />
+          <EstimationMateriauxValidation
+            estimationsFicheSolution={estimationMateriaux}
+            goToFicheSolutionStep={goToSpecificFicheSolutionStep}
+          />
         )}
       </CustomDSFRModal>
     </>
