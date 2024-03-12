@@ -28,7 +28,7 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
   const fetcher = (fsId: number) => getFicheSolutionById(`${fsId}`);
   const { data: currentFicheSolution } = useSWRImmutable(
     estimationStep <= estimation.fiches_solutions_id.length
-      ? `ficheSolution-${estimation.fiches_solutions_id[estimationStep-1]}`
+      ? `ficheSolution-${estimation.fiches_solutions_id[estimationStep - 1]}`
       : null,
     () => fetcher(estimation.fiches_solutions_id[estimationStep - 1]),
   );
