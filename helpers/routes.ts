@@ -15,7 +15,8 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
-  ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/liste`,
+  ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
+    `/espace-projet/${projetId}/estimation/liste${(opener && `?open=${opener}`) || ""}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions/liste`,
   ESPACE_PROJET_FICHES_SOLUTIONS_REX: (projetId: number, projetRexSlug: string) =>
     `/espace-projet/${projetId}/projet/${projetRexSlug}`,

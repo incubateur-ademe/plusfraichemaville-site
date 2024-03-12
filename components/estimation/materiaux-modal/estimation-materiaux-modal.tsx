@@ -12,6 +12,7 @@ import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form"
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { upsert } from "@/helpers/listUtils";
+import { useSearchParams } from "next/navigation";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;
@@ -19,6 +20,7 @@ type EstimationCardDeleteModalProps = {
 
 export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModalProps) {
   let [estimationStep, setEstimationStep] = useState(1);
+  const newEstimationId = useSearchParams().get("open");
 
   const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -49,9 +51,10 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
   const currentEstimationMateriaux = useMemo(() => {
     return estimationMateriaux?.find((em) => em.ficheSolutionId == currentFicheSolution?.id);
   }, [currentFicheSolution, estimationMateriaux]);
+
   const modal = createModal({
     id: `estimation-materiaux-modal-${estimation.id}`,
-    isOpenedByDefault: false,
+    isOpenedByDefault: newEstimationId === estimation.id.toString(),
   });
 
   const updateEstimationInStore = (estimation: estimation) => {
