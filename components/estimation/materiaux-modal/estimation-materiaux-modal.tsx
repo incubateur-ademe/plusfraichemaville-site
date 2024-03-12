@@ -27,7 +27,9 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const fetcher = (fsId: number) => getFicheSolutionById(`${fsId}`);
   const { data: currentFicheSolution } = useSWR(
-    `ficheSolution-${estimation.fiches_solutions_id[estimationStep - 1]}`,
+    estimationStep <= estimation.fiches_solutions_id.length
+      ? `ficheSolution-${estimation.fiches_solutions_id[estimationStep-1]}`
+      : null,
     () => fetcher(estimation.fiches_solutions_id[estimationStep - 1]),
   );
   const { data: nextFicheSolution } = useSWR(
