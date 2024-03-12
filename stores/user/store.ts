@@ -1,12 +1,12 @@
 import { createStore } from "zustand/vanilla";
-import { Session } from "next-auth";
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { updateBookmarkedFichesSolutionsProjetAction } from "@/actions/users/update-bookmarked-fs-action";
+import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
-export type UserInfos = Session["user"] | undefined;
+export type UserInfos = UserWithCollectivite | null | undefined;
 
 interface UserState {
-  userInfos: UserInfos;
+  userInfos?: UserInfos;
   bookmarkedFichesSolutions: ProjectBookmarks[];
 }
 

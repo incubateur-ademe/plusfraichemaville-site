@@ -18,9 +18,17 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
 import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { useUserStore } from "@/stores/user/provider";
+import { UserInfos } from "@/stores/user/store";
+import clsx from "clsx";
+import Link from "next/link";
+
+const hasAllRequiredFieldsSet = (user?: UserInfos) =>
+  user && user.nom && user.prenom && user.email && user.collectivites[0].collectivite_id && user.poste;
 
 export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => {
   const router = useRouter();
+  const user = useUserStore((state) => state.userInfos);
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
 
   const form = useForm<ProjetInfoFormData>({
@@ -43,6 +51,9 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
   }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
+    if (!hasAllRequiredFieldsSet(user)) {
+      return null;
+    }
     const result = await upsertProjetAction({
       ...data,
     });
@@ -61,46 +72,60 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
   const disabled = form.formState.isSubmitting;
 
   return (
-    <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
-      <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} />
-      <SelectFormField
-        control={form.control}
-        path="typeEspace"
-        label="Sur quel espace souhaitez vous agir ?"
-        asterisk={true}
-        options={typeEspaceOptions}
-        placeholder="Selectionnez un type d'espace"
-      />
-      <InputFormField
-        control={form.control}
-        path="adresse"
-        label="Si je la connais, adresse du lieu de l'intervention"
-      />
-      <InputFormField
-        control={form.control}
-        path="dateEcheance"
-        label="Date de livraison souhaitée"
-        asterisk={true}
-        type="month"
-        placeholder="YYYY-MM"
-      />
-      <SelectFormField
-        control={form.control}
-        path="niveauMaturite"
-        label="Niveau de maturité du projet"
-        asterisk={true}
-        options={niveauxMaturiteProjetOptions}
-        placeholder="Selectionnez un niveau de maturité"
-      />
-      <CollectiviteInputFormField
-        control={form.control}
-        path="collectivite"
-        label="Collectivité du projet"
-        asterisk={true}
-      />
-      <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
-        {"Valider"}
-      </Button>
-    </form>
+    <>
+      {!hasAllRequiredFieldsSet(user) && (
+        <p className="my-10">
+          Pour créer ou modifier un projet, vous dever{" "}
+          <Link href={PFMV_ROUTES.MON_PROFIL} className="font-bold">
+            compléter votre profil
+          </Link>
+        </p>
+      )}
+      <form
+        id="user-info"
+        onSubmit={form.handleSubmit(onSubmit)}
+        className={clsx(!hasAllRequiredFieldsSet(user) && "opacity-50 pointer-events-none")}
+      >
+        <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} />
+        <SelectFormField
+          control={form.control}
+          path="typeEspace"
+          label="Sur quel espace souhaitez vous agir ?"
+          asterisk={true}
+          options={typeEspaceOptions}
+          placeholder="Selectionnez un type d'espace"
+        />
+        <InputFormField
+          control={form.control}
+          path="adresse"
+          label="Si je la connais, adresse du lieu de l'intervention"
+        />
+        <InputFormField
+          control={form.control}
+          path="dateEcheance"
+          label="Date de livraison souhaitée"
+          asterisk={true}
+          type="month"
+          placeholder="YYYY-MM"
+        />
+        <SelectFormField
+          control={form.control}
+          path="niveauMaturite"
+          label="Niveau de maturité du projet"
+          asterisk={true}
+          options={niveauxMaturiteProjetOptions}
+          placeholder="Selectionnez un niveau de maturité"
+        />
+        <CollectiviteInputFormField
+          control={form.control}
+          path="collectivite"
+          label="Collectivité du projet"
+          asterisk={true}
+        />
+        <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
+          {"Valider"}
+        </Button>
+      </form>
+    </>
   );
 };
