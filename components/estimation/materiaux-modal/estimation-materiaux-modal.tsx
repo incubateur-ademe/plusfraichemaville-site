@@ -7,11 +7,11 @@ import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useMemo, useState } from "react";
 import CustomDSFRModal from "@/components/common/CustomDSFRModal";
 import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
-import useSWR from "swr";
 import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { upsert } from "@/helpers/listUtils";
+import useSWRImmutable from "swr/immutable";
 import { EstimationMateriauxValidation } from "@/components/estimation/materiaux-modal/estimation-materiaux-validation";
 
 type EstimationCardDeleteModalProps = {
@@ -26,13 +26,13 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
 
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const fetcher = (fsId: number) => getFicheSolutionById(`${fsId}`);
-  const { data: currentFicheSolution } = useSWR(
+  const { data: currentFicheSolution } = useSWRImmutable(
     estimationStep <= estimation.fiches_solutions_id.length
       ? `ficheSolution-${estimation.fiches_solutions_id[estimationStep-1]}`
       : null,
     () => fetcher(estimation.fiches_solutions_id[estimationStep - 1]),
   );
-  const { data: nextFicheSolution } = useSWR(
+  const { data: nextFicheSolution } = useSWRImmutable(
     estimationStep <= estimation.fiches_solutions_id.length - 1
       ? `ficheSolution-${estimation.fiches_solutions_id[estimationStep]}`
       : null,
