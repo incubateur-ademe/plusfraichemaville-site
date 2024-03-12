@@ -14,7 +14,7 @@ import { editUserInfoAction } from "@/actions/users/edit-user-info-action";
 import { notifications } from "@/components/common/notifications";
 import { useUserStore } from "@/stores/user/provider";
 
-export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite, buttonLabel: string }) => {
+export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite; buttonLabel: string }) => {
   const router = useRouter();
   const userCollectivite = user.collectivites[0];
   const setUserInfos = useUserStore((state) => state.setUserInfos);
