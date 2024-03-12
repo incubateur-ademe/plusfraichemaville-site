@@ -17,35 +17,39 @@ type FichesSolutionsProjetsSelectedProps = {
   selectedFichesSolutionsIds?: number[];
   isValidated: boolean | undefined;
   updateStore: (_projet: ProjetWithRelations) => void;
-  projetId?: number
+  projetId?: number;
 };
 
 export const FichesSolutionsProjetsSelected = ({
   selectedFichesSolutionsIds,
   isValidated,
   updateStore,
-  projetId
+  projetId,
 }: FichesSolutionsProjetsSelectedProps) => {
   const router = useRouter();
-
-  const validateFichesSolutionsToProjet = async () => {
-    if (isValidated && projetId) {
-      notifications("success", "FICHES_SOLUTIONS_VALIDATED");
-      router.push(PFMV_ROUTES.TABLEAU_DE_BORD(projetId));
-
-    } else if (projetId) {
-      const updatedProjet = await updateFichesSolutionsValidatedAction(projetId);
-      notifications(updatedProjet.type, updatedProjet.message);
-      if (updatedProjet.projet) {
-        updateStore(updatedProjet.projet);
-        router.push(PFMV_ROUTES.TABLEAU_DE_BORD(projetId));
-      }
-    }
-  };
 
   if (!projetId) {
     return null;
   }
+
+  const returnToDashboard = () => {
+    router.push(PFMV_ROUTES.TABLEAU_DE_BORD(projetId));
+  };
+
+  const validateFichesSolutionsToProjet = async () => {
+    if (isValidated) {
+      notifications("success", "FICHES_SOLUTIONS_VALIDATED");
+      returnToDashboard();
+    } else {
+      const updatedProjet = await updateFichesSolutionsValidatedAction(projetId);
+      notifications(updatedProjet.type, updatedProjet.message);
+      if (updatedProjet.projet) {
+        updateStore(updatedProjet.projet);
+        returnToDashboard();
+      }
+    }
+  };
+
   return (
     <div>
       <div className="flex flex-wrap gap-8 mb-10">
@@ -68,9 +72,15 @@ export const FichesSolutionsProjetsSelected = ({
           <span className="text-white text-center">Ajouter des solutions</span>
         </Link>
       </div>
-      <Button className="rounded-3xl" type="button" onClick={validateFichesSolutionsToProjet}>
-        Valider
-      </Button>
+      {selectedFichesSolutionsIds && selectedFichesSolutionsIds.length > 0 ? (
+        <Button className="rounded-3xl" type="button" onClick={validateFichesSolutionsToProjet}>
+          Valider
+        </Button>
+      ) : (
+        <Button className="rounded-3xl" type="button" onClick={returnToDashboard}>
+          Retour au tableau de bord
+        </Button>
+      )}
     </div>
   );
 };

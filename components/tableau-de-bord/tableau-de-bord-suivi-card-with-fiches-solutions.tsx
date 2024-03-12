@@ -5,13 +5,13 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiCli
 import { useProjetsStore } from "@/stores/projets/provider";
 import clsx from "clsx";
 import Image from "next/image";
-import { useParams } from "next/navigation";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
+
+const IMAGE_SLICE_INDEX = 5;
 
 export const TableauDeBordSuiviWithFichesSolutions = () => {
-  const { projetId } = useParams();
-  const getProjetById = useProjetsStore((state) => state.getProjetById);
-  const selectedFichesSolutions = getProjetById(+projetId)?.fiches_solutions_id;
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const selectedFichesSolutions = projet?.fiches_solutions_id;
 
   if (!selectedFichesSolutions) {
     return null;
@@ -19,17 +19,17 @@ export const TableauDeBordSuiviWithFichesSolutions = () => {
 
   return (
     <div className="flex">
-      {selectedFichesSolutions.slice(0, 5).map((ficheSolutionid, index) => {
+      {selectedFichesSolutions.slice(0, IMAGE_SLICE_INDEX).map((ficheSolutionid, index) => {
         return <TableauDeBordSuiviWithFichesSolutionsImage ficheSolutionId={ficheSolutionid.toString()} key={index} />;
       })}
-      {selectedFichesSolutions.length > 5 && (
+      {selectedFichesSolutions.length > IMAGE_SLICE_INDEX && (
         <div
           className={clsx(
             "w-10 h-10 rounded-[50%] overflow-hidden mr-2 shrink-0",
             "flex justify-center items-center bg-dsfr-border-default-blue-france text-white",
           )}
         >
-          +{selectedFichesSolutions.length - 5}
+          +{selectedFichesSolutions.length - IMAGE_SLICE_INDEX}
         </div>
       )}
     </div>
@@ -37,7 +37,9 @@ export const TableauDeBordSuiviWithFichesSolutions = () => {
 };
 
 export const TableauDeBordSuiviWithFichesSolutionsImage = ({ ficheSolutionId }: { ficheSolutionId: string }) => {
-  const { data } = useSWR(ficheSolutionId, () => getFicheSolutionById(ficheSolutionId.toString()));
+  const { data } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
+    getFicheSolutionById(ficheSolutionId.toString()),
+  );
 
   return (
     <div className="w-10 h-10 rounded-[50%] overflow-hidden mr-2 shrink-0">
