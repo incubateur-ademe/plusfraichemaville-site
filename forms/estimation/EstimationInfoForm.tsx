@@ -77,6 +77,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
                     {
                       label: null,
                       nativeInputProps: {
+                        name: "ficheSolutionIds",
                         value: ficheSolutionId.toString(),
                         onChange: () => handleFicheSolutionChange(ficheSolutionId.toString()),
                       },
