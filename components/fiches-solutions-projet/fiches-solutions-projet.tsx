@@ -18,6 +18,7 @@ export const FichesSolutionsProjet = () => {
           selectedFichesSolutionsIds={selectedFichesSolutionsIds}
           isValidated={projet?.fiches_solutions_validated}
           updateStore={updateStore}
+          projetId={projet?.id}
         />
         <FichesSolutionProjetBookmarksByEspace
           projetNom={projet?.nom ?? ""}

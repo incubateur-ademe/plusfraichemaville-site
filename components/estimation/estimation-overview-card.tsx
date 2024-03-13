@@ -4,24 +4,15 @@ import clsx from "clsx";
 
 import { EstimationCardPriceInfo } from "@/components/estimation/estimation-card-price-info";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
-import sumBy from "lodash/sumBy";
 import React, { useMemo } from "react";
 import { EstimationDeleteModal } from "@/components/estimation/estimation-delete-modal";
 import { EstimationMateriauModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
+import { computeGlobalFicheSolutionPrice } from "@/helpers/coutMateriau";
 
 export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
-  const coutMinInvestissement = useMemo(
-    () => sumBy(estimationMateriaux, "coutMinInvestissement"),
-    [estimationMateriaux],
-  );
-  const coutMaxInvestissement = useMemo(
-    () => sumBy(estimationMateriaux, "coutMaxInvestissement"),
-    [estimationMateriaux],
-  );
-  const coutMinEntretien = useMemo(() => sumBy(estimationMateriaux, "coutMinEntretien"), [estimationMateriaux]);
-  const coutMaxEntretien = useMemo(() => sumBy(estimationMateriaux, "coutMaxEntretien"), [estimationMateriaux]);
+  const globalPrice = useMemo(() => computeGlobalFicheSolutionPrice(estimationMateriaux), [estimationMateriaux]);
 
   if (estimation.fiches_solutions_id.length < 1) {
     return null;
@@ -58,12 +49,12 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
         <div className="flex flex-row justify-between mt-6">
           <div className="font-bold">Investissement</div>
           <div>
-            <strong>{`${coutMinInvestissement} - ${coutMaxInvestissement} € `}</strong>HT
+            <strong>{`${globalPrice.fourniture.min} - ${globalPrice.fourniture.max} € `}</strong>HT
           </div>
         </div>
         <div className="flex flex-row justify-between">
           <div className="font-bold">Entretien</div>
-          <div>{`${coutMinEntretien} - ${coutMaxEntretien} € HT / an`}</div>
+          <div>{`${globalPrice.entretien.min} - ${globalPrice.entretien.max} € HT / an`}</div>
         </div>
       </div>
       <div className="float-right flex flex-row gap-6 mt-12">

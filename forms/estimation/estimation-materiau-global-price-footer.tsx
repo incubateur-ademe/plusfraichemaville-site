@@ -1,5 +1,5 @@
 type EstimationMateriauGlobalPriceFooterProps = {
-  title: string;
+  title?: string;
   investissementMin?: number;
   investissementMax?: number;
   entretienMin?: number;
@@ -15,7 +15,7 @@ export default function EstimationMateriauGlobalPriceFooter({
 }: EstimationMateriauGlobalPriceFooterProps) {
   return (
     <>
-      <div className="mt-8 text-[1.375rem] font-bold">{`Estimation pour ${title}`}</div>
+      {title && <div className="mt-8 text-[1.375rem] font-bold">{`Estimation pour ${title}`}</div>}
       <div className="mt-8 text-[1.375rem] font-bold flex flex-row justify-between max-w-[30rem] ml-auto mr-0">
         <div>Investissement :</div>
         <div>

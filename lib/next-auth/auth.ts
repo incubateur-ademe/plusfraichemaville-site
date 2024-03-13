@@ -27,7 +27,7 @@ export const authOptions: NextAuthOptions = {
           const codeInsee = entityFromSiren?.etablissement?.adresseEtablissement.codeCommuneEtablissement;
           const codePostal = entityFromSiren?.etablissement?.adresseEtablissement.codePostalEtablissement;
           if (codePostal && codeInsee) {
-            const entitiesFromBan = await fetchCollectiviteFromBanApi(codeInsee);
+            const entitiesFromBan = await fetchCollectiviteFromBanApi(codePostal);
             const collectiviteToUse = entitiesFromBan.find(
               (address) => address.codeInsee === codeInsee && address.codePostal === codePostal,
             );
