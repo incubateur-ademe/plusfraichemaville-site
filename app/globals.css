@@ -7,9 +7,9 @@
   [type="reset"],
   [type="submit"],
   button {
-    -webkit-appearance: button;
+    /* -webkit-appearance: button;
     background-color: inherit;
-    background-image: inherit;
+    background-image: inherit; */
   }
 
   input[type="number"]::-webkit-outer-spin-button,

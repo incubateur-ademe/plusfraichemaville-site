@@ -7,6 +7,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { ModalSaveFicheSolutionProps } from "../ButtonSaveFicheSolution";
+import { notifications } from "@/components/common/notifications";
 
 export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: ModalSaveFicheSolutionProps) => {
   const [selectedProjetId, setSelectedProjetId] = useState(-1);
@@ -18,6 +19,7 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
       const update = await updateFichesSolutionsProjetAction(selectedProjetId, [+ficheSolutionId]);
       if (update.projet) {
         addOrUpdateProjet(update.projet);
+        notifications(update.type, "FICHE_SOLUTION_ADDED_TO_PROJET");
       }
     }
   };

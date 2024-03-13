@@ -21,8 +21,8 @@ const progressState = (progress?: "0" | "50" | "100") => {
 
 export const TableauDeBordSuiviCardProgress = ({ progress }: TableauDeBordSuiviCardProgressProps) => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const p = typeof progress === "function" ? progress(currentProjet!) : progress;
-  const { label, widthClass } = progressState(p);
+  const progressValue = typeof progress === "function" ? progress(currentProjet!) : progress;
+  const { label, widthClass } = progressState(progressValue);
 
   return (
     <>
@@ -36,7 +36,7 @@ export const TableauDeBordSuiviCardProgress = ({ progress }: TableauDeBordSuiviC
         ></div>
         <div className={`w-full h-2 relative bg-dsfr-border-default-grey rounded-3xl`}></div>
       </div>
-      {progress == "100" && (
+      {progressValue == "100" && (
         <i className="ri-checkbox-circle-fill ml-2 text-dsfr-background-action-high-success-hover"></i>
       )}
       <span className="text-xs ml-2 text-dsfr-background-action-high-success-hover font-medium">{label}</span>

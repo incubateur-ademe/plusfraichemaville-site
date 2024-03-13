@@ -30,11 +30,6 @@ export const TableauDeBordTabs = () => {
       filter: "recommandation",
       component: <TableauDeBordRecommandation />,
     },
-    {
-      label: "Option de partage",
-      filter: "option-de-partage",
-      component: <>Option de partage</>,
-    },
   ];
 
   return (
