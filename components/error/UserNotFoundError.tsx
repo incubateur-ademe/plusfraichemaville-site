@@ -1,4 +1,4 @@
-export default async function UserNotFoundError() {
+export default function UserNotFoundError() {
   return (
     <div className="fr-container mt-8 font-bold">
       {"Une erreur s'est produite, veuillez vous déconnecter puis vous reconnecter. "}

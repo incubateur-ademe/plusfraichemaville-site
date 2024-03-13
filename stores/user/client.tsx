@@ -5,7 +5,7 @@ import { useLayoutEffect } from "react";
 import { useUserStore } from "./provider";
 import { UserInfos } from "./store";
 
-export const UserStoreClient = ({ user }: { user: UserInfos }) => {
+export const UserStoreClient = ({ user }: { user?: UserInfos }) => {
   const setUserInfos = useUserStore((state) => state.setUserInfos);
 
   useLayoutEffect(() => {

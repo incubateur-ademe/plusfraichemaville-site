@@ -18,6 +18,7 @@ import { notifications } from "@/components/common/notifications";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
   const router = useRouter();
+
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
@@ -43,9 +44,10 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     notifications(result.type, result.message);
     if (result.type === "success") {
       if (result.estimation) {
-        // TODO : rediriger vers la page d'estimation des matériaux en ouvrant la modif de l'estimation nouvellement créée
+        // TODO : rediriger vers la page d'estimation des matériaux en ouvrant
+        // la modif de l'estimation nouvellement créée
         updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
-        router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id));
+        router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id, `${result.estimation.id}`));
       }
     }
   };

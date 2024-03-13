@@ -17,6 +17,7 @@ export const updateFichesSolutionsProjet = (
     include: {
       collectivite: true,
       estimations: true,
+      creator: true,
     },
   });
 };
@@ -31,6 +32,7 @@ export const updateFichesSolutionsProjetValidated = (projetId: number): Promise<
     },
     include: {
       collectivite: true,
+      creator: true,
       estimations: true,
     },
   });
@@ -88,6 +90,7 @@ export const createOrUpdateProjet = async ({
     include: {
       collectivite: true,
       estimations: true,
+      creator: true,
     },
   });
 };

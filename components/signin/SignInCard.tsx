@@ -1,6 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import React from "react";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 const messages = {
   connect:
@@ -15,7 +16,10 @@ type SignInCardProps = {
   message: keyof typeof messages;
 };
 
-export default function SignInCard({ callbackUrl, message }: SignInCardProps) {
+export default function SignInCard({
+  callbackUrl = process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE,
+  message,
+}: SignInCardProps) {
   const handleSignIn = () => signIn("agentconnect", { callbackUrl });
 
   return (

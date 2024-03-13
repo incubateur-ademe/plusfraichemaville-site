@@ -61,46 +61,48 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
   const disabled = form.formState.isSubmitting;
 
   return (
-    <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
-      <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} />
-      <SelectFormField
-        control={form.control}
-        path="typeEspace"
-        label="Sur quel espace souhaitez vous agir ?"
-        asterisk={true}
-        options={typeEspaceOptions}
-        placeholder="Selectionnez un type d'espace"
-      />
-      <InputFormField
-        control={form.control}
-        path="adresse"
-        label="Si je la connais, adresse du lieu de l'intervention"
-      />
-      <InputFormField
-        control={form.control}
-        path="dateEcheance"
-        label="Date de livraison souhaitée"
-        asterisk={true}
-        type="month"
-        placeholder="YYYY-MM"
-      />
-      <SelectFormField
-        control={form.control}
-        path="niveauMaturite"
-        label="Niveau de maturité du projet"
-        asterisk={true}
-        options={niveauxMaturiteProjetOptions}
-        placeholder="Selectionnez un niveau de maturité"
-      />
-      <CollectiviteInputFormField
-        control={form.control}
-        path="collectivite"
-        label="Collectivité du projet"
-        asterisk={true}
-      />
-      <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
-        {"Valider"}
-      </Button>
-    </form>
+    <>
+      <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
+        <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} />
+        <SelectFormField
+          control={form.control}
+          path="typeEspace"
+          label="Sur quel espace souhaitez vous agir ?"
+          asterisk={true}
+          options={typeEspaceOptions}
+          placeholder="Selectionnez un type d'espace"
+        />
+        <InputFormField
+          control={form.control}
+          path="adresse"
+          label="Si je la connais, adresse du lieu de l'intervention"
+        />
+        <InputFormField
+          control={form.control}
+          path="dateEcheance"
+          label="Date de livraison souhaitée"
+          asterisk={true}
+          type="month"
+          placeholder="YYYY-MM"
+        />
+        <SelectFormField
+          control={form.control}
+          path="niveauMaturite"
+          label="Niveau de maturité du projet"
+          asterisk={true}
+          options={niveauxMaturiteProjetOptions}
+          placeholder="Selectionnez un niveau de maturité"
+        />
+        <CollectiviteInputFormField
+          control={form.control}
+          path="collectivite"
+          label="Collectivité du projet"
+          asterisk={true}
+        />
+        <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
+          {"Valider"}
+        </Button>
+      </form>
+    </>
   );
 };

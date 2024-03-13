@@ -28,7 +28,14 @@ export default function Page() {
           flex-[0_1_100%] order-1 [&>*:not(:nth-child(2))]:w-full [&>*:nth-child(2)]:grow items-start
           place-content-center"
       >
-        <div>{session.status !== "authenticated" && <SignInCard message="save" />}</div>
+        <div>
+          {session.status !== "authenticated" && (
+            <SignInCard
+              message="save"
+              callbackUrl={process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE}
+            />
+          )}
+        </div>
         {bookmarkedFichesSolutions && bookmarkedFichesSolutions.length === 0 ? (
           <div>
             <div className="fr-h3">Mes solutions sauvegardées</div>

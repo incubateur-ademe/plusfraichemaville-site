@@ -12,10 +12,12 @@ import CollectiviteInputFormField from "@/components/common/CollectiviteInputFor
 import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
 import { editUserInfoAction } from "@/actions/users/edit-user-info-action";
 import { notifications } from "@/components/common/notifications";
+import { useUserStore } from "@/stores/user/provider";
 
-export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
+export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite; buttonLabel: string }) => {
   const router = useRouter();
   const userCollectivite = user.collectivites[0];
+  const setUserInfos = useUserStore((state) => state.setUserInfos);
 
   const form = useForm<UserInfoFormData>({
     resolver: zodResolver(UserInfoFormSchema),
@@ -33,6 +35,7 @@ export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
     notifications(result.type, result.message);
 
     if (result.type === "success") {
+      setUserInfos(result.updatedUser);
       router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE);
     }
   };
@@ -53,7 +56,7 @@ export const UserInfoForm = ({ user }: { user: UserWithCollectivite }) => {
       />
       <InputFormField control={form.control} path="poste" label="Mon poste dans la collectivité" asterisk={true} />
       <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
-        {"Je rejoins l'espace projet de ma collectivité"}
+        {buttonLabel}
       </Button>
     </form>
   );

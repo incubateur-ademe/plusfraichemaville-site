@@ -39,6 +39,7 @@ export const editUserInfoAction = async (
       userPoste: data.poste,
       collectiviteId: collectiviteId,
     });
+
     revalidatePath(PFMV_ROUTES.MON_PROFIL);
     return { type: "success", message: "USER_UPDATED", updatedUser };
   }
