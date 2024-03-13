@@ -3,13 +3,8 @@
 @tailwind utilities;
 
 @layer base {
-  [type="button"],
-  [type="reset"],
-  [type="submit"],
-  button {
-    /* -webkit-appearance: button;
-    background-color: inherit;
-    background-image: inherit; */
+  [type="submit"] {
+    background-color: var(--background-action-high-blue-france);
   }
 
   input[type="number"]::-webkit-outer-spin-button,
