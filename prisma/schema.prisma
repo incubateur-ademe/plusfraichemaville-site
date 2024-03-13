@@ -1,0 +1,120 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model User {
+  id                String    @id @default(cuid())
+  email             String    @unique
+  emailVerified     DateTime?
+  image             String?
+  accounts          Account[]
+  agentconnect_info Json?
+
+  nom                        String?
+  prenom                     String?
+  poste                      String?
+  created_at                 DateTime            @default(now())
+  collectivites_created      collectivite[]      @relation(name: "collectivite_creator")
+  projets_created            projet[]
+  estimations_created        estimation[]
+  collectivites              user_collectivite[] @relation(name: "collectivite_belonging")
+  selection_fiches_solutions Json?
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model collectivite {
+  id           Int              @id
+  nom          String
+  code_insee   String?             @unique
+  code_postal  String?
+  adresse_info Json?
+  ban_id       String?             @unique
+  latitude     Float?
+  longitude    Float?
+  users        user_collectivite[] @relation(name: "users_in_collectivite")
+  created_by   String
+  creator      User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
+  created_at   DateTime            @default(now())
+  projet       projet[]
+}
+
+enum RoleCollectivite {
+  ADMIN
+}
+
+model user_collectivite {
+  user_id         String
+  collectivite_id Int
+  verified        Boolean      @default(false)
+  user            User         @relation(name: "collectivite_belonging", fields: [user_id], references: [id])
+  collectivite    collectivite @relation(name: "users_in_collectivite", fields: [collectivite_id], references: [id])
+  created_at      DateTime     @default(now())
+
+  @@id(name: "userCollectiviteId", [user_id, collectivite_id])
+}
+
+model projet {
+  id                         Int       @id
+  created_by                 String
+  creator                    User         @relation(fields: [created_by], references: [id])
+  created_at                 DateTime     @default(now())
+  nom                        String
+  type_espace                String?
+  adresse                    String?
+  niveau_maturite            String?
+  adresse_info               Json?
+  date_echeance              DateTime?
+  fiches_solutions_id        Int[]
+  fiches_solutions_validated Boolean      @default(false)
+  estimations                estimation[]
+  collectiviteId             Int
+  collectivite               collectivite @relation(fields: [collectiviteId], references: [id])
+}
+
+enum StatusEstimation {
+  en_cours
+  validee
+}
+
+model estimation {
+  id                      Int           @id 
+  created_by              String
+  creator                 User             @relation(fields: [created_by], references: [id])
+  created_at              DateTime         @default(now())
+  projet_id               Int
+  projet                  projet           @relation(fields: [projet_id], references: [id])
+  fiches_solutions_id     Int[]
+  materiaux               Json?
+  status                  StatusEstimation
+}

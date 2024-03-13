@@ -1,3 +1,5 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
@@ -5,6 +7,8 @@ import React from "react";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { PFMV_ROUTES } from "@/helpers/routes";
+import { useParams } from "next/navigation";
 
 export default function FicheSolutionFullCard({
   ficheSolution,
@@ -13,8 +17,14 @@ export default function FicheSolutionFullCard({
   ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
   extraUrlParams?: { param: string; value: string }[];
 }) {
+  const { projetId } = useParams();
+  const isEspaceProjet = projetId;
+
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
-  let url = `/fiche-solution/${ficheSolution.slug}`;
+  let url = isEspaceProjet
+    ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION(+projetId, ficheSolution.slug)
+    : `${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheSolution.slug}`;
+
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
   return (
     <Link className="flex w-72 flex-col pfmv-card md:ml-0" href={url}>
@@ -46,7 +56,7 @@ export default function FicheSolutionFullCard({
               className={"text-xs"}
             />
             <div className="text-center mt-4">
-              <div className={`fr-btn fr-btn--tertiary rounded-3xl px-9`}>{"J'explore la solution"}</div>
+              <div className={"fr-btn fr-btn--tertiary rounded-3xl px-9"}>{"J'explore la solution"}</div>
             </div>
           </div>
         </div>

@@ -1,9 +1,13 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { APIResponse } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
+import { PFMV_ROUTES } from "@/helpers/routes";
+import clsx from "clsx";
+import { useParams } from "next/navigation";
 
 export default function FicheSolutionSmallHorizontalCard({
   ficheSolution,
@@ -13,11 +17,21 @@ export default function FicheSolutionSmallHorizontalCard({
   className?: string;
 }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.data.attributes.type_solution);
+
+  const { projetId } = useParams();
+
+  const url = projetId
+    ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION(+projetId, ficheSolution.data.attributes.slug)
+    : `${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheSolution.data.attributes.slug}`;
+
   return (
     <Link
-      className={`flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row
-      items-center fiche-solution-small-vertical-card ${className}`}
-      href={`/fiche-solution/${ficheSolution.data.attributes.slug}`}
+      className={clsx(
+        "flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row",
+        "items-center fiche-solution-small-vertical-card",
+        className,
+      )}
+      href={url}
     >
       <div className="flex w-40 h-full">
         <Image

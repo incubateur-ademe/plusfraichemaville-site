@@ -1,5 +1,5 @@
-import * as Sentry from "@sentry/nextjs";
 import { APIResponse } from "@/lib/strapi/types/types";
+import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 export const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
@@ -42,21 +42,20 @@ export const strapiGraphQLCall = async (query: String, variables?: any) => {
     })
       .then((res) =>
         res.json().catch((err) => {
-          console.log("Error when transforming Strapi response to JSON", err, res);
+          customCaptureException("Error when transforming Strapi response to JSON", err);
           throw new Error("Error when transforming Strapi response to JSON " + err);
         }),
       )
       .then((res) => {
         if (res?.errors) {
-          console.log("errors", res?.errors);
-          Sentry.captureMessage("Some Strapi error occured", "error");
+          captureError("Some Strapi error occured", res?.errors);
         }
         return res?.data;
       })
       .catch((err) => {
-        Sentry.captureException(err);
+        customCaptureException("Caugth an exception while calling Strapi", err);
       });
   } catch (err) {
-    Sentry.captureException(err);
+    customCaptureException("Caugth exception while calling Strapi", err);
   }
 };

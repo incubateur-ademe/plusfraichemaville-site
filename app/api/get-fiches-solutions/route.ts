@@ -5,8 +5,10 @@ export async function GET(request: NextRequest) {
   const ficheSolutionIds = request.nextUrl.searchParams.get("ficheSolutionIds");
 
   if (ficheSolutionIds) {
-    return NextResponse.json(await getFicheSolutionByIds(<number[]>JSON.parse(ficheSolutionIds)));
-  } else {
-    return NextResponse.json("[]");
+    const listFicheSolutionIds = <number[]>JSON.parse(ficheSolutionIds);
+    if (listFicheSolutionIds.length > 0) {
+      return NextResponse.json(await getFicheSolutionByIds(<number[]>JSON.parse(ficheSolutionIds)));
+    }
   }
+  return NextResponse.json("[]");
 }

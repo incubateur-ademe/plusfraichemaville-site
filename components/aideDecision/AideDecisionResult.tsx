@@ -7,6 +7,7 @@ import Link from "next/link";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
 import { notEmpty } from "@/helpers/listUtils";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 type Props = {
   aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">;
@@ -43,7 +44,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
               <div className="mt-8 text-center md:text-left hidden md:block">
                 <Link
                   className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
-                  href={`/aide-decision/${previousStep.slug}`}
+                  href={`${PFMV_ROUTES.AIDE_DECISION}/${previousStep.slug}`}
                 >
                   Retour
                 </Link>

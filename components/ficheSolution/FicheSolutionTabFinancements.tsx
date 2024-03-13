@@ -50,7 +50,7 @@ export default function FicheSolutionTabFinancements({
             <div key={aideRegionale.region?.data?.attributes.code} className="mt-2 mb-10">
               <div className="flex">
                 <span className="fr-icon-map-pin-2-fill fr-icon--sm mr-2" />
-                <div className="text-lg  font-bold mb-1">
+                <div className="text-lg font-bold mb-1">
                   {getRegionLabelFromCode(aideRegionale.region?.data?.attributes.code)}
                 </div>
               </div>
