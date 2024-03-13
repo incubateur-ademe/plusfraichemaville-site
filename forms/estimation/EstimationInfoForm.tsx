@@ -72,12 +72,12 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
               <div className="mt-4 flex place-content-center">
                 <Checkbox
                   className="m-auto"
-                  {...form.register("ficheSolutionIds")}
                   options={[
                     {
                       label: null,
                       nativeInputProps: {
                         value: ficheSolutionId.toString(),
+                        ...form.register("ficheSolutionIds"),
                         onChange: () => handleFicheSolutionChange(ficheSolutionId.toString()),
                       },
                     },

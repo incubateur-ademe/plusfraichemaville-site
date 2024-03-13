@@ -55,7 +55,7 @@ export function EstimationMateriauxValidation({
       <Button className={`rounded-3xl mr-4`} type="button" onClick={validateEstimation}>
         {"Valider l'estimation"}
       </Button>
-      <Button className={`rounded-3xl`} type="button" onClick={onPrevious} priority="secondary">
+      <Button className={`rounded-3xl`} onClick={onPrevious} priority="secondary">
         Précédent
       </Button>
     </>

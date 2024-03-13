@@ -28,7 +28,7 @@ const tokenFetch = async (): Promise<IApiSirenQueryToken | null> => {
 
     return result;
   } catch (e: any) {
-    Sentry.captureException("Error when fetching SIREN API info", e);
+    Sentry.captureException("Exception when fetching SIREN API token", e);
     return null;
   }
 };
@@ -51,12 +51,12 @@ export const fetchEntrepriseFromSirenApi = async (siret: string) => {
     const result = (await response.json()) as IApiSirenQueryTypes;
 
     if (response.status >= 400 || result.fault) {
-      captureError("Error when fetching SIREN API Info", result.error);
+      captureError("Error when fetching SIREN API Info", result.fault);
       return null;
     }
     return result;
   } catch (e: any) {
-    Sentry.captureException("Error when fetching SIREN API info", e);
+    Sentry.captureException("Exception when fetching SIREN API info", e);
     return null;
   }
 };

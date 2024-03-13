@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: ReactElement | null }) 
   const user = useUserStore((state) => state.userInfos);
   const router = useRouter();
   if (user && !hasAllRequiredFieldsSet(user)) {
-    router.push(PFMV_ROUTES.MON_PROFIL);
+    return router.push(PFMV_ROUTES.MON_PROFIL);
   }
   return (
     <>

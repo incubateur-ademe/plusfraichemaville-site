@@ -21,5 +21,5 @@ export const updateFichesSolutionsProjetAction = async (
 
   const projet = await updateFichesSolutionsProjet(projetId, fichesSolutionsId);
 
-  return { type: "success", message: "FICHE_SOLUTION_ADDED_TO_PROJET", projet };
+  return { type: "success", message: "FICHES_SOLUTIONS_ADDED_TO_PROJET", projet };
 };

@@ -7,6 +7,7 @@ import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useSaveBookmarksButton } from "./use-save-bookmarks";
 import { ModalSaveFicheSolutionDisconnected } from "./modals/modal-save-fiche-solution-disconnected";
 import { ModalSaveFichesSolutionsConnected } from "./modals/modal-save-fiche-solution-connected";
+import clsx from "clsx";
 
 const modal = createModal({
   id: "bookmark-modal",
@@ -49,9 +50,10 @@ export default function ButtonSaveFicheSolution({
             </Button>
           ) : (
             <div
-              // eslint-disable-next-line max-len
-              className="flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france text-white rounded-2xl
-                  cursor-pointer w-8 h-8"
+              className={clsx(
+                "flex justify-center items-center hover:bg-dsfr-hover-blue-sun bg-dsfr-text-label-blue-france ",
+                "text-white rounded-2xl cursor-pointer w-8 h-8",
+              )}
               onClick={changeFavorite}
             >
               <span className={"fr-icon--sm fr-icon-bookmark-line"} aria-hidden="true" />

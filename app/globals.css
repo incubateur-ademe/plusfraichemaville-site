@@ -3,6 +3,11 @@
 @tailwind utilities;
 
 @layer base {
+  [type="submit"],
+  [type="button"] {
+    background-color: var(--background-action-high-blue-france);
+  }
+
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"] {
