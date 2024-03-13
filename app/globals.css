@@ -3,6 +3,15 @@
 @tailwind utilities;
 
 @layer base {
+  [type="button"],
+  [type="reset"],
+  [type="submit"],
+  button {
+    -webkit-appearance: button;
+    background-color: inherit;
+    background-image: inherit;
+  }
+
   input[type="number"]::-webkit-outer-spin-button,
   input[type="number"]::-webkit-inner-spin-button,
   input[type="number"] {
