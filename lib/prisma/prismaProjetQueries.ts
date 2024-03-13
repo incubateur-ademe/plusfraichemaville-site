@@ -90,6 +90,7 @@ export const createOrUpdateProjet = async ({
     include: {
       collectivite: true,
       estimations: true,
+      creator: true,
     },
   });
 };
