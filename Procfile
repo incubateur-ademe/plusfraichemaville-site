@@ -1,1 +1,1 @@
-postdeploy: pnpm exec prisma migrate deploy
+postdeploy: npx prisma migrate deploy
