@@ -1,3 +1,4 @@
+import "./globals.css";
 import { getHtmlAttributes } from "@codegouvfr/react-dsfr/next-appdir/getHtmlAttributes";
 import { StartDsfr } from "./StartDsfr";
 import { defaultColorScheme } from "./defaultColorScheme";
@@ -7,7 +8,6 @@ import AppHeader from "@/components/layout/AppHeader";
 import { Metadata } from "next";
 import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 import localFont from "next/font/local";
-import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import MatomoScript from "@/components/matomo/MatomoScript";
 import MainLayoutProviders from "@/components/layout/MainLayoutProviders";

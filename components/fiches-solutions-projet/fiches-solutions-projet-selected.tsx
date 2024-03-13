@@ -73,11 +73,11 @@ export const FichesSolutionsProjetsSelected = ({
         </Link>
       </div>
       {selectedFichesSolutionsIds && selectedFichesSolutionsIds.length > 0 ? (
-        <Button className="rounded-3xl" type="button" onClick={validateFichesSolutionsToProjet}>
+        <Button className="rounded-3xl bg-pfmv-navy" type="button" onClick={validateFichesSolutionsToProjet}>
           Valider
         </Button>
       ) : (
-        <Button className="rounded-3xl" type="button" onClick={returnToDashboard}>
+        <Button className="rounded-3xl bg-pfmv-navy" type="button" onClick={returnToDashboard}>
           Retour au tableau de bord
         </Button>
       )}
