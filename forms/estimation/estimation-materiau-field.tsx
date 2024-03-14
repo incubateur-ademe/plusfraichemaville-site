@@ -2,8 +2,9 @@ import { MateriauResponse } from "@/components/ficheSolution/type";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import CmsRichText from "@/components/common/CmsRichText";
+
 import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/coutMateriau";
+import { TruncateRichText } from "@/components/common/truncate-rich-text";
 
 type EstimationMateriauFieldProps = {
   materiau?: MateriauResponse;
@@ -32,7 +33,7 @@ export default function EstimationMateriauField({
           <div className="flex items-center gap-6 mb-4">
             <div className="text-[1.375rem] font-bold">{materiau.attributes.titre}</div>
           </div>
-          <CmsRichText label={materiau.attributes.description} className="text-sm" />
+          <TruncateRichText richText={materiau.attributes.description} maxHeight={4.5} maxChars={200} />
           <div className="text-dsfr-text-mention-grey text-sm">
             <div>{`Coût d'investissement : ${getLabelCoutFourniture(materiau.attributes)}`}</div>
             <div>{`Coût d'entretien : ${getLabelCoutEntretien(materiau.attributes)}`}</div>
