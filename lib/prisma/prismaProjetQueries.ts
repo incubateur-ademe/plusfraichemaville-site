@@ -13,7 +13,7 @@ export const updateFichesSolutionsProjet = (
     },
     data: {
       fiches_solutions_id: fichesSolutionsId,
-      fiches_solutions_validated: false
+      fiches_solutions_validated: false,
     },
     include: {
       collectivite: true,
