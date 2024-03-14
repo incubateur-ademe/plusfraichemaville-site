@@ -6,6 +6,7 @@ import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-c
 import { TableauDeBordSuiviCardInfoProjet } from "./tableau-de-bord-suivi-card-info-projet";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
 import { getLastCompletedEstimation } from "@/helpers/estimation";
+// eslint-disable-next-line max-len
 import { TableauDeBordSuiviWithEstimation } from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 
 export const TableauDeBordSuivi = () => {
