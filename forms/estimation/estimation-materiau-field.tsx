@@ -4,7 +4,7 @@ import { PropsWithChildren } from "react";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
 import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/coutMateriau";
-import { TruncateRichText } from "@/components/common/truncate-rich-text";
+import { ShowMoreRichText } from "@/components/common/show-more-rich-text";
 
 type EstimationMateriauFieldProps = {
   materiau?: MateriauResponse;
@@ -33,7 +33,7 @@ export default function EstimationMateriauField({
           <div className="flex items-center gap-6 mb-4">
             <div className="text-[1.375rem] font-bold">{materiau.attributes.titre}</div>
           </div>
-          <TruncateRichText richText={materiau.attributes.description} maxHeight={4.5} maxChars={200} />
+          <ShowMoreRichText richText={materiau.attributes.description} maxHeight={4.5} maxChars={200} />
           <div className="text-dsfr-text-mention-grey text-sm">
             <div>{`Coût d'investissement : ${getLabelCoutFourniture(materiau.attributes)}`}</div>
             <div>{`Coût d'entretien : ${getLabelCoutEntretien(materiau.attributes)}`}</div>

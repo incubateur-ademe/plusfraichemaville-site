@@ -2,7 +2,7 @@ import clsx from "clsx";
 import { useState } from "react";
 import CmsRichText from "./CmsRichText";
 
-function cutTextWithoutBlank(str: string, maxLength?: number) {
+function truncateTextWithoutBlank(str: string, maxLength?: number) {
   if (maxLength) {
     if (str.length <= maxLength) return str;
     let cutPosition = str.substring(0, maxLength + 1).lastIndexOf(" ");
@@ -12,7 +12,7 @@ function cutTextWithoutBlank(str: string, maxLength?: number) {
   }
 }
 
-export const TruncateRichText = ({
+export const ShowMoreRichText = ({
   richText,
   maxHeight = 4.5, // rem
   maxChars = 200,
@@ -23,7 +23,7 @@ export const TruncateRichText = ({
 }) => {
   const [show, setShow] = useState(false);
   const toggle = () => setShow(!show);
-  const currentRichText = show ? richText : `${cutTextWithoutBlank(richText, maxChars)} ...`;
+  const currentRichText = show ? richText : `${truncateTextWithoutBlank(richText, maxChars)} ...`;
   return (
     <>
       <div className={clsx("overflow-hidden", show ? "max-h-auto" : `max-h-[${maxHeight}rem]`)}>
