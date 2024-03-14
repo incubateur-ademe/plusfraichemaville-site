@@ -27,10 +27,31 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     setIsModalOpen(estimationId === estimation.id.toString());
   }, [estimationId, estimation.id]);
 
-  const modal = {
-    open: () => setIsModalOpen(true),
-    close: () => setIsModalOpen(false),
-  };
+  const modalId = `estimation-materiaux-modal-${estimation.id}`;
+
+  const modal = useMemo(
+    () => ({
+      open: () => setIsModalOpen(true),
+      close: () => setIsModalOpen(false),
+    }),
+    [],
+  );
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        modal.close();
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isModalOpen, estimation.id, modal, modalId]);
 
   const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -98,14 +119,10 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
 
   return (
     <>
-      <Button onClick={() => setIsModalOpen(true)} className="rounded-3xl">
+      <Button onClick={modal.open} className="rounded-3xl">
         Modifier
       </Button>
-      <CustomDSFRModal
-        modalId={`estimation-materiaux-modal-${estimation.id}`}
-        isModalOpen={isModalOpen}
-        close={modal.close}
-      >
+      <CustomDSFRModal modalId={modalId} isModalOpen={isModalOpen} close={modal.close}>
         <Stepper
           currentStep={estimationStep}
           nextTitle={stepperNextTitle}
