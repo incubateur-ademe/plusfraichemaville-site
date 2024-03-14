@@ -30,7 +30,7 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
         </div>
       ) : (
         <div className="text-xs text-right text-dsfr-text-default-grey">
-          <i className="fr-icon--sm ri-circle-fill text-dsfr-default-success mr-1" />
+          <i className="fr-icon--sm ri-circle-fill text-dsfr-background-action-high-success-hover mr-1" />
           En cours
         </div>
       )}

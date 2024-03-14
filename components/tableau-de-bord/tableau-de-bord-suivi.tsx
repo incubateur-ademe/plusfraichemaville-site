@@ -5,6 +5,7 @@ import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-d
 import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
 import { TableauDeBordSuiviCardWithList } from "./tableau-de-bord-suivi-card-with-list";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
+import { getLastCompletedEstimation } from "@/helpers/estimation";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -55,7 +56,13 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je fais une estimation de budget pour mon projet",
     index: 4,
-    progress: "0",
+    progress: (projet: ProjetWithRelations) => {
+      if (projet && projet.estimations?.length > 0) {
+        return getLastCompletedEstimation(projet.estimations) ? "100" : "50";
+      } else {
+        return "0";
+      }
+    },
     disabled: false,
     type: "estimation",
     picto: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,
