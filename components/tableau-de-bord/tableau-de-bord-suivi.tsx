@@ -3,9 +3,12 @@ import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bo
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
 
 import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
-import { TableauDeBordSuiviCardWithList } from "./tableau-de-bord-suivi-card-with-list";
+import { TableauDeBordSuiviCardInfoProjet } from "./tableau-de-bord-suivi-card-info-projet";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
 import { getLastCompletedEstimation } from "@/helpers/estimation";
+import {
+  TableauDeBordSuiviWithEstimation
+} from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -38,7 +41,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     disabled: false,
     type: "renseignement",
     picto: <PictoTableauDeBordSelector pictoId="renseignement" className="w-28" />,
-    children: <TableauDeBordSuiviCardWithList />,
+    children: <TableauDeBordSuiviCardInfoProjet />,
   },
   {
     title: "Je choisis mes solutions de rafraîchissement",
@@ -67,9 +70,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     type: "estimation",
     picto: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,
     children: (
-      <TableauDeBordSuiviWithText>
-        Choisir les matériaux adéquats pour faire une estimation du coût des solutions.
-      </TableauDeBordSuiviWithText>
+      <TableauDeBordSuiviWithEstimation/>
     ),
   },
   {
