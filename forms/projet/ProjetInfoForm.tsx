@@ -99,7 +99,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
           label="Collectivité du projet"
           asterisk={true}
         />
-        <Button className={`rounded-3xl text-sm`} type="submit" disabled={disabled}>
+        <Button className={`rounded-3xl text-sm bg-pfmv-navy`} type="submit" disabled={disabled}>
           {"Valider"}
         </Button>
       </form>
