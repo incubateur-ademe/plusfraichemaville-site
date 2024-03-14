@@ -1,9 +1,9 @@
 "use client";
-import { createModal } from "@codegouvfr/react-dsfr/Modal";
+
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { estimation } from "@prisma/client";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import CustomDSFRModal from "@/components/common/CustomDSFRModal";
 import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form";
@@ -12,6 +12,7 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import { upsert } from "@/helpers/listUtils";
 import useSWRImmutable from "swr/immutable";
 import { EstimationMateriauxValidation } from "@/components/estimation/materiaux-modal/estimation-materiaux-validation";
+import { useSearchParams } from "next/navigation";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;
@@ -19,6 +20,38 @@ type EstimationCardDeleteModalProps = {
 
 export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModalProps) {
   let [estimationStep, setEstimationStep] = useState(1);
+  const estimationId = useSearchParams().get("open");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    setIsModalOpen(estimationId === estimation.id.toString());
+  }, [estimationId, estimation.id]);
+
+  const modalId = `estimation-materiaux-modal-${estimation.id}`;
+
+  const modal = useMemo(
+    () => ({
+      open: () => setIsModalOpen(true),
+      close: () => setIsModalOpen(false),
+    }),
+    [],
+  );
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        modal.close();
+      }
+    };
+
+    if (isModalOpen) {
+      document.addEventListener("keydown", handleEscapeKey);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleEscapeKey);
+    };
+  }, [isModalOpen, estimation.id, modal, modalId]);
 
   const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -55,11 +88,6 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     return estimationMateriaux?.find((em) => em.ficheSolutionId == currentFicheSolution?.id);
   }, [currentFicheSolution, estimationMateriaux]);
 
-  const modal = createModal({
-    id: `estimation-materiaux-modal-${estimation.id}`,
-    isOpenedByDefault: false,
-  });
-
   const updateEstimationInStore = (estimation: estimation) => {
     const currentProject = getCurrentProjet();
     if (currentProject) {
@@ -91,10 +119,10 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
 
   return (
     <>
-      <Button nativeButtonProps={modal.buttonProps} className="rounded-3xl">
+      <Button onClick={modal.open} className="rounded-3xl">
         Modifier
       </Button>
-      <CustomDSFRModal modalId={`estimation-materiaux-modal-${estimation.id}`}>
+      <CustomDSFRModal modalId={modalId} isModalOpen={isModalOpen} close={modal.close}>
         <Stepper
           currentStep={estimationStep}
           nextTitle={stepperNextTitle}
