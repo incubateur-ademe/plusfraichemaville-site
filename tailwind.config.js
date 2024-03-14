@@ -27,7 +27,6 @@ module.exports = {
       "dsfr-border-default-blue-france": "var(--border-default-blue-france)",
       "dsfr-background-flat-blue-france": "var(--background-flat-blue-france)",
       "dsfr-border-action-low-blue-france": "var(--border-action-low-blue-france)",
-      "dsfr-grey-975": "#f6f6f6",
       "dsfr-blue-france-925": "var(--border-open-blue-france)",
       "dsfr-text-label-blue-france": "var(--text-label-blue-france)",
       "dsfr-hover-blue-sun": "var(--background-action-high-blue-france-hover)",
@@ -42,6 +41,7 @@ module.exports = {
       "dsfr-text-default-grey": "var(--text-default-grey)",
       "dsfr-text-error": "var(--text-default-error)",
       "dsfr-contrast-grey": "var(--background-contrast-grey)",
+      "dsfr-default-success": "var(--border-default-green-emeraude)",
 
       "tab-hover": "rgba(66, 17, 170, 0.10)!important",
     },
