@@ -23,4 +23,3 @@ export const getLastCompletedEstimation = (estimations: estimation[] | undefined
 
 const isFicheSolutionEstimated = (ficheSolutionId: number, estimationMateriaux: EstimationMateriauxFicheSolution[]) =>
   estimationMateriaux?.findIndex((estimationMat) => estimationMat.ficheSolutionId === ficheSolutionId) !== -1;
-

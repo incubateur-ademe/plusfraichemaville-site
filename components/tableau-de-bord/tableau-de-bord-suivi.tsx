@@ -6,9 +6,7 @@ import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-c
 import { TableauDeBordSuiviCardInfoProjet } from "./tableau-de-bord-suivi-card-info-projet";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
 import { getLastCompletedEstimation } from "@/helpers/estimation";
-import {
-  TableauDeBordSuiviWithEstimation
-} from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
+import { TableauDeBordSuiviWithEstimation } from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -69,9 +67,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     disabled: false,
     type: "estimation",
     picto: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,
-    children: (
-      <TableauDeBordSuiviWithEstimation/>
-    ),
+    children: <TableauDeBordSuiviWithEstimation />,
   },
   {
     title: "Je trouve des financements",

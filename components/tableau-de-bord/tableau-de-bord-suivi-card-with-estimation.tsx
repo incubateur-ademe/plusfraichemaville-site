@@ -15,7 +15,7 @@ export const TableauDeBordSuiviWithEstimation = () => {
       computeGlobalFicheSolutionPrice(lastCompletedEstimation?.materiaux as EstimationMateriauxFicheSolution[] | null),
     [lastCompletedEstimation],
   );
-  if (!globalPrice || (!lastCompletedEstimation)) {
+  if (!globalPrice || !lastCompletedEstimation) {
     return (
       <span className="text-sm">Choisir les matériaux adéquats pour faire une estimation du coût des solutions.</span>
     );
