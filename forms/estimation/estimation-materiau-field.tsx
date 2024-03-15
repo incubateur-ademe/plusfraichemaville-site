@@ -36,7 +36,6 @@ export default function EstimationMateriauField({
           </div>
           <ShowMoreRichText
             richText={materiau.attributes.description}
-            lines={4}
             className={clsx("text-sm", "[&>*:last-child]:m-0")}
           />
           <div className="text-dsfr-text-mention-grey text-sm">
