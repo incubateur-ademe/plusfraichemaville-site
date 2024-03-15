@@ -44,8 +44,6 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     notifications(result.type, result.message);
     if (result.type === "success") {
       if (result.estimation) {
-        // TODO : rediriger vers la page d'estimation des matériaux en ouvrant
-        // la modif de l'estimation nouvellement créée
         updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
         router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id, `${result.estimation.id}`));
       }
@@ -53,6 +51,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
   };
 
   const disabled = form.formState.isSubmitting;
+  const { error } = form.getFieldState("ficheSolutionIds");
 
   return (
     <form id="create-estimation" onSubmit={form.handleSubmit(onSubmit)}>
@@ -87,9 +86,11 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
             </FicheSolutionSmallCard>
           ))}
         </div>
+
         <Button className={`rounded-3xl bg-pfmv-navy`} type="submit" disabled={disabled}>
           {"Faire une estimation"}
         </Button>
+        {error && <p className={clsx("fr-error-text !text-base", "mb-4")}>{error.message}</p>}
       </FicheSolutionSmallCardContainer>
     </form>
   );

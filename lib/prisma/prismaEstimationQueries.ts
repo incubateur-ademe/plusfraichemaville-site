@@ -29,7 +29,6 @@ export const createEstimation = async (
       projet_id: projetId,
       fiches_solutions_id: fichesSolutionId,
       created_by: createdBy,
-      status: "en_cours",
       id: generateRandomId(),
     },
   });
@@ -45,6 +44,7 @@ export const updateEstimationMateriaux = async (
     },
     data: {
       materiaux: estimationMateriaux as Prisma.JsonArray,
+      updated_at: new Date(),
     },
   });
 };

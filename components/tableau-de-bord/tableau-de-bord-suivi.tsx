@@ -3,8 +3,11 @@ import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bo
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
 
 import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
-import { TableauDeBordSuiviCardWithList } from "./tableau-de-bord-suivi-card-with-list";
+import { TableauDeBordSuiviCardInfoProjet } from "./tableau-de-bord-suivi-card-info-projet";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
+import { getLastCompletedEstimation } from "@/helpers/estimation";
+// eslint-disable-next-line max-len
+import { TableauDeBordSuiviWithEstimation } from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -37,7 +40,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     disabled: false,
     type: "renseignement",
     picto: <PictoTableauDeBordSelector pictoId="renseignement" className="w-28" />,
-    children: <TableauDeBordSuiviCardWithList />,
+    children: <TableauDeBordSuiviCardInfoProjet />,
   },
   {
     title: "Je choisis mes solutions de rafraîchissement",
@@ -55,15 +58,17 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je fais une estimation de budget pour mon projet",
     index: 4,
-    progress: "0",
+    progress: (projet: ProjetWithRelations) => {
+      if (projet && projet.estimations?.length > 0) {
+        return getLastCompletedEstimation(projet.estimations) ? "100" : "50";
+      } else {
+        return "0";
+      }
+    },
     disabled: false,
     type: "estimation",
     picto: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,
-    children: (
-      <TableauDeBordSuiviWithText>
-        Choisir les matériaux adéquats pour faire une estimation du coût des solutions.
-      </TableauDeBordSuiviWithText>
-    ),
+    children: <TableauDeBordSuiviWithEstimation />,
   },
   {
     title: "Je trouve des financements",

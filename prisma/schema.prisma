@@ -54,7 +54,7 @@ model VerificationToken {
 }
 
 model collectivite {
-  id           Int              @id
+  id           Int                 @id
   nom          String
   code_insee   String?             @unique
   code_postal  String?
@@ -85,7 +85,7 @@ model user_collectivite {
 }
 
 model projet {
-  id                         Int       @id
+  id                         Int          @id
   created_by                 String
   creator                    User         @relation(fields: [created_by], references: [id])
   created_at                 DateTime     @default(now())
@@ -102,19 +102,14 @@ model projet {
   collectivite               collectivite @relation(fields: [collectiviteId], references: [id])
 }
 
-enum StatusEstimation {
-  en_cours
-  validee
-}
-
 model estimation {
-  id                      Int           @id 
-  created_by              String
-  creator                 User             @relation(fields: [created_by], references: [id])
-  created_at              DateTime         @default(now())
-  projet_id               Int
-  projet                  projet           @relation(fields: [projet_id], references: [id])
-  fiches_solutions_id     Int[]
-  materiaux               Json?
-  status                  StatusEstimation
+  id                  Int      @id
+  created_by          String
+  creator             User     @relation(fields: [created_by], references: [id])
+  created_at          DateTime @default(now())
+  updated_at          DateTime @default(now())
+  projet_id           Int
+  projet              projet   @relation(fields: [projet_id], references: [id])
+  fiches_solutions_id Int[]
+  materiaux           Json?
 }
