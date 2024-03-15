@@ -17,11 +17,11 @@ export type PictoId = keyof typeof pictos;
 
 type PictoEspaceType = PictoType<PictoId> & { withBackground: boolean };
 
-export const PictoEspaceSelector = ({ pictoId, withBackground, width = 65, height = 65 }: PictoEspaceType) => {
+export const PictoEspaceSelector = ({ pictoId, withBackground, width = 64, height = 64 }: PictoEspaceType) => {
   const selectedPicto = pictos[pictoId];
 
   return (
-    <div className={`p-[5px] relative flex justify-center items-center`}>
+    <div className={`p-[5px] w-20 h-20 relative flex justify-center items-center`}>
       {withBackground && (
         <div className="absolute inset-0 w-full h-full -z-1 rounded-lg bg-dsfr-background-action-low-blue-france"></div>
       )}

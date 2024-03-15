@@ -5,6 +5,7 @@ import { Button } from "@codegouvfr/react-dsfr/Button";
 import { projet } from "@prisma/client";
 import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
 import { notifications } from "../common/notifications";
+import clsx from "clsx";
 
 type ListeProjetsCardDeleteModalProps = {
   projetNom: projet["nom"];
@@ -23,9 +24,13 @@ export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjet
         size="small"
         priority="secondary"
         nativeButtonProps={modal.buttonProps}
-        className="fr-btn fr-btn--icon-left rounded-3xl"
+        className={clsx(
+          "fr-btn fr-btn--icon-left rounded-3xl flex justify-center items-center",
+          "!h-4 !w-8 !p-0 border-dsfr-text-disabled-grey !shadow-pfmv-light-grey",
+          "!shadow-[inset_0_0_0_1px]",
+        )}
       >
-        Supprimer
+        <i className="ri-delete-bin-fill h-4 w-4 before:!w-4 before:!h-4 before:!align-[0]"></i>
       </Button>
       <modal.Component
         title=""
