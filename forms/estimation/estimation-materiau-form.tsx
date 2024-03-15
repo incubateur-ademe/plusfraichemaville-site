@@ -20,6 +20,7 @@ import { updateEstimationMateriauxAction } from "@/actions/estimation/update-est
 import { notifications } from "@/components/common/notifications";
 import { estimation } from "@prisma/client";
 import { mapStrapiEstimationMateriauxToFormValues } from "@/lib/prisma/prismaCustomTypesHelper";
+import { scrollToTop } from "@/helpers/common";
 
 export default function EstimationMateriauForm({
   ficheSolution,
@@ -155,25 +156,41 @@ export default function EstimationMateriauForm({
               entretienMin={globalPrice?.entretien.min}
               entretienMax={globalPrice?.entretien.max}
             />
-            <Button className={`rounded-3xl mr-4`} onClick={form.handleSubmit(onSubmitAndNext)} disabled={disabled}>
-              {"Suivant"}
-            </Button>
-            <Button
-              className={`rounded-3xl mr-4`}
-              onClick={form.handleSubmit(onSubmitAndClose)}
-              disabled={disabled}
-              priority="secondary"
-            >
-              {"Enregistrer et finir plus tard"}
-            </Button>
-            <Button
-              className={`rounded-3xl mr-4`}
-              onClick={form.handleSubmit(onSubmitAndPrevious)}
-              disabled={disabled}
-              priority="tertiary"
-            >
-              {"Précédent"}
-            </Button>
+            <div className="flex items-center">
+              <Button
+                className={`rounded-3xl mr-4 !p-0`}
+                onClick={form.handleSubmit(onSubmitAndNext)}
+                disabled={disabled}
+              >
+                <div
+                  className="h-10 py-2 px-4"
+                  onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
+                >
+                  {"Suivant"}
+                </div>
+              </Button>
+              <Button
+                className={`rounded-3xl mr-4`}
+                onClick={form.handleSubmit(onSubmitAndClose)}
+                disabled={disabled}
+                priority="secondary"
+              >
+                {"Enregistrer et finir plus tard"}
+              </Button>
+              <Button
+                className={`rounded-3xl mr-4 !p-0`}
+                onClick={form.handleSubmit(onSubmitAndPrevious)}
+                disabled={disabled}
+                priority="tertiary"
+              >
+                <div
+                  className="h-10 py-2 px-4"
+                  onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
+                >
+                  {"Précédent"}
+                </div>
+              </Button>
+            </div>
           </form>
         </>
       ) : (
