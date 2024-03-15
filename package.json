@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "predev:start": "only-include-used-icons",
-    "prebuild": "only-include-used-icons",
+    "prebuild": "only-include-used-icons && npx prisma generate",
     "dev:db:migrate": "prisma migrate dev",
     "dev:db:push": "prisma db push",
     "dev:db:generateClient": "prisma generate",

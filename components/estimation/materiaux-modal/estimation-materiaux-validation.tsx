@@ -52,7 +52,7 @@ export function EstimationMateriauxValidation({
         entretienMin={globalPrice.entretien.min}
         entretienMax={globalPrice.entretien.max}
       />
-      <Button className={`rounded-3xl mr-4`} type="button" onClick={validateEstimation}>
+      <Button className={`rounded-3xl mr-4`} onClick={validateEstimation}>
         {"Valider l'estimation"}
       </Button>
       <Button className={`rounded-3xl`} onClick={onPrevious} priority="secondary">
