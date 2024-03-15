@@ -20,7 +20,7 @@ export default function CustomDSFRModal({
       <div className="fr-container fr-container--fluid fr-container-md relative">
         <div className="fr-grid-row fr-grid-row--center !block">
           <div className="max-w-[95%] my-0 mx-auto ">
-            <div className="customModalBody">
+            <div className="customModalBody" id={`custom-${modalId}`}>
               <div className="fr-modal__header !pb-0">
                 <button
                   className="fr-btn--close fr-btn"

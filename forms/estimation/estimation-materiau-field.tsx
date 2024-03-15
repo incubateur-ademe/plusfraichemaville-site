@@ -5,6 +5,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiCli
 
 import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/coutMateriau";
 import { ShowMoreRichText } from "@/components/common/show-more-rich-text";
+import clsx from "clsx";
 
 type EstimationMateriauFieldProps = {
   materiau?: MateriauResponse;
@@ -35,9 +36,8 @@ export default function EstimationMateriauField({
           </div>
           <ShowMoreRichText
             richText={materiau.attributes.description}
-            maxHeight={4.5}
-            maxChars={200}
-            className="text-sm"
+            lines={4}
+            className={clsx("text-sm", "[&>*:last-child]:m-0")}
           />
           <div className="text-dsfr-text-mention-grey text-sm">
             <div>{`Coût d'investissement : ${getLabelCoutFourniture(materiau.attributes)}`}</div>
