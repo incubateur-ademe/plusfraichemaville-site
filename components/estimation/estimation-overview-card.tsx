@@ -10,6 +10,7 @@ import { EstimationMateriauModal } from "@/components/estimation/materiaux-modal
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
 import { computeGlobalFicheSolutionPrice } from "@/helpers/coutMateriau";
 import { isComplete } from "@/helpers/estimation";
+import { dateToStringWithTime } from "@/helpers/dateUtils";
 
 export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
@@ -23,18 +24,21 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
 
   return (
     <div className={clsx("pfmv-strong-card pt-8 pb-12 px-12")}>
-      {isEstimationCompleted ? (
-        <div className="text-xs text-right text-dsfr-text-default-grey">
-          <i className="fr-icon-success-fill text-dsfr-border-default-grey mr-1" />
-          Complétée
-        </div>
-      ) : (
-        <div className="text-xs text-right text-dsfr-text-default-grey">
-          <i className="fr-icon--sm ri-circle-fill text-dsfr-background-action-high-success-hover mr-1" />
-          En cours
-        </div>
-      )}
-      <div className="mb-6 text-lg">{"Votre simulation pour ces solutions et matériaux choisis pour chacune."}</div>
+      <div className="flex flex-row justify-between mb-6">
+        <div className="mb-6 text-xl font-bold">{`Estimation du ${dateToStringWithTime(estimation.created_at)}`}</div>
+
+        {isEstimationCompleted ? (
+          <div className="text-xs text-right text-dsfr-text-default-grey">
+            <i className="fr-icon-success-fill text-dsfr-border-default-grey mr-1" />
+            Complétée
+          </div>
+        ) : (
+          <div className="text-xs text-right text-dsfr-text-default-grey">
+            <i className="fr-icon--sm ri-circle-fill text-dsfr-background-action-high-success-hover mr-1" />
+            En cours
+          </div>
+        )}
+      </div>
       <div className={clsx("flex flex-wrap gap-6 mb-12")}>
         {estimation.fiches_solutions_id.map((ficheSolutionId) => (
           <FicheSolutionSmallCard
