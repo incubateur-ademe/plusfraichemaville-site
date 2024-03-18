@@ -6,7 +6,7 @@ import { Feature, GeoJsonProperties, Point } from "geojson";
 const fetchAddressFromBanApi = async (
   keyword: string,
   limit: number,
-  type?: string
+  type?: string,
 ): Promise<Feature<Point, GeoJsonProperties>[]> => {
   if (keyword?.trim()?.length < 3) {
     return [];
@@ -16,9 +16,9 @@ const fetchAddressFromBanApi = async (
     {
       method: "GET",
       headers: {
-        Accept: "application/json"
-      }
-    }
+        Accept: "application/json",
+      },
+    },
   );
   const result = (await response.json()) as BanAPIResponse;
   if ("code" in result) {
@@ -29,7 +29,7 @@ const fetchAddressFromBanApi = async (
 
 export const fetchCollectiviteFromBanApi = async (
   keyword: string,
-  limit: number = 10
+  limit: number = 10,
 ): Promise<AddressCollectivite[]> => {
   try {
     const results = await fetchAddressFromBanApi(keyword, limit, "municipality");
@@ -40,10 +40,7 @@ export const fetchCollectiviteFromBanApi = async (
   }
 };
 
-export const fetchProjetAddressFromBanApi = async (
-  keyword: string,
-  limit: number = 10
-): Promise<AddressProjet[]> => {
+export const fetchProjetAddressFromBanApi = async (keyword: string, limit: number = 10): Promise<AddressProjet[]> => {
   try {
     const results = await fetchAddressFromBanApi(keyword, limit);
     return results.map(mapAddressApiToAddressProjet);
@@ -52,4 +49,3 @@ export const fetchProjetAddressFromBanApi = async (
     return [];
   }
 };
-

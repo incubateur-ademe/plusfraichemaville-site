@@ -26,18 +26,18 @@ type CommonProps<T extends FieldValues> = {
 export type InputFormFieldProps<T extends FieldValues> = CommonProps<T>;
 
 const AddressInputFormField = <T extends FieldValues>({
-                                                        label,
-                                                        path,
-                                                        control,
-                                                        hint,
-                                                        disabled,
-                                                        className,
-                                                        valid,
-                                                        icon,
-                                                        info,
-                                                        asterisk,
-                                                        ...rest
-                                                      }: InputFormFieldProps<T>) => {
+  label,
+  path,
+  control,
+  hint,
+  disabled,
+  className,
+  valid,
+  icon,
+  info,
+  asterisk,
+  ...rest
+}: InputFormFieldProps<T>) => {
   const id = `input-form-field__${path}`;
 
   const [query, setQuery] = useState("");
@@ -69,8 +69,8 @@ const AddressInputFormField = <T extends FieldValues>({
           ariaDescribedBy = `${id}__valid`;
         }
 
-        const onChangeHandleNull = (event:any) => {
-          onChange(event ?? {label: ""});
+        const onChangeHandleNull = (event: any) => {
+          onChange(event ?? { label: "" });
         };
 
         const input = (
@@ -80,9 +80,7 @@ const AddressInputFormField = <T extends FieldValues>({
                 <Combobox.Input
                   aria-describedby={ariaDescribedBy}
                   className=" fr-input w-full "
-                  displayValue={(address: AddressProjet) =>
-                    address?.label ?? ""
-                  }
+                  displayValue={(address: AddressProjet) => address?.label ?? ""}
                   onChange={(event) => throttledFetchAddress(event.target.value)}
                   onBlur={onBlur}
                   ref={ref}
@@ -155,9 +153,9 @@ const AddressInputFormField = <T extends FieldValues>({
               {
                 "fr-input-group--error": error,
                 "fr-input-group--disabled": disabled,
-                "fr-input-group--valid": valid && isTouched && !invalid
+                "fr-input-group--valid": valid && isTouched && !invalid,
               },
-              className
+              className,
             )}
           >
             <label className="fr-label fr-mb-1v" htmlFor={id}>

@@ -28,8 +28,8 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
     resolver: zodResolver(ProjetInfoFormSchema),
     defaultValues: {
       adresse: mapDBProjetToProjetAddress(projet),
-      collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined
-    }
+      collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
+    },
   });
 
   useEffect(() => {
@@ -40,13 +40,13 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
       niveauMaturite: projet?.niveau_maturite ?? "",
       adresse: mapDBProjetToProjetAddress(projet),
       dateEcheance: monthDateToString(projet?.date_echeance),
-      collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined
+      collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
     });
   }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
     const result = await upsertProjetAction({
-      ...data
+      ...data,
     });
     notifications(result.type, result.message);
 
