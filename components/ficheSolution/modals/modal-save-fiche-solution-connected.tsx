@@ -8,15 +8,18 @@ import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 import { ModalSaveFicheSolutionProps } from "../ButtonSaveFicheSolution";
 import { notifications } from "@/components/common/notifications";
+import CustomDSFRModal from "@/components/common/CustomDSFRModal";
 
 export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: ModalSaveFicheSolutionProps) => {
   const [selectedProjetId, setSelectedProjetId] = useState(-1);
   const projets = useProjetsStore((state) => state.projets);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+  const currentProjet = useProjetsStore((state) => state.getProjetById(selectedProjetId));
 
   const validate = async () => {
-    if (selectedProjetId > 0 && ficheSolutionId) {
-      const update = await updateFichesSolutionsProjetAction(selectedProjetId, [+ficheSolutionId]);
+    if (currentProjet && selectedProjetId > 0 && ficheSolutionId) {
+      const merged = Array.from(new Set([...currentProjet.fiches_solutions_id, +ficheSolutionId]));
+      const update = await updateFichesSolutionsProjetAction(selectedProjetId, merged);
       if (update.projet) {
         addOrUpdateProjet(update.projet);
         notifications(update.type, "FICHE_SOLUTION_ADDED_TO_PROJET");
@@ -29,7 +32,12 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
   };
 
   return (
-    <modal.Component title="" size="large">
+    <CustomDSFRModal
+      modalId={ficheSolutionId?.toString()!}
+      close={modal.close}
+      isModalOpen={modal.isModalOpen}
+      size="small"
+    >
       <div className="flex items-center mb-4">
         <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
         <span className="text-2xl font-bold block">Solution ajoutée dans Ma sélection</span>
@@ -65,11 +73,11 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
       </Button>
       <Link
         href={PFMV_ROUTES.MES_FICHES_SOLUTIONS}
-        onClick={() => modal.close()}
+        // onClick={() => modal.close()}
         className="fr-btn fr-btn--secondary rounded-3xl !min-h-fit !text-sm mr-4"
       >
         Voir mes fiches solutions
       </Link>
-    </modal.Component>
+    </CustomDSFRModal>
   );
 };

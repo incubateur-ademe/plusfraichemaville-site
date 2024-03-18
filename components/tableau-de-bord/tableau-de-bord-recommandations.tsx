@@ -3,22 +3,33 @@ import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQuerie
 import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
 
 import useSWRImmutable from "swr/immutable";
-import { useEffect, useMemo, useState } from "react";
+
 import { FicheSolutionResponse } from "../ficheSolution/type";
 
-const getUniqueFSComplementaires = (fichesSolutionsComplementaires: FicheSolutionResponse[]) =>
-  Object.values(
-    fichesSolutionsComplementaires.reduce<Record<string, FicheSolutionResponse>>((acc, item) => {
-      acc[item.id] = item;
-      return acc;
-    }, {}),
-  );
+const fetcher = (fichesIds: number[]) => {
+  const f = (ficheId: number) => getFicheSolutionById(ficheId.toString());
+  return Promise.all(fichesIds.map((ficheId) => f(ficheId)));
+};
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const [fsComplementaires, setFSComplementaires] = useState<FicheSolutionResponse[]>([]);
-  const updateFSComplementaires = (updates: FicheSolutionResponse[]) => setFSComplementaires(updates);
-  const fichesSolutionsUniques = useMemo(() => getUniqueFSComplementaires(fsComplementaires), [fsComplementaires]);
+  const urls = projet?.fiches_solutions_id ?? [];
+  const { data } = useSWRImmutable(urls, () => fetcher(urls));
+
+  const fichesSolutions = data?.map((fs) => fs?.attributes.fiches_solutions_complementaires);
+
+  const fichesSolutionsComplementaires = fichesSolutions?.reduce((acc, curr) => {
+    if (curr && curr.data) {
+      return acc.concat(curr.data);
+    } else {
+      return acc;
+    }
+  }, [] as FicheSolutionResponse[]);
+
+  const filteredFichesSolutionsComplementaires = fichesSolutionsComplementaires?.filter(
+    (currentElement, currentIndex, array) =>
+      array.findIndex((element) => element.id === currentElement.id) === currentIndex,
+  );
 
   if (!projet) {
     return null;
@@ -32,37 +43,9 @@ export const TableauDeBordRecommandation = () => {
         des solutions complémentaires à celles que vous avez choisies afin de créer les meilleures combinaisons et
         synergies possibles.
       </p>
-      {fichesSolutionsUniques.map((fs) => (
-        <FicheSolutionCardWithUserInfo ficheSolution={fs} key={fs.id} projectName="" />
-      ))}
-      {projet?.fiches_solutions_id.map((ficheSolutionId) => (
-        <TableauDeBordRecommandationItem
-          setFSComplementaires={updateFSComplementaires}
-          ficheSolutionId={ficheSolutionId}
-          key={ficheSolutionId}
-        />
-      ))}
+      {filteredFichesSolutionsComplementaires?.map(
+        (fs) => fs && <FicheSolutionCardWithUserInfo ficheSolution={fs} key={fs?.id} projectName="" />,
+      )}
     </div>
   );
-};
-
-const TableauDeBordRecommandationItem = ({
-  ficheSolutionId,
-  setFSComplementaires,
-}: {
-  ficheSolutionId: number;
-  setFSComplementaires: (_updates: FicheSolutionResponse[]) => void;
-}) => {
-  const { data } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
-    getFicheSolutionById(ficheSolutionId.toString()),
-  );
-
-  useEffect(() => {
-    if (data && data.attributes.fiches_solutions_complementaires) {
-      const arr = data.attributes.fiches_solutions_complementaires.data;
-      setFSComplementaires(arr);
-    }
-  }, [data, setFSComplementaires]);
-
-  return null;
 };
