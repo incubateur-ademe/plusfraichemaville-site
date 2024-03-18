@@ -1,66 +1,69 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { projet } from "@prisma/client";
+import { Prisma, projet } from "@prisma/client";
 import { ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
+import { GeoJsonProperties } from "geojson";
 
 export const updateFichesSolutionsProjet = (
   projetId: number,
-  fichesSolutionsId: number[],
+  fichesSolutionsId: number[]
 ): Promise<ProjetWithRelations | null> => {
   return prismaClient.projet.update({
     where: {
-      id: projetId,
+      id: projetId
     },
     data: {
       fiches_solutions_id: fichesSolutionsId,
-      fiches_solutions_validated: false,
+      fiches_solutions_validated: false
     },
     include: {
       collectivite: true,
       estimations: true,
-      creator: true,
-    },
+      creator: true
+    }
   });
 };
 
 export const updateFichesSolutionsProjetValidated = (projetId: number): Promise<ProjetWithRelations | null> => {
   return prismaClient.projet.update({
     where: {
-      id: projetId,
+      id: projetId
     },
     data: {
-      fiches_solutions_validated: true,
+      fiches_solutions_validated: true
     },
     include: {
       collectivite: true,
       creator: true,
-      estimations: true,
-    },
+      estimations: true
+    }
   });
 };
 
 export const getProjetById = async (projetId: number): Promise<projet | null> => {
   return prismaClient.projet.findUnique({
     where: {
-      id: projetId,
-    },
+      id: projetId
+    }
   });
 };
 
 export const createOrUpdateProjet = async ({
-  projetId,
-  nomProjet,
-  adresse,
-  dateEcheance,
-  typeEspace,
-  niveauMaturite,
-  userId,
-  collectiviteId,
-}: {
+                                             projetId,
+                                             nomProjet,
+                                             adresse,
+                                             adresse_info,
+                                             dateEcheance,
+                                             typeEspace,
+                                             niveauMaturite,
+                                             userId,
+                                             collectiviteId
+                                           }: {
   projetId?: number;
   nomProjet: string;
   typeEspace: string;
   adresse?: string;
+  adresse_info?: GeoJsonProperties;
   dateEcheance: string;
   niveauMaturite: string;
   userId: string;
@@ -68,30 +71,32 @@ export const createOrUpdateProjet = async ({
 }) => {
   return prismaClient.projet.upsert({
     where: {
-      id: projetId ?? -1,
+      id: projetId ?? -1
     },
     create: {
+      id: generateRandomId(),
+      created_by: userId,
       nom: nomProjet,
       type_espace: typeEspace,
       adresse,
+      adresse_info: adresse_info as Prisma.JsonObject,
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
-      collectiviteId: collectiviteId,
-      created_by: userId,
-      id: generateRandomId(),
+      collectiviteId: collectiviteId
     },
     update: {
       nom: nomProjet,
       type_espace: typeEspace,
-      adresse,
+      adresse: adresse ?? null,
+      adresse_info: adresse_info as Prisma.JsonObject ?? null,
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
-      collectiviteId: collectiviteId,
+      collectiviteId: collectiviteId
     },
     include: {
       collectivite: true,
       estimations: true,
-      creator: true,
-    },
+      creator: true
+    }
   });
 };

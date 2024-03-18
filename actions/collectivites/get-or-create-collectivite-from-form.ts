@@ -1,4 +1,4 @@
-import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
+import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetch";
 import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
 import { CollectiviteFormData } from "@/forms/collectivite/collectivite-form-schema";
 
