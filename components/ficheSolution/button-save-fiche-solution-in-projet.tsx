@@ -67,7 +67,6 @@ export const ButtonSaveFicheSolutionInProjet = ({
           const updatedProjet = await updateFichesSolutionsProjetAction(projet.id, fichesSolutionsUpdated);
           if (updatedProjet.projet) {
             updateStore(updatedProjet.projet);
-
             !isAlreadySaved && modal.open();
           }
         }}

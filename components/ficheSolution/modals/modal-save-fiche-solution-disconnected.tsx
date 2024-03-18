@@ -1,10 +1,19 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ModalSaveFicheSolutionProps } from "../ButtonSaveFicheSolution";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import CustomDSFRModal from "@/components/common/CustomDSFRModal";
 
-export const ModalSaveFicheSolutionDisconnected = ({ modal }: ModalSaveFicheSolutionProps) => {
+export const ModalSaveFicheSolutionDisconnected = ({ modal, ficheSolutionId }: ModalSaveFicheSolutionProps) => {
   return (
-    <modal.Component title="Solution sauvegardée dans mon espace Projet" iconId="fr-icon-arrow-right-line" size="large">
+    <CustomDSFRModal
+      modalId={ficheSolutionId?.toString()!}
+      close={modal.close}
+      isModalOpen={modal.isModalOpen}
+      size="small"
+    >
+      <h1 id="fr-modal-title-bookmark-modal" className="fr-modal__title">
+        <span className="fr-icon-arrow-right-line fr-fi--lg"></span>Solution sauvegardée dans mon espace Projet
+      </h1>
       <div>Retrouvez toutes vos solutions mises en favoris dans votre espace Projet.</div>
       <div className="mt-6">
         <Button className={"rounded-3xl text-sm mr-6 mb-2"} onClick={() => modal.close()} size="small">
@@ -19,6 +28,6 @@ export const ModalSaveFicheSolutionDisconnected = ({ modal }: ModalSaveFicheSolu
           Ma sélection
         </Button>
       </div>
-    </modal.Component>
+    </CustomDSFRModal>
   );
 };

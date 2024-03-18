@@ -1,23 +1,22 @@
 "use client";
-import React from "react";
 
 import Button from "@codegouvfr/react-dsfr/Button";
-import { createModal } from "@codegouvfr/react-dsfr/Modal";
 
 import { useSaveBookmarksButton } from "./use-save-bookmarks";
 import { ModalSaveFicheSolutionDisconnected } from "./modals/modal-save-fiche-solution-disconnected";
 import { ModalSaveFichesSolutionsConnected } from "./modals/modal-save-fiche-solution-connected";
 import clsx from "clsx";
-
-const modal = createModal({
-  id: "bookmark-modal",
-  isOpenedByDefault: false,
-});
+import { useMemo, useState } from "react";
 
 export type ModalSaveFicheSolutionProps = {
-  modal: typeof modal;
+  modal: {
+    open: () => void;
+    close: () => void;
+    isModalOpen: boolean;
+  };
   ficheSolutionId?: number;
 };
+
 export default function ButtonSaveFicheSolution({
   ficheSolutionId,
   projectName,
@@ -29,6 +28,17 @@ export default function ButtonSaveFicheSolution({
   projectName: string;
   className?: string;
 }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const modal = useMemo(
+    () => ({
+      open: () => setIsModalOpen(true),
+      close: () => setIsModalOpen(false),
+      isModalOpen,
+    }),
+    [isModalOpen],
+  );
+
   const { isBookmarked, changeFavorite, isAuthenticated } = useSaveBookmarksButton(
     ficheSolutionId,
     projectName,
