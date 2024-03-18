@@ -1,7 +1,8 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { projet } from "@prisma/client";
+import { Prisma, projet } from "@prisma/client";
 import { ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
+import { GeoJsonProperties } from "geojson";
 
 export const updateFichesSolutionsProjet = (
   projetId: number,
@@ -51,6 +52,7 @@ export const createOrUpdateProjet = async ({
   projetId,
   nomProjet,
   adresse,
+  adresse_info,
   dateEcheance,
   typeEspace,
   niveauMaturite,
@@ -61,6 +63,7 @@ export const createOrUpdateProjet = async ({
   nomProjet: string;
   typeEspace: string;
   adresse?: string;
+  adresse_info?: GeoJsonProperties;
   dateEcheance: string;
   niveauMaturite: string;
   userId: string;
@@ -71,19 +74,21 @@ export const createOrUpdateProjet = async ({
       id: projetId ?? -1,
     },
     create: {
+      id: generateRandomId(),
+      created_by: userId,
       nom: nomProjet,
       type_espace: typeEspace,
       adresse,
+      adresse_info: adresse_info as Prisma.JsonObject,
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
-      created_by: userId,
-      id: generateRandomId(),
     },
     update: {
       nom: nomProjet,
       type_espace: typeEspace,
-      adresse,
+      adresse: adresse ?? null,
+      adresse_info: (adresse_info as Prisma.JsonObject) ?? null,
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,

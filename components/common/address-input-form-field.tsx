@@ -3,10 +3,10 @@ import { Fragment, ReactNode, useEffect, useState } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/components/common/RedAsterisk";
 import { Combobox, Transition } from "@headlessui/react";
-import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetch";
+import { fetchProjetAddressFromBanApi } from "@/lib/adresseApi/fetch";
 import debounce from "lodash/debounce";
 import { Oval } from "react-loader-spinner";
-import { AddressCollectivite } from "@/lib/adresseApi/types";
+import { AddressProjet } from "@/lib/adresseApi/types";
 import clsx from "clsx";
 
 type CommonProps<T extends FieldValues> = {
@@ -25,7 +25,7 @@ type CommonProps<T extends FieldValues> = {
 
 export type InputFormFieldProps<T extends FieldValues> = CommonProps<T>;
 
-const CollectiviteInputFormField = <T extends FieldValues>({
+const AddressInputFormField = <T extends FieldValues>({
   label,
   path,
   control,
@@ -42,11 +42,11 @@ const CollectiviteInputFormField = <T extends FieldValues>({
 
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [fetchedAddresses, setFetchedAddresses] = useState<AddressCollectivite[]>([]);
+  const [fetchedAddresses, setFetchedAddresses] = useState<AddressProjet[]>([]);
 
   useEffect(() => {
     setLoading(true);
-    fetchCollectiviteFromBanApi(query)
+    fetchProjetAddressFromBanApi(query)
       .then((result) => {
         setFetchedAddresses(result);
       })
@@ -55,7 +55,7 @@ const CollectiviteInputFormField = <T extends FieldValues>({
       });
   }, [query]);
 
-  const throttledFetchCollectivite = debounce((keyword) => setQuery(keyword), 200);
+  const throttledFetchAddress = debounce((keyword) => setQuery(keyword), 200);
 
   return (
     <Controller
@@ -69,17 +69,19 @@ const CollectiviteInputFormField = <T extends FieldValues>({
           ariaDescribedBy = `${id}__valid`;
         }
 
+        const onChangeHandleNull = (event: any) => {
+          onChange(event ?? { label: "" });
+        };
+
         const input = (
-          <Combobox defaultValue={value} onChange={onChange} nullable disabled={disabled}>
+          <Combobox defaultValue={value} onChange={onChangeHandleNull} nullable disabled={disabled}>
             <div className="relative mt-1">
               <div className={"flex items-center"}>
                 <Combobox.Input
                   aria-describedby={ariaDescribedBy}
                   className=" fr-input w-full "
-                  displayValue={(address: AddressCollectivite) =>
-                    address ? `${address?.nomCollectivite} - ${address?.codePostal}` : ""
-                  }
-                  onChange={(event) => throttledFetchCollectivite(event.target.value)}
+                  displayValue={(address: AddressProjet) => address?.label ?? ""}
+                  onChange={(event) => throttledFetchAddress(event.target.value)}
                   onBlur={onBlur}
                   ref={ref}
                   {...rest}
@@ -114,7 +116,7 @@ const CollectiviteInputFormField = <T extends FieldValues>({
                   ) : (
                     fetchedAddresses.map((address) => (
                       <Combobox.Option
-                        key={address.banId}
+                        key={address.label}
                         className={({ active }) =>
                           `relative cursor-default select-none py-2 pl-4 pr-4 ${
                             active ? "bg-dsfr-background-alt-grey " : ""
@@ -125,7 +127,7 @@ const CollectiviteInputFormField = <T extends FieldValues>({
                         {({ selected, active }) => (
                           <>
                             <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                              {`${address.nomCollectivite} - ${address.codePostal}`}
+                              {`${address.label}`}
                             </span>
                             {selected ? (
                               <span
@@ -183,4 +185,4 @@ const CollectiviteInputFormField = <T extends FieldValues>({
   );
 };
 
-export default CollectiviteInputFormField;
+export default AddressInputFormField;

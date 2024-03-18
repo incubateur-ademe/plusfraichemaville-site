@@ -16,8 +16,9 @@ import { upsertProjetAction } from "@/actions/projets/upsert-projet-action";
 import { notifications } from "@/components/common/notifications";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
-import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
+import { mapDBCollectiviteToCollectiviteAddress, mapDBProjetToProjetAddress } from "@/lib/adresseApi/banApiHelper";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import AddressInputFormField from "@/components/common/address-input-form-field";
 
 export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => {
   const router = useRouter();
@@ -26,6 +27,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
   const form = useForm<ProjetInfoFormData>({
     resolver: zodResolver(ProjetInfoFormSchema),
     defaultValues: {
+      adresse: mapDBProjetToProjetAddress(projet),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
     },
   });
@@ -36,7 +38,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
       nom: projet?.nom ?? "",
       typeEspace: projet?.type_espace ?? "",
       niveauMaturite: projet?.niveau_maturite ?? "",
-      adresse: projet?.adresse || undefined,
+      adresse: mapDBProjetToProjetAddress(projet),
       dateEcheance: monthDateToString(projet?.date_echeance),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
     });
@@ -72,7 +74,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
           options={typeEspaceOptions}
           placeholder="Selectionnez un type d'espace"
         />
-        <InputFormField
+        <AddressInputFormField
           control={form.control}
           path="adresse"
           label="Si je la connais, adresse du lieu de l'intervention"

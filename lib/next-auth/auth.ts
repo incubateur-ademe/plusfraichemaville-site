@@ -9,7 +9,7 @@ import { getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries"
 import { attachUserToCollectivite } from "@/lib/prisma/prismaUserCollectiviteQueries";
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { AgentConnectInfo } from "@/lib/prisma/prismaCustomTypes";
-import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetchCollectivite";
+import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetch";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const authOptions: NextAuthOptions = {

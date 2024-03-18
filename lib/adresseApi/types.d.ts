@@ -14,3 +14,8 @@ export type AddressCollectivite = {
   lat?: number | null;
   banInfo?: GeoJsonProperties | null;
 };
+
+export type AddressProjet = {
+  label: string;
+  banInfo?: GeoJsonProperties | null;
+};
