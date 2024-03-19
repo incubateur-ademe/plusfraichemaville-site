@@ -73,7 +73,7 @@ export const authOptions: NextAuthOptions = {
       checks: ["nonce", "state"],
       authorization: {
         params: {
-          scope: "openid uid given_name usual_name email siret chorusdt phone organizational_unit siren",
+          scope: "openid uid given_name usual_name email siret",
           acr_values: "eidas1",
           redirect_uri: process.env.NEXT_PUBLIC_URL_SITE + "/api/auth/callback/agentconnect",
           nonce: uuidv4(),
