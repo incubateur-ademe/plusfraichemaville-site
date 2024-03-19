@@ -109,7 +109,7 @@ model estimation {
   created_at          DateTime @default(now())
   updated_at          DateTime @default(now())
   projet_id           Int
-  projet              projet   @relation(fields: [projet_id], references: [id])
+  projet              projet   @relation(fields: [projet_id], references: [id], onDelete: Cascade)
   fiches_solutions_id Int[]
   materiaux           Json?
 }

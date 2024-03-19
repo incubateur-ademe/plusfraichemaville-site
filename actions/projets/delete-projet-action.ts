@@ -6,6 +6,7 @@ import { deleteUserProjet } from "@/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
+import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const deleteProjetAction = async (projetId: number): Promise<ResponseAction<{}>> => {
   const session = await auth();
@@ -17,9 +18,14 @@ export const deleteProjetAction = async (projetId: number): Promise<ResponseActi
     return { type: "error", message: "PROJET_DELETE_UNAUTHORIZED" };
   }
 
-  await deleteUserProjet(projetId);
+  try {
+    await deleteUserProjet(projetId);
 
-  revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
+    revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
+  } catch (e) {
+    customCaptureException("Error in DeleteProjetAction DB call", e);
+    return { type: "error", message: "TECHNICAL_ERROR" };
+  }
 
   return { type: "success", message: "PROJET_DELETE" };
 };
