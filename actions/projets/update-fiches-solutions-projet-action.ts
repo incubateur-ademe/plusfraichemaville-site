@@ -19,7 +19,7 @@ export const updateFichesSolutionsProjetAction = async (
     return { type: "error", message: "UNAUTHORIZED", projet: null };
   }
 
-  const projet = await updateFichesSolutionsProjet(projetId, fichesSolutionsId);
+  const projet = await updateFichesSolutionsProjet(projetId, fichesSolutionsId, session.user.id);
 
   return { type: "success", message: "FICHES_SOLUTIONS_ADDED_TO_PROJET", projet };
 };

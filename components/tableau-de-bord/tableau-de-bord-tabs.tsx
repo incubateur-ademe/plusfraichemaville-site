@@ -7,6 +7,9 @@ import { TableauDeBordRecommandation } from "./tableau-de-bord-recommandations";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useParams, useSearchParams } from "next/navigation";
+import { updateRecommandationsViewedByUser } from "@/actions/projets/update-recommandations-viewed-by-user-action";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { useUserStore } from "@/stores/user/provider";
 
 const getButtonTabClassName = (active: boolean) =>
   clsx(
@@ -19,6 +22,11 @@ export const TableauDeBordTabs = () => {
   const params = useSearchParams();
   const currentTab = params.get("tab");
 
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+  const currentUser = useUserStore((state) => state.userInfos?.id);
+  const recommandationViewed = useProjetsStore((state) => state.getCurrentProjet())?.recommandations_viewed_by;
+  const recommandationsAlreadyViewed = currentUser && recommandationViewed?.includes(currentUser);
+
   const tabs = [
     {
       label: "Tableau de suivi",
@@ -29,6 +37,12 @@ export const TableauDeBordTabs = () => {
       label: "Recommandations",
       filter: "recommandation",
       component: <TableauDeBordRecommandation />,
+      update: async () => {
+        const updatedProjet = await updateRecommandationsViewedByUser(projetId as string, "add");
+        if (updatedProjet.projet) {
+          addOrUpdateProjet(updatedProjet.projet);
+        }
+      },
     },
   ];
 
@@ -44,10 +58,13 @@ export const TableauDeBordTabs = () => {
               className={clsx(
                 getButtonTabClassName(currentTab === tab.filter),
                 "!bg-none relative",
-                tab.filter === "recommandation" && `after:right-4 after:rounded-full after:w-[7.5px] after:h-[7.5px]`,
+                !recommandationsAlreadyViewed &&
+                  tab.filter === "recommandation" &&
+                  `after:right-4 after:rounded-full after:w-[7.5px] after:h-[7.5px]`,
                 tab.filter === "recommandation" &&
                   "after:absolute after:top-2 after:bg-dsfr-background-flat-blue-france",
               )}
+              onClick={async () => tab.update && tab.update()}
               key={`button-tab-${index}`}
             >
               {tab.label}
