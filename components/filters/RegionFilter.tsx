@@ -15,7 +15,7 @@ export default function RegionFilter({ className }: { className?: string }) {
   return (
     <div className={className}>
       <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-3">Régions</div>
-      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink gap-3`}>
+      <div className={"flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink gap-3"}>
         <button className="fr-tag fr-text--xs" onClick={() => clearFilter()}>
           Toutes régions
         </button>

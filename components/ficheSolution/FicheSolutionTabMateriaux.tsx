@@ -23,6 +23,7 @@ export default function FicheSolutionTabMateriaux({
                 <div className="w-28 h-28 relative hidden md:flex flex-none mt-8">
                   <Image
                     fill
+                    sizes="5vw"
                     src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
                     alt={mat.titre}
                     className={"object-cover rounded-2xl"}
@@ -59,7 +60,7 @@ export default function FicheSolutionTabMateriaux({
           ))}
         </>
       ) : (
-        <div className="text-dsfr-text-title-grey   mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
+        <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
       )}
       {ficheSolution.cout_minimum_entretien && ficheSolution.cout_maximum_entretien && (
         <>

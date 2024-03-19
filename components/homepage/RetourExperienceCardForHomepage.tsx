@@ -3,6 +3,7 @@ import Tag from "@codegouvfr/react-dsfr/Tag";
 import Link from "next/link";
 import React from "react";
 import { HomepageRetourExperience } from "@/components/homepage/HomepageRetourExperienceList";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export default function RetourExperienceCardForHomepage({
   retourExperience,
@@ -14,7 +15,7 @@ export default function RetourExperienceCardForHomepage({
   return (
     <Link
       className={`flex w-72 flex-col pfmv-card min-h-[26rem] ${className}`}
-      href={`/projet/${retourExperience.slug}`}
+      href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${retourExperience.slug}`}
     >
       <div className="flex w-full h-40">
         <Image

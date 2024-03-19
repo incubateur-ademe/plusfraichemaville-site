@@ -81,6 +81,8 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
               description
               cout_maximum_fourniture
               cout_minimum_fourniture
+              cout_minimum_entretien
+              cout_maximum_entretien
               cout_unite
             }
           }
@@ -148,6 +150,15 @@ export async function getFicheSolutionBySlug(
   slug: string,
 ): Promise<APIResponseData<"api::fiche-solution.fiche-solution"> | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
+  const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
+    ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  return safeReturnStrapiEntity(apiResponse);
+}
+
+export async function getFicheSolutionById(
+  ficheSolutionId: string,
+): Promise<APIResponseData<"api::fiche-solution.fiche-solution"> | null> {
+  const filter = new StrapiFilter(true, [{ attribute: "id", operator: "eq", value: ficheSolutionId, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
     ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntity(apiResponse);
