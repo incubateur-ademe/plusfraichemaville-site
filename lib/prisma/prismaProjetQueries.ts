@@ -4,10 +4,19 @@ import { ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
 
-export const updateFichesSolutionsProjet = (
+export const updateFichesSolutionsProjet = async (
   projetId: number,
   fichesSolutionsId: number[],
+  userId: string,
 ): Promise<ProjetWithRelations | null> => {
+  const projet = await getProjetById(projetId);
+  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
+  let updatedRecommandationsViewed: string[] = [];
+
+  if (recommandationsViewedUserIds) {
+    updatedRecommandationsViewed = recommandationsViewedUserIds.filter((currentUserId) => currentUserId !== userId);
+  }
+
   return prismaClient.projet.update({
     where: {
       id: projetId,
@@ -15,11 +24,55 @@ export const updateFichesSolutionsProjet = (
     data: {
       fiches_solutions_id: fichesSolutionsId,
       fiches_solutions_validated: false,
+      recommandations_viewed_by: updatedRecommandationsViewed,
     },
     include: {
       collectivite: true,
       estimations: true,
       creator: true,
+    },
+  });
+};
+
+export const addRecommandationsViewedBy = async (projetId: number, userId: string) => {
+  const projet = await getProjetById(projetId);
+  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
+  let updatedRecommandationsViewed: string[] = [];
+  if (recommandationsViewedUserIds) {
+    updatedRecommandationsViewed = [...recommandationsViewedUserIds, userId];
+  }
+
+  return prismaClient.projet.update({
+    where: { id: projetId },
+    data: {
+      recommandations_viewed_by: updatedRecommandationsViewed,
+    },
+    include: {
+      collectivite: true,
+      creator: true,
+      estimations: true,
+    },
+  });
+};
+
+export const deleteRecommandationsViewedBy = async (projetId: number, userId: string) => {
+  const projet = await getProjetById(projetId);
+  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
+  let updatedRecommandationsViewed: string[] = [];
+
+  if (recommandationsViewedUserIds) {
+    updatedRecommandationsViewed = recommandationsViewedUserIds.filter((currentUserId) => currentUserId !== userId);
+  }
+
+  return prismaClient.projet.update({
+    where: { id: projetId },
+    data: {
+      recommandations_viewed_by: updatedRecommandationsViewed,
+    },
+    include: {
+      collectivite: true,
+      creator: true,
+      estimations: true,
     },
   });
 };
