@@ -6,6 +6,7 @@ import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { saveBookmarkedFicheSolutionsByUser } from "@/lib/prisma/prismaUserQueries";
 
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
+import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const saveBookmarkedFichesSolutionsUserAction = async (
   userId: string,
@@ -21,10 +22,15 @@ export const saveBookmarkedFichesSolutionsUserAction = async (
     return { type: "error", message: "UNAUTHORIZED", updatedBookmarkedFichesSolutions: null };
   }
 
-  const updatedBookmarkedFichesSolutions = (await saveBookmarkedFicheSolutionsByUser(
-    session.user.id,
-    savedFichesSolutionsIds,
-  )) as ProjectBookmarks[];
+  try {
+    const updatedBookmarkedFichesSolutions = (await saveBookmarkedFicheSolutionsByUser(
+      session.user.id,
+      savedFichesSolutionsIds,
+    )) as ProjectBookmarks[];
 
-  return { type: "success", message: "BOOKMARKED_SAVED_IN_DB", updatedBookmarkedFichesSolutions };
+    return { type: "success", message: "BOOKMARKED_SAVED_IN_DB", updatedBookmarkedFichesSolutions };
+  } catch (e) {
+    customCaptureException("Error in SaveBookmarkedFichesSolutionsUserAction DB call", e);
+    return { type: "error", message: "TECHNICAL_ERROR", updatedBookmarkedFichesSolutions: null };
+  }
 };

@@ -8,7 +8,7 @@ import { ResponseAction } from "../actions-types";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
-import { captureError } from "@/lib/sentry/sentryCustomMessage";
+import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
 
 export const editUserInfoAction = async (
@@ -27,20 +27,29 @@ export const editUserInfoAction = async (
     captureError("EditUserInfoAction format errors", parseParamResult.error.flatten());
     return { type: "error", message: "PARSING_ERROR" };
   } else {
-    const prismaUser = await getUserWithCollectivites(data.userId);
-    if (prismaUser?.collectivites[0] && prismaUser?.collectivites[0].collectivite.ban_id !== data.collectivite.banId) {
-      return { type: "error", message: "CHANGE_COLLECTIVITE_ERROR" };
-    }
-    const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
-    const updatedUser = await updateUser({
-      userId: data.userId,
-      userPrenom: data.prenom,
-      userNom: data.nom,
-      userPoste: data.poste,
-      collectiviteId: collectiviteId,
-    });
+    try {
+      const prismaUser = await getUserWithCollectivites(data.userId);
+      if (
+        prismaUser?.collectivites[0] &&
+        prismaUser?.collectivites[0].collectivite.ban_id !== data.collectivite.banId
+      ) {
+        return { type: "error", message: "CHANGE_COLLECTIVITE_ERROR" };
+      }
+      const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
 
-    revalidatePath(PFMV_ROUTES.MON_PROFIL);
-    return { type: "success", message: "USER_UPDATED", updatedUser };
+      const updatedUser = await updateUser({
+        userId: data.userId,
+        userPrenom: data.prenom,
+        userNom: data.nom,
+        userPoste: data.poste,
+        collectiviteId: collectiviteId,
+      });
+
+      revalidatePath(PFMV_ROUTES.MON_PROFIL);
+      return { type: "success", message: "USER_UPDATED", updatedUser };
+    } catch (e) {
+      customCaptureException("Error in EditUserInfoAction DB call", e);
+      return { type: "error", message: "TECHNICAL_ERROR" };
+    }
   }
 };
