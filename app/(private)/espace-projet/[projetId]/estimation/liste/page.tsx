@@ -20,7 +20,7 @@ export default function CreateEstimationPage() {
       <div className="text-2xl font-bold mb-2">{"Je fais une estimation de budget pour mon projet"}</div>
       <div className="text-lg">{`Mes solutions sélectionnées pour mon projet ${currentProjet?.nom}.`}</div>
       <div className="mb-10  text-lg">
-        {`Vous pouvez estimer une fourchette de prix en fonction des matériaux et système choisis.`}
+        {`Vous pouvez estimer une fourchette de prix en fonction des matériaux et systèmes choisis.`}
       </div>
       <div className="flex flex-col gap-12">
         {currentProjet.estimations.map((estimation) => (
