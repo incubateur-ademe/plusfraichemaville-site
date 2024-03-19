@@ -9,7 +9,7 @@ import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const updateFichesSolutionsProjetAction = async (
   projetId: number,
-  fichesSolutionsId: number[]
+  fichesSolutionsId: number[],
 ): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
@@ -25,6 +25,6 @@ export const updateFichesSolutionsProjetAction = async (
     return { type: "success", message: "FICHES_SOLUTIONS_ADDED_TO_PROJET", projet };
   } catch (e) {
     customCaptureException("Error in UpdateFichesSolutionsProjetAction DB call", e);
-    return { type: "error", message: "TECHNICAL_ERROR", projet: null  };
+    return { type: "error", message: "TECHNICAL_ERROR", projet: null };
   }
 };

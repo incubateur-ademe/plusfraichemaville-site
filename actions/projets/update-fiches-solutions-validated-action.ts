@@ -9,7 +9,7 @@ import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const updateFichesSolutionsValidatedAction = async (
-  projetId: number
+  projetId: number,
 ): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {

@@ -22,7 +22,6 @@ export const updateBookmarkedFichesSolutionsProjetAction = async (
     return { type: "error", message: "UNAUTHORIZED", updatedBookmarkedFichesSolutions: null };
   }
 
-
   try {
     const updatedBookmarkedFichesSolutions = await updateBookmarkedFichesSolutions(
       session.user.id,
@@ -34,5 +33,4 @@ export const updateBookmarkedFichesSolutionsProjetAction = async (
     customCaptureException("Error in UpdateBookmarkedFichesSolutionsProjetAction DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR", updatedBookmarkedFichesSolutions: null };
   }
-
 };

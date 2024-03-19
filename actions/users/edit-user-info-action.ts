@@ -12,7 +12,7 @@ import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomM
 import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
 
 export const editUserInfoAction = async (
-  data: UserInfoFormData & { userId: string }
+  data: UserInfoFormData & { userId: string },
 ): Promise<ResponseAction<{ updatedUser?: UserWithCollectivite | null }>> => {
   const session = await auth();
   if (!session) {
@@ -29,8 +29,10 @@ export const editUserInfoAction = async (
   } else {
     try {
       const prismaUser = await getUserWithCollectivites(data.userId);
-      if (prismaUser?.collectivites[0] &&
-        prismaUser?.collectivites[0].collectivite.ban_id !== data.collectivite.banId) {
+      if (
+        prismaUser?.collectivites[0] &&
+        prismaUser?.collectivites[0].collectivite.ban_id !== data.collectivite.banId
+      ) {
         return { type: "error", message: "CHANGE_COLLECTIVITE_ERROR" };
       }
       const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
@@ -40,7 +42,7 @@ export const editUserInfoAction = async (
         userPrenom: data.prenom,
         userNom: data.nom,
         userPoste: data.poste,
-        collectiviteId: collectiviteId
+        collectiviteId: collectiviteId,
       });
 
       revalidatePath(PFMV_ROUTES.MON_PROFIL);

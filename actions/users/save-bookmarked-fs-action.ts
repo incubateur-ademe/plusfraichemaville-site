@@ -10,7 +10,7 @@ import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const saveBookmarkedFichesSolutionsUserAction = async (
   userId: string,
-  savedFichesSolutionsIds: ProjectBookmarks[]
+  savedFichesSolutionsIds: ProjectBookmarks[],
 ): Promise<ResponseAction<{ updatedBookmarkedFichesSolutions: ProjectBookmarks[] | null }>> => {
   const session = await auth();
 
@@ -25,7 +25,7 @@ export const saveBookmarkedFichesSolutionsUserAction = async (
   try {
     const updatedBookmarkedFichesSolutions = (await saveBookmarkedFicheSolutionsByUser(
       session.user.id,
-      savedFichesSolutionsIds
+      savedFichesSolutionsIds,
     )) as ProjectBookmarks[];
 
     return { type: "success", message: "BOOKMARKED_SAVED_IN_DB", updatedBookmarkedFichesSolutions };
