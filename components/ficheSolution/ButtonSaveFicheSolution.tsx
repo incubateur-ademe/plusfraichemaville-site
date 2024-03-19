@@ -32,8 +32,12 @@ export default function ButtonSaveFicheSolution({
 
   const modal = useMemo(
     () => ({
-      open: () => setIsModalOpen(true),
-      close: () => setIsModalOpen(false),
+      open: () => {
+        setIsModalOpen(true);
+      },
+      close: () => {
+        setIsModalOpen(false);
+      },
       isModalOpen,
     }),
     [isModalOpen],

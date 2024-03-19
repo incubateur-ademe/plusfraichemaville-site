@@ -31,8 +31,12 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
 
   const modal = useMemo(
     () => ({
-      open: () => setIsModalOpen(true),
-      close: () => setIsModalOpen(false),
+      open: () => {
+        setIsModalOpen(true);
+      },
+      close: () => {
+        setIsModalOpen(false);
+      },
     }),
     [],
   );
