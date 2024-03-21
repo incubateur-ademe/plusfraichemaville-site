@@ -44,6 +44,7 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
         ...ImageInfo
       }
       methode
+      echelle
       slug
     }
 }`;

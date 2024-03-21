@@ -13,13 +13,13 @@ export type FichesDiagnosticFilterUpdater = {
 };
 
 export const useFichesDiagnosticFilters = () => {
-  const [filter, setFilter] = useState<FichesDiagnosticFiltersState>({
+  const [filters, setFilters] = useState<FichesDiagnosticFiltersState>({
     echelle: null,
     methode: null,
   });
 
   const methodeUpdater = (updatedFilter: string) => {
-    setFilter((currentFilter) => {
+    setFilters((currentFilter) => {
       const currentMethodes = currentFilter.methode || [];
       const isExisting = currentMethodes.includes(updatedFilter);
       const newMethodes = isExisting
@@ -31,18 +31,18 @@ export const useFichesDiagnosticFilters = () => {
 
   const isActive = (clickedFilter: string | null, key: FichesDiagnosticFiltersKey) => {
     if (key === "methode") {
-      return filter[key]?.includes(clickedFilter as string);
+      return filters[key]?.includes(clickedFilter as string);
     }
-    return clickedFilter === filter[key];
+    return clickedFilter === filters[key];
   };
 
   const updater = (updatedFilter: string | string[] | null, key: FichesDiagnosticFiltersKey) => {
     if (key === "methode" && typeof updatedFilter === "string") {
       methodeUpdater(updatedFilter);
     } else {
-      setFilter({ ...filter, [key]: updatedFilter });
+      setFilters({ ...filters, [key]: updatedFilter });
     }
   };
 
-  return { isActive, updater };
+  return { isActive, updater, filters };
 };
