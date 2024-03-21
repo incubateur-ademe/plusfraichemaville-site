@@ -680,6 +680,111 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
   };
 }
 
+export interface ApiFicheDiagnosticFicheDiagnostic extends Schema.CollectionType {
+  collectionName: "fiche_diagnostics";
+  info: {
+    singularName: "fiche-diagnostic";
+    pluralName: "fiche-diagnostics";
+    displayName: "Fiche Diagnostic";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titre: Attribute.String & Attribute.Required;
+    description_courte: Attribute.String & Attribute.Required;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    etapes_mise_en_oeuvre: Attribute.Component<"fiche-diagnostic.etape-mise-en-oeuvre", true>;
+    materiel_fiche_diagnostics: Attribute.Relation<
+      "api::fiche-diagnostic.fiche-diagnostic",
+      "manyToMany",
+      "api::materiel-fiche-diagnostic.materiel-fiche-diagnostic"
+    >;
+    rank: Attribute.Integer;
+    image_principale: Attribute.Media;
+    echelle: Attribute.Enumeration<["territoire", "espace"]>;
+    methode: Attribute.Enumeration<
+      ["observation", "enquete", "simulation_numerique", "analyse_spatiale", "modelisation_spatiale"]
+    >;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    besoin: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    indicateurs: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    delai_min: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    delai_max: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_min: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_max: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    explication_source: Attribute.String;
+    avantage_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    vigilance_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    en_savoir_plus_description: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::fiche-diagnostic.fiche-diagnostic", "oneToOne", "admin::user"> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<"api::fiche-diagnostic.fiche-diagnostic", "oneToOne", "admin::user"> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
   collectionName: "fiche_solutions";
   info: {
@@ -1013,6 +1118,51 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
   };
 }
 
+export interface ApiMaterielFicheDiagnosticMaterielFicheDiagnostic extends Schema.CollectionType {
+  collectionName: "materiel_fiche_diagnostics";
+  info: {
+    singularName: "materiel-fiche-diagnostic";
+    pluralName: "materiel-fiche-diagnostics";
+    displayName: "Materiel Fiche Diagnostic";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titre: Attribute.String;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    fiche_diagnostics: Attribute.Relation<
+      "api::materiel-fiche-diagnostic.materiel-fiche-diagnostic",
+      "manyToMany",
+      "api::fiche-diagnostic.fiche-diagnostic"
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      "api::materiel-fiche-diagnostic.materiel-fiche-diagnostic",
+      "oneToOne",
+      "admin::user"
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      "api::materiel-fiche-diagnostic.materiel-fiche-diagnostic",
+      "oneToOne",
+      "admin::user"
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiObjectifDeveloppementDurableObjectifDeveloppementDurable extends Schema.CollectionType {
   collectionName: "objectif_developpement_durables";
   info: {
@@ -1340,8 +1490,10 @@ declare module "@strapi/types" {
       "plugin::users-permissions.user": PluginUsersPermissionsUser;
       "api::aide-decision-etape.aide-decision-etape": ApiAideDecisionEtapeAideDecisionEtape;
       "api::cobenefice.cobenefice": ApiCobeneficeCobenefice;
+      "api::fiche-diagnostic.fiche-diagnostic": ApiFicheDiagnosticFicheDiagnostic;
       "api::fiche-solution.fiche-solution": ApiFicheSolutionFicheSolution;
       "api::materiau.materiau": ApiMateriauMateriau;
+      "api::materiel-fiche-diagnostic.materiel-fiche-diagnostic": ApiMaterielFicheDiagnosticMaterielFicheDiagnostic;
       // eslint-disable-next-line max-len
       "api::objectif-developpement-durable.objectif-developpement-durable": ApiObjectifDeveloppementDurableObjectifDeveloppementDurable;
       "api::region.region": ApiRegionRegion;
