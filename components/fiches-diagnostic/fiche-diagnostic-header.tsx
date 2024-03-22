@@ -1,9 +1,9 @@
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
-import { FicheDiagnosticResponse } from "./types";
+import { FicheDiagnosticResponseAttributes } from "./types";
 import Image from "next/image";
 
-export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnosticResponse["attributes"] }) => {
+export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
   return (
     <div className="bg-dsfr-background-alt-red-marianne" id="fiche-diag-header">
       <div className="fr-container">
@@ -20,7 +20,7 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
             <small className="block text-base text-dsfr-text-mention-grey mb-6">
               <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
               Méthode de diagnostic{" "}
-              <span className="font-bold text-dsfr-background-flat-warning">{attributes.methode}</span>
+              <span className="font-bold capitalize text-dsfr-background-flat-warning">{attributes.methode}</span>
             </small>
             <h1 className="text-4xl leading-[50px] mb-2">{attributes.titre}</h1>
             <h2 className="text-xl leading-8">{attributes.description_courte}</h2>
