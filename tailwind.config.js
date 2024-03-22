@@ -17,12 +17,14 @@ module.exports = {
     },
     colors: {
       white: "#fff",
+      black: "#000",
       "pfmv-light-blue": "#0080C2",
       "pfmv-dark-blue": "#292A82",
       "pfmv-light-grey": "#CECECE",
       "pfmv-grey-dashed": "#A6A6A6",
       "pfmv-navy": "var(--background-active-blue-france)",
       "pfmv-orange": "#ffe8e5",
+      "pfmv-low-pink": "#fbb8ab",
       "dsfr-background-flat-warning": "#fc5d00",
       "dsfr-background-alt-red-marianne": "var(--background-alt-red-marianne)",
       "dsfr-background-default-grey-hover": "var(--background-default-grey-hover)",
@@ -44,7 +46,6 @@ module.exports = {
       "dsfr-text-default-grey": "var(--text-default-grey)",
       "dsfr-text-error": "var(--text-default-error)",
       "dsfr-contrast-grey": "var(--background-contrast-grey)",
-
       "tab-hover": "rgba(66, 17, 170, 0.10)!important",
     },
   },

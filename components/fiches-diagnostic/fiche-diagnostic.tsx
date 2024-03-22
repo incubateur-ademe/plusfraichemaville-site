@@ -1,4 +1,5 @@
 import { FicheDiagnosticHeader } from "./fiche-diagnostic-header";
+import { FicheDiagnosticTabs } from "./fiche-diagnostic-tabs";
 import { FicheDiagnosticResponse } from "./types";
 
 type FicheDiagnosticProps = {
@@ -11,6 +12,7 @@ export const FicheDiagnostic = ({ ficheDiagnostic }: FicheDiagnosticProps) => {
   return (
     <div>
       <FicheDiagnosticHeader attributes={attributes} />
+      <FicheDiagnosticTabs />
     </div>
   );
 };
