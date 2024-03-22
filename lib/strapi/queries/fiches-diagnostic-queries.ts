@@ -19,17 +19,13 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = (
           titre
           description
         }
-        materiel_fiche_diagnostics {
+        etapes_mise_en_oeuvre {
+          titre
+          description
+        }
+        fiches_diagnostics_associees  ${strapiFilter.publicationStateString()} {
           data {
-            attributes {
-              titre
-              description
-              fiche_diagnostics {
-                data {
-                  ...FicheDiagnosticCardInfo
-                }
-              }
-            }
+            ...FicheDiagnosticCardInfo
           }
         }
         rank

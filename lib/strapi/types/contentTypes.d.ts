@@ -775,6 +775,11 @@ export interface ApiFicheDiagnosticFicheDiagnostic extends Schema.CollectionType
           preset: "light";
         }
       >;
+    fiches_diagnostics_associees: Attribute.Relation<
+      "api::fiche-diagnostic.fiche-diagnostic",
+      "oneToMany",
+      "api::fiche-diagnostic.fiche-diagnostic"
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

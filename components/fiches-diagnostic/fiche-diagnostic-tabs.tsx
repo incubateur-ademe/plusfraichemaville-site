@@ -1,25 +1,36 @@
 import clsx from "clsx";
 import CustomTabButton from "../common/CustomTabButton";
 import { PropsWithChildren } from "react";
-const tabs = [
-  {
-    label: "Méthode",
-    contentId: "methode-panel",
-    isSelected: true,
-  },
-  {
-    label: "Avantages et points de vigilance",
-    contentId: "avantages-et-points-de-vigilance-panel",
-    isSelected: false,
-  },
-  {
-    label: "Mise en œuvre",
-    contentId: "mise-en-oeuvre-panel",
-    isSelected: false,
-  },
-];
+import { FicheDiagnosticResponseAttributes } from "./types";
+import { FicheDiagnosticMethodeTab } from "./fiche-diagnostic-tab-methode";
+import { FicheDiagnosticAvantageTab } from "./fiche-diagnostic-tab-avantages";
+import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-moe";
 
-export const FicheDiagnosticTabs = ({ children }: PropsWithChildren) => {
+type FicheDiagnosticTabsProps = {
+  attributes: FicheDiagnosticResponseAttributes;
+} & PropsWithChildren;
+
+export const FicheDiagnosticTabs = ({ attributes }: FicheDiagnosticTabsProps) => {
+  const tabs = [
+    {
+      label: "Méthode",
+      contentId: "methode-panel",
+      isSelected: true,
+      component: <FicheDiagnosticMethodeTab attributes={attributes} />,
+    },
+    {
+      label: "Avantages et points de vigilance",
+      contentId: "avantages-et-points-de-vigilance-panel",
+      isSelected: false,
+      component: <FicheDiagnosticAvantageTab attributes={attributes} />,
+    },
+    {
+      label: "Mise en œuvre",
+      contentId: "mise-en-oeuvre-panel",
+      isSelected: false,
+      component: <FicheDiagnosticMiseEnOeuvreTab attributes={attributes} />,
+    },
+  ];
   return (
     <div className="relative">
       <div className="bg-pfmv-orange h-14 w-full absolute left-0 top-0"></div>
@@ -35,10 +46,10 @@ export const FicheDiagnosticTabs = ({ children }: PropsWithChildren) => {
           {tabs.map((tab, index) => (
             <div
               id={tab.contentId}
-              className={clsx("customPanel fr-tabs__panel", !index && "fr-tabs__panel--selected")}
+              className={clsx("customPanel customPanelDiag fr-tabs__panel", !index && "fr-tabs__panel--selected")}
               role="tabpanel"
             >
-              {children}
+              {tab.component}
             </div>
           ))}
         </div>
