@@ -11,6 +11,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_LISTE: "/espace-projet",
   MON_PROFIL: "/info-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
+  FICHE_DIAGNOSTIC: (url: string) => `/fiches-diagnostic/${url}`,
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
   TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: string) =>
     `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
