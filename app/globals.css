@@ -154,6 +154,15 @@
   color: var(--text-label-blue-france);
 }
 
+.customTab.custom-tab-diag {
+  @apply text-black;
+}
+
+.customTab[aria-selected="true"].custom-tab-diag,
+.customTab:hover.custom-tab-diag {
+  @apply !bg-pfmv-low-pink;
+}
+
 .customTab {
   margin: 0;
   height: 100%;

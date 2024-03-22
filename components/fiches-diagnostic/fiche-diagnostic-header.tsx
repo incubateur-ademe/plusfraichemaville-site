@@ -7,8 +7,8 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
   return (
     <div className="bg-dsfr-background-alt-red-marianne" id="fiche-diag-header">
       <div className="fr-container">
-        <div className="flex gap-9 pt-8 pb-11 relative bg-dsfr-background-alt-red-marianne">
-          <div className="w-72 h-72 relative">
+        <div className="grid grid-cols-12 gap-10 pt-8 pb-11 relative bg-dsfr-background-alt-red-marianne">
+          <div className="col-span-3 w-full h-full relative">
             <Image
               src={getStrapiImageUrl(attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.image_principale?.data.attributes.alternativeText ?? "Header image"}
@@ -16,7 +16,7 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
               fill
             />
           </div>
-          <div className="max-w-xl">
+          <div className=" col-span-6 max-w-xl">
             <small className="block text-base text-dsfr-text-mention-grey mb-6">
               <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
               Méthode de diagnostic{" "}
