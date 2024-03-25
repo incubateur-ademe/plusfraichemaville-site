@@ -8,7 +8,7 @@ import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
 type FicheDiagnosticCardProps = {
-  vertical?: boolean;
+  horizontal?: boolean;
   ficheDiagnostic: FicheDiagnosticResponse;
 };
 
@@ -60,9 +60,6 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
               </div>
             </div>
           </div>
-          {/* <div className="absolute right-2 top-2">
-          <ButtonSaveFicheSolution />
-        </div> */}
           <div className="absolute right-6 bottom-6">
             <PictoEchelleSelector pictoId={ficheDiagnostic.attributes.echelle!} className="w-12" />
           </div>
