@@ -4,8 +4,9 @@ import { STRAPI_IMAGE_KEY_SIZE, getStrapiImageUrl } from "@/lib/strapi/strapiCli
 import { getDelaiTravauxFicheSolution } from "@/helpers/delaiTravauxFicheSolution";
 import { getCoutFicheSolution } from "@/helpers/coutFicheSolution";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
-import Link from "next/link";
+
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
 
 type FicheDiagnosticCardProps = {
   horizontal?: boolean;
@@ -25,7 +26,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
 
   return (
     <div className="pfmv-card min-w-[900px] h-fit relative">
-      <Link href={ficheUrl}>
+      <FicheDiagnosticLink href={ficheUrl}>
         <div className="bg-dsfr-background-alt-red-marianne rounded-[0.9375rem] flex">
           <div className="flex w-72 relative overflow-hidden">
             <Image
@@ -64,7 +65,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
             <PictoEchelleSelector pictoId={ficheDiagnostic.attributes.echelle!} className="w-12" />
           </div>
         </div>
-      </Link>
+      </FicheDiagnosticLink>
     </div>
   );
 };

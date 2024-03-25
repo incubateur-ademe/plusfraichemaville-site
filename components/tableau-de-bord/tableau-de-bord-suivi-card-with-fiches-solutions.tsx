@@ -9,7 +9,7 @@ import useSWRImmutable from "swr/immutable";
 
 const IMAGE_SLICE_INDEX = 5;
 
-export const TableauDeBordSuiviWithFichesSolutions = () => {
+export const TableauDeBordSuiviWithImages = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const selectedFichesSolutions = projet?.fiches_solutions_id;
 
