@@ -28,6 +28,14 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = (
             ...FicheDiagnosticCardInfo
           }
         }
+        materiel_fiche_diagnostics {
+          data {
+            attributes {
+              titre
+              description
+            }
+          }
+        }
         rank
         image_principale {
           ...ImageInfo

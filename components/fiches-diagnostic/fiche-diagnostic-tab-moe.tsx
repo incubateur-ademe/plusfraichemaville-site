@@ -1,3 +1,4 @@
+import CmsRichText from "../common/CmsRichText";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
 import { FicheDiagnosticResponseAttributes } from "./types";
 
@@ -7,8 +8,9 @@ type MOE = {
 };
 
 export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
-  console.log(attributes.materiel_fiche_diagnostics);
   const moe = attributes.etapes_mise_en_oeuvre as unknown as MOE[];
+  const materiels = attributes.materiel_fiche_diagnostics;
+
   return (
     <div>
       <h3 className="text-3xl mb-9">Mise en œuvre</h3>
@@ -20,10 +22,14 @@ export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: Fic
         ))}
       </div>
       <div className="h-fit pl-6 pt-8 pr-4 pb-14 rounded-2xl bg-dsfr-background-alt-red-marianne">
-        {/* <h4 className="text-lg font-bold">Matériel et données nécessaires</h4>
-        {attributes.materiel_fiche_diagnostics?.data.map((mat, index) => (
-          <CmsRichText label={mat.attributes.description} />
-        ))} */}
+        <h4 className="text-lg font-bold">Matériel et données nécessaires</h4>
+        <ul>
+          {materiels?.data.map((mat, index) => (
+            <li key={index}>
+              <CmsRichText label={mat.attributes.description} className="[&>*]:mb-0" />
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );
