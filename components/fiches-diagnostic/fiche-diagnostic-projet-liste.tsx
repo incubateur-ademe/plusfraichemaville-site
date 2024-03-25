@@ -6,7 +6,7 @@ import { FichesDiagnosticProjetEmpty } from "./fiche-diagnostic-projet-empty";
 import { FicheDiagnosticCardWithFetcher } from "./fiche-diagnostic-card-with-fetcher";
 
 import { FicheDiagnosticProjetListeAddButton } from "./fiche-diagnostic-projet-liste-add-button";
-import Button from "@codegouvfr/react-dsfr/Button";
+
 import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
