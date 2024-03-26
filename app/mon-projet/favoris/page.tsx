@@ -8,6 +8,8 @@ import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
+import { FicheDiagnosticCardWithFetcher } from "@/components/fiches-diagnostic/fiche-diagnostic-card-with-fetcher";
+import { getFichesDiagnosticFromLocalStorage } from "@/components/fiches-diagnostic/helpers";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -16,10 +18,14 @@ export default function Page() {
   }, []);
   const session = useSession();
   const userBookmarkedFichesSolutions = useUserStore((state) => state.bookmarkedFichesSolutions);
+  const userBookmarkedFichesDiagnostic = useUserStore((state) => state.bookmarkedFichesDiagnostic);
   const [bookmarkedFichesSolutionsInLocalStorage] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
 
   const bookmarkedFichesSolutions =
     session.status === "authenticated" ? userBookmarkedFichesSolutions : bookmarkedFichesSolutionsInLocalStorage;
+
+  const bookmarkedFichesDiagnostic =
+    session.status === "authenticated" ? userBookmarkedFichesDiagnostic : getFichesDiagnosticFromLocalStorage();
 
   return (
     isClient && (
@@ -36,6 +42,10 @@ export default function Page() {
             />
           )}
         </div>
+        {bookmarkedFichesDiagnostic &&
+          bookmarkedFichesDiagnostic.map((ficheDiagnosticId, index) => (
+            <FicheDiagnosticCardWithFetcher ficheDiagnosticId={+ficheDiagnosticId} key={index} />
+          ))}
         {bookmarkedFichesSolutions && bookmarkedFichesSolutions.length === 0 ? (
           <div>
             <div className="fr-h3">Mes solutions sauvegardées</div>

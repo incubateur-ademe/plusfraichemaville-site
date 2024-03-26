@@ -2,6 +2,52 @@ import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper"
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { User } from "@prisma/client";
+
+export const updateFichesDiagnosticByUser = async (userId: string, ficheDiagnosticIds: number[]) => {
+  const user = await getUser(userId);
+  const userFichesDiagnostic = user?.selection_fiches_diagnostic;
+
+  let mergedFichesDiagnostic: number[] = [];
+
+  if (userFichesDiagnostic) {
+    mergedFichesDiagnostic = Array.from(new Set([...userFichesDiagnostic, ...ficheDiagnosticIds]));
+  }
+
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      selection_fiches_diagnostic: mergedFichesDiagnostic,
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};
+
+export const updateFicheDiagnosticByUser = async (userId: string, ficheDiagnosticId: number) => {
+  const user = await getUser(userId);
+  const userFichesDiagnostic = user?.selection_fiches_diagnostic;
+  let updatedFichesDiagnostic: number[] = [];
+
+  if (userFichesDiagnostic?.includes(+ficheDiagnosticId)) {
+    updatedFichesDiagnostic = userFichesDiagnostic.filter((currentFicheId) => currentFicheId !== +ficheDiagnosticId);
+  } else if (userFichesDiagnostic) {
+    updatedFichesDiagnostic = [...userFichesDiagnostic, +ficheDiagnosticId];
+  } else {
+    updatedFichesDiagnostic = [+ficheDiagnosticId];
+  }
+
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      selection_fiches_diagnostic: updatedFichesDiagnostic,
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};
 
 export const deleteUserProjet = (projetId: number) => {
   return prismaClient.projet.delete({
@@ -77,6 +123,14 @@ export const getUserWithCollectivites = async (userId: string): Promise<UserWith
       id: userId,
     },
     include: { collectivites: { include: { collectivite: true } } },
+  });
+};
+
+export const getUser = async (userId: string): Promise<User | null> => {
+  return prismaClient.user.findUnique({
+    where: {
+      id: userId,
+    },
   });
 };
 
