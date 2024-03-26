@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { homepageData } from "./homepage-data";
+import { HomepageHeroPictos } from "./homepage-hero-pictos";
 
 export const HomepageHero = () => {
   const { hero } = homepageData;
   return (
-    <div className="pt-10 pb-16">
+    <div className="pt-10 pb-16 relative">
       <div className="w-fit mx-auto">
         <h1 className="text-4xl text-center mb-12 text-pfmv-navy font-normal">{hero.title()}</h1>
         <h2 className="mb-10 text-[26px] font-bold text-pfmv-navy text-center max-w-2xl">{hero.baseline}</h2>
@@ -17,6 +18,7 @@ export const HomepageHero = () => {
           </Link>
         </div>
       </div>
+      <HomepageHeroPictos />
     </div>
   );
 };
