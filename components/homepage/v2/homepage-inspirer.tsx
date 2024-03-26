@@ -6,19 +6,22 @@ import { STRAPI_IMAGE_KEY_SIZE, getStrapiImageUrl } from "@/lib/strapi/strapiCli
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import clsx from "clsx";
+import CmsRichText from "@/components/common/CmsRichText";
 
 export const HomepageInspirer = () => {
   const { inspirer } = homepageData;
   return (
-    <div>
+    <div className="w-fit mx-auto pb-20">
       <h3 className="text-pfmv-navy text-[26px] font-bold my-14 text-center">{inspirer.title}</h3>
       <HomepageInspirerCard slug={inspirer.featuredRex} featured />
-      {inspirer.otherRex.map((rex, index) => (
-        <HomepageInspirerCard slug={rex} key={index} />
-      ))}
+      <div className="flex gap-8">
+        {inspirer.otherRex.map((rex, index) => (
+          <HomepageInspirerCard slug={rex} key={index} />
+        ))}
+      </div>
       <Link
         className={clsx(
-          "fr-btn fr-btn--secondary mx-auto rounded-3xl !block",
+          "fr-btn fr-btn--secondary mt-10 mx-auto rounded-3xl !block",
           "!shadow-none text-pfmv-navy border-[1px] border-pfmv-navy",
         )}
         href={inspirer.cta.url}
@@ -37,22 +40,29 @@ export const HomepageInspirerCard = async ({ slug, featured = false }: { slug: s
   }
 
   return featured ? (
-    <div className="flex pfmv-card">
-      <div className="w-[427px] h-[277px]">
-        <Image
-          src={getStrapiImageUrl(rex?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
-          alt={rex.attributes.image_principale?.data.attributes.alternativeText ?? "image collectivité"}
-          fill
-        />
+    <Link href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.attributes.slug}`}>
+      <div className="flex gap-8 pfmv-card px-8 max-w-[78rem] mb-10">
+        <div className="w-[427px] py-10 shrink-0 relative flex justify-center items-center">
+          <Image
+            src={getStrapiImageUrl(rex?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
+            alt={rex.attributes.image_principale?.data.attributes.alternativeText ?? "image collectivité"}
+            className="object-cover w-full h-full"
+            width={427}
+            height={277}
+          />
+        </div>
+        <div className="py-12">
+          <h4 className="font-bold text-2xl mb-4">{rex.attributes.titre}</h4>
+          <CmsRichText label={rex.attributes.description} />
+          <Link
+            href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.attributes.slug}`}
+            className="text-pfmv-navy font-bold !bg-none"
+          >
+            Lire la suite
+          </Link>
+        </div>
       </div>
-      <div>
-        <h4 className="font-bold text-2xl mb-4">{rex.attributes.titre}</h4>
-        <p className="mb-10">{rex.attributes.description}</p>
-        <Link href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.attributes.slug}`} className="text-pfmv-navy font-bold">
-          Lire la suite
-        </Link>
-      </div>
-    </div>
+    </Link>
   ) : (
     <RetourExperienceCard retourExperience={rex} />
   );

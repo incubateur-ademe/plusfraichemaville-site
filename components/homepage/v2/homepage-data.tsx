@@ -65,16 +65,28 @@ export const homepageData = {
   },
   inspirer: {
     title: "S'inspirer des collectivités qui sont passées à l'action",
-    featuredRex: "/autoroute-urbaine-transformee-en-couloir-vert",
+    featuredRex: "autoroute-urbaine-transformee-en-couloir-vert",
     otherRex: [
-      "/transformation-parking-ilot-de-fraicheur",
-      "/ecoquartier-clichy-batignolles",
-      "/transformation-parking-ilot-de-fraicheur",
-      "/ecoquartier-clichy-batignolles",
+      "transformation-parking-ilot-de-fraicheur",
+      "ecoquartier-clichy-batignolles",
+      "transformation-parking-ilot-de-fraicheur",
+      "ecoquartier-clichy-batignolles",
     ],
     cta: {
       label: "Voir tous les projets réalisés",
       url: PFMV_ROUTES.RETOURS_EXPERIENCE,
+    },
+  },
+  newsletter: {
+    title: "Abonnez-vous à notre lettre d’information",
+    subtitle:
+      // eslint-disable-next-line max-len
+      "Rejoignez la communauté Plus Fraîche ma ville, recevez des conseils d'experts lors de nos webinaires et parlez-nous de vos projets.",
+    input: {
+      label: "Votre adresse électronique (ex. : nom@domaine.fr)",
+      button: "S'abonner",
+      // eslint-disable-next-line max-len
+      info: "En renseignant votre adresse électronique, vous acceptez de recevoir nos actualités par courriel. Vous pouvez vous désinscrire à tout moment à l’aide des liens de désinscription ou en nous contactant.",
     },
   },
 };
