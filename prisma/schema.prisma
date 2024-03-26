@@ -43,7 +43,7 @@ model User {
   estimations_created         estimation[]
   collectivites               user_collectivite[] @relation(name: "collectivite_belonging")
   selection_fiches_solutions  Json?
-  selection_fiches_diagnostic Json?
+  selection_fiches_diagnostic Int[]
 }
 
 model VerificationToken {
