@@ -46,20 +46,18 @@ export const HomepageInspirerCard = async ({ slug, featured = false }: { slug: s
           <Image
             src={getStrapiImageUrl(rex?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
             alt={rex.attributes.image_principale?.data.attributes.alternativeText ?? "image collectivité"}
-            className="object-cover w-full h-full"
-            width={427}
-            height={277}
+            className="object-cover w-full h-auto"
+            sizes="50vw"
+            width={0}
+            height={0}
           />
         </div>
         <div className="py-12">
           <h4 className="font-bold text-2xl mb-4">{rex.attributes.titre}</h4>
           <CmsRichText label={rex.attributes.description} />
-          <Link
-            href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.attributes.slug}`}
-            className="text-pfmv-navy font-bold !bg-none"
-          >
+          <div className="text-pfmv-navy font-bold !bg-none hover:text-dsfr-background-action-high-blue-france-active">
             Lire la suite
-          </Link>
+          </div>
         </div>
       </div>
     </Link>

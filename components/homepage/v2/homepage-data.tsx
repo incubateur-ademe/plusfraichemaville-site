@@ -1,4 +1,5 @@
 import { PFMV_ROUTES } from "@/helpers/routes";
+import clsx from "clsx";
 
 export const homepageData = {
   hero: {
@@ -92,11 +93,11 @@ export const homepageData = {
 };
 
 export const multilines = (lines: string[], className?: string) => (
-  <div className={className}>
+  <span className={clsx(className, "block")}>
     {lines.map((line, i) => (
       <span className="block" key={i}>
         {line}
       </span>
     ))}
-  </div>
+  </span>
 );

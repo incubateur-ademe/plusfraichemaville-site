@@ -26,13 +26,14 @@ export const HomepageStart = () => {
                   {line.cta.label}
                 </Link>
               </div>
-              <div className="relative shrink-0">
+              <div className="shrink-0 h-auto" style={{ width: line.image.width, height: line.image.height }}>
                 <Image
                   src={line.image.url}
-                  width={line.image.width}
-                  height={line.image.height}
+                  width={0}
+                  height={0}
                   alt="picto par où commencer"
-                  objectFit="cover"
+                  className="object-cover w-full h-auto"
+                  sizes="50vw"
                 />
               </div>
             </div>

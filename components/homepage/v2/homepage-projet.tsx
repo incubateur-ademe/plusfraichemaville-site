@@ -16,7 +16,7 @@ export const HomepageProjet = () => {
           {projet.cta.label}
         </Link>
       </div>
-      <Image src={projet.image} alt="balade dans un jardin urbain" fill objectFit="cover" className="-z-10" />
+      <Image src={projet.image} alt="balade dans un jardin urbain" fill className="-z-10 object-cover" />
     </div>
   );
 };

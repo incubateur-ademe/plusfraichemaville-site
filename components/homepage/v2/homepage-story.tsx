@@ -33,8 +33,8 @@ export const HomepageStory = async ({ slug }: { slug: string }) => {
             src={getStrapiImageUrl(ficheSolution?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
             alt={ficheSolution?.attributes.image_principale?.data.attributes.alternativeText ?? ""}
             fill
-            objectFit="cover"
-            className="-z-10"
+            sizes="60vw"
+            className="-z-10 object-cover"
           />
         </div>
       </Link>
