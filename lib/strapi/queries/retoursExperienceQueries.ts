@@ -20,6 +20,14 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
       attributes {
         titre
         description
+        slug
+        region {
+          data {
+            attributes {
+              code
+            }
+          }
+        }
         image_principale {
           ...ImageInfo
         }
