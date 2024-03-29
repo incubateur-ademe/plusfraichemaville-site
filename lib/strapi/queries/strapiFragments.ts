@@ -31,6 +31,24 @@ export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSm
     }
 }`;
 
+export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCardInfo on FicheDiagnosticEntity {
+  id
+    attributes {
+      titre
+      description_courte
+      delai_min
+      delai_max
+      cout_min
+      cout_max
+      image_principale {
+        ...ImageInfo
+      }
+      methode
+      echelle
+      slug
+    }
+}`;
+
 export const STRAPI_IMAGE_FRAGMENT = `fragment ImageInfo on UploadFileEntityResponse {
   data {
     attributes {

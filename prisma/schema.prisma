@@ -34,15 +34,16 @@ model User {
   accounts          Account[]
   agentconnect_info Json?
 
-  nom                        String?
-  prenom                     String?
-  poste                      String?
-  created_at                 DateTime            @default(now())
-  collectivites_created      collectivite[]      @relation(name: "collectivite_creator")
-  projets_created            projet[]
-  estimations_created        estimation[]
-  collectivites              user_collectivite[] @relation(name: "collectivite_belonging")
-  selection_fiches_solutions Json?
+  nom                         String?
+  prenom                      String?
+  poste                       String?
+  created_at                  DateTime            @default(now())
+  collectivites_created       collectivite[]      @relation(name: "collectivite_creator")
+  projets_created             projet[]
+  estimations_created         estimation[]
+  collectivites               user_collectivite[] @relation(name: "collectivite_belonging")
+  selection_fiches_solutions  Json?
+  selection_fiches_diagnostic Int[]
 }
 
 model VerificationToken {
@@ -96,6 +97,7 @@ model projet {
   adresse_info               Json?
   date_echeance              DateTime?
   fiches_solutions_id        Int[]
+  fiches_diagnostic_id       Int[]
   fiches_solutions_validated Boolean      @default(false)
   estimations                estimation[]
   collectiviteId             Int
