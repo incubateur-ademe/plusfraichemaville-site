@@ -17,9 +17,9 @@ export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: Fic
         ))}
       </div>
       {attributes.materiel && (
-        <div className="h-fit pl-6 pt-8 pr-4 pb-14 rounded-2xl bg-dsfr-background-alt-red-marianne">
+        <div className="h-fit pl-6 pt-8 pr-4 pb-8 rounded-2xl bg-dsfr-background-alt-red-marianne">
           <h4 className="text-lg font-bold">Matériel et données nécessaires</h4>
-          <CmsRichText label={attributes.materiel} className="[&>*]:mb-0" />
+          <CmsRichText label={attributes.materiel}/>
         </div>
       )}
     </div>
