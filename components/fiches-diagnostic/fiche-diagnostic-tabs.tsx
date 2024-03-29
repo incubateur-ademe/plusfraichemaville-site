@@ -53,6 +53,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
           {tabs.map((tab, index) => (
             <div
               id={tab.contentId}
+              key={tab.contentId}
               className={clsx("customPanel customPanelDiag fr-tabs__panel", !index && "fr-tabs__panel--selected")}
               role="tabpanel"
             >
