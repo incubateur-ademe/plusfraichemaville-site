@@ -856,7 +856,7 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
         "rendre_espaces_publics_plus_accueillants",
         "rendre_ville_plus_ludique",
         "sensibiliser_vivant_nature",
-        "sequestrer_du_carbone",
+        "sequestrer_du_carbone"
       ]
     > &
       Attribute.SetPluginOptions<{
@@ -992,6 +992,14 @@ export interface ApiFicheDiagnosticFicheDiagnostic
       "api::fiche-diagnostic.fiche-diagnostic"
     >;
     materiel: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    partenaire: Attribute.RichText &
       Attribute.CustomField<
         "plugin::ckeditor.CKEditor",
         {
