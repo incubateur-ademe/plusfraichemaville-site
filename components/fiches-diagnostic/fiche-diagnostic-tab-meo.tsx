@@ -2,7 +2,6 @@ import CmsRichText from "../common/CmsRichText";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
 import { FicheDiagnosticResponseAttributes } from "./types";
 
-
 export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
   const meo = attributes.etapes_mise_en_oeuvre;
 
@@ -19,7 +18,7 @@ export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: Fic
       {attributes.materiel && (
         <div className="h-fit pl-6 pt-8 pr-4 pb-8 rounded-2xl bg-dsfr-background-alt-red-marianne">
           <h4 className="text-lg font-bold">Matériel et données nécessaires</h4>
-          <CmsRichText label={attributes.materiel}/>
+          <CmsRichText label={attributes.materiel} />
         </div>
       )}
     </div>

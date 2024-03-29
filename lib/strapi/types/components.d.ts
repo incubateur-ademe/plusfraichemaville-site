@@ -46,11 +46,7 @@ export interface FicheSolutionAideRegionale extends Schema.Component {
     description: "";
   };
   attributes: {
-    region: Attribute.Relation<
-      "fiche-solution.aide-regionale",
-      "oneToOne",
-      "api::region.region"
-    >;
+    region: Attribute.Relation<"fiche-solution.aide-regionale", "oneToOne", "api::region.region">;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
