@@ -19,20 +19,20 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
       label: "Méthode",
       contentId: "methode-panel",
       isSelected: true,
-      component: <FicheDiagnosticMethodeTab attributes={attributes} />
+      component: <FicheDiagnosticMethodeTab attributes={attributes} />,
     },
     {
       label: "Avantages et points de vigilance",
       contentId: "avantages-et-points-de-vigilance-panel",
       isSelected: false,
-      component: <FicheDiagnosticAvantageTab attributes={attributes} />
+      component: <FicheDiagnosticAvantageTab attributes={attributes} />,
     },
     {
       label: "Mise en œuvre",
       contentId: "mise-en-oeuvre-panel",
       isSelected: false,
-      component: <FicheDiagnosticMiseEnOeuvreTab attributes={attributes} />
-    }
+      component: <FicheDiagnosticMiseEnOeuvreTab attributes={attributes} />,
+    },
   ];
   return (
     <div className="relative">

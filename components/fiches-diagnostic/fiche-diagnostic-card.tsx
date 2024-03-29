@@ -94,7 +94,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, horizontal }: FicheDiagno
         </div>
       </FicheDiagnosticLink>
 
-      <FicheDiagnosticSaveButton ficheDiagnosticId={ficheDiagnostic.id} className="absolute top-3 right-4"/>
+      <FicheDiagnosticSaveButton ficheDiagnosticId={ficheDiagnostic.id} className="absolute top-3 right-4" />
     </div>
   );
 };

@@ -12,11 +12,11 @@ type FicheDiagnosticSaveButtonProps = {
 };
 
 export const FicheDiagnosticSaveButton = ({
-                                            ficheDiagnosticId,
-                                            projetId,
-                                            showLabel = false,
-                                            className
-                                          }: FicheDiagnosticSaveButtonProps) => {
+  ficheDiagnosticId,
+  projetId,
+  showLabel = false,
+  className,
+}: FicheDiagnosticSaveButtonProps) => {
   const updateBookmarkedFichesDiagnostic = useUserStore((state) => state.updateBookmarkedFichesDiagnostic);
 
   const ficheDiagnosticIds = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic);
@@ -36,27 +36,26 @@ export const FicheDiagnosticSaveButton = ({
   return (
     <>
       {label ? (
-          <Button
-            onClick={updateFicheDiagnostic}
-            className={clsx("rounded-3xl text-sm", className)}
-            iconId={picto}
-            size="small"
-          >
-            {label}
-          </Button>
-        ) :
-        (
-          <button
-            onClick={updateFicheDiagnostic}
-            className={clsx(
-              "rounded-full bg-pfmv-dark-blue w-8 h-8 flex justify-center items-center",
-              "hover:!bg-dsfr-hover-blue-sun", className
-            )}
-          >
-            <span className={clsx(picto, "text-white before:!w-4 before:!h-4 h-4 before:!align-[super]")} />
-          </button>
-        )
-      }
+        <Button
+          onClick={updateFicheDiagnostic}
+          className={clsx("rounded-3xl text-sm", className)}
+          iconId={picto}
+          size="small"
+        >
+          {label}
+        </Button>
+      ) : (
+        <button
+          onClick={updateFicheDiagnostic}
+          className={clsx(
+            "rounded-full bg-pfmv-dark-blue w-8 h-8 flex justify-center items-center",
+            "hover:!bg-dsfr-hover-blue-sun",
+            className,
+          )}
+        >
+          <span className={clsx(picto, "text-white before:!w-4 before:!h-4 h-4 before:!align-[super]")} />
+        </button>
+      )}
     </>
   );
 };
