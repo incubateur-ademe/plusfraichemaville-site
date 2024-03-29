@@ -6,7 +6,6 @@ import FicheSolutionTabSynthese from "@/components/ficheSolution/FicheSolutionTa
 import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionTabMateriaux";
 import FicheSolutionTabMiseEnOeuvre from "@/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
 import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
-import ButtonShareFicheSolution from "@/components/ficheSolution/ButtonShareFicheSolution";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import FicheSolutionTabFinancements from "@/components/ficheSolution/FicheSolutionTabFinancements";
 import FicheSolutionTabOups from "@/components/ficheSolution/FicheSolutionTabOups";
@@ -15,6 +14,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiCli
 import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
 import { ButtonSaveFicheSolutionInProjet } from "./button-save-fiche-solution-in-projet";
 import clsx from "clsx";
+import ButtonShareCurrentUrl from "@/components/common/button-share-current-url";
 
 export async function FicheSolution({
   params,
@@ -58,7 +58,7 @@ export async function FicheSolution({
                 currentPageLabel={ficheSolution.attributes.titre}
               />
             )}
-            <ButtonShareFicheSolution className={"hidden md:block mb-4"} />
+            <ButtonShareCurrentUrl className={"hidden md:block mb-4"} />
             {params.projetId ? (
               // TODO: créer un button-save-selector => select entre bouton dans fiche projet / fiche globale
               <div className="relative [&>button]:right-auto">

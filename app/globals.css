@@ -176,10 +176,6 @@
   padding: 3rem 0 3rem 0 !important;
 }
 
-.customPanel.customPanelDiag {
-  @apply !pl-40;
-}
-
 .typeSolutionGreenIcon {
   color: var(--border-default-green-emeraude);
 }
