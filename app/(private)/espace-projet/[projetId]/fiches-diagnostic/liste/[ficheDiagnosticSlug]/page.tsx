@@ -1,12 +1,14 @@
 import { FicheDiagnostic } from "@/components/fiches-diagnostic/fiche-diagnostic";
 import { getFicheDiagnosticBySlug } from "@/lib/strapi/queries/fiches-diagnostic-queries";
+import { notFound } from "next/navigation";
 
-export default async function FicheDiagnosticPage() {
-  const ficheDiagnostic = await getFicheDiagnosticBySlug("classification-geoclimatique");
+export default async function FicheDiagnosticPage({ params }: {
+  params: { ficheDiagnosticSlug: string };
+}) {
+  const ficheDiagnostic = await getFicheDiagnosticBySlug(params.ficheDiagnosticSlug);
 
-  // TODO: handle fiche non dispo
   if (!ficheDiagnostic) {
-    return null;
+    return notFound();
   }
   return <FicheDiagnostic ficheDiagnostic={ficheDiagnostic} />;
 }
