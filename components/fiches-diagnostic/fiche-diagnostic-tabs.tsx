@@ -1,16 +1,19 @@
 import clsx from "clsx";
 import CustomTabButton from "../common/CustomTabButton";
 import { PropsWithChildren } from "react";
-import { FicheDiagnosticResponseAttributes } from "./types";
+import { FicheDiagnosticResponse } from "./types";
 import { FicheDiagnosticMethodeTab } from "./fiche-diagnostic-tab-methode";
 import { FicheDiagnosticAvantageTab } from "./fiche-diagnostic-tab-avantages";
 import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-meo";
+import ButtonShareCurrentUrl from "@/components/common/button-share-current-url";
+import { FicheDiagnosticSaveButton } from "@/components/fiches-diagnostic/fiche-diagnostic-save-button";
 
 type FicheDiagnosticTabsProps = {
-  attributes: FicheDiagnosticResponseAttributes;
+  ficheDiagnostic: FicheDiagnosticResponse;
 } & PropsWithChildren;
 
-export const FicheDiagnosticTabs = ({ attributes }: FicheDiagnosticTabsProps) => {
+export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProps) => {
+  const { attributes, id } = ficheDiagnostic;
   const tabs = [
     {
       label: "Méthode",
@@ -34,9 +37,13 @@ export const FicheDiagnosticTabs = ({ attributes }: FicheDiagnosticTabsProps) =>
   return (
     <div className="relative">
       <div className="bg-pfmv-orange h-14 w-full absolute left-0 top-0"></div>
-      <div className="fr-container">
+      <div className="fr-container flex flex-row">
+        <div className="flex-none md:w-56 md:mt-[6.5rem]">
+          <ButtonShareCurrentUrl className={"hidden md:block mb-4"} />
+          <FicheDiagnosticSaveButton ficheDiagnosticId={id} showLabel />
+        </div>
         <div className="fr-tabs !shadow-none before:!shadow-none">
-          <ul className="fr-tabs__list !p-0 !pl-40" role="tablist" aria-label="Menu fiche diagnostic">
+          <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche diagnostic">
             {tabs.map((tab) => (
               <li role="presentation" key={tab.contentId}>
                 <CustomTabButton {...tab} className="text-black custom-tab-diag" />

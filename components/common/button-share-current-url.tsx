@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
-export default function ButtonShareFicheSolution({ className }: { className?: string }) {
+export default function ButtonShareCurrentUrl({ className }: { className?: string }) {
   const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
