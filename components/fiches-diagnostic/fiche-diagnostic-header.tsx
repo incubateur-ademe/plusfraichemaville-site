@@ -2,6 +2,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiCli
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
 import { FicheDiagnosticResponseAttributes } from "./types";
 import Image from "next/image";
+import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 
 export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
   return (
@@ -20,7 +21,9 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
             <small className="block text-base text-dsfr-text-mention-grey mb-6">
               <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
               Méthode de diagnostic{" "}
-              <span className="font-bold capitalize text-dsfr-background-flat-warning">{attributes.methode}</span>
+              <span className="font-bold capitalize text-dsfr-background-flat-warning">
+                {getMethodeDiagnosticFromCode(attributes.methode)?.label}
+              </span>
             </small>
             <h1 className="text-4xl leading-[50px] mb-2">{attributes.titre}</h1>
             <h2 className="text-xl leading-8">{attributes.description_courte}</h2>

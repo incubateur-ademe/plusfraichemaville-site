@@ -3,7 +3,7 @@ import { FichesDiagnosticFilterUpdater } from "./use-fiches-diagnostic-filters";
 
 export const ALL_METHODES = [
   { label: "Observation", code: "observation" },
-  { label: "Modélisation", code: "modelisation_spatiale" },
+  { label: "Modélisation spatiale", code: "modelisation_spatiale" },
   { label: "Enquête", code: "enquete" },
   { label: "Simulation numérique", code: "simulation_numerique" },
   { label: "Analyse spatiale", code: "analyse_spatiale" },
@@ -30,3 +30,6 @@ export const MethodeFilter = ({ updater, isActive }: FichesDiagnosticFilterUpdat
     </div>
   );
 };
+
+export const getMethodeDiagnosticFromCode = (methodeDiagnosticCode?: string | null) =>
+  methodeDiagnosticCode ? ALL_METHODES.find((r) => r.code === methodeDiagnosticCode) : null;

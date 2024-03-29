@@ -10,6 +10,7 @@ import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
 import { FicheDiagnosticSaveButton } from "./fiche-diagnostic-save-button";
 import clsx from "clsx";
 import Link from "next/link";
+import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 
 type FicheDiagnosticCardProps = {
   horizontal?: boolean;
@@ -49,7 +50,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, horizontal }: FicheDiagno
               <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
               Méthode de diagnostic{" "}
               <span className="text-dsfr-background-flat-warning font-bold capitalize inline-block">
-                {ficheDiagnostic.attributes.methode}
+                {getMethodeDiagnosticFromCode(ficheDiagnostic.attributes.methode)?.label}
               </span>
             </span>
             <h5 className="my-3 max-w-[350px]">{ficheDiagnostic.attributes.titre}</h5>
