@@ -4,7 +4,7 @@ import { PropsWithChildren } from "react";
 import { FicheDiagnosticResponseAttributes } from "./types";
 import { FicheDiagnosticMethodeTab } from "./fiche-diagnostic-tab-methode";
 import { FicheDiagnosticAvantageTab } from "./fiche-diagnostic-tab-avantages";
-import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-moe";
+import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-meo";
 
 type FicheDiagnosticTabsProps = {
   attributes: FicheDiagnosticResponseAttributes;

@@ -4,13 +4,13 @@ import { FicheDiagnosticResponseAttributes } from "./types";
 
 
 export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
-  const moe = attributes.etapes_mise_en_oeuvre;
+  const meo = attributes.etapes_mise_en_oeuvre;
 
   return (
     <div>
       <h3 className="text-3xl mb-9">Mise en œuvre</h3>
       <div className="mb-14">
-        {moe?.map((m, i) => (
+        {meo?.map((m, i) => (
           <div className="mb-14" key={i}>
             <FicheDiagnosticTabBlocText withPicto title={m.titre} text={m.description} titleClassName="text-lg mb-2" />
           </div>
