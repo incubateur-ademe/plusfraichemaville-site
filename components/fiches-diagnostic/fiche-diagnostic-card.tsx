@@ -32,10 +32,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
     <div className={clsx("pfmv-card h-fit relative", vertical ? "w-72" : "min-w-[900px]")}>
       <FicheDiagnosticLink href={ficheUrl}>
         <div
-          className={clsx(
-            "bg-dsfr-background-alt-red-marianne rounded-[0.9375rem]",
-            vertical ? "block pb-5" : "flex",
-          )}
+          className={clsx("bg-dsfr-background-alt-red-marianne rounded-[0.9375rem]", vertical ? "block pb-5" : "flex")}
         >
           <div className={clsx("w-72 relative overflow-hidden", vertical ? "block h-52" : "flex")}>
             <Image
