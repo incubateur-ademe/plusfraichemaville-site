@@ -8,15 +8,18 @@ import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolut
 import { APIResponseData, GetValues } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
+import { ButtonSaveFicheSolutionInProjet } from "@/components/ficheSolution/button-save-fiche-solution-in-projet";
 
 export default function FicheSolutionTabSynthese({
   ficheSolutionId,
   projectName,
   ficheSolution,
+  projetId,
 }: {
   ficheSolutionId: number;
   projectName: string;
   ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+  projetId?: string;
 }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
 
@@ -43,12 +46,16 @@ export default function FicheSolutionTabSynthese({
                 <span className="mt-[1px]">{typeSolution.label}</span>
               </div>
             )}
-            <ButtonSaveFicheSolution
-              ficheSolutionId={ficheSolutionId}
-              projectName={projectName}
-              className="md:hidden mr-2"
-              label={false}
-            />
+            {projetId ? (
+              <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolutionId} label className="md:hidden mr-2" />
+            ) : (
+              <ButtonSaveFicheSolution
+                ficheSolutionId={ficheSolutionId}
+                projectName={projectName}
+                className="md:hidden mr-2"
+                label={false}
+              />
+            )}
           </div>
           <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">
             {ficheSolution.description_courte}

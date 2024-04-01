@@ -20,7 +20,7 @@ export const FicheDiagnosticSaveButton = ({
   const updateBookmarkedFichesDiagnostic = useUserStore((state) => state.updateBookmarkedFichesDiagnostic);
 
   const ficheDiagnosticIds = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic);
-  const isSaved = ficheDiagnosticIds && ficheDiagnosticIds.includes(ficheDiagnosticId);
+  const isSaved = ficheDiagnosticIds && ficheDiagnosticIds.includes(+ficheDiagnosticId);
 
   const ficheDiagnosticIdsFromStorage = useUserStore((state) => state.bookmarkedFichesDiagnostic);
   const isSavedInStorage =

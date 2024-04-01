@@ -62,30 +62,28 @@ export const ButtonSaveFicheSolutionInProjet = ({
           Voir mes fiches solutions
         </Link>
       </modal.Component>
-      <Button
-        onClick={async () => {
-          const updatedProjet = await updateFichesSolutionsProjetAction(projet.id, fichesSolutionsUpdated);
-          if (updatedProjet.projet) {
-            updateStore(updatedProjet.projet);
-            !isAlreadySaved && modal.open();
-          }
-        }}
-        className={clsx(
-          "!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0",
-          "flex justify-center items-center absolute top-2 right-2",
-          className,
-        )}
-      >
-        <i
-          className={clsx(
-            `fr-icon--sm`,
-            isAlreadySaved ? "ri-add-circle-fill" : "ri-add-circle-line",
-            (isAlreadySaved || label) && "mr-1",
-          )}
-        ></i>
-        {!isAlreadySaved && label && "Ajouter au projet"}
-        {isAlreadySaved && "Ajoutée au projet"}
-      </Button>
+      <div className={className}>
+        <Button
+          onClick={async () => {
+            const updatedProjet = await updateFichesSolutionsProjetAction(projet.id, fichesSolutionsUpdated);
+            if (updatedProjet.projet) {
+              updateStore(updatedProjet.projet);
+              !isAlreadySaved && modal.open();
+            }
+          }}
+          className={clsx("!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0", "flex justify-center items-center")}
+        >
+          <i
+            className={clsx(
+              `fr-icon--sm`,
+              isAlreadySaved ? "ri-add-circle-fill" : "ri-add-circle-line",
+              (isAlreadySaved || label) && "mr-1",
+            )}
+          ></i>
+          {!isAlreadySaved && label && "Ajouter au projet"}
+          {isAlreadySaved && "Ajoutée au projet"}
+        </Button>
+      </div>
     </>
   );
 };

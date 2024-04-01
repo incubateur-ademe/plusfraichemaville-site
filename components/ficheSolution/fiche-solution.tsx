@@ -61,13 +61,11 @@ export async function FicheSolution({
             <ButtonShareCurrentUrl className={"hidden md:block mb-4"} />
             {params.projetId ? (
               // TODO: créer un button-save-selector => select entre bouton dans fiche projet / fiche globale
-              <div className="relative [&>button]:right-auto">
-                <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} label />
-              </div>
+              <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} label className="hidden md:block" />
             ) : (
               <ButtonSaveFicheSolution
                 ficheSolutionId={ficheSolution.id}
-                label={true}
+                label
                 projectName={(historique && historique[1].label) || ""}
                 className={"hidden md:block"}
               />
@@ -100,6 +98,7 @@ export async function FicheSolution({
                 ficheSolutionId={ficheSolution.id}
                 projectName={(historique && historique[1].label) || ""}
                 ficheSolution={ficheSolution.attributes}
+                projetId={params.projetId}
               />
             </div>
             <div id="materiaux-panel" className="fr-tabs__panel customPanel" role="tabpanel">

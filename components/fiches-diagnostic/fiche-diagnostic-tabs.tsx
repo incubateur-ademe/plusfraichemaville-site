@@ -19,7 +19,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
       label: "Méthode",
       contentId: "methode-panel",
       isSelected: true,
-      component: <FicheDiagnosticMethodeTab attributes={attributes} />,
+      component: <FicheDiagnosticMethodeTab ficheDiagnostic={ficheDiagnostic} />,
     },
     {
       label: "Avantages et points de vigilance",
@@ -38,7 +38,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
     <div className="relative">
       <div className="bg-pfmv-orange h-14 w-full absolute left-0 top-0"></div>
       <div className="fr-container flex flex-row">
-        <div className="flex-none md:w-56 md:mt-[6.5rem]">
+        <div className="hidden md:block flex-none md:w-56 md:mt-[6.5rem]">
           <ButtonShareCurrentUrl className={"hidden md:block mb-4"} />
           <FicheDiagnosticSaveButton ficheDiagnosticId={id} showLabel />
         </div>
