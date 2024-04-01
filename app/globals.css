@@ -90,6 +90,10 @@
   box-shadow: 0 5px 10px 0 rgba(0, 0, 145, 0.3);
 }
 
+.svg-orange {
+  filter: invert(38%) sepia(31%) saturate(3603%) hue-rotate(1deg) brightness(103%) contrast(106%);
+}
+
 .pfmv-card:hover,
 .fiche-solution-small-vertical-card:hover {
   background: #fff !important;

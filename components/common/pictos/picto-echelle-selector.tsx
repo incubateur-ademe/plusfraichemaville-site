@@ -24,7 +24,7 @@ export const PictoEchelleSelector = ({ pictoId, className, large }: PictoEchelle
     >
       <Image
         src={`/images/echelle/${selectedPicto}.svg`}
-        className={clsx("mx-auto !text-dsfr-background-flat-warning", className)}
+        className={clsx("mx-auto svg-orange", className)}
         alt={`${pictoId}`}
         width={20}
         height={20}
