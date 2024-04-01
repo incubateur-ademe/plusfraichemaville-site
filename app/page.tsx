@@ -1,6 +1,6 @@
 import { HomepageV2 } from "@/components/homepage/v2/homepage";
 import AppFooter from "@/components/layout/AppFooter";
-
+export const dynamic = "force-static";
 export default function Home() {
   return (
     <>

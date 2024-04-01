@@ -34,53 +34,53 @@ export const homepageData = {
     title: "Vous aider à trouver les bonnes solutions pour rafraîchir durablement votre collectivité",
     cards: [
       {
-        title: "Fontaines et réseaux de fontainerie",
+        title: "Stockage eau de pluie",
         alt: "",
         code: "bleue",
-        slug: "fontaines-reseau-fontainerie",
-        image: "/images/homepage/solution-bleue-1.png",
+        slug: "stockage-eau-de-pluie",
+        image: "/images/homepage/solutions/stockage-eau-de-pluie.jpeg",
       },
       {
-        title: "Ouvrage paysager de gestion des eaux pluviales",
+        title: "Arbres et végétaux dans la cour d'école",
         alt: "",
         code: "verte",
-        slug: "gestion-eaux-pluviales",
-        image: "/images/homepage/solution-verte-1.jpeg",
+        slug: "arbres-vegetaux-cour-ecole",
+        image: "/images/homepage/solutions/arbres-vegetaux-cour-ecole.jpeg",
+      },
+      {
+        title: "Adaptation des batiments - école",
+        alt: "",
+        code: "grise",
+        slug: "batiment-ecole-adaptation-renovation-batiments",
+        image: "/images/homepage/solutions/batiment-ecole-adaptation-renovation-batiments.jpeg",
       },
       {
         title: "Comportements collectifs face à la chaleur",
         alt: "",
         code: "douce",
         slug: "comportements-collectifs",
-        image: "/images/homepage/solution-douce-1.jpeg",
+        image: "/images/homepage/solutions/comportements-collectifs.jpeg",
       },
       {
-        title: "Revêtement drainant / perméable",
-        alt: "",
-        code: "grise",
-        slug: "revetement-drainant",
-        image: "/images/homepage/solution-grise-1.jpeg",
-      },
-      {
-        title: "Stockage eau de pluie",
-        alt: "",
-        code: "bleue",
-        slug: "stockage-eau-de-pluie",
-        image: "/images/homepage/solution-bleue-2.jpeg",
-      },
-      {
-        title: "Prendre soin d'un arbre existant",
+        title: "Façade végétalisée",
         alt: "",
         code: "verte",
-        slug: "prendre-soin-arbre-existant",
-        image: "/images/homepage/solution-verte-2.jpeg",
+        slug: "facade-vegetalisee",
+        image: "/images/homepage/solutions/facade-vegetalisee.jpeg",
       },
       {
-        title: "Jeux et équipements durables",
+        title: "Revêtement à albédo élevé",
         alt: "",
         code: "grise",
-        slug: "jeux-et-equipements-durables-ecoles",
-        image: "/images/homepage/solution-grise-2.jpeg",
+        slug: "revetement-albedo-eleve",
+        image: "/images/homepage/solutions/revetement-albedo-eleve.jpeg",
+      },
+      {
+        title: "Stockage eau de pluie dans la cour d'école",
+        alt: "",
+        code: "bleue",
+        slug: "stockage-eau-pluie-ecole",
+        image: "/images/homepage/solutions/stockage-eau-pluie-ecole.jpeg",
       },
     ],
   },
@@ -110,12 +110,79 @@ export const homepageData = {
   },
   inspirer: {
     title: "S'inspirer des collectivités qui sont passées à l'action",
-    featuredRex: "autoroute-urbaine-transformee-en-couloir-vert",
+    featuredRex: {
+      slug: "lyon-arbres-de-pluie",
+      climat_actuel: "semi_continental",
+      climat_futur: "mediterraneen",
+      titre: "À Lyon, les arbres de pluie comme armes de résilience",
+      image_principale: "/images/homepage/rex/lyon-arbres-de-pluie.jpeg",
+      // eslint-disable-next-line max-len
+      description: `<p>Le projet "arbres de pluie" à Lyon, initié fin 2020 dans le cadre du programme européen <a target="_blank" rel="noopener noreferrer" href="https://www.ofb.gouv.fr/le-projet-life-integre-artisan">Life ARTISAN</a>, offre une solution prometteuse face au réchauffement climatique et à la dégradation urbaine. Porté par la Métropole de Lyon, ce projet vise à élargir les fosses qui entourent les arbres existants, afin de permettre une meilleure infiltration des eaux de pluie et le rafraîchissement de la ville. Par la capture de carbone, la recharge des nappes phréatiques et le refuge qu’ils constituent pour la biodiversité, les arbres se transforment en alliés précieux pour l'environnement. De plus, cette initiative crée des îlots de fraîcheur grâce à l'évapotranspiration des arbres. Les résultats probants des premières installations, avec une absorption complète des petites pluies et une meilleure résilience face aux sécheresses, témoignent de l'efficacité de ce projet bénéfique pour l'amélioration du cadre de vie urbain et la préservation de la nature.&nbsp;</p>`,
+      region: {
+        data: {
+          attributes: {
+            code: "FR-ARA",
+          },
+        },
+      },
+    },
     otherRex: [
-      "transformation-parking-ilot-de-fraicheur",
-      "ecoquartier-clichy-batignolles",
-      "transformation-parking-ilot-de-fraicheur",
-      "ecoquartier-clichy-batignolles",
+      {
+        slug: "toulouse-plus-fraiche",
+        climat_actuel: "oceanique",
+        climat_futur: "mediterraneen",
+        titre: "Toulouse Plus Fraîche : un plan d’adaptation en 30 actions ",
+        image_principale: "/images/homepage/rex/toulouse-plus-fraiche.jpeg",
+        region: {
+          data: {
+            attributes: {
+              code: "FR-OCC",
+            },
+          },
+        },
+      },
+      {
+        slug: "verdissons-nos-murs-lille",
+        climat_actuel: "oceanique",
+        climat_futur: "mediterraneen",
+        titre: "“Verdissons nos murs”, le programme de Lille pour végétaliser ses façades",
+        image_principale: "/images/homepage/rex/verdissons-nos-murs-lille.jpeg",
+        region: {
+          data: {
+            attributes: {
+              code: "FR-HDF",
+            },
+          },
+        },
+      },
+      {
+        slug: "cour-oasis-berthelot-montrouge",
+        climat_actuel: "oceanique",
+        climat_futur: "mediterraneen",
+        titre: "La cour Oasis Berthelot, un îlot de fraîcheur au coeur de Montrouge",
+        image_principale: "/images/homepage/rex/cour-oasis-berthelot-montrouge.jpeg",
+        region: {
+          data: {
+            attributes: {
+              code: "FR-IDF",
+            },
+          },
+        },
+      },
+      {
+        slug: "micro-foret-bordeaux",
+        climat_actuel: "oceanique",
+        climat_futur: "mediterraneen",
+        titre: "Wangari Muta Maathai, la première micro-forêt de Bordeaux ",
+        image_principale: "/images/homepage/rex/micro-foret-bordeaux.jpeg",
+        region: {
+          data: {
+            attributes: {
+              code: "FR-NAQ",
+            },
+          },
+        },
+      },
     ],
     cta: {
       label: "Voir tous les projets réalisés",

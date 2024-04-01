@@ -1,8 +1,8 @@
-import { getRetourExperienceBySlug } from "@/lib/strapi/queries/retoursExperienceQueries";
+"use client";
+
 import { homepageData } from "./homepage-data";
-import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
+import RetourExperienceCard, { RexInHome } from "@/components/retourExperience/RetourExperienceCard";
 import Image from "next/image";
-import { STRAPI_IMAGE_KEY_SIZE, getStrapiImageUrl } from "@/lib/strapi/strapiClient";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import clsx from "clsx";
@@ -15,10 +15,10 @@ export const HomepageInspirer = () => {
       <h3 className="px-10 lg:px-0 text-pfmv-navy text-lg lg:text-[26px] font-bold my-10 lg:my-14 text-center">
         {inspirer.title}
       </h3>
-      <HomepageInspirerCard slug={inspirer.featuredRex} featured />
-      <div className="flex gap-8 lg:flex-row flex-col items-center">
+      <HomepageInspirerCard rex={inspirer.featuredRex} description={inspirer.featuredRex.description} featured />
+      <div className="flex gap-8 lg:flex-row justify-center flex-wrap lg:flex-nowrap items-center">
         {inspirer.otherRex.map((rex, index) => (
-          <HomepageInspirerCard slug={rex} key={index} />
+          <HomepageInspirerCard rex={rex} key={index} />
         ))}
       </div>
       <Link
@@ -34,25 +34,24 @@ export const HomepageInspirer = () => {
   );
 };
 
-export const HomepageInspirerCard = async ({ slug, featured = false }: { slug: string; featured?: boolean }) => {
-  const rex = await getRetourExperienceBySlug(slug);
-
-  if (!rex) {
-    return null;
-  }
-
+export const HomepageInspirerCard = ({
+  rex,
+  featured = false,
+  description,
+}: {
+  rex: (typeof homepageData.inspirer.otherRex)[number];
+  description?: string;
+  featured?: boolean;
+}) => {
   return featured ? (
     <>
-      <RetourExperienceCard retourExperience={rex} className="flex lg:hidden mx-auto mb-8" />
-      <Link
-        href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.attributes.slug}`}
-        className="hidden lg:inline-block !bg-none"
-      >
+      <RetourExperienceCard retourExperience={rex as unknown as RexInHome} className="flex lg:hidden mx-auto mb-8" />
+      <Link href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.slug}`} className="hidden lg:inline-block !bg-none">
         <div className="flex gap-8 pfmv-card px-8 mb-10">
           <div className="w-[427px] py-10 shrink-0 relative flex justify-center items-center">
             <Image
-              src={getStrapiImageUrl(rex?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
-              alt={rex.attributes.image_principale?.data.attributes.alternativeText ?? "image collectivité"}
+              src={rex.image_principale}
+              alt={rex.titre}
               className="object-cover w-full h-auto"
               sizes="50vw"
               width={0}
@@ -60,8 +59,8 @@ export const HomepageInspirerCard = async ({ slug, featured = false }: { slug: s
             />
           </div>
           <div className="py-12">
-            <h4 className="font-bold text-2xl mb-4">{rex.attributes.titre}</h4>
-            <CmsRichText label={rex.attributes.description} />
+            <h4 className="font-bold text-2xl mb-4">{rex.titre}</h4>
+            {description && <CmsRichText label={description} />}
             <div
               className={clsx(
                 "text-pfmv-navy font-bold !bg-none hover:text-dsfr-background-action-high-blue-france-active",
@@ -74,6 +73,6 @@ export const HomepageInspirerCard = async ({ slug, featured = false }: { slug: s
       </Link>
     </>
   ) : (
-    <RetourExperienceCard className="w-[17.5rem]" retourExperience={rex} />
+    <RetourExperienceCard className="w-[17.5rem]" retourExperience={rex as unknown as RexInHome} />
   );
 };
