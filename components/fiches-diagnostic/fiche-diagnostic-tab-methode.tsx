@@ -2,8 +2,9 @@ import { Separator } from "../common/separator";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
 import { FicheDiagnosticResponseAttributes } from "./types";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
-import { getCoutFicheSolution } from "@/helpers/coutFicheSolution";
-import { getDelaiTravauxFicheSolution } from "@/helpers/delaiTravauxFicheSolution";
+import { getCoutFiche } from "@/helpers/coutFiche";
+import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
+import { TypeFiche } from "@/helpers/common";
 
 export const FicheDiagnosticMethodeTab = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
   const coutMin = attributes.cout_min;
@@ -11,8 +12,8 @@ export const FicheDiagnosticMethodeTab = ({ attributes }: { attributes: FicheDia
   const delaiMin = attributes.delai_min;
   const delaiMax = attributes.delai_max;
 
-  const delai = getDelaiTravauxFicheSolution(delaiMin, delaiMax);
-  const cout = getCoutFicheSolution(coutMin, coutMax);
+  const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
+  const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
 
   return (
     <div>
@@ -28,7 +29,7 @@ export const FicheDiagnosticMethodeTab = ({ attributes }: { attributes: FicheDia
           <div>
             <small className="mb-1 block text-dsfr-text-mention-grey text-sm">Temporalité</small>
             <div className="flex justify-between">
-              <div className="h-4 mr-2">{cout?.icons("!text-dsfr-background-flat-warning before:!w-4")}</div>
+              <div className="h-4 mr-2">{delai?.icons(TypeFiche.diagnostic, "before:!w-4")}</div>
               <small className="text-dsfr-text-mention-grey text-sm">
                 {delaiMin} à {delaiMax} mois
               </small>
@@ -38,7 +39,7 @@ export const FicheDiagnosticMethodeTab = ({ attributes }: { attributes: FicheDia
           <div>
             <small className="mb-1 block text-dsfr-text-mention-grey text-sm">Coût</small>
             <div className="flex justify-between">
-              <div className="h-4 mr-2">{delai?.icons("!text-dsfr-background-flat-warning before:!w-4")}</div>
+              <div className="h-4 mr-2">{cout?.icons(TypeFiche.diagnostic, "before:!w-4")}</div>
               <small className="text-dsfr-text-mention-grey text-sm">
                 de {coutMin} à {coutMax} euros HT
               </small>
