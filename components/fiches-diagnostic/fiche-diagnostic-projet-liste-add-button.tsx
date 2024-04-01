@@ -12,6 +12,6 @@ export const FicheDiagnosticProjetListeAddButton = () => (
     )}
   >
     <i className="ri-add-circle-fill text-white text-sm mb-2"></i>
-    <span className="text-white text-center">Ajouter des solutions</span>
+    <span className="text-white text-center">Ajouter des méthodes</span>
   </FicheDiagnosticLink>
 );

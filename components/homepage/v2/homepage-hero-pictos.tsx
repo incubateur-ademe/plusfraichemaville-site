@@ -26,7 +26,7 @@ export const HomepageHeroPictos = () => {
   return (
     <div
       className={clsx(
-        "absolute top-0 left-0 flex justify-between items-center w-full h-full [&>*]:h-full pointer-events-none",
+        "absolute -z-10 top-0 left-0 flex justify-between items-center w-full h-full [&>*]:h-full pointer-events-none",
       )}
     >
       <HomepageHeroPictoLeft />

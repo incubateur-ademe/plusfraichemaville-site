@@ -2,39 +2,47 @@
 
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
-import { getFicheSolutionBySlug } from "@/lib/strapi/queries/fichesSolutionsQueries";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 
-export const HomepageStory = async ({ slug }: { slug: string }) => {
-  const ficheSolution = await getFicheSolutionBySlug(slug);
-  const typeSolution = getTypeSolutionFromCode(ficheSolution?.attributes.type_solution);
+type HomepageStoryProps = {
+  story: {
+    title: string;
+    code: string;
+    slug: string;
+    image: string;
+    alt: string;
+  };
+};
+
+export const HomepageStory = ({ story }: HomepageStoryProps) => {
+  const typeSolution = getTypeSolutionFromCode(story.code);
 
   return (
-    <div>
-      <Link href={`${PFMV_ROUTES.FICHES_SOLUTIONS}/${slug}`}>
+    <div className="group">
+      <Link href={`${PFMV_ROUTES.FICHES_SOLUTIONS}/${story.slug}`}>
         <div
           className={clsx(
-            "w-[358px] h-[540px] shrink-0 rounded-3xl flex justify-end flex-col px-8 py-5",
-            "relative overflow-hidden",
+            "md:w-[358px] md:h-[540px] shrink-0 rounded-2xl flex justify-end flex-col pt-5",
+            "w-[210px] h-[296px] relative overflow-hidden",
+            "md:py-10 px-5 md:px-8 py-5",
             `gradient-solution-${typeSolution?.code}`,
           )}
         >
           {typeSolution && (
-            <div className="flex text-xs mb-2 text-white">
+            <div className="flex text-sm md:text-lg mb-2 text-white">
               {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           )}
-          <h4 className="text-white">{ficheSolution?.attributes.titre}</h4>
+          <h4 className="text-white text-base md:text-[22px] md:leading-7 m-0">{story.title}</h4>
           <Image
-            src={getStrapiImageUrl(ficheSolution?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
-            alt={ficheSolution?.attributes.image_principale?.data.attributes.alternativeText ?? ""}
+            src={story.image}
+            alt={story.alt}
             fill
             sizes="60vw"
-            className="-z-10 object-cover"
+            className="-z-10 object-cover group-hover:scale-[1.05] transition-transform duration-300 ease-in"
           />
         </div>
       </Link>

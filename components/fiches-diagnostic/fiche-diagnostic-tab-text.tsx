@@ -19,7 +19,7 @@ export const FicheDiagnosticTabBlocText = ({
   withPicto,
 }: FicheDiagnosticTabBlocTextProps) => {
   return (
-    <div className={clsx(small && "w-1/2")}>
+    <div className={clsx(small && "w-full md:w-1/2")}>
       <h3 className={clsx("text-2xl", withPicto && "flex items-center", titleClassName)}>
         {withPicto && <PictoTick />}
 

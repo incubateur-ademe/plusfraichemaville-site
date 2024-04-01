@@ -19,13 +19,13 @@ export const homepageData = {
     },
   },
   projet: {
-    title: ["Vous avez un projet de rafraîchissement", "N'attendez pas la prochaine vague."],
+    title: ["Vous avez un projet de rafraîchissement ?", "N'attendez pas la prochaine vague."],
     subtitle: [
       "Grâce à l'espace projet, réalisez des simulations budgétaires",
       "et accédez à des recommandations techniques détaillées.",
     ],
     cta: {
-      label: "Je crée une projet",
+      label: "Je crée un projet",
       url: PFMV_ROUTES.ESPACE_PROJET,
     },
     image: "/images/homepage/home-hero.png",
@@ -33,11 +33,55 @@ export const homepageData = {
   stories: {
     title: "Vous aider à trouver les bonnes solutions pour rafraîchir durablement votre collectivité",
     cards: [
-      "fontaines-reseau-fontainerie",
-      "facade-vegetalisee",
-      "revetement-drainant",
-      "comportements-individuels",
-      "jardin-suspendu",
+      {
+        title: "Fontaines et réseaux de fontainerie",
+        alt: "",
+        code: "bleue",
+        slug: "fontaines-reseau-fontainerie",
+        image: "/images/homepage/solution-bleue-1.png",
+      },
+      {
+        title: "Ouvrage paysager de gestion des eaux pluviales",
+        alt: "",
+        code: "verte",
+        slug: "gestion-eaux-pluviales",
+        image: "/images/homepage/solution-verte-1.jpeg",
+      },
+      {
+        title: "Comportements collectifs face à la chaleur",
+        alt: "",
+        code: "douce",
+        slug: "comportements-collectifs",
+        image: "/images/homepage/solution-douce-1.jpeg",
+      },
+      {
+        title: "Revêtement drainant / perméable",
+        alt: "",
+        code: "grise",
+        slug: "revetement-drainant",
+        image: "/images/homepage/solution-grise-1.jpeg",
+      },
+      {
+        title: "Stockage eau de pluie",
+        alt: "",
+        code: "bleue",
+        slug: "stockage-eau-de-pluie",
+        image: "/images/homepage/solution-bleue-2.jpeg",
+      },
+      {
+        title: "Prendre soin d'un arbre existant",
+        alt: "",
+        code: "verte",
+        slug: "prendre-soin-arbre-existant",
+        image: "/images/homepage/solution-verte-2.jpeg",
+      },
+      {
+        title: "Jeux et équipements durables",
+        alt: "",
+        code: "grise",
+        slug: "jeux-et-equipements-durables-ecoles",
+        image: "/images/homepage/solution-grise-2.jpeg",
+      },
     ],
   },
   start: {
@@ -46,7 +90,7 @@ export const homepageData = {
       {
         title: "Faites un diagnostic de la surchauffe sur votre territoire",
         description: "Consultez les différentes méthodes de diagnostic en fonction de votre besoin.",
-        image: { url: "/images/homepage/home-start-1.png", width: 304, height: 320 },
+        image: { url: "/images/homepage/home-start-1.svg", width: 331, height: 320 },
         cta: {
           label: "Je trouve la bonne méthode",
           url: PFMV_ROUTES.FICHES_DIAGNOSTIC,
@@ -56,7 +100,7 @@ export const homepageData = {
         title: "Trouvez les solutions de rafraîchissement adaptées à votre projet",
         description:
           "Accédez à l’outil de découverte des solutions ou recherchez des fiches solutions par thématiques.",
-        image: { url: "/images/homepage/home-start-2.png", width: 331, height: 353 },
+        image: { url: "/images/homepage/home-start-2.svg", width: 331, height: 353 },
         cta: {
           label: "Je découvre les solutions",
           url: PFMV_ROUTES.FICHES_SOLUTIONS,

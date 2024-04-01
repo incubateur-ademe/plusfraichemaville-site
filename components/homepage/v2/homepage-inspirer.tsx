@@ -12,9 +12,11 @@ export const HomepageInspirer = () => {
   const { inspirer } = homepageData;
   return (
     <div className="w-fit mx-auto pb-20">
-      <h3 className="text-pfmv-navy text-[26px] font-bold my-14 text-center">{inspirer.title}</h3>
+      <h3 className="px-10 lg:px-0 text-pfmv-navy text-lg lg:text-[26px] font-bold my-10 lg:my-14 text-center">
+        {inspirer.title}
+      </h3>
       <HomepageInspirerCard slug={inspirer.featuredRex} featured />
-      <div className="flex gap-8">
+      <div className="flex gap-8 lg:flex-row flex-col items-center">
         {inspirer.otherRex.map((rex, index) => (
           <HomepageInspirerCard slug={rex} key={index} />
         ))}
@@ -40,27 +42,37 @@ export const HomepageInspirerCard = async ({ slug, featured = false }: { slug: s
   }
 
   return featured ? (
-    <Link href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.attributes.slug}`}>
-      <div className="flex gap-8 pfmv-card px-8 max-w-[78rem] mb-10">
-        <div className="w-[427px] py-10 shrink-0 relative flex justify-center items-center">
-          <Image
-            src={getStrapiImageUrl(rex?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
-            alt={rex.attributes.image_principale?.data.attributes.alternativeText ?? "image collectivité"}
-            className="object-cover w-full h-auto"
-            sizes="50vw"
-            width={0}
-            height={0}
-          />
-        </div>
-        <div className="py-12">
-          <h4 className="font-bold text-2xl mb-4">{rex.attributes.titre}</h4>
-          <CmsRichText label={rex.attributes.description} />
-          <div className="text-pfmv-navy font-bold !bg-none hover:text-dsfr-background-action-high-blue-france-active">
-            Lire la suite
+    <>
+      <RetourExperienceCard retourExperience={rex} className="flex lg:hidden mx-auto mb-8" />
+      <Link
+        href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.attributes.slug}`}
+        className="hidden lg:inline-block !bg-none"
+      >
+        <div className="flex gap-8 pfmv-card px-8 max-w-[78rem] mb-10">
+          <div className="w-[427px] py-10 shrink-0 relative flex justify-center items-center">
+            <Image
+              src={getStrapiImageUrl(rex?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
+              alt={rex.attributes.image_principale?.data.attributes.alternativeText ?? "image collectivité"}
+              className="object-cover w-full h-auto"
+              sizes="50vw"
+              width={0}
+              height={0}
+            />
+          </div>
+          <div className="py-12">
+            <h4 className="font-bold text-2xl mb-4">{rex.attributes.titre}</h4>
+            <CmsRichText label={rex.attributes.description} />
+            <div
+              className={clsx(
+                "text-pfmv-navy font-bold !bg-none hover:text-dsfr-background-action-high-blue-france-active",
+              )}
+            >
+              Lire la suite
+            </div>
           </div>
         </div>
-      </div>
-    </Link>
+      </Link>
+    </>
   ) : (
     <RetourExperienceCard retourExperience={rex} />
   );

@@ -1,3 +1,5 @@
+"use server";
+
 import { FicheDiagnosticResponse, FichesDiagnosticResponse } from "./../../../components/fiches-diagnostic/types";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "../helpers/strapiArrayUtils";
 import { strapiGraphQLCall } from "../strapiClient";
@@ -83,8 +85,9 @@ export async function getFicheDiagnosticBySlug(slug: string): Promise<FicheDiagn
 }
 
 export async function getFicheDiagnosticById(id: string): Promise<FicheDiagnosticResponse | null> {
-  const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: id, relation: false }]);
+  const filter = new StrapiFilter(true, [{ attribute: "id", operator: "eq", value: id, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_FICHE_DIAGNOSTIC_COMPLETE_DATA(filter)))
     ?.ficheDiagnostics as APIResponseCollection<"api::fiche-diagnostic.fiche-diagnostic">;
+
   return safeReturnStrapiEntity(apiResponse);
 }
