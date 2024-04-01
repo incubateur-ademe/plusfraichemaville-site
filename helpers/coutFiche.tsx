@@ -1,15 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-
-export enum TypeFiche {
-  // eslint-disable-next-line no-unused-vars
-  solution,
-  // eslint-disable-next-line no-unused-vars
-  diagnostic,
-}
-
-export const highlightedIconClass = (typeFiche: TypeFiche) =>
-  typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-background-flat-warning";
+import { highlightedIconClass, TypeFiche } from "@/helpers/common";
 
 type CoutFiche = {
   coutMax(_: TypeFiche): number;
