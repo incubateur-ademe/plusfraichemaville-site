@@ -1,14 +1,22 @@
 import { Separator } from "../common/separator";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
-import { FicheDiagnosticResponseAttributes } from "./types";
+import { FicheDiagnosticResponse } from "./types";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
 import { getCoutFiche } from "@/helpers/coutFiche";
 import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
 import { TypeFiche } from "@/helpers/common";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
+import React from "react";
+import { FicheDiagnosticSaveButton } from "@/components/fiches-diagnostic/fiche-diagnostic-save-button";
 
-export const FicheDiagnosticMethodeTab = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
+export const FicheDiagnosticMethodeTab = ({
+  ficheDiagnostic,
+}: {
+  ficheDiagnostic: FicheDiagnosticResponse;
+  projetId?: number;
+}) => {
+  const { attributes, id: ficheDiagnosticId } = ficheDiagnostic;
   const coutMin = attributes.cout_min;
   const coutMax = attributes.cout_max;
   const delaiMin = attributes.delai_min;
@@ -19,6 +27,11 @@ export const FicheDiagnosticMethodeTab = ({ attributes }: { attributes: FicheDia
 
   return (
     <div>
+      <FicheDiagnosticSaveButton
+        ficheDiagnosticId={ficheDiagnosticId}
+        showLabel
+        className="md:!hidden absolute top-2 right-0"
+      />
       <div className="md:hidden text-base text-dsfr-text-mention-grey mb-6">
         <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
         Méthode de diagnostic{" "}

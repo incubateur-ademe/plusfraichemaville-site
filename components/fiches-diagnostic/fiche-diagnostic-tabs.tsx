@@ -19,7 +19,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
       label: "Méthode",
       contentId: "methode-panel",
       isSelected: true,
-      component: <FicheDiagnosticMethodeTab attributes={attributes} />,
+      component: <FicheDiagnosticMethodeTab ficheDiagnostic={ficheDiagnostic} />,
     },
     {
       label: "Avantages et points de vigilance",
