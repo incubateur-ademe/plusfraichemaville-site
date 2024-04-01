@@ -71,10 +71,7 @@ export const ButtonSaveFicheSolutionInProjet = ({
               !isAlreadySaved && modal.open();
             }
           }}
-          className={clsx(
-            "!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0",
-            "flex justify-center items-center"
-          )}
+          className={clsx("!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0", "flex justify-center items-center")}
         >
           <i
             className={clsx(

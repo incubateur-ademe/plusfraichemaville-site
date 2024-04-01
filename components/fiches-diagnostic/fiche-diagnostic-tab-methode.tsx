@@ -27,21 +27,18 @@ export const FicheDiagnosticMethodeTab = ({ attributes }: { attributes: FicheDia
         </span>
       </div>
       <div className="flex justify-between flex-col md:flex-row">
-
         <div className="max-w-screen-sm">
-          <h3 className={clsx("text-2xl md:text-2xl md:hidden")}>
-            {attributes.description_courte}
-          </h3>
-            <FicheDiagnosticTabBlocText
-              title="Description de la méthode"
-              text={attributes.description}
-              titleClassName="text-2xl mb-4 hidden md:block"
-            />
+          <h3 className={clsx("text-2xl md:text-2xl md:hidden")}>{attributes.description_courte}</h3>
+          <FicheDiagnosticTabBlocText
+            title="Description de la méthode"
+            text={attributes.description}
+            titleClassName="text-2xl mb-4 hidden md:block"
+          />
         </div>
         <div
           className={clsx(
             "h-fit rounded-2xl shrink-0",
-            "md:w-80 md:bg-dsfr-background-alt-red-marianne md:pl-6 md:pt-8 md:pr-4 md:pb-14"
+            "md:w-80 md:bg-dsfr-background-alt-red-marianne md:pl-6 md:pt-8 md:pr-4 md:pb-14",
           )}
         >
           <div>
