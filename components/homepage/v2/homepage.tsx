@@ -4,6 +4,7 @@ import { HomepageProjet } from "./homepage-projet";
 import { HomepageRedirect } from "./homepage-redirect";
 import { HomepageStart } from "./homepage-start";
 import { HomepageStories } from "./homepage-stories";
+import { HomepageNewsletter } from "./homepage-newsletter";
 
 export const HomepageV2 = () => {
   return (
@@ -13,6 +14,7 @@ export const HomepageV2 = () => {
       <HomepageStories />
       <HomepageStart />
       <HomepageInspirer />
+      <HomepageNewsletter />
       <HomepageRedirect />
     </div>
   );

@@ -11,7 +11,7 @@ import CmsRichText from "@/components/common/CmsRichText";
 export const HomepageInspirer = () => {
   const { inspirer } = homepageData;
   return (
-    <div className="w-fit mx-auto pb-20">
+    <div className="w-full mx-auto pb-20 max-w-[78rem] px-5">
       <h3 className="px-10 lg:px-0 text-pfmv-navy text-lg lg:text-[26px] font-bold my-10 lg:my-14 text-center">
         {inspirer.title}
       </h3>
@@ -48,7 +48,7 @@ export const HomepageInspirerCard = async ({ slug, featured = false }: { slug: s
         href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.attributes.slug}`}
         className="hidden lg:inline-block !bg-none"
       >
-        <div className="flex gap-8 pfmv-card px-8 max-w-[78rem] mb-10">
+        <div className="flex gap-8 pfmv-card px-8 mb-10">
           <div className="w-[427px] py-10 shrink-0 relative flex justify-center items-center">
             <Image
               src={getStrapiImageUrl(rex?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
@@ -74,6 +74,6 @@ export const HomepageInspirerCard = async ({ slug, featured = false }: { slug: s
       </Link>
     </>
   ) : (
-    <RetourExperienceCard retourExperience={rex} />
+    <RetourExperienceCard className="w-[17.5rem]" retourExperience={rex} />
   );
 };

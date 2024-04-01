@@ -6,7 +6,7 @@ import clsx from "clsx";
 export const HomepageProjet = () => {
   const { projet } = homepageData;
   return (
-    <div className="relative gradient-l-to-r-navy">
+    <div className="relative gradient-l-to-r-navy min-h-80 lg:min-h-0">
       <div className="fr-container flex flex-col lg:block pt-60 lg:pt-40 pb-10 lg:pb-36 ">
         <h2
           className={clsx(
