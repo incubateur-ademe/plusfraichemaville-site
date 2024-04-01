@@ -13,7 +13,7 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
             <Image
               src={getStrapiImageUrl(attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.titre}
-              className="object-cover shrink-0"
+              className="object-cover"
               fill
             />
           </div>
