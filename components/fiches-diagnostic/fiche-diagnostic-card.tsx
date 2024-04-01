@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { FicheDiagnosticResponse } from "./types";
-import { STRAPI_IMAGE_KEY_SIZE, getStrapiImageUrl } from "@/lib/strapi/strapiClient";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getDelaiTravauxFicheSolution } from "@/helpers/delaiTravauxFicheSolution";
-import { getCoutFicheSolution } from "@/helpers/coutFicheSolution";
+import { getCoutFiche, TypeFiche } from "@/helpers/coutFiche";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
 
 import { PFMV_ROUTES } from "@/helpers/routes";
@@ -24,7 +24,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
   const delaiMax = ficheDiagnostic.attributes.delai_max;
 
   const delai = getDelaiTravauxFicheSolution(delaiMin, delaiMax);
-  const cout = getCoutFicheSolution(coutMin, coutMax);
+  const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
 
   const ficheUrl = PFMV_ROUTES.FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug);
 
@@ -57,7 +57,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             <div className={clsx(vertical ? "block" : "flex")}>
               <div className={clsx(vertical ? "block mb-3" : "flex mr-6")}>
                 {vertical && <small>Coût</small>}
-                <div className="h-4 mr-2">{cout?.icons("!text-dsfr-background-flat-warning before:!w-4")}</div>
+                <div className="h-4 mr-2">{cout?.icons(TypeFiche.diagnostic, "before:!w-4")}</div>
                 {!vertical && (
                   <small className="text-dsfr-text-disabled-grey">
                     de {coutMin} à {coutMax} euros HT

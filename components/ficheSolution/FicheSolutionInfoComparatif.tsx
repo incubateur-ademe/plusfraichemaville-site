@@ -1,5 +1,5 @@
 import React from "react";
-import { getCoutFicheSolution } from "@/helpers/coutFicheSolution";
+import { getCoutFiche, TypeFiche } from "@/helpers/coutFiche";
 import { getDelaiTravauxFicheSolution } from "@/helpers/delaiTravauxFicheSolution";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getPorteeBaisseTemperatureLabelFromCode } from "@/helpers/porteeBaisseTemperatureFicheSolution";
@@ -19,7 +19,7 @@ export default function FicheSolutionInfoComparatif({
     ficheSolution.delai_travaux_minimum,
     ficheSolution.delai_travaux_maximum,
   );
-  const cout = getCoutFicheSolution(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
+  const cout = getCoutFiche(TypeFiche.solution, ficheSolution.cout_minimum, ficheSolution.cout_maximum);
   return (
     <div className={`${className}`}>
       {!!ficheSolution.baisse_temperature && (
@@ -65,7 +65,7 @@ export default function FicheSolutionInfoComparatif({
         <div className="text-dsfr-text-mention-grey">Coût</div>
         <div className="inline-block w-full">
           <div className="float-left">
-            <div className="float-left text-base">{cout?.icons("fr-icon--sm")}</div>
+            <div className="float-left text-base">{cout?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
           </div>
           <div className="float-right text-dsfr-text-mention-grey mt-1">
             {`de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € / m²`}
