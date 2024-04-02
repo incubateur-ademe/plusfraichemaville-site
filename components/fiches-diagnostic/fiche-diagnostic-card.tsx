@@ -9,7 +9,6 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
 import { FicheDiagnosticSaveButton } from "./fiche-diagnostic-save-button";
 import clsx from "clsx";
-import Link from "next/link";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import { TypeFiche } from "@/helpers/common";
 
@@ -107,24 +106,24 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             <PictoEchelleSelector pictoId={ficheDiagnostic.attributes.echelle!} className="w-12" />
           </div>
           {vertical ? (
-            <Link
-              href={ficheUrl}
+            <div
+              // href={ficheUrl}
               className={
                 "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 pb-5 rounded-3xl px-9"
               }
             >
               {"J'explore la méthode"}
-            </Link>
+            </div>
           ) : (
-            <Link
-              href={ficheUrl}
+            <div
+              // href={ficheUrl}
               className={clsx(
                 "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 pb-5 rounded-3xl px-9",
                 "!block lg:!hidden",
               )}
             >
               {"J'explore la méthode"}
-            </Link>
+            </div>
           )}
         </div>
       </FicheDiagnosticLink>
