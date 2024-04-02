@@ -16,6 +16,7 @@ import { UserStoreServer } from "@/stores/user/server";
 import { UseBookmarkedFichesSolutions } from "@/hooks/use-bookmark-fiches-solutions";
 // eslint-disable-next-line max-len
 import { FicheDiagnosticSaveFromLocalStorage } from "@/components/fiches-diagnostic/fiche-diagnostic-save-from-local-storage";
+import { Test } from "@/components/common/generic-save-fiche-button";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -63,7 +64,10 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <FicheDiagnosticSaveFromLocalStorage />
           <AppHeader />
           <Toaster position="bottom-left" />
-          <div className={`${xtra_bold.variable}`}>{children}</div>
+          <div className={`${xtra_bold.variable}`}>
+            <Test />
+            {children}
+          </div>
         </MainLayoutProviders>
       </body>
     </html>
