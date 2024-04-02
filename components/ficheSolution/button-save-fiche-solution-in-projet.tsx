@@ -52,7 +52,11 @@ export const ButtonSaveFicheSolutionInProjet = ({
             <span className="text-dsfr-text-label-blue-france">{projet.nom}</span>
           </span>
         </div>
-        <Button priority="primary" className="rounded-3xl !min-h-fit !text-sm ml-20 mr-4" onClick={() => modal.close()}>
+        <Button
+          priority="primary"
+          className="rounded-3xl !min-h-fit !text-sm md:ml-20 mr-4"
+          onClick={() => modal.close()}
+        >
           Continuer ma lecture
         </Button>
         <Link

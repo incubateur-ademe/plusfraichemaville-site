@@ -24,10 +24,14 @@ const cards: TableauDeBordSuiviCardProps[] = [
     title: "Je fais un diagnostic de surchauffe urbaine",
     index: 1,
     progress: "0",
-    disabled: false,
+    disabled: true,
     type: "diagnostic",
     picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
-    children: <TableauDeBordSuiviWithImages></TableauDeBordSuiviWithImages>,
+    children: (
+      <TableauDeBordSuiviWithText>
+        Comprendre les enjeux de surchauffe sur votre territoire avec des données tangibles.
+      </TableauDeBordSuiviWithText>
+    ),
   },
   {
     title: "Je renseigne mon projet",
