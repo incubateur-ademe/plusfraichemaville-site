@@ -69,19 +69,21 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             <p className={clsx("text-sm max-w-[350px] leading-6", vertical ? "mb-11" : "mb-11 lg:mb-3")}>
               {ficheDiagnostic.attributes.description_courte}
             </p>
-            <div className={clsx(vertical ? "block" : "block lg:flex")}>
+            <div className={clsx(vertical ? "block" : "block lg:flex lg:mb-4")}>
               <div className={clsx(vertical ? "block mb-3" : "block mb-3 lg:flex lg:mr-6 lg:mb-0")}>
                 {vertical ? (
                   <small className="text-dsfr-text-disabled-grey">Coût</small>
                 ) : (
                   <small className="text-dsfr-text-disabled-grey inline lg:hidden">Coût</small>
                 )}
-                <div className="h-4 mr-2">{cout?.icons(TypeFiche.diagnostic, "before:!w-4")}</div>
-                {!vertical && (
-                  <small className="text-dsfr-text-disabled-grey hidden lg:block">
-                    de {coutMin} à {coutMax} euros HT
-                  </small>
-                )}
+                <div className="flex items-center">
+                  <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
+                  {!vertical && (
+                    <small className="text-dsfr-text-disabled-grey hidden lg:block">
+                      de {coutMin} à {coutMax} euros HT
+                    </small>
+                  )}
+                </div>
               </div>
               <div className={clsx(vertical ? "block" : "block lg:flex")}>
                 {vertical ? (
@@ -89,12 +91,14 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
                 ) : (
                   <small className="text-dsfr-text-disabled-grey inline lg:hidden">Temporalité</small>
                 )}
-                <div className="h-4 mr-2 mb-4">{delai?.icons(TypeFiche.diagnostic, "before:!w-4")}</div>
-                {!vertical && (
-                  <small className="text-dsfr-text-disabled-grey hidden lg:block">
-                    {delaiMin} à {delaiMax} mois
-                  </small>
-                )}
+                <div className="flex items-center">
+                  <div className="mr-2">{delai?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
+                  {!vertical && (
+                    <small className="text-dsfr-text-disabled-grey hidden lg:block">
+                      {delaiMin} à {delaiMax} mois
+                    </small>
+                  )}
+                </div>
               </div>
             </div>
           </div>

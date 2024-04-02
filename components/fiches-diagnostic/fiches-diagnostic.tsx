@@ -15,7 +15,9 @@ export const FichesDiagnostic = ({ fichesDiagnostic }: FichesDiagnosticProps) =>
 
   const filteredFichesDiagnostic = fichesDiagnostic.filter((fiche) => {
     const isFilterInactive = !filters.echelle && (!filters.methode || filters.methode.length === 0);
-    const matchesEchelle = filters.echelle ? fiche.attributes.echelle === filters.echelle : true;
+    const matchesEchelle = filters.echelle
+      ? fiche.attributes.echelle === filters.echelle || !fiche.attributes.echelle
+      : true;
     const matchesMethode = filters.methode?.length ? filters.methode.includes(fiche.attributes.methode!) : true;
     return isFilterInactive || (matchesEchelle && matchesMethode);
   });
