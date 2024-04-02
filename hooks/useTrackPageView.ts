@@ -1,3 +1,5 @@
+"use client";
+
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { trackPageView } from "@/helpers/matomo/trackEvent";

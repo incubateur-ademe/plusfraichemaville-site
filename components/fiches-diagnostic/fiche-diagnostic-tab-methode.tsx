@@ -50,7 +50,7 @@ export const FicheDiagnosticMethodeTab = ({
         </div>
         <div
           className={clsx(
-            "h-fit rounded-2xl shrink-0",
+            "h-fit rounded-2xl shrink-0 md:ml-14",
             "md:w-80 md:bg-dsfr-background-alt-red-marianne md:pl-6 md:pt-8 md:pr-4 md:pb-14",
           )}
         >
