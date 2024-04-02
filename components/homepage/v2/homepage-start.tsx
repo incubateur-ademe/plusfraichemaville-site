@@ -29,7 +29,7 @@ export const HomepageStart = () => {
                 <h4
                   className={clsx(
                     "text-base text-center lg:text-left lg:text-[28px] text-pfmv-navy mb-3",
-                    "px-10 lg:px-0",
+                    "px-10 lg:px-0 lg:leading-8",
                   )}
                 >
                   {line.title}

@@ -15,7 +15,7 @@ export const homepageData = {
     },
     cta2: {
       label: "Créer un projet",
-      url: PFMV_ROUTES.ESPACE_PROJET,
+      url: PFMV_ROUTES.CREATE_PROJET,
     },
   },
   projet: {
@@ -26,7 +26,7 @@ export const homepageData = {
     ],
     cta: {
       label: "Je crée un projet",
-      url: PFMV_ROUTES.ESPACE_PROJET,
+      url: PFMV_ROUTES.CREATE_PROJET,
     },
     image: "/images/homepage/home-hero.png",
   },

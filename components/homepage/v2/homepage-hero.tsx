@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { homepageData } from "./homepage-data";
 import { HomepageHeroPictos } from "./homepage-hero-pictos";
+import clsx from "clsx";
 
 export const HomepageHero = () => {
   const { hero } = homepageData;
@@ -10,7 +11,12 @@ export const HomepageHero = () => {
         <h1 className="px-10 lg:px-0 text-2xl lg:text-4xl text-center mb-8 lg:mb-12 text-pfmv-navy font-normal">
           {hero.title()}
         </h1>
-        <h2 className="mb-10 px-10 lg:px-0 text-base lg:text-[26px] font-bold text-pfmv-navy text-center max-w-2xl">
+        <h2
+          className={clsx(
+            "mb-10 px-10 lg:px-0 text-base lg:text-[26px] font-bold text-pfmv-navy text-center max-w-2xl",
+            "lg:leading-9",
+          )}
+        >
           {hero.baseline}
         </h2>
         <div className="flex gap-4 justify-center flex-col lg:flex-row items-center">
