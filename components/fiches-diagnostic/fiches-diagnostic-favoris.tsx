@@ -7,12 +7,14 @@ export const FichesDiagnosticFavoris = ({
   bookmarkedFichesDiagnostic?: string[] | number[];
 }) => {
   return (
-    <div className="mb-10">
+    <div className="mb-20">
       <div className="fr-h3">Mes méthodes de diagnostic mises en favoris</div>
       {bookmarkedFichesDiagnostic && bookmarkedFichesDiagnostic.length > 0 ? (
-        bookmarkedFichesDiagnostic.map((ficheDiagnosticId, index) => (
-          <FicheDiagnosticCardWithFetcher ficheDiagnosticId={+ficheDiagnosticId} key={index} vertical />
-        ))
+        <div className="flex flex-wrap p-0 m-0 gap-6 justify-center lg:justify-normal">
+          {bookmarkedFichesDiagnostic.map((ficheDiagnosticId, index) => (
+            <FicheDiagnosticCardWithFetcher ficheDiagnosticId={+ficheDiagnosticId} key={index} vertical />
+          ))}
+        </div>
       ) : (
         <FichesDiagnosticFavorisEmpty />
       )}
