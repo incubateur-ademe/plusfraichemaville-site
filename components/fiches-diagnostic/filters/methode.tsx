@@ -11,9 +11,9 @@ export const ALL_METHODES = [
 
 export const MethodeFilter = ({ updater, isActive }: FichesDiagnosticFilterUpdater) => {
   return (
-    <div className="md:min-w-[13rem]">
-      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-3">Types de méthodes</div>
-      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink gap-4`}>
+    <div className="md:min-w-[13rem] mb-10 lg:mb-0">
+      <div className="text-sm text-center lg:text-left text-dsfr-text-mention-grey mb-5 lg:mb-3">Types de méthodes</div>
+      <div className={`flex flex-row lg:flex-col justify-center lg:justify-start flex-wrap shrink gap-4`}>
         {ALL_METHODES.map((methode) => (
           <button
             key={methode.code}

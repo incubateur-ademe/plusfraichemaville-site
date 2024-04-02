@@ -23,7 +23,7 @@ export const FichesDiagnostic = ({ fichesDiagnostic }: FichesDiagnosticProps) =>
   return (
     <div className="fr-container">
       <EchelleFilter updater={updater} isActive={isActive} />
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row">
         <MethodeFilter updater={updater} isActive={isActive} />
         <FichesDiagnosticList fichesDiagnostic={filteredFichesDiagnostic} />
       </div>
