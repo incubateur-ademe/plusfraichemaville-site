@@ -1,10 +1,11 @@
 import React from "react";
-import { getCoutFicheSolution } from "@/helpers/coutFicheSolution";
-import { getDelaiTravauxFicheSolution } from "@/helpers/delaiTravauxFicheSolution";
+import { getCoutFiche } from "@/helpers/coutFiche";
+import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getPorteeBaisseTemperatureLabelFromCode } from "@/helpers/porteeBaisseTemperatureFicheSolution";
 import baisseICUIcon from "../../public/images/fiches-solutions/picto-thermometre.svg";
 import Image from "next/image";
+import { TypeFiche } from "@/helpers/common";
 
 export default function FicheSolutionInfoComparatif({
   ficheSolution,
@@ -15,11 +16,12 @@ export default function FicheSolutionInfoComparatif({
   className?: string;
   temperatureFormat: "large" | "small";
 }) {
-  const delaiTravaux = getDelaiTravauxFicheSolution(
+  const delaiTravaux = getDelaiTravauxFiche(
+    TypeFiche.solution,
     ficheSolution.delai_travaux_minimum,
     ficheSolution.delai_travaux_maximum,
   );
-  const cout = getCoutFicheSolution(ficheSolution.cout_minimum, ficheSolution.cout_maximum);
+  const cout = getCoutFiche(TypeFiche.solution, ficheSolution.cout_minimum, ficheSolution.cout_maximum);
   return (
     <div className={`${className}`}>
       {!!ficheSolution.baisse_temperature && (
@@ -54,7 +56,7 @@ export default function FicheSolutionInfoComparatif({
         <hr className="pb-2 mt-3" />
         <div className="text-dsfr-text-mention-grey">Délai des travaux</div>
         <div className="inline-block w-full">
-          <div className="float-left text-base">{delaiTravaux?.icons("fr-icon--sm")}</div>
+          <div className="float-left text-base">{delaiTravaux?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
           <div className="float-right text-dsfr-text-mention-grey mt-1">
             {`de ${ficheSolution.delai_travaux_minimum} à ${ficheSolution.delai_travaux_maximum} mois`}
           </div>
@@ -65,7 +67,7 @@ export default function FicheSolutionInfoComparatif({
         <div className="text-dsfr-text-mention-grey">Coût</div>
         <div className="inline-block w-full">
           <div className="float-left">
-            <div className="float-left text-base">{cout?.icons("fr-icon--sm")}</div>
+            <div className="float-left text-base">{cout?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
           </div>
           <div className="float-right text-dsfr-text-mention-grey mt-1">
             {`de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € / m²`}

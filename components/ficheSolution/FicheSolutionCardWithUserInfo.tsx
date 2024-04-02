@@ -27,7 +27,7 @@ export default function FicheSolutionCardWithUserInfo({
       <FicheSolutionFullCard ficheSolution={ficheSolution.attributes} extraUrlParams={extraUrlParams} />
       {children}
       {projetId ? (
-        <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} />
+        <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} className="absolute top-2 right-2" />
       ) : (
         <ButtonSaveFicheSolution
           ficheSolutionId={ficheSolution.id}

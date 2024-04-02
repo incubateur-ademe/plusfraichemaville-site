@@ -12,7 +12,7 @@ export const FicheDiagnostic = ({ ficheDiagnostic }: FicheDiagnosticProps) => {
   return (
     <div>
       <FicheDiagnosticHeader attributes={attributes} />
-      <FicheDiagnosticTabs attributes={attributes} />
+      <FicheDiagnosticTabs ficheDiagnostic={ficheDiagnostic} />
     </div>
   );
 };

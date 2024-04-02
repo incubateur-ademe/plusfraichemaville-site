@@ -20,6 +20,25 @@ export interface CommonCitation extends Schema.Component {
   };
 }
 
+export interface FicheDiagnosticEtapeMiseEnOeuvre extends Schema.Component {
+  collectionName: "components_fiche_diagnostic_etape_mise_en_oeuvres";
+  info: {
+    displayName: "Etape_mise_en_oeuvre";
+  };
+  attributes: {
+    titre: Attribute.String & Attribute.Required;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+  };
+}
+
 export interface FicheSolutionAideRegionale extends Schema.Component {
   collectionName: "components_fiche_solution_aide_regionales";
   info: {
@@ -168,6 +187,7 @@ declare module "@strapi/types" {
   export module Shared {
     export interface Components {
       "common.citation": CommonCitation;
+      "fiche-diagnostic.etape-mise-en-oeuvre": FicheDiagnosticEtapeMiseEnOeuvre;
       "fiche-solution.aide-regionale": FicheSolutionAideRegionale;
       "fiche-solution.etape-diagnostic": FicheSolutionEtapeDiagnostic;
       "fiche-solution.etape-entretien": FicheSolutionEtapeEntretien;

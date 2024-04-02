@@ -52,7 +52,7 @@ export default function ButtonSaveFicheSolution({
   return (
     <div>
       <>
-        <div className={`${className}`}>
+        <div className={className}>
           {label || isBookmarked ? (
             <Button
               className={"fr-icon--sm rounded-3xl text-sm"}

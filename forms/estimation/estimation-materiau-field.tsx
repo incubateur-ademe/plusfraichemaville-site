@@ -25,7 +25,7 @@ export default function EstimationMateriauField({
         <div className="w-28 h-28 relative flex flex-none mt-8">
           <Image
             fill
-            sizes="5vw"
+            sizes="30vw md:5vw"
             src={getStrapiImageUrl(materiau.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
             alt={materiau.attributes.titre}
             className={"object-cover rounded-2xl"}

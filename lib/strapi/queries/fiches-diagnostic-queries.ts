@@ -1,6 +1,6 @@
 "use server";
 
-import { FicheDiagnosticResponse, FichesDiagnosticResponse } from "./../../../components/fiches-diagnostic/types";
+import { FicheDiagnosticResponse, FichesDiagnosticResponse } from "@/components/fiches-diagnostic/types";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "../helpers/strapiArrayUtils";
 import { strapiGraphQLCall } from "../strapiClient";
 import { APIResponseCollection } from "../types/types";
@@ -30,14 +30,7 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = (
             ...FicheDiagnosticCardInfo
           }
         }
-        materiel_fiche_diagnostics {
-          data {
-            attributes {
-              titre
-              description
-            }
-          }
-        }
+        materiel
         rank
         image_principale {
           ...ImageInfo
