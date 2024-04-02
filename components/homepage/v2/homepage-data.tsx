@@ -116,8 +116,6 @@ export const homepageData = {
       climat_futur: "mediterraneen",
       titre: "À Lyon, les arbres de pluie comme armes de résilience",
       image_principale: "/images/homepage/rex/lyon-arbres-de-pluie.jpeg",
-      // eslint-disable-next-line max-len
-      description: `<p>Le projet "arbres de pluie" à Lyon, initié fin 2020 dans le cadre du programme européen <a target="_blank" rel="noopener noreferrer" href="https://www.ofb.gouv.fr/le-projet-life-integre-artisan">Life ARTISAN</a>, offre une solution prometteuse face au réchauffement climatique et à la dégradation urbaine. Porté par la Métropole de Lyon, ce projet vise à élargir les fosses qui entourent les arbres existants, afin de permettre une meilleure infiltration des eaux de pluie et le rafraîchissement de la ville. Par la capture de carbone, la recharge des nappes phréatiques et le refuge qu’ils constituent pour la biodiversité, les arbres se transforment en alliés précieux pour l'environnement. De plus, cette initiative crée des îlots de fraîcheur grâce à l'évapotranspiration des arbres. Les résultats probants des premières installations, avec une absorption complète des petites pluies et une meilleure résilience face aux sécheresses, témoignent de l'efficacité de ce projet bénéfique pour l'amélioration du cadre de vie urbain et la préservation de la nature.&nbsp;</p>`,
       region: {
         data: {
           attributes: {
