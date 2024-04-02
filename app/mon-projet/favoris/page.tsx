@@ -8,8 +8,8 @@ import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
-import { FicheDiagnosticCardWithFetcher } from "@/components/fiches-diagnostic/fiche-diagnostic-card-with-fetcher";
 import { getFichesDiagnosticFromLocalStorage } from "@/components/fiches-diagnostic/helpers";
+import { FichesDiagnosticFavoris } from "@/components/fiches-diagnostic/fiches-diagnostic-favoris";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -42,12 +42,7 @@ export default function Page() {
             />
           )}
         </div>
-        <div>
-          {bookmarkedFichesDiagnostic &&
-            bookmarkedFichesDiagnostic.map((ficheDiagnosticId, index) => (
-              <FicheDiagnosticCardWithFetcher ficheDiagnosticId={+ficheDiagnosticId} key={index} vertical />
-            ))}
-        </div>
+        <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
         {bookmarkedFichesSolutions && bookmarkedFichesSolutions.length === 0 ? (
           <div>
             <div className="fr-h3">Mes solutions sauvegardées</div>
