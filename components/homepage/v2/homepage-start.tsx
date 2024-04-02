@@ -13,8 +13,8 @@ export const HomepageStart = () => {
       </h3>
       <div className="mx-auto max-w-5xl">
         {start.lines.map((line, index) => (
-          <>
-            <div className={clsx("flex justify-between items-center flex-col lg:flex-row")} key={index}>
+          <div key={index}>
+            <div className={clsx("flex justify-between items-center flex-col lg:flex-row")}>
               <div className="max-w-xl">
                 <div className="block mx-auto lg:hidden w-[331px]">
                   <Image
@@ -63,7 +63,7 @@ export const HomepageStart = () => {
             {index === 0 && (
               <Separator className={clsx("mx-auto my-10 lg:my-20 bg-pfmv-navy opacity-10", "w-4/5 lg:w-full")} />
             )}
-          </>
+          </div>
         ))}
       </div>
     </div>

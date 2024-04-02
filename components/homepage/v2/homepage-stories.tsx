@@ -20,7 +20,7 @@ export const HomepageStories = () => {
           hasTrack={false}
           options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
         >
-          <SplideTrack className="!pl-3 lg:!pl-6 !overflow-scroll !lg:overflow-hidden">
+          <SplideTrack className="!pl-3 lg:!pl-6 overflow-auto lg:!overflow-hidden">
             {stories.cards.map((story, index) => (
               <SplideSlide className="!mr-3 md:!mr-6" key={index}>
                 <HomepageStory story={story} key={index} />
@@ -31,7 +31,7 @@ export const HomepageStories = () => {
           <div
             className={clsx(
               "splide__arrows absolute left-0 px-6 top-1/2",
-              "-translate-y-1/2 w-screen flex justify-between items-center",
+              "-translate-y-1/2 w-full flex justify-between items-center",
               "hidden lg:flex",
             )}
           >

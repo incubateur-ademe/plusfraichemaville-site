@@ -68,12 +68,15 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
           Ajouter au projet
         </Button>
       </div>
-      <Button priority="primary" className="rounded-3xl !min-h-fit !text-sm ml-20 mr-4" onClick={() => modal.close()}>
+      <Button
+        priority="primary"
+        className="rounded-3xl !min-h-fit !text-sm md:ml-20 mr-4"
+        onClick={() => modal.close()}
+      >
         Continuer ma lecture
       </Button>
       <Link
         href={PFMV_ROUTES.MES_FICHES_SOLUTIONS}
-        // onClick={() => modal.close()}
         className="fr-btn fr-btn--secondary rounded-3xl !min-h-fit !text-sm mr-4"
       >
         Voir mes fiches solutions
