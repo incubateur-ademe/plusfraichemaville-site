@@ -45,7 +45,7 @@ export default function Page() {
         <div>
           {bookmarkedFichesDiagnostic &&
             bookmarkedFichesDiagnostic.map((ficheDiagnosticId, index) => (
-              <FicheDiagnosticCardWithFetcher ficheDiagnosticId={+ficheDiagnosticId} key={index} horizontal />
+              <FicheDiagnosticCardWithFetcher ficheDiagnosticId={+ficheDiagnosticId} key={index} vertical />
             ))}
         </div>
         {bookmarkedFichesSolutions && bookmarkedFichesSolutions.length === 0 ? (
