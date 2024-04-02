@@ -8,8 +8,8 @@ import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
-import { FicheDiagnosticCardWithFetcher } from "@/components/fiches-diagnostic/fiche-diagnostic-card-with-fetcher";
 import { getFichesDiagnosticFromLocalStorage } from "@/components/fiches-diagnostic/helpers";
+import { FichesDiagnosticFavoris } from "@/components/fiches-diagnostic/fiches-diagnostic-favoris";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -18,7 +18,7 @@ export default function Page() {
   }, []);
   const session = useSession();
   const userBookmarkedFichesSolutions = useUserStore((state) => state.bookmarkedFichesSolutions);
-  const userBookmarkedFichesDiagnostic = useUserStore((state) => state.bookmarkedFichesDiagnostic);
+  const userBookmarkedFichesDiagnostic = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic);
   const [bookmarkedFichesSolutionsInLocalStorage] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
 
   const bookmarkedFichesSolutions =
@@ -30,7 +30,7 @@ export default function Page() {
   return (
     isClient && (
       <div
-        className="fr-container text-dsfr-text-title-grey pt-8 flex flex-row flex-wrap first:flex-[1_0_50%] gap-8
+        className="fr-container text-dsfr-text-title-grey pt-10 flex flex-row flex-wrap first:flex-[1_0_50%]
           flex-[0_1_100%] order-1 [&>*:not(:nth-child(2))]:w-full [&>*:nth-child(2)]:grow items-start
           place-content-center"
       >
@@ -42,12 +42,7 @@ export default function Page() {
             />
           )}
         </div>
-        <div>
-          {bookmarkedFichesDiagnostic &&
-            bookmarkedFichesDiagnostic.map((ficheDiagnosticId, index) => (
-              <FicheDiagnosticCardWithFetcher ficheDiagnosticId={+ficheDiagnosticId} key={index} vertical />
-            ))}
-        </div>
+        <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
         {bookmarkedFichesSolutions && bookmarkedFichesSolutions.length === 0 ? (
           <div>
             <div className="fr-h3">Mes solutions sauvegardées</div>

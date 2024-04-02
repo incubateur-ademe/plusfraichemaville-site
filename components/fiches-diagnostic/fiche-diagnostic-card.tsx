@@ -29,12 +29,14 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
   const ficheUrl = PFMV_ROUTES.FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug);
 
   return (
-    <div className={clsx("pfmv-card lg:h-fit relative", vertical ? "w-72" : "w-72 lg:max-w-[900px] lg:w-full")}>
+    <div
+      className={clsx("pfmv-card lg:h-fit relative", vertical ? "w-72 lg:!h-auto" : "w-72 lg:max-w-[900px] lg:w-full")}
+    >
       <FicheDiagnosticLink href={ficheUrl}>
         <div
           className={clsx(
             "bg-dsfr-background-alt-red-marianne rounded-[0.9375rem]",
-            vertical ? "flex flex-col pb-5 h-auto" : "flex flex-col pb-5 h-full lg:h-fit lg:pb-0 lg:flex lg:flex-row",
+            vertical ? "flex flex-col pb-5 h-full" : "flex flex-col pb-5 h-full lg:h-fit lg:pb-0 lg:flex lg:flex-row",
           )}
         >
           <div
