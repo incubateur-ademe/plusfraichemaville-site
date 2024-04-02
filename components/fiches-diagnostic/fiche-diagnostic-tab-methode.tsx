@@ -82,23 +82,36 @@ export const FicheDiagnosticMethodeTab = ({
         <FicheDiagnosticTabBlocText title="Besoin de la collectivité" text={attributes.besoin} small />
         <FicheDiagnosticTabBlocText title="Les indicateurs étudiés" text={attributes.indicateurs} small />
       </div>
-      <Separator className="mt-6 mb-12" />
-      <FicheDiagnosticTabBlocText
-        title="En savoir plus"
-        text={attributes.en_savoir_plus_description}
-        textClassName="[&>*]:mb-2"
-      />
-
-      <Separator className="my-12" />
-      <div>
-        <h3 className="text-2xl mb-1">Méthodologies associées</h3>
-        <span className="mb-14 block">Consultez les méthodologies de diagnostic associées</span>
-        <div className="pr-5">
-          {attributes.fiches_diagnostics_associees?.data.map((ficheDiagnostic) => (
-            <FicheDiagnosticCard ficheDiagnostic={ficheDiagnostic} />
-          ))}
-        </div>
-      </div>
+      {!!attributes.en_savoir_plus_description && (
+        <>
+          <Separator className="mt-6 mb-12" />
+          <FicheDiagnosticTabBlocText
+            title="En savoir plus"
+            text={attributes.en_savoir_plus_description}
+            textClassName="[&>*]:mb-2"
+          />
+        </>
+      )}
+      {attributes.fiches_diagnostics_associees?.data && attributes.fiches_diagnostics_associees.data.length > 0 && (
+        <>
+          <Separator className="my-12" />
+          <div>
+            <h3 className="text-2xl mb-1">Méthodologies associées</h3>
+            <span className="mb-6 block">Consultez les méthodologies de diagnostic associées</span>
+            <div className="px-2 flex flex-wrap gap-6">
+              {attributes.fiches_diagnostics_associees?.data.map((ficheDiagnostic) => (
+                <FicheDiagnosticCard ficheDiagnostic={ficheDiagnostic} key={ficheDiagnostic.id} />
+              ))}
+            </div>
+          </div>
+        </>
+      )}
+      {!!attributes.partenaire && (
+        <>
+          <Separator className="mt-6 mb-12" />
+          <FicheDiagnosticTabBlocText title="Crédit" text={attributes.partenaire} textClassName="[&>*]:mb-2" />
+        </>
+      )}
     </div>
   );
 };

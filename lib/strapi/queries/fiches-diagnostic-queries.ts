@@ -46,6 +46,7 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = (
         avantage_description
         vigilance_description
         en_savoir_plus_description
+        partenaire
       }
     }
   }
