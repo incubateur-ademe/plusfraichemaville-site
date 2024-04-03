@@ -30,7 +30,10 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
 
   return (
     <div
-      className={clsx("pfmv-card lg:h-fit relative", vertical ? "w-72 lg:!h-auto" : "w-72 lg:max-w-[900px] lg:w-full")}
+      className={clsx(
+        "pfmv-card lg:h-fit relative",
+        vertical ? "w-72 lg:!h-auto" : "w-72 lg:max-w-[900px] lg:w-[53rem]",
+      )}
     >
       <FicheDiagnosticLink href={ficheUrl}>
         <div

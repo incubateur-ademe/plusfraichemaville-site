@@ -16,13 +16,11 @@ export const FicheDiagnosticProjetListe = () => {
 
   return (
     <div>
-      <div className="flex lg:items-center gap-8 mb-10 flex-col lg:flex-row">
+      <div className="flex items-center gap-8 mb-10 flex-row flex-wrap">
         {savedFichesDiagnostic?.length === 0 && <FichesDiagnosticProjetEmpty />}
-        <div className="flex flex-row flex-wrap lg:flex-col gap-6 w-full ">
-          {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
-            <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
-          ))}
-        </div>
+        {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
+          <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
+        ))}
         <div>
           <FicheDiagnosticProjetListeAddButton />
         </div>
