@@ -1,5 +1,3 @@
-"use client";
-
 import RetourExperienceCard, { RexInHome } from "@/components/retourExperience/RetourExperienceCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import clsx from "clsx";
