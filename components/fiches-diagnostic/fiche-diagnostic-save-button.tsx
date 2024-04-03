@@ -37,6 +37,7 @@ export const FicheDiagnosticSaveButton = ({
 
   const projetPicto = isSavedInDatabase ? "ri-add-circle-fill" : "ri-add-circle-line";
   const label = isSavedInStorage || isSavedInDatabase ? "Sauvegardée" : showLabel ? "Sauvegarder" : "";
+
   const userBookmarkPicto = isSavedInStorage || isSavedInDatabase ? "fr-icon-bookmark-fill" : "fr-icon-bookmark-line";
   const picto = projetId ? projetPicto : userBookmarkPicto;
 
