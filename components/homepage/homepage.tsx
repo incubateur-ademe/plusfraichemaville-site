@@ -5,7 +5,7 @@ import { HomepageStart } from "./homepage-start";
 import { HomepageStories } from "./homepage-stories";
 import { HomepageNewsletter } from "./homepage-newsletter";
 
-export const HomepageV2 = () => {
+export const Homepage = () => {
   return (
     <div>
       <HomepageHero />
