@@ -4,6 +4,7 @@ import { HomepageProjet } from "./homepage-projet";
 import { HomepageStart } from "./homepage-start";
 import { HomepageStories } from "./homepage-stories";
 import { HomepageNewsletter } from "./homepage-newsletter";
+import { HomepageOdd } from "@/components/homepage/homepage-odd";
 
 export const Homepage = () => {
   return (
@@ -14,6 +15,7 @@ export const Homepage = () => {
       <HomepageStart />
       <HomepageInspirer />
       <HomepageNewsletter />
+      <HomepageOdd />
     </div>
   );
 };
