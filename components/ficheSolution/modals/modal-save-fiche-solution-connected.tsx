@@ -43,10 +43,10 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
         <span className="text-2xl font-bold block">Solution ajoutée dans Ma sélection</span>
       </div>
       <span>
-        Retrouvez toutes vos solutions mises en favoris dans Ma sélection. <br />
+        Retrouvez toutes vos solutions mises en favoris dans Ma sélection. <br /><br />
         Voulez-vous ajouter aussi cette solution dans l’un de vos projets ?
       </span>
-      <div className="my-10 flex items-center gap-5">
+      <div className="mt-2 mb-10 flex items-center gap-5">
         <Select
           label=""
           className="w-96"
@@ -64,7 +64,11 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
             );
           })}
         </Select>
-        <Button className="rounded-3xl !h-fit !min-h-fit !text-sm !mb-3" onClick={validate}>
+        <Button
+          className="rounded-3xl !h-fit !min-h-fit !text-sm !mb-3"
+          onClick={validate}
+          disabled={selectedProjetId <= 0}
+        >
           Ajouter au projet
         </Button>
       </div>
