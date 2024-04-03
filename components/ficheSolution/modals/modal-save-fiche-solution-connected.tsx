@@ -43,7 +43,8 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
         <span className="text-2xl font-bold block">Solution ajoutée dans Ma sélection</span>
       </div>
       <span>
-        Retrouvez toutes vos solutions mises en favoris dans Ma sélection. <br /><br />
+        Retrouvez toutes vos solutions mises en favoris dans Ma sélection. <br />
+        <br />
         Voulez-vous ajouter aussi cette solution dans l’un de vos projets ?
       </span>
       <div className="mt-2 mb-10 flex items-center gap-5">
