@@ -23,8 +23,10 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je fais un diagnostic de surchauffe urbaine",
     index: 1,
-    progress: "0",
-    disabled: true,
+    progress: (projet: ProjetWithRelations) => {
+      return projet?.fiches_diagnostic_id && projet.fiches_diagnostic_id.length > 0 ? "100" : "0";
+    },
+    disabled: false,
     type: "diagnostic",
     picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
     children: (
