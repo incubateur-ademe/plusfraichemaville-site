@@ -2,7 +2,7 @@ import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bord";
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
 
-import { TableauDeBordSuiviWithFichesSolutions } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
+import { TableauDeBordSuiviWithImages } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
 import { TableauDeBordSuiviCardInfoProjet } from "./tableau-de-bord-suivi-card-info-projet";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
 import { getLastCompletedEstimation } from "@/helpers/estimation";
@@ -21,7 +21,7 @@ export const TableauDeBordSuivi = () => {
 
 const cards: TableauDeBordSuiviCardProps[] = [
   {
-    title: "Je fais un diagnostic de surchauffe urbaine",
+    title: "Je choisis une méthode de diagnostic",
     index: 1,
     progress: "0",
     disabled: true,
@@ -53,7 +53,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     disabled: false,
     type: "solution",
     picto: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,
-    children: <TableauDeBordSuiviWithFichesSolutions />,
+    children: <TableauDeBordSuiviWithImages />,
   },
   {
     title: "Je fais une estimation de budget pour mon projet",

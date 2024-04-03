@@ -23,6 +23,9 @@ dependencies:
   '@sentry/nextjs':
     specifier: 7.77.0
     version: 7.77.0(next@14.0.4)(react@18.2.0)(webpack@5.89.0)
+  '@splidejs/react-splide':
+    specifier: ^0.7.12
+    version: 0.7.12
   clsx:
     specifier: ^2.1.0
     version: 2.1.0
@@ -47,9 +50,6 @@ dependencies:
   react-hot-toast:
     specifier: ^2.4.1
     version: 2.4.1(csstype@3.1.3)(react-dom@18.2.0)(react@18.2.0)
-  react-image-gallery:
-    specifier: ^1.3.0
-    version: 1.3.0(react@18.2.0)
   react-loader-spinner:
     specifier: ^5.4.5
     version: 5.4.5(@babel/core@7.24.0)(react-dom@18.2.0)(react@18.2.0)
@@ -2836,6 +2836,16 @@ packages:
       escape-string-regexp: 2.0.0
       lodash.deburr: 4.1.0
     dev: true
+
+  /@splidejs/react-splide@0.7.12:
+    resolution: {integrity: sha512-UfXH+j47jsMc4x5HA/aOwuuHPqn6y9+ZTNYPWDRD8iLKvIVMZlzq2unjUEvyDAU+TTVPZOXkG2Ojeoz0P4AkZw==}
+    dependencies:
+      '@splidejs/splide': 4.1.4
+    dev: false
+
+  /@splidejs/splide@4.1.4:
+    resolution: {integrity: sha512-5I30evTJcAJQXt6vJ26g2xEkG+l1nXcpEw4xpKh0/FWQ8ozmAeTbtniVtVmz2sH1Es3vgfC4SS8B2X4o5JMptA==}
+    dev: false
 
   /@strapi/admin@4.16.2(@babel/runtime@7.24.0)(@codemirror/autocomplete@6.14.0)(@codemirror/language@6.10.1)(@codemirror/lint@6.5.0)(@codemirror/search@6.5.6)(@codemirror/state@6.4.1)(@codemirror/theme-one-dark@6.1.2)(@codemirror/view@6.25.1)(@strapi/data-transfer@4.16.2)(@strapi/strapi@4.16.2)(@types/node@20.8.2)(@types/react-dom@18.2.10)(@types/react@18.2.25)(codemirror@5.65.16)(debug@4.3.4)(react-dom@18.2.0)(react-router-dom@5.3.4)(react@18.2.0)(redux@4.2.1)(styled-components@5.3.3):
     resolution: {integrity: sha512-kmz7QBGJcSjMdSA7jL3D9cj/xyZYPBiIqJFMSwMuc2P4Mr0QK1lKX3I6SCSMjLjEzjDi88vZEpuz0WUNegKQfQ==}
@@ -10122,14 +10132,6 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
       - csstype
-    dev: false
-
-  /react-image-gallery@1.3.0(react@18.2.0):
-    resolution: {integrity: sha512-lKnPaOzxqSdujPFyl+CkVw0j1aYoNCHk61cvr1h7aahf5aWqmPcR9YhUB4cYrt5Tn5KHDaPUzYm5/+cX9WxzaA==}
-    peerDependencies:
-      react: ^16.0.0 || ^17.0.0 || ^18.0.0
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /react-intl@6.4.1(react@18.2.0)(typescript@5.2.2):

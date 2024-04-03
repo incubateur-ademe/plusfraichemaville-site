@@ -44,9 +44,10 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
       </div>
       <span>
         Retrouvez toutes vos solutions mises en favoris dans Ma sélection. <br />
+        <br />
         Voulez-vous ajouter aussi cette solution dans l’un de vos projets ?
       </span>
-      <div className="my-10 flex items-center gap-5">
+      <div className="mt-2 mb-10 flex items-center gap-5">
         <Select
           label=""
           className="w-96"
@@ -64,16 +65,23 @@ export const ModalSaveFichesSolutionsConnected = ({ modal, ficheSolutionId }: Mo
             );
           })}
         </Select>
-        <Button className="rounded-3xl !h-fit !min-h-fit !text-sm !mb-3" onClick={validate}>
+        <Button
+          className="rounded-3xl !h-fit !min-h-fit !text-sm !mb-3"
+          onClick={validate}
+          disabled={selectedProjetId <= 0}
+        >
           Ajouter au projet
         </Button>
       </div>
-      <Button priority="primary" className="rounded-3xl !min-h-fit !text-sm ml-20 mr-4" onClick={() => modal.close()}>
+      <Button
+        priority="primary"
+        className="rounded-3xl !min-h-fit !text-sm md:ml-20 mr-4"
+        onClick={() => modal.close()}
+      >
         Continuer ma lecture
       </Button>
       <Link
         href={PFMV_ROUTES.MES_FICHES_SOLUTIONS}
-        // onClick={() => modal.close()}
         className="fr-btn fr-btn--secondary rounded-3xl !min-h-fit !text-sm mr-4"
       >
         Voir mes fiches solutions

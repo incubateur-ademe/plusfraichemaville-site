@@ -23,6 +23,11 @@ export default function NavigationMenu() {
           isActive: pathname?.startsWith(PFMV_ROUTES.AIDE_DECISION),
         },
         {
+          linkProps: { href: PFMV_ROUTES.FICHES_DIAGNOSTIC, target: "_self", onClick: cancelCurrentProjet },
+          text: "Méthodes de diagnostic",
+          isActive: pathname?.startsWith(PFMV_ROUTES.FICHES_DIAGNOSTIC),
+        },
+        {
           text: "Passer à l'action",
           isActive: pathname?.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS),
           linkProps: { href: PFMV_ROUTES.FICHES_SOLUTIONS, target: "_self", onClick: cancelCurrentProjet },

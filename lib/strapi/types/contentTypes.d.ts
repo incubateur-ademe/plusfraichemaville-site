@@ -680,6 +680,127 @@ export interface ApiCobeneficeCobenefice extends Schema.CollectionType {
   };
 }
 
+export interface ApiFicheDiagnosticFicheDiagnostic extends Schema.CollectionType {
+  collectionName: "fiche_diagnostics";
+  info: {
+    singularName: "fiche-diagnostic";
+    pluralName: "fiche-diagnostics";
+    displayName: "Fiche Diagnostic";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    titre: Attribute.String & Attribute.Required;
+    description_courte: Attribute.String & Attribute.Required;
+    description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    etapes_mise_en_oeuvre: Attribute.Component<"fiche-diagnostic.etape-mise-en-oeuvre", true>;
+    rank: Attribute.Integer;
+    image_principale: Attribute.Media;
+    echelle: Attribute.Enumeration<["territoire", "espace"]>;
+    methode: Attribute.Enumeration<
+      ["observation", "enquete", "simulation_numerique", "analyse_spatiale", "modelisation_spatiale"]
+    >;
+    slug: Attribute.String & Attribute.Required & Attribute.Unique;
+    besoin: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    indicateurs: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    delai_min: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    delai_max: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_min: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    cout_max: Attribute.Integer &
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
+    explication_source: Attribute.String;
+    avantage_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    vigilance_description: Attribute.RichText &
+      Attribute.Required &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    en_savoir_plus_description: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    fiches_diagnostics_associees: Attribute.Relation<
+      "api::fiche-diagnostic.fiche-diagnostic",
+      "oneToMany",
+      "api::fiche-diagnostic.fiche-diagnostic"
+    >;
+    materiel: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    partenaire: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<"api::fiche-diagnostic.fiche-diagnostic", "oneToOne", "admin::user"> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<"api::fiche-diagnostic.fiche-diagnostic", "oneToOne", "admin::user"> &
+      Attribute.Private;
+  };
+}
+
 export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
   collectionName: "fiche_solutions";
   info: {
@@ -1340,6 +1461,7 @@ declare module "@strapi/types" {
       "plugin::users-permissions.user": PluginUsersPermissionsUser;
       "api::aide-decision-etape.aide-decision-etape": ApiAideDecisionEtapeAideDecisionEtape;
       "api::cobenefice.cobenefice": ApiCobeneficeCobenefice;
+      "api::fiche-diagnostic.fiche-diagnostic": ApiFicheDiagnosticFicheDiagnostic;
       "api::fiche-solution.fiche-solution": ApiFicheSolutionFicheSolution;
       "api::materiau.materiau": ApiMateriauMateriau;
       // eslint-disable-next-line max-len

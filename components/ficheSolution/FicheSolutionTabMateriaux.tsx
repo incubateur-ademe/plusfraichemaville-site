@@ -36,6 +36,7 @@ export default function FicheSolutionTabMateriaux({
                         fill
                         src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
                         alt={mat.titre}
+                        sizes="30vw"
                         className={"object-cover rounded-2xl"}
                       />
                     </div>

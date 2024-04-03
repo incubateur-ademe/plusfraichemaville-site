@@ -26,7 +26,7 @@ export const useBookmarkedFichesSolutions = () => {
 
             if (saved.updatedBookmarkedFichesSolutions && saved.updatedBookmarkedFichesSolutions?.length > 0) {
               setBookmarkedFichesSolutions(saved.updatedBookmarkedFichesSolutions);
-              localStorage.clear();
+              localStorage.setItem(BOOKMARK_FS_KEY, JSON.stringify([]));
             }
           } catch (error) {
             console.warn(error);

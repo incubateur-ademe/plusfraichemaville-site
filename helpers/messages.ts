@@ -4,6 +4,8 @@ export const success = {
   ESTIMATION_VALIDATED: "Votre estimation a bien été enregistrée.",
   BOOKMARKED_SAVED_IN_DB: "Les fiches solutions ont bien été sauvegardées.",
   FICHES_SOLUTIONS_ADDED_TO_PROJET: "Les fiches solutions ont bien été ajoutées au projet en cours.",
+  FICHES_DIAGNOSTIC_ADDED_TO_PROJET: "Les fiches diagnostic ont bien été ajoutées au projet en cours.",
+  FICHE_DIAGNOSTIC_ADDED_TO_PROJET: "La fiche diagnostic a bien été ajoutée au projet en cours.",
   PROJET_DELETE: "Votre projet a bien été supprimé.",
   PROJETS_LOADED: "Les projets ont été chargés.",
   PROJET_UPSERTED: "Les informations du projet ont bien été enregistrées.",
