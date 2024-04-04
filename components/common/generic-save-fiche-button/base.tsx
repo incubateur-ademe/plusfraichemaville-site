@@ -4,16 +4,16 @@ import { GenericButtonAssets } from "./helpers";
 
 export const GenericSaveBase = ({
   className,
-  save,
+  update,
   assets,
 }: {
-  save?: () => void;
+  update?: () => void;
   assets: GenericButtonAssets["saved"];
   className?: string;
 }) => (
   <div className={className}>
     <Button
-      onClick={save}
+      onClick={update}
       className={clsx("!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0", "flex justify-center items-center")}
     >
       <i className={clsx(`fr-icon--sm`, assets.code)}></i>

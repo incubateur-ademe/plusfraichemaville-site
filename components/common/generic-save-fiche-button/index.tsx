@@ -4,21 +4,30 @@ import { useSession } from "next-auth/react";
 
 import { GenericSaveUnauthenticated } from "./generic-save-unauthenticated";
 
-// TODO: modals
+type GenericSaveFicheButtonBaseProps = {
+  type: "diagnostic" | "solution";
+  id: number;
+  projectName?: string;
+};
 
-export const GenericSaveFicheButton = () => {
-  const isAuthenticated = useSession().status === "authenticated";
+export interface GenericSaveFicheButtonCommonProps extends GenericSaveFicheButtonBaseProps {}
+
+export const GenericSaveFicheButton = ({ type, id, projectName }: GenericSaveFicheButtonBaseProps) => {
+  const status = useSession().status;
   const selectorComp = {
-    diagnostic: <></>,
-    solution: <></>,
+    authenticated: <></>,
+    loading: <>spinner</>,
+    unauthenticated: <GenericSaveUnauthenticated type={type} id={id} projectName={projectName} />,
   };
-  return <div>{!isAuthenticated && <GenericSaveUnauthenticated />}</div>;
+
+  return <div>{selectorComp[status]}</div>;
 };
 
 export const Test = () => {
   return (
-    <div className="py-[30vh]">
-      <GenericSaveFicheButton />
+    <div className="py-[3vh]">
+      <GenericSaveFicheButton type="diagnostic" id={2} />
+      <GenericSaveFicheButton type="solution" id={10} projectName="École" />
     </div>
   );
 };

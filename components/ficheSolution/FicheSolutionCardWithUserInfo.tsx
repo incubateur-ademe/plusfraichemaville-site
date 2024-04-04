@@ -22,6 +22,7 @@ export default function FicheSolutionCardWithUserInfo({
   projectName,
 }: FicheSolutionCardWithUserInfoProps) {
   const { projetId } = useParams();
+
   return (
     <div className={`relative flex ${className}`}>
       <FicheSolutionFullCard ficheSolution={ficheSolution.attributes} extraUrlParams={extraUrlParams} />
