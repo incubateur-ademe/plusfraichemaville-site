@@ -8,7 +8,7 @@ import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
-import { getFichesDiagnosticFromLocalStorage } from "@/components/fiches-diagnostic/helpers";
+
 import { FichesDiagnosticFavoris } from "@/components/fiches-diagnostic/fiches-diagnostic-favoris";
 
 export default function Page() {
@@ -19,13 +19,13 @@ export default function Page() {
   const session = useSession();
   const userBookmarkedFichesSolutions = useUserStore((state) => state.bookmarkedFichesSolutions);
   const userBookmarkedFichesDiagnostic = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic);
+  const bookmarkedFichesDiagnosticInLocalStorage = useUserStore((state) => state.bookmarkedFichesDiagnostic);
   const [bookmarkedFichesSolutionsInLocalStorage] = useLocalStorage<ProjectBookmarks[]>(BOOKMARK_FS_KEY, []);
-
   const bookmarkedFichesSolutions =
     session.status === "authenticated" ? userBookmarkedFichesSolutions : bookmarkedFichesSolutionsInLocalStorage;
 
   const bookmarkedFichesDiagnostic =
-    session.status === "authenticated" ? userBookmarkedFichesDiagnostic : getFichesDiagnosticFromLocalStorage();
+    session.status === "authenticated" ? userBookmarkedFichesDiagnostic : bookmarkedFichesDiagnosticInLocalStorage;
 
   return (
     isClient && (

@@ -113,18 +113,16 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
           </div>
           {vertical ? (
             <div
-              // href={ficheUrl}
               className={
-                "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 pb-5 rounded-3xl px-9"
+                "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 rounded-3xl px-9"
               }
             >
               {"J'explore la méthode"}
             </div>
           ) : (
             <div
-              // href={ficheUrl}
               className={clsx(
-                "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 pb-5 rounded-3xl px-9",
+                "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 rounded-3xl px-9",
                 "!block lg:!hidden",
               )}
             >
