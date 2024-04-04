@@ -27,16 +27,7 @@ export const HomepageStories = () => {
               </SplideSlide>
             ))}
           </SplideTrack>
-
-          <div
-            className={clsx(
-              "splide__arrows absolute left-0 px-6 top-1/2",
-              "-translate-y-1/2 w-full flex justify-between items-center",
-              "hidden lg:flex",
-            )}
-          >
-            <HomepageStoriesControllers />
-          </div>
+          <HomepageStoriesControllers />
         </Splide>
       </div>
     </div>

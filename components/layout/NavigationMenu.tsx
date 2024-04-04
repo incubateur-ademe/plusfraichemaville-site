@@ -24,7 +24,7 @@ export default function NavigationMenu() {
         },
         {
           linkProps: { href: PFMV_ROUTES.FICHES_DIAGNOSTIC, target: "_self", onClick: cancelCurrentProjet },
-          text: "Évaluer la surchauffe",
+          text: "Méthodes de diagnostic",
           isActive: pathname?.startsWith(PFMV_ROUTES.FICHES_DIAGNOSTIC),
         },
         {

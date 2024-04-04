@@ -4,8 +4,9 @@ import { HomepageProjet } from "./homepage-projet";
 import { HomepageStart } from "./homepage-start";
 import { HomepageStories } from "./homepage-stories";
 import { HomepageNewsletter } from "./homepage-newsletter";
+import { HomepageOdd } from "@/components/homepage/homepage-odd";
 
-export const HomepageV2 = () => {
+export const Homepage = () => {
   return (
     <div>
       <HomepageHero />
@@ -14,6 +15,7 @@ export const HomepageV2 = () => {
       <HomepageStart />
       <HomepageInspirer />
       <HomepageNewsletter />
+      <HomepageOdd />
     </div>
   );
 };
