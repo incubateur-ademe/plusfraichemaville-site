@@ -3,13 +3,13 @@ import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { updateBookmarkedFichesSolutionsProjetAction } from "@/actions/users/update-bookmarked-fs-action";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { updateFicheDiagnosticByUserAction } from "@/actions/users/update-fiche-diagnostic-by-user-action";
-import { updateFicheDiagnosticToLocalStorage } from "@/components/fiches-diagnostic/helpers";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/fiche-in-storage-helper";
 
 export type UserInfos = UserWithCollectivite | null | undefined;
 
 interface UserState {
   userInfos?: UserInfos;
-  bookmarkedFichesSolutions: ProjectBookmarks[];
+  bookmarkedFichesSolutions: FichesBookmarked[];
   bookmarkedFichesDiagnostic: string[];
 }
 
@@ -17,8 +17,8 @@ export type UserActions = {
   setUserInfos: (_userInfos: UserInfos) => void;
   setBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: ProjectBookmarks[]) => void;
   setBookmarkedFichesDiagnostic: (_bookmarkedFichesDiagnostic: string[]) => void;
-  updateBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: ProjectBookmarks[]) => void;
-  updateBookmarkedFichesDiagnostic: (_ficheDiagnosticId: number) => void;
+  updateBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: FichesBookmarked[]) => void;
+  updateBookmarkedFichesDiagnostic: (_bookmarkedFichesDiagnostic: FichesBookmarked[]) => void;
 };
 
 export type UserStore = UserState & UserActions;
@@ -45,23 +45,18 @@ export const createUserStore = (initState: UserState = defaultInitState) => {
       const { userInfos } = get();
       if (userInfos) {
         const update = await updateBookmarkedFichesSolutionsProjetAction(userInfos?.id, bookmarkedFichesSolutions);
-        if (update.updatedBookmarkedFichesSolutions) {
-          set({ bookmarkedFichesSolutions: update.updatedBookmarkedFichesSolutions });
-        }
-      }
-    },
-    updateBookmarkedFichesDiagnostic: async (ficheDiagnosticId) => {
-      const { userInfos } = get();
-      if (userInfos) {
-        const update = await updateFicheDiagnosticByUserAction(userInfos?.id, ficheDiagnosticId);
         if (update.user) {
           set({ userInfos: update.user });
         }
-      } else {
-        const bookmarkedFichesDiagnostic = updateFicheDiagnosticToLocalStorage(ficheDiagnosticId.toString());
-        set({
-          bookmarkedFichesDiagnostic,
-        });
+      }
+    },
+    updateBookmarkedFichesDiagnostic: async (bookmarkedFichesDiagnostic) => {
+      const { userInfos } = get();
+      if (userInfos) {
+        const update = await updateFicheDiagnosticByUserAction(userInfos?.id, bookmarkedFichesDiagnostic);
+        if (update.user) {
+          set({ userInfos: update.user });
+        }
       }
     },
   }));

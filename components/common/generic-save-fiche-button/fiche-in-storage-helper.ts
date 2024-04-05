@@ -1,6 +1,6 @@
 export const BOOKMARK_FS_KEY = "bookmark-fs-id";
 export const FICHE_DIAGNOSTIC_IDS_STORAGE_KEY = "fiches-diagnostic";
-type FicheBookmarkedSolution = {
+export type FicheBookmarkedSolution = {
   projectName: string;
   ficheSolutionIds: number[];
 };

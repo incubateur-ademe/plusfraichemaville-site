@@ -27,6 +27,7 @@ export const useSaveBookmarksButton = (ficheSolutionId: number, projectName: str
   const bookmarkedFichesSolutions = isAuthenticated
     ? connectedBookmarkedFichesSolutions
     : disconnectedBookmarkedFichesSolutions;
+
   const setBookmarkedFichesSolutions = isAuthenticated
     ? setConnectedBookmarkedFichesSolutions
     : setDisconnectedBookmarkedFichesSolutions;

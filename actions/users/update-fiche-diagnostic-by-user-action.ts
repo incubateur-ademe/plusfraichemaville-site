@@ -7,10 +7,11 @@ import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { updateFicheDiagnosticByUser } from "@/lib/prisma/prismaUserQueries";
 import { UserInfos } from "@/stores/user/store";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/fiche-in-storage-helper";
 
 export const updateFicheDiagnosticByUserAction = async (
   userId: string,
-  ficheDiagnosticId: number,
+  ficheDiagnosticIds: FichesBookmarked[],
 ): Promise<ResponseAction<{ user: UserInfos | null }>> => {
   const session = await auth();
   if (!session) {
@@ -22,7 +23,7 @@ export const updateFicheDiagnosticByUserAction = async (
   }
 
   try {
-    const user = await updateFicheDiagnosticByUser(session.user.id, ficheDiagnosticId);
+    const user = await updateFicheDiagnosticByUser(session.user.id, ficheDiagnosticIds);
     return { type: "success", message: "FICHE_DIAGNOSTIC_ADDED_TO_PROJET", user };
   } catch (e) {
     customCaptureException("Error in UpdateFichesDiagnosticByUserAction DB call", e);

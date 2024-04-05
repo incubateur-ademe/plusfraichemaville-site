@@ -17,7 +17,7 @@ export const useSaveBookmarks = (
     setIsBookmarked(isFicheBookmarked(fichesInStorage, convertedFicheId, projectName));
   }, [fichesInStorage, convertedFicheId, projectName]);
 
-  const changeFavorite = () => {
+  const update = () => {
     if (isBookmarked) {
       setFichesInStorage(deleteBookmarkFiche(type, fichesInStorage, convertedFicheId, projectName));
       setIsBookmarked(false);
@@ -28,5 +28,5 @@ export const useSaveBookmarks = (
     }
   };
 
-  return { isBookmarked, changeFavorite };
+  return { isBookmarked, update };
 };

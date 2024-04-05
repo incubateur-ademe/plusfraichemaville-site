@@ -1,4 +1,5 @@
 import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/fiche-in-storage-helper";
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
@@ -25,25 +26,13 @@ export const updateFichesDiagnosticByUser = async (userId: string, ficheDiagnost
   });
 };
 
-export const updateFicheDiagnosticByUser = async (userId: string, ficheDiagnosticId: number) => {
-  const user = await getUser(userId);
-  const userFichesDiagnostic = user?.selection_fiches_diagnostic;
-  let updatedFichesDiagnostic: number[] = [];
-
-  if (userFichesDiagnostic?.includes(+ficheDiagnosticId)) {
-    updatedFichesDiagnostic = userFichesDiagnostic.filter((currentFicheId) => currentFicheId !== +ficheDiagnosticId);
-  } else if (userFichesDiagnostic) {
-    updatedFichesDiagnostic = [...userFichesDiagnostic, +ficheDiagnosticId];
-  } else {
-    updatedFichesDiagnostic = [+ficheDiagnosticId];
-  }
-
+export const updateFicheDiagnosticByUser = async (userId: string, ficheDiagnosticIds: FichesBookmarked[]) => {
   return prismaClient.user.update({
     where: {
       id: userId,
     },
     data: {
-      selection_fiches_diagnostic: updatedFichesDiagnostic,
+      selection_fiches_diagnostic: ficheDiagnosticIds as number[],
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
@@ -104,17 +93,17 @@ export const saveBookmarkedFicheSolutionsByUser = async (
 
 export const updateBookmarkedFichesSolutions = async (
   userId: string,
-  updatedBookMarkedFichesSolutions: ProjectBookmarks[],
+  updatedBookMarkedFichesSolutions: FichesBookmarked[],
 ) => {
-  const updated = await prismaClient.user.update({
+  return await prismaClient.user.update({
     where: {
       id: userId,
     },
     data: {
       selection_fiches_solutions: updatedBookMarkedFichesSolutions,
     },
+    include: { collectivites: { include: { collectivite: true } } },
   });
-  return updated.selection_fiches_solutions as ProjectBookmarks[];
 };
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {

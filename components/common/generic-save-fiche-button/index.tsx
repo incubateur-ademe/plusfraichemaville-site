@@ -3,19 +3,18 @@
 import { useSession } from "next-auth/react";
 
 import { GenericSaveUnauthenticated } from "./generic-save-unauthenticated";
+import { GenericSaveAuthenticated } from "./generic-save-authenticated";
 
-type GenericSaveFicheButtonBaseProps = {
+export type GenericSaveFicheButtonProps = {
   type: "diagnostic" | "solution";
   id: number;
   projectName?: string;
 };
 
-export interface GenericSaveFicheButtonCommonProps extends GenericSaveFicheButtonBaseProps {}
-
-export const GenericSaveFicheButton = ({ type, id, projectName }: GenericSaveFicheButtonBaseProps) => {
+export const GenericSaveFicheButton = ({ type, id, projectName }: GenericSaveFicheButtonProps) => {
   const status = useSession().status;
   const selectorComp = {
-    authenticated: <></>,
+    authenticated: <GenericSaveAuthenticated type={type} id={id} projectName={projectName} />,
     loading: <>spinner</>,
     unauthenticated: <GenericSaveUnauthenticated type={type} id={id} projectName={projectName} />,
   };
