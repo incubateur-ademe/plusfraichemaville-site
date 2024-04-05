@@ -4,13 +4,12 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiCli
 import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
 import { getCoutFiche } from "@/helpers/coutFiche";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
-
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
-import { FicheDiagnosticSaveButton } from "./fiche-diagnostic-save-button";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import { TypeFiche } from "@/helpers/common";
+import { GenericSaveFicheButton } from "../common/generic-save-fiche-button";
 
 type FicheDiagnosticCardProps = {
   vertical?: boolean;
@@ -133,8 +132,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
           )}
         </div>
       </FicheDiagnosticLink>
-
-      <FicheDiagnosticSaveButton ficheDiagnosticId={ficheDiagnostic.id} className="absolute top-3 right-4" />
+      <GenericSaveFicheButton id={ficheDiagnostic.id} type="diagnostic" />
     </div>
   );
 };

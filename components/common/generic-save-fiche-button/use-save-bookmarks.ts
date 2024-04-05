@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FichesBookmarked, isFicheBookmarked, deleteBookmarkFiche, addFicheBookmark } from "./fiche-in-storage-helper";
+import { FichesBookmarked, isFicheBookmarked, deleteBookmarkFiche, addFicheBookmark } from "./helpers";
 
 export const useSaveBookmarks = (
   type: "solution" | "diagnostic",
@@ -7,7 +7,7 @@ export const useSaveBookmarks = (
   fichesInStorage: FichesBookmarked[],
   setFichesInStorage: (_fichesInStorage: FichesBookmarked[]) => void,
   projectName: string,
-  openModal: () => void,
+  openModal?: () => void,
 ) => {
   const convertedFicheId = +ficheId;
 
@@ -24,7 +24,7 @@ export const useSaveBookmarks = (
     } else {
       setFichesInStorage(addFicheBookmark(type, fichesInStorage, convertedFicheId, projectName));
       setIsBookmarked(true);
-      openModal();
+      openModal && openModal();
     }
   };
 

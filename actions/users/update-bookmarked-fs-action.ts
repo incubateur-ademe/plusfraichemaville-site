@@ -6,7 +6,7 @@ import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { updateBookmarkedFichesSolutions } from "@/lib/prisma/prismaUserQueries";
 
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/fiche-in-storage-helper";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/helpers";
 import { UserInfos } from "@/stores/user/store";
 
 export const updateBookmarkedFichesSolutionsProjetAction = async (

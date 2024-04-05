@@ -1,5 +1,5 @@
 import { useLocalStorage } from "usehooks-ts";
-import { FichesBookmarked, BOOKMARK_FS_KEY, FICHE_DIAGNOSTIC_IDS_STORAGE_KEY } from "./fiche-in-storage-helper";
+import { FichesBookmarked, BOOKMARK_FS_KEY, FICHE_DIAGNOSTIC_IDS_STORAGE_KEY } from "./helpers";
 
 export const useFicheLocalStorage = (type: "solution" | "diagnostic") => {
   const isSolution = type === "solution";

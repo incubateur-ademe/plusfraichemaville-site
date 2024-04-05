@@ -3,7 +3,7 @@ import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { updateBookmarkedFichesSolutionsProjetAction } from "@/actions/users/update-bookmarked-fs-action";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { updateFicheDiagnosticByUserAction } from "@/actions/users/update-fiche-diagnostic-by-user-action";
-import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/fiche-in-storage-helper";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/helpers";
 
 export type UserInfos = UserWithCollectivite | null | undefined;
 

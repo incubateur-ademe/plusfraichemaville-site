@@ -1,5 +1,5 @@
 import { PFMV_ROUTES } from "@/helpers/routes";
-import { FicheBookmarkedSolution } from "../common/generic-save-fiche-button/fiche-in-storage-helper";
+import { FicheBookmarkedSolution } from "../common/generic-save-fiche-button/helpers";
 import BookmarkedFicheSolutionByProject from "../favoris/BookmarkedFicheSolution";
 import Button from "@codegouvfr/react-dsfr/Button";
 

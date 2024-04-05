@@ -1,9 +1,9 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
-import { selectSavedOrUnsavedAssets } from "./helpers";
 import { useSaveBookmarks } from "./use-save-bookmarks";
-import { FichesBookmarked } from "./fiche-in-storage-helper";
+import { FichesBookmarked } from "./helpers";
 import { GenericSaveFicheButtonProps } from ".";
+import { selectSavedOrUnsavedAssets } from "./assets";
 
 interface GenericSaveFicheButtonBaseProps extends GenericSaveFicheButtonProps {
   className?: string;
@@ -11,24 +11,27 @@ interface GenericSaveFicheButtonBaseProps extends GenericSaveFicheButtonProps {
   setFichesIds: (_fichesIds: FichesBookmarked[]) => void;
 }
 
-export const GenericSaveBase = ({
+export const GenericSaveButton = ({
   className,
   type,
   id,
   fichesIds,
   setFichesIds,
   projectName,
+  opener,
 }: GenericSaveFicheButtonBaseProps) => {
   const { isBookmarked, update } = useSaveBookmarks(type, id, fichesIds, setFichesIds, projectName ?? "", opener);
   const assets = selectSavedOrUnsavedAssets(isBookmarked, "common");
-
   return (
-    <div className={className}>
+    <div className={clsx("absolute top-3 right-4", className)}>
       <Button
         onClick={update}
-        className={clsx("!text-sm !w-fit !min-h-[2rem] !p-2 rounded-full !py-0", "flex justify-center items-center")}
+        className={clsx(
+          "!text-sm !w-fit !min-h-[2rem] !pr-3 !pl-[0.65rem]  rounded-full !py-0",
+          "flex justify-center items-center",
+        )}
       >
-        <i className={clsx(`fr-icon--sm`, assets.code)}></i>
+        <i className={clsx("fr-icon--sm mr-2", assets.code)}></i>
         {assets.label}
       </Button>
     </div>

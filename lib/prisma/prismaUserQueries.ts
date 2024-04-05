@@ -1,5 +1,5 @@
 import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper";
-import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/fiche-in-storage-helper";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/helpers";
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";

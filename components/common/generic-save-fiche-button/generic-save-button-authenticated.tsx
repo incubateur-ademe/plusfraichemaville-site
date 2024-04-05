@@ -1,11 +1,11 @@
-import { GenericSaveBase } from "./base";
+import { GenericSaveButton } from "./generic-save-button";
 
 import { useUserStore } from "@/stores/user/provider";
-import { FichesBookmarked } from "./fiche-in-storage-helper";
+import { FichesBookmarked } from "./helpers";
 import { GenericSaveFicheButtonProps } from ".";
 
-export const GenericSaveAuthenticated = ({ id, type, projectName }: GenericSaveFicheButtonProps) => {
-  const isSolution = type === "solution";
+export const GenericSaveAuthenticated = ({ ...props }: GenericSaveFicheButtonProps) => {
+  const isSolution = props.type === "solution";
   const fichesIds: FichesBookmarked[] = useUserStore((state) =>
     isSolution
       ? (state.userInfos?.selection_fiches_solutions as FichesBookmarked[]) ?? []
@@ -15,7 +15,5 @@ export const GenericSaveAuthenticated = ({ id, type, projectName }: GenericSaveF
     isSolution ? state.updateBookmarkedFichesSolutions : state.updateBookmarkedFichesDiagnostic,
   );
 
-  return (
-    <GenericSaveBase id={id} type={type} fichesIds={fichesIds} setFichesIds={setFichesIds} projectName={projectName} />
-  );
+  return <GenericSaveButton fichesIds={fichesIds} setFichesIds={setFichesIds} {...props} />;
 };
