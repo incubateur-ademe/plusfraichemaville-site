@@ -3,7 +3,8 @@ import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { updateBookmarkedFichesSolutionsProjetAction } from "@/actions/users/update-bookmarked-fs-action";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { updateFicheDiagnosticByUserAction } from "@/actions/users/update-fiche-diagnostic-by-user-action";
-import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/helpers";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche/helpers";
+import { updateFichesUserAction } from "@/actions/users/update-fiches-user-action";
 
 export type UserInfos = UserWithCollectivite | null | undefined;
 
@@ -19,6 +20,7 @@ export type UserActions = {
   setBookmarkedFichesDiagnostic: (_bookmarkedFichesDiagnostic: string[]) => void;
   updateBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: FichesBookmarked[]) => void;
   updateBookmarkedFichesDiagnostic: (_bookmarkedFichesDiagnostic: FichesBookmarked[]) => void;
+  updateFichesUser: (_type: "solution" | "diagnostic", _ficheId: number) => void;
 };
 
 export type UserStore = UserState & UserActions;
@@ -56,6 +58,15 @@ export const createUserStore = (initState: UserState = defaultInitState) => {
         const update = await updateFicheDiagnosticByUserAction(userInfos?.id, bookmarkedFichesDiagnostic);
         if (update.user) {
           set({ userInfos: update.user });
+        }
+      }
+    },
+    updateFichesUser: async (type, ficheId) => {
+      const { userInfos } = get();
+      if (userInfos) {
+        const update = await updateFichesUserAction(userInfos.id, ficheId, type);
+        if (update.user) {
+          set(() => ({ userInfos: update.user }));
         }
       }
     },

@@ -3,9 +3,9 @@ import { FichesDiagnosticFilterUpdater } from "./use-fiches-diagnostic-filters";
 
 export const ALL_METHODES = [
   { label: "Observation", code: "observation" },
-  { label: "Modélisation spatiale", code: "modelisation_spatiale" },
+  { label: "Modélisation", code: "modelisation_spatiale" },
   { label: "Enquête", code: "enquete" },
-  { label: "Simulation numérique", code: "simulation_numerique" },
+  // { label: "Simulation numérique", code: "simulation_numerique" },
   { label: "Analyse spatiale", code: "analyse_spatiale" },
 ];
 

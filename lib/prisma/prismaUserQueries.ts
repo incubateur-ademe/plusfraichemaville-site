@@ -1,5 +1,5 @@
 import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper";
-import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/helpers";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche/helpers";
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
@@ -26,13 +26,26 @@ export const updateFichesDiagnosticByUser = async (userId: string, ficheDiagnost
   });
 };
 
-export const updateFicheDiagnosticByUser = async (userId: string, ficheDiagnosticIds: FichesBookmarked[]) => {
+export const updateFichesUser = async (ficheId: number, userId: string, type: "solution" | "diagnostic") => {
+  const user = await getUserWithCollectivites(userId);
+  const selectedByUser =
+    type === "solution"
+      ? (user?.selection_fiches_solutions as number[])
+      : (user?.selection_fiches_diagnostic as number[]);
+
+  const isAlreadySaved = selectedByUser?.includes(+ficheId);
+  const fichesUpdated = isAlreadySaved
+    ? selectedByUser?.filter((ficheId) => ficheId !== +ficheId)
+    : selectedByUser && Array.from(new Set([...selectedByUser, +ficheId]));
+
   return prismaClient.user.update({
     where: {
       id: userId,
     },
     data: {
-      selection_fiches_diagnostic: ficheDiagnosticIds as number[],
+      selection_fiches_solutions: type === "solution" ? fichesUpdated : (user?.selection_fiches_solutions as number[]),
+      selection_fiches_diagnostic:
+        type === "diagnostic" ? fichesUpdated : (user?.selection_fiches_diagnostic as number[]),
     },
     include: { collectivites: { include: { collectivite: true } } },
   });

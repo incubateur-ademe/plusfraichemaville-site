@@ -7,7 +7,7 @@ import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { updateFicheDiagnosticByUser } from "@/lib/prisma/prismaUserQueries";
 import { UserInfos } from "@/stores/user/store";
-import { FichesBookmarked } from "@/components/common/generic-save-fiche-button/helpers";
+import { FichesBookmarked } from "@/components/common/generic-save-fiche/helpers";
 
 export const updateFicheDiagnosticByUserAction = async (
   userId: string,

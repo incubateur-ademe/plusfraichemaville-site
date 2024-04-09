@@ -5,7 +5,7 @@ import FicheSolutionFullCard from "@/components/ficheSolution/FicheSolutionFullC
 import { APIResponseData } from "@/lib/strapi/types/types";
 import { useParams } from "next/navigation";
 import { ButtonSaveFicheSolutionInProjet } from "./button-save-fiche-solution-in-projet";
-import { GenericSaveFicheButton } from "../common/generic-save-fiche-button";
+import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheSolutionCardWithUserInfoProps = {
   ficheSolution: APIResponseData<"api::fiche-solution.fiche-solution">;
@@ -30,7 +30,7 @@ export default function FicheSolutionCardWithUserInfo({
       {projetId ? (
         <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} className="absolute top-2 right-2" />
       ) : (
-        <GenericSaveFicheButton id={ficheSolution.id} projectName={projectName} type="solution" />
+        <GenericSaveFiche id={ficheSolution.id} projectName={projectName} type="solution" />
       )}
     </div>
   );

@@ -9,7 +9,6 @@ import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import { TypeFiche } from "@/helpers/common";
-import { GenericSaveFicheButton } from "../common/generic-save-fiche-button";
 
 type FicheDiagnosticCardProps = {
   vertical?: boolean;
@@ -132,7 +131,6 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
           )}
         </div>
       </FicheDiagnosticLink>
-      <GenericSaveFicheButton id={ficheDiagnostic.id} type="diagnostic" />
     </div>
   );
 };

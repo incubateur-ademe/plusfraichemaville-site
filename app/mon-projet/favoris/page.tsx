@@ -8,7 +8,7 @@ import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
 import { getFichesDiagnosticFromLocalStorage } from "@/components/fiches-diagnostic/helpers";
 import { FichesDiagnosticFavoris } from "@/components/fiches-diagnostic/fiches-diagnostic-favoris";
-import { FicheBookmarkedSolution, FichesBookmarked } from "@/components/common/generic-save-fiche-button/helpers";
+import { FicheBookmarkedSolution, FichesBookmarked } from "@/components/common/generic-save-fiche/helpers";
 import { FichesSolutionsFavoris } from "@/components/ficheSolution/fiches-solutions-favoris";
 
 export default function Page() {
