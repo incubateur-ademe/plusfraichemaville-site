@@ -41,6 +41,7 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
     addOrUpdateProjet: (_projet) => set((state) => ({ projets: upsert(state.projets, _projet) })),
     updateSelectedFiches: async (type, ficheId, projetId) => {
       const update = await updateFichesProjetAction(projetId, ficheId, type);
+
       if (update.projet) {
         set((state) => ({ projets: upsert(state.projets, update.projet!) }));
       }

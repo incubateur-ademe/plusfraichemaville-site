@@ -8,7 +8,7 @@ import { TypeFiche } from "@/helpers/common";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import React from "react";
-import { FicheDiagnosticSaveButton } from "@/components/fiches-diagnostic/fiche-diagnostic-save-button";
+import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 export const FicheDiagnosticMethodeTab = ({
   ficheDiagnostic,
@@ -27,17 +27,15 @@ export const FicheDiagnosticMethodeTab = ({
 
   return (
     <div>
-      <FicheDiagnosticSaveButton
-        ficheDiagnosticId={ficheDiagnosticId}
-        showLabel
-        className="md:!hidden absolute top-2 right-0"
-      />
-      <div className="md:hidden text-base text-dsfr-text-mention-grey mb-6">
+      <div className="md:hidden text-base text-dsfr-text-mention-grey mb-6 relative">
         <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
         Méthode de diagnostic{" "}
         <span className="font-bold capitalize text-dsfr-background-flat-warning">
           {getMethodeDiagnosticFromCode(attributes.methode)?.label}
         </span>
+        <div className="absolute [&>*]:top-0 [&>*]:right-0 top-0 right-0 w-52 md:hidden">
+          <GenericSaveFiche id={ficheDiagnosticId} type="diagnostic" />
+        </div>
       </div>
       <div className="flex justify-between flex-col md:flex-row">
         <div className="max-w-screen-sm">

@@ -1,30 +1,23 @@
-export const commonAssets = {
-  saved: {
-    code: "fr-icon-bookmark-fill",
-    label: "Sauvegardé",
-  },
-  unsaved: {
-    code: "fr-icon-bookmark-line",
-    label: "Sauvegarder",
-  },
-};
+import clsx from "clsx";
 
-const projetAssets = {
+export const baseAssets = (type: "common" | "projet") => ({
   saved: {
-    code: "ri-add-circle-fill",
-    label: "Ajoutée au projet",
+    code: "",
+    label: type === "common" ? "Sauvegardée" : "Ajoutée au projet x",
+    className: "!text-sm !w-fit !min-h-[2rem] !pr-3 !pl-[0.65rem]  rounded-full !py-0 flex justify-center items-center",
   },
   unsaved: {
-    code: "ri-add-circle-line",
-    label: "Ajouter au projet",
+    code: "ri-bookmark-line",
+    // code: "ri-add-line",
+    label: "",
+    className: clsx(
+      "!min-h-[2rem] !w-8 !h-8 !p-1  rounded-full flex justify-center items-center",
+      // "!min-h-[2rem] !p-1  rounded-full flex justify-center items-center",
+      "!bg-pfmv-light-grey [&>*]:bg-pfmv-light-grey] shadow-pfmv-card-shadow",
+      "[&>*]:text-dsfr-text-mention-grey",
+    ),
   },
-};
+});
 
 export const selectSavedOrUnsavedAssets = (isSaved: boolean, type: "common" | "projet") =>
-  type === "common" && isSaved
-    ? commonAssets.saved
-    : type === "common" && !isSaved
-      ? commonAssets.unsaved
-      : type === "projet" && isSaved
-        ? projetAssets.saved
-        : projetAssets.unsaved;
+  isSaved ? baseAssets(type).saved : baseAssets(type).unsaved;

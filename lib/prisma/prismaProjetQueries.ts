@@ -21,7 +21,7 @@ export const updateFichesProjet = async (
 
   const isAlreadySaved = selectedFichesInProjet?.includes(+ficheId);
   const fichesUpdated = isAlreadySaved
-    ? selectedFichesInProjet?.filter((ficheId) => ficheId !== +ficheId)
+    ? selectedFichesInProjet?.filter((currentFicheId) => currentFicheId !== +ficheId)
     : selectedFichesInProjet && Array.from(new Set([...selectedFichesInProjet, +ficheId]));
 
   return prismaClient.projet.update({

@@ -9,6 +9,7 @@ import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import { TypeFiche } from "@/helpers/common";
+import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticCardProps = {
   vertical?: boolean;
@@ -30,6 +31,9 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
     <div
       className={clsx("pfmv-card lg:h-fit relative", vertical ? "w-72 lg:!h-auto" : "w-72 lg:max-w-[900px] lg:w-full")}
     >
+      <div className="z-20 relative">
+        <GenericSaveFiche id={ficheDiagnostic.id} type="diagnostic" />
+      </div>
       <FicheDiagnosticLink href={ficheUrl}>
         <div
           className={clsx(
@@ -111,7 +115,6 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
           </div>
           {vertical ? (
             <div
-              // href={ficheUrl}
               className={
                 "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 pb-5 rounded-3xl px-9"
               }
@@ -120,7 +123,6 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             </div>
           ) : (
             <div
-              // href={ficheUrl}
               className={clsx(
                 "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 pb-5 rounded-3xl px-9",
                 "!block lg:!hidden",

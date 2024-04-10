@@ -16,9 +16,9 @@ export const isFicheBookmarked = (
 
   for (const bookmark of currentBookmarks) {
     if (typeof bookmark === "number") {
-      if (bookmark === ficheId) return true;
+      if (bookmark === +ficheId) return true;
     } else if (bookmark.projectName === projectName) {
-      if (bookmark.ficheSolutionIds.includes(ficheId)) return true;
+      if (bookmark.ficheSolutionIds.includes(+ficheId)) return true;
     }
   }
 
@@ -34,8 +34,8 @@ export const addFicheBookmark = (
   if (!ficheId) return currentBookmarks;
 
   if (type === "diagnostic") {
-    if (!currentBookmarks.includes(ficheId)) {
-      currentBookmarks.push(ficheId);
+    if (!currentBookmarks.includes(+ficheId)) {
+      currentBookmarks.push(+ficheId);
     }
   } else {
     const projectIndex = currentBookmarks.findIndex(
@@ -44,11 +44,11 @@ export const addFicheBookmark = (
 
     if (projectIndex !== -1) {
       const projectBookmark = currentBookmarks[projectIndex] as FicheBookmarkedSolution;
-      if (!projectBookmark.ficheSolutionIds.includes(ficheId)) {
-        projectBookmark.ficheSolutionIds.push(ficheId);
+      if (!projectBookmark.ficheSolutionIds.includes(+ficheId)) {
+        projectBookmark.ficheSolutionIds.push(+ficheId);
       }
     } else {
-      currentBookmarks.push({ projectName, ficheSolutionIds: [ficheId] });
+      currentBookmarks.push({ projectName, ficheSolutionIds: [+ficheId] });
     }
   }
 
@@ -64,13 +64,13 @@ export const deleteBookmarkFiche = (
   if (!ficheId) return currentBookmarks;
 
   if (type === "diagnostic") {
-    return currentBookmarks.filter((bookmark) => bookmark !== ficheId);
+    return currentBookmarks.filter((bookmark) => bookmark !== +ficheId);
   } else {
     const updatedBookmarks = currentBookmarks.map((bookmark) => {
       if (typeof bookmark !== "number" && bookmark.projectName === projectName) {
         return {
           ...bookmark,
-          ficheSolutionIds: bookmark.ficheSolutionIds.filter((id) => id !== ficheId),
+          ficheSolutionIds: bookmark.ficheSolutionIds.filter((id) => id !== +ficheId),
         };
       }
       return bookmark;

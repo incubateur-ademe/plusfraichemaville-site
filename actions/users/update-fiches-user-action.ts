@@ -11,6 +11,7 @@ export const updateFichesUserAction = async (
   userId: string,
   ficheId: number,
   type: "solution" | "diagnostic",
+  projectName?: string,
 ): Promise<ResponseAction<{ user: UserInfos | null }>> => {
   const session = await auth();
 
@@ -23,7 +24,7 @@ export const updateFichesUserAction = async (
   }
 
   try {
-    const user = await updateFichesUser(ficheId, session.user.id, type);
+    const user = await updateFichesUser(ficheId, session.user.id, type, projectName);
 
     return {
       type: "success",

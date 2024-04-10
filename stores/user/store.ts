@@ -20,7 +20,7 @@ export type UserActions = {
   setBookmarkedFichesDiagnostic: (_bookmarkedFichesDiagnostic: string[]) => void;
   updateBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: FichesBookmarked[]) => void;
   updateBookmarkedFichesDiagnostic: (_bookmarkedFichesDiagnostic: FichesBookmarked[]) => void;
-  updateFichesUser: (_type: "solution" | "diagnostic", _ficheId: number) => void;
+  updateFichesUser: (_type: "solution" | "diagnostic", _ficheId: number, _projectName: string) => void;
 };
 
 export type UserStore = UserState & UserActions;
@@ -61,10 +61,12 @@ export const createUserStore = (initState: UserState = defaultInitState) => {
         }
       }
     },
-    updateFichesUser: async (type, ficheId) => {
+    updateFichesUser: async (type, ficheId, projectName?: string) => {
       const { userInfos } = get();
       if (userInfos) {
-        const update = await updateFichesUserAction(userInfos.id, ficheId, type);
+        const update = await updateFichesUserAction(userInfos.id, ficheId, type, projectName);
+        console.log({ projectName, ficheId });
+
         if (update.user) {
           set(() => ({ userInfos: update.user }));
         }

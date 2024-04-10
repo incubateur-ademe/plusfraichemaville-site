@@ -9,7 +9,7 @@ import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 
 export const updateFichesProjetAction = async (
   projetId: number,
-  ficheSolutionId: number,
+  ficheId: number,
   type: "solution" | "diagnostic",
 ): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
   const session = await auth();
@@ -22,7 +22,7 @@ export const updateFichesProjetAction = async (
   }
 
   try {
-    const projet = await updateFichesProjet(projetId, ficheSolutionId, session.user.id, type);
+    const projet = await updateFichesProjet(projetId, ficheId, session.user.id, type);
     return {
       type: "success",
       message: type === "solution" ? "FICHE_SOLUTION_ADDED_TO_PROJET" : "FICHE_DIAGNOSTIC_ADDED_TO_PROJET",

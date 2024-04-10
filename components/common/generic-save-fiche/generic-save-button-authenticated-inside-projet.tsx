@@ -12,9 +12,10 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
     updater(props.type, props.id, projet?.id!);
     !isSaved && opener && opener();
   };
+
   const isSaved = isSolution
-    ? projet?.fiches_solutions_id.includes(props.id)
-    : projet?.fiches_diagnostic_id.includes(props.id);
+    ? projet?.fiches_solutions_id.includes(+props.id)
+    : projet?.fiches_diagnostic_id.includes(+props.id);
 
   const assets = selectSavedOrUnsavedAssets(isSaved ?? false, "projet");
 
