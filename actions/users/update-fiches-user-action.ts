@@ -3,29 +3,36 @@
 import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
-
+import { updateFichesUser } from "@/lib/prisma/prismaUserQueries";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { updateFicheDiagnosticByUser } from "@/lib/prisma/prismaUserQueries";
 import { UserInfos } from "@/stores/user/store";
 
-export const updateFicheDiagnosticByUserAction = async (
+export const updateFichesUserAction = async (
   userId: string,
-  ficheDiagnosticId: number,
+  ficheId: number,
+  type: "solution" | "diagnostic",
+  projectName?: string,
 ): Promise<ResponseAction<{ user: UserInfos | null }>> => {
   const session = await auth();
+
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", user: null };
   }
 
-  if (!(await hasPermissionToUpdateUser(userId, session.user.id))) {
+  if (!hasPermissionToUpdateUser(session.user.id, userId)) {
     return { type: "error", message: "UNAUTHORIZED", user: null };
   }
 
   try {
-    const user = await updateFicheDiagnosticByUser(session.user.id, ficheDiagnosticId);
-    return { type: "success", message: "FICHE_DIAGNOSTIC_ADDED_TO_PROJET", user };
+    const user = await updateFichesUser(ficheId, session.user.id, type, projectName);
+
+    return {
+      type: "success",
+      message: type === "solution" ? "BOOKMARKED_SAVED_IN_DB" : "BOOKMARKED_DIAG_SAVED_IN_DB",
+      user,
+    };
   } catch (e) {
-    customCaptureException("Error in UpdateFichesDiagnosticByUserAction DB call", e);
+    customCaptureException("Error in updateFichesUser DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR", user: null };
   }
 };

@@ -16,18 +16,19 @@ export const FicheDiagnosticProjetListe = () => {
 
   return (
     <div>
-      <div className="flex items-center gap-8 mb-10">
+      <div className="flex gap-8 mb-10 flex-row flex-wrap">
         {savedFichesDiagnostic?.length === 0 && <FichesDiagnosticProjetEmpty />}
-        <div>
-          {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
-            <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
-          ))}
-        </div>
-        <div>
+        {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
+          <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
+        ))}
+        <div className="flex items-center">
           <FicheDiagnosticProjetListeAddButton />
         </div>
       </div>
-      <FicheDiagnosticLink href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD} className="fr-btn rounded-3xl">
+      <FicheDiagnosticLink
+        href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
+        className="fr-btn fr-btn--secondary rounded-3xl"
+      >
         Aller au tableau de bord
       </FicheDiagnosticLink>
     </div>

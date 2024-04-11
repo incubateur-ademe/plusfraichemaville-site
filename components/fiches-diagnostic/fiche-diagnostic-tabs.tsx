@@ -6,7 +6,7 @@ import { FicheDiagnosticMethodeTab } from "./fiche-diagnostic-tab-methode";
 import { FicheDiagnosticAvantageTab } from "./fiche-diagnostic-tab-avantages";
 import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-meo";
 import ButtonShareCurrentUrl from "@/components/common/button-share-current-url";
-import { FicheDiagnosticSaveButton } from "@/components/fiches-diagnostic/fiche-diagnostic-save-button";
+import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticTabsProps = {
   ficheDiagnostic: FicheDiagnosticResponse;
@@ -39,8 +39,10 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
       <div className="bg-pfmv-orange h-14 w-full absolute left-0 top-0"></div>
       <div className="fr-container flex flex-row">
         <div className="hidden md:block flex-none md:w-56 md:mt-[6.5rem]">
-          <ButtonShareCurrentUrl className={"hidden md:block mb-4"} />
-          <FicheDiagnosticSaveButton ficheDiagnosticId={id} showLabel />
+          <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-2"} />
+          <div className="relative hidden md:block [&>*]:left-0">
+            <GenericSaveFiche id={id} type="diagnostic" />
+          </div>
         </div>
         <div className="fr-tabs !shadow-none before:!shadow-none">
           <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche diagnostic">

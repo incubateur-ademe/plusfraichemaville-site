@@ -1,49 +1,78 @@
 import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper";
+import {
+  FicheBookmarkedSolution,
+  FichesBookmarked,
+  addFicheBookmark,
+  deleteBookmarkFiche,
+  isFicheBookmarked,
+  mergeFicheBookmarkedDiagnostic,
+  mergeFicheBookmarkedSolutions,
+} from "@/components/common/generic-save-fiche/helpers";
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
 
-export const updateFichesDiagnosticByUser = async (userId: string, ficheDiagnosticIds: number[]) => {
+export const saveAllFichesFromLocalStorage = async (
+  userId: string,
+  fiches: {
+    fichesSolutions: FichesBookmarked[];
+    fichesDiagnostic: FichesBookmarked[];
+  },
+) => {
   const user = await getUser(userId);
-  const userFichesDiagnostic = user?.selection_fiches_diagnostic;
 
-  let mergedFichesDiagnostic: number[] = [];
+  const currentSavedFichesDiagnostic = user?.selection_fiches_diagnostic;
+  const currentSavedFichesSolutions = user?.selection_fiches_solutions;
 
-  if (userFichesDiagnostic) {
-    mergedFichesDiagnostic = Array.from(new Set([...userFichesDiagnostic, ...ficheDiagnosticIds]));
-  }
+  const updatedSavedFichesDiagnostic = mergeFicheBookmarkedDiagnostic(
+    fiches.fichesDiagnostic,
+    currentSavedFichesDiagnostic,
+  );
+
+  const updatedSavedFichesSolutions = mergeFicheBookmarkedSolutions(
+    fiches.fichesSolutions as FicheBookmarkedSolution[],
+    currentSavedFichesSolutions as FicheBookmarkedSolution[],
+  );
 
   return prismaClient.user.update({
     where: {
       id: userId,
     },
     data: {
-      selection_fiches_diagnostic: mergedFichesDiagnostic,
+      selection_fiches_diagnostic: updatedSavedFichesDiagnostic as number[],
+      selection_fiches_solutions: updatedSavedFichesSolutions,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
 };
 
-export const updateFicheDiagnosticByUser = async (userId: string, ficheDiagnosticId: number) => {
-  const user = await getUser(userId);
-  const userFichesDiagnostic = user?.selection_fiches_diagnostic;
-  let updatedFichesDiagnostic: number[] = [];
+export const updateFichesUser = async (
+  ficheId: number,
+  userId: string,
+  type: "solution" | "diagnostic",
+  projectName?: string,
+) => {
+  const user = await getUserWithCollectivites(userId);
+  const selectedByUser =
+    type === "solution"
+      ? (user?.selection_fiches_solutions as number[])
+      : (user?.selection_fiches_diagnostic as number[]);
 
-  if (userFichesDiagnostic?.includes(+ficheDiagnosticId)) {
-    updatedFichesDiagnostic = userFichesDiagnostic.filter((currentFicheId) => currentFicheId !== +ficheDiagnosticId);
-  } else if (userFichesDiagnostic) {
-    updatedFichesDiagnostic = [...userFichesDiagnostic, +ficheDiagnosticId];
-  } else {
-    updatedFichesDiagnostic = [+ficheDiagnosticId];
-  }
+  const isAlreadySaved = isFicheBookmarked(selectedByUser, ficheId, projectName ?? "");
+
+  const fichesUpdated = isAlreadySaved
+    ? deleteBookmarkFiche(type, selectedByUser, +ficheId, projectName ?? "")
+    : addFicheBookmark(type, selectedByUser, +ficheId, projectName ?? "");
 
   return prismaClient.user.update({
     where: {
       id: userId,
     },
     data: {
-      selection_fiches_diagnostic: updatedFichesDiagnostic,
+      selection_fiches_solutions: type === "solution" ? fichesUpdated : (user?.selection_fiches_solutions as number[]),
+      selection_fiches_diagnostic:
+        type === "diagnostic" ? (fichesUpdated as number[]) : (user?.selection_fiches_diagnostic as number[]),
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
@@ -104,17 +133,17 @@ export const saveBookmarkedFicheSolutionsByUser = async (
 
 export const updateBookmarkedFichesSolutions = async (
   userId: string,
-  updatedBookMarkedFichesSolutions: ProjectBookmarks[],
+  updatedBookMarkedFichesSolutions: FichesBookmarked[],
 ) => {
-  const updated = await prismaClient.user.update({
+  return await prismaClient.user.update({
     where: {
       id: userId,
     },
     data: {
       selection_fiches_solutions: updatedBookMarkedFichesSolutions,
     },
+    include: { collectivites: { include: { collectivite: true } } },
   });
-  return updated.selection_fiches_solutions as ProjectBookmarks[];
 };
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {

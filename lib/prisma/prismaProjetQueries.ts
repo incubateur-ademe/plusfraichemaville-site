@@ -4,6 +4,44 @@ import { ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
 
+export const updateFichesProjet = async (
+  projetId: number,
+  ficheId: number,
+  userId: string,
+  type: "solution" | "diagnostic",
+): Promise<ProjetWithRelations | null> => {
+  const projet = await getProjetById(projetId);
+  const selectedFichesInProjet = type === "solution" ? projet?.fiches_solutions_id : projet?.fiches_diagnostic_id;
+  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
+  let updatedRecommandationsViewed: string[] = [];
+
+  if (recommandationsViewedUserIds) {
+    updatedRecommandationsViewed = recommandationsViewedUserIds.filter((currentUserId) => currentUserId !== userId);
+  }
+
+  const isAlreadySaved = selectedFichesInProjet?.includes(+ficheId);
+  const fichesUpdated = isAlreadySaved
+    ? selectedFichesInProjet?.filter((currentFicheId) => currentFicheId !== +ficheId)
+    : selectedFichesInProjet && Array.from(new Set([...selectedFichesInProjet, +ficheId]));
+
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+    },
+    data: {
+      fiches_solutions_id: type === "solution" ? fichesUpdated : projet?.fiches_solutions_id,
+      fiches_diagnostic_id: type === "diagnostic" ? fichesUpdated : projet?.fiches_diagnostic_id,
+      fiches_solutions_validated: false,
+      recommandations_viewed_by: updatedRecommandationsViewed,
+    },
+    include: {
+      collectivite: true,
+      estimations: true,
+      creator: true,
+    },
+  });
+};
+
 export const updateFichesSolutionsProjet = async (
   projetId: number,
   fichesSolutionsId: number[],
