@@ -21,7 +21,7 @@ export const TableauDeBordSuivi = () => {
 
 const cards: TableauDeBordSuiviCardProps[] = [
   {
-    title: "Je fais un diagnostic de surchauffe urbaine",
+    title: "Je choisis une méthode de diagnostic",
     index: 1,
     progress: "0",
     disabled: true,

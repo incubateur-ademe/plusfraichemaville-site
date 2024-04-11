@@ -6,9 +6,13 @@ import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useUserStore } from "@/stores/user/provider";
 import { useSession } from "next-auth/react";
-import { getFichesDiagnosticFromLocalStorage } from "@/components/fiches-diagnostic/helpers";
+
 import { FichesDiagnosticFavoris } from "@/components/fiches-diagnostic/fiches-diagnostic-favoris";
-import { FicheBookmarkedSolution, FichesBookmarked } from "@/components/common/generic-save-fiche/helpers";
+import {
+  FICHE_DIAGNOSTIC_IDS_STORAGE_KEY,
+  FicheBookmarkedSolution,
+  FichesBookmarked,
+} from "@/components/common/generic-save-fiche/helpers";
 import { FichesSolutionsFavoris } from "@/components/ficheSolution/fiches-solutions-favoris";
 
 export default function Page() {
@@ -20,6 +24,8 @@ export default function Page() {
   const userBookmarkedFichesSolutions = useUserStore((state) => state.userInfos?.selection_fiches_solutions);
   const userBookmarkedFichesDiagnostic = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic);
   const [bookmarkedFichesSolutionsInLocalStorage] = useLocalStorage<FichesBookmarked[]>(BOOKMARK_FS_KEY, []);
+  const [bookmarkedFichesDiagnosticInLocalStorage] = useLocalStorage<number[]>(FICHE_DIAGNOSTIC_IDS_STORAGE_KEY, []);
+  console.log(bookmarkedFichesDiagnosticInLocalStorage);
 
   const bookmarkedFichesSolutions =
     session.status === "authenticated"
@@ -27,7 +33,7 @@ export default function Page() {
       : bookmarkedFichesSolutionsInLocalStorage ?? [];
 
   const bookmarkedFichesDiagnostic =
-    session.status === "authenticated" ? userBookmarkedFichesDiagnostic : getFichesDiagnosticFromLocalStorage();
+    session.status === "authenticated" ? userBookmarkedFichesDiagnostic : bookmarkedFichesDiagnosticInLocalStorage;
 
   return (
     isClient && (

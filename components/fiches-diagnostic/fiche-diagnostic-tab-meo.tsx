@@ -11,7 +11,7 @@ export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: Fic
       <div className="mb-14">
         {meo?.map((m, i) => (
           <div className="mb-14" key={i}>
-            <FicheDiagnosticTabBlocText withPicto title={m.titre} text={m.description} titleClassName="text-lg mb-2" />
+            <FicheDiagnosticTabBlocText withPicto title={m.titre} text={m.description} titleClassName="!text-lg mb-2" />
           </div>
         ))}
       </div>

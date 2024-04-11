@@ -50,6 +50,7 @@ module.exports = {
       "dsfr-text-default-grey": "var(--text-default-grey)",
       "dsfr-text-error": "var(--text-default-error)",
       "dsfr-contrast-grey": "var(--background-contrast-grey)",
+      "dsfr-action-high-red-hover": "var(--background-action-high-red-marianne-hover)",
       "tab-hover": "rgba(66, 17, 170, 0.10)!important",
     },
   },
