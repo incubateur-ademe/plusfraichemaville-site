@@ -1,5 +1,6 @@
 "use client";
 import "@splidejs/splide/css/core";
+// @ts-ignore
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { homepageData } from "./homepage-data";
 import { HomepageStoriesControllers } from "./homepage-stories-controllers";
