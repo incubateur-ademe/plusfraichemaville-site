@@ -25,7 +25,6 @@ export default function Page() {
   const userBookmarkedFichesDiagnostic = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic);
   const [bookmarkedFichesSolutionsInLocalStorage] = useLocalStorage<FichesBookmarked[]>(BOOKMARK_FS_KEY, []);
   const [bookmarkedFichesDiagnosticInLocalStorage] = useLocalStorage<number[]>(FICHE_DIAGNOSTIC_IDS_STORAGE_KEY, []);
-  console.log(bookmarkedFichesDiagnosticInLocalStorage);
 
   const bookmarkedFichesSolutions =
     session.status === "authenticated"
