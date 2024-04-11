@@ -103,7 +103,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
           </div>
           <div
             className={clsx(
-              "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 pb-5 rounded-3xl px-9",
+              "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 rounded-3xl",
               !vertical && "lg:!hidden",
             )}
           >
