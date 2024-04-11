@@ -47,27 +47,6 @@ export const saveAllFichesFromLocalStorage = async (
   });
 };
 
-export const updateFichesDiagnosticByUser = async (userId: string, ficheDiagnosticIds: number[]) => {
-  const user = await getUser(userId);
-  const userFichesDiagnostic = user?.selection_fiches_diagnostic;
-
-  let mergedFichesDiagnostic: number[] = [];
-
-  if (userFichesDiagnostic) {
-    mergedFichesDiagnostic = Array.from(new Set([...userFichesDiagnostic, ...ficheDiagnosticIds]));
-  }
-
-  return prismaClient.user.update({
-    where: {
-      id: userId,
-    },
-    data: {
-      selection_fiches_diagnostic: mergedFichesDiagnostic,
-    },
-    include: { collectivites: { include: { collectivite: true } } },
-  });
-};
-
 export const updateFichesUser = async (
   ficheId: number,
   userId: string,
