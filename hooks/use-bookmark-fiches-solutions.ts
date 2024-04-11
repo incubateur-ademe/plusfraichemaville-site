@@ -17,6 +17,7 @@ export const useBookmarkedFichesSolutions = () => {
     const fetchAndSaveBookmarks = async () => {
       if (typeof window !== "undefined") {
         const storedBookmarks = localStorage.getItem(BOOKMARK_FS_KEY);
+        console.log(storedBookmarks);
 
         if (storedBookmarks && user?.id && !init) {
           const parsedBookmarks = convertBookmarkIdsToNumbers(JSON.parse(storedBookmarks));

@@ -2,19 +2,19 @@ import clsx from "clsx";
 
 export const baseAssets = (type: "common" | "projet") => ({
   saved: {
-    code: "",
-    label: type === "common" ? "Sauvegardée" : "Ajoutée au projet x",
-    className: "!text-sm !w-fit !min-h-[2rem] !pr-3 !pl-[0.65rem]  rounded-full !py-0 flex justify-center items-center",
+    code: false,
+    label: type === "common" ? "Sauvegardée" : "Ajoutée au projet",
+    className: clsx(
+      "bg-pfmv-navy !text-sm !w-fit !min-h-[2rem] pl-3 pr-2  rounded-full !py-0",
+      "flex justify-center items-center text-white",
+      "hover:!bg-dsfr-background-action-high-blue-france-active",
+    ),
   },
   unsaved: {
-    code: "ri-bookmark-line",
-    // code: "ri-add-line",
-    label: "",
+    code: true,
     className: clsx(
-      "!min-h-[2rem] !w-8 !h-8 !p-1  rounded-full flex justify-center items-center",
-      // "!min-h-[2rem] !p-1  rounded-full flex justify-center items-center",
-      "!bg-pfmv-light-grey [&>*]:bg-pfmv-light-grey] shadow-pfmv-card-shadow",
-      "[&>*]:text-dsfr-text-mention-grey",
+      "!w-8 !h-8 rounded-full flex justify-center items-center",
+      " shadow-pfmv-card-shadow overflow-hidden",
     ),
   },
 });

@@ -81,3 +81,46 @@ export const deleteBookmarkFiche = (
     });
   }
 };
+
+export const mergeFicheBookmarkedSolutions = (
+  newCurrentFichesBookmarked: FicheBookmarkedSolution[],
+  currentFichesBookmarked?: FicheBookmarkedSolution[],
+): FicheBookmarkedSolution[] => {
+  const merged = new Map<string, number[]>();
+
+  const allItems = [...(currentFichesBookmarked ?? []), ...newCurrentFichesBookmarked];
+
+  for (const item of allItems) {
+    if (item.projectName === "" || merged.has(item.projectName)) {
+      const existingIds = merged.get(item.projectName) || [];
+      const newIds = Array.from(new Set([...existingIds, ...item.ficheSolutionIds]));
+      merged.set(item.projectName, newIds);
+    } else {
+      merged.set(item.projectName, item.ficheSolutionIds);
+    }
+  }
+
+  return Array.from(merged).map(([projectName, ficheSolutionIds]) => ({
+    projectName,
+    ficheSolutionIds,
+  }));
+};
+export const mergeFicheBookmarkedDiagnostic = (
+  newCurrentFichesBookmarked: FichesBookmarked[],
+  currentFichesBookmarked?: FichesBookmarked[],
+): FichesBookmarked[] => {
+  return Array.from(new Set([...(currentFichesBookmarked ?? []), ...newCurrentFichesBookmarked]));
+};
+
+export const getAllSavedFichesFromLocalStorage = () => {
+  const fichesSolutionsBookmarked = localStorage.getItem(BOOKMARK_FS_KEY);
+  const fichesDiagnosticBookmarked = localStorage.getItem(FICHE_DIAGNOSTIC_IDS_STORAGE_KEY);
+
+  const fichesDiagnostic = JSON.parse(fichesDiagnosticBookmarked ?? "[]") as FichesBookmarked[];
+  const fichesSolutions = JSON.parse(fichesSolutionsBookmarked ?? "[]") as FichesBookmarked[];
+
+  return {
+    fichesDiagnostic,
+    fichesSolutions,
+  };
+};

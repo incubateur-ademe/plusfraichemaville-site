@@ -65,17 +65,6 @@ export async function FicheSolution({
                 projectName={(historique && historique[1].label) || ""}
               />
             </div>
-            {/* {params.projetId ? (
-              // TODO: créer un button-save-selector => select entre bouton dans fiche projet / fiche globale
-              <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} label className="hidden md:block" />
-            ) : (
-              <ButtonSaveFicheSolution
-                ficheSolutionId={ficheSolution.id}
-                label
-                projectName={(historique && historique[1].label) || ""}
-                className={"hidden md:block"}
-              />
-            )} */}
           </div>
           <div className="fr-tabs before:!shadow-none">
             <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche solution">

@@ -18,7 +18,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
   const updateSelectedFiche = useProjetsStore((state) => state.updateSelectedFiches);
 
   const validate = () => {
-    updateSelectedFiche(type, ficheId, selectedProjetId);
+    updateSelectedFiche(type, +ficheId, selectedProjetId, true);
   };
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {

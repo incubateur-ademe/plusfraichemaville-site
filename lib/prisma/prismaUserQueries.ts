@@ -1,14 +1,51 @@
 import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper";
 import {
+  FicheBookmarkedSolution,
   FichesBookmarked,
   addFicheBookmark,
   deleteBookmarkFiche,
   isFicheBookmarked,
+  mergeFicheBookmarkedDiagnostic,
+  mergeFicheBookmarkedSolutions,
 } from "@/components/common/generic-save-fiche/helpers";
 import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
+
+export const saveAllFichesFromLocalStorage = async (
+  userId: string,
+  fiches: {
+    fichesSolutions: FichesBookmarked[];
+    fichesDiagnostic: FichesBookmarked[];
+  },
+) => {
+  const user = await getUser(userId);
+
+  const currentSavedFichesDiagnostic = user?.selection_fiches_diagnostic;
+  const currentSavedFichesSolutions = user?.selection_fiches_solutions;
+
+  const updatedSavedFichesDiagnostic = mergeFicheBookmarkedDiagnostic(
+    fiches.fichesDiagnostic,
+    currentSavedFichesDiagnostic,
+  );
+
+  const updatedSavedFichesSolutions = mergeFicheBookmarkedSolutions(
+    fiches.fichesSolutions as FicheBookmarkedSolution[],
+    currentSavedFichesSolutions as FicheBookmarkedSolution[],
+  );
+
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      selection_fiches_diagnostic: updatedSavedFichesDiagnostic as number[],
+      selection_fiches_solutions: updatedSavedFichesSolutions,
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};
 
 export const updateFichesDiagnosticByUser = async (userId: string, ficheDiagnosticIds: number[]) => {
   const user = await getUser(userId);
@@ -48,7 +85,6 @@ export const updateFichesUser = async (
   const fichesUpdated = isAlreadySaved
     ? deleteBookmarkFiche(type, selectedByUser, +ficheId, projectName ?? "")
     : addFicheBookmark(type, selectedByUser, +ficheId, projectName ?? "");
-  console.log({ fichesUpdated, selectedByUser, ficheId });
 
   return prismaClient.user.update({
     where: {

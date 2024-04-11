@@ -19,5 +19,5 @@ export const GenericSaveUnauthenticated = ({ ...props }: GenericSaveFicheButtonW
 
   const assets = selectSavedOrUnsavedAssets(isBookmarked, "common");
 
-  return <GenericSaveButtonElement assets={assets} update={update} {...props} />;
+  return <GenericSaveButtonElement isSaved={isBookmarked} assets={assets} update={update} {...props} />;
 };

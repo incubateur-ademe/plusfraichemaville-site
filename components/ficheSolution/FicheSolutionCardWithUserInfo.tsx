@@ -20,7 +20,7 @@ export default function FicheSolutionCardWithUserInfo({
   projectName,
 }: FicheSolutionCardWithUserInfoProps) {
   return (
-    <div className={`relative ${className}`}>
+    <div className={`relative flex ${className}`}>
       <FicheSolutionFullCard ficheSolution={ficheSolution.attributes} extraUrlParams={extraUrlParams} />
       {children}
       <GenericSaveFiche id={ficheSolution.id} type="solution" projectName={projectName} />

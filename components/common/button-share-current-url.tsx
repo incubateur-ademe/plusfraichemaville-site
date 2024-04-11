@@ -1,4 +1,5 @@
 "use client";
+import clsx from "clsx";
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -21,16 +22,20 @@ export default function ButtonShareCurrentUrl({ className }: { className?: strin
       {isClient ? (
         <>
           <div
-            className="flex flex-row mb-4 text-dsfr-text-mention-grey cursor-pointer"
+            className="flex flex-row items-center gap-2 mb-4 text-dsfr-text-mention-grey cursor-pointer"
             onClick={copyCurrentUrlToClipboard}
           >
-            <i className={"ri-share-forward-fill text-dsfr-text-label-blue-france mr-2"} />
+            <div className="bg-pfmv-navy w-8 h-8 rounded-full flex items-center justify-center">
+              <i className={clsx("fr-icon--sm ri-share-forward-fill text-dsfr-text-label-blue-france text-white")} />
+            </div>
             <span className="mt-[1px] text-dsfr-text-label-blue-france text-sm font-bold">Partager</span>
           </div>
         </>
       ) : (
-        <div className="flex flex-row mb-4 text-dsfr-text-mention-grey">
-          <i className={"ri-share-forward-fill text-dsfr-text-label-blue-france mr-2"} />
+        <div className="flex flex-row items-center gap-2 mb-4 text-dsfr-text-mention-grey">
+          <div className="bg-pfmv-navy w-8 h-8 rounded-full flex items-center justify-center">
+            <i className={clsx(" fr-icon--sm ri-share-forward-fill text-dsfr-text-label-blue-france text-white")} />
+          </div>
           <span className="mt-[1px] text-dsfr-text-label-blue-france text-sm font-bold">Partager</span>
         </div>
       )}

@@ -19,5 +19,5 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
 
   const assets = selectSavedOrUnsavedAssets(isSaved ?? false, "projet");
 
-  return <GenericSaveButtonElement update={update} assets={assets} {...props} />;
+  return <GenericSaveButtonElement isSaved={isSaved} update={update} assets={assets} {...props} />;
 };
