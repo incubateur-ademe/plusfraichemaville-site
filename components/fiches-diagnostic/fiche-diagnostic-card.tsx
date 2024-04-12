@@ -40,6 +40,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
           <div className={clsx("w-72 relative overflow-hidden block h-52", !vertical && "lg:flex lg:h-auto")}>
             <Image
               fill
+              sizes="(max-width: 768px) 80vw, 33vw"
               src={getStrapiImageUrl(ficheDiagnostic.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}
               className={clsx(
