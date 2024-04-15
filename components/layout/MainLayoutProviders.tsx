@@ -10,7 +10,7 @@ export default function MainLayoutProviders({ children, lang }: PropsWithChildre
   useTrackPageView();
 
   return (
-    <SessionProvider refetchOnWindowFocus={false}>
+    <SessionProvider>
       <UserStoreProvider>
         <ProjetsStoreProvider>
           <DsfrProvider lang={lang}>{children}</DsfrProvider>

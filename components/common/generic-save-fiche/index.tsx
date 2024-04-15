@@ -1,6 +1,5 @@
 "use client";
 
-import { useSession } from "next-auth/react";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { GenericSaveModal } from "./generic-save-modal";
 import { GenericSaveButton } from "./generic-save-button";
@@ -16,7 +15,6 @@ export type GenericSaveBaseProps = {
 };
 
 export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
-  const status = useSession().status;
   const modal = createModal({
     id: `${props.id.toString()}-${generateRandomId()}`,
     isOpenedByDefault: false,
@@ -24,8 +22,8 @@ export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
 
   return (
     <div className={clsx("absolute top-3 right-4")} data-id="generic-save-fiche">
-      <GenericSaveButton modal={modal} status={status} {...props} />
-      {!props.withoutModal && <GenericSaveModal modal={modal} status={status} {...props} />}
+      <GenericSaveButton modal={modal} {...props} />
+      {!props.withoutModal && <GenericSaveModal modal={modal} {...props} />}
     </div>
   );
 };

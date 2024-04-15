@@ -6,9 +6,9 @@ import { GenericSaveUnauthenticated } from "./generic-save-button-unauthenticate
 import { GenericSaveSpinner } from "./generic-spinner";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { GenericSaveAuthenticatedInsideProjet } from "./generic-save-button-authenticated-inside-projet";
+import { useSession } from "next-auth/react";
 
 interface GenericSaveFicheButtonBaseProps extends GenericSaveBaseProps {
-  status: "authenticated" | "unauthenticated" | "loading";
   modal?: DSFRModal;
 }
 
@@ -16,8 +16,9 @@ export interface GenericSaveFicheButtonWithOpener extends GenericSaveBaseProps {
   opener?: () => void;
 }
 
-export const GenericSaveButton = ({ status, modal, ...props }: GenericSaveFicheButtonBaseProps) => {
+export const GenericSaveButton = ({ modal, ...props }: GenericSaveFicheButtonBaseProps) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
+  const status = useSession().status;
 
   const buttons = {
     authenticated: currentProjetId ? (
