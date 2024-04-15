@@ -8,7 +8,6 @@ import { TypeFiche } from "@/helpers/common";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import React from "react";
-import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 export const FicheDiagnosticMethodeTab = ({
   ficheDiagnostic,
@@ -16,7 +15,7 @@ export const FicheDiagnosticMethodeTab = ({
   ficheDiagnostic: FicheDiagnosticResponse;
   projetId?: number;
 }) => {
-  const { attributes, id: ficheDiagnosticId } = ficheDiagnostic;
+  const { attributes } = ficheDiagnostic;
   const coutMin = attributes.cout_min;
   const coutMax = attributes.cout_max;
   const delaiMin = attributes.delai_min;
@@ -33,9 +32,6 @@ export const FicheDiagnosticMethodeTab = ({
         <span className="font-bold capitalize text-dsfr-background-flat-warning">
           {getMethodeDiagnosticFromCode(attributes.methode)?.label}
         </span>
-        <div className="absolute [&>*]:top-0 [&>*]:right-0 top-0 right-0 w-52 md:hidden">
-          <GenericSaveFiche id={ficheDiagnosticId} type="diagnostic" />
-        </div>
       </div>
       <div className="flex justify-between flex-col md:flex-row">
         <div className="max-w-screen-sm">

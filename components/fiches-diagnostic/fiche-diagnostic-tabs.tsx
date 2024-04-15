@@ -37,11 +37,17 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
   return (
     <div className="relative">
       <div className="bg-pfmv-orange h-14 w-full absolute left-0 top-0"></div>
-      <div className="fr-container flex flex-row">
-        <div className="hidden md:block flex-none md:w-56 md:mt-[6.5rem]">
+      <div className="relative fr-container flex flex-row">
+        <div className="flex-none md:w-56 md:mt-[6.5rem]">
           <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-2"} />
-          <div className="relative hidden md:block [&>*]:left-0">
-            <GenericSaveFiche id={id} type="diagnostic" />
+
+          <div
+            className={clsx(
+              "absolute right-3 top-[90px] w-32 lg:left-6 md:w-32 md:top-[148px] md:right-[unset]",
+              "[&>*]:right-[unset] md:[&>*]:top-0",
+            )}
+          >
+            <GenericSaveFiche id={id} type="diagnostic" withLabel />
           </div>
         </div>
         <div className="fr-tabs !shadow-none before:!shadow-none">

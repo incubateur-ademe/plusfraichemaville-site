@@ -40,7 +40,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
         sélection. <br />
         Voulez-vous ajouter aussi cette solution dans l’un de vos projets ?
       </span>
-      <div className="my-10 flex-col md:flex-row flex items-center gap-0 md:gap-5">
+      <div className="my-10 flex-col md:flex-row flex md:items-center gap-0 md:gap-5">
         <Select
           label=""
           className="w-96"

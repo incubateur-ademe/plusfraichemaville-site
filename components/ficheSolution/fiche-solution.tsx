@@ -60,7 +60,7 @@ export async function FicheSolution({
             <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-1"} />
             <div
               className={clsx(
-                "absolute right-0 top-[90px] w-32 md:left-0 md:w-32 md:top-12 md:right-[unset]",
+                "absolute right-3 top-[90px] w-32 md:left-0 md:w-32 md:top-12 md:right-[unset]",
                 "[&>*]:right-[unset] md:[&>*]:top-0",
               )}
             >
