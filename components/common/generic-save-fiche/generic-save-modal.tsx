@@ -3,6 +3,7 @@ import { GenericSaveModalUnauthenticated } from "./generic-save-modal-unauthenti
 import { useProjetsStore } from "@/stores/projets/provider";
 import { ModalSaveModalAuthenticatedOutsideProjet } from "./generic-save-modal-authenticated-outside-projet";
 import { ModalSaveModalAuthenticatedInsideProjet } from "./generic-save-modal-authenticated-inside-projet";
+import { useSession } from "next-auth/react";
 
 export type GenericSaveModalCommonProps = {
   modal: DSFRModal;
@@ -10,12 +11,10 @@ export type GenericSaveModalCommonProps = {
   id: number;
 };
 
-interface GenericSaveModalInitialProps extends GenericSaveModalCommonProps {
-  status: "authenticated" | "unauthenticated" | "loading";
-}
-
-export const GenericSaveModal = ({ status, ...props }: GenericSaveModalInitialProps) => {
+export const GenericSaveModal = ({ ...props }: GenericSaveModalCommonProps) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
+  const status = useSession().status;
+  console.log("status", status);
 
   const modals = {
     unauthenticated: <GenericSaveModalUnauthenticated {...props} />,
