@@ -7,11 +7,8 @@ import RetourExperienceCard from "@/components/retourExperience/RetourExperience
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import { APIResponseData, GetValues } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 export default function FicheSolutionTabSynthese({
-  ficheSolutionId,
-  projectName,
   ficheSolution,
 }: {
   ficheSolutionId: number;
@@ -38,9 +35,6 @@ export default function FicheSolutionTabSynthese({
       <div className="flex flex-col md:flex-row justify-between">
         <div className="md:pr-9">
           <div className="flex flex-row justify-between items-center mb-4 relative">
-            <div className="md:hidden absolute [&>*]:top-0 [&>*]:right-0  right-0 -top-2 w-52">
-              <GenericSaveFiche id={ficheSolutionId} type="solution" projectName={projectName} />
-            </div>
             {typeSolution && (
               <div className="flex flex-row text-dsfr-text-mention-grey">
                 {typeSolution.coloredIcon("fr-icon mr-4 mb-auto")}

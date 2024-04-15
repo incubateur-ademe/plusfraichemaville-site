@@ -10,6 +10,7 @@ type FicheSolutionCardWithUserInfoProps = {
   projectName: string;
   extraUrlParams?: { param: string; value: string }[];
   className?: string;
+  withoutModal?: boolean;
 } & PropsWithChildren;
 
 export default function FicheSolutionCardWithUserInfo({
@@ -18,17 +19,13 @@ export default function FicheSolutionCardWithUserInfo({
   className = "",
   children,
   projectName,
+  withoutModal,
 }: FicheSolutionCardWithUserInfoProps) {
   return (
     <div className={`relative flex ${className}`}>
       <FicheSolutionFullCard ficheSolution={ficheSolution.attributes} extraUrlParams={extraUrlParams} />
       {children}
-      <GenericSaveFiche id={ficheSolution.id} type="solution" projectName={projectName} />
-      {/* {projetId ? (
-        <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} className="absolute top-2 right-2" />
-      ) : (
-        <GenericSaveFiche id={ficheSolution.id} projectName={projectName} type="solution" />
-      )} */}
+      <GenericSaveFiche id={ficheSolution.id} type="solution" projectName={projectName} withoutModal={withoutModal} />
     </div>
   );
 }

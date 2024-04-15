@@ -18,7 +18,9 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
   const updateSelectedFiche = useProjetsStore((state) => state.updateSelectedFiches);
 
   const validate = () => {
-    updateSelectedFiche(type, +ficheId, selectedProjetId, true);
+    if (selectedProjetId > 0) {
+      updateSelectedFiche(type, +ficheId, selectedProjetId, true);
+    }
   };
 
   const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
@@ -38,7 +40,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
         sélection. <br />
         Voulez-vous ajouter aussi cette solution dans l’un de vos projets ?
       </span>
-      <div className="my-10 flex items-center gap-5">
+      <div className="my-10 flex-col md:flex-row flex md:items-center gap-0 md:gap-5">
         <Select
           label=""
           className="w-96"
@@ -56,11 +58,19 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
             );
           })}
         </Select>
-        <Button className="rounded-3xl !h-fit !min-h-fit !text-sm !mb-3" onClick={validate}>
+        <Button
+          className="rounded-3xl !h-fit !min-h-fit !text-sm !mb-3"
+          disabled={selectedProjetId < 1}
+          onClick={validate}
+        >
           Ajouter au projet
         </Button>
       </div>
-      <Button priority="primary" className="rounded-3xl !min-h-fit !text-sm md:ml-20 mr-4" onClick={modal.close}>
+      <Button
+        priority="primary"
+        className="rounded-3xl mb-2 md:mb-0 !min-h-fit !text-sm md:ml-20 mr-4"
+        onClick={modal.close}
+      >
         Continuer ma lecture
       </Button>
       <Link
