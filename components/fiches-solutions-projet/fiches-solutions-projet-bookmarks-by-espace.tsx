@@ -24,7 +24,8 @@ export const FichesSolutionProjetBookmarksByEspace = ({
   );
 
   const label = getLabelFromCode(projetTypeEspace);
-  const matchedFichesSolutions = userFichesSolutions.find((fiche) => fiche.projectName === label);
+  const matchedFichesSolutions =
+    userFichesSolutions && userFichesSolutions.find((fiche) => fiche.projectName === label);
 
   if (!matchedFichesSolutions) {
     return null;

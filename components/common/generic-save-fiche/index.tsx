@@ -16,6 +16,7 @@ export type GenericSaveBaseProps = {
 
 export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
   const status = useSession().status;
+  console.log(status);
 
   const modal = createModal({
     id: `${props.id.toString()}-${generateRandomId()}`,
