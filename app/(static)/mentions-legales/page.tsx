@@ -33,17 +33,14 @@ export default async function PageMentionsLegales() {
       <h2>Hébergement du site</h2>
       <p>
         Ce site est hébergé par Scalingo SAS
-        <address>
-          <p>
-            9 rue de la Krutenau
-            <br />
-            67100 Strasbourg
-            <br />
-            <a href="https://scalingo.com/fr" target="_blank" rel="nofollow noopener noreferrer">
-              https://scalingo.com/fr
-            </a>
-          </p>
-        </address>
+        <br />
+        9 rue de la Krutenau
+        <br />
+        67100 Strasbourg
+        <br />
+        <a href="https://scalingo.com/fr" target="_blank" rel="nofollow noopener noreferrer">
+          https://scalingo.com/fr
+        </a>
       </p>
       <h2>Accessibilité</h2>
       <p>
