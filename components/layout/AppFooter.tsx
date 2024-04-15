@@ -67,6 +67,11 @@ export default function AppFooter() {
               </a>
             </li>
             <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href="/mentions-legales">
+                Mentions légales
+              </a>
+            </li>
+            <li className="fr-footer__bottom-item">
               <a
                 className="fr-footer__bottom-link"
                 href="https://github.com/incubateur-ademe/plusfraichemaville-site"
