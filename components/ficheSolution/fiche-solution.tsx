@@ -48,8 +48,8 @@ export async function FicheSolution({
           </div>
         </div>
         <div className="h-14 w-full bg-dsfr-background-alt-blue-france absolute" />
-        <div className="fr-container flex flex-row">
-          <div className="flex-none md:w-56 md:mt-[6.5rem]">
+        <div className="fr-container flex flex-row relative">
+          <div className="flex-none md:w-56 md:mt-[6.5rem] md:relative">
             {historique && (
               <AideDecisionBreadcrumbs
                 historique={historique}
@@ -58,7 +58,12 @@ export async function FicheSolution({
               />
             )}
             <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-1"} />
-            <div className="relative [&>*]:left-0 hidden md:block">
+            <div
+              className={clsx(
+                "absolute right-0 top-[90px] w-32 md:left-0 md:w-32 md:top-12 md:right-[unset]",
+                "[&>*]:right-[unset] md:[&>*]:top-0",
+              )}
+            >
               <GenericSaveFiche
                 id={ficheSolution.id}
                 type="solution"
