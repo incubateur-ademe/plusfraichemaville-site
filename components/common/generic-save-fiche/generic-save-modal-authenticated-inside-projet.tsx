@@ -17,7 +17,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
       </div>
       <Button
         priority="primary"
-        className="rounded-3xl !min-h-fit !text-sm md:ml-20 mr-4"
+        className="rounded-3xl !min-h-fit !text-sm md:ml-20 mr-4 mb-2"
         onClick={() => modal.close()}
       >
         Continuer ma lecture
