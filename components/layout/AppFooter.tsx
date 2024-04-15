@@ -62,7 +62,7 @@ export default function AppFooter() {
         <div className="fr-footer__bottom">
           <ul className="fr-footer__bottom-list">
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="#">
+              <a className="fr-footer__bottom-link" href="/accessibilite">
                 Accessibilité : non conforme
               </a>
             </li>
