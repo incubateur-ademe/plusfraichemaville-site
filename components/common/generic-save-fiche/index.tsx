@@ -5,18 +5,20 @@ import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { GenericSaveModal } from "./generic-save-modal";
 import { GenericSaveButton } from "./generic-save-button";
 import clsx from "clsx";
+import { generateRandomId } from "@/helpers/common";
 
 export type GenericSaveBaseProps = {
   type: "diagnostic" | "solution";
   id: number;
   projectName?: string;
+  withLabel?: boolean;
 };
 
 export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
   const status = useSession().status;
 
   const modal = createModal({
-    id: props.id.toString(),
+    id: `${props.id.toString()}-${generateRandomId()}`,
     isOpenedByDefault: false,
   });
 

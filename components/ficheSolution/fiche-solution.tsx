@@ -63,6 +63,7 @@ export async function FicheSolution({
                 id={ficheSolution.id}
                 type="solution"
                 projectName={(historique && historique[1].label) || ""}
+                withLabel
               />
             </div>
           </div>

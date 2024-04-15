@@ -4,12 +4,13 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import clsx from "clsx";
 import { usePathname } from "next/navigation";
 
-export const GenericSaveLabel = ({ isSaved }: { isSaved: boolean }) => {
+export const GenericSaveLabel = ({ isSaved, withLabel }: { isSaved: boolean; withLabel?: boolean }) => {
   const pathname = usePathname();
   const isFullpage = pathname.startsWith("/fiche-solution/") || pathname.startsWith("/fiches-diagnostic/");
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const label = currentProjetId ? "Ajouter au projet" : "Sauvegarder";
-  if (!isFullpage) {
+
+  if (!isFullpage || !withLabel) {
     return null;
   }
   return (

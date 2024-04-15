@@ -105,6 +105,7 @@ export const mergeFicheBookmarkedSolutions = (
     ficheSolutionIds,
   }));
 };
+
 export const mergeFicheBookmarkedDiagnostic = (
   newCurrentFichesBookmarked: FichesBookmarked[],
   currentFichesBookmarked?: FichesBookmarked[],

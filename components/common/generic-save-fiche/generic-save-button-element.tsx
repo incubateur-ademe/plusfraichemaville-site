@@ -14,7 +14,13 @@ interface GenericSaveFicheButtonBaseProps extends GenericSaveBaseProps {
   isSaved?: boolean;
 }
 
-export const GenericSaveButtonElement = ({ className, assets, update, isSaved }: GenericSaveFicheButtonBaseProps) => {
+export const GenericSaveButtonElement = ({
+  className,
+  assets,
+  update,
+  isSaved,
+  withLabel,
+}: GenericSaveFicheButtonBaseProps) => {
   return (
     <div className={clsx(className, "z-[1] relative")}>
       <button onClick={update} className={clsx(assets.className)}>
@@ -26,7 +32,7 @@ export const GenericSaveButtonElement = ({ className, assets, update, isSaved }:
           </>
         )}
       </button>
-      <GenericSaveLabel isSaved={isSaved!} />
+      <GenericSaveLabel isSaved={isSaved!} withLabel={withLabel} />
     </div>
   );
 };
