@@ -10,7 +10,8 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
   const updater = useProjetsStore((state) => state.updateSelectedFiches);
   const update = () => {
     updater(props.type, props.id, projet?.id!);
-    !isSaved && opener && opener();
+
+    !isSaved && !props.withoutModal && opener && opener();
   };
 
   const isSaved = isSolution

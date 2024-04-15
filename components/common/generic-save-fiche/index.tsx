@@ -12,10 +12,12 @@ export type GenericSaveBaseProps = {
   id: number;
   projectName?: string;
   withLabel?: boolean;
+  withoutModal?: boolean;
 };
 
 export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
   const status = useSession().status;
+
   console.log(status);
 
   const modal = createModal({
@@ -26,7 +28,7 @@ export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
   return (
     <div className={clsx("absolute top-3 right-4")} data-id="generic-save-fiche">
       <GenericSaveButton modal={modal} status={status} {...props} />
-      <GenericSaveModal modal={modal} status={status} {...props} />
+      {!props.withoutModal && <GenericSaveModal modal={modal} status={status} {...props} />}
     </div>
   );
 };

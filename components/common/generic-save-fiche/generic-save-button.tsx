@@ -9,7 +9,7 @@ import { GenericSaveAuthenticatedInsideProjet } from "./generic-save-button-auth
 
 interface GenericSaveFicheButtonBaseProps extends GenericSaveBaseProps {
   status: "authenticated" | "unauthenticated" | "loading";
-  modal: DSFRModal;
+  modal?: DSFRModal;
 }
 
 export interface GenericSaveFicheButtonWithOpener extends GenericSaveBaseProps {
@@ -21,11 +21,11 @@ export const GenericSaveButton = ({ status, modal, ...props }: GenericSaveFicheB
 
   const buttons = {
     authenticated: currentProjetId ? (
-      <GenericSaveAuthenticatedInsideProjet {...props} opener={modal.open} />
+      <GenericSaveAuthenticatedInsideProjet {...props} opener={modal?.open} />
     ) : (
-      <GenericSaveAuthenticatedOutsideProjet {...props} opener={modal.open} />
+      <GenericSaveAuthenticatedOutsideProjet {...props} opener={modal?.open} />
     ),
-    unauthenticated: <GenericSaveUnauthenticated {...props} opener={modal.open} />,
+    unauthenticated: <GenericSaveUnauthenticated {...props} opener={modal?.open} />,
     loading: <GenericSaveSpinner />,
   };
 
