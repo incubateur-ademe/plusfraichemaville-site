@@ -43,8 +43,8 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
 
           <div
             className={clsx(
-              "absolute right-3 top-[55px] w-44 lg:left-6 md:top-[148px] md:right-[unset]",
-              "[&>*]:right-[unset] md:[&>*]:top-0",
+              "absolute left-0 top-[68px] w-52 md:top-[148px]",
+              "[&>*]:left-4 [&>*]:md:left-6 md:[&>*]:top-0 [&>*]:right-[unset]",
             )}
           >
             <GenericSaveFiche id={id} type="diagnostic" withLabel />
@@ -62,7 +62,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
             <div
               id={tab.contentId}
               key={tab.contentId}
-              className={clsx("customPanel customPanelDiag fr-tabs__panel", !index && "fr-tabs__panel--selected")}
+              className={clsx("!px-0 !py-20 md:!py-12 fr-tabs__panel", !index && "fr-tabs__panel--selected")}
               role="tabpanel"
             >
               {tab.component}

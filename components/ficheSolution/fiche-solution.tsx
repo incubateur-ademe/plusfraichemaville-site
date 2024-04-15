@@ -60,8 +60,8 @@ export async function FicheSolution({
             <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-1"} />
             <div
               className={clsx(
-                "absolute right-0 top-[55px] w-44 lg:w-auto md:top-12 md:left-0 md:right-[unset]",
-                "[&>*]:right-[unset] md:[&>*]:top-0",
+                "absolute left-0 top-[68px] w-52 md:top-12 md:right-[unset]",
+                "md:[&>*]:top-0 [&>*]:md:left-0 [&>*]:left-4",
               )}
             >
               <GenericSaveFiche
@@ -92,7 +92,7 @@ export async function FicheSolution({
             </ul>
             <div
               id="synthese-panel"
-              className="fr-tabs__panel fr-tabs__panel--selected customPanel !pt-0"
+              className="fr-tabs__panel fr-tabs__panel--selected !px-0 !py-20 md:!py-12"
               role="tabpanel"
             >
               <FicheSolutionTabSynthese
@@ -102,16 +102,16 @@ export async function FicheSolution({
                 projetId={params.projetId}
               />
             </div>
-            <div id="materiaux-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+            <div id="materiaux-panel" className="fr-tabs__panel !px-0 !py-20 md:!py-12" role="tabpanel">
               <FicheSolutionTabMateriaux ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 !py-20 md:!py-12" role="tabpanel">
               <FicheSolutionTabMiseEnOeuvre ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="financements-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+            <div id="financements-panel" className="fr-tabs__panel !px-0 !py-20 md:!py-12" role="tabpanel">
               <FicheSolutionTabFinancements ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="oups-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+            <div id="oups-panel" className="fr-tabs__panel !px-0 !py-20 md:!py-12" role="tabpanel">
               <FicheSolutionTabOups ficheSolution={ficheSolution.attributes} />
             </div>
           </div>
