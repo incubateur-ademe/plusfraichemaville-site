@@ -43,7 +43,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
 
           <div
             className={clsx(
-              "absolute right-3 top-[90px] w-32 lg:left-6 md:w-32 md:top-[148px] md:right-[unset]",
+              "absolute right-3 top-[55px] w-44 lg:left-6 md:top-[148px] md:right-[unset]",
               "[&>*]:right-[unset] md:[&>*]:top-0",
             )}
           >
