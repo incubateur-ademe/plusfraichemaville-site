@@ -28,7 +28,7 @@ export const homepageData = {
       label: "Je crée un projet",
       url: PFMV_ROUTES.CREATE_PROJET,
     },
-    image: "/images/homepage/home-hero.png",
+    image: "/images/homepage/home-hero.jpg",
   },
   stories: {
     title: "Vous aider à trouver les bonnes solutions pour rafraîchir durablement votre collectivité",
@@ -45,28 +45,28 @@ export const homepageData = {
         alt: "",
         code: "verte",
         slug: "arbres-vegetaux-cour-ecole",
-        image: "/images/homepage/solutions/arbres-vegetaux-cour-ecole.jpeg",
+        image: "/images/homepage/solutions/arbres-vegetaux-cour-ecole.jpg",
       },
       {
         title: "Adaptation des batiments - école",
         alt: "",
         code: "grise",
         slug: "batiment-ecole-adaptation-renovation-batiments",
-        image: "/images/homepage/solutions/batiment-ecole-adaptation-renovation-batiments.jpeg",
+        image: "/images/homepage/solutions/batiment-ecole-adaptation-renovation-batiments.jpg",
       },
       {
         title: "Comportements collectifs face à la chaleur",
         alt: "",
         code: "douce",
         slug: "comportements-collectifs",
-        image: "/images/homepage/solutions/comportements-collectifs.jpeg",
+        image: "/images/homepage/solutions/comportements-collectifs.jpg",
       },
       {
         title: "Façade végétalisée",
         alt: "",
         code: "verte",
         slug: "facade-vegetalisee",
-        image: "/images/homepage/solutions/facade-vegetalisee.jpeg",
+        image: "/images/homepage/solutions/facade-vegetalisee.jpg",
       },
       {
         title: "Revêtement à albédo élevé",
@@ -90,7 +90,7 @@ export const homepageData = {
       {
         title: "Faites un diagnostic de la surchauffe sur votre territoire",
         description: "Consultez les différentes méthodes de diagnostic en fonction de votre besoin.",
-        image: { url: "/images/homepage/home-start-1.svg", width: 331, height: 320 },
+        image: { url: "/images/homepage/home-start-1.png", width: 331, height: 320 },
         cta: {
           label: "Je trouve la bonne méthode",
           url: PFMV_ROUTES.FICHES_DIAGNOSTIC,
@@ -115,7 +115,7 @@ export const homepageData = {
       climat_actuel: "semi_continental",
       climat_futur: "mediterraneen",
       titre: "À Lyon, les arbres de pluie comme armes de résilience",
-      image_principale: "/images/homepage/rex/lyon-arbres-de-pluie.jpeg",
+      image_principale: "/images/homepage/rex/lyon-arbres-de-pluie.jpg",
       region: {
         data: {
           attributes: {
@@ -158,7 +158,7 @@ export const homepageData = {
         climat_actuel: "oceanique",
         climat_futur: "mediterraneen",
         titre: "La cour Oasis Berthelot, un îlot de fraîcheur au coeur de Montrouge",
-        image_principale: "/images/homepage/rex/cour-oasis-berthelot-montrouge.jpeg",
+        image_principale: "/images/homepage/rex/cour-oasis-berthelot-montrouge.jpg",
         region: {
           data: {
             attributes: {

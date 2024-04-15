@@ -15,6 +15,7 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
               alt={attributes.titre}
               className="object-cover"
               fill
+              sizes="(max-width: 768px) 80vw, 33vw"
             />
           </div>
           <div className=" col-span-9 md:col-span-6 max-w-xl">

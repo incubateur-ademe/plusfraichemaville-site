@@ -17,7 +17,7 @@ export default async function SolutionRetourExperienceCard({
         <div className="relative h-32 w-32 flex-none">
           <Image
             fill
-            sizes="30vw md:5vw"
+            sizes="(max-width: 768px) 50vw, 10vw"
             className="rounded-full object-cover"
             src={getStrapiImageUrl(solution.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
             alt={solution.attributes.titre}
