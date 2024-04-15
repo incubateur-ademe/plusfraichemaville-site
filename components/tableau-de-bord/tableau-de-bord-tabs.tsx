@@ -23,8 +23,9 @@ export const TableauDeBordTabs = () => {
   const currentTab = params.get("tab");
 
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const currentUser = useUserStore((state) => state.userInfos?.id);
-  const recommandationViewed = useProjetsStore((state) => state.getCurrentProjet())?.recommandations_viewed_by;
+  const recommandationViewed = currentProjet?.recommandations_viewed_by;
   const recommandationsAlreadyViewed = currentUser && recommandationViewed?.includes(currentUser);
 
   const tabs = [
@@ -38,9 +39,11 @@ export const TableauDeBordTabs = () => {
       filter: "recommandation",
       component: <TableauDeBordRecommandation />,
       update: async () => {
-        const updatedProjet = await updateRecommandationsViewedByUser(projetId as string, "add");
-        if (updatedProjet.projet) {
-          addOrUpdateProjet(updatedProjet.projet);
+        if (currentUser && !recommandationsAlreadyViewed) {
+          const updatedProjet = await updateRecommandationsViewedByUser(projetId as string, currentUser, "add");
+          if (updatedProjet.projet) {
+            addOrUpdateProjet(updatedProjet.projet);
+          }
         }
       },
     },
@@ -60,6 +63,8 @@ export const TableauDeBordTabs = () => {
                 "!bg-none relative",
                 !recommandationsAlreadyViewed &&
                   tab.filter === "recommandation" &&
+                  currentProjet?.fiches_solutions_id &&
+                  currentProjet.fiches_solutions_id.length > 0 &&
                   `after:right-4 after:rounded-full after:w-[7.5px] after:h-[7.5px]`,
                 tab.filter === "recommandation" &&
                   "after:absolute after:top-2 after:bg-dsfr-background-flat-blue-france",

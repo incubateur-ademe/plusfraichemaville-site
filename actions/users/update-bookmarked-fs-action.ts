@@ -19,7 +19,7 @@ export const updateBookmarkedFichesSolutionsProjetAction = async (
     return { type: "error", message: "UNAUTHENTICATED", user: null };
   }
 
-  if (!hasPermissionToUpdateUser(session.user.id, userId)) {
+  if (!hasPermissionToUpdateUser(userId, session.user.id)) {
     return { type: "error", message: "UNAUTHORIZED", user: null };
   }
 

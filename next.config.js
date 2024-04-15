@@ -1,5 +1,44 @@
-/** @type {import("next").NextConfig} */
+const cspHeader = `
+    default-src 'self';
+    script-src 'self' https://stats.beta.gouv.fr 'unsafe-eval' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline';
+    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ ;
+    font-src 'self';
+    object-src 'none';
+    base-uri 'self';
+    form-action 'self';
+    frame-src https://c33e446d.sibforms.com ;
+    frame-ancestors 'none';
+    upgrade-insecure-requests;
+    connect-src 'self' https://sentry.incubateur.net/ https://stats.beta.gouv.fr/matomo.php
+     https://api-adresse.data.gouv.fr/search/ ;
+`;
 const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Content-Security-Policy",
+            value: cspHeader.replace(/\n/g, ""),
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+        ],
+      },
+    ];
+  },
   async redirects() {
     return [
       {
