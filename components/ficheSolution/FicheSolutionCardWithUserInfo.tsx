@@ -25,7 +25,13 @@ export default function FicheSolutionCardWithUserInfo({
     <div className={`relative flex ${className}`}>
       <FicheSolutionFullCard ficheSolution={ficheSolution.attributes} extraUrlParams={extraUrlParams} />
       {children}
-      <GenericSaveFiche id={ficheSolution.id} type="solution" projectName={projectName} withoutModal={withoutModal} />
+      <GenericSaveFiche
+        id={ficheSolution.id}
+        type="solution"
+        projectName={projectName}
+        withoutModal={withoutModal}
+        classNameButton="absolute top-3 right-4"
+      />
     </div>
   );
 }

@@ -30,5 +30,5 @@ export const GenericSaveButton = ({ modal, ...props }: GenericSaveFicheButtonBas
     loading: <GenericSaveSpinner />,
   };
 
-  return buttons[status];
+  return <div className={props.classNameButton}>{buttons[status]}</div>;
 };

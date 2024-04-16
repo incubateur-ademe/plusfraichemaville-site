@@ -41,12 +41,10 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
         <div className="flex-none md:w-56 md:mt-[6.5rem]">
           <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-2"} />
 
-          <div
-            className={clsx(
-              "absolute left-0 top-[68px] w-52 md:top-[148px]",
-              "[&>*]:left-4 [&>*]:md:left-6 md:[&>*]:top-0 [&>*]:right-[unset]",
-            )}
-          >
+          <div className="absolute right-4 top-[68px] md:hidden">
+            <GenericSaveFiche id={id} type="diagnostic" />
+          </div>
+          <div className="hidden md:block mt-4">
             <GenericSaveFiche id={id} type="diagnostic" withLabel />
           </div>
         </div>
@@ -62,7 +60,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
             <div
               id={tab.contentId}
               key={tab.contentId}
-              className={clsx("!px-0 !py-20 md:!py-12 fr-tabs__panel", !index && "fr-tabs__panel--selected")}
+              className={clsx("!px-0 !pt-14 md:!py-12 fr-tabs__panel", !index && "fr-tabs__panel--selected")}
               role="tabpanel"
             >
               {tab.component}

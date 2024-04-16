@@ -29,7 +29,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
 
   return (
     <div className={clsx("pfmv-card w-72 relative h-auto", !vertical && "lg:w-[53rem] lg:h-fit")}>
-      <GenericSaveFiche id={ficheDiagnostic.id} type="diagnostic" />
+      <GenericSaveFiche id={ficheDiagnostic.id} type="diagnostic" classNameButton="absolute top-3 right-4" />
       <FicheDiagnosticLink href={ficheUrl}>
         <div
           className={clsx(

@@ -58,12 +58,14 @@ export async function FicheSolution({
               />
             )}
             <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-1"} />
-            <div
-              className={clsx(
-                "absolute left-0 top-[68px] w-52 md:top-12 md:right-[unset]",
-                "md:[&>*]:top-0 [&>*]:md:left-0 [&>*]:left-4",
-              )}
-            >
+            <div className="absolute right-4 top-[68px] md:hidden">
+              <GenericSaveFiche
+                id={ficheSolution.id}
+                type="solution"
+                projectName={(historique && historique[1].label) || ""}
+              />
+            </div>
+            <div className="hidden md:block mt-4">
               <GenericSaveFiche
                 id={ficheSolution.id}
                 type="solution"
@@ -92,7 +94,7 @@ export async function FicheSolution({
             </ul>
             <div
               id="synthese-panel"
-              className="fr-tabs__panel fr-tabs__panel--selected !px-0 !py-20 md:!py-12"
+              className="fr-tabs__panel fr-tabs__panel--selected !px-0 md:!py-12"
               role="tabpanel"
             >
               <FicheSolutionTabSynthese
@@ -102,16 +104,16 @@ export async function FicheSolution({
                 projetId={params.projetId}
               />
             </div>
-            <div id="materiaux-panel" className="fr-tabs__panel !px-0 !py-20 md:!py-12" role="tabpanel">
+            <div id="materiaux-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
               <FicheSolutionTabMateriaux ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 !py-20 md:!py-12" role="tabpanel">
+            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
               <FicheSolutionTabMiseEnOeuvre ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="financements-panel" className="fr-tabs__panel !px-0 !py-20 md:!py-12" role="tabpanel">
+            <div id="financements-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
               <FicheSolutionTabFinancements ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="oups-panel" className="fr-tabs__panel !px-0 !py-20 md:!py-12" role="tabpanel">
+            <div id="oups-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
               <FicheSolutionTabOups ficheSolution={ficheSolution.attributes} />
             </div>
           </div>
