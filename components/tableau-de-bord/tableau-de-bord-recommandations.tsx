@@ -44,7 +44,7 @@ export const TableauDeBordRecommandation = () => {
         synergies possibles.
       </p>
       {filteredFichesSolutionsComplementaires?.map(
-        (fs) => fs && <FicheSolutionCardWithUserInfo ficheSolution={fs} key={fs?.id} projectName="" />,
+        (fs) => fs && <FicheSolutionCardWithUserInfo ficheSolution={fs} key={fs?.id} projectName="" withoutModal />,
       )}
     </div>
   );

@@ -26,6 +26,7 @@ export default function FicheSolutionFullCard({
     : `${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheSolution.slug}`;
 
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
+
   return (
     <Link className="flex w-72 flex-col pfmv-card md:ml-0" href={url}>
       <div className="flex w-full h-52">

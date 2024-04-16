@@ -7,14 +7,9 @@ import RetourExperienceCard from "@/components/retourExperience/RetourExperience
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import { APIResponseData, GetValues } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
-import { ButtonSaveFicheSolutionInProjet } from "@/components/ficheSolution/button-save-fiche-solution-in-projet";
 
 export default function FicheSolutionTabSynthese({
-  ficheSolutionId,
-  projectName,
   ficheSolution,
-  projetId,
 }: {
   ficheSolutionId: number;
   projectName: string;
@@ -39,22 +34,12 @@ export default function FicheSolutionTabSynthese({
     <div>
       <div className="flex flex-col md:flex-row justify-between">
         <div className="md:pr-9">
-          <div className="flex flex-row justify-between items-center mb-4">
+          <div className="flex flex-row justify-between items-center mb-4 relative">
             {typeSolution && (
               <div className="flex flex-row text-dsfr-text-mention-grey">
                 {typeSolution.coloredIcon("fr-icon mr-4 mb-auto")}
                 <span className="mt-[1px]">{typeSolution.label}</span>
               </div>
-            )}
-            {projetId ? (
-              <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolutionId} label className="md:hidden mr-2" />
-            ) : (
-              <ButtonSaveFicheSolution
-                ficheSolutionId={ficheSolutionId}
-                projectName={projectName}
-                className="md:hidden mr-2"
-                label={false}
-              />
             )}
           </div>
           <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">

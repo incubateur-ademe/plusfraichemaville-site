@@ -21,6 +21,7 @@ module.exports = {
       "pfmv-light-blue": "#0080C2",
       "pfmv-dark-blue": "#292A82",
       "pfmv-light-grey": "#CECECE",
+      "pfmv-truelight-grey": "#fbecec",
       "pfmv-grey-dashed": "#A6A6A6",
       "pfmv-navy": "var(--background-active-blue-france)",
       "pfmv-orange": "#ffe8e5",

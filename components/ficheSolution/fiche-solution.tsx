@@ -5,16 +5,15 @@ import CustomTabButton from "@/components/common/CustomTabButton";
 import FicheSolutionTabSynthese from "@/components/ficheSolution/FicheSolutionTabSynthese";
 import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionTabMateriaux";
 import FicheSolutionTabMiseEnOeuvre from "@/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
-import ButtonSaveFicheSolution from "@/components/ficheSolution/ButtonSaveFicheSolution";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
 import FicheSolutionTabFinancements from "@/components/ficheSolution/FicheSolutionTabFinancements";
 import FicheSolutionTabOups from "@/components/ficheSolution/FicheSolutionTabOups";
 import { getFicheSolutionBySlug } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
-import { ButtonSaveFicheSolutionInProjet } from "./button-save-fiche-solution-in-projet";
 import clsx from "clsx";
 import ButtonShareCurrentUrl from "@/components/common/button-share-current-url";
+import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 export async function FicheSolution({
   params,
@@ -49,8 +48,8 @@ export async function FicheSolution({
           </div>
         </div>
         <div className="h-14 w-full bg-dsfr-background-alt-blue-france absolute" />
-        <div className="fr-container flex flex-row">
-          <div className="flex-none md:w-56 md:mt-[6.5rem]">
+        <div className="fr-container flex flex-row relative">
+          <div className="flex-none md:w-56 md:mt-[6.5rem] md:relative">
             {historique && (
               <AideDecisionBreadcrumbs
                 historique={historique}
@@ -58,18 +57,22 @@ export async function FicheSolution({
                 currentPageLabel={ficheSolution.attributes.titre}
               />
             )}
-            <ButtonShareCurrentUrl className={"hidden md:block mb-4"} />
-            {params.projetId ? (
-              // TODO: créer un button-save-selector => select entre bouton dans fiche projet / fiche globale
-              <ButtonSaveFicheSolutionInProjet ficheSolutionId={ficheSolution.id} label className="hidden md:block" />
-            ) : (
-              <ButtonSaveFicheSolution
-                ficheSolutionId={ficheSolution.id}
-                label
+            <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-1"} />
+            <div className="absolute right-4 top-[68px] md:hidden">
+              <GenericSaveFiche
+                id={ficheSolution.id}
+                type="solution"
                 projectName={(historique && historique[1].label) || ""}
-                className={"hidden md:block"}
               />
-            )}
+            </div>
+            <div className="hidden md:block mt-4">
+              <GenericSaveFiche
+                id={ficheSolution.id}
+                type="solution"
+                projectName={(historique && historique[1].label) || ""}
+                withLabel
+              />
+            </div>
           </div>
           <div className="fr-tabs before:!shadow-none">
             <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche solution">
@@ -91,7 +94,7 @@ export async function FicheSolution({
             </ul>
             <div
               id="synthese-panel"
-              className="fr-tabs__panel fr-tabs__panel--selected customPanel !pt-0"
+              className="fr-tabs__panel fr-tabs__panel--selected !px-0 md:!py-12"
               role="tabpanel"
             >
               <FicheSolutionTabSynthese
@@ -101,16 +104,16 @@ export async function FicheSolution({
                 projetId={params.projetId}
               />
             </div>
-            <div id="materiaux-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+            <div id="materiaux-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
               <FicheSolutionTabMateriaux ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
               <FicheSolutionTabMiseEnOeuvre ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="financements-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+            <div id="financements-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
               <FicheSolutionTabFinancements ficheSolution={ficheSolution.attributes} />
             </div>
-            <div id="oups-panel" className="fr-tabs__panel customPanel" role="tabpanel">
+            <div id="oups-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
               <FicheSolutionTabOups ficheSolution={ficheSolution.attributes} />
             </div>
           </div>

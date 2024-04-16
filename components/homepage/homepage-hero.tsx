@@ -15,7 +15,6 @@ export const HomepageHero = () => {
             "text-pfmv-navy font-normal",
           )}
         >
-          {/* {hero.title()} */}
           <div className="w-56 lg:w-auto">
             <PictoPFMV />
           </div>

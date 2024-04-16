@@ -19,6 +19,7 @@ export const PFMV_ROUTES = {
   TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: string) =>
     `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions`,
+  ESPACE_PROJET_FICHES_DIAGNOSTIC: (projetId: number) => `/espace-projet/${projetId}/fiches-diagnostic`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
   ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
     `/espace-projet/${projetId}/estimation/liste${(opener && `?open=${opener}`) || ""}`,
@@ -28,5 +29,4 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION: (projetId: number, ficheSolutionSlug: string) =>
     `/espace-projet/${projetId}/fiches-solutions/liste/${ficheSolutionSlug}`,
   ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
-  ESPACE_PROJET_FICHES_DIAGNOSTIC: (projetId: number) => `/espace-projet/${projetId}/fiches-diagnostic`,
 };

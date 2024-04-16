@@ -8,7 +8,6 @@ import { TypeFiche } from "@/helpers/common";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import React from "react";
-import { FicheDiagnosticSaveButton } from "@/components/fiches-diagnostic/fiche-diagnostic-save-button";
 
 export const FicheDiagnosticMethodeTab = ({
   ficheDiagnostic,
@@ -16,7 +15,7 @@ export const FicheDiagnosticMethodeTab = ({
   ficheDiagnostic: FicheDiagnosticResponse;
   projetId?: number;
 }) => {
-  const { attributes, id: ficheDiagnosticId } = ficheDiagnostic;
+  const { attributes } = ficheDiagnostic;
   const coutMin = attributes.cout_min;
   const coutMax = attributes.cout_max;
   const delaiMin = attributes.delai_min;
@@ -27,12 +26,7 @@ export const FicheDiagnosticMethodeTab = ({
 
   return (
     <div>
-      <FicheDiagnosticSaveButton
-        ficheDiagnosticId={ficheDiagnosticId}
-        showLabel
-        className="md:!hidden absolute top-2 right-0"
-      />
-      <div className="md:hidden text-base text-dsfr-text-mention-grey mb-6">
+      <div className="md:hidden text-base text-dsfr-text-mention-grey mb-6 relative">
         <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
         Méthode de diagnostic{" "}
         <span className="font-bold capitalize text-dsfr-background-flat-warning">

@@ -6,7 +6,7 @@ import { FicheDiagnosticMethodeTab } from "./fiche-diagnostic-tab-methode";
 import { FicheDiagnosticAvantageTab } from "./fiche-diagnostic-tab-avantages";
 import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-meo";
 import ButtonShareCurrentUrl from "@/components/common/button-share-current-url";
-import { FicheDiagnosticSaveButton } from "@/components/fiches-diagnostic/fiche-diagnostic-save-button";
+import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticTabsProps = {
   ficheDiagnostic: FicheDiagnosticResponse;
@@ -37,10 +37,16 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
   return (
     <div className="relative">
       <div className="bg-pfmv-orange h-14 w-full absolute left-0 top-0"></div>
-      <div className="fr-container flex flex-row">
-        <div className="hidden md:block flex-none md:w-56 md:mt-[6.5rem]">
-          <ButtonShareCurrentUrl className={"hidden md:block mb-4"} />
-          <FicheDiagnosticSaveButton ficheDiagnosticId={id} showLabel />
+      <div className="relative fr-container flex flex-row">
+        <div className="flex-none md:w-56 md:mt-[6.5rem]">
+          <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-2"} />
+
+          <div className="absolute right-4 top-[68px] md:hidden">
+            <GenericSaveFiche id={id} type="diagnostic" />
+          </div>
+          <div className="hidden md:block mt-4">
+            <GenericSaveFiche id={id} type="diagnostic" withLabel />
+          </div>
         </div>
         <div className="fr-tabs !shadow-none before:!shadow-none">
           <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche diagnostic">
@@ -54,7 +60,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
             <div
               id={tab.contentId}
               key={tab.contentId}
-              className={clsx("customPanel customPanelDiag fr-tabs__panel", !index && "fr-tabs__panel--selected")}
+              className={clsx("!px-0 !pt-14 md:!py-12 fr-tabs__panel", !index && "fr-tabs__panel--selected")}
               role="tabpanel"
             >
               {tab.component}
