@@ -24,12 +24,18 @@ export const CLIMAT_EQUATORIAL: ClimatRetourExperience = {
   label: "Équatorial",
 };
 
+export const CLIMAT_TEMPERE: ClimatRetourExperience = {
+  code: "tempere",
+  label: "Tempéré",
+};
+
 const CLIMATS_RETOUR_EXPERIENCE = [
   CLIMAT_MEDITERRANEEN,
   CLIMAT_OCEANIQUE,
   CLIMAT_SEMI_ARIDE,
   CLIMAT_SEMI_CONTINENTAL,
   CLIMAT_EQUATORIAL,
+  CLIMAT_TEMPERE
 ];
 
 export const getClimatLabelFromCode = (climatCode?: string | undefined) =>

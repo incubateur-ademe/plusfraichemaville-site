@@ -1232,7 +1232,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
       }>;
     region: Attribute.Relation<"api::retour-experience.retour-experience", "oneToOne", "api::region.region">;
     climat_actuel: Attribute.Enumeration<
-      ["oceanique", "mediterraneen", "semi_aride", "semi_continental", "equatorial"]
+      ["oceanique", "mediterraneen", "semi_aride", "semi_continental", "equatorial", "tempere"]
     > &
       Attribute.SetPluginOptions<{
         versions: {
@@ -1240,7 +1240,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
         };
       }>;
     climat_futur: Attribute.Enumeration<
-      ["oceanique", "mediterraneen", "semi_aride", "semi_continental", "equatorial"]
+      ["oceanique", "mediterraneen", "semi_aride", "semi_continental", "equatorial", "tempere"]
     > &
       Attribute.SetPluginOptions<{
         versions: {
