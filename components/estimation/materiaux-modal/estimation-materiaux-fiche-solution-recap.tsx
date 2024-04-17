@@ -46,7 +46,7 @@ export function EstimationMateriauxFicheSolutionRecap({
               <div className="w-16 h-16 relative flex flex-none mr-6">
                 <Image
                   fill
-                  sizes="(max-width: 768px) 80vw, 10vw"
+                  sizes="(max-width: 768px) 80vw, 20vw"
                   src={getStrapiImageUrl(materiau.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
                   alt={materiau.attributes.titre}
                   className={"object-cover rounded-xl"}

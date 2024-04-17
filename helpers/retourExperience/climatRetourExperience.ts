@@ -35,7 +35,7 @@ const CLIMATS_RETOUR_EXPERIENCE = [
   CLIMAT_SEMI_ARIDE,
   CLIMAT_SEMI_CONTINENTAL,
   CLIMAT_EQUATORIAL,
-  CLIMAT_TEMPERE
+  CLIMAT_TEMPERE,
 ];
 
 export const getClimatLabelFromCode = (climatCode?: string | undefined) =>
