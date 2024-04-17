@@ -17,9 +17,19 @@ export const trackEvent = (args: (string | null)[]) => {
 
 export const trackPageView = (url: string) => {
   if (shouldUseDevTracker) {
-    console.debug("trackPageView => ", url);
+    console.debug("trackPageView => ", sanitizeMatomoUrl(url));
     return;
   }
-  window?._paq?.push(["setCustomUrl", url]);
+  window?._paq?.push(["setCustomUrl", sanitizeMatomoUrl(url)]);
   window?._paq?.push(["trackPageView"]);
+};
+
+export const sanitizeMatomoUrl = (url: string) => {
+  const splittedUrl = url.split("/espace-projet/");
+  const espaceProjetSubstring = splittedUrl[1];
+  if (!espaceProjetSubstring) {
+    return url;
+  }
+  const projetId = espaceProjetSubstring.split("/")[0];
+  return !isNaN(+projetId) ? url.replace(projetId, "[projetId]") : url;
 };
