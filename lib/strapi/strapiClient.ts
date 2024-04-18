@@ -26,7 +26,7 @@ export const getStrapiImageUrl = (
   return image.data.attributes.url;
 };
 
-export const strapiGraphQLCall = async (query: String, variables?: any) => {
+export const strapiGraphQLCall = async (query: String, variables?: any, signal?: AbortSignal) => {
   try {
     return await fetch(STRAPI_URL + "/graphql", {
       method: "POST",
@@ -38,6 +38,7 @@ export const strapiGraphQLCall = async (query: String, variables?: any) => {
         query: query,
         variables: variables,
       }),
+      signal,
       next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags: ["strapi"] },
     })
       .then((res) =>

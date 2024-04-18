@@ -1,32 +1,37 @@
 import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import { FicheSolutionResponse } from "../ficheSolution/type";
 import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { abortablePromise } from "@/helpers/abortable-promise";
+import useSWRImmutable from "swr/immutable";
+import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
+
+function useCancelableSWR(key: string, id: number) {
+  const controller = new AbortController();
+  const swr = useSWRImmutable(key, () => abortablePromise(getFicheSolutionById(id.toString()), controller.signal));
+
+  return [swr, controller] as const;
+}
 
 export const FichesSolutionsProjetsSelectedCard = ({
   ficheSolutionId,
 }: {
   ficheSolutionId: FicheSolutionResponse["id"];
 }) => {
-  const [data, setData] = useState<FicheSolutionResponse | null>();
+  const [{ data, isLoading }, controller] = useCancelableSWR(`fiche-solution-${ficheSolutionId}`, ficheSolutionId);
+
+  // const { data } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
+  //   getFicheSolutionById(ficheSolutionId.toString()),
+  // );
 
   useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    abortablePromise(getFicheSolutionById(ficheSolutionId.toString()), signal)
-      .then(setData)
-      .catch((err) => {
-        return err;
-      });
-
     return () => {
       controller.abort();
     };
-  }, [ficheSolutionId]);
+  }, [controller]);
 
   if (!data) {
     return null;
   }
-  return <FicheSolutionCardWithUserInfo ficheSolution={data} projectName="" />;
+  return isLoading ? <FicheSolutionFullCardSkeleton /> : <FicheSolutionFullCardSkeleton />;
 };

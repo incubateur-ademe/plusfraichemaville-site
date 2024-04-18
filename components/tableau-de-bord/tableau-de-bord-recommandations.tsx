@@ -5,7 +5,7 @@ import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWit
 import useSWR from "swr";
 
 import { FicheSolutionResponse } from "../ficheSolution/type";
-import { FicheSolutionSkeleton } from "../ficheSolution/fiche-solution-skeleton";
+import { FicheSolutionSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
