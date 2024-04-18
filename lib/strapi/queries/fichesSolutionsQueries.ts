@@ -186,3 +186,19 @@ export async function getFicheSolutionByIds(
     ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntities(apiResponse);
 }
+
+export async function getFicheSolutionByIdsComplete(
+  ficheSolutionIds: number[],
+): Promise<APIResponseData<"api::fiche-solution.fiche-solution">[]> {
+  const filter = new StrapiFilter(true, [
+    {
+      attribute: "id",
+      operator: "in",
+      value: ficheSolutionIds,
+      relation: false,
+    },
+  ]);
+  const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
+    ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  return safeReturnStrapiEntities(apiResponse);
+}

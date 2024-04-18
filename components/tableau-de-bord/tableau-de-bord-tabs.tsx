@@ -80,11 +80,14 @@ export const TableauDeBordTabs = () => {
 
       <div className="tabs bg-dsfr-border-action-low-blue-france min-h-[40rem] py-10">
         <div className="fr-container">
-          {tabs.map((tab, index) => (
-            <TableauDeBordTab active={currentTab === tab.filter} key={index}>
-              {tab.component}
-            </TableauDeBordTab>
-          ))}
+          {tabs.map(
+            (tab, index) =>
+              currentTab === tab.filter && (
+                <TableauDeBordTab active={currentTab === tab.filter} key={index}>
+                  {tab.component}
+                </TableauDeBordTab>
+              ),
+          )}
         </div>
       </div>
     </>
