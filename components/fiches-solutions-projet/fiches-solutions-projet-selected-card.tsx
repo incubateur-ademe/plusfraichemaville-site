@@ -33,5 +33,9 @@ export const FichesSolutionsProjetsSelectedCard = ({
   if (!data) {
     return null;
   }
-  return isLoading ? <FicheSolutionFullCardSkeleton /> : <FicheSolutionFullCardSkeleton />;
+  return isLoading ? (
+    <FicheSolutionFullCardSkeleton />
+  ) : (
+    <FicheSolutionCardWithUserInfo ficheSolution={data} projectName="" />
+  );
 };
