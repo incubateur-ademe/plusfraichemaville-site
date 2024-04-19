@@ -1,7 +1,6 @@
-"use client";
-
 import artworkOvoidSvgUrl from "@codegouvfr/react-dsfr/dsfr/artwork/background/ovoid.svg";
 import artworkTechnicalErrorSvgUrl from "@codegouvfr/react-dsfr/dsfr/artwork/pictograms/system/technical-error.svg";
+import clsx from "clsx";
 
 type UnavailablePageProps = {
   title: string;
@@ -15,8 +14,12 @@ type UnavailablePageProps = {
 export const UnavailablePage = ({ title }: UnavailablePageProps) => {
   return (
     <div className="fr-container">
-      {/* eslint-disable-next-line max-len */}
-      <div className="fr-my-7w fr-mt-md-12w fr-mb-md-10w fr-grid-row fr-grid-row--gutters fr-grid-row--center fr-grid-row--middle">
+      <div
+        className={clsx(
+          "fr-my-7w fr-mt-md-12w fr-mb-md-10w fr-grid-row fr-grid-row--gutters",
+          "fr-grid-row--center fr-grid-row--middle",
+        )}
+      >
         <div className="fr-py-0 fr-col-12 fr-col-md-6">
           <h1>{title ?? "Page non disponible"}</h1>
           <p className="fr-mb-3w fr-text--lead">
