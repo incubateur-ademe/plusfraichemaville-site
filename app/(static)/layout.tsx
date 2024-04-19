@@ -1,3 +1,4 @@
+export const dynamic = "force-static";
 import React, { ReactElement } from "react";
 import AppFooter from "@/components/layout/AppFooter";
 

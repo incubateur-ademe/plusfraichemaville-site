@@ -13,6 +13,9 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
+      STRAPI_TOKEN: ${{ secrets.STRAPI_TOKEN }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v4
