@@ -16,7 +16,7 @@ export const FichesSolutionsProjetsSelectedCard = ({
 }: {
   ficheSolutionId: FicheSolutionResponse["id"];
 }) => {
-  const [{ data, isLoading }] = useCancelableSWR(`fiche-solution-${ficheSolutionId}`, ficheSolutionId);
+  const [{ data, isLoading }] = useCancelableSWR(`ficheSolution-${ficheSolutionId}`, ficheSolutionId);
 
   return !data && isLoading ? (
     <FicheSolutionFullCardSkeleton />
