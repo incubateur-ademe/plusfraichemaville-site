@@ -5,7 +5,7 @@ import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWit
 import useSWR from "swr";
 
 import { FicheSolutionResponse } from "../ficheSolution/type";
-import { FicheSolutionSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
+import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -46,9 +46,9 @@ export const TableauDeBordRecommandation = () => {
       </p>
       {isLoading ? (
         <div className="flex gap-8">
-          <FicheSolutionSkeleton />
-          <FicheSolutionSkeleton />
-          <FicheSolutionSkeleton />
+          <FicheSolutionFullCardSkeleton />
+          <FicheSolutionFullCardSkeleton />
+          <FicheSolutionFullCardSkeleton />
         </div>
       ) : (
         filteredFichesSolutionsComplementaires?.map(
