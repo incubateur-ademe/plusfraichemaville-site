@@ -42,9 +42,9 @@ export function EstimationMateriauxValidation({
       <div className="mt-8 text-[1.375rem] font-bold text-dsfr-text-title-grey">
         Estimation totale des solutions envisagées
       </div>
-      <div className="text-[1.375rem] text-dsfr-text-mention-grey">
+      <div className="text-dsfr-text-mention-grey mt-1">
         <i className={`fr-icon-info-fill mr-2`} />
-        Inclus : fourniture et pose (hors travaux complémentaires de voirie, consolidation, etc.)
+        Inclut : fourniture et pose (hors travaux complémentaires de voirie, consolidation, etc.)
       </div>
       <EstimationMateriauGlobalPriceFooter
         investissementMin={globalPrice.fourniture.min}
