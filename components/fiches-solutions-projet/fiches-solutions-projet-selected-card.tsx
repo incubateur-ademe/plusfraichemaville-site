@@ -20,22 +20,15 @@ export const FichesSolutionsProjetsSelectedCard = ({
 }) => {
   const [{ data, isLoading }, controller] = useCancelableSWR(`fiche-solution-${ficheSolutionId}`, ficheSolutionId);
 
-  // const { data } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
-  //   getFicheSolutionById(ficheSolutionId.toString()),
-  // );
-
   useEffect(() => {
     return () => {
       controller.abort();
     };
   }, [controller]);
 
-  if (!data) {
-    return null;
-  }
-  return isLoading ? (
+  return isLoading && !data ? (
     <FicheSolutionFullCardSkeleton />
   ) : (
-    <FicheSolutionCardWithUserInfo ficheSolution={data} projectName="" />
+    data && <FicheSolutionCardWithUserInfo ficheSolution={data} projectName="" />
   );
 };
