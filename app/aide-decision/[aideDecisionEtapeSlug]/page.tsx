@@ -4,9 +4,20 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
 import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
-import { getAideDecisionBySlug, getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
+import {
+  getAideDecisionBySlug,
+  getAideDecisionHistoryBySlug,
+  getAllAideDecisionSlugs,
+} from "@/lib/strapi/queries/aideDecisionQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { PFMV_ROUTES } from "@/helpers/routes";
+
+export async function generateStaticParams() {
+  const allAideDectionEtape = await getAllAideDecisionSlugs();
+  return allAideDectionEtape.map((aideDecisionEtape) => ({
+    aideDecisionEtapeSlug: aideDecisionEtape.attributes.slug || "",
+  }));
+}
 
 export default async function Page({
   params,
