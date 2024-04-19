@@ -3,6 +3,7 @@ export class AbortedWarning extends Error {
 }
 
 export const abortablePromise = async <T>(promise: Promise<T>, signal: AbortSignal): Promise<T> => {
+  console.log(signal.aborted);
   if (signal.aborted) return Promise.reject(new AbortedWarning("Aborted early"));
 
   return Promise.race([
