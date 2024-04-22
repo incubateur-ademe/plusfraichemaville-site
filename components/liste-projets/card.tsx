@@ -25,10 +25,15 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
       <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>
         <div className={`pfmv-card p-5 pb-16 rounded-xl flex mb-5 relative ${disabledText}`}>
           <div className="mr-6">
-            <PictoEspaceSelector pictoId={projet.type_espace as PictoId} withBackground />
+            <PictoEspaceSelector
+              pictoId={projet.type_espace as PictoId}
+              withBackground
+              size="medium"
+              pictoClassName="svg-blue"
+            />
           </div>
           <div>
-            <h3 className="text-xl text-dsfr-text-label-blue-france mb-1">{projet.nom}</h3>
+            <h3 className="text-xl text-dsfr-text-label-blue-france mb-1 mt-2">{projet.nom}</h3>
             <h4 className="text-dsfr-text-label-blue-france mb-4 text-base">
               <i className="ri-map-pin-line before:!w-4 mr-1"></i>
               {projet.collectivite.nom}
@@ -45,7 +50,7 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
           </div>
         </div>
       </Link>
-      <div className="flex items-center h-8 bottom-10 left-32 absolute">
+      <div className="flex items-center h-8 bottom-6 left-32 absolute">
         <Link
           className="fr-btn fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
           href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}

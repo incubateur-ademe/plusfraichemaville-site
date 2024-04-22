@@ -94,6 +94,10 @@
   filter: invert(38%) sepia(31%) saturate(3603%) hue-rotate(1deg) brightness(103%) contrast(106%);
 }
 
+.svg-blue {
+  filter: invert(16%) sepia(71%) saturate(3750%) hue-rotate(236deg) brightness(66%) contrast(139%);
+}
+
 .pfmv-card:hover,
 .fiche-solution-small-vertical-card:hover {
   background: #fff !important;
