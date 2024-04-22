@@ -1,6 +1,10 @@
 "use server";
 import "server-only";
-import { AideDecisionEtapeHistory, StrapiFilter } from "@/lib/strapi/queries/commonStrapiFilters";
+import {
+  AideDecisionEtapeHistory,
+  solutionRetourExperienceFilter,
+  StrapiFilter,
+} from "@/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
@@ -38,7 +42,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
             id
             ...FicheSolutionCardInfo
             attributes{
-              solution_retour_experiences {
+              solution_retour_experiences ${solutionRetourExperienceFilter()} {
                 data {
                   attributes {
                     retour_experience {
@@ -65,6 +69,16 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
             }
           }
         }
+      }
+    }
+  }
+}`;
+export const GET_ALL_AIDE_DECISION_ETAPE_SLUG = (strapiFilter: StrapiFilter) => `query {
+  aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
+    data {
+      id
+      attributes {
+        slug
       }
     }
   }
@@ -133,6 +147,15 @@ export async function getAideDecisionFirstSteps(): Promise<
     { attribute: "rank", order: "asc" },
   );
   const apiResponse = (await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter)))
+    ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getAllAideDecisionSlugs(): Promise<
+  APIResponseData<"api::aide-decision-etape.aide-decision-etape">[]
+> {
+  const filter = new StrapiFilter(true, []);
+  const apiResponse = (await strapiGraphQLCall(GET_ALL_AIDE_DECISION_ETAPE_SLUG(filter)))
     ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
   return safeReturnStrapiEntities(apiResponse);
 }

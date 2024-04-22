@@ -1,6 +1,6 @@
 "use server";
 import "server-only";
-import { StrapiFilter } from "@/lib/strapi/queries/commonStrapiFilters";
+import { solutionRetourExperienceFilter, StrapiFilter } from "@/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
@@ -47,7 +47,7 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
             ...ImageInfo
           }
         }
-        solution_retour_experiences {
+        solution_retour_experiences ${solutionRetourExperienceFilter()} {
           data {
             id
             attributes {

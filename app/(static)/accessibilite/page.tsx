@@ -21,7 +21,7 @@ export default async function PageAccessibilite() {
         .
       </p>
       <p>
-        {"Cette déclaration d’accessibilité s’applique à"} <strong>Plus fraîche ma ville</strong>{" "}
+        {"Cette déclaration d’accessibilité s’applique à "} <strong>Plus fraîche ma ville</strong>{" "}
         <Link href="https://plusfraichemaville.fr">
           {/* eslint-disable-next-line max-len */}
           (https://plusfraichemaville.fr)
@@ -39,7 +39,7 @@ export default async function PageAccessibilite() {
       <h2>{"Amélioration et contact"}</h2>
       <p>
         Si vous n’arrivez pas à accéder à un contenu ou à un service, vous pouvez contacter le responsable de
-        <strong>Plus fraîche ma ville</strong> pourêtre orienté vers une alternative accessible ou obtenir le contenu
+        <strong> Plus fraîche ma ville</strong> pourêtre orienté vers une alternative accessible ou obtenir le contenu
         sous une autre forme.
       </p>
       <ul className="basic-information feedback h-card mb-8">
