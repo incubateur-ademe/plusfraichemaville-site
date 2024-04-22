@@ -1,6 +1,6 @@
 "use server";
 import "server-only";
-import { StrapiFilter } from "@/lib/strapi/queries/commonStrapiFilters";
+import { solutionRetourExperienceFilter, StrapiFilter } from "@/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
@@ -47,7 +47,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
         contexte_titre
         contexte_description
         rafraichissement_attendu_description
-        solution_retour_experiences {
+        solution_retour_experiences ${solutionRetourExperienceFilter()} {
           data {
             attributes {
               retour_experience {

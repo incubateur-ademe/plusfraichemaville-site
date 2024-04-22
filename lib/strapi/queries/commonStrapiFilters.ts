@@ -5,6 +5,14 @@ type StrapiInFilter = { attribute: string; value: string[] | number[]; operator:
 type StrapiRelationFilter = { attribute: string; operator: "null" | "notNull"; relation: true };
 type StrapiSortFilter = { attribute: string; order: "asc" | "desc" };
 
+const strapiShowStatuses = process.env.STRAPI_SHOW_STATUSES || "LIVE";
+
+export const solutionRetourExperienceFilter = () =>
+  strapiShowStatuses === "LIVE"
+    ? "(filters:{and: [{fiche_solution: {publishedAt: {notNull: true}}}" +
+      ", {retour_experience: {publishedAt: {notNull: true}}} ]} )"
+    : "";
+
 export class StrapiFilter {
   includePublicationState: boolean;
   andFilters: (StrapiEqFilter | StrapiInFilter | StrapiRelationFilter)[];
@@ -21,7 +29,7 @@ export class StrapiFilter {
   }
 
   publicationStateString(): string {
-    return ` ( publicationState: ${process.env.STRAPI_SHOW_STATUSES || "LIVE"} ) `;
+    return ` ( publicationState: ${strapiShowStatuses} ) `;
   }
 
   wholeFilterString(): string {
@@ -38,9 +46,7 @@ export class StrapiFilter {
             })
             .join(",")}]}`
         : null;
-    const publicationStateString = this.includePublicationState
-      ? `publicationState: ${process.env.STRAPI_SHOW_STATUSES || "LIVE"}`
-      : null;
+    const publicationStateString = this.includePublicationState ? `publicationState: ${strapiShowStatuses}` : null;
     const sortString = this.sortFilter ? `sort: "${this.sortFilter.attribute}:${this.sortFilter.order}"` : null;
     if (publicationStateString || filterString || sortString) {
       return `( ${[publicationStateString, filterString, sortString].filter(Boolean).join(",")} ) `;

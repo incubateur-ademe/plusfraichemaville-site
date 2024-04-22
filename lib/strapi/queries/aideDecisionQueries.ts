@@ -1,6 +1,10 @@
 "use server";
 import "server-only";
-import { AideDecisionEtapeHistory, StrapiFilter } from "@/lib/strapi/queries/commonStrapiFilters";
+import {
+  AideDecisionEtapeHistory,
+  solutionRetourExperienceFilter,
+  StrapiFilter,
+} from "@/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
@@ -38,7 +42,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
             id
             ...FicheSolutionCardInfo
             attributes{
-              solution_retour_experiences {
+              solution_retour_experiences ${solutionRetourExperienceFilter()} {
                 data {
                   attributes {
                     retour_experience {
