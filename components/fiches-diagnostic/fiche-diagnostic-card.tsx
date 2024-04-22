@@ -28,7 +28,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
   const ficheUrl = PFMV_ROUTES.FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug);
 
   return (
-    <div className={clsx("pfmv-card w-72 relative h-auto", !vertical && "lg:w-[53rem] lg:h-fit")}>
+    <div className={clsx("pfmv-card w-72 relative h-auto", !vertical && "lg:max-w-[53rem] lg:w-full lg:h-fit")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type="diagnostic" classNameButton="absolute top-3 right-4" />
       <FicheDiagnosticLink href={ficheUrl}>
         <div

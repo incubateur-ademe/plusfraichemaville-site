@@ -1,20 +1,21 @@
 import { useProjetsStore } from "@/stores/projets/provider";
-import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
+import { getFicheSolutionByIdsComplete } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
 
-import useSWRImmutable from "swr/immutable";
+import useSWR from "swr";
 
 import { FicheSolutionResponse } from "../ficheSolution/type";
-
-const fetcher = (fichesIds: number[]) => {
-  const f = (ficheId: number) => getFicheSolutionById(ficheId.toString());
-  return Promise.all(fichesIds.map((ficheId) => f(ficheId)));
-};
+import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const urls = projet?.fiches_solutions_id ?? [];
-  const { data } = useSWRImmutable(urls, () => fetcher(urls));
+
+  const { data, isLoading } = useSWR(urls, () => getFicheSolutionByIdsComplete(urls), {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
 
   const fichesSolutions = data?.map((fs) => fs?.attributes.fiches_solutions_complementaires);
 
@@ -43,8 +44,16 @@ export const TableauDeBordRecommandation = () => {
         des solutions complémentaires à celles que vous avez choisies afin de créer les meilleures combinaisons et
         synergies possibles.
       </p>
-      {filteredFichesSolutionsComplementaires?.map(
-        (fs) => fs && <FicheSolutionCardWithUserInfo ficheSolution={fs} key={fs?.id} projectName="" withoutModal />,
+      {isLoading ? (
+        <div className="flex gap-8">
+          <FicheSolutionFullCardSkeleton />
+          <FicheSolutionFullCardSkeleton />
+          <FicheSolutionFullCardSkeleton />
+        </div>
+      ) : (
+        filteredFichesSolutionsComplementaires?.map(
+          (fs) => fs && <FicheSolutionCardWithUserInfo ficheSolution={fs} key={fs?.id} projectName="" withoutModal />,
+        )
       )}
     </div>
   );
