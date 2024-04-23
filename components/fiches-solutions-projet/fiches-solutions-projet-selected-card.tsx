@@ -4,6 +4,7 @@ import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWit
 import { abortablePromise } from "@/helpers/abortable-promise";
 import useSWRImmutable from "swr/immutable";
 import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
+import { useEffect } from "react";
 
 function useCancelableSWR(key: string, id: number) {
   const controller = new AbortController();
@@ -16,7 +17,12 @@ export const FichesSolutionsProjetsSelectedCard = ({
 }: {
   ficheSolutionId: FicheSolutionResponse["id"];
 }) => {
-  const [{ data, isLoading }] = useCancelableSWR(`ficheSolution-${ficheSolutionId}`, ficheSolutionId);
+  const [{ data, isLoading, mutate }] = useCancelableSWR(`ficheSolution-${ficheSolutionId}`, ficheSolutionId);
+  useEffect(() => {
+    if (!data) {
+      mutate();
+    }
+  }, [mutate, data]);
 
   return !data && isLoading ? (
     <FicheSolutionFullCardSkeleton />
