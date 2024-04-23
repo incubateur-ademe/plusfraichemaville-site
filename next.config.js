@@ -24,10 +24,6 @@ const nextConfig = {
             value: cspHeader.replace(/\n/g, ""),
           },
           {
-            key: "Strict-Transport-Security",
-            value: "includeSubDomains; preload",
-          },
-          {
             key: "X-Frame-Options",
             value: "DENY",
           },
