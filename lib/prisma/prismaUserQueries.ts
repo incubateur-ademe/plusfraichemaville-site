@@ -77,27 +77,6 @@ export const updateFichesUser = async (
   });
 };
 
-export const deleteUserProjet = (projetId: number) => {
-  return prismaClient.projet.delete({
-    where: {
-      id: projetId,
-    },
-  });
-};
-
-export const getUserProjets = async (userId: string) => {
-  return prismaClient.projet.findMany({
-    where: {
-      created_by: userId,
-    },
-    include: {
-      collectivite: true,
-      estimations: true,
-      creator: true,
-    },
-  });
-};
-
 export const getBookmarkedFichesSolutions = async (userId: string): Promise<ProjectBookmarks[] | undefined> => {
   const user = await prismaClient.user.findUnique({
     where: {

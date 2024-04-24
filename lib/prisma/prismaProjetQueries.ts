@@ -3,6 +3,13 @@ import { Prisma, projet } from "@prisma/client";
 import { ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
+import projetInclude = Prisma.projetInclude;
+
+const projetIncludes: projetInclude | null = {
+  collectivite: true,
+  creator: true,
+  estimations: { where: { deleted_at: null } },
+};
 
 export const updateFichesProjet = async (
   projetId: number,
@@ -34,11 +41,7 @@ export const updateFichesProjet = async (
       fiches_solutions_validated: false,
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
-    include: {
-      collectivite: true,
-      estimations: true,
-      creator: true,
-    },
+    include: projetIncludes,
   });
 };
 
@@ -64,11 +67,7 @@ export const updateFichesSolutionsProjet = async (
       fiches_solutions_validated: false,
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
-    include: {
-      collectivite: true,
-      estimations: true,
-      creator: true,
-    },
+    include: projetIncludes,
   });
 };
 
@@ -85,11 +84,7 @@ export const addRecommandationsViewedBy = async (projetId: number, userId: strin
     data: {
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
-    include: {
-      collectivite: true,
-      creator: true,
-      estimations: true,
-    },
+    include: projetIncludes,
   });
 };
 
@@ -107,11 +102,7 @@ export const deleteRecommandationsViewedBy = async (projetId: number, userId: st
     data: {
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
-    include: {
-      collectivite: true,
-      creator: true,
-      estimations: true,
-    },
+    include: projetIncludes,
   });
 };
 
@@ -123,11 +114,7 @@ export const updateFichesSolutionsProjetValidated = (projetId: number): Promise<
     data: {
       fiches_solutions_validated: true,
     },
-    include: {
-      collectivite: true,
-      creator: true,
-      estimations: true,
-    },
+    include: projetIncludes,
   });
 };
 
@@ -184,10 +171,37 @@ export const createOrUpdateProjet = async ({
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
     },
-    include: {
-      collectivite: true,
-      estimations: true,
-      creator: true,
+    include: projetIncludes,
+  });
+};
+
+export const deleteProjet = (projetId: number, userId: string) => {
+  prismaClient.estimation.updateMany({
+    where: {
+      projet_id: projetId,
     },
+    data: {
+      deleted_at: new Date(),
+      deleted_by: userId,
+    },
+  });
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+    },
+    data: {
+      deleted_at: new Date(),
+      deleted_by: userId,
+    },
+  });
+};
+
+
+export const getUserProjets = async (userId: string) => {
+  return prismaClient.projet.findMany({
+    where: {
+      created_by: userId,
+    },
+    include: projetIncludes,
   });
 };
