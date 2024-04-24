@@ -15,6 +15,7 @@ import { ProjetStoreServer } from "@/stores/projets/server";
 import { UserStoreServer } from "@/stores/user/server";
 // eslint-disable-next-line max-len
 import { GenericFichesSaverFromLocalStorage } from "@/components/common/generic-save-fiche/generic-saver-from-local-storage";
+import { headers } from "next/headers";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -46,12 +47,13 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactElement | null }) {
   const lang = "fr";
+  const nonce = headers().get("x-nonce") ?? undefined;
 
   return (
     <html {...getHtmlAttributes({ defaultColorScheme, lang })}>
       <head>
         <StartDsfr />
-        <DsfrHead Link={Link} doDisableFavicon={true} />
+        <DsfrHead Link={Link} doDisableFavicon={true} nonce={nonce} />
         <MatomoScript />
       </head>
       <body>
@@ -59,8 +61,6 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <ProjetStoreServer />
           <UserStoreServer />
           <GenericFichesSaverFromLocalStorage />
-          {/* <UseBookmarkedFichesSolutions />
-          <FicheDiagnosticSaveFromLocalStorage /> */}
           <AppHeader />
           <Toaster position="bottom-left" />
           <div className={`${xtra_bold.variable}`}>{children}</div>
