@@ -28,10 +28,10 @@ export const GenericSaveButtonElement = ({
           <div
             className={clsx(
               "w-8 h-8 rounded-full flex items-center justify-center",
-              "bg-pfmv-navy hover:!bg-dsfr-background-action-high-blue-france-active",
+              "bg-pfmv-navy hover:!bg-dsfr-background-action-high-blue-france-active savePicto",
             )}
           >
-            <i className="fr-icon--lg ri-add-fill  ml-px text-white" />
+            <GenericSavePicto />
           </div>
         )}
         {assets.label && (

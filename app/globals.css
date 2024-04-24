@@ -202,6 +202,7 @@
 
 .image-gallery-slides {
   max-height: 400px !important;
+
   .image-gallery-image {
     max-height: 400px !important;
     max-width: 100%;
@@ -244,6 +245,7 @@
 .gradient-solution-grise {
   background: linear-gradient(179.96deg, rgba(33, 35, 34, 0) 21.41%, rgba(33, 35, 34, 0.9) 99.96%);
 }
+
 .gradient-solution-bleue {
   background: linear-gradient(180deg, rgba(24, 19, 81, 0) 39.81%, rgba(33, 103, 215, 0.9) 100%);
 }
@@ -254,4 +256,16 @@
 
 .gradient-solution-verte {
   background: linear-gradient(180.29deg, rgba(12, 114, 65, 0) 26.19%, rgba(35, 109, 69, 0.9) 99.75%);
+}
+
+.savePicto {
+  path {
+    fill: var(--background-active-blue-france);
+  }
+}
+
+.savePicto:hover {
+  path {
+    fill: var(--background-action-high-blue-france-active);
+  }
 }
