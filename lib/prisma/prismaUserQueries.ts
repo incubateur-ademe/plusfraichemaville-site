@@ -1,9 +1,8 @@
-import { mergeBookmarkedFichesSolutions } from "@/app/mon-projet/favoris/helper";
 import {
-  FicheBookmarkedSolution,
-  FichesBookmarked,
   addFicheBookmark,
   deleteBookmarkFiche,
+  FicheBookmarkedSolution,
+  FichesBookmarked,
   isFicheBookmarked,
   mergeFicheBookmarkedDiagnostic,
   mergeFicheBookmarkedSolutions,
@@ -112,30 +111,11 @@ export const getBookmarkedFichesSolutions = async (userId: string): Promise<Proj
   return user?.selection_fiches_solutions as ProjectBookmarks[];
 };
 
-export const saveBookmarkedFicheSolutionsByUser = async (
-  userId: string,
-  newBookmarkedFichesSolutions: ProjectBookmarks[],
-) => {
-  const currentSavedFichesSolutions = await getBookmarkedFichesSolutions(userId);
-  const oldSavedBookmarFichesSolutions = (currentSavedFichesSolutions as ProjectBookmarks[]) ?? [];
-  const updatedBookMarkedFichesSolutions = mergeBookmarkedFichesSolutions(
-    oldSavedBookmarFichesSolutions,
-    newBookmarkedFichesSolutions,
-  );
-
-  const updateBookmarkedFichesSolution = await updateBookmarkedFichesSolutions(
-    userId,
-    updatedBookMarkedFichesSolutions,
-  );
-
-  return updateBookmarkedFichesSolution;
-};
-
 export const updateBookmarkedFichesSolutions = async (
   userId: string,
   updatedBookMarkedFichesSolutions: FichesBookmarked[],
 ) => {
-  return await prismaClient.user.update({
+  return prismaClient.user.update({
     where: {
       id: userId,
     },
