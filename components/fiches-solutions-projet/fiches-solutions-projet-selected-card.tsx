@@ -1,19 +1,18 @@
-import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import { FicheSolutionResponse } from "../ficheSolution/type";
 import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
-import useSWRImmutable from "swr/immutable";
-
+import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
+import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { makeFicheSolutionUrlApi } from "../ficheSolution/helpers";
 export const FichesSolutionsProjetsSelectedCard = ({
   ficheSolutionId,
 }: {
   ficheSolutionId: FicheSolutionResponse["id"];
 }) => {
-  const { data } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
-    getFicheSolutionById(ficheSolutionId.toString()),
-  );
+  const { data, isLoading } = useSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionUrlApi(ficheSolutionId));
 
-  if (!data) {
-    return null;
-  }
-  return <FicheSolutionCardWithUserInfo ficheSolution={data} projectName="" />;
+  return !data && isLoading ? (
+    <FicheSolutionFullCardSkeleton />
+  ) : (
+    data && <FicheSolutionCardWithUserInfo ficheSolution={data[0]} projectName="" />
+  );
 };

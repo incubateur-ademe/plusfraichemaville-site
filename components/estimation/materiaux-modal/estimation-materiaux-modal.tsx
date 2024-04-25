@@ -5,14 +5,15 @@ import { estimation } from "@prisma/client";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useEffect, useMemo, useState } from "react";
 import CustomDSFRModal from "@/components/common/CustomDSFRModal";
-import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { upsert } from "@/helpers/listUtils";
-import useSWRImmutable from "swr/immutable";
 import { EstimationMateriauxValidation } from "@/components/estimation/materiaux-modal/estimation-materiaux-validation";
 import { useSearchParams } from "next/navigation";
+import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
+import { FicheSolutionResponse } from "@/components/ficheSolution/type";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;
@@ -61,19 +62,21 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
 
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
-  const fetcher = (fsId: number) => getFicheSolutionById(`${fsId}`);
-  const { data: currentFicheSolution } = useSWRImmutable(
+
+  const { data: currentFicheSolutionData } = useSwrWithFetcher<FicheSolutionResponse[]>(
     estimationStep <= estimation.fiches_solutions_id.length
-      ? `ficheSolution-${estimation.fiches_solutions_id[estimationStep - 1]}`
+      ? makeFicheSolutionCompleteUrlApi(estimation.fiches_solutions_id[estimationStep - 1])
       : null,
-    () => fetcher(estimation.fiches_solutions_id[estimationStep - 1]),
   );
-  const { data: nextFicheSolution } = useSWRImmutable(
+
+  const { data: nextFicheSolutionData } = useSwrWithFetcher<FicheSolutionResponse[]>(
     estimationStep <= estimation.fiches_solutions_id.length - 1
-      ? `ficheSolution-${estimation.fiches_solutions_id[estimationStep]}`
+      ? makeFicheSolutionCompleteUrlApi(estimation.fiches_solutions_id[estimationStep])
       : null,
-    () => fetcher(estimation.fiches_solutions_id[estimationStep]),
   );
+  const currentFicheSolution = currentFicheSolutionData && currentFicheSolutionData[0];
+  const nextFicheSolution = nextFicheSolutionData && nextFicheSolutionData[0];
+
   const stepperTitle = useMemo(
     () =>
       estimationStep === estimation.fiches_solutions_id.length + 1

@@ -10,6 +10,7 @@ export const FichesSolutionsProjet = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const updateStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const selectedFichesSolutionsIds = projet?.fiches_solutions_id;
+
   return (
     <>
       <div className="fr-container py-10">

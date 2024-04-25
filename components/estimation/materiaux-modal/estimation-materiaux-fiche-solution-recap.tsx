@@ -1,10 +1,11 @@
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
-import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { useCallback } from "react";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/coutMateriau";
-import useSWRImmutable from "swr/immutable";
+import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { FicheSolutionResponse } from "@/components/ficheSolution/type";
+import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationMateriauxFicheSolution;
@@ -15,8 +16,8 @@ export function EstimationMateriauxFicheSolutionRecap({
   ficheSolutionEstimation,
   goToFicheSolutionStep,
 }: EstimationMateriauxFicheSolutionRecapProps) {
-  const { data: ficheSolution } = useSWRImmutable(`ficheSolution-${ficheSolutionEstimation.ficheSolutionId}`, () =>
-    getFicheSolutionById(`${ficheSolutionEstimation.ficheSolutionId}`),
+  const { data } = useSwrWithFetcher<FicheSolutionResponse[]>(
+    makeFicheSolutionCompleteUrlApi(ficheSolutionEstimation.ficheSolutionId),
   );
 
   const getQuantiteByMateriauId = useCallback(
@@ -24,6 +25,13 @@ export function EstimationMateriauxFicheSolutionRecap({
       ficheSolutionEstimation.estimationMateriaux?.find((estMat) => +estMat.materiauId === +materiauId)?.quantite || 0,
     [ficheSolutionEstimation.estimationMateriaux],
   );
+
+  if (!data) {
+    return null;
+  }
+
+  const ficheSolution = data[0];
+
   if (!ficheSolution || !ficheSolution.attributes.materiaux || ficheSolution.attributes.materiaux.data.length === 0) {
     return null;
   }

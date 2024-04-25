@@ -107,7 +107,7 @@ export const authOptions: NextAuthOptions = {
       },
       profile: async (profile) => {
         return {
-          id: profile.sub,
+          id: profile.email,
           prenom: profile.given_name,
           nom: profile.usual_name,
           email: profile.email,

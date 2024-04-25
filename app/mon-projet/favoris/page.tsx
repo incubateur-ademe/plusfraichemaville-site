@@ -20,6 +20,7 @@ export default function Page() {
   useEffect(() => {
     setIsClient(true);
   }, []);
+
   const session = useSession();
   const userBookmarkedFichesSolutions = useUserStore((state) => state.userInfos?.selection_fiches_solutions);
   const userBookmarkedFichesDiagnostic = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic);

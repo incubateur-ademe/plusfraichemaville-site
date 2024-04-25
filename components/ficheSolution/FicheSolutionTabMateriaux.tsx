@@ -11,6 +11,9 @@ export default function FicheSolutionTabMateriaux({
 }: {
   ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
 }) {
+  const displayEntretienPanel =
+    ficheSolution.cout_minimum_entretien != null && ficheSolution.cout_maximum_entretien != null;
+
   return (
     <div>
       <div className="text-dsfr-text-title-grey font-bold text-[1.75rem] mb-8">Matériaux et coûts</div>
@@ -63,7 +66,7 @@ export default function FicheSolutionTabMateriaux({
       ) : (
         <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
       )}
-      {ficheSolution.cout_minimum_entretien && ficheSolution.cout_maximum_entretien && (
+      {displayEntretienPanel && (
         <>
           <hr className="p-0 h-[1px] mt-16" />
           <div className={"flex flex-col md:flex-row gap-1 md:gap-6"}>
