@@ -8,7 +8,6 @@ import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const urls = projet?.fiches_solutions_id ?? [];
-  console.log(makeFicheSolutionCompleteUrlApi(urls));
 
   const { data, isLoading } = useSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionCompleteUrlApi(urls));
 

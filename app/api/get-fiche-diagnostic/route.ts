@@ -8,5 +8,5 @@ export async function GET(request: NextRequest) {
   if (ficheDiagnosticId) {
     return NextResponse.json(await getFicheDiagnosticById(ficheDiagnosticId));
   }
-  return NextResponse.json("[]");
+  return NextResponse.json(null);
 }
