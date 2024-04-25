@@ -122,7 +122,7 @@ export const getProjetById = async (projetId: number): Promise<projet | null> =>
   return prismaClient.projet.findUnique({
     where: {
       id: projetId,
-      deleted_at: null
+      deleted_at: null,
     },
   });
 };
@@ -151,7 +151,7 @@ export const createOrUpdateProjet = async ({
   return prismaClient.projet.upsert({
     where: {
       id: projetId ?? -1,
-      deleted_at: null
+      deleted_at: null,
     },
     create: {
       id: generateRandomId(),
@@ -207,7 +207,7 @@ export const getUserProjets = async (userId: string) => {
   return prismaClient.projet.findMany({
     where: {
       created_by: userId,
-      deleted_at: null
+      deleted_at: null,
     },
     include: projetIncludes,
   });
