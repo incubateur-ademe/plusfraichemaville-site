@@ -2,7 +2,6 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { FicheBookmarkedSolution } from "../common/generic-save-fiche/helpers";
 import BookmarkedFicheSolutionByProject from "../favoris/BookmarkedFicheSolution";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { FicheSolutionFullCardSkeleton } from "./fiche-solution-full-card-skeleton";
 
 export const FichesSolutionsFavoris = ({
   bookmarkedFichesSolutions,
@@ -23,16 +22,15 @@ export const FichesSolutionsFavoris = ({
         Découvrir les solutions
       </Button>
     </div>
-  ) : bookmarkedFichesSolutions ? (
-    bookmarkedFichesSolutions
-      .sort((a, b) => b.projectName.localeCompare(a.projectName))
-      .map((pb) => (
-        <div key={pb.projectName}>
-          <BookmarkedFicheSolutionByProject projectName={pb.projectName} ficheSolutionIds={pb.ficheSolutionIds} />
-          <hr className="mt-8" />
-        </div>
-      ))
   ) : (
-    <FicheSolutionFullCardSkeleton />
+    bookmarkedFichesSolutions &&
+      bookmarkedFichesSolutions
+        .sort((a, b) => b.projectName.localeCompare(a.projectName))
+        .map((pb) => (
+          <div key={pb.projectName}>
+            <BookmarkedFicheSolutionByProject projectName={pb.projectName} ficheSolutionIds={pb.ficheSolutionIds} />
+            <hr className="mt-8" />
+          </div>
+        ))
   );
 };
