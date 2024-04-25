@@ -1,6 +1,7 @@
-import { getFicheDiagnosticById } from "@/lib/strapi/queries/fiches-diagnostic-queries";
-import useSWRImmutable from "swr/immutable";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
+import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { makeFicheDiagnosticUrlApi } from "./helpers";
+import { FicheDiagnosticResponse } from "./types";
 
 export const FicheDiagnosticCardWithFetcher = ({
   ficheDiagnosticId,
@@ -9,8 +10,7 @@ export const FicheDiagnosticCardWithFetcher = ({
   ficheDiagnosticId: number;
   vertical?: boolean;
 }) => {
-  const fetcher = async (fdId: number) => await getFicheDiagnosticById(fdId.toString());
-  const { data } = useSWRImmutable(`fiche-diagnostic-${ficheDiagnosticId}`, () => fetcher(ficheDiagnosticId));
+  const { data } = useSwrWithFetcher<FicheDiagnosticResponse>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
 
   if (!data) {
     return null;
