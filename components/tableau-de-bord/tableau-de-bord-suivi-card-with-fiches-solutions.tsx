@@ -1,15 +1,17 @@
 "use client";
 
-import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { useProjetsStore } from "@/stores/projets/provider";
 import clsx from "clsx";
 import Image from "next/image";
-import useSWRImmutable from "swr/immutable";
-import { getFicheDiagnosticById } from "@/lib/strapi/queries/fiches-diagnostic-queries";
 import { APIResponse } from "@/lib/strapi/types/types";
 import { TypeFiche } from "@/helpers/common";
 import { TableauDeBordSuiviWithText } from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-text";
+import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
+import { FicheSolutionResponse } from "../ficheSolution/type";
+import { FicheDiagnosticResponse } from "../fiches-diagnostic/types";
+import { makeFicheDiagnosticUrlApi } from "../fiches-diagnostic/helpers";
 
 const IMAGE_SLICE_INDEX = 5;
 
@@ -69,17 +71,13 @@ const TableauDeBordSFicheImages = ({
 };
 
 const TableauDeBordFicheSolutionImage = ({ ficheSolutionId }: { ficheSolutionId: string }) => {
-  const { data } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
-    getFicheSolutionById(ficheSolutionId.toString()),
-  );
-  return <TableauSuiviFicheImages image={data?.attributes.image_principale} />;
+  const { data } = useSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionCompleteUrlApi(ficheSolutionId));
+  const ficheSolution = data && data[0];
+  return <TableauSuiviFicheImages image={ficheSolution?.attributes.image_principale} />;
 };
 
 export const TableauDeBordFicheDiagnosticImage = ({ ficheDiagnosticId }: { ficheDiagnosticId: string }) => {
-  const { data } = useSWRImmutable(`fiche-diagnostic-${ficheDiagnosticId}`, () =>
-    getFicheDiagnosticById(ficheDiagnosticId.toString()),
-  );
-
+  const { data } = useSwrWithFetcher<FicheDiagnosticResponse>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
   return <TableauSuiviFicheImages image={data?.attributes.image_principale} />;
 };
 

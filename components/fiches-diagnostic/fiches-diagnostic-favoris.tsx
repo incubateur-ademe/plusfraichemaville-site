@@ -1,5 +1,5 @@
+import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
 import { FicheDiagnosticCardWithFetcher } from "./fiche-diagnostic-card-with-fetcher";
-import { FichesDiagnosticFavorisEmpty } from "./fiches-diagnostic-favoris-empty";
 
 export const FichesDiagnosticFavoris = ({
   bookmarkedFichesDiagnostic,
@@ -16,7 +16,7 @@ export const FichesDiagnosticFavoris = ({
           ))}
         </div>
       ) : (
-        <FichesDiagnosticFavorisEmpty />
+        <FicheSolutionFullCardSkeleton />
       )}
     </div>
   );

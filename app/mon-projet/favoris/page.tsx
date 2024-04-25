@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+
 import { useLocalStorage } from "usehooks-ts";
 import { BOOKMARK_FS_KEY } from "@/helpers/bookmarkedFicheSolutionHelper";
 import SignInCard from "@/components/signin/SignInCard";
@@ -16,10 +16,6 @@ import {
 import { FichesSolutionsFavoris } from "@/components/ficheSolution/fiches-solutions-favoris";
 
 export default function Page() {
-  const [isClient, setIsClient] = useState(false);
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
   const session = useSession();
   const userBookmarkedFichesSolutions = useUserStore((state) => state.userInfos?.selection_fiches_solutions);
   const userBookmarkedFichesDiagnostic = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic);
@@ -35,23 +31,18 @@ export default function Page() {
     session.status === "authenticated" ? userBookmarkedFichesDiagnostic : bookmarkedFichesDiagnosticInLocalStorage;
 
   return (
-    isClient && (
-      <div
-        className="fr-container text-dsfr-text-title-grey pt-10 flex flex-row flex-wrap first:flex-[1_0_50%]
+    <div
+      className="fr-container text-dsfr-text-title-grey pt-10 flex flex-row flex-wrap first:flex-[1_0_50%]
           flex-[0_1_100%] order-1 [&>*:not(:nth-child(2))]:w-full [&>*:nth-child(2)]:grow items-start
           place-content-center"
-      >
-        <div>
-          {session.status !== "authenticated" && (
-            <SignInCard
-              message="save"
-              callbackUrl={process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE}
-            />
-          )}
-        </div>
-        <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
-        <FichesSolutionsFavoris bookmarkedFichesSolutions={bookmarkedFichesSolutions as FicheBookmarkedSolution[]} />
+    >
+      <div>
+        {session.status !== "authenticated" && (
+          <SignInCard message="save" callbackUrl={process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE} />
+        )}
       </div>
-    )
+      <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
+      <FichesSolutionsFavoris bookmarkedFichesSolutions={bookmarkedFichesSolutions as FicheBookmarkedSolution[]} />
+    </div>
   );
 }

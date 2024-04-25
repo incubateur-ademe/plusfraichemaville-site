@@ -1,32 +1,18 @@
-import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import { FicheSolutionResponse } from "../ficheSolution/type";
 import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
-import { abortablePromise } from "@/helpers/abortable-promise";
-import useSWRImmutable from "swr/immutable";
 import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
-import { useEffect } from "react";
-
-function useCancelableSWR(key: string, id: number) {
-  const controller = new AbortController();
-  const swr = useSWRImmutable(key, () => abortablePromise(getFicheSolutionById(id.toString()), controller.signal));
-  return [swr, controller] as const;
-}
-
+import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { makeFicheSolutionUrlApi } from "../ficheSolution/helpers";
 export const FichesSolutionsProjetsSelectedCard = ({
   ficheSolutionId,
 }: {
   ficheSolutionId: FicheSolutionResponse["id"];
 }) => {
-  const [{ data, isLoading, mutate }] = useCancelableSWR(`ficheSolution-${ficheSolutionId}`, ficheSolutionId);
-  useEffect(() => {
-    if (!data) {
-      mutate();
-    }
-  }, [mutate, data]);
+  const { data, isLoading } = useSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionUrlApi(ficheSolutionId));
 
   return !data && isLoading ? (
     <FicheSolutionFullCardSkeleton />
   ) : (
-    data && <FicheSolutionCardWithUserInfo ficheSolution={data} projectName="" />
+    data && <FicheSolutionCardWithUserInfo ficheSolution={data[0]} projectName="" />
   );
 };

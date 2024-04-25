@@ -3,8 +3,9 @@ import Image from "next/image";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
 import React, { PropsWithChildren } from "react";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { getFicheSolutionById } from "@/lib/strapi/queries/fichesSolutionsQueries";
-import useSWRImmutable from "swr/immutable";
+import { makeFicheSolutionUrlApi } from "./helpers";
+import { FicheSolutionResponse } from "./type";
+import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 
 export function FicheSolutionSmallCard({
   ficheSolutionId,
@@ -16,9 +17,10 @@ export function FicheSolutionSmallCard({
   onClick?: () => void;
   className?: string;
 } & PropsWithChildren) {
-  const { data: ficheSolution } = useSWRImmutable(`ficheSolution-${ficheSolutionId}`, () =>
-    getFicheSolutionById(ficheSolutionId.toString()),
-  );
+  const { data } = useSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionUrlApi(ficheSolutionId));
+
+  const ficheSolution = data && data[0];
+
   if (!ficheSolution) {
     return null;
   }
