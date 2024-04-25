@@ -122,6 +122,7 @@ export const getProjetById = async (projetId: number): Promise<projet | null> =>
   return prismaClient.projet.findUnique({
     where: {
       id: projetId,
+      deleted_at: null
     },
   });
 };
@@ -150,6 +151,7 @@ export const createOrUpdateProjet = async ({
   return prismaClient.projet.upsert({
     where: {
       id: projetId ?? -1,
+      deleted_at: null
     },
     create: {
       id: generateRandomId(),
@@ -175,32 +177,37 @@ export const createOrUpdateProjet = async ({
   });
 };
 
-export const deleteProjet = (projetId: number, userId: string) => {
-  prismaClient.estimation.updateMany({
-    where: {
-      projet_id: projetId,
-    },
-    data: {
-      deleted_at: new Date(),
-      deleted_by: userId,
-    },
-  });
-  return prismaClient.projet.update({
-    where: {
-      id: projetId,
-    },
-    data: {
-      deleted_at: new Date(),
-      deleted_by: userId,
-    },
-  });
+export const deleteProjet = async (projetId: number, userId: string) => {
+  prismaClient.estimation
+    .updateMany({
+      where: {
+        projet_id: projetId,
+        deleted_at: null,
+      },
+      data: {
+        deleted_at: new Date(),
+        deleted_by: userId,
+      },
+    })
+    .then(() =>
+      prismaClient.projet.update({
+        where: {
+          id: projetId,
+          deleted_at: null,
+        },
+        data: {
+          deleted_at: new Date(),
+          deleted_by: userId,
+        },
+      }),
+    );
 };
-
 
 export const getUserProjets = async (userId: string) => {
   return prismaClient.projet.findMany({
     where: {
       created_by: userId,
+      deleted_at: null
     },
     include: projetIncludes,
   });
