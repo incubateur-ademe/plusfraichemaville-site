@@ -31,7 +31,7 @@ export default function BannerProjet({ className }: { className?: string }) {
             </div>
             <Link
               href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
-              className="text-[1.375rem] mb-1 w-fit hover:underline"
+              className="text-[1.375rem] !leading-6 mb-1 w-fit hover:underline"
             >
               <div>{currentProjet.nom}</div>
             </Link>
