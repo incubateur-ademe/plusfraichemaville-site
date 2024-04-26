@@ -63,13 +63,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
             ...FicheSolutionCardInfo
           }
         }
-        logo_partenaire {
-          data {
-            attributes {
-              url
-            }
-          }
-        }
+        credits
         materiaux {
           data {
             id

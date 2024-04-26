@@ -6,7 +6,6 @@ import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutio
 import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
 import { APIResponseData, GetValues } from "@/lib/strapi/types/types";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
 export default function FicheSolutionTabSynthese({
   ficheSolution,
@@ -130,19 +129,11 @@ export default function FicheSolutionTabSynthese({
             </div>
           </div>
         )}
-      {ficheSolution.logo_partenaire && !!ficheSolution.logo_partenaire.data && (
+      {!!ficheSolution.credits && (
         <>
           <hr className="pb-8 mt-12" />
-          <div className={"flex flex-col md:flex-row ml-4"}>
-            <div className="text-lg mr-5 text-dsfr-text-mention-grey flex items-center mb-2">Partenaire</div>
-            <Image
-              width={110}
-              height={110}
-              src={getStrapiImageUrl(ficheSolution.logo_partenaire, STRAPI_IMAGE_KEY_SIZE.small)}
-              alt={ficheSolution.titre}
-              className={"h-full "}
-            />
-          </div>
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Crédit</div>
+          <CmsRichText label={ficheSolution.credits} className="text-dsfr-text-title-grey" />
         </>
       )}
     </div>
