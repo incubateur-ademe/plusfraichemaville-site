@@ -1,10 +1,22 @@
 import { APIResponse } from "@/lib/strapi/types/types";
 import { FicheSolution } from "@/components/ficheSolution/type";
+import { RetourExperience } from "@/components/retourExperience/type";
 
 export const getCreditsImageForFicheSolution = (ficheSolution: FicheSolution) => {
   const credits = new Set<string>();
   addImageCreditToSet(credits, ficheSolution.image_principale);
   ficheSolution.materiaux?.data.map((materiau) => addImageCreditToSet(credits, materiau.attributes.image));
+  return Array.from(credits);
+};
+
+export const getCreditsImageForRetourExperience = (retourExperience: RetourExperience) => {
+  const credits = new Set<string>();
+  addImageCreditToSet(credits, retourExperience.image_principale);
+  addImageCreditToSet(credits, retourExperience.situation_avant?.image);
+  addImageCreditToSet(credits, retourExperience.situation_apres?.image);
+  retourExperience.solution_retour_experiences?.data.map((solution) =>
+    addImageCreditToSet(credits, solution.attributes.image),
+  );
   return Array.from(credits);
 };
 
