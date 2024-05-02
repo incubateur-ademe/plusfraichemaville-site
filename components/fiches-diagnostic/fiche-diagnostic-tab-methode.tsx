@@ -8,6 +8,7 @@ import { TypeFiche } from "@/helpers/common";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import React from "react";
+import { getCreditsImageForFicheDiagnostic } from "@/helpers/credits-image";
 
 export const FicheDiagnosticMethodeTab = ({
   ficheDiagnostic,
@@ -23,6 +24,8 @@ export const FicheDiagnosticMethodeTab = ({
 
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
+
+  const creditsImage = getCreditsImageForFicheDiagnostic(attributes);
 
   return (
     <div>
@@ -104,6 +107,13 @@ export const FicheDiagnosticMethodeTab = ({
         <>
           <Separator className="mt-6 mb-12" />
           <FicheDiagnosticTabBlocText title="Crédit" text={attributes.partenaire} textClassName="[&>*]:mb-2" />
+        </>
+      )}
+      {creditsImage.length > 0 && (
+        <>
+          <hr className="pb-8 mt-12" />
+          <div className="text-dsfr-text-title-grey font-bold mb-4">Crédits images</div>
+          <div>{creditsImage.join(", ")}</div>
         </>
       )}
     </div>

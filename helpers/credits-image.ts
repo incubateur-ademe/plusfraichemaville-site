@@ -1,6 +1,7 @@
 import { APIResponse } from "@/lib/strapi/types/types";
 import { FicheSolution } from "@/components/ficheSolution/type";
 import { RetourExperience } from "@/components/retourExperience/type";
+import { FicheDiagnosticResponseAttributes } from "@/components/fiches-diagnostic/types";
 
 export const getCreditsImageForFicheSolution = (ficheSolution: FicheSolution) => {
   const credits = new Set<string>();
@@ -17,6 +18,12 @@ export const getCreditsImageForRetourExperience = (retourExperience: RetourExper
   retourExperience.solution_retour_experiences?.data.map((solution) =>
     addImageCreditToSet(credits, solution.attributes.image),
   );
+  return Array.from(credits);
+};
+
+export const getCreditsImageForFicheDiagnostic = (ficheDiagnostic: FicheDiagnosticResponseAttributes) => {
+  const credits = new Set<string>();
+  addImageCreditToSet(credits, ficheDiagnostic.image_principale);
   return Array.from(credits);
 };
 
