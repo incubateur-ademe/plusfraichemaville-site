@@ -24,8 +24,17 @@ export const TableauDeBordSuivi = () => {
 
 const cards: TableauDeBordSuiviCardProps[] = [
   {
-    title: "Je choisis une méthode de diagnostic",
+    title: "Je renseigne mon projet",
     index: 1,
+    progress: "100",
+    disabled: false,
+    type: "renseignement",
+    picto: <PictoTableauDeBordSelector pictoId="renseignement" className="w-28" />,
+    children: <TableauDeBordSuiviCardInfoProjet />,
+  },
+  {
+    title: "Je choisis une méthode de diagnostic",
+    index: 2,
     progress: (projet: ProjetWithRelations) => {
       return projet?.fiches_diagnostic_id && projet.fiches_diagnostic_id.length > 0 ? "100" : "0";
     },
@@ -33,15 +42,6 @@ const cards: TableauDeBordSuiviCardProps[] = [
     type: "diagnostic",
     picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
     children: <TableauDeBordFichesDiagnoscticImages />,
-  },
-  {
-    title: "Je renseigne mon projet",
-    index: 2,
-    progress: "100",
-    disabled: false,
-    type: "renseignement",
-    picto: <PictoTableauDeBordSelector pictoId="renseignement" className="w-28" />,
-    children: <TableauDeBordSuiviCardInfoProjet />,
   },
   {
     title: "Je choisis mes solutions de rafraîchissement",
