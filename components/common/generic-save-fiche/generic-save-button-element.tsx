@@ -24,7 +24,11 @@ export const GenericSaveButtonElement = ({
   return (
     <div className={clsx(className, "z-[1] relative")}>
       <button onClick={update} className={clsx(assets.className)}>
-        {assets.code && <GenericSavePicto />}
+        {assets.code && (
+          <div className={clsx("w-8 h-8 rounded-full flex items-center justify-center savePicto")}>
+            <GenericSavePicto />
+          </div>
+        )}
         {assets.label && (
           <>
             {assets.label}

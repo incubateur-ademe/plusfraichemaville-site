@@ -2,11 +2,11 @@
 
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { auth } from "@/lib/next-auth/auth";
-import { getUserProjets } from "@/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { hasPermissionToViewUserProjet } from "@/actions/projets/permissions";
+import { getUserProjets } from "@/lib/prisma/prismaProjetQueries";
 
 export const getUserProjetsAction = async (
   userId: string,

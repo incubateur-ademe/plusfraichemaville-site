@@ -40,7 +40,9 @@ model User {
   created_at                  DateTime            @default(now())
   collectivites_created       collectivite[]      @relation(name: "collectivite_creator")
   projets_created             projet[]
-  estimations_created         estimation[]
+  estimations_created         estimation[]        @relation(name: "estimation_creator")
+  estimations_deleted         estimation[]        @relation(name: "estimation_deleter")
+  projets_deleted             projet[]            @relation(name: "projet_deleter")
   collectivites               user_collectivite[] @relation(name: "collectivite_belonging")
   selection_fiches_solutions  Json                @default("[]")
   selection_fiches_diagnostic Int[]               @default([])
@@ -103,16 +105,22 @@ model projet {
   collectiviteId             Int
   collectivite               collectivite @relation(fields: [collectiviteId], references: [id])
   recommandations_viewed_by  String[]
+  deleted_at                 DateTime?
+  deleted_by                 String?
+  deleter                    User?        @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
 }
 
 model estimation {
-  id                  Int      @id
+  id                  Int       @id
   created_by          String
-  creator             User     @relation(fields: [created_by], references: [id])
-  created_at          DateTime @default(now())
-  updated_at          DateTime @default(now())
+  creator             User      @relation(name: "estimation_creator", fields: [created_by], references: [id])
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @default(now())
   projet_id           Int
-  projet              projet   @relation(fields: [projet_id], references: [id], onDelete: Cascade)
+  projet              projet    @relation(fields: [projet_id], references: [id], onDelete: Cascade)
   fiches_solutions_id Int[]
   materiaux           Json?
+  deleted_at          DateTime?
+  deleted_by          String?
+  deleter             User?     @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
 }

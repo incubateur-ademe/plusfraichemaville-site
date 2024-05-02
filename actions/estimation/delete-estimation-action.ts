@@ -22,7 +22,7 @@ export const deleteEstimationAction = async (estimationId: number): Promise<Resp
   }
 
   try {
-    await deleteEstimation(estimationId);
+    await deleteEstimation(estimationId, session.user.id);
   } catch (e) {
     customCaptureException("Error in DeleteEstimationAction DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };
