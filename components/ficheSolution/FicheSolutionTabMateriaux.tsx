@@ -1,10 +1,10 @@
 import React from "react";
 import Image from "next/image";
 import CmsRichText from "@/components/common/CmsRichText";
-import { getUniteCoutMateriauFromCode } from "@/helpers/coutMateriau";
 import entretienIcon from "../../public/images/fiches-solutions/entretien.svg";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getUniteCoutFromCode } from "@/helpers/cout/cout-common";
 
 export default function FicheSolutionTabMateriaux({
   ficheSolution,
@@ -54,7 +54,7 @@ export default function FicheSolutionTabMateriaux({
                 >
                   <div>
                     <b>{`${mat.cout_minimum_fourniture} - ${mat.cout_maximum_fourniture} € `}</b>HT /{" "}
-                    {getUniteCoutMateriauFromCode(mat.cout_unite).unitLabel}
+                    {getUniteCoutFromCode(mat.cout_unite).unitLabel}
                   </div>
                   <div className="text-sm ">(fourniture et pose)</div>
                 </div>
@@ -95,7 +95,7 @@ export default function FicheSolutionTabMateriaux({
               <div>
                 <b>{`${ficheSolution.cout_minimum_entretien} - 
                 ${ficheSolution.cout_maximum_entretien} € `}</b>
-                HT / {getUniteCoutMateriauFromCode(ficheSolution.cout_entretien_unite).unitLabel}{" "}
+                HT / {getUniteCoutFromCode(ficheSolution.cout_entretien_unite).unitLabel}{" "}
               </div>
               <div className="text-sm ">par an</div>
             </div>

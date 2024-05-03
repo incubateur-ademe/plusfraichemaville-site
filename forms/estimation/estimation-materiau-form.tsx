@@ -1,9 +1,4 @@
 import { useCallback, useEffect, useMemo } from "react";
-import {
-  getLabelCoutEntretienByQuantite,
-  getLabelCoutFournitureByQuantite,
-  getUniteCoutMateriauFromCode,
-} from "@/helpers/coutMateriau";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -21,6 +16,8 @@ import { notifications } from "@/components/common/notifications";
 import { estimation } from "@prisma/client";
 import { mapStrapiEstimationMateriauxToFormValues } from "@/lib/prisma/prismaCustomTypesHelper";
 import { scrollToTop } from "@/helpers/common";
+import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/cout/cout-materiau";
+import { getUniteCoutFromCode } from "@/helpers/cout/cout-common";
 
 export default function EstimationMateriauForm({
   ficheSolution,
@@ -125,8 +122,7 @@ export default function EstimationMateriauForm({
               <EstimationMateriauField materiau={getMateriauFromId(+field.materiauId)} key={field.materiauId}>
                 <InputFormField
                   label={
-                    getUniteCoutMateriauFromCode(getMateriauFromId(+field.materiauId)?.attributes.cout_unite)
-                      .estimationLabel
+                    getUniteCoutFromCode(getMateriauFromId(+field.materiauId)?.attributes.cout_unite).estimationLabel
                   }
                   type="number"
                   control={form.control}

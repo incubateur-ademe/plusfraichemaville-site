@@ -1,4 +1,5 @@
 import { APIResponseData } from "@/lib/strapi/types/types";
+import { UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
 
 type AideDecisionSortFilter = {
   label: string;
@@ -20,11 +21,22 @@ const SORT_TEMPERATURE: AideDecisionSortFilter = {
 const SORT_PRICE: AideDecisionSortFilter = {
   code: "abordable",
   label: "Les plus abordables",
-  sortFn: (fs1, fs2) =>
-    ((fs1.attributes.cout_maximum || 0) - (fs1.attributes.cout_minimum || 0)) / 2 >
-    ((fs2.attributes.cout_maximum || 0) - (fs2.attributes.cout_minimum || 0)) / 2
-      ? 1
-      : -1,
+  sortFn: (fs1, fs2) => {
+    if (
+      fs1.attributes.cout_unite === UNITE_COUT_MEGAWATTHEURE.code &&
+      fs2.attributes.cout_unite !== UNITE_COUT_MEGAWATTHEURE.code
+    ) {
+      return 1;
+    } else if (
+      fs2.attributes.cout_unite === UNITE_COUT_MEGAWATTHEURE.code &&
+      fs1.attributes.cout_unite !== UNITE_COUT_MEGAWATTHEURE.code
+    ) {
+      return -1;
+    }
+    const cout1 = (fs1.attributes.cout_maximum || 0) - (fs1.attributes.cout_minimum || 0);
+    const cout2 = (fs2.attributes.cout_maximum || 0) - (fs2.attributes.cout_minimum || 0);
+    return cout1 < cout2 ? -1 : 1;
+  },
   maxItem: 3,
 };
 

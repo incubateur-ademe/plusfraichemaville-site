@@ -2,10 +2,10 @@ import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { useCallback } from "react";
-import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/coutMateriau";
 import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { FicheSolutionResponse } from "@/components/ficheSolution/type";
 import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
+import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/cout/cout-materiau";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationMateriauxFicheSolution;

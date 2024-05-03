@@ -1,14 +1,16 @@
 import React from "react";
 import clsx from "clsx";
 import { highlightedIconClass, TypeFiche } from "@/helpers/common";
+import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
+import { FicheSolution } from "@/components/ficheSolution/type";
 
-type CoutFiche = {
+type CoutFicheSolution = {
   coutMax(_: TypeFiche): number;
   shortLabel: string;
   icons: (_t: TypeFiche, _?: string) => React.ReactNode;
 };
 
-const COUT_CHEAP: CoutFiche = {
+const COUT_CHEAP: CoutFicheSolution = {
   coutMax: (typeFiche) => (typeFiche === TypeFiche.solution ? 400 : 5000),
   shortLabel: "Peu coûteux",
   icons: (typeFiche, extraClasses?) => (
@@ -20,7 +22,7 @@ const COUT_CHEAP: CoutFiche = {
   ),
 };
 
-const COUT_AVERAGE: CoutFiche = {
+const COUT_AVERAGE: CoutFicheSolution = {
   coutMax: (typeFiche) => (typeFiche === TypeFiche.solution ? 1000 : 15000),
   shortLabel: "Peu coûteux",
   icons: (typeFiche, extraClasses?) => (
@@ -32,7 +34,7 @@ const COUT_AVERAGE: CoutFiche = {
   ),
 };
 
-const COUT_EXPENSIVE: CoutFiche = {
+const COUT_EXPENSIVE: CoutFicheSolution = {
   coutMax: (_) => Number.MAX_SAFE_INTEGER,
   shortLabel: "Coûteux",
   icons: (typeFiche, extraClasses?) => (
@@ -44,9 +46,21 @@ const COUT_EXPENSIVE: CoutFiche = {
   ),
 };
 
-export const ALL_COUTS_FICHE: CoutFiche[] = [COUT_CHEAP, COUT_AVERAGE, COUT_EXPENSIVE];
+export const ALL_COUTS_FICHE: CoutFicheSolution[] = [COUT_CHEAP, COUT_AVERAGE, COUT_EXPENSIVE];
 
-export const getCoutFiche = (typeFiche: TypeFiche, coutMin?: number, coutMax?: number) =>
-  coutMin == undefined || coutMax == undefined
-    ? null
-    : ALL_COUTS_FICHE.find((cout) => cout.coutMax(typeFiche) >= (coutMax + coutMin) / 2) || COUT_EXPENSIVE;
+export const getCoutFiche = (typeFiche: TypeFiche, coutMin?: number, coutMax?: number, coutUniteCode?: string) => {
+  if (coutMin == undefined || coutMax == undefined) {
+    return null;
+  }
+  if (coutUniteCode === UNITE_COUT_MEGAWATTHEURE.code) {
+    return COUT_EXPENSIVE;
+  }
+  return ALL_COUTS_FICHE.find((cout) => cout.coutMax(typeFiche) >= (coutMax + coutMin) / 2) || COUT_EXPENSIVE;
+};
+
+export const getLabelCoutFourniture = (ficheSolution: FicheSolution) =>
+  ficheSolution.cout_minimum != null && ficheSolution.cout_maximum != null
+    ? `de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € HT / ${
+        getUniteCoutFromCode(ficheSolution.cout_unite).unitLabel
+      }`
+    : "NA";
