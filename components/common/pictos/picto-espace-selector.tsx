@@ -2,6 +2,7 @@ import { TypeEspace } from "@/components/filters/TypeEspaceFilter";
 
 import Image from "next/image";
 import { PictoType } from ".";
+import clsx from "clsx";
 
 const pictos: Record<TypeEspace["code"], string> = {
   rondpoint: "espace-icone-rond-point.svg",
@@ -15,18 +16,32 @@ const pictos: Record<TypeEspace["code"], string> = {
 
 export type PictoId = keyof typeof pictos;
 
-type PictoEspaceType = PictoType<PictoId> & { withBackground: boolean };
+type PictoEspaceType = PictoType<PictoId> & {
+  withBackground: boolean;
+  size: "small" | "medium";
+  pictoClassName?: string;
+};
 
-export const PictoEspaceSelector = ({ pictoId, withBackground, width = 64, height = 64 }: PictoEspaceType) => {
+export const PictoEspaceSelector = ({ pictoId, withBackground, size = "medium", pictoClassName }: PictoEspaceType) => {
   const selectedPicto = pictos[pictoId];
 
   return (
-    <div className={`p-[5px] w-20 h-20 relative flex justify-center items-center`}>
+    <div
+      className={clsx(
+        `relative flex justify-center items-center`,
+        size === "small" ? "w-[3.125rem] h-[3.125rem]" : " w-20 h-20",
+      )}
+    >
       {withBackground && (
         <div className="absolute inset-0 w-full h-full -z-1 rounded-lg bg-dsfr-background-action-low-blue-france"></div>
       )}
       <div className="z-10">
-        <Image width={width} height={height} alt={`pictogramme ${pictoId}`} src={`/images/espaces/${selectedPicto}`} />
+        <Image
+          fill
+          alt={`pictogramme ${pictoId}`}
+          src={`/images/espaces/${selectedPicto}`}
+          className={clsx("p-[5px]", pictoClassName)}
+        />
       </div>
     </div>
   );

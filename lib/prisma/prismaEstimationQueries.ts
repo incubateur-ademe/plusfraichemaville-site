@@ -7,14 +7,20 @@ export const getEstimationById = async (estimationId: number): Promise<estimatio
   return prismaClient.estimation.findUnique({
     where: {
       id: estimationId,
+      deleted_at: null,
     },
   });
 };
 
-export const deleteEstimation = (estimationId: number) => {
-  return prismaClient.estimation.delete({
+export const deleteEstimation = (estimationId: number, userId: string) => {
+  return prismaClient.estimation.update({
     where: {
       id: estimationId,
+      deleted_at: null,
+    },
+    data: {
+      deleted_by: userId,
+      deleted_at: new Date(),
     },
   });
 };
@@ -41,6 +47,7 @@ export const updateEstimationMateriaux = async (
   return prismaClient.estimation.update({
     where: {
       id: estimationId,
+      deleted_at: null,
     },
     data: {
       materiaux: estimationMateriaux as Prisma.JsonArray,

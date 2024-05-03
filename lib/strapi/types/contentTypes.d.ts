@@ -1039,6 +1039,14 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         }
       >;
     libelle_avantage_solution: Attribute.String;
+    credits: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

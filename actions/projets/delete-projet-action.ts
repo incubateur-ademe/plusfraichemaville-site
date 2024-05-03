@@ -2,11 +2,11 @@
 
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { auth } from "@/lib/next-auth/auth";
-import { deleteUserProjet } from "@/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
+import { deleteProjet } from "@/lib/prisma/prismaProjetQueries";
 
 export const deleteProjetAction = async (projetId: number): Promise<ResponseAction<{}>> => {
   const session = await auth();
@@ -19,7 +19,7 @@ export const deleteProjetAction = async (projetId: number): Promise<ResponseActi
   }
 
   try {
-    await deleteUserProjet(projetId);
+    await deleteProjet(projetId, session.user.id);
 
     revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
   } catch (e) {
