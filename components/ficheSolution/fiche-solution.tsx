@@ -24,6 +24,7 @@ export async function FicheSolution({
 }) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
   const historique = await getAideDecisionHistoryBySlug(searchParams?.etapeAideDecision, true);
+
   if (ficheSolution) {
     const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
     return (

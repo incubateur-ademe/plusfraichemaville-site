@@ -1,8 +1,8 @@
 import clsx from "clsx";
 
-export const FicheSolutionFullCardSkeleton = () => {
+export const FicheSolutionFullCardSkeleton = ({ small }: { small?: boolean }) => {
   return (
-    <div className="w-72 pfmv-card h-[40.3125rem] bg-white">
+    <div className={clsx("w-72 pfmv-card h-[40.3125rem] bg-white", small ? "h-[26rem]" : "h-[40.3125rem]")}>
       <div className="animate-pulse">
         <div className="bg-dsfr-contrast-grey rounded-t-xl h-52 w-full"></div>
 
