@@ -10,11 +10,13 @@ import { getRetourExperienceBySlug } from "@/lib/strapi/queries/retoursExperienc
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
 import SolutionRetourExperienceCard from "@/components/retourExperience/SolutionRetourExperienceCard";
+import { getCreditsImageForRetourExperience } from "@/helpers/credits-image";
 
 export async function RetourExperience({ params }: { params: { retourExperienceSlug: string; projetId: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
 
   if (retourExperience) {
+    const creditsImage = getCreditsImageForRetourExperience(retourExperience.attributes);
     const solutions = retourExperience.attributes.solution_retour_experiences?.data;
     const linkedRetourExperiences = retourExperience.attributes.retour_experiences?.data;
     return (
@@ -102,6 +104,13 @@ export async function RetourExperience({ params }: { params: { retourExperienceS
                     </li>
                   ))}
                 </ul>
+              </>
+            )}
+            {creditsImage.length > 0 && (
+              <>
+                <hr className="pb-8 mt-12" />
+                <div className="text-dsfr-text-title-grey font-bold mb-4">Crédits images</div>
+                <div>{creditsImage.join(", ")}</div>
               </>
             )}
           </div>
