@@ -135,7 +135,7 @@ export default function FicheSolutionTabSynthese({
       {!!ficheSolution.credits && (
         <>
           <hr className="pb-8 mt-12" />
-          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Crédit</div>
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Crédits</div>
           <CmsRichText label={ficheSolution.credits} className="text-dsfr-text-title-grey" />
         </>
       )}

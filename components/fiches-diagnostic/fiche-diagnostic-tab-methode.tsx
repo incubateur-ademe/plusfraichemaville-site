@@ -106,7 +106,7 @@ export const FicheDiagnosticMethodeTab = ({
       {!!attributes.partenaire && (
         <>
           <Separator className="mt-6 mb-12" />
-          <FicheDiagnosticTabBlocText title="Crédit" text={attributes.partenaire} textClassName="[&>*]:mb-2" />
+          <FicheDiagnosticTabBlocText title="Crédits" text={attributes.partenaire} textClassName="[&>*]:mb-2" />
         </>
       )}
       {creditsImage.length > 0 && (
