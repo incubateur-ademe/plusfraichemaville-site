@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
-      NEXTAUTH_SECRET: ${{ secrets.NEXTAUTH_SECRET }}
+      NEXTAUTH_SECRET: ${{ vars.NEXTAUTH_SECRET }}
       NEXT_PUBLIC_STRAPI_URL: ${{ secrets.NEXT_PUBLIC_STRAPI_URL }}
       STRAPI_TOKEN: ${{ secrets.STRAPI_TOKEN }}
     steps:
@@ -23,7 +23,7 @@ jobs:
           node-version: 18.17.1
       - uses: pnpm/action-setup@v2.4.0
         with:
-          version: 8.7.0
+          version: 9.0.2
 
       - name: Install dependencies
         run: pnpm install
