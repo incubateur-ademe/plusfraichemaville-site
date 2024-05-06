@@ -3,9 +3,9 @@ import Image from "next/image";
 import { PropsWithChildren } from "react";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
-import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/coutMateriau";
 import { ShowMoreRichText } from "@/components/common/show-more-rich-text";
 import clsx from "clsx";
+import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/cout/cout-materiau";
 
 type EstimationMateriauFieldProps = {
   materiau?: MateriauResponse;

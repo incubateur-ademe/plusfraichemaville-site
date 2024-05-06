@@ -8,9 +8,9 @@ import React, { useMemo } from "react";
 import { EstimationDeleteModal } from "@/components/estimation/estimation-delete-modal";
 import { EstimationMateriauModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
-import { computeGlobalFicheSolutionPrice } from "@/helpers/coutMateriau";
 import { isComplete } from "@/helpers/estimation";
 import { dateToStringWithTime } from "@/helpers/dateUtils";
+import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
 
 export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
