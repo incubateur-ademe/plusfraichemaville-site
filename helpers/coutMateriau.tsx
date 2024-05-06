@@ -50,7 +50,7 @@ export const getLabelCoutFournitureByQuantite = (
   materiau: GetValues<"api::materiau.materiau"> | undefined,
   quantite: number,
 ) =>
-  materiau && materiau.cout_minimum_fourniture && materiau.cout_maximum_fourniture && quantite
+  materiau && materiau.cout_minimum_fourniture != null && materiau.cout_maximum_fourniture != null && quantite
     ? `${materiau.cout_minimum_fourniture * quantite} - ${materiau.cout_maximum_fourniture * quantite} €`
     : "0 €";
 
@@ -65,7 +65,7 @@ export const getLabelCoutEntretienByQuantite = (
   materiau: GetValues<"api::materiau.materiau"> | undefined,
   quantite: number,
 ) =>
-  materiau && materiau.cout_minimum_entretien && materiau.cout_maximum_entretien && quantite
+  materiau && materiau.cout_minimum_entretien != null && materiau.cout_maximum_entretien != null && quantite
     ? `${materiau.cout_minimum_entretien * quantite} - ${materiau.cout_maximum_entretien * quantite} € / an`
     : "0 € / an";
 
