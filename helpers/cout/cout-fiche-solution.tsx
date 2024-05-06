@@ -63,4 +63,4 @@ export const getLabelCoutFourniture = (ficheSolution: FicheSolution) =>
     ? `de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € HT / ${
         getUniteCoutFromCode(ficheSolution.cout_unite).unitLabel
       }`
-    : "NA";
+    : "Coût non disponible";
