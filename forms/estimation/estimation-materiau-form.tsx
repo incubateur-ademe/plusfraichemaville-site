@@ -94,8 +94,8 @@ export default function EstimationMateriauForm({
             max: quantiteMateriau * (materiauCMS.attributes.cout_maximum_entretien || 0) + acc.entretien.max,
           },
           fourniture: {
-            min: quantiteMateriau * materiauCMS.attributes.cout_minimum_fourniture + acc.fourniture.min,
-            max: quantiteMateriau * materiauCMS.attributes.cout_maximum_fourniture + acc.fourniture.max,
+            min: quantiteMateriau * (materiauCMS.attributes.cout_minimum_fourniture || 0) + acc.fourniture.min,
+            max: quantiteMateriau * (materiauCMS.attributes.cout_maximum_fourniture || 0) + acc.fourniture.max,
           },
         };
       },

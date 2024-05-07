@@ -52,11 +52,17 @@ export default function FicheSolutionTabMateriaux({
                     "md:w-60 flex flex-col flex-none bg-dsfr-background-alt-grey text-dsfr-text-mention-grey p-6"
                   }
                 >
-                  <div>
-                    <b>{`${mat.cout_minimum_fourniture} - ${mat.cout_maximum_fourniture} € `}</b>HT /{" "}
-                    {getUniteCoutFromCode(mat.cout_unite).unitLabel}
-                  </div>
-                  <div className="text-sm ">(fourniture et pose)</div>
+                  {mat.cout_minimum_fourniture != null && mat.cout_maximum_fourniture != null ? (
+                    <>
+                      <div>
+                        <b>{`${mat.cout_minimum_fourniture} - ${mat.cout_maximum_fourniture} € `}</b>HT /{" "}
+                        {getUniteCoutFromCode(mat.cout_unite).unitLabel}
+                      </div>
+                      <div className="text-sm ">(fourniture et pose)</div>
+                    </>
+                  ) : (
+                    <div className="text-sm ">Information de coût non disponible</div>
+                  )}
                 </div>
               </div>
               <hr className="p-0 h-[1px]" />
