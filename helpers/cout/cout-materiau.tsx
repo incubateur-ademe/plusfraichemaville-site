@@ -1,9 +1,7 @@
-import { GetValues } from "@/lib/strapi/types/types";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import sumBy from "lodash/sumBy";
 import { getUniteCoutFromCode } from "@/helpers/cout/cout-common";
-
-type Materiau = GetValues<"api::materiau.materiau">;
+import { Materiau } from "@/components/ficheSolution/type";
 
 export const materiauHasNoCost = (materiau: Materiau) =>
   !materiau.cout_minimum_fourniture &&
