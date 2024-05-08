@@ -11,10 +11,15 @@ import {
   EstimationMateriauxFormSchema,
 } from "@/forms/estimation/estimation-materiau-form-schema";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import {
+  EstimationMateriauxSimpleFieldFormData,
+  EstimationMateriauxFormSimpleFieldSchema,
+} from "@/forms/estimation/estimation-materiau-form-simple-field-schema";
+import { generateRandomId } from "@/helpers/common";
 
 export const updateEstimationMateriauxAction = async (
   estimationId: number,
-  data: EstimationMateriauxFormData,
+  data: EstimationMateriauxFormData | EstimationMateriauxSimpleFieldFormData,
 ): Promise<ResponseAction<{ updatedEstimation?: estimation }>> => {
   const session = await auth();
   if (!session) {
@@ -26,7 +31,12 @@ export const updateEstimationMateriauxAction = async (
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 
-  const parseParamResult = EstimationMateriauxFormSchema.safeParse(data);
+  const isMultipleFieldsFormData = "estimationMateriaux" in data;
+
+  const parseParamResult = isMultipleFieldsFormData
+    ? EstimationMateriauxFormSchema.safeParse(data)
+    : EstimationMateriauxFormSimpleFieldSchema.safeParse(data);
+
   if (!parseParamResult.success) {
     captureError("UpdateEstimationMateriauxAction format errors", parseParamResult.error.flatten());
     return { type: "error", message: "PARSING_ERROR" };
@@ -35,12 +45,15 @@ export const updateEstimationMateriauxAction = async (
       const currentMateriauxEstimation = (estimation.materiaux as EstimationMateriauxFicheSolution[]) || [];
       const newMateriauxEstimation: EstimationMateriauxFicheSolution = {
         ficheSolutionId: data.ficheSolutionId,
-        estimationMateriaux: data.estimationMateriaux,
+        estimationMateriaux: isMultipleFieldsFormData
+          ? data.estimationMateriaux
+          : [{ quantite: data.quantite, materiauId: generateRandomId().toString() }],
         coutMinInvestissement: data.globalPrice?.fourniture?.min || 0,
         coutMaxInvestissement: data.globalPrice?.fourniture?.max || 0,
         coutMinEntretien: data.globalPrice?.entretien?.min || 0,
         coutMaxEntretien: data.globalPrice?.entretien?.max || 0,
       };
+
       const index = currentMateriauxEstimation?.findIndex((e) => e.ficheSolutionId === data.ficheSolutionId);
       if (index === -1) {
         currentMateriauxEstimation.push(newMateriauxEstimation);
