@@ -27,6 +27,7 @@ export default function FicheSolutionInfoComparatif({
     ficheSolution.cout_maximum,
     ficheSolution.cout_unite,
   );
+
   return (
     <div className={`${className}`}>
       {!!ficheSolution.baisse_temperature && (
@@ -67,7 +68,7 @@ export default function FicheSolutionInfoComparatif({
           </div>
         </div>
       </div>
-      <div className={`${!cout ? " invisible " : ""}`}>
+      <div>
         <hr className="pb-2 mt-1" />
         <div className="text-dsfr-text-mention-grey">Coût</div>
         <div className="inline-block w-full">
