@@ -12,10 +12,9 @@ import {
 } from "@/forms/estimation/estimation-materiau-form-schema";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import {
-  EstimationMateriauxSimpleFieldFormData,
   EstimationMateriauxFormSimpleFieldSchema,
+  EstimationMateriauxSimpleFieldFormData,
 } from "@/forms/estimation/estimation-materiau-form-simple-field-schema";
-import { generateRandomId } from "@/helpers/common";
 
 export const updateEstimationMateriauxAction = async (
   estimationId: number,
@@ -45,13 +44,12 @@ export const updateEstimationMateriauxAction = async (
       const currentMateriauxEstimation = (estimation.materiaux as EstimationMateriauxFicheSolution[]) || [];
       const newMateriauxEstimation: EstimationMateriauxFicheSolution = {
         ficheSolutionId: data.ficheSolutionId,
-        estimationMateriaux: isMultipleFieldsFormData
-          ? data.estimationMateriaux
-          : [{ quantite: data.quantite, materiauId: generateRandomId().toString() }],
+        estimationMateriaux: isMultipleFieldsFormData ? data.estimationMateriaux : undefined,
         coutMinInvestissement: data.globalPrice?.fourniture?.min || 0,
         coutMaxInvestissement: data.globalPrice?.fourniture?.max || 0,
         coutMinEntretien: data.globalPrice?.entretien?.min || 0,
         coutMaxEntretien: data.globalPrice?.entretien?.max || 0,
+        quantite: isMultipleFieldsFormData ? undefined : data.quantite,
       };
 
       const index = currentMateriauxEstimation?.findIndex((e) => e.ficheSolutionId === data.ficheSolutionId);

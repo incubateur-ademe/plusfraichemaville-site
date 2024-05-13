@@ -22,7 +22,7 @@ export function EstimationMateriauxFicheSolutionRecap({
 
   const getQuantiteByMateriauId = useCallback(
     (materiauId: number): number =>
-      ficheSolutionEstimation.estimationMateriaux.find((estMat) => +estMat.materiauId === +materiauId)?.quantite || 0,
+      ficheSolutionEstimation.estimationMateriaux?.find((estMat) => +estMat.materiauId === +materiauId)?.quantite || 0,
     [ficheSolutionEstimation.estimationMateriaux],
   );
 

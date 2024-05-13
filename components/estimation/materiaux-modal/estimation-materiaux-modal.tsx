@@ -143,28 +143,33 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
         />
         {currentFicheSolution && (
           <>
-            <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre},
-             vous aurez besoin de choisir parmi les matériaux et systèmes suivants :`}</div>
             {isSimpleForm ? (
-              <EstimationMateriauSimpleFieldForm
-                estimationId={estimation.id}
-                ficheSolution={currentFicheSolution}
-                estimationMateriaux={currentEstimationMateriaux}
-                onClose={modal.close}
-                onPrevious={goToPreviousStep}
-                onNext={goToNextStep}
-                onUpdateEstimation={updateEstimationInStore}
-              />
+              <>
+                <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.attributes.titre}`}</div>
+                <EstimationMateriauSimpleFieldForm
+                  estimationId={estimation.id}
+                  ficheSolution={currentFicheSolution}
+                  estimationMateriaux={currentEstimationMateriaux}
+                  onClose={modal.close}
+                  onPrevious={goToPreviousStep}
+                  onNext={goToNextStep}
+                  onUpdateEstimation={updateEstimationInStore}
+                />
+              </>
             ) : (
-              <EstimationMateriauForm
-                estimationId={estimation.id}
-                ficheSolution={currentFicheSolution}
-                estimationMateriaux={currentEstimationMateriaux}
-                onClose={modal.close}
-                onPrevious={goToPreviousStep}
-                onNext={goToNextStep}
-                onUpdateEstimation={updateEstimationInStore}
-              />
+              <>
+                <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre}, vous aurez
+                besoin de choisir parmi les matériaux et systèmes suivants :`}</div>
+                <EstimationMateriauForm
+                  estimationId={estimation.id}
+                  ficheSolution={currentFicheSolution}
+                  estimationMateriaux={currentEstimationMateriaux}
+                  onClose={modal.close}
+                  onPrevious={goToPreviousStep}
+                  onNext={goToNextStep}
+                  onUpdateEstimation={updateEstimationInStore}
+                />
+              </>
             )}
           </>
         )}

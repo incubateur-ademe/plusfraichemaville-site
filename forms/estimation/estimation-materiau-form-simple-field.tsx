@@ -18,6 +18,8 @@ import {
   EstimationMateriauxFormSimpleFieldSchema,
 } from "./estimation-materiau-form-simple-field-schema";
 import InputFormField from "@/components/common/InputFormField";
+import { getUniteCoutFromCode } from "@/helpers/cout/cout-common";
+import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/cout/cout-fiche-solution";
 
 export default function EstimationMateriauSimpleFieldForm({
   ficheSolution,
@@ -39,7 +41,7 @@ export default function EstimationMateriauSimpleFieldForm({
   const initialValues = useMemo(
     () => ({
       ficheSolutionId: +ficheSolution.id,
-      quantite: estimationMateriaux?.estimationMateriaux[0].quantite,
+      quantite: estimationMateriaux?.quantite || 0,
     }),
     [estimationMateriaux?.estimationMateriaux, ficheSolution.id],
   );
@@ -63,7 +65,6 @@ export default function EstimationMateriauSimpleFieldForm({
 
   const onSubmit = async (data: EstimationMateriauxSimpleFieldFormData, callback?: () => void) => {
     data.globalPrice = globalPrice;
-
     const actionResult = await updateEstimationMateriauxAction(estimationId, data);
     if (actionResult.type !== "success") {
       notifications(actionResult.type, actionResult.message);
@@ -96,81 +97,64 @@ export default function EstimationMateriauSimpleFieldForm({
 
   return (
     <>
-      {ficheSolution.attributes.materiaux?.data && ficheSolution.attributes.materiaux.data.length > 0 ? (
-        <>
-          <form
-            id={`estimation-fiche-solution-${ficheSolution.id}`}
-            onSubmit={form.handleSubmit((data) => onSubmit(data))}
-          >
-            <EstimationMateriauFieldUnique
-              description={ficheSolution.attributes.description_estimation}
-              image={ficheSolution.attributes.image_principale}
-            >
-              <InputFormField
-                label="estimationLabel"
-                type="number"
-                control={form.control}
-                path="quantite"
-                whiteBackground
-              />
-              <div>Investissement</div>
-              <div className="font-bold mb-2">
-                {ficheSolution.attributes.cout_minimum} {ficheSolution.attributes.cout_maximum}€ / an
-              </div>
-              <div>Entretien</div>
-              <div className="font-bold mb-2">
-                {ficheSolution.attributes.cout_minimum_entretien} {ficheSolution.attributes.cout_maximum_entretien}€ /
-                an
-              </div>
-            </EstimationMateriauFieldUnique>
+      <form id={`estimation-fiche-solution-${ficheSolution.id}`} onSubmit={form.handleSubmit((data) => onSubmit(data))}>
+        <EstimationMateriauFieldUnique ficheSolution={ficheSolution.attributes}>
+          <InputFormField
+            label={getUniteCoutFromCode(ficheSolution.attributes.cout_unite).estimationLabel}
+            type="number"
+            control={form.control}
+            path="quantite"
+            whiteBackground
+          />
+          <div>Investissement</div>
+          <div className="font-bold mb-2">
+            {getLabelCoutFournitureByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0)}
+          </div>
+          <div>Entretien</div>
+          <div className="font-bold mb-2">
+            {getLabelCoutEntretienByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0)}
+          </div>
+        </EstimationMateriauFieldUnique>
 
-            <EstimationMateriauGlobalPriceFooter
-              title={ficheSolution.attributes.titre}
-              investissementMin={globalPrice?.fourniture.min}
-              investissementMax={globalPrice?.fourniture.max}
-              entretienMin={globalPrice?.entretien.min}
-              entretienMax={globalPrice?.entretien.max}
-            />
-            <div className="flex items-center">
-              <Button
-                className={`rounded-3xl mr-4 !p-0`}
-                onClick={form.handleSubmit(onSubmitAndNext)}
-                disabled={disabled}
-              >
-                <div
-                  className="h-10 py-2 px-4"
-                  onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
-                >
-                  {"Suivant"}
-                </div>
-              </Button>
-              <Button
-                className={`rounded-3xl mr-4`}
-                onClick={form.handleSubmit(onSubmitAndClose)}
-                disabled={disabled}
-                priority="secondary"
-              >
-                {"Enregistrer et finir plus tard"}
-              </Button>
-              <Button
-                className={`rounded-3xl mr-4 !p-0`}
-                onClick={form.handleSubmit(onSubmitAndPrevious)}
-                disabled={disabled}
-                priority="tertiary"
-              >
-                <div
-                  className="h-10 py-2 px-4"
-                  onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
-                >
-                  {"Précédent"}
-                </div>
-              </Button>
+        <EstimationMateriauGlobalPriceFooter
+          title={ficheSolution.attributes.titre}
+          investissementMin={globalPrice?.fourniture.min}
+          investissementMax={globalPrice?.fourniture.max}
+          entretienMin={globalPrice?.entretien.min}
+          entretienMax={globalPrice?.entretien.max}
+        />
+        <div className="flex items-center">
+          <Button className={`rounded-3xl mr-4 !p-0`} onClick={form.handleSubmit(onSubmitAndNext)} disabled={disabled}>
+            <div
+              className="h-10 py-2 px-4"
+              onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
+            >
+              {"Suivant"}
             </div>
-          </form>
-        </>
-      ) : (
-        <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
-      )}{" "}
+          </Button>
+          <Button
+            className={`rounded-3xl mr-4`}
+            onClick={form.handleSubmit(onSubmitAndClose)}
+            disabled={disabled}
+            priority="secondary"
+          >
+            {"Enregistrer et finir plus tard"}
+          </Button>
+          <Button
+            className={`rounded-3xl mr-4 !p-0`}
+            onClick={form.handleSubmit(onSubmitAndPrevious)}
+            disabled={disabled}
+            priority="tertiary"
+          >
+            <div
+              className="h-10 py-2 px-4"
+              onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
+            >
+              {"Précédent"}
+            </div>
+          </Button>
+        </div>
+      </form>
     </>
   );
 }

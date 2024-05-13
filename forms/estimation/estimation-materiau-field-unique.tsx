@@ -1,16 +1,15 @@
-import { ShowMoreRichText } from "@/components/common/show-more-rich-text";
-import { STRAPI_IMAGE_KEY_SIZE, getStrapiImageUrl } from "@/lib/strapi/strapiClient";
-import { APIResponse } from "@/lib/strapi/types/types";
-import clsx from "clsx";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
+import CmsRichText from "@/components/common/CmsRichText";
+import { FicheSolution } from "@/components/ficheSolution/type";
+import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/cout/cout-fiche-solution";
 
 type EstimationMateriauFieldUniqueProps = {
-  description?: string;
-  image?: APIResponse<"plugin::upload.file"> | null;
+  ficheSolution: FicheSolution;
 } & PropsWithChildren;
 
-export const EstimationMateriauFieldUnique = ({ image, description, children }: EstimationMateriauFieldUniqueProps) => {
+export const EstimationMateriauFieldUnique = ({ ficheSolution, children }: EstimationMateriauFieldUniqueProps) => {
   return (
     <div>
       <hr className="p-0 h-[1px]" />
@@ -20,15 +19,18 @@ export const EstimationMateriauFieldUnique = ({ image, description, children }: 
           <Image
             fill
             sizes="30vw md:5vw"
-            src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.small)}
+            src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
             alt={""}
             className={"object-cover rounded-2xl"}
           />
         </div>
         <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-title-grey grow">
-          <ShowMoreRichText richText={description ?? ""} className={clsx("text-sm", "[&>*:last-child]:m-0")} />
+          <CmsRichText label={ficheSolution.description_estimation ?? ""} className={"text-sm"} />
+          <div className="text-dsfr-text-mention-grey text-sm">
+            <div>{`Coût d'investissement : ${getLabelCoutFourniture(ficheSolution)}`}</div>
+            <div>{`Coût d'entretien : ${getLabelCoutEntretien(ficheSolution)}`}</div>
+          </div>
         </div>
-
         <div className={"md:w-60 flex flex-col flex-none bg-dsfr-contrast-grey p-6"}>{children}</div>
       </div>
       <hr className="p-0 h-[1px] mb-2" />
