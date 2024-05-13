@@ -1029,7 +1029,9 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         min: 0;
       }>;
     portee_baisse_temperature: Attribute.Enumeration<["air", "surface", "interieur"]>;
-    cout_entretien_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite"]>;
+    cout_entretien_unite: Attribute.Enumeration<
+      ["metreCarre", "lineaire", "metreCube", "unite", "megaWattHeure", "kiloWatt"]
+    >;
     en_savoir_plus: Attribute.RichText &
       Attribute.CustomField<
         "plugin::ckeditor.CKEditor",
@@ -1134,7 +1136,7 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
       Attribute.SetMinMax<{
         min: 0;
       }>;
-    cout_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite", "megaWattHeure"]> &
+    cout_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite", "megaWattHeure", "kiloWatt"]> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
