@@ -68,8 +68,8 @@ export const getLabelCoutFourniture = (ficheSolution: FicheSolution) =>
 export const getLabelCoutEntretien = (ficheSolution: FicheSolution) =>
   ficheSolution.cout_minimum_entretien != null && ficheSolution.cout_maximum_entretien != null
     ? `de ${ficheSolution.cout_minimum_entretien} à ${ficheSolution.cout_maximum_entretien} € HT / ${
-      getUniteCoutFromCode(ficheSolution.cout_entretien_unite).unitLabel
-    }`
+        getUniteCoutFromCode(ficheSolution.cout_entretien_unite).unitLabel
+      }`
     : "Coût non disponible";
 
 export const getLabelCoutFournitureByQuantite = (ficheSolution: FicheSolution, quantite: number) =>
@@ -81,4 +81,3 @@ export const getLabelCoutEntretienByQuantite = (ficheSolution: FicheSolution, qu
   ficheSolution.cout_minimum_entretien != null && ficheSolution.cout_maximum_entretien != null && quantite
     ? `${ficheSolution.cout_minimum_entretien * quantite} - ${ficheSolution.cout_maximum_entretien * quantite} € / an`
     : "0 € / an";
-
