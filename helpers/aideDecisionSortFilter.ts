@@ -22,7 +22,13 @@ const SORT_PRICE: AideDecisionSortFilter = {
   code: "abordable",
   label: "Les plus abordables",
   sortFn: (fs1, fs2) => {
-    if (
+    const fs1HasNoMinMaxCost = !fs1.attributes.cout_maximum && !fs1.attributes.cout_minimum;
+    const fs2HasNoMinMaxCost = !fs2.attributes.cout_maximum && !fs2.attributes.cout_minimum;
+    if (fs1HasNoMinMaxCost && !fs2HasNoMinMaxCost) {
+      return -1;
+    } else if (!fs1HasNoMinMaxCost && fs2HasNoMinMaxCost) {
+      return 1;
+    } else if (
       fs1.attributes.cout_unite === UNITE_COUT_MEGAWATTHEURE.code &&
       fs2.attributes.cout_unite !== UNITE_COUT_MEGAWATTHEURE.code
     ) {
