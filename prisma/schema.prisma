@@ -124,3 +124,23 @@ model estimation {
   deleted_by          String?
   deleter             User?     @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
 }
+
+enum TypeLieuClimadiag {
+  commune
+  epci
+}
+
+model climadiag {
+  id                          Int               @id @default(autoincrement())
+  nom                         String
+  type_lieu                   TypeLieuClimadiag
+  code_insee                  String
+  code_postal                 String
+  epci_parent_id              Int?
+  jours_tres_chauds_ref       Float
+  jours_tres_chauds_prevision Json
+  nuits_chaudes_ref           Float
+  nuits_chaudes_prevision     Json
+  jours_vdc_ref               Float
+  jours_vdc_prevision         Json
+}
