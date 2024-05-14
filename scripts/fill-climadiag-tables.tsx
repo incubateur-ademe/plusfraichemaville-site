@@ -1,6 +1,7 @@
-import { prismaClient } from "@/lib/prisma/prismaClient";
+// @ts-nocheck
 import { Prisma } from "@prisma/client";
 import { ProjectionsIndicateurClimadiag } from "@/lib/prisma/prismaCustomTypes";
+import { prismaClient } from "@/lib/prisma/prismaClient";
 
 const fileStructureToPrismaIndicateur = (data: string): ProjectionsIndicateurClimadiag => {
   return {
