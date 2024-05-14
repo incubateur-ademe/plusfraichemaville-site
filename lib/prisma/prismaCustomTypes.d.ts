@@ -21,11 +21,11 @@ export type EstimationMateriauxFicheSolution = {
 
 export type AgentConnectInfo = { siret: string };
 
-type ClimadiagTemperatureProjection= {
+type ClimadiagTemperatureProjection = {
   min: number;
   max: number;
   median: number;
-}
+};
 export type ProjectionsIndicateurClimadiag = {
   2030: ClimadiagTemperatureProjection;
   2050: ClimadiagTemperatureProjection;
