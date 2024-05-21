@@ -31,7 +31,7 @@ export const searchClimadiagInfo = async (searchTerms: string[], limit: number) 
             startsWith: fullTextQuery,
           },
         },
-        computeClimadiagNameQuery(searchTerms)
+        computeClimadiagNameQuery(searchTerms),
       ],
     },
     take: limit,
@@ -44,7 +44,7 @@ const computeClimadiagNameQuery = (searchTerms: string[]): Prisma.climadiagWhere
       return {
         nom: {
           contains: searchTerm,
-          mode: "insensitive"
+          mode: "insensitive",
         },
       };
     }),
