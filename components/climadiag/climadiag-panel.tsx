@@ -1,13 +1,13 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
-import { climadiag } from "@prisma/client";
 import { Select } from "@codegouvfr/react-dsfr/Select";
 import { ClimadiagIndicateurs } from "@/components/climadiag/climadiag-indicateurs";
+import { Climadiag } from "./types";
 
 export const ClimadiagPanel = ({ userId }: { userId: string }) => {
-  const [value, setValue] = useState<climadiag>();
-  const { data, isLoading } = useSwrWithFetcher<climadiag[]>(
+  const [value, setValue] = useState<Climadiag>();
+  const { data, isLoading } = useSwrWithFetcher<Climadiag[]>(
     `/api/get-climadiag-info-for-user-projects?userId=${userId}`,
   );
 
