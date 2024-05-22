@@ -4,7 +4,8 @@ export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]) => {
   return prismaClient.climadiag.findMany({
     where: {
       code_insee: {
-        in: codeInsee,
+        in: ["02190"],
+        // in: codeInsee,
       },
     },
   });
