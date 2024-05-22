@@ -1029,7 +1029,9 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         min: 0;
       }>;
     portee_baisse_temperature: Attribute.Enumeration<["air", "surface", "interieur"]>;
-    cout_entretien_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite"]>;
+    cout_entretien_unite: Attribute.Enumeration<
+      ["metreCarre", "lineaire", "metreCube", "unite", "megaWattHeure", "kiloWatt"]
+    >;
     en_savoir_plus: Attribute.RichText &
       Attribute.CustomField<
         "plugin::ckeditor.CKEditor",
@@ -1040,6 +1042,15 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
       >;
     libelle_avantage_solution: Attribute.String;
     credits: Attribute.RichText &
+      Attribute.CustomField<
+        "plugin::ckeditor.CKEditor",
+        {
+          output: "HTML";
+          preset: "light";
+        }
+      >;
+    cout_unite: Attribute.Enumeration<["metreCarre", "megaWattHeure"]> & Attribute.DefaultTo<"metreCarre">;
+    description_estimation: Attribute.RichText &
       Attribute.CustomField<
         "plugin::ckeditor.CKEditor",
         {
@@ -1090,7 +1101,6 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         }
       >;
     cout_minimum_fourniture: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1100,7 +1110,6 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
         min: 0;
       }>;
     cout_maximum_fourniture: Attribute.Integer &
-      Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1127,7 +1136,7 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
       Attribute.SetMinMax<{
         min: 0;
       }>;
-    cout_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite"]> &
+    cout_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite", "megaWattHeure", "kiloWatt"]> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         versions: {

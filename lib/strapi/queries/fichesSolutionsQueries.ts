@@ -26,6 +26,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
         }
         cout_minimum
         cout_maximum
+        cout_unite
         baisse_temperature
         portee_baisse_temperature
         libelle_avantage_solution
@@ -34,6 +35,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
         types_espace
         slug
         description
+        description_estimation
         en_savoir_plus
         cobenefices {
           data {

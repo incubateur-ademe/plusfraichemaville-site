@@ -2,7 +2,7 @@ import { Separator } from "../common/separator";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
 import { FicheDiagnosticResponse } from "./types";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
-import { getCoutFiche } from "@/helpers/coutFiche";
+import { getCoutFiche } from "@/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
 import { TypeFiche } from "@/helpers/common";
 import clsx from "clsx";

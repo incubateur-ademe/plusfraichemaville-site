@@ -2,7 +2,7 @@ import Image from "next/image";
 import { FicheDiagnosticResponse } from "./types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
-import { getCoutFiche } from "@/helpers/coutFiche";
+import { getCoutFiche } from "@/helpers/cout/cout-fiche-solution";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { FicheDiagnosticLink } from "./fiche-diagnostic-link";

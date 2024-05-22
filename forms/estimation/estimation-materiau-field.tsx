@@ -3,9 +3,9 @@ import Image from "next/image";
 import { PropsWithChildren } from "react";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 
-import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/coutMateriau";
 import { ShowMoreRichText } from "@/components/common/show-more-rich-text";
 import clsx from "clsx";
+import { getLabelCoutEntretien, getLabelCoutFourniture, materiauHasNoCost } from "@/helpers/cout/cout-materiau";
 
 type EstimationMateriauFieldProps = {
   materiau?: MateriauResponse;
@@ -15,9 +15,10 @@ export default function EstimationMateriauField({
   materiau,
   children,
 }: EstimationMateriauFieldProps & PropsWithChildren) {
-  if (!materiau) {
+  if (!materiau || materiauHasNoCost(materiau.attributes)) {
     return null;
   }
+
   return (
     <div key={materiau.id}>
       <hr className="p-0 h-[1px]" />

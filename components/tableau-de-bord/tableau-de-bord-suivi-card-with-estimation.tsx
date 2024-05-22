@@ -3,8 +3,8 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { useMemo } from "react";
 import { getLastCompletedEstimation } from "@/helpers/estimation";
-import { computeGlobalFicheSolutionPrice } from "@/helpers/coutMateriau";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
 
 export const TableauDeBordSuiviWithEstimation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
