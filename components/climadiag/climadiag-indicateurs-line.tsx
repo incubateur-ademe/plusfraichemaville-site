@@ -17,7 +17,7 @@ export const ClimadiagIndicateursLine = ({ type, temperature }: ClimadiagIndicat
   const toggler = () => setLegend(!legend);
 
   return (
-    <div className="bg-white rounded-2xl px-5 py-2 mb-2 w-fit lg:w-full">
+    <div className="bg-white rounded-2xl px-5 py-2 mb-2 w-fit lg:w-full" id={`line-${type}`}>
       <div className="flex justify-between flex-col gap-4 lg:flex-row lg:gap-0">
         <div className="flex items-center gap-6">
           <Image
