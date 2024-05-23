@@ -25,9 +25,9 @@ export const ClimadiagViewer = ({ data, close }: ClimadiagViewerProps) => {
   }, [filename, close]);
 
   return (
-    <div className="relative">
+    <div className="relative bg-white">
       <div className="fixed w-screen top-0 left-0 -z-[9] h-[2000px] bg-white"></div>
-      <div id="climadiag-viewer" className="bg-white top-0 w-screen h-[2000px] fixed -z-10 left-0">
+      <div id="climadiag-viewer" className="bg-white top-0 w-screen h-[2000px] -z-20 fixed left-0">
         <div>
           <div className="px-14 py-10">
             <ClimadiagViewerHeader />

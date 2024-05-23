@@ -2,7 +2,6 @@ import { ClimadiagIndicateursTabButton } from "./climadiag-indicateurs-tab-butto
 import { ClimadiagIndicateursTabButtons } from "./climadiag-indicateurs-tab-buttons";
 import { useClimadiagIndicateurTabs } from "./hooks/use-climadiag-indicateur-tabs";
 import { ClimadiagIndicateursLine } from "./climadiag-indicateurs-line";
-import { ClimadiagDownloader } from "./climadiag-downloader";
 import { ClimadiagIndicateursHeader } from "./climadiag-indicateurs-header";
 import { Climadiag } from "./types";
 
@@ -24,7 +23,7 @@ export const ClimadiagIndicateursTabs = ({ data }: { data: Climadiag }) => {
       ></ClimadiagIndicateursLine>
       <ClimadiagIndicateursLine year={selectedYear} temperature={yearlyData.nuits_chaudes} type="nuits_chaudes" />
       <ClimadiagIndicateursLine year={selectedYear} temperature={yearlyData.jours_vdc} type="jours_vdc" />
-      <ClimadiagDownloader data={data}></ClimadiagDownloader>
+      {/* <ClimadiagDownloader data={data} /> */}
     </div>
   );
 };

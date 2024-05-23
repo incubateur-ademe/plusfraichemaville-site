@@ -17,7 +17,7 @@ export const ClimadiagDownloader = ({ data }: ClimadiagDownloaderProps) => {
     <>
       <button
         onClick={download}
-        className="flex items-center text-base font-bold pl-2 mt-4 !hover:bg-transparent hover:underline"
+        className="flex items-center text-base font-bold pl-2 mt-4 hover:!bg-pfmv-truelight-grey/0 hover:underline"
       >
         Télécharger la synthèse
         <svg className="ml-2" width="13" height="14" viewBox="0 0 13 14" fill="none">
@@ -40,6 +40,7 @@ export const ClimadiagDownloader = ({ data }: ClimadiagDownloaderProps) => {
           </defs>
         </svg>
       </button>
+
       {viewer && <LazyClimadiagViewer data={data} close={close} />}
     </>
   );
