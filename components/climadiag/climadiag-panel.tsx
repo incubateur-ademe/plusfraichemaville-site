@@ -11,7 +11,7 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   const [userResultGroup, setUserResultGroup] = useState<any[]>([]);
   const [searchClimadiagData, setSearchClimadiagData] = useState<climadiag[]>([]);
 
-  const { data, isLoading } = useSwrWithFetcher<climadiag[]>(
+  const { data: userClimadiagInfos, isLoading } = useSwrWithFetcher<climadiag[]>(
     `/api/get-climadiag-info-for-user-projects?userId=${userId}`,
   );
 
@@ -33,21 +33,27 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
     });
 
   useEffect(() => {
-    if (!isLoading && data && data.length > 0) {
-      setSelectedClimadiagInfo(data[0]);
-      setUserResultGroup([{ label: "Vos collectivités", options: climadiagToOptions(data) }]);
+    if (!isLoading && userClimadiagInfos && userClimadiagInfos.length > 0) {
+      setSelectedClimadiagInfo(userClimadiagInfos[0]);
+      setUserResultGroup([{ label: "Vos collectivités", options: climadiagToOptions(userClimadiagInfos) }]);
     }
-  }, [data, isLoading]);
+  }, [userClimadiagInfos, isLoading]);
 
-  const selectableData = useMemo(() => data?.concat(searchClimadiagData), [data, searchClimadiagData]);
+  const selectableData = useMemo(
+    () => userClimadiagInfos?.concat(searchClimadiagData),
+    [userClimadiagInfos, searchClimadiagData],
+  );
 
   const defaultOptions = useMemo(() => {
-    if (data?.find((climadiag) => climadiag?.id === selectedClimadiagInfo?.id) || !selectedClimadiagInfo) {
+    if (
+      !selectedClimadiagInfo ||
+      userClimadiagInfos?.find((climadiag) => climadiag?.id === selectedClimadiagInfo?.id)
+    ) {
       return userResultGroup;
     } else {
       return computeSearchResultGroup(climadiagToOptions([selectedClimadiagInfo])).concat(userResultGroup);
     }
-  }, [data, selectedClimadiagInfo, userResultGroup]);
+  }, [userClimadiagInfos, selectedClimadiagInfo, userResultGroup]);
 
   return (
     <div className="bg-dsfr-background-open-blue-france">
