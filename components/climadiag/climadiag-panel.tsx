@@ -17,7 +17,7 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
 
   const promiseOptions = (inputValue: string) =>
     new Promise<any[]>((resolve) => {
-      if (inputValue?.length > 2) {
+      if (inputValue?.trim().length > 2) {
         resolve(
           fetch(`/api/search-climadiag-info?search=${inputValue}`)
             .then((t) => t.json())

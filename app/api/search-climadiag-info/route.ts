@@ -16,6 +16,6 @@ export async function GET(request: NextRequest) {
   const searchTerms = searchText
     .normalize("NFD")
     .replace(/[\u0300-\u036f]/g, "")
-    .split(" ");
+    .split(/ +/) ;
   return NextResponse.json(await searchClimadiagInfo(searchTerms, limit));
 }
