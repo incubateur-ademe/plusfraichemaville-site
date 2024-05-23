@@ -5,7 +5,7 @@ import clsx from "clsx";
 type ClimadiagIndicateursTabButtonProps = {
   active: boolean;
   year: ClimadiagYear;
-  changeTab: (_year: keyof ProjectionsIndicateurClimadiag) => void;
+  changeTab?: (_year: keyof ProjectionsIndicateurClimadiag) => void;
 };
 
 export const ClimadiagIndicateursTabButton = ({ active, year, changeTab }: ClimadiagIndicateursTabButtonProps) => {
@@ -17,8 +17,9 @@ export const ClimadiagIndicateursTabButton = ({ active, year, changeTab }: Clima
         active
           ? "bg-dsfr-text-label-blue-france text-white font-bold pr-16 pointer-events-none"
           : "bg-dsfr-background-action-low-blue-france-hover",
+        "hover:!bg-dsfr-background-action-low-blue-france-active",
       )}
-      onClick={() => changeTab(year)}
+      onClick={() => changeTab && changeTab(year)}
     >
       {year}
       {active && (

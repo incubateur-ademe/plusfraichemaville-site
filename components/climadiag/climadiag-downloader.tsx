@@ -1,15 +1,24 @@
-import * as htmlToImage from "html-to-image";
-import { jsPDF } from "jspdf";
+import { useState } from "react";
+import { Climadiag } from "./types";
+import dynamic from "next/dynamic";
 
 type ClimadiagDownloaderProps = {
-  filename: string;
+  data: Climadiag;
 };
-// TODO: Dynamic import OR other page (with autoclosing) / Meilleur choix vs jspdf seul ou autre lib.
-export const ClimadiagDownloader = ({ filename }: ClimadiagDownloaderProps) => {
-  const pdf = () => generatePdf(`Climadiag-${filename}`, "#climadiag-viewer");
+
+const LazyClimadiagViewer = dynamic(() => import("./climadiag-viewer").then((mod) => mod.ClimadiagViewer));
+
+export const ClimadiagDownloader = ({ data }: ClimadiagDownloaderProps) => {
+  const [viewer, setViewer] = useState(false);
+  const download = () => setViewer(true);
+  const close = () => setViewer(false);
+
   return (
     <>
-      <button onClick={pdf} className="flex items-center text-base font-bold pl-2 mt-4 !hover:bg-none">
+      <button
+        onClick={download}
+        className="flex items-center text-base font-bold pl-2 mt-4 !hover:bg-transparent hover:underline"
+      >
         Télécharger la synthèse
         <svg className="ml-2" width="13" height="14" viewBox="0 0 13 14" fill="none">
           <g>
@@ -31,21 +40,7 @@ export const ClimadiagDownloader = ({ filename }: ClimadiagDownloaderProps) => {
           </defs>
         </svg>
       </button>
-      <div className="size-40 bg-black invisible fixed bottom-0" id="test"></div>
+      {viewer && <LazyClimadiagViewer data={data} close={close} />}
     </>
   );
-};
-
-const generatePdf = (filename: string = "export", nodeId: string) => {
-  const node = document.querySelector<HTMLElement>(nodeId);
-
-  node &&
-    htmlToImage.toJpeg(node, { quality: 1 }).then((dataUrl) => {
-      const pdf = new jsPDF();
-      const img = pdf.getImageProperties(dataUrl);
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (img.height * pdfWidth) / img.width;
-      pdf.addImage(dataUrl, "jpg", 0, 0, pdfWidth, pdfHeight);
-      pdf.save(`${filename}.pdf`);
-    });
 };

@@ -1,13 +1,18 @@
 import Image from "next/image";
-import { PropsWithChildren } from "react";
 
-export const ClimadiagIndicateursTabButtons = ({ children }: PropsWithChildren) => {
+export const ClimadiagViewerHeader = () => {
   return (
-    <div className="flex justify-between items-center mb-5">
-      <div>
-        {children}
-        <span className="text-pfmv-grey text-base">(horizons)</span>
+    <div className="flex justify-between">
+      <div className="flex gap-6">
+        <div className="fr-logo">
+          République
+          <br />
+          Française
+        </div>
+
+        <Image height={75} width={200} src="/images/logo-ademe-pfmv.svg" alt="ADEME - Plus fraîche ma ville" />
       </div>
+
       <div className="flex gap-4 items-center justify-center">
         <Image
           src="/images/climadiag/climadiag-meteo-france.png"

@@ -8,8 +8,6 @@ export const useClimadiagIndicateurTabs = (data: Climadiag) => {
     setSelectedYear(year);
   };
 
-  const filename = `${data.nom}-${data.code_postal}`;
-
   const getYearlyData = (year: ClimadiagYear): ClimadiagTemperatureJourMap => {
     return {
       jours_tres_chauds: {
@@ -33,6 +31,5 @@ export const useClimadiagIndicateurTabs = (data: Climadiag) => {
     selectedYear,
     changeYearTab,
     yearlyData,
-    filename,
   };
 };

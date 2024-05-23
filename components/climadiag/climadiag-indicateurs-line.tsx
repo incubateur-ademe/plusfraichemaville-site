@@ -1,23 +1,32 @@
 import Image from "next/image";
 import { ClimadiagIndicateursLineJour } from "./climadiag-indicateurs-line-jour";
 import { SeparatorY } from "../common/separator";
-import { ClimadiagTemperatureJour, ClimadiagTypeJour } from "./types";
+import { ClimadiagTemperatureJour, ClimadiagTypeJour, ClimadiagYear } from "./types";
 import { useState } from "react";
 import { ClimadiagIndicateursLineLegend } from "./climadiag-indicateurs-line-legend";
 import { climadiagIndicateursData } from "./climadia-indicateurs-data";
+import clsx from "clsx";
 
 type ClimadiagIndicateursLineProps = {
   type: ClimadiagTypeJour;
   temperature: ClimadiagTemperatureJour;
+  year: ClimadiagYear;
+  viewer?: boolean;
 };
 
-export const ClimadiagIndicateursLine = ({ type, temperature }: ClimadiagIndicateursLineProps) => {
+export const ClimadiagIndicateursLine = ({ type, temperature, viewer, year }: ClimadiagIndicateursLineProps) => {
   const { title, picto, indice, legend: climatLegend } = climadiagIndicateursData.line[type];
   const [legend, setLegend] = useState(false);
   const toggler = () => setLegend(!legend);
 
   return (
-    <div className="bg-white rounded-2xl px-5 py-2 mb-2 w-fit lg:w-full" id={`line-${type}`}>
+    <div
+      className={clsx(
+        "bg-white rounded-2xl px-5 py-2 mb-2 w-fit lg:w-full",
+        viewer && "border-[2px] border-pfmv-light-grey/35",
+      )}
+      id={`line-${type}`}
+    >
       <div className="flex justify-between flex-col gap-4 lg:flex-row lg:gap-0">
         <div className="flex items-center gap-6">
           <Image
@@ -35,9 +44,11 @@ export const ClimadiagIndicateursLine = ({ type, temperature }: ClimadiagIndicat
                 {indice}°C)
               </span>
             )}
-            <button onClick={toggler} className="text-sm underline mt-4">
-              Afficher la légende
-            </button>
+            {!viewer && (
+              <button onClick={toggler} className="text-sm underline mt-4">
+                Afficher la légende
+              </button>
+            )}
           </div>
         </div>
 
@@ -50,7 +61,7 @@ export const ClimadiagIndicateursLine = ({ type, temperature }: ClimadiagIndicat
           <ClimadiagIndicateursLineJour jour={temperature.prevision.max} valeur="haute" />
         </div>
       </div>
-      {legend && <ClimadiagIndicateursLineLegend legend={climatLegend} />}
+      {legend && <ClimadiagIndicateursLineLegend legend={climatLegend[year]} year={year} />}
     </div>
   );
 };
