@@ -12,20 +12,20 @@ export const ClimadiagViewerItem = ({ data, year }: { data: Climadiag; year: Cli
       <ClimadiagIndicateursLine
         temperature={{ prevision: data.jours_tres_chauds_prevision[year], ref: data.jours_tres_chauds_ref }}
         type="jours_chauds"
-        viewer
         year={year}
+        isPDF
       />
       <ClimadiagIndicateursLine
         temperature={{ prevision: data.nuits_chaudes_prevision[year], ref: data.nuits_chaudes_ref }}
         type="nuits_chaudes"
-        viewer
         year={year}
+        isPDF
       />
       <ClimadiagIndicateursLine
         temperature={{ prevision: data.jours_vdc_prevision[year], ref: data.jours_vdc_ref }}
         type="jours_vdc"
-        viewer
         year={year}
+        isPDF
       />
     </div>
   );
