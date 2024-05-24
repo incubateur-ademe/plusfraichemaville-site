@@ -12,7 +12,6 @@ export const ClimadiagDownloader = ({ data }: ClimadiagDownloaderProps) => {
   const [viewer, setViewer] = useState(false);
   const download = () => setViewer(true);
   const close = () => setViewer(false);
-
   return (
     <>
       <button
