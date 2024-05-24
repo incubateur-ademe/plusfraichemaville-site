@@ -8,7 +8,9 @@ export const FichesSolutionsProjetsSelectedCard = ({
 }: {
   ficheSolutionId: FicheSolutionResponse["id"];
 }) => {
-  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionUrlApi(ficheSolutionId));
+  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
+    makeFicheSolutionUrlApi(ficheSolutionId),
+  );
 
   return !data && isLoading ? (
     <FicheSolutionFullCardSkeleton />

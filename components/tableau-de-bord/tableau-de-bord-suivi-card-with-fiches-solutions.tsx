@@ -71,7 +71,9 @@ const TableauDeBordSFicheImages = ({
 };
 
 const TableauDeBordFicheSolutionImage = ({ ficheSolutionId }: { ficheSolutionId: string }) => {
-  const { data } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionCompleteUrlApi(ficheSolutionId));
+  const { data } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
+    makeFicheSolutionCompleteUrlApi(ficheSolutionId),
+  );
   const ficheSolution = data && data[0];
   return <TableauSuiviFicheImages image={ficheSolution?.attributes.image_principale} />;
 };
