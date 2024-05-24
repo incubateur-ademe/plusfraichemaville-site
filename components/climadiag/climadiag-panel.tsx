@@ -5,6 +5,7 @@ import { climadiag } from "@prisma/client";
 import { ClimadiagIndicateurs } from "@/components/climadiag/climadiag-indicateurs";
 import AsyncSelect from "react-select/async";
 import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "@/components/climadiag/helpers";
+import debounce from "lodash/debounce";
 
 export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<climadiag>();
@@ -15,22 +16,21 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
     `/api/get-climadiag-info-for-user-projects?userId=${userId}`,
   );
 
-  const promiseOptions = (inputValue: string) =>
-    new Promise<any[]>((resolve) => {
-      if (inputValue?.trim().length > 2) {
-        resolve(
-          fetch(`/api/search-climadiag-info?search=${inputValue}`)
-            .then((t) => t.json())
-            .then((searchedValues) => {
-              setSearchClimadiagData(searchedValues);
-              const searchOptions = searchedValues?.length > 0 ? climadiagToOptions(searchedValues) : NO_RESULT_OPTION;
-              return computeSearchResultGroup(searchOptions).concat(userResultGroup);
-            }),
-        );
-      } else {
-        resolve(defaultOptions);
-      }
-    });
+  const searchClimadiagInfos = (inputValue: string, callback: (_: any) => void) => {
+    if (inputValue?.trim().length > 2) {
+      fetch(`/api/search-climadiag-info?search=${inputValue}`)
+        .then((t) => t.json())
+        .then((searchedValues) => {
+          setSearchClimadiagData(searchedValues);
+          const searchOptions = searchedValues?.length > 0 ? climadiagToOptions(searchedValues) : NO_RESULT_OPTION;
+          callback(computeSearchResultGroup(searchOptions).concat(userResultGroup));
+        });
+    } else {
+      callback(defaultOptions);
+    }
+  };
+
+  const loadSuggestions = debounce(searchClimadiagInfos, 200);
 
   useEffect(() => {
     if (!isLoading && userClimadiagInfos && userClimadiagInfos.length > 0) {
@@ -65,12 +65,13 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
           <AsyncSelect
             value={selectedClimadiagInfo ? climadiagToOptions([selectedClimadiagInfo]) : null}
             defaultOptions={defaultOptions}
-            loadOptions={promiseOptions}
+            loadOptions={loadSuggestions}
             onChange={(event) =>
               setSelectedClimadiagInfo(
                 selectableData?.find((climadiagInfo) => climadiagInfo.id === +(event?.value || 0)),
               )
             }
+            loadingMessage={() => "Recherche en cours..."}
             className="min-w-64 w-fit"
             isClearable
             placeholder="Chercher une commune / EPCI (nom ou code)"
