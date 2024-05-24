@@ -37,9 +37,9 @@ export const ClimadiagIndicateursLine = ({ type, temperature, viewer, year }: Cl
             alt="jour très chaud picto"
           />
           <div className="max-w-[350px] lg:max-w-[420px] pt-4">
-            <span className="text-[22px] font-bold block pb-1">{title}</span>
+            <span className="text-[22px] font-bold block leading-[1.2]">{title}</span>
             {indice && (
-              <span className="text-[22px] block">
+              <span className="text-[22px] block leading-[1.2]">
                 ({">"}
                 {indice}°C)
               </span>
