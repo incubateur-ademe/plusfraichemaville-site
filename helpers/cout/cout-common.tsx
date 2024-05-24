@@ -30,12 +30,19 @@ export const UNITE_COUT_MEGAWATTHEURE: UniteCout = {
   estimationLabel: "Nombre de MWh",
 };
 
+const UNITE_COUT_KILOWATT: UniteCout = {
+  code: "kiloWatt",
+  unitLabel: "kW",
+  estimationLabel: "Nombre de kW",
+};
+
 const ALL_UNITES_COUT: UniteCout[] = [
   UNITE_COUT_LINEAIRE,
   UNITE_COUT_METRE_CARRE,
   UNITE_COUT_METRE_CUBE,
   UNITE_COUT_UNITE,
   UNITE_COUT_MEGAWATTHEURE,
+  UNITE_COUT_KILOWATT,
 ];
 
 export const getUniteCoutFromCode = (code?: string) =>
