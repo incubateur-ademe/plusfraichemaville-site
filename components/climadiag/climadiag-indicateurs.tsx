@@ -1,6 +1,12 @@
 "use client";
-import { climadiag } from "@prisma/client";
 
-export const ClimadiagIndicateurs = ({ climadiagInfo }: { climadiagInfo: climadiag }) => {
-  return <div className="bg-dsfr-background-open-blue-france">{JSON.stringify(climadiagInfo)}</div>;
+import { ClimadiagIndicateursTabs } from "./climadiag-indicateurs-tabs";
+import { Climadiag } from "./types";
+
+export const ClimadiagIndicateurs = ({ climadiagInfo }: { climadiagInfo: Climadiag }) => {
+  return (
+    <div className="bg-dsfr-background-open-blue-france">
+      <ClimadiagIndicateursTabs data={climadiagInfo} />
+    </div>
+  );
 };
