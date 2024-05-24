@@ -1,18 +1,18 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
-import { climadiag } from "@prisma/client";
 import { ClimadiagIndicateurs } from "@/components/climadiag/climadiag-indicateurs";
 import AsyncSelect from "react-select/async";
 import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "@/components/climadiag/helpers";
 import debounce from "lodash/debounce";
+import { Climadiag } from "./types";
 
 export const ClimadiagPanel = ({ userId }: { userId: string }) => {
-  const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<climadiag>();
+  const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<Climadiag>();
   const [userResultGroup, setUserResultGroup] = useState<any[]>([]);
-  const [searchClimadiagData, setSearchClimadiagData] = useState<climadiag[]>([]);
+  const [searchClimadiagData, setSearchClimadiagData] = useState<Climadiag[]>([]);
 
-  const { data: userClimadiagInfos, isLoading } = useSwrWithFetcher<climadiag[]>(
+  const { data: userClimadiagInfos, isLoading } = useSwrWithFetcher<Climadiag[]>(
     `/api/get-climadiag-info-for-user-projects?userId=${userId}`,
   );
 
@@ -56,8 +56,8 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   }, [userClimadiagInfos, selectedClimadiagInfo, userResultGroup]);
 
   return (
-    <div className="bg-dsfr-background-open-blue-france">
-      <div className="fr-container py-10 min-h-[25rem]">
+    <div className="bg-dsfr-background-open-blue-france" id="climadiag-panel">
+      <div className="fr-container pt-10 pb-28 min-h-[25rem] -mb-40">
         <div className="text-dsfr-text-label-blue-france text-[1.375rem] font-bold mb-6">
           Les indicateurs de surchauffe de ma collectivité
         </div>
