@@ -7,9 +7,19 @@ import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "
 import debounce from "lodash/debounce";
 import { Climadiag } from "./types";
 
+interface Option {
+  value: number;
+  label: string;
+}
+
+interface GroupedOptions {
+  label: string;
+  options: Option[];
+}
+
 export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<Climadiag>();
-  const [userResultGroup, setUserResultGroup] = useState<any[]>([]);
+  const [userResultGroup, setUserResultGroup] = useState<GroupedOptions[]>([]);
   const [searchClimadiagData, setSearchClimadiagData] = useState<Climadiag[]>([]);
 
   const { data: userClimadiagInfos, isLoading } = useSwrWithFetcher<Climadiag[]>(
@@ -64,7 +74,7 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
         <>
           <AsyncSelect
             value={selectedClimadiagInfo ? climadiagToOptions([selectedClimadiagInfo]) : null}
-            defaultOptions={defaultOptions}
+            defaultOptions={defaultOptions as GroupedOptions[]}
             loadOptions={loadSuggestions}
             onChange={(event) =>
               setSelectedClimadiagInfo(
