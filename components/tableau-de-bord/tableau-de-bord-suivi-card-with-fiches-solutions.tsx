@@ -7,7 +7,7 @@ import Image from "next/image";
 import { APIResponse } from "@/lib/strapi/types/types";
 import { TypeFiche } from "@/helpers/common";
 import { TableauDeBordSuiviWithText } from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-text";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
 import { FicheSolutionResponse } from "../ficheSolution/type";
 import { FicheDiagnosticResponse } from "../fiches-diagnostic/types";
@@ -71,13 +71,15 @@ const TableauDeBordSFicheImages = ({
 };
 
 const TableauDeBordFicheSolutionImage = ({ ficheSolutionId }: { ficheSolutionId: string }) => {
-  const { data } = useSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionCompleteUrlApi(ficheSolutionId));
+  const { data } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
+    makeFicheSolutionCompleteUrlApi(ficheSolutionId),
+  );
   const ficheSolution = data && data[0];
   return <TableauSuiviFicheImages image={ficheSolution?.attributes.image_principale} />;
 };
 
 export const TableauDeBordFicheDiagnosticImage = ({ ficheDiagnosticId }: { ficheDiagnosticId: string }) => {
-  const { data } = useSwrWithFetcher<FicheDiagnosticResponse>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
+  const { data } = useImmutableSwrWithFetcher<FicheDiagnosticResponse>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
   return <TableauSuiviFicheImages image={data?.attributes.image_principale} />;
 };
 

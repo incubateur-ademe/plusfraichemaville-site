@@ -21,3 +21,13 @@ export type ClimadiagTemperatureJourMap = {
   nuits_chaudes: ClimadiagTemperatureJour;
   jours_vdc: ClimadiagTemperatureJour;
 };
+
+export type Option = {
+  value: number;
+  label: string;
+};
+
+export type GroupedOptions = {
+  label: string;
+  options: Option[];
+};

@@ -37,6 +37,7 @@
     "react-hook-form": "^7.50.1",
     "react-hot-toast": "^2.4.1",
     "react-loader-spinner": "^5.4.5",
+    "react-select": "^5.8.0",
     "server-only": "^0.0.1",
     "sharp": "^0.32.6",
     "swr": "^2.2.5",
