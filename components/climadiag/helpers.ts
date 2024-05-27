@@ -1,5 +1,5 @@
 import { climadiag } from "@prisma/client";
-import { Options } from "react-select";
+import { GroupedOptions, Option } from "./types";
 
 const climadiagInfoLabel = (climadiagInfo: climadiag) =>
   climadiagInfo.type_lieu === "epci"
@@ -12,7 +12,7 @@ export const climadiagToOptions = (climadiagInfos: climadiag[]) =>
     label: climadiagInfoLabel(climadiagInfo),
   }));
 
-export const computeSearchResultGroup = (climadiagOptions: Options<unknown>) => {
+export const computeSearchResultGroup = (climadiagOptions: Option[]): GroupedOptions[] => {
   return [
     {
       label: "Résultat de recherche",
@@ -21,4 +21,4 @@ export const computeSearchResultGroup = (climadiagOptions: Options<unknown>) => 
   ];
 };
 
-export const NO_RESULT_OPTION = [{ label: "Aucun résultat", isDisabled: true }];
+export const NO_RESULT_OPTION = [{ label: "Aucun résultat", value: 0, isDisabled: true }];

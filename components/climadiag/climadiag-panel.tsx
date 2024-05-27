@@ -5,17 +5,7 @@ import { ClimadiagIndicateurs } from "@/components/climadiag/climadiag-indicateu
 import AsyncSelect from "react-select/async";
 import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "@/components/climadiag/helpers";
 import debounce from "lodash/debounce";
-import { Climadiag } from "./types";
-
-interface Option {
-  value: number;
-  label: string;
-}
-
-interface GroupedOptions {
-  label: string;
-  options: Option[];
-}
+import { Climadiag, GroupedOptions } from "./types";
 
 export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<Climadiag>();
@@ -30,7 +20,7 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
     if (inputValue?.trim().length > 2) {
       fetch(`/api/search-climadiag-info?search=${inputValue}`)
         .then((t) => t.json())
-        .then((searchedValues) => {
+        .then((searchedValues: Climadiag[]) => {
           setSearchClimadiagData(searchedValues);
           const searchOptions = searchedValues?.length > 0 ? climadiagToOptions(searchedValues) : NO_RESULT_OPTION;
           callback(computeSearchResultGroup(searchOptions).concat(userResultGroup));
@@ -74,7 +64,7 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
         <>
           <AsyncSelect
             value={selectedClimadiagInfo ? climadiagToOptions([selectedClimadiagInfo]) : null}
-            defaultOptions={defaultOptions as GroupedOptions[]}
+            defaultOptions={defaultOptions}
             loadOptions={loadSuggestions}
             onChange={(event) =>
               setSelectedClimadiagInfo(
