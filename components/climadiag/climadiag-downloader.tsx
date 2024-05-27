@@ -28,7 +28,7 @@ export const ClimadiagDownloader = ({ data }: ClimadiagDownloaderProps) => {
         disabled={loading}
         className={clsx(
           "flex items-center text-base font-bold pl-2 mt-4 hover:!bg-pfmv-truelight-grey/0 hover:underline",
-          "disabled:pointer-events-none disabled:text-pfmv-navy",
+          "disabled:pointer-events-none disabled:text-pfmv-navy text-dsfr-text-label-blue-france",
         )}
       >
         Télécharger la synthèse
