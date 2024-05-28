@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import { BOOKMARK_FS_KEY } from "@/helpers/bookmarkedFicheSolutionHelper";
 import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useUserStore } from "@/stores/user/provider";
@@ -9,9 +8,10 @@ import { useSession } from "next-auth/react";
 
 import { FichesDiagnosticFavoris } from "@/components/fiches-diagnostic/fiches-diagnostic-favoris";
 import {
+  BOOKMARK_FS_KEY,
   FICHE_DIAGNOSTIC_IDS_STORAGE_KEY,
   FicheBookmarkedSolution,
-  FichesBookmarked,
+  FichesBookmarked
 } from "@/components/common/generic-save-fiche/helpers";
 import { FichesSolutionsFavoris } from "@/components/ficheSolution/fiches-solutions-favoris";
 

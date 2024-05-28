@@ -7,7 +7,6 @@ import {
   mergeFicheBookmarkedDiagnostic,
   mergeFicheBookmarkedSolutions,
 } from "@/components/common/generic-save-fiche/helpers";
-import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
@@ -75,19 +74,6 @@ export const updateFichesUser = async (
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
-};
-
-export const getBookmarkedFichesSolutions = async (userId: string): Promise<ProjectBookmarks[] | undefined> => {
-  const user = await prismaClient.user.findUnique({
-    where: {
-      id: userId,
-    },
-    select: {
-      selection_fiches_solutions: true,
-    },
-  });
-
-  return user?.selection_fiches_solutions as ProjectBookmarks[];
 };
 
 export const updateBookmarkedFichesSolutions = async (
