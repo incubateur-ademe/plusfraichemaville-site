@@ -11,7 +11,7 @@ import {
   BOOKMARK_FS_KEY,
   FICHE_DIAGNOSTIC_IDS_STORAGE_KEY,
   FicheBookmarkedSolution,
-  FichesBookmarked
+  FichesBookmarked,
 } from "@/components/common/generic-save-fiche/helpers";
 import { FichesSolutionsFavoris } from "@/components/ficheSolution/fiches-solutions-favoris";
 
