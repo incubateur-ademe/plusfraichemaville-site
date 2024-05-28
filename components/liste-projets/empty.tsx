@@ -5,11 +5,11 @@ import Link from "next/link";
 
 export const ListProjetsHeaderEmpty = () => {
   return (
-    <div className="pfmv-card relative mt-3 bg-white h-fit flex justify-between items-center">
-      <Link href={PFMV_ROUTES.CREATE_PROJET}>
+    <div className="pfmv-card relative mt-3 bg-white h-fit flex justify-between items-center py-6 md:py-0">
+      <Link href={PFMV_ROUTES.CREATE_PROJET} className="!bg-none w-full">
         <div className=" flex justify-between items-center">
           <div className="flex gap-11 items-center">
-            <div className="shrink-0">
+            <div className="shrink-0 hidden md:block">
               <Image
                 className="rounded-tl-2xl rounded-bl-2xl"
                 src="/images/espace-projet/empty-projet.jpg"
@@ -18,7 +18,7 @@ export const ListProjetsHeaderEmpty = () => {
                 alt=""
               />
             </div>
-            <div>
+            <div className="pr-6 pl-6 md:pl-0">
               <span className="text-lg font-bold block">Vous n’avez pas encore créé de projet ?</span>
               <span className="text-lg">N’attendez pas la prochaine vague de chaleur !</span>
             </div>
