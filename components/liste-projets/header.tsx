@@ -5,7 +5,7 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
   return (
     <div className="pb-4 flex justify-between">
       <div>
-        <h2 className="text-dsfr-text-label-blue-france text-2xl mb-1">Mon espace projet</h2>
+        <h2 className="text-dsfr-text-label-blue-france text-[28px] mb-1">Mon espace projet</h2>
         {isListEmpty ? (
           <span className="text-lg min-h-[3rem] block">
             Vous n’avez pas encore de projets en cours. <br /> Créer un projet pour faire une simulation budgétaire et
