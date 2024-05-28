@@ -8,7 +8,7 @@ export const ListProjets = () => {
 
   return (
     <div className="bg-dsfr-background-alt-blue-france">
-      <div className="fr-container py-10 min-h-[25rem]">
+      <div className="fr-container py-10">
         <ListeProjetsHeader isListEmpty={projets.length === 0} />
         {projets.length > 0 && projets.map((projet, index) => <ListeProjetsCard projet={projet} key={index} />)}
       </div>
