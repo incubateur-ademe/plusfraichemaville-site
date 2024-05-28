@@ -10,7 +10,7 @@ import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
 import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
 
-export const GET_FICHE_SOLUTION_COMPLETE_DATA = (
+const GET_FICHE_SOLUTION_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
 ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
@@ -132,7 +132,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
   }
 }`;
 
-export const GET_FICHE_SOLUTION_CARD_DATA = (
+const GET_FICHE_SOLUTION_CARD_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} query {
     ficheSolutions ${strapiFilter.wholeFilterString()} {
