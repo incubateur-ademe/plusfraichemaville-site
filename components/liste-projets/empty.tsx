@@ -5,11 +5,11 @@ import Link from "next/link";
 
 export const ListProjetsHeaderEmpty = () => {
   return (
-    <div className="relative mt-3">
+    <div className="pfmv-card relative mt-3 bg-white h-fit flex justify-between items-center">
       <Link href={PFMV_ROUTES.CREATE_PROJET}>
-        <div className="pfmv-card flex justify-between items-center">
+        <div className=" flex justify-between items-center">
           <div className="flex gap-11 items-center">
-            <div>
+            <div className="shrink-0">
               <Image
                 className="rounded-tl-2xl rounded-bl-2xl"
                 src="/images/espace-projet/empty-projet.jpg"
@@ -25,7 +25,7 @@ export const ListProjetsHeaderEmpty = () => {
           </div>
         </div>
       </Link>
-      <div className="w-[132px] h-[121.5px] shrink-0 absolute right-[26px] top-1/2 -translate-y-1/2">
+      <div className="w-[132px] h-[121.5px] shrink-0  mr-[26px]">
         <Link
           href={PFMV_ROUTES.CREATE_PROJET}
           className={clsx(
