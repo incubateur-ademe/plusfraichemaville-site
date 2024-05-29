@@ -23,6 +23,7 @@
     "@codegouvfr/react-dsfr": "^1.9.2",
     "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
+    "@incubateur-ademe/legal-pages-react": "^0.2.0",
     "@prisma/client": "^5.9.1",
     "@sentry/nextjs": "7.77.0",
     "@splidejs/react-splide": "^0.7.12",
