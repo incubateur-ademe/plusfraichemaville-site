@@ -1,24 +1,25 @@
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 
-interface ProjetsByTown {
+interface ProjetsByCollectivite {
   [codeInsee: string]: {
     commune: string;
     projets: ProjetWithRelations[];
   };
 }
 
-export const groupProjetsByTown = (projets: ProjetWithRelations[]): [string, ProjetWithRelations[]][] => {
-  const groupedProjets = projets.reduce<ProjetsByTown>((acc, projet) => {
+export const groupProjetsByCollectivite = (projets: ProjetWithRelations[]): [string, ProjetWithRelations[]][] => {
+  const groupedProjets = projets.reduce<ProjetsByCollectivite>((acc, projet) => {
     const { code_insee, nom } = projet.collectivite;
+    const codeInsee = code_insee ?? "";
 
-    if (code_insee) {
-      if (!acc[code_insee]) {
-        acc[code_insee] = {
+    if (codeInsee) {
+      if (!acc[codeInsee]) {
+        acc[codeInsee] = {
           commune: nom,
           projets: [],
         };
       }
-      acc[code_insee].projets.push(projet);
+      acc[codeInsee].projets.push(projet);
     }
     return acc;
   }, {});

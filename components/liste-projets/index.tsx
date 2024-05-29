@@ -2,11 +2,11 @@
 import { ListeProjetsCard } from "@/components/liste-projets/card";
 import { ListeProjetsHeader } from "./header";
 import { useProjetsStore } from "@/stores/projets/provider";
-import { groupProjetsByTown } from "./helpers";
+import { groupProjetsByCollectivite } from "./helpers";
 
 export const ListProjets = () => {
   const projets = useProjetsStore((state) => state.projets);
-  const projetsByTown = groupProjetsByTown(projets);
+  const projetsByTown = groupProjetsByCollectivite(projets);
 
   return (
     <div className="bg-dsfr-background-alt-blue-france">
