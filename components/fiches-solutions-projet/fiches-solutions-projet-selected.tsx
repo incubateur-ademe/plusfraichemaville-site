@@ -5,13 +5,12 @@ import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
-import { FichesSolutionsProjetsSelectedCard } from "./fiches-solutions-projet-selected-card";
-
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { updateFichesSolutionsValidatedAction } from "@/actions/projets/update-fiches-solutions-validated-action";
 import { notifications } from "../common/notifications";
 import Button from "@codegouvfr/react-dsfr/Button";
 import React from "react";
+import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
 
 type FichesSolutionsProjetsSelectedProps = {
   selectedFichesSolutionsIds?: number[];
@@ -57,7 +56,7 @@ export const FichesSolutionsProjetsSelected = ({
           <FichesSolutionsProjetEmpty />
         ) : (
           selectedFichesSolutionsIds?.map((selectedFichesSolution, index) => (
-            <FichesSolutionsProjetsSelectedCard ficheSolutionId={selectedFichesSolution} key={index} />
+            <FicheSolutionCardWithFetcher id={selectedFichesSolution} complete projectName="" key={index} />
           ))
         )}
         <Link

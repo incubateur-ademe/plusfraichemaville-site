@@ -48,7 +48,7 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
             <ul className="flex flex-wrap gap-6 p-0 m-0 justify-center md:justify-normal">
               {filteredFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.id} className="flex">
-                  <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution} />
+                  <FicheSolutionCardWithUserInfo projectName="" ficheSolution={ficheSolution} />
                 </li>
               ))}
             </ul>

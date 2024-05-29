@@ -1,9 +1,9 @@
 import { useProjetsStore } from "@/stores/projets/provider";
-import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
 import { FicheSolutionResponse } from "../ficheSolution/type";
 import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
 import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
+import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -47,9 +47,9 @@ export const TableauDeBordRecommandation = () => {
           <FicheSolutionFullCardSkeleton />
         </div>
       ) : (
-        filteredFichesSolutionsComplementaires?.map(
-          (fs) => fs && <FicheSolutionCardWithUserInfo ficheSolution={fs} key={fs?.id} projectName="" withoutModal />,
-        )
+        filteredFichesSolutionsComplementaires?.map((fs) => (
+          <FicheSolutionCardWithFetcher complete id={fs.id} key={fs?.id} projectName="" withoutModal />
+        ))
       )}
     </div>
   );
