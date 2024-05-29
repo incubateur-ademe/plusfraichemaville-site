@@ -3,9 +3,9 @@ import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes
 import { EstimationMateriauxFicheSolutionRecap } from "@/components/estimation/materiaux-modal/estimation-materiaux-fiche-solution-recap";
 import { useMemo } from "react";
 import EstimationMateriauGlobalPriceFooter from "@/forms/estimation/estimation-materiau-global-price-footer";
-import { computeGlobalFicheSolutionPrice } from "@/helpers/coutMateriau";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { notifications } from "@/components/common/notifications";
+import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
 
 type EstimationMateriauxValidationProps = {
   estimationsFicheSolution: EstimationMateriauxFicheSolution[];

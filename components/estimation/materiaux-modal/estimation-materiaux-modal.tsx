@@ -11,9 +11,11 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import { upsert } from "@/helpers/listUtils";
 import { EstimationMateriauxValidation } from "@/components/estimation/materiaux-modal/estimation-materiaux-validation";
 import { useSearchParams } from "next/navigation";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
 import { FicheSolutionResponse } from "@/components/ficheSolution/type";
+import { UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
+import EstimationMateriauSimpleFieldForm from "@/forms/estimation/estimation-materiau-form-simple-field";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;
@@ -63,13 +65,13 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
 
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
 
-  const { data: currentFicheSolutionData } = useSwrWithFetcher<FicheSolutionResponse[]>(
+  const { data: currentFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
     estimationStep <= estimation.fiches_solutions_id.length
       ? makeFicheSolutionCompleteUrlApi(estimation.fiches_solutions_id[estimationStep - 1])
       : null,
   );
 
-  const { data: nextFicheSolutionData } = useSwrWithFetcher<FicheSolutionResponse[]>(
+  const { data: nextFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
     estimationStep <= estimation.fiches_solutions_id.length - 1
       ? makeFicheSolutionCompleteUrlApi(estimation.fiches_solutions_id[estimationStep])
       : null,
@@ -124,6 +126,8 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     }
   };
 
+  const isSimpleForm = currentFicheSolution?.attributes.cout_unite === UNITE_COUT_MEGAWATTHEURE.code;
+
   return (
     <>
       <Button onClick={modal.open} className="rounded-3xl">
@@ -139,17 +143,34 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
         />
         {currentFicheSolution && (
           <>
-            <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre},
-             vous aurez besoin de choisir parmi les matériaux et systèmes suivants :`}</div>
-            <EstimationMateriauForm
-              estimationId={estimation.id}
-              ficheSolution={currentFicheSolution}
-              estimationMateriaux={currentEstimationMateriaux}
-              onClose={modal.close}
-              onPrevious={goToPreviousStep}
-              onNext={goToNextStep}
-              onUpdateEstimation={updateEstimationInStore}
-            />
+            {isSimpleForm ? (
+              <>
+                <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.attributes.titre}`}</div>
+                <EstimationMateriauSimpleFieldForm
+                  estimationId={estimation.id}
+                  ficheSolution={currentFicheSolution}
+                  estimationMateriaux={currentEstimationMateriaux}
+                  onClose={modal.close}
+                  onPrevious={goToPreviousStep}
+                  onNext={goToNextStep}
+                  onUpdateEstimation={updateEstimationInStore}
+                />
+              </>
+            ) : (
+              <>
+                <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre}, vous aurez
+                besoin de choisir parmi les matériaux et systèmes suivants :`}</div>
+                <EstimationMateriauForm
+                  estimationId={estimation.id}
+                  ficheSolution={currentFicheSolution}
+                  estimationMateriaux={currentEstimationMateriaux}
+                  onClose={modal.close}
+                  onPrevious={goToPreviousStep}
+                  onNext={goToNextStep}
+                  onUpdateEstimation={updateEstimationInStore}
+                />
+              </>
+            )}
           </>
         )}
         {estimationStep === estimation.fiches_solutions_id.length + 1 && estimationMateriaux && (

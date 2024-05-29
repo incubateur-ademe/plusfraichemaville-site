@@ -2,10 +2,10 @@ import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { useCallback } from "react";
-import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/coutMateriau";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { FicheSolutionResponse } from "@/components/ficheSolution/type";
 import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
+import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/cout/cout-materiau";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationMateriauxFicheSolution;
@@ -16,7 +16,7 @@ export function EstimationMateriauxFicheSolutionRecap({
   ficheSolutionEstimation,
   goToFicheSolutionStep,
 }: EstimationMateriauxFicheSolutionRecapProps) {
-  const { data } = useSwrWithFetcher<FicheSolutionResponse[]>(
+  const { data } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
     makeFicheSolutionCompleteUrlApi(ficheSolutionEstimation.ficheSolutionId),
   );
 
@@ -47,40 +47,43 @@ export function EstimationMateriauxFicheSolutionRecap({
           aria-hidden="true"
         ></span>
       </div>
-      {ficheSolution.attributes.materiaux.data.map((materiau) => (
-        <div key={materiau.id}>
-          <div className={"flex flex-row gap-6 justify-between items-center my-2 basis-full"}>
-            <div className="flex flex-row items-center">
-              <div className="w-16 h-16 relative flex flex-none mr-6">
-                <Image
-                  fill
-                  sizes="(max-width: 768px) 80vw, 20vw"
-                  src={getStrapiImageUrl(materiau.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
-                  alt={materiau.attributes.titre}
-                  className={"object-cover rounded-xl"}
-                />
+      {ficheSolution.attributes.materiaux.data.map(
+        (materiau) =>
+          getQuantiteByMateriauId(materiau.id) > 0 && (
+            <div key={materiau.id}>
+              <div className={"flex flex-row gap-6 justify-between items-center my-2 basis-full"}>
+                <div className="flex flex-row items-center">
+                  <div className="w-16 h-16 relative flex flex-none mr-6">
+                    <Image
+                      fill
+                      sizes="(max-width: 768px) 80vw, 20vw"
+                      src={getStrapiImageUrl(materiau.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
+                      alt={materiau.attributes.titre}
+                      className={"object-cover rounded-xl"}
+                    />
+                  </div>
+                  <div>{materiau.attributes.titre}</div>
+                </div>
+                <div>
+                  <div>
+                    Inv.
+                    <strong>{` ${getLabelCoutFournitureByQuantite(
+                      materiau.attributes,
+                      getQuantiteByMateriauId(materiau.id),
+                    )}`}</strong>
+                  </div>
+                  <div className="text-dsfr-text-mention-grey text-sm">
+                    Ent.
+                    <strong>{` ${getLabelCoutEntretienByQuantite(
+                      materiau.attributes,
+                      getQuantiteByMateriauId(materiau.id),
+                    )}`}</strong>
+                  </div>
+                </div>
               </div>
-              <div>{materiau.attributes.titre}</div>
             </div>
-            <div>
-              <div>
-                Inv.
-                <strong>{` ${getLabelCoutFournitureByQuantite(
-                  materiau.attributes,
-                  getQuantiteByMateriauId(materiau.id),
-                )}`}</strong>
-              </div>
-              <div className="text-dsfr-text-mention-grey text-sm">
-                Ent.
-                <strong>{` ${getLabelCoutEntretienByQuantite(
-                  materiau.attributes,
-                  getQuantiteByMateriauId(materiau.id),
-                )}`}</strong>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+          ),
+      )}
       <div className="bg-dsfr-contrast-grey p-4 mb-2 mt-6">
         <div className="flex flex-row justify-between">
           <div className="font-bold">Total Investissement</div>

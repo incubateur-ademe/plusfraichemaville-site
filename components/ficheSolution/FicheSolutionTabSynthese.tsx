@@ -1,21 +1,24 @@
 import Image from "next/image";
 import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
-import React from "react";
+import { useMemo } from "react";
 import CmsRichText from "@/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
 import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
 import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import { APIResponseData, GetValues } from "@/lib/strapi/types/types";
+import { APIResponseData } from "@/lib/strapi/types/types";
+import { FicheSolution } from "@/components/ficheSolution/type";
+import { getCreditsImageForFicheSolution } from "@/helpers/credits-image";
 
 export default function FicheSolutionTabSynthese({
   ficheSolution,
 }: {
   ficheSolutionId: number;
   projectName: string;
-  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+  ficheSolution: FicheSolution;
   projetId?: string;
 }) {
   const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
+  const creditsImage = useMemo(() => getCreditsImageForFicheSolution(ficheSolution), [ficheSolution]);
 
   const uniqueRetourExperienceList =
     ficheSolution?.solution_retour_experiences?.data.reduce((accumulator, rex) => {
@@ -132,8 +135,15 @@ export default function FicheSolutionTabSynthese({
       {!!ficheSolution.credits && (
         <>
           <hr className="pb-8 mt-12" />
-          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Crédit</div>
+          <div className="text-dsfr-text-title-grey font-bold text-[1.375rem] mb-4">Crédits</div>
           <CmsRichText label={ficheSolution.credits} className="text-dsfr-text-title-grey" />
+        </>
+      )}
+      {creditsImage.length > 0 && (
+        <>
+          <hr className="pb-8 mt-12" />
+          <div className="text-dsfr-text-title-grey font-bold mb-4">Crédits images</div>
+          <div>{creditsImage.join(", ")}</div>
         </>
       )}
     </div>

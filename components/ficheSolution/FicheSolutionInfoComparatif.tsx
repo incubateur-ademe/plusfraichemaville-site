@@ -1,5 +1,5 @@
 import React from "react";
-import { getCoutFiche } from "@/helpers/coutFiche";
+import { getCoutFiche, getLabelCoutFourniture } from "@/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
 import { GetValues } from "@/lib/strapi/types/types";
 import { getPorteeBaisseTemperatureLabelFromCode } from "@/helpers/porteeBaisseTemperatureFicheSolution";
@@ -21,7 +21,13 @@ export default function FicheSolutionInfoComparatif({
     ficheSolution.delai_travaux_minimum,
     ficheSolution.delai_travaux_maximum,
   );
-  const cout = getCoutFiche(TypeFiche.solution, ficheSolution.cout_minimum, ficheSolution.cout_maximum);
+  const cout = getCoutFiche(
+    TypeFiche.solution,
+    ficheSolution.cout_minimum,
+    ficheSolution.cout_maximum,
+    ficheSolution.cout_unite,
+  );
+
   return (
     <div className={`${className}`}>
       {!!ficheSolution.baisse_temperature && (
@@ -62,16 +68,14 @@ export default function FicheSolutionInfoComparatif({
           </div>
         </div>
       </div>
-      <div className={`${!cout ? " invisible " : ""}`}>
+      <div>
         <hr className="pb-2 mt-1" />
         <div className="text-dsfr-text-mention-grey">Coût</div>
         <div className="inline-block w-full">
           <div className="float-left">
             <div className="float-left text-base">{cout?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
           </div>
-          <div className="float-right text-dsfr-text-mention-grey mt-1">
-            {`de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € / m²`}
-          </div>
+          <div className="float-right text-dsfr-text-mention-grey mt-1">{getLabelCoutFourniture(ficheSolution)}</div>
         </div>
       </div>
     </div>
