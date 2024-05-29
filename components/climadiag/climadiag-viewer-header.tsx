@@ -4,12 +4,12 @@ export const ClimadiagViewerHeader = () => {
   return (
     <div className="flex justify-between">
       <div className="flex gap-6">
-        <div className="fr-logo">
-          République
-          <br />
-          Française
-        </div>
-
+        <Image
+          height={80}
+          width={100}
+          src="/images/climadiag/republique-francaise-logo.jpg"
+          alt="Logo République Française"
+        />
         <Image height={75} width={200} src="/images/logo-ademe-pfmv.svg" alt="ADEME - Plus fraîche ma ville" />
       </div>
 
