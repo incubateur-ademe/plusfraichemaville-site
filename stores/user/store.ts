@@ -1,8 +1,11 @@
 import { createStore } from "zustand/vanilla";
-import { ProjectBookmarks } from "@/helpers/bookmarkedFicheSolutionHelper";
 import { updateBookmarkedFichesSolutionsProjetAction } from "@/actions/users/update-bookmarked-fs-action";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { FichesBookmarked, getAllSavedFichesFromLocalStorage } from "@/components/common/generic-save-fiche/helpers";
+import {
+  FicheBookmarkedSolution,
+  FichesBookmarked,
+  getAllSavedFichesFromLocalStorage,
+} from "@/components/common/generic-save-fiche/helpers";
 import { updateFichesUserAction } from "@/actions/users/update-fiches-user-action";
 import { saveAllFichesFromLocalStorageAction } from "@/actions/users/save-all-fiches-from-local-storage";
 
@@ -16,7 +19,7 @@ interface UserState {
 
 export type UserActions = {
   setUserInfos: (_userInfos: UserInfos) => void;
-  setBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: ProjectBookmarks[]) => void;
+  setBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: FicheBookmarkedSolution[]) => void;
   setBookmarkedFichesDiagnostic: (_bookmarkedFichesDiagnostic: string[]) => void;
   updateBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: FichesBookmarked[]) => void;
   updateFichesUser: (_type: "solution" | "diagnostic", _ficheId: number, _projectName: string) => void;

@@ -3,14 +3,6 @@ import { AddressCollectivite } from "@/lib/adresseApi/types";
 import { Prisma } from "@prisma/client";
 import { generateRandomId } from "@/helpers/common";
 
-export const getCollectivite = async (collectiviteId: number) => {
-  return prismaClient.collectivite.findUnique({
-    where: {
-      id: collectiviteId,
-    },
-  });
-};
-
 export const getOrCreateCollectivite = async (data: AddressCollectivite, creatorUserId: string) => {
   return prismaClient.collectivite.upsert({
     where: {

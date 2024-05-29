@@ -15,7 +15,7 @@ import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types
 import { getHistoryFromAideDecisionEtape } from "@/lib/strapi/helpers/getHistoryFromAideDecision";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
 
-export const GET_FILTERED_AIDE_DECISION_ETAPE = (
+const GET_FILTERED_AIDE_DECISION_ETAPE = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
 ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
@@ -73,7 +73,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
     }
   }
 }`;
-export const GET_ALL_AIDE_DECISION_ETAPE_SLUG = (strapiFilter: StrapiFilter) => `query {
+const GET_ALL_AIDE_DECISION_ETAPE_SLUG = (strapiFilter: StrapiFilter) => `query {
   aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
     data {
       id
@@ -84,7 +84,7 @@ export const GET_ALL_AIDE_DECISION_ETAPE_SLUG = (strapiFilter: StrapiFilter) => 
   }
 }`;
 
-export const GET_AIDE_DECISION_ETAPE_HISTORY = (strapiFilter: StrapiFilter) => `  ${STRAPI_IMAGE_FRAGMENT} query {
+const GET_AIDE_DECISION_ETAPE_HISTORY = (strapiFilter: StrapiFilter) => `  ${STRAPI_IMAGE_FRAGMENT} query {
   aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
     data {
       id

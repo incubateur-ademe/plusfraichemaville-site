@@ -10,7 +10,7 @@ import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
 import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
 
-export const GET_FICHE_SOLUTION_COMPLETE_DATA = (
+const GET_FICHE_SOLUTION_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
 ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
@@ -132,7 +132,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
   }
 }`;
 
-export const GET_FICHE_SOLUTION_CARD_DATA = (
+const GET_FICHE_SOLUTION_CARD_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} query {
     ficheSolutions ${strapiFilter.wholeFilterString()} {
@@ -147,16 +147,6 @@ export async function getFicheSolutionBySlug(
 ): Promise<APIResponseData<"api::fiche-solution.fiche-solution"> | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
-    ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
-  return safeReturnStrapiEntity(apiResponse);
-}
-
-export async function getFicheSolutionById(
-  ficheSolutionId: string,
-  signal?: AbortSignal,
-): Promise<APIResponseData<"api::fiche-solution.fiche-solution"> | null> {
-  const filter = new StrapiFilter(true, [{ attribute: "id", operator: "eq", value: ficheSolutionId, relation: false }]);
-  const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), null, signal))
     ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntity(apiResponse);
 }
