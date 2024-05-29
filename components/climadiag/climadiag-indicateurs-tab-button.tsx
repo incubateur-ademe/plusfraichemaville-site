@@ -28,7 +28,7 @@ export const ClimadiagIndicateursTabButton = ({ active, year, changeTab }: Clima
             +{temperature}°C
           </span>
           <svg viewBox="0 0 50 50">
-            <rect width="50" height="50" fill="#02568d" rx="25" ry="25"></rect>
+            <rect width="50" height="50" fill="var(--border-default-blue-france)" rx="25" ry="25"></rect>
             <path
               fill="none"
               stroke="#fff"
