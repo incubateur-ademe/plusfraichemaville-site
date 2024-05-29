@@ -1,6 +1,6 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { FicheSolutionResponse } from "../ficheSolution/type";
-import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
+import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
 import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
@@ -42,9 +42,9 @@ export const TableauDeBordRecommandation = () => {
       </p>
       {isLoading ? (
         <div className="flex gap-8">
-          <FicheSolutionFullCardSkeleton />
-          <FicheSolutionFullCardSkeleton />
-          <FicheSolutionFullCardSkeleton />
+          <FicheCardSkeleton />
+          <FicheCardSkeleton />
+          <FicheCardSkeleton />
         </div>
       ) : (
         filteredFichesSolutionsComplementaires?.map((fs) => (

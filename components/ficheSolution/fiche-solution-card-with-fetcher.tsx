@@ -4,7 +4,7 @@ import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import FicheSolutionCardWithUserInfo, { FicheSolutionCardWithUserInfoProps } from "./FicheSolutionCardWithUserInfo";
 import { makeFicheSolutionCompleteUrlApi, makeFicheSolutionUrlApi } from "./helpers";
 import { FicheSolutionResponse } from "./type";
-import { FicheSolutionFullCardSkeleton } from "./fiche-solution-full-card-skeleton";
+import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 
 interface FicheSolutionCardWithFetcherProps extends Omit<FicheSolutionCardWithUserInfoProps, "ficheSolution"> {
   complete: boolean;
@@ -16,7 +16,7 @@ export const FicheSolutionCardWithFetcher = ({ complete, id, ...props }: FicheSo
   const { data, isLoading } = useSwrWithFetcher<FicheSolutionResponse[]>(urlMaker(id));
 
   return !data && isLoading ? (
-    <FicheSolutionFullCardSkeleton />
+    <FicheCardSkeleton />
   ) : (
     data && <FicheSolutionCardWithUserInfo ficheSolution={data[0]} {...props} />
   );
