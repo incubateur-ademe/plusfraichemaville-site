@@ -11,10 +11,10 @@ type ClimadiagIndicateursLineProps = {
   type: ClimadiagTypeJour;
   temperature: ClimadiagTemperatureJour;
   year: ClimadiagYear;
-  viewer?: boolean;
+  isPDF?: boolean;
 };
 
-export const ClimadiagIndicateursLine = ({ type, temperature, viewer, year }: ClimadiagIndicateursLineProps) => {
+export const ClimadiagIndicateursLine = ({ type, temperature, isPDF, year }: ClimadiagIndicateursLineProps) => {
   const { title, picto, indice, legend: climatLegend } = climadiagIndicateursData.line[type];
   const [legend, setLegend] = useState(false);
   const toggler = () => setLegend(!legend);
@@ -23,11 +23,10 @@ export const ClimadiagIndicateursLine = ({ type, temperature, viewer, year }: Cl
     <div
       className={clsx(
         "bg-white rounded-2xl px-5 py-2 mb-2 w-fit lg:w-full",
-        viewer && "border-[2px] border-pfmv-light-grey/35",
+        isPDF && "border-[2px] w-full border-pfmv-light-grey/35",
       )}
-      id={`line-${type}`}
     >
-      <div className="flex justify-between flex-col gap-4 lg:flex-row lg:gap-0">
+      <div className={clsx("flex justify-between climadiag-line lg:flex-row lg:gap-0", !isPDF && "gap-4 flex-col")}>
         <div className="flex items-center gap-6">
           <Image
             src={`/images/climadiag/${picto}.svg`}
@@ -36,7 +35,7 @@ export const ClimadiagIndicateursLine = ({ type, temperature, viewer, year }: Cl
             className="w-[100px] h-[100px]"
             alt="jour très chaud picto"
           />
-          <div className="max-w-[350px] lg:max-w-[420px] pt-4">
+          <div className={clsx("pt-4 max-w-[300px]", !isPDF && "lg:max-w-[420px]")}>
             <span className="text-[22px] font-bold block leading-[1.2]">{title}</span>
             {indice && (
               <span className="text-[22px] block leading-[1.2]">
@@ -44,7 +43,7 @@ export const ClimadiagIndicateursLine = ({ type, temperature, viewer, year }: Cl
                 {indice}°C)
               </span>
             )}
-            {!viewer && (
+            {!isPDF && (
               <button onClick={toggler} className="text-sm underline mt-4">
                 Afficher la légende
               </button>

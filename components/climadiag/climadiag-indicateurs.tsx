@@ -2,6 +2,7 @@
 
 import { ClimadiagIndicateursTabs } from "./climadiag-indicateurs-tabs";
 import { Climadiag } from "./types";
+import { ClimadiagDownloader } from "@/components/climadiag/climadiag-downloader";
 
 export const ClimadiagIndicateurs = ({ climadiagInfo }: { climadiagInfo: Climadiag }) => {
   return (
@@ -10,6 +11,7 @@ export const ClimadiagIndicateurs = ({ climadiagInfo }: { climadiagInfo: Climadi
       <div className="float-right text-xs text-pfmv-grey">
         Les données Climadiag sont la propriété exclusive de Météo-France.
       </div>
+      <ClimadiagDownloader data={climadiagInfo} />
     </div>
   );
 };

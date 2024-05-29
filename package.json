@@ -30,13 +30,14 @@
     "html-to-image": "^1.11.11",
     "jspdf": "^2.5.1",
     "lodash": "^4.17.21",
-    "next": "14.0.4",
+    "next": "14.2.3",
     "next-auth": "^4.24.5",
     "react": "^18",
     "react-dom": "^18",
     "react-hook-form": "^7.50.1",
     "react-hot-toast": "^2.4.1",
     "react-loader-spinner": "^5.4.5",
+    "react-select": "^5.8.0",
     "server-only": "^0.0.1",
     "sharp": "^0.32.6",
     "swr": "^2.2.5",
@@ -68,6 +69,6 @@
   },
   "engines": {
     "node": "18.17.1",
-    "pnpm": "9.1.2"
+    "pnpm": "9.1.3"
   }
 }

@@ -1,21 +1,59 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
-import { Select } from "@codegouvfr/react-dsfr/Select";
 import { ClimadiagIndicateurs } from "@/components/climadiag/climadiag-indicateurs";
-import { Climadiag } from "./types";
+import AsyncSelect from "react-select/async";
+import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "@/components/climadiag/helpers";
+import debounce from "lodash/debounce";
+import { Climadiag, GroupedOptions } from "./types";
 
 export const ClimadiagPanel = ({ userId }: { userId: string }) => {
-  const [value, setValue] = useState<Climadiag>();
-  const { data, isLoading } = useSwrWithFetcher<Climadiag[]>(
+  const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<Climadiag>();
+  const [userResultGroup, setUserResultGroup] = useState<GroupedOptions[]>([]);
+  const [searchClimadiagData, setSearchClimadiagData] = useState<Climadiag[]>([]);
+
+  const { data: userClimadiagInfos, isLoading } = useSwrWithFetcher<Climadiag[]>(
     `/api/get-climadiag-info-for-user-projects?userId=${userId}`,
   );
 
-  useEffect(() => {
-    if (!isLoading) {
-      setValue(data?.[0]);
+  const searchClimadiagInfos = (inputValue: string, callback: (_: any) => void) => {
+    if (inputValue?.trim().length > 2) {
+      fetch(`/api/search-climadiag-info?search=${inputValue}`)
+        .then((t) => t.json())
+        .then((searchedValues: Climadiag[]) => {
+          setSearchClimadiagData(searchedValues);
+          const searchOptions = searchedValues?.length > 0 ? climadiagToOptions(searchedValues) : NO_RESULT_OPTION;
+          callback(computeSearchResultGroup(searchOptions).concat(userResultGroup));
+        });
+    } else {
+      callback(defaultOptions);
     }
-  }, [data, isLoading]);
+  };
+
+  const loadSuggestions = debounce(searchClimadiagInfos, 200);
+
+  useEffect(() => {
+    if (!isLoading && userClimadiagInfos && userClimadiagInfos.length > 0) {
+      setSelectedClimadiagInfo(userClimadiagInfos[0]);
+      setUserResultGroup([{ label: "Vos collectivités", options: climadiagToOptions(userClimadiagInfos) }]);
+    }
+  }, [userClimadiagInfos, isLoading]);
+
+  const selectableData = useMemo(
+    () => userClimadiagInfos?.concat(searchClimadiagData),
+    [userClimadiagInfos, searchClimadiagData],
+  );
+
+  const defaultOptions = useMemo(() => {
+    if (
+      !selectedClimadiagInfo ||
+      userClimadiagInfos?.find((climadiag) => climadiag?.id === selectedClimadiagInfo?.id)
+    ) {
+      return userResultGroup;
+    } else {
+      return computeSearchResultGroup(climadiagToOptions([selectedClimadiagInfo])).concat(userResultGroup);
+    }
+  }, [userClimadiagInfos, selectedClimadiagInfo, userResultGroup]);
 
   return (
     <div className="bg-dsfr-background-open-blue-france" id="climadiag-panel">
@@ -23,24 +61,23 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
         <div className="text-dsfr-text-label-blue-france text-[1.375rem] font-bold mb-6">
           Les indicateurs de surchauffe de ma collectivité
         </div>
-        {data && data.length > 0 && (
-          <>
-            <Select
-              label=""
-              nativeSelectProps={{
-                onChange: (event) => setValue(data?.find((climadiagInfo) => climadiagInfo.id === +event.target.value)),
-                className: "!bg-white !shadow-none !rounded-md min-w-64 !w-fit",
-              }}
-            >
-              {data.map((climadiagInfo) => (
-                <option key={climadiagInfo.id} value={climadiagInfo.id}>
-                  {climadiagInfo.nom} - {climadiagInfo.code_postal}
-                </option>
-              ))}
-            </Select>
-            {value && <ClimadiagIndicateurs climadiagInfo={value} />}
-          </>
-        )}
+        <>
+          <AsyncSelect
+            value={selectedClimadiagInfo ? climadiagToOptions([selectedClimadiagInfo]) : null}
+            defaultOptions={defaultOptions}
+            loadOptions={loadSuggestions}
+            onChange={(event) =>
+              setSelectedClimadiagInfo(
+                selectableData?.find((climadiagInfo) => climadiagInfo.id === +(event?.value || 0)),
+              )
+            }
+            loadingMessage={() => "Recherche en cours..."}
+            className="min-w-64 w-fit"
+            isClearable
+            placeholder="Chercher une commune / EPCI (nom ou code)"
+          />
+          {selectedClimadiagInfo && <ClimadiagIndicateurs climadiagInfo={selectedClimadiagInfo} />}
+        </>
       </div>
     </div>
   );
