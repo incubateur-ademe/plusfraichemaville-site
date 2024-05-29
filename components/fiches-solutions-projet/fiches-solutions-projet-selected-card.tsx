@@ -1,14 +1,16 @@
 import { FicheSolutionResponse } from "../ficheSolution/type";
 import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
 import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionUrlApi } from "../ficheSolution/helpers";
 export const FichesSolutionsProjetsSelectedCard = ({
   ficheSolutionId,
 }: {
   ficheSolutionId: FicheSolutionResponse["id"];
 }) => {
-  const { data, isLoading } = useSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionUrlApi(ficheSolutionId));
+  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
+    makeFicheSolutionUrlApi(ficheSolutionId),
+  );
 
   return !data && isLoading ? (
     <FicheSolutionFullCardSkeleton />

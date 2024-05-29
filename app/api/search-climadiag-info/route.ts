@@ -13,6 +13,11 @@ export async function GET(request: NextRequest) {
   if (!searchText || searchText.length < 3 || limit <= 0 || limit > 20) {
     return NextResponse.json([], { status: 400 });
   }
-  const searchTerms = searchText.split(" ");
+
+  const searchTerms = searchText
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .split(/ +/);
+
   return NextResponse.json(await searchClimadiagInfo(searchTerms, limit));
 }

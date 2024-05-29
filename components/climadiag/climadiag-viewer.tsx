@@ -33,7 +33,7 @@ export const ClimadiagViewer = ({ data, close }: ClimadiagViewerProps) => {
             <ClimadiagViewerHeader />
             <Separator className="mt-6 mb-10" />
             <div className="mb-8">
-              <ClimadiagIndicateursHeader city={`${data.nom} ${data.code_postal}`} viewer />
+              <ClimadiagIndicateursHeader city={`${data.nom} ${data.code_postal}`} isPDF />
             </div>
             <ClimadiagViewerItem data={data} year={2030} />
             <ClimadiagViewerItem data={data} year={2050} />
@@ -55,11 +55,9 @@ const generatePdf = async (filename: string = "export", nodeId: string, callback
     node.style.height = `${height}px`;
 
     htmlToImage
-      .toJpeg(node, { quality: 1 })
+      .toJpeg(node, { quality: 1, canvasHeight: 1850, includeQueryParams: true })
       .then((dataUrl) => {
-        const pdf = new jsPDF({
-          format: [width, height],
-        });
+        const pdf = new jsPDF();
         const img = pdf.getImageProperties(dataUrl);
         const pdfWidth = pdf.internal.pageSize.getWidth();
         const pdfHeight = (img.height * pdfWidth) / img.width;

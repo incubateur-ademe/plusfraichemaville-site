@@ -11,7 +11,7 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import { upsert } from "@/helpers/listUtils";
 import { EstimationMateriauxValidation } from "@/components/estimation/materiaux-modal/estimation-materiaux-validation";
 import { useSearchParams } from "next/navigation";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
 import { FicheSolutionResponse } from "@/components/ficheSolution/type";
 import { UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
@@ -65,13 +65,13 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
 
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
 
-  const { data: currentFicheSolutionData } = useSwrWithFetcher<FicheSolutionResponse[]>(
+  const { data: currentFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
     estimationStep <= estimation.fiches_solutions_id.length
       ? makeFicheSolutionCompleteUrlApi(estimation.fiches_solutions_id[estimationStep - 1])
       : null,
   );
 
-  const { data: nextFicheSolutionData } = useSwrWithFetcher<FicheSolutionResponse[]>(
+  const { data: nextFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
     estimationStep <= estimation.fiches_solutions_id.length - 1
       ? makeFicheSolutionCompleteUrlApi(estimation.fiches_solutions_id[estimationStep])
       : null,
