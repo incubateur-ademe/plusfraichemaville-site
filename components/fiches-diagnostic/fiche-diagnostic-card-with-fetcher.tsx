@@ -1,5 +1,5 @@
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheDiagnosticUrlApi } from "./helpers";
 import { FicheDiagnosticResponse } from "./types";
 
@@ -10,7 +10,7 @@ export const FicheDiagnosticCardWithFetcher = ({
   ficheDiagnosticId: number;
   vertical?: boolean;
 }) => {
-  const { data } = useSwrWithFetcher<FicheDiagnosticResponse>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
+  const { data } = useImmutableSwrWithFetcher<FicheDiagnosticResponse>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
 
   if (!data) {
     return null;

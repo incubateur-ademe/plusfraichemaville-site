@@ -18,3 +18,5 @@ export enum TypeFiche {
 
 export const highlightedIconClass = (typeFiche: TypeFiche) =>
   typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-background-flat-warning";
+
+export const roundToTenth = (num: number) => Math.round(num * 10) / 10;

@@ -2,14 +2,16 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import FicheSolutionCardWithUserInfo from "../ficheSolution/FicheSolutionCardWithUserInfo";
 import { FicheSolutionResponse } from "../ficheSolution/type";
 import { FicheSolutionFullCardSkeleton } from "../ficheSolution/fiche-solution-full-card-skeleton";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const urls = projet?.fiches_solutions_id ?? [];
 
-  const { data, isLoading } = useSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionCompleteUrlApi(urls));
+  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
+    makeFicheSolutionCompleteUrlApi(urls),
+  );
 
   const fichesSolutions = data?.map((fs) => fs?.attributes.fiches_solutions_complementaires);
 
