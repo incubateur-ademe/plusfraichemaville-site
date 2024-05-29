@@ -11,11 +11,13 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
           <span className="text-lg block mb-8">Les projets de rafraîchissement de ma collectivité</span>
           {isListEmpty && <ListProjetsHeaderEmpty />}
         </div>
-        <div className="shrink-0">
-          <Link href={PFMV_ROUTES.CREATE_PROJET} className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl">
-            Créer un projet
-          </Link>
-        </div>
+        {!isListEmpty && (
+          <div className="shrink-0">
+            <Link href={PFMV_ROUTES.CREATE_PROJET} className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl">
+              Créer un projet
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );
