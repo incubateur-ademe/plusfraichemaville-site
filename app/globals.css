@@ -273,3 +273,11 @@
     fill: var(--background-action-high-blue-france-active);
   }
 }
+
+.notification-badge {
+  @apply !relative block after:rounded-full after:size-[7.5px] after:absolute after:top-3 after:right-2 after:bg-dsfr-background-flat-blue-france after:opacity-0;
+}
+
+.notification-badge.active {
+  @apply after:opacity-100;
+}

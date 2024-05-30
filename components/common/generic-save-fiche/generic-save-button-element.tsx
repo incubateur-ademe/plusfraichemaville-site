@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { GenericSaveBaseProps } from ".";
 import { GenericSaveLabel } from "./generic-save-label";
 import { GenericSavePicto } from "./generic-save-picto";
+import { navSelectionBadgeOn } from "@/helpers/notification-badge";
 
 interface GenericSaveFicheButtonBaseProps extends GenericSaveBaseProps {
   className?: string;
@@ -21,9 +22,13 @@ export const GenericSaveButtonElement = ({
   isSaved,
   withLabel,
 }: GenericSaveFicheButtonBaseProps) => {
+  const updater = () => {
+    update();
+    !isSaved && navSelectionBadgeOn();
+  };
   return (
     <div className={clsx(className, "z-[1] relative")}>
-      <button onClick={update} className={clsx(assets.className)}>
+      <button onClick={updater} className={clsx(assets.className)}>
         {assets.code && (
           <div className={clsx("w-8 h-8 rounded-full flex items-center justify-center savePicto")}>
             <GenericSavePicto />
