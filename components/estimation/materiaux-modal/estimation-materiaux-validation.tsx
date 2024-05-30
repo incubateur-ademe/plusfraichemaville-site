@@ -38,11 +38,11 @@ export function EstimationMateriauxValidation({
           goToFicheSolutionStep={goToFicheSolutionStep}
         />
       ))}
-      <hr className="p-0 h-[1px] mb-2" />
+      <hr className="mb-2 h-[1px] p-0" />
       <div className="mt-8 text-[1.375rem] font-bold text-dsfr-text-title-grey">
         Estimation totale des solutions envisagées
       </div>
-      <div className="text-dsfr-text-mention-grey mt-1">
+      <div className="mt-1 text-dsfr-text-mention-grey">
         <i className={`fr-icon-info-fill mr-2`} />
         Inclut : fourniture et pose (hors travaux complémentaires de voirie, consolidation, etc.)
       </div>
@@ -52,7 +52,7 @@ export function EstimationMateriauxValidation({
         entretienMin={globalPrice.entretien.min}
         entretienMax={globalPrice.entretien.max}
       />
-      <Button className={`rounded-3xl mr-4`} onClick={validateEstimation}>
+      <Button className={`mr-4 rounded-3xl`} onClick={validateEstimation}>
         {"Valider l'estimation"}
       </Button>
       <Button className={`rounded-3xl`} onClick={onPrevious} priority="secondary">

@@ -29,9 +29,9 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
 
   return (
     <modal.Component title="" size="large">
-      <div className="flex items-center mb-4">
+      <div className="mb-4 flex items-center">
         <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
-        <span className="text-2xl font-bold block">
+        <span className="block text-2xl font-bold">
           {type === "solution" ? "Solution" : "Méthode de diagnostic"} ajoutée dans Ma sélection
         </span>
       </div>
@@ -40,7 +40,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
         sélection. <br />
         Voulez-vous ajouter aussi cette solution dans l’un de vos projets ?
       </span>
-      <div className="my-10 flex-col md:flex-row flex md:items-center gap-0 md:gap-5">
+      <div className="my-10 flex flex-col gap-0 md:flex-row md:items-center md:gap-5">
         <Select
           label=""
           className="w-96"
@@ -59,7 +59,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
           })}
         </Select>
         <Button
-          className="rounded-3xl !h-fit !min-h-fit !text-sm !mb-3"
+          className="!mb-3 !h-fit !min-h-fit rounded-3xl !text-sm"
           disabled={selectedProjetId < 1}
           onClick={validate}
         >
@@ -68,7 +68,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
       </div>
       <Button
         priority="primary"
-        className="rounded-3xl mb-2 md:mb-0 !min-h-fit !text-sm md:ml-20 mr-4"
+        className="mb-2 mr-4 !min-h-fit rounded-3xl !text-sm md:mb-0 md:ml-20"
         onClick={modal.close}
       >
         Continuer ma lecture
@@ -76,7 +76,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
       <Link
         onClick={modal.close}
         href={type === "solution" ? PFMV_ROUTES.MES_FICHES_SOLUTIONS : PFMV_ROUTES.MES_FICHES_SOLUTIONS}
-        className="fr-btn fr-btn--secondary rounded-3xl !min-h-fit !text-sm mr-4"
+        className="fr-btn fr-btn--secondary mr-4 !min-h-fit rounded-3xl !text-sm"
       >
         Voir mes {type === "solution" ? "fiches solutions" : "fiches diagnostic"}
       </Link>

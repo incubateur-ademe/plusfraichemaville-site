@@ -7,7 +7,7 @@ export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: Fic
 
   return (
     <div>
-      <h3 className="text-3xl mb-9">Mise en œuvre</h3>
+      <h3 className="mb-9 text-3xl">Mise en œuvre</h3>
       <div className="mb-14">
         {meo?.map((m, i) => (
           <div className="mb-14" key={i}>
@@ -16,7 +16,7 @@ export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: Fic
         ))}
       </div>
       {attributes.materiel && (
-        <div className="h-fit pl-6 pt-8 pr-4 pb-8 rounded-2xl bg-dsfr-background-alt-red-marianne">
+        <div className="h-fit rounded-2xl bg-dsfr-background-alt-red-marianne pb-8 pl-6 pr-4 pt-8">
           <h4 className="text-lg font-bold">Matériel et données nécessaires</h4>
           <CmsRichText label={attributes.materiel} />
         </div>

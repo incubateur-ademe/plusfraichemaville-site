@@ -13,9 +13,9 @@ export const ClimadiagIndicateursTabButton = ({ active, year, changeTab }: Clima
   return (
     <button
       className={clsx(
-        "text-xl px-4 py-1 rounded-3xl relative mr-3",
+        "relative mr-3 rounded-3xl px-4 py-1 text-xl",
         active
-          ? "bg-dsfr-text-label-blue-france text-white font-bold pr-16 pointer-events-none"
+          ? "pointer-events-none bg-dsfr-text-label-blue-france pr-16 font-bold text-white"
           : "bg-dsfr-background-action-low-blue-france-hover",
         "hover:!bg-dsfr-background-action-low-blue-france-active",
       )}
@@ -23,8 +23,8 @@ export const ClimadiagIndicateursTabButton = ({ active, year, changeTab }: Clima
     >
       {year}
       {active && (
-        <div className="absolute right-0 -top-[6px] w-[48px]">
-          <span className={clsx("absolute text-[9.5px] top-[10.5px]", year === 2050 ? "left-[16px]" : "left-[19px]")}>
+        <div className="absolute -top-[6px] right-0 w-[48px]">
+          <span className={clsx("absolute top-[10.5px] text-[9.5px]", year === 2050 ? "left-[16px]" : "left-[19px]")}>
             +{temperature}°C
           </span>
           <svg viewBox="0 0 50 50">

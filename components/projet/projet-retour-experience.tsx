@@ -25,36 +25,36 @@ export async function RetourExperience({ params }: { params: { retourExperienceS
           <Image
             width={1920}
             height={384}
-            className="w-full max-h-40 md:max-h-96 object-cover block"
+            className="block max-h-40 w-full object-cover md:max-h-96"
             src={getStrapiImageUrl(retourExperience.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
             alt={retourExperience.attributes.titre || "image titre"}
           />
         </div>
-        <div className="flex flex-col md:flex-row fr-container">
+        <div className="fr-container flex flex-col md:flex-row">
           <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
           <div className="flex-1 md:pl-12">
-            <h1 className={"text-3xl md:text-[40px] md:leading-[3rem] mt-4"}>{retourExperience.attributes.titre}</h1>
-            <CmsRichText label={retourExperience.attributes.description} className={"text-xl leading-8 mt-10"} />
+            <h1 className={"mt-4 text-3xl md:text-[40px] md:leading-[3rem]"}>{retourExperience.attributes.titre}</h1>
+            <CmsRichText label={retourExperience.attributes.description} className={"mt-10 text-xl leading-8"} />
             {retourExperience.attributes.citations &&
               retourExperience.attributes.citations.length > 0 &&
               retourExperience.attributes.citations.map((citation) => (
                 <CustomDSFRQuote key={citation.auteur} citation={citation} className="mt-12" />
               ))}
-            <div className="flex flex-col md:flex-row mt-10">
+            <div className="mt-10 flex flex-col md:flex-row">
               <SituationRetourExperienceCard
                 titre="Avant le projet"
                 situation={retourExperience.attributes.situation_avant}
-                className="mb-4 md:mb-0 md:mr-3 flex-1 bg-dsfr-background-alt-grey"
+                className="mb-4 flex-1 bg-dsfr-background-alt-grey md:mb-0 md:mr-3"
               />
               <SituationRetourExperienceCard
                 titre="Après le projet"
                 situation={retourExperience.attributes.situation_apres}
-                className="md:ml-3 flex-1 bg-dsfr-background-alt-blue-france"
+                className="flex-1 bg-dsfr-background-alt-blue-france md:ml-3"
               />
             </div>
             {solutions && solutions.length > 0 && (
               <>
-                <h2 className="text-3xl mt-10 mb-6">Solutions réalisées</h2>
+                <h2 className="mb-6 mt-10 text-3xl">Solutions réalisées</h2>
                 {solutions.map((solution) => (
                   <SolutionRetourExperienceCard solution={solution} key={solution.id} className="mb-4" />
                 ))}
@@ -62,7 +62,7 @@ export async function RetourExperience({ params }: { params: { retourExperienceS
             )}
             {retourExperience.attributes.calendrier && retourExperience.attributes.calendrier.length > 0 && (
               <div className="fr-accordions-group">
-                <h2 className="text-3xl mt-10 mb-6">Calendrier</h2>
+                <h2 className="mb-6 mt-10 text-3xl">Calendrier</h2>
                 <CalendrierRetourExperienceAccordion etapes={retourExperience.attributes.calendrier} />
               </div>
             )}
@@ -80,7 +80,7 @@ export async function RetourExperience({ params }: { params: { retourExperienceS
               retourExperience.attributes.ressources ||
               retourExperience.attributes.credits) && (
               <>
-                <h2 className="text-3xl mt-10 mb-4">Pour en savoir plus</h2>
+                <h2 className="mb-4 mt-10 text-3xl">Pour en savoir plus</h2>
                 <ItemRetourExperience
                   title="Partenaires"
                   content={retourExperience.attributes.partenaires}
@@ -96,8 +96,8 @@ export async function RetourExperience({ params }: { params: { retourExperienceS
             )}
             {!!(linkedRetourExperiences && linkedRetourExperiences.length > 0) && (
               <>
-                <h2 className="text-3xl mt-10 mb-3">Découvrir d{"'"}autres projets réalisés</h2>
-                <ul className="flex grow list-none flex-wrap p-0 gap-6">
+                <h2 className="mb-3 mt-10 text-3xl">Découvrir d{"'"}autres projets réalisés</h2>
+                <ul className="flex grow list-none flex-wrap gap-6 p-0">
                   {retourExperience.attributes.retour_experiences?.data.map((rex) => (
                     <li key={rex.id}>
                       <RetourExperienceCard retourExperience={rex} />
@@ -108,8 +108,8 @@ export async function RetourExperience({ params }: { params: { retourExperienceS
             )}
             {creditsImage.length > 0 && (
               <>
-                <hr className="pb-8 mt-12" />
-                <div className="text-dsfr-text-title-grey font-bold mb-4">Crédits images</div>
+                <hr className="mt-12 pb-8" />
+                <div className="mb-4 font-bold text-dsfr-text-title-grey">Crédits images</div>
                 <div>{creditsImage.join(", ")}</div>
               </>
             )}

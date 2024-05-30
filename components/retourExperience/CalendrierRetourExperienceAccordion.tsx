@@ -14,7 +14,7 @@ export default async function CalendrierRetourExperienceAccordion({
       className={`${className}`}
       label={
         <div className="flex">
-          <div className="flex-none w-32">{etape.date}</div>
+          <div className="w-32 flex-none">{etape.date}</div>
           <div className="flex-1">{etape.titre}</div>
         </div>
       }

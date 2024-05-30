@@ -26,12 +26,12 @@ export const ClimadiagViewer = ({ data, close }: ClimadiagViewerProps) => {
 
   return (
     <div className="relative bg-white">
-      <div className="fixed w-screen top-0 left-0 -z-[9] h-[2000px] bg-white"></div>
-      <div id="climadiag-viewer" className="bg-white top-0 w-screen h-[2000px] -z-20 fixed left-0">
+      <div className="fixed left-0 top-0 -z-[9] h-[2000px] w-screen bg-white"></div>
+      <div id="climadiag-viewer" className="fixed left-0 top-0 -z-20 h-[2000px] w-screen bg-white">
         <div>
           <div className="px-14 py-10">
             <ClimadiagViewerHeader />
-            <Separator className="mt-6 mb-10" />
+            <Separator className="mb-10 mt-6" />
             <div className="mb-8">
               <ClimadiagIndicateursHeader city={`${data.nom} ${data.code_postal}`} isPDF />
             </div>

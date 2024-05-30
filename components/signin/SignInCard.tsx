@@ -23,9 +23,9 @@ export default function SignInCard({
   const handleSignIn = () => signIn("agentconnect", { callbackUrl });
 
   return (
-    <div className="bg-dsfr-background-alt-grey rounded-2xl px-12 py-9 max-w-xl">
+    <div className="max-w-xl rounded-2xl bg-dsfr-background-alt-grey px-12 py-9">
       <div className="text-xl font-bold text-dsfr-text-title-grey">{messages[message]}</div>
-      <div className="mt-8 mb-8">
+      <div className="mb-8 mt-8">
         Vous n’avez jamais utilisé AgentConnect? Renseignez simplement votre adresse professionnelle.
       </div>
       <div className="fr-connect-group">

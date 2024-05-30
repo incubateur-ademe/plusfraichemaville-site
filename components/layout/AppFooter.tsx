@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function AppFooter() {
   return (
-    <footer className="fr-footer !pt-0 !mt-0 !shadow-none" role="contentinfo" id="footer">
+    <footer className="fr-footer !mt-0 !pt-0 !shadow-none" role="contentinfo" id="footer">
       <hr className="pb-6" />
       <div className="fr-container">
         <div className="fr-footer__body">

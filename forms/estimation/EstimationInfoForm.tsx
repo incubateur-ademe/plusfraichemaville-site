@@ -60,7 +60,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
         subtitle="Choisissez les solutions à estimer pour votre simulation"
         className="pfmv-strong-card "
       >
-        <div className={clsx("flex flex-wrap gap-6 mb-12")}>
+        <div className={clsx("mb-12 flex flex-wrap gap-6")}>
           {projet.fiches_solutions_id?.map((ficheSolutionId) => (
             <FicheSolutionSmallCard
               key={ficheSolutionId}

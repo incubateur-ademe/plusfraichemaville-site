@@ -21,7 +21,7 @@ export default async function SituationRetourExperienceCard({
         <div className="fr-card__content">
           <h3 className="fr-card__title">{titre}</h3>
           <div className="fr-card__desc h-full">
-            <div className={"flex justify-between flex-col h-full"}>
+            <div className={"flex h-full flex-col justify-between"}>
               <CmsRichText label={situation.description} />
             </div>
           </div>
@@ -32,7 +32,7 @@ export default async function SituationRetourExperienceCard({
           <Image
             width={600}
             height={300}
-            className="w-full h-52 object-cover rounded-t-2xl"
+            className="h-52 w-full rounded-t-2xl object-cover"
             src={getStrapiImageUrl(situation.image, STRAPI_IMAGE_KEY_SIZE.medium)}
             alt={titre}
           />

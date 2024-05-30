@@ -53,9 +53,9 @@ export const FichesSolutionProjetBookmarksContainer = ({
     <FicheSolutionSmallCardContainer
       title={title}
       subtitle={subtitle}
-      className="bg-dsfr-background-alt-blue-france rounded-xl mt-10"
+      className="mt-10 rounded-xl bg-dsfr-background-alt-blue-france"
     >
-      <div className="flex flex-wrap gap-8 mb-8">
+      <div className="mb-8 flex flex-wrap gap-8">
         {bookmarksIds?.map((ficheSolutionId, index) => (
           <FicheSolutionSmallCard
             ficheSolutionId={ficheSolutionId}

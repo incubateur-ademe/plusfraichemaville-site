@@ -23,7 +23,7 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
   return (
     <div className="relative">
       <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>
-        <div className={`pfmv-card p-5 pb-16 rounded-xl flex mb-5 relative ${disabledText}`}>
+        <div className={`pfmv-card relative mb-5 flex rounded-xl p-5 pb-16 ${disabledText}`}>
           <div className="mr-6">
             <PictoEspaceSelector
               pictoId={projet.type_espace as PictoId}
@@ -33,26 +33,26 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
             />
           </div>
           <div>
-            <h3 className="text-xl text-dsfr-text-label-blue-france mb-1 mt-2">{projet.nom}</h3>
-            <h4 className="text-dsfr-text-label-blue-france mb-4 text-base">
-              <i className="ri-map-pin-line before:!w-4 mr-1"></i>
+            <h3 className="mb-1 mt-2 text-xl text-dsfr-text-label-blue-france">{projet.nom}</h3>
+            <h4 className="mb-4 text-base text-dsfr-text-label-blue-france">
+              <i className="ri-map-pin-line mr-1 before:!w-4"></i>
               {projet.collectivite.nom}
             </h4>
           </div>
           <div
             className={clsx(
-              "absolute top-5 right-5 text-sm",
-              "before:inline-block before:w-[10px] before:h-[10px] before:mr-2",
-              "before:bg-dsfr-background-action-high-success-hover before:rounded-full",
+              "absolute right-5 top-5 text-sm",
+              "before:mr-2 before:inline-block before:h-[10px] before:w-[10px]",
+              "before:rounded-full before:bg-dsfr-background-action-high-success-hover",
             )}
           >
             En cours
           </div>
         </div>
       </Link>
-      <div className="flex items-center h-8 bottom-6 left-32 absolute">
+      <div className="absolute bottom-6 left-32 flex h-8 items-center">
         <Link
-          className="fr-btn fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
+          className="fr-btn fr-btn--sm fr-btn fr-btn--icon-left mr-4 rounded-3xl"
           href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}
           style={{ ...disabledButton }}
         >

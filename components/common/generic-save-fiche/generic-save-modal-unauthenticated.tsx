@@ -15,7 +15,7 @@ export const GenericSaveModalUnauthenticated = ({ modal, type }: GenericSaveModa
         </h1>
         <div>Retrouvez toutes vos {mentions} mises en favoris dans Ma sélection.</div>
         <div className="mt-6">
-          <Button className={"rounded-3xl text-sm mr-6 mb-2"} onClick={() => modal.close()} size="small">
+          <Button className={"mb-2 mr-6 rounded-3xl text-sm"} onClick={() => modal.close()} size="small">
             Continuer ma lecture
           </Button>
           <Button

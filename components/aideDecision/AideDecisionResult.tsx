@@ -36,12 +36,12 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
             <AideDecisionBreadcrumbs
               currentPageLabel={aideDecisionEtape.nom}
               historique={historique}
-              className="hidden md:block md:mt-60"
+              className="hidden md:mt-60 md:block"
             />
           )}
           <div className="grow overflow-x-auto">
             {previousStep && (
-              <div className="mt-8 text-center md:text-left hidden md:block">
+              <div className="mt-8 hidden text-center md:block md:text-left">
                 <Link
                   className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
                   href={`${PFMV_ROUTES.AIDE_DECISION}/${previousStep.slug}`}
@@ -50,11 +50,11 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                 </Link>
               </div>
             )}
-            <h1 className={"mb-4 pt-10 fr-h4 text-center md:text-left"}>
+            <h1 className={"fr-h4 mb-4 pt-10 text-center md:text-left"}>
               Découvrez les solutions proposées pour votre recherche
             </h1>
             <AideDecisionSortFilter className="mb-9" />
-            <ul className="flex list-none flex-wrap justify-center md:justify-start gap-6 pl-2">
+            <ul className="flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
               {sortedFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.id} className="flex">
                   <FicheSolutionCardWithUserInfo
@@ -67,10 +67,10 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
             </ul>
             {relatedRetourExperiences.length > 0 && (
               <>
-                <h1 className={"mb-6 mt-16 fr-h4 text-center md:text-left"}>
+                <h1 className={"fr-h4 mb-6 mt-16 text-center md:text-left"}>
                   Découvrez les projets réalisés pour les solutions proposées
                 </h1>
-                <ul className="flex list-none overflow-x-auto md:justify-start pt-2 gap-6 pl-2">
+                <ul className="flex list-none gap-6 overflow-x-auto pl-2 pt-2 md:justify-start">
                   {relatedRetourExperiences.map((rex) => (
                     <li key={rex?.data.id} className="flex">
                       <RetourExperienceCard retourExperience={rex?.data} />

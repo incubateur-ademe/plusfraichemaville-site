@@ -26,29 +26,29 @@ export function FicheSolutionSmallCard({
   }
   const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
   return (
-    <div className={`flex w-60 flex-col md:ml-0 relative ${className}`} onClick={onClick}>
-      <div className="flex w-full h-32">
+    <div className={`relative flex w-60 flex-col md:ml-0 ${className}`} onClick={onClick}>
+      <div className="flex h-32 w-full">
         <Image
           width={450}
           height={300}
           src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={ficheSolution.attributes.titre}
-          className={"w-full h-full object-cover rounded-t-2xl"}
+          className={"h-full w-full rounded-t-2xl object-cover"}
         />
       </div>
-      <div className="px-6 pt-6 pb-4 flex flex-col grow">
+      <div className="flex grow flex-col px-6 pb-4 pt-6">
         {typeSolution && (
           <>
-            <div className="flex flex-row text-xs mb-2 text-dsfr-text-mention-grey">
+            <div className="mb-2 flex flex-row text-xs text-dsfr-text-mention-grey">
               {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           </>
         )}
-        <div className={"text-lg font-bold text-dsfr-text-title-grey text-blue-hover"}>
+        <div className={"text-blue-hover text-lg font-bold text-dsfr-text-title-grey"}>
           {ficheSolution.attributes.titre}
         </div>
-        <div className={"text-sm text-dsfr-text-title-grey mt-4"}>{ficheSolution.attributes.description_courte}</div>
+        <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheSolution.attributes.description_courte}</div>
         <div className={"mt-auto"}>
           <div className="mt-4 flex place-content-center">{children}</div>
         </div>

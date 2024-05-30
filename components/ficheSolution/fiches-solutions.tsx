@@ -35,7 +35,7 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
     );
   return (
     <div className="fr-container">
-      <TypeEspaceFilter className="mb-8 mt-8 md:ml-52 flex justify-center md:justify-normal" />
+      <TypeEspaceFilter className="mb-8 mt-8 flex justify-center md:ml-52 md:justify-normal" />
       <div className="flex flex-col md:flex-row">
         <div className="md:min-w-[13rem]">
           <TypeSolutionFilter className="mb-6" />
@@ -45,7 +45,7 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
           <div className="text-xl font-bold">Aucune fiche solution ne correspond à vos critères.</div>
         ) : (
           <div className="grow list-none p-0">
-            <ul className="flex flex-wrap gap-6 p-0 m-0 justify-center md:justify-normal">
+            <ul className="m-0 flex flex-wrap justify-center gap-6 p-0 md:justify-normal">
               {filteredFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.id} className="flex">
                   <FicheSolutionCardWithUserInfo projectName={""} ficheSolution={ficheSolution} />

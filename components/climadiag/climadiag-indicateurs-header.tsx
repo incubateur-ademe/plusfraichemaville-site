@@ -5,8 +5,8 @@ type ClimadiagIndicateursHeaderProps = {
 
 export const ClimadiagIndicateursHeader = ({ city, isPDF }: ClimadiagIndicateursHeaderProps) => {
   return (
-    <div className=" text-xl font-bold mb-4">
-      {!isPDF && <i className="ri-map-pin-line before:!w-[14px] mr-1"></i>}
+    <div className=" mb-4 text-xl font-bold">
+      {!isPDF && <i className="ri-map-pin-line mr-1 before:!w-[14px]"></i>}
       {city}
     </div>
   );

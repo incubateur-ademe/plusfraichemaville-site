@@ -11,10 +11,10 @@ export default function AideDecisionFirstStepEtapeCard({
 }) {
   return (
     <Link
-      className="!bg-none w-32 h-32 flex flex-col items-center pfmv-card"
+      className="pfmv-card flex h-32 w-32 flex-col items-center !bg-none"
       href={`${PFMV_ROUTES.AIDE_DECISION}/${aideDecisionEtape.slug}`}
     >
-      <div className={"text-sm text-center text-pfmv-light-grey"}>&nbsp;</div>
+      <div className={"text-center text-sm text-pfmv-light-grey"}>&nbsp;</div>
       <div>
         <Image
           width={80}
@@ -24,7 +24,7 @@ export default function AideDecisionFirstStepEtapeCard({
           className={"svg-blue-hover"}
         />
       </div>
-      <div className={"text-sm text-center"}>{aideDecisionEtape.nom}</div>
+      <div className={"text-center text-sm"}>{aideDecisionEtape.nom}</div>
     </Link>
   );
 }

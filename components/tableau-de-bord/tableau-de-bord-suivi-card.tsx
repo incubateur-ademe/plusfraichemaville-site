@@ -43,18 +43,18 @@ export const TableauDeBordSuiviCard = ({
   return (
     <Link
       href={linkResolver(+projetId)}
-      className={clsx("!bg-none active:bg-transparent !rounded-2xl", disabled && "pointer-events-none")}
+      className={clsx("active:bg-transparent !rounded-2xl !bg-none", disabled && "pointer-events-none")}
     >
-      <div className={clsx("pfmv-card w-[355px] h-[370px] !rounded-2xl cursor-pointer")}>
+      <div className={clsx("pfmv-card h-[370px] w-[355px] cursor-pointer !rounded-2xl")}>
         <div
           className={clsx(
-            "h-1/2 !rounded-t-2xl flex justify-center items-center relative",
+            "relative flex h-1/2 items-center justify-center !rounded-t-2xl",
             disabled ? "bg-dsfr-background-alt-grey" : " bg-dsfr-border-default-blue-france",
           )}
         >
           <small
             className={clsx(
-              "absolute top-3 left-6 text-2xl font-bold",
+              "absolute left-6 top-3 text-2xl font-bold",
               disabled ? "text-dsfr-text-disabled-grey" : "text-dsfr-blue-france-925",
             )}
           >
@@ -63,10 +63,10 @@ export const TableauDeBordSuiviCard = ({
           {picto}
         </div>
         <div className="h-auto p-6 pt-4">
-          <h3 className={clsx("flex items-center mb-2 min-h-[3.5rem] text-xl", disabledTextClass)}>{title}</h3>
-          <div className={clsx("mb-3 h-12 relative", disabledTextClass)}>{children}</div>
+          <h3 className={clsx("mb-2 flex min-h-[3.5rem] items-center text-xl", disabledTextClass)}>{title}</h3>
+          <div className={clsx("relative mb-3 h-12", disabledTextClass)}>{children}</div>
           <div>
-            <div className="relative flex items-center h-8">
+            <div className="relative flex h-8 items-center">
               {disabled ? (
                 <Badge small severity="new" className="!bg-dsfr-border-default-grey">
                   Bientôt disponible
