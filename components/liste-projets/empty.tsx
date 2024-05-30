@@ -29,7 +29,7 @@ export const ListProjetsHeaderEmpty = () => {
         <Link
           href={PFMV_ROUTES.CREATE_PROJET}
           className={clsx(
-            "fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl",
+            "fr-btn ri-add-circle-fill fr-btn--icon-left rounded-[10px]",
             "w-full h-full !flex-col items-center justify-center gap-3",
             "before:!m-0 before:!size-6",
           )}
