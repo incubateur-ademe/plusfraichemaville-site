@@ -1,6 +1,6 @@
 "use client";
 
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import FicheSolutionCardWithUserInfo, { FicheSolutionCardWithUserInfoProps } from "./FicheSolutionCardWithUserInfo";
 import { makeFicheSolutionCompleteUrlApi, makeFicheSolutionUrlApi } from "./helpers";
 import { FicheSolutionResponse } from "./type";
@@ -13,7 +13,7 @@ interface FicheSolutionCardWithFetcherProps extends Omit<FicheSolutionCardWithUs
 
 export const FicheSolutionCardWithFetcher = ({ complete, id, ...props }: FicheSolutionCardWithFetcherProps) => {
   const urlMaker = complete ? makeFicheSolutionCompleteUrlApi : makeFicheSolutionUrlApi;
-  const { data, isLoading } = useSwrWithFetcher<FicheSolutionResponse[]>(urlMaker(id));
+  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(urlMaker(id));
 
   return !data && isLoading ? (
     <FicheCardSkeleton />

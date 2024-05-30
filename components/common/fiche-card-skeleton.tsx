@@ -1,22 +1,18 @@
 import clsx from "clsx";
 
-export const FicheCardSkeleton = ({ vertical }: { vertical?: boolean }) => {
+export const FicheCardSkeleton = ({ horizontal }: { horizontal?: boolean }) => {
   return (
     <div
-      className={clsx(
-        "pfmv-card  bg-white",
-        vertical ? "h-52 lg:w-full lg:max-w-[53rem]" : "h-[40.3125rem] w-72",
-        // small ? "h-[26rem]" : "h-[40.3125rem]",
-      )}
+      className={clsx("pfmv-card  bg-white", horizontal ? "h-52 lg:w-full lg:max-w-[53rem]" : "h-[40.3125rem] w-72")}
     >
-      <div className={clsx("animate-pulse", vertical && "flex")}>
+      <div className={clsx("animate-pulse", horizontal && "flex")}>
         <div
           className={clsx(
             "bg-dsfr-contrast-grey h-52",
-            vertical ? "w-72 rounded-tl-xl rounded-bl-xl" : "w-full rounded-t-xl shrink-0",
+            horizontal ? "w-72 rounded-tl-xl rounded-bl-xl" : "w-full rounded-t-xl shrink-0",
           )}
         ></div>
-        <div className={clsx(vertical && "w-full")}>
+        <div className={clsx(horizontal && "w-full")}>
           <div
             className={clsx(
               "bg-dsfr-background-contrast-green-menthe-active opacity-30",
