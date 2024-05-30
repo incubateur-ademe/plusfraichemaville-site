@@ -23,18 +23,18 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
   return (
     <div className="relative">
       <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>
-        <div className={`pfmv-card p-5 pb-16 rounded-xl flex mb-5 relative ${disabledText}`}>
+        <div className={`pfmv-card p-5 rounded-xl flex mb-5 relative ${disabledText}`}>
           <div className="mr-6">
             <PictoEspaceSelector
               pictoId={projet.type_espace as PictoId}
               withBackground
-              size="medium"
+              size="large"
               pictoClassName="svg-blue"
             />
           </div>
           <div>
-            <h3 className="text-xl text-dsfr-text-label-blue-france mb-1 mt-2">{projet.nom}</h3>
-            <h4 className="text-dsfr-text-label-blue-france mb-4 text-base">
+            <h3 className="text-[22px] text-dsfr-text-label-blue-france mb-0">{projet.nom}</h3>
+            <h4 className="text-dsfr-text-label-blue-france mb-4 text-lg">
               <i className="ri-map-pin-line before:!w-4 mr-1"></i>
               {projet.collectivite.nom}
             </h4>
@@ -50,9 +50,9 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
           </div>
         </div>
       </Link>
-      <div className="flex items-center h-8 bottom-6 left-32 absolute">
+      <div className="flex items-center h-8 bottom-6 left-[11.5rem] absolute">
         <Link
-          className="fr-btn fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
+          className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl mr-4"
           href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}
           style={{ ...disabledButton }}
         >
