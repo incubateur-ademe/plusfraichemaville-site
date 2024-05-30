@@ -1,12 +1,9 @@
 import { FichesSolutionsProjetEmpty } from ".";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/helpers/routes";
-
 import { FichesSolutionsProjetsSelectedCard } from "./fiches-solutions-projet-selected-card";
-
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { updateFichesSolutionsValidatedAction } from "@/actions/projets/update-fiches-solutions-validated-action";
 import { notifications } from "../common/notifications";
