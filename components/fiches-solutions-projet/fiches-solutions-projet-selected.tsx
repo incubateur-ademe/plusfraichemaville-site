@@ -1,12 +1,9 @@
 import { FichesSolutionsProjetEmpty } from ".";
-
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/helpers/routes";
-
 import { FichesSolutionsProjetsSelectedCard } from "./fiches-solutions-projet-selected-card";
-
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { updateFichesSolutionsValidatedAction } from "@/actions/projets/update-fiches-solutions-validated-action";
 import { notifications } from "../common/notifications";
@@ -63,7 +60,7 @@ export const FichesSolutionsProjetsSelected = ({
         <Link
           href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(+projetId)}
           className={clsx(
-            "fr-btn !h-32 !w-32 rounded-3xl bg-dsfr-text-label-blue-france",
+            "fr-btn !h-32 !w-32 rounded-[10px] bg-dsfr-text-label-blue-france",
             "flex !flex-col items-center justify-center",
             "self-center",
           )}
