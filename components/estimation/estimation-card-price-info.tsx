@@ -3,7 +3,7 @@ import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes
 
 export const EstimationCardPriceInfo = ({ estimationInfo }: { estimationInfo?: EstimationMateriauxFicheSolution }) => {
   if (!estimationInfo) {
-    return <div className="text-dsfr-text-error text-sm font-bold min-h-[2.5rem]">Non complétée</div>;
+    return <div className="min-h-[2.5rem] text-sm font-bold text-dsfr-text-error">Non complétée</div>;
   }
   return (
     <div className="text-sm">

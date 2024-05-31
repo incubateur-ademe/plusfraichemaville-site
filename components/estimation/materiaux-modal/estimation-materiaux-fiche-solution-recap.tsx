@@ -38,12 +38,12 @@ export function EstimationMateriauxFicheSolutionRecap({
 
   return (
     <div className="text-dsfr-text-title-grey">
-      <hr className="p-0 h-[1px] mb-4" />
-      <div className={"flex flex-row gap-6 justify-between items-center mb-6"}>
+      <hr className="mb-4 h-[1px] p-0" />
+      <div className={"mb-6 flex flex-row items-center justify-between gap-6"}>
         <div className="text-[1.375rem] font-bold">{ficheSolution.attributes.titre}</div>
         <span
           onClick={() => goToFicheSolutionStep(ficheSolution.id)}
-          className="fr-icon-edit-box-line text-dsfr-text-label-blue-france cursor-pointer"
+          className="fr-icon-edit-box-line cursor-pointer text-dsfr-text-label-blue-france"
           aria-hidden="true"
         ></span>
       </div>
@@ -51,15 +51,15 @@ export function EstimationMateriauxFicheSolutionRecap({
         (materiau) =>
           getQuantiteByMateriauId(materiau.id) > 0 && (
             <div key={materiau.id}>
-              <div className={"flex flex-row gap-6 justify-between items-center my-2 basis-full"}>
+              <div className={"my-2 flex basis-full flex-row items-center justify-between gap-6"}>
                 <div className="flex flex-row items-center">
-                  <div className="w-16 h-16 relative flex flex-none mr-6">
+                  <div className="relative mr-6 flex h-16 w-16 flex-none">
                     <Image
                       fill
                       sizes="(max-width: 768px) 80vw, 20vw"
                       src={getStrapiImageUrl(materiau.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
                       alt={materiau.attributes.titre}
-                      className={"object-cover rounded-xl"}
+                      className={"rounded-xl object-cover"}
                     />
                   </div>
                   <div>{materiau.attributes.titre}</div>
@@ -72,7 +72,7 @@ export function EstimationMateriauxFicheSolutionRecap({
                       getQuantiteByMateriauId(materiau.id),
                     )}`}</strong>
                   </div>
-                  <div className="text-dsfr-text-mention-grey text-sm">
+                  <div className="text-sm text-dsfr-text-mention-grey">
                     Ent.
                     <strong>{` ${getLabelCoutEntretienByQuantite(
                       materiau.attributes,
@@ -84,7 +84,7 @@ export function EstimationMateriauxFicheSolutionRecap({
             </div>
           ),
       )}
-      <div className="bg-dsfr-contrast-grey p-4 mb-2 mt-6">
+      <div className="mb-2 mt-6 bg-dsfr-contrast-grey p-4">
         <div className="flex flex-row justify-between">
           <div className="font-bold">Total Investissement</div>
           <div>

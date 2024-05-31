@@ -17,7 +17,7 @@ export default function AideDecisionBreadcrumbs({
       {historique.map((step, index) => (
         <div className={`${styles.step}`} key={index}>
           <div className={`${styles.vStepper}`}>
-            <div className={`${styles.circle} text-xs text-center`}>{index + 1}</div>
+            <div className={`${styles.circle} text-center text-xs`}>{index + 1}</div>
             <div className={`${styles.line}`} />
           </div>
           <Link
@@ -31,7 +31,7 @@ export default function AideDecisionBreadcrumbs({
       {currentPageLabel && (
         <div className={`${styles.step}`}>
           <div className={`${styles.vStepper}`}>
-            <div className={`${styles.circle} text-xs text-center`}>{historique.length + 1}</div>
+            <div className={`${styles.circle} text-center text-xs`}>{historique.length + 1}</div>
             <div className={`${styles.line}`} />
           </div>
           <div className={`${styles.content} font-bold`}>{currentPageLabel}</div>

@@ -21,14 +21,14 @@ export default async function RetoursExperiences({
 
   return (
     <div className="fr-container">
-      <TypeEspaceFilter className="mb-8 mt-8 md:ml-52 flex justify-center md:justify-normal" />
+      <TypeEspaceFilter className="mb-8 mt-8 flex justify-center md:ml-52 md:justify-normal" />
       <div className="flex flex-col md:flex-row">
-        <RegionFilter className="md:min-w-[13rem] mb-6" />
+        <RegionFilter className="mb-6 md:min-w-[13rem]" />
         {filteredRetoursExperiences.length === 0 ? (
           <div className="text-xl font-bold">{"Aucun retour d'expérience ne correspond à vos critères."}</div>
         ) : (
           <div className="grow list-none flex-wrap justify-center p-0">
-            <ul className="flex grow list-none flex-wrap p-0 gap-6 justify-center md:justify-normal">
+            <ul className="flex grow list-none flex-wrap justify-center gap-6 p-0 md:justify-normal">
               {filteredRetoursExperiences.map((retourExperience) => (
                 <li key={retourExperience.id}>
                   <RetourExperienceCard retourExperience={retourExperience} />

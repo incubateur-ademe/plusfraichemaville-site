@@ -16,13 +16,13 @@ export default function EstimationMateriauGlobalPriceFooter({
   return (
     <>
       {title && <div className="mt-8 text-[1.375rem] font-bold">{`Estimation pour ${title}`}</div>}
-      <div className="mt-8 text-[1.375rem] font-bold flex flex-row justify-between max-w-[30rem] ml-auto mr-0">
+      <div className="ml-auto mr-0 mt-8 flex max-w-[30rem] flex-row justify-between text-[1.375rem] font-bold">
         <div>Investissement :</div>
         <div>
           <strong>{`${investissementMin} - ${investissementMax} € `}</strong>HT
         </div>
       </div>
-      <div className="mt-2 mb-6 ml-auto mr-0 text-lg flex flex-row justify-between max-w-[30rem]">
+      <div className="mb-6 ml-auto mr-0 mt-2 flex max-w-[30rem] flex-row justify-between text-lg">
         <div>Entretien :</div>
         <div>
           <strong>{`${entretienMin} - ${entretienMax} € `}</strong>HT par an

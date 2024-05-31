@@ -17,7 +17,7 @@ export default function CreateEstimationPage() {
 
   return (
     <div className="fr-container pt-8">
-      <div className="text-2xl font-bold mb-2">{"Je fais une estimation de budget pour mon projet"}</div>
+      <div className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</div>
       <div className="text-lg">{`Mes solutions sélectionnées pour mon projet ${currentProjet?.nom}.`}</div>
       <div className="mb-10  text-lg">
         {`Vous pouvez estimer une fourchette de prix en fonction des matériaux et systèmes choisis.`}
@@ -27,7 +27,7 @@ export default function CreateEstimationPage() {
           <EstimationOverviewCard key={estimation.id} estimation={estimation} />
         ))}
       </div>
-      <div className="flex flex-row gap-6 mt-12">
+      <div className="mt-12 flex flex-row gap-6">
         <Button
           className="rounded-3xl"
           iconId="ri-add-circle-fill"

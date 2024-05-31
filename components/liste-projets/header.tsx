@@ -5,10 +5,10 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) => {
   return (
     <>
-      <div className="pb-4 flex justify-between">
+      <div className="flex justify-between pb-4">
         <div className="w-full">
-          <h2 className="text-dsfr-text-label-blue-france text-2xl mb-1">Mon espace projet</h2>
-          <span className="text-lg block mb-8">Les projets de rafraîchissement de ma collectivité</span>
+          <h2 className="mb-1 text-2xl text-dsfr-text-label-blue-france">Mon espace projet</h2>
+          <span className="mb-8 block text-lg">Les projets de rafraîchissement de ma collectivité</span>
           {isListEmpty && <ListProjetsHeaderEmpty />}
         </div>
         {!isListEmpty && (

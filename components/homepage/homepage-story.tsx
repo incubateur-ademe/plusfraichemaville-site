@@ -24,25 +24,25 @@ export const HomepageStory = ({ story }: HomepageStoryProps) => {
       <Link href={`${PFMV_ROUTES.FICHES_SOLUTIONS}/${story.slug}`}>
         <div
           className={clsx(
-            "md:w-[358px] md:h-[540px] shrink-0 rounded-2xl flex justify-end flex-col pt-5",
-            "w-[210px] h-[296px] relative overflow-hidden",
-            "md:py-10 px-5 md:px-8 py-5",
+            "flex shrink-0 flex-col justify-end rounded-2xl pt-5 md:h-[540px] md:w-[358px]",
+            "relative h-[296px] w-[210px] overflow-hidden",
+            "px-5 py-5 md:px-8 md:py-10",
             `gradient-solution-${typeSolution?.code}`,
           )}
         >
           {typeSolution && (
-            <div className="flex text-sm md:text-lg mb-2 text-white">
+            <div className="mb-2 flex text-sm text-white md:text-lg">
               {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           )}
-          <h4 className="text-white text-base md:text-[22px] md:leading-7 m-0">{story.title}</h4>
+          <h4 className="m-0 text-base text-white md:text-[22px] md:leading-7">{story.title}</h4>
           <Image
             src={story.image}
             alt={story.alt}
             fill
             sizes="60vw"
-            className="-z-10 object-cover group-hover:scale-[1.05] transition-transform duration-300 ease-in"
+            className="-z-10 object-cover transition-transform duration-300 ease-in group-hover:scale-[1.05]"
           />
         </div>
       </Link>

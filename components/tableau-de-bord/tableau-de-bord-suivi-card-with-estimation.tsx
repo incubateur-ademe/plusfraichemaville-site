@@ -22,7 +22,7 @@ export const TableauDeBordSuiviWithEstimation = () => {
   }
 
   return (
-    <div className="flex flex-row justify-between text-sm mt-auto">
+    <div className="mt-auto flex flex-row justify-between text-sm">
       <div className="font-bold">Dernière estimation :</div>
       <div className="text-right">
         <div>

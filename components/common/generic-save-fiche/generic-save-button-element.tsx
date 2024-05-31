@@ -22,10 +22,10 @@ export const GenericSaveButtonElement = ({
   withLabel,
 }: GenericSaveFicheButtonBaseProps) => {
   return (
-    <div className={clsx(className, "z-[1] relative")}>
+    <div className={clsx(className, "relative z-[1]")}>
       <button onClick={update} className={clsx(assets.className)}>
         {assets.code && (
-          <div className={clsx("w-8 h-8 rounded-full flex items-center justify-center savePicto")}>
+          <div className={clsx("savePicto flex h-8 w-8 items-center justify-center rounded-full")}>
             <GenericSavePicto />
           </div>
         )}

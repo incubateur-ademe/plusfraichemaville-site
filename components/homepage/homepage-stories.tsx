@@ -11,8 +11,8 @@ import clsx from "clsx";
 export const HomepageStories = () => {
   const { stories } = homepageData;
   return (
-    <div className="mb-11 relative">
-      <h3 className={clsx("my-14 text-lg lg:text-2xl text-pfmv-navy max-w-2xl text-center mx-auto", "px-10 lg:px-0")}>
+    <div className="relative mb-11">
+      <h3 className={clsx("mx-auto my-14 max-w-2xl text-center text-lg text-pfmv-navy lg:text-2xl", "px-10 lg:px-0")}>
         {stories.title}
       </h3>
       <div>
@@ -22,7 +22,7 @@ export const HomepageStories = () => {
           hasTrack={false}
           options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
         >
-          <SplideTrack className="!pl-3 lg:!pl-6 overflow-auto lg:!overflow-hidden">
+          <SplideTrack className="overflow-auto !pl-3 lg:!overflow-hidden lg:!pl-6">
             {stories.cards.map((story, index) => (
               <SplideSlide className="!mr-3 md:!mr-6" key={index}>
                 <HomepageStory story={story} key={index} />

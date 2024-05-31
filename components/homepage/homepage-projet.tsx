@@ -6,22 +6,22 @@ import clsx from "clsx";
 export const HomepageProjet = () => {
   const { projet } = homepageData;
   return (
-    <div className="relative gradient-l-to-r-navy min-h-80 lg:min-h-0">
-      <div className="fr-container flex flex-col lg:block pt-60 lg:pt-40 pb-10 lg:pb-36 ">
+    <div className="gradient-l-to-r-navy relative min-h-80 lg:min-h-0">
+      <div className="fr-container flex flex-col pb-10 pt-60 lg:block lg:pb-36 lg:pt-40 ">
         <h2
           className={clsx(
-            "text-[18px] text-center lg:text-left lg:text-3xl font-bold mb-6 text-white",
+            "mb-6 text-center text-[18px] font-bold text-white lg:text-left lg:text-3xl",
             "leading-6 lg:leading-10",
           )}
         >
           {multilines(projet.title)}
         </h2>
-        <p className="hidden lg:block mb-11 text-white">{multilines(projet.subtitle)}</p>
+        <p className="mb-11 hidden text-white lg:block">{multilines(projet.subtitle)}</p>
         <Link
           className={clsx(
-            "fr-btn fr-btn--secondary rounded-3xl !text-white !shadow-none border-[1px] border-white",
-            "hover:!text-pfmv-navy hover:!bg-white transition-[background] duration-300",
-            "!lg:flex mx-auto !lg:mx-0",
+            "fr-btn fr-btn--secondary rounded-3xl border-[1px] border-white !text-white !shadow-none",
+            "transition-[background] duration-300 hover:!bg-white hover:!text-pfmv-navy",
+            "!lg:flex !lg:mx-0 mx-auto",
           )}
           href={projet.cta.url}
         >

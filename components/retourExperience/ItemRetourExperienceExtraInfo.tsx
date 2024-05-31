@@ -11,7 +11,7 @@ export default async function ItemRetourExperienceExtraInfo({
 }) {
   return !content ? null : (
     <>
-      <div className={`basis-1/2 md:basis-auto mb-3 ${className}`}>
+      <div className={`mb-3 basis-1/2 md:basis-auto ${className}`}>
         <div className="font-bold">{title}</div>
         <CmsRichText label={content} />
       </div>

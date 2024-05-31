@@ -52,7 +52,7 @@ export const TableauDeBordTabs = () => {
   return (
     <>
       <div className="bg-dsfr-background-alt-blue-france">
-        <div className="flex fr-container">
+        <div className="fr-container flex">
           {tabs.map((tab, index) => (
             <Link
               href={PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(+projetId, tab.filter)}
@@ -60,12 +60,12 @@ export const TableauDeBordTabs = () => {
               data-index=""
               className={clsx(
                 getButtonTabClassName(currentTab === tab.filter),
-                "!bg-none relative",
+                "relative !bg-none",
                 !recommandationsAlreadyViewed &&
                   tab.filter === "recommandation" &&
                   currentProjet?.fiches_solutions_id &&
                   currentProjet.fiches_solutions_id.length > 0 &&
-                  `after:right-4 after:rounded-full after:w-[7.5px] after:h-[7.5px]`,
+                  `after:right-4 after:h-[7.5px] after:w-[7.5px] after:rounded-full`,
                 tab.filter === "recommandation" &&
                   "after:absolute after:top-2 after:bg-dsfr-background-flat-blue-france",
               )}
@@ -78,7 +78,7 @@ export const TableauDeBordTabs = () => {
         </div>
       </div>
 
-      <div className="tabs bg-dsfr-border-action-low-blue-france min-h-[40rem] py-10">
+      <div className="tabs min-h-[40rem] bg-dsfr-border-action-low-blue-france py-10">
         <div className="fr-container">
           {tabs.map(
             (tab, index) =>

@@ -26,20 +26,20 @@ export const TableauDeBordSuiviCardProgress = ({ progress }: TableauDeBordSuiviC
 
   return (
     <>
-      <div className="w-2/3 relative">
+      <div className="relative w-2/3">
         <div
           className={clsx(
-            "h-2 absolute left-0 bg-dsfr-background-action-high-success-hover",
+            "absolute left-0 h-2 bg-dsfr-background-action-high-success-hover",
             " text-dsfr-background-action-low-blue-france",
-            `rounded-3xl origin-top-left z-10 ${widthClass}`,
+            `z-10 origin-top-left rounded-3xl ${widthClass}`,
           )}
         ></div>
-        <div className={`w-full h-2 relative bg-dsfr-border-default-grey rounded-3xl`}></div>
+        <div className={`relative h-2 w-full rounded-3xl bg-dsfr-border-default-grey`}></div>
       </div>
       {progressValue == "100" && (
         <i className="ri-checkbox-circle-fill ml-2 text-dsfr-background-action-high-success-hover"></i>
       )}
-      <span className="text-xs ml-2 text-dsfr-background-action-high-success-hover font-medium">{label}</span>
+      <span className="ml-2 text-xs font-medium text-dsfr-background-action-high-success-hover">{label}</span>
     </>
   );
 };

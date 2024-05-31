@@ -17,7 +17,7 @@ export const FichesSolutionsFavoris = ({
         linkProps={{
           href: PFMV_ROUTES.FICHES_SOLUTIONS,
         }}
-        className={"rounded-3xl mt-8"}
+        className={"mt-8 rounded-3xl"}
       >
         Découvrir les solutions
       </Button>

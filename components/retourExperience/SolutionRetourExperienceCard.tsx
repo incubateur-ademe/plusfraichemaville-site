@@ -13,7 +13,7 @@ export default async function SolutionRetourExperienceCard({
 }) {
   return (
     <div className={className}>
-      <div className={`max-w-3xl flex ${className}`}>
+      <div className={`flex max-w-3xl ${className}`}>
         <div className="relative h-32 w-32 flex-none">
           <Image
             fill
@@ -23,7 +23,7 @@ export default async function SolutionRetourExperienceCard({
             alt={solution.attributes.titre}
           />
         </div>
-        <div className="grow ml-4 md:ml-12">
+        <div className="ml-4 grow md:ml-12">
           <div className="text-xl font-bold">{solution.attributes.titre}</div>
           <CmsRichText label={solution.attributes.description || ""} />
           {solution.attributes.fiche_solution?.data && (
