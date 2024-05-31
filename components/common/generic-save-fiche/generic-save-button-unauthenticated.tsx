@@ -1,4 +1,4 @@
-import { navSelectionBadgeOn } from "@/helpers/notification-badge";
+import { setBadgeOn, NotificationElements } from "@/helpers/notification-badge";
 import { selectSavedOrUnsavedAssets } from "./assets";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { GenericSaveButtonElement } from "./generic-save-button-element";
@@ -21,7 +21,7 @@ export const GenericSaveUnauthenticated = ({ ...props }: GenericSaveFicheButtonW
   const assets = selectSavedOrUnsavedAssets(isBookmarked, "common");
   const updater = () => {
     update();
-    !isBookmarked && navSelectionBadgeOn();
+    !isBookmarked && setBadgeOn(NotificationElements.selectionMenuItem);
   };
   return <GenericSaveButtonElement isSaved={isBookmarked} assets={assets} update={updater} {...props} />;
 };

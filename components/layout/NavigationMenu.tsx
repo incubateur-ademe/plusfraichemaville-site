@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useSession } from "next-auth/react";
 import { useProjetsStore } from "@/stores/projets/provider";
-import { NOTIF_BADGE_CLASSNAME, navSelectionBadgeOff } from "@/helpers/notification-badge";
+import { setBadgeOff, NotificationElements } from "@/helpers/notification-badge";
 
 export default function NavigationMenu() {
   const pathname = usePathname();
@@ -42,12 +42,12 @@ export default function NavigationMenu() {
             target: "_self",
             onClick: () => {
               cancelCurrentProjet();
-              navSelectionBadgeOff();
+              setBadgeOff(NotificationElements.selectionMenuItem);
             },
           },
           text: "Ma sélection",
           isActive: pathname?.startsWith(PFMV_ROUTES.MES_FICHES_SOLUTIONS),
-          className: NOTIF_BADGE_CLASSNAME,
+          className: NotificationElements.selectionMenuItem,
         },
         {
           linkProps: { href: "/contact", target: "_self", onClick: cancelCurrentProjet },

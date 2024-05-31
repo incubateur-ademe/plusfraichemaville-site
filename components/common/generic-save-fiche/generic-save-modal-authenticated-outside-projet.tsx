@@ -7,7 +7,7 @@ import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
-import { navSelectionBadgeOff } from "@/helpers/notification-badge";
+import { setBadgeOff, NotificationElements } from "@/helpers/notification-badge";
 
 export const ModalSaveModalAuthenticatedOutsideProjet = ({
   modal,
@@ -77,7 +77,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
       <Link
         onClick={() => {
           modal.close();
-          navSelectionBadgeOff();
+          setBadgeOff(NotificationElements.selectionMenuItem);
         }}
         href={type === "solution" ? PFMV_ROUTES.MES_FICHES_SOLUTIONS : PFMV_ROUTES.MES_FICHES_SOLUTIONS}
         className="fr-btn fr-btn--secondary rounded-3xl !min-h-fit !text-sm mr-4"

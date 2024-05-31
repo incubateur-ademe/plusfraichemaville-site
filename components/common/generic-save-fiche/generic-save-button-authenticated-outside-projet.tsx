@@ -3,7 +3,7 @@ import { useUserStore } from "@/stores/user/provider";
 import { selectSavedOrUnsavedAssets } from "./assets";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { isFicheBookmarked } from "./helpers";
-import { navSelectionBadgeOn } from "@/helpers/notification-badge";
+import { setBadgeOn, NotificationElements } from "@/helpers/notification-badge";
 
 export const GenericSaveAuthenticatedOutsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
   const isSolution = props.type === "solution";
@@ -15,7 +15,7 @@ export const GenericSaveAuthenticatedOutsideProjet = ({ opener, ...props }: Gene
   const update = () => {
     updater(props.type, props.id, props.projectName ?? "");
     !isSaved && opener && opener();
-    !isSaved && navSelectionBadgeOn();
+    !isSaved && setBadgeOn(NotificationElements.selectionMenuItem);
   };
 
   const assets = selectSavedOrUnsavedAssets(isSaved, "common");
