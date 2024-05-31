@@ -60,7 +60,7 @@ export const FichesSolutionsProjetsSelected = ({
         <Link
           href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(+projetId)}
           className={clsx(
-            "fr-btn !w-32 !h-32 rounded-3xl bg-dsfr-text-label-blue-france",
+            "fr-btn !w-32 !h-32 rounded-[10px] bg-dsfr-text-label-blue-france",
             "flex !flex-col items-center justify-center",
             "self-center",
           )}

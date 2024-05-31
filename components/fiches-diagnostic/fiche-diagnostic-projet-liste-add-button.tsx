@@ -6,7 +6,7 @@ export const FicheDiagnosticProjetListeAddButton = () => (
   <FicheDiagnosticLink
     href={PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_LISTE_ALL}
     className={clsx(
-      "fr-btn !w-32 !h-32 rounded-3xl bg-dsfr-text-label-blue-france",
+      "fr-btn !w-32 !h-32 rounded-[10px] bg-dsfr-text-label-blue-france",
       "flex !flex-col items-center justify-center",
       "self-center",
     )}
