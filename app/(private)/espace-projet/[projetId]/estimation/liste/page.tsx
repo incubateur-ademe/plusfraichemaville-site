@@ -13,37 +13,37 @@ export default function CreateEstimationPage() {
   }
   if (currentProjet.estimations.length < 1) {
     redirect(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id));
+  } else {
+    return (
+      <div className="fr-container pt-8">
+        <div className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</div>
+        <div className="text-lg">{`Mes solutions sélectionnées pour mon projet ${currentProjet?.nom}.`}</div>
+        <div className="mb-10  text-lg">
+          {`Vous pouvez estimer une fourchette de prix en fonction des matériaux et systèmes choisis.`}
+        </div>
+        <div className="flex flex-col gap-12">
+          {currentProjet.estimations.map((estimation) => (
+            <EstimationOverviewCard key={estimation.id} estimation={estimation} />
+          ))}
+        </div>
+        <div className="mt-12 flex flex-row gap-6">
+          <Button
+            className="rounded-3xl"
+            iconId="ri-add-circle-fill"
+            iconPosition="left"
+            linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id), target: "_self" }}
+          >
+            Ajouter une estimation
+          </Button>
+          <Button
+            className="rounded-3xl"
+            priority="secondary"
+            linkProps={{ href: PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id), target: "_self" }}
+          >
+            Revenir au tableau de bord
+          </Button>
+        </div>
+      </div>
+    );
   }
-
-  return (
-    <div className="fr-container pt-8">
-      <div className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</div>
-      <div className="text-lg">{`Mes solutions sélectionnées pour mon projet ${currentProjet?.nom}.`}</div>
-      <div className="mb-10  text-lg">
-        {`Vous pouvez estimer une fourchette de prix en fonction des matériaux et systèmes choisis.`}
-      </div>
-      <div className="flex flex-col gap-12">
-        {currentProjet.estimations.map((estimation) => (
-          <EstimationOverviewCard key={estimation.id} estimation={estimation} />
-        ))}
-      </div>
-      <div className="mt-12 flex flex-row gap-6">
-        <Button
-          className="rounded-3xl"
-          iconId="ri-add-circle-fill"
-          iconPosition="left"
-          linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id), target: "_self" }}
-        >
-          Ajouter une estimation
-        </Button>
-        <Button
-          className="rounded-3xl"
-          priority="secondary"
-          linkProps={{ href: PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id), target: "_self" }}
-        >
-          Revenir au tableau de bord
-        </Button>
-      </div>
-    </div>
-  );
 }
