@@ -34,7 +34,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
         size="large"
         buttons={[
           {
-            doClosesModal: true,
+            doClosesModal: false,
             children: "Supprimer",
             priority: "primary",
             className: "rounded-3xl !min-h-fit !text-sm mr-4",
@@ -44,6 +44,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
               notifications(res.type, res.message);
               const impactedProjet = getProjetById(estimation.projet_id);
               if (res.type === "success" && impactedProjet) {
+                modal.close();
                 updateProjetInStore({
                   ...impactedProjet,
                   estimations: impactedProjet.estimations?.filter((es) => es.id !== estimation.id),
