@@ -2,7 +2,6 @@ import clsx from "clsx";
 import { PropsWithChildren } from "react";
 
 type CustomDSFRModalProps = {
-  isModalOpen: boolean;
   modalId: string;
   className?: string;
   size?: "small" | "large";
@@ -12,7 +11,6 @@ type CustomDSFRModalProps = {
 export default function CustomDSFRModal({
   modalId,
   size = "large",
-  isModalOpen,
   close,
   children,
   className,
@@ -22,8 +20,7 @@ export default function CustomDSFRModal({
       role="dialog"
       id={modalId}
       className={clsx(
-        "fr-modal before:!h-[5vh] before:!flex-none after:!h-[5vh] after:!flex-none",
-        isModalOpen && "fr-modal--opened",
+        `fr-modal before:!h-[5vh] before:!flex-none after:!h-[5vh] after:!flex-none`,
         className,
       )}
     >
