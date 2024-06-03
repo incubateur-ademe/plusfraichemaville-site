@@ -130,14 +130,14 @@ export default function EstimationMateriauForm({
                   whiteBackground
                 />
                 <div>Investissement</div>
-                <div className="font-bold mb-2">
+                <div className="mb-2 font-bold">
                   {getLabelCoutFournitureByQuantite(
                     getMateriauFromId(+field.materiauId)?.attributes,
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
                   )}
                 </div>
                 <div>Entretien</div>
-                <div className="font-bold mb-2">
+                <div className="mb-2 font-bold">
                   {getLabelCoutEntretienByQuantite(
                     getMateriauFromId(+field.materiauId)?.attributes,
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
@@ -154,19 +154,19 @@ export default function EstimationMateriauForm({
             />
             <div className="flex items-center">
               <Button
-                className={`rounded-3xl mr-4 !p-0`}
+                className={`mr-4 rounded-3xl !p-0`}
                 onClick={form.handleSubmit(onSubmitAndNext)}
                 disabled={disabled}
               >
                 <div
-                  className="h-10 py-2 px-4"
+                  className="h-10 px-4 py-2"
                   onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
                 >
                   {"Suivant"}
                 </div>
               </Button>
               <Button
-                className={`rounded-3xl mr-4`}
+                className={`mr-4 rounded-3xl`}
                 onClick={form.handleSubmit(onSubmitAndClose)}
                 disabled={disabled}
                 priority="secondary"
@@ -174,13 +174,13 @@ export default function EstimationMateriauForm({
                 {"Enregistrer et finir plus tard"}
               </Button>
               <Button
-                className={`rounded-3xl mr-4 !p-0`}
+                className={`mr-4 rounded-3xl !p-0`}
                 onClick={form.handleSubmit(onSubmitAndPrevious)}
                 disabled={disabled}
                 priority="tertiary"
               >
                 <div
-                  className="h-10 py-2 px-4"
+                  className="h-10 px-4 py-2"
                   onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
                 >
                   {"Précédent"}
@@ -190,7 +190,7 @@ export default function EstimationMateriauForm({
           </form>
         </>
       ) : (
-        <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
+        <div className="mb-4 text-dsfr-text-title-grey">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
       )}{" "}
     </>
   );

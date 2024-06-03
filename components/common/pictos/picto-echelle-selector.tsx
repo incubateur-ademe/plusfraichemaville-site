@@ -17,14 +17,14 @@ export const PictoEchelleSelector = ({ pictoId, className, large }: PictoEchelle
   return (
     <div
       className={clsx(
-        "flex justify-center items-center flex-col rounded-[10px]",
-        "text-dsfr-background-flat-warning bg-pfmv-orange",
-        large ? "w-36 h-40" : "w-20 h-24",
+        "flex flex-col items-center justify-center rounded-[10px]",
+        "bg-pfmv-orange text-dsfr-background-flat-warning",
+        large ? "h-40 w-36" : "h-24 w-20",
       )}
     >
       <Image
         src={`/images/echelle/${selectedPicto}.svg`}
-        className={clsx("mx-auto svg-orange", className)}
+        className={clsx("svg-orange mx-auto", className)}
         alt={`${pictoId}`}
         width={20}
         height={20}
@@ -32,7 +32,7 @@ export const PictoEchelleSelector = ({ pictoId, className, large }: PictoEchelle
       <span
         className={clsx(
           "text-center font-bold text-dsfr-background-flat-warning",
-          large ? "text-base px-6" : "text-xs",
+          large ? "px-6 text-base" : "text-xs",
         )}
       >
         {selectedName}

@@ -20,6 +20,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
   const router = useRouter();
 
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
+  const setCurrentEstimationId = useProjetsStore((state) => state.setCurrentEstimationId);
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
     if (currentFicheSolutionIds.indexOf(ficheSolutionId) === -1)
@@ -45,7 +46,8 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     if (result.type === "success") {
       if (result.estimation) {
         updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
-        router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id, `${result.estimation.id}`));
+        setCurrentEstimationId(result.estimation.id);
+        router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id));
       }
     }
   };
@@ -60,7 +62,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
         subtitle="Choisissez les solutions à estimer pour votre simulation"
         className="pfmv-strong-card "
       >
-        <div className={clsx("flex flex-wrap gap-6 mb-12")}>
+        <div className={clsx("mb-12 flex flex-wrap gap-6")}>
           {projet.fiches_solutions_id?.map((ficheSolutionId) => (
             <FicheSolutionSmallCard
               key={ficheSolutionId}

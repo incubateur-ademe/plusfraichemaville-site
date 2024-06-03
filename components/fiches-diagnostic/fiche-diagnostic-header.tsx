@@ -8,8 +8,8 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
   return (
     <div className="bg-dsfr-background-alt-red-marianne" id="fiche-diag-header">
       <div className="fr-container">
-        <div className="grid grid-cols-12 gap-4 md:gap-10 pt-8 pb-11 relative bg-dsfr-background-alt-red-marianne">
-          <div className="col-span-3 md:col-span-3  h-20 w-20 md:w-full md:h-full relative">
+        <div className="relative grid grid-cols-12 gap-4 bg-dsfr-background-alt-red-marianne pb-11 pt-8 md:gap-10">
+          <div className="relative col-span-3  h-20 w-20 md:col-span-3 md:h-full md:w-full">
             <Image
               src={getStrapiImageUrl(attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.titre}
@@ -18,19 +18,19 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
               sizes="(max-width: 768px) 80vw, 33vw"
             />
           </div>
-          <div className=" col-span-9 md:col-span-6 max-w-xl">
-            <small className="hidden md:block text-base text-dsfr-text-mention-grey mb-6">
-              <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
+          <div className=" col-span-9 max-w-xl md:col-span-6">
+            <small className="mb-6 hidden text-base text-dsfr-text-mention-grey md:block">
+              <i className="ri-bar-chart-fill mr-1 text-dsfr-background-flat-warning before:!w-4"></i>
               Méthode de diagnostic{" "}
               <span className="font-bold capitalize text-dsfr-background-flat-warning">
                 {getMethodeDiagnosticFromCode(attributes.methode)?.label}
               </span>
             </small>
-            <h1 className="text-lg md:text-4xl md:leading-[50px] mb-2">{attributes.titre}</h1>
-            <h2 className="hidden md:block text-xl leading-8">{attributes.description_courte}</h2>
+            <h1 className="mb-2 text-lg md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
+            <h2 className="hidden text-xl leading-8 md:block">{attributes.description_courte}</h2>
           </div>
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 hidden md:block">
-            <PictoEchelleSelector pictoId={attributes.echelle!} className="w-16 h-16" large />
+          <div className="absolute right-0 top-1/2 hidden -translate-y-1/2 md:block">
+            <PictoEchelleSelector pictoId={attributes.echelle!} className="h-16 w-16" large />
           </div>
         </div>
       </div>

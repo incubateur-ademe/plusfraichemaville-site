@@ -33,28 +33,28 @@ export async function FicheSolution({
           <Image
             width={1200}
             height={500}
-            className={"w-full h-48 md:h-96 object-cover relative -z-10 "}
+            className={"relative -z-10 h-48 w-full object-cover md:h-96 "}
             src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
             alt={ficheSolution.attributes.titre}
           />
           <div className="fr-container">
             <h1
               className={clsx(
-                "mt-8 md:fr-container absolute text-white text-[1.375rem] md:text-[2.625rem]",
-                "md:ml-56 bottom-0 md:bottom-4 font-bold leading-normal",
+                "md:fr-container absolute mt-8 text-[1.375rem] text-white md:text-[2.625rem]",
+                "bottom-0 font-bold leading-normal md:bottom-4 md:ml-56",
               )}
             >
               {ficheSolution.attributes.titre}
             </h1>
           </div>
         </div>
-        <div className="h-14 w-full bg-dsfr-background-alt-blue-france absolute" />
-        <div className="fr-container flex flex-row relative">
-          <div className="flex-none md:w-56 md:mt-[6.5rem] md:relative">
+        <div className="absolute h-14 w-full bg-dsfr-background-alt-blue-france" />
+        <div className="fr-container relative flex flex-row">
+          <div className="flex-none md:relative md:mt-[6.5rem] md:w-56">
             {historique && (
               <AideDecisionBreadcrumbs
                 historique={historique}
-                className="hidden md:block mb-16 -mt-2"
+                className="-mt-2 mb-16 hidden md:block"
                 currentPageLabel={ficheSolution.attributes.titre}
               />
             )}
@@ -66,7 +66,7 @@ export async function FicheSolution({
                 projectName={(historique && historique[1].label) || ""}
               />
             </div>
-            <div className="hidden md:block mt-4">
+            <div className="mt-4 hidden md:block">
               <GenericSaveFiche
                 id={ficheSolution.id}
                 type="solution"
@@ -76,7 +76,7 @@ export async function FicheSolution({
             </div>
           </div>
           <div className="fr-tabs before:!shadow-none">
-            <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche solution">
+            <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
                 <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" />
               </li>

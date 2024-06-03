@@ -15,7 +15,7 @@ export default function BookmarkedFicheSolutionByProject({
           ? `Vous avez sauvegardé ces solutions pour l'espace  « ${projectName} »`
           : "Vous avez sauvegardé ces solutions"}
       </div>
-      <ul className="flex list-none flex-wrap justify-center md:justify-normal p-0 gap-6">
+      <ul className="flex list-none flex-wrap justify-center gap-6 p-0 md:justify-normal">
         {ficheSolutionIds.map((ficheSolution) => (
           <li key={ficheSolution} className="flex">
             <FicheSolutionCardWithFetcher complete id={ficheSolution} projectName={projectName} />

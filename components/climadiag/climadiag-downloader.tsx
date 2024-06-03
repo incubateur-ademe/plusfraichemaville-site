@@ -27,15 +27,15 @@ export const ClimadiagDownloader = ({ data }: ClimadiagDownloaderProps) => {
         onClick={download}
         disabled={loading}
         className={clsx(
-          "flex items-center text-base font-bold pl-2 mt-4 hover:!bg-pfmv-truelight-grey/0 hover:underline",
-          "disabled:pointer-events-none disabled:text-pfmv-navy text-dsfr-text-label-blue-france",
+          "mt-4 flex items-center pl-2 text-base font-bold hover:!bg-pfmv-truelight-grey/0 hover:underline",
+          "text-dsfr-text-label-blue-france disabled:pointer-events-none disabled:text-pfmv-navy",
         )}
       >
         Télécharger la synthèse
         {loading ? (
-          <Spinner className="size-3 ml-3" />
+          <Spinner className="ml-3 size-3" />
         ) : (
-          <i className="fr-icon--sm ml-2 mt-[1px] ri-download-2-line"></i>
+          <i className="fr-icon--sm ri-download-2-line ml-2 mt-[1px]"></i>
         )}
       </button>
       {viewer && <LazyClimadiagViewer data={data} close={close} />}

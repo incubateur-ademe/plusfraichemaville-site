@@ -10,7 +10,7 @@ export const ClimadiagIndicateursLineJour = ({ withBackground, valeur, jour }: C
     <div
       className={clsx(
         withBackground && "bg-dsfr-background-default-grey-hover",
-        "w-[130px] h-[125px]  rounded-2xl flex justify-center flex-col pl-4",
+        "flex h-[125px]  w-[130px] flex-col justify-center rounded-2xl pl-4",
       )}
     >
       <div
@@ -25,7 +25,7 @@ export const ClimadiagIndicateursLineJour = ({ withBackground, valeur, jour }: C
         <span className="text-4xl ">{Math.round(jour)} </span>
         {Math.round(jour) > 1 ? "jours" : "jour"}
       </div>
-      <div className="text-pfmv-grey text-sm">
+      <div className="text-sm text-pfmv-grey">
         <span className="block">valeur</span>
         <span>{valeur ?? "de référence"}</span>
       </div>

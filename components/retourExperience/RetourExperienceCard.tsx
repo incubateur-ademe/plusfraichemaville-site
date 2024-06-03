@@ -30,8 +30,8 @@ export default function RetourExperienceCard({
     : `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${selectRex.slug}`;
 
   return (
-    <Link className={`flex w-72 flex-col pfmv-card min-h-[26rem] ${className}`} href={url}>
-      <div className="flex w-full h-40">
+    <Link className={`pfmv-card flex min-h-[26rem] w-72 flex-col ${className}`} href={url}>
+      <div className="flex h-40 w-full">
         <Image
           width={450}
           height={300}
@@ -41,15 +41,15 @@ export default function RetourExperienceCard({
               : selectRex.image_principale
           }
           alt={selectRex.titre}
-          className={"w-full object-cover rounded-t-2xl"}
+          className={"w-full rounded-t-2xl object-cover"}
         />
       </div>
-      <div className="p-6 flex flex-col grow">
-        <div className={"text-lg font-bold text-dsfr-text-title-grey text-blue-hover mb-3"}>{selectRex.titre}</div>
+      <div className="flex grow flex-col p-6">
+        <div className={"text-blue-hover mb-3 text-lg font-bold text-dsfr-text-title-grey"}>{selectRex.titre}</div>
         <Tag small={true} className={"mb-8"}>
           {getRegionLabelFromCode(selectRex.region?.data?.attributes.code)}
         </Tag>
-        <div className={"mt-auto text-dsfr-text-mention-grey text-xs"}>
+        <div className={"mt-auto text-xs text-dsfr-text-mention-grey"}>
           <div>
             Climat actuel : <b>{getClimatLabelFromCode(selectRex.climat_actuel)}</b>
           </div>

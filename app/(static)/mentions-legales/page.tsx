@@ -14,6 +14,13 @@ export default async function PageMentionsLegales() {
           email: "hello@scalingo.com",
         }}
         siteUrl="https://plusfraichemaville.fr"
+        thirdParties={[
+          {
+            name: "RemixIcon",
+            url: "https://remixicon.com/",
+            text: "Certaines icônes du site sont issues de la librairie RemixIcon",
+          },
+        ]}
       />
     </div>
   );

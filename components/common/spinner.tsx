@@ -3,7 +3,7 @@ import clsx from "clsx";
 /* eslint-disable max-len */
 export const Spinner = ({ className }: { className?: string }) => {
   return (
-    <svg className={clsx("animate-spin -ml-1 mr-3 size-5 text-white", className)} fill="none" viewBox="0 0 24 24">
+    <svg className={clsx("-ml-1 mr-3 size-5 animate-spin text-white", className)} fill="none" viewBox="0 0 24 24">
       <circle className="opacity-75" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
       <path
         className="opacity-75"

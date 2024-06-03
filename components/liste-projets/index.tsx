@@ -10,21 +10,21 @@ export const ListProjets = () => {
   const projetsByTown = groupProjetsByCollectivite(projets);
 
   return (
-    <div className="bg-dsfr-background-alt-blue-france relative">
+    <div className="relative bg-dsfr-background-alt-blue-france">
       <Image
         src="/images/espace-projet/wave.svg"
         width={440}
         height={204}
         alt=""
-        className="absolute top-0 right-0 z-0"
+        className="absolute right-0 top-0 z-0"
       />
-      <div className="fr-container py-10 min-h-[25rem] z-10 relative">
+      <div className="fr-container relative z-10 min-h-[25rem] py-10">
         <ListeProjetsHeader isListEmpty={projets.length === 0} />
         {projetsByTown.map(([commune, projetsByCommune], index) => {
           return (
             <div className="mb-8" key={index}>
-              <h3 className="text-[22px] font-bold mb-4 text-pfmv-navy">
-                <i className="ri-map-pin-line before:!w-[14px] mr-1"></i>
+              <h3 className="mb-4 text-[22px] font-bold text-pfmv-navy">
+                <i className="ri-map-pin-line mr-1 before:!w-[14px]"></i>
                 {commune}
               </h3>
               {projetsByCommune.length > 0 &&

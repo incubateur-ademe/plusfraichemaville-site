@@ -8,7 +8,7 @@ export const ALL_ECHELLES = [
 
 export const EchelleFilter = ({ updater, isActive }: FichesDiagnosticFilterUpdater) => {
   return (
-    <div className="flex flex-row flex-wrap mb-8 mt-8 md:ml-52 justify-evenly md:justify-normal">
+    <div className="mb-8 mt-8 flex flex-row flex-wrap justify-evenly md:ml-52 md:justify-normal">
       <EchelleButtonFilter
         updater={() => updater(null, "echelle")}
         isActive={isActive(null, "echelle")}

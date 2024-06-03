@@ -5,6 +5,7 @@ import { SessionProvider } from "next-auth/react";
 import { ProjetsStoreProvider } from "@/stores/projets/provider";
 import { UserStoreProvider } from "@/stores/user/provider";
 import MatomoPageView from "@/components/matomo/matomo-page-view";
+import ModalProvider from "@/components/modal/modal-provider";
 
 export default function MainLayoutProviders({ children, lang }: PropsWithChildren<{ lang: string }>) {
   return (
@@ -14,7 +15,12 @@ export default function MainLayoutProviders({ children, lang }: PropsWithChildre
           <Suspense>
             <MatomoPageView />
           </Suspense>
-          <DsfrProvider lang={lang}>{children}</DsfrProvider>
+          <DsfrProvider lang={lang}>
+            <>
+              {children}
+              <ModalProvider />
+            </>
+          </DsfrProvider>
         </ProjetsStoreProvider>
       </UserStoreProvider>
     </SessionProvider>

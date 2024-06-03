@@ -14,7 +14,7 @@ import { TableauDeBordSuiviWithEstimation } from "@/components/tableau-de-bord/t
 
 export const TableauDeBordSuivi = () => {
   return (
-    <div className="gap-8 flex-wrap flex">
+    <div className="flex flex-wrap gap-8">
       {cards.map((card, index) => (
         <TableauDeBordSuiviCard {...card} key={index} />
       ))}

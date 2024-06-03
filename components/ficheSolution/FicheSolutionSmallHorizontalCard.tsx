@@ -27,25 +27,25 @@ export default function FicheSolutionSmallHorizontalCard({
   return (
     <Link
       className={clsx(
-        "flex max-w-[28rem] w-full md:w-[28rem] h-[7rem] flex-row",
-        "items-center fiche-solution-small-vertical-card",
+        "flex h-[7rem] w-full max-w-[28rem] flex-row md:w-[28rem]",
+        "fiche-solution-small-vertical-card items-center",
         className,
       )}
       href={url}
     >
-      <div className="flex w-40 h-full">
+      <div className="flex h-full w-40">
         <Image
           width={450}
           height={300}
           src={getStrapiImageUrl(ficheSolution.data.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
           alt={ficheSolution.data.attributes.titre}
-          className={"w-full object-cover rounded-l-2xl"}
+          className={"w-full rounded-l-2xl object-cover"}
         />
       </div>
       <div className="m-4 max-w-[18rem]">
-        <div className={"font-bold text-blue-hover"}>{ficheSolution.data.attributes.titre}</div>
+        <div className={"text-blue-hover font-bold"}>{ficheSolution.data.attributes.titre}</div>
         {typeSolution && (
-          <div className="flex flex-row text-dsfr-text-mention-grey mt-4">
+          <div className="mt-4 flex flex-row text-dsfr-text-mention-grey">
             {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
             <span className="mt-[2px] text-sm">{typeSolution.label}</span>
           </div>

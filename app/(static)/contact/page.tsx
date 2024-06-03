@@ -3,10 +3,10 @@ import React from "react";
 export default async function PageContact() {
   return (
     <div className="fr-container">
-      <div className="text-dsfr-text-title-grey font-bold text-[1.75rem] mt-8 text-center">
+      <div className="mt-8 text-center text-[1.75rem] font-bold text-dsfr-text-title-grey">
         {"Abonnez-vous à notre bulletin d'informations"}
       </div>
-      <div className="text-dsfr-text-title-grey mt-6 mb-4 text-center">
+      <div className="mb-4 mt-6 text-center text-dsfr-text-title-grey">
         {"N'hésitez pas à nous contacter aussi par mail : plusfraichemaville@ademe.fr"}
       </div>
       <iframe

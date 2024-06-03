@@ -28,55 +28,55 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
   const ficheUrl = PFMV_ROUTES.FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug);
 
   return (
-    <div className={clsx("pfmv-card w-72 relative h-auto", !vertical && "lg:max-w-[53rem] lg:w-full lg:h-fit")}>
+    <div className={clsx("pfmv-card relative h-auto w-72", !vertical && "lg:h-fit lg:w-full lg:max-w-[53rem]")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type="diagnostic" classNameButton="absolute top-3 right-4" />
       <FicheDiagnosticLink href={ficheUrl}>
         <div
           className={clsx(
-            "bg-dsfr-background-alt-red-marianne rounded-[0.9375rem] flex flex-col pb-5 h-full",
-            !vertical && "lg:h-fit lg:pb-0 lg:flex lg:flex-row",
+            "flex h-full flex-col rounded-[0.9375rem] bg-dsfr-background-alt-red-marianne pb-5",
+            !vertical && "lg:flex lg:h-fit lg:flex-row lg:pb-0",
           )}
         >
-          <div className={clsx("w-72 relative overflow-hidden block h-52", !vertical && "lg:flex lg:h-auto")}>
+          <div className={clsx("relative block h-52 w-72 overflow-hidden", !vertical && "lg:flex lg:h-auto")}>
             <Image
               fill
               sizes="(max-width: 768px) 80vw, 33vw"
               src={getStrapiImageUrl(ficheDiagnostic.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}
               className={clsx(
-                "w-full h-full object-cover z-0 rounded-t-2xl",
-                !vertical && "lg:rounded-t-none lg:rounded-l-2xl lg:rounded-tl-2xl",
+                "z-0 h-full w-full rounded-t-2xl object-cover",
+                !vertical && "lg:rounded-l-2xl lg:rounded-t-none lg:rounded-tl-2xl",
               )}
             />
           </div>
           <div
             className={clsx(
-              "pt-5 pb-2 h-fit px-6 flex flex-col grow justify-between",
+              "flex h-fit grow flex-col justify-between px-6 pb-2 pt-5",
               !vertical && "lg:justify-start lg:px-7",
             )}
           >
             <span className={clsx("text-xs", !vertical && "lg:text-sm")}>
-              <i className="ri-bar-chart-fill before:!w-4 mr-1 text-dsfr-background-flat-warning"></i>
+              <i className="ri-bar-chart-fill mr-1 text-dsfr-background-flat-warning before:!w-4"></i>
               Méthode de diagnostic{" "}
-              <span className="text-dsfr-background-flat-warning font-bold capitalize inline-block">
+              <span className="inline-block font-bold capitalize text-dsfr-background-flat-warning">
                 {getMethodeDiagnosticFromCode(ficheDiagnostic.attributes.methode)?.label}
               </span>
             </span>
             <h5 className="my-3 max-w-[350px]">{ficheDiagnostic.attributes.titre}</h5>
-            <p className={clsx("text-sm max-w-[350px] leading-6 mb-11", !vertical && "lg:mb-3")}>
+            <p className={clsx("mb-11 max-w-[350px] text-sm leading-6", !vertical && "lg:mb-3")}>
               {ficheDiagnostic.attributes.description_courte}
             </p>
-            <div className={clsx("block", !vertical && "lg:flex lg:mb-4")}>
-              <div className={clsx("block mb-3", !vertical && "lg:flex lg:mr-6 lg:mb-0")}>
+            <div className={clsx("block", !vertical && "lg:mb-4 lg:flex")}>
+              <div className={clsx("mb-3 block", !vertical && "lg:mb-0 lg:mr-6 lg:flex")}>
                 {vertical ? (
                   <small className="text-dsfr-text-disabled-grey">Coût</small>
                 ) : (
-                  <small className="text-dsfr-text-disabled-grey inline lg:hidden">Coût</small>
+                  <small className="inline text-dsfr-text-disabled-grey lg:hidden">Coût</small>
                 )}
                 <div className="flex items-center">
                   <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
-                    <small className="text-dsfr-text-disabled-grey hidden lg:block">
+                    <small className="hidden text-dsfr-text-disabled-grey lg:block">
                       de {coutMin} à {coutMax} euros HT
                     </small>
                   )}
@@ -86,12 +86,12 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
                 {vertical ? (
                   <small className="text-dsfr-text-disabled-grey">Temporalité</small>
                 ) : (
-                  <small className="text-dsfr-text-disabled-grey inline lg:hidden">Temporalité</small>
+                  <small className="inline text-dsfr-text-disabled-grey lg:hidden">Temporalité</small>
                 )}
                 <div className="flex items-center">
                   <div className="mr-2">{delai?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
-                    <small className="text-dsfr-text-disabled-grey hidden lg:block">
+                    <small className="hidden text-dsfr-text-disabled-grey lg:block">
                       {delaiMin} à {delaiMax} mois
                     </small>
                   )}
@@ -99,12 +99,12 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
               </div>
             </div>
           </div>
-          <div className={clsx("absolute right-6 bottom-[5.5rem]", !vertical && "lg:bottom-6")}>
+          <div className={clsx("absolute bottom-[5.5rem] right-6", !vertical && "lg:bottom-6")}>
             <PictoEchelleSelector pictoId={ficheDiagnostic.attributes.echelle!} className="w-12" />
           </div>
           <div
             className={clsx(
-              "fr-btn fr-btn--tertiary !text-dsfr-background-flat-warning !mx-auto !block mt-3 rounded-3xl",
+              "fr-btn fr-btn--tertiary !mx-auto mt-3 !block rounded-3xl !text-dsfr-background-flat-warning",
               !vertical && "lg:!hidden",
             )}
           >

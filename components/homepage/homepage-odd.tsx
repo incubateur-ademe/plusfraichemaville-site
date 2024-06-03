@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 export const HomepageOdd = () => (
-  <div className="fr-container flex flex-col gap-8 md:gap-0 md:flex-row text-start w-full md:items-center py-8">
+  <div className="fr-container flex w-full flex-col gap-8 py-8 text-start md:flex-row md:items-center md:gap-0">
     <div className="max-w-sm text-sm">Plus fraîche ma ville répond aux Objectifs de Développement Durable</div>
     <div className={"flex flex-row"}>
       <Image
