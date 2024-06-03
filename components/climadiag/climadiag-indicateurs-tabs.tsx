@@ -16,11 +16,7 @@ export const ClimadiagIndicateursTabs = ({ data }: { data: Climadiag }) => {
         <ClimadiagIndicateursTabButton changeTab={changeYearTab} year={2050} active={selectedYear === 2050} />
         <ClimadiagIndicateursTabButton changeTab={changeYearTab} year={2100} active={selectedYear === 2100} />
       </ClimadiagIndicateursTabButtons>
-      <ClimadiagIndicateursLine
-        temperature={yearlyData.jours_tres_chauds}
-        type="jours_chauds"
-        year={selectedYear}
-      ></ClimadiagIndicateursLine>
+      <ClimadiagIndicateursLine year={selectedYear} temperature={yearlyData.jours_tres_chauds} type="jours_chauds" />
       <ClimadiagIndicateursLine year={selectedYear} temperature={yearlyData.nuits_chaudes} type="nuits_chaudes" />
       <ClimadiagIndicateursLine year={selectedYear} temperature={yearlyData.jours_vdc} type="jours_vdc" />
     </div>

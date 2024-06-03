@@ -1,6 +1,4 @@
-import { useApi } from "@/hooks/useApi";
-import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import { APIResponseData } from "@/lib/strapi/types/types";
+import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
 
 export default function BookmarkedFicheSolutionByProject({
   projectName,
@@ -9,29 +7,21 @@ export default function BookmarkedFicheSolutionByProject({
   projectName: string;
   ficheSolutionIds: number[];
 }) {
-  // TODO: revoir la logique pour fetcher par route + useSWR
-  const { data: ficheSolutions } = useApi<APIResponseData<"api::fiche-solution.fiche-solution">[]>(
-    `/api/get-fiches-solutions?ficheSolutionIds=${JSON.stringify(ficheSolutionIds)}`,
-  );
-  if (ficheSolutions && ficheSolutions?.length > 0) {
-    return (
-      <div className="text-dsfr-text-title-grey">
-        <div className={"fr-h3"}>
-          {projectName ? `Mon projet « ${projectName} »` : "Mes solutions mises en favoris"}
-        </div>
-        <div className="mb-6">
-          {projectName
-            ? `Vous avez sauvegardé ces solutions pour l'espace  « ${projectName} »`
-            : "Vous avez sauvegardé ces solutions"}
-        </div>
-        <ul className="flex list-none flex-wrap justify-center gap-6 p-0 md:justify-normal">
-          {ficheSolutions.map((ficheSolution) => (
-            <li key={ficheSolution.id} className="flex">
-              <FicheSolutionCardWithUserInfo ficheSolution={ficheSolution} projectName={projectName} />
-            </li>
-          ))}
-        </ul>
+  return (
+    <div className="text-dsfr-text-title-grey">
+      <div className={"fr-h3"}>{projectName ? `Mon projet « ${projectName} »` : "Mes solutions mises en favoris"}</div>
+      <div className="mb-6">
+        {projectName
+          ? `Vous avez sauvegardé ces solutions pour l'espace  « ${projectName} »`
+          : "Vous avez sauvegardé ces solutions"}
       </div>
-    );
-  }
+      <ul className="flex list-none flex-wrap justify-center gap-6 p-0 md:justify-normal">
+        {ficheSolutionIds.map((ficheSolution) => (
+          <li key={ficheSolution} className="flex">
+            <FicheSolutionCardWithFetcher complete id={ficheSolution} projectName={projectName} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
 }
