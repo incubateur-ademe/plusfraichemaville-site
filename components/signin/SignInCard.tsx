@@ -2,6 +2,7 @@
 import { signIn } from "next-auth/react";
 import React from "react";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import clsx from "clsx";
 
 const messages = {
   connect:
@@ -14,16 +15,18 @@ const messages = {
 type SignInCardProps = {
   callbackUrl?: string;
   message: keyof typeof messages;
+  className?: string;
 };
 
 export default function SignInCard({
   callbackUrl = process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE,
   message,
+  className,
 }: SignInCardProps) {
   const handleSignIn = () => signIn("agentconnect", { callbackUrl });
 
   return (
-    <div className="max-w-xl rounded-2xl bg-dsfr-background-alt-grey px-12 py-9">
+    <div className={clsx("max-w-xl rounded-2xl bg-dsfr-background-alt-grey px-12 py-9", className)}>
       <div className="text-xl font-bold text-dsfr-text-title-grey">{messages[message]}</div>
       <div className="mb-8 mt-8">
         Vous n’avez jamais utilisé AgentConnect? Renseignez simplement votre adresse professionnelle.
