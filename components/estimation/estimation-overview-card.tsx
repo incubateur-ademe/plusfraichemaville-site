@@ -6,15 +6,18 @@ import { EstimationCardPriceInfo } from "@/components/estimation/estimation-card
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import React, { useMemo } from "react";
 import { EstimationDeleteModal } from "@/components/estimation/estimation-delete-modal";
-import { EstimationMateriauModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
 import { isComplete } from "@/helpers/estimation";
 import { dateToStringWithTime } from "@/helpers/dateUtils";
 import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
+import { Button } from "@codegouvfr/react-dsfr/Button";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { estimationModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 
 export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const globalPrice = useMemo(() => computeGlobalFicheSolutionPrice(estimationMateriaux), [estimationMateriaux]);
+  const setCurrentEstimationId = useProjetsStore((state) => state.setCurrentEstimationId);
 
   const isEstimationCompleted = useMemo(() => isComplete(estimation), [estimation]);
 
@@ -70,7 +73,15 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
         </div>
       </div>
       <div className="float-right mt-12 flex flex-row gap-6">
-        <EstimationMateriauModal estimation={estimation} />
+        <Button
+          nativeButtonProps={estimationModal.buttonProps}
+          onClick={() => {
+            setCurrentEstimationId(estimation.id);
+          }}
+          className="rounded-3xl"
+        >
+          Modifier
+        </Button>
         <EstimationDeleteModal estimation={estimation} />
       </div>
     </div>

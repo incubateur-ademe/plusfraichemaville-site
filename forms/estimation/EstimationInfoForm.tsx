@@ -20,6 +20,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
   const router = useRouter();
 
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
+  const setCurrentEstimationId = useProjetsStore((state) => state.setCurrentEstimationId);
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
     if (currentFicheSolutionIds.indexOf(ficheSolutionId) === -1)
@@ -45,7 +46,8 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     if (result.type === "success") {
       if (result.estimation) {
         updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
-        router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id, `${result.estimation.id}`));
+        setCurrentEstimationId(result.estimation.id);
+        router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id));
       }
     }
   };
