@@ -15,13 +15,13 @@ export default async function InfoPerso() {
     <div className="fr-container pt-8">
       {!isUserComplete ? (
         <>
-          <h1 className="fr-h5 !text-dsfr-text-label-blue-france !mb-2">
+          <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">
             {"J'inscris ou je rejoins une collectivité"}
           </h1>
           <div className="mb-4">Je vérifie les informations liées à mon compte AgentConnect</div>
         </>
       ) : (
-        <h1 className="fr-h5 !text-dsfr-text-label-blue-france !mb-2">{"Mon profil"}</h1>
+        <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">{"Mon profil"}</h1>
       )}
       <UserInfoForm
         user={user}

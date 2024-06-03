@@ -57,8 +57,8 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
 
   return (
     <div className="bg-dsfr-background-open-blue-france" id="climadiag-panel">
-      <div className="fr-container pt-10 pb-28 min-h-[25rem] -mb-40">
-        <div className="text-dsfr-text-label-blue-france text-[1.375rem] font-bold mb-6">
+      <div className="fr-container -mb-40 min-h-[25rem] pb-28 pt-10">
+        <div className="mb-6 text-[1.375rem] font-bold text-dsfr-text-label-blue-france">
           Les indicateurs de surchauffe de ma collectivité
         </div>
         <>
@@ -72,7 +72,7 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
               )
             }
             loadingMessage={() => "Recherche en cours..."}
-            className="min-w-64 w-fit"
+            className="w-fit min-w-64"
             isClearable
             placeholder="Chercher une commune / EPCI (nom ou code)"
           />

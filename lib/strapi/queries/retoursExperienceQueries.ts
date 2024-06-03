@@ -10,7 +10,7 @@ import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
 import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
 
-export const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (
+const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT}
 ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
@@ -100,7 +100,7 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
   }
 }`;
 
-export const GET_RETOUR_EXPERIENCE_CARD_DATA = (
+const GET_RETOUR_EXPERIENCE_CARD_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
     retourExperiences ${strapiFilter.wholeFilterString()} {

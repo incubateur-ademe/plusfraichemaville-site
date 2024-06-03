@@ -1,64 +1,30 @@
 "use client";
 
-import { Button } from "@codegouvfr/react-dsfr/Button";
 import { estimation } from "@prisma/client";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useEffect, useMemo, useState } from "react";
-import CustomDSFRModal from "@/components/common/CustomDSFRModal";
 import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { upsert } from "@/helpers/listUtils";
 import { EstimationMateriauxValidation } from "@/components/estimation/materiaux-modal/estimation-materiaux-validation";
-import { useSearchParams } from "next/navigation";
 import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
 import { FicheSolutionResponse } from "@/components/ficheSolution/type";
 import { UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
 import EstimationMateriauSimpleFieldForm from "@/forms/estimation/estimation-materiau-form-simple-field";
+import { estimationModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;
 };
 
-export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModalProps) {
-  let [estimationStep, setEstimationStep] = useState(1);
-  const estimationId = useSearchParams().get("open");
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export function EstimationMateriauModalContent({ estimation }: EstimationCardDeleteModalProps) {
+  const [estimationStep, setEstimationStep] = useState(1);
 
   useEffect(() => {
-    setIsModalOpen(estimationId === estimation.id.toString());
-  }, [estimationId, estimation.id]);
-
-  const modalId = `estimation-materiaux-modal-${estimation.id}`;
-
-  const modal = useMemo(
-    () => ({
-      open: () => {
-        setIsModalOpen(true);
-      },
-      close: () => {
-        setIsModalOpen(false);
-      },
-    }),
-    [],
-  );
-
-  useEffect(() => {
-    const handleEscapeKey = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        modal.close();
-      }
-    };
-
-    if (isModalOpen) {
-      document.addEventListener("keydown", handleEscapeKey);
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEscapeKey);
-    };
-  }, [isModalOpen, estimation.id, modal, modalId]);
+    setEstimationStep(1);
+  }, [estimation.id]);
 
   const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -115,7 +81,7 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
     if (estimationStep > 1) {
       setEstimationStep(estimationStep - 1);
     } else {
-      modal.close();
+      estimationModal.close();
     }
   };
 
@@ -130,58 +96,53 @@ export function EstimationMateriauModal({ estimation }: EstimationCardDeleteModa
 
   return (
     <>
-      <Button onClick={modal.open} className="rounded-3xl">
-        Modifier
-      </Button>
-      <CustomDSFRModal modalId={modalId} isModalOpen={isModalOpen} close={modal.close}>
-        <Stepper
-          currentStep={estimationStep}
-          nextTitle={stepperNextTitle}
-          stepCount={estimation.fiches_solutions_id.length + 1}
-          title={stepperTitle}
-          className="max-w-[40rem]"
-        />
-        {currentFicheSolution && (
-          <>
-            {isSimpleForm ? (
-              <>
-                <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.attributes.titre}`}</div>
-                <EstimationMateriauSimpleFieldForm
-                  estimationId={estimation.id}
-                  ficheSolution={currentFicheSolution}
-                  estimationMateriaux={currentEstimationMateriaux}
-                  onClose={modal.close}
-                  onPrevious={goToPreviousStep}
-                  onNext={goToNextStep}
-                  onUpdateEstimation={updateEstimationInStore}
-                />
-              </>
-            ) : (
-              <>
-                <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre}, vous aurez
+      <Stepper
+        currentStep={estimationStep}
+        nextTitle={stepperNextTitle}
+        stepCount={estimation.fiches_solutions_id.length + 1}
+        title={stepperTitle}
+        className="max-w-[40rem]"
+      />
+      {currentFicheSolution && (
+        <>
+          {isSimpleForm ? (
+            <>
+              <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.attributes.titre}`}</div>
+              <EstimationMateriauSimpleFieldForm
+                estimationId={estimation.id}
+                ficheSolution={currentFicheSolution}
+                estimationMateriaux={currentEstimationMateriaux}
+                onClose={estimationModal.close}
+                onPrevious={goToPreviousStep}
+                onNext={goToNextStep}
+                onUpdateEstimation={updateEstimationInStore}
+              />
+            </>
+          ) : (
+            <>
+              <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre}, vous aurez
                 besoin de choisir parmi les matériaux et systèmes suivants :`}</div>
-                <EstimationMateriauForm
-                  estimationId={estimation.id}
-                  ficheSolution={currentFicheSolution}
-                  estimationMateriaux={currentEstimationMateriaux}
-                  onClose={modal.close}
-                  onPrevious={goToPreviousStep}
-                  onNext={goToNextStep}
-                  onUpdateEstimation={updateEstimationInStore}
-                />
-              </>
-            )}
-          </>
-        )}
-        {estimationStep === estimation.fiches_solutions_id.length + 1 && estimationMateriaux && (
-          <EstimationMateriauxValidation
-            estimationsFicheSolution={estimationMateriaux}
-            goToFicheSolutionStep={goToSpecificFicheSolutionStep}
-            onClose={modal.close}
-            onPrevious={goToPreviousStep}
-          />
-        )}
-      </CustomDSFRModal>
+              <EstimationMateriauForm
+                estimationId={estimation.id}
+                ficheSolution={currentFicheSolution}
+                estimationMateriaux={currentEstimationMateriaux}
+                onClose={estimationModal.close}
+                onPrevious={goToPreviousStep}
+                onNext={goToNextStep}
+                onUpdateEstimation={updateEstimationInStore}
+              />
+            </>
+          )}
+        </>
+      )}
+      {estimationStep === estimation.fiches_solutions_id.length + 1 && estimationMateriaux && (
+        <EstimationMateriauxValidation
+          estimationsFicheSolution={estimationMateriaux}
+          goToFicheSolutionStep={goToSpecificFicheSolutionStep}
+          onClose={estimationModal.close}
+          onPrevious={goToPreviousStep}
+        />
+      )}
     </>
   );
 }

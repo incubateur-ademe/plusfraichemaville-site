@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import { BOOKMARK_FS_KEY } from "@/helpers/bookmarkedFicheSolutionHelper";
 import SignInCard from "@/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useUserStore } from "@/stores/user/provider";
@@ -9,6 +8,7 @@ import { useSession } from "next-auth/react";
 
 import { FichesDiagnosticFavoris } from "@/components/fiches-diagnostic/fiches-diagnostic-favoris";
 import {
+  BOOKMARK_FS_KEY,
   FICHE_DIAGNOSTIC_IDS_STORAGE_KEY,
   FicheBookmarkedSolution,
   FichesBookmarked,
@@ -38,9 +38,9 @@ export default function Page() {
   return (
     isClient && (
       <div
-        className="fr-container text-dsfr-text-title-grey pt-10 flex flex-row flex-wrap first:flex-[1_0_50%]
-          flex-[0_1_100%] order-1 [&>*:not(:nth-child(2))]:w-full [&>*:nth-child(2)]:grow items-start
-          place-content-center"
+        className="fr-container order-1 flex flex-[0_1_100%] flex-row flex-wrap place-content-center
+          items-start pt-10 text-dsfr-text-title-grey first:flex-[1_0_50%] [&>*:not(:nth-child(2))]:w-full
+          [&>*:nth-child(2)]:grow"
       >
         <div>
           {session.status !== "authenticated" && (

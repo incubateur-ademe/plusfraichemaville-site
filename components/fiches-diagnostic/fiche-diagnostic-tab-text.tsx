@@ -21,7 +21,7 @@ export const FicheDiagnosticTabBlocText = ({
   return (
     <div className={clsx(small && "md:w-1/2")}>
       <h3 className={clsx("text-2xl md:text-2xl", withPicto && "flex flex-row", titleClassName)}>
-        {withPicto && <i className={"fr-icon-success-fill fr-icon--sm text-dsfr-action-high-red-hover mr-2 "} />}
+        {withPicto && <i className={"fr-icon-success-fill fr-icon--sm mr-2 text-dsfr-action-high-red-hover "} />}
 
         {title}
       </h3>

@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function AppFooter() {
   return (
-    <footer className="fr-footer !pt-0 !mt-0 !shadow-none" role="contentinfo" id="footer">
+    <footer className="fr-footer !mt-0 !pt-0 !shadow-none" role="contentinfo" id="footer">
       <hr className="pb-6" />
       <div className="fr-container">
         <div className="fr-footer__body">
@@ -69,6 +69,16 @@ export default function AppFooter() {
             <li className="fr-footer__bottom-item">
               <a className="fr-footer__bottom-link" href="/mentions-legales">
                 Mentions légales
+              </a>
+            </li>
+            <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href="/politique-de-confidentialite">
+                Politique de confidentialité
+              </a>
+            </li>
+            <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href="/stats" target="_self">
+                Statistiques
               </a>
             </li>
             <li className="fr-footer__bottom-item">

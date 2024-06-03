@@ -1,25 +1,24 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
 import Link from "next/link";
+import { ListProjetsHeaderEmpty } from "./empty";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) => {
   return (
-    <div className="pb-4 flex justify-between">
-      <div>
-        <h2 className="text-dsfr-text-label-blue-france text-2xl mb-1">Mon espace projet</h2>
-        {isListEmpty ? (
-          <span className="text-lg min-h-[3rem] mb-[3rem] block">
-            Vous n’avez pas encore de projets en cours. <br /> Créer un projet pour faire une simulation budgétaire et
-            accéder à de nombreuses recommandations.
-          </span>
-        ) : (
-          <span className="text-lg min-h-[3rem] block">Liste des projets de rafraîchissement dans ma collectivité</span>
+    <>
+      <div className="flex justify-between pb-4">
+        <div className="w-full">
+          <h2 className="mb-1 text-2xl text-dsfr-text-label-blue-france">Mon espace projet</h2>
+          <span className="mb-8 block text-lg">Les projets de rafraîchissement de ma collectivité</span>
+          {isListEmpty && <ListProjetsHeaderEmpty />}
+        </div>
+        {!isListEmpty && (
+          <div className="shrink-0">
+            <Link href={PFMV_ROUTES.CREATE_PROJET} className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl">
+              Créer un projet
+            </Link>
+          </div>
         )}
       </div>
-      <div className="shrink-0">
-        <Link href={PFMV_ROUTES.CREATE_PROJET} className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl">
-          Créer un projet
-        </Link>
-      </div>
-    </div>
+    </>
   );
 };

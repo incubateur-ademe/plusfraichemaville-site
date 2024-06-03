@@ -22,29 +22,29 @@ export const ClimadiagIndicateursLine = ({ type, temperature, isPDF, year }: Cli
   return (
     <div
       className={clsx(
-        "bg-white rounded-2xl px-5 py-2 mb-2 w-fit lg:w-full",
-        isPDF && "border-[2px] w-full border-pfmv-light-grey/35",
+        "mb-2 w-fit rounded-2xl bg-white px-5 py-2 lg:w-full",
+        isPDF && "w-full border-[2px] border-pfmv-light-grey/35",
       )}
     >
-      <div className={clsx("flex justify-between climadiag-line lg:flex-row lg:gap-0", !isPDF && "gap-4 flex-col")}>
+      <div className={clsx("climadiag-line flex justify-between lg:flex-row lg:gap-0", !isPDF && "flex-col gap-4")}>
         <div className="flex items-center gap-6">
           <Image
             src={`/images/climadiag/${picto}.svg`}
             width={100}
             height={100}
-            className="w-[100px] h-[100px]"
+            className="h-[100px] w-[100px]"
             alt="jour très chaud picto"
           />
-          <div className={clsx("pt-4 max-w-[300px]", !isPDF && "lg:max-w-[420px]")}>
-            <span className="text-[22px] font-bold block leading-[1.2]">{title}</span>
+          <div className={clsx("max-w-[300px] pt-4", !isPDF && "lg:max-w-[420px]")}>
+            <span className="block text-[22px] font-bold leading-[1.2]">{title}</span>
             {indice && (
-              <span className="text-[22px] block leading-[1.2]">
+              <span className="block text-[22px] leading-[1.2]">
                 ({">"}
                 {indice}°C)
               </span>
             )}
             {!isPDF && (
-              <button onClick={toggler} className="text-sm underline mt-4">
+              <button onClick={toggler} className="mt-4 text-sm underline">
                 Afficher la légende
               </button>
             )}

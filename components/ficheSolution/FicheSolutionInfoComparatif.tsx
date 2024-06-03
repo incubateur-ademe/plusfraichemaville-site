@@ -31,7 +31,7 @@ export default function FicheSolutionInfoComparatif({
   return (
     <div className={`${className}`}>
       {!!ficheSolution.baisse_temperature && (
-        <div className="flex flex-row justify-between w-full mt-6 mb-2">
+        <div className="mb-2 mt-6 flex w-full flex-row justify-between">
           <div className="mr-4 mt-auto text-dsfr-text-mention-grey">
             {getPorteeBaisseTemperatureLabelFromCode(ficheSolution.portee_baisse_temperature)}
           </div>
@@ -47,11 +47,11 @@ export default function FicheSolutionInfoComparatif({
         </div>
       )}
       {!ficheSolution.baisse_temperature && (
-        <div className="flex flex-row justify-between w-full mt-6 mb-2">
+        <div className="mb-2 mt-6 flex w-full flex-row justify-between">
           <div className="mr-4 mt-auto text-dsfr-text-mention-grey">{ficheSolution.libelle_avantage_solution}</div>
-          <div className="float-right text-right flex-none">
+          <div className="float-right flex-none text-right">
             <Image
-              className={temperatureFormat === "large" ? "w-12 h-12" : "w-10 h-10"}
+              className={temperatureFormat === "large" ? "h-12 w-12" : "h-10 w-10"}
               src={baisseICUIcon}
               alt="Baisse de l'ICU"
             />
@@ -59,23 +59,23 @@ export default function FicheSolutionInfoComparatif({
         </div>
       )}
       <div className={`${!delaiTravaux ? " invisible " : ""}`}>
-        <hr className="pb-2 mt-3" />
+        <hr className="mt-3 pb-2" />
         <div className="text-dsfr-text-mention-grey">Délai des travaux</div>
         <div className="inline-block w-full">
           <div className="float-left text-base">{delaiTravaux?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
-          <div className="float-right text-dsfr-text-mention-grey mt-1">
+          <div className="float-right mt-1 text-dsfr-text-mention-grey">
             {`de ${ficheSolution.delai_travaux_minimum} à ${ficheSolution.delai_travaux_maximum} mois`}
           </div>
         </div>
       </div>
       <div>
-        <hr className="pb-2 mt-1" />
+        <hr className="mt-1 pb-2" />
         <div className="text-dsfr-text-mention-grey">Coût</div>
         <div className="inline-block w-full">
           <div className="float-left">
             <div className="float-left text-base">{cout?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
           </div>
-          <div className="float-right text-dsfr-text-mention-grey mt-1">{getLabelCoutFourniture(ficheSolution)}</div>
+          <div className="float-right mt-1 text-dsfr-text-mention-grey">{getLabelCoutFourniture(ficheSolution)}</div>
         </div>
       </div>
     </div>

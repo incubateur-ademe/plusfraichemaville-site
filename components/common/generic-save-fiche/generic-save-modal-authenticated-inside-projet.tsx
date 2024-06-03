@@ -8,7 +8,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   return (
     <modal.Component title="" size="large">
-      <div className="flex items-center mb-10">
+      <div className="mb-10 flex items-center">
         <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
         <span className="text-2xl font-bold">
           {type === "solution" ? "Solution" : "Méthode diagnostic"} ajoutée dans mon projet <br />
@@ -17,7 +17,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
       </div>
       <Button
         priority="primary"
-        className="rounded-3xl !min-h-fit !text-sm md:ml-20 mr-4 mb-2"
+        className="mb-2 mr-4 !min-h-fit rounded-3xl !text-sm md:ml-20"
         onClick={() => modal.close()}
       >
         Continuer ma lecture
@@ -28,7 +28,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
             ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projet?.id!)
             : PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC(projet?.id!)
         }
-        className="fr-btn fr-btn--secondary rounded-3xl !min-h-fit !text-sm mr-4"
+        className="fr-btn fr-btn--secondary mr-4 !min-h-fit rounded-3xl !text-sm"
       >
         Voir mes fiches {type === "solution" ? "solutions" : "diagnostic"}
       </Link>

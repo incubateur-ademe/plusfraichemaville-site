@@ -16,7 +16,7 @@ export const FicheDiagnosticProjetListe = () => {
 
   return (
     <div>
-      <div className="flex gap-8 mb-10 flex-row flex-wrap">
+      <div className="mb-10 flex flex-row flex-wrap gap-8">
         {savedFichesDiagnostic?.length === 0 && <FichesDiagnosticProjetEmpty />}
         {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
           <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />

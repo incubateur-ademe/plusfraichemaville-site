@@ -18,8 +18,8 @@ export default async function CustomAccordion({
       <h3 className="mb-0">
         <button
           className={
-            "fr-accordion__btn !text-dsfr-text-title-grey !text-[1.375rem] bigIconAccordion" +
-            " !font-bold !bg-dsfr-background-alt-grey rounded-2xl !p-6"
+            "fr-accordion__btn bigIconAccordion !text-[1.375rem] !text-dsfr-text-title-grey" +
+            " rounded-2xl !bg-dsfr-background-alt-grey !p-6 !font-bold"
           }
           aria-expanded={expanded ? "true" : "false"}
           aria-controls={ariaId}
@@ -27,7 +27,7 @@ export default async function CustomAccordion({
           {title}
         </button>
       </h3>
-      <div className="fr-collapse bg-dsfr-background-alt-grey rounded-b-2xl !mt-[-1rem] !px-8 " id={ariaId}>
+      <div className="fr-collapse !mt-[-1rem] rounded-b-2xl bg-dsfr-background-alt-grey !px-8 " id={ariaId}>
         {children}
       </div>
     </section>

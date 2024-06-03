@@ -2,35 +2,23 @@ import clsx from "clsx";
 import { PropsWithChildren } from "react";
 
 type CustomDSFRModalProps = {
-  isModalOpen: boolean;
   modalId: string;
   className?: string;
   size?: "small" | "large";
   close: () => void;
 } & PropsWithChildren;
 
-export default function CustomDSFRModal({
-  modalId,
-  size = "large",
-  isModalOpen,
-  close,
-  children,
-  className,
-}: CustomDSFRModalProps) {
+export default function CustomDSFRModal({ modalId, size = "large", close, children, className }: CustomDSFRModalProps) {
   return (
     <dialog
       role="dialog"
       id={modalId}
-      className={clsx(
-        "fr-modal before:!flex-none before:!h-[5vh] after:!flex-none after:!h-[5vh]",
-        isModalOpen && "fr-modal--opened",
-        className,
-      )}
+      className={clsx(`fr-modal before:!h-[5vh] before:!flex-none after:!h-[5vh] after:!flex-none`, className)}
     >
-      <div className="w-full h-full absolute left-0 top-0 bg-[#000] opacity-25" onClick={close}></div>
+      <div className="absolute left-0 top-0 h-full w-full bg-[#000] opacity-25" onClick={close}></div>
       <div className="fr-container fr-container--fluid fr-container-md relative">
         <div className="fr-grid-row fr-grid-row--center !block">
-          <div className={clsx("my-0 mx-auto", size === "large" ? "md:max-w-[95%]" : "md:max-w-[66%]")}>
+          <div className={clsx("mx-auto my-0", size === "large" ? "md:max-w-[95%]" : "md:max-w-[66%]")}>
             <div className="customModalBody" id={`custom-${modalId}`}>
               <div className="fr-modal__header">
                 <button
