@@ -1,28 +1,21 @@
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { collectivite } from "@prisma/client";
 
 interface ProjetsByCollectivite {
-  [codeInsee: string]: {
-    commune: string;
-    projets: ProjetWithRelations[];
-  };
+  collectivite: collectivite;
+  projets: ProjetWithRelations[];
 }
 
-export const groupProjetsByCollectivite = (projets: ProjetWithRelations[]): [string, ProjetWithRelations[]][] => {
-  const groupedProjets = projets.reduce<ProjetsByCollectivite>((acc, projet) => {
-    const { code_insee, nom } = projet.collectivite;
-    const codeInsee = code_insee ?? "";
-
-    if (codeInsee) {
-      if (!acc[codeInsee]) {
-        acc[codeInsee] = {
-          commune: nom,
-          projets: [],
-        };
-      }
-      acc[codeInsee].projets.push(projet);
+export const groupProjetsByCollectivite = (projets: ProjetWithRelations[]): ProjetsByCollectivite[] => {
+  return projets.reduce<ProjetsByCollectivite[]>((acc, projet) => {
+    const existingGroup = acc.find(
+      (projetsByCollectivite) => projetsByCollectivite.collectivite.id === projet.collectivite.id,
+    );
+    if (existingGroup) {
+      existingGroup.projets.push(projet);
+    } else {
+      acc.push({ collectivite: projet.collectivite, projets: [projet] });
     }
     return acc;
-  }, {});
-
-  return Object.values(groupedProjets).map(({ commune, projets }) => [commune, projets]);
+  }, []);
 };
