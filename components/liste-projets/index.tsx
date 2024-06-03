@@ -22,7 +22,7 @@ export const ListProjets = () => {
         <ListeProjetsHeader isListEmpty={projets.length === 0} />
         {projetsByTown.map(([commune, projetsByCommune], index) => {
           return (
-            <div className="mb-8" key={index}>
+            <div className="mb-8" key={index} id={commune}>
               <h3 className="mb-4 text-[22px] font-bold text-pfmv-navy">
                 <i className="ri-map-pin-line mr-1 before:!w-[14px]"></i>
                 {commune}
