@@ -56,7 +56,7 @@ export default async function Connexion({ searchParams }: { searchParams: { call
         </div>
       </div>
       <h2 className="mx-auto mb-20 mt-16 w-[420px] text-center text-[22px] font-bold leading-7">{data.title}</h2>
-      <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-24">
+      <div className="flex flex-wrap items-start justify-center gap-x-12 gap-y-[90px]">
         {data.blocs.map((bloc, index) => (
           <div className="flex w-full max-w-[500px] justify-start gap-8" key={index}>
             <Image
