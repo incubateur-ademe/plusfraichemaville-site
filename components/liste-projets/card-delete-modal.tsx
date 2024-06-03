@@ -6,6 +6,8 @@ import { projet } from "@prisma/client";
 
 import clsx from "clsx";
 import { useProjetsStore } from "@/stores/projets/provider";
+import { notifications } from "../common/notifications";
+import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
 
 type ListeProjetsCardDeleteModalProps = {
   projetNom: projet["nom"];
@@ -17,7 +19,7 @@ export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjet
     id: `delete-projet-modal-${projetId}`,
     isOpenedByDefault: false,
   });
-  const deleteProjet = useProjetsStore((state) => state.deleteProjet);
+  const deleteStoredProjet = useProjetsStore((state) => state.deleteProjet);
   return (
     <>
       <Button
@@ -37,11 +39,18 @@ export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjet
         size="large"
         buttons={[
           {
-            doClosesModal: true,
+            doClosesModal: false,
             children: "Supprimer",
             priority: "primary",
             className: "rounded-3xl !min-h-fit !text-sm mr-4",
-            onClick: async () => deleteProjet(projetId),
+            onClick: async () => {
+              const res = await deleteProjetAction(projetId);
+              if (res.type === "success") {
+                deleteStoredProjet(projetId);
+                modal.close();
+              }
+              notifications(res.type, res.message);
+            },
           },
           {
             doClosesModal: true,

@@ -3,7 +3,6 @@ import { createStore } from "zustand/vanilla";
 import { upsert } from "@/helpers/listUtils";
 import { updateFichesProjetAction } from "@/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/components/common/notifications";
-import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
 
 interface ProjetsState {
   projets: ProjetWithRelations[];
@@ -57,13 +56,9 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
       }
     },
     deleteProjet: async (projetId) => {
-      const res = await deleteProjetAction(projetId);
-      if (res.type === "success") {
-        set((state) => ({
-          projets: state.projets.filter((projet) => projet.id !== projetId),
-        }));
-      }
-      notifications(res.type, res.message);
+      set((state) => ({
+        projets: state.projets.filter((projet) => projet.id !== projetId),
+      }));
     },
   }));
 };
