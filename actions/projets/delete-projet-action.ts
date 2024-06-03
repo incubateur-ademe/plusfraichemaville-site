@@ -1,8 +1,6 @@
 "use server";
 
-import { PFMV_ROUTES } from "@/helpers/routes";
 import { auth } from "@/lib/next-auth/auth";
-import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
@@ -20,8 +18,6 @@ export const deleteProjetAction = async (projetId: number): Promise<ResponseActi
 
   try {
     await deleteProjet(projetId, session.user.id);
-
-    revalidatePath(PFMV_ROUTES.ESPACE_PROJET_LISTE);
   } catch (e) {
     customCaptureException("Error in DeleteProjetAction DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };
