@@ -27,12 +27,12 @@ export function ListeProjetsCardDeleteModal({ projetId, projetNom }: ListeProjet
         priority="secondary"
         nativeButtonProps={modal.buttonProps}
         className={clsx(
-          "fr-btn fr-btn--icon-left rounded-3xl flex justify-center items-center",
-          "!h-4 !w-8 !p-0 border-dsfr-text-disabled-grey !shadow-pfmv-light-grey",
+          "fr-btn fr-btn--icon-left flex items-center justify-center rounded-3xl",
+          "!h-4 !w-8 border-dsfr-text-disabled-grey !p-0 !shadow-pfmv-light-grey",
           "!shadow-[inset_0_0_0_1px]",
         )}
       >
-        <i className="ri-delete-bin-fill h-4 w-4 before:!w-4 before:!h-4 before:!align-[0]"></i>
+        <i className="ri-delete-bin-fill h-4 w-4 before:!h-4 before:!w-4 before:!align-[0]"></i>
       </Button>
       <modal.Component
         title=""

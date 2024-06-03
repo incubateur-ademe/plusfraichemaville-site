@@ -13,7 +13,7 @@ export default async function CustomTodoStep({
   return (
     <div className={className}>
       <div className="mb-1 flex flex-row">
-        <i className={"fr-icon-success-fill fr-icon--sm text-dsfr-text-disabled-grey mr-2 mt-[2px]"} />
+        <i className={"fr-icon-success-fill fr-icon--sm mr-2 mt-[2px] text-dsfr-text-disabled-grey"} />
         <span className="text-lg font-bold text-dsfr-text-title-grey">{title}</span>
       </div>
       <div>

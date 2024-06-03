@@ -11,7 +11,7 @@ export const GenericSaveLabel = ({ isSaved, withLabel }: { isSaved: boolean; wit
     <span
       className={clsx(
         "absolute !left-10 top-1 -z-10 w-[7.5rem]",
-        "mt-[1px] text-dsfr-text-label-blue-france text-sm font-bold",
+        "mt-[1px] text-sm font-bold text-dsfr-text-label-blue-france",
       )}
     >
       {!isSaved && withLabel && label}

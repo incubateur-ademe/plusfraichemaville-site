@@ -23,7 +23,7 @@ export default async function ObjectifsDeveloppementDurable({
               title={odd.attributes.description || ""}
               width={imageSize}
               height={imageSize}
-              className={"rounded-md mr-2 mb-2"}
+              className={"mb-2 mr-2 rounded-md"}
             />
           ))}
         </div>

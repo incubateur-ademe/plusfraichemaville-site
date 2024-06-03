@@ -12,7 +12,7 @@ export default function CreateEstimationPage() {
   }
   return (
     <div className="fr-container pt-8">
-      <div className="text-2xl font-bold mb-2">{"Je fais une estimation de budget pour mon projet"}</div>
+      <div className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</div>
       {currentProjet.fiches_solutions_id?.length > 0 ? (
         <>
           <div className="text-lg">{`Mes solutions sélectionnées pour mon projet ${currentProjet?.nom}.`}</div>
@@ -28,7 +28,7 @@ export default function CreateEstimationPage() {
               "vous n'avez pas sélectionné de fiches solutions."}
           </div>
           <Button
-            className="rounded-3xl mt-4"
+            className="mt-4 rounded-3xl"
             linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(currentProjet.id), target: "_self" }}
           >
             Sélectionner des fiches solutions

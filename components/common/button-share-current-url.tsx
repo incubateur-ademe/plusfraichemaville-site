@@ -22,26 +22,26 @@ export default function ButtonShareCurrentUrl({ className }: { className?: strin
       {isClient ? (
         <>
           <div
-            className="flex flex-row items-center gap-2 mb-4 text-dsfr-text-mention-grey cursor-pointer"
+            className="mb-4 flex cursor-pointer flex-row items-center gap-2 text-dsfr-text-mention-grey"
             onClick={copyCurrentUrlToClipboard}
           >
             <div
               className={clsx(
-                "w-8 h-8 rounded-full flex items-center justify-center",
+                "flex h-8 w-8 items-center justify-center rounded-full",
                 "bg-pfmv-navy hover:!bg-dsfr-background-action-high-blue-france-active",
               )}
             >
               <i className={clsx("fr-icon--sm ri-share-forward-fill text-white")} />
             </div>
-            <span className="mt-[1px] text-dsfr-text-label-blue-france text-sm font-bold">Partager</span>
+            <span className="mt-[1px] text-sm font-bold text-dsfr-text-label-blue-france">Partager</span>
           </div>
         </>
       ) : (
-        <div className="flex flex-row items-center gap-2 mb-4 text-dsfr-text-mention-grey">
-          <div className="bg-pfmv-navy w-8 h-8 rounded-full flex items-center justify-center">
+        <div className="mb-4 flex flex-row items-center gap-2 text-dsfr-text-mention-grey">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-pfmv-navy">
             <i className={clsx(" fr-icon--sm ri-share-forward-fill text-white")} />
           </div>
-          <span className="mt-[1px] text-dsfr-text-label-blue-france text-sm font-bold">Partager</span>
+          <span className="mt-[1px] text-sm font-bold text-dsfr-text-label-blue-france">Partager</span>
         </div>
       )}
     </div>

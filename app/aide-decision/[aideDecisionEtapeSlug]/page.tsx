@@ -36,12 +36,12 @@ export default async function Page({
       : PFMV_ROUTES.AIDE_DECISION;
     return (
       <div className={"fr-container"}>
-        <div className="block md:flex flex-row justify-items-center">
+        <div className="block flex-row justify-items-center md:flex">
           {historique && (
             <AideDecisionBreadcrumbs
               currentPageLabel={currentStep.attributes.nom}
               historique={historique}
-              className="hidden md:block md:mt-60"
+              className="hidden md:mt-60 md:block"
             />
           )}
           <div className="grow">
@@ -50,12 +50,12 @@ export default async function Page({
               height={46}
               src={getStrapiImageUrl(firstStep.image, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={currentStep.attributes.question_suivante || "Etape suivante"}
-              className="pt-7 m-auto"
+              className="m-auto pt-7"
             />
             <h1 className={"mb-10 text-center text-xl"}>{currentStep.attributes.question_suivante}</h1>
             <ul className="flex list-none flex-wrap justify-center p-0">
               {currentStep.attributes.etapes_suivantes.data.map((aideDecision) => (
-                <li key={aideDecision.id} className="m-3 w-96 md:w-56 flex">
+                <li key={aideDecision.id} className="m-3 flex w-96 md:w-56">
                   <AideDecisionEtapeCard aideDecisionEtape={aideDecision.attributes} />
                 </li>
               ))}

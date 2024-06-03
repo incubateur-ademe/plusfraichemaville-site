@@ -59,8 +59,8 @@ const TableauDeBordSFicheImages = ({
       {selectedFichesIds.length > IMAGE_SLICE_INDEX && (
         <div
           className={clsx(
-            "w-10 h-10 rounded-[50%] overflow-hidden mr-2 shrink-0",
-            "flex justify-center items-center bg-dsfr-border-default-blue-france text-white",
+            "mr-2 h-10 w-10 shrink-0 overflow-hidden rounded-[50%]",
+            "flex items-center justify-center bg-dsfr-border-default-blue-france text-white",
           )}
         >
           +{selectedFichesIds.length - IMAGE_SLICE_INDEX}
@@ -85,9 +85,9 @@ export const TableauDeBordFicheDiagnosticImage = ({ ficheDiagnosticId }: { fiche
 
 const TableauSuiviFicheImages = ({ image }: { image: APIResponse<"plugin::upload.file"> | null | undefined }) => {
   return (
-    <div className="w-10 h-10 rounded-[50%] overflow-hidden mr-2 shrink-0">
+    <div className="mr-2 h-10 w-10 shrink-0 overflow-hidden rounded-[50%]">
       <Image
-        className="w-10 h-10 object-cover"
+        className="h-10 w-10 object-cover"
         alt="image"
         width={48}
         height={48}

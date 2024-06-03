@@ -55,7 +55,7 @@ export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite
         disabled={!!userCollectivite}
       />
       <InputFormField control={form.control} path="poste" label="Mon poste dans la collectivité" asterisk={true} />
-      <Button className={`rounded-3xl text-sm bg-pfmv-navy`} type="submit" disabled={disabled}>
+      <Button className={`rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>
         {buttonLabel}
       </Button>
     </form>

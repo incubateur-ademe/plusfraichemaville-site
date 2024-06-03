@@ -28,12 +28,12 @@ export const PictoEspaceSelector = ({ pictoId, withBackground, size = "medium", 
   return (
     <div
       className={clsx(
-        `relative flex justify-center items-center`,
+        `relative flex items-center justify-center`,
         size === "small" ? "size-[3.125rem]" : size === "large" ? "size-[136px]" : "size-20",
       )}
     >
       {withBackground && (
-        <div className="absolute inset-0 w-full h-full -z-1 rounded-lg bg-dsfr-background-action-low-blue-france"></div>
+        <div className="-z-1 absolute inset-0 h-full w-full rounded-lg bg-dsfr-background-action-low-blue-france"></div>
       )}
       <div className="z-10">
         <Image

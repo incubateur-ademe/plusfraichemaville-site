@@ -36,23 +36,23 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
   ];
   return (
     <div className="relative">
-      <div className="bg-pfmv-orange h-14 w-full absolute left-0 top-0"></div>
-      <div className="relative fr-container flex flex-row">
-        <div className="flex-none md:w-56 md:mt-[6.5rem]">
+      <div className="absolute left-0 top-0 h-14 w-full bg-pfmv-orange"></div>
+      <div className="fr-container relative flex flex-row">
+        <div className="flex-none md:mt-[6.5rem] md:w-56">
           <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-2"} />
 
           <div className="absolute right-4 top-[68px] md:hidden">
             <GenericSaveFiche id={id} type="diagnostic" />
           </div>
-          <div className="hidden md:block mt-4">
+          <div className="mt-4 hidden md:block">
             <GenericSaveFiche id={id} type="diagnostic" withLabel />
           </div>
         </div>
         <div className="fr-tabs !shadow-none before:!shadow-none">
-          <ul className="fr-tabs__list !m-0 !p-0 !h-14" role="tablist" aria-label="Menu fiche diagnostic">
+          <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche diagnostic">
             {tabs.map((tab) => (
               <li role="presentation" key={tab.contentId}>
-                <CustomTabButton {...tab} className="text-black custom-tab-diag" />
+                <CustomTabButton {...tab} className="custom-tab-diag text-black" />
               </li>
             ))}
           </ul>
@@ -60,7 +60,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
             <div
               id={tab.contentId}
               key={tab.contentId}
-              className={clsx("!px-0 !pt-14 md:!py-12 fr-tabs__panel", !index && "fr-tabs__panel--selected")}
+              className={clsx("fr-tabs__panel !px-0 !pt-14 md:!py-12", !index && "fr-tabs__panel--selected")}
               role="tabpanel"
             >
               {tab.component}

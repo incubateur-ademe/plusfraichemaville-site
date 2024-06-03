@@ -7,13 +7,13 @@ export default async function Posts() {
   return (
     <div className={"fr-container relative"}>
       <div className="flex flex-row justify-items-center">
-        <AideDecisionBreadcrumbs currentPageLabel="Espace" historique={[]} className="hidden md:block md:mt-60" />
+        <AideDecisionBreadcrumbs currentPageLabel="Espace" historique={[]} className="hidden md:mt-60 md:block" />
         <div className="grow">
           <h1 className={"mb-12 pt-[4.5rem] text-center text-xl"}>Sur quel espace voulez-vous agir ?</h1>
-          <div className="max-w-2xl m-auto">
+          <div className="m-auto max-w-2xl">
             <ul className="flex list-none flex-wrap justify-center gap-6 ">
               {aideDecisionFirstSteps.map((aideDecision) => (
-                <li key={aideDecision.id} className="p-0 flex justify-center">
+                <li key={aideDecision.id} className="flex justify-center p-0">
                   <AideDecisionFirstStepEtapeCard aideDecisionEtape={aideDecision.attributes} />
                 </li>
               ))}

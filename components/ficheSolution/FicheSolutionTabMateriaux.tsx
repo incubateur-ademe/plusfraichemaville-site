@@ -16,31 +16,31 @@ export default function FicheSolutionTabMateriaux({
 
   return (
     <div>
-      <div className="text-dsfr-text-title-grey font-bold text-[1.75rem] mb-8">Matériaux et coûts</div>
+      <div className="mb-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Matériaux et coûts</div>
       {ficheSolution.materiaux?.data && ficheSolution.materiaux.data.length > 0 ? (
         <>
-          <hr className="p-0 h-[1px]" />
+          <hr className="h-[1px] p-0" />
           {ficheSolution.materiaux.data.map(({ attributes: mat }) => (
             <div key={mat.titre}>
-              <div className={"flex flex-col md:flex-row gap-1 md:gap-6 justify-between"}>
-                <div className="w-28 h-28 relative hidden md:flex flex-none mt-8">
+              <div className={"flex flex-col justify-between gap-1 md:flex-row md:gap-6"}>
+                <div className="relative mt-8 hidden h-28 w-28 flex-none md:flex">
                   <Image
                     fill
                     sizes="30vw"
                     src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
                     alt={mat.titre}
-                    className={"object-cover rounded-2xl"}
+                    className={"rounded-2xl object-cover"}
                   />
                 </div>
-                <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-title-grey grow">
-                  <div className="flex items-center gap-6 mb-4">
-                    <div className="w-28 h-28 relative flex md:hidden flex-none">
+                <div className="mb-0 mt-8 grow text-dsfr-text-title-grey md:mb-8">
+                  <div className="mb-4 flex items-center gap-6">
+                    <div className="relative flex h-28 w-28 flex-none md:hidden">
                       <Image
                         fill
                         src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
                         alt={mat.titre}
                         sizes="30vw"
-                        className={"object-cover rounded-2xl"}
+                        className={"rounded-2xl object-cover"}
                       />
                     </div>
                     <div className="text-2xl font-bold">{mat.titre}</div>
@@ -49,7 +49,7 @@ export default function FicheSolutionTabMateriaux({
                 </div>
                 <div
                   className={
-                    "md:w-60 flex flex-col flex-none bg-dsfr-background-alt-grey text-dsfr-text-mention-grey p-6"
+                    "flex flex-none flex-col bg-dsfr-background-alt-grey p-6 text-dsfr-text-mention-grey md:w-60"
                   }
                 >
                   {mat.cout_minimum_fourniture != null && mat.cout_maximum_fourniture != null ? (
@@ -65,37 +65,37 @@ export default function FicheSolutionTabMateriaux({
                   )}
                 </div>
               </div>
-              <hr className="p-0 h-[1px]" />
+              <hr className="h-[1px] p-0" />
             </div>
           ))}
         </>
       ) : (
-        <div className="text-dsfr-text-title-grey mb-4">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
+        <div className="mb-4 text-dsfr-text-title-grey">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
       )}
       {displayEntretienPanel && (
         <>
-          <hr className="p-0 h-[1px] mt-16" />
-          <div className={"flex flex-col md:flex-row gap-1 md:gap-6"}>
-            <div className="w-28 h-28 relative hidden md:flex flex-none mt-8 mb-8">
+          <hr className="mt-16 h-[1px] p-0" />
+          <div className={"flex flex-col gap-1 md:flex-row md:gap-6"}>
+            <div className="relative mb-8 mt-8 hidden h-28 w-28 flex-none md:flex">
               <Image fill src={entretienIcon} alt="Coût d'entretien" sizes="33vw" />
             </div>
-            <div className="mb-0 md:mb-8 mt-8 text-dsfr-text-title-grey flex flex-col grow">
-              <div className="flex items-center gap-6 mb-4">
-                <div className="w-28 h-28 relative flex md:hidden flex-none">
+            <div className="mb-0 mt-8 flex grow flex-col text-dsfr-text-title-grey md:mb-8">
+              <div className="mb-4 flex items-center gap-6">
+                <div className="relative flex h-28 w-28 flex-none md:hidden">
                   <Image fill src={entretienIcon} alt="Coût d'entretien" sizes="80vw" />
                 </div>
-                <div className="text-2xl font-bold mb-2">{"Coût d'entretien"}</div>
+                <div className="mb-2 text-2xl font-bold">{"Coût d'entretien"}</div>
               </div>
               {ficheSolution.cout_entretien_description && (
-                <div className="text-sm flex grow">
+                <div className="flex grow text-sm">
                   <CmsRichText label={ficheSolution.cout_entretien_description} />
                 </div>
               )}
             </div>
             <div
               className={
-                "md:w-60 flex flex-col flex-none bg-dsfr-background-action-low-blue-france " +
-                " text-dsfr-text-mention-grey p-6"
+                "flex flex-none flex-col bg-dsfr-background-action-low-blue-france md:w-60 " +
+                " p-6 text-dsfr-text-mention-grey"
               }
             >
               <div>
@@ -106,7 +106,7 @@ export default function FicheSolutionTabMateriaux({
               <div className="text-sm ">par an</div>
             </div>
           </div>
-          <hr className="p-0 h-[1px]" />
+          <hr className="h-[1px] p-0" />
         </>
       )}
     </div>

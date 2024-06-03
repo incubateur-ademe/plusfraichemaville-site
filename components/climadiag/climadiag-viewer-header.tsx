@@ -13,7 +13,7 @@ export const ClimadiagViewerHeader = () => {
         <Image height={75} width={200} src="/images/logo-ademe-pfmv.svg" alt="ADEME - Plus fraîche ma ville" />
       </div>
 
-      <div className="flex gap-4 items-center justify-center">
+      <div className="flex items-center justify-center gap-4">
         <Image
           src="/images/climadiag/climadiag-meteo-france.png"
           width={136}

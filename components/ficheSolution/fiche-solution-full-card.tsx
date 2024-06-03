@@ -28,27 +28,27 @@ export default function FicheSolutionFullCard({
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
 
   return (
-    <Link className="flex w-72 flex-col pfmv-card md:ml-0" href={url}>
-      <div className="flex w-full h-52">
+    <Link className="pfmv-card flex w-72 flex-col md:ml-0" href={url}>
+      <div className="flex h-52 w-full">
         <Image
           width={450}
           height={300}
           src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={ficheSolution.titre}
-          className={"w-full h-full object-cover rounded-t-2xl"}
+          className={"h-full w-full rounded-t-2xl object-cover"}
         />
       </div>
-      <div className="px-6 pt-6 pb-4 flex flex-col grow">
+      <div className="flex grow flex-col px-6 pb-4 pt-6">
         {typeSolution && (
           <>
-            <div className="flex flex-row text-xs mb-2 text-dsfr-text-mention-grey">
+            <div className="mb-2 flex flex-row text-xs text-dsfr-text-mention-grey">
               {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           </>
         )}
-        <div className={"text-xl font-bold text-dsfr-text-title-grey text-blue-hover"}>{ficheSolution.titre}</div>
-        <div className={"text-sm text-dsfr-text-title-grey mt-4"}>{ficheSolution.description_courte}</div>
+        <div className={"text-blue-hover text-xl font-bold text-dsfr-text-title-grey"}>{ficheSolution.titre}</div>
+        <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheSolution.description_courte}</div>
         <div className={"mt-auto"}>
           <div>
             <FicheSolutionInfoComparatif
@@ -56,7 +56,7 @@ export default function FicheSolutionFullCard({
               ficheSolution={ficheSolution}
               className={"text-xs"}
             />
-            <div className="text-center mt-4">
+            <div className="mt-4 text-center">
               <div className={"fr-btn fr-btn--tertiary rounded-3xl px-9"}>{"J'explore la solution"}</div>
             </div>
           </div>

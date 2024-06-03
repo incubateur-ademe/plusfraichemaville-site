@@ -108,8 +108,8 @@ const AddressInputFormField = <T extends FieldValues>({
                 afterLeave={() => setQuery("")}
               >
                 <Combobox.Options
-                  className="absolute z-30 bg-white p-0 list-none mt-1 max-h-60 w-full
-                overflow-auto rounded-md text-base shadow-lg ring-1 ring-black/5"
+                  className="shadow-lg absolute z-30 mt-1 max-h-60 w-full list-none overflow-auto
+                rounded-md bg-white p-0 text-base ring-1 ring-black/5"
                 >
                   {fetchedAddresses.length === 0 && query !== "" && !loading ? (
                     <div className="relative cursor-default select-none px-4 py-2">Aucun résultat.</div>

@@ -14,8 +14,8 @@ export default function BaisseTemperatureFilter({ className }: { className?: str
 
   return (
     <div>
-      <div className="text-sm text-center md:text-left text-dsfr-text-mention-grey mb-3">Baisse de la température</div>
-      <div className={`flex flex-row md:flex-col justify-center md:justify-start flex-wrap shrink gap-4 ${className}`}>
+      <div className="mb-3 text-center text-sm text-dsfr-text-mention-grey md:text-left">Baisse de la température</div>
+      <div className={`flex shrink flex-row flex-wrap justify-center gap-4 md:flex-col md:justify-start ${className}`}>
         {ALL_BAISSES_TEMPERATURE_FICHE_SOLUTION.map((baisseTemperature) => (
           <button
             key={baisseTemperature.code}
