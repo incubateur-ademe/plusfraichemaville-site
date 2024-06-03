@@ -8,39 +8,39 @@ export const FicheCardSkeleton = ({ horizontal }: { horizontal?: boolean }) => {
       <div className={clsx("animate-pulse", horizontal && "flex")}>
         <div
           className={clsx(
-            "bg-dsfr-contrast-grey h-52",
-            horizontal ? "w-72 rounded-tl-xl rounded-bl-xl" : "w-full rounded-t-xl shrink-0",
+            "h-52 bg-dsfr-contrast-grey",
+            horizontal ? "w-72 rounded-bl-xl rounded-tl-xl" : "w-full shrink-0 rounded-t-xl",
           )}
         ></div>
         <div className={clsx(horizontal && "w-full")}>
           <div
             className={clsx(
               "bg-dsfr-background-contrast-green-menthe-active opacity-30",
-              "w-4/5 mx-auto h-3 rounded-xl mt-8",
+              "mx-auto mt-8 h-3 w-4/5 rounded-xl",
             )}
           ></div>
           <div
             className={clsx(
               "bg-dsfr-background-contrast-green-menthe-active opacity-30",
-              "w-4/5 mx-auto h-3 rounded-xl mt-4",
+              "mx-auto mt-4 h-3 w-4/5 rounded-xl",
             )}
           ></div>
           <div
             className={clsx(
               "bg-dsfr-background-contrast-green-menthe-active opacity-30",
-              "w-4/5 mx-auto h-3 rounded-xl mt-4",
+              "mx-auto mt-4 h-3 w-4/5 rounded-xl",
             )}
           ></div>
           <div
             className={clsx(
               "bg-dsfr-background-contrast-green-menthe-active opacity-30",
-              "w-4/5 mx-auto h-3 rounded-xl mt-4",
+              "mx-auto mt-4 h-3 w-4/5 rounded-xl",
             )}
           ></div>
           <div
             className={clsx(
               "bg-dsfr-background-contrast-green-menthe-active opacity-30",
-              "w-4/5 mx-auto h-3 rounded-xl mt-4",
+              "mx-auto mt-4 h-3 w-4/5 rounded-xl",
             )}
           ></div>
         </div>
