@@ -4,13 +4,12 @@ import { usePathname } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useSession } from "next-auth/react";
 import { useProjetsStore } from "@/stores/projets/provider";
+import { setBadgeOff, NotificationElements } from "@/helpers/notification-badge";
 
 export default function NavigationMenu() {
   const pathname = usePathname();
   const { status } = useSession();
-
   const setCurrentProjetId = useProjetsStore((state) => state.setCurrentProjetId);
-
   const cancelCurrentProjet = () => setCurrentProjetId(null);
 
   return (
@@ -38,9 +37,17 @@ export default function NavigationMenu() {
           isActive: pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE),
         },
         {
-          linkProps: { href: PFMV_ROUTES.MES_FICHES_SOLUTIONS, target: "_self", onClick: cancelCurrentProjet },
+          linkProps: {
+            href: PFMV_ROUTES.MES_FICHES_SOLUTIONS,
+            target: "_self",
+            onClick: () => {
+              cancelCurrentProjet();
+              setBadgeOff(NotificationElements.selectionMenuItem);
+            },
+          },
           text: "Ma sélection",
           isActive: pathname?.startsWith(PFMV_ROUTES.MES_FICHES_SOLUTIONS),
+          className: NotificationElements.selectionMenuItem,
         },
         {
           linkProps: { href: "/contact", target: "_self", onClick: cancelCurrentProjet },

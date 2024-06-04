@@ -5,7 +5,7 @@ import FicheSolutionFullCard from "@/components/ficheSolution/fiche-solution-ful
 import { APIResponseData } from "@/lib/strapi/types/types";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 
-type FicheSolutionCardWithUserInfoProps = {
+export type FicheSolutionCardWithUserInfoProps = {
   ficheSolution: APIResponseData<"api::fiche-solution.fiche-solution">;
   projectName: string;
   extraUrlParams?: { param: string; value: string }[];

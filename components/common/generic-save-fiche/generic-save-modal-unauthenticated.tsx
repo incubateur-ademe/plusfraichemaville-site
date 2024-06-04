@@ -1,6 +1,7 @@
 import { PFMV_ROUTES } from "@/helpers/routes";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
+import { setBadgeOff, NotificationElements } from "@/helpers/notification-badge";
 
 export const GenericSaveModalUnauthenticated = ({ modal, type }: GenericSaveModalCommonProps) => {
   const isSolution = type === "solution";
@@ -24,7 +25,7 @@ export const GenericSaveModalUnauthenticated = ({ modal, type }: GenericSaveModa
             linkProps={{ href: PFMV_ROUTES.MES_FICHES_SOLUTIONS, target: "_self" }}
             size="small"
           >
-            Ma sélection
+            <span onClick={() => setBadgeOff(NotificationElements.selectionMenuItem)}>Ma sélection</span>
           </Button>
         </div>
       </div>

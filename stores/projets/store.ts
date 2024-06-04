@@ -22,6 +22,7 @@ export type ProjetsActions = {
     _projetId: number,
     _withNotification?: boolean,
   ) => void;
+  deleteProjet: (_projetId: number) => void;
   setCurrentEstimationId: (_estimationIdd: number | null) => void;
 };
 
@@ -51,13 +52,17 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
     addOrUpdateProjet: (_projet) => set((state) => ({ projets: upsert(state.projets, _projet) })),
     updateSelectedFiches: async (type, ficheId, projetId, withNotification) => {
       const update = await updateFichesProjetAction(projetId, ficheId, type);
-
       if (update.projet) {
         set((state) => ({ projets: upsert(state.projets, update.projet!) }));
         if (withNotification) {
           notifications(update.type, update.message);
         }
       }
+    },
+    deleteProjet: async (projetId) => {
+      set((state) => ({
+        projets: state.projets.filter((projet) => projet.id !== projetId),
+      }));
     },
   }));
 };
