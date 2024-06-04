@@ -1,36 +1,32 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
-import Button from "@codegouvfr/react-dsfr/Button";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 
 export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: GenericSaveModalCommonProps) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   return (
-    <modal.Component title="" size="large">
-      <div className="mb-10 flex items-center">
-        <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
-        <span className="text-2xl font-bold">
-          {type === "solution" ? "Solution" : "Méthode diagnostic"} ajoutée dans mon projet <br />
-          <span className="text-dsfr-text-label-blue-france">{projet?.nom}</span>
-        </span>
-      </div>
-      <Button
-        priority="primary"
-        className="mb-2 mr-4 !min-h-fit rounded-3xl !text-sm md:ml-20"
+    <modal.Component
+      title={`${type === "solution" ? "Solution" : "Méthode diagnostic"} ajoutée à mon projet`}
+      size="medium"
+      // @ts-ignore
+      iconId="fr-icon-success-fill text-dsfr-background-action-high-success-hover mr-2"
+    >
+      <div className="mb-10 text-2xl font-bold">{projet?.nom}</div>
+      <GenericFicheLink
+        className="fr-btn fr-btn--secondary mb-4 mr-4 !min-h-fit rounded-3xl !text-sm"
         onClick={() => modal.close()}
-      >
-        Continuer ma lecture
-      </Button>
-      <Link
         href={
-          type === "solution"
-            ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projet?.id!)
-            : PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC(projet?.id!)
+          type === "diagnostic"
+            ? PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_LISTE_ALL
+            : PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL
         }
-        className="fr-btn fr-btn--secondary mr-4 !min-h-fit rounded-3xl !text-sm"
       >
-        Voir mes fiches {type === "solution" ? "solutions" : "diagnostic"}
+        {type === "diagnostic" ? "Ajouter d'autres diagnostic" : "Ajouter d'autres solutions"}
+      </GenericFicheLink>
+      <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projet?.id!)} className="fr-btn mr-4 !min-h-fit rounded-3xl !text-sm">
+        Aller au tableau de bord
       </Link>
     </modal.Component>
   );
