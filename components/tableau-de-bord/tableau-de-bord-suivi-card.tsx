@@ -19,7 +19,7 @@ export type TableauDeBordCardType =
 
 export type TableauDeBordSuiviCardProps = {
   title: string;
-  progress: "0" | "50" | "100" | ((_projet: ProjetWithRelations) => "0" | "50" | "100");
+  progress: "0" | "50" | "100" | ((_projet: ProjetWithRelations | undefined) => "0" | "50" | "100");
   index: number;
   disabled?: boolean;
   children: ReactNode;
