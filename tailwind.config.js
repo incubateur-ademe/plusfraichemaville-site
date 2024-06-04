@@ -26,6 +26,7 @@ module.exports = {
       "pfmv-navy": "var(--background-active-blue-france)",
       "pfmv-orange": "#ffe8e5",
       "pfmv-low-pink": "#fbb8ab",
+      "pfmv-background-action-high-red-marianne-hover": "var(--background-action-high-red-marianne-hover)",
       "pfmv-grey": "#666666",
       "pfmv-climadiag-yellow": "var(--background-action-low-yellow-moutarde-active)",
       "pfmv-climadiag-orange": "var(--border-default-orange-terre-battue)",

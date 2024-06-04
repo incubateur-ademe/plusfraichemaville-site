@@ -61,6 +61,10 @@
       }
     }
   }
+
+  .notification-badge {
+    @apply !relative block after:absolute after:right-2 after:top-3 after:size-[7.5px] after:rounded-full after:bg-dsfr-background-flat-blue-france;
+  }
 }
 
 .pfmv-card,
@@ -272,8 +276,4 @@
   path {
     fill: var(--background-action-high-blue-france-active);
   }
-}
-
-.notification-badge {
-  @apply !relative block after:absolute after:right-2 after:top-3 after:size-[7.5px] after:rounded-full after:bg-dsfr-background-flat-blue-france;
 }
