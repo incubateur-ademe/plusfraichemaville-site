@@ -41,7 +41,7 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
                 "block size-[51px] rounded-full !bg-none",
                 !recommandationsAlreadyViewed &&
                   link.notificationBadge &&
-                  "after:bg-pfmv-background-action-high-red-marianne-hover !relative block after:absolute",
+                  "!relative block after:absolute after:bg-pfmv-background-action-high-red-marianne-hover",
                 !recommandationsAlreadyViewed &&
                   link.notificationBadge &&
                   "after:right-1 after:top-1 after:size-[7.5px] after:rounded-full",
