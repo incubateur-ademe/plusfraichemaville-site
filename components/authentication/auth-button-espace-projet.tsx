@@ -19,7 +19,7 @@ export const AuthButtonEspaceProjet = () => {
         "!text-sm !shadow-none",
         isAuthanticated || isConnexionPage
           ? "!bg-dsfr-background-action-low-blue-france"
-          : "border-dsfr-background-disabled-grey border-[1px]",
+          : "border-[1px] border-dsfr-background-disabled-grey",
       )}
     >
       Mon espace projet
