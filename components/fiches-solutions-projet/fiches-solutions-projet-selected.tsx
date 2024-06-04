@@ -9,6 +9,7 @@ import { notifications } from "../common/notifications";
 import Button from "@codegouvfr/react-dsfr/Button";
 import React from "react";
 import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
+import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 
 type FichesSolutionsProjetsSelectedProps = {
   selectedFichesSolutionsIds?: number[];
@@ -57,8 +58,8 @@ export const FichesSolutionsProjetsSelected = ({
             <FicheSolutionCardWithFetcher id={selectedFichesSolution} complete projectName="" key={index} />
           ))
         )}
-        <Link
-          href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(+projetId)}
+        <GenericFicheLink
+          href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL}
           className={clsx(
             "fr-btn !h-32 !w-32 rounded-[10px] bg-dsfr-text-label-blue-france",
             "flex !flex-col items-center justify-center",
@@ -67,7 +68,7 @@ export const FichesSolutionsProjetsSelected = ({
         >
           <i className="ri-add-circle-fill mb-2 text-sm text-white"></i>
           <span className="text-center text-white">Ajouter des solutions</span>
-        </Link>
+        </GenericFicheLink>
       </div>
       {selectedFichesSolutionsIds && selectedFichesSolutionsIds.length > 0 ? (
         <Button className="rounded-3xl bg-pfmv-navy" type="button" onClick={validateFichesSolutionsToProjet}>

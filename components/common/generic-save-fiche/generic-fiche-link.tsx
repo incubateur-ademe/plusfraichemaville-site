@@ -6,18 +6,19 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren } from "react";
 
-type FicheDiagnosticLinkProps = {
+type GenericFicheLinkProps = {
   href: string;
   className?: string;
+  onClick?: () => void;
 } & PropsWithChildren;
 
-export const FicheDiagnosticLink = ({ children, className, href }: FicheDiagnosticLinkProps) => {
+export const GenericFicheLink = ({ children, className, href, onClick }: GenericFicheLinkProps) => {
   const pathname = usePathname();
   const projetId = useProjetsStore((state) => state.currentProjetId);
   const url = pathname.startsWith(PFMV_ROUTES.ESPACE_PROJET) ? `/espace-projet/${projetId}${href}` : href;
 
   return (
-    <Link href={url} className={className}>
+    <Link href={url} className={className} onClick={onClick}>
       {children}
     </Link>
   );
