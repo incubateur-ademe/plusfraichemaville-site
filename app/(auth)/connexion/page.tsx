@@ -20,7 +20,7 @@ const data = {
       title: "Invitez des membres à collaborer sur votre projet",
       description: "Partagez la conception de votre projet au sein de votre collectivité",
       picto: "collaborer",
-      badge: true,
+      comingSoon: true,
     },
     {
       title: "Trouvez des financements adaptés à votre projet",
@@ -31,7 +31,7 @@ const data = {
       title: "Lancez la mise-en-œuvre des solutions",
       description: "Rédigez un cahier des charges et chercher les bons prestataires pour réaliser le projet.",
       picto: "solutions",
-      badge: true,
+      comingSoon: true,
     },
   ],
 };
@@ -69,7 +69,7 @@ export default async function Connexion({ searchParams }: { searchParams: { call
             <div>
               <h3 className="mb-3 text-[22px] font-bold leading-7">{bloc.title}</h3>
               <p className="mb-4 text-lg">{bloc.description}</p>
-              {bloc.badge && (
+              {bloc.comingSoon && (
                 <Badge
                   small
                   severity="new"
