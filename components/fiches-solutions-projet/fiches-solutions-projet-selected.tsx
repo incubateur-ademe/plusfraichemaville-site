@@ -16,7 +16,6 @@ export const FichesSolutionsProjetsSelected = ({
   selectedFichesSolutionsIds,
   projetId,
 }: FichesSolutionsProjetsSelectedProps) => {
-
   if (!projetId) {
     return null;
   }
