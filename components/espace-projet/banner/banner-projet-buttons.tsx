@@ -30,7 +30,7 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
             href={PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projetId, link.url)}
             className={clsx(
               "block size-[51px] rounded-full !bg-none",
-              !recommandationsAlreadyViewed && link.badge && "after:bg-pfmv-red !relative block after:absolute",
+              !recommandationsAlreadyViewed && link.badge && "!relative block after:absolute after:bg-pfmv-red",
               !recommandationsAlreadyViewed &&
                 link.badge &&
                 "after:right-1 after:top-1 after:size-[7.5px] after:rounded-full",
