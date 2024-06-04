@@ -13,6 +13,7 @@ export const PFMV_ROUTES = {
   CREATE_PROJET: "/espace-projet/creation-projet",
   ESPACE_PROJET_FICHES_DIAGNOSTIC_LISTE: "/espace-projet/fiche-diagnostic",
   ESPACE_PROJET_FICHES_DIAGNOSTIC_LISTE_ALL: "/fiches-diagnostic/liste",
+  ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiches-solutions/liste",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord?tab=tableau-de-suivi",
   FICHE_DIAGNOSTIC: (url: string) => `/fiches-diagnostic/${url}`,
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
@@ -23,7 +24,6 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
   ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
     `/espace-projet/${projetId}/estimation/liste${(opener && `?open=${opener}`) || ""}`,
-  ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions/liste`,
   ESPACE_PROJET_FICHES_SOLUTIONS_REX: (projetId: number, projetRexSlug: string) =>
     `/espace-projet/${projetId}/projet/${projetRexSlug}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION: (projetId: number, ficheSolutionSlug: string) =>

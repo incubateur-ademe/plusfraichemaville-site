@@ -20,9 +20,16 @@ type PictoEspaceType = PictoType<PictoId> & {
   withBackground: boolean;
   size: "small" | "medium" | "large";
   pictoClassName?: string;
+  className?: string;
 };
 
-export const PictoEspaceSelector = ({ pictoId, withBackground, size = "medium", pictoClassName }: PictoEspaceType) => {
+export const PictoEspaceSelector = ({
+  pictoId,
+  withBackground,
+  size = "medium",
+  pictoClassName,
+  className,
+}: PictoEspaceType) => {
   const selectedPicto = pictos[pictoId];
 
   return (
@@ -30,6 +37,7 @@ export const PictoEspaceSelector = ({ pictoId, withBackground, size = "medium", 
       className={clsx(
         `relative flex items-center justify-center`,
         size === "small" ? "size-[3.125rem]" : size === "large" ? "size-[136px]" : "size-20",
+        className,
       )}
     >
       {withBackground && (

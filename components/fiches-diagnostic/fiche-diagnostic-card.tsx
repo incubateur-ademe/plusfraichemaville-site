@@ -5,7 +5,7 @@ import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
 import { getCoutFiche } from "@/helpers/cout/cout-fiche-solution";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
 import { PFMV_ROUTES } from "@/helpers/routes";
-import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
+import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import { TypeFiche } from "@/helpers/common";
@@ -30,7 +30,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
   return (
     <div className={clsx("pfmv-card relative h-auto w-72", !vertical && "lg:h-fit lg:w-full lg:max-w-[53rem]")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type="diagnostic" classNameButton="absolute top-3 right-4" />
-      <FicheDiagnosticLink href={ficheUrl}>
+      <GenericFicheLink href={ficheUrl}>
         <div
           className={clsx(
             "flex h-full flex-col rounded-[0.9375rem] bg-dsfr-background-alt-red-marianne pb-5",
@@ -111,7 +111,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             {"J'explore la méthode"}
           </div>
         </div>
-      </FicheDiagnosticLink>
+      </GenericFicheLink>
     </div>
   );
 };
