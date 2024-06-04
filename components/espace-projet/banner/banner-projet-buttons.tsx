@@ -8,10 +8,12 @@ import {
   BannerPictoRecommandations,
   BannerPictoTableauDeSuivi,
 } from "./banner-projet-buttons-pictos";
+import { useRef } from "react";
 
 export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
   const searchParams = useSearchParams();
   const currentTab = searchParams.get("tab");
+  const linkRef = useRef<(HTMLAnchorElement | null)[]>([]);
 
   const { recommandationsAlreadyViewed, updateToRecommandationsViewed } = useRecommandationsViewed();
   const links = [
@@ -37,11 +39,16 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
           <div className="relative" key={index}>
             <Link
               href={PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projetId, link.url)}
+              ref={(ref) => {
+                if (linkRef.current) {
+                  linkRef.current[index] = ref;
+                }
+              }}
               className={clsx(
                 "block size-[51px] rounded-full !bg-none",
                 !recommandationsAlreadyViewed &&
                   link.notificationBadge &&
-                  "!relative block after:absolute after:bg-pfmv-background-action-high-red-marianne-hover",
+                  "after:bg-pfmv-background-action-high-red-marianne-hover !relative block after:absolute",
                 !recommandationsAlreadyViewed &&
                   link.notificationBadge &&
                   "after:right-1 after:top-1 after:size-[7.5px] after:rounded-full",
@@ -54,7 +61,10 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
                   ["bg-dsfr-text-label-blue-france"]: currentTab === link.url,
                 },
               )}
-              onClick={async () => link.update && link.update()}
+              onClick={() => {
+                linkRef.current[index]?.blur();
+                link.update && link.update();
+              }}
               aria-describedby={`tooltip-${link.tooltip}-${projetId}`}
               id="link-2990"
               key={index}
