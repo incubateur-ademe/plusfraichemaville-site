@@ -25,12 +25,9 @@ export const ListProjets = () => {
             <div
               className="mb-8"
               key={collectiviteWithProjet.collectivite.id}
-              id={collectiviteWithProjet.collectivite.code_insee ?? ""}
+              id={collectiviteWithProjet.collectivite.code_insee || collectiviteWithProjet.collectivite.nom}
             >
-              <h3
-                id={collectiviteWithProjet.collectivite.code_insee || collectiviteWithProjet.collectivite.nom}
-                className="mb-4 text-[22px] font-bold text-pfmv-navy"
-              >
+              <h3 className="mb-4 text-[22px] font-bold text-pfmv-navy">
                 <i className="ri-home-2-fill mr-2  before:!w-[20px]"></i>
                 {collectiviteWithProjet.collectivite.nom}
               </h3>

@@ -30,7 +30,12 @@ export default function BannerProjet({ className }: { className?: string }) {
             </div>
             <div className="flex flex-col justify-between py-1">
               <div className="mb-1 w-fit">
-                <Link href={{ pathname: PFMV_ROUTES.ESPACE_PROJET_LISTE, hash: currentProjet.collectivite.code_insee }}>
+                <Link
+                  href={{
+                    pathname: PFMV_ROUTES.ESPACE_PROJET_LISTE,
+                    hash: currentProjet.collectivite.code_insee || currentProjet.collectivite.nom,
+                  }}
+                >
                   <div
                     className={clsx(
                       "mr-1 rounded-[4px] bg-dsfr-background-action-low-blue-france text-base hover:underline",

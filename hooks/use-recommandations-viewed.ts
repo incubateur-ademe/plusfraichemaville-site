@@ -7,7 +7,9 @@ export const useRecommandationsViewed = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const currentUser = useUserStore((state) => state.userInfos?.id);
   const recommandationViewed = currentProjet?.recommandations_viewed_by;
-  const recommandationsAlreadyViewed = currentUser && recommandationViewed?.includes(currentUser);
+  const shouldShowRecommandationBadge = (currentProjet?.fiches_solutions_id?.length || 0) > 0;
+  const recommandationsAlreadyViewed =
+    (currentUser && recommandationViewed?.includes(currentUser)) || !shouldShowRecommandationBadge;
 
   const updateToRecommandationsViewed = async () => {
     if (currentUser && currentProjet && !recommandationsAlreadyViewed) {
