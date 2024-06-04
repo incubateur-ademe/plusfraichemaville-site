@@ -7,7 +7,7 @@ export const BannerPictoRecommandations = ({ active }: BannerPictoProps) => {
   const isActive = active ? "#fff" : "#000091";
   return (
     <svg
-      className="lef0t-1/2 pointer-events-none absolute top-1/2 -translate-x-1/2 -translate-y-1/2"
+      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
       width="30"
       height="25"
       viewBox="0 0 30 25"
