@@ -1,5 +1,4 @@
 import { FichesSolutionsProjetEmpty } from ".";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/helpers/routes";

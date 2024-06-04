@@ -1,6 +1,5 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
-import Button from "@codegouvfr/react-dsfr/Button";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
