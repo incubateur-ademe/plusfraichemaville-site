@@ -32,7 +32,7 @@ export const AuthButtonUser = () => {
 
   return (
     <div className="relative h-7">
-      <button onClick={opener} className="flex gap-1 hover:!bg-white">
+      <button onClick={opener} className="flex items-center gap-1 hover:!bg-white">
         <Image src="/images/auth/user.svg" width={28} height={28} alt="" />{" "}
         <span className={clsx("text-[10px]", open ? "text-dsfr-text-label-blue-france" : "text-pfmv-light-grey")}>
           ▼
