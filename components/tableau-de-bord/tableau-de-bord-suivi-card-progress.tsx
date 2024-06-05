@@ -21,7 +21,7 @@ const progressState = (progress?: "0" | "50" | "100") => {
 
 export const TableauDeBordSuiviCardProgress = ({ progress }: TableauDeBordSuiviCardProgressProps) => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const progressValue = typeof progress === "function" ? progress(currentProjet!) : progress;
+  const progressValue = typeof progress === "function" ? progress(currentProjet) : progress;
   const { label, widthClass } = progressState(progressValue);
 
   return (
