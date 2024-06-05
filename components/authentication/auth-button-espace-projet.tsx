@@ -6,8 +6,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const AuthButtonEspaceProjet = () => {
-  const isConnexionPage = usePathname().startsWith("/connexion");
-  const isEspaceProjet = usePathname().startsWith("/espace-projet");
+  const isConnexionPage = usePathname().startsWith(PFMV_ROUTES.CONNEXION);
+  const isEspaceProjet = usePathname().startsWith(PFMV_ROUTES.ESPACE_PROJET);
 
   return (
     <Link
@@ -17,7 +17,7 @@ export const AuthButtonEspaceProjet = () => {
         "!text-sm !shadow-none",
         isConnexionPage || isEspaceProjet
           ? "!bg-dsfr-background-action-low-blue-france"
-          : "border-[1px] border-dsfr-background-disabled-grey",
+          : "border-dsfr-background-disabled-grey border-[1px]",
       )}
     >
       Mon espace projet
