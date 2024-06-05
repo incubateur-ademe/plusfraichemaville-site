@@ -41,7 +41,7 @@ export const AuthButtonUser = () => {
       {open && (
         <div
           className={clsx(
-            "absolute right-0 top-[130%] w-40 bg-white px-5 pb-1 pl-3 pt-5 text-right shadow-pfmv-card-shadow",
+            "absolute right-0 top-[130%] w-40 bg-white px-5 pb-1 pl-3 pt-3 text-right shadow-pfmv-card-shadow",
           )}
         >
           <ul className="relative z-10">
