@@ -2,14 +2,12 @@
 
 import { PFMV_ROUTES } from "@/helpers/routes";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 export const AuthButtonEspaceProjet = () => {
-  const { status } = useSession();
-  const isAuthanticated = status === "authenticated";
   const isConnexionPage = usePathname().startsWith("/connexion");
+  const isEspaceProjet = usePathname().startsWith("/espace-projet");
 
   return (
     <Link
@@ -17,9 +15,9 @@ export const AuthButtonEspaceProjet = () => {
       className={clsx(
         "fr-btn fr-btn--tertiary ri-dashboard-fill fr-btn--icon-left relative z-10",
         "!text-sm !shadow-none",
-        isAuthanticated || isConnexionPage
+        isConnexionPage || isEspaceProjet
           ? "!bg-dsfr-background-action-low-blue-france"
-          : "border-[1px] border-dsfr-background-disabled-grey",
+          : "border-dsfr-background-disabled-grey border-[1px]",
       )}
     >
       Mon espace projet
