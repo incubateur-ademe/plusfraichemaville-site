@@ -89,26 +89,25 @@ model user_collectivite {
 }
 
 model projet {
-  id                         Int          @id
-  created_by                 String
-  creator                    User         @relation(fields: [created_by], references: [id])
-  created_at                 DateTime     @default(now())
-  nom                        String
-  type_espace                String?
-  adresse                    String?
-  niveau_maturite            String?
-  adresse_info               Json?
-  date_echeance              DateTime?
-  fiches_solutions_id        Int[]
-  fiches_diagnostic_id       Int[]
-  fiches_solutions_validated Boolean      @default(false)
-  estimations                estimation[]
-  collectiviteId             Int
-  collectivite               collectivite @relation(fields: [collectiviteId], references: [id])
-  recommandations_viewed_by  String[]
-  deleted_at                 DateTime?
-  deleted_by                 String?
-  deleter                    User?        @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
+  id                        Int          @id
+  created_by                String
+  creator                   User         @relation(fields: [created_by], references: [id])
+  created_at                DateTime     @default(now())
+  nom                       String
+  type_espace               String?
+  adresse                   String?
+  niveau_maturite           String?
+  adresse_info              Json?
+  date_echeance             DateTime?
+  fiches_solutions_id       Int[]
+  fiches_diagnostic_id      Int[]
+  estimations               estimation[]
+  collectiviteId            Int
+  collectivite              collectivite @relation(fields: [collectiviteId], references: [id])
+  recommandations_viewed_by String[]
+  deleted_at                DateTime?
+  deleted_by                String?
+  deleter                   User?        @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
 }
 
 model estimation {

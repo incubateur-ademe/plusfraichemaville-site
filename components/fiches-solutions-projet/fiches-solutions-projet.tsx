@@ -17,7 +17,6 @@ export const FichesSolutionsProjet = () => {
         <FichesSolutionsProjetHeader projetId={projet?.id} projetNom={projet?.nom} />
         <FichesSolutionsProjetsSelected
           selectedFichesSolutionsIds={selectedFichesSolutionsIds}
-          isValidated={projet?.fiches_solutions_validated}
           updateStore={updateStore}
           projetId={projet?.id}
         />

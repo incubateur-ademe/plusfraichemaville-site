@@ -35,9 +35,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je choisis une méthode de diagnostic",
     index: 2,
-    progress: (projet: ProjetWithRelations) => {
-      return projet?.fiches_diagnostic_id && projet.fiches_diagnostic_id.length > 0 ? "100" : "0";
-    },
+    progress: (projet: ProjetWithRelations | undefined) => (projet?.fiches_diagnostic_id.length ? "100" : "0"),
     disabled: false,
     type: "diagnostic",
     picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
@@ -46,11 +44,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je choisis mes solutions de rafraîchissement",
     index: 3,
-    progress: (projet: ProjetWithRelations) => {
-      if (projet) {
-        return projet.fiches_solutions_validated ? "100" : projet.fiches_solutions_id.length ? "50" : "0";
-      } else return "0";
-    },
+    progress: (projet: ProjetWithRelations | undefined) => (projet?.fiches_solutions_id.length ? "100" : "0"),
     disabled: false,
     type: "solution",
     picto: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,
@@ -59,7 +53,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je fais une estimation de budget pour mon projet",
     index: 4,
-    progress: (projet: ProjetWithRelations) => {
+    progress: (projet: ProjetWithRelations | undefined) => {
       if (projet && projet.estimations?.length > 0) {
         return getLastCompletedEstimation(projet.estimations) ? "100" : "50";
       } else {
