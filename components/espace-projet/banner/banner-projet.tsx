@@ -13,7 +13,7 @@ export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
 
   return (
-    <div className={`bg-dsfr-background-alt-blue-france py-8 ${className} min-h-[7rem]`}>
+    <div className={`bg-dsfr-background-alt-blue-france py-4 ${className} min-h-[7rem]`}>
       {!currentProjet ? (
         <BannerProjetSkeleton />
       ) : (
