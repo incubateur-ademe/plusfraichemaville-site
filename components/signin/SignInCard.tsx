@@ -27,7 +27,7 @@ export default function SignInCard({
 
   return (
     <div className={clsx("max-w-xl rounded-2xl bg-dsfr-background-alt-grey px-12 py-9", className)}>
-      <div className="text-xl font-bold text-dsfr-text-title-grey">{messages[message]}</div>
+      <h2 className="text-xl font-bold text-dsfr-text-title-grey">{messages[message]}</h2>
       <div className="mb-8 mt-8">
         Vous n’avez jamais utilisé AgentConnect? Renseignez simplement votre adresse professionnelle.
       </div>

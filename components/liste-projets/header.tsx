@@ -7,7 +7,7 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
     <>
       <div className="flex justify-between pb-4">
         <div className="w-full">
-          <h2 className="mb-1 text-2xl text-dsfr-text-label-blue-france">Mon espace projet</h2>
+          <h1 className="mb-1 text-2xl text-dsfr-text-label-blue-france">Mon espace projet</h1>
           <span className="mb-8 block text-lg">Les projets de rafraîchissement de ma collectivité</span>
           {isListEmpty && <ListProjetsHeaderEmpty />}
         </div>

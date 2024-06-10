@@ -12,9 +12,9 @@ export const HomepageStories = () => {
   const { stories } = homepageData;
   return (
     <div className="relative mb-11">
-      <h3 className={clsx("mx-auto my-14 max-w-2xl text-center text-lg text-pfmv-navy lg:text-2xl", "px-10 lg:px-0")}>
+      <h2 className={clsx("mx-auto my-14 max-w-2xl text-center text-lg text-pfmv-navy lg:text-2xl", "px-10 lg:px-0")}>
         {stories.title}
-      </h3>
+      </h2>
       <div>
         <Splide
           id="homepage-stories-slider"

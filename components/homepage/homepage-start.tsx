@@ -8,9 +8,9 @@ export const HomepageStart = () => {
   const { start } = homepageData;
   return (
     <div className="bg-dsfr-background-alt-blue-france pb-11">
-      <h3 className="mb-0 py-10 text-center text-lg font-bold text-pfmv-navy lg:pb-20 lg:pt-14 lg:text-[26px]">
+      <h2 className="mb-0 py-10 text-center text-lg font-bold text-pfmv-navy lg:pb-20 lg:pt-14 lg:text-[26px]">
         {start.title}
-      </h3>
+      </h2>
       <div className="mx-auto max-w-5xl">
         {start.lines.map((line, index) => (
           <div key={index}>
@@ -26,14 +26,14 @@ export const HomepageStart = () => {
                     sizes="50vw"
                   />
                 </div>
-                <h4
+                <h3
                   className={clsx(
                     "mb-3 text-center text-base text-pfmv-navy lg:text-left lg:text-[28px]",
                     "px-10 lg:px-0 lg:leading-8",
                   )}
                 >
                   {line.title}
-                </h4>
+                </h3>
                 <p className="mb-8 px-10 text-center lg:px-0 lg:text-left">{line.description}</p>
                 <Link
                   className={clsx(
