@@ -3,6 +3,10 @@ import { UserInfoForm } from "@/forms/user/UserInfoForm";
 import UserNotFoundError from "@/components/error/UserNotFoundError";
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { hasAllRequiredFieldsSet } from "@/helpers/user";
+import { Metadata } from "next";
+import { computeMetadata } from "@/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Votre profil");
 
 export default async function InfoPerso() {
   const session = await auth();

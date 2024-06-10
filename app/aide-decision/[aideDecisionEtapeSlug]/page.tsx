@@ -11,6 +11,13 @@ import {
 } from "@/lib/strapi/queries/aideDecisionQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { Metadata } from "next";
+import { computeMetadata } from "@/helpers/metadata/helpers";
+
+type AideDecisionPageProps = {
+  params: { aideDecisionEtapeSlug: string };
+  searchParams: { tri: string | undefined };
+};
 
 export async function generateStaticParams() {
   const allAideDectionEtape = await getAllAideDecisionSlugs();
@@ -19,13 +26,16 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { aideDecisionEtapeSlug: string };
-  searchParams: { tri: string | undefined };
-}) {
+export async function generateMetadata({ params }: AideDecisionPageProps): Promise<Metadata> {
+  const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
+  return computeMetadata(
+    currentStep?.attributes.nom || "Explorez nos solutions",
+    currentStep?.attributes.description,
+    getStrapiImageUrl(currentStep?.attributes.image, STRAPI_IMAGE_KEY_SIZE.medium),
+  );
+}
+
+export default async function AideDecisionPage({ params, searchParams }: AideDecisionPageProps) {
   const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
