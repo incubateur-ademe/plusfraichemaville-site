@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "predev:start": "only-include-used-icons",
+    "predev:localAsProd": "only-include-used-icons",
     "prebuild": "only-include-used-icons && npx prisma generate",
     "dev:db:migrate": "prisma migrate dev",
     "dev:db:push": "prisma db push",
@@ -70,7 +71,7 @@
     "typescript": "^5"
   },
   "engines": {
-    "node": "18.17.1",
-    "pnpm": "9.1.4"
+    "node": "20.14.0",
+    "pnpm": "^9"
   }
 }

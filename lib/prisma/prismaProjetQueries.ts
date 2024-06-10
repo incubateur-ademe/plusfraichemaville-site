@@ -38,7 +38,6 @@ export const updateFichesProjet = async (
     data: {
       fiches_solutions_id: type === "solution" ? fichesUpdated : projet?.fiches_solutions_id,
       fiches_diagnostic_id: type === "diagnostic" ? fichesUpdated : projet?.fiches_diagnostic_id,
-      fiches_solutions_validated: false,
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
     include: projetIncludes,
@@ -64,7 +63,6 @@ export const updateFichesSolutionsProjet = async (
     },
     data: {
       fiches_solutions_id: fichesSolutionsId,
-      fiches_solutions_validated: false,
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
     include: projetIncludes,
@@ -101,18 +99,6 @@ export const deleteRecommandationsViewedBy = async (projetId: number, userId: st
     where: { id: projetId },
     data: {
       recommandations_viewed_by: updatedRecommandationsViewed,
-    },
-    include: projetIncludes,
-  });
-};
-
-export const updateFichesSolutionsProjetValidated = (projetId: number): Promise<ProjetWithRelations | null> => {
-  return prismaClient.projet.update({
-    where: {
-      id: projetId,
-    },
-    data: {
-      fiches_solutions_validated: true,
     },
     include: projetIncludes,
   });

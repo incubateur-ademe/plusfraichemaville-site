@@ -17,7 +17,6 @@ export const HomepageStories = () => {
       </h3>
       <div>
         <Splide
-          // className="gap-6"
           id="homepage-stories-slider"
           hasTrack={false}
           options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}

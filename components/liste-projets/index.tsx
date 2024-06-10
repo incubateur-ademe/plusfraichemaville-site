@@ -4,10 +4,12 @@ import { ListeProjetsHeader } from "./header";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { groupProjetsByCollectivite } from "./helpers";
 import Image from "next/image";
+import orderBy from "lodash/orderBy";
 
 export const ListProjets = () => {
   const projets = useProjetsStore((state) => state.projets);
-  const projetsByTown = groupProjetsByCollectivite(projets);
+  const projetsByCollectivite = groupProjetsByCollectivite(projets);
+  const sortedProjetsByCollectivite = orderBy(projetsByCollectivite, ["collectivite.nom"], "asc");
 
   return (
     <div className="relative bg-dsfr-background-alt-blue-france">
@@ -20,15 +22,20 @@ export const ListProjets = () => {
       />
       <div className="fr-container relative z-10 min-h-[25rem] py-10">
         <ListeProjetsHeader isListEmpty={projets.length === 0} />
-        {projetsByTown.map(([commune, projetsByCommune], index) => {
+        {sortedProjetsByCollectivite.map((collectiviteWithProjet) => {
           return (
-            <div className="mb-8" key={index}>
+            <div
+              className="mb-8"
+              key={collectiviteWithProjet.collectivite.id}
+              id={collectiviteWithProjet.collectivite.code_insee || collectiviteWithProjet.collectivite.nom}
+            >
               <h3 className="mb-4 text-[22px] font-bold text-pfmv-navy">
-                <i className="ri-map-pin-line mr-1 before:!w-[14px]"></i>
-                {commune}
+                <i className="ri-home-2-fill mr-2  before:!w-[20px]"></i>
+                {collectiviteWithProjet.collectivite.nom}
               </h3>
-              {projetsByCommune.length > 0 &&
-                projetsByCommune.map((projet, index) => <ListeProjetsCard projet={projet} key={index} />)}
+              {collectiviteWithProjet.projets.map((projet, index) => (
+                <ListeProjetsCard projet={projet} key={index} />
+              ))}
             </div>
           );
         })}

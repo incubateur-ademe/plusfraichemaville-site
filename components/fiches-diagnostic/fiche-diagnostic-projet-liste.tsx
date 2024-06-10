@@ -7,7 +7,7 @@ import { FicheDiagnosticCardWithFetcher } from "./fiche-diagnostic-card-with-fet
 
 import { FicheDiagnosticProjetListeAddButton } from "./fiche-diagnostic-projet-liste-add-button";
 
-import { FicheDiagnosticLink } from "./fiche-diagnostic-link";
+import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
 export const FicheDiagnosticProjetListe = () => {
@@ -25,12 +25,12 @@ export const FicheDiagnosticProjetListe = () => {
           <FicheDiagnosticProjetListeAddButton />
         </div>
       </div>
-      <FicheDiagnosticLink
+      <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
         className="fr-btn fr-btn--secondary rounded-3xl"
       >
         Aller au tableau de bord
-      </FicheDiagnosticLink>
+      </GenericFicheLink>
     </div>
   );
 };

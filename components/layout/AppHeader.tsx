@@ -2,7 +2,8 @@ import React from "react";
 import NavigationMenu from "@/components/layout/NavigationMenu";
 import Image from "next/image";
 import AdemePFMVLogo from "../../public/images/logo-ademe-pfmv.svg";
-import { EspaceProjetButton } from "../monEspaceProjet/buttons";
+
+import { AuthButtons } from "../authentication/auth-buttons";
 
 export default function AppHeader() {
   return (
@@ -39,7 +40,7 @@ export default function AppHeader() {
                   </div>
                 </div>
               </div>
-              <EspaceProjetButton />
+              <AuthButtons />
             </div>
           </div>
         </div>
