@@ -54,7 +54,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
               Découvrez les solutions proposées pour votre recherche
             </h1>
             <AideDecisionSortFilter className="mb-9" />
-            <ul className="flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
+            <ul className="mb-14 flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
               {sortedFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.id} className="flex">
                   <FicheSolutionCardWithUserInfo
