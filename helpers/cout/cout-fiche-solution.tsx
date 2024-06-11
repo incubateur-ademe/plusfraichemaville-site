@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { highlightedIconClass, TypeFiche } from "@/helpers/common";
+import { formatNumberWithSpaces, highlightedIconClass, TypeFiche } from "@/helpers/common";
 import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
 import { FicheSolution } from "@/components/ficheSolution/type";
 
@@ -60,9 +60,9 @@ export const getCoutFiche = (typeFiche: TypeFiche, coutMin?: number, coutMax?: n
 
 export const getLabelCoutFourniture = (ficheSolution: FicheSolution) =>
   ficheSolution.cout_minimum != null && ficheSolution.cout_maximum != null
-    ? `de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € HT / ${
-        getUniteCoutFromCode(ficheSolution.cout_unite).unitLabel
-      }`
+    ? `de ${formatNumberWithSpaces(ficheSolution.cout_minimum)} à ${formatNumberWithSpaces(
+        ficheSolution.cout_maximum,
+      )} € HT / ${getUniteCoutFromCode(ficheSolution.cout_unite).unitLabel}`
     : "Coût non disponible";
 
 export const getLabelCoutEntretien = (ficheSolution: FicheSolution) =>

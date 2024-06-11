@@ -1,3 +1,5 @@
+import { formatNumberWithSpaces } from "@/helpers/common";
+
 type EstimationMateriauGlobalPriceFooterProps = {
   title?: string;
   investissementMin?: number;
@@ -19,13 +21,17 @@ export default function EstimationMateriauGlobalPriceFooter({
       <div className="ml-auto mr-0 mt-8 flex max-w-[30rem] flex-row justify-between text-[1.375rem] font-bold">
         <div>Investissement :</div>
         <div>
-          <strong>{`${investissementMin} - ${investissementMax} € `}</strong>HT
+          <strong>{`${formatNumberWithSpaces(investissementMin)} - ${formatNumberWithSpaces(
+            investissementMax,
+          )} € `}</strong>
+          HT
         </div>
       </div>
       <div className="mb-6 ml-auto mr-0 mt-2 flex max-w-[30rem] flex-row justify-between text-lg">
         <div>Entretien :</div>
         <div>
-          <strong>{`${entretienMin} - ${entretienMax} € `}</strong>HT par an
+          <strong>{`${formatNumberWithSpaces(entretienMin)} - ${formatNumberWithSpaces(entretienMax)} € `}</strong>HT
+          par an
         </div>
       </div>
     </>
