@@ -65,7 +65,7 @@ export default async function AideDecisionPage({ params, searchParams }: AideDec
             <h1 className={"mb-10 text-center text-xl"}>{currentStep.attributes.question_suivante}</h1>
             <ul className="flex list-none flex-wrap justify-center p-0">
               {currentStep.attributes.etapes_suivantes.data.map((aideDecision) => (
-                <li key={aideDecision.id} className="m-3 flex w-96 md:w-56">
+                <li key={aideDecision.id} className="m-3 flex w-96 md:w-[220px]">
                   <AideDecisionEtapeCard aideDecisionEtape={aideDecision.attributes} />
                 </li>
               ))}
