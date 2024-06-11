@@ -42,7 +42,7 @@ export const TableauDeBordSuiviCardProgress = ({ progress }: TableauDeBordSuiviC
       <span
         className={clsx(
           "ml-2 text-xs font-medium",
-          progressValue == "100" ? "text-dsfr-background-action-high-success-hover" : "text-dsfr-text-disabled-grey",
+          progressValue == "100" ? "text-dsfr-text-default-success" : "text-pfmv-grey",
         )}
       >
         {label}

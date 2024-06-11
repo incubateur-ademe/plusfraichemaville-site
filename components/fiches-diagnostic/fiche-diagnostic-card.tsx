@@ -56,9 +56,9 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             )}
           >
             <span className={clsx("text-xs", !vertical && "lg:text-sm")}>
-              <i className="ri-bar-chart-fill mr-1 text-dsfr-background-flat-warning before:!w-4"></i>
+              <i className="ri-bar-chart-fill text-dsfr-border-action-high-error mr-1 before:!w-4"></i>
               Méthode de diagnostic{" "}
-              <span className="inline-block font-bold capitalize text-dsfr-background-flat-warning">
+              <span className="text-dsfr-border-action-high-error inline-block font-bold capitalize">
                 {getMethodeDiagnosticFromCode(ficheDiagnostic.attributes.methode)?.label}
               </span>
             </span>
@@ -69,14 +69,14 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             <div className={clsx("block", !vertical && "lg:mb-4 lg:flex")}>
               <div className={clsx("mb-3 block", !vertical && "lg:mb-0 lg:mr-6 lg:flex")}>
                 {vertical ? (
-                  <small className="text-dsfr-text-disabled-grey">Coût</small>
+                  <small className="text-text-pfmv-grey">Coût</small>
                 ) : (
-                  <small className="inline text-dsfr-text-disabled-grey lg:hidden">Coût</small>
+                  <small className="text-text-pfmv-grey inline lg:hidden">Coût</small>
                 )}
                 <div className="flex items-center">
                   <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
-                    <small className="hidden text-dsfr-text-disabled-grey lg:block">
+                    <small className="hidden text-pfmv-grey lg:block">
                       de {coutMin} à {coutMax} euros HT
                     </small>
                   )}
@@ -84,14 +84,14 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
               </div>
               <div className={clsx("block", !vertical && "lg:flex")}>
                 {vertical ? (
-                  <small className="text-dsfr-text-disabled-grey">Temporalité</small>
+                  <small className="text-text-pfmv-grey">Temporalité</small>
                 ) : (
-                  <small className="inline text-dsfr-text-disabled-grey lg:hidden">Temporalité</small>
+                  <small className="text-text-pfmv-grey inline lg:hidden">Temporalité</small>
                 )}
                 <div className="flex items-center">
                   <div className="mr-2">{delai?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
-                    <small className="hidden text-dsfr-text-disabled-grey lg:block">
+                    <small className="hidden text-pfmv-grey lg:block">
                       {delaiMin} à {delaiMax} mois
                     </small>
                   )}
