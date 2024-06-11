@@ -45,7 +45,7 @@ export default function RetourExperienceCard({
         />
       </div>
       <div className="flex grow flex-col p-6">
-        <div className={"text-blue-hover mb-3 text-lg font-bold text-dsfr-text-title-grey"}>{selectRex.titre}</div>
+        <h3 className={"text-blue-hover mb-3 text-lg font-bold text-dsfr-text-title-grey"}>{selectRex.titre}</h3>
         <Tag small={true} className={"mb-8"}>
           {getRegionLabelFromCode(selectRex.region?.data?.attributes.code)}
         </Tag>

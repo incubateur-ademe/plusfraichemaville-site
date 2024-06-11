@@ -36,7 +36,7 @@ export const HomepageStory = ({ story }: HomepageStoryProps) => {
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           )}
-          <h4 className="m-0 text-base text-white md:text-[22px] md:leading-7">{story.title}</h4>
+          <h3 className="m-0 text-base text-white md:text-[22px] md:leading-7">{story.title}</h3>
           <Image
             src={story.image}
             alt={story.alt}

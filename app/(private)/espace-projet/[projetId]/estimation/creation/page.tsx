@@ -12,7 +12,7 @@ export default function CreateEstimationPage() {
   }
   return (
     <div className="fr-container pt-8">
-      <div className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</div>
+      <h1 className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</h1>
       {currentProjet.fiches_solutions_id?.length > 0 ? (
         <>
           <div className="text-lg">{`Mes solutions sélectionnées pour mon projet ${currentProjet?.nom}.`}</div>
