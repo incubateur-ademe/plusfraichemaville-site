@@ -29,7 +29,7 @@ export const HomepageInspirerCard = ({
             />
           </div>
           <div className="py-12">
-            <h4 className="mb-4 text-2xl font-bold">{rex.titre}</h4>
+            <h3 className="mb-4 text-2xl font-bold">{rex.titre}</h3>
             <p>
               Le projet {'"arbres de pluie"'} à Lyon, initié fin 2020 dans le cadre du programme européen Life ARTISAN ,
               offre une solution prometteuse face au réchauffement climatique et à la dégradation urbaine. Porté par la

@@ -11,6 +11,13 @@ import {
 } from "@/lib/strapi/queries/aideDecisionQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { Metadata } from "next";
+import { computeMetadata } from "@/helpers/metadata/helpers";
+
+type AideDecisionPageProps = {
+  params: { aideDecisionEtapeSlug: string };
+  searchParams: { tri: string | undefined };
+};
 
 export async function generateStaticParams() {
   const allAideDectionEtape = await getAllAideDecisionSlugs();
@@ -19,13 +26,16 @@ export async function generateStaticParams() {
   }));
 }
 
-export default async function Page({
-  params,
-  searchParams,
-}: {
-  params: { aideDecisionEtapeSlug: string };
-  searchParams: { tri: string | undefined };
-}) {
+export async function generateMetadata({ params }: AideDecisionPageProps): Promise<Metadata> {
+  const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
+  return computeMetadata(
+    currentStep?.attributes.nom || "Explorez nos solutions",
+    currentStep?.attributes.description,
+    getStrapiImageUrl(currentStep?.attributes.image, STRAPI_IMAGE_KEY_SIZE.medium),
+  );
+}
+
+export default async function AideDecisionPage({ params, searchParams }: AideDecisionPageProps) {
   const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
@@ -55,7 +65,7 @@ export default async function Page({
             <h1 className={"mb-10 text-center text-xl"}>{currentStep.attributes.question_suivante}</h1>
             <ul className="flex list-none flex-wrap justify-center p-0">
               {currentStep.attributes.etapes_suivantes.data.map((aideDecision) => (
-                <li key={aideDecision.id} className="m-3 flex w-96 md:w-56">
+                <li key={aideDecision.id} className="m-3 flex w-96 md:w-[220px]">
                   <AideDecisionEtapeCard aideDecisionEtape={aideDecision.attributes} />
                 </li>
               ))}

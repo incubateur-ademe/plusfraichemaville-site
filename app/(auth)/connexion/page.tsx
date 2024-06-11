@@ -6,6 +6,10 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import Image from "next/image";
 import clsx from "clsx";
 import Badge from "@codegouvfr/react-dsfr/Badge";
+import { Metadata } from "next";
+import { computeMetadata } from "@/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Créez votre projet");
 
 const data = {
   mainTitle: "Mon espace projet",

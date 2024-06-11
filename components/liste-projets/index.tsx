@@ -29,10 +29,10 @@ export const ListProjets = () => {
               key={collectiviteWithProjet.collectivite.id}
               id={collectiviteWithProjet.collectivite.code_insee || collectiviteWithProjet.collectivite.nom}
             >
-              <h3 className="mb-4 text-[22px] font-bold text-pfmv-navy">
+              <h2 className="mb-4 text-[22px] font-bold leading-normal  text-pfmv-navy">
                 <i className="ri-home-2-fill mr-2  before:!w-[20px]"></i>
                 {collectiviteWithProjet.collectivite.nom}
-              </h3>
+              </h2>
               {collectiviteWithProjet.projets.map((projet, index) => (
                 <ListeProjetsCard projet={projet} key={index} />
               ))}

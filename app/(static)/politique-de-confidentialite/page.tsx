@@ -1,5 +1,9 @@
 import React from "react";
 import { PrivacyPolicy } from "@incubateur-ademe/legal-pages-react";
+import { Metadata } from "next";
+import { computeMetadata } from "@/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Politique de confidentialité");
 
 export default async function PagePolitiqueDeConfidentialite() {
   return (

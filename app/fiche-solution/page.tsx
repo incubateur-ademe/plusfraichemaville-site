@@ -1,4 +1,8 @@
 import { FichesSolutions } from "@/components/ficheSolution/fiches-solutions";
+import { Metadata } from "next";
+import { computeMetadata } from "@/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Passez à l’action");
 
 export default async function FichesSolutionsPage({
   searchParams,

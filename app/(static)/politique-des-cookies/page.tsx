@@ -1,4 +1,8 @@
 import React from "react";
+import { Metadata } from "next";
+import { computeMetadata } from "@/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Politique des cookies");
 
 export default async function PagePolitiqueDesCookies() {
   return (
