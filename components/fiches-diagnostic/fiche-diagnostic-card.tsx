@@ -62,8 +62,10 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
                 {getMethodeDiagnosticFromCode(ficheDiagnostic.attributes.methode)?.label}
               </span>
             </h3>
-            <h2 className="my-3 max-w-[350px] text-[22px] leading-tight">{ficheDiagnostic.attributes.titre}</h2>
-            <p className={clsx("mb-11 max-w-[350px] text-sm leading-6", !vertical && "lg:mb-3")}>
+            <h2 className={clsx("my-3 max-w-[350px]", vertical ? "text-xl" : "text-[22px] leading-tight")}>
+              {ficheDiagnostic.attributes.titre}
+            </h2>
+            <p className={clsx("mb-11 max-w-[350px] text-sm", !vertical && "leading-6 lg:mb-3")}>
               {ficheDiagnostic.attributes.description_courte}
             </p>
             <div className={clsx("block", !vertical && "lg:mb-4 lg:flex")}>
