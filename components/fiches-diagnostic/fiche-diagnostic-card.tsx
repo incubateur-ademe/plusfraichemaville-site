@@ -56,9 +56,9 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             )}
           >
             <h3 className={clsx("m-0 text-xs font-normal", !vertical && "lg:text-sm")}>
-              <i className="ri-bar-chart-fill text-dsfr-border-action-high-error mr-1 before:!w-4"></i>
+              <i className="ri-bar-chart-fill mr-1 text-dsfr-border-action-high-error before:!w-4"></i>
               Méthode de diagnostic{" "}
-              <span className="text-dsfr-border-action-high-error inline-block font-bold capitalize">
+              <span className="inline-block font-bold capitalize text-dsfr-border-action-high-error">
                 {getMethodeDiagnosticFromCode(ficheDiagnostic.attributes.methode)?.label}
               </span>
             </h3>

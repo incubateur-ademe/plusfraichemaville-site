@@ -31,7 +31,7 @@ export const PictoEchelleSelector = ({ pictoId, className, large }: PictoEchelle
       />
       <span
         className={clsx(
-          "text-dsfr-border-action-high-error text-center font-bold",
+          "text-center font-bold text-dsfr-border-action-high-error",
           large ? "px-6 text-base" : "text-xs",
         )}
       >
