@@ -5,9 +5,9 @@ import RedAsterisk from "@/components/common/RedAsterisk";
 import { Combobox, Transition } from "@headlessui/react";
 import { fetchProjetAddressFromBanApi } from "@/lib/adresseApi/fetch";
 import debounce from "lodash/debounce";
-import { Oval } from "react-loader-spinner";
 import { AddressProjet } from "@/lib/adresseApi/types";
 import clsx from "clsx";
+import { Spinner } from "@/components/common/spinner";
 
 type CommonProps<T extends FieldValues> = {
   className?: string;
@@ -86,19 +86,7 @@ const AddressInputFormField = <T extends FieldValues>({
                   ref={ref}
                   {...rest}
                 />
-                {loading && (
-                  <Oval
-                    wrapperClass="ml-2"
-                    height={20}
-                    width={20}
-                    color="black"
-                    visible={true}
-                    ariaLabel="oval-loading"
-                    secondaryColor="grey"
-                    strokeWidth={4}
-                    strokeWidthSecondary={4}
-                  />
-                )}
+                {loading && <Spinner />}
               </div>
               <Transition
                 as={Fragment}
