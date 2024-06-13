@@ -91,7 +91,8 @@
 }
 
 .svg-orange {
-  filter: invert(25%) sepia(100%) saturate(600%) hue-rotate(350deg) brightness(90%) contrast(85%);
+  filter: brightness(0) saturate(100%) invert(10%) sepia(100%) saturate(7104%) hue-rotate(15deg) brightness(87%)
+    contrast(108%);
 }
 
 .svg-blue {
