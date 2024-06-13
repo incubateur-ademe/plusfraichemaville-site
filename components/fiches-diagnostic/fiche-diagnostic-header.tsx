@@ -20,9 +20,9 @@ export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnos
           </div>
           <div className=" col-span-9 max-w-xl md:col-span-6">
             <small className="mb-6 hidden text-base text-dsfr-text-mention-grey md:block">
-              <i className="ri-bar-chart-fill text-dsfr-border-action-high-error mr-1 before:!w-4"></i>
+              <i className="ri-bar-chart-fill mr-1 text-dsfr-border-action-high-error before:!w-4"></i>
               Méthode de diagnostic{" "}
-              <span className="text-dsfr-border-action-high-error font-bold capitalize">
+              <span className="font-bold capitalize text-dsfr-border-action-high-error">
                 {getMethodeDiagnosticFromCode(attributes.methode)?.label}
               </span>
             </small>
