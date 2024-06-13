@@ -74,10 +74,14 @@ export const getLabelCoutEntretien = (ficheSolution: FicheSolution) =>
 
 export const getLabelCoutFournitureByQuantite = (ficheSolution: FicheSolution, quantite: number) =>
   ficheSolution.cout_minimum != null && ficheSolution.cout_maximum != null && quantite
-    ? `${ficheSolution.cout_minimum * quantite} - ${ficheSolution.cout_maximum * quantite} €`
+    ? `${formatNumberWithSpaces(ficheSolution.cout_minimum * quantite)} - ${formatNumberWithSpaces(
+        ficheSolution.cout_maximum * quantite,
+      )} €`
     : "0 €";
 
 export const getLabelCoutEntretienByQuantite = (ficheSolution: FicheSolution, quantite: number) =>
   ficheSolution.cout_minimum_entretien != null && ficheSolution.cout_maximum_entretien != null && quantite
-    ? `${ficheSolution.cout_minimum_entretien * quantite} - ${ficheSolution.cout_maximum_entretien * quantite} € / an`
+    ? `${formatNumberWithSpaces(ficheSolution.cout_minimum_entretien * quantite)} - ${formatNumberWithSpaces(
+        ficheSolution.cout_maximum_entretien * quantite,
+      )} € / an`
     : "0 € / an";
