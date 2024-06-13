@@ -8,7 +8,7 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
-import { TypeFiche } from "@/helpers/common";
+import { formatNumberWithSpaces, TypeFiche } from "@/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticCardProps = {
@@ -79,7 +79,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
                   <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
                     <small className="hidden text-dsfr-text-disabled-grey lg:block">
-                      de {coutMin} à {coutMax} euros HT
+                      de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} euros HT
                     </small>
                   )}
                 </div>

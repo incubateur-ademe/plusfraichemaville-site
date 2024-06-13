@@ -2,6 +2,7 @@ import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes
 import sumBy from "lodash/sumBy";
 import { getUniteCoutFromCode } from "@/helpers/cout/cout-common";
 import { Materiau } from "@/components/ficheSolution/type";
+import { formatNumberWithSpaces } from "../common";
 
 export const materiauHasNoCost = (materiau: Materiau) =>
   !materiau.cout_minimum_fourniture &&
@@ -18,7 +19,9 @@ export const getLabelCoutFourniture = (materiau: Materiau) =>
 
 export const getLabelCoutFournitureByQuantite = (materiau: Materiau | undefined, quantite: number) =>
   materiau && materiau.cout_minimum_fourniture != null && materiau.cout_maximum_fourniture != null && quantite
-    ? `${materiau.cout_minimum_fourniture * quantite} - ${materiau.cout_maximum_fourniture * quantite} €`
+    ? `${formatNumberWithSpaces(materiau.cout_minimum_fourniture * quantite)} - ${formatNumberWithSpaces(
+        materiau.cout_maximum_fourniture * quantite,
+      )} €`
     : "0 €";
 
 export const getLabelCoutEntretien = (materiau: Materiau) =>
@@ -30,7 +33,9 @@ export const getLabelCoutEntretien = (materiau: Materiau) =>
 
 export const getLabelCoutEntretienByQuantite = (materiau: Materiau | undefined, quantite: number) =>
   materiau && materiau.cout_minimum_entretien != null && materiau.cout_maximum_entretien != null && quantite
-    ? `${materiau.cout_minimum_entretien * quantite} - ${materiau.cout_maximum_entretien * quantite} € / an`
+    ? `${formatNumberWithSpaces(materiau.cout_minimum_entretien * quantite)} - ${formatNumberWithSpaces(
+        materiau.cout_maximum_entretien * quantite,
+      )} € / an`
     : "0 € / an";
 
 export const computeGlobalFicheSolutionPrice = (estimationMateriaux: EstimationMateriauxFicheSolution[] | null) => {

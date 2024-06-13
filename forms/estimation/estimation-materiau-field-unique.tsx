@@ -4,6 +4,7 @@ import { PropsWithChildren } from "react";
 import CmsRichText from "@/components/common/CmsRichText";
 import { FicheSolution } from "@/components/ficheSolution/type";
 import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/cout/cout-fiche-solution";
+import { formatNumberWithSpaces } from "@/helpers/common";
 
 type EstimationMateriauFieldUniqueProps = {
   ficheSolution: FicheSolution;
@@ -27,8 +28,8 @@ export const EstimationMateriauFieldUnique = ({ ficheSolution, children }: Estim
         <div className="mb-0 mt-8 grow text-dsfr-text-title-grey md:mb-8">
           <CmsRichText label={ficheSolution.description_estimation ?? ""} className={"text-sm"} />
           <div className="text-sm text-dsfr-text-mention-grey">
-            <div>{`Coût d'investissement : ${getLabelCoutFourniture(ficheSolution)}`}</div>
-            <div>{`Coût d'entretien : ${getLabelCoutEntretien(ficheSolution)}`}</div>
+            <div>{`Coût d'investissement : ${formatNumberWithSpaces(getLabelCoutFourniture(ficheSolution))}`}</div>
+            <div>{`Coût d'entretien : ${formatNumberWithSpaces(getLabelCoutEntretien(ficheSolution))}`}</div>
           </div>
         </div>
         <div className={"flex flex-none flex-col bg-dsfr-contrast-grey p-6 md:w-60"}>{children}</div>
