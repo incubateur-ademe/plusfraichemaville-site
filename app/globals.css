@@ -277,3 +277,23 @@
 .notification-badge {
   @apply !relative block after:absolute after:right-2 after:top-3 after:size-[7.5px] after:rounded-full after:bg-dsfr-background-flat-blue-france;
 }
+
+.aide-modal .fr-grid-row > div {
+  @apply w-full max-w-full flex-shrink-0 flex-grow-0 basis-full;
+}
+
+.aide-modal .fr-modal__body {
+  @apply rounded-[20px];
+}
+
+.aide-modal .fr-modal__header,
+.aide-modal .fr-modal__title {
+  @apply hidden;
+}
+
+/* -- DEV PURPOSES ONLY -- */
+/* .financement-modal {
+  visibility: visible !important;
+  opacity: 1 !important;
+} */
+/* ----------------------- */
