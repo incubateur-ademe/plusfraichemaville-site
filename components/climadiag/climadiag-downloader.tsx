@@ -33,7 +33,7 @@ export const ClimadiagDownloader = ({ data }: ClimadiagDownloaderProps) => {
       >
         Télécharger la synthèse
         {loading ? (
-          <Spinner className="ml-3 size-3" />
+          <Spinner className="ml-3 !size-6" />
         ) : (
           <i className="fr-icon--sm ri-download-2-line ml-2 mt-[1px]"></i>
         )}
