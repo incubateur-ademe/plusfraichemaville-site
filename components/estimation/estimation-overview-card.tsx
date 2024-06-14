@@ -12,6 +12,7 @@ import { dateToStringWithTime } from "@/helpers/dateUtils";
 import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { useProjetsStore } from "@/stores/projets/provider";
+
 import { estimationModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 import { formatNumberWithSpaces } from "@/helpers/common";
 
@@ -59,7 +60,7 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
           </FicheSolutionSmallCard>
         ))}
       </div>
-      <div className={clsx("text-lg", !isEstimationCompleted && "text-dsfr-text-disabled-grey")}>
+      <div className={clsx("text-lg", !isEstimationCompleted && "text-pfmv-grey")}>
         <div className="font-bold">Estimation totale des solutions envisagées</div>
         <div>(hors travaux complémentaires de voirie, consolidation etc)</div>
         <div className="mt-6 flex flex-row justify-between">
