@@ -8,7 +8,7 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
-import { TypeFiche } from "@/helpers/common";
+import { formatNumberWithSpaces, TypeFiche } from "@/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticCardProps = {
@@ -56,9 +56,9 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             )}
           >
             <h3 className={clsx("m-0 text-xs font-normal", !vertical && "lg:text-sm")}>
-              <i className="ri-bar-chart-fill mr-1 text-dsfr-border-action-high-error before:!w-4"></i>
+              <i className="ri-bar-chart-fill text-dsfr-border-action-high-error mr-1 before:!w-4"></i>
               Méthode de diagnostic{" "}
-              <span className="inline-block font-bold capitalize text-dsfr-border-action-high-error">
+              <span className="text-dsfr-border-action-high-error inline-block font-bold capitalize">
                 {getMethodeDiagnosticFromCode(ficheDiagnostic.attributes.methode)?.label}
               </span>
             </h3>
@@ -79,7 +79,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
                   <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
                     <small className="hidden text-pfmv-grey lg:block">
-                      de {coutMin} à {coutMax} euros HT
+                      de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} euros HT
                     </small>
                   )}
                 </div>

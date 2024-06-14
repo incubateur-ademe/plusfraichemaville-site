@@ -6,6 +6,7 @@ import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { FicheSolutionResponse } from "@/components/ficheSolution/type";
 import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/cout/cout-materiau";
+import { formatNumberWithSpaces } from "@/helpers/common";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationMateriauxFicheSolution;
@@ -89,8 +90,8 @@ export function EstimationMateriauxFicheSolutionRecap({
           <div className="font-bold">Total Investissement</div>
           <div>
             <strong>
-              {`${ficheSolutionEstimation.coutMinInvestissement}
-                   - ${ficheSolutionEstimation.coutMaxInvestissement} € `}
+              {`${formatNumberWithSpaces(ficheSolutionEstimation.coutMinInvestissement)}
+                   - ${formatNumberWithSpaces(ficheSolutionEstimation.coutMaxInvestissement)} € `}
             </strong>
             HT
           </div>
@@ -99,7 +100,9 @@ export function EstimationMateriauxFicheSolutionRecap({
           <div className="font-bold">Total Entretien</div>
           <div className="text-sm">
             <strong>
-              {`${ficheSolutionEstimation.coutMinEntretien} - ${ficheSolutionEstimation.coutMaxEntretien} € `}
+              {`${formatNumberWithSpaces(ficheSolutionEstimation.coutMinEntretien)} - ${formatNumberWithSpaces(
+                ficheSolutionEstimation.coutMaxEntretien,
+              )} € `}
             </strong>
             HT / an
           </div>

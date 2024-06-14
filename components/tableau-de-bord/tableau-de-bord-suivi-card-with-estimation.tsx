@@ -5,6 +5,7 @@ import { useMemo } from "react";
 import { getLastCompletedEstimation } from "@/helpers/estimation";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
+import { formatNumberWithSpaces } from "@/helpers/common";
 
 export const TableauDeBordSuiviWithEstimation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -26,10 +27,12 @@ export const TableauDeBordSuiviWithEstimation = () => {
       <div className="font-bold">Dernière estimation :</div>
       <div className="text-right">
         <div>
-          {globalPrice.fourniture.min} - {globalPrice.fourniture.max} € HT
+          {formatNumberWithSpaces(globalPrice.fourniture.min)} - {formatNumberWithSpaces(globalPrice.fourniture.max)} €
+          HT
         </div>
         <div className="text-dsfr-text-mention-grey">
-          {globalPrice.entretien.min} - {globalPrice.entretien.max} € HT / an
+          {formatNumberWithSpaces(globalPrice.entretien.min)} - {formatNumberWithSpaces(globalPrice.entretien.max)} € HT
+          / an
         </div>
       </div>
     </div>

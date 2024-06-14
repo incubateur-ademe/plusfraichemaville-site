@@ -17,4 +17,6 @@ export enum TypeFiche {
 }
 
 export const highlightedIconClass = (typeFiche: TypeFiche) =>
-  typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-border-action-high-error";
+  typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-background-flat-warning";
+
+export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");

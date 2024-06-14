@@ -14,6 +14,7 @@ import { Button } from "@codegouvfr/react-dsfr/Button";
 import { useProjetsStore } from "@/stores/projets/provider";
 
 import { estimationModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
+import { formatNumberWithSpaces } from "@/helpers/common";
 
 export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
@@ -65,12 +66,17 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
         <div className="mt-6 flex flex-row justify-between">
           <div className="font-bold">Investissement</div>
           <div>
-            <strong>{`${globalPrice.fourniture.min} - ${globalPrice.fourniture.max} € `}</strong>HT
+            <strong>{`${formatNumberWithSpaces(globalPrice.fourniture.min)} - ${formatNumberWithSpaces(
+              globalPrice.fourniture.max,
+            )} € `}</strong>
+            HT
           </div>
         </div>
         <div className="flex flex-row justify-between">
           <div className="font-bold">Entretien</div>
-          <div>{`${globalPrice.entretien.min} - ${globalPrice.entretien.max} € HT / an`}</div>
+          <div>{`${formatNumberWithSpaces(globalPrice.entretien.min)} - ${formatNumberWithSpaces(
+            globalPrice.entretien.max,
+          )} € HT / an`}</div>
         </div>
       </div>
       <div className="float-right mt-12 flex flex-row gap-6">
