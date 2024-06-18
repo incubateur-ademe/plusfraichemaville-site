@@ -278,3 +278,34 @@
 .notification-badge {
   @apply !relative block after:absolute after:right-2 after:top-3 after:size-[7.5px] after:rounded-full after:bg-dsfr-background-flat-blue-france;
 }
+
+.fr-consent-banner {
+  max-width: 32rem !important;
+}
+
+.fr-modal__content,
+.fr-consent-banner {
+  border-radius: 1.5rem;
+  .fr-btn {
+    border-radius: 1.5rem;
+  }
+}
+
+#fr-consent-banner-button-refuse-app {
+  background-color: transparent !important;
+  --hover: inherit !important;
+  --active: inherit !important;
+  color: var(--text-action-high-blue-france) !important;
+  box-shadow: inset 0 0 0 1px var(--border-action-high-blue-france) !important;
+}
+
+#fr-consent-banner-button-refuse-app:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+}
+#fr-consent-banner-button-refuse-app:active {
+  background-color: rgba(0, 0, 0, 0.1) !important;
+}
+
+#fr-consent-modal-control-button {
+  box-shadow: inset 0 0 0 1px var(--border-default-grey);
+}
