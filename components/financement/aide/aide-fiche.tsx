@@ -13,7 +13,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
     {
       title: "Porteur(s) d'aide",
       picto: "porteur-aide",
-      description: "aide.sub",
+      description: aide.financers,
     },
     {
       title: "Subvention",
@@ -23,22 +23,22 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
     {
       title: "Récurrence",
       picto: "recurrence",
-      description: "aide.sub",
+      description: aide.recurrence,
     },
     {
       title: "Bénéficiaires",
       picto: "beneficiaires",
-      description: "aide.sub",
+      description: aide.targeted_audiences,
     },
     {
       title: "Zone géographique couverte par l'aide",
       picto: "zone-geo",
-      description: "aide.sub",
+      description: aide.perimeter,
     },
     {
       title: "Dernières mises à jour",
       picto: "maj",
-      description: "aide.sub",
+      date: aide.date_updated,
     },
   ];
 
@@ -48,21 +48,27 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
         <GenericSaveFiche id={100} type="diagnostic" className="ml-auto w-fit" />
         <div className="mb-6 flex items-center gap-4">
           <Image src="/images/financement/financement.svg" width={64} height={64} alt="" />
-          <h2 className="mb-0 text-[22px] text-dsfr-background-flat-info">Financement</h2>
+          <h2 className="text-dsfr-background-flat-info mb-0 text-[22px]">Financement</h2>
         </div>
         <div>
           {lines.map((line, index) => (
-            <AideFichePanelLine title={line.title} description={line.description} picto={line.picto} key={index} />
+            <AideFichePanelLine
+              title={line.title}
+              description={line.description}
+              picto={line.picto}
+              date={line.date}
+              key={index}
+            />
           ))}
         </div>
       </div>
       <div className="w-full">
         <div className="mb-11">
-          <small className="mb-5 block text-base font-bold text-dsfr-background-flat-info">
+          <small className="text-dsfr-background-flat-info mb-5 block text-base font-bold">
             {"Porteur d'aide public"}
           </small>
-          <h1 className="mb-10 text-[40px] text-dsfr-background-flat-info">{aide.name}</h1>
-          <h2 className="max-w-xl text-[22px] leading-7 text-dsfr-background-flat-info">
+          <h1 className="text-dsfr-background-flat-info mb-10 text-[40px]">{aide.name}</h1>
+          <h2 className="text-dsfr-background-flat-info max-w-xl text-[22px] leading-7">
             {"Nom initial de l'aide"}
             <span className="block font-normal">{aide.name_initial}</span>
           </h2>
