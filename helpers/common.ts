@@ -15,8 +15,15 @@ export enum TypeFiche {
   // eslint-disable-next-line no-unused-vars
   diagnostic,
 }
-
 export const highlightedIconClass = (typeFiche: TypeFiche) =>
   typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-border-action-high-error";
 
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
+
+export const formatISODateToFullDate = (isoDate: string) => {
+  const date = new Date(isoDate);
+  const day = String(date.getDate()).padStart(2, "0");
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const year = date.getFullYear();
+  return `${day}/${month}/${year}`;
+};

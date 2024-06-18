@@ -33,6 +33,7 @@ module.exports = {
       "pfmv-climadiag-red": "var(--border-default-red-marianne)",
       "dsfr-border-action-high-error": "var(--border-action-high-error)",
       "dsfr-warning-425-625-hover": "var(--warning-425-625-hover)",
+      "dsfr-background-flat-info": "var(--background-flat-info)",
       "dsfr-background-action-low-blue-france-active": "var(--background-action-low-blue-france-active)",
       "dsfr-background-action-low-blue-france-hover": "var(--background-action-low-blue-france-hover)",
       "dsfr-background-action-high-blue-france-active": "var(--background-action-high-blue-france-active)",

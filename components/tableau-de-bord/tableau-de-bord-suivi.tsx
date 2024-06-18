@@ -69,7 +69,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     title: "Je trouve des financements",
     index: 5,
     progress: "0",
-    disabled: true,
+    disabled: false,
     type: "financement",
     picto: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
     children: (

@@ -8,7 +8,7 @@ import projetInclude = Prisma.projetInclude;
 const projetIncludes: projetInclude | null = {
   collectivite: true,
   creator: true,
-  estimations: { where: { deleted_at: null } },
+  estimations: { include: { aides: true }, where: { deleted_at: null } },
 };
 
 export const updateFichesProjet = async (
