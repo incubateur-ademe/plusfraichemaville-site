@@ -75,11 +75,7 @@ export default async function Connexion({ searchParams }: { searchParams: { call
               <h3 className="mb-3 text-[22px] font-bold leading-7">{bloc.title}</h3>
               <p className="mb-4 text-lg">{bloc.description}</p>
               {bloc.comingSoon && (
-                <Badge
-                  small
-                  severity="new"
-                  className="!bg-dsfr-background-open-blue-france !text-dsfr-border-default-blue-france"
-                >
+                <Badge small severity="new" className="!bg-dsfr-background-open-blue-france !text-dsfr-hover-blue-sun">
                   Bientôt disponible
                 </Badge>
               )}

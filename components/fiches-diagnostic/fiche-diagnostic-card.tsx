@@ -8,7 +8,7 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
-import { TypeFiche } from "@/helpers/common";
+import { formatNumberWithSpaces, TypeFiche } from "@/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticCardProps = {
@@ -56,9 +56,9 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             )}
           >
             <h3 className={clsx("m-0 text-xs font-normal", !vertical && "lg:text-sm")}>
-              <i className="ri-bar-chart-fill mr-1 text-dsfr-background-flat-warning before:!w-4"></i>
+              <i className="ri-bar-chart-fill mr-1 text-dsfr-border-action-high-error before:!w-4"></i>
               Méthode de diagnostic{" "}
-              <span className="inline-block font-bold capitalize text-dsfr-background-flat-warning">
+              <span className="inline-block font-bold capitalize text-dsfr-border-action-high-error">
                 {getMethodeDiagnosticFromCode(ficheDiagnostic.attributes.methode)?.label}
               </span>
             </h3>
@@ -71,29 +71,29 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
             <div className={clsx("block", !vertical && "lg:mb-4 lg:flex")}>
               <div className={clsx("mb-3 block", !vertical && "lg:mb-0 lg:mr-6 lg:flex")}>
                 {vertical ? (
-                  <small className="text-dsfr-text-disabled-grey">Coût</small>
+                  <small className="text-text-pfmv-grey">Coût</small>
                 ) : (
-                  <small className="inline text-dsfr-text-disabled-grey lg:hidden">Coût</small>
+                  <small className="text-text-pfmv-grey inline lg:hidden">Coût</small>
                 )}
                 <div className="flex items-center">
                   <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
-                    <small className="hidden text-dsfr-text-disabled-grey lg:block">
-                      de {coutMin} à {coutMax} euros HT
+                    <small className="hidden text-pfmv-grey lg:block">
+                      de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} euros HT
                     </small>
                   )}
                 </div>
               </div>
               <div className={clsx("block", !vertical && "lg:flex")}>
                 {vertical ? (
-                  <small className="text-dsfr-text-disabled-grey">Temporalité</small>
+                  <small className="text-text-pfmv-grey">Temporalité</small>
                 ) : (
-                  <small className="inline text-dsfr-text-disabled-grey lg:hidden">Temporalité</small>
+                  <small className="text-text-pfmv-grey inline lg:hidden">Temporalité</small>
                 )}
                 <div className="flex items-center">
                   <div className="mr-2">{delai?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
-                    <small className="hidden text-dsfr-text-disabled-grey lg:block">
+                    <small className="hidden text-pfmv-grey lg:block">
                       {delaiMin} à {delaiMax} mois
                     </small>
                   )}

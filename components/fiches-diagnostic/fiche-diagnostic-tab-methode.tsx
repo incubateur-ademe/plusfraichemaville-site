@@ -4,7 +4,7 @@ import { FicheDiagnosticResponse } from "./types";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
 import { getCoutFiche } from "@/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
-import { TypeFiche } from "@/helpers/common";
+import { TypeFiche, formatNumberWithSpaces } from "@/helpers/common";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
 import React from "react";
@@ -66,7 +66,7 @@ export const FicheDiagnosticMethodeTab = ({
             <div className="flex justify-between">
               <div className="mr-2 h-4">{cout?.icons(TypeFiche.diagnostic, "before:!w-4")}</div>
               <small className="text-sm text-dsfr-text-mention-grey">
-                de {coutMin} à {coutMax} euros HT
+                de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} euros HT
               </small>
             </div>
           </div>

@@ -16,7 +16,7 @@ export enum TypeFiche {
   diagnostic,
 }
 export const highlightedIconClass = (typeFiche: TypeFiche) =>
-  typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-background-flat-warning";
+  typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-border-action-high-error";
 
 export const formatISODateToFullDate = (isoDate: string) => {
   const date = new Date(isoDate);
@@ -25,3 +25,5 @@ export const formatISODateToFullDate = (isoDate: string) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
+
+export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
