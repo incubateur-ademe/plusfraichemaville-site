@@ -8,7 +8,7 @@ type AideFicheModalProps = { id: number } & PropsWithChildren;
 export const AideFicheModal = ({ id, children }: AideFicheModalProps) => {
   const modal = createModal({
     id: id.toString(),
-    isOpenedByDefault: true,
+    isOpenedByDefault: false,
   });
 
   return (

@@ -290,10 +290,3 @@
 .aide-modal .fr-modal__title {
   @apply hidden;
 }
-
-/* -- DEV PURPOSES ONLY -- */
-/* .financement-modal {
-  visibility: visible !important;
-  opacity: 1 !important;
-} */
-/* ----------------------- */
