@@ -24,6 +24,20 @@ export const trackPageView = (url: string) => {
   window?._paq?.push(["trackPageView"]);
 };
 
+export const acceptCookie = () => {
+  if (shouldUseDevTracker) {
+    console.debug("rememberCookieConsentGiven");
+  }
+  window?._paq?.push(["rememberCookieConsentGiven"]);
+};
+
+export const declineCookie = () => {
+  if (shouldUseDevTracker) {
+    console.debug("forgetCookieConsentGiven");
+  }
+  window?._paq?.push(["forgetCookieConsentGiven"]);
+};
+
 export const sanitizeMatomoUrl = (url: string) => {
   const splittedUrl = url.split("/espace-projet/");
   const espaceProjetSubstring = splittedUrl[1];

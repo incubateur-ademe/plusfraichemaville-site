@@ -17,6 +17,7 @@ import { UserStoreServer } from "@/stores/user/server";
 import { GenericFichesSaverFromLocalStorage } from "@/components/common/generic-save-fiche/generic-saver-from-local-storage";
 import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/helpers/metadata/helpers";
+import { ConsentBannerAndConsentManagement } from "@/components/cookie/consentManagement";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -59,6 +60,7 @@ export default async function RootLayout({ children }: { children: ReactElement 
       </head>
       <body>
         <MainLayoutProviders lang={lang}>
+          <ConsentBannerAndConsentManagement />
           <ProjetStoreServer />
           <UserStoreServer />
           <GenericFichesSaverFromLocalStorage />
