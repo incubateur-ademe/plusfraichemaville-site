@@ -20,18 +20,24 @@ const datas = {
   },
 };
 
-export const AideListeEmpty = ({ type }: { type: "solution" | "estimation" }) => {
-  const projetId = useProjetsStore((state) => state.currentProjetId);
-  if (!projetId) {
+export const AideListeEmpty = () => {
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+
+  const { estimations, fiches_solutions_id: fichesSolutions } = projet || {};
+
+  const hasEstimations = estimations && estimations?.length > 0;
+  const hasFichesSolutions = fichesSolutions && fichesSolutions?.length > 0;
+
+  const data = datas[hasFichesSolutions ? "estimation" : "solution"];
+
+  if (hasEstimations && hasFichesSolutions) {
     return null;
   }
-
-  const data = datas[type];
 
   return (
     <div>
       <p className="text-lg">{data.description}</p>
-      <Link href={data.url(projetId)} className="fr-btn mb-7 rounded-3xl">
+      <Link href={data.url(projet?.id ?? 0)} className="fr-btn mb-7 rounded-3xl">
         {data.label}
       </Link>
     </div>

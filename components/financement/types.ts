@@ -45,6 +45,15 @@ export type AidesTerritoiresAide = {
   project_references: string[];
 };
 
+export type AidesTerritoiresAideCard = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
+  id: number;
+  aideTerritoireId: number;
+};
+
+export type AidesTerritoiresAidesByEstimation = {
+  [estimationId: number]: AidesTerritoiresAideCard[];
+};
+
 export type AidesTerritoiresAideType = "Aide financière" | "Aide en ingénierie";
 
 export type AidesTerritoiresAideNameKey = keyof typeof aidesTerritoiresAideName;

@@ -17,7 +17,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord?tab=tableau-de-suivi",
   FICHE_DIAGNOSTIC: (url: string) => `/fiches-diagnostic/${url}`,
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
-  TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: string) =>
+  TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "recommandation") =>
     `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions/liste`,

@@ -18,12 +18,12 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
   const { recommandationsAlreadyViewed, updateToRecommandationsViewed } = useRecommandationsViewed();
   const links = [
     {
-      url: "tableau-de-suivi",
+      url: "tableau-de-suivi" as const,
       tooltip: "Tableau de suivi",
       picto: ({ active }: BannerPictoProps) => <BannerPictoTableauDeSuivi active={active} />,
     },
     {
-      url: "recommandation",
+      url: "recommandation" as const,
       tooltip: "Recommandations",
       notificationBadge: true,
       update: updateToRecommandationsViewed,

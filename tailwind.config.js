@@ -34,6 +34,7 @@ module.exports = {
       "dsfr-border-action-high-error": "var(--border-action-high-error)",
       "dsfr-warning-425-625-hover": "var(--warning-425-625-hover)",
       "dsfr-background-flat-info": "var(--background-flat-info)",
+      "dsfr-background-flat-orange-terre-battue": "var(--background-flat-orange-terre-battue)",
       "dsfr-background-action-low-blue-france-active": "var(--background-action-low-blue-france-active)",
       "dsfr-background-action-low-blue-france-hover": "var(--background-action-low-blue-france-hover)",
       "dsfr-background-action-high-blue-france-active": "var(--background-action-high-blue-france-active)",

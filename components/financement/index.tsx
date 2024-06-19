@@ -1,10 +1,13 @@
-import { AideListeEmptyAdd } from "./aide/aide-liste-empty-add";
+"use client";
+
+import { AideListe } from "./aide/aide-liste";
+import { AideListeEmpty } from "./aide/aide-liste-empty";
 
 export const Financement = async () => {
   return (
-    <div className="fr-container pt-6">
-      <h1 className="mb-0 text-[28px]">Je trouve des financements et des aides techniques</h1>
-      <AideListeEmptyAdd />
+    <div className="fr-container pt-8">
+      <AideListeEmpty />
+      <AideListe />
     </div>
   );
 };
