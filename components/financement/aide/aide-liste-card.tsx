@@ -1,6 +1,7 @@
 import { Separator, SeparatorY } from "@/components/common/separator";
 import { FicheSolutionSmallCard } from "@/components/ficheSolution/fiche-solution-small-card";
 import { formatNumberWithSpaces } from "@/helpers/common";
+import { dateToStringWithTime } from "@/helpers/dateUtils";
 import { estimation } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
@@ -15,8 +16,7 @@ export const AideListeCard = ({ financementCount, ingenierieCount, estimation }:
   return (
     <div className="pfmv-card w-full p-8 hover:outline-none">
       <h2 className="mb-1 text-[22px] text-pfmv-navy">
-        Nommer estimation
-        <i className="ri-pencil-fill ml-1"></i>
+        {`Estimation du ${dateToStringWithTime(estimation.created_at)}`}
       </h2>
       <span className="mb-10 block text-black">Solutions pour lesquelles vous recherchez des financements</span>
       <div className="mb-8 flex flex-wrap gap-6">
@@ -57,12 +57,12 @@ export const AideListeCard = ({ financementCount, ingenierieCount, estimation }:
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
               <Image src="/images/financement/ingenierie.svg" width={41} height={38} alt="" />
-              <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-orange-terre-battue">
+              <span className="text-block text-dsfr-background-flat-orange-terre-battue pt-2 text-[68px] font-bold">
                 {ingenierieCount}
               </span>
             </div>
             <div>
-              <span className="block font-bold text-dsfr-background-flat-orange-terre-battue">
+              <span className="text-dsfr-background-flat-orange-terre-battue block font-bold">
                 soutien à {"l'ingénierie"}
               </span>
               <span>ont été trouvées</span>

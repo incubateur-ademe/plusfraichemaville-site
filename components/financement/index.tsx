@@ -1,5 +1,3 @@
-"use client";
-
 import { AideListe } from "./aide/aide-liste";
 import { AideListeEmpty } from "./aide/aide-liste-empty";
 
