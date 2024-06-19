@@ -58,9 +58,9 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   return (
     <div className="bg-dsfr-background-open-blue-france" id="climadiag-panel">
       <div className="fr-container -mb-40 min-h-[25rem] pb-28 pt-10">
-        <div className="mb-6 text-[1.375rem] font-bold text-dsfr-text-label-blue-france">
+        <h2 className="mb-6 text-[1.375rem] font-bold leading-tight text-dsfr-text-label-blue-france">
           Les indicateurs de surchauffe de ma collectivité
-        </div>
+        </h2>
         <>
           <AsyncSelect
             value={selectedClimadiagInfo ? climadiagToOptions([selectedClimadiagInfo]) : null}

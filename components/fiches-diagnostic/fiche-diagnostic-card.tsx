@@ -8,7 +8,7 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
-import { TypeFiche } from "@/helpers/common";
+import { formatNumberWithSpaces, TypeFiche } from "@/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticCardProps = {
@@ -55,43 +55,45 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnost
               !vertical && "lg:justify-start lg:px-7",
             )}
           >
-            <span className={clsx("text-xs", !vertical && "lg:text-sm")}>
-              <i className="ri-bar-chart-fill mr-1 text-dsfr-background-flat-warning before:!w-4"></i>
+            <h3 className={clsx("m-0 text-xs font-normal", !vertical && "lg:text-sm")}>
+              <i className="ri-bar-chart-fill mr-1 text-dsfr-border-action-high-error before:!w-4"></i>
               Méthode de diagnostic{" "}
-              <span className="inline-block font-bold capitalize text-dsfr-background-flat-warning">
+              <span className="inline-block font-bold capitalize text-dsfr-border-action-high-error">
                 {getMethodeDiagnosticFromCode(ficheDiagnostic.attributes.methode)?.label}
               </span>
-            </span>
-            <h5 className="my-3 max-w-[350px]">{ficheDiagnostic.attributes.titre}</h5>
-            <p className={clsx("mb-11 max-w-[350px] text-sm leading-6", !vertical && "lg:mb-3")}>
+            </h3>
+            <h2 className={clsx("my-3 max-w-[350px]", vertical ? "text-xl" : "text-[22px] leading-tight")}>
+              {ficheDiagnostic.attributes.titre}
+            </h2>
+            <p className={clsx("mb-11 max-w-[350px] text-sm", !vertical && "leading-6 lg:mb-3")}>
               {ficheDiagnostic.attributes.description_courte}
             </p>
             <div className={clsx("block", !vertical && "lg:mb-4 lg:flex")}>
               <div className={clsx("mb-3 block", !vertical && "lg:mb-0 lg:mr-6 lg:flex")}>
                 {vertical ? (
-                  <small className="text-dsfr-text-disabled-grey">Coût</small>
+                  <small className="text-text-pfmv-grey">Coût</small>
                 ) : (
-                  <small className="inline text-dsfr-text-disabled-grey lg:hidden">Coût</small>
+                  <small className="text-text-pfmv-grey inline lg:hidden">Coût</small>
                 )}
                 <div className="flex items-center">
                   <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
-                    <small className="hidden text-dsfr-text-disabled-grey lg:block">
-                      de {coutMin} à {coutMax} euros HT
+                    <small className="hidden text-pfmv-grey lg:block">
+                      de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} euros HT
                     </small>
                   )}
                 </div>
               </div>
               <div className={clsx("block", !vertical && "lg:flex")}>
                 {vertical ? (
-                  <small className="text-dsfr-text-disabled-grey">Temporalité</small>
+                  <small className="text-text-pfmv-grey">Temporalité</small>
                 ) : (
-                  <small className="inline text-dsfr-text-disabled-grey lg:hidden">Temporalité</small>
+                  <small className="text-text-pfmv-grey inline lg:hidden">Temporalité</small>
                 )}
                 <div className="flex items-center">
                   <div className="mr-2">{delai?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
                   {!vertical && (
-                    <small className="hidden text-dsfr-text-disabled-grey lg:block">
+                    <small className="hidden text-pfmv-grey lg:block">
                       {delaiMin} à {delaiMax} mois
                     </small>
                   )}

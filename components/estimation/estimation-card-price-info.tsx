@@ -1,4 +1,5 @@
 "use client";
+import { formatNumberWithSpaces } from "@/helpers/common";
 import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
 
 export const EstimationCardPriceInfo = ({ estimationInfo }: { estimationInfo?: EstimationMateriauxFicheSolution }) => {
@@ -8,10 +9,15 @@ export const EstimationCardPriceInfo = ({ estimationInfo }: { estimationInfo?: E
   return (
     <div className="text-sm">
       <div>
-        <strong>{`${estimationInfo.coutMinInvestissement} - ${estimationInfo.coutMaxInvestissement} €`}</strong> HT
+        <strong>{`${formatNumberWithSpaces(estimationInfo.coutMinInvestissement)} - ${formatNumberWithSpaces(
+          estimationInfo.coutMaxInvestissement,
+        )} €`}</strong>{" "}
+        HT
       </div>
       <div className="text-dsfr-text-mention-grey">
-        {`${estimationInfo.coutMinEntretien} - ${estimationInfo.coutMaxEntretien} € HT / an`}
+        {`${formatNumberWithSpaces(estimationInfo.coutMinEntretien)} - ${formatNumberWithSpaces(
+          estimationInfo.coutMaxEntretien,
+        )} € HT / an`}
       </div>
     </div>
   );

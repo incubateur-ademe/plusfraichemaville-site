@@ -11,7 +11,7 @@ import EstimationMateriauGlobalPriceFooter from "@/forms/estimation/estimation-m
 import { updateEstimationMateriauxAction } from "@/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/components/common/notifications";
 import { estimation } from "@prisma/client";
-import { scrollToTop } from "@/helpers/common";
+import { formatNumberWithSpaces, scrollToTop } from "@/helpers/common";
 import { EstimationMateriauFieldUnique } from "./estimation-materiau-field-unique";
 import {
   EstimationMateriauxSimpleFieldFormData,
@@ -108,11 +108,15 @@ export default function EstimationMateriauSimpleFieldForm({
           />
           <div>Investissement</div>
           <div className="mb-2 font-bold">
-            {getLabelCoutFournitureByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0)}
+            {formatNumberWithSpaces(
+              getLabelCoutFournitureByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0),
+            )}
           </div>
           <div>Entretien</div>
           <div className="mb-2 font-bold">
-            {getLabelCoutEntretienByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0)}
+            {formatNumberWithSpaces(
+              getLabelCoutEntretienByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0),
+            )}
           </div>
         </EstimationMateriauFieldUnique>
 

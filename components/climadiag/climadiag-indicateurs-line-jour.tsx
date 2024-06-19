@@ -19,7 +19,7 @@ export const ClimadiagIndicateursLineJour = ({ withBackground, valeur, jour }: C
           valeur === "basse" && "text-pfmv-climadiag-yellow",
           valeur === "médiane" && "text-pfmv-climadiag-orange",
           valeur === "haute" && "text-pfmv-climadiag-red",
-          !valeur && "text-dsfr-text-disabled-grey",
+          !valeur && "text-pfmv-grey",
         )}
       >
         <span className="text-4xl ">{Math.round(jour)} </span>

@@ -1,6 +1,6 @@
 import React from "react";
 import clsx from "clsx";
-import { highlightedIconClass, TypeFiche } from "@/helpers/common";
+import { formatNumberWithSpaces, highlightedIconClass, TypeFiche } from "@/helpers/common";
 import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
 import { FicheSolution } from "@/components/ficheSolution/type";
 
@@ -60,9 +60,9 @@ export const getCoutFiche = (typeFiche: TypeFiche, coutMin?: number, coutMax?: n
 
 export const getLabelCoutFourniture = (ficheSolution: FicheSolution) =>
   ficheSolution.cout_minimum != null && ficheSolution.cout_maximum != null
-    ? `de ${ficheSolution.cout_minimum} à ${ficheSolution.cout_maximum} € HT / ${
-        getUniteCoutFromCode(ficheSolution.cout_unite).unitLabel
-      }`
+    ? `de ${formatNumberWithSpaces(ficheSolution.cout_minimum)} à ${formatNumberWithSpaces(
+        ficheSolution.cout_maximum,
+      )} € HT / ${getUniteCoutFromCode(ficheSolution.cout_unite).unitLabel}`
     : "Coût non disponible";
 
 export const getLabelCoutEntretien = (ficheSolution: FicheSolution) =>
@@ -74,10 +74,14 @@ export const getLabelCoutEntretien = (ficheSolution: FicheSolution) =>
 
 export const getLabelCoutFournitureByQuantite = (ficheSolution: FicheSolution, quantite: number) =>
   ficheSolution.cout_minimum != null && ficheSolution.cout_maximum != null && quantite
-    ? `${ficheSolution.cout_minimum * quantite} - ${ficheSolution.cout_maximum * quantite} €`
+    ? `${formatNumberWithSpaces(ficheSolution.cout_minimum * quantite)} - ${formatNumberWithSpaces(
+        ficheSolution.cout_maximum * quantite,
+      )} €`
     : "0 €";
 
 export const getLabelCoutEntretienByQuantite = (ficheSolution: FicheSolution, quantite: number) =>
   ficheSolution.cout_minimum_entretien != null && ficheSolution.cout_maximum_entretien != null && quantite
-    ? `${ficheSolution.cout_minimum_entretien * quantite} - ${ficheSolution.cout_maximum_entretien * quantite} € / an`
+    ? `${formatNumberWithSpaces(ficheSolution.cout_minimum_entretien * quantite)} - ${formatNumberWithSpaces(
+        ficheSolution.cout_maximum_entretien * quantite,
+      )} € / an`
     : "0 € / an";

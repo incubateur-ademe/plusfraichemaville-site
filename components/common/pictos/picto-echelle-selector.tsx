@@ -18,7 +18,7 @@ export const PictoEchelleSelector = ({ pictoId, className, large }: PictoEchelle
     <div
       className={clsx(
         "flex flex-col items-center justify-center rounded-[10px]",
-        "bg-pfmv-orange text-dsfr-background-flat-warning",
+        "bg-pfmv-orange",
         large ? "h-40 w-36" : "h-24 w-20",
       )}
     >
@@ -31,7 +31,7 @@ export const PictoEchelleSelector = ({ pictoId, className, large }: PictoEchelle
       />
       <span
         className={clsx(
-          "text-center font-bold text-dsfr-background-flat-warning",
+          "text-center font-bold text-dsfr-border-action-high-error",
           large ? "px-6 text-base" : "text-xs",
         )}
       >

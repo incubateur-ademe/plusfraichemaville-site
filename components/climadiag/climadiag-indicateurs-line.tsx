@@ -36,7 +36,7 @@ export const ClimadiagIndicateursLine = ({ type, temperature, isPDF, year }: Cli
             alt="jour très chaud picto"
           />
           <div className={clsx("max-w-[300px] pt-4", !isPDF && "lg:max-w-[420px]")}>
-            <span className="block text-[22px] font-bold leading-[1.2]">{title}</span>
+            <h3 className="mb-0 block text-[22px] font-bold leading-[1.2] text-dsfr-text-label-blue-france">{title}</h3>
             {indice && (
               <span className="block text-[22px] leading-[1.2]">
                 ({">"}

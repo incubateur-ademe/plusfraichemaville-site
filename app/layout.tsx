@@ -16,6 +16,8 @@ import { UserStoreServer } from "@/stores/user/server";
 // eslint-disable-next-line max-len
 import { GenericFichesSaverFromLocalStorage } from "@/components/common/generic-save-fiche/generic-saver-from-local-storage";
 import { headers } from "next/headers";
+import { defaultMetadataDescription, defaultMetadataImage } from "@/helpers/metadata/helpers";
+import { ConsentBannerAndConsentManagement } from "@/components/cookie/consentManagement";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
@@ -34,14 +36,14 @@ export const metadata: Metadata = {
       type: "image/svg+xml",
     },
   },
-  description: "Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité.",
+  description: defaultMetadataDescription,
   manifest: "/favicon/manifest.webmanifest",
   metadataBase: new URL("https://plusfraichemaville.fr"),
   openGraph: {
     title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
     type: "website",
-    description: "Le service numérique dédié aux agents et aux élus qui rafraîchissent durablement leur collectivité.",
-    images: "/favicon/apple-touch-icon.png",
+    description: defaultMetadataDescription,
+    images: defaultMetadataImage,
   },
 };
 
@@ -58,6 +60,7 @@ export default async function RootLayout({ children }: { children: ReactElement 
       </head>
       <body>
         <MainLayoutProviders lang={lang}>
+          <ConsentBannerAndConsentManagement />
           <ProjetStoreServer />
           <UserStoreServer />
           <GenericFichesSaverFromLocalStorage />

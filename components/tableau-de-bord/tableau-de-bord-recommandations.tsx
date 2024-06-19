@@ -35,7 +35,9 @@ export const TableauDeBordRecommandation = () => {
   return (
     <div className="flex flex-wrap gap-8">
       <p>
-        <span className="mb-2 block text-[1.375rem] font-bold text-dsfr-text-label-blue-france">Recommandations</span>
+        <h1 className="mb-2 block text-[1.375rem] font-bold leading-snug text-dsfr-text-label-blue-france">
+          Recommandations
+        </h1>
         Aucune solution ne peut résoudre seule la problématique de la surchauffe urbaine. <br /> Nous vous proposons ici
         des solutions complémentaires à celles que vous avez choisies afin de créer les meilleures combinaisons et
         synergies possibles.

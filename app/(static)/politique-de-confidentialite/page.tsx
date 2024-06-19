@@ -1,12 +1,17 @@
 import React from "react";
 import { PrivacyPolicy } from "@incubateur-ademe/legal-pages-react";
+import { Metadata } from "next";
+import { computeMetadata } from "@/helpers/metadata/helpers";
+import { FooterConsentManagementItem } from "@/components/cookie/consentManagement";
+
+export const metadata: Metadata = computeMetadata("Politique de confidentialité");
 
 export default async function PagePolitiqueDeConfidentialite() {
   return (
     <div className="fr-container pt-12">
       <PrivacyPolicy
         siteName="Plus fraîche ma ville"
-        cookieConsentButton={<div>{"Ce site n'utilise pas de cookies optionnels"}</div>}
+        cookieConsentButton={<FooterConsentManagementItem />}
         cookies={[
           {
             category: "Authentification",
@@ -14,6 +19,14 @@ export default async function PagePolitiqueDeConfidentialite() {
             expiration: "1 mois",
             finalities: "Gestion de l'authentification dans l'espace projet",
             editor: "Next Auth & ADEME",
+            destination: "France",
+          },
+          {
+            category: "Mesure d’audience anonymisée",
+            name: "Matomo",
+            expiration: "13 mois",
+            finalities: "Mesure d’audience",
+            editor: "Matomo & ADEME",
             destination: "France",
           },
         ]}
