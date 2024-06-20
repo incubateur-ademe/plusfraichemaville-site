@@ -57,12 +57,12 @@ export const AideListeCard = ({ financementCount, ingenierieCount, estimation }:
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
               <Image src="/images/financement/ingenierie.svg" width={41} height={38} alt="" />
-              <span className="text-block text-dsfr-background-flat-orange-terre-battue pt-2 text-[68px] font-bold">
+              <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-orange-terre-battue">
                 {ingenierieCount}
               </span>
             </div>
             <div>
-              <span className="text-dsfr-background-flat-orange-terre-battue block font-bold">
+              <span className="block font-bold text-dsfr-background-flat-orange-terre-battue">
                 soutien à {"l'ingénierie"}
               </span>
               <span>ont été trouvées</span>
