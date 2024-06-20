@@ -5,7 +5,7 @@ export const Spinner = ({ className }: { className?: string }) => {
   return (
     <div className={clsx("size-8 content-center rounded-full", className)}>
       <svg className="m-1 animate-spin text-white" fill="none" viewBox="0 0 24 24">
-        <circle className="opacity-100" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="3"></circle>
+        <circle className="opacity-100" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3"></circle>
         <path
           className="opacity-75"
           fill="#000091"

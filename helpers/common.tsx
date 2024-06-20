@@ -27,3 +27,22 @@ export const formatISODateToFullDate = (isoDate: string) => {
   const year = date.getFullYear();
   return `${day}/${month}/${year}`;
 };
+
+export const nullFunctionalComponent = () => <></>;
+
+export const daysUntilDate = (dateString: string | null): number | null => {
+  if (!dateString) {
+    return null;
+  }
+  const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+  const targetDate = new Date(dateString);
+
+  const currentDate = new Date();
+
+  // Calculate the difference in days
+  const differenceInDays = Math.ceil((targetDate.getTime() - currentDate.getTime()) / MS_PER_DAY);
+
+  // Return the number of days if it is between 1 and 10, otherwise return null
+  return differenceInDays > 0 && differenceInDays <= 10 ? differenceInDays : null;
+};
