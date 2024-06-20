@@ -304,6 +304,12 @@
   }
 }
 
+.fr-modal__content {
+  .fr-btns-group {
+    direction: rtl;
+  }
+}
+
 #fr-consent-banner-button-refuse-app {
   background-color: transparent !important;
   --hover: inherit !important;
