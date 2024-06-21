@@ -4,20 +4,25 @@ import { useEstimationGlobalPrice } from "@/hooks/use-estimation-global-price";
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
+import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { AidesTerritoiresAidesResponse } from "@/components/financement/types";
 
 type AideEstimationsCardWithoutSelectionProps = {
-  financementCount: number;
-  ingenierieCount: number;
   estimation: EstimationWithAides;
 } & PropsWithChildren;
 
 export const AideEstimationsCardWithoutSelection = ({
-  financementCount,
-  ingenierieCount,
   estimation,
   children,
 }: AideEstimationsCardWithoutSelectionProps) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
+  const aides = useImmutableSwrWithFetcher<AidesTerritoiresAidesResponse>(
+    `/api/search-aides-for-estimation?estimationId=${estimation.id}`,
+  );
+
+  // TODO : calculer les bons chiffres
+  const financementCount = aides.data?.results.length || 0;
+  const ingenierieCount = aides.data?.results.length || 0;
 
   return (
     <>

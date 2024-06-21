@@ -19,7 +19,7 @@ const getPerimterIdIdOrFetchItFromAidesTerritoires = async (collectivite: collec
   if (collectivite.aides_territoires_perimeter_id) {
     return collectivite.aides_territoires_perimeter_id;
   }
-  let collectiviteAideTerritoireId = DEFAULT_PERIMETER_ID;
+  let collectiviteAideTerritoireId = null;
   if (collectivite.code_insee) {
     const result = await callAidesTerritoiresApi<IApiAidesTerritoiresQueryPerimeter>(
       `${process.env.AIDES_TERRITOIRES_API_URL}/perimeters/?insees=${collectivite.code_insee}`,
@@ -29,8 +29,16 @@ const getPerimterIdIdOrFetchItFromAidesTerritoires = async (collectivite: collec
       collectiviteAideTerritoireId = result?.results[0].id;
     }
   }
+  if (!collectiviteAideTerritoireId && collectivite.code_postal) {
+    const result = await callAidesTerritoiresApi<IApiAidesTerritoiresQueryPerimeter>(
+      `${process.env.AIDES_TERRITOIRES_API_URL}/perimeters/?zipcodes=${collectivite.code_postal}`,
+    );
 
-  await updateCollectiviteAidesTerritoireId(collectivite.id, collectiviteAideTerritoireId);
-  return collectiviteAideTerritoireId;
+    if ((result?.results.length || 0) > 0 && result?.results[0].id) {
+      collectiviteAideTerritoireId = result?.results[0].id;
+    }
+  }
+
+  await updateCollectiviteAidesTerritoireId(collectivite.id, collectiviteAideTerritoireId || DEFAULT_PERIMETER_ID);
+  return collectiviteAideTerritoireId || DEFAULT_PERIMETER_ID;
 };
-

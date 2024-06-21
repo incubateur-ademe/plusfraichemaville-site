@@ -6,6 +6,6 @@ export interface IApiAidesTerritoiresQueryToken extends IApiAidesTerritoiresResp
   token: string;
 }
 
-export interface IApiAidesTerritoiresQueryPerimeter extends IApiAidesTerritoiresResponse{
+export interface IApiAidesTerritoiresQueryPerimeter extends IApiAidesTerritoiresResponse {
   results: { id: string; zipcodes: string[]; code: string }[];
 }

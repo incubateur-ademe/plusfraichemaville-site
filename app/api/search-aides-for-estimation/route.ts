@@ -20,7 +20,7 @@ export async function GET(request: NextRequest) {
             ficheSolutions.map((fs) => fs.attributes),
             collectivite,
           );
-          return NextResponse.json(result?.results);
+          return NextResponse.json(result);
         }
       }
     }

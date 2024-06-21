@@ -38,7 +38,7 @@ export const AideEstimationsListe = () => {
                 </Link>
               </AideEstimationsCardWithSelection>
             ) : (
-              <AideEstimationsCardWithoutSelection financementCount={1} ingenierieCount={1} estimation={estimation}>
+              <AideEstimationsCardWithoutSelection estimation={estimation}>
                 <Link
                   className="fr-btn !ml-auto !block rounded-3xl"
                   href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT(projet?.id, estimation.id)}

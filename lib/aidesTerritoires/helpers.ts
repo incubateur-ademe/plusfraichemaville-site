@@ -10,8 +10,8 @@ const FETCH_TOCKEN_CACHE_TAG = "aides-territoires-token";
 export const extractMotsClesFromFichesSolutions = (fichesSolutions: FicheSolution[]) => {
   return fichesSolutions
     .map((ficheSolution) => ficheSolution.aides_territoires_mots_cles || ficheSolution.titre)
-    .join(",")
-    .split(",")
+    .join(";")
+    .split(";")
     .map((motCle) => `"${motCle.trim()}"`)
     .join(",");
 };

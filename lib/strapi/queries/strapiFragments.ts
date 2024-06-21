@@ -17,6 +17,7 @@ export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo
       delai_travaux_maximum
       types_espace
       slug
+      aides_territoires_mots_cles
     }
 }`;
 
