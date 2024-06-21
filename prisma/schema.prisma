@@ -57,19 +57,20 @@ model VerificationToken {
 }
 
 model collectivite {
-  id           Int                 @id
-  nom          String
-  code_insee   String?             @unique
-  code_postal  String?
-  adresse_info Json?
-  ban_id       String?             @unique
-  latitude     Float?
-  longitude    Float?
-  users        user_collectivite[] @relation(name: "users_in_collectivite")
-  created_by   String
-  creator      User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
-  created_at   DateTime            @default(now())
-  projet       projet[]
+  id                             Int                 @id
+  nom                            String
+  code_insee                     String?             @unique
+  code_postal                    String?
+  adresse_info                   Json?
+  ban_id                         String?             @unique
+  latitude                       Float?
+  longitude                      Float?
+  users                          user_collectivite[] @relation(name: "users_in_collectivite")
+  created_by                     String
+  creator                        User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
+  created_at                     DateTime            @default(now())
+  projet                         projet[]
+  aides_territoires_perimeter_id String?
 }
 
 enum RoleCollectivite {

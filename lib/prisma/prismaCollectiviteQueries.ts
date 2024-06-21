@@ -32,3 +32,25 @@ export const createCollectiviteByName = async (collectiviteName: string, creator
     },
   });
 };
+
+export const updateCollectiviteAidesTerritoireId = async (
+  collectiviteId: number,
+  aidesTerritoiresPerimeterId: string,
+) => {
+  return prismaClient.collectivite.update({
+    where: {
+      id: collectiviteId,
+    },
+    data: {
+      aides_territoires_perimeter_id: aidesTerritoiresPerimeterId,
+    },
+  });
+};
+
+export const getCollectiviteById = async (idCollectivite: number) => {
+  return prismaClient.collectivite.findUnique({
+    where: {
+      id: idCollectivite,
+    },
+  });
+};
