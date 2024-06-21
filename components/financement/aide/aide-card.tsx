@@ -66,7 +66,7 @@ export const AideCard = ({ id }: AideCardProps) => {
         <AideCardLine isAideFinanciere={isAideFinanciere} icon="calendrier">
           <div className="flex items-center gap-4">
             {daysUntilDate(aide.submission_deadline) && (
-              <div className="bg-dsfr-background-contrast-yellow-tournesol-hover w-fit rounded-[4px] px-[6px] py-[2px] text-sm font-bold text-black">
+              <div className="w-fit rounded-[4px] bg-dsfr-background-contrast-yellow-tournesol-hover px-[6px] py-[2px] text-sm font-bold text-black">
                 <i className="ri-error-warning-line mr-1 size-4 text-black before:!size-4 before:!align-[-4px]"></i>
                 J-{daysUntilDate(aide.submission_deadline)}
               </div>
