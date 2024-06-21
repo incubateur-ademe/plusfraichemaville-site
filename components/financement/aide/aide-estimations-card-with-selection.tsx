@@ -5,15 +5,17 @@ import { useProjetsStore } from "@/stores/projets/provider";
 import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
 import { getRegionByDepartment } from "@/lib/departements";
 import { TypeEspace, selectEspaceByCode } from "@/components/filters/TypeEspaceFilter";
+import { PropsWithChildren } from "react";
 
 type AideEstimationsCardWithSelectionProps = {
   fichesSolutionsId: number[];
   estimationsAides: estimations_aides[];
-};
+} & PropsWithChildren;
 
 export const AideEstimationsCardWithSelection = ({
   fichesSolutionsId,
   estimationsAides,
+  children,
 }: AideEstimationsCardWithSelectionProps) => {
   const aidesId = estimationsAides.map(({ aideId }) => aideId);
 
@@ -39,6 +41,7 @@ export const AideEstimationsCardWithSelection = ({
           <AideCard id={aideId} key={aideId} />
         ))}
       </div>
+      {children}
     </>
   );
 };

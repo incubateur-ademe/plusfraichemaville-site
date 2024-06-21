@@ -3,18 +3,19 @@ import { FicheSolutionSmallCard } from "@/components/ficheSolution/fiche-solutio
 import { useEstimationGlobalPrice } from "@/hooks/use-estimation-global-price";
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
-import Link from "next/link";
+import { PropsWithChildren } from "react";
 
 type AideEstimationsCardWithoutSelectionProps = {
   financementCount: number;
   ingenierieCount: number;
   estimation: EstimationWithAides;
-};
+} & PropsWithChildren;
 
 export const AideEstimationsCardWithoutSelection = ({
   financementCount,
   ingenierieCount,
   estimation,
+  children,
 }: AideEstimationsCardWithoutSelectionProps) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
 
@@ -74,9 +75,7 @@ export const AideEstimationsCardWithoutSelection = ({
             </div>
           </div>
         </div>
-        <Link href="/" className="fr-btn rounded-[30px]">
-          Sélectionner
-        </Link>
+        {children}
       </div>
     </>
   );
