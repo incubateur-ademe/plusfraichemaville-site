@@ -23,6 +23,10 @@ export const typeEspaceOptions: SelectOption[] = [
   ...ALL_ESPACES.map((espace) => ({ name: espace.label, value: espace.code })),
 ];
 
+export const selectEspaceByCode = (code: TypeEspace["code"]) => {
+  return ALL_ESPACES.find((espace) => espace.code === code)?.label;
+};
+
 export default function TypeEspaceFilter({ className }: { className?: string }) {
   const { setTypeEspaceFilter, clearTypeEspaceFilter, isTypeEspaceSelected } = useTypeEspaceFilter();
 

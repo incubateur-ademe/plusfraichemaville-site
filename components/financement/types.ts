@@ -5,6 +5,11 @@ export type AidesTerritoiresAidesResponse = {
   results: AidesTerritoiresAide[];
 };
 
+export type AidesTerritoiresAideOverview = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
+  id: number;
+  aideTerritoireId: number;
+};
+
 export type AidesTerritoiresAide = {
   id: number;
   slug: string | null;
@@ -13,11 +18,22 @@ export type AidesTerritoiresAide = {
   name_initial: string | null;
   short_title: string | null;
   financers: string[];
+  financers_full: {
+    id: number;
+    name: string;
+    logo: string;
+  }[];
   instructors: string[];
+  instructors_full: {
+    id: number;
+    name: string;
+    logo: string;
+  }[];
   programs: string[];
   description: string | null;
   eligibility: string | null;
   perimeter: string | null;
+  perimeter_scale: string | null;
   mobilization_steps: string[];
   origin_url: string | null;
   categories: string[];
@@ -25,11 +41,20 @@ export type AidesTerritoiresAide = {
   application_url: string | null;
   targeted_audiences: string[];
   aid_types: AidesTerritoiresAideName[];
+  aid_types_full: {
+    id: number;
+    name: string;
+    group: {
+      id: number;
+      name: AidesTerritoiresAideType;
+    };
+  }[];
   is_charged: boolean;
   destinations: string[];
   start_date: string | null;
   predeposit_date: string | null;
   submission_deadline: string | null;
+  subvention_comment: string | null;
   subvention_rate_lower_bound: number | null;
   subvention_rate_upper_bound: number | null;
   loan_amount: number | null;
@@ -43,15 +68,6 @@ export type AidesTerritoiresAide = {
   date_created: string | null;
   date_updated: string | null;
   project_references: string[];
-};
-
-export type AidesTerritoiresAideCard = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
-  id: number;
-  aideTerritoireId: number;
-};
-
-export type AidesTerritoiresAidesByEstimation = {
-  [estimationId: number]: AidesTerritoiresAideCard[];
 };
 
 export type AidesTerritoiresAideType = "Aide financière" | "Aide en ingénierie";

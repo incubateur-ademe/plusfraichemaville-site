@@ -3,6 +3,7 @@ import { AidesTerritoiresAide, AidesTerritoiresAideType } from "../types";
 import { GenericSaveFiche } from "@/components/common/generic-save-fiche";
 import CmsRichText from "@/components/common/CmsRichText";
 import { AideFichePanelLine } from "./aide-fiche-panel-line";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 type AideFicheProps = {
   aide: AidesTerritoiresAide;
@@ -18,7 +19,12 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
     {
       title: "Subvention",
       picto: "subvention",
-      description: "aide.sub",
+      description: [
+        `${aide.subvention_rate_lower_bound ? `Min: ${aide.subvention_rate_lower_bound}% -` : ""}  ${
+          aide.subvention_rate_upper_bound ? `Max: ${aide.subvention_rate_upper_bound}` : ""
+        }%`,
+        aide.subvention_comment ?? "",
+      ],
     },
     {
       title: "Récurrence",
@@ -73,7 +79,17 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
             <span className="block font-normal">{aide.name_initial}</span>
           </h2>
         </div>
-        <div>{aide.description && <CmsRichText label={aide.description} />}</div>
+        <div className="mb-16">{aide.description && <CmsRichText label={aide.description} />}</div>
+        <div className="flex justify-end">
+          <Button
+            iconId="ri-external-link-fill"
+            className="!ml-auto rounded-2xl"
+            size="small"
+            onClick={() => window.open(aide.application_url ?? "")}
+          >
+            Candidater
+          </Button>
+        </div>
       </div>
     </div>
   );

@@ -1,8 +1,8 @@
-import { AidesTerritoiresAideName, AidesTerritoiresAideType, aidesTerritoiresAideNameAndTypeMap } from "./types";
+import { AidesTerritoiresAide, AidesTerritoiresAideType } from "./types";
 
-export const resolveAidType = (aid_types: AidesTerritoiresAideName[]): AidesTerritoiresAideType => {
-  for (const aid of aid_types) {
-    if (aidesTerritoiresAideNameAndTypeMap[aid] === "Aide financière") {
+export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): AidesTerritoiresAideType => {
+  for (const aid of aid_types_full) {
+    if (aid.group.name === "Aide financière") {
       return "Aide financière";
     }
   }

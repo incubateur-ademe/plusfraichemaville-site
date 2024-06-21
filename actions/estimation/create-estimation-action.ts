@@ -7,12 +7,12 @@ import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomM
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { EstimationFormData, EstimationFormSchema } from "@/forms/estimation/EstimationFormSchema";
 import { createEstimation } from "@/lib/prisma/prismaEstimationQueries";
-import { estimation } from "@prisma/client";
+import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 
 export const createEstimationAction = async (
   projetId: number,
   data: EstimationFormData,
-): Promise<ResponseAction<{ estimation?: estimation }>> => {
+): Promise<ResponseAction<{ estimation?: EstimationWithAides }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
