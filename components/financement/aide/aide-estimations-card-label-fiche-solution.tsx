@@ -7,24 +7,20 @@ import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
 
 export const AideEstimationsCardLabelFicheSolution = ({ ficheId }: { ficheId: number }) => {
   const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionUrlApi(ficheId));
-  if (!data) {
-    return null;
-  }
-  const ficheSolution = data[0];
-  const Icon = getTypeSolutionFromCode(ficheSolution.attributes.type_solution)?.coloredIcon ?? nullFunctionalComponent;
 
-  return isLoading ? (
-    <>Skeleton</>
-  ) : (
+  const ficheSolution = data && data[0];
+  const Icon = getTypeSolutionFromCode(ficheSolution?.attributes.type_solution)?.coloredIcon ?? nullFunctionalComponent;
+
+  return (
     <div className="shrink-0">
-      <AideEstimationsCardLabel>
+      <AideEstimationsCardLabel isLoading={isLoading}>
         <div className="flex items-center justify-center gap-1">
           {
             <i className="[&>i]:!inline-block [&>i]:!size-4 [&>i]:before:!size-4 [&>i]:before:!align-[-4px]">
               <Icon />
             </i>
           }
-          {ficheSolution.attributes.titre}
+          {ficheSolution?.attributes.titre}
         </div>
       </AideEstimationsCardLabel>
     </div>

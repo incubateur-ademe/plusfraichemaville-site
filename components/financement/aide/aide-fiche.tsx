@@ -18,7 +18,12 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
     {
       title: "Subvention",
       picto: "subvention",
-      description: "aide.sub",
+      description: [
+        `${aide.subvention_rate_lower_bound ? `Min: ${aide.subvention_rate_lower_bound}% -` : ""}  ${
+          aide.subvention_rate_upper_bound ? `Max: ${aide.subvention_rate_upper_bound}` : ""
+        }%`,
+        aide.subvention_comment ?? "",
+      ],
     },
     {
       title: "Récurrence",

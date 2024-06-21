@@ -18,7 +18,7 @@ export const AideCard = ({ id }: AideCardProps) => {
   const aide = seed[0];
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === "Aide financière";
-  console.log(daysUntilDate(aide.submission_deadline));
+
   return (
     <div className="pfmv-card w-fit max-w-[266px] overflow-hidden hover:outline-none" id={`aide-card-${id}`}>
       <div
@@ -61,12 +61,12 @@ export const AideCard = ({ id }: AideCardProps) => {
           {aide.subvention_rate_upper_bound && (
             <span className="mb-2 block">Max: {aide.subvention_rate_upper_bound}%</span>
           )}
-          {aide.subvention_comment && <span className="mb-2 block">Max: {aide.subvention_comment}%</span>}
+          {aide.subvention_comment && <span className="mb-2 block">{aide.subvention_comment}%</span>}
         </AideCardLine>
         <AideCardLine isAideFinanciere={isAideFinanciere} icon="calendrier">
           <div className="flex items-center gap-4">
-            <div className="w-fit rounded-[4px] bg-dsfr-background-contrast-yellow-tournesol-hover px-[6px] py-[2px] text-sm font-bold text-black text-pfmv-navy">
-              <i className="ri-error-warning-line mr-1 size-4 before:!size-4 before:!align-[-4px]"></i>
+            <div className="bg-dsfr-background-contrast-yellow-tournesol-hover w-fit rounded-[4px] px-[6px] py-[2px] text-sm font-bold text-black">
+              <i className="ri-error-warning-line mr-1 size-4 text-black before:!size-4 before:!align-[-4px]"></i>
               J-{daysUntilDate(aide.submission_deadline)}
             </div>
             <span>Échéance : {aide.submission_deadline}</span>

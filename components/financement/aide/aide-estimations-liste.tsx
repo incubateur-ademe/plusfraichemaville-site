@@ -12,7 +12,6 @@ export const AideEstimationsListe = () => {
 
   const hasEstimations = estimations && estimations?.length > 0;
   const hasFichesSolutions = fichesSolutions && fichesSolutions?.length > 0;
-  const hasAidesSelected = estimations && estimations[0].estimations_aides.length > 0;
 
   if (!hasEstimations || !hasFichesSolutions) {
     return null;
@@ -24,7 +23,7 @@ export const AideEstimationsListe = () => {
       <div>
         {estimations.map((estimation, index) => (
           <AideEstimationsCard estimation={estimation} key={index}>
-            {hasAidesSelected ? (
+            {estimation.estimations_aides.length > 0 ? (
               <AideEstimationsCardWithSelection
                 fichesSolutionsId={estimation.fiches_solutions_id}
                 estimationsAides={estimation.estimations_aides}
