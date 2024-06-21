@@ -6,11 +6,7 @@ export type UserWithCollectivite = Prisma.UserGetPayload<{
 
 export type EstimationWithAides = Prisma.estimationGetPayload<{
   include: {
-    estimations_aides: {
-      include: {
-        aide: true;
-      };
-    };
+    estimations_aides: true;
   };
 }>;
 

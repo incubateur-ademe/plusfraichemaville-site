@@ -63,12 +63,12 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     return estimationMateriaux?.find((em) => em.ficheSolutionId == currentFicheSolution?.id);
   }, [currentFicheSolution, estimationMateriaux]);
 
-  const updateEstimationInStore = (estimation: estimation) => {
+  const updateEstimationInStore = (estimation: EstimationWithAides) => {
     const currentProject = getCurrentProjet();
     if (currentProject) {
       updateProjetInStore({
         ...currentProject,
-        estimations: upsert(currentProject.estimations, estimation) as EstimationWithAides[],
+        estimations: upsert(currentProject.estimations, estimation),
       });
     }
   };

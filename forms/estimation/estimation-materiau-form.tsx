@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from "react";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -13,7 +13,7 @@ import EstimationMateriauField from "@/forms/estimation/estimation-materiau-fiel
 import EstimationMateriauGlobalPriceFooter from "@/forms/estimation/estimation-materiau-global-price-footer";
 import { updateEstimationMateriauxAction } from "@/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/components/common/notifications";
-import { estimation } from "@prisma/client";
+
 import { mapStrapiEstimationMateriauxToFormValues } from "@/lib/prisma/prismaCustomTypesHelper";
 import { scrollToTop } from "@/helpers/common";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/cout/cout-materiau";
@@ -34,7 +34,7 @@ export default function EstimationMateriauForm({
   onNext: () => void;
   onPrevious: () => void;
   onClose: () => void;
-  onUpdateEstimation: (_: estimation) => void;
+  onUpdateEstimation: (_: EstimationWithAides) => void;
 }) {
   const initialValues = useMemo(
     () => ({
