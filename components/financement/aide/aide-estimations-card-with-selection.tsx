@@ -4,6 +4,7 @@ import { AideCard } from "./aide-card";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
 import { getRegionByDepartment } from "@/lib/departements";
+import { TypeEspace, selectEspaceByCode } from "@/components/filters/TypeEspaceFilter";
 
 type AideEstimationsCardWithSelectionProps = {
   fichesSolutionsId: number[];
@@ -16,7 +17,7 @@ export const AideEstimationsCardWithSelection = ({
 }: AideEstimationsCardWithSelectionProps) => {
   const aidesId = estimationsAides.map(({ aideId }) => aideId);
 
-  const espace = useProjetsStore((state) => state.getCurrentProjet()?.type_espace);
+  const espace = useProjetsStore((state) => state.getCurrentProjet()?.type_espace) as TypeEspace["code"];
   const collectivite = useProjetsStore((state) => state.getCurrentProjet()?.collectivite);
   const commune = `${collectivite?.code_postal} ${collectivite?.nom}`;
   const region = getRegionByDepartment(collectivite?.code_postal);
@@ -31,7 +32,7 @@ export const AideEstimationsCardWithSelection = ({
       <div className="mb-6 flex flex-wrap gap-4">
         <AideEstimationsCardLabel>Region {region}</AideEstimationsCardLabel>
         <AideEstimationsCardLabel>{commune}</AideEstimationsCardLabel>
-        <AideEstimationsCardLabel>{espace}</AideEstimationsCardLabel>
+        <AideEstimationsCardLabel>{selectEspaceByCode(espace)}</AideEstimationsCardLabel>
       </div>
       <div className="aide-card">
         {aidesId.map((aideId) => (
