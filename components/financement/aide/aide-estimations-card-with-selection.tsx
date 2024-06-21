@@ -34,7 +34,7 @@ export const AideEstimationsCardWithSelection = ({
         <AideEstimationsCardLabel>{commune}</AideEstimationsCardLabel>
         <AideEstimationsCardLabel>{selectEspaceByCode(espace)}</AideEstimationsCardLabel>
       </div>
-      <div className="aide-card">
+      <div className="aide-card flex flex-wrap gap-6">
         {aidesId.map((aideId) => (
           <AideCard id={aideId} key={aideId} />
         ))}

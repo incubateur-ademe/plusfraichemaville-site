@@ -20,7 +20,7 @@ export const AideCard = ({ id }: AideCardProps) => {
   const isAideFinanciere = type === "Aide financière";
 
   return (
-    <div className="pfmv-card w-fit max-w-[266px] overflow-hidden hover:outline-none" id={`aide-card-${id}`}>
+    <div className="pfmv-card w-fit max-w-[266px] shrink-0 overflow-hidden hover:outline-none" id={`aide-card-${id}`}>
       <div
         className={clsx("h-24 px-5 py-4", {
           "bg-dsfr-background-alt-blue-france": isAideFinanciere,
@@ -65,10 +65,12 @@ export const AideCard = ({ id }: AideCardProps) => {
         </AideCardLine>
         <AideCardLine isAideFinanciere={isAideFinanciere} icon="calendrier">
           <div className="flex items-center gap-4">
-            <div className="w-fit rounded-[4px] bg-dsfr-background-contrast-yellow-tournesol-hover px-[6px] py-[2px] text-sm font-bold text-black">
-              <i className="ri-error-warning-line mr-1 size-4 text-black before:!size-4 before:!align-[-4px]"></i>
-              J-{daysUntilDate(aide.submission_deadline)}
-            </div>
+            {daysUntilDate(aide.submission_deadline) && (
+              <div className="bg-dsfr-background-contrast-yellow-tournesol-hover w-fit rounded-[4px] px-[6px] py-[2px] text-sm font-bold text-black">
+                <i className="ri-error-warning-line mr-1 size-4 text-black before:!size-4 before:!align-[-4px]"></i>
+                J-{daysUntilDate(aide.submission_deadline)}
+              </div>
+            )}
             <span>Échéance : {aide.submission_deadline}</span>
           </div>
         </AideCardLine>
