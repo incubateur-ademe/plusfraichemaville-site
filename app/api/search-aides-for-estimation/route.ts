@@ -5,11 +5,16 @@ import { getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
 import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
 import { getCollectiviteById } from "@/lib/prisma/prismaCollectiviteQueries";
 
+export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
+  `/api/search-aides-for-estimation?estimationId=${estimationId}`;
+
 export async function GET(request: NextRequest) {
   // TODO : Sécuriser cette route
   const estimationId = request.nextUrl.searchParams.get("estimationId");
+
   if (estimationId) {
     const estimation = await getEstimationById(+estimationId);
+
     if (estimation) {
       const ficheSolutions = await getFicheSolutionByIds(estimation.fiches_solutions_id);
       const projet = await getProjetById(estimation.projet_id);

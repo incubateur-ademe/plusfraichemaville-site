@@ -78,6 +78,12 @@
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
 }
 
+.pfmv-card-outline {
+  background: #fff !important;
+  outline: 1px solid #000091;
+  outline-offset: 0px;
+}
+
 .pfmv-card:hover {
   box-shadow: 4px 4px 10px rgba(0, 0, 145, 0.25);
 }

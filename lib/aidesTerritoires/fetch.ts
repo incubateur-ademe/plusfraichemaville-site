@@ -10,6 +10,7 @@ const DEFAULT_PERIMETER_ID = "70956-france";
 export const fetchAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution[], collectivite: collectivite) => {
   const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
   const perimeterId = await getPerimterIdIdOrFetchItFromAidesTerritoires(collectivite);
+
   return await callAidesTerritoiresApi<IApiAidesTerritoiresQueryPerimeter>(
     `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?perimeter=${perimeterId}&text=${motsCles}&itemsPerPage=1000`,
   );

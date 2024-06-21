@@ -21,15 +21,15 @@ export const AideEstimationsListe = () => {
 
   return (
     <div>
-      <AideEstimationsListeHeader projetId={projet?.id} />
+      <AideEstimationsListeHeader
+        projetId={projet?.id}
+        title="Pour quelle estimation souhaitez-vous trouver des financements ou des soutiens à l'ingénierie ?"
+      />
       <div>
         {estimations.map((estimation, index) => (
           <AideEstimationsCard estimation={estimation} key={index}>
             {estimation.estimations_aides.length > 0 ? (
-              <AideEstimationsCardWithSelection
-                fichesSolutionsId={estimation.fiches_solutions_id}
-                estimationsAides={estimation.estimations_aides}
-              >
+              <AideEstimationsCardWithSelection estimationsAides={estimation.estimations_aides}>
                 <Link
                   className="fr-btn !ml-auto mt-6 !block rounded-3xl"
                   href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT(projet?.id, estimation.id)}

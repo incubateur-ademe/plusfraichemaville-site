@@ -13,7 +13,6 @@ type AideCardProps = {
 };
 
 export const AideCard = ({ aideId }: AideCardProps) => {
-  //  const data  = useImmutableFetcher(id)... Webservice ici
   const aide = seed[0];
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === "Aide financière";
