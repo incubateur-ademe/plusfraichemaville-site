@@ -38,7 +38,7 @@ export const AideEstimationsCardWithSelection = ({
       </div>
       <div className="aide-card flex flex-wrap gap-6">
         {aidesId.map((aideId) => (
-          <AideCard id={aideId} key={aideId} />
+          <AideCard aideId={aideId} key={aideId} />
         ))}
       </div>
       {children}

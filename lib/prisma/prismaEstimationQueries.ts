@@ -38,7 +38,9 @@ export const createEstimation = async (
       id: generateRandomId(),
     },
     include: {
-      estimations_aides: true,
+      estimations_aides: {
+        include: { aide: true },
+      },
     },
   });
 };
@@ -57,7 +59,9 @@ export const updateEstimationMateriaux = async (
       updated_at: new Date(),
     },
     include: {
-      estimations_aides: true,
+      estimations_aides: {
+        include: { aide: true },
+      },
     },
   });
 };

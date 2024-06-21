@@ -5,22 +5,24 @@ import { AidesTerritoiresAide } from "../types";
 import Image from "next/image";
 import { resolveAidType } from "../helpers";
 import clsx from "clsx";
-
-import { daysUntilDate } from "@/helpers/common";
 import { AideCardLine } from "./aide-card-line";
+import { AideEstimationsCardWarningRemainingDay } from "./aide-estimations-card-warning-remaining-day";
 
 type AideCardProps = {
-  id: number;
+  aideId: number;
 };
 
-export const AideCard = ({ id }: AideCardProps) => {
+export const AideCard = ({ aideId }: AideCardProps) => {
   //  const data  = useImmutableFetcher(id)... Webservice ici
   const aide = seed[0];
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === "Aide financière";
 
   return (
-    <div className="pfmv-card w-fit max-w-[266px] shrink-0 overflow-hidden hover:outline-none" id={`aide-card-${id}`}>
+    <div
+      className="pfmv-card no-shadow w-fit max-w-[266px] shrink-0 overflow-hidden hover:outline-none"
+      id={`aide-card-${aideId}`}
+    >
       <div
         className={clsx("h-24 px-5 py-4", {
           "bg-dsfr-background-alt-blue-france": isAideFinanciere,
@@ -65,17 +67,12 @@ export const AideCard = ({ id }: AideCardProps) => {
         </AideCardLine>
         <AideCardLine isAideFinanciere={isAideFinanciere} icon="calendrier">
           <div className="flex items-center gap-4">
-            {daysUntilDate(aide.submission_deadline) && (
-              <div className="w-fit rounded-[4px] bg-dsfr-background-contrast-yellow-tournesol-hover px-[6px] py-[2px] text-sm font-bold text-black">
-                <i className="ri-error-warning-line mr-1 size-4 text-black before:!size-4 before:!align-[-4px]"></i>
-                J-{daysUntilDate(aide.submission_deadline)}
-              </div>
-            )}
+            <AideEstimationsCardWarningRemainingDay submissionDeadline={aide.submission_deadline} />
             <span>Échéance : {aide.submission_deadline}</span>
           </div>
         </AideCardLine>
       </div>
-      <AideFicheModal id={id}>
+      <AideFicheModal id={aideId}>
         <AideFiche aide={aide} type={type} />
       </AideFicheModal>
     </div>

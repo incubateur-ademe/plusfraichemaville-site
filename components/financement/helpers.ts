@@ -1,3 +1,4 @@
+import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import { AidesTerritoiresAide, AidesTerritoiresAideType } from "./types";
 
 export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): AidesTerritoiresAideType => {
@@ -8,3 +9,9 @@ export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_f
   }
   return "Aide en ingénierie";
 };
+
+export const getAideSubmissionDeadlineAndName = (estimationAides: EstimationWithAides["estimations_aides"]) =>
+  estimationAides.map(({ aide: { submission_deadline, name } }) => ({
+    submission_deadline,
+    name,
+  }));
