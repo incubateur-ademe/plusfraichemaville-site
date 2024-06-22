@@ -5,17 +5,21 @@ import { AideEstimationsListeHeader } from "./aide-estimations-liste-header";
 import { AideEstimationsPanelHeader } from "./aide-estimations-panel-header";
 import { Separator } from "@/components/common/separator";
 import { useParams } from "next/navigation";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
-import { AidesTerritoiresAidesResponse } from "../types";
-import { SEARCH_AIDE_FOR_ESTIMATION_URL } from "@/app/api/search-aides-for-estimation/route";
+import { AideCard } from "./aide-card";
+import { AideCardSkeleton } from "./aide-card-skeleton";
+import { useAidesByEstimationFetcher } from "@/hooks/use-aides-by-estimation";
+import { AideEditFilter } from "./aide-edit-filter";
+import { memo } from "react";
+import { countAidesByType } from "../helpers";
 
-export const AideEdit = () => {
+export const AideEdit = memo(() => {
   const projetId = useProjetsStore((state) => state.currentProjetId);
-  const estimationId = useParams().estimationId;
+  const estimationId = useParams().estimationId as string;
+  const skeletons = [...new Array(4)].map((_, i) => <AideCardSkeleton key={i} />);
 
-  const data = useSwrWithFetcher<AidesTerritoiresAidesResponse>(SEARCH_AIDE_FOR_ESTIMATION_URL(+estimationId));
+  const { data, isLoading } = useAidesByEstimationFetcher(estimationId);
+  const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
 
-  console.log(data.data);
   return (
     <div className="fr-container pt-8">
       <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
@@ -26,12 +30,14 @@ export const AideEdit = () => {
         />
         <AideEstimationsPanelHeader />
         <Separator className="mb-6" />
+        <AideEditFilter aideFinanciereCount={aideFinanciereCount} aideTechniqueCount={aideTechniqueCount} />
+
+        <div className="aide-card flex flex-wrap gap-6">
+          {isLoading ? skeletons : data?.results.map((aide) => <AideCard aide={aide} key={aide.id} />)}
+        </div>
       </div>
-      {/* <div className="aide-card flex flex-wrap gap-6">
-        {aidesId.map((aideId) => (
-          <AideCard aideId={aideId} key={aideId} />
-        ))}
-      </div> */}
     </div>
   );
-};
+});
+
+AideEdit.displayName = "AideEdit";

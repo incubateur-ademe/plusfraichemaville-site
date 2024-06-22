@@ -1,8 +1,9 @@
+/* eslint-disable max-len */
 import { estimations_aides } from "@prisma/client";
 
-import { AideCard } from "./aide-card";
 import { PropsWithChildren } from "react";
 import { AideEstimationsPanelHeader } from "./aide-estimations-panel-header";
+import { AideCardWithFetcher } from "./aide-card-with-fetcher";
 
 type AideEstimationsCardWithSelectionProps = {
   estimationsAides: estimations_aides[];
@@ -19,7 +20,7 @@ export const AideEstimationsCardWithSelection = ({
       <AideEstimationsPanelHeader />
       <div className="aide-card flex flex-wrap gap-6">
         {aidesId.map((aideId) => (
-          <AideCard aideId={aideId} key={aideId} />
+          <AideCardWithFetcher aideId={aideId} key={aideId} />
         ))}
       </div>
       {children}

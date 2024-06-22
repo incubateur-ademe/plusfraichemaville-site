@@ -5,8 +5,7 @@ import { AideEstimationsCard } from "./aide-estimations-card";
 import { AideEstimationsCardWithoutSelection } from "./aide-estimations-card-without-selection";
 import { AideEstimationsCardWithSelection } from "./aide-estimations-card-with-selection";
 import { AideEstimationsListeHeader } from "./aide-estimations-liste-header";
-import Link from "next/link";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { AideEstimationsListeLink } from "./aide-estimation-liste-link";
 
 export const AideEstimationsListe = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -30,21 +29,23 @@ export const AideEstimationsListe = () => {
           <AideEstimationsCard estimation={estimation} key={index}>
             {estimation.estimations_aides.length > 0 ? (
               <AideEstimationsCardWithSelection estimationsAides={estimation.estimations_aides}>
-                <Link
+                <AideEstimationsListeLink
                   className="fr-btn !ml-auto mt-6 !block rounded-3xl"
-                  href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT(projet?.id, estimation.id)}
+                  projetId={projet?.id}
+                  estimationId={estimation.id}
                 >
                   Modifier
-                </Link>
+                </AideEstimationsListeLink>
               </AideEstimationsCardWithSelection>
             ) : (
               <AideEstimationsCardWithoutSelection estimation={estimation}>
-                <Link
+                <AideEstimationsListeLink
                   className="fr-btn !ml-auto !block rounded-3xl"
-                  href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT(projet?.id, estimation.id)}
+                  projetId={projet?.id}
+                  estimationId={estimation.id}
                 >
                   Sélectionner
-                </Link>
+                </AideEstimationsListeLink>
               </AideEstimationsCardWithoutSelection>
             )}
           </AideEstimationsCard>

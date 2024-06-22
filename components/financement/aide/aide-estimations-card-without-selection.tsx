@@ -4,8 +4,8 @@ import { useEstimationGlobalPrice } from "@/hooks/use-estimation-global-price";
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
-import { AidesTerritoiresAidesResponse } from "@/components/financement/types";
+import { useAidesSelectedByEstimationFetcher } from "@/hooks/use-aides-selected-by-estimation";
+import { countAidesByType } from "../helpers";
 
 type AideEstimationsCardWithoutSelectionProps = {
   estimation: EstimationWithAides;
@@ -16,13 +16,8 @@ export const AideEstimationsCardWithoutSelection = ({
   children,
 }: AideEstimationsCardWithoutSelectionProps) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
-  const aides = useImmutableSwrWithFetcher<AidesTerritoiresAidesResponse>(
-    `/api/search-aides-for-estimation?estimationId=${estimation.id}`,
-  );
-
-  // TODO : calculer les bons chiffres
-  const financementCount = aides.data?.results.length || 0;
-  const ingenierieCount = aides.data?.results.length || 0;
+  const { data: aides } = useAidesSelectedByEstimationFetcher(estimation.id);
+  const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(aides?.results ?? []);
 
   return (
     <>
@@ -54,14 +49,14 @@ export const AideEstimationsCardWithoutSelection = ({
             <div className="flex gap-2">
               <Image src="/images/financement/financement.svg" width={41} height={38} alt="" />
               <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-info">
-                {financementCount}
+                {aideFinanciereCount}
               </span>
             </div>
             <div>
               <span className="block font-bold text-dsfr-background-flat-info">
-                {financementCount > 1 ? "financements" : "financement"}
+                {aideFinanciereCount > 1 ? "financements" : "financement"}
               </span>
-              <span>{financementCount > 1 ? "ont été trouvés" : "a été trouvé"}</span>
+              <span>{aideFinanciereCount > 1 ? "ont été trouvés" : "a été trouvé"}</span>
             </div>
           </div>
           <SeparatorY />
@@ -69,14 +64,14 @@ export const AideEstimationsCardWithoutSelection = ({
             <div className="flex gap-2">
               <Image src="/images/financement/ingenierie.svg" width={41} height={38} alt="" />
               <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-orange-terre-battue">
-                {ingenierieCount}
+                {aideTechniqueCount}
               </span>
             </div>
             <div>
               <span className="block font-bold text-dsfr-background-flat-orange-terre-battue">
-                {ingenierieCount > 1 ? "soutiens à l'ingénierie" : "soutien à l'ingénierie"}
+                {aideTechniqueCount > 1 ? "soutiens à l'ingénierie" : "soutien à l'ingénierie"}
               </span>
-              <span>{ingenierieCount > 1 ? "ont été trouvés" : "a été trouvé"}</span>
+              <span>{aideTechniqueCount > 1 ? "ont été trouvés" : "a été trouvé"}</span>
             </div>
           </div>
         </div>
