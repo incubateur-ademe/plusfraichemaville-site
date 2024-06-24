@@ -7,7 +7,13 @@ import { callAidesTerritoiresApi, extractMotsClesFromFichesSolutions } from "@/l
 
 const DEFAULT_PERIMETER_ID = "70956-france";
 
-export const fetchAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution[], collectivite: collectivite) => {
+export const fetchAidesFromAidesTerritoiresById = async (aideTerritoireAideId: number) => {
+  return await callAidesTerritoiresApi<IApiAidesTerritoiresQueryPerimeter>(
+    `${process.env.AIDES_TERRITOIRES_API_URL}/aids/by-id/${aideTerritoireAideId}`,
+  );
+};
+
+export const searchAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution[], collectivite: collectivite) => {
   const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
   const perimeterId = await getPerimterIdIdOrFetchItFromAidesTerritoires(collectivite);
   return await callAidesTerritoiresApi<IApiAidesTerritoiresQueryPerimeter>(

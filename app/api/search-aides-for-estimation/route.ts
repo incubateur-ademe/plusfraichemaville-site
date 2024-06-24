@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchAidesFromAidesTerritoires } from "@/lib/aidesTerritoires/fetch";
+import { searchAidesFromAidesTerritoires } from "@/lib/aidesTerritoires/fetch";
 import { getFicheSolutionByIds } from "@/lib/strapi/queries/fichesSolutionsQueries";
 import { getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
 import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
   const ficheSolutions = await getFicheSolutionByIds(estimation.fiches_solutions_id);
   const collectivite = await getCollectiviteById(projet.collectiviteId);
   if (collectivite) {
-    const result = await fetchAidesFromAidesTerritoires(
+    const result = await searchAidesFromAidesTerritoires(
       ficheSolutions.map((fs) => fs.attributes),
       collectivite,
     );
