@@ -1,3 +1,5 @@
+import { IApiAidesTerritoiresResponse } from "@/lib/aidesTerritoires/types";
+
 export type AidesTerritoiresAidesResponse = {
   count: number;
   previous: string | null;
@@ -10,7 +12,7 @@ export type AidesTerritoiresAideOverview = Pick<AidesTerritoiresAide, "submissio
   aideTerritoireId: number;
 };
 
-export type AidesTerritoiresAide = {
+export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
   id: number;
   slug: string | null;
   url: string | null;
@@ -68,7 +70,7 @@ export type AidesTerritoiresAide = {
   date_created: string | null;
   date_updated: string | null;
   project_references: string[];
-};
+}
 
 export enum TypeAidesTerritoiresAide {
   // eslint-disable-next-line no-unused-vars
