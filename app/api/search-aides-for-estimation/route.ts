@@ -8,6 +8,9 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/next-auth/auth";
 import { hasPermissionToViewProjet } from "@/actions/projets/permissions";
 
+export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
+  `/api/search-aides-for-estimation?estimationId=${estimationId}`;
+
 export async function GET(request: NextRequest) {
   const estimationId = request.nextUrl.searchParams.get("estimationId");
   if (!estimationId) {

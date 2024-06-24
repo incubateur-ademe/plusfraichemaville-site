@@ -6,9 +6,23 @@ export type UserWithCollectivite = Prisma.UserGetPayload<{
 
 export type EstimationWithAides = Prisma.estimationGetPayload<{
   include: {
-    estimations_aides: true;
+    estimations_aides: {
+      include: {
+        aide: true;
+      };
+    };
   };
 }>;
+
+export const includeEstimationsWithAides: EstimationWithAides = {
+  include: {
+    estimations_aides: {
+      include: {
+        aide: true,
+      },
+    },
+  },
+};
 
 export interface ProjetWithRelations extends projet {
   collectivite: collectivite;

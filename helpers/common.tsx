@@ -42,3 +42,6 @@ export const daysUntilDate = (dateString: string | null): number | null => {
 
   return differenceInDays > 0 && differenceInDays <= 10 ? differenceInDays : null;
 };
+
+export const changeNodeListClassname = (nodes: HTMLElement[], action: "add" | "remove", className: string) =>
+  nodes.forEach((node) => node.classList[action](className));
