@@ -5,9 +5,9 @@ export type AidesTerritoiresAidesResponse = {
   results: AidesTerritoiresAide[];
 };
 
-export type AidesTerritoiresAideOverview = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
-  id: number;
+export type AidesTerritoiresAideBaseData = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
   aideTerritoireId: number;
+  type: AidesTerritoiresAideType;
 };
 
 export type AidesTerritoiresAide = {

@@ -7,16 +7,18 @@ import { resolveAidType } from "../helpers";
 import clsx from "clsx";
 import { AideCardLine } from "./aide-card-line";
 import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
+import { AideCardSaveButton } from "./aide-card-save-button";
+import { useParams } from "next/navigation";
 
 type AideCardProps = {
   aide: AidesTerritoiresAide;
   withSaveButton?: boolean;
 };
 
-export const AideCard = ({ aide }: AideCardProps) => {
+export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
+  const estimationId = +useParams().estimationId;
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === "Aide financière";
-  console.log(aide);
 
   return (
     <div
@@ -25,7 +27,7 @@ export const AideCard = ({ aide }: AideCardProps) => {
       data-type={type}
     >
       <div
-        className={clsx("h-24 px-5 py-4", {
+        className={clsx("relative h-24 px-5 py-4", {
           "bg-dsfr-background-alt-blue-france": isAideFinanciere,
           "bg-dsfr-background-alt-brown-cafe-creme": !isAideFinanciere,
         })}
@@ -45,6 +47,7 @@ export const AideCard = ({ aide }: AideCardProps) => {
         >
           {isAideFinanciere ? "Financemement" : "Soutien à l'ingénierie"}
         </span>
+        {withSaveButton && <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} />}
       </div>
       <div className="p-5">
         <div className="mb-4 w-fit rounded-[4px] bg-dsfr-background-alt-blue-france px-[6px] py-[2px] text-sm font-bold text-pfmv-navy">
