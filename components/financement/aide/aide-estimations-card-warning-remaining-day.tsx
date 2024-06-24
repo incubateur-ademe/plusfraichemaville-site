@@ -3,7 +3,7 @@ import { daysUntilDate } from "@/helpers/common";
 import { AidesTerritoiresAide } from "../types";
 import clsx from "clsx";
 
-export const AideEstimationsCardWarningRemainingDay = ({
+export const AideEstimationsCardWarningRemainingDays = ({
   submissionDeadline,
 }: {
   submissionDeadline: AidesTerritoiresAide["submission_deadline"];

@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { aideCardOff, aideCardOn } from "../helpers";
+import clsx from "clsx";
 
 type AideEditFilterProps = {
   aideFinanciereCount: number;
   aideTechniqueCount: number;
+  isLoading: boolean;
 };
 
-export const AideEditFilter = ({ aideFinanciereCount, aideTechniqueCount }: AideEditFilterProps) => {
+export const AideEditFilter = ({ aideFinanciereCount, aideTechniqueCount, isLoading }: AideEditFilterProps) => {
   const [filter, setFilter] = useState({
     aideFinanciere: true,
     aideTechnique: true,
@@ -24,17 +26,23 @@ export const AideEditFilter = ({ aideFinanciereCount, aideTechniqueCount }: Aide
 
   return (
     <div className="flex gap-5">
-      <div className="mb-10 mt-5 flex cursor-pointer gap-2" onClick={aideFinanciere}>
+      <div className="mb-10 flex cursor-pointer gap-2" onClick={aideFinanciere}>
         <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
           {filter.aideFinanciere && <i className="ri-check-line mr-2" />}
         </div>
-        Aides financières ({aideFinanciereCount})
+        Aides financières
+        <span className={clsx(isLoading && "w-9 animate-pulse rounded-lg bg-pfmv-grey/20")}>
+          {!isLoading && `(${aideFinanciereCount})`}
+        </span>
       </div>
-      <div className="mb-10 mt-5 flex cursor-pointer gap-2" onClick={aideTechnique}>
+      <div className="mb-10 flex cursor-pointer gap-2" onClick={aideTechnique}>
         <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
           {filter.aideTechnique && <i className="ri-check-line mr-2" />}
         </div>
-        Aides techniques ({aideTechniqueCount})
+        Aides techniques
+        <div className={clsx(isLoading && "w-9 animate-pulse rounded-lg bg-pfmv-grey/20")}>
+          {!isLoading && `(${aideTechniqueCount})`}
+        </div>
       </div>
     </div>
   );

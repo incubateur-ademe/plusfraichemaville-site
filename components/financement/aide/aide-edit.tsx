@@ -30,10 +30,14 @@ export const AideEdit = memo(() => {
         />
         <AideEstimationsPanelHeader />
         <Separator className="mb-6" />
-        <AideEditFilter aideFinanciereCount={aideFinanciereCount} aideTechniqueCount={aideTechniqueCount} />
+        <AideEditFilter
+          aideFinanciereCount={aideFinanciereCount}
+          aideTechniqueCount={aideTechniqueCount}
+          isLoading={isLoading}
+        />
 
         <div className="aide-card flex flex-wrap gap-6">
-          {isLoading ? skeletons : data?.results.map((aide) => <AideCard aide={aide} key={aide.id} />)}
+          {isLoading ? skeletons : data?.results.slice(1, 2).map((aide) => <AideCard aide={aide} key={aide.id} />)}
         </div>
       </div>
     </div>

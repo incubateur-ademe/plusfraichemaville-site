@@ -6,6 +6,8 @@ import Image from "next/image";
 import { PropsWithChildren } from "react";
 import { useAidesSelectedByEstimationFetcher } from "@/hooks/use-aides-selected-by-estimation";
 import { countAidesByType } from "../helpers";
+import clsx from "clsx";
+import { Spinner } from "@/components/common/spinner";
 
 type AideEstimationsCardWithoutSelectionProps = {
   estimation: EstimationWithAides;
@@ -16,7 +18,7 @@ export const AideEstimationsCardWithoutSelection = ({
   children,
 }: AideEstimationsCardWithoutSelectionProps) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
-  const { data: aides } = useAidesSelectedByEstimationFetcher(estimation.id);
+  const { data: aides, isLoading } = useAidesSelectedByEstimationFetcher(estimation.id);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(aides?.results ?? []);
 
   return (
@@ -48,8 +50,14 @@ export const AideEstimationsCardWithoutSelection = ({
           <div className="flex items-center gap-4">
             <div className="flex gap-2">
               <Image src="/images/financement/financement.svg" width={41} height={38} alt="" />
-              <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-info">
-                {aideFinanciereCount}
+              <span className={clsx("text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-info")}>
+                {isLoading ? (
+                  <div className="w-[100px]">
+                    <Spinner />
+                  </div>
+                ) : (
+                  aideFinanciereCount
+                )}
               </span>
             </div>
             <div>
@@ -64,7 +72,13 @@ export const AideEstimationsCardWithoutSelection = ({
             <div className="flex gap-2">
               <Image src="/images/financement/ingenierie.svg" width={41} height={38} alt="" />
               <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-orange-terre-battue">
-                {aideTechniqueCount}
+                {isLoading ? (
+                  <div className="w-[100px]">
+                    <Spinner />
+                  </div>
+                ) : (
+                  aideTechniqueCount
+                )}
               </span>
             </div>
             <div>

@@ -13,7 +13,7 @@ export const AideEstimationsPanelHeader = () => {
 
   return (
     <>
-      <div className="mb-3 flex flex-wrap gap-4">
+      <div className="mb-3 flex h-7 flex-wrap gap-4">
         {fichesSolutionsId?.map((ficheId) => <AideEstimationsCardLabelFicheSolution ficheId={ficheId} key={ficheId} />)}
       </div>
       <div className="mb-6 flex flex-wrap gap-4">

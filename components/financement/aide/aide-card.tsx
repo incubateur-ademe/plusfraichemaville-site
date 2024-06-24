@@ -6,15 +6,17 @@ import Image from "next/image";
 import { resolveAidType } from "../helpers";
 import clsx from "clsx";
 import { AideCardLine } from "./aide-card-line";
-import { AideEstimationsCardWarningRemainingDay } from "./aide-estimations-card-warning-remaining-day";
+import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
 
 type AideCardProps = {
   aide: AidesTerritoiresAide;
+  withSaveButton?: boolean;
 };
 
 export const AideCard = ({ aide }: AideCardProps) => {
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === "Aide financière";
+  console.log(aide);
 
   return (
     <div
@@ -66,7 +68,7 @@ export const AideCard = ({ aide }: AideCardProps) => {
         </AideCardLine>
         <AideCardLine isAideFinanciere={isAideFinanciere} icon="calendrier">
           <div className="flex items-center gap-4">
-            <AideEstimationsCardWarningRemainingDay submissionDeadline={aide.submission_deadline} />
+            <AideEstimationsCardWarningRemainingDays submissionDeadline={aide.submission_deadline} />
             <span>Échéance : {aide.submission_deadline}</span>
           </div>
         </AideCardLine>

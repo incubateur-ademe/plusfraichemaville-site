@@ -1,6 +1,6 @@
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import { getAideSubmissionDeadlineAndName } from "../helpers";
-import { AideEstimationsCardWarningRemainingDay } from "./aide-estimations-card-warning-remaining-day";
+import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
 
 type AideEstimationsCardDeadlineProps = {
   estimationsAides: EstimationWithAides["estimations_aides"];
@@ -16,7 +16,7 @@ export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimation
           <span className="mr-2 inline-block font-bold">{aideDeadline.name} : </span>
           <span>
             Échéance : {aideDeadline.submission_deadline}
-            <AideEstimationsCardWarningRemainingDay submissionDeadline={aideDeadline.submission_deadline} />
+            <AideEstimationsCardWarningRemainingDays submissionDeadline={aideDeadline.submission_deadline} />
           </span>
         </li>
       ))}
