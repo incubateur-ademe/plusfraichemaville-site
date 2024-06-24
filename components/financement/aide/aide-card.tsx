@@ -7,6 +7,8 @@ import { resolveAidType } from "../helpers";
 import clsx from "clsx";
 import { AideCardLine } from "./aide-card-line";
 import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { useModalStore } from "@/stores/modal/provider";
 
 type AideCardProps = {
   aide: AidesTerritoiresAide;
@@ -14,9 +16,9 @@ type AideCardProps = {
 };
 
 export const AideCard = ({ aide }: AideCardProps) => {
+  const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === "Aide financière";
-  console.log(aide);
 
   return (
     <div
@@ -74,9 +76,13 @@ export const AideCard = ({ aide }: AideCardProps) => {
         </AideCardLine>
       </div>
       <div className="mt-auto">
-        <AideFicheModal id={aide.id}>
-          <AideFiche aide={aide} type={type} />
-        </AideFicheModal>
+        <Button
+          priority="tertiary"
+          className="!mx-auto mb-5 mt-auto !block rounded-3xl px-9"
+          onClick={() => setCurrentDetailedAide(aide)}
+        >
+          {"J'explore la solution"}
+        </Button>
       </div>
     </div>
   );
