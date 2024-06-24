@@ -1,6 +1,4 @@
 /* eslint-disable max-len */
-import { AideFiche } from "./aide-fiche";
-import { AideFicheModal } from "./aide-fiche-modal";
 import { AidesTerritoiresAide } from "../types";
 import Image from "next/image";
 import { resolveAidType } from "../helpers";
@@ -22,7 +20,7 @@ export const AideCard = ({ aide }: AideCardProps) => {
 
   return (
     <div
-      className="pfmv-card no-shadow flex w-[266px] flex-col overflow-hidden cursor-pointer"
+      className="pfmv-card no-shadow flex w-[266px] cursor-pointer flex-col overflow-hidden"
       id={`aide-card-${aide.id}`}
       data-type={type}
       onClick={() => setCurrentDetailedAide(aide)}
