@@ -30,10 +30,11 @@ export const AideCardLine = ({ isAideFinanciere, icon, children }: AideCardLineP
     <div className="border-t-[1px] border-t-black/10 py-4">
       <div className="mb-2 flex gap-2">
         <i
-          className={clsx(`${icons[icon].picto} block shrink-0`, "size-4 before:!size-4 before:!align-[-1px]", {
-            "text-dsfr-background-flat-info": isAideFinanciere,
-            "text-dsfr-background-flat-orange-terre-battue": !isAideFinanciere,
-          })}
+          className={clsx(
+            `${icons[icon].picto} block shrink-0`,
+            "size-4 before:!size-4 before:!align-[-1px]",
+            isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
+          )}
         ></i>
         <span className="text-sm font-bold">{icons[icon].title}</span>
       </div>

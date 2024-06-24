@@ -1,5 +1,4 @@
-/* eslint-disable max-len */
-import { AidesTerritoiresAide } from "../types";
+import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "../types";
 import Image from "next/image";
 import { resolveAidType } from "../helpers";
 import clsx from "clsx";
@@ -16,7 +15,7 @@ type AideCardProps = {
 export const AideCard = ({ aide }: AideCardProps) => {
   const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
   const type = resolveAidType(aide.aid_types_full);
-  const isAideFinanciere = type === "Aide financière";
+  const isAideFinanciere = type === TypeAidesTerritoiresAide.financement;
 
   return (
     <div
@@ -26,10 +25,10 @@ export const AideCard = ({ aide }: AideCardProps) => {
       onClick={() => setCurrentDetailedAide(aide)}
     >
       <div
-        className={clsx("h-24 px-5 py-4", {
-          "bg-dsfr-background-alt-blue-france": isAideFinanciere,
-          "bg-dsfr-background-alt-brown-cafe-creme": !isAideFinanciere,
-        })}
+        className={clsx(
+          "h-24 px-5 py-4",
+          isAideFinanciere ? "bg-dsfr-background-alt-blue-france" : "bg-dsfr-background-alt-brown-cafe-creme",
+        )}
       >
         <Image
           src={`/images/financement/${isAideFinanciere ? "financement" : "ingenierie"}.svg`}
@@ -39,16 +38,21 @@ export const AideCard = ({ aide }: AideCardProps) => {
           alt=""
         />
         <span
-          className={clsx("text-sm font-bold", {
-            "text-dsfr-background-flat-info": isAideFinanciere,
-            "text-dsfr-background-flat-orange-terre-battue": !isAideFinanciere,
-          })}
+          className={clsx(
+            "text-sm font-bold",
+            isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
+          )}
         >
           {isAideFinanciere ? "Financemement" : "Soutien à l'ingénierie"}
         </span>
       </div>
       <div className="p-5">
-        <div className="mb-4 w-fit rounded-[4px] bg-dsfr-background-alt-blue-france px-[6px] py-[2px] text-sm font-bold text-pfmv-navy">
+        <div
+          className={clsx(
+            "mb-4 w-fit rounded-[4px] bg-dsfr-background-alt-blue-france px-[6px] py-[2px]",
+            "text-sm font-bold text-pfmv-navy",
+          )}
+        >
           {aide.perimeter_scale}
         </div>
         <h2 className="mb-6 text-lg">{aide.name}</h2>

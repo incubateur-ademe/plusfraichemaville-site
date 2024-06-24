@@ -3,7 +3,6 @@
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { AideFiche } from "@/components/financement/aide/aide-fiche";
 import { useModalStore } from "@/stores/modal/provider";
-import { resolveAidType } from "@/components/financement/helpers";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
 
@@ -27,11 +26,7 @@ export const AideFicheModal = () => {
   return (
     <>
       <modal.Component title="" size="large" className="aide-modal relative">
-        {currentDetailedAide ? (
-          <AideFiche aide={currentDetailedAide} type={resolveAidType(currentDetailedAide.aid_types_full)} />
-        ) : (
-          <div>Chargement en cours...</div>
-        )}
+        {currentDetailedAide ? <AideFiche aide={currentDetailedAide} /> : <div>Chargement en cours...</div>}
       </modal.Component>
     </>
   );

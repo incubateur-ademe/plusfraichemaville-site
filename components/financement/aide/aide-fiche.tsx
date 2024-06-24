@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { AidesTerritoiresAide, AidesTerritoiresAideType } from "../types";
+import { AidesTerritoiresAide } from "../types";
 import { GenericSaveFiche } from "@/components/common/generic-save-fiche";
 import CmsRichText from "@/components/common/CmsRichText";
 import { AideFichePanelLine } from "./aide-fiche-panel-line";
@@ -7,7 +7,6 @@ import Button from "@codegouvfr/react-dsfr/Button";
 
 type AideFicheProps = {
   aide: AidesTerritoiresAide;
-  type: AidesTerritoiresAideType;
 };
 export const AideFiche = ({ aide }: AideFicheProps) => {
   const lines = [
