@@ -6,21 +6,24 @@ import { ProjetsStoreProvider } from "@/stores/projets/provider";
 import { UserStoreProvider } from "@/stores/user/provider";
 import MatomoPageView from "@/components/matomo/matomo-page-view";
 import ModalProvider from "@/components/modal/modal-provider";
+import { ModalStoreProvider } from "@/stores/modal/provider";
 
 export default function MainLayoutProviders({ children, lang }: PropsWithChildren<{ lang: string }>) {
   return (
     <SessionProvider>
       <UserStoreProvider>
         <ProjetsStoreProvider>
-          <Suspense>
-            <MatomoPageView />
-          </Suspense>
-          <DsfrProvider lang={lang}>
-            <>
-              {children}
-              <ModalProvider />
-            </>
-          </DsfrProvider>
+          <ModalStoreProvider>
+            <Suspense>
+              <MatomoPageView />
+            </Suspense>
+            <DsfrProvider lang={lang}>
+              <>
+                {children}
+                <ModalProvider />
+              </>
+            </DsfrProvider>
+          </ModalStoreProvider>
         </ProjetsStoreProvider>
       </UserStoreProvider>
     </SessionProvider>

@@ -10,15 +10,15 @@ import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-ca
 import { isComplete } from "@/helpers/estimation";
 import { dateToStringWithTime } from "@/helpers/dateUtils";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { useProjetsStore } from "@/stores/projets/provider";
 import { estimationModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 import { useEstimationGlobalPrice } from "@/hooks/use-estimation-global-price";
+import { useModalStore } from "@/stores/modal/provider";
 
 export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
 
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
-  const setCurrentEstimationId = useProjetsStore((state) => state.setCurrentEstimationId);
+  const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
 
   const isEstimationCompleted = useMemo(() => isComplete(estimation), [estimation]);
 

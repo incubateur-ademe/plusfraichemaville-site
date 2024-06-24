@@ -1,38 +1,28 @@
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
-import { AidesTerritoiresAide, AidesTerritoiresAideType } from "./types";
+import { AidesTerritoiresAide, AidesTerritoiresAideType, TypeAidesTerritoiresAide } from "./types";
 import { changeNodeListClassname } from "@/helpers/common";
 
-export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): AidesTerritoiresAideType => {
+export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): TypeAidesTerritoiresAide => {
   for (const aid of aid_types_full) {
     if (aid.group.name === "Aide financière") {
-      return "Aide financière";
+      return TypeAidesTerritoiresAide.financement;
     }
   }
-  return "Aide en ingénierie";
+  return TypeAidesTerritoiresAide.ingenierie;
 };
 
 export const countAidesByType = (aides: AidesTerritoiresAide[]) => {
-  const types = aides.map((aide) => resolveAidType(aide.aid_types_full));
-
-  const countOccurrences = (arr: string[]): Record<string, number> => {
-    const keyMap: Record<string, string> = {
-      "Aide financière": "aideFinanciereCount",
-      "Aide en ingénierie": "aideTechniqueCount",
-    };
-
-    return arr.reduce(
-      (acc, curr) => {
-        const key = keyMap[curr];
-        if (key) {
-          acc[key] = (acc[key] || 0) + 1;
-        }
-        return acc;
-      },
-      {} as Record<string, number>,
-    );
-  };
-
-  return countOccurrences(types);
+  return aides.reduce(
+    (acc, current) => {
+      if (resolveAidType(current.aid_types_full) === TypeAidesTerritoiresAide.financement) {
+        acc.aideFinanciereCount = acc.aideFinanciereCount + 1;
+      } else {
+        acc.aideTechniqueCount = acc.aideTechniqueCount + 1;
+      }
+      return acc;
+    },
+    { aideFinanciereCount: 0, aideTechniqueCount: 0 },
+  );
 };
 
 export const getAideSubmissionDeadlineAndName = (estimationAides: EstimationWithAides["estimations_aides"]) =>
