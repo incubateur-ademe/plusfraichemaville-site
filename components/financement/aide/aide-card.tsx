@@ -20,7 +20,7 @@ export const AideCard = ({ aide }: AideCardProps) => {
 
   return (
     <div
-      className="pfmv-card no-shadow w-fit max-w-[266px] shrink-0 overflow-hidden hover:outline-none flex flex-col"
+      className="pfmv-card no-shadow flex w-fit max-w-[266px] shrink-0 flex-col overflow-hidden hover:outline-none"
       id={`aide-card-${aide.id}`}
       data-type={type}
     >
