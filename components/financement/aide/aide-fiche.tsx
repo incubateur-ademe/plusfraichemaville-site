@@ -49,7 +49,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
   ];
 
   return (
-    <div className="flex gap-6 rounded-[20px] pt-8">
+    <div className="flex gap-6 rounded-[20px]">
       <div className="w-full max-w-96 rounded-2xl bg-dsfr-background-alt-blue-france p-6" id="financement-panel">
         <GenericSaveFiche id={100} type="diagnostic" className="ml-auto w-fit" />
         <div className="mb-6 flex items-center gap-4">

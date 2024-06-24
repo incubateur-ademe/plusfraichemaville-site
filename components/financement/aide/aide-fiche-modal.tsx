@@ -15,14 +15,11 @@ export const AideFicheModal = ({ id, children }: AideFicheModalProps) => {
   return (
     <>
       <modal.Component title="" size="large" className="aide-modal relative">
-        <button className="absolute right-8 top-8 text-pfmv-navy" onClick={modal.close}>
-          <i className="ri-close-line"></i>
-        </button>
         {children}
       </modal.Component>
       <Button
         priority="tertiary"
-        className="!mx-auto mb-5 !block rounded-3xl px-9"
+        className="!mx-auto mb-5 mt-auto !block rounded-3xl px-9"
         nativeButtonProps={modal.buttonProps}
       >
         {"J'explore la solution"}
