@@ -1,10 +1,11 @@
 "use client";
 
-import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { AideFiche } from "@/components/financement/aide/aide-fiche";
 import { useModalStore } from "@/stores/modal/provider";
 import { resolveAidType } from "@/components/financement/helpers";
+import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
+import { useEffect } from "react";
 
 const modal = createModal({
   id: "detailed-aide-modal",
@@ -13,9 +14,19 @@ const modal = createModal({
 
 export const AideFicheModal = () => {
   const currentDetailedAide = useModalStore((state) => state.currentDetailedAide);
+  const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
+  useEffect(() => {
+    if (currentDetailedAide) {
+      modal.open();
+    }
+  }, [currentDetailedAide]);
+  useIsModalOpen(modal, {
+    onConceal: () => setCurrentDetailedAide(null),
+  });
+
   return (
     <>
-      <modal.Component title="" size="large" className="aide-modal relative">e
+      <modal.Component title="" size="large" className="aide-modal relative">
         {currentDetailedAide ? (
           <AideFiche aide={currentDetailedAide} type={resolveAidType(currentDetailedAide.aid_types_full)} />
         ) : (

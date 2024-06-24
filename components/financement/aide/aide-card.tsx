@@ -22,9 +22,10 @@ export const AideCard = ({ aide }: AideCardProps) => {
 
   return (
     <div
-      className="pfmv-card no-shadow flex w-fit max-w-[266px] shrink-0 flex-col overflow-hidden hover:outline-none"
+      className="pfmv-card no-shadow flex w-[266px] flex-col overflow-hidden cursor-pointer"
       id={`aide-card-${aide.id}`}
       data-type={type}
+      onClick={() => setCurrentDetailedAide(aide)}
     >
       <div
         className={clsx("h-24 px-5 py-4", {
