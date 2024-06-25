@@ -1,14 +1,17 @@
 import Image from "next/image";
-import { AidesTerritoiresAide } from "../types";
+import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "../types";
 import CmsRichText from "@/components/common/CmsRichText";
 import { AideFichePanelLine } from "./aide-fiche-panel-line";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { AideCardSaveButton } from "./aide-card-save-button";
+import { resolveAidType } from "@/components/financement/helpers";
+import clsx from "clsx";
 
 type AideFicheProps = {
   aide: AidesTerritoiresAide;
 };
 export const AideFiche = ({ aide }: AideFicheProps) => {
+  const isAideFinanciere = resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement;
   const lines = [
     {
       title: "Porteur(s) d'aide",
@@ -50,13 +53,25 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
   return (
     <div className="flex gap-6 rounded-[20px]">
       <div
-        className="relative w-full max-w-96 rounded-2xl bg-dsfr-background-alt-blue-france p-6"
+        className={clsx(
+          "relative w-full max-w-96 rounded-2xl p-6",
+          isAideFinanciere ? "bg-dsfr-background-alt-blue-france" : "bg-dsfr-background-alt-brown-cafe-creme",
+        )}
         id="financement-panel"
       >
         <AideCardSaveButton estimationId={1} aideTerritoireId={aide.id} className="right-4 top-4" />
         <div className="mb-6 flex items-center gap-4">
-          <Image src="/images/financement/financement.svg" width={64} height={64} alt="" />
-          <h2 className="mb-0 text-[22px] text-dsfr-background-flat-info">Financement</h2>
+          <Image
+            src={`/images/financement/${isAideFinanciere ? "financement" : "ingenierie"}.svg`}
+            className="mb-2"
+            width={64}
+            height={64}
+            alt=""
+          />
+          <h2 className={clsx("mb-0 text-[22px]",
+            isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",)}>
+            {isAideFinanciere ? "Financemement" : "Soutien à l'ingénierie"}
+          </h2>
         </div>
         <div>
           {lines.map((line, index) => (
