@@ -18,6 +18,10 @@ export const deleteAideInEstimationAction = async (
 
   const estimation = await getEstimationById(estimationId);
 
+  if (!aideId) {
+    return { type: "success", message: "ESTIMATION_AIDE_DELETED" };
+  }
+
   if (!estimation) {
     return { type: "error", message: "ESTIMATION_DOESNT_EXIST" };
   }
@@ -29,7 +33,7 @@ export const deleteAideInEstimationAction = async (
   try {
     const estimationAide = await deleteAideInEstimation(estimationId, aideId);
     if (estimationAide) {
-      return { type: "success", message: "ESTIMATION_UPDATED", estimationAide };
+      return { type: "success", message: "ESTIMATION_AIDE_DELETED", estimationAide };
     }
 
     return { type: "error", message: "TECHNICAL_ERROR" };

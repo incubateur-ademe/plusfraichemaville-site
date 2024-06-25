@@ -7,13 +7,6 @@ export type AidesTerritoiresAidesResponse = {
   results: AidesTerritoiresAide[];
 };
 
-export type AidesTerritoiresAideBaseData = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
-  id?: number;
-  userId: string | null;
-  aideTerritoireId: number;
-  type: TypeAidesTerritoiresAide;
-};
-
 export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
   id: number;
   slug: string | null;

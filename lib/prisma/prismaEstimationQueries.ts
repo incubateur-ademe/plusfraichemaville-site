@@ -67,8 +67,18 @@ export const updateEstimationMateriaux = async (
 };
 
 export const addAideInEstimation = async (estimationId: number, aideId: number): Promise<EstimationAide> => {
-  return prismaClient.estimations_aides.create({
-    data: {
+  return prismaClient.estimations_aides.upsert({
+    where: {
+      estimationId_aideId: {
+        estimationId,
+        aideId,
+      },
+    },
+    update: {
+      estimationId,
+      aideId,
+    },
+    create: {
       estimationId,
       aideId,
     },
