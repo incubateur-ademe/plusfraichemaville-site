@@ -4,6 +4,8 @@ import { resolveAidType } from "../helpers";
 import clsx from "clsx";
 import { AideCardLine } from "./aide-card-line";
 import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
+import { AideCardSaveButton } from "./aide-card-save-button";
+import { useParams } from "next/navigation";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/stores/modal/provider";
 
@@ -12,10 +14,11 @@ type AideCardProps = {
   withSaveButton?: boolean;
 };
 
-export const AideCard = ({ aide }: AideCardProps) => {
+export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
   const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === TypeAidesTerritoiresAide.financement;
+  const estimationId = +useParams().estimationId;
 
   return (
     <div
@@ -26,7 +29,7 @@ export const AideCard = ({ aide }: AideCardProps) => {
     >
       <div
         className={clsx(
-          "h-24 px-5 py-4",
+          "relative h-24 px-5 py-4",
           isAideFinanciere ? "bg-dsfr-background-alt-blue-france" : "bg-dsfr-background-alt-brown-cafe-creme",
         )}
       >
@@ -45,6 +48,9 @@ export const AideCard = ({ aide }: AideCardProps) => {
         >
           {isAideFinanciere ? "Financemement" : "Soutien à l'ingénierie"}
         </span>
+        {withSaveButton && (
+          <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} className="right-2 top-2" />
+        )}
       </div>
       <div className="p-5">
         <div

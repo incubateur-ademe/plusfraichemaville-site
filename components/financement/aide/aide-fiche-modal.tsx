@@ -19,6 +19,7 @@ export const AideFicheModal = () => {
       modal.open();
     }
   }, [currentDetailedAide]);
+
   useIsModalOpen(modal, {
     onConceal: () => setCurrentDetailedAide(null),
   });

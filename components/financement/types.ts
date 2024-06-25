@@ -7,9 +7,9 @@ export type AidesTerritoiresAidesResponse = {
   results: AidesTerritoiresAide[];
 };
 
-export type AidesTerritoiresAideOverview = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
-  id: number;
+export type AidesTerritoiresAideBaseData = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
   aideTerritoireId: number;
+  type: TypeAidesTerritoiresAide;
 };
 
 export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
@@ -74,11 +74,10 @@ export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
 
 export enum TypeAidesTerritoiresAide {
   // eslint-disable-next-line no-unused-vars
-  financement,
+  financement = "financement",
   // eslint-disable-next-line no-unused-vars
-  ingenierie,
+  ingenierie = "ingenierie",
 }
-
 export type AidesTerritoiresAideType = "Aide financière" | "Aide en ingénierie";
 
 export type AidesTerritoiresAideNameKey = keyof typeof aidesTerritoiresAideName;
