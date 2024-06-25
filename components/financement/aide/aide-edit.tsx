@@ -37,9 +37,7 @@ export const AideEdit = memo(() => {
         />
 
         <div className="aide-card flex flex-wrap gap-6">
-          {isLoading
-            ? skeletons
-            : data?.results.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
+          {isLoading ? skeletons : data?.results.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
         </div>
       </div>
     </div>

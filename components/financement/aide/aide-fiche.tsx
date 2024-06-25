@@ -6,50 +6,14 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { AideCardSaveButton } from "./aide-card-save-button";
 import { resolveAidType } from "@/components/financement/helpers";
 import clsx from "clsx";
+import { AidesTerritoiresFullDetailedLines } from "@/components/financement/aide/aide-info-lines";
 
 type AideFicheProps = {
   aide: AidesTerritoiresAide;
 };
+
 export const AideFiche = ({ aide }: AideFicheProps) => {
   const isAideFinanciere = resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement;
-  const lines = [
-    {
-      title: "Porteur(s) d'aide",
-      picto: "porteur-aide",
-      description: aide.financers,
-    },
-    {
-      title: "Subvention",
-      picto: "subvention",
-      description: [
-        `${aide.subvention_rate_lower_bound ? `Min: ${aide.subvention_rate_lower_bound}% -` : ""}  ${
-          aide.subvention_rate_upper_bound ? `Max: ${aide.subvention_rate_upper_bound}%` : ""
-        }`,
-        aide.subvention_comment ?? "",
-      ],
-    },
-    {
-      title: "Récurrence",
-      picto: "recurrence",
-      description: aide.recurrence,
-    },
-    {
-      title: "Bénéficiaires",
-      picto: "beneficiaires",
-      description: aide.targeted_audiences,
-    },
-    {
-      title: "Zone géographique couverte par l'aide",
-      picto: "zone-geo",
-      description: aide.perimeter,
-    },
-    {
-      title: "Dernières mises à jour",
-      picto: "maj",
-      date: aide.date_updated,
-    },
-  ];
-
   return (
     <div className="flex gap-6 rounded-[20px]">
       <div
@@ -68,19 +32,24 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
             height={64}
             alt=""
           />
-          <h2 className={clsx("mb-0 text-[22px]",
-            isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",)}>
+          <h2
+            className={clsx(
+              "mb-0 text-[22px]",
+              isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
+            )}
+          >
             {isAideFinanciere ? "Financemement" : "Soutien à l'ingénierie"}
           </h2>
         </div>
         <div>
-          {lines.map((line, index) => (
+          {AidesTerritoiresFullDetailedLines(aide).map((line, index) => (
             <AideFichePanelLine
-              title={line.title}
-              description={line.description}
-              picto={line.picto}
-              date={line.date}
+              line={line}
               key={index}
+              pictoClassname={
+                isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue"
+              }
+              classname="mb-8"
             />
           ))}
         </div>

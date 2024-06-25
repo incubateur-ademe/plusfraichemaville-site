@@ -2,12 +2,12 @@ import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "../types";
 import Image from "next/image";
 import { resolveAidType } from "../helpers";
 import clsx from "clsx";
-import { AideCardLine } from "./aide-card-line";
-import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
 import { AideCardSaveButton } from "./aide-card-save-button";
 import { useParams } from "next/navigation";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/stores/modal/provider";
+import { AidesTerritoiresCardLines } from "@/components/financement/aide/aide-info-lines";
+import { AideFichePanelLine } from "@/components/financement/aide/aide-fiche-panel-line";
 
 type AideCardProps = {
   aide: AidesTerritoiresAide;
@@ -61,28 +61,18 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
         >
           {aide.perimeter_scale}
         </div>
-        <h2 className="mb-6 text-lg">{aide.name}</h2>
-        <AideCardLine isAideFinanciere={isAideFinanciere} icon="porteur">
-          {aide.financers.join(", ")}
-        </AideCardLine>
-        <AideCardLine isAideFinanciere={isAideFinanciere} icon="recurrence">
-          {aide.recurrence}
-        </AideCardLine>
-        <AideCardLine isAideFinanciere={isAideFinanciere} icon="subvention">
-          {aide.subvention_rate_lower_bound && (
-            <span className="mb-2 block">Min: {aide.subvention_rate_lower_bound}%</span>
-          )}
-          {aide.subvention_rate_upper_bound && (
-            <span className="mb-2 block">Max: {aide.subvention_rate_upper_bound}%</span>
-          )}
-          {aide.subvention_comment && <span className="mb-2 block">{aide.subvention_comment}%</span>}
-        </AideCardLine>
-        <AideCardLine isAideFinanciere={isAideFinanciere} icon="calendrier">
-          <div className="flex items-center gap-4">
-            <AideEstimationsCardWarningRemainingDays submissionDeadline={aide.submission_deadline} />
-            <span>Échéance : {aide.submission_deadline}</span>
-          </div>
-        </AideCardLine>
+        <h2 className="mb-7 text-lg">{aide.name}</h2>
+        {AidesTerritoiresCardLines(aide).map((line) => (
+          <AideFichePanelLine
+            key={line.title}
+            line={line}
+            pictoClassname={clsx(
+              "fr-icon--sm",
+              isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
+            )}
+            classname="text-sm border-t-[1px] border-t-black/10 py-3"
+          />
+        ))}
       </div>
       <div className="mt-auto">
         <Button
