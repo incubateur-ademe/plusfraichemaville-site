@@ -1,3 +1,5 @@
+import { IApiAidesTerritoiresResponse } from "@/lib/aidesTerritoires/types";
+
 export type AidesTerritoiresAidesResponse = {
   count: number;
   previous: string | null;
@@ -7,10 +9,10 @@ export type AidesTerritoiresAidesResponse = {
 
 export type AidesTerritoiresAideBaseData = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
   aideTerritoireId: number;
-  type: AidesTerritoiresAideType;
+  type: TypeAidesTerritoiresAide;
 };
 
-export type AidesTerritoiresAide = {
+export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
   id: number;
   slug: string | null;
   url: string | null;
@@ -68,8 +70,14 @@ export type AidesTerritoiresAide = {
   date_created: string | null;
   date_updated: string | null;
   project_references: string[];
-};
+}
 
+export enum TypeAidesTerritoiresAide {
+  // eslint-disable-next-line no-unused-vars
+  financement = "financement",
+  // eslint-disable-next-line no-unused-vars
+  ingenierie = "ingenierie",
+}
 export type AidesTerritoiresAideType = "Aide financière" | "Aide en ingénierie";
 
 export type AidesTerritoiresAideNameKey = keyof typeof aidesTerritoiresAideName;
@@ -86,13 +94,13 @@ const aidesTerritoiresAideName = {
   IngenierieJuridiqueAdministrative: "Ingénierie Juridique / administrative",
 } as const;
 
-export const aidesTerritoiresAideNameAndTypeMap: Record<AidesTerritoiresAideName, AidesTerritoiresAideType> = {
-  [aidesTerritoiresAideName.Subvention]: "Aide financière",
-  [aidesTerritoiresAideName.Pret]: "Aide financière",
-  [aidesTerritoiresAideName.AvanceRecuperable]: "Aide financière",
-  [aidesTerritoiresAideName.CertificatEconomieEnergie]: "Aide financière",
-  [aidesTerritoiresAideName.AutreAideFinanciere]: "Aide financière",
-  [aidesTerritoiresAideName.IngenierieTechnique]: "Aide en ingénierie",
-  [aidesTerritoiresAideName.IngenierieFinanciere]: "Aide en ingénierie",
-  [aidesTerritoiresAideName.IngenierieJuridiqueAdministrative]: "Aide en ingénierie",
+export const aidesTerritoiresAideNameAndTypeMap: Record<AidesTerritoiresAideName, TypeAidesTerritoiresAide> = {
+  [aidesTerritoiresAideName.Subvention]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.Pret]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.AvanceRecuperable]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.CertificatEconomieEnergie]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.AutreAideFinanciere]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.IngenierieTechnique]: TypeAidesTerritoiresAide.ingenierie,
+  [aidesTerritoiresAideName.IngenierieFinanciere]: TypeAidesTerritoiresAide.ingenierie,
+  [aidesTerritoiresAideName.IngenierieJuridiqueAdministrative]: TypeAidesTerritoiresAide.ingenierie,
 } as const;

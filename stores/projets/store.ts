@@ -7,7 +7,6 @@ import { notifications } from "@/components/common/notifications";
 interface ProjetsState {
   projets: ProjetWithRelations[];
   currentProjetId: number | null;
-  currentEstimationId: number | null;
 }
 
 export type ProjetsActions = {
@@ -23,7 +22,6 @@ export type ProjetsActions = {
     _withNotification?: boolean,
   ) => void;
   deleteProjet: (_projetId: number) => void;
-  setCurrentEstimationId: (_estimationIdd: number | null) => void;
 };
 
 export type ProjetsStore = ProjetsState & ProjetsActions;
@@ -31,7 +29,6 @@ export type ProjetsStore = ProjetsState & ProjetsActions;
 export const defaultInitState: ProjetsState = {
   projets: [],
   currentProjetId: null,
-  currentEstimationId: null,
 };
 
 export const initProjetsStore = (): ProjetsState => {
@@ -43,7 +40,6 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
     ...initState,
     setProjets: (projets) => set(() => ({ projets })),
     setCurrentProjetId: (currentProjetId) => set(() => ({ currentProjetId })),
-    setCurrentEstimationId: (currentEstimationId) => set(() => ({ currentEstimationId })),
     getCurrentProjet: () => {
       const { projets, currentProjetId } = get();
       return projets.find((projet) => projet.id === currentProjetId);

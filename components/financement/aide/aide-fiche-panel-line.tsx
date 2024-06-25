@@ -8,7 +8,7 @@ type AideFichePanelLineProps = {
   date?: string | null;
 };
 export const AideFichePanelLine = ({ title, description, date, picto }: AideFichePanelLineProps) => {
-  const desc = typeof description === "string" ? description : description?.join(", ");
+  const desc = typeof description === "string" ? description : description?.filter(Boolean).join(", ");
 
   return (
     <div className="mb-8 flex items-start gap-[10px]">

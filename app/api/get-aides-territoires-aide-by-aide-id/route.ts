@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchAidesFromAidesTerritoiresById } from "@/lib/aidesTerritoires/fetch";
+import { fetchAideFromAidesTerritoiresById } from "@/lib/aidesTerritoires/fetch";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/next-auth/auth";
 import { getAideById } from "@/lib/prisma/prismaAideQueries";
@@ -19,6 +19,6 @@ export async function GET(request: NextRequest) {
   if (!aide) {
     return NextResponse.json("Aide not found", { status: 422 });
   }
-  const result = await fetchAidesFromAidesTerritoiresById(aide.aideTerritoireId);
+  const result = await fetchAideFromAidesTerritoiresById(aide.aideTerritoireId);
   return NextResponse.json(result);
 }

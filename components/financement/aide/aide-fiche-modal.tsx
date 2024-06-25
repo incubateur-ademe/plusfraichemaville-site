@@ -1,29 +1,34 @@
 "use client";
 
-import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
-import { PropsWithChildren } from "react";
+import { AideFiche } from "@/components/financement/aide/aide-fiche";
+import { useModalStore } from "@/stores/modal/provider";
+import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
+import { useEffect } from "react";
 
-type AideFicheModalProps = { id: number } & PropsWithChildren;
+const modal = createModal({
+  id: "detailed-aide-modal",
+  isOpenedByDefault: false,
+});
 
-export const AideFicheModal = ({ id, children }: AideFicheModalProps) => {
-  const modal = createModal({
-    id: id.toString(),
-    isOpenedByDefault: false,
+export const AideFicheModal = () => {
+  const currentDetailedAide = useModalStore((state) => state.currentDetailedAide);
+  const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
+  useEffect(() => {
+    if (currentDetailedAide) {
+      modal.open();
+    }
+  }, [currentDetailedAide]);
+
+  useIsModalOpen(modal, {
+    onConceal: () => setCurrentDetailedAide(null),
   });
 
   return (
     <>
       <modal.Component title="" size="large" className="aide-modal relative">
-        {children}
+        {currentDetailedAide ? <AideFiche aide={currentDetailedAide} /> : <div>Chargement en cours...</div>}
       </modal.Component>
-      <Button
-        priority="tertiary"
-        className="!mx-auto mb-5 mt-auto !block rounded-3xl px-9"
-        nativeButtonProps={modal.buttonProps}
-      >
-        {"J'explore la solution"}
-      </Button>
     </>
   );
 };

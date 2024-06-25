@@ -75,7 +75,10 @@ export const addAideInEstimation = async (estimationId: number, aideId: number):
   });
 };
 
-export const deleteAideInEstimation = async (estimationId: number, aideId: number): Promise<estimations_aides> => {
+export const deleteAideInEstimation = async (
+  estimationId: number,
+  aideId: number,
+): Promise<estimations_aides | null> => {
   return prismaClient.estimations_aides.delete({
     where: {
       estimationId_aideId: {

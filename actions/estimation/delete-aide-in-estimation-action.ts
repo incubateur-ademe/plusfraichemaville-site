@@ -29,8 +29,11 @@ export const deleteAideInEstimationAction = async (
 
   try {
     const estimationAide = await deleteAideInEstimation(estimationId, aideId);
+    if (estimationAide) {
+      return { type: "success", message: "ESTIMATION_UPDATED", estimationAide };
+    }
 
-    return { type: "success", message: "ESTIMATION_UPDATED", estimationAide };
+    return { type: "error", message: "TECHNICAL_ERROR" };
   } catch (e) {
     customCaptureException("Error in updateAideInEstimation DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };

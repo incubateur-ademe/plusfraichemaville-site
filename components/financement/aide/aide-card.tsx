@@ -1,7 +1,4 @@
-/* eslint-disable max-len */
-import { AideFiche } from "./aide-fiche";
-import { AideFicheModal } from "./aide-fiche-modal";
-import { AidesTerritoiresAide } from "../types";
+import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "../types";
 import Image from "next/image";
 import { resolveAidType } from "../helpers";
 import clsx from "clsx";
@@ -9,6 +6,8 @@ import { AideCardLine } from "./aide-card-line";
 import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
 import { AideCardSaveButton } from "./aide-card-save-button";
 import { useParams } from "next/navigation";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { useModalStore } from "@/stores/modal/provider";
 
 type AideCardProps = {
   aide: AidesTerritoiresAide;
@@ -16,21 +15,23 @@ type AideCardProps = {
 };
 
 export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
-  const estimationId = +useParams().estimationId;
+  const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
   const type = resolveAidType(aide.aid_types_full);
-  const isAideFinanciere = type === "Aide financière";
+  const isAideFinanciere = type === TypeAidesTerritoiresAide.financement;
+  const estimationId = +useParams().estimationId;
 
   return (
     <div
-      className="pfmv-card no-shadow flex w-fit max-w-[266px] shrink-0 flex-col overflow-hidden hover:outline-none"
+      className="pfmv-card no-shadow flex w-[266px] cursor-pointer flex-col overflow-hidden"
       id={`aide-card-${aide.id}`}
       data-type={type}
+      onClick={() => setCurrentDetailedAide(aide)}
     >
       <div
-        className={clsx("relative h-24 px-5 py-4", {
-          "bg-dsfr-background-alt-blue-france": isAideFinanciere,
-          "bg-dsfr-background-alt-brown-cafe-creme": !isAideFinanciere,
-        })}
+        className={clsx(
+          "relative h-24 px-5 py-4",
+          isAideFinanciere ? "bg-dsfr-background-alt-blue-france" : "bg-dsfr-background-alt-brown-cafe-creme",
+        )}
       >
         <Image
           src={`/images/financement/${isAideFinanciere ? "financement" : "ingenierie"}.svg`}
@@ -40,17 +41,24 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
           alt=""
         />
         <span
-          className={clsx("text-sm font-bold", {
-            "text-dsfr-background-flat-info": isAideFinanciere,
-            "text-dsfr-background-flat-orange-terre-battue": !isAideFinanciere,
-          })}
+          className={clsx(
+            "text-sm font-bold",
+            isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
+          )}
         >
           {isAideFinanciere ? "Financemement" : "Soutien à l'ingénierie"}
         </span>
-        {withSaveButton && <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} />}
+        {withSaveButton && (
+          <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} className="right-2 top-2" />
+        )}
       </div>
       <div className="p-5">
-        <div className="mb-4 w-fit rounded-[4px] bg-dsfr-background-alt-blue-france px-[6px] py-[2px] text-sm font-bold text-pfmv-navy">
+        <div
+          className={clsx(
+            "mb-4 w-fit rounded-[4px] bg-dsfr-background-alt-blue-france px-[6px] py-[2px]",
+            "text-sm font-bold text-pfmv-navy",
+          )}
+        >
           {aide.perimeter_scale}
         </div>
         <h2 className="mb-6 text-lg">{aide.name}</h2>
@@ -77,9 +85,13 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
         </AideCardLine>
       </div>
       <div className="mt-auto">
-        <AideFicheModal id={aide.id}>
-          <AideFiche aide={aide} type={type} />
-        </AideFicheModal>
+        <Button
+          priority="tertiary"
+          className="!mx-auto mb-5 mt-auto !block rounded-3xl px-9"
+          onClick={() => setCurrentDetailedAide(aide)}
+        >
+          {"J'explore la solution"}
+        </Button>
       </div>
     </div>
   );

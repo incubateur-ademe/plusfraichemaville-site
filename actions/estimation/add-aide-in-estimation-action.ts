@@ -1,12 +1,13 @@
 "use server";
+import { fetchAideFromAidesTerritoiresById } from "@/lib/aidesTerritoires/fetch";
 
 import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { addAideInEstimation, getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { AidesTerritoiresAide, AidesTerritoiresAideBaseData } from "@/components/financement/types";
-import { fetchAidesFromAidesTerritoiresById } from "@/lib/aidesTerritoires/fetch";
+import { AidesTerritoiresAideBaseData } from "@/components/financement/types";
+
 import { upsertAide } from "@/lib/prisma/prismaAideQueries";
 import { resolveAidType } from "@/components/financement/helpers";
 import { estimations_aides } from "@prisma/client";
@@ -20,7 +21,11 @@ export const addAideInEstimationAction = async (
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  const aideTerritoire = await fetchAidesFromAidesTerritoiresById(aideTerritoireId);
+  const aideTerritoire = await fetchAideFromAidesTerritoiresById(aideTerritoireId);
+
+  if (!aideTerritoire) {
+    return { type: "error", message: "TECHNICAL_ERROR" };
+  }
 
   const aideBaseData: AidesTerritoiresAideBaseData = {
     aideTerritoireId: aideTerritoire.id,
