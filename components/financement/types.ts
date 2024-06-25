@@ -8,6 +8,8 @@ export type AidesTerritoiresAidesResponse = {
 };
 
 export type AidesTerritoiresAideBaseData = Pick<AidesTerritoiresAide, "submission_deadline" | "name" | "financers"> & {
+  id?: number;
+  userId: string | null;
   aideTerritoireId: number;
   type: TypeAidesTerritoiresAide;
 };

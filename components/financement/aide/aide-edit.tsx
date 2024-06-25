@@ -39,7 +39,7 @@ export const AideEdit = memo(() => {
         <div className="aide-card flex flex-wrap gap-6">
           {isLoading
             ? skeletons
-            : data?.results.slice(1, 2).map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
+            : data?.results.slice(1, 10).map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
         </div>
       </div>
     </div>

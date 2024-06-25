@@ -5,13 +5,12 @@ import { ResponseAction } from "../actions-types";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { deleteAideInEstimation, getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-
-import { estimations_aides } from "@prisma/client";
+import { EstimationAide } from "@/lib/prisma/prismaCustomTypes";
 
 export const deleteAideInEstimationAction = async (
   estimationId: number,
   aideId: number,
-): Promise<ResponseAction<{ estimationAide?: estimations_aides }>> => {
+): Promise<ResponseAction<{ estimationAide?: EstimationAide }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
