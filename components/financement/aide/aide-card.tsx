@@ -20,6 +20,8 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
   const isAideFinanciere = type === TypeAidesTerritoiresAide.financement;
   const estimationId = +useParams().estimationId;
 
+  console.log(aide.name_initial);
+
   return (
     <div className="pfmv-card no-shadow  relative w-[266px] cursor-pointer overflow-hidden" id={`aide-card-${aide.id}`}>
       {withSaveButton && (
@@ -60,13 +62,14 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
           <h2 className="mb-6 text-lg">{aide.name}</h2>
           {AidesTerritoiresCardLines(aide).map((line) => (
             <AideFichePanelLine
-              key={line.title}
               line={line}
               pictoClassname={clsx(
                 "fr-icon--sm",
                 isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
               )}
+              withTooltip={line.withTooltip}
               classname="text-sm border-t-[1px] border-t-black/10 py-3"
+              key={line.title}
             />
           ))}
         </div>

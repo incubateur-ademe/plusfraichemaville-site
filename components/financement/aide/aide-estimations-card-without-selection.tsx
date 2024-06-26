@@ -32,7 +32,7 @@ export const AideEstimationsCardWithoutSelection = ({
           />
         ))}
       </div>
-      <Separator className="mb-6" />
+      <Separator className="mb-6 h-px !opacity-100" />
       <div className="mb-8">
         <div className="mb-2 flex items-center justify-between text-lg">
           <span className="block font-bold text-black">Investissement</span>

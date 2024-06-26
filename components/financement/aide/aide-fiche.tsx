@@ -48,11 +48,12 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
           {AidesTerritoiresFullDetailedLines(aide).map((line, index) => (
             <AideFichePanelLine
               line={line}
-              key={index}
+              withTooltip={line.withTooltip}
               pictoClassname={
                 isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue"
               }
               classname="mb-8"
+              key={index}
             />
           ))}
         </div>
@@ -63,10 +64,12 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
             {"Porteur d'aide public"}
           </small>
           <h1 className="mb-10 text-[40px] text-dsfr-background-flat-info">{aide.name}</h1>
-          <h2 className="max-w-xl text-[22px] leading-7 text-dsfr-background-flat-info">
-            {"Nom initial de l'aide"}
-            <span className="block font-normal">{aide.name_initial}</span>
-          </h2>
+          {aide.name_initial && (
+            <h2 className="max-w-xl text-[22px] leading-7 text-dsfr-background-flat-info">
+              {"Nom initial de l'aide"}
+              <span className="block font-normal">{aide.name_initial}</span>
+            </h2>
+          )}
         </div>
         <div className="mb-16">{aide.description && <CmsRichText label={aide.description} />}</div>
         {aide.application_url && (
