@@ -56,8 +56,7 @@ export const callAidesTerritoiresApi = async <T extends IApiAidesTerritoiresResp
     });
 
     const result = (await response.json()) as T;
-
-    if (!isSecondCall && response.status === 401 && result.message === "Expired JWT Token") {
+    if (!isSecondCall && response.status === 401) {
       revalidateTag(FETCH_TOCKEN_CACHE_TAG);
       return callAidesTerritoiresApi(url, true);
     }
