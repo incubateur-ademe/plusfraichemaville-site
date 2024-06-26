@@ -8,13 +8,15 @@ import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
 import { useAidesByEstimationFetcher } from "@/hooks/use-aides-by-estimation";
 import { AideEditFilter } from "./aide-edit-filter";
-import { memo, useMemo } from "react";
+import React, { memo, useMemo } from "react";
 import { countAidesByType, resolveAidType } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/components/financement/types";
 import { useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
+import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
+import { PFMV_ROUTES } from "@/helpers/routes";
+import toast from "react-hot-toast";
 
 export const AideEdit = memo(() => {
-  const projetId = useProjetsStore((state) => state.currentProjetId);
   const estimationId = useParams().estimationId as string;
   const skeletons = [...new Array(4)].map((_, i) => <AideCardSkeleton key={i} />);
   const { filters, toggleFilter } = useAideEstimationEditFilter();
@@ -39,7 +41,6 @@ export const AideEdit = memo(() => {
   return (
     <div className="fr-container pt-8">
       <AideEstimationsListeHeader
-        projetId={projetId!}
         // eslint-disable-next-line max-len
         title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature"
       />
@@ -59,6 +60,21 @@ export const AideEdit = memo(() => {
             ? skeletons
             : filteredResults?.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
         </div>
+      </div>
+      <div className="flex justify-between">
+        <GenericFicheLink
+          href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
+          className="fr-btn fr-btn--secondary rounded-3xl"
+        >
+          Précédent
+        </GenericFicheLink>
+        <GenericFicheLink
+          href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
+          className="fr-btn fr-btn--primary rounded-3xl"
+          onClick={() => toast.success("Votre sélection a bien été validée")}
+        >
+          Valider
+        </GenericFicheLink>
       </div>
     </div>
   );
