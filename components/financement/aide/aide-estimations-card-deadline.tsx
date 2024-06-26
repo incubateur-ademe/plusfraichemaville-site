@@ -14,7 +14,7 @@ export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimation
       {aideDeadlineAndName.map((aideDeadline, index) => (
         <li className="list-none text-lg" key={index}>
           <span className="mr-2 inline-block font-bold">{aideDeadline.name} : </span>
-          <span>
+          <span className="text-pretty">
             Échéance : {aideDeadline.submission_deadline}
             <AideEstimationsCardWarningRemainingDays submissionDeadline={aideDeadline.submission_deadline} />
           </span>

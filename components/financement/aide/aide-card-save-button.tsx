@@ -43,7 +43,7 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
   return (
     <div className={clsx("absolute", className)}>
       <GenericSaveButtonElement
-        type="diagnostic"
+        type="aide"
         withoutModal
         className=""
         update={update}

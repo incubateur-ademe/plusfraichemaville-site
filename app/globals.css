@@ -337,5 +337,15 @@
 }
 
 .aide-modal .fr-modal__body {
-  @apply rounded-[20px];
+  @apply h-[90vh] !max-h-[90vh] rounded-[20px];
+}
+
+.aide-modal .fr-container--fluid {
+  @apply overflow-visible;
+}
+
+.aide-modal.fr-modal::before {
+  flex: none;
+  height: unset;
+  margin: 5vh 0 0;
 }

@@ -22,12 +22,12 @@ export const AideEdit = memo(() => {
 
   return (
     <div className="fr-container pt-8">
+      <AideEstimationsListeHeader
+        projetId={projetId!}
+        // eslint-disable-next-line max-len
+        title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature"
+      />
       <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
-        <AideEstimationsListeHeader
-          projetId={projetId!}
-          // eslint-disable-next-line max-len
-          title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature"
-        />
         <AideEstimationsPanelHeader />
         <Separator className="mb-6" />
         <AideEditFilter
@@ -37,9 +37,7 @@ export const AideEdit = memo(() => {
         />
 
         <div className="aide-card flex flex-wrap gap-6">
-          {isLoading
-            ? skeletons
-            : data?.results.slice(1, 10).map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
+          {isLoading ? skeletons : data?.results.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
         </div>
       </div>
     </div>

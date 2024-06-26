@@ -30,7 +30,7 @@ export const formatISODateToFullDate = (isoDate: string) => {
 
 export const nullFunctionalComponent = () => <></>;
 
-export const daysUntilDate = (dateString: string | null): number | null => {
+export const daysUntilDate = (dateString: string | null, maxRemainingDay: number = 45): number | null => {
   if (!dateString) {
     return null;
   }
@@ -40,7 +40,7 @@ export const daysUntilDate = (dateString: string | null): number | null => {
   const currentDate = new Date();
   const differenceInDays = Math.ceil((targetDate.getTime() - currentDate.getTime()) / MS_PER_DAY);
 
-  return differenceInDays > 0 && differenceInDays <= 10 ? differenceInDays : null;
+  return differenceInDays > 0 && differenceInDays <= maxRemainingDay ? differenceInDays : null;
 };
 
 export const changeNodeListClassname = (nodes: HTMLElement[], action: "add" | "remove", className: string) =>
