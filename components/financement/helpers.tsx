@@ -1,6 +1,5 @@
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
-import { AidesTerritoiresAide, AidesTerritoiresAideType, TypeAidesTerritoiresAide } from "./types";
-import { changeNodeListClassname } from "@/helpers/common";
+import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
 
 export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): TypeAidesTerritoiresAide => {
   for (const aid of aid_types_full) {
@@ -30,23 +29,3 @@ export const getAideSubmissionDeadlineAndName = (estimationAides: EstimationWith
     submission_deadline,
     name,
   }));
-
-export const aideCardOff = (aideCardType: AidesTerritoiresAideType) => {
-  const aideCard = document.querySelectorAll<HTMLElement>(`[data-type="${aideCardType}"]`);
-  const aideCardList = Array.from(aideCard);
-
-  if (aideCard) {
-    changeNodeListClassname(aideCardList, "remove", "block");
-    changeNodeListClassname(aideCardList, "add", "hidden");
-  }
-};
-
-export const aideCardOn = (aideCardType: AidesTerritoiresAideType) => {
-  const aideCard = document.querySelectorAll<HTMLElement>(`[data-type="${aideCardType}"]`);
-  const aideCardList = Array.from(aideCard);
-
-  if (aideCard) {
-    changeNodeListClassname(aideCardList, "add", "block");
-    changeNodeListClassname(aideCardList, "remove", "hidden");
-  }
-};

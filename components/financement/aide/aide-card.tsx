@@ -21,11 +21,7 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
   const estimationId = +useParams().estimationId;
 
   return (
-    <div
-      className="pfmv-card no-shadow  relative w-[266px] cursor-pointer overflow-hidden"
-      id={`aide-card-${aide.id}`}
-      data-type={type}
-    >
+    <div className="pfmv-card no-shadow  relative w-[266px] cursor-pointer overflow-hidden" id={`aide-card-${aide.id}`}>
       {withSaveButton && (
         <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} className="right-2 top-2" />
       )}
