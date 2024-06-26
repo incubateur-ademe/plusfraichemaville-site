@@ -153,7 +153,6 @@ model aide {
   type                String
   name                String?
   financers           String[]
-  userId              String?
   estimations_aides   estimations_aides[]
 }
 

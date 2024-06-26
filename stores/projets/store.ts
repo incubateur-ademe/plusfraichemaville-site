@@ -1,10 +1,11 @@
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationAide, ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
 import { upsert } from "@/helpers/listUtils";
 import { updateFichesProjetAction } from "@/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/components/common/notifications";
+import { updateAideInEstimation } from "./helper";
 
-interface ProjetsState {
+export interface ProjetsState {
   projets: ProjetWithRelations[];
   currentProjetId: number | null;
 }
@@ -15,6 +16,8 @@ export type ProjetsActions = {
   getCurrentProjet: () => ProjetWithRelations | undefined;
   getProjetById: (_projetId: number) => ProjetWithRelations | undefined;
   addOrUpdateProjet: (_projet: ProjetWithRelations) => void;
+  addAideInEstimation: (_estimationId: number, _estimationAide: EstimationAide) => void;
+  deleteAideInEstimation: (_estimationId: number, _aideTerritoireId: number) => void;
   updateSelectedFiches: (
     _type: "solution" | "diagnostic",
     _ficheId: number,
@@ -59,6 +62,12 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
       set((state) => ({
         projets: state.projets.filter((projet) => projet.id !== projetId),
       }));
+    },
+    addAideInEstimation: (estimationId, estimationAide) => {
+      set((state) => updateAideInEstimation(state, estimationId, estimationAide, null));
+    },
+    deleteAideInEstimation: (estimationId, aideTerritoireId) => {
+      set((state) => updateAideInEstimation(state, estimationId, null, aideTerritoireId));
     },
   }));
 };

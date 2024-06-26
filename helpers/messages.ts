@@ -3,6 +3,8 @@ export const success = {
   ESTIMATION_CREATED: "Votre estimation a bien été créée.",
   ESTIMATION_VALIDATED: "Votre estimation a bien été enregistrée.",
   ESTIMATION_UPDATED: "Votre estimation a bien été mise à jour.",
+  ESTIMATION_AIDE_ADDED: "L'aide a bien été ajoutée à votre estimation.",
+  ESTIMATION_AIDE_DELETED: "L'aide a bien été supprimée de votre estimation.",
   BOOKMARKED_SAVED_IN_DB: "Les fiches solutions ont bien été sauvegardées.",
   BOOKMARKED_DIAG_SAVED_IN_DB: "Les fiches diagnostic ont bien été sauvegardées.",
   FICHES_SOLUTIONS_ADDED_TO_PROJET: "Les fiches solutions ont bien été ajoutées au projet en cours.",

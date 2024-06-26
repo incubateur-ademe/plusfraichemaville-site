@@ -14,6 +14,8 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
   };
 }>;
 
+export type EstimationAide = EstimationWithAides["estimations_aides"][number];
+
 export const includeEstimationsWithAides: EstimationWithAides = {
   include: {
     estimations_aides: {
