@@ -17,7 +17,6 @@ export const AideEstimationsListe = () => {
   if (!hasEstimations || !hasFichesSolutions) {
     return null;
   }
-  console.log(estimations);
 
   return (
     <div>
