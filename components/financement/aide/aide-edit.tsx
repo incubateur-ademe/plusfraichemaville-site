@@ -29,7 +29,7 @@ export const AideEdit = memo(() => {
       />
       <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
         <AideEstimationsPanelHeader />
-        <Separator className="mb-6" />
+
         <AideEditFilter
           aideFinanciereCount={aideFinanciereCount}
           aideTechniqueCount={aideTechniqueCount}
