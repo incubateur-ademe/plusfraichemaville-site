@@ -1,0 +1,79 @@
+import { AidesTerritoiresAide } from "@/components/financement/types";
+import { formatISODateToFullDate } from "@/helpers/common";
+import React from "react";
+// eslint-disable-next-line max-len
+import { AideEstimationsCardWarningRemainingDays } from "@/components/financement/aide/aide-estimations-card-warning-remaining-day";
+
+export type AidesTerritoiresAideLine = {
+  title: string;
+  picto: string;
+  description: React.ReactNode | string | string[] | null;
+};
+
+const AideLinePorteurAide = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+  title: "Porteur(s) d'aide",
+  picto: "ri-hand-coin-line",
+  description: aide.financers,
+});
+
+const AideLineSubvention = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+  title: "Subvention",
+  picto: "ri-percent-line",
+  description: [
+    `${aide.subvention_rate_lower_bound ? `Min: ${aide.subvention_rate_lower_bound}% -` : ""}  ${
+      aide.subvention_rate_upper_bound ? `Max: ${aide.subvention_rate_upper_bound}%` : ""
+    }`,
+    aide.subvention_comment ?? "",
+  ],
+});
+
+const AideLineRecurrence = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+  title: "Récurrence",
+  picto: "ri-loop-left-line",
+  description: aide.recurrence,
+});
+
+const AideLineBeneficiaire = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+  title: "Bénéficiaires",
+  picto: "ri-user-add-line",
+  description: aide.targeted_audiences,
+});
+
+const AideLineZone = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+  title: "Zone géographique couverte par l'aide",
+  picto: "ri-map-pin-line",
+  description: aide.perimeter,
+});
+
+const AideLineDateMaj = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+  title: "Dernières mises à jour",
+  picto: "ri-flashlight-line",
+  description: aide.date_updated && formatISODateToFullDate(aide.date_updated),
+});
+
+const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+  title: "Calendrier",
+  picto: "ri-calendar-2-line",
+  description: (
+    <div className="flex items-center gap-4">
+      <AideEstimationsCardWarningRemainingDays submissionDeadline={aide.submission_deadline} />
+      <span>Échéance : {aide.submission_deadline}</span>
+    </div>
+  ),
+});
+
+export const AidesTerritoiresFullDetailedLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => [
+  AideLinePorteurAide(aide),
+  AideLineSubvention(aide),
+  AideLineRecurrence(aide),
+  AideLineBeneficiaire(aide),
+  AideLineZone(aide),
+  AideLineDateMaj(aide),
+];
+
+export const AidesTerritoiresCardLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => [
+  AideLinePorteurAide(aide),
+  AideLineRecurrence(aide),
+  AideLineSubvention(aide),
+  AideLineCalendrier(aide),
+];

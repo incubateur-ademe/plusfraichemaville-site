@@ -6,11 +6,12 @@ import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { deleteAideInEstimation, getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { EstimationAide } from "@/lib/prisma/prismaCustomTypes";
+import { Prisma } from "@prisma/client";
 
 export const deleteAideInEstimationAction = async (
   estimationId: number,
   aideId: number,
-): Promise<ResponseAction<{ estimationAide?: EstimationAide }>> => {
+): Promise<ResponseAction<{ estimationAide?: EstimationAide | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -32,13 +33,14 @@ export const deleteAideInEstimationAction = async (
 
   try {
     const estimationAide = await deleteAideInEstimation(estimationId, aideId);
-    if (estimationAide) {
-      return { type: "success", message: "ESTIMATION_AIDE_DELETED", estimationAide };
-    }
-
-    return { type: "error", message: "TECHNICAL_ERROR" };
+    return { type: "success", message: "ESTIMATION_AIDE_DELETED", estimationAide };
   } catch (e) {
-    customCaptureException("Error in updateAideInEstimation DB call", e);
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === "P2025") {
+        return { type: "success", message: "ESTIMATION_AIDE_DELETED", estimationAide: null };
+      }
+    }
+    customCaptureException("Error in deleteAideInEstimationAction DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };
   }
 };

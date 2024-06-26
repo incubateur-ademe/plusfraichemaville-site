@@ -10,12 +10,11 @@ export const getAideById = async (aideId: number) => {
 };
 
 export const upsertAide = async (aideData: Omit<aide, "id">) => {
-  const upsertedAide = await prismaClient.aide.upsert({
+  return prismaClient.aide.upsert({
     where: {
       aideTerritoireId: aideData.aideTerritoireId,
     },
     update: aideData,
     create: aideData,
   });
-  return upsertedAide;
 };

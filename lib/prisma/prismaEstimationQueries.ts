@@ -1,6 +1,6 @@
 import { generateRandomId } from "@/helpers/common";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { estimation, Prisma } from "@prisma/client";
+import { estimation, estimations_aides, Prisma } from "@prisma/client";
 import { EstimationAide, EstimationMateriauxFicheSolution, EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 
 export const getEstimationById = async (estimationId: number): Promise<estimation | null> => {
@@ -74,10 +74,7 @@ export const addAideInEstimation = async (estimationId: number, aideId: number):
         aideId,
       },
     },
-    update: {
-      estimationId,
-      aideId,
-    },
+    update: {},
     create: {
       estimationId,
       aideId,

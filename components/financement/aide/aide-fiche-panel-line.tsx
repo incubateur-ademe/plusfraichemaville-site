@@ -1,22 +1,21 @@
-import { formatISODateToFullDate } from "@/helpers/common";
-import Image from "next/image";
+import clsx from "clsx";
+import { AidesTerritoiresAideLine } from "@/components/financement/aide/aide-info-lines";
+import React from "react";
 
 type AideFichePanelLineProps = {
-  title: string;
-  description?: string[] | string | null;
-  picto: string;
-  date?: string | null;
+  line: AidesTerritoiresAideLine;
+  pictoClassname?: string;
+  classname?: string;
 };
-export const AideFichePanelLine = ({ title, description, date, picto }: AideFichePanelLineProps) => {
-  const desc = typeof description === "string" ? description : description?.filter(Boolean).join(", ");
+export const AideFichePanelLine = ({ line, pictoClassname, classname }: AideFichePanelLineProps) => {
+  const desc = Array.isArray(line.description) ? line.description?.filter(Boolean).join(", ") : line.description;
 
   return (
-    <div className="mb-8 flex items-start gap-[10px]">
-      <Image src={`/images/financement/${picto}.svg`} width={16} height={16} alt="" className="block shrink-0 pt-1" />
+    <div className={clsx("flex items-start gap-[10px]", classname)}>
+      <i className={clsx(`${line.picto} block shrink-0`, "before:!align-[-1px]", pictoClassname)} />
       <div>
-        <span className="text-base font-bold">{title}</span>
-        {description && <p className="mb-0">{desc}</p>}
-        {date && <p className="mb-0">{formatISODateToFullDate(date)}</p>}
+        <span className=" font-bold">{line.title}</span>
+        {line.description && <div className="mb-0">{desc}</div>}
       </div>
     </div>
   );
