@@ -8,10 +8,13 @@ type AideEstimationsCardLabelProps = {
 export const AideEstimationsCardLabel = ({ children, isLoading }: AideEstimationsCardLabelProps) => {
   return (
     <div
-      className={clsx("h-7 rounded-2xl bg-dsfr-contrast-grey px-3 py-1 text-sm", {
-        "w-32 animate-pulse": isLoading,
-        "w-fit ": !isLoading,
-      })}
+      className={clsx(
+        "border-dsfr-background-contrast-grey-hover h-[1.8rem] rounded-2xl border-[1px] px-3 py-1 text-sm",
+        {
+          "w-32 animate-pulse": isLoading,
+          "w-fit ": !isLoading,
+        },
+      )}
     >
       {children}
     </div>

@@ -3,7 +3,6 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { AideEstimationsListeHeader } from "./aide-estimations-liste-header";
 import { AideEstimationsPanelHeader } from "./aide-estimations-panel-header";
-import { Separator } from "@/components/common/separator";
 import { useParams } from "next/navigation";
 import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
@@ -39,14 +38,14 @@ export const AideEdit = memo(() => {
 
   return (
     <div className="fr-container pt-8">
+      <AideEstimationsListeHeader
+        projetId={projetId!}
+        // eslint-disable-next-line max-len
+        title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature"
+      />
       <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
-        <AideEstimationsListeHeader
-          projetId={projetId!}
-          // eslint-disable-next-line max-len
-          title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature"
-        />
         <AideEstimationsPanelHeader />
-        <Separator className="mb-6" />
+
         <AideEditFilter
           filters={filters}
           toggleFilter={toggleFilter}

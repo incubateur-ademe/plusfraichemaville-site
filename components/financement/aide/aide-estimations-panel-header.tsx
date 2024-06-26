@@ -1,8 +1,8 @@
 import { TypeEspace, selectEspaceByCode } from "@/components/filters/TypeEspaceFilter";
-import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
 import { AideEstimationsCardLabelFicheSolution } from "./aide-estimations-card-label-fiche-solution";
 import { getRegionByDepartment } from "@/lib/departements";
 import { useProjetsStore } from "@/stores/projets/provider";
+import { Separator, SeparatorY } from "@/components/common/separator";
 
 export const AideEstimationsPanelHeader = () => {
   const fichesSolutionsId = useProjetsStore((state) => state.getCurrentProjet()?.fiches_solutions_id);
@@ -13,14 +13,17 @@ export const AideEstimationsPanelHeader = () => {
 
   return (
     <>
-      <div className="mb-3 flex h-7 flex-wrap gap-4">
+      <div className="mb-4 flex flex-wrap gap-4">
+        <h3 className="mb-0 text-xl text-pfmv-navy">Region {region}</h3>
+        <SeparatorY />
+        <h3 className="mb-0 text-xl text-pfmv-navy">{commune}</h3>
+        <SeparatorY />
+        <h3 className="mb-0 text-xl text-pfmv-navy">{selectEspaceByCode(espace)}</h3>
+      </div>
+      <div className="mb-6 flex h-7 flex-wrap gap-4">
         {fichesSolutionsId?.map((ficheId) => <AideEstimationsCardLabelFicheSolution ficheId={ficheId} key={ficheId} />)}
       </div>
-      <div className="mb-6 flex flex-wrap gap-4">
-        <AideEstimationsCardLabel>Region {region}</AideEstimationsCardLabel>
-        <AideEstimationsCardLabel>{commune}</AideEstimationsCardLabel>
-        <AideEstimationsCardLabel>{selectEspaceByCode(espace)}</AideEstimationsCardLabel>
-      </div>
+      <Separator className="mb-6 h-px !opacity-100" />
     </>
   );
 };

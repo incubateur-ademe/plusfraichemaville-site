@@ -7,6 +7,7 @@ import { AideCardSaveButton } from "./aide-card-save-button";
 import { resolveAidType } from "@/components/financement/helpers";
 import clsx from "clsx";
 import { AidesTerritoiresFullDetailedLines } from "@/components/financement/aide/aide-info-lines";
+import { useParams } from "next/navigation";
 
 type AideFicheProps = {
   aide: AidesTerritoiresAide;
@@ -14,16 +15,18 @@ type AideFicheProps = {
 
 export const AideFiche = ({ aide }: AideFicheProps) => {
   const isAideFinanciere = resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement;
+  const estimationId = +useParams().estimationId;
+
   return (
     <div className="flex gap-6 rounded-[20px]">
       <div
         className={clsx(
-          "relative w-full max-w-96 rounded-2xl p-6",
+          "relative w-full max-w-96 rounded-2xl px-6 pb-6 pt-14",
           isAideFinanciere ? "bg-dsfr-background-alt-blue-france" : "bg-dsfr-background-alt-brown-cafe-creme",
         )}
         id="financement-panel"
       >
-        <AideCardSaveButton estimationId={1} aideTerritoireId={aide.id} className="right-4 top-4" />
+        <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} className="right-4 top-4" />
         <div className="mb-6 flex items-center gap-4">
           <Image
             src={`/images/financement/${isAideFinanciere ? "financement" : "ingenierie"}.svg`}
@@ -66,16 +69,18 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
           </h2>
         </div>
         <div className="mb-16">{aide.description && <CmsRichText label={aide.description} />}</div>
-        <div className="flex justify-end">
-          <Button
-            iconId="ri-external-link-fill"
-            className="!ml-auto rounded-2xl"
-            size="small"
-            onClick={() => window.open(aide.application_url ?? "")}
-          >
-            Candidater
-          </Button>
-        </div>
+        {aide.application_url && (
+          <div className="flex justify-end">
+            <Button
+              iconId="ri-external-link-fill"
+              className="!ml-auto rounded-2xl"
+              size="small"
+              onClick={() => window.open(aide.application_url ?? "")}
+            >
+              Candidater
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );

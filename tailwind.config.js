@@ -32,6 +32,7 @@ module.exports = {
       "pfmv-climadiag-orange": "var(--border-default-orange-terre-battue)",
       "pfmv-climadiag-red": "var(--border-default-red-marianne)",
       "dsfr-background-alt-brown-cafe-creme": "var(--background-alt-brown-cafe-creme)",
+      "dsfr-background-contrast-grey-hover": "var(--background-contrast-grey-hover)",
       "dsfr-border-action-high-error": "var(--border-action-high-error)",
       "dsfr-background-contrast-yellow-tournesol-hover": "var(--background-contrast-yellow-tournesol-hover)",
       "dsfr-warning-425-625-hover": "var(--warning-425-625-hover)",

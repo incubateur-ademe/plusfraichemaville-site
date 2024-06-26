@@ -15,7 +15,7 @@ export const AideFichePanelLine = ({ line, pictoClassname, classname }: AideFich
       <i className={clsx(`${line.picto} block shrink-0`, "before:!align-[-1px]", pictoClassname)} />
       <div>
         <span className=" font-bold">{line.title}</span>
-        {line.description && <div className="mb-0">{desc}</div>}
+        {line.description && <div className="mb-0 text-pretty">{desc}</div>}
       </div>
     </div>
   );
