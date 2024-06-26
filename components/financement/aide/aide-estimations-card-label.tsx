@@ -9,7 +9,7 @@ export const AideEstimationsCardLabel = ({ children, isLoading }: AideEstimation
   return (
     <div
       className={clsx(
-        "border-dsfr-background-contrast-grey-hover h-[1.8rem] rounded-2xl border-[1px] px-3 py-1 text-sm",
+        "h-[1.8rem] rounded-2xl border-[1px] border-dsfr-background-contrast-grey-hover px-3 py-1 text-sm",
         {
           "w-32 animate-pulse": isLoading,
           "w-fit ": !isLoading,

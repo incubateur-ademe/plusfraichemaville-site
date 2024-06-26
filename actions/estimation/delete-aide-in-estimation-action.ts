@@ -33,6 +33,7 @@ export const deleteAideInEstimationAction = async (
 
   try {
     const estimationAide = await deleteAideInEstimation(estimationId, aideId);
+
     return { type: "success", message: "ESTIMATION_AIDE_DELETED", estimationAide };
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {

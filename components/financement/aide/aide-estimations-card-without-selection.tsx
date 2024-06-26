@@ -53,7 +53,7 @@ export const AideEstimationsCardWithoutSelection = ({
               <span className={clsx("text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-info")}>
                 {isLoading ? (
                   <div className="w-[100px]">
-                    <Spinner />
+                    <Spinner circleColor="text-dsfr-background-flat-info" pathColor="fill-white" />
                   </div>
                 ) : (
                   aideFinanciereCount
@@ -74,7 +74,7 @@ export const AideEstimationsCardWithoutSelection = ({
               <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-orange-terre-battue">
                 {isLoading ? (
                   <div className="w-[100px]">
-                    <Spinner />
+                    <Spinner circleColor="text-dsfr-background-flat-orange-terre-battue" pathColor="fill-white" />
                   </div>
                 ) : (
                   aideTechniqueCount

@@ -22,7 +22,7 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
 
   const updater = {
     delete: {
-      action: () => deleteAideInEstimationAction(estimationId, 1234564),
+      action: () => deleteAideInEstimationAction(estimationId, savedId!),
       storeAction: () => deleteAideInEstimation(estimationId, aideTerritoireId),
     },
     add: {
