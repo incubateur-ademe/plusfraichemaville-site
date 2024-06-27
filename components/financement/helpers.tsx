@@ -1,5 +1,5 @@
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
-import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
+import { AideTerritoireBase, AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
 import { ReactNode } from "react";
 
 export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): TypeAidesTerritoiresAide => {
@@ -18,6 +18,20 @@ export const countAidesByType = (aides: AidesTerritoiresAide[]) => {
         acc.aideFinanciereCount = acc.aideFinanciereCount + 1;
       } else {
         acc.aideTechniqueCount = acc.aideTechniqueCount + 1;
+      }
+      return acc;
+    },
+    { aideFinanciereCount: 0, aideTechniqueCount: 0 },
+  );
+};
+
+export const countAidesByTypeFromDB = (aides: AideTerritoireBase[]) => {
+  return aides.reduce(
+    (acc, current) => {
+      if (current.type === TypeAidesTerritoiresAide.financement) {
+        acc.aideFinanciereCount++;
+      } else {
+        acc.aideTechniqueCount++;
       }
       return acc;
     },

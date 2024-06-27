@@ -11,15 +11,18 @@ export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimation
 
   return (
     <ul className="mt-4 p-0">
-      {aideDeadlineAndName.map((aideDeadline, index) => (
-        <li className="list-none text-lg" key={index}>
-          <span className="mr-2 inline-block font-bold">{aideDeadline.name} : </span>
-          <span className="text-pretty">
-            Échéance : {aideDeadline.submission_deadline}
-            <AideEstimationsCardWarningRemainingDays submissionDeadline={aideDeadline.submission_deadline} />
-          </span>
-        </li>
-      ))}
+      {aideDeadlineAndName.map(
+        (aideDeadline, index) =>
+          aideDeadline.submission_deadline && (
+            <li className="list-none text-lg" key={index}>
+              <span className="mr-2 inline-block font-bold">{aideDeadline.name} : </span>
+              <span className="text-pretty">
+                Échéance : {aideDeadline.submission_deadline}
+                <AideEstimationsCardWarningRemainingDays submissionDeadline={aideDeadline.submission_deadline} />
+              </span>
+            </li>
+          ),
+      )}
     </ul>
   );
 };
