@@ -13,6 +13,8 @@ type AideFichePanelLineProps = {
 
 export const AideFichePanelLine = ({ line, pictoClassname, classname, showMore }: AideFichePanelLineProps) => {
   const description = processDescription(line.description);
+  console.log(line.title === "Subvention" ? line.description : "");
+
   return (
     <div className={clsx(classname)}>
       <div className="mb-2 flex flex-row">

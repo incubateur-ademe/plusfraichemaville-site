@@ -18,7 +18,7 @@ const AideLinePorteurAide = (aide: AidesTerritoiresAide, showMore?: boolean): Ai
   showMore,
 });
 
-const AideLineSubvention = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+const AideLineSubvention = (aide: AidesTerritoiresAide, showMore?: boolean): AidesTerritoiresAideLine => ({
   title: "Subvention",
   picto: "ri-percent-line",
   description: [
@@ -27,6 +27,7 @@ const AideLineSubvention = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
     }`,
     aide.subvention_comment ?? "",
   ],
+  showMore,
 });
 
 const AideLineRecurrence = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
@@ -35,10 +36,11 @@ const AideLineRecurrence = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
   description: aide.recurrence,
 });
 
-const AideLineBeneficiaire = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+const AideLineBeneficiaire = (aide: AidesTerritoiresAide, showMore?: boolean): AidesTerritoiresAideLine => ({
   title: "Bénéficiaires",
   picto: "ri-user-add-line",
   description: aide.targeted_audiences,
+  showMore,
 });
 
 const AideLineZone = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
@@ -72,9 +74,9 @@ const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
 
 export const AidesTerritoiresFullDetailedLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => [
   AideLinePorteurAide(aide, true),
-  AideLineSubvention(aide),
+  AideLineSubvention(aide, true),
   AideLineRecurrence(aide),
-  AideLineBeneficiaire(aide),
+  AideLineBeneficiaire(aide, true),
   AideLineZone(aide),
   AideLineDateMaj(aide),
 ];
@@ -82,6 +84,6 @@ export const AidesTerritoiresFullDetailedLines = (aide: AidesTerritoiresAide): A
 export const AidesTerritoiresCardLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => [
   AideLinePorteurAide(aide, false),
   AideLineRecurrence(aide),
-  AideLineSubvention(aide),
+  AideLineSubvention(aide, false),
   AideLineCalendrier(aide),
 ];
