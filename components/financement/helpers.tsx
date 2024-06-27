@@ -28,7 +28,7 @@ export const countAidesByType = (aides: AidesTerritoiresAide[]) => {
 export const countAidesByTypeFromDB = (aides: AideTerritoireBase[]) => {
   return aides.reduce(
     (acc, current) => {
-      if (current.type === "financement") {
+      if (current.type === TypeAidesTerritoiresAide.financement) {
         acc.aideFinanciereCount++;
       } else {
         acc.aideTechniqueCount++;
