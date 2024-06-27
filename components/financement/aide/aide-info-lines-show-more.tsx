@@ -20,7 +20,6 @@ export const AideInfoLineShowMore = ({ text, slice = 3, showMore }: TooltipProps
     showMore ? (
       <div className="relative">
         {currentText.join(", ")}{" "}
-        {/* {!show && <span id="link">{`(et ${remainingElements} ${remainingElements > 1 ? "autres" : "autre"})`}</span>} */}
         <button onClick={toggle} className={clsx("mb-4 block text-sm font-medium underline")}>
           voir {show ? "moins" : `les ${remainingElements} ${remainingElements > 1 ? "autres" : "autre"}`}
         </button>
@@ -32,6 +31,6 @@ export const AideInfoLineShowMore = ({ text, slice = 3, showMore }: TooltipProps
       </div>
     )
   ) : (
-    <div>{text.join(", ")}</div>
+    <div>{text.filter(Boolean).join(", ")}</div>
   );
 };

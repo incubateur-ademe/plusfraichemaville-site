@@ -13,6 +13,8 @@ type AideFichePanelLineProps = {
 
 export const AideFichePanelLine = ({ line, pictoClassname, classname, showMore }: AideFichePanelLineProps) => {
   const description = processDescription(line.description);
+  console.log(line.title === "Subvention" ? line.description : "");
+
   return (
     <div className={clsx("flex items-start gap-[10px]", classname)}>
       <i className={clsx(`${line.picto} block shrink-0`, "before:!pt-[20px] before:!align-[-1px]", pictoClassname)} />

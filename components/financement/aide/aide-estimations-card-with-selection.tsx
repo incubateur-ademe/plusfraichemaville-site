@@ -24,8 +24,8 @@ export const AideEstimationsCardWithSelection = ({
 
   const aidesTechniques =
     aideTechniqueCount > 0
-      ? `${aideTechniqueCount} financements sélectionnés`
-      : `${aideTechniqueCount} financement sélectionné`;
+      ? `${aideTechniqueCount} soutiens à l'ingénierie sélectionnés`
+      : `${aideTechniqueCount} soutien à l'ingénierie sélectionné`;
 
   return (
     <>
