@@ -6,6 +6,9 @@ import { AideEstimationsCardWithoutSelection } from "./aide-estimations-card-wit
 import { AideEstimationsCardWithSelection } from "./aide-estimations-card-with-selection";
 import { AideEstimationsListeHeader } from "./aide-estimations-liste-header";
 import { AideEstimationsListeLink } from "./aide-estimation-liste-link";
+import { PFMV_ROUTES } from "@/helpers/routes";
+import React from "react";
+import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 
 export const AideEstimationsListe = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -17,13 +20,12 @@ export const AideEstimationsListe = () => {
   if (!hasEstimations || !hasFichesSolutions) {
     return null;
   }
-  console.log(estimations);
 
   return (
     <div>
       <AideEstimationsListeHeader
-        projetId={projet?.id}
-        title="Pour quelle estimation souhaitez-vous trouver des financements ou des soutiens à l'ingénierie ?"
+        title="Pour quelle estimation souhaitez-vous
+        trouver des financements ou des soutiens à l'ingénierie ?"
       />
       <div>
         {estimations.map((estimation, index) => (
@@ -52,6 +54,12 @@ export const AideEstimationsListe = () => {
           </AideEstimationsCard>
         ))}
       </div>
+      <GenericFicheLink
+        href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
+        className="fr-btn fr-btn--secondary rounded-3xl"
+      >
+        Revenir au tableau de bord
+      </GenericFicheLink>
     </div>
   );
 };

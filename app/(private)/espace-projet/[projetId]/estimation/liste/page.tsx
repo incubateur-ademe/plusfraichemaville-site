@@ -5,6 +5,7 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { redirect } from "next/navigation";
 import { EstimationOverviewCard } from "@/components/estimation/estimation-overview-card";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -35,13 +36,12 @@ export default function CreateEstimationPage() {
           >
             Ajouter une estimation
           </Button>
-          <Button
-            className="rounded-3xl"
-            priority="secondary"
-            linkProps={{ href: PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id), target: "_self" }}
+          <GenericFicheLink
+            href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
+            className="fr-btn fr-btn--secondary rounded-3xl"
           >
             Revenir au tableau de bord
-          </Button>
+          </GenericFicheLink>
         </div>
       </div>
     );
