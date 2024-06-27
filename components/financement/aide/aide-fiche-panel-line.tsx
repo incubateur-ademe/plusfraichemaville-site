@@ -14,10 +14,12 @@ type AideFichePanelLineProps = {
 export const AideFichePanelLine = ({ line, pictoClassname, classname, showMore }: AideFichePanelLineProps) => {
   const description = processDescription(line.description);
   return (
-    <div className={clsx("flex items-start gap-[10px]", classname)}>
-      <i className={clsx(`${line.picto} block shrink-0`, "before:!pt-[20px] before:!align-[-1px]", pictoClassname)} />
+    <div className={clsx(classname)}>
+      <div className="mb-2 flex flex-row">
+        <i className={clsx(`${line.picto} mr-2`, pictoClassname)} />
+        <span className="font-bold">{line.title}</span>
+      </div>
       <div>
-        <span className=" font-bold">{line.title}</span>
         {description ? (
           Array.isArray(line.description) ? (
             <AideInfoLineShowMore text={line.description} showMore={showMore} />
