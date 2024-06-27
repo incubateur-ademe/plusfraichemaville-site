@@ -67,6 +67,15 @@ export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
   project_references: string[];
 }
 
+export type AideTerritoireBase = {
+  id: number;
+  aideTerritoireId: number;
+  submission_deadline: string | null;
+  type: string;
+  name: string | null;
+  financers: string[];
+};
+
 export enum TypeAidesTerritoiresAide {
   // eslint-disable-next-line no-unused-vars
   financement = "financement",

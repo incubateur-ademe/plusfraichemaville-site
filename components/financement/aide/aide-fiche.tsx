@@ -43,14 +43,14 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
               isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
             )}
           >
-            {isAideFinanciere ? "Financemement" : "Soutien à l'ingénierie"}
+            {isAideFinanciere ? "Financement" : "Soutien à l'ingénierie"}
           </h2>
         </div>
         <div>
           {AidesTerritoiresFullDetailedLines(aide).map((line, index) => (
             <AideFichePanelLine
               line={line}
-              withTooltip={line.withTooltip}
+              showMore={line.showMore}
               pictoClassname={
                 isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue"
               }
@@ -62,12 +62,12 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
       </div>
       <div className="w-full">
         <div className="mb-11">
-          <small className="mb-5 block text-base font-bold text-dsfr-background-flat-info">
+          <small className="text-dsfr-background-flat-info mb-5 block text-base font-bold">
             {"Porteur d'aide public"}
           </small>
-          <h1 className="mb-10 text-[40px] text-dsfr-background-flat-info">{aide.name}</h1>
+          <h1 className="text-dsfr-background-flat-info mb-10 text-[40px]">{aide.name}</h1>
           {aide.name_initial && (
-            <h2 className="max-w-xl text-[22px] leading-7 text-dsfr-background-flat-info">
+            <h2 className="text-dsfr-background-flat-info max-w-xl text-[22px] leading-7">
               {"Nom initial de l'aide"}
               <span className="block font-normal">{aide.name_initial}</span>
             </h2>

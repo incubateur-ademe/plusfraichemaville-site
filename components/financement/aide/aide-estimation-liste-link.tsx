@@ -11,7 +11,7 @@ type AideEstimationsListeLinkProps = {
 export const AideEstimationsListeLink = ({ projetId, estimationId }: AideEstimationsListeLinkProps) => {
   return (
     <Link
-      className="fr-btn !ml-auto mt-6 !block rounded-3xl"
+      className="fr-btn !ml-auto !block rounded-3xl"
       href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT(projetId, estimationId)}
     >
       Modifier

@@ -8,14 +8,14 @@ export type AidesTerritoiresAideLine = {
   title: string;
   picto: string;
   description: React.ReactNode | string | string[] | null;
-  withTooltip?: boolean;
+  showMore?: boolean;
 };
 
-const AideLinePorteurAide = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
+const AideLinePorteurAide = (aide: AidesTerritoiresAide, showMore?: boolean): AidesTerritoiresAideLine => ({
   title: "Porteur(s) d'aide",
   picto: "ri-hand-coin-line",
   description: aide.financers,
-  withTooltip: true,
+  showMore,
 });
 
 const AideLineSubvention = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
@@ -65,7 +65,7 @@ const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
 });
 
 export const AidesTerritoiresFullDetailedLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => [
-  AideLinePorteurAide(aide),
+  AideLinePorteurAide(aide, true),
   AideLineSubvention(aide),
   AideLineRecurrence(aide),
   AideLineBeneficiaire(aide),
@@ -74,7 +74,7 @@ export const AidesTerritoiresFullDetailedLines = (aide: AidesTerritoiresAide): A
 ];
 
 export const AidesTerritoiresCardLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => [
-  AideLinePorteurAide(aide),
+  AideLinePorteurAide(aide, false),
   AideLineRecurrence(aide),
   AideLineSubvention(aide),
   AideLineCalendrier(aide),

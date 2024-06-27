@@ -16,7 +16,7 @@ export const AideEstimationsCardLabelFicheSolution = ({ ficheId }: { ficheId: nu
       <AideEstimationsCardLabel isLoading={isLoading}>
         <div className="flex items-center justify-center gap-1">
           {
-            <i className="[&>i]:!inline-block [&>i]:!size-4 [&>i]:before:!size-4 [&>i]:before:!align-[-4px]">
+            <i className="[&>i]:!inline-block [&>i]:!size-4 [&>i]:before:!size-4 [&>i]:before:!align-[-3px]">
               <Icon />
             </i>
           }
