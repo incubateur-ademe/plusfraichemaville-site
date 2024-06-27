@@ -8,12 +8,14 @@ export type AidesTerritoiresAideLine = {
   title: string;
   picto: string;
   description: React.ReactNode | string | string[] | null;
+  withTooltip?: boolean;
 };
 
 const AideLinePorteurAide = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
   title: "Porteur(s) d'aide",
   picto: "ri-hand-coin-line",
   description: aide.financers,
+  withTooltip: true,
 });
 
 const AideLineSubvention = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
@@ -57,7 +59,7 @@ const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
   description: (
     <div className="flex items-center gap-4">
       <AideEstimationsCardWarningRemainingDays submissionDeadline={aide.submission_deadline} />
-      <span>Échéance : {aide.submission_deadline}</span>
+      <span>{aide.submission_deadline ? `Échéance : ${aide.submission_deadline}` : "Non communiqué"}</span>
     </div>
   ),
 });

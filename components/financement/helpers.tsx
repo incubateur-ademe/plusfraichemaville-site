@@ -1,5 +1,6 @@
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
+import { ReactNode } from "react";
 
 export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): TypeAidesTerritoiresAide => {
   for (const aid of aid_types_full) {
@@ -29,3 +30,13 @@ export const getAideSubmissionDeadlineAndName = (estimationAides: EstimationWith
     submission_deadline,
     name,
   }));
+
+export const processDescription = (description: ReactNode | string | string[] | null) => {
+  if (Array.isArray(description)) {
+    const removeEmptyStrings = (arr: string[]): string[] => {
+      return arr.filter((item) => item.trim().length > 0);
+    };
+    return removeEmptyStrings(description).join(", ");
+  }
+  return description as string;
+};
