@@ -149,7 +149,7 @@ model climadiag {
 model aide {
   id                  Int                 @id @default(autoincrement())
   aideTerritoireId    Int                 @unique
-  submission_deadline String?
+  submission_deadline DateTime?           @db.Date
   type                String
   name                String?
   financers           String[]

@@ -31,7 +31,7 @@ export const addAideInEstimationAction = async (
       aideTerritoireId: aideTerritoire.id,
       name: aideTerritoire.name,
       financers: aideTerritoire.financers,
-      submission_deadline: aideTerritoire.submission_deadline,
+      submission_deadline: aideTerritoire.submission_deadline ? new Date(aideTerritoire.submission_deadline) : null,
       type: resolveAidType(aideTerritoire.aid_types_full),
     };
 

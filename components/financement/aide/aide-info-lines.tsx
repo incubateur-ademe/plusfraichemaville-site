@@ -1,8 +1,8 @@
 import { AidesTerritoiresAide } from "@/components/financement/types";
-import { formatISODateToFullDate } from "@/helpers/common";
 import React from "react";
 // eslint-disable-next-line max-len
 import { AideEstimationsCardWarningRemainingDays } from "@/components/financement/aide/aide-estimations-card-warning-remaining-day";
+import { dateToStringWithoutTime } from "@/helpers/dateUtils";
 
 export type AidesTerritoiresAideLine = {
   title: string;
@@ -52,7 +52,7 @@ const AideLineZone = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => (
 const AideLineDateMaj = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
   title: "Dernières mises à jour",
   picto: "ri-flashlight-line",
-  description: aide.date_updated && formatISODateToFullDate(aide.date_updated),
+  description: aide.date_updated && dateToStringWithoutTime(new Date(aide.date_updated)),
 });
 
 const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
@@ -60,8 +60,14 @@ const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
   picto: "ri-calendar-2-line",
   description: (
     <div className="flex items-center gap-4">
-      <AideEstimationsCardWarningRemainingDays submissionDeadline={aide.submission_deadline} />
-      <span>{aide.submission_deadline ? `Échéance : ${aide.submission_deadline}` : "Non communiqué"}</span>
+      {aide.submission_deadline && (
+        <AideEstimationsCardWarningRemainingDays submissionDeadline={new Date(aide.submission_deadline)} />
+      )}
+      <span>
+        {aide.submission_deadline
+          ? `Échéance : ${dateToStringWithoutTime(new Date(aide.submission_deadline))}`
+          : "Non communiqué"}
+      </span>
     </div>
   ),
 });

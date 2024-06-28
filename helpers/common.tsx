@@ -20,28 +20,16 @@ export const highlightedIconClass = (typeFiche: TypeFiche) =>
 
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
 
-export const formatISODateToFullDate = (isoDate: string) => {
-  const date = new Date(isoDate);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
-};
-
 export const nullFunctionalComponent = () => <></>;
 
-export const daysUntilDate = (dateString: string | null, maxRemainingDay: number = 45): number | null => {
-  if (!dateString) {
+export const daysUntilDate = (targetDate: Date | null, maxRemainingDay: number = 45): number | null => {
+  if (!targetDate) {
     return null;
   }
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
-  const targetDate = new Date(dateString);
   const currentDate = new Date();
   const differenceInDays = Math.ceil((targetDate.getTime() - currentDate.getTime()) / MS_PER_DAY);
 
   return differenceInDays > 0 && differenceInDays <= maxRemainingDay ? differenceInDays : null;
 };
-
-export const changeNodeListClassname = (nodes: HTMLElement[], action: "add" | "remove", className: string) =>
-  nodes.forEach((node) => node.classList[action](className));
