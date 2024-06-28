@@ -20,7 +20,7 @@ export const AideEstimationsPanelHeader = () => {
         <SeparatorY />
         <h3 className="mb-0 text-xl text-pfmv-navy">{selectEspaceByCode(espace)}</h3>
       </div>
-      <div className="mb-6 flex h-7 flex-wrap gap-4">
+      <div className="mb-6 flex min-h-7 flex-wrap gap-4">
         {fichesSolutionsId?.map((ficheId) => <AideEstimationsCardLabelFicheSolution ficheId={ficheId} key={ficheId} />)}
       </div>
       <Separator className="mb-6 h-px !opacity-100" />

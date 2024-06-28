@@ -19,7 +19,7 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
   const links = [
     {
       url: "tableau-de-suivi" as const,
-      tooltip: "Tableau de suivi",
+      tooltip: "Tableau de bord",
       picto: ({ active }: BannerPictoProps) => <BannerPictoTableauDeSuivi active={active} />,
     },
     {

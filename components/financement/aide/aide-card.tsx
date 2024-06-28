@@ -21,7 +21,7 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
   const estimationId = +useParams().estimationId;
 
   return (
-    <div className="pfmv-card no-shadow  relative w-[266px] cursor-pointer overflow-hidden" id={`aide-card-${aide.id}`}>
+    <div className="pfmv-card no-shadow  relative w-[362px] cursor-pointer overflow-hidden" id={`aide-card-${aide.id}`}>
       {withSaveButton && (
         <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} className="right-2 top-2" />
       )}
@@ -74,10 +74,10 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
         <div className="mt-auto">
           <Button
             priority="tertiary"
-            className="!mx-auto mb-5 mt-auto !block rounded-3xl px-9"
+            className="!mx-auto mb-5 mt-auto !block !w-56 rounded-3xl px-9"
             onClick={() => setCurrentDetailedAide(aide)}
           >
-            {"J'explore la solution"}
+            {"Lire plus"}
           </Button>
         </div>
       </div>
