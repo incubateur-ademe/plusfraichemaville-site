@@ -3,8 +3,13 @@ export function monthDateToString(value: Date | null | undefined): string {
 }
 
 export function dateToStringWithTime(value: Date): string {
-  return `${addLeadingZero(value.getDate())}/${addLeadingZero(value.getMonth() + 1)}/${value.getFullYear()}
-   à ${addLeadingZero(value.getHours())}:${addLeadingZero(value.getMinutes())}`;
+  return `${dateToStringWithoutTime(value)} à ${addLeadingZero(value.getHours())}:${addLeadingZero(
+    value.getMinutes(),
+  )}`;
+}
+
+export function dateToStringWithoutTime(value: Date): string {
+  return `${addLeadingZero(value.getDate())}/${addLeadingZero(value.getMonth() + 1)}/${value.getFullYear()}`;
 }
 
 const addLeadingZero = (value: number): string => ("0" + value).slice(-2);

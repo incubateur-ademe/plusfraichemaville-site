@@ -1,6 +1,5 @@
 import z from "zod";
 import { CollectiviteFormSchema } from "@/forms/collectivite/collectivite-form-schema";
-import { GeoJsonProperties } from "geojson";
 
 export const ProjetInfoFormSchema = z.object({
   projetId: z.number().optional(),

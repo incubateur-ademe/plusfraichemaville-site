@@ -18,12 +18,18 @@ export enum TypeFiche {
 export const highlightedIconClass = (typeFiche: TypeFiche) =>
   typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-border-action-high-error";
 
-export const formatISODateToFullDate = (isoDate: string) => {
-  const date = new Date(isoDate);
-  const day = String(date.getDate()).padStart(2, "0");
-  const month = String(date.getMonth() + 1).padStart(2, "0");
-  const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
-};
-
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
+
+export const nullFunctionalComponent = () => <></>;
+
+export const daysUntilDate = (targetDate: Date | null, maxRemainingDay: number = 45): number | null => {
+  if (!targetDate) {
+    return null;
+  }
+  const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+  const currentDate = new Date();
+  const differenceInDays = Math.ceil((targetDate.getTime() - currentDate.getTime()) / MS_PER_DAY);
+
+  return differenceInDays > 0 && differenceInDays <= maxRemainingDay ? differenceInDays : null;
+};

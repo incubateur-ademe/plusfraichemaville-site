@@ -7,6 +7,7 @@ import CustomDSFRModal from "@/components/common/CustomDSFRModal";
 import { EstimationMateriauModalContent } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal-content";
 import { useEffect, useMemo } from "react";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
+import { useModalStore } from "@/stores/modal/provider";
 
 export const estimationModal = createModal({
   id: "estimation-modal",
@@ -14,8 +15,8 @@ export const estimationModal = createModal({
 });
 
 export function EstimationMateriauModalContainer() {
-  const currentEstimationId = useProjetsStore((state) => state.currentEstimationId);
-  const setCurrentEstimationId = useProjetsStore((state) => state.setCurrentEstimationId);
+  const currentEstimationId = useModalStore((state) => state.currentEstimationId);
+  const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   useIsModalOpen(estimationModal, {
     onConceal: () => setCurrentEstimationId(null),

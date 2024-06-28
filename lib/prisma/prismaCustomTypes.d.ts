@@ -1,12 +1,34 @@
-import { collectivite, estimation, Prisma, projet, User } from "@prisma/client";
+import { collectivite, Prisma, projet, User } from "@prisma/client";
 
 export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
 }>;
 
+export type EstimationWithAides = Prisma.estimationGetPayload<{
+  include: {
+    estimations_aides: {
+      include: {
+        aide: true;
+      };
+    };
+  };
+}>;
+
+export type EstimationAide = EstimationWithAides["estimations_aides"][number];
+
+export const includeEstimationsWithAides: EstimationWithAides = {
+  include: {
+    estimations_aides: {
+      include: {
+        aide: true,
+      },
+    },
+  },
+};
+
 export interface ProjetWithRelations extends projet {
   collectivite: collectivite;
-  estimations: estimation[];
+  estimations: EstimationWithAides[];
   creator: User;
 }
 

@@ -1,3 +1,5 @@
+import { IApiAidesTerritoiresResponse } from "@/lib/aidesTerritoires/types";
+
 export type AidesTerritoiresAidesResponse = {
   count: number;
   previous: string | null;
@@ -5,7 +7,7 @@ export type AidesTerritoiresAidesResponse = {
   results: AidesTerritoiresAide[];
 };
 
-export type AidesTerritoiresAide = {
+export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
   id: number;
   slug: string | null;
   url: string | null;
@@ -13,11 +15,22 @@ export type AidesTerritoiresAide = {
   name_initial: string | null;
   short_title: string | null;
   financers: string[];
+  financers_full: {
+    id: number;
+    name: string;
+    logo: string;
+  }[];
   instructors: string[];
+  instructors_full: {
+    id: number;
+    name: string;
+    logo: string;
+  }[];
   programs: string[];
   description: string | null;
   eligibility: string | null;
   perimeter: string | null;
+  perimeter_scale: string | null;
   mobilization_steps: string[];
   origin_url: string | null;
   categories: string[];
@@ -25,11 +38,20 @@ export type AidesTerritoiresAide = {
   application_url: string | null;
   targeted_audiences: string[];
   aid_types: AidesTerritoiresAideName[];
+  aid_types_full: {
+    id: number;
+    name: string;
+    group: {
+      id: number;
+      name: AidesTerritoiresAideType;
+    };
+  }[];
   is_charged: boolean;
   destinations: string[];
   start_date: string | null;
   predeposit_date: string | null;
   submission_deadline: string | null;
+  subvention_comment: string | null;
   subvention_rate_lower_bound: number | null;
   subvention_rate_upper_bound: number | null;
   loan_amount: number | null;
@@ -43,8 +65,23 @@ export type AidesTerritoiresAide = {
   date_created: string | null;
   date_updated: string | null;
   project_references: string[];
+}
+
+export type AideTerritoireBase = {
+  id: number;
+  aideTerritoireId: number;
+  submission_deadline: string | null;
+  type: string;
+  name: string | null;
+  financers: string[];
 };
 
+export enum TypeAidesTerritoiresAide {
+  // eslint-disable-next-line no-unused-vars
+  financement = "financement",
+  // eslint-disable-next-line no-unused-vars
+  ingenierie = "ingenierie",
+}
 export type AidesTerritoiresAideType = "Aide financière" | "Aide en ingénierie";
 
 export type AidesTerritoiresAideNameKey = keyof typeof aidesTerritoiresAideName;
@@ -61,13 +98,13 @@ const aidesTerritoiresAideName = {
   IngenierieJuridiqueAdministrative: "Ingénierie Juridique / administrative",
 } as const;
 
-export const aidesTerritoiresAideNameAndTypeMap: Record<AidesTerritoiresAideName, AidesTerritoiresAideType> = {
-  [aidesTerritoiresAideName.Subvention]: "Aide financière",
-  [aidesTerritoiresAideName.Pret]: "Aide financière",
-  [aidesTerritoiresAideName.AvanceRecuperable]: "Aide financière",
-  [aidesTerritoiresAideName.CertificatEconomieEnergie]: "Aide financière",
-  [aidesTerritoiresAideName.AutreAideFinanciere]: "Aide financière",
-  [aidesTerritoiresAideName.IngenierieTechnique]: "Aide en ingénierie",
-  [aidesTerritoiresAideName.IngenierieFinanciere]: "Aide en ingénierie",
-  [aidesTerritoiresAideName.IngenierieJuridiqueAdministrative]: "Aide en ingénierie",
+export const aidesTerritoiresAideNameAndTypeMap: Record<AidesTerritoiresAideName, TypeAidesTerritoiresAide> = {
+  [aidesTerritoiresAideName.Subvention]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.Pret]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.AvanceRecuperable]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.CertificatEconomieEnergie]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.AutreAideFinanciere]: TypeAidesTerritoiresAide.financement,
+  [aidesTerritoiresAideName.IngenierieTechnique]: TypeAidesTerritoiresAide.ingenierie,
+  [aidesTerritoiresAideName.IngenierieFinanciere]: TypeAidesTerritoiresAide.ingenierie,
+  [aidesTerritoiresAideName.IngenierieJuridiqueAdministrative]: TypeAidesTerritoiresAide.ingenierie,
 } as const;

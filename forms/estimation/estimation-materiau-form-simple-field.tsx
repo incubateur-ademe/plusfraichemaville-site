@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -10,7 +10,6 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import EstimationMateriauGlobalPriceFooter from "@/forms/estimation/estimation-materiau-global-price-footer";
 import { updateEstimationMateriauxAction } from "@/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/components/common/notifications";
-import { estimation } from "@prisma/client";
 import { formatNumberWithSpaces, scrollToTop } from "@/helpers/common";
 import { EstimationMateriauFieldUnique } from "./estimation-materiau-field-unique";
 import {
@@ -36,7 +35,7 @@ export default function EstimationMateriauSimpleFieldForm({
   onNext: () => void;
   onPrevious: () => void;
   onClose: () => void;
-  onUpdateEstimation: (_: estimation) => void;
+  onUpdateEstimation: (_: EstimationWithAides) => void;
 }) {
   const initialValues = useMemo(
     () => ({
