@@ -14,11 +14,14 @@ import { useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-fi
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import toast from "react-hot-toast";
+import { useProjetsStore } from "@/stores/projets/provider";
 
 export const AideEdit = memo(() => {
   const estimationId = useParams().estimationId as string;
-  const skeletons = [...new Array(4)].map((_, i) => <AideCardSkeleton key={i} />);
   const { filters, toggleFilter } = useAideEstimationEditFilter();
+  const skeletons = [...new Array(4)].map((_, i) => <AideCardSkeleton key={i} />);
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const estimation = projet?.estimations.find((estimation) => estimation.id === +estimationId);
 
   const { data, isLoading } = useAidesByEstimationFetcher(estimationId);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
@@ -33,8 +36,13 @@ export const AideEdit = memo(() => {
           (aide) =>
             filters.showAidesFinancieres ||
             resolveAidType(aide.aid_types_full) !== TypeAidesTerritoiresAide.financement,
+        )
+        .filter(
+          (aide) =>
+            !filters.selectedAides ||
+            estimation?.estimations_aides.find((estimationAide) => estimationAide.aide.aideTerritoireId === aide.id),
         ),
-    [data?.results, filters.showAidesFinancieres, filters.showAidesIngenierie],
+    [data?.results, estimation?.estimations_aides, filters],
   );
 
   return (
@@ -51,6 +59,7 @@ export const AideEdit = memo(() => {
           toggleFilter={toggleFilter}
           aideFinanciereCount={aideFinanciereCount}
           aideTechniqueCount={aideTechniqueCount}
+          selectedAidesCount={estimation?.estimations_aides?.length || 0}
           isLoading={isLoading}
         />
 
