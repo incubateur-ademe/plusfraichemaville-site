@@ -15,6 +15,7 @@ import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic
 import { PFMV_ROUTES } from "@/helpers/routes";
 import toast from "react-hot-toast";
 import { useProjetsStore } from "@/stores/projets/provider";
+import { FAR_FUTURE } from "@/helpers/dateUtils";
 
 export const AideEdit = memo(() => {
   const estimationId = useParams().estimationId as string;
@@ -41,7 +42,10 @@ export const AideEdit = memo(() => {
           (aide) =>
             !filters.selectedAides ||
             estimation?.estimations_aides.find((estimationAide) => estimationAide.aide.aideTerritoireId === aide.id),
-        ),
+        )
+        .sort((a, b) => {
+          return new Date(a.submission_deadline || FAR_FUTURE) < new Date(b.submission_deadline || FAR_FUTURE) ? -1 : 0;
+        }),
     [data?.results, estimation?.estimations_aides, filters],
   );
 
