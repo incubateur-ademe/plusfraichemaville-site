@@ -8,14 +8,13 @@ import { AideCardSkeleton } from "./aide-card-skeleton";
 import { useAidesByEstimationFetcher } from "@/hooks/use-aides-by-estimation";
 import { AideEditFilter } from "./aide-edit-filter";
 import React, { memo, useMemo } from "react";
-import { countAidesByType, resolveAidType } from "../helpers";
+import { countAidesByType, resolveAidType, sumbissionDateSortApi } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/components/financement/types";
 import { useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import toast from "react-hot-toast";
 import { useProjetsStore } from "@/stores/projets/provider";
-import { FAR_FUTURE } from "@/helpers/dateUtils";
 
 export const AideEdit = memo(() => {
   const estimationId = useParams().estimationId as string;
@@ -43,9 +42,7 @@ export const AideEdit = memo(() => {
             !filters.selectedAides ||
             estimation?.estimations_aides.find((estimationAide) => estimationAide.aide.aideTerritoireId === aide.id),
         )
-        .sort((a, b) => {
-          return new Date(a.submission_deadline || FAR_FUTURE) < new Date(b.submission_deadline || FAR_FUTURE) ? -1 : 0;
-        }),
+        .sort(sumbissionDateSortApi),
     [data?.results, estimation?.estimations_aides, filters],
   );
 

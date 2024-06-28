@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 import { AideEstimationsPanelHeader } from "./aide-estimations-panel-header";
 import { AideCardWithFetcher } from "./aide-card-with-fetcher";
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
-import { countAidesByTypeFromDB } from "../helpers";
+import { countAidesByTypeFromDB, sumbissionDateSortBase } from "../helpers";
 
 type AideEstimationsCardWithSelectionProps = {
   estimationsAides: EstimationWithAides["estimations_aides"];
@@ -13,7 +13,7 @@ export const AideEstimationsCardWithSelection = ({
   estimationsAides,
   children,
 }: AideEstimationsCardWithSelectionProps) => {
-  const aidesId = estimationsAides.map(({ aideId }) => aideId);
+  const aidesId = estimationsAides.sort(sumbissionDateSortBase).map(({ aideId }) => aideId);
   const aidesTerritoires = estimationsAides.map((ea) => ea.aide);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByTypeFromDB(aidesTerritoires);
 
