@@ -65,4 +65,3 @@ export const sumbissionDateSortApi = (a: AidesTerritoiresAide, b: AidesTerritoir
 
 export const sumbissionDateSortBase = (a: EstimationAide, b: EstimationAide) =>
   dateSort(a.aide.submission_deadline, b.aide.submission_deadline);
-
