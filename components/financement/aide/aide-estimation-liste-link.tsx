@@ -8,13 +8,13 @@ type AideEstimationsListeLinkProps = {
   className?: string;
 } & PropsWithChildren;
 
-export const AideEstimationsListeLink = ({ projetId, estimationId }: AideEstimationsListeLinkProps) => {
+export const AideEstimationsListeLink = ({ projetId, estimationId, children }: AideEstimationsListeLinkProps) => {
   return (
     <Link
       className="fr-btn !ml-auto !block rounded-3xl"
       href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT(projetId, estimationId)}
     >
-      Modifier
+      {children}
     </Link>
   );
 };

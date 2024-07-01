@@ -8,7 +8,6 @@ type AideCardWithFetcherProps = {
   aideId: number;
 };
 export const AideCardWithFetcher = ({ aideId }: AideCardWithFetcherProps) => {
-  // TODO : create route for fetch a simple aide
   const { data, isLoading } = useImmutableSwrWithFetcher<AidesTerritoiresAide>(
     GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL(aideId),
   );

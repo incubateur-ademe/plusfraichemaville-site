@@ -31,7 +31,7 @@ export const AideEstimationsListe = () => {
         {estimations.map((estimation, index) => (
           <AideEstimationsCard estimation={estimation} key={index}>
             {estimation.estimations_aides.length > 0 ? (
-              <AideEstimationsCardWithSelection estimationsAides={estimation.estimations_aides}>
+              <AideEstimationsCardWithSelection estimation={estimation}>
                 <AideEstimationsListeLink
                   className="fr-btn !ml-auto mt-6 !block rounded-3xl"
                   projetId={projet?.id}
