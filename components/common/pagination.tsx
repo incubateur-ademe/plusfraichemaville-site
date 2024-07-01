@@ -1,4 +1,4 @@
-import { fr } from "@codegouvfr/react-dsfr";
+import clsx from "clsx";
 
 type PaginationProps = {
   count: number;
@@ -8,36 +8,54 @@ type PaginationProps = {
 
 export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps) => {
   const getPagination = (count: number, defaultPage: number) => {
-    const maxVisiblePages = 10;
+    const maxVisiblePages = 7;
+    const pages: { number: number | string; active: boolean }[] = [];
+    const item = { number: "...", active: false };
+
+    const addPage = (number: number) => pages.push({ number, active: defaultPage === number });
+
     if (count <= maxVisiblePages) {
-      return Array.from({ length: count }, (_, v) => ({
-        number: v + 1,
-        active: defaultPage === v + 1,
-      }));
+      for (let i = 1; i <= count; i++) {
+        addPage(i);
+      }
+      return pages;
     }
 
-    if (defaultPage > count - maxVisiblePages) {
-      return Array.from({ length: maxVisiblePages }, (_, v) => {
-        const pageNumber = count - (maxVisiblePages - v) + 1;
-        return {
-          number: pageNumber,
-          active: defaultPage === pageNumber,
-        };
-      });
+    if (defaultPage <= 4) {
+      for (let i = 1; i <= 5; i++) {
+        addPage(i);
+      }
+      pages.push(item);
+      addPage(count);
+    } else if (defaultPage >= count - 3) {
+      addPage(1);
+      pages.push(item);
+      for (let i = count - 4; i <= count; i++) {
+        addPage(i);
+      }
+    } else {
+      addPage(1);
+      pages.push(item);
+      for (let i = defaultPage - 1; i <= defaultPage + 1; i++) {
+        addPage(i);
+      }
+      pages.push(item);
+      addPage(count);
     }
-    return [];
+
+    return pages;
   };
 
-  const pages = getPagination(count, defaultPage!);
+  const pages = getPagination(count, defaultPage);
 
   return (
-    <div className={fr.cx("fr-grid-row", "fr-mt-5w")}>
-      <div className={fr.cx("fr-mx-auto")}>
-        <nav role="navigation" className={fr.cx("fr-pagination")} aria-label="Pagination">
-          <ul className={fr.cx("fr-pagination__list")}>
+    <div className={clsx("fr-grid-row")}>
+      <div className={clsx("fr-mx-auto")}>
+        <nav role="navigation" className={clsx("fr-pagination")} aria-label="Pagination">
+          <ul className={clsx("fr-pagination__list")}>
             <li>
               <button
-                className={fr.cx("fr-pagination__link", "fr-pagination__link--first")}
+                className={clsx("fr-pagination__link !mb-0", "fr-pagination__link--first")}
                 disabled={defaultPage === 1}
                 onClick={() => onPageChange(1)}
               >
@@ -46,27 +64,39 @@ export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps
             </li>
             <li>
               <button
-                className={fr.cx("fr-pagination__link", "fr-pagination__link--prev", "fr-pagination__link--lg-label")}
+                className={clsx(
+                  "fr-pagination__link !mb-0",
+                  "fr-pagination__link--prev",
+                  "fr-pagination__link--lg-label",
+                )}
                 disabled={defaultPage === 1}
                 onClick={() => onPageChange(defaultPage! - 1)}
               >
                 Page précédente
               </button>
             </li>
-            {pages.map((p) => (
-              <li key={p.number}>
-                <button
-                  className={fr.cx("fr-pagination__link")}
-                  disabled={p.active}
-                  onClick={() => onPageChange(p.number)}
-                >
-                  {p.number}
-                </button>
+            {pages.map((p, index) => (
+              <li key={index}>
+                {p.number === "..." ? (
+                  <span className={clsx("fr-pagination__link !mb-0")}>...</span>
+                ) : (
+                  <button
+                    className={clsx("fr-pagination__link !mb-0", { "fr-pagination__link--active": p.active })}
+                    disabled={p.active}
+                    onClick={() => onPageChange(+p.number)}
+                  >
+                    {p.number}
+                  </button>
+                )}
               </li>
             ))}
             <li>
               <button
-                className={fr.cx("fr-pagination__link", "fr-pagination__link--next", "fr-pagination__link--lg-label")}
+                className={clsx(
+                  "fr-pagination__link !mb-0",
+                  "fr-pagination__link--next",
+                  "fr-pagination__link--lg-label",
+                )}
                 disabled={defaultPage === count}
                 onClick={() => onPageChange(defaultPage! + 1)}
               >
@@ -75,7 +105,7 @@ export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps
             </li>
             <li>
               <button
-                className={fr.cx("fr-pagination__link", "fr-pagination__link--last")}
+                className={clsx("fr-pagination__link !mb-0", "fr-pagination__link--last")}
                 disabled={defaultPage === count}
                 onClick={() => onPageChange(count)}
               >

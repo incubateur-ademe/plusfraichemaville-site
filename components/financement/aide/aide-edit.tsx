@@ -17,31 +17,32 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 
 import { Pagination } from "@/components/common/pagination";
 import { usePagination } from "@/hooks/use-pagination";
+import toast from "react-hot-toast";
 
 export const AideEdit = memo(() => {
   const estimationId = useParams().estimationId as string;
   const skeletons = [...new Array(4)].map((_, i) => <AideCardSkeleton key={i} />);
-  const { filters, toggleFilter } = useAideEstimationEditFilter();
 
   const { data, isLoading } = useAidesByEstimationFetcher(estimationId);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
-  const filteredResults = useMemo(
-    () =>
-      data?.results
-        .filter(
-          (aide) =>
-            filters.showAidesIngenierie || resolveAidType(aide.aid_types_full) !== TypeAidesTerritoiresAide.ingenierie,
-        )
-        .filter(
-          (aide) =>
-            filters.showAidesFinancieres ||
-            resolveAidType(aide.aid_types_full) !== TypeAidesTerritoiresAide.financement,
-        ),
-    [data?.results, filters.showAidesFinancieres, filters.showAidesIngenierie],
-  );
+  const { filters, toggleFilter } = useAideEstimationEditFilter();
+
+  const filteredResults = useMemo(() => {
+    return data?.results
+      .filter(
+        (aide) =>
+          filters.showAidesIngenierie || resolveAidType(aide.aid_types_full) !== TypeAidesTerritoiresAide.ingenierie,
+      )
+      .filter(
+        (aide) =>
+          filters.showAidesFinancieres || resolveAidType(aide.aid_types_full) !== TypeAidesTerritoiresAide.financement,
+      );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [data?.results, filters.showAidesFinancieres, filters.showAidesIngenierie]);
 
   const { paginatedResults, currentPage, handlePageChange, itemsPerPage } = usePagination({
     data: filteredResults,
+    itemsPerPage: 6,
   });
 
   return (
@@ -65,27 +66,28 @@ export const AideEdit = memo(() => {
             : paginatedResults?.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <GenericFicheLink
           href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
-          className="fr-btn fr-btn--secondary rounded-3xl"
+          className="fr-btn fr-btn--secondary h-fit rounded-3xl"
         >
           Précédent
         </GenericFicheLink>
+        {filteredResults && (
+          <Pagination
+            count={Math.ceil(filteredResults.length / itemsPerPage)}
+            defaultPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        )}
         <GenericFicheLink
           href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
-          className="fr-btn fr-btn--primary rounded-3xl"
+          className="fr-btn fr-btn--primary h-fit rounded-3xl"
+          onClick={() => toast.success("Votre sélection a bien été validée")}
         >
           Valider
         </GenericFicheLink>
       </div>
-      {filteredResults && (
-        <Pagination
-          count={Math.ceil(filteredResults.length / itemsPerPage)}
-          defaultPage={currentPage}
-          onPageChange={handlePageChange}
-        />
-      )}
     </div>
   );
 });
