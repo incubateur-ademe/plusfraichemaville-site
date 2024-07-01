@@ -19,7 +19,7 @@ import { useProjetsStore } from "@/stores/projets/provider";
 export const AideEdit = memo(() => {
   const estimationId = useParams().estimationId as string;
   const { filters, toggleFilter } = useAideEstimationEditFilter();
-  const skeletons = [...new Array(4)].map((_, i) => <AideCardSkeleton key={i} />);
+  const skeletons = [...new Array(3)].map((_, i) => <AideCardSkeleton key={i} />);
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const estimation = projet?.estimations.find((estimation) => estimation.id === +estimationId);
 
