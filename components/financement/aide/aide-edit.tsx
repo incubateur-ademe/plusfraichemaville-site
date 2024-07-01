@@ -7,15 +7,16 @@ import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
 import { useAidesByEstimationFetcher } from "@/hooks/use-aides-by-estimation";
 import { AideEditFilter } from "./aide-edit-filter";
-import { memo, useMemo, useState } from "react";
+import { memo, useMemo } from "react";
 
 import { countAidesByType, resolveAidType } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/components/financement/types";
 import { useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
-import toast from "react-hot-toast";
+
 import { Pagination } from "@/components/common/pagination";
+import { usePagination } from "@/hooks/use-pagination";
 
 export const AideEdit = memo(() => {
   const estimationId = useParams().estimationId as string;
@@ -39,18 +40,7 @@ export const AideEdit = memo(() => {
     [data?.results, filters.showAidesFinancieres, filters.showAidesIngenierie],
   );
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const ITEMS_PER_PAGE = 40;
-
-  const paginatedResults = useMemo(() => {
-    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
-    const endIndex = startIndex + ITEMS_PER_PAGE;
-    return filteredResults?.slice(startIndex, endIndex);
-  }, [filteredResults, currentPage, ITEMS_PER_PAGE]);
-
-  const handlePageChange = (page: number) => {
-    setCurrentPage(page);
-  };
+  const { paginatedResults, currentPage, handlePageChange, itemsPerPage } = usePagination(filteredResults);
 
   return (
     <div className="fr-container pt-8">
@@ -83,14 +73,13 @@ export const AideEdit = memo(() => {
         <GenericFicheLink
           href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
           className="fr-btn fr-btn--primary rounded-3xl"
-          onClick={() => toast.success("Votre sélection a bien été validée")}
         >
           Valider
         </GenericFicheLink>
       </div>
       {filteredResults && (
         <Pagination
-          count={Math.ceil(filteredResults.length / ITEMS_PER_PAGE)}
+          count={Math.ceil(filteredResults.length / itemsPerPage)}
           defaultPage={currentPage}
           onPageChange={handlePageChange}
         />

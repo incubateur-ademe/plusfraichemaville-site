@@ -62,12 +62,12 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
       </div>
       <div className="w-full">
         <div className="mb-11">
-          <small className="text-dsfr-background-flat-info mb-5 block text-base font-bold">
+          <small className="mb-5 block text-base font-bold text-dsfr-background-flat-info">
             {"Porteur d'aide public"}
           </small>
-          <h1 className="text-dsfr-background-flat-info mb-10 text-[40px]">{aide.name}</h1>
+          <h1 className="mb-10 text-[40px] text-dsfr-background-flat-info">{aide.name}</h1>
           {aide.name_initial && (
-            <h2 className="text-dsfr-background-flat-info max-w-xl text-[22px] leading-7">
+            <h2 className="max-w-xl text-[22px] leading-7 text-dsfr-background-flat-info">
               {"Nom initial de l'aide"}
               <span className="block font-normal">{aide.name_initial}</span>
             </h2>
