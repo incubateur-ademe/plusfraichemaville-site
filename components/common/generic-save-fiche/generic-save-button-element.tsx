@@ -3,7 +3,7 @@ import { GenericSaveBaseProps } from ".";
 import { GenericSaveLabel } from "./generic-save-label";
 import { GenericSavePicto } from "./generic-save-picto";
 
-interface GenericSaveFicheButtonBaseProps extends GenericSaveBaseProps {
+interface GenericSaveFicheButtonBaseProps extends Omit<GenericSaveBaseProps, "type"> {
   className?: string;
   update: () => void;
   assets: {

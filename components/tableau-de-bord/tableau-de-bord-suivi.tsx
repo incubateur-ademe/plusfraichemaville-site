@@ -68,8 +68,9 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je trouve des financements",
     index: 5,
-    progress: "0",
-    disabled: true,
+    progress: (projet: ProjetWithRelations | undefined) =>
+      projet?.estimations?.find((estimation) => estimation.estimations_aides.length > 0) ? "100" : "0",
+    disabled: false,
     type: "financement",
     picto: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
     children: (

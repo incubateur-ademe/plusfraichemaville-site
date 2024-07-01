@@ -5,12 +5,11 @@ import { ResponseAction } from "../actions-types";
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { getEstimationById, updateEstimationMateriaux } from "@/lib/prisma/prismaEstimationQueries";
-import { estimation } from "@prisma/client";
 import {
   EstimationMateriauxFormData,
   EstimationMateriauxFormSchema,
 } from "@/forms/estimation/estimation-materiau-form-schema";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import {
   EstimationMateriauxFormSimpleFieldSchema,
   EstimationMateriauxSimpleFieldFormData,
@@ -19,7 +18,7 @@ import {
 export const updateEstimationMateriauxAction = async (
   estimationId: number,
   data: EstimationMateriauxFormData | EstimationMateriauxSimpleFieldFormData,
-): Promise<ResponseAction<{ updatedEstimation?: estimation }>> => {
+): Promise<ResponseAction<{ updatedEstimation?: EstimationWithAides }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };

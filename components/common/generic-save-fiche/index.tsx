@@ -4,6 +4,7 @@ import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { GenericSaveModal } from "./generic-save-modal";
 import { GenericSaveButton } from "./generic-save-button";
 import { generateRandomId } from "@/helpers/common";
+import clsx from "clsx";
 
 export type GenericSaveBaseProps = {
   type: "diagnostic" | "solution";
@@ -12,6 +13,7 @@ export type GenericSaveBaseProps = {
   withLabel?: boolean;
   withoutModal?: boolean;
   classNameButton?: string;
+  className?: string;
 };
 
 export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
@@ -21,7 +23,7 @@ export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
   });
 
   return (
-    <div data-id="generic-save-fiche">
+    <div data-id="generic-save-fiche" className={clsx(props.className)}>
       <GenericSaveButton modal={modal} {...props} />
       {!props.withoutModal && <GenericSaveModal modal={modal} {...props} />}
     </div>
