@@ -3,14 +3,16 @@ import { useState } from "react";
 export type AideEstimationEditFiltersState = {
   showAidesFinancieres: boolean;
   showAidesIngenierie: boolean;
+  selectedAides: boolean;
 };
 
-export type FichesDiagnosticFiltersKey = "showAidesFinancieres" | "showAidesIngenierie";
+export type FichesDiagnosticFiltersKey = "showAidesFinancieres" | "showAidesIngenierie" | "selectedAides";
 
 export const useAideEstimationEditFilter = () => {
   const [filters, setFilters] = useState<AideEstimationEditFiltersState>({
     showAidesFinancieres: true,
     showAidesIngenierie: true,
+    selectedAides: false,
   });
 
   const toggleFilter = (key: FichesDiagnosticFiltersKey) => {

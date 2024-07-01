@@ -1,3 +1,5 @@
+export const FAR_FUTURE = new Date(3024, 0, 0, 1);
+
 export function monthDateToString(value: Date | null | undefined): string {
   return value ? `${value.getFullYear()}-${("0" + (value.getMonth() + 1)).slice(-2)}` : "";
 }

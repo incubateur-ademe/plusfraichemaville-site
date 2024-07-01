@@ -23,16 +23,10 @@ const datas = {
 export const AideEstimationListeEmpty = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
 
-  const { estimations, fiches_solutions_id: fichesSolutions } = projet || {};
-
-  const hasEstimations = estimations && estimations?.length > 0;
+  const { fiches_solutions_id: fichesSolutions } = projet || {};
   const hasFichesSolutions = fichesSolutions && fichesSolutions?.length > 0;
 
   const data = datas[hasFichesSolutions ? "estimation" : "solution"];
-
-  if (hasEstimations && hasFichesSolutions) {
-    return null;
-  }
 
   return (
     <div>

@@ -9,17 +9,10 @@ import { AideEstimationsListeLink } from "./aide-estimation-liste-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import React from "react";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
+import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 
-export const AideEstimationsListe = () => {
+export const AideEstimationsListe = ({ estimations }: { estimations: EstimationWithAides[] }) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const { estimations, fiches_solutions_id: fichesSolutions } = projet || {};
-
-  const hasEstimations = estimations && estimations?.length > 0;
-  const hasFichesSolutions = fichesSolutions && fichesSolutions?.length > 0;
-
-  if (!hasEstimations || !hasFichesSolutions) {
-    return null;
-  }
 
   return (
     <div>
@@ -31,7 +24,7 @@ export const AideEstimationsListe = () => {
         {estimations.map((estimation, index) => (
           <AideEstimationsCard estimation={estimation} key={index}>
             {estimation.estimations_aides.length > 0 ? (
-              <AideEstimationsCardWithSelection estimationsAides={estimation.estimations_aides}>
+              <AideEstimationsCardWithSelection estimation={estimation}>
                 <AideEstimationsListeLink
                   className="fr-btn !ml-auto mt-6 !block rounded-3xl"
                   projetId={projet?.id}

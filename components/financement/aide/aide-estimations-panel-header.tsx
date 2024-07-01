@@ -1,11 +1,11 @@
-import { TypeEspace, selectEspaceByCode } from "@/components/filters/TypeEspaceFilter";
+import { selectEspaceByCode, TypeEspace } from "@/components/filters/TypeEspaceFilter";
 import { AideEstimationsCardLabelFicheSolution } from "./aide-estimations-card-label-fiche-solution";
 import { getRegionByDepartment } from "@/lib/departements";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { Separator, SeparatorY } from "@/components/common/separator";
+import { estimation } from "@prisma/client";
 
-export const AideEstimationsPanelHeader = () => {
-  const fichesSolutionsId = useProjetsStore((state) => state.getCurrentProjet()?.fiches_solutions_id);
+export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estimation }) => {
   const espace = useProjetsStore((state) => state.getCurrentProjet()?.type_espace) as TypeEspace["code"];
   const collectivite = useProjetsStore((state) => state.getCurrentProjet()?.collectivite);
   const commune = `${collectivite?.code_postal} ${collectivite?.nom}`;
@@ -21,7 +21,9 @@ export const AideEstimationsPanelHeader = () => {
         <h3 className="mb-0 text-xl text-pfmv-navy">{selectEspaceByCode(espace)}</h3>
       </div>
       <div className="mb-6 flex min-h-7 flex-wrap gap-4">
-        {fichesSolutionsId?.map((ficheId) => <AideEstimationsCardLabelFicheSolution ficheId={ficheId} key={ficheId} />)}
+        {estimation?.fiches_solutions_id?.map((ficheId) => (
+          <AideEstimationsCardLabelFicheSolution ficheId={ficheId} key={ficheId} />
+        ))}
       </div>
       <Separator className="mb-6 h-px !opacity-100" />
     </>

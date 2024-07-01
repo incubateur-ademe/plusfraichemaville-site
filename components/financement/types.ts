@@ -67,15 +67,6 @@ export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
   project_references: string[];
 }
 
-export type AideTerritoireBase = {
-  id: number;
-  aideTerritoireId: number;
-  submission_deadline: string | null;
-  type: string;
-  name: string | null;
-  financers: string[];
-};
-
 export enum TypeAidesTerritoiresAide {
   // eslint-disable-next-line no-unused-vars
   financement = "financement",
@@ -96,15 +87,4 @@ const aidesTerritoiresAideName = {
   IngenierieTechnique: "Ingénierie technique",
   IngenierieFinanciere: "Ingénierie financière",
   IngenierieJuridiqueAdministrative: "Ingénierie Juridique / administrative",
-} as const;
-
-export const aidesTerritoiresAideNameAndTypeMap: Record<AidesTerritoiresAideName, TypeAidesTerritoiresAide> = {
-  [aidesTerritoiresAideName.Subvention]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.Pret]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.AvanceRecuperable]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.CertificatEconomieEnergie]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.AutreAideFinanciere]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.IngenierieTechnique]: TypeAidesTerritoiresAide.ingenierie,
-  [aidesTerritoiresAideName.IngenierieFinanciere]: TypeAidesTerritoiresAide.ingenierie,
-  [aidesTerritoiresAideName.IngenierieJuridiqueAdministrative]: TypeAidesTerritoiresAide.ingenierie,
 } as const;

@@ -35,3 +35,9 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>
     `/espace-projet/${projetId}/financement/edit/${estimationId}`,
 };
+
+export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
+  `/api/get-aides-territoires-aide-by-aide-id?aideId=${aideId}`;
+
+export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
+  `/api/search-aides-for-estimation?estimationId=${estimationId}`;
