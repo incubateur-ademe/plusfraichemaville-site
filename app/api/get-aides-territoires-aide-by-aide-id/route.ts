@@ -4,9 +4,6 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/next-auth/auth";
 import { getAideById } from "@/lib/prisma/prismaAideQueries";
 
-export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
-  `/api/get-aides-territoires-aide-by-aide-id?aideId=${aideId}`;
-
 export async function GET(request: NextRequest) {
   const aideId = request.nextUrl.searchParams.get("aideId");
   if (!aideId) {

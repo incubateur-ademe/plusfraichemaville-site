@@ -7,7 +7,7 @@ import { generateRandomId } from "@/helpers/common";
 import clsx from "clsx";
 
 export type GenericSaveBaseProps = {
-  type: "diagnostic" | "solution" | "aide";
+  type: "diagnostic" | "solution";
   id: number;
   projectName?: string;
   withLabel?: boolean;
