@@ -7,13 +7,15 @@ import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
 import { useAidesByEstimationFetcher } from "@/hooks/use-aides-by-estimation";
 import { AideEditFilter } from "./aide-edit-filter";
-import React, { memo, useMemo } from "react";
+import { memo, useMemo, useState } from "react";
+
 import { countAidesByType, resolveAidType } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/components/financement/types";
 import { useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import toast from "react-hot-toast";
+import { Pagination } from "@/components/common/pagination";
 
 export const AideEdit = memo(() => {
   const estimationId = useParams().estimationId as string;
@@ -37,12 +39,23 @@ export const AideEdit = memo(() => {
     [data?.results, filters.showAidesFinancieres, filters.showAidesIngenierie],
   );
 
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 40;
+
+  const paginatedResults = useMemo(() => {
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    return filteredResults?.slice(startIndex, endIndex);
+  }, [filteredResults, currentPage, ITEMS_PER_PAGE]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
   return (
     <div className="fr-container pt-8">
-      <AideEstimationsListeHeader
-        // eslint-disable-next-line max-len
-        title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature"
-      />
+      {/* eslint-disable-next-line max-len */}
+      <AideEstimationsListeHeader title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature" />
       <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
         <AideEstimationsPanelHeader />
 
@@ -57,7 +70,7 @@ export const AideEdit = memo(() => {
         <div className="aide-card flex flex-wrap gap-6">
           {isLoading
             ? skeletons
-            : filteredResults?.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
+            : paginatedResults?.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
         </div>
       </div>
       <div className="flex justify-between">
@@ -75,6 +88,13 @@ export const AideEdit = memo(() => {
           Valider
         </GenericFicheLink>
       </div>
+      {filteredResults && (
+        <Pagination
+          count={Math.ceil(filteredResults.length / ITEMS_PER_PAGE)}
+          defaultPage={currentPage}
+          onPageChange={handlePageChange}
+        />
+      )}
     </div>
   );
 });
