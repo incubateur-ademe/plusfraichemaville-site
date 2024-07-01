@@ -40,7 +40,9 @@ export const AideEdit = memo(() => {
     [data?.results, filters.showAidesFinancieres, filters.showAidesIngenierie],
   );
 
-  const { paginatedResults, currentPage, handlePageChange, itemsPerPage } = usePagination(filteredResults);
+  const { paginatedResults, currentPage, handlePageChange, itemsPerPage } = usePagination({
+    data: filteredResults,
+  });
 
   return (
     <div className="fr-container pt-8">

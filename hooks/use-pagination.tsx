@@ -1,6 +1,12 @@
+import { scrollToTop } from "@/helpers/common";
 import { useState, useMemo } from "react";
 
-export const usePagination = <T,>(data?: T[], itemsPerPage: number = 12) => {
+type UsePaginationProps<T> = {
+  data?: T[];
+  itemsPerPage?: number;
+};
+
+export const usePagination = <T,>({ data, itemsPerPage = 12 }: UsePaginationProps<T>) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const paginatedResults = useMemo(() => {
@@ -13,6 +19,7 @@ export const usePagination = <T,>(data?: T[], itemsPerPage: number = 12) => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
+    scrollToTop();
   };
 
   return { paginatedResults, currentPage, totalPages, handlePageChange, itemsPerPage };
