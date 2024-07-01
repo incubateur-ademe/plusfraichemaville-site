@@ -1,8 +1,9 @@
-import { AidesTerritoiresAide } from "@/components/financement/types";
+import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "@/components/financement/types";
 import React from "react";
 // eslint-disable-next-line max-len
 import { AideEstimationsCardWarningRemainingDays } from "@/components/financement/aide/aide-estimations-card-warning-remaining-day";
 import { dateToStringWithoutTime } from "@/helpers/dateUtils";
+import { resolveAidType } from "@/components/financement/helpers";
 
 export type AidesTerritoiresAideLine = {
   title: string;
@@ -72,18 +73,32 @@ const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
   ),
 });
 
-export const AidesTerritoiresFullDetailedLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => [
-  AideLinePorteurAide(aide, true),
-  AideLineSubvention(aide, true),
-  AideLineRecurrence(aide),
-  AideLineBeneficiaire(aide, true),
-  AideLineZone(aide),
-  AideLineDateMaj(aide),
-];
+export const AidesTerritoiresFullDetailedLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => {
+  return resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement
+    ? [
+        AideLinePorteurAide(aide, true),
+        AideLineSubvention(aide, true),
+        AideLineRecurrence(aide),
+        AideLineBeneficiaire(aide, true),
+        AideLineZone(aide),
+        AideLineDateMaj(aide),
+      ]
+    : [
+        AideLinePorteurAide(aide, true),
+        AideLineRecurrence(aide),
+        AideLineBeneficiaire(aide, true),
+        AideLineZone(aide),
+        AideLineDateMaj(aide),
+      ];
+};
 
-export const AidesTerritoiresCardLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => [
-  AideLinePorteurAide(aide, false),
-  AideLineRecurrence(aide),
-  AideLineSubvention(aide, false),
-  AideLineCalendrier(aide),
-];
+export const AidesTerritoiresCardLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => {
+  return resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement
+    ? [
+        AideLinePorteurAide(aide, false),
+        AideLineRecurrence(aide),
+        AideLineSubvention(aide, false),
+        AideLineCalendrier(aide),
+      ]
+    : [AideLinePorteurAide(aide, false), AideLineRecurrence(aide), AideLineCalendrier(aide)];
+};
