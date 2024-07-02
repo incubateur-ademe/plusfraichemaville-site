@@ -13,7 +13,6 @@ type AideEstimationsCardDeadlineProps = {
 
 export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimationsCardDeadlineProps) => {
   const aideDeadlineAndName = getAideSubmissionDeadlineAndName(estimationsAides);
-  console.log({ aideDeadlineAndName });
 
   return (
     <CustomAccordion
