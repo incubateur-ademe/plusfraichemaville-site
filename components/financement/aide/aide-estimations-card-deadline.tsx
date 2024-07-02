@@ -13,10 +13,11 @@ type AideEstimationsCardDeadlineProps = {
 
 export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimationsCardDeadlineProps) => {
   const aideDeadlineAndName = getAideSubmissionDeadlineAndName(estimationsAides);
+  console.log({ aideDeadlineAndName });
 
   return (
     <CustomAccordion
-      title={`Mes échéances de candidature (${estimationsAides.length})`}
+      title={`Mes échéances de candidature (${aideDeadlineAndName.length})`}
       ariaId={`accordion-echeances-${estimationsAides[0].estimationId}`}
       expanded={false}
       className="mb-[14px] mt-4 rounded-2xl [&>h3>button]:!text-pfmv-navy"
