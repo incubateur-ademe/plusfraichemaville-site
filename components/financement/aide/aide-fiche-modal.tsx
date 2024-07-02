@@ -16,9 +16,7 @@ export const AideFicheModal = () => {
   const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
   useEffect(() => {
     if (currentDetailedAide) {
-      setTimeout(() => {
-        modal.open();
-      }, 150);
+      modal.open();
     }
   }, [currentDetailedAide]);
 
@@ -28,7 +26,7 @@ export const AideFicheModal = () => {
 
   return (
     <>
-      <modal.Component title="" size="large" className="aide-modal relative">
+      <modal.Component title="" size="large" className="aide-modal">
         {currentDetailedAide ? <AideFiche aide={currentDetailedAide} /> : <div>Chargement en cours...</div>}
       </modal.Component>
     </>
