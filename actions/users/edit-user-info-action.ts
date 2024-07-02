@@ -39,7 +39,7 @@ export const editUserInfoAction = async (
       const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
       const canalAcquisition =
         data.canalAcquisition === CUSTOM_CANAL_ACQUISITION.label
-          ? data.customCanalAcquisition ?? data.canalAcquisition
+          ? data.customCanalAcquisition || data.canalAcquisition
           : data.canalAcquisition;
 
       const updatedUser = await updateUser({
