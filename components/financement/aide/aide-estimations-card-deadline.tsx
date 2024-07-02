@@ -4,31 +4,26 @@ import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card
 import { dateToStringWithoutTime } from "@/helpers/dateUtils";
 import clsx from "clsx";
 import { Separator } from "@/components/common/separator";
-import { useState } from "react";
+import React from "react";
+import CustomAccordion from "@/components/common/CustomAccordion";
 
 type AideEstimationsCardDeadlineProps = {
   estimationsAides: EstimationWithAides["estimations_aides"];
 };
 
 export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimationsCardDeadlineProps) => {
-  const [show, setShow] = useState(false);
   const aideDeadlineAndName = getAideSubmissionDeadlineAndName(estimationsAides);
-  const toggle = () => setShow(!show);
-  console.log({ aideDeadlineAndName });
 
   return (
-    <div className="rounded-2xl bg-dsfr-background-alt-blue-france px-6 py-4">
-      <div className="flex cursor-pointer items-center gap-3" onClick={toggle}>
-        <i className="ri-calendar-2-fill size-4 text-pfmv-navy before:!size-4 before:!align-[0px]"></i>
-        {estimationsAides.length && (
-          <h3 className="mb-0 flex w-full items-center justify-between text-[22px] text-pfmv-navy">
-            Mes échéances de candidature ({aideDeadlineAndName.length})
-            {show ? <i className="ri-arrow-up-s-line"></i> : <i className="ri-arrow-down-s-line"></i>}
-          </h3>
-        )}
-      </div>
-
-      {show && (
+    <CustomAccordion
+      title={`Mes échéances de candidature (${estimationsAides.length})`}
+      ariaId={`accordion-echeances-${estimationsAides[0].estimationId}`}
+      expanded={false}
+      className="rounded-2xl [&>h3>button]:!text-pfmv-navy"
+      bgColor="!bg-dsfr-background-alt-blue-france"
+      picto={<i className="ri-calendar-2-fill mr-2 size-5 text-pfmv-navy before:!size-5 before:!align-[0px]"></i>}
+    >
+      <div className="mb-2 mt-4 flex flex-col gap-4">
         <ul className="mt-4 p-0">
           {aideDeadlineAndName.map(
             (aideDeadline, index) =>
@@ -49,7 +44,7 @@ export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimation
               ),
           )}
         </ul>
-      )}
-    </div>
+      </div>
+    </CustomAccordion>
   );
 };
