@@ -50,7 +50,7 @@ export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
   destinations: string[];
   start_date: string | null;
   predeposit_date: string | null;
-  submission_deadline: string | null;
+  submission_deadline: Date | null;
   subvention_comment: string | null;
   subvention_rate_lower_bound: number | null;
   subvention_rate_upper_bound: number | null;
@@ -70,7 +70,7 @@ export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
 export type AideTerritoireBase = {
   id: number;
   aideTerritoireId: number;
-  submission_deadline: string | null;
+  submission_deadline: Date | null;
   type: string;
   name: string | null;
   financers: string[];
