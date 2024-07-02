@@ -10,6 +10,7 @@ import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
+import { CUSTOM_CANAL_ACQUISITION } from "@/helpers/canalAcquisition";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },
@@ -36,6 +37,10 @@ export const editUserInfoAction = async (
         return { type: "error", message: "CHANGE_COLLECTIVITE_ERROR" };
       }
       const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
+      const canalAcquisition =
+        data.canalAcquisition === CUSTOM_CANAL_ACQUISITION.label
+          ? data.customCanalAcquisition || data.canalAcquisition
+          : data.canalAcquisition;
 
       const updatedUser = await updateUser({
         userId: data.userId,
@@ -43,6 +48,7 @@ export const editUserInfoAction = async (
         userNom: data.nom,
         userPoste: data.poste,
         collectiviteId: collectiviteId,
+        canalAcquisition: canalAcquisition,
       });
 
       revalidatePath(PFMV_ROUTES.MON_PROFIL);
