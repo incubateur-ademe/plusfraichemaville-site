@@ -4,6 +4,7 @@ import { AideCardWithFetcher } from "./aide-card-with-fetcher";
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 import { countAidesByTypeFromDB, sumbissionDateSortBase } from "../helpers";
 import clsx from "clsx";
+import { AideEstimationsCardRecap } from "./aide-estimations-recap";
 
 type AideEstimationsCardWithSelectionProps = {
   estimation: EstimationWithAides;
@@ -46,7 +47,12 @@ export const AideEstimationsCardWithSelection = ({ estimation, children }: AideE
           <AideCardWithFetcher aideId={aideId} key={aideId} />
         ))}
       </div>
-      {children}
+      <AideEstimationsCardRecap
+        isLoading={false}
+        countAides={{ aideFinanciereCount, aideTechniqueCount, verb: "sélectionné" }}
+      >
+        {children}
+      </AideEstimationsCardRecap>
     </>
   );
 };

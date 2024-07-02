@@ -44,7 +44,7 @@ export const AideEstimationsCardWithoutSelection = ({
           <span className="block">{`${entretienMin} - ${entretienMax} € HT / an`}</span>
         </div>
       </div>
-      <AideEstimationsCardRecap isLoading={isLoading} countAides={countAides}>
+      <AideEstimationsCardRecap isLoading={isLoading} countAides={{ ...countAides, verb: "trouvé" }}>
         {children}
       </AideEstimationsCardRecap>
     </>

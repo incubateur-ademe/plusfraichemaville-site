@@ -21,16 +21,7 @@ export const AideEstimationsCard = ({ estimation, children }: AideEstimationsCar
       <span className="mb-6 block text-black">Solutions pour lesquelles vous recherchez des financements</span>
       <Separator className="mb-4 h-px !opacity-100" />
       {children}
-      {hasSubmissionDeadline && (
-        <>
-          <div className="mb-4 mt-6 flex items-center gap-3">
-            <i className="ri-calendar-2-fill size-4 text-pfmv-navy before:!size-4 before:!align-[0px]"></i>
-            {ea.length && <h3 className="mb-0 text-[22px] text-pfmv-navy">Mes échéances de candidature</h3>}
-          </div>
-          <Separator className="h-px !opacity-100" />
-          <AideEstimationsCardDeadline estimationsAides={ea} />
-        </>
-      )}
+      {hasSubmissionDeadline && <AideEstimationsCardDeadline estimationsAides={ea} />}
     </div>
   );
 };
