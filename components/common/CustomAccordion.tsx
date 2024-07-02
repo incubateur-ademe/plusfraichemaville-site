@@ -1,6 +1,6 @@
 import React from "react";
 
-export default async function CustomAccordion({
+export default function CustomAccordion({
   title,
   expanded,
   ariaId,
