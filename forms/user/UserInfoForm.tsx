@@ -13,6 +13,9 @@ import { mapDBCollectiviteToCollectiviteAddress } from "@/lib/adresseApi/banApiH
 import { editUserInfoAction } from "@/actions/users/edit-user-info-action";
 import { notifications } from "@/components/common/notifications";
 import { useUserStore } from "@/stores/user/provider";
+import SelectFormField from "@/components/common/SelectFormField";
+import { canalAcquisitionUserOptions, CUSTOM_CANAL_ACQUISITION } from "@/helpers/canalAcquisition";
+import clsx from "clsx";
 
 export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite; buttonLabel: string }) => {
   const router = useRouter();
@@ -27,6 +30,8 @@ export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite
       email: user.email,
       poste: user.poste ?? "",
       collectivite: mapDBCollectiviteToCollectiviteAddress(userCollectivite?.collectivite) ?? undefined,
+      canalAcquisition: user.canal_acquisition ?? "",
+      customCanalAcquisition: user.canal_acquisition ?? "",
     },
   });
 
@@ -41,6 +46,7 @@ export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite
   };
 
   const disabled = form.formState.isSubmitting;
+  const watchCanalAcquisition = form.watch("canalAcquisition");
 
   return (
     <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
@@ -55,6 +61,23 @@ export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite
         disabled={!!userCollectivite}
       />
       <InputFormField control={form.control} path="poste" label="Mon poste dans la collectivité" asterisk={true} />
+      {!user.canal_acquisition && (
+        <>
+          <SelectFormField
+            control={form.control}
+            path="canalAcquisition"
+            label="Comment nous avez-vous connu ?"
+            placeholder="Sélectionnez le canal par lequel vous nous avez connu"
+            options={canalAcquisitionUserOptions()}
+          />
+          <InputFormField
+            control={form.control}
+            path="customCanalAcquisition"
+            label="Précisez..."
+            className={clsx(watchCanalAcquisition === CUSTOM_CANAL_ACQUISITION.label ? "block" : "hidden")}
+          />
+        </>
+      )}
       <Button className={`rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>
         {buttonLabel}
       </Button>
