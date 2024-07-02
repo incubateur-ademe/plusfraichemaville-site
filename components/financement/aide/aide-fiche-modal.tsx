@@ -16,7 +16,9 @@ export const AideFicheModal = () => {
   const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
   useEffect(() => {
     if (currentDetailedAide) {
-      modal.open();
+      setTimeout(() => {
+        modal.open();
+      }, 150);
     }
   }, [currentDetailedAide]);
 
