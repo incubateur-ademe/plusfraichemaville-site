@@ -97,14 +97,3 @@ const aidesTerritoiresAideName = {
   IngenierieFinanciere: "Ingénierie financière",
   IngenierieJuridiqueAdministrative: "Ingénierie Juridique / administrative",
 } as const;
-
-export const aidesTerritoiresAideNameAndTypeMap: Record<AidesTerritoiresAideName, TypeAidesTerritoiresAide> = {
-  [aidesTerritoiresAideName.Subvention]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.Pret]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.AvanceRecuperable]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.CertificatEconomieEnergie]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.AutreAideFinanciere]: TypeAidesTerritoiresAide.financement,
-  [aidesTerritoiresAideName.IngenierieTechnique]: TypeAidesTerritoiresAide.ingenierie,
-  [aidesTerritoiresAideName.IngenierieFinanciere]: TypeAidesTerritoiresAide.ingenierie,
-  [aidesTerritoiresAideName.IngenierieJuridiqueAdministrative]: TypeAidesTerritoiresAide.ingenierie,
-} as const;

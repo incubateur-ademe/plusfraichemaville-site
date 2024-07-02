@@ -1,6 +1,8 @@
-import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
-import { AideTerritoireBase, AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
+import { EstimationAide, EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
+import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
 import { ReactNode } from "react";
+import { FAR_FUTURE } from "@/helpers/dateUtils";
+import { aide } from "@prisma/client";
 
 export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): TypeAidesTerritoiresAide => {
   for (const aid of aid_types_full) {
@@ -25,7 +27,7 @@ export const countAidesByType = (aides: AidesTerritoiresAide[]) => {
   );
 };
 
-export const countAidesByTypeFromDB = (aides: AideTerritoireBase[]) => {
+export const countAidesByTypeFromDB = (aides: aide[]) => {
   return aides.reduce(
     (acc, current) => {
       if (current.type === TypeAidesTerritoiresAide.financement) {
@@ -54,3 +56,12 @@ export const processDescription = (description: ReactNode | string | string[] | 
   }
   return description as string;
 };
+
+const dateSort = (a: Date | string | null, b: Date | string | null) =>
+  new Date(a || FAR_FUTURE) < new Date(b || FAR_FUTURE) ? -1 : 0;
+
+export const sumbissionDateSortApi = (a: AidesTerritoiresAide, b: AidesTerritoiresAide) =>
+  dateSort(a.submission_deadline, b.submission_deadline);
+
+export const sumbissionDateSortBase = (a: EstimationAide, b: EstimationAide) =>
+  dateSort(a.aide.submission_deadline, b.aide.submission_deadline);

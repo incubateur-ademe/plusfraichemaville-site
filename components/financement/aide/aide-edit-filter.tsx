@@ -4,6 +4,7 @@ import { AideEstimationEditFiltersState, FichesDiagnosticFiltersKey } from "@/ho
 type AideEditFilterProps = {
   aideFinanciereCount: number;
   aideTechniqueCount: number;
+  selectedAidesCount: number;
   filters: AideEstimationEditFiltersState;
   toggleFilter: (_: FichesDiagnosticFiltersKey) => void;
   isLoading: boolean;
@@ -12,6 +13,7 @@ type AideEditFilterProps = {
 export const AideEditFilter = ({
   aideFinanciereCount,
   aideTechniqueCount,
+  selectedAidesCount,
   filters,
   toggleFilter,
   isLoading,
@@ -34,6 +36,15 @@ export const AideEditFilter = ({
         Aides techniques
         <div className={clsx(isLoading && "w-9 animate-pulse rounded-lg bg-pfmv-grey/20")}>
           {!isLoading && `(${aideTechniqueCount})`}
+        </div>
+      </div>
+      <div className="mb-10 flex cursor-pointer gap-2" onClick={() => toggleFilter("selectedAides")}>
+        <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
+          {filters.selectedAides && <i className="ri-check-line mr-2" />}
+        </div>
+        Mes aides sélectionnées
+        <div className={clsx(isLoading && "w-9 animate-pulse rounded-lg bg-pfmv-grey/20")}>
+          {!isLoading && `(${selectedAidesCount})`}
         </div>
       </div>
     </div>

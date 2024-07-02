@@ -7,7 +7,7 @@ import { useSession } from "next-auth/react";
 
 export type GenericSaveModalCommonProps = {
   modal: DSFRModal;
-  type: "solution" | "diagnostic" | "aide";
+  type: "solution" | "diagnostic";
   id: number;
 };
 

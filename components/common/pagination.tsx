@@ -3,7 +3,13 @@ import clsx from "clsx";
 type PaginationProps = {
   count: number;
   defaultPage: number;
-  onPageChange: (_page: number) => void;
+  onPageChange: (
+    _page: number,
+    _config?: {
+      needScrollToTop?: boolean;
+      nameId?: string | undefined;
+    },
+  ) => void;
 };
 
 export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps) => {
@@ -57,7 +63,7 @@ export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps
               <button
                 className={clsx("fr-pagination__link !mb-0", "fr-pagination__link--first")}
                 disabled={defaultPage === 1}
-                onClick={() => onPageChange(1)}
+                onClick={() => onPageChange(1, { nameId: "financement-pagination" })}
               >
                 Première page
               </button>
@@ -70,7 +76,7 @@ export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps
                   "fr-pagination__link--lg-label",
                 )}
                 disabled={defaultPage === 1}
-                onClick={() => onPageChange(defaultPage! - 1)}
+                onClick={() => onPageChange(defaultPage! - 1, { nameId: "financement-pagination" })}
               >
                 Page précédente
               </button>
@@ -83,7 +89,7 @@ export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps
                   <button
                     className={clsx("fr-pagination__link !mb-0", { "fr-pagination__link--active": p.active })}
                     disabled={p.active}
-                    onClick={() => onPageChange(+p.number)}
+                    onClick={() => onPageChange(+p.number, { nameId: "financement-pagination" })}
                   >
                     {p.number}
                   </button>
@@ -98,7 +104,7 @@ export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps
                   "fr-pagination__link--lg-label",
                 )}
                 disabled={defaultPage === count}
-                onClick={() => onPageChange(defaultPage! + 1)}
+                onClick={() => onPageChange(defaultPage! + 1, { nameId: "financement-pagination" })}
               >
                 Page suivante
               </button>
@@ -107,7 +113,7 @@ export const Pagination = ({ count, defaultPage, onPageChange }: PaginationProps
               <button
                 className={clsx("fr-pagination__link !mb-0", "fr-pagination__link--last")}
                 disabled={defaultPage === count}
-                onClick={() => onPageChange(count)}
+                onClick={() => onPageChange(count, { nameId: "financement-pagination" })}
               >
                 Dernière page
               </button>
