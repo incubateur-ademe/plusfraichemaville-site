@@ -7,12 +7,15 @@ import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
 import { useAidesByEstimationFetcher } from "@/hooks/use-aides-by-estimation";
 import { AideEditFilter } from "./aide-edit-filter";
-import React, { memo, useMemo } from "react";
+import { memo, useMemo } from "react";
 import { countAidesByType, resolveAidType, sumbissionDateSortApi } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/components/financement/types";
-import { useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
+import { FichesDiagnosticFiltersKey, useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
+
+import { Pagination } from "@/components/common/pagination";
+import { usePagination } from "@/hooks/use-pagination";
 import toast from "react-hot-toast";
 import { useProjetsStore } from "@/stores/projets/provider";
 
@@ -45,19 +48,26 @@ export const AideEdit = memo(() => {
         .sort(sumbissionDateSortApi),
     [data?.results, estimation?.estimations_aides, filters],
   );
+  const { paginatedResults, currentPage, handlePageChange, itemsPerPage } = usePagination({
+    data: filteredResults,
+    itemsPerPage: 6,
+  });
+
+  const handleFiltersChange = (key: FichesDiagnosticFiltersKey) => {
+    toggleFilter(key);
+    handlePageChange(1, { needScrollToTop: false });
+  };
 
   return (
-    <div className="fr-container pt-8">
-      <AideEstimationsListeHeader
-        // eslint-disable-next-line max-len
-        title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature"
-      />
+    <div className="fr-container pt-8" id="financement-pagination">
+      {/* eslint-disable-next-line max-len */}
+      <AideEstimationsListeHeader title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature" />
       <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
         <AideEstimationsPanelHeader estimation={estimation} />
 
         <AideEditFilter
           filters={filters}
-          toggleFilter={toggleFilter}
+          toggleFilter={handleFiltersChange}
           aideFinanciereCount={aideFinanciereCount}
           aideTechniqueCount={aideTechniqueCount}
           selectedAidesCount={estimation?.estimations_aides?.length || 0}
@@ -67,19 +77,26 @@ export const AideEdit = memo(() => {
         <div className="aide-card flex flex-wrap gap-6">
           {isLoading
             ? skeletons
-            : filteredResults?.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
+            : paginatedResults?.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
         </div>
       </div>
-      <div className="flex justify-between">
+      <div className="flex items-center justify-between">
         <GenericFicheLink
           href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
-          className="fr-btn fr-btn--secondary rounded-3xl"
+          className="fr-btn fr-btn--secondary h-fit rounded-3xl"
         >
           Précédent
         </GenericFicheLink>
+        {filteredResults && (
+          <Pagination
+            count={Math.ceil(filteredResults.length / itemsPerPage)}
+            defaultPage={currentPage}
+            onPageChange={handlePageChange}
+          />
+        )}
         <GenericFicheLink
           href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
-          className="fr-btn fr-btn--primary rounded-3xl"
+          className="fr-btn fr-btn--primary h-fit rounded-3xl"
           onClick={() => toast.success("Votre sélection a bien été validée")}
         >
           Valider

@@ -6,7 +6,7 @@ export const generateRandomId = () => Math.floor(Math.random() * 900000000) + 10
  */
 export const scrollToTop = (element?: string) => {
   const target = element && document.querySelector(element);
-  return element ? target && (target.scrollTop = 0) : window.scrollTo({ top: 0 });
+  return element ? target && target.scrollIntoView() : window.scrollTo({ top: 0 });
 };
 
 export enum TypeFiche {

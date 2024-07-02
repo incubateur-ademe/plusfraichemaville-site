@@ -42,10 +42,9 @@ export const countAidesByTypeFromDB = (aides: aide[]) => {
 };
 
 export const getAideSubmissionDeadlineAndName = (estimationAides: EstimationWithAides["estimations_aides"]) =>
-  estimationAides.map(({ aide: { submission_deadline, name } }) => ({
-    submission_deadline,
-    name,
-  }));
+  estimationAides
+    .filter(({ aide: { submission_deadline } }) => submission_deadline !== null)
+    .map(({ aide: { submission_deadline, name } }) => ({ submission_deadline, name }));
 
 export const processDescription = (description: ReactNode | string | string[] | null) => {
   if (Array.isArray(description)) {

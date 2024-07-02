@@ -9,12 +9,15 @@ type AideEstimationsCardRecapProps = {
   countAides: {
     aideFinanciereCount: number;
     aideTechniqueCount: number;
+    verb?: string;
   };
 } & PropsWithChildren;
 
 export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: AideEstimationsCardRecapProps) => {
   return (
-    <div className="flex h-24 items-center justify-between rounded-2xl bg-dsfr-background-alt-blue-france px-6 py-3">
+    <div
+      className={"mb-4 flex h-24 items-center justify-between rounded-2xl bg-dsfr-background-alt-blue-france px-6 py-3"}
+    >
       <div className="flex gap-8">
         <div className="flex items-center gap-4">
           <div className="flex gap-2">
@@ -33,7 +36,9 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
             <span className="block font-bold text-dsfr-background-flat-info">
               {countAides.aideFinanciereCount > 1 ? "financements" : "financement"}
             </span>
-            <span>{countAides.aideFinanciereCount > 1 ? "ont été trouvés" : "a été trouvé"}</span>
+            <span>
+              {countAides.aideFinanciereCount > 1 ? `ont été ${countAides.verb}s` : `a été ${countAides.verb}`}
+            </span>
           </div>
         </div>
         <SeparatorY />
@@ -54,7 +59,9 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
             <span className="block font-bold text-dsfr-background-flat-orange-terre-battue">
               {countAides.aideTechniqueCount > 1 ? "soutiens à l'ingénierie" : "soutien à l'ingénierie"}
             </span>
-            <span>{countAides.aideTechniqueCount > 1 ? "ont été trouvés" : "a été trouvé"}</span>
+            <span>
+              {countAides.aideTechniqueCount > 1 ? `ont été ${countAides.verb}s` : `a été ${countAides.verb}`}
+            </span>
           </div>
         </div>
       </div>
