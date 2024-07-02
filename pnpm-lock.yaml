@@ -21,8 +21,8 @@ importers:
         specifier: ^3.3.4
         version: 3.4.2(react-hook-form@7.51.5(react@18.3.1))
       '@incubateur-ademe/legal-pages-react':
-        specifier: ^0.2.0
-        version: 0.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^0.3.0
+        version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@prisma/client':
         specifier: ^5.9.1
         version: 5.14.0(prisma@5.14.0)
@@ -885,11 +885,11 @@ packages:
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
     deprecated: Use @eslint/object-schema instead
 
-  '@incubateur-ademe/legal-pages-markdown@0.2.0':
-    resolution: {integrity: sha512-t9rmsPagsDIVkalapaQ33C2W4omi1SPa9pfzoommH2lKjagbK+TkMRlKT+ZNaEJXJzG4SKZHm8g0FqkEYxtzvA==}
+  '@incubateur-ademe/legal-pages-markdown@0.3.0':
+    resolution: {integrity: sha512-DJ6OE+h/vaAFtGxwM1o0sRQvkQWvqQgMsFF9N/JVsVT21+DpR2wBSKWeBKZUxp75jeOqqGa8AGB1hS3kCR1xGQ==}
 
-  '@incubateur-ademe/legal-pages-react@0.2.0':
-    resolution: {integrity: sha512-wlM2MZakPycdfxFDJse1NYrnyrdMpmmCS0eahGGWOkyyqfLcDED26s32Wv2iUqLYFeuKAfHU9cQrjpoA+SvN5A==}
+  '@incubateur-ademe/legal-pages-react@0.3.0':
+    resolution: {integrity: sha512-69Z9SbyFzj3Y8BO8PWWpTOTJlgA9pT7oc4E19P4HtfVCo9wEP30BqsXgATE2P8wGWpklKm9GHA9S8ingfdVXuQ==}
     peerDependencies:
       react: ^18.3.0
       react-dom: ^18.3.0
@@ -7811,11 +7811,11 @@ snapshots:
 
   '@humanwhocodes/object-schema@2.0.3': {}
 
-  '@incubateur-ademe/legal-pages-markdown@0.2.0': {}
+  '@incubateur-ademe/legal-pages-markdown@0.3.0': {}
 
-  '@incubateur-ademe/legal-pages-react@0.2.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@incubateur-ademe/legal-pages-react@0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@incubateur-ademe/legal-pages-markdown': 0.2.0
+      '@incubateur-ademe/legal-pages-markdown': 0.3.0
       mustache: 4.2.0
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)

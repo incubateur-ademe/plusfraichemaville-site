@@ -11,6 +11,7 @@ export default async function PageMentionsLegales() {
       <LegalNotice
         siteName="Plus fraîche ma ville"
         licenceUrl="https://github.com/incubateur-ademe/plusfraichemaville-site/blob/main/LICENSE"
+        contactEmail="plusfraichemaville@ademe.fr"
         siteHost={{
           name: "Scalingo SAS",
           address: "155 bis Av. Pierre Brossolette 92240 Montrouge",
