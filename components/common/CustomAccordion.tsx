@@ -24,7 +24,7 @@ export default function CustomAccordion({
         <button
           className={clsx(
             "fr-accordion__btn bigIconAccordion !text-[1.375rem] !text-dsfr-text-title-grey" +
-              " rounded-2xl !bg-dsfr-background-alt-grey !px-6 !py-6 !font-bold",
+              " rounded-2xl !px-6 !py-6 !font-bold",
             bgColor ?? "!bg-dsfr-background-alt-grey",
           )}
           aria-expanded={expanded ? "true" : "false"}

@@ -89,6 +89,9 @@
 }
 .pfmv-card.no-shadow:hover {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+  .text-blue-hover {
+    color: var(--text-title-grey);
+  }
 }
 
 .fiche-solution-small-vertical-card {

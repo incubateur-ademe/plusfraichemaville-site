@@ -15,14 +15,12 @@ type AideEstimationsCardRecapProps = {
 
 export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: AideEstimationsCardRecapProps) => {
   return (
-    <div
-      className={"mb-4 flex h-24 items-center justify-between rounded-2xl bg-dsfr-background-alt-blue-france px-6 py-3"}
-    >
+    <div className={"flex h-24 items-center justify-between rounded-2xl bg-dsfr-background-alt-blue-france px-6 py-3"}>
       <div className="flex gap-8">
-        <div className="flex items-center gap-4">
+        <div className={clsx("flex items-center gap-4", !countAides.aideFinanciereCount && "contrast-0 saturate-0")}>
           <div className="flex gap-2">
             <Image src="/images/financement/financement.svg" width={41} height={38} alt="" />
-            <span className={clsx("text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-info")}>
+            <span className={clsx("text-block text-dsfr-background-flat-info pt-2 text-[68px] font-bold")}>
               {isLoading ? (
                 <div className="w-[100px]">
                   <Spinner circleColor="text-dsfr-background-flat-info" pathColor="fill-white" />
@@ -33,7 +31,7 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
             </span>
           </div>
           <div>
-            <span className="block font-bold text-dsfr-background-flat-info">
+            <span className="text-dsfr-background-flat-info block font-bold">
               {countAides.aideFinanciereCount > 1 ? "financements" : "financement"}
             </span>
             <span>
@@ -42,10 +40,10 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
           </div>
         </div>
         <SeparatorY />
-        <div className="flex items-center gap-4">
+        <div className={clsx("flex items-center gap-4", !countAides.aideTechniqueCount && "contrast-0 saturate-0")}>
           <div className="flex gap-2">
             <Image src="/images/financement/ingenierie.svg" width={41} height={38} alt="" />
-            <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-orange-terre-battue">
+            <span className="text-block text-dsfr-background-flat-orange-terre-battue pt-2 text-[68px] font-bold">
               {isLoading ? (
                 <div className="w-[100px]">
                   <Spinner circleColor="text-dsfr-background-flat-orange-terre-battue" pathColor="fill-white" />
@@ -56,7 +54,7 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
             </span>
           </div>
           <div>
-            <span className="block font-bold text-dsfr-background-flat-orange-terre-battue">
+            <span className="text-dsfr-background-flat-orange-terre-battue block font-bold">
               {countAides.aideTechniqueCount > 1 ? "soutiens à l'ingénierie" : "soutien à l'ingénierie"}
             </span>
             <span>

@@ -19,7 +19,7 @@ export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimation
       title={`Mes échéances de candidature (${estimationsAides.length})`}
       ariaId={`accordion-echeances-${estimationsAides[0].estimationId}`}
       expanded={false}
-      className="rounded-2xl [&>h3>button]:!text-pfmv-navy"
+      className="mb-[14px] mt-4 rounded-2xl [&>h3>button]:!text-pfmv-navy"
       bgColor="!bg-dsfr-background-alt-blue-france"
       picto={<i className="ri-calendar-2-fill mr-2 size-5 text-pfmv-navy before:!size-5 before:!align-[0px]"></i>}
     >

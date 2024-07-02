@@ -26,7 +26,7 @@ export const AideEstimationsCardWithoutSelection = ({
         {estimation.fiches_solutions_id.map((fiche, index) => (
           <FicheSolutionSmallCard
             ficheSolutionId={fiche}
-            className="w-52 shrink-0 rounded-2xl border-[1px] border-dsfr-border-default-grey"
+            className="pointer-events-none w-52 shrink-0 rounded-2xl border-[1px] border-dsfr-border-default-grey"
             key={index}
           />
         ))}
