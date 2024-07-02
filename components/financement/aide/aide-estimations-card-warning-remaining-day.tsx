@@ -13,7 +13,7 @@ export const AideEstimationsCardWarningRemainingDays = ({
       <div
         className={clsx(
           className,
-          "bg-dsfr-background-contrast-yellow-tournesol-hover shrink-0",
+          "shrink-0 bg-dsfr-background-contrast-yellow-tournesol-hover",
           "w-fit rounded-[4px] px-[6px] py-[2px] text-sm font-bold text-black",
         )}
       >
