@@ -11,7 +11,7 @@ import { memo, useMemo } from "react";
 
 import { countAidesByType, resolveAidType } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/components/financement/types";
-import { useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
+import { FichesDiagnosticFiltersKey, useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
@@ -45,6 +45,11 @@ export const AideEdit = memo(() => {
     itemsPerPage: 6,
   });
 
+  const handleFiltersChange = (key: FichesDiagnosticFiltersKey) => {
+    toggleFilter(key);
+    handlePageChange(1);
+  };
+
   return (
     <div className="fr-container pt-8">
       {/* eslint-disable-next-line max-len */}
@@ -54,7 +59,7 @@ export const AideEdit = memo(() => {
 
         <AideEditFilter
           filters={filters}
-          toggleFilter={toggleFilter}
+          toggleFilter={handleFiltersChange}
           aideFinanciereCount={aideFinanciereCount}
           aideTechniqueCount={aideTechniqueCount}
           isLoading={isLoading}
