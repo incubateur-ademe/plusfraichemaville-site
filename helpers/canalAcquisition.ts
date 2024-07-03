@@ -21,6 +21,9 @@ const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
     label: "Appel d’un chargé de déploiement",
   },
+  {
+    label: "Salon, événement local",
+  },
 ];
 
 export const canalAcquisitionUserOptions = (): SelectOption[] => {
