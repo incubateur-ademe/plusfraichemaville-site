@@ -46,6 +46,7 @@ model User {
   collectivites               user_collectivite[] @relation(name: "collectivite_belonging")
   selection_fiches_solutions  Json                @default("[]")
   selection_fiches_diagnostic Int[]               @default([])
+  canal_acquisition           String?
 }
 
 model VerificationToken {
