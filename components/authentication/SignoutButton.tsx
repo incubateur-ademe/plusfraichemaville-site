@@ -9,7 +9,7 @@ const SignoutButton = () => {
   const router = useRouter();
 
   const onLogout = async () => {
-    router.push(PFMV_ROUTES.DECONNEXION_AGENT_CONNECT);
+    router.push(PFMV_ROUTES.DECONNEXION);
   };
 
   return (
