@@ -17,7 +17,12 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
   return (
     <div className={"flex h-24 items-center justify-between rounded-2xl bg-dsfr-background-alt-blue-france px-6 py-3"}>
       <div className="flex gap-8">
-        <div className={clsx("flex items-center gap-4", !countAides.aideFinanciereCount && "contrast-0 saturate-0")}>
+        <div
+          className={clsx(
+            "flex items-center gap-4",
+            !isLoading && !countAides.aideFinanciereCount && "contrast-0 saturate-0",
+          )}
+        >
           <div className="flex gap-2">
             <Image src="/images/financement/financement.svg" width={41} height={38} alt="" />
             <span className={clsx("text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-info")}>
@@ -40,7 +45,12 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
           </div>
         </div>
         <SeparatorY className="h-14" />
-        <div className={clsx("flex items-center gap-4", !countAides.aideTechniqueCount && "contrast-0 saturate-0")}>
+        <div
+          className={clsx(
+            "flex items-center gap-4",
+            !isLoading && !countAides.aideTechniqueCount && "contrast-0 saturate-0",
+          )}
+        >
           <div className="flex gap-2">
             <Image src="/images/financement/ingenierie.svg" width={41} height={38} alt="" />
             <span className="text-block pt-2 text-[68px] font-bold text-dsfr-background-flat-orange-terre-battue">
