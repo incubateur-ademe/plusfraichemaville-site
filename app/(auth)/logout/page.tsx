@@ -8,7 +8,7 @@ export default function Logout() {
   const session = useSession();
   useEffect(() => {
     if (session.data) {
-      const callbackUrl = `/logout/agentconnect?id_token_hint=${session.data?.id_token}`;
+      const callbackUrl = `/logot/agentconnect?id_token_hint=${session.data?.id_token}`;
       signOut({ redirect: false, callbackUrl }).then((signOutResponse) => router.push(signOutResponse.url));
     }
   }, [router, session]);
