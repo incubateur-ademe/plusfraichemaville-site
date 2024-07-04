@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 export const AideEstimationsCardWarningRemainingDays = ({
   submissionDeadline,
-  size = "large",
+  size,
   className,
 }: {
   submissionDeadline: Date;
@@ -15,32 +15,22 @@ export const AideEstimationsCardWarningRemainingDays = ({
     return null;
   }
   return (
-    <>
-      {daysUntilSubmissionDate < 0 ? (
-        <div
-          className={clsx(
-            className,
-            "shrink-0 bg-dsfr-orange-warning",
-            "w-fit rounded-[4px] py-[4px] pl-1 pr-2 font-bold text-black",
-            size === "large" ? "text-sm" : "text-xs",
-          )}
-        >
-          <i className={clsx("ri-close-circle-line mr-1", size === "small" && "fr-icon--sm")}></i>
-          Expiré
-        </div>
-      ) : (
-        <div
-          className={clsx(
-            className,
-            "shrink-0 bg-dsfr-background-contrast-yellow-tournesol-hover",
-            "w-fit rounded-[4px] py-[4px] pl-1 pr-2 font-bold text-black",
-            size === "large" ? "text-sm" : "text-xs",
-          )}
-        >
-          <i className={clsx("ri-error-warning-line mr-1", size === "small" && "fr-icon--sm")}></i>
-          J-{daysUntilDate(submissionDeadline)}
-        </div>
+    <div
+      className={clsx(
+        className,
+        "w-fit shrink-0 rounded-[4px] py-[4px] pl-1 pr-2 font-bold text-black",
+        size === "large" ? "text-sm" : "text-xs",
+        daysUntilSubmissionDate < 0 ? "bg-dsfr-orange-warning" : "bg-dsfr-background-contrast-yellow-tournesol-hover",
       )}
-    </>
+    >
+      <i
+        className={clsx(
+          "mr-1",
+          size === "small" && "fr-icon--sm",
+          daysUntilSubmissionDate < 0 ? "ri-close-circle-line" : "ri-error-warning-line",
+        )}
+      />
+      {daysUntilSubmissionDate < 0 ? <>Expiré</> : <>J-{daysUntilDate(submissionDeadline)}</>}
+    </div>
   );
 };
