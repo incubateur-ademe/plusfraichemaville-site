@@ -73,7 +73,14 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
           </div>
         </div>
       </div>
-      {children}
+      {countAides.aideTechniqueCount > 0 || countAides.aideFinanciereCount > 0 ? (
+        <>{children}</>
+      ) : (
+        <div className="flex flex-row items-center gap-4">
+          <Image src={`/images/financement/no-result.svg`} alt="" width={45} height={42} />
+          <div className="text-lg font-bold text-dsfr-text-label-blue-france">Aucun résultat</div>
+        </div>
+      )}
     </div>
   );
 };
