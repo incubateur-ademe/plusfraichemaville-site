@@ -73,7 +73,7 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
           </div>
         </div>
       </div>
-      {countAides.aideTechniqueCount > 0 || countAides.aideFinanciereCount > 0 ? (
+      {countAides.aideTechniqueCount > 0 || countAides.aideFinanciereCount > 0 || isLoading ? (
         <>{children}</>
       ) : (
         <div className="flex flex-row items-center gap-4">

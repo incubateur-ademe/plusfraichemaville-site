@@ -1,6 +1,6 @@
 import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "../types";
 import Image from "next/image";
-import { resolveAidType } from "../helpers";
+import { getPerimeterScaleLabel, resolveAidType } from "../helpers";
 import clsx from "clsx";
 import { AideCardSaveButton } from "./aide-card-save-button";
 import { useParams } from "next/navigation";
@@ -55,7 +55,7 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
               "text-sm font-bold text-pfmv-navy",
             )}
           >
-            {aide.perimeter_scale}
+            {getPerimeterScaleLabel(aide.perimeter_scale)}
           </div>
           <h2 className="mb-6 text-lg">{aide.name}</h2>
           {AidesTerritoiresCardLines(aide).map((line) => (
