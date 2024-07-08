@@ -20,7 +20,7 @@ export const AideEditFilter = ({
 }: AideEditFilterProps) => {
   return (
     <div className="flex gap-5">
-      <div className="mb-10 flex cursor-pointer gap-2" onClick={() => toggleFilter("showAidesFinancieres")}>
+      <div className="flex cursor-pointer gap-2" onClick={() => toggleFilter("showAidesFinancieres")}>
         <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
           {filters.showAidesFinancieres && <i className="ri-check-line mr-2" />}
         </div>
@@ -29,7 +29,7 @@ export const AideEditFilter = ({
           {!isLoading && `(${aideFinanciereCount})`}
         </span>
       </div>
-      <div className="mb-10 flex cursor-pointer gap-2" onClick={() => toggleFilter("showAidesIngenierie")}>
+      <div className="flex cursor-pointer gap-2" onClick={() => toggleFilter("showAidesIngenierie")}>
         <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
           {filters.showAidesIngenierie && <i className="ri-check-line mr-2" />}
         </div>
@@ -38,7 +38,7 @@ export const AideEditFilter = ({
           {!isLoading && `(${aideTechniqueCount})`}
         </div>
       </div>
-      <div className="mb-10 flex cursor-pointer gap-2" onClick={() => toggleFilter("selectedAides")}>
+      <div className="flex cursor-pointer gap-2" onClick={() => toggleFilter("selectedAides")}>
         <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
           {filters.selectedAides && <i className="ri-check-line mr-2" />}
         </div>

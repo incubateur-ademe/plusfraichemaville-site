@@ -59,6 +59,9 @@ export const processDescription = (description: ReactNode | string | string[] | 
 const dateSort = (a: Date | string | null, b: Date | string | null) =>
   new Date(a || FAR_FUTURE) < new Date(b || FAR_FUTURE) ? -1 : 0;
 
+export const maxSubventionRateSortApi = (a: AidesTerritoiresAide, b: AidesTerritoiresAide) =>
+  (a.subvention_rate_upper_bound || 0) > (b.subvention_rate_upper_bound || 0) ? -1 : 0;
+
 export const sumbissionDateSortApi = (a: AidesTerritoiresAide, b: AidesTerritoiresAide) =>
   dateSort(a.submission_deadline, b.submission_deadline);
 
