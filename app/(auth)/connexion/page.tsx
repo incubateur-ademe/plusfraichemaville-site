@@ -30,7 +30,6 @@ const data = {
       title: "Trouvez des financements adaptés à votre projet",
       description: "Identifiez les aides et les contacts nécessaires pour préparer un dossier de financement.",
       picto: "financement",
-      comingSoon: true,
     },
     {
       title: "Lancez la mise-en-œuvre des solutions",
