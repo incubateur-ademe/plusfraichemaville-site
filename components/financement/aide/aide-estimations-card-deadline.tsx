@@ -32,10 +32,13 @@ export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimation
                   <span className="mr-2 inline-block font-bold">{aideDeadline.name} : </span>
                   <span className="block text-pretty">
                     <AideEstimationsCardWarningRemainingDays
-                      submissionDeadline={aideDeadline.submission_deadline}
+                      submissionDeadline={new Date(aideDeadline.submission_deadline)}
                       className="mr-4 inline-block"
+                      size="large"
                     />
-                    Échéance : {dateToStringWithoutTime(aideDeadline.submission_deadline)}
+                    <span className="align-middle">
+                      Échéance : {dateToStringWithoutTime(aideDeadline.submission_deadline)}
+                    </span>
                   </span>
                   {index !== aideDeadlineAndName.length - 1 && (
                     <Separator className="mb-3 mt-4 bg-dsfr-hover-blue-sun !opacity-10" />
