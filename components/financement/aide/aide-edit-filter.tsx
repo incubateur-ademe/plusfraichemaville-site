@@ -20,7 +20,10 @@ export const AideEditFilter = ({
 }: AideEditFilterProps) => {
   return (
     <div className="flex gap-5">
-      <div className="mb-10 flex cursor-pointer gap-2" onClick={() => toggleFilter("showAidesFinancieres")}>
+      <button
+        className="flex cursor-pointer gap-2 hover:!bg-white"
+        onClick={() => toggleFilter("showAidesFinancieres")}
+      >
         <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
           {filters.showAidesFinancieres && <i className="ri-check-line mr-2" />}
         </div>
@@ -28,8 +31,8 @@ export const AideEditFilter = ({
         <span className={clsx(isLoading && "w-9 animate-pulse rounded-lg bg-pfmv-grey/20")}>
           {!isLoading && `(${aideFinanciereCount})`}
         </span>
-      </div>
-      <div className="mb-10 flex cursor-pointer gap-2" onClick={() => toggleFilter("showAidesIngenierie")}>
+      </button>
+      <button className="flex cursor-pointer gap-2 hover:!bg-white" onClick={() => toggleFilter("showAidesIngenierie")}>
         <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
           {filters.showAidesIngenierie && <i className="ri-check-line mr-2" />}
         </div>
@@ -37,8 +40,8 @@ export const AideEditFilter = ({
         <div className={clsx(isLoading && "w-9 animate-pulse rounded-lg bg-pfmv-grey/20")}>
           {!isLoading && `(${aideTechniqueCount})`}
         </div>
-      </div>
-      <div className="mb-10 flex cursor-pointer gap-2" onClick={() => toggleFilter("selectedAides")}>
+      </button>
+      <button className="flex cursor-pointer gap-2 hover:!bg-white" onClick={() => toggleFilter("selectedAides")}>
         <div className="skrink-0 flex size-6 rounded-[4px] border-[1px] border-pfmv-navy text-pfmv-navy">
           {filters.selectedAides && <i className="ri-check-line mr-2" />}
         </div>
@@ -46,7 +49,7 @@ export const AideEditFilter = ({
         <div className={clsx(isLoading && "w-9 animate-pulse rounded-lg bg-pfmv-grey/20")}>
           {!isLoading && `(${selectedAidesCount})`}
         </div>
-      </div>
+      </button>
     </div>
   );
 };

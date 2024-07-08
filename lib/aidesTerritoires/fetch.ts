@@ -19,7 +19,8 @@ export const searchAidesFromAidesTerritoires = async (fichesSolutions: FicheSolu
   const perimeterId = await getPerimterIdIdOrFetchItFromAidesTerritoires(collectivite);
 
   return await callAidesTerritoiresApi<IApiAidesTerritoiresPaginatedAides>(
-    `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?perimeter=${perimeterId}&text=${motsCles}&itemsPerPage=1000`,
+    `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?perimeter=${perimeterId}&text=${motsCles}
+    &itemsPerPage=1000&targeted_audiences=commune&targeted_audiences=epci`,
   );
 };
 
