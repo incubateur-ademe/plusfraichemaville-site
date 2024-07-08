@@ -30,7 +30,7 @@ export const AideEstimationsCardWarningRemainingDays = ({
           daysUntilSubmissionDate < 0 ? "ri-close-circle-line" : "ri-error-warning-line",
         )}
       />
-      {daysUntilSubmissionDate < 0 ? <>Expiré</> : <>J-{daysUntilDate(submissionDeadline)}</>}
+      {daysUntilSubmissionDate < 0 ? <span>Expiré</span> : <span>J-{daysUntilDate(submissionDeadline)}</span>}
     </div>
   );
 };
