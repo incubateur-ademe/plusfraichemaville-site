@@ -16,3 +16,12 @@ export type DSFRModal = {
   isOpenedByDefault: boolean;
   id: string;
 };
+
+export type Page = {
+  params: {
+    [key: string]: string;
+  };
+  searchParams: {
+    [key: string]: string;
+  };
+};

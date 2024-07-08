@@ -24,7 +24,7 @@ export const AuthButtonUser = () => {
     },
     {
       label: isAuthanticated ? "Se déconnecter" : "Se connecter",
-      url: isAuthanticated ? PFMV_ROUTES.DECONNEXION_AGENT_CONNECT : PFMV_ROUTES.ESPACE_PROJET,
+      url: isAuthanticated ? PFMV_ROUTES.DECONNEXION : PFMV_ROUTES.ESPACE_PROJET,
       className: "text-dsfr-text-label-blue-france font-bold",
       shouldDisplay: true,
     },
