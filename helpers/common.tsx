@@ -6,7 +6,7 @@ export const generateRandomId = () => Math.floor(Math.random() * 900000000) + 10
  */
 export const scrollToTop = (element?: string) => {
   const target = element && document.querySelector(element);
-  return element ? target && (target.scrollTop = 0) : window.scrollTo({ top: 0 });
+  return element ? target && target.scrollIntoView() : window.scrollTo({ top: 0 });
 };
 
 export enum TypeFiche {
@@ -15,8 +15,21 @@ export enum TypeFiche {
   // eslint-disable-next-line no-unused-vars
   diagnostic,
 }
-
 export const highlightedIconClass = (typeFiche: TypeFiche) =>
   typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-border-action-high-error";
 
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
+
+export const nullFunctionalComponent = () => <></>;
+
+export const daysUntilDate = (targetDate: Date | null, maxRemainingDay: number = 45): number | null => {
+  if (!targetDate) {
+    return null;
+  }
+  const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+  const currentDate = new Date();
+  const differenceInDays = Math.ceil((targetDate.getTime() - currentDate.getTime()) / MS_PER_DAY);
+
+  return differenceInDays > 0 && differenceInDays <= maxRemainingDay ? differenceInDays : null;
+};

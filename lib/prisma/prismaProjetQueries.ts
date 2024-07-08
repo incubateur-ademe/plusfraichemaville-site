@@ -3,12 +3,20 @@ import { Prisma, projet } from "@prisma/client";
 import { ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
-import projetInclude = Prisma.projetInclude;
 
-const projetIncludes: projetInclude | null = {
+const projetIncludes = {
   collectivite: true,
   creator: true,
-  estimations: { where: { deleted_at: null } },
+  estimations: {
+    where: { deleted_at: null },
+    include: {
+      estimations_aides: {
+        include: {
+          aide: true,
+        },
+      },
+    },
+  },
 };
 
 export const updateFichesProjet = async (

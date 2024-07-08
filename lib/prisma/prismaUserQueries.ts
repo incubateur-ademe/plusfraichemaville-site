@@ -114,12 +114,14 @@ export const updateUser = async ({
   userPrenom,
   userPoste,
   collectiviteId,
+  canalAcquisition,
 }: {
   userId: string;
   userNom: string;
   userPrenom: string;
   userPoste: string;
   collectiviteId: number;
+  canalAcquisition?: string;
 }): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.update({
     where: {
@@ -136,6 +138,7 @@ export const updateUser = async ({
           create: { collectivite_id: collectiviteId, verified: false },
         },
       },
+      canal_acquisition: canalAcquisition,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });

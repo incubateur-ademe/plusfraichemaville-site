@@ -46,7 +46,7 @@ export const FichesSolutionsProjetsSelected = ({
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
         className="fr-btn fr-btn--secondary rounded-3xl"
       >
-        Aller au tableau de bord
+        Revenir au tableau de bord
       </GenericFicheLink>
     </div>
   );

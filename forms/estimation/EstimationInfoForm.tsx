@@ -15,12 +15,13 @@ import { FicheSolutionSmallCard } from "@/components/ficheSolution/fiche-solutio
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { useRouter } from "next/navigation";
 import { notifications } from "@/components/common/notifications";
+import { useModalStore } from "@/stores/modal/provider";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
   const router = useRouter();
 
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
-  const setCurrentEstimationId = useProjetsStore((state) => state.setCurrentEstimationId);
+  const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
     if (currentFicheSolutionIds.indexOf(ficheSolutionId) === -1)

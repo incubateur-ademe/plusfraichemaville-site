@@ -28,13 +28,12 @@ model Account {
 }
 
 model User {
-  id                String    @id @default(cuid())
-  email             String    @unique
-  emailVerified     DateTime?
-  image             String?
-  accounts          Account[]
-  agentconnect_info Json?
-
+  id                          String              @id @default(cuid())
+  email                       String              @unique
+  emailVerified               DateTime?
+  image                       String?
+  accounts                    Account[]
+  agentconnect_info           Json?
   nom                         String?
   prenom                      String?
   poste                       String?
@@ -47,6 +46,7 @@ model User {
   collectivites               user_collectivite[] @relation(name: "collectivite_belonging")
   selection_fiches_solutions  Json                @default("[]")
   selection_fiches_diagnostic Int[]               @default([])
+  canal_acquisition           String?
 }
 
 model VerificationToken {
@@ -58,19 +58,20 @@ model VerificationToken {
 }
 
 model collectivite {
-  id           Int                 @id
-  nom          String
-  code_insee   String?             @unique
-  code_postal  String?
-  adresse_info Json?
-  ban_id       String?             @unique
-  latitude     Float?
-  longitude    Float?
-  users        user_collectivite[] @relation(name: "users_in_collectivite")
-  created_by   String
-  creator      User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
-  created_at   DateTime            @default(now())
-  projet       projet[]
+  id                             Int                 @id
+  nom                            String
+  code_insee                     String?             @unique
+  code_postal                    String?
+  adresse_info                   Json?
+  ban_id                         String?             @unique
+  latitude                       Float?
+  longitude                      Float?
+  users                          user_collectivite[] @relation(name: "users_in_collectivite")
+  created_by                     String
+  creator                        User                @relation(name: "collectivite_creator", fields: [created_by], references: [id])
+  created_at                     DateTime            @default(now())
+  projet                         projet[]
+  aides_territoires_perimeter_id String?
 }
 
 enum RoleCollectivite {
@@ -111,18 +112,19 @@ model projet {
 }
 
 model estimation {
-  id                  Int       @id
+  id                  Int                 @id
   created_by          String
-  creator             User      @relation(name: "estimation_creator", fields: [created_by], references: [id])
-  created_at          DateTime  @default(now())
-  updated_at          DateTime  @default(now())
+  creator             User                @relation(name: "estimation_creator", fields: [created_by], references: [id])
+  created_at          DateTime            @default(now())
+  updated_at          DateTime            @default(now())
   projet_id           Int
-  projet              projet    @relation(fields: [projet_id], references: [id], onDelete: Cascade)
+  projet              projet              @relation(fields: [projet_id], references: [id], onDelete: Cascade)
   fiches_solutions_id Int[]
   materiaux           Json?
   deleted_at          DateTime?
   deleted_by          String?
-  deleter             User?     @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
+  deleter             User?               @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
+  estimations_aides   estimations_aides[]
 }
 
 enum TypeLieuClimadiag {
@@ -143,4 +145,24 @@ model climadiag {
   nuits_chaudes_prevision     Json
   jours_vdc_ref               Float
   jours_vdc_prevision         Json
+}
+
+model aide {
+  id                  Int                 @id @default(autoincrement())
+  aideTerritoireId    Int                 @unique
+  submission_deadline DateTime?           @db.Date
+  type                String
+  name                String?
+  financers           String[]
+  estimations_aides   estimations_aides[]
+}
+
+model estimations_aides {
+  id           Int        @default(autoincrement())
+  estimation   estimation @relation(fields: [estimationId], references: [id])
+  estimationId Int
+  aide         aide       @relation(fields: [aideId], references: [id])
+  aideId       Int
+
+  @@id([estimationId, aideId])
 }
