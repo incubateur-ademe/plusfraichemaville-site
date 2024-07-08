@@ -7,7 +7,9 @@ import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
-import { setBadgeOff, NotificationElements } from "@/helpers/notification-badge";
+import { NotificationElements, setBadgeOff } from "@/helpers/notification-badge";
+import { updateFichesProjetAction } from "@/actions/projets/update-fiches-projet-action";
+import { notifications } from "@/components/common/notifications";
 
 export const ModalSaveModalAuthenticatedOutsideProjet = ({
   modal,
@@ -16,11 +18,15 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
 }: GenericSaveModalCommonProps & { id: number }) => {
   const [selectedProjetId, setSelectedProjetId] = useState(-1);
   const projets = useProjetsStore((state) => state.projets);
-  const updateSelectedFiche = useProjetsStore((state) => state.updateSelectedFiches);
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
 
-  const validate = () => {
+  const validate = async () => {
     if (selectedProjetId > 0) {
-      updateSelectedFiche(type, +ficheId, selectedProjetId, true);
+      const update = await updateFichesProjetAction(selectedProjetId, +ficheId, type);
+      if (update.projet) {
+        addOrUpdateProjet(update.projet);
+      }
+      notifications(update.type, update.message);
     }
   };
 
