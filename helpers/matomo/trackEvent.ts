@@ -45,5 +45,7 @@ export const sanitizeMatomoUrl = (url: string) => {
     return url;
   }
   const projetId = espaceProjetSubstring.split("/")[0];
-  return !isNaN(+projetId) ? url.replace(projetId, "[projetId]") : url;
+  const urlWithoutProjetId = !isNaN(+projetId) ? url.replace(projetId, "[projetId]") : url;
+  const financementId = urlWithoutProjetId.split("/")[5];
+  return !isNaN(+financementId) ? urlWithoutProjetId.replace(financementId, "[financementId]") : urlWithoutProjetId;
 };
