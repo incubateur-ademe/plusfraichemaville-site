@@ -24,6 +24,9 @@ const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
     label: "Salon, événement local",
   },
+  {
+    label: "Recherche internet",
+  },
 ];
 
 export const canalAcquisitionUserOptions = (): SelectOption[] => {
