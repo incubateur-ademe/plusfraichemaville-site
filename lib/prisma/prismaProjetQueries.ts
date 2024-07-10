@@ -142,32 +142,53 @@ export const createOrUpdateProjet = async ({
   userId: string;
   collectiviteId: number;
 }) => {
-  return prismaClient.projet.upsert({
-    where: {
-      id: projetId ?? -1,
-      deleted_at: null,
-    },
-    create: {
-      id: generateRandomId(),
-      created_by: userId,
-      nom: nomProjet,
-      type_espace: typeEspace,
-      adresse,
-      adresse_info: adresse_info as Prisma.JsonObject,
-      niveau_maturite: niveauMaturite,
-      date_echeance: new Date(dateEcheance),
-      collectiviteId: collectiviteId,
-    },
-    update: {
-      nom: nomProjet,
-      type_espace: typeEspace,
-      adresse: adresse ?? null,
-      adresse_info: (adresse_info as Prisma.JsonObject) ?? null,
-      niveau_maturite: niveauMaturite,
-      date_echeance: new Date(dateEcheance),
-      collectiviteId: collectiviteId,
-    },
-    include: projetIncludes,
+  return prismaClient.$transaction(async (prisma) => {
+    const projet = await prisma.projet.upsert({
+      where: {
+        id: projetId ?? -1,
+        deleted_at: null,
+      },
+      create: {
+        id: generateRandomId(),
+        created_by: userId,
+        nom: nomProjet,
+        type_espace: typeEspace,
+        adresse,
+        adresse_info: adresse_info as Prisma.JsonObject,
+        niveau_maturite: niveauMaturite,
+        date_echeance: new Date(dateEcheance),
+        collectiviteId: collectiviteId,
+      },
+      update: {
+        nom: nomProjet,
+        type_espace: typeEspace,
+        adresse: adresse ?? null,
+        adresse_info: (adresse_info as Prisma.JsonObject) ?? null,
+        niveau_maturite: niveauMaturite,
+        date_echeance: new Date(dateEcheance),
+        collectiviteId: collectiviteId,
+      },
+      include: projetIncludes,
+    });
+
+    if (!projetId) {
+      const user = await prisma.user.findUnique({ where: { id: userId } });
+      if (!user) {
+        throw new Error("User not found");
+      }
+
+      await prisma.user_projet.create({
+        data: {
+          email_address: user.email,
+          role: "ADMIN",
+          projet_id: projet.id,
+          user_id: userId,
+          invitation_status: "ACCEPTED",
+        },
+      });
+    }
+
+    return projet;
   });
 };
 
