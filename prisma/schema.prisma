@@ -48,7 +48,6 @@ model User {
   selection_fiches_solutions  Json                @default("[]")
   selection_fiches_diagnostic Int[]               @default([])
   canal_acquisition           String?
-  user_projet                 user_projet[]
   user_projet_deleted         user_projet[]       @relation(name: "user_projet_deleter")
   discardedInformation        String[]
 }
@@ -96,7 +95,7 @@ enum InvitationStatus {
 }
 
 model user_projet {
-  id                String           @id @default(cuid())
+  id                Int              @id @default(autoincrement())
   email_address     String
   role              RoleProjet
   projet_id         Int
@@ -104,14 +103,12 @@ model user_projet {
   user_id           String?
   user              User?            @relation(name: "projet_access", fields: [user_id], references: [id])
   created_at        DateTime         @default(now())
-  invitation_token  String           @default(uuid())
+  invitation_token  String?          @default(uuid())
   invitation_status InvitationStatus
   deleted_at        DateTime?
   deleted_by        String?
   deleter           User?            @relation(name: "user_projet_deleter", fields: [deleted_by], references: [id])
   email             email[]
-  User              User?            @relation(fields: [userId], references: [id])
-  userId            String?
 
   @@unique([user_id, projet_id])
 }
@@ -134,7 +131,7 @@ model email {
   sending_time        DateTime     @default(now())
   brevo_id            String?
   email_status        emailStatus
-  user_projet_id      String?
+  user_projet_id      Int?
   user_projet         user_projet? @relation(fields: [user_projet_id], references: [id])
 }
 
