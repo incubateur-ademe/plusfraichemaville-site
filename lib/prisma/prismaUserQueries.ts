@@ -9,7 +9,7 @@ import {
 } from "@/components/common/generic-save-fiche/helpers";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { User } from "@prisma/client";
+import { RoleProjet, User } from "@prisma/client";
 
 export const saveAllFichesFromLocalStorage = async (
   userId: string,
@@ -142,4 +142,41 @@ export const updateUser = async ({
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
+};
+
+export const getUserProjectRole = async (userId: string, projectId: number): Promise<RoleProjet | null> => {
+  try {
+    const userProject = await prismaClient.user_projet.findUnique({
+      where: {
+        user_id_projet_id: {
+          user_id: userId,
+          projet_id: projectId,
+        },
+      },
+      select: {
+        role: true,
+      },
+    });
+
+    return userProject?.role ?? null;
+  } catch (error) {
+    console.log("Erreur lors de la récuparation du rôle : ", error);
+    throw error;
+  }
+};
+
+export const getOtherAdmins = async (currentUserId: string, projectId: number): Promise<boolean | undefined> => {
+  try {
+    const otherAdmins = await prismaClient.user_projet.findMany({
+      where: {
+        projet_id: projectId,
+        role: RoleProjet.ADMIN,
+        user_id: { not: currentUserId },
+      },
+    });
+    return otherAdmins.length > 0;
+  } catch (error) {
+    console.log("Erreur lors de la récuparation des autres admins : ", error);
+    throw error;
+  }
 };
