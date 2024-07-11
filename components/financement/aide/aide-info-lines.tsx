@@ -60,9 +60,9 @@ const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
   title: "Calendrier",
   picto: "ri-calendar-2-line",
   description: (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-3">
       {aide.submission_deadline && (
-        <AideEstimationsCardWarningRemainingDays submissionDeadline={new Date(aide.submission_deadline)} />
+        <AideEstimationsCardWarningRemainingDays submissionDeadline={new Date(aide.submission_deadline)} size="small" />
       )}
       <span>
         {aide.submission_deadline

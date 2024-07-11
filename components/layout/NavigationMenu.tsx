@@ -72,7 +72,7 @@ export default function NavigationMenu() {
                   },
                   {
                     linkProps: {
-                      href: PFMV_ROUTES.DECONNEXION_AGENT_CONNECT,
+                      href: PFMV_ROUTES.DECONNEXION,
                     },
                     text: "Se déconnecter",
                   },
