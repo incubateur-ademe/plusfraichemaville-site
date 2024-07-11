@@ -180,3 +180,28 @@ export const getOtherAdmins = async (currentUserId: string, projectId: number): 
     throw error;
   }
 };
+
+export const getOldestProjectAdmin = async (projectId: number) => {
+  return prismaClient.user_projet.findFirst({
+    where: {
+      projet_id: projectId,
+      role: RoleProjet.ADMIN,
+      deleted_at: null,
+    },
+    orderBy: {
+      created_at: "asc",
+    },
+    select: {
+      user: {
+        select: {
+          email: true,
+        },
+      },
+      projet: {
+        select: {
+          nom: true,
+        },
+      },
+    },
+  });
+};
