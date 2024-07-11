@@ -19,6 +19,11 @@ export const TableauDeBordTabs = () => {
       filter: "recommandation",
       component: <TableauDeBordRecommandation />,
     },
+    {
+      label: "Partage",
+      filter: "partage",
+      component: <>Partage</>,
+    },
   ];
 
   return (

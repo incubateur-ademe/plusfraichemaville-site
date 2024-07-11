@@ -2,6 +2,7 @@ import { createEmailRecord, updateEmailStatus as updateEmailStatusQuery } from "
 import { email, emailStatus, emailType } from "@prisma/client";
 import { brevoFetcher } from "./fetcher";
 import { getOldestProjectAdmin } from "@/lib/prisma/prismaUserQueries";
+import { ResponseAction } from "@/actions/actions-types";
 
 interface Templates {
   templateId: number;
@@ -13,7 +14,7 @@ export class EmailService {
   constructor() {
     this.templates = {
       projetInvitation: {
-        templateId: 1,
+        templateId: 15,
       },
       projetRequestAccess: {
         templateId: 2,
@@ -35,7 +36,7 @@ export class EmailService {
     to: string,
     type: emailType,
     params: Record<string, string>,
-  ): Promise<{ success: boolean; messageId?: string; error?: string }> {
+  ): Promise<ResponseAction<{ email?: email }>> {
     const { templateId } = this.templates[type];
 
     try {
@@ -47,9 +48,9 @@ export class EmailService {
       }
 
       const data = await response.json();
-      await this.updateEmailStatus(emailRecordId, emailStatus.SUCCESS, data.messageId);
+      const email = await this.updateEmailStatus(emailRecordId, emailStatus.SUCCESS, data.messageId);
 
-      return { success: true, messageId: data.messageId };
+      return { type: "success", message: "ESTIMATION_AIDE_ADDED", email };
     } catch (error) {
       console.error("Erreur lors de l'envoi du mail : ", error);
 
@@ -57,15 +58,16 @@ export class EmailService {
         await this.updateEmailStatus((error as any).emailRecordId, emailStatus.ERROR);
       }
 
-      return { success: false, error: error instanceof Error ? error.message : String(error) };
+      return { type: "error", message: "TECHNICAL_ERROR" };
     }
   }
 
   async sendInvitationEmail(userEmail: string, projectName: string, invitationLink: string) {
-    return this.sendEmail(userEmail, "projetInvitation", {
+    const response = await this.sendEmail(userEmail, "projetInvitation", {
       projectName,
       invitationLink,
     });
+    return response.email;
   }
 
   async sendRequestAccessEmail(projectId: number, requesterName: string, requestedLink: string) {

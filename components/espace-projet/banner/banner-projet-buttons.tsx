@@ -29,6 +29,11 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
       update: updateToRecommandationsViewed,
       picto: ({ active }: BannerPictoProps) => <BannerPictoRecommandations active={active} />,
     },
+    {
+      url: "partage" as const,
+      tooltip: "Partage",
+      picto: ({ active }: BannerPictoProps) => <BannerPictoRecommandations active={active} />,
+    },
   ];
 
   return (

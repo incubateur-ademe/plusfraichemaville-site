@@ -16,6 +16,7 @@ export const success = {
   USER_UPDATED: "Vos informations ont bien été enregistrées.",
   FICHE_SOLUTION_ADDED_TO_PROJET: "La fiche solution a bien été ajoutée au projet.",
   RECOMMANDATION_VIEWED_UPDATED: "Les recommandations vues ont été mises à jour.",
+  EMAIL_SENT: "L'email a été envoyé.",
 };
 
 export const error = {
