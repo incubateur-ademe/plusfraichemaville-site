@@ -14,12 +14,17 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
   };
 }>;
 
+export type UserProjetWithUser = Prisma.user_projetGetPayload<{
+  include: { user: true };
+}>;
+
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];
 
 export interface ProjetWithRelations extends projet {
   collectivite: collectivite;
   estimations: EstimationWithAides[];
   creator: User;
+  users: UserProjetWithUser[];
 }
 
 export type EstimationMateriauxFicheSolution = {
