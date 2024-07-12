@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
+  BannerPictoPartage,
   BannerPictoProps,
   BannerPictoRecommandations,
   BannerPictoTableauDeSuivi,
@@ -32,7 +33,7 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
     {
       url: "partage" as const,
       tooltip: "Partage",
-      picto: ({ active }: BannerPictoProps) => <BannerPictoRecommandations active={active} />,
+      picto: ({ active }: BannerPictoProps) => <BannerPictoPartage active={active} />,
     },
   ];
 

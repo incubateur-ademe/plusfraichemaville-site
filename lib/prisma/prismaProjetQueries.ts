@@ -17,6 +17,11 @@ const projetIncludes = {
       },
     },
   },
+  users: {
+    include: {
+      user: true,
+    },
+  },
 };
 
 export const updateFichesProjet = async (
