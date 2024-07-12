@@ -16,11 +16,7 @@ export const PartageOverviewMemberSection = ({ title, members, isFirst }: Partag
       {!isFirst && <h2 className="mb-3 text-[22px] text-pfmv-navy">{title}</h2>}
       {members.map((member, i) => (
         <PartageOverviewMember
-          name={`${member.user?.nom} ${member.user?.prenom}`}
-          poste={member.user?.poste}
-          email={member.user?.email}
-          role={member.role}
-          statut={member.invitation_status}
+          member={member}
           isCurrentUser={member.user_id === userId}
           key={member.id}
           className={clsx(

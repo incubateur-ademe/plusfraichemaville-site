@@ -4,9 +4,11 @@ import clsx from "clsx";
 
 import { useState } from "react";
 import { useModalStore } from "@/stores/modal/provider";
-import { PartageOverviewMemberProps } from "./partage-overview-member";
+import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 
-export type PartageOverviewMemberStatusAdminProps = Pick<PartageOverviewMemberProps, "name" | "poste" | "email">;
+export type PartageOverviewMemberStatusAdminProps = {
+  member: UserProjetWithUser;
+};
 
 export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberStatusAdminProps) => {
   const [open, setOpen] = useState(false);
