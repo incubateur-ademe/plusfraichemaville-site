@@ -18,6 +18,7 @@ export const PartageOverviewMemberSection = ({ title, members, isFirst }: Partag
         <PartageOverviewMember
           name={`${member.user?.nom} ${member.user?.prenom}`}
           poste={member.user?.poste}
+          email={member.user?.email}
           role={member.role}
           statut={member.invitation_status}
           isCurrentUser={member.user_id === userId}

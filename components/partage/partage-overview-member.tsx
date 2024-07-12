@@ -1,10 +1,12 @@
 import { InvitationStatus, RoleProjet } from "@prisma/client";
 import clsx from "clsx";
 import { PartageOverviewMemberSyllabes } from "./partage-overview-member-syllabes";
+import { PartageOverviewMemberStatusAdmin } from "./partage-overview-member-status-admin";
 
-type PartageOverviewMemberProps = {
+export type PartageOverviewMemberProps = {
   name?: string | null;
   poste?: string | null;
+  email?: string | null;
   role: RoleProjet;
   statut: InvitationStatus;
   className?: string;
@@ -14,6 +16,7 @@ type PartageOverviewMemberProps = {
 export const PartageOverviewMember = ({
   name,
   poste,
+  email,
   role,
   statut,
   className,
@@ -35,7 +38,9 @@ export const PartageOverviewMember = ({
       </span>
       <span className="w-full max-w-72 text-dsfr-text-mention-grey">{poste}</span>
       <span className="w-full max-w-56 lowercase">({role})</span>
-      <span className="w-full max-w-56">{statut}</span>
+      <span className="w-full max-w-56">
+        <PartageOverviewMemberStatusAdmin name={name} poste={poste} email={email} />
+      </span>
     </div>
   );
 };

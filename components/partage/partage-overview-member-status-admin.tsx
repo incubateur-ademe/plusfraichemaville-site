@@ -1,0 +1,67 @@
+"use client";
+
+import clsx from "clsx";
+
+import { useState } from "react";
+import { useModalStore } from "@/stores/modal/provider";
+import { PartageOverviewMemberProps } from "./partage-overview-member";
+
+export type PartageOverviewMemberStatusAdminProps = Pick<PartageOverviewMemberProps, "name" | "poste" | "email">;
+
+export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberStatusAdminProps) => {
+  const [open, setOpen] = useState(false);
+  const opener = () => setOpen(!open);
+  const closer = () => setOpen(false);
+  const setCurrentUserStatusModification = useModalStore((state) => state.setCurrentUserStatusModification);
+
+  const links = [
+    {
+      label: "Modifier les accès",
+      iconId: "ri-pencil-fill",
+      className: "text-dsfr-text-label-blue-france",
+    },
+    {
+      label: "Supprimer le membre",
+      iconId: "ri-delete-bin-fill",
+      className: "text-pfmv-climadiag-red",
+    },
+  ];
+
+  return (
+    <div className="relative flex items-center justify-between">
+      <div>
+        <i className="ri-checkbox-circle-fill mr-2 size-6 text-dsfr-background-action-high-success-hover"></i>
+        activé
+      </div>
+      <div className="shrink-0">
+        <button
+          onClick={opener}
+          className={clsx(
+            "block size-10 rounded-full border-[1px] border-solid border-dsfr-border-default-grey hover:!bg-white",
+          )}
+        >
+          <i className="ri-more-2-line size-6" />
+        </button>
+        {open && (
+          <div className={clsx("absolute right-0 top-[130%] z-10 bg-white px-5 pb-1 pt-3 shadow-pfmv-card-shadow")}>
+            <ul className="relative z-10 pl-0">
+              {links.map((link, index) => (
+                <li className={`mb-3 list-none text-sm ${link.className} font-bold`} key={index}>
+                  <i className={clsx(link.iconId, "mr-2 size-6 before:!size-5")} />
+                  <button
+                    onClick={() => {
+                      closer();
+                      setCurrentUserStatusModification(props);
+                    }}
+                  >
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};

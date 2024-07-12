@@ -8,7 +8,6 @@ type PartageOverviewMemberSyllabesProps = {
 
 export const PartageOverviewMemberSyllabes = ({ name, active }: PartageOverviewMemberSyllabesProps) => {
   const syllabes = name ? extractNameSyllables(name) : "-";
-  console.log(syllabes);
 
   return (
     <div
@@ -17,7 +16,7 @@ export const PartageOverviewMemberSyllabes = ({ name, active }: PartageOverviewM
         active ? "bg-dsfr-background-flat-info" : "bg-dsfr-background-action-high-purple-glycine-hover",
       )}
     >
-      {name ? extractNameSyllables(name) : "-"}
+      {syllabes}
     </div>
   );
 };
