@@ -3,6 +3,7 @@ import { EstimationMateriauModalContainer } from "@/components/estimation/materi
 import { AideFicheModal } from "@/components/financement/aide/aide-fiche-modal";
 // eslint-disable-next-line max-len
 import { PartageMemberModificationRoleModale } from "../partage/partage-member-modification-role-modale";
+import { PartageOverviewDeleteOrQuitModale } from "../partage/partage-overview-delete-or-quit-modale";
 
 export default function ModalProvider() {
   return (
@@ -10,6 +11,7 @@ export default function ModalProvider() {
       <EstimationMateriauModalContainer />
       <AideFicheModal />
       <PartageMemberModificationRoleModale />
+      <PartageOverviewDeleteOrQuitModale />
     </>
   );
 }

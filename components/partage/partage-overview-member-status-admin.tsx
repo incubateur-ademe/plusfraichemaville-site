@@ -15,17 +15,33 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
   const opener = () => setOpen(!open);
   const closer = () => setOpen(false);
   const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
+  const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
 
   const links = [
     {
       label: "Modifier les accès",
       iconId: "ri-pencil-fill",
       className: "text-dsfr-text-label-blue-france",
+      onClick: () => setCurrentUserModification(props),
     },
     {
       label: "Supprimer le membre",
       iconId: "ri-delete-bin-fill",
       className: "text-pfmv-climadiag-red",
+      onClick: () =>
+        setCurrentDeleteOrQuitModal({
+          member: props.member,
+          options: {
+            action: (projetId: string, currentUserId: number, userId: number) => {
+              console.log(projetId, currentUserId, userId);
+            },
+            confirmLabel: "Supprimer le projet",
+            title: "Supprimer le projet",
+            description:
+              // eslint-disable-next-line max-len
+              "Attention, cette action est irréversible va impacter les autres membres invités sur votre projet. Toutes les informations seront perdues.",
+          },
+        }),
     },
   ];
 
@@ -53,7 +69,7 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
                   <button
                     onClick={() => {
                       closer();
-                      setCurrentUserModification(props);
+                      link.onClick();
                     }}
                   >
                     {link.label}
