@@ -14,7 +14,7 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
   const [open, setOpen] = useState(false);
   const opener = () => setOpen(!open);
   const closer = () => setOpen(false);
-  const setCurrentUserStatusModification = useModalStore((state) => state.setCurrentUserStatusModification);
+  const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
 
   const links = [
     {
@@ -53,7 +53,7 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
                   <button
                     onClick={() => {
                       closer();
-                      setCurrentUserStatusModification(props);
+                      setCurrentUserModification(props);
                     }}
                   >
                     {link.label}

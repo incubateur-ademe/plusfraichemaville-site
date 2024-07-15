@@ -5,15 +5,13 @@ import { PartageOverviewMemberStatusAdminProps } from "@/components/partage/part
 interface ModalState {
   currentEstimationId: number | null;
   currentDetailedAide: AidesTerritoiresAide | null;
-  currentUserStatusModification: PartageOverviewMemberStatusAdminProps | null;
+  currentUserModification: PartageOverviewMemberStatusAdminProps | null;
 }
 
 export type ModalActions = {
   setCurrentEstimationId: (_estimationId: number | null) => void;
   setCurrentDetailedAide: (_currentDetailedAide: AidesTerritoiresAide | null) => void;
-  setCurrentUserStatusModification: (
-    _currentUserStatusModification: PartageOverviewMemberStatusAdminProps | null,
-  ) => void;
+  setCurrentUserModification: (_currentUserModification: PartageOverviewMemberStatusAdminProps | null) => void;
 };
 
 export type ModalStore = ModalState & ModalActions;
@@ -21,7 +19,7 @@ export type ModalStore = ModalState & ModalActions;
 export const defaultInitState: ModalState = {
   currentEstimationId: null,
   currentDetailedAide: null,
-  currentUserStatusModification: null,
+  currentUserModification: null,
 };
 
 export const initModalStore = (): ModalState => {
@@ -33,6 +31,6 @@ export const createModalStore = (initState: ModalState = defaultInitState) => {
     ...initState,
     setCurrentEstimationId: (currentEstimationId) => set(() => ({ currentEstimationId })),
     setCurrentDetailedAide: (currentDetailedAide) => set(() => ({ currentDetailedAide })),
-    setCurrentUserStatusModification: (currentUserStatusModification) => set(() => ({ currentUserStatusModification })),
+    setCurrentUserModification: (currentUserModification) => set(() => ({ currentUserModification })),
   }));
 };

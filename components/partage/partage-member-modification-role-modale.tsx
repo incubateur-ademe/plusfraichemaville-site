@@ -18,39 +18,39 @@ const modal = createModal({
   isOpenedByDefault: false,
 });
 
-export const PartageOverviewMemberStatusAdminModificationModale = () => {
-  const currentUserStatusModification = useModalStore((state) => state.currentUserStatusModification);
-  const setCurrentUserStatusModification = useModalStore((state) => state.setCurrentUserStatusModification);
+export const PartageMemberModificationRoleModale = () => {
+  const currentUserModification = useModalStore((state) => state.currentUserModification);
+  const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
   const form = useForm<PartageUserModificationData>({
     resolver: zodResolver(PartageUserModificationSchema),
     defaultValues: {
-      role: currentUserStatusModification?.member.role,
+      role: currentUserModification?.member.role,
     },
   });
   useEffect(() => {
-    if (currentUserStatusModification) {
+    if (currentUserModification) {
       modal.open();
       form.reset({
-        role: currentUserStatusModification.member.role,
+        role: currentUserModification.member.role,
       });
     }
-  }, [currentUserStatusModification, form]);
+  }, [currentUserModification, form]);
 
   useIsModalOpen(modal, {
-    onConceal: () => setCurrentUserStatusModification(null),
+    onConceal: () => setCurrentUserModification(null),
   });
 
   const onSubmit: SubmitHandler<PartageUserModificationData> = async (data) => {
-    console.log(data);
+    console.log(data, data.role);
   };
 
   // eslint-disable-next-line max-len
-  const name = `${currentUserStatusModification?.member.user?.prenom} ${currentUserStatusModification?.member.user?.nom}`;
+  const name = `${currentUserModification?.member.user?.prenom} ${currentUserModification?.member.user?.nom}`;
 
   return (
     <>
       <modal.Component title="" size="small" className="current-user-status-modale">
-        {currentUserStatusModification ? (
+        {currentUserModification ? (
           <>
             <form id="user-partage-modification" onSubmit={form.handleSubmit(onSubmit)}>
               <Input
@@ -64,14 +64,14 @@ export const PartageOverviewMemberStatusAdminModificationModale = () => {
                 label=""
                 disabled
                 nativeInputProps={{
-                  placeholder: currentUserStatusModification.member.user?.poste ?? "",
+                  placeholder: currentUserModification.member.user?.poste ?? "",
                 }}
               />
               <Input
                 label=""
                 disabled
                 nativeInputProps={{
-                  placeholder: currentUserStatusModification.member.user?.email ?? "",
+                  placeholder: currentUserModification.member.user?.email ?? "",
                 }}
               />
               <SelectFormField
