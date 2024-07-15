@@ -5,6 +5,10 @@ import clsx from "clsx";
 import { useState } from "react";
 import { useModalStore } from "@/stores/modal/provider";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { deleteUserFromProjetAction } from "@/actions/users/delete-user-from-projet";
+import { useUserStore } from "@/stores/user/provider";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { notifications } from "../common/notifications";
 
 export type PartageOverviewMemberStatusAdminProps = {
   member: UserProjetWithUser;
@@ -14,6 +18,8 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
   const [open, setOpen] = useState(false);
   const opener = () => setOpen(!open);
   const closer = () => setOpen(false);
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const projectId = useProjetsStore((state) => state.currentProjetId);
   const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
   const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
 
@@ -32,8 +38,11 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
         setCurrentDeleteOrQuitModal({
           member: props.member,
           options: {
-            action: (projetId: string, currentUserId: number, userId: number) => {
-              console.log(projetId, currentUserId, userId);
+            action: async () => {
+              if (currentUserId && props.member.user_id && projectId) {
+                const result = await deleteUserFromProjetAction(currentUserId, props.member.user_id, projectId);
+                notifications(result.type, result.message);
+              }
             },
             confirmLabel: "Supprimer le projet",
             title: "Supprimer le projet",

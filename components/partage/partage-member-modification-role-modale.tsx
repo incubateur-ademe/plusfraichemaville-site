@@ -12,6 +12,12 @@ import {
   PartageUserModificationSchema,
 } from "@/forms/partage/partage-user-modification-schema";
 import SelectFormField from "../common/SelectFormField";
+import { updateUserRoleProjectAction } from "@/actions/users/update-user-role-project";
+import { useUserStore } from "@/stores/user/provider";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { RoleProjet } from "@prisma/client";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { notifications } from "../common/notifications";
 
 const modal = createModal({
   id: "user-status-modification",
@@ -19,6 +25,8 @@ const modal = createModal({
 });
 
 export const PartageMemberModificationRoleModale = () => {
+  const userId = useUserStore((state) => state.userInfos?.id);
+  const projetId = useProjetsStore((state) => state.getCurrentProjet()?.id);
   const currentUserModification = useModalStore((state) => state.currentUserModification);
   const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
   const form = useForm<PartageUserModificationData>({
@@ -41,7 +49,14 @@ export const PartageMemberModificationRoleModale = () => {
   });
 
   const onSubmit: SubmitHandler<PartageUserModificationData> = async (data) => {
-    console.log(data, data.role);
+    if (userId && currentUserModification?.member.user_id && projetId) {
+      const result = await updateUserRoleProjectAction(
+        currentUserModification?.member.user_id.toString(),
+        projetId,
+        data.role as RoleProjet,
+      );
+      notifications(result.type, result.message);
+    }
   };
 
   // eslint-disable-next-line max-len
@@ -49,7 +64,7 @@ export const PartageMemberModificationRoleModale = () => {
 
   return (
     <>
-      <modal.Component title="" size="small" className="current-user-status-modale">
+      <modal.Component title="" size="small" className="current-user-status-modale min-h-[376px]">
         {currentUserModification ? (
           <>
             <form id="user-partage-modification" onSubmit={form.handleSubmit(onSubmit)}>
@@ -84,6 +99,14 @@ export const PartageMemberModificationRoleModale = () => {
                   { name: "Lecteur", value: "LECTEUR" },
                 ]}
               />
+              <div className="flex justify-between">
+                <Button priority="tertiary" onClick={modal.close} className="mr-4">
+                  Annuler
+                </Button>
+                <Button priority="primary" onClick={modal.close}>
+                  Sauvegarder
+                </Button>
+              </div>
             </form>
           </>
         ) : (

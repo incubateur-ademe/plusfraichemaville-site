@@ -39,18 +39,21 @@ export const PartageOverviewDeleteOrQuitModale = () => {
 
   return (
     <>
-      <modal.Component title="" size="large" className="current-user-status-modale">
+      <modal.Component title="" size="large" className="current-user-status-modale min-h-[296px]">
         <div>
           <h2 className="mb-4 text-2xl">{currentDeleteOrQuitModal?.options.title}</h2>
           <p className="mb-4">{currentDeleteOrQuitModal?.options.description}</p>
           <div className="ml-auto w-fit">
-            <Button priority="tertiary" className="mr-4">
+            <Button priority="tertiary" className="mr-4" onClick={modal.close}>
               Annuler
             </Button>
             <Button
               priority="tertiary"
               className="!text-pfmv-climadiag-red"
-              onClick={() => currentDeleteOrQuitModal?.options.action()}
+              onClick={() => {
+                currentDeleteOrQuitModal?.options.action();
+                modal.close();
+              }}
             >
               {currentDeleteOrQuitModal?.options.confirmLabel}
             </Button>

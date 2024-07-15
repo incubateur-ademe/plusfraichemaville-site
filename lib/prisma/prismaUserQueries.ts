@@ -8,7 +8,7 @@ import {
   mergeFicheBookmarkedSolutions,
 } from "@/components/common/generic-save-fiche/helpers";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUser, UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { RoleProjet, User } from "@prisma/client";
 
 export const saveAllFichesFromLocalStorage = async (
@@ -204,4 +204,47 @@ export const getOldestProjectAdmin = async (projectId: number) => {
       },
     },
   });
+};
+
+export const updateUserRoleProject = async (
+  userId: string,
+  projectId: number,
+  newRole: RoleProjet,
+): Promise<UserProjetWithUser> => {
+  const updatedUserProject = await prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: {
+        user_id: userId,
+        projet_id: projectId,
+      },
+    },
+    data: {
+      role: newRole,
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  return updatedUserProject;
+};
+
+export const deleteUserFromProject = async (userId: string, projectId: number, deletedById: string) => {
+  const softDeletedUserProject = await prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: {
+        user_id: userId,
+        projet_id: projectId,
+      },
+    },
+    data: {
+      deleted_at: new Date(),
+      deleted_by: deletedById,
+    },
+    include: {
+      user: true,
+    },
+  });
+
+  return softDeletedUserProject;
 };
