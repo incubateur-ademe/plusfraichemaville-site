@@ -10,7 +10,7 @@ export type PartageOverviewMemberProps = {
 };
 
 export const PartageOverviewMember = ({ className, member, isCurrentUser }: PartageOverviewMemberProps) => {
-  const name = `${member.user?.prenom} ${member.user?.nom}`;
+  const name = `${member.user?.prenom ?? "-"} ${member.user?.nom ?? "-"}`;
   return (
     <div
       className={clsx(
