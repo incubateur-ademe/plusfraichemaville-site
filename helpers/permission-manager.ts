@@ -49,15 +49,11 @@ export class PermissionManager {
 
     if (updatingUserRole !== RoleProjet.ADMIN) {
       return false;
-    }
-
-    if (updatingUserId === targetUserId) {
+    } else if (updatingUserId === targetUserId) {
       const otherAdminsExist = await this.checkOtherAdminsExist(updatingUserId, projectId);
       if (!otherAdminsExist) {
         return false;
       }
-    }
-
-    return true;
+    } else return true;
   }
 }

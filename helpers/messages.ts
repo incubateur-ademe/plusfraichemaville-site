@@ -17,6 +17,8 @@ export const success = {
   FICHE_SOLUTION_ADDED_TO_PROJET: "La fiche solution a bien été ajoutée au projet.",
   RECOMMANDATION_VIEWED_UPDATED: "Les recommandations vues ont été mises à jour.",
   EMAIL_SENT: "L'email a été envoyé.",
+  ROLE_UPDATED: "Le nouveau rôle a bien été enregistré.",
+  USER_DELETED_FROM_PROJECT: "Le membre a bien été supprimé du projet.",
 };
 
 export const error = {
