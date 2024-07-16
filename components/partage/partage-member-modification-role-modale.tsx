@@ -35,6 +35,7 @@ export const PartageMemberModificationRoleModale = () => {
       role: currentUserModification?.member.role,
     },
   });
+
   useEffect(() => {
     if (currentUserModification) {
       modal.open();
@@ -67,6 +68,7 @@ export const PartageMemberModificationRoleModale = () => {
       <modal.Component title="" size="small" className="current-user-status-modale min-h-[376px]">
         {currentUserModification ? (
           <>
+            <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Modifier les informations {"d'un member"}</h2>
             <form id="user-partage-modification" onSubmit={form.handleSubmit(onSubmit)}>
               <Input
                 label=""
@@ -100,10 +102,16 @@ export const PartageMemberModificationRoleModale = () => {
                 ]}
               />
               <div className="flex justify-between">
-                <Button priority="tertiary" onClick={modal.close} className="mr-4">
+                <Button
+                  priority="tertiary"
+                  onClick={modal.close}
+                  nativeButtonProps={modal}
+                  type="button"
+                  className="mr-4"
+                >
                   Annuler
                 </Button>
-                <Button priority="primary" onClick={modal.close}>
+                <Button priority="primary" type="submit" onClick={modal.close}>
                   Sauvegarder
                 </Button>
               </div>

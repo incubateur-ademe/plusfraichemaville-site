@@ -7,6 +7,7 @@ import {
   mergeFicheBookmarkedDiagnostic,
   mergeFicheBookmarkedSolutions,
 } from "@/components/common/generic-save-fiche/helpers";
+import { generateRandomId } from "@/helpers/common";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserProjetWithUser, UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { RoleProjet, User } from "@prisma/client";
@@ -230,7 +231,7 @@ export const updateUserRoleProject = async (
 };
 
 export const deleteUserFromProject = async (userId: string, projectId: number, deletedById: string) => {
-  const softDeletedUserProject = await prismaClient.user_projet.update({
+  const deletedUser = await prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
         user_id: userId,
@@ -246,5 +247,69 @@ export const deleteUserFromProject = async (userId: string, projectId: number, d
     },
   });
 
-  return softDeletedUserProject;
+  return deletedUser;
+};
+
+export const inviteMember = async (projectId: number, email: string, role: RoleProjet) => {
+  return prismaClient.$transaction(async (tx) => {
+    let user = await tx.user.findUnique({
+      where: { email },
+      select: { id: true },
+    });
+
+    if (!user) {
+      user = await tx.user.create({
+        data: {
+          email,
+          emailVerified: null,
+        },
+        select: { id: true },
+      });
+    }
+
+    const existingInvitation = await tx.user_projet.findFirst({
+      where: {
+        projet_id: projectId,
+        email_address: email,
+      },
+    });
+
+    const invitationToken = `${generateRandomId()}`;
+    let userProject;
+
+    if (existingInvitation && existingInvitation.invitation_status === "INVITED") {
+      userProject = await tx.user_projet.update({
+        where: { id: existingInvitation.id },
+        data: {
+          role,
+          deleted_at: null,
+          deleted_by: null,
+          user_id: user.id,
+          invitation_token: invitationToken,
+        },
+      });
+    } else {
+      userProject = await tx.user_projet.create({
+        data: {
+          projet_id: projectId,
+          email_address: email,
+          role,
+          invitation_status: "INVITED",
+          user_id: user.id,
+          invitation_token: invitationToken,
+        },
+      });
+    }
+
+    const invitationEmail = await tx.email.create({
+      data: {
+        destination_address: email,
+        type: "projetInvitation",
+        email_status: "PENDING",
+        user_projet_id: userProject.id,
+      },
+    });
+
+    return { userProject, invitationEmail, userId: user.id };
+  });
 };

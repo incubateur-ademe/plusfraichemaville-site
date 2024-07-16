@@ -44,11 +44,11 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
                 notifications(result.type, result.message);
               }
             },
-            confirmLabel: "Supprimer le projet",
-            title: "Supprimer le projet",
+            confirmLabel: "Supprimer le membre",
+            title: "Supprimer le membre",
             description:
               // eslint-disable-next-line max-len
-              "Attention, cette action est irréversible va impacter les autres membres invités sur votre projet. Toutes les informations seront perdues.",
+              "Le membre n’aura plus accès au projet. Il pourra rejoindre le projet à nouveau par le biais d'une invitation ou d'une demande d'accès.",
           },
         }),
     },
@@ -70,23 +70,26 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
           <i className="ri-more-2-line size-6" />
         </button>
         {open && (
-          <div className={clsx("absolute right-0 top-[130%] z-10 bg-white px-5 pb-1 pt-3 shadow-pfmv-card-shadow")}>
-            <ul className="relative z-10 pl-0">
-              {links.map((link, index) => (
-                <li className={`mb-3 list-none text-sm ${link.className} font-bold`} key={index}>
-                  <i className={clsx(link.iconId, "mr-2 size-6 before:!size-5")} />
-                  <button
-                    onClick={() => {
-                      closer();
-                      link.onClick();
-                    }}
-                  >
-                    {link.label}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <>
+            <div className="fixed left-0 top-0 z-30 size-full" onClick={closer}></div>
+            <div className={clsx("absolute right-0 top-[130%] z-40 bg-white px-5 pb-1 pt-3 shadow-pfmv-card-shadow")}>
+              <ul className="relative z-10 pl-0">
+                {links.map((link, index) => (
+                  <li className={`mb-3 list-none text-sm ${link.className} font-bold`} key={index}>
+                    <i className={clsx(link.iconId, "mr-2 size-6 before:!size-5")} />
+                    <button
+                      onClick={() => {
+                        closer();
+                        link.onClick();
+                      }}
+                    >
+                      {link.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </>
         )}
       </div>
     </div>

@@ -1,6 +1,6 @@
-import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
 import { PropsWithChildren } from "react";
+import { PartageOverviewMemberInviteButton } from "./partage-overview-member-invite-button";
 
 type PartageOverviewWrapperProps = {
   title: string;
@@ -12,11 +12,7 @@ export const PartageOverviewWrapper = ({ title, withSharingOption, children }: P
     <div className="relative rounded-2xl bg-white p-8">
       <div className="flex items-center justify-between pb-5">
         <h1 className="mb-0 text-[22px] text-pfmv-navy">{title}</h1>
-        {withSharingOption && (
-          <Button priority="primary" className="rounded-3xl">
-            Inviter un membre
-          </Button>
-        )}
+        {withSharingOption && <PartageOverviewMemberInviteButton />}
       </div>
       <div
         className={clsx(
