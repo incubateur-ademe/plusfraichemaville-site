@@ -31,7 +31,7 @@ export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserPro
       <div className="flex items-center">
         <div
           className={clsx(
-            "bg-dsfr-border-default-yellow-moutarde mr-2 flex size-5 items-center justify-center rounded-full py-[2px]",
+            "mr-2 flex size-5 items-center justify-center rounded-full bg-dsfr-border-default-yellow-moutarde py-[2px]",
           )}
         >
           <i className={clsx("ri-mail-send-line", "flex h-3 shrink-0 text-white before:!size-[12px]")}></i>
