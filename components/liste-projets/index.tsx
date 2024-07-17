@@ -16,15 +16,15 @@ export const ListProjets = () => {
   const projetsByStatus = sortProjectsByInvitationStatus(projets, userId);
 
   const activeProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsActive);
+  const invitedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsInvited);
   const requestedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsRequested);
-  const withPendingRequestProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsWithPendingRequest);
 
   const tabs = [
     { count: activeProjets.length, label: "Projet(s) actif(s)", content: <ListeProjetTab projets={activeProjets} /> },
     {
-      count: withPendingRequestProjets.length,
+      count: invitedProjets.length,
       label: "Invitation(s) en attente(s)",
-      content: <ListeProjetTab projets={withPendingRequestProjets} />,
+      content: <ListeProjetTab projets={invitedProjets} />,
     },
     {
       count: requestedProjets.length,
