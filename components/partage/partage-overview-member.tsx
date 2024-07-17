@@ -1,7 +1,10 @@
 import clsx from "clsx";
 import { PartageOverviewMemberSyllabes } from "./partage-overview-member-syllabes";
-import { PartageOverviewMemberStatusAdmin } from "./partage-overview-member-status-admin";
+import { PartageOverviewMemberStatusAcceptedAdmin } from "./partage-overview-member-status-accepted-admin";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { InvitationStatus } from "@prisma/client";
+import { ReactElement } from "react";
+import { PartageOverviewMemberStatusInvited } from "./partage-overview-member-status-invited";
 
 export type PartageOverviewMemberProps = {
   member: UserProjetWithUser;
@@ -13,6 +16,14 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
   const nom = member.user?.nom;
   const prenom = member.user?.prenom;
   const name = !prenom && !nom ? member.email_address : `${prenom ?? "-"} ${nom ?? "-"}`;
+
+  const status: Record<InvitationStatus, ReactElement> = {
+    ACCEPTED: <PartageOverviewMemberStatusAcceptedAdmin member={member} />,
+    INVITED: <PartageOverviewMemberStatusInvited member={member} />,
+    DECLINED: <></>,
+    REQUESTED: <></>,
+  };
+
   return (
     <div
       className={clsx(
@@ -29,9 +40,7 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
       </span>
       <span className="w-full max-w-72 text-dsfr-text-mention-grey">{member.user?.poste}</span>
       <span className="w-full max-w-56 lowercase">({member.role})</span>
-      <span className="w-full max-w-56">
-        <PartageOverviewMemberStatusAdmin member={member} />
-      </span>
+      <span className="w-full max-w-56">{status[member.invitation_status]}</span>
     </div>
   );
 };

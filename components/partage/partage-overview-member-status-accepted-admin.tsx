@@ -7,19 +7,17 @@ import { useModalStore } from "@/stores/modal/provider";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import { deleteUserFromProjetAction } from "@/actions/users/delete-user-from-projet";
 import { useUserStore } from "@/stores/user/provider";
-import { useProjetsStore } from "@/stores/projets/provider";
 import { notifications } from "../common/notifications";
 
 export type PartageOverviewMemberStatusAdminProps = {
   member: UserProjetWithUser;
 };
 
-export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberStatusAdminProps) => {
+export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewMemberStatusAdminProps) => {
   const [open, setOpen] = useState(false);
   const opener = () => setOpen(!open);
   const closer = () => setOpen(false);
   const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const projectId = useProjetsStore((state) => state.currentProjetId);
   const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
   const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
 
@@ -39,8 +37,12 @@ export const PartageOverviewMemberStatusAdmin = (props: PartageOverviewMemberSta
           member: props.member,
           options: {
             action: async () => {
-              if (currentUserId && props.member.user_id && projectId) {
-                const result = await deleteUserFromProjetAction(currentUserId, props.member.user_id, projectId);
+              if (currentUserId && props.member.user_id && props.member.projet_id) {
+                const result = await deleteUserFromProjetAction(
+                  currentUserId,
+                  props.member.user_id,
+                  props.member.projet_id,
+                );
                 notifications(result.type, result.message);
               }
             },
