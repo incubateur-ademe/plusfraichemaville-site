@@ -226,9 +226,31 @@ export const deleteProjet = async (projetId: number, userId: string) => {
 export const getUserProjets = async (userId: string) => {
   return prismaClient.projet.findMany({
     where: {
-      created_by: userId,
+      OR: [
+        { created_by: userId },
+        {
+          users: {
+            some: {
+              user_id: userId,
+              deleted_at: null,
+              invitation_status: { in: ["ACCEPTED", "REQUESTED", "INVITED"] },
+            },
+          },
+        },
+      ],
       deleted_at: null,
     },
-    include: projetIncludes,
+    include: {
+      ...projetIncludes,
+      users: {
+        where: {
+          deleted_at: null,
+          invitation_status: { in: ["ACCEPTED", "REQUESTED", "INVITED"] },
+        },
+        include: {
+          user: true,
+        },
+      },
+    },
   });
 };
