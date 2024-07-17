@@ -39,7 +39,7 @@ export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserPro
         <span>envoyé</span>
       </div>
       <Button priority="tertiary" onClick={handleResendInvitation} disabled={isPending} className="rounded-[20px]">
-        {!isPending ? <Spinner /> : "Renvoyer"}
+        {isPending ? <Spinner /> : "Renvoyer"}
       </Button>
     </div>
   );
