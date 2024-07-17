@@ -1,7 +1,10 @@
 import { createStore } from "zustand/vanilla";
 import { AidesTerritoiresAide } from "@/components/financement/types";
-import { PartageOverviewMemberStatusAdminProps } from "@/components/partage/partage-overview-member-status-admin";
+
 import { PartageOverviewDeleteOrQuitModaleState } from "@/components/partage/partage-overview-delete-or-quit-modale";
+
+// eslint-disable-next-line max-len
+import { PartageOverviewMemberStatusAdminProps } from "@/components/partage/partage-overview-member-status-accepted-admin";
 
 interface ModalState {
   currentEstimationId: number | null;
