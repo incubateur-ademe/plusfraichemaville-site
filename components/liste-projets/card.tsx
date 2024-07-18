@@ -5,13 +5,23 @@ import { PictoEspaceSelector } from "../common/pictos";
 import { PictoId } from "../common/pictos/picto-espace-selector";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { InvitationStatus } from "@prisma/client";
+import { Case, Conditional } from "../common/conditional-renderer";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
+import { useUserStore } from "@/stores/user/provider";
+import { dateToStringWithoutTime } from "@/helpers/dateUtils";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
   projet: ProjetWithRelations;
+  invitationStatus: InvitationStatus;
 };
 
-export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) => {
+export const ListeProjetsCard = ({ projet, invitationStatus, disabled }: ListeProjetsCardProps) => {
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const currentUserInfo = getCurrentUserProjectInfos(projet, currentUserId);
+
   const disabledText = disabled && "[&>*>*]:text-dsfr-text-disabled-grey pointer-events-none";
   const disabledButton = disabled && {
     color: "var(--grey-625-425)",
@@ -39,27 +49,60 @@ export const ListeProjetsCard = ({ projet, disabled }: ListeProjetsCardProps) =>
               {projet.collectivite.nom}
             </h4>
           </div>
-          <div
-            className={clsx(
-              "absolute right-5 top-5 text-sm",
-              "before:mr-2 before:inline-block before:h-[10px] before:w-[10px]",
-              "before:rounded-full before:bg-dsfr-background-action-high-success-hover",
-            )}
-          >
-            En cours
-          </div>
+          <Conditional>
+            <Case condition={invitationStatus === "ACCEPTED"}>
+              <div
+                className={clsx(
+                  "absolute right-5 top-5 text-sm",
+                  "before:mr-2 before:inline-block before:h-[10px] before:w-[10px]",
+                  "before:rounded-full before:bg-dsfr-background-action-high-success-hover",
+                )}
+              >
+                En cours
+              </div>
+            </Case>
+            <Case condition={invitationStatus === "INVITED"}>
+              <div className="absolute right-5 top-5 h-full text-sm">
+                <div className="mb-2 flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <i className="ri-team-fill text-pfmv-navy"></i>
+                    {projet.users.length}
+                  </div>
+                  <div>
+                    <span>Admin : {getOldestAdmin(projet).username}</span>
+                  </div>
+                </div>
+                <span className="ml-auto block w-fit lowercase">({currentUserInfo?.role})</span>
+                <div className="absolute bottom-10 right-0">
+                  Reçue le {dateToStringWithoutTime(currentUserInfo?.created_at!)}
+                </div>
+              </div>
+            </Case>
+          </Conditional>
         </div>
       </Link>
-      <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center">
-        <Link
-          className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left mr-4 rounded-3xl"
-          href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}
-          style={{ ...disabledButton }}
-        >
-          Accéder au projet
-        </Link>
-        <ListeProjetsCardDeleteModal projetId={projet.id} projetNom={projet.nom} />
-      </div>
+      <Conditional>
+        <Case condition={invitationStatus === "ACCEPTED"}>
+          <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
+            <Link
+              className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
+              href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}
+              style={{ ...disabledButton }}
+            >
+              Accéder au projet
+            </Link>
+            <ListeProjetsCardDeleteModal projetId={projet.id} projetNom={projet.nom} />
+          </div>
+        </Case>
+        <Case condition={invitationStatus === "INVITED"}>
+          <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
+            <Button priority="tertiary" className="rounded-3xl">
+              Décliner
+            </Button>
+            <Button className="rounded-3xl">Rejoindre</Button>
+          </div>
+        </Case>
+      </Conditional>
     </div>
   );
 };

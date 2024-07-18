@@ -1,7 +1,14 @@
+import { InvitationStatus } from "@prisma/client";
 import { ListeProjetsCard } from "./card";
 import { ProjetsByCollectivite } from "./helpers";
 
-export const ListeProjetTab = ({ projets }: { projets: ProjetsByCollectivite[] }) => {
+export const ListeProjetTab = ({
+  projets,
+  invitationStatus,
+}: {
+  projets: ProjetsByCollectivite[];
+  invitationStatus: InvitationStatus;
+}) => {
   return projets.map((collectiviteWithProjet) => {
     return (
       <div
@@ -14,7 +21,7 @@ export const ListeProjetTab = ({ projets }: { projets: ProjetsByCollectivite[] }
           {collectiviteWithProjet.collectivite.nom}
         </h2>
         {collectiviteWithProjet.projets.map((projet, index) => (
-          <ListeProjetsCard projet={projet} key={index} />
+          <ListeProjetsCard projet={projet} invitationStatus={invitationStatus} key={index} />
         ))}
       </div>
     );
