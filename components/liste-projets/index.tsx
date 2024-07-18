@@ -20,16 +20,20 @@ export const ListProjets = () => {
   const requestedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsRequested);
 
   const tabs = [
-    { count: activeProjets.length, label: "Projet(s) actif(s)", content: <ListeProjetTab projets={activeProjets} /> },
     {
-      count: invitedProjets.length,
-      label: "Invitation(s) en attente(s)",
-      content: <ListeProjetTab projets={invitedProjets} />,
+      count: projetsByStatus.projectsActive.length,
+      label: "Projet actif",
+      content: <ListeProjetTab projets={activeProjets} invitationStatus="ACCEPTED" />,
     },
     {
-      count: requestedProjets.length,
-      label: "Demande(s) envoyé(es)",
-      content: <ListeProjetTab projets={requestedProjets} />,
+      count: projetsByStatus.projectsInvited.length,
+      label: "Invitation en attente",
+      content: <ListeProjetTab projets={invitedProjets} invitationStatus="INVITED" />,
+    },
+    {
+      count: projetsByStatus.projectsRequested.length,
+      label: "Demande envoyée",
+      content: <ListeProjetTab projets={requestedProjets} invitationStatus="REQUESTED" />,
     },
   ];
 
@@ -43,7 +47,7 @@ export const ListProjets = () => {
         className="absolute right-0 top-0 z-0"
       />
       <div className="fr-container relative z-10 min-h-[25rem] overflow-x-hidden py-10">
-        <ListeProjetsHeader isListEmpty={projets.length === 0} />
+        <ListeProjetsHeader />
         <div>
           <div>
             <div className="mb-10 flex w-fit gap-2 border-b-[1px] border-b-pfmv-grey/20">

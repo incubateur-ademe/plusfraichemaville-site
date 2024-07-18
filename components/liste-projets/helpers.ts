@@ -1,4 +1,4 @@
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import { collectivite } from "@prisma/client";
 import { orderBy } from "lodash";
 
@@ -50,4 +50,34 @@ export const sortProjectsByInvitationStatus = (
       projectsRequested: [],
     },
   );
+};
+
+export const getOldestAdmin = (project: ProjetWithRelations) => {
+  const oldestAdmin = project.users
+    .filter((userProjet) => userProjet.role === "ADMIN" && userProjet.invitation_status === "ACCEPTED")
+    .reduce<UserProjetWithUser | undefined>((oldest, current) => {
+      if (!oldest) return current;
+      return oldest.created_at <= current.created_at ? oldest : current;
+    }, undefined);
+
+  if (!oldestAdmin || !oldestAdmin.user) {
+    return { username: null };
+  }
+
+  return {
+    username: `${oldestAdmin.user.prenom} ${oldestAdmin.user.nom}` || null,
+  };
+};
+
+export const getAllUserProjectCount = (project: ProjetWithRelations) => {
+  const allUsersProject = project.users.filter((user) => user.invitation_status === "ACCEPTED");
+  return allUsersProject.length;
+};
+
+export const getCurrentUserProjectInfos = (
+  project: ProjetWithRelations,
+  currentUserId?: string,
+): UserProjetWithUser | null => {
+  const userProjectLine = project.users.find((userProjet) => userProjet.user_id === currentUserId);
+  return userProjectLine || null;
 };
