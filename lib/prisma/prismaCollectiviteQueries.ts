@@ -2,6 +2,7 @@ import { prismaClient } from "@/lib/prisma/prismaClient";
 import { AddressCollectivite } from "@/lib/adresseApi/types";
 import { Prisma } from "@prisma/client";
 import { generateRandomId } from "@/helpers/common";
+import { ProjetWithRelations } from "./prismaCustomTypes";
 
 export const getOrCreateCollectivite = async (data: AddressCollectivite, creatorUserId: string) => {
   return prismaClient.collectivite.upsert({
@@ -53,4 +54,54 @@ export const getCollectiviteById = async (idCollectivite: number) => {
       id: idCollectivite,
     },
   });
+};
+
+export const getAvailableProjectsForCollectivite = async (
+  collectiviteId: number,
+  userId: string,
+): Promise<ProjetWithRelations[]> => {
+  const projects = await prismaClient.projet.findMany({
+    where: {
+      collectiviteId: collectiviteId,
+      deleted_at: null,
+      OR: [
+        {
+          users: {
+            none: {
+              user_id: userId,
+              invitation_status: { in: ["ACCEPTED", "DECLINED"] },
+            },
+          },
+        },
+        {
+          users: {
+            some: {
+              user_id: userId,
+              invitation_status: "REQUESTED",
+            },
+          },
+        },
+      ],
+    },
+    include: {
+      collectivite: true,
+      estimations: {
+        include: {
+          estimations_aides: {
+            include: {
+              aide: true,
+            },
+          },
+        },
+      },
+      creator: true,
+      users: {
+        include: {
+          user: true,
+        },
+      },
+    },
+  });
+
+  return projects;
 };

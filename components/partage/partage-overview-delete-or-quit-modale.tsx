@@ -13,7 +13,6 @@ export type PartageOverviewDeleteOrQuitModaleState = {
     title: string;
     description: string;
     confirmLabel: string;
-    // TODO: No any
     action: (..._args: any[]) => void;
   };
 } | null;

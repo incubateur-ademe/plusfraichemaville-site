@@ -21,9 +21,11 @@ export const success = {
   USER_DELETED_FROM_PROJECT: "Le membre a bien été supprimé du projet.",
   ACCEPT_INVITATION: "Vous avez rejoint le projet.",
   DECLINDED_INVITATION: "Vous avez décliné l'invitation au projet.",
+  REQUEST_SENT: "Votre demande a bien été envoyée.",
 };
 
 export const error = {
+  ALREADY_SENT: "Une demande est déjà en cours pour ce projet.",
   UNAUTHENTICATED: "Utilisateur non authentifié.",
   DELAY_TOO_SHORT: "Veuillez attendre 10 minutes avant de renvoyer une invitation.",
   UNAUTHORIZED: "Vous ne disposez pas des droits nécessaires à la modification.",

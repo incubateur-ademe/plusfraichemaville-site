@@ -420,3 +420,86 @@ export async function declineProjectInvitation(userId: string, projectId: number
 
   return updatedUserProject;
 }
+
+interface RequestToJoinProjectResult {
+  requesterName: string;
+  invitationToken: string;
+  emailId?: string;
+}
+
+export const requestToJoinProject = async (
+  userId: string,
+  projectId: number,
+  email: string,
+): Promise<RequestToJoinProjectResult | null> => {
+  return prismaClient.$transaction(async (tx) => {
+    const existingUserProject = await tx.user_projet.findUnique({
+      where: {
+        user_id_projet_id: {
+          user_id: userId,
+          projet_id: projectId,
+        },
+      },
+    });
+
+    if (existingUserProject) {
+      return null;
+    }
+
+    const projectWithAdmin = await tx.projet.findUnique({
+      where: { id: projectId },
+      include: {
+        collectivite: true,
+        users: {
+          where: { role: "ADMIN", invitation_status: "ACCEPTED" },
+          orderBy: { created_at: "asc" },
+          take: 1,
+          include: { user: true },
+        },
+      },
+    });
+
+    if (!projectWithAdmin) {
+      return null;
+    }
+
+    const requester = await getUser(userId);
+
+    if (!requester) {
+      return null;
+    }
+
+    const invitationToken = `${generateRandomId()}`;
+
+    const newUserProject = await tx.user_projet.create({
+      data: {
+        user_id: userId,
+        projet_id: projectId,
+        role: "LECTEUR",
+        invitation_status: "REQUESTED",
+        email_address: email,
+        invitation_token: invitationToken,
+      },
+    });
+
+    const oldestAdmin = projectWithAdmin.users[0]?.user;
+
+    let createdEmail = null;
+    if (oldestAdmin) {
+      createdEmail = await tx.email.create({
+        data: {
+          destination_address: oldestAdmin.email,
+          type: "projetRequestAccess",
+          email_status: "PENDING",
+          user_projet_id: newUserProject.id,
+        },
+      });
+    }
+
+    return {
+      emailId: createdEmail?.id,
+      requesterName: `${requester.prenom} ${requester.nom}`,
+      invitationToken,
+    };
+  });
+};
