@@ -6,7 +6,7 @@ import { PictoId } from "../common/pictos/picto-espace-selector";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/helpers/routes";
 import { InvitationStatus } from "@prisma/client";
-import { Case, Conditional } from "../common/conditional-renderer";
+import { Case, Conditional, Default } from "../common/conditional-renderer";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
 import { useUserStore } from "@/stores/user/provider";
@@ -15,17 +15,35 @@ import { useTransition } from "react";
 import { notifications } from "../common/notifications";
 import { acceptProjectInvitationAction } from "@/actions/users/accept-project-invitation-action";
 import { declineProjectInvitationAction } from "@/actions/users/decline-project-invitation-action";
+import { requestToJoinProjectAction } from "@/actions/projets/request-to-join-project-action";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
   projet: ProjetWithRelations;
-  invitationStatus: InvitationStatus;
+  invitationStatus?: InvitationStatus;
+  isBrowsing?: boolean;
 };
 
-export const ListeProjetsCard = ({ projet, invitationStatus, disabled }: ListeProjetsCardProps) => {
+export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsing }: ListeProjetsCardProps) => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const currentUserMail = useUserStore((state) => state.userInfos?.email);
   const currentUserInfo = getCurrentUserProjectInfos(projet, currentUserId);
   const [isPending, startTransition] = useTransition();
+
+  const hasAlreadyRequest = getCurrentUserProjectInfos(projet, currentUserId)?.invitation_status === "REQUESTED";
+
+  const handleSendRequest = () => {
+    startTransition(async () => {
+      try {
+        if (currentUserId && currentUserMail) {
+          const result = await requestToJoinProjectAction(currentUserId, projet.id, currentUserMail);
+          notifications(result.type, result.message);
+        }
+      } catch (e) {
+        throw new Error();
+      }
+    });
+  };
 
   const handleAcceptInvitation = () => {
     startTransition(async () => {
@@ -61,57 +79,96 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled }: ListePr
     boxShadow: "none",
   };
 
+  const contentCard = (
+    <>
+      <div className={clsx(`relative mb-5 flex rounded-xl p-5 ${disabledText}`)}>
+        <div className="mr-6">
+          <PictoEspaceSelector
+            pictoId={projet.type_espace as PictoId}
+            withBackground
+            size="large"
+            pictoClassName="svg-blue"
+          />
+        </div>
+        <div>
+          <h3 className="mb-0 text-[22px] text-dsfr-text-label-blue-france">{projet.nom}</h3>
+          <h4 className="mb-4 text-lg text-dsfr-text-label-blue-france">
+            <i className="ri-map-pin-line mr-1 before:!w-4"></i>
+            {projet.collectivite.nom}
+          </h4>
+        </div>
+        <Conditional>
+          <Case condition={invitationStatus === "ACCEPTED"}>
+            <div
+              className={clsx(
+                "absolute right-5 top-5 text-sm",
+                "before:mr-2 before:inline-block before:h-[10px] before:w-[10px]",
+                "before:rounded-full before:bg-dsfr-background-action-high-success-hover",
+              )}
+            >
+              En cours
+            </div>
+          </Case>
+          <Case condition={invitationStatus === "INVITED" || isBrowsing === true}>
+            <div className="absolute right-5 top-5 h-full text-sm">
+              <div className="mb-2 flex items-center gap-6">
+                <div className="flex items-center gap-2">
+                  <i className="ri-team-fill text-pfmv-navy"></i>
+                  {getAllUserProjectCount(projet)}
+                </div>
+                <div>
+                  <span>Admin : {getOldestAdmin(projet).username}</span>
+                </div>
+              </div>
+              <Conditional>
+                <Case condition={invitationStatus === "INVITED"}>
+                  <span className="ml-auto block w-fit lowercase">({currentUserInfo?.role})</span>
+                </Case>
+              </Conditional>
+              <Conditional>
+                <Case condition={invitationStatus === "INVITED"}>
+                  {currentUserInfo && (
+                    <div className="absolute bottom-10 right-0">
+                      Reçue le
+                      {invitationStatus === "INVITED" && dateToStringWithoutTime(currentUserInfo?.created_at)}
+                    </div>
+                  )}
+                </Case>
+              </Conditional>
+              <Conditional>
+                <Case condition={isBrowsing === true}>
+                  {hasAlreadyRequest ? (
+                    <span className="flex items-center gap-2">
+                      <i className="ri-hourglass-fill text-pfmv-climadiag-red"></i>
+                      En attente
+                    </span>
+                  ) : (
+                    <span className="flex items-center gap-2">
+                      <i className="ri-lock-fill text-pfmv-climadiag-red"></i>
+                      Accès restreint
+                    </span>
+                  )}
+                </Case>
+              </Conditional>
+            </div>
+          </Case>
+        </Conditional>
+      </div>
+    </>
+  );
+
   return (
     <div className="relative">
-      <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>
-        <div className={`pfmv-card relative mb-5 flex rounded-xl p-5 ${disabledText}`}>
-          <div className="mr-6">
-            <PictoEspaceSelector
-              pictoId={projet.type_espace as PictoId}
-              withBackground
-              size="large"
-              pictoClassName="svg-blue"
-            />
+      <Conditional>
+        <Case condition={invitationStatus === "ACCEPTED"}>
+          <div className="pfmv-card">
+            <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>{contentCard}</Link>
           </div>
-          <div>
-            <h3 className="mb-0 text-[22px] text-dsfr-text-label-blue-france">{projet.nom}</h3>
-            <h4 className="mb-4 text-lg text-dsfr-text-label-blue-france">
-              <i className="ri-map-pin-line mr-1 before:!w-4"></i>
-              {projet.collectivite.nom}
-            </h4>
-          </div>
-          <Conditional>
-            <Case condition={invitationStatus === "ACCEPTED"}>
-              <div
-                className={clsx(
-                  "absolute right-5 top-5 text-sm",
-                  "before:mr-2 before:inline-block before:h-[10px] before:w-[10px]",
-                  "before:rounded-full before:bg-dsfr-background-action-high-success-hover",
-                )}
-              >
-                En cours
-              </div>
-            </Case>
-            <Case condition={invitationStatus === "INVITED"}>
-              <div className="absolute right-5 top-5 h-full text-sm">
-                <div className="mb-2 flex items-center gap-6">
-                  <div className="flex items-center gap-2">
-                    <i className="ri-team-fill text-pfmv-navy"></i>
-                    {getAllUserProjectCount(projet)}
-                  </div>
-                  <div>
-                    <span>Admin : {getOldestAdmin(projet).username}</span>
-                  </div>
-                </div>
-                <span className="ml-auto block w-fit lowercase">({currentUserInfo?.role})</span>
-                <div className="absolute bottom-10 right-0">
-                  Reçue le {dateToStringWithoutTime(currentUserInfo?.created_at!)}
-                </div>
-              </div>
-            </Case>
-          </Conditional>
-        </div>
-      </Link>
+        </Case>
+        <Default>
+          <div className="pfmv-card-no-hover">{contentCard}</div>
+        </Default>
+      </Conditional>
       <Conditional>
         <Case condition={invitationStatus === "ACCEPTED"}>
           <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
@@ -132,6 +189,18 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled }: ListePr
             </Button>
             <Button onClick={handleAcceptInvitation} disabled={isPending} className="rounded-3xl">
               Rejoindre
+            </Button>
+          </div>
+        </Case>
+        <Case condition={isBrowsing === true}>
+          <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
+            <Button
+              disabled={isPending || hasAlreadyRequest}
+              priority="tertiary"
+              className="rounded-3xl"
+              onClick={handleSendRequest}
+            >
+              {hasAlreadyRequest ? "Accès demandé" : "Demander un accès"}
             </Button>
           </div>
         </Case>
