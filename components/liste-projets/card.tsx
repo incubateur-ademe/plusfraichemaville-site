@@ -8,9 +8,13 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import { InvitationStatus } from "@prisma/client";
 import { Case, Conditional } from "../common/conditional-renderer";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
+import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
 import { useUserStore } from "@/stores/user/provider";
 import { dateToStringWithoutTime } from "@/helpers/dateUtils";
+import { useTransition } from "react";
+import { notifications } from "../common/notifications";
+import { acceptProjectInvitationAction } from "@/actions/users/accept-project-invitation-action";
+import { declineProjectInvitationAction } from "@/actions/users/decline-project-invitation-action";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -21,6 +25,33 @@ type ListeProjetsCardProps = {
 export const ListeProjetsCard = ({ projet, invitationStatus, disabled }: ListeProjetsCardProps) => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
   const currentUserInfo = getCurrentUserProjectInfos(projet, currentUserId);
+  const [isPending, startTransition] = useTransition();
+
+  const handleAcceptInvitation = () => {
+    startTransition(async () => {
+      try {
+        if (currentUserId) {
+          const result = await acceptProjectInvitationAction(currentUserId, projet.id);
+          notifications(result.type, result.message);
+        }
+      } catch (e) {
+        throw new Error();
+      }
+    });
+  };
+
+  const handleDeclineInvitation = () => {
+    startTransition(async () => {
+      try {
+        if (currentUserId) {
+          const result = await declineProjectInvitationAction(currentUserId, projet.id);
+          notifications(result.type, result.message);
+        }
+      } catch (e) {
+        throw new Error();
+      }
+    });
+  };
 
   const disabledText = disabled && "[&>*>*]:text-dsfr-text-disabled-grey pointer-events-none";
   const disabledButton = disabled && {
@@ -66,7 +97,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled }: ListePr
                 <div className="mb-2 flex items-center gap-6">
                   <div className="flex items-center gap-2">
                     <i className="ri-team-fill text-pfmv-navy"></i>
-                    {projet.users.length}
+                    {getAllUserProjectCount(projet)}
                   </div>
                   <div>
                     <span>Admin : {getOldestAdmin(projet).username}</span>
@@ -96,10 +127,12 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled }: ListePr
         </Case>
         <Case condition={invitationStatus === "INVITED"}>
           <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
-            <Button priority="tertiary" className="rounded-3xl">
+            <Button disabled={isPending} priority="tertiary" className="rounded-3xl" onClick={handleDeclineInvitation}>
               Décliner
             </Button>
-            <Button className="rounded-3xl">Rejoindre</Button>
+            <Button onClick={handleAcceptInvitation} disabled={isPending} className="rounded-3xl">
+              Rejoindre
+            </Button>
           </div>
         </Case>
       </Conditional>

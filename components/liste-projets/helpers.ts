@@ -69,6 +69,11 @@ export const getOldestAdmin = (project: ProjetWithRelations) => {
   };
 };
 
+export const getAllUserProjectCount = (project: ProjetWithRelations) => {
+  const allUsersProject = project.users.filter((user) => user.invitation_status === "ACCEPTED");
+  return allUsersProject.length;
+};
+
 export const getCurrentUserProjectInfos = (
   project: ProjetWithRelations,
   currentUserId?: string,

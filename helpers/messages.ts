@@ -19,6 +19,8 @@ export const success = {
   EMAIL_SENT: "L'email a été envoyé.",
   ROLE_UPDATED: "Le nouveau rôle a bien été enregistré.",
   USER_DELETED_FROM_PROJECT: "Le membre a bien été supprimé du projet.",
+  ACCEPT_INVITATION: "Vous avez rejoint le projet.",
+  DECLINDED_INVITATION: "Vous avez décliné l'invitation au projet.",
 };
 
 export const error = {

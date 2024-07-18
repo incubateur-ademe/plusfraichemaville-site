@@ -386,3 +386,37 @@ export const prepareInvitationResend = async (userProjetId: number): Promise<Pre
     };
   });
 };
+
+export async function acceptProjectInvitation(userId: string, projectId: number): Promise<user_projet | null> {
+  const updatedUserProject = await prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: {
+        user_id: userId,
+        projet_id: projectId,
+      },
+      invitation_status: "INVITED",
+    },
+    data: {
+      invitation_status: "ACCEPTED",
+    },
+  });
+
+  return updatedUserProject;
+}
+
+export async function declineProjectInvitation(userId: string, projectId: number): Promise<user_projet | null> {
+  const updatedUserProject = await prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: {
+        user_id: userId,
+        projet_id: projectId,
+      },
+      invitation_status: "INVITED",
+    },
+    data: {
+      invitation_status: "DECLINED",
+    },
+  });
+
+  return updatedUserProject;
+}
