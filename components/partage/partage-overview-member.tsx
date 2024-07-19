@@ -5,6 +5,7 @@ import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import { InvitationStatus } from "@prisma/client";
 import { ReactElement } from "react";
 import { PartageOverviewMemberStatusInvited } from "./partage-overview-member-status-invited";
+import { PartageOverviewMemberStatusRequested } from "./partage-overview-member-status-requested";
 
 export type PartageOverviewMemberProps = {
   member: UserProjetWithUser;
@@ -20,8 +21,8 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
   const status: Record<InvitationStatus, ReactElement> = {
     ACCEPTED: <PartageOverviewMemberStatusAcceptedAdmin member={member} />,
     INVITED: <PartageOverviewMemberStatusInvited member={member} />,
+    REQUESTED: <PartageOverviewMemberStatusRequested member={member} />,
     DECLINED: <></>,
-    REQUESTED: <></>,
   };
 
   return (
