@@ -438,7 +438,11 @@ export const acceptProjectRequest = async (userId: string, projectId: number): P
   return updatedUserProject;
 };
 
-export const declineProjectRequest = async (userId: string, projectId: number): Promise<user_projet | null> => {
+export const declineProjectRequest = async (
+  userId: string,
+  projectId: number,
+  deletedBy: string,
+): Promise<user_projet | null> => {
   const updatedUserProject = await prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
@@ -449,6 +453,8 @@ export const declineProjectRequest = async (userId: string, projectId: number): 
     },
     data: {
       invitation_status: "DECLINED",
+      deleted_at: new Date(),
+      deleted_by: deletedBy,
     },
   });
 

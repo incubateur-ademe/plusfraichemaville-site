@@ -24,7 +24,7 @@ export const declineProjectRequestAction = async (
   }
 
   try {
-    const accept = await declineProjectRequest(userIdToUpdate, projectId);
+    const accept = await declineProjectRequest(userIdToUpdate, projectId, userId);
     revalidatePath(`/espace-projet/${projectId}`);
     if (accept) {
       return {
