@@ -12,7 +12,7 @@ import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
-): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations }>> => {
+): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
