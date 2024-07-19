@@ -147,8 +147,8 @@ export const createOrUpdateProjet = async ({
   userId: string;
   collectiviteId: number;
 }) => {
-  return prismaClient.$transaction(async (prisma) => {
-    const projet = await prisma.projet.upsert({
+  return prismaClient.$transaction(async (tx) => {
+    const projet = await tx.projet.upsert({
       where: {
         id: projetId ?? -1,
         deleted_at: null,
@@ -177,12 +177,12 @@ export const createOrUpdateProjet = async ({
     });
 
     if (!projetId) {
-      const user = await prisma.user.findUnique({ where: { id: userId } });
+      const user = await tx.user.findUnique({ where: { id: userId } });
       if (!user) {
-        throw new Error("User not found");
+        return null;
       }
 
-      await prisma.user_projet.create({
+      await tx.user_projet.create({
         data: {
           email_address: user.email,
           role: "ADMIN",
