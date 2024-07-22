@@ -69,7 +69,7 @@ export const getAvailableProjectsForCollectivite = async (
           users: {
             none: {
               user_id: userId,
-              invitation_status: { in: ["ACCEPTED", "DECLINED"] },
+              invitation_status: { in: ["ACCEPTED"] },
             },
           },
         },
