@@ -1,5 +1,5 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { Prisma, projet } from "@prisma/client";
+import { Prisma, projet, user_projet } from "@prisma/client";
 import { ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
@@ -252,5 +252,52 @@ export const getUserProjets = async (userId: string) => {
         },
       },
     },
+  });
+};
+
+export const leaveProject = async (userId: string, projectId: number): Promise<user_projet | null> => {
+  return prismaClient.$transaction(async (tx) => {
+    const user = await tx.user_projet.findUnique({
+      where: {
+        user_id_projet_id: {
+          user_id: userId,
+          projet_id: projectId,
+        },
+      },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    if (user.role === "ADMIN") {
+      const adminCount = await tx.user_projet.count({
+        where: {
+          projet_id: projectId,
+          role: "ADMIN",
+          invitation_status: "ACCEPTED",
+        },
+      });
+
+      if (adminCount < 2) {
+        return null;
+      }
+    }
+
+    const updatedUser = await tx.user_projet.update({
+      where: {
+        user_id_projet_id: {
+          user_id: userId,
+          projet_id: projectId,
+        },
+      },
+      data: {
+        invitation_status: "DECLINED",
+        deleted_at: new Date(),
+        deleted_by: userId,
+      },
+    });
+
+    return updatedUser;
   });
 };

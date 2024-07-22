@@ -1,4 +1,4 @@
-import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import { InvitationStatus } from "@prisma/client";
 
 type GroupedUserProjet = Partial<Record<InvitationStatus, UserProjetWithUser[]>>;
@@ -14,4 +14,17 @@ export const groupByInvitationStatus = (users: UserProjetWithUser[]) => {
     }
     return acc;
   }, {});
+};
+
+export const checkOtherAdminExists = (members?: ProjetWithRelations["users"], currentUserId?: string): boolean => {
+  if (!members) {
+    return false;
+  }
+
+  const otherAdmins = members.filter(
+    (member: UserProjetWithUser) =>
+      member.role === "ADMIN" && member.user_id !== currentUserId && member.invitation_status === "ACCEPTED",
+  );
+
+  return otherAdmins.length > 0;
 };
