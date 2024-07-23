@@ -16,7 +16,10 @@ export const groupByInvitationStatus = (users: UserProjetWithUser[]) => {
   }, {});
 };
 
-export const checkOtherAdminExists = (members?: ProjetWithRelations["users"], currentUserId?: string): boolean => {
+export const checkOtherAdminExists = (
+  members?: ProjetWithRelations["users"],
+  currentUserId?: string | null,
+): boolean => {
   if (!members) {
     return false;
   }
