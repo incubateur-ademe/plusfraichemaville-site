@@ -16,7 +16,9 @@ export class PermissionManager {
   }
   private async isAdminOrEditeur(userId: string, projectId: number): Promise<boolean> {
     const role = await this.getUserProjectRole(userId, projectId);
-    return role === RoleProjet.ADMIN || role === RoleProjet.EDITEUR;
+    // TODO: confirmer que cette valeur n'est pas autorisée
+    // return role === RoleProjet.ADMIN || role === RoleProjet.EDITEUR;
+    return role === RoleProjet.ADMIN;
   }
 
   async canViewProject(userId: string, projectId: number) {
