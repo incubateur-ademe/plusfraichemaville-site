@@ -212,7 +212,12 @@ export const updateUserRoleProject = async (
   userId: string,
   projectId: number,
   newRole: RoleProjet,
-): Promise<UserProjetWithUser> => {
+): Promise<UserProjetWithUser | null> => {
+  // TODO: confirmer que ces valeurs ne sont pas autorisées
+  if (newRole === "ADMIN" || newRole === "EDITEUR") {
+    return null;
+  }
+
   const updatedUserProject = await prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
