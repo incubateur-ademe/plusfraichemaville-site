@@ -48,6 +48,7 @@ export const PartageOverviewMemberInviteButton = () => {
             label=""
             options={[
               { name: "Admin", value: "ADMIN" },
+              // TODO: confirmer que cette valeur n'est pas autorisée
               { name: "Editeur", value: "EDITEUR" },
               { name: "Lecteur", value: "LECTEUR" },
             ]}
