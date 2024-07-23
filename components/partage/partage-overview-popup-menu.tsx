@@ -22,7 +22,7 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
   const currentUserId = currentUserInfo?.user_id;
   const hasOtherAdmin = checkOtherAdminExists(members, currentUserInfo?.user_id);
   const isAdmin = currentUserInfo?.role === "ADMIN";
-  const canQuitProject = isAdmin && hasOtherAdmin;
+  const canLeaveProject = !isAdmin || (isAdmin && hasOtherAdmin);
 
   const handleQuitProject = () => {
     startTransition(async () => {
@@ -61,11 +61,11 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
         setCurrentDeleteOrQuitModal({
           options: {
             action: async () => {
-              canQuitProject && handleQuitProject();
+              canLeaveProject && handleQuitProject();
             },
-            confirmLabel: canQuitProject ? "Quitter le projet" : null,
-            title: canQuitProject ? "Quitter le projet" : " Impossible de quitter le projet",
-            description: canQuitProject
+            confirmLabel: canLeaveProject ? "Quitter le projet" : null,
+            title: canLeaveProject ? "Quitter le projet" : " Impossible de quitter le projet",
+            description: canLeaveProject
               ? // eslint-disable-next-line max-len
                 "Êtes-vous certain de vouloir quitter le projet ? SI vous souhaitez le réintégrer par la suite, vous devrez faire une demande d’accès."
               : // eslint-disable-next-line max-len
