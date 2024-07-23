@@ -8,11 +8,11 @@ import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import Button from "@codegouvfr/react-dsfr/Button";
 
 export type PartageOverviewDeleteOrQuitModaleState = {
-  member: UserProjetWithUser;
+  member?: UserProjetWithUser;
   options: {
     title: string;
     description: string;
-    confirmLabel: string;
+    confirmLabel: string | null;
     action: (..._args: any[]) => void;
   };
 } | null;
@@ -46,16 +46,18 @@ export const PartageOverviewDeleteOrQuitModale = () => {
             <Button priority="tertiary" className="mr-4" onClick={modal.close}>
               Annuler
             </Button>
-            <Button
-              priority="tertiary"
-              className="!text-pfmv-climadiag-red"
-              onClick={() => {
-                currentDeleteOrQuitModal?.options.action();
-                modal.close();
-              }}
-            >
-              {currentDeleteOrQuitModal?.options.confirmLabel}
-            </Button>
+            {currentDeleteOrQuitModal?.options.confirmLabel && (
+              <Button
+                priority="tertiary"
+                className="!text-pfmv-climadiag-red"
+                onClick={() => {
+                  currentDeleteOrQuitModal?.options.action();
+                  modal.close();
+                }}
+              >
+                {currentDeleteOrQuitModal?.options.confirmLabel}
+              </Button>
+            )}
           </div>
         </div>
       </modal.Component>

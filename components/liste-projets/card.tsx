@@ -16,6 +16,7 @@ import { notifications } from "../common/notifications";
 import { acceptProjectInvitationAction } from "@/actions/users/accept-project-invitation-action";
 import { declineProjectInvitationAction } from "@/actions/users/decline-project-invitation-action";
 import { requestToJoinProjectAction } from "@/actions/projets/request-to-join-project-action";
+import { PartageOverviewPopupMenu } from "../partage/partage-overview-popup-menu";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -28,6 +29,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
   const currentUserId = useUserStore((state) => state.userInfos?.id);
   const currentUserMail = useUserStore((state) => state.userInfos?.email);
   const currentUserInfo = getCurrentUserProjectInfos(projet, currentUserId);
+  const members = projet.users;
   const [isPending, startTransition] = useTransition();
 
   const hasAlreadyRequest = getCurrentUserProjectInfos(projet, currentUserId)?.invitation_status === "REQUESTED";
@@ -98,17 +100,6 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
           </h4>
         </div>
         <Conditional>
-          <Case condition={invitationStatus === "ACCEPTED"}>
-            <div
-              className={clsx(
-                "absolute right-5 top-5 text-sm",
-                "before:mr-2 before:inline-block before:h-[10px] before:w-[10px]",
-                "before:rounded-full before:bg-dsfr-background-action-high-success-hover",
-              )}
-            >
-              En cours
-            </div>
-          </Case>
           <Case condition={invitationStatus === "INVITED" || isBrowsing === true}>
             <div className="absolute right-5 top-5 h-full text-sm">
               <div className="mb-2 flex items-center gap-6">
@@ -180,6 +171,9 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
               Accéder au projet
             </Link>
             <ListeProjetsCardDeleteModal projetId={projet.id} projetNom={projet.nom} />
+          </div>
+          <div className={clsx("absolute right-5 top-5 text-sm")}>
+            <PartageOverviewPopupMenu members={members} projectId={projet.id} currentUserInfo={currentUserInfo} />
           </div>
         </Case>
         <Case condition={invitationStatus === "INVITED"}>
