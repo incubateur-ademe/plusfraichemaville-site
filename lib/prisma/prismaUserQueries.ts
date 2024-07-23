@@ -253,8 +253,8 @@ export const deleteUserFromProject = async (userId: string, projectId: number, d
 
 export const inviteMember = async (projectId: number, email: string, role: RoleProjet) => {
   return prismaClient.$transaction(async (tx) => {
-    // TODO: confirmer que cette valeur n'est pas autorisée
-    if (role === "EDITEUR") {
+    // TODO: confirmer que ces valeurs ne sont pas autorisées
+    if (role === "EDITEUR" || role === "ADMIN") {
       return null;
     }
 
