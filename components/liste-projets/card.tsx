@@ -1,5 +1,4 @@
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { ListeProjetsCardDeleteModal } from "./card-delete-modal";
 import Link from "next/link";
 import { PictoEspaceSelector } from "../common/pictos";
 import { PictoId } from "../common/pictos/picto-espace-selector";
@@ -100,7 +99,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
           </h4>
         </div>
         <Conditional>
-          <Case condition={invitationStatus === "INVITED" || isBrowsing === true}>
+          <Case condition={invitationStatus === "ACCEPTED" || invitationStatus === "INVITED" || isBrowsing === true}>
             <div className="absolute right-5 top-5 h-full text-sm">
               <div className="mb-2 flex items-center gap-6">
                 <div className="flex items-center gap-2">
@@ -112,7 +111,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
                 </div>
               </div>
               <Conditional>
-                <Case condition={invitationStatus === "INVITED"}>
+                <Case condition={invitationStatus === "INVITED" || invitationStatus === "ACCEPTED"}>
                   <span className="ml-auto block w-fit lowercase">({currentUserInfo?.role})</span>
                 </Case>
               </Conditional>
@@ -170,9 +169,8 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
             >
               Accéder au projet
             </Link>
-            <ListeProjetsCardDeleteModal projetId={projet.id} projetNom={projet.nom} />
           </div>
-          <div className={clsx("absolute right-5 top-5 text-sm")}>
+          <div className={clsx("absolute bottom-5 right-5 text-sm")}>
             <PartageOverviewPopupMenu members={members} projectId={projet.id} currentUserInfo={currentUserInfo} />
           </div>
         </Case>
