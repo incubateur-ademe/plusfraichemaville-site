@@ -23,6 +23,7 @@ export const success = {
   DECLINDED_INVITATION: "Vous avez décliné l'invitation au projet.",
   REQUEST_SENT: "Votre demande a bien été envoyée.",
   QUIT_PROJET: "Vous avez quitté le projet.",
+  CHOICE_SAVED: "Vous choix a été enregistré.",
 };
 
 export const error = {
