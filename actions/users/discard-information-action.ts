@@ -6,8 +6,13 @@ import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/helpers/permission-manager";
 
 import { discardedInformation } from "@/lib/prisma/prismaUserQueries";
+import { revalidatePath } from "next/cache";
 
-export const discardInformationAction = async (userId: string, modalId: string): Promise<ResponseAction> => {
+export const discardInformationAction = async (
+  userId: string,
+  modalId: string,
+  projectId?: number | null,
+): Promise<ResponseAction> => {
   const session = await auth();
 
   if (!session) {
@@ -21,7 +26,7 @@ export const discardInformationAction = async (userId: string, modalId: string):
 
   try {
     const discardInformation = await discardedInformation(userId, modalId);
-
+    revalidatePath(`/espace-projet/${projectId}`);
     if (discardInformation) {
       return {
         type: "success",
