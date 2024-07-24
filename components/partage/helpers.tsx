@@ -31,3 +31,6 @@ export const checkOtherAdminExists = (
 
   return otherAdmins.length > 0;
 };
+
+export const getCurrentUserRole = (users?: UserProjetWithUser[], userId?: string) =>
+  users?.find((user) => user.user_id === userId)?.role;

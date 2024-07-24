@@ -553,3 +553,30 @@ export const requestToJoinProject = async (
     };
   });
 };
+
+export const discardedInformation = async (userId: string, modalId: string): Promise<User | null> => {
+  return prismaClient.$transaction(async (tx) => {
+    const user = await tx.user.findUnique({
+      where: { id: userId },
+    });
+
+    if (!user) {
+      return null;
+    }
+
+    let updatedModalIds = user.discardedInformation || [];
+
+    if (!updatedModalIds.includes(modalId)) {
+      updatedModalIds.push(modalId);
+    }
+
+    const updatedUser = await tx.user.update({
+      where: { id: userId },
+      data: {
+        discardedInformation: updatedModalIds,
+      },
+    });
+
+    return updatedUser;
+  });
+};
