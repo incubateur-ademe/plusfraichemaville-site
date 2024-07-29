@@ -6,6 +6,8 @@ import { deleteUserFromProjetAction } from "@/actions/users/delete-user-from-pro
 import { useUserStore } from "@/stores/user/provider";
 import { notifications } from "../common/notifications";
 import { PopupMenu } from "../common/popup-menu";
+import { getCurrentUserRole } from "./helpers";
+import { useProjetsStore } from "@/stores/projets/provider";
 
 export type PartageOverviewMemberStatusAdminProps = {
   member: UserProjetWithUser;
@@ -14,7 +16,10 @@ export type PartageOverviewMemberStatusAdminProps = {
 
 export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewMemberStatusAdminProps) => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const members = useProjetsStore((state) => state.getCurrentProjet())?.users;
   const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
+  const currentUserRole = getCurrentUserRole(members, currentUserId);
+
   // TODO: À garder selon règles métier.
   // const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
 
@@ -61,7 +66,7 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
         <i className="ri-checkbox-circle-fill mr-2 size-6 text-dsfr-background-action-high-success-hover"></i>
         activé
       </div>
-      {!props.isCurrentUser && <PopupMenu links={links} />}
+      {!props.isCurrentUser && currentUserRole === "ADMIN" && <PopupMenu links={links} />}
     </div>
   );
 };

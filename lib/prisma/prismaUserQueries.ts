@@ -260,7 +260,6 @@ export const deleteUserFromProject = async (userId: string, projectId: number, d
 
 export const inviteMember = async (projectId: number, email: string, role: RoleProjet) => {
   return prismaClient.$transaction(async (tx) => {
-    // TODO: confirmer que ces valeurs ne sont pas autorisées
     if (role === "EDITEUR" || role === "ADMIN") {
       return null;
     }
@@ -280,24 +279,32 @@ export const inviteMember = async (projectId: number, email: string, role: RoleP
       });
     }
 
-    const existingInvitation = await tx.user_projet.findFirst({
+    const invitationToken = `${generateRandomId()}`;
+
+    const existingUserProject = await tx.user_projet.findUnique({
       where: {
-        projet_id: projectId,
-        email_address: email,
+        user_id_projet_id: {
+          user_id: user.id,
+          projet_id: projectId,
+        },
       },
     });
 
-    const invitationToken = `${generateRandomId()}`;
     let userProject;
 
-    if (existingInvitation && existingInvitation.invitation_status === "INVITED") {
+    if (existingUserProject) {
       userProject = await tx.user_projet.update({
-        where: { id: existingInvitation.id },
+        where: {
+          user_id_projet_id: {
+            user_id: user.id,
+            projet_id: projectId,
+          },
+        },
         data: {
           role,
+          invitation_status: "INVITED",
           deleted_at: null,
           deleted_by: null,
-          user_id: user.id,
           invitation_token: invitationToken,
         },
       });

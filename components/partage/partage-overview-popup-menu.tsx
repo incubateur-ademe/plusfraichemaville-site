@@ -93,7 +93,7 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
     },
   ];
 
-  const linksByRole = isAdmin ? links : [links[0]];
+  const linksByRole = isAdmin ? [links[1]] : [links[0]];
 
   return <PopupMenu links={linksByRole} />;
 };
