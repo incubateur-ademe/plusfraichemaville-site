@@ -19,7 +19,7 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
   const name = !prenom && !nom ? member.email_address : `${prenom ?? "-"} ${nom ?? "-"}`;
 
   const status: Record<InvitationStatus, ReactElement> = {
-    ACCEPTED: <PartageOverviewMemberStatusAcceptedAdmin member={member} />,
+    ACCEPTED: <PartageOverviewMemberStatusAcceptedAdmin member={member} isCurrentUser={isCurrentUser} />,
     INVITED: <PartageOverviewMemberStatusInvited member={member} />,
     REQUESTED: <PartageOverviewMemberStatusRequested member={member} />,
     DECLINED: <></>,

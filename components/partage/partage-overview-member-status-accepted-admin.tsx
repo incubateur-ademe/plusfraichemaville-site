@@ -9,20 +9,23 @@ import { PopupMenu } from "../common/popup-menu";
 
 export type PartageOverviewMemberStatusAdminProps = {
   member: UserProjetWithUser;
+  isCurrentUser?: boolean;
 };
 
 export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewMemberStatusAdminProps) => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
   const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
+  // TODO: À garder selon règles métier.
+  // const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
 
   const links = [
-    {
-      label: "Modifier les accès",
-      iconId: "ri-pencil-fill",
-      className: "text-dsfr-text-label-blue-france",
-      onClick: () => setCurrentUserModification(props),
-    },
+    // TODO: À garder selon règles métier.
+    // {
+    //   label: "Modifier les accès",
+    //   iconId: "ri-pencil-fill",
+    //   className: "text-dsfr-text-label-blue-france",
+    //   onClick: () => setCurrentUserModification(props),
+    // },
     {
       label: "Supprimer le membre",
       iconId: "ri-delete-bin-fill",
@@ -38,6 +41,7 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
                   props.member.user_id,
                   props.member.projet_id,
                 );
+                console.log("result ====>", result);
                 notifications(result.type, result.message);
               }
             },
@@ -57,7 +61,7 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
         <i className="ri-checkbox-circle-fill mr-2 size-6 text-dsfr-background-action-high-success-hover"></i>
         activé
       </div>
-      <PopupMenu links={links} />
+      {!props.isCurrentUser && <PopupMenu links={links} />}
     </div>
   );
 };

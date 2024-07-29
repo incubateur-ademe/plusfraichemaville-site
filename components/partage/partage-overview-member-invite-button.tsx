@@ -6,7 +6,6 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { PartageUserInvitationData, PartageUserInvitationSchema } from "@/forms/partage/partage-user-invitation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import SelectFormField from "../common/SelectFormField";
 import InputFormField from "../common/InputFormField";
 import { inviteMemberAction } from "@/actions/users/invite-user-action";
 import { useProjetsStore } from "@/stores/projets/provider";
@@ -28,7 +27,7 @@ export const PartageOverviewMemberInviteButton = () => {
 
   const onSubmit: SubmitHandler<PartageUserInvitationData> = async (data) => {
     if (projectId) {
-      const result = await inviteMemberAction(projectId, data.email, "", data.role);
+      const result = await inviteMemberAction(projectId, data.email, "", "LECTEUR");
       notifications(result.type, result.message);
     }
   };
@@ -42,17 +41,17 @@ export const PartageOverviewMemberInviteButton = () => {
         <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Inviter un membre</h2>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <InputFormField control={form.control} path="email" />
-          <SelectFormField
+          {/* TODO: confirmer que ces valeurs ne sont pas autorisées */}
+          {/* <SelectFormField
             control={form.control}
             path="role"
             label=""
             options={[
-              // TODO: confirmer que ces valeurs ne sont pas autorisées
-              // { name: "Admin", value: "ADMIN" },
-              // { name: "Editeur", value: "EDITEUR" },
+              { name: "Admin", value: "ADMIN" },
+              { name: "Editeur", value: "EDITEUR" },
               { name: "Lecteur", value: "LECTEUR" },
             ]}
-          />
+          /> */}
           <div className="flex justify-between">
             <Button priority="tertiary" onClick={modal.close} nativeButtonProps={modal} type="button" className="mr-4">
               Annuler

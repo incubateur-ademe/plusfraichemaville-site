@@ -2,7 +2,7 @@
 
 import { useProjetsStore } from "@/stores/projets/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { checkOtherAdminExists } from "./helpers";
+import { checkOtherAdminExists, getCurrentUserRole } from "./helpers";
 import { useUserStore } from "@/stores/user/provider";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useTransition } from "react";
@@ -25,6 +25,7 @@ export const PartageOverviewQuit = () => {
   const members = useProjetsStore((state) => state.getCurrentProjet()?.users);
 
   const hasOtherAdmins = checkOtherAdminExists(members, currentUserId);
+  const currentUserRole = getCurrentUserRole(members, currentUserId);
 
   const handleQuitProject = () => {
     startTransition(async () => {
@@ -39,6 +40,10 @@ export const PartageOverviewQuit = () => {
       }
     });
   };
+
+  if (currentUserRole === "ADMIN") {
+    return null;
+  }
 
   return (
     <div className="mt-5 flex items-center justify-between rounded-2xl bg-white px-8 py-6">
