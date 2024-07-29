@@ -213,6 +213,8 @@ export const updateUserRoleProject = async (
   projectId: number,
   newRole: RoleProjet,
 ): Promise<UserProjetWithUser | null> => {
+  console.log("ici la role", newRole);
+
   // TODO: confirmer que ces valeurs ne sont pas autorisées
   if (newRole === "ADMIN" || newRole === "EDITEUR") {
     return null;

@@ -96,9 +96,8 @@ export const PartageMemberModificationRoleModale = () => {
                 path="role"
                 label=""
                 options={[
-                  // TODO: confirmer que ces valeurs ne sont pas autorisées
-                  // { name: "Admin", value: "ADMIN" },
-                  // { name: "Editeur", value: "EDITEUR" },
+                  { name: "Admin", value: "ADMIN" },
+                  { name: "Editeur", value: "EDITEUR" },
                   { name: "Lecteur", value: "LECTEUR" },
                 ]}
               />
