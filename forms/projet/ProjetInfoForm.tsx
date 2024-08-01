@@ -45,9 +45,12 @@ export const ProjetInfoForm = ({ projet, readOnly }: { projet?: ProjetWithRelati
   }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
-    const result = await upsertProjetAction({
-      ...data,
-    });
+    const result = await upsertProjetAction(
+      {
+        ...data,
+      },
+      readOnly,
+    );
     notifications(result.type, result.message);
 
     if (result.type === "success") {

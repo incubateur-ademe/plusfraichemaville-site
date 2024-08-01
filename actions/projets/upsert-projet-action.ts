@@ -12,6 +12,7 @@ import { PermissionManager } from "@/helpers/permission-manager";
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
+  readOnly?: boolean,
 ): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
@@ -26,7 +27,7 @@ export const upsertProjetAction = async (
   const canUpdateProjet =
     data.projetId && (await new PermissionManager().canEditProject(session.user.id, data.projetId));
 
-  if (!canUpdateProjet) {
+  if (!canUpdateProjet && readOnly) {
     return { type: "error", message: "TECHNICAL_ERROR" };
   }
 
