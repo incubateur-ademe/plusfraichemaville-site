@@ -3,7 +3,7 @@
 import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
+
 import { getEstimationById, updateEstimationMateriaux } from "@/lib/prisma/prismaEstimationQueries";
 import {
   EstimationMateriauxFormData,
@@ -14,6 +14,7 @@ import {
   EstimationMateriauxFormSimpleFieldSchema,
   EstimationMateriauxSimpleFieldFormData,
 } from "@/forms/estimation/estimation-materiau-form-simple-field-schema";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const updateEstimationMateriauxAction = async (
   estimationId: number,
@@ -25,7 +26,12 @@ export const updateEstimationMateriauxAction = async (
   }
 
   const estimation = await getEstimationById(estimationId);
-  if (!estimation || !(await hasPermissionToUpdateProjet(estimation.projet_id, session.user.id))) {
+  if (!estimation) {
+    return { type: "error", message: "TECHNICAL_ERROR" };
+  }
+
+  const canUpdateProjet = await new PermissionManager().canEditProject(session.user.id, estimation.projet_id);
+  if (!canUpdateProjet) {
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 

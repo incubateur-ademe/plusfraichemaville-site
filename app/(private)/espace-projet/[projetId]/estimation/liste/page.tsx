@@ -6,13 +6,17 @@ import { redirect } from "next/navigation";
 import { EstimationOverviewCard } from "@/components/estimation/estimation-overview-card";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
+import { useUserStore } from "@/stores/user/provider";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
+
   if (!currentProjet) {
     return null;
   }
-  if (currentProjet.estimations.length < 1) {
+  if (currentProjet.estimations.length < 1 && isCurrentUserAdmin) {
     redirect(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id));
   } else {
     return (
@@ -28,14 +32,16 @@ export default function CreateEstimationPage() {
           ))}
         </div>
         <div className="mt-12 flex flex-row gap-6">
-          <Button
-            className="rounded-3xl"
-            iconId="ri-add-circle-fill"
-            iconPosition="left"
-            linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id), target: "_self" }}
-          >
-            Ajouter une estimation
-          </Button>
+          {isCurrentUserAdmin && (
+            <Button
+              className="rounded-3xl"
+              iconId="ri-add-circle-fill"
+              iconPosition="left"
+              linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id), target: "_self" }}
+            >
+              Ajouter une estimation
+            </Button>
+          )}
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
             className="fr-btn fr-btn--secondary rounded-3xl"
