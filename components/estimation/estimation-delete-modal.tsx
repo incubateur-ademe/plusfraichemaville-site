@@ -40,7 +40,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
             className: "rounded-3xl !min-h-fit !text-sm mr-4",
 
             onClick: async () => {
-              const res = await deleteEstimationAction(estimation.id);
+              const res = await deleteEstimationAction(estimation.id, estimation.projet_id);
               notifications(res.type, res.message);
               const impactedProjet = getProjetById(estimation.projet_id);
               if (res.type === "success" && impactedProjet) {

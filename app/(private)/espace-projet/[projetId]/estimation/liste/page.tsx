@@ -28,7 +28,11 @@ export default function CreateEstimationPage() {
         </div>
         <div className="flex flex-col gap-12">
           {currentProjet.estimations.map((estimation) => (
-            <EstimationOverviewCard key={estimation.id} estimation={estimation} />
+            <EstimationOverviewCard
+              key={estimation.id}
+              estimation={estimation}
+              isCurrentUserAdmin={isCurrentUserAdmin}
+            />
           ))}
         </div>
         <div className="mt-12 flex flex-row gap-6">
