@@ -4,5 +4,5 @@ import { getAllFichesDiagnostic } from "@/lib/strapi/queries/fiches-diagnostic-q
 export default async function FichesDiagnosticPage() {
   const fichesDiagnosticResponse = await getAllFichesDiagnostic();
 
-  return <FichesDiagnostic fichesDiagnostic={fichesDiagnosticResponse} />;
+  return <FichesDiagnostic fichesDiagnostic={fichesDiagnosticResponse} withReadOnly />;
 }

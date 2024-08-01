@@ -5,6 +5,7 @@ import { PartageOverviewMemberInviteButton } from "./partage-overview-member-inv
 type PartageOverviewWrapperProps = {
   title: string;
   withSharingOption?: boolean;
+  currentUserIsAdmin?: boolean;
 } & PropsWithChildren;
 
 export const PartageOverviewWrapper = ({ title, withSharingOption, children }: PartageOverviewWrapperProps) => {
