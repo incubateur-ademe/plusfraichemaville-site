@@ -83,25 +83,46 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
   const contentCard = (
     <>
       <div className={clsx(`relative mb-5 flex rounded-xl p-5 ${disabledText}`)}>
-        <div className="mr-6">
-          <PictoEspaceSelector
-            pictoId={projet.type_espace as PictoId}
-            withBackground
-            size="large"
-            pictoClassName="svg-blue"
-          />
-        </div>
-        <div>
-          <h3 className="mb-0 text-[22px] text-dsfr-text-label-blue-france">{projet.nom}</h3>
-          <h4 className="mb-4 text-lg text-dsfr-text-label-blue-france">
-            <i className="ri-map-pin-line mr-1 before:!w-4"></i>
-            {projet.collectivite.nom}
-          </h4>
+        <div
+          className={clsx(
+            "flex",
+            (invitationStatus === "REQUESTED" || invitationStatus === "INVITED" || isBrowsing === true) && "opacity-25",
+          )}
+        >
+          <div className="mr-6">
+            <PictoEspaceSelector
+              pictoId={projet.type_espace as PictoId}
+              withBackground
+              size="large"
+              pictoClassName="svg-blue"
+            />
+          </div>
+          <div>
+            <h3 className="mb-0 text-[22px] text-dsfr-text-label-blue-france">{projet.nom}</h3>
+            <h4 className="mb-4 text-lg text-dsfr-text-label-blue-france">
+              <i className="ri-map-pin-line mr-1 before:!w-4"></i>
+              {projet.collectivite.nom}
+            </h4>
+          </div>
         </div>
         <Conditional>
-          <Case condition={invitationStatus === "ACCEPTED" || invitationStatus === "INVITED" || isBrowsing === true}>
-            <div className="absolute right-5 top-5 h-full text-sm">
-              <div className="mb-2 flex items-center gap-6">
+          <Case
+            condition={
+              invitationStatus === "ACCEPTED" ||
+              invitationStatus === "INVITED" ||
+              invitationStatus === "REQUESTED" ||
+              isBrowsing === true
+            }
+          >
+            <div className={clsx("absolute right-5 top-5 h-full text-sm")}>
+              <div
+                className={clsx(
+                  "mb-2 flex items-center gap-6",
+
+                  (invitationStatus === "REQUESTED" || invitationStatus === "INVITED" || isBrowsing === true) &&
+                    "opacity-25",
+                )}
+              >
                 <div className="flex items-center gap-2">
                   <i className="ri-team-fill text-pfmv-navy"></i>
                   {getAllUserProjectCount(projet)}
@@ -111,8 +132,21 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
                 </div>
               </div>
               <Conditional>
-                <Case condition={invitationStatus === "INVITED" || invitationStatus === "ACCEPTED"}>
-                  <span className="ml-auto block w-fit lowercase">({currentUserInfo?.role})</span>
+                <Case
+                  condition={
+                    invitationStatus === "INVITED" ||
+                    invitationStatus === "ACCEPTED" ||
+                    invitationStatus === "REQUESTED"
+                  }
+                >
+                  <span
+                    className={clsx(
+                      "ml-auto block w-fit lowercase",
+                      (invitationStatus === "REQUESTED" || invitationStatus === "INVITED") && "opacity-25",
+                    )}
+                  >
+                    ({currentUserInfo?.role})
+                  </span>
                 </Case>
               </Conditional>
               <Conditional>
@@ -126,14 +160,14 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
                 </Case>
               </Conditional>
               <Conditional>
-                <Case condition={isBrowsing === true}>
+                <Case condition={isBrowsing === true || invitationStatus === "REQUESTED"}>
                   {hasAlreadyRequest ? (
-                    <span className="flex items-center gap-2">
+                    <span className={clsx("flex items-center gap-2", "mt-4 justify-end")}>
                       <i className="ri-hourglass-fill text-pfmv-climadiag-red"></i>
                       En attente
                     </span>
                   ) : (
-                    <span className="flex items-center gap-2">
+                    <span className={clsx("flex items-center gap-2", "mt-4 justify-end")}>
                       <i className="ri-lock-fill text-pfmv-climadiag-red"></i>
                       Accès restreint
                     </span>

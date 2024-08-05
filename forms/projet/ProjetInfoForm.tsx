@@ -20,7 +20,7 @@ import { mapDBCollectiviteToCollectiviteAddress, mapDBProjetToProjetAddress } fr
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import AddressInputFormField from "@/components/common/address-input-form-field";
 
-export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => {
+export const ProjetInfoForm = ({ projet, readOnly }: { projet?: ProjetWithRelations; readOnly?: boolean }) => {
   const router = useRouter();
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
 
@@ -45,9 +45,12 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
   }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
-    const result = await upsertProjetAction({
-      ...data,
-    });
+    const result = await upsertProjetAction(
+      {
+        ...data,
+      },
+      readOnly,
+    );
     notifications(result.type, result.message);
 
     if (result.type === "success") {
@@ -60,12 +63,12 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
     }
   };
 
-  const disabled = form.formState.isSubmitting;
+  const disabled = readOnly ?? form.formState.isSubmitting;
 
   return (
     <>
       <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
-        <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} />
+        <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} disabled={disabled} />
         <SelectFormField
           control={form.control}
           path="typeEspace"
@@ -73,11 +76,13 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
           asterisk={true}
           options={typeEspaceOptions}
           placeholder="Selectionnez un type d'espace"
+          disabled={disabled}
         />
         <AddressInputFormField
           control={form.control}
           path="adresse"
           label="Si je la connais, adresse du lieu de l'intervention"
+          disabled={disabled}
         />
         <InputFormField
           control={form.control}
@@ -86,6 +91,7 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
           asterisk={true}
           type="month"
           placeholder="YYYY-MM"
+          disabled={disabled}
         />
         <SelectFormField
           control={form.control}
@@ -94,17 +100,27 @@ export const ProjetInfoForm = ({ projet }: { projet?: ProjetWithRelations }) => 
           asterisk={true}
           options={niveauxMaturiteProjetOptions}
           placeholder="Selectionnez un niveau de maturité"
+          disabled={disabled}
         />
         <CollectiviteInputFormField
           control={form.control}
           path="collectivite"
           label="Collectivité du projet"
           asterisk={true}
+          disabled={disabled}
         />
-        <Button className={`rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>
-          {"Valider"}
-        </Button>
+
+        {!readOnly && (
+          <Button className={`rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>
+            {"Valider"}
+          </Button>
+        )}
       </form>
+      {readOnly && (
+        <Button className={`mt-6 rounded-3xl bg-pfmv-navy text-sm`} priority="tertiary" onClick={router.back}>
+          Retour
+        </Button>
+      )}
     </>
   );
 };

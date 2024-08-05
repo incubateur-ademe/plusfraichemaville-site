@@ -27,7 +27,7 @@ export class PermissionManager {
   }
 
   async canEditProject(userId: string, projectId: number) {
-    return this.isAdminOrEditeur(userId, projectId);
+    return this.isAdmin(userId, projectId);
   }
 
   async canDeleteProject(userId: string, projectId: number) {

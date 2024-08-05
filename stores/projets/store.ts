@@ -2,6 +2,7 @@ import { EstimationAide, ProjetWithRelations } from "@/lib/prisma/prismaCustomTy
 import { createStore } from "zustand/vanilla";
 import { upsert } from "@/helpers/listUtils";
 import { updateAideInEstimation } from "./helper";
+import { currentUserIsAdmin } from "@/components/partage/helpers";
 
 export interface ProjetsState {
   projets: ProjetWithRelations[];
@@ -17,6 +18,7 @@ export type ProjetsActions = {
   addAideInEstimation: (_estimationId: number, _estimationAide: EstimationAide) => void;
   deleteAideInEstimation: (_estimationId: number, _aideTerritoireId: number) => void;
   deleteProjet: (_projetId: number) => void;
+  isCurrentUserAdmin: (_userId?: string) => boolean;
 };
 
 export type ProjetsStore = ProjetsState & ProjetsActions;
@@ -51,6 +53,10 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
     },
     deleteAideInEstimation: (estimationId, aideTerritoireId) => {
       set((state) => updateAideInEstimation(state, estimationId, null, aideTerritoireId));
+    },
+    isCurrentUserAdmin: (userId?: string) => {
+      const currentProjet = get().getCurrentProjet();
+      return currentProjet ? currentUserIsAdmin(currentProjet.users, userId) : false;
     },
   }));
 };

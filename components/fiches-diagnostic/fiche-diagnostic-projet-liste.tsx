@@ -9,9 +9,12 @@ import { FicheDiagnosticProjetListeAddButton } from "./fiche-diagnostic-projet-l
 
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { useUserStore } from "@/stores/user/provider";
 
 export const FicheDiagnosticProjetListe = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const userId = useUserStore((state) => state.userInfos?.id);
+  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(userId));
   const savedFichesDiagnostic = projet?.fiches_diagnostic_id;
 
   return (
@@ -21,9 +24,11 @@ export const FicheDiagnosticProjetListe = () => {
         {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
           <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
         ))}
-        <div className="flex items-center">
-          <FicheDiagnosticProjetListeAddButton />
-        </div>
+        {isCurrentUserAdmin && (
+          <div className="flex items-center">
+            <FicheDiagnosticProjetListeAddButton />
+          </div>
+        )}
       </div>
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}

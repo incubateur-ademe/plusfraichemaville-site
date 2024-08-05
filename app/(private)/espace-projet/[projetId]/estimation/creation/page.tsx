@@ -2,14 +2,20 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { EstimationInfoForm } from "@/forms/estimation/EstimationInfoForm";
 import Button from "@codegouvfr/react-dsfr/Button";
-import React from "react";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { useUserStore } from "@/stores/user/provider";
+import { redirect } from "next/navigation";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  if (!currentProjet) {
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
+
+  if (!currentProjet || !isCurrentUserAdmin) {
+    currentProjet && redirect(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(currentProjet.id));
     return null;
   }
+
   return (
     <div className="fr-container pt-8">
       <h1 className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</h1>

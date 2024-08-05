@@ -4,10 +4,10 @@ import { auth } from "@/lib/next-auth/auth";
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { EstimationFormData, EstimationFormSchema } from "@/forms/estimation/EstimationFormSchema";
 import { createEstimation } from "@/lib/prisma/prismaEstimationQueries";
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const createEstimationAction = async (
   projetId: number,
@@ -22,7 +22,9 @@ export const createEstimationAction = async (
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  if (projetId && !(await hasPermissionToUpdateProjet(projetId, session.user.id))) {
+  const canUpdateProjet = await new PermissionManager().canEditProject(session.user.id, projetId);
+
+  if (!canUpdateProjet) {
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 
