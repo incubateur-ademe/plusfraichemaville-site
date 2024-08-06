@@ -215,7 +215,6 @@ export const updateUserRoleProject = async (
 ): Promise<UserProjetWithUser | null> => {
   console.log("ici la role", newRole);
 
-  // TODO: confirmer que ces valeurs ne sont pas autorisées
   if (newRole === "ADMIN" || newRole === "EDITEUR") {
     return null;
   }
@@ -492,18 +491,12 @@ export const requestToJoinProject = async (
   email: string,
 ): Promise<RequestToJoinProjectResult | null> => {
   return prismaClient.$transaction(async (tx) => {
-    const existingUserProject = await tx.user_projet.findUnique({
+    const existingUserProject = await tx.user_projet.findFirst({
       where: {
-        user_id_projet_id: {
-          user_id: userId,
-          projet_id: projectId,
-        },
+        user_id: userId,
+        projet_id: projectId,
       },
     });
-
-    if (existingUserProject) {
-      return null;
-    }
 
     const projectWithAdmin = await tx.projet.findUnique({
       where: { id: projectId },
@@ -530,16 +523,32 @@ export const requestToJoinProject = async (
 
     const invitationToken = `${generateRandomId()}`;
 
-    const newUserProject = await tx.user_projet.create({
-      data: {
-        user_id: userId,
-        projet_id: projectId,
-        role: "LECTEUR",
-        invitation_status: "REQUESTED",
-        email_address: email,
-        invitation_token: invitationToken,
-      },
-    });
+    let newUserProject;
+
+    if (existingUserProject) {
+      newUserProject = await tx.user_projet.update({
+        where: {
+          id: existingUserProject.id,
+        },
+        data: {
+          invitation_status: "REQUESTED",
+          invitation_token: invitationToken,
+          deleted_at: null,
+          deleted_by: null,
+        },
+      });
+    } else {
+      newUserProject = await tx.user_projet.create({
+        data: {
+          user_id: userId,
+          projet_id: projectId,
+          role: "LECTEUR",
+          invitation_status: "REQUESTED",
+          email_address: email,
+          invitation_token: invitationToken,
+        },
+      });
+    }
 
     const oldestAdmin = projectWithAdmin.users[0]?.user;
 
@@ -562,7 +571,6 @@ export const requestToJoinProject = async (
     };
   });
 };
-
 export const discardedInformation = async (userId: string, modalId: string): Promise<User | null> => {
   return prismaClient.$transaction(async (tx) => {
     const user = await tx.user.findUnique({

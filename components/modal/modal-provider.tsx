@@ -5,6 +5,7 @@ import { AideFicheModal } from "@/components/financement/aide/aide-fiche-modal";
 import { PartageMemberModificationRoleModale } from "../partage/partage-member-modification-role-modale";
 import { PartageOverviewDeleteOrQuitModale } from "../partage/partage-overview-delete-or-quit-modale";
 import { ToJoinProjetsModal } from "../liste-projets/to-join-projets-modal";
+import { TableauDeBordDiscardViewerModeModal } from "../tableau-de-bord/tableau-de-bord-discard-viewer-mode-modal";
 
 export default function ModalProvider() {
   return (
@@ -14,6 +15,7 @@ export default function ModalProvider() {
       <PartageMemberModificationRoleModale />
       <PartageOverviewDeleteOrQuitModale />
       <ToJoinProjetsModal />
+      <TableauDeBordDiscardViewerModeModal />
     </>
   );
 }

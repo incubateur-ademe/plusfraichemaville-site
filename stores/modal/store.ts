@@ -10,6 +10,7 @@ interface ModalState {
   currentUserModification: PartageOverviewMemberStatusAdminProps | null;
   currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState;
   currentToJoinProjets: number | null;
+  currentDiscardViewerMode: boolean | null;
 }
 
 export type ModalActions = {
@@ -18,6 +19,7 @@ export type ModalActions = {
   setCurrentUserModification: (_currentUserModification: PartageOverviewMemberStatusAdminProps | null) => void;
   setCurrentDeleteOrQuitModal: (_currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState) => void;
   setCurrentToJoinProjets: (_collectiviteId: number | null) => void;
+  setCurrentDiscardViewerMode: (_currentDiscardViewerMode: boolean | null) => void;
 };
 
 export type ModalStore = ModalState & ModalActions;
@@ -28,6 +30,7 @@ export const defaultInitState: ModalState = {
   currentUserModification: null,
   currentDeleteOrQuitModal: null,
   currentToJoinProjets: null,
+  currentDiscardViewerMode: null,
 };
 
 export const initModalStore = (): ModalState => {
@@ -42,5 +45,6 @@ export const createModalStore = (initState: ModalState = defaultInitState) => {
     setCurrentUserModification: (currentUserModification) => set(() => ({ currentUserModification })),
     setCurrentDeleteOrQuitModal: (currentDeleteOrQuitModal) => set(() => ({ currentDeleteOrQuitModal })),
     setCurrentToJoinProjets: (collectiviteId) => set(() => ({ currentToJoinProjets: collectiviteId })),
+    setCurrentDiscardViewerMode: (currentDiscardViewerMode) => set(() => ({ currentDiscardViewerMode })),
   }));
 };

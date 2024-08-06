@@ -4,7 +4,6 @@ import { TableauDeBordSuivi, TableauDeBordTab } from ".";
 import { TableauDeBordPartage } from "./tableau-de-bord-partage";
 import { TableauDeBordRecommandation } from "./tableau-de-bord-recommandations";
 import { useSearchParams } from "next/navigation";
-import { TableauDeBordViewerModeModal } from "./tableau-de-bord-viewer-mode-modal";
 
 export const TableauDeBordTabs = () => {
   const params = useSearchParams();
@@ -30,7 +29,6 @@ export const TableauDeBordTabs = () => {
 
   return (
     <>
-      <TableauDeBordViewerModeModal />
       <div className="tabs min-h-[40rem] bg-dsfr-border-action-low-blue-france py-10">
         <div className="fr-container">
           {tabs.map(

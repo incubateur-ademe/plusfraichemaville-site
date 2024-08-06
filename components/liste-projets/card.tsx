@@ -16,6 +16,8 @@ import { acceptProjectInvitationAction } from "@/actions/users/accept-project-in
 import { declineProjectInvitationAction } from "@/actions/users/decline-project-invitation-action";
 import { requestToJoinProjectAction } from "@/actions/projets/request-to-join-project-action";
 import { PartageOverviewPopupMenu } from "../partage/partage-overview-popup-menu";
+import { getCurrentUserRole } from "../partage/helpers";
+import { useModalStore } from "@/stores/modal/provider";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -30,6 +32,10 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
   const currentUserInfo = getCurrentUserProjectInfos(projet, currentUserId);
   const members = projet.users;
   const [isPending, startTransition] = useTransition();
+
+  const setDiscardViewerMode = useModalStore((state) => state.setCurrentDiscardViewerMode);
+  const isLecteur = (projet && getCurrentUserRole(projet.users, currentUserId) !== "ADMIN") ?? false;
+  const openDiscardViewerMode = () => isLecteur && setDiscardViewerMode(true);
 
   const hasAlreadyRequest = getCurrentUserProjectInfos(projet, currentUserId)?.invitation_status === "REQUESTED";
 
@@ -186,7 +192,9 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
       <Conditional>
         <Case condition={invitationStatus === "ACCEPTED"}>
           <div className="pfmv-card">
-            <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>{contentCard}</Link>
+            <Link onClick={openDiscardViewerMode} href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>
+              {contentCard}
+            </Link>
           </div>
         </Case>
         <Default>
