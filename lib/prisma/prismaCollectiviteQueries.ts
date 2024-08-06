@@ -62,26 +62,17 @@ export const getAvailableProjectsForCollectivite = async (
 ): Promise<ProjetWithRelations[]> => {
   const projects = await prismaClient.projet.findMany({
     where: {
-      collectiviteId: collectiviteId,
+      collectiviteId,
       deleted_at: null,
-      OR: [
-        {
-          users: {
-            none: {
-              user_id: userId,
-              invitation_status: { in: ["ACCEPTED"] },
-            },
+      NOT: {
+        users: {
+          some: {
+            user_id: userId,
+            invitation_status: "ACCEPTED",
+            deleted_at: null,
           },
         },
-        {
-          users: {
-            some: {
-              user_id: userId,
-              invitation_status: "REQUESTED",
-            },
-          },
-        },
-      ],
+      },
     },
     include: {
       collectivite: true,

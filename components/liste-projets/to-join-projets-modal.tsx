@@ -39,7 +39,7 @@ export const ToJoinProjetsModal = () => {
   return (
     <>
       <modal.Component title="" size="large" className="join-project-modal">
-        <h2 className="mb-4 text-xl font-bold">Rejoindre d’autres projets</h2>
+        <h2 className="mb-4 text-xl font-bold">Rejoindre {"d'autres"} projets</h2>
         <span className="mb-8 block text-base">
           Vous pouvez consulter tous les projets liés à la collectivité concernée et soumettre une demande {"d'accès"}.
           {"L'administrateur"} sera alors notifié de votre demande.

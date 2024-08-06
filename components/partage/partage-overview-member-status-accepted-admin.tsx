@@ -46,7 +46,6 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
                   props.member.user_id,
                   props.member.projet_id,
                 );
-                console.log("result ====>", result);
                 notifications(result.type, result.message);
               }
             },

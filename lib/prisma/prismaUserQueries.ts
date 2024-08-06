@@ -248,6 +248,7 @@ export const deleteUserFromProject = async (userId: string, projectId: number, d
     data: {
       deleted_at: new Date(),
       deleted_by: deletedById,
+      invitation_status: "DECLINED",
     },
     include: {
       user: true,
