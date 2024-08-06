@@ -8,9 +8,14 @@ import clsx from "clsx";
 import { BannerProjetButtons } from "./banner-projet-buttons";
 import { Suspense } from "react";
 import { BannerProjetSkeleton } from "./banner-projet-skeleton";
+import { getCurrentUserRole } from "@/components/partage/helpers";
+import { useUserStore } from "@/stores/user/provider";
+import { LecteurModeLabel } from "@/components/common/lecteur-mode-label";
 
 export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const isLecteur = (currentProjet && getCurrentUserRole(currentProjet.users, currentUserId) !== "ADMIN") ?? false;
 
   return (
     <div className={`bg-dsfr-background-alt-blue-france py-4 ${className} min-h-[7rem]`}>
@@ -56,9 +61,16 @@ export default function BannerProjet({ className }: { className?: string }) {
               </Link>
             </div>
           </div>
-          <Suspense>
-            <BannerProjetButtons projetId={currentProjet.id} />
-          </Suspense>
+          <div className="flex gap-4">
+            {isLecteur && (
+              <div className="rounded-xl bg-white px-4 py-2">
+                <LecteurModeLabel />
+              </div>
+            )}
+            <Suspense>
+              <BannerProjetButtons projetId={currentProjet.id} />
+            </Suspense>
+          </div>
         </div>
       )}
     </div>

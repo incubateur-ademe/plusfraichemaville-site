@@ -3,12 +3,13 @@ import { useUserStore } from "@/stores/user/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
-import Image from "next/image";
+
 import { useEffect, useTransition } from "react";
 
 import { discardInformationAction } from "@/actions/users/discard-information-action";
 import { useModalStore } from "@/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
+import { LecteurModeLabel } from "../common/lecteur-mode-label";
 
 const MODAL_ID = "tableau-de-bord-lecteur-mode-modal";
 
@@ -61,8 +62,7 @@ export const TableauDeBordDiscardViewerModeModal = () => {
   return (
     <modal.Component title="" size="large">
       <h2 className="mb-4 flex gap-4 text-2xl">
-        <Image src="/images/espace-projet/viewer-mode.svg" width={46} height={35} alt="" />
-        Mode lecteur
+        <LecteurModeLabel />
       </h2>
       <div className="mb-6">
         Vous allez consulter ce projet en <strong>mode lecteur</strong>, sans possibilité de modification. Pour ajuster

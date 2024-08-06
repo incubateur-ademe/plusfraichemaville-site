@@ -10,9 +10,10 @@ import { PFMV_ROUTES } from "@/helpers/routes";
 import React from "react";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
-import Image from "next/image";
+
 import { Case, Conditional } from "@/components/common/conditional-renderer";
 import { useUserStore } from "@/stores/user/provider";
+import { LecteurModeLabel } from "@/components/common/lecteur-mode-label";
 
 export const AideEstimationsListe = ({ estimations }: { estimations: EstimationWithAides[] }) => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
@@ -41,10 +42,7 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
                     </AideEstimationsListeLink>
                   </Case>
                   <Case condition={isCurrentUserAdmin === false}>
-                    <div className="flex items-center justify-center gap-4">
-                      <Image src="/images/espace-projet/viewer-mode.svg" width={46} height={35} alt="" />
-                      <strong className="text-pfmv-navy">Mode lecteur</strong>
-                    </div>
+                    <LecteurModeLabel />
                   </Case>
                 </Conditional>
               </AideEstimationsCardWithSelection>
@@ -61,10 +59,7 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
                     </AideEstimationsListeLink>
                   </Case>
                   <Case condition={isCurrentUserAdmin === false}>
-                    <div className="flex items-center justify-center gap-4">
-                      <Image src="/images/espace-projet/viewer-mode.svg" width={46} height={35} alt="" />
-                      <strong className="text-pfmv-navy">Mode lecteur</strong>
-                    </div>
+                    <LecteurModeLabel />
                   </Case>
                 </Conditional>
               </AideEstimationsCardWithoutSelection>

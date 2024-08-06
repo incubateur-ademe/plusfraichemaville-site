@@ -38,7 +38,7 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
   ];
 
   return (
-    <div className="flex gap-4">
+    <>
       {links.map((link, index) => {
         const Picto = link.picto;
         return (
@@ -87,6 +87,6 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };
