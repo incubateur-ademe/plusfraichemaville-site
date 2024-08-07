@@ -7,11 +7,11 @@ import { email, RoleProjet } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
 import { revalidatePath } from "next/cache";
 import { EmailService } from "@/services/brevo";
+import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
 
 export const inviteMemberAction = async (
   projectId: number,
   email: string,
-  projectName: string,
   role: RoleProjet,
 ): Promise<ResponseAction<{ mail?: email | null }>> => {
   try {
@@ -20,8 +20,9 @@ export const inviteMemberAction = async (
       return { type: "error", message: "UNAUTHENTICATED", mail: null };
     }
 
+    const projet = await getProjetById(projectId);
     const canShareProject = await new PermissionManager().canShareProject(session.user.id, projectId);
-    if (!canShareProject) {
+    if (!canShareProject || !projet) {
       return { type: "error", message: "UNAUTHORIZED", mail: null };
     }
 
@@ -30,7 +31,7 @@ export const inviteMemberAction = async (
       const emailService = new EmailService();
       const result = await emailService.sendInvitationEmail(
         email,
-        projectName,
+        projet.nom,
         invitation.userProject.invitation_token,
         invitation.invitationEmail.id,
       );
