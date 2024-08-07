@@ -30,7 +30,7 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
       storeAction: () => deleteAideInEstimation(estimationId, aideTerritoireId),
     },
     add: {
-      action: () => addAideInEstimationAction(estimationId, aideTerritoireId, currentProjetId),
+      action: () => addAideInEstimationAction(estimationId, aideTerritoireId),
       storeAction: (estimationAide: EstimationAide) => addAideInEstimation(estimationId, estimationAide),
     },
   };
