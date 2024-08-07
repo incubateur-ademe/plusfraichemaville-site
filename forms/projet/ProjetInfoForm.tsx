@@ -45,12 +45,9 @@ export const ProjetInfoForm = ({ projet, readOnly }: { projet?: ProjetWithRelati
   }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
-    const result = await upsertProjetAction(
-      {
-        ...data,
-      },
-      readOnly,
-    );
+    const result = await upsertProjetAction({
+      ...data,
+    });
     notifications(result.type, result.message);
 
     if (result.type === "success") {
@@ -116,7 +113,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: { projet?: ProjetWithRelati
           </Button>
         )}
       </form>
-      {readOnly && (
+      {readOnly  && (
         <Button className={`mt-6 rounded-3xl bg-pfmv-navy text-sm`} priority="tertiary" onClick={router.back}>
           Retour
         </Button>
