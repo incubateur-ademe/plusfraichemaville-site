@@ -25,7 +25,7 @@ export const acceptProjectInvitationAction = async (userId: string, projectId: n
     if (accept) {
       return {
         type: "success",
-        message: "ACCEPT_INVITATION",
+        message: "ACCEPT_INVITATION_PROJECT_ACCESS",
       };
     } else
       return {

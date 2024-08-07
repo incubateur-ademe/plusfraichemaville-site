@@ -8,7 +8,6 @@ import { revalidatePath } from "next/cache";
 import { declineProjectRequest } from "@/lib/prisma/prismaUserQueries";
 
 export const declineProjectRequestAction = async (
-  userId: string,
   projectId: number,
   userIdToUpdate: string,
 ): Promise<ResponseAction> => {
@@ -17,19 +16,19 @@ export const declineProjectRequestAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  const cantEditProject = await new PermissionManager().canEditProject(userId, projectId);
+  const cantEditProject = await new PermissionManager().canEditProject(session.user.id, projectId);
 
   if (!cantEditProject) {
     return { type: "error", message: "UNAUTHORIZED" };
   }
 
   try {
-    const accept = await declineProjectRequest(userIdToUpdate, projectId, userId);
+    const decline = await declineProjectRequest(userIdToUpdate, projectId, session.user.id);
     revalidatePath(`/espace-projet/${projectId}`);
-    if (accept) {
+    if (decline) {
       return {
         type: "success",
-        message: "DECLINDED_INVITATION",
+        message: "DECLINE_REQUEST_PROJECT_ACCESS",
       };
     } else
       return {
@@ -37,7 +36,7 @@ export const declineProjectRequestAction = async (
         message: "TECHNICAL_ERROR",
       };
   } catch (e) {
-    customCaptureException("Error in accepting invitation DB call", e);
+    customCaptureException("Error in declining invitation DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };
   }
 };

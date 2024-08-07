@@ -25,7 +25,7 @@ export const declineProjectInvitationAction = async (userId: string, projectId: 
     if (accept) {
       return {
         type: "success",
-        message: "DECLINDED_INVITATION",
+        message: "DECLINE_INVITATION_PROJECT_ACCESS",
       };
     } else
       return {
