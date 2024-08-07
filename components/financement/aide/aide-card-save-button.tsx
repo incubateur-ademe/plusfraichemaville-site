@@ -18,7 +18,6 @@ type AideCardSaveButtonProps = {
 
 export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }: AideCardSaveButtonProps) => {
   const { isLoading, startLoading, stopLoading } = useDelayedLoading(1000);
-  const currentProjetId = useProjetsStore((state) => state.getCurrentProjet()?.id);
   const addAideInEstimation = useProjetsStore((state) => state.addAideInEstimation);
   const deleteAideInEstimation = useProjetsStore((state) => state.deleteAideInEstimation);
   const savedId = useGetSavedAideInEstimationId(estimationId, aideTerritoireId);
@@ -26,7 +25,7 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
 
   const updater = {
     delete: {
-      action: () => deleteAideInEstimationAction(estimationId, savedId!, currentProjetId),
+      action: () => deleteAideInEstimationAction(estimationId, savedId!),
       storeAction: () => deleteAideInEstimation(estimationId, aideTerritoireId),
     },
     add: {
