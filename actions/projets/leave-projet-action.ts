@@ -12,10 +12,10 @@ export const leaveProjectAction = async (userId: string, projetId: number): Prom
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  const canUpdateProjet = await new PermissionManager().canUpdateUser(session.user.id, userId);
+  const canUpdateUser = await new PermissionManager().canUpdateUser(session.user.id, userId);
 
-  if (!canUpdateProjet) {
-    return { type: "error", message: "TECHNICAL_ERROR" };
+  if (!canUpdateUser) {
+    return { type: "error", message: "UNAUTHORIZED" };
   }
 
   try {
