@@ -25,7 +25,6 @@ export const success = {
   DECLINE_REQUEST_PROJECT_ACCESS: "Vous avez refusé la demande d'accès au projet.",
   REQUEST_SENT: "Votre demande a bien été envoyée.",
   QUIT_PROJET: "Vous avez quitté le projet.",
-  CHOICE_SAVED: "Vous choix a été enregistré.",
 };
 
 export const error = {

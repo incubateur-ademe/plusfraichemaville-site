@@ -41,10 +41,7 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
           options: {
             action: async () => {
               if (props.member.user_id && props.member.projet_id) {
-                const result = await deleteUserFromProjetAction(
-                  props.member.user_id,
-                  props.member.projet_id,
-                );
+                const result = await deleteUserFromProjetAction(props.member.user_id, props.member.projet_id);
                 notifications(result.type, result.message);
               }
             },
