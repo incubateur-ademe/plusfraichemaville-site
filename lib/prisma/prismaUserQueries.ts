@@ -167,20 +167,15 @@ export const getUserProjectRole = async (userId: string, projectId: number): Pro
   }
 };
 
-export const getOtherAdmins = async (currentUserId: string, projectId: number): Promise<boolean | undefined> => {
-  try {
-    const otherAdmins = await prismaClient.user_projet.findMany({
-      where: {
-        projet_id: projectId,
-        role: RoleProjet.ADMIN,
-        user_id: { not: currentUserId },
-      },
-    });
-    return otherAdmins.length > 0;
-  } catch (error) {
-    console.log("Erreur lors de la récuparation des autres admins : ", error);
-    throw error;
-  }
+export const getOtherAdmins = async (currentUserId: string, projectId: number): Promise<user_projet[]> => {
+  return prismaClient.user_projet.findMany({
+    where: {
+      projet_id: projectId,
+      role: RoleProjet.ADMIN,
+      user_id: { not: currentUserId },
+      deleted_at: null,
+    },
+  });
 };
 
 export const getOldestProjectAdmin = async (projectId: number) => {

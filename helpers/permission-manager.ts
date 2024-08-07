@@ -7,23 +7,12 @@ export class PermissionManager {
   }
 
   private async checkOtherAdminsExist(currentUserId: string, projectId: number) {
-    return getOtherAdmins(currentUserId, projectId);
+    return (await getOtherAdmins(currentUserId, projectId)).length > 0;
   }
 
   private async isAdmin(userId: string, projectId: number): Promise<boolean> {
     const role = await this.getUserProjectRole(userId, projectId);
     return role === RoleProjet.ADMIN;
-  }
-  private async isAdminOrEditeur(userId: string, projectId: number): Promise<boolean> {
-    const role = await this.getUserProjectRole(userId, projectId);
-    // TODO: confirmer que cette valeur n'est pas autorisée
-    // return role === RoleProjet.ADMIN || role === RoleProjet.EDITEUR;
-    return role === RoleProjet.ADMIN;
-  }
-
-  async canViewProject(userId: string, projectId: number) {
-    const role = await this.getUserProjectRole(userId, projectId);
-    return role !== null;
   }
 
   async canEditProject(userId: string, projectId: number) {
@@ -38,24 +27,21 @@ export class PermissionManager {
     return this.isAdmin(userId, projectId);
   }
 
-  async canUpdateUser(userIdToUpdate: string, userIdUpdating: string) {
+  canUpdateUser(userIdToUpdate: string, userIdUpdating: string) {
     return userIdToUpdate === userIdUpdating;
   }
 
-  async canViewUserProject(authenticatedUserId: string, userId: string) {
+  canViewUserProject(authenticatedUserId: string, userId: string) {
     return authenticatedUserId === userId;
   }
 
   async canUpdateUserRole(updatingUserId: string, targetUserId: string, projectId: number) {
-    const updatingUserRole = await this.getUserProjectRole(updatingUserId, projectId);
-
-    if (updatingUserRole !== RoleProjet.ADMIN) {
+    if (!(await this.isAdmin(updatingUserId, projectId))) {
       return false;
-    } else if (updatingUserId === targetUserId) {
-      const otherAdminsExist = await this.checkOtherAdminsExist(updatingUserId, projectId);
-      if (!otherAdminsExist) {
-        return false;
-      }
-    } else return true;
+    } else if (updatingUserId !== targetUserId) {
+      return true;
+    } else {
+      return await this.checkOtherAdminsExist(updatingUserId, projectId);
+    }
   }
 }
