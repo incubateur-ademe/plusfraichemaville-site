@@ -5,8 +5,8 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { useTransition } from "react";
 import { Spinner } from "../common/spinner";
 import { notifications } from "../common/notifications";
-import { acceptProjectRequestAction } from "@/actions/users/accept-project-request-action";
-import { declineProjectRequestAction } from "@/actions/users/decline-project-request-action";
+import { acceptProjectRequestAction } from "@/actions/userProjet/accept-project-request-action";
+import { declineProjectRequestAction } from "@/actions/userProjet/decline-project-request-action";
 
 export const PartageOverviewMemberStatusRequested = ({ member }: { member: UserProjetWithUser }) => {
   const [isPending, startTransition] = useTransition();

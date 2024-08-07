@@ -23,18 +23,9 @@ export const declineProjectRequestAction = async (
   }
 
   try {
-    const decline = await declineProjectRequest(userIdToUpdate, projectId, session.user.id);
+    await declineProjectRequest(userIdToUpdate, projectId, session.user.id);
     revalidatePath(`/espace-projet/${projectId}`);
-    if (decline) {
-      return {
-        type: "success",
-        message: "DECLINE_REQUEST_PROJECT_ACCESS",
-      };
-    } else
-      return {
-        type: "error",
-        message: "TECHNICAL_ERROR",
-      };
+    return { type: "success", message: "DECLINE_REQUEST_PROJECT_ACCESS" };
   } catch (e) {
     customCaptureException("Error in declining invitation DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };

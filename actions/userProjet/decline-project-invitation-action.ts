@@ -20,18 +20,9 @@ export const declineProjectInvitationAction = async (userId: string, projectId: 
   }
 
   try {
-    const accept = await declineProjectInvitation(userId, projectId);
+    await declineProjectInvitation(userId, projectId);
     revalidatePath(`/espace-projet/${projectId}`);
-    if (accept) {
-      return {
-        type: "success",
-        message: "DECLINE_INVITATION_PROJECT_ACCESS",
-      };
-    } else
-      return {
-        type: "error",
-        message: "TECHNICAL_ERROR",
-      };
+    return { type: "success", message: "DECLINE_INVITATION_PROJECT_ACCESS" };
   } catch (e) {
     customCaptureException("Error in decline invitation DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };
