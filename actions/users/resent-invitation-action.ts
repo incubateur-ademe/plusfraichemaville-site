@@ -7,10 +7,7 @@ import { PermissionManager } from "@/helpers/permission-manager";
 import { EmailService } from "@/services/brevo";
 import { prepareInvitationResend } from "@/lib/prisma/prismaUserQueries";
 
-export const resentInvitationAction = async (
-  userProjetId: number,
-  projectId: number,
-): Promise<ResponseAction> => {
+export const resentInvitationAction = async (userProjetId: number, projectId: number): Promise<ResponseAction> => {
   const session = await auth();
 
   if (!session) {
