@@ -3,10 +3,10 @@
 import { auth } from "@/lib/next-auth/auth";
 import { PermissionManager } from "@/helpers/permission-manager";
 import { inviteMember } from "@/lib/prisma/prismaUserQueries";
-import { RoleProjet, email } from "@prisma/client";
-import { sendInvitationAction } from "../emails/send-invitation-email-action";
+import { email, RoleProjet } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
 import { revalidatePath } from "next/cache";
+import { EmailService } from "@/services/brevo";
 
 export const inviteMemberAction = async (
   projectId: number,
@@ -27,14 +27,15 @@ export const inviteMemberAction = async (
 
     const invitation = await inviteMember(projectId, email, role);
     if (invitation) {
-      const result = await sendInvitationAction(
+      const emailService = new EmailService();
+      const result = await emailService.sendInvitationEmail(
         email,
         projectName,
         invitation.userProject.invitation_token,
         invitation.invitationEmail.id,
       );
       revalidatePath(`/espace-projet/${projectId}`);
-      return { type: "success", message: "EMAIL_SENT", mail: result.mail };
+      return { type: "success", message: "EMAIL_SENT", mail: result.email };
     }
     return { type: "error", message: "TECHNICAL_ERROR" };
   } catch (error) {
