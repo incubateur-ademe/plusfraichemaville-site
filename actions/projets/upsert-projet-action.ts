@@ -23,11 +23,8 @@ export const upsertProjetAction = async (
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  const canUpdateProjet =
-    data.projetId && (await new PermissionManager().canEditProject(session.user.id, data.projetId));
-
-  if (!canUpdateProjet) {
-    return { type: "error", message: "UNAUTHORIZED" };
+  if (data.projetId && !(await new PermissionManager().canEditProject(session.user.id, data.projetId))) {
+    return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 
   const parseParamResult = ProjetInfoFormSchema.safeParse(data);
