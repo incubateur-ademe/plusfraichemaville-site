@@ -2,7 +2,6 @@
 
 import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { deleteAideInEstimation, getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { EstimationAide } from "@/lib/prisma/prismaCustomTypes";
@@ -12,20 +11,10 @@ import { PermissionManager } from "@/helpers/permission-manager";
 export const deleteAideInEstimationAction = async (
   estimationId: number,
   aideId: number,
-  projetId?: number,
 ): Promise<ResponseAction<{ estimationAide?: EstimationAide | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
-  }
-
-  if (!projetId) {
-    return { type: "error", message: "TECHNICAL_ERROR" };
-  }
-
-  const canUpdateProjet = await new PermissionManager().canEditProject(session.user.id, projetId);
-  if (!canUpdateProjet) {
-    return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 
   const estimation = await getEstimationById(estimationId);
@@ -38,8 +27,8 @@ export const deleteAideInEstimationAction = async (
     return { type: "error", message: "ESTIMATION_DOESNT_EXIST" };
   }
 
-  if (!(await hasPermissionToUpdateProjet(estimation.projet_id, session.user.id))) {
-    return { type: "error", message: "UNAUTHORIZED" };
+  if (!(await new PermissionManager().canEditProject(session.user.id, estimation.projet_id))) {
+    return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 
   try {

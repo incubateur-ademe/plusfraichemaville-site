@@ -9,7 +9,6 @@ import { PermissionManager } from "@/helpers/permission-manager";
 import { revalidatePath } from "next/cache";
 
 export const deleteUserFromProjetAction = async (
-  currentUserId: string,
   userId: string,
   projectId: number,
 ): Promise<ResponseAction<{ member: UserProjetWithUser | null }>> => {
@@ -25,13 +24,9 @@ export const deleteUserFromProjetAction = async (
   }
 
   try {
-    const member = await deleteUserFromProject(userId, projectId, currentUserId);
+    const member = await deleteUserFromProject(userId, projectId, session.user.id);
     revalidatePath(`/espace-projet/${projectId}`);
-    return {
-      type: "success",
-      message: "USER_DELETED_FROM_PROJECT",
-      member,
-    };
+    return { type: "success", message: "USER_DELETED_FROM_PROJECT", member };
   } catch (e) {
     customCaptureException("Error in updating user role DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR", member: null };

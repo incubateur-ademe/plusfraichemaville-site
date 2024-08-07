@@ -19,11 +19,12 @@ export const success = {
   EMAIL_SENT: "L'email a été envoyé.",
   ROLE_UPDATED: "Le nouveau rôle a bien été enregistré.",
   USER_DELETED_FROM_PROJECT: "Le membre a bien été supprimé du projet.",
-  ACCEPT_INVITATION: "Vous avez rejoint le projet.",
-  DECLINDED_INVITATION: "Vous avez décliné l'invitation au projet.",
+  ACCEPT_INVITATION_PROJECT_ACCESS: "Vous avez rejoint le projet.",
+  DECLINE_INVITATION_PROJECT_ACCESS: "Vous avez décliné l'invitation au projet.",
+  ACCEPT_REQUEST_PROJECT_ACCESS: "Vous avez accepté la demande d'accès au projet.",
+  DECLINE_REQUEST_PROJECT_ACCESS: "Vous avez refusé la demande d'accès au projet.",
   REQUEST_SENT: "Votre demande a bien été envoyée.",
   QUIT_PROJET: "Vous avez quitté le projet.",
-  CHOICE_SAVED: "Vous choix a été enregistré.",
 };
 
 export const error = {

@@ -3,15 +3,15 @@
 import { auth } from "@/lib/next-auth/auth";
 import { PermissionManager } from "@/helpers/permission-manager";
 import { inviteMember } from "@/lib/prisma/prismaUserQueries";
-import { RoleProjet, email } from "@prisma/client";
-import { sendInvitationAction } from "../emails/send-invitation-email-action";
+import { email, RoleProjet } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
 import { revalidatePath } from "next/cache";
+import { EmailService } from "@/services/brevo";
+import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
 
 export const inviteMemberAction = async (
   projectId: number,
   email: string,
-  projectName: string,
   role: RoleProjet,
 ): Promise<ResponseAction<{ mail?: email | null }>> => {
   try {
@@ -20,21 +20,23 @@ export const inviteMemberAction = async (
       return { type: "error", message: "UNAUTHENTICATED", mail: null };
     }
 
+    const projet = await getProjetById(projectId);
     const canShareProject = await new PermissionManager().canShareProject(session.user.id, projectId);
-    if (!canShareProject) {
+    if (!canShareProject || !projet) {
       return { type: "error", message: "UNAUTHORIZED", mail: null };
     }
 
     const invitation = await inviteMember(projectId, email, role);
     if (invitation) {
-      const result = await sendInvitationAction(
+      const emailService = new EmailService();
+      const result = await emailService.sendInvitationEmail(
         email,
-        projectName,
+        projet.nom,
         invitation.userProject.invitation_token,
         invitation.invitationEmail.id,
       );
       revalidatePath(`/espace-projet/${projectId}`);
-      return { type: "success", message: "EMAIL_SENT", mail: result.mail };
+      return { type: "success", message: "EMAIL_SENT", mail: result.email };
     }
     return { type: "error", message: "TECHNICAL_ERROR" };
   } catch (error) {

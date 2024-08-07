@@ -5,9 +5,9 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/helpers/permission-manager";
 import { revalidatePath } from "next/cache";
-import { acceptProjectInvitation } from "@/lib/prisma/prismaUserQueries";
+import { declineProjectInvitation } from "@/lib/prisma/prismaUserQueries";
 
-export const acceptProjectInvitationAction = async (userId: string, projectId: number): Promise<ResponseAction> => {
+export const declineProjectInvitationAction = async (userId: string, projectId: number): Promise<ResponseAction> => {
   const session = await auth();
 
   if (!session) {
@@ -20,20 +20,11 @@ export const acceptProjectInvitationAction = async (userId: string, projectId: n
   }
 
   try {
-    const accept = await acceptProjectInvitation(userId, projectId);
+    await declineProjectInvitation(userId, projectId);
     revalidatePath(`/espace-projet/${projectId}`);
-    if (accept) {
-      return {
-        type: "success",
-        message: "ACCEPT_INVITATION",
-      };
-    } else
-      return {
-        type: "error",
-        message: "TECHNICAL_ERROR",
-      };
+    return { type: "success", message: "DECLINE_INVITATION_PROJECT_ACCESS" };
   } catch (e) {
-    customCaptureException("Error in accepting invitation DB call", e);
+    customCaptureException("Error in decline invitation DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };
   }
 };

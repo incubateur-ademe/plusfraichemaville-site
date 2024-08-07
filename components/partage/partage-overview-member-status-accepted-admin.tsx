@@ -2,7 +2,7 @@
 
 import { useModalStore } from "@/stores/modal/provider";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
-import { deleteUserFromProjetAction } from "@/actions/users/delete-user-from-projet";
+import { deleteUserFromProjetAction } from "@/actions/userProjet/delete-user-from-projet";
 import { useUserStore } from "@/stores/user/provider";
 import { notifications } from "../common/notifications";
 import { PopupMenu } from "../common/popup-menu";
@@ -40,12 +40,8 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
           member: props.member,
           options: {
             action: async () => {
-              if (currentUserId && props.member.user_id && props.member.projet_id) {
-                const result = await deleteUserFromProjetAction(
-                  currentUserId,
-                  props.member.user_id,
-                  props.member.projet_id,
-                );
+              if (props.member.user_id && props.member.projet_id) {
+                const result = await deleteUserFromProjetAction(props.member.user_id, props.member.projet_id);
                 notifications(result.type, result.message);
               }
             },

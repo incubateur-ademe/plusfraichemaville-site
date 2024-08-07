@@ -25,18 +25,9 @@ export const discardInformationAction = async (
   }
 
   try {
-    const discardInformation = await discardedInformation(userId, modalId);
+    await discardedInformation(userId, modalId);
     revalidatePath(`/espace-projet/${projectId}`);
-    if (discardInformation) {
-      return {
-        type: "success",
-        message: "CHOICE_SAVED",
-      };
-    } else
-      return {
-        type: "error",
-        message: "TECHNICAL_ERROR",
-      };
+    return { type: "success" };
   } catch (e) {
     customCaptureException("Error in accepting invitation DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };

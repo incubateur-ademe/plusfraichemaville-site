@@ -28,7 +28,7 @@ export class EmailService {
     return updateEmailStatusQuery(id, status, brevoId);
   }
 
-  async sendEmail(
+  private async sendEmail(
     to: string,
     type: emailType,
     params: Record<string, string>,

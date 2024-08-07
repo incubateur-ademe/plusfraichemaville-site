@@ -26,12 +26,7 @@ export const updateEstimationMateriauxAction = async (
   }
 
   const estimation = await getEstimationById(estimationId);
-  if (!estimation) {
-    return { type: "error", message: "TECHNICAL_ERROR" };
-  }
-
-  const canUpdateProjet = await new PermissionManager().canEditProject(session.user.id, estimation.projet_id);
-  if (!canUpdateProjet) {
+  if (!estimation || !(await new PermissionManager().canEditProject(session.user.id, estimation.projet_id))) {
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 
