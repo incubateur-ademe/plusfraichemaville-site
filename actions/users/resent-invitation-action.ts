@@ -8,7 +8,6 @@ import { EmailService } from "@/services/brevo";
 import { prepareInvitationResend } from "@/lib/prisma/prismaUserQueries";
 
 export const resentInvitationAction = async (
-  userId: string,
   userProjetId: number,
   projectId: number,
 ): Promise<ResponseAction> => {
@@ -17,7 +16,7 @@ export const resentInvitationAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  const canUpdateUserRole = await new PermissionManager().canUpdateUserRole(session?.user.id, userId, projectId);
+  const canUpdateUserRole = await new PermissionManager().canShareProject(session?.user.id, projectId);
 
   if (!canUpdateUserRole) {
     return { type: "error", message: "UNAUTHORIZED" };

@@ -11,14 +11,13 @@ import { notifications } from "../common/notifications";
 export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserProjetWithUser }) => {
   const [isPending, startTransition] = useTransition();
 
-  const userId = member.user_id;
   const userProjetId = member.id;
   const projetId = member.projet_id;
 
   const handleResendInvitation = () => {
     startTransition(async () => {
       try {
-        const result = await resentInvitationAction(userId ?? "", userProjetId, projetId);
+        const result = await resentInvitationAction(userProjetId, projetId);
         notifications(result.type, result.message);
       } catch (e) {
         throw new Error();
