@@ -1,4 +1,8 @@
-import { getOtherAdmins, getUserProjectRole as getUserProjectRoleQuery } from "@/lib/prisma/prismaUserQueries";
+import {
+  getOtherAdmins,
+  getUserProjectRole as getUserProjectRoleQuery,
+  getUserWithCollectivites,
+} from "@/lib/prisma/prismaUserQueries";
 import { RoleProjet } from "@prisma/client";
 
 export class PermissionManager {
@@ -43,5 +47,13 @@ export class PermissionManager {
     } else {
       return await this.checkOtherAdminsExist(updatingUserId, projectId);
     }
+  }
+
+  async canUserViewCollectiviteProjets(userId: string, collectiviteId: number): Promise<boolean> {
+    const user = await getUserWithCollectivites(userId);
+    if (user) {
+      return user.collectivites.some((collectivite) => collectivite.collectivite_id === collectiviteId);
+    }
+    return false;
   }
 }

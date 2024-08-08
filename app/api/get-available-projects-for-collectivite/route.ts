@@ -18,8 +18,12 @@ export async function GET(request: NextRequest) {
   }
 
   const canViewUserProject = new PermissionManager().canViewUserProject(session.user.id, userId);
+  const canUserViewCollectiviteProjets = await new PermissionManager().canUserViewCollectiviteProjets(
+    session.user.id,
+    +collectiviteId,
+  );
 
-  if (!canViewUserProject) {
+  if (!canViewUserProject || !canUserViewCollectiviteProjets) {
     return NextResponse.json([], { status: 401 });
   }
 
