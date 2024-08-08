@@ -1,6 +1,6 @@
 import { updateEmailStatus as updateEmailStatusQuery } from "@/lib/prisma/prisma-email-queries";
 import { email, emailStatus, emailType } from "@prisma/client";
-import { brevoFetcher } from "./fetcher";
+import { brevoSender } from "./brevo-sender";
 import { getOldestProjectAdmin } from "@/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "@/actions/actions-types";
 
@@ -37,7 +37,7 @@ export class EmailService {
     const { templateId } = this.templates[type];
 
     try {
-      const response = await brevoFetcher(to, templateId, params);
+      const response = await brevoSender(to, templateId, params);
 
       if (!response.ok) {
         throw new Error(`Erreur avec l'API Brevo : ${response.status}`);

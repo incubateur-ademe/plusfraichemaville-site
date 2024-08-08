@@ -1,4 +1,4 @@
-export const brevoFetcher = async (to: string, templateId: number, params: Record<string, string>) => {
+export const brevoSender = async (to: string, templateId: number, params: Record<string, string>) => {
   return await fetch(process.env.BREVO_API_URL ?? "", {
     method: "POST",
     headers: {
