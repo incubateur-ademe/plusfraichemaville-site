@@ -301,3 +301,25 @@ export const leaveProject = async (userId: string, projectId: number): Promise<u
     return updatedUser;
   });
 };
+
+export const getAvailableProjectsForCollectivite = async (
+  collectiviteId: number,
+  userId: string,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      collectiviteId,
+      deleted_at: null,
+      NOT: {
+        users: {
+          some: {
+            user_id: userId,
+            invitation_status: "ACCEPTED",
+            deleted_at: null,
+          },
+        },
+      },
+    },
+    include: projetIncludes,
+  });
+};
