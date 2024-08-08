@@ -1,13 +1,10 @@
-import {
-  getOtherAdmins,
-  getUserProjectRole as getUserProjectRoleQuery,
-  getUserWithCollectivites,
-} from "@/lib/prisma/prismaUserQueries";
+import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { RoleProjet } from "@prisma/client";
+import { getOtherAdmins, getUserProjet } from "@/lib/prisma/prisma-user-projet-queries";
 
 export class PermissionManager {
   private async getUserProjectRole(userId: string, projectId: number): Promise<RoleProjet | null> {
-    return getUserProjectRoleQuery(userId, projectId);
+    return (await getUserProjet(userId, projectId))?.role ?? null;
   }
 
   private async checkOtherAdminsExist(currentUserId: string, projectId: number) {

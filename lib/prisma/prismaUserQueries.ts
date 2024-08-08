@@ -9,9 +9,9 @@ import {
 } from "@/components/common/generic-save-fiche/helpers";
 import { generateRandomId } from "@/helpers/common";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserProjetWithUser, UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 import { RoleProjet, User, user_projet } from "@prisma/client";
-import { ResponseAction } from "./../../actions/actions-types";
+import { ResponseAction } from "@/actions/actions-types";
 
 export const saveAllFichesFromLocalStorage = async (
   userId: string,
@@ -144,113 +144,6 @@ export const updateUser = async ({
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
-};
-
-export const getUserProjectRole = async (userId: string, projectId: number): Promise<RoleProjet | null> => {
-  try {
-    const userProject = await prismaClient.user_projet.findUnique({
-      where: {
-        user_id_projet_id: {
-          user_id: userId,
-          projet_id: projectId,
-        },
-      },
-      select: {
-        role: true,
-      },
-    });
-
-    return userProject?.role ?? null;
-  } catch (error) {
-    console.log("Erreur lors de la récuparation du rôle : ", error);
-    throw error;
-  }
-};
-
-export const getOtherAdmins = async (currentUserId: string, projectId: number): Promise<user_projet[]> => {
-  return prismaClient.user_projet.findMany({
-    where: {
-      projet_id: projectId,
-      role: RoleProjet.ADMIN,
-      user_id: { not: currentUserId },
-      deleted_at: null,
-    },
-  });
-};
-
-export const getOldestProjectAdmin = async (projectId: number) => {
-  return prismaClient.user_projet.findFirst({
-    where: {
-      projet_id: projectId,
-      role: RoleProjet.ADMIN,
-      deleted_at: null,
-    },
-    orderBy: {
-      created_at: "asc",
-    },
-    select: {
-      user: {
-        select: {
-          email: true,
-        },
-      },
-      projet: {
-        select: {
-          nom: true,
-        },
-      },
-    },
-  });
-};
-
-export const updateUserRoleProject = async (
-  userId: string,
-  projectId: number,
-  newRole: RoleProjet,
-): Promise<UserProjetWithUser | null> => {
-  console.log("ici la role", newRole);
-
-  if (newRole === "ADMIN" || newRole === "EDITEUR") {
-    return null;
-  }
-
-  const updatedUserProject = await prismaClient.user_projet.update({
-    where: {
-      user_id_projet_id: {
-        user_id: userId,
-        projet_id: projectId,
-      },
-    },
-    data: {
-      role: newRole,
-    },
-    include: {
-      user: true,
-    },
-  });
-
-  return updatedUserProject;
-};
-
-export const deleteUserFromProject = async (userId: string, projectId: number, deletedById: string) => {
-  const deletedUser = await prismaClient.user_projet.update({
-    where: {
-      user_id_projet_id: {
-        user_id: userId,
-        projet_id: projectId,
-      },
-    },
-    data: {
-      deleted_at: new Date(),
-      deleted_by: deletedById,
-      invitation_status: "DECLINED",
-    },
-    include: {
-      user: true,
-    },
-  });
-
-  return deletedUser;
 };
 
 export const inviteMember = async (projectId: number, email: string, role: RoleProjet) => {
@@ -399,80 +292,6 @@ export const prepareInvitationResend = async (userProjetId: number): Promise<Pre
       newInvitationToken,
     };
   });
-};
-
-export const acceptProjectInvitation = async (userId: string, projectId: number): Promise<user_projet | null> => {
-  const updatedUserProject = await prismaClient.user_projet.update({
-    where: {
-      user_id_projet_id: {
-        user_id: userId,
-        projet_id: projectId,
-      },
-      invitation_status: "INVITED",
-    },
-    data: {
-      invitation_status: "ACCEPTED",
-    },
-  });
-
-  return updatedUserProject;
-};
-
-export const declineProjectInvitation = async (userId: string, projectId: number): Promise<user_projet | null> => {
-  const updatedUserProject = await prismaClient.user_projet.update({
-    where: {
-      user_id_projet_id: {
-        user_id: userId,
-        projet_id: projectId,
-      },
-      invitation_status: "INVITED",
-    },
-    data: {
-      invitation_status: "DECLINED",
-    },
-  });
-
-  return updatedUserProject;
-};
-
-export const acceptProjectRequest = async (userId: string, projectId: number): Promise<user_projet | null> => {
-  const updatedUserProject = await prismaClient.user_projet.update({
-    where: {
-      user_id_projet_id: {
-        user_id: userId,
-        projet_id: projectId,
-      },
-      invitation_status: "REQUESTED",
-    },
-    data: {
-      invitation_status: "ACCEPTED",
-    },
-  });
-
-  return updatedUserProject;
-};
-
-export const declineProjectRequest = async (
-  userId: string,
-  projectId: number,
-  deletedBy: string,
-): Promise<user_projet | null> => {
-  const updatedUserProject = await prismaClient.user_projet.update({
-    where: {
-      user_id_projet_id: {
-        user_id: userId,
-        projet_id: projectId,
-      },
-      invitation_status: "REQUESTED",
-    },
-    data: {
-      invitation_status: "DECLINED",
-      deleted_at: new Date(),
-      deleted_by: deletedBy,
-    },
-  });
-
-  return updatedUserProject;
 };
 
 interface RequestToJoinProjectResult {

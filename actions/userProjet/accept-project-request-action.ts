@@ -5,7 +5,7 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/helpers/permission-manager";
 import { revalidatePath } from "next/cache";
-import { acceptProjectRequest } from "@/lib/prisma/prismaUserQueries";
+import { acceptProjectRequest } from "@/lib/prisma/prisma-user-projet-queries";
 
 export const acceptProjectRequestAction = async (
   projectId: number,

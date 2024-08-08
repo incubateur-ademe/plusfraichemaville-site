@@ -2,17 +2,15 @@
 
 import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { updateUserRoleProject } from "@/lib/prisma/prismaUserQueries";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { RoleProjet } from "@prisma/client";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/helpers/permission-manager";
 import { revalidatePath } from "next/cache";
+import { deleteUserFromProject } from "@/lib/prisma/prisma-user-projet-queries";
 
-export const updateUserRoleProjectAction = async (
+export const deleteUserFromProjetAction = async (
   userId: string,
   projectId: number,
-  role: RoleProjet,
 ): Promise<ResponseAction<{ member: UserProjetWithUser | null }>> => {
   const session = await auth();
 
@@ -26,13 +24,9 @@ export const updateUserRoleProjectAction = async (
   }
 
   try {
-    const member = await updateUserRoleProject(userId, projectId, role);
+    const member = await deleteUserFromProject(userId, projectId, session.user.id);
     revalidatePath(`/espace-projet/${projectId}`);
-    return {
-      type: "success",
-      message: "ROLE_UPDATED",
-      member,
-    };
+    return { type: "success", message: "USER_DELETED_FROM_PROJECT", member };
   } catch (e) {
     customCaptureException("Error in updating user role DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR", member: null };

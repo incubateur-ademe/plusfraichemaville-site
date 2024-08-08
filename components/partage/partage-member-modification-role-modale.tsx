@@ -12,7 +12,7 @@ import {
   PartageUserModificationSchema,
 } from "@/forms/partage/partage-user-modification-schema";
 import SelectFormField from "../common/SelectFormField";
-import { updateUserRoleProjectAction } from "@/actions/users/update-user-role-project";
+import { updateUserRoleProjectAction } from "@/actions/users/update-user-role-project-action";
 import { useUserStore } from "@/stores/user/provider";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { RoleProjet } from "@prisma/client";

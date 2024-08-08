@@ -5,7 +5,7 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/helpers/permission-manager";
 import { revalidatePath } from "next/cache";
-import { acceptProjectInvitation } from "@/lib/prisma/prismaUserQueries";
+import { acceptProjectInvitation } from "@/lib/prisma/prisma-user-projet-queries";
 
 export const acceptProjectInvitationAction = async (userId: string, projectId: number): Promise<ResponseAction> => {
   const session = await auth();

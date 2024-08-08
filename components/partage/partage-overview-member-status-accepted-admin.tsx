@@ -2,7 +2,7 @@
 
 import { useModalStore } from "@/stores/modal/provider";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
-import { deleteUserFromProjetAction } from "@/actions/userProjet/delete-user-from-projet";
+import { deleteUserFromProjetAction } from "@/actions/userProjet/delete-user-from-projet-action";
 import { useUserStore } from "@/stores/user/provider";
 import { notifications } from "../common/notifications";
 import { PopupMenu } from "../common/popup-menu";
