@@ -40,4 +40,5 @@ export const error = {
   TECHNICAL_ERROR: "Erreur technique, veuillez réessayer plus tard.",
   CHANGE_COLLECTIVITE_ERROR: "Erreur technique, veuillez réessayer plus tard.",
   INVITATION_DOESNT_EXIST: "L'invitation n'existe pas.",
+  PROJET_MUST_HAVE_ONE_ADMIN: "Vous ne pouvez pas quitter le projet car vous êtes le seul administrateur du projet."
 };

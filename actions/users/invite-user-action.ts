@@ -12,7 +12,6 @@ import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
 export const inviteMemberAction = async (
   projectId: number,
   email: string,
-  role: RoleProjet,
 ): Promise<ResponseAction<{ mail?: email | null }>> => {
   try {
     const session = await auth();
@@ -26,7 +25,7 @@ export const inviteMemberAction = async (
       return { type: "error", message: "UNAUTHORIZED", mail: null };
     }
 
-    const invitation = await inviteMember(projectId, email, role);
+    const invitation = await inviteMember(projectId, email);
     if (invitation) {
       const emailService = new EmailService();
       const result = await emailService.sendInvitationEmail(

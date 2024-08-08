@@ -147,53 +147,39 @@ export const createOrUpdateProjet = async ({
   userId: string;
   collectiviteId: number;
 }) => {
-  return prismaClient.$transaction(async (tx) => {
-    const projet = await tx.projet.upsert({
-      where: {
-        id: projetId ?? -1,
-        deleted_at: null,
-      },
-      create: {
-        id: generateRandomId(),
-        created_by: userId,
-        nom: nomProjet,
-        type_espace: typeEspace,
-        adresse,
-        adresse_info: adresse_info as Prisma.JsonObject,
-        niveau_maturite: niveauMaturite,
-        date_echeance: new Date(dateEcheance),
-        collectiviteId: collectiviteId,
-      },
-      update: {
-        nom: nomProjet,
-        type_espace: typeEspace,
-        adresse: adresse ?? null,
-        adresse_info: (adresse_info as Prisma.JsonObject) ?? null,
-        niveau_maturite: niveauMaturite,
-        date_echeance: new Date(dateEcheance),
-        collectiviteId: collectiviteId,
-      },
-      include: projetIncludes,
-    });
-
-    if (!projetId) {
-      const user = await tx.user.findUnique({ where: { id: userId } });
-      if (!user) {
-        return null;
-      }
-
-      await tx.user_projet.create({
-        data: {
-          email_address: user.email,
-          role: "ADMIN",
-          projet_id: projet.id,
+  return prismaClient.projet.upsert({
+    where: {
+      id: projetId ?? -1,
+      deleted_at: null,
+    },
+    create: {
+      id: generateRandomId(),
+      created_by: userId,
+      nom: nomProjet,
+      type_espace: typeEspace,
+      adresse,
+      adresse_info: adresse_info as Prisma.JsonObject,
+      niveau_maturite: niveauMaturite,
+      date_echeance: new Date(dateEcheance),
+      collectiviteId: collectiviteId,
+      users: {
+        create: {
           user_id: userId,
+          role: "ADMIN",
           invitation_status: "ACCEPTED",
         },
-      });
-    }
-
-    return projet;
+      },
+    },
+    update: {
+      nom: nomProjet,
+      type_espace: typeEspace,
+      adresse: adresse ?? null,
+      adresse_info: (adresse_info as Prisma.JsonObject) ?? null,
+      niveau_maturite: niveauMaturite,
+      date_echeance: new Date(dateEcheance),
+      collectiviteId: collectiviteId,
+    },
+    include: projetIncludes,
   });
 };
 
@@ -256,49 +242,18 @@ export const getUserProjets = async (userId: string) => {
 };
 
 export const leaveProject = async (userId: string, projectId: number): Promise<user_projet | null> => {
-  return prismaClient.$transaction(async (tx) => {
-    const user = await tx.user_projet.findUnique({
-      where: {
-        user_id_projet_id: {
-          user_id: userId,
-          projet_id: projectId,
-        },
+  return prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: {
+        user_id: userId,
+        projet_id: projectId,
       },
-    });
-
-    if (!user) {
-      return null;
-    }
-
-    if (user.role === "ADMIN") {
-      const adminCount = await tx.user_projet.count({
-        where: {
-          projet_id: projectId,
-          role: "ADMIN",
-          invitation_status: "ACCEPTED",
-        },
-      });
-
-      if (adminCount < 2) {
-        return null;
-      }
-    }
-
-    const updatedUser = await tx.user_projet.update({
-      where: {
-        user_id_projet_id: {
-          user_id: userId,
-          projet_id: projectId,
-        },
-      },
-      data: {
-        invitation_status: "DECLINED",
-        deleted_at: new Date(),
-        deleted_by: userId,
-      },
-    });
-
-    return updatedUser;
+      deleted_at: null,
+    },
+    data: {
+      deleted_at: new Date(),
+      deleted_by: userId,
+    },
   });
 };
 

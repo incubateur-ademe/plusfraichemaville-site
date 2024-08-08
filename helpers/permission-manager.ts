@@ -7,11 +7,11 @@ export class PermissionManager {
     return (await getUserProjet(userId, projectId))?.role ?? null;
   }
 
-  private async checkOtherAdminsExist(currentUserId: string, projectId: number) {
+  async checkOtherAdminsExist(currentUserId: string, projectId: number) {
     return (await getOtherAdmins(currentUserId, projectId)).length > 0;
   }
 
-  private async isAdmin(userId: string, projectId: number): Promise<boolean> {
+  async isAdmin(userId: string, projectId: number): Promise<boolean> {
     const role = await this.getUserProjectRole(userId, projectId);
     return role === RoleProjet.ADMIN;
   }

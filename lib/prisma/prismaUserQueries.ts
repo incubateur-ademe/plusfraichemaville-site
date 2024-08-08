@@ -146,11 +146,8 @@ export const updateUser = async ({
   });
 };
 
-export const inviteMember = async (projectId: number, email: string, role: RoleProjet) => {
+export const inviteMember = async (projectId: number, email: string) => {
   return prismaClient.$transaction(async (tx) => {
-    if (role === "EDITEUR" || role === "ADMIN") {
-      return null;
-    }
 
     let user = await tx.user.findUnique({
       where: { email },
@@ -189,7 +186,7 @@ export const inviteMember = async (projectId: number, email: string, role: RoleP
           },
         },
         data: {
-          role,
+          role: RoleProjet.LECTEUR,
           invitation_status: "INVITED",
           deleted_at: null,
           deleted_by: null,
@@ -201,7 +198,7 @@ export const inviteMember = async (projectId: number, email: string, role: RoleP
         data: {
           projet_id: projectId,
           email_address: email,
-          role,
+          role: RoleProjet.LECTEUR,
           invitation_status: "INVITED",
           user_id: user.id,
           invitation_token: invitationToken,

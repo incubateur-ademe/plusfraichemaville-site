@@ -96,7 +96,7 @@ enum InvitationStatus {
 
 model user_projet {
   id                Int              @id @default(autoincrement())
-  email_address     String
+  email_address     String?
   role              RoleProjet
   projet_id         Int
   projet            projet           @relation(fields: [projet_id], references: [id])

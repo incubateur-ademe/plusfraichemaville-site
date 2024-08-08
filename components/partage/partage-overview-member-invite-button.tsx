@@ -27,7 +27,7 @@ export const PartageOverviewMemberInviteButton = () => {
 
   const onSubmit: SubmitHandler<PartageUserInvitationData> = async (data) => {
     if (projectId) {
-      const result = await inviteMemberAction(projectId, data.email, "LECTEUR");
+      const result = await inviteMemberAction(projectId, data.email);
       notifications(result.type, result.message);
     }
   };

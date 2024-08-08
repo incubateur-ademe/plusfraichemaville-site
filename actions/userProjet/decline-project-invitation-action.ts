@@ -13,7 +13,7 @@ export const declineProjectInvitationAction = async (userId: string, projectId: 
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  const canUpdateUser = await new PermissionManager().canUpdateUser(userId, session.user.id);
+  const canUpdateUser = new PermissionManager().canUpdateUser(userId, session.user.id);
 
   if (!canUpdateUser) {
     return { type: "error", message: "UNAUTHORIZED" };
