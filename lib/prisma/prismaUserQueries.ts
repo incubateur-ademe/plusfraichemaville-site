@@ -148,7 +148,6 @@ export const updateUser = async ({
 
 export const inviteMember = async (projectId: number, email: string) => {
   return prismaClient.$transaction(async (tx) => {
-
     let user = await tx.user.findUnique({
       where: { email },
       select: { id: true },
