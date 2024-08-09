@@ -43,7 +43,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
     startTransition(async () => {
       try {
         if (currentUserId && currentUserMail) {
-          const result = await requestToJoinProjectAction(currentUserId, projet.id, currentUserMail);
+          const result = await requestToJoinProjectAction(currentUserId, projet.id);
           notifications(result.type, result.message);
         }
       } catch (e) {
