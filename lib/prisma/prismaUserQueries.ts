@@ -7,7 +7,6 @@ import {
   mergeFicheBookmarkedDiagnostic,
   mergeFicheBookmarkedSolutions,
 } from "@/components/common/generic-save-fiche/helpers";
-import { generateRandomId } from "@/helpers/common";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
@@ -19,7 +18,7 @@ export const saveAllFichesFromLocalStorage = async (
     fichesDiagnostic: FichesBookmarked[];
   },
 ) => {
-  const user = await getUser(userId);
+  const user = await getUserById(userId);
 
   const currentSavedFichesDiagnostic = user?.selection_fiches_diagnostic;
   const currentSavedFichesSolutions = user?.selection_fiches_solutions;
@@ -101,7 +100,7 @@ export const getUserWithCollectivites = async (userId: string): Promise<UserWith
   });
 };
 
-export const getUser = async (userId: string): Promise<User | null> => {
+export const getUserById = async (userId: string): Promise<User | null> => {
   return prismaClient.user.findUnique({
     where: {
       id: userId,
@@ -154,99 +153,8 @@ export const updateUser = async ({
   });
 };
 
-interface RequestToJoinProjectResult {
-  requesterName: string;
-  invitationToken: string;
-  emailId?: string;
-}
-
-export const requestToJoinProject = async (
-  userId: string,
-  projectId: number,
-  email: string,
-): Promise<RequestToJoinProjectResult | null> => {
-  return prismaClient.$transaction(async (tx) => {
-    const existingUserProject = await tx.user_projet.findFirst({
-      where: {
-        user_id: userId,
-        projet_id: projectId,
-      },
-    });
-
-    const projectWithAdmin = await tx.projet.findUnique({
-      where: { id: projectId },
-      include: {
-        collectivite: true,
-        users: {
-          where: { role: "ADMIN", invitation_status: "ACCEPTED" },
-          orderBy: { created_at: "asc" },
-          take: 1,
-          include: { user: true },
-        },
-      },
-    });
-
-    if (!projectWithAdmin) {
-      return null;
-    }
-
-    const requester = await getUser(userId);
-
-    if (!requester) {
-      return null;
-    }
-
-    const invitationToken = `${generateRandomId()}`;
-
-    let newUserProject;
-
-    if (existingUserProject) {
-      newUserProject = await tx.user_projet.update({
-        where: {
-          id: existingUserProject.id,
-        },
-        data: {
-          invitation_status: "REQUESTED",
-          invitation_token: invitationToken,
-          deleted_at: null,
-          deleted_by: null,
-        },
-      });
-    } else {
-      newUserProject = await tx.user_projet.create({
-        data: {
-          user_id: userId,
-          projet_id: projectId,
-          role: "LECTEUR",
-          invitation_status: "REQUESTED",
-          email_address: email,
-          invitation_token: invitationToken,
-        },
-      });
-    }
-
-    const oldestAdmin = projectWithAdmin.users[0]?.user;
-
-    let createdEmail = null;
-    if (oldestAdmin) {
-      createdEmail = await tx.email.create({
-        data: {
-          destination_address: oldestAdmin.email,
-          type: "projetRequestAccess",
-          email_status: "PENDING",
-          user_projet_id: newUserProject.id,
-        },
-      });
-    }
-
-    return {
-      emailId: createdEmail?.id,
-      requesterName: `${requester.prenom} ${requester.nom}`,
-      invitationToken,
-    };
-  });
-};
 export const discardedInformation = async (userId: string, modalId: string): Promise<User | null> => {
+  //TODO Supprimer cette transaction
   return prismaClient.$transaction(async (tx) => {
     const user = await tx.user.findUnique({
       where: { id: userId },
@@ -262,13 +170,11 @@ export const discardedInformation = async (userId: string, modalId: string): Pro
       updatedModalIds.push(modalId);
     }
 
-    const updatedUser = await tx.user.update({
+    return tx.user.update({
       where: { id: userId },
       data: {
         discardedInformation: updatedModalIds,
       },
     });
-
-    return updatedUser;
   });
 };

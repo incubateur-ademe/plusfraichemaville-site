@@ -41,6 +41,10 @@ export const error = {
   CHANGE_COLLECTIVITE_ERROR: "Erreur technique, veuillez réessayer plus tard.",
   PROJET_MUST_HAVE_ONE_ADMIN: "Vous ne pouvez pas quitter le projet car vous êtes le seul administrateur du projet.",
   USER_ALREADY_IN_PROJET: "Cet utilisateur a déjà accès au projet.",
+  REQUEST_ALREADY_IN_PROJET: "Vous avez déjà accès au projet.",
+  REQUEST_ALREADY_INVITED:
+    "Vous avez été invité sur ce projet, vous pouvez accepter l'invitation dans l'onglet \"Invitations\".",
+  REQUEST_ALREADY_SENT: "Vous avez déjà envoyé une demande d'accès sur ce projet.",
   USER_ALREADY_INVITED_IN_PROJET: "Cet utilisateur a déjà été invité à rejoindre le projet.",
   USER_ALREADY_REQUESTED_ACCESS_TO_PROJET: "Cet utilisateur a déjà demandé l'accès au projet.",
 };

@@ -1,4 +1,4 @@
-import { InvitationStatus, RoleProjet, user_projet } from "@prisma/client";
+import { InvitationStatus, RoleProjet, User, user_projet } from "@prisma/client";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 
@@ -223,5 +223,27 @@ export const inviteMember = async (projectId: number, email: string, userId?: st
       deleted_at: null,
       deleted_by: null,
     },
+  });
+};
+
+export const getOrCreateProjectJoinRequest = async (
+  projectId: number,
+  user: User,
+): Promise<UserProjetWithRelations> => {
+  return prismaClient.user_projet.upsert({
+    where: { user_id_projet_id: { projet_id: projectId, user_id: user.id } },
+    create: {
+      email_address: user.email,
+      projet_id: projectId,
+      user_id: user.id,
+      role: RoleProjet.LECTEUR,
+      invitation_status: InvitationStatus.REQUESTED,
+    },
+    update: {
+      invitation_status: InvitationStatus.REQUESTED,
+      deleted_at: null,
+      deleted_by: null,
+    },
+    include: { projet: true, user: true },
   });
 };

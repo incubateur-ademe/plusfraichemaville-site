@@ -14,7 +14,7 @@ export const updateEmailStatus = async (id: string, status: emailStatus, brevoId
 export const createEmail = async (
   destinationAddress: string,
   type: emailType,
-  userProjetId: number,
+  userProjetId?: number,
 ): Promise<email> => {
   return prismaClient.email.create({
     data: {

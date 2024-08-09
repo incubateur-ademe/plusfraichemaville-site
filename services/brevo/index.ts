@@ -1,9 +1,10 @@
 import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/lib/prisma/prisma-email-queries";
-import { email, emailStatus, emailType, projet, user_projet } from "@prisma/client";
+import { email, emailStatus, emailType, projet, User, user_projet } from "@prisma/client";
 import { brevoSender } from "./brevo-sender";
 import { ResponseAction } from "@/actions/actions-types";
 import { getOldestProjectAdmin } from "@/lib/prisma/prisma-user-projet-queries";
 import { captureError } from "@/lib/sentry/sentryCustomMessage";
+import { UserProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 
 interface Templates {
   templateId: number;
@@ -31,12 +32,13 @@ export class EmailService {
 
   private async sendEmail(
     to: string,
-    type: emailType,
+    emailType: emailType,
     params: Record<string, string>,
-    existingEmailId?: string,
+    userProjetId?: number,
   ): Promise<EmailSendResult> {
-    const { templateId } = this.templates[type];
+    const { templateId } = this.templates[emailType];
 
+    const dbEmail = await createEmail(to, emailType, userProjetId);
     try {
       const response = await brevoSender(to, templateId, params);
 
@@ -47,51 +49,34 @@ export class EmailService {
       const data = await response.json();
 
       let email = null;
-      if (existingEmailId) {
-        email = await this.updateEmailStatus(existingEmailId || "", emailStatus.SUCCESS, data.messageId);
-      }
+      email = await this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId);
 
       return { type: "success", message: "EMAIL_SENT", email };
     } catch (error) {
       captureError("Erreur lors de l'envoi du mail : ", error);
-      if (existingEmailId) {
-        await this.updateEmailStatus(existingEmailId, emailStatus.ERROR);
-      }
+      await this.updateEmailStatus(dbEmail.id, emailStatus.ERROR);
       return { type: "error", message: "TECHNICAL_ERROR" };
     }
   }
 
   async sendInvitationEmail(email: string, projet: projet, userProjet: user_projet): Promise<EmailSendResult> {
-    const dbEmail = await createEmail(email, emailType.projetInvitation, userProjet.id);
-    return this.sendEmail(
-      email,
-      "projetInvitation",
-      {
-        projet: projet.nom,
-        invitationToken: userProjet.invitation_token ?? "",
-      },
-      dbEmail.id,
-    );
+    return this.sendEmail(email, emailType.projetInvitation, {
+      projet: projet.nom,
+      invitationToken: userProjet.invitation_token ?? "",
+    });
   }
 
-  async sendRequestAccessEmail(
-    projectId: number,
-    requesterName: string,
-    invitationToken: string,
-    existingEmailId?: string,
-  ) {
-    const oldestAdmin = await getOldestProjectAdmin(projectId);
-    if (oldestAdmin && oldestAdmin.user?.email && oldestAdmin.projet.nom) {
-      return this.sendEmail(
-        oldestAdmin.user.email,
-        "projetRequestAccess",
-        {
-          projectName: oldestAdmin.projet.nom,
-          requesterName,
-          invitationToken,
-        },
-        existingEmailId,
-      );
+  async sendRequestAccessEmail(userProjet: UserProjetWithRelations) {
+    if (!userProjet.user) {
+      return { type: "error", message: "TECHNICAL_ERROR" };
+    }
+    const oldestAdmin = await getOldestProjectAdmin(userProjet.projet_id);
+    if (oldestAdmin && oldestAdmin.user?.email) {
+      return this.sendEmail(oldestAdmin.user.email, emailType.projetRequestAccess, {
+        projectName: userProjet.projet.nom,
+        requesterName: `${userProjet.user.prenom} ${userProjet.user.nom}`,
+        invitationToken: userProjet.invitation_token ?? "",
+      });
     }
     return { type: "error", message: "ADMIN_NOT_FOUND" };
   }
