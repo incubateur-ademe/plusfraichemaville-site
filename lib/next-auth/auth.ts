@@ -11,6 +11,7 @@ import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { AgentConnectInfo } from "@/lib/prisma/prismaCustomTypes";
 import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetch";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
+import { attachInvitationsByEmail } from "@/lib/prisma/prisma-user-projet-queries";
 
 export const authOptions: NextAuthOptions = {
   // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493
@@ -37,6 +38,7 @@ export const authOptions: NextAuthOptions = {
             }
           }
         }
+        await attachInvitationsByEmail(prismaUser.email, user.id);
       }
     },
   },

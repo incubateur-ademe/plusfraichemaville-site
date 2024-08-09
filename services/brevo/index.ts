@@ -1,8 +1,4 @@
-import {
-  createEmail,
-  updateEmailStatus,
-  updateEmailStatus as updateEmailStatusQuery
-} from "@/lib/prisma/prisma-email-queries";
+import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/lib/prisma/prisma-email-queries";
 import { email, emailStatus, emailType, projet, user_projet } from "@prisma/client";
 import { brevoSender } from "./brevo-sender";
 import { ResponseAction } from "@/actions/actions-types";
@@ -62,11 +58,7 @@ export class EmailService {
     }
   }
 
-  async sendInvitationEmail(
-    email: string,
-    projet: projet,
-    userProjet: user_projet,
-  ): Promise<EmailSendResult> {
+  async sendInvitationEmail(email: string, projet: projet, userProjet: user_projet): Promise<EmailSendResult> {
     const dbEmail = await createEmail(email, emailType.projetInvitation, userProjet.id);
     return this.sendEmail(
       email,

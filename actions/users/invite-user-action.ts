@@ -8,7 +8,7 @@ import { ResponseAction } from "../actions-types";
 import { revalidatePath } from "next/cache";
 import { EmailService } from "@/services/brevo";
 import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
-import { getUserProjetByEmail, inviteMember } from "@/lib/prisma/prisma-user-projet-queries";
+import { getUserProjetByEmailAndProjet, inviteMember } from "@/lib/prisma/prisma-user-projet-queries";
 
 export const inviteMemberAction = async (
   projectId: number,
@@ -31,7 +31,7 @@ export const inviteMemberAction = async (
     if (existingUser) {
       existingProjetLink = existingUser.projets.find((projet) => projet.projet_id === projectId);
     } else {
-      existingProjetLink = await getUserProjetByEmail(email, projectId);
+      existingProjetLink = await getUserProjetByEmailAndProjet(email, projectId);
     }
 
     if (existingProjetLink) {

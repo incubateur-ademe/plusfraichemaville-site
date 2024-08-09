@@ -14,12 +14,28 @@ export const getUserProjet = async (userId: string, projectId: number): Promise<
   });
 };
 
-export const getUserProjetByEmail = async (userEmail: string, projectId: number): Promise<user_projet | null> => {
+export const getUserProjetByEmailAndProjet = async (
+  userEmail: string,
+  projectId: number,
+): Promise<user_projet | null> => {
   return prismaClient.user_projet.findFirst({
     where: {
-      projet_id : projectId,
+      projet_id: projectId,
       email_address: userEmail,
       deleted_at: null,
+    },
+  });
+};
+
+export const attachInvitationsByEmail = async (userEmail: string, userId: string) => {
+  return prismaClient.user_projet.updateMany({
+    where: {
+      email_address: userEmail,
+      user_id: null,
+      deleted_at: null,
+    },
+    data: {
+      user_id: userId,
     },
   });
 };
@@ -181,7 +197,6 @@ export const declineProjectRequest = async (
     },
   });
 };
-
 
 export const inviteMember = async (projectId: number, email: string, userId?: string) => {
   return prismaClient.user_projet.upsert({
