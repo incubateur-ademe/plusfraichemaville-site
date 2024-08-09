@@ -18,6 +18,7 @@ import { requestToJoinProjectAction } from "@/actions/userProjet/request-to-join
 import { PartageOverviewPopupMenu } from "../partage/partage-overview-popup-menu";
 import { getCurrentUserRole } from "../partage/helpers";
 import { useModalStore } from "@/stores/modal/provider";
+import { generateRandomId, isProduction } from "@/helpers/common";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -39,11 +40,24 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
 
   const hasAlreadyRequest = getCurrentUserProjectInfos(projet, currentUserId)?.invitation_status === "REQUESTED";
 
+  const newInvitationToken = `${generateRandomId()}`;
+
   const handleSendRequest = () => {
     startTransition(async () => {
       try {
         if (currentUserId && currentUserMail) {
-          const result = await requestToJoinProjectAction(currentUserId, projet.id, currentUserMail);
+          const result = await requestToJoinProjectAction(currentUserId, projet.id, {
+            mail: currentUserMail,
+            collectivite: projet.collectivite.nom,
+            city: projet.collectivite.nom,
+            link: isProduction
+              ? // eslint-disable-next-line max-len
+                `${process.env.URL_SITE_PROD}/espace-projet/${projet.id}/tableau-de-bord?tab=partage&token=${newInvitationToken}`
+              : // eslint-disable-next-line max-len
+                `http://pfmv.localhost:3000/espace-projet/${projet.id}/tableau-de-bord?tab=partage&token=${newInvitationToken}`,
+            projectName: projet.nom,
+            username: `${currentUserInfo?.user?.prenom} ${currentUserInfo?.user?.nom}`,
+          });
           notifications(result.type, result.message);
         }
       } catch (e) {
@@ -159,8 +173,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
                 <Case condition={invitationStatus === "INVITED"}>
                   {currentUserInfo && (
                     <div className="absolute bottom-10 right-0">
-                      Reçue le
-                      {invitationStatus === "INVITED" && dateToStringWithoutTime(currentUserInfo?.created_at)}
+                      Reçue le {invitationStatus === "INVITED" && dateToStringWithoutTime(currentUserInfo?.created_at)}
                     </div>
                   )}
                 </Case>

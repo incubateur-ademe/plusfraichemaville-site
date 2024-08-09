@@ -1,3 +1,5 @@
+export const isProduction = process.env.NODE_ENV === "production";
+
 export const generateRandomId = () => Math.floor(Math.random() * 900000000) + 100000000;
 
 /**

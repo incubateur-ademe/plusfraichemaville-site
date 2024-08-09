@@ -1,3 +1,5 @@
+import { EspaceProjetTabsId } from "@/components/liste-projets";
+
 export const PFMV_ROUTES = {
   AIDE_DECISION: "/aide-decision",
   FICHES_SOLUTIONS: "/fiche-solution",
@@ -6,8 +8,8 @@ export const PFMV_ROUTES = {
   RETOURS_EXPERIENCE: "/projet",
   CONNEXION: "/connexion",
   DECONNEXION: "/logout",
-  ESPACE_PROJET: "/espace-projet",
-  ESPACE_PROJET_LISTE: "/espace-projet",
+  ESPACE_PROJET: "/espace-projet?tab=projet",
+  ESPACE_PROJET_LISTE: "/espace-projet?tab=projet",
   MON_PROFIL: "/info-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
   ESPACE_PROJET_FICHES_DIAGNOSTIC_LISTE: "/espace-projet/fiche-diagnostic",
@@ -19,6 +21,7 @@ export const PFMV_ROUTES = {
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
   TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "recommandation" | "partage") =>
     `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
+  ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions/liste`,
   ESPACE_PROJET_FICHES_DIAGNOSTIC: (projetId: number) => `/espace-projet/${projetId}/fiches-diagnostic`,

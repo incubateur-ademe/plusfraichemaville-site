@@ -7,20 +7,42 @@ import clsx from "clsx";
 import { useTransition } from "react";
 import { Spinner } from "../common/spinner";
 import { notifications } from "../common/notifications";
+import { generateRandomId, isProduction } from "@/helpers/common";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { useUserStore } from "@/stores/user/provider";
 
 export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserProjetWithUser }) => {
   const [isPending, startTransition] = useTransition();
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const currentUser = useUserStore((state) => state.userInfos);
 
   const userProjetId = member.id;
   const projetId = member.projet_id;
 
   const handleResendInvitation = () => {
     startTransition(async () => {
-      try {
-        const result = await resentInvitationAction(userProjetId, projetId);
-        notifications(result.type, result.message);
-      } catch (e) {
-        throw new Error();
+      if (projet) {
+        try {
+          const newInvitationToken = `${generateRandomId()}`;
+
+          const config = {
+            link: isProduction
+              ? // eslint-disable-next-line max-len
+                `${process.env.URL_SITE_PROD}/espace-projet?tab=invitation&token=${newInvitationToken}`
+              : // eslint-disable-next-line max-len
+                `http://pfmv.localhost:3000/espace-projet?tab=invitation&token=${newInvitationToken}`,
+            collectivite: projet.collectivite.nom,
+            city: projet.collectivite.nom,
+            projectName: projet.nom,
+            mail: member.email_address,
+            username: `${currentUser?.prenom} ${currentUser?.nom}`,
+          };
+
+          const result = await resentInvitationAction(userProjetId, projetId, config);
+          notifications(result.type, result.message);
+        } catch (e) {
+          throw new Error();
+        }
       }
     });
   };

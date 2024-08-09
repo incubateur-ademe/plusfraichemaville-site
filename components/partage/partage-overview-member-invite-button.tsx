@@ -10,6 +10,8 @@ import InputFormField from "../common/InputFormField";
 import { inviteMemberAction } from "@/actions/users/invite-user-action";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { notifications } from "../common/notifications";
+import { generateRandomId, isProduction } from "@/helpers/common";
+import { useUserStore } from "@/stores/user/provider";
 
 const modal = createModal({
   id: "partage-overview-invite-member",
@@ -17,7 +19,8 @@ const modal = createModal({
 });
 
 export const PartageOverviewMemberInviteButton = () => {
-  const projectId = useProjetsStore((state) => state.currentProjetId);
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const user = useUserStore((state) => state.userInfos);
   const form = useForm<PartageUserInvitationData>({
     resolver: zodResolver(PartageUserInvitationSchema),
     defaultValues: {
@@ -26,8 +29,21 @@ export const PartageOverviewMemberInviteButton = () => {
   });
 
   const onSubmit: SubmitHandler<PartageUserInvitationData> = async (data) => {
-    if (projectId) {
-      const result = await inviteMemberAction(projectId, data.email, "LECTEUR");
+    if (projet) {
+      const newInvitationToken = `${generateRandomId()}`;
+      const config = {
+        link: isProduction
+          ? // eslint-disable-next-line max-len
+            `${process.env.URL_SITE_PROD}/espace-projet?tab=invitation&token=${newInvitationToken}`
+          : // eslint-disable-next-line max-len
+            `http://pfmv.localhost:3000/espace-projet?tab=invitation&token=${newInvitationToken}`,
+        collectivite: projet.collectivite.nom,
+        city: projet.collectivite.nom,
+        projectName: projet.nom,
+        mail: data.email,
+        username: `${user?.prenom} ${user?.nom}`,
+      };
+      const result = await inviteMemberAction(projet.id, data.email, "LECTEUR", config);
       notifications(result.type, result.message);
     }
   };

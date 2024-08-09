@@ -10,16 +10,25 @@ interface Templates {
 
 type EmailSendResult = ResponseAction<{ email?: email }>;
 
+export type EmailProjetPartageConfig = {
+  username: string;
+  collectivite: string;
+  projectName: string;
+  city: string;
+  link: string;
+  mail: string;
+};
+
 export class EmailService {
   private readonly templates: Record<emailType, Templates>;
 
   constructor() {
     this.templates = {
       projetInvitation: {
-        templateId: 15,
+        templateId: 38,
       },
       projetRequestAccess: {
-        templateId: 2,
+        templateId: 39,
       },
     };
   }
@@ -31,7 +40,7 @@ export class EmailService {
   private async sendEmail(
     to: string,
     type: emailType,
-    params: Record<string, string>,
+    params: EmailProjetPartageConfig,
     existingEmailId?: string,
   ): Promise<EmailSendResult> {
     const { templateId } = this.templates[type];
@@ -61,39 +70,16 @@ export class EmailService {
 
   async sendInvitationEmail(
     email: string,
-    projectName: string,
-    invitationToken?: string | null,
-    existingEmailId?: string,
+    existingEmailId: string,
+    params: EmailProjetPartageConfig,
   ): Promise<EmailSendResult> {
-    return this.sendEmail(
-      email,
-      "projetInvitation",
-      {
-        projectName,
-        invitationToken: invitationToken ?? "",
-      },
-      existingEmailId,
-    );
+    return this.sendEmail(email, "projetInvitation", params, existingEmailId);
   }
 
-  async sendRequestAccessEmail(
-    projectId: number,
-    requesterName: string,
-    invitationToken: string,
-    existingEmailId?: string,
-  ) {
+  async sendRequestAccessEmail(projectId: number, existingEmailId: string, params: EmailProjetPartageConfig) {
     const oldestAdmin = await getOldestProjectAdmin(projectId);
     if (oldestAdmin && oldestAdmin.user?.email && oldestAdmin.projet.nom) {
-      return this.sendEmail(
-        oldestAdmin.user.email,
-        "projetRequestAccess",
-        {
-          projectName: oldestAdmin.projet.nom,
-          requesterName,
-          invitationToken,
-        },
-        existingEmailId,
-      );
+      return this.sendEmail(oldestAdmin.user.email, "projetRequestAccess", params, existingEmailId);
     }
     return { type: "error", message: "ADMIN_NOT_FOUND" };
   }

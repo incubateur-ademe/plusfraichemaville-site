@@ -5,13 +5,13 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/helpers/permission-manager";
 import { revalidatePath } from "next/cache";
-import { EmailService } from "@/services/brevo";
+import { EmailProjetPartageConfig, EmailService } from "@/services/brevo";
 import { requestToJoinProject } from "@/lib/prisma/prismaUserQueries";
 
 export const requestToJoinProjectAction = async (
   userId: string,
   projectId: number,
-  email: string,
+  params: EmailProjetPartageConfig,
 ): Promise<ResponseAction> => {
   const session = await auth();
   if (!session) {
@@ -24,18 +24,13 @@ export const requestToJoinProjectAction = async (
   }
 
   try {
-    const request = await requestToJoinProject(userId, projectId, email);
+    const request = await requestToJoinProject(userId, projectId, params.mail);
     if (request) {
       revalidatePath(`/espace-projet/${projectId}`);
 
       if (request) {
         const emailService = new EmailService();
-        await emailService.sendRequestAccessEmail(
-          projectId,
-          request.requesterName,
-          request.invitationToken,
-          request.emailId,
-        );
+        await emailService.sendRequestAccessEmail(projectId, request.emailId!, params);
       }
       return {
         type: "success",

@@ -6,13 +6,14 @@ import { inviteMember } from "@/lib/prisma/prismaUserQueries";
 import { email, RoleProjet } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
 import { revalidatePath } from "next/cache";
-import { EmailService } from "@/services/brevo";
+import { EmailProjetPartageConfig, EmailService } from "@/services/brevo";
 import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
 
 export const inviteMemberAction = async (
   projectId: number,
   email: string,
   role: RoleProjet,
+  params: EmailProjetPartageConfig,
 ): Promise<ResponseAction<{ mail?: email | null }>> => {
   try {
     const session = await auth();
@@ -29,12 +30,7 @@ export const inviteMemberAction = async (
     const invitation = await inviteMember(projectId, email, role);
     if (invitation) {
       const emailService = new EmailService();
-      const result = await emailService.sendInvitationEmail(
-        email,
-        projet.nom,
-        invitation.userProject.invitation_token,
-        invitation.invitationEmail.id,
-      );
+      const result = await emailService.sendInvitationEmail(email, invitation.invitationEmail.id, params);
       revalidatePath(`/espace-projet/${projectId}`);
       return { type: "success", message: "EMAIL_SENT", mail: result.email };
     }

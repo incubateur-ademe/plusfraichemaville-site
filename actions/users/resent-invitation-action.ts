@@ -4,12 +4,13 @@ import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/helpers/permission-manager";
-import { EmailService } from "@/services/brevo";
+import { EmailProjetPartageConfig, EmailService } from "@/services/brevo";
 import { prepareInvitationResend } from "@/lib/prisma/prismaUserQueries";
 
 export const resentInvitationAction = async (
   userProjetId: number,
   projectId: number,
+  params: EmailProjetPartageConfig,
 ): Promise<ResponseAction> => {
   const session = await auth();
 
@@ -23,16 +24,10 @@ export const resentInvitationAction = async (
   }
 
   try {
-    const { userProjet, newEmailId, projectName, newInvitationToken, type, message } =
-      await prepareInvitationResend(userProjetId);
+    const { userProjet, newEmailId, projectName, type, message } = await prepareInvitationResend(userProjetId);
 
     if (userProjet?.email_address && projectName) {
-      const sent = await new EmailService().sendInvitationEmail(
-        userProjet?.email_address,
-        projectName,
-        newInvitationToken,
-        newEmailId,
-      );
+      const sent = await new EmailService().sendInvitationEmail(userProjet?.email_address, newEmailId!, params);
 
       return {
         type: sent.type,
