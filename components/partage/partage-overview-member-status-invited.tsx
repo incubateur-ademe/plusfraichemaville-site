@@ -1,6 +1,6 @@
 "use client";
 
-import { resentInvitationAction } from "@/actions/users/resent-invitation-action";
+import { resendInvitationAction } from "@/actions/users/resend-invitation-action";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
@@ -12,12 +12,11 @@ export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserPro
   const [isPending, startTransition] = useTransition();
 
   const userProjetId = member.id;
-  const projetId = member.projet_id;
 
   const handleResendInvitation = () => {
     startTransition(async () => {
       try {
-        const result = await resentInvitationAction(userProjetId, projetId);
+        const result = await resendInvitationAction(userProjetId);
         notifications(result.type, result.message);
       } catch (e) {
         throw new Error();

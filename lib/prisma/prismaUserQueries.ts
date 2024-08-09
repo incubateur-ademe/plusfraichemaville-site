@@ -10,8 +10,7 @@ import {
 import { generateRandomId } from "@/helpers/common";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/lib/prisma/prismaCustomTypes";
-import { User, user_projet } from "@prisma/client";
-import { ResponseAction } from "@/actions/actions-types";
+import { User } from "@prisma/client";
 
 export const saveAllFichesFromLocalStorage = async (
   userId: string,
@@ -152,78 +151,6 @@ export const updateUser = async ({
       canal_acquisition: canalAcquisition,
     },
     include: { collectivites: { include: { collectivite: true } } },
-  });
-};
-
-const RESEND_DELAY_MINUTES = 10;
-
-type PrepareInvitationResendResult = ResponseAction<{
-  userProjet?: user_projet;
-  newEmailId?: string;
-  projectName?: string;
-  newInvitationToken?: string;
-}>;
-
-export const prepareInvitationResend = async (userProjetId: number): Promise<PrepareInvitationResendResult> => {
-  return prismaClient.$transaction(async (tx) => {
-    const existingInvitation = await tx.user_projet.findUnique({
-      where: { id: userProjetId },
-      include: {
-        projet: true,
-        email: {
-          orderBy: { sending_time: "desc" },
-          take: 1,
-        },
-      },
-    });
-
-    if (!existingInvitation) {
-      return {
-        type: "error",
-        message: "INVITATION_DOESNT_EXIST",
-      };
-    }
-
-    const lastEmail = existingInvitation.email[0];
-    const now = new Date();
-
-    const timeSinceLastEmail = lastEmail ? (now.getTime() - lastEmail.sending_time.getTime()) / 60000 : Infinity;
-
-    if (timeSinceLastEmail < RESEND_DELAY_MINUTES) {
-      return {
-        type: "error",
-        message: "DELAY_TOO_SHORT",
-      };
-    }
-
-    const newInvitationToken = `${generateRandomId()}`;
-
-    const updatedUserProjet = await tx.user_projet.update({
-      where: {
-        id: userProjetId,
-      },
-      data: {
-        invitation_token: newInvitationToken,
-      },
-    });
-
-    const newEmail = await tx.email.create({
-      data: {
-        destination_address: existingInvitation.email_address,
-        type: "projetInvitation",
-        email_status: "PENDING",
-        user_projet_id: userProjetId,
-      },
-    });
-
-    return {
-      type: "success",
-      message: "EMAIL_SENT",
-      userProjet: updatedUserProjet,
-      newEmailId: newEmail.id,
-      projectName: existingInvitation.projet.nom,
-      newInvitationToken,
-    };
   });
 };
 

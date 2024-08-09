@@ -22,6 +22,10 @@ export type UserProjetWithUser = Prisma.user_projetGetPayload<{
   include: { user: true };
 }>;
 
+export type UserProjetWithRelations = Prisma.user_projetGetPayload<{
+  include: { projet: true; user: true };
+}>;
+
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];
 
 export interface ProjetWithRelations extends projet {

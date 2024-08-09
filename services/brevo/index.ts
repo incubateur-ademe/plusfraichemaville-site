@@ -46,7 +46,10 @@ export class EmailService {
 
       const data = await response.json();
 
-      const email = await this.updateEmailStatus(existingEmailId || "", emailStatus.SUCCESS, data.messageId);
+      let email = null;
+      if (existingEmailId) {
+        email = await this.updateEmailStatus(existingEmailId || "", emailStatus.SUCCESS, data.messageId);
+      }
 
       return { type: "success", message: "EMAIL_SENT", email };
     } catch (error) {

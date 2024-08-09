@@ -30,8 +30,8 @@ export const success = {
 export const error = {
   ALREADY_SENT: "Une demande est déjà en cours pour ce projet.",
   UNAUTHENTICATED: "Utilisateur non authentifié.",
-  DELAY_TOO_SHORT: "Veuillez attendre 10 minutes avant de renvoyer une invitation.",
-  UNAUTHORIZED: "Vous ne disposez pas des droits nécessaires à la modification.",
+  INVITATION_RESEND_DELAY_TOO_SHORT: "Veuillez attendre 10 minutes avant de renvoyer une invitation.",
+  UNAUTHORIZED: "Vous ne disposez pas des droits nécessaires pour cette opération.",
   ESTIMATION_DELETE_UNAUTHORIZED: "Vous n'avez pas les droits de suppression sur cette estimation.",
   ESTIMATION_DOESNT_EXIST: "L'estimation n'existe pas.",
   PROJET_DELETE_UNAUTHORIZED: "Vous n'avez pas les droits de suppression sur ce projet.",
@@ -39,7 +39,6 @@ export const error = {
   PARSING_ERROR: "Erreur de validation des données envoyées.",
   TECHNICAL_ERROR: "Erreur technique, veuillez réessayer plus tard.",
   CHANGE_COLLECTIVITE_ERROR: "Erreur technique, veuillez réessayer plus tard.",
-  INVITATION_DOESNT_EXIST: "L'invitation n'existe pas.",
   PROJET_MUST_HAVE_ONE_ADMIN: "Vous ne pouvez pas quitter le projet car vous êtes le seul administrateur du projet.",
   USER_ALREADY_IN_PROJET: "Cet utilisateur a déjà accès au projet.",
   USER_ALREADY_INVITED_IN_PROJET: "Cet utilisateur a déjà été invité à rejoindre le projet.",

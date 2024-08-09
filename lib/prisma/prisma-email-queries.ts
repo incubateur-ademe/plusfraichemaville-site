@@ -25,3 +25,10 @@ export const createEmail = async (
     },
   });
 };
+
+export const getLastEmailForUserProjet = async (userProjetId: number, emailType: emailType): Promise<email | null> => {
+  return prismaClient.email.findFirst({
+    where: { user_projet_id: userProjetId, type: emailType },
+    orderBy: { sending_time: "desc" },
+  });
+};

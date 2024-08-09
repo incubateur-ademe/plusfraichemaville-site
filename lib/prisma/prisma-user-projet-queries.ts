@@ -1,6 +1,6 @@
 import { InvitationStatus, RoleProjet, user_projet } from "@prisma/client";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { UserProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 
 export const getUserProjet = async (userId: string, projectId: number): Promise<user_projet | null> => {
   return prismaClient.user_projet.findUnique({
@@ -11,6 +11,15 @@ export const getUserProjet = async (userId: string, projectId: number): Promise<
       },
       deleted_at: null,
     },
+  });
+};
+export const getUserProjetById = async (userProjetId: number): Promise<UserProjetWithRelations | null> => {
+  return prismaClient.user_projet.findUnique({
+    where: {
+      id: userProjetId,
+      deleted_at: null,
+    },
+    include: { projet: true, user: true },
   });
 };
 
