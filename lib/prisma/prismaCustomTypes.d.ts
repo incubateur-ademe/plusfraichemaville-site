@@ -4,6 +4,10 @@ export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
 }>;
 
+export type UserWithProjets = Prisma.UserGetPayload<{
+  include: { projets: { include: { projet: true } } };
+}>;
+
 export type EstimationWithAides = Prisma.estimationGetPayload<{
   include: {
     estimations_aides: {

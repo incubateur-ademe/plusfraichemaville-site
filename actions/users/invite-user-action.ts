@@ -2,12 +2,13 @@
 
 import { auth } from "@/lib/next-auth/auth";
 import { PermissionManager } from "@/helpers/permission-manager";
-import { inviteMember } from "@/lib/prisma/prismaUserQueries";
-import { email, RoleProjet } from "@prisma/client";
+import { getUserByEmail } from "@/lib/prisma/prismaUserQueries";
+import { email, InvitationStatus } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
 import { revalidatePath } from "next/cache";
 import { EmailService } from "@/services/brevo";
 import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
+import { getUserProjetByEmail, inviteMember } from "@/lib/prisma/prisma-user-projet-queries";
 
 export const inviteMemberAction = async (
   projectId: number,
@@ -25,15 +26,28 @@ export const inviteMemberAction = async (
       return { type: "error", message: "UNAUTHORIZED", mail: null };
     }
 
-    const invitation = await inviteMember(projectId, email);
+    const existingUser = await getUserByEmail(email);
+    let existingProjetLink;
+    if (existingUser) {
+      existingProjetLink = existingUser.projets.find((projet) => projet.projet_id === projectId);
+    } else {
+      existingProjetLink = await getUserProjetByEmail(email, projectId);
+    }
+
+    if (existingProjetLink) {
+      if (existingProjetLink.invitation_status === InvitationStatus.ACCEPTED) {
+        return { type: "error", message: "USER_ALREADY_IN_PROJET", mail: null };
+      } else if (existingProjetLink.invitation_status === InvitationStatus.INVITED) {
+        return { type: "error", message: "USER_ALREADY_INVITED_IN_PROJET", mail: null };
+      } else if (existingProjetLink.invitation_status === InvitationStatus.REQUESTED) {
+        return { type: "error", message: "USER_ALREADY_REQUESTED_ACCESS_TO_PROJET", mail: null };
+      }
+    }
+
+    const invitation = await inviteMember(projectId, email, existingUser?.id);
     if (invitation) {
       const emailService = new EmailService();
-      const result = await emailService.sendInvitationEmail(
-        email,
-        projet.nom,
-        invitation.userProject.invitation_token,
-        invitation.invitationEmail.id,
-      );
+      const result = await emailService.sendInvitationEmail(email, projet, invitation);
       revalidatePath(`/espace-projet/${projectId}`);
       return { type: "success", message: "EMAIL_SENT", mail: result.email };
     }

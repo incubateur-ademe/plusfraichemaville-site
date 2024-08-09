@@ -1,8 +1,13 @@
-import { updateEmailStatus as updateEmailStatusQuery } from "@/lib/prisma/prisma-email-queries";
-import { email, emailStatus, emailType } from "@prisma/client";
+import {
+  createEmail,
+  updateEmailStatus,
+  updateEmailStatus as updateEmailStatusQuery
+} from "@/lib/prisma/prisma-email-queries";
+import { email, emailStatus, emailType, projet, user_projet } from "@prisma/client";
 import { brevoSender } from "./brevo-sender";
 import { ResponseAction } from "@/actions/actions-types";
 import { getOldestProjectAdmin } from "@/lib/prisma/prisma-user-projet-queries";
+import { captureError } from "@/lib/sentry/sentryCustomMessage";
 
 interface Templates {
   templateId: number;
@@ -49,30 +54,28 @@ export class EmailService {
 
       return { type: "success", message: "EMAIL_SENT", email };
     } catch (error) {
-      console.error("Erreur lors de l'envoi du mail : ", error);
-
+      captureError("Erreur lors de l'envoi du mail : ", error);
       if (existingEmailId) {
         await this.updateEmailStatus(existingEmailId, emailStatus.ERROR);
       }
-
       return { type: "error", message: "TECHNICAL_ERROR" };
     }
   }
 
   async sendInvitationEmail(
     email: string,
-    projectName: string,
-    invitationToken?: string | null,
-    existingEmailId?: string,
+    projet: projet,
+    userProjet: user_projet,
   ): Promise<EmailSendResult> {
+    const dbEmail = await createEmail(email, emailType.projetInvitation, userProjet.id);
     return this.sendEmail(
       email,
       "projetInvitation",
       {
-        projectName,
-        invitationToken: invitationToken ?? "",
+        projet: projet.nom,
+        invitationToken: userProjet.invitation_token ?? "",
       },
-      existingEmailId,
+      dbEmail.id,
     );
   }
 

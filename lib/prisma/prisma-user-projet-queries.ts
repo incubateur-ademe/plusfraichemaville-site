@@ -1,4 +1,4 @@
-import { RoleProjet, user_projet } from "@prisma/client";
+import { InvitationStatus, RoleProjet, user_projet } from "@prisma/client";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 
@@ -9,6 +9,16 @@ export const getUserProjet = async (userId: string, projectId: number): Promise<
         user_id: userId,
         projet_id: projectId,
       },
+      deleted_at: null,
+    },
+  });
+};
+
+export const getUserProjetByEmail = async (userEmail: string, projectId: number): Promise<user_projet | null> => {
+  return prismaClient.user_projet.findFirst({
+    where: {
+      projet_id : projectId,
+      email_address: userEmail,
       deleted_at: null,
     },
   });
@@ -112,7 +122,11 @@ export const acceptProjectInvitation = async (userId: string, projectId: number)
   });
 };
 
-export const declineProjectInvitation = async (userId: string, projectId: number): Promise<user_projet | null> => {
+export const declineProjectInvitation = async (
+  userId: string,
+  projectId: number,
+  deletedBy: string,
+): Promise<user_projet | null> => {
   return prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
@@ -124,7 +138,8 @@ export const declineProjectInvitation = async (userId: string, projectId: number
     },
     data: {
       invitation_status: "DECLINED",
-      //TODO Doit on également supprimer l'invitation, ou bien on doit l'afficher au statut declined dans le tableau?
+      deleted_at: new Date(),
+      deleted_by: deletedBy,
     },
   });
 };
@@ -161,9 +176,28 @@ export const declineProjectRequest = async (
     },
     data: {
       invitation_status: "DECLINED",
-      //TODO Doit on également supprimer la demande, ou bien on doit l'afficher au statut declined dans le tableau?
       deleted_at: new Date(),
       deleted_by: deletedBy,
+    },
+  });
+};
+
+
+export const inviteMember = async (projectId: number, email: string, userId?: string) => {
+  return prismaClient.user_projet.upsert({
+    where: { user_id_projet_id: { projet_id: projectId, user_id: userId ?? "" }, email_address: email },
+    create: {
+      email_address: email,
+      projet_id: projectId,
+      user_id: userId,
+      role: RoleProjet.LECTEUR,
+      invitation_status: InvitationStatus.INVITED,
+    },
+    update: {
+      role: RoleProjet.LECTEUR,
+      invitation_status: InvitationStatus.INVITED,
+      deleted_at: null,
+      deleted_by: null,
     },
   });
 };

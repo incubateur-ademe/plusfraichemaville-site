@@ -20,7 +20,7 @@ export const declineProjectInvitationAction = async (userId: string, projectId: 
   }
 
   try {
-    await declineProjectInvitation(userId, projectId);
+    await declineProjectInvitation(userId, projectId, session.user.id);
     revalidatePath(`/espace-projet/${projectId}`);
     return { type: "success", message: "DECLINE_INVITATION_PROJECT_ACCESS" };
   } catch (e) {

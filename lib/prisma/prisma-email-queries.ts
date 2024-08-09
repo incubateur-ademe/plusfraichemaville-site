@@ -1,4 +1,4 @@
-import { email, emailStatus } from "@prisma/client";
+import { email, emailStatus, emailType } from "@prisma/client";
 import { prismaClient } from "./prismaClient";
 
 export const updateEmailStatus = async (id: string, status: emailStatus, brevoId?: string): Promise<email> => {
@@ -7,6 +7,21 @@ export const updateEmailStatus = async (id: string, status: emailStatus, brevoId
     data: {
       email_status: status,
       brevo_id: brevoId,
+    },
+  });
+};
+
+export const createEmail = async (
+  destinationAddress: string,
+  type: emailType,
+  userProjetId: number,
+): Promise<email> => {
+  return prismaClient.email.create({
+    data: {
+      destination_address: destinationAddress,
+      user_projet_id: userProjetId,
+      type: type,
+      email_status: emailStatus.PENDING,
     },
   });
 };

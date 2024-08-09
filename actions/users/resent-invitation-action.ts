@@ -28,7 +28,6 @@ export const resentInvitationAction = async (userProjetId: number, projectId: nu
         userProjet?.email_address,
         projectName,
         newInvitationToken,
-        newEmailId,
       );
 
       return {

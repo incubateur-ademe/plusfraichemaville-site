@@ -9,8 +9,8 @@ import {
 } from "@/components/common/generic-save-fiche/helpers";
 import { generateRandomId } from "@/helpers/common";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { RoleProjet, User, user_projet } from "@prisma/client";
+import { UserWithCollectivite, UserWithProjets } from "@/lib/prisma/prismaCustomTypes";
+import { User, user_projet } from "@prisma/client";
 import { ResponseAction } from "@/actions/actions-types";
 
 export const saveAllFichesFromLocalStorage = async (
@@ -110,6 +110,15 @@ export const getUser = async (userId: string): Promise<User | null> => {
   });
 };
 
+export const getUserByEmail = async (userEmail: string): Promise<UserWithProjets | null> => {
+  return prismaClient.user.findUnique({
+    where: {
+      email: userEmail,
+    },
+    include: { projets: { where: { deleted_at: null }, include: { projet: true } } },
+  });
+};
+
 export const updateUser = async ({
   userId,
   userNom,
@@ -143,78 +152,6 @@ export const updateUser = async ({
       canal_acquisition: canalAcquisition,
     },
     include: { collectivites: { include: { collectivite: true } } },
-  });
-};
-
-export const inviteMember = async (projectId: number, email: string) => {
-  return prismaClient.$transaction(async (tx) => {
-    let user = await tx.user.findUnique({
-      where: { email },
-      select: { id: true },
-    });
-
-    if (!user) {
-      user = await tx.user.create({
-        data: {
-          email,
-          emailVerified: null,
-        },
-        select: { id: true },
-      });
-    }
-
-    const invitationToken = `${generateRandomId()}`;
-
-    const existingUserProject = await tx.user_projet.findUnique({
-      where: {
-        user_id_projet_id: {
-          user_id: user.id,
-          projet_id: projectId,
-        },
-      },
-    });
-
-    let userProject;
-
-    if (existingUserProject) {
-      userProject = await tx.user_projet.update({
-        where: {
-          user_id_projet_id: {
-            user_id: user.id,
-            projet_id: projectId,
-          },
-        },
-        data: {
-          role: RoleProjet.LECTEUR,
-          invitation_status: "INVITED",
-          deleted_at: null,
-          deleted_by: null,
-          invitation_token: invitationToken,
-        },
-      });
-    } else {
-      userProject = await tx.user_projet.create({
-        data: {
-          projet_id: projectId,
-          email_address: email,
-          role: RoleProjet.LECTEUR,
-          invitation_status: "INVITED",
-          user_id: user.id,
-          invitation_token: invitationToken,
-        },
-      });
-    }
-
-    const invitationEmail = await tx.email.create({
-      data: {
-        destination_address: email,
-        type: "projetInvitation",
-        email_status: "PENDING",
-        user_projet_id: userProject.id,
-      },
-    });
-
-    return { userProject, invitationEmail, userId: user.id };
   });
 };
 
