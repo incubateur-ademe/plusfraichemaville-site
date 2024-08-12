@@ -23,20 +23,21 @@ export const PartageOverviewQuit = () => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
   const currentProjetId = useProjetsStore((state) => state.getCurrentProjet()?.id);
   const members = useProjetsStore((state) => state.getCurrentProjet()?.users);
+  const deleteProjetFromStore = useProjetsStore((state) => state.deleteProjet);
 
   const hasOtherAdmins = checkOtherAdminExists(members, currentUserId);
   const currentUserRole = getCurrentUserRole(members, currentUserId);
 
   const handleQuitProject = () => {
     startTransition(async () => {
-      try {
-        if (currentUserId && currentProjetId) {
-          const result = await leaveProjectAction(currentUserId, currentProjetId);
-          notifications(result.type, result.message);
+      if (currentUserId && currentProjetId) {
+        const result = await leaveProjectAction(currentUserId, currentProjetId);
+        notifications(result.type, result.message);
+        if (result?.type === "success") {
+          deleteProjetFromStore(currentProjetId);
+          modal.close();
           push(PFMV_ROUTES.ESPACE_PROJET);
         }
-      } catch (e) {
-        throw new Error();
       }
     });
   };
@@ -80,7 +81,6 @@ export const PartageOverviewQuit = () => {
             priority="tertiary"
             disabled={isPending}
             onClick={() => {
-              modal.close();
               handleQuitProject();
             }}
           >
