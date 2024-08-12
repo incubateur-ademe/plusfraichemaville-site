@@ -24,7 +24,6 @@ export const ListProjets = () => {
   const requestedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsRequested);
 
   const searchParams = useSearchParams();
-  const currentTab = searchParams.get("tab");
 
   const tabs = [
     {
@@ -46,6 +45,7 @@ export const ListProjets = () => {
       id: "demande" as const,
     },
   ];
+  const currentTab = searchParams.get("tab") || tabs[0].id;
 
   return (
     <div className="relative bg-dsfr-background-alt-blue-france">

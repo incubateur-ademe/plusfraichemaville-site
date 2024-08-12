@@ -41,7 +41,7 @@ export const PartageOverviewQuit = () => {
     });
   };
 
-  if (currentUserRole === "ADMIN") {
+  if (!currentUserRole || currentUserRole === "ADMIN") {
     return null;
   }
 
