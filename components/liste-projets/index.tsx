@@ -12,7 +12,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
 
-export type EspaceProjetTabsId = "projet" | "invitation" | "request";
+export type EspaceProjetTabsId = "projet" | "invitation" | "demande";
 
 export const ListProjets = () => {
   const userId = useUserStore((state) => state.userInfos?.id);
@@ -43,7 +43,7 @@ export const ListProjets = () => {
       count: projetsByStatus.projectsRequested.length,
       label: "Demande envoyée",
       content: <ListeProjetTab projets={requestedProjets} invitationStatus="REQUESTED" />,
-      id: "request" as const,
+      id: "demande" as const,
     },
   ];
 

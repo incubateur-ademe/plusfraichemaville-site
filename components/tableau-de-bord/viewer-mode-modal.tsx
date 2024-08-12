@@ -1,4 +1,3 @@
-import { useProjetsStore } from "@/stores/projets/provider";
 import { useUserStore } from "@/stores/user/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
@@ -11,43 +10,42 @@ import { useModalStore } from "@/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { LecteurModeLabel } from "../common/lecteur-mode-label";
 
-const MODAL_ID = "tableau-de-bord-lecteur-mode-modal";
+export const MODE_LECTEUR_MODAL_ID = "mode-lecteur-modal";
 
 const modal = createModal({
   isOpenedByDefault: false,
-  id: MODAL_ID,
+  id: MODE_LECTEUR_MODAL_ID,
 });
 
-export const TableauDeBordDiscardViewerModeModal = () => {
+export const ViewerModeModal = () => {
   const [isPending, startTransition] = useTransition();
 
-  const currentDiscardViewerMode = useModalStore((state) => state.currentDiscardViewerMode);
-  const setCurrentDiscardViewerMode = useModalStore((state) => state.setCurrentDiscardViewerMode);
+  const showInfoViewerMode = useModalStore((state) => state.showInfoViewerMode);
+  const setShowInfoViewerMode = useModalStore((state) => state.setShowInfoViewerMode);
 
-  const currentProject = useProjetsStore((state) => state.getCurrentProjet());
   const userId = useUserStore((state) => state.userInfos?.id);
+  const setUserInfos = useUserStore((state) => state.setUserInfos);
 
   useEffect(() => {
-    if (currentDiscardViewerMode) {
+    if (showInfoViewerMode) {
       setTimeout(() => {
         modal.open();
       }, 350);
     }
-  }, [currentDiscardViewerMode]);
+  }, [showInfoViewerMode]);
 
   useIsModalOpen(modal, {
-    onConceal: () => setCurrentDiscardViewerMode(null),
+    onConceal: () => setShowInfoViewerMode(false),
   });
 
   const handleDiscardInformation = () => {
     startTransition(async () => {
-      try {
         if (userId) {
-          await discardInformationAction(userId, MODAL_ID, currentProject?.id);
+          const result = await discardInformationAction(userId, MODE_LECTEUR_MODAL_ID);
+          if (result.type === "success") {
+            setUserInfos(result.updatedUser);
+          }
         }
-      } catch (error) {
-        throw new Error();
-      }
     });
   };
 

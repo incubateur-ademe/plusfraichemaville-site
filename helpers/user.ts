@@ -7,3 +7,6 @@ export const hasAllRequiredFieldsSet = (user: UserInfos) =>
 
 export const getPrimaryCollectiviteForUser = (user: UserWithCollectivite): collectivite =>
   user.collectivites[0].collectivite;
+
+export const hasDiscardedInformation = (user: UserInfos, informationId: string): boolean =>
+  user?.discardedInformation.includes(informationId) ?? false;
