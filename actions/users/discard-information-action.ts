@@ -5,14 +5,13 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/helpers/permission-manager";
 
-import { discardedInformation } from "@/lib/prisma/prismaUserQueries";
-import { revalidatePath } from "next/cache";
+import { getUserWithCollectivites, updateUserDiscardedInformation } from "@/lib/prisma/prismaUserQueries";
+import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
 
 export const discardInformationAction = async (
   userId: string,
   modalId: string,
-  projectId?: number | null,
-): Promise<ResponseAction> => {
+): Promise<ResponseAction<{ updatedUser?: UserWithCollectivite | null }>> => {
   const session = await auth();
 
   if (!session) {
@@ -25,9 +24,19 @@ export const discardInformationAction = async (
   }
 
   try {
-    await discardedInformation(userId, modalId);
-    revalidatePath(`/espace-projet/${projectId}`);
-    return { type: "success" };
+    const user = await getUserWithCollectivites(userId);
+    if (!user) {
+      return { type: "error", message: "UNAUTHORIZED" };
+    }
+
+    const updatedModalIds = user.discardedInformation || [];
+
+    if (updatedModalIds.includes(modalId)) {
+      return { type: "success", updatedUser: user };
+    }
+    updatedModalIds.push(modalId);
+    const updatedUser = await updateUserDiscardedInformation(userId, updatedModalIds);
+    return { type: "success", updatedUser: updatedUser };
   } catch (e) {
     customCaptureException("Error in accepting invitation DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };

@@ -153,28 +153,17 @@ export const updateUser = async ({
   });
 };
 
-export const discardedInformation = async (userId: string, modalId: string): Promise<User | null> => {
-  //TODO Supprimer cette transaction
-  return prismaClient.$transaction(async (tx) => {
-    const user = await tx.user.findUnique({
-      where: { id: userId },
-    });
-
-    if (!user) {
-      return null;
-    }
-
-    let updatedModalIds = user.discardedInformation || [];
-
-    if (!updatedModalIds.includes(modalId)) {
-      updatedModalIds.push(modalId);
-    }
-
-    return tx.user.update({
-      where: { id: userId },
-      data: {
-        discardedInformation: updatedModalIds,
-      },
-    });
+export const updateUserDiscardedInformation = async (
+  userId: string,
+  updatedModalIds: string[],
+): Promise<UserWithCollectivite | null> => {
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      discardedInformation: updatedModalIds,
+    },
+    include: { collectivites: { include: { collectivite: true } } },
   });
 };

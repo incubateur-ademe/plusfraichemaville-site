@@ -2,7 +2,7 @@ import { useModalStore } from "@/stores/modal/provider";
 import Image from "next/image";
 
 export const LecteurModeLabel = () => {
-  const setDiscardViewerMode = useModalStore((state) => state.setCurrentDiscardViewerMode);
+  const setDiscardViewerMode = useModalStore((state) => state.setShowInfoViewerMode);
   const openModal = () => setDiscardViewerMode(true);
 
   return (

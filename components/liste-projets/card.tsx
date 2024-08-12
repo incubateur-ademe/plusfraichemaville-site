@@ -18,6 +18,8 @@ import { requestToJoinProjectAction } from "@/actions/userProjet/request-to-join
 import { PartageOverviewPopupMenu } from "../partage/partage-overview-popup-menu";
 import { getCurrentUserRole } from "../partage/helpers";
 import { useModalStore } from "@/stores/modal/provider";
+import { hasDiscardedInformation } from "@/helpers/user";
+import { MODE_LECTEUR_MODAL_ID } from "@/components/tableau-de-bord/viewer-mode-modal";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -27,53 +29,41 @@ type ListeProjetsCardProps = {
 };
 
 export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsing }: ListeProjetsCardProps) => {
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const currentUserMail = useUserStore((state) => state.userInfos?.email);
-  const currentUserInfo = getCurrentUserProjectInfos(projet, currentUserId);
+  const currentUser = useUserStore((state) => state.userInfos);
+  const currentUserInfo = getCurrentUserProjectInfos(projet, currentUser?.id);
   const members = projet.users;
   const [isPending, startTransition] = useTransition();
 
-  const setDiscardViewerMode = useModalStore((state) => state.setCurrentDiscardViewerMode);
-  const isLecteur = (projet && getCurrentUserRole(projet.users, currentUserId) !== "ADMIN") ?? false;
-  const openDiscardViewerMode = () => isLecteur && setDiscardViewerMode(true);
+  const setShowInfoViewerMode = useModalStore((state) => state.setShowInfoViewerMode);
+  const isLecteur = (projet && getCurrentUserRole(projet.users, currentUser?.id) !== "ADMIN") ?? false;
+  const openDiscardViewerMode = () =>
+    isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID) && setShowInfoViewerMode(true);
 
-  const hasAlreadyRequest = getCurrentUserProjectInfos(projet, currentUserId)?.invitation_status === "REQUESTED";
+  const hasAlreadyRequest = getCurrentUserProjectInfos(projet, currentUser?.id)?.invitation_status === "REQUESTED";
 
   const handleSendRequest = () => {
     startTransition(async () => {
-      try {
-        if (currentUserId && currentUserMail) {
-          const result = await requestToJoinProjectAction(currentUserId, projet.id);
-          notifications(result.type, result.message);
-        }
-      } catch (e) {
-        throw new Error();
+      if (currentUser?.id) {
+        const result = await requestToJoinProjectAction(currentUser?.id, projet.id);
+        notifications(result.type, result.message);
       }
     });
   };
 
   const handleAcceptInvitation = () => {
     startTransition(async () => {
-      try {
-        if (currentUserId) {
-          const result = await acceptProjectInvitationAction(currentUserId, projet.id);
-          notifications(result.type, result.message);
-        }
-      } catch (e) {
-        throw new Error();
+      if (currentUser?.id) {
+        const result = await acceptProjectInvitationAction(currentUser?.id, projet.id);
+        notifications(result.type, result.message);
       }
     });
   };
 
   const handleDeclineInvitation = () => {
     startTransition(async () => {
-      try {
-        if (currentUserId) {
-          const result = await declineProjectInvitationAction(currentUserId, projet.id);
-          notifications(result.type, result.message);
-        }
-      } catch (e) {
-        throw new Error();
+      if (currentUser?.id) {
+        const result = await declineProjectInvitationAction(currentUser?.id, projet.id);
+        notifications(result.type, result.message);
       }
     });
   };
@@ -205,6 +195,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
           <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
             <Link
               className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
+              onClick={openDiscardViewerMode}
               href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}
               style={{ ...disabledButton }}
             >
