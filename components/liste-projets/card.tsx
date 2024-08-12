@@ -159,8 +159,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
                 <Case condition={invitationStatus === "INVITED"}>
                   {currentUserInfo && (
                     <div className="absolute bottom-10 right-0">
-                      Reçue le
-                      {invitationStatus === "INVITED" && dateToStringWithoutTime(currentUserInfo?.created_at)}
+                      Reçue le {invitationStatus === "INVITED" && dateToStringWithoutTime(currentUserInfo?.created_at)}
                     </div>
                   )}
                 </Case>

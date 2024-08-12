@@ -7,7 +7,7 @@ import { PermissionManager } from "@/helpers/permission-manager";
 import { revalidatePath } from "next/cache";
 import { EmailService } from "@/services/brevo";
 import { getUserById } from "@/lib/prisma/prismaUserQueries";
-import { getOrCreateProjectJoinRequest, getUserProjet } from "@/lib/prisma/prisma-user-projet-queries";
+import { renewOrCreateProjectJoinRequest, getUserProjet } from "@/lib/prisma/prisma-user-projet-queries";
 import { InvitationStatus } from "@prisma/client";
 
 export const requestToJoinProjectAction = async (userId: string, projectId: number): Promise<ResponseAction> => {
@@ -37,7 +37,7 @@ export const requestToJoinProjectAction = async (userId: string, projectId: numb
       }
     }
 
-    const projetLink = await getOrCreateProjectJoinRequest(projectId, user);
+    const projetLink = await renewOrCreateProjectJoinRequest(projectId, user);
     revalidatePath(`/espace-projet/${projectId}`);
     const emailService = new EmailService();
     await emailService.sendRequestAccessEmail(projetLink);

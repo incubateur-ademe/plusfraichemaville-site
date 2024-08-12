@@ -2,7 +2,7 @@
 
 import { auth } from "@/lib/next-auth/auth";
 import { PermissionManager } from "@/helpers/permission-manager";
-import { getUserByEmail } from "@/lib/prisma/prismaUserQueries";
+import { getUserByEmail, getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { email, InvitationStatus } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
 import { revalidatePath } from "next/cache";
@@ -19,10 +19,11 @@ export const inviteMemberAction = async (
     if (!session) {
       return { type: "error", message: "UNAUTHENTICATED", mail: null };
     }
+    const currentUser = await getUserWithCollectivites(session.user.id);
 
     const projet = await getProjetById(projectId);
     const canShareProject = await new PermissionManager().canShareProject(session.user.id, projectId);
-    if (!canShareProject || !projet) {
+    if (!canShareProject || !projet || !currentUser) {
       return { type: "error", message: "UNAUTHORIZED", mail: null };
     }
 
@@ -47,7 +48,7 @@ export const inviteMemberAction = async (
     const invitation = await inviteMember(projectId, email, existingUser?.id);
     if (invitation) {
       const emailService = new EmailService();
-      const result = await emailService.sendInvitationEmail(email, projet, invitation);
+      const result = await emailService.sendInvitationEmail(email, invitation, currentUser);
       revalidatePath(`/espace-projet/${projectId}`);
       return { type: "success", message: "EMAIL_SENT", mail: result.email };
     }

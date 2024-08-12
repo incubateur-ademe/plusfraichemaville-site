@@ -4,7 +4,9 @@ import { brevoSender } from "./brevo-sender";
 import { ResponseAction } from "@/actions/actions-types";
 import { getOldestProjectAdmin } from "@/lib/prisma/prisma-user-projet-queries";
 import { captureError } from "@/lib/sentry/sentryCustomMessage";
-import { UserProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { UserProjetWithRelations, UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { getPrimaryCollectiviteForUser } from "@/helpers/user";
+import { PFMV_ROUTES } from "@/helpers/routes";
 
 interface Templates {
   templateId: number;
@@ -12,16 +14,25 @@ interface Templates {
 
 type EmailSendResult = ResponseAction<{ email?: email }>;
 
+export type EmailProjetPartageConfig = {
+  username: string;
+  userCollectiviteName: string;
+  projetName: string;
+  projetCollectiviteName: string;
+  link: string;
+  destinationMail: string;
+};
+
 export class EmailService {
   private readonly templates: Record<emailType, Templates>;
 
   constructor() {
     this.templates = {
       projetInvitation: {
-        templateId: 15,
+        templateId: 38,
       },
       projetRequestAccess: {
-        templateId: 2,
+        templateId: 39,
       },
     };
   }
@@ -33,7 +44,7 @@ export class EmailService {
   private async sendEmail(
     to: string,
     emailType: emailType,
-    params: Record<string, string>,
+    params: EmailProjetPartageConfig,
     userProjetId?: number,
   ): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
@@ -59,11 +70,21 @@ export class EmailService {
     }
   }
 
-  async sendInvitationEmail(email: string, projet: projet, userProjet: user_projet): Promise<EmailSendResult> {
-    return this.sendEmail(email, emailType.projetInvitation, {
-      projet: projet.nom,
-      invitationToken: userProjet.invitation_token ?? "",
-    });
+  async sendInvitationEmail(
+    email: string,
+    userProjet: UserProjetWithRelations,
+    actionInitiatorUser: UserWithCollectivite,
+  ): Promise<EmailSendResult> {
+    const params: EmailProjetPartageConfig = {
+      username: `${actionInitiatorUser.prenom} ${actionInitiatorUser.nom}`,
+      projetCollectiviteName: userProjet.projet.collectivite.nom,
+      userCollectiviteName: getPrimaryCollectiviteForUser(actionInitiatorUser).nom,
+      destinationMail: email,
+      projetName: userProjet.projet.nom,
+      link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB("invitation")}`,
+    };
+
+    return this.sendEmail(email, emailType.projetInvitation, params, userProjet.id);
   }
 
   async sendRequestAccessEmail(userProjet: UserProjetWithRelations) {
@@ -72,11 +93,19 @@ export class EmailService {
     }
     const oldestAdmin = await getOldestProjectAdmin(userProjet.projet_id);
     if (oldestAdmin && oldestAdmin.user?.email) {
-      return this.sendEmail(oldestAdmin.user.email, emailType.projetRequestAccess, {
-        projectName: userProjet.projet.nom,
-        requesterName: `${userProjet.user.prenom} ${userProjet.user.nom}`,
-        invitationToken: userProjet.invitation_token ?? "",
-      });
+      const params: EmailProjetPartageConfig = {
+        username: `${userProjet.user.prenom} ${userProjet.user.nom}`,
+        projetCollectiviteName: userProjet.projet.collectivite.nom,
+        userCollectiviteName: getPrimaryCollectiviteForUser(userProjet.user).nom,
+        destinationMail: oldestAdmin.user.email,
+        projetName: userProjet.projet.nom,
+        link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(
+          userProjet.projet_id,
+          "partage",
+        )}`,
+      };
+
+      return this.sendEmail(oldestAdmin.user.email, emailType.projetRequestAccess, params);
     }
     return { type: "error", message: "ADMIN_NOT_FOUND" };
   }

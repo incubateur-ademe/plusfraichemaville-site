@@ -19,7 +19,10 @@ export const getUserProjetById = async (userProjetId: number): Promise<UserProje
       id: userProjetId,
       deleted_at: null,
     },
-    include: { projet: true, user: true },
+    include: {
+      projet: { include: { collectivite: true } },
+      user: { include: { collectivites: { include: { collectivite: true } } } },
+    },
   });
 };
 
@@ -207,7 +210,11 @@ export const declineProjectRequest = async (
   });
 };
 
-export const inviteMember = async (projectId: number, email: string, userId?: string) => {
+export const inviteMember = async (
+  projectId: number,
+  email: string,
+  userId?: string,
+): Promise<UserProjetWithRelations> => {
   return prismaClient.user_projet.upsert({
     where: { user_id_projet_id: { projet_id: projectId, user_id: userId ?? "" }, email_address: email },
     create: {
@@ -222,11 +229,16 @@ export const inviteMember = async (projectId: number, email: string, userId?: st
       invitation_status: InvitationStatus.INVITED,
       deleted_at: null,
       deleted_by: null,
+      created_at: new Date(),
+    },
+    include: {
+      projet: { include: { collectivite: true } },
+      user: { include: { collectivites: { include: { collectivite: true } } } },
     },
   });
 };
 
-export const getOrCreateProjectJoinRequest = async (
+export const renewOrCreateProjectJoinRequest = async (
   projectId: number,
   user: User,
 ): Promise<UserProjetWithRelations> => {
@@ -243,7 +255,11 @@ export const getOrCreateProjectJoinRequest = async (
       invitation_status: InvitationStatus.REQUESTED,
       deleted_at: null,
       deleted_by: null,
+      created_at: new Date(),
     },
-    include: { projet: true, user: true },
+    include: {
+      projet: { include: { collectivite: true } },
+      user: { include: { collectivites: { include: { collectivite: true } } } },
+    },
   });
 };

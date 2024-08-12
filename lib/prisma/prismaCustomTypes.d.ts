@@ -23,7 +23,10 @@ export type UserProjetWithUser = Prisma.user_projetGetPayload<{
 }>;
 
 export type UserProjetWithRelations = Prisma.user_projetGetPayload<{
-  include: { projet: true; user: true };
+  include: {
+    projet: { include: { collectivite: true } };
+    user: { include: { collectivites: { include: { collectivite } } } };
+  };
 }>;
 
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];
