@@ -40,12 +40,12 @@ export const ViewerModeModal = () => {
 
   const handleDiscardInformation = () => {
     startTransition(async () => {
-        if (userId) {
-          const result = await discardInformationAction(userId, MODE_LECTEUR_MODAL_ID);
-          if (result.type === "success") {
-            setUserInfos(result.updatedUser);
-          }
+      if (userId) {
+        const result = await discardInformationAction(userId, MODE_LECTEUR_MODAL_ID);
+        if (result.type === "success") {
+          setUserInfos(result.updatedUser);
         }
+      }
     });
   };
 
