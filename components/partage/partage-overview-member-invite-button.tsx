@@ -21,6 +21,7 @@ export const PartageOverviewMemberInviteButton = () => {
   const form = useForm<PartageUserInvitationData>({
     resolver: zodResolver(PartageUserInvitationSchema),
     defaultValues: {
+      email: "",
       role: "LECTEUR",
     },
   });
@@ -29,6 +30,9 @@ export const PartageOverviewMemberInviteButton = () => {
     if (projectId) {
       const result = await inviteMemberAction(projectId, data.email);
       notifications(result.type, result.message);
+      if (result.type === "success") {
+        modal.close();
+      }
     }
   };
 
@@ -40,23 +44,12 @@ export const PartageOverviewMemberInviteButton = () => {
       <modal.Component title="" size="small" className="current-user-status-modale min-h-[296px]">
         <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Inviter un membre</h2>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <InputFormField control={form.control} path="email" />
-          {/* TODO: confirmer que ces valeurs ne sont pas autorisées */}
-          {/* <SelectFormField
-            control={form.control}
-            path="role"
-            label=""
-            options={[
-              { name: "Admin", value: "ADMIN" },
-              { name: "Editeur", value: "EDITEUR" },
-              { name: "Lecteur", value: "LECTEUR" },
-            ]}
-          /> */}
+          <InputFormField control={form.control} path="email" placeholder="Adresse email de la personne à inviter" />
           <div className="flex justify-between">
-            <Button priority="tertiary" onClick={modal.close} nativeButtonProps={modal} type="button" className="mr-4">
+            <Button priority="tertiary" onClick={modal.close} nativeButtonProps={modal.buttonProps} type="button">
               Annuler
             </Button>
-            <Button priority="primary" type="submit" onClick={modal.close}>
+            <Button priority="primary" type="submit">
               Inviter
             </Button>
           </div>

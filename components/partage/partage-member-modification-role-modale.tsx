@@ -105,7 +105,7 @@ export const PartageMemberModificationRoleModale = () => {
                 <Button
                   priority="tertiary"
                   onClick={modal.close}
-                  nativeButtonProps={modal}
+                  nativeButtonProps={modal.buttonProps}
                   type="button"
                   className="mr-4"
                 >
