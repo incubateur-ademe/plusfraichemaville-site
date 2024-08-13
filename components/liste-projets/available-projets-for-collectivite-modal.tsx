@@ -3,14 +3,13 @@
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useModalStore } from "@/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { useUserStore } from "@/stores/user/provider";
 import { ListeProjetsCard } from "./card";
 import { ProjetWithPublicRelations } from "@/lib/prisma/prismaCustomTypes";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL } from "@/helpers/routes";
-import { GroupedOptions } from "@/components/climadiag/types";
 import { upsert } from "@/helpers/listUtils";
 
 const modal = createModal({

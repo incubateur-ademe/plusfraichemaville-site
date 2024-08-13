@@ -133,6 +133,16 @@ export const getProjetWithPublicRelationsById = async (projetId: number): Promis
   });
 };
 
+export const getProjetWithRelationsById = async (projetId: number): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.findUnique({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    include: projetIncludes,
+  });
+};
+
 export const createOrUpdateProjet = async ({
   projetId,
   nomProjet,

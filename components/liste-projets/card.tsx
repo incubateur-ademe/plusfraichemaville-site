@@ -41,6 +41,7 @@ export const ListeProjetsCard = ({
   const [updatedProjet, setUpdatedProjet] = useState(projet);
   const currentUser = useUserStore((state) => state.userInfos);
   const setPendingProjets = useProjetsStore((state) => state.setPendingProjets);
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const deletePendingProjet = useProjetsStore((state) => state.deletePendingProjet);
   const members = updatedProjet.users;
   const [isPending, startTransition] = useTransition();
@@ -75,6 +76,10 @@ export const ListeProjetsCard = ({
       if (currentUser?.id) {
         const result = await acceptProjectInvitationAction(currentUser?.id, updatedProjet.id);
         notifications(result.type, result.message);
+        if (result.type === "success" && result.projet) {
+          deletePendingProjet(updatedProjet.id);
+          addOrUpdateProjet(result.projet);
+        }
       }
     });
   };
