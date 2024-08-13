@@ -4,7 +4,6 @@ import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/helpers/permission-manager";
-import { revalidatePath } from "next/cache";
 import { declineProjectInvitation } from "@/lib/prisma/prisma-user-projet-queries";
 
 export const declineProjectInvitationAction = async (userId: string, projectId: number): Promise<ResponseAction> => {
@@ -21,7 +20,6 @@ export const declineProjectInvitationAction = async (userId: string, projectId: 
 
   try {
     await declineProjectInvitation(userId, projectId, session.user.id);
-    revalidatePath(`/espace-projet/${projectId}`);
     return { type: "success", message: "DECLINE_INVITATION_PROJECT_ACCESS" };
   } catch (e) {
     customCaptureException("Error in decline invitation DB call", e);

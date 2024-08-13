@@ -73,8 +73,8 @@ export const ListProjets = () => {
                 >
                   <TabButton isActive={currentTab === tab.id} tab={tab.id}>
                     {tab.label} ({tab.count})
-                    {index === 1 && tab.count > 0 && (
-                      <div className="absolute -top-4 right-0 size-2 rounded-full bg-pfmv-climadiag-red"></div>
+                    {tab.id === "invitation" && tab.count > 0 && (
+                      <div className="relative -top-4 left-2 size-2 rounded-full bg-pfmv-climadiag-red"></div>
                     )}
                   </TabButton>
                 </div>

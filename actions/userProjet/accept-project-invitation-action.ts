@@ -21,7 +21,6 @@ export const acceptProjectInvitationAction = async (userId: string, projectId: n
 
   try {
     await acceptProjectInvitation(userId, projectId);
-    revalidatePath(`/espace-projet/${projectId}`);
     return { type: "success", message: "ACCEPT_INVITATION_PROJECT_ACCESS" };
   } catch (e) {
     customCaptureException("Error in accepting invitation DB call", e);
