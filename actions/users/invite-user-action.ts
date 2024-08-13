@@ -5,7 +5,6 @@ import { PermissionManager } from "@/helpers/permission-manager";
 import { getUserByEmail, getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { InvitationStatus } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
-import { revalidatePath } from "next/cache";
 import { EmailService } from "@/services/brevo";
 import { getProjetById, getProjetWithRelationsById } from "@/lib/prisma/prismaProjetQueries";
 import { getUserProjetByEmailAndProjet, inviteMember } from "@/lib/prisma/prisma-user-projet-queries";
@@ -52,7 +51,6 @@ export const inviteMemberAction = async (
       const emailService = new EmailService();
       await emailService.sendInvitationEmail(email, invitation, currentUser);
       const updatedProjet = await getProjetWithRelationsById(projectId);
-      revalidatePath(`/espace-projet/${projectId}`);
       return { type: "success", message: "EMAIL_SENT", updatedProjet: updatedProjet };
     }
     return { type: "error", message: "TECHNICAL_ERROR" };
