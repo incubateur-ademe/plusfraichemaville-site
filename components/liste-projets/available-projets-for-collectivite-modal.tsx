@@ -49,7 +49,7 @@ export const AvailableProjetsForCollectiviteModal = () => {
         <Conditional>
           <Case condition={!isLoading && (availableProjects?.length || 0) === 0}>
             <div className="text-lg font-bold italic">
-              {"Il n'y a aucun projet disponible pour cette collectivité."}
+              {"Il n'y a aucun autre projet disponible pour cette collectivité."}
             </div>
           </Case>
         </Conditional>

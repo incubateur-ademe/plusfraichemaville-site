@@ -21,6 +21,23 @@ export const projetIncludes = {
   },
 };
 
+export const projetPublicSelect = {
+  id: true,
+  nom: true,
+  collectiviteId: true,
+  type_espace: true,
+  collectivite: true,
+  users: {
+    select: {
+      user: { select: { id: true, nom: true, prenom: true } },
+      created_at: true,
+      role: true,
+      invitation_status: true,
+      user_id: true
+    },
+  },
+};
+
 export const updateFichesProjet = async (
   projetId: number,
   ficheId: number,
@@ -129,7 +146,7 @@ export const getProjetWithPublicRelationsById = async (projetId: number): Promis
       id: projetId,
       deleted_at: null,
     },
-    include: { collectivite: true, users: { include: { user: true } } },
+    select: projetPublicSelect,
   });
 };
 
@@ -238,7 +255,7 @@ export const getPendingUserProjets = async (userId: string): Promise<ProjetWithP
       },
       deleted_at: null,
     },
-    include: { collectivite: true, users: { include: { user: true } } },
+    select: projetPublicSelect,
   });
 };
 
@@ -294,6 +311,6 @@ export const getAvailableProjectsForCollectivite = async (
         },
       },
     },
-    include: { collectivite: true, users: { include: { user: true } } },
+    select: projetPublicSelect,
   });
 };

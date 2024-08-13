@@ -19,7 +19,13 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
 }>;
 
 export type UserProjetWithUser = Prisma.user_projetGetPayload<{
-  include: { user: true };
+  select: {
+    user: { select: { id: true; nom: true; prenom: true } };
+    created_at: true;
+    role: true;
+    invitation_status: true;
+    user_id: true;
+  };
 }>;
 
 export type UserProjetWithRelations = Prisma.user_projetGetPayload<{
@@ -38,7 +44,7 @@ export interface ProjetWithRelations extends projet {
   users: UserProjetWithUser[];
 }
 
-export interface ProjetWithPublicRelations extends projet {
+export interface ProjetWithPublicRelations extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace"> {
   collectivite: collectivite;
   users: UserProjetWithUser[];
 }
