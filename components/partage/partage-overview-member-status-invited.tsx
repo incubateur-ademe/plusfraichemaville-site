@@ -15,12 +15,8 @@ export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserPro
 
   const handleResendInvitation = () => {
     startTransition(async () => {
-      try {
-        const result = await resendInvitationAction(userProjetId);
-        notifications(result.type, result.message);
-      } catch (e) {
-        throw new Error();
-      }
+      const result = await resendInvitationAction(userProjetId);
+      notifications(result.type, result.message);
     });
   };
 

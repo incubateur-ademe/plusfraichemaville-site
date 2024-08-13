@@ -18,19 +18,10 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
   const currentUserId = useUserStore((state) => state.userInfos?.id);
   const members = useProjetsStore((state) => state.getCurrentProjet())?.users;
   const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const currentUserRole = getCurrentUserRole(members, currentUserId);
 
-  // TODO: À garder selon règles métier.
-  // const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
-
   const links = [
-    // TODO: À garder selon règles métier.
-    // {
-    //   label: "Modifier les accès",
-    //   iconId: "ri-pencil-fill",
-    //   className: "text-dsfr-text-label-blue-france",
-    //   onClick: () => setCurrentUserModification(props),
-    // },
     {
       label: "Supprimer le membre",
       iconId: "ri-delete-bin-fill",
@@ -43,13 +34,16 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
               if (props.member.user_id && props.member.projet_id) {
                 const result = await deleteUserFromProjetAction(props.member.user_id, props.member.projet_id);
                 notifications(result.type, result.message);
+                if (result.type === "success" && result.updatedProjet) {
+                  addOrUpdateProjet(result.updatedProjet);
+                }
               }
             },
             confirmLabel: "Supprimer le membre",
             title: "Supprimer le membre",
             description:
-              // eslint-disable-next-line max-len
-              "Le membre n’aura plus accès au projet. Il pourra rejoindre le projet à nouveau par le biais d'une invitation ou d'une demande d'accès.",
+              "Le membre n’aura plus accès au projet. " +
+              "Il pourra rejoindre le projet à nouveau par le biais d'une invitation ou d'une demande d'accès.",
           },
         }),
     },

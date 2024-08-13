@@ -1,4 +1,4 @@
-import { extractNameSyllables } from "@/helpers/common";
+import { extractNameInitiales } from "@/helpers/common";
 import clsx from "clsx";
 
 type PartageOverviewMemberSyllabesProps = {
@@ -6,8 +6,8 @@ type PartageOverviewMemberSyllabesProps = {
   active?: boolean;
 };
 
-export const PartageOverviewMemberSyllabes = ({ name, active }: PartageOverviewMemberSyllabesProps) => {
-  const syllabes = name ? extractNameSyllables(name) : "-";
+export const PartageOverviewMemberInitiales = ({ name, active }: PartageOverviewMemberSyllabesProps) => {
+  const initiales = name ? extractNameInitiales(name) : "-";
 
   return (
     <div
@@ -16,7 +16,7 @@ export const PartageOverviewMemberSyllabes = ({ name, active }: PartageOverviewM
         active ? "bg-dsfr-background-flat-info" : "bg-dsfr-background-action-high-purple-glycine-hover",
       )}
     >
-      {syllabes}
+      {initiales}
     </div>
   );
 };
