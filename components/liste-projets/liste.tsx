@@ -24,7 +24,7 @@ export const ListeProjetTab = ({
     return (
       <div className="w-full">
         <Conditional>
-          <Case condition={invitationStatus === "ACCEPTED"}>
+          <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
             <ListProjetsHeaderEmpty />
             <div className="ml-auto mt-5 w-fit rounded-[10px] !border-[1px] !border-pfmv-navy text-sm">
               <Button
@@ -60,7 +60,8 @@ export const ListeProjetTab = ({
           <Conditional>
             <Case
               condition={
-                invitationStatus === "ACCEPTED" && userCollectiviteId === collectiviteWithProjet.collectivite.id
+                invitationStatus === InvitationStatus.ACCEPTED &&
+                userCollectiviteId === collectiviteWithProjet.collectivite.id
               }
             >
               <div className="ml-auto w-fit rounded-[10px] !border-[1px] !border-pfmv-navy text-sm">

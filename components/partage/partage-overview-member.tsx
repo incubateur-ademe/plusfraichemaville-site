@@ -34,7 +34,7 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
       )}
     >
       <div className="absolute left-0">
-        <PartageOverviewMemberInitiales name={name} active={member.invitation_status === "ACCEPTED"} />
+        <PartageOverviewMemberInitiales name={name} active={member.invitation_status === InvitationStatus.ACCEPTED} />
       </div>
       <span className="w-full max-w-72">
         {name} {isCurrentUser && "(vous)"}

@@ -17,7 +17,7 @@ export const PartageOverviewAdmin = () => {
   const membersByStatus = groupByInvitationStatus(members);
 
   const sections: { title: string; status: InvitationStatus }[] = [
-    { title: "", status: "ACCEPTED" },
+    { title: "", status: InvitationStatus.ACCEPTED },
     { title: "Accès demandé", status: "REQUESTED" },
     { title: "Invité(s)", status: "INVITED" },
   ];

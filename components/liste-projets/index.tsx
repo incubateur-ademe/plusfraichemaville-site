@@ -11,6 +11,7 @@ import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { InvitationStatus } from "@prisma/client";
 
 export type EspaceProjetTabsId = "projet" | "invitation" | "demande";
 
@@ -30,7 +31,7 @@ export const ListProjets = () => {
     {
       count: projets.length,
       label: projets.length < 2 ? "Projet actif" : "Projets actifs",
-      content: <ListeProjetTab projets={activeProjets} invitationStatus="ACCEPTED" />,
+      content: <ListeProjetTab projets={activeProjets} invitationStatus={InvitationStatus.ACCEPTED} />,
       id: "projet" as const,
     },
     {

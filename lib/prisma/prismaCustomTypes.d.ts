@@ -19,6 +19,9 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
 }>;
 
 export type UserProjetWithUser = Prisma.user_projetGetPayload<{
+  include: { user: true };
+}>;
+export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
   select: {
     user: { select: { id: true; nom: true; prenom: true } };
     created_at: true;
@@ -46,7 +49,7 @@ export interface ProjetWithRelations extends projet {
 
 export interface ProjetWithPublicRelations extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace"> {
   collectivite: collectivite;
-  users: UserProjetWithUser[];
+  users: UserProjetWithPublicUser[];
 }
 
 export type EstimationMateriauxFicheSolution = {

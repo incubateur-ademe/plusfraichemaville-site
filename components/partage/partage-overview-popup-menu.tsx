@@ -2,7 +2,7 @@
 
 import { useModalStore } from "@/stores/modal/provider";
 import { PopupMenu } from "../common/popup-menu";
-import { ProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations, UserProjetWithPublicUser } from "@/lib/prisma/prismaCustomTypes";
 import { checkOtherAdminExists } from "./helpers";
 import { useTransition } from "react";
 import { leaveProjetAction } from "@/actions/projets/leave-projet-action";
@@ -12,8 +12,8 @@ import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
 
 type PartageOverviewPopupMenuProps = {
   projectId: number;
-  currentUserInfo: UserProjetWithUser | null;
-  members: ProjetWithRelations["users"];
+  currentUserInfo: UserProjetWithPublicUser | null;
+  members: ProjetWithPublicRelations["users"];
 };
 export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }: PartageOverviewPopupMenuProps) => {
   const [, startTransition] = useTransition();

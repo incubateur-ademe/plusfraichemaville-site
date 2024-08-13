@@ -132,7 +132,7 @@ export const ListeProjetsCard = ({
         <Conditional>
           <Case
             condition={
-              invitationStatus === "ACCEPTED" ||
+              invitationStatus === InvitationStatus.ACCEPTED ||
               invitationStatus === "INVITED" ||
               invitationStatus === "REQUESTED" ||
               isBrowsing === true
@@ -159,7 +159,7 @@ export const ListeProjetsCard = ({
                 <Case
                   condition={
                     invitationStatus === "INVITED" ||
-                    invitationStatus === "ACCEPTED" ||
+                    invitationStatus === InvitationStatus.ACCEPTED ||
                     invitationStatus === "REQUESTED"
                   }
                 >
@@ -207,7 +207,7 @@ export const ListeProjetsCard = ({
   return (
     <div className="relative">
       <Conditional>
-        <Case condition={invitationStatus === "ACCEPTED"}>
+        <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
           <div className="pfmv-card">
             <Link onClick={openDiscardViewerMode} href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}>
               {contentCard}
@@ -219,7 +219,7 @@ export const ListeProjetsCard = ({
         </Default>
       </Conditional>
       <Conditional>
-        <Case condition={invitationStatus === "ACCEPTED"}>
+        <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
           <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
             <Link
               className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
