@@ -20,17 +20,27 @@ import { getCurrentUserRole } from "../partage/helpers";
 import { useModalStore } from "@/stores/modal/provider";
 import { hasDiscardedInformation } from "@/helpers/user";
 import { MODE_LECTEUR_MODAL_ID } from "@/components/tableau-de-bord/viewer-mode-modal";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { getPendingUserProjetsAction } from "@/actions/projets/get-pending-user-projets-action";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
   projet: ProjetWithPublicRelations;
   invitationStatus?: InvitationStatus;
   isBrowsing?: boolean;
+  updateProjet?: (_updatedProjet: ProjetWithPublicRelations) => void;
 };
 
-export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsing }: ListeProjetsCardProps) => {
+export const ListeProjetsCard = ({
+  projet,
+  invitationStatus,
+  disabled,
+  isBrowsing,
+  updateProjet,
+}: ListeProjetsCardProps) => {
   const [updatedProjet, setUpdatedProjet] = useState(projet);
   const currentUser = useUserStore((state) => state.userInfos);
+  const setPendingProjets = useProjetsStore((state) => state.setPendingProjets);
   const members = updatedProjet.users;
   const [isPending, startTransition] = useTransition();
 
@@ -47,8 +57,13 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
       if (currentUser?.id) {
         const result = await requestToJoinProjectAction(currentUser?.id, updatedProjet.id);
         notifications(result.type, result.message);
-        if (result.updatedProjet) {
+        if (result.updatedProjet && updateProjet) {
+          updateProjet(result.updatedProjet);
           setUpdatedProjet(result.updatedProjet);
+          const pendingProjetsActionResult = await getPendingUserProjetsAction(currentUser.id);
+          if (pendingProjetsActionResult.pendingProjets) {
+            setPendingProjets(pendingProjetsActionResult.pendingProjets);
+          }
         }
       }
     });

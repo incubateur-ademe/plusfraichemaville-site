@@ -17,9 +17,10 @@ export type EspaceProjetTabsId = "projet" | "invitation" | "demande";
 export const ListProjets = () => {
   const userId = useUserStore((state) => state.userInfos?.id);
   const projets = useProjetsStore((state) => state.projets);
-  const projetsByStatus = sortProjectsByInvitationStatus(projets, userId);
+  const pendingProjets = useProjetsStore((state) => state.pendingProjets);
+  const projetsByStatus = sortProjectsByInvitationStatus(pendingProjets, userId);
 
-  const activeProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsActive);
+  const activeProjets = groupAndOrderProjetsByCollectivite(projets);
   const invitedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsInvited);
   const requestedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsRequested);
 
@@ -27,7 +28,7 @@ export const ListProjets = () => {
 
   const tabs = [
     {
-      count: projetsByStatus.projectsActive.length,
+      count: projets.length,
       label: "Projet actif",
       content: <ListeProjetTab projets={activeProjets} invitationStatus="ACCEPTED" />,
       id: "projet" as const,

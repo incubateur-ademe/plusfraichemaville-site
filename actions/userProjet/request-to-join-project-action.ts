@@ -34,13 +34,13 @@ export const requestToJoinProjectAction = async (
   }
 
   try {
-    const ecistingProjetLink = await getUserProjet(userId, projectId);
-    if (ecistingProjetLink) {
-      if (ecistingProjetLink.invitation_status === InvitationStatus.ACCEPTED) {
+    const existingProjetLink = await getUserProjet(userId, projectId);
+    if (existingProjetLink) {
+      if (existingProjetLink.invitation_status === InvitationStatus.ACCEPTED) {
         return { type: "error", message: "REQUEST_ALREADY_IN_PROJET" };
-      } else if (ecistingProjetLink.invitation_status === InvitationStatus.INVITED) {
+      } else if (existingProjetLink.invitation_status === InvitationStatus.INVITED) {
         return { type: "error", message: "REQUEST_ALREADY_INVITED" };
-      } else if (ecistingProjetLink.invitation_status === InvitationStatus.REQUESTED) {
+      } else if (existingProjetLink.invitation_status === InvitationStatus.REQUESTED) {
         return { type: "error", message: "REQUEST_ALREADY_SENT" };
       }
     }

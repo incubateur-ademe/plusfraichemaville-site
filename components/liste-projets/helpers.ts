@@ -1,13 +1,13 @@
-import { ProjetWithPublicRelations, ProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import { collectivite } from "@prisma/client";
 import { orderBy } from "lodash";
 
 export interface ProjetsByCollectivite {
   collectivite: collectivite;
-  projets: ProjetWithRelations[];
+  projets: ProjetWithPublicRelations[];
 }
 
-export const groupAndOrderProjetsByCollectivite = (projets: ProjetWithRelations[]): ProjetsByCollectivite[] => {
+export const groupAndOrderProjetsByCollectivite = (projets: ProjetWithPublicRelations[]): ProjetsByCollectivite[] => {
   const p = projets.reduce<ProjetsByCollectivite[]>((acc, projet) => {
     let existingGroup = acc.find(({ collectivite }) => collectivite.id === projet.collectivite.id);
     if (!existingGroup) {
@@ -21,22 +21,19 @@ export const groupAndOrderProjetsByCollectivite = (projets: ProjetWithRelations[
 };
 
 type SortedProjects = {
-  projectsActive: ProjetWithRelations[];
-  projectsInvited: ProjetWithRelations[];
-  projectsRequested: ProjetWithRelations[];
+  projectsInvited: ProjetWithPublicRelations[];
+  projectsRequested: ProjetWithPublicRelations[];
 };
 
 export const sortProjectsByInvitationStatus = (
-  projects: ProjetWithRelations[],
+  projects: ProjetWithPublicRelations[],
   currentUserId?: string | null,
 ): SortedProjects => {
   return projects.reduce<SortedProjects>(
     (acc, project) => {
       const currentUserProject = project.users.find((u) => u.user_id === currentUserId);
 
-      if (currentUserProject?.invitation_status === "ACCEPTED") {
-        acc.projectsActive.push(project);
-      } else if (currentUserProject?.invitation_status === "INVITED") {
+      if (currentUserProject?.invitation_status === "INVITED") {
         acc.projectsInvited.push(project);
       } else if (currentUserProject?.invitation_status === "REQUESTED") {
         acc.projectsRequested.push(project);
@@ -45,7 +42,6 @@ export const sortProjectsByInvitationStatus = (
       return acc;
     },
     {
-      projectsActive: [],
       projectsInvited: [],
       projectsRequested: [],
     },

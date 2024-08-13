@@ -3,13 +3,15 @@
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useModalStore } from "@/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { useUserStore } from "@/stores/user/provider";
 import { ListeProjetsCard } from "./card";
 import { ProjetWithPublicRelations } from "@/lib/prisma/prismaCustomTypes";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL } from "@/helpers/routes";
+import { GroupedOptions } from "@/components/climadiag/types";
+import { upsert } from "@/helpers/listUtils";
 
 const modal = createModal({
   id: "join-project-modal",
@@ -35,7 +37,7 @@ export const AvailableProjetsForCollectiviteModal = () => {
 
   const url = collectiviteId && userId ? GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL(collectiviteId, userId) : null;
 
-  const { data: availableProjects, isLoading } = useSwrWithFetcher<ProjetWithPublicRelations[]>(url);
+  const { data: availableProjects, isLoading, mutate } = useSwrWithFetcher<ProjetWithPublicRelations[]>(url);
 
   return (
     <>
@@ -45,7 +47,16 @@ export const AvailableProjetsForCollectiviteModal = () => {
           Vous pouvez consulter tous les projets liés à la collectivité concernée et soumettre une demande {"d'accès"}.
           {"L'administrateur"} sera alors notifié de votre demande.
         </span>
-        {availableProjects?.map((projet) => <ListeProjetsCard projet={projet} isBrowsing key={projet.id} />)}
+        {availableProjects?.map((projet) => (
+          <ListeProjetsCard
+            projet={projet}
+            isBrowsing
+            key={projet.id}
+            updateProjet={async (updatedProjet) => {
+              await mutate(upsert(availableProjects, updatedProjet));
+            }}
+          />
+        ))}
         {isLoading && <FicheCardSkeleton horizontal />}
       </modal.Component>
     </>

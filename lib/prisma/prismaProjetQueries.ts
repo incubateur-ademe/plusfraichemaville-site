@@ -11,16 +11,13 @@ export const projetIncludes = {
     where: { deleted_at: null },
     include: {
       estimations_aides: {
-        include: {
-          aide: true,
-        },
+        include: { aide: true },
       },
     },
   },
   users: {
-    include: {
-      user: true,
-    },
+    where: { deleted_at: null },
+    include: { user: true },
   },
 };
 
@@ -219,34 +216,36 @@ export const deleteProjet = async (projetId: number, userId: string) => {
     );
 };
 
-export const getUserProjets = async (userId: string) => {
+export const getPendingUserProjets = async (userId: string): Promise<ProjetWithPublicRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
-      OR: [
-        { created_by: userId },
-        {
-          users: {
-            some: {
-              user_id: userId,
-              deleted_at: null,
-              invitation_status: { in: ["ACCEPTED", "REQUESTED", "INVITED"] },
-            },
-          },
+      users: {
+        some: {
+          user_id: userId,
+          deleted_at: null,
+          invitation_status: { in: ["REQUESTED", "INVITED"] },
         },
-      ],
+      },
+      deleted_at: null,
+    },
+    include: { collectivite: true, users: { include: { user: true } } },
+  });
+};
+
+export const getUserProjets = async (userId: string): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      users: {
+        some: {
+          user_id: userId,
+          deleted_at: null,
+          invitation_status: { in: ["ACCEPTED"] },
+        },
+      },
       deleted_at: null,
     },
     include: {
       ...projetIncludes,
-      users: {
-        where: {
-          deleted_at: null,
-          invitation_status: { in: ["ACCEPTED", "REQUESTED", "INVITED"] },
-        },
-        include: {
-          user: true,
-        },
-      },
     },
   });
 };
