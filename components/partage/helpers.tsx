@@ -3,7 +3,7 @@ import {
   UserProjetWithPublicUser,
   UserProjetWithUser,
 } from "@/lib/prisma/prismaCustomTypes";
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus, RoleProjet } from "@prisma/client";
 
 type GroupedUserProjet = Partial<Record<InvitationStatus, UserProjetWithUser[]>>;
 
@@ -28,7 +28,7 @@ export const checkOtherAdminExists = (
 
   const otherAdmins = members.filter(
     (member: UserProjetWithPublicUser) =>
-      member.role === "ADMIN" &&
+      member.role === RoleProjet.ADMIN &&
       member.user_id !== currentUserId &&
       member.invitation_status === InvitationStatus.ACCEPTED,
   );
@@ -41,5 +41,5 @@ export const getCurrentUserRole = (users?: UserProjetWithPublicUser[], userId?: 
 
 export const currentUserIsAdmin = (users?: UserProjetWithUser[], userId?: string) => {
   const role = users?.find((user) => user.user_id === userId)?.role;
-  return role === "ADMIN";
+  return role === RoleProjet.ADMIN;
 };

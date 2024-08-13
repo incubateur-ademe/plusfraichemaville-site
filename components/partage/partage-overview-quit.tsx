@@ -10,6 +10,7 @@ import { leaveProjetAction } from "@/actions/projets/leave-projet-action";
 import { notifications } from "../common/notifications";
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { RoleProjet } from "@prisma/client";
 
 const modal = createModal({
   id: "partage-overview-quit-project",
@@ -42,7 +43,7 @@ export const PartageOverviewQuit = () => {
     });
   };
 
-  if (!currentUserRole || currentUserRole === "ADMIN") {
+  if (!currentUserRole || currentUserRole === RoleProjet.ADMIN) {
     return null;
   }
 

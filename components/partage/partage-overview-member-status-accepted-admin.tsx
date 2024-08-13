@@ -8,6 +8,7 @@ import { notifications } from "../common/notifications";
 import { PopupMenu } from "../common/popup-menu";
 import { getCurrentUserRole } from "./helpers";
 import { useProjetsStore } from "@/stores/projets/provider";
+import { RoleProjet } from "@prisma/client";
 
 export type PartageOverviewMemberStatusAdminProps = {
   member: UserProjetWithUser;
@@ -55,7 +56,7 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
         <i className="ri-checkbox-circle-fill mr-2 size-6 text-dsfr-background-action-high-success-hover"></i>
         activé
       </div>
-      {!props.isCurrentUser && currentUserRole === "ADMIN" && <PopupMenu links={links} />}
+      {!props.isCurrentUser && currentUserRole === RoleProjet.ADMIN && <PopupMenu links={links} />}
     </div>
   );
 };

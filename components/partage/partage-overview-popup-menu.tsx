@@ -9,6 +9,7 @@ import { leaveProjetAction } from "@/actions/projets/leave-projet-action";
 import { notifications } from "../common/notifications";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
+import { RoleProjet } from "@prisma/client";
 
 type PartageOverviewPopupMenuProps = {
   projectId: number;
@@ -22,7 +23,7 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
 
   const currentUserId = currentUserInfo?.user_id;
   const hasOtherAdmin = checkOtherAdminExists(members, currentUserInfo?.user_id);
-  const isAdmin = currentUserInfo?.role === "ADMIN";
+  const isAdmin = currentUserInfo?.role === RoleProjet.ADMIN;
   const canLeaveProject = !isAdmin || (isAdmin && hasOtherAdmin);
 
   const handleQuitProject = () => {

@@ -4,7 +4,7 @@ import { PictoEspaceSelector } from "../common/pictos";
 import { PictoId } from "../common/pictos/picto-espace-selector";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/helpers/routes";
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus, RoleProjet } from "@prisma/client";
 import { Case, Conditional, Default } from "../common/conditional-renderer";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
@@ -47,7 +47,8 @@ export const ListeProjetsCard = ({
   const [isPending, startTransition] = useTransition();
 
   const setShowInfoViewerMode = useModalStore((state) => state.setShowInfoViewerMode);
-  const isLecteur = (updatedProjet && getCurrentUserRole(updatedProjet.users, currentUser?.id) !== "ADMIN") ?? false;
+  const isLecteur =
+    (updatedProjet && getCurrentUserRole(updatedProjet.users, currentUser?.id) !== RoleProjet.ADMIN) ?? false;
   const openDiscardViewerMode = () =>
     isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID) && setShowInfoViewerMode(true);
 

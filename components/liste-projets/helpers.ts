@@ -1,5 +1,5 @@
 import { ProjetWithPublicRelations, UserProjetWithPublicUser } from "@/lib/prisma/prismaCustomTypes";
-import { collectivite, InvitationStatus } from "@prisma/client";
+import { collectivite, InvitationStatus, RoleProjet } from "@prisma/client";
 import { orderBy } from "lodash";
 
 export interface ProjetsByCollectivite {
@@ -50,7 +50,10 @@ export const sortProjectsByInvitationStatus = (
 
 export const getOldestAdmin = (project: ProjetWithPublicRelations) => {
   const oldestAdmin = project.users
-    .filter((userProjet) => userProjet.role === "ADMIN" && userProjet.invitation_status === InvitationStatus.ACCEPTED)
+    .filter(
+      (userProjet) =>
+        userProjet.role === RoleProjet.ADMIN && userProjet.invitation_status === InvitationStatus.ACCEPTED,
+    )
     .reduce<UserProjetWithPublicUser | undefined>((oldest, current) => {
       if (!oldest) return current;
       return oldest.created_at <= current.created_at ? oldest : current;

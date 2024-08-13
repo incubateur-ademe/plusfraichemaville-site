@@ -96,9 +96,9 @@ export const PartageMemberModificationRoleModale = () => {
                 path="role"
                 label=""
                 options={[
-                  { name: "Admin", value: "ADMIN" },
-                  { name: "Editeur", value: "EDITEUR" },
-                  { name: "Lecteur", value: "LECTEUR" },
+                  { name: "Admin", value: RoleProjet.ADMIN },
+                  { name: "Editeur", value: RoleProjet.EDITEUR },
+                  { name: "Lecteur", value: RoleProjet.LECTEUR },
                 ]}
               />
               <div className="flex justify-between">

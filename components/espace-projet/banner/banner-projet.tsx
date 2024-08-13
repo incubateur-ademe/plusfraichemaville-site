@@ -11,11 +11,13 @@ import { BannerProjetSkeleton } from "./banner-projet-skeleton";
 import { getCurrentUserRole } from "@/components/partage/helpers";
 import { useUserStore } from "@/stores/user/provider";
 import { LecteurModeLabel } from "@/components/common/lecteur-mode-label";
+import { RoleProjet } from "@prisma/client";
 
 export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const isLecteur = (currentProjet && getCurrentUserRole(currentProjet.users, currentUserId) !== "ADMIN") ?? false;
+  const isLecteur =
+    (currentProjet && getCurrentUserRole(currentProjet.users, currentUserId) !== RoleProjet.ADMIN) ?? false;
 
   return (
     <div className={`bg-dsfr-background-alt-blue-france py-4 ${className} min-h-[7rem]`}>

@@ -1,5 +1,5 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { InvitationStatus, Prisma, projet, user_projet } from "@prisma/client";
+import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
@@ -199,7 +199,7 @@ export const createOrUpdateProjet = async ({
       users: {
         create: {
           user_id: userId,
-          role: "ADMIN",
+          role: RoleProjet.ADMIN,
           invitation_status: InvitationStatus.ACCEPTED,
         },
       },

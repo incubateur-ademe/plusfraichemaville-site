@@ -10,6 +10,7 @@ import InputFormField from "../common/InputFormField";
 import { inviteMemberAction } from "@/actions/users/invite-user-action";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { notifications } from "../common/notifications";
+import { RoleProjet } from "@prisma/client";
 
 const modal = createModal({
   id: "partage-overview-invite-member",
@@ -23,7 +24,7 @@ export const PartageOverviewMemberInviteButton = () => {
     resolver: zodResolver(PartageUserInvitationSchema),
     defaultValues: {
       email: "",
-      role: "LECTEUR",
+      role: RoleProjet.LECTEUR,
     },
   });
 

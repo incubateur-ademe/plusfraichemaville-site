@@ -3,14 +3,14 @@
 import { useProjetsStore } from "@/stores/projets/provider";
 import { PartageOverviewWrapper } from "./partage-overview-wrapper";
 import { getCurrentUserRole, groupByInvitationStatus } from "./helpers";
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus, RoleProjet } from "@prisma/client";
 import { PartageOverviewMemberSection } from "./partage-overview-member-section";
 import { useUserStore } from "@/stores/user/provider";
 
 export const PartageOverviewAdmin = () => {
   const members = useProjetsStore((state) => state.getCurrentProjet()?.users);
   const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const currentUserIsAdmin = getCurrentUserRole(members, currentUserId) === "ADMIN";
+  const currentUserIsAdmin = getCurrentUserRole(members, currentUserId) === RoleProjet.ADMIN;
 
   if (!members) return null;
 
