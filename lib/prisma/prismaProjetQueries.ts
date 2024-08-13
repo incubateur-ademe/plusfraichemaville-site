@@ -1,10 +1,10 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { Prisma, projet, user_projet } from "@prisma/client";
-import { ProjetWithRelations } from "./prismaCustomTypes";
+import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
 
-const projetIncludes = {
+export const projetIncludes = {
   collectivite: true,
   creator: true,
   estimations: {
@@ -123,6 +123,16 @@ export const getProjetById = async (projetId: number): Promise<projet | null> =>
       id: projetId,
       deleted_at: null,
     },
+  });
+};
+
+export const getProjetWithPublicRelationsById = async (projetId: number): Promise<ProjetWithPublicRelations | null> => {
+  return prismaClient.projet.findUnique({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    include: { collectivite: true, users: { include: { user: true } } },
   });
 };
 
@@ -260,7 +270,7 @@ export const leaveProject = async (userId: string, projectId: number): Promise<u
 export const getAvailableProjectsForCollectivite = async (
   collectiviteId: number,
   userId: string,
-): Promise<ProjetWithRelations[]> => {
+): Promise<ProjetWithPublicRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
       collectiviteId,
@@ -275,6 +285,6 @@ export const getAvailableProjectsForCollectivite = async (
         },
       },
     },
-    include: projetIncludes,
+    include: { collectivite: true, users: { include: { user: true } } },
   });
 };

@@ -255,7 +255,6 @@ export const renewOrCreateProjectJoinRequest = async (
       invitation_status: InvitationStatus.REQUESTED,
       deleted_at: null,
       deleted_by: null,
-      created_at: new Date(),
     },
     include: {
       projet: { include: { collectivite: true } },

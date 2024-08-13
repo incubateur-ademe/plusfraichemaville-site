@@ -4,11 +4,12 @@ import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useModalStore } from "@/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
 import { useUserStore } from "@/stores/user/provider";
 import { ListeProjetsCard } from "./card";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations } from "@/lib/prisma/prismaCustomTypes";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
+import { GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL } from "@/helpers/routes";
 
 const modal = createModal({
   id: "join-project-modal",
@@ -30,11 +31,9 @@ export const ToJoinProjetsModal = () => {
     onConceal: () => setCurrentToJoinProjets(null),
   });
 
-  const url = collectiviteId
-    ? `/api/get-available-projects-for-collectivite?collectiviteId=${collectiviteId}&userId=${userId}`
-    : null;
+  const url = collectiviteId && userId ? GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL(collectiviteId, userId) : null;
 
-  const { data: availableProjects, isLoading } = useImmutableSwrWithFetcher<ProjetWithRelations[]>(url);
+  const { data: availableProjects, isLoading } = useSwrWithFetcher<ProjetWithPublicRelations[]>(url);
 
   return (
     <>
