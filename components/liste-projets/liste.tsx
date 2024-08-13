@@ -23,9 +23,9 @@ export const ListeProjetTab = ({
   if (!projets.length) {
     return (
       <div className="w-full">
-        <ListProjetsHeaderEmpty />
         <Conditional>
           <Case condition={invitationStatus === "ACCEPTED"}>
+            <ListProjetsHeaderEmpty />
             <div className="ml-auto mt-5 w-fit rounded-[10px] !border-[1px] !border-pfmv-navy text-sm">
               <Button
                 iconId="ri-add-circle-fill"
@@ -33,10 +33,12 @@ export const ListeProjetTab = ({
                 onClick={() => userCollectiviteId && setCollectiviteIdToListAvailableProjets(userCollectiviteId)}
                 className="rounded-[10px]"
               >
-                Rejoindre {"d'autres"} projets
+                Rejoindre {"d'autres"} projets de ma collectivité
               </Button>
             </div>
           </Case>
+          <Case condition={invitationStatus === "INVITED"}>{"Vous n'avez aucune invitation en attente."}</Case>
+          <Case condition={invitationStatus === "REQUESTED"}>{"Vous n'avez aucune demande d'accès en cours."}</Case>
         </Conditional>
       </div>
     );
@@ -56,7 +58,11 @@ export const ListeProjetTab = ({
             <ListeProjetsCard projet={projet} invitationStatus={invitationStatus} key={projet.id} />
           ))}
           <Conditional>
-            <Case condition={invitationStatus === "ACCEPTED"}>
+            <Case
+              condition={
+                invitationStatus === "ACCEPTED" && userCollectiviteId === collectiviteWithProjet.collectivite.id
+              }
+            >
               <div className="ml-auto w-fit rounded-[10px] !border-[1px] !border-pfmv-navy text-sm">
                 <Button
                   iconId="ri-add-circle-fill"
