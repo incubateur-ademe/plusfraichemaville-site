@@ -1,5 +1,5 @@
 import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/lib/prisma/prisma-email-queries";
-import { email, emailStatus, emailType, projet, User, user_projet } from "@prisma/client";
+import { email, emailStatus, emailType } from "@prisma/client";
 import { brevoSender } from "./brevo-sender";
 import { ResponseAction } from "@/actions/actions-types";
 import { getOldestProjectAdmin } from "@/lib/prisma/prisma-user-projet-queries";

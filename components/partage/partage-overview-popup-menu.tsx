@@ -5,10 +5,11 @@ import { PopupMenu } from "../common/popup-menu";
 import { ProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import { checkOtherAdminExists } from "./helpers";
 import { useTransition } from "react";
-import { leaveProjectAction } from "@/actions/projets/leave-projet-action";
+import { leaveProjetAction } from "@/actions/projets/leave-projet-action";
 import { notifications } from "../common/notifications";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
+
 type PartageOverviewPopupMenuProps = {
   projectId: number;
   currentUserInfo: UserProjetWithUser | null;
@@ -26,28 +27,23 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
 
   const handleQuitProject = () => {
     startTransition(async () => {
-      try {
-        if (currentUserId && projectId) {
-          const result = await leaveProjectAction(currentUserId, projectId);
-          notifications(result.type, result.message);
+      if (currentUserId && projectId) {
+        const result = await leaveProjetAction(currentUserId, projectId);
+        notifications(result.type, result.message);
+        if (result.type === "success") {
+          deleteStoredProjet(projectId);
         }
-      } catch (e) {
-        throw new Error();
       }
     });
   };
   const handleDeleteProject = () => {
     startTransition(async () => {
-      try {
-        if (currentUserId && projectId) {
-          const res = await deleteProjetAction(projectId);
-          if (res.type === "success") {
-            deleteStoredProjet(projectId);
-          }
-          notifications(res.type, res.message);
+      if (currentUserId && projectId) {
+        const res = await deleteProjetAction(projectId);
+        if (res.type === "success") {
+          deleteStoredProjet(projectId);
         }
-      } catch (e) {
-        throw new Error();
+        notifications(res.type, res.message);
       }
     });
   };
@@ -66,10 +62,10 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
             confirmLabel: canLeaveProject ? "Quitter le projet" : null,
             title: canLeaveProject ? "Quitter le projet" : " Impossible de quitter le projet",
             description: canLeaveProject
-              ? // eslint-disable-next-line max-len
-                "Êtes-vous certain de vouloir quitter le projet ? SI vous souhaitez le réintégrer par la suite, vous devrez faire une demande d’accès."
-              : // eslint-disable-next-line max-len
-                "Vous êtes le seul administrateur du projet. Pour quitter le projet, il vous faut définir un nouvel administrateur.",
+              ? "Êtes-vous certain de vouloir quitter le projet ? " +
+                "Si vous souhaitez le réintégrer par la suite, vous devrez faire une demande d’accès."
+              : "Vous êtes le seul administrateur du projet. " +
+                "Pour quitter le projet, il vous faut définir un nouvel administrateur.",
           },
         }),
     },
@@ -86,8 +82,8 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
             confirmLabel: "Supprimer le projet",
             title: "Supprimer le projet",
             description:
-              // eslint-disable-next-line max-len
-              "Attention, cette action est irréversible va impacter les autres membres invités sur votre projet. Toutes les informations seront perdues.",
+              "Attention, cette action est irréversible va impacter les autres membres invités sur votre projet. " +
+              "Toutes les informations seront perdues.",
           },
         }),
     },

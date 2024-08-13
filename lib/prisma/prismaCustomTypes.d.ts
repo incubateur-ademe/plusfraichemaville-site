@@ -38,6 +38,11 @@ export interface ProjetWithRelations extends projet {
   users: UserProjetWithUser[];
 }
 
+export interface ProjetWithPublicRelations extends projet {
+  collectivite: collectivite;
+  users: UserProjetWithUser[];
+}
+
 export type EstimationMateriauxFicheSolution = {
   ficheSolutionId: number;
   estimationMateriaux?: { materiauId: string; quantite: number }[];

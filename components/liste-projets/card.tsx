@@ -1,4 +1,4 @@
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations } from "@/lib/prisma/prismaCustomTypes";
 import Link from "next/link";
 import { PictoEspaceSelector } from "../common/pictos";
 import { PictoId } from "../common/pictos/picto-espace-selector";
@@ -10,7 +10,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
 import { useUserStore } from "@/stores/user/provider";
 import { dateToStringWithoutTime } from "@/helpers/dateUtils";
-import { useTransition } from "react";
+import { useState, useTransition } from "react";
 import { notifications } from "../common/notifications";
 import { acceptProjectInvitationAction } from "@/actions/userProjet/accept-project-invitation-action";
 import { declineProjectInvitationAction } from "@/actions/userProjet/decline-project-invitation-action";
@@ -20,32 +20,53 @@ import { getCurrentUserRole } from "../partage/helpers";
 import { useModalStore } from "@/stores/modal/provider";
 import { hasDiscardedInformation } from "@/helpers/user";
 import { MODE_LECTEUR_MODAL_ID } from "@/components/tableau-de-bord/viewer-mode-modal";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { getPendingUserProjetsAction } from "@/actions/projets/get-pending-user-projets-action";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
-  projet: ProjetWithRelations;
+  projet: ProjetWithPublicRelations;
   invitationStatus?: InvitationStatus;
   isBrowsing?: boolean;
+  updateProjet?: (_updatedProjet: ProjetWithPublicRelations) => void;
 };
 
-export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsing }: ListeProjetsCardProps) => {
+export const ListeProjetsCard = ({
+  projet,
+  invitationStatus,
+  disabled,
+  isBrowsing,
+  updateProjet,
+}: ListeProjetsCardProps) => {
+  const [updatedProjet, setUpdatedProjet] = useState(projet);
   const currentUser = useUserStore((state) => state.userInfos);
-  const currentUserInfo = getCurrentUserProjectInfos(projet, currentUser?.id);
-  const members = projet.users;
+  const setPendingProjets = useProjetsStore((state) => state.setPendingProjets);
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+  const deletePendingProjet = useProjetsStore((state) => state.deletePendingProjet);
+  const members = updatedProjet.users;
   const [isPending, startTransition] = useTransition();
 
   const setShowInfoViewerMode = useModalStore((state) => state.setShowInfoViewerMode);
-  const isLecteur = (projet && getCurrentUserRole(projet.users, currentUser?.id) !== "ADMIN") ?? false;
+  const isLecteur = (updatedProjet && getCurrentUserRole(updatedProjet.users, currentUser?.id) !== "ADMIN") ?? false;
   const openDiscardViewerMode = () =>
     isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID) && setShowInfoViewerMode(true);
 
-  const hasAlreadyRequest = getCurrentUserProjectInfos(projet, currentUser?.id)?.invitation_status === "REQUESTED";
+  const currentUserInfo = getCurrentUserProjectInfos(updatedProjet, currentUser?.id);
+  const hasAlreadyRequest = currentUserInfo?.invitation_status === "REQUESTED";
 
   const handleSendRequest = () => {
     startTransition(async () => {
       if (currentUser?.id) {
-        const result = await requestToJoinProjectAction(currentUser?.id, projet.id);
+        const result = await requestToJoinProjectAction(currentUser?.id, updatedProjet.id);
         notifications(result.type, result.message);
+        if (result.updatedProjet && updateProjet) {
+          updateProjet(result.updatedProjet);
+          setUpdatedProjet(result.updatedProjet);
+          const pendingProjetsActionResult = await getPendingUserProjetsAction(currentUser.id);
+          if (pendingProjetsActionResult.pendingProjets) {
+            setPendingProjets(pendingProjetsActionResult.pendingProjets);
+          }
+        }
       }
     });
   };
@@ -53,8 +74,12 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
   const handleAcceptInvitation = () => {
     startTransition(async () => {
       if (currentUser?.id) {
-        const result = await acceptProjectInvitationAction(currentUser?.id, projet.id);
+        const result = await acceptProjectInvitationAction(currentUser?.id, updatedProjet.id);
         notifications(result.type, result.message);
+        if (result.type === "success" && result.projet) {
+          deletePendingProjet(updatedProjet.id);
+          addOrUpdateProjet(result.projet);
+        }
       }
     });
   };
@@ -62,8 +87,11 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
   const handleDeclineInvitation = () => {
     startTransition(async () => {
       if (currentUser?.id) {
-        const result = await declineProjectInvitationAction(currentUser?.id, projet.id);
+        const result = await declineProjectInvitationAction(currentUser?.id, updatedProjet.id);
         notifications(result.type, result.message);
+        if (result.type === "success") {
+          deletePendingProjet(updatedProjet.id);
+        }
       }
     });
   };
@@ -87,17 +115,17 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
         >
           <div className="mr-6">
             <PictoEspaceSelector
-              pictoId={projet.type_espace as PictoId}
+              pictoId={updatedProjet.type_espace as PictoId}
               withBackground
               size="large"
               pictoClassName="svg-blue"
             />
           </div>
           <div>
-            <h3 className="mb-0 text-[22px] text-dsfr-text-label-blue-france">{projet.nom}</h3>
+            <h3 className="mb-0 text-[22px] text-dsfr-text-label-blue-france">{updatedProjet.nom}</h3>
             <h4 className="mb-4 text-lg text-dsfr-text-label-blue-france">
               <i className="ri-map-pin-line mr-1 before:!w-4"></i>
-              {projet.collectivite.nom}
+              {updatedProjet.collectivite.nom}
             </h4>
           </div>
         </div>
@@ -121,10 +149,10 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
               >
                 <div className="flex items-center gap-2">
                   <i className="ri-team-fill text-pfmv-navy"></i>
-                  {getAllUserProjectCount(projet)}
+                  {getAllUserProjectCount(updatedProjet)}
                 </div>
                 <div>
-                  <span>Admin : {getOldestAdmin(projet).username}</span>
+                  <span>Admin : {getOldestAdmin(updatedProjet).username}</span>
                 </div>
               </div>
               <Conditional>
@@ -181,7 +209,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
       <Conditional>
         <Case condition={invitationStatus === "ACCEPTED"}>
           <div className="pfmv-card">
-            <Link onClick={openDiscardViewerMode} href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}>
+            <Link onClick={openDiscardViewerMode} href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}>
               {contentCard}
             </Link>
           </div>
@@ -196,14 +224,18 @@ export const ListeProjetsCard = ({ projet, invitationStatus, disabled, isBrowsin
             <Link
               className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
               onClick={openDiscardViewerMode}
-              href={PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)}
+              href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}
               style={{ ...disabledButton }}
             >
               Accéder au projet
             </Link>
           </div>
           <div className={clsx("absolute bottom-5 right-5 text-sm")}>
-            <PartageOverviewPopupMenu members={members} projectId={projet.id} currentUserInfo={currentUserInfo} />
+            <PartageOverviewPopupMenu
+              members={members}
+              projectId={updatedProjet.id}
+              currentUserInfo={currentUserInfo}
+            />
           </div>
         </Case>
         <Case condition={invitationStatus === "INVITED"}>

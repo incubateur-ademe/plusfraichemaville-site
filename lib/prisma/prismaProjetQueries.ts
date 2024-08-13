@@ -1,26 +1,23 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { Prisma, projet, user_projet } from "@prisma/client";
-import { ProjetWithRelations } from "./prismaCustomTypes";
+import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
 
-const projetIncludes = {
+export const projetIncludes = {
   collectivite: true,
   creator: true,
   estimations: {
     where: { deleted_at: null },
     include: {
       estimations_aides: {
-        include: {
-          aide: true,
-        },
+        include: { aide: true },
       },
     },
   },
   users: {
-    include: {
-      user: true,
-    },
+    where: { deleted_at: null },
+    include: { user: true },
   },
 };
 
@@ -126,6 +123,26 @@ export const getProjetById = async (projetId: number): Promise<projet | null> =>
   });
 };
 
+export const getProjetWithPublicRelationsById = async (projetId: number): Promise<ProjetWithPublicRelations | null> => {
+  return prismaClient.projet.findUnique({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    include: { collectivite: true, users: { include: { user: true } } },
+  });
+};
+
+export const getProjetWithRelationsById = async (projetId: number): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.findUnique({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    include: projetIncludes,
+  });
+};
+
 export const createOrUpdateProjet = async ({
   projetId,
   nomProjet,
@@ -209,34 +226,36 @@ export const deleteProjet = async (projetId: number, userId: string) => {
     );
 };
 
-export const getUserProjets = async (userId: string) => {
+export const getPendingUserProjets = async (userId: string): Promise<ProjetWithPublicRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
-      OR: [
-        { created_by: userId },
-        {
-          users: {
-            some: {
-              user_id: userId,
-              deleted_at: null,
-              invitation_status: { in: ["ACCEPTED", "REQUESTED", "INVITED"] },
-            },
-          },
+      users: {
+        some: {
+          user_id: userId,
+          deleted_at: null,
+          invitation_status: { in: ["REQUESTED", "INVITED"] },
         },
-      ],
+      },
+      deleted_at: null,
+    },
+    include: { collectivite: true, users: { include: { user: true } } },
+  });
+};
+
+export const getUserProjets = async (userId: string): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      users: {
+        some: {
+          user_id: userId,
+          deleted_at: null,
+          invitation_status: { in: ["ACCEPTED"] },
+        },
+      },
       deleted_at: null,
     },
     include: {
       ...projetIncludes,
-      users: {
-        where: {
-          deleted_at: null,
-          invitation_status: { in: ["ACCEPTED", "REQUESTED", "INVITED"] },
-        },
-        include: {
-          user: true,
-        },
-      },
     },
   });
 };
@@ -260,7 +279,7 @@ export const leaveProject = async (userId: string, projectId: number): Promise<u
 export const getAvailableProjectsForCollectivite = async (
   collectiviteId: number,
   userId: string,
-): Promise<ProjetWithRelations[]> => {
+): Promise<ProjetWithPublicRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
       collectiviteId,
@@ -275,6 +294,6 @@ export const getAvailableProjectsForCollectivite = async (
         },
       },
     },
-    include: projetIncludes,
+    include: { collectivite: true, users: { include: { user: true } } },
   });
 };

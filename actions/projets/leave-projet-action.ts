@@ -6,7 +6,7 @@ import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { leaveProject } from "@/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/helpers/permission-manager";
 
-export const leaveProjectAction = async (userId: string, projetId: number): Promise<ResponseAction<{}>> => {
+export const leaveProjetAction = async (userId: string, projetId: number): Promise<ResponseAction<{}>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -26,7 +26,6 @@ export const leaveProjectAction = async (userId: string, projetId: number): Prom
     ) {
       return { type: "error", message: "PROJET_MUST_HAVE_ONE_ADMIN" };
     }
-
     const result = await leaveProject(userId, projetId);
     if (result) {
       return { type: "success", message: "QUIT_PROJET" };

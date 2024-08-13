@@ -34,7 +34,7 @@ export const daysUntilDate = (targetDate: Date | null): number | null => {
   return Math.ceil((targetDate.getTime() - new Date().getTime()) / MS_PER_DAY);
 };
 
-export const extractNameSyllables = (name: string) => {
+export const extractNameInitiales = (name: string) => {
   const match = name.match(/^[^\s-]+|\S+$/g);
   return match ? match.map((word) => word[0].toUpperCase()).join("") : "";
 };

@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { PartageOverviewMemberSyllabes } from "./partage-overview-member-syllabes";
+import { PartageOverviewMemberInitiales } from "./partage-overview-member-initiales";
 import { PartageOverviewMemberStatusAcceptedAdmin } from "./partage-overview-member-status-accepted-admin";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import { InvitationStatus } from "@prisma/client";
@@ -34,7 +34,7 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
       )}
     >
       <div className="absolute left-0">
-        <PartageOverviewMemberSyllabes name={name} active={member.invitation_status === "ACCEPTED"} />
+        <PartageOverviewMemberInitiales name={name} active={member.invitation_status === "ACCEPTED"} />
       </div>
       <span className="w-full max-w-72">
         {name} {isCurrentUser && "(vous)"}

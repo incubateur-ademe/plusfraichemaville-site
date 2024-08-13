@@ -5,7 +5,6 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { RoleProjet } from "@prisma/client";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
-import { revalidatePath } from "next/cache";
 import { updateUserRoleProject } from "@/lib/prisma/prisma-user-projet-queries";
 
 export const updateUserRoleProjectAction = async (
@@ -27,7 +26,6 @@ export const updateUserRoleProjectAction = async (
 
   try {
     const member = await updateUserRoleProject(userId, projectId, role);
-    revalidatePath(`/espace-projet/${projectId}`);
     return {
       type: "success",
       message: "ROLE_UPDATED",

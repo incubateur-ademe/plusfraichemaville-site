@@ -17,9 +17,10 @@ export type EspaceProjetTabsId = "projet" | "invitation" | "demande";
 export const ListProjets = () => {
   const userId = useUserStore((state) => state.userInfos?.id);
   const projets = useProjetsStore((state) => state.projets);
-  const projetsByStatus = sortProjectsByInvitationStatus(projets, userId);
+  const pendingProjets = useProjetsStore((state) => state.pendingProjets);
+  const projetsByStatus = sortProjectsByInvitationStatus(pendingProjets, userId);
 
-  const activeProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsActive);
+  const activeProjets = groupAndOrderProjetsByCollectivite(projets);
   const invitedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsInvited);
   const requestedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsRequested);
 
@@ -27,20 +28,20 @@ export const ListProjets = () => {
 
   const tabs = [
     {
-      count: projetsByStatus.projectsActive.length,
-      label: "Projet actif",
+      count: projets.length,
+      label: projets.length < 2 ? "Projet actif" : "Projets actifs",
       content: <ListeProjetTab projets={activeProjets} invitationStatus="ACCEPTED" />,
       id: "projet" as const,
     },
     {
       count: projetsByStatus.projectsInvited.length,
-      label: "Invitation en attente",
+      label: projetsByStatus.projectsInvited.length < 2 ? "Invitation en attente" : "Invitations en attente",
       content: <ListeProjetTab projets={invitedProjets} invitationStatus="INVITED" />,
       id: "invitation" as const,
     },
     {
       count: projetsByStatus.projectsRequested.length,
-      label: "Demande envoyée",
+      label: projetsByStatus.projectsRequested.length < 2 ? "Demande envoyée" : "Demandes envoyées",
       content: <ListeProjetTab projets={requestedProjets} invitationStatus="REQUESTED" />,
       id: "demande" as const,
     },
@@ -72,8 +73,8 @@ export const ListProjets = () => {
                 >
                   <TabButton isActive={currentTab === tab.id} tab={tab.id}>
                     {tab.label} ({tab.count})
-                    {index === 1 && tab.count > 0 && (
-                      <div className="absolute -top-4 right-0 size-2 rounded-full bg-pfmv-climadiag-red"></div>
+                    {tab.id === "invitation" && tab.count > 0 && (
+                      <div className="relative -top-4 left-2 size-2 rounded-full bg-pfmv-climadiag-red"></div>
                     )}
                   </TabButton>
                 </div>
