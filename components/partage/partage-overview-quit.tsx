@@ -6,7 +6,7 @@ import { checkOtherAdminExists, getCurrentUserRole } from "./helpers";
 import { useUserStore } from "@/stores/user/provider";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useTransition } from "react";
-import { leaveProjectAction } from "@/actions/projets/leave-projet-action";
+import { leaveProjetAction } from "@/actions/projets/leave-projet-action";
 import { notifications } from "../common/notifications";
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/helpers/routes";
@@ -31,7 +31,7 @@ export const PartageOverviewQuit = () => {
   const handleQuitProject = () => {
     startTransition(async () => {
       if (currentUserId && currentProjetId) {
-        const result = await leaveProjectAction(currentUserId, currentProjetId);
+        const result = await leaveProjetAction(currentUserId, currentProjetId);
         notifications(result.type, result.message);
         if (result?.type === "success") {
           deleteProjetFromStore(currentProjetId);

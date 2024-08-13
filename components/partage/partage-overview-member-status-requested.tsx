@@ -28,16 +28,12 @@ export const PartageOverviewMemberStatusRequested = ({ member }: { member: UserP
   };
   const handleDeclineRequest = () => {
     startTransition(async () => {
-      try {
-        if (userIdToUpdate) {
-          const result = await declineProjectRequestAction(projetId, userIdToUpdate);
-          notifications(result.type, result.message);
-          if (result.type === "success" && result.updatedProjet) {
-            addOrUpdateProjet(result.updatedProjet);
-          }
+      if (userIdToUpdate) {
+        const result = await declineProjectRequestAction(projetId, userIdToUpdate);
+        notifications(result.type, result.message);
+        if (result.type === "success" && result.updatedProjet) {
+          addOrUpdateProjet(result.updatedProjet);
         }
-      } catch (e) {
-        throw new Error();
       }
     });
   };

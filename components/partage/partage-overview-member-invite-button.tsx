@@ -18,6 +18,7 @@ const modal = createModal({
 
 export const PartageOverviewMemberInviteButton = () => {
   const projectId = useProjetsStore((state) => state.currentProjetId);
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const form = useForm<PartageUserInvitationData>({
     resolver: zodResolver(PartageUserInvitationSchema),
     defaultValues: {
@@ -31,6 +32,9 @@ export const PartageOverviewMemberInviteButton = () => {
       const result = await inviteMemberAction(projectId, data.email);
       notifications(result.type, result.message);
       if (result.type === "success") {
+        if (result.updatedProjet) {
+          addOrUpdateProjet(result.updatedProjet);
+        }
         modal.close();
       }
     }
