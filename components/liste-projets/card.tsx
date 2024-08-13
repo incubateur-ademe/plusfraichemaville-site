@@ -52,7 +52,7 @@ export const ListeProjetsCard = ({
     isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID) && setShowInfoViewerMode(true);
 
   const currentUserInfo = getCurrentUserProjectInfos(updatedProjet, currentUser?.id);
-  const hasAlreadyRequest = currentUserInfo?.invitation_status === "REQUESTED";
+  const hasAlreadyRequest = currentUserInfo?.invitation_status === InvitationStatus.REQUESTED;
 
   const handleSendRequest = () => {
     startTransition(async () => {
@@ -110,7 +110,10 @@ export const ListeProjetsCard = ({
         <div
           className={clsx(
             "flex",
-            (invitationStatus === "REQUESTED" || invitationStatus === "INVITED" || isBrowsing === true) && "opacity-25",
+            (invitationStatus === InvitationStatus.REQUESTED ||
+              invitationStatus === InvitationStatus.INVITED ||
+              isBrowsing === true) &&
+              "opacity-25",
           )}
         >
           <div className="mr-6">
@@ -133,8 +136,8 @@ export const ListeProjetsCard = ({
           <Case
             condition={
               invitationStatus === InvitationStatus.ACCEPTED ||
-              invitationStatus === "INVITED" ||
-              invitationStatus === "REQUESTED" ||
+              invitationStatus === InvitationStatus.INVITED ||
+              invitationStatus === InvitationStatus.REQUESTED ||
               isBrowsing === true
             }
           >
@@ -143,7 +146,9 @@ export const ListeProjetsCard = ({
                 className={clsx(
                   "mb-2 flex items-center gap-6",
 
-                  (invitationStatus === "REQUESTED" || invitationStatus === "INVITED" || isBrowsing === true) &&
+                  (invitationStatus === InvitationStatus.REQUESTED ||
+                    invitationStatus === InvitationStatus.INVITED ||
+                    isBrowsing === true) &&
                     "opacity-25",
                 )}
               >
@@ -158,15 +163,17 @@ export const ListeProjetsCard = ({
               <Conditional>
                 <Case
                   condition={
-                    invitationStatus === "INVITED" ||
+                    invitationStatus === InvitationStatus.INVITED ||
                     invitationStatus === InvitationStatus.ACCEPTED ||
-                    invitationStatus === "REQUESTED"
+                    invitationStatus === InvitationStatus.REQUESTED
                   }
                 >
                   <span
                     className={clsx(
                       "ml-auto block w-fit lowercase",
-                      (invitationStatus === "REQUESTED" || invitationStatus === "INVITED") && "opacity-25",
+                      (invitationStatus === InvitationStatus.REQUESTED ||
+                        invitationStatus === InvitationStatus.INVITED) &&
+                        "opacity-25",
                     )}
                   >
                     ({currentUserInfo?.role})
@@ -174,16 +181,18 @@ export const ListeProjetsCard = ({
                 </Case>
               </Conditional>
               <Conditional>
-                <Case condition={invitationStatus === "INVITED"}>
+                <Case condition={invitationStatus === InvitationStatus.INVITED}>
                   {currentUserInfo && (
                     <div className="absolute bottom-10 right-0">
-                      Reçue le {invitationStatus === "INVITED" && dateToStringWithoutTime(currentUserInfo?.created_at)}
+                      Reçue le{" "}
+                      {invitationStatus === InvitationStatus.INVITED &&
+                        dateToStringWithoutTime(currentUserInfo?.created_at)}
                     </div>
                   )}
                 </Case>
               </Conditional>
               <Conditional>
-                <Case condition={isBrowsing === true || invitationStatus === "REQUESTED"}>
+                <Case condition={isBrowsing === true || invitationStatus === InvitationStatus.REQUESTED}>
                   {hasAlreadyRequest ? (
                     <span className={clsx("flex items-center gap-2", "mt-4 justify-end")}>
                       <i className="ri-hourglass-fill text-pfmv-climadiag-red"></i>
@@ -238,7 +247,7 @@ export const ListeProjetsCard = ({
             />
           </div>
         </Case>
-        <Case condition={invitationStatus === "INVITED"}>
+        <Case condition={invitationStatus === InvitationStatus.INVITED}>
           <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
             <Button disabled={isPending} priority="tertiary" className="rounded-3xl" onClick={handleDeclineInvitation}>
               Décliner

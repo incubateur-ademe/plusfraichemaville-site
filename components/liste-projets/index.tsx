@@ -37,13 +37,13 @@ export const ListProjets = () => {
     {
       count: projetsByStatus.projectsInvited.length,
       label: projetsByStatus.projectsInvited.length < 2 ? "Invitation en attente" : "Invitations en attente",
-      content: <ListeProjetTab projets={invitedProjets} invitationStatus="INVITED" />,
+      content: <ListeProjetTab projets={invitedProjets} invitationStatus={InvitationStatus.INVITED} />,
       id: "invitation" as const,
     },
     {
       count: projetsByStatus.projectsRequested.length,
       label: projetsByStatus.projectsRequested.length < 2 ? "Demande envoyée" : "Demandes envoyées",
-      content: <ListeProjetTab projets={requestedProjets} invitationStatus="REQUESTED" />,
+      content: <ListeProjetTab projets={requestedProjets} invitationStatus={InvitationStatus.REQUESTED} />,
       id: "demande" as const,
     },
   ];

@@ -33,9 +33,9 @@ export const sortProjectsByInvitationStatus = (
     (acc, project) => {
       const currentUserProject = project.users.find((u) => u.user_id === currentUserId);
 
-      if (currentUserProject?.invitation_status === "INVITED") {
+      if (currentUserProject?.invitation_status === InvitationStatus.INVITED) {
         acc.projectsInvited.push(project);
-      } else if (currentUserProject?.invitation_status === "REQUESTED") {
+      } else if (currentUserProject?.invitation_status === InvitationStatus.REQUESTED) {
         acc.projectsRequested.push(project);
       }
 

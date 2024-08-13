@@ -37,8 +37,12 @@ export const ListeProjetTab = ({
               </Button>
             </div>
           </Case>
-          <Case condition={invitationStatus === "INVITED"}>{"Vous n'avez aucune invitation en attente."}</Case>
-          <Case condition={invitationStatus === "REQUESTED"}>{"Vous n'avez aucune demande d'accès en cours."}</Case>
+          <Case condition={invitationStatus === InvitationStatus.INVITED}>
+            {"Vous n'avez aucune invitation en attente."}
+          </Case>
+          <Case condition={invitationStatus === InvitationStatus.REQUESTED}>
+            {"Vous n'avez aucune demande d'accès en cours."}
+          </Case>
         </Conditional>
       </div>
     );

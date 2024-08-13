@@ -1,5 +1,5 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { Prisma, projet, user_projet } from "@prisma/client";
+import { InvitationStatus, Prisma, projet, user_projet } from "@prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
@@ -33,7 +33,7 @@ export const projetPublicSelect = {
       created_at: true,
       role: true,
       invitation_status: true,
-      user_id: true
+      user_id: true,
     },
   },
 };
@@ -200,7 +200,7 @@ export const createOrUpdateProjet = async ({
         create: {
           user_id: userId,
           role: "ADMIN",
-          invitation_status: "ACCEPTED",
+          invitation_status: InvitationStatus.ACCEPTED,
         },
       },
     },
@@ -250,7 +250,7 @@ export const getPendingUserProjets = async (userId: string): Promise<ProjetWithP
         some: {
           user_id: userId,
           deleted_at: null,
-          invitation_status: { in: ["REQUESTED", "INVITED"] },
+          invitation_status: { in: [InvitationStatus.REQUESTED, InvitationStatus.INVITED] },
         },
       },
       deleted_at: null,
@@ -266,7 +266,7 @@ export const getUserProjets = async (userId: string): Promise<ProjetWithRelation
         some: {
           user_id: userId,
           deleted_at: null,
-          invitation_status: { in: ["ACCEPTED"] },
+          invitation_status: { in: [InvitationStatus.ACCEPTED] },
         },
       },
       deleted_at: null,
@@ -305,7 +305,7 @@ export const getAvailableProjectsForCollectivite = async (
         users: {
           some: {
             user_id: userId,
-            invitation_status: "ACCEPTED",
+            invitation_status: InvitationStatus.ACCEPTED,
             deleted_at: null,
           },
         },

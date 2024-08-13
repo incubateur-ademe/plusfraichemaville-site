@@ -126,7 +126,7 @@ export const deleteUserFromProject = async (
     data: {
       deleted_at: new Date(),
       deleted_by: deletedById,
-      invitation_status: "DECLINED",
+      invitation_status: InvitationStatus.DECLINED,
     },
     include: {
       user: true,
@@ -142,10 +142,10 @@ export const acceptProjectInvitation = async (userId: string, projectId: number)
         projet_id: projectId,
       },
       deleted_at: null,
-      invitation_status: "INVITED",
+      invitation_status: InvitationStatus.INVITED,
     },
     data: {
-      invitation_status: "ACCEPTED",
+      invitation_status: InvitationStatus.ACCEPTED,
     },
   });
 };
@@ -161,11 +161,11 @@ export const declineProjectInvitation = async (
         user_id: userId,
         projet_id: projectId,
       },
-      invitation_status: "INVITED",
+      invitation_status: InvitationStatus.INVITED,
       deleted_at: null,
     },
     data: {
-      invitation_status: "DECLINED",
+      invitation_status: InvitationStatus.DECLINED,
       deleted_at: new Date(),
       deleted_by: deletedBy,
     },
@@ -180,10 +180,10 @@ export const acceptProjectRequest = async (userId: string, projectId: number): P
         projet_id: projectId,
       },
       deleted_at: null,
-      invitation_status: "REQUESTED",
+      invitation_status: InvitationStatus.REQUESTED,
     },
     data: {
-      invitation_status: "ACCEPTED",
+      invitation_status: InvitationStatus.ACCEPTED,
     },
   });
 };
@@ -200,10 +200,10 @@ export const declineProjectRequest = async (
         projet_id: projectId,
       },
       deleted_at: null,
-      invitation_status: "REQUESTED",
+      invitation_status: InvitationStatus.REQUESTED,
     },
     data: {
-      invitation_status: "DECLINED",
+      invitation_status: InvitationStatus.DECLINED,
       deleted_at: new Date(),
       deleted_by: deletedBy,
     },
