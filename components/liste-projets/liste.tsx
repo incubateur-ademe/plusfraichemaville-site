@@ -15,7 +15,9 @@ export const ListeProjetTab = ({
   projets: ProjetsByCollectivite[];
   invitationStatus: InvitationStatus;
 }) => {
-  const setCurrentToJoinProjets = useModalStore((state) => state.setCurrentToJoinProjets);
+  const setCollectiviteIdToListAvailableProjets = useModalStore(
+    (state) => state.setCollectiviteIdToListAvailableProjets,
+  );
   const userCollectiviteId = useUserStore((state) => state.userInfos?.collectivites[0].collectivite_id);
 
   if (!projets.length) {
@@ -28,7 +30,7 @@ export const ListeProjetTab = ({
               <Button
                 iconId="ri-add-circle-fill"
                 priority="tertiary no outline"
-                onClick={() => userCollectiviteId && setCurrentToJoinProjets(userCollectiviteId)}
+                onClick={() => userCollectiviteId && setCollectiviteIdToListAvailableProjets(userCollectiviteId)}
                 className="rounded-[10px]"
               >
                 Rejoindre {"d'autres"} projets
@@ -59,7 +61,7 @@ export const ListeProjetTab = ({
                 <Button
                   iconId="ri-add-circle-fill"
                   priority="tertiary no outline"
-                  onClick={() => setCurrentToJoinProjets(collectiviteWithProjet.collectivite.id)}
+                  onClick={() => setCollectiviteIdToListAvailableProjets(collectiviteWithProjet.collectivite.id)}
                   className="rounded-[10px]"
                 >
                   Rejoindre {"d'autres"} projets

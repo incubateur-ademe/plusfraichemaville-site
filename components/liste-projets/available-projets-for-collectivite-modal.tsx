@@ -16,9 +16,11 @@ const modal = createModal({
   isOpenedByDefault: false,
 });
 
-export const ToJoinProjetsModal = () => {
-  const collectiviteId = useModalStore((state) => state.currentToJoinProjets);
-  const setCurrentToJoinProjets = useModalStore((state) => state.setCurrentToJoinProjets);
+export const AvailableProjetsForCollectiviteModal = () => {
+  const collectiviteId = useModalStore((state) => state.collectiviteIdToListAvailableProjets);
+  const setCollectiviteIdToListAvailableProjets = useModalStore(
+    (state) => state.setCollectiviteIdToListAvailableProjets,
+  );
   const userId = useUserStore((state) => state.userInfos?.id);
 
   useEffect(() => {
@@ -28,7 +30,7 @@ export const ToJoinProjetsModal = () => {
   }, [collectiviteId]);
 
   useIsModalOpen(modal, {
-    onConceal: () => setCurrentToJoinProjets(null),
+    onConceal: () => setCollectiviteIdToListAvailableProjets(null),
   });
 
   const url = collectiviteId && userId ? GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL(collectiviteId, userId) : null;

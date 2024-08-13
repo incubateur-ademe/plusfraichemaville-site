@@ -4,7 +4,7 @@ import { AideFicheModal } from "@/components/financement/aide/aide-fiche-modal";
 // eslint-disable-next-line max-len
 import { PartageMemberModificationRoleModale } from "../partage/partage-member-modification-role-modale";
 import { PartageOverviewDeleteOrQuitModale } from "../partage/partage-overview-delete-or-quit-modale";
-import { ToJoinProjetsModal } from "../liste-projets/to-join-projets-modal";
+import { AvailableProjetsForCollectiviteModal } from "../liste-projets/available-projets-for-collectivite-modal";
 import { ViewerModeModal } from "../tableau-de-bord/viewer-mode-modal";
 
 export default function ModalProvider() {
@@ -14,7 +14,7 @@ export default function ModalProvider() {
       <AideFicheModal />
       <PartageMemberModificationRoleModale />
       <PartageOverviewDeleteOrQuitModale />
-      <ToJoinProjetsModal />
+      <AvailableProjetsForCollectiviteModal />
       <ViewerModeModal />
     </>
   );

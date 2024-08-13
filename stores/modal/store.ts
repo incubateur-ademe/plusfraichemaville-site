@@ -9,7 +9,7 @@ interface ModalState {
   currentDetailedAide: AidesTerritoiresAide | null;
   currentUserModification: PartageOverviewMemberStatusAdminProps | null;
   currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState;
-  currentToJoinProjets: number | null;
+  collectiviteIdToListAvailableProjets: number | null;
   showInfoViewerMode: boolean;
 }
 
@@ -18,7 +18,7 @@ export type ModalActions = {
   setCurrentDetailedAide: (_currentDetailedAide: AidesTerritoiresAide | null) => void;
   setCurrentUserModification: (_currentUserModification: PartageOverviewMemberStatusAdminProps | null) => void;
   setCurrentDeleteOrQuitModal: (_currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState) => void;
-  setCurrentToJoinProjets: (_collectiviteId: number | null) => void;
+  setCollectiviteIdToListAvailableProjets: (_collectiviteId: number | null) => void;
   setShowInfoViewerMode: (_showInfoViewerMode: boolean) => void;
 };
 
@@ -29,7 +29,7 @@ export const defaultInitState: ModalState = {
   currentDetailedAide: null,
   currentUserModification: null,
   currentDeleteOrQuitModal: null,
-  currentToJoinProjets: null,
+  collectiviteIdToListAvailableProjets: null,
   showInfoViewerMode: false,
 };
 
@@ -44,7 +44,8 @@ export const createModalStore = (initState: ModalState = defaultInitState) => {
     setCurrentDetailedAide: (currentDetailedAide) => set(() => ({ currentDetailedAide })),
     setCurrentUserModification: (currentUserModification) => set(() => ({ currentUserModification })),
     setCurrentDeleteOrQuitModal: (currentDeleteOrQuitModal) => set(() => ({ currentDeleteOrQuitModal })),
-    setCurrentToJoinProjets: (collectiviteId) => set(() => ({ currentToJoinProjets: collectiviteId })),
+    setCollectiviteIdToListAvailableProjets: (collectiviteId) =>
+      set(() => ({ collectiviteIdToListAvailableProjets: collectiviteId })),
     setShowInfoViewerMode: (showInfoViewerMode) => set(() => ({ showInfoViewerMode: showInfoViewerMode })),
   }));
 };
