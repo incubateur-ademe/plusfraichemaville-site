@@ -11,6 +11,7 @@ import { ProjetWithPublicRelations } from "@/lib/prisma/prismaCustomTypes";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL } from "@/helpers/routes";
 import { upsert } from "@/helpers/listUtils";
+import { Case, Conditional } from "@/components/common/conditional-renderer";
 
 const modal = createModal({
   id: "join-project-modal",
@@ -40,12 +41,18 @@ export const AvailableProjetsForCollectiviteModal = () => {
 
   return (
     <>
-      <modal.Component title="" size="large" className="join-project-modal">
-        <h2 className="mb-4 text-xl font-bold">Rejoindre {"d'autres"} projets</h2>
+      <modal.Component title="Rejoindre d'autres projets" size="large" className="join-project-modal">
         <span className="mb-8 block text-base">
-          Vous pouvez consulter tous les projets liés à la collectivité concernée et soumettre une demande {"d'accès"}.
+          Vous pouvez consulter tous les projets liés à votre collectivité et soumettre une demande {"d'accès"}.
           {"L'administrateur"} sera alors notifié de votre demande.
         </span>
+        <Conditional>
+          <Case condition={!isLoading && (availableProjects?.length || 0) === 0}>
+            <div className="text-lg font-bold italic">
+              {"Il n'y a aucun projet disponible pour cette collectivité."}
+            </div>
+          </Case>
+        </Conditional>
         {availableProjects?.map((projet) => (
           <ListeProjetsCard
             projet={projet}
