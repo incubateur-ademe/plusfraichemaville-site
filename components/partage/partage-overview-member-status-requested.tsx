@@ -7,21 +7,22 @@ import { Spinner } from "../common/spinner";
 import { notifications } from "../common/notifications";
 import { acceptProjectRequestAction } from "@/actions/userProjet/accept-project-request-action";
 import { declineProjectRequestAction } from "@/actions/userProjet/decline-project-request-action";
+import { useProjetsStore } from "@/stores/projets/provider";
 
 export const PartageOverviewMemberStatusRequested = ({ member }: { member: UserProjetWithUser }) => {
   const [isPending, startTransition] = useTransition();
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const userIdToUpdate = member.user_id;
   const projetId = member.projet_id;
 
   const handleAcceptRequest = () => {
     startTransition(async () => {
-      try {
-        if (userIdToUpdate) {
-          const result = await acceptProjectRequestAction(projetId, userIdToUpdate);
-          notifications(result.type, result.message);
+      if (userIdToUpdate) {
+        const result = await acceptProjectRequestAction(projetId, userIdToUpdate);
+        notifications(result.type, result.message);
+        if (result.type === "success" && result.updatedProjet) {
+          addOrUpdateProjet(result.updatedProjet);
         }
-      } catch (e) {
-        throw new Error();
       }
     });
   };
@@ -31,6 +32,9 @@ export const PartageOverviewMemberStatusRequested = ({ member }: { member: UserP
         if (userIdToUpdate) {
           const result = await declineProjectRequestAction(projetId, userIdToUpdate);
           notifications(result.type, result.message);
+          if (result.type === "success" && result.updatedProjet) {
+            addOrUpdateProjet(result.updatedProjet);
+          }
         }
       } catch (e) {
         throw new Error();

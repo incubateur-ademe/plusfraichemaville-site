@@ -19,7 +19,7 @@ export const PartageOverviewAdmin = () => {
   const sections: { title: string; status: InvitationStatus }[] = [
     { title: "", status: "ACCEPTED" },
     { title: "Accès demandé", status: "REQUESTED" },
-    { title: "Invité(e.s)", status: "INVITED" },
+    { title: "Invité(s)", status: "INVITED" },
   ];
 
   return (
