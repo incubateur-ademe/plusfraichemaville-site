@@ -29,19 +29,19 @@ export const ListProjets = () => {
   const tabs = [
     {
       count: projets.length,
-      label: "Projet actif",
+      label: projets.length < 2 ? "Projet actif" : "Projets actifs",
       content: <ListeProjetTab projets={activeProjets} invitationStatus="ACCEPTED" />,
       id: "projet" as const,
     },
     {
       count: projetsByStatus.projectsInvited.length,
-      label: "Invitation en attente",
+      label: projetsByStatus.projectsInvited.length < 2 ? "Invitation en attente" : "Invitations en attente",
       content: <ListeProjetTab projets={invitedProjets} invitationStatus="INVITED" />,
       id: "invitation" as const,
     },
     {
       count: projetsByStatus.projectsRequested.length,
-      label: "Demande envoyée",
+      label: projetsByStatus.projectsRequested.length < 2 ? "Demande envoyée" : "Demandes envoyées",
       content: <ListeProjetTab projets={requestedProjets} invitationStatus="REQUESTED" />,
       id: "demande" as const,
     },
