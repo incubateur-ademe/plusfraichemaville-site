@@ -45,6 +45,8 @@ export const FichesSolutionProjetBookmarksContainer = ({
       if (updatedProjet.projet) {
         updateStore(updatedProjet.projet);
         notifications(updatedProjet.type, updatedProjet.message);
+      } else {
+        notifications(updatedProjet.type, updatedProjet.message);
       }
     }
   };

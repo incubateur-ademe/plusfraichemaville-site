@@ -3,8 +3,8 @@
 import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { hasPermissionToUpdateProjet, hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { addRecommandationsViewedBy, deleteRecommandationsViewedBy } from "@/lib/prisma/prismaProjetQueries";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const updateRecommandationsViewedByUser = async (
   projetId: string,
@@ -17,8 +17,8 @@ export const updateRecommandationsViewedByUser = async (
   }
 
   if (
-    !(await hasPermissionToUpdateProjet(+projetId, session.user.id)) ||
-    !hasPermissionToUpdateUser(userId, session.user.id)
+    !(await new PermissionManager().canEditProject(session.user.id, +projetId)) ||
+    !new PermissionManager().canUpdateUser(userId, session.user.id)
   ) {
     return { type: "error", message: "UNAUTHORIZED", projet: null };
   }

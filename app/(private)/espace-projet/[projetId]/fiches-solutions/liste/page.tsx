@@ -1,3 +1,4 @@
+import { ProtectedEspaceProjetUrl } from "@/components/common/protected-espace-projet-url";
 import { FichesSolutions } from "@/components/ficheSolution/fiches-solutions";
 
 export default async function FichesSolutionsListePage({
@@ -9,5 +10,9 @@ export default async function FichesSolutionsListePage({
     baisseTemperatureFilter: string | undefined;
   };
 }) {
-  return <FichesSolutions searchParams={searchParams} />;
+  return (
+    <ProtectedEspaceProjetUrl>
+      <FichesSolutions searchParams={searchParams} />
+    </ProtectedEspaceProjetUrl>
+  );
 }

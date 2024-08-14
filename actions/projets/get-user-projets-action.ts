@@ -5,8 +5,8 @@ import { auth } from "@/lib/next-auth/auth";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { hasPermissionToViewUserProjet } from "@/actions/projets/permissions";
 import { getUserProjets } from "@/lib/prisma/prismaProjetQueries";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const getUserProjetsAction = async (
   userId: string,
@@ -16,7 +16,7 @@ export const getUserProjetsAction = async (
     return { type: "error", message: "UNAUTHENTICATED", projets: [] };
   }
 
-  if (!hasPermissionToViewUserProjet(session.user.id, userId)) {
+  if (!new PermissionManager().canViewUserProject(session.user.id, userId)) {
     return { type: "error", message: "UNAUTHORIZED", projets: [] };
   }
   const projets = await getUserProjets(userId);

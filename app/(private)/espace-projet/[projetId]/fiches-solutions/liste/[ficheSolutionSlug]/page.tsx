@@ -1,3 +1,4 @@
+import { ProtectedEspaceProjetUrl } from "@/components/common/protected-espace-projet-url";
 import { FicheSolution } from "@/components/ficheSolution/fiche-solution";
 
 export default async function FicheSolutionPage({
@@ -7,5 +8,9 @@ export default async function FicheSolutionPage({
   params: { ficheSolutionSlug: string; projetId: string };
   searchParams: { etapeAideDecision: string | undefined };
 }) {
-  return <FicheSolution params={params} searchParams={searchParams} />;
+  return (
+    <ProtectedEspaceProjetUrl>
+      <FicheSolution params={params} searchParams={searchParams} />
+    </ProtectedEspaceProjetUrl>
+  );
 }

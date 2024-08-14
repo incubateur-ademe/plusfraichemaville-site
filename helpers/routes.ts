@@ -1,3 +1,5 @@
+import { EspaceProjetTabsId } from "@/components/liste-projets";
+
 export const PFMV_ROUTES = {
   AIDE_DECISION: "/aide-decision",
   FICHES_SOLUTIONS: "/fiche-solution",
@@ -17,8 +19,9 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   FICHE_DIAGNOSTIC: (url: string) => `/fiches-diagnostic/${url}`,
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
-  TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "recommandation") =>
+  TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "recommandation" | "partage") =>
     `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
+  ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiches-solutions/liste`,
   ESPACE_PROJET_FICHES_DIAGNOSTIC: (projetId: number) => `/espace-projet/${projetId}/fiches-diagnostic`,
@@ -40,3 +43,6 @@ export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
 
 export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
   `/api/search-aides-for-estimation?estimationId=${estimationId}`;
+
+export const GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL = (collectiviteId: number, userId: string) =>
+  `/api/get-available-projects-for-collectivite?collectiviteId=${collectiviteId}&userId=${userId}`;

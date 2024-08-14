@@ -16,11 +16,22 @@ export const success = {
   USER_UPDATED: "Vos informations ont bien été enregistrées.",
   FICHE_SOLUTION_ADDED_TO_PROJET: "La fiche solution a bien été ajoutée au projet.",
   RECOMMANDATION_VIEWED_UPDATED: "Les recommandations vues ont été mises à jour.",
+  EMAIL_SENT: "L'email a été envoyé.",
+  ROLE_UPDATED: "Le nouveau rôle a bien été enregistré.",
+  USER_DELETED_FROM_PROJECT: "Le membre a bien été supprimé du projet.",
+  ACCEPT_INVITATION_PROJECT_ACCESS: "Vous avez rejoint le projet.",
+  DECLINE_INVITATION_PROJECT_ACCESS: "Vous avez décliné l'invitation au projet.",
+  ACCEPT_REQUEST_PROJECT_ACCESS: "Vous avez accepté la demande d'accès au projet.",
+  DECLINE_REQUEST_PROJECT_ACCESS: "Vous avez refusé la demande d'accès au projet.",
+  REQUEST_SENT: "Votre demande a bien été envoyée.",
+  QUIT_PROJET: "Vous avez quitté le projet.",
 };
 
 export const error = {
+  ALREADY_SENT: "Une demande est déjà en cours pour ce projet.",
   UNAUTHENTICATED: "Utilisateur non authentifié.",
-  UNAUTHORIZED: "Vous ne disposez pas des droits nécessaires à la modification.",
+  INVITATION_RESEND_DELAY_TOO_SHORT: "Veuillez attendre 10 minutes avant de renvoyer une invitation.",
+  UNAUTHORIZED: "Vous ne disposez pas des droits nécessaires pour cette opération.",
   ESTIMATION_DELETE_UNAUTHORIZED: "Vous n'avez pas les droits de suppression sur cette estimation.",
   ESTIMATION_DOESNT_EXIST: "L'estimation n'existe pas.",
   PROJET_DELETE_UNAUTHORIZED: "Vous n'avez pas les droits de suppression sur ce projet.",
@@ -28,4 +39,14 @@ export const error = {
   PARSING_ERROR: "Erreur de validation des données envoyées.",
   TECHNICAL_ERROR: "Erreur technique, veuillez réessayer plus tard.",
   CHANGE_COLLECTIVITE_ERROR: "Erreur technique, veuillez réessayer plus tard.",
+  PROJET_MUST_HAVE_ONE_ADMIN: "Vous ne pouvez pas quitter le projet car vous êtes le seul administrateur du projet.",
+  USER_ALREADY_IN_PROJET: "Cet utilisateur a déjà accès au projet.",
+  REQUEST_ALREADY_IN_PROJET: "Vous avez déjà accès au projet.",
+  REQUEST_ALREADY_INVITED:
+    "Vous avez été invité sur ce projet, vous pouvez accepter l'invitation dans l'onglet \"Invitations\".",
+  REQUEST_ALREADY_SENT: "Vous avez déjà envoyé une demande d'accès sur ce projet.",
+  USER_ALREADY_INVITED_IN_PROJET: "Cet utilisateur a déjà été invité à rejoindre le projet.",
+  USER_ALREADY_REQUESTED_ACCESS_TO_PROJET: "Cet utilisateur a déjà demandé l'accès au projet.",
+  INVITATION_NOT_FOUND: "Ce lien d'invitation a déjà été utilisé ou n'est pas valide.",
+  INVITATION_NOT_FOR_EMAIL: "Cette invitation ne correspond pas à votre email.",
 };

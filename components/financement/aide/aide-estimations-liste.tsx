@@ -11,7 +11,13 @@ import React from "react";
 import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
 import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 
+import { Case, Conditional } from "@/components/common/conditional-renderer";
+import { useUserStore } from "@/stores/user/provider";
+import { LecteurModeLabel } from "@/components/common/lecteur-mode-label";
+
 export const AideEstimationsListe = ({ estimations }: { estimations: EstimationWithAides[] }) => {
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
   const projet = useProjetsStore((state) => state.getCurrentProjet());
 
   return (
@@ -25,23 +31,37 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
           <AideEstimationsCard estimation={estimation} key={index}>
             {estimation.estimations_aides.length > 0 ? (
               <AideEstimationsCardWithSelection estimation={estimation}>
-                <AideEstimationsListeLink
-                  className="fr-btn !ml-auto mt-6 !block rounded-3xl"
-                  projetId={projet?.id}
-                  estimationId={estimation.id}
-                >
-                  Modifier
-                </AideEstimationsListeLink>
+                <Conditional>
+                  <Case condition={isCurrentUserAdmin === true}>
+                    <AideEstimationsListeLink
+                      className="fr-btn !ml-auto mt-6 !block rounded-3xl"
+                      projetId={projet?.id}
+                      estimationId={estimation.id}
+                    >
+                      Modifier
+                    </AideEstimationsListeLink>
+                  </Case>
+                  <Case condition={isCurrentUserAdmin === false}>
+                    <LecteurModeLabel />
+                  </Case>
+                </Conditional>
               </AideEstimationsCardWithSelection>
             ) : (
               <AideEstimationsCardWithoutSelection estimation={estimation}>
-                <AideEstimationsListeLink
-                  className="fr-btn !ml-auto !block rounded-3xl"
-                  projetId={projet?.id}
-                  estimationId={estimation.id}
-                >
-                  Sélectionner
-                </AideEstimationsListeLink>
+                <Conditional>
+                  <Case condition={isCurrentUserAdmin === true}>
+                    <AideEstimationsListeLink
+                      className="fr-btn !ml-auto !block rounded-3xl"
+                      projetId={projet?.id}
+                      estimationId={estimation.id}
+                    >
+                      Sélectionner
+                    </AideEstimationsListeLink>
+                  </Case>
+                  <Case condition={isCurrentUserAdmin === false}>
+                    <LecteurModeLabel />
+                  </Case>
+                </Conditional>
               </AideEstimationsCardWithoutSelection>
             )}
           </AideEstimationsCard>

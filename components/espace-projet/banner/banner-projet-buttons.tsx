@@ -4,6 +4,7 @@ import clsx from "clsx";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
+  BannerPictoPartage,
   BannerPictoProps,
   BannerPictoRecommandations,
   BannerPictoTableauDeSuivi,
@@ -29,10 +30,15 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
       update: updateToRecommandationsViewed,
       picto: ({ active }: BannerPictoProps) => <BannerPictoRecommandations active={active} />,
     },
+    {
+      url: "partage" as const,
+      tooltip: "Partage",
+      picto: ({ active }: BannerPictoProps) => <BannerPictoPartage active={active} />,
+    },
   ];
 
   return (
-    <div className="flex gap-4">
+    <>
       {links.map((link, index) => {
         const Picto = link.picto;
         return (
@@ -81,6 +87,6 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
           </div>
         );
       })}
-    </div>
+    </>
   );
 };

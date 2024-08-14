@@ -6,7 +6,7 @@ import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
 import { getCollectiviteById } from "@/lib/prisma/prismaCollectiviteQueries";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/next-auth/auth";
-import { hasPermissionToViewProjet } from "@/actions/projets/permissions";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export async function GET(request: NextRequest) {
   const estimationId = request.nextUrl.searchParams.get("estimationId");
@@ -28,7 +28,7 @@ export async function GET(request: NextRequest) {
   if (!projet) {
     return NextResponse.json("Projet not found", { status: 422 });
   }
-  if (!(await hasPermissionToViewProjet(projet.id, session.user.id))) {
+  if (!(await new PermissionManager().canEditProject(session.user.id, projet.id))) {
     return NextResponse.json(null, { status: 403 });
   }
 
