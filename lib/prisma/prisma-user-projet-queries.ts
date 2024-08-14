@@ -1,6 +1,7 @@
 import { InvitationStatus, RoleProjet, User, user_projet } from "@prisma/client";
 import { prismaClient } from "@/lib/prisma/prismaClient";
 import { UserProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { projetPublicSelect } from "@/lib/prisma/prismaProjetQueries";
 
 export const getUserProjet = async (userId: string, projectId: number): Promise<user_projet | null> => {
   return prismaClient.user_projet.findUnique({
@@ -48,7 +49,25 @@ export const attachInvitationsByEmail = async (userEmail: string, userId: string
     },
     data: {
       user_id: userId,
+      invitation_token: null,
     },
+  });
+};
+
+export const attachInvitationsByToken = async (invitationId: number, invitationToken: string, user: User) => {
+  return prismaClient.user_projet.update({
+    where: {
+      id: invitationId,
+      invitation_token: invitationToken,
+      user_id: null,
+      deleted_at: null,
+    },
+    data: {
+      user_id: user.id,
+      invitation_token: null,
+      email_address: user.email,
+    },
+    select: { projet: { select: projetPublicSelect } },
   });
 };
 
@@ -146,6 +165,7 @@ export const acceptProjectInvitation = async (userId: string, projectId: number)
     },
     data: {
       invitation_status: InvitationStatus.ACCEPTED,
+      invitation_token: null,
     },
   });
 };
@@ -168,6 +188,7 @@ export const declineProjectInvitation = async (
       invitation_status: InvitationStatus.DECLINED,
       deleted_at: new Date(),
       deleted_by: deletedBy,
+      invitation_token: null,
     },
   });
 };
@@ -184,6 +205,7 @@ export const acceptProjectRequest = async (userId: string, projectId: number): P
     },
     data: {
       invitation_status: InvitationStatus.ACCEPTED,
+      invitation_token: null,
     },
   });
 };
@@ -206,6 +228,7 @@ export const declineProjectRequest = async (
       invitation_status: InvitationStatus.DECLINED,
       deleted_at: new Date(),
       deleted_by: deletedBy,
+      invitation_token: null,
     },
   });
 };

@@ -47,4 +47,6 @@ export const error = {
   REQUEST_ALREADY_SENT: "Vous avez déjà envoyé une demande d'accès sur ce projet.",
   USER_ALREADY_INVITED_IN_PROJET: "Cet utilisateur a déjà été invité à rejoindre le projet.",
   USER_ALREADY_REQUESTED_ACCESS_TO_PROJET: "Cet utilisateur a déjà demandé l'accès au projet.",
+  INVITATION_NOT_FOUND: "Ce lien d'invitation a déjà été utilisé ou n'est pas valide.",
+  INVITATION_NOT_FOR_EMAIL: "Cette invitation ne correspond pas à votre email.",
 };

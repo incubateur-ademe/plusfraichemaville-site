@@ -201,6 +201,7 @@ export const createOrUpdateProjet = async ({
           user_id: userId,
           role: RoleProjet.ADMIN,
           invitation_status: InvitationStatus.ACCEPTED,
+          invitation_token: null,
         },
       },
     },

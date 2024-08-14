@@ -81,7 +81,9 @@ export class EmailService {
       userCollectiviteName: getPrimaryCollectiviteForUser(actionInitiatorUser).nom,
       destinationMail: email,
       projetName: userProjet.projet.nom,
-      link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB("invitation")}`,
+      link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB(
+        "invitation",
+      )}&invitation_token=${userProjet.invitation_token}&invitation_id=${userProjet.id}`,
     };
 
     return this.sendEmail(email, emailType.projetInvitation, params, userProjet.id);
