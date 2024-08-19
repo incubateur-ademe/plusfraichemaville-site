@@ -59,7 +59,7 @@ export const ListProjets = () => {
         className="absolute right-0 top-0 z-0"
       />
       <div className="fr-container relative z-10 min-h-[25rem] overflow-x-hidden py-10">
-        <ListeProjetsHeader />
+        <ListeProjetsHeader isListEmpty={projets.length === 0} />
         <div>
           <div>
             <div className="mb-10 flex w-fit border-b-[1px] border-b-pfmv-grey/20">

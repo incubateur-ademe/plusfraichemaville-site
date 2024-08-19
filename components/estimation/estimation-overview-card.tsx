@@ -39,7 +39,7 @@ export const EstimationOverviewCard = ({
 
         {isEstimationCompleted ? (
           <div className="text-right text-xs text-dsfr-text-default-grey">
-            <i className="fr-icon-success-fill mr-1 text-dsfr-border-default-grey" />
+            <i className="fr-icon-success-fill mr-1 text-dsfr-background-action-high-success-hover" />
             Complétée
           </div>
         ) : (

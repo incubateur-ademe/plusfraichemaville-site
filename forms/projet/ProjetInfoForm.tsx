@@ -114,7 +114,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: { projet?: ProjetWithRelati
         )}
       </form>
       {readOnly && (
-        <Button className={`mt-6 rounded-3xl bg-pfmv-navy text-sm`} priority="tertiary" onClick={router.back}>
+        <Button className={`mt-6 rounded-3xl text-sm`} priority="tertiary" onClick={router.back}>
           Retour
         </Button>
       )}

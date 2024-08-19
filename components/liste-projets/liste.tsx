@@ -3,10 +3,7 @@ import { ListeProjetsCard } from "./card";
 import { ProjetsByCollectivite } from "./helpers";
 
 import { ListProjetsHeaderEmpty } from "./empty";
-import Button from "@codegouvfr/react-dsfr/Button";
-import { useModalStore } from "@/stores/modal/provider";
 import { Case, Conditional } from "../common/conditional-renderer";
-import { useUserStore } from "@/stores/user/provider";
 
 export const ListeProjetTab = ({
   projets,
@@ -15,27 +12,12 @@ export const ListeProjetTab = ({
   projets: ProjetsByCollectivite[];
   invitationStatus: InvitationStatus;
 }) => {
-  const setCollectiviteIdToListAvailableProjets = useModalStore(
-    (state) => state.setCollectiviteIdToListAvailableProjets,
-  );
-  const userCollectiviteId = useUserStore((state) => state.userInfos?.collectivites[0].collectivite_id);
-
   if (!projets.length) {
     return (
       <div className="w-full">
         <Conditional>
           <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
             <ListProjetsHeaderEmpty />
-            <div className="ml-auto mt-5 w-fit rounded-[10px] !border-[1px] !border-pfmv-navy text-sm">
-              <Button
-                iconId="ri-add-circle-fill"
-                priority="tertiary no outline"
-                onClick={() => userCollectiviteId && setCollectiviteIdToListAvailableProjets(userCollectiviteId)}
-                className="rounded-[10px]"
-              >
-                Rejoindre {"d'autres"} projets de ma collectivité
-              </Button>
-            </div>
           </Case>
           <Case condition={invitationStatus === InvitationStatus.INVITED}>
             {"Vous n'avez aucune invitation en attente."}
@@ -61,25 +43,6 @@ export const ListeProjetTab = ({
           {collectiviteWithProjet.projets.map((projet) => (
             <ListeProjetsCard projet={projet} invitationStatus={invitationStatus} key={projet.id} />
           ))}
-          <Conditional>
-            <Case
-              condition={
-                invitationStatus === InvitationStatus.ACCEPTED &&
-                userCollectiviteId === collectiviteWithProjet.collectivite.id
-              }
-            >
-              <div className="ml-auto w-fit rounded-[10px] !border-[1px] !border-pfmv-navy text-sm">
-                <Button
-                  iconId="ri-add-circle-fill"
-                  priority="tertiary no outline"
-                  onClick={() => setCollectiviteIdToListAvailableProjets(collectiviteWithProjet.collectivite.id)}
-                  className="rounded-[10px]"
-                >
-                  Rejoindre {"d'autres"} projets
-                </Button>
-              </div>
-            </Case>
-          </Conditional>
         </div>
       );
     });
