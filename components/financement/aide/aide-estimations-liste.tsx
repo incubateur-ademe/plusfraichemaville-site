@@ -13,7 +13,7 @@ import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
 
 import { Case, Conditional } from "@/components/common/conditional-renderer";
 import { useUserStore } from "@/stores/user/provider";
-import { LecteurModeLabel } from "@/components/common/lecteur-mode-label";
+import { AideEstimationsCardRecap } from "@/components/financement/aide/aide-estimations-recap";
 
 export const AideEstimationsListe = ({ estimations }: { estimations: EstimationWithAides[] }) => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
@@ -27,29 +27,22 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
         trouver des financements ou des soutiens à l'ingénierie ?"
       />
       <div>
-        {estimations.map((estimation, index) => (
-          <AideEstimationsCard estimation={estimation} key={index}>
+        {estimations.map((estimation) => (
+          <AideEstimationsCard estimation={estimation} key={estimation.id}>
             {estimation.estimations_aides.length > 0 ? (
               <AideEstimationsCardWithSelection estimation={estimation}>
-                <Conditional>
-                  <Case condition={isCurrentUserAdmin === true}>
-                    <AideEstimationsListeLink
-                      className="fr-btn !ml-auto mt-6 !block rounded-3xl"
-                      projetId={projet?.id}
-                      estimationId={estimation.id}
-                    >
-                      Modifier
-                    </AideEstimationsListeLink>
-                  </Case>
-                  <Case condition={isCurrentUserAdmin === false}>
-                    <LecteurModeLabel />
-                  </Case>
-                </Conditional>
+                <AideEstimationsListeLink
+                  className="fr-btn !ml-auto mt-6 !block rounded-3xl"
+                  projetId={projet?.id}
+                  estimationId={estimation.id}
+                >
+                  Modifier
+                </AideEstimationsListeLink>
               </AideEstimationsCardWithSelection>
             ) : (
-              <AideEstimationsCardWithoutSelection estimation={estimation}>
-                <Conditional>
-                  <Case condition={isCurrentUserAdmin === true}>
+              <Conditional>
+                <Case condition={isCurrentUserAdmin}>
+                  <AideEstimationsCardWithoutSelection estimation={estimation}>
                     <AideEstimationsListeLink
                       className="fr-btn !ml-auto !block rounded-3xl"
                       projetId={projet?.id}
@@ -57,12 +50,15 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
                     >
                       Sélectionner
                     </AideEstimationsListeLink>
-                  </Case>
-                  <Case condition={isCurrentUserAdmin === false}>
-                    <LecteurModeLabel />
-                  </Case>
-                </Conditional>
-              </AideEstimationsCardWithoutSelection>
+                  </AideEstimationsCardWithoutSelection>
+                </Case>
+                <Case condition={!isCurrentUserAdmin}>
+                  <AideEstimationsCardRecap
+                    isLoading={false}
+                    countAides={{ aideFinanciereCount: 0, aideTechniqueCount: 0, verb: "sélectionné" }}
+                  />
+                </Case>
+              </Conditional>
             )}
           </AideEstimationsCard>
         ))}

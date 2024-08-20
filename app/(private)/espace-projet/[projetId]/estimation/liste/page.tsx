@@ -16,8 +16,16 @@ export default function CreateEstimationPage() {
   if (!currentProjet) {
     return null;
   }
-  if (currentProjet.estimations.length < 1 && isCurrentUserAdmin) {
-    redirect(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id));
+  if (currentProjet.estimations.length < 1) {
+    if (isCurrentUserAdmin) {
+      redirect(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id));
+    } else {
+      return (
+        <div className="fr-container pt-8">
+          <div className="mb-2 text-2xl font-bold">{"Aucune estimation n'a été faite pour ce projet"}</div>
+        </div>
+      );
+    }
   } else {
     return (
       <div className="fr-container pt-8">
