@@ -24,7 +24,6 @@ const data = {
       title: "Invitez des membres à collaborer sur votre projet",
       description: "Partagez la conception de votre projet au sein de votre collectivité",
       picto: "collaborer",
-      comingSoon: true,
     },
     {
       title: "Trouvez des financements adaptés à votre projet",

@@ -6,11 +6,11 @@ import { getUserWithCollectivites, updateUser } from "@/lib/prisma/prismaUserQue
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
 import { CUSTOM_CANAL_ACQUISITION } from "@/helpers/canalAcquisition";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },
@@ -19,7 +19,7 @@ export const editUserInfoAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  if (!hasPermissionToUpdateUser(data.userId, session.user.id)) {
+  if (!new PermissionManager().canUpdateUser(data.userId, session.user.id)) {
     return { type: "error", message: "UNAUTHORIZED" };
   }
 

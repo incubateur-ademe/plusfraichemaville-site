@@ -2,10 +2,10 @@
 
 import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { hasPermissionToUpdateUser } from "@/actions/projets/permissions";
 import { updateFichesUser } from "@/lib/prisma/prismaUserQueries";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { UserInfos } from "@/stores/user/store";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const updateFichesUserAction = async (
   userId: string,
@@ -19,7 +19,7 @@ export const updateFichesUserAction = async (
     return { type: "error", message: "UNAUTHENTICATED", user: null };
   }
 
-  if (!hasPermissionToUpdateUser(userId, session.user.id)) {
+  if (!new PermissionManager().canUpdateUser(userId, session.user.id)) {
     return { type: "error", message: "UNAUTHORIZED", user: null };
   }
 

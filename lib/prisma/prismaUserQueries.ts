@@ -8,7 +8,7 @@ import {
   mergeFicheBookmarkedSolutions,
 } from "@/components/common/generic-save-fiche/helpers";
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { UserWithCollectivite, UserWithProjets } from "@/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
 
 export const saveAllFichesFromLocalStorage = async (
@@ -18,7 +18,7 @@ export const saveAllFichesFromLocalStorage = async (
     fichesDiagnostic: FichesBookmarked[];
   },
 ) => {
-  const user = await getUser(userId);
+  const user = await getUserById(userId);
 
   const currentSavedFichesDiagnostic = user?.selection_fiches_diagnostic;
   const currentSavedFichesSolutions = user?.selection_fiches_solutions;
@@ -100,11 +100,20 @@ export const getUserWithCollectivites = async (userId: string): Promise<UserWith
   });
 };
 
-export const getUser = async (userId: string): Promise<User | null> => {
+export const getUserById = async (userId: string): Promise<User | null> => {
   return prismaClient.user.findUnique({
     where: {
       id: userId,
     },
+  });
+};
+
+export const getUserByEmail = async (userEmail: string): Promise<UserWithProjets | null> => {
+  return prismaClient.user.findUnique({
+    where: {
+      email: userEmail,
+    },
+    include: { projets: { where: { deleted_at: null }, include: { projet: true } } },
   });
 };
 
@@ -139,6 +148,21 @@ export const updateUser = async ({
         },
       },
       canal_acquisition: canalAcquisition,
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};
+
+export const updateUserDiscardedInformation = async (
+  userId: string,
+  updatedModalIds: string[],
+): Promise<UserWithCollectivite | null> => {
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      discardedInformation: updatedModalIds,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });

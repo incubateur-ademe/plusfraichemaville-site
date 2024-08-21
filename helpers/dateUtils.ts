@@ -10,7 +10,10 @@ export function dateToStringWithTime(value: Date): string {
   )}`;
 }
 
-export function dateToStringWithoutTime(value: Date): string {
+export function dateToStringWithoutTime(value: Date): string | null {
+  if (!value) {
+    return null;
+  }
   return `${addLeadingZero(value.getDate())}/${addLeadingZero(value.getMonth() + 1)}/${value.getFullYear()}`;
 }
 

@@ -7,22 +7,23 @@ import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/forms/projet/ProjetI
 import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { createOrUpdateProjet } from "@/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
-): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations }>> => {
+): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
   const user = await getUserWithCollectivites(session?.user.id);
+
   if (!user || !user.collectivites[0]) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  if (data.projetId && !(await hasPermissionToUpdateProjet(data.projetId, session.user.id))) {
+  if (data.projetId && !(await new PermissionManager().canEditProject(session.user.id, data.projetId))) {
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 

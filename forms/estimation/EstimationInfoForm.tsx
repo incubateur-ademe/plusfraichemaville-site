@@ -43,12 +43,14 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     const result = await createEstimationAction(projet.id, {
       ...data,
     });
-    notifications(result.type, result.message);
     if (result.type === "success") {
+      notifications(result.type, result.message);
       if (result.estimation) {
         updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
         setCurrentEstimationId(result.estimation.id);
         router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id));
+      } else {
+        notifications(result.type, result.message);
       }
     }
   };

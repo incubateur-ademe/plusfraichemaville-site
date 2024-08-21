@@ -16,7 +16,7 @@ export const Spinner = ({ className, pathColor, circleColor }: SpinnerProps) => 
           cy="12"
           r="10"
           stroke="currentColor"
-          strokeWidth="3"
+          strokeWidth="1"
         ></circle>
         <path
           className={clsx("opacity-75", pathColor)}

@@ -2,10 +2,10 @@
 
 import { auth } from "@/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { hasPermissionToUpdateProjet } from "@/actions/projets/permissions";
 import { updateFichesProjet } from "@/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const updateFichesProjetAction = async (
   projetId: number,
@@ -17,7 +17,9 @@ export const updateFichesProjetAction = async (
     return { type: "error", message: "UNAUTHENTICATED", projet: null };
   }
 
-  if (!(await hasPermissionToUpdateProjet(projetId, session.user.id))) {
+  const canUpdateProjet = await new PermissionManager().canEditProject(session.user.id, projetId);
+
+  if (!canUpdateProjet) {
     return { type: "error", message: "UNAUTHORIZED", projet: null };
   }
 

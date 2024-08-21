@@ -20,12 +20,16 @@ import toast from "react-hot-toast";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { AideEditSortField } from "@/components/financement/aide/aide-edit-sort-field";
 import { useAideEstimationEditSortMethod } from "@/hooks/use-aide-estimation-edit-sort-method";
+import { useUserStore } from "@/stores/user/provider";
 
 export const AideEdit = memo(() => {
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
+
   const estimationId = useParams().estimationId as string;
   const { filters, toggleFilter } = useAideEstimationEditFilter();
   const skeletons = [...new Array(3)].map((_, i) => <AideCardSkeleton key={i} />);
-  const projet = useProjetsStore((state) => state.getCurrentProjet());
   const estimation = projet?.estimations.find((estimation) => estimation.id === +estimationId);
   const { sortMethod, setSortMethod } = useAideEstimationEditSortMethod();
 
@@ -90,7 +94,9 @@ export const AideEdit = memo(() => {
         <div className="aide-card flex flex-wrap gap-6">
           {isLoading
             ? skeletons
-            : paginatedResults?.map((aide) => <AideCard aide={aide} withSaveButton key={aide.id} />)}
+            : paginatedResults?.map((aide) => (
+                <AideCard aide={aide} withSaveButton={isCurrentUserAdmin} key={aide.id} />
+              ))}
         </div>
       </div>
       <div className="flex items-center justify-between">

@@ -1,0 +1,49 @@
+import { InvitationStatus } from "@prisma/client";
+import { ListeProjetsCard } from "./card";
+import { ProjetsByCollectivite } from "./helpers";
+
+import { ListProjetsHeaderEmpty } from "./empty";
+import { Case, Conditional } from "../common/conditional-renderer";
+
+export const ListeProjetTab = ({
+  projets,
+  invitationStatus,
+}: {
+  projets: ProjetsByCollectivite[];
+  invitationStatus: InvitationStatus;
+}) => {
+  if (!projets.length) {
+    return (
+      <div className="w-full">
+        <Conditional>
+          <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
+            <ListProjetsHeaderEmpty />
+          </Case>
+          <Case condition={invitationStatus === InvitationStatus.INVITED}>
+            {"Vous n'avez aucune invitation en attente."}
+          </Case>
+          <Case condition={invitationStatus === InvitationStatus.REQUESTED}>
+            {"Vous n'avez aucune demande d'accès en cours."}
+          </Case>
+        </Conditional>
+      </div>
+    );
+  } else
+    return projets.map((collectiviteWithProjet) => {
+      return (
+        <div
+          className="mb-8"
+          key={collectiviteWithProjet.collectivite.id}
+          id={collectiviteWithProjet.collectivite.code_insee || collectiviteWithProjet.collectivite.nom}
+        >
+          <h2 className="mb-4 text-[22px] font-bold leading-normal  text-pfmv-navy">
+            <i className="ri-home-2-fill mr-2  before:!w-[20px]"></i>
+            {collectiviteWithProjet.collectivite.nom}
+          </h2>
+          {collectiviteWithProjet.projets.map((projet) => (
+            <ListeProjetsCard projet={projet} invitationStatus={invitationStatus} key={projet.id} />
+          ))}
+        </div>
+      );
+    });
+};

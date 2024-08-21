@@ -4,6 +4,10 @@ export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
 }>;
 
+export type UserWithProjets = Prisma.UserGetPayload<{
+  include: { projets: { include: { projet: true } } };
+}>;
+
 export type EstimationWithAides = Prisma.estimationGetPayload<{
   include: {
     estimations_aides: {
@@ -14,12 +18,38 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
   };
 }>;
 
+export type UserProjetWithUser = Prisma.user_projetGetPayload<{
+  include: { user: true };
+}>;
+export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
+  select: {
+    user: { select: { id: true; nom: true; prenom: true } };
+    created_at: true;
+    role: true;
+    invitation_status: true;
+    user_id: true;
+  };
+}>;
+
+export type UserProjetWithRelations = Prisma.user_projetGetPayload<{
+  include: {
+    projet: { include: { collectivite: true } };
+    user: { include: { collectivites: { include: { collectivite } } } };
+  };
+}>;
+
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];
 
 export interface ProjetWithRelations extends projet {
   collectivite: collectivite;
   estimations: EstimationWithAides[];
   creator: User;
+  users: UserProjetWithUser[];
+}
+
+export interface ProjetWithPublicRelations extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace"> {
+  collectivite: collectivite;
+  users: UserProjetWithPublicUser[];
 }
 
 export type EstimationMateriauxFicheSolution = {

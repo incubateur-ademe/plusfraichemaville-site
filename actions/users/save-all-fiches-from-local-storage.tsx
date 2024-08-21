@@ -1,10 +1,10 @@
 "use server";
 
 import { auth } from "@/lib/next-auth/auth";
-import { hasPermissionToUpdateUser } from "../projets/permissions";
 import { FichesBookmarked } from "@/components/common/generic-save-fiche/helpers";
 import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
 import { saveAllFichesFromLocalStorage } from "@/lib/prisma/prismaUserQueries";
+import { PermissionManager } from "@/helpers/permission-manager";
 
 export const saveAllFichesFromLocalStorageAction = async (
   userId: string,
@@ -19,7 +19,7 @@ export const saveAllFichesFromLocalStorageAction = async (
     return { type: "error", message: "UNAUTHENTICATED", user: null };
   }
 
-  if (!hasPermissionToUpdateUser(userId, session.user.id)) {
+  if (!new PermissionManager().canUpdateUser(userId, session.user.id)) {
     return { type: "error", message: "UNAUTHORIZED", user: null };
   }
 

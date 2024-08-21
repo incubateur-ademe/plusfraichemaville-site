@@ -2,7 +2,11 @@ import { SeparatorY } from "@/components/common/separator";
 import { Spinner } from "@/components/common/spinner";
 import clsx from "clsx";
 import Image from "next/image";
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
+import { useUserStore } from "@/stores/user/provider";
+import { useProjetsStore } from "@/stores/projets/provider";
+import { Case, Conditional } from "@/components/common/conditional-renderer";
+import { LecteurModeLabel } from "@/components/common/lecteur-mode-label";
 
 type AideEstimationsCardRecapProps = {
   isLoading: boolean;
@@ -14,6 +18,9 @@ type AideEstimationsCardRecapProps = {
 } & PropsWithChildren;
 
 export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: AideEstimationsCardRecapProps) => {
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
+
   return (
     <div className={"flex h-24 items-center justify-between rounded-2xl bg-dsfr-background-alt-blue-france px-6 py-3"}>
       <div className="flex gap-8">
@@ -73,14 +80,21 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
           </div>
         </div>
       </div>
-      {countAides.aideTechniqueCount > 0 || countAides.aideFinanciereCount > 0 || isLoading ? (
-        <>{children}</>
-      ) : (
-        <div className="flex flex-row items-center gap-4">
-          <Image src={`/images/financement/no-result.svg`} alt="" width={45} height={42} />
-          <div className="text-lg font-bold text-dsfr-text-label-blue-france">Aucun résultat</div>
-        </div>
-      )}
+      <Conditional>
+        <Case condition={isCurrentUserAdmin}>
+          {countAides.aideTechniqueCount > 0 || countAides.aideFinanciereCount > 0 || isLoading ? (
+            <>{children}</>
+          ) : (
+            <div className="flex flex-row items-center gap-4">
+              <Image src={`/images/financement/no-result.svg`} alt="" width={45} height={42} />
+              <div className="text-lg font-bold text-dsfr-text-label-blue-france">Aucun résultat</div>
+            </div>
+          )}
+        </Case>
+        <Case condition={!isCurrentUserAdmin}>
+          <LecteurModeLabel />
+        </Case>
+      </Conditional>
     </div>
   );
 };

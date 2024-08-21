@@ -1,20 +1,39 @@
 import { prismaClient } from "@/lib/prisma/prismaClient";
-import { Prisma, projet } from "@prisma/client";
-import { ProjetWithRelations } from "./prismaCustomTypes";
+import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
+import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/helpers/common";
 import { GeoJsonProperties } from "geojson";
 
-const projetIncludes = {
+export const projetIncludes = {
   collectivite: true,
   creator: true,
   estimations: {
     where: { deleted_at: null },
     include: {
       estimations_aides: {
-        include: {
-          aide: true,
-        },
+        include: { aide: true },
       },
+    },
+  },
+  users: {
+    where: { deleted_at: null },
+    include: { user: true },
+  },
+};
+
+export const projetPublicSelect = {
+  id: true,
+  nom: true,
+  collectiviteId: true,
+  type_espace: true,
+  collectivite: true,
+  users: {
+    select: {
+      user: { select: { id: true, nom: true, prenom: true } },
+      created_at: true,
+      role: true,
+      invitation_status: true,
+      user_id: true,
     },
   },
 };
@@ -121,6 +140,26 @@ export const getProjetById = async (projetId: number): Promise<projet | null> =>
   });
 };
 
+export const getProjetWithPublicRelationsById = async (projetId: number): Promise<ProjetWithPublicRelations | null> => {
+  return prismaClient.projet.findUnique({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    select: projetPublicSelect,
+  });
+};
+
+export const getProjetWithRelationsById = async (projetId: number): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.findUnique({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    include: projetIncludes,
+  });
+};
+
 export const createOrUpdateProjet = async ({
   projetId,
   nomProjet,
@@ -157,6 +196,14 @@ export const createOrUpdateProjet = async ({
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
+      users: {
+        create: {
+          user_id: userId,
+          role: RoleProjet.ADMIN,
+          invitation_status: InvitationStatus.ACCEPTED,
+          invitation_token: null,
+        },
+      },
     },
     update: {
       nom: nomProjet,
@@ -197,12 +244,74 @@ export const deleteProjet = async (projetId: number, userId: string) => {
     );
 };
 
-export const getUserProjets = async (userId: string) => {
+export const getPendingUserProjets = async (userId: string): Promise<ProjetWithPublicRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
-      created_by: userId,
+      users: {
+        some: {
+          user_id: userId,
+          deleted_at: null,
+          invitation_status: { in: [InvitationStatus.REQUESTED, InvitationStatus.INVITED] },
+        },
+      },
       deleted_at: null,
     },
-    include: projetIncludes,
+    select: projetPublicSelect,
+  });
+};
+
+export const getUserProjets = async (userId: string): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      users: {
+        some: {
+          user_id: userId,
+          deleted_at: null,
+          invitation_status: { in: [InvitationStatus.ACCEPTED] },
+        },
+      },
+      deleted_at: null,
+    },
+    include: {
+      ...projetIncludes,
+    },
+  });
+};
+
+export const leaveProject = async (userId: string, projectId: number): Promise<user_projet | null> => {
+  return prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: {
+        user_id: userId,
+        projet_id: projectId,
+      },
+      deleted_at: null,
+    },
+    data: {
+      deleted_at: new Date(),
+      deleted_by: userId,
+    },
+  });
+};
+
+export const getAvailableProjectsForCollectivite = async (
+  collectiviteId: number,
+  userId: string,
+): Promise<ProjetWithPublicRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      collectiviteId,
+      deleted_at: null,
+      NOT: {
+        users: {
+          some: {
+            user_id: userId,
+            invitation_status: InvitationStatus.ACCEPTED,
+            deleted_at: null,
+          },
+        },
+      },
+    },
+    select: projetPublicSelect,
   });
 };

@@ -14,7 +14,13 @@ import { estimationModal } from "@/components/estimation/materiaux-modal/estimat
 import { useEstimationGlobalPrice } from "@/hooks/use-estimation-global-price";
 import { useModalStore } from "@/stores/modal/provider";
 
-export const EstimationOverviewCard = ({ estimation }: { estimation: estimation }) => {
+export const EstimationOverviewCard = ({
+  estimation,
+  isCurrentUserAdmin,
+}: {
+  estimation: estimation;
+  isCurrentUserAdmin?: boolean;
+}) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
 
   const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
@@ -33,7 +39,7 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
 
         {isEstimationCompleted ? (
           <div className="text-right text-xs text-dsfr-text-default-grey">
-            <i className="fr-icon-success-fill mr-1 text-dsfr-border-default-grey" />
+            <i className="fr-icon-success-fill mr-1 text-dsfr-background-action-high-success-hover" />
             Complétée
           </div>
         ) : (
@@ -74,18 +80,20 @@ export const EstimationOverviewCard = ({ estimation }: { estimation: estimation 
           <div>{`${entretienMin} - ${entretienMax} € HT / an`}</div>
         </div>
       </div>
-      <div className="float-right mt-12 flex flex-row gap-6">
-        <Button
-          nativeButtonProps={estimationModal.buttonProps}
-          onClick={() => {
-            setCurrentEstimationId(estimation.id);
-          }}
-          className="rounded-3xl"
-        >
-          Modifier
-        </Button>
-        <EstimationDeleteModal estimation={estimation} />
-      </div>
+      {isCurrentUserAdmin && (
+        <div className="float-right mt-12 flex flex-row gap-6">
+          <Button
+            nativeButtonProps={estimationModal.buttonProps}
+            onClick={() => {
+              setCurrentEstimationId(estimation.id);
+            }}
+            className="rounded-3xl"
+          >
+            Modifier
+          </Button>
+          <EstimationDeleteModal estimation={estimation} />
+        </div>
+      )}
     </div>
   );
 };
