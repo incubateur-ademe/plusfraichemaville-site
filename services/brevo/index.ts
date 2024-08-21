@@ -34,6 +34,12 @@ export class EmailService {
       projetRequestAccess: {
         templateId: 39,
       },
+      projetAccessGranted: {
+        templateId: 42,
+      },
+      projetAccessDeclined: {
+        templateId: 44,
+      },
     };
   }
 
@@ -87,6 +93,25 @@ export class EmailService {
     };
 
     return this.sendEmail(email, emailType.projetInvitation, params, userProjet.id);
+  }
+
+  async sendResponseRequestAccessEmail(
+    email: string,
+    userProjet: UserProjetWithRelations,
+    actionInitiatorUser: UserWithCollectivite,
+    accessGranted: boolean,
+  ): Promise<EmailSendResult> {
+    const params: EmailProjetPartageConfig = {
+      username: `${actionInitiatorUser.prenom} ${actionInitiatorUser.nom}`,
+      projetCollectiviteName: userProjet.projet.collectivite.nom,
+      userCollectiviteName: getPrimaryCollectiviteForUser(actionInitiatorUser).nom,
+      destinationMail: email,
+      projetName: userProjet.projet.nom,
+      link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET}`,
+    };
+    const template = accessGranted ? emailType.projetAccessGranted : emailType.projetAccessDeclined;
+
+    return this.sendEmail(email, template, params, userProjet.id);
   }
 
   async sendRequestAccessEmail(userProjet: UserProjetWithRelations) {
