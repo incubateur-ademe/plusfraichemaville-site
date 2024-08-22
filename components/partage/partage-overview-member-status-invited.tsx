@@ -7,11 +7,14 @@ import clsx from "clsx";
 import { useTransition } from "react";
 import { Spinner } from "../common/spinner";
 import { notifications } from "../common/notifications";
+import { useIsLecteur } from "@/hooks/use-is-lecteur";
+import { Case, Conditional } from "@/components/common/conditional-renderer";
 
 export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserProjetWithUser }) => {
   const [isPending, startTransition] = useTransition();
 
   const userProjetId = member.id;
+  const isLecteur = useIsLecteur();
 
   const handleResendInvitation = () => {
     startTransition(async () => {
@@ -32,9 +35,13 @@ export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserPro
         </div>
         <span>envoyé</span>
       </div>
-      <Button priority="tertiary" onClick={handleResendInvitation} disabled={isPending} className="rounded-[20px]">
-        {isPending ? <Spinner /> : "Renvoyer"}
-      </Button>
+      <Conditional>
+        <Case condition={!isLecteur}>
+          <Button priority="tertiary" onClick={handleResendInvitation} disabled={isPending} className="rounded-[20px]">
+            {isPending ? <Spinner /> : "Renvoyer"}
+          </Button>
+        </Case>
+      </Conditional>
     </div>
   );
 };
