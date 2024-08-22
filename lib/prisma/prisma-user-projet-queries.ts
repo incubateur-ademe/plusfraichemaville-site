@@ -193,7 +193,10 @@ export const declineProjectInvitation = async (
   });
 };
 
-export const acceptProjectRequest = async (userId: string, projectId: number): Promise<user_projet | null> => {
+export const acceptProjectRequest = async (
+  userId: string,
+  projectId: number,
+): Promise<UserProjetWithRelations | null> => {
   return prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
@@ -207,6 +210,10 @@ export const acceptProjectRequest = async (userId: string, projectId: number): P
       invitation_status: InvitationStatus.ACCEPTED,
       invitation_token: null,
     },
+    include: {
+      projet: { include: { collectivite: true } },
+      user: { include: { collectivites: { include: { collectivite: true } } } },
+    },
   });
 };
 
@@ -214,7 +221,7 @@ export const declineProjectRequest = async (
   userId: string,
   projectId: number,
   deletedBy: string,
-): Promise<user_projet | null> => {
+): Promise<UserProjetWithRelations | null> => {
   return prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
@@ -229,6 +236,10 @@ export const declineProjectRequest = async (
       deleted_at: new Date(),
       deleted_by: deletedBy,
       invitation_token: null,
+    },
+    include: {
+      projet: { include: { collectivite: true } },
+      user: { include: { collectivites: { include: { collectivite: true } } } },
     },
   });
 };
