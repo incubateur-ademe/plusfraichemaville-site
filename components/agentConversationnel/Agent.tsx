@@ -18,17 +18,7 @@ export default function Agent() {
 
   return (
     <div className={clsx("agent-popover", "fixed bottom-10 right-10 z-[1000] h-[80%] max-h-[30rem] w-96 text-sm")}>
-      <AiChat
-        adapter={nluxCustomAdapter}
-        displayOptions={{ themeId: "nova", colorScheme: "light" }}
-        personaOptions={{
-          assistant: { name: "Zéphyr", avatar: "/images/zephyr/zephyr.png" },
-          user: {
-            name: "Vous",
-            avatar: <Image src={"/images/auth/user.svg"} width={32} height={32} alt="" />,
-          },
-        }}
-      >
+      <AiChat adapter={nluxCustomAdapter} displayOptions={{ themeId: "nova", colorScheme: "light" }}>
         <AiChatUI.Greeting>
           <div className="flex flex-col items-center">
             <Image src={"/images/zephyr/zephyr.png"} width={32} height={32} alt="" />
