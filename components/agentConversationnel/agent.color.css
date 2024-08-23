@@ -1,0 +1,7 @@
+.nlux-AiChat-root.nlux-theme-nova[data-color-scheme="light"] {
+  --nlux-HumanMessage--BackgroundColor: var(--background-active-blue-france);
+  --nlux-HumanMessage--TextColor: white;
+
+  --nlux-AiMessage--BackgroundColor: var(--background-contrast-blue-france);
+  --nlux-AiMessage--TextColor: black;
+}
