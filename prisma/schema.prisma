@@ -226,3 +226,15 @@ model estimations_aides {
 
   @@id([estimationId, aideId])
 }
+
+model agent_conversationnel {
+  id                  Int      @id @default(autoincrement())
+  userId              String?
+  conversationId      String
+  created_at          DateTime @default(now())
+  fiche_solution_id   Int?
+  fiche_diagnostic_id Int?
+  estimation_id       Int?
+  projet_id           Int?
+  collectivite_id     Int?
+}

@@ -1,7 +1,11 @@
 .nlux-AiChat-root.nlux-theme-nova[data-color-scheme="light"] {
   --nlux-HumanMessage--BackgroundColor: var(--background-active-blue-france);
   --nlux-HumanMessage--TextColor: white;
-
   --nlux-AiMessage--BackgroundColor: var(--background-contrast-blue-france);
   --nlux-AiMessage--TextColor: black;
+  --nlux-send-icon: url("/images/zephyr/send.svg");
+}
+
+.nlux-comp-composer > button > .nlux-comp-sendIcon {
+  max-width: 20px;
 }
