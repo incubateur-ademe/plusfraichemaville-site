@@ -8,11 +8,11 @@ import { PropsWithChildren } from "react";
 import { AgentGreeting } from "./agent-greeting";
 
 export const AgentContainer = ({ children }: PropsWithChildren) => {
-  const { chatAdapter, aiApi } = useAiChat();
+  const { adapter, api } = useAiChat();
 
   return (
     <div className={clsx("agent-popover", "fixed bottom-10 right-10 z-[1000] h-[80%] max-h-[30rem] w-96 text-sm")}>
-      <AiChat api={aiApi} adapter={chatAdapter} displayOptions={{ themeId: "nova", colorScheme: "light" }}>
+      <AiChat api={api} adapter={adapter}>
         <AiChatUI.Greeting>
           <AgentGreeting />
         </AiChatUI.Greeting>
