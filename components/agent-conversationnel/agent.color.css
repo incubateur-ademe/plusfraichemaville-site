@@ -6,6 +6,17 @@
   --nlux-send-icon: url("/images/zephyr/send.svg");
 }
 
+nlux-composer-container {
+  height: 10px;
+}
 .nlux-comp-composer > button > .nlux-comp-sendIcon {
   max-width: 20px;
+}
+
+.nlux-comp-composer > button > .nlux-comp-sendIcon > .nlux-comp-sendIcon-container {
+  background: var(--background-active-blue-france);
+}
+
+.nlux-AiChat-root > .nlux-chatRoom-container > .nlux-composer-container {
+  border-top: solid 1px var(--background-contrast-blue-france-hover);
 }

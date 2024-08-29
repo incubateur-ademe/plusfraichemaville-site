@@ -2,22 +2,51 @@
 import "@nlux/themes/nova.css";
 import "./agent.color.css";
 import { AiChat, AiChatUI } from "@nlux/react";
-import { useAiChat } from "./hooks/use-ai-chat";
+import { useAiChatConfig } from "./hooks/use-ai-chat-config";
 import clsx from "clsx";
 import { PropsWithChildren } from "react";
 import { AgentGreeting } from "./agent-greeting";
+import { useAiChatControls } from "./hooks/use-ai-chat-controls";
+import { Case, Conditional } from "../common/conditional-renderer";
+import { AgentButton } from "./agent-button";
+import { AgentHeader } from "./agent-header";
+import { AgentLoader } from "./agent-loader";
 
 export const AgentContainer = ({ children }: PropsWithChildren) => {
-  const { adapter, api } = useAiChat();
+  const { adapter, api } = useAiChatConfig();
+  const { isOpen, displayOptions, openChat, closeChat, expandChat } = useAiChatControls();
+  const { width, height } = displayOptions.dimensions;
 
   return (
-    <div className={clsx("agent-popover", "fixed bottom-10 right-10 z-[1000] h-[80%] max-h-[30rem] w-96 text-sm")}>
-      <AiChat api={api} adapter={adapter}>
-        <AiChatUI.Greeting>
-          <AgentGreeting />
-        </AiChatUI.Greeting>
-        {children}
-      </AiChat>
-    </div>
+    <Conditional>
+      <Case condition={isOpen === true}>
+        <div
+          className={clsx("agent-popover", "fixed z-[1000] bg-white text-sm", displayOptions.containerClassName)}
+          style={{ width, height }}
+        >
+          <AgentHeader closeChat={closeChat} expandChat={expandChat} />
+          <div className={clsx("mx-auto max-w-3xl")}>
+            <AiChat
+              api={api}
+              adapter={adapter}
+              displayOptions={{ height }}
+              className={displayOptions.rootClassName}
+              composerOptions={{ placeholder: "Envoyer un message" }}
+            >
+              <AiChatUI.Loader>
+                <AgentLoader />
+              </AiChatUI.Loader>
+              <AiChatUI.Greeting>
+                <AgentGreeting />
+              </AiChatUI.Greeting>
+              {children}
+            </AiChat>
+          </div>
+        </div>
+      </Case>
+      <Case condition={isOpen === false}>
+        <AgentButton openChat={openChat} />
+      </Case>
+    </Conditional>
   );
 };

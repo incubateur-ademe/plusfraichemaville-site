@@ -2,6 +2,7 @@ import { retrieveConversationAction } from "@/actions/agent-conversationnel/retr
 import { saveConversationAction } from "@/actions/agent-conversationnel/save-conversation-action";
 import { sentChatMessageAction } from "@/actions/agent-conversationnel/send-chat-message-action";
 import { PFMV_ROUTES } from "@/helpers/routes";
+import { ConversationHistory } from "@/services/ragtime/ragtime-types";
 import { useAiChatApi, useAsBatchAdapter } from "@nlux/react";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
@@ -9,10 +10,10 @@ import { useLocalStorage } from "usehooks-ts";
 
 const CONVERSATION_ID_KEY = "c-id";
 
-export const useAiChat = () => {
+export const useAiChatConfig = () => {
   const [conversationId, setConversationId] = useState<string | null>(null);
   const [savedConversationId, setSavedConversationId] = useLocalStorage<string>(CONVERSATION_ID_KEY, "");
-  // const [initialConversation, setInitialConversation] = useState(null);
+  const [initialConversation, setInitialConversation] = useState<ConversationHistory | null>(null);
   const isConnexionPage = usePathname().startsWith(PFMV_ROUTES.CONNEXION);
 
   const api = useAiChatApi();
@@ -33,6 +34,7 @@ export const useAiChat = () => {
       const result = await retrieveConversationAction(savedConversationId);
       if (result.type === "success") {
         setConversationId(savedConversationId);
+        setInitialConversation(result.conversationHistory);
       }
     }
   }, [savedConversationId, isConnexionPage]);
@@ -41,5 +43,5 @@ export const useAiChat = () => {
     loadExistingConversation();
   }, [loadExistingConversation]);
 
-  return { adapter, api, loadExistingConversation };
+  return { adapter, api, loadExistingConversation, initialConversation };
 };
