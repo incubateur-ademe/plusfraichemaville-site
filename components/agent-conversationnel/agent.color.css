@@ -20,3 +20,13 @@ nlux-composer-container {
 .nlux-AiChat-root > .nlux-chatRoom-container > .nlux-composer-container {
   border-top: solid 1px var(--background-contrast-blue-france-hover);
 }
+
+.nlux-comp-chatItem.nlux-comp-chatItem--bubblesLayout > .nlux-comp-message {
+  padding: 0;
+  border-radius: 0;
+}
+
+.nlux-comp-chatItem.nlux-comp-chatItem--bubblesLayout.nlux-comp-chatItem--sent > .nlux-comp-message,
+.nlux-comp-chatItem.nlux-comp-chatItem--bubblesLayout.nlux-comp-chatItem--received > .nlux-comp-message {
+  background: none;
+}

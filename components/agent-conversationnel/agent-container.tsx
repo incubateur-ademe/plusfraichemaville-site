@@ -11,6 +11,8 @@ import { Case, Conditional } from "../common/conditional-renderer";
 import { AgentButton } from "./agent-button";
 import { AgentHeader } from "./agent-header";
 import { AgentLoader } from "./agent-loader";
+import { AgentResponseRenderer } from "./renderers/agent-renderer-response";
+import { AgentPromptRenderer } from "./renderers/agent-renderer-prompt";
 
 export const AgentContainer = ({ children }: PropsWithChildren) => {
   const { adapter, api } = useAiChatConfig();
@@ -32,6 +34,17 @@ export const AgentContainer = ({ children }: PropsWithChildren) => {
               displayOptions={{ height }}
               className={displayOptions.rootClassName}
               composerOptions={{ placeholder: "Envoyer un message" }}
+              messageOptions={{
+                responseRenderer: AgentResponseRenderer,
+                promptRenderer: AgentPromptRenderer,
+              }}
+              conversationOptions={{
+                conversationStarters: [
+                  { prompt: "Qu'est ce que l'imperméabilisation ?" },
+                  { prompt: "Je cherche des informations sur les ICU" },
+                  { prompt: "Qui es-tu?" },
+                ],
+              }}
             >
               <AiChatUI.Loader>
                 <AgentLoader />
