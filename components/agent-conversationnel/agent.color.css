@@ -51,10 +51,16 @@ nlux-composer-container {
   border: solid 1px var(--background-contrast-grey-active) !important;
   background: #fff !important;
   border-radius: 12px !important;
+  flex-direction: row !important;
+  justify-content: flex-start !important;
+  align-items: center !important;
 }
 
 .ai-chat-expand .nlux-comp-conversationStarters > button {
   height: 190px !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-direction: column !important;
 }
 
 .ai-chat-expand .nlux-comp-conversationStarters > button span {
@@ -62,7 +68,11 @@ nlux-composer-container {
   width: 100%;
 }
 .nlux-comp-conversationStarters > button:hover {
-  background: var(--background-alt-blue-france) !important;
+  border-color: var(--background-active-blue-france) !important;
+}
+
+.nlux-comp-conversationStarters > button > img {
+  width: 24px;
 }
 
 .nlux-launchPad-container {

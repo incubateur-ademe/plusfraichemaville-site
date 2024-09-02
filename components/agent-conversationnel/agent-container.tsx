@@ -44,9 +44,9 @@ export const AgentContainer = ({ children }: PropsWithChildren) => {
               }}
               conversationOptions={{
                 conversationStarters: [
-                  { prompt: "Je veux créer un projet" },
-                  { prompt: "Je cherche une solution" },
-                  { prompt: "Aide à la décision?" },
+                  { prompt: "Je veux créer un projet", icon: "/images/zephyr/loupe.svg" },
+                  { prompt: "Je cherche une solution", icon: "/images/zephyr/plus.svg" },
+                  { prompt: "Aide à la décision?", icon: "/images/zephyr/etoiles.svg" },
                 ],
               }}
             >
