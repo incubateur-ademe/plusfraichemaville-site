@@ -12,7 +12,7 @@ export const AgentHeader = ({ closeChat, expandChat, loadExistingConversation }:
     <div
       className={clsx(
         "absolute top-0 z-[9999999] w-full rounded-t-2xl bg-white p-4",
-        "border-b-dsfr-background-contrast-blue-france-hover border-b-[1px]",
+        "border-b-[1px] border-b-dsfr-background-contrast-blue-france-hover",
       )}
     >
       <div className="mx-auto flex max-w-3xl justify-between">
