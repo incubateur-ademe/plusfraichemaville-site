@@ -30,3 +30,47 @@ nlux-composer-container {
 .nlux-comp-chatItem.nlux-comp-chatItem--bubblesLayout.nlux-comp-chatItem--received > .nlux-comp-message {
   background: none;
 }
+
+.nlux-conversationStarters-container {
+  overflow: visible;
+}
+.nlux-comp-conversationStarters {
+  flex-direction: column;
+  margin: 0 0 1rem;
+  padding: 0 1.25rem !important;
+}
+.ai-chat-expand .nlux-comp-conversationStarters {
+  flex-direction: row;
+  margin: 0 0 1rem;
+  padding: 0 1.25rem !important;
+}
+.nlux-comp-conversationStarters > button {
+  width: 100% !important;
+  padding: 14px 12px;
+  height: auto !important;
+  border: solid 1px var(--background-contrast-grey-active) !important;
+  background: #fff !important;
+  border-radius: 12px !important;
+}
+
+.ai-chat-expand .nlux-comp-conversationStarters > button {
+  height: 190px !important;
+}
+
+.ai-chat-expand .nlux-comp-conversationStarters > button span {
+  text-align: center;
+  width: 100%;
+}
+.nlux-comp-conversationStarters > button:hover {
+  background: var(--background-alt-blue-france) !important;
+}
+
+.nlux-launchPad-container {
+  overflow: auto;
+}
+
+.nlux-comp-welcomeMessage {
+  height: auto !important;
+  display: block !important;
+  flex: none !important;
+}

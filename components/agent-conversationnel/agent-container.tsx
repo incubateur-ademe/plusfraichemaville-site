@@ -15,7 +15,7 @@ import { AgentResponseRenderer } from "./renderers/agent-renderer-response";
 import { AgentPromptRenderer } from "./renderers/agent-renderer-prompt";
 
 export const AgentContainer = ({ children }: PropsWithChildren) => {
-  const { adapter, api } = useAiChatConfig();
+  const { adapter, api, loadExistingConversation } = useAiChatConfig();
   const { isOpen, displayOptions, openChat, closeChat, expandChat } = useAiChatControls();
   const { width, height } = displayOptions.dimensions;
 
@@ -26,7 +26,11 @@ export const AgentContainer = ({ children }: PropsWithChildren) => {
           className={clsx("agent-popover", "fixed z-[1000] bg-white text-sm", displayOptions.containerClassName)}
           style={{ width, height }}
         >
-          <AgentHeader closeChat={closeChat} expandChat={expandChat} />
+          <AgentHeader
+            closeChat={closeChat}
+            expandChat={expandChat}
+            loadExistingConversation={loadExistingConversation}
+          />
           <div className={clsx("mx-auto max-w-3xl")}>
             <AiChat
               api={api}
@@ -40,9 +44,9 @@ export const AgentContainer = ({ children }: PropsWithChildren) => {
               }}
               conversationOptions={{
                 conversationStarters: [
-                  { prompt: "Qu'est ce que l'imperméabilisation ?" },
-                  { prompt: "Je cherche des informations sur les ICU" },
-                  { prompt: "Qui es-tu?" },
+                  { prompt: "Je veux créer un projet" },
+                  { prompt: "Je cherche une solution" },
+                  { prompt: "Aide à la décision?" },
                 ],
               }}
             >

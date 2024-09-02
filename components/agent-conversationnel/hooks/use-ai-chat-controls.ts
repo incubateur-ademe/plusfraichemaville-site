@@ -15,9 +15,9 @@ export const useAiChatControls = () => {
 
   const displayOptions = useMemo(
     () => ({
-      dimensions: { width: expand ? width : 360, height: expand ? height : 450 },
+      dimensions: { width: expand ? width : 360, height: expand ? height : 540 },
       containerClassName: expand ? "bottom-0 left-0" : "bottom-10 right-10 rounded-2xl",
-      rootClassName: expand ? "pt-14" : "pt-12",
+      rootClassName: expand ? "ai-chat-expand pt-14" : "pt-12",
     }),
     [expand, height, width],
   );
