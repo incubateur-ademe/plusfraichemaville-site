@@ -374,3 +374,7 @@
 .join-project-modal .fr-col-lg-12 {
   @apply w-[90%] max-w-full flex-none;
 }
+
+.agent-popover {
+  box-shadow: 0 0 10px 0 rgba(0, 0, 145, 0.2);
+}

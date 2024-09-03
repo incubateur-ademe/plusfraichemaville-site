@@ -9,9 +9,9 @@ const cspHeader = `
     script-src 'self' https://stats.beta.gouv.fr 'nonce-${nonce}' 'strict-dynamic' ${
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
-    style-src 'self' 'unsafe-inline';
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ ;
-    font-src 'self';
+    font-src 'self' https://fonts.gstatic.com/;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
