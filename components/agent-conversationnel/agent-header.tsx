@@ -4,10 +4,10 @@ import Image from "next/image";
 type AgentHeaderProps = {
   closeChat: () => void;
   expandChat: () => void;
-  loadExistingConversation: () => void;
+  loadLastConversation: () => void;
 };
 
-export const AgentHeader = ({ closeChat, expandChat, loadExistingConversation }: AgentHeaderProps) => {
+export const AgentHeader = ({ closeChat, expandChat, loadLastConversation }: AgentHeaderProps) => {
   return (
     <div
       className={clsx(
@@ -21,7 +21,7 @@ export const AgentHeader = ({ closeChat, expandChat, loadExistingConversation }:
           <span className="text-base font-bold text-pfmv-navy">Zéphyr</span>
         </div>
         <div className="flex items-center gap-6 text-pfmv-navy">
-          <button onClick={loadExistingConversation}>
+          <button onClick={loadLastConversation}>
             <i className="ri-history-line"></i>
           </button>
           <button onClick={expandChat}>
