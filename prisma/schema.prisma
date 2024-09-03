@@ -50,6 +50,7 @@ model User {
   canal_acquisition           String?
   user_projet_deleted         user_projet[]       @relation(name: "user_projet_deleter")
   discardedInformation        String[]
+  conversations               conversation[]
 }
 
 model VerificationToken {
@@ -225,4 +226,12 @@ model estimations_aides {
   aideId       Int
 
   @@id([estimationId, aideId])
+}
+
+model conversation {
+  id         String   @id @default(cuid())
+  userId     String?
+  ragtimeId  String   @unique
+  created_at DateTime @default(now())
+  user       User?    @relation(fields: [userId], references: [id])
 }
