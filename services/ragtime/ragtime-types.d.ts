@@ -1,32 +1,31 @@
-export interface Conversation {
+export interface AiConversation {
   conversationId: string;
-  events: Event[];
+  events: AiEvent[];
 }
+
+export type AiRole = "user" | "system" | "assistant";
 
 export interface ConversationHistoryMessage {
   timestamp: string;
-  role: "user" | "assistant";
+  role: AiRole;
   content: string;
   msgIndex: number;
 }
 
-export interface Event {
+export interface AiEvent {
   type: "start" | "message";
   data: string;
 }
 
-export interface ConversationHistory {
+export type ConversationHistory = {
+  role: AiRole;
+  message: string;
+}[];
+
+export interface RagtimeConversationHistory {
   id: string;
   createdOn: string;
   updatedOn: string;
   messages: ConversationHistoryMessage[];
   supervisionReportCount: number;
-}
-
-export interface ConversationContext {
-  ficheSolutionId: number;
-  ficheDiagnosticId: number;
-  estimationId: number;
-  projetId: number;
-  collectiviteId: number;
 }

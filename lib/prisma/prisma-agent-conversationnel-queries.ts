@@ -1,16 +1,35 @@
-import { ConversationContext } from "@/services/ragtime/ragtime-types";
 import { prismaClient } from "./prismaClient";
 
-export const saveConversation = async (conversationId: string, userId?: string, context?: ConversationContext) => {
-  return await prismaClient.agent_conversationnel.create({
+export const saveConversation = async (ragtimeId: string, userId?: string) => {
+  return await prismaClient.conversation.create({
     data: {
-      conversationId,
+      ragtimeId,
       userId: userId ?? null,
-      collectivite_id: context?.collectiviteId,
-      fiche_diagnostic_id: context?.ficheDiagnosticId,
-      fiche_solution_id: context?.ficheSolutionId,
-      projet_id: context?.projetId,
-      estimation_id: context?.estimationId,
+    },
+  });
+};
+
+export const retrieveLoggedConversation = async (conversationId: string, userId?: string) => {
+  return await prismaClient.conversation.findUnique({
+    where: {
+      id: conversationId,
+      OR: [
+        {
+          userId,
+        },
+        {
+          userId: null,
+        },
+      ],
+    },
+  });
+};
+
+export const retrieveAnonymousConversation = async (conversationId: string) => {
+  return await prismaClient.conversation.findUnique({
+    where: {
+      id: conversationId,
+      userId: null,
     },
   });
 };

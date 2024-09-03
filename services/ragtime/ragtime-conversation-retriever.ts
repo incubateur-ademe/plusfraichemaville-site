@@ -1,9 +1,9 @@
-import { ConversationHistory } from "@/services/ragtime/ragtime-types";
+import { RagtimeConversationHistory } from "@/services/ragtime/ragtime-types";
 import { ragtimeConfig, RagtimeSlug } from "./config";
 
-export const ragtimeConversationRetriever = async (conversationId: string): Promise<ConversationHistory> => {
+export const ragtimeConversationRetriever = async (conversationId: string): Promise<RagtimeConversationHistory> => {
   const slug = `${RagtimeSlug.conversation}/${conversationId}`;
-  return ragtimeConfig<ConversationHistory>(
+  return ragtimeConfig<RagtimeConversationHistory>(
     slug,
     {
       conversationId,
