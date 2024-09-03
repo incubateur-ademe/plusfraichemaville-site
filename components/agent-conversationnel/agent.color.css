@@ -16,9 +16,18 @@ nlux-composer-container {
 .nlux-comp-composer > button > .nlux-comp-sendIcon > .nlux-comp-sendIcon-container {
   background: var(--background-active-blue-france);
 }
+.ai-chat-expand .nlux-composer-container {
+  border-top: none !important;
+  padding: 10px;
+}
 
 .nlux-AiChat-root > .nlux-chatRoom-container > .nlux-composer-container {
   border-top: solid 1px var(--background-contrast-blue-france-hover);
+}
+
+.ai-chat-expand .nlux-comp-composer {
+  border: solid 1px var(--background-contrast-blue-france-hover);
+  border-radius: 10px;
 }
 
 .nlux-comp-chatItem.nlux-comp-chatItem--bubblesLayout > .nlux-comp-message {
@@ -83,4 +92,8 @@ nlux-composer-container {
   height: auto !important;
   display: block !important;
   flex: none !important;
+}
+
+.ai-chat-expand .nlux-AiChat-root > .nlux-chatRoom-container > .nlux-composer-container > .nlux-comp-composer {
+  border: solid 1px var(--background-contrast-blue-france-hover);
 }
