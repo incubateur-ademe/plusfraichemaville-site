@@ -2,10 +2,17 @@ import { retrieveConversationAction } from "@/actions/agent-conversationnel/retr
 import { sentChatMessageAction } from "@/actions/agent-conversationnel/send-chat-message-action";
 import { ConversationHistory } from "@/services/ragtime/ragtime-types";
 import { useAiChatApi, useAsBatchAdapter } from "@nlux/react";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 const CONVERSATION_ID_KEY = "c-id";
+
+export type ConversationControls = {
+  loadLastConversation?: () => Promise<void>;
+  resetConversation: () => void;
+  conversationStarted: boolean;
+  hasLastConversation: boolean;
+};
 
 export const useAiChatConfig = () => {
   const [conversationId, setConversationId] = useState<string | null | undefined>(null);
@@ -33,5 +40,25 @@ export const useAiChatConfig = () => {
     }
   }, [savedConversationId]);
 
-  return { adapter, api, initialConversation, loadLastConversation };
+  const resetConversation = useCallback(() => {
+    setConversationId(null);
+    api.conversation.reset();
+  }, [api.conversation]);
+
+  const conversationControls = useMemo<ConversationControls>(
+    () => ({
+      loadLastConversation,
+      resetConversation,
+      hasLastConversation: Boolean(savedConversationId),
+      conversationStarted: Boolean(conversationId),
+    }),
+    [conversationId, loadLastConversation, resetConversation, savedConversationId],
+  );
+
+  return {
+    adapter,
+    api,
+    initialConversation,
+    conversationControls,
+  };
 };

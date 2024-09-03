@@ -8,13 +8,16 @@ import { PropsWithChildren } from "react";
 import { AgentGreeting } from "./agent-greeting";
 import { useAiChatControls } from "./hooks/use-ai-chat-controls";
 import { AgentButton } from "./agent-button";
-import { AgentHeader } from "./agent-header";
+
 import { AgentLoader } from "./agent-loader";
 import { AgentResponseRenderer } from "./renderers/agent-renderer-response";
 import { AgentPromptRenderer } from "./renderers/agent-renderer-prompt";
+import dynamic from "next/dynamic";
+
+const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.AgentHeader));
 
 export const Agent = ({ children }: PropsWithChildren) => {
-  const { adapter, api, initialConversation, loadLastConversation } = useAiChatConfig();
+  const { adapter, api, initialConversation, conversationControls } = useAiChatConfig();
   const { displayOptions, openChat, closeChat, expandChat } = useAiChatControls();
   const { width, height } = displayOptions.dimensions;
 
@@ -24,7 +27,7 @@ export const Agent = ({ children }: PropsWithChildren) => {
         className={clsx("agent-popover", "fixed z-[1000] bg-white text-sm", displayOptions.containerClassName)}
         style={{ width, height }}
       >
-        <AgentHeader closeChat={closeChat} expandChat={expandChat} loadLastConversation={loadLastConversation} />
+        <AgentHeader closeChat={closeChat} expandChat={expandChat} conversationControls={conversationControls} />
         <div className={clsx("mx-auto max-w-3xl")}>
           <AiChat
             api={api}
