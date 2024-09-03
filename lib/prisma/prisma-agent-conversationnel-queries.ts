@@ -1,7 +1,7 @@
 import { prismaClient } from "./prismaClient";
 
 export const saveConversation = async (ragtimeId: string, userId?: string) => {
-  return await prismaClient.conversation.create({
+  return prismaClient.conversation.create({
     data: {
       ragtimeId,
       userId: userId ?? null,
@@ -9,8 +9,8 @@ export const saveConversation = async (ragtimeId: string, userId?: string) => {
   });
 };
 
-export const retrieveLoggedConversation = async (conversationId: string, userId?: string) => {
-  return await prismaClient.conversation.findUnique({
+export const retrieveLoggedConversation = async (conversationId: string, userId: string) => {
+  return prismaClient.conversation.findUnique({
     where: {
       id: conversationId,
       OR: [
@@ -26,7 +26,7 @@ export const retrieveLoggedConversation = async (conversationId: string, userId?
 };
 
 export const retrieveAnonymousConversation = async (conversationId: string) => {
-  return await prismaClient.conversation.findUnique({
+  return prismaClient.conversation.findUnique({
     where: {
       id: conversationId,
       userId: null,

@@ -18,7 +18,7 @@ import { GenericFichesSaverFromLocalStorage } from "@/components/common/generic-
 import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/components/cookie/consentManagement";
-import Agent from "@/components/agent-conversationnel/agent";
+import { Agent } from "@/components/agent-conversationnel/agent";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",
