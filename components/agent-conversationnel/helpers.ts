@@ -3,7 +3,7 @@ import { ConversationHistory, RagtimeConversationHistory } from "@/services/ragt
 export const sanitizeConversationHistoryFromRagtime = (conversation: RagtimeConversationHistory): ConversationHistory =>
   conversation.messages
     // TODO: parfois le rôle provenant de Ragtime peut-être tool
-    .filter(({ role }) => role === "assistant" || role === "user")
+    .filter(({ role, content }) => (role === "assistant" || role === "user") && content)
     .map((message) => ({
       role: message.role,
       message: message.content,
