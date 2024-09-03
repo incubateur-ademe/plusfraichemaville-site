@@ -1,8 +1,9 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 
 const CHAT_WIDTH = 360;
 const CHAT_HEIGHT = 540;
+const TAILWIND_BREAKPOINT_SM = 640;
 
 export const useAiChatControls = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,6 +16,12 @@ export const useAiChatControls = () => {
     setIsOpen(false);
     setExpand(false);
   };
+
+  useEffect(() => {
+    if (width < TAILWIND_BREAKPOINT_SM) {
+      setExpand(true);
+    }
+  }, [width, isOpen]);
 
   const displayOptions = useMemo(
     () => ({

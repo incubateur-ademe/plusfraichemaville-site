@@ -42,7 +42,7 @@ export const AgentHeader = ({
           <span className="text-base font-bold text-pfmv-navy">Zéphyr</span>
         </div>
         <div className="flex items-center gap-4 text-pfmv-navy">
-          <button onClick={expandChat}>
+          <button onClick={expandChat} className="hidden sm:block">
             <i className="ri-expand-diagonal-line"></i>
           </button>
           <button onClick={closeChat}>
