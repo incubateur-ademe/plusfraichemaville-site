@@ -27,7 +27,7 @@ export const AgentHeader = ({
           <Conditional>
             <Case condition={conversationControls.conversationStarted}>
               <button onClick={conversationControls.resetConversation}>
-                <i className="ri-arrow-left-line"></i>
+                <i className="ri-arrow-left-line text-pfmv-navy"></i>
               </button>
             </Case>
             <Case condition={!conversationControls.conversationStarted && conversationControls.hasLastConversation}>
