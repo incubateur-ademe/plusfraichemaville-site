@@ -97,3 +97,12 @@ nlux-composer-container {
 .ai-chat-expand .nlux-AiChat-root > .nlux-chatRoom-container > .nlux-composer-container > .nlux-comp-composer {
   border: solid 1px var(--background-contrast-blue-france-hover);
 }
+
+.nlux-comp-composer > textarea {
+  height: 3.5rem;
+  cursor: text;
+}
+
+.nlux-comp-composer.nlux-composer--typing button > .nlux-comp-sendIcon {
+  height: 1rem;
+}
