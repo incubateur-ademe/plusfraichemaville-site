@@ -17,7 +17,7 @@ export const ChatOpenGraphLink = ({
       {CHAT_OPEN_GRAPH_CORRESPONDANCES.map((correspondance) => (
         <Case key={correspondance.matchingPattern} condition={chatMessage.includes(correspondance.matchingPattern)}>
           <div className="mt-4">
-            <Link href={correspondance.link}>
+            <Link href={correspondance.link} onClick={displayOptions.toggleChat}>
               <div>
                 <Image
                   width={displayOptions.dimensions.width}

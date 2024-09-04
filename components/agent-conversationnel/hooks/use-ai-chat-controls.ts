@@ -10,14 +10,15 @@ export type ChatDisplayOptions = {
   containerClassName: string;
   rootClassName: string;
   expanded: boolean;
+  toggleChat: () => void;
 };
 
 export const useAiChatControls = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [expand, setExpand] = useState(false);
   const { width, height } = useWindowSize();
-
   const expandChat = () => setExpand(!expand);
+  const minimizeChat = () => setExpand(false);
   const openChat = () => setIsOpen(true);
   const closeChat = () => {
     setIsOpen(false);
@@ -38,6 +39,7 @@ export const useAiChatControls = () => {
       }`,
       rootClassName: expand ? "ai-chat-expand pt-14" : "pt-12",
       expanded: expand,
+      toggleChat: width < TAILWIND_BREAKPOINT_SM ? closeChat : minimizeChat,
     }),
     [expand, isOpen, height, width],
   );

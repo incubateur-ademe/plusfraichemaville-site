@@ -18,7 +18,9 @@ export const AgentResponseRenderer: ResponseRenderer<string> = (
         components={{
           a: ({ href = "", children }) => {
             return href.startsWith("/") ? (
-              <Link href={href}>{children}</Link>
+              <Link href={href} onClick={displayOptions.toggleChat}>
+                {children}
+              </Link>
             ) : (
               <a href={href} target="_blank" rel="noreferrer">
                 {children}
