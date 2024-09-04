@@ -106,3 +106,13 @@ nlux-composer-container {
 .nlux-comp-composer.nlux-composer--typing button > .nlux-comp-sendIcon {
   height: 1rem;
 }
+
+@media (max-width: 640px) {
+  .ai-chat-expand .nlux-comp-conversationStarters {
+    flex-direction: column;
+  }
+
+  .ai-chat-expand .nlux-comp-conversationStarters > button {
+    height: 6rem !important;
+  }
+}
