@@ -31,9 +31,12 @@ export const AgentHeader = ({
               </button>
             </Case>
             <Case condition={!conversationControls.conversationStarted && conversationControls.hasLastConversation}>
-              <button onClick={conversationControls.loadLastConversation}>
+              <button onClick={conversationControls.loadLastConversation} aria-describedby={`tooltip-restaurer`}>
                 <i className="ri-history-line text-pfmv-navy"></i>
               </button>
+              <span className="fr-tooltip fr-placement" id={`tooltip-restaurer`} role="tooltip" aria-hidden="true">
+                Reprendre la dernière conversation
+              </span>
             </Case>
           </Conditional>
         </div>
