@@ -6,8 +6,8 @@ export const sanitizeConversationHistoryFromRagtime = (conversation: RagtimeConv
     .filter(({ role, content }) => (role === "assistant" || role === "user") && content)
     .map((message) => ({
       role: message.role,
-      message: sanitizeMessageFromRagtime(message.content),
+      message: message.content,
     }));
 
-export const sanitizeMessageFromRagtime = (ragtimeResponseMessage: string): string =>
+export const sanitizeUrlInMessageFromRagtime = (ragtimeResponseMessage: string): string =>
   ragtimeResponseMessage.replace("https://plusfraichemaville.fr/", "/");
