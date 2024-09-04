@@ -1,13 +1,20 @@
 import clsx from "clsx";
 import Image from "next/image";
+import { ConversationControls } from "./hooks/use-ai-chat-config";
+import { Case, Conditional } from "../common/conditional-renderer";
 
 type AgentHeaderProps = {
   closeChat: () => void;
   expandChat: () => void;
-  loadLastConversation: () => void;
+  conversationControls: ConversationControls;
 };
 
-export const AgentHeader = ({ closeChat, expandChat, loadLastConversation }: AgentHeaderProps) => {
+export const AgentHeader = ({
+  closeChat,
+  expandChat,
+
+  conversationControls,
+}: AgentHeaderProps) => {
   return (
     <div
       className={clsx(
@@ -15,16 +22,27 @@ export const AgentHeader = ({ closeChat, expandChat, loadLastConversation }: Age
         "border-b-[1px] border-b-dsfr-background-contrast-blue-france-hover",
       )}
     >
-      <div className="mx-auto flex max-w-3xl justify-between">
-        <div className="flex items-center gap-[10px]">
+      <div className="relative mx-auto flex max-w-3xl justify-between">
+        <div>
+          <Conditional>
+            <Case condition={conversationControls.conversationStarted}>
+              <button onClick={conversationControls.resetConversation}>
+                <i className="ri-arrow-left-line text-pfmv-navy"></i>
+              </button>
+            </Case>
+            <Case condition={!conversationControls.conversationStarted && conversationControls.hasLastConversation}>
+              <button onClick={conversationControls.loadLastConversation}>
+                <i className="ri-history-line text-pfmv-navy"></i>
+              </button>
+            </Case>
+          </Conditional>
+        </div>
+        <div className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 items-center gap-[10px]">
           <Image src={"/images/zephyr/zephyr.png"} width={26} height={26} alt="" />
           <span className="text-base font-bold text-pfmv-navy">Zéphyr</span>
         </div>
-        <div className="flex items-center gap-6 text-pfmv-navy">
-          <button onClick={loadLastConversation}>
-            <i className="ri-history-line"></i>
-          </button>
-          <button onClick={expandChat}>
+        <div className="flex items-center gap-4 text-pfmv-navy">
+          <button onClick={expandChat} className="hidden sm:block">
             <i className="ri-expand-diagonal-line"></i>
           </button>
           <button onClick={closeChat}>

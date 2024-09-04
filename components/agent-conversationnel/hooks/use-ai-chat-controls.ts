@@ -1,8 +1,10 @@
-import { useMemo, useState } from "react";
+import { getTailwindTheme } from "@/helpers/common";
+import { useEffect, useMemo, useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 
 const CHAT_WIDTH = 360;
 const CHAT_HEIGHT = 540;
+const TAILWIND_BREAKPOINT_SM = Number.parseInt(getTailwindTheme().screens.sm);
 
 export type ChatDisplayOptions = {
   dimensions: { width: number; height: number };
@@ -22,6 +24,12 @@ export const useAiChatControls = () => {
     setIsOpen(false);
     setExpand(false);
   };
+
+  useEffect(() => {
+    if (width < TAILWIND_BREAKPOINT_SM) {
+      setExpand(true);
+    }
+  }, [width, isOpen]);
 
   const displayOptions: ChatDisplayOptions = useMemo(
     () => ({
