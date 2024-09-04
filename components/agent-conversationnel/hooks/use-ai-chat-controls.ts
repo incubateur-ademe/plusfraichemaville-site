@@ -1,10 +1,10 @@
-import { getTailwindConfig } from "@/helpers/common";
+import { getTailwindTheme } from "@/helpers/common";
 import { useEffect, useMemo, useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 
 const CHAT_WIDTH = 360;
 const CHAT_HEIGHT = 540;
-const TAILWIND_BREAKPOINT_SM = Number.parseInt(getTailwindConfig().screens.sm);
+const TAILWIND_BREAKPOINT_SM = Number.parseInt(getTailwindTheme().screens.sm);
 
 export const useAiChatControls = () => {
   const [isOpen, setIsOpen] = useState(false);

@@ -44,4 +44,4 @@ export const extractNameInitiales = (name: string) => {
   return match ? match.map((word) => word[0].toUpperCase()).join("") : "";
 };
 
-export const getTailwindConfig = () => fullConfig.theme;
+export const getTailwindTheme = () => fullConfig.theme;
