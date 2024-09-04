@@ -27,7 +27,7 @@ export const useAiChatControls = () => {
     } else if (prevWidth < TAILWIND_BREAKPOINT_SM && width >= TAILWIND_BREAKPOINT_SM) {
       setExpand(false);
     }
-  }, [width]);
+  }, [width, isOpen]);
 
   const displayOptions = useMemo(
     () => ({
