@@ -1,8 +1,3 @@
-import resolveConfig from "tailwindcss/resolveConfig";
-import tailwindConfig from "../tailwind.config";
-
-const fullConfig = resolveConfig(tailwindConfig);
-
 export const isProduction = process.env.NODE_ENV === "production";
 
 export const generateRandomId = () => Math.floor(Math.random() * 900000000) + 100000000;
@@ -43,5 +38,3 @@ export const extractNameInitiales = (name: string) => {
   const match = name.match(/^[^\s-]+|\S+$/g);
   return match ? match.map((word) => word[0].toUpperCase()).join("") : "";
 };
-
-export const getTailwindTheme = () => fullConfig.theme;

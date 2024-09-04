@@ -1,10 +1,9 @@
-import { getTailwindTheme } from "@/helpers/common";
 import { useEffect, useMemo, useState } from "react";
 import { useWindowSize } from "usehooks-ts";
 
 const CHAT_WIDTH = 360;
 const CHAT_HEIGHT = 540;
-const TAILWIND_BREAKPOINT_SM = Number.parseInt(getTailwindTheme().screens.sm);
+const TAILWIND_BREAKPOINT_SM = 640;
 
 export type ChatDisplayOptions = {
   dimensions: { width: number; height: number };
