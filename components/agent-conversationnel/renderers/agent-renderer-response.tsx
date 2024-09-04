@@ -9,12 +9,11 @@ export const AgentResponseRenderer: ResponseRenderer<string> = (
   props: ResponseRendererProps<string>,
   displayOptions: ChatDisplayOptions,
 ) => {
+  const content = props.content.toString();
   return (
     <div className="rounded-2xl rounded-bl-none bg-dsfr-background-contrast-blue-france p-3">
       <Markdown
         className="[&_>_p]:mb-0"
-        // eslint-disable-next-line react/no-children-prop
-        children={props.content.toString()}
         urlTransform={sanitizeUrlInMessageFromRagtime}
         components={{
           a: ({ href = "", children }) => {
@@ -27,7 +26,9 @@ export const AgentResponseRenderer: ResponseRenderer<string> = (
             );
           },
         }}
-      />
+      >
+        {content}
+      </Markdown>
       <ChatOpenGraphLink chatMessage={props.content.toString()} displayOptions={displayOptions} />
     </div>
   );
