@@ -8,7 +8,7 @@ import {
   retrieveLoggedConversation,
   saveConversation,
 } from "@/lib/prisma/prisma-agent-conversationnel-queries";
-import { sanitizeMessageFromRagtime } from "@/components/agent-conversationnel/helpers";
+import { sanitizeUrlInMessageFromRagtime } from "@/components/agent-conversationnel/helpers";
 
 export const sentChatMessageAction = async (
   userMessage: string,
@@ -46,7 +46,7 @@ export const sentChatMessageAction = async (
     type: "success",
     conversationId: retrievedConversation?.id,
     messageResponse: responseText?.data
-      ? sanitizeMessageFromRagtime(responseText.data)
+      ? sanitizeUrlInMessageFromRagtime(responseText.data)
       : "Je n'ai pu trouver de réponse satisfaisante, pouvez-vous reformuler votre question ?",
   };
 };
