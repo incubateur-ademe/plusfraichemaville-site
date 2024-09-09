@@ -38,15 +38,25 @@ export const sentChatMessageAction = async (
   }
 
   const ragTimeResult = await ragtimeSender(userMessage, ragtimeId);
-  if (!conversationId) {
-    retrievedConversation = await saveConversation(ragTimeResult.conversationId, session?.user.id);
+
+  if (ragTimeResult.success) {
+    if (!conversationId) {
+      retrievedConversation = await saveConversation(ragTimeResult.value.conversationId, session?.user.id);
+    }
+
+    const responseText = ragTimeResult.value.events.find((event) => event.type === "message");
+    return {
+      type: "success",
+      conversationId: retrievedConversation?.id,
+      messageResponse: responseText?.data
+        ? sanitizeUrlInMessageFromRagtime(responseText.data)
+        : "Je n'ai pu trouver de réponse satisfaisante, pouvez-vous reformuler votre question ?",
+    };
+  } else {
+    return {
+      type: "error",
+      conversationId: retrievedConversation?.id,
+      messageResponse: "Je n'ai pu trouver de réponse satisfaisante, pouvez-vous reformuler votre question ?",
+    };
   }
-  const responseText = ragTimeResult.events.find((event) => event.type === "message");
-  return {
-    type: "success",
-    conversationId: retrievedConversation?.id,
-    messageResponse: responseText?.data
-      ? sanitizeUrlInMessageFromRagtime(responseText.data)
-      : "Je n'ai pu trouver de réponse satisfaisante, pouvez-vous reformuler votre question ?",
-  };
 };
