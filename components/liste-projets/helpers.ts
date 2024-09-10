@@ -77,6 +77,7 @@ export const getCurrentUserProjectInfos = (
   project: ProjetWithPublicRelations,
   currentUserId?: string,
 ): UserProjetWithPublicUser | null => {
+  console.log("DEVRAIT ÊTRE LA QU'UNE FOIS")
   const userProjectLine = project.users.find((userProjet) => userProjet.user_id === currentUserId);
   return userProjectLine || null;
 };

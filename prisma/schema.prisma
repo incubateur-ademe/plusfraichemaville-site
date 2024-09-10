@@ -110,6 +110,8 @@ model user_projet {
   deleted_by        String?
   deleter           User?            @relation(name: "user_projet_deleter", fields: [deleted_by], references: [id])
   email             email[]
+  nb_views          Int?             @default(0)
+  last_viewed_at    DateTime?
 
   @@unique([user_id, projet_id])
 }

@@ -298,6 +298,10 @@
   @apply !relative block after:absolute after:right-2 after:top-3 after:size-[7.5px] after:rounded-full after:bg-dsfr-background-flat-blue-france;
 }
 
+.new-project-acess-badge {
+  @apply !relative after:absolute after:-right-[3px] after:-top-[3px] after:size-2 after:rounded-full after:bg-dsfr-action-high-red-hover;
+}
+
 .aide-modal .fr-grid-row > div {
   @apply w-full max-w-full flex-shrink-0 flex-grow-0 basis-full;
 }

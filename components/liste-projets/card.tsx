@@ -10,7 +10,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
 import { useUserStore } from "@/stores/user/provider";
 import { dateToStringWithoutTime } from "@/helpers/dateUtils";
-import { useState, useTransition } from "react";
+import { useMemo, useState, useTransition } from "react";
 import { notifications } from "../common/notifications";
 import { acceptProjectInvitationAction } from "@/actions/userProjet/accept-project-invitation-action";
 import { declineProjectInvitationAction } from "@/actions/userProjet/decline-project-invitation-action";
@@ -22,6 +22,7 @@ import { hasDiscardedInformation } from "@/helpers/user";
 import { MODE_LECTEUR_MODAL_ID } from "@/components/tableau-de-bord/viewer-mode-modal";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { getPendingUserProjetsAction } from "@/actions/projets/get-pending-user-projets-action";
+import { accessProjetAction } from "@/actions/userProjet/access-projet-action";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -49,10 +50,17 @@ export const ListeProjetsCard = ({
   const setShowInfoViewerMode = useModalStore((state) => state.setShowInfoViewerMode);
   const isLecteur =
     (updatedProjet && getCurrentUserRole(updatedProjet.users, currentUser?.id) !== RoleProjet.ADMIN) ?? false;
-  const openDiscardViewerMode = () =>
-    isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID) && setShowInfoViewerMode(true);
+  const openProjet = async () => {
+    if (isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID)) {
+      setShowInfoViewerMode(true);
+    }
+    await accessProjetAction(updatedProjet.id);
+  };
 
-  const currentUserInfo = getCurrentUserProjectInfos(updatedProjet, currentUser?.id);
+  const currentUserInfo = useMemo(
+    () => getCurrentUserProjectInfos(updatedProjet, currentUser?.id),
+    [currentUser?.id, updatedProjet],
+  );
   const hasAlreadyRequest = currentUserInfo?.invitation_status === InvitationStatus.REQUESTED;
 
   const handleSendRequest = () => {
@@ -153,6 +161,17 @@ export const ListeProjetsCard = ({
                     "opacity-25",
                 )}
               >
+                <div
+                  className={clsx(
+                    "new-project-acess-badge rounded p-1 text-xs font-bold text-pfmv-navy",
+                    "bg-dsfr-background-contrast-blue-france",
+                    (currentUserInfo?.invitation_status !== InvitationStatus.ACCEPTED ||
+                      (currentUserInfo?.nb_views || 0) > 0) &&
+                      "hidden",
+                  )}
+                >
+                  Nouvel accès
+                </div>
                 <div className="flex items-center gap-2">
                   <i className="ri-team-fill text-pfmv-navy"></i>
                   {getAllUserProjectCount(updatedProjet)}
@@ -219,7 +238,7 @@ export const ListeProjetsCard = ({
       <Conditional>
         <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
           <div className="pfmv-card">
-            <Link onClick={openDiscardViewerMode} href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}>
+            <Link onClick={openProjet} href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}>
               {contentCard}
             </Link>
           </div>
@@ -233,7 +252,7 @@ export const ListeProjetsCard = ({
           <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
             <Link
               className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
-              onClick={openDiscardViewerMode}
+              onClick={openProjet}
               href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}
               style={{ ...disabledButton }}
             >

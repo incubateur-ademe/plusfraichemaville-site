@@ -60,7 +60,7 @@ module.exports = {
       "dsfr-blue-france-925": "var(--border-open-blue-france)",
       "dsfr-text-label-blue-france": "var(--text-label-blue-france)",
       "dsfr-hover-blue-sun": "var(--background-action-high-blue-france-hover)",
-      "dsfr-background-alt-blue-france": "var(--background-alt-blue-france)",
+        "dsfr-background-alt-blue-france": "var(--background-alt-blue-france)",
       "dsfr-background-alt-blue-france-hover": "var(--background-alt-blue-france-hover)",
       "dsfr-background-alt-grey": "var(--background-alt-grey)",
       "dsfr-background-action-low-blue-france": "var(--background-action-low-blue-france)",
