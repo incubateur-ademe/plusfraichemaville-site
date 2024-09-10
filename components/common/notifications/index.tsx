@@ -1,7 +1,7 @@
 import { error, success } from "@/helpers/messages";
 import toast from "react-hot-toast";
 
-const messages = {
+export const messages = {
   ...error,
   ...success,
 };

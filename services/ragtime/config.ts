@@ -26,7 +26,7 @@ export const ragtimeConfig = async <T>(
     const response = await fetch(url, options);
 
     if (!response.ok) {
-      response.status === 500 ? failure("ERROR_500") : failure("SERVICE_ERROR");
+      return response.status === 500 ? failure("ERROR_500") : failure("SERVICE_ERROR");
     }
 
     const data = (await response.json()) as T;

@@ -1,4 +1,4 @@
-import { NotificationsMessage } from "@/components/common/notifications";
+import { messages, NotificationsMessage } from "@/components/common/notifications";
 
 type Success<Response> = {
   success: true;
@@ -7,10 +7,10 @@ type Success<Response> = {
 
 type Failure = {
   success: false;
-  error: NotificationsMessage;
+  error: string;
 };
 
 export type Result<Response> = Success<Response> | Failure;
 
 export const success = <Response>(value: Response): Success<Response> => ({ success: true, value });
-export const failure = (error: NotificationsMessage): Failure => ({ success: false, error });
+export const failure = (error: NotificationsMessage): Failure => ({ success: false, error: messages[error] });

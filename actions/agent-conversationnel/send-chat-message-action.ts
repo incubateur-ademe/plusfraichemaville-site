@@ -56,7 +56,7 @@ export const sentChatMessageAction = async (
     return {
       type: "error",
       conversationId: retrievedConversation?.id,
-      messageResponse: "Je n'ai pu trouver de réponse satisfaisante, pouvez-vous reformuler votre question ?",
+      messageResponse: ragTimeResult.error,
     };
   }
 };

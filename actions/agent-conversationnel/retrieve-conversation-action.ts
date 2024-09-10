@@ -16,6 +16,7 @@ export const retrieveConversationAction = async (
   ResponseAction<{
     conversationHistory?: ConversationHistory;
     conversationId: string | null;
+    messageError?: string;
   }>
 > => {
   const session = await auth();
@@ -36,7 +37,7 @@ export const retrieveConversationAction = async (
       const conversationHistory = sanitizeConversationHistoryFromRagtime(result.value);
       return { type: "success", conversationHistory, conversationId: retrievedConversation.id };
     } else {
-      return { type: "error", conversationHistory: undefined, conversationId: null, message: result.error };
+      return { type: "error", conversationHistory: undefined, conversationId: null, messageError: result.error };
     }
   } else {
     return { type: "error", conversationHistory: undefined, conversationId: null };
