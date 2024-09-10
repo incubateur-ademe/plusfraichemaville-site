@@ -49,7 +49,11 @@ export default async function Connexion({ searchParams }: { searchParams: { call
     <div className="fr-container pt-8">
       <h1 className="fr-h3 !mb-9">{data.mainTitle}</h1>
       <div className="flex">
-        <SignInCard message="connect" callbackUrl={searchParams.callbackUrl} className="rounded-r-none" />
+        <SignInCard
+          message="connect"
+          callbackUrl={searchParams.callbackUrl}
+          className="lg:max-w-full lg:rounded-r-none"
+        />
         <div
           className={clsx(
             "hidden w-full items-center rounded-r-2xl bg-dsfr-background-open-blue-france py-9 pl-[91px] pr-36 lg:flex",
