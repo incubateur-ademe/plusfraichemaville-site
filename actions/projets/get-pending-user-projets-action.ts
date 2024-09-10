@@ -14,7 +14,7 @@ export const getPendingUserProjetsAction = async (
     return { type: "error", message: "UNAUTHENTICATED", pendingProjets: [] };
   }
 
-  if (!new PermissionManager().canViewUserProject(session.user.id, userId)) {
+  if (!new PermissionManager().canViewUserProject(userId)) {
     return { type: "error", message: "UNAUTHORIZED", pendingProjets: [] };
   }
   const pendingProjets = await getPendingUserProjets(userId);

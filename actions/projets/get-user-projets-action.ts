@@ -16,7 +16,7 @@ export const getUserProjetsAction = async (
     return { type: "error", message: "UNAUTHENTICATED", projets: [] };
   }
 
-  if (!new PermissionManager().canViewUserProject(session.user.id, userId)) {
+  if (!new PermissionManager().canViewUserProject(userId)) {
     return { type: "error", message: "UNAUTHORIZED", projets: [] };
   }
   const projets = await getUserProjets(userId);

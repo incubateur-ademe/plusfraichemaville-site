@@ -25,7 +25,7 @@ export const resendInvitationAction = async (userProjetId: number): Promise<Resp
       return { type: "error", message: "UNAUTHORIZED" };
     }
 
-    const canShareProjet = await new PermissionManager().canShareProject(session?.user.id, userProjet.projet_id);
+    const canShareProjet = await new PermissionManager().canShareProject(userProjet.projet_id);
 
     if (!canShareProjet) {
       return { type: "error", message: "UNAUTHORIZED" };

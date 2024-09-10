@@ -18,7 +18,7 @@ export const deleteEstimationAction = async (estimationId: number): Promise<Resp
     return { type: "success", message: "ESTIMATION_DELETE" };
   }
 
-  const canUpdateProjet = await new PermissionManager().canEditProject(session.user.id, estimationToDelete.projet_id);
+  const canUpdateProjet = await new PermissionManager().canEditProject(estimationToDelete.projet_id);
   if (!canUpdateProjet) {
     return { type: "error", message: "ESTIMATION_DELETE_UNAUTHORIZED" };
   }

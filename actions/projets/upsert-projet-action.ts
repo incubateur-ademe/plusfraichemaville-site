@@ -23,7 +23,7 @@ export const upsertProjetAction = async (
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  if (data.projetId && !(await new PermissionManager().canEditProject(session.user.id, data.projetId))) {
+  if (data.projetId && !(await new PermissionManager().canEditProject(data.projetId))) {
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 

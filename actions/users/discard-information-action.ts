@@ -17,7 +17,7 @@ export const discardInformationAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  const canUpdateUser = new PermissionManager().canUpdateUser(userId, session.user.id);
+  const canUpdateUser = new PermissionManager().canUpdateUser(userId);
 
   if (!canUpdateUser) {
     return { type: "error", message: "UNAUTHORIZED" };

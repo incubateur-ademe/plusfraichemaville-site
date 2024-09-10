@@ -19,7 +19,7 @@ export const saveAllFichesFromLocalStorageAction = async (
     return { type: "error", message: "UNAUTHENTICATED", user: null };
   }
 
-  if (!new PermissionManager().canUpdateUser(userId, session.user.id)) {
+  if (!new PermissionManager().canUpdateUser(userId)) {
     return { type: "error", message: "UNAUTHORIZED", user: null };
   }
 

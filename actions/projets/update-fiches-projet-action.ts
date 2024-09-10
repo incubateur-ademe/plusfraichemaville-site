@@ -17,7 +17,7 @@ export const updateFichesProjetAction = async (
     return { type: "error", message: "UNAUTHENTICATED", projet: null };
   }
 
-  const canUpdateProjet = await new PermissionManager().canEditProject(session.user.id, projetId);
+  const canUpdateProjet = await new PermissionManager().canEditProject(projetId);
 
   if (!canUpdateProjet) {
     return { type: "error", message: "UNAUTHORIZED", projet: null };

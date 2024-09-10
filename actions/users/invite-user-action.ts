@@ -23,7 +23,7 @@ export const inviteMemberAction = async (
     const currentUser = await getUserWithCollectivites(session.user.id);
 
     const projet = await getProjetById(projectId);
-    const canShareProject = await new PermissionManager().canShareProject(session.user.id, projectId);
+    const canShareProject = await new PermissionManager().canShareProject(projectId);
     if (!canShareProject || !projet || !currentUser) {
       return { type: "error", message: "UNAUTHORIZED", updatedProjet: null };
     }

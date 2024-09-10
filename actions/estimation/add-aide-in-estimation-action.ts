@@ -43,7 +43,7 @@ export const addAideInEstimationAction = async (
       return { type: "error", message: "ESTIMATION_DOESNT_EXIST" };
     }
 
-    const canUpdateProjet = await new PermissionManager().canEditProject(session.user.id, estimation.projet_id);
+    const canUpdateProjet = await new PermissionManager().canEditProject(estimation.projet_id);
     if (!canUpdateProjet) {
       return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
     }

@@ -27,7 +27,7 @@ export const deleteAideInEstimationAction = async (
     return { type: "error", message: "ESTIMATION_DOESNT_EXIST" };
   }
 
-  if (!(await new PermissionManager().canEditProject(session.user.id, estimation.projet_id))) {
+  if (!(await new PermissionManager().canEditProject(estimation.projet_id))) {
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 
