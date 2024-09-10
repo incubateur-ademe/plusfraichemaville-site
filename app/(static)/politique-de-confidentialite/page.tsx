@@ -38,6 +38,13 @@ export default async function PagePolitiqueDeConfidentialite() {
             serviceType: "Hébergement",
             policyUrl: "https://scalingo.com/fr/contrat-gestion-traitements-donnees-personnelles",
           },
+          {
+            name: "Ragtime",
+            country: "France",
+            hostingCountry: "France",
+            serviceType: "Agent conversationnel",
+            policyUrl: "https://ragtime.ai",
+          },
         ]}
       />
     </div>
