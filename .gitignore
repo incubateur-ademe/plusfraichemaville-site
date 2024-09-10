@@ -37,3 +37,4 @@ next-env.d.ts
 .sentryclirc
 
 yarn.lock
+certificates
