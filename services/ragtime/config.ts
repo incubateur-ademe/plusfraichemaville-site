@@ -25,18 +25,13 @@ export const ragtimeConfig = async <T>(
 
   try {
     const response = await fetch(url, options);
-
     if (!response.ok) {
       customCaptureException(`Error in Zephyr call. Status code: ${response.status}`);
       return response.status === 500 ? failure("ERROR_500") : failure("SERVICE_ERROR");
     }
-
     const data = (await response.json()) as T;
     return success(data);
   } catch (error) {
-    if (process.env.NODE_ENV === "development") {
-      console.log(error);
-    }
     captureError(`Error in Zephyr call`, error);
     return failure("SERVICE_ERROR");
   }

@@ -15,7 +15,7 @@ export const retrieveConversationAction = async (
 ): Promise<
   ResponseAction<{
     conversationHistory?: ConversationHistory;
-    conversationId: string | null;
+    conversationId?: string | null;
     messageError?: string;
   }>
 > => {
@@ -37,9 +37,9 @@ export const retrieveConversationAction = async (
       const conversationHistory = sanitizeConversationHistoryFromRagtime(result.value);
       return { type: "success", conversationHistory, conversationId: retrievedConversation.id };
     } else {
-      return { type: "error", conversationHistory: undefined, conversationId: null, messageError: result.error };
+      return { type: "error", messageError: result.error };
     }
   } else {
-    return { type: "error", conversationHistory: undefined, conversationId: null };
+    return { type: "error" };
   }
 };
