@@ -3,7 +3,6 @@ import { sentChatMessageAction } from "@/actions/agent-conversationnel/send-chat
 import { ConversationHistory } from "@/services/ragtime/ragtime-types";
 import { useAiChatApi, useAsBatchAdapter } from "@nlux/react";
 import { useCallback, useMemo, useState } from "react";
-import toast from "react-hot-toast";
 import { useLocalStorage } from "usehooks-ts";
 
 const CONVERSATION_ID_KEY = "c-id";
@@ -19,6 +18,7 @@ export const useAiChatConfig = () => {
   const [conversationId, setConversationId] = useState<string | null | undefined>(null);
   const [savedConversationId, setSavedConversationId] = useLocalStorage<string | undefined>(CONVERSATION_ID_KEY, "");
   const [initialConversation, setInitialConversation] = useState<ConversationHistory | undefined>(undefined);
+  const [error, setError] = useState("");
 
   const api = useAiChatApi();
 
@@ -38,7 +38,10 @@ export const useAiChatConfig = () => {
         setConversationId(result.conversationId);
         setInitialConversation(result.conversationHistory);
       } else {
-        toast(result.messageError ?? "");
+        setError("Erreur de chargement");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
       }
     }
   }, [savedConversationId]);
@@ -63,5 +66,6 @@ export const useAiChatConfig = () => {
     api,
     initialConversation,
     conversationControls,
+    error,
   };
 };
