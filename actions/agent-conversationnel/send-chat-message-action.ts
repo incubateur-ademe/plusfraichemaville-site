@@ -9,6 +9,7 @@ import {
   saveConversation,
 } from "@/lib/prisma/prisma-agent-conversationnel-queries";
 import { sanitizeUrlInMessageFromRagtime } from "@/components/agent-conversationnel/helpers";
+import { generateRandomId } from "@/helpers/common";
 
 export const sentChatMessageAction = async (
   userMessage: string,
@@ -19,13 +20,11 @@ export const sentChatMessageAction = async (
     conversationId?: string;
   }>
 > => {
-  let ragtimeId = null;
+  let ragtimeConversationId = generateRandomId().toString();
   const session = await auth();
+  const userId = session?.user.id;
   let retrievedConversation;
   if (conversationId) {
-    const session = await auth();
-    const userId = session?.user.id;
-
     if (userId) {
       retrievedConversation = await retrieveLoggedConversation(conversationId, userId);
     } else {
@@ -34,10 +33,10 @@ export const sentChatMessageAction = async (
     if (!retrievedConversation) {
       return { type: "error", message: "UNAUTHORIZED" };
     }
-    ragtimeId = retrievedConversation?.ragtimeId;
+    ragtimeConversationId = retrievedConversation?.ragtimeId;
   }
-
-  const ragTimeResult = await ragtimeSender(userMessage, ragtimeId);
+  const ragtimeUserId = userId ? userId : `anonymous-${ragtimeConversationId}`;
+  const ragTimeResult = await ragtimeSender(userMessage, ragtimeUserId, ragtimeConversationId);
 
   if (ragTimeResult.success) {
     if (!conversationId) {
