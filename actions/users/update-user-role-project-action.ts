@@ -18,7 +18,9 @@ export const updateUserRoleProjectAction = async (
   if (!session || session) {
     return { type: "error", message: "UNAUTHENTICATED", member: null };
   }
-  // const canUpdateUserRole = await new PermissionManager().canUpdateUserRole(session?.user.id, userId, projectId);
+
+  // const permission = new PermissionManager(session);
+  // const canUpdateUserRole = await permission.canUpdateUserRole(session?.user.id, userId, projectId);
   //
   // if (!canUpdateUserRole) {
   //   return { type: "error", message: "UNAUTHORIZED", member: null };

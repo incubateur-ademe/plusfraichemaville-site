@@ -17,11 +17,10 @@ export async function GET(request: NextRequest) {
     return NextResponse.json([], { status: 400 });
   }
 
-  const canViewUserProject = new PermissionManager().canViewUserProject(session.user.id, userId);
-  const canUserViewCollectiviteProjets = await new PermissionManager().canUserViewCollectiviteProjets(
-    session.user.id,
-    +collectiviteId,
-  );
+  const permission = new PermissionManager(session);
+
+  const canViewUserProject = permission.canViewUserProject(userId);
+  const canUserViewCollectiviteProjets = await permission.canUserViewCollectiviteProjets(+collectiviteId);
 
   if (!canViewUserProject || !canUserViewCollectiviteProjets) {
     return NextResponse.json([], { status: 401 });
