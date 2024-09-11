@@ -34,7 +34,7 @@ export class PermissionManager {
     return this.isAdmin(projectId);
   }
 
-  canShareProject(projectId: number) {
+  async canShareProject(projectId: number) {
     return this.isAdmin(projectId);
   }
 
@@ -42,7 +42,7 @@ export class PermissionManager {
     return this.authenticatedUserId === userIdToUpdate;
   }
 
-  async canViewUserProject(userId: string) {
+  canViewUserProject(userId: string) {
     return this.authenticatedUserId === userId;
   }
 
