@@ -34,12 +34,11 @@ export class PermissionManager {
     return this.isAdmin(projectId);
   }
 
-  async canShareProject(projectId: number) {
-    // await this.ensureInitialized();
+  canShareProject(projectId: number) {
     return this.isAdmin(projectId);
   }
 
-  async canUpdateUser(userIdToUpdate: string) {
+  canUpdateUser(userIdToUpdate: string) {
     return this.authenticatedUserId === userIdToUpdate;
   }
 
