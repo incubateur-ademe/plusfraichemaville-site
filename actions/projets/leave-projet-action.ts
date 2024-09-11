@@ -11,7 +11,7 @@ export const leaveProjetAction = async (userId: string, projetId: number): Promi
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  const permissionManager = new PermissionManager();
+  const permissionManager = new PermissionManager(session);
 
   const canUpdateUser = permissionManager.canUpdateUser(userId);
 
@@ -20,7 +20,10 @@ export const leaveProjetAction = async (userId: string, projetId: number): Promi
   }
 
   try {
-    if ((await permissionManager.isAdmin(projetId)) && !(await permissionManager.checkOtherAdminsExist(projetId))) {
+    if (
+      (await permissionManager.isAdmin(projetId)) &&
+      !(await permissionManager.checkOtherAdminsExist(projetId, userId))
+    ) {
       return { type: "error", message: "PROJET_MUST_HAVE_ONE_ADMIN" };
     }
     const result = await leaveProject(userId, projetId);

@@ -15,8 +15,8 @@ export const updateRecommandationsViewedByUser = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", projet: null };
   }
-
-  if (!(await new PermissionManager().canEditProject(+projetId)) || !new PermissionManager().canUpdateUser(userId)) {
+  const permission = new PermissionManager(session);
+  if (!permission.canEditProject(+projetId) || !permission.canUpdateUser(userId)) {
     return { type: "error", message: "UNAUTHORIZED", projet: null };
   }
 

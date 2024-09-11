@@ -18,8 +18,9 @@ export const updateBookmarkedFichesSolutionsProjetAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", user: null };
   }
+  const permission = new PermissionManager(session);
 
-  if (!new PermissionManager().canUpdateUser(userId)) {
+  if (!permission.canUpdateUser(userId)) {
     return { type: "error", message: "UNAUTHORIZED", user: null };
   }
 

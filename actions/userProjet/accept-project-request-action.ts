@@ -23,7 +23,7 @@ export const acceptProjectRequestAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  const cantEditProject = await new PermissionManager().canShareProject(projectId);
+  const cantEditProject = await new PermissionManager(session).canShareProject(projectId);
 
   if (!cantEditProject) {
     return { type: "error", message: "UNAUTHORIZED" };

@@ -19,7 +19,10 @@ export const editUserInfoAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  if (!new PermissionManager().canUpdateUser(data.userId)) {
+
+  const permission = new PermissionManager(session);
+
+  if (!permission.canUpdateUser(data.userId)) {
     return { type: "error", message: "UNAUTHORIZED" };
   }
 

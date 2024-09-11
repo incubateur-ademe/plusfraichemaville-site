@@ -12,7 +12,7 @@ export const deleteProjetAction = async (projetId: number): Promise<ResponseActi
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 
-  const canDeleteProject = await new PermissionManager().canDeleteProject(projetId);
+  const canDeleteProject = await new PermissionManager(session).canDeleteProject(projetId);
 
   if (!canDeleteProject) {
     return { type: "error", message: "PROJET_DELETE_UNAUTHORIZED" };
