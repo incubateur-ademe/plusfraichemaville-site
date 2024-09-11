@@ -54,7 +54,9 @@ export const ListeProjetsCard = ({
     if (isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID)) {
       setShowInfoViewerMode(true);
     }
-    await accessProjetAction(updatedProjet.id);
+    if (currentUser) {
+      await accessProjetAction(currentUser?.id, updatedProjet.id);
+    }
   };
 
   const currentUserInfo = useMemo(
