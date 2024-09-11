@@ -5,20 +5,10 @@ import { Session } from "next-auth";
 
 export class PermissionManager {
   authenticatedUserId?: string;
-  // private initPromise: Promise<void>;
 
   constructor(session: Session | null) {
     this.authenticatedUserId = session?.user.id;
   }
-
-  // private async init() {
-  //   const session = await auth();
-  //   this.authenticatedUserId = session?.user.id;
-  // }
-
-  // private async ensureInitialized() {
-  //   await this.initPromise;
-  // }
 
   private async getUserProjectRole(projectId: number): Promise<RoleProjet | null> {
     if (!this.authenticatedUserId) {
