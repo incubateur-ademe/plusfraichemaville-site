@@ -36,7 +36,7 @@ export const Agent = ({ children }: PropsWithChildren) => {
             adapter={adapter}
             displayOptions={{ height, colorScheme: "light" }}
             className={displayOptions.rootClassName}
-            composerOptions={{ placeholder: "Envoyer un message" }}
+            composerOptions={{ placeholder: "Envoyer un message", autoFocus: true }}
             messageOptions={{
               responseRenderer: (props) => AgentResponseRenderer(props, displayOptions),
               promptRenderer: AgentPromptRenderer,
