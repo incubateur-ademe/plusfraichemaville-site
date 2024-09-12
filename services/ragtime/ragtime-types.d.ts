@@ -22,7 +22,6 @@ export type ConversationHistory = {
   message: string;
 }[];
 
-
 export interface RagtimeConversationHistory {
   id: string;
   createdOn: string;
