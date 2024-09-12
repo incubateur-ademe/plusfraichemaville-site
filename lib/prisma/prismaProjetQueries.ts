@@ -34,6 +34,7 @@ export const projetPublicSelect = {
       role: true,
       invitation_status: true,
       user_id: true,
+      nb_views: true,
     },
   },
 };
@@ -202,6 +203,8 @@ export const createOrUpdateProjet = async ({
           role: RoleProjet.ADMIN,
           invitation_status: InvitationStatus.ACCEPTED,
           invitation_token: null,
+          nb_views: 1,
+          last_viewed_at: new Date(),
         },
       },
     },

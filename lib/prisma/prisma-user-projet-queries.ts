@@ -296,3 +296,13 @@ export const renewOrCreateProjectJoinRequest = async (
     },
   });
 };
+
+export const updateLastAccessToProjetByUser = async (userProjetLink: user_projet): Promise<user_projet> => {
+  return prismaClient.user_projet.update({
+    where: { id: userProjetLink.id },
+    data: {
+      last_viewed_at: new Date(),
+      nb_views: (userProjetLink.nb_views || 0) + 1,
+    },
+  });
+};

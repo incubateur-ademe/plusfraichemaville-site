@@ -28,6 +28,7 @@ export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
     role: true;
     invitation_status: true;
     user_id: true;
+    nb_views: true;
   };
 }>;
 
