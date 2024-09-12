@@ -19,7 +19,7 @@ export interface AiEvent {
 
 export type ConversationHistory = {
   role: AiRole;
-  message: string;
+  message: string | string[];
 }[];
 
 export interface RagtimeConversationHistory {

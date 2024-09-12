@@ -22,7 +22,7 @@ export const useAiChatConfig = () => {
 
   const api = useAiChatApi();
 
-  const adapter = useAsBatchAdapter(async (message: string): Promise<string> => {
+  const adapter = useAsBatchAdapter(async (message: string): Promise<string[] | string> => {
     const result = await sentChatMessageAction(message, conversationId);
     if (result.type === "success") {
       setConversationId(result.conversationId);

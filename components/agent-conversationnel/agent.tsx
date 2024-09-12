@@ -41,6 +41,7 @@ export const Agent = ({ children }: PropsWithChildren) => {
               responseRenderer: (props) => AgentResponseRenderer(props, displayOptions),
               promptRenderer: AgentPromptRenderer,
             }}
+            // @ts-ignore
             initialConversation={initialConversation}
             conversationOptions={{
               conversationStarters: [

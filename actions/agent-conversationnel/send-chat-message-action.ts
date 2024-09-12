@@ -8,14 +8,13 @@ import {
   retrieveLoggedConversation,
   saveConversation,
 } from "@/lib/prisma/prisma-agent-conversationnel-queries";
-import { sanitizeUrlInMessageFromRagtime } from "@/components/agent-conversationnel/helpers";
 
 export const sentChatMessageAction = async (
   userMessage: string,
   conversationId?: string | null,
 ): Promise<
   ResponseAction<{
-    messageResponse?: string;
+    messageResponse?: string | string[];
     conversationId?: string;
   }>
 > => {
@@ -41,13 +40,12 @@ export const sentChatMessageAction = async (
       retrievedConversation = await saveConversation(ragTimeResult.value.conversationId, session?.user.id);
     }
 
-    const responseText = ragTimeResult.value.events.find((event) => event.type === "message");
+    const responses = ragTimeResult.value.events.filter((event) => event.type === "message").map((e) => e.data);
     return {
       type: "success",
       conversationId: retrievedConversation?.id,
-      messageResponse: responseText?.data
-        ? sanitizeUrlInMessageFromRagtime(responseText.data)
-        : "Je n'ai pu trouver de réponse satisfaisante, pouvez-vous reformuler votre question ?",
+      messageResponse:
+        responses || "Je n'ai pu trouver de réponse satisfaisante, pouvez-vous reformuler votre question ?",
     };
   } else {
     return {
