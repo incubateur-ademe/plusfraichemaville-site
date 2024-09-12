@@ -13,7 +13,7 @@ export const accessProjetAction = async (userId: string, projectId: number): Pro
     if (!session) {
       return { type: "error", message: "UNAUTHENTICATED" };
     }
-    const canUpdateUser = new PermissionManager().canUpdateUser(userId, session.user.id);
+    const canUpdateUser = new PermissionManager(session).canUpdateUser(userId);
 
     if (!canUpdateUser) {
       return { type: "error", message: "UNAUTHORIZED" };
