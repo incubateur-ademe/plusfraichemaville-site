@@ -13,7 +13,10 @@ export const getUserInfoAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  if (!new PermissionManager().canUpdateUser(userId, session.user.id)) {
+
+  const permission = new PermissionManager(session);
+
+  if (!permission.canUpdateUser(userId)) {
     return { type: "error", message: "UNAUTHORIZED" };
   }
 

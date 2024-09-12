@@ -29,6 +29,8 @@ export const success = {
 
 export const error = {
   ALREADY_SENT: "Une demande est déjà en cours pour ce projet.",
+  ERROR_500: "Erreur de réponse du serveur. Merci de réessayer plus tard.",
+  SERVICE_ERROR: "Une erreur s'est produite. Merci de réessayer ou de contacter notre support.",
   UNAUTHENTICATED: "Utilisateur non authentifié.",
   INVITATION_RESEND_DELAY_TOO_SHORT: "Veuillez attendre 10 minutes avant de renvoyer une invitation.",
   UNAUTHORIZED: "Vous ne disposez pas des droits nécessaires pour cette opération.",

@@ -13,11 +13,12 @@ import { AgentLoader } from "./agent-loader";
 import { AgentResponseRenderer } from "./renderers/agent-renderer-response";
 import { AgentPromptRenderer } from "./renderers/agent-renderer-prompt";
 import dynamic from "next/dynamic";
+import { AgentError } from "./agent-error";
 
 const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.AgentHeader));
 
 export const Agent = ({ children }: PropsWithChildren) => {
-  const { adapter, api, initialConversation, conversationControls } = useAiChatConfig();
+  const { adapter, api, initialConversation, conversationControls, error } = useAiChatConfig();
   const { displayOptions, openChat, closeChat, expandChat } = useAiChatControls();
   const { width, height } = displayOptions.dimensions;
 
@@ -28,13 +29,14 @@ export const Agent = ({ children }: PropsWithChildren) => {
         style={{ width, height }}
       >
         <AgentHeader closeChat={closeChat} expandChat={expandChat} conversationControls={conversationControls} />
-        <div className={clsx("mx-auto max-w-3xl")}>
+        <div className={clsx("relative mx-auto max-w-3xl")}>
+          <AgentError error={error} />
           <AiChat
             api={api}
             adapter={adapter}
             displayOptions={{ height, colorScheme: "light" }}
             className={displayOptions.rootClassName}
-            composerOptions={{ placeholder: "Envoyer un message" }}
+            composerOptions={{ placeholder: "Envoyer un message", autoFocus: true }}
             messageOptions={{
               responseRenderer: (props) => AgentResponseRenderer(props, displayOptions),
               promptRenderer: AgentPromptRenderer,

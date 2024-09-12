@@ -1,53 +1,71 @@
 import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
 import { RoleProjet } from "@prisma/client";
 import { getOtherAdmins, getUserProjet } from "@/lib/prisma/prisma-user-projet-queries";
+import { Session } from "next-auth";
 
 export class PermissionManager {
-  private async getUserProjectRole(userId: string, projectId: number): Promise<RoleProjet | null> {
-    return (await getUserProjet(userId, projectId))?.role ?? null;
+  authenticatedUserId?: string;
+
+  constructor(session: Session | null) {
+    this.authenticatedUserId = session?.user.id;
   }
 
-  async checkOtherAdminsExist(currentUserId: string, projectId: number) {
-    return (await getOtherAdmins(currentUserId, projectId)).length > 0;
+  private async getUserProjectRole(projectId: number): Promise<RoleProjet | null> {
+    if (!this.authenticatedUserId) {
+      return null;
+    }
+    return (await getUserProjet(this.authenticatedUserId, projectId))?.role ?? null;
   }
 
-  async isAdmin(userId: string, projectId: number): Promise<boolean> {
-    const role = await this.getUserProjectRole(userId, projectId);
+  async checkOtherAdminsExist(projectId: number, targetUserId: string) {
+    return (await getOtherAdmins(targetUserId, projectId)).length > 0;
+  }
+
+  async isAdmin(projectId: number): Promise<boolean> {
+    const role = await this.getUserProjectRole(projectId);
     return role === RoleProjet.ADMIN;
   }
 
-  async canEditProject(userId: string, projectId: number) {
-    return this.isAdmin(userId, projectId);
+  async canEditProject(projectId: number) {
+    return this.isAdmin(projectId);
   }
 
-  async canDeleteProject(userId: string, projectId: number) {
-    return this.isAdmin(userId, projectId);
+  async canDeleteProject(projectId: number) {
+    return this.isAdmin(projectId);
   }
 
-  async canShareProject(userId: string, projectId: number) {
-    return this.isAdmin(userId, projectId);
+  async canShareProject(projectId: number) {
+    return this.isAdmin(projectId);
   }
 
-  canUpdateUser(userIdToUpdate: string, userIdUpdating: string) {
-    return userIdToUpdate === userIdUpdating;
+  canUpdateUser(userIdToUpdate: string) {
+    return this.authenticatedUserId === userIdToUpdate;
   }
 
-  canViewUserProject(authenticatedUserId: string, userId: string) {
-    return authenticatedUserId === userId;
+  canViewUserProject(userId: string) {
+    return this.authenticatedUserId === userId;
   }
 
-  async canUpdateUserRole(updatingUserId: string, targetUserId: string, projectId: number) {
-    if (!(await this.isAdmin(updatingUserId, projectId))) {
+  async canUpdateUserRole(targetUserId: string, projectId: number) {
+    if (!this.authenticatedUserId) {
       return false;
-    } else if (updatingUserId !== targetUserId) {
+    }
+
+    if (!(await this.isAdmin(projectId))) {
+      return false;
+    } else if (this.authenticatedUserId !== targetUserId) {
       return true;
     } else {
-      return await this.checkOtherAdminsExist(updatingUserId, projectId);
+      return await this.checkOtherAdminsExist(projectId, targetUserId);
     }
   }
 
-  async canUserViewCollectiviteProjets(userId: string, collectiviteId: number): Promise<boolean> {
-    const user = await getUserWithCollectivites(userId);
+  async canUserViewCollectiviteProjets(collectiviteId: number): Promise<boolean> {
+    if (!this.authenticatedUserId) {
+      return false;
+    }
+
+    const user = await getUserWithCollectivites(this.authenticatedUserId);
     if (user) {
       return user.collectivites.some((collectivite) => collectivite.collectivite_id === collectiviteId);
     }

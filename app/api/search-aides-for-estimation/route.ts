@@ -28,7 +28,9 @@ export async function GET(request: NextRequest) {
   if (!projet) {
     return NextResponse.json("Projet not found", { status: 422 });
   }
-  if (!(await new PermissionManager().canEditProject(session.user.id, projet.id))) {
+
+  const permission = new PermissionManager(session);
+  if (!(await permission.canEditProject(projet.id))) {
     return NextResponse.json(null, { status: 403 });
   }
 

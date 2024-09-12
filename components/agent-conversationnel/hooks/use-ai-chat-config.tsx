@@ -18,6 +18,7 @@ export const useAiChatConfig = () => {
   const [conversationId, setConversationId] = useState<string | null | undefined>(null);
   const [savedConversationId, setSavedConversationId] = useLocalStorage<string | undefined>(CONVERSATION_ID_KEY, "");
   const [initialConversation, setInitialConversation] = useState<ConversationHistory | undefined>(undefined);
+  const [error, setError] = useState("");
 
   const api = useAiChatApi();
 
@@ -36,6 +37,11 @@ export const useAiChatConfig = () => {
       if (result.type === "success") {
         setConversationId(result.conversationId);
         setInitialConversation(result.conversationHistory);
+      } else {
+        setError("Erreur de chargement");
+        setTimeout(() => {
+          setError("");
+        }, 2000);
       }
     }
   }, [savedConversationId]);
@@ -60,5 +66,6 @@ export const useAiChatConfig = () => {
     api,
     initialConversation,
     conversationControls,
+    error,
   };
 };

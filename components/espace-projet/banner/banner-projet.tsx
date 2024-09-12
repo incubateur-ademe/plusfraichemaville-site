@@ -65,8 +65,8 @@ export default function BannerProjet({ className }: { className?: string }) {
           </div>
           <div className="flex gap-4">
             {isLecteur && (
-              <div className="rounded-xl bg-white px-4 py-2">
-                <LecteurModeLabel />
+              <div className="flex rounded-xl bg-white px-4 py-2">
+                <LecteurModeLabel imageClassname="h-6 w-6" />
               </div>
             )}
             <Suspense>

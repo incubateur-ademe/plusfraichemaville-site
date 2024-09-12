@@ -1,7 +1,7 @@
 "use server";
 
 import { ResponseAction } from "../actions-types";
-import { ConversationHistory, RagtimeConversationHistory } from "@/services/ragtime/ragtime-types";
+import { ConversationHistory } from "@/services/ragtime/ragtime-types";
 import { auth } from "@/lib/next-auth/auth";
 import {
   retrieveAnonymousConversation,
@@ -15,12 +15,13 @@ export const retrieveConversationAction = async (
 ): Promise<
   ResponseAction<{
     conversationHistory?: ConversationHistory;
-    conversationId: string | null;
+    conversationId?: string | null;
+    messageError?: string;
   }>
 > => {
   const session = await auth();
   const userId = session?.user.id;
-  let ragtimeConversationHistory: RagtimeConversationHistory;
+
   let retrievedConversation;
 
   if (userId) {
@@ -30,11 +31,15 @@ export const retrieveConversationAction = async (
   }
 
   if (retrievedConversation) {
-    ragtimeConversationHistory = await ragtimeConversationRetriever(retrievedConversation.ragtimeId);
-    const conversationHistory = sanitizeConversationHistoryFromRagtime(ragtimeConversationHistory);
+    const result = await ragtimeConversationRetriever(retrievedConversation.ragtimeId);
 
-    return { type: "success", conversationHistory, conversationId: retrievedConversation.id };
+    if (result.success) {
+      const conversationHistory = sanitizeConversationHistoryFromRagtime(result.value);
+      return { type: "success", conversationHistory, conversationId: retrievedConversation.id };
+    } else {
+      return { type: "error", messageError: result.error };
+    }
   } else {
-    return { type: "error", conversationHistory: undefined, conversationId: null };
+    return { type: "error" };
   }
 };
