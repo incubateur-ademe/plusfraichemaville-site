@@ -9,7 +9,6 @@ import {
   saveConversation,
 } from "@/lib/prisma/prisma-agent-conversationnel-queries";
 import { sanitizeUrlInMessageFromRagtime } from "@/components/agent-conversationnel/helpers";
-import { generateRandomId } from "@/helpers/common";
 
 export const sentChatMessageAction = async (
   userMessage: string,
@@ -35,8 +34,7 @@ export const sentChatMessageAction = async (
     }
     ragtimeConversationId = retrievedConversation?.ragtimeId;
   }
-  const ragtimeUserId = userId ? userId : `anonymous-${ragtimeConversationId || generateRandomId()}`;
-  const ragTimeResult = await ragtimeSender(userMessage, ragtimeUserId, ragtimeConversationId);
+  const ragTimeResult = await ragtimeSender(userMessage, ragtimeConversationId);
 
   if (ragTimeResult.success) {
     if (!conversationId) {
