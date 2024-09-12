@@ -20,7 +20,7 @@ export const sentChatMessageAction = async (
     conversationId?: string;
   }>
 > => {
-  let ragtimeConversationId = generateRandomId().toString();
+  let ragtimeConversationId = null;
   const session = await auth();
   const userId = session?.user.id;
   let retrievedConversation;
@@ -35,7 +35,7 @@ export const sentChatMessageAction = async (
     }
     ragtimeConversationId = retrievedConversation?.ragtimeId;
   }
-  const ragtimeUserId = userId ? userId : `anonymous-${ragtimeConversationId}`;
+  const ragtimeUserId = userId ? userId : `anonymous-${ragtimeConversationId || generateRandomId()}`;
   const ragTimeResult = await ragtimeSender(userMessage, ragtimeUserId, ragtimeConversationId);
 
   if (ragTimeResult.success) {
