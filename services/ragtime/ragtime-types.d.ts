@@ -17,10 +17,17 @@ export interface AiEvent {
   data: string;
 }
 
-export type ConversationHistory = {
-  role: AiRole;
-  message: string | string[];
-}[];
+export type UserConversationHistory = {
+  role: "user";
+  message: string;
+};
+
+export type AgentConversationHistory = {
+  role: "assistant";
+  message: string[];
+};
+
+export type ConversationHistory = UserConversationHistory[] | AgentConversationHistory[];
 
 export interface RagtimeConversationHistory {
   id: string;
