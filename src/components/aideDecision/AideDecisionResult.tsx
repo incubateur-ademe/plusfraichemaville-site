@@ -1,13 +1,13 @@
-import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
-import AideDecisionSortFilter from "@/components/filters/AideDecisionSortFilter";
-import { getAideDecisionSortFieldFromCode } from "@/helpers/aideDecisionSortFilter";
-import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
+import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionBreadcrumbs";
+import AideDecisionSortFilter from "@/src/components/filters/AideDecisionSortFilter";
+import { getAideDecisionSortFieldFromCode } from "@/src/helpers/aideDecisionSortFilter";
+import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
 import Link from "next/link";
-import { GetValues } from "@/lib/strapi/types/types";
-import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
-import { notEmpty } from "@/helpers/listUtils";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { GetValues } from "@/src/lib/strapi/types/types";
+import { getAideDecisionHistoryBySlug } from "@/src/lib/strapi/queries/aideDecisionQueries";
+import { notEmpty } from "@/src/helpers/listUtils";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 type Props = {
   aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">;

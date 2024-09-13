@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { PictoType } from ".";
 import clsx from "clsx";
-import { ALL_ECHELLES } from "@/components/fiches-diagnostic/filters/echelle";
+import { ALL_ECHELLES } from "@/src/components/fiches-diagnostic/filters/echelle";
 
 type PictoEchelleType = PictoType<"territoire" | "espace" | "toutes"> & { large?: boolean };
 

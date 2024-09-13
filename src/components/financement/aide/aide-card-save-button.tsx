@@ -1,13 +1,13 @@
-import { addAideInEstimationAction } from "@/actions/estimation/add-aide-in-estimation-action";
-import { deleteAideInEstimationAction } from "@/actions/estimation/delete-aide-in-estimation-action";
-import { selectSavedOrUnsavedAssets } from "@/components/common/generic-save-fiche/assets";
-import { GenericSaveButtonElement } from "@/components/common/generic-save-fiche/generic-save-button-element";
-import { notifications } from "@/components/common/notifications";
-import { Spinner } from "@/components/common/spinner";
-import { useDelayedLoading } from "@/hooks/use-delayed-loading";
-import { useGetSavedAideInEstimationId } from "@/hooks/use-get-aide-saved-in-estimation-id";
-import { EstimationAide } from "@/lib/prisma/prismaCustomTypes";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { addAideInEstimationAction } from "@/src/actions/estimation/add-aide-in-estimation-action";
+import { deleteAideInEstimationAction } from "@/src/actions/estimation/delete-aide-in-estimation-action";
+import { selectSavedOrUnsavedAssets } from "@/src/components/common/generic-save-fiche/assets";
+import { GenericSaveButtonElement } from "@/src/components/common/generic-save-fiche/generic-save-button-element";
+import { notifications } from "@/src/components/common/notifications";
+import { Spinner } from "@/src/components/common/spinner";
+import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
+import { useGetSavedAideInEstimationId } from "@/src/hooks/use-get-aide-saved-in-estimation-id";
+import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 
 type AideCardSaveButtonProps = {

@@ -1,4 +1,4 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { TableauDeBordCardType } from "./tableau-de-bord-suivi-card";
 
 export const makeUrl: Record<TableauDeBordCardType, (_: number) => string> = {

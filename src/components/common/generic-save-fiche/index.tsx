@@ -3,7 +3,7 @@
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { GenericSaveModal } from "./generic-save-modal";
 import { GenericSaveButton } from "./generic-save-button";
-import { generateRandomId } from "@/helpers/common";
+import { generateRandomId } from "@/src/helpers/common";
 import clsx from "clsx";
 
 export type GenericSaveBaseProps = {

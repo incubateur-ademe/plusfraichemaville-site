@@ -1,11 +1,11 @@
 "use client";
 
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { FichesSolutionsProjetHeader } from ".";
 import { FichesSolutionsProjetsSelected } from "./fiches-solutions-projet-selected";
 import { AllSolutionsBoard } from "../common/all-solutions-board";
 import { FichesSolutionProjetBookmarksByEspace } from "./fiches-solutions-projet-bookmarks-by-espace";
-import { useUserStore } from "@/stores/user/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export const FichesSolutionsProjet = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());

@@ -1,15 +1,15 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
-import { PermissionManager } from "@/helpers/permission-manager";
-import { getUserByEmail, getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
+import { auth } from "@/src/lib/next-auth/auth";
+import { PermissionManager } from "@/src/helpers/permission-manager";
+import { getUserByEmail, getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 import { InvitationStatus } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
-import { EmailService } from "@/services/brevo";
-import { getProjetById, getProjetWithRelationsById } from "@/lib/prisma/prismaProjetQueries";
-import { getUserProjetByEmailAndProjet, inviteMember } from "@/lib/prisma/prisma-user-projet-queries";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
+import { EmailService } from "@/src/services/brevo";
+import { getProjetById, getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
+import { getUserProjetByEmailAndProjet, inviteMember } from "@/src/lib/prisma/prisma-user-projet-queries";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 export const inviteMemberAction = async (
   projectId: number,

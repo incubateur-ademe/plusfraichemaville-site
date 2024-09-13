@@ -1,5 +1,5 @@
 import z from "zod";
-import { CollectiviteFormSchema } from "@/forms/collectivite/collectivite-form-schema";
+import { CollectiviteFormSchema } from "@/src/forms/collectivite/collectivite-form-schema";
 
 export const ProjetInfoFormSchema = z.object({
   projetId: z.number().optional(),

@@ -1,9 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Case, Conditional } from "@/components/common/conditional-renderer";
+import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 // eslint-disable-next-line max-len
-import { CHAT_OPEN_GRAPH_CORRESPONDANCES } from "@/components/agent-conversationnel/renderers/chat-open-graph-correspondance";
-import { ChatDisplayOptions } from "@/components/agent-conversationnel/hooks/use-ai-chat-controls";
+import { CHAT_OPEN_GRAPH_CORRESPONDANCES } from "@/src/components/agent-conversationnel/renderers/chat-open-graph-correspondance";
+import { ChatDisplayOptions } from "@/src/components/agent-conversationnel/hooks/use-ai-chat-controls";
 
 export const ChatOpenGraphLink = ({
   chatMessage,

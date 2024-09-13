@@ -1,6 +1,6 @@
 "use client";
 
-import { useIsLecteur } from "@/hooks/use-is-lecteur";
+import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren } from "react";

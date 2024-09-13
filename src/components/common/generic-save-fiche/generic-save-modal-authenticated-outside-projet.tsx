@@ -1,15 +1,15 @@
 import { Select } from "@codegouvfr/react-dsfr/Select";
 
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
-import { NotificationElements, setBadgeOff } from "@/helpers/notification-badge";
-import { updateFichesProjetAction } from "@/actions/projets/update-fiches-projet-action";
-import { notifications } from "@/components/common/notifications";
+import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
+import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
+import { notifications } from "@/src/components/common/notifications";
 
 export const ModalSaveModalAuthenticatedOutsideProjet = ({
   modal,

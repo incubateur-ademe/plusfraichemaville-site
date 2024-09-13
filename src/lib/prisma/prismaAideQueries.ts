@@ -1,4 +1,4 @@
-import { prismaClient } from "@/lib/prisma/prismaClient";
+import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { aide } from "@prisma/client";
 
 export const getAideById = async (aideId: number) => {

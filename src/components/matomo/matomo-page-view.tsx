@@ -1,8 +1,8 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { acceptCookie, declineCookie, trackPageView } from "@/helpers/matomo/trackEvent";
-import { useConsent } from "@/components/cookie/consentManagement";
+import { acceptCookie, declineCookie, trackPageView } from "@/src/helpers/matomo/trackEvent";
+import { useConsent } from "@/src/components/cookie/consentManagement";
 
 export default function MatomoPageView() {
   const pathname = usePathname();

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "../types";
-import CmsRichText from "@/components/common/CmsRichText";
+import CmsRichText from "@/src/components/common/CmsRichText";
 import { AideFichePanelLine } from "./aide-fiche-panel-line";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { AideCardSaveButton } from "./aide-card-save-button";
-import { resolveAidType } from "@/components/financement/helpers";
+import { resolveAidType } from "@/src/components/financement/helpers";
 import clsx from "clsx";
-import { AidesTerritoiresFullDetailedLines } from "@/components/financement/aide/aide-info-lines";
+import { AidesTerritoiresFullDetailedLines } from "@/src/components/financement/aide/aide-info-lines";
 import { useParams } from "next/navigation";
 
 type AideFicheProps = {

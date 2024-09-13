@@ -1,6 +1,6 @@
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { UserStoreClient } from "./client";
-import { getUserInfoAction } from "@/actions/users/get-user-info-action";
+import { getUserInfoAction } from "@/src/actions/users/get-user-info-action";
 
 export const UserStoreServer = async () => {
   const session = await auth();

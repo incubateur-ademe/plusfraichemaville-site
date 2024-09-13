@@ -1,8 +1,8 @@
-import AideDecisionFirstStepEtapeCard from "@/components/aideDecision/AideDecisionFirstStepCard";
-import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
-import { getAideDecisionFirstSteps } from "@/lib/strapi/queries/aideDecisionQueries";
+import AideDecisionFirstStepEtapeCard from "@/src/components/aideDecision/AideDecisionFirstStepCard";
+import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionBreadcrumbs";
+import { getAideDecisionFirstSteps } from "@/src/lib/strapi/queries/aideDecisionQueries";
 import { Metadata } from "next";
-import { computeMetadata } from "@/helpers/metadata/helpers";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 export const metadata: Metadata = computeMetadata("Explorez nos solutions");
 

@@ -2,7 +2,7 @@
 
 import { useProjetsStore } from "./provider";
 import { useLayoutEffect } from "react";
-import { ProjetWithPublicRelations, ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const ProjetStoreClient = ({
   projets,

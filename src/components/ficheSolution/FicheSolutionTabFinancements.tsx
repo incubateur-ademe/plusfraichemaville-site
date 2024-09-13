@@ -2,9 +2,9 @@ import React from "react";
 import aidesTerittoiresLogo from "../../public/images/fiches-solutions/aides-territoires.svg";
 import Link from "next/link";
 import Image from "next/image";
-import { getRegionLabelFromCode } from "@/helpers/regions";
-import CmsRichText from "@/components/common/CmsRichText";
-import { GetValues } from "@/lib/strapi/types/types";
+import { getRegionLabelFromCode } from "@/src/helpers/regions";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import { GetValues } from "@/src/lib/strapi/types/types";
 
 export default function FicheSolutionTabFinancements({
   ficheSolution,

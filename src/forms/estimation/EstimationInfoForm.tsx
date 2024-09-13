@@ -1,21 +1,21 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { estimation } from "@prisma/client";
 import clsx from "clsx";
 
-import { EstimationFormData, EstimationFormSchema } from "@/forms/estimation/EstimationFormSchema";
+import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation/EstimationFormSchema";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
-import { createEstimationAction } from "@/actions/estimation/create-estimation-action";
+import { createEstimationAction } from "@/src/actions/estimation/create-estimation-action";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { FicheSolutionSmallCardContainer } from "@/components/ficheSolution/fiche-solution-small-card-container";
-import { FicheSolutionSmallCard } from "@/components/ficheSolution/fiche-solution-small-card";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { FicheSolutionSmallCardContainer } from "@/src/components/ficheSolution/fiche-solution-small-card-container";
+import { FicheSolutionSmallCard } from "@/src/components/ficheSolution/fiche-solution-small-card";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useRouter } from "next/navigation";
-import { notifications } from "@/components/common/notifications";
-import { useModalStore } from "@/stores/modal/provider";
+import { notifications } from "@/src/components/common/notifications";
+import { useModalStore } from "@/src/stores/modal/provider";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
   const router = useRouter();

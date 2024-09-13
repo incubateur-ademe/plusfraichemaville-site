@@ -1,5 +1,5 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { useRecommandationsViewed } from "@/hooks/use-recommandations-viewed";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { useRecommandationsViewed } from "@/src/hooks/use-recommandations-viewed";
 import clsx from "clsx";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";

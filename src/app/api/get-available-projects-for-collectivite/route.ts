@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "@/lib/next-auth/auth";
-import { PermissionManager } from "@/helpers/permission-manager";
-import { getAvailableProjectsForCollectivite } from "@/lib/prisma/prismaProjetQueries";
+import { authOptions } from "@/src/lib/next-auth/auth";
+import { PermissionManager } from "@/src/helpers/permission-manager";
+import { getAvailableProjectsForCollectivite } from "@/src/lib/prisma/prismaProjetQueries";
 
 export async function GET(request: NextRequest) {
   const collectiviteId = request.nextUrl.searchParams.get("collectiviteId");

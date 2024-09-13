@@ -1,4 +1,4 @@
-import { error, success } from "@/helpers/messages";
+import { error, success } from "@/src/helpers/messages";
 import toast from "react-hot-toast";
 
 export const messages = {

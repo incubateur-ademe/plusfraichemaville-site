@@ -3,8 +3,8 @@ import { FicheSolutionSmallCardContainer } from "../ficheSolution/fiche-solution
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ChangeEvent, useRef } from "react";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { updateFichesSolutionsProjetAction } from "@/actions/projets/update-fiches-solutions-projet-action";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { updateFichesSolutionsProjetAction } from "@/src/actions/projets/update-fiches-solutions-projet-action";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
 import { notifications } from "../common/notifications";
 

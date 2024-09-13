@@ -1,4 +1,4 @@
-import { getFicheSolutionByIds } from "@/lib/strapi/queries/fichesSolutionsQueries";
+import { getFicheSolutionByIds } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {

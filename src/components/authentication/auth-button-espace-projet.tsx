@@ -1,6 +1,6 @@
 "use client";
 
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";

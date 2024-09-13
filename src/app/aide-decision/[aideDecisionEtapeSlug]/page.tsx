@@ -1,18 +1,18 @@
-import AideDecisionEtapeCard from "@/components/aideDecision/AideDecisionEtapeCard";
+import AideDecisionEtapeCard from "@/src/components/aideDecision/AideDecisionEtapeCard";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import AideDecisionResult from "@/components/aideDecision/AideDecisionResult";
-import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
+import AideDecisionResult from "@/src/components/aideDecision/AideDecisionResult";
+import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionBreadcrumbs";
 import {
   getAideDecisionBySlug,
   getAideDecisionHistoryBySlug,
   getAllAideDecisionSlugs,
-} from "@/lib/strapi/queries/aideDecisionQueries";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { PFMV_ROUTES } from "@/helpers/routes";
+} from "@/src/lib/strapi/queries/aideDecisionQueries";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { Metadata } from "next";
-import { computeMetadata } from "@/helpers/metadata/helpers";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 type AideDecisionPageProps = {
   params: { aideDecisionEtapeSlug: string };

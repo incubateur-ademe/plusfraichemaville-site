@@ -1,7 +1,7 @@
 "use client";
 import { signIn } from "next-auth/react";
 import React from "react";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 
 const messages = {

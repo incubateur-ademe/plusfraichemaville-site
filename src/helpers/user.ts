@@ -1,5 +1,5 @@
-import { UserInfos } from "@/stores/user/store";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { UserInfos } from "@/src/stores/user/store";
+import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { collectivite } from "@prisma/client";
 
 export const hasAllRequiredFieldsSet = (user: UserInfos) =>

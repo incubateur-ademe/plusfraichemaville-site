@@ -1,11 +1,11 @@
 import React from "react";
-import { getCoutFiche, getLabelCoutFourniture } from "@/helpers/cout/cout-fiche-solution";
-import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
-import { GetValues } from "@/lib/strapi/types/types";
-import { getPorteeBaisseTemperatureLabelFromCode } from "@/helpers/porteeBaisseTemperatureFicheSolution";
+import { getCoutFiche, getLabelCoutFourniture } from "@/src/helpers/cout/cout-fiche-solution";
+import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
+import { GetValues } from "@/src/lib/strapi/types/types";
+import { getPorteeBaisseTemperatureLabelFromCode } from "@/src/helpers/porteeBaisseTemperatureFicheSolution";
 import baisseICUIcon from "../../public/images/fiches-solutions/picto-thermometre.svg";
 import Image from "next/image";
-import { TypeFiche } from "@/helpers/common";
+import { TypeFiche } from "@/src/helpers/common";
 
 export default function FicheSolutionInfoComparatif({
   ficheSolution,

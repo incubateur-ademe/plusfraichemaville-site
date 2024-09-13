@@ -1,7 +1,7 @@
-import { FichesDiagnostic } from "@/components/fiches-diagnostic/fiches-diagnostic";
-import { getAllFichesDiagnostic } from "@/lib/strapi/queries/fiches-diagnostic-queries";
+import { FichesDiagnostic } from "@/src/components/fiches-diagnostic/fiches-diagnostic";
+import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { Metadata } from "next";
-import { computeMetadata } from "@/helpers/metadata/helpers";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 export const metadata: Metadata = computeMetadata("Évaluez la surchauffe");
 

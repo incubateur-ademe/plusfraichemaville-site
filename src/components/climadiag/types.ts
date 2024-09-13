@@ -1,4 +1,4 @@
-import { ClimadiagTemperatureProjection, ProjectionsIndicateurClimadiag } from "@/lib/prisma/prismaCustomTypes";
+import { ClimadiagTemperatureProjection, ProjectionsIndicateurClimadiag } from "@/src/lib/prisma/prismaCustomTypes";
 import { climadiag } from "@prisma/client";
 
 export interface Climadiag extends climadiag {

@@ -2,7 +2,7 @@
 
 import { ClimadiagIndicateursTabs } from "./climadiag-indicateurs-tabs";
 import { Climadiag } from "./types";
-import { ClimadiagDownloader } from "@/components/climadiag/climadiag-downloader";
+import { ClimadiagDownloader } from "@/src/components/climadiag/climadiag-downloader";
 
 export const ClimadiagIndicateurs = ({ climadiagInfo }: { climadiagInfo: Climadiag }) => {
   return (

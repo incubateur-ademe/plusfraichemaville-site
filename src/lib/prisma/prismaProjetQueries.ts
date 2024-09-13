@@ -1,7 +1,7 @@
-import { prismaClient } from "@/lib/prisma/prismaClient";
+import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
-import { generateRandomId } from "@/helpers/common";
+import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 
 export const projetIncludes = {

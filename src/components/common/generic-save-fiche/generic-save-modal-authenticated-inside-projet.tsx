@@ -1,8 +1,8 @@
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
 import Link from "next/link";
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 
 export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: GenericSaveModalCommonProps) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());

@@ -1,9 +1,9 @@
 import { ResponseRenderer, ResponseRendererProps } from "@nlux/react";
 import Markdown from "react-markdown";
 import Link from "next/link";
-import { sanitizeUrlInMessageFromRagtime } from "@/components/agent-conversationnel/helpers";
-import { ChatOpenGraphLink } from "@/components/agent-conversationnel/renderers/chat-open-graph-link";
-import { ChatDisplayOptions } from "@/components/agent-conversationnel/hooks/use-ai-chat-controls";
+import { sanitizeUrlInMessageFromRagtime } from "@/src/components/agent-conversationnel/helpers";
+import { ChatOpenGraphLink } from "@/src/components/agent-conversationnel/renderers/chat-open-graph-link";
+import { ChatDisplayOptions } from "@/src/components/agent-conversationnel/hooks/use-ai-chat-controls";
 
 export const AgentResponseRenderer: ResponseRenderer<string> = (
   props: ResponseRendererProps<string>,

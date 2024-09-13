@@ -1,8 +1,8 @@
 "use client";
 
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { DisplayUserName } from "../common/display-user-name";
-import { selectEspaceByCode } from "@/components/filters/TypeEspaceFilter";
+import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
 
 export const TableauDeBordSuiviCardInfoProjet = () => {
   const current = useProjetsStore((state) => state.getCurrentProjet());

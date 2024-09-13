@@ -1,6 +1,6 @@
 "use client";
 
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import FicheSolutionCardWithUserInfo, { FicheSolutionCardWithUserInfoProps } from "./FicheSolutionCardWithUserInfo";
 import { makeFicheSolutionCompleteUrlApi, makeFicheSolutionUrlApi } from "./helpers";
 import { FicheSolutionResponse } from "./type";

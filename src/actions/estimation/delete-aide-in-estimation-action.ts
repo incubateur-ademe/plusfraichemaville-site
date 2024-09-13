@@ -1,12 +1,12 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { deleteAideInEstimation, getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { EstimationAide } from "@/lib/prisma/prismaCustomTypes";
+import { deleteAideInEstimation, getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
 import { Prisma } from "@prisma/client";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const deleteAideInEstimationAction = async (
   estimationId: number,

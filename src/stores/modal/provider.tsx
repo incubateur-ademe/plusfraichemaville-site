@@ -2,7 +2,7 @@
 
 import { createContext, type ReactNode, useContext, useRef } from "react";
 import { type StoreApi, useStore } from "zustand";
-import { createModalStore, initModalStore, ModalStore } from "@/stores/modal/store";
+import { createModalStore, initModalStore, ModalStore } from "@/src/stores/modal/store";
 
 export const ModalStoreContext = createContext<StoreApi<ModalStore> | null>(null);
 

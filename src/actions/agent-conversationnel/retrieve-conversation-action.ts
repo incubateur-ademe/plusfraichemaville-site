@@ -1,14 +1,14 @@
 "use server";
 
 import { ResponseAction } from "../actions-types";
-import { ConversationHistory } from "@/services/ragtime/ragtime-types";
-import { auth } from "@/lib/next-auth/auth";
+import { ConversationHistory } from "@/src/services/ragtime/ragtime-types";
+import { auth } from "@/src/lib/next-auth/auth";
 import {
   retrieveAnonymousConversation,
   retrieveLoggedConversation,
-} from "@/lib/prisma/prisma-agent-conversationnel-queries";
-import { ragtimeConversationRetriever } from "@/services/ragtime/ragtime-conversation-retriever";
-import { sanitizeConversationHistoryFromRagtime } from "@/components/agent-conversationnel/helpers";
+} from "@/src/lib/prisma/prisma-agent-conversationnel-queries";
+import { ragtimeConversationRetriever } from "@/src/services/ragtime/ragtime-conversation-retriever";
+import { sanitizeConversationHistoryFromRagtime } from "@/src/components/agent-conversationnel/helpers";
 
 export const retrieveConversationAction = async (
   conversationId: string,

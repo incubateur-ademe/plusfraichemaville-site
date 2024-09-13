@@ -1,4 +1,4 @@
-import { ProjectionsIndicateurClimadiag } from "@/lib/prisma/prismaCustomTypes";
+import { ProjectionsIndicateurClimadiag } from "@/src/lib/prisma/prismaCustomTypes";
 import { ClimadiagYear } from "./types";
 import clsx from "clsx";
 

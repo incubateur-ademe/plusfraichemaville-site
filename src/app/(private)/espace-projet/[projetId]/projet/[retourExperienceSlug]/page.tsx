@@ -1,4 +1,4 @@
-import { RetourExperience } from "@/components/projet/projet-retour-experience";
+import { RetourExperience } from "@/src/components/projet/projet-retour-experience";
 
 export default async function RetourExperiencePage({
   params,

@@ -1,4 +1,4 @@
-import { ProjetInfoForm } from "@/forms/projet/ProjetInfoForm";
+import { ProjetInfoForm } from "@/src/forms/projet/ProjetInfoForm";
 
 export default async function CreateProjetPage() {
   return (

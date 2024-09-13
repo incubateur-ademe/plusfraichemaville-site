@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
-import { getAllFichesSolutions } from "@/lib/strapi/queries/fichesSolutionsQueries";
-import { getRetoursExperiences } from "@/lib/strapi/queries/retoursExperienceQueries";
-import { getAllFichesDiagnostic } from "@/lib/strapi/queries/fiches-diagnostic-queries";
+import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
+import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
+import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_URL_SITE ?? "";

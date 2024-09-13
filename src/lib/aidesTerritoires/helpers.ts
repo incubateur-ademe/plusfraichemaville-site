@@ -1,6 +1,6 @@
-import { FicheSolution } from "@/components/ficheSolution/type";
-import { IApiAidesTerritoiresQueryToken, IApiAidesTerritoiresResponse } from "@/lib/aidesTerritoires/types";
-import { captureError } from "@/lib/sentry/sentryCustomMessage";
+import { FicheSolution } from "@/src/components/ficheSolution/type";
+import { IApiAidesTerritoiresQueryToken, IApiAidesTerritoiresResponse } from "@/src/lib/aidesTerritoires/types";
+import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import * as Sentry from "@sentry/nextjs";
 import { revalidateTag } from "next/cache";
 

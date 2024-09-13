@@ -1,4 +1,4 @@
-import { useModalStore } from "@/stores/modal/provider";
+import { useModalStore } from "@/src/stores/modal/provider";
 import Image from "next/image";
 
 export const LecteurModeLabel = ({ imageClassname }: { imageClassname?: string }) => {

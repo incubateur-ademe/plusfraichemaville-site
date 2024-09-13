@@ -1,6 +1,6 @@
-import { formatNumberWithSpaces } from "@/helpers/common";
-import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { computeGlobalFicheSolutionPrice } from "@/src/helpers/cout/cout-materiau";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import { estimation } from "@prisma/client";
 import { useMemo } from "react";
 

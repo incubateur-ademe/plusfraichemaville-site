@@ -1,8 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
-import { GetValues } from "@/lib/strapi/types/types";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { GetValues } from "@/src/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export default function AideDecisionEtapeCard({
   aideDecisionEtape,

@@ -2,17 +2,17 @@
 import { estimation } from "@prisma/client";
 import clsx from "clsx";
 
-import { EstimationCardPriceInfo } from "@/components/estimation/estimation-card-price-info";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import React, { useMemo } from "react";
-import { EstimationDeleteModal } from "@/components/estimation/estimation-delete-modal";
+import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
-import { isComplete } from "@/helpers/estimation";
-import { dateToStringWithTime } from "@/helpers/dateUtils";
+import { isComplete } from "@/src/helpers/estimation";
+import { dateToStringWithTime } from "@/src/helpers/dateUtils";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { estimationModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
-import { useEstimationGlobalPrice } from "@/hooks/use-estimation-global-price";
-import { useModalStore } from "@/stores/modal/provider";
+import { estimationModal } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
+import { useEstimationGlobalPrice } from "@/src/hooks/use-estimation-global-price";
+import { useModalStore } from "@/src/stores/modal/provider";
 
 export const EstimationOverviewCard = ({
   estimation,

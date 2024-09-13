@@ -1,14 +1,14 @@
 "use server";
 import "server-only";
-import { solutionRetourExperienceFilter, StrapiFilter } from "@/lib/strapi/queries/commonStrapiFilters";
+import { solutionRetourExperienceFilter, StrapiFilter } from "@/src/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
   STRAPI_IMAGE_FRAGMENT,
-} from "@/lib/strapi/queries/strapiFragments";
-import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
-import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
-import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
+} from "@/src/lib/strapi/queries/strapiFragments";
+import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
+import { APIResponseCollection, APIResponseData } from "@/src/lib/strapi/types/types";
+import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/src/lib/strapi/helpers/strapiArrayUtils";
 
 const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,

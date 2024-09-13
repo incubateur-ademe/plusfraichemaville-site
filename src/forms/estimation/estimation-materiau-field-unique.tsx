@@ -1,10 +1,10 @@
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
-import CmsRichText from "@/components/common/CmsRichText";
-import { FicheSolution } from "@/components/ficheSolution/type";
-import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/helpers/cout/cout-fiche-solution";
-import { formatNumberWithSpaces } from "@/helpers/common";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import { FicheSolution } from "@/src/components/ficheSolution/type";
+import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/src/helpers/cout/cout-fiche-solution";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 type EstimationMateriauFieldUniqueProps = {
   ficheSolution: FicheSolution;

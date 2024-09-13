@@ -1,7 +1,11 @@
-import { generateRandomId } from "@/helpers/common";
-import { prismaClient } from "@/lib/prisma/prismaClient";
+import { generateRandomId } from "@/src/helpers/common";
+import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { estimation, Prisma } from "@prisma/client";
-import { EstimationAide, EstimationMateriauxFicheSolution, EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
+import {
+  EstimationAide,
+  EstimationMateriauxFicheSolution,
+  EstimationWithAides,
+} from "@/src/lib/prisma/prismaCustomTypes";
 
 export const getEstimationById = async (estimationId: number): Promise<estimation | null> => {
   return prismaClient.estimation.findUnique({

@@ -1,4 +1,4 @@
-import { SelectOption } from "@/components/common/SelectFormField";
+import { SelectOption } from "@/src/components/common/SelectFormField";
 
 export type NiveauMaturite = {
   label: string;

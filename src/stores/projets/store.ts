@@ -1,8 +1,8 @@
-import { EstimationAide, ProjetWithPublicRelations, ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationAide, ProjetWithPublicRelations, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
-import { upsert } from "@/helpers/listUtils";
+import { upsert } from "@/src/helpers/listUtils";
 import { updateAideInEstimation } from "./helper";
-import { currentUserIsAdmin } from "@/components/partage/helpers";
+import { currentUserIsAdmin } from "@/src/components/partage/helpers";
 
 export interface ProjetsState {
   projets: ProjetWithRelations[];

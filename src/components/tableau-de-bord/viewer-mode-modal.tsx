@@ -1,12 +1,12 @@
-import { useUserStore } from "@/stores/user/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 
 import { useEffect, useTransition } from "react";
 
-import { discardInformationAction } from "@/actions/users/discard-information-action";
-import { useModalStore } from "@/stores/modal/provider";
+import { discardInformationAction } from "@/src/actions/users/discard-information-action";
+import { useModalStore } from "@/src/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { LecteurModeLabel } from "../common/lecteur-mode-label";
 

@@ -1,16 +1,16 @@
 "use server";
 
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { auth } from "@/lib/next-auth/auth";
-import { getUserWithCollectivites, updateUser } from "@/lib/prisma/prismaUserQueries";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { auth } from "@/src/lib/next-auth/auth";
+import { getUserWithCollectivites, updateUser } from "@/src/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { UserInfoFormData, UserInfoFormSchema } from "@/forms/user/UserInfoFormSchema";
-import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
-import { CUSTOM_CANAL_ACQUISITION } from "@/helpers/canalAcquisition";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserInfoFormData, UserInfoFormSchema } from "@/src/forms/user/UserInfoFormSchema";
+import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
+import { CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },

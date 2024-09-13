@@ -1,7 +1,7 @@
 import styles from "./AideDecisionBreadcrumbsStyles.module.css";
 import Link from "next/link";
-import { AideDecisionEtapeHistory } from "@/lib/strapi/queries/commonStrapiFilters";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { AideDecisionEtapeHistory } from "@/src/lib/strapi/queries/commonStrapiFilters";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export default function AideDecisionBreadcrumbs({
   historique,

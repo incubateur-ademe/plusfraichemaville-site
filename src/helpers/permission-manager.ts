@@ -1,6 +1,6 @@
-import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
+import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 import { RoleProjet } from "@prisma/client";
-import { getOtherAdmins, getUserProjet } from "@/lib/prisma/prisma-user-projet-queries";
+import { getOtherAdmins, getUserProjet } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { Session } from "next-auth";
 
 export class PermissionManager {

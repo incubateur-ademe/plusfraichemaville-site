@@ -7,7 +7,7 @@ import { TableauDeBordSuiviCardProgress } from ".";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { makeUrl } from "./helpers";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 export type TableauDeBordCardType =
   | "diagnostic"

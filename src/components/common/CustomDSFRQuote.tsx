@@ -1,5 +1,5 @@
-import CmsRichText from "@/components/common/CmsRichText";
-import { GetValues } from "@/lib/strapi/types/types";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import { GetValues } from "@/src/lib/strapi/types/types";
 
 export default async function CustomDSFRQuote({
   citation,

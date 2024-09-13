@@ -1,14 +1,14 @@
 "use server";
 
 import { ResponseAction } from "../actions-types";
-import { ragtimeSender } from "@/services/ragtime/ragtime-sender";
-import { auth } from "@/lib/next-auth/auth";
+import { ragtimeSender } from "@/src/services/ragtime/ragtime-sender";
+import { auth } from "@/src/lib/next-auth/auth";
 import {
   retrieveAnonymousConversation,
   retrieveLoggedConversation,
   saveConversation,
-} from "@/lib/prisma/prisma-agent-conversationnel-queries";
-import { sanitizeUrlInMessageFromRagtime } from "@/components/agent-conversationnel/helpers";
+} from "@/src/lib/prisma/prisma-agent-conversationnel-queries";
+import { sanitizeUrlInMessageFromRagtime } from "@/src/components/agent-conversationnel/helpers";
 
 export const sentChatMessageAction = async (
   userMessage: string,

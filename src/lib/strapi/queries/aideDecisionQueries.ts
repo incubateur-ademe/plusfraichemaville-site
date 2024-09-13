@@ -4,16 +4,16 @@ import {
   AideDecisionEtapeHistory,
   solutionRetourExperienceFilter,
   StrapiFilter,
-} from "@/lib/strapi/queries/commonStrapiFilters";
+} from "@/src/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
   STRAPI_IMAGE_FRAGMENT,
-} from "@/lib/strapi/queries/strapiFragments";
-import { strapiGraphQLCall } from "@/lib/strapi/strapiClient";
-import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
-import { getHistoryFromAideDecisionEtape } from "@/lib/strapi/helpers/getHistoryFromAideDecision";
-import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/lib/strapi/helpers/strapiArrayUtils";
+} from "@/src/lib/strapi/queries/strapiFragments";
+import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
+import { APIResponseCollection, APIResponseData } from "@/src/lib/strapi/types/types";
+import { getHistoryFromAideDecisionEtape } from "@/src/lib/strapi/helpers/getHistoryFromAideDecision";
+import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/src/lib/strapi/helpers/strapiArrayUtils";
 
 const GET_FILTERED_AIDE_DECISION_ETAPE = (
   strapiFilter: StrapiFilter,

@@ -1,11 +1,11 @@
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 // eslint-disable-next-line max-len
-import { EstimationMateriauxFicheSolutionRecap } from "@/components/estimation/materiaux-modal/estimation-materiaux-fiche-solution-recap";
+import { EstimationMateriauxFicheSolutionRecap } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-fiche-solution-recap";
 import { useMemo } from "react";
-import EstimationMateriauGlobalPriceFooter from "@/forms/estimation/estimation-materiau-global-price-footer";
+import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { notifications } from "@/components/common/notifications";
-import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
+import { notifications } from "@/src/components/common/notifications";
+import { computeGlobalFicheSolutionPrice } from "@/src/helpers/cout/cout-materiau";
 
 type EstimationMateriauxValidationProps = {
   estimationsFicheSolution: EstimationMateriauxFicheSolution[];

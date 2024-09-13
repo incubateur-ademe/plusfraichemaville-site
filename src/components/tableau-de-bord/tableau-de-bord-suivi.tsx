@@ -1,4 +1,4 @@
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bord";
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
 
@@ -8,9 +8,9 @@ import {
 } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
 import { TableauDeBordSuiviCardInfoProjet } from "./tableau-de-bord-suivi-card-info-projet";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
-import { getLastCompletedEstimation } from "@/helpers/estimation";
+import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 // eslint-disable-next-line max-len
-import { TableauDeBordSuiviWithEstimation } from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
+import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 
 export const TableauDeBordSuivi = () => {
   return (

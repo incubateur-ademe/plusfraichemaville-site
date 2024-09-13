@@ -3,7 +3,7 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 const SignoutButton = () => {
   const router = useRouter();

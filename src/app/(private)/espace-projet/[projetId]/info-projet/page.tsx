@@ -1,8 +1,8 @@
 "use client";
-import { currentUserIsAdmin } from "@/components/partage/helpers";
-import { ProjetInfoForm } from "@/forms/projet/ProjetInfoForm";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { useUserStore } from "@/stores/user/provider";
+import { currentUserIsAdmin } from "@/src/components/partage/helpers";
+import { ProjetInfoForm } from "@/src/forms/projet/ProjetInfoForm";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import { useShallow } from "zustand/react/shallow";
 
 export default function UpdateProjetPage() {

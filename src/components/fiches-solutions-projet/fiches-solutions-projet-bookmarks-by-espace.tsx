@@ -1,5 +1,5 @@
-import { useUserStore } from "@/stores/user/provider";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { useUserStore } from "@/src/stores/user/provider";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { FichesSolutionProjetBookmarksContainer } from "./fiches-solutions-projet-bookmarks-container";
 import { ALL_ESPACES } from "../filters/TypeEspaceFilter";
 import { FicheBookmarkedSolution } from "../common/generic-save-fiche/helpers";

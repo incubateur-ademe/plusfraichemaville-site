@@ -1,5 +1,5 @@
-import { APIResponse, GetValues } from "@/lib/strapi/types/types";
-import { AideDecisionEtapeHistory } from "@/lib/strapi/queries/commonStrapiFilters";
+import { APIResponse, GetValues } from "@/src/lib/strapi/types/types";
+import { AideDecisionEtapeHistory } from "@/src/lib/strapi/queries/commonStrapiFilters";
 
 export function getHistoryFromAideDecisionEtape(
   aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">,

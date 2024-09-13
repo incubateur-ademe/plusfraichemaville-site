@@ -1,9 +1,9 @@
-import { Separator } from "@/components/common/separator";
-import { FicheSolutionSmallCard } from "@/components/ficheSolution/fiche-solution-small-card";
-import { useEstimationGlobalPrice } from "@/hooks/use-estimation-global-price";
-import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
+import { Separator } from "@/src/components/common/separator";
+import { FicheSolutionSmallCard } from "@/src/components/ficheSolution/fiche-solution-small-card";
+import { useEstimationGlobalPrice } from "@/src/hooks/use-estimation-global-price";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { PropsWithChildren } from "react";
-import { useAidesSelectedByEstimationFetcher } from "@/hooks/use-aides-selected-by-estimation";
+import { useAidesSelectedByEstimationFetcher } from "@/src/hooks/use-aides-selected-by-estimation";
 import { countAidesByType } from "../helpers";
 
 import { AideEstimationsCardRecap } from "./aide-estimations-recap";

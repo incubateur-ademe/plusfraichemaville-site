@@ -1,7 +1,7 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
-import { setBadgeOff, NotificationElements } from "@/helpers/notification-badge";
+import { setBadgeOff, NotificationElements } from "@/src/helpers/notification-badge";
 
 export const GenericSaveModalUnauthenticated = ({ modal, type }: GenericSaveModalCommonProps) => {
   const isSolution = type === "solution";

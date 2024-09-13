@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { PartageOverviewMemberInitiales } from "./partage-overview-member-initiales";
 import { PartageOverviewMemberStatusAcceptedAdmin } from "./partage-overview-member-status-accepted-admin";
-import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { InvitationStatus } from "@prisma/client";
 import { ReactElement } from "react";
 import { PartageOverviewMemberStatusInvited } from "./partage-overview-member-status-invited";

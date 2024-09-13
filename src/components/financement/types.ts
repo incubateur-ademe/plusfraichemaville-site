@@ -1,4 +1,4 @@
-import { IApiAidesTerritoiresResponse } from "@/lib/aidesTerritoires/types";
+import { IApiAidesTerritoiresResponse } from "@/src/lib/aidesTerritoires/types";
 
 export type AidesTerritoiresAidesResponse = {
   count: number;

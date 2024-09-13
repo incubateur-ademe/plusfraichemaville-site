@@ -1,14 +1,14 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { PermissionManager } from "@/helpers/permission-manager";
-import { EmailService } from "@/services/brevo";
-import { getUserProjetById } from "@/lib/prisma/prisma-user-projet-queries";
-import { getLastEmailForUserProjet } from "@/lib/prisma/prisma-email-queries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/src/helpers/permission-manager";
+import { EmailService } from "@/src/services/brevo";
+import { getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
+import { getLastEmailForUserProjet } from "@/src/lib/prisma/prisma-email-queries";
 import { emailType } from "@prisma/client";
-import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
+import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 
 const RESEND_DELAY_MINUTES = 10;
 

@@ -1,5 +1,8 @@
 import clsx from "clsx";
-import { AideEstimationEditFiltersState, FichesDiagnosticFiltersKey } from "@/hooks/use-aide-estimation-edit-filter";
+import {
+  AideEstimationEditFiltersState,
+  FichesDiagnosticFiltersKey,
+} from "@/src/hooks/use-aide-estimation-edit-filter";
 
 type AideEditFilterProps = {
   aideFinanciereCount: number;

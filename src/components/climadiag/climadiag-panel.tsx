@@ -1,9 +1,9 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
-import { useSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
-import { ClimadiagIndicateurs } from "@/components/climadiag/climadiag-indicateurs";
+import { useSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
+import { ClimadiagIndicateurs } from "@/src/components/climadiag/climadiag-indicateurs";
 import AsyncSelect from "react-select/async";
-import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "@/components/climadiag/helpers";
+import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "@/src/components/climadiag/helpers";
 import debounce from "lodash/debounce";
 import { Climadiag, GroupedOptions } from "./types";
 

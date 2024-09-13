@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { fetchAideFromAidesTerritoiresById } from "@/lib/aidesTerritoires/fetch";
+import { fetchAideFromAidesTerritoiresById } from "@/src/lib/aidesTerritoires/fetch";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/next-auth/auth";
-import { getAideById } from "@/lib/prisma/prismaAideQueries";
+import { authOptions } from "@/src/lib/next-auth/auth";
+import { getAideById } from "@/src/lib/prisma/prismaAideQueries";
 
 export async function GET(request: NextRequest) {
   const aideId = request.nextUrl.searchParams.get("aideId");

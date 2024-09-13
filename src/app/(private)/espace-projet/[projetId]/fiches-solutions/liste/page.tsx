@@ -1,5 +1,5 @@
-import { ProtectedEspaceProjetUrl } from "@/components/common/protected-espace-projet-url";
-import { FichesSolutions } from "@/components/ficheSolution/fiches-solutions";
+import { ProtectedEspaceProjetUrl } from "@/src/components/common/protected-espace-projet-url";
+import { FichesSolutions } from "@/src/components/ficheSolution/fiches-solutions";
 
 export default async function FichesSolutionsListePage({
   searchParams,

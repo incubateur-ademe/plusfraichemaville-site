@@ -1,12 +1,12 @@
 import { FichesSolutionsProjetEmpty } from ".";
 import clsx from "clsx";
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import React from "react";
 import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
-import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
-import { useUserStore } from "@/stores/user/provider";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
+import { useUserStore } from "@/src/stores/user/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 
 type FichesSolutionsProjetsSelectedProps = {
   selectedFichesSolutionsIds?: number[];

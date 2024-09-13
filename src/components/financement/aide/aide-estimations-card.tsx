@@ -1,8 +1,8 @@
-import { dateToStringWithTime } from "@/helpers/dateUtils";
-import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
+import { dateToStringWithTime } from "@/src/helpers/dateUtils";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { PropsWithChildren } from "react";
 
-import { Separator } from "@/components/common/separator";
+import { Separator } from "@/src/components/common/separator";
 import { AideEstimationsCardDeadline } from "./aide-estimations-card-deadline";
 
 type AideEstimationsCardProps = {

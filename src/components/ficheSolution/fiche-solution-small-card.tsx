@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
+import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
 import React, { PropsWithChildren } from "react";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { makeFicheSolutionUrlApi } from "./helpers";
 import { FicheSolutionResponse } from "./type";
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 
 export function FicheSolutionSmallCard({
   ficheSolutionId,

@@ -1,6 +1,6 @@
-import { getCurrentUserRole } from "@/components/partage/helpers";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { useUserStore } from "@/stores/user/provider";
+import { getCurrentUserRole } from "@/src/components/partage/helpers";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import { RoleProjet } from "@prisma/client";
 
 export const useIsLecteur = () => {

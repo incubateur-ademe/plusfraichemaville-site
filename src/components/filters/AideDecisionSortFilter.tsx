@@ -1,7 +1,7 @@
 "use client";
-import { useAideDecisionSortFilter } from "@/hooks/useAideDecisionSortFilter";
-import { ALL_AIDE_DECISION_SORT_FIELD } from "@/helpers/aideDecisionSortFilter";
-import FilterButton from "@/components/common/FilterButton";
+import { useAideDecisionSortFilter } from "@/src/hooks/useAideDecisionSortFilter";
+import { ALL_AIDE_DECISION_SORT_FIELD } from "@/src/helpers/aideDecisionSortFilter";
+import FilterButton from "@/src/components/common/FilterButton";
 
 export default function AideDecisionSortFilter({ className }: { className?: string }) {
   const { setAideDecisionSortField, isAideDecisionSortFieldSelected } = useAideDecisionSortFilter();

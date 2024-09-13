@@ -1,5 +1,5 @@
 "use client";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import Image from "next/image";

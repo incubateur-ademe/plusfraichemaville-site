@@ -1,11 +1,11 @@
-import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { getAideSubmissionDeadlineAndName } from "../helpers";
 import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
-import { dateToStringWithoutTime } from "@/helpers/dateUtils";
+import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import clsx from "clsx";
-import { Separator } from "@/components/common/separator";
+import { Separator } from "@/src/components/common/separator";
 import React from "react";
-import CustomAccordion from "@/components/common/CustomAccordion";
+import CustomAccordion from "@/src/components/common/CustomAccordion";
 
 type AideEstimationsCardDeadlineProps = {
   estimationsAides: EstimationWithAides["estimations_aides"];

@@ -1,4 +1,4 @@
-import { Financement } from "@/components/financement";
+import { Financement } from "@/src/components/financement";
 
 export default function FinancementPage() {
   return <Financement />;

@@ -1,15 +1,15 @@
 "use client";
 
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { checkOtherAdminExists, getCurrentUserRole } from "./helpers";
-import { useUserStore } from "@/stores/user/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useTransition } from "react";
-import { leaveProjetAction } from "@/actions/projets/leave-projet-action";
+import { leaveProjetAction } from "@/src/actions/projets/leave-projet-action";
 import { notifications } from "../common/notifications";
 import { useRouter } from "next/navigation";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { RoleProjet } from "@prisma/client";
 
 const modal = createModal({

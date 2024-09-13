@@ -1,8 +1,8 @@
 import React from "react";
-import CmsRichText from "@/components/common/CmsRichText";
-import CustomAccordion from "@/components/common/CustomAccordion";
-import CustomTodoStep from "@/components/common/CustomTodoStep";
-import { GetValues } from "@/lib/strapi/types/types";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import CustomAccordion from "@/src/components/common/CustomAccordion";
+import CustomTodoStep from "@/src/components/common/CustomTodoStep";
+import { GetValues } from "@/src/lib/strapi/types/types";
 
 export default function FicheSolutionTabMiseEnOeuvre({
   ficheSolution,

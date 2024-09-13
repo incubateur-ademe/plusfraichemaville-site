@@ -1,4 +1,4 @@
-import { TableauDeBordCardType } from "@/components/tableau-de-bord/tableau-de-bord-suivi-card";
+import { TableauDeBordCardType } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card";
 import Image from "next/image";
 import { PictoType } from ".";
 import clsx from "clsx";

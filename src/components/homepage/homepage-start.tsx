@@ -2,7 +2,7 @@ import Link from "next/link";
 import { homepageData } from "./homepage-data";
 import Image from "next/image";
 import clsx from "clsx";
-import { Separator } from "@/components/common/separator";
+import { Separator } from "@/src/components/common/separator";
 
 export const HomepageStart = () => {
   const { start } = homepageData;

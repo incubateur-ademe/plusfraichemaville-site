@@ -1,6 +1,6 @@
 "use client";
-import { useMultipleValuesFilter } from "@/hooks/useMultipleValuesFilter";
-import { ALL_TYPES_SOLUTION } from "@/helpers/typeSolution";
+import { useMultipleValuesFilter } from "@/src/hooks/useMultipleValuesFilter";
+import { ALL_TYPES_SOLUTION } from "@/src/helpers/typeSolution";
 
 export default function TypeSolutionFilter({ className }: { className?: string }) {
   const FILTER_NAME = "typeSolutionFilter";

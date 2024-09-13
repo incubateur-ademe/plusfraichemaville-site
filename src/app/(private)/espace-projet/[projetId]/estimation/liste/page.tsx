@@ -1,12 +1,12 @@
 "use client";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import React from "react";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { redirect } from "next/navigation";
-import { EstimationOverviewCard } from "@/components/estimation/estimation-overview-card";
+import { EstimationOverviewCard } from "@/src/components/estimation/estimation-overview-card";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
-import { useUserStore } from "@/stores/user/provider";
+import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());

@@ -1,9 +1,9 @@
 "use client";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { EstimationInfoForm } from "@/forms/estimation/EstimationInfoForm";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { EstimationInfoForm } from "@/src/forms/estimation/EstimationInfoForm";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { ProtectedEspaceProjetUrl } from "@/components/common/protected-espace-projet-url";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { ProtectedEspaceProjetUrl } from "@/src/components/common/protected-espace-projet-url";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());

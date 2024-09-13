@@ -1,6 +1,6 @@
-import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetch";
-import { createCollectiviteByName, getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
-import { CollectiviteFormData } from "@/forms/collectivite/collectivite-form-schema";
+import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
+import { createCollectiviteByName, getOrCreateCollectivite } from "@/src/lib/prisma/prismaCollectiviteQueries";
+import { CollectiviteFormData } from "@/src/forms/collectivite/collectivite-form-schema";
 
 export const getOrCreateCollectiviteFromForm = async (data: CollectiviteFormData, userId: string) => {
   let collectiviteId = data.id;

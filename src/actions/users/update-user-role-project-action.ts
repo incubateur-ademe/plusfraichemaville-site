@@ -1,11 +1,11 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { RoleProjet } from "@prisma/client";
-import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
-import { updateUserRoleProject } from "@/lib/prisma/prisma-user-projet-queries";
+import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { updateUserRoleProject } from "@/src/lib/prisma/prisma-user-projet-queries";
 
 export const updateUserRoleProjectAction = async (
   userId: string,

@@ -1,8 +1,8 @@
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ProjetStoreClient } from "./client";
 
-import { getUserProjetsAction } from "@/actions/projets/get-user-projets-action";
-import { getPendingUserProjetsAction } from "@/actions/projets/get-pending-user-projets-action";
+import { getUserProjetsAction } from "@/src/actions/projets/get-user-projets-action";
+import { getPendingUserProjetsAction } from "@/src/actions/projets/get-pending-user-projets-action";
 
 export const ProjetStoreServer = async () => {
   const session = await auth();

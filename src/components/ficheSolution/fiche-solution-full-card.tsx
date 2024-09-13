@@ -2,12 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
+import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
 import React from "react";
-import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
-import { GetValues } from "@/lib/strapi/types/types";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
+import { GetValues } from "@/src/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useParams } from "next/navigation";
 
 export default function FicheSolutionFullCard({

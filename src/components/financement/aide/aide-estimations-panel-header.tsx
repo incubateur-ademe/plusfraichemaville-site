@@ -1,8 +1,8 @@
-import { selectEspaceByCode, TypeEspace } from "@/components/filters/TypeEspaceFilter";
+import { selectEspaceByCode, TypeEspace } from "@/src/components/filters/TypeEspaceFilter";
 import { AideEstimationsCardLabelFicheSolution } from "./aide-estimations-card-label-fiche-solution";
-import { getRegionByDepartment } from "@/lib/departements";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { Separator, SeparatorY } from "@/components/common/separator";
+import { getRegionByDepartment } from "@/src/lib/departements";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { Separator, SeparatorY } from "@/src/components/common/separator";
 import { estimation } from "@prisma/client";
 
 export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estimation }) => {

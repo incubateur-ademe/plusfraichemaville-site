@@ -2,9 +2,9 @@ import React from "react";
 import oupsImage from "../../public/images/fiches-solutions/oups.svg";
 import Image from "next/image";
 import Highlight from "@codegouvfr/react-dsfr/Highlight";
-import CmsRichText from "@/components/common/CmsRichText";
-import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import { GetValues } from "@/lib/strapi/types/types";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import { GetValues } from "@/src/lib/strapi/types/types";
 import Link from "next/link";
 
 export default function FicheSolutionTabOups({

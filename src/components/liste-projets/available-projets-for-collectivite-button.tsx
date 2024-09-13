@@ -1,6 +1,6 @@
 import Button from "@codegouvfr/react-dsfr/Button";
-import { useModalStore } from "@/stores/modal/provider";
-import { useUserStore } from "@/stores/user/provider";
+import { useModalStore } from "@/src/stores/modal/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export const AvailableProjetsForCollectiviteButton = ({ className }: { className?: string }) => {
   const setCollectiviteIdToListAvailableProjets = useModalStore(

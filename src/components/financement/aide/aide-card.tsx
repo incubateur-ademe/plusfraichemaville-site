@@ -5,9 +5,9 @@ import clsx from "clsx";
 import { AideCardSaveButton } from "./aide-card-save-button";
 import { useParams } from "next/navigation";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { useModalStore } from "@/stores/modal/provider";
-import { AidesTerritoiresCardLines } from "@/components/financement/aide/aide-info-lines";
-import { AideFichePanelLine } from "@/components/financement/aide/aide-fiche-panel-line";
+import { useModalStore } from "@/src/stores/modal/provider";
+import { AidesTerritoiresCardLines } from "@/src/components/financement/aide/aide-info-lines";
+import { AideFichePanelLine } from "@/src/components/financement/aide/aide-fiche-panel-line";
 
 type AideCardProps = {
   aide: AidesTerritoiresAide;

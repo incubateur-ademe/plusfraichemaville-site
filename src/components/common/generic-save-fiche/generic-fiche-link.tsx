@@ -1,7 +1,7 @@
 "use client";
 
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren } from "react";

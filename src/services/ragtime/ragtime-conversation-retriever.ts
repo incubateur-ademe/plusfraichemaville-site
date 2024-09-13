@@ -1,6 +1,6 @@
-import { RagtimeConversationHistory } from "@/services/ragtime/ragtime-types";
+import { RagtimeConversationHistory } from "@/src/services/ragtime/ragtime-types";
 import { ragtimeConfig, RagtimeSlug } from "./config";
-import { Result } from "@/helpers/result-manager";
+import { Result } from "@/src/helpers/result-manager";
 
 export const ragtimeConversationRetriever = async (
   conversationId: string,

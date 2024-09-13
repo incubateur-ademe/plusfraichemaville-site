@@ -1,12 +1,12 @@
-import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/lib/prisma/prisma-email-queries";
+import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/src/lib/prisma/prisma-email-queries";
 import { email, emailStatus, emailType } from "@prisma/client";
 import { brevoSender } from "./brevo-sender";
-import { ResponseAction } from "@/actions/actions-types";
-import { getOldestProjectAdmin } from "@/lib/prisma/prisma-user-projet-queries";
-import { captureError } from "@/lib/sentry/sentryCustomMessage";
-import { UserProjetWithRelations, UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { getPrimaryCollectiviteForUser } from "@/helpers/user";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { ResponseAction } from "@/src/actions/actions-types";
+import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";
+import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
+import { UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 interface Templates {
   templateId: number;

@@ -1,7 +1,7 @@
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import sumBy from "lodash/sumBy";
-import { getUniteCoutFromCode } from "@/helpers/cout/cout-common";
-import { Materiau } from "@/components/ficheSolution/type";
+import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
+import { Materiau } from "@/src/components/ficheSolution/type";
 import { formatNumberWithSpaces } from "../common";
 
 export const materiauHasNoCost = (materiau: Materiau) =>

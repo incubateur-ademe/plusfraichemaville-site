@@ -1,4 +1,4 @@
-import { EstimationAide } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
 import { ProjetsState } from "./store";
 
 export const updateAideInEstimation = (

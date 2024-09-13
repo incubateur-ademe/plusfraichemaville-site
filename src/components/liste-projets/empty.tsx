@@ -1,9 +1,9 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";
 // eslint-disable-next-line max-len
-import { AvailableProjetsForCollectiviteButton } from "@/components/liste-projets/available-projets-for-collectivite-button";
+import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
 
 export const ListProjetsHeaderEmpty = () => {
   return (

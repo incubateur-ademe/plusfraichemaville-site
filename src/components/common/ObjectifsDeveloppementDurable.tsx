@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { APIResponseData } from "@/lib/strapi/types/types";
+import { APIResponseData } from "@/src/lib/strapi/types/types";
 
 export default async function ObjectifsDeveloppementDurable({
   objectifs,

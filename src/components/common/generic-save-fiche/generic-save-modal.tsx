@@ -1,6 +1,6 @@
 import { DSFRModal } from "@/src/types/global";
 import { GenericSaveModalUnauthenticated } from "./generic-save-modal-unauthenticated";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { ModalSaveModalAuthenticatedOutsideProjet } from "./generic-save-modal-authenticated-outside-projet";
 import { ModalSaveModalAuthenticatedInsideProjet } from "./generic-save-modal-authenticated-inside-projet";
 import { useSession } from "next-auth/react";

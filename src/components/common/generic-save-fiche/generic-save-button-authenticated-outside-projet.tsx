@@ -1,9 +1,9 @@
 import { GenericSaveButtonElement } from "./generic-save-button-element";
-import { useUserStore } from "@/stores/user/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import { selectSavedOrUnsavedAssets } from "./assets";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { isFicheBookmarked } from "./helpers";
-import { setBadgeOn, NotificationElements } from "@/helpers/notification-badge";
+import { setBadgeOn, NotificationElements } from "@/src/helpers/notification-badge";
 
 export const GenericSaveAuthenticatedOutsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
   const isSolution = props.type === "solution";

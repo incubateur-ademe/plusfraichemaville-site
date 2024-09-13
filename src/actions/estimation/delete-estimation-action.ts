@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { deleteEstimation, getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { deleteEstimation, getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const deleteEstimationAction = async (estimationId: number): Promise<ResponseAction<{}>> => {
   const session = await auth();

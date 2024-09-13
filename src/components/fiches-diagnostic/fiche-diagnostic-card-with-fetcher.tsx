@@ -1,5 +1,5 @@
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheDiagnosticUrlApi } from "./helpers";
 import { FicheDiagnosticResponse } from "./types";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";

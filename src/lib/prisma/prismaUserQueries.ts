@@ -6,9 +6,9 @@ import {
   isFicheBookmarked,
   mergeFicheBookmarkedDiagnostic,
   mergeFicheBookmarkedSolutions,
-} from "@/components/common/generic-save-fiche/helpers";
-import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserWithCollectivite, UserWithProjets } from "@/lib/prisma/prismaCustomTypes";
+} from "@/src/components/common/generic-save-fiche/helpers";
+import { prismaClient } from "@/src/lib/prisma/prismaClient";
+import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
 
 export const saveAllFichesFromLocalStorage = async (

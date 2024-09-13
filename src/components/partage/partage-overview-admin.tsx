@@ -1,11 +1,11 @@
 "use client";
 
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { PartageOverviewWrapper } from "./partage-overview-wrapper";
 import { getCurrentUserRole, groupByInvitationStatus } from "./helpers";
 import { InvitationStatus, RoleProjet } from "@prisma/client";
 import { PartageOverviewMemberSection } from "./partage-overview-member-section";
-import { useUserStore } from "@/stores/user/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export const PartageOverviewAdmin = () => {
   const members = useProjetsStore((state) => state.getCurrentProjet()?.users);

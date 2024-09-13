@@ -1,17 +1,17 @@
 import { getServerSession, NextAuthOptions } from "next-auth";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { GetServerSidePropsContext, NextApiRequest, NextApiResponse } from "next";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { v4 as uuidv4 } from "uuid";
-import { prismaClient } from "@/lib/prisma/prismaClient";
-import { fetchEntrepriseFromSirenApi } from "@/lib/siren/fetch";
-import { getOrCreateCollectivite } from "@/lib/prisma/prismaCollectiviteQueries";
-import { attachUserToCollectivite } from "@/lib/prisma/prismaUserCollectiviteQueries";
-import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
-import { AgentConnectInfo } from "@/lib/prisma/prismaCustomTypes";
-import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetch";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { attachInvitationsByEmail } from "@/lib/prisma/prisma-user-projet-queries";
+import { prismaClient } from "@/src/lib/prisma/prismaClient";
+import { fetchEntrepriseFromSirenApi } from "@/src/lib/siren/fetch";
+import { getOrCreateCollectivite } from "@/src/lib/prisma/prismaCollectiviteQueries";
+import { attachUserToCollectivite } from "@/src/lib/prisma/prismaUserCollectiviteQueries";
+import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
+import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { attachInvitationsByEmail } from "@/src/lib/prisma/prisma-user-projet-queries";
 
 export const authOptions: NextAuthOptions = {
   // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493

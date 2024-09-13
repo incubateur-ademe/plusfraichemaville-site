@@ -1,5 +1,5 @@
-import { APIResponseData } from "@/lib/strapi/types/types";
-import { UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
+import { APIResponseData } from "@/src/lib/strapi/types/types";
+import { UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
 
 type AideDecisionSortFilter = {
   label: string;

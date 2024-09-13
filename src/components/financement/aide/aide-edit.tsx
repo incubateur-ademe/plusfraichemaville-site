@@ -5,22 +5,22 @@ import { AideEstimationsPanelHeader } from "./aide-estimations-panel-header";
 import { useParams } from "next/navigation";
 import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
-import { useAidesByEstimationFetcher } from "@/hooks/use-aides-by-estimation";
+import { useAidesByEstimationFetcher } from "@/src/hooks/use-aides-by-estimation";
 import { AideEditFilter } from "./aide-edit-filter";
 import { memo, useMemo } from "react";
 import { countAidesByType, maxSubventionRateSortApi, resolveAidType, sumbissionDateSortApi } from "../helpers";
-import { TypeAidesTerritoiresAide } from "@/components/financement/types";
-import { FichesDiagnosticFiltersKey, useAideEstimationEditFilter } from "@/hooks/use-aide-estimation-edit-filter";
-import { GenericFicheLink } from "@/components/common/generic-save-fiche/generic-fiche-link";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { TypeAidesTerritoiresAide } from "@/src/components/financement/types";
+import { FichesDiagnosticFiltersKey, useAideEstimationEditFilter } from "@/src/hooks/use-aide-estimation-edit-filter";
+import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
-import { Pagination } from "@/components/common/pagination";
-import { usePagination } from "@/hooks/use-pagination";
+import { Pagination } from "@/src/components/common/pagination";
+import { usePagination } from "@/src/hooks/use-pagination";
 import toast from "react-hot-toast";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { AideEditSortField } from "@/components/financement/aide/aide-edit-sort-field";
-import { useAideEstimationEditSortMethod } from "@/hooks/use-aide-estimation-edit-sort-method";
-import { useUserStore } from "@/stores/user/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { AideEditSortField } from "@/src/components/financement/aide/aide-edit-sort-field";
+import { useAideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation-edit-sort-method";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export const AideEdit = memo(() => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());

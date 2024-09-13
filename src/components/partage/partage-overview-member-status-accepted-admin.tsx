@@ -1,13 +1,13 @@
 "use client";
 
-import { useModalStore } from "@/stores/modal/provider";
-import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
-import { deleteUserFromProjetAction } from "@/actions/userProjet/delete-user-from-projet-action";
-import { useUserStore } from "@/stores/user/provider";
+import { useModalStore } from "@/src/stores/modal/provider";
+import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { deleteUserFromProjetAction } from "@/src/actions/userProjet/delete-user-from-projet-action";
+import { useUserStore } from "@/src/stores/user/provider";
 import { notifications } from "../common/notifications";
 import { PopupMenu } from "../common/popup-menu";
 import { getCurrentUserRole } from "./helpers";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { RoleProjet } from "@prisma/client";
 
 export type PartageOverviewMemberStatusAdminProps = {

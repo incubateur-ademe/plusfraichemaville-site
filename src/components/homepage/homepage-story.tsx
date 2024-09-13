@@ -1,7 +1,7 @@
 /* eslint-disable no-undef */
 
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
 import clsx from "clsx";
 import Image from "next/image";
 import Link from "next/link";

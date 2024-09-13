@@ -1,4 +1,4 @@
-import { EspaceProjetTabsId } from "@/components/liste-projets";
+import { EspaceProjetTabsId } from "@/src/components/liste-projets";
 
 export const PFMV_ROUTES = {
   AIDE_DECISION: "/aide-decision",

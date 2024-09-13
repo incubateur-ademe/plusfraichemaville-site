@@ -4,21 +4,21 @@ import { StartDsfr } from "./StartDsfr";
 import { defaultColorScheme } from "./defaultColorScheme";
 import Link from "next/link";
 import React, { ReactElement } from "react";
-import AppHeader from "@/components/layout/AppHeader";
+import AppHeader from "@/src/components/layout/AppHeader";
 import { Metadata } from "next";
 import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
-import MatomoScript from "@/components/matomo/MatomoScript";
-import MainLayoutProviders from "@/components/layout/MainLayoutProviders";
-import { ProjetStoreServer } from "@/stores/projets/server";
-import { UserStoreServer } from "@/stores/user/server";
+import MatomoScript from "@/src/components/matomo/MatomoScript";
+import MainLayoutProviders from "@/src/components/layout/MainLayoutProviders";
+import { ProjetStoreServer } from "@/src/stores/projets/server";
+import { UserStoreServer } from "@/src/stores/user/server";
 // eslint-disable-next-line max-len
-import { GenericFichesSaverFromLocalStorage } from "@/components/common/generic-save-fiche/generic-saver-from-local-storage";
+import { GenericFichesSaverFromLocalStorage } from "@/src/components/common/generic-save-fiche/generic-saver-from-local-storage";
 import { headers } from "next/headers";
-import { defaultMetadataDescription, defaultMetadataImage } from "@/helpers/metadata/helpers";
-import { ConsentBannerAndConsentManagement } from "@/components/cookie/consentManagement";
-import { Agent } from "@/components/agent-conversationnel/agent";
+import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
+import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
+import { Agent } from "@/src/components/agent-conversationnel/agent";
 
 const xtra_bold = localFont({
   src: "../public/fonts/Marianne-ExtraBold.woff2",

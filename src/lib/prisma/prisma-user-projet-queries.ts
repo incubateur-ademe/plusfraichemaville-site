@@ -1,7 +1,7 @@
 import { InvitationStatus, RoleProjet, User, user_projet } from "@prisma/client";
-import { prismaClient } from "@/lib/prisma/prismaClient";
-import { UserProjetWithRelations, UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
-import { projetPublicSelect } from "@/lib/prisma/prismaProjetQueries";
+import { prismaClient } from "@/src/lib/prisma/prismaClient";
+import { UserProjetWithRelations, UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { projetPublicSelect } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const getUserProjet = async (userId: string, projectId: number): Promise<user_projet | null> => {
   return prismaClient.user_projet.findUnique({

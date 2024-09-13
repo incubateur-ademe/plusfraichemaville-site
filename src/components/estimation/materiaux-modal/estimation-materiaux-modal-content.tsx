@@ -3,17 +3,18 @@
 import { estimation } from "@prisma/client";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useEffect, useMemo, useState } from "react";
-import EstimationMateriauForm from "@/forms/estimation/estimation-materiau-form";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { upsert } from "@/helpers/listUtils";
-import { EstimationMateriauxValidation } from "@/components/estimation/materiaux-modal/estimation-materiaux-validation";
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
-import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
-import { FicheSolutionResponse } from "@/components/ficheSolution/type";
-import { UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
-import EstimationMateriauSimpleFieldForm from "@/forms/estimation/estimation-materiau-form-simple-field";
-import { estimationModal } from "@/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
+import EstimationMateriauForm from "@/src/forms/estimation/estimation-materiau-form";
+import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { upsert } from "@/src/helpers/listUtils";
+// eslint-disable-next-line max-len
+import { EstimationMateriauxValidation } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-validation";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
+import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
+import { FicheSolutionResponse } from "@/src/components/ficheSolution/type";
+import { UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
+import EstimationMateriauSimpleFieldForm from "@/src/forms/estimation/estimation-materiau-form-simple-field";
+import { estimationModal } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 
 type EstimationCardDeleteModalProps = {
   estimation: estimation;

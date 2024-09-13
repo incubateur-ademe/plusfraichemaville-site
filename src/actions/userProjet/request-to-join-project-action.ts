@@ -1,15 +1,15 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { PermissionManager } from "@/helpers/permission-manager";
-import { EmailService } from "@/services/brevo";
-import { getUserById } from "@/lib/prisma/prismaUserQueries";
-import { getUserProjet, renewOrCreateProjectJoinRequest } from "@/lib/prisma/prisma-user-projet-queries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/src/helpers/permission-manager";
+import { EmailService } from "@/src/services/brevo";
+import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserProjet, renewOrCreateProjectJoinRequest } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { InvitationStatus } from "@prisma/client";
-import { ProjetWithPublicRelations } from "@/lib/prisma/prismaCustomTypes";
-import { getProjetWithPublicRelationsById } from "@/lib/prisma/prismaProjetQueries";
+import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { getProjetWithPublicRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const requestToJoinProjectAction = async (
   userId: string,

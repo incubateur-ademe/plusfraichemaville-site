@@ -1,4 +1,4 @@
-import { APIResponseData } from "@/lib/strapi/types/types";
+import { APIResponseData } from "@/src/lib/strapi/types/types";
 
 export type FichesDiagnosticResponse = APIResponseData<"api::fiche-diagnostic.fiche-diagnostic">[];
 export type FicheDiagnosticResponse = APIResponseData<"api::fiche-diagnostic.fiche-diagnostic">;

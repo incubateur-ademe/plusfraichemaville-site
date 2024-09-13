@@ -5,7 +5,7 @@ import { FicheDiagnosticResponse } from "./types";
 import { FicheDiagnosticMethodeTab } from "./fiche-diagnostic-tab-methode";
 import { FicheDiagnosticAvantageTab } from "./fiche-diagnostic-tab-avantages";
 import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-meo";
-import ButtonShareCurrentUrl from "@/components/common/button-share-current-url";
+import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-url";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticTabsProps = {

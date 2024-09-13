@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { getUserProjet, updateLastAccessToProjetByUser } from "@/lib/prisma/prisma-user-projet-queries";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { getUserProjet, updateLastAccessToProjetByUser } from "@/src/lib/prisma/prisma-user-projet-queries";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const accessProjetAction = async (userId: string, projectId: number): Promise<ResponseAction> => {
   try {

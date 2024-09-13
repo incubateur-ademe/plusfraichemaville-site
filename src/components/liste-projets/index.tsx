@@ -2,15 +2,15 @@
 
 import React, { PropsWithChildren, ReactNode } from "react";
 import { ListeProjetsHeader } from "./header";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { groupAndOrderProjetsByCollectivite, sortProjectsByInvitationStatus } from "./helpers";
 import Image from "next/image";
-import { useUserStore } from "@/stores/user/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import { ListeProjetTab } from "./liste";
 import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { InvitationStatus } from "@prisma/client";
 
 export type EspaceProjetTabsId = "projet" | "invitation" | "demande";

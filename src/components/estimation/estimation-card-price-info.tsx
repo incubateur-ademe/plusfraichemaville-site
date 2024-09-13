@@ -1,6 +1,6 @@
 "use client";
-import { formatNumberWithSpaces } from "@/helpers/common";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const EstimationCardPriceInfo = ({ estimationInfo }: { estimationInfo?: EstimationMateriauxFicheSolution }) => {
   if (!estimationInfo) {

@@ -1,4 +1,4 @@
-import { ConversationHistory, RagtimeConversationHistory } from "@/services/ragtime/ragtime-types";
+import { ConversationHistory, RagtimeConversationHistory } from "@/src/services/ragtime/ragtime-types";
 
 export const sanitizeConversationHistoryFromRagtime = (conversation: RagtimeConversationHistory): ConversationHistory =>
   conversation.messages

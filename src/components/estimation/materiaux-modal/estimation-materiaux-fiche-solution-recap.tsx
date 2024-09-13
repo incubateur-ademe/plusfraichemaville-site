@@ -1,12 +1,12 @@
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { useCallback } from "react";
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
-import { FicheSolutionResponse } from "@/components/ficheSolution/type";
-import { makeFicheSolutionCompleteUrlApi } from "@/components/ficheSolution/helpers";
-import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/cout/cout-materiau";
-import { formatNumberWithSpaces } from "@/helpers/common";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
+import { FicheSolutionResponse } from "@/src/components/ficheSolution/type";
+import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
+import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationMateriauxFicheSolution;

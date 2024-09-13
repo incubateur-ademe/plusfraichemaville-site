@@ -1,5 +1,5 @@
 import { estimation } from "@prisma/client";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import orderBy from "lodash/orderBy";
 
 export const isComplete = (estimation: estimation) => {

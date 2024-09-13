@@ -1,14 +1,14 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { PermissionManager } from "@/helpers/permission-manager";
-import { declineProjectRequest } from "@/lib/prisma/prisma-user-projet-queries";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { getProjetWithRelationsById } from "@/lib/prisma/prismaProjetQueries";
-import { EmailService } from "@/services/brevo";
-import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/src/helpers/permission-manager";
+import { declineProjectRequest } from "@/src/lib/prisma/prisma-user-projet-queries";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
+import { EmailService } from "@/src/services/brevo";
+import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 
 export const declineProjectRequestAction = async (
   projectId: number,

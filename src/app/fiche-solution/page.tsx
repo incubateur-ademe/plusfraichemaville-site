@@ -1,6 +1,6 @@
-import { FichesSolutions } from "@/components/ficheSolution/fiches-solutions";
+import { FichesSolutions } from "@/src/components/ficheSolution/fiches-solutions";
 import { Metadata } from "next";
-import { computeMetadata } from "@/helpers/metadata/helpers";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 export const metadata: Metadata = computeMetadata("Passez à l’action");
 

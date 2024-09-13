@@ -1,12 +1,12 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
-import { getUserWithCollectivites, updateUserDiscardedInformation } from "@/lib/prisma/prismaUserQueries";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { getUserWithCollectivites, updateUserDiscardedInformation } from "@/src/lib/prisma/prismaUserQueries";
+import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const discardInformationAction = async (
   userId: string,

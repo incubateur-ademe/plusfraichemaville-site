@@ -1,8 +1,8 @@
-import ItemRetourExperienceExtraInfo from "@/components/retourExperience/ItemRetourExperienceExtraInfo";
-import ObjectifsDeveloppementDurable from "@/components/common/ObjectifsDeveloppementDurable";
-import { APIResponseData } from "@/lib/strapi/types/types";
-import { getClimatLabelFromCode } from "@/helpers/retourExperience/climatRetourExperience";
-import { getTemporaliteLabelFromCode } from "@/helpers/retourExperience/temporaliteRetourExperience";
+import ItemRetourExperienceExtraInfo from "@/src/components/retourExperience/ItemRetourExperienceExtraInfo";
+import ObjectifsDeveloppementDurable from "@/src/components/common/ObjectifsDeveloppementDurable";
+import { APIResponseData } from "@/src/lib/strapi/types/types";
+import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRetourExperience";
+import { getTemporaliteLabelFromCode } from "@/src/helpers/retourExperience/temporaliteRetourExperience";
 
 export default async function RetourExperienceExtraInfoPanel({
   retourExperience,

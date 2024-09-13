@@ -1,14 +1,14 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
-import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
+import { auth } from "@/src/lib/next-auth/auth";
+import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
-import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/forms/projet/ProjetInfoFormSchema";
-import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { createOrUpdateProjet } from "@/lib/prisma/prismaProjetQueries";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { getOrCreateCollectiviteFromForm } from "@/actions/collectivites/get-or-create-collectivite-from-form";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
+import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { createOrUpdateProjet } from "@/src/lib/prisma/prismaProjetQueries";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,

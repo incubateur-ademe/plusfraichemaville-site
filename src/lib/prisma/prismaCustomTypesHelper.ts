@@ -1,5 +1,5 @@
-import { MateriauResponse } from "@/components/ficheSolution/type";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
+import { MateriauResponse } from "@/src/components/ficheSolution/type";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const mapStrapiEstimationMateriauxToFormValues = (
   ficheSolutionMateriaux: MateriauResponse[] | undefined,

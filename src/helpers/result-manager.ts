@@ -1,4 +1,4 @@
-import { messages, NotificationsMessage } from "@/components/common/notifications";
+import { messages, NotificationsMessage } from "@/src/components/common/notifications";
 
 type Success<Response> = {
   success: true;

@@ -1,8 +1,8 @@
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { AideCard } from "./aide-card";
 import { AidesTerritoiresAide } from "../types";
 import { AideCardSkeleton } from "./aide-card-skeleton";
-import { GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL } from "@/helpers/routes";
+import { GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL } from "@/src/helpers/routes";
 
 type AideCardWithFetcherProps = {
   aideId: number;

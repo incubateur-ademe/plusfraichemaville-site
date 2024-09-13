@@ -1,4 +1,4 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 

@@ -4,11 +4,11 @@ import { createModal } from "@codegouvfr/react-dsfr/Modal";
 
 import Button from "@codegouvfr/react-dsfr/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { PartageUserInvitationData, PartageUserInvitationSchema } from "@/forms/partage/partage-user-invitation";
+import { PartageUserInvitationData, PartageUserInvitationSchema } from "@/src/forms/partage/partage-user-invitation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputFormField from "../common/InputFormField";
-import { inviteMemberAction } from "@/actions/users/invite-user-action";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { inviteMemberAction } from "@/src/actions/users/invite-user-action";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
 import { RoleProjet } from "@prisma/client";
 

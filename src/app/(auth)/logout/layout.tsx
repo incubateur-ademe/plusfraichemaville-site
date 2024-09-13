@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import AppFooter from "@/components/layout/AppFooter";
+import AppFooter from "@/src/components/layout/AppFooter";
 
 export default function Layout({ children }: { children: ReactElement | null }) {
   return (

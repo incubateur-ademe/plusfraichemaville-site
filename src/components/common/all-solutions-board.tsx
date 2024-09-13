@@ -4,7 +4,7 @@ import {
   TYPE_SOLUTION_GRISE,
   TYPE_SOLUTION_DOUCE,
   TypeSolution,
-} from "@/helpers/typeSolution";
+} from "@/src/helpers/typeSolution";
 import Image from "next/image";
 
 export const AllSolutionsBoard = () => {

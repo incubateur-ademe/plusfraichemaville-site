@@ -1,4 +1,4 @@
-import { FicheSolution } from "@/components/ficheSolution/fiche-solution";
+import { FicheSolution } from "@/src/components/ficheSolution/fiche-solution";
 
 export default async function FicheSolutionPage({
   params,

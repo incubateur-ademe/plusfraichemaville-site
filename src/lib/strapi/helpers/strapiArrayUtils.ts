@@ -1,4 +1,4 @@
-import { APIResponseCollection, APIResponseData } from "@/lib/strapi/types/types";
+import { APIResponseCollection, APIResponseData } from "@/src/lib/strapi/types/types";
 import type { Common } from "@strapi/strapi";
 
 function removeNullAttributesEntity<K extends Common.UID.ContentType>(

@@ -1,10 +1,13 @@
 "use server";
-import { IApiAidesTerritoiresPaginatedAides, IApiAidesTerritoiresQueryPerimeter } from "@/lib/aidesTerritoires/types";
-import { FicheSolution } from "@/components/ficheSolution/type";
+import {
+  IApiAidesTerritoiresPaginatedAides,
+  IApiAidesTerritoiresQueryPerimeter,
+} from "@/src/lib/aidesTerritoires/types";
+import { FicheSolution } from "@/src/components/ficheSolution/type";
 import { collectivite } from "@prisma/client";
-import { updateCollectiviteAidesTerritoireId } from "@/lib/prisma/prismaCollectiviteQueries";
-import { callAidesTerritoiresApi, extractMotsClesFromFichesSolutions } from "@/lib/aidesTerritoires/helpers";
-import { AidesTerritoiresAide } from "@/components/financement/types";
+import { updateCollectiviteAidesTerritoireId } from "@/src/lib/prisma/prismaCollectiviteQueries";
+import { callAidesTerritoiresApi, extractMotsClesFromFichesSolutions } from "@/src/lib/aidesTerritoires/helpers";
+import { AidesTerritoiresAide } from "@/src/components/financement/types";
 
 const DEFAULT_PERIMETER_ID = "70956-france";
 

@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { leaveProject } from "@/lib/prisma/prismaProjetQueries";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { leaveProject } from "@/src/lib/prisma/prismaProjetQueries";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const leaveProjetAction = async (userId: string, projetId: number): Promise<ResponseAction<{}>> => {
   const session = await auth();

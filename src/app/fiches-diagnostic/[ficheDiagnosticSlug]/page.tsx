@@ -1,9 +1,9 @@
-import { FicheDiagnostic } from "@/components/fiches-diagnostic/fiche-diagnostic";
-import { getAllFichesDiagnostic, getFicheDiagnosticBySlug } from "@/lib/strapi/queries/fiches-diagnostic-queries";
+import { FicheDiagnostic } from "@/src/components/fiches-diagnostic/fiche-diagnostic";
+import { getAllFichesDiagnostic, getFicheDiagnosticBySlug } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { computeMetadata } from "@/helpers/metadata/helpers";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 type FicheDiagnosticPageProps = {
   params: { ficheDiagnosticSlug: string };

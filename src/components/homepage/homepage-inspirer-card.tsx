@@ -1,5 +1,5 @@
-import RetourExperienceCard, { RexInHome } from "@/components/retourExperience/RetourExperienceCard";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import RetourExperienceCard, { RexInHome } from "@/src/components/retourExperience/RetourExperienceCard";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Link from "next/link";
 import { homepageData } from "./homepage-data";

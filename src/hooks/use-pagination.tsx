@@ -1,4 +1,4 @@
-import { scrollToTop } from "@/helpers/common";
+import { scrollToTop } from "@/src/helpers/common";
 import { useState, useMemo } from "react";
 
 type UsePaginationProps<T> = {

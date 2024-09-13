@@ -1,10 +1,10 @@
 "use client";
 import { MainNavigation } from "@codegouvfr/react-dsfr/MainNavigation";
 import { usePathname } from "next/navigation";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useSession } from "next-auth/react";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { setBadgeOff, NotificationElements } from "@/helpers/notification-badge";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { setBadgeOff, NotificationElements } from "@/src/helpers/notification-badge";
 
 export default function NavigationMenu() {
   const pathname = usePathname();

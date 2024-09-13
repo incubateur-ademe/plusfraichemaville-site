@@ -1,13 +1,13 @@
 import Image from "next/image";
-import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
+import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
 import { useMemo } from "react";
-import CmsRichText from "@/components/common/CmsRichText";
-import FicheSolutionInfoComparatif from "@/components/ficheSolution/FicheSolutionInfoComparatif";
-import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
-import FicheSolutionCardWithUserInfo from "@/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import { APIResponseData } from "@/lib/strapi/types/types";
-import { FicheSolution } from "@/components/ficheSolution/type";
-import { getCreditsImageForFicheSolution } from "@/helpers/credits-image";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
+import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
+import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import { APIResponseData } from "@/src/lib/strapi/types/types";
+import { FicheSolution } from "@/src/components/ficheSolution/type";
+import { getCreditsImageForFicheSolution } from "@/src/helpers/credits-image";
 
 export default function FicheSolutionTabSynthese({
   ficheSolution,

@@ -1,4 +1,4 @@
-import { formatNumberWithSpaces } from "@/helpers/common";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 type EstimationMateriauGlobalPriceFooterProps = {
   title?: string;

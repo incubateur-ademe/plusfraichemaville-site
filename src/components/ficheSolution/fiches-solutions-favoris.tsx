@@ -1,4 +1,4 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { FicheBookmarkedSolution } from "../common/generic-save-fiche/helpers";
 import BookmarkedFicheSolutionByProject from "../favoris/BookmarkedFicheSolution";
 import Button from "@codegouvfr/react-dsfr/Button";

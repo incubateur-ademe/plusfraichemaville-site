@@ -1,4 +1,4 @@
-import { TypeEspace } from "@/components/filters/TypeEspaceFilter";
+import { TypeEspace } from "@/src/components/filters/TypeEspaceFilter";
 
 import Image from "next/image";
 import { PictoType } from ".";

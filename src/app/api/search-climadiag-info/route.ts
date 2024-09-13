@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "@/lib/next-auth/auth";
-import { searchClimadiagInfo } from "@/lib/prisma/prisma-climadiag-queries";
+import { authOptions } from "@/src/lib/next-auth/auth";
+import { searchClimadiagInfo } from "@/src/lib/prisma/prisma-climadiag-queries";
 
 export async function GET(request: NextRequest) {
   const searchText = request.nextUrl.searchParams.get("search");

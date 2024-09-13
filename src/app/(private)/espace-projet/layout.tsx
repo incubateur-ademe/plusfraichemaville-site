@@ -1,9 +1,9 @@
 "use client";
 import React, { ReactElement } from "react";
-import { useUserStore } from "@/stores/user/provider";
-import { hasAllRequiredFieldsSet } from "@/helpers/user";
+import { useUserStore } from "@/src/stores/user/provider";
+import { hasAllRequiredFieldsSet } from "@/src/helpers/user";
 import { useRouter } from "next/navigation";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export default function Layout({ children }: { children: ReactElement | null }) {
   const user = useUserStore((state) => state.userInfos);

@@ -3,10 +3,10 @@ import { GenericSaveBaseProps } from ".";
 import { GenericSaveAuthenticatedOutsideProjet } from "./generic-save-button-authenticated-outside-projet";
 
 import { GenericSaveUnauthenticated } from "./generic-save-button-unauthenticated";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericSaveAuthenticatedInsideProjet } from "./generic-save-button-authenticated-inside-projet";
 import { useSession } from "next-auth/react";
-import { Spinner } from "@/components/common/spinner";
+import { Spinner } from "@/src/components/common/spinner";
 
 interface GenericSaveFicheButtonBaseProps extends GenericSaveBaseProps {
   modal?: DSFRModal;

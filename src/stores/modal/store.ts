@@ -1,8 +1,9 @@
 import { createStore } from "zustand/vanilla";
-import { AidesTerritoiresAide } from "@/components/financement/types";
-import { PartageOverviewDeleteOrQuitModaleState } from "@/components/partage/partage-overview-delete-or-quit-modale";
+import { AidesTerritoiresAide } from "@/src/components/financement/types";
 // eslint-disable-next-line max-len
-import { PartageOverviewMemberStatusAdminProps } from "@/components/partage/partage-overview-member-status-accepted-admin";
+import { PartageOverviewDeleteOrQuitModaleState } from "@/src/components/partage/partage-overview-delete-or-quit-modale";
+// eslint-disable-next-line max-len
+import { PartageOverviewMemberStatusAdminProps } from "@/src/components/partage/partage-overview-member-status-accepted-admin";
 
 interface ModalState {
   currentEstimationId: number | null;

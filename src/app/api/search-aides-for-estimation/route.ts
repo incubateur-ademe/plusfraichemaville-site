@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import { searchAidesFromAidesTerritoires } from "@/lib/aidesTerritoires/fetch";
-import { getFicheSolutionByIds } from "@/lib/strapi/queries/fichesSolutionsQueries";
-import { getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
-import { getProjetById } from "@/lib/prisma/prismaProjetQueries";
-import { getCollectiviteById } from "@/lib/prisma/prismaCollectiviteQueries";
+import { searchAidesFromAidesTerritoires } from "@/src/lib/aidesTerritoires/fetch";
+import { getFicheSolutionByIds } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
+import { getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
+import { getProjetById } from "@/src/lib/prisma/prismaProjetQueries";
+import { getCollectiviteById } from "@/src/lib/prisma/prismaCollectiviteQueries";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/next-auth/auth";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { authOptions } from "@/src/lib/next-auth/auth";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export async function GET(request: NextRequest) {
   const estimationId = request.nextUrl.searchParams.get("estimationId");

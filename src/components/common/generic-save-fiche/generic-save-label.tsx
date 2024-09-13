@@ -1,6 +1,6 @@
 "use client";
 
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 
 export const GenericSaveLabel = ({ isSaved, withLabel }: { isSaved: boolean; withLabel?: boolean }) => {

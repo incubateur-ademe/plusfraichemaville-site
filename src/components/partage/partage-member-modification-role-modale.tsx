@@ -2,7 +2,7 @@
 
 import { Input } from "@codegouvfr/react-dsfr/Input";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
-import { useModalStore } from "@/stores/modal/provider";
+import { useModalStore } from "@/src/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -10,11 +10,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
   PartageUserModificationData,
   PartageUserModificationSchema,
-} from "@/forms/partage/partage-user-modification-schema";
+} from "@/src/forms/partage/partage-user-modification-schema";
 import SelectFormField from "../common/SelectFormField";
-import { updateUserRoleProjectAction } from "@/actions/users/update-user-role-project-action";
-import { useUserStore } from "@/stores/user/provider";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { updateUserRoleProjectAction } from "@/src/actions/users/update-user-role-project-action";
+import { useUserStore } from "@/src/stores/user/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { RoleProjet } from "@prisma/client";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { notifications } from "../common/notifications";

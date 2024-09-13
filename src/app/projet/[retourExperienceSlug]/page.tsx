@@ -1,8 +1,8 @@
-import { RetourExperience } from "@/components/projet/projet-retour-experience";
+import { RetourExperience } from "@/src/components/projet/projet-retour-experience";
 import { Metadata } from "next";
-import { computeMetadata } from "@/helpers/metadata/helpers";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { getRetourExperienceBySlug } from "@/lib/strapi/queries/retoursExperienceQueries";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { getRetourExperienceBySlug } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 
 type RetourExperiencePageProps = {
   params: { retourExperienceSlug: string; projetId: string };

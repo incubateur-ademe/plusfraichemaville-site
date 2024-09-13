@@ -1,14 +1,14 @@
 "use client";
 
-import { useModalStore } from "@/stores/modal/provider";
+import { useModalStore } from "@/src/stores/modal/provider";
 import { PopupMenu } from "../common/popup-menu";
-import { ProjetWithPublicRelations, UserProjetWithPublicUser } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations, UserProjetWithPublicUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { checkOtherAdminExists } from "./helpers";
 import { useTransition } from "react";
-import { leaveProjetAction } from "@/actions/projets/leave-projet-action";
+import { leaveProjetAction } from "@/src/actions/projets/leave-projet-action";
 import { notifications } from "../common/notifications";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { deleteProjetAction } from "@/src/actions/projets/delete-projet-action";
 import { RoleProjet } from "@prisma/client";
 
 type PartageOverviewPopupMenuProps = {

@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
-import { FichesBookmarked } from "@/components/common/generic-save-fiche/helpers";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { saveAllFichesFromLocalStorage } from "@/lib/prisma/prismaUserQueries";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { auth } from "@/src/lib/next-auth/auth";
+import { FichesBookmarked } from "@/src/components/common/generic-save-fiche/helpers";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { saveAllFichesFromLocalStorage } from "@/src/lib/prisma/prismaUserQueries";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const saveAllFichesFromLocalStorageAction = async (
   userId: string,

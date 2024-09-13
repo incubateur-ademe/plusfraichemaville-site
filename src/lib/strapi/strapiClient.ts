@@ -1,5 +1,5 @@
-import { APIResponse } from "@/lib/strapi/types/types";
-import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
+import { APIResponse } from "@/src/lib/strapi/types/types";
+import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 export const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";

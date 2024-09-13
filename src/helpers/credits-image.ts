@@ -1,7 +1,7 @@
-import { APIResponse } from "@/lib/strapi/types/types";
-import { FicheSolution } from "@/components/ficheSolution/type";
-import { RetourExperience } from "@/components/retourExperience/type";
-import { FicheDiagnosticResponseAttributes } from "@/components/fiches-diagnostic/types";
+import { APIResponse } from "@/src/lib/strapi/types/types";
+import { FicheSolution } from "@/src/components/ficheSolution/type";
+import { RetourExperience } from "@/src/components/retourExperience/type";
+import { FicheDiagnosticResponseAttributes } from "@/src/components/fiches-diagnostic/types";
 
 export const getCreditsImageForFicheSolution = (ficheSolution: FicheSolution) => {
   const credits = new Set<string>();

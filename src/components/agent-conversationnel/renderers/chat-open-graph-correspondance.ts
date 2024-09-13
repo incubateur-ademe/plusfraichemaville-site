@@ -1,4 +1,4 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export const CHAT_OPEN_GRAPH_CORRESPONDANCES = [
   {

@@ -1,8 +1,8 @@
 "use client";
 
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
-import { AideFiche } from "@/components/financement/aide/aide-fiche";
-import { useModalStore } from "@/stores/modal/provider";
+import { AideFiche } from "@/src/components/financement/aide/aide-fiche";
+import { useModalStore } from "@/src/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
 

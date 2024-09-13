@@ -1,6 +1,6 @@
-import { retrieveConversationAction } from "@/actions/agent-conversationnel/retrieve-conversation-action";
-import { sentChatMessageAction } from "@/actions/agent-conversationnel/send-chat-message-action";
-import { ConversationHistory } from "@/services/ragtime/ragtime-types";
+import { retrieveConversationAction } from "@/src/actions/agent-conversationnel/retrieve-conversation-action";
+import { sentChatMessageAction } from "@/src/actions/agent-conversationnel/send-chat-message-action";
+import { ConversationHistory } from "@/src/services/ragtime/ragtime-types";
 import { useAiChatApi, useAsBatchAdapter } from "@nlux/react";
 import { useCallback, useMemo, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";

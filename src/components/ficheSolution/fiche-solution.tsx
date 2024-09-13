@@ -1,18 +1,18 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
-import CustomTabButton from "@/components/common/CustomTabButton";
-import FicheSolutionTabSynthese from "@/components/ficheSolution/FicheSolutionTabSynthese";
-import FicheSolutionTabMateriaux from "@/components/ficheSolution/FicheSolutionTabMateriaux";
-import FicheSolutionTabMiseEnOeuvre from "@/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
-import AideDecisionBreadcrumbs from "@/components/aideDecision/AideDecisionBreadcrumbs";
-import FicheSolutionTabFinancements from "@/components/ficheSolution/FicheSolutionTabFinancements";
-import FicheSolutionTabOups from "@/components/ficheSolution/FicheSolutionTabOups";
-import { getFicheSolutionBySlug } from "@/lib/strapi/queries/fichesSolutionsQueries";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { getAideDecisionHistoryBySlug } from "@/lib/strapi/queries/aideDecisionQueries";
+import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
+import CustomTabButton from "@/src/components/common/CustomTabButton";
+import FicheSolutionTabSynthese from "@/src/components/ficheSolution/FicheSolutionTabSynthese";
+import FicheSolutionTabMateriaux from "@/src/components/ficheSolution/FicheSolutionTabMateriaux";
+import FicheSolutionTabMiseEnOeuvre from "@/src/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
+import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionBreadcrumbs";
+import FicheSolutionTabFinancements from "@/src/components/ficheSolution/FicheSolutionTabFinancements";
+import FicheSolutionTabOups from "@/src/components/ficheSolution/FicheSolutionTabOups";
+import { getFicheSolutionBySlug } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { getAideDecisionHistoryBySlug } from "@/src/lib/strapi/queries/aideDecisionQueries";
 import clsx from "clsx";
-import ButtonShareCurrentUrl from "@/components/common/button-share-current-url";
+import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-url";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 export async function FicheSolution({

@@ -1,8 +1,8 @@
 import Image from "next/image";
-import FicheSolutionSmallHorizontalCard from "@/components/ficheSolution/FicheSolutionSmallHorizontalCard";
-import CmsRichText from "@/components/common/CmsRichText";
-import { APIResponseData } from "@/lib/strapi/types/types";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import FicheSolutionSmallHorizontalCard from "@/src/components/ficheSolution/FicheSolutionSmallHorizontalCard";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import { APIResponseData } from "@/src/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 
 export default async function SolutionRetourExperienceCard({
   solution,

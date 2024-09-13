@@ -1,11 +1,11 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { updateFichesUser } from "@/lib/prisma/prismaUserQueries";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { UserInfos } from "@/stores/user/store";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { updateFichesUser } from "@/src/lib/prisma/prismaUserQueries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { UserInfos } from "@/src/stores/user/store";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const updateFichesUserAction = async (
   userId: string,

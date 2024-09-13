@@ -1,4 +1,4 @@
-import { prismaClient } from "@/lib/prisma/prismaClient";
+import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { Prisma } from "@prisma/client";
 
 export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]) => {

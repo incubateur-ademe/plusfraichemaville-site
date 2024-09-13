@@ -1,13 +1,13 @@
 "use client";
 
-import { ClimadiagPanel } from "@/components/climadiag/climadiag-panel";
-import { ListProjets } from "@/components/liste-projets";
-import { useUserStore } from "@/stores/user/provider";
+import { ClimadiagPanel } from "@/src/components/climadiag/climadiag-panel";
+import { ListProjets } from "@/src/components/liste-projets";
+import { useUserStore } from "@/src/stores/user/provider";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { attachInvitationToUserAction } from "@/actions/userProjet/attach-invitation-to-user-action";
-import { notifications } from "@/components/common/notifications";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { attachInvitationToUserAction } from "@/src/actions/userProjet/attach-invitation-to-user-action";
+import { notifications } from "@/src/components/common/notifications";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 
 export default function ListProjetsPage() {
   const searchParams = useSearchParams();

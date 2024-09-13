@@ -1,12 +1,12 @@
 "use server";
 
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { auth } from "@/lib/next-auth/auth";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { auth } from "@/src/lib/next-auth/auth";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { getUserProjets } from "@/lib/prisma/prismaProjetQueries";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { getUserProjets } from "@/src/lib/prisma/prismaProjetQueries";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const getUserProjetsAction = async (
   userId: string,

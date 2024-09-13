@@ -2,7 +2,7 @@ import Link from "next/link";
 import { homepageData } from "./homepage-data";
 import { HomepageHeroPictos } from "./homepage-hero-pictos";
 import clsx from "clsx";
-import { PictoPFMV } from "@/components/common/pictos/picto-pfmv";
+import { PictoPFMV } from "@/src/components/common/pictos/picto-pfmv";
 
 export const HomepageHero = () => {
   const { hero } = homepageData;

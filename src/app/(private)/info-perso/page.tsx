@@ -1,10 +1,10 @@
-import { auth } from "@/lib/next-auth/auth";
-import { UserInfoForm } from "@/forms/user/UserInfoForm";
-import UserNotFoundError from "@/components/error/UserNotFoundError";
-import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
-import { hasAllRequiredFieldsSet } from "@/helpers/user";
+import { auth } from "@/src/lib/next-auth/auth";
+import { UserInfoForm } from "@/src/forms/user/UserInfoForm";
+import UserNotFoundError from "@/src/components/error/UserNotFoundError";
+import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { hasAllRequiredFieldsSet } from "@/src/helpers/user";
 import { Metadata } from "next";
-import { computeMetadata } from "@/helpers/metadata/helpers";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 export const metadata: Metadata = computeMetadata("Votre profil");
 

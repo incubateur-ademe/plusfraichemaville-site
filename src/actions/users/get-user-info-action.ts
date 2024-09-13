@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const getUserInfoAction = async (
   userId: string,

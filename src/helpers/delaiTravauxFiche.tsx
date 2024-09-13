@@ -1,5 +1,5 @@
 import React from "react";
-import { highlightedIconClass, TypeFiche } from "@/helpers/common";
+import { highlightedIconClass, TypeFiche } from "@/src/helpers/common";
 import clsx from "clsx";
 
 type DelaiTravauxFiche = {

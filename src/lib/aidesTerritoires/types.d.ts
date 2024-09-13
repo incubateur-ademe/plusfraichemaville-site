@@ -1,4 +1,4 @@
-import { AidesTerritoiresAide } from "@/components/financement/types";
+import { AidesTerritoiresAide } from "@/src/components/financement/types";
 
 export interface IApiAidesTerritoiresResponse {
   message?: string;

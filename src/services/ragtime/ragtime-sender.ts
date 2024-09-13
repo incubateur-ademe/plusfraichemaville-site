@@ -1,6 +1,6 @@
-import { AiConversation } from "@/services/ragtime/ragtime-types";
+import { AiConversation } from "@/src/services/ragtime/ragtime-types";
 import { ragtimeConfig } from "./config";
-import { Result } from "@/helpers/result-manager";
+import { Result } from "@/src/helpers/result-manager";
 
 export const ragtimeSender = async (
   newMessage: string,

@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { PermissionManager } from "@/helpers/permission-manager";
-import { declineProjectInvitation } from "@/lib/prisma/prisma-user-projet-queries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/src/helpers/permission-manager";
+import { declineProjectInvitation } from "@/src/lib/prisma/prisma-user-projet-queries";
 
 export const declineProjectInvitationAction = async (userId: string, projectId: number): Promise<ResponseAction> => {
   const session = await auth();

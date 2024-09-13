@@ -1,6 +1,6 @@
 "use client";
-import { useMultipleValuesFilter } from "@/hooks/useMultipleValuesFilter";
-import { ALL_BAISSES_TEMPERATURE_FICHE_SOLUTION } from "@/helpers/baisseTemperatureFicheSolution";
+import { useMultipleValuesFilter } from "@/src/hooks/useMultipleValuesFilter";
+import { ALL_BAISSES_TEMPERATURE_FICHE_SOLUTION } from "@/src/helpers/baisseTemperatureFicheSolution";
 
 export default function BaisseTemperatureFilter({ className }: { className?: string }) {
   const FILTER_NAME = "baisseTemperatureFilter";

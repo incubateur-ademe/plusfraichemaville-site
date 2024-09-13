@@ -1,7 +1,7 @@
 import Image from "next/image";
-import CmsRichText from "@/components/common/CmsRichText";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { GetValues } from "@/lib/strapi/types/types";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { GetValues } from "@/src/lib/strapi/types/types";
 
 export default async function SituationRetourExperienceCard({
   situation,

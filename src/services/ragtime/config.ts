@@ -1,5 +1,5 @@
-import { failure, Result, success } from "@/helpers/result-manager";
-import { captureError, customCaptureException } from "@/lib/sentry/sentryCustomMessage";
+import { failure, Result, success } from "@/src/helpers/result-manager";
+import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 export enum RagtimeSlug {
   // eslint-disable-next-line no-unused-vars

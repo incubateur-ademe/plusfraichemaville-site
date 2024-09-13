@@ -1,6 +1,6 @@
 import * as Sentry from "@sentry/nextjs";
-import { captureError } from "@/lib/sentry/sentryCustomMessage";
-import { IApiSirenQueryToken, IApiSirenQueryTypes } from "@/lib/siren/types";
+import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
+import { IApiSirenQueryToken, IApiSirenQueryTypes } from "@/src/lib/siren/types";
 
 const TOKEN_VALIDITY_IN_SECONDS = 86400;
 

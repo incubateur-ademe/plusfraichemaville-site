@@ -1,9 +1,9 @@
 "use client";
 import { AideEstimationsListe } from "./aide/aide-estimations-liste";
 import { AideEstimationListeEmpty } from "./aide/aide-estimations-liste-empty";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { useUserStore } from "@/stores/user/provider";
-import { Case, Conditional } from "@/components/common/conditional-renderer";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useUserStore } from "@/src/stores/user/provider";
+import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 
 export const Financement = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());

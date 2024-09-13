@@ -1,8 +1,8 @@
-import { makeFicheSolutionUrlApi } from "@/components/ficheSolution/helpers";
-import { FicheSolutionResponse } from "@/components/ficheSolution/type";
-import { nullFunctionalComponent } from "@/helpers/common";
-import { getTypeSolutionFromCode } from "@/helpers/typeSolution";
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers";
+import { FicheSolutionResponse } from "@/src/components/ficheSolution/type";
+import { nullFunctionalComponent } from "@/src/helpers/common";
+import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
 
 export const AideEstimationsCardLabelFicheSolution = ({ ficheId }: { ficheId: number }) => {

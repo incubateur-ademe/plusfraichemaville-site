@@ -1,5 +1,5 @@
 import { collectivite, User } from "@prisma/client";
-import { prismaClient } from "@/lib/prisma/prismaClient";
+import { prismaClient } from "@/src/lib/prisma/prismaClient";
 
 export const attachUserToCollectivite = async (user: User, collectivite: collectivite, verified: boolean) => {
   return prismaClient.user_collectivite.create({

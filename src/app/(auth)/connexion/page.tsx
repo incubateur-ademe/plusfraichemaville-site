@@ -1,13 +1,13 @@
 import React from "react";
-import SignInCard from "@/components/signin/SignInCard";
-import { auth } from "@/lib/next-auth/auth";
+import SignInCard from "@/src/components/signin/SignInCard";
+import { auth } from "@/src/lib/next-auth/auth";
 import { redirect } from "next/navigation";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Image from "next/image";
 import clsx from "clsx";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { Metadata } from "next";
-import { computeMetadata } from "@/helpers/metadata/helpers";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 export const metadata: Metadata = computeMetadata("Créez votre projet");
 

@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { PartageOverviewMember } from "./partage-overview-member";
-import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
-import { useUserStore } from "@/stores/user/provider";
+import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { useUserStore } from "@/src/stores/user/provider";
 
 type PartageOverviewMemberSectionProps = {
   title: string;

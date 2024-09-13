@@ -1,6 +1,6 @@
 "use client";
 
-import { useUserStore } from "@/stores/user/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import { useEffect } from "react";
 
 export const GenericFichesSaverFromLocalStorage = () => {

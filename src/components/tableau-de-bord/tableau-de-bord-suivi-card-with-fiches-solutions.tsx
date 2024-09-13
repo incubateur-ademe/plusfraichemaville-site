@@ -1,13 +1,13 @@
 "use client";
 
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 import Image from "next/image";
-import { APIResponse } from "@/lib/strapi/types/types";
-import { TypeFiche } from "@/helpers/common";
-import { TableauDeBordSuiviWithText } from "@/components/tableau-de-bord/tableau-de-bord-suivi-card-with-text";
-import { useImmutableSwrWithFetcher } from "@/hooks/use-swr-with-fetcher";
+import { APIResponse } from "@/src/lib/strapi/types/types";
+import { TypeFiche } from "@/src/helpers/common";
+import { TableauDeBordSuiviWithText } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-text";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
 import { FicheSolutionResponse } from "../ficheSolution/type";
 import { FicheDiagnosticResponse } from "../fiches-diagnostic/types";

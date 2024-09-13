@@ -5,9 +5,9 @@ import { Button } from "@codegouvfr/react-dsfr/Button";
 import { projet } from "@prisma/client";
 
 import clsx from "clsx";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
-import { deleteProjetAction } from "@/actions/projets/delete-projet-action";
+import { deleteProjetAction } from "@/src/actions/projets/delete-projet-action";
 
 type ListeProjetsCardDeleteModalProps = {
   projetNom: projet["nom"];

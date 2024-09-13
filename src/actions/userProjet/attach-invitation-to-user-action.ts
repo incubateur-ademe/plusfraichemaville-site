@@ -1,13 +1,13 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { PermissionManager } from "@/helpers/permission-manager";
-import { getUserById } from "@/lib/prisma/prismaUserQueries";
-import { attachInvitationsByToken, getUserProjetById } from "@/lib/prisma/prisma-user-projet-queries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/src/helpers/permission-manager";
+import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
+import { attachInvitationsByToken, getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { Prisma } from "@prisma/client";
-import { ProjetWithPublicRelations } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const attachInvitationToUserAction = async (
   userId: string,

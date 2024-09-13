@@ -1,8 +1,8 @@
 import React from "react";
 import clsx from "clsx";
-import { formatNumberWithSpaces, highlightedIconClass, TypeFiche } from "@/helpers/common";
-import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/helpers/cout/cout-common";
-import { FicheSolution } from "@/components/ficheSolution/type";
+import { formatNumberWithSpaces, highlightedIconClass, TypeFiche } from "@/src/helpers/common";
+import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
+import { FicheSolution } from "@/src/components/ficheSolution/type";
 
 type CoutFicheSolution = {
   coutMax(_: TypeFiche): number;

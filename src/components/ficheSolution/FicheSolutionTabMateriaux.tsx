@@ -1,11 +1,11 @@
 import React from "react";
 import Image from "next/image";
-import CmsRichText from "@/components/common/CmsRichText";
+import CmsRichText from "@/src/components/common/CmsRichText";
 import entretienIcon from "../../public/images/fiches-solutions/entretien.svg";
-import { GetValues } from "@/lib/strapi/types/types";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { getUniteCoutFromCode } from "@/helpers/cout/cout-common";
-import { formatNumberWithSpaces } from "@/helpers/common";
+import { GetValues } from "@/src/lib/strapi/types/types";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export default function FicheSolutionTabMateriaux({
   ficheSolution,

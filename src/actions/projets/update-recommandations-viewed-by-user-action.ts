@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { addRecommandationsViewedBy, deleteRecommandationsViewedBy } from "@/lib/prisma/prismaProjetQueries";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { addRecommandationsViewedBy, deleteRecommandationsViewedBy } from "@/src/lib/prisma/prismaProjetQueries";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const updateRecommandationsViewedByUser = async (
   projetId: string,

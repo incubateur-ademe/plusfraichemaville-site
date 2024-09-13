@@ -1,16 +1,16 @@
 import Image from "next/image";
-import CustomDSFRQuote from "@/components/common/CustomDSFRQuote";
-import SituationRetourExperienceCard from "@/components/retourExperience/SituationRetourExperienceCard";
-import CalendrierRetourExperienceAccordion from "@/components/retourExperience/CalendrierRetourExperienceAccordion";
-import ItemRetourExperience from "@/components/retourExperience/ItemRetourExperience";
-import RetourExperienceExtraInfoPanel from "@/components/retourExperience/RetourExperienceExtraInfoPanel";
+import CustomDSFRQuote from "@/src/components/common/CustomDSFRQuote";
+import SituationRetourExperienceCard from "@/src/components/retourExperience/SituationRetourExperienceCard";
+import CalendrierRetourExperienceAccordion from "@/src/components/retourExperience/CalendrierRetourExperienceAccordion";
+import ItemRetourExperience from "@/src/components/retourExperience/ItemRetourExperience";
+import RetourExperienceExtraInfoPanel from "@/src/components/retourExperience/RetourExperienceExtraInfoPanel";
 import { notFound } from "next/navigation";
-import CmsRichText from "@/components/common/CmsRichText";
-import { getRetourExperienceBySlug } from "@/lib/strapi/queries/retoursExperienceQueries";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import RetourExperienceCard from "@/components/retourExperience/RetourExperienceCard";
-import SolutionRetourExperienceCard from "@/components/retourExperience/SolutionRetourExperienceCard";
-import { getCreditsImageForRetourExperience } from "@/helpers/credits-image";
+import CmsRichText from "@/src/components/common/CmsRichText";
+import { getRetourExperienceBySlug } from "@/src/lib/strapi/queries/retoursExperienceQueries";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
+import SolutionRetourExperienceCard from "@/src/components/retourExperience/SolutionRetourExperienceCard";
+import { getCreditsImageForRetourExperience } from "@/src/helpers/credits-image";
 
 export async function RetourExperience({ params }: { params: { retourExperienceSlug: string; projetId: string } }) {
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);

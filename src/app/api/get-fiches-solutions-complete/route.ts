@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getFicheSolutionByIdsComplete } from "@/lib/strapi/queries/fichesSolutionsQueries";
+import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
 export async function GET(request: NextRequest) {
   const ficheSolutionIds = request.nextUrl.searchParams.get("ficheSolutionIds");

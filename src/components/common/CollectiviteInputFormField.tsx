@@ -1,13 +1,13 @@
 "use client";
 import { Fragment, ReactNode, useEffect, useState } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
-import RedAsterisk from "@/components/common/RedAsterisk";
+import RedAsterisk from "@/src/components/common/RedAsterisk";
 import { Combobox, Transition } from "@headlessui/react";
-import { fetchCollectiviteFromBanApi } from "@/lib/adresseApi/fetch";
+import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
 import debounce from "lodash/debounce";
-import { AddressCollectivite } from "@/lib/adresseApi/types";
+import { AddressCollectivite } from "@/src/lib/adresseApi/types";
 import clsx from "clsx";
-import { Spinner } from "@/components/common/spinner";
+import { Spinner } from "@/src/components/common/spinner";
 
 type CommonProps<T extends FieldValues> = {
   className?: string;

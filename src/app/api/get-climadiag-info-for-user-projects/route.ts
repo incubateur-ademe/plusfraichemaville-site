@@ -1,10 +1,10 @@
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
-import { authOptions } from "@/lib/next-auth/auth";
-import { getUserProjets } from "@/lib/prisma/prismaProjetQueries";
-import { getUserWithCollectivites } from "@/lib/prisma/prismaUserQueries";
-import { notEmpty } from "@/helpers/listUtils";
-import { getClimadiagInfoFromCodeInsee } from "@/lib/prisma/prisma-climadiag-queries";
+import { authOptions } from "@/src/lib/next-auth/auth";
+import { getUserProjets } from "@/src/lib/prisma/prismaProjetQueries";
+import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { notEmpty } from "@/src/helpers/listUtils";
+import { getClimadiagInfoFromCodeInsee } from "@/src/lib/prisma/prisma-climadiag-queries";
 
 export async function GET(request: NextRequest) {
   const requestUserId = request.nextUrl.searchParams.get("userId");

@@ -1,7 +1,7 @@
 import { PropsWithChildren } from "react";
 import { AideEstimationsPanelHeader } from "./aide-estimations-panel-header";
 import { AideCardWithFetcher } from "./aide-card-with-fetcher";
-import { EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { countAidesByTypeFromDB, sumbissionDateSortBase } from "../helpers";
 
 import { AideEstimationsCardRecap } from "./aide-estimations-recap";

@@ -1,15 +1,15 @@
 "use server";
-import { fetchAideFromAidesTerritoiresById } from "@/lib/aidesTerritoires/fetch";
+import { fetchAideFromAidesTerritoiresById } from "@/src/lib/aidesTerritoires/fetch";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { addAideInEstimation, getEstimationById } from "@/lib/prisma/prismaEstimationQueries";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
+import { addAideInEstimation, getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
-import { upsertAide } from "@/lib/prisma/prismaAideQueries";
-import { resolveAidType } from "@/components/financement/helpers";
-import { EstimationAide } from "@/lib/prisma/prismaCustomTypes";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { upsertAide } from "@/src/lib/prisma/prismaAideQueries";
+import { resolveAidType } from "@/src/components/financement/helpers";
+import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const addAideInEstimationAction = async (
   estimationId: number,

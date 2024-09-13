@@ -1,4 +1,4 @@
-import { ProjetWithPublicRelations, UserProjetWithPublicUser } from "@/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations, UserProjetWithPublicUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { collectivite, InvitationStatus, RoleProjet } from "@prisma/client";
 import { orderBy } from "lodash";
 

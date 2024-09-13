@@ -1,10 +1,10 @@
 "use client";
 
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
-import { useModalStore } from "@/stores/modal/provider";
+import { useModalStore } from "@/src/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
-import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import Button from "@codegouvfr/react-dsfr/Button";
 
 export type PartageOverviewDeleteOrQuitModaleState = {

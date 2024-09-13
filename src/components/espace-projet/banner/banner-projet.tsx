@@ -1,16 +1,16 @@
 "use client";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { PictoEspaceSelector } from "@/components/common/pictos";
-import { PictoId } from "@/components/common/pictos/picto-espace-selector";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { PictoEspaceSelector } from "@/src/components/common/pictos";
+import { PictoId } from "@/src/components/common/pictos/picto-espace-selector";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Link from "next/link";
 import clsx from "clsx";
 import { BannerProjetButtons } from "./banner-projet-buttons";
 import { Suspense } from "react";
 import { BannerProjetSkeleton } from "./banner-projet-skeleton";
-import { getCurrentUserRole } from "@/components/partage/helpers";
-import { useUserStore } from "@/stores/user/provider";
-import { LecteurModeLabel } from "@/components/common/lecteur-mode-label";
+import { getCurrentUserRole } from "@/src/components/partage/helpers";
+import { useUserStore } from "@/src/stores/user/provider";
+import { LecteurModeLabel } from "@/src/components/common/lecteur-mode-label";
 import { RoleProjet } from "@prisma/client";
 
 export default function BannerProjet({ className }: { className?: string }) {

@@ -4,8 +4,8 @@ import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { estimation } from "@prisma/client";
 import { notifications } from "../common/notifications";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { deleteEstimationAction } from "@/actions/estimation/delete-estimation-action";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { deleteEstimationAction } from "@/src/actions/estimation/delete-estimation-action";
 
 type ListeProjetsCardDeleteModalProps = {
   estimation: estimation;

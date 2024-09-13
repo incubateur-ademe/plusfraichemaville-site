@@ -1,12 +1,12 @@
-import { SeparatorY } from "@/components/common/separator";
-import { Spinner } from "@/components/common/spinner";
+import { SeparatorY } from "@/src/components/common/separator";
+import { Spinner } from "@/src/components/common/spinner";
 import clsx from "clsx";
 import Image from "next/image";
 import React, { PropsWithChildren } from "react";
-import { useUserStore } from "@/stores/user/provider";
-import { useProjetsStore } from "@/stores/projets/provider";
-import { Case, Conditional } from "@/components/common/conditional-renderer";
-import { LecteurModeLabel } from "@/components/common/lecteur-mode-label";
+import { useUserStore } from "@/src/stores/user/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { Case, Conditional } from "@/src/components/common/conditional-renderer";
+import { LecteurModeLabel } from "@/src/components/common/lecteur-mode-label";
 
 type AideEstimationsCardRecapProps = {
   isLoading: boolean;

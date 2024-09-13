@@ -1,13 +1,13 @@
 import { createStore } from "zustand/vanilla";
-import { updateBookmarkedFichesSolutionsProjetAction } from "@/actions/users/update-bookmarked-fs-action";
-import { UserWithCollectivite } from "@/lib/prisma/prismaCustomTypes";
+import { updateBookmarkedFichesSolutionsProjetAction } from "@/src/actions/users/update-bookmarked-fs-action";
+import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import {
   FicheBookmarkedSolution,
   FichesBookmarked,
   getAllSavedFichesFromLocalStorage,
-} from "@/components/common/generic-save-fiche/helpers";
-import { updateFichesUserAction } from "@/actions/users/update-fiches-user-action";
-import { saveAllFichesFromLocalStorageAction } from "@/actions/users/save-all-fiches-from-local-storage";
+} from "@/src/components/common/generic-save-fiche/helpers";
+import { updateFichesUserAction } from "@/src/actions/users/update-fiches-user-action";
+import { saveAllFichesFromLocalStorageAction } from "@/src/actions/users/save-all-fiches-from-local-storage";
 
 export type UserInfos = UserWithCollectivite | null | undefined;
 

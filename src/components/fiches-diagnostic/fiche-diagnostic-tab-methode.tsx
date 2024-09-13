@@ -2,13 +2,13 @@ import { Separator } from "../common/separator";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
 import { FicheDiagnosticResponse } from "./types";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
-import { getCoutFiche } from "@/helpers/cout/cout-fiche-solution";
-import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
-import { TypeFiche, formatNumberWithSpaces } from "@/helpers/common";
+import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
+import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
+import { TypeFiche, formatNumberWithSpaces } from "@/src/helpers/common";
 import clsx from "clsx";
-import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
+import { getMethodeDiagnosticFromCode } from "@/src/components/fiches-diagnostic/filters/methode";
 import React from "react";
-import { getCreditsImageForFicheDiagnostic } from "@/helpers/credits-image";
+import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
 
 export const FicheDiagnosticMethodeTab = ({
   ficheDiagnostic,

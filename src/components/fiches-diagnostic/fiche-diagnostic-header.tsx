@@ -1,8 +1,8 @@
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
 import { FicheDiagnosticResponseAttributes } from "./types";
 import Image from "next/image";
-import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
+import { getMethodeDiagnosticFromCode } from "@/src/components/fiches-diagnostic/filters/methode";
 
 export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
   return (

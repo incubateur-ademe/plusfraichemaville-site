@@ -1,4 +1,4 @@
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Link from "next/link";
 
 export const FichesDiagnosticFavorisEmpty = () => (

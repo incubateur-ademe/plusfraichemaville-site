@@ -1,11 +1,11 @@
 import { GenericSaveButtonElement } from "./generic-save-button-element";
 
 import { selectSavedOrUnsavedAssets } from "./assets";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
-import { updateFichesProjetAction } from "@/actions/projets/update-fiches-projet-action";
-import { notifications } from "@/components/common/notifications";
-import { useUserStore } from "@/stores/user/provider";
+import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
+import { notifications } from "@/src/components/common/notifications";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
   const isSolution = props.type === "solution";

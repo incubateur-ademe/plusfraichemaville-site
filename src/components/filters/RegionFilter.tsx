@@ -1,6 +1,6 @@
 "use client";
-import { ALL_REGIONS } from "@/helpers/regions";
-import { useMultipleValuesFilter } from "@/hooks/useMultipleValuesFilter";
+import { ALL_REGIONS } from "@/src/helpers/regions";
+import { useMultipleValuesFilter } from "@/src/hooks/useMultipleValuesFilter";
 
 export default function RegionFilter({ className }: { className?: string }) {
   const FILTER_NAME = "regionFilter";

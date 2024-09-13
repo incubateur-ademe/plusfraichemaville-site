@@ -1,8 +1,8 @@
-import { FicheSolution } from "@/components/ficheSolution/fiche-solution";
-import { getAllFichesSolutions, getFicheSolutionBySlug } from "@/lib/strapi/queries/fichesSolutionsQueries";
+import { FicheSolution } from "@/src/components/ficheSolution/fiche-solution";
+import { getAllFichesSolutions, getFicheSolutionBySlug } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { Metadata } from "next";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { computeMetadata } from "@/helpers/metadata/helpers";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 type FicheSolutionPageProps = {
   params: { ficheSolutionSlug: string; projetId: string };

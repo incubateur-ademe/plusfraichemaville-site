@@ -1,9 +1,9 @@
-import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "@/components/financement/types";
+import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "@/src/components/financement/types";
 import React from "react";
 // eslint-disable-next-line max-len
-import { AideEstimationsCardWarningRemainingDays } from "@/components/financement/aide/aide-estimations-card-warning-remaining-day";
-import { dateToStringWithoutTime } from "@/helpers/dateUtils";
-import { resolveAidType } from "@/components/financement/helpers";
+import { AideEstimationsCardWarningRemainingDays } from "@/src/components/financement/aide/aide-estimations-card-warning-remaining-day";
+import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
+import { resolveAidType } from "@/src/components/financement/helpers";
 
 export type AidesTerritoiresAideLine = {
   title: string;

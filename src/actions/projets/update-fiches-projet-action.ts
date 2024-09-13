@@ -1,11 +1,11 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { updateFichesProjet } from "@/lib/prisma/prismaProjetQueries";
-import { ProjetWithRelations } from "@/lib/prisma/prismaCustomTypes";
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { updateFichesProjet } from "@/src/lib/prisma/prismaProjetQueries";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const updateFichesProjetAction = async (
   projetId: number,

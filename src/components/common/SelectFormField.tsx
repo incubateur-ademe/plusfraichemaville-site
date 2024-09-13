@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
-import RedAsterisk from "@/components/common/RedAsterisk";
+import RedAsterisk from "@/src/components/common/RedAsterisk";
 
 export type SelectOption<T extends string = string> = {
   name: string;

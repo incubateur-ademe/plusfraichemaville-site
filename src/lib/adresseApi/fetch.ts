@@ -1,6 +1,6 @@
-import { customCaptureException } from "@/lib/sentry/sentryCustomMessage";
-import { AddressCollectivite, AddressProjet, BanAPIResponse } from "@/lib/adresseApi/types";
-import { mapAddressApiToAddressProjet, mapAddressApiToCollectiviteAddress } from "@/lib/adresseApi/banApiHelper";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { AddressCollectivite, AddressProjet, BanAPIResponse } from "@/src/lib/adresseApi/types";
+import { mapAddressApiToAddressProjet, mapAddressApiToCollectiviteAddress } from "@/src/lib/adresseApi/banApiHelper";
 import { Feature, GeoJsonProperties, Point } from "geojson";
 
 const fetchAddressFromBanApi = async (

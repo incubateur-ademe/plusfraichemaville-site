@@ -1,6 +1,6 @@
 "use server";
 
-import { FicheDiagnosticResponse, FichesDiagnosticResponse } from "@/components/fiches-diagnostic/types";
+import { FicheDiagnosticResponse, FichesDiagnosticResponse } from "@/src/components/fiches-diagnostic/types";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "../helpers/strapiArrayUtils";
 import { strapiGraphQLCall } from "../strapiClient";
 import { APIResponseCollection } from "../types/types";

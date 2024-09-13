@@ -1,4 +1,4 @@
-import { setBadgeOn, NotificationElements } from "@/helpers/notification-badge";
+import { setBadgeOn, NotificationElements } from "@/src/helpers/notification-badge";
 import { selectSavedOrUnsavedAssets } from "./assets";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { GenericSaveButtonElement } from "./generic-save-button-element";

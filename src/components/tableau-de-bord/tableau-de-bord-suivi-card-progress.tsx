@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 
 type TableauDeBordSuiviCardProgressProps = {
   progress: TableauDeBordSuiviCardProps["progress"];

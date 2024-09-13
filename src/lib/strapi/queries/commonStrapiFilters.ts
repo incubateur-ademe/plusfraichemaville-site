@@ -1,4 +1,4 @@
-import { APIResponse } from "@/lib/strapi/types/types";
+import { APIResponse } from "@/src/lib/strapi/types/types";
 
 type StrapiEqFilter = { attribute: string; value: string; operator: "eq"; relation: false };
 type StrapiInFilter = { attribute: string; value: string[] | number[]; operator: "in"; relation: false };

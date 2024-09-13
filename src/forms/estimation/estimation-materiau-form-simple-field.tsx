@@ -1,24 +1,27 @@
 import { useEffect, useMemo } from "react";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { FicheSolutionResponse } from "@/components/ficheSolution/type";
+import { FicheSolutionResponse } from "@/src/components/ficheSolution/type";
 
 import Button from "@codegouvfr/react-dsfr/Button";
 
-import EstimationMateriauGlobalPriceFooter from "@/forms/estimation/estimation-materiau-global-price-footer";
-import { updateEstimationMateriauxAction } from "@/actions/estimation/update-estimation-materiaux-action";
-import { notifications } from "@/components/common/notifications";
-import { formatNumberWithSpaces, scrollToTop } from "@/helpers/common";
+import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
+import { updateEstimationMateriauxAction } from "@/src/actions/estimation/update-estimation-materiaux-action";
+import { notifications } from "@/src/components/common/notifications";
+import { formatNumberWithSpaces, scrollToTop } from "@/src/helpers/common";
 import { EstimationMateriauFieldUnique } from "./estimation-materiau-field-unique";
 import {
   EstimationMateriauxSimpleFieldFormData,
   EstimationMateriauxFormSimpleFieldSchema,
 } from "./estimation-materiau-form-simple-field-schema";
-import InputFormField from "@/components/common/InputFormField";
-import { getUniteCoutFromCode } from "@/helpers/cout/cout-common";
-import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/helpers/cout/cout-fiche-solution";
+import InputFormField from "@/src/components/common/InputFormField";
+import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
+import {
+  getLabelCoutEntretienByQuantite,
+  getLabelCoutFournitureByQuantite,
+} from "@/src/helpers/cout/cout-fiche-solution";
 
 export default function EstimationMateriauSimpleFieldForm({
   ficheSolution,

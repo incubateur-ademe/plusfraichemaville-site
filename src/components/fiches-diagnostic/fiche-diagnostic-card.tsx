@@ -1,14 +1,14 @@
 import Image from "next/image";
 import { FicheDiagnosticResponse } from "./types";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/lib/strapi/strapiClient";
-import { getDelaiTravauxFiche } from "@/helpers/delaiTravauxFiche";
-import { getCoutFiche } from "@/helpers/cout/cout-fiche-solution";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
+import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
-import { PFMV_ROUTES } from "@/helpers/routes";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
-import { getMethodeDiagnosticFromCode } from "@/components/fiches-diagnostic/filters/methode";
-import { formatNumberWithSpaces, TypeFiche } from "@/helpers/common";
+import { getMethodeDiagnosticFromCode } from "@/src/components/fiches-diagnostic/filters/methode";
+import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 
 type FicheDiagnosticCardProps = {

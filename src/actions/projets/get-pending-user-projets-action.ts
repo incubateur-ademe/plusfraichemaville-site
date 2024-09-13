@@ -1,10 +1,10 @@
 "use server";
 
-import { auth } from "@/lib/next-auth/auth";
+import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { ProjetWithPublicRelations } from "@/lib/prisma/prismaCustomTypes";
-import { getPendingUserProjets } from "@/lib/prisma/prismaProjetQueries";
-import { PermissionManager } from "@/helpers/permission-manager";
+import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { getPendingUserProjets } from "@/src/lib/prisma/prismaProjetQueries";
+import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const getPendingUserProjetsAction = async (
   userId: string,

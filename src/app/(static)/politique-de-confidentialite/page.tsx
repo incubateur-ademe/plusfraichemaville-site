@@ -1,8 +1,8 @@
 import React from "react";
 import { PrivacyPolicy } from "@incubateur-ademe/legal-pages-react";
 import { Metadata } from "next";
-import { computeMetadata } from "@/helpers/metadata/helpers";
-import { FooterConsentManagementItem } from "@/components/cookie/consentManagement";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { FooterConsentManagementItem } from "@/src/components/cookie/consentManagement";
 
 export const metadata: Metadata = computeMetadata("Politique de confidentialité");
 

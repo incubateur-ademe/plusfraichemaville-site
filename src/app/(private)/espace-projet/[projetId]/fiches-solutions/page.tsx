@@ -1,4 +1,4 @@
-import { FichesSolutionsProjet } from "@/components/fiches-solutions-projet";
+import { FichesSolutionsProjet } from "@/src/components/fiches-solutions-projet";
 
 export default function FichesSolutionsProjetPage() {
   return <FichesSolutionsProjet />;

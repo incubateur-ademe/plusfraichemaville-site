@@ -1,6 +1,6 @@
 "use client";
 
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { FichesDiagnosticProjetEmpty } from "./fiche-diagnostic-projet-empty";
 
 import { FicheDiagnosticCardWithFetcher } from "./fiche-diagnostic-card-with-fetcher";
@@ -8,8 +8,8 @@ import { FicheDiagnosticCardWithFetcher } from "./fiche-diagnostic-card-with-fet
 import { FicheDiagnosticProjetListeAddButton } from "./fiche-diagnostic-projet-liste-add-button";
 
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
-import { PFMV_ROUTES } from "@/helpers/routes";
-import { useUserStore } from "@/stores/user/provider";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export const FicheDiagnosticProjetListe = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());

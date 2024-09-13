@@ -1,4 +1,4 @@
-import { extractNameInitiales } from "@/helpers/common";
+import { extractNameInitiales } from "@/src/helpers/common";
 import clsx from "clsx";
 
 type PartageOverviewMemberSyllabesProps = {

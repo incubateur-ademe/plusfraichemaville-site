@@ -1,13 +1,13 @@
 "use client";
 
-import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useTransition } from "react";
 import { Spinner } from "../common/spinner";
 import { notifications } from "../common/notifications";
-import { acceptProjectRequestAction } from "@/actions/userProjet/accept-project-request-action";
-import { declineProjectRequestAction } from "@/actions/userProjet/decline-project-request-action";
-import { useProjetsStore } from "@/stores/projets/provider";
+import { acceptProjectRequestAction } from "@/src/actions/userProjet/accept-project-request-action";
+import { declineProjectRequestAction } from "@/src/actions/userProjet/decline-project-request-action";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 
 export const PartageOverviewMemberStatusRequested = ({ member }: { member: UserProjetWithUser }) => {
   const [isPending, startTransition] = useTransition();

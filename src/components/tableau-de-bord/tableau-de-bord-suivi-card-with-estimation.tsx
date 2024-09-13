@@ -1,11 +1,11 @@
 "use client";
 
-import { useProjetsStore } from "@/stores/projets/provider";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useMemo } from "react";
-import { getLastCompletedEstimation } from "@/helpers/estimation";
-import { EstimationMateriauxFicheSolution } from "@/lib/prisma/prismaCustomTypes";
-import { computeGlobalFicheSolutionPrice } from "@/helpers/cout/cout-materiau";
-import { formatNumberWithSpaces } from "@/helpers/common";
+import { getLastCompletedEstimation } from "@/src/helpers/estimation";
+import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { computeGlobalFicheSolutionPrice } from "@/src/helpers/cout/cout-materiau";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export const TableauDeBordSuiviWithEstimation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
