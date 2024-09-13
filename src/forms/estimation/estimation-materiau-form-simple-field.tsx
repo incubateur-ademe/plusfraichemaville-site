@@ -45,7 +45,7 @@ export default function EstimationMateriauSimpleFieldForm({
       ficheSolutionId: +ficheSolution.id,
       quantite: estimationMateriaux?.quantite || 0,
     }),
-    [estimationMateriaux?.estimationMateriaux, ficheSolution.id],
+    [estimationMateriaux?.quantite, ficheSolution.id],
   );
   const form = useForm<EstimationMateriauxSimpleFieldFormData>({
     resolver: zodResolver(EstimationMateriauxFormSimpleFieldSchema),

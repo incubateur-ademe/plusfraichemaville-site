@@ -24,14 +24,14 @@ export const useMultipleValuesFilter = (filterName: string) => {
       }
       router.push(pathname + "?" + params.toString(), { scroll: false });
     },
-    [searchParams, pathname, router],
+    [filterName, searchParams, pathname, router],
   );
 
   const clearFilter = useCallback(() => {
     const params = new URLSearchParams(searchParams);
     params.delete(filterName);
     router.push(pathname + "?" + params.toString(), { scroll: false });
-  }, [pathname, router, searchParams]);
+  }, [filterName, pathname, router, searchParams]);
 
   const isFilterCodeSelected = (filterCode: string) => searchParams.get(filterName)?.split(",").includes(filterCode);
 
