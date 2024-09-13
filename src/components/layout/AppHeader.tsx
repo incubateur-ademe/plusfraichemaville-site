@@ -1,7 +1,7 @@
 import React from "react";
 import NavigationMenu from "@/src/components/layout/NavigationMenu";
 import Image from "next/image";
-import AdemePFMVLogo from "../../public/images/logo-ademe-pfmv.svg";
+import AdemePFMVLogo from "../../../public/images/logo-ademe-pfmv.svg";
 
 import { AuthButtons } from "../authentication/auth-buttons";
 import Link from "next/link";

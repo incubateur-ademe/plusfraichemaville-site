@@ -21,7 +21,7 @@ import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/conse
 import { Agent } from "@/src/components/agent-conversationnel/agent";
 
 const xtra_bold = localFont({
-  src: "../public/fonts/Marianne-ExtraBold.woff2",
+  src: "../../public/fonts/Marianne-ExtraBold.woff2",
   variable: "--font-xtra-bold",
 });
 

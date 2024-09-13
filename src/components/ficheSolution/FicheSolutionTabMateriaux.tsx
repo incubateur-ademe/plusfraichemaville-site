@@ -1,7 +1,7 @@
 import React from "react";
 import Image from "next/image";
 import CmsRichText from "@/src/components/common/CmsRichText";
-import entretienIcon from "../../public/images/fiches-solutions/entretien.svg";
+import entretienIcon from "../../../public/images/fiches-solutions/entretien.svg";
 import { GetValues } from "@/src/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";

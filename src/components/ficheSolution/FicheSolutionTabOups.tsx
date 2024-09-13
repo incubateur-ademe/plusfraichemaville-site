@@ -1,5 +1,5 @@
 import React from "react";
-import oupsImage from "../../public/images/fiches-solutions/oups.svg";
+import oupsImage from "../../../public/images/fiches-solutions/oups.svg";
 import Image from "next/image";
 import Highlight from "@codegouvfr/react-dsfr/Highlight";
 import CmsRichText from "@/src/components/common/CmsRichText";

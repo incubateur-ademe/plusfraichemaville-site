@@ -1,5 +1,5 @@
 import React from "react";
-import aidesTerittoiresLogo from "../../public/images/fiches-solutions/aides-territoires.svg";
+import aidesTerittoiresLogo from "../../../public/images/fiches-solutions/aides-territoires.svg";
 import Link from "next/link";
 import Image from "next/image";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
