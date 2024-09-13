@@ -1,4 +1,4 @@
-import { DSFRModal } from "@/types/global";
+import { DSFRModal } from "@/src/types/global";
 import { GenericSaveBaseProps } from ".";
 import { GenericSaveAuthenticatedOutsideProjet } from "./generic-save-button-authenticated-outside-projet";
 

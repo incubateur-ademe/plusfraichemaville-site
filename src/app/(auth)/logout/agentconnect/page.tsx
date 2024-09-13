@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { redirect } from "next/navigation";
-import { Page } from "@/types/global";
+import { Page } from "@/src/types/global";
 
 const Logout = async (props: Page) => {
   const logOutUrl = new URL(`${process.env.AGENT_CONNECT_BASE_URL}/v2/session/end`);

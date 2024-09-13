@@ -1,4 +1,4 @@
-import { DSFRModal } from "@/types/global";
+import { DSFRModal } from "@/src/types/global";
 import { GenericSaveModalUnauthenticated } from "./generic-save-modal-unauthenticated";
 import { useProjetsStore } from "@/stores/projets/provider";
 import { ModalSaveModalAuthenticatedOutsideProjet } from "./generic-save-modal-authenticated-outside-projet";
