@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { useState } from "react";
+import { Hidden } from "./hidden";
 
 type PopupMenuProps = {
   links: {
@@ -23,6 +24,7 @@ export const PopupMenu = ({ links }: PopupMenuProps) => {
           "block size-10 rounded-full border-[1px] border-solid border-dsfr-border-default-grey hover:!bg-white",
         )}
       >
+        <Hidden accessible>{"Plus d'actions"}</Hidden>
         <i className="ri-more-2-line size-6" />
       </button>
       {open && (
