@@ -6,6 +6,7 @@ import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
 import { UserProjetWithUser } from "@/lib/prisma/prismaCustomTypes";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { Hidden } from "../common/hidden";
 
 export type PartageOverviewDeleteOrQuitModaleState = {
   member?: UserProjetWithUser;
@@ -32,15 +33,19 @@ export const PartageOverviewDeleteOrQuitModale = () => {
     }
   }, [currentDeleteOrQuitModal]);
 
-  useIsModalOpen(modal, {
+  const isModalOpen = useIsModalOpen(modal, {
     onConceal: () => setCurrentDeleteOrQuitModal(null),
   });
 
   return (
     <>
-      <modal.Component title="" size="large" className="current-user-status-modale min-h-[296px]">
+      <modal.Component
+        title={<Hidden>{currentDeleteOrQuitModal?.options.title ?? "Fiche détail de l'aide"}</Hidden>}
+        size="large"
+        className="current-user-status-modale min-h-[296px]"
+      >
         <div>
-          <h2 className="mb-4 text-2xl">{currentDeleteOrQuitModal?.options.title}</h2>
+          {isModalOpen && <h2 className="mb-4 text-2xl">{currentDeleteOrQuitModal?.options.title}</h2>}
           <p className="mb-4">{currentDeleteOrQuitModal?.options.description}</p>
           <div className="ml-auto w-fit">
             <Button priority="tertiary" className="mr-4" onClick={modal.close}>
