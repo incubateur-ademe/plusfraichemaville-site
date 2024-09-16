@@ -6,7 +6,7 @@ module.exports = {
   },
   settings: {
     next: {
-      rootDir: ["app/*/"],
+      rootDir: ["src/app/*/"],
     },
   },
   rules: {
