@@ -7,6 +7,7 @@ import { UserStoreProvider } from "@/src/stores/user/provider";
 import MatomoPageView from "@/src/components/matomo/matomo-page-view";
 import ModalProvider from "@/src/components/modal/modal-provider";
 import { ModalStoreProvider } from "@/src/stores/modal/provider";
+import HubspotPageView from "../hubspot/path-page-view";
 
 export default function MainLayoutProviders({ children, lang }: PropsWithChildren<{ lang: string }>) {
   return (
@@ -16,6 +17,7 @@ export default function MainLayoutProviders({ children, lang }: PropsWithChildre
           <ModalStoreProvider>
             <Suspense>
               <MatomoPageView />
+              <HubspotPageView />
             </Suspense>
             <DsfrProvider lang={lang}>
               <>

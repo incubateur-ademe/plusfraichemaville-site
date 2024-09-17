@@ -8,6 +8,11 @@ export const { ConsentBannerAndConsentManagement, FooterConsentManagementItem, u
       title: "Matomo",
       description: "Nous utilisons des cookies pour mesurer l’audience de notre site et améliorer son contenu.",
     },
+    hubspot: {
+      title: "Hubspot",
+      // TODO: À changer selon le besoin
+      description: "Nous utilisons des cookies pour mesurer l’audience de notre site et améliorer son contenu.",
+    },
   },
   personalDataPolicyLinkProps: {
     href: "/politique-de-confidentialite#cookies",

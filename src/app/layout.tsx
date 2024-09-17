@@ -9,7 +9,7 @@ import { Metadata } from "next";
 import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
-import MatomoScript from "@/src/components/matomo/MatomoScript";
+import MatomoScript from "@/src/components/matomo/matomo-script";
 import MainLayoutProviders from "@/src/components/layout/MainLayoutProviders";
 import { ProjetStoreServer } from "@/src/stores/projets/server";
 import { UserStoreServer } from "@/src/stores/user/server";
@@ -19,6 +19,7 @@ import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
 import { Agent } from "@/src/components/agent-conversationnel/agent";
+import { HusbpotScript } from "../components/hubspot/script";
 
 const xtra_bold = localFont({
   src: "../../public/fonts/Marianne-ExtraBold.woff2",
@@ -58,6 +59,7 @@ export default async function RootLayout({ children }: { children: ReactElement 
         <StartDsfr />
         <DsfrHead Link={Link} doDisableFavicon={true} nonce={nonce} />
         <MatomoScript />
+        <HusbpotScript />
       </head>
       <body>
         <MainLayoutProviders lang={lang}>
