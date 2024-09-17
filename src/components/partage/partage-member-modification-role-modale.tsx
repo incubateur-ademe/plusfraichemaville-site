@@ -68,7 +68,7 @@ export const PartageMemberModificationRoleModale = () => {
       <modal.Component title="" size="small" className="current-user-status-modale min-h-[376px]">
         {currentUserModification ? (
           <>
-            <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Modifier les informations {"d'un member"}</h2>
+            <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Modifier les informations {"d'un membre"}</h2>
             <form id="user-partage-modification" onSubmit={form.handleSubmit(onSubmit)}>
               <Input
                 label=""

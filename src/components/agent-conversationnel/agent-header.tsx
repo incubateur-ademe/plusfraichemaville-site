@@ -2,6 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { ConversationControls } from "./hooks/use-ai-chat-config";
 import { Case, Conditional } from "../common/conditional-renderer";
+import { Hidden } from "../common/hidden";
 
 type AgentHeaderProps = {
   closeChat: () => void;
@@ -33,6 +34,7 @@ export const AgentHeader = ({
             <Case condition={!conversationControls.conversationStarted && conversationControls.hasLastConversation}>
               <button onClick={conversationControls.loadLastConversation} aria-describedby={`tooltip-restaurer`}>
                 <i className="ri-history-line text-pfmv-navy"></i>
+                <Hidden accessible>Reprendre la dernière conversation</Hidden>
               </button>
               <span className="fr-tooltip fr-placement" id={`tooltip-restaurer`} role="tooltip" aria-hidden="true">
                 Reprendre la dernière conversation
@@ -47,9 +49,11 @@ export const AgentHeader = ({
         <div className="flex items-center gap-4 text-pfmv-navy">
           <button onClick={expandChat} className="hidden sm:block">
             <i className="ri-expand-diagonal-line"></i>
+            <Hidden accessible>{"Agrandir/Réduire la fenêtre de l'agent conversationnel"}</Hidden>
           </button>
           <button onClick={closeChat}>
             <i className="ri-close-line"></i>
+            <Hidden accessible>{"Fermer la fenêtre de l'agent conversationnel"}</Hidden>
           </button>
         </div>
       </div>

@@ -382,3 +382,15 @@
 .agent-popover {
   box-shadow: 0 0 10px 0 rgba(0, 0, 145, 0.2);
 }
+
+.visually-hidden:not(:focus):not(:active) {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: auto;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
