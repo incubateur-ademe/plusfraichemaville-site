@@ -1,10 +1,6 @@
 /** @type {import("tailwindcss").Config} */
 module.exports = {
-  content: [
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./forms/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       fontFamily: {
@@ -34,7 +30,9 @@ module.exports = {
       "dsfr-background-alt-brown-cafe-creme": "var(--background-alt-brown-cafe-creme)",
       "dsfr-background-contrast-blue-france": "var(--background-contrast-blue-france)",
       "dsfr-background-contrast-grey-hover": "var(--background-contrast-grey-hover)",
+      "dsfr-background-contrast-grey-active": "var(--background-contrast-grey-active)",
       "dsfr-border-action-high-error": "var(--border-action-high-error)",
+      "dsfr-background-contrast-blue-france-hover": "var(--background-contrast-blue-france-hover)",
       "dsfr-background-contrast-yellow-tournesol-hover": "var(--background-contrast-yellow-tournesol-hover)",
       "dsfr-warning-425-625-hover": "var(--warning-425-625-hover)",
       "dsfr-background-flat-info": "var(--background-flat-info)",
