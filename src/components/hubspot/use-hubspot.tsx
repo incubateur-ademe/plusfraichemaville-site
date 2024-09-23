@@ -34,6 +34,7 @@ export const useHubspot = (): UseHubspotProps => {
   };
 
   const declineCookie = () => {
+    _hsq.push(["doNotTrack"]);
     _hsp.push(["revokeCookieConsent"]);
   };
 

@@ -10,10 +10,10 @@ const cspHeader = `
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
     script-src-elem 'self' 'nonce-${nonce}' https://js-eu1.hs-scripts.com https://js-eu1.hscollectedforms.net 
-    https://js-eu1.hs-analytics.net/analytics/1727091300000/145216267.js 
+    https://js-eu1.hs-analytics.net/
     https://js-eu1.hs-banner.com/v2/145216267/banner.js;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ ;
+    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ https://track-eu1.hubspot.com/;
     font-src 'self' https://fonts.gstatic.com/;
     object-src 'none';
     base-uri 'self';
