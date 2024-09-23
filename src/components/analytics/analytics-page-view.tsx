@@ -3,6 +3,7 @@ import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useConsent } from "@/src/components/cookie/consentManagement";
 import { AnalyticsService } from "./types";
+import { sanitizeUrlForAnalyticTool } from "./helpers";
 
 type AnalyticsPageViewProps = {
   service: AnalyticsService;
@@ -30,7 +31,8 @@ export default function AnalyticsPageView({ service, acceptCookie, declineCookie
   useEffect(() => {
     if (consent) {
       const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
-      tracker(url);
+      const sanitizedUrl = sanitizeUrlForAnalyticTool(url);
+      tracker(sanitizedUrl);
     }
   }, [consent, pathname, searchParams, tracker]);
 

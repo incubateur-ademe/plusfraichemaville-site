@@ -2,6 +2,7 @@ import { HubspotSetTrackEventProps, UseHubspotProps } from "./types";
 
 export const useHubspot = (): UseHubspotProps => {
   const _hsq = typeof window !== "undefined" && window._hsq ? window._hsq : [];
+  const _hsp = typeof window !== "undefined" && window._hsp ? window._hsp : [];
 
   const setTrackPageView = () => {
     _hsq.push(["trackPageView"]);
@@ -33,7 +34,11 @@ export const useHubspot = (): UseHubspotProps => {
   };
 
   const declineCookie = () => {
-    _hsq.push(["revokeCookieConsent"]);
+    _hsp.push(["revokeCookieConsent"]);
+  };
+
+  const acceptCookie = () => {
+    _hsq.push(["doNotTrack", { track: true }]);
   };
 
   return {
@@ -42,5 +47,6 @@ export const useHubspot = (): UseHubspotProps => {
     setIdentity,
     setTrackEvent,
     declineCookie,
+    acceptCookie,
   };
 };

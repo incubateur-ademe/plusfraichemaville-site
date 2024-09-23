@@ -4,6 +4,7 @@ export type HubspotQueryParams =
   | "identify"
   | "trackEvent"
   | "revokeCookieConsent"
+  | "doNotTrack"
   | "addPrivacyConsentListener"
   | "addIdentityListener";
 
@@ -20,4 +21,18 @@ export type UseHubspotProps = {
   setIdentity: (_email: string, _customProperties?: {}) => void;
   setTrackEvent: (_event: HubspotSetTrackEventProps) => void;
   declineCookie: () => void;
+  acceptCookie: () => void;
+};
+
+type HubspotCookieConsentCategory = {
+  necessary: boolean;
+  analytics: boolean;
+  advertisement: boolean;
+  functionality: boolean;
+};
+
+export type HubspotCookieConsent = {
+  allowed: boolean;
+  previousCategories: HubspotCookieConsentCategory;
+  categories: HubspotCookieConsentCategory;
 };

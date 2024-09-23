@@ -30,5 +30,6 @@ export type Page = {
 declare global {
   export interface Window {
     _hsq: HubspotQuery[];
+    _hsp: HubspotQuery[];
   }
 }
