@@ -7,6 +7,7 @@ import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
+import { Hidden } from "../hidden";
 import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
@@ -35,13 +36,17 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
   };
 
   return (
-    <modal.Component title="" size="large">
-      <div className="mb-4 flex items-center">
-        <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
-        <span className="block text-2xl font-bold">
-          {type === "solution" ? "Solution" : "Méthode de diagnostic"} ajoutée dans Ma sélection
-        </span>
-      </div>
+    <modal.Component
+      title={
+        <div className="mb-4 mt-6 flex items-center">
+          <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
+          <span className="block text-2xl font-bold">
+            {type === "solution" ? "Solution" : "Méthode de diagnostic"} ajoutée dans Ma sélection
+          </span>
+        </div>
+      }
+      size="large"
+    >
       <span>
         Retrouvez toutes vos {type === "solution" ? "solutions" : "méthode de diagnostic"} mises en favoris dans Ma
         sélection. <br />
@@ -49,7 +54,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
       </span>
       <div className="my-10 flex flex-col gap-0 md:flex-row md:items-center md:gap-5">
         <Select
-          label=""
+          label={<Hidden accessible>Selectionnez un projet</Hidden>}
           className="w-96"
           nativeSelectProps={{
             onChange: handleChange,

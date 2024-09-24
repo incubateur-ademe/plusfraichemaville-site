@@ -26,7 +26,15 @@ export const AideFicheModal = () => {
 
   return (
     <>
-      <modal.Component title="" size="large" className="aide-modal">
+      <modal.Component
+        title={
+          <span aria-hidden className="hidden">
+            {currentDetailedAide?.name_initial ?? "Détail de l'aide financière"}
+          </span>
+        }
+        size="large"
+        className="aide-modal"
+      >
         {currentDetailedAide ? <AideFiche aide={currentDetailedAide} /> : <div>Chargement en cours...</div>}
       </modal.Component>
     </>

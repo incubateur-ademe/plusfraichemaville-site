@@ -18,7 +18,6 @@ import { GenericFichesSaverFromLocalStorage } from "@/src/components/common/gene
 import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
-import { Agent } from "@/src/components/agent-conversationnel/agent";
 import { HusbpotScript } from "../components/hubspot/script";
 
 const xtra_bold = localFont({
@@ -70,7 +69,6 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <AppHeader />
           <Toaster position="bottom-left" />
           <div className={`${xtra_bold.variable}`}>{children}</div>
-          <Agent />
         </MainLayoutProviders>
       </body>
     </html>

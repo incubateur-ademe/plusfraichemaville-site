@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { GenericSaveBaseProps } from ".";
 import { GenericSaveLabel } from "./generic-save-label";
 import { GenericSavePicto } from "./generic-save-picto";
+import { Hidden } from "../hidden";
 
 interface GenericSaveFicheButtonBaseProps extends Omit<GenericSaveBaseProps, "type"> {
   className?: string;
@@ -26,6 +27,7 @@ export const GenericSaveButtonElement = ({
       <button onClick={update} className={clsx(assets.className)}>
         {assets.code && (
           <div className={clsx("savePicto flex h-8 w-8 items-center justify-center rounded-full")}>
+            <Hidden accessible>Sauvegarder</Hidden>
             <GenericSavePicto />
           </div>
         )}

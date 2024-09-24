@@ -58,10 +58,16 @@ export const ViewerModeModal = () => {
   };
 
   return (
-    <modal.Component title="" size="large">
-      <h2 className="mb-4 flex gap-4 text-2xl">
-        <LecteurModeLabel />
-      </h2>
+    <modal.Component
+      title={
+        <>
+          <span className="mb-4 flex gap-4 text-2xl">
+            <LecteurModeLabel />
+          </span>
+        </>
+      }
+      size="large"
+    >
       <div className="mb-6">
         Vous allez consulter ce projet en <strong>mode lecteur</strong>, sans possibilité de modification. Pour ajuster
         vos droits {"d'accès"}, veuillez contacter l’administrateur du projet.

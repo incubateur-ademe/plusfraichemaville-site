@@ -4,7 +4,6 @@ import "./agent.color.css";
 import { AiChat, AiChatUI } from "@nlux/react";
 import { useAiChatConfig } from "./hooks/use-ai-chat-config";
 import clsx from "clsx";
-import { PropsWithChildren } from "react";
 import { AgentGreeting } from "./agent-greeting";
 import { useAiChatControls } from "./hooks/use-ai-chat-controls";
 import { AgentButton } from "./agent-button";
@@ -17,7 +16,7 @@ import { AgentError } from "./agent-error";
 
 const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.AgentHeader));
 
-export const Agent = ({ children }: PropsWithChildren) => {
+export const Agent = () => {
   const { adapter, api, initialConversation, conversationControls, error } = useAiChatConfig();
   const { displayOptions, openChat, closeChat, expandChat } = useAiChatControls();
   const { width, height } = displayOptions.dimensions;
@@ -44,9 +43,21 @@ export const Agent = ({ children }: PropsWithChildren) => {
             initialConversation={initialConversation}
             conversationOptions={{
               conversationStarters: [
-                { prompt: "Je veux créer un projet", icon: "/images/zephyr/loupe.svg" },
-                { prompt: "Je cherche une solution", icon: "/images/zephyr/plus.svg" },
-                { prompt: "Aide à la décision?", icon: "/images/zephyr/etoiles.svg" },
+                {
+                  prompt: "Je veux créer un projet",
+                  icon: "/images/zephyr/loupe.svg",
+                  label: "Je veux créer un projet",
+                },
+                {
+                  prompt: "Je cherche une solution",
+                  icon: "/images/zephyr/plus.svg",
+                  label: "Je cherche une solution",
+                },
+                {
+                  prompt: "Aide à la décision?",
+                  icon: "/images/zephyr/etoiles.svg",
+                  label: "Aide à la décision?",
+                },
               ],
             }}
           >
@@ -56,7 +67,6 @@ export const Agent = ({ children }: PropsWithChildren) => {
             <AiChatUI.Greeting>
               <AgentGreeting />
             </AiChatUI.Greeting>
-            {children}
           </AiChat>
         </div>
       </div>
