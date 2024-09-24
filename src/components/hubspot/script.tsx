@@ -1,8 +1,14 @@
+import { auth } from "@/src/lib/next-auth/auth";
 import { headers } from "next/headers";
 import Script from "next/script";
 
-export function HusbpotScript() {
+export async function HusbpotScript() {
   const nonce = headers().get("x-nonce") || "";
+  const session = await auth();
+
+  if (!session?.user.email) {
+    return null;
+  }
 
   return (
     <Script
