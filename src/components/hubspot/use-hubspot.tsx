@@ -1,7 +1,7 @@
 import { HubspotSetTrackEventProps, UseHubspotProps } from "./types";
 
 export const useHubspot = (): UseHubspotProps => {
-  const isProd = process.env.NODE_ENV !== "production";
+  const isProd = process.env.NODE_ENV === "production";
   const _hsq = typeof window !== "undefined" && isProd && window._hsq ? window._hsq : [];
   const _hsp = typeof window !== "undefined" && isProd && window._hsp ? window._hsp : [];
 
