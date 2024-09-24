@@ -5,7 +5,7 @@ export type NiveauMaturite = {
   code: string;
 };
 
-const ALL_NIVEAU_MATURITE: NiveauMaturite[] = [
+export const ALL_NIVEAU_MATURITE: NiveauMaturite[] = [
   {
     label: "Questionnement sur la surchauffe urbaine au sein d’une commune",
     code: "questionnement",
