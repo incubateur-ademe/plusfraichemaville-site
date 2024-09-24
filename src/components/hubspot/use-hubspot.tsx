@@ -33,6 +33,11 @@ export const useHubspot = (): UseHubspotProps => {
     ]);
   };
 
+  const trackUserWithEmail = (path: string, email: string) => {
+    setPathPageView(path);
+    setIdentity(email, { path });
+  };
+
   const declineCookie = () => {
     _hsq.push(["doNotTrack"]);
     _hsp.push(["revokeCookieConsent"]);
@@ -47,6 +52,7 @@ export const useHubspot = (): UseHubspotProps => {
     setTrackPageView,
     setIdentity,
     setTrackEvent,
+    trackUserWithEmail,
     declineCookie,
     acceptCookie,
   };

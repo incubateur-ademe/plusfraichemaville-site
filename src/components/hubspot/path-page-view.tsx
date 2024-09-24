@@ -17,7 +17,7 @@ export default function HubspotPageView() {
       service="hubspot"
       acceptCookie={service.acceptCookie}
       declineCookie={service.declineCookie}
-      tracker={(path) => service.setIdentity(email, { path })}
+      tracker={(path) => service.trackUserWithEmail(path, email)}
     />
   );
 }
