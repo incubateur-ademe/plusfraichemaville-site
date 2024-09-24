@@ -20,6 +20,9 @@ importers:
       '@hookform/resolvers':
         specifier: ^3.3.4
         version: 3.4.2(react-hook-form@7.51.5(react@18.3.1))
+      '@hubspot/api-client':
+        specifier: ^12.0.0
+        version: 12.0.0
       '@incubateur-ademe/legal-pages-react':
         specifier: ^0.3.0
         version: 0.3.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -880,6 +883,9 @@ packages:
     resolution: {integrity: sha512-1m9uAVIO8wVf7VCDAGsuGA0t6Z3m6jVGAN50HkV9vYLl0yixKK/Z1lr01vaRvYCkIKGoy1noVRxMzQYb4y/j1Q==}
     peerDependencies:
       react-hook-form: ^7.0.0
+
+  '@hubspot/api-client@12.0.0':
+    resolution: {integrity: sha512-mdzzRi5k/UlyvVfsODpDZYSnFtrWdusXNFM2Ejl/kOS7fn6CKHNm0IKLTRjvqfNKFj5OQ9CHEjPG9xt+1ycNpQ==}
 
   '@humanwhocodes/config-array@0.11.14':
     resolution: {integrity: sha512-3T8LkOmg45BV5FICb15QQMsyUSWrQ8AygVfC7ZG32zOalnqrilm018ZVCw0eapXux8FtA33q8PSRSstjee3jSg==}
@@ -2045,6 +2051,9 @@ packages:
   '@types/ms@0.7.34':
     resolution: {integrity: sha512-nG96G3Wp6acyAgJqGasjODb+acrI7KltPiRxzHPXnP3NgI28bpQDRv53olbqGXbfcgF5aiiHmO3xpwEpS5Ld9g==}
 
+  '@types/node-fetch@2.6.11':
+    resolution: {integrity: sha512-24xFj9R5+rfQJLRyM56qh+wnVSYhyXC2tkoBndtY0U+vubqNsYXGjufB2nn8Q6gt0LrARwL6UBtMCSVCwl4B1g==}
+
   '@types/node@20.13.0':
     resolution: {integrity: sha512-FM6AOb3khNkNIXPnHFDYaHerSv8uN22C91z098AnGccVu+Pcdhi+pNUFDi0iLmPIsVE0JBD0KVS7mzUYt4nRzQ==}
 
@@ -2537,6 +2546,9 @@ packages:
 
   boolbase@1.0.0:
     resolution: {integrity: sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==}
+
+  bottleneck@2.19.5:
+    resolution: {integrity: sha512-VHiNCbI1lKdl44tGrhNfU3lup0Tj/ZBMJB5/2ZbNXRCPuRCO7ed2mgcK4r17y+KB2EfuYuRaVlwNbAeaWGSpbw==}
 
   boxen@5.1.2:
     resolution: {integrity: sha512-9gYgQKXx+1nP8mP7CzFyaUARhg7D3n1dF/FnErWmu9l6JvGpNUN278h0aSb+QjoiKSWG+iZ3uHrcqk0qrY9RQQ==}
@@ -3376,6 +3388,9 @@ packages:
     resolution: {integrity: sha512-QCOllgZJtaUo9miYBcLChTUaHNjJF3PYs1VidD7AwiEj1kYxKeQTctLAezAOH5ZKRH0g2IgPn6KwB4IT8iRpvA==}
     engines: {node: '>= 0.4'}
 
+  es6-promise@4.2.8:
+    resolution: {integrity: sha512-HJDGx5daxeIvxdBxvG2cb9g4tEvwIk3i8+nhX0yGrYmZUzbkdg8QbDevheDB8gd0//uPj4c1EQua8Q+MViT0/w==}
+
   esbuild-loader@2.21.0:
     resolution: {integrity: sha512-k7ijTkCT43YBSZ6+fBCW1Gin7s46RrJ0VQaM8qA7lq7W+OLsGgtLyFV8470FzYi/4TeDexniTBTPTwZUnXXR5g==}
     peerDependencies:
@@ -3703,6 +3718,10 @@ packages:
     peerDependencies:
       typescript: '>3.6.0'
       webpack: ^5.11.0
+
+  form-data@2.5.1:
+    resolution: {integrity: sha512-m21N3WOmEEURgk6B9GLOE4RuWOFf28Lhh9qGYeNlGq4VDXUlJy2th2slBNU8Gp8EzloYZOibZJ7t5ecIrFSjVA==}
+    engines: {node: '>= 0.12'}
 
   form-data@4.0.0:
     resolution: {integrity: sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==}
@@ -5865,6 +5884,9 @@ packages:
     resolution: {integrity: sha512-0wsrzgTz/kAVIeuxSjnpGC56rzYtr6JT/2BwEvMaPhFIoYa1aGO8LbzuU1R0uUYQkLpWBTOj0l/CLAJB64J6nQ==}
     engines: {node: '>=0.6'}
 
+  querystringify@2.2.0:
+    resolution: {integrity: sha512-FIqgj2EUvTa7R50u0rGsyTftzjYmv/a3hO345bZNrqabNqjtgiDMgmo4mkUjd+nzU5oF3dClKqFIPUKybUyqoQ==}
+
   queue-microtask@1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
 
@@ -6193,6 +6215,9 @@ packages:
   require-from-string@2.0.2:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
+
+  requires-port@1.0.0:
+    resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
 
   reselect@4.1.8:
     resolution: {integrity: sha512-ab9EmR80F/zQTMNeneUr4cv+jSwPJgIlvEmVwLerwrWVbpLlBuls9XHzIeTFy4cegU2NHBp3va0LKOzU5qFEYQ==}
@@ -7084,6 +7109,9 @@ packages:
   urix@0.1.0:
     resolution: {integrity: sha512-Am1ousAhSLBeB9cG/7k7r2R0zj50uDRlZHPGbazid5s9rlF1F/QKYObEKSIunSjIOkJZqwRRLpvewjEkM7pSqg==}
     deprecated: Please see https://github.com/lydell/urix#deprecated
+
+  url-parse@1.5.10:
+    resolution: {integrity: sha512-WypcfiRhfeUP9vvF0j6rw0J3hrWrw6iZv3+22h6iRMJ/8z1Tj6XfLP4DsUix5MhMPnXpiHDoKyoZ/bdCkwBCiQ==}
 
   use-callback-ref@1.3.2:
     resolution: {integrity: sha512-elOQwe6Q8gqZgDA8mrh44qRTQqpIHDcZ3hXTLjBe1i4ph8XpNJnO+aQf3NaG+lriLopI4HMx9VjQLfPQ6vhnoA==}
@@ -8044,6 +8072,19 @@ snapshots:
   '@hookform/resolvers@3.4.2(react-hook-form@7.51.5(react@18.3.1))':
     dependencies:
       react-hook-form: 7.51.5(react@18.3.1)
+
+  '@hubspot/api-client@12.0.0':
+    dependencies:
+      '@types/node-fetch': 2.6.11
+      bottleneck: 2.19.5
+      es6-promise: 4.2.8
+      form-data: 2.5.1
+      lodash.get: 4.4.2
+      lodash.merge: 4.6.2
+      node-fetch: 2.7.0
+      url-parse: 1.5.10
+    transitivePeerDependencies:
+      - encoding
 
   '@humanwhocodes/config-array@0.11.14':
     dependencies:
@@ -9850,6 +9891,11 @@ snapshots:
 
   '@types/ms@0.7.34': {}
 
+  '@types/node-fetch@2.6.11':
+    dependencies:
+      '@types/node': 20.13.0
+      form-data: 4.0.0
+
   '@types/node@20.13.0':
     dependencies:
       undici-types: 5.26.5
@@ -10410,6 +10456,8 @@ snapshots:
       readable-stream: 3.6.2
 
   boolbase@1.0.0: {}
+
+  bottleneck@2.19.5: {}
 
   boxen@5.1.2:
     dependencies:
@@ -11373,6 +11421,8 @@ snapshots:
       is-date-object: 1.0.5
       is-symbol: 1.0.4
 
+  es6-promise@4.2.8: {}
+
   esbuild-loader@2.21.0(webpack@5.91.0(esbuild@0.19.11)):
     dependencies:
       esbuild: 0.16.17
@@ -11890,6 +11940,12 @@ snapshots:
       tapable: 2.2.1
       typescript: 5.2.2
       webpack: 5.91.0(esbuild@0.19.11)
+
+  form-data@2.5.1:
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      mime-types: 2.1.35
 
   form-data@4.0.0:
     dependencies:
@@ -14254,6 +14310,8 @@ snapshots:
     dependencies:
       side-channel: 1.0.6
 
+  querystringify@2.2.0: {}
+
   queue-microtask@1.2.3: {}
 
   queue-tick@1.0.1: {}
@@ -14656,6 +14714,8 @@ snapshots:
   require-directory@2.1.1: {}
 
   require-from-string@2.0.2: {}
+
+  requires-port@1.0.0: {}
 
   reselect@4.1.8: {}
 
@@ -15648,6 +15708,11 @@ snapshots:
       punycode: 2.3.1
 
   urix@0.1.0: {}
+
+  url-parse@1.5.10:
+    dependencies:
+      querystringify: 2.2.0
+      requires-port: 1.0.0
 
   use-callback-ref@1.3.2(@types/react@18.3.3)(react@18.3.1):
     dependencies:
