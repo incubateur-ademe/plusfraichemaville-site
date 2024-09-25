@@ -10,7 +10,7 @@ import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/Pro
 import SelectFormField from "@/src/components/common/SelectFormField";
 import { typeEspaceOptions } from "@/src/components/filters/TypeEspaceFilter";
 import { monthDateToString } from "@/src/helpers/dateUtils";
-import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturiteProjet";
+import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
 import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
 import { upsertProjetAction } from "@/src/actions/projets/upsert-projet-action";
 import { notifications } from "@/src/components/common/notifications";

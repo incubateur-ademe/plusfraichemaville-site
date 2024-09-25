@@ -23,7 +23,7 @@ import { MODE_LECTEUR_MODAL_ID } from "@/src/components/tableau-de-bord/viewer-m
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getPendingUserProjetsAction } from "@/src/actions/projets/get-pending-user-projets-action";
 import { accessProjetAction } from "@/src/actions/userProjet/access-projet-action";
-import { Maturite } from "./maturite";
+import { Maturite } from "../maturite/maturite";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -253,7 +253,9 @@ export const ListeProjetsCard = ({
       <Conditional>
         <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
           <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
-            <Maturite />
+            <Maturite compact />
+          </div>
+          <div className={clsx("absolute bottom-5 right-5 flex gap-4 text-sm")}>
             <Link
               className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
               onClick={openProjet}
@@ -262,8 +264,6 @@ export const ListeProjetsCard = ({
             >
               Accéder au projet
             </Link>
-          </div>
-          <div className={clsx("absolute bottom-5 right-5 text-sm")}>
             <PartageOverviewPopupMenu
               members={members}
               projectId={updatedProjet.id}
