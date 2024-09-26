@@ -34,7 +34,7 @@ export const ContactForm = () => {
     if (actionResult.type === "error") {
       notifications(actionResult.type, actionResult.message);
     } else {
-      router.push(PFMV_ROUTES.CONTACT_SUCCESS)
+      router.push(PFMV_ROUTES.CONTACT_SUCCESS);
     }
   };
 

@@ -7,6 +7,7 @@ import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 
 interface Templates {
   templateId: number;
@@ -40,6 +41,9 @@ export class EmailService {
       projetAccessDeclined: {
         templateId: 44,
       },
+      contactMessageSent: {
+        templateId: 45,
+      },
     };
   }
 
@@ -47,20 +51,28 @@ export class EmailService {
     return updateEmailStatusQuery(id, status, brevoId);
   }
 
-  private async sendEmail(
-    to: string,
-    emailType: emailType,
-    params: EmailProjetPartageConfig,
-    userProjetId?: number,
-  ): Promise<EmailSendResult> {
+  private async sendEmail({
+    to,
+    emailType,
+    params,
+    userProjetId,
+    extra,
+  }: {
+    to: string;
+    emailType: emailType;
+    params?: Record<string, string>;
+    userProjetId?: number;
+    extra?: any;
+  }): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
 
-    const dbEmail = await createEmail(to, emailType, userProjetId);
+    const dbEmail = await createEmail(to, emailType, userProjetId, extra);
     try {
       const response = await brevoSender(to, templateId, params);
 
       if (!response.ok) {
-        throw new Error(`Erreur avec l'API Brevo : ${response.status}`);
+        const data = await response.json();
+        throw new Error(`Erreur avec l'API Brevo : ${JSON.stringify(data)}`);
       }
 
       const data = await response.json();
@@ -92,7 +104,12 @@ export class EmailService {
       )}&invitation_token=${userProjet.invitation_token}&invitation_id=${userProjet.id}`,
     };
 
-    return this.sendEmail(email, emailType.projetInvitation, params, userProjet.id);
+    return this.sendEmail({
+      to: email,
+      emailType: emailType.projetInvitation,
+      params: params,
+      userProjetId: userProjet.id,
+    });
   }
 
   async sendResponseRequestAccessEmail(
@@ -111,7 +128,7 @@ export class EmailService {
     };
     const template = accessGranted ? emailType.projetAccessGranted : emailType.projetAccessDeclined;
 
-    return this.sendEmail(email, template, params, userProjet.id);
+    return this.sendEmail({ to: email, emailType: template, params: params, userProjetId: userProjet.id });
   }
 
   async sendRequestAccessEmail(userProjet: UserProjetWithRelations) {
@@ -132,8 +149,17 @@ export class EmailService {
         )}`,
       };
 
-      return this.sendEmail(oldestAdmin.user.email, emailType.projetRequestAccess, params);
+      return this.sendEmail({
+        to: oldestAdmin.user.email,
+        emailType: emailType.projetRequestAccess,
+        userProjetId: userProjet.id,
+        params: params,
+      });
     }
     return { type: "error", message: "ADMIN_NOT_FOUND" };
+  }
+
+  async sendContactMessageReceivedEmail(data: ContactFormData) {
+    return this.sendEmail({ to: data.email, emailType: emailType.contactMessageSent, extra: data });
   }
 }
