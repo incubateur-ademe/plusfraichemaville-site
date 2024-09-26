@@ -48,7 +48,8 @@ export interface ProjetWithRelations extends projet {
   users: UserProjetWithUser[];
 }
 
-export interface ProjetWithPublicRelations extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace"> {
+export interface ProjetWithPublicRelations
+  extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace" | "niveau_maturite"> {
   collectivite: collectivite;
   users: UserProjetWithPublicUser[];
 }

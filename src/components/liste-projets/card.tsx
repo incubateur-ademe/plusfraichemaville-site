@@ -118,7 +118,7 @@ export const ListeProjetsCard = ({
 
   const contentCard = (
     <>
-      <div className={clsx(`relative mb-5 flex rounded-xl p-5 ${disabledText}`)}>
+      <div className={clsx(`relative mb-5 flex rounded-xl p-4 ${disabledText}`)}>
         <div
           className={clsx(
             "flex",
@@ -252,9 +252,15 @@ export const ListeProjetsCard = ({
       </Conditional>
       <Conditional>
         <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
-          <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
-            <Maturite compact />
-          </div>
+          {
+            <div className="absolute bottom-4 left-[11rem] flex h-8 items-center gap-4">
+              <div className="flex items-center justify-end gap-2">
+                <i className="ri-information-line text-pfmv-navy before:!w-4"></i>
+                <span className="text-sm font-bold text-pfmv-navy">Maturité du projet : </span>
+                <Maturite niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} compact />
+              </div>
+            </div>
+          }
           <div className={clsx("absolute bottom-5 right-5 flex gap-4 text-sm")}>
             <Link
               className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
@@ -272,7 +278,7 @@ export const ListeProjetsCard = ({
           </div>
         </Case>
         <Case condition={invitationStatus === InvitationStatus.INVITED}>
-          <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
+          <div className="absolute bottom-4 left-[11rem] flex h-8 items-center gap-4">
             <Button disabled={isPending} priority="tertiary" className="rounded-3xl" onClick={handleDeclineInvitation}>
               Décliner
             </Button>
@@ -282,7 +288,7 @@ export const ListeProjetsCard = ({
           </div>
         </Case>
         <Case condition={isBrowsing === true}>
-          <div className="absolute bottom-6 left-[11.5rem] flex h-8 items-center gap-4">
+          <div className="absolute bottom-4 left-[11rem] flex h-8 items-center gap-4">
             <Button
               disabled={isPending || hasAlreadyRequest}
               priority="tertiary"

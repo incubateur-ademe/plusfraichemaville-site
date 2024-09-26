@@ -156,6 +156,7 @@ model projet {
   created_by                String
   creator                   User          @relation(fields: [created_by], references: [id])
   created_at                DateTime      @default(now())
+  updated_at                DateTime      @default(now())
   nom                       String
   type_espace               String?
   adresse                   String?
