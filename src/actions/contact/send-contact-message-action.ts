@@ -12,7 +12,6 @@ export const sendContactMessageAction = async (data: ContactFormData): Promise<R
   } else {
     try {
       await createHubspotTicket(data);
-
       return { type: "success" };
     } catch (e) {
       customCaptureException("Error in sendContactMessageAction", e);
