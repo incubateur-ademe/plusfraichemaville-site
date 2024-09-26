@@ -1,7 +1,7 @@
 import { InvitationStatus, RoleProjet, User, user_projet } from "@prisma/client";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { UserProjetWithRelations, UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
-import { projetPublicSelect } from "@/src/lib/prisma/prismaProjetQueries";
+import { projetPublicSelect, projetUpdated } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const getUserProjet = async (userId: string, projectId: number): Promise<user_projet | null> => {
   return prismaClient.user_projet.findUnique({
@@ -134,7 +134,7 @@ export const deleteUserFromProject = async (
   projectId: number,
   deletedById: string,
 ): Promise<UserProjetWithUser | null> => {
-  return prismaClient.user_projet.update({
+  const response = await prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
         user_id: userId,
@@ -151,6 +151,10 @@ export const deleteUserFromProject = async (
       user: true,
     },
   });
+
+  await projetUpdated(response.projet_id);
+
+  return response;
 };
 
 export const acceptProjectInvitation = async (userId: string, projectId: number): Promise<user_projet | null> => {
@@ -249,7 +253,7 @@ export const inviteMember = async (
   email: string,
   userId?: string,
 ): Promise<UserProjetWithRelations> => {
-  return prismaClient.user_projet.upsert({
+  const response = await prismaClient.user_projet.upsert({
     where: { user_id_projet_id: { projet_id: projectId, user_id: userId ?? "" }, email_address: email },
     create: {
       email_address: email,
@@ -270,13 +274,17 @@ export const inviteMember = async (
       user: { include: { collectivites: { include: { collectivite: true } } } },
     },
   });
+
+  await projetUpdated(response.projet_id);
+
+  return response;
 };
 
 export const renewOrCreateProjectJoinRequest = async (
   projectId: number,
   user: User,
 ): Promise<UserProjetWithRelations> => {
-  return prismaClient.user_projet.upsert({
+  const response = await prismaClient.user_projet.upsert({
     where: { user_id_projet_id: { projet_id: projectId, user_id: user.id } },
     create: {
       email_address: user.email,
@@ -295,6 +303,10 @@ export const renewOrCreateProjectJoinRequest = async (
       user: { include: { collectivites: { include: { collectivite: true } } } },
     },
   });
+
+  await projetUpdated(response.projet_id);
+
+  return response;
 };
 
 export const updateLastAccessToProjetByUser = async (userProjetLink: user_projet): Promise<user_projet> => {

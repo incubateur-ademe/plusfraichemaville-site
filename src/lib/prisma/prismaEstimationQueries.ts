@@ -97,6 +97,15 @@ export const addAideInEstimation = async (estimationId: number, aideId: number):
     },
   });
 
+  const estimation = await prismaClient.estimation.findUnique({
+    where: { id: estimationId },
+    select: { projet_id: true },
+  });
+
+  if (estimation) {
+    await projetUpdated(estimation.projet_id);
+  }
+
   return response;
 };
 
@@ -112,6 +121,15 @@ export const deleteAideInEstimation = async (estimationId: number, aideId: numbe
       aide: true,
     },
   });
+
+  const estimation = await prismaClient.estimation.findUnique({
+    where: { id: estimationId },
+    select: { projet_id: true },
+  });
+
+  if (estimation) {
+    await projetUpdated(estimation.projet_id);
+  }
 
   return response;
 };

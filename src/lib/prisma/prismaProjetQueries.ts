@@ -330,6 +330,7 @@ export const updateMaturiteProjet = (projetId: number, niveauMaturite: string) =
     },
     data: {
       niveau_maturite: niveauMaturite,
+      updated_at: new Date(),
     },
     include: projetIncludes,
   });
