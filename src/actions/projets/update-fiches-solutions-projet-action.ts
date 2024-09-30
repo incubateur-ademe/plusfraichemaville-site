@@ -6,6 +6,7 @@ import { updateFichesSolutionsProjet } from "@/src/lib/prisma/prismaProjetQuerie
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 
 export const updateFichesSolutionsProjetAction = async (
   projetId: number,
@@ -24,6 +25,18 @@ export const updateFichesSolutionsProjetAction = async (
 
   try {
     const projet = await updateFichesSolutionsProjet(projetId, fichesSolutionsId, session.user.id);
+
+    if (projet) {
+      await createAnalytic({
+        context: {
+          fichesSolutionsId,
+        },
+        event_type: "AJOUT_FICHE_SOLUTION",
+        reference_id: projet?.id,
+        reference_type: "PROJET",
+        userId: session.user.id,
+      });
+    }
     return { type: "success", message: "FICHES_SOLUTIONS_ADDED_TO_PROJET", projet };
   } catch (e) {
     customCaptureException("Error in UpdateFichesSolutionsProjetAction DB call", e);

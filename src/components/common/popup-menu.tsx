@@ -20,9 +20,7 @@ export const PopupMenu = ({ links }: PopupMenuProps) => {
     <div className="shrink-0">
       <button
         onClick={opener}
-        className={clsx(
-          "block size-10 rounded-full border-[1px] border-solid border-dsfr-border-default-grey hover:!bg-white",
-        )}
+        className={clsx("block size-10 rounded-full border-[1px] border-solid border-dsfr-border-default-grey")}
       >
         <Hidden accessible>{"Plus d'actions"}</Hidden>
         <i className="ri-more-2-line size-6" />

@@ -112,7 +112,7 @@ export const updateUserRoleProject = async (
   projectId: number,
   newRole: RoleProjet,
 ): Promise<UserProjetWithUser | null> => {
-  return prismaClient.user_projet.update({
+  const response = prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
         user_id: userId,
@@ -127,6 +127,10 @@ export const updateUserRoleProject = async (
       user: true,
     },
   });
+
+  await projetUpdated(projectId);
+
+  return response;
 };
 
 export const deleteUserFromProject = async (

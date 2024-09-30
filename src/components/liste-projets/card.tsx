@@ -256,7 +256,7 @@ export const ListeProjetsCard = ({
             <div className="flex items-center justify-end gap-2">
               <i className="ri-information-line text-pfmv-navy before:!w-4"></i>
               <span className="text-sm font-bold text-pfmv-navy">Maturité du projet : </span>
-              <Maturite niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} compact />
+              <Maturite niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} />
             </div>
           </div>
           <div className={clsx("absolute bottom-5 right-5 flex gap-4 text-sm")}>

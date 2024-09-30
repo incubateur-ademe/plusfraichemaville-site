@@ -14,7 +14,11 @@ export const TableauDeBordMaturite = () => {
       <div>
         <span className="font-bold text-black">Maturité du projet</span>
         <div className="h-10">
-          {projet ? <Maturite niveau={projet?.niveau_maturite} projetId={projet.id} /> : <Spinner className="w-6" />}
+          {projet ? (
+            <Maturite niveau={projet?.niveau_maturite} projetId={projet.id} withLabel />
+          ) : (
+            <Spinner className="w-6" />
+          )}
         </div>
       </div>
       <div>

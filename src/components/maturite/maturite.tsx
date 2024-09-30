@@ -13,12 +13,12 @@ import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 type MaturiteProps = {
   niveau: string | null;
   projetId: number;
-  compact?: boolean;
+  withLabel?: boolean;
 };
 
 type CurrentNiveauMaturite = NiveauMaturite | undefined;
 
-export const Maturite = ({ compact, niveau, projetId }: MaturiteProps) => {
+export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
   const [show, setShow] = useState(false);
   const [currentNiveau, setCurrentNiveau] = useState<CurrentNiveauMaturite>(getNiveauMaturiteByCode(niveau));
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -38,14 +38,19 @@ export const Maturite = ({ compact, niveau, projetId }: MaturiteProps) => {
   };
 
   return (
-    <div className="relative w-fit border-b border-b-pfmv-grey-dashed/25">
+    <div
+      className={clsx(
+        "relative w-fit",
+        !isLecteur && "border-b border-b-pfmv-grey-dashed/25 hover:border-b-pfmv-grey-dashed",
+      )}
+    >
       <Button
         onClick={toggleShow}
         priority="tertiary no outline"
         className={clsx("relative !p-0 hover:!bg-white", isLecteur && "cursor-default")}
       >
         <MaturiteProgress value={currentNiveau?.avancement} />
-        <span className={clsx("font-normal text-black", !compact && "mr-4")}>{!compact && currentNiveau?.label}</span>
+        <span className={clsx("font-normal text-black", withLabel && "mr-4")}>{withLabel && currentNiveau?.label}</span>
         {!isLecteur && <i className="ri-arrow-down-s-line text-black"></i>}
       </Button>
       {show && !isLecteur && (

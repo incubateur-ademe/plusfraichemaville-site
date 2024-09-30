@@ -9,6 +9,7 @@ import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { EmailService } from "@/src/services/brevo";
 import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 
 export const acceptProjectRequestAction = async (
   projectId: number,
@@ -31,6 +32,15 @@ export const acceptProjectRequestAction = async (
 
   try {
     const projetLink = await acceptProjectRequest(userIdToUpdate, projectId);
+    if (projetLink) {
+      await createAnalytic({
+        context: {},
+        event_type: "ACCEPT_REQUEST",
+        reference_id: projetLink?.id,
+        reference_type: "USER",
+        userId: session.user.id,
+      });
+    }
     const currentUser = await getUserWithCollectivites(session.user.id);
     if (projetLink && projetLink.user && currentUser) {
       const emailService = new EmailService();

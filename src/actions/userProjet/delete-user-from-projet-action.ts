@@ -7,6 +7,7 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { deleteUserFromProject } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 
 export const deleteUserFromProjetAction = async (
   userId: string,
@@ -30,6 +31,17 @@ export const deleteUserFromProjetAction = async (
   try {
     await deleteUserFromProject(userId, projectId, session.user.id);
     const updatedProjet = await getProjetWithRelationsById(projectId);
+    if (updatedProjet) {
+      await createAnalytic({
+        context: {
+          deletedUser: userId,
+        },
+        event_type: "DELETE_USER_FROM_PROJET",
+        reference_id: updatedProjet?.id,
+        reference_type: "USER",
+        userId: session.user.id,
+      });
+    }
     return { type: "success", message: "USER_DELETED_FROM_PROJECT", updatedProjet: updatedProjet };
   } catch (e) {
     customCaptureException("Error in updating user role DB call", e);

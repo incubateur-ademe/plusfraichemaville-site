@@ -6,6 +6,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { RoleProjet } from "@prisma/client";
 import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { updateUserRoleProject } from "@/src/lib/prisma/prisma-user-projet-queries";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 
 export const updateUserRoleProjectAction = async (
   userId: string,
@@ -28,6 +29,18 @@ export const updateUserRoleProjectAction = async (
 
   try {
     const member = await updateUserRoleProject(userId, projectId, role);
+    if (member) {
+      await createAnalytic({
+        context: {
+          updatedUser: member.user_id,
+        },
+        event_type: "UPDATE_USER_ROLE",
+        reference_id: member?.id,
+        reference_type: "USER",
+        // @ts-ignore
+        userId: session.user.id,
+      });
+    }
     return {
       type: "success",
       message: "ROLE_UPDATED",
