@@ -26,7 +26,7 @@ export const declineProjectInvitationAction = async (userId: string, projectId: 
         context: {},
         event_type: "DECLINE_INVITATION",
         reference_id: projectId,
-        reference_type: "USER",
+        reference_type: "PROJET",
         userId: session.user.id,
       });
     }

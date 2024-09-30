@@ -36,7 +36,7 @@ export const acceptProjectInvitationAction = async (
         context: {},
         event_type: "ACCEPT_INVITATION",
         reference_id: projectId,
-        reference_type: "USER",
+        reference_type: "PROJET",
         userId: session.user.id,
       });
     }

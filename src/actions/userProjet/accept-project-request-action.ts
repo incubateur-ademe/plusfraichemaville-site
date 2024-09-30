@@ -36,8 +36,8 @@ export const acceptProjectRequestAction = async (
       await createAnalytic({
         context: {},
         event_type: "ACCEPT_REQUEST",
-        reference_id: projetLink?.id,
-        reference_type: "USER",
+        reference_id: projectId,
+        reference_type: "PROJET",
         userId: session.user.id,
       });
     }

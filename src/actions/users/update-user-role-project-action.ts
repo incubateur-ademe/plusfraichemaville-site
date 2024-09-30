@@ -35,8 +35,9 @@ export const updateUserRoleProjectAction = async (
           updatedUser: member.user_id,
         },
         event_type: "UPDATE_USER_ROLE",
-        reference_id: member?.id,
         reference_type: "USER",
+        // @ts-ignore
+        reference_id: session.user.id,
         // @ts-ignore
         userId: session.user.id,
       });

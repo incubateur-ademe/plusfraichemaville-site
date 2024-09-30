@@ -35,7 +35,7 @@ export const leaveProjetAction = async (userId: string, projetId: number): Promi
             role: result.role,
           },
           event_type: "LEAVE_PROJET",
-          reference_id: result?.id,
+          reference_id: result?.projet_id,
           reference_type: "PROJET",
           userId: session.user.id,
         });
