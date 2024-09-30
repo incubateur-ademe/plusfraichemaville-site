@@ -146,8 +146,9 @@ export async function getAideDecisionFirstSteps(): Promise<
     ],
     { attribute: "rank", order: "asc" },
   );
-  const apiResponse = (await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter)))
-    ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter), { tag: "aide-decision-first-step" })
+  )?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
   return safeReturnStrapiEntities(apiResponse);
 }
 
@@ -155,8 +156,9 @@ export async function getAllAideDecisionSlugs(): Promise<
   APIResponseData<"api::aide-decision-etape.aide-decision-etape">[]
 > {
   const filter = new StrapiFilter(true, []);
-  const apiResponse = (await strapiGraphQLCall(GET_ALL_AIDE_DECISION_ETAPE_SLUG(filter)))
-    ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_ALL_AIDE_DECISION_ETAPE_SLUG(filter), { tag: "get-all-aide-decision" })
+  )?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
   return safeReturnStrapiEntities(apiResponse);
 }
 
@@ -164,8 +166,9 @@ export async function getAideDecisionBySlug(
   slug: string,
 ): Promise<APIResponseData<"api::aide-decision-etape.aide-decision-etape"> | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
-  const apiResponse = (await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter)))
-    ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter), { tag: "get-decision-by-slug" })
+  )?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
   return safeReturnStrapiEntity(apiResponse);
 }
 
@@ -182,8 +185,9 @@ export async function getAideDecisionHistoryBySlug(
         relation: false,
       },
     ]);
-    const apiResponse = (await strapiGraphQLCall(GET_AIDE_DECISION_ETAPE_HISTORY(filter)))
-      ?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+    const apiResponse = (
+      await strapiGraphQLCall(GET_AIDE_DECISION_ETAPE_HISTORY(filter), { tag: "get-aide-decision-history-by-slug" })
+    )?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
     if (apiResponse?.data?.length > 0) {
       return getHistoryFromAideDecisionEtape(apiResponse.data[0].attributes, includeCurrentStep);
     }

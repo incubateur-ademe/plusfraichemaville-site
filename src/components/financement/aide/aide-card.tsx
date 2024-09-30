@@ -19,7 +19,6 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === TypeAidesTerritoiresAide.financement;
   const estimationId = +useParams().estimationId;
-
   return (
     <div className="pfmv-card no-shadow  relative w-[362px] cursor-pointer overflow-hidden" id={`aide-card-${aide.id}`}>
       {withSaveButton && (
