@@ -31,10 +31,11 @@ type StrapiGraphQLCallConfig = {
   variables?: any;
   signal?: AbortSignal;
   tag?: string;
+  id?: string | number;
 };
 
 export const strapiGraphQLCall = async (query: string, config?: StrapiGraphQLCallConfig) => {
-  const tag = config?.tag ? `strapi-${config.tag}` : "strapi";
+  const configTag = config?.id ? `strapi-${config?.tag}-${config.id}` : `strapi-${config?.tag}`;
   try {
     const response = await fetch(STRAPI_URL + "/graphql", {
       method: "POST",
@@ -47,19 +48,19 @@ export const strapiGraphQLCall = async (query: string, config?: StrapiGraphQLCal
         variables: config?.variables,
       }),
       signal: config?.signal,
-      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags: [tag] },
+      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags: [configTag, "strapi"] },
     });
 
     const res = await response.json();
 
     if (res?.errors) {
-      revalidateTag(tag);
-      captureError("Some Strapi error occurred", res?.errors);
+      revalidateTag(configTag);
+      captureError(`Some Strapi error occurred. Tag: ${configTag}. Id: ${config?.id}`, res?.errors);
     }
 
     return res?.data;
   } catch (err) {
-    revalidateTag(tag);
+    revalidateTag(configTag);
     customCaptureException("Caught exception while calling Strapi", err);
   }
 };
