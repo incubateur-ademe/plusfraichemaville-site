@@ -9,7 +9,6 @@ import { createOrUpdateProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
@@ -48,17 +47,6 @@ export const upsertProjetAction = async (
         userId: user.id,
       });
 
-      if (updatedProjet) {
-        await createAnalytic({
-          context: {
-            nomProjet: updatedProjet.nom,
-          },
-          event_type: "CREATE_OR_UPDATE_PROJET",
-          reference_id: updatedProjet?.id,
-          reference_type: "PROJET",
-          userId: session.user.id,
-        });
-      }
       return { type: "success", message: "PROJET_UPSERTED", updatedProjet };
     } catch (e) {
       customCaptureException("Error in EditProjetInfoAction DB call", e);

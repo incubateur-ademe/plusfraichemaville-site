@@ -6,7 +6,6 @@ import { updateFichesProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 
 export const updateFichesProjetAction = async (
   projetId: number,
@@ -28,17 +27,6 @@ export const updateFichesProjetAction = async (
     const projet = await updateFichesProjet(projetId, ficheId, session.user.id, type);
     const eventType = type === "solution" ? "AJOUT_FICHE_SOLUTION" : "AJOUT_FICHE_DIAGNOSTIC";
 
-    if (projet) {
-      await createAnalytic({
-        context: {
-          ficheId,
-        },
-        event_type: eventType,
-        reference_id: projet?.id,
-        reference_type: "PROJET",
-        userId: session.user.id,
-      });
-    }
     return {
       type: "success",
       message: eventType,
