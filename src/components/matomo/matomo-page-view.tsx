@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { acceptCookie, declineCookie, trackPageView } from "@/src/helpers/matomo/trackEvent";
 import { useConsent } from "@/src/components/cookie/consentManagement";
 
+// TODO: utiliser AnalyticsPageView
 export default function MatomoPageView() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
