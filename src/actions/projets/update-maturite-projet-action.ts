@@ -28,8 +28,6 @@ export const updateMaturiteProjetAction = async (
   try {
     const projet = await updateMaturiteProjet(projetId, niveauMaturite);
 
-    // TODO: à la création du projet, créer un event avec le niveau de maturité.
-
     if (projet) {
       await createAnalytic({
         context: {
