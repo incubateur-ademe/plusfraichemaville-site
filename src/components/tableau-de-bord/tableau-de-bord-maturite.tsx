@@ -7,7 +7,7 @@ export const TableauDeBordMaturite = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const updatedAt = projet?.updated_at;
   const lastUpdate = daysSinceDate(updatedAt);
-  const formattedDate = !lastUpdate ? "Aujourd'hui" : `Depuis ${lastUpdate} jour${lastUpdate > 1 ? "s" : ""}`;
+  const formattedDate = !lastUpdate ? "Aujourd'hui" : lastUpdate === 1 ? "Hier" : `Il y a ${lastUpdate} jours`;
 
   return (
     <div className="mb-8 flex h-24 w-[70.5rem] items-center justify-between rounded-2xl bg-white px-8">
