@@ -30,12 +30,13 @@ export const getStrapiImageUrl = (
 type StrapiGraphQLCallConfig = {
   variables?: any;
   signal?: AbortSignal;
-  tag?: string;
+  tag: string;
 };
 
-export const strapiGraphQLCall = async (query: string, config?: StrapiGraphQLCallConfig) => {
-  const configTag = config?.tag ?? "strapi-default";
-  const tags = ["strapi", configTag];
+export const strapiGraphQLCall = async (query: string, config: StrapiGraphQLCallConfig) => {
+  const defaultTag = "strapi";
+  const tags = [defaultTag, config.tag];
+
   try {
     const response = await fetch(STRAPI_URL + "/graphql", {
       method: "POST",
