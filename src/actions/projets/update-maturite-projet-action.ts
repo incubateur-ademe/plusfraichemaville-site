@@ -1,15 +1,18 @@
 "use server";
 
+import { NiveauMaturite } from "@/src/helpers/maturite-projet";
+
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { updateFichesSolutionsProjet } from "@/src/lib/prisma/prismaProjetQueries";
+import { updateMaturiteProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 
-export const updateFichesSolutionsProjetAction = async (
+export const updateMaturiteProjetAction = async (
   projetId: number,
-  fichesSolutionsId: number[],
+  niveauMaturite: NiveauMaturite["code"],
 ): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
@@ -23,11 +26,27 @@ export const updateFichesSolutionsProjetAction = async (
   }
 
   try {
-    const projet = await updateFichesSolutionsProjet(projetId, fichesSolutionsId, session.user.id);
+    const projet = await updateMaturiteProjet(projetId, niveauMaturite);
 
-    return { type: "success", message: "FICHES_SOLUTIONS_ADDED_TO_PROJET", projet };
+    if (projet) {
+      await createAnalytic({
+        context: {
+          maturite: projet.niveau_maturite,
+        },
+        event_type: "UPDATE_MATURITE",
+        reference_id: projet?.id,
+        reference_type: "PROJET",
+        userId: session.user.id,
+      });
+    }
+
+    return {
+      type: "success",
+      message: "MATURITE_PROJET_UPDATED",
+      projet,
+    };
   } catch (e) {
-    customCaptureException("Error in UpdateFichesSolutionsProjetAction DB call", e);
+    customCaptureException("Error in updateMaturiteProjetAction", e);
     return { type: "error", message: "TECHNICAL_ERROR", projet: null };
   }
 };

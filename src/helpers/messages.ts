@@ -8,8 +8,8 @@ export const success = {
   BOOKMARKED_SAVED_IN_DB: "Les fiches solutions ont bien été sauvegardées.",
   BOOKMARKED_DIAG_SAVED_IN_DB: "Les fiches diagnostic ont bien été sauvegardées.",
   FICHES_SOLUTIONS_ADDED_TO_PROJET: "Les fiches solutions ont bien été ajoutées au projet en cours.",
-  FICHES_DIAGNOSTIC_ADDED_TO_PROJET: "Les fiches diagnostic ont bien été ajoutées au projet en cours.",
-  FICHE_DIAGNOSTIC_ADDED_TO_PROJET: "La fiche diagnostic a bien été ajoutée au projet en cours.",
+  AJOUT_FICHE_SOLUTION: "Les fiches diagnostic ont bien été ajoutées au projet en cours.",
+  AJOUT_FICHE_DIAGNOSTIC: "La fiche diagnostic a bien été ajoutée au projet en cours.",
   PROJET_DELETE: "Votre projet a bien été supprimé.",
   PROJETS_LOADED: "Les projets ont été chargés.",
   PROJET_UPSERTED: "Les informations du projet ont bien été enregistrées.",
@@ -25,6 +25,7 @@ export const success = {
   DECLINE_REQUEST_PROJECT_ACCESS: "Vous avez refusé la demande d'accès au projet.",
   REQUEST_SENT: "Votre demande a bien été envoyée.",
   QUIT_PROJET: "Vous avez quitté le projet.",
+  MATURITE_PROJET_UPDATED: "Le niveau de maturité de votre projet a été mis à jour.",
 };
 
 export const error = {

@@ -31,6 +31,7 @@ export const acceptProjectRequestAction = async (
 
   try {
     const projetLink = await acceptProjectRequest(userIdToUpdate, projectId);
+
     const currentUser = await getUserWithCollectivites(session.user.id);
     if (projetLink && projetLink.user && currentUser) {
       const emailService = new EmailService();

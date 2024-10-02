@@ -20,6 +20,7 @@ export const declineProjectInvitationAction = async (userId: string, projectId: 
 
   try {
     await declineProjectInvitation(userId, projectId, session.user.id);
+
     return { type: "success", message: "DECLINE_INVITATION_PROJECT_ACCESS" };
   } catch (e) {
     customCaptureException("Error in decline invitation DB call", e);
