@@ -31,11 +31,11 @@ type StrapiGraphQLCallConfig = {
   variables?: any;
   signal?: AbortSignal;
   tag?: string;
-  id?: string | number;
 };
 
 export const strapiGraphQLCall = async (query: string, config?: StrapiGraphQLCallConfig) => {
-  const configTag = config?.id ? `strapi-${config?.tag}-${config.id}` : `strapi-${config?.tag}`;
+  const configTag = config?.tag ?? "strapi-default";
+  const tags = ["strapi", configTag];
   try {
     const response = await fetch(STRAPI_URL + "/graphql", {
       method: "POST",
@@ -48,19 +48,19 @@ export const strapiGraphQLCall = async (query: string, config?: StrapiGraphQLCal
         variables: config?.variables,
       }),
       signal: config?.signal,
-      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags: [configTag, "strapi"] },
+      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags },
     });
 
     const res = await response.json();
 
     if (res?.errors) {
-      revalidateTag(configTag);
-      captureError(`Some Strapi error occurred. Tag: ${configTag}. Id: ${config?.id}`, res?.errors);
+      tags.forEach((tag) => revalidateTag(tag));
+      captureError(`Some Strapi error occurred. Tags: ${tags.join(", ")}.`, res?.errors);
     }
 
     return res?.data;
   } catch (err) {
-    revalidateTag(configTag);
-    customCaptureException("Caught exception while calling Strapi", err);
+    tags.forEach((tag) => revalidateTag(tag));
+    customCaptureException(`Caught exception while calling Strapi.  Tags: ${tags.join(", ")}.`, err);
   }
 };
