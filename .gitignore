@@ -38,3 +38,6 @@ next-env.d.ts
 
 yarn.lock
 certificates
+
+/scripts/ficheSolution.json
+/scripts/retourExperience.json
