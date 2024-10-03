@@ -9,9 +9,13 @@ import { useUserStore } from "@/src/stores/user/provider";
 import { sendContactMessageAction } from "@/src/actions/contact/send-contact-message-action";
 import SelectFormField from "@/src/components/common/SelectFormField";
 import { objetMessageContactOptions } from "@/src/helpers/objet-message-contact";
+import { notifications } from "@/src/components/common/notifications";
+import { useRouter } from "next/navigation";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export const ContactForm = () => {
   const user = useUserStore((state) => state.userInfos);
+  const router = useRouter();
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(ContactFormSchema),
@@ -27,6 +31,11 @@ export const ContactForm = () => {
 
   const onSubmit: SubmitHandler<ContactFormData> = async (data) => {
     const actionResult = await sendContactMessageAction(data);
+    if (actionResult.type === "error") {
+      notifications(actionResult.type, actionResult.message);
+    } else {
+      router.push(PFMV_ROUTES.CONTACT_SUCCESS);
+    }
   };
 
   useEffect(() => {

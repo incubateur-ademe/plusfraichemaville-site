@@ -24,7 +24,7 @@
     "@codegouvfr/react-dsfr": "^1.9.2",
     "@headlessui/react": "^1.7.18",
     "@hookform/resolvers": "^3.3.4",
-    "@hubspot/api-client": "^12.0.0",
+    "@hubspot/api-client": "^12.0.1",
     "@incubateur-ademe/legal-pages-react": "^0.3.0",
     "@nlux/react": "^2.17.1",
     "@nlux/themes": "^2.17.1",
