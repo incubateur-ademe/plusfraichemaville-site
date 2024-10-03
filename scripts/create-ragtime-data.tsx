@@ -57,24 +57,24 @@ const strapiRetourExperienceToRagtime = (strapiRetourExperience: RetourExperienc
   return {
     id: strapiRetourExperience.id,
     titre: strapiRetourExperienceAttributes.titre,
-    climat_actuel: getClimatLabelFromCode(strapiRetourExperienceAttributes.climat_actuel) ?? "",
-    cout: strapiRetourExperienceAttributes.cout ?? "",
-    climat_futur: getClimatLabelFromCode(strapiRetourExperienceAttributes.climat_futur) ?? "",
-    difficultes: strapiRetourExperienceAttributes.difficultes ?? "",
-    echelle: strapiRetourExperienceAttributes.echelle ?? "",
     description: strapiRetourExperienceAttributes.description,
+    difficultes: strapiRetourExperienceAttributes.difficultes ?? "",
     situation_apres: strapiRetourExperienceAttributes.situation_apres?.description ?? "",
-    slug: strapiRetourExperienceAttributes.slug,
     solutions:
       strapiRetourExperienceAttributes.solution_retour_experiences?.data
         .map((sol) => `${sol.attributes.titre} ${sol.attributes.description}`)
         .join(" | ") ?? "",
     temporalite: strapiRetourExperienceAttributes.temporalite ?? "",
+    echelle: strapiRetourExperienceAttributes.echelle ?? "",
     region: getRegionLabelFromCode(strapiRetourExperienceAttributes.region?.data.attributes.code) ?? "",
+    climat_actuel: getClimatLabelFromCode(strapiRetourExperienceAttributes.climat_actuel) ?? "",
+    cout: strapiRetourExperienceAttributes.cout ?? "",
+    climat_futur: getClimatLabelFromCode(strapiRetourExperienceAttributes.climat_futur) ?? "",
     // @ts-ignore
     types_espace: { types_espace: strapiRetourExperienceAttributes.types_espaces?.map(selectEspaceByCode) ?? [] },
     // @ts-ignore
     types_solutions: { types_solutions: strapiRetourExperienceAttributes.types_solutions },
+    slug: strapiRetourExperienceAttributes.slug,
   };
 };
 
