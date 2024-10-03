@@ -167,3 +167,20 @@ export const updateUserDiscardedInformation = async (
     include: { collectivites: { include: { collectivite: true } } },
   });
 };
+
+export const getNewUsersFromLastSync = async () => {
+  const lastSync = await prismaClient.syncLog.findFirst({
+    orderBy: { lastSyncDate: "desc" },
+  });
+
+  const lastSyncDate = lastSync?.lastSyncDate ?? new Date(0);
+
+  const newUsers = await prismaClient.user.findMany({
+    where: {
+      OR: [{ created_at: { gte: lastSyncDate } }, { updated_at: { gte: lastSyncDate } }],
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+
+  return newUsers;
+};

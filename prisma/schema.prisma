@@ -38,6 +38,7 @@ model User {
   prenom                      String?
   poste                       String?
   created_at                  DateTime            @default(now())
+  updated_at                  DateTime?           @updatedAt
   collectivites_created       collectivite[]      @relation(name: "collectivite_creator")
   projets_created             projet[]
   estimations_created         estimation[]        @relation(name: "estimation_creator")
@@ -269,4 +270,9 @@ model Analytics {
   event_type     EventType
   context        Json?
   userId         String
+}
+
+model SyncLog {
+  id           String   @id @default(cuid())
+  lastSyncDate DateTime @default(now())
 }
