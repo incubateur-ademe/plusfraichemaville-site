@@ -2,8 +2,9 @@ import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { makeBulkUsersData } from "@/src/services/hubspot/make-bulk-users-data";
+import { HubspotBulkUsersUpdateResponse } from "@/src/services/hubspot/hubspot-types";
 import { getNewUsersFromLastSync } from "@/src/lib/prisma/prismaUserQueries";
+import { makeHubspotBulkUsersData } from "@/src/services/hubspot/hubspot-helpers";
 
 export async function POST() {
   const authorization = headers().get("authorization");
@@ -12,7 +13,6 @@ export async function POST() {
   }
 
   const newUsers = await getNewUsersFromLastSync();
-  const hubspotData = makeBulkUsersData(newUsers);
 
   try {
     const response = await fetch("https://api.hubapi.com/crm/v3/objects/contacts/batch/upsert", {
@@ -21,18 +21,24 @@ export async function POST() {
         "Content-Type": "application/json",
         Authorization: `Bearer ${process.env.HUBSPOT_ACCESS_TOKEN}`,
       },
-      body: JSON.stringify({ inputs: hubspotData }),
+      body: JSON.stringify(makeHubspotBulkUsersData(newUsers)),
     });
 
-    console.log("Synchronisation réussie:", response);
+    const hubspotResponse = (await response.json()) as HubspotBulkUsersUpdateResponse;
 
-    await prismaClient.syncLog.create({
-      data: {
-        lastSyncDate: new Date(),
-      },
-    });
+    if (hubspotResponse.status === "COMPLETE") {
+      await prismaClient.syncLog.create({
+        data: {
+          lastSyncDate: new Date(),
+        },
+      });
+      return NextResponse.json({ message: "Synchronisation réussie" }, { status: 200 });
+    } else {
+      captureError("Erreur lors de la synchronisation", { id: hubspotResponse.correlationId });
+      return NextResponse.json({ message: hubspotResponse.message }, { status: 400 });
+    }
   } catch (error) {
-    console.error("Erreur lors de la synchronisation:", error);
-    captureError(`Erreur lors de la synchronisation.`);
+    captureError("Erreur lors de la synchronisation.");
+    return NextResponse.json({ message: "Erreur lors de la synchronisation." }, { status: 500 });
   }
 }

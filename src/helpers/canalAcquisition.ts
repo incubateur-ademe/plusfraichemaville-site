@@ -5,7 +5,7 @@ export type CanalAcquisition = {
 };
 
 export const CUSTOM_CANAL_ACQUISITION: CanalAcquisition = {
-  label: "Autres...",
+  label: "Autre",
 };
 
 const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
