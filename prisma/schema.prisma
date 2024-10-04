@@ -272,7 +272,13 @@ model Analytics {
   userId         String
 }
 
-model SyncLog {
-  id           String   @id @default(cuid())
-  lastSyncDate DateTime @default(now())
+enum JobType {
+  SYNC_HUBSPOT
+}
+
+model cron_jobs {
+  id                   String   @id @default(cuid())
+  execution_start_time DateTime @default(now())
+  execution_end_time   DateTime
+  job_type             JobType
 }
