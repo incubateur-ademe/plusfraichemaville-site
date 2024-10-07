@@ -6,6 +6,8 @@ export const PFMV_ROUTES = {
   FICHES_DIAGNOSTIC: "/fiches-diagnostic",
   MES_FICHES_SOLUTIONS: "/mon-projet/favoris",
   RETOURS_EXPERIENCE: "/projet",
+  CONTACT: "/contact",
+  CONTACT_SUCCESS: "contact/success",
   CONNEXION: "/connexion",
   DECONNEXION: "/logout",
   ESPACE_PROJET: "/espace-projet",

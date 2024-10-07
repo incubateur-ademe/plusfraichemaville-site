@@ -123,6 +123,7 @@ enum emailType {
   projetRequestAccess
   projetAccessGranted
   projetAccessDeclined
+  contactMessageSent
 }
 
 enum emailStatus {
@@ -140,6 +141,7 @@ model email {
   email_status        emailStatus
   user_projet_id      Int?
   user_projet         user_projet? @relation(fields: [user_projet_id], references: [id])
+  extra               Json?
 }
 
 model user_collectivite {
