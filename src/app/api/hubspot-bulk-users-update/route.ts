@@ -12,6 +12,7 @@ export async function POST() {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
   }
 
+  const executionStartTime = new Date();
   const newUsers = await getNewUsersFromLastSync();
 
   try {
@@ -27,9 +28,12 @@ export async function POST() {
     const hubspotResponse = (await response.json()) as HubspotBulkUsersUpdateResponse;
 
     if (hubspotResponse.status === "COMPLETE") {
-      await prismaClient.syncLog.create({
+      const executionEndTime = new Date();
+      await prismaClient.cron_jobs.create({
         data: {
-          lastSyncDate: new Date(),
+          execution_start_time: executionStartTime,
+          execution_end_time: executionEndTime,
+          job_type: "SYNC_HUBSPOT",
         },
       });
       return NextResponse.json({ message: "Synchronisation réussie" }, { status: 200 });

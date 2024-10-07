@@ -169,11 +169,11 @@ export const updateUserDiscardedInformation = async (
 };
 
 export const getNewUsersFromLastSync = async () => {
-  const lastSync = await prismaClient.syncLog.findFirst({
-    orderBy: { lastSyncDate: "desc" },
+  const lastSync = await prismaClient.cron_jobs.findFirst({
+    orderBy: { execution_end_time: "desc" },
   });
 
-  const lastSyncDate = lastSync?.lastSyncDate ?? new Date(0);
+  const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
 
   const newUsers = await prismaClient.user.findMany({
     where: {
