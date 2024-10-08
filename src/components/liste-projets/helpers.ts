@@ -10,13 +10,16 @@ export interface ProjetsByCollectivite {
 export const groupAndOrderProjetsByCollectivite = (projets: ProjetWithPublicRelations[]): ProjetsByCollectivite[] => {
   const p = projets.reduce<ProjetsByCollectivite[]>((acc, projet) => {
     let existingGroup = acc.find(({ collectivite }) => collectivite.id === projet.collectivite.id);
+
     if (!existingGroup) {
       existingGroup = { collectivite: projet.collectivite, projets: [] };
       acc.push(existingGroup);
     }
+
     existingGroup.projets.push(projet);
     return acc;
   }, []);
+
   return orderBy(p, ["collectivite.nom"], "asc");
 };
 

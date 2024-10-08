@@ -190,7 +190,7 @@ export default function EstimationMateriauForm({
           </form>
         </>
       ) : (
-        <div className="mb-4 text-dsfr-text-title-grey">Auncun matériau n{"'"}a été renseigné pour cette fiche</div>
+        <div className="mb-4 text-dsfr-text-title-grey">Aucun matériau n{"'"}a été renseigné pour cette fiche</div>
       )}{" "}
     </>
   );

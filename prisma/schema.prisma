@@ -51,6 +51,7 @@ model User {
   user_projet_deleted         user_projet[]       @relation(name: "user_projet_deleter")
   discardedInformation        String[]
   conversations               conversation[]
+  Analytics                   Analytics[]
 }
 
 model VerificationToken {
@@ -158,6 +159,7 @@ model projet {
   created_by                String
   creator                   User          @relation(fields: [created_by], references: [id])
   created_at                DateTime      @default(now())
+  updated_at                DateTime      @default(now())
   nom                       String
   type_espace               String?
   adresse                   String?
@@ -238,4 +240,35 @@ model conversation {
   ragtimeId  String   @unique
   created_at DateTime @default(now())
   user       User?    @relation(fields: [userId], references: [id])
+}
+
+enum ReferenceType {
+  USER
+  PROJET
+  ESTIMATION
+}
+
+enum EventType {
+  AJOUT_FICHE_SOLUTION
+  AJOUT_FICHE_DIAGNOSTIC
+  CREATE_OR_UPDATE_PROJET
+  DELETE_PROJET
+  LEAVE_PROJET
+  UPDATE_MATURITE
+  UPDATE_USER_ROLE
+  DELETE_USER_FROM_PROJET
+  ACCEPT_INVITATION
+  DECLINE_INVITATION
+  ACCEPT_REQUEST
+}
+
+model Analytics {
+  id             String        @id @default(cuid())
+  created_at     DateTime      @default(now())
+  created_by     User          @relation(fields: [userId], references: [id])
+  reference_id   Int
+  reference_type ReferenceType
+  event_type     EventType
+  context        Json?
+  userId         String
 }
