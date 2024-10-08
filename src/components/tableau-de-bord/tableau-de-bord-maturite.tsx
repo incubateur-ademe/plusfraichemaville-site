@@ -1,12 +1,12 @@
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Maturite } from "../maturite/maturite";
-import { daysSinceDate } from "@/src/helpers/common";
+import { daysUntilDate } from "@/src/helpers/common";
 import { Spinner } from "../common/spinner";
 
 export const TableauDeBordMaturite = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const updatedAt = projet?.updated_at;
-  const lastUpdate = daysSinceDate(updatedAt);
+  const lastUpdate = updatedAt && -daysUntilDate(updatedAt)!;
   const formattedDate = !lastUpdate ? "Aujourd'hui" : lastUpdate === 1 ? "Hier" : `Il y a ${lastUpdate} jours`;
 
   return (

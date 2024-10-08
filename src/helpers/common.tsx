@@ -34,16 +34,6 @@ export const daysUntilDate = (targetDate: Date | null): number | null => {
   return Math.ceil((targetDate.getTime() - new Date().getTime()) / MS_PER_DAY);
 };
 
-export const daysSinceDate = (date?: Date) => {
-  if (!date) {
-    return null;
-  }
-  const today = new Date();
-  const differenceTime = today.getTime() - date.getTime();
-  const differenceDay = Math.floor(differenceTime / (1000 * 3600 * 24));
-  return differenceDay;
-};
-
 export const extractNameInitiales = (name: string) => {
   const match = name.match(/^[^\s-]+|\S+$/g);
   return match ? match.map((word) => word[0].toUpperCase()).join("") : "";

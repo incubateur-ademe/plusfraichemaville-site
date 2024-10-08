@@ -43,12 +43,21 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
         "relative w-fit",
         !isLecteur && "border-b border-b-pfmv-grey-dashed/25 hover:border-b-pfmv-grey-dashed",
       )}
+      aria-describedby={`tooltip-maturite`}
     >
       <Button
         onClick={toggleShow}
         priority="tertiary no outline"
         className={clsx("relative !p-0 hover:!bg-white", isLecteur && "cursor-default")}
       >
+        <span
+          className={clsx("fr-tooltip fr-placement", show && "!hidden")}
+          id={`tooltip-maturite`}
+          role="tooltip"
+          aria-hidden="true"
+        >
+          {currentNiveau?.label}
+        </span>
         <MaturiteProgress value={currentNiveau?.avancement} />
         <span className={clsx("font-normal text-black", withLabel && "mr-4")}>{withLabel && currentNiveau?.label}</span>
         {!isLecteur && <i className="ri-arrow-down-s-line text-black"></i>}
