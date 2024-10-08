@@ -51,7 +51,7 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
         className={clsx("relative !p-0 hover:!bg-white", isLecteur && "cursor-default")}
       >
         <span
-          className={clsx("fr-tooltip fr-placement", show && "!hidden")}
+          className={clsx("fr-tooltip fr-placement", withLabel ? "!hidden" : show && "!hidden")}
           id={`tooltip-maturite`}
           role="tooltip"
           aria-hidden="true"
