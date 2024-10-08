@@ -146,15 +146,17 @@ export async function getFicheSolutionBySlug(
   slug: string,
 ): Promise<APIResponseData<"api::fiche-solution.fiche-solution"> | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
-  const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
-    ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), { tag: `get-fiche-solution-${slug}` })
+  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntity(apiResponse);
 }
 
 export async function getAllFichesSolutions(): Promise<APIResponseData<"api::fiche-solution.fiche-solution">[]> {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
-  const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter)))
-    ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter), { tag: "get-all-fiches-solution" })
+  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntities(apiResponse);
 }
 
@@ -169,8 +171,11 @@ export async function getFicheSolutionByIds(
       relation: false,
     },
   ]);
-  const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter)))
-    ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter), {
+      tag: `get-fiche-solution-by-ids-${ficheSolutionIds.join("-")}`,
+    })
+  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntities(apiResponse);
 }
 
@@ -185,7 +190,10 @@ export async function getFicheSolutionByIdsComplete(
       relation: false,
     },
   ]);
-  const apiResponse = (await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter)))
-    ?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), {
+      tag: `get-fiche-solution-by-ids-complete-${ficheSolutionIds.join("-")}`,
+    })
+  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntities(apiResponse);
 }
