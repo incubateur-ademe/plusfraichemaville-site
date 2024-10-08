@@ -1,5 +1,7 @@
 import { Client } from "@hubspot/api-client";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
+import { hubspotsObjectsType, makeBatchUpsertContactProperties } from "./hubspot-helpers";
+import { User } from "@prisma/client";
 
 const hubspotClient = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
 
@@ -18,4 +20,21 @@ export const createHubspotTicket = async (data: ContactFormData) => {
     properties,
   };
   await hubspotClient.crm.tickets.basicApi.create(SimplePublicObjectInputForCreate);
+};
+
+export const batchUpdateHubspotContacts = async (users: User[]) => {
+  const properties = makeBatchUpsertContactProperties(users);
+  return await hubspotClient.crm.contacts.batchApi.upsert({
+    inputs: properties,
+  });
+};
+
+export const batchUpdateHubspotProjectsByUser = async () => {
+  const properties = {
+    id: "",
+    properties: {},
+  };
+  return await hubspotClient.crm.objects.batchApi.upsert(hubspotsObjectsType.TRANSACTIONS, {
+    inputs: [properties],
+  });
 };
