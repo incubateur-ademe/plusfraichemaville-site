@@ -1,6 +1,6 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
-import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
+import { ProjetWithPublicRelations, ProjetWithRelations, UserProjetWithPublicUser } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 
@@ -346,4 +346,35 @@ export const projetUpdated = async (projetId: number): Promise<projet | null> =>
       updated_at: new Date(),
     },
   });
+};
+
+export const getUpsertedProjectsFromLastSync = async () => {
+  const lastSync = await prismaClient.cron_jobs.findFirst({
+    where: { job_type: "SYNC_HUBSPOT" },
+    orderBy: { execution_end_time: "desc" },
+  });
+
+  const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
+
+  const updatedProjects = await prismaClient.projet.findMany({
+    where: {
+      OR: [{ created_at: { gte: lastSyncDate } }, { updated_at: { gte: lastSyncDate } }],
+    },
+    include: {
+      users: {
+        where: {
+          role: "ADMIN",
+        },
+        select: {
+          email: true,
+          role: true,
+        },
+      },
+    },
+  });
+
+  return updatedProjects.map((projet) => ({
+    projet,
+    adminEmail: projet.users,
+  }));
 };

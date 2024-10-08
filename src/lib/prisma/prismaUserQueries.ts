@@ -168,7 +168,7 @@ export const updateUserDiscardedInformation = async (
   });
 };
 
-export const getNewUsersFromLastSync = async () => {
+export const getUpsertedUsersFromLastSync = async () => {
   const lastSync = await prismaClient.cron_jobs.findFirst({
     orderBy: { execution_end_time: "desc" },
   });

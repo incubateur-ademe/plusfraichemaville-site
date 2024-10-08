@@ -3,8 +3,9 @@ import { headers } from "next/headers";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 
-import { getNewUsersFromLastSync } from "@/src/lib/prisma/prismaUserQueries";
+import { getUpsertedUsersFromLastSync } from "@/src/lib/prisma/prismaUserQueries";
 import { batchUpdateHubspotContacts } from "@/src/services/hubspot";
+import { getUpsertedProjectsFromLastSync } from "@/src/lib/prisma/prismaProjetQueries";
 
 export async function POST() {
   const authorization = headers().get("authorization");
@@ -12,7 +13,9 @@ export async function POST() {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
   }
 
-  const newUsers = await getNewUsersFromLastSync();
+  const newUsers = await getUpsertedUsersFromLastSync();
+  const newProjects = await getUpsertedProjectsFromLastSync();
+  console.log(newProjects);
 
   try {
     const response = await batchUpdateHubspotContacts(newUsers);
