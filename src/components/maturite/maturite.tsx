@@ -67,8 +67,7 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
           {show && <div className="fixed inset-0 z-[1] h-screen w-screen" onClick={closer} />}
           <ul
             className={clsx(
-              "absolute top-[calc(100%_+_12px)] z-10 m-0 block w-[600px]",
-              "bg-white p-0 shadow-pfmv-card-shadow",
+              "absolute top-[calc(100%_+_12px)] z-10 m-0 block w-[600px] bg-white p-0 shadow-pfmv-card-shadow",
             )}
           >
             {ALL_NIVEAU_MATURITE.map((niveau, index) => (
