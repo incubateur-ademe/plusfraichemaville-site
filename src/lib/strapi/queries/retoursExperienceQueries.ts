@@ -114,14 +114,15 @@ export async function getRetourExperienceBySlug(
   slug: string,
 ): Promise<APIResponseData<"api::retour-experience.retour-experience"> | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
-  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter)))
-    ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter), { tag: `get-rex-by-slug-${slug}` })
+  )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntity(apiResponse);
 }
 
 export async function getRetoursExperiences(): Promise<APIResponseData<"api::retour-experience.retour-experience">[]> {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
-  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter)))
+  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter), { tag: "get-rex" }))
     ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntities(apiResponse);
 }

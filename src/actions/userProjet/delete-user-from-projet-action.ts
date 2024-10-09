@@ -30,7 +30,8 @@ export const deleteUserFromProjetAction = async (
   try {
     await deleteUserFromProject(userId, projectId, session.user.id);
     const updatedProjet = await getProjetWithRelationsById(projectId);
-    return { type: "success", message: "USER_DELETED_FROM_PROJECT", updatedProjet: updatedProjet };
+
+    return { type: "success", message: "USER_DELETED_FROM_PROJECT", updatedProjet };
   } catch (e) {
     customCaptureException("Error in updating user role DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR", updatedProjet: null };

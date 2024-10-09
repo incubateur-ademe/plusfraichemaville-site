@@ -1,6 +1,7 @@
 "use client";
 
 import { TableauDeBordSuivi, TableauDeBordTab } from ".";
+
 import { TableauDeBordPartage } from "./tableau-de-bord-partage";
 import { TableauDeBordRecommandation } from "./tableau-de-bord-recommandations";
 import { useSearchParams } from "next/navigation";

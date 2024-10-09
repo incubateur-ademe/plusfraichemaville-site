@@ -28,6 +28,7 @@ export const updateUserRoleProjectAction = async (
 
   try {
     const member = await updateUserRoleProject(userId, projectId, role);
+
     return {
       type: "success",
       message: "ROLE_UPDATED",
