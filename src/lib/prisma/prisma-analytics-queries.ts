@@ -10,7 +10,7 @@ export const createAnalytic = async (analytics: AnalyticsProps): Promise<Analyti
       reference_type: analytics.reference_type,
       event_type: analytics.event_type,
       context: analytics.context ?? {},
-      userId: analytics.userId,
+      user_id: analytics.userId,
     },
   });
 };

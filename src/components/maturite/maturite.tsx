@@ -65,9 +65,9 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
       {show && !isLecteur && (
         <>
           {show && <div className="fixed inset-0 z-[1] h-screen w-screen" onClick={closer} />}
-          <ul className="absolute top-[calc(100%_+_12px)] z-10 block w-[540px] shadow-pfmv-card-shadow">
+          <ul className="absolute top-[calc(100%_+_12px)] z-10 m-0 block w-[600px] bg-white p-0 shadow-pfmv-card-shadow">
             {ALL_NIVEAU_MATURITE.map((niveau, index) => (
-              <li className="relative mb-0 p-0" key={index}>
+              <li className="relative mb-0 list-none p-0" key={index}>
                 <div
                   className={clsx(
                     "absolute left-0 top-1/2 z-[2] h-6 w-0.5 -translate-y-1/2 bg-pfmv-navy",
@@ -75,7 +75,7 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
                   )}
                 ></div>
                 <Button
-                  className="h-12 w-full bg-white px-4 py-3 text-sm"
+                  className="h-12 !w-full bg-white px-4 py-3 text-sm"
                   priority="tertiary no outline"
                   onClick={() => {
                     setCurrentNiveau(niveau);
@@ -86,7 +86,7 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
                   <MaturiteProgress value={niveau.avancement} />
                   <span
                     className={clsx(
-                      "ml-3 font-normal",
+                      "ml-3 text-left font-normal",
                       index + 1 === currentNiveau?.avancement ? "text-pfmv-navy" : "text-black",
                     )}
                   >
