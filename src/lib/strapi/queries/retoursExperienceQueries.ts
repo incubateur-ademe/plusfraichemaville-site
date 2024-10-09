@@ -131,7 +131,8 @@ export async function getAllCompleteRetoursExperiences(): Promise<
   APIResponseData<"api::retour-experience.retour-experience">[]
 > {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
-  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter)))
-    ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter), { tag: "get-all-complete-retour-experience" })
+  )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntities(apiResponse);
 }
