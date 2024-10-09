@@ -22,7 +22,7 @@ export const TableauDeBordMaturite = () => {
           )}
         </div>
       </div>
-      {lastUpdate && (
+      {updatedAt && (
         <div>
           <span className="block text-end text-[18px] font-bold leading-6 text-pfmv-navy">Dernière modification</span>
           <span className="block text-end text-[18px] leading-6 text-pfmv-navy">{formattedDate}</span>
