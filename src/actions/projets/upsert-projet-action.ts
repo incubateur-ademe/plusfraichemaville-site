@@ -56,7 +56,7 @@ export const upsertProjetAction = async (
           event_type: "UPDATE_MATURITE",
           reference_id: updatedProjet?.id,
           reference_type: "PROJET",
-          userId: session.user.id,
+          user_id: session.user.id,
         });
       }
 

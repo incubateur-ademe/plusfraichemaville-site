@@ -36,7 +36,7 @@ export const updateMaturiteProjetAction = async (
         event_type: "UPDATE_MATURITE",
         reference_id: projet?.id,
         reference_type: "PROJET",
-        userId: session.user.id,
+        user_id: session.user.id,
       });
     }
 
