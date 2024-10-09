@@ -6,7 +6,6 @@ import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { getUpsertedUsersFromLastSync } from "@/src/lib/prisma/prismaUserQueries";
 import { batchUpdateHubspotContacts, batchUpdateHubspotProjectsByUser } from "@/src/services/hubspot";
 import { getUpsertedProjectsFromLastSync } from "@/src/lib/prisma/prismaProjetQueries";
-import { getUsersAndProjectsFromLastSync } from "@/src/lib/prisma/prisma-cron-jobs-queries";
 
 export async function POST() {
   const authorization = headers().get("authorization");
@@ -15,8 +14,8 @@ export async function POST() {
   }
 
   // const newUsers = await getUpsertedUsersFromLastSync();
-  const t = await getUsersAndProjectsFromLastSync();
-  console.log(t);
+  // const t = await getUsersAndProjectsFromLastSync();
+  // console.log(t);
 
   const newProjects = await getUpsertedProjectsFromLastSync();
 

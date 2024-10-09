@@ -34,10 +34,8 @@ export const batchUpdateHubspotContacts = async (users: User[]) => {
 };
 
 export const batchUpdateHubspotProjectsByUser = async (projets: ProjetWithAdminUser[]) => {
-  // Contact: Si un contact est nouveau ou updaté, le mettre à jour.
-  // Projet: Récupérer l'adresse mail de l'admin, trouver l'id puis l'associé au projet.
-  // Puis updater le projet.
   const properties = makeBatchUpsertProjectsByContactProperties(projets);
+  console.log(projets);
   const batch = await hubspotClient.crm.deals.batchApi.upsert({
     inputs: properties,
   });
@@ -61,7 +59,7 @@ async function createBidirectionalAssociation(dealId: string, contactId: string)
   });
 }
 
-const a = async () =>
+const createContactToDealAssociation = async () =>
   await hubspotClient.crm.associations.batchApi.create("contact", "deal", {
     inputs: [
       {
@@ -76,7 +74,7 @@ const a = async () =>
     ],
   });
 
-const b = async () =>
+const createDealToContactAssociation = async () =>
   await hubspotClient.crm.associations.batchApi.create("deal", "contact", {
     inputs: [
       {
