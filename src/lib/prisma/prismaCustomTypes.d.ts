@@ -1,4 +1,4 @@
-import { collectivite, Prisma, projet, User } from "@prisma/client";
+import { collectivite, Prisma, projet, RoleProjet, User } from "@prisma/client";
 
 export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
@@ -53,6 +53,17 @@ export interface ProjetWithPublicRelations
   collectivite: collectivite;
   users: UserProjetWithPublicUser[];
 }
+
+type ProjectUserAndAdmin = {
+  user: {
+    email: string;
+  } | null;
+  role: RoleProjet;
+};
+
+export type ProjetWithAdminUser = projet & {
+  users: ProjectUserAndAdmin[];
+};
 
 export type EstimationMateriauxFicheSolution = {
   ficheSolutionId: number;

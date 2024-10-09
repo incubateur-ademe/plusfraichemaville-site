@@ -4,8 +4,9 @@ import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 
 import { getUpsertedUsersFromLastSync } from "@/src/lib/prisma/prismaUserQueries";
-import { batchUpdateHubspotContacts } from "@/src/services/hubspot";
+import { batchUpdateHubspotContacts, batchUpdateHubspotProjectsByUser } from "@/src/services/hubspot";
 import { getUpsertedProjectsFromLastSync } from "@/src/lib/prisma/prismaProjetQueries";
+import { getUsersAndProjectsFromLastSync } from "@/src/lib/prisma/prisma-cron-jobs-queries";
 
 export async function POST() {
   const authorization = headers().get("authorization");
@@ -13,31 +14,49 @@ export async function POST() {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
   }
 
-  const newUsers = await getUpsertedUsersFromLastSync();
+  // const newUsers = await getUpsertedUsersFromLastSync();
+  const t = await getUsersAndProjectsFromLastSync();
+  console.log(t);
+
   const newProjects = await getUpsertedProjectsFromLastSync();
-  console.log(newProjects);
 
   try {
-    const response = await batchUpdateHubspotContacts(newUsers);
+    // const responseContacts = await batchUpdateHubspotContacts(newUsers);
+    const responseProjets = await batchUpdateHubspotProjectsByUser(newProjects);
 
-    if (response.status === "COMPLETE") {
-      await prismaClient.cron_jobs.create({
-        data: {
-          execution_start_time: response.startedAt,
-          execution_end_time: response.completedAt,
-          job_type: "SYNC_HUBSPOT",
-        },
-      });
+    if (
+      // responseContacts.status === "COMPLETE" &&
+      responseProjets.status === "COMPLETE"
+    ) {
+      // await prismaClient.cron_jobs.create({
+      //   data: {
+      //     execution_start_time: responseProjets.startedAt,
+      //     execution_end_time: responseProjets.completedAt,
+      //     job_type: "SYNC_HUBSPOT",
+      //   },
+      // });
       return NextResponse.json({ message: "Synchronsation avec Hubspot réussie" }, { status: 200 });
     } else {
-      captureError("Erreur lors de la synchronsation avec Hubspot", { date: response.startedAt });
+      captureError("Erreur lors de la synchronsation avec Hubspot", {
+        // contactsExecutionTime: responseContacts.completedAt,
+        projetsExecutionTime: responseProjets.completedAt,
+      });
       return NextResponse.json(
-        { message: `Erreur lors de la synchronsation avec Hubspot du ${response.completedAt}` },
+        { message: `Erreur lors de la synchronsation avec Hubspot du ${responseProjets.completedAt}` },
         { status: 400 },
       );
     }
   } catch (error) {
+    console.log((error as HubspotError).body);
     captureError("Erreur lors de la synchronisation.");
     return NextResponse.json({ message: "Erreur lors de la synchronisation." }, { status: 500 });
   }
 }
+
+type HubspotError = {
+  body: {
+    status: string;
+    message: string;
+    correlationid: string;
+  };
+};
