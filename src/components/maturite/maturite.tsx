@@ -43,7 +43,7 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
         "relative w-fit",
         !isLecteur && "border-b border-b-pfmv-grey-dashed/25 hover:border-b-pfmv-grey-dashed",
       )}
-      aria-describedby={`tooltip-maturite`}
+      aria-describedby={`tooltip-maturite-${projetId}`}
     >
       <Button
         onClick={toggleShow}
@@ -52,7 +52,7 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
       >
         <span
           className={clsx("fr-tooltip fr-placement conic-gradient", withLabel ? "!hidden" : show && "!hidden")}
-          id={`tooltip-maturite`}
+          id={`tooltip-maturite-${projetId}`}
           role="tooltip"
           aria-hidden="true"
         >

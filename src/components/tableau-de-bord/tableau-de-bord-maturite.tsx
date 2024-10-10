@@ -8,6 +8,7 @@ export const TableauDeBordMaturite = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const updatedAt = projet?.updated_at ?? projet?.created_at;
   const lastUpdate = updatedAt && -daysUntilDate(updatedAt)!;
+
   const formattedDate = getRelativeDate(lastUpdate);
 
   return (
