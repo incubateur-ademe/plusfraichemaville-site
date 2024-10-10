@@ -1,7 +1,11 @@
 import { ProjetWithAdminUser, ProjetWithRelations, UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
-import { SimplePublicObjectBatchInputUpsert } from "@hubspot/api-client/lib/codegen/crm/companies";
+import {
+  AssociationSpecAssociationCategoryEnum,
+  SimplePublicObjectBatchInputUpsert,
+} from "@hubspot/api-client/lib/codegen/crm/companies";
 import { getHubspotPipelineDealStageCode, HubspotPipelineDealStageKey } from "@/src/helpers/maturite-projet";
+import { hubspotClient } from ".";
 
 export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObjectBatchInputUpsert[] =>
   users.map((user) => ({
@@ -38,3 +42,17 @@ export const makeBatchUpsertProjectsByContactProperties = (
       closedate: new Date(projet.date_echeance!)?.setUTCHours(0, 0, 0, 0).toString(),
     },
   }));
+
+export const createBidirectionalAssociations = async (associations: { dealId: string; contactId: string }[]) =>
+  await hubspotClient.crm.associations.v4.batchApi.create("deal", "contact", {
+    inputs: associations.map((association) => ({
+      _from: { id: association.dealId },
+      to: { id: association.contactId },
+      types: [
+        {
+          associationCategory: AssociationSpecAssociationCategoryEnum.HubspotDefined,
+          associationTypeId: 3,
+        },
+      ],
+    })),
+  });

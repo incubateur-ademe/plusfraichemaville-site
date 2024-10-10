@@ -1,4 +1,4 @@
-import { getUsersAndProjectsFromLastSync } from "@/src/lib/prisma/prisma-cron-jobs-queries";
+import { getUsersAndProjectsFromLastSync, saveLastCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
@@ -26,16 +26,9 @@ export async function POST() {
     if (
       batch.contactBatch.status === "COMPLETE" &&
       batch.projectBatch.status === "COMPLETE" &&
-      batch.contactToDealBatch.status === "COMPLETE" &&
-      batch.dealToContactBatch.status === "COMPLETE"
+      batch.associationsBatch.status === "COMPLETE"
     ) {
-      // await prismaClient.cron_jobs.create({
-      //   data: {
-      //     execution_start_time: responseProjets.startedAt,
-      //     execution_end_time: responseProjets.completedAt,
-      //     job_type: "SYNC_HUBSPOT",
-      //   },
-      // });
+      saveLastCronJob(batch.associationsBatch.startedAt, batch.associationsBatch.completedAt, "SYNC_HUBSPOT");
       return NextResponse.json({ message: "Synchronsation avec Hubspot réussie" }, { status: 200 });
     } else {
       captureError("Erreur lors de la synchronsation avec Hubspot", {
