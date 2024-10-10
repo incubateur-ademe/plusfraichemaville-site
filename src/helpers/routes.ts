@@ -8,6 +8,7 @@ export const PFMV_ROUTES = {
   RETOURS_EXPERIENCE: "/projet",
   CONTACT: "/contact",
   CONTACT_SUCCESS: "contact/success",
+  NEWSLETTER_SUCCESS: "newsletter/success",
   CONNEXION: "/connexion",
   DECONNEXION: "/logout",
   ESPACE_PROJET: "/espace-projet",
