@@ -1,4 +1,6 @@
+import { Prisma } from "@prisma/client";
 import { prismaClient } from "./prismaClient";
+import { UserWithAdminProjets } from "./prismaCustomTypes";
 
 export const getLastHubspotSync = async () =>
   await prismaClient.cron_jobs.findFirst({
@@ -6,53 +8,51 @@ export const getLastHubspotSync = async () =>
     orderBy: { execution_end_time: "desc" },
   });
 
-// export async function getUsersAndProjectsFromLastSync() {
-//   const lastSync = await getLastHubspotSync();
+export const getUsersAndProjectsFromLastSync = async (): Promise<UserWithAdminProjets[]> => {
+  const lastSync = await getLastHubspotSync();
 
-//   const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
-//   const lastSyncTimeParam = [{ created_at: { gte: lastSyncDate } }, { updated_at: { gte: lastSyncDate } }];
+  const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
+  const lastSyncTimeParam = [{ created_at: { gte: lastSyncDate } }, { updated_at: { gte: lastSyncDate } }];
 
-//   const usersAndProjects = await prismaClient.user.findMany({
-//     where: {
-//       OR: [
-//         { created_at: { gte: lastSyncDate } },
-//         { updated_at: { gte: lastSyncDate } },
-//         {
-//           projets_created: {
-//             some: {
-//               OR: lastSyncTimeParam,
-//             },
-//           },
-//         },
-//         {
-//           projets: {
-//             some: {
-//               projet: {
-//                 OR: lastSyncTimeParam,
-//               },
-//             },
-//           },
-//         },
-//       ],
-//     },
-//     include: {
-//       projets_created: {
-//         where: {
-//           OR: lastSyncTimeParam,
-//         },
-//       },
-//       projets: {
-//         where: {
-//           projet: {
-//             OR: lastSyncTimeParam,
-//           },
-//         },
-//         include: {
-//           projet: true,
-//         },
-//       },
-//     },
-//   });
+  const usersAndProjects = await prismaClient.user.findMany({
+    where: {
+      OR: [
+        { created_at: { gte: lastSyncDate } },
+        { updated_at: { gte: lastSyncDate } },
+        {
+          projets: {
+            some: {
+              AND: [
+                { role: "ADMIN" },
+                {
+                  projet: {
+                    OR: lastSyncTimeParam,
+                  },
+                },
+              ],
+            },
+          },
+        },
+      ],
+    },
+    include: {
+      projets: {
+        where: {
+          AND: [
+            { role: "ADMIN" },
+            {
+              projet: {
+                OR: lastSyncTimeParam,
+              },
+            },
+          ],
+        },
+        include: {
+          projet: true,
+        },
+      },
+    },
+  });
 
-//   return usersAndProjects;
-// }
+  return usersAndProjects;
+};

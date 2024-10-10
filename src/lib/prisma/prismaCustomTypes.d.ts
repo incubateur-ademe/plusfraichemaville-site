@@ -21,6 +21,16 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
 export type UserProjetWithUser = Prisma.user_projetGetPayload<{
   include: { user: true };
 }>;
+
+export type UserWithAdminProjets = Prisma.UserGetPayload<{
+  include: {
+    projets: {
+      where: { role: "ADMIN" };
+      include: { projet: true };
+    };
+  };
+}>;
+
 export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
   select: {
     user: { select: { id: true; nom: true; prenom: true } };
