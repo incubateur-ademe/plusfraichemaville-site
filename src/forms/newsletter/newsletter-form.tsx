@@ -20,7 +20,6 @@ export const NewsletterForm = () => {
   const userCollectivite = user?.collectivites[0]?.collectivite;
   const router = useRouter();
   const [isCollectivite, setIsCollectivite] = useState(false);
-  console.log("user?.collectivites[0]?.collectivite", user?.collectivites[0]?.collectivite);
 
   const form = useForm<NewsletterFormData>({
     resolver: zodResolver(NewsletterFormSchema),
@@ -31,6 +30,9 @@ export const NewsletterForm = () => {
   });
 
   const onSubmit: SubmitHandler<NewsletterFormData> = async (data) => {
+    if (!isCollectivite) {
+      data.collectivite = null;
+    }
     const actionResult = await subscribeNewsletterAction(data);
     if (actionResult.type === "error") {
       notifications(actionResult.type, actionResult.message);

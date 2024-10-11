@@ -1,6 +1,6 @@
 import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/src/lib/prisma/prisma-email-queries";
 import { email, emailStatus, emailType } from "@prisma/client";
-import { brevoSender } from "./brevo-sender";
+import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
 import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
@@ -68,7 +68,7 @@ export class EmailService {
 
     const dbEmail = await createEmail(to, emailType, userProjetId, extra);
     try {
-      const response = await brevoSender(to, templateId, params);
+      const response = await brevoSendEmail(to, templateId, params);
 
       if (!response.ok) {
         const data = await response.json();
