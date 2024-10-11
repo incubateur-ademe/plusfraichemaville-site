@@ -2,7 +2,7 @@ import { getUsersAndProjectsFromLastSync, saveLastCronJob } from "@/src/lib/pris
 import { NextResponse } from "next/server";
 import { headers } from "next/headers";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
-import { batchUpdate } from "@/src/services/hubspot";
+import { hubspotBatchSync } from "@/src/services/hubspot";
 
 type HubspotError = {
   body: {
@@ -21,7 +21,7 @@ export async function POST() {
   const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync();
 
   try {
-    const batch = await batchUpdate(usersAndProjectsFromLastSync);
+    const batch = await hubspotBatchSync(usersAndProjectsFromLastSync);
 
     if (
       batch.contactBatch.status === "COMPLETE" &&

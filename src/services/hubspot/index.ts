@@ -2,12 +2,12 @@ import { Client } from "@hubspot/api-client";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
   createBidirectionalAssociations,
+  getHubspotUsersFromAdminProjets,
   makeBatchUpsertContactProperties,
   makeBatchUpsertProjectsByContactProperties,
 } from "./hubspot-helpers";
-import { ProjetWithAdminUser, UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
-import { FilterOperatorEnum } from "@hubspot/api-client/lib/codegen/crm/deals";
 import { getProjetsWithAdminUser } from "@/src/components/liste-projets/helpers";
+import { UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const hubspotClient = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
 
@@ -28,22 +28,7 @@ export const createHubspotTicket = async (data: ContactFormData) => {
   await hubspotClient.crm.tickets.basicApi.create(SimplePublicObjectInputForCreate);
 };
 
-const searchHubspotUserByEmail = async (email: string) =>
-  await hubspotClient.crm.contacts.searchApi.doSearch({
-    filterGroups: [
-      {
-        filters: [
-          {
-            propertyName: "email",
-            operator: FilterOperatorEnum.Eq,
-            value: email,
-          },
-        ],
-      },
-    ],
-  });
-
-export const batchUpdate = async (usersWithAdminProjets: UserWithAdminProjets[]) => {
+export const hubspotBatchSync = async (usersWithAdminProjets: UserWithAdminProjets[]) => {
   const contactProperties = makeBatchUpsertContactProperties(usersWithAdminProjets);
   const contactBatch = await hubspotClient.crm.contacts.batchApi.upsert({
     inputs: contactProperties,
@@ -55,12 +40,7 @@ export const batchUpdate = async (usersWithAdminProjets: UserWithAdminProjets[])
     inputs: projectProperties,
   });
 
-  const contactIds = await Promise.all(
-    usersWithAdminProjets.map(async (user) => {
-      const hubspotUser = await searchHubspotUserByEmail(user.email);
-      return { email: user.email, hubspotId: hubspotUser.results[0]?.id };
-    }),
-  );
+  const contactIds = await getHubspotUsersFromAdminProjets(usersWithAdminProjets);
 
   const associations = usersWithAdminProjets
     .flatMap((user) =>
