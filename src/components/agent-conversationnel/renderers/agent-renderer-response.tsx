@@ -16,7 +16,7 @@ export const AgentResponseRenderer: ResponseRenderer<string | string[]> = (
       {messages.map((message, index) => (
         <div key={index} className="rounded-2xl rounded-bl-none bg-dsfr-background-contrast-blue-france p-3">
           <Markdown
-            className="[&_>_p]:mb-0"
+            className="agentResponse [&_>_p]:mb-0"
             urlTransform={sanitizeUrlInMessageFromRagtime}
             components={{
               a: ({ href = "", children }) => {
