@@ -25,11 +25,11 @@ export const updateFichesProjetAction = async (
 
   try {
     const projet = await updateFichesProjet(projetId, ficheId, session.user.id, type);
-    const eventType = type === "solution" ? "AJOUT_FICHE_SOLUTION" : "AJOUT_FICHE_DIAGNOSTIC";
+    const message = type === "solution" ? "FICHE_SOLUTION_ADDED_TO_PROJET" : "FICHE_DIAGNOSTIC_ADDED_TO_PROJET";
 
     return {
       type: "success",
-      message: eventType,
+      message,
       projet,
     };
   } catch (e) {

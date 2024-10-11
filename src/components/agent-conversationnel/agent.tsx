@@ -44,19 +44,19 @@ export const Agent = () => {
             conversationOptions={{
               conversationStarters: [
                 {
-                  prompt: "Je veux créer un projet",
-                  icon: "/images/zephyr/loupe.svg",
-                  label: "Je veux créer un projet",
-                },
-                {
                   prompt: "Je cherche une solution",
-                  icon: "/images/zephyr/plus.svg",
+                  icon: "/images/zephyr/cherche-solution.svg",
                   label: "Je cherche une solution",
                 },
                 {
-                  prompt: "Aide à la décision?",
-                  icon: "/images/zephyr/etoiles.svg",
-                  label: "Aide à la décision?",
+                  prompt: "Je veux créer un projet",
+                  icon: "/images/zephyr/creation-projet.svg",
+                  label: "Je veux créer un projet",
+                },
+                {
+                  prompt: "Aide à la décision",
+                  icon: "/images/zephyr/aide-decision.svg",
+                  label: "Aide à la décision",
                 },
               ],
             }}

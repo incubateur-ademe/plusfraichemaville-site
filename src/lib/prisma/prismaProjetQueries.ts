@@ -74,7 +74,6 @@ export const updateFichesProjet = async (
       fiches_solutions_id: type === "solution" ? fichesUpdated : projet?.fiches_solutions_id,
       fiches_diagnostic_id: type === "diagnostic" ? fichesUpdated : projet?.fiches_diagnostic_id,
       recommandations_viewed_by: updatedRecommandationsViewed,
-      updated_at: new Date(),
     },
     include: projetIncludes,
   });
@@ -100,7 +99,6 @@ export const updateFichesSolutionsProjet = async (
     data: {
       fiches_solutions_id: fichesSolutionsId,
       recommandations_viewed_by: updatedRecommandationsViewed,
-      updated_at: new Date(),
     },
     include: projetIncludes,
   });
@@ -225,7 +223,6 @@ export const createOrUpdateProjet = async ({
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
-      updated_at: new Date(),
     },
     include: projetIncludes,
   });
@@ -336,7 +333,6 @@ export const updateMaturiteProjet = (projetId: number, niveauMaturite: string) =
     },
     data: {
       niveau_maturite: niveauMaturite,
-      updated_at: new Date(),
     },
     include: projetIncludes,
   });
@@ -348,9 +344,7 @@ export const projetUpdated = async (projetId: number): Promise<projet | null> =>
       id: projetId,
       deleted_at: null,
     },
-    data: {
-      updated_at: new Date(),
-    },
+    data: {},
   });
 };
 

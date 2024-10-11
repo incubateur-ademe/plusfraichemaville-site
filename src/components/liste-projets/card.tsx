@@ -254,7 +254,6 @@ export const ListeProjetsCard = ({
         <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
           <div className="absolute bottom-4 left-[11rem] flex h-8 items-center gap-4">
             <div className="flex items-center justify-end gap-2">
-              <i className="ri-information-line text-pfmv-navy before:!w-4"></i>
               <span className="text-sm font-bold text-pfmv-navy">Maturité du projet : </span>
               <Maturite niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} />
             </div>

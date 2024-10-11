@@ -1,5 +1,4 @@
 "use server";
-import "server-only";
 import { solutionRetourExperienceFilter, StrapiFilter } from "@/src/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT,
@@ -21,6 +20,7 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
         titre
         description
         slug
+        types_espaces
         region {
           data {
             attributes {
@@ -114,14 +114,25 @@ export async function getRetourExperienceBySlug(
   slug: string,
 ): Promise<APIResponseData<"api::retour-experience.retour-experience"> | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
-  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter)))
-    ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
+  const apiResponse = (
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter), { tag: `get-rex-by-slug-${slug}` })
+  )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntity(apiResponse);
 }
 
 export async function getRetoursExperiences(): Promise<APIResponseData<"api::retour-experience.retour-experience">[]> {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
-  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter)))
+  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter), { tag: "get-rex" }))
     ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getAllCompleteRetoursExperiences(): Promise<
+  APIResponseData<"api::retour-experience.retour-experience">[]
+> {
+  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const apiResponse = (
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter), { tag: "get-all-complete-retour-experience" })
+  )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntities(apiResponse);
 }
