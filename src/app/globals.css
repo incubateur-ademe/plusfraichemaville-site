@@ -413,3 +413,9 @@
     linear-gradient(90deg, var(--border-default-grey), var(--border-default-grey)),
     linear-gradient(90deg, var(--background-overlap-grey), var(--background-overlap-grey)) !important;
 }
+
+.agentResponse {
+  ol {
+    padding-inline-start: var(--ol-start) !important;
+  }
+}

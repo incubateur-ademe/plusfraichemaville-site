@@ -1,5 +1,4 @@
 "use server";
-import "server-only";
 import { solutionRetourExperienceFilter, StrapiFilter } from "@/src/lib/strapi/queries/commonStrapiFilters";
 import {
   FICHE_SOLUTION_CARD_INFO_FRAGMENT,
@@ -156,6 +155,16 @@ export async function getAllFichesSolutions(): Promise<APIResponseData<"api::fic
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter), { tag: "get-all-fiches-solution" })
+  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getAllCompleteFichesSolutions(): Promise<
+  APIResponseData<"api::fiche-solution.fiche-solution">[]
+> {
+  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const apiResponse = (
+    await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), { tag: "get-all-complete-fiches-solution" })
   )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
   return safeReturnStrapiEntities(apiResponse);
 }
