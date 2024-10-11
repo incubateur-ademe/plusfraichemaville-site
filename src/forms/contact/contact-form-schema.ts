@@ -9,6 +9,6 @@ export const ContactFormSchema = z.object({
   objetMessage: z.string().min(1, { message: "Veuillez sélectionner l'objet de votre message" }),
   message: z.string().min(1, { message: "Veuillez écrire un message" }),
   subscribeToNewsletter: z.boolean(),
-  collectivite: CollectiviteFormSchema.nullish()
+  collectivite: CollectiviteFormSchema.nullish(),
 });
 export type ContactFormData = z.infer<typeof ContactFormSchema>;
