@@ -22,7 +22,7 @@ export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObj
       jobtitle: user.poste ?? "",
       lifecyclestage: "opportunity",
       canal_d_acquisition: user.canal_acquisition ?? "",
-      // date_d_inscription_pfmv: new Date(user.created_at).getTime().toString(),
+      date_d_inscription_pfmv: new Date(user.created_at).setUTCHours(0, 0, 0, 0).toString(),
     },
   }));
 
