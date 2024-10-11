@@ -51,7 +51,7 @@ export const NewsletterForm = () => {
   const disabled =
     form.formState.isSubmitting || !form.watch("email") || (isCollectivite && !form.watch("collectivite"));
   return (
-    <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
+    <form id="newsletter-form" onSubmit={form.handleSubmit(onSubmit)}>
       <ToggleSwitch
         className="max-w-60"
         label="Je suis une collectivite"

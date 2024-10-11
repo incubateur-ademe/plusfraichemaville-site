@@ -12,10 +12,9 @@ export const subscribeNewsletterAction = async (data: NewsletterFormData): Promi
   } else {
     try {
       const response = await brevoAddContact(data.email, data.collectivite?.nomCollectivite);
-
       if (!response.ok) {
         const brevoResponse = await response.json();
-        captureError("Erreur avec lors de l'inscription à la newsletter", JSON.stringify(data));
+        captureError("Erreur avec lors de l'inscription à la newsletter", JSON.stringify(brevoResponse));
         if (brevoResponse.code === "duplicate_parameter") {
           return { type: "error", message: "ALREADY_SUBSCRIBED_NEWSLETTER" };
         }
