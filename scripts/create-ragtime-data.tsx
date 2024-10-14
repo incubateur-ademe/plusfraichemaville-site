@@ -98,7 +98,7 @@ const strapiRetourExperienceToRagtime = (strapiRetourExperience: RetourExperienc
     // @ts-ignore
     types_solutions: strapiRetourExperienceAttributes.types_solutions,
     slug: strapiRetourExperienceAttributes.slug,
-    link: `https://plusfraichemaville.fr/projet/${strapiRetourExperienceAttributes.slug}`
+    link: `https://plusfraichemaville.fr/projet/${strapiRetourExperienceAttributes.slug}`,
   };
 };
 
@@ -145,7 +145,7 @@ const strapiFicheSolutionToRagtime = (strapiFicheSolution: FicheSolutionResponse
     delai_travaux_minimum: strapiFicheSolutionAttributes.delai_travaux_minimum,
     delai_travaux_maximum: strapiFicheSolutionAttributes.delai_travaux_maximum,
     slug: strapiFicheSolutionAttributes.slug,
-    link: `https://plusfraichemaville.fr/fiche-solution/${strapiFicheSolutionAttributes.slug}`
+    link: `https://plusfraichemaville.fr/fiche-solution/${strapiFicheSolutionAttributes.slug}`,
   };
 };
 
@@ -170,7 +170,7 @@ const strapiFicheDiagnosticToRagtime = (strapiFicheDiagnostic: FicheDiagnosticRe
     delai_min: strapiFicheDiagAttributes.delai_min,
     delai_max: strapiFicheDiagAttributes.delai_max,
     slug: strapiFicheDiagAttributes.slug,
-    link: `https://plusfraichemaville.fr/fiches-diagnostic/${strapiFicheDiagAttributes.slug}`
+    link: `https://plusfraichemaville.fr/fiches-diagnostic/${strapiFicheDiagAttributes.slug}`,
   };
 };
 
