@@ -17,7 +17,7 @@ export function dateToStringWithoutTime(value: Date): string | null {
   return `${addLeadingZero(value.getDate())}/${addLeadingZero(value.getMonth() + 1)}/${value.getFullYear()}`;
 }
 
-export const getRelativeDate = (lastUpdate?: number) =>
+export const getRelativeDate = (lastUpdate?: number | null) =>
   !lastUpdate ? "Aujourd'hui" : lastUpdate === 1 ? "Hier" : `Il y a ${lastUpdate} jours`;
 
 const addLeadingZero = (value: number): string => ("0" + value).slice(-2);
