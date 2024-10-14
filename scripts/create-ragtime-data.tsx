@@ -25,6 +25,7 @@ type RagTimeFicheDiagnostic = {
   points_vigilance: string;
   etapes_mise_en_oeuvre: string;
   slug: string;
+  link: string;
 };
 
 type RagTimeFicheSolution = {
@@ -52,6 +53,7 @@ type RagTimeFicheSolution = {
   delai_travaux_minimum: number | undefined;
   delai_travaux_maximum: number | undefined;
   slug: string;
+  link: string;
 };
 
 type RagTimeRetourExperience = {
@@ -70,6 +72,7 @@ type RagTimeRetourExperience = {
   cout: string;
   types_espace: string[];
   slug: string;
+  link: string;
 };
 
 const strapiRetourExperienceToRagtime = (strapiRetourExperience: RetourExperienceResponse): RagTimeRetourExperience => {
@@ -95,6 +98,7 @@ const strapiRetourExperienceToRagtime = (strapiRetourExperience: RetourExperienc
     // @ts-ignore
     types_solutions: strapiRetourExperienceAttributes.types_solutions,
     slug: strapiRetourExperienceAttributes.slug,
+    link: `https://plusfraichemaville.fr/projet/${strapiRetourExperienceAttributes.slug}`
   };
 };
 
@@ -141,6 +145,7 @@ const strapiFicheSolutionToRagtime = (strapiFicheSolution: FicheSolutionResponse
     delai_travaux_minimum: strapiFicheSolutionAttributes.delai_travaux_minimum,
     delai_travaux_maximum: strapiFicheSolutionAttributes.delai_travaux_maximum,
     slug: strapiFicheSolutionAttributes.slug,
+    link: `https://plusfraichemaville.fr/fiche-solution/${strapiFicheSolutionAttributes.slug}`
   };
 };
 
@@ -165,6 +170,7 @@ const strapiFicheDiagnosticToRagtime = (strapiFicheDiagnostic: FicheDiagnosticRe
     delai_min: strapiFicheDiagAttributes.delai_min,
     delai_max: strapiFicheDiagAttributes.delai_max,
     slug: strapiFicheDiagAttributes.slug,
+    link: `https://plusfraichemaville.fr/fiches-diagnostic/${strapiFicheDiagAttributes.slug}`
   };
 };
 
