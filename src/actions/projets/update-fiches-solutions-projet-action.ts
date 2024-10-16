@@ -24,6 +24,7 @@ export const updateFichesSolutionsProjetAction = async (
 
   try {
     const projet = await updateFichesSolutionsProjet(projetId, fichesSolutionsId, session.user.id);
+
     return { type: "success", message: "FICHES_SOLUTIONS_ADDED_TO_PROJET", projet };
   } catch (e) {
     customCaptureException("Error in UpdateFichesSolutionsProjetAction DB call", e);

@@ -6,9 +6,6 @@
   --nlux-send-icon: url("/images/zephyr/send.svg");
 }
 
-nlux-composer-container {
-  height: 10px;
-}
 .nlux-comp-composer > button > .nlux-comp-sendIcon {
   max-width: 20px;
 }
@@ -55,7 +52,7 @@ nlux-composer-container {
 }
 .nlux-comp-conversationStarters > button {
   width: 100% !important;
-  padding: 14px 12px;
+  padding: 10px 12px !important;
   height: auto !important;
   border: solid 1px var(--background-contrast-grey-active) !important;
   background: #fff !important;
@@ -81,7 +78,7 @@ nlux-composer-container {
 }
 
 .nlux-comp-conversationStarters > button > img {
-  width: 24px;
+  width: 40px;
 }
 
 .nlux-launchPad-container {

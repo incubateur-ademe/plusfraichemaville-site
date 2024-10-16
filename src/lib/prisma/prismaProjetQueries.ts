@@ -27,6 +27,7 @@ export const projetPublicSelect = {
   collectiviteId: true,
   type_espace: true,
   collectivite: true,
+  niveau_maturite: true,
   users: {
     select: {
       user: { select: { id: true, nom: true, prenom: true } },
@@ -316,5 +317,27 @@ export const getAvailableProjectsForCollectivite = async (
       },
     },
     select: projetPublicSelect,
+  });
+};
+
+export const updateMaturiteProjet = (projetId: number, niveauMaturite: string) => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+    },
+    data: {
+      niveau_maturite: niveauMaturite,
+    },
+    include: projetIncludes,
+  });
+};
+
+export const projetUpdated = async (projetId: number): Promise<projet | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    data: {},
   });
 };

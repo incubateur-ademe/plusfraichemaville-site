@@ -1,5 +1,6 @@
 import { APIResponse } from "@/src/lib/strapi/types/types";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { revalidateTag } from "next/cache";
 
 export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 export const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
@@ -26,9 +27,18 @@ export const getStrapiImageUrl = (
   return image.data.attributes.url;
 };
 
-export const strapiGraphQLCall = async (query: String, variables?: any, signal?: AbortSignal) => {
+type StrapiGraphQLCallConfig = {
+  variables?: any;
+  signal?: AbortSignal;
+  tag: string;
+};
+
+export const strapiGraphQLCall = async (query: string, config: StrapiGraphQLCallConfig) => {
+  const defaultTag = "strapi";
+  const tags = [defaultTag, config.tag];
+
   try {
-    return await fetch(STRAPI_URL + "/graphql", {
+    const response = await fetch(STRAPI_URL + "/graphql", {
       method: "POST",
       headers: {
         Authorization: `Bearer ${STRAPI_TOKEN}`,
@@ -36,27 +46,22 @@ export const strapiGraphQLCall = async (query: String, variables?: any, signal?:
       },
       body: JSON.stringify({
         query: query,
-        variables: variables,
+        variables: config?.variables,
       }),
-      signal,
-      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags: ["strapi"] },
-    })
-      .then((res) =>
-        res.json().catch((err) => {
-          customCaptureException("Error when transforming Strapi response to JSON", err);
-          throw new Error("Error when transforming Strapi response to JSON " + err);
-        }),
-      )
-      .then((res) => {
-        if (res?.errors) {
-          captureError("Some Strapi error occured", res?.errors);
-        }
-        return res?.data;
-      })
-      .catch((err) => {
-        customCaptureException("Caugth an exception while calling Strapi", err);
-      });
+      signal: config?.signal,
+      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags },
+    });
+
+    const res = await response.json();
+
+    if (res?.errors) {
+      tags.forEach((tag) => revalidateTag(tag));
+      captureError(`Some Strapi error occurred. Tags: ${tags.join(", ")}.`, res?.errors);
+    }
+
+    return res?.data;
   } catch (err) {
-    customCaptureException("Caugth exception while calling Strapi", err);
+    tags.forEach((tag) => revalidateTag(tag));
+    customCaptureException(`Caught exception while calling Strapi.  Tags: ${tags.join(", ")}.`, err);
   }
 };
