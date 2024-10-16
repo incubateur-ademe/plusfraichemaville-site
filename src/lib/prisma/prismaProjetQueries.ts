@@ -1,11 +1,6 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
-import {
-  ProjetWithAdminUser,
-  ProjetWithPublicRelations,
-  ProjetWithRelations,
-  UserProjetWithPublicUser,
-} from "./prismaCustomTypes";
+import { ProjetWithAdminUser, ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { getLastHubspotSync } from "./prisma-cron-jobs-queries";

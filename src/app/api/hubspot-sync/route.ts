@@ -28,7 +28,7 @@ export async function POST() {
       batch.projectBatch.status === "COMPLETE" &&
       batch.associationsBatch.status === "COMPLETE"
     ) {
-      saveLastCronJob(batch.associationsBatch.startedAt, batch.associationsBatch.completedAt, "SYNC_HUBSPOT");
+      saveLastCronJob(batch.associationsBatch.startedAt, batch.associationsBatch.completedAt);
       return NextResponse.json({ message: "Synchronsation avec Hubspot réussie" }, { status: 200 });
     } else {
       captureError("Erreur lors de la synchronsation avec Hubspot", {
