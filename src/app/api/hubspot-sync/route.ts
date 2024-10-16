@@ -18,9 +18,8 @@ export async function POST() {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
   }
 
-  const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync();
-
   try {
+    const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync();
     const batch = await hubspotBatchSync(usersAndProjectsFromLastSync);
 
     if (
