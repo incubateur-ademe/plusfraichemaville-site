@@ -15,7 +15,7 @@ import CollectiviteInputFormField from "@/src/components/common/CollectiviteInpu
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { mapDBCollectiviteToCollectiviteAddress } from "@/src/lib/adresseApi/banApiHelper";
 
-export const NewsletterForm = () => {
+export const NewsletterForm = ({ rerouteAfterSuccess = false }: { rerouteAfterSuccess?: boolean }) => {
   const user = useUserStore((state) => state.userInfos);
   const userCollectivite = user?.collectivites[0]?.collectivite;
   const router = useRouter();
@@ -37,7 +37,11 @@ export const NewsletterForm = () => {
     if (actionResult.type === "error") {
       notifications(actionResult.type, actionResult.message);
     } else {
-      router.push(PFMV_ROUTES.NEWSLETTER_SUCCESS);
+      if (rerouteAfterSuccess) {
+        router.push(PFMV_ROUTES.NEWSLETTER_SUCCESS);
+      } else {
+        notifications(actionResult.type, actionResult.message);
+      }
     }
   };
 
@@ -51,7 +55,7 @@ export const NewsletterForm = () => {
   const disabled =
     form.formState.isSubmitting || !form.watch("email") || (isCollectivite && !form.watch("collectivite"));
   return (
-    <form id="newsletter-form" onSubmit={form.handleSubmit(onSubmit)}>
+    <form id="newsletter-form" onSubmit={form.handleSubmit(onSubmit)} className="w-full">
       <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />
 
       <ToggleSwitch
@@ -73,7 +77,7 @@ export const NewsletterForm = () => {
         </Case>
       </Conditional>
       <Button className={`float-right mt-4 rounded-3xl`} type="submit" disabled={disabled}>
-        Envoyer
+        {"S'abonner"}
       </Button>
     </form>
   );

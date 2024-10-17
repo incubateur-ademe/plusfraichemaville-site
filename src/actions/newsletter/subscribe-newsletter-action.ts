@@ -21,7 +21,7 @@ export const subscribeNewsletterAction = async (data: NewsletterFormData): Promi
         return { type: "error", message: "TECHNICAL_ERROR" };
       }
 
-      return { type: "success" };
+      return { type: "success", message: "NEWSLETTER_SUCCESS" };
     } catch (e) {
       customCaptureException("Error in subscribeNewsletterAction", e);
       return { type: "error", message: "TECHNICAL_ERROR" };

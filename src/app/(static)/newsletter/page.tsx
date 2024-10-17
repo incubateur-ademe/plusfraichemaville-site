@@ -12,7 +12,7 @@ export default async function PageNewsletter() {
       <div className="mb-4">
         {"Recevez des conseils d'experts lors de nos webinaires et parlez-nous de vos projets"}
       </div>
-      <NewsletterForm />
+      <NewsletterForm rerouteAfterSuccess />
     </div>
   );
 }
