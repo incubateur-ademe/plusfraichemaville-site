@@ -47,6 +47,7 @@ export default function Page() {
             <SignInCard
               message="save"
               callbackUrl={process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE}
+              className="mb-10"
             />
           )}
         </div>

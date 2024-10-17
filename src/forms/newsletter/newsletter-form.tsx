@@ -52,9 +52,11 @@ export const NewsletterForm = () => {
     form.formState.isSubmitting || !form.watch("email") || (isCollectivite && !form.watch("collectivite"));
   return (
     <form id="newsletter-form" onSubmit={form.handleSubmit(onSubmit)}>
+      <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />
+
       <ToggleSwitch
         className="max-w-60"
-        label="Je suis une collectivite"
+        label="Je suis une collectivité"
         checked={isCollectivite}
         onChange={(checked) => setIsCollectivite(checked)}
         labelPosition="left"
@@ -70,8 +72,6 @@ export const NewsletterForm = () => {
           />
         </Case>
       </Conditional>
-      <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />
-
       <Button className={`float-right mt-4 rounded-3xl`} type="submit" disabled={disabled}>
         Envoyer
       </Button>
