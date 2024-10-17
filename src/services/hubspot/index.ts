@@ -30,6 +30,7 @@ export const createHubspotTicket = async (data: ContactFormData) => {
 
 export const hubspotBatchSync = async (usersWithAdminProjets: UserWithAdminProjets[]) => {
   const contactProperties = makeBatchUpsertContactProperties(usersWithAdminProjets);
+
   const contactBatch = await hubspotClient.crm.contacts.batchApi.upsert({
     inputs: contactProperties,
   });

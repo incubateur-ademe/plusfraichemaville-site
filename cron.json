@@ -1,8 +1,8 @@
 {
   "jobs": [
     {
-      "command": "curl --location --request POST '$URL_SITE_PROD/api/hubspot-bulk-users-update' --header 'authorization: Bearer $HUBSPOT_API_TOKEN'",
-      "schedule": "0 0 * * 0"
+      "command": "npm run hubspot-sync",
+      "schedule": "0 0 * * *"
     }
   ]
 }
