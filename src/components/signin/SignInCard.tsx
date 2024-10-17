@@ -41,7 +41,7 @@ export default function SignInCard({
             href="https://www.proconnect.gouv.fr/"
             target="_blank"
             rel="noopener"
-            title="Qu’est-ce que AgentConnect  ? - nouvelle fenêtre"
+            title="Qu’est-ce que ProConnect  ? - nouvelle fenêtre"
           >
             Qu’est-ce que ProConnect ?
           </a>
