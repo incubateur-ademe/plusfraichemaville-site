@@ -16,6 +16,12 @@ const syncWithHubspot = async () => {
     const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync();
 
     console.log("Début de la synchronisation avec Hubspot...");
+
+    if (!usersAndProjectsFromLastSync.length) {
+      console.log("Aucune nouvelle donnée à synchroniser.");
+      process.exit(0);
+    }
+
     const batch = await hubspotBatchSync(usersAndProjectsFromLastSync);
 
     if (

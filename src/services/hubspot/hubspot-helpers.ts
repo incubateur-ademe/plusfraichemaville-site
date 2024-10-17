@@ -5,8 +5,18 @@ import {
   FilterOperatorEnum,
   SimplePublicObjectBatchInputUpsert,
 } from "@hubspot/api-client/lib/codegen/crm/companies";
-import { getHubspotPipelineDealStageCode, HubspotPipelineDealStageKey } from "@/src/helpers/maturite-projet";
 import { hubspotClient } from ".";
+
+type HubspotPipelineDealStageKey = keyof typeof pipelineDealStage;
+
+const pipelineDealStage = {
+  questionnement: "appointmentscheduled",
+  priorisationSolutions: "qualifiedtobuy",
+  redactionCDC: "presentationscheduled",
+  lancementTravaux: "decisionmakerboughtin",
+  evaluationActions: "closedwon",
+  projetAbandonne: "closedlost",
+};
 
 export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObjectBatchInputUpsert[] =>
   users.map((user) => ({
@@ -35,7 +45,7 @@ export const makeBatchUpsertProjectsByContactProperties = (
     projet_id_unique: projet.id.toString(),
     properties: {
       dealname: projet.nom,
-      dealstage: getHubspotPipelineDealStageCode(projet.niveau_maturite as HubspotPipelineDealStageKey) ?? "",
+      dealstage: pipelineDealStage[projet.niveau_maturite as HubspotPipelineDealStageKey] ?? "",
       niveau_de_maturite: projet.niveau_maturite ?? "",
       createdate: new Date(projet.created_at).getTime().toString(),
       projet_id_unique: projet.id.toString(),

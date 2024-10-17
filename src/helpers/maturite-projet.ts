@@ -6,20 +6,6 @@ export type NiveauMaturite = {
   avancement: number;
 };
 
-const pipelineDealStage = {
-  questionnement: "appointmentscheduled",
-  priorisationSolutions: "qualifiedtobuy",
-  redactionCDC: "presentationscheduled",
-  lancementTravaux: "decisionmakerboughtin",
-  evaluationActions: "closedwon",
-  projetAbandonne: "closedlost",
-};
-
-export type HubspotPipelineDealStageKey = keyof typeof pipelineDealStage;
-
-export const getHubspotPipelineDealStageCode = (code: HubspotPipelineDealStageKey | null) =>
-  code && pipelineDealStage[code];
-
 export const ALL_NIVEAU_MATURITE: NiveauMaturite[] = [
   {
     label: "Questionnement sur la surchauffe urbaine au sein d’une commune",
