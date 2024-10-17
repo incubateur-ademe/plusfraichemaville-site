@@ -1,8 +1,9 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
-import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
+import { ProjetWithAdminUser, ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
+import { getLastHubspotSync } from "./prisma-cron-jobs-queries";
 
 export const projetIncludes = {
   collectivite: true,
@@ -340,4 +341,33 @@ export const projetUpdated = async (projetId: number): Promise<projet | null> =>
     },
     data: {},
   });
+};
+
+export const getUpsertedProjectsFromLastSync = async (): Promise<ProjetWithAdminUser[]> => {
+  const lastSync = await getLastHubspotSync();
+  const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
+
+  const updatedProjects = await prismaClient.projet.findMany({
+    where: {
+      OR: [{ created_at: { gte: lastSyncDate } }, { updated_at: { gte: lastSyncDate } }],
+    },
+    include: {
+      users: {
+        where: {
+          role: "ADMIN",
+        },
+        select: {
+          user: {
+            select: {
+              email: true,
+            },
+          },
+          role: true,
+        },
+        take: 1,
+      },
+    },
+  });
+
+  return updatedProjects;
 };
