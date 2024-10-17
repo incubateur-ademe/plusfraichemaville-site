@@ -7,9 +7,9 @@ import clsx from "clsx";
 const messages = {
   connect:
     // eslint-disable-next-line max-len
-    "Connectez-vous et créez votre projet pour faire votre simulation budgétaire et accéder à de nombreuses recommandations.",
+    "Vous êtes agent ou élu(e) d’une collectivité ? Connectez-vous, créez votre projet et accédez à de nombreuses recommandations !",
   // eslint-disable-next-line max-len
-  save: "Connectez-vous pour sauvegarder vos solutions, faire une estimation budgétaire de votre projet et accéder à de nombreuses recommandations.",
+  save: "Vous êtes agent ou élu(e) d’une collectivité ? Connectez-vous pour sauvegarder vos solutions et accéder à de nombreuses recommandations.",
 };
 
 type SignInCardProps = {
@@ -29,21 +29,21 @@ export default function SignInCard({
     <div className={clsx("max-w-xl rounded-2xl bg-dsfr-background-alt-grey px-12 py-9", className)}>
       <h2 className="text-xl font-bold text-dsfr-text-title-grey">{messages[message]}</h2>
       <div className="mb-8 mt-8">
-        Vous n’avez jamais utilisé AgentConnect? Renseignez simplement votre adresse professionnelle.
+        Pour vous connecter avec ProConnect, il vous suffit de renseigner votre adresse professionnelle.
       </div>
       <div className="fr-connect-group">
         <button className="fr-connect" onClick={handleSignIn}>
           <span className="fr-connect__login">S’identifier avec</span>{" "}
-          <span className="fr-connect__brand">AgentConnect</span>
+          <span className="fr-connect__brand">ProConnect</span>
         </button>
         <p>
           <a
-            href="https://agentconnect.gouv.fr/"
+            href="https://www.proconnect.gouv.fr/"
             target="_blank"
             rel="noopener"
             title="Qu’est-ce que AgentConnect  ? - nouvelle fenêtre"
           >
-            Qu’est-ce que AgentConnect ?
+            Qu’est-ce que ProConnect ?
           </a>
         </p>
       </div>
