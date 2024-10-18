@@ -78,19 +78,34 @@ export async function FicheSolution({
           <div className="fr-tabs before:!shadow-none">
             <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
-                <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" />
+                <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" className="customTab" />
               </li>
               <li role="presentation">
-                <CustomTabButton label="Matériaux et coûts" isSelected={false} contentId="materiaux-panel" />
+                <CustomTabButton
+                  label="Matériaux et coûts"
+                  isSelected={false}
+                  contentId="materiaux-panel"
+                  className="customTab"
+                />
               </li>
               <li role="presentation">
-                <CustomTabButton label="Mise en œuvre" isSelected={false} contentId="mise-en-oeuvre-panel" />
+                <CustomTabButton
+                  label="Mise en œuvre"
+                  isSelected={false}
+                  contentId="mise-en-oeuvre-panel"
+                  className="customTab"
+                />
               </li>
               <li role="presentation">
-                <CustomTabButton label="Financements" isSelected={false} contentId="financements-panel" />
+                <CustomTabButton
+                  label="Financements"
+                  isSelected={false}
+                  contentId="financements-panel"
+                  className="customTab"
+                />
               </li>
               <li role="presentation">
-                <CustomTabButton label="Oups !" isSelected={false} contentId="oups-panel" />
+                <CustomTabButton label="Oups !" isSelected={false} contentId="oups-panel" className="customTab" />
               </li>
             </ul>
             <div

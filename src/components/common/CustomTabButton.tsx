@@ -11,7 +11,7 @@ export default async function CustomTabButton({
 }) {
   return (
     <button
-      className={`customTab ${className}`}
+      className={className}
       tabIndex={isSelected ? 0 : -1}
       role="tab"
       aria-selected={isSelected}
