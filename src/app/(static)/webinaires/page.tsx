@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { HomepageNewsletter } from "@/src/components/homepage/homepage-newsletter";
@@ -30,7 +29,7 @@ export default async function PageWebinaires() {
                 label={`Webinaires à venir (${futureWebinaires.length ?? 0})`}
                 isSelected
                 contentId="tabpanel-webinaires-a-venir"
-                className="simpleTab"
+                className="simpleTab w-52"
               />
             </li>
             <li role="presentation">
@@ -38,7 +37,7 @@ export default async function PageWebinaires() {
                 label={`Webinaires à revoir (${pastWebinaires.length ?? 0})`}
                 isSelected={false}
                 contentId="tabpanel-webinaires-a-revoir"
-                className="simpleTab"
+                className="simpleTab w-52"
               />
             </li>
           </ul>

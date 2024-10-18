@@ -46,7 +46,7 @@ export const WebinaireCard = ({ webinaire }: { webinaire: WebinaireResponse }) =
               {webinaire.attributes.lien_inscription ? (
                 <Button
                   className=" !w-36 !justify-center rounded-3xl"
-                  linkProps={{ href: webinaire.attributes.lien_inscription, target: "_self" }}
+                  linkProps={{ href: webinaire.attributes.lien_inscription, target: "_blank" }}
                 >
                   {"Je m'inscris"}
                 </Button>
@@ -60,7 +60,7 @@ export const WebinaireCard = ({ webinaire }: { webinaire: WebinaireResponse }) =
               {webinaire.attributes.lien_replay ? (
                 <Button
                   className=" !w-36 !justify-center rounded-3xl"
-                  linkProps={{ href: webinaire.attributes.lien_replay, target: "_self" }}
+                  linkProps={{ href: webinaire.attributes.lien_replay, target: "_blank" }}
                 >
                   {"Replay"}
                 </Button>
