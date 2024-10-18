@@ -10,6 +10,7 @@ import {
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
+import { getLastHubspotSync } from "./prisma-cron-jobs-queries";
 
 export const saveAllFichesFromLocalStorage = async (
   userId: string,
@@ -166,4 +167,18 @@ export const updateUserDiscardedInformation = async (
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
+};
+
+export const getUpsertedUsersFromLastSync = async () => {
+  const lastSync = await getLastHubspotSync();
+  const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
+
+  const newUsers = await prismaClient.user.findMany({
+    where: {
+      OR: [{ created_at: { gte: lastSyncDate } }, { updated_at: { gte: lastSyncDate } }],
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+
+  return newUsers;
 };
