@@ -10,7 +10,6 @@ import {
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
-import { getLastHubspotSync } from "./prisma-cron-jobs-queries";
 
 export const saveAllFichesFromLocalStorage = async (
   userId: string,
