@@ -342,32 +342,3 @@ export const projetUpdated = async (projetId: number): Promise<projet | null> =>
     data: {},
   });
 };
-
-export const getUpsertedProjectsFromLastSync = async (): Promise<ProjetWithAdminUser[]> => {
-  const lastSync = await getLastHubspotSync();
-  const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
-
-  const updatedProjects = await prismaClient.projet.findMany({
-    where: {
-      OR: [{ created_at: { gte: lastSyncDate } }, { updated_at: { gte: lastSyncDate } }],
-    },
-    include: {
-      users: {
-        where: {
-          role: "ADMIN",
-        },
-        select: {
-          user: {
-            select: {
-              email: true,
-            },
-          },
-          role: true,
-        },
-        take: 1,
-      },
-    },
-  });
-
-  return updatedProjects;
-};

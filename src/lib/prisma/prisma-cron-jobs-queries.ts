@@ -1,3 +1,4 @@
+import { cron_jobs } from "@prisma/client";
 import { prismaClient } from "./prismaClient";
 import { UserWithAdminProjets } from "./prismaCustomTypes";
 
@@ -7,12 +8,12 @@ export const getLastHubspotSync = async () =>
     orderBy: { execution_end_time: "desc" },
   });
 
-export const saveLastCronJob = async (startTime: Date, endTime: Date) =>
+export const saveCronJob = async (startTime: Date, endTime: Date, jobType: cron_jobs["job_type"]) =>
   await prismaClient.cron_jobs.create({
     data: {
       execution_start_time: startTime,
       execution_end_time: endTime,
-      job_type: "SYNC_HUBSPOT",
+      job_type: jobType,
     },
   });
 

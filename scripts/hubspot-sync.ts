@@ -1,5 +1,5 @@
-import { getUsersAndProjectsFromLastSync, saveLastCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
-import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
+import { getUsersAndProjectsFromLastSync, saveCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
+import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { hubspotBatchSync } from "@/src/services/hubspot";
 
 type HubspotError = {
@@ -11,7 +11,13 @@ type HubspotError = {
 };
 
 const syncWithHubspot = async () => {
+  if (process.env.NODE_ENV !== "production") {
+    console.log("La synchronisation n'a pas aboutie : éxecution hors d'un environnement de production.");
+    return;
+  }
+
   try {
+    const startedDate = new Date();
     console.log("Récupération des utilisateurs et projets depuis la dernière synchronisation...");
     const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync();
 
@@ -28,7 +34,7 @@ const syncWithHubspot = async () => {
       batch.projectBatch.status === "COMPLETE" &&
       batch.associationsBatch.status === "COMPLETE"
     ) {
-      await saveLastCronJob(batch.associationsBatch.startedAt, batch.associationsBatch.completedAt);
+      await saveCronJob(startedDate, new Date(), "SYNC_HUBSPOT");
       console.log("Synchronisation avec Hubspot réussie !");
       process.exit(0);
     } else {
@@ -40,11 +46,10 @@ const syncWithHubspot = async () => {
     }
   } catch (error) {
     const err = error as HubspotError;
-    captureError("Erreur lors de la synchronisation.", {
+    customCaptureException("Erreur lors de la synchronisation.", {
       id: err.body?.correlationid,
       hubspotMessage: err.body?.message,
     });
-    console.log("Erreur lors de la synchronisation.", error);
     process.exit(1);
   }
 };
