@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { NewsletterForm } from "@/src/forms/newsletter/newsletter-form";
 
 export const HomepageNewsletter = () => (
   <div>
@@ -7,15 +8,13 @@ export const HomepageNewsletter = () => (
       <div className="fr-container">
         <div className="fr-grid-row">
           <div className="fr-col-12 fr-col-md-6 !pr-[6%]">
-            <div className="fr-follow__newsletter">
+            <div className="">
               <h2 className="fr-h5">Abonnez-vous à notre lettre d’information</h2>
               <p className="mb-6 mt-2">
                 {"Rejoignez la communauté Plus Fraîche ma ville, recevez des conseils d'experts lors " +
                   "de nos webinaires et parlez-nous de vos projets."}
               </p>
-              <Link className="fr-btn rounded-3xl" href={PFMV_ROUTES.NEWSLETTER}>
-                {"S'abonner"}
-              </Link>
+              <NewsletterForm />
             </div>
           </div>
           <div className="fr-col-12 fr-col-md-6">

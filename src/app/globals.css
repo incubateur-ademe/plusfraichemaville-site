@@ -200,6 +200,30 @@
   overflow: hidden;
 }
 
+.simpleTab[aria-selected="true"],
+.simpleTab:hover {
+  border-width: 0 0 2px 0;
+  border-style: solid;
+  border-color: var(--text-label-blue-france);
+  font-weight: bold;
+}
+
+.simpleTab {
+  @apply text-black;
+}
+
+.simpleTab {
+  margin: 0;
+  height: 100%;
+  padding: 1rem 1.5rem 1rem 1.5rem;
+  font-size: 0.875rem;
+  white-space: nowrap;
+  overflow: hidden;
+  border-width: 0 0 1px 0;
+  border-style: solid;
+  border-color: #a6a6a6;
+}
+
 .customPanel {
   padding: 3rem 0 3rem 0 !important;
 }

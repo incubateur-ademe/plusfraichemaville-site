@@ -10,6 +10,7 @@ export const PFMV_ROUTES = {
   CONTACT_SUCCESS: "/contact/success",
   NEWSLETTER: "/newsletter",
   NEWSLETTER_SUCCESS: "/newsletter/success",
+  WEBINAIRES: "/webinaires",
   CONNEXION: "/connexion",
   DECONNEXION: "/logout",
   ESPACE_PROJET: "/espace-projet",
