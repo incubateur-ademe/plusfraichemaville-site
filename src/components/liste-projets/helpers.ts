@@ -1,4 +1,9 @@
-import { ProjetWithPublicRelations, UserProjetWithPublicUser } from "@/src/lib/prisma/prismaCustomTypes";
+import {
+  ProjetWithAdminUser,
+  ProjetWithPublicRelations,
+  UserProjetWithPublicUser,
+  UserWithAdminProjets,
+} from "@/src/lib/prisma/prismaCustomTypes";
 import { collectivite, InvitationStatus, RoleProjet } from "@prisma/client";
 import { orderBy } from "lodash";
 
@@ -82,4 +87,13 @@ export const getCurrentUserProjectInfos = (
 ): UserProjetWithPublicUser | null => {
   const userProjectLine = project.users.find((userProjet) => userProjet.user_id === currentUserId);
   return userProjectLine || null;
+};
+
+export const getProjetsWithAdminUser = (usersWithProjects: UserWithAdminProjets[]): ProjetWithAdminUser[] => {
+  return usersWithProjects.flatMap((user) =>
+    user.projets.map((userProjet) => ({
+      ...userProjet.projet,
+      users: [{ user: { email: user.email }, role: userProjet.role }],
+    })),
+  );
 };
