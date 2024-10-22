@@ -200,8 +200,7 @@
   overflow: hidden;
 }
 
-.simpleTab[aria-selected="true"],
-.simpleTab:hover {
+.simpleTab[aria-selected="true"] {
   border-width: 0 0 2px 0;
   border-style: solid;
   border-color: var(--text-label-blue-france);
