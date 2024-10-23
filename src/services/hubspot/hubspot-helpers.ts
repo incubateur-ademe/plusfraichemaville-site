@@ -18,6 +18,9 @@ const pipelineDealStage = {
   projetAbandonne: "closedlost",
 };
 
+const formatCanalAcquisition = (canal: string | null) =>
+  canal && canal === "Démo Plus fraîche ma ville" ? "Démo Plus Fraîche Ma Ville" : canal || "";
+
 export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObjectBatchInputUpsert[] =>
   users.map((user) => ({
     idProperty: "email",
@@ -31,7 +34,7 @@ export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObj
       lastname: user.nom ?? "",
       jobtitle: user.poste ?? "",
       lifecyclestage: "opportunity",
-      canal_d_acquisition: user.canal_acquisition ?? "",
+      canal_d_acquisition: formatCanalAcquisition(user?.canal_acquisition),
       date_d_inscription_pfmv: new Date(user.created_at).setUTCHours(0, 0, 0, 0).toString(),
     },
   }));
