@@ -38,6 +38,7 @@ model User {
   prenom                      String?
   poste                       String?
   created_at                  DateTime            @default(now())
+  updated_at                  DateTime?           @updatedAt
   collectivites_created       collectivite[]      @relation(name: "collectivite_creator")
   projets_created             projet[]
   estimations_created         estimation[]        @relation(name: "estimation_creator")
@@ -261,4 +262,15 @@ model Analytics {
   event_type     EventType
   context        Json?
   user_id        String
+}
+
+enum JobType {
+  SYNC_HUBSPOT
+}
+
+model cron_jobs {
+  id                   String   @id @default(cuid())
+  execution_start_time DateTime @default(now())
+  execution_end_time   DateTime
+  job_type             JobType
 }

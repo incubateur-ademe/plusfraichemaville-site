@@ -7,7 +7,7 @@ export const FichesDiagnosticFavoris = ({
   bookmarkedFichesDiagnostic?: string[] | number[];
 }) => {
   return (
-    <div className="mb-20 mt-10">
+    <div className="mb-20">
       <div className="fr-h3">Mes méthodes de diagnostic mises en favoris</div>
       {bookmarkedFichesDiagnostic && bookmarkedFichesDiagnostic.length > 0 ? (
         <div className="m-0 flex flex-wrap justify-center gap-6 p-0 lg:justify-normal">
