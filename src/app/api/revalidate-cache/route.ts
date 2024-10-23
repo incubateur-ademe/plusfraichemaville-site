@@ -6,6 +6,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 export async function POST(request: NextRequest) {
   const authorization = headers().get("authorization");
   const tag = request.nextUrl.searchParams.get("tag");
+  console.log("VARIABLE D'ENV", process.env.TEST_DATABASE);
 
   if (authorization !== `Bearer ${process.env.CACHE_REVALIDATION_TOKEN}`) {
     return NextResponse.json({ message: "Invalid token" }, { status: 401 });
