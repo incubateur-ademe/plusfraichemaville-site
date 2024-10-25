@@ -97,3 +97,8 @@ export type ProjectionsIndicateurClimadiag = {
   2050: ClimadiagTemperatureProjection;
   2100: ClimadiagTemperatureProjection;
 };
+
+export type ProjetSourcing = {
+  type: "EN_COURS" | "REX";
+  id: number;
+};

@@ -321,12 +321,9 @@ export interface PluginUploadFile extends Schema.CollectionType {
     folderPath: Attribute.String &
       Attribute.Required &
       Attribute.Private &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<"plugin::upload.file", "oneToOne", "admin::user"> & Attribute.Private;
@@ -352,24 +349,18 @@ export interface PluginUploadFolder extends Schema.CollectionType {
   attributes: {
     name: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     pathId: Attribute.Integer & Attribute.Required & Attribute.Unique;
     parent: Attribute.Relation<"plugin::upload.folder", "manyToOne", "plugin::upload.folder">;
     children: Attribute.Relation<"plugin::upload.folder", "oneToMany", "plugin::upload.folder">;
     files: Attribute.Relation<"plugin::upload.folder", "oneToMany", "plugin::upload.file">;
     path: Attribute.String &
       Attribute.Required &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<"plugin::upload.folder", "oneToOne", "admin::user"> & Attribute.Private;
@@ -398,9 +389,6 @@ export interface PluginContentReleasesRelease extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required;
     releasedAt: Attribute.DateTime;
-    scheduledAt: Attribute.DateTime;
-    timezone: Attribute.String;
-    status: Attribute.Enumeration<["ready", "blocked", "failed", "done", "empty"]> & Attribute.Required;
     actions: Attribute.Relation<
       "plugin::content-releases.release",
       "oneToMany",
@@ -435,13 +423,11 @@ export interface PluginContentReleasesReleaseAction extends Schema.CollectionTyp
     type: Attribute.Enumeration<["publish", "unpublish"]> & Attribute.Required;
     entry: Attribute.Relation<"plugin::content-releases.release-action", "morphToOne">;
     contentType: Attribute.String & Attribute.Required;
-    locale: Attribute.String;
     release: Attribute.Relation<
       "plugin::content-releases.release-action",
       "manyToOne",
       "plugin::content-releases.release"
     >;
-    isEntryValid: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<"plugin::content-releases.release-action", "oneToOne", "admin::user"> &
@@ -473,13 +459,10 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 50;
+      }>;
     code: Attribute.String & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -613,7 +596,7 @@ export interface ApiAideDecisionEtapeAideDecisionEtape extends Schema.Collection
     nom: Attribute.String & Attribute.Required;
     description: Attribute.String;
     question_suivante: Attribute.String;
-    image: Attribute.Media<"images">;
+    image: Attribute.Media;
     slug: Attribute.String & Attribute.Required & Attribute.Unique;
     fiches_solutions: Attribute.Relation<
       "api::aide-decision-etape.aide-decision-etape",
@@ -722,7 +705,7 @@ export interface ApiFicheDiagnosticFicheDiagnostic extends Schema.CollectionType
       >;
     etapes_mise_en_oeuvre: Attribute.Component<"fiche-diagnostic.etape-mise-en-oeuvre", true>;
     rank: Attribute.Integer;
-    image_principale: Attribute.Media<"images">;
+    image_principale: Attribute.Media;
     echelle: Attribute.Enumeration<["territoire", "espace"]>;
     methode: Attribute.Enumeration<
       ["observation", "enquete", "simulation_numerique", "analyse_spatiale", "modelisation_spatiale"]
@@ -745,33 +728,21 @@ export interface ApiFicheDiagnosticFicheDiagnostic extends Schema.CollectionType
         }
       >;
     delai_min: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     delai_max: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     cout_min: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     cout_max: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     explication_source: Attribute.String;
     avantage_description: Attribute.RichText &
       Attribute.Required &
@@ -856,7 +827,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           versioned: true;
         };
       }>;
-    image_principale: Attribute.Media<"images"> &
+    image_principale: Attribute.Media &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -873,24 +844,18 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     cout_maximum: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     type_solution: Attribute.Enumeration<["bleue", "verte", "grise", "douce"]> &
       Attribute.SetPluginOptions<{
         versions: {
@@ -919,12 +884,9 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     contexte_titre: Attribute.String &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -950,7 +912,7 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           preset: "light";
         }
       >;
-    logo_partenaire: Attribute.Media<"images"> &
+    logo_partenaire: Attribute.Media &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -962,24 +924,18 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     cout_maximum_entretien: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     etapes_mise_en_oeuvre: Attribute.Component<"fiche-solution.etape-mise-en-oeuvre", true> &
       Attribute.SetPluginOptions<{
         versions: {
@@ -1065,19 +1021,13 @@ export interface ApiFicheSolutionFicheSolution extends Schema.CollectionType {
         }
       >;
     delai_travaux_minimum: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     delai_travaux_maximum: Attribute.Integer &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     portee_baisse_temperature: Attribute.Enumeration<["air", "surface", "interieur"]>;
     cout_entretien_unite: Attribute.Enumeration<
       ["metreCarre", "lineaire", "metreCube", "unite", "megaWattHeure", "kiloWatt"]
@@ -1136,7 +1086,7 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
           versioned: true;
         };
       }>;
-    image: Attribute.Media<"images" | "files" | "videos" | "audios"> &
+    image: Attribute.Media &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1157,48 +1107,36 @@ export interface ApiMateriauMateriau extends Schema.CollectionType {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     cout_maximum_fourniture: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     cout_minimum_entretien: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     cout_maximum_entretien: Attribute.Integer &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
         };
       }> &
-      Attribute.SetMinMax<
-        {
-          min: 0;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 0;
+      }>;
     cout_unite: Attribute.Enumeration<["metreCarre", "lineaire", "metreCube", "unite", "megaWattHeure", "kiloWatt"]> &
       Attribute.Required &
       Attribute.SetPluginOptions<{
@@ -1228,13 +1166,10 @@ export interface ApiObjectifDeveloppementDurableObjectifDeveloppementDurable ext
     numero: Attribute.Integer &
       Attribute.Required &
       Attribute.Unique &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 17;
-        },
-        number
-      >;
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 17;
+      }>;
     description: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -1299,7 +1234,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
           versioned: true;
         };
       }>;
-    image_principale: Attribute.Media<"images"> &
+    image_principale: Attribute.Media &
       Attribute.SetPluginOptions<{
         versions: {
           versioned: true;
@@ -1465,6 +1400,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
           versioned: true;
         };
       }>;
+    sourcing: Attribute.Component<"retour-experience.sourcing", true>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1488,7 +1424,7 @@ export interface ApiSolutionRetourExperienceSolutionRetourExperience extends Sch
   };
   attributes: {
     titre: Attribute.String & Attribute.Required;
-    image: Attribute.Media<"images">;
+    image: Attribute.Media;
     fiche_solution: Attribute.Relation<
       "api::solution-retour-experience.solution-retour-experience",
       "manyToOne",

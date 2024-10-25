@@ -170,7 +170,7 @@ export interface RetourExperienceSituation extends Schema.Component {
     description: "";
   };
   attributes: {
-    image: Attribute.Media<"images" | "files" | "videos" | "audios">;
+    image: Attribute.Media;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -180,6 +180,48 @@ export interface RetourExperienceSituation extends Schema.Component {
           preset: "light";
         }
       >;
+  };
+}
+
+export interface RetourExperienceSourcing extends Schema.Component {
+  collectionName: "components_retour_experience_sourcings";
+  info: {
+    displayName: "Sourcing";
+    icon: "phone";
+    description: "";
+  };
+  attributes: {
+    label: Attribute.String;
+    telephone: Attribute.String;
+    type_de_contact: Attribute.Enumeration<
+      ["Public et parapublic", "Entreprises et agences", "Conseil", "Recherche et enseignement"]
+    >;
+    sous_type_de_contact: Attribute.Enumeration<
+      [
+        "Bureau d\u2019\u00E9tude",
+        "Assistance \u00E0 maitrise d\u2019ouvrage",
+        "Association",
+        "P\u00F4le universitaire",
+        "Laboratoire de recherche",
+        "Agence d\u2019architecture",
+        "Entreprise priv\u00E9e",
+        "Agence paysagiste",
+        "Syndicat mixte",
+        "Collectif",
+        "Am\u00E9nageur",
+        "Agence de l\u2019eau",
+        "CAUE",
+        "Conseil en ing\u00E9nierie",
+        "Agence de conception lumi\u00E8re",
+        "Agence de communication",
+        "Syndic de copropri\u00E9t\u00E9",
+        "Soci\u00E9t\u00E9 d\u2019arboriculture",
+        "Acteur public et parapublic",
+        "Bailleur social",
+        "Institut",
+      ]
+    >;
+    email: Attribute.Email;
   };
 }
 
@@ -195,6 +237,7 @@ declare module "@strapi/types" {
       "fiche-solution.oups": FicheSolutionOups;
       "retour-experience.calendrier": RetourExperienceCalendrier;
       "retour-experience.situation": RetourExperienceSituation;
+      "retour-experience.sourcing": RetourExperienceSourcing;
     }
   }
 }

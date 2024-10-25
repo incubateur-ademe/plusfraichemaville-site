@@ -70,6 +70,14 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
           date
           description
         }
+        calendrier {
+          id
+          label
+          email
+          telephone
+          type_de_contact
+          sous_type_de_contact
+        }
         financement
         difficultes
         partenaires

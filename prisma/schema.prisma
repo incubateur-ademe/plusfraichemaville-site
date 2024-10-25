@@ -177,6 +177,8 @@ model projet {
   deleted_by                String?
   deleter                   User?         @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
   users                     user_projet[]
+  is_public                 Boolean       @default(true)
+  sourcing                  Json?
 }
 
 model estimation {
