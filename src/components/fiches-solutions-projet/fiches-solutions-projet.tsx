@@ -25,13 +25,13 @@ export const FichesSolutionsProjet = () => {
         />
         {currentUserIsAdmin && (
           <>
-            {/* <FichesSolutionProjetBookmarksByEspace
+            <FichesSolutionProjetBookmarksByEspace
               projetNom={projet?.nom ?? ""}
               projetTypeEspace={projet?.type_espace ?? ""}
               projetsFichesSolutionsIds={selectedFichesSolutionsIds ?? []}
               updateStore={updateStore}
               projetId={projet?.id}
-            /> */}
+            />
 
             <FichesSolutionProjetBookmarksByEspace
               projetNom={projet?.nom ?? ""}
