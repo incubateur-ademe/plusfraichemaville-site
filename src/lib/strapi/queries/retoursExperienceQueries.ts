@@ -3,6 +3,7 @@ import { solutionRetourExperienceFilter, StrapiFilter } from "@/src/lib/strapi/q
 import {
   FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
+  RETOUR_EXPERIENCE_WITH_SOURCING,
   STRAPI_IMAGE_FRAGMENT,
 } from "@/src/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
@@ -70,7 +71,7 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
           date
           description
         }
-        calendrier {
+        sourcing {
           id
           label
           email
@@ -118,6 +119,16 @@ const GET_RETOUR_EXPERIENCE_CARD_DATA = (
     }
 }`;
 
+const GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_SOURCING = (
+  strapiFilter: StrapiFilter,
+) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_WITH_SOURCING} query {
+    retourExperiences ${strapiFilter.wholeFilterString()} {
+      data {
+        ...RetourExperienceCardInfo
+      }
+    }
+}`;
+
 export async function getRetourExperienceBySlug(
   slug: string,
 ): Promise<APIResponseData<"api::retour-experience.retour-experience"> | null> {
@@ -132,6 +143,16 @@ export async function getRetoursExperiences(): Promise<APIResponseData<"api::ret
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter), { tag: "get-rex" }))
     ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getRetoursExperiencesWithSourcing(): Promise<
+  APIResponseData<"api::retour-experience.retour-experience">[]
+> {
+  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const apiResponse = (
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_SOURCING(filter), { tag: "get-rex-with-sourcing" })
+  )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntities(apiResponse);
 }
 
