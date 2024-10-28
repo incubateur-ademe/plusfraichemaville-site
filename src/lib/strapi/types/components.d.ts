@@ -194,31 +194,37 @@ export interface RetourExperienceSourcing extends Schema.Component {
     label: Attribute.String;
     telephone: Attribute.String;
     type_de_contact: Attribute.Enumeration<
-      ["Public et parapublic", "Entreprises et agences", "Conseil", "Recherche et enseignement"]
+      [
+        "Conseil",
+        "Structure publique",
+        "Conception & r\u00E9alisation",
+        "Concertation citoyenne",
+        "Recherche & innovation",
+        "Groupements",
+      ]
     >;
     sous_type_de_contact: Attribute.Enumeration<
       [
-        "Bureau d\u2019\u00E9tude",
+        "Bureau d\u2019\u00E9tude en ing\u00E9nierie",
+        "Bureau d\u2019\u00E9tude technique",
         "Assistance \u00E0 maitrise d\u2019ouvrage",
-        "Association",
+        "Agence de l\u2019eau",
+        "Bailleur social",
+        "CAUE",
+        "Agence d\u2019architecture",
+        "Agence paysagiste",
+        "Am\u00E9nageur",
+        "Soci\u00E9t\u00E9 d\u2019arboriculture",
+        "Agence de conception lumi\u00E8re",
+        "Syndic de copropri\u00E9t\u00E9",
+        "Agence de communication",
+        "Collectif",
         "P\u00F4le universitaire",
         "Laboratoire de recherche",
-        "Agence d\u2019architecture",
-        "Entreprise priv\u00E9e",
-        "Agence paysagiste",
-        "Syndicat mixte",
-        "Collectif",
-        "Am\u00E9nageur",
-        "Agence de l\u2019eau",
-        "CAUE",
-        "Conseil en ing\u00E9nierie",
-        "Agence de conception lumi\u00E8re",
-        "Agence de communication",
-        "Syndic de copropri\u00E9t\u00E9",
-        "Soci\u00E9t\u00E9 d\u2019arboriculture",
-        "Acteur public et parapublic",
-        "Bailleur social",
         "Institut",
+        "Syndicat mixte",
+        "Association",
+        "F\u00E9d\u00E9ration",
       ]
     >;
     email: Attribute.Email;
