@@ -444,7 +444,7 @@
 }
 
 .leaflet-control-zoom {
-  @apply flex flex-col gap-3 !border-none;
+  @apply !absolute !bottom-[-403px] !left-[10px] flex flex-col gap-3 !border-none;
 }
 
 .leaflet-control-zoom-in,
