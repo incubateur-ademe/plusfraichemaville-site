@@ -448,6 +448,10 @@
   background-image: none !important;
 }
 
+.custom-marker-cluster {
+  @apply !flex !size-11 !items-center !justify-center rounded-full border-[4px] border-dsfr-border-action-low-blue-france !bg-white text-base font-bold text-pfmv-navy;
+}
+
 .fr-connect {
   padding-left: 4.375em !important;
 }

@@ -1,19 +1,25 @@
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import { RexProjet, StrapiLocation } from "@/src/lib/strapi/types/types";
+import { RexProjet } from "@/src/lib/strapi/types/types";
 import { LatLngTuple } from "leaflet";
+import { SourcingMapElementProps } from "../map";
+import { GeoJsonDocument } from "./types";
 
-export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]) =>
+export const makeInProgressProjetsPositions = (
+  inProgressProjets: ProjetWithPublicRelations[],
+): SourcingMapElementProps["markers"] =>
   inProgressProjets.map((projet) => ({
     geocode: [projet.collectivite.latitude, projet.collectivite.longitude] as LatLngTuple,
+    type: "in-progress",
   }));
 
-export const makeRexProjetsPositions = (rexProjets: RexProjet[]) =>
+export const makeRexProjetsPositions = (rexProjets: RexProjet[]): SourcingMapElementProps["markers"] =>
   rexProjets
-    .filter((projet) => projet.attributes.location as unknown as StrapiLocation)
+    .filter((projet) => Boolean(projet.attributes.location as unknown as GeoJsonDocument))
     .map((projet) => {
-      const location = projet.attributes.location as unknown as StrapiLocation;
-      const geocode = [location.lat, location.lng] as LatLngTuple;
+      const { coordinates } = (projet.attributes.location as unknown as GeoJsonDocument).features[0].geometry;
+      const geocode = [coordinates[1], coordinates[0]] as LatLngTuple;
       return {
         geocode,
+        type: "rex",
       };
     });
