@@ -443,6 +443,11 @@
   }
 }
 
+.leaflet-control-zoom-in,
+.leaflet-control-zoom-out {
+  background-image: none !important;
+}
+
 .fr-connect {
   padding-left: 4.375em !important;
 }
