@@ -98,7 +98,24 @@ export type ProjectionsIndicateurClimadiag = {
   2100: ClimadiagTemperatureProjection;
 };
 
-export type ProjetSourcing = {
-  type: "EN_COURS" | "REX";
-  id: number;
+export type ProjetSourcingCms = {
+  rexId: number;
+  contactId: number;
+};
+
+export type ProjetAdresseInfo = {
+  x: number;
+  y: number;
+  id: string;
+  city: string;
+  name: string;
+  type: "housenumber" | "street" | "locality" | "municipality";
+  label: string;
+  score: number;
+  street: string;
+  context: string;
+  citycode: string;
+  postcode: string;
+  importance: number;
+  housenumber?: string;
 };

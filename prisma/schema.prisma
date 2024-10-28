@@ -156,11 +156,11 @@ model user_collectivite {
 }
 
 model projet {
-  id                        Int           @id
+  id                        Int                      @id
   created_by                String
-  creator                   User          @relation(fields: [created_by], references: [id])
-  created_at                DateTime      @default(now())
-  updated_at                DateTime?     @updatedAt
+  creator                   User                     @relation(fields: [created_by], references: [id])
+  created_at                DateTime                 @default(now())
+  updated_at                DateTime?                @updatedAt
   nom                       String
   type_espace               String?
   adresse                   String?
@@ -171,14 +171,26 @@ model projet {
   fiches_diagnostic_id      Int[]
   estimations               estimation[]
   collectiviteId            Int
-  collectivite              collectivite  @relation(fields: [collectiviteId], references: [id])
+  collectivite              collectivite             @relation(fields: [collectiviteId], references: [id])
   recommandations_viewed_by String[]
   deleted_at                DateTime?
   deleted_by                String?
-  deleter                   User?         @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
+  deleter                   User?                    @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
   users                     user_projet[]
-  is_public                 Boolean       @default(true)
-  sourcing_cms              Json?
+  is_public                 Boolean                  @default(true)
+  sourcing_cms              Json[]
+  projet_sourcing_projet    projet_sourcing_projet[]
+}
+
+model projet_sourcing_projet {
+  id          Int      @id @default(autoincrement())
+  projet      projet   @relation(fields: [projet_id], references: [id])
+  projet_id   Int
+  sourcing_id Int
+  created_at  DateTime @default(now())
+  created_by  String
+
+  @@unique([projet_id, sourcing_id])
 }
 
 model estimation {
