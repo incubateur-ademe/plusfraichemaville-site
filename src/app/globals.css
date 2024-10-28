@@ -443,9 +443,14 @@
   }
 }
 
+.leaflet-control-zoom {
+  @apply flex flex-col gap-3 !border-none;
+}
+
 .leaflet-control-zoom-in,
 .leaflet-control-zoom-out {
   background-image: none !important;
+  @apply !flex !size-10 !items-center !justify-center !rounded-full !shadow-pfmv-card-shadow [&>span]:!pb-1 [&>span]:!text-pfmv-navy;
 }
 
 .custom-marker-cluster {
