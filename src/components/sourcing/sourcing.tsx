@@ -5,7 +5,7 @@ import { SourcingEmpty } from "./sourcing-empty";
 
 export const Sourcing = () => {
   return (
-    <div className="flex gap-6 ">
+    <div className="flex gap-6">
       <SourcingEmpty />
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_SOURCING_MAP}
