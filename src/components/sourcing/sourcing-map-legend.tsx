@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const legends = [
   {
-    picto: "collectivite",
+    picto: "ma-collectivite",
     label: "Ma collectivité",
   },
   {
@@ -18,17 +18,11 @@ const legends = [
 
 export const SourcingMapLegend = () => {
   return (
-    <div className="absolute bottom-0 left-0 z-[450] flex items-center gap-6 rounded-tr-2xl bg-white px-3 py-1 text-sm">
+    <div className="absolute bottom-0 left-0 z-[450] flex items-center gap-6 rounded-tr-2xl bg-white p-3 text-sm">
       <span className="font-bold">Légende</span>
       {legends.map((legend, index) => (
-        <div className={clsx("flex items-center", index === 0 ? "gap-0" : "gap-1")} key={index}>
-          <Image
-            src={`/images/sourcing/sourcing-projet-${legend.picto}.svg`}
-            width={20}
-            height={24}
-            className={index === 0 ? "w-[48px]" : "w-[34px]"}
-            alt=""
-          />
+        <div className={clsx("flex items-center", "gap-3")} key={index}>
+          <Image src={`/images/sourcing/sourcing-projet-${legend.picto}.svg`} width={20} height={24} alt="" />
           <span>{legend.label}</span>
         </div>
       ))}

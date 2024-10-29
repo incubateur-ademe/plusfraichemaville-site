@@ -4,19 +4,20 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer, Marker, ZoomControl } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { LatLngTuple } from "leaflet";
-import { useProjetCoordinates } from "./hooks";
+import { useCurrentProjetCoordinates } from "./hooks";
 import { createClusterCustomIcon, createCustomIcon } from "./helpers-client";
 import { SourcingMapLegend } from "./sourcing-map-legend";
 
 export type SourcingMapClientProps = {
   markers: {
     geocode: LatLngTuple;
-    type: "in-progress" | "rex" | "collectivite";
+    type: "in-progress" | "rex" | "ma-collectivite";
   }[];
 };
 
 export const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
-  const coordinates = useProjetCoordinates();
+  const currentProjetCoordinates = useCurrentProjetCoordinates();
+
   return (
     <MapContainer className="relative h-[715px]" center={[48.8566, 2.3522]} zoom={5} zoomControl={false}>
       <TileLayer
@@ -28,7 +29,9 @@ export const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
           <Marker position={marker.geocode} key={index} icon={createCustomIcon(marker.type)} />
         ))}
       </MarkerClusterGroup>
-      {coordinates && <Marker position={coordinates} icon={createCustomIcon("collectivite")} />}
+      {currentProjetCoordinates && (
+        <Marker position={currentProjetCoordinates} icon={createCustomIcon("ma-collectivite")} />
+      )}
       <ZoomControl position="topleft" />
       <SourcingMapLegend />
     </MapContainer>

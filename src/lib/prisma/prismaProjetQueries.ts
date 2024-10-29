@@ -346,6 +346,7 @@ export const getPublicProjets = async (): Promise<ProjetWithPublicRelations[]> =
   return prismaClient.projet.findMany({
     where: {
       is_public: true,
+      deleted_at: null,
     },
     select: projetPublicSelect,
   });

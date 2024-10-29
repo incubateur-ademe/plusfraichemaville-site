@@ -28,8 +28,8 @@ model Account {
 }
 
 model User {
-  id                          String              @id @default(cuid())
-  email                       String              @unique
+  id                          String                   @id @default(cuid())
+  email                       String                   @unique
   emailVerified               DateTime?
   image                       String?
   accounts                    Account[]
@@ -37,22 +37,23 @@ model User {
   nom                         String?
   prenom                      String?
   poste                       String?
-  created_at                  DateTime            @default(now())
-  updated_at                  DateTime?           @updatedAt
-  collectivites_created       collectivite[]      @relation(name: "collectivite_creator")
+  created_at                  DateTime                 @default(now())
+  updated_at                  DateTime?                @updatedAt
+  collectivites_created       collectivite[]           @relation(name: "collectivite_creator")
   projets_created             projet[]
-  estimations_created         estimation[]        @relation(name: "estimation_creator")
-  estimations_deleted         estimation[]        @relation(name: "estimation_deleter")
-  projets_deleted             projet[]            @relation(name: "projet_deleter")
-  collectivites               user_collectivite[] @relation(name: "collectivite_belonging")
-  projets                     user_projet[]       @relation(name: "projet_access")
-  selection_fiches_solutions  Json                @default("[]")
-  selection_fiches_diagnostic Int[]               @default([])
+  estimations_created         estimation[]             @relation(name: "estimation_creator")
+  estimations_deleted         estimation[]             @relation(name: "estimation_deleter")
+  projets_deleted             projet[]                 @relation(name: "projet_deleter")
+  collectivites               user_collectivite[]      @relation(name: "collectivite_belonging")
+  projets                     user_projet[]            @relation(name: "projet_access")
+  selection_fiches_solutions  Json                     @default("[]")
+  selection_fiches_diagnostic Int[]                    @default([])
   canal_acquisition           String?
-  user_projet_deleted         user_projet[]       @relation(name: "user_projet_deleter")
+  user_projet_deleted         user_projet[]            @relation(name: "user_projet_deleter")
   discardedInformation        String[]
   conversations               conversation[]
   Analytics                   Analytics[]
+  projet_sourcing_projet      projet_sourcing_projet[]
 }
 
 model VerificationToken {
@@ -179,18 +180,21 @@ model projet {
   users                     user_projet[]
   is_public                 Boolean                  @default(true)
   sourcing_cms              Json[]
-  projet_sourcing_projet    projet_sourcing_projet[]
+  sourcing_projets          projet_sourcing_projet[] @relation("sourcing_projet")
+  sourcing_contacts         projet_sourcing_projet[] @relation("sourcing_contact")
 }
 
 model projet_sourcing_projet {
-  id          Int      @id @default(autoincrement())
-  projet      projet   @relation(fields: [projet_id], references: [id])
-  projet_id   Int
-  sourcing_id Int
-  created_at  DateTime @default(now())
-  created_by  String
+  id         Int      @id @default(autoincrement())
+  projet     projet   @relation("sourcing_projet", fields: [projet_id], references: [id])
+  projet_id  Int
+  contact    projet   @relation("sourcing_contact", fields: [contact_id], references: [id])
+  contact_id Int
+  created_at DateTime @default(now())
+  created_by String
+  creator    User     @relation(fields: [created_by], references: [id])
 
-  @@unique([projet_id, sourcing_id])
+  @@unique([projet_id, contact_id])
 }
 
 model estimation {

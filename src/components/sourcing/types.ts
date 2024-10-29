@@ -22,7 +22,7 @@ interface AddressProperties {
   street: string;
 }
 
-interface Adresse {
+export interface GeoJsonAdresse {
   type: "Feature";
   geometry: Geometry;
   properties: AddressProperties;
@@ -31,7 +31,7 @@ interface Adresse {
 export interface GeoJsonDocument {
   type: "FeatureCollection";
   version: string;
-  features: Adresse[];
+  features: GeoJsonAdresse[];
   attribution: string;
   licence: string;
   query: string;

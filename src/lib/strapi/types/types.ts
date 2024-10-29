@@ -113,24 +113,3 @@ export interface APIResponseCollection<TContentTypeUID extends Common.UID.Conten
   data: APIResponseData<TContentTypeUID>[];
   meta: APIResponseCollectionMetadata;
 }
-
-export type RexProjet = APIResponseData<"api::retour-experience.retour-experience">;
-
-export type StrapiLocation = {
-  lat: number;
-  lng: number;
-  details: {
-    geometry: {
-      location: { lat: number; lng: number };
-      viewport: {
-        east: number;
-        west: number;
-        north: number;
-        south: number;
-      };
-    };
-    html_attributions: string[];
-  };
-  place_id: string;
-  description: string;
-};

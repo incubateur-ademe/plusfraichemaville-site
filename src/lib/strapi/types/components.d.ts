@@ -163,6 +163,53 @@ export interface RetourExperienceCalendrier extends Schema.Component {
   };
 }
 
+export interface RetourExperienceContact extends Schema.Component {
+  collectionName: "components_retour_experience_contacts";
+  info: {
+    displayName: "Contact";
+    icon: "phone";
+  };
+  attributes: {
+    label: Attribute.String;
+    telephone: Attribute.String;
+    email: Attribute.Email;
+    type_de_contact: Attribute.Enumeration<
+      [
+        "conseil",
+        "structure_publique",
+        "conception_et_realisation",
+        "concertation_citoyenne",
+        "recherche_et_innovation",
+        "groupements",
+      ]
+    >;
+    sous_type_de_contact: Attribute.Enumeration<
+      [
+        "bureau_etude_ingenierie",
+        "bureau_etude_technique",
+        "assistance_maitrise_ouvrage",
+        "agence_eau",
+        "bailleur_social",
+        "caue",
+        "agence_architecture",
+        "agence_paysagiste",
+        "amenageur",
+        "societe_arboriculture",
+        "agence_conception_lumiere",
+        "syndic_copropriete",
+        "agence_communication",
+        "collectif",
+        "pole_universitaire",
+        "laboratoire_recherche",
+        "institut",
+        "syndicat_mixte",
+        "association",
+        "federation",
+      ]
+    >;
+  };
+}
+
 export interface RetourExperienceSituation extends Schema.Component {
   collectionName: "components_retour_experience_situations";
   info: {
@@ -193,41 +240,41 @@ export interface RetourExperienceSourcing extends Schema.Component {
   attributes: {
     label: Attribute.String;
     telephone: Attribute.String;
+    email: Attribute.Email;
     type_de_contact: Attribute.Enumeration<
       [
-        "Conseil",
-        "Structure publique",
-        "Conception & r\u00E9alisation",
-        "Concertation citoyenne",
-        "Recherche & innovation",
-        "Groupements",
+        "conseil",
+        "structure_publique",
+        "conception_et_realisation",
+        "concertation_citoyenne",
+        "recherche_et_innovation",
+        "groupements",
       ]
     >;
     sous_type_de_contact: Attribute.Enumeration<
       [
-        "Bureau d\u2019\u00E9tude en ing\u00E9nierie",
-        "Bureau d\u2019\u00E9tude technique",
-        "Assistance \u00E0 maitrise d\u2019ouvrage",
-        "Agence de l\u2019eau",
-        "Bailleur social",
-        "CAUE",
-        "Agence d\u2019architecture",
-        "Agence paysagiste",
-        "Am\u00E9nageur",
-        "Soci\u00E9t\u00E9 d\u2019arboriculture",
-        "Agence de conception lumi\u00E8re",
-        "Syndic de copropri\u00E9t\u00E9",
-        "Agence de communication",
-        "Collectif",
-        "P\u00F4le universitaire",
-        "Laboratoire de recherche",
-        "Institut",
-        "Syndicat mixte",
-        "Association",
-        "F\u00E9d\u00E9ration",
+        "bureau_etude_ingenierie",
+        "bureau_etude_technique",
+        "assistance_maitrise_ouvrage",
+        "agence_eau",
+        "bailleur_social",
+        "caue",
+        "agence_architecture",
+        "agence_paysagiste",
+        "amenageur",
+        "societe_arboriculture",
+        "agence_conception_lumiere",
+        "syndic_copropriete",
+        "agence_communication",
+        "collectif",
+        "pole_universitaire",
+        "laboratoire_recherche",
+        "institut",
+        "syndicat_mixte",
+        "association",
+        "federation",
       ]
     >;
-    email: Attribute.Email;
   };
 }
 
@@ -242,6 +289,7 @@ declare module "@strapi/types" {
       "fiche-solution.etape-mise-en-oeuvre": FicheSolutionEtapeMiseEnOeuvre;
       "fiche-solution.oups": FicheSolutionOups;
       "retour-experience.calendrier": RetourExperienceCalendrier;
+      "retour-experience.contact": RetourExperienceContact;
       "retour-experience.situation": RetourExperienceSituation;
       "retour-experience.sourcing": RetourExperienceSourcing;
     }

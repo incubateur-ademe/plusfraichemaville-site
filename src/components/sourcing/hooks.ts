@@ -1,22 +1,18 @@
 "use client";
 
-import { useAddressSearch } from "@/src/hooks/use-adress-search";
-import { ProjetAdresseInfo } from "@/src/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { LatLngTuple } from "leaflet";
+import { GeoJsonAdresse } from "./types";
+import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 
-export const useProjetCoordinates = (): LatLngTuple | undefined => {
+export const useCurrentProjetCoordinates = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const adresseInfo = projet?.adresse_info as ProjetAdresseInfo;
+  const adresseInfo = projet?.adresse_info as unknown as GeoJsonAdresse["properties"];
   const collectivite = projet?.collectivite;
-  const { addresses } = useAddressSearch(adresseInfo?.label, 1);
 
-  if (adresseInfo && addresses?.[0]) {
-    const { coordinates } = addresses[0].geometry;
-    return [coordinates[1], coordinates[0]];
-  }
+  const coordinates = adresseInfo
+    ? lambert93toWGPS(adresseInfo.x, adresseInfo.y)
+    : { latitude: collectivite?.latitude, longitude: collectivite?.longitude };
 
-  if (collectivite?.latitude && collectivite?.longitude) {
-    return [collectivite.latitude, collectivite.longitude];
-  }
+  return [coordinates.latitude, coordinates.longitude] as LatLngTuple;
 };

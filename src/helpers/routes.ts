@@ -20,7 +20,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FICHES_DIAGNOSTIC_LISTE: "/espace-projet/fiche-diagnostic",
   ESPACE_PROJET_FICHES_DIAGNOSTIC_LISTE_ALL: "/fiches-diagnostic/liste",
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiches-solutions/liste",
-  ESPACE_PROJET_SOURCING_MAP: "/sourcing/map",
+  ESPACE_PROJET_SOURCING_MAP: "/sourcing/carte",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord?tab=tableau-de-suivi",
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   FICHE_DIAGNOSTIC: (url: string) => `/fiches-diagnostic/${url}`,

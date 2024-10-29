@@ -6,9 +6,9 @@ import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getPublicProjets } from "@/src/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 
-export const getPublicProjetsAction = async (
-  userId: string,
-): Promise<ResponseAction<{ publicProjets: ProjetWithPublicRelations[] }>> => {
+export const getPublicProjetsAction = async (): Promise<
+  ResponseAction<{ publicProjets: ProjetWithPublicRelations[] }>
+> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", publicProjets: [] };
@@ -16,7 +16,7 @@ export const getPublicProjetsAction = async (
 
   const permission = new PermissionManager(session);
 
-  if (!permission.canViewUserProject(userId)) {
+  if (!permission.canViewUserProject(session.user.id)) {
     return { type: "error", message: "UNAUTHORIZED", publicProjets: [] };
   }
   const publicProjets = await getPublicProjets();
