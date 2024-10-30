@@ -15,7 +15,7 @@ export type SourcingMapClientProps = {
   }[];
 };
 
-export const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
+const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
   const currentProjetCoordinates = useCurrentProjetCoordinates();
 
   return (
@@ -37,3 +37,5 @@ export const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
     </MapContainer>
   );
 };
+
+export default SourcingMapClient;

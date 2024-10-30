@@ -1,7 +1,13 @@
 import { getRetoursExperiencesWithContacts } from "@/src/lib/strapi/queries/retoursExperienceQueries";
-import { SourcingMapClient } from "./sourcing-map-client";
 import { makeInProgressProjetsPositions, makeRexProjetsPositions } from "./helpers";
 import { getPublicProjetsAction } from "@/src/actions/projets/get-public-projets-action";
+import dynamic from "next/dynamic";
+import { SourcingMapSkeleton } from "./sourcing-map-skeleton";
+
+const LazySourcingMapClient = dynamic(() => import("./sourcing-map-client"), {
+  ssr: false,
+  loading: () => <SourcingMapSkeleton />,
+});
 
 export const SourcingMap = async () => {
   const rexProjets = await getRetoursExperiencesWithContacts();
@@ -12,7 +18,7 @@ export const SourcingMap = async () => {
 
   return (
     <div>
-      <SourcingMapClient markers={markers} />
+      <LazySourcingMapClient markers={markers} />
     </div>
   );
 };
