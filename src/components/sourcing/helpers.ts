@@ -8,12 +8,13 @@ import { RetourExperienceResponse } from "../ficheSolution/type";
 export const makeInProgressProjetsPositions = (
   inProgressProjets: ProjetWithPublicRelations[],
 ): SourcingMapClientProps["markers"] =>
-  inProgressProjets.map(({ collectivite }) => {
-    const adresseInfo = collectivite.adresse_info as unknown as GeoJsonAdresse["properties"];
+  inProgressProjets.map((projet) => {
+
+    const adresseInfo = projet.adresse_info as unknown as GeoJsonAdresse["properties"];
 
     const coordinates = adresseInfo
       ? lambert93toWGPS(adresseInfo.x, adresseInfo.y)
-      : { latitude: collectivite.latitude, longitude: collectivite.longitude };
+      : { latitude: projet.collectivite.latitude, longitude: projet.collectivite.longitude };
 
     return {
       geocode: [coordinates.latitude, coordinates.longitude] as LatLngTuple,

@@ -28,6 +28,7 @@ export const projetPublicSelect = {
   type_espace: true,
   collectivite: true,
   niveau_maturite: true,
+  adresse_info: true,
   users: {
     select: {
       user: { select: { id: true, nom: true, prenom: true } },
