@@ -143,7 +143,7 @@ export async function getRetoursExperiencesWithContacts(): Promise<
 > {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (
-    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS(filter), { tag: "get-rex-with-sourcing" })
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS(filter), { tag: "get-rex-with-contacts" })
   )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntities(apiResponse);
 }
