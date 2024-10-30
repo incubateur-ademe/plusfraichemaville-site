@@ -178,7 +178,7 @@ model projet {
   deleted_by                String?
   deleter                   User?                    @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
   users                     user_projet[]
-  is_public                 Boolean                  @default(true)
+  is_public                 Boolean?
   sourcing_cms              Json[]
   sourcing_projets          projet_sourcing_projet[] @relation("sourcing_projet")
   sourced_by_projets        projet_sourcing_projet[] @relation("sourced_by_projets")
