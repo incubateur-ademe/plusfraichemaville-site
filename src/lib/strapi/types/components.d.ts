@@ -163,6 +163,56 @@ export interface RetourExperienceCalendrier extends Schema.Component {
   };
 }
 
+export interface RetourExperienceContact extends Schema.Component {
+  collectionName: "components_retour_experience_contacts";
+  info: {
+    displayName: "Contact";
+    icon: "phone";
+    description: "";
+  };
+  attributes: {
+    label: Attribute.String;
+    telephone: Attribute.String;
+    email: Attribute.Email;
+    type_de_contact: Attribute.Enumeration<
+      [
+        "conseil",
+        "structure_publique",
+        "conception_et_realisation",
+        "concertation_citoyenne",
+        "recherche_et_innovation",
+        "groupements",
+        "collectivite",
+      ]
+    >;
+    sous_type_de_contact: Attribute.Enumeration<
+      [
+        "bureau_etude_ingenierie",
+        "bureau_etude_technique",
+        "assistance_maitrise_ouvrage",
+        "agence_eau",
+        "bailleur_social",
+        "caue",
+        "agence_architecture",
+        "agence_paysagiste",
+        "amenageur",
+        "societe_arboriculture",
+        "agence_conception_lumiere",
+        "syndic_copropriete",
+        "agence_communication",
+        "collectif",
+        "pole_universitaire",
+        "laboratoire_recherche",
+        "institut",
+        "syndicat_mixte",
+        "association",
+        "federation",
+        "collectivite",
+      ]
+    >;
+  };
+}
+
 export interface RetourExperienceSituation extends Schema.Component {
   collectionName: "components_retour_experience_situations";
   info: {
@@ -170,7 +220,7 @@ export interface RetourExperienceSituation extends Schema.Component {
     description: "";
   };
   attributes: {
-    image: Attribute.Media;
+    image: Attribute.Media<"images" | "files" | "videos" | "audios">;
     description: Attribute.RichText &
       Attribute.Required &
       Attribute.CustomField<
@@ -180,48 +230,6 @@ export interface RetourExperienceSituation extends Schema.Component {
           preset: "light";
         }
       >;
-  };
-}
-
-export interface RetourExperienceSourcing extends Schema.Component {
-  collectionName: "components_retour_experience_sourcings";
-  info: {
-    displayName: "Sourcing";
-    icon: "phone";
-    description: "";
-  };
-  attributes: {
-    label: Attribute.String;
-    telephone: Attribute.String;
-    type_de_contact: Attribute.Enumeration<
-      ["Public et parapublic", "Entreprises et agences", "Conseil", "Recherche et enseignement"]
-    >;
-    sous_type_de_contact: Attribute.Enumeration<
-      [
-        "Bureau d\u2019\u00E9tude",
-        "Assistance \u00E0 maitrise d\u2019ouvrage",
-        "Association",
-        "P\u00F4le universitaire",
-        "Laboratoire de recherche",
-        "Agence d\u2019architecture",
-        "Entreprise priv\u00E9e",
-        "Agence paysagiste",
-        "Syndicat mixte",
-        "Collectif",
-        "Am\u00E9nageur",
-        "Agence de l\u2019eau",
-        "CAUE",
-        "Conseil en ing\u00E9nierie",
-        "Agence de conception lumi\u00E8re",
-        "Agence de communication",
-        "Syndic de copropri\u00E9t\u00E9",
-        "Soci\u00E9t\u00E9 d\u2019arboriculture",
-        "Acteur public et parapublic",
-        "Bailleur social",
-        "Institut",
-      ]
-    >;
-    email: Attribute.Email;
   };
 }
 
@@ -236,8 +244,8 @@ declare module "@strapi/types" {
       "fiche-solution.etape-mise-en-oeuvre": FicheSolutionEtapeMiseEnOeuvre;
       "fiche-solution.oups": FicheSolutionOups;
       "retour-experience.calendrier": RetourExperienceCalendrier;
+      "retour-experience.contact": RetourExperienceContact;
       "retour-experience.situation": RetourExperienceSituation;
-      "retour-experience.sourcing": RetourExperienceSourcing;
     }
   }
 }

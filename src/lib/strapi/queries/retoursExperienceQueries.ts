@@ -3,6 +3,7 @@ import { solutionRetourExperienceFilter, StrapiFilter } from "@/src/lib/strapi/q
 import {
   FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
+  RETOUR_EXPERIENCE_WITH_CONTACTS,
   STRAPI_IMAGE_FRAGMENT,
 } from "@/src/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
@@ -70,14 +71,6 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
           date
           description
         }
-        calendrier {
-          id
-          label
-          email
-          telephone
-          type_de_contact
-          sous_type_de_contact
-        }
         financement
         difficultes
         partenaires
@@ -118,6 +111,16 @@ const GET_RETOUR_EXPERIENCE_CARD_DATA = (
     }
 }`;
 
+const GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS = (
+  strapiFilter: StrapiFilter,
+) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_WITH_CONTACTS} query {
+    retourExperiences ${strapiFilter.wholeFilterString()} {
+      data {
+        ...RetourExperienceCardInfo
+      }
+    }
+}`;
+
 export async function getRetourExperienceBySlug(
   slug: string,
 ): Promise<APIResponseData<"api::retour-experience.retour-experience"> | null> {
@@ -132,6 +135,16 @@ export async function getRetoursExperiences(): Promise<APIResponseData<"api::ret
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter), { tag: "get-rex" }))
     ?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getRetoursExperiencesWithContacts(): Promise<
+  APIResponseData<"api::retour-experience.retour-experience">[]
+> {
+  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const apiResponse = (
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS(filter), { tag: "get-rex-with-contacts" })
+  )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntities(apiResponse);
 }
 

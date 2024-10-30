@@ -59,7 +59,7 @@ export interface ProjetWithRelations extends projet {
 }
 
 export interface ProjetWithPublicRelations
-  extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace" | "niveau_maturite"> {
+  extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace" | "niveau_maturite" | "adresse_info"> {
   collectivite: collectivite;
   users: UserProjetWithPublicUser[];
 }
@@ -96,9 +96,4 @@ export type ProjectionsIndicateurClimadiag = {
   2030: ClimadiagTemperatureProjection;
   2050: ClimadiagTemperatureProjection;
   2100: ClimadiagTemperatureProjection;
-};
-
-export type ProjetSourcing = {
-  type: "EN_COURS" | "REX";
-  id: number;
 };

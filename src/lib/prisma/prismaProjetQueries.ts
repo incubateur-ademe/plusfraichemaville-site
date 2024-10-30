@@ -28,6 +28,7 @@ export const projetPublicSelect = {
   type_espace: true,
   collectivite: true,
   niveau_maturite: true,
+  adresse_info: true,
   users: {
     select: {
       user: { select: { id: true, nom: true, prenom: true } },
@@ -339,5 +340,15 @@ export const projetUpdated = async (projetId: number): Promise<projet | null> =>
       deleted_at: null,
     },
     data: {},
+  });
+};
+
+export const getPublicProjets = async (): Promise<ProjetWithPublicRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      is_public: true,
+      deleted_at: null,
+    },
+    select: projetPublicSelect,
   });
 };

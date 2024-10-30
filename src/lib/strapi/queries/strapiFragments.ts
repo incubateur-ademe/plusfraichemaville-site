@@ -81,3 +81,29 @@ export const RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT = `fragment RetourExperienceCa
       }
     }
 }`;
+export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceCardInfo on RetourExperienceEntity {
+  id
+    attributes {
+      titre
+      slug
+      location
+      contacts {
+        id
+        label
+        email
+        telephone
+        type_de_contact
+        sous_type_de_contact
+      }
+      region {
+        data {
+          attributes {
+            code
+          }
+        }
+      }
+      image_principale {
+        ...ImageInfo
+      }
+    }
+}`;
