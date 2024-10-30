@@ -4,6 +4,8 @@ import { SourcingMapClientProps } from "./sourcing-map-client";
 export const createCustomIcon = (type: SourcingMapClientProps["markers"][number]["type"]) =>
   new Icon({
     iconUrl: `/images/sourcing/sourcing-projet-${type}.svg`,
+    iconSize: [64, 77],
+    iconAnchor: [32, 77],
   });
 
 export const createClusterCustomIcon = function (cluster: any) {
@@ -11,5 +13,6 @@ export const createClusterCustomIcon = function (cluster: any) {
     html: `<span>${cluster.getChildCount()}</span>`,
     className: "custom-marker-cluster",
     iconSize: point(33, 33, true),
+    iconAnchor: [50, 12],
   });
 };

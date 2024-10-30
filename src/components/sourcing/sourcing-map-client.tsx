@@ -7,6 +7,7 @@ import { LatLngTuple } from "leaflet";
 import { useCurrentProjetCoordinates } from "./hooks";
 import { createClusterCustomIcon, createCustomIcon } from "./helpers-client";
 import { SourcingMapLegend } from "./sourcing-map-legend";
+import { ScaleControl } from "react-leaflet";
 
 export type SourcingMapClientProps = {
   markers: {
@@ -19,7 +20,13 @@ const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
   const currentProjetCoordinates = useCurrentProjetCoordinates();
 
   return (
-    <MapContainer className="relative h-[715px]" center={[48.8566, 2.3522]} zoom={5} zoomControl={false}>
+    <MapContainer
+      className="relative h-[715px]"
+      center={[48.8566, 2.3522]}
+      zoom={5}
+      zoomControl={false}
+      attributionControl={false}
+    >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -34,6 +41,7 @@ const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
       )}
       <ZoomControl position="topleft" />
       <SourcingMapLegend />
+      <ScaleControl position="bottomright" imperial={false} />
     </MapContainer>
   );
 };

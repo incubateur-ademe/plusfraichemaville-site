@@ -7,6 +7,9 @@ import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 
 export const useCurrentProjetCoordinates = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
+  if (!projet) {
+    return null;
+  }
   const adresseInfo = projet?.adresse_info as unknown as GeoJsonAdresse["properties"];
   const collectivite = projet?.collectivite;
 

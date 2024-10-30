@@ -9,7 +9,6 @@ export const makeInProgressProjetsPositions = (
   inProgressProjets: ProjetWithPublicRelations[],
 ): SourcingMapClientProps["markers"] =>
   inProgressProjets.map((projet) => {
-
     const adresseInfo = projet.adresse_info as unknown as GeoJsonAdresse["properties"];
 
     const coordinates = adresseInfo
