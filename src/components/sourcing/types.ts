@@ -27,13 +27,3 @@ export interface GeoJsonAdresse {
   geometry: Geometry;
   properties: AddressProperties;
 }
-
-export interface GeoJsonDocument {
-  type: "FeatureCollection";
-  version: string;
-  features: GeoJsonAdresse[];
-  attribution: string;
-  licence: string;
-  query: string;
-  limit: number;
-}

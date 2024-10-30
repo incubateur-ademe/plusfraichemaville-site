@@ -53,7 +53,7 @@ model User {
   discardedInformation        String[]
   conversations               conversation[]
   Analytics                   Analytics[]
-  projet_sourcing_projet      projet_sourcing_projet[]
+  sourcing_contacts           projet_sourcing_projet[]
 }
 
 model VerificationToken {
@@ -181,20 +181,20 @@ model projet {
   is_public                 Boolean                  @default(true)
   sourcing_cms              Json[]
   sourcing_projets          projet_sourcing_projet[] @relation("sourcing_projet")
-  sourcing_contacts         projet_sourcing_projet[] @relation("sourcing_contact")
+  sourced_by_projets        projet_sourcing_projet[] @relation("sourced_by_projets")
 }
 
 model projet_sourcing_projet {
-  id         Int      @id @default(autoincrement())
-  projet     projet   @relation("sourcing_projet", fields: [projet_id], references: [id])
-  projet_id  Int
-  contact    projet   @relation("sourcing_contact", fields: [contact_id], references: [id])
-  contact_id Int
-  created_at DateTime @default(now())
-  created_by String
-  creator    User     @relation(fields: [created_by], references: [id])
+  id                Int      @id @default(autoincrement())
+  projet            projet   @relation("sourcing_projet", fields: [projet_id], references: [id])
+  projet_id         Int
+  sourced_projet    projet   @relation("sourced_by_projets", fields: [sourced_projet_id], references: [id])
+  sourced_projet_id Int
+  created_at        DateTime @default(now())
+  created_by        String
+  creator           User     @relation(fields: [created_by], references: [id])
 
-  @@unique([projet_id, contact_id])
+  @@unique([projet_id, sourced_projet_id])
 }
 
 model estimation {

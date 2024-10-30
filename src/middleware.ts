@@ -10,7 +10,10 @@ const cspHeader = `
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ https://*.openstreetmap.org;
+    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ 
+    https://a.tile.openstreetmap.org 
+    https://b.tile.openstreetmap.org 
+    https://c.tile.openstreetmap.org;
     font-src 'self' https://fonts.gstatic.com/;
     object-src 'none';
     base-uri 'self';
