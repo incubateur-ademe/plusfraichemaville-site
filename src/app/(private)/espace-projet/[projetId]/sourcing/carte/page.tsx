@@ -1,6 +1,6 @@
-import { SourcingMap } from "@/src/components/sourcing/sourcing-map";
+import { SourcingSearch } from "@/src/components/sourcing/sourcing-search";
 
 const SourcingMapPage = () => {
-  return <SourcingMap />;
+  return <SourcingSearch />;
 };
 export default SourcingMapPage;

@@ -18,6 +18,7 @@ export const makeInProgressProjetsPositions = (
     return {
       geocode: [coordinates.latitude, coordinates.longitude] as LatLngTuple,
       type: "in-progress",
+      idProjet: projet.id
     };
   });
 
@@ -30,5 +31,6 @@ export const makeRexProjetsPositions = (rexProjets: RetourExperienceResponse[]):
       return {
         geocode,
         type: "rex",
+        idProjet: projet.id
       };
     });
