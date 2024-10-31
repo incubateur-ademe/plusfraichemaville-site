@@ -3,8 +3,8 @@
 import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, ScaleControl, TileLayer, ZoomControl } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import { useCurrentProjetCoordinates } from "./hooks";
-import { createClusterCustomIcon, createCustomIcon, CustomMarker } from "./helpers-client";
+import { useCurrentProjetCoordinates } from "../hooks";
+import { createClusterCustomIcon, createCustomIcon, CustomMarker } from "../helpers-client";
 import { SourcingMapLegend } from "./sourcing-map-legend";
 
 export type SourcingMapClientProps = {

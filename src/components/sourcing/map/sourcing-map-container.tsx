@@ -4,7 +4,7 @@ import { useState } from "react";
 // eslint-disable-next-line max-len
 import { SourcingSidePanelContainer } from "@/src/components/sourcing/sidePanel/sourcing-side-panel-container";
 import { CustomMarker } from "@/src/components/sourcing/helpers-client";
-import SourcingMapClient from "@/src/components/sourcing/sourcing-map-client";
+import SourcingMapClient from "@/src/components/sourcing/map/sourcing-map-client";
 
 const SourcingMapContainer = ({ markers }: { markers: CustomMarker[] }) => {
   const [selectedMarker, setSelectedMarker] = useState<CustomMarker>();

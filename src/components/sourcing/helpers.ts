@@ -1,13 +1,11 @@
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { LatLngTuple } from "leaflet";
-import { SourcingMapClientProps } from "./sourcing-map-client";
-import { GeoJsonAdresse } from "./types";
+import { SourcingMapClientProps } from "./map/sourcing-map-client";
+import { CustomMarker, GeoJsonAdresse } from "./types";
 import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 
-export const makeInProgressProjetsPositions = (
-  inProgressProjets: ProjetWithPublicRelations[],
-): SourcingMapClientProps["markers"] =>
+export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
     const adresseInfo = projet.adresse_info as unknown as GeoJsonAdresse["properties"];
 
@@ -18,7 +16,7 @@ export const makeInProgressProjetsPositions = (
     return {
       geocode: [coordinates.latitude, coordinates.longitude] as LatLngTuple,
       type: "in-progress",
-      idProjet: projet.id
+      idProjet: projet.id,
     };
   });
 
@@ -31,6 +29,6 @@ export const makeRexProjetsPositions = (rexProjets: RetourExperienceResponse[]):
       return {
         geocode,
         type: "rex",
-        idProjet: projet.id
+        idProjet: projet.id,
       };
     });
