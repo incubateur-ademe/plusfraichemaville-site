@@ -31,7 +31,7 @@ const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
-      <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon}>
+      <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon} showCoverageOnHover={false}>
         {markers.map((marker, index) => (
           <Marker position={marker.geocode} key={index} icon={createCustomIcon(marker.type)} />
         ))}
