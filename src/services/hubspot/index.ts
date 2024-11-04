@@ -41,6 +41,7 @@ export const hubspotBatchSync = async (
   usersWithAdminProjets: UserWithAdminProjets[],
 ): Promise<{
   status: "COMPLETE" | "ERROR";
+  message: string;
 }> => {
   const userBatches = chunk(usersWithAdminProjets, HUBSPOT_BATCH_LIMIT);
   let allContactResults = [];
@@ -109,7 +110,11 @@ export const hubspotBatchSync = async (
     );
   }
 
+  // eslint-disable-next-line max-len
+  const message = `Contact(s): ${allContactResults.length} | Projet(s): ${allProjectResults.length} | Association(s): ${allAssociationResults.length}`;
+
   return {
     status: isSuccess ? "COMPLETE" : "ERROR",
+    message,
   };
 };

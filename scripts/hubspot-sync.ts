@@ -33,6 +33,7 @@ const syncWithHubspot = async () => {
     if (batch.status === "COMPLETE") {
       await saveCronJob(startedDate, new Date(), "SYNC_HUBSPOT");
       console.log("Synchronisation avec Hubspot réussie !");
+      console.log(batch.message);
       process.exit(0);
     } else {
       captureError("Erreur lors de la synchronisation avec Hubspot.", {
