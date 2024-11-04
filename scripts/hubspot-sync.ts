@@ -11,7 +11,7 @@ type HubspotError = {
 };
 
 const syncWithHubspot = async () => {
-  if (process.env.HUBSPOT_SYNC_ENV !== "production") {
+  if (process.env.HUBSPOT_SYNC_ENV !== "true") {
     console.log("La synchronisation n'a pas aboutie : éxecution hors d'un environnement de production.");
     return;
   }
@@ -38,7 +38,6 @@ const syncWithHubspot = async () => {
       captureError("Erreur lors de la synchronisation avec Hubspot.", {
         executionTime: new Date(),
       });
-      console.log(`Erreur lors de la synchronisation avec Hubspot du ${new Date()}`);
       process.exit(1);
     }
   } catch (error) {
