@@ -8,6 +8,14 @@ import {
 } from "./hubspot-helpers";
 import { getProjetsWithAdminUser } from "@/src/components/liste-projets/helpers";
 import { UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
+import chunk from "lodash/chunk";
+import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
+// eslint-disable-next-line max-len
+import { BatchResponseSimplePublicUpsertObjectWithErrors as ContactBatchWithErrors } from "@hubspot/api-client/lib/codegen/crm/contacts";
+// eslint-disable-next-line max-len
+import { BatchResponseSimplePublicUpsertObjectWithErrors as DealBatchWithErrors } from "@hubspot/api-client/lib/codegen/crm/deals";
+// eslint-disable-next-line max-len
+import { BatchResponseLabelsBetweenObjectPairWithErrors } from "@hubspot/api-client/lib/codegen/crm/associations/v4/models/BatchResponseLabelsBetweenObjectPairWithErrors";
 
 export const hubspotClient = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
 
@@ -27,42 +35,81 @@ export const createHubspotTicket = async (data: ContactFormData) => {
   };
   await hubspotClient.crm.tickets.basicApi.create(SimplePublicObjectInputForCreate);
 };
+const HUBSPOT_BATCH_LIMIT = 99;
 
-export const hubspotBatchSync = async (usersWithAdminProjets: UserWithAdminProjets[]) => {
-  const contactProperties = makeBatchUpsertContactProperties(usersWithAdminProjets);
+export const hubspotBatchSync = async (
+  usersWithAdminProjets: UserWithAdminProjets[],
+): Promise<{
+  status: "COMPLETE" | "ERROR";
+}> => {
+  const userBatches = chunk(usersWithAdminProjets, HUBSPOT_BATCH_LIMIT);
+  let allContactResults = [];
+  let allProjectResults = [];
+  let allAssociationResults = [];
 
-  const contactBatch = await hubspotClient.crm.contacts.batchApi.upsert({
-    inputs: contactProperties,
-  });
+  for (const batchUsers of userBatches) {
+    // contacts
+    const contactProperties = makeBatchUpsertContactProperties(batchUsers);
+    const contactBatch = await hubspotClient.crm.contacts.batchApi.upsert({
+      inputs: contactProperties,
+    });
+    allContactResults.push(contactBatch);
+    const contactIds = await getHubspotUsersFromAdminProjets(batchUsers);
 
-  const projets = getProjetsWithAdminUser(usersWithAdminProjets);
-  const projectProperties = makeBatchUpsertProjectsByContactProperties(projets);
-  const projectBatch = await hubspotClient.crm.deals.batchApi.upsert({
-    inputs: projectProperties,
-  });
+    // projets
+    const allProjets = getProjetsWithAdminUser(batchUsers);
+    const projetBatches = chunk(allProjets, HUBSPOT_BATCH_LIMIT);
 
-  const contactIds = await getHubspotUsersFromAdminProjets(usersWithAdminProjets);
+    for (const projetBatch of projetBatches) {
+      const projectProperties = makeBatchUpsertProjectsByContactProperties(projetBatch);
+      const projectBatch = await hubspotClient.crm.deals.batchApi.upsert({
+        inputs: projectProperties,
+      });
+      allProjectResults.push(projectBatch);
 
-  const associations = usersWithAdminProjets
-    .flatMap((user) =>
-      user.projets.map((userProjet) => {
-        const contactResult = contactIds.find((contact) => contact.email === user.email)?.hubspotId;
-        const dealResult = projectBatch.results.find(
-          (result) => result.properties.projet_id_unique === userProjet.projet.id.toString(),
-        );
-        return {
-          contactId: contactResult ?? "",
-          dealId: dealResult?.id ?? "",
-        };
-      }),
-    )
-    .filter((assocaition) => assocaition.contactId && assocaition.dealId);
+      // associations
+      const associations = batchUsers
+        .flatMap((user) =>
+          user.projets
+            .filter((userProjet) => projetBatch.some((p) => p.id === userProjet.projet.id))
+            .map((userProjet) => ({
+              contactId: contactIds.find((contact) => contact.email === user.email)?.hubspotId ?? "",
+              dealId:
+                projectBatch.results.find(
+                  (result) => result.properties.projet_id_unique === userProjet.projet.id.toString(),
+                )?.id ?? "",
+            })),
+        )
+        .filter((association) => association.contactId && association.dealId);
 
-  const associationsBatch = await createBidirectionalAssociations(associations);
+      const associationBatch = await createBidirectionalAssociations(associations);
+      allAssociationResults.push(associationBatch);
+    }
+  }
+
+  const isSuccess =
+    allContactResults.every((batch) => batch.status === "COMPLETE") &&
+    allProjectResults.every((batch) => batch.status === "COMPLETE") &&
+    allAssociationResults.every((batch) => batch.status === "COMPLETE");
+
+  if (!isSuccess) {
+    allContactResults.map(
+      (batch) =>
+        batch instanceof ContactBatchWithErrors &&
+        captureError("Batch Hubspot sur les contacts en erreur", batch.errors),
+    );
+    allProjectResults.map(
+      (batch) =>
+        batch instanceof DealBatchWithErrors && captureError("Batch Hubspot sur les projets en erreur", batch.errors),
+    );
+    allAssociationResults.map(
+      (batch) =>
+        batch instanceof BatchResponseLabelsBetweenObjectPairWithErrors &&
+        captureError("Batch Hubspot sur les associations contacts / projets en erreur", batch.errors),
+    );
+  }
 
   return {
-    contactBatch,
-    projectBatch,
-    associationsBatch,
+    status: isSuccess ? "COMPLETE" : "ERROR",
   };
 };
