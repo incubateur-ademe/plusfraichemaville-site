@@ -9,6 +9,13 @@ import {
 import { getProjetsWithAdminUser } from "@/src/components/liste-projets/helpers";
 import { UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import chunk from "lodash/chunk";
+import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
+// eslint-disable-next-line max-len
+import { BatchResponseSimplePublicUpsertObjectWithErrors as ContactBatchWithErrors } from "@hubspot/api-client/lib/codegen/crm/contacts";
+// eslint-disable-next-line max-len
+import { BatchResponseSimplePublicUpsertObjectWithErrors as DealBatchWithErrors } from "@hubspot/api-client/lib/codegen/crm/deals";
+// eslint-disable-next-line max-len
+import { BatchResponseLabelsBetweenObjectPairWithErrors } from "@hubspot/api-client/lib/codegen/crm/associations/v4/models/BatchResponseLabelsBetweenObjectPairWithErrors";
 
 export const hubspotClient = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
 
@@ -84,6 +91,23 @@ export const hubspotBatchSync = async (
     allContactResults.every((batch) => batch.status === "COMPLETE") &&
     allProjectResults.every((batch) => batch.status === "COMPLETE") &&
     allAssociationResults.every((batch) => batch.status === "COMPLETE");
+
+  if (!isSuccess) {
+    allContactResults.map(
+      (batch) =>
+        batch instanceof ContactBatchWithErrors &&
+        captureError("Batch Hubspot sur les contacts en erreur", batch.errors),
+    );
+    allProjectResults.map(
+      (batch) =>
+        batch instanceof DealBatchWithErrors && captureError("Batch Hubspot sur les projets en erreur", batch.errors),
+    );
+    allAssociationResults.map(
+      (batch) =>
+        batch instanceof BatchResponseLabelsBetweenObjectPairWithErrors &&
+        captureError("Batch Hubspot sur les associations contacts / projets en erreur", batch.errors),
+    );
+  }
 
   return {
     status: isSuccess ? "COMPLETE" : "ERROR",
