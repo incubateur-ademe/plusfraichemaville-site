@@ -12,5 +12,5 @@ export const SourcingRexSidePanelContainer = ({ rexId }: { rexId: number }) => {
     Skeleton: SourcingRexSidePanelSkeleton,
     Content: SourcingRexSidePanelContent,
   });
-  return <div className="h-full">{sidePanel}</div>;
+  return <div>{sidePanel}</div>;
 };
