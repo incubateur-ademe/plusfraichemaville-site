@@ -5,7 +5,10 @@ export async function GET(request: NextRequest) {
   const rexId = request.nextUrl.searchParams.get("rexId");
   if (rexId) {
     const response = await getRetoursExperiencesWithContactsById(rexId);
-    return NextResponse.json(response);
+    if (response) {
+      return NextResponse.json(response);
+    }
+    return NextResponse.json(null);
   }
-  return NextResponse.json([]);
+  return NextResponse.json(null);
 }

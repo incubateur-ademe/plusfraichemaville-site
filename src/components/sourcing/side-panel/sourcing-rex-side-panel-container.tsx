@@ -6,7 +6,7 @@ import { SourcingRexSidePanelSkeleton } from "./sourcing-rex-side-panel-skeleton
 import { RetourExperienceResponse } from "../../ficheSolution/type";
 
 export const SourcingRexSidePanelContainer = ({ rexId }: { rexId: number }) => {
-  const sidePanel = useSidePanelFetcher<RetourExperienceResponse[]>({
+  const sidePanel = useSidePanelFetcher<RetourExperienceResponse>({
     url: GET_REX_WITH_CONTACTS_BY_ID(rexId),
     Skeleton: SourcingRexSidePanelSkeleton,
     Content: SourcingRexSidePanelContent,

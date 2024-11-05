@@ -4,8 +4,8 @@ import Badge from "@codegouvfr/react-dsfr/Badge";
 import { RetourExperienceResponse } from "../../ficheSolution/type";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 
-export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceResponse[] }) => {
-  const projet = data[0].attributes;
+export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceResponse }) => {
+  const projet = data.attributes;
 
   return (
     <div className="p-5">
