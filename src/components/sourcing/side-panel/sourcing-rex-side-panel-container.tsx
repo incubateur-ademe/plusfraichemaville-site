@@ -1,15 +1,16 @@
+import { GET_REX_WITH_CONTACTS_BY_ID } from "@/src/helpers/routes";
 import { RetourExperience } from "../../retourExperience/type";
 import { useSidePanelFetcher } from "../hooks";
 
 import { SourcingRexSidePanelContent } from "./sourcing-rex-side-panel-content";
 import { SourcingRexSidePanelSkeleton } from "./sourcing-rex-side-panel-skeleton";
+import { RetourExperienceResponse } from "../../ficheSolution/type";
 
-export const SourcingRexSidePanelContainer = ({ retourExperienceId }: { retourExperienceId: number }) => {
-  const sidePanel = useSidePanelFetcher<RetourExperience>({
-    url: "",
+export const SourcingRexSidePanelContainer = ({ rexId }: { rexId: number }) => {
+  const sidePanel = useSidePanelFetcher<RetourExperienceResponse[]>({
+    url: GET_REX_WITH_CONTACTS_BY_ID(rexId),
     Skeleton: SourcingRexSidePanelSkeleton,
     Content: SourcingRexSidePanelContent,
   });
-
   return <div className="h-full">{sidePanel}</div>;
 };

@@ -147,6 +147,15 @@ export async function getRetoursExperiencesWithContacts(): Promise<
   )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
   return safeReturnStrapiEntities(apiResponse);
 }
+export async function getRetoursExperiencesWithContactsById(
+  id: string,
+): Promise<APIResponseData<"api::retour-experience.retour-experience">[]> {
+  const filter = new StrapiFilter(true, [{ attribute: "id", operator: "eq", value: id, relation: false }]);
+  const apiResponse = (
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS(filter), { tag: "get-rex-with-contacts" })
+  )?.retourExperiences as APIResponseCollection<"api::retour-experience.retour-experience">;
+  return safeReturnStrapiEntities(apiResponse);
+}
 
 export async function getAllCompleteRetoursExperiences(): Promise<
   APIResponseData<"api::retour-experience.retour-experience">[]

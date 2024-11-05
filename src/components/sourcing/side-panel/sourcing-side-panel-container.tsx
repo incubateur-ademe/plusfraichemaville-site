@@ -14,7 +14,7 @@ export const SourcingSidePanelContainer = ({ marker }: { marker: CustomMarker | 
           <SourcingInProgressSidePanel projetId={marker?.idProjet!} />
         </Case>
         <Case condition={marker?.type === "rex"}>
-          <SourcingRexSidePanelContainer retourExperienceId={marker?.idProjet!} />
+          <SourcingRexSidePanelContainer rexId={marker?.idProjet!} />
         </Case>
         <Case condition={marker?.type === "ma-collectivite"}>
           <SourcingMyLocationSidePanel />
