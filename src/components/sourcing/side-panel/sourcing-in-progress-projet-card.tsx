@@ -2,7 +2,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
-export const SourcingInProgressProjetCard = ({ projet }: { projet: ProjetWithPublicRelations }) => {
+export const SourcingInProgressProjetCard = ({ data }: { data: ProjetWithPublicRelations }) => {
   return (
     <div className="p-5">
       <div className="mb-4 text-xl font-bold text-pfmv-navy">Le projet</div>
@@ -27,7 +27,7 @@ export const SourcingInProgressProjetCard = ({ projet }: { projet: ProjetWithPub
             >
               PROJET EN COURS
             </div>
-            <div className="animate-pulse">{projet.nom}</div>
+            <div className="animate-pulse">{data.nom}</div>
           </div>
         </div>
       </div>
