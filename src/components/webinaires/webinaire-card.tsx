@@ -6,6 +6,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import React from "react";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
+import { WebinaireSubscriptionButton } from "@/src/components/webinaires/webinaire-subscription-button";
 
 export const WebinaireCard = ({ webinaire }: { webinaire: WebinaireResponse }) => {
   const isWebinairePast = !isWebinaireInFuture(webinaire);
@@ -44,12 +45,7 @@ export const WebinaireCard = ({ webinaire }: { webinaire: WebinaireResponse }) =
           <Case condition={!isWebinairePast}>
             <div className="mt-4 text-center">
               {webinaire.attributes.lien_inscription ? (
-                <Button
-                  className=" !w-36 !justify-center rounded-3xl"
-                  linkProps={{ href: webinaire.attributes.lien_inscription, target: "_blank" }}
-                >
-                  {"Je m'inscris"}
-                </Button>
+                <WebinaireSubscriptionButton lienInscription={webinaire.attributes.lien_inscription} />
               ) : (
                 "Inscription non disponible"
               )}
