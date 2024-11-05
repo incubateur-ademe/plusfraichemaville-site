@@ -5,10 +5,10 @@ import { dateToLiteralString, stipStrapiTime } from "@/src/helpers/dateUtils";
 import Button from "@codegouvfr/react-dsfr/Button";
 import React from "react";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
+import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
 
 export const WebinaireCard = ({ webinaire }: { webinaire: WebinaireResponse }) => {
-  const isWebinairePast =
-    webinaire.attributes.jour_evenement && new Date(webinaire.attributes.jour_evenement) <= new Date();
+  const isWebinairePast = !isWebinaireInFuture(webinaire);
   const timeInterval =
     webinaire.attributes.heure_debut && webinaire.attributes.heure_fin
       ? `de ${stipStrapiTime(webinaire.attributes.heure_debut)} à ${stipStrapiTime(webinaire.attributes.heure_fin)}`
