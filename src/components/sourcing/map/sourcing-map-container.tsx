@@ -2,7 +2,7 @@
 // eslint-disable-next-line max-len
 import { useState } from "react";
 // eslint-disable-next-line max-len
-import { SourcingSidePanelContainer } from "@/src/components/sourcing/sidePanel/sourcing-side-panel-container";
+import { SourcingSidePanelContainer } from "@/src/components/sourcing/side-panel/sourcing-side-panel-container";
 import { CustomMarker } from "@/src/components/sourcing/helpers-client";
 import SourcingMapClient from "@/src/components/sourcing/map/sourcing-map-client";
 
