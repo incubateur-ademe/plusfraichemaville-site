@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { trackEvent } from "@/src/helpers/matomo/trackEvent";
 import { WEBINAIRE_SUBSCRIPTION } from "@/src/helpers/matomo/matommo-tags";
 
