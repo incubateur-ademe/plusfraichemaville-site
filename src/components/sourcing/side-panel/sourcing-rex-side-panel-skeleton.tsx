@@ -4,7 +4,7 @@ export const SourcingRexSidePanelSkeleton = () => {
   return (
     <div className="p-5">
       <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Le projet</h2>
-      <div className="pfmv-card-no-hover w-[362px] overflow-hidden">
+      <div className="w-[362px] overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey">
         <div className="h-36 animate-pulse overflow-hidden bg-dsfr-contrast-grey"></div>
         <div className="px-6 py-4">
           <Badge small noIcon severity="success" className="mb-2">

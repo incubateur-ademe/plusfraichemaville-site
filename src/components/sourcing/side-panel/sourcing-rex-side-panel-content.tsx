@@ -11,7 +11,7 @@ export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceRe
     <div className="p-5">
       <div className="mb-5">
         <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Le projet</h2>
-        <div className="pfmv-card-no-hover w-[362px] overflow-hidden">
+        <div className="w-[362px] overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey">
           <div className="h-36 overflow-hidden">
             <Image
               width={362}
