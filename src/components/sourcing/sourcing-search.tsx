@@ -2,14 +2,14 @@ import { getRetoursExperiencesWithContacts } from "@/src/lib/strapi/queries/reto
 import { makeInProgressProjetsPositions, makeRexProjetsPositions } from "./helpers";
 import { getPublicProjetsAction } from "@/src/actions/projets/get-public-projets-action";
 import dynamic from "next/dynamic";
-import { SourcingMapSkeleton } from "./sourcing-map-skeleton";
+import { SourcingMapSkeleton } from "./map/sourcing-map-skeleton";
 
-const LazySourcingMapClient = dynamic(() => import("./sourcing-map-client"), {
+const LazySourcingMapClient = dynamic(() => import("./map/sourcing-map-container"), {
   ssr: false,
   loading: () => <SourcingMapSkeleton />,
 });
 
-export const SourcingMap = async () => {
+export const SourcingSearch = async () => {
   const rexProjets = await getRetoursExperiencesWithContacts();
   const rexProjetsPositions = makeRexProjetsPositions(rexProjets);
   const inProgressProjets = await getPublicProjetsAction();

@@ -1,3 +1,5 @@
+import { LatLngTuple } from "leaflet";
+
 type Coordinates = [number, number];
 
 interface Geometry {
@@ -27,3 +29,9 @@ export interface GeoJsonAdresse {
   geometry: Geometry;
   properties: AddressProperties;
 }
+
+export type CustomMarker = {
+  geocode: LatLngTuple;
+  type: "in-progress" | "rex" | "ma-collectivite";
+  idProjet?: number;
+};

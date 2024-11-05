@@ -1,23 +1,23 @@
 "use client";
 
 import "leaflet/dist/leaflet.css";
-import { MapContainer, TileLayer, Marker, ZoomControl } from "react-leaflet";
+import { MapContainer, Marker, ScaleControl, TileLayer, ZoomControl } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
-import { LatLngTuple } from "leaflet";
-import { useCurrentProjetCoordinates } from "./hooks";
-import { createClusterCustomIcon, createCustomIcon } from "./helpers-client";
+import { useCurrentProjetCoordinates } from "../hooks";
+import { createClusterCustomIcon, createCustomIcon, CustomMarker } from "../helpers-client";
 import { SourcingMapLegend } from "./sourcing-map-legend";
-import { ScaleControl } from "react-leaflet";
 
 export type SourcingMapClientProps = {
-  markers: {
-    geocode: LatLngTuple;
-    type: "in-progress" | "rex" | "ma-collectivite";
-  }[];
+  markers: CustomMarker[];
+  setSelectedMarker: (_: CustomMarker) => void;
 };
 
-const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
+const SourcingMapClient = ({ markers, setSelectedMarker }: SourcingMapClientProps) => {
   const currentProjetCoordinates = useCurrentProjetCoordinates();
+
+  const handleMarkerClick = (selectedMarker: CustomMarker) => {
+    setSelectedMarker(selectedMarker);
+  };
 
   return (
     <MapContainer
@@ -33,11 +33,26 @@ const SourcingMapClient = ({ markers }: SourcingMapClientProps) => {
       />
       <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon} showCoverageOnHover={false}>
         {markers.map((marker, index) => (
-          <Marker position={marker.geocode} key={index} icon={createCustomIcon(marker.type)} />
+          <Marker
+            position={marker.geocode}
+            key={index}
+            icon={createCustomIcon(marker.type)}
+            eventHandlers={{ click: () => handleMarkerClick(marker) }}
+          />
         ))}
       </MarkerClusterGroup>
       {currentProjetCoordinates && (
-        <Marker position={currentProjetCoordinates} icon={createCustomIcon("ma-collectivite")} />
+        <Marker
+          position={currentProjetCoordinates}
+          icon={createCustomIcon("ma-collectivite")}
+          eventHandlers={{
+            click: () =>
+              handleMarkerClick({
+                geocode: currentProjetCoordinates,
+                type: "ma-collectivite",
+              }),
+          }}
+        />
       )}
       <ZoomControl position="topleft" />
       <SourcingMapLegend />

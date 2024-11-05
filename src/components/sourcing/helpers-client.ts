@@ -1,7 +1,12 @@
-import { Icon, divIcon, point } from "leaflet";
-import { SourcingMapClientProps } from "./sourcing-map-client";
+import { divIcon, Icon, LatLngTuple, point } from "leaflet";
 
-export const createCustomIcon = (type: SourcingMapClientProps["markers"][number]["type"]) =>
+export type CustomMarker = {
+  geocode: LatLngTuple;
+  type: "in-progress" | "rex" | "ma-collectivite";
+  idProjet?: number;
+};
+
+export const createCustomIcon = (type: CustomMarker["type"]) =>
   new Icon({
     iconUrl: `/images/sourcing/sourcing-projet-${type}.svg`,
     iconSize: [64, 77],
