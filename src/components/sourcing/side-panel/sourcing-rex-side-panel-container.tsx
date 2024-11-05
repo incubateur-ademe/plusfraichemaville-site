@@ -1,5 +1,4 @@
 import { GET_REX_WITH_CONTACTS_BY_ID } from "@/src/helpers/routes";
-import { RetourExperience } from "../../retourExperience/type";
 import { useSidePanelFetcher } from "../hooks";
 
 import { SourcingRexSidePanelContent } from "./sourcing-rex-side-panel-content";

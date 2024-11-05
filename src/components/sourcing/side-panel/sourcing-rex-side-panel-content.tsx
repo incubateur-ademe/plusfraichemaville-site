@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { RetourExperience } from "../../retourExperience/type";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { RetourExperienceResponse } from "../../ficheSolution/type";
