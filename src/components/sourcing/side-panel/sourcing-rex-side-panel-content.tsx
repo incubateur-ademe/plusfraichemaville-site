@@ -4,11 +4,11 @@ import Badge from "@codegouvfr/react-dsfr/Badge";
 import { RetourExperienceResponse } from "../../ficheSolution/type";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { SourcingSidePanelContactCard } from "./sourcing-side-panel-contact-card";
-import { RetourExperienceContact } from "@/src/lib/strapi/types/components";
+import { RetourExperienceContactType } from "@/src/lib/strapi/types/types";
 
 export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceResponse }) => {
   const projet = data.attributes;
-  const contacts = data.attributes.contacts as unknown as RetourExperienceContact["attributes"][];
+  const contacts = data.attributes.contacts as RetourExperienceContactType[];
   return (
     <>
       <div className="mb-5">
