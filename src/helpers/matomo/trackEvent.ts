@@ -12,6 +12,7 @@ declare global {
 export const trackEvent = (event: MATOMO_EVENT) => {
   if (shouldUseDevTracker || !window?._paq) {
     console.debug("trackEvent => ", event);
+    return;
   }
   window?._paq?.push(["trackEvent", event.category, event.action, event.name]);
 };
