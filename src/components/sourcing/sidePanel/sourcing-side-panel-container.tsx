@@ -4,7 +4,7 @@ import { SourcingMyLocationSidePanel } from "@/src/components/sourcing/sidePanel
 import { SourcingNoSelectionSidePanel } from "@/src/components/sourcing/sidePanel/sourcing-no-selection-side-panel";
 
 // eslint-disable-next-line max-len
-import { SourcingInProgressSidePanel } from "@/src/components/sourcing/sidePanel/sourcing-in-progress-projet-side-panel";
+import { SourcingInProgressSidePanelContainer } from "@/src/components/sourcing/sidePanel/sourcing-in-progress-projet-side-panel-container";
 // eslint-disable-next-line max-len
 import { SourcingRetourExperienceSidePanel } from "@/src/components/sourcing/sidePanel/sourcing-retour-experience-side-panel";
 
@@ -13,7 +13,7 @@ export const SourcingSidePanelContainer = ({ marker }: { marker: CustomMarker | 
     <div>
       <Conditional>
         <Case condition={marker?.type === "in-progress"}>
-          <SourcingInProgressSidePanel projetId={marker?.idProjet!} />
+          <SourcingInProgressSidePanelContainer projetId={marker?.idProjet!} />
         </Case>
         <Case condition={marker?.type === "rex"}>
           <SourcingRetourExperienceSidePanel retourExperienceId={marker?.idProjet!} />
