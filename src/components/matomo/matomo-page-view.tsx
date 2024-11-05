@@ -21,8 +21,8 @@ export default function MatomoPageView() {
   }, [matomoConsent]);
 
   useEffect(() => {
-      const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
-      trackPageView(url);
+    const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
+    trackPageView(url);
   }, [pathname, searchParams]);
 
   return <></>;
