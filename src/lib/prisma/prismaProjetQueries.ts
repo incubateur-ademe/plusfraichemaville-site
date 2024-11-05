@@ -358,7 +358,7 @@ export const getPublicProjetById = async (projetId: number): Promise<ProjetWithP
     where: {
       id: projetId,
       is_public: true,
-      deleted_at: null
+      deleted_at: null,
     },
     select: projetPublicSelect,
   });

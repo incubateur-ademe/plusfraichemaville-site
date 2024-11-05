@@ -54,8 +54,6 @@ export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
 export const GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL = (collectiviteId: number, userId: string) =>
   `/api/get-available-projects-for-collectivite?collectiviteId=${collectiviteId}&userId=${userId}`;
 
-export const GET_PUBLIC_PROJET_BY_ID = (projetId: number) =>
-  `/api/get-public-projet-by-id?projetId=${projetId}`;
-
+export const GET_PUBLIC_PROJET_BY_ID = (projetId: number) => `/api/get-public-projet-by-id?projetId=${projetId}`;
 
 export const GET_REX_WITH_CONTACTS_BY_ID = (rexId: number) => `/api/get-rex-with-contacts-by-id?rexId=${rexId}`;
