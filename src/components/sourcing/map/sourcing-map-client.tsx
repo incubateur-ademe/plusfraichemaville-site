@@ -21,7 +21,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker }: SourcingMapClientProp
 
   return (
     <MapContainer
-      className="relative h-[715px]"
+      className="relative"
       center={[48.8566, 2.3522]}
       zoom={5}
       zoomControl={false}

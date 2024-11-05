@@ -3,12 +3,14 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { RetourExperienceResponse } from "../../ficheSolution/type";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
+import { SourcingSidePanelContactCard } from "./sourcing-side-panel-contact-card";
+import { RetourExperienceContact } from "@/src/lib/strapi/types/components";
 
 export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceResponse }) => {
   const projet = data.attributes;
-
+  const contacts = data.attributes.contacts as unknown as RetourExperienceContact["attributes"][];
   return (
-    <div className="p-5">
+    <>
       <div className="mb-5">
         <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Le projet</h2>
         <div className="w-[362px] overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey">
@@ -32,6 +34,10 @@ export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceRe
           </div>
         </div>
       </div>
-    </div>
+      <div>
+        <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Contacts</h2>
+        {contacts?.map((contact, index) => <SourcingSidePanelContactCard contact={contact} key={index} />)}
+      </div>
+    </>
   );
 };
