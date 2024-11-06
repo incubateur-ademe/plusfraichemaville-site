@@ -32,3 +32,37 @@ export const makeRexProjetsPositions = (rexProjets: RetourExperienceResponse[]):
         idProjet: projet.id,
       };
     });
+
+export const contactsTypeMap = {
+  conseil: "Conseil",
+  structure_publique: "Structure publique",
+  conception_et_realisation: "Conception et réalisation",
+  concertation_citoyenne: "Concertation citoyenne",
+  recherche_et_innovation: "Recherche et innovation",
+  groupements: "Groupements",
+  collectivite: "Collectivité",
+} as const;
+
+export const contactsSousTypeMap = {
+  bureau_etude_ingenierie: "Bureau d'étude ingénierie",
+  bureau_etude_technique: "Bureau d'étude technique",
+  assistance_maitrise_ouvrage: "Assistance à maîtrise d'ouvrage",
+  agence_eau: "Agence de l'eau",
+  bailleur_social: "Bailleur social",
+  caue: "CAUE",
+  agence_architecture: "Agence d'architecture",
+  agence_paysagiste: "Agence paysagiste",
+  amenageur: "Aménageur",
+  societe_arboriculture: "Société d'arboriculture",
+  agence_conception_lumiere: "Agence conception lumière",
+  syndic_copropriete: "Syndic de copropriété",
+  agence_communication: "Agence de communication",
+  collectif: "Collectif",
+  pole_universitaire: "Pôle universitaire",
+  laboratoire_recherche: "Laboratoire de recherche",
+  institut: "Institut",
+  syndicat_mixte: "Syndicat mixte",
+  association: "Association",
+  federation: "Fédération",
+  collectivite: "Collectivité",
+} as const;

@@ -11,7 +11,7 @@ type HubspotError = {
 };
 
 const syncWithHubspot = async () => {
-  if (process.env.NODE_ENV !== "production") {
+  if (process.env.HUBSPOT_SYNC_ENV !== "true") {
     console.log("La synchronisation n'a pas aboutie : éxecution hors d'un environnement de production.");
     return;
   }
@@ -27,21 +27,18 @@ const syncWithHubspot = async () => {
     }
 
     console.log("Début de la synchronisation avec Hubspot...");
+
     const batch = await hubspotBatchSync(usersAndProjectsFromLastSync);
 
-    if (
-      batch.contactBatch.status === "COMPLETE" &&
-      batch.projectBatch.status === "COMPLETE" &&
-      batch.associationsBatch.status === "COMPLETE"
-    ) {
+    if (batch.status === "COMPLETE") {
       await saveCronJob(startedDate, new Date(), "SYNC_HUBSPOT");
       console.log("Synchronisation avec Hubspot réussie !");
+      console.log(batch.message);
       process.exit(0);
     } else {
       captureError("Erreur lors de la synchronisation avec Hubspot.", {
-        executionTime: batch.projectBatch.completedAt,
+        executionTime: new Date(),
       });
-      console.log(`Erreur lors de la synchronisation avec Hubspot du ${batch.projectBatch.completedAt}`);
       process.exit(1);
     }
   } catch (error) {
