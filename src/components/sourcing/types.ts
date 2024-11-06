@@ -7,7 +7,7 @@ interface Geometry {
   coordinates: Coordinates;
 }
 
-interface AddressProperties {
+export interface AddressProperties {
   label: string;
   score: number;
   housenumber: string;

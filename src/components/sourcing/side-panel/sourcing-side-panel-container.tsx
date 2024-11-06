@@ -4,23 +4,25 @@ import { SourcingMyLocationSidePanel } from "@/src/components/sourcing/side-pane
 import { SourcingNoSelectionSidePanel } from "@/src/components/sourcing/side-panel/sourcing-no-selection-side-panel";
 import { SourcingRexSidePanelContainer } from "@/src/components/sourcing/side-panel/sourcing-rex-side-panel-container";
 // eslint-disable-next-line max-len
-import { SourcingInProgressSidePanel } from "@/src/components/sourcing/side-panel/sourcing-in-progress-projet-side-panel";
+import { SourcingInProgressSidePanelContainer } from "@/src/components/sourcing/side-panel/sourcing-in-progress-projet-side-panel-container";
 
 export const SourcingSidePanelContainer = ({ marker }: { marker: CustomMarker | undefined }) => {
   return (
-    <Conditional>
-      <Case condition={marker?.type === "in-progress"}>
-        <SourcingInProgressSidePanel projetId={marker?.idProjet!} />
-      </Case>
-      <Case condition={marker?.type === "rex"}>
-        <SourcingRexSidePanelContainer rexId={marker?.idProjet!} />
-      </Case>
-      <Case condition={marker?.type === "ma-collectivite"}>
-        <SourcingMyLocationSidePanel />
-      </Case>
-      <Default>
-        <SourcingNoSelectionSidePanel />
-      </Default>
-    </Conditional>
+    <div>
+      <Conditional>
+        <Case condition={marker?.type === "in-progress"}>
+          <SourcingInProgressSidePanelContainer projetId={marker?.idProjet!} />
+        </Case>
+        <Case condition={marker?.type === "rex"}>
+          <SourcingRexSidePanelContainer rexId={marker?.idProjet!} />
+        </Case>
+        <Case condition={marker?.type === "ma-collectivite"}>
+          <SourcingMyLocationSidePanel />
+        </Case>
+        <Default>
+          <SourcingNoSelectionSidePanel />
+        </Default>
+      </Conditional>
+    </div>
   );
 };
