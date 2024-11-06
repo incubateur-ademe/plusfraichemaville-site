@@ -33,7 +33,7 @@ export type UserWithAdminProjets = Prisma.UserGetPayload<{
 
 export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
   select: {
-    user: { select: { id: true; nom: true; prenom: true } };
+    user: { select: { id: true; nom: true; prenom: true; email: true; agentconnect_info: true } };
     created_at: true;
     role: true;
     invitation_status: true;
