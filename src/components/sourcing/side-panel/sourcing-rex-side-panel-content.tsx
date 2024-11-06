@@ -6,6 +6,7 @@ import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
 import { RetourExperienceContactType } from "@/src/lib/strapi/types/types";
 import { Case, Conditional, Default } from "../../common/conditional-renderer";
+import clsx from "clsx";
 
 export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceResponse }) => {
   const projet = data.attributes;
@@ -42,7 +43,12 @@ export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceRe
             {contacts?.map((contact, index) => <SourcingContactCard contact={contact} key={index} />)}
           </Case>
           <Default>
-            <div className="flex h-64 items-center justify-center overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey">
+            <div
+              className={clsx(
+                "flex h-64 items-center justify-center overflow-hidden",
+                "rounded-2xl border-[1px] border-dsfr-border-default-grey",
+              )}
+            >
               <div className="p-6">{"Aucun contact n'est associé à ce projet"}</div>
             </div>
           </Default>
