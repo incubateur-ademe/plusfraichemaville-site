@@ -1,3 +1,5 @@
+import { AddressProperties } from "@/src/components/sourcing/types";
+
 type Region = {
   label: string;
   code: string;
@@ -25,3 +27,7 @@ export const ALL_REGIONS: Region[] = [
 
 export const getRegionLabelFromCode = (regionCode?: string | null) =>
   regionCode ? ALL_REGIONS.find((r) => r.code === regionCode)?.label : regionCode;
+
+export const getRegionLabelFromAdresseInfo = (adresseInfo: AddressProperties | null) => {
+  return adresseInfo?.context && adresseInfo.context?.split(", ")[2];
+};
