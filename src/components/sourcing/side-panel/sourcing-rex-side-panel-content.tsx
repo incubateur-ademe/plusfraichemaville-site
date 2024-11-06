@@ -20,7 +20,7 @@ export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceRe
               height={144}
               src={getStrapiImageUrl(projet.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt=""
-              className="object-cover"
+              className="h-full object-cover"
             />
           </div>
           <div className="px-6 py-4">

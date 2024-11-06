@@ -11,8 +11,8 @@ type SourcingSidePanelContactCardProps = {
 export const SourcingSidePanelContactCard = ({ contact }: SourcingSidePanelContactCardProps) => {
   const [copySuccess, setCopySuccess] = useState<string | null>(null);
 
-  const type = contactsTypeMap[contact.type_de_contact as unknown as keyof typeof contactsTypeMap];
-  const sousType = contactsSousTypeMap[contact.sous_type_de_contact as unknown as keyof typeof contactsSousTypeMap];
+  const type = contactsTypeMap[contact.type_de_contact as keyof typeof contactsTypeMap];
+  const sousType = contactsSousTypeMap[contact.sous_type_de_contact as keyof typeof contactsSousTypeMap];
 
   const handleCopy = async (text?: string, field?: string) => {
     if (text && field) {
@@ -30,9 +30,9 @@ export const SourcingSidePanelContactCard = ({ contact }: SourcingSidePanelConta
     >
       <span
         className={clsx(
-          // eslint-disable-next-line max-len
-          "absolute -left-32 -top-6 w-36 rounded-md bg-white py-1 text-center text-xs not-italic shadow-pfmv-card-shadow",
-          " pointer-events-none transition-opacity duration-500",
+          "absolute -left-32 -top-6 w-36 rounded-md bg-white",
+          "py-1 text-center text-xs not-italic shadow-pfmv-card-shadow",
+          "pointer-events-none transition-opacity duration-500",
           copySuccess === field ? "opacity-100" : "opacity-0",
         )}
       >
