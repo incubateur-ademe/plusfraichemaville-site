@@ -2,23 +2,26 @@ import { WebinaireResponse } from "@/src/components/webinaires/types";
 import React from "react";
 import { WebinaireCard } from "@/src/components/webinaires/webinaire-card";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
+import clsx from "clsx";
 
 export const WebinairesList = ({
   id,
   webinaires,
   emptyListPlaceholder,
+  tabIndex,
 }: {
   id: string;
   webinaires: WebinaireResponse[];
   emptyListPlaceholder: string;
+  tabIndex: number;
 }) => {
   return (
     <div
       id={id}
-      className="fr-tabs__panel fr-tabs__panel--selected !px-0 md:!py-12"
+      className={clsx("fr-tabs__panel !px-0 md:!py-12", !tabIndex && "fr-tabs__panel--selected")}
       role="tabpanel"
       aria-labelledby={id}
-      tabIndex={0}
+      tabIndex={tabIndex}
     >
       <div className="bg-dsfr-background-open-blue-france p-8">
         <Conditional>
