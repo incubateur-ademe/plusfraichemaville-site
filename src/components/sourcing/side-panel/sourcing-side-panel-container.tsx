@@ -8,21 +8,19 @@ import { SourcingInProgressSidePanelContainer } from "@/src/components/sourcing/
 
 export const SourcingSidePanelContainer = ({ marker }: { marker: CustomMarker | undefined }) => {
   return (
-    <div>
-      <Conditional>
-        <Case condition={marker?.type === "in-progress"}>
-          <SourcingInProgressSidePanelContainer projetId={marker?.idProjet!} />
-        </Case>
-        <Case condition={marker?.type === "rex"}>
-          <SourcingRexSidePanelContainer rexId={marker?.idProjet!} />
-        </Case>
-        <Case condition={marker?.type === "ma-collectivite"}>
-          <SourcingMyLocationSidePanel />
-        </Case>
-        <Default>
-          <SourcingNoSelectionSidePanel />
-        </Default>
-      </Conditional>
-    </div>
+    <Conditional>
+      <Case condition={marker?.type === "in-progress"}>
+        <SourcingInProgressSidePanelContainer projetId={marker?.idProjet!} />
+      </Case>
+      <Case condition={marker?.type === "rex"}>
+        <SourcingRexSidePanelContainer rexId={marker?.idProjet!} />
+      </Case>
+      <Case condition={marker?.type === "ma-collectivite"}>
+        <SourcingMyLocationSidePanel />
+      </Case>
+      <Default>
+        <SourcingNoSelectionSidePanel />
+      </Default>
+    </Conditional>
   );
 };
