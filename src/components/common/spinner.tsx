@@ -8,8 +8,8 @@ type SpinnerProps = {
 
 export const Spinner = ({ className, pathColor, circleColor }: SpinnerProps) => {
   return (
-    <div className={clsx("size-8 content-center rounded-full", className)}>
-      <svg className="m-1 animate-spin text-white" fill="none" viewBox="0 0 24 24">
+    <div className={clsx("flex size-8 items-center justify-center rounded-full", className)}>
+      <svg className="m-1 w-full animate-spin text-white" fill="none" viewBox="0 0 24 24">
         <circle
           className={clsx("opacity-100", circleColor)}
           cx="12"

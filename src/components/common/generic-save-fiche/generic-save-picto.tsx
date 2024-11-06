@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 export const GenericSavePicto = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" className="scale-105 transform-gpu" viewBox="0 0 34 34">
+  <svg xmlns="http://www.w3.org/2000/svg" className="w-full scale-105 transform-gpu" viewBox="0 0 34 34">
     <defs></defs>
     <circle fill="#fff" strokeWidth={0} cx="17" cy="17" r="17" />
     <path
