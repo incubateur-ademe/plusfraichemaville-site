@@ -11,5 +11,5 @@ export const SourcingInProgressSidePanelContainer = ({ projetId }: { projetId: n
     Skeleton: SourcingInProgressProjetSkeleton,
     Content: SourcingInProgressProjetCard,
   });
-  return <div>{sidePanel}</div>;
+  return <>{sidePanel}</>;
 };

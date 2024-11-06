@@ -4,7 +4,7 @@ import { Badge } from "@codegouvfr/react-dsfr/Badge";
 
 export const SourcingInProgressProjetSkeleton = () => {
   return (
-    <div className="p-5">
+    <div>
       <div className="mb-4 text-xl font-bold text-pfmv-navy">Le projet</div>
 
       <div className={clsx("h-[17rem] w-full rounded-2xl border-[1px] border-dsfr-border-default-grey")}>

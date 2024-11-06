@@ -12,11 +12,14 @@ export const SourcingInProgressProjetCard = ({ data }: { data: ProjetWithPublicR
     (data.adresse_info as AddressProperties | null) || (data.collectivite.adresse_info as AddressProperties | null),
   );
   return (
-    <div className="p-5">
+    <div>
       <div className="mb-4 text-xl font-bold text-pfmv-navy">Le projet</div>
 
       <div
-        className={clsx("flex min-h-[17rem] w-full flex-col rounded-2xl border-[1px] border-dsfr-border-default-grey")}
+        className={clsx(
+          "flex min-h-[17rem] w-full flex-col rounded-2xl border-[1px] border-dsfr-border-default-grey",
+          "overflow-hidden",
+        )}
       >
         <div className="flex h-full grow flex-col">
           <div
