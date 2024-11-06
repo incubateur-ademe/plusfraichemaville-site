@@ -11,10 +11,10 @@ const SourcingMapContainer = ({ markers }: { markers: CustomMarker[] }) => {
 
   return (
     <div className="flex">
-      <div className="h-[715px] w-[50rem] shrink-0">
+      <div className="h-[715px] w-full max-w-[50rem]">
         <SourcingMapClient markers={markers} setSelectedMarker={setSelectedMarker} />
       </div>
-      <div className="h-[715px] w-full overflow-scroll p-5">
+      <div className="h-[715px] w-[400px] shrink-0 overflow-scroll p-5">
         <SourcingSidePanelContainer marker={selectedMarker} />
       </div>
     </div>

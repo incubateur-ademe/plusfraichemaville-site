@@ -3,8 +3,9 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { RetourExperienceResponse } from "../../ficheSolution/type";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
-import { SourcingSidePanelContactCard } from "./sourcing-side-panel-contact-card";
+import { SourcingContactCard } from "../contacts/sourcing-contact-card";
 import { RetourExperienceContactType } from "@/src/lib/strapi/types/types";
+import { Case, Conditional, Default } from "../../common/conditional-renderer";
 
 export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceResponse }) => {
   const projet = data.attributes;
@@ -13,7 +14,7 @@ export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceRe
     <>
       <div className="mb-5">
         <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Le projet</h2>
-        <div className="w-[362px] overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey">
+        <div className="overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey">
           <div className="h-36 overflow-hidden">
             <Image
               width={362}
@@ -36,7 +37,16 @@ export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceRe
       </div>
       <div>
         <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Contacts</h2>
-        {contacts?.map((contact, index) => <SourcingSidePanelContactCard contact={contact} key={index} />)}
+        <Conditional>
+          <Case condition={contacts.length > 0}>
+            {contacts?.map((contact, index) => <SourcingContactCard contact={contact} key={index} />)}
+          </Case>
+          <Default>
+            <div className="flex h-64 items-center justify-center overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey">
+              <div className="p-6">{"Aucun contact n'est associé à ce projet"}</div>
+            </div>
+          </Default>
+        </Conditional>
       </div>
     </>
   );
