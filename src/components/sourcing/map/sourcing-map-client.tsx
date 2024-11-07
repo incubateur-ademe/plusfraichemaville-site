@@ -54,7 +54,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker }: SourcingMapClientProp
           }}
         />
       )}
-      <ZoomControl position="topleft" />
+      <ZoomControl />
       <SourcingMapLegend />
       <ScaleControl position="bottomright" imperial={false} />
     </MapContainer>

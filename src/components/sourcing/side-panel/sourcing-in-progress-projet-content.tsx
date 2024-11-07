@@ -8,17 +8,20 @@ import Tag from "@codegouvfr/react-dsfr/Tag";
 import { Maturite } from "@/src/components/maturite/maturite";
 import { getOldestAdmin } from "../../liste-projets/helpers";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
+import { SourcingContact } from "@/src/lib/strapi/types/types";
 
-export const SourcingInProgressProjetCard = ({ data }: { data: ProjetWithPublicRelations }) => {
+export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
   const regionLabel = getRegionLabelFromAdresseInfo(
     (data.adresse_info as AddressProperties | null) || (data.collectivite.adresse_info as AddressProperties | null),
   );
 
   const user = getOldestAdmin(data)?.user;
-  const contact = {
+  const contact: SourcingContact = {
     email: user?.email,
     // @ts-ignore
     telephone: user?.agentconnect_info?.phone_number,
+    sous_type_de_contact: "collectivite",
+    type_de_contact: "collectivite",
   };
 
   return (
@@ -61,10 +64,18 @@ export const SourcingInProgressProjetCard = ({ data }: { data: ProjetWithPublicR
         </div>
       </div>
       <div>
-        <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Contacts</h2>
-        <SourcingContactCard
-          contact={{ type_de_contact: "collectivite", sous_type_de_contact: "collectivite", ...contact }}
-        />
+        <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Contact</h2>
+        {contact.email && <SourcingContactCard contact={contact} />}
+        {!contact.email && (
+          <div
+            className={clsx(
+              "flex h-64 items-center justify-center overflow-hidden",
+              "rounded-2xl border-[1px] border-dsfr-border-default-grey",
+            )}
+          >
+            <div className="p-6">{"Aucun contact n'est associé à ce projet"}</div>
+          </div>
+        )}
       </div>
     </>
   );
