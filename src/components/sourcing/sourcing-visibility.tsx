@@ -17,7 +17,6 @@ export const SourcingVisibility = () => {
   const handleVisibility = async (event: ChangeEvent<HTMLInputElement>) => {
     if (projetId) {
       console.log(event.target.checked);
-
       const result = await updateProjetVisibilityAction(projetId, event.target.checked);
       if (result.projet) {
         addOrUpdateProjet(result.projet);
