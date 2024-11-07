@@ -6,7 +6,6 @@ import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
 import { notifications } from "../common/notifications";
 import Image from "next/image";
 import clsx from "clsx";
-import { ChangeEvent } from "react";
 
 export const SourcingVisibility = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -14,10 +13,9 @@ export const SourcingVisibility = () => {
   const projetId = useProjetsStore((state) => state.getCurrentProjet())?.id;
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
 
-  const handleVisibility = async (event: ChangeEvent<HTMLInputElement>) => {
+  const handleVisibility = async (checked: boolean) => {
     if (projetId) {
-      console.log(event.target.checked);
-      const result = await updateProjetVisibilityAction(projetId, event.target.checked);
+      const result = await updateProjetVisibilityAction(projetId, checked);
       if (result.projet) {
         addOrUpdateProjet(result.projet);
       }
@@ -28,23 +26,12 @@ export const SourcingVisibility = () => {
   return (
     <div className="rounded-[20px] bg-dsfr-background-default-grey-hover px-8 py-6">
       {currentProjet ? (
-        <p
-          className={clsx(
-            "fr-badge fr-badge--sm fr-badge--no-icon mb-2",
-            isPublic ? "fr-badge--success" : "fr-badge--error",
-          )}
-        >
-          <Image
-            src="/images/sourcing/sourcing-label-collectivite.svg"
-            className="mr-1"
-            width={16}
-            height={16}
-            alt=""
-          />
+        <p className={clsx("fr-badge fr-badge--sm fr-badge--no-icon mb-2", isPublic && "fr-badge--success")}>
+          <Image src="/images/sourcing/sourcing-france-visible.svg" className="mr-1" width={11} height={11} alt="" />
           {isPublic ? "Visible" : "Masqué"} {"sur l'annuaire des projets"}
         </p>
       ) : (
-        <div className="mb-3 h-6 w-52 animate-pulse rounded bg-dsfr-contrast-grey"></div>
+        <div className="mb-2 h-[1.3575rem] w-[265px] animate-pulse rounded bg-dsfr-contrast-grey"></div>
       )}
 
       <div className="flex items-center justify-between">
