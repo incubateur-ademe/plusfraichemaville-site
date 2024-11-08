@@ -37,6 +37,14 @@ export type CustomMarker = {
   idProjet?: number;
 };
 
+export type SourcingContact = {
+  type_de_contact: GetValues<"retour-experience.contact">["type_de_contact"];
+  sous_type_de_contact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
+  label?: string;
+  telephone?: string;
+  email?: string;
+};
+
 export type SourcingContactTypeMap = {
   code:
     | GetValues<"retour-experience.contact">["sous_type_de_contact"]

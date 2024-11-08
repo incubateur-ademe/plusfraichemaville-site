@@ -4,9 +4,9 @@ import Badge from "@codegouvfr/react-dsfr/Badge";
 import { RetourExperienceResponse } from "../../ficheSolution/type";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
-import { SourcingContact } from "@/src/lib/strapi/types/types";
 import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
+import { SourcingContact } from "@/src/components/sourcing/types";
 
 export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
   const projet = data.attributes;

@@ -1,13 +1,13 @@
 import { getSourcingContactTypeLabel } from "../helpers";
 import Image from "next/image";
-import { SourcingContact } from "@/src/lib/strapi/types/types";
 import { CopyField } from "../../common/copy-field";
+import { SourcingContact } from "@/src/components/sourcing/types";
 
-type SourcingSidePanelContactCardProps = {
+type SourcingContactCardProps = {
   contact: SourcingContact;
 };
 
-export const SourcingContactCard = ({ contact }: SourcingSidePanelContactCardProps) => {
+export const SourcingContactCard = ({ contact }: SourcingContactCardProps) => {
   const type = getSourcingContactTypeLabel(contact.type_de_contact, false);
   const sousType = getSourcingContactTypeLabel(contact.sous_type_de_contact, true);
 

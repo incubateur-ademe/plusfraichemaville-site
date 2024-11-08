@@ -1,4 +1,3 @@
-import { SourcingContactTypeMap } from "@/src/components/sourcing/types";
 import type { Attribute, Common, Utils } from "@strapi/strapi";
 
 type IDProperty = { id: number };
@@ -114,13 +113,3 @@ export interface APIResponseCollection<TContentTypeUID extends Common.UID.Conten
   data: APIResponseData<TContentTypeUID>[];
   meta: APIResponseCollectionMetadata;
 }
-
-export type RetourExperienceContactType = GetValues<"retour-experience.contact">;
-
-export type SourcingContact = {
-  sous_type_de_contact: SourcingContactTypeMap["code"];
-  type_de_contact: SourcingContactTypeMap["code"];
-  label?: string;
-  telephone?: string;
-  email?: string;
-};

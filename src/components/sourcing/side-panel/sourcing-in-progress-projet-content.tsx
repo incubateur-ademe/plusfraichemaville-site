@@ -3,12 +3,11 @@ import Image from "next/image";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { getRegionLabelFromAdresseInfo } from "@/src/helpers/regions";
-import { AddressProperties } from "@/src/components/sourcing/types";
+import { AddressProperties, SourcingContact } from "@/src/components/sourcing/types";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { Maturite } from "@/src/components/maturite/maturite";
 import { getOldestAdmin } from "../../liste-projets/helpers";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
-import { SourcingContact } from "@/src/lib/strapi/types/types";
 
 export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
   const regionLabel = getRegionLabelFromAdresseInfo(
@@ -65,17 +64,7 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
       </div>
       <div>
         <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Contact</h2>
-        {contact.email && <SourcingContactCard contact={contact} />}
-        {!contact.email && (
-          <div
-            className={clsx(
-              "flex h-64 items-center justify-center overflow-hidden",
-              "rounded-2xl border-[1px] border-dsfr-border-default-grey",
-            )}
-          >
-            <div className="p-6">{"Aucun contact n'est associé à ce projet"}</div>
-          </div>
-        )}
+        <SourcingContactCard contact={contact} />
       </div>
     </>
   );
