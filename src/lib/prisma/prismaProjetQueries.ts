@@ -1,8 +1,9 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
-import { ProjetWithPublicRelations, ProjetWithRelations, RexContactId } from "./prismaCustomTypes";
+import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
+import { RexContactId } from "@/src/components/sourcing/types";
 
 export const projetIncludes = {
   collectivite: true,
