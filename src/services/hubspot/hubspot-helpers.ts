@@ -6,6 +6,7 @@ import {
   SimplePublicObjectBatchInputUpsert,
 } from "@hubspot/api-client/lib/codegen/crm/companies";
 import { hubspotClient } from ".";
+import { ALL_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 
 type HubspotPipelineDealStageKey = keyof typeof pipelineDealStage;
 
@@ -18,8 +19,12 @@ const pipelineDealStage = {
   projetAbandonne: "closedlost",
 };
 
-const formatCanalAcquisition = (canal: string | null) =>
-  canal && canal === "Démo Plus fraîche ma ville" ? "Démo Plus Fraîche Ma Ville" : canal || "";
+const formatCanalAcquisition = (canal: string | null) => {
+  if (!canal) return "";
+  const normalizedCanal = canal === "Démo Plus fraîche ma ville" ? "Démo Plus Fraîche Ma Ville" : canal;
+  const canalExists = ALL_CANAL_ACQUISITION.some((item) => item.label === normalizedCanal);
+  return canalExists ? normalizedCanal : "Autre";
+};
 
 export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObjectBatchInputUpsert[] =>
   users.map((user) => ({
