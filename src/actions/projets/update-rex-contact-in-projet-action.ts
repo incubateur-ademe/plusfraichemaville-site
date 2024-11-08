@@ -32,8 +32,9 @@ export const updateRexContactInProjetAction = async (
       (savedContact) => !isEqual(savedContact, rexContactId),
     );
     if (typeUpdate === "add") {
-      newSourcingCms = [...(projetToUpdate.sourcing_cms as RexContactId[]), rexContactId];
+      newSourcingCms = [...newSourcingCms, rexContactId];
     }
+    console.log("newSourcingCms AFTER", newSourcingCms)
     projetToUpdate = await updateSourcingCmsProjet(projetId, newSourcingCms);
 
     return { type: "success", projet: projetToUpdate };

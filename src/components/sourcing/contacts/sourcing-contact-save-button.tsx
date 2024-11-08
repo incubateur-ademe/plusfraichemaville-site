@@ -31,8 +31,9 @@ export const SourcingContactSaveButton = ({
 
   useEffect(() => {
     const projet = getProjetById(projetId);
+
     setSaved(
-      rexContactId && projet && typeContact === "rex"
+      rexContactId && projet
         ? (projet.sourcing_cms as RexContactId[]).some((savedRexContactId) => isEqual(savedRexContactId, rexContactId))
         : false,
     );
