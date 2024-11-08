@@ -1,15 +1,15 @@
-import { contactsSousTypeMap, contactsTypeMap } from "../helpers";
+import { getSourcingContactTypeLabel } from "../helpers";
 import Image from "next/image";
-import { RetourExperienceContactType } from "@/src/lib/strapi/types/types";
 import { CopyField } from "../../common/copy-field";
+import { SourcingContact } from "@/src/components/sourcing/types";
 
-type SourcingSidePanelContactCardProps = {
-  contact: RetourExperienceContactType;
+type SourcingContactCardProps = {
+  contact: SourcingContact;
 };
 
-export const SourcingContactCard = ({ contact }: SourcingSidePanelContactCardProps) => {
-  const type = contactsTypeMap[contact.type_de_contact as keyof typeof contactsTypeMap];
-  const sousType = contactsSousTypeMap[contact.sous_type_de_contact as keyof typeof contactsSousTypeMap];
+export const SourcingContactCard = ({ contact }: SourcingContactCardProps) => {
+  const type = getSourcingContactTypeLabel(contact.type_de_contact, false);
+  const sousType = getSourcingContactTypeLabel(contact.sous_type_de_contact, true);
 
   return (
     <div className="mb-4 overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey p-6">

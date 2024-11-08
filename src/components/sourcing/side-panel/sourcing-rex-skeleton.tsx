@@ -1,6 +1,6 @@
 import Badge from "@codegouvfr/react-dsfr/Badge";
 
-export const SourcingRexSidePanelSkeleton = () => {
+export const SourcingRexSkeleton = () => {
   return (
     <div>
       <div className="mb-5">

@@ -4,13 +4,14 @@ import Badge from "@codegouvfr/react-dsfr/Badge";
 import { RetourExperienceResponse } from "../../ficheSolution/type";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
-import { RetourExperienceContactType } from "@/src/lib/strapi/types/types";
 import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
+import { SourcingContact } from "@/src/components/sourcing/types";
 
-export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceResponse }) => {
+export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
   const projet = data.attributes;
-  const contacts = data.attributes.contacts as RetourExperienceContactType[];
+  const contacts = data.attributes.contacts as SourcingContact[];
+
   return (
     <>
       <div className="mb-5">
@@ -37,7 +38,7 @@ export const SourcingRexSidePanelContent = ({ data }: { data: RetourExperienceRe
         </div>
       </div>
       <div>
-        <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Contacts</h2>
+        <h2 className="mb-4 text-xl font-bold text-pfmv-navy">{contacts.length > 0 ? "Contacts" : "Contact"}</h2>
         <Conditional>
           <Case condition={contacts.length > 0}>
             {contacts?.map((contact, index) => <SourcingContactCard contact={contact} key={index} />)}

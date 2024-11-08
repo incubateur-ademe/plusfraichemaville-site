@@ -1,3 +1,4 @@
+import { GetValues } from "@/src/lib/strapi/types/types";
 import { LatLngTuple } from "leaflet";
 
 type Coordinates = [number, number];
@@ -34,4 +35,19 @@ export type CustomMarker = {
   geocode: LatLngTuple;
   type: "in-progress" | "rex" | "ma-collectivite";
   idProjet?: number;
+};
+
+export type SourcingContact = {
+  type_de_contact: GetValues<"retour-experience.contact">["type_de_contact"];
+  sous_type_de_contact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
+  label?: string;
+  telephone?: string;
+  email?: string;
+};
+
+export type SourcingContactTypeMap = {
+  code:
+    | GetValues<"retour-experience.contact">["sous_type_de_contact"]
+    | GetValues<"retour-experience.contact">["type_de_contact"];
+  label: string;
 };

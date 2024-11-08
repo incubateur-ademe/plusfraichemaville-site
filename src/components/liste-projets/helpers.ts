@@ -56,7 +56,7 @@ export const sortProjectsByInvitationStatus = (
   );
 };
 
-export const getOldestAdmin = (project: ProjetWithPublicRelations) => {
+export const getOldestAdmin = (project: ProjetWithPublicRelations): UserProjetWithPublicUser | null => {
   const oldestAdmin = project.users
     .filter(
       (userProjet) =>
@@ -68,12 +68,10 @@ export const getOldestAdmin = (project: ProjetWithPublicRelations) => {
     }, undefined);
 
   if (!oldestAdmin || !oldestAdmin.user) {
-    return { username: null };
+    return null;
   }
 
-  return {
-    username: `${oldestAdmin.user.prenom} ${oldestAdmin.user.nom}` || null,
-  };
+  return oldestAdmin;
 };
 
 export const getAllUserProjectCount = (project: ProjetWithPublicRelations) => {
