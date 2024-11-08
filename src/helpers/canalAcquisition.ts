@@ -8,7 +8,7 @@ export const CUSTOM_CANAL_ACQUISITION: CanalAcquisition = {
   label: "Autre",
 };
 
-const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
+export const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
     label: "Webinaire",
   },
