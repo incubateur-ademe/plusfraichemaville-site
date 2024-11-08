@@ -38,6 +38,8 @@ export type CustomMarker = {
 };
 
 export type SourcingContact = {
+  type: "rex" | "in-progress";
+  id: number;
   type_de_contact: GetValues<"retour-experience.contact">["type_de_contact"];
   sous_type_de_contact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
   label?: string;

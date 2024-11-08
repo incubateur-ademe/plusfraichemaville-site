@@ -1,6 +1,6 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
-import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
+import { ProjetWithPublicRelations, ProjetWithRelations, RexContactId } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 
@@ -361,5 +361,21 @@ export const getPublicProjetById = async (projetId: number): Promise<ProjetWithP
       deleted_at: null,
     },
     select: projetPublicSelect,
+  });
+};
+
+export const updateSourcingCmsProjet = (
+  projetId: number,
+  sourcingCms: RexContactId[],
+): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    data: {
+      sourcing_cms: sourcingCms,
+    },
+    include: projetIncludes,
   });
 };

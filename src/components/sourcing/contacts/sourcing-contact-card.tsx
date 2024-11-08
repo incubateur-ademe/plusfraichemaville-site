@@ -2,19 +2,23 @@ import { getSourcingContactTypeLabel } from "../helpers";
 import Image from "next/image";
 import { CopyField } from "../../common/copy-field";
 import { SourcingContact } from "@/src/components/sourcing/types";
+import { SourcingContactSaveButton } from "@/src/components/sourcing/contacts/sourcing-contact-save-button";
 
 type SourcingContactCardProps = {
   contact: SourcingContact;
+  rexId: number;
+  projetId?: number | null;
 };
 
-export const SourcingContactCard = ({ contact }: SourcingContactCardProps) => {
+export const SourcingContactCard = ({ contact, rexId, projetId }: SourcingContactCardProps) => {
+
   const type = getSourcingContactTypeLabel(contact.type_de_contact, false);
   const sousType = getSourcingContactTypeLabel(contact.sous_type_de_contact, true);
 
   return (
     <div className="mb-4 overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey p-6">
-      <div className="mb-6">
-        <p className="fr-badge fr-badge--info fr-badge--sm fr-badge--no-icon mb-2 !text-pfmv-navy">
+      <div className="mb-6 flex flex-row items-center justify-between">
+        <div className="fr-badge fr-badge--info fr-badge--sm fr-badge--no-icon !max-w-[116px] !text-pfmv-navy">
           {contact.type_de_contact === "collectivite" && (
             <Image
               src="/images/sourcing/sourcing-label-collectivite.svg"
@@ -25,7 +29,14 @@ export const SourcingContactCard = ({ contact }: SourcingContactCardProps) => {
             />
           )}
           {type}
-        </p>
+        </div>
+        {projetId && (
+          <SourcingContactSaveButton
+            rexContactId={{ rexId, contactId: contact.id }}
+            typeContact={contact.type}
+            projetId={projetId}
+          />
+        )}
       </div>
       <div>
         <h3 className="mb-1 text-lg font-bold">{sousType}</h3>
