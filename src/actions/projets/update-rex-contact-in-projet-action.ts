@@ -2,10 +2,11 @@
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { ProjetWithRelations, RexContactId } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getProjetWithRelationsById, updateSourcingCmsProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import { isEqual } from "lodash";
+import { RexContactId } from "@/src/components/sourcing/types";
 
 export const updateRexContactInProjetAction = async (
   projetId: number,
@@ -34,7 +35,6 @@ export const updateRexContactInProjetAction = async (
     if (typeUpdate === "add") {
       newSourcingCms = [...newSourcingCms, rexContactId];
     }
-    console.log("newSourcingCms AFTER", newSourcingCms)
     projetToUpdate = await updateSourcingCmsProjet(projetId, newSourcingCms);
 
     return { type: "success", projet: projetToUpdate };

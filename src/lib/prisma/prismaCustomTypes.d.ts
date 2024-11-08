@@ -97,5 +97,3 @@ export type ProjectionsIndicateurClimadiag = {
   2050: ClimadiagTemperatureProjection;
   2100: ClimadiagTemperatureProjection;
 };
-
-export type RexContactId = { rexId: number; contactId: number };

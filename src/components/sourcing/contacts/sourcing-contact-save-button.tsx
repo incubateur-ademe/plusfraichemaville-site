@@ -2,28 +2,21 @@ import { selectSavedOrUnsavedAssets } from "@/src/components/common/generic-save
 import { GenericSaveButtonElement } from "@/src/components/common/generic-save-fiche/generic-save-button-element";
 import { notifications } from "@/src/components/common/notifications";
 import { Spinner } from "@/src/components/common/spinner";
-import { RexContactId } from "@/src/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 import { isEqual } from "lodash";
 import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
 import { updateRexContactInProjetAction } from "@/src/actions/projets/update-rex-contact-in-projet-action";
 import { useEffect, useState } from "react";
+import { RexContactId, SourcingContact } from "@/src/components/sourcing/types";
 
 type SourcingContactSaveButtonProps = {
-  typeContact: "rex" | "in-progress";
   projetId: number;
-  contactProjetId?: number;
-  rexContactId?: RexContactId;
+  contact: SourcingContact;
   className?: string;
 };
 
-export const SourcingContactSaveButton = ({
-  typeContact,
-  projetId,
-  rexContactId,
-  className,
-}: SourcingContactSaveButtonProps) => {
+export const SourcingContactSaveButton = ({ projetId, contact, className }: SourcingContactSaveButtonProps) => {
   const [isSaved, setSaved] = useState(false);
   const { isLoading, startLoading, stopLoading } = useDelayedLoading(200);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -32,21 +25,28 @@ export const SourcingContactSaveButton = ({
   useEffect(() => {
     const projet = getProjetById(projetId);
 
-    setSaved(
-      rexContactId && projet
-        ? (projet.sourcing_cms as RexContactId[]).some((savedRexContactId) => isEqual(savedRexContactId, rexContactId))
-        : false,
-    );
-  }, [getProjetById, projetId, rexContactId, typeContact]);
+    if (contact.type === "rex" && projet) {
+      setSaved(
+        (projet.sourcing_cms as RexContactId[]).some((savedRexContactId) =>
+          isEqual(savedRexContactId, {
+            rexId: contact.id.rexId,
+            contactId: contact.id.contactId,
+          }),
+        ),
+      );
+    } else {
+      setSaved(false);
+    }
+  }, [contact, getProjetById, projetId]);
 
   const assets = selectSavedOrUnsavedAssets(isSaved, "common");
 
   const updater = {
     delete: {
-      action: () => updateRexContactInProjetAction(projetId, rexContactId!, "delete"),
+      action: () => contact.type === "rex" && updateRexContactInProjetAction(projetId, contact.id, "delete"),
     },
     add: {
-      action: () => updateRexContactInProjetAction(projetId, rexContactId!, "add"),
+      action: () => contact.type === "rex" && updateRexContactInProjetAction(projetId, contact.id, "add"),
     },
   };
 
@@ -55,12 +55,12 @@ export const SourcingContactSaveButton = ({
 
     const result = isSaved ? await updater.delete.action() : await updater.add.action();
 
-    if (result?.type === "success" && result.projet) {
-      addOrUpdateProjet(result.projet);
-      setSaved(!isSaved);
-    } else {
-      notifications(result.type, result.message);
-    }
+    // if (result?.type === "success" && result.projet) {
+    //   addOrUpdateProjet(result.projet);
+    //   setSaved(!isSaved);
+    // } else {
+    //   notifications(result.type, result.message);
+    // }
     stopLoading();
   };
 

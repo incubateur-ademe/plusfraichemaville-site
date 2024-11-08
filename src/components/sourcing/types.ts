@@ -37,15 +37,17 @@ export type CustomMarker = {
   idProjet?: number;
 };
 
+export type StrapiSourcingContact = GetValues<"retour-experience.contact"> & { id: number };
+
+export type RexContactId = { rexId: number; contactId: number };
+
 export type SourcingContact = {
-  type: "rex" | "in-progress";
-  id: number;
-  type_de_contact: GetValues<"retour-experience.contact">["type_de_contact"];
-  sous_type_de_contact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
+  typeContact: GetValues<"retour-experience.contact">["type_de_contact"];
+  sousTypeContact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
   label?: string;
   telephone?: string;
   email?: string;
-};
+} & ({ type: "rex"; id: RexContactId } | { type: "in-progress"; projetId: number });
 
 export type SourcingContactTypeMap = {
   code:

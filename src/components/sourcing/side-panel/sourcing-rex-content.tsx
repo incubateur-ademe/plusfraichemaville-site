@@ -6,15 +6,16 @@ import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
 import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
-import { SourcingContact } from "@/src/components/sourcing/types";
+import { StrapiSourcingContact } from "@/src/components/sourcing/types";
 import { useProjetsStore } from "@/src/stores/projets/provider";
+import { strapiContactToDbContact } from "@/src/components/sourcing/helpers";
 
 export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
-
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const retourExperienceAttributes = data.attributes;
-  //TODO Faire une map
-  const contacts = data.attributes.contacts as unknown as SourcingContact[];
+  const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>
+    strapiContactToDbContact(contact, data.id),
+  );
   return (
     <>
       <div className="mb-5">
@@ -45,7 +46,7 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
         <Conditional>
           <Case condition={contacts.length > 0}>
             {contacts?.map((contact, index) => (
-              <SourcingContactCard contact={contact} key={index} projetId={currentProjetId} rexId={data.id} />
+              <SourcingContactCard contact={contact} key={index} projetId={currentProjetId} />
             ))}
           </Case>
           <Default>

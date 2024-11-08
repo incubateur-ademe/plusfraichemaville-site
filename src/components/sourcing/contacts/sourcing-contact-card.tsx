@@ -6,20 +6,18 @@ import { SourcingContactSaveButton } from "@/src/components/sourcing/contacts/so
 
 type SourcingContactCardProps = {
   contact: SourcingContact;
-  rexId: number;
   projetId?: number | null;
 };
 
-export const SourcingContactCard = ({ contact, rexId, projetId }: SourcingContactCardProps) => {
-
-  const type = getSourcingContactTypeLabel(contact.type_de_contact, false);
-  const sousType = getSourcingContactTypeLabel(contact.sous_type_de_contact, true);
+export const SourcingContactCard = ({ contact, projetId }: SourcingContactCardProps) => {
+  const type = getSourcingContactTypeLabel(contact.typeContact, false);
+  const sousType = getSourcingContactTypeLabel(contact.sousTypeContact, true);
 
   return (
     <div className="mb-4 overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey p-6">
       <div className="mb-6 flex flex-row items-center justify-between">
         <div className="fr-badge fr-badge--info fr-badge--sm fr-badge--no-icon !max-w-[116px] !text-pfmv-navy">
-          {contact.type_de_contact === "collectivite" && (
+          {contact.typeContact === "collectivite" && (
             <Image
               src="/images/sourcing/sourcing-label-collectivite.svg"
               className="mr-1"
@@ -30,13 +28,7 @@ export const SourcingContactCard = ({ contact, rexId, projetId }: SourcingContac
           )}
           {type}
         </div>
-        {projetId && (
-          <SourcingContactSaveButton
-            rexContactId={{ rexId, contactId: contact.id }}
-            typeContact={contact.type}
-            projetId={projetId}
-          />
-        )}
+        {projetId && <SourcingContactSaveButton contact={contact} projetId={projetId} />}
       </div>
       <div>
         <h3 className="mb-1 text-lg font-bold">{sousType}</h3>
