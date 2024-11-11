@@ -47,7 +47,7 @@ export type SourcingContact = {
   label?: string;
   telephone?: string;
   email?: string;
-} & ({ type: "rex"; id: RexContactId } | { type: "in-progress"; projetId: number });
+} & ({ type: "rex"; id: RexContactId } | { type: "in-progress"; userProjetId: number });
 
 export type SourcingContactTypeMap = {
   code:

@@ -20,6 +20,7 @@ export const projetIncludes = {
     where: { deleted_at: null },
     include: { user: true },
   },
+  sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
 export const projetPublicSelect = {
@@ -32,6 +33,7 @@ export const projetPublicSelect = {
   adresse_info: true,
   users: {
     select: {
+      id: true,
       user: { select: { id: true, nom: true, prenom: true, email: true, agentconnect_info: true } },
       created_at: true,
       role: true,
@@ -40,6 +42,7 @@ export const projetPublicSelect = {
       nb_views: true,
     },
   },
+  sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
 export const updateFichesProjet = async (

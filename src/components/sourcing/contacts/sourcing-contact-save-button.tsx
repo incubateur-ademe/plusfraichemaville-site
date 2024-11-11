@@ -9,6 +9,7 @@ import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
 import { updateRexContactInProjetAction } from "@/src/actions/projets/update-rex-contact-in-projet-action";
 import { useEffect, useState } from "react";
 import { RexContactId, SourcingContact } from "@/src/components/sourcing/types";
+import { updateUserContactInProjetAction } from "@/src/actions/projets/update-user-contact-in-projet-action";
 
 type SourcingContactSaveButtonProps = {
   projetId: number;
@@ -34,8 +35,12 @@ export const SourcingContactSaveButton = ({ projetId, contact, className }: Sour
           }),
         ),
       );
-    } else {
-      setSaved(false);
+    } else if (contact.type === "in-progress") {
+      setSaved(
+        projet?.sourcing_user_projets.some(
+          (savedUserProjet) => savedUserProjet.sourced_user_projet.id === contact.userProjetId,
+        ) || false,
+      );
     }
   }, [contact, getProjetById, projetId]);
 
@@ -43,10 +48,16 @@ export const SourcingContactSaveButton = ({ projetId, contact, className }: Sour
 
   const updater = {
     delete: {
-      action: () => contact.type === "rex" && updateRexContactInProjetAction(projetId, contact.id, "delete"),
+      action: () =>
+        contact.type === "rex"
+          ? updateRexContactInProjetAction(projetId, contact.id, "delete")
+          : updateUserContactInProjetAction(projetId, contact.userProjetId, "delete"),
     },
     add: {
-      action: () => contact.type === "rex" && updateRexContactInProjetAction(projetId, contact.id, "add"),
+      action: () =>
+        contact.type === "rex"
+          ? updateRexContactInProjetAction(projetId, contact.id, "add")
+          : updateUserContactInProjetAction(projetId, contact.userProjetId, "add"),
     },
   };
 
@@ -55,12 +66,12 @@ export const SourcingContactSaveButton = ({ projetId, contact, className }: Sour
 
     const result = isSaved ? await updater.delete.action() : await updater.add.action();
 
-    // if (result?.type === "success" && result.projet) {
-    //   addOrUpdateProjet(result.projet);
-    //   setSaved(!isSaved);
-    // } else {
-    //   notifications(result.type, result.message);
-    // }
+    if (result.type === "success" && result.projet) {
+      addOrUpdateProjet(result.projet);
+      setSaved(!isSaved);
+    } else {
+      notifications(result.type, result.message);
+    }
     stopLoading();
   };
 
