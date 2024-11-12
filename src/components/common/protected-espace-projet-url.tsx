@@ -4,9 +4,11 @@ import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useRouter } from "next/navigation";
 import { PropsWithChildren } from "react";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 
 export const ProtectedEspaceProjetUrl = ({ children }: PropsWithChildren) => {
-  const isLecteur = useIsLecteur();
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  const isLecteur = useIsLecteur(currentProjet?.id);
   const { back, push } = useRouter();
 
   if (isLecteur) {

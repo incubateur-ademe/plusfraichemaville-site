@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CopyField } from "../../common/copy-field";
 import { SourcingContact } from "@/src/components/sourcing/types";
 import { SourcingContactSaveButton } from "@/src/components/sourcing/contacts/sourcing-contact-save-button";
+import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 
 type SourcingContactCardProps = {
   contact: SourcingContact;
@@ -12,6 +13,8 @@ type SourcingContactCardProps = {
 export const SourcingContactCard = ({ contact, projetId }: SourcingContactCardProps) => {
   const type = getSourcingContactTypeLabel(contact.typeContact, false);
   const sousType = getSourcingContactTypeLabel(contact.sousTypeContact, true);
+
+  const shoudDisplaySaveButton = !useIsLecteur(projetId);
 
   return (
     <div className="mb-4 overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey p-6">
@@ -28,7 +31,7 @@ export const SourcingContactCard = ({ contact, projetId }: SourcingContactCardPr
           )}
           {type}
         </div>
-        {projetId && <SourcingContactSaveButton contact={contact} projetId={projetId} />}
+        {projetId && shoudDisplaySaveButton && <SourcingContactSaveButton contact={contact} projetId={projetId} />}
       </div>
       <div>
         <h3 className="mb-1 text-lg font-bold">{sousType}</h3>
