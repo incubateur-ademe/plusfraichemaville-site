@@ -84,7 +84,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     ),
   },
   {
-    title: "Je lance la mise en œuvre",
+    title: "Annuaire des projets Plus fraîche ma ville",
     index: 6,
     progress: "0",
     disabled: true,
@@ -92,7 +92,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     picto: <PictoTableauDeBordSelector pictoId="lancement" className="w-20" />,
     children: (
       <TableauDeBordSuiviWithText>
-        Rédiger un cahier des charges et chercher les bons prestataires pour réaliser le projet
+        {"Contacter des partenaires : bureaux d'étude, AMO, agents de collectivités"}
       </TableauDeBordSuiviWithText>
     ),
   },
