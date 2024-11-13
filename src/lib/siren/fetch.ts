@@ -37,8 +37,7 @@ export const fetchEntrepriseFromSirenApi = async (siret: string) => {
   const token = await tokenFetch();
   try {
     const response = await fetch(
-      `https://api.insee.fr/entreprises/sirene/siret/${siret}?` +
-        `champs=codePostalEtablissement,codeCommuneEtablissement`,
+      `https://api.insee.fr/entreprises/sirene/siret/${siret}`,
       {
         method: "GET",
         headers: {

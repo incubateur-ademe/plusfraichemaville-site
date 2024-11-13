@@ -34,7 +34,7 @@ export const projetPublicSelect = {
   users: {
     select: {
       id: true,
-      user: { select: { id: true, nom: true, prenom: true, email: true, agentconnect_info: true, poste: true } },
+      user: { select: { id: true, nom: true, prenom: true, email: true, poste: true, nom_etablissement: true } },
       created_at: true,
       role: true,
       invitation_status: true,

@@ -23,5 +23,6 @@ export interface IApiSirenQueryToken extends IApiSirenQuery {
 export interface IApiSirenQueryTypes extends IApiSirenQuery {
   etablissement?: {
     adresseEtablissement: { codePostalEtablissement: string | null; codeCommuneEtablissement: string | null };
+    uniteLegale?: { denominationUniteLegale?: string };
   };
 }

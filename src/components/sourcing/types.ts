@@ -52,7 +52,7 @@ export type SourcingContact = {
       id: RexContactId;
       sousTypeContact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
     }
-  | { type: "in-progress"; userProjetId: number; nomCollectivite: string; poste?: string | null }
+  | { type: "in-progress"; userProjetId: number; nomCollectivite?: string | null; poste?: string | null }
 );
 
 export type SourcingContactTypeMap = {
