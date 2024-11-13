@@ -19,7 +19,7 @@ export const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
     label: "Mail",
   },
   {
-    label: "Appel d’un chargé de déploiement",
+    label: "Appel d'un chargé de déploiement",
   },
   {
     label: "Salon, événement local",
