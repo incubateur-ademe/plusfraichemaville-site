@@ -87,7 +87,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     title: "Annuaire des projets Plus fraîche ma ville",
     index: 6,
     progress: (projet: ProjetWithRelations | undefined) =>
-      (((projet?.sourcing_user_projets?.length || 0) > 0) || (projet?.sourcing_cms.length || 0) > 0)  ? "100" : "0",
+      (projet?.sourcing_user_projets?.length || 0) > 0 || (projet?.sourcing_cms.length || 0) > 0 ? "100" : "0",
     disabled: false,
     type: "sourcing",
     picto: <PictoTableauDeBordSelector pictoId="sourcing" className="w-20" />,
