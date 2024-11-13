@@ -30,6 +30,7 @@ export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite
       email: user.email,
       poste: user.poste ?? "",
       collectivite: mapDBCollectiviteToCollectiviteAddress(userCollectivite?.collectivite) ?? undefined,
+      nomEtablissement: user.nom_etablissement ?? "",
       canalAcquisition: user.canal_acquisition ?? "",
       customCanalAcquisition: user.canal_acquisition ?? "",
     },
@@ -60,7 +61,14 @@ export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite
         asterisk={true}
         disabled={!!userCollectivite}
       />
-      <InputFormField control={form.control} path="poste" label="Mon poste dans la collectivité" asterisk={true} />
+      <InputFormField
+        control={form.control}
+        path={"nomEtablissement"}
+        label="Etablissement auquel je suis rattaché"
+        asterisk={true}
+        disabled={!!user.nom_etablissement}
+      />
+      <InputFormField control={form.control} path="poste" label="Mon poste dans l'établissement" asterisk={true} />
       {!user.canal_acquisition && (
         <>
           <SelectFormField

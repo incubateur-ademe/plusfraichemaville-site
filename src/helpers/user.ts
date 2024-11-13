@@ -1,6 +1,6 @@
 import { UserInfos } from "@/src/stores/user/store";
 import { UserPublicInfos, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
-import { collectivite, User } from "@prisma/client";
+import { collectivite } from "@prisma/client";
 import { capitalize } from "lodash";
 
 export const hasAllRequiredFieldsSet = (user: UserInfos) =>

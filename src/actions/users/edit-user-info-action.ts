@@ -52,6 +52,7 @@ export const editUserInfoAction = async (
         userPoste: data.poste,
         collectiviteId: collectiviteId,
         canalAcquisition: canalAcquisition,
+        nomEtablissement: data.nomEtablissement
       });
 
       revalidatePath(PFMV_ROUTES.MON_PROFIL);

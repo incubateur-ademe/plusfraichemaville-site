@@ -34,7 +34,16 @@ export type UserWithAdminProjets = Prisma.UserGetPayload<{
 export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
   select: {
     id;
-    user: { select: { id: true; nom: true; prenom: true; email: true; agentconnect_info: true; poste: true } };
+    user: {
+      select: {
+        id: true;
+        nom: true;
+        prenom: true;
+        email: true;
+        poste: true;
+        nom_etablissement: true;
+      };
+    };
     created_at: true;
     role: true;
     invitation_status: true;
@@ -44,7 +53,14 @@ export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
 }>;
 
 export type UserPublicInfos = Prisma.UserGetPayload<{
-  select: { id: true; nom: true; prenom: true; email: true; agentconnect_info: true; poste: true };
+  select: {
+    id: true;
+    nom: true;
+    prenom: true;
+    email: true;
+    poste: true;
+    nom_etablissement: true;
+  };
 }>;
 
 export type UserProjetWithRelations = Prisma.user_projetGetPayload<{

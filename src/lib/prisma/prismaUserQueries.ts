@@ -9,7 +9,8 @@ import {
 } from "@/src/components/common/generic-save-fiche/helpers";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
-import { User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
+import { IApiSirenQueryTypes } from "@/src/lib/siren/types";
 
 export const saveAllFichesFromLocalStorage = async (
   userId: string,
@@ -124,6 +125,7 @@ export const updateUser = async ({
   userPoste,
   collectiviteId,
   canalAcquisition,
+  nomEtablissement,
 }: {
   userId: string;
   userNom: string;
@@ -131,6 +133,7 @@ export const updateUser = async ({
   userPoste: string;
   collectiviteId: number;
   canalAcquisition?: string;
+  nomEtablissement?: string;
 }): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.update({
     where: {
@@ -148,6 +151,7 @@ export const updateUser = async ({
         },
       },
       canal_acquisition: canalAcquisition,
+      nom_etablissement: nomEtablissement,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
@@ -163,6 +167,23 @@ export const updateUserDiscardedInformation = async (
     },
     data: {
       discardedInformation: updatedModalIds,
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};
+
+export const updateUserEtablissementInfo = async (
+  userId: string,
+  nomEtablissement?: string,
+  etablissementInfo?: IApiSirenQueryTypes["etablissement"],
+): Promise<UserWithCollectivite | null> => {
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      nom_etablissement: nomEtablissement,
+      siren_info: etablissementInfo as Prisma.JsonObject,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });

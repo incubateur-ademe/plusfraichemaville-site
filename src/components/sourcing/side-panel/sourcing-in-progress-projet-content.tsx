@@ -24,9 +24,7 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
         typeContact: "collectivite",
         email: user?.user?.email,
         poste: user?.user?.poste,
-        nomCollectivite: "Collectivité",
-        // @ts-ignore
-        telephone: user?.agentconnect_info?.phone_number,
+        nomCollectivite: user?.user?.nom_etablissement,
         label: user.user ? prettyUserName(user.user) : "",
       }
     : null;
