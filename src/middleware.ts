@@ -22,7 +22,7 @@ const cspHeader = `
     frame-ancestors 'none';
     upgrade-insecure-requests;
     connect-src 'self' https://sentry.incubateur.net/ https://stats.beta.gouv.fr/matomo.php
-     https://api-adresse.data.gouv.fr/search/ https://js-eu1.hs-scripts.com https://*.hubspot.com
+     https://api-adresse.data.gouv.fr/search/ https://js-eu1.hs-scripts.com
      https://forms-eu1.hscollectedforms.net/collected-forms/v1/config/json;
 `;
 const cspHeaderValue = cspHeader.replace(/\s{2,}/g, " ").trim();
