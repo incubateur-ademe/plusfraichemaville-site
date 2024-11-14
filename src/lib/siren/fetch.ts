@@ -36,16 +36,13 @@ const tokenFetch = async (): Promise<IApiSirenQueryToken | null> => {
 export const fetchEntrepriseFromSirenApi = async (siret: string) => {
   const token = await tokenFetch();
   try {
-    const response = await fetch(
-      `https://api.insee.fr/entreprises/sirene/siret/${siret}`,
-      {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          Authorization: `Bearer ${token?.access_token}`,
-        },
+    const response = await fetch(`https://api.insee.fr/entreprises/sirene/siret/${siret}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        Authorization: `Bearer ${token?.access_token}`,
       },
-    );
+    });
 
     const result = (await response.json()) as IApiSirenQueryTypes;
 
