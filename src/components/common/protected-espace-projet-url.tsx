@@ -11,7 +11,7 @@ export const ProtectedEspaceProjetUrl = ({ children }: PropsWithChildren) => {
   const isLecteur = useIsLecteur(currentProjet?.id);
   const { back, push } = useRouter();
 
-  if (isLecteur) {
+  if (!currentProjet || isLecteur) {
     return (
       <div className="fr-container pt-8">
         <h1 className="text-xl">{"Vous n'êtes pas autorisé à consulter cette page."}</h1>

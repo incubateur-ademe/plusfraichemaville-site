@@ -5,7 +5,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getProjetWithRelationsById, updateSourcingCmsProjet } from "@/src/lib/prisma/prismaProjetQueries";
-import { isEqual } from "lodash";
+import isEqual from "lodash/isEqual";
 import { RexContactId } from "@/src/components/sourcing/types";
 
 export const updateRexContactInProjetAction = async (
