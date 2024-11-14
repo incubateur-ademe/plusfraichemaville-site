@@ -54,6 +54,7 @@ export const hubspotBatchSync = async (
     const contactBatch = await hubspotClient.crm.contacts.batchApi.upsert({
       inputs: contactProperties,
     });
+
     allContactResults.push(contactBatch);
     const contactIds = await getHubspotUsersFromAdminProjets(batchUsers);
 
@@ -110,8 +111,12 @@ export const hubspotBatchSync = async (
     );
   }
 
+  const totalContacts = allContactResults.reduce((acc, batch) => acc + (batch.results?.length ?? 0), 0);
+  const totalProjects = allProjectResults.reduce((acc, batch) => acc + (batch.results?.length ?? 0), 0);
+  const totalAssociations = allAssociationResults.reduce((acc, batch) => acc + (batch.results?.length ?? 0), 0);
+
   // eslint-disable-next-line max-len
-  const message = `Contact(s): ${allContactResults.length} | Projet(s): ${allProjectResults.length} | Association(s): ${allAssociationResults.length}`;
+  const message = `Contact(s): ${totalContacts} | Projet(s): ${totalProjects} | Association(s): ${totalAssociations}`;
 
   return {
     status: isSuccess ? "COMPLETE" : "ERROR",
