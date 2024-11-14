@@ -8,20 +8,25 @@ import Tag from "@codegouvfr/react-dsfr/Tag";
 import { Maturite } from "@/src/components/maturite/maturite";
 import { getOldestAdmin } from "../../liste-projets/helpers";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 
 export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
+  const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const regionLabel = getRegionLabelFromAdresseInfo(
     (data.adresse_info as AddressProperties | null) || (data.collectivite.adresse_info as AddressProperties | null),
   );
-
-  const user = getOldestAdmin(data)?.user;
-  const contact: SourcingContact = {
-    email: user?.email,
-    // @ts-ignore
-    telephone: user?.agentconnect_info?.phone_number,
-    sous_type_de_contact: "collectivite",
-    type_de_contact: "collectivite",
-  };
+  const user = getOldestAdmin(data);
+  const contact: SourcingContact | null = user
+    ? {
+        type: "in-progress",
+        userProjetId: user?.id,
+        typeContact: "collectivite",
+        sousTypeContact: "collectivite",
+        email: user?.user?.email,
+        // @ts-ignore
+        telephone: user?.agentconnect_info?.phone_number,
+      }
+    : null;
 
   return (
     <>
@@ -62,10 +67,12 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
           </div>
         </div>
       </div>
-      <div>
-        <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Contact</h2>
-        <SourcingContactCard contact={contact} />
-      </div>
+      {contact && (
+        <div>
+          <h2 className="mb-4 text-xl font-bold text-pfmv-navy">Contact</h2>
+          <SourcingContactCard contact={contact} projetId={currentProjetId} />
+        </div>
+      )}
     </>
   );
 };

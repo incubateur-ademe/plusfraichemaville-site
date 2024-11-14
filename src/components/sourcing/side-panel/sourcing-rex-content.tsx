@@ -6,12 +6,16 @@ import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
 import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
-import { SourcingContact } from "@/src/components/sourcing/types";
+import { StrapiSourcingContact } from "@/src/components/sourcing/types";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { strapiContactToDbContact } from "@/src/components/sourcing/helpers";
 
 export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
-  const projet = data.attributes;
-  const contacts = data.attributes.contacts as SourcingContact[];
-
+  const currentProjetId = useProjetsStore((state) => state.currentProjetId);
+  const retourExperienceAttributes = data.attributes;
+  const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>
+    strapiContactToDbContact(contact, data.id),
+  );
   return (
     <>
       <div className="mb-5">
@@ -21,7 +25,7 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
             <Image
               width={362}
               height={144}
-              src={getStrapiImageUrl(projet.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+              src={getStrapiImageUrl(retourExperienceAttributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt=""
               className="h-full object-cover"
             />
@@ -30,9 +34,9 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
             <Badge small noIcon severity="success" className="mb-2">
               Projet réalisé
             </Badge>
-            <h3 className="mb-4 text-lg font-bold">{projet.titre}</h3>
+            <h3 className="mb-4 text-lg font-bold">{retourExperienceAttributes.titre}</h3>
             <div className="w-fit rounded-xl bg-dsfr-contrast-grey px-2 py-[2px] text-xs">
-              {getRegionLabelFromCode(projet.region?.data.attributes.code)}
+              {getRegionLabelFromCode(retourExperienceAttributes.region?.data.attributes.code)}
             </div>
           </div>
         </div>
@@ -41,7 +45,9 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
         <h2 className="mb-4 text-xl font-bold text-pfmv-navy">{contacts.length > 0 ? "Contacts" : "Contact"}</h2>
         <Conditional>
           <Case condition={contacts.length > 0}>
-            {contacts?.map((contact, index) => <SourcingContactCard contact={contact} key={index} />)}
+            {contacts?.map((contact, index) => (
+              <SourcingContactCard contact={contact} key={index} projetId={currentProjetId} />
+            ))}
           </Case>
           <Default>
             <div

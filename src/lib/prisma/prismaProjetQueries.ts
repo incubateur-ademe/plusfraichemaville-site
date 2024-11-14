@@ -3,6 +3,7 @@ import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@pris
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
+import { RexContactId } from "@/src/components/sourcing/types";
 
 export const projetIncludes = {
   collectivite: true,
@@ -19,6 +20,7 @@ export const projetIncludes = {
     where: { deleted_at: null },
     include: { user: true },
   },
+  sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
 export const projetPublicSelect = {
@@ -31,6 +33,7 @@ export const projetPublicSelect = {
   adresse_info: true,
   users: {
     select: {
+      id: true,
       user: { select: { id: true, nom: true, prenom: true, email: true, agentconnect_info: true } },
       created_at: true,
       role: true,
@@ -39,6 +42,7 @@ export const projetPublicSelect = {
       nb_views: true,
     },
   },
+  sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
 export const updateFichesProjet = async (
@@ -361,5 +365,21 @@ export const getPublicProjetById = async (projetId: number): Promise<ProjetWithP
       deleted_at: null,
     },
     select: projetPublicSelect,
+  });
+};
+
+export const updateSourcingCmsProjet = (
+  projetId: number,
+  sourcingCms: RexContactId[],
+): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    data: {
+      sourcing_cms: sourcingCms,
+    },
+    include: projetIncludes,
   });
 };

@@ -1,7 +1,7 @@
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { LatLngTuple } from "leaflet";
 import { SourcingMapClientProps } from "./map/sourcing-map-client";
-import { CustomMarker, GeoJsonAdresse, SourcingContactTypeMap } from "./types";
+import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, StrapiSourcingContact } from "./types";
 import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 
@@ -71,4 +71,16 @@ export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"]
   const map = isSousType ? contactsSousTypeMap : contactsTypeMap;
   const contactType = map.find((item) => item.code === code);
   return contactType?.label;
+};
+
+export const strapiContactToDbContact = (strapiContact: StrapiSourcingContact, rexId: number): SourcingContact => {
+  return {
+    type: "rex",
+    id: { rexId, contactId: strapiContact.id },
+    label: strapiContact.label,
+    email: strapiContact.email,
+    telephone: strapiContact.telephone,
+    sousTypeContact: strapiContact.sous_type_de_contact,
+    typeContact: strapiContact.type_de_contact,
+  };
 };

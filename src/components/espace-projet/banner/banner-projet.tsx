@@ -8,16 +8,12 @@ import clsx from "clsx";
 import { BannerProjetButtons } from "./banner-projet-buttons";
 import { Suspense } from "react";
 import { BannerProjetSkeleton } from "./banner-projet-skeleton";
-import { getCurrentUserRole } from "@/src/components/partage/helpers";
-import { useUserStore } from "@/src/stores/user/provider";
 import { LecteurModeLabel } from "@/src/components/common/lecteur-mode-label";
-import { RoleProjet } from "@prisma/client";
+import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 
 export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const isLecteur =
-    (currentProjet && getCurrentUserRole(currentProjet.users, currentUserId) !== RoleProjet.ADMIN) ?? false;
+  const isLecteur = useIsLecteur(currentProjet?.id);
 
   return (
     <div className={`bg-dsfr-background-alt-blue-france py-4 ${className} min-h-[7rem]`}>

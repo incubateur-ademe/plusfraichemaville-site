@@ -3,12 +3,9 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useUserStore } from "@/src/stores/user/provider";
 import { RoleProjet } from "@prisma/client";
 
-export const useIsLecteur = (projetId?: number) => {
-  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const projetById = useProjetsStore((state) => (projetId ? state.getProjetById(projetId) : null));
+export const useIsLecteur = (projetId?: number | null) => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const projetById = useProjetsStore((state) => (projetId ? state.getProjetById(projetId) : null));
 
-  const selectedProjet = projetId && projetById ? projetById.users : currentProjet?.users;
-
-  return getCurrentUserRole(selectedProjet, currentUserId) !== RoleProjet.ADMIN ?? false;
+  return getCurrentUserRole(projetById?.users, currentUserId) === RoleProjet.LECTEUR ?? false;
 };
