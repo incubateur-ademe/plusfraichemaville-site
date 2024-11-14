@@ -27,6 +27,9 @@ export const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
     label: "Recherche internet",
   },
+  {
+    label: "Appel à manifestation d'intérêt (AMI)",
+  },
 ];
 
 export const canalAcquisitionUserOptions = (): SelectOption[] => {
