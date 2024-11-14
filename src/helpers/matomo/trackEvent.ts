@@ -1,4 +1,4 @@
-import { MATOMO_EVENT } from "@/src/helpers/matomo/matommo-tags";
+import { MATOMO_EVENT } from "@/src/helpers/matomo/matomo-tags";
 
 const shouldUseDevTracker = process.env.NODE_ENV !== "production";
 
