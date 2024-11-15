@@ -1,4 +1,4 @@
-const enableHubspotTracking = process.env.NODE_ENV === "production";
+const enableHubspotTracking = process.env.NEXT_PUBLIC_HUBSPOT_ENABLE_TRACKING === "true";
 
 export const trackUserWithEmail = (path: string, email?: string | null) => {
   if (email) {
