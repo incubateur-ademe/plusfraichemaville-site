@@ -9,7 +9,7 @@ import { updateMaturiteProjetAction } from "@/src/actions/projets/update-maturit
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
-import { trackEvent } from "@/src/helpers/matomo/trackEvent";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { UPDATE_MATURITE } from "@/src/helpers/matomo/matomo-tags";
 
 type MaturiteProps = {

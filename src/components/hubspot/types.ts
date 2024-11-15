@@ -20,7 +20,7 @@ export type UseHubspotProps = {
   setTrackPageView: () => void;
   setIdentity: (_email: string, _customProperties?: {}) => void;
   setTrackEvent: (_event: HubspotSetTrackEventProps) => void;
-  trackUserWithEmail: (_path: string, _email: string) => void;
+  trackUserWithEmail: (_path: string, _email?: string | null) => void;
   declineCookie: () => void;
   acceptCookie: () => void;
 };

@@ -18,7 +18,6 @@ import { GenericFichesSaverFromLocalStorage } from "@/src/components/common/gene
 import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
-import { HusbpotScript } from "../components/hubspot/script";
 import { Agent } from "@/src/components/agent-conversationnel/agent";
 
 const xtra_bold = localFont({

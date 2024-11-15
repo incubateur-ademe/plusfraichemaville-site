@@ -1,23 +1,32 @@
 "use client";
 
-import { useSession } from "next-auth/react";
-import AnalyticsPageView from "../analytics/analytics-page-view";
-import { useHubspot } from "./use-hubspot";
+import { acceptHubspotCookie, declineHubspotCookie, trackUserWithEmail } from "./track-hubspot";
+import { useUserStore } from "@/src/stores/user/provider";
+import { useEffect } from "react";
+import { sanitizeUrlForAnalyticTool } from "@/src/components/analytics/helpers";
+import { useConsent } from "@/src/components/cookie/consentManagement";
+import { usePathname, useSearchParams } from "next/navigation";
 
 export default function HubspotPageView() {
-  const service = useHubspot();
-  const email = useSession().data?.user.email;
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentUser = useUserStore((state) => state.userInfos);
+  const { finalityConsent } = useConsent();
+  const consent = finalityConsent?.hubspot;
 
-  if (!email) {
-    return null;
-  }
+  useEffect(() => {
+    if (consent) {
+      acceptHubspotCookie();
+    } else {
+      declineHubspotCookie();
+    }
+  }, [consent]);
 
-  return (
-    <AnalyticsPageView
-      service="hubspot"
-      acceptCookie={service.acceptCookie}
-      declineCookie={service.declineCookie}
-      tracker={(path) => service.trackUserWithEmail(path, email)}
-    />
-  );
+  useEffect(() => {
+    if (consent) {
+      const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
+      const sanitizedUrl = sanitizeUrlForAnalyticTool(url);
+      trackUserWithEmail(sanitizedUrl, currentUser?.email);
+    }
+  }, [consent, currentUser?.email, pathname, searchParams]);
 }
