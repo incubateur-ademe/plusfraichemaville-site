@@ -71,7 +71,22 @@ export type UserProjetWithRelations = Prisma.user_projetGetPayload<{
 }>;
 
 export type ProjetSourcingContact = Prisma.projet_sourcing_contactGetPayload<{
-  include: { sourced_user_projet: { include: { user: true } } };
+  include: {
+    sourced_user_projet: {
+      include: {
+        user: {
+          select: {
+            id: true;
+            nom: true;
+            prenom: true;
+            email: true;
+            poste: true;
+            nom_etablissement: true;
+          };
+        };
+      };
+    };
+  };
 }>;
 
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];

@@ -20,7 +20,24 @@ export const projetIncludes = {
     where: { deleted_at: null },
     include: { user: true },
   },
-  sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
+  sourcing_user_projets: {
+    include: {
+      sourced_user_projet: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              nom: true,
+              prenom: true,
+              email: true,
+              poste: true,
+              nom_etablissement: true,
+            },
+          },
+        },
+      },
+    },
+  },
 };
 
 export const projetPublicSelect = {
