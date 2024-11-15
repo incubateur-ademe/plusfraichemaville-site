@@ -1,4 +1,3 @@
-"use client";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useConsent } from "@/src/components/cookie/consentManagement";

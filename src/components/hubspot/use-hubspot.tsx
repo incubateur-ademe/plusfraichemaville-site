@@ -1,5 +1,4 @@
 import { HubspotSetTrackEventProps, UseHubspotProps } from "./types";
-import { sanitizeUrlForAnalyticTool } from "@/src/components/analytics/helpers";
 
 export const useHubspot = (): UseHubspotProps => {
   const isProd = process.env.NODE_ENV === "production";
