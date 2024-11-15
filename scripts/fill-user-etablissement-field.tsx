@@ -23,6 +23,8 @@ async function main() {
         );
       }
       console.log(`L'utilisateur ${userToProcess.email} a été mis à jour`);
+    } else {
+      console.log(`L'utilisateur ${userToProcess.email} n'a pas de siret`);
     }
   });
 }
