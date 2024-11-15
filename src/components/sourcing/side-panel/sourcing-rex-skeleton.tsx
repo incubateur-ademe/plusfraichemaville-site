@@ -11,7 +11,7 @@ export const SourcingRexSkeleton = () => {
         )}
       >
         <div className="flex items-center justify-between">
-          <Badge small noIcon className="!text-dsfr-text-inverted-success !bg-dsfr-text-default-success">
+          <Badge small noIcon className="!bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
             Projet réalisé
           </Badge>
           <div className="flex flex-row items-center gap-1">

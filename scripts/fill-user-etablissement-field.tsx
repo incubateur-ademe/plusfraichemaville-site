@@ -13,7 +13,7 @@ async function main() {
     // @ts-ignore
     const siret = userToProcess.agentconnect_info?.siret;
     if (siret) {
-      await new Promise(r => setTimeout(r, 300));
+      await new Promise((r) => setTimeout(r, 300));
       const entityFromSiret = await fetchEntrepriseFromSirenApi(siret);
       if (entityFromSiret?.etablissement) {
         await updateUserEtablissementInfo(

@@ -8,7 +8,7 @@ export type CustomMarker = {
 
 export const createCustomIcon = (type: CustomMarker["type"], isActive: boolean) =>
   new Icon({
-    iconUrl: `/images/sourcing/sourcing-projet-${type}${isActive ? '-active' : ''}.svg`,
+    iconUrl: `/images/sourcing/sourcing-projet-${type}${isActive ? "-active" : ""}.svg`,
     iconSize: [64, 77],
     iconAnchor: [32, 77],
   });
