@@ -1,4 +1,5 @@
 import { HubspotSetTrackEventProps, UseHubspotProps } from "./types";
+import { sanitizeUrlForAnalyticTool } from "@/src/components/analytics/helpers";
 
 export const useHubspot = (): UseHubspotProps => {
   const isProd = process.env.NODE_ENV === "production";
@@ -35,11 +36,21 @@ export const useHubspot = (): UseHubspotProps => {
   };
 
   const trackUserWithEmail = (path: string, email: string) => {
+    if (!isProd) {
+      console.debug("Hubspot trackUserWithEmail => ", path, email);
+      return;
+    }
+
     setPathPageView(path);
     setIdentity(email, { path });
   };
 
   const declineCookie = () => {
+    const hubspotCookies = ["__hssc", "__hssrc", "__hs_do_not_track", "__hstc", "hubspotutk", "messagesUtk", "testrt"];
+    hubspotCookies.forEach((cookieName) => {
+      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+    });
+
     _hsq.push(["doNotTrack"]);
     _hsp.push(["revokeCookieConsent"]);
   };
