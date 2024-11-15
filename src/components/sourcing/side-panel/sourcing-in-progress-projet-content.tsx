@@ -31,23 +31,26 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
 
   return (
     <>
-      <div className="flex w-full flex-col">
-        <div className={clsx("min-h-[11.5rem] bg-dsfr-background-alt-blue-france px-11 pb-4 pt-6")}>
-          <div className="flex items-center justify-between">
-            <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
-              Projet en cours
-            </Badge>
-            <div className="text-sm font-bold">{selectEspaceByCode(data.type_espace)}</div>
-          </div>
-          <div className="mb-8 mt-4 text-lg font-bold">{data.nom}</div>
-          <div className="mt-auto flex flex-row items-center justify-between gap-1">
-            <Tag small className="h-fit">
-              {regionLabel}
-            </Tag>
-            <div className="flex flex-row items-center gap-1">
-              <div className="text-nowrap text-sm text-dsfr-text-mention-grey">Maturité du projet :</div>
-              <Maturite niveau={data.niveau_maturite} projetId={data.id} editable={false} />
-            </div>
+      <div
+        className={clsx(
+          "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey" +
+            "min-h-[11.5rem] px-11 pb-4 pt-6",
+        )}
+      >
+        <div className="flex items-center justify-between">
+          <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
+            Projet en cours
+          </Badge>
+          <div className="text-sm font-bold">{selectEspaceByCode(data.type_espace)}</div>
+        </div>
+        <div className="mb-8 mt-4 text-lg font-bold">{data.nom}</div>
+        <div className="mt-auto flex flex-row items-center justify-between gap-1">
+          <Tag small className="h-fit">
+            {regionLabel}
+          </Tag>
+          <div className="flex flex-row items-center gap-2">
+            <div className="text-nowrap text-sm text-dsfr-text-mention-grey">Maturité du projet</div>
+            <Maturite niveau={data.niveau_maturite} projetId={data.id} editable={false} />
           </div>
         </div>
       </div>

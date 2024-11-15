@@ -23,7 +23,7 @@ export const SourcingInProgressProjetSkeleton = () => {
           <div className="mt-auto flex flex-row items-center justify-between">
             <div className={"h-3 w-1/4 animate-pulse rounded-xl bg-dsfr-background-contrast-grey-active opacity-30"} />
             <div className="flex flex-row items-center gap-1">
-              <div className="text-sm text-dsfr-text-mention-grey">Maturité du projet :</div>
+              <div className="text-sm text-dsfr-text-mention-grey">Maturité du projet</div>
               <div className={"size-8 animate-pulse rounded-full bg-dsfr-background-contrast-grey-active opacity-30"} />
             </div>
           </div>
