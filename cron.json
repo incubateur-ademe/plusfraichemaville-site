@@ -1,0 +1,7 @@
+{
+  "jobs": [
+    {
+      "command": "0 0 * * * npm run hubspot-sync"
+    }
+  ]
+}

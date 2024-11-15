@@ -22,11 +22,9 @@ export default function MatomoPageView() {
   }, [matomoConsent]);
 
   useEffect(() => {
-    if (matomoConsent) {
-      const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
-      trackPageView(url);
-    }
-  }, [matomoConsent, pathname, searchParams]);
+    const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
+    trackPageView(url);
+  }, [pathname, searchParams]);
 
   return <></>;
 }

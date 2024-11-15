@@ -28,6 +28,12 @@ const nextConfig = {
         destination: "/projet",
         permanent: true,
       },
+      {
+        source: "/:path*",
+        has: [{ type: "host", value: "www.plusfraichemaville.fr" }],
+        destination: "https://plusfraichemaville.fr/:path*",
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {

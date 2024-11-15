@@ -11,14 +11,18 @@ import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-te
 import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 // eslint-disable-next-line max-len
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
+import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
 
 export const TableauDeBordSuivi = () => {
   return (
-    <div className="flex flex-wrap gap-8">
-      {cards.map((card, index) => (
-        <TableauDeBordSuiviCard {...card} key={index} />
-      ))}
-    </div>
+    <>
+      <TableauDeBordMaturite />
+      <div className="flex flex-wrap gap-8">
+        {cards.map((card, index) => (
+          <TableauDeBordSuiviCard {...card} key={index} />
+        ))}
+      </div>
+    </>
   );
 };
 
@@ -80,7 +84,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     ),
   },
   {
-    title: "Je lance la mise en œuvre",
+    title: "Annuaire des projets Plus fraîche ma ville",
     index: 6,
     progress: "0",
     disabled: true,
@@ -88,7 +92,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     picto: <PictoTableauDeBordSelector pictoId="lancement" className="w-20" />,
     children: (
       <TableauDeBordSuiviWithText>
-        Rédiger un cahier des charges et chercher les bons prestataires pour réaliser le projet
+        {"Contacter des partenaires : bureaux d'étude, AMO, agents de collectivités"}
       </TableauDeBordSuiviWithText>
     ),
   },

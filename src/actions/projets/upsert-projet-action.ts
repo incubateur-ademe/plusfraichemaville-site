@@ -5,10 +5,11 @@ import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { createOrUpdateProjet } from "@/src/lib/prisma/prismaProjetQueries";
+import { createOrUpdateProjet, getProjetById } from "@/src/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
@@ -24,8 +25,16 @@ export const upsertProjetAction = async (
   }
   const permission = new PermissionManager(session);
 
-  if (data.projetId && !(await permission.canEditProject(data.projetId))) {
-    return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
+  let projetToEdit = null;
+  if (data.projetId) {
+    if (!(await permission.canEditProject(data.projetId))) {
+      return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
+    } else {
+      projetToEdit = await getProjetById(data.projetId);
+      if (!projetToEdit) {
+        return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
+      }
+    }
   }
 
   const parseParamResult = ProjetInfoFormSchema.safeParse(data);
@@ -46,6 +55,19 @@ export const upsertProjetAction = async (
         collectiviteId: collectiviteId,
         userId: user.id,
       });
+
+      if (updatedProjet && projetToEdit?.niveau_maturite !== updatedProjet.niveau_maturite) {
+        await createAnalytic({
+          context: {
+            maturite: updatedProjet.niveau_maturite,
+          },
+          event_type: "UPDATE_MATURITE",
+          reference_id: updatedProjet?.id,
+          reference_type: "PROJET",
+          user_id: session.user.id,
+        });
+      }
+
       return { type: "success", message: "PROJET_UPSERTED", updatedProjet };
     } catch (e) {
       customCaptureException("Error in EditProjetInfoAction DB call", e);

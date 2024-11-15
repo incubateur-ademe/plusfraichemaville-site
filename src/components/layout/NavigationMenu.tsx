@@ -50,9 +50,14 @@ export default function NavigationMenu() {
           className: NotificationElements.selectionMenuItem,
         },
         {
-          linkProps: { href: "/contact", target: "_self", onClick: cancelCurrentProjet },
+          linkProps: { href: PFMV_ROUTES.WEBINAIRES, target: "_self", onClick: cancelCurrentProjet },
+          text: "Webinaires",
+          isActive: pathname?.startsWith(PFMV_ROUTES.WEBINAIRES),
+        },
+        {
+          linkProps: { href: PFMV_ROUTES.CONTACT, target: "_self", onClick: cancelCurrentProjet },
           text: "Nous contacter",
-          isActive: pathname?.startsWith("/contact"),
+          isActive: pathname?.startsWith(PFMV_ROUTES.CONTACT),
         },
         {
           menuLinks:

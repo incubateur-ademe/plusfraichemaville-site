@@ -30,6 +30,7 @@ export const acceptProjectInvitationAction = async (
   try {
     await acceptProjectInvitation(userId, projectId);
     const joinedProjet = await getProjetWithRelationsById(projectId);
+
     return { type: "success", message: "ACCEPT_INVITATION_PROJECT_ACCESS", projet: joinedProjet };
   } catch (e) {
     customCaptureException("Error in accepting invitation DB call", e);

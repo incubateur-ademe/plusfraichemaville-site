@@ -1,6 +1,7 @@
 import React from "react";
 import AdemeAMFLogo from "@/public/images/logo-ademe-amf.webp";
 import Image from "next/image";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export default function AppFooter() {
   return (
@@ -84,6 +85,11 @@ export default function AppFooter() {
             <li className="fr-footer__bottom-item">
               <a className="fr-footer__bottom-link" href="/stats" target="_self">
                 Statistiques
+              </a>
+            </li>
+            <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.NEWSLETTER} target="_self">
+                Newsletter
               </a>
             </li>
             <li className="fr-footer__bottom-item">

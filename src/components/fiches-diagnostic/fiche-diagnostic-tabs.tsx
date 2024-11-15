@@ -52,7 +52,7 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
           <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche diagnostic">
             {tabs.map((tab) => (
               <li role="presentation" key={tab.contentId}>
-                <CustomTabButton {...tab} className="custom-tab-diag text-black" />
+                <CustomTabButton {...tab} className="customTab custom-tab-diag text-black" />
               </li>
             ))}
           </ul>

@@ -18,7 +18,7 @@ const cspHeader = `
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-src https://c33e446d.sibforms.com https://stats.plusfraichemaville.fr;
+    frame-src https://stats.plusfraichemaville.fr;
     frame-ancestors 'none';
     upgrade-insecure-requests;
     connect-src 'self' https://sentry.incubateur.net/ https://stats.beta.gouv.fr/matomo.php

@@ -1,4 +1,4 @@
-import { collectivite, Prisma, projet, User } from "@prisma/client";
+import { collectivite, Prisma, projet, RoleProjet, User } from "@prisma/client";
 
 export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
@@ -21,6 +21,16 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
 export type UserProjetWithUser = Prisma.user_projetGetPayload<{
   include: { user: true };
 }>;
+
+export type UserWithAdminProjets = Prisma.UserGetPayload<{
+  include: {
+    projets: {
+      where: { role: "ADMIN" };
+      include: { projet: true };
+    };
+  };
+}>;
+
 export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
   select: {
     user: { select: { id: true; nom: true; prenom: true } };
@@ -48,10 +58,22 @@ export interface ProjetWithRelations extends projet {
   users: UserProjetWithUser[];
 }
 
-export interface ProjetWithPublicRelations extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace"> {
+export interface ProjetWithPublicRelations
+  extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace" | "niveau_maturite"> {
   collectivite: collectivite;
   users: UserProjetWithPublicUser[];
 }
+
+type ProjectUserAndAdmin = {
+  user: {
+    email: string;
+  } | null;
+  role: RoleProjet;
+};
+
+export type ProjetWithAdminUser = projet & {
+  users: ProjectUserAndAdmin[];
+};
 
 export type EstimationMateriauxFicheSolution = {
   ficheSolutionId: number;

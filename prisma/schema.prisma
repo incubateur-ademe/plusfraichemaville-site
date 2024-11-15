@@ -38,6 +38,7 @@ model User {
   prenom                      String?
   poste                       String?
   created_at                  DateTime            @default(now())
+  updated_at                  DateTime?           @updatedAt
   collectivites_created       collectivite[]      @relation(name: "collectivite_creator")
   projets_created             projet[]
   estimations_created         estimation[]        @relation(name: "estimation_creator")
@@ -51,6 +52,7 @@ model User {
   user_projet_deleted         user_projet[]       @relation(name: "user_projet_deleter")
   discardedInformation        String[]
   conversations               conversation[]
+  Analytics                   Analytics[]
 }
 
 model VerificationToken {
@@ -121,6 +123,7 @@ enum emailType {
   projetRequestAccess
   projetAccessGranted
   projetAccessDeclined
+  contactMessageSent
 }
 
 enum emailStatus {
@@ -138,6 +141,7 @@ model email {
   email_status        emailStatus
   user_projet_id      Int?
   user_projet         user_projet? @relation(fields: [user_projet_id], references: [id])
+  extra               Json?
 }
 
 model user_collectivite {
@@ -156,6 +160,7 @@ model projet {
   created_by                String
   creator                   User          @relation(fields: [created_by], references: [id])
   created_at                DateTime      @default(now())
+  updated_at                DateTime?     @updatedAt
   nom                       String
   type_espace               String?
   adresse                   String?
@@ -236,4 +241,36 @@ model conversation {
   ragtimeId  String   @unique
   created_at DateTime @default(now())
   user       User?    @relation(fields: [userId], references: [id])
+}
+
+enum ReferenceType {
+  USER
+  PROJET
+  ESTIMATION
+}
+
+enum EventType {
+  UPDATE_MATURITE
+}
+
+model Analytics {
+  id             String        @id @default(cuid())
+  created_at     DateTime      @default(now())
+  created_by     User          @relation(fields: [user_id], references: [id])
+  reference_id   Int
+  reference_type ReferenceType
+  event_type     EventType
+  context        Json?
+  user_id        String
+}
+
+enum JobType {
+  SYNC_HUBSPOT
+}
+
+model cron_jobs {
+  id                   String   @id @default(cuid())
+  execution_start_time DateTime @default(now())
+  execution_end_time   DateTime
+  job_type             JobType
 }

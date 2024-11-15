@@ -22,7 +22,7 @@ export default async function InfoPerso() {
           <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">
             {"J'inscris ou je rejoins une collectivité"}
           </h1>
-          <div className="mb-4">Je vérifie les informations liées à mon compte AgentConnect</div>
+          <div className="mb-4">Je vérifie les informations liées à mon compte ProConnect</div>
         </>
       ) : (
         <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">{"Mon profil"}</h1>

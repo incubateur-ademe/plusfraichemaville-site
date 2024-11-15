@@ -1,3 +1,4 @@
+import { MATOMO_EVENT } from "@/src/helpers/matomo/matomo-tags";
 import { sanitizeUrlForAnalyticTool } from "@/src/components/analytics/helpers";
 
 const shouldUseDevTracker = process.env.NODE_ENV !== "production";
@@ -9,13 +10,12 @@ declare global {
   }
 }
 
-export const trackEvent = (args: (string | null)[]) => {
+export const trackEvent = (event: MATOMO_EVENT) => {
   if (shouldUseDevTracker || !window?._paq) {
-    console.debug("trackEvent => ", args.join(" => "));
+    console.debug("trackEvent => ", event);
     return;
   }
-  // Pass a copy of the array to avoid mutation
-  window?._paq?.push([...args]);
+  window?._paq?.push(["trackEvent", event.category, event.action, event.name]);
 };
 
 export const trackPageView = (url: string) => {

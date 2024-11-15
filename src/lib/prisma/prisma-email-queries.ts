@@ -15,6 +15,7 @@ export const createEmail = async (
   destinationAddress: string,
   type: emailType,
   userProjetId?: number,
+  extra?: any,
 ): Promise<email> => {
   return prismaClient.email.create({
     data: {
@@ -22,6 +23,7 @@ export const createEmail = async (
       user_projet_id: userProjetId,
       type: type,
       email_status: emailStatus.PENDING,
+      extra: extra,
     },
   });
 };
