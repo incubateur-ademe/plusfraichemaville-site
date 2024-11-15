@@ -1,9 +1,9 @@
 import { HubspotSetTrackEventProps, UseHubspotProps } from "./types";
 
 export const useHubspot = (): UseHubspotProps => {
-  const isProd = process.env.NODE_ENV === "production";
-  const _hsq = typeof window !== "undefined" && isProd && window._hsq ? window._hsq : [];
-  const _hsp = typeof window !== "undefined" && isProd && window._hsp ? window._hsp : [];
+  const enableHubspotTracking = process.env.NODE_ENV === "production";
+  const _hsq = typeof window !== "undefined" && enableHubspotTracking && window._hsq ? window._hsq : [];
+  const _hsp = typeof window !== "undefined" && enableHubspotTracking && window._hsp ? window._hsp : [];
 
   const setTrackPageView = () => {
     _hsq.push(["trackPageView"]);
@@ -15,27 +15,15 @@ export const useHubspot = (): UseHubspotProps => {
   };
 
   const setIdentity = (email: string, customProperties?: {}) => {
-    _hsq.push([
-      "identify",
-      {
-        email,
-        ...customProperties,
-      },
-    ]);
+    _hsq.push(["identify", { email, ...customProperties }]);
   };
 
   const setTrackEvent = ({ eventId, value }: HubspotSetTrackEventProps) => {
-    _hsq.push([
-      "trackEvent",
-      {
-        id: eventId,
-        value,
-      },
-    ]);
+    _hsq.push(["trackEvent", { id: eventId, value }]);
   };
 
   const trackUserWithEmail = (path: string, email: string) => {
-    if (!isProd) {
+    if (!enableHubspotTracking) {
       console.debug("Hubspot trackUserWithEmail => ", path, email);
       return;
     }

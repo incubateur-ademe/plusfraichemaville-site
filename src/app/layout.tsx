@@ -59,7 +59,6 @@ export default async function RootLayout({ children }: { children: ReactElement 
         <StartDsfr />
         <DsfrHead Link={Link} doDisableFavicon={true} nonce={nonce} />
         <MatomoScript />
-        <HusbpotScript />
       </head>
       <body>
         <MainLayoutProviders lang={lang}>

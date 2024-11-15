@@ -9,11 +9,9 @@ const cspHeader = `
     script-src 'self' https://stats.beta.gouv.fr 'nonce-${nonce}' 'strict-dynamic' ${
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
-    script-src-elem 'self' 'nonce-${nonce}' https://js-eu1.hs-scripts.com https://js-eu1.hscollectedforms.net 
-    https://js-eu1.hs-analytics.net/
-    https://js-eu1.hs-banner.com/v2/145216267/banner.js;
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ https://track-eu1.hubspot.com/;
+    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ https://*.hsforms.com 
+    https://*.hubspot.com;
     font-src 'self' https://fonts.gstatic.com/;
     object-src 'none';
     base-uri 'self';
@@ -22,8 +20,7 @@ const cspHeader = `
     frame-ancestors 'none';
     upgrade-insecure-requests;
     connect-src 'self' https://sentry.incubateur.net/ https://stats.beta.gouv.fr/matomo.php
-     https://api-adresse.data.gouv.fr/search/ https://js-eu1.hs-scripts.com
-     https://forms-eu1.hscollectedforms.net/collected-forms/v1/config/json;
+     https://api-adresse.data.gouv.fr/search/ https://*.hscollectedforms.net;
 `;
 const cspHeaderValue = cspHeader.replace(/\s{2,}/g, " ").trim();
 
