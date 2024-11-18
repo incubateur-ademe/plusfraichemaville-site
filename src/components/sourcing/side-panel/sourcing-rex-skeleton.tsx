@@ -7,7 +7,7 @@ export const SourcingRexSkeleton = () => {
       <div
         className={clsx(
           "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey" +
-            "min-h-[11.5rem] px-11 pb-4 pt-6",
+            "min-h-[11.5rem] px-5 pb-4 pt-6",
         )}
       >
         <div className="flex items-center justify-between">
