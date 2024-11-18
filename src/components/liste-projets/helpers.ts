@@ -87,7 +87,7 @@ export const getCurrentUserProjectInfos = (
   return userProjectLine || null;
 };
 
-export const getProjetsWithAdminUser = (usersWithProjects: UserWithAdminProjets[]): ProjetWithAdminUser[] => {
+export const flattenUsersProjectsToProjects = (usersWithProjects: UserWithAdminProjets[]): ProjetWithAdminUser[] => {
   return usersWithProjects.flatMap((user) =>
     user.projets.map((userProjet) => ({
       ...userProjet.projet,

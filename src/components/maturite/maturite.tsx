@@ -9,6 +9,8 @@ import { updateMaturiteProjetAction } from "@/src/actions/projets/update-maturit
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { UPDATE_MATURITE } from "@/src/helpers/matomo/matomo-tags";
 
 type MaturiteProps = {
   niveau: string | null;
@@ -38,6 +40,7 @@ export const Maturite = ({
   const handleUpdateMaturiteProjet = async (niveau: NiveauMaturite["code"]) => {
     if (projetId) {
       const result = await updateMaturiteProjetAction(projetId, niveau);
+      trackEvent(UPDATE_MATURITE);
       if (result.projet) {
         addOrUpdateProjet(result.projet);
       }

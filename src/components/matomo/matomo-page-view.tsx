@@ -1,7 +1,7 @@
 "use client";
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { acceptCookie, declineCookie, trackPageView } from "@/src/helpers/matomo/trackEvent";
+import { acceptCookie, declineCookie, trackPageView } from "@/src/helpers/matomo/track-matomo";
 import { useConsent } from "@/src/components/cookie/consentManagement";
 
 export default function MatomoPageView() {

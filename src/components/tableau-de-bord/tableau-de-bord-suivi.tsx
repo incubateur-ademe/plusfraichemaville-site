@@ -93,7 +93,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     picto: <PictoTableauDeBordSelector pictoId="sourcing" className="w-20" />,
     children: (
       <TableauDeBordSuiviWithText>
-        {"Contacter des partenaires : bureaux d'études, AMO, agents et collectivités"}
+        {"Contacter des partenaires : bureaux d'étude, AMO, agents de collectivités"}
       </TableauDeBordSuiviWithText>
     ),
   },

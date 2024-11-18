@@ -1,4 +1,5 @@
-import { MATOMO_EVENT } from "@/src/helpers/matomo/matommo-tags";
+import { MATOMO_EVENT } from "@/src/helpers/matomo/matomo-tags";
+import { sanitizeUrlForAnalyticTool } from "@/src/components/analytics/helpers";
 
 const shouldUseDevTracker = process.env.NODE_ENV !== "production";
 
@@ -19,35 +20,27 @@ export const trackEvent = (event: MATOMO_EVENT) => {
 
 export const trackPageView = (url: string) => {
   if (shouldUseDevTracker) {
-    console.debug("trackPageView => ", sanitizeMatomoUrl(url));
+    console.debug("trackPageView => ", sanitizeUrlForAnalyticTool(url));
     return;
   }
-  window?._paq?.push(["setCustomUrl", sanitizeMatomoUrl(url)]);
+  window?._paq?.push(["setCustomUrl", sanitizeUrlForAnalyticTool(url)]);
   window?._paq?.push(["trackPageView"]);
 };
 
 export const acceptCookie = () => {
   if (shouldUseDevTracker) {
     console.debug("rememberCookieConsentGiven");
+    console.debug("HeatmapSessionRecording::enable");
   }
   window?._paq?.push(["rememberCookieConsentGiven"]);
+  window?._paq?.push(["HeatmapSessionRecording::enable"]);
 };
 
 export const declineCookie = () => {
   if (shouldUseDevTracker) {
     console.debug("forgetCookieConsentGiven");
+    console.debug("HeatmapSessionRecording::disable");
   }
   window?._paq?.push(["forgetCookieConsentGiven"]);
-};
-
-export const sanitizeMatomoUrl = (url: string) => {
-  const splittedUrl = url.split("/espace-projet/");
-  const espaceProjetSubstring = splittedUrl[1];
-  if (!espaceProjetSubstring) {
-    return url;
-  }
-  const projetId = espaceProjetSubstring.split("/")[0];
-  const urlWithoutProjetId = !isNaN(+projetId) ? url.replace(projetId, "[projetId]") : url;
-  const financementId = urlWithoutProjetId.split("/")[5];
-  return !isNaN(+financementId) ? urlWithoutProjetId.replace(financementId, "[financementId]") : urlWithoutProjetId;
+  window?._paq?.push(["HeatmapSessionRecording::disable"]);
 };
