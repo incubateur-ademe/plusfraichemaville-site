@@ -469,7 +469,7 @@
   content: none;
 }
 .sourcingCardAccordionBtn.fr-accordion__btn::before {
-  --icon-size:1rem;
+  --icon-size: 1rem;
   flex: 0 0 auto;
   display: inline-block;
   vertical-align: calc((0.75em - var(--icon-size)) * 0.5);
@@ -484,6 +484,6 @@
   margin-left: auto;
 }
 
-.sourcingCardAccordionBtn.fr-accordion__btn[aria-expanded=true]::before {
+.sourcingCardAccordionBtn.fr-accordion__btn[aria-expanded="true"]::before {
   transform: rotate(-180deg);
 }

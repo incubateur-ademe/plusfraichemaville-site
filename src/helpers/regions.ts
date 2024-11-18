@@ -1,6 +1,5 @@
 import { AddressProperties } from "@/src/components/sourcing/types";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import { projet } from "@prisma/client";
 
 type Region = {
   label: string;

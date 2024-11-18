@@ -16,9 +16,9 @@ export default function SourcingCardAccordion({
       <h3 className="mb-0">
         <button
           className={clsx(
-            "sourcingCardAccordionBtn fr-accordion__btn !rounded-b-2xl !text-[1.375rem] !text-dsfr-text-title-grey",
+            "sourcingCardAccordionBtn fr-accordion__btn !text-[1.375rem] !text-dsfr-text-title-grey",
             "!bg-dsfr-background-alt-blue-france !p-6 !font-bold",
-            "fr-icon-arrow-down-s-line  fr-btn--icon-left",
+            "fr-icon-arrow-down-s-line  fr-btn--icon-left !mb-4",
           )}
           aria-expanded={"false"}
           aria-controls={ariaId}

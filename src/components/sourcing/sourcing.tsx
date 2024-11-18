@@ -20,6 +20,7 @@ export const Sourcing = () => {
       {!isEmpty(inProgressProjetContacts) &&
         inProgressProjetContacts?.map((inProgressProjetContact) => (
           <SourcingContactCard
+            key={inProgressProjetContact.sourced_user_projet_id}
             contact={userProjetToSourcingContact(inProgressProjetContact.sourced_user_projet, true)}
             sourcingProjetId={currentProjet?.id}
             className="w-[22rem]"

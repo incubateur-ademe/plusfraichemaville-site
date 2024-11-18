@@ -23,17 +23,17 @@ export const SourcingContactCard = ({
   className,
   showSourcedProjet,
 }: SourcingContactCardProps) => {
+  const isTypeRex = contact.type === "rex";
   const type = getSourcingContactTypeLabel(contact.typeContact, false);
-  const ligne1 =
-    contact.type === "rex" ? getSourcingContactTypeLabel(contact.sousTypeContact, true) : contact.nomCollectivite;
-  const ligne3 = contact.type === "rex" ? null : contact.poste;
+  const ligne1 = isTypeRex ? getSourcingContactTypeLabel(contact.sousTypeContact, true) : contact.nomCollectivite;
+  const ligne3 = isTypeRex ? null : contact.poste;
 
   const shoudDisplaySaveButton = !useIsLecteur(sourcingProjetId);
 
   return (
     <div
       className={clsx(
-        "flex flex-col justify-between rounded-2xl border-[1px] border-dsfr-border-default-grey",
+        "flex flex-col justify-between overflow-y-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey",
         className,
       )}
     >
@@ -72,8 +72,8 @@ export const SourcingContactCard = ({
       </div>
       {showSourcedProjet && (
         <div className="flex w-full flex-col">
-          <SourcingCardAccordion ariaId={`accordion-diag${generateRandomId()}`}>
-            {contact.type === "in-progress" ? (
+          <SourcingCardAccordion ariaId={`accordion-diag${!isTypeRex ? contact.userProjetId : generateRandomId()}`}>
+            {!isTypeRex ? (
               <>
                 <div className="mb-4 font-bold">{contact.projet?.nom}</div>
                 <Tag small className="h-fit">
