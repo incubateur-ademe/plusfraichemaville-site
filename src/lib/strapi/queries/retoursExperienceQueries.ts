@@ -113,10 +113,10 @@ const GET_RETOUR_EXPERIENCE_CARD_DATA = (
 
 const GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS = (
   strapiFilter: StrapiFilter,
-) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_WITH_CONTACTS} query {
+) => ` ${RETOUR_EXPERIENCE_WITH_CONTACTS} query {
     retourExperiences ${strapiFilter.wholeFilterString()} {
       data {
-        ...RetourExperienceCardInfo
+        ...RetourExperienceWithContactInfo
       }
     }
 }`;

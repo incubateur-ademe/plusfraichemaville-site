@@ -7,7 +7,7 @@ import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { fetchEntrepriseFromSirenApi } from "@/src/lib/siren/fetch";
 import { getOrCreateCollectivite } from "@/src/lib/prisma/prismaCollectiviteQueries";
 import { attachUserToCollectivite } from "@/src/lib/prisma/prismaUserCollectiviteQueries";
-import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserWithCollectivites, updateUserEtablissementInfo } from "@/src/lib/prisma/prismaUserQueries";
 import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
 import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
@@ -27,6 +27,13 @@ export const authOptions: NextAuthOptions = {
           const entityFromSiren = await fetchEntrepriseFromSirenApi(siret);
           const codeInsee = entityFromSiren?.etablissement?.adresseEtablissement.codeCommuneEtablissement;
           const codePostal = entityFromSiren?.etablissement?.adresseEtablissement.codePostalEtablissement;
+          if (entityFromSiren?.etablissement) {
+            await updateUserEtablissementInfo(
+              user.id,
+              entityFromSiren.etablissement?.uniteLegale?.denominationUniteLegale,
+              entityFromSiren.etablissement,
+            );
+          }
           if (codePostal && codeInsee) {
             const entitiesFromBan = await fetchCollectiviteFromBanApi(codePostal);
             const collectiviteToUse = entitiesFromBan.find(

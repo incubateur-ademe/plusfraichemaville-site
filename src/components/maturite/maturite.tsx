@@ -13,13 +13,20 @@ import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 type MaturiteProps = {
   niveau: string | null;
   projetId: number;
+  buttonBgHoverColor?: string;
   withLabel?: boolean;
   editable?: boolean;
 };
 
 type CurrentNiveauMaturite = NiveauMaturite | undefined;
 
-export const Maturite = ({ withLabel, niveau, projetId, editable = true }: MaturiteProps) => {
+export const Maturite = ({
+  withLabel,
+  niveau,
+  projetId,
+  buttonBgHoverColor = "bg-white",
+  editable = true,
+}: MaturiteProps) => {
   const [show, setShow] = useState(false);
   const [currentNiveau, setCurrentNiveau] = useState<CurrentNiveauMaturite>(getNiveauMaturiteByCode(niveau));
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -47,9 +54,9 @@ export const Maturite = ({ withLabel, niveau, projetId, editable = true }: Matur
       aria-describedby={`tooltip-maturite-${projetId}`}
     >
       <Button
-        onClick={toggleShow}
+        onClick={readOnly ? () => {} : toggleShow}
         priority="tertiary no outline"
-        className={clsx("relative !p-0 hover:!bg-white", readOnly && "cursor-default")}
+        className={clsx("relative !p-0", readOnly && "cursor-default", `hover:!${buttonBgHoverColor}`)}
       >
         <span
           className={clsx("fr-tooltip fr-placement conic-gradient", withLabel ? "!hidden" : show && "!hidden")}

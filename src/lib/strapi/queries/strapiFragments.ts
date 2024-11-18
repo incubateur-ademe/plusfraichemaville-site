@@ -81,11 +81,12 @@ export const RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT = `fragment RetourExperienceCa
       }
     }
 }`;
-export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceCardInfo on RetourExperienceEntity {
+export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceWithContactInfo on RetourExperienceEntity {
   id
     attributes {
       titre
       slug
+      cout
       location
       contacts {
         id
@@ -101,9 +102,6 @@ export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceCardInf
             code
           }
         }
-      }
-      image_principale {
-        ...ImageInfo
       }
     }
 }`;

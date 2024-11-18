@@ -43,11 +43,17 @@ export type RexContactId = { rexId: number; contactId: number };
 
 export type SourcingContact = {
   typeContact: GetValues<"retour-experience.contact">["type_de_contact"];
-  sousTypeContact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
   label?: string;
   telephone?: string;
   email?: string;
-} & ({ type: "rex"; id: RexContactId } | { type: "in-progress"; userProjetId: number });
+} & (
+  | {
+      type: "rex";
+      id: RexContactId;
+      sousTypeContact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
+    }
+  | { type: "in-progress"; userProjetId: number; nomCollectivite?: string | null; poste?: string | null }
+);
 
 export type SourcingContactTypeMap = {
   code:
