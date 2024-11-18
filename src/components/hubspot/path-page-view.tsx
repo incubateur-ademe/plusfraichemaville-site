@@ -29,4 +29,5 @@ export default function HubspotPageView() {
       trackUserWithEmail(sanitizedUrl, currentUser?.email);
     }
   }, [consent, currentUser?.email, pathname, searchParams]);
+  return <></>;
 }

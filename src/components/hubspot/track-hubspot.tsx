@@ -17,7 +17,7 @@ export const declineHubspotCookie = () => {
     console.debug("declineHubspotCookie");
     return;
   }
-  const hubspotCookies = ["__hssc", "__hssrc", "__hs_do_not_track", "__hstc", "hubspotutk", "messagesUtk", "testrt"];
+  const hubspotCookies = ["__hssc", "__hssrc", "__hs_do_not_track", "__hstc", "hubspotutk", "messagesUtk"];
   hubspotCookies.forEach((cookieName) => {
     document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
   });
