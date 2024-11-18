@@ -1,5 +1,5 @@
 "use client";
-import React, { PropsWithChildren, Suspense } from "react";
+import { PropsWithChildren, Suspense } from "react";
 import { DsfrProvider } from "@codegouvfr/react-dsfr/next-appdir/DsfrProvider";
 import { SessionProvider } from "next-auth/react";
 import { ProjetsStoreProvider } from "@/src/stores/projets/provider";
