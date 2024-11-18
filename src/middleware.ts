@@ -10,7 +10,8 @@ const cspHeader = `
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ ;
+    img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/ https://*.hsforms.com 
+    https://*.hubspot.com;
     font-src 'self' https://fonts.gstatic.com/;
     object-src 'none';
     base-uri 'self';
@@ -19,7 +20,7 @@ const cspHeader = `
     frame-ancestors 'none';
     upgrade-insecure-requests;
     connect-src 'self' https://sentry.incubateur.net/ https://stats.beta.gouv.fr/matomo.php
-     https://api-adresse.data.gouv.fr/search/ ;
+     https://api-adresse.data.gouv.fr/search/ https://*.hscollectedforms.net;
 `;
 const cspHeaderValue = cspHeader.replace(/\s{2,}/g, " ").trim();
 
