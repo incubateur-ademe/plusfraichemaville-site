@@ -30,13 +30,17 @@ export const trackPageView = (url: string) => {
 export const acceptCookie = () => {
   if (shouldUseDevTracker) {
     console.debug("rememberCookieConsentGiven");
+    console.debug("HeatmapSessionRecording::enable");
   }
   window?._paq?.push(["rememberCookieConsentGiven"]);
+  window?._paq?.push(["HeatmapSessionRecording::enable"]);
 };
 
 export const declineCookie = () => {
   if (shouldUseDevTracker) {
     console.debug("forgetCookieConsentGiven");
+    console.debug("HeatmapSessionRecording::disable");
   }
   window?._paq?.push(["forgetCookieConsentGiven"]);
+  window?._paq?.push(["HeatmapSessionRecording::disable"]);
 };
