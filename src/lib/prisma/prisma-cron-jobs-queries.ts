@@ -20,7 +20,11 @@ export const saveCronJob = async (startTime: Date, endTime: Date, jobType: cron_
 export const getUsersAndProjectsFromLastSync = async (): Promise<UserWithAdminProjets[]> => {
   const lastSync = await getLastHubspotSync();
   const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
-  const lastSyncTimeParam = [{ created_at: { gte: lastSyncDate } }, { updated_at: { gte: lastSyncDate } }];
+  const lastSyncTimeParams = [
+    { created_at: { gte: lastSyncDate } },
+    { updated_at: { gte: lastSyncDate } },
+    { deleted_at: { gte: lastSyncDate } },
+  ];
 
   const usersAndProjects = await prismaClient.user.findMany({
     where: {
@@ -34,7 +38,7 @@ export const getUsersAndProjectsFromLastSync = async (): Promise<UserWithAdminPr
                 { role: "ADMIN" },
                 {
                   projet: {
-                    OR: lastSyncTimeParam,
+                    OR: lastSyncTimeParams,
                   },
                 },
               ],
@@ -50,7 +54,7 @@ export const getUsersAndProjectsFromLastSync = async (): Promise<UserWithAdminPr
             { role: "ADMIN" },
             {
               projet: {
-                OR: lastSyncTimeParam,
+                OR: lastSyncTimeParams,
               },
             },
           ],
