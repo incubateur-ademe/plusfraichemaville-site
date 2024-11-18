@@ -51,8 +51,19 @@ export type SourcingContact = {
       type: "rex";
       id: RexContactId;
       sousTypeContact: GetValues<"retour-experience.contact">["sous_type_de_contact"];
+      rex?: { nom: string; cout: string; region: string; slug: string };
     }
-  | { type: "in-progress"; userProjetId: number; nomCollectivite?: string | null; poste?: string | null }
+  | {
+      type: "in-progress";
+      userProjetId: number;
+      nomCollectivite?: string | null;
+      poste?: string | null;
+      projet?: {
+        nom: string;
+        region: string | null;
+        typeEspace?: string | null;
+      };
+    }
 );
 
 export type SourcingContactTypeMap = {

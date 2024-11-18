@@ -34,6 +34,15 @@ export const projetIncludes = {
               nom_etablissement: true,
             },
           },
+          projet: {
+            select: {
+              collectivite: true,
+              nom: true,
+              type_espace: true,
+              niveau_maturite: true,
+              adresse_info: true,
+            },
+          },
         },
       },
     },
@@ -52,6 +61,15 @@ export const projetPublicSelect = {
     select: {
       id: true,
       user: { select: { id: true, nom: true, prenom: true, email: true, poste: true, nom_etablissement: true } },
+      projet: {
+        select: {
+          collectivite: true,
+          nom: true,
+          type_espace: true,
+          niveau_maturite: true,
+          adresse_info: true,
+        },
+      },
       created_at: true,
       role: true,
       invitation_status: true,
