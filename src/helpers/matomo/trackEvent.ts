@@ -1,6 +1,6 @@
 import { MATOMO_EVENT } from "@/src/helpers/matomo/matomo-tags";
 
-const shouldUseDevTracker = process.env.NODE_ENV !== "production";
+const shouldUseDevTracker = process.env.NODE_ENV === "production";
 
 declare global {
   // eslint-disable-next-line no-unused-vars
@@ -29,15 +29,19 @@ export const trackPageView = (url: string) => {
 export const acceptCookie = () => {
   if (shouldUseDevTracker) {
     console.debug("rememberCookieConsentGiven");
+    console.debug("HeatmapSessionRecording::enable");
   }
   window?._paq?.push(["rememberCookieConsentGiven"]);
+  window?._paq?.push(["HeatmapSessionRecording::enable"]);
 };
 
 export const declineCookie = () => {
   if (shouldUseDevTracker) {
     console.debug("forgetCookieConsentGiven");
+    console.debug("HeatmapSessionRecording::disable");
   }
   window?._paq?.push(["forgetCookieConsentGiven"]);
+  window?._paq?.push(["HeatmapSessionRecording::disable"]);
 };
 
 export const sanitizeMatomoUrl = (url: string) => {
