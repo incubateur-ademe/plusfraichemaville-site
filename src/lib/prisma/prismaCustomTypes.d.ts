@@ -31,7 +31,7 @@ export type UserWithAdminProjets = Prisma.UserGetPayload<{
   };
 }>;
 
-export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
+export type UserProjetWithPublicInfos = Prisma.user_projetGetPayload<{
   select: {
     id;
     user: {
@@ -42,6 +42,15 @@ export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
         email: true;
         poste: true;
         nom_etablissement: true;
+      };
+    };
+    projet: {
+      select: {
+        collectivite: true;
+        nom: true;
+        type_espace: true;
+        niveau_maturite: true;
+        adresse_info: true;
       };
     };
     created_at: true;
@@ -84,6 +93,15 @@ export type ProjetSourcingContact = Prisma.projet_sourcing_contactGetPayload<{
             nom_etablissement: true;
           };
         };
+        projet: {
+          select: {
+            collectivite: true;
+            nom: true;
+            type_espace: true;
+            niveau_maturite: true;
+            adresse_info: true;
+          };
+        };
       };
     };
   };
@@ -102,7 +120,7 @@ export interface ProjetWithRelations extends projet {
 export interface ProjetWithPublicRelations
   extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace" | "niveau_maturite" | "adresse_info"> {
   collectivite: collectivite;
-  users: UserProjetWithPublicUser[];
+  users: UserProjetWithPublicInfos[];
 }
 
 type ProjectUserAndAdmin = {

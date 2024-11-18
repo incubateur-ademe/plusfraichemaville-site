@@ -11,3 +11,7 @@ export function upsert<T extends { id: string | number }>(array: T[], element: T
   }
   return array;
 }
+
+export function isEmpty(listToCheck?: any): boolean {
+  return !Array.isArray(listToCheck) || !listToCheck.length;
+}

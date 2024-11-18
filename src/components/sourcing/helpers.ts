@@ -1,9 +1,12 @@
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelations, UserProjetWithPublicInfos } from "@/src/lib/prisma/prismaCustomTypes";
 import { LatLngTuple } from "leaflet";
 import { SourcingMapClientProps } from "./map/sourcing-map-client";
 import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, StrapiSourcingContact } from "./types";
 import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
+import { prettyUserName } from "@/src/helpers/user";
+import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
+import { getRegionLabelForProjet } from "@/src/helpers/regions";
 
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
@@ -84,3 +87,23 @@ export const strapiContactToDbContact = (strapiContact: StrapiSourcingContact, r
     typeContact: strapiContact.type_de_contact,
   };
 };
+
+export const userProjetToSourcingContact = (
+  userProjet: UserProjetWithPublicInfos,
+  withProjet: boolean,
+): SourcingContact => ({
+  type: "in-progress",
+  userProjetId: userProjet?.id,
+  typeContact: "collectivite",
+  email: userProjet?.user?.email,
+  poste: userProjet?.user?.poste,
+  nomCollectivite: userProjet?.user?.nom_etablissement,
+  label: userProjet.user ? prettyUserName(userProjet.user) : "",
+  projet: withProjet
+    ? {
+        nom: userProjet.projet.nom,
+        typeEspace: selectEspaceByCode(userProjet.projet.type_espace),
+        region: getRegionLabelForProjet(userProjet.projet),
+      }
+    : undefined,
+});

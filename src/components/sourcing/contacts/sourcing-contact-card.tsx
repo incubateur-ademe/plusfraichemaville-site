@@ -5,51 +5,87 @@ import { SourcingContact } from "@/src/components/sourcing/types";
 import { SourcingContactSaveButton } from "@/src/components/sourcing/contacts/sourcing-contact-save-button";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import clsx from "clsx";
+import React from "react";
+import SourcingCardAccordion from "@/src/components/common/sourcing-card-accordion";
+import Tag from "@codegouvfr/react-dsfr/Tag";
+import { generateRandomId } from "@/src/helpers/common";
 
 type SourcingContactCardProps = {
   contact: SourcingContact;
-  projetId?: number | null;
+  showSourcedProjet: boolean;
+  sourcingProjetId?: number | null;
+  className?: string;
 };
 
-export const SourcingContactCard = ({ contact, projetId }: SourcingContactCardProps) => {
+export const SourcingContactCard = ({
+  contact,
+  sourcingProjetId,
+  className,
+  showSourcedProjet,
+}: SourcingContactCardProps) => {
   const type = getSourcingContactTypeLabel(contact.typeContact, false);
   const ligne1 =
     contact.type === "rex" ? getSourcingContactTypeLabel(contact.sousTypeContact, true) : contact.nomCollectivite;
   const ligne3 = contact.type === "rex" ? null : contact.poste;
 
-  const shoudDisplaySaveButton = !useIsLecteur(projetId);
+  const shoudDisplaySaveButton = !useIsLecteur(sourcingProjetId);
 
   return (
-    <div className="mb-4 overflow-hidden rounded-2xl border-[1px] border-dsfr-border-default-grey p-6">
-      <div className="mb-6 flex flex-row items-center justify-between">
-        <div
-          className={clsx(
-            "fr-badge fr-badge--info fr-badge--sm fr-badge--no-icon !max-w-[116px] !text-pfmv-navy",
-            "!bg-dsfr-background-open-blue-france",
+    <div
+      className={clsx(
+        "flex flex-col justify-between rounded-2xl border-[1px] border-dsfr-border-default-grey",
+        className,
+      )}
+    >
+      <div className="p-6">
+        <div className="mb-6 flex flex-row items-center justify-between">
+          <div
+            className={clsx(
+              "fr-badge fr-badge--info fr-badge--sm fr-badge--no-icon !max-w-[116px] !text-pfmv-navy",
+              "!bg-dsfr-background-open-blue-france",
+            )}
+          >
+            {contact.typeContact === "collectivite" && (
+              <Image
+                src="/images/sourcing/sourcing-label-collectivite.svg"
+                className="mr-1"
+                width={16}
+                height={16}
+                alt=""
+              />
+            )}
+            {type}
+          </div>
+          {sourcingProjetId && shoudDisplaySaveButton && (
+            <SourcingContactSaveButton contact={contact} projetId={sourcingProjetId} />
           )}
-        >
-          {contact.typeContact === "collectivite" && (
-            <Image
-              src="/images/sourcing/sourcing-label-collectivite.svg"
-              className="mr-1"
-              width={16}
-              height={16}
-              alt=""
-            />
-          )}
-          {type}
         </div>
-        {projetId && shoudDisplaySaveButton && <SourcingContactSaveButton contact={contact} projetId={projetId} />}
-      </div>
-      <div>
-        <h3 className="mb-1 text-lg font-bold">{ligne1}</h3>
-        <h4 className="mb-0 text-[16px]">{contact.label}</h4>
-        <h5 className="mb-0 text-[16px]">{ligne3}</h5>
         <div>
-          {contact.email && <CopyField className="text-pfmv-navy underline" label="Email" value={contact.email} />}
-          {contact.telephone && <CopyField label="Téléphone" value={contact.telephone} />}
+          <h3 className="mb-1 text-lg font-bold">{ligne1}</h3>
+          <h4 className="mb-0 !text-base">{contact.label}</h4>
+          <h5 className="mb-0 !text-base">{ligne3}</h5>
+          <div>
+            {contact.email && <CopyField className="text-pfmv-navy underline" label="Email" value={contact.email} />}
+            {contact.telephone && <CopyField label="Téléphone" value={contact.telephone} />}
+          </div>
         </div>
       </div>
+      {showSourcedProjet && (
+        <div className="flex w-full flex-col">
+          <SourcingCardAccordion ariaId={`accordion-diag${generateRandomId()}`}>
+            {contact.type === "in-progress" ? (
+              <>
+                <div className="mb-4 font-bold">{contact.projet?.nom}</div>
+                <Tag small className="h-fit">
+                  {contact.projet?.region}
+                </Tag>
+              </>
+            ) : (
+              <div>REX</div>
+            )}
+          </SourcingCardAccordion>
+        </div>
+      )}
     </div>
   );
 };

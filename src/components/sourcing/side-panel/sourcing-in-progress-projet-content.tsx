@@ -1,33 +1,21 @@
 import clsx from "clsx";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import Badge from "@codegouvfr/react-dsfr/Badge";
-import { getRegionLabelFromAdresseInfo } from "@/src/helpers/regions";
-import { AddressProperties, SourcingContact } from "@/src/components/sourcing/types";
+import { getRegionLabelForProjet } from "@/src/helpers/regions";
+import { SourcingContact } from "@/src/components/sourcing/types";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { Maturite } from "@/src/components/maturite/maturite";
 import { getOldestAdmin } from "../../liste-projets/helpers";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
-import { prettyUserName } from "@/src/helpers/user";
+import { userProjetToSourcingContact } from "@/src/components/sourcing/helpers";
 
 export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
-  const regionLabel = getRegionLabelFromAdresseInfo(
-    (data.adresse_info as AddressProperties | null) || (data.collectivite.adresse_info as AddressProperties | null),
-  );
+  const regionLabel = getRegionLabelForProjet(data);
   const user = getOldestAdmin(data);
-  const contact: SourcingContact | null = user
-    ? {
-        type: "in-progress",
-        userProjetId: user?.id,
-        typeContact: "collectivite",
-        email: user?.user?.email,
-        poste: user?.user?.poste,
-        nomCollectivite: user?.user?.nom_etablissement,
-        label: user.user ? prettyUserName(user.user) : "",
-      }
-    : null;
+  const contact: SourcingContact | null = user ? userProjetToSourcingContact(user, false) : null;
 
   return (
     <>
@@ -62,7 +50,12 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
       {contact && (
         <div className="p-5">
           <h2 className="text-xl font-bold text-pfmv-navy">Contact</h2>
-          <SourcingContactCard contact={contact} projetId={currentProjetId} />
+          <SourcingContactCard
+            contact={contact}
+            sourcingProjetId={currentProjetId}
+            className="mb-4"
+            showSourcedProjet={false}
+          />
         </div>
       )}
     </>

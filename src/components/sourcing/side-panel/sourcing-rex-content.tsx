@@ -42,7 +42,13 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
         <Conditional>
           <Case condition={contacts.length > 0}>
             {contacts?.map((contact, index) => (
-              <SourcingContactCard contact={contact} key={index} projetId={currentProjetId} />
+              <SourcingContactCard
+                contact={contact}
+                key={index}
+                sourcingProjetId={currentProjetId}
+                className="mb-4"
+                showSourcedProjet={false}
+              />
             ))}
           </Case>
           <Default>

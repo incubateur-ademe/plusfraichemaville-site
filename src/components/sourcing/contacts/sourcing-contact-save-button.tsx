@@ -44,7 +44,7 @@ export const SourcingContactSaveButton = ({ projetId, contact, className }: Sour
     }
   }, [contact, getProjetById, projetId]);
 
-  const assets = selectSavedOrUnsavedAssets(isSaved, "common");
+  const assets = selectSavedOrUnsavedAssets(isSaved, "contact");
 
   const updater = {
     delete: {
