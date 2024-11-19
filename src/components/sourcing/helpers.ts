@@ -72,6 +72,10 @@ export const contactsSousTypeMap: SourcingContactTypeMap[] = [
   { code: "association", label: "Association" },
   { code: "federation", label: "Fédération" },
   { code: "collectivite", label: "Collectivité" },
+  { code: "entreprise_privee", label: "Entreprise privée" },
+  { code: "agence_urbanisme", label: "Agence d'urbanisme" },
+  { code: "etablissement_public", label: "Établissement public" },
+  { code: "pole_innovation", label: "Pôle d'innovation" },
 ] as const;
 
 export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"], isSousType: boolean) => {
