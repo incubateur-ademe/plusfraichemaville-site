@@ -1,6 +1,6 @@
 "use client";
-import { trackEvent } from "@/src/helpers/matomo/trackEvent";
-import { WEBINAIRE_SUBSCRIPTION } from "@/src/helpers/matomo/matommo-tags";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { WEBINAIRE_SUBSCRIPTION } from "@/src/helpers/matomo/matomo-tags";
 
 export const WebinaireSubscriptionButton = ({ lienInscription }: { lienInscription: string }) => {
   return (

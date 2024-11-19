@@ -31,14 +31,60 @@ export type UserWithAdminProjets = Prisma.UserGetPayload<{
   };
 }>;
 
-export type UserProjetWithPublicUser = Prisma.user_projetGetPayload<{
+export type UserProjetWithUserInfos = Prisma.user_projetGetPayload<{
   select: {
-    user: { select: { id: true; nom: true; prenom: true } };
+    id;
+    user: {
+      select: {
+        id: true;
+        nom: true;
+        prenom: true;
+        email: true;
+        poste: true;
+        nom_etablissement: true;
+      };
+    };
     created_at: true;
     role: true;
     invitation_status: true;
     user_id: true;
     nb_views: true;
+  };
+}>;
+
+export type UserProjetWithPublicInfos = Prisma.user_projetGetPayload<{
+  select: {
+    id;
+    user: {
+      select: {
+        id: true;
+        nom: true;
+        prenom: true;
+        email: true;
+        poste: true;
+        nom_etablissement: true;
+      };
+    };
+    projet: {
+      select: {
+        collectivite: true;
+        nom: true;
+        type_espace: true;
+        niveau_maturite: true;
+        adresse_info: true;
+      };
+    };
+  };
+}>;
+
+export type UserPublicInfos = Prisma.UserGetPayload<{
+  select: {
+    id: true;
+    nom: true;
+    prenom: true;
+    email: true;
+    poste: true;
+    nom_etablissement: true;
   };
 }>;
 
@@ -49,6 +95,34 @@ export type UserProjetWithRelations = Prisma.user_projetGetPayload<{
   };
 }>;
 
+export type ProjetSourcingContact = Prisma.projet_sourcing_contactGetPayload<{
+  include: {
+    sourced_user_projet: {
+      include: {
+        user: {
+          select: {
+            id: true;
+            nom: true;
+            prenom: true;
+            email: true;
+            poste: true;
+            nom_etablissement: true;
+          };
+        };
+        projet: {
+          select: {
+            collectivite: true;
+            nom: true;
+            type_espace: true;
+            niveau_maturite: true;
+            adresse_info: true;
+          };
+        };
+      };
+    };
+  };
+}>;
+
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];
 
 export interface ProjetWithRelations extends projet {
@@ -56,12 +130,13 @@ export interface ProjetWithRelations extends projet {
   estimations: EstimationWithAides[];
   creator: User;
   users: UserProjetWithUser[];
+  sourcing_user_projets: ProjetSourcingContact[];
 }
 
 export interface ProjetWithPublicRelations
   extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace" | "niveau_maturite" | "adresse_info"> {
   collectivite: collectivite;
-  users: UserProjetWithPublicUser[];
+  users: UserProjetWithUserInfos[];
 }
 
 type ProjectUserAndAdmin = {

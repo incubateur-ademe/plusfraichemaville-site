@@ -86,13 +86,14 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Annuaire des projets Plus fraîche ma ville",
     index: 6,
-    progress: "0",
+    progress: (projet: ProjetWithRelations | undefined) =>
+      (projet?.sourcing_user_projets?.length || 0) > 0 || (projet?.sourcing_cms.length || 0) > 0 ? "100" : "0",
     disabled: false,
-    type: "lancement",
-    picto: <PictoTableauDeBordSelector pictoId="lancement" className="w-20" />,
+    type: "sourcing",
+    picto: <PictoTableauDeBordSelector pictoId="sourcing" className="w-20" />,
     children: (
       <TableauDeBordSuiviWithText>
-        {"Contacter des partenaires : bureaux d'études, AMO, agents et collectivités"}
+        {"Contacter des partenaires : bureaux d'étude, AMO, agents de collectivités"}
       </TableauDeBordSuiviWithText>
     ),
   },

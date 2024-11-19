@@ -1,13 +1,18 @@
-import { ProjetWithAdminUser, UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithAdminUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { User } from "@prisma/client";
 import {
   AssociationSpecAssociationCategoryEnum,
-  FilterOperatorEnum,
+  BatchResponseSimplePublicUpsertObject,
+  BatchResponseSimplePublicUpsertObjectWithErrors,
   SimplePublicObjectBatchInputUpsert,
 } from "@hubspot/api-client/lib/codegen/crm/companies";
 import { hubspotClient } from ".";
+import { ALL_CANAL_ACQUISITION, CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
+import chunk from "lodash/chunk";
+import { FilterOperatorEnum } from "@hubspot/api-client/lib/codegen/crm/deals";
 
 type HubspotPipelineDealStageKey = keyof typeof pipelineDealStage;
+const HUBSPOT_CONTACT_BATCH_LIMIT = 50;
 
 const pipelineDealStage = {
   questionnement: "appointmentscheduled",
@@ -18,8 +23,11 @@ const pipelineDealStage = {
   projetAbandonne: "closedlost",
 };
 
-const formatCanalAcquisition = (canal: string | null) =>
-  canal && canal === "Démo Plus fraîche ma ville" ? "Démo Plus Fraîche Ma Ville" : canal || "";
+const formatCanalAcquisition = (canal: string | null) => {
+  if (!canal) return "";
+  const canalExists = ALL_CANAL_ACQUISITION.some((item) => item.label === canal);
+  return canalExists ? canal : CUSTOM_CANAL_ACQUISITION.label;
+};
 
 export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObjectBatchInputUpsert[] =>
   users.map((user) => ({
@@ -71,24 +79,50 @@ export const createBidirectionalAssociations = async (associations: { dealId: st
     })),
   });
 
-export const getHubspotUsersFromAdminProjets = async (usersWithAdminProjets: UserWithAdminProjets[]) => {
-  const emails = usersWithAdminProjets.map((user) => user.email);
-  const response = await hubspotClient.crm.contacts.searchApi.doSearch({
+export const archiveHubspotDeals = async (projectIds: number[]) => {
+  const searchResponse = await hubspotClient.crm.deals.searchApi.doSearch({
     filterGroups: [
       {
         filters: [
           {
-            propertyName: "email",
+            propertyName: "projet_id_unique",
             operator: FilterOperatorEnum.In,
-            values: emails,
+            values: projectIds.map((id) => id.toString()),
           },
         ],
       },
     ],
   });
 
-  return response.results.map((result) => ({
-    email: result.properties.email,
-    hubspotId: result.id,
+  const dealIds = searchResponse.results.map((deal) => deal.id);
+
+  if (dealIds.length > 0) {
+    const dealIdsSimplePublicObject = dealIds.map((id) => ({ id }));
+    await hubspotClient.crm.deals.batchApi.archive({ inputs: dealIdsSimplePublicObject });
+  }
+
+  return dealIds.length;
+};
+
+export const getHubspotContactIds = async (
+  contactBatch: BatchResponseSimplePublicUpsertObjectWithErrors | BatchResponseSimplePublicUpsertObject,
+) => {
+  const contactResults = [];
+  const contactBatches = chunk(contactBatch.results, HUBSPOT_CONTACT_BATCH_LIMIT);
+
+  for (const batch of contactBatches) {
+    const batchDetails = await hubspotClient.crm.contacts.batchApi.read({
+      inputs: batch.map((result) => ({ id: result.id })),
+      properties: ["email"],
+      propertiesWithHistory: ["email"],
+    });
+    contactResults.push(...batchDetails.results);
+  }
+
+  const contactIds = contactResults.map((contact) => ({
+    email: contact.properties.email as string,
+    hubspotId: contact.id,
   }));
+
+  return contactIds;
 };

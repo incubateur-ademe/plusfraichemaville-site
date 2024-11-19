@@ -1,4 +1,5 @@
 import { AddressProperties } from "@/src/components/sourcing/types";
+import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 type Region = {
   label: string;
@@ -28,6 +29,14 @@ export const ALL_REGIONS: Region[] = [
 export const getRegionLabelFromCode = (regionCode?: string | null) =>
   regionCode ? ALL_REGIONS.find((r) => r.code === regionCode)?.label : regionCode;
 
-export const getRegionLabelFromAdresseInfo = (adresseInfo: AddressProperties | null) => {
-  return adresseInfo?.context && adresseInfo.context?.split(", ")[2];
+const getRegionLabelFromAdresseInfo = (adresseInfo: AddressProperties | null) => {
+  return (adresseInfo?.context && adresseInfo.context?.split(", ")[2]) || null;
+};
+
+export const getRegionLabelForProjet = (
+  projet: Pick<ProjetWithPublicRelations, "adresse_info" | "collectivite">,
+): string | null => {
+  const adresseInfo =
+    (projet.adresse_info as AddressProperties | null) || (projet.collectivite.adresse_info as AddressProperties | null);
+  return adresseInfo ? getRegionLabelFromAdresseInfo(adresseInfo) : null;
 };

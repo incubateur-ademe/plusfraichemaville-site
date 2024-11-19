@@ -8,7 +8,7 @@ export const CUSTOM_CANAL_ACQUISITION: CanalAcquisition = {
   label: "Autre",
 };
 
-const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
+export const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
     label: "Webinaire",
   },
@@ -19,13 +19,16 @@ const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
     label: "Mail",
   },
   {
-    label: "Appel d’un chargé de déploiement",
+    label: "Appel d'un chargé de déploiement",
   },
   {
     label: "Salon, événement local",
   },
   {
     label: "Recherche internet",
+  },
+  {
+    label: "Appel à manifestation d'intérêt (AMI)",
   },
 ];
 

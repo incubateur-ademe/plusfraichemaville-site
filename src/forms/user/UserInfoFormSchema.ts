@@ -7,6 +7,7 @@ export const UserInfoFormSchema = z.object({
   prenom: z.string().min(1, { message: "Veuillez renseigner votre prénom" }),
   collectivite: CollectiviteFormSchema,
   poste: z.string().min(1, { message: "Veuillez renseigner votre poste" }),
+  nomEtablissement: z.string().min(1, { message: "Veuillez renseigner votre établissement de rattachement" }),
   canalAcquisition: z.string(),
   customCanalAcquisition: z.string(),
 });

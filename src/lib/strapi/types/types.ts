@@ -113,5 +113,3 @@ export interface APIResponseCollection<TContentTypeUID extends Common.UID.Conten
   data: APIResponseData<TContentTypeUID>[];
   meta: APIResponseCollectionMetadata;
 }
-
-export type RetourExperienceContactType = GetValues<"retour-experience.contact">;

@@ -6,9 +6,9 @@ export type CustomMarker = {
   idProjet?: number;
 };
 
-export const createCustomIcon = (type: CustomMarker["type"]) =>
+export const createCustomIcon = (type: CustomMarker["type"], isActive: boolean) =>
   new Icon({
-    iconUrl: `/images/sourcing/sourcing-projet-${type}.svg`,
+    iconUrl: `/images/sourcing/sourcing-projet-${type}${isActive ? "-active" : ""}.svg`,
     iconSize: [64, 77],
     iconAnchor: [32, 77],
   });

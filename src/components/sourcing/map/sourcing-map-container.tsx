@@ -1,7 +1,5 @@
 "use client";
-// eslint-disable-next-line max-len
 import { useState } from "react";
-// eslint-disable-next-line max-len
 import { SourcingSidePanelContainer } from "@/src/components/sourcing/side-panel/sourcing-side-panel-container";
 import { CustomMarker } from "@/src/components/sourcing/helpers-client";
 import SourcingMapClient from "@/src/components/sourcing/map/sourcing-map-client";
@@ -12,9 +10,9 @@ const SourcingMapContainer = ({ markers }: { markers: CustomMarker[] }) => {
   return (
     <div className="flex">
       <div className="h-[715px] w-full max-w-[50rem]">
-        <SourcingMapClient markers={markers} setSelectedMarker={setSelectedMarker} />
+        <SourcingMapClient markers={markers} setSelectedMarker={setSelectedMarker} selectedMarker={selectedMarker} />
       </div>
-      <div className="h-[715px] w-[400px] shrink-0 overflow-scroll p-5">
+      <div className="h-[715px] w-[400px] shrink-0 overflow-y-auto">
         <SourcingSidePanelContainer marker={selectedMarker} />
       </div>
     </div>

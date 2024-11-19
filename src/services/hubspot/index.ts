@@ -2,11 +2,11 @@ import { Client } from "@hubspot/api-client";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
   createBidirectionalAssociations,
-  getHubspotUsersFromAdminProjets,
+  getHubspotContactIds,
   makeBatchUpsertContactProperties,
   makeBatchUpsertProjectsByContactProperties,
 } from "./hubspot-helpers";
-import { getProjetsWithAdminUser } from "@/src/components/liste-projets/helpers";
+import { flattenUsersProjectsToProjects } from "@/src/components/liste-projets/helpers";
 import { UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import chunk from "lodash/chunk";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
@@ -49,16 +49,15 @@ export const hubspotBatchSync = async (
   let allAssociationResults = [];
 
   for (const batchUsers of userBatches) {
-    // contacts
+    // Contacts
     const contactProperties = makeBatchUpsertContactProperties(batchUsers);
     const contactBatch = await hubspotClient.crm.contacts.batchApi.upsert({
       inputs: contactProperties,
     });
     allContactResults.push(contactBatch);
-    const contactIds = await getHubspotUsersFromAdminProjets(batchUsers);
 
-    // projets
-    const allProjets = getProjetsWithAdminUser(batchUsers);
+    // Projets
+    const allProjets = flattenUsersProjectsToProjects(batchUsers);
     const projetBatches = chunk(allProjets, HUBSPOT_BATCH_LIMIT);
 
     for (const projetBatch of projetBatches) {
@@ -68,20 +67,21 @@ export const hubspotBatchSync = async (
       });
       allProjectResults.push(projectBatch);
 
-      // associations
-      const associations = batchUsers
-        .flatMap((user) =>
-          user.projets
-            .filter((userProjet) => projetBatch.some((p) => p.id === userProjet.projet.id))
-            .map((userProjet) => ({
-              contactId: contactIds.find((contact) => contact.email === user.email)?.hubspotId ?? "",
-              dealId:
-                projectBatch.results.find(
-                  (result) => result.properties.projet_id_unique === userProjet.projet.id.toString(),
-                )?.id ?? "",
-            })),
-        )
-        .filter((association) => association.contactId && association.dealId);
+      // Associations
+      const contactIds = await getHubspotContactIds(contactBatch);
+      const associations = batchUsers.flatMap((user) => {
+        const contactId = contactIds.find((contact) => contact.email === user.email)?.hubspotId ?? "";
+        return user.projets
+          .filter((userProjet) => projetBatch.some((p) => p.id === userProjet.projet.id))
+          .map((userProjet) => ({
+            contactId,
+            dealId:
+              projectBatch.results.find(
+                (result) => result.properties.projet_id_unique === userProjet.projet.id.toString(),
+              )?.id ?? "",
+          }))
+          .filter((association) => association.contactId && association.dealId);
+      });
 
       const associationBatch = await createBidirectionalAssociations(associations);
       allAssociationResults.push(associationBatch);
@@ -110,8 +110,12 @@ export const hubspotBatchSync = async (
     );
   }
 
+  const totalContacts = allContactResults.reduce((acc, batch) => acc + (batch.results?.length ?? 0), 0);
+  const totalProjects = allProjectResults.reduce((acc, batch) => acc + (batch.results?.length ?? 0), 0);
+  const totalAssociations = allAssociationResults.reduce((acc, batch) => acc + (batch.results?.length ?? 0), 0);
+
   // eslint-disable-next-line max-len
-  const message = `Contact(s): ${allContactResults.length} | Projet(s): ${allProjectResults.length} | Association(s): ${allAssociationResults.length}`;
+  const message = `Contact(s): ${totalContacts} | Projet(s): ${totalProjects} | Association(s): ${totalAssociations}`;
 
   return {
     status: isSuccess ? "COMPLETE" : "ERROR",

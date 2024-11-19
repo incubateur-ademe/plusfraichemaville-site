@@ -3,6 +3,7 @@ import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@pris
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
+import { RexContactId } from "@/src/components/sourcing/types";
 
 export const projetIncludes = {
   collectivite: true,
@@ -19,6 +20,33 @@ export const projetIncludes = {
     where: { deleted_at: null },
     include: { user: true },
   },
+  sourcing_user_projets: {
+    include: {
+      sourced_user_projet: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              nom: true,
+              prenom: true,
+              email: true,
+              poste: true,
+              nom_etablissement: true,
+            },
+          },
+          projet: {
+            select: {
+              collectivite: true,
+              nom: true,
+              type_espace: true,
+              niveau_maturite: true,
+              adresse_info: true,
+            },
+          },
+        },
+      },
+    },
+  },
 };
 
 export const projetPublicSelect = {
@@ -31,7 +59,17 @@ export const projetPublicSelect = {
   adresse_info: true,
   users: {
     select: {
-      user: { select: { id: true, nom: true, prenom: true } },
+      id: true,
+      user: { select: { id: true, nom: true, prenom: true, email: true, poste: true, nom_etablissement: true } },
+      projet: {
+        select: {
+          collectivite: true,
+          nom: true,
+          type_espace: true,
+          niveau_maturite: true,
+          adresse_info: true,
+        },
+      },
       created_at: true,
       role: true,
       invitation_status: true,
@@ -39,6 +77,7 @@ export const projetPublicSelect = {
       nb_views: true,
     },
   },
+  sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
 export const updateFichesProjet = async (
@@ -364,8 +403,9 @@ export const getPublicProjetById = async (projetId: number): Promise<ProjetWithP
   });
 };
 
-export const updateProjetVisibility = async (
+export const updateSourcingCmsProjet = (
   projetId: number,
+  sourcingCms: RexContactId[],
   visible: boolean,
 ): Promise<ProjetWithRelations | null> => {
   return prismaClient.projet.update({
@@ -374,6 +414,8 @@ export const updateProjetVisibility = async (
     },
     data: {
       is_public: visible,
+      deleted_at: null,
+      sourcing_cms: sourcingCms,
     },
     include: projetIncludes,
   });

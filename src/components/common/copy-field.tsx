@@ -8,20 +8,19 @@ interface CopyFieldProps {
 }
 
 export const CopyField = ({ label, value, className }: CopyFieldProps) => {
-  const [copySuccess, setCopySuccess] = useState<string | null>(null);
+  const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = async (text?: string, field?: string) => {
     if (text && field) {
       await navigator.clipboard.writeText(text);
-      setCopySuccess(field);
-      setTimeout(() => setCopySuccess(null), 1000);
+      setCopySuccess(true);
+      setTimeout(() => setCopySuccess(false), 1000);
     }
   };
 
   return (
-    <div className={clsx("mb-2")}>
+    <div className={"mb-2 flex gap-2"}>
       <span className="flex items-center justify-between">
-        {label} :{" "}
         <i
           className={clsx(
             "ri-file-copy-line relative h-4 w-4 cursor-pointer text-pfmv-navy before:!h-5 before:!w-5",
@@ -32,17 +31,17 @@ export const CopyField = ({ label, value, className }: CopyFieldProps) => {
         >
           <span
             className={clsx(
-              "absolute -left-32 -top-7 w-36 rounded-md bg-white",
+              "absolute -left-0 -top-7 w-36 rounded-md bg-white",
               "py-1 text-center text-xs not-italic shadow-pfmv-card-shadow",
               "pointer-events-none transition-opacity duration-200",
-              copySuccess === label ? "opacity-100" : "opacity-0",
+              copySuccess ? "opacity-100" : "opacity-0",
             )}
           >
             {label} copié
           </span>
         </i>
       </span>
-      <span className={clsx("block cursor-pointer", className)} onClick={() => handleCopy(value, label)}>
+      <span className={clsx("block cursor-pointer pt-[2px]", className)} onClick={() => handleCopy(value, label)}>
         {value}
       </span>
     </div>

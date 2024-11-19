@@ -10,9 +10,10 @@ import { SourcingMapLegend } from "./sourcing-map-legend";
 export type SourcingMapClientProps = {
   markers: CustomMarker[];
   setSelectedMarker: (_: CustomMarker) => void;
+  selectedMarker?: CustomMarker;
 };
 
-const SourcingMapClient = ({ markers, setSelectedMarker }: SourcingMapClientProps) => {
+const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker }: SourcingMapClientProps) => {
   const currentProjetCoordinates = useCurrentProjetCoordinates();
 
   const handleMarkerClick = (selectedMarker: CustomMarker) => {
@@ -36,7 +37,10 @@ const SourcingMapClient = ({ markers, setSelectedMarker }: SourcingMapClientProp
           <Marker
             position={marker.geocode}
             key={index}
-            icon={createCustomIcon(marker.type)}
+            icon={createCustomIcon(
+              marker.type,
+              marker.type === selectedMarker?.type && marker.idProjet === selectedMarker.idProjet,
+            )}
             eventHandlers={{ click: () => handleMarkerClick(marker) }}
           />
         ))}
@@ -44,7 +48,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker }: SourcingMapClientProp
       {currentProjetCoordinates && (
         <Marker
           position={currentProjetCoordinates}
-          icon={createCustomIcon("ma-collectivite")}
+          icon={createCustomIcon("ma-collectivite", selectedMarker?.type === "ma-collectivite")}
           eventHandlers={{
             click: () =>
               handleMarkerClick({
@@ -54,7 +58,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker }: SourcingMapClientProp
           }}
         />
       )}
-      <ZoomControl position="topleft" />
+      <ZoomControl />
       <SourcingMapLegend />
       <ScaleControl position="bottomright" imperial={false} />
     </MapContainer>

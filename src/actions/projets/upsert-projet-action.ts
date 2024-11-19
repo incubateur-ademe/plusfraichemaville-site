@@ -5,7 +5,7 @@ import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { createOrUpdateProjet } from "@/src/lib/prisma/prismaProjetQueries";
+import { createOrUpdateProjet, getProjetById } from "@/src/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { PermissionManager } from "@/src/helpers/permission-manager";
@@ -25,8 +25,16 @@ export const upsertProjetAction = async (
   }
   const permission = new PermissionManager(session);
 
-  if (data.projetId && !(await permission.canEditProject(data.projetId))) {
-    return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
+  let projetToEdit = null;
+  if (data.projetId) {
+    if (!(await permission.canEditProject(data.projetId))) {
+      return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
+    } else {
+      projetToEdit = await getProjetById(data.projetId);
+      if (!projetToEdit) {
+        return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
+      }
+    }
   }
 
   const parseParamResult = ProjetInfoFormSchema.safeParse(data);
@@ -48,7 +56,7 @@ export const upsertProjetAction = async (
         userId: user.id,
       });
 
-      if (updatedProjet) {
+      if (updatedProjet && projetToEdit?.niveau_maturite !== updatedProjet.niveau_maturite) {
         await createAnalytic({
           context: {
             maturite: updatedProjet.niveau_maturite,

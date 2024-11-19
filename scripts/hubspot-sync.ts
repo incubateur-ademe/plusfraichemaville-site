@@ -1,6 +1,7 @@
 import { getUsersAndProjectsFromLastSync, saveCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { hubspotBatchSync } from "@/src/services/hubspot";
+import { archiveHubspotDeals } from "@/src/services/hubspot/hubspot-helpers";
 
 type HubspotError = {
   body: {
@@ -26,9 +27,24 @@ const syncWithHubspot = async () => {
       process.exit(0);
     }
 
+    const deletedProjects = usersAndProjectsFromLastSync.flatMap((user) =>
+      user.projets.filter((p) => p.projet.deleted_at).map((p) => p.projet.id),
+    );
+
+    if (deletedProjects.length > 0) {
+      console.log("Archivage des projets supprimés dans Hubspot...");
+      const archiveResult = await archiveHubspotDeals(deletedProjects);
+      console.log(`Projet(s) archivé(s) : ${archiveResult}`);
+    }
+
     console.log("Début de la synchronisation avec Hubspot...");
 
-    const batch = await hubspotBatchSync(usersAndProjectsFromLastSync);
+    const activeUsersAndProjects = usersAndProjectsFromLastSync.map((user) => ({
+      ...user,
+      projets: user.projets.filter((p) => !p.projet.deleted_at),
+    }));
+
+    const batch = await hubspotBatchSync(activeUsersAndProjects);
 
     if (batch.status === "COMPLETE") {
       await saveCronJob(startedDate, new Date(), "SYNC_HUBSPOT");

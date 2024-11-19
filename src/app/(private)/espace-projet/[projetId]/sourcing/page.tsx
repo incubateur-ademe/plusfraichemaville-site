@@ -1,11 +1,7 @@
 import { Sourcing } from "@/src/components/sourcing/sourcing";
 
 const SourcingPage = () => {
-  return (
-    <div>
-      <Sourcing />
-    </div>
-  );
+  return <Sourcing />;
 };
 
 export default SourcingPage;
