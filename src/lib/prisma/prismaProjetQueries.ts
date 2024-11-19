@@ -406,14 +406,12 @@ export const getPublicProjetById = async (projetId: number): Promise<ProjetWithP
 export const updateSourcingCmsProjet = (
   projetId: number,
   sourcingCms: RexContactId[],
-  visible: boolean,
 ): Promise<ProjetWithRelations | null> => {
   return prismaClient.projet.update({
     where: {
       id: projetId,
     },
     data: {
-      is_public: visible,
       deleted_at: null,
       sourcing_cms: sourcingCms,
     },
