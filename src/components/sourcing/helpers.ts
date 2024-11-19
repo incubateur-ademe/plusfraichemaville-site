@@ -6,7 +6,7 @@ import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
 import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
-import { getRegionLabelForProjet } from "@/src/helpers/regions";
+import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
@@ -78,17 +78,23 @@ export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"]
 
 export const strapiContactToSourcingContact = (
   strapiContact: StrapiSourcingContact,
-  rexId: number,
+  retourExperience: RetourExperienceResponse,
 ): SourcingContact => {
   return {
     type: "rex",
-    id: { rexId, contactId: strapiContact.id },
+    id: { rexId: retourExperience.id, contactId: strapiContact.id },
     label: strapiContact.label,
     email: strapiContact.email,
     telephone: strapiContact.telephone,
     siteInternet: strapiContact.site_internet,
     sousTypeContact: strapiContact.sous_type_de_contact,
     typeContact: strapiContact.type_de_contact,
+    rex: {
+      nom: retourExperience.attributes.titre,
+      cout: retourExperience.attributes.cout,
+      slug: retourExperience.attributes.slug,
+      region: getRegionLabelFromCode(retourExperience.attributes.region?.data.attributes.code)
+    },
   };
 };
 

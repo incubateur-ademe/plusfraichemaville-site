@@ -70,7 +70,7 @@ export const SourcingContactCard = ({
             {contact.email && <CopyField className="text-pfmv-navy underline" label="Email" value={contact.email} />}
             {contact.telephone && <CopyField label="Téléphone" value={contact.telephone} />}
             {contact.siteInternet && (
-              <div className="fr-icon-global-line before:mb-[1px] text-pfmv-navy before:!h-5 before:!w-5 before:mr-1">
+              <div className="fr-icon-global-line text-pfmv-navy before:mb-[1px] before:mr-1 before:!h-5 before:!w-5">
                 <Link href={contact.siteInternet} prefetch={false} target="_blank">
                   Accéder au site internet
                 </Link>
@@ -85,9 +85,14 @@ export const SourcingContactCard = ({
             ariaId={`accordion-diag-${contactUniqueId}`}
             title={
               isProjetTypeRex ? (
-                <Badge small noIcon className="!bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
-                  Projet réalisé
-                </Badge>
+                <div className="flex w-full flex-row justify-between">
+                  <Badge small noIcon className="!bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
+                    Projet réalisé
+                  </Badge>
+                  <div className="text-sm text-right font-medium">
+                    <strong>Budget</strong> {contact.rex?.cout}
+                  </div>
+                </div>
               ) : (
                 <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
                   Projet en cours
@@ -103,7 +108,12 @@ export const SourcingContactCard = ({
                 </Tag>
               </>
             ) : (
-              <div>REX</div>
+              <>
+                <div className="mb-4 font-bold">{contact.rex?.nom}</div>
+                <Tag small className="h-fit">
+                  {contact.rex?.region}
+                </Tag>
+              </>
             )}
           </SourcingCardAccordion>
         </div>

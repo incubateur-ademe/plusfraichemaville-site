@@ -13,7 +13,7 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const retourExperienceAttributes = data.attributes;
   const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>
-    strapiContactToSourcingContact(contact, data.id),
+    strapiContactToSourcingContact(contact, data),
   );
   return (
     <>

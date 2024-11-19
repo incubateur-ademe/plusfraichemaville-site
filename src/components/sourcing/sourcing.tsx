@@ -8,12 +8,14 @@ import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { SourcingContactCard } from "@/src/components/sourcing/contacts/sourcing-contact-card";
 import { userProjetToSourcingContact } from "@/src/components/sourcing/helpers";
+import { RexContactId } from "@/src/components/sourcing/types";
+import { SourcingRexContactCardFetcher } from "@/src/components/sourcing/contacts/sourcing-rex-contact-card-fetcher";
 
 export const Sourcing = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isLecteur = useIsLecteur(currentProjet?.id);
   const inProgressProjetContacts = currentProjet?.sourcing_user_projets;
-  const rexContacts = currentProjet?.sourcing_cms;
+  const rexContactIds = currentProjet?.sourcing_cms as RexContactId[];
 
   return (
     <div className="flex flex-wrap gap-x-6 gap-y-12">
@@ -27,8 +29,14 @@ export const Sourcing = () => {
             showSourcedProjet
           />
         ))}
-      {!isEmpty(rexContacts) && <></>}
-      {isEmpty(inProgressProjetContacts) && isEmpty(rexContacts) && <SourcingEmpty />}
+      {!isEmpty(rexContactIds) &&
+        rexContactIds.map((rexContactId) => (
+          <SourcingRexContactCardFetcher
+            rexContactId={rexContactId}
+            key={`${rexContactId.rexId}-${rexContactId.contactId}`}
+          />
+        ))}
+      {isEmpty(inProgressProjetContacts) && isEmpty(rexContactIds) && <SourcingEmpty />}
       {!isLecteur && (
         <GenericFicheLink
           href={PFMV_ROUTES.ESPACE_PROJET_SOURCING_MAP}
