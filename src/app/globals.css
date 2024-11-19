@@ -451,7 +451,7 @@
 }
 
 .custom-marker-cluster {
-  @apply !flex !size-[3.25rem] !items-center !justify-center rounded-full border-[6px] border-dsfr-border-action-low-blue-france !bg-white text-base font-bold text-pfmv-navy;
+  @apply !flex  !items-center !justify-center rounded-full border-[6px] border-dsfr-border-action-low-blue-france !bg-white text-base font-bold text-pfmv-navy;
 }
 
 .fr-connect {
