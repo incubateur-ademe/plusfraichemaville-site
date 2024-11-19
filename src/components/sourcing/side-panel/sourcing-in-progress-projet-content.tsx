@@ -15,7 +15,7 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const regionLabel = getRegionLabelForProjet(data);
   const user = getOldestAdmin(data);
-  const contact: SourcingContact | null = user ? userProjetToSourcingContact(user, false) : null;
+  const contact: SourcingContact | null = user ? userProjetToSourcingContact(user) : null;
 
   return (
     <>

@@ -1,7 +1,7 @@
 import {
   ProjetWithAdminUser,
   ProjetWithPublicRelations,
-  UserProjetWithPublicInfos,
+  UserProjetWithUserInfos,
   UserWithAdminProjets,
 } from "@/src/lib/prisma/prismaCustomTypes";
 import { collectivite, InvitationStatus, RoleProjet } from "@prisma/client";
@@ -56,13 +56,13 @@ export const sortProjectsByInvitationStatus = (
   );
 };
 
-export const getOldestAdmin = (project: ProjetWithPublicRelations): UserProjetWithPublicInfos | null => {
+export const getOldestAdmin = (project: ProjetWithPublicRelations): UserProjetWithUserInfos | null => {
   const oldestAdmin = project.users
     .filter(
       (userProjet) =>
         userProjet.role === RoleProjet.ADMIN && userProjet.invitation_status === InvitationStatus.ACCEPTED,
     )
-    .reduce<UserProjetWithPublicInfos | undefined>((oldest, current) => {
+    .reduce<UserProjetWithUserInfos | undefined>((oldest, current) => {
       if (!oldest) return current;
       return oldest.created_at <= current.created_at ? oldest : current;
     }, undefined);
@@ -82,7 +82,7 @@ export const getAllUserProjectCount = (project: ProjetWithPublicRelations) => {
 export const getCurrentUserProjectInfos = (
   project: ProjetWithPublicRelations,
   currentUserId?: string,
-): UserProjetWithPublicInfos | null => {
+): UserProjetWithUserInfos | null => {
   const userProjectLine = project.users.find((userProjet) => userProjet.user_id === currentUserId);
   return userProjectLine || null;
 };
