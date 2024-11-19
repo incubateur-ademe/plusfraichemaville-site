@@ -7,7 +7,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { SourcingContactCard } from "@/src/components/sourcing/contacts/sourcing-contact-card";
-import { userProjetToSourcingContact } from "@/src/components/sourcing/helpers";
+import { userProjetToSourcingContactWithProjet } from "@/src/components/sourcing/helpers";
 
 export const Sourcing = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -21,7 +21,7 @@ export const Sourcing = () => {
         inProgressProjetContacts?.map((inProgressProjetContact) => (
           <SourcingContactCard
             key={inProgressProjetContact.sourced_user_projet_id}
-            contact={userProjetToSourcingContact(inProgressProjetContact.sourced_user_projet, true)}
+            contact={userProjetToSourcingContactWithProjet(inProgressProjetContact.sourced_user_projet)}
             sourcingProjetId={currentProjet?.id}
             className="w-[22rem]"
             showSourcedProjet
