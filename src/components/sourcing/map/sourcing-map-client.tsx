@@ -6,6 +6,7 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 import { useCurrentProjetCoordinates } from "../hooks";
 import { createClusterCustomIcon, createCustomIcon, CustomMarker } from "../helpers-client";
 import { SourcingMapLegend } from "./sourcing-map-legend";
+import { SourcingMapFocus } from "./sourcing-map-focus";
 
 export type SourcingMapClientProps = {
   markers: CustomMarker[];
@@ -58,9 +59,10 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker }: Sourc
           }}
         />
       )}
-      <ZoomControl />
+      <ZoomControl position="topright" />
       <SourcingMapLegend />
       <ScaleControl position="bottomright" imperial={false} />
+      <SourcingMapFocus coordinates={currentProjetCoordinates} />
     </MapContainer>
   );
 };
