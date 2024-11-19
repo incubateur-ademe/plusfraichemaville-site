@@ -97,7 +97,7 @@ export const strapiContactToSourcingContact = (
       nom: retourExperience.attributes.titre,
       cout: retourExperience.attributes.cout,
       slug: retourExperience.attributes.slug,
-      region: getRegionLabelFromCode(retourExperience.attributes.region?.data.attributes.code)
+      region: getRegionLabelFromCode(retourExperience.attributes.region?.data.attributes.code),
     },
   };
 };

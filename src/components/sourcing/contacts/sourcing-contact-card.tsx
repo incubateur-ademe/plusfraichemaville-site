@@ -89,7 +89,7 @@ export const SourcingContactCard = ({
                   <Badge small noIcon className="!bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
                     Projet réalisé
                   </Badge>
-                  <div className="text-sm text-right font-medium">
+                  <div className="text-right text-sm font-medium">
                     <strong>Budget</strong> {contact.rex?.cout}
                   </div>
                 </div>
