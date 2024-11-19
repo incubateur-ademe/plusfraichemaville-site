@@ -42,7 +42,7 @@ export const contactsTypeMap: SourcingContactTypeMap[] = [
   { code: "conception_et_realisation", label: "Conception et réalisation" },
   { code: "concertation_citoyenne", label: "Concertation citoyenne" },
   { code: "recherche_et_innovation", label: "Recherche et innovation" },
-  { code: "groupements", label: "Groupements" },
+  { code: "groupements", label: "Groupement" },
   { code: "collectivite", label: "Collectivité" },
 ] as const;
 
@@ -76,13 +76,17 @@ export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"]
   return contactType?.label;
 };
 
-export const strapiContactToDbContact = (strapiContact: StrapiSourcingContact, rexId: number): SourcingContact => {
+export const strapiContactToSourcingContact = (
+  strapiContact: StrapiSourcingContact,
+  rexId: number,
+): SourcingContact => {
   return {
     type: "rex",
     id: { rexId, contactId: strapiContact.id },
     label: strapiContact.label,
     email: strapiContact.email,
     telephone: strapiContact.telephone,
+    siteInternet: strapiContact.site_internet,
     sousTypeContact: strapiContact.sous_type_de_contact,
     typeContact: strapiContact.type_de_contact,
   };

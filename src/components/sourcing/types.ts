@@ -46,6 +46,7 @@ export type SourcingContact = {
   label?: string;
   telephone?: string;
   email?: string;
+  siteInternet?: string;
 } & (
   | {
       type: "rex";

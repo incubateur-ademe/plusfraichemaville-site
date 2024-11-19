@@ -1,14 +1,15 @@
 import clsx from "clsx";
 import React, { ReactNode } from "react";
-import Badge from "@codegouvfr/react-dsfr/Badge";
 
 export default function SourcingCardAccordion({
   ariaId,
+  title,
   children,
   className,
 }: {
   ariaId: string;
   className?: string;
+  title: ReactNode;
   children: ReactNode;
 }) {
   return (
@@ -23,9 +24,7 @@ export default function SourcingCardAccordion({
           aria-expanded={"false"}
           aria-controls={ariaId}
         >
-          <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
-            Projet en cours
-          </Badge>
+          {title}
         </button>
       </h3>
       <div

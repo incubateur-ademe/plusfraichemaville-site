@@ -93,6 +93,7 @@ export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceWithCon
         label
         email
         telephone
+        site_internet
         type_de_contact
         sous_type_de_contact
       }
