@@ -420,3 +420,18 @@ export const updateSourcingCmsProjet = (
     include: projetIncludes,
   });
 };
+
+export const updateProjetVisibility = async (
+  projetId: number,
+  visible: boolean,
+): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+    },
+    data: {
+      is_public: visible,
+    },
+    include: projetIncludes,
+  });
+};
