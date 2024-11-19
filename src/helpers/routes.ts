@@ -57,3 +57,5 @@ export const GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL = (collectiviteId: numbe
 export const GET_PUBLIC_PROJET_BY_ID = (projetId: number) => `/api/get-public-projet-by-id?projetId=${projetId}`;
 
 export const GET_REX_WITH_CONTACTS_BY_ID = (rexId: number) => `/api/get-rex-with-contacts-by-id?rexId=${rexId}`;
+
+export const GET_REX_BY_SLUG = (rexSlug: string) => `/api/get-rex-by-slug?rexSlug=${rexSlug}`;
