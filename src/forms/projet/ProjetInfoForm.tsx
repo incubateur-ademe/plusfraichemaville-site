@@ -1,7 +1,7 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
+import { PropsWithChildren, useEffect } from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import InputFormField from "@/src/components/common/InputFormField";
 import { useRouter } from "next/navigation";
@@ -19,8 +19,11 @@ import { useShallow } from "zustand/react/shallow";
 import { mapDBCollectiviteToCollectiviteAddress, mapDBProjetToProjetAddress } from "@/src/lib/adresseApi/banApiHelper";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import AddressInputFormField from "@/src/components/common/address-input-form-field";
-
-export const ProjetInfoForm = ({ projet, readOnly }: { projet?: ProjetWithRelations; readOnly?: boolean }) => {
+type ProjetInfoFormProps = {
+  projet?: ProjetWithRelations;
+  readOnly?: boolean;
+} & PropsWithChildren;
+export const ProjetInfoForm = ({ projet, readOnly, children }: ProjetInfoFormProps) => {
   const router = useRouter();
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
 
@@ -106,6 +109,8 @@ export const ProjetInfoForm = ({ projet, readOnly }: { projet?: ProjetWithRelati
           asterisk={true}
           disabled={disabled}
         />
+
+        {children}
 
         {!readOnly && (
           <Button className={`rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>

@@ -37,11 +37,14 @@ export const SourcingVisibility = () => {
       <div className="flex items-center justify-between">
         <div className="max-w-4xl">
           <p className="mb-3 text-xl font-bold">
-            Souhaitez-vous faire apparaître ce projet sur l’annuaire Plus fraîche ma ville ?{" "}
+            Souhaitez-vous rendre votre projet visible par les autres membres de la communauté Plus fraîche ma ville ?
           </p>
           <p>
-            Dans le cadre du module 6 de l’espace projet Plus fraîche ma ville, vous pouvez retrouvez des projets
-            réalisés et en cours pour créer un réseau de collectivités. Votre projet, en cours, peut y figurer
+            Rendez votre projet visible dans le module 6 pour partager son objet, sa localisation et son état
+            d’avancement aux autres membres de la communauté. Grâce à cette fonctionnalité, découvrez les initiatives
+            voisines, échangez avec d’autres porteurs de projet, et obtenez des contacts de prestataires. En tant
+            qu’administrateur d’un projet, vos prénom, nom et adresse mail seront partagés avec les utilisateurs
+            connectés.
           </p>
         </div>
         {currentProjet ? (
@@ -51,7 +54,7 @@ export const SourcingVisibility = () => {
               label=""
               inputTitle=""
               showCheckedHint={false}
-              defaultChecked={isPublic}
+              defaultChecked={isPublic ?? false}
               onChange={handleVisibility}
             />
           </div>
