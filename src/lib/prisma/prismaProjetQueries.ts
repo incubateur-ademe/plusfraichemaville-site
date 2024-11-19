@@ -410,9 +410,9 @@ export const updateSourcingCmsProjet = (
   return prismaClient.projet.update({
     where: {
       id: projetId,
+      deleted_at: null,
     },
     data: {
-      deleted_at: null,
       sourcing_cms: sourcingCms,
     },
     include: projetIncludes,
