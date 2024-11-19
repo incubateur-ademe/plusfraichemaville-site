@@ -16,7 +16,6 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
   const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>
     strapiContactToDbContact(contact, data.id),
   );
-  console.log(retourExperienceAttributes);
 
   return (
     <>
