@@ -19,8 +19,8 @@ export const SourcingRexContactCardSkeleton = () => {
           <div className="h-3 w-36 rounded-xl bg-dsfr-background-contrast-grey-active opacity-30" />
         </div>
       </div>
-      <div className="mt-auto h-16 w-full bg-dsfr-background-alt-blue-france flex items-center">
-        <div className="h-3 w-2/5 ml-4 rounded-xl bg-dsfr-background-contrast-grey-active opacity-30" />
+      <div className="mt-auto flex h-16 w-full items-center bg-dsfr-background-alt-blue-france">
+        <div className="ml-4 h-3 w-2/5 rounded-xl bg-dsfr-background-contrast-grey-active opacity-30" />
       </div>
     </div>
   );
