@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export type TypeSolution = {
   label: string;
   code: string;
@@ -5,8 +7,8 @@ export type TypeSolution = {
   colorClass: string;
   explanation: string;
   cardImage: string;
-  icon: (_?: string) => React.ReactNode;
-  coloredIcon: (_?: string) => React.ReactNode;
+  icon: (_?: string) => ReactNode;
+  coloredIcon: (_?: string) => ReactNode;
 };
 
 export const TYPE_SOLUTION_VERTE: TypeSolution = {

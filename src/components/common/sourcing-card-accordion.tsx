@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ReactNode } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 
 export default function SourcingCardAccordion({
   ariaId,
@@ -10,8 +10,7 @@ export default function SourcingCardAccordion({
   ariaId: string;
   className?: string;
   title: ReactNode;
-  children: ReactNode;
-}) {
+} & PropsWithChildren) {
   return (
     <section className={`fr-accordion before:!shadow-none ${className}`}>
       <h3 className="mb-0">

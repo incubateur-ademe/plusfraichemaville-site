@@ -11,6 +11,7 @@ import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
 import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
@@ -99,7 +100,7 @@ export const strapiContactToSourcingContact = (
     typeContact: strapiContact.type_de_contact,
     rex: {
       nom: retourExperience.attributes.titre,
-      cout: retourExperience.attributes.cout,
+      cout: `${formatNumberWithSpaces(retourExperience.attributes.cout_euro)} €`,
       slug: retourExperience.attributes.slug,
       region: getRegionLabelFromCode(retourExperience.attributes.region?.data.attributes.code),
     },

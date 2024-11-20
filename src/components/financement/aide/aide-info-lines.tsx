@@ -4,11 +4,12 @@ import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "@/src/components
 import { AideEstimationsCardWarningRemainingDays } from "@/src/components/financement/aide/aide-estimations-card-warning-remaining-day";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { resolveAidType } from "@/src/components/financement/helpers";
+import { ReactNode } from "react";
 
 export type AidesTerritoiresAideLine = {
   title: string;
   picto: string;
-  description: React.ReactNode | string | string[] | null;
+  description: ReactNode | string | string[] | null;
   showMore?: boolean;
 };
 

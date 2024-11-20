@@ -2,11 +2,12 @@ import clsx from "clsx";
 import { formatNumberWithSpaces, highlightedIconClass, TypeFiche } from "@/src/helpers/common";
 import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
 import { FicheSolution } from "@/src/components/ficheSolution/type";
+import { ReactNode } from "react";
 
 type CoutFicheSolution = {
   coutMax(_: TypeFiche): number;
   shortLabel: string;
-  icons: (_t: TypeFiche, _?: string) => React.ReactNode;
+  icons: (_t: TypeFiche, _?: string) => ReactNode;
 };
 
 const COUT_CHEAP: CoutFicheSolution = {

@@ -1,9 +1,10 @@
 import { highlightedIconClass, TypeFiche } from "@/src/helpers/common";
 import clsx from "clsx";
+import { ReactNode } from "react";
 
 type DelaiTravauxFiche = {
   delaiMax(_: TypeFiche): number;
-  icons: (_t: TypeFiche, _?: string) => React.ReactNode;
+  icons: (_t: TypeFiche, _?: string) => ReactNode;
 };
 
 const DELAI_TRAVAUX_FAST: DelaiTravauxFiche = {
