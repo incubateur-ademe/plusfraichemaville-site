@@ -451,7 +451,7 @@
 }
 
 .custom-marker-cluster {
-  @apply !flex !size-[3.25rem] !items-center !justify-center rounded-full border-[6px] border-dsfr-border-action-low-blue-france !bg-white text-base font-bold text-pfmv-navy;
+  @apply !flex  !items-center !justify-center rounded-full border-[6px] border-dsfr-border-action-low-blue-france !bg-white text-base font-bold text-pfmv-navy;
 }
 
 .fr-connect {
@@ -486,4 +486,12 @@
 
 .sourcingCardAccordionBtn.fr-accordion__btn[aria-expanded="true"]::before {
   transform: rotate(-180deg);
+}
+
+.leaflet-control-zoom {
+  @apply !absolute !bottom-[-403px] !left-[10px] !border-none;
+}
+
+.leaflet-container a {
+  @apply !text-pfmv-navy;
 }
