@@ -4,7 +4,7 @@ import Image from "next/image";
 const legends = [
   {
     picto: "ma-collectivite",
-    label: "Ma collectivité",
+    label: "Mon projet",
   },
   {
     picto: "rex",
