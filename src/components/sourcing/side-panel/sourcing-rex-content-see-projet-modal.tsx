@@ -28,7 +28,15 @@ export const SourcingRexContentSeeProjetModal = () => {
 
   return (
     <>
-      <modal.Component title="" size="large" className="sourcing-rex-projet-modal aide-modal">
+      <modal.Component
+        title={
+          <span aria-hidden className="hidden">
+            Détail du projet
+          </span>
+        }
+        size="large"
+        className="xl-modal"
+      >
         {currentSourcingRexProjet && (
           <Suspense fallback={<SourcingRexContentSeeProjetModalSkeleton />}>
             <RetourExperienceClient isModal params={{ retourExperienceSlug: currentSourcingRexProjet }} />

@@ -33,7 +33,7 @@ export const AideFicheModal = () => {
           </span>
         }
         size="large"
-        className="aide-modal"
+        className="xl-modal"
       >
         {currentDetailedAide ? <AideFiche aide={currentDetailedAide} /> : <div>Chargement en cours...</div>}
       </modal.Component>

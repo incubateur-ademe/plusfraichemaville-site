@@ -47,14 +47,14 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
               <SituationRetourExperienceCard
                 titre="Avant le projet"
                 situation={retourExperience.attributes.situation_avant}
-                className={clsx("h-full !bg-dsfr-background-alt-grey", isModal && " w-96 ")}
+                className={clsx("h-full !bg-dsfr-background-alt-grey", isModal && "w-96")}
               />
             </div>
             <div className="flex-1">
               <SituationRetourExperienceCard
                 titre="Après le projet"
                 situation={retourExperience.attributes.situation_apres}
-                className={clsx("h-full !bg-dsfr-background-alt-blue-france", isModal && " w-96 ")}
+                className={clsx("h-full !bg-dsfr-background-alt-blue-france", isModal && "w-96")}
               />
             </div>
           </div>

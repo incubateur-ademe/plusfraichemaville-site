@@ -17,7 +17,7 @@ export default async function SituationRetourExperienceCard({
     return null;
   }
   return (
-    <div className={clsx("fr-card fr-card--no-border fr-card--shadow rounded-2xl max-w-md", className)}>
+    <div className={clsx("fr-card fr-card--no-border fr-card--shadow max-w-md rounded-2xl", className)}>
       <div className="fr-card__body">
         <div className="fr-card__content">
           <h3 className="fr-card__title">{titre}</h3>

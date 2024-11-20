@@ -16,7 +16,6 @@ export const SourcingRexContentSeeProject = ({ slug }: { slug: string }) => {
           Voir le projet <i className="ri-arrow-right-line ml-2 before:mb-[3px] before:!size-4"></i>
         </Button>
       </div>
-      <SourcingRexContentSeeProjetModal />
     </>
   );
 };
