@@ -5,7 +5,7 @@ import { useModalStore } from "@/src/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect, Suspense } from "react";
 import { SourcingRexContentSeeProjetModalSkeleton } from "./sourcing-rex-content-see-projet-modal-skeleton";
-import { RetourExperienceClient } from "../../projet/projet-retour-experience-client";
+import { RetourExperienceWithFetcher } from "../../projet/projet-retour-experience-with-fetcher";
 
 const modal = createModal({
   id: "sourcing-rex-projet-modal",
@@ -39,7 +39,7 @@ export const SourcingRexContentSeeProjetModal = () => {
       >
         {currentSourcingRexProjet && (
           <Suspense fallback={<SourcingRexContentSeeProjetModalSkeleton />}>
-            <RetourExperienceClient isModal params={{ retourExperienceSlug: currentSourcingRexProjet }} />
+            <RetourExperienceWithFetcher isModal retourExperienceSlug={currentSourcingRexProjet} />
           </Suspense>
         )}
       </modal.Component>

@@ -7,13 +7,13 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 type SolutionRetourExperienceCardProps = {
   solution: APIResponseData<"api::solution-retour-experience.solution-retour-experience">;
   className?: string;
-  isModal?: boolean;
+  displayFicheSolutionCard?: boolean;
 };
 
 export default async function SolutionRetourExperienceCard({
   solution,
   className,
-  isModal,
+  displayFicheSolutionCard,
 }: SolutionRetourExperienceCardProps) {
   return (
     <div className={className}>
@@ -30,7 +30,7 @@ export default async function SolutionRetourExperienceCard({
         <div className="ml-4 grow">
           <div className="text-xl font-bold">{solution.attributes.titre}</div>
           <CmsRichText label={solution.attributes.description || ""} />
-          {!isModal && solution.attributes.fiche_solution?.data && (
+          {!displayFicheSolutionCard && solution.attributes.fiche_solution?.data && (
             <FicheSolutionSmallHorizontalCard
               ficheSolution={solution.attributes.fiche_solution}
               className={"mb-4 hidden md:flex"}
@@ -38,7 +38,7 @@ export default async function SolutionRetourExperienceCard({
           )}
         </div>
       </div>
-      {!isModal && solution.attributes.fiche_solution?.data && (
+      {!displayFicheSolutionCard && solution.attributes.fiche_solution?.data && (
         <FicheSolutionSmallHorizontalCard
           ficheSolution={solution.attributes.fiche_solution}
           className={"mb-9 block md:hidden"}

@@ -65,7 +65,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
                 <SolutionRetourExperienceCard
                   solution={solution}
                   key={solution.id}
-                  isModal={isModal}
+                  displayFicheSolutionCard={isModal}
                   className={clsx("mb-4", isModal && "!mb-12 flex-col lg:flex-row")}
                 />
               ))}
