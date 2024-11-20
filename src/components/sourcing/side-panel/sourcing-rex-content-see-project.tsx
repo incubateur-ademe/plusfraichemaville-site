@@ -1,6 +1,5 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/src/stores/modal/provider";
-import { SourcingRexContentSeeProjetModal } from "./sourcing-rex-content-see-projet-modal";
 
 export const SourcingRexContentSeeProject = ({ slug }: { slug: string }) => {
   const setCurrentSourcingRexProjet = useModalStore((state) => state.setCurrentSourcingRexProjet);
