@@ -6,6 +6,7 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 import { useCurrentProjetCoordinates } from "../hooks";
 import { createClusterCustomIcon, createCustomIcon, CustomMarker } from "../helpers-client";
 import { SourcingMapLegend } from "./sourcing-map-legend";
+import { SourcingMapFocus } from "./sourcing-map-focus";
 
 export type SourcingMapClientProps = {
   markers: CustomMarker[];
@@ -23,8 +24,8 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker }: Sourc
   return (
     <MapContainer
       className="relative h-full"
-      center={[48.8566, 2.3522]}
-      zoom={5}
+      center={currentProjetCoordinates || undefined}
+      zoom={8}
       zoomControl={false}
       attributionControl={false}
     >
@@ -49,6 +50,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker }: Sourc
       {currentProjetCoordinates && (
         <Marker
           position={currentProjetCoordinates}
+          zIndexOffset={9999}
           icon={createCustomIcon("ma-collectivite", selectedMarker?.type === "ma-collectivite")}
           eventHandlers={{
             click: () =>
@@ -59,9 +61,10 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker }: Sourc
           }}
         />
       )}
-      <ZoomControl />
+      <ZoomControl position="topleft" />
       <SourcingMapLegend />
       <ScaleControl position="bottomright" imperial={false} />
+      <SourcingMapFocus coordinates={currentProjetCoordinates} />
     </MapContainer>
   );
 };
