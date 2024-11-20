@@ -9,6 +9,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { strapiContactToDbContact } from "@/src/components/sourcing/helpers";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { SourcingRexContentSeeProject } from "./sourcing-rex-content-see-project";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
@@ -16,6 +17,7 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
   const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>
     strapiContactToDbContact(contact, data.id),
   );
+
   return (
     <>
       <div
@@ -30,7 +32,7 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
           </Badge>
           <div className="flex flex-row items-center gap-1">
             <div className="text-sm">Budget</div>
-            <div className="text-sm font-bold">{retourExperienceAttributes.cout}</div>
+            <div className="text-sm font-bold">{formatNumberWithSpaces(retourExperienceAttributes.cout_euro)} €</div>
           </div>
         </div>
         <div className="mb-8 mt-4 text-lg font-bold">{retourExperienceAttributes.titre}</div>

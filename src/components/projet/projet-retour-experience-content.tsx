@@ -42,16 +42,16 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             retourExperience.attributes.citations.map((citation) => (
               <CustomDSFRQuote key={citation.auteur} citation={citation} className="mt-12" />
             ))}
-          <div className={clsx("mt-10 flex flex-col md:gap-6", !isModal && "md:flex-row")}>
+          <div className={clsx("mt-10 flex flex-wrap flex-col md:gap-6 md:flex-row")}>
             <SituationRetourExperienceCard
               titre="Avant le projet"
               situation={retourExperience.attributes.situation_avant}
-              className="mb-4 flex-1 bg-dsfr-background-alt-grey md:mb-0"
+              className={clsx("flex !bg-dsfr-background-alt-grey", isModal && " w-96 ")}
             />
             <SituationRetourExperienceCard
               titre="Après le projet"
               situation={retourExperience.attributes.situation_apres}
-              className="flex-1 bg-dsfr-background-alt-blue-france"
+              className={clsx("flex !bg-dsfr-background-alt-blue-france", isModal && " w-96 ")}
             />
           </div>
           {solutions && solutions.length > 0 && (
