@@ -1,5 +1,5 @@
 import { WebinaireResponse } from "@/src/components/webinaires/types";
-import React from "react";
+
 import { WebinaireCard } from "@/src/components/webinaires/webinaire-card";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import clsx from "clsx";

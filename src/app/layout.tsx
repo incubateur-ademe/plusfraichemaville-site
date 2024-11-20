@@ -3,7 +3,7 @@ import { getHtmlAttributes } from "@codegouvfr/react-dsfr/next-appdir/getHtmlAtt
 import { StartDsfr } from "./StartDsfr";
 import { defaultColorScheme } from "./defaultColorScheme";
 import Link from "next/link";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import AppHeader from "@/src/components/layout/AppHeader";
 import { Metadata } from "next";
 import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";

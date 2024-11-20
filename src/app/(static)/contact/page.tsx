@@ -1,4 +1,3 @@
-import React from "react";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { ContactForm } from "@/src/forms/contact/contact-form";

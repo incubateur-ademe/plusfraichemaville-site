@@ -1,7 +1,7 @@
 "use client";
 
 import * as Sentry from "@sentry/nextjs";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 export default function Error({ error }: { error: Error & { digest?: string } }) {
   useEffect(() => {

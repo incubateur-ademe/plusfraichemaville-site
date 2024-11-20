@@ -1,7 +1,7 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+
 import Button from "@codegouvfr/react-dsfr/Button";
 import InputFormField from "@/src/components/common/InputFormField";
 import { UserInfoFormData, UserInfoFormSchema } from "@/src/forms/user/UserInfoFormSchema";

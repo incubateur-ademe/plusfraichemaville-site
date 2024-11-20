@@ -1,6 +1,6 @@
 "use client";
 
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import FicheSolutionFullCard from "@/src/components/ficheSolution/fiche-solution-full-card";
 import { APIResponseData } from "@/src/lib/strapi/types/types";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
