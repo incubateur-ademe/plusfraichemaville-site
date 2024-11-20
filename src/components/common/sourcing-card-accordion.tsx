@@ -27,7 +27,9 @@ export default function SourcingCardAccordion({
         </button>
       </h3>
       <div
-        className={clsx("fr-collapse !m-0 !mt-[-1rem] w-full rounded-b-2xl !bg-dsfr-background-alt-blue-france !px-6")}
+        className={clsx(
+          "fr-collapse !m-0 !mt-[-1rem] w-full rounded-b-2xl !bg-dsfr-background-alt-blue-france !px-6 !pt-0",
+        )}
         id={ariaId}
       >
         {children}

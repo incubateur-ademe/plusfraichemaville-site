@@ -10,6 +10,7 @@ import SourcingCardAccordion from "@/src/components/common/sourcing-card-accordi
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Link from "next/link";
+import { SourcingRexContentSeeProject } from "@/src/components/sourcing/side-panel/sourcing-rex-content-see-project";
 
 type SourcingContactCardProps = {
   contact: SourcingContact;
@@ -110,9 +111,12 @@ export const SourcingContactCard = ({
             ) : (
               <>
                 <div className="mb-4 font-bold">{contact.rex?.nom}</div>
-                <Tag small className="h-fit">
-                  {contact.rex?.region}
-                </Tag>
+                <div className="flex">
+                  <Tag small className="h-fit">
+                    {contact.rex?.region}
+                  </Tag>
+                  {contact?.rex?.slug && <SourcingRexContentSeeProject slug={contact.rex.slug} />}
+                </div>
               </>
             )}
           </SourcingCardAccordion>
