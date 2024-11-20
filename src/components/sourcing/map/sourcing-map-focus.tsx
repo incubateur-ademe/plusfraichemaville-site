@@ -7,19 +7,21 @@ import { useMap } from "react-leaflet";
 export const SourcingMapFocus = ({ coordinates }: { coordinates: LatLngTuple | null }) => {
   const map = useMap();
   const handleFocus = useCallback(() => {
-    coordinates && map.setView(coordinates, map.getZoom());
+    coordinates && map.setView(coordinates, map.getZoom(), { animate: true, duration: 0.75 });
   }, [map, coordinates]);
 
   return (
     <Button
-      iconId="ri-home-7-line"
       className={clsx(
         "absolute left-5 top-5 z-[999] rounded-[30px] !bg-white shadow-pfmv-card-shadow",
-        "font-[marianne] !font-normal !text-dsfr-action-high-red-hover",
+        "font-[marianne] !font-normal",
       )}
       onClick={handleFocus}
     >
-      <span className="text-black">Recentrer sur mon projet</span>
+      <span>
+        <i className="ri-home-7-line mr-2 !text-dsfr-action-high-red-hover"></i>
+        <span className="text-black">Recentrer sur mon projet</span>
+      </span>
     </Button>
   );
 };
