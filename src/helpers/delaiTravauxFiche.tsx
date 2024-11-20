@@ -1,4 +1,3 @@
-import React from "react";
 import { highlightedIconClass, TypeFiche } from "@/src/helpers/common";
 import clsx from "clsx";
 

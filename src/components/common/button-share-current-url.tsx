@@ -1,6 +1,6 @@
 "use client";
 import clsx from "clsx";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
 export default function ButtonShareCurrentUrl({ className }: { className?: string }) {

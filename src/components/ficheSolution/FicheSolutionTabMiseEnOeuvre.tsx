@@ -1,4 +1,3 @@
-import React from "react";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import CustomAccordion from "@/src/components/common/CustomAccordion";
 import CustomTodoStep from "@/src/components/common/CustomTodoStep";

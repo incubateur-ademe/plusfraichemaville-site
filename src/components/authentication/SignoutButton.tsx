@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@codegouvfr/react-dsfr/Button";
-import React from "react";
+
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 

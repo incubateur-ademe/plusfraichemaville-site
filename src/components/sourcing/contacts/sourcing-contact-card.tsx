@@ -5,7 +5,7 @@ import { SourcingContact } from "@/src/components/sourcing/types";
 import { SourcingContactSaveButton } from "@/src/components/sourcing/contacts/sourcing-contact-save-button";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import clsx from "clsx";
-import React from "react";
+
 import SourcingCardAccordion from "@/src/components/common/sourcing-card-accordion";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import Badge from "@codegouvfr/react-dsfr/Badge";

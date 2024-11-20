@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { AidesTerritoiresAideLine } from "@/src/components/financement/aide/aide-info-lines";
-import React from "react";
+
 import { AideInfoLineShowMore } from "./aide-info-lines-show-more";
 import { processDescription } from "../helpers";
 

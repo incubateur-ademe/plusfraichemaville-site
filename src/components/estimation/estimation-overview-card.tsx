@@ -4,7 +4,7 @@ import clsx from "clsx";
 
 import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";
 import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
 import { isComplete } from "@/src/helpers/estimation";

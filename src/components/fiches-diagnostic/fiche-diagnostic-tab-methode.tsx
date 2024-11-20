@@ -7,7 +7,7 @@ import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { TypeFiche, formatNumberWithSpaces } from "@/src/helpers/common";
 import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/src/components/fiches-diagnostic/filters/methode";
-import React from "react";
+
 import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
 
 export const FicheDiagnosticMethodeTab = ({

@@ -1,5 +1,3 @@
-import React from "react";
-
 export type TypeSolution = {
   label: string;
   code: string;

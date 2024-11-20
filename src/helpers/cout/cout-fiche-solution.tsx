@@ -1,4 +1,3 @@
-import React from "react";
 import clsx from "clsx";
 import { formatNumberWithSpaces, highlightedIconClass, TypeFiche } from "@/src/helpers/common";
 import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";

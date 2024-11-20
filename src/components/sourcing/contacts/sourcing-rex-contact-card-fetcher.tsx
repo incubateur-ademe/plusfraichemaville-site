@@ -1,5 +1,5 @@
 import { RexContactId, StrapiSourcingContact } from "@/src/components/sourcing/types";
-import React from "react";
+
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { RetourExperienceResponse } from "@/src/components/ficheSolution/type";
 import { GET_REX_WITH_CONTACTS_BY_ID } from "@/src/helpers/routes";

@@ -1,5 +1,5 @@
 import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "@/src/components/financement/types";
-import React from "react";
+
 // eslint-disable-next-line max-len
 import { AideEstimationsCardWarningRemainingDays } from "@/src/components/financement/aide/aide-estimations-card-warning-remaining-day";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
