@@ -1,6 +1,5 @@
 "use client";
 import { currentUserIsAdmin } from "@/src/components/partage/helpers";
-import { SourcingVisibility } from "@/src/components/sourcing/sourcing-visibility";
 import { ProjetInfoForm } from "@/src/forms/projet/ProjetInfoForm";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useUserStore } from "@/src/stores/user/provider";
@@ -18,11 +17,7 @@ export default function UpdateProjetPage() {
       <div className="mb-4">
         {"Toutes les informations me permettront d'obtenir des recommandations sur mon projet."}
       </div>
-      <ProjetInfoForm projet={currentProjet} readOnly={!isAdmin}>
-        <div className="my-10">
-          <SourcingVisibility />
-        </div>
-      </ProjetInfoForm>
+      <ProjetInfoForm projet={currentProjet} readOnly={!isAdmin} />
     </div>
   );
 }

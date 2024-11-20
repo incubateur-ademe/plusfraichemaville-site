@@ -1,4 +1,3 @@
-import React from "react";
 import CmsRichText from "@/src/components/common/CmsRichText";
 
 export default async function CustomTodoStep({

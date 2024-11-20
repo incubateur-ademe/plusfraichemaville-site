@@ -1,31 +1,18 @@
-"use client";
-
-import { updateProjetVisibilityAction } from "@/src/actions/projets/update-projet-visibility-action";
-import { useProjetsStore } from "@/src/stores/projets/provider";
-import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
-import { notifications } from "../common/notifications";
-import Image from "next/image";
 import clsx from "clsx";
+import Image from "next/image";
+import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
 
-export const SourcingVisibility = () => {
-  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const isPublic = useProjetsStore((state) => state.getCurrentProjet())?.is_public;
-  const projetId = useProjetsStore((state) => state.getCurrentProjet())?.id;
-  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+type ProjetVisibilityProps = {
+  isPublic?: boolean | null;
+  isLoading?: boolean;
+  onVisibilityChange: (_checked: boolean) => void;
+  disabled?: boolean;
+};
 
-  const handleVisibility = async (checked: boolean) => {
-    if (projetId) {
-      const result = await updateProjetVisibilityAction(projetId, checked);
-      if (result.projet) {
-        addOrUpdateProjet(result.projet);
-      }
-      notifications(result.type, result.message);
-    }
-  };
-
+export const ProjetVisibility = ({ isPublic, isLoading, onVisibilityChange, disabled }: ProjetVisibilityProps) => {
   return (
-    <div className="rounded-[20px] bg-dsfr-background-default-grey-hover p-8">
-      {currentProjet ? (
+    <div className="mb-14 mt-16 rounded-[20px] bg-dsfr-background-default-grey-hover p-8">
+      {!isLoading ? (
         <p
           className={clsx(
             "fr-badge fr-badge--sm fr-badge--no-icon mb-2",
@@ -54,24 +41,23 @@ export const SourcingVisibility = () => {
           <p>
             Rendez votre projet visible dans le module 6 pour partager son objet, sa localisation et son état
             d’avancement aux autres membres de la communauté. Grâce à cette fonctionnalité, découvrez les initiatives
-            voisines, échangez avec d’autres porteurs de projet, et obtenez des contacts de prestataires. En tant
-            qu’administrateur d’un projet, vos prénom, nom et adresse mail seront partagés avec les utilisateurs
-            connectés.
+            voisines, échangez avec d’autres porteurs de projet, et obtenez des contacts de prestataires.
           </p>
           <p>
             En tant qu’administrateur d’un projet, vos prénom, nom et adresse mail seront partagés avec les utilisateurs
             connectés.
           </p>
         </div>
-        {currentProjet ? (
+        {!isLoading ? (
           <div className="[&>div]:-mr-8">
             <ToggleSwitch
               labelPosition="right"
               label=""
               inputTitle=""
               showCheckedHint={false}
-              defaultChecked={isPublic ?? false}
-              onChange={handleVisibility}
+              checked={isPublic ?? undefined}
+              disabled={disabled}
+              onChange={onVisibilityChange}
             />
           </div>
         ) : (

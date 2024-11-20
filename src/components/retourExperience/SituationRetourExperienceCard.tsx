@@ -2,6 +2,7 @@ import Image from "next/image";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { GetValues } from "@/src/lib/strapi/types/types";
+import { clsx } from "clsx";
 
 export default async function SituationRetourExperienceCard({
   situation,
@@ -16,7 +17,7 @@ export default async function SituationRetourExperienceCard({
     return null;
   }
   return (
-    <div className={`fr-card fr-card--no-border fr-card--shadow rounded-2xl ${className} max-w-md`}>
+    <div className={clsx("fr-card fr-card--no-border fr-card--shadow max-w-md rounded-2xl", className)}>
       <div className="fr-card__body">
         <div className="fr-card__content">
           <h3 className="fr-card__title">{titre}</h3>

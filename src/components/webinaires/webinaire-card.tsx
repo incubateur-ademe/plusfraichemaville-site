@@ -3,7 +3,7 @@ import Image from "next/image";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import { dateToLiteralString, stipStrapiTime } from "@/src/helpers/dateUtils";
 import Button from "@codegouvfr/react-dsfr/Button";
-import React from "react";
+
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
 import { WebinaireSubscriptionButton } from "@/src/components/webinaires/webinaire-subscription-button";

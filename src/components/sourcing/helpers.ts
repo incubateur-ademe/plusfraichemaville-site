@@ -10,7 +10,8 @@ import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
 import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
-import { getRegionLabelForProjet } from "@/src/helpers/regions";
+import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
@@ -46,7 +47,7 @@ export const contactsTypeMap: SourcingContactTypeMap[] = [
   { code: "conception_et_realisation", label: "Conception et réalisation" },
   { code: "concertation_citoyenne", label: "Concertation citoyenne" },
   { code: "recherche_et_innovation", label: "Recherche et innovation" },
-  { code: "groupements", label: "Groupements" },
+  { code: "groupements", label: "Groupement" },
   { code: "collectivite", label: "Collectivité" },
 ] as const;
 
@@ -72,6 +73,10 @@ export const contactsSousTypeMap: SourcingContactTypeMap[] = [
   { code: "association", label: "Association" },
   { code: "federation", label: "Fédération" },
   { code: "collectivite", label: "Collectivité" },
+  { code: "entreprise_privee", label: "Entreprise privée" },
+  { code: "agence_urbanisme", label: "Agence d'urbanisme" },
+  { code: "etablissement_public", label: "Établissement public" },
+  { code: "pole_innovation", label: "Pôle d'innovation" },
 ] as const;
 
 export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"], isSousType: boolean) => {
@@ -80,15 +85,25 @@ export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"]
   return contactType?.label;
 };
 
-export const strapiContactToDbContact = (strapiContact: StrapiSourcingContact, rexId: number): SourcingContact => {
+export const strapiContactToSourcingContact = (
+  strapiContact: StrapiSourcingContact,
+  retourExperience: RetourExperienceResponse,
+): SourcingContact => {
   return {
     type: "rex",
-    id: { rexId, contactId: strapiContact.id },
+    id: { rexId: retourExperience.id, contactId: strapiContact.id },
     label: strapiContact.label,
     email: strapiContact.email,
     telephone: strapiContact.telephone,
+    siteInternet: strapiContact.site_internet,
     sousTypeContact: strapiContact.sous_type_de_contact,
     typeContact: strapiContact.type_de_contact,
+    rex: {
+      nom: retourExperience.attributes.titre,
+      cout: `${formatNumberWithSpaces(retourExperience.attributes.cout_euro)} €`,
+      slug: retourExperience.attributes.slug,
+      region: getRegionLabelFromCode(retourExperience.attributes.region?.data.attributes.code),
+    },
   };
 };
 

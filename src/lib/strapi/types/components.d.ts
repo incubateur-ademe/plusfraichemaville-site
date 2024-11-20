@@ -187,29 +187,34 @@ export interface RetourExperienceContact extends Schema.Component {
     >;
     sous_type_de_contact: Attribute.Enumeration<
       [
+        "agence_architecture",
+        "agence_communication",
+        "agence_conception_lumiere",
+        "agence_eau",
+        "agence_paysagiste",
+        "agence_urbanisme",
+        "amenageur",
+        "assistance_maitrise_ouvrage",
+        "association",
+        "bailleur_social",
         "bureau_etude_ingenierie",
         "bureau_etude_technique",
-        "assistance_maitrise_ouvrage",
-        "agence_eau",
-        "bailleur_social",
         "caue",
-        "agence_architecture",
-        "agence_paysagiste",
-        "amenageur",
-        "societe_arboriculture",
-        "agence_conception_lumiere",
-        "syndic_copropriete",
-        "agence_communication",
         "collectif",
-        "pole_universitaire",
-        "laboratoire_recherche",
-        "institut",
-        "syndicat_mixte",
-        "association",
-        "federation",
         "collectivite",
+        "entreprise_privee",
+        "etablissement_public",
+        "federation",
+        "institut",
+        "laboratoire_recherche",
+        "pole_innovation",
+        "pole_universitaire",
+        "societe_arboriculture",
+        "syndic_copropriete",
+        "syndicat_mixte",
       ]
     >;
+    site_internet: Attribute.String;
   };
 }
 

@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
-import React from "react";
+
 import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
 import { GetValues } from "@/src/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";

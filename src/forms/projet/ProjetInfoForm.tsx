@@ -1,7 +1,7 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { PropsWithChildren, useEffect } from "react";
+import { useEffect } from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import InputFormField from "@/src/components/common/InputFormField";
 import { useRouter } from "next/navigation";
@@ -19,11 +19,13 @@ import { useShallow } from "zustand/react/shallow";
 import { mapDBCollectiviteToCollectiviteAddress, mapDBProjetToProjetAddress } from "@/src/lib/adresseApi/banApiHelper";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import AddressInputFormField from "@/src/components/common/address-input-form-field";
+import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
+
 type ProjetInfoFormProps = {
   projet?: ProjetWithRelations;
   readOnly?: boolean;
-} & PropsWithChildren;
-export const ProjetInfoForm = ({ projet, readOnly, children }: ProjetInfoFormProps) => {
+};
+export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
   const router = useRouter();
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
 
@@ -32,6 +34,7 @@ export const ProjetInfoForm = ({ projet, readOnly, children }: ProjetInfoFormPro
     defaultValues: {
       adresse: mapDBProjetToProjetAddress(projet),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
+      isPublic: projet?.is_public ?? false,
     },
   });
 
@@ -44,6 +47,7 @@ export const ProjetInfoForm = ({ projet, readOnly, children }: ProjetInfoFormPro
       adresse: mapDBProjetToProjetAddress(projet),
       dateEcheance: monthDateToString(projet?.date_echeance),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
+      isPublic: projet?.is_public ?? false,
     });
   }, [form, projet]);
 
@@ -109,8 +113,7 @@ export const ProjetInfoForm = ({ projet, readOnly, children }: ProjetInfoFormPro
           asterisk={true}
           disabled={disabled}
         />
-
-        {children}
+        <ProjetVisibilityFormField control={form.control} disabled={disabled} />
 
         {!readOnly && (
           <Button className={`rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>

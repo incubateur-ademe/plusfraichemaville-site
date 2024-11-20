@@ -6,15 +6,16 @@ import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
 import { StrapiSourcingContact } from "@/src/components/sourcing/types";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { strapiContactToDbContact } from "@/src/components/sourcing/helpers";
+import { strapiContactToSourcingContact } from "@/src/components/sourcing/helpers";
 import Tag from "@codegouvfr/react-dsfr/Tag";
+import { SourcingRexContentSeeProject } from "./sourcing-rex-content-see-project";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const retourExperienceAttributes = data.attributes;
   const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>
-    strapiContactToDbContact(contact, data.id),
+    strapiContactToSourcingContact(contact, data),
   );
 
   return (
@@ -35,9 +36,12 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
           </div>
         </div>
         <div className="mb-8 mt-4 text-lg font-bold">{retourExperienceAttributes.titre}</div>
-        <Tag small className="h-fit">
-          {getRegionLabelFromCode(retourExperienceAttributes.region?.data.attributes.code)}
-        </Tag>
+        <div className="flex items-center justify-between">
+          <Tag small className="h-fit">
+            {getRegionLabelFromCode(retourExperienceAttributes.region?.data.attributes.code)}
+          </Tag>
+          <SourcingRexContentSeeProject slug={retourExperienceAttributes.slug} />
+        </div>
       </div>
       <div className="p-5">
         <h2 className="text-xl font-bold text-pfmv-navy">{contacts.length > 0 ? "Contacts" : "Contact"}</h2>

@@ -1,4 +1,3 @@
-import React from "react";
 import SignInCard from "@/src/components/signin/SignInCard";
 import { auth } from "@/src/lib/next-auth/auth";
 import { redirect } from "next/navigation";

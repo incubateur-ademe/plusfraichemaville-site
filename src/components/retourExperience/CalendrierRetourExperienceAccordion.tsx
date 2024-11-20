@@ -9,9 +9,10 @@ export default async function CalendrierRetourExperienceAccordion({
   etapes: GetValues<"retour-experience.calendrier">[];
   className?: string;
 }) {
-  return etapes.map((etape) => (
+  return etapes.map((etape, index) => (
     <Accordion
       className={`${className}`}
+      key={index}
       label={
         <div className="flex">
           <div className="w-32 flex-none">{etape.date}</div>

@@ -1,4 +1,3 @@
-import React from "react";
 import AdemeAMFLogo from "@/public/images/logo-ademe-amf.webp";
 import Image from "next/image";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
