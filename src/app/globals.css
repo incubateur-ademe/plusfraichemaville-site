@@ -487,3 +487,11 @@
 .sourcingCardAccordionBtn.fr-accordion__btn[aria-expanded="true"]::before {
   transform: rotate(-180deg);
 }
+
+.leaflet-control-zoom {
+  @apply !absolute !bottom-[-403px] !left-[10px] !border-none;
+}
+
+.leaflet-container a {
+  @apply !text-pfmv-navy;
+}

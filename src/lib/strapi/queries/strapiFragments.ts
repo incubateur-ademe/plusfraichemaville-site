@@ -87,6 +87,7 @@ export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceWithCon
       titre
       slug
       cout
+      cout_euro
       location
       contacts {
         id
