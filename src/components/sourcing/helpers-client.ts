@@ -5,13 +5,15 @@ export type CustomMarker = {
   type: "in-progress" | "rex" | "ma-collectivite";
   idProjet?: number;
 };
-
-export const createCustomIcon = (type: CustomMarker["type"], isActive: boolean) =>
-  new Icon({
+export const createCustomIcon = (type: CustomMarker["type"], isActive: boolean) => {
+  const WIDTH = 44;
+  const HEIGHT = 53;
+  return new Icon({
     iconUrl: `/images/sourcing/sourcing-projet-${type}${isActive ? "-active" : ""}.svg`,
-    iconSize: [64, 77],
-    iconAnchor: [32, 77],
+    iconSize: [WIDTH, HEIGHT],
+    iconAnchor: [WIDTH / 2, HEIGHT],
   });
+};
 
 export const createClusterCustomIcon = function (cluster: any) {
   const count = cluster.getChildCount();
