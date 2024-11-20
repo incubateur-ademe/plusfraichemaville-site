@@ -1,16 +1,16 @@
 import clsx from "clsx";
-import React, { ReactNode } from "react";
-import Badge from "@codegouvfr/react-dsfr/Badge";
+import { PropsWithChildren, ReactNode } from "react";
 
 export default function SourcingCardAccordion({
   ariaId,
+  title,
   children,
   className,
 }: {
   ariaId: string;
   className?: string;
-  children: ReactNode;
-}) {
+  title: ReactNode;
+} & PropsWithChildren) {
   return (
     <section className={`fr-accordion before:!shadow-none ${className}`}>
       <h3 className="mb-0">
@@ -23,9 +23,7 @@ export default function SourcingCardAccordion({
           aria-expanded={"false"}
           aria-controls={ariaId}
         >
-          <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
-            Projet en cours
-          </Badge>
+          {title}
         </button>
       </h3>
       <div

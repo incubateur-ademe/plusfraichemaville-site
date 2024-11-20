@@ -2,7 +2,7 @@ import { FichesSolutionsProjetEmpty } from ".";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import React from "react";
+
 import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 import { useUserStore } from "@/src/stores/user/provider";

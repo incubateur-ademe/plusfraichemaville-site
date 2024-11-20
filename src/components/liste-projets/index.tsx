@@ -1,6 +1,6 @@
 "use client";
 
-import React, { PropsWithChildren, ReactNode } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 import { ListeProjetsHeader } from "./header";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { groupAndOrderProjetsByCollectivite, sortProjectsByInvitationStatus } from "./helpers";

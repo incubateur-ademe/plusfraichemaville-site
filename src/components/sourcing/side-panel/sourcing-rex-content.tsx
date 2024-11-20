@@ -6,7 +6,7 @@ import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
 import { StrapiSourcingContact } from "@/src/components/sourcing/types";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { strapiContactToDbContact } from "@/src/components/sourcing/helpers";
+import { strapiContactToSourcingContact } from "@/src/components/sourcing/helpers";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 
@@ -14,7 +14,7 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const retourExperienceAttributes = data.attributes;
   const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>
-    strapiContactToDbContact(contact, data.id),
+    strapiContactToSourcingContact(contact, data),
   );
 
   return (

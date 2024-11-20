@@ -5,10 +5,11 @@ import { SourcingContact } from "@/src/components/sourcing/types";
 import { SourcingContactSaveButton } from "@/src/components/sourcing/contacts/sourcing-contact-save-button";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import clsx from "clsx";
-import React from "react";
+
 import SourcingCardAccordion from "@/src/components/common/sourcing-card-accordion";
 import Tag from "@codegouvfr/react-dsfr/Tag";
-import { generateRandomId } from "@/src/helpers/common";
+import Badge from "@codegouvfr/react-dsfr/Badge";
+import Link from "next/link";
 
 type SourcingContactCardProps = {
   contact: SourcingContact;
@@ -23,10 +24,11 @@ export const SourcingContactCard = ({
   className,
   showSourcedProjet,
 }: SourcingContactCardProps) => {
-  const isTypeRex = contact.type === "rex";
+  const isProjetTypeRex = contact.type === "rex";
   const type = getSourcingContactTypeLabel(contact.typeContact, false);
-  const ligne1 = isTypeRex ? getSourcingContactTypeLabel(contact.sousTypeContact, true) : contact.nomCollectivite;
-  const ligne3 = isTypeRex ? null : contact.poste;
+  const ligne1 = isProjetTypeRex ? getSourcingContactTypeLabel(contact.sousTypeContact, true) : contact.nomCollectivite;
+  const ligne3 = isProjetTypeRex ? null : contact.poste;
+  const contactUniqueId = isProjetTypeRex ? `${contact.id.rexId}-${contact.id.contactId}` : `${contact.userProjetId}`;
 
   const shoudDisplaySaveButton = !useIsLecteur(sourcingProjetId);
 
@@ -67,13 +69,38 @@ export const SourcingContactCard = ({
           <div>
             {contact.email && <CopyField className="text-pfmv-navy underline" label="Email" value={contact.email} />}
             {contact.telephone && <CopyField label="Téléphone" value={contact.telephone} />}
+            {contact.siteInternet && (
+              <div className="fr-icon-global-line text-pfmv-navy before:mb-[1px] before:mr-1 before:!h-5 before:!w-5">
+                <Link href={contact.siteInternet} prefetch={false} target="_blank">
+                  Accéder au site internet
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
       {showSourcedProjet && (
         <div className="flex w-full flex-col">
-          <SourcingCardAccordion ariaId={`accordion-diag${!isTypeRex ? contact.userProjetId : generateRandomId()}`}>
-            {!isTypeRex ? (
+          <SourcingCardAccordion
+            ariaId={`accordion-diag-${contactUniqueId}`}
+            title={
+              isProjetTypeRex ? (
+                <div className="flex w-full flex-row justify-between">
+                  <Badge small noIcon className="!bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
+                    Projet réalisé
+                  </Badge>
+                  <div className="text-right text-sm font-medium">
+                    <strong>Budget</strong> {contact.rex?.cout}
+                  </div>
+                </div>
+              ) : (
+                <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
+                  Projet en cours
+                </Badge>
+              )
+            }
+          >
+            {!isProjetTypeRex ? (
               <>
                 <div className="mb-4 font-bold">{contact.projet?.nom}</div>
                 <Tag small className="h-fit">
@@ -81,7 +108,12 @@ export const SourcingContactCard = ({
                 </Tag>
               </>
             ) : (
-              <div>REX</div>
+              <>
+                <div className="mb-4 font-bold">{contact.rex?.nom}</div>
+                <Tag small className="h-fit">
+                  {contact.rex?.region}
+                </Tag>
+              </>
             )}
           </SourcingCardAccordion>
         </div>
