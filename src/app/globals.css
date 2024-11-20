@@ -325,11 +325,11 @@
   @apply !relative after:absolute after:-right-[3px] after:-top-[3px] after:size-2 after:rounded-full after:bg-dsfr-action-high-red-hover;
 }
 
-.aide-modal .fr-grid-row > div {
+.xl-modal .fr-grid-row > div {
   @apply w-full max-w-full flex-shrink-0 flex-grow-0 basis-full;
 }
 
-.aide-modal .fr-modal__body {
+.xl-modal .fr-modal__body {
   @apply rounded-[20px];
 }
 
@@ -369,19 +369,19 @@
 #fr-consent-modal-control-button {
   box-shadow: inset 0 0 0 1px var(--border-default-grey);
 }
-.aide-modal .fr-modal__title {
+.xl-modal .fr-modal__title {
   display: none;
 }
 
-.aide-modal .fr-modal__body {
+.xl-modal .fr-modal__body {
   @apply h-[90vh] !max-h-[90vh] rounded-[20px];
 }
 
-.aide-modal .fr-container--fluid {
+.xl-modal .fr-container--fluid {
   @apply overflow-visible;
 }
 
-.aide-modal.fr-modal::before {
+.xl-modal.fr-modal::before {
   flex: none;
   height: unset;
   margin: 5vh 0 0;
