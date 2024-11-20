@@ -1467,6 +1467,7 @@ export interface ApiRetourExperienceRetourExperience extends Schema.CollectionTy
       }>;
     location: Attribute.JSON;
     contacts: Attribute.Component<"retour-experience.contact", true>;
+    cout_euro: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
