@@ -42,17 +42,21 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             retourExperience.attributes.citations.map((citation) => (
               <CustomDSFRQuote key={citation.auteur} citation={citation} className="mt-12" />
             ))}
-          <div className={clsx("mt-10 flex flex-wrap flex-col md:gap-6 md:flex-row")}>
-            <SituationRetourExperienceCard
-              titre="Avant le projet"
-              situation={retourExperience.attributes.situation_avant}
-              className={clsx("flex !bg-dsfr-background-alt-grey", isModal && " w-96 ")}
-            />
-            <SituationRetourExperienceCard
-              titre="Après le projet"
-              situation={retourExperience.attributes.situation_apres}
-              className={clsx("flex !bg-dsfr-background-alt-blue-france", isModal && " w-96 ")}
-            />
+          <div className={clsx("mt-10 flex flex-col flex-wrap gap-6 md:flex-row")}>
+            <div className="flex-1">
+              <SituationRetourExperienceCard
+                titre="Avant le projet"
+                situation={retourExperience.attributes.situation_avant}
+                className={clsx("h-full !bg-dsfr-background-alt-grey", isModal && " w-96 ")}
+              />
+            </div>
+            <div className="flex-1">
+              <SituationRetourExperienceCard
+                titre="Après le projet"
+                situation={retourExperience.attributes.situation_apres}
+                className={clsx("h-full !bg-dsfr-background-alt-blue-france", isModal && " w-96 ")}
+              />
+            </div>
           </div>
           {solutions && solutions.length > 0 && (
             <>
