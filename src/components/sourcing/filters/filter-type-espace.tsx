@@ -19,7 +19,7 @@ export const SourcingFilterTypeEspace = ({
     );
   };
   return (
-    <SourcingFiltersAccordion label="Type d'espaces" className="mb-6">
+    <SourcingFiltersAccordion label="Type d'espaces">
       <div className="flex flex-col gap-3">
         {ALL_ESPACES.map((espace) => (
           <div

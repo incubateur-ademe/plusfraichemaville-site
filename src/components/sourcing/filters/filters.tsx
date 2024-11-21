@@ -9,7 +9,7 @@ export const SourcingFilters = ({ className, children }: SourcingFiltersProps) =
   return (
     <div className={clsx(className)}>
       <div className="absolute z-[9999]">
-        <div className="flex gap-4">{children}</div>
+        <div className="mb-6 flex gap-4">{children}</div>
       </div>
     </div>
   );
