@@ -4,7 +4,7 @@ import { SourcingSidePanelContainer } from "@/src/components/sourcing/side-panel
 
 import SourcingMapClient from "@/src/components/sourcing/map/sourcing-map-client";
 import { SourcingFilters } from "../filters/filters";
-import { SourcingFiltersTypeEspace } from "../filters/filters-type-espace";
+import { SourcingFilterTypeEspace } from "../filters/filter-type-espace";
 import { CustomMarker } from "../types";
 import { TypeEspaceCode } from "../../filters/TypeEspaceFilter";
 
@@ -27,7 +27,7 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
     <div>
       <h2 className="mb-6 text-2xl">Je sélectionne des prestataires et des partenaires</h2>
       <SourcingFilters className="h-20">
-        <SourcingFiltersTypeEspace
+        <SourcingFilterTypeEspace
           selectedTypeEspace={selectedTypeEspace}
           setSelectedTypeEspace={setSelectedTypeEspace}
         />

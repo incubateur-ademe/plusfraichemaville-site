@@ -4,7 +4,7 @@ import { ALL_ESPACES, TypeEspaceCode } from "../../filters/TypeEspaceFilter";
 import { SourcingFiltersAccordion } from "./filters-accordion";
 import clsx from "clsx";
 
-export const SourcingFiltersTypeEspace = ({
+export const SourcingFilterTypeEspace = ({
   selectedTypeEspace,
   setSelectedTypeEspace,
 }: {
