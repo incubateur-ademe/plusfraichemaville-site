@@ -1,6 +1,5 @@
 import { EstimationAide, ProjetWithPublicRelations, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
-import { upsert } from "@/src/helpers/listUtils";
 import { updateAideInEstimation } from "./helper";
 import { currentUserIsAdmin } from "@/src/components/partage/helpers";
 
@@ -48,9 +47,14 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
       return projets.find((projet) => projet.id === currentProjetId);
     },
     getProjetById: (projetId) => get().projets.find((projet) => projet.id === projetId),
-    addOrUpdateProjet: (_projet) => set((state) => ({ projets: upsert(state.projets, _projet) })),
+    addOrUpdateProjet: (_projet) =>
+      set((state) => ({
+        projets: [...state.projets.filter((p) => p.id !== _projet.id), _projet],
+      })),
     addOrUpdatePendingProjet: (_pendingProjet) =>
-      set((state) => ({ pendingProjets: upsert(state.pendingProjets, _pendingProjet) })),
+      set((state) => ({
+        pendingProjets: [...state.pendingProjets.filter((p) => p.id !== _pendingProjet.id), _pendingProjet],
+      })),
     deleteProjet: async (projetId) => {
       set((state) => ({
         projets: state.projets.filter((projet) => projet.id !== projetId),
