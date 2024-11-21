@@ -480,8 +480,7 @@
   mask-size: 100% 100%;
   content: "";
   transition: transform 0.3s;
-  margin-right: 0;
-  margin-left: auto;
+  margin-right: 0.5rem !important;
 }
 
 .sourcingCardAccordionBtn.fr-accordion__btn[aria-expanded="true"]::before {

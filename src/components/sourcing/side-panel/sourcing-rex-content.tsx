@@ -32,7 +32,11 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
           </Badge>
           <div className="flex flex-row items-center gap-1">
             <div className="text-sm">Budget</div>
-            <div className="text-sm font-bold">{formatNumberWithSpaces(retourExperienceAttributes.cout_euro)} €</div>
+            <div className="text-sm font-bold">
+              {retourExperienceAttributes.cout_euro
+                ? `${formatNumberWithSpaces(retourExperienceAttributes.cout_euro)} €`
+                : "Non communiqué"}
+            </div>
           </div>
         </div>
         <div className="mb-8 mt-4 text-lg font-bold">{retourExperienceAttributes.titre}</div>

@@ -87,7 +87,7 @@ export const SourcingContactCard = ({
             title={
               isProjetTypeRex ? (
                 <div className="flex w-full flex-row justify-between">
-                  <Badge small noIcon className="!bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
+                  <Badge small noIcon className="!mb-0 !bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
                     Projet réalisé
                   </Badge>
                   <div className="text-right text-sm font-medium">
@@ -95,7 +95,7 @@ export const SourcingContactCard = ({
                   </div>
                 </div>
               ) : (
-                <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
+                <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
                   Projet en cours
                 </Badge>
               )
@@ -111,7 +111,7 @@ export const SourcingContactCard = ({
             ) : (
               <>
                 <div className="mb-4 font-bold">{contact.rex?.nom}</div>
-                <div className="flex">
+                <div className="flex items-center justify-between">
                   <Tag small className="h-fit">
                     {contact.rex?.region}
                   </Tag>
