@@ -1,5 +1,6 @@
 import { GetValues } from "@/src/lib/strapi/types/types";
 import { LatLngTuple } from "leaflet";
+import { TypeEspaceCode } from "../filters/TypeEspaceFilter";
 
 type Coordinates = [number, number];
 
@@ -35,6 +36,9 @@ export type CustomMarker = {
   geocode: LatLngTuple;
   type: "in-progress" | "rex" | "ma-collectivite";
   idProjet?: number;
+  projet?: {
+    typeEspace?: TypeEspaceCode | TypeEspaceCode[];
+  };
 };
 
 export type StrapiSourcingContact = GetValues<"retour-experience.contact"> & { id: number };

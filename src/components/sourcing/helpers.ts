@@ -9,14 +9,13 @@ import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, 
 import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
-import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
+import { selectEspaceByCode, TypeEspace } from "@/src/components/filters/TypeEspaceFilter";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
     const adresseInfo = projet.adresse_info as unknown as GeoJsonAdresse["properties"];
-
     const coordinates = adresseInfo
       ? lambert93toWGPS(adresseInfo.x, adresseInfo.y)
       : { latitude: projet.collectivite.latitude, longitude: projet.collectivite.longitude };
@@ -25,6 +24,9 @@ export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPubl
       geocode: [coordinates.latitude, coordinates.longitude] as LatLngTuple,
       type: "in-progress",
       idProjet: projet.id,
+      projet: {
+        typeEspace: projet.type_espace as TypeEspace["code"],
+      },
     };
   });
 
@@ -34,10 +36,15 @@ export const makeRexProjetsPositions = (rexProjets: RetourExperienceResponse[]):
     .map((projet) => {
       const { coordinates } = (projet.attributes.location as unknown as GeoJsonAdresse).geometry;
       const geocode = [coordinates[1], coordinates[0]] as LatLngTuple;
+      const typeEspace = projet.attributes.types_espaces as TypeEspace["code"][];
+
       return {
         geocode,
         type: "rex",
         idProjet: projet.id,
+        projet: {
+          typeEspace,
+        },
       };
     });
 

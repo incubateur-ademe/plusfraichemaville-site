@@ -17,7 +17,7 @@ export const SourcingSearch = async () => {
   const markers = [...rexProjetsPositions, ...inProgressProjetsPositions];
 
   return (
-    <div>
+    <div className="relative">
       <LazySourcingMapClient markers={markers} />
     </div>
   );
