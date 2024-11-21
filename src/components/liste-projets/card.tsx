@@ -10,7 +10,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
 import { useUserStore } from "@/src/stores/user/provider";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
-import { useMemo, useState, useTransition } from "react";
+import { useEffect, useMemo, useState, useTransition } from "react";
 import { notifications } from "../common/notifications";
 import { acceptProjectInvitationAction } from "@/src/actions/userProjet/accept-project-invitation-action";
 import { declineProjectInvitationAction } from "@/src/actions/userProjet/decline-project-invitation-action";
@@ -50,6 +50,10 @@ export const ListeProjetsCard = ({
 
   const user = getOldestAdmin(updatedProjet)?.user;
   const adminUsername = `${user?.prenom} ${user?.nom}`;
+
+  useEffect(() => {
+    setUpdatedProjet(projet);
+  }, [projet]);
 
   const setShowInfoViewerMode = useModalStore((state) => state.setShowInfoViewerMode);
   const isLecteur =
