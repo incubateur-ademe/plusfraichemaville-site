@@ -66,7 +66,7 @@ export const SourcingContactCard = ({
         <div>
           <h3 className="mb-1 text-lg font-bold">{ligne1}</h3>
           <h4 className="mb-0 !text-base">{contact.label}</h4>
-          <h5 className="mb-0 !text-base">{ligne3}</h5>
+          <h5 className="mb-2 !text-base">{ligne3}</h5>
           <div>
             {contact.email && <CopyField className="text-pfmv-navy underline" label="Email" value={contact.email} />}
             {contact.telephone && <CopyField label="Téléphone" value={contact.telephone} />}

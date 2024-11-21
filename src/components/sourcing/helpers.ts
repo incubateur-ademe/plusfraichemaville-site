@@ -100,7 +100,9 @@ export const strapiContactToSourcingContact = (
     typeContact: strapiContact.type_de_contact,
     rex: {
       nom: retourExperience.attributes.titre,
-      cout: `${formatNumberWithSpaces(retourExperience.attributes.cout_euro)} €`,
+      cout: retourExperience.attributes.cout_euro
+        ? `${formatNumberWithSpaces(retourExperience.attributes.cout_euro)} €`
+        : "Non communiqué",
       slug: retourExperience.attributes.slug,
       region: getRegionLabelFromCode(retourExperience.attributes.region?.data.attributes.code),
     },

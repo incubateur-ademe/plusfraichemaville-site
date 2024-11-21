@@ -2,7 +2,7 @@
 
 import { ALL_NIVEAU_MATURITE, getNiveauMaturiteByCode, NiveauMaturite } from "@/src/helpers/maturite-projet";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { MaturiteProgress } from "./maturite-progress";
 import clsx from "clsx";
 import { updateMaturiteProjetAction } from "@/src/actions/projets/update-maturite-projet-action";
@@ -44,7 +44,9 @@ export const Maturite = ({
       notifications(result.type, result.message);
     }
   };
-
+  useEffect(() => {
+    setShow(false);
+  }, [niveau]);
   const currentNiveau = useMemo(() => getNiveauMaturiteByCode(niveau || null), [niveau]);
   return (
     <div
@@ -55,9 +57,15 @@ export const Maturite = ({
       aria-describedby={`tooltip-maturite-${projetId}`}
     >
       <Button
+        disabled={readOnly}
         onClick={readOnly ? () => {} : toggleShow}
         priority="tertiary no outline"
-        className={clsx("relative !p-0", readOnly && "cursor-default", `hover:!${buttonBgHoverColor}`)}
+        className={clsx(
+          "relative !p-0",
+          readOnly && "cursor-default",
+          `hover:!${buttonBgHoverColor}`,
+          readOnly && "!cursor-default !text-dsfr-text-title-grey",
+        )}
       >
         <span
           className={clsx("fr-tooltip fr-placement conic-gradient", withLabel ? "!hidden" : show && "!hidden")}
