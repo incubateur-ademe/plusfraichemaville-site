@@ -4,7 +4,7 @@ export const SourcingRexContactCardSkeleton = () => {
   return (
     <div
       className={clsx(
-        "w-[22rem] rounded-2xl border-[1px] border-dsfr-border-default-grey",
+        "w-96 rounded-2xl border-[1px] border-dsfr-border-default-grey",
         "flex flex-col justify-between overflow-y-hidden",
       )}
     >

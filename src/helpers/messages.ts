@@ -27,6 +27,7 @@ export const success = {
   QUIT_PROJET: "Vous avez quitté le projet.",
   MATURITE_PROJET_UPDATED: "Le niveau de maturité de votre projet a été mis à jour.",
   NEWSLETTER_SUCCESS: "Votre inscription a bien été prise en compte.",
+  VISIBILITY_UPDATED: "La visibilité du projet a été mis à jour.",
 };
 
 export const error = {

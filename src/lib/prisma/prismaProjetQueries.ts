@@ -212,6 +212,7 @@ export const createOrUpdateProjet = async ({
   niveauMaturite,
   userId,
   collectiviteId,
+  isPublic,
 }: {
   projetId?: number;
   nomProjet: string;
@@ -222,6 +223,7 @@ export const createOrUpdateProjet = async ({
   niveauMaturite: string;
   userId: string;
   collectiviteId: number;
+  isPublic: boolean;
 }) => {
   return prismaClient.projet.upsert({
     where: {
@@ -238,6 +240,7 @@ export const createOrUpdateProjet = async ({
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
+      is_public: isPublic,
       users: {
         create: {
           user_id: userId,
@@ -257,6 +260,7 @@ export const createOrUpdateProjet = async ({
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
+      is_public: isPublic,
     },
     include: projetIncludes,
   });
@@ -414,6 +418,22 @@ export const updateSourcingCmsProjet = (
     },
     data: {
       sourcing_cms: sourcingCms,
+    },
+    include: projetIncludes,
+  });
+};
+
+export const updateProjetVisibility = async (
+  projetId: number,
+  visible: boolean,
+): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    data: {
+      is_public: visible,
     },
     include: projetIncludes,
   });

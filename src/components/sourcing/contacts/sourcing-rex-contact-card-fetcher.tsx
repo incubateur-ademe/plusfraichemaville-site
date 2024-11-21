@@ -29,7 +29,7 @@ export const SourcingRexContactCardFetcher = ({ rexContactId }: { rexContactId: 
         contact={sourcingContact}
         showSourcedProjet
         sourcingProjetId={currentProjet?.id}
-        className="w-[22rem]"
+        className="w-96"
       />
     )
   );
