@@ -1,16 +1,23 @@
-import { ProjetInfoFormData } from "@/src/forms/projet/ProjetInfoFormSchema";
-import { Control, useController } from "react-hook-form";
+import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import { ProjetVisibility } from "./projet-visibility";
 
-type ProjetVisibilityFormFieldProps = {
-  control: Control<ProjetInfoFormData>;
+type ProjetVisibilityFormFieldProps<T extends FieldValues> = {
+  control: Control<T>;
+  path: FieldPath<T>;
   disabled?: boolean;
 };
-export const ProjetVisibilityFormField = ({ control, disabled }: ProjetVisibilityFormFieldProps) => {
-  const { field } = useController({
-    name: "isPublic",
-    control,
-  });
-
-  return <ProjetVisibility isPublic={field.value} onVisibilityChange={field.onChange} disabled={disabled} />;
+export const ProjetVisibilityFormField = <T extends FieldValues>({
+  control,
+  path,
+  disabled,
+}: ProjetVisibilityFormFieldProps<T>) => {
+  return (
+    <Controller
+      control={control}
+      render={({ field }) => (
+        <ProjetVisibility isPublic={field.value} onVisibilityChange={field.onChange} disabled={disabled} />
+      )}
+      name={path}
+    />
+  );
 };

@@ -113,7 +113,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
           asterisk={true}
           disabled={disabled}
         />
-        <ProjetVisibilityFormField control={form.control} disabled={disabled} />
+        <ProjetVisibilityFormField control={form.control} path="isPublic" disabled={disabled} />
 
         {!readOnly && (
           <Button className={`rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>
