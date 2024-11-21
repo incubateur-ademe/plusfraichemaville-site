@@ -26,7 +26,7 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
         )}
       >
         <div className="flex items-center justify-between">
-          <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
+          <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
             Projet en cours
           </Badge>
           <div className="text-sm font-bold">{selectEspaceByCode(data.type_espace)}</div>

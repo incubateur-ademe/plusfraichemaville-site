@@ -27,7 +27,7 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
         )}
       >
         <div className="flex items-center justify-between">
-          <Badge small noIcon className="!bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
+          <Badge small noIcon className="!mb-0 !bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
             Projet réalisé
           </Badge>
           <div className="flex flex-row items-center gap-1">

@@ -7,7 +7,7 @@ export const SourcingInProgressProjetSkeleton = () => {
       <div className="h-46 flex w-full flex-col">
         <div className={clsx("h-[11.5rem] bg-dsfr-background-alt-blue-france px-5 pb-4 pt-6")}>
           <div className="flex items-center justify-between">
-            <Badge small noIcon className="!bg-pfmv-navy !text-dsfr-background-alt-blue-france">
+            <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
               Projet en cours
             </Badge>
             <div className={"h-3 w-1/4 animate-pulse rounded-xl bg-dsfr-background-contrast-grey-active opacity-30"} />
