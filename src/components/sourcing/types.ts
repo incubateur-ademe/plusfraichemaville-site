@@ -41,6 +41,8 @@ export type CustomMarker = {
   };
 };
 
+export type CustomMarkerType = CustomMarker["type"];
+
 export type StrapiSourcingContact = GetValues<"retour-experience.contact"> & { id: number };
 
 export type RexContactId = { rexId: number; contactId: number };

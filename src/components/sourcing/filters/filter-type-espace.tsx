@@ -3,14 +3,14 @@ import Image from "next/image";
 import { ALL_ESPACES, TypeEspaceCode } from "../../filters/TypeEspaceFilter";
 import { SourcingFiltersAccordion } from "./filters-accordion";
 import clsx from "clsx";
-
+type SourcingFilterTypeEspaceProps = {
+  selectedTypeEspace: TypeEspaceCode[];
+  setSelectedTypeEspace: (_type: TypeEspaceCode[]) => void;
+};
 export const SourcingFilterTypeEspace = ({
   selectedTypeEspace,
   setSelectedTypeEspace,
-}: {
-  selectedTypeEspace: TypeEspaceCode[];
-  setSelectedTypeEspace: (_type: TypeEspaceCode[]) => void;
-}) => {
+}: SourcingFilterTypeEspaceProps) => {
   const handleSelectedType = (type: TypeEspaceCode) => {
     setSelectedTypeEspace(
       selectedTypeEspace?.includes(type)

@@ -5,8 +5,9 @@ import { SourcingSidePanelContainer } from "@/src/components/sourcing/side-panel
 import SourcingMapClient from "@/src/components/sourcing/map/sourcing-map-client";
 import { SourcingFilters } from "../filters/filters";
 import { SourcingFilterTypeEspace } from "../filters/filter-type-espace";
-import { CustomMarker } from "../types";
+import { CustomMarker, CustomMarkerType } from "../types";
 import { TypeEspaceCode } from "../../filters/TypeEspaceFilter";
+import { SourcingFilterProjetStatus } from "../filters/filter-projet-status";
 
 type SourcingMapContainerProps = {
   markers: CustomMarker[];
@@ -15,13 +16,17 @@ type SourcingMapContainerProps = {
 const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
   const [selectedMarker, setSelectedMarker] = useState<CustomMarker>();
   const [selectedTypeEspace, setSelectedTypeEspace] = useState<TypeEspaceCode[]>([]);
+  const [selectedProjetStatus, setSelectedProjetStatus] = useState<CustomMarkerType[]>([]);
 
-  const filteredMarkers =
-    selectedTypeEspace.length > 0
-      ? markers.filter((marker) =>
-          [marker.projet?.typeEspace ?? []].flat().some((type) => selectedTypeEspace.includes(type)),
-        )
-      : markers;
+  const filteredMarkers = markers.filter((marker) => {
+    const typeEspaceMatch =
+      selectedTypeEspace.length === 0 ||
+      [marker.projet?.typeEspace ?? []].flat().some((type) => selectedTypeEspace.includes(type));
+
+    const statusMatch = selectedProjetStatus.length === 0 || selectedProjetStatus.includes(marker.type);
+
+    return typeEspaceMatch && statusMatch;
+  });
 
   return (
     <div>
@@ -30,6 +35,10 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
         <SourcingFilterTypeEspace
           selectedTypeEspace={selectedTypeEspace}
           setSelectedTypeEspace={setSelectedTypeEspace}
+        />
+        <SourcingFilterProjetStatus
+          selectedProjetStatus={selectedProjetStatus}
+          setSelectedProjetStatus={setSelectedProjetStatus}
         />
       </SourcingFilters>
       <div className="flex">
