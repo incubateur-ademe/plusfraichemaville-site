@@ -430,6 +430,7 @@ export const updateProjetVisibility = async (
   return prismaClient.projet.update({
     where: {
       id: projetId,
+      deleted_at: null,
     },
     data: {
       is_public: visible,
