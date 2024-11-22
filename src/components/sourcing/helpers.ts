@@ -9,14 +9,13 @@ import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, 
 import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
-import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
+import { selectEspaceByCode, TypeEspaceCode } from "@/src/components/filters/TypeEspaceFilter";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
     const adresseInfo = projet.adresse_info as unknown as GeoJsonAdresse["properties"];
-
     const coordinates = adresseInfo
       ? lambert93toWGPS(adresseInfo.x, adresseInfo.y)
       : { latitude: projet.collectivite.latitude, longitude: projet.collectivite.longitude };
@@ -25,19 +24,28 @@ export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPubl
       geocode: [coordinates.latitude, coordinates.longitude] as LatLngTuple,
       type: "in-progress",
       idProjet: projet.id,
+      projet: {
+        typeEspace: projet.type_espace as TypeEspaceCode,
+      },
     };
   });
 
-export const makeRexProjetsPositions = (rexProjets: RetourExperienceResponse[]): SourcingMapClientProps["markers"] =>
+export const makeRexMarkers = (rexProjets: RetourExperienceResponse[]): SourcingMapClientProps["markers"] =>
   rexProjets
     .filter((projet) => Boolean(projet.attributes.location as unknown as GeoJsonAdresse))
     .map((projet) => {
       const { coordinates } = (projet.attributes.location as unknown as GeoJsonAdresse).geometry;
       const geocode = [coordinates[1], coordinates[0]] as LatLngTuple;
+      const typeEspace = projet.attributes.types_espaces as TypeEspaceCode[];
+
       return {
         geocode,
         type: "rex",
         idProjet: projet.id,
+        projet: {
+          typeEspace,
+          budget: projet.attributes.cout_euro,
+        },
       };
     });
 
@@ -133,3 +141,13 @@ export const userProjetToSourcingContactWithProjet = (userProjet: UserProjetWith
     region: getRegionLabelForProjet(userProjet.projet),
   },
 });
+
+export const BUDGET_RANGES = {
+  LESS_THAN_10K: { min: 0, max: 10000, label: "Moins de 10k€" },
+  FROM_10K_TO_40K: { min: 10000, max: 40000, label: "De 10k€ à 40k€" },
+  FROM_40K_TO_100K: { min: 40000, max: 100000, label: "De 40k€ à 100k€" },
+  FROM_100K_TO_500K: { min: 100000, max: 500000, label: "De 100k€ à 500k€" },
+  MORE_THAN_500K: { min: 500000, max: Infinity, label: "Plus de 500k€" },
+} as const;
+
+export type BudgetRangeKey = keyof typeof BUDGET_RANGES;

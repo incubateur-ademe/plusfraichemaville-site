@@ -1,10 +1,6 @@
-import { divIcon, Icon, LatLngTuple, point } from "leaflet";
+import { divIcon, Icon, point } from "leaflet";
+import { CustomMarker } from "./types";
 
-export type CustomMarker = {
-  geocode: LatLngTuple;
-  type: "in-progress" | "rex" | "ma-collectivite";
-  idProjet?: number;
-};
 export const createCustomIcon = (type: CustomMarker["type"], isActive: boolean) => {
   const WIDTH = 44;
   const HEIGHT = 53;

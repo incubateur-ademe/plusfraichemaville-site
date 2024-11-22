@@ -89,6 +89,7 @@ export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceWithCon
       cout
       cout_euro
       location
+      types_espaces
       contacts {
         id
         label
