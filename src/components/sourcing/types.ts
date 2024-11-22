@@ -38,6 +38,7 @@ export type CustomMarker = {
   idProjet?: number;
   projet?: {
     typeEspace?: TypeEspaceCode | TypeEspaceCode[];
+    budget?: number;
   };
 };
 

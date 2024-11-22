@@ -1,32 +1,30 @@
 "use client";
-import { useState } from "react";
-import { SourcingSidePanelContainer } from "@/src/components/sourcing/side-panel/sourcing-side-panel-container";
 
+import { SourcingSidePanelContainer } from "@/src/components/sourcing/side-panel/sourcing-side-panel-container";
 import SourcingMapClient from "@/src/components/sourcing/map/sourcing-map-client";
 import { SourcingFilters } from "../filters/filters";
 import { SourcingFilterTypeEspace } from "../filters/filter-type-espace";
-import { CustomMarker, CustomMarkerType } from "../types";
-import { TypeEspaceCode } from "../../filters/TypeEspaceFilter";
+import { CustomMarker } from "../types";
 import { SourcingFilterProjetStatus } from "../filters/filter-projet-status";
+import { SourcingFilterBudget } from "../filters/filter-budget";
+import { useSourcingFilters } from "../filters/use-sourcing-filters";
 
 type SourcingMapContainerProps = {
   markers: CustomMarker[];
 };
 
 const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
-  const [selectedMarker, setSelectedMarker] = useState<CustomMarker>();
-  const [selectedTypeEspace, setSelectedTypeEspace] = useState<TypeEspaceCode[]>([]);
-  const [selectedProjetStatus, setSelectedProjetStatus] = useState<CustomMarkerType[]>([]);
-
-  const filteredMarkers = markers.filter((marker) => {
-    const typeEspaceMatch =
-      selectedTypeEspace.length === 0 ||
-      [marker.projet?.typeEspace ?? []].flat().some((type) => selectedTypeEspace.includes(type));
-
-    const statusMatch = selectedProjetStatus.length === 0 || selectedProjetStatus.includes(marker.type);
-
-    return typeEspaceMatch && statusMatch;
-  });
+  const {
+    filteredMarkers,
+    selectedMarker,
+    setSelectedMarker,
+    selectedTypeEspace,
+    setSelectedTypeEspace,
+    selectedStatus,
+    setSelectedStatus,
+    selectedBudget,
+    setSelectedBudget,
+  } = useSourcingFilters(markers);
 
   return (
     <div>
@@ -36,10 +34,8 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
           selectedTypeEspace={selectedTypeEspace}
           setSelectedTypeEspace={setSelectedTypeEspace}
         />
-        <SourcingFilterProjetStatus
-          selectedProjetStatus={selectedProjetStatus}
-          setSelectedProjetStatus={setSelectedProjetStatus}
-        />
+        <SourcingFilterProjetStatus selectedProjetStatus={selectedStatus} setSelectedProjetStatus={setSelectedStatus} />
+        <SourcingFilterBudget selectedBudget={selectedBudget} setSelectedBudget={setSelectedBudget} />
       </SourcingFilters>
       <div className="flex">
         <div className="h-[715px] w-full max-w-[50rem]">

@@ -44,6 +44,7 @@ export const makeRexProjetsPositions = (rexProjets: RetourExperienceResponse[]):
         idProjet: projet.id,
         projet: {
           typeEspace,
+          budget: projet.attributes.cout_euro,
         },
       };
     });
@@ -140,3 +141,13 @@ export const userProjetToSourcingContactWithProjet = (userProjet: UserProjetWith
     region: getRegionLabelForProjet(userProjet.projet),
   },
 });
+
+export const BUDGET_RANGES = {
+  LESS_THAN_10K: { min: 0, max: 10000, label: "Moins de 10k€" },
+  FROM_10K_TO_40K: { min: 10000, max: 40000, label: "De 10k€ à 40k€" },
+  FROM_40K_TO_100K: { min: 40000, max: 100000, label: "De 40k€ à 100k€" },
+  FROM_100K_TO_500K: { min: 100000, max: 500000, label: "De 100k€ à 500k€" },
+  MORE_THAN_500K: { min: 500000, max: Infinity, label: "Plus de 500k€" },
+} as const;
+
+export type BudgetRangeKey = keyof typeof BUDGET_RANGES;
