@@ -4,7 +4,6 @@ import { redirect } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Image from "next/image";
 import clsx from "clsx";
-import Badge from "@codegouvfr/react-dsfr/Badge";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
@@ -33,7 +32,6 @@ const data = {
       title: "Lancez la mise-en-œuvre des solutions",
       description: "Rédigez un cahier des charges et chercher les bons prestataires pour réaliser le projet.",
       picto: "solutions",
-      comingSoon: true,
     },
   ],
 };
@@ -75,11 +73,6 @@ export default async function Connexion({ searchParams }: { searchParams: { call
             <div>
               <h3 className="mb-3 text-[22px] font-bold leading-7">{bloc.title}</h3>
               <p className="mb-4 text-lg">{bloc.description}</p>
-              {bloc.comingSoon && (
-                <Badge small severity="new" className="!bg-dsfr-background-open-blue-france !text-dsfr-hover-blue-sun">
-                  Bientôt disponible
-                </Badge>
-              )}
             </div>
           </div>
         ))}
