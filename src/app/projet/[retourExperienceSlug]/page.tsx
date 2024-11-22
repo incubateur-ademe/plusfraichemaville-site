@@ -1,4 +1,4 @@
-import { RetourExperience } from "@/src/components/projet/projet-retour-experience";
+import { RetourExperienceServer } from "@/src/components/projet/projet-retour-experience-server";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
@@ -18,5 +18,5 @@ export async function generateMetadata({ params }: RetourExperiencePageProps): P
 }
 
 export default async function RetourExperiencePage({ params }: RetourExperiencePageProps) {
-  return <RetourExperience params={params} />;
+  return <RetourExperienceServer params={params} />;
 }

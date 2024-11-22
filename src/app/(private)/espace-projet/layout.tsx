@@ -1,5 +1,5 @@
 "use client";
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { useUserStore } from "@/src/stores/user/provider";
 import { hasAllRequiredFieldsSet } from "@/src/helpers/user";
 import { useRouter } from "next/navigation";

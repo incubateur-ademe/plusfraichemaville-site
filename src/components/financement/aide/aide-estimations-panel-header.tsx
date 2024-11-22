@@ -14,7 +14,7 @@ export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estima
   return (
     <>
       <div className="mb-4 flex flex-wrap gap-4">
-        <h3 className="mb-0 text-xl text-pfmv-navy">Region {region}</h3>
+        <h3 className="mb-0 text-xl text-pfmv-navy">Région {region}</h3>
         <SeparatorY />
         <h3 className="mb-0 text-xl text-pfmv-navy">{commune}</h3>
         <SeparatorY />

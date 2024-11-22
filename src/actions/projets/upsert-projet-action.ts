@@ -54,6 +54,7 @@ export const upsertProjetAction = async (
         dateEcheance: data.dateEcheance,
         collectiviteId: collectiviteId,
         userId: user.id,
+        isPublic: data.isPublic,
       });
 
       if (updatedProjet && projetToEdit?.niveau_maturite !== updatedProjet.niveau_maturite) {

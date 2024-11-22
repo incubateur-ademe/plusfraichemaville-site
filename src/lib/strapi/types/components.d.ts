@@ -163,6 +163,61 @@ export interface RetourExperienceCalendrier extends Schema.Component {
   };
 }
 
+export interface RetourExperienceContact extends Schema.Component {
+  collectionName: "components_retour_experience_contacts";
+  info: {
+    displayName: "Contact";
+    icon: "phone";
+    description: "";
+  };
+  attributes: {
+    label: Attribute.String;
+    telephone: Attribute.String;
+    email: Attribute.Email;
+    type_de_contact: Attribute.Enumeration<
+      [
+        "conseil",
+        "structure_publique",
+        "conception_et_realisation",
+        "concertation_citoyenne",
+        "recherche_et_innovation",
+        "groupements",
+        "collectivite",
+      ]
+    >;
+    sous_type_de_contact: Attribute.Enumeration<
+      [
+        "agence_architecture",
+        "agence_communication",
+        "agence_conception_lumiere",
+        "agence_eau",
+        "agence_paysagiste",
+        "agence_urbanisme",
+        "amenageur",
+        "assistance_maitrise_ouvrage",
+        "association",
+        "bailleur_social",
+        "bureau_etude_ingenierie",
+        "bureau_etude_technique",
+        "caue",
+        "collectif",
+        "collectivite",
+        "entreprise_privee",
+        "etablissement_public",
+        "federation",
+        "institut",
+        "laboratoire_recherche",
+        "pole_innovation",
+        "pole_universitaire",
+        "societe_arboriculture",
+        "syndic_copropriete",
+        "syndicat_mixte",
+      ]
+    >;
+    site_internet: Attribute.String;
+  };
+}
+
 export interface RetourExperienceSituation extends Schema.Component {
   collectionName: "components_retour_experience_situations";
   info: {
@@ -194,6 +249,7 @@ declare module "@strapi/types" {
       "fiche-solution.etape-mise-en-oeuvre": FicheSolutionEtapeMiseEnOeuvre;
       "fiche-solution.oups": FicheSolutionOups;
       "retour-experience.calendrier": RetourExperienceCalendrier;
+      "retour-experience.contact": RetourExperienceContact;
       "retour-experience.situation": RetourExperienceSituation;
     }
   }

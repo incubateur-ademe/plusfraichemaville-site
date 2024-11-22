@@ -3,6 +3,7 @@ import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@pris
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
+import { RexContactId } from "@/src/components/sourcing/types";
 
 export const projetIncludes = {
   collectivite: true,
@@ -19,6 +20,33 @@ export const projetIncludes = {
     where: { deleted_at: null },
     include: { user: true },
   },
+  sourcing_user_projets: {
+    include: {
+      sourced_user_projet: {
+        include: {
+          user: {
+            select: {
+              id: true,
+              nom: true,
+              prenom: true,
+              email: true,
+              poste: true,
+              nom_etablissement: true,
+            },
+          },
+          projet: {
+            select: {
+              collectivite: true,
+              nom: true,
+              type_espace: true,
+              niveau_maturite: true,
+              adresse_info: true,
+            },
+          },
+        },
+      },
+    },
+  },
 };
 
 export const projetPublicSelect = {
@@ -28,9 +56,20 @@ export const projetPublicSelect = {
   type_espace: true,
   collectivite: true,
   niveau_maturite: true,
+  adresse_info: true,
   users: {
     select: {
-      user: { select: { id: true, nom: true, prenom: true } },
+      id: true,
+      user: { select: { id: true, nom: true, prenom: true, email: true, poste: true, nom_etablissement: true } },
+      projet: {
+        select: {
+          collectivite: true,
+          nom: true,
+          type_espace: true,
+          niveau_maturite: true,
+          adresse_info: true,
+        },
+      },
       created_at: true,
       role: true,
       invitation_status: true,
@@ -38,6 +77,7 @@ export const projetPublicSelect = {
       nb_views: true,
     },
   },
+  sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
 export const updateFichesProjet = async (
@@ -172,6 +212,7 @@ export const createOrUpdateProjet = async ({
   niveauMaturite,
   userId,
   collectiviteId,
+  isPublic,
 }: {
   projetId?: number;
   nomProjet: string;
@@ -182,6 +223,7 @@ export const createOrUpdateProjet = async ({
   niveauMaturite: string;
   userId: string;
   collectiviteId: number;
+  isPublic: boolean;
 }) => {
   return prismaClient.projet.upsert({
     where: {
@@ -198,6 +240,7 @@ export const createOrUpdateProjet = async ({
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
+      is_public: isPublic,
       users: {
         create: {
           user_id: userId,
@@ -217,6 +260,7 @@ export const createOrUpdateProjet = async ({
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
+      is_public: isPublic,
     },
     include: projetIncludes,
   });
@@ -339,5 +383,58 @@ export const projetUpdated = async (projetId: number): Promise<projet | null> =>
       deleted_at: null,
     },
     data: {},
+  });
+};
+
+export const getPublicProjets = async (): Promise<ProjetWithPublicRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      is_public: true,
+      deleted_at: null,
+    },
+    select: projetPublicSelect,
+  });
+};
+
+export const getPublicProjetById = async (projetId: number): Promise<ProjetWithPublicRelations | null> => {
+  return prismaClient.projet.findUnique({
+    where: {
+      id: projetId,
+      is_public: true,
+      deleted_at: null,
+    },
+    select: projetPublicSelect,
+  });
+};
+
+export const updateSourcingCmsProjet = (
+  projetId: number,
+  sourcingCms: RexContactId[],
+): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    data: {
+      sourcing_cms: sourcingCms,
+    },
+    include: projetIncludes,
+  });
+};
+
+export const updateProjetVisibility = async (
+  projetId: number,
+  visible: boolean,
+): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    data: {
+      is_public: visible,
+    },
+    include: projetIncludes,
   });
 };

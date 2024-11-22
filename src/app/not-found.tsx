@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function Generic404Page() {
   return (
     <main role="main" id="content">

@@ -3,6 +3,7 @@ import { CollectiviteFormSchema } from "@/src/forms/collectivite/collectivite-fo
 
 export const ProjetInfoFormSchema = z.object({
   projetId: z.number().optional(),
+  isPublic: z.boolean(),
   nom: z.string().min(1, { message: "Veuillez renseigner le nom du projet" }),
   typeEspace: z.string().min(1, { message: "Veuillez renseigner l'espace sur lequel vous souhaitez agir" }),
   adresse: z

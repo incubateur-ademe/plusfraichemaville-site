@@ -48,6 +48,9 @@ export const ListeProjetsCard = ({
   const members = updatedProjet.users;
   const [isPending, startTransition] = useTransition();
 
+  const user = getOldestAdmin(updatedProjet)?.user;
+  const adminUsername = `${user?.prenom} ${user?.nom}`;
+
   useEffect(() => {
     setUpdatedProjet(projet);
   }, [projet]);
@@ -184,7 +187,7 @@ export const ListeProjetsCard = ({
                   {getAllUserProjectCount(updatedProjet)}
                 </div>
                 <div>
-                  <span>Admin : {getOldestAdmin(updatedProjet).username}</span>
+                  <span>Admin : {adminUsername}</span>
                 </div>
               </div>
               <Conditional>

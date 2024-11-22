@@ -1,4 +1,3 @@
-import React from "react";
 import { getCoutFiche, getLabelCoutFourniture } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { GetValues } from "@/src/lib/strapi/types/types";
