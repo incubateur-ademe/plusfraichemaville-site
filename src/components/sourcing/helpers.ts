@@ -9,7 +9,7 @@ import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, 
 import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
-import { selectEspaceByCode, TypeEspace, TypeEspaceCode } from "@/src/components/filters/TypeEspaceFilter";
+import { selectEspaceByCode, TypeEspaceCode } from "@/src/components/filters/TypeEspaceFilter";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 
