@@ -1,8 +1,7 @@
-"use client";
-
 import { ALL_ESPACES, TypeEspaceCode } from "../../filters/TypeEspaceFilter";
-import { SourcingFiltersAccordion } from "./filters-accordion";
+import { SourcingFiltersAccordion } from "./sourcing-filters-accordion";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
+
 type SourcingFilterTypeEspaceProps = {
   selectedTypeEspace: TypeEspaceCode[];
   setSelectedTypeEspace: (_type: TypeEspaceCode[]) => void;
@@ -19,7 +18,7 @@ export const SourcingFilterTypeEspace = ({
     );
   };
   return (
-    <SourcingFiltersAccordion label="Type d'espaces">
+    <SourcingFiltersAccordion code="type-espace">
       <Checkbox
         className="h-72"
         options={ALL_ESPACES.map((espace) => ({

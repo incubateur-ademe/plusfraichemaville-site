@@ -30,7 +30,7 @@ export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPubl
     };
   });
 
-export const makeRexProjetsPositions = (rexProjets: RetourExperienceResponse[]): SourcingMapClientProps["markers"] =>
+export const makeRexMarkers = (rexProjets: RetourExperienceResponse[]): SourcingMapClientProps["markers"] =>
   rexProjets
     .filter((projet) => Boolean(projet.attributes.location as unknown as GeoJsonAdresse))
     .map((projet) => {

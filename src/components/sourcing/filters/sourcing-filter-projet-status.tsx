@@ -1,7 +1,5 @@
-"use client";
-
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
-import { SourcingFiltersAccordion } from "./filters-accordion";
+import { SourcingFiltersAccordion } from "./sourcing-filters-accordion";
 import { CustomMarkerType } from "../types";
 
 type SourcingFilterProjetStatusProps = {
@@ -21,7 +19,7 @@ export const SourcingFilterProjetStatus = ({
     );
   };
   return (
-    <SourcingFiltersAccordion label="Statut du projet">
+    <SourcingFiltersAccordion code="statut-projet">
       <Checkbox
         className="h-12"
         options={[

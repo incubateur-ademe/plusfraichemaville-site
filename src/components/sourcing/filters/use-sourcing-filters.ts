@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { TypeEspaceCode } from "../../filters/TypeEspaceFilter";
-import { BudgetRangeKey, BUDGET_RANGES } from "../helpers";
+import { BUDGET_RANGES, BudgetRangeKey } from "../helpers";
 import { CustomMarker, CustomMarkerType } from "../types";
 
 const useFilteredMarkers = (
@@ -21,7 +21,7 @@ const useFilteredMarkers = (
     filters.budget.length === 0 ||
     filters.budget.some((budgetKey) => {
       const { min, max } = BUDGET_RANGES[budgetKey];
-      return marker.projet?.budget && marker.projet.budget >= min && marker.projet.budget < max;
+      return marker.projet?.budget != null && marker.projet.budget >= min && marker.projet.budget < max;
     });
 
   return markers.filter((marker) => isTypeEspaceMatch(marker) && isStatusMatch(marker) && isBudgetMatch(marker));

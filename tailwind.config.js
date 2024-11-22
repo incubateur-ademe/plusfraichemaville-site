@@ -9,7 +9,6 @@ module.exports = {
     },
     boxShadow: {
       "pfmv-card-shadow": "0px 4px 20px 0px rgba(0, 0, 0, 0.10)",
-      "pfmv-navy-shadow": "0 0 20px 0 rgba(0, 0, 145, 0.2)",
       none: "0px 0px rgba(0, 0, 0)",
     },
     colors: {

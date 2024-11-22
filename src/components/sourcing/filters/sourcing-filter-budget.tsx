@@ -1,7 +1,5 @@
-"use client";
-
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
-import { SourcingFiltersAccordion } from "./filters-accordion";
+import { SourcingFiltersAccordion } from "./sourcing-filters-accordion";
 import { BUDGET_RANGES, BudgetRangeKey } from "../helpers";
 
 type SourcingFilterBudgetProps = {
@@ -18,7 +16,7 @@ export const SourcingFilterBudget = ({ selectedBudget, setSelectedBudget }: Sour
     );
   };
   return (
-    <SourcingFiltersAccordion label="Budget">
+    <SourcingFiltersAccordion code="budget">
       <Checkbox
         className="h-48"
         options={Object.entries(BUDGET_RANGES).map(([key, range]) => ({
