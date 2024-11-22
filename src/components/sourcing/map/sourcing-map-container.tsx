@@ -1,13 +1,18 @@
 "use client";
 
-import { SourcingSidePanelContainer } from "@/src/components/sourcing/side-panel/sourcing-side-panel-container";
-import SourcingMapClient from "@/src/components/sourcing/map/sourcing-map-client";
 import { SourcingFilters } from "../filters/sourcing-filters";
 import { SourcingFilterTypeEspace } from "../filters/sourcing-filter-type-espace";
 import { CustomMarker } from "../types";
 import { SourcingFilterProjetStatus } from "../filters/sourcing-filter-projet-status";
 import { SourcingFilterBudget } from "../filters/sourcing-filter-budget";
 import { useSourcingFilters } from "../filters/use-sourcing-filters";
+import dynamic from "next/dynamic";
+
+import { SourcingMapSkeleton } from "./sourcing-map-skeleton";
+const LazySourcingMapClient = dynamic(() => import("../map/sourcing-map-client"), {
+  ssr: false,
+  loading: () => <SourcingMapSkeleton />,
+});
 
 type SourcingMapContainerProps = {
   markers: CustomMarker[];
@@ -41,18 +46,12 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
           Réinitialiser les filtres
         </button>
       </SourcingFilters>
-      <div className="flex">
-        <div className="h-[715px] w-full max-w-[50rem]">
-          <SourcingMapClient
-            markers={filteredMarkers}
-            setSelectedMarker={setSelectedMarker}
-            selectedMarker={selectedMarker}
-          />
-        </div>
-        <div className="h-[715px] w-[400px] shrink-0 overflow-y-auto">
-          <SourcingSidePanelContainer marker={selectedMarker} />
-        </div>
-      </div>
+
+      <LazySourcingMapClient
+        markers={filteredMarkers}
+        setSelectedMarker={setSelectedMarker}
+        selectedMarker={selectedMarker}
+      />
     </>
   );
 };
