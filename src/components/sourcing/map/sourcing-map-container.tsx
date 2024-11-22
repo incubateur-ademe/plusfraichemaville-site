@@ -24,6 +24,7 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
     setSelectedStatus,
     selectedBudget,
     setSelectedBudget,
+    resetFilters,
   } = useSourcingFilters(markers);
 
   return (
@@ -36,6 +37,9 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
         />
         <SourcingFilterProjetStatus selectedProjetStatus={selectedStatus} setSelectedProjetStatus={setSelectedStatus} />
         <SourcingFilterBudget selectedBudget={selectedBudget} setSelectedBudget={setSelectedBudget} />
+        <button className="h-14 underline hover:!bg-white" onClick={resetFilters}>
+          Réinitialiser les filtres
+        </button>
       </SourcingFilters>
       <div className="flex">
         <div className="h-[715px] w-full max-w-[50rem]">

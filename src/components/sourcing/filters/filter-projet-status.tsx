@@ -31,6 +31,7 @@ export const SourcingFilterProjetStatus = ({
               name: "in-progress",
               value: "in-progress",
               onChange: () => handleSelectedProjetStatus("in-progress"),
+              checked: selectedProjetStatus?.includes("in-progress"),
             },
           },
           {
@@ -39,6 +40,7 @@ export const SourcingFilterProjetStatus = ({
               name: "rex",
               value: "rex",
               onChange: () => handleSelectedProjetStatus("rex"),
+              checked: selectedProjetStatus?.includes("rex"),
             },
           },
         ]}

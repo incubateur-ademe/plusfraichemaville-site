@@ -33,6 +33,12 @@ export const useSourcingFilters = (markers: CustomMarker[]) => {
   const [selectedStatus, setSelectedStatus] = useState<CustomMarkerType[]>([]);
   const [selectedBudget, setSelectedBudget] = useState<BudgetRangeKey[]>([]);
 
+  const resetFilters = () => {
+    setSelectedTypeEspace([]);
+    setSelectedStatus([]);
+    setSelectedBudget([]);
+  };
+
   const filteredMarkers = useFilteredMarkers(markers, {
     typeEspace: selectedTypeEspace,
     status: selectedStatus,
@@ -49,5 +55,6 @@ export const useSourcingFilters = (markers: CustomMarker[]) => {
     setSelectedStatus,
     selectedBudget,
     setSelectedBudget,
+    resetFilters,
   };
 };

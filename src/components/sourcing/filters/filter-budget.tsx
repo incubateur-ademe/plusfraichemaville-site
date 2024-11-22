@@ -26,6 +26,7 @@ export const SourcingFilterBudget = ({ selectedBudget, setSelectedBudget }: Sour
           value: key,
           nativeInputProps: {
             onChange: () => handleSelectedBudget(key as BudgetRangeKey),
+            checked: selectedBudget?.includes(key as BudgetRangeKey),
           },
         }))}
       />
