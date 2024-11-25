@@ -49,6 +49,7 @@ export type StrapiSourcingContact = GetValues<"retour-experience.contact"> & { i
 export type RexContactId = { rexId: number; contactId: number };
 
 export type SourcingContact = {
+  uniqueId:string;
   typeContact: GetValues<"retour-experience.contact">["type_de_contact"];
   label?: string;
   telephone?: string;

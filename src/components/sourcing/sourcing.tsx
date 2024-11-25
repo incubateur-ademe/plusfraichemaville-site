@@ -6,11 +6,14 @@ import { SourcingEmpty } from "./sourcing-empty";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import { isEmpty } from "@/src/helpers/listUtils";
-import { SourcingContactCard } from "@/src/components/sourcing/contacts/sourcing-contact-card";
 import { userProjetToSourcingContactWithProjet } from "@/src/components/sourcing/helpers";
 import { RexContactId } from "@/src/components/sourcing/types";
 import { SourcingRexContactCardFetcher } from "@/src/components/sourcing/contacts/sourcing-rex-contact-card-fetcher";
 import { SourcingProjetVisibility } from "./sourcing-projet-visibility";
+import { useSourcingCardFilters } from "@/src/components/sourcing/use-sourcing-card-filters";
+import { useEffect, useMemo } from "react";
+import { SourcingCardFilters } from "@/src/components/sourcing/sourcing-card-filters";
+import { SourcingContactCard } from "@/src/components/sourcing/contacts/sourcing-contact-card";
 
 export const Sourcing = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -18,22 +21,55 @@ export const Sourcing = () => {
   const inProgressProjetContacts = currentProjet?.sourcing_user_projets;
   const rexContactIds = currentProjet?.sourcing_cms as RexContactId[];
 
+  const {
+    contactTypeFilters,
+    setFilter,
+    setInProgressContacts,
+    removeRexContacts,
+    contactCountForFilter,
+    addRexContact,
+    contactIsVisible,
+  } = useSourcingCardFilters();
+
+  const inProgressSourcingContact = useMemo(
+    () => inProgressProjetContacts?.map((c) => userProjetToSourcingContactWithProjet(c.sourced_user_projet)) || [],
+    [inProgressProjetContacts],
+  );
+
+  useEffect(() => {
+    setInProgressContacts(inProgressSourcingContact);
+  }, [inProgressSourcingContact, setInProgressContacts]);
+
+  useEffect(() => {
+    removeRexContacts(rexContactIds);
+  }, [removeRexContacts, rexContactIds]);
+
   return (
     <>
+      <SourcingCardFilters
+        setFilter={setFilter}
+        contactTypeFilters={contactTypeFilters}
+        contactCountForFilter={contactCountForFilter}
+      />
       <div className="flex flex-wrap gap-x-6 gap-y-12">
-        {!isEmpty(inProgressProjetContacts) &&
-          inProgressProjetContacts?.map((inProgressProjetContact) => (
-            <SourcingContactCard
-              key={inProgressProjetContact.sourced_user_projet_id}
-              contact={userProjetToSourcingContactWithProjet(inProgressProjetContact.sourced_user_projet)}
-              sourcingProjetId={currentProjet?.id}
-              className="w-96"
-              showSourcedProjet
-            />
-          ))}
+        {!isEmpty(inProgressSourcingContact) &&
+          inProgressSourcingContact?.map(
+            (contact) =>
+              contactIsVisible(contact) && (
+                <SourcingContactCard
+                  key={contact.uniqueId}
+                  contact={contact}
+                  sourcingProjetId={currentProjet?.id}
+                  className="w-96"
+                  showSourcedProjet
+                />
+              ),
+          )}
         {!isEmpty(rexContactIds) &&
           rexContactIds.map((rexContactId) => (
             <SourcingRexContactCardFetcher
+              addRexContact={addRexContact}
+              contactIsVisible={contactIsVisible}
               rexContactId={rexContactId}
               key={`${rexContactId.rexId}-${rexContactId.contactId}`}
             />
