@@ -2,7 +2,7 @@
 
 import { ALL_NIVEAU_MATURITE, getNiveauMaturiteByCode, NiveauMaturite } from "@/src/helpers/maturite-projet";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { MaturiteProgress } from "./maturite-progress";
 import clsx from "clsx";
 import { updateMaturiteProjetAction } from "@/src/actions/projets/update-maturite-projet-action";
@@ -18,11 +18,8 @@ type MaturiteProps = {
   withLabel?: boolean;
 };
 
-type CurrentNiveauMaturite = NiveauMaturite | undefined;
-
 export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
   const [show, setShow] = useState(false);
-  const [currentNiveau, setCurrentNiveau] = useState<CurrentNiveauMaturite>(getNiveauMaturiteByCode(niveau));
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const isLecteur = useIsLecteur(projetId);
 
@@ -40,6 +37,7 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
     }
   };
 
+  const currentNiveau = useMemo(() => getNiveauMaturiteByCode(niveau || null), [niveau]);
   return (
     <div
       className={clsx(
@@ -85,7 +83,6 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
                   className="h-12 !w-full bg-white px-4 py-3 text-sm"
                   priority="tertiary no outline"
                   onClick={() => {
-                    setCurrentNiveau(niveau);
                     handleUpdateMaturiteProjet(niveau.code);
                     setShow(false);
                   }}
