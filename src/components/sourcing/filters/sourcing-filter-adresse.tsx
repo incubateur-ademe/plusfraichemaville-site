@@ -50,7 +50,7 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
           )}
           placeholder="Rechercher une adresse"
           displayValue={(address: BanFeature) =>
-            address ? `${address?.properties.city} - ${address?.properties.postcode}` : ""
+            address ? `${address?.properties.label} - ${address?.properties.postcode}` : ""
           }
           onChange={(event) => throttledFetchCollectivite(event.target.value)}
         />
