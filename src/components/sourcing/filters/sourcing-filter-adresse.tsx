@@ -37,7 +37,7 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
     }
   };
 
-  const throttledFetchCollectivite = debounce((keyword) => setQuery(keyword), 200);
+  const throttledFetchAddress = debounce((keyword) => setQuery(keyword), 200);
 
   return (
     <Combobox onChange={handleChange} nullable>
@@ -52,7 +52,7 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
           displayValue={(address: BanFeature) =>
             address ? `${address?.properties.label} - ${address?.properties.postcode}` : ""
           }
-          onChange={(event) => throttledFetchCollectivite(event.target.value)}
+          onChange={(event) => throttledFetchAddress(event.target.value)}
         />
 
         {loading && <Spinner className="absolute right-2 top-3" />}
