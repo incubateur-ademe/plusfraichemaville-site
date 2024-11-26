@@ -13,7 +13,7 @@ export const SourcingCardFilters = ({
   contactCountForFilter,
 }: SourcingCardFiltersProps) => {
   return (
-    <div className="mb-12 grid grid-cols-4 gap-4">
+    <div className="mb-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       {contactTypeFilters.map((filter) => (
         <button
           className="flex cursor-pointer gap-2 hover:!bg-white"

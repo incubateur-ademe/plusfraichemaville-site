@@ -9,7 +9,7 @@ export type SourcingContactFiltersState = {
 
 export const useSourcingCardFilters = () => {
   const [contactTypeFilters, setContactTypeFilters] = useState<SourcingContactFiltersState>(
-    contactsTypeMap.map((contactType) => ({ filterKey: contactType.code, selected: true })),
+    contactsTypeMap.map((contactType) => ({ filterKey: contactType.code, selected: false })),
   );
 
   const setFilter = (key: ContactTypeKeys, selected: boolean) => {
@@ -55,7 +55,9 @@ export const useSourcingCardFilters = () => {
 
   const contactIsVisible = useCallback(
     (contact: SourcingContact): boolean =>
-      contactTypeFilters.find((f) => f.filterKey === contact.typeContact)?.selected || false,
+      contactTypeFilters.every((f) => !f.selected) ||
+      contactTypeFilters.find((f) => f.filterKey === contact.typeContact)?.selected ||
+      false,
     [contactTypeFilters],
   );
 
