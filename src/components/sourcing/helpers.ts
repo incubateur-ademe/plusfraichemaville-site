@@ -87,7 +87,7 @@ export const contactsSousTypeMap: SourcingContactTypeMap[] = [
   { code: "pole_innovation", label: "Pôle d'innovation" },
 ] as const;
 
-export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"], isSousType: boolean) => {
+export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"], isSousType?: boolean) => {
   const map = isSousType ? contactsSousTypeMap : contactsTypeMap;
   const contactType = map.find((item) => item.code === code);
   return contactType?.label;

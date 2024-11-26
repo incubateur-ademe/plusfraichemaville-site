@@ -1,3 +1,4 @@
+import { getSourcingContactTypeLabel } from "../helpers";
 import { SourcingContact } from "../types";
 
 type SourcingContactsDownloaderProps = {
@@ -9,14 +10,21 @@ export const SourcingContactsDownloader = ({ contacts }: SourcingContactsDownloa
     return null;
   }
 
+  const escapeCsvField = (field: string) => {
+    if (field.includes(",") || field.includes('"')) {
+      return `"${field.replace(/"/g, '""')}"`;
+    }
+    return field;
+  };
+
   const makeCsv = () => {
     const headersFields = [
       "Type de contact",
-      "Sous-type",
-      "Label",
+      "Sous-type de contact",
+      "Entreprise",
       "Email",
       "Téléphone",
-      "Site Internet",
+      "Site internet",
       "Nom du projet",
       "Région",
       "Poste",
@@ -29,8 +37,8 @@ export const SourcingContactsDownloader = ({ contacts }: SourcingContactsDownloa
           : [contact.projet?.nom || "", contact.projet?.region || "", contact.poste || ""];
 
       const fields = [
-        contact.typeContact || "",
-        contact.type === "rex" ? contact.sousTypeContact || "" : "",
+        getSourcingContactTypeLabel(contact.typeContact) || "",
+        contact.type === "rex" ? getSourcingContactTypeLabel(contact.sousTypeContact, true) || "" : "",
         contact.label || "",
         contact.email || "",
         contact.telephone || "",
@@ -38,7 +46,7 @@ export const SourcingContactsDownloader = ({ contacts }: SourcingContactsDownloa
         ...specificFields,
       ];
 
-      return fields.join(",");
+      return fields.map(escapeCsvField).join(",");
     });
 
     return [headersFields, ...csvRows].join("\n");
@@ -56,8 +64,9 @@ export const SourcingContactsDownloader = ({ contacts }: SourcingContactsDownloa
   };
 
   return (
-    <button onClick={downloadCsv} className="text-sm text-pfmv-navy underline hover:!bg-white">
-      Exporter les contacts en CSV <i className="ri-download-line"></i>
+    <button onClick={downloadCsv} className="text-sm text-pfmv-navy hover:!bg-white">
+      <span className="hover:underline">Exporter les contacts en CSV</span>
+      <i className="ri-download-line !no-underline before:!mb-1 before:!size-3"></i>
     </button>
   );
 };
