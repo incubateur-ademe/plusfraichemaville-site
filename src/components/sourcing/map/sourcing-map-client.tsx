@@ -1,22 +1,36 @@
 "use client";
 
+import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, ScaleControl, TileLayer, ZoomControl } from "react-leaflet";
+import { MapContainer, Marker, ScaleControl, TileLayer, useMap, ZoomControl } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { useCurrentProjetCoordinates } from "../hooks";
 import { createClusterCustomIcon, createCustomIcon } from "../helpers-client";
 import { SourcingMapLegend } from "./sourcing-map-legend";
 import { SourcingMapFocus } from "./sourcing-map-focus";
-import { CustomMarker } from "../types";
+import { CustomMarker, ZOOM_LEVELS, ZoomLevelKey } from "../types";
 import { SourcingSidePanelContainer } from "../side-panel/sourcing-side-panel-container";
+import { LatLngTuple } from "leaflet";
 
 export type SourcingMapClientProps = {
   markers: CustomMarker[];
   setSelectedMarker: (_: CustomMarker) => void;
   selectedMarker?: CustomMarker;
+  mapFocus?: { coordinates?: LatLngTuple; zoom?: ZoomLevelKey };
 };
 
-const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker }: SourcingMapClientProps) => {
+const MapFocus = ({ mapFocus }: { mapFocus?: { coordinates?: LatLngTuple; zoom?: ZoomLevelKey } }) => {
+  const map = useMap();
+  useEffect(() => {
+    if (mapFocus?.coordinates) {
+      map.setView(mapFocus.coordinates, mapFocus.zoom && ZOOM_LEVELS[mapFocus.zoom]);
+    }
+  }, [mapFocus, map]);
+
+  return null;
+};
+
+const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocus }: SourcingMapClientProps) => {
   const currentProjetCoordinates = useCurrentProjetCoordinates();
 
   const handleMarkerClick = (selectedMarker: CustomMarker) => {
@@ -33,6 +47,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker }: Sourc
           zoomControl={false}
           attributionControl={false}
         >
+          <MapFocus mapFocus={mapFocus} />
           <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png"
