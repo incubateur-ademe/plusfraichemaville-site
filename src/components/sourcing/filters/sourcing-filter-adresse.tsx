@@ -80,7 +80,7 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
                 value={address}
                 className={({ active }) =>
                   clsx(
-                    "-ml-4 h-14 border-b border-dsfr-border-default-grey pl-4",
+                    "-ml-4 h-14 border-b border-dsfr-border-default-grey !pl-8",
                     "flex items-center",
                     active && "bg-dsfr-background-alt-grey",
                   )

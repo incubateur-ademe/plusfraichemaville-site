@@ -386,11 +386,16 @@ export const projetUpdated = async (projetId: number): Promise<projet | null> =>
   });
 };
 
-export const getPublicProjets = async (): Promise<ProjetWithPublicRelations[]> => {
+type GetPublicProjetsParams = {
+  excludeProjetId?: number;
+};
+
+export const getPublicProjets = async (params?: GetPublicProjetsParams): Promise<ProjetWithPublicRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
       is_public: true,
       deleted_at: null,
+      ...(params?.excludeProjetId ? { NOT: { id: params.excludeProjetId } } : {}),
     },
     select: projetPublicSelect,
   });

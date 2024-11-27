@@ -51,7 +51,7 @@ export const Sourcing = () => {
         contactTypeFilters={contactTypeFilters}
         contactCountForFilter={contactCountForFilter}
       />
-      <div className="flex flex-wrap gap-x-6 gap-y-12">
+      <div className="flex flex-wrap gap-6">
         {!isEmpty(inProgressSourcingContact) &&
           inProgressSourcingContact?.map(
             (contact) =>
@@ -89,7 +89,7 @@ export const Sourcing = () => {
         )}
       </div>
       <div className="mt-10">
-        <SourcingProjetVisibility />
+        <SourcingProjetVisibility isLecteur={isLecteur} />
       </div>
     </>
   );

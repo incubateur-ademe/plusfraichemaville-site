@@ -5,7 +5,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
 import { ProjetVisibility } from "../common/projet-visibility";
 
-export const SourcingProjetVisibility = () => {
+export const SourcingProjetVisibility = ({ isLecteur }: { isLecteur: boolean }) => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isPublic = currentProjet?.is_public;
   const projetId = currentProjet?.id;
@@ -21,5 +21,12 @@ export const SourcingProjetVisibility = () => {
     }
   };
 
-  return <ProjetVisibility isPublic={isPublic} isLoading={!currentProjet} onVisibilityChange={handleVisibility} />;
+  return (
+    <ProjetVisibility
+      isPublic={isPublic}
+      disabled={isLecteur}
+      isLoading={!currentProjet}
+      onVisibilityChange={handleVisibility}
+    />
+  );
 };
