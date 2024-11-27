@@ -1,7 +1,7 @@
-import TypeEspaceFilter from "@/src/components/filters/TypeEspaceFilter";
 import RegionFilter from "@/src/components/filters/RegionFilter";
 import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
+import TypeEspaceFilter from "../filters/type-espace-filter-component";
 
 export default async function RetoursExperiences({
   searchParams,

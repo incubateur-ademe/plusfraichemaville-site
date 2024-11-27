@@ -8,7 +8,11 @@ import { strapiContactToSourcingContact } from "@/src/components/sourcing/helper
 import { SourcingContactCard } from "@/src/components/sourcing/contacts/sourcing-contact-card";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 
-export const SourcingRexContactCardFetcher = ({ rexContactId }: { rexContactId: RexContactId }) => {
+type SourcingRexContactCardFetcherProps = {
+  rexContactId: RexContactId;
+};
+
+export const SourcingRexContactCardFetcher = ({ rexContactId }: SourcingRexContactCardFetcherProps) => {
   const { data, isLoading } = useImmutableSwrWithFetcher<RetourExperienceResponse>(
     GET_REX_WITH_CONTACTS_BY_ID(rexContactId.rexId),
   );

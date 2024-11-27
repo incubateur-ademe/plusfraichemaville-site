@@ -10,7 +10,6 @@ import { strapiContactToSourcingContact } from "@/src/components/sourcing/helper
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { SourcingRexContentSeeProject } from "./sourcing-rex-content-see-project";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
-import { SourcingContactsDownloader } from "./sourcing-contacts-downloader";
 
 export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
@@ -73,7 +72,6 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
             </div>
           </Default>
         </Conditional>
-        <SourcingContactsDownloader contacts={contacts} />
       </div>
     </>
   );

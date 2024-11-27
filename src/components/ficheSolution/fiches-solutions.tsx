@@ -1,10 +1,10 @@
-import TypeEspaceFilter from "@/src/components/filters/TypeEspaceFilter";
 import TypeSolutionFilter from "@/src/components/filters/TypeSolutionFilter";
 import BaisseTemperatureFilter from "@/src/components/filters/BaisseTemperatureFilter";
 import { getBaisseTemperatureFicheSolutionFromTemperature } from "@/src/helpers/baisseTemperatureFicheSolution";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
 import FicheSolutionCardWithUserInfo from "./FicheSolutionCardWithUserInfo";
+import TypeEspaceFilter from "../filters/type-espace-filter-component";
 
 type FichesSolutionsProps = {
   searchParams: {

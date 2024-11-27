@@ -10,7 +10,6 @@ import { SourcingContactCard } from "../contacts/sourcing-contact-card";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
 import { userProjetToSourcingContact } from "@/src/components/sourcing/helpers";
-import { SourcingContactsDownloader } from "./sourcing-contacts-downloader";
 
 export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
@@ -59,7 +58,6 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
           />
         </div>
       )}
-      <SourcingContactsDownloader contacts={contact ? [contact] : []} />
     </>
   );
 };
