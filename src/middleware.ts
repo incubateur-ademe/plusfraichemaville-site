@@ -13,6 +13,7 @@ const cspHeader = `
     img-src 'self' blob: data: https://plusfraichemaville.s3.fr-par.scw.cloud/
     https://*.basemaps.cartocdn.com
     https://*.hsforms.com 
+    https://data.geopf.fr
     https://*.hubspot.com;
     font-src 'self' https://fonts.gstatic.com/;
     object-src 'none';
