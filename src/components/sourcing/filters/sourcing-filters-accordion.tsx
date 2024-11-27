@@ -24,7 +24,10 @@ export const SourcingFiltersAccordion = ({ code, children, className }: Sourcing
   const filter = filters.find((f) => f.code === code);
   return (
     <Accordion
-      className={clsx("!z-[1500] h-fit w-56 !border-x-[1px] !border-x-dsfr-border-default-grey bg-white", className)}
+      className={clsx(
+        "!z-[1500] h-fit w-[212px] !border-x-[1px] !border-x-dsfr-border-default-grey bg-white",
+        className,
+      )}
       label={
         <>
           <i className={clsx(filter?.iconId, "!mb-4 mr-2 size-4 before:!size-4")} />

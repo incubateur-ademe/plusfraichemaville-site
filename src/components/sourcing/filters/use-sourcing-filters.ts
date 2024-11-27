@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { TypeEspaceCode } from "../../filters/TypeEspaceFilter";
 import { BUDGET_RANGES, BudgetRangeKey } from "../helpers";
-import { CustomMarker, CustomMarkerType } from "../types";
+import { CustomMarker, CustomMarkerType, ZoomLevelKey } from "../types";
+import { LatLngTuple } from "leaflet";
 
 const useFilteredMarkers = (
   markers: CustomMarker[],
@@ -32,6 +33,7 @@ export const useSourcingFilters = (markers: CustomMarker[]) => {
   const [selectedTypeEspace, setSelectedTypeEspace] = useState<TypeEspaceCode[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<CustomMarkerType[]>([]);
   const [selectedBudget, setSelectedBudget] = useState<BudgetRangeKey[]>([]);
+  const [mapFocus, setMapFocus] = useState<{ coordinates?: LatLngTuple; zoom?: ZoomLevelKey }>();
 
   const resetFilters = () => {
     setSelectedTypeEspace([]);
@@ -56,5 +58,7 @@ export const useSourcingFilters = (markers: CustomMarker[]) => {
     selectedBudget,
     setSelectedBudget,
     resetFilters,
+    mapFocus,
+    setMapFocus,
   };
 };
