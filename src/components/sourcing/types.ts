@@ -9,6 +9,15 @@ interface Geometry {
   coordinates: Coordinates;
 }
 
+export const ZOOM_LEVELS = {
+  housenumber: 18,
+  street: 16,
+  locality: 14,
+  municipality: 12,
+} as const;
+
+export type ZoomLevelKey = keyof typeof ZOOM_LEVELS;
+
 export interface AddressProperties {
   label: string;
   score: number;
@@ -49,6 +58,7 @@ export type StrapiSourcingContact = GetValues<"retour-experience.contact"> & { i
 export type RexContactId = { rexId: number; contactId: number };
 
 export type SourcingContact = {
+  uniqueId: string;
   typeContact: GetValues<"retour-experience.contact">["type_de_contact"];
   label?: string;
   telephone?: string;

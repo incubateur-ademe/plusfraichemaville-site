@@ -9,6 +9,7 @@ import { useSourcingFilters } from "../filters/use-sourcing-filters";
 import dynamic from "next/dynamic";
 
 import { SourcingMapSkeleton } from "./sourcing-map-skeleton";
+import { SourcingFilterAdresse } from "../filters/sourcing-filter-adresse";
 const LazySourcingMapClient = dynamic(() => import("../map/sourcing-map-client"), {
   ssr: false,
   loading: () => <SourcingMapSkeleton />,
@@ -30,27 +31,36 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
     selectedBudget,
     setSelectedBudget,
     resetFilters,
+    mapFocus,
+    setMapFocus,
   } = useSourcingFilters(markers);
 
   return (
     <>
       <h2 className="mb-6 text-2xl">Je sélectionne des prestataires et des partenaires</h2>
       <SourcingFilters>
-        <SourcingFilterTypeEspace
-          selectedTypeEspace={selectedTypeEspace}
-          setSelectedTypeEspace={setSelectedTypeEspace}
-        />
-        <SourcingFilterProjetStatus selectedProjetStatus={selectedStatus} setSelectedProjetStatus={setSelectedStatus} />
-        <SourcingFilterBudget selectedBudget={selectedBudget} setSelectedBudget={setSelectedBudget} />
-        <button className="h-14 underline hover:!bg-white" onClick={resetFilters}>
-          Réinitialiser les filtres
-        </button>
+        <SourcingFilterAdresse setMapFocus={setMapFocus} />
+        <div className="flex flex-wrap gap-4">
+          <SourcingFilterTypeEspace
+            selectedTypeEspace={selectedTypeEspace}
+            setSelectedTypeEspace={setSelectedTypeEspace}
+          />
+          <SourcingFilterProjetStatus
+            selectedProjetStatus={selectedStatus}
+            setSelectedProjetStatus={setSelectedStatus}
+          />
+          <SourcingFilterBudget selectedBudget={selectedBudget} setSelectedBudget={setSelectedBudget} />
+          <button className="h-14 underline hover:!bg-white" onClick={resetFilters}>
+            Réinitialiser
+          </button>
+        </div>
       </SourcingFilters>
 
       <LazySourcingMapClient
         markers={filteredMarkers}
         setSelectedMarker={setSelectedMarker}
         selectedMarker={selectedMarker}
+        mapFocus={mapFocus}
       />
     </>
   );

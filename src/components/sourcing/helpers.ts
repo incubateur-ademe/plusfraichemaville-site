@@ -50,14 +50,19 @@ export const makeRexMarkers = (rexProjets: RetourExperienceResponse[]): Sourcing
     });
 
 export const contactsTypeMap: SourcingContactTypeMap[] = [
+  { code: "collectivite", label: "Collectivité" },
   { code: "conseil", label: "Conseil" },
   { code: "structure_publique", label: "Structure publique" },
   { code: "conception_et_realisation", label: "Conception et réalisation" },
   { code: "concertation_citoyenne", label: "Concertation citoyenne" },
   { code: "recherche_et_innovation", label: "Recherche et innovation" },
   { code: "groupements", label: "Groupement" },
-  { code: "collectivite", label: "Collectivité" },
 ] as const;
+
+export type ContactTypeKeys = (typeof contactsTypeMap)[number]["code"];
+
+export const getContactTypeLabelByCode = (code: ContactTypeKeys) =>
+  contactsTypeMap.find((c) => c.code === code)?.label || code;
 
 export const contactsSousTypeMap: SourcingContactTypeMap[] = [
   { code: "bureau_etude_ingenierie", label: "Bureau d'étude ingénierie" },
@@ -99,6 +104,7 @@ export const strapiContactToSourcingContact = (
 ): SourcingContact => {
   return {
     type: "rex",
+    uniqueId: `rex-${retourExperience.id}-${strapiContact.id}`,
     id: { rexId: retourExperience.id, contactId: strapiContact.id },
     label: strapiContact.label,
     email: strapiContact.email,
@@ -119,6 +125,7 @@ export const strapiContactToSourcingContact = (
 
 export const userProjetToSourcingContact = (userProjet: UserProjetWithUserInfos): SourcingContact => ({
   type: "in-progress",
+  uniqueId: `in-progress-${userProjet?.id}`,
   userProjetId: userProjet?.id,
   typeContact: "collectivite",
   email: userProjet?.user?.email,
@@ -129,6 +136,7 @@ export const userProjetToSourcingContact = (userProjet: UserProjetWithUserInfos)
 
 export const userProjetToSourcingContactWithProjet = (userProjet: UserProjetWithPublicInfos): SourcingContact => ({
   type: "in-progress",
+  uniqueId: `in-progress-${userProjet?.id}`,
   userProjetId: userProjet?.id,
   typeContact: "collectivite",
   email: userProjet?.user?.email,
