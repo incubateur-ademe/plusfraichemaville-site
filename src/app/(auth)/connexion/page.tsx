@@ -29,7 +29,7 @@ const data = {
       picto: "financement",
     },
     {
-      title: "Annuaire des projets",
+      title: "Annuaire des projets Plus fraîche ma ville",
       description:
         "Trouvez les contacts utiles à votre projet : agents de collectivités, bureaux d'étude, AMO, entreprises.",
       picto: "sourcing",
