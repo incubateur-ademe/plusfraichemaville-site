@@ -2,7 +2,7 @@
 
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { DisplayUserName } from "../common/display-user-name";
-import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
+import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 
 export const TableauDeBordSuiviCardInfoProjet = () => {
   const current = useProjetsStore((state) => state.getCurrentProjet());

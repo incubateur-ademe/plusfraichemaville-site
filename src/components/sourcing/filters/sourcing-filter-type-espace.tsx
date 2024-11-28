@@ -1,4 +1,5 @@
-import { ALL_ESPACES, TypeEspaceCode } from "../../filters/TypeEspaceFilter";
+import { ALL_ESPACES } from "@/src/helpers/type-espace-filter";
+import { TypeEspaceCode } from "@/src/helpers/type-espace-filter";
 import { SourcingFiltersAccordion } from "./sourcing-filters-accordion";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 

@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
 import SelectFormField from "@/src/components/common/SelectFormField";
-import { typeEspaceOptions } from "@/src/components/filters/TypeEspaceFilter";
 import { monthDateToString } from "@/src/helpers/dateUtils";
 import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
 import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
@@ -20,6 +19,7 @@ import { mapDBCollectiviteToCollectiviteAddress, mapDBProjetToProjetAddress } fr
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import AddressInputFormField from "@/src/components/common/address-input-form-field";
 import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
+import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
 
 type ProjetInfoFormProps = {
   projet?: ProjetWithRelations;

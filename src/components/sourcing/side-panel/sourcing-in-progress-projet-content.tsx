@@ -8,8 +8,9 @@ import { Maturite } from "@/src/components/maturite/maturite";
 import { getOldestAdmin } from "../../liste-projets/helpers";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
+
 import { userProjetToSourcingContact } from "@/src/components/sourcing/helpers";
+import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 
 export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);

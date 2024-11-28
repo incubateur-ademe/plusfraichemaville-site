@@ -9,15 +9,17 @@ import { SourcingContactCard } from "@/src/components/sourcing/contacts/sourcing
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useEffect, useState } from "react";
 
+type SourcingRexContactCardFetcherProps = {
+  rexContactId: RexContactId;
+  contactIsVisible: (_: SourcingContact) => boolean;
+  addRexContact: (_: SourcingContact) => void;
+};
+
 export const SourcingRexContactCardFetcher = ({
   rexContactId,
   contactIsVisible,
   addRexContact,
-}: {
-  rexContactId: RexContactId;
-  contactIsVisible: (_: SourcingContact) => boolean;
-  addRexContact: (_: SourcingContact) => void;
-}) => {
+}: SourcingRexContactCardFetcherProps) => {
   const [sourcingContact, setSourcingContact] = useState<SourcingContact | null>();
   const { data, isLoading } = useImmutableSwrWithFetcher<RetourExperienceResponse>(
     GET_REX_WITH_CONTACTS_BY_ID(rexContactId.rexId),

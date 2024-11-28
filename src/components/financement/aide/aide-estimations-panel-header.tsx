@@ -1,9 +1,10 @@
-import { selectEspaceByCode, TypeEspace } from "@/src/components/filters/TypeEspaceFilter";
 import { AideEstimationsCardLabelFicheSolution } from "./aide-estimations-card-label-fiche-solution";
 import { getRegionByDepartment } from "@/src/lib/departements";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Separator, SeparatorY } from "@/src/components/common/separator";
 import { estimation } from "@prisma/client";
+import { TypeEspace } from "@/src/helpers/type-espace-filter";
+import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 
 export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estimation }) => {
   const espace = useProjetsStore((state) => state.getCurrentProjet()?.type_espace) as TypeEspace["code"];

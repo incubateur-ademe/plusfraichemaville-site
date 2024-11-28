@@ -9,9 +9,9 @@ import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, 
 import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
-import { selectEspaceByCode, TypeEspaceCode } from "@/src/components/filters/TypeEspaceFilter";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { selectEspaceByCode, TypeEspaceCode } from "@/src/helpers/type-espace-filter";
 
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
@@ -92,7 +92,7 @@ export const contactsSousTypeMap: SourcingContactTypeMap[] = [
   { code: "pole_innovation", label: "Pôle d'innovation" },
 ] as const;
 
-export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"], isSousType: boolean) => {
+export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"], isSousType?: boolean) => {
   const map = isSousType ? contactsSousTypeMap : contactsTypeMap;
   const contactType = map.find((item) => item.code === code);
   return contactType?.label;

@@ -10,6 +10,7 @@ import { userProjetToSourcingContactWithProjet } from "@/src/components/sourcing
 import { RexContactId } from "@/src/components/sourcing/types";
 import { SourcingRexContactCardFetcher } from "@/src/components/sourcing/contacts/sourcing-rex-contact-card-fetcher";
 import { SourcingProjetVisibility } from "./sourcing-projet-visibility";
+import { SourcingContactsDownloader } from "./side-panel/sourcing-contacts-downloader";
 import { useSourcingCardFilters } from "@/src/components/sourcing/use-sourcing-card-filters";
 import { useEffect, useMemo } from "react";
 import { SourcingCardFilters } from "@/src/components/sourcing/sourcing-card-filters";
@@ -75,6 +76,8 @@ export const Sourcing = () => {
             />
           ))}
         {isEmpty(inProgressProjetContacts) && isEmpty(rexContactIds) && <SourcingEmpty />}
+        {!isEmpty(inProgressProjetContacts) ||
+          (!isEmpty(rexContactIds) && <SourcingContactsDownloader projetId={currentProjet?.id} />)}
         {!isLecteur && (
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_SOURCING_MAP}
