@@ -13,15 +13,20 @@ import { selectEspaceByCode, TypeEspaceCode } from "@/src/components/filters/Typ
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 
+export const getProjetCoordinates = (projet: ProjetWithPublicRelations): LatLngTuple => {
+  const adresseInfo = projet.adresse_info as unknown as GeoJsonAdresse["properties"];
+  const coordinates = adresseInfo
+    ? lambert93toWGPS(adresseInfo.x, adresseInfo.y)
+    : { latitude: projet.collectivite.latitude, longitude: projet.collectivite.longitude };
+  return [coordinates.latitude, coordinates.longitude] as LatLngTuple;
+};
+
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
   inProgressProjets.map((projet) => {
-    const adresseInfo = projet.adresse_info as unknown as GeoJsonAdresse["properties"];
-    const coordinates = adresseInfo
-      ? lambert93toWGPS(adresseInfo.x, adresseInfo.y)
-      : { latitude: projet.collectivite.latitude, longitude: projet.collectivite.longitude };
+    const coordinates = getProjetCoordinates(projet);
 
     return {
-      geocode: [coordinates.latitude, coordinates.longitude] as LatLngTuple,
+      geocode: [coordinates[0], coordinates[1]],
       type: "in-progress",
       idProjet: projet.id,
       projet: {

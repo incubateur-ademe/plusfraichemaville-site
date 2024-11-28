@@ -1,30 +1,16 @@
 "use client";
 
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { LatLngTuple } from "leaflet";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { ComponentType } from "react";
-import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
+import { getProjetCoordinates } from "@/src/components/sourcing/helpers";
 
 export const useCurrentProjetCoordinates = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-
   if (!projet) {
     return null;
   }
-
-  const { collectivite, adresse_info } = projet;
-
-  const projetCollectiviteCoordinates = [collectivite?.latitude, collectivite?.longitude];
-
-  if (!adresse_info) {
-    return projetCollectiviteCoordinates as LatLngTuple;
-  }
-
-  const { x, y } = adresse_info as { x: number; y: number };
-  const { latitude, longitude } = lambert93toWGPS(x, y);
-
-  return [latitude, longitude] as LatLngTuple;
+  return getProjetCoordinates(projet);
 };
 
 interface UseSidePanelFetcherConfig<T> {
