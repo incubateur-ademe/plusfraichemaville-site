@@ -1,6 +1,6 @@
 import { useTransition } from "react";
 import { generateSourcingContactsCsvAction } from "@/src/actions/projets/generate-sourcing-contacts-csv-action";
-import { downloadCsv } from "@/src/helpers/csv";
+import { downloadCsv } from "@/src/helpers/csv-utils";
 
 type SourcingContactsDownloaderProps = {
   projetId?: number;
@@ -14,7 +14,7 @@ export const SourcingContactsDownloader = ({ projetId }: SourcingContactsDownloa
       if (projetId) {
         const result = await generateSourcingContactsCsvAction(projetId);
         if (result.type === "success" && result.csv) {
-          downloadCsv(result.csv, "contacts");
+          downloadCsv(result.csv, "contacts-plusfraichemaville");
         }
       }
     });

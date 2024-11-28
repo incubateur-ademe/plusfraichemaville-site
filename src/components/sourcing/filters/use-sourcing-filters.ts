@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { TypeEspaceCode } from "../../filters/TypeEspaceFilter";
 import { BUDGET_RANGES, BudgetRangeKey } from "../helpers";
 import { CustomMarker, CustomMarkerType, ZoomLevelKey } from "../types";
 import { LatLngTuple } from "leaflet";
+import { TypeEspaceCode } from "@/src/helpers/type-espace-filter";
 
 const useFilteredMarkers = (
   markers: CustomMarker[],

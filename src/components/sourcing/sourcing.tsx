@@ -76,9 +76,8 @@ export const Sourcing = () => {
             />
           ))}
         {isEmpty(inProgressProjetContacts) && isEmpty(rexContactIds) && <SourcingEmpty />}
-        {!isEmpty(inProgressProjetContacts) && !isEmpty(rexContactIds) && !isLecteur && (
-          <SourcingContactsDownloader projetId={currentProjet?.id} />
-        )}
+        {!isEmpty(inProgressProjetContacts) ||
+          (!isEmpty(rexContactIds) && <SourcingContactsDownloader projetId={currentProjet?.id} />)}
         {!isLecteur && (
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_SOURCING_MAP}

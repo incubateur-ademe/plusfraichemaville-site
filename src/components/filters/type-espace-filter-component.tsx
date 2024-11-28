@@ -1,7 +1,8 @@
 "use client";
 
+import { ALL_ESPACES } from "@/src/helpers/type-espace-filter";
 import { useTypeEspaceFilter } from "@/src/hooks/useTypeEspaceFilter";
-import { ALL_ESPACES } from "./TypeEspaceFilter";
+
 import Image from "next/image";
 
 export default function TypeEspaceFilter({ className }: { className?: string }) {

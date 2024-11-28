@@ -1,6 +1,6 @@
+import { TypeEspaceCode } from "@/src/helpers/type-espace-filter";
 import { GetValues } from "@/src/lib/strapi/types/types";
 import { LatLngTuple } from "leaflet";
-import { TypeEspaceCode } from "../filters/TypeEspaceFilter";
 
 type Coordinates = [number, number];
 
