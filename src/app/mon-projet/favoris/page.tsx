@@ -15,6 +15,7 @@ import {
 } from "@/src/components/common/generic-save-fiche/helpers";
 import { FichesSolutionsFavoris } from "@/src/components/ficheSolution/fiches-solutions-favoris";
 import Accordion from "@codegouvfr/react-dsfr/Accordion";
+import clsx from "clsx";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -47,10 +48,10 @@ export default function Page() {
             />
           )}
         </div>
-        <FavorisAccordion>
+        <FavorisAccordion type="diagnostic">
           <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
         </FavorisAccordion>
-        <FavorisAccordion>
+        <FavorisAccordion type="solution">
           <FichesSolutionsFavoris bookmarkedFichesSolutions={bookmarkedFichesSolutions as FicheBookmarkedSolution[]} />
         </FavorisAccordion>
       </div>
@@ -60,12 +61,23 @@ export default function Page() {
 type FavorisAccordionProps = {
   children: NonNullable<ReactNode>;
   projectName?: string;
+  type: "solution" | "diagnostic";
 };
-export const FavorisAccordion = ({ children, projectName }: FavorisAccordionProps) => {
+export const FavorisAccordion = ({ children, type, projectName }: FavorisAccordionProps) => {
   return (
     <Accordion
-      label={projectName ? `Mon projet « ${projectName} »` : "Mes favoris"}
-      className="rounded-[20px] bg-dsfr-background-default-grey-hover"
+      label={
+        <h2 className="mb-0 text-[22px] text-black">
+          {!projectName && type === "diagnostic"
+            ? "Mes méthodes de diagnostic mises en favoris"
+            : `Mes solutions mises en favoris ${projectName ? "pour " + projectName : ""}`}
+        </h2>
+      }
+      className={clsx(
+        "favoris-accordion",
+        "!text-black",
+        "!rounded-[20px] bg-dsfr-background-default-grey-hover hover:!rounded-[20px]",
+      )}
     >
       {children}
     </Accordion>

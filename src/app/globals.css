@@ -494,3 +494,15 @@
 .leaflet-container a {
   @apply !text-pfmv-navy;
 }
+
+.favoris-accordion .fr-accordion_btn,
+.favoris-accordion .fr-accordion__btn[aria-expanded="true"] {
+  border-radius: 20px !important;
+  color: black !important;
+  background-color: var(--background-default-grey-hover) !important;
+}
+
+.favoris-accordion .fr-accordion_btn:hover {
+  border-radius: 20px !important;
+  background-color: var(--background-default-grey-hover) !important;
+}
