@@ -37,7 +37,7 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
 
   return (
     <>
-      <h2 className="mb-6 text-2xl">Je sélectionne des prestataires et des partenaires</h2>
+      <h2 className="mb-6 text-[28px]">Je sélectionne des prestataires et des partenaires</h2>
       <SourcingFilters>
         <SourcingFilterAdresse setMapFocus={setMapFocus} />
         <div className="flex flex-wrap gap-4">
@@ -50,7 +50,7 @@ const SourcingMapContainer = ({ markers }: SourcingMapContainerProps) => {
             setSelectedProjetStatus={setSelectedStatus}
           />
           <SourcingFilterBudget selectedBudget={selectedBudget} setSelectedBudget={setSelectedBudget} />
-          <button className="h-14 underline hover:!bg-white" onClick={resetFilters}>
+          <button className="h-12 underline hover:!bg-white" onClick={resetFilters}>
             Réinitialiser
           </button>
         </div>

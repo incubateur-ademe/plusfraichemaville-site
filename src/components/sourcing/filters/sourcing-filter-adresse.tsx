@@ -44,7 +44,7 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
       <div className="relative mr-5 flex h-fit w-96">
         <Combobox.Input
           className={clsx(
-            "relative h-14 w-96 placeholder:text-black",
+            "relative h-12 w-96 placeholder:text-black",
             "px-4 ring-1 ring-dsfr-border-default-grey",
             "focus:bg-dsfr-contrast-grey focus:outline-none",
           )}
@@ -80,7 +80,7 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
                 value={address}
                 className={({ active }) =>
                   clsx(
-                    "-ml-4 h-14 border-b border-dsfr-border-default-grey pl-4",
+                    "-ml-4 h-14 border-b border-dsfr-border-default-grey !pl-8",
                     "flex items-center",
                     active && "bg-dsfr-background-alt-grey",
                   )
