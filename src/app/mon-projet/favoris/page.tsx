@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import SignInCard from "@/src/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
@@ -14,6 +14,7 @@ import {
   FichesBookmarked,
 } from "@/src/components/common/generic-save-fiche/helpers";
 import { FichesSolutionsFavoris } from "@/src/components/ficheSolution/fiches-solutions-favoris";
+import Accordion from "@codegouvfr/react-dsfr/Accordion";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -37,11 +38,7 @@ export default function Page() {
 
   return (
     isClient && (
-      <div
-        className="fr-container order-1 flex flex-[0_1_100%] flex-row flex-wrap place-content-center
-          items-start pt-10 text-dsfr-text-title-grey first:flex-[1_0_50%] [&>*:not(:nth-child(2))]:w-full
-          [&>*:nth-child(2)]:grow"
-      >
+      <div className="fr-container pt-10">
         <div>
           {session.status !== "authenticated" && (
             <SignInCard
@@ -50,9 +47,27 @@ export default function Page() {
             />
           )}
         </div>
-        <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
-        <FichesSolutionsFavoris bookmarkedFichesSolutions={bookmarkedFichesSolutions as FicheBookmarkedSolution[]} />
+        <FavorisAccordion>
+          <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
+        </FavorisAccordion>
+        <FavorisAccordion>
+          <FichesSolutionsFavoris bookmarkedFichesSolutions={bookmarkedFichesSolutions as FicheBookmarkedSolution[]} />
+        </FavorisAccordion>
       </div>
     )
   );
 }
+type FavorisAccordionProps = {
+  children: NonNullable<ReactNode>;
+  projectName?: string;
+};
+export const FavorisAccordion = ({ children, projectName }: FavorisAccordionProps) => {
+  return (
+    <Accordion
+      label={projectName ? `Mon projet « ${projectName} »` : "Mes favoris"}
+      className="rounded-[20px] bg-dsfr-background-default-grey-hover"
+    >
+      {children}
+    </Accordion>
+  );
+};
