@@ -1,8 +1,9 @@
 import { useUserStore } from "@/src/stores/user/provider";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { FichesSolutionProjetBookmarksContainer } from "./fiches-solutions-projet-bookmarks-container";
-import { ALL_ESPACES } from "../filters/TypeEspaceFilter";
+
 import { FicheBookmarkedSolution } from "../common/generic-save-fiche/helpers";
+import { ALL_ESPACES } from "@/src/helpers/type-espace-filter";
 
 const getLabelFromCode = (code: string): string => ALL_ESPACES.find((espace) => espace.code === code)?.label || "";
 
