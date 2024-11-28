@@ -22,7 +22,9 @@ const useFilteredMarkers = (
     filters.budget.length === 0 ||
     filters.budget.some((budgetKey) => {
       const { min, max } = BUDGET_RANGES[budgetKey];
-      return marker.projet?.budget != null && marker.projet.budget >= min && marker.projet.budget < max;
+      return (
+        marker.projet?.budget != null && Math.abs(marker.projet.budget) >= min && Math.abs(marker.projet.budget) < max
+      );
     });
 
   return markers.filter((marker) => isTypeEspaceMatch(marker) && isStatusMatch(marker) && isBudgetMatch(marker));

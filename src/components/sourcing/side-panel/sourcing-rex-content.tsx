@@ -33,7 +33,7 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
           <div className="flex flex-row items-center gap-1">
             <div className="text-sm">Budget</div>
             <div className="text-sm font-bold">
-              {retourExperienceAttributes.cout_euro
+              {retourExperienceAttributes.cout_euro != null && retourExperienceAttributes.cout_euro >= 0
                 ? `${formatNumberWithSpaces(retourExperienceAttributes.cout_euro)} €`
                 : "Non communiqué"}
             </div>

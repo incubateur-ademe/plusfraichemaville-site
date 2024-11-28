@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, ScaleControl, TileLayer, useMap, ZoomControl } from "react-leaflet";
+import { MapContainer, Marker, ScaleControl, useMap, ZoomControl } from "react-leaflet";
 import MarkerClusterGroup from "react-leaflet-cluster";
 import { useCurrentProjetCoordinates } from "../hooks";
 import { createClusterCustomIcon, createCustomIcon } from "../helpers-client";
@@ -10,6 +10,7 @@ import { SourcingMapLegend } from "./sourcing-map-legend";
 import { SourcingMapFocus } from "./sourcing-map-focus";
 import { CustomMarker, ZOOM_LEVELS, ZoomLevelKey } from "../types";
 import { SourcingSidePanelContainer } from "../side-panel/sourcing-side-panel-container";
+import { SourcingMapTileLayer } from "@/src/components/sourcing/map/sourcing-map-tile-layer";
 import { LatLngTuple } from "leaflet";
 
 export type SourcingMapClientProps = {
@@ -47,12 +48,8 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocu
           zoomControl={false}
           attributionControl={false}
         >
+          <SourcingMapTileLayer />
           <MapFocus mapFocus={mapFocus} />
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png"
-            subdomains="abcd"
-          />
           <MarkerClusterGroup chunkedLoading iconCreateFunction={createClusterCustomIcon} showCoverageOnHover={false}>
             {markers.map((marker, index) => (
               <Marker
