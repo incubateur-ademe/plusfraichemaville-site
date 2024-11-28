@@ -29,7 +29,7 @@ export const SourcingMapTileLayer = () => {
           }
         />
       )}
-      <div className={clsx("absolute bottom-12 left-[10px] z-[999] cursor-pointer")} onClick={switchTileLayer}>
+      <div className={clsx("absolute bottom-14 left-[10px] z-[999] cursor-pointer")} onClick={switchTileLayer}>
         <Image
           src={`/images/sourcing/sourcing-map-${tileLayer}.png`}
           alt="Changer de fond de carte"
