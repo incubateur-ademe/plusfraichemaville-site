@@ -91,6 +91,9 @@ export const Sourcing = () => {
           </GenericFicheLink>
         )}
       </div>
+      {(!isEmpty(inProgressProjetContacts) || !isEmpty(rexContactIds)) && (
+        <SourcingContactsDownloader projetId={currentProjet?.id} className="mt-10" />
+      )}
       <div className="mt-10">
         <SourcingProjetVisibility />
       </div>

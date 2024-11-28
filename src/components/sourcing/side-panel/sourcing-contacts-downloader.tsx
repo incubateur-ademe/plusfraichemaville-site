@@ -1,12 +1,14 @@
 import { useTransition } from "react";
 import { generateSourcingContactsCsvAction } from "@/src/actions/projets/generate-sourcing-contacts-csv-action";
 import { downloadCsv } from "@/src/helpers/csv-utils";
+import clsx from "clsx";
 
 type SourcingContactsDownloaderProps = {
   projetId?: number;
+  className?: string;
 };
 
-export const SourcingContactsDownloader = ({ projetId }: SourcingContactsDownloaderProps) => {
+export const SourcingContactsDownloader = ({ projetId, className }: SourcingContactsDownloaderProps) => {
   const [isPending, startTransition] = useTransition();
 
   const handleDownload = () => {
@@ -21,7 +23,11 @@ export const SourcingContactsDownloader = ({ projetId }: SourcingContactsDownloa
   };
 
   return (
-    <button onClick={handleDownload} disabled={isPending} className="text-sm text-pfmv-navy hover:!bg-white">
+    <button
+      onClick={handleDownload}
+      disabled={isPending}
+      className={clsx("text-sm text-pfmv-navy hover:!bg-white", className)}
+    >
       <span className="hover:underline">Exporter les contacts en CSV</span>
       <i className="ri-download-line !no-underline before:!mb-1 before:!size-3"></i>
     </button>
