@@ -29,9 +29,10 @@ const data = {
       picto: "financement",
     },
     {
-      title: "Lancez la mise-en-œuvre des solutions",
-      description: "Rédigez un cahier des charges et chercher les bons prestataires pour réaliser le projet.",
-      picto: "solutions",
+      title: "Annuaire des projets",
+      description:
+        "Trouvez les contacts utiles à votre projet : agents de collectivités, bureaux d'étude, AMO, entreprises.",
+      picto: "sourcing",
     },
   ],
 };

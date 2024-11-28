@@ -494,3 +494,7 @@
 .leaflet-container a {
   @apply !text-pfmv-navy;
 }
+
+.sourcingFilterAccordion .fr-accordion__title .fr-accordion__btn {
+  @apply !py-0;
+}
