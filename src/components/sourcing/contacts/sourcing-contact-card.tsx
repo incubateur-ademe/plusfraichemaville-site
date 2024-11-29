@@ -64,7 +64,7 @@ export const SourcingContactCard = ({
           )}
         </div>
         <div>
-          <h3 className="mb-1 text-lg font-bold">{ligne1}</h3>
+          <h3 className={clsx("mb-1 font-bold", isProjetTypeRex ? "text-xl" : "text-lg")}>{ligne1}</h3>
           <h4 className="mb-0 !text-base">{contact.label}</h4>
           <h5 className="mb-2 !text-base">{ligne3}</h5>
           <div>

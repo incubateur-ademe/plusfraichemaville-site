@@ -47,7 +47,12 @@ export const Sourcing = () => {
 
   return (
     <>
-      <h2 className="mb-4 text-[28px]">Mes contacts utiles au projet</h2>
+      <div className="mb-8 flex justify-between align-middle">
+        <h2 className="!mb-0 text-[28px]">Mes contacts utiles au projet</h2>
+        {(!isEmpty(inProgressProjetContacts) || !isEmpty(rexContactIds)) && (
+          <SourcingContactsDownloader projetId={currentProjet?.id} />
+        )}
+      </div>
       <p className="mb-10">
         Inspirez-vous des projets réalisés ou en cours et identifiez les contacts utiles à votre projet
       </p>
@@ -93,9 +98,6 @@ export const Sourcing = () => {
           </GenericFicheLink>
         )}
       </div>
-      {(!isEmpty(inProgressProjetContacts) || !isEmpty(rexContactIds)) && (
-        <SourcingContactsDownloader projetId={currentProjet?.id} className="mt-10" />
-      )}
       <div className="mt-10">
         <SourcingProjetVisibility isLecteur={isLecteur} />
       </div>

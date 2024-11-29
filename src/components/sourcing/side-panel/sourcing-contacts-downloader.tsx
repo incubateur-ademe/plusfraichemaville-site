@@ -28,8 +28,11 @@ export const SourcingContactsDownloader = ({ projetId, className }: SourcingCont
       disabled={isPending}
       className={clsx("text-sm text-pfmv-navy hover:!bg-white", className)}
     >
-      <span className="hover:underline">Exporter les contacts en CSV</span>
-      <i className="ri-download-line !no-underline before:!mb-1 before:!size-3"></i>
+      <span
+        className={clsx("underline underline-offset-4 hover:decoration-2", "fr-link--icon-right ri-download-2-line")}
+      >
+        Exporter les contacts en CSV
+      </span>
     </button>
   );
 };
