@@ -20,7 +20,7 @@ export const Sourcing = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isLecteur = useIsLecteur(currentProjet?.id);
   const inProgressProjetContacts = currentProjet?.sourcing_user_projets;
-  const rexContactIds = currentProjet?.sourcing_cms as RexContactId[];
+  const rexContactIds = currentProjet?.sourcing_cms as RexContactId[] | undefined;
 
   const {
     contactTypeFilters,
@@ -42,7 +42,9 @@ export const Sourcing = () => {
   }, [inProgressSourcingContact, setInProgressContacts]);
 
   useEffect(() => {
-    removeRexContacts(rexContactIds);
+    if (rexContactIds) {
+      removeRexContacts(rexContactIds);
+    }
   }, [removeRexContacts, rexContactIds]);
 
   return (
@@ -76,7 +78,7 @@ export const Sourcing = () => {
               ),
           )}
         {!isEmpty(rexContactIds) &&
-          rexContactIds.map((rexContactId) => (
+          rexContactIds?.map((rexContactId) => (
             <SourcingRexContactCardFetcher
               addRexContact={addRexContact}
               contactIsVisible={contactIsVisible}
