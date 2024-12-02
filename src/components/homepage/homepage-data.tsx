@@ -11,7 +11,7 @@ export const homepageData = {
     baseline: "Le service numérique dédié aux élus et aux agents qui rafraîchissent durablement leur collectivité.",
     cta1: {
       label: "Trouver une  solution",
-      url: PFMV_ROUTES.FICHES_SOLUTIONS,
+      url: PFMV_ROUTES.AIDE_DECISION,
     },
     cta2: {
       label: "Créer un projet",
@@ -85,7 +85,7 @@ export const homepageData = {
     ],
   },
   start: {
-    title: "Par où commencer ?",
+    title: "Lancez-vous !",
     lines: [
       {
         title: "Faites un diagnostic de la surchauffe sur votre territoire",
