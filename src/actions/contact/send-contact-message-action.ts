@@ -5,6 +5,8 @@ import { createHubspotTicket } from "@/src/services/hubspot";
 import { ContactFormData, ContactFormSchema } from "@/src/forms/contact/contact-form-schema";
 import { EmailService } from "@/src/services/brevo";
 import { brevoAddContact } from "@/src/services/brevo/brevo-api";
+import { sendMattermostWebhook } from "@/src/services/mattermost";
+import { makeHubspotMattermostWebhookData } from "@/src/services/mattermost/mattermost-helpers";
 
 export const sendContactMessageAction = async (data: ContactFormData): Promise<ResponseAction> => {
   const parseParamResult = ContactFormSchema.safeParse(data);
@@ -13,7 +15,9 @@ export const sendContactMessageAction = async (data: ContactFormData): Promise<R
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      await createHubspotTicket(data);
+      const ticket = await createHubspotTicket(data);
+      await sendMattermostWebhook(makeHubspotMattermostWebhookData(ticket), "hubspot");
+
       if (data.subscribeToNewsletter) {
         const response = await brevoAddContact(data.email, data.collectivite?.nomCollectivite, data.nom, data.prenom);
         if (!response.ok) {
