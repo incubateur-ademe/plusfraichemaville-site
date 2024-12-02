@@ -508,3 +508,7 @@
 .favoris-accordion .fr-collapse {
   @apply !px-6 !pt-0;
 }
+
+.sourcingFilterAccordion .fr-accordion__title .fr-accordion__btn {
+  @apply !py-0;
+}

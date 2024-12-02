@@ -1,6 +1,7 @@
 import Accordion from "@codegouvfr/react-dsfr/Accordion";
 import clsx from "clsx";
-import { ReactNode } from "react";
+import { ReactNode, useRef, useState } from "react";
+import { useClickOutsideManagement } from "@/src/hooks/use-click-outside-management";
 
 type SourcingFilterType = {
   code: "type-espace" | "statut-projet" | "budget";
@@ -21,12 +22,24 @@ const filters: SourcingFilterType[] = [
 ];
 
 export const SourcingFiltersAccordion = ({ code, children, className }: SourcingFiltersAccordionProps) => {
+  const [expanded, setExpanded] = useState(false);
   const filter = filters.find((f) => f.code === code);
+  const filterRef = useRef(null);
+  useClickOutsideManagement({
+    ref: filterRef,
+    action: () => {
+      setExpanded(false);
+    },
+  });
   return (
     <Accordion
+      onExpandedChange={() => setExpanded(!expanded)}
+      expanded={expanded}
+      ref={filterRef}
       className={clsx(
         "!z-[1500] h-fit w-[212px] !border-x-[1px] !border-x-dsfr-border-default-grey bg-white",
         className,
+        "sourcingFilterAccordion",
       )}
       label={
         <>

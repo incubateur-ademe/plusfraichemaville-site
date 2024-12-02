@@ -39,9 +39,9 @@ export const ProjetVisibility = ({ isPublic, isLoading, onVisibilityChange, disa
             Souhaitez-vous rendre votre projet visible par les autres membres de la communauté Plus fraîche ma ville ?
           </p>
           <p>
-            Rendez votre projet visible dans le module 6 pour partager son objet, sa localisation et son état
-            d’avancement aux autres membres de la communauté. Grâce à cette fonctionnalité, découvrez les initiatives
-            voisines, échangez avec d’autres porteurs de projet, et obtenez des contacts de prestataires.
+            Rendez votre projet visible dans {"l'annuaire"} des projets pour partager son objet, sa localisation et son
+            état d’avancement aux autres membres de la communauté. Grâce à cette fonctionnalité, découvrez les
+            initiatives voisines, échangez avec d’autres porteurs de projet, et obtenez des contacts de prestataires.
           </p>
           <p>
             En tant qu’administrateur d’un projet, vos prénom, nom et adresse mail seront partagés avec les utilisateurs

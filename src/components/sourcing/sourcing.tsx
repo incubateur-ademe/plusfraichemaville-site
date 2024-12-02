@@ -20,7 +20,7 @@ export const Sourcing = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isLecteur = useIsLecteur(currentProjet?.id);
   const inProgressProjetContacts = currentProjet?.sourcing_user_projets;
-  const rexContactIds = currentProjet?.sourcing_cms as RexContactId[];
+  const rexContactIds = currentProjet?.sourcing_cms as RexContactId[] | undefined;
 
   const {
     contactTypeFilters,
@@ -42,17 +42,28 @@ export const Sourcing = () => {
   }, [inProgressSourcingContact, setInProgressContacts]);
 
   useEffect(() => {
-    removeRexContacts(rexContactIds);
+    if (rexContactIds) {
+      removeRexContacts(rexContactIds);
+    }
   }, [removeRexContacts, rexContactIds]);
 
   return (
     <>
+      <div className="mb-8 flex justify-between align-middle">
+        <h2 className="!mb-0 text-[28px]">Mes contacts utiles au projet</h2>
+        {(!isEmpty(inProgressProjetContacts) || !isEmpty(rexContactIds)) && (
+          <SourcingContactsDownloader projetId={currentProjet?.id} />
+        )}
+      </div>
+      <p className="mb-10">
+        Inspirez-vous des projets réalisés ou en cours et identifiez les contacts utiles à votre projet
+      </p>
       <SourcingCardFilters
         setFilter={setFilter}
         contactTypeFilters={contactTypeFilters}
         contactCountForFilter={contactCountForFilter}
       />
-      <div className="flex flex-wrap gap-x-6 gap-y-12">
+      <div className="flex flex-wrap gap-6">
         {!isEmpty(inProgressSourcingContact) &&
           inProgressSourcingContact?.map(
             (contact) =>
@@ -67,7 +78,7 @@ export const Sourcing = () => {
               ),
           )}
         {!isEmpty(rexContactIds) &&
-          rexContactIds.map((rexContactId) => (
+          rexContactIds?.map((rexContactId) => (
             <SourcingRexContactCardFetcher
               addRexContact={addRexContact}
               contactIsVisible={contactIsVisible}
@@ -76,8 +87,6 @@ export const Sourcing = () => {
             />
           ))}
         {isEmpty(inProgressProjetContacts) && isEmpty(rexContactIds) && <SourcingEmpty />}
-        {!isEmpty(inProgressProjetContacts) ||
-          (!isEmpty(rexContactIds) && <SourcingContactsDownloader projetId={currentProjet?.id} />)}
         {!isLecteur && (
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_SOURCING_MAP}
@@ -92,7 +101,7 @@ export const Sourcing = () => {
         )}
       </div>
       <div className="mt-10">
-        <SourcingProjetVisibility />
+        <SourcingProjetVisibility isLecteur={isLecteur} />
       </div>
     </>
   );
