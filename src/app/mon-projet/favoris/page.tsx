@@ -1,5 +1,5 @@
 "use client";
-import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import SignInCard from "@/src/components/signin/SignInCard";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
@@ -14,7 +14,6 @@ import {
   FichesBookmarked,
 } from "@/src/components/common/generic-save-fiche/helpers";
 import { FichesSolutionsFavoris } from "@/src/components/ficheSolution/fiches-solutions-favoris";
-import Accordion from "@codegouvfr/react-dsfr/Accordion";
 import clsx from "clsx";
 
 export default function Page() {
@@ -44,42 +43,19 @@ export default function Page() {
           {session.status !== "authenticated" && (
             <SignInCard
               message="save"
+              className={clsx(
+                "mb-9 flex !w-full !max-w-full pb-0",
+                "[&_.fr-connect-group]:flex [&_.fr-connect-group]:flex-col",
+                "[&_.fr-connect-group]:items-center [&_.fr-connect-group]:justify-center",
+              )}
               callbackUrl={process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE}
             />
           )}
         </div>
-        <FavorisAccordion type="diagnostic">
-          <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
-        </FavorisAccordion>
-        <FavorisAccordion type="solution">
-          <FichesSolutionsFavoris bookmarkedFichesSolutions={bookmarkedFichesSolutions as FicheBookmarkedSolution[]} />
-        </FavorisAccordion>
+
+        <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
+        <FichesSolutionsFavoris bookmarkedFichesSolutions={bookmarkedFichesSolutions as FicheBookmarkedSolution[]} />
       </div>
     )
   );
 }
-type FavorisAccordionProps = {
-  children: NonNullable<ReactNode>;
-  projectName?: string;
-  type: "solution" | "diagnostic";
-};
-export const FavorisAccordion = ({ children, type, projectName }: FavorisAccordionProps) => {
-  return (
-    <Accordion
-      label={
-        <h2 className="mb-0 text-[22px] text-black">
-          {!projectName && type === "diagnostic"
-            ? "Mes méthodes de diagnostic mises en favoris"
-            : `Mes solutions mises en favoris ${projectName ? "pour " + projectName : ""}`}
-        </h2>
-      }
-      className={clsx(
-        "favoris-accordion",
-        "!text-black",
-        "!rounded-[20px] bg-dsfr-background-default-grey-hover hover:!rounded-[20px]",
-      )}
-    >
-      {children}
-    </Accordion>
-  );
-};

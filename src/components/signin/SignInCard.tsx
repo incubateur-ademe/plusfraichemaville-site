@@ -27,10 +27,13 @@ export default function SignInCard({
 
   return (
     <div className={clsx("max-w-xl rounded-2xl bg-dsfr-background-alt-grey px-12 py-9", className)}>
-      <h2 className="text-xl font-bold text-dsfr-text-title-grey">{messages[message]}</h2>
-      <div className="mb-8 mt-8">
-        Pour vous connecter avec ProConnect, il vous suffit de renseigner votre adresse professionnelle.
+      <div>
+        <h2 className="text-xl font-bold text-dsfr-text-title-grey">{messages[message]}</h2>
+        <div className="mb-8 mt-8">
+          Pour vous connecter avec ProConnect, il vous suffit de renseigner votre adresse professionnelle.
+        </div>
       </div>
+
       <div className="fr-connect-group">
         <button className="fr-connect" onClick={handleSignIn}>
           <span className="fr-connect__login">S’identifier avec</span>{" "}

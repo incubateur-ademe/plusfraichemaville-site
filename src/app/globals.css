@@ -496,13 +496,15 @@
 }
 
 .favoris-accordion .fr-accordion_btn,
-.favoris-accordion .fr-accordion__btn[aria-expanded="true"] {
-  border-radius: 20px !important;
-  color: black !important;
-  background-color: var(--background-default-grey-hover) !important;
+.favoris-accordion .fr-accordion__btn[aria-expanded="true"],
+.favoris-accordion .fr-accordion_btn:hover {
+  @apply !rounded-[20px] !bg-dsfr-background-default-grey-hover !py-8 !text-black;
 }
 
-.favoris-accordion .fr-accordion_btn:hover {
-  border-radius: 20px !important;
-  background-color: var(--background-default-grey-hover) !important;
+.favoris-accordion .fr-accordion__btn {
+  @apply !rounded-[20px] !bg-dsfr-background-default-grey-hover !py-8 !text-black;
+}
+
+.favoris-accordion .fr-collapse {
+  @apply !px-6 !pt-0;
 }
