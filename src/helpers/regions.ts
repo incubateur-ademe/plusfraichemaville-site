@@ -1,4 +1,4 @@
-import { AddressProperties } from "@/src/components/sourcing/types";
+import { AddressProperties, GeoJsonAdresse } from "@/src/components/sourcing/types";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 type Region = {
@@ -34,9 +34,10 @@ const getRegionLabelFromAdresseInfo = (adresseInfo: AddressProperties | null) =>
 };
 
 export const getRegionLabelForProjet = (
-  projet: Pick<ProjetWithPublicRelations, "adresse_info" | "collectivite">,
+  projet: Pick<ProjetWithPublicRelations, "adresse_all_infos" | "collectivite">,
 ): string | null => {
   const adresseInfo =
-    (projet.adresse_info as AddressProperties | null) || (projet.collectivite.adresse_info as AddressProperties | null);
-  return adresseInfo ? getRegionLabelFromAdresseInfo(adresseInfo) : null;
+    (projet.adresse_all_infos as GeoJsonAdresse | null) ||
+    (projet.collectivite.adresse_all_infos as GeoJsonAdresse | null);
+  return adresseInfo ? getRegionLabelFromAdresseInfo(adresseInfo.properties) : null;
 };

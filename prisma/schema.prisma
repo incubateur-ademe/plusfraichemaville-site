@@ -72,6 +72,7 @@ model collectivite {
   code_insee                     String?             @unique
   code_postal                    String?
   adresse_info                   Json?
+  adresse_all_infos              Json?
   ban_id                         String?             @unique
   latitude                       Float?
   longitude                      Float?
@@ -170,6 +171,7 @@ model projet {
   adresse                   String?
   niveau_maturite           String?
   adresse_info              Json?
+  adresse_all_infos         Json?
   date_echeance             DateTime?
   fiches_solutions_id       Int[]
   fiches_diagnostic_id      Int[]
