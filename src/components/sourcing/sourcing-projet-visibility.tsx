@@ -3,9 +3,17 @@
 import { updateProjetVisibilityAction } from "@/src/actions/projets/update-projet-visibility-action";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
-import { ProjetVisibility } from "../common/projet-visibility";
+import { ProjetVisibilityReduced } from "@/src/components/common/projet-visibility-reduced";
+import React from "react";
+import { ProjetVisibility } from "@/src/components/common/projet-visibility";
 
-export const SourcingProjetVisibility = ({ isLecteur }: { isLecteur: boolean }) => {
+export const SourcingProjetVisibility = ({
+  isLecteur,
+  reducedComponent = false,
+}: {
+  isLecteur: boolean;
+  reducedComponent?: boolean;
+}) => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isPublic = currentProjet?.is_public;
   const projetId = currentProjet?.id;
@@ -22,11 +30,22 @@ export const SourcingProjetVisibility = ({ isLecteur }: { isLecteur: boolean }) 
   };
 
   return (
-    <ProjetVisibility
-      isPublic={isPublic}
-      disabled={isLecteur}
-      isLoading={!currentProjet}
-      onVisibilityChange={handleVisibility}
-    />
+    <>
+      {reducedComponent ? (
+        <ProjetVisibilityReduced
+          isPublic={isPublic}
+          disabled={isLecteur}
+          isLoading={!currentProjet}
+          onVisibilityChange={handleVisibility}
+        />
+      ) : (
+        <ProjetVisibility
+          isPublic={isPublic}
+          disabled={isLecteur}
+          isLoading={!currentProjet}
+          onVisibilityChange={handleVisibility}
+        />
+      )}
+    </>
   );
 };
