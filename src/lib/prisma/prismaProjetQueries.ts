@@ -40,7 +40,7 @@ export const projetIncludes = {
               nom: true,
               type_espace: true,
               niveau_maturite: true,
-              adresse_info: true,
+              adresse_all_infos: true,
             },
           },
         },
@@ -56,7 +56,7 @@ export const projetPublicSelect = {
   type_espace: true,
   collectivite: true,
   niveau_maturite: true,
-  adresse_info: true,
+  adresse_all_infos: true,
   users: {
     select: {
       id: true,
@@ -67,7 +67,7 @@ export const projetPublicSelect = {
           nom: true,
           type_espace: true,
           niveau_maturite: true,
-          adresse_info: true,
+          adresse_all_infos: true,
         },
       },
       created_at: true,
@@ -206,7 +206,7 @@ export const createOrUpdateProjet = async ({
   projetId,
   nomProjet,
   adresse,
-  adresse_info,
+  adresse_all_infos,
   dateEcheance,
   typeEspace,
   niveauMaturite,
@@ -218,7 +218,7 @@ export const createOrUpdateProjet = async ({
   nomProjet: string;
   typeEspace: string;
   adresse?: string;
-  adresse_info?: GeoJsonProperties;
+  adresse_all_infos?: GeoJsonProperties;
   dateEcheance: string;
   niveauMaturite: string;
   userId: string;
@@ -236,7 +236,7 @@ export const createOrUpdateProjet = async ({
       nom: nomProjet,
       type_espace: typeEspace,
       adresse,
-      adresse_info: adresse_info as Prisma.JsonObject,
+      adresse_all_infos: adresse_all_infos as unknown as Prisma.JsonObject,
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
@@ -256,7 +256,7 @@ export const createOrUpdateProjet = async ({
       nom: nomProjet,
       type_espace: typeEspace,
       adresse: adresse ?? null,
-      adresse_info: (adresse_info as Prisma.JsonObject) ?? null,
+      adresse_all_infos: (adresse_all_infos as unknown as Prisma.JsonObject) ?? null,
       niveau_maturite: niveauMaturite,
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,

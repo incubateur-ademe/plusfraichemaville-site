@@ -6,7 +6,6 @@ import {
 import { LatLngTuple } from "leaflet";
 import { SourcingMapClientProps } from "./map/sourcing-map-client";
 import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, StrapiSourcingContact } from "./types";
-import { lambert93toWGPS } from "@/src/helpers/convert-coordinates";
 import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
@@ -14,9 +13,9 @@ import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { selectEspaceByCode, TypeEspaceCode } from "@/src/helpers/type-espace-filter";
 
 export const getProjetCoordinates = (projet: ProjetWithPublicRelations): LatLngTuple => {
-  const adresseInfo = projet.adresse_info as unknown as GeoJsonAdresse["properties"];
-  const coordinates = adresseInfo
-    ? lambert93toWGPS(adresseInfo.x, adresseInfo.y)
+  const adresseInfo = projet.adresse_all_infos as unknown as GeoJsonAdresse | undefined;
+  const coordinates = adresseInfo?.geometry.coordinates
+    ? { latitude: adresseInfo.geometry.coordinates[1], longitude: adresseInfo.geometry.coordinates[0] }
     : { latitude: projet.collectivite.latitude, longitude: projet.collectivite.longitude };
   return [coordinates.latitude, coordinates.longitude] as LatLngTuple;
 };
