@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import { SimplePublicObject } from "@hubspot/api-client/lib/codegen/crm/companies";
 
 export const makeHubspotMattermostWebhookData = (ticket: SimplePublicObject) => {
