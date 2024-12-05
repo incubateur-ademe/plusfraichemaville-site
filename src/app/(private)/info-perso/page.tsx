@@ -30,6 +30,7 @@ export default async function InfoPerso() {
       <UserInfoForm
         user={user}
         buttonLabel={isUserComplete ? "Valider mes informations" : "Je rejoins l'espace projet de ma collectivité"}
+        newUser={!isUserComplete}
       />
     </div>
   );

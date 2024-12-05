@@ -16,8 +16,18 @@ import { useUserStore } from "@/src/stores/user/provider";
 import SelectFormField from "@/src/components/common/SelectFormField";
 import { canalAcquisitionUserOptions, CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 import clsx from "clsx";
+import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
+import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 
-export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite; buttonLabel: string }) => {
+export const UserInfoForm = ({
+  user,
+  buttonLabel,
+  newUser,
+}: {
+  user: UserWithCollectivite;
+  buttonLabel: string;
+  newUser: boolean;
+}) => {
   const router = useRouter();
   const userCollectivite = user.collectivites[0];
   const setUserInfos = useUserStore((state) => state.setUserInfos);
@@ -33,6 +43,8 @@ export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite
       nomEtablissement: user.nom_etablissement ?? "",
       canalAcquisition: user.canal_acquisition ?? "",
       customCanalAcquisition: user.canal_acquisition ?? "",
+      acceptCommunicationProduit: user.accept_communication_produit ?? true,
+      subscribeToNewsletter: false,
     },
   });
 
@@ -86,7 +98,38 @@ export const UserInfoForm = ({ user, buttonLabel }: { user: UserWithCollectivite
           />
         </>
       )}
-      <Button className={`rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>
+      <Conditional>
+        <Case condition={newUser}>
+          <Checkbox
+            options={[
+              {
+                label:
+                  "Je souhaite recevoir la newsletter de Plus fraîche ma ville et être informé(e)" +
+                  " des actualités sur le rafraîchissement urbain",
+                nativeInputProps: {
+                  ...form.register("subscribeToNewsletter"),
+                },
+              },
+            ]}
+          />
+        </Case>
+        <Default>
+          <>
+            <h1 className="fr-h5 !mb-5 !mt-12 !text-dsfr-text-label-blue-france">Mes préférences de communication</h1>
+            <Checkbox
+              options={[
+                {
+                  label: "Je souhaite être informé(e) des nouvelles fonctionnalités de Plus fraîche ma ville",
+                  nativeInputProps: {
+                    ...form.register("acceptCommunicationProduit"),
+                  },
+                },
+              ]}
+            />
+          </>
+        </Default>
+      </Conditional>
+      <Button className={`mt-6 rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>
         {buttonLabel}
       </Button>
     </form>
