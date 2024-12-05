@@ -38,6 +38,10 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocu
     setSelectedMarker(selectedMarker);
   };
 
+  if (!currentProjetCoordinates) {
+    return null;
+  }
+
   return (
     <div className="flex">
       <div className="h-[715px] w-full max-w-[50rem]">
