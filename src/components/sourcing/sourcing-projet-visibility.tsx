@@ -5,7 +5,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
 import { ProjetVisibility } from "../common/projet-visibility";
 
-export const SourcingProjetVisibility = ({ isLecteur }: { isLecteur: boolean }) => {
+export const SourcingProjetVisibility = ({ isLecteur, reduced = false }: { isLecteur: boolean; reduced?: boolean }) => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isPublic = currentProjet?.is_public;
   const projetId = currentProjet?.id;
@@ -27,6 +27,7 @@ export const SourcingProjetVisibility = ({ isLecteur }: { isLecteur: boolean }) 
       disabled={isLecteur}
       isLoading={!currentProjet}
       onVisibilityChange={handleVisibility}
+      reduced={reduced}
     />
   );
 };
