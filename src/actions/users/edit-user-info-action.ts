@@ -59,6 +59,7 @@ export const editUserInfoAction = async (
       const response = await upsertBrevoContact({
         email: data.email,
         acceptInfoProduct: data.acceptCommunicationProduit,
+        subscribeNewsletter: data.subscribeToNewsletter,
       });
       if (!response.ok) {
         const brevoResponse = await response.json();

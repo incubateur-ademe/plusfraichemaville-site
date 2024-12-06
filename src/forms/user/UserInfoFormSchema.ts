@@ -11,6 +11,6 @@ export const UserInfoFormSchema = z.object({
   canalAcquisition: z.string(),
   customCanalAcquisition: z.string(),
   acceptCommunicationProduit: z.boolean(),
-  subscribeToNewsletter: z.boolean(),
+  subscribeToNewsletter: z.boolean().optional(),
 });
 export type UserInfoFormData = z.infer<typeof UserInfoFormSchema>;

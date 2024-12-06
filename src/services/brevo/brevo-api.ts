@@ -15,6 +15,7 @@ export const brevoSendEmail = async (to: string, templateId: number, params?: Re
 
 type BrevoUpsertContactType = {
   email: string;
+  subscribeNewsletter?: boolean;
   acceptInfoProduct?: boolean;
   nomCollectivite?: string;
   nom?: string;
@@ -25,6 +26,7 @@ export const brevoAddContact = async ({
   email,
   nomCollectivite,
   acceptInfoProduct,
+  subscribeNewsletter,
   nom,
   prenom,
 }: BrevoUpsertContactType) => {
@@ -42,6 +44,7 @@ export const brevoAddContact = async ({
           TYPE: 1,
         }),
         OPT_IN_INFO_PRODUIT: acceptInfoProduct,
+        OPT_IN_NEWSLETTER: subscribeNewsletter,
         NOM: nom,
         PRENOM: prenom,
       },

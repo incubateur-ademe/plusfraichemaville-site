@@ -14,6 +14,7 @@ export const subscribeNewsletterAction = async (data: NewsletterFormData): Promi
       const response = await brevoAddContact({
         email: data.email,
         nomCollectivite: data.collectivite?.nomCollectivite,
+        subscribeNewsletter: true,
       });
       if (!response.ok) {
         const brevoResponse = await response.json();

@@ -20,6 +20,7 @@ export const sendContactMessageAction = async (data: ContactFormData): Promise<R
           nomCollectivite: data.collectivite?.nomCollectivite,
           nom: data.nom,
           prenom: data.prenom,
+          subscribeNewsletter: true,
         });
         if (!response.ok) {
           const brevoResponse = await response.json();
