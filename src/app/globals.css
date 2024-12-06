@@ -495,6 +495,20 @@
   @apply !text-pfmv-navy;
 }
 
+.favoris-accordion .fr-accordion_btn,
+.favoris-accordion .fr-accordion__btn[aria-expanded="true"],
+.favoris-accordion .fr-accordion_btn:hover {
+  @apply !rounded-[20px] !bg-dsfr-background-default-grey-hover !py-8 !text-black;
+}
+
+.favoris-accordion .fr-accordion__btn {
+  @apply !rounded-[20px] !bg-dsfr-background-default-grey-hover !py-8 !text-black;
+}
+
+.favoris-accordion .fr-collapse {
+  @apply !px-6 !pt-0;
+}
+
 .sourcingFilterAccordion .fr-accordion__title .fr-accordion__btn {
   @apply !py-0;
 }

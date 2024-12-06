@@ -14,6 +14,7 @@ import {
   FichesBookmarked,
 } from "@/src/components/common/generic-save-fiche/helpers";
 import { FichesSolutionsFavoris } from "@/src/components/ficheSolution/fiches-solutions-favoris";
+import clsx from "clsx";
 
 export default function Page() {
   const [isClient, setIsClient] = useState(false);
@@ -37,19 +38,21 @@ export default function Page() {
 
   return (
     isClient && (
-      <div
-        className="fr-container order-1 flex flex-[0_1_100%] flex-row flex-wrap place-content-center
-          items-start pt-10 text-dsfr-text-title-grey first:flex-[1_0_50%] [&>*:not(:nth-child(2))]:w-full
-          [&>*:nth-child(2)]:grow"
-      >
+      <div className="fr-container pt-10">
         <div>
           {session.status !== "authenticated" && (
             <SignInCard
               message="save"
+              className={clsx(
+                "mb-9 flex !w-full !max-w-full pb-0",
+                "[&_.fr-connect-group]:flex [&_.fr-connect-group]:flex-col",
+                "[&_.fr-connect-group]:items-center [&_.fr-connect-group]:justify-center",
+              )}
               callbackUrl={process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE}
             />
           )}
         </div>
+
         <FichesDiagnosticFavoris bookmarkedFichesDiagnostic={bookmarkedFichesDiagnostic} />
         <FichesSolutionsFavoris bookmarkedFichesSolutions={bookmarkedFichesSolutions as FicheBookmarkedSolution[]} />
       </div>
