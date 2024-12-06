@@ -35,8 +35,6 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocu
   const currentProjetCoordinates = useCurrentProjetCoordinates();
 
   const handleMarkerClick = (selectedMarker: CustomMarker) => {
-    console.log("selectedMarker", selectedMarker);
-
     setSelectedMarker(selectedMarker);
   };
 

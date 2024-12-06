@@ -18,6 +18,9 @@ export const MATOMO_ACTIONS = {
   SOURCING_DOWNLOAD_CSV: "sourcing-download-csv",
   SOURCING_SAVE_CONTACT: "sourcing-save-contact",
   SOURCING_DELETE_CONTACT: "sourcing-delete-contact",
+  SOURCING_SIDE_PANEL_OPEN_REX: "sourcing-side-panel-open-rex",
+  SOURCING_SIDE_PANEL_OPEN_IN_PROGRESS: "sourcing-side-panel-open-in-progress",
+  SOURCING_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN: "sourcing-side-panel-view-projet-modal-open",
 };
 
 export const WEBINAIRE_SUBSCRIPTION: MATOMO_EVENT = {
@@ -41,29 +44,47 @@ export const OPEN_ZEPHYR: MATOMO_EVENT = {
 export const COPY_EMAIL: MATOMO_EVENT = {
   category: MATOMO_CATEGORIES.ESPACE_PROJET,
   action: MATOMO_ACTIONS.SOURCING_COPY_EMAIL,
-  name: "Copie de l'email d'un contact (sourcing)",
+  name: "[Sourcing] Copie de l'email d'un contact",
 };
 
 export const COPY_TELEPHONE: MATOMO_EVENT = {
   category: MATOMO_CATEGORIES.ESPACE_PROJET,
   action: MATOMO_ACTIONS.SOURCING_COPY_TELEPHONE,
-  name: "Copie du téléphone d'un contact (sourcing)",
+  name: "[Sourcing] Copie du téléphone d'un contact",
 };
 
 export const SOURCING_DOWNLOAD_CSV: MATOMO_EVENT = {
   category: MATOMO_CATEGORIES.ESPACE_PROJET,
   action: MATOMO_ACTIONS.SOURCING_DOWNLOAD_CSV,
-  name: "Téléchargement du CSV des contacts (sourcing)",
+  name: "[Sourcing] Téléchargement du CSV des contacts",
 };
 
 export const SOURCING_SAVING_CONTACT: MATOMO_EVENT = {
   category: MATOMO_CATEGORIES.ESPACE_PROJET,
   action: MATOMO_ACTIONS.SOURCING_SAVE_CONTACT,
-  name: "Sauvegarde d'un contact (sourcing)",
+  name: "[Sourcing] Sauvegarde d'un contact",
 };
 
 export const SOURCING_DELETING_CONTACT: MATOMO_EVENT = {
   category: MATOMO_CATEGORIES.ESPACE_PROJET,
   action: MATOMO_ACTIONS.SOURCING_DELETE_CONTACT,
-  name: "Suppression d'un contact (sourcing)",
+  name: "[Sourcing] Suppression d'un contact",
 };
+
+export const SOURCING_SIDE_PANEL_OPEN_REX = (name: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.SOURCING_SIDE_PANEL_OPEN_REX,
+  name: `[Sourcing] Ouverture du pin rex : « ${name} »`,
+});
+
+export const SOURCING_SIDE_PANEL_OPEN_IN_PROGRESS = (name: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.SOURCING_SIDE_PANEL_OPEN_IN_PROGRESS,
+  name: `[Sourcing] Ouverture du pin du projet en cours : « ${name} »`,
+});
+
+export const SOURCING_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN = (name: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.SOURCING_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN,
+  name: `[Sourcing] Ouverture de la modal de visualisation du projet : « ${name} »`,
+});
