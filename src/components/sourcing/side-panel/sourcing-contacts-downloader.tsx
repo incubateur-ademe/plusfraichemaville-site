@@ -2,6 +2,8 @@ import { useTransition } from "react";
 import { generateSourcingContactsCsvAction } from "@/src/actions/projets/generate-sourcing-contacts-csv-action";
 import { downloadCsv } from "@/src/helpers/csv-utils";
 import clsx from "clsx";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { SOURCING_DOWNLOAD_CSV } from "@/src/helpers/matomo/matomo-tags";
 
 type SourcingContactsDownloaderProps = {
   projetId?: number;
@@ -12,6 +14,7 @@ export const SourcingContactsDownloader = ({ projetId, className }: SourcingCont
   const [isPending, startTransition] = useTransition();
 
   const handleDownload = () => {
+    trackEvent(SOURCING_DOWNLOAD_CSV);
     startTransition(async () => {
       if (projetId) {
         const result = await generateSourcingContactsCsvAction(projetId);

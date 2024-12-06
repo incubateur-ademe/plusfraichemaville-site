@@ -5,9 +5,10 @@ interface CopyFieldProps {
   label: string;
   value?: string;
   className?: string;
+  onClick?: () => void;
 }
 
-export const CopyField = ({ label, value, className }: CopyFieldProps) => {
+export const CopyField = ({ label, value, className, onClick }: CopyFieldProps) => {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = async (text?: string, field?: string) => {
@@ -18,6 +19,11 @@ export const CopyField = ({ label, value, className }: CopyFieldProps) => {
     }
   };
 
+  const handleClick = () => {
+    onClick && onClick();
+    handleCopy(value, label);
+  };
+
   return (
     <div className={"mb-2 flex gap-2"}>
       <span className="flex items-center justify-between">
@@ -26,7 +32,7 @@ export const CopyField = ({ label, value, className }: CopyFieldProps) => {
             "ri-file-copy-line relative h-4 w-4 cursor-pointer text-pfmv-navy before:!h-5 before:!w-5",
             "before:!mb-3",
           )}
-          onClick={() => handleCopy(value, label)}
+          onClick={handleClick}
           title="Cliquer pour copier"
         >
           <span
@@ -41,7 +47,7 @@ export const CopyField = ({ label, value, className }: CopyFieldProps) => {
           </span>
         </i>
       </span>
-      <span className={clsx("block cursor-pointer pt-[2px]", className)} onClick={() => handleCopy(value, label)}>
+      <span className={clsx("block cursor-pointer pt-[2px]", className)} onClick={handleClick}>
         {value}
       </span>
     </div>

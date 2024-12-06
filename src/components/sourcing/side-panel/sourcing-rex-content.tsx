@@ -10,6 +10,7 @@ import { strapiContactToSourcingContact } from "@/src/components/sourcing/helper
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { SourcingRexContentSeeProject } from "./sourcing-rex-content-see-project";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { SourcingSidePanelTracking } from "./sourcing-side-panel-tracking";
 
 export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
@@ -22,10 +23,11 @@ export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse })
     <>
       <div
         className={clsx(
-          "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey" +
-            "min-h-[11.5rem] px-5 pb-4 pt-6",
+          "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey",
+          "min-h-52 px-5 pb-4 pt-6",
         )}
       >
+        <SourcingSidePanelTracking type="rex" name={retourExperienceAttributes.titre} />
         <div className="flex items-center justify-between">
           <Badge small noIcon className="!mb-0 !bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
             Projet réalisé

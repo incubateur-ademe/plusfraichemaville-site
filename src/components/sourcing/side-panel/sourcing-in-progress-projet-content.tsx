@@ -11,6 +11,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 
 import { userProjetToSourcingContact } from "@/src/components/sourcing/helpers";
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
+import { SourcingSidePanelTracking } from "./sourcing-side-panel-tracking";
 
 export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
@@ -26,6 +27,7 @@ export const SourcingInProgressProjetContent = ({ data }: { data: ProjetWithPubl
             "min-h-[11.5rem] px-5 pb-4 pt-6",
         )}
       >
+        <SourcingSidePanelTracking type="in-progress" name={data.nom} />
         <div className="flex items-center justify-between">
           <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
             Projet en cours

@@ -11,6 +11,8 @@ import Tag from "@codegouvfr/react-dsfr/Tag";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Link from "next/link";
 import { SourcingRexContentSeeProject } from "@/src/components/sourcing/side-panel/sourcing-rex-content-see-project";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { COPY_EMAIL, COPY_TELEPHONE } from "@/src/helpers/matomo/matomo-tags";
 
 type SourcingContactCardProps = {
   contact: SourcingContact;
@@ -68,8 +70,17 @@ export const SourcingContactCard = ({
           <h4 className="mb-0 !text-base">{contact.label}</h4>
           <h5 className="mb-2 !text-base">{ligne3}</h5>
           <div>
-            {contact.email && <CopyField className="text-pfmv-navy underline" label="Email" value={contact.email} />}
-            {contact.telephone && <CopyField label="Téléphone" value={contact.telephone} />}
+            {contact.email && (
+              <CopyField
+                className="text-pfmv-navy underline"
+                label="Email"
+                value={contact.email}
+                onClick={() => trackEvent(COPY_EMAIL)}
+              />
+            )}
+            {contact.telephone && (
+              <CopyField label="Téléphone" value={contact.telephone} onClick={() => trackEvent(COPY_TELEPHONE)} />
+            )}
             {contact.siteInternet && (
               <div className="fr-icon-global-line text-pfmv-navy before:mb-[1px] before:mr-1 before:!h-5 before:!w-5">
                 <Link href={contact.siteInternet} prefetch={false} target="_blank">
