@@ -20,12 +20,8 @@ export const CopyField = ({ label, value, className, onClick }: CopyFieldProps) 
   };
 
   const handleClick = () => {
-    if (onClick) {
-      onClick();
-      handleCopy(value, label);
-    } else {
-      handleCopy(value, label);
-    }
+    onClick && onClick();
+    handleCopy(value, label);
   };
 
   return (
