@@ -44,6 +44,9 @@ export class EmailService {
       contactMessageSent: {
         templateId: 45,
       },
+      welcomeMessage: {
+        templateId: 52,
+      },
     };
   }
 
