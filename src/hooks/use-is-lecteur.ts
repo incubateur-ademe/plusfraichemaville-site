@@ -7,5 +7,5 @@ export const useIsLecteur = (projetId?: number | null) => {
   const currentUserId = useUserStore((state) => state.userInfos?.id);
   const projetById = useProjetsStore((state) => (projetId ? state.getProjetById(projetId) : null));
 
-  return getCurrentUserRole(projetById?.users, currentUserId) === RoleProjet.LECTEUR ?? false;
+  return getCurrentUserRole(projetById?.users, currentUserId) === RoleProjet.LECTEUR;
 };

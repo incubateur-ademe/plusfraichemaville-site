@@ -14,8 +14,6 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { attachInvitationsByEmail } from "@/src/lib/prisma/prisma-user-projet-queries";
 
 export const authOptions: NextAuthOptions = {
-  // Ok to ignore : https://github.com/nextauthjs/next-auth/issues/9493
-  // @ts-expect-error
   adapter: PrismaAdapter(prismaClient),
   events: {
     createUser: async ({ user }) => {
