@@ -10,5 +10,7 @@ export const UserInfoFormSchema = z.object({
   nomEtablissement: z.string().min(1, { message: "Veuillez renseigner votre établissement de rattachement" }),
   canalAcquisition: z.string(),
   customCanalAcquisition: z.string(),
+  acceptCommunicationProduit: z.boolean(),
+  subscribeToNewsletter: z.boolean().optional(),
 });
 export type UserInfoFormData = z.infer<typeof UserInfoFormSchema>;
