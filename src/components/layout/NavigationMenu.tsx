@@ -18,7 +18,7 @@ export default function NavigationMenu() {
       items={[
         {
           linkProps: { href: PFMV_ROUTES.AIDE_DECISION, target: "_self", onClick: cancelCurrentProjet },
-          text: "Découvrir",
+          text: "Démarrer un projet",
           isActive: pathname?.startsWith(PFMV_ROUTES.AIDE_DECISION),
         },
         {
