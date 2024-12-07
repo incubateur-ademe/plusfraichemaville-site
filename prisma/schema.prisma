@@ -28,34 +28,35 @@ model Account {
 }
 
 model User {
-  id                          String                    @id @default(cuid())
-  email                       String                    @unique
-  emailVerified               DateTime?
-  image                       String?
-  accounts                    Account[]
-  agentconnect_info           Json?
-  nom                         String?
-  prenom                      String?
-  poste                       String?
-  nom_etablissement           String?
-  siren_info                  Json?
-  created_at                  DateTime                  @default(now())
-  updated_at                  DateTime?                 @updatedAt
-  collectivites_created       collectivite[]            @relation(name: "collectivite_creator")
-  projets_created             projet[]
-  estimations_created         estimation[]              @relation(name: "estimation_creator")
-  estimations_deleted         estimation[]              @relation(name: "estimation_deleter")
-  projets_deleted             projet[]                  @relation(name: "projet_deleter")
-  collectivites               user_collectivite[]       @relation(name: "collectivite_belonging")
-  projets                     user_projet[]             @relation(name: "projet_access")
-  selection_fiches_solutions  Json                      @default("[]")
-  selection_fiches_diagnostic Int[]                     @default([])
-  canal_acquisition           String?
-  user_projet_deleted         user_projet[]             @relation(name: "user_projet_deleter")
-  discardedInformation        String[]
-  conversations               conversation[]
-  Analytics                   Analytics[]
-  sourcing_contacts_created   projet_sourcing_contact[]
+  id                           String                    @id @default(cuid())
+  email                        String                    @unique
+  emailVerified                DateTime?
+  image                        String?
+  accounts                     Account[]
+  agentconnect_info            Json?
+  nom                          String?
+  prenom                       String?
+  poste                        String?
+  nom_etablissement            String?
+  siren_info                   Json?
+  created_at                   DateTime                  @default(now())
+  updated_at                   DateTime?                 @updatedAt
+  collectivites_created        collectivite[]            @relation(name: "collectivite_creator")
+  projets_created              projet[]
+  estimations_created          estimation[]              @relation(name: "estimation_creator")
+  estimations_deleted          estimation[]              @relation(name: "estimation_deleter")
+  projets_deleted              projet[]                  @relation(name: "projet_deleter")
+  collectivites                user_collectivite[]       @relation(name: "collectivite_belonging")
+  projets                      user_projet[]             @relation(name: "projet_access")
+  selection_fiches_solutions   Json                      @default("[]")
+  selection_fiches_diagnostic  Int[]                     @default([])
+  canal_acquisition            String?
+  user_projet_deleted          user_projet[]             @relation(name: "user_projet_deleter")
+  discardedInformation         String[]
+  conversations                conversation[]
+  Analytics                    Analytics[]
+  sourcing_contacts_created    projet_sourcing_contact[]
+  accept_communication_produit Boolean                   @default(true)
 }
 
 model VerificationToken {

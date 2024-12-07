@@ -12,6 +12,7 @@ import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get
 import { CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { hasAllRequiredFieldsSet } from "@/src/helpers/user";
+import { upsertBrevoContact } from "@/src/services/brevo/brevo-api";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },
@@ -62,7 +63,17 @@ export const editUserInfoAction = async (
         collectiviteId: collectiviteId,
         canalAcquisition: canalAcquisition,
         nomEtablissement: data.nomEtablissement,
+        acceptCommunicationProduit: data.acceptCommunicationProduit,
       });
+      const response = await upsertBrevoContact({
+        email: data.email,
+        acceptInfoProduct: data.acceptCommunicationProduit,
+        subscribeNewsletter: data.subscribeToNewsletter,
+      });
+      if (!response.ok) {
+        const brevoResponse = await response.json();
+        captureError("Erreur lors de la mise à jour dans Brevo", JSON.stringify(brevoResponse));
+      }
 
       revalidatePath(PFMV_ROUTES.MON_PROFIL);
       return { type: "success", message: "USER_UPDATED", updatedUser };

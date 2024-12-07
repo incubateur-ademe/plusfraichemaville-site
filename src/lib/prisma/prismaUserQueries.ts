@@ -126,12 +126,14 @@ export const updateUser = async ({
   collectiviteId,
   canalAcquisition,
   nomEtablissement,
+  acceptCommunicationProduit,
 }: {
   userId: string;
   userNom: string;
   userPrenom: string;
   userPoste: string;
   collectiviteId: number;
+  acceptCommunicationProduit: boolean;
   canalAcquisition?: string;
   nomEtablissement?: string;
 }): Promise<UserWithCollectivite | null> => {
@@ -143,6 +145,7 @@ export const updateUser = async ({
       nom: userNom,
       prenom: userPrenom,
       poste: userPoste,
+      accept_communication_produit: acceptCommunicationProduit,
       collectivites: {
         upsert: {
           where: { userCollectiviteId: { user_id: userId, collectivite_id: collectiviteId } },

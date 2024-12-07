@@ -11,7 +11,11 @@ export const subscribeNewsletterAction = async (data: NewsletterFormData): Promi
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      const response = await brevoAddContact(data.email, data.collectivite?.nomCollectivite);
+      const response = await brevoAddContact({
+        email: data.email,
+        nomCollectivite: data.collectivite?.nomCollectivite,
+        subscribeNewsletter: true,
+      });
       if (!response.ok) {
         const brevoResponse = await response.json();
         captureError("Erreur avec lors de l'inscription à la newsletter", JSON.stringify(brevoResponse));
@@ -20,7 +24,6 @@ export const subscribeNewsletterAction = async (data: NewsletterFormData): Promi
         }
         return { type: "error", message: "TECHNICAL_ERROR" };
       }
-
       return { type: "success", message: "NEWSLETTER_SUCCESS" };
     } catch (e) {
       customCaptureException("Error in subscribeNewsletterAction", e);

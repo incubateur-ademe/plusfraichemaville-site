@@ -15,7 +15,13 @@ export const sendContactMessageAction = async (data: ContactFormData): Promise<R
     try {
       await createHubspotTicket(data);
       if (data.subscribeToNewsletter) {
-        const response = await brevoAddContact(data.email, data.collectivite?.nomCollectivite, data.nom, data.prenom);
+        const response = await brevoAddContact({
+          email: data.email,
+          nomCollectivite: data.collectivite?.nomCollectivite,
+          nom: data.nom,
+          prenom: data.prenom,
+          subscribeNewsletter: true,
+        });
         if (!response.ok) {
           const brevoResponse = await response.json();
           captureError(
