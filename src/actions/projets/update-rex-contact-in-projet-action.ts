@@ -4,7 +4,7 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { getProjetWithRelationsById, updateSourcingCmsProjet } from "@/src/lib/prisma/prismaProjetQueries";
+import { getProjetWithRelationsById, updateSourcingRexProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import isEqual from "lodash/isEqual";
 import { RexContactId } from "@/src/components/sourcing/types";
 
@@ -29,13 +29,14 @@ export const updateRexContactInProjetAction = async (
       return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
     }
 
-    let newSourcingCms = (projetToUpdate.sourcing_cms as RexContactId[]).filter(
-      (savedContact) => !isEqual(savedContact, rexContactId),
-    );
+    let newSourcingRex =
+      (projetToUpdate.sourcing_rex as RexContactId[] | null)?.filter(
+        (savedContact) => !isEqual(savedContact, rexContactId),
+      ) || [];
     if (typeUpdate === "add") {
-      newSourcingCms = [...newSourcingCms, rexContactId];
+      newSourcingRex = [...newSourcingRex, rexContactId];
     }
-    projetToUpdate = await updateSourcingCmsProjet(projetId, newSourcingCms);
+    projetToUpdate = await updateSourcingRexProjet(projetId, newSourcingRex);
 
     return { type: "success", projet: projetToUpdate };
   } catch (e) {

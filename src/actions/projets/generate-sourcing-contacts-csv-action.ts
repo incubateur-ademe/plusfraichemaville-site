@@ -26,8 +26,8 @@ export const generateSourcingContactsCsvAction = async (
     const inProgressContacts =
       projet?.sourcing_user_projets?.map((c) => userProjetToSourcingContactWithProjet(c.sourced_user_projet)) || [];
 
-    const rexContactIds = projet?.sourcing_cms as RexContactId[];
-    const uniqueRexContactIds = Array.from(new Set(rexContactIds.map((r) => r.rexId)));
+    const rexContactIds = projet?.sourcing_rex as RexContactId[] | null;
+    const uniqueRexContactIds = Array.from(new Set(rexContactIds?.map((r) => r.rexId)));
     const allRex = await Promise.all(
       uniqueRexContactIds.map((rexContactId) => getRetoursExperiencesWithContactsById(rexContactId.toString())),
     );
@@ -36,12 +36,14 @@ export const generateSourcingContactsCsvAction = async (
       const currentRexContacts = currentRex?.attributes.contacts as unknown as StrapiSourcingContact[];
       if (!currentRexContacts) return [];
 
-      return rexContactIds
-        .filter((rexContactId) => rexContactId.rexId === currentRex?.id)
-        .map((rexContactId) => currentRexContacts.find((contact) => contact.id === rexContactId.contactId))
-        .filter((contact): contact is StrapiSourcingContact => contact !== undefined)
-        .map((contact) => currentRex && strapiContactToSourcingContact(contact, currentRex))
-        .filter((contact): contact is SourcingContact => contact !== null);
+      return (
+        rexContactIds
+          ?.filter((rexContactId) => rexContactId.rexId === currentRex?.id)
+          .map((rexContactId) => currentRexContacts.find((contact) => contact.id === rexContactId.contactId))
+          .filter((contact): contact is StrapiSourcingContact => contact !== undefined)
+          .map((contact) => currentRex && strapiContactToSourcingContact(contact, currentRex))
+          .filter((contact): contact is SourcingContact => contact !== null) || []
+      );
     });
 
     const allContacts = [...inProgressContacts, ...rexContacts];

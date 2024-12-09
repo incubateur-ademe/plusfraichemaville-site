@@ -12,6 +12,7 @@ import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 // eslint-disable-next-line max-len
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
+import { RexContactId } from "@/src/components/sourcing/types";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -87,7 +88,10 @@ const cards: TableauDeBordSuiviCardProps[] = [
     title: "Annuaire des projets Plus fraîche ma ville",
     index: 6,
     progress: (projet: ProjetWithRelations | undefined) =>
-      (projet?.sourcing_user_projets?.length || 0) > 0 || (projet?.sourcing_cms.length || 0) > 0 ? "100" : "0",
+      (projet?.sourcing_user_projets?.length || 0) > 0 ||
+      ((projet?.sourcing_rex as RexContactId[] | null)?.length || 0) > 0
+        ? "100"
+        : "0",
     disabled: false,
     type: "sourcing",
     picto: <PictoTableauDeBordSelector pictoId="sourcing" className="w-20" />,
