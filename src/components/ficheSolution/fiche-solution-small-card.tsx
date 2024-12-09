@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { makeFicheSolutionUrlApi } from "./helpers";
 import { FicheSolutionResponse } from "./type";

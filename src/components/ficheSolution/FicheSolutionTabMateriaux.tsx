@@ -1,4 +1,3 @@
-import React from "react";
 import Image from "next/image";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import entretienIcon from "../../../public/images/fiches-solutions/entretien.svg";

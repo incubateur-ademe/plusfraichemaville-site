@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React from "react";
+
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import ReactMarkdown from "react-markdown";

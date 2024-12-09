@@ -1,9 +1,9 @@
 import clsx from "clsx";
 
-export const baseAssets = (type: "common" | "projet") => ({
+export const baseAssets = (type: "common" | "projet" | "contact") => ({
   saved: {
     code: false,
-    label: type === "common" ? "Sauvegardée" : "Ajoutée au projet",
+    label: type === "contact" ? "Sauvegardé" : type === "common" ? "Sauvegardée" : "Ajoutée au projet",
     className: clsx(
       "bg-pfmv-navy !text-sm !w-fit !min-h-[2rem] pl-3 pr-2  rounded-full !py-0",
       "flex justify-center items-center text-white",
@@ -19,5 +19,5 @@ export const baseAssets = (type: "common" | "projet") => ({
   },
 });
 
-export const selectSavedOrUnsavedAssets = (isSaved: boolean, type: "common" | "projet") =>
+export const selectSavedOrUnsavedAssets = (isSaved: boolean, type: "common" | "projet" | "contact") =>
   isSaved ? baseAssets(type).saved : baseAssets(type).unsaved;

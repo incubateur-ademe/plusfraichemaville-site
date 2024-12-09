@@ -2,7 +2,7 @@ import { SeparatorY } from "@/src/components/common/separator";
 import { Spinner } from "@/src/components/common/spinner";
 import clsx from "clsx";
 import Image from "next/image";
-import React, { PropsWithChildren } from "react";
+import { PropsWithChildren } from "react";
 import { useUserStore } from "@/src/stores/user/provider";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";

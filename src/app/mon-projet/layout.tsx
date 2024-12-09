@@ -1,4 +1,4 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import AppFooter from "@/src/components/layout/AppFooter";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";

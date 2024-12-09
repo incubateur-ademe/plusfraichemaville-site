@@ -49,11 +49,12 @@ export const upsertProjetAction = async (
         nomProjet: data.nom,
         typeEspace: data.typeEspace,
         adresse: data.adresse?.label || undefined,
-        adresse_info: data.adresse?.banInfo || undefined,
+        adresse_all_infos: data.adresse?.banInfo || undefined,
         niveauMaturite: data.niveauMaturite,
         dateEcheance: data.dateEcheance,
         collectiviteId: collectiviteId,
         userId: user.id,
+        isPublic: data.isPublic,
       });
 
       if (updatedProjet && projetToEdit?.niveau_maturite !== updatedProjet.niveau_maturite) {

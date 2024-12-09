@@ -3,7 +3,7 @@ import { AddressCollectivite, AddressProjet, BanAPIResponse } from "@/src/lib/ad
 import { mapAddressApiToAddressProjet, mapAddressApiToCollectiviteAddress } from "@/src/lib/adresseApi/banApiHelper";
 import { Feature, GeoJsonProperties, Point } from "geojson";
 
-const fetchAddressFromBanApi = async (
+export const fetchAddressFromBanApi = async (
   keyword: string,
   limit: number,
   type?: string,

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import Link from "next/link";
-import React from "react";
+
 import { APIResponseData } from "@/src/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRetourExperience";

@@ -9,7 +9,8 @@ import {
 } from "@/src/components/common/generic-save-fiche/helpers";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
-import { User } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
+import { IApiSirenQueryTypes } from "@/src/lib/siren/types";
 
 export const saveAllFichesFromLocalStorage = async (
   userId: string,
@@ -124,13 +125,17 @@ export const updateUser = async ({
   userPoste,
   collectiviteId,
   canalAcquisition,
+  nomEtablissement,
+  acceptCommunicationProduit,
 }: {
   userId: string;
   userNom: string;
   userPrenom: string;
   userPoste: string;
   collectiviteId: number;
+  acceptCommunicationProduit: boolean;
   canalAcquisition?: string;
+  nomEtablissement?: string;
 }): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.update({
     where: {
@@ -140,6 +145,7 @@ export const updateUser = async ({
       nom: userNom,
       prenom: userPrenom,
       poste: userPoste,
+      accept_communication_produit: acceptCommunicationProduit,
       collectivites: {
         upsert: {
           where: { userCollectiviteId: { user_id: userId, collectivite_id: collectiviteId } },
@@ -148,6 +154,7 @@ export const updateUser = async ({
         },
       },
       canal_acquisition: canalAcquisition,
+      nom_etablissement: nomEtablissement,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
@@ -163,6 +170,23 @@ export const updateUserDiscardedInformation = async (
     },
     data: {
       discardedInformation: updatedModalIds,
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};
+
+export const updateUserEtablissementInfo = async (
+  userId: string,
+  nomEtablissement?: string,
+  etablissementInfo?: IApiSirenQueryTypes["etablissement"],
+): Promise<UserWithCollectivite | null> => {
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      nom_etablissement: nomEtablissement,
+      siren_info: etablissementInfo as Prisma.JsonObject,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });

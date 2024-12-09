@@ -28,31 +28,35 @@ model Account {
 }
 
 model User {
-  id                          String              @id @default(cuid())
-  email                       String              @unique
-  emailVerified               DateTime?
-  image                       String?
-  accounts                    Account[]
-  agentconnect_info           Json?
-  nom                         String?
-  prenom                      String?
-  poste                       String?
-  created_at                  DateTime            @default(now())
-  updated_at                  DateTime?           @updatedAt
-  collectivites_created       collectivite[]      @relation(name: "collectivite_creator")
-  projets_created             projet[]
-  estimations_created         estimation[]        @relation(name: "estimation_creator")
-  estimations_deleted         estimation[]        @relation(name: "estimation_deleter")
-  projets_deleted             projet[]            @relation(name: "projet_deleter")
-  collectivites               user_collectivite[] @relation(name: "collectivite_belonging")
-  projets                     user_projet[]       @relation(name: "projet_access")
-  selection_fiches_solutions  Json                @default("[]")
-  selection_fiches_diagnostic Int[]               @default([])
-  canal_acquisition           String?
-  user_projet_deleted         user_projet[]       @relation(name: "user_projet_deleter")
-  discardedInformation        String[]
-  conversations               conversation[]
-  Analytics                   Analytics[]
+  id                           String                    @id @default(cuid())
+  email                        String                    @unique
+  emailVerified                DateTime?
+  image                        String?
+  accounts                     Account[]
+  agentconnect_info            Json?
+  nom                          String?
+  prenom                       String?
+  poste                        String?
+  nom_etablissement            String?
+  siren_info                   Json?
+  created_at                   DateTime                  @default(now())
+  updated_at                   DateTime?                 @updatedAt
+  collectivites_created        collectivite[]            @relation(name: "collectivite_creator")
+  projets_created              projet[]
+  estimations_created          estimation[]              @relation(name: "estimation_creator")
+  estimations_deleted          estimation[]              @relation(name: "estimation_deleter")
+  projets_deleted              projet[]                  @relation(name: "projet_deleter")
+  collectivites                user_collectivite[]       @relation(name: "collectivite_belonging")
+  projets                      user_projet[]             @relation(name: "projet_access")
+  selection_fiches_solutions   Json                      @default("[]")
+  selection_fiches_diagnostic  Int[]                     @default([])
+  canal_acquisition            String?
+  user_projet_deleted          user_projet[]             @relation(name: "user_projet_deleter")
+  discardedInformation         String[]
+  conversations                conversation[]
+  Analytics                    Analytics[]
+  sourcing_contacts_created    projet_sourcing_contact[]
+  accept_communication_produit Boolean                   @default(true)
 }
 
 model VerificationToken {
@@ -69,6 +73,7 @@ model collectivite {
   code_insee                     String?             @unique
   code_postal                    String?
   adresse_info                   Json?
+  adresse_all_infos              Json?
   ban_id                         String?             @unique
   latitude                       Float?
   longitude                      Float?
@@ -98,22 +103,23 @@ enum InvitationStatus {
 }
 
 model user_projet {
-  id                Int              @id @default(autoincrement())
-  email_address     String?
-  role              RoleProjet
-  projet_id         Int
-  projet            projet           @relation(fields: [projet_id], references: [id])
-  user_id           String?
-  user              User?            @relation(name: "projet_access", fields: [user_id], references: [id])
-  created_at        DateTime         @default(now())
-  invitation_token  String?          @default(uuid())
-  invitation_status InvitationStatus
-  deleted_at        DateTime?
-  deleted_by        String?
-  deleter           User?            @relation(name: "user_projet_deleter", fields: [deleted_by], references: [id])
-  email             email[]
-  nb_views          Int?             @default(0)
-  last_viewed_at    DateTime?
+  id                 Int                       @id @default(autoincrement())
+  email_address      String?
+  role               RoleProjet
+  projet_id          Int
+  projet             projet                    @relation(fields: [projet_id], references: [id])
+  user_id            String?
+  user               User?                     @relation(name: "projet_access", fields: [user_id], references: [id])
+  created_at         DateTime                  @default(now())
+  invitation_token   String?                   @default(uuid())
+  invitation_status  InvitationStatus
+  deleted_at         DateTime?
+  deleted_by         String?
+  deleter            User?                     @relation(name: "user_projet_deleter", fields: [deleted_by], references: [id])
+  email              email[]
+  nb_views           Int?                      @default(0)
+  last_viewed_at     DateTime?
+  sourced_by_projets projet_sourcing_contact[] @relation("sourced_by_projets")
 
   @@unique([user_id, projet_id])
 }
@@ -156,27 +162,44 @@ model user_collectivite {
 }
 
 model projet {
-  id                        Int           @id
+  id                        Int                       @id
   created_by                String
-  creator                   User          @relation(fields: [created_by], references: [id])
-  created_at                DateTime      @default(now())
-  updated_at                DateTime?     @updatedAt
+  creator                   User                      @relation(fields: [created_by], references: [id])
+  created_at                DateTime                  @default(now())
+  updated_at                DateTime?                 @updatedAt
   nom                       String
   type_espace               String?
   adresse                   String?
   niveau_maturite           String?
   adresse_info              Json?
+  adresse_all_infos         Json?
   date_echeance             DateTime?
   fiches_solutions_id       Int[]
   fiches_diagnostic_id      Int[]
   estimations               estimation[]
   collectiviteId            Int
-  collectivite              collectivite  @relation(fields: [collectiviteId], references: [id])
+  collectivite              collectivite              @relation(fields: [collectiviteId], references: [id])
   recommandations_viewed_by String[]
   deleted_at                DateTime?
   deleted_by                String?
-  deleter                   User?         @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
+  deleter                   User?                     @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
   users                     user_projet[]
+  is_public                 Boolean?
+  sourcing_rex              Json?
+  sourcing_user_projets     projet_sourcing_contact[] @relation("sourcing_projet")
+}
+
+model projet_sourcing_contact {
+  id                     Int         @id @default(autoincrement())
+  projet                 projet      @relation("sourcing_projet", fields: [projet_id], references: [id])
+  projet_id              Int
+  sourced_user_projet    user_projet @relation("sourced_by_projets", fields: [sourced_user_projet_id], references: [id])
+  sourced_user_projet_id Int
+  created_at             DateTime    @default(now())
+  created_by             String
+  creator                User        @relation(fields: [created_by], references: [id])
+
+  @@unique([projet_id, sourced_user_projet_id])
 }
 
 model estimation {

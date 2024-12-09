@@ -13,7 +13,7 @@ export const getOrCreateCollectivite = async (data: AddressCollectivite, creator
       code_postal: data.codePostal,
       code_insee: data.codeInsee,
       ban_id: data.banId,
-      adresse_info: data.banInfo as Prisma.JsonObject,
+      adresse_all_infos: data.banInfo as Prisma.JsonObject,
       latitude: data.lat,
       longitude: data.long,
       created_by: creatorUserId,

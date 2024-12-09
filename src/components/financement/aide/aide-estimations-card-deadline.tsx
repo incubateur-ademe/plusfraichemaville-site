@@ -4,7 +4,7 @@ import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import clsx from "clsx";
 import { Separator } from "@/src/components/common/separator";
-import React from "react";
+
 import CustomAccordion from "@/src/components/common/CustomAccordion";
 
 type AideEstimationsCardDeadlineProps = {

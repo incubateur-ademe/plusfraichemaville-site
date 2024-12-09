@@ -14,7 +14,7 @@ export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserPro
   const [isPending, startTransition] = useTransition();
 
   const userProjetId = member.id;
-  const isLecteur = useIsLecteur();
+  const isLecteur = useIsLecteur(member.projet_id);
 
   const handleResendInvitation = () => {
     startTransition(async () => {

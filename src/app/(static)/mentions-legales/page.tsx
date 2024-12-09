@@ -1,4 +1,3 @@
-import React from "react";
 import { LegalNotice } from "@incubateur-ademe/legal-pages-react";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";

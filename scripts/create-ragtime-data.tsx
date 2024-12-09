@@ -3,12 +3,12 @@ import { FicheSolutionResponse, RetourExperienceResponse } from "@/src/component
 import { writeFileSync } from "node:fs";
 import { getAllCompleteRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRetourExperience";
-import { selectEspaceByCode } from "@/src/components/filters/TypeEspaceFilter";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { FicheDiagnosticResponse } from "@/src/components/fiches-diagnostic/types";
 import { getAllCompleteFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { getTemporaliteLabelFromCode } from "@/src/helpers/retourExperience/temporaliteRetourExperience";
+import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 
 type RagTimeFicheDiagnostic = {
   id: number;

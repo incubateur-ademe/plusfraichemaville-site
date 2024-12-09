@@ -1,8 +1,7 @@
-import { TypeEspace } from "@/src/components/filters/TypeEspaceFilter";
-
 import Image from "next/image";
 import { PictoType } from ".";
 import clsx from "clsx";
+import { TypeEspace } from "@/src/helpers/type-espace-filter";
 
 const pictos: Record<TypeEspace["code"], string> = {
   rondpoint: "espace-icone-rond-point.svg",

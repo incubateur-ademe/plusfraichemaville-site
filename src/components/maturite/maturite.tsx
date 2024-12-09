@@ -15,13 +15,21 @@ import { UPDATE_MATURITE } from "@/src/helpers/matomo/matomo-tags";
 type MaturiteProps = {
   niveau: string | null;
   projetId: number;
+  buttonBgHoverColor?: string;
   withLabel?: boolean;
+  editable?: boolean;
 };
 
-export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
+export const Maturite = ({
+  withLabel,
+  niveau,
+  projetId,
+  buttonBgHoverColor = "bg-white",
+  editable = true,
+}: MaturiteProps) => {
   const [show, setShow] = useState(false);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
-  const isLecteur = useIsLecteur(projetId);
+  const readOnly = useIsLecteur(projetId) || !editable;
 
   const toggleShow = () => setShow(!show);
   const closer = () => setShow(false);
@@ -42,14 +50,19 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
     <div
       className={clsx(
         "relative w-fit",
-        !isLecteur && "border-b border-b-pfmv-grey-dashed/25 hover:border-b-pfmv-grey-dashed",
+        !readOnly && "border-b border-b-pfmv-grey-dashed/25 hover:border-b-pfmv-grey-dashed",
       )}
       aria-describedby={`tooltip-maturite-${projetId}`}
     >
       <Button
-        onClick={toggleShow}
+        disabled={readOnly}
+        onClick={readOnly ? () => {} : toggleShow}
         priority="tertiary no outline"
-        className={clsx("relative !p-0 hover:!bg-white", isLecteur && "cursor-default")}
+        className={clsx(
+          "relative !p-0",
+          `hover:!${buttonBgHoverColor}`,
+          readOnly && "!cursor-default !text-dsfr-text-title-grey",
+        )}
       >
         <span
           className={clsx("fr-tooltip fr-placement conic-gradient", withLabel ? "!hidden" : show && "!hidden")}
@@ -61,9 +74,9 @@ export const Maturite = ({ withLabel, niveau, projetId }: MaturiteProps) => {
         </span>
         <MaturiteProgress value={currentNiveau?.avancement} />
         <span className={clsx("font-normal text-black", withLabel && "mr-4")}>{withLabel && currentNiveau?.label}</span>
-        {!isLecteur && <i className="ri-arrow-down-s-line text-black"></i>}
+        {!readOnly && <i className="ri-arrow-down-s-line text-black"></i>}
       </Button>
-      {show && !isLecteur && (
+      {show && !readOnly && (
         <>
           {show && <div className="fixed inset-0 z-[1] h-screen w-screen" onClick={closer} />}
           <ul

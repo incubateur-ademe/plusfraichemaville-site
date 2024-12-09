@@ -23,7 +23,7 @@ export default function AideDecisionEtapeCard({
           className={"h-full w-full rounded-l-2xl object-cover md:rounded-t-2xl md:rounded-bl-none"}
         />
       </div>
-      <div className="m-4 max-w-[11rem]">
+      <div className="m-4 max-w-[11rem] md:max-w-none">
         <h3 className={"text-blue-hover mb-0 text-[16px] font-bold leading-tight"}>{aideDecisionEtape.nom}</h3>
         <div className={"fr-text mt-4 hidden text-dsfr-text-mention-grey md:block"}>
           {aideDecisionEtape.description}
