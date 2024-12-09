@@ -31,12 +31,12 @@ export const SourcingContactSaveButton = ({ projetId, contact, className }: Sour
 
     if (contact.type === "rex" && projet) {
       setSaved(
-        (projet.sourcing_cms as RexContactId[]).some((savedRexContactId) =>
+        (projet.sourcing_rex as RexContactId[] | null)?.some((savedRexContactId) =>
           isEqual(savedRexContactId, {
             rexId: contact.id.rexId,
             contactId: contact.id.contactId,
           }),
-        ),
+        ) || false,
       );
     } else if (contact.type === "in-progress") {
       setSaved(
