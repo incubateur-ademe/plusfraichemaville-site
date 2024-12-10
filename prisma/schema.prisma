@@ -291,6 +291,7 @@ model Analytics {
 
 enum JobType {
   SYNC_HUBSPOT
+  CSM_MAIL_BATCH
 }
 
 model cron_jobs {

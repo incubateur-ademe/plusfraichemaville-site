@@ -7,6 +7,11 @@ export const getLastHubspotSync = async () =>
     where: { job_type: "SYNC_HUBSPOT" },
     orderBy: { execution_end_time: "desc" },
   });
+export const getLastCsmMailBatch = async () =>
+  await prismaClient.cron_jobs.findFirst({
+    where: { job_type: "CSM_MAIL_BATCH" },
+    orderBy: { execution_end_time: "desc" },
+  });
 
 export const saveCronJob = async (startTime: Date, endTime: Date, jobType: cron_jobs["job_type"]) =>
   await prismaClient.cron_jobs.create({
