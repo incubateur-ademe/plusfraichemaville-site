@@ -41,12 +41,15 @@ export const getLastEmailForUserProjet = async (userProjetId: number, emailType:
   });
 };
 
-export const getUserWithNoActivityAfterSignup = async (since = 10): Promise<User[] | null> => {
+export const getUserWithNoActivityAfterSignup = async (lastSyncDate: Date, since = 10): Promise<User[] | null> => {
   const SINCE_DAYS_AGO = new Date(Date.now() - since * 24 * 60 * 60 * 1000);
 
   const noActivityEmails = await prismaClient.email.findMany({
     where: {
       type: emailType.noActivityAfterSignup,
+      sending_time: {
+        gte: lastSyncDate,
+      },
     },
     select: {
       destination_address: true,
