@@ -12,7 +12,7 @@ export const brevoSendEmail = async (to: string, templateId: number, params?: Re
       body: JSON.stringify({
         to: [{ email: to }],
         templateId: templateId,
-        ...(params && { params: { ...params, NOM: params?.nom } }),
+        ...(params && { params }),
       }),
       signal: controller.signal,
     });

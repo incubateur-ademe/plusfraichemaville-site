@@ -169,7 +169,7 @@ export class EmailService {
     return this.sendEmail({
       to: data.email,
       emailType: emailType.welcomeMessage,
-      params: { nom: data.nom },
+      params: { NOM: data.nom },
       extra: data,
     });
   }
