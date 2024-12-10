@@ -53,7 +53,7 @@ export const getUserWithNoActivityAfterSignup = async (since = 10): Promise<User
     },
   });
 
-  const emailAddresses = noActivityEmails.map((email) => email.destination_address);
+  const emails = noActivityEmails.map((email) => email.destination_address);
 
   return prismaClient.user.findMany({
     where: {
@@ -64,7 +64,7 @@ export const getUserWithNoActivityAfterSignup = async (since = 10): Promise<User
         none: {},
       },
       email: {
-        notIn: emailAddresses,
+        notIn: emails,
       },
     },
   });
