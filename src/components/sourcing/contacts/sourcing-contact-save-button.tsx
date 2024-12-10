@@ -10,6 +10,9 @@ import { updateRexContactInProjetAction } from "@/src/actions/projets/update-rex
 import { useEffect, useState } from "react";
 import { RexContactId, SourcingContact } from "@/src/components/sourcing/types";
 import { updateUserContactInProjetAction } from "@/src/actions/projets/update-user-contact-in-projet-action";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { SOURCING_SAVING_CONTACT } from "@/src/helpers/matomo/matomo-tags";
+import { SOURCING_DELETING_CONTACT } from "@/src/helpers/matomo/matomo-tags";
 
 type SourcingContactSaveButtonProps = {
   projetId: number;
@@ -28,12 +31,12 @@ export const SourcingContactSaveButton = ({ projetId, contact, className }: Sour
 
     if (contact.type === "rex" && projet) {
       setSaved(
-        (projet.sourcing_cms as RexContactId[]).some((savedRexContactId) =>
+        (projet.sourcing_rex as RexContactId[] | null)?.some((savedRexContactId) =>
           isEqual(savedRexContactId, {
             rexId: contact.id.rexId,
             contactId: contact.id.contactId,
           }),
-        ),
+        ) || false,
       );
     } else if (contact.type === "in-progress") {
       setSaved(
@@ -65,6 +68,8 @@ export const SourcingContactSaveButton = ({ projetId, contact, className }: Sour
     startLoading();
 
     const result = isSaved ? await updater.delete.action() : await updater.add.action();
+
+    isSaved ? trackEvent(SOURCING_DELETING_CONTACT) : trackEvent(SOURCING_SAVING_CONTACT);
 
     if (result.type === "success" && result.projet) {
       addOrUpdateProjet(result.projet);

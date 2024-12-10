@@ -412,9 +412,9 @@ export const getPublicProjetById = async (projetId: number): Promise<ProjetWithP
   });
 };
 
-export const updateSourcingCmsProjet = (
+export const updateSourcingRexProjet = (
   projetId: number,
-  sourcingCms: RexContactId[],
+  sourcingRex: RexContactId[],
 ): Promise<ProjetWithRelations | null> => {
   return prismaClient.projet.update({
     where: {
@@ -422,7 +422,7 @@ export const updateSourcingCmsProjet = (
       deleted_at: null,
     },
     data: {
-      sourcing_cms: sourcingCms,
+      sourcing_rex: sourcingRex,
     },
     include: projetIncludes,
   });

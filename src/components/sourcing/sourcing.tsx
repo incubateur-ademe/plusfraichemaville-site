@@ -20,7 +20,7 @@ export const Sourcing = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isLecteur = useIsLecteur(currentProjet?.id);
   const inProgressProjetContacts = currentProjet?.sourcing_user_projets;
-  const rexContactIds = currentProjet?.sourcing_cms as RexContactId[] | undefined;
+  const rexContactIds = currentProjet?.sourcing_rex as RexContactId[] | undefined;
 
   const {
     contactTypeFilters,
