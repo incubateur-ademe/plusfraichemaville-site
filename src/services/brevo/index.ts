@@ -190,11 +190,16 @@ export class EmailService {
     if (!usersEmail?.length) {
       return { message: "Aucun utilisateur trouvé." };
     } else {
-      await this.sendEmail({
+      const response = await this.sendEmail({
         to: usersEmail,
         emailType: emailType.noActivityAfterSignup,
       });
-      return { message: `Email(s) envoyé(s) à ${usersEmail.length} utilisateur(s).` };
+
+      if (response.type === "success") {
+        return { message: `Email(s) envoyé(s) à ${usersEmail.length} utilisateur(s).`, success: true };
+      } else {
+        return { message: "Erreur lors de l'envoi des emails.", success: false };
+      }
     }
   }
 }
