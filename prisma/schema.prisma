@@ -187,7 +187,7 @@ model projet {
   deleter                   User?                     @relation(name: "projet_deleter", fields: [deleted_by], references: [id])
   users                     user_projet[]
   is_public                 Boolean?
-  sourcing_cms              Json[]
+  sourcing_rex              Json?
   sourcing_user_projets     projet_sourcing_contact[] @relation("sourcing_projet")
 }
 
