@@ -2,8 +2,8 @@ import { getLastCsmMailBatch, saveCronJob } from "@/src/lib/prisma/prisma-cron-j
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EmailService } from "@/src/services/brevo";
 
-const syncWithHubspot = async () => {
-  if (process.env.HUBSPOT_SYNC_ENV !== "true") {
+const main = async () => {
+  if (process.env.CSM_MAIL_BATCH_ENV !== "true") {
     console.log("La synchronisation n'a pas aboutie : éxecution hors d'un environnement de production.");
     return;
   }
@@ -34,4 +34,4 @@ const syncWithHubspot = async () => {
   }
 };
 
-syncWithHubspot();
+main();
