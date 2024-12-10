@@ -130,6 +130,7 @@ enum emailType {
   projetAccessGranted
   projetAccessDeclined
   contactMessageSent
+  welcomeMessage
 }
 
 enum emailStatus {

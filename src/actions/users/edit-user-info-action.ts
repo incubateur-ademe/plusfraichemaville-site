@@ -11,7 +11,6 @@ import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCus
 import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { hasAllRequiredFieldsSet } from "@/src/helpers/user";
 import { upsertBrevoContact } from "@/src/services/brevo/brevo-api";
 
 export const editUserInfoAction = async (
@@ -43,12 +42,6 @@ export const editUserInfoAction = async (
         return { type: "error", message: "CHANGE_COLLECTIVITE_ERROR" };
       }
 
-      const isNewUser = !hasAllRequiredFieldsSet(prismaUser);
-
-      if (isNewUser) {
-        console.log("########### NEW USER");
-      }
-
       const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
       const canalAcquisition =
         data.canalAcquisition === CUSTOM_CANAL_ACQUISITION.label
@@ -70,8 +63,10 @@ export const editUserInfoAction = async (
         acceptInfoProduct: data.acceptCommunicationProduit,
         subscribeNewsletter: data.subscribeToNewsletter,
       });
+
       if (!response.ok) {
         const brevoResponse = await response.json();
+
         captureError("Erreur lors de la mise à jour dans Brevo", JSON.stringify(brevoResponse));
       }
 
