@@ -27,7 +27,9 @@ const syncWithHubspot = async () => {
     console.log("Batch des mails CSM réussi !");
     process.exit(0);
   } catch (error) {
-    customCaptureException("Erreur lors du batch des mails CSM.", {});
+    customCaptureException("Erreur lors du batch des mails CSM.", {
+      executionTime: new Date(),
+    });
     process.exit(1);
   }
 };
