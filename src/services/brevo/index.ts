@@ -44,6 +44,9 @@ export class EmailService {
       contactMessageSent: {
         templateId: 45,
       },
+      welcomeMessage: {
+        templateId: 52,
+      },
     };
   }
 
@@ -65,7 +68,6 @@ export class EmailService {
     extra?: any;
   }): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
-
     const dbEmail = await createEmail(to, emailType, userProjetId, extra);
     try {
       const response = await brevoSendEmail(to, templateId, params);
@@ -161,5 +163,14 @@ export class EmailService {
 
   async sendContactMessageReceivedEmail(data: ContactFormData) {
     return this.sendEmail({ to: data.email, emailType: emailType.contactMessageSent, extra: data });
+  }
+
+  async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom">) {
+    return this.sendEmail({
+      to: data.email,
+      emailType: emailType.welcomeMessage,
+      params: { NOM: data.nom },
+      extra: data,
+    });
   }
 }

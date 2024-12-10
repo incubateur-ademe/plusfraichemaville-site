@@ -12,6 +12,7 @@ import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
 import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { attachInvitationsByEmail } from "@/src/lib/prisma/prisma-user-projet-queries";
+import { EmailService } from "@/src/services/brevo";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prismaClient),
@@ -44,6 +45,11 @@ export const authOptions: NextAuthOptions = {
           }
         }
         await attachInvitationsByEmail(prismaUser.email, user.id);
+        const emailService = new EmailService();
+        await emailService.sendWelcomeMessageEmail({
+          email: prismaUser.email,
+          nom: prismaUser.nom ?? "",
+        });
       }
     },
   },
