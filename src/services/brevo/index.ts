@@ -198,7 +198,10 @@ export class EmailService {
       if (response.type === "success") {
         return { message: `Email(s) envoyé(s) à ${usersEmail.length} utilisateur(s).`, success: true };
       } else {
-        return { message: "Erreur lors de l'envoi des emails.", success: false };
+        return {
+          message: "Erreur lors de l'envoi des emails des utilisateurs inactifs depuis leur inscription.",
+          success: false,
+        };
       }
     }
   }
