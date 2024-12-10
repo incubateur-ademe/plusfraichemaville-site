@@ -131,6 +131,7 @@ enum emailType {
   projetAccessDeclined
   contactMessageSent
   welcomeMessage
+  noActivityAfterSignup
 }
 
 enum emailStatus {
