@@ -34,14 +34,12 @@ export const editUserInfoAction = async (
   } else {
     try {
       const prismaUser = await getUserWithCollectivites(data.userId);
-
       if (
         prismaUser?.collectivites[0] &&
         prismaUser?.collectivites[0].collectivite.ban_id !== data.collectivite.banId
       ) {
         return { type: "error", message: "CHANGE_COLLECTIVITE_ERROR" };
       }
-
       const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
       const canalAcquisition =
         data.canalAcquisition === CUSTOM_CANAL_ACQUISITION.label
@@ -63,10 +61,8 @@ export const editUserInfoAction = async (
         acceptInfoProduct: data.acceptCommunicationProduit,
         subscribeNewsletter: data.subscribeToNewsletter,
       });
-
       if (!response.ok) {
         const brevoResponse = await response.json();
-
         captureError("Erreur lors de la mise à jour dans Brevo", JSON.stringify(brevoResponse));
       }
 
