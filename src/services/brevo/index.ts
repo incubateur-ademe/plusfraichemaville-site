@@ -1,4 +1,8 @@
-import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/src/lib/prisma/prisma-email-queries";
+import {
+  createEmail,
+  getUserWithNoActivityAfterSignup,
+  updateEmailStatus as updateEmailStatusQuery,
+} from "@/src/lib/prisma/prisma-email-queries";
 import { email, emailStatus, emailType } from "@prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
@@ -44,6 +48,12 @@ export class EmailService {
       contactMessageSent: {
         templateId: 45,
       },
+      welcomeMessage: {
+        templateId: 52,
+      },
+      noActivityAfterSignup: {
+        templateId: 53,
+      },
     };
   }
 
@@ -58,15 +68,15 @@ export class EmailService {
     userProjetId,
     extra,
   }: {
-    to: string;
+    to: string | string[];
     emailType: emailType;
     params?: Record<string, string>;
     userProjetId?: number;
     extra?: any;
   }): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
+    const dbEmails = await createEmail(to, emailType, userProjetId, extra);
 
-    const dbEmail = await createEmail(to, emailType, userProjetId, extra);
     try {
       const response = await brevoSendEmail(to, templateId, params);
 
@@ -77,13 +87,14 @@ export class EmailService {
 
       const data = await response.json();
 
-      let email = null;
-      email = await this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId);
+      const updatedEmails = await Promise.all(
+        dbEmails.map((dbEmail) => this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId)),
+      );
 
-      return { type: "success", message: "EMAIL_SENT", email };
+      return { type: "success", message: "EMAIL_SENT", email: updatedEmails[0] };
     } catch (error) {
       captureError("Erreur lors de l'envoi du mail : ", error);
-      await this.updateEmailStatus(dbEmail.id, emailStatus.ERROR);
+      await Promise.all(dbEmails.map((dbEmail) => this.updateEmailStatus(dbEmail.id, emailStatus.ERROR)));
       return { type: "error", message: "TECHNICAL_ERROR" };
     }
   }
@@ -161,5 +172,29 @@ export class EmailService {
 
   async sendContactMessageReceivedEmail(data: ContactFormData) {
     return this.sendEmail({ to: data.email, emailType: emailType.contactMessageSent, extra: data });
+  }
+
+  async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom">) {
+    return this.sendEmail({
+      to: data.email,
+      emailType: emailType.welcomeMessage,
+      params: { NOM: data.nom },
+      extra: data,
+    });
+  }
+
+  async sendNoActivityAfterSignupEmail() {
+    const users = await getUserWithNoActivityAfterSignup();
+    const usersEmail = users?.map((user) => user.email);
+
+    if (!usersEmail?.length) {
+      return { message: "Aucun utilisateur trouvé." };
+    } else {
+      await this.sendEmail({
+        to: usersEmail,
+        emailType: emailType.noActivityAfterSignup,
+      });
+      return { message: `Email(s) envoyé(s) à ${usersEmail.length} utilisateur(s).` };
+    }
   }
 }
