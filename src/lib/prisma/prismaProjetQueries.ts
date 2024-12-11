@@ -1,5 +1,5 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
+import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
@@ -439,6 +439,35 @@ export const updateProjetVisibility = async (
     },
     data: {
       is_public: visible,
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsForProjetCreationEmail = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      created_at: {
+        gte: afterDate,
+        lte: beforeDate,
+      },
+      NOT: {
+        users: {
+          some: {
+            role: "ADMIN",
+            email: {
+              some: {
+                type: emailType.projetCreation,
+                email_status: "SUCCESS",
+              },
+            },
+          },
+        },
+      },
     },
     include: projetIncludes,
   });
