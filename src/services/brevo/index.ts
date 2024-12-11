@@ -67,15 +67,17 @@ export class EmailService {
     params,
     userProjetId,
     extra,
+    userId,
   }: {
     to: string;
     emailType: emailType;
     params?: Record<string, string>;
     userProjetId?: number;
+    userId?: string;
     extra?: any;
   }): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
-    const dbEmail = await createEmail(to, emailType, userProjetId, extra);
+    const dbEmail = await createEmail({ to, emailType, userProjetId, userId, extra });
 
     try {
       const response = await brevoSendEmail(to, templateId, params);
@@ -183,24 +185,29 @@ export class EmailService {
 
   async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
     const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
-    const usersEmail = users?.map((user) => user.email);
 
-    if (!usersEmail?.length) {
+    if (!users?.length) {
       return { message: "Aucun utilisateur trouvé." };
     } else {
-      const response = await this.sendEmail({
-        to: usersEmail,
-        emailType: emailType.noActivityAfterSignup,
-      });
+      const results = await Promise.all(
+        users.map(async (user) => {
+          const result = await this.sendEmail({
+            to: user.email,
+            userId: user.id,
+            emailType: emailType.noActivityAfterSignup,
+            params: {
+              NOM: user.nom || "",
+            },
+          });
 
-      if (response.type === "success") {
-        return { message: `Email(s) envoyé(s) à ${usersEmail.length} utilisateur(s).`, success: true };
-      } else {
-        return {
-          message: "Erreur lors de l'envoi des emails des utilisateurs inactifs depuis leur inscription.",
-          success: false,
-        };
-      }
+          if (result.type === "success") {
+            console.log(`Email envoyé à ${user.email} - type: ${emailType.noActivityAfterSignup}`);
+          }
+
+          return result;
+        }),
+      );
+      return results;
     }
   }
 }

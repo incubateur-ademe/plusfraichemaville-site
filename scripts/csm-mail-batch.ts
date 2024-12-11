@@ -1,5 +1,5 @@
 import { getLastCsmMailBatch, saveCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
-import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EmailService } from "@/src/services/brevo";
 
 const main = async () => {
@@ -16,12 +16,7 @@ const main = async () => {
 
     const INACTIVITY_DAYS = 10;
     console.log(`Recherche des utilisateurs inactifs depuis ${INACTIVITY_DAYS} jours...`);
-    const { success, message } = await emailService.sendNoActivityAfterSignupEmail(lastSyncDate, INACTIVITY_DAYS);
-    if (!success) {
-      captureError(message, { executionTime: new Date() });
-      process.exit(1);
-    }
-    console.log(message);
+    await emailService.sendNoActivityAfterSignupEmail(lastSyncDate, INACTIVITY_DAYS);
 
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     console.log("Batch des mails CSM réussi !");
