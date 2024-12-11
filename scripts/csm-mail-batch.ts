@@ -4,7 +4,7 @@ import { EmailService } from "@/src/services/brevo";
 
 const main = async () => {
   if (process.env.CSM_MAIL_BATCH_ACTIVE !== "true") {
-    console.log("La synchronisation n'a pas aboutie : éxecution hors d'un environnement de production.");
+    console.log("Le batch des mails CSM n'est pas activé sur cet environnement.");
     return;
   }
 
