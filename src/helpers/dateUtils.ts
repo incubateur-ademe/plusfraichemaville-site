@@ -2,6 +2,8 @@ import type { Attribute } from "@strapi/strapi";
 
 export const FAR_FUTURE = new Date(3024, 0, 0, 1);
 
+export const removeDaysToDate = (date: Date, nbDays: number) => new Date(date.getTime() - nbDays * 24 * 60 * 60 * 1000);
+
 export function monthDateToString(value: Date | null | undefined): string {
   return value ? `${value.getFullYear()}-${("0" + (value.getMonth() + 1)).slice(-2)}` : "";
 }

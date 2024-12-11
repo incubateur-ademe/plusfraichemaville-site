@@ -6,6 +6,7 @@ export const PFMV_ROUTES = {
   FICHES_DIAGNOSTIC: "/fiches-diagnostic",
   MES_FICHES_SOLUTIONS: "/mon-projet/favoris",
   RETOURS_EXPERIENCE: "/projet",
+  RETOUR_EXPERIENCE: (slug: string) => `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${slug}`,
   CONTACT: "/contact",
   CONTACT_SUCCESS: "/contact/success",
   NEWSLETTER: "/newsletter",
@@ -44,6 +45,8 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>
     `/espace-projet/${projetId}/financement/edit/${estimationId}`,
 };
+
+export const getFullUrl = (route: string): string => `${process.env.NEXT_PUBLIC_URL_SITE}${route}`;
 
 export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
   `/api/get-aides-territoires-aide-by-aide-id?aideId=${aideId}`;

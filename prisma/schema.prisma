@@ -125,6 +125,7 @@ model user_projet {
 }
 
 enum emailType {
+  projetCreation
   projetInvitation
   projetRequestAccess
   projetAccessGranted
