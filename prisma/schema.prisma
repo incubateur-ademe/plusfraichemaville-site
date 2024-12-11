@@ -57,6 +57,7 @@ model User {
   Analytics                    Analytics[]
   sourcing_contacts_created    projet_sourcing_contact[]
   accept_communication_produit Boolean                   @default(true)
+  emails                       email[]
 }
 
 model VerificationToken {
@@ -149,6 +150,8 @@ model email {
   email_status        emailStatus
   user_projet_id      Int?
   user_projet         user_projet? @relation(fields: [user_projet_id], references: [id])
+  user                User?        @relation(fields: [user_id], references: [id])
+  user_id             String?
   extra               Json?
 }
 

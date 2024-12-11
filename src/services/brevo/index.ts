@@ -68,14 +68,14 @@ export class EmailService {
     userProjetId,
     extra,
   }: {
-    to: string | string[];
+    to: string;
     emailType: emailType;
     params?: Record<string, string>;
     userProjetId?: number;
     extra?: any;
   }): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
-    const dbEmails = await createEmail(to, emailType, userProjetId, extra);
+    const dbEmail = await createEmail(to, emailType, userProjetId, extra);
 
     try {
       const response = await brevoSendEmail(to, templateId, params);
@@ -87,14 +87,12 @@ export class EmailService {
 
       const data = await response.json();
 
-      const updatedEmails = await Promise.all(
-        dbEmails.map((dbEmail) => this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId)),
-      );
+      const email = await this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId);
 
-      return { type: "success", message: "EMAIL_SENT", email: updatedEmails[0] };
+      return { type: "success", message: "EMAIL_SENT", email };
     } catch (error) {
       captureError("Erreur lors de l'envoi du mail : ", error);
-      await Promise.all(dbEmails.map((dbEmail) => this.updateEmailStatus(dbEmail.id, emailStatus.ERROR)));
+      await this.updateEmailStatus(dbEmail.id, emailStatus.ERROR);
       return { type: "error", message: "TECHNICAL_ERROR" };
     }
   }

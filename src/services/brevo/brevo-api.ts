@@ -1,4 +1,4 @@
-export const brevoSendEmail = async (to: string | string[], templateId: number, params?: Record<string, string>) => {
+export const brevoSendEmail = async (to: string, templateId: number, params?: Record<string, string>) => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
 
@@ -10,7 +10,7 @@ export const brevoSendEmail = async (to: string | string[], templateId: number, 
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        to: Array.isArray(to) ? to.map((email) => ({ email })) : [{ email: to }],
+        to: [{ email: to }],
         templateId: templateId,
         ...(params && { params }),
       }),

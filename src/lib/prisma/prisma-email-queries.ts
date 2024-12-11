@@ -12,26 +12,20 @@ export const updateEmailStatus = async (id: string, status: emailStatus, brevoId
 };
 
 export const createEmail = async (
-  destinationAddress: string | string[],
+  destinationAddress: string,
   type: emailType,
   userProjetId?: number,
   extra?: any,
-): Promise<email[]> => {
-  const addresses = Array.isArray(destinationAddress) ? destinationAddress : [destinationAddress];
-
-  const emailPromises = addresses.map((address) =>
-    prismaClient.email.create({
-      data: {
-        destination_address: address,
-        user_projet_id: userProjetId,
-        type: type,
-        email_status: emailStatus.PENDING,
-        extra: extra,
-      },
-    }),
-  );
-
-  return Promise.all(emailPromises);
+): Promise<email> => {
+  return prismaClient.email.create({
+    data: {
+      destination_address: destinationAddress,
+      user_projet_id: userProjetId,
+      type: type,
+      email_status: emailStatus.PENDING,
+      extra: extra,
+    },
+  });
 };
 
 export const getLastEmailForUserProjet = async (userProjetId: number, emailType: emailType): Promise<email | null> => {
@@ -44,20 +38,6 @@ export const getLastEmailForUserProjet = async (userProjetId: number, emailType:
 export const getUserWithNoActivityAfterSignup = async (lastSyncDate: Date, since = 10): Promise<User[] | null> => {
   const SINCE_DAYS_AGO = new Date(Date.now() - since * 24 * 60 * 60 * 1000);
 
-  const noActivityEmails = await prismaClient.email.findMany({
-    where: {
-      type: emailType.noActivityAfterSignup,
-      sending_time: {
-        gte: lastSyncDate,
-      },
-    },
-    select: {
-      destination_address: true,
-    },
-  });
-
-  const emails = noActivityEmails.map((email) => email.destination_address);
-
   return prismaClient.user.findMany({
     where: {
       created_at: {
@@ -66,8 +46,13 @@ export const getUserWithNoActivityAfterSignup = async (lastSyncDate: Date, since
       projets: {
         none: {},
       },
-      email: {
-        notIn: emails,
+      emails: {
+        none: {
+          type: emailType.noActivityAfterSignup,
+          sending_time: {
+            gte: lastSyncDate,
+          },
+        },
       },
     },
   });
