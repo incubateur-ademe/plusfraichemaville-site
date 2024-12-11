@@ -3,7 +3,7 @@ import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCus
 import { EmailService } from "@/src/services/brevo";
 
 const main = async () => {
-  if (process.env.CSM_MAIL_BATCH_ENV !== "true") {
+  if (process.env.CSM_MAIL_BATCH_ACTIVE !== "true") {
     console.log("La synchronisation n'a pas aboutie : éxecution hors d'un environnement de production.");
     return;
   }
