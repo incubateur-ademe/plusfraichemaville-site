@@ -14,14 +14,14 @@ const main = async () => {
     const lastSync = await getLastCsmMailBatch();
     const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
 
-    console.log("Recherche des utilisateurs inactifs plus de 10 jours après leur inscription...");
-    const emailNoActivity = await emailService.sendNoActivityAfterSignupEmail(lastSyncDate);
-    if (!emailNoActivity.success) {
-      captureError(emailNoActivity.message, {
-        executionTime: new Date(),
-      });
+    const INACTIVITY_DAYS = 10;
+    console.log(`Recherche des utilisateurs inactifs depuis ${INACTIVITY_DAYS} jours...`);
+    const { success, message } = await emailService.sendNoActivityAfterSignupEmail(lastSyncDate, INACTIVITY_DAYS);
+    if (!success) {
+      captureError(message, { executionTime: new Date() });
       process.exit(1);
     }
+    console.log(message);
 
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     console.log("Batch des mails CSM réussi !");
