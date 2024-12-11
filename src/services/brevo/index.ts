@@ -181,8 +181,8 @@ export class EmailService {
     });
   }
 
-  async sendNoActivityAfterSignupEmail(lastSyncDate: Date) {
-    const users = await getUserWithNoActivityAfterSignup(lastSyncDate);
+  async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
+    const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
     const usersEmail = users?.map((user) => user.email);
 
     if (!usersEmail?.length) {
