@@ -52,11 +52,7 @@ export const getUserWithNoActivityAfterSignup = async (lastSyncDate: Date, inact
         lte: removeDaysToDate(new Date(), inactivityDays),
       },
       projets: {
-        every: {
-          deleted_at: {
-            not: null,
-          },
-        },
+        none: {},
       },
       emails: {
         none: {
