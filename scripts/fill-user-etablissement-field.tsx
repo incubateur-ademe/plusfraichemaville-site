@@ -15,6 +15,7 @@ async function main() {
       const siret = userToProcess.agentconnect_info?.siret;
       if (siret) {
         const entityFromSiret = await fetchEntrepriseFromSirenApi(siret);
+
         if (entityFromSiret?.etablissement) {
           await updateUserEtablissementInfo(
             userToProcess.id,
