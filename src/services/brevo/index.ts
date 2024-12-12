@@ -12,6 +12,7 @@ import { UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/
 import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
+import { daysUntilDate } from "@/src/helpers/dateUtils";
 
 interface Templates {
   templateId: number;
@@ -185,7 +186,8 @@ export class EmailService {
 
   async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
     const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
-
+    const mails = users.map((user) => user.email);
+    console.log(mails);
     if (!users?.length) {
       return { message: "Aucun utilisateur trouvé." };
     } else {
@@ -196,7 +198,8 @@ export class EmailService {
             userId: user.id,
             emailType: emailType.noActivityAfterSignup,
             params: {
-              NOM: user.nom || "",
+              nom: user.nom || "",
+              date_creation_compte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
             },
           });
 

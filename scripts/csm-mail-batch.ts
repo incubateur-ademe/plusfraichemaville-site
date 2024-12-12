@@ -1,3 +1,4 @@
+import { removeDaysToDate } from "@/src/helpers/dateUtils";
 import { getLastCsmMailBatch, saveCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EmailService } from "@/src/services/brevo";
@@ -12,7 +13,7 @@ const main = async () => {
     const emailService = new EmailService();
     const startedDate = new Date();
     const lastSync = await getLastCsmMailBatch();
-    const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
+    const lastSyncDate = lastSync?.execution_end_time ?? removeDaysToDate(new Date(), 10);
 
     const INACTIVITY_DAYS = 10;
     console.log(`Recherche des utilisateurs inactifs depuis ${INACTIVITY_DAYS} jours...`);
