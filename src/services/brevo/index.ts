@@ -1,4 +1,8 @@
-import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/src/lib/prisma/prisma-email-queries";
+import {
+  createEmail,
+  getUserWithNoActivityAfterSignup,
+  updateEmailStatus as updateEmailStatusQuery,
+} from "@/src/lib/prisma/prisma-email-queries";
 import { email, emailStatus, emailType } from "@prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
@@ -47,6 +51,9 @@ export class EmailService {
       welcomeMessage: {
         templateId: 52,
       },
+      noActivityAfterSignup: {
+        templateId: 53,
+      },
     };
   }
 
@@ -60,15 +67,18 @@ export class EmailService {
     params,
     userProjetId,
     extra,
+    userId,
   }: {
     to: string;
     emailType: emailType;
     params?: Record<string, string>;
     userProjetId?: number;
+    userId?: string;
     extra?: any;
   }): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
-    const dbEmail = await createEmail(to, emailType, userProjetId, extra);
+    const dbEmail = await createEmail({ to, emailType, userProjetId, userId, extra });
+
     try {
       const response = await brevoSendEmail(to, templateId, params);
 
@@ -79,8 +89,7 @@ export class EmailService {
 
       const data = await response.json();
 
-      let email = null;
-      email = await this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId);
+      const email = await this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId);
 
       return { type: "success", message: "EMAIL_SENT", email };
     } catch (error) {
@@ -172,5 +181,33 @@ export class EmailService {
       params: { NOM: data.nom },
       extra: data,
     });
+  }
+
+  async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
+    const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
+
+    if (!users?.length) {
+      return { message: "Aucun utilisateur trouvé." };
+    } else {
+      const results = await Promise.all(
+        users.map(async (user) => {
+          const result = await this.sendEmail({
+            to: user.email,
+            userId: user.id,
+            emailType: emailType.noActivityAfterSignup,
+            params: {
+              NOM: user.nom || "",
+            },
+          });
+
+          if (result.type === "success") {
+            console.log(`Email envoyé à ${user.email} - type: ${emailType.noActivityAfterSignup}`);
+          }
+
+          return result;
+        }),
+      );
+      return results;
+    }
   }
 }
