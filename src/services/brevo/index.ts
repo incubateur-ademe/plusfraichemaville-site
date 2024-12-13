@@ -13,7 +13,7 @@ import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import { getProjetsForProjetCreationEmail } from "@/src/lib/prisma/prismaProjetQueries";
-import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
+import { daysUntilDate } from "@/src/helpers/dateUtils";
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { RetourExperienceResponse } from "@/src/components/ficheSolution/type";
 import shuffle from "lodash/shuffle";
@@ -266,7 +266,7 @@ export class EmailService {
             emailType: emailType.noActivityAfterSignup,
             params: {
               nom: user.nom || "",
-              date_creation_compte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
+              dateCreationCompte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
             },
           });
 

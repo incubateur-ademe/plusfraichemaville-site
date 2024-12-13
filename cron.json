@@ -4,7 +4,7 @@
       "command": "0 0 * * * npm run hubspot-sync"
     },
     {
-      "command": "0 0 * * * npm run csm-mail-batch"
+      "command": "0 1 * * * npm run csm-mail-batch"
     }
   ]
 }
