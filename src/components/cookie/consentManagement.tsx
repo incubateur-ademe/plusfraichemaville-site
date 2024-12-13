@@ -3,7 +3,7 @@
 
 import { createConsentManagement } from "@codegouvfr/react-dsfr/consentManagement";
 
-export const { ConsentBannerAndConsentManagement, FooterConsentManagementItem, useConsent } = createConsentManagement({
+export const { ConsentBannerAndConsentManagement, useConsent } = createConsentManagement({
   finalityDescription: {
     matomo: {
       title: "Matomo",
