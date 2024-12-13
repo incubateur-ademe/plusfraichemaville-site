@@ -1,5 +1,6 @@
-import { email, emailStatus, emailType } from "@prisma/client";
+import { email, emailStatus, emailType, User } from "@prisma/client";
 import { prismaClient } from "./prismaClient";
+import { removeDaysToDate } from "@/src/helpers/dateUtils";
 
 export const updateEmailStatus = async (id: string, status: emailStatus, brevoId?: string): Promise<email> => {
   return prismaClient.email.update({
@@ -11,19 +12,27 @@ export const updateEmailStatus = async (id: string, status: emailStatus, brevoId
   });
 };
 
-export const createEmail = async (
-  destinationAddress: string,
-  type: emailType,
-  userProjetId?: number,
-  extra?: any,
-): Promise<email> => {
+export const createEmail = async ({
+  to,
+  emailType,
+  userProjetId,
+  userId,
+  extra,
+}: {
+  to: string;
+  emailType: emailType;
+  userProjetId?: number;
+  userId?: string;
+  extra?: any;
+}): Promise<email> => {
   return prismaClient.email.create({
     data: {
-      destination_address: destinationAddress,
+      destination_address: to,
       user_projet_id: userProjetId,
-      type: type,
+      type: emailType,
       email_status: emailStatus.PENDING,
       extra: extra,
+      user_id: userId,
     },
   });
 };
@@ -32,5 +41,25 @@ export const getLastEmailForUserProjet = async (userProjetId: number, emailType:
   return prismaClient.email.findFirst({
     where: { user_projet_id: userProjetId, type: emailType },
     orderBy: { sending_time: "desc" },
+  });
+};
+
+export const getUserWithNoActivityAfterSignup = async (lastSyncDate: Date, inactivityDays = 10): Promise<User[]> => {
+  return prismaClient.user.findMany({
+    where: {
+      created_at: {
+        gte: removeDaysToDate(lastSyncDate, inactivityDays),
+        lte: removeDaysToDate(new Date(), inactivityDays),
+      },
+      projets: {
+        none: {},
+      },
+      emails: {
+        none: {
+          type: emailType.noActivityAfterSignup,
+          email_status: emailStatus.SUCCESS,
+        },
+      },
+    },
   });
 };

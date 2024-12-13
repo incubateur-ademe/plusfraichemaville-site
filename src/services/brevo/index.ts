@@ -1,4 +1,8 @@
-import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/src/lib/prisma/prisma-email-queries";
+import {
+  createEmail,
+  getUserWithNoActivityAfterSignup,
+  updateEmailStatus as updateEmailStatusQuery,
+} from "@/src/lib/prisma/prisma-email-queries";
 import { email, emailStatus, emailType } from "@prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
@@ -9,7 +13,7 @@ import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import { getProjetsForProjetCreationEmail } from "@/src/lib/prisma/prismaProjetQueries";
-import { removeDaysToDate } from "@/src/helpers/dateUtils";
+import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { RetourExperienceResponse } from "@/src/components/ficheSolution/type";
 import shuffle from "lodash/shuffle";
@@ -93,6 +97,9 @@ export class EmailService {
       projetCreation: {
         templateId: 54,
       },
+      noActivityAfterSignup: {
+        templateId: 53,
+      },
     };
   }
 
@@ -106,15 +113,18 @@ export class EmailService {
     params,
     userProjetId,
     extra,
+    userId,
   }: {
     to: string;
     emailType: emailType;
     params?: Record<string, string>;
     userProjetId?: number;
+    userId?: string;
     extra?: any;
   }): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
-    const dbEmail = await createEmail(to, emailType, userProjetId, extra);
+    const dbEmail = await createEmail({ to, emailType, userProjetId, userId, extra });
+
     try {
       const response = await brevoSendEmail(to, templateId, params);
 
@@ -219,11 +229,8 @@ export class EmailService {
     });
   }
 
-  async sendProjetCreationEmail(lastSyncDate?: Date) {
-    const projets = await getProjetsForProjetCreationEmail(
-      removeDaysToDate(lastSyncDate || new Date(), 3),
-      removeDaysToDate(new Date(), 1),
-    );
+  async sendProjetCreationEmail(lastSyncDate: Date) {
+    const projets = await getProjetsForProjetCreationEmail(lastSyncDate, new Date());
     console.log(`Nb de mails de création de projet à envoyer : ${projets.length}`);
     const allRex = await getRetoursExperiences();
     const shuffledRex = shuffle(allRex);
@@ -243,5 +250,34 @@ export class EmailService {
         });
       }),
     );
+  }
+
+  async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
+    const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
+
+    if (!users?.length) {
+      return { message: "Aucun utilisateur trouvé." };
+    } else {
+      const results = await Promise.all(
+        users.map(async (user) => {
+          const result = await this.sendEmail({
+            to: user.email,
+            userId: user.id,
+            emailType: emailType.noActivityAfterSignup,
+            params: {
+              nom: user.nom || "",
+              date_creation_compte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
+            },
+          });
+
+          if (result.type === "success") {
+            console.log(`Email envoyé à ${user.email} - type: ${emailType.noActivityAfterSignup}`);
+          }
+
+          return result;
+        }),
+      );
+      return results;
+    }
   }
 }

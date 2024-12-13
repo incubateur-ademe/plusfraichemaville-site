@@ -36,7 +36,10 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
         <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
         <div className={clsx("flex-1 md:pl-12")}>
           <h1 className={"mt-4 text-3xl md:text-[40px] md:leading-[3rem]"}>{retourExperience.attributes.titre}</h1>
-          <CmsRichText label={retourExperience.attributes.description} className={"mt-10 text-xl leading-8"} />
+          <CmsRichText
+            label={retourExperience.attributes.description}
+            className={"mt-10 text-xl leading-8 [&_p]:text-xl [&_p]:leading-8"}
+          />
           {retourExperience.attributes.citations &&
             retourExperience.attributes.citations.length > 0 &&
             retourExperience.attributes.citations.map((citation) => (
