@@ -1,5 +1,7 @@
 export const FAR_FUTURE = new Date(3024, 0, 0, 1);
 
+export const removeDaysToDate = (date: Date, nbDays: number) => new Date(date.getTime() - nbDays * 24 * 60 * 60 * 1000);
+
 export function monthDateToString(value: Date | null | undefined): string {
   return value ? `${value.getFullYear()}-${("0" + (value.getMonth() + 1)).slice(-2)}` : "";
 }
@@ -37,3 +39,12 @@ export const getRelativeDate = (lastUpdate?: number | null) =>
   !lastUpdate ? "Aujourd'hui" : lastUpdate === 1 ? "Hier" : `Il y a ${lastUpdate} jours`;
 
 const addLeadingZero = (value: number): string => ("0" + value).slice(-2);
+
+export const daysUntilDate = (targetDate: Date | null): number | null => {
+  if (!targetDate) {
+    return null;
+  }
+  const MS_PER_DAY = 1000 * 60 * 60 * 24;
+
+  return Math.ceil((targetDate.getTime() - new Date().getTime()) / MS_PER_DAY);
+};
