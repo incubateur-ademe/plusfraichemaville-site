@@ -25,15 +25,6 @@ export const formatNumberWithSpaces = (num?: number | string): string => (num ? 
 
 export const nullFunctionalComponent = () => <></>;
 
-export const daysUntilDate = (targetDate: Date | null): number | null => {
-  if (!targetDate) {
-    return null;
-  }
-  const MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-  return Math.ceil((targetDate.getTime() - new Date().getTime()) / MS_PER_DAY);
-};
-
 export const extractNameInitiales = (name: string) => {
   const match = name.match(/^[^\s-]+|\S+$/g);
   return match ? match.map((word) => word[0].toUpperCase()).join("") : "";

@@ -1,8 +1,8 @@
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Maturite } from "../maturite/maturite";
-import { daysUntilDate } from "@/src/helpers/common";
+
 import { Spinner } from "../common/spinner";
-import { getRelativeDate } from "@/src/helpers/dateUtils";
+import { daysUntilDate, getRelativeDate } from "@/src/helpers/dateUtils";
 
 export const TableauDeBordMaturite = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
