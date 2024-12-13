@@ -6,7 +6,6 @@ import {
   EstimationMateriauxFormData,
   EstimationMateriauxFormSchema,
 } from "@/src/forms/estimation/estimation-materiau-form-schema";
-import { FicheSolutionResponse } from "@/src/components/ficheSolution/type";
 import InputFormField from "@/src/components/common/InputFormField";
 import Button from "@codegouvfr/react-dsfr/Button";
 import EstimationMateriauField from "@/src/forms/estimation/estimation-materiau-field";
@@ -18,6 +17,7 @@ import { mapStrapiEstimationMateriauxToFormValues } from "@/src/lib/prisma/prism
 import { scrollToTop } from "@/src/helpers/common";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export default function EstimationMateriauForm({
   ficheSolution,
@@ -28,7 +28,7 @@ export default function EstimationMateriauForm({
   onClose,
   onUpdateEstimation,
 }: {
-  ficheSolution: FicheSolutionResponse;
+  ficheSolution: FicheSolution;
   estimationMateriaux?: EstimationMateriauxFicheSolution;
   estimationId: number;
   onNext: () => void;

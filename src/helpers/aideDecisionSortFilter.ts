@@ -1,13 +1,10 @@
-import { APIResponseData } from "@/src/lib/strapi/types/types";
 import { UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 type AideDecisionSortFilter = {
   label: string;
   code: string;
-  sortFn: (
-    _: APIResponseData<"api::fiche-solution.fiche-solution">,
-    __: APIResponseData<"api::fiche-solution.fiche-solution">,
-  ) => number;
+  sortFn: (_: FicheSolution, __: FicheSolution) => number;
   maxItem: number;
 };
 

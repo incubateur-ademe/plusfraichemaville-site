@@ -6,11 +6,12 @@ import {
 import { LatLngTuple } from "leaflet";
 import { SourcingMapClientProps } from "./map/sourcing-map-client";
 import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, StrapiSourcingContact } from "./types";
-import { RetourExperienceResponse } from "../ficheSolution/type";
 import { prettyUserName } from "@/src/helpers/user";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { selectEspaceByCode, TypeEspaceCode } from "@/src/helpers/type-espace-filter";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
+import { SousTypeDeContact, TypeDeContact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 
 export const getProjetCoordinates = (projet: ProjetWithPublicRelations): LatLngTuple => {
   const adresseInfo = projet.adresse_all_infos as unknown as GeoJsonAdresse | undefined;
@@ -34,7 +35,7 @@ export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPubl
     };
   });
 
-export const makeRexMarkers = (rexProjets: RetourExperienceResponse[]): SourcingMapClientProps["markers"] =>
+export const makeRexMarkers = (rexProjets: RetourExperience[]): SourcingMapClientProps["markers"] =>
   rexProjets
     .filter((projet) => Boolean(projet.attributes.location as unknown as GeoJsonAdresse))
     .map((projet) => {
@@ -54,13 +55,13 @@ export const makeRexMarkers = (rexProjets: RetourExperienceResponse[]): Sourcing
     });
 
 export const contactsTypeMap: SourcingContactTypeMap[] = [
-  { code: "collectivite", label: "Collectivité" },
-  { code: "conseil", label: "Conseil" },
-  { code: "structure_publique", label: "Structure publique" },
-  { code: "conception_et_realisation", label: "Conception et réalisation" },
-  { code: "concertation_citoyenne", label: "Concertation citoyenne" },
-  { code: "recherche_et_innovation", label: "Recherche et innovation" },
-  { code: "groupements", label: "Groupement" },
+  { code: TypeDeContact.Collectivite, label: "Collectivité" },
+  { code: TypeDeContact.Conseil, label: "Conseil" },
+  { code: TypeDeContact.StructurePublique, label: "Structure publique" },
+  { code: TypeDeContact.ConceptionEtRealisation, label: "Conception et réalisation" },
+  { code: TypeDeContact.ConcertationCitoyenne, label: "Concertation citoyenne" },
+  { code: TypeDeContact.RechercheEtInnovation, label: "Recherche et innovation" },
+  { code: TypeDeContact.Groupements, label: "Groupement" },
 ] as const;
 
 export type ContactTypeKeys = (typeof contactsTypeMap)[number]["code"];
@@ -69,31 +70,31 @@ export const getContactTypeLabelByCode = (code: ContactTypeKeys) =>
   contactsTypeMap.find((c) => c.code === code)?.label || code;
 
 export const contactsSousTypeMap: SourcingContactTypeMap[] = [
-  { code: "bureau_etude_ingenierie", label: "Bureau d'étude ingénierie" },
-  { code: "bureau_etude_technique", label: "Bureau d'étude technique" },
-  { code: "assistance_maitrise_ouvrage", label: "Assistance à maîtrise d'ouvrage" },
-  { code: "agence_eau", label: "Agence de l'eau" },
-  { code: "bailleur_social", label: "Bailleur social" },
-  { code: "caue", label: "CAUE" },
-  { code: "agence_architecture", label: "Agence d'architecture" },
-  { code: "agence_paysagiste", label: "Agence paysagiste" },
-  { code: "amenageur", label: "Aménageur" },
-  { code: "societe_arboriculture", label: "Société d'arboriculture" },
-  { code: "agence_conception_lumiere", label: "Agence conception lumière" },
-  { code: "syndic_copropriete", label: "Syndic de copropriété" },
-  { code: "agence_communication", label: "Agence de communication" },
-  { code: "collectif", label: "Collectif" },
-  { code: "pole_universitaire", label: "Pôle universitaire" },
-  { code: "laboratoire_recherche", label: "Laboratoire de recherche" },
-  { code: "institut", label: "Institut" },
-  { code: "syndicat_mixte", label: "Syndicat mixte" },
-  { code: "association", label: "Association" },
-  { code: "federation", label: "Fédération" },
-  { code: "collectivite", label: "Collectivité" },
-  { code: "entreprise_privee", label: "Entreprise privée" },
-  { code: "agence_urbanisme", label: "Agence d'urbanisme" },
-  { code: "etablissement_public", label: "Établissement public" },
-  { code: "pole_innovation", label: "Pôle d'innovation" },
+  { code: SousTypeDeContact.BureauEtudeIngenierie, label: "Bureau d'étude ingénierie" },
+  { code: SousTypeDeContact.BureauEtudeTechnique, label: "Bureau d'étude technique" },
+  { code: SousTypeDeContact.AssistanceMaitriseOuvrage, label: "Assistance à maîtrise d'ouvrage" },
+  { code: SousTypeDeContact.AgenceEau, label: "Agence de l'eau" },
+  { code: SousTypeDeContact.BailleurSocial, label: "Bailleur social" },
+  { code: SousTypeDeContact.Caue, label: "CAUE" },
+  { code: SousTypeDeContact.AgenceArchitecture, label: "Agence d'architecture" },
+  { code: SousTypeDeContact.AgencePaysagiste, label: "Agence paysagiste" },
+  { code: SousTypeDeContact.Amenageur, label: "Aménageur" },
+  { code: SousTypeDeContact.SocieteArboriculture, label: "Société d'arboriculture" },
+  { code: SousTypeDeContact.AgenceConceptionLumiere, label: "Agence conception lumière" },
+  { code: SousTypeDeContact.SyndicCopropriete, label: "Syndic de copropriété" },
+  { code: SousTypeDeContact.AgenceCommunication, label: "Agence de communication" },
+  { code: SousTypeDeContact.Collectif, label: "Collectif" },
+  { code: SousTypeDeContact.PoleUniversitaire, label: "Pôle universitaire" },
+  { code: SousTypeDeContact.LaboratoireRecherche, label: "Laboratoire de recherche" },
+  { code: SousTypeDeContact.Institut, label: "Institut" },
+  { code: SousTypeDeContact.SyndicatMixte, label: "Syndicat mixte" },
+  { code: SousTypeDeContact.Association, label: "Association" },
+  { code: SousTypeDeContact.Federation, label: "Fédération" },
+  { code: SousTypeDeContact.Collectivite, label: "Collectivité" },
+  { code: SousTypeDeContact.EntreprisePrivee, label: "Entreprise privée" },
+  { code: SousTypeDeContact.AgenceUrbanisme, label: "Agence d'urbanisme" },
+  { code: SousTypeDeContact.EtablissementPublic, label: "Établissement public" },
+  { code: SousTypeDeContact.PoleInnovation, label: "Pôle d'innovation" },
 ] as const;
 
 export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"], isSousType?: boolean) => {
@@ -104,7 +105,7 @@ export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"]
 
 export const strapiContactToSourcingContact = (
   strapiContact: StrapiSourcingContact,
-  retourExperience: RetourExperienceResponse,
+  retourExperience: RetourExperience,
 ): SourcingContact => {
   return {
     type: "rex",
@@ -132,7 +133,7 @@ export const userProjetToSourcingContact = (userProjet: UserProjetWithUserInfos)
   type: "in-progress",
   uniqueId: `in-progress-${userProjet?.id}`,
   userProjetId: userProjet?.id,
-  typeContact: "collectivite",
+  typeContact: TypeDeContact.Collectivite,
   email: userProjet?.user?.email,
   poste: userProjet?.user?.poste,
   nomCollectivite: userProjet?.user?.nom_etablissement,
@@ -143,7 +144,7 @@ export const userProjetToSourcingContactWithProjet = (userProjet: UserProjetWith
   type: "in-progress",
   uniqueId: `in-progress-${userProjet?.id}`,
   userProjetId: userProjet?.id,
-  typeContact: "collectivite",
+  typeContact: TypeDeContact.Collectivite,
   email: userProjet?.user?.email,
   poste: userProjet?.user?.poste,
   nomCollectivite: userProjet?.user?.nom_etablissement,

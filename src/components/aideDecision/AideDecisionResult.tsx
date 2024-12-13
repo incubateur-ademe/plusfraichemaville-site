@@ -4,23 +4,28 @@ import AideDecisionSortFilter from "@/src/components/filters/AideDecisionSortFil
 import { getAideDecisionSortFieldFromCode } from "@/src/helpers/aideDecisionSortFilter";
 import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
 import Link from "next/link";
-import { GetValues } from "@/src/lib/strapi/types/types";
 import { getAideDecisionHistoryBySlug } from "@/src/lib/strapi/queries/aideDecisionQueries";
 import { notEmpty } from "@/src/helpers/listUtils";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
 
 type Props = {
-  aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">;
+  aideDecisionEtapeAttributes: AideDecisionEtape["attributes"];
   searchParams: { tri: string | undefined };
 };
 
-export default async function AideDecisionResult({ aideDecisionEtape, searchParams }: Props) {
-  const historique = await getAideDecisionHistoryBySlug(aideDecisionEtape.slug);
+export default async function AideDecisionResult({ aideDecisionEtapeAttributes, searchParams }: Props) {
+  const historique = await getAideDecisionHistoryBySlug(aideDecisionEtapeAttributes.slug);
   const previousStep = historique && historique[historique.length - 1] ? historique[historique.length - 1] : null;
 
-  if (!!aideDecisionEtape.fiches_solutions?.data && aideDecisionEtape.fiches_solutions.data.length > 0) {
+  if (
+    !!aideDecisionEtapeAttributes.fiches_solutions?.data &&
+    aideDecisionEtapeAttributes.fiches_solutions.data.length > 0
+  ) {
     const sortBy = getAideDecisionSortFieldFromCode(searchParams?.tri);
-    const sortedFichesSolutions = aideDecisionEtape.fiches_solutions.data.sort(sortBy.sortFn).slice(0, sortBy.maxItem);
+    const sortedFichesSolutions = aideDecisionEtapeAttributes.fiches_solutions.data
+      .sort(sortBy.sortFn)
+      .slice(0, sortBy.maxItem);
 
     const relatedRetourExperiences = sortedFichesSolutions
       .flatMap((fs) => fs.attributes.solution_retour_experiences?.data.map((sol) => sol.attributes.retour_experience))
@@ -34,7 +39,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
         <div className="flex flex-row justify-items-center">
           {historique && (
             <AideDecisionBreadcrumbs
-              currentPageLabel={aideDecisionEtape.nom}
+              currentPageLabel={aideDecisionEtapeAttributes.nom}
               historique={historique}
               className="hidden md:mt-60 md:block"
             />
@@ -60,7 +65,7 @@ export default async function AideDecisionResult({ aideDecisionEtape, searchPara
                   <FicheSolutionCardWithUserInfo
                     ficheSolution={ficheSolution}
                     projectName={(historique && historique[1]?.label) || ""}
-                    extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtape.slug }]}
+                    extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtapeAttributes.slug }]}
                   />
                 </li>
               ))}

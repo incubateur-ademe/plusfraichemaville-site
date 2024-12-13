@@ -1,15 +1,15 @@
 import clsx from "clsx";
 import CustomTabButton from "../common/CustomTabButton";
 import { PropsWithChildren } from "react";
-import { FicheDiagnosticResponse } from "./types";
 import { FicheDiagnosticMethodeTab } from "./fiche-diagnostic-tab-methode";
 import { FicheDiagnosticAvantageTab } from "./fiche-diagnostic-tab-avantages";
 import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-meo";
 import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-url";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 type FicheDiagnosticTabsProps = {
-  ficheDiagnostic: FicheDiagnosticResponse;
+  ficheDiagnostic: FicheDiagnostic;
 } & PropsWithChildren;
 
 export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProps) => {

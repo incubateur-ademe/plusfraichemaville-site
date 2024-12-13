@@ -1,12 +1,12 @@
 import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers";
-import { FicheSolutionResponse } from "@/src/components/ficheSolution/type";
 import { nullFunctionalComponent } from "@/src/helpers/common";
 import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export const AideEstimationsCardLabelFicheSolution = ({ ficheId }: { ficheId: number }) => {
-  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionUrlApi(ficheId));
+  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionUrlApi(ficheId));
 
   const ficheSolution = data && data[0];
   const Icon = getTypeSolutionFromCode(ficheSolution?.attributes.type_solution)?.coloredIcon ?? nullFunctionalComponent;

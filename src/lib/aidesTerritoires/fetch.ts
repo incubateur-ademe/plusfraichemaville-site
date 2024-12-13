@@ -3,11 +3,11 @@ import {
   IApiAidesTerritoiresPaginatedAides,
   IApiAidesTerritoiresQueryPerimeter,
 } from "@/src/lib/aidesTerritoires/types";
-import { FicheSolution } from "@/src/components/ficheSolution/type";
 import { collectivite } from "@prisma/client";
 import { updateCollectiviteAidesTerritoireId } from "@/src/lib/prisma/prismaCollectiviteQueries";
 import { callAidesTerritoiresApi, extractMotsClesFromFichesSolutions } from "@/src/lib/aidesTerritoires/helpers";
 import { AidesTerritoiresAide } from "@/src/components/financement/types";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 const DEFAULT_PERIMETER_ID = "70956-france";
 
@@ -17,7 +17,7 @@ export const fetchAideFromAidesTerritoiresById = async (aideTerritoireAideId: nu
   );
 };
 
-export const searchAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution[], collectivite: collectivite) => {
+export const searchAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution["attributes"][], collectivite: collectivite) => {
   const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
   const perimeterId = await getPerimterIdIdOrFetchItFromAidesTerritoires(collectivite);
 

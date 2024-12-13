@@ -1,10 +1,10 @@
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { PictoEchelleSelector } from "../common/pictos/picto-echelle-selector";
-import { FicheDiagnosticResponseAttributes } from "./types";
 import Image from "next/image";
 import { getMethodeDiagnosticFromCode } from "@/src/components/fiches-diagnostic/filters/methode";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
-export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
+export const FicheDiagnosticHeader = ({ attributes }: { attributes: FicheDiagnostic["attributes"] }) => {
   return (
     <div className="bg-dsfr-background-alt-red-marianne" id="fiche-diag-header">
       <div className="fr-container">

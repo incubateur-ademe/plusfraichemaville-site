@@ -1,12 +1,12 @@
 import { FicheDiagnosticHeader } from "./fiche-diagnostic-header";
 import { FicheDiagnosticTabs } from "./fiche-diagnostic-tabs";
-import { FicheDiagnosticResponse } from "./types";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 type FicheDiagnosticProps = {
-  ficheDiagnostic: FicheDiagnosticResponse;
+  ficheDiagnostic: FicheDiagnostic;
 };
 
-export const FicheDiagnostic = ({ ficheDiagnostic }: FicheDiagnosticProps) => {
+export const FicheDiagnosticComponent = ({ ficheDiagnostic }: FicheDiagnosticProps) => {
   const attributes = ficheDiagnostic.attributes;
 
   return (

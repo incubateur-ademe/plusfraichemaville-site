@@ -4,8 +4,8 @@ import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
 import { PropsWithChildren } from "react";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { makeFicheSolutionUrlApi } from "./helpers";
-import { FicheSolutionResponse } from "./type";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export function FicheSolutionSmallCard({
   ficheSolutionId,
@@ -17,7 +17,7 @@ export function FicheSolutionSmallCard({
   onClick?: () => void;
   className?: string;
 } & PropsWithChildren) {
-  const { data } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(makeFicheSolutionUrlApi(ficheSolutionId));
+  const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionUrlApi(ficheSolutionId));
 
   const ficheSolution = data && data[0];
 
@@ -36,7 +36,7 @@ export function FicheSolutionSmallCard({
           className={"h-full w-full rounded-t-2xl object-cover"}
         />
       </div>
-      <div className="flex grow flex-col px-6 pb-4 pt-6">
+      <div className="flex grow flex-col px-4 pb-4 pt-6">
         {typeSolution && (
           <>
             <div className="mb-2 flex flex-row text-xs text-dsfr-text-mention-grey">

@@ -1,4 +1,4 @@
-import { APIResponse } from "@/src/lib/strapi/types/types";
+import { Media } from "@/src/lib/strapi/types/common/Media";
 
 type StrapiEqFilter = { attribute: string; value: string; operator: "eq"; relation: false };
 type StrapiInFilter = { attribute: string; value: string[] | number[]; operator: "in"; relation: false };
@@ -59,9 +59,9 @@ export class StrapiFilter {
 export class AideDecisionEtapeHistory {
   label: string;
   slug: string;
-  image: APIResponse<"plugin::upload.file"> | null | undefined;
+  image: {data: Media} | null | undefined;
 
-  constructor(label: string, slug: string, image?: APIResponse<"plugin::upload.file"> | null) {
+  constructor(label: string, slug: string, image?: {data: Media} | null) {
     this.label = label;
     this.image = image;
     this.slug = slug;

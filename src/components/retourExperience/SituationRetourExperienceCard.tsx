@@ -1,15 +1,15 @@
 import Image from "next/image";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { GetValues } from "@/src/lib/strapi/types/types";
 import { clsx } from "clsx";
+import { Situation } from "@/src/lib/strapi/types/components/retour-experience/Situation";
 
 export default async function SituationRetourExperienceCard({
   situation,
   titre,
   className,
 }: {
-  situation?: GetValues<"retour-experience.situation">;
+  situation?: Situation;
   titre: string;
   className?: string;
 }) {

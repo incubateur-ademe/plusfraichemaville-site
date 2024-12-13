@@ -116,21 +116,21 @@ export async function FicheSolution({
               <FicheSolutionTabSynthese
                 ficheSolutionId={ficheSolution.id}
                 projectName={(historique && historique[1].label) || ""}
-                ficheSolution={ficheSolution.attributes}
+                ficheSolution={ficheSolution}
                 projetId={params.projetId}
               />
             </div>
             <div id="materiaux-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
-              <FicheSolutionTabMateriaux ficheSolution={ficheSolution.attributes} />
+              <FicheSolutionTabMateriaux ficheAttributes={ficheSolution.attributes} />
             </div>
             <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
-              <FicheSolutionTabMiseEnOeuvre ficheSolution={ficheSolution.attributes} />
+              <FicheSolutionTabMiseEnOeuvre ficheAttributes={ficheSolution.attributes} />
             </div>
             <div id="financements-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
-              <FicheSolutionTabFinancements ficheSolution={ficheSolution.attributes} />
+              <FicheSolutionTabFinancements ficheAttributes={ficheSolution.attributes} />
             </div>
             <div id="oups-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
-              <FicheSolutionTabOups ficheSolution={ficheSolution.attributes} />
+              <FicheSolutionTabOups ficheAttributes={ficheSolution.attributes} />
             </div>
           </div>
         </div>

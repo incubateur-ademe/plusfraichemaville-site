@@ -1,7 +1,7 @@
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
-import { FicheDiagnosticResponseAttributes } from "./types";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
-export const FicheDiagnosticAvantageTab = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
+export const FicheDiagnosticAvantageTab = ({ attributes }: { attributes: FicheDiagnostic["attributes"] }) => {
   return (
     <div className="flex flex-col gap-8 md:flex-row">
       <FicheDiagnosticTabBlocText title="Avantages" text={attributes.avantage_description} small />

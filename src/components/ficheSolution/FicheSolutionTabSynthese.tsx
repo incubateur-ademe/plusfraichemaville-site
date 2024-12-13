@@ -5,9 +5,10 @@ import CmsRichText from "@/src/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
 import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
 import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import { APIResponseData } from "@/src/lib/strapi/types/types";
-import { FicheSolution } from "@/src/components/ficheSolution/type";
 import { getCreditsImageForFicheSolution } from "@/src/helpers/credits-image";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { SolutionRetourExperience } from "@/src/lib/strapi/types/api/solution-retour-experience";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
 export default function FicheSolutionTabSynthese({
   ficheSolution,
@@ -17,11 +18,12 @@ export default function FicheSolutionTabSynthese({
   ficheSolution: FicheSolution;
   projetId?: string;
 }) {
-  const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
+  const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
   const creditsImage = useMemo(() => getCreditsImageForFicheSolution(ficheSolution), [ficheSolution]);
+  const ficheAttributes = ficheSolution?.attributes;
 
   const uniqueRetourExperienceList =
-    ficheSolution?.solution_retour_experiences?.data.reduce((accumulator, rex) => {
+    ficheSolution?.attributes.solution_retour_experiences?.data.reduce((accumulator, rex) => {
       if (
         !accumulator.find(
           (item) => item.attributes.retour_experience?.data.id === rex.attributes.retour_experience?.data.id,
@@ -30,7 +32,7 @@ export default function FicheSolutionTabSynthese({
         accumulator.push(rex);
       }
       return accumulator;
-    }, [] as APIResponseData<"api::solution-retour-experience.solution-retour-experience">[]) || [];
+    }, [] as SolutionRetourExperience[]) || [];
 
   return (
     <div>
@@ -45,14 +47,18 @@ export default function FicheSolutionTabSynthese({
             )}
           </div>
           <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">
-            {ficheSolution.description_courte}
+            {ficheAttributes.description_courte}
           </div>
-          <CmsRichText label={ficheSolution.description} className="text-dsfr-text-title-grey" />
+          <CmsRichText label={ficheAttributes.description} className="text-dsfr-text-title-grey" />
         </div>
         <div className="w-full flex-none border-dsfr-border-default-grey md:w-72 md:border-l md:pl-6 ">
-          <FicheSolutionInfoComparatif temperatureFormat="large" ficheSolution={ficheSolution} className={"text-sm"} />
+          <FicheSolutionInfoComparatif
+            temperatureFormat="large"
+            ficheAttributes={ficheAttributes}
+            className={"text-sm"}
+          />
           <hr className="mt-1 pb-2" />
-          {ficheSolution.cobenefices?.data.map((cobenefice) => (
+          {ficheAttributes.cobenefices?.data.map((cobenefice) => (
             <div key={cobenefice.id} className="mt-3 flex flex-row">
               <Image
                 width={50}
@@ -68,30 +74,30 @@ export default function FicheSolutionTabSynthese({
       </div>
       <hr className="mt-6 pb-6 md:mt-12 md:pb-8" />
       <div className="flex flex-col gap-8 md:flex-row">
-        {ficheSolution.contexte_description && (
+        {ficheAttributes.contexte_description && (
           <div className="basis-1/2">
             <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">
-              {ficheSolution.contexte_titre}
+              {ficheAttributes.contexte_titre}
             </div>
-            <CmsRichText label={ficheSolution.contexte_description} className="text-dsfr-text-title-grey" />
+            <CmsRichText label={ficheAttributes.contexte_description} className="text-dsfr-text-title-grey" />
           </div>
         )}
         <hr className="mt-1 pb-1 md:hidden" />
-        {ficheSolution.rafraichissement_attendu_description && (
+        {ficheAttributes.rafraichissement_attendu_description && (
           <div className="basis-1/2">
             <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">Rafraîchissement attendu</div>
             <CmsRichText
-              label={ficheSolution.rafraichissement_attendu_description}
+              label={ficheAttributes.rafraichissement_attendu_description}
               className="text-dsfr-text-title-grey"
             />
           </div>
         )}
       </div>
-      {!!ficheSolution.en_savoir_plus && (
+      {!!ficheAttributes.en_savoir_plus && (
         <>
           <hr className="mt-6 pb-6 md:pb-8 " />
           <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">En savoir plus</div>
-          <CmsRichText label={ficheSolution.en_savoir_plus} className="text-dsfr-text-title-grey" />
+          <CmsRichText label={ficheAttributes.en_savoir_plus} className="text-dsfr-text-title-grey" />
         </>
       )}
       {uniqueRetourExperienceList.length > 0 && (
@@ -104,24 +110,22 @@ export default function FicheSolutionTabSynthese({
             {uniqueRetourExperienceList.map((rex) => (
               <RetourExperienceCard
                 key={rex.attributes.retour_experience?.data.id}
-                retourExperience={
-                  rex.attributes.retour_experience?.data as APIResponseData<"api::retour-experience.retour-experience">
-                }
+                retourExperience={rex.attributes.retour_experience?.data as RetourExperience}
                 className={"mb-12 mt-8 w-72 flex-none"}
               />
             ))}
           </div>
         </div>
       )}
-      {!!ficheSolution.fiches_solutions_complementaires?.data.length &&
-        ficheSolution.fiches_solutions_complementaires.data.length > 0 && (
+      {!!ficheAttributes.fiches_solutions_complementaires?.data.length &&
+        ficheAttributes.fiches_solutions_complementaires.data.length > 0 && (
           <div className="mt-12 rounded-2xl bg-dsfr-background-alt-blue-france pl-6 pt-10">
             <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">Solutions complémentaires</div>
             <div className="text-dsfr-text-title-grey">
               Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
             </div>
             <div className="flex flex-row gap-6 overflow-x-auto pl-2">
-              {ficheSolution.fiches_solutions_complementaires.data.map((fs) => (
+              {ficheAttributes.fiches_solutions_complementaires.data.map((fs) => (
                 <FicheSolutionCardWithUserInfo
                   ficheSolution={fs}
                   key={fs.id}
@@ -132,11 +136,11 @@ export default function FicheSolutionTabSynthese({
             </div>
           </div>
         )}
-      {!!ficheSolution.credits && (
+      {!!ficheAttributes.credits && (
         <>
           <hr className="mt-12 pb-8" />
           <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">Crédits</div>
-          <CmsRichText label={ficheSolution.credits} className="text-dsfr-text-title-grey" />
+          <CmsRichText label={ficheAttributes.credits} className="text-dsfr-text-title-grey" />
         </>
       )}
       {creditsImage.length > 0 && (

@@ -4,14 +4,14 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 import Image from "next/image";
-import { APIResponse } from "@/src/lib/strapi/types/types";
 import { TypeFiche } from "@/src/helpers/common";
 import { TableauDeBordSuiviWithText } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-text";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
-import { FicheSolutionResponse } from "../ficheSolution/type";
-import { FicheDiagnosticResponse } from "../fiches-diagnostic/types";
 import { makeFicheDiagnosticUrlApi } from "../fiches-diagnostic/helpers";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
+import { Media } from "@/src/lib/strapi/types/common/Media";
 
 const IMAGE_SLICE_INDEX = 5;
 
@@ -71,19 +71,17 @@ const TableauDeBordSFicheImages = ({
 };
 
 const TableauDeBordFicheSolutionImage = ({ ficheSolutionId }: { ficheSolutionId: string }) => {
-  const { data } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
-    makeFicheSolutionCompleteUrlApi(ficheSolutionId),
-  );
+  const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionCompleteUrlApi(ficheSolutionId));
   const ficheSolution = data && data[0];
   return <TableauSuiviFicheImages image={ficheSolution?.attributes.image_principale} />;
 };
 
 export const TableauDeBordFicheDiagnosticImage = ({ ficheDiagnosticId }: { ficheDiagnosticId: string }) => {
-  const { data } = useImmutableSwrWithFetcher<FicheDiagnosticResponse>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
+  const { data } = useImmutableSwrWithFetcher<FicheDiagnostic>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
   return <TableauSuiviFicheImages image={data?.attributes.image_principale} />;
 };
 
-const TableauSuiviFicheImages = ({ image }: { image: APIResponse<"plugin::upload.file"> | null | undefined }) => {
+const TableauSuiviFicheImages = ({ image }: { image: { data: Media } | null | undefined }) => {
   return (
     <div className="mr-2 h-10 w-10 shrink-0 overflow-hidden rounded-[50%]">
       <Image

@@ -1,8 +1,7 @@
-import { WebinaireResponse } from "@/src/components/webinaires/types";
-
 import { WebinaireCard } from "@/src/components/webinaires/webinaire-card";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import clsx from "clsx";
+import { Webinaire } from "@/src/lib/strapi/types/api/webinaire";
 
 export const WebinairesList = ({
   id,
@@ -11,7 +10,7 @@ export const WebinairesList = ({
   tabIndex,
 }: {
   id: string;
-  webinaires: WebinaireResponse[];
+  webinaires: Webinaire[];
   emptyListPlaceholder: string;
   tabIndex: number;
 }) => {

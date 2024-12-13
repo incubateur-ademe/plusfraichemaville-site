@@ -2,11 +2,11 @@
 
 import { PropsWithChildren } from "react";
 import FicheSolutionFullCard from "@/src/components/ficheSolution/fiche-solution-full-card";
-import { APIResponseData } from "@/src/lib/strapi/types/types";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export type FicheSolutionCardWithUserInfoProps = {
-  ficheSolution: APIResponseData<"api::fiche-solution.fiche-solution">;
+  ficheSolution: FicheSolution;
   projectName: string;
   extraUrlParams?: { param: string; value: string }[];
   className?: string;
@@ -23,7 +23,7 @@ export default function FicheSolutionCardWithUserInfo({
 }: FicheSolutionCardWithUserInfoProps) {
   return (
     <div className={`relative flex ${className}`}>
-      <FicheSolutionFullCard ficheSolution={ficheSolution.attributes} extraUrlParams={extraUrlParams} />
+      <FicheSolutionFullCard ficheAttributes={ficheSolution.attributes} extraUrlParams={extraUrlParams} />
       {children}
       <GenericSaveFiche
         id={ficheSolution.id}
