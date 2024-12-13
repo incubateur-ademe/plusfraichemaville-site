@@ -2,7 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
+import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import { useParams } from "next/navigation";

@@ -3,24 +3,36 @@
 export interface ObjectifDeveloppementDurable {
   id: number;
   attributes: {
-    createdAt: Date;    updatedAt: Date;    publishedAt?: Date;    numero: number;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt?: Date;
+    numero: number;
     description: string;
   };
 }
 export interface ObjectifDeveloppementDurable_Plain {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  numero: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  numero: number;
   description: string;
 }
 
 export interface ObjectifDeveloppementDurable_NoRelations {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  numero: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  numero: number;
   description: string;
 }
 
 export interface ObjectifDeveloppementDurable_AdminPanelLifeCycle {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  numero: number;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  numero: number;
   description: string;
 }

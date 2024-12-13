@@ -122,9 +122,7 @@ const GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS = (
     }
 }`;
 
-export async function getRetourExperienceBySlug(
-  slug: string,
-): Promise<RetourExperience | null> {
+export async function getRetourExperienceBySlug(slug: string): Promise<RetourExperience | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter), { tag: `get-rex-by-slug-${slug}` })
@@ -139,18 +137,14 @@ export async function getRetoursExperiences(): Promise<RetourExperience[]> {
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getRetoursExperiencesWithContacts(): Promise<
-  RetourExperience[]
-> {
+export async function getRetoursExperiencesWithContacts(): Promise<RetourExperience[]> {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS(filter), { tag: "get-rex-with-contacts" })
   )?.retourExperiences as APIResponseCollection<RetourExperience>;
   return safeReturnStrapiEntities(apiResponse);
 }
-export async function getRetoursExperiencesWithContactsById(
-  id: string,
-): Promise<RetourExperience | null> {
+export async function getRetoursExperiencesWithContactsById(id: string): Promise<RetourExperience | null> {
   const filter = new StrapiFilter(true, [{ attribute: "id", operator: "eq", value: id, relation: false }]);
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS(filter), {
@@ -160,9 +154,7 @@ export async function getRetoursExperiencesWithContactsById(
   return safeReturnStrapiEntity(apiResponse);
 }
 
-export async function getAllCompleteRetoursExperiences(): Promise<
-  RetourExperience[]
-> {
+export async function getAllCompleteRetoursExperiences(): Promise<RetourExperience[]> {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter), { tag: "get-all-complete-retour-experience" })

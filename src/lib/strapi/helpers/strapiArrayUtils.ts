@@ -1,8 +1,6 @@
 import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 
-function removeNullAttributesEntity<T extends { attributes: any }>(
-  value: T,
-): value is T {
+function removeNullAttributesEntity<T extends { attributes: any }>(value: T): value is T {
   return !!value.attributes;
 }
 

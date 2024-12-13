@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
+import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import CustomTabButton from "@/src/components/common/CustomTabButton";
 import FicheSolutionTabSynthese from "@/src/components/ficheSolution/FicheSolutionTabSynthese";
 import FicheSolutionTabMateriaux from "@/src/components/ficheSolution/FicheSolutionTabMateriaux";

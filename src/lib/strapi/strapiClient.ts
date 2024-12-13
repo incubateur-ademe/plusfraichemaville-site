@@ -12,10 +12,7 @@ export const STRAPI_IMAGE_KEY_SIZE = {
 } as const;
 export type STRAPI_IMAGE_KEY_SIZE_TYPE = (typeof STRAPI_IMAGE_KEY_SIZE)[keyof typeof STRAPI_IMAGE_KEY_SIZE];
 
-export const getStrapiImageUrl = (
-  image?: { data: Media } | null,
-  sizeKey?: STRAPI_IMAGE_KEY_SIZE_TYPE,
-) => {
+export const getStrapiImageUrl = (image?: { data: Media } | null, sizeKey?: STRAPI_IMAGE_KEY_SIZE_TYPE) => {
   if (!image?.data?.attributes) {
     return "/images/placeholder.svg";
   }

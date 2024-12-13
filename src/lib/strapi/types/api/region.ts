@@ -3,24 +3,36 @@
 export interface Region {
   id: number;
   attributes: {
-    createdAt: Date;    updatedAt: Date;    publishedAt?: Date;    code: string;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt?: Date;
+    code: string;
     nom?: string;
   };
 }
 export interface Region_Plain {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  code: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  code: string;
   nom?: string;
 }
 
 export interface Region_NoRelations {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  code: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  code: string;
   nom?: string;
 }
 
 export interface Region_AdminPanelLifeCycle {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  code: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  code: string;
   nom?: string;
 }

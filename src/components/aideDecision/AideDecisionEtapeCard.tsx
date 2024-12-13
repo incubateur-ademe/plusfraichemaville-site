@@ -25,9 +25,7 @@ export default function AideDecisionEtapeCard({
       </div>
       <div className="m-4 max-w-[11rem] md:max-w-none">
         <h3 className={"text-blue-hover mb-0 text-[16px] font-bold leading-tight"}>{etapeAttributes.nom}</h3>
-        <div className={"fr-text mt-4 hidden text-dsfr-text-mention-grey md:block"}>
-          {etapeAttributes.description}
-        </div>
+        <div className={"fr-text mt-4 hidden text-dsfr-text-mention-grey md:block"}>{etapeAttributes.description}</div>
       </div>
     </Link>
   );

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
+import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import { useMemo } from "react";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";

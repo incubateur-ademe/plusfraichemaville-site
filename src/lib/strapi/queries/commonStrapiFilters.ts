@@ -59,9 +59,9 @@ export class StrapiFilter {
 export class AideDecisionEtapeHistory {
   label: string;
   slug: string;
-  image: {data: Media} | null | undefined;
+  image: { data: Media } | null | undefined;
 
-  constructor(label: string, slug: string, image?: {data: Media} | null) {
+  constructor(label: string, slug: string, image?: { data: Media } | null) {
     this.label = label;
     this.image = image;
     this.slug = slug;

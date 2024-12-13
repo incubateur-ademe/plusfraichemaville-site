@@ -13,4 +13,3 @@ export interface EtapeMiseEnOeuvre_NoRelations {
   titre: string;
   description: any;
 }
-

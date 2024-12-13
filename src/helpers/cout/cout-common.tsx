@@ -1,3 +1,5 @@
+import { CoutUnite } from "@/src/lib/strapi/types/api/materiau";
+
 type UniteCout = {
   code: string;
   unitLabel: string;
@@ -5,33 +7,33 @@ type UniteCout = {
 };
 
 const UNITE_COUT_LINEAIRE: UniteCout = {
-  code: "lineaire",
+  code: CoutUnite.Lineaire,
   unitLabel: "mètre linéaire",
   estimationLabel: "Nombre de mètre linéaire",
 };
 const UNITE_COUT_METRE_CARRE: UniteCout = {
-  code: "metreCarre",
+  code: CoutUnite.MetreCarre,
   unitLabel: "m²",
   estimationLabel: "Nombre de m²",
 };
 const UNITE_COUT_METRE_CUBE: UniteCout = {
-  code: "metreCube",
+  code: CoutUnite.MetreCube,
   unitLabel: "m³",
   estimationLabel: "Nombre de m³",
 };
 const UNITE_COUT_UNITE: UniteCout = {
-  code: "unite",
+  code: CoutUnite.Unite,
   unitLabel: "unité",
   estimationLabel: "Nombre d'unité",
 };
 export const UNITE_COUT_MEGAWATTHEURE: UniteCout = {
-  code: "megaWattHeure",
+  code: CoutUnite.MegaWattHeure,
   unitLabel: "MWh",
   estimationLabel: "Nombre de MWh",
 };
 
 const UNITE_COUT_KILOWATT: UniteCout = {
-  code: "kiloWatt",
+  code: CoutUnite.KiloWatt,
   unitLabel: "kW",
   estimationLabel: "Nombre de kW",
 };

@@ -1,11 +1,12 @@
 import clsx from "clsx";
 import { FichesDiagnosticFilterUpdater } from "./use-fiches-diagnostic-filters";
+import { Methode } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 export const ALL_METHODES = [
-  { label: "Observation", code: "observation" },
-  { label: "Modélisation", code: "modelisation_spatiale" },
-  { label: "Enquête", code: "enquete" },
-  { label: "Analyse spatiale", code: "analyse_spatiale" },
+  { label: "Observation", code: Methode.Observation },
+  { label: "Modélisation", code: Methode.ModelisationSpatiale },
+  { label: "Enquête", code: Methode.Enquete },
+  { label: "Analyse spatiale", code: Methode.AnalyseSpatiale },
 ];
 
 export const MethodeFilter = ({ updater, isActive }: FichesDiagnosticFilterUpdater) => {

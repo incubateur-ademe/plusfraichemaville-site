@@ -13,4 +13,3 @@ export interface EtapeDiagnostic_NoRelations {
   titre: string;
   description: any;
 }
-

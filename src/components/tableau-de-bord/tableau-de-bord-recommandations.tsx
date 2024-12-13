@@ -9,9 +9,7 @@ export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const urls = projet?.fiches_solutions_id ?? [];
 
-  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(urls),
-  );
+  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionCompleteUrlApi(urls));
 
   const fichesSolutions = data?.map((fs) => fs?.attributes.fiches_solutions_complementaires);
 

@@ -1,5 +1,3 @@
-import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-
 export interface APIResponseCollectionMetadata {
   pagination: {
     page: number;

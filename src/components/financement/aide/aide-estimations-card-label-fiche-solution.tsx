@@ -1,6 +1,6 @@
 import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers";
 import { nullFunctionalComponent } from "@/src/helpers/common";
-import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
+import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";

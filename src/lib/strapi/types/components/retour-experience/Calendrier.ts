@@ -16,4 +16,3 @@ export interface Calendrier_NoRelations {
   titre: string;
   description?: any;
 }
-

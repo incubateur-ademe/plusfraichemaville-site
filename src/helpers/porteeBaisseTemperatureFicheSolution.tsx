@@ -1,20 +1,22 @@
+import { PorteeBaisseTemperature } from "@/src/lib/strapi/types/api/fiche-solution";
+
 type PorteeBaisseTemperatureFicheSolution = {
   code: string;
   label: string;
 };
 
 const PORTEE_AIR: PorteeBaisseTemperatureFicheSolution = {
-  code: "air",
+  code: PorteeBaisseTemperature.Air,
   label: "Baisse médiane de la température de l’air",
 };
 
 const PORTEE_SURFACE: PorteeBaisseTemperatureFicheSolution = {
-  code: "surface",
+  code: PorteeBaisseTemperature.Surface,
   label: "Baisse médiane de la température de surface",
 };
 
 const PORTEE_INTERIEUR: PorteeBaisseTemperatureFicheSolution = {
-  code: "interieur",
+  code: PorteeBaisseTemperature.Interieur,
   label: "Baisse médiane de la température intérieure",
 };
 

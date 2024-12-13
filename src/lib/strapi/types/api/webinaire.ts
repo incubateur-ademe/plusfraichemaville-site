@@ -3,7 +3,10 @@
 export interface Webinaire {
   id: number;
   attributes: {
-    createdAt: Date;    updatedAt: Date;    publishedAt?: Date;    titre?: string;
+    createdAt: Date;
+    updatedAt: Date;
+    publishedAt?: Date;
+    titre?: string;
     description?: any;
     lien_inscription?: string;
     lien_replay?: string;
@@ -14,7 +17,10 @@ export interface Webinaire {
 }
 export interface Webinaire_Plain {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  titre?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  titre?: string;
   description?: any;
   lien_inscription?: string;
   lien_replay?: string;
@@ -25,7 +31,10 @@ export interface Webinaire_Plain {
 
 export interface Webinaire_NoRelations {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  titre?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  titre?: string;
   description?: any;
   lien_inscription?: string;
   lien_replay?: string;
@@ -36,7 +45,10 @@ export interface Webinaire_NoRelations {
 
 export interface Webinaire_AdminPanelLifeCycle {
   id: number;
-  createdAt: Date;  updatedAt: Date;  publishedAt?: Date;  titre?: string;
+  createdAt: Date;
+  updatedAt: Date;
+  publishedAt?: Date;
+  titre?: string;
   description?: any;
   lien_inscription?: string;
   lien_replay?: string;

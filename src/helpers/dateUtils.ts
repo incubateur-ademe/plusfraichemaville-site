@@ -1,5 +1,3 @@
-import type { Attribute } from "@strapi/strapi";
-
 export const FAR_FUTURE = new Date(3024, 0, 0, 1);
 
 export function monthDateToString(value: Date | null | undefined): string {
@@ -31,7 +29,7 @@ export function dateToLiteralString(value?: Date): string | null {
   });
 }
 
-export function stipStrapiTime(time: Attribute.TimeValue): string {
+export function stipStrapiTime(time: Date): string {
   return time.toString().substring(0, 5);
 }
 

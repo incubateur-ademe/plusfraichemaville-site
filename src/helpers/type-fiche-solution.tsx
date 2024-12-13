@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
+import { TypeSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
-export type TypeSolution = {
+export type TypeFicheSolution = {
   label: string;
   code: string;
   bannerClass: string;
@@ -11,8 +12,8 @@ export type TypeSolution = {
   coloredIcon: (_?: string) => ReactNode;
 };
 
-export const TYPE_SOLUTION_VERTE: TypeSolution = {
-  code: "verte",
+export const TYPE_SOLUTION_VERTE: TypeFicheSolution = {
+  code: TypeSolution.Verte,
   label: "Solution verte",
   bannerClass: " greenSolutionBanner ",
   colorClass: " typeSolutionGreenIcon ",
@@ -24,8 +25,8 @@ export const TYPE_SOLUTION_VERTE: TypeSolution = {
   coloredIcon: (extraClasses?) => <i className={`fr-icon-leaf-fill typeSolutionGreenIcon ${extraClasses}`} />,
 };
 
-export const TYPE_SOLUTION_BLEUE: TypeSolution = {
-  code: "bleue",
+export const TYPE_SOLUTION_BLEUE: TypeFicheSolution = {
+  code: TypeSolution.Bleue,
   label: "Solution bleue",
   bannerClass: " blueSolutionBanner ",
   colorClass: " typeSolutionBlueIcon ",
@@ -37,8 +38,8 @@ export const TYPE_SOLUTION_BLEUE: TypeSolution = {
   coloredIcon: (extraClasses?) => <i className={`ri-drop-fill typeSolutionBlueIcon ${extraClasses}`} />,
 };
 
-export const TYPE_SOLUTION_GRISE: TypeSolution = {
-  code: "grise",
+export const TYPE_SOLUTION_GRISE: TypeFicheSolution = {
+  code: TypeSolution.Grise,
   label: "Solution grise",
   bannerClass: " graySolutionBanner ",
   colorClass: " typeSolutionGrayIcon ",
@@ -50,8 +51,8 @@ export const TYPE_SOLUTION_GRISE: TypeSolution = {
   coloredIcon: (extraClasses?) => <i className={`ri-home-fill typeSolutionGrayIcon ${extraClasses}`} />,
 };
 
-export const TYPE_SOLUTION_DOUCE: TypeSolution = {
-  code: "douce",
+export const TYPE_SOLUTION_DOUCE: TypeFicheSolution = {
+  code: TypeSolution.Douce,
   label: "Solution douce",
   bannerClass: " softSolutionBanner ",
   colorClass: " typeSolutionSoftIcon ",
@@ -63,7 +64,7 @@ export const TYPE_SOLUTION_DOUCE: TypeSolution = {
   coloredIcon: (extraClasses?) => <i className={`ri-user-voice-fill typeSolutionSoftIcon ${extraClasses}`} />,
 };
 
-export const ALL_TYPES_SOLUTION: TypeSolution[] = [
+export const ALL_TYPES_SOLUTION: TypeFicheSolution[] = [
   TYPE_SOLUTION_VERTE,
   TYPE_SOLUTION_BLEUE,
   TYPE_SOLUTION_GRISE,

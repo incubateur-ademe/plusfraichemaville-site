@@ -17,7 +17,10 @@ export const fetchAideFromAidesTerritoiresById = async (aideTerritoireAideId: nu
   );
 };
 
-export const searchAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution["attributes"][], collectivite: collectivite) => {
+export const searchAidesFromAidesTerritoires = async (
+  fichesSolutions: FicheSolution["attributes"][],
+  collectivite: collectivite,
+) => {
   const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
   const perimeterId = await getPerimterIdIdOrFetchItFromAidesTerritoires(collectivite);
 

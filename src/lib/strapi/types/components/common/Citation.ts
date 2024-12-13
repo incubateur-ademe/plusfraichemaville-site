@@ -13,4 +13,3 @@ export interface Citation_NoRelations {
   auteur: string;
   texte: any;
 }
-
