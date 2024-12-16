@@ -1,40 +1,52 @@
 import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import sumBy from "lodash/sumBy";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
-import { Materiau } from "@/src/components/ficheSolution/type";
 import { formatNumberWithSpaces } from "../common";
+import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 
-export const materiauHasNoCost = (materiau: Materiau) =>
-  !materiau.cout_minimum_fourniture &&
-  !materiau.cout_maximum_fourniture &&
-  !materiau.cout_minimum_entretien &&
-  !materiau.cout_maximum_entretien;
+export const materiauHasNoCost = (materiauAttributes: Materiau["attributes"]) =>
+  !materiauAttributes.cout_minimum_fourniture &&
+  !materiauAttributes.cout_maximum_fourniture &&
+  !materiauAttributes.cout_minimum_entretien &&
+  !materiauAttributes.cout_maximum_entretien;
 
-export const getLabelCoutFourniture = (materiau: Materiau) =>
-  materiau.cout_minimum_fourniture != null && materiau.cout_maximum_fourniture != null
-    ? `${materiau.cout_minimum_fourniture} - ${materiau.cout_maximum_fourniture} € HT / ${
-        getUniteCoutFromCode(materiau.cout_unite).unitLabel
+export const getLabelCoutFourniture = (materiauAttributes: Materiau["attributes"]) =>
+  materiauAttributes.cout_minimum_fourniture != null && materiauAttributes.cout_maximum_fourniture != null
+    ? `${materiauAttributes.cout_minimum_fourniture} - ${materiauAttributes.cout_maximum_fourniture} € HT / ${
+        getUniteCoutFromCode(materiauAttributes.cout_unite).unitLabel
       }`
     : "NA";
 
-export const getLabelCoutFournitureByQuantite = (materiau: Materiau | undefined, quantite: number) =>
-  materiau && materiau.cout_minimum_fourniture != null && materiau.cout_maximum_fourniture != null && quantite
-    ? `${formatNumberWithSpaces(materiau.cout_minimum_fourniture * quantite)} - ${formatNumberWithSpaces(
-        materiau.cout_maximum_fourniture * quantite,
+export const getLabelCoutFournitureByQuantite = (
+  materiauAttributes: Materiau["attributes"] | undefined,
+  quantite: number,
+) =>
+  materiauAttributes &&
+  materiauAttributes.cout_minimum_fourniture != null &&
+  materiauAttributes.cout_maximum_fourniture != null &&
+  quantite
+    ? `${formatNumberWithSpaces(materiauAttributes.cout_minimum_fourniture * quantite)} - ${formatNumberWithSpaces(
+        materiauAttributes.cout_maximum_fourniture * quantite,
       )} €`
     : "0 €";
 
-export const getLabelCoutEntretien = (materiau: Materiau) =>
-  materiau.cout_minimum_entretien != null && materiau.cout_maximum_entretien != null
-    ? `${materiau.cout_minimum_entretien} - ${materiau.cout_maximum_entretien} € HT / ${
-        getUniteCoutFromCode(materiau.cout_unite).unitLabel
+export const getLabelCoutEntretien = (materiauAttributes: Materiau["attributes"]) =>
+  materiauAttributes.cout_minimum_entretien != null && materiauAttributes.cout_maximum_entretien != null
+    ? `${materiauAttributes.cout_minimum_entretien} - ${materiauAttributes.cout_maximum_entretien} € HT / ${
+        getUniteCoutFromCode(materiauAttributes.cout_unite).unitLabel
       } / an`
     : "NA";
 
-export const getLabelCoutEntretienByQuantite = (materiau: Materiau | undefined, quantite: number) =>
-  materiau && materiau.cout_minimum_entretien != null && materiau.cout_maximum_entretien != null && quantite
-    ? `${formatNumberWithSpaces(materiau.cout_minimum_entretien * quantite)} - ${formatNumberWithSpaces(
-        materiau.cout_maximum_entretien * quantite,
+export const getLabelCoutEntretienByQuantite = (
+  materiauAttributes: Materiau["attributes"] | undefined,
+  quantite: number,
+) =>
+  materiauAttributes &&
+  materiauAttributes.cout_minimum_entretien != null &&
+  materiauAttributes.cout_maximum_entretien != null &&
+  quantite
+    ? `${formatNumberWithSpaces(materiauAttributes.cout_minimum_entretien * quantite)} - ${formatNumberWithSpaces(
+        materiauAttributes.cout_maximum_entretien * quantite,
       )} € / an`
     : "0 € / an";
 

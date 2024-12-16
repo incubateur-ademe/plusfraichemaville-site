@@ -1,8 +1,8 @@
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
-import { FichesDiagnosticResponse } from "./types";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 type FichesDiagnosticListProps = {
-  fichesDiagnostic: FichesDiagnosticResponse;
+  fichesDiagnostic: FicheDiagnostic[];
 };
 
 export const FichesDiagnosticList = ({ fichesDiagnostic }: FichesDiagnosticListProps) => {

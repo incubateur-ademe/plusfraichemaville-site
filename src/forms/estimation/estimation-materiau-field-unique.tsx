@@ -2,15 +2,18 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import Image from "next/image";
 import { PropsWithChildren } from "react";
 import CmsRichText from "@/src/components/common/CmsRichText";
-import { FicheSolution } from "@/src/components/ficheSolution/type";
 import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/src/helpers/cout/cout-fiche-solution";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 type EstimationMateriauFieldUniqueProps = {
-  ficheSolution: FicheSolution;
+  ficheSolutionAttributes: FicheSolution["attributes"];
 } & PropsWithChildren;
 
-export const EstimationMateriauFieldUnique = ({ ficheSolution, children }: EstimationMateriauFieldUniqueProps) => {
+export const EstimationMateriauFieldUnique = ({
+  ficheSolutionAttributes,
+  children,
+}: EstimationMateriauFieldUniqueProps) => {
   return (
     <div>
       <hr className="h-[1px] p-0" />
@@ -20,16 +23,18 @@ export const EstimationMateriauFieldUnique = ({ ficheSolution, children }: Estim
           <Image
             fill
             sizes="30vw md:5vw"
-            src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
+            src={getStrapiImageUrl(ficheSolutionAttributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
             alt={""}
             className={"rounded-2xl object-cover"}
           />
         </div>
         <div className="mb-0 mt-8 grow text-dsfr-text-title-grey md:mb-8">
-          <CmsRichText label={ficheSolution.description_estimation ?? ""} className={"text-sm"} />
+          <CmsRichText label={ficheSolutionAttributes.description_estimation ?? ""} className={"text-sm"} />
           <div className="text-sm text-dsfr-text-mention-grey">
-            <div>{`Coût d'investissement : ${formatNumberWithSpaces(getLabelCoutFourniture(ficheSolution))}`}</div>
-            <div>{`Coût d'entretien : ${formatNumberWithSpaces(getLabelCoutEntretien(ficheSolution))}`}</div>
+            <div>{`Coût d'investissement : ${formatNumberWithSpaces(
+              getLabelCoutFourniture(ficheSolutionAttributes),
+            )}`}</div>
+            <div>{`Coût d'entretien : ${formatNumberWithSpaces(getLabelCoutEntretien(ficheSolutionAttributes))}`}</div>
           </div>
         </div>
         <div className={"flex flex-none flex-col bg-dsfr-contrast-grey p-6 md:w-60"}>{children}</div>

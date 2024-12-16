@@ -1,4 +1,4 @@
-import { FicheDiagnostic } from "@/src/components/fiches-diagnostic/fiche-diagnostic";
+import { FicheDiagnosticComponent } from "@/src/components/fiches-diagnostic/fiche-diagnostic-component";
 import { getFicheDiagnosticBySlug } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { notFound } from "next/navigation";
 
@@ -8,5 +8,5 @@ export default async function FicheDiagnosticPage({ params }: { params: { ficheD
   if (!ficheDiagnostic) {
     return notFound();
   }
-  return <FicheDiagnostic ficheDiagnostic={ficheDiagnostic} />;
+  return <FicheDiagnosticComponent ficheDiagnostic={ficheDiagnostic} />;
 }

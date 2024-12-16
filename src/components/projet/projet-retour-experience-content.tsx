@@ -1,4 +1,3 @@
-import { RetourExperienceResponse } from "@/src/components/ficheSolution/type";
 import { getCreditsImageForRetourExperience } from "@/src/helpers/credits-image";
 import clsx from "clsx";
 import { ImageLoader } from "../common/image-loader";
@@ -11,14 +10,15 @@ import SolutionRetourExperienceCard from "../retourExperience/SolutionRetourExpe
 import CalendrierRetourExperienceAccordion from "../retourExperience/CalendrierRetourExperienceAccordion";
 import ItemRetourExperience from "../retourExperience/ItemRetourExperience";
 import RetourExperienceCard from "../retourExperience/RetourExperienceCard";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
 type RetourExperienceContentProps = {
-  retourExperience: RetourExperienceResponse;
+  retourExperience: RetourExperience;
   isModal?: boolean;
 };
 
 export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExperienceContentProps) => {
-  const creditsImage = getCreditsImageForRetourExperience(retourExperience.attributes);
+  const creditsImage = getCreditsImageForRetourExperience(retourExperience);
   const solutions = retourExperience.attributes.solution_retour_experiences?.data;
   const linkedRetourExperiences = retourExperience.attributes.retour_experiences?.data;
   return (

@@ -15,8 +15,8 @@ import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import { getProjetsForProjetCreationEmail } from "@/src/lib/prisma/prismaProjetQueries";
 import { daysUntilDate } from "@/src/helpers/dateUtils";
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
-import { RetourExperienceResponse } from "@/src/components/ficheSolution/type";
 import shuffle from "lodash/shuffle";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
 interface Templates {
   templateId: number;
@@ -48,7 +48,7 @@ export type EmailProjetCreationParam = {
 
 const computeProjetCreationEmailParam = (
   projet: ProjetWithRelations,
-  rexExamples: RetourExperienceResponse[],
+  rexExamples: RetourExperience[],
 ): EmailProjetCreationParam => {
   if (rexExamples.length < 3) {
     return {

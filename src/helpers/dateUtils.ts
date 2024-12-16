@@ -1,5 +1,3 @@
-import type { Attribute } from "@strapi/strapi";
-
 export const FAR_FUTURE = new Date(3024, 0, 0, 1);
 
 export const removeDaysToDate = (date: Date, nbDays: number) => new Date(date.getTime() - nbDays * 24 * 60 * 60 * 1000);
@@ -33,7 +31,7 @@ export function dateToLiteralString(value?: Date): string | null {
   });
 }
 
-export function stipStrapiTime(time: Attribute.TimeValue): string {
+export function stipStrapiTime(time: Date): string {
   return time.toString().substring(0, 5);
 }
 

@@ -31,7 +31,7 @@
     "@nlux/react": "^2.17.1",
     "@nlux/themes": "^2.17.1",
     "@prisma/client": "^5.22.0",
-    "@sentry/nextjs": "7.77.0",
+    "@sentry/nextjs": "7.120.1",
     "@splidejs/react-splide": "^0.7.12",
     "clsx": "^2.1.1",
     "html-to-image": "^1.11.11",
@@ -58,9 +58,9 @@
     "zustand": "^4.5.5"
   },
   "devDependencies": {
-    "@strapi/strapi": "^4.25.17",
     "@types/geojson": "^7946.0.14",
     "@types/leaflet": "^1.9.14",
+    "@types/lodash": "^4.17.13",
     "@types/node": "^20.17.9",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
@@ -70,6 +70,7 @@
     "eslint": "^8.57.1",
     "eslint-config-next": "14.0.4",
     "eslint-config-prettier": "^9.1.0",
+    "i": "^0.3.7",
     "postcss": "^8.4.49",
     "prettier": "3.1.1",
     "prettier-plugin-classnames": "^0.6.6",

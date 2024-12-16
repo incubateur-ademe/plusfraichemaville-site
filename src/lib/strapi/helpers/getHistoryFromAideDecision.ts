@@ -1,25 +1,20 @@
-import { APIResponse, GetValues } from "@/src/lib/strapi/types/types";
 import { AideDecisionEtapeHistory } from "@/src/lib/strapi/queries/commonStrapiFilters";
+import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
 
-export function getHistoryFromAideDecisionEtape(
-  aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">,
-  includeCurrentStep = false,
-) {
+export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionEtape, includeCurrentStep = false) {
   const history: AideDecisionEtapeHistory[] = [];
-  let etapeParente: GetValues<"api::aide-decision-etape.aide-decision-etape"> | null | undefined = <
-    GetValues<"api::aide-decision-etape.aide-decision-etape"> | null | undefined
-  >(includeCurrentStep ? aideDecisionEtape : aideDecisionEtape.etape_precedente?.data?.attributes);
+  let etapeParente: AideDecisionEtape | null | undefined = includeCurrentStep
+    ? aideDecisionEtape
+    : aideDecisionEtape.attributes.etape_precedente?.data;
   while (etapeParente) {
     history.unshift(
       new AideDecisionEtapeHistory(
-        <string>etapeParente.nom,
-        <string>etapeParente.slug,
-        <APIResponse<"plugin::upload.file"> | null>etapeParente.image,
+        <string>etapeParente.attributes.nom,
+        <string>etapeParente.attributes.slug,
+        etapeParente.attributes.image,
       ),
     );
-    etapeParente = <GetValues<"api::aide-decision-etape.aide-decision-etape"> | null | undefined>(
-      etapeParente.etape_precedente?.data?.attributes
-    );
+    etapeParente = etapeParente.attributes.etape_precedente?.data;
   }
   history.unshift(new AideDecisionEtapeHistory("Espace", ""));
   return history;

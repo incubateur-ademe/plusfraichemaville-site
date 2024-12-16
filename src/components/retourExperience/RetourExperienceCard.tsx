@@ -5,22 +5,22 @@ import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import Link from "next/link";
 
-import { APIResponseData } from "@/src/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRetourExperience";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useParams } from "next/navigation";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
 export type RexInHome = Pick<
-  APIResponseData<"api::retour-experience.retour-experience">["attributes"],
-  "slug" | "climat_actuel" | "climat_futur" | "image_principale" | "titre" | "region"
->;
+  RetourExperience["attributes"],
+  "slug" | "climat_actuel" | "climat_futur" | "titre" | "region"
+> & { image_principale: string };
 
 export default function RetourExperienceCard({
   retourExperience,
   className,
 }: {
-  retourExperience: APIResponseData<"api::retour-experience.retour-experience"> | RexInHome;
+  retourExperience: RetourExperience | RexInHome;
   className?: string;
 }) {
   const selectRex = "attributes" in retourExperience ? retourExperience.attributes : retourExperience;
@@ -36,9 +36,9 @@ export default function RetourExperienceCard({
           width={450}
           height={300}
           src={
-            "attributes" in retourExperience
-              ? getStrapiImageUrl(selectRex.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)
-              : selectRex.image_principale
+            typeof selectRex.image_principale === "string"
+              ? selectRex.image_principale
+              : getStrapiImageUrl(selectRex.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)
           }
           alt={selectRex.titre}
           className={"w-full rounded-t-2xl object-cover"}

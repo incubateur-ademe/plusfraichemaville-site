@@ -1,14 +1,15 @@
 import { getAllCompleteFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
-import { FicheSolutionResponse, RetourExperienceResponse } from "@/src/components/ficheSolution/type";
 import { writeFileSync } from "node:fs";
 import { getAllCompleteRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRetourExperience";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
-import { FicheDiagnosticResponse } from "@/src/components/fiches-diagnostic/types";
 import { getAllCompleteFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { getTemporaliteLabelFromCode } from "@/src/helpers/retourExperience/temporaliteRetourExperience";
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 type RagTimeFicheDiagnostic = {
   id: number;
@@ -75,7 +76,7 @@ type RagTimeRetourExperience = {
   link: string;
 };
 
-const strapiRetourExperienceToRagtime = (strapiRetourExperience: RetourExperienceResponse): RagTimeRetourExperience => {
+const strapiRetourExperienceToRagtime = (strapiRetourExperience: RetourExperience): RagTimeRetourExperience => {
   const strapiRetourExperienceAttributes = strapiRetourExperience.attributes;
   return {
     id: strapiRetourExperience.id,
@@ -102,7 +103,7 @@ const strapiRetourExperienceToRagtime = (strapiRetourExperience: RetourExperienc
   };
 };
 
-const strapiFicheSolutionToRagtime = (strapiFicheSolution: FicheSolutionResponse): RagTimeFicheSolution => {
+const strapiFicheSolutionToRagtime = (strapiFicheSolution: FicheSolution): RagTimeFicheSolution => {
   const strapiFicheSolutionAttributes = strapiFicheSolution.attributes;
   return {
     id: strapiFicheSolution.id,
@@ -149,7 +150,7 @@ const strapiFicheSolutionToRagtime = (strapiFicheSolution: FicheSolutionResponse
   };
 };
 
-const strapiFicheDiagnosticToRagtime = (strapiFicheDiagnostic: FicheDiagnosticResponse): RagTimeFicheDiagnostic => {
+const strapiFicheDiagnosticToRagtime = (strapiFicheDiagnostic: FicheDiagnostic): RagTimeFicheDiagnostic => {
   const strapiFicheDiagAttributes = strapiFicheDiagnostic.attributes;
   return {
     id: strapiFicheDiagnostic.id,

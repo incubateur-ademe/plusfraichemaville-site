@@ -1,30 +1,30 @@
 import Link from "next/link";
 import Image from "next/image";
-import { GetValues } from "@/src/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
 
 export default function AideDecisionFirstStepEtapeCard({
-  aideDecisionEtape,
+  etapeAttributes,
 }: {
-  aideDecisionEtape: GetValues<"api::aide-decision-etape.aide-decision-etape">;
+  etapeAttributes: AideDecisionEtape["attributes"];
 }) {
   return (
     <Link
       className="pfmv-card flex h-32 w-32 flex-col items-center !bg-none"
-      href={`${PFMV_ROUTES.AIDE_DECISION}/${aideDecisionEtape.slug}`}
+      href={`${PFMV_ROUTES.AIDE_DECISION}/${etapeAttributes.slug}`}
     >
       <div className={"text-center text-sm text-pfmv-light-grey"}>&nbsp;</div>
       <div>
         <Image
           width={80}
           height={80}
-          src={getStrapiImageUrl(aideDecisionEtape.image, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={aideDecisionEtape.nom || ""}
+          src={getStrapiImageUrl(etapeAttributes.image, STRAPI_IMAGE_KEY_SIZE.medium)}
+          alt={etapeAttributes.nom || ""}
           className={"svg-blue-hover"}
         />
       </div>
-      <div className={"text-center text-sm"}>{aideDecisionEtape.nom}</div>
+      <div className={"text-center text-sm"}>{etapeAttributes.nom}</div>
     </Link>
   );
 }
