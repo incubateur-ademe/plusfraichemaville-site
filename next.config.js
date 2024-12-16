@@ -1,3 +1,7 @@
+module.exports = {
+  output: "standalone",
+};
+
 const nextConfig = {
   async headers() {
     return [
