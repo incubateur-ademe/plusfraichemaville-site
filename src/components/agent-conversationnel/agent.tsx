@@ -18,7 +18,7 @@ const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.Age
 
 export const Agent = () => {
   const { adapter, api, initialConversation, conversationControls, error } = useAiChatConfig();
-  const { displayOptions, openChat, closeChat, expandChat } = useAiChatControls();
+  const { displayOptions, closeChat, expandChat, chatController } = useAiChatControls();
   const { width, height } = displayOptions.dimensions;
 
   return (
@@ -70,7 +70,7 @@ export const Agent = () => {
           </AiChat>
         </div>
       </div>
-      <AgentButton openChat={openChat} />
+      <AgentButton chatController={chatController} />
     </>
   );
 };

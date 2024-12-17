@@ -25,6 +25,11 @@ export const useAiChatControls = () => {
     setExpand(false);
   };
 
+  const chatController = {
+    isOpen,
+    toggle: isOpen ? closeChat : openChat,
+  };
+
   useEffect(() => {
     if (width < TAILWIND_BREAKPOINT_SM) {
       setExpand(true);
@@ -44,5 +49,5 @@ export const useAiChatControls = () => {
     [expand, isOpen, height, width],
   );
 
-  return { isOpen, openChat, closeChat, expandChat, displayOptions };
+  return { isOpen, closeChat, expandChat, displayOptions, chatController };
 };
