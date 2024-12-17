@@ -66,7 +66,7 @@ export default async function AideDecisionPage({ params, searchParams }: AideDec
             <ul className="flex list-none flex-wrap justify-center p-0">
               {currentStep.attributes.etapes_suivantes.data.map((aideDecision) => (
                 <li key={aideDecision.id} className="m-3 flex w-96 md:w-[220px]">
-                  <AideDecisionEtapeCard aideDecisionEtape={aideDecision.attributes} />
+                  <AideDecisionEtapeCard etapeAttributes={aideDecision.attributes} />
                 </li>
               ))}
             </ul>
@@ -82,7 +82,9 @@ export default async function AideDecisionPage({ params, searchParams }: AideDec
   } else {
     const aideDecisionEtape = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
     if (aideDecisionEtape) {
-      return <AideDecisionResult searchParams={searchParams} aideDecisionEtape={aideDecisionEtape.attributes} />;
+      return (
+        <AideDecisionResult searchParams={searchParams} aideDecisionEtapeAttributes={aideDecisionEtape.attributes} />
+      );
     } else {
       notFound();
     }

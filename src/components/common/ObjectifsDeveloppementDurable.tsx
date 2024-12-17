@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { APIResponseData } from "@/src/lib/strapi/types/types";
+import { ObjectifDeveloppementDurable } from "@/src/lib/strapi/types/api/objectif-developpement-durable";
 
 export default async function ObjectifsDeveloppementDurable({
   objectifs,
   imageSize = 100,
   className,
 }: {
-  objectifs: APIResponseData<"api::objectif-developpement-durable.objectif-developpement-durable">[] | undefined;
+  objectifs: ObjectifDeveloppementDurable[] | undefined;
   imageSize?: number;
   className?: string;
 }) {

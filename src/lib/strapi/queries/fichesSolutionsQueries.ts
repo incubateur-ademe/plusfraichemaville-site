@@ -6,8 +6,9 @@ import {
   STRAPI_IMAGE_FRAGMENT,
 } from "@/src/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
-import { APIResponseCollection, APIResponseData } from "@/src/lib/strapi/types/types";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/src/lib/strapi/helpers/strapiArrayUtils";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { APIResponseCollection } from "../types/strapi-custom-types";
 
 const GET_FICHE_SOLUTION_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,
@@ -141,37 +142,31 @@ const GET_FICHE_SOLUTION_CARD_DATA = (
     }
 }`;
 
-export async function getFicheSolutionBySlug(
-  slug: string,
-): Promise<APIResponseData<"api::fiche-solution.fiche-solution"> | null> {
+export async function getFicheSolutionBySlug(slug: string): Promise<FicheSolution | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (
     await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), { tag: `get-fiche-solution-${slug}` })
-  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  )?.ficheSolutions as APIResponseCollection<FicheSolution>;
   return safeReturnStrapiEntity(apiResponse);
 }
 
-export async function getAllFichesSolutions(): Promise<APIResponseData<"api::fiche-solution.fiche-solution">[]> {
+export async function getAllFichesSolutions(): Promise<FicheSolution[]> {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter), { tag: "get-all-fiches-solution" })
-  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  )?.ficheSolutions as APIResponseCollection<FicheSolution>;
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getAllCompleteFichesSolutions(): Promise<
-  APIResponseData<"api::fiche-solution.fiche-solution">[]
-> {
+export async function getAllCompleteFichesSolutions(): Promise<FicheSolution[]> {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), { tag: "get-all-complete-fiches-solution" })
-  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  )?.ficheSolutions as APIResponseCollection<FicheSolution>;
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getFicheSolutionByIds(
-  ficheSolutionIds: number[],
-): Promise<APIResponseData<"api::fiche-solution.fiche-solution">[]> {
+export async function getFicheSolutionByIds(ficheSolutionIds: number[]): Promise<FicheSolution[]> {
   const filter = new StrapiFilter(true, [
     {
       attribute: "id",
@@ -184,13 +179,11 @@ export async function getFicheSolutionByIds(
     await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter), {
       tag: `get-fiche-solution-by-ids-${ficheSolutionIds.join("-")}`,
     })
-  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  )?.ficheSolutions as APIResponseCollection<FicheSolution>;
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getFicheSolutionByIdsComplete(
-  ficheSolutionIds: number[],
-): Promise<APIResponseData<"api::fiche-solution.fiche-solution">[]> {
+export async function getFicheSolutionByIdsComplete(ficheSolutionIds: number[]): Promise<FicheSolution[]> {
   const filter = new StrapiFilter(true, [
     {
       attribute: "id",
@@ -203,6 +196,6 @@ export async function getFicheSolutionByIdsComplete(
     await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), {
       tag: `get-fiche-solution-by-ids-complete-${ficheSolutionIds.join("-")}`,
     })
-  )?.ficheSolutions as APIResponseCollection<"api::fiche-solution.fiche-solution">;
+  )?.ficheSolutions as APIResponseCollection<FicheSolution>;
   return safeReturnStrapiEntities(apiResponse);
 }

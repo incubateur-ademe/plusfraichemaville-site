@@ -1,8 +1,8 @@
 import clsx from "clsx";
 import { formatNumberWithSpaces, highlightedIconClass, TypeFiche } from "@/src/helpers/common";
 import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
-import { FicheSolution } from "@/src/components/ficheSolution/type";
 import { ReactNode } from "react";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 type CoutFicheSolution = {
   coutMax(_: TypeFiche): number;
@@ -58,30 +58,38 @@ export const getCoutFiche = (typeFiche: TypeFiche, coutMin?: number, coutMax?: n
   return ALL_COUTS_FICHE.find((cout) => cout.coutMax(typeFiche) >= (coutMax + coutMin) / 2) || COUT_EXPENSIVE;
 };
 
-export const getLabelCoutFourniture = (ficheSolution: FicheSolution) =>
-  ficheSolution.cout_minimum != null && ficheSolution.cout_maximum != null
-    ? `de ${formatNumberWithSpaces(ficheSolution.cout_minimum)} à ${formatNumberWithSpaces(
-        ficheSolution.cout_maximum,
-      )} € HT / ${getUniteCoutFromCode(ficheSolution.cout_unite).unitLabel}`
+export const getLabelCoutFourniture = (ficheSolutionAttributes: FicheSolution["attributes"]) =>
+  ficheSolutionAttributes.cout_minimum != null && ficheSolutionAttributes.cout_maximum != null
+    ? `de ${formatNumberWithSpaces(ficheSolutionAttributes.cout_minimum)} à ${formatNumberWithSpaces(
+        ficheSolutionAttributes.cout_maximum,
+      )} € HT / ${getUniteCoutFromCode(ficheSolutionAttributes.cout_unite).unitLabel}`
     : "Coût non disponible";
 
-export const getLabelCoutEntretien = (ficheSolution: FicheSolution) =>
-  ficheSolution.cout_minimum_entretien != null && ficheSolution.cout_maximum_entretien != null
-    ? `de ${ficheSolution.cout_minimum_entretien} à ${ficheSolution.cout_maximum_entretien} € HT / ${
-        getUniteCoutFromCode(ficheSolution.cout_entretien_unite).unitLabel
-      }`
+export const getLabelCoutEntretien = (ficheSolutionAttributes: FicheSolution["attributes"]) =>
+  ficheSolutionAttributes.cout_minimum_entretien != null && ficheSolutionAttributes.cout_maximum_entretien != null
+    ? `de ${ficheSolutionAttributes.cout_minimum_entretien} à ${
+        ficheSolutionAttributes.cout_maximum_entretien
+      } € HT / ${getUniteCoutFromCode(ficheSolutionAttributes.cout_entretien_unite).unitLabel}`
     : "Coût non disponible";
 
-export const getLabelCoutFournitureByQuantite = (ficheSolution: FicheSolution, quantite: number) =>
-  ficheSolution.cout_minimum != null && ficheSolution.cout_maximum != null && quantite
-    ? `${formatNumberWithSpaces(ficheSolution.cout_minimum * quantite)} - ${formatNumberWithSpaces(
-        ficheSolution.cout_maximum * quantite,
+export const getLabelCoutFournitureByQuantite = (
+  ficheSolutionAttributes: FicheSolution["attributes"],
+  quantite: number,
+) =>
+  ficheSolutionAttributes.cout_minimum != null && ficheSolutionAttributes.cout_maximum != null && quantite
+    ? `${formatNumberWithSpaces(ficheSolutionAttributes.cout_minimum * quantite)} - ${formatNumberWithSpaces(
+        ficheSolutionAttributes.cout_maximum * quantite,
       )} €`
     : "0 €";
 
-export const getLabelCoutEntretienByQuantite = (ficheSolution: FicheSolution, quantite: number) =>
-  ficheSolution.cout_minimum_entretien != null && ficheSolution.cout_maximum_entretien != null && quantite
-    ? `${formatNumberWithSpaces(ficheSolution.cout_minimum_entretien * quantite)} - ${formatNumberWithSpaces(
-        ficheSolution.cout_maximum_entretien * quantite,
+export const getLabelCoutEntretienByQuantite = (
+  ficheSolutionAttributes: FicheSolution["attributes"],
+  quantite: number,
+) =>
+  ficheSolutionAttributes.cout_minimum_entretien != null &&
+  ficheSolutionAttributes.cout_maximum_entretien != null &&
+  quantite
+    ? `${formatNumberWithSpaces(ficheSolutionAttributes.cout_minimum_entretien * quantite)} - ${formatNumberWithSpaces(
+        ficheSolutionAttributes.cout_maximum_entretien * quantite,
       )} € / an`
     : "0 € / an";

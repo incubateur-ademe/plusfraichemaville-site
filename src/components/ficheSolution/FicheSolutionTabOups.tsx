@@ -3,14 +3,10 @@ import Image from "next/image";
 import Highlight from "@codegouvfr/react-dsfr/Highlight";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import { GetValues } from "@/src/lib/strapi/types/types";
 import Link from "next/link";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
-export default function FicheSolutionTabOups({
-  ficheSolution,
-}: {
-  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
-}) {
+export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttributes: FicheSolution["attributes"] }) {
   return (
     <div className="text-dsfr-text-title-grey">
       <div className="mb-8 text-[1.75rem] font-bold">Oups !</div>
@@ -24,7 +20,7 @@ export default function FicheSolutionTabOups({
           </div>
         </div>
       </div>
-      {(!ficheSolution.oups || ficheSolution.oups.length === 0) && (
+      {(!ficheAttributes.oups || ficheAttributes.oups.length === 0) && (
         <div className={"mt-8"}>
           {"Retrouvez bientôt ici les conseils et les solutions complémentaires rapides et faciles à mettre en " +
             "œuvre qui vous permettront de rétablir la situation en un rien de temps."}
@@ -38,7 +34,7 @@ export default function FicheSolutionTabOups({
           </div>
         </div>
       )}
-      {ficheSolution.oups?.map((oups) => (
+      {ficheAttributes.oups?.map((oups) => (
         <div key={oups.titre} className="mt-12">
           <Highlight className="ml-0 text-[1.375rem] font-bold leading-normal">{oups.titre}</Highlight>
           <CmsRichText label={oups.description} className="mt-8" />

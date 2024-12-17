@@ -1,14 +1,14 @@
-import { FicheSolution } from "@/src/components/ficheSolution/type";
 import { IApiAidesTerritoiresQueryToken, IApiAidesTerritoiresResponse } from "@/src/lib/aidesTerritoires/types";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import * as Sentry from "@sentry/nextjs";
 import { revalidateTag } from "next/cache";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 const TOKEN_VALIDITY_IN_SECONDS = 86400;
 const FETCH_TOCKEN_CACHE_TAG = "aides-territoires-token";
 
-export const extractMotsClesFromFichesSolutions = (fichesSolutions: FicheSolution[]) => {
-  return fichesSolutions
+export const extractMotsClesFromFichesSolutions = (fichesAttributes: FicheSolution["attributes"][]) => {
+  return fichesAttributes
     .map((ficheSolution) => ficheSolution.aides_territoires_mots_cles || ficheSolution.titre)
     .join(";")
     .split(";")

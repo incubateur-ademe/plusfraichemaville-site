@@ -3,8 +3,8 @@
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import FicheSolutionCardWithUserInfo, { FicheSolutionCardWithUserInfoProps } from "./FicheSolutionCardWithUserInfo";
 import { makeFicheSolutionCompleteUrlApi, makeFicheSolutionUrlApi } from "./helpers";
-import { FicheSolutionResponse } from "./type";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 interface FicheSolutionCardWithFetcherProps extends Omit<FicheSolutionCardWithUserInfoProps, "ficheSolution"> {
   complete: boolean;
@@ -13,7 +13,7 @@ interface FicheSolutionCardWithFetcherProps extends Omit<FicheSolutionCardWithUs
 
 export const FicheSolutionCardWithFetcher = ({ complete, id, ...props }: FicheSolutionCardWithFetcherProps) => {
   const urlMaker = complete ? makeFicheSolutionCompleteUrlApi : makeFicheSolutionUrlApi;
-  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(urlMaker(id));
+  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(urlMaker(id));
 
   return !data && isLoading ? (
     <FicheCardSkeleton />

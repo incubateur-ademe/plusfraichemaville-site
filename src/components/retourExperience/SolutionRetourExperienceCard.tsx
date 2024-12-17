@@ -1,11 +1,11 @@
 import Image from "next/image";
 import FicheSolutionSmallHorizontalCard from "@/src/components/ficheSolution/FicheSolutionSmallHorizontalCard";
 import CmsRichText from "@/src/components/common/CmsRichText";
-import { APIResponseData } from "@/src/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { SolutionRetourExperience } from "@/src/lib/strapi/types/api/solution-retour-experience";
 
 type SolutionRetourExperienceCardProps = {
-  solution: APIResponseData<"api::solution-retour-experience.solution-retour-experience">;
+  solution: SolutionRetourExperience;
   className?: string;
   displayFicheSolutionCard?: boolean;
 };
@@ -32,7 +32,7 @@ export default async function SolutionRetourExperienceCard({
           <CmsRichText label={solution.attributes.description || ""} />
           {!displayFicheSolutionCard && solution.attributes.fiche_solution?.data && (
             <FicheSolutionSmallHorizontalCard
-              ficheSolution={solution.attributes.fiche_solution}
+              ficheSolution={solution.attributes.fiche_solution.data}
               className={"mb-4 hidden md:flex"}
             />
           )}
@@ -40,7 +40,7 @@ export default async function SolutionRetourExperienceCard({
       </div>
       {!displayFicheSolutionCard && solution.attributes.fiche_solution?.data && (
         <FicheSolutionSmallHorizontalCard
-          ficheSolution={solution.attributes.fiche_solution}
+          ficheSolution={solution.attributes.fiche_solution.data}
           className={"mb-9 block md:hidden"}
         />
       )}

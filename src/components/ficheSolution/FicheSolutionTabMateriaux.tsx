@@ -1,26 +1,26 @@
 import Image from "next/image";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import entretienIcon from "../../../public/images/fiches-solutions/entretien.svg";
-import { GetValues } from "@/src/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export default function FicheSolutionTabMateriaux({
-  ficheSolution,
+  ficheAttributes,
 }: {
-  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+  ficheAttributes: FicheSolution["attributes"];
 }) {
   const displayEntretienPanel =
-    ficheSolution.cout_minimum_entretien != null && ficheSolution.cout_maximum_entretien != null;
+    ficheAttributes.cout_minimum_entretien != null && ficheAttributes.cout_maximum_entretien != null;
 
   return (
     <div>
       <div className="mb-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Matériaux et coûts</div>
-      {ficheSolution.materiaux?.data && ficheSolution.materiaux.data.length > 0 ? (
+      {ficheAttributes.materiaux?.data && ficheAttributes.materiaux.data.length > 0 ? (
         <>
           <hr className="h-[1px] p-0" />
-          {ficheSolution.materiaux.data.map(({ attributes: mat }) => (
+          {ficheAttributes.materiaux.data.map(({ attributes: mat }) => (
             <div key={mat.titre}>
               <div className={"flex flex-col justify-between gap-1 md:flex-row md:gap-6"}>
                 <div className="relative mt-8 hidden h-28 w-28 flex-none md:flex">
@@ -88,9 +88,9 @@ export default function FicheSolutionTabMateriaux({
                 </div>
                 <div className="mb-2 text-2xl font-bold">{"Coût d'entretien"}</div>
               </div>
-              {ficheSolution.cout_entretien_description && (
+              {ficheAttributes.cout_entretien_description && (
                 <div className="flex grow text-sm">
-                  <CmsRichText label={ficheSolution.cout_entretien_description} />
+                  <CmsRichText label={ficheAttributes.cout_entretien_description} />
                 </div>
               )}
             </div>
@@ -101,9 +101,9 @@ export default function FicheSolutionTabMateriaux({
               }
             >
               <div>
-                <b>{`${formatNumberWithSpaces(ficheSolution.cout_minimum_entretien)} - 
-                ${formatNumberWithSpaces(ficheSolution.cout_maximum_entretien)} € `}</b>
-                HT / {getUniteCoutFromCode(ficheSolution.cout_entretien_unite).unitLabel}{" "}
+                <b>{`${formatNumberWithSpaces(ficheAttributes.cout_minimum_entretien)} - 
+                ${formatNumberWithSpaces(ficheAttributes.cout_maximum_entretien)} € `}</b>
+                HT / {getUniteCoutFromCode(ficheAttributes.cout_entretien_unite).unitLabel}{" "}
               </div>
               <div className="text-sm ">par an</div>
             </div>

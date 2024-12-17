@@ -1,9 +1,9 @@
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { RetourExperienceContent } from "./projet-retour-experience-content";
-import { RetourExperienceResponse } from "../ficheSolution/type";
 import { GET_REX_BY_SLUG } from "@/src/helpers/routes";
 // eslint-disable-next-line max-len
 import { SourcingRexContentSeeProjetModalSkeleton } from "../sourcing/side-panel/sourcing-rex-content-see-projet-modal-skeleton";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
 type RetourExperienceProps = {
   retourExperienceSlug: string;
@@ -11,7 +11,7 @@ type RetourExperienceProps = {
 };
 
 export function RetourExperienceWithFetcher({ retourExperienceSlug, isModal }: RetourExperienceProps) {
-  const { data: retourExperience } = useImmutableSwrWithFetcher<RetourExperienceResponse>(
+  const { data: retourExperience } = useImmutableSwrWithFetcher<RetourExperience>(
     GET_REX_BY_SLUG(retourExperienceSlug),
   );
 
