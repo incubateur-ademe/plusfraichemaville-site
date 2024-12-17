@@ -19,15 +19,18 @@ export const useAiChatControls = () => {
   const { width, height } = useWindowSize();
   const expandChat = () => setExpand(!expand);
   const minimizeChat = () => setExpand(false);
-  const openChat = () => setIsOpen(true);
+  const toggle = () => setIsOpen(!isOpen);
   const closeChat = () => {
     setIsOpen(false);
     setExpand(false);
   };
 
-  const chatController = {
+  const controllers = {
     isOpen,
-    toggle: isOpen ? closeChat : openChat,
+    toggle,
+    expandChat,
+    closeChat,
+    minimizeChat,
   };
 
   useEffect(() => {
@@ -49,5 +52,5 @@ export const useAiChatControls = () => {
     [expand, isOpen, height, width],
   );
 
-  return { isOpen, closeChat, expandChat, displayOptions, chatController };
+  return { displayOptions, controllers };
 };

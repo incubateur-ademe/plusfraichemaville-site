@@ -4,20 +4,20 @@ import { OPEN_ZEPHYR } from "@/src/helpers/matomo/matomo-tags";
 import { AgentButtonPicto } from "./agent-button-picto";
 
 type AgentButtonProps = {
-  chatController: {
+  controllers: {
     isOpen: boolean;
     toggle: () => void;
   };
 };
 
-export const AgentButton = ({ chatController }: AgentButtonProps) => {
+export const AgentButton = ({ controllers }: AgentButtonProps) => {
   const onClick = () => {
     trackEvent(OPEN_ZEPHYR);
-    chatController.toggle();
+    controllers.toggle();
   };
   return (
     <button
-      disabled={chatController.isOpen}
+      disabled={controllers.isOpen}
       onClick={onClick}
       className={clsx(
         "fixed right-0 top-80 flex h-14 w-32 items-center gap-3 !bg-pfmv-navy px-3",
