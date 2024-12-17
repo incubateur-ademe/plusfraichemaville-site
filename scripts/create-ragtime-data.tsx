@@ -85,10 +85,7 @@ const strapiRetourExperienceToRagtime = (strapiRetourExperience: RetourExperienc
     situation_apres: strapiRetourExperienceAttributes.situation_apres?.description ?? "",
     solutions:
       strapiRetourExperienceAttributes.solution_retour_experiences?.data
-        .map(
-          (sol: { attributes: { titre: any; description: any } }) =>
-            `${sol.attributes.titre} ${sol.attributes.description}`,
-        )
+        .map((sol) => `${sol.attributes.titre} ${sol.attributes.description}`)
         .join(" | ") ?? "",
     temporalite: getTemporaliteLabelFromCode(strapiRetourExperienceAttributes.temporalite) ?? "",
     echelle: strapiRetourExperienceAttributes.echelle ?? "",
@@ -114,24 +111,21 @@ const strapiFicheSolutionToRagtime = (strapiFicheSolution: FicheSolutionResponse
     rafraichissement_attendu: strapiFicheSolutionAttributes.rafraichissement_attendu_description ?? "",
     etapes_mises_en_oeuvre:
       strapiFicheSolutionAttributes.etapes_mise_en_oeuvre
-        ?.map((etapeMeo: { titre: any; description: any }) => `${etapeMeo.titre} - ${etapeMeo.description}`)
+        ?.map((etapeMeo) => `${etapeMeo.titre} - ${etapeMeo.description}`)
         .join(" | ") ?? "",
     etapes_diagnostic:
       strapiFicheSolutionAttributes.etapes_diagnostic
-        ?.map((etape: { titre: any; description: any }) => `${etape.titre} - ${etape.description}`)
+        ?.map((etape) => `${etape.titre} - ${etape.description}`)
         .join(" | ") ?? "",
     etapes_entretien:
       strapiFicheSolutionAttributes.etapes_entretien
-        ?.map((etape: { titre: any; description: any }) => `${etape.titre} - ${etape.description}`)
+        ?.map((etape) => `${etape.titre} - ${etape.description}`)
         .join(" | ") ?? "",
     point_vigilance: strapiFicheSolutionAttributes.point_vigilance ?? "",
     description: strapiFicheSolutionAttributes.description,
     materiaux:
       strapiFicheSolutionAttributes.materiaux?.data
-        .map(
-          (materiau: { attributes: { titre: any; description: any } }) =>
-            `${materiau.attributes.titre} - ${materiau.attributes.description}`,
-        )
+        .map((materiau) => `${materiau.attributes.titre} - ${materiau.attributes.description}`)
         .join(" | ") ?? "",
     cobenefices:
       strapiFicheSolutionAttributes.cobenefices?.data
@@ -168,7 +162,7 @@ const strapiFicheDiagnosticToRagtime = (strapiFicheDiagnostic: FicheDiagnosticRe
     points_vigilance: strapiFicheDiagAttributes.vigilance_description,
     etapes_mise_en_oeuvre:
       strapiFicheDiagAttributes.etapes_mise_en_oeuvre
-        ?.map((etapeMeo: { titre: any; description: any }) => `${etapeMeo.titre} - ${etapeMeo.description}`)
+        ?.map((etapeMeo) => `${etapeMeo.titre} - ${etapeMeo.description}`)
         .join(" | ") ?? "",
 
     cout_max: strapiFicheDiagAttributes.cout_max,
