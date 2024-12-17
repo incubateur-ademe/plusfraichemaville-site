@@ -7,7 +7,6 @@ import clsx from "clsx";
 import { AgentGreeting } from "./agent-greeting";
 import { useAiChatControls } from "./hooks/use-ai-chat-controls";
 import { AgentButton } from "./agent-button";
-
 import { AgentLoader } from "./agent-loader";
 import { AgentResponseRenderer } from "./renderers/agent-renderer-response";
 import { AgentPromptRenderer } from "./renderers/agent-renderer-prompt";
@@ -41,25 +40,6 @@ export const Agent = () => {
               promptRenderer: AgentPromptRenderer,
             }}
             initialConversation={initialConversation}
-            conversationOptions={{
-              conversationStarters: [
-                {
-                  prompt: "Je cherche une solution",
-                  icon: "/images/zephyr/cherche-solution.svg",
-                  label: "Je cherche une solution",
-                },
-                {
-                  prompt: "Je veux créer un projet",
-                  icon: "/images/zephyr/creation-projet.svg",
-                  label: "Je veux créer un projet",
-                },
-                {
-                  prompt: "Aide à la décision",
-                  icon: "/images/zephyr/aide-decision.svg",
-                  label: "Aide à la décision",
-                },
-              ],
-            }}
           >
             <AiChatUI.Loader>
               <AgentLoader />
