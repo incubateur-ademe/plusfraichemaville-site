@@ -18,7 +18,7 @@ const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.Age
 
 export const Agent = () => {
   const { adapter, api, initialConversation, conversationControls, error } = useAiChatConfig();
-  const { displayOptions, openChat, closeChat, expandChat } = useAiChatControls();
+  const { displayOptions, controllers } = useAiChatControls();
   const { width, height } = displayOptions.dimensions;
 
   return (
@@ -27,7 +27,7 @@ export const Agent = () => {
         className={clsx("agent-popover", "fixed z-[1000] bg-white text-sm", displayOptions.containerClassName)}
         style={{ width, height }}
       >
-        <AgentHeader closeChat={closeChat} expandChat={expandChat} conversationControls={conversationControls} />
+        <AgentHeader controllers={controllers} conversationControls={conversationControls} />
         <div className={clsx("relative mx-auto max-w-3xl")}>
           <AgentError error={error} />
           <AiChat
@@ -70,7 +70,7 @@ export const Agent = () => {
           </AiChat>
         </div>
       </div>
-      <AgentButton openChat={openChat} />
+      <AgentButton controllers={controllers} />
     </>
   );
 };

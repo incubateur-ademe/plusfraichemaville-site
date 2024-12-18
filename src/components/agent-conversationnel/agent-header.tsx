@@ -5,17 +5,14 @@ import { Case, Conditional } from "../common/conditional-renderer";
 import { Hidden } from "../common/hidden";
 
 type AgentHeaderProps = {
-  closeChat: () => void;
-  expandChat: () => void;
+  controllers: {
+    closeChat: () => void;
+    expandChat: () => void;
+  };
   conversationControls: ConversationControls;
 };
 
-export const AgentHeader = ({
-  closeChat,
-  expandChat,
-
-  conversationControls,
-}: AgentHeaderProps) => {
+export const AgentHeader = ({ controllers, conversationControls }: AgentHeaderProps) => {
   return (
     <div
       className={clsx(
@@ -47,11 +44,11 @@ export const AgentHeader = ({
           <span className="text-base font-bold text-pfmv-navy">Zéphyr</span>
         </div>
         <div className="flex items-center gap-4 text-pfmv-navy">
-          <button onClick={expandChat} className="hidden sm:block">
+          <button onClick={controllers.expandChat} className="hidden sm:block">
             <i className="ri-expand-diagonal-line"></i>
             <Hidden accessible>{"Agrandir/Réduire la fenêtre de l'agent conversationnel"}</Hidden>
           </button>
-          <button onClick={closeChat}>
+          <button onClick={controllers.closeChat}>
             <i className="ri-close-line"></i>
             <Hidden accessible>{"Fermer la fenêtre de l'agent conversationnel"}</Hidden>
           </button>
