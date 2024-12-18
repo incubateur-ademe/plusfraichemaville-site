@@ -11,9 +11,10 @@ import {
   STRAPI_IMAGE_FRAGMENT,
 } from "@/src/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
-import { APIResponseCollection, APIResponseData } from "@/src/lib/strapi/types/types";
 import { getHistoryFromAideDecisionEtape } from "@/src/lib/strapi/helpers/getHistoryFromAideDecision";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/src/lib/strapi/helpers/strapiArrayUtils";
+import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
+import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 
 const GET_FILTERED_AIDE_DECISION_ETAPE = (
   strapiFilter: StrapiFilter,
@@ -132,9 +133,7 @@ const GET_AIDE_DECISION_ETAPE_HISTORY = (strapiFilter: StrapiFilter) => `  ${STR
   }
 }`;
 
-export async function getAideDecisionFirstSteps(): Promise<
-  APIResponseData<"api::aide-decision-etape.aide-decision-etape">[]
-> {
+export async function getAideDecisionFirstSteps(): Promise<AideDecisionEtape[]> {
   const filter = new StrapiFilter(
     true,
     [
@@ -148,27 +147,23 @@ export async function getAideDecisionFirstSteps(): Promise<
   );
   const apiResponse = (
     await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter), { tag: "aide-decision-first-step" })
-  )?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+  )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getAllAideDecisionSlugs(): Promise<
-  APIResponseData<"api::aide-decision-etape.aide-decision-etape">[]
-> {
+export async function getAllAideDecisionSlugs(): Promise<AideDecisionEtape[]> {
   const filter = new StrapiFilter(true, []);
   const apiResponse = (
     await strapiGraphQLCall(GET_ALL_AIDE_DECISION_ETAPE_SLUG(filter), { tag: "get-all-aide-decision" })
-  )?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+  )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getAideDecisionBySlug(
-  slug: string,
-): Promise<APIResponseData<"api::aide-decision-etape.aide-decision-etape"> | null> {
+export async function getAideDecisionBySlug(slug: string): Promise<AideDecisionEtape | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (
     await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter), { tag: `get-decision-by-slug-${slug}` })
-  )?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+  )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
   return safeReturnStrapiEntity(apiResponse);
 }
 
@@ -189,9 +184,9 @@ export async function getAideDecisionHistoryBySlug(
       await strapiGraphQLCall(GET_AIDE_DECISION_ETAPE_HISTORY(filter), {
         tag: `get-aide-decision-history-by-slug-${slug}`,
       })
-    )?.aideDecisionEtapes as APIResponseCollection<"api::aide-decision-etape.aide-decision-etape">;
+    )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
     if (apiResponse?.data?.length > 0) {
-      return getHistoryFromAideDecisionEtape(apiResponse.data[0].attributes, includeCurrentStep);
+      return getHistoryFromAideDecisionEtape(apiResponse.data[0], includeCurrentStep);
     }
   }
   return null;

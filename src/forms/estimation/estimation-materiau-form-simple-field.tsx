@@ -3,8 +3,6 @@ import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { FicheSolutionResponse } from "@/src/components/ficheSolution/type";
-
 import Button from "@codegouvfr/react-dsfr/Button";
 
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
@@ -22,6 +20,7 @@ import {
   getLabelCoutEntretienByQuantite,
   getLabelCoutFournitureByQuantite,
 } from "@/src/helpers/cout/cout-fiche-solution";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export default function EstimationMateriauSimpleFieldForm({
   ficheSolution,
@@ -32,7 +31,7 @@ export default function EstimationMateriauSimpleFieldForm({
   onUpdateEstimation,
   estimationMateriaux,
 }: {
-  ficheSolution: FicheSolutionResponse;
+  ficheSolution: FicheSolution;
   estimationMateriaux?: EstimationMateriauxFicheSolution;
   estimationId: number;
   onNext: () => void;
@@ -100,7 +99,7 @@ export default function EstimationMateriauSimpleFieldForm({
   return (
     <>
       <form id={`estimation-fiche-solution-${ficheSolution.id}`} onSubmit={form.handleSubmit((data) => onSubmit(data))}>
-        <EstimationMateriauFieldUnique ficheSolution={ficheSolution.attributes}>
+        <EstimationMateriauFieldUnique ficheSolutionAttributes={ficheSolution.attributes}>
           <InputFormField
             label={getUniteCoutFromCode(ficheSolution.attributes.cout_unite).estimationLabel}
             type="number"

@@ -1,17 +1,15 @@
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { FicheSolutionResponse } from "../ficheSolution/type";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
 import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const urls = projet?.fiches_solutions_id ?? [];
 
-  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
-    makeFicheSolutionCompleteUrlApi(urls),
-  );
+  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionCompleteUrlApi(urls));
 
   const fichesSolutions = data?.map((fs) => fs?.attributes.fiches_solutions_complementaires);
 
@@ -21,7 +19,7 @@ export const TableauDeBordRecommandation = () => {
     } else {
       return acc;
     }
-  }, [] as FicheSolutionResponse[]);
+  }, [] as FicheSolution[]);
 
   const filteredFichesSolutionsComplementaires = fichesSolutionsComplementaires?.filter(
     (currentElement, currentIndex, array) =>

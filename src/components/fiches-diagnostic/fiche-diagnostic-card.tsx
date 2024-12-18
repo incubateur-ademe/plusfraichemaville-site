@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { FicheDiagnosticResponse } from "./types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
@@ -10,10 +9,11 @@ import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/src/components/fiches-diagnostic/filters/methode";
 import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 type FicheDiagnosticCardProps = {
   vertical?: boolean;
-  ficheDiagnostic: FicheDiagnosticResponse;
+  ficheDiagnostic: FicheDiagnostic;
 };
 
 export const FicheDiagnosticCard = ({ ficheDiagnostic, vertical }: FicheDiagnosticCardProps) => {

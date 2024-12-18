@@ -2,9 +2,9 @@
 
 import { safeReturnStrapiEntities } from "../helpers/strapiArrayUtils";
 import { strapiGraphQLCall } from "../strapiClient";
-import { APIResponseCollection } from "../types/types";
+import { APIResponseCollection } from "../types/strapi-custom-types";
 import { StrapiFilter } from "./commonStrapiFilters";
-import { WebinaireResponse } from "@/src/components/webinaires/types";
+import { Webinaire } from "@/src/lib/strapi/types/api/webinaire";
 
 export const GET_WEBINAIRES = async (strapiFilter: StrapiFilter) => `query {
   webinaires ${strapiFilter.wholeFilterString()} {
@@ -23,13 +23,13 @@ export const GET_WEBINAIRES = async (strapiFilter: StrapiFilter) => `query {
   }
 }`;
 
-export async function getAllWebinaires(): Promise<WebinaireResponse[] | []> {
+export async function getAllWebinaires(): Promise<Webinaire[] | []> {
   const filter = new StrapiFilter(true, [], { attribute: "jour_evenement", order: "asc" });
   const apiResponse = (
     await strapiGraphQLCall(await GET_WEBINAIRES(filter), {
       tag: `webinaires`,
     })
-  )?.webinaires as APIResponseCollection<"api::webinaire.webinaire">;
+  )?.webinaires as APIResponseCollection<Webinaire>;
 
   return safeReturnStrapiEntities(apiResponse);
 }

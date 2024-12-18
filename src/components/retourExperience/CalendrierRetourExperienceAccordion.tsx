@@ -1,12 +1,12 @@
 import Accordion from "@codegouvfr/react-dsfr/Accordion";
 import CmsRichText from "@/src/components/common/CmsRichText";
-import { GetValues } from "@/src/lib/strapi/types/types";
+import { Calendrier } from "@/src/lib/strapi/types/components/retour-experience/Calendrier";
 
 export default async function CalendrierRetourExperienceAccordion({
   etapes,
   className,
 }: {
-  etapes: GetValues<"retour-experience.calendrier">[];
+  etapes: Calendrier[];
   className?: string;
 }) {
   return etapes.map((etape, index) => (

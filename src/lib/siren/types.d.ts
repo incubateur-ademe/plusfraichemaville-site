@@ -16,10 +16,6 @@ interface IApiSirenQuery {
   };
 }
 
-export interface IApiSirenQueryToken extends IApiSirenQuery {
-  access_token: string;
-}
-
 export interface IApiSirenQueryTypes extends IApiSirenQuery {
   etablissement?: {
     adresseEtablissement: { codePostalEtablissement: string | null; codeCommuneEtablissement: string | null };

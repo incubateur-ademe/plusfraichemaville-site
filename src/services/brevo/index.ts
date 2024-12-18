@@ -1,13 +1,22 @@
-import { createEmail, updateEmailStatus as updateEmailStatusQuery } from "@/src/lib/prisma/prisma-email-queries";
+import {
+  createEmail,
+  getUserWithNoActivityAfterSignup,
+  updateEmailStatus as updateEmailStatusQuery,
+} from "@/src/lib/prisma/prisma-email-queries";
 import { email, emailStatus, emailType } from "@prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
 import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
-import { UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelations, UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
+import { getProjetsForProjetCreationEmail } from "@/src/lib/prisma/prismaProjetQueries";
+import { daysUntilDate } from "@/src/helpers/dateUtils";
+import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
+import shuffle from "lodash/shuffle";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
 interface Templates {
   templateId: number;
@@ -22,6 +31,44 @@ export type EmailProjetPartageConfig = {
   projetCollectiviteName: string;
   link: string;
   destinationMail: string;
+};
+
+export type EmailProjetCreationParam = {
+  nomUtilisateur: string;
+  nomProjet: string;
+  rex1Titre?: string;
+  rex1Url?: string;
+  rex2Titre?: string;
+  rex2Url?: string;
+  rex3Titre?: string;
+  rex3Url?: string;
+  rex4Titre?: string;
+  rex4Url?: string;
+};
+
+const computeProjetCreationEmailParam = (
+  projet: ProjetWithRelations,
+  rexExamples: RetourExperience[],
+): EmailProjetCreationParam => {
+  if (rexExamples.length < 3) {
+    return {
+      nomProjet: projet.nom,
+      nomUtilisateur: projet.creator.nom || "",
+    };
+  } else {
+    return {
+      nomProjet: projet.nom,
+      nomUtilisateur: projet.creator.nom || "",
+      rex1Titre: rexExamples[0].attributes.titre,
+      rex1Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rexExamples[0].attributes.slug)),
+      rex2Titre: rexExamples[1].attributes.titre,
+      rex2Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rexExamples[1].attributes.slug)),
+      rex3Titre: rexExamples[2].attributes.titre,
+      rex3Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rexExamples[2].attributes.slug)),
+      rex4Titre: rexExamples[3]?.attributes.titre,
+      ...(rexExamples[3] && { rex4Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rexExamples[3]?.attributes.slug)) }),
+    };
+  }
 };
 
 export class EmailService {
@@ -44,6 +91,15 @@ export class EmailService {
       contactMessageSent: {
         templateId: 45,
       },
+      welcomeMessage: {
+        templateId: 52,
+      },
+      projetCreation: {
+        templateId: 54,
+      },
+      noActivityAfterSignup: {
+        templateId: 53,
+      },
     };
   }
 
@@ -57,16 +113,18 @@ export class EmailService {
     params,
     userProjetId,
     extra,
+    userId,
   }: {
     to: string;
     emailType: emailType;
     params?: Record<string, string>;
     userProjetId?: number;
+    userId?: string;
     extra?: any;
   }): Promise<EmailSendResult> {
     const { templateId } = this.templates[emailType];
+    const dbEmail = await createEmail({ to, emailType, userProjetId, userId, extra });
 
-    const dbEmail = await createEmail(to, emailType, userProjetId, extra);
     try {
       const response = await brevoSendEmail(to, templateId, params);
 
@@ -77,8 +135,7 @@ export class EmailService {
 
       const data = await response.json();
 
-      let email = null;
-      email = await this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId);
+      const email = await this.updateEmailStatus(dbEmail.id, emailStatus.SUCCESS, data.messageId);
 
       return { type: "success", message: "EMAIL_SENT", email };
     } catch (error) {
@@ -161,5 +218,66 @@ export class EmailService {
 
   async sendContactMessageReceivedEmail(data: ContactFormData) {
     return this.sendEmail({ to: data.email, emailType: emailType.contactMessageSent, extra: data });
+  }
+
+  async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom">) {
+    return this.sendEmail({
+      to: data.email,
+      emailType: emailType.welcomeMessage,
+      params: { NOM: data.nom },
+      extra: data,
+    });
+  }
+
+  async sendProjetCreationEmail(lastSyncDate: Date) {
+    const projets = await getProjetsForProjetCreationEmail(lastSyncDate, new Date());
+    console.log(`Nb de mails de création de projet à envoyer : ${projets.length}`);
+    const allRex = await getRetoursExperiences();
+    const shuffledRex = shuffle(allRex);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const rexExamples = shuffledRex
+          // @ts-ignore
+          .filter((rex) => rex.attributes.types_espaces?.includes(projet.type_espace))
+          .slice(0, 4);
+        const emailParams = computeProjetCreationEmailParam(projet, rexExamples);
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetCreation,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === "ADMIN")?.id,
+        });
+      }),
+    );
+  }
+
+  async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
+    const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
+
+    if (!users?.length) {
+      return { message: "Aucun utilisateur trouvé." };
+    } else {
+      const results = await Promise.all(
+        users.map(async (user) => {
+          const result = await this.sendEmail({
+            to: user.email,
+            userId: user.id,
+            emailType: emailType.noActivityAfterSignup,
+            params: {
+              nom: user.nom || "",
+              dateCreationCompte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
+            },
+          });
+
+          if (result.type === "success") {
+            console.log(`Email envoyé à ${user.email} - type: ${emailType.noActivityAfterSignup}`);
+          }
+
+          return result;
+        }),
+      );
+      return results;
+    }
   }
 }

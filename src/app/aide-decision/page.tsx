@@ -18,7 +18,7 @@ export default async function Posts() {
             <ul className="flex list-none flex-wrap justify-center gap-6 ">
               {aideDecisionFirstSteps.map((aideDecision) => (
                 <li key={aideDecision.id} className="flex justify-center p-0">
-                  <AideDecisionFirstStepEtapeCard aideDecisionEtape={aideDecision.attributes} />
+                  <AideDecisionFirstStepEtapeCard etapeAttributes={aideDecision.attributes} />
                 </li>
               ))}
             </ul>

@@ -1,5 +1,3 @@
-export const isProduction = process.env.NODE_ENV === "production";
-
 export const generateRandomId = () => Math.floor(Math.random() * 900000000) + 100000000;
 
 /**
@@ -24,15 +22,6 @@ export const highlightedIconClass = (typeFiche: TypeFiche) =>
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
 
 export const nullFunctionalComponent = () => <></>;
-
-export const daysUntilDate = (targetDate: Date | null): number | null => {
-  if (!targetDate) {
-    return null;
-  }
-  const MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-  return Math.ceil((targetDate.getTime() - new Date().getTime()) / MS_PER_DAY);
-};
 
 export const extractNameInitiales = (name: string) => {
   const match = name.match(/^[^\s-]+|\S+$/g);

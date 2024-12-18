@@ -1,38 +1,38 @@
 import { getCoutFiche, getLabelCoutFourniture } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
-import { GetValues } from "@/src/lib/strapi/types/types";
 import { getPorteeBaisseTemperatureLabelFromCode } from "@/src/helpers/porteeBaisseTemperatureFicheSolution";
 import baisseICUIcon from "../../../public/images/fiches-solutions/picto-thermometre.svg";
 import Image from "next/image";
 import { TypeFiche } from "@/src/helpers/common";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export default function FicheSolutionInfoComparatif({
-  ficheSolution,
+  ficheAttributes,
   className,
   temperatureFormat,
 }: {
-  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+  ficheAttributes: FicheSolution["attributes"];
   className?: string;
   temperatureFormat: "large" | "small";
 }) {
   const delaiTravaux = getDelaiTravauxFiche(
     TypeFiche.solution,
-    ficheSolution.delai_travaux_minimum,
-    ficheSolution.delai_travaux_maximum,
+    ficheAttributes.delai_travaux_minimum,
+    ficheAttributes.delai_travaux_maximum,
   );
   const cout = getCoutFiche(
     TypeFiche.solution,
-    ficheSolution.cout_minimum,
-    ficheSolution.cout_maximum,
-    ficheSolution.cout_unite,
+    ficheAttributes.cout_minimum,
+    ficheAttributes.cout_maximum,
+    ficheAttributes.cout_unite,
   );
 
   return (
     <div className={`${className}`}>
-      {!!ficheSolution.baisse_temperature && (
+      {!!ficheAttributes.baisse_temperature && (
         <div className="mb-2 mt-6 flex w-full flex-row justify-between">
           <div className="mr-4 mt-auto text-dsfr-text-mention-grey">
-            {getPorteeBaisseTemperatureLabelFromCode(ficheSolution.portee_baisse_temperature)}
+            {getPorteeBaisseTemperatureLabelFromCode(ficheAttributes.portee_baisse_temperature)}
           </div>
           <div className="float-right text-right">
             <div
@@ -40,14 +40,14 @@ export default function FicheSolutionInfoComparatif({
                 temperatureFormat === "large" ? "text-[2.5rem] leading-[2.5rem] " : "text-[2rem] leading-8"
               }`}
             >
-              {`-${ficheSolution.baisse_temperature?.toLocaleString("fr")}°C`}
+              {`-${ficheAttributes.baisse_temperature?.toLocaleString("fr")}°C`}
             </div>
           </div>
         </div>
       )}
-      {!ficheSolution.baisse_temperature && (
+      {!ficheAttributes.baisse_temperature && (
         <div className="mb-2 mt-6 flex w-full flex-row justify-between">
-          <div className="mr-4 mt-auto text-dsfr-text-mention-grey">{ficheSolution.libelle_avantage_solution}</div>
+          <div className="mr-4 mt-auto text-dsfr-text-mention-grey">{ficheAttributes.libelle_avantage_solution}</div>
           <div className="float-right flex-none text-right">
             <Image
               className={temperatureFormat === "large" ? "h-12 w-12" : "h-10 w-10"}
@@ -63,7 +63,7 @@ export default function FicheSolutionInfoComparatif({
         <div className="inline-block w-full">
           <div className="float-left text-base">{delaiTravaux?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
           <div className="float-right mt-1 text-dsfr-text-mention-grey">
-            {`de ${ficheSolution.delai_travaux_minimum} à ${ficheSolution.delai_travaux_maximum} mois`}
+            {`de ${ficheAttributes.delai_travaux_minimum} à ${ficheAttributes.delai_travaux_maximum} mois`}
           </div>
         </div>
       </div>
@@ -74,7 +74,7 @@ export default function FicheSolutionInfoComparatif({
           <div className="float-left">
             <div className="float-left text-base">{cout?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
           </div>
-          <div className="float-right mt-1 text-dsfr-text-mention-grey">{getLabelCoutFourniture(ficheSolution)}</div>
+          <div className="float-right mt-1 text-dsfr-text-mention-grey">{getLabelCoutFourniture(ficheAttributes)}</div>
         </div>
       </div>
     </div>

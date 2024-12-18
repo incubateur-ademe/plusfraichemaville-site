@@ -1,5 +1,4 @@
 import Badge from "@codegouvfr/react-dsfr/Badge";
-import { RetourExperienceResponse } from "../../ficheSolution/type";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { SourcingContactCard } from "../contacts/sourcing-contact-card";
 import { Case, Conditional, Default } from "../../common/conditional-renderer";
@@ -11,8 +10,9 @@ import Tag from "@codegouvfr/react-dsfr/Tag";
 import { SourcingRexContentSeeProject } from "./sourcing-rex-content-see-project";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { SourcingSidePanelTracking } from "./sourcing-side-panel-tracking";
+import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
-export const SourcingRexContent = ({ data }: { data: RetourExperienceResponse }) => {
+export const SourcingRexContent = ({ data }: { data: RetourExperience }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const retourExperienceAttributes = data.attributes;
   const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>

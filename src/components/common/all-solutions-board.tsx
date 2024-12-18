@@ -3,8 +3,8 @@ import {
   TYPE_SOLUTION_BLEUE,
   TYPE_SOLUTION_GRISE,
   TYPE_SOLUTION_DOUCE,
-  TypeSolution,
-} from "@/src/helpers/typeSolution";
+  TypeFicheSolution,
+} from "@/src/helpers/type-fiche-solution";
 import Image from "next/image";
 
 export const AllSolutionsBoard = () => {
@@ -24,7 +24,7 @@ export const AllSolutionsBoard = () => {
   );
 };
 
-export const HomeSolutionExplanationCard = ({ typeSolution }: { typeSolution: TypeSolution }) => {
+export const HomeSolutionExplanationCard = ({ typeSolution }: { typeSolution: TypeFicheSolution }) => {
   return (
     <div className="flex w-72 flex-col items-center rounded-2xl bg-dsfr-background-default-grey">
       <div className="flex h-40 w-full">

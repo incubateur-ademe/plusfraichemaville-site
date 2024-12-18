@@ -33,7 +33,8 @@ export const createHubspotTicket = async (data: ContactFormData) => {
   const SimplePublicObjectInputForCreate = {
     properties,
   };
-  await hubspotClient.crm.tickets.basicApi.create(SimplePublicObjectInputForCreate);
+  const ticket = await hubspotClient.crm.tickets.basicApi.create(SimplePublicObjectInputForCreate);
+  return ticket;
 };
 const HUBSPOT_BATCH_LIMIT = 99;
 

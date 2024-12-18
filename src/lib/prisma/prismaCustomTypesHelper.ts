@@ -1,8 +1,8 @@
-import { MateriauResponse } from "@/src/components/ficheSolution/type";
 import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 
 export const mapStrapiEstimationMateriauxToFormValues = (
-  ficheSolutionMateriaux: MateriauResponse[] | undefined,
+  ficheSolutionMateriaux: Materiau[] | undefined,
   defaultEstimationMateriaux: EstimationMateriauxFicheSolution | undefined,
 ) => {
   return ficheSolutionMateriaux?.map((materiau) => ({

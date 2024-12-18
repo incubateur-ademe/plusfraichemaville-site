@@ -3,10 +3,10 @@ import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { useCallback } from "react";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import { FicheSolutionResponse } from "@/src/components/ficheSolution/type";
 import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationMateriauxFicheSolution;
@@ -17,7 +17,7 @@ export function EstimationMateriauxFicheSolutionRecap({
   ficheSolutionEstimation,
   goToFicheSolutionStep,
 }: EstimationMateriauxFicheSolutionRecapProps) {
-  const { data } = useImmutableSwrWithFetcher<FicheSolutionResponse[]>(
+  const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(
     makeFicheSolutionCompleteUrlApi(ficheSolutionEstimation.ficheSolutionId),
   );
 

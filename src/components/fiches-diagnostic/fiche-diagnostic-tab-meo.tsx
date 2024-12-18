@@ -1,8 +1,8 @@
 import CmsRichText from "../common/CmsRichText";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
-import { FicheDiagnosticResponseAttributes } from "./types";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
-export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: FicheDiagnosticResponseAttributes }) => {
+export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: FicheDiagnostic["attributes"] }) => {
   const meo = attributes.etapes_mise_en_oeuvre;
 
   return (
