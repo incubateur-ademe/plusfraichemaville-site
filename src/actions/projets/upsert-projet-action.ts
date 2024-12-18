@@ -10,6 +10,8 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { $Enums, EventType } from "@prisma/client";
+import ReferenceType = $Enums.ReferenceType;
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
@@ -62,9 +64,26 @@ export const upsertProjetAction = async (
           context: {
             maturite: updatedProjet.niveau_maturite,
           },
-          event_type: "UPDATE_MATURITE",
+          event_type: EventType.UPDATE_MATURITE,
           reference_id: updatedProjet?.id,
-          reference_type: "PROJET",
+          reference_type: ReferenceType.PROJET,
+          user_id: session.user.id,
+        });
+      }
+
+      const isUpdatingExistingProjet = !!data.projetId;
+      if (
+        updatedProjet &&
+        ((isUpdatingExistingProjet && projetToEdit?.is_public !== updatedProjet.is_public) ||
+          (!isUpdatingExistingProjet && data.isPublic))
+      ) {
+        await createAnalytic({
+          context: null,
+          event_type: updatedProjet.is_public
+            ? EventType.UPDATE_PROJET_SET_VISIBLE
+            : EventType.UPDATE_PROJET_SET_INVISIBLE,
+          reference_id: updatedProjet?.id,
+          reference_type: ReferenceType.PROJET,
           user_id: session.user.id,
         });
       }

@@ -267,7 +267,7 @@ export const createOrUpdateProjet = async ({
 };
 
 export const deleteProjet = async (projetId: number, userId: string) => {
-  prismaClient.estimation
+  return prismaClient.estimation
     .updateMany({
       where: {
         projet_id: projetId,
