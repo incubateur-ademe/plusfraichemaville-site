@@ -14,7 +14,7 @@
     "dev:start": "next dev",
     "clean": "rm -rf ./.next && rm -rf ./node_modules",
     "build": "next build",
-    "start": "node .next/standalone/server.js",
+    "start": "next start",
     "lint": "next lint",
     "prettier": "npx prettier --check . --ignore-path .prettierignore",
     "fixPrettier": "prettier . --write",
