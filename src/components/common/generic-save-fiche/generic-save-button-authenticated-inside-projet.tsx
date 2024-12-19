@@ -5,7 +5,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
-import { useUserStore } from "@/src/stores/user/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
   const isSolution = props.type === "solution";
@@ -27,10 +27,9 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
 
   const assets = selectSavedOrUnsavedAssets(isSaved ?? false, "projet");
 
-  const userId = useUserStore((state) => state.userInfos?.id);
-  const isCurentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(userId));
+  const canEditProjet = useCanEditProjet(projet?.id);
 
-  if (!isCurentUserAdmin) {
+  if (!canEditProjet) {
     return null;
   }
 
