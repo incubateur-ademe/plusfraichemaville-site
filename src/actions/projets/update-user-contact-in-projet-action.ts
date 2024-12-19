@@ -8,6 +8,7 @@ import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries
 import { addContactToProjet, deleteContactFromProjet } from "@/src/lib/prisma/prisma-projet-sourcing-contact-queries";
 import { getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { TypeUpdate } from "@/src/helpers/common";
+import { Prisma } from "@prisma/client";
 
 export const updateUserContactInProjetAction = async (
   projetId: number,
@@ -31,7 +32,13 @@ export const updateUserContactInProjetAction = async (
     if (typeUpdate === TypeUpdate.add) {
       await addContactToProjet(projetId, userProjetId, session.user.id);
     } else {
-      await deleteContactFromProjet(projetId, userProjetId);
+      try {
+        await deleteContactFromProjet(projetId, userProjetId);
+      } catch (e) {
+        if (!(e instanceof Prisma.PrismaClientKnownRequestError) || e.code !== "P2025") {
+          throw e;
+        }
+      }
     }
     const updatedProjet = await getProjetWithRelationsById(projetId);
     return { type: "success", projet: updatedProjet };
