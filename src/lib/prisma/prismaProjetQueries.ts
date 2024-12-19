@@ -1,7 +1,7 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
-import { generateRandomId } from "@/src/helpers/common";
+import { generateRandomId, TypeUpdate } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/sourcing/types";
 
@@ -85,6 +85,7 @@ export const updateFichesProjet = async (
   ficheId: number,
   userId: string,
   type: "solution" | "diagnostic",
+  typeUpdate: TypeUpdate,
 ): Promise<ProjetWithRelations | null> => {
   const projet = await getProjetById(projetId);
   const selectedFichesInProjet = type === "solution" ? projet?.fiches_solutions_id : projet?.fiches_diagnostic_id;
@@ -95,10 +96,10 @@ export const updateFichesProjet = async (
     updatedRecommandationsViewed = recommandationsViewedUserIds.filter((currentUserId) => currentUserId !== userId);
   }
 
-  const isAlreadySaved = selectedFichesInProjet?.includes(+ficheId);
-  const fichesUpdated = isAlreadySaved
-    ? selectedFichesInProjet?.filter((currentFicheId) => currentFicheId !== +ficheId)
-    : selectedFichesInProjet && Array.from(new Set([...selectedFichesInProjet, +ficheId]));
+  let fichesUpdated = selectedFichesInProjet?.filter((currentFicheId) => currentFicheId !== +ficheId) || [];
+  if (typeUpdate === TypeUpdate.add) {
+    fichesUpdated = [...fichesUpdated, +ficheId];
+  }
 
   return prismaClient.projet.update({
     where: {

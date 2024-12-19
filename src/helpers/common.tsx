@@ -16,6 +16,13 @@ export enum TypeFiche {
   diagnostic,
 }
 
+export enum TypeUpdate {
+  // eslint-disable-next-line no-unused-vars
+  add = "add",
+  // eslint-disable-next-line no-unused-vars
+  delete = "delete",
+}
+
 export const highlightedIconClass = (typeFiche: TypeFiche) =>
   typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-border-action-high-error";
 

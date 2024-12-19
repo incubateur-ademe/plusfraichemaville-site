@@ -11,6 +11,7 @@ import { Hidden } from "../hidden";
 import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
+import { TypeUpdate } from "@/src/helpers/common";
 
 export const ModalSaveModalAuthenticatedOutsideProjet = ({
   modal,
@@ -23,7 +24,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
 
   const validate = async () => {
     if (selectedProjetId > 0) {
-      const update = await updateFichesProjetAction(selectedProjetId, +ficheId, type);
+      const update = await updateFichesProjetAction(selectedProjetId, +ficheId, type, TypeUpdate.add);
       if (update.projet) {
         addOrUpdateProjet(update.projet);
       }
