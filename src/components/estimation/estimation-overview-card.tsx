@@ -16,10 +16,10 @@ import { useModalStore } from "@/src/stores/modal/provider";
 
 export const EstimationOverviewCard = ({
   estimation,
-  isCurrentUserAdmin,
+  canEditEstimation,
 }: {
   estimation: estimation;
-  isCurrentUserAdmin?: boolean;
+  canEditEstimation?: boolean;
 }) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
 
@@ -80,7 +80,7 @@ export const EstimationOverviewCard = ({
           <div>{`${entretienMin} - ${entretienMax} € HT / an`}</div>
         </div>
       </div>
-      {isCurrentUserAdmin && (
+      {canEditEstimation && (
         <div className="float-right mt-12 flex flex-row gap-6">
           <Button
             nativeButtonProps={estimationModal.buttonProps}

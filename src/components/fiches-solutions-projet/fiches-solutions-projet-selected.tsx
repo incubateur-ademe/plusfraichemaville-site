@@ -5,8 +5,7 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
-import { useUserStore } from "@/src/stores/user/provider";
-import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 type FichesSolutionsProjetsSelectedProps = {
   selectedFichesSolutionsIds?: number[];
@@ -18,8 +17,7 @@ export const FichesSolutionsProjetsSelected = ({
   selectedFichesSolutionsIds,
   projetId,
 }: FichesSolutionsProjetsSelectedProps) => {
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const currentUserIsAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
+  const canEditProjet = useCanEditProjet(projetId);
   if (!projetId) {
     return null;
   }
@@ -34,7 +32,7 @@ export const FichesSolutionsProjetsSelected = ({
             <FicheSolutionCardWithFetcher id={selectedFichesSolution} complete projectName="" key={index} />
           ))
         )}
-        {currentUserIsAdmin && (
+        {canEditProjet && (
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL}
             className={clsx(

@@ -4,7 +4,7 @@ import { PictoEspaceSelector } from "../common/pictos";
 import { PictoId } from "../common/pictos/picto-espace-selector";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { InvitationStatus, RoleProjet } from "@prisma/client";
+import { InvitationStatus } from "@prisma/client";
 import { Case, Conditional, Default } from "../common/conditional-renderer";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";
@@ -16,7 +16,6 @@ import { acceptProjectInvitationAction } from "@/src/actions/userProjet/accept-p
 import { declineProjectInvitationAction } from "@/src/actions/userProjet/decline-project-invitation-action";
 import { requestToJoinProjectAction } from "@/src/actions/userProjet/request-to-join-project-action";
 import { PartageOverviewPopupMenu } from "../partage/partage-overview-popup-menu";
-import { getCurrentUserRole } from "../partage/helpers";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { hasDiscardedInformation } from "@/src/helpers/user";
 import { MODE_LECTEUR_MODAL_ID } from "@/src/components/tableau-de-bord/viewer-mode-modal";
@@ -24,6 +23,8 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getPendingUserProjetsAction } from "@/src/actions/projets/get-pending-user-projets-action";
 import { accessProjetAction } from "@/src/actions/userProjet/access-projet-action";
 import { Maturite } from "../maturite/maturite";
+import { getUserRoleFromCode } from "@/src/helpers/user-role";
+import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 
 type ListeProjetsCardProps = {
   disabled?: boolean;
@@ -56,8 +57,7 @@ export const ListeProjetsCard = ({
   }, [projet]);
 
   const setShowInfoViewerMode = useModalStore((state) => state.setShowInfoViewerMode);
-  const isLecteur =
-    (updatedProjet && getCurrentUserRole(updatedProjet.users, currentUser?.id) !== RoleProjet.ADMIN) ?? false;
+  const isLecteur = useIsLecteur(projet.id);
   const openProjet = async () => {
     if (isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID)) {
       setShowInfoViewerMode(true);
@@ -200,13 +200,13 @@ export const ListeProjetsCard = ({
                 >
                   <span
                     className={clsx(
-                      "ml-auto block w-fit lowercase",
+                      "ml-auto block w-fit",
                       (invitationStatus === InvitationStatus.REQUESTED ||
                         invitationStatus === InvitationStatus.INVITED) &&
                         "opacity-25",
                     )}
                   >
-                    ({currentUserInfo?.role})
+                    ({getUserRoleFromCode(currentUserInfo?.role)?.label})
                   </span>
                 </Case>
               </Conditional>

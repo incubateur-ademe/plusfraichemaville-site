@@ -8,6 +8,8 @@ import { resolveAidType } from "@/src/components/financement/helpers";
 import clsx from "clsx";
 import { AidesTerritoiresFullDetailedLines } from "@/src/components/financement/aide/aide-info-lines";
 import { useParams } from "next/navigation";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 type AideFicheProps = {
   aide: AidesTerritoiresAide;
@@ -16,6 +18,8 @@ type AideFicheProps = {
 export const AideFiche = ({ aide }: AideFicheProps) => {
   const isAideFinanciere = resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement;
   const estimationId = +useParams().estimationId;
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const canEditProjet = useCanEditProjet(projet?.id);
 
   return (
     <div className="flex gap-6 rounded-[20px]">
@@ -26,7 +30,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
         )}
         id="financement-panel"
       >
-        {!!estimationId && (
+        {!!estimationId && canEditProjet && (
           <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} className="right-4 top-4" />
         )}
         <div className="mb-6 flex items-center gap-4">

@@ -7,11 +7,12 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getProjetWithRelationsById, updateSourcingRexProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import isEqual from "lodash/isEqual";
 import { RexContactId } from "@/src/components/sourcing/types";
+import { TypeUpdate } from "@/src/helpers/common";
 
 export const updateRexContactInProjetAction = async (
   projetId: number,
   rexContactId: RexContactId,
-  typeUpdate: "add" | "delete",
+  typeUpdate: TypeUpdate,
 ): Promise<ResponseAction<{ projet?: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
@@ -33,7 +34,7 @@ export const updateRexContactInProjetAction = async (
       (projetToUpdate.sourcing_rex as RexContactId[] | null)?.filter(
         (savedContact) => !isEqual(savedContact, rexContactId),
       ) || [];
-    if (typeUpdate === "add") {
+    if (typeUpdate === TypeUpdate.add) {
       newSourcingRex = [...newSourcingRex, rexContactId];
     }
     projetToUpdate = await updateSourcingRexProjet(projetId, newSourcingRex);

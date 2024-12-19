@@ -60,8 +60,13 @@ export default function EstimationMateriauForm({
 
   const watchAllFields = form.watch();
 
+  const closeAndNotif = () => {
+    onClose();
+    notifications("success", "ESTIMATION_VALIDATED");
+  };
+
   const onSubmitAndNext = async (data: EstimationMateriauxFormData) => onSubmit(data, onNext);
-  const onSubmitAndClose = async (data: EstimationMateriauxFormData) => onSubmit(data, onClose);
+  const onSubmitAndClose = async (data: EstimationMateriauxFormData) => onSubmit(data, closeAndNotif);
   const onSubmitAndPrevious = async (data: EstimationMateriauxFormData) => onSubmit(data, onPrevious);
 
   const onSubmit = async (data: EstimationMateriauxFormData, callback?: () => void) => {

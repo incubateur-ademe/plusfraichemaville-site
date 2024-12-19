@@ -6,11 +6,13 @@ import { updateFichesProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { TypeUpdate } from "@/src/helpers/common";
 
 export const updateFichesProjetAction = async (
   projetId: number,
   ficheId: number,
-  type: "solution" | "diagnostic",
+  typeFiche: "solution" | "diagnostic",
+  typeUpdate: TypeUpdate,
 ): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
@@ -24,8 +26,8 @@ export const updateFichesProjetAction = async (
   }
 
   try {
-    const projet = await updateFichesProjet(projetId, ficheId, session.user.id, type);
-    const message = type === "solution" ? "FICHE_SOLUTION_ADDED_TO_PROJET" : "FICHE_DIAGNOSTIC_ADDED_TO_PROJET";
+    const projet = await updateFichesProjet(projetId, ficheId, session.user.id, typeFiche, typeUpdate);
+    const message = typeFiche === "solution" ? "FICHE_SOLUTION_ADDED_TO_PROJET" : "FICHE_DIAGNOSTIC_ADDED_TO_PROJET";
 
     return {
       type: "success",
