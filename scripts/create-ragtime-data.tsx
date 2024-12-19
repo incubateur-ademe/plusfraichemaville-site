@@ -130,7 +130,7 @@ const strapiFicheSolutionToRagtime = (strapiFicheSolution: FicheSolution): RagTi
         .join(" | ") ?? "",
     cobenefices:
       strapiFicheSolutionAttributes.cobenefices?.data
-        .map((cobenefice) => cobenefice.attributes.description)
+        .map((cobenefice: { attributes: { description: any } }) => cobenefice.attributes.description)
         .join(" | ") ?? "",
     contexte_description: strapiFicheSolutionAttributes.contexte_description,
     // @ts-ignore
