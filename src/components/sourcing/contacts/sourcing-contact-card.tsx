@@ -3,7 +3,6 @@ import Image from "next/image";
 import { CopyField } from "../../common/copy-field";
 import { SourcingContact } from "@/src/components/sourcing/types";
 import { SourcingContactSaveButton } from "@/src/components/sourcing/contacts/sourcing-contact-save-button";
-import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import clsx from "clsx";
 
 import SourcingCardAccordion from "@/src/components/common/sourcing-card-accordion";
