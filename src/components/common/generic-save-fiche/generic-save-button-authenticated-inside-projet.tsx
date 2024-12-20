@@ -6,10 +6,10 @@ import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
-import { TypeUpdate } from "@/src/helpers/common";
+import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
 
 export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
-  const isSolution = props.type === "solution";
+  const isSolution = props.type === TypeFiche.solution;
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
 

@@ -1,7 +1,7 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
-import { generateRandomId, TypeUpdate } from "@/src/helpers/common";
+import { generateRandomId, TypeFiche, TypeUpdate } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/sourcing/types";
 
@@ -84,11 +84,12 @@ export const updateFichesProjet = async (
   projetId: number,
   ficheId: number,
   userId: string,
-  type: "solution" | "diagnostic",
+  type: TypeFiche,
   typeUpdate: TypeUpdate,
 ): Promise<ProjetWithRelations | null> => {
   const projet = await getProjetById(projetId);
-  const selectedFichesInProjet = type === "solution" ? projet?.fiches_solutions_id : projet?.fiches_diagnostic_id;
+  const selectedFichesInProjet =
+    type === TypeFiche.solution ? projet?.fiches_solutions_id : projet?.fiches_diagnostic_id;
   const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
   let updatedRecommandationsViewed: string[] = [];
 
@@ -106,8 +107,8 @@ export const updateFichesProjet = async (
       id: projetId,
     },
     data: {
-      fiches_solutions_id: type === "solution" ? fichesUpdated : projet?.fiches_solutions_id,
-      fiches_diagnostic_id: type === "diagnostic" ? fichesUpdated : projet?.fiches_diagnostic_id,
+      fiches_solutions_id: type === TypeFiche.solution ? fichesUpdated : projet?.fiches_solutions_id,
+      fiches_diagnostic_id: type === TypeFiche.diagnostic ? fichesUpdated : projet?.fiches_diagnostic_id,
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
     include: projetIncludes,

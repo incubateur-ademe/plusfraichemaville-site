@@ -14,6 +14,7 @@ import { getAideDecisionHistoryBySlug } from "@/src/lib/strapi/queries/aideDecis
 import clsx from "clsx";
 import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-url";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
+import { TypeFiche } from "@/src/helpers/common";
 
 export async function FicheSolution({
   params,
@@ -62,14 +63,14 @@ export async function FicheSolution({
             <div className="absolute right-4 top-[68px] md:hidden">
               <GenericSaveFiche
                 id={ficheSolution.id}
-                type="solution"
+                type={TypeFiche.solution}
                 projectName={(historique && historique[1].label) || ""}
               />
             </div>
             <div className="mt-4 hidden md:block">
               <GenericSaveFiche
                 id={ficheSolution.id}
-                type="solution"
+                type={TypeFiche.solution}
                 projectName={(historique && historique[1].label) || ""}
                 withLabel
               />
