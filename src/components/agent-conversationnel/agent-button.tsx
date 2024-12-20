@@ -23,7 +23,7 @@ export const AgentButton = ({ controllers }: AgentButtonProps) => {
         "fixed right-0 top-36 flex h-14 w-32 items-center gap-3 !bg-pfmv-navy px-3 md:top-80",
         "rounded-l-2xl",
         "z-[900] transition-transform duration-300",
-        "translate-x-[84px] hover:translate-x-0",
+        "translate-x-[84px] md:hover:translate-x-0",
         "disabled:pointer-events-none disabled:hidden",
       )}
     >
