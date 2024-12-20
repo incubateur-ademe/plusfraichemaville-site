@@ -36,7 +36,8 @@ export class PermissionManager {
   }
 
   async canShareProject(projectId: number) {
-    return this.isAdmin(projectId);
+    const role = await this.getUserProjectRole(projectId);
+    return role === RoleProjet.ADMIN || role === RoleProjet.EDITEUR;
   }
 
   canUpdateUser(userIdToUpdate: string) {
