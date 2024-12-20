@@ -41,7 +41,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
 
             onClick: async () => {
               const res = await deleteEstimationAction(estimation.id);
-              notifications(res.type, res.message);
+              // notifications(res.type, res.message);
               const impactedProjet = getProjetById(estimation.projet_id);
               if (res.type === "success" && impactedProjet) {
                 modal.close();
