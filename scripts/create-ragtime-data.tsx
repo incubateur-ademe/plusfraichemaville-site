@@ -129,7 +129,7 @@ const strapiFicheSolutionToRagtime = (strapiFicheSolution: FicheSolutionResponse
         .join(" | ") ?? "",
     cobenefices:
       strapiFicheSolutionAttributes.cobenefices?.data
-        .map((cobenefice: { attributes: { description: any } }) => cobenefice.attributes.description)
+        .map((cobenefice) => cobenefice.attributes.description)
         .join(" | ") ?? "",
     contexte_description: strapiFicheSolutionAttributes.contexte_description,
     // @ts-ignore

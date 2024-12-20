@@ -1,5 +1,13 @@
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
+
+type StrapiWebhookPayload = {
+  model: "webinaire";
+  entry: {
+    id: number;
+    slug?: string;
+  };
+};
 
 export async function POST(request: NextRequest) {
   try {
@@ -9,8 +17,12 @@ export async function POST(request: NextRequest) {
     if (!headersToken || headersToken !== token) {
       return NextResponse.json({ message: "Unauthorized" }, { status: 401 });
     }
+    const payload: StrapiWebhookPayload = await request.json();
 
-    revalidatePath("/webinaires");
+    if (payload.model === "webinaire") {
+      revalidatePath("/webinaires");
+      revalidateTag("webinaires");
+    }
 
     return NextResponse.json({
       revalidated: true,
