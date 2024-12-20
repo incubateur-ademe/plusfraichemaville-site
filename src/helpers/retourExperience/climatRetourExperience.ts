@@ -1,31 +1,33 @@
+import { ClimatActuel } from "@/src/lib/strapi/types/api/retour-experience";
+
 type ClimatRetourExperience = {
   code: string;
   label: string;
 };
 
 export const CLIMAT_MEDITERRANEEN: ClimatRetourExperience = {
-  code: "mediterraneen",
+  code: ClimatActuel.Mediterraneen,
   label: "Méditerranéen",
 };
 export const CLIMAT_OCEANIQUE: ClimatRetourExperience = {
-  code: "oceanique",
+  code: ClimatActuel.Oceanique,
   label: "Océanique",
 };
 export const CLIMAT_SEMI_ARIDE: ClimatRetourExperience = {
-  code: "semi_aride",
+  code: ClimatActuel.SemiAride,
   label: "Semi-aride",
 };
 export const CLIMAT_SEMI_CONTINENTAL: ClimatRetourExperience = {
-  code: "semi_continental",
+  code: ClimatActuel.SemiContinental,
   label: "Semi-continental",
 };
 export const CLIMAT_EQUATORIAL: ClimatRetourExperience = {
-  code: "equatorial",
+  code: ClimatActuel.Equatorial,
   label: "Équatorial",
 };
 
 export const CLIMAT_TEMPERE: ClimatRetourExperience = {
-  code: "tempere",
+  code: ClimatActuel.Tempere,
   label: "Tempéré",
 };
 

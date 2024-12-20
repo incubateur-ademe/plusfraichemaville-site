@@ -1,9 +1,10 @@
 import { EchelleButtonFilter } from "./echelle-button";
 import { FichesDiagnosticFilterUpdater } from "./use-fiches-diagnostic-filters";
+import { Echelle } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 export const ALL_ECHELLES = [
-  { label: "Sur le territoire", code: "territoire", icon: "echelle-territoire" },
-  { label: "Sur un espace", code: "espace", icon: "echelle-espace" },
+  { label: "Sur le territoire", code: Echelle.Territoire, icon: "echelle-territoire" },
+  { label: "Sur un espace", code: Echelle.Espace, icon: "echelle-espace" },
 ];
 
 export const EchelleFilter = ({ updater, isActive }: FichesDiagnosticFilterUpdater) => {

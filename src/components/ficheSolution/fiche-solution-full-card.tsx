@@ -2,28 +2,28 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { getTypeSolutionFromCode } from "@/src/helpers/typeSolution";
+import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 
 import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
-import { GetValues } from "@/src/lib/strapi/types/types";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useParams } from "next/navigation";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export default function FicheSolutionFullCard({
-  ficheSolution,
+  ficheAttributes,
   extraUrlParams,
 }: {
-  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+  ficheAttributes: FicheSolution["attributes"];
   extraUrlParams?: { param: string; value: string }[];
 }) {
   const { projetId } = useParams();
   const isEspaceProjet = projetId;
 
-  const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
+  const typeSolution = getTypeSolutionFromCode(ficheAttributes.type_solution);
   let url = isEspaceProjet
-    ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION(+projetId, ficheSolution.slug)
-    : `${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheSolution.slug}`;
+    ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION(+projetId, ficheAttributes.slug)
+    : `${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheAttributes.slug}`;
 
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
 
@@ -33,8 +33,8 @@ export default function FicheSolutionFullCard({
         <Image
           width={450}
           height={300}
-          src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={ficheSolution.titre}
+          src={getStrapiImageUrl(ficheAttributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+          alt={ficheAttributes.titre}
           className={"h-full w-full rounded-t-2xl object-cover"}
         />
       </div>
@@ -47,13 +47,13 @@ export default function FicheSolutionFullCard({
             </div>
           </>
         )}
-        <h2 className={"text-blue-hover m-0 text-xl font-bold text-dsfr-text-title-grey"}>{ficheSolution.titre}</h2>
-        <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheSolution.description_courte}</div>
+        <h2 className={"text-blue-hover m-0 text-xl font-bold text-dsfr-text-title-grey"}>{ficheAttributes.titre}</h2>
+        <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheAttributes.description_courte}</div>
         <div className={"mt-auto"}>
           <div>
             <FicheSolutionInfoComparatif
               temperatureFormat="small"
-              ficheSolution={ficheSolution}
+              ficheAttributes={ficheAttributes}
               className={"text-xs"}
             />
             <div className="mt-4 text-center">

@@ -1,16 +1,16 @@
 import CmsRichText from "@/src/components/common/CmsRichText";
 import CustomAccordion from "@/src/components/common/CustomAccordion";
 import CustomTodoStep from "@/src/components/common/CustomTodoStep";
-import { GetValues } from "@/src/lib/strapi/types/types";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export default function FicheSolutionTabMiseEnOeuvre({
-  ficheSolution,
+  ficheAttributes,
 }: {
-  ficheSolution: GetValues<"api::fiche-solution.fiche-solution">;
+  ficheAttributes: FicheSolution["attributes"];
 }) {
-  const diagStepToShow = !!(ficheSolution.etapes_diagnostic?.length && ficheSolution.etapes_diagnostic?.length > 0);
+  const diagStepToShow = !!(ficheAttributes.etapes_diagnostic?.length && ficheAttributes.etapes_diagnostic?.length > 0);
   const meoStepToShow = !!(
-    ficheSolution.etapes_mise_en_oeuvre?.length && ficheSolution.etapes_mise_en_oeuvre?.length > 0
+    ficheAttributes.etapes_mise_en_oeuvre?.length && ficheAttributes.etapes_mise_en_oeuvre?.length > 0
   );
 
   return (
@@ -20,7 +20,7 @@ export default function FicheSolutionTabMiseEnOeuvre({
         {diagStepToShow && (
           <CustomAccordion title="Diagnostic en amont" expanded={true} ariaId="accordion-diag">
             <div className="mb-2 mt-4 flex flex-col gap-4">
-              {ficheSolution.etapes_diagnostic?.map((diag) => (
+              {ficheAttributes.etapes_diagnostic?.map((diag) => (
                 <CustomTodoStep key={diag.titre} title={diag.titre} label={diag.description} />
               ))}
             </div>
@@ -34,13 +34,13 @@ export default function FicheSolutionTabMiseEnOeuvre({
             ariaId="accordion-meo"
           >
             <div className="mb-2 mt-4 flex flex-col gap-4">
-              {ficheSolution.etapes_mise_en_oeuvre?.map((etapeMeo) => (
+              {ficheAttributes.etapes_mise_en_oeuvre?.map((etapeMeo) => (
                 <CustomTodoStep key={etapeMeo.titre} title={etapeMeo.titre} label={etapeMeo.description} />
               ))}
             </div>
           </CustomAccordion>
         )}
-        {ficheSolution.etapes_entretien && ficheSolution.etapes_entretien?.length > 0 && (
+        {ficheAttributes.etapes_entretien && ficheAttributes.etapes_entretien?.length > 0 && (
           <CustomAccordion
             title="Entretien"
             expanded={!diagStepToShow && !meoStepToShow}
@@ -48,7 +48,7 @@ export default function FicheSolutionTabMiseEnOeuvre({
             ariaId="accordion-entretien"
           >
             <div className="mb-2 mt-4 flex flex-col gap-4">
-              {ficheSolution.etapes_entretien?.map((etapeEntretien) => (
+              {ficheAttributes.etapes_entretien?.map((etapeEntretien) => (
                 <CustomTodoStep
                   key={etapeEntretien.titre}
                   title={etapeEntretien.titre}
@@ -59,10 +59,10 @@ export default function FicheSolutionTabMiseEnOeuvre({
           </CustomAccordion>
         )}
       </div>
-      {ficheSolution.point_vigilance && (
+      {ficheAttributes.point_vigilance && (
         <div className="mt-24 rounded-2xl bg-dsfr-background-action-low-blue-france px-12 py-6">
           <div className="mb-6 text-lg font-bold text-dsfr-text-title-grey">Points de vigilance</div>
-          <CmsRichText label={ficheSolution.point_vigilance} />
+          <CmsRichText label={ficheAttributes.point_vigilance} />
         </div>
       )}
     </div>

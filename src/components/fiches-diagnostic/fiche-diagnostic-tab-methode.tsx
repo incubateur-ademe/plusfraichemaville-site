@@ -1,6 +1,5 @@
 import { Separator } from "../common/separator";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
-import { FicheDiagnosticResponse } from "./types";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
@@ -9,11 +8,12 @@ import clsx from "clsx";
 import { getMethodeDiagnosticFromCode } from "@/src/components/fiches-diagnostic/filters/methode";
 
 import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 export const FicheDiagnosticMethodeTab = ({
   ficheDiagnostic,
 }: {
-  ficheDiagnostic: FicheDiagnosticResponse;
+  ficheDiagnostic: FicheDiagnostic;
   projetId?: number;
 }) => {
   const { attributes } = ficheDiagnostic;
