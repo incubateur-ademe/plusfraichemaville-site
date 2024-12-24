@@ -11,6 +11,7 @@ import { inviteMemberAction } from "@/src/actions/users/invite-user-action";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
 import { RoleProjet } from "@prisma/client";
+import SelectFormField from "../common/SelectFormField";
 
 const modal = createModal({
   id: "partage-overview-invite-member",
@@ -30,7 +31,7 @@ export const PartageOverviewMemberInviteButton = () => {
 
   const onSubmit: SubmitHandler<PartageUserInvitationData> = async (data) => {
     if (projectId) {
-      const result = await inviteMemberAction(projectId, data.email);
+      const result = await inviteMemberAction(projectId, data.email, data.role);
       notifications(result.type, result.message);
       if (result.type === "success") {
         if (result.updatedProjet) {
@@ -50,6 +51,15 @@ export const PartageOverviewMemberInviteButton = () => {
         <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Inviter un membre</h2>
         <form onSubmit={form.handleSubmit(onSubmit)}>
           <InputFormField control={form.control} path="email" placeholder="Adresse email de la personne à inviter" />
+          <SelectFormField
+            control={form.control}
+            path="role"
+            label=""
+            options={[
+              { name: "Lecteur", value: "LECTEUR" },
+              { name: "Editeur", value: "EDITEUR" },
+            ]}
+          />
           <div className="flex justify-between">
             <Button priority="tertiary" onClick={modal.close} nativeButtonProps={modal.buttonProps} type="button">
               Annuler

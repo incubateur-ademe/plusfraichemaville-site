@@ -3,7 +3,7 @@
 import { auth } from "@/src/lib/next-auth/auth";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getUserByEmail, getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus, RoleProjet } from "@prisma/client";
 import { ResponseAction } from "../actions-types";
 import { EmailService } from "@/src/services/brevo";
 import { getProjetById, getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
@@ -14,6 +14,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 export const inviteMemberAction = async (
   projectId: number,
   email: string,
+  role: RoleProjet,
 ): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations | null }>> => {
   try {
     const session = await auth();
@@ -47,7 +48,7 @@ export const inviteMemberAction = async (
       }
     }
 
-    const invitation = await inviteMember(projectId, email, existingUser?.id);
+    const invitation = await inviteMember(projectId, email, role, existingUser?.id);
     if (invitation) {
       const emailService = new EmailService();
       await emailService.sendInvitationEmail(email, invitation, currentUser);

@@ -255,6 +255,7 @@ export const declineProjectRequest = async (
 export const inviteMember = async (
   projectId: number,
   email: string,
+  role: RoleProjet,
   userId?: string,
 ): Promise<UserProjetWithRelations> => {
   const response = await prismaClient.user_projet.upsert({
@@ -263,11 +264,11 @@ export const inviteMember = async (
       email_address: email,
       projet_id: projectId,
       user_id: userId,
-      role: RoleProjet.LECTEUR,
+      role,
       invitation_status: InvitationStatus.INVITED,
     },
     update: {
-      role: RoleProjet.LECTEUR,
+      role,
       invitation_status: InvitationStatus.INVITED,
       deleted_at: null,
       deleted_by: null,
