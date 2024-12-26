@@ -11,7 +11,7 @@ import { Hidden } from "../hidden";
 import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
-import { TypeUpdate } from "@/src/helpers/common";
+import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
 
 export const ModalSaveModalAuthenticatedOutsideProjet = ({
   modal,
@@ -42,15 +42,15 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
         <div className="mb-4 mt-6 flex items-center">
           <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
           <span className="block text-2xl font-bold">
-            {type === "solution" ? "Solution" : "Méthode de diagnostic"} ajoutée dans Ma sélection
+            {type === TypeFiche.solution ? "Solution" : "Méthode de diagnostic"} ajoutée dans Ma sélection
           </span>
         </div>
       }
       size="large"
     >
       <span>
-        Retrouvez toutes vos {type === "solution" ? "solutions" : "méthode de diagnostic"} mises en favoris dans Ma
-        sélection. <br />
+        Retrouvez toutes vos {type === TypeFiche.solution ? "solutions" : "méthode de diagnostic"} mises en favoris dans
+        Ma sélection. <br />
         Voulez-vous ajouter aussi cette solution dans l’un de vos projets ?
       </span>
       <div className="my-10 flex flex-col gap-0 md:flex-row md:items-center md:gap-5">
@@ -91,10 +91,10 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
           modal.close();
           setBadgeOff(NotificationElements.selectionMenuItem);
         }}
-        href={type === "solution" ? PFMV_ROUTES.MES_FICHES_SOLUTIONS : PFMV_ROUTES.MES_FICHES_SOLUTIONS}
+        href={type === TypeFiche.solution ? PFMV_ROUTES.MES_FICHES_SOLUTIONS : PFMV_ROUTES.MES_FICHES_SOLUTIONS}
         className="fr-btn fr-btn--secondary mr-4 !min-h-fit rounded-3xl !text-sm"
       >
-        Voir mes {type === "solution" ? "fiches solutions" : "fiches diagnostic"}
+        Voir mes {type === TypeFiche.solution ? "fiches solutions" : "fiches diagnostic"}
       </Link>
     </modal.Component>
   );

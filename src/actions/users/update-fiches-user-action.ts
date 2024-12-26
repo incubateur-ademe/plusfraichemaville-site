@@ -6,11 +6,12 @@ import { updateFichesUser } from "@/src/lib/prisma/prismaUserQueries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { UserInfos } from "@/src/stores/user/store";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const updateFichesUserAction = async (
   userId: string,
   ficheId: number,
-  type: "solution" | "diagnostic",
+  type: TypeFiche,
   projectName?: string,
 ): Promise<ResponseAction<{ user: UserInfos | null }>> => {
   const session = await auth();
@@ -30,7 +31,7 @@ export const updateFichesUserAction = async (
 
     return {
       type: "success",
-      message: type === "solution" ? "BOOKMARKED_SAVED_IN_DB" : "BOOKMARKED_DIAG_SAVED_IN_DB",
+      message: type === TypeFiche.solution ? "BOOKMARKED_SAVED_IN_DB" : "BOOKMARKED_DIAG_SAVED_IN_DB",
       user,
     };
   } catch (e) {

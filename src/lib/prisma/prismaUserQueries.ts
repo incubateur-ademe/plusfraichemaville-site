@@ -11,6 +11,7 @@ import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import { Prisma, User } from "@prisma/client";
 import { IApiSirenQueryTypes } from "@/src/lib/siren/types";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const saveAllFichesFromLocalStorage = async (
   userId: string,
@@ -46,15 +47,10 @@ export const saveAllFichesFromLocalStorage = async (
   });
 };
 
-export const updateFichesUser = async (
-  ficheId: number,
-  userId: string,
-  type: "solution" | "diagnostic",
-  projectName?: string,
-) => {
+export const updateFichesUser = async (ficheId: number, userId: string, type: TypeFiche, projectName?: string) => {
   const user = await getUserWithCollectivites(userId);
   const selectedByUser =
-    type === "solution"
+    type === TypeFiche.solution
       ? (user?.selection_fiches_solutions as number[])
       : (user?.selection_fiches_diagnostic as number[]);
 
@@ -69,9 +65,10 @@ export const updateFichesUser = async (
       id: userId,
     },
     data: {
-      selection_fiches_solutions: type === "solution" ? fichesUpdated : (user?.selection_fiches_solutions as number[]),
+      selection_fiches_solutions:
+        type === TypeFiche.solution ? fichesUpdated : (user?.selection_fiches_solutions as number[]),
       selection_fiches_diagnostic:
-        type === "diagnostic" ? (fichesUpdated as number[]) : (user?.selection_fiches_diagnostic as number[]),
+        type === TypeFiche.diagnostic ? (fichesUpdated as number[]) : (user?.selection_fiches_diagnostic as number[]),
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
