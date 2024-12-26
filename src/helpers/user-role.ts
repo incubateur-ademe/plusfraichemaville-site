@@ -5,12 +5,12 @@ type UserRole = {
   label: string;
 };
 
-const ROLE_LECTEUR: UserRole = {
+export const ROLE_LECTEUR: UserRole = {
   code: RoleProjet.LECTEUR,
   label: "lecteur",
 };
 
-const ROLE_EDITEUR: UserRole = {
+export const ROLE_EDITEUR: UserRole = {
   code: RoleProjet.EDITEUR,
   label: "éditeur",
 };
