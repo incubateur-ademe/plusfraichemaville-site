@@ -20,3 +20,19 @@ ${ticket.properties.subject}
 ${ticket.properties.content}`,
   };
 };
+
+type CsmBatchWebhookData = {
+  nbMailCreationProjet: number;
+  nbMailsInactiveUser: number;
+};
+
+export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
+  return {
+    text: `**[Fin de traitement d'envoi des mails CSM]**
+    
+**Nb de mails de création de projets : ** ${data.nbMailCreationProjet}
+
+**Nb de mails d'utilisateurs inactifs : ** ${data.nbMailCreationProjet} 
+`,
+  };
+};
