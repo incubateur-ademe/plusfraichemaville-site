@@ -4,6 +4,7 @@ import { PropsWithChildren } from "react";
 import FicheSolutionFullCard from "@/src/components/ficheSolution/fiche-solution-full-card";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { TypeFiche } from "@/src/helpers/common";
 
 export type FicheSolutionCardWithUserInfoProps = {
   ficheSolution: FicheSolution;
@@ -27,7 +28,7 @@ export default function FicheSolutionCardWithUserInfo({
       {children}
       <GenericSaveFiche
         id={ficheSolution.id}
-        type="solution"
+        type={TypeFiche.solution}
         projectName={projectName}
         withoutModal={withoutModal}
         classNameButton="absolute top-3 right-4"

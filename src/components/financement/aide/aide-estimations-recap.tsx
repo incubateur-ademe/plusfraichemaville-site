@@ -3,10 +3,10 @@ import { Spinner } from "@/src/components/common/spinner";
 import clsx from "clsx";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
-import { useUserStore } from "@/src/stores/user/provider";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { LecteurModeLabel } from "@/src/components/common/lecteur-mode-label";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 type AideEstimationsCardRecapProps = {
   isLoading: boolean;
@@ -18,8 +18,8 @@ type AideEstimationsCardRecapProps = {
 } & PropsWithChildren;
 
 export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: AideEstimationsCardRecapProps) => {
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const canEditProjet = useCanEditProjet(projet?.id);
 
   return (
     <div className={"flex h-24 items-center justify-between rounded-2xl bg-dsfr-background-alt-blue-france px-6 py-3"}>
@@ -81,7 +81,7 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
         </div>
       </div>
       <Conditional>
-        <Case condition={isCurrentUserAdmin}>
+        <Case condition={canEditProjet}>
           {countAides.aideTechniqueCount > 0 || countAides.aideFinanciereCount > 0 || isLoading ? (
             <>{children}</>
           ) : (
@@ -91,7 +91,7 @@ export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: Ai
             </div>
           )}
         </Case>
-        <Case condition={!isCurrentUserAdmin}>
+        <Case condition={!canEditProjet}>
           <LecteurModeLabel />
         </Case>
       </Conditional>

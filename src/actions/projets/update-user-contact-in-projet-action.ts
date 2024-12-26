@@ -7,11 +7,13 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { addContactToProjet, deleteContactFromProjet } from "@/src/lib/prisma/prisma-projet-sourcing-contact-queries";
 import { getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
+import { TypeUpdate } from "@/src/helpers/common";
+import { Prisma } from "@prisma/client";
 
 export const updateUserContactInProjetAction = async (
   projetId: number,
   userProjetId: number,
-  typeUpdate: "add" | "delete",
+  typeUpdate: TypeUpdate,
 ): Promise<ResponseAction<{ projet?: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
@@ -27,10 +29,16 @@ export const updateUserContactInProjetAction = async (
     if (!projetToUpdate || !userProjetToUse) {
       return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
     }
-    if (typeUpdate === "add") {
+    if (typeUpdate === TypeUpdate.add) {
       await addContactToProjet(projetId, userProjetId, session.user.id);
     } else {
-      await deleteContactFromProjet(projetId, userProjetId);
+      try {
+        await deleteContactFromProjet(projetId, userProjetId);
+      } catch (e) {
+        if (!(e instanceof Prisma.PrismaClientKnownRequestError) || e.code !== "P2025") {
+          throw e;
+        }
+      }
     }
     const updatedProjet = await getProjetWithRelationsById(projetId);
     return { type: "success", projet: updatedProjet };

@@ -3,11 +3,10 @@
 import { useModalStore } from "@/src/stores/modal/provider";
 import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { deleteUserFromProjetAction } from "@/src/actions/userProjet/delete-user-from-projet-action";
-import { useUserStore } from "@/src/stores/user/provider";
 import { notifications } from "../common/notifications";
 import { PopupMenu } from "../common/popup-menu";
-import { getCurrentUserRole } from "./helpers";
 import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { RoleProjet } from "@prisma/client";
 
 export type PartageOverviewMemberStatusAdminProps = {
@@ -16,12 +15,11 @@ export type PartageOverviewMemberStatusAdminProps = {
 };
 
 export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewMemberStatusAdminProps) => {
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const members = useProjetsStore((state) => state.getCurrentProjet())?.users;
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
-  const currentUserRole = getCurrentUserRole(members, currentUserId);
   const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
+  const canEditProjet = useCanEditProjet(currentProjet?.id);
 
   const links = [
     {
@@ -63,9 +61,7 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
         <i className="ri-checkbox-circle-fill mr-2 size-6 text-dsfr-background-action-high-success-hover"></i>
         activé
       </div>
-      {!props.isCurrentUser &&
-        props.member.role !== RoleProjet.ADMIN &&
-        (currentUserRole === RoleProjet.ADMIN || currentUserRole === RoleProjet.EDITEUR) && <PopupMenu links={links} />}
+      {!props.isCurrentUser && props.member.role !== RoleProjet.ADMIN && canEditProjet && <PopupMenu links={links} />}
     </div>
   );
 };

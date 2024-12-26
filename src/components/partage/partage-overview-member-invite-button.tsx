@@ -12,6 +12,8 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
 import { RoleProjet } from "@prisma/client";
 import SelectFormField from "../common/SelectFormField";
+import { ROLE_EDITEUR, ROLE_LECTEUR } from "@/src/helpers/user-role";
+import capitalize from "lodash/capitalize";
 
 const modal = createModal({
   id: "partage-overview-invite-member",
@@ -56,8 +58,8 @@ export const PartageOverviewMemberInviteButton = () => {
             path="role"
             label=""
             options={[
-              { name: "Lecteur", value: "LECTEUR" },
-              { name: "Editeur", value: "EDITEUR" },
+              { name: capitalize(ROLE_LECTEUR.label), value: ROLE_LECTEUR.code },
+              { name: capitalize(ROLE_EDITEUR.label), value: ROLE_EDITEUR.code },
             ]}
           />
           <div className="flex justify-between">

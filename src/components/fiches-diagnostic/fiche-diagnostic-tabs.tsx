@@ -7,6 +7,7 @@ import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-meo";
 import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-url";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
+import { TypeFiche } from "@/src/helpers/common";
 
 type FicheDiagnosticTabsProps = {
   ficheDiagnostic: FicheDiagnostic;
@@ -42,10 +43,10 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
           <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-2"} />
 
           <div className="absolute right-4 top-[68px] md:hidden">
-            <GenericSaveFiche id={id} type="diagnostic" />
+            <GenericSaveFiche id={id} type={TypeFiche.diagnostic} />
           </div>
           <div className="mt-4 hidden md:block">
-            <GenericSaveFiche id={id} type="diagnostic" withLabel />
+            <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel />
           </div>
         </div>
         <div className="fr-tabs !shadow-none before:!shadow-none">

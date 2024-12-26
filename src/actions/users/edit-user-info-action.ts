@@ -56,14 +56,18 @@ export const editUserInfoAction = async (
         nomEtablissement: data.nomEtablissement,
         acceptCommunicationProduit: data.acceptCommunicationProduit,
       });
-      const response = await upsertBrevoContact({
-        email: data.email,
-        acceptInfoProduct: data.acceptCommunicationProduit,
-        subscribeNewsletter: data.subscribeToNewsletter,
-      });
-      if (!response.ok) {
-        const brevoResponse = await response.json();
-        captureError("Erreur lors de la mise à jour dans Brevo", JSON.stringify(brevoResponse));
+      try {
+        const response = await upsertBrevoContact({
+          email: data.email,
+          acceptInfoProduct: data.acceptCommunicationProduit,
+          subscribeNewsletter: data.subscribeToNewsletter,
+        });
+        if (!response.ok) {
+          const brevoResponse = await response.json();
+          captureError("Erreur lors de la mise à jour dans Brevo", JSON.stringify(brevoResponse));
+        }
+      } catch (e) {
+        customCaptureException("Error in Brevo call in EditUserInfoAction", e);
       }
 
       revalidatePath(PFMV_ROUTES.MON_PROFIL);

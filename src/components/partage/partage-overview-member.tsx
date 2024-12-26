@@ -6,6 +6,7 @@ import { InvitationStatus } from "@prisma/client";
 import { ReactElement } from "react";
 import { PartageOverviewMemberStatusInvited } from "./partage-overview-member-status-invited";
 import { PartageOverviewMemberStatusRequested } from "./partage-overview-member-status-requested";
+import { getUserRoleFromCode } from "@/src/helpers/user-role";
 
 export type PartageOverviewMemberProps = {
   member: UserProjetWithUser;
@@ -40,7 +41,7 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
         {name} {isCurrentUser && "(vous)"}
       </span>
       <span className="w-full max-w-72 text-dsfr-text-mention-grey">{member.user?.poste}</span>
-      <span className="w-full max-w-56 lowercase">({member.role})</span>
+      <span className="w-full max-w-56">({getUserRoleFromCode(member.role)?.label})</span>
       <span className="w-full max-w-56">{status[member.invitation_status]}</span>
     </div>
   );

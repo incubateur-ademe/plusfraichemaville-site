@@ -11,8 +11,8 @@ import { useEffect, useState } from "react";
 import { RexContactId, SourcingContact } from "@/src/components/sourcing/types";
 import { updateUserContactInProjetAction } from "@/src/actions/projets/update-user-contact-in-projet-action";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
-import { SOURCING_SAVING_CONTACT } from "@/src/helpers/matomo/matomo-tags";
-import { SOURCING_DELETING_CONTACT } from "@/src/helpers/matomo/matomo-tags";
+import { SOURCING_DELETING_CONTACT, SOURCING_SAVING_CONTACT } from "@/src/helpers/matomo/matomo-tags";
+import { TypeUpdate } from "@/src/helpers/common";
 
 type SourcingContactSaveButtonProps = {
   projetId: number;
@@ -53,14 +53,14 @@ export const SourcingContactSaveButton = ({ projetId, contact, className }: Sour
     delete: {
       action: () =>
         contact.type === "rex"
-          ? updateRexContactInProjetAction(projetId, contact.id, "delete")
-          : updateUserContactInProjetAction(projetId, contact.userProjetId, "delete"),
+          ? updateRexContactInProjetAction(projetId, contact.id, TypeUpdate.delete)
+          : updateUserContactInProjetAction(projetId, contact.userProjetId, TypeUpdate.delete),
     },
     add: {
       action: () =>
         contact.type === "rex"
-          ? updateRexContactInProjetAction(projetId, contact.id, "add")
-          : updateUserContactInProjetAction(projetId, contact.userProjetId, "add"),
+          ? updateRexContactInProjetAction(projetId, contact.id, TypeUpdate.add)
+          : updateUserContactInProjetAction(projetId, contact.userProjetId, TypeUpdate.add),
     },
   };
 
