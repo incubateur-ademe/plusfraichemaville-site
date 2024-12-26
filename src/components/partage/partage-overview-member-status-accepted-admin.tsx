@@ -21,8 +21,15 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
   const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const currentUserRole = getCurrentUserRole(members, currentUserId);
+  const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
 
   const links = [
+    {
+      label: "Modifier les accès",
+      iconId: "ri-pencil-fill",
+      className: "text-dsfr-text-label-blue-france",
+      onClick: () => setCurrentUserModification(props),
+    },
     {
       label: "Supprimer le membre",
       iconId: "ri-delete-bin-fill",
@@ -56,7 +63,9 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
         <i className="ri-checkbox-circle-fill mr-2 size-6 text-dsfr-background-action-high-success-hover"></i>
         activé
       </div>
-      {!props.isCurrentUser && currentUserRole === RoleProjet.ADMIN && <PopupMenu links={links} />}
+      {!props.isCurrentUser &&
+        props.member.role !== RoleProjet.ADMIN &&
+        (currentUserRole === RoleProjet.ADMIN || currentUserRole === RoleProjet.EDITEUR) && <PopupMenu links={links} />}
     </div>
   );
 };

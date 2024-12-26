@@ -46,14 +46,43 @@ export class PermissionManager {
     return this.authenticatedUserId === userId;
   }
 
-  async canUpdateUserRole(targetUserId: string, projectId: number) {
+  async canDeleteUserFromProject(targetUserId: string, projectId: number) {
     if (!this.authenticatedUserId) {
       return false;
     }
 
     if (!(await this.isAdmin(projectId))) {
       return false;
-    } else if (this.authenticatedUserId !== targetUserId) {
+    }
+
+    const targetUserRole = await getUserProjet(targetUserId, projectId);
+    if (targetUserRole?.role === RoleProjet.ADMIN) {
+      return false;
+    }
+
+    if (this.authenticatedUserId !== targetUserId) {
+      return true;
+    } else {
+      return await this.checkOtherAdminsExist(projectId, targetUserId);
+    }
+  }
+
+  async canModifiyUserRole(targetUserId: string, projectId: number) {
+    if (!this.authenticatedUserId) {
+      return false;
+    }
+
+    const userRole = await this.getUserProjectRole(projectId);
+    if (userRole !== RoleProjet.ADMIN && userRole !== RoleProjet.EDITEUR) {
+      return false;
+    }
+
+    const targetUserRole = await getUserProjet(targetUserId, projectId);
+    if (targetUserRole?.role === RoleProjet.ADMIN) {
+      return false;
+    }
+
+    if (this.authenticatedUserId !== targetUserId) {
       return true;
     } else {
       return await this.checkOtherAdminsExist(projectId, targetUserId);
