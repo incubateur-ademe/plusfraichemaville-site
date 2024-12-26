@@ -9,12 +9,11 @@ import { FicheDiagnosticProjetListeAddButton } from "./fiche-diagnostic-projet-l
 
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { useUserStore } from "@/src/stores/user/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export const FicheDiagnosticProjetListe = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const userId = useUserStore((state) => state.userInfos?.id);
-  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(userId));
+  const canEditProjet = useCanEditProjet(projet?.id);
   const savedFichesDiagnostic = projet?.fiches_diagnostic_id;
 
   return (
@@ -24,7 +23,7 @@ export const FicheDiagnosticProjetListe = () => {
         {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
           <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
         ))}
-        {isCurrentUserAdmin && (
+        {canEditProjet && (
           <div className="flex items-center">
             <FicheDiagnosticProjetListeAddButton />
           </div>
