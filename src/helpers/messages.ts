@@ -55,4 +55,5 @@ export const error = {
   INVITATION_NOT_FOUND: "Ce lien d'invitation a déjà été utilisé ou n'est pas valide.",
   INVITATION_NOT_FOR_EMAIL: "Cette invitation ne correspond pas à votre email.",
   ALREADY_SUBSCRIBED_NEWSLETTER: "Cette adresse email est déjà abonnée à notre newsletter.",
+  ADMIN_ROLE_NOT_ALLOWED: "Vous ne pouvez pas ajouter le rôle administrateur.",
 };

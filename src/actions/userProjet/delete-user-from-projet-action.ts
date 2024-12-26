@@ -21,7 +21,7 @@ export const deleteUserFromProjetAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", updatedProjet: null };
   }
-  const canUpdateUserRole = await new PermissionManager(session).canUpdateUserRole(userId, projectId);
+  const canUpdateUserRole = await new PermissionManager(session).canModifiyUserRole(userId, projectId);
 
   if (!canUpdateUserRole) {
     return { type: "error", message: "UNAUTHORIZED", updatedProjet: null };
