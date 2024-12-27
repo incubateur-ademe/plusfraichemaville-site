@@ -255,29 +255,24 @@ export class EmailService {
   async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
     const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
 
-    if (!users?.length) {
-      return { message: "Aucun utilisateur trouvé." };
-    } else {
-      const results = await Promise.all(
-        users.map(async (user) => {
-          const result = await this.sendEmail({
-            to: user.email,
-            userId: user.id,
-            emailType: emailType.noActivityAfterSignup,
-            params: {
-              nom: user.nom || "",
-              dateCreationCompte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
-            },
-          });
+    return await Promise.all(
+      users.map(async (user) => {
+        const result = await this.sendEmail({
+          to: user.email,
+          userId: user.id,
+          emailType: emailType.noActivityAfterSignup,
+          params: {
+            nom: user.nom || "",
+            dateCreationCompte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
+          },
+        });
 
-          if (result.type === "success") {
-            console.log(`Email envoyé à ${user.email} - type: ${emailType.noActivityAfterSignup}`);
-          }
+        if (result.type === "success") {
+          console.log(`Email envoyé à ${user.email} - type: ${emailType.noActivityAfterSignup}`);
+        }
 
-          return result;
-        }),
-      );
-      return results;
-    }
+        return result;
+      }),
+    );
   }
 }
