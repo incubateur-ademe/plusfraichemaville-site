@@ -21,7 +21,11 @@ type GetNorthStarStatsProps = {
   dateFrom: Date;
   range: DateRange;
 };
+type NorthStarQueryRecord = {
+  periode: Date | null;
+  score: bigint | null;
+};
 
-export const getNorthStarStats = async (params: GetNorthStarStatsProps) => {
+export const getNorthStarStats = async (params: GetNorthStarStatsProps): Promise<NorthStarQueryRecord[]> => {
   return prismaClient.$queryRawTyped(northStarStatQuery(params.dateFrom, params.range));
 };
