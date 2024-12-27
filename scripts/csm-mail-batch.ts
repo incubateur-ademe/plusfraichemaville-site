@@ -2,7 +2,7 @@ import { removeDaysToDate } from "@/src/helpers/dateUtils";
 import { getLastCsmMailBatch, saveCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EmailService } from "@/src/services/brevo";
-import { makeCsmBatchWebhookData } from "@/src/services/mattermost/mattermost-helpers";
+import { makeBatchErrorWebhookData, makeCsmBatchWebhookData } from "@/src/services/mattermost/mattermost-helpers";
 import { sendMattermostWebhook } from "@/src/services/mattermost";
 
 const main = async () => {
@@ -38,9 +38,8 @@ const main = async () => {
     console.log("Batch des mails CSM réussi !");
     process.exit(0);
   } catch (error) {
-    customCaptureException("Erreur lors du batch des mails CSM.", {
-      executionTime: new Date(),
-    });
+    customCaptureException("Erreur lors du batch des mails CSM.", error);
+    await sendMattermostWebhook(makeBatchErrorWebhookData("Erreur lors du batch des mails CSM."), "batch", 5000);
     process.exit(1);
   }
 };

@@ -36,3 +36,22 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
 `,
   };
 };
+
+export const makeHubspotSyncBatchWebhookData = (message: string) => {
+  return {
+    text: `**[Fin de traitement de synchronisation Hubspot]**
+    
+**Détail du traitement :**
+${message}
+`,
+  };
+};
+
+export const makeBatchErrorWebhookData = (message: string) => {
+  return {
+    text: `:alert:**[Batch en erreur]**:alert:
+${message}
+@raphael.taieb @mehdilouraoui  
+`,
+  };
+};
