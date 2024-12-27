@@ -1,3 +1,5 @@
+export type DateRange = "day" | "week" | "month" | "year";
+
 export const FAR_FUTURE = new Date(3024, 0, 0, 1);
 
 export const removeDaysToDate = (date: Date, nbDays: number) => new Date(date.getTime() - nbDays * 24 * 60 * 60 * 1000);
