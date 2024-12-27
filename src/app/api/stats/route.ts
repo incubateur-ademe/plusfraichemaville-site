@@ -26,9 +26,11 @@ type StatOuput = {
   stats: StatOutputRecord[];
 };
 
-export async function POST(request: NextRequest) {
-  const requestBody = await request.json();
-  const parsedRequest = StatsRouteSchema.safeParse(requestBody);
+export async function GET(request: NextRequest) {
+  const parsedRequest = StatsRouteSchema.safeParse({
+    since: +(request.nextUrl.searchParams.get("since") ?? 0),
+    periodicity: request.nextUrl.searchParams.get("periodicity"),
+  });
   if (!parsedRequest.success) {
     const { errors } = parsedRequest.error;
     return NextResponse.json({ error: { message: "Invalid request", errors } }, { status: 400 });
