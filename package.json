@@ -5,7 +5,7 @@
   "scripts": {
     "predev:start": "only-include-used-icons",
     "predev:localAsProd": "only-include-used-icons",
-    "prebuild": "only-include-used-icons && npx prisma generate",
+    "prebuild": "only-include-used-icons && npx prisma generate --sql",
     "dev:db:migrate": "prisma migrate dev",
     "dev:db:push": "prisma db push",
     "dev:db:generateClient": "prisma generate",
@@ -34,6 +34,7 @@
     "@sentry/nextjs": "7.120.1",
     "@splidejs/react-splide": "^0.7.12",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "html-to-image": "^1.11.11",
     "jspdf": "^2.5.2",
     "leaflet": "^1.9.4",
