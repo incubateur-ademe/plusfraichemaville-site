@@ -6,18 +6,28 @@ import { redirect } from "next/navigation";
 import { EstimationOverviewCard } from "@/src/components/estimation/estimation-overview-card";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
+import { useEffect, useState } from "react";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
-export default function CreateEstimationPage() {
+export default function ListeEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(currentProjet?.id);
+  const [shouldRedirectToCreationPage, setShouldRedirectToCreationPage] = useState(false);
+  useEffect(() => {
+    if (shouldRedirectToCreationPage && currentProjet) {
+      redirect(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id));
+    }
+  }, [currentProjet, shouldRedirectToCreationPage]);
 
   if (!currentProjet) {
-    return null;
+    return <></>;
   }
   if (currentProjet.estimations.length < 1) {
     if (canEditProjet) {
-      redirect(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id));
+      if (!shouldRedirectToCreationPage) {
+        setShouldRedirectToCreationPage(true);
+      }
+      return <></>;
     } else {
       return (
         <div className="fr-container pt-8">
