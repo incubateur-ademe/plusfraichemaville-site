@@ -54,7 +54,7 @@ export default function ListeEstimationPage() {
               className="rounded-3xl"
               iconId="ri-add-circle-fill"
               iconPosition="left"
-              linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet?.id), target: "_self" }}
+              linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id), target: "_self" }}
             >
               Ajouter une estimation
             </Button>
