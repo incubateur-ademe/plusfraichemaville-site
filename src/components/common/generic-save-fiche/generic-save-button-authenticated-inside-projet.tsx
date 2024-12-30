@@ -5,14 +5,25 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
-import { useUserStore } from "@/src/stores/user/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
 
 export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
-  const isSolution = props.type === "solution";
+  const isSolution = props.type === TypeFiche.solution;
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+
+  const isSaved = isSolution
+    ? projet?.fiches_solutions_id.includes(+props.id)
+    : projet?.fiches_diagnostic_id.includes(+props.id);
+
   const update = async () => {
-    const update = await updateFichesProjetAction(projet?.id!, +props.id, props.type);
+    const update = await updateFichesProjetAction(
+      projet?.id!,
+      +props.id,
+      props.type,
+      isSaved ? TypeUpdate.delete : TypeUpdate.add,
+    );
     if (update.projet) {
       addOrUpdateProjet(update.projet);
       !isSaved && !props.withoutModal && opener && opener();
@@ -20,17 +31,11 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
       notifications(update.type, update.message);
     }
   };
-
-  const isSaved = isSolution
-    ? projet?.fiches_solutions_id.includes(+props.id)
-    : projet?.fiches_diagnostic_id.includes(+props.id);
-
   const assets = selectSavedOrUnsavedAssets(isSaved ?? false, "projet");
 
-  const userId = useUserStore((state) => state.userInfos?.id);
-  const isCurentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(userId));
+  const canEditProjet = useCanEditProjet(projet?.id);
 
-  if (!isCurentUserAdmin) {
+  if (!canEditProjet) {
     return null;
   }
 

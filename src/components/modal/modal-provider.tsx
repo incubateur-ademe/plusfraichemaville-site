@@ -6,10 +6,12 @@ import { AvailableProjetsForCollectiviteModal } from "../liste-projets/available
 import { ViewerModeModal } from "../tableau-de-bord/viewer-mode-modal";
 // eslint-disable-next-line max-len
 import { SourcingRexContentSeeProjetModal } from "@/src/components/sourcing/side-panel/sourcing-rex-content-see-projet-modal";
+import { PartageMemberModificationRoleModale } from "../partage/partage-member-modification-role-modale";
 
 export default function ModalProvider() {
   return (
     <>
+      <PartageMemberModificationRoleModale />
       <EstimationMateriauModalContainer />
       <AideFicheModal />
       <PartageOverviewDeleteOrQuitModale />

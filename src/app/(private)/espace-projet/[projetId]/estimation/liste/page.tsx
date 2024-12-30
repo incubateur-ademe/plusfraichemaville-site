@@ -6,14 +6,12 @@ import { redirect } from "next/navigation";
 import { EstimationOverviewCard } from "@/src/components/estimation/estimation-overview-card";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
-import { useUserStore } from "@/src/stores/user/provider";
 import { useEffect, useState } from "react";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export default function ListeEstimationPage() {
-  console.log("DANS ListeEstimationPage");
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
+  const canEditProjet = useCanEditProjet(currentProjet?.id);
   const [shouldRedirectToCreationPage, setShouldRedirectToCreationPage] = useState(false);
   useEffect(() => {
     if (shouldRedirectToCreationPage && currentProjet) {
@@ -25,7 +23,7 @@ export default function ListeEstimationPage() {
     return <></>;
   }
   if (currentProjet.estimations.length < 1) {
-    if (isCurrentUserAdmin) {
+    if (canEditProjet) {
       if (!shouldRedirectToCreationPage) {
         setShouldRedirectToCreationPage(true);
       }
@@ -46,16 +44,12 @@ export default function ListeEstimationPage() {
           {`Vous pouvez estimer une fourchette de prix en fonction des matériaux et systèmes choisis.`}
         </div>
         <div className="flex flex-col gap-12">
-          {currentProjet?.estimations.map((estimation) => (
-            <EstimationOverviewCard
-              key={estimation.id}
-              estimation={estimation}
-              isCurrentUserAdmin={isCurrentUserAdmin}
-            />
+          {currentProjet.estimations.map((estimation) => (
+            <EstimationOverviewCard key={estimation.id} estimation={estimation} canEditEstimation={canEditProjet} />
           ))}
         </div>
         <div className="mt-12 flex flex-row gap-6">
-          {isCurrentUserAdmin && (
+          {canEditProjet && (
             <Button
               className="rounded-3xl"
               iconId="ri-add-circle-fill"

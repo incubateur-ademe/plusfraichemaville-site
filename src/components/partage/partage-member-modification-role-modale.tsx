@@ -18,6 +18,8 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { RoleProjet } from "@prisma/client";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { notifications } from "../common/notifications";
+import capitalize from "lodash/capitalize";
+import { ROLE_EDITEUR, ROLE_LECTEUR } from "@/src/helpers/user-role";
 
 const modal = createModal({
   id: "user-status-modification",
@@ -27,6 +29,7 @@ const modal = createModal({
 export const PartageMemberModificationRoleModale = () => {
   const userId = useUserStore((state) => state.userInfos?.id);
   const projetId = useProjetsStore((state) => state.getCurrentProjet()?.id);
+  const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const currentUserModification = useModalStore((state) => state.currentUserModification);
   const setCurrentUserModification = useModalStore((state) => state.setCurrentUserModification);
   const form = useForm<PartageUserModificationData>({
@@ -57,6 +60,9 @@ export const PartageMemberModificationRoleModale = () => {
         data.role as RoleProjet,
       );
       notifications(result.type, result.message);
+      if (result.type === "success" && result.projet) {
+        addOrUpdateProjet(result.projet);
+      }
     }
   };
 
@@ -96,9 +102,8 @@ export const PartageMemberModificationRoleModale = () => {
                 path="role"
                 label=""
                 options={[
-                  { name: "Admin", value: RoleProjet.ADMIN },
-                  { name: "Editeur", value: RoleProjet.EDITEUR },
-                  { name: "Lecteur", value: RoleProjet.LECTEUR },
+                  { name: capitalize(ROLE_LECTEUR.label), value: ROLE_LECTEUR.code },
+                  { name: capitalize(ROLE_EDITEUR.label), value: ROLE_EDITEUR.code },
                 ]}
               />
               <div className="flex justify-between">

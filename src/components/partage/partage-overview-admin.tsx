@@ -2,15 +2,15 @@
 
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { PartageOverviewWrapper } from "./partage-overview-wrapper";
-import { getCurrentUserRole, groupByInvitationStatus } from "./helpers";
-import { InvitationStatus, RoleProjet } from "@prisma/client";
+import { groupByInvitationStatus } from "./helpers";
+import { InvitationStatus } from "@prisma/client";
 import { PartageOverviewMemberSection } from "./partage-overview-member-section";
-import { useUserStore } from "@/src/stores/user/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export const PartageOverviewAdmin = () => {
-  const members = useProjetsStore((state) => state.getCurrentProjet()?.users);
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const currentUserIsAdmin = getCurrentUserRole(members, currentUserId) === RoleProjet.ADMIN;
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  const members = currentProjet?.users;
+  const canEditProjet = useCanEditProjet(currentProjet?.id);
 
   if (!members) return null;
 
@@ -25,7 +25,7 @@ export const PartageOverviewAdmin = () => {
   return (
     <PartageOverviewWrapper
       title="Gérer les membres de votre collectivité sur ce projet"
-      withSharingOption={currentUserIsAdmin}
+      withSharingOption={canEditProjet}
     >
       {sections.map(
         ({ title, status }, index) =>

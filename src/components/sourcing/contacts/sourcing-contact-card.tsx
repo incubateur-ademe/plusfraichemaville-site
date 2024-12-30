@@ -3,7 +3,6 @@ import Image from "next/image";
 import { CopyField } from "../../common/copy-field";
 import { SourcingContact } from "@/src/components/sourcing/types";
 import { SourcingContactSaveButton } from "@/src/components/sourcing/contacts/sourcing-contact-save-button";
-import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import clsx from "clsx";
 
 import SourcingCardAccordion from "@/src/components/common/sourcing-card-accordion";
@@ -13,6 +12,7 @@ import Link from "next/link";
 import { SourcingRexContentSeeProject } from "@/src/components/sourcing/side-panel/sourcing-rex-content-see-project";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { COPY_EMAIL, COPY_TELEPHONE } from "@/src/helpers/matomo/matomo-tags";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 type SourcingContactCardProps = {
   contact: SourcingContact;
@@ -33,7 +33,7 @@ export const SourcingContactCard = ({
   const ligne3 = isProjetTypeRex ? null : contact.poste;
   const contactUniqueId = isProjetTypeRex ? `${contact.id.rexId}-${contact.id.contactId}` : `${contact.userProjetId}`;
 
-  const shoudDisplaySaveButton = !useIsLecteur(sourcingProjetId);
+  const canEditProjet = useCanEditProjet(sourcingProjetId);
 
   return (
     <div
@@ -61,7 +61,7 @@ export const SourcingContactCard = ({
             )}
             {type}
           </div>
-          {sourcingProjetId && shoudDisplaySaveButton && (
+          {sourcingProjetId && canEditProjet && (
             <SourcingContactSaveButton contact={contact} projetId={sourcingProjetId} />
           )}
         </div>

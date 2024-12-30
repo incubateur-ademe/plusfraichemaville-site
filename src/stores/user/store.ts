@@ -8,6 +8,7 @@ import {
 } from "@/src/components/common/generic-save-fiche/helpers";
 import { updateFichesUserAction } from "@/src/actions/users/update-fiches-user-action";
 import { saveAllFichesFromLocalStorageAction } from "@/src/actions/users/save-all-fiches-from-local-storage";
+import { TypeFiche } from "@/src/helpers/common";
 
 export type UserInfos = UserWithCollectivite | null | undefined;
 
@@ -22,7 +23,7 @@ export type UserActions = {
   setBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: FicheBookmarkedSolution[]) => void;
   setBookmarkedFichesDiagnostic: (_bookmarkedFichesDiagnostic: string[]) => void;
   updateBookmarkedFichesSolutions: (_bookmarkedFichesSolutions: FichesBookmarked[]) => void;
-  updateFichesUser: (_type: "solution" | "diagnostic", _ficheId: number, _projectName: string) => void;
+  updateFichesUser: (_type: TypeFiche, _ficheId: number, _projectName: string) => void;
   updateBookmarkedFichesFromLocalStorage: () => void;
 };
 

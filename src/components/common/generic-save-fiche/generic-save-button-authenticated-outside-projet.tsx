@@ -4,9 +4,10 @@ import { selectSavedOrUnsavedAssets } from "./assets";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { isFicheBookmarked } from "./helpers";
 import { setBadgeOn, NotificationElements } from "@/src/helpers/notification-badge";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const GenericSaveAuthenticatedOutsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
-  const isSolution = props.type === "solution";
+  const isSolution = props.type === TypeFiche.solution;
   const userFichesSolutions = useUserStore((state) => state.userInfos?.selection_fiches_solutions) as number[];
   const userFichesDiagnostic = useUserStore((state) => state.userInfos?.selection_fiches_diagnostic) as number[];
   const currentFiches = isSolution ? userFichesSolutions : userFichesDiagnostic;

@@ -3,11 +3,11 @@
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { GenericSaveModal } from "./generic-save-modal";
 import { GenericSaveButton } from "./generic-save-button";
-import { generateRandomId } from "@/src/helpers/common";
+import { generateRandomId, TypeFiche } from "@/src/helpers/common";
 import clsx from "clsx";
 
 export type GenericSaveBaseProps = {
-  type: "diagnostic" | "solution";
+  type: TypeFiche;
   id: number;
   projectName?: string;
   withLabel?: boolean;
