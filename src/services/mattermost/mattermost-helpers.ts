@@ -20,3 +20,38 @@ ${ticket.properties.subject}
 ${ticket.properties.content}`,
   };
 };
+
+type CsmBatchWebhookData = {
+  nbMailCreationProjet: number;
+  nbMailsInactiveUser: number;
+};
+
+export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
+  return {
+    text: `**[Fin de traitement d'envoi des mails CSM]**
+    
+**Nb de mails de création de projets : ** ${data.nbMailCreationProjet}
+
+**Nb de mails d'utilisateurs inactifs : ** ${data.nbMailCreationProjet} 
+`,
+  };
+};
+
+export const makeHubspotSyncBatchWebhookData = (message: string) => {
+  return {
+    text: `**[Fin de traitement de synchronisation Hubspot]**
+    
+**Détail du traitement :**
+${message}
+`,
+  };
+};
+
+export const makeBatchErrorWebhookData = (message: string) => {
+  return {
+    text: `:alert:**[Batch en erreur]**:alert:
+${message}
+@raphael.taieb @mehdilouraoui  
+`,
+  };
+};
