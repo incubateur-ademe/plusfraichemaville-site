@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import { Analytics, Prisma } from "@prisma/client";
+import { Analytics } from "@prisma/client";
 import { prismaClient } from "./prismaClient";
 import { DateRange } from "@/src/helpers/dateUtils";
 
@@ -22,29 +22,42 @@ type GetNorthStarStatsProps = {
   dateFrom: Date;
   range: DateRange;
 };
-type NorthStarQueryRecord = {
-  periode: Date | null;
-  score: bigint | null;
-};
 
-export const getNorthStarStats = async (params: GetNorthStarStatsProps): Promise<NorthStarQueryRecord[]> => {
-  return prismaClient.$queryRaw(
-    Prisma.sql`with score_table as (select date_trunc(${params.range}, created_at)                                    as date1,
-                                           sum(CASE WHEN event_type = 'UPDATE_PROJET_SET_VISIBLE' THEN 1 ELSE -1 END) as score
-                                    from pfmv."Analytics"
-                                    WHERE event_type in
-                                          ('UPDATE_PROJET_SET_VISIBLE',
-                                           'UPDATE_PROJET_SET_INVISIBLE')
-                                      and created_at >= ${params.dateFrom}
-                                    group by 1
-                                    order by 1 desc),
-                    all_intervals as (SELECT date_trunc(${params.range}, ts) as date1
-                                      FROM generate_series(${params.dateFrom}, now(), CONCAT('1 ', ${params.range})::interval) AS ts
-                                      group by 1)
-               select all_intervals.date1::timestamp::date as "periode",
-                      coalesce(score, 0)                   as "score"
-               from score_table
-                        right outer join all_intervals on all_intervals.date1 = score_table.date1
-               order by 1;`,
-  );
+export const getNorthStarStats = async (
+  dateFrom: GetNorthStarStatsProps["dateFrom"],
+): Promise<
+  {
+    created_at: Date;
+  }[]
+> => {
+  const projets = await prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      created_at: {
+        gte: dateFrom,
+      },
+      creator: {
+        NOT: [
+          {
+            email: {
+              contains: "@ademe.fr",
+            },
+          },
+          {
+            email: {
+              contains: "@beta.gouv.fr",
+            },
+          },
+          {
+            email: "marie.racine@dihal.gouv.fr",
+          },
+        ],
+      },
+    },
+    select: {
+      created_at: true,
+    },
+  });
+
+  return projets;
 };
