@@ -20,12 +20,11 @@ import toast from "react-hot-toast";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { AideEditSortField } from "@/src/components/financement/aide/aide-edit-sort-field";
 import { useAideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation-edit-sort-method";
-import { useUserStore } from "@/src/stores/user/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export const AideEdit = memo(() => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
+  const canEditProjet = useCanEditProjet(projet?.id);
 
   const estimationId = useParams().estimationId as string;
   const { filters, toggleFilter } = useAideEstimationEditFilter();
@@ -94,9 +93,7 @@ export const AideEdit = memo(() => {
         <div className="aide-card flex flex-wrap gap-6">
           {isLoading
             ? skeletons
-            : paginatedResults?.map((aide) => (
-                <AideCard aide={aide} withSaveButton={isCurrentUserAdmin} key={aide.id} />
-              ))}
+            : paginatedResults?.map((aide) => <AideCard aide={aide} withSaveButton={canEditProjet} key={aide.id} />)}
         </div>
       </div>
       <div className="flex items-center justify-between">

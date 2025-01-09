@@ -2,7 +2,6 @@ export const success = {
   ESTIMATION_DELETE: "Votre estimation a bien été supprimée.",
   ESTIMATION_CREATED: "Votre estimation a bien été créée.",
   ESTIMATION_VALIDATED: "Votre estimation a bien été enregistrée.",
-  ESTIMATION_UPDATED: "Votre estimation a bien été mise à jour.",
   ESTIMATION_AIDE_ADDED: "L'aide a bien été ajoutée à votre estimation.",
   ESTIMATION_AIDE_DELETED: "L'aide a bien été supprimée de votre estimation.",
   BOOKMARKED_SAVED_IN_DB: "Les fiches solutions ont bien été sauvegardées.",
@@ -56,4 +55,5 @@ export const error = {
   INVITATION_NOT_FOUND: "Ce lien d'invitation a déjà été utilisé ou n'est pas valide.",
   INVITATION_NOT_FOR_EMAIL: "Cette invitation ne correspond pas à votre email.",
   ALREADY_SUBSCRIBED_NEWSLETTER: "Cette adresse email est déjà abonnée à notre newsletter.",
+  ADMIN_ROLE_NOT_ALLOWED: "Vous ne pouvez pas ajouter le rôle administrateur.",
 };

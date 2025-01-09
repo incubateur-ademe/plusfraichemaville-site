@@ -12,13 +12,12 @@ import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/gen
 import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
-import { useUserStore } from "@/src/stores/user/provider";
 import { AideEstimationsCardRecap } from "@/src/components/financement/aide/aide-estimations-recap";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export const AideEstimationsListe = ({ estimations }: { estimations: EstimationWithAides[] }) => {
-  const currentUserId = useUserStore((state) => state.userInfos?.id);
-  const isCurrentUserAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(currentUserId));
   const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const canEditProjet = useCanEditProjet(projet?.id);
 
   return (
     <div>
@@ -41,7 +40,7 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
               </AideEstimationsCardWithSelection>
             ) : (
               <Conditional>
-                <Case condition={isCurrentUserAdmin}>
+                <Case condition={canEditProjet}>
                   <AideEstimationsCardWithoutSelection estimation={estimation}>
                     <AideEstimationsListeLink
                       className="fr-btn !ml-auto !block rounded-3xl"
@@ -52,7 +51,7 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
                     </AideEstimationsListeLink>
                   </AideEstimationsCardWithoutSelection>
                 </Case>
-                <Case condition={!isCurrentUserAdmin}>
+                <Case condition={!canEditProjet}>
                   <AideEstimationsCardRecap
                     isLoading={false}
                     countAides={{ aideFinanciereCount: 0, aideTechniqueCount: 0, verb: "sélectionné" }}

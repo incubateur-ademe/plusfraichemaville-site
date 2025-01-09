@@ -1,4 +1,5 @@
 import { ConversationHistory, RagtimeConversationHistory } from "@/src/services/ragtime/ragtime-types";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export const sanitizeConversationHistoryFromRagtime = (conversation: RagtimeConversationHistory): ConversationHistory =>
   conversation.messages
@@ -8,5 +9,13 @@ export const sanitizeConversationHistoryFromRagtime = (conversation: RagtimeConv
       message: message.content,
     }));
 
-export const sanitizeUrlInMessageFromRagtime = (ragtimeResponseMessage: string): string =>
-  ragtimeResponseMessage.replace("https://plusfraichemaville.fr/", "/");
+export const sanitizeUrlInMessageFromRagtime = (ragtimeResponseMessage: string, projetId?: number): string => {
+  if (projetId) {
+    return ragtimeResponseMessage
+      .replace("https://plusfraichemaville.fr/fiches-diagnostic", PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC(projetId))
+      .replace("https://plusfraichemaville.fr/fiche-solution", PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projetId))
+      .replace("https://plusfraichemaville.fr/", "/");
+  } else {
+    return ragtimeResponseMessage.replace("https://plusfraichemaville.fr/", "/");
+  }
+};

@@ -1,3 +1,5 @@
+import { TypeFiche } from "@/src/helpers/common";
+
 export const BOOKMARK_FS_KEY = "bookmark-fs-id";
 export const FICHE_DIAGNOSTIC_IDS_STORAGE_KEY = "fiches-diagnostic";
 export type FicheBookmarkedSolution = {
@@ -26,14 +28,14 @@ export const isFicheBookmarked = (
 };
 
 export const addFicheBookmark = (
-  type: "solution" | "diagnostic",
+  type: TypeFiche,
   currentBookmarks: FichesBookmarked[],
   ficheId: number | undefined,
   projectName: string,
 ): FichesBookmarked[] => {
   if (!ficheId) return currentBookmarks;
 
-  if (type === "diagnostic") {
+  if (type === TypeFiche.diagnostic) {
     if (!currentBookmarks.includes(+ficheId)) {
       currentBookmarks.push(+ficheId);
     }
@@ -56,14 +58,14 @@ export const addFicheBookmark = (
 };
 
 export const deleteBookmarkFiche = (
-  type: "solution" | "diagnostic",
+  type: TypeFiche,
   currentBookmarks: FichesBookmarked[],
   ficheId: number | undefined,
   projectName: string,
 ): FichesBookmarked[] => {
   if (!ficheId) return currentBookmarks;
 
-  if (type === "diagnostic") {
+  if (type === TypeFiche.diagnostic) {
     return currentBookmarks.filter((bookmark) => bookmark !== +ficheId);
   } else {
     const updatedBookmarks = currentBookmarks.map((bookmark) => {

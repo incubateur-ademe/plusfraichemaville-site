@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import { FichesBookmarked, isFicheBookmarked, deleteBookmarkFiche, addFicheBookmark } from "./helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const useSaveBookmarks = (
-  type: "solution" | "diagnostic",
+  type: TypeFiche,
   ficheId: number,
   fichesInStorage: FichesBookmarked[],
   setFichesInStorage: (_fichesInStorage: FichesBookmarked[]) => void,

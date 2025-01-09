@@ -2,6 +2,11 @@ import { getUsersAndProjectsFromLastSync, saveCronJob } from "@/src/lib/prisma/p
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { hubspotBatchSync } from "@/src/services/hubspot";
 import { archiveHubspotDeals } from "@/src/services/hubspot/hubspot-helpers";
+import {
+  makeBatchErrorWebhookData,
+  makeHubspotSyncBatchWebhookData,
+} from "@/src/services/mattermost/mattermost-helpers";
+import { sendMattermostWebhook } from "@/src/services/mattermost";
 
 type HubspotError = {
   body: {
@@ -24,6 +29,9 @@ const syncWithHubspot = async () => {
 
     if (!usersAndProjectsFromLastSync.length) {
       console.log("Aucune nouvelle donnée à synchroniser.");
+      await saveCronJob(startedDate, new Date(), "SYNC_HUBSPOT");
+      const webhookData = makeHubspotSyncBatchWebhookData("Aucune donnée à traiter.");
+      await sendMattermostWebhook(webhookData, "batch", 5000);
       process.exit(0);
     }
 
@@ -48,6 +56,8 @@ const syncWithHubspot = async () => {
 
     if (batch.status === "COMPLETE") {
       await saveCronJob(startedDate, new Date(), "SYNC_HUBSPOT");
+      const webhookData = makeHubspotSyncBatchWebhookData(batch.message);
+      await sendMattermostWebhook(webhookData, "batch", 5000);
       console.log("Synchronisation avec Hubspot réussie !");
       console.log(batch.message);
       process.exit(0);
@@ -55,6 +65,11 @@ const syncWithHubspot = async () => {
       captureError("Erreur lors de la synchronisation avec Hubspot.", {
         executionTime: new Date(),
       });
+      await sendMattermostWebhook(
+        makeBatchErrorWebhookData("Erreur lors du batch de synchronisation Hubspot."),
+        "batch",
+        5000,
+      );
       process.exit(1);
     }
   } catch (error) {
@@ -63,6 +78,11 @@ const syncWithHubspot = async () => {
       id: err.body?.correlationid,
       hubspotMessage: err.body?.message,
     });
+    await sendMattermostWebhook(
+      makeBatchErrorWebhookData("Erreur lors du batch de synchronisation Hubspot."),
+      "batch",
+      5000,
+    );
     process.exit(1);
   }
 };

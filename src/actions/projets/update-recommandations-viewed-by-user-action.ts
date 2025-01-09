@@ -5,11 +5,12 @@ import { ResponseAction } from "../actions-types";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { addRecommandationsViewedBy, deleteRecommandationsViewedBy } from "@/src/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { TypeUpdate } from "@/src/helpers/common";
 
 export const updateRecommandationsViewedByUser = async (
   projetId: string,
   userId: string,
-  action: "add" | "delete",
+  action: TypeUpdate,
 ): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
   const session = await auth();
   if (!session) {
@@ -21,7 +22,7 @@ export const updateRecommandationsViewedByUser = async (
   }
 
   const projet =
-    action === "add"
+    action === TypeUpdate.add
       ? await addRecommandationsViewedBy(+projetId, session.user.id)
       : await deleteRecommandationsViewedBy(+projetId, session.user.id);
 

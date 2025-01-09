@@ -1,7 +1,7 @@
 import { InvitationStatus, RoleProjet, User, user_projet } from "@prisma/client";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { UserProjetWithRelations, UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
-import { projetPublicSelect, projetUpdated } from "@/src/lib/prisma/prismaProjetQueries";
+import { ProjetWithRelations, UserProjetWithRelations, UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { projetIncludes, projetPublicSelect, projetUpdated } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const getUserProjet = async (userId: string, projectId: number): Promise<user_projet | null> => {
   return prismaClient.user_projet.findUnique({
@@ -111,7 +111,7 @@ export const updateUserRoleProject = async (
   userId: string,
   projectId: number,
   newRole: RoleProjet,
-): Promise<UserProjetWithUser | null> => {
+): Promise<ProjetWithRelations | null> => {
   const response = await prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
@@ -124,13 +124,13 @@ export const updateUserRoleProject = async (
       role: newRole,
     },
     include: {
-      user: true,
+      projet: { include: projetIncludes },
     },
   });
 
   await projetUpdated(projectId);
 
-  return response;
+  return response.projet;
 };
 
 export const deleteUserFromProject = async (
@@ -255,6 +255,7 @@ export const declineProjectRequest = async (
 export const inviteMember = async (
   projectId: number,
   email: string,
+  role: RoleProjet,
   userId?: string,
 ): Promise<UserProjetWithRelations> => {
   const response = await prismaClient.user_projet.upsert({
@@ -263,11 +264,11 @@ export const inviteMember = async (
       email_address: email,
       projet_id: projectId,
       user_id: userId,
-      role: RoleProjet.LECTEUR,
+      role,
       invitation_status: InvitationStatus.INVITED,
     },
     update: {
-      role: RoleProjet.LECTEUR,
+      role,
       invitation_status: InvitationStatus.INVITED,
       deleted_at: null,
       deleted_by: null,

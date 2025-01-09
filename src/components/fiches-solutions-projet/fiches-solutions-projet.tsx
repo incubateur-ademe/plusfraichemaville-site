@@ -5,40 +5,39 @@ import { FichesSolutionsProjetHeader } from ".";
 import { FichesSolutionsProjetsSelected } from "./fiches-solutions-projet-selected";
 import { AllSolutionsBoard } from "../common/all-solutions-board";
 import { FichesSolutionProjetBookmarksByEspace } from "./fiches-solutions-projet-bookmarks-by-espace";
-import { useUserStore } from "@/src/stores/user/provider";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export const FichesSolutionsProjet = () => {
-  const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const curretUserId = useUserStore((state) => state.userInfos?.id);
-  const currentUserIsAdmin = useProjetsStore((state) => state.isCurrentUserAdmin(curretUserId));
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  const canEditProjet = useCanEditProjet(currentProjet?.id);
   const updateStore = useProjetsStore((state) => state.addOrUpdateProjet);
-  const selectedFichesSolutionsIds = projet?.fiches_solutions_id;
+  const selectedFichesSolutionsIds = currentProjet?.fiches_solutions_id;
 
   return (
     <>
       <div className="fr-container py-10">
-        <FichesSolutionsProjetHeader projetId={projet?.id} projetNom={projet?.nom} />
+        <FichesSolutionsProjetHeader projetId={currentProjet?.id} projetNom={currentProjet?.nom} />
         <FichesSolutionsProjetsSelected
           selectedFichesSolutionsIds={selectedFichesSolutionsIds}
           updateStore={updateStore}
-          projetId={projet?.id}
+          projetId={currentProjet?.id}
         />
-        {currentUserIsAdmin && (
+        {canEditProjet && (
           <>
             <FichesSolutionProjetBookmarksByEspace
-              projetNom={projet?.nom ?? ""}
-              projetTypeEspace={projet?.type_espace ?? ""}
+              projetNom={currentProjet?.nom ?? ""}
+              projetTypeEspace={currentProjet?.type_espace ?? ""}
               projetsFichesSolutionsIds={selectedFichesSolutionsIds ?? []}
               updateStore={updateStore}
-              projetId={projet?.id}
+              projetId={currentProjet?.id}
             />
 
             <FichesSolutionProjetBookmarksByEspace
-              projetNom={projet?.nom ?? ""}
+              projetNom={currentProjet?.nom ?? ""}
               projetTypeEspace={""}
               projetsFichesSolutionsIds={selectedFichesSolutionsIds ?? []}
               updateStore={updateStore}
-              projetId={projet?.id}
+              projetId={currentProjet?.id}
             />
           </>
         )}
