@@ -1,9 +1,9 @@
 "use client";
 
-import { type ReactNode, createContext, useRef, useContext } from "react";
+import { createContext, type ReactNode, useContext, useRef } from "react";
 import { type StoreApi, useStore } from "zustand";
 
-import { type ProjetsStore, createProjetStore, initProjetsStore } from "@/src/stores/projets/store";
+import { createProjetStore, initProjetsStore, type ProjetsStore } from "@/src/stores/projets/store";
 
 export const ProjetsStoreContext = createContext<StoreApi<ProjetsStore> | null>(null);
 
@@ -12,10 +12,7 @@ export interface ProjetsStoreProviderProps {
 }
 
 export const ProjetsStoreProvider = ({ children }: ProjetsStoreProviderProps) => {
-  const storeRef = useRef<StoreApi<ProjetsStore>>();
-  if (!storeRef.current) {
-    storeRef.current = createProjetStore(initProjetsStore());
-  }
+  const storeRef = useRef<StoreApi<ProjetsStore>>(createProjetStore(initProjetsStore()));
 
   return <ProjetsStoreContext.Provider value={storeRef.current}>{children}</ProjetsStoreContext.Provider>;
 };

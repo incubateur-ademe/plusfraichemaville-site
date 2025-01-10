@@ -11,10 +11,7 @@ export interface UserStoreProviderProps {
 }
 
 export const UserStoreProvider = ({ children }: UserStoreProviderProps) => {
-  const storeRef = useRef<StoreApi<UserStore>>();
-  if (!storeRef.current) {
-    storeRef.current = createUserStore(initUserStore());
-  }
+  const storeRef = useRef<StoreApi<UserStore>>(createUserStore(initUserStore()));
 
   return <UserStoreContext.Provider value={storeRef.current}>{children}</UserStoreContext.Provider>;
 };

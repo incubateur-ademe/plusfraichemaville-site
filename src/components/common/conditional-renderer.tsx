@@ -8,6 +8,8 @@ const Conditional = ({ children }: PropsWithChildren) => {
     if (!isValidElement(child)) return;
 
     if (!matchChild && child.type === Case) {
+      // TODO See how to fix properly this warning
+      // @ts-ignore
       const { condition } = child.props;
       const conditionResult = Boolean(condition);
 
