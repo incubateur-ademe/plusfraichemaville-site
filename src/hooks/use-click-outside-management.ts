@@ -1,7 +1,7 @@
 import { RefObject, useEffect } from "react";
 
 type UseClickOutsideManagementProps = {
-  ref: RefObject<HTMLInputElement>;
+  ref: RefObject<HTMLInputElement | null>;
   action: () => void;
 };
 

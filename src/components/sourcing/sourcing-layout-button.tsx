@@ -18,13 +18,15 @@ export const SourcingLayoutButton = () => {
       >
         Revenir au tableau de bord
       </GenericFicheLink>
-      <Conditional>
-        <Case condition={isMapPage}>
-          <Link href={PFMV_ROUTES.ESPACE_PROJET_SOURCING(+projetId)} className="fr-btn rounded-3xl">
-            Voir mes contacts sélectionnés
-          </Link>
-        </Case>
-      </Conditional>
+      {projetId && (
+        <Conditional>
+          <Case condition={isMapPage}>
+            <Link href={PFMV_ROUTES.ESPACE_PROJET_SOURCING(+projetId)} className="fr-btn rounded-3xl">
+              Voir mes contacts sélectionnés
+            </Link>
+          </Case>
+        </Conditional>
+      )}
     </div>
   );
 };
