@@ -13,7 +13,7 @@ import { AgentPromptRenderer } from "./renderers/agent-renderer-prompt";
 import dynamic from "next/dynamic";
 import { AgentError } from "./agent-error";
 
-const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.AgentHeader));
+const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.AgentHeader), {ssr: false});
 
 export const Agent = () => {
   const { adapter, api, initialConversation, conversationControls, error } = useAiChatConfig();

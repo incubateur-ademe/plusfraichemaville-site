@@ -50,7 +50,7 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: ReactElement | null }) {
   const lang = "fr";
-  const nonce = headers().get("x-nonce") ?? undefined;
+  const nonce = (await headers()).get("x-nonce") ?? undefined;
 
   return (
     <html {...getHtmlAttributes({ defaultColorScheme, lang })}>
