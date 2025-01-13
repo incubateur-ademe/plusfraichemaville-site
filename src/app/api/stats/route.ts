@@ -1,8 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
 import { add } from "date-fns/add";
+import { startOfYear } from "date-fns/startOfYear";
+import { startOfMonth } from "date-fns/startOfMonth";
+import { startOfWeek } from "date-fns/startOfWeek";
+import { startOfDay } from "date-fns/startOfDay";
 import { getNorthStarStats } from "@/src/lib/prisma/prisma-analytics-queries";
-import { DateRange, getBeginningDateOfRange } from "@/src/helpers/dateUtils";
+import { fr } from "date-fns/locale/fr";
+import { DateRange } from "@/src/helpers/dateUtils";
 
 const StatsRouteSchema = z.object({
   since: z
@@ -37,13 +42,26 @@ export async function GET(request: NextRequest) {
     return NextResponse.json({ error: { message: "Invalid request", errors } }, { status: 400 });
   } else {
     const { since: nbIntervals, periodicity } = parsedRequest.data;
-    const dateBeginOfLastPeriod = getBeginningDateOfRange(new Date(), periodicity);
-
-    const dateBeginOfLastPeriodWithOffset = add(dateBeginOfLastPeriod, {
+    let dateBeginOfLastPeriod = new Date();
+    switch (periodicity) {
+      case "year":
+        dateBeginOfLastPeriod = startOfYear(new Date());
+        break;
+      case "month":
+        dateBeginOfLastPeriod = startOfMonth(new Date());
+        break;
+      case "week":
+        dateBeginOfLastPeriod = startOfWeek(new Date(), { weekStartsOn: 1, locale: fr });
+        break;
+      case "day":
+        dateBeginOfLastPeriod = startOfDay(new Date());
+        break;
+    }
+    dateBeginOfLastPeriod = add(dateBeginOfLastPeriod, {
       minutes: -dateBeginOfLastPeriod.getTimezoneOffset(),
     });
 
-    const dateBeginOfFirstPeriod = add(dateBeginOfLastPeriodWithOffset, {
+    const dateBeginOfFirstPeriod = add(dateBeginOfLastPeriod, {
       ...(periodicity === "year" && { years: 1 - nbIntervals }),
       ...(periodicity === "month" && { months: 1 - nbIntervals }),
       ...(periodicity === "week" && { weeks: 1 - nbIntervals }),
@@ -86,7 +104,20 @@ const computeStats = (
 
   projets.forEach((projet) => {
     let periodeDate: Date;
-    periodeDate = getBeginningDateOfRange(projet.created_at, params.range);
+    switch (params.range) {
+      case "day":
+        periodeDate = startOfDay(projet.created_at);
+        break;
+      case "week":
+        periodeDate = startOfWeek(projet.created_at, { weekStartsOn: 1, locale: fr });
+        break;
+      case "month":
+        periodeDate = startOfMonth(projet.created_at);
+        break;
+      case "year":
+        periodeDate = startOfYear(projet.created_at);
+        break;
+    }
     const periodeKey = periodeDate.toISOString();
     statsMap.set(periodeKey, (statsMap.get(periodeKey) || 0) + 1);
   });
