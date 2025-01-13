@@ -3,6 +3,7 @@
 import { Analytics } from "@prisma/client";
 import { prismaClient } from "./prismaClient";
 import { DateRange } from "@/src/helpers/dateUtils";
+import { northStartStatQuery } from "@prisma/sql";
 
 type AnalyticsProps = Omit<Analytics, "id" | "created_at" | "created_by">;
 
@@ -21,6 +22,10 @@ export const createAnalytic = async (analytics: AnalyticsProps): Promise<Analyti
 type GetNorthStarStatsProps = {
   dateFrom: Date;
   range: DateRange;
+};
+
+export const getNorthStarStatsRaw = async (params: GetNorthStarStatsProps) => {
+  return prismaClient.$queryRawTyped(northStartStatQuery(params.dateFrom, params.range));
 };
 
 export const getNorthStarStats = async (
