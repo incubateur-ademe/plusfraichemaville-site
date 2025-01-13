@@ -1,3 +1,9 @@
+import { startOfDay } from "date-fns/startOfDay";
+import { startOfWeek } from "date-fns/startOfWeek";
+import { fr } from "date-fns/locale/fr";
+import { startOfMonth } from "date-fns/startOfMonth";
+import { startOfYear } from "date-fns/startOfYear";
+
 export type DateRange = "day" | "week" | "month" | "year";
 
 export const FAR_FUTURE = new Date(3024, 0, 0, 1);
@@ -49,4 +55,17 @@ export const daysUntilDate = (targetDate: Date | null): number | null => {
   const MS_PER_DAY = 1000 * 60 * 60 * 24;
 
   return Math.ceil((targetDate.getTime() - new Date().getTime()) / MS_PER_DAY);
+};
+
+export const getBeginningDateOfRange = (dateValue: Date, range: DateRange): Date => {
+  switch (range) {
+    case "day":
+      return startOfDay(dateValue);
+    case "week":
+      return startOfWeek(dateValue, { weekStartsOn: 1, locale: fr });
+    case "month":
+      return startOfMonth(dateValue);
+    case "year":
+      return startOfYear(dateValue);
+  }
 };
