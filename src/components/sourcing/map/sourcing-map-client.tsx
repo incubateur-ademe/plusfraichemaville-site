@@ -7,11 +7,13 @@ import MarkerClusterGroup from "react-leaflet-cluster";
 import { useCurrentProjetCoordinates } from "../hooks";
 import { createClusterCustomIcon, createCustomIcon } from "../helpers-client";
 import { SourcingMapLegend } from "./sourcing-map-legend";
-import { SourcingMapFocus } from "./sourcing-map-focus";
 import { CustomMarker, ZOOM_LEVELS, ZoomLevelKey } from "../types";
 import { SourcingSidePanelContainer } from "../side-panel/sourcing-side-panel-container";
 import { SourcingMapTileLayer } from "@/src/components/sourcing/map/sourcing-map-tile-layer";
 import { LatLngTuple } from "leaflet";
+import { SourcingMapFocus } from "@/src/components/sourcing/map/sourcing-map-focus";
+
+export const MAP_FALLBACK_DEFAULT_LOCATION: LatLngTuple = [48.8566, 2.3522];
 
 export type SourcingMapClientProps = {
   markers: CustomMarker[];
@@ -47,7 +49,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocu
       <div className="h-[715px] w-full max-w-[50rem]">
         <MapContainer
           className="relative h-full"
-          center={currentProjetCoordinates || undefined}
+          center={currentProjetCoordinates[0] ? currentProjetCoordinates : MAP_FALLBACK_DEFAULT_LOCATION}
           zoom={8}
           zoomControl={false}
           attributionControl={false}
@@ -67,7 +69,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocu
               />
             ))}
           </MarkerClusterGroup>
-          {currentProjetCoordinates && (
+          {currentProjetCoordinates[0] && (
             <Marker
               position={currentProjetCoordinates}
               zIndexOffset={9999}
@@ -84,7 +86,7 @@ const SourcingMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocu
           <ZoomControl position="topleft" />
           <SourcingMapLegend />
           <ScaleControl position="bottomright" imperial={false} />
-          <SourcingMapFocus coordinates={currentProjetCoordinates} />
+          {currentProjetCoordinates[0] && <SourcingMapFocus coordinates={currentProjetCoordinates} />}
         </MapContainer>
       </div>
       <div className="h-[715px] w-[400px] shrink-0 overflow-y-auto">
