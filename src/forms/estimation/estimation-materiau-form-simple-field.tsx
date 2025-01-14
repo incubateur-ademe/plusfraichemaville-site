@@ -98,7 +98,10 @@ export default function EstimationMateriauSimpleFieldForm({
 
   return (
     <>
-      <form id={`estimation-fiche-solution-${ficheSolution.id}`} onSubmit={form.handleSubmit((data) => onSubmit(data))}>
+      <form
+        id={`estimation-fiche-solution-${ficheSolution.id}-form`}
+        onSubmit={form.handleSubmit((data) => onSubmit(data))}
+      >
         <EstimationMateriauFieldUnique ficheSolutionAttributes={ficheSolution.attributes}>
           <InputFormField
             label={getUniteCoutFromCode(ficheSolution.attributes.cout_unite).estimationLabel}

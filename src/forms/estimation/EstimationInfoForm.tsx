@@ -59,7 +59,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
   const { error } = form.getFieldState("ficheSolutionIds");
 
   return (
-    <form id="create-estimation" onSubmit={form.handleSubmit(onSubmit)}>
+    <form id="create-estimation-form" onSubmit={form.handleSubmit(onSubmit)}>
       <FicheSolutionSmallCardContainer
         title=""
         subtitle="Choisissez les solutions à estimer pour votre simulation"
