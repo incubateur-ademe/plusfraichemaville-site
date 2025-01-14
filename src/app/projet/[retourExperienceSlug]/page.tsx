@@ -5,10 +5,11 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { getRetourExperienceBySlug } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 
 type RetourExperiencePageProps = {
-  params: { retourExperienceSlug: string; projetId: string };
+  params: Promise<{ retourExperienceSlug: string; projetId: string }>;
 };
 
-export async function generateMetadata({ params }: RetourExperiencePageProps): Promise<Metadata> {
+export async function generateMetadata(props: RetourExperiencePageProps): Promise<Metadata> {
+  const params = await props.params;
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
   return computeMetadata(
     "Retour d'expérience",
@@ -17,6 +18,7 @@ export async function generateMetadata({ params }: RetourExperiencePageProps): P
   );
 }
 
-export default async function RetourExperiencePage({ params }: RetourExperiencePageProps) {
+export default async function RetourExperiencePage(props: RetourExperiencePageProps) {
+  const params = await props.params;
   return <RetourExperienceServer params={params} />;
 }

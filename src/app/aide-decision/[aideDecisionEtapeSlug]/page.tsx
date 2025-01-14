@@ -15,8 +15,8 @@ import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 type AideDecisionPageProps = {
-  params: { aideDecisionEtapeSlug: string };
-  searchParams: { tri: string | undefined };
+  params: Promise<{ aideDecisionEtapeSlug: string }>;
+  searchParams: Promise<{ tri: string | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -26,7 +26,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: AideDecisionPageProps): Promise<Metadata> {
+export async function generateMetadata(props: AideDecisionPageProps): Promise<Metadata> {
+  const params = await props.params;
   const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
   return computeMetadata(
     currentStep?.attributes.nom || "Explorez nos solutions",
@@ -35,7 +36,9 @@ export async function generateMetadata({ params }: AideDecisionPageProps): Promi
   );
 }
 
-export default async function AideDecisionPage({ params, searchParams }: AideDecisionPageProps) {
+export default async function AideDecisionPage(props: AideDecisionPageProps) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {

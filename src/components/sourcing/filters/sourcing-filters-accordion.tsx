@@ -24,7 +24,7 @@ const filters: SourcingFilterType[] = [
 export const SourcingFiltersAccordion = ({ code, children, className }: SourcingFiltersAccordionProps) => {
   const [expanded, setExpanded] = useState(false);
   const filter = filters.find((f) => f.code === code);
-  const filterRef = useRef(null);
+  const filterRef = useRef<HTMLInputElement>(null);
   useClickOutsideManagement({
     ref: filterRef,
     action: () => {

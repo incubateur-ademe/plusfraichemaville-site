@@ -5,8 +5,8 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 type FicheSolutionPageProps = {
-  params: { ficheSolutionSlug: string; projetId: string };
-  searchParams: { etapeAideDecision: string | undefined };
+  params: Promise<{ ficheSolutionSlug: string; projetId: string }>;
+  searchParams: Promise<{ etapeAideDecision: string | undefined }>;
 };
 
 export async function generateStaticParams() {
@@ -16,7 +16,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: FicheSolutionPageProps): Promise<Metadata> {
+export async function generateMetadata(props: FicheSolutionPageProps): Promise<Metadata> {
+  const params = await props.params;
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
   return computeMetadata(
     ficheSolution?.attributes.titre || "Fiche solution",
@@ -25,6 +26,8 @@ export async function generateMetadata({ params }: FicheSolutionPageProps): Prom
   );
 }
 
-export default async function FicheSolutionPage({ params, searchParams }: FicheSolutionPageProps) {
+export default async function FicheSolutionPage(props: FicheSolutionPageProps) {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   return <FicheSolution params={params} searchParams={searchParams} />;
 }

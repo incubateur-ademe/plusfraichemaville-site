@@ -6,7 +6,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
 type FicheDiagnosticPageProps = {
-  params: { ficheDiagnosticSlug: string };
+  params: Promise<{ ficheDiagnosticSlug: string }>;
 };
 
 export async function generateStaticParams() {
@@ -16,7 +16,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: FicheDiagnosticPageProps): Promise<Metadata> {
+export async function generateMetadata(props: FicheDiagnosticPageProps): Promise<Metadata> {
+  const params = await props.params;
   const ficheDiagnostic = await getFicheDiagnosticBySlug(params.ficheDiagnosticSlug);
   return computeMetadata(
     ficheDiagnostic?.attributes.titre || "Fiche diagnostic",
@@ -25,7 +26,8 @@ export async function generateMetadata({ params }: FicheDiagnosticPageProps): Pr
   );
 }
 
-export default async function FicheDiagnosticPage({ params }: { params: { ficheDiagnosticSlug: string } }) {
+export default async function FicheDiagnosticPage(props: { params: Promise<{ ficheDiagnosticSlug: string }> }) {
+  const params = await props.params;
   const ficheDiagnostic = await getFicheDiagnosticBySlug(params.ficheDiagnosticSlug);
 
   if (!ficheDiagnostic) {

@@ -12,7 +12,7 @@ type StrapiWebhookPayload = {
 };
 
 export async function POST(request: NextRequest) {
-  const authorization = headers().get("authorization");
+  const authorization = (await headers()).get("authorization");
   const tag = request.nextUrl.searchParams.get("tag");
 
   if (authorization !== `Bearer ${process.env.CACHE_REVALIDATION_TOKEN}`) {

@@ -19,12 +19,12 @@ export type DSFRModal = {
 };
 
 export type Page = {
-  params: {
+  params: Promise<{
     [key: string]: string;
-  };
-  searchParams: {
+  }>;
+  searchParams: Promise<{
     [key: string]: string;
-  };
+  }>;
 };
 
 declare global {

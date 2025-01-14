@@ -18,11 +18,11 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
   const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === TypeAidesTerritoiresAide.financement;
-  const estimationId = +useParams().estimationId;
+  const estimationId = useParams().estimationId;
   return (
     <div className="pfmv-card no-shadow  relative w-[362px] cursor-pointer overflow-hidden" id={`aide-card-${aide.id}`}>
-      {withSaveButton && (
-        <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} className="right-2 top-2" />
+      {withSaveButton && !!estimationId && (
+        <AideCardSaveButton estimationId={+estimationId} aideTerritoireId={aide.id} className="right-2 top-2" />
       )}
       <div className="flex h-full flex-col" onClick={() => setCurrentDetailedAide(aide)}>
         <div

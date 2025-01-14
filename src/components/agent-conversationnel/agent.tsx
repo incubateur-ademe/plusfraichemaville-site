@@ -8,12 +8,12 @@ import { AgentGreeting } from "./agent-greeting";
 import { useAiChatControls } from "./hooks/use-ai-chat-controls";
 import { AgentButton } from "./agent-button";
 import { AgentLoader } from "./agent-loader";
-import { AgentResponseRenderer } from "./renderers/agent-renderer-response";
 import { AgentPromptRenderer } from "./renderers/agent-renderer-prompt";
 import dynamic from "next/dynamic";
 import { AgentError } from "./agent-error";
+import { AgentResponseRenderer } from "@/src/components/agent-conversationnel/renderers/agent-renderer-response";
 
-const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.AgentHeader));
+const AgentHeader = dynamic(() => import("./agent-header").then((mod) => mod.AgentHeader), { ssr: false });
 
 export const Agent = () => {
   const { adapter, api, initialConversation, conversationControls, error } = useAiChatConfig();
@@ -36,7 +36,7 @@ export const Agent = () => {
             className={displayOptions.rootClassName}
             composerOptions={{ placeholder: "Envoyer un message", autoFocus: true }}
             messageOptions={{
-              responseRenderer: (props) => AgentResponseRenderer(props, displayOptions),
+              responseRenderer: (props) => AgentResponseRenderer({ ...props, displayOptions }),
               promptRenderer: AgentPromptRenderer,
             }}
             initialConversation={initialConversation}

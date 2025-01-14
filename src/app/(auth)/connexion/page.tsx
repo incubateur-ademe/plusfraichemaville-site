@@ -37,7 +37,8 @@ const data = {
   ],
 };
 
-export default async function Connexion({ searchParams }: { searchParams: { callbackUrl: string | undefined } }) {
+export default async function Connexion(props: { searchParams: Promise<{ callbackUrl: string | undefined }> }) {
+  const searchParams = await props.searchParams;
   const session = await auth();
   if (session) {
     redirect(PFMV_ROUTES.ESPACE_PROJET_LISTE);

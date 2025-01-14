@@ -17,7 +17,7 @@ type AideFicheProps = {
 
 export const AideFiche = ({ aide }: AideFicheProps) => {
   const isAideFinanciere = resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement;
-  const estimationId = +useParams().estimationId;
+  const estimationId = useParams().estimationId;
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(projet?.id);
 
@@ -31,7 +31,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
         id="financement-panel"
       >
         {!!estimationId && canEditProjet && (
-          <AideCardSaveButton estimationId={estimationId} aideTerritoireId={aide.id} className="right-4 top-4" />
+          <AideCardSaveButton estimationId={+estimationId} aideTerritoireId={aide.id} className="right-4 top-4" />
         )}
         <div className="mb-6 flex items-center gap-4">
           <Image
