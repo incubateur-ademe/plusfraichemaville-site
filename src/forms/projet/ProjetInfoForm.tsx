@@ -34,7 +34,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
     defaultValues: {
       adresse: mapDBProjetToProjetAddress(projet),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
-      isPublic: projet?.is_public ?? false,
+      isPublic: projet?.is_public ?? true,
     },
   });
 
@@ -47,7 +47,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
       adresse: mapDBProjetToProjetAddress(projet),
       dateEcheance: monthDateToString(projet?.date_echeance),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
-      isPublic: projet?.is_public ?? false,
+      isPublic: projet?.is_public ?? true,
     });
   }, [form, projet]);
 
