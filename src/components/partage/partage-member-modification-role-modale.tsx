@@ -75,7 +75,7 @@ export const PartageMemberModificationRoleModale = () => {
         {currentUserModification ? (
           <>
             <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Modifier les informations {"d'un membre"}</h2>
-            <form id="user-partage-modification" onSubmit={form.handleSubmit(onSubmit)}>
+            <form id="user-partage-modification-form" onSubmit={form.handleSubmit(onSubmit)}>
               <Input
                 label=""
                 disabled

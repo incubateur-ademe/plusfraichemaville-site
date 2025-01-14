@@ -68,7 +68,7 @@ export const ContactForm = () => {
     !form.watch("objetMessage") ||
     !form.watch("email");
   return (
-    <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
+    <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
       <InputFormField control={form.control} path="prenom" label="Votre prénom" asterisk={true} />
       <InputFormField control={form.control} path="nom" label="Votre nom" asterisk={true} />
       <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />

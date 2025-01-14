@@ -34,7 +34,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
     defaultValues: {
       adresse: mapDBProjetToProjetAddress(projet),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
-      isPublic: projet?.is_public ?? false,
+      isPublic: projet?.is_public ?? true,
     },
   });
 
@@ -47,7 +47,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
       adresse: mapDBProjetToProjetAddress(projet),
       dateEcheance: monthDateToString(projet?.date_echeance),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
-      isPublic: projet?.is_public ?? false,
+      isPublic: projet?.is_public ?? true,
     });
   }, [form, projet]);
 
@@ -71,7 +71,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
 
   return (
     <>
-      <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
+      <form id="projet-info-form" onSubmit={form.handleSubmit(onSubmit)}>
         <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} disabled={disabled} />
         <SelectFormField
           control={form.control}
