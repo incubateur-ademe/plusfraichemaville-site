@@ -62,7 +62,7 @@ export const UserInfoForm = ({
   const watchCanalAcquisition = form.watch("canalAcquisition");
 
   return (
-    <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
+    <form id="user-info-form" onSubmit={form.handleSubmit(onSubmit)}>
       <InputFormField control={form.control} path="nom" label="Nom" asterisk={true} />
       <InputFormField control={form.control} path="prenom" label="Prénom" asterisk={true} />
       <InputFormField control={form.control} path="email" label="Email" asterisk={true} disabled={!!user.email} />

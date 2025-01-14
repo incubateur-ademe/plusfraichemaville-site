@@ -12,15 +12,19 @@ export const trackUserWithEmail = (path: string, email?: string | null) => {
   }
 };
 
+export const removeHubspotCookies = () => {
+  const hubspotCookies = ["__hssc", "__hssrc", "__hs_do_not_track", "__hstc", "hubspotutk", "messagesUtk"];
+  hubspotCookies.forEach((cookieName) => {
+    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
+  });
+};
+
 export const declineHubspotCookie = () => {
   if (!enableHubspotTracking) {
     console.debug("declineHubspotCookie");
     return;
   }
-  const hubspotCookies = ["__hssc", "__hssrc", "__hs_do_not_track", "__hstc", "hubspotutk", "messagesUtk"];
-  hubspotCookies.forEach((cookieName) => {
-    document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`;
-  });
+  removeHubspotCookies();
   window?._hsq?.push(["doNotTrack"]);
   window?._hsp?.push(["revokeCookieConsent"]);
 };

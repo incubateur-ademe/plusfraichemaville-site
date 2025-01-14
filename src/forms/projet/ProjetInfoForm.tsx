@@ -71,7 +71,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
 
   return (
     <>
-      <form id="user-info" onSubmit={form.handleSubmit(onSubmit)}>
+      <form id="projet-info-form" onSubmit={form.handleSubmit(onSubmit)}>
         <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} disabled={disabled} />
         <SelectFormField
           control={form.control}
