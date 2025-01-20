@@ -1,5 +1,5 @@
 import { Fragment, useState, useEffect } from "react";
-import { Combobox, Transition } from "@headlessui/react";
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react";
 import { fetchAddressFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { BanFeature } from "@/src/lib/adresseApi/types";
 import debounce from "lodash/debounce";
@@ -40,9 +40,9 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
   const throttledFetchAddress = debounce((keyword) => setQuery(keyword), 200);
 
   return (
-    <Combobox onChange={handleChange} nullable>
+    <Combobox onChange={handleChange} as="div">
       <div className="relative mr-5 flex h-fit w-96">
-        <Combobox.Input
+        <ComboboxInput
           className={clsx(
             "relative h-12 w-96 placeholder:text-black",
             "px-4 ring-1 ring-dsfr-border-default-grey",
@@ -64,7 +64,7 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
         leaveTo="opacity-100"
         afterLeave={() => setQuery("")}
       >
-        <Combobox.Options
+        <ComboboxOptions
           className={clsx(
             "absolute top-12 z-[1000] max-h-60 !w-96 list-none overflow-auto",
             "bg-white",
@@ -75,22 +75,22 @@ export const SourcingFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProp
             <div className="border-b border-dsfr-border-default-grey p-4">Aucun résultat.</div>
           ) : (
             fetchedAddresses.map((address, index) => (
-              <Combobox.Option
+              <ComboboxOption
                 key={index}
                 value={address}
-                className={({ active }) =>
+                className={({ focus }) =>
                   clsx(
                     "-ml-4 h-14 border-b border-dsfr-border-default-grey !pl-8",
                     "flex items-center",
-                    active && "bg-dsfr-background-alt-grey",
+                    focus && "bg-dsfr-background-alt-grey",
                   )
                 }
               >
                 {`${address?.properties.label} - ${address?.properties.postcode}`}
-              </Combobox.Option>
+              </ComboboxOption>
             ))
           )}
-        </Combobox.Options>
+        </ComboboxOptions>
       </Transition>
     </Combobox>
   );
