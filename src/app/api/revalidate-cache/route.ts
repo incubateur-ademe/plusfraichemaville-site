@@ -24,6 +24,9 @@ export async function POST(request: NextRequest) {
     if (payload.model === "webinaire") {
       revalidateTag("webinaires");
       return NextResponse.json({ message: "Successfully revalidated webinaires" }, { status: 200 });
+    } else if (payload.model === "retourExperience") {
+      revalidateTag("get-rex-aquagir");
+      return NextResponse.json({ message: "Successfully revalidated webinaires" }, { status: 200 });
     }
     return NextResponse.json({ message: "Nothing to revalidate" }, { status: 200 });
   } catch (error) {

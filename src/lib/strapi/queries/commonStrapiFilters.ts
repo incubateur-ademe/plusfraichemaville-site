@@ -1,6 +1,7 @@
 import { Media } from "@/src/lib/strapi/types/common/Media";
+import { isBoolean } from "@/src/helpers/common";
 
-type StrapiEqFilter = { attribute: string; value: string; operator: "eq"; relation: false };
+type StrapiEqFilter = { attribute: string; value: string | boolean; operator: "eq"; relation: false };
 type StrapiInFilter = { attribute: string; value: string[] | number[]; operator: "in"; relation: false };
 type StrapiRelationFilter = { attribute: string; operator: "null" | "notNull"; relation: true };
 type StrapiSortFilter = { attribute: string; order: "asc" | "desc" };
@@ -39,7 +40,9 @@ export class StrapiFilter {
             .map((f) => {
               switch (f.relation) {
                 case false:
-                  return ` {${f.attribute}: {${f.operator}: ${JSON.stringify(f.value)}}} `;
+                  return ` {${f.attribute}: {${f.operator}: ${
+                    isBoolean(f.value) ? f.value : JSON.stringify(f.value)
+                  }}} `;
                 case true:
                   return ` {${f.attribute} : {id : {${f.operator} : true}}} `;
               }
