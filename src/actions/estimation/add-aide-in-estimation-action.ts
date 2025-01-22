@@ -3,13 +3,14 @@ import { fetchAideFromAidesTerritoiresById } from "@/src/lib/aidesTerritoires/fe
 
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { addAideInEstimation, getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
+import { getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 import { upsertAide } from "@/src/lib/prisma/prismaAideQueries";
 import { resolveAidType } from "@/src/components/financement/helpers";
 import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { addAideInEstimation } from "@/src/lib/prisma/prisma-aide-estimation-queries";
 
 export const addAideInEstimationAction = async (
   estimationId: number,
@@ -48,7 +49,7 @@ export const addAideInEstimationAction = async (
       return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
     }
 
-    const estimationAide = await addAideInEstimation(estimationId, upsertedAide.id);
+    const estimationAide = await addAideInEstimation(estimationId, upsertedAide.id, session.user.id);
     return { type: "success", message: "ESTIMATION_AIDE_ADDED", estimationAide };
   } catch (e) {
     customCaptureException("Error in updateAideInEstimation DB call", e);

@@ -61,7 +61,7 @@ export const callAidesTerritoiresApi = async <T extends IApiAidesTerritoiresResp
       return callAidesTerritoiresApi(url, true);
     }
     if (response.status >= 400) {
-      captureError("Error when calling Aides territoires API", result.message);
+      captureError(`Error when calling Aides territoires API status ${response.status}`, result.message);
       return null;
     }
     return result;

@@ -1,11 +1,7 @@
 import { generateRandomId } from "@/src/helpers/common";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { estimation, Prisma } from "@prisma/client";
-import {
-  EstimationAide,
-  EstimationMateriauxFicheSolution,
-  EstimationWithAides,
-} from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { projetUpdated } from "./prismaProjetQueries";
 
 export const getEstimationById = async (estimationId: number): Promise<estimation | null> => {
@@ -75,61 +71,6 @@ export const updateEstimationMateriaux = async (
   });
 
   await projetUpdated(response.projet_id);
-
-  return response;
-};
-
-export const addAideInEstimation = async (estimationId: number, aideId: number): Promise<EstimationAide> => {
-  const response = await prismaClient.estimations_aides.upsert({
-    where: {
-      estimationId_aideId: {
-        estimationId,
-        aideId,
-      },
-    },
-    update: {},
-    create: {
-      estimationId,
-      aideId,
-    },
-    include: {
-      aide: true,
-    },
-  });
-
-  const estimation = await prismaClient.estimation.findUnique({
-    where: { id: estimationId },
-    select: { projet_id: true },
-  });
-
-  if (estimation) {
-    await projetUpdated(estimation.projet_id);
-  }
-
-  return response;
-};
-
-export const deleteAideInEstimation = async (estimationId: number, aideId: number): Promise<EstimationAide | null> => {
-  const response = await prismaClient.estimations_aides.delete({
-    where: {
-      estimationId_aideId: {
-        estimationId,
-        aideId,
-      },
-    },
-    include: {
-      aide: true,
-    },
-  });
-
-  const estimation = await prismaClient.estimation.findUnique({
-    where: { id: estimationId },
-    select: { projet_id: true },
-  });
-
-  if (estimation) {
-    await projetUpdated(estimation.projet_id);
-  }
 
   return response;
 };

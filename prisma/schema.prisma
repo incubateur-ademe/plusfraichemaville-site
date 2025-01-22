@@ -58,6 +58,7 @@ model User {
   sourcing_contacts_created    projet_sourcing_contact[]
   accept_communication_produit Boolean                   @default(true)
   emails                       email[]
+  estimations_aides            estimations_aides[]
 }
 
 model VerificationToken {
@@ -260,6 +261,9 @@ model estimations_aides {
   estimationId Int
   aide         aide       @relation(fields: [aideId], references: [id])
   aideId       Int
+  created_at   DateTime?  @default(now())
+  user_id      String?
+  created_by   User?      @relation(fields: [user_id], references: [id])
 
   @@id([estimationId, aideId])
 }
