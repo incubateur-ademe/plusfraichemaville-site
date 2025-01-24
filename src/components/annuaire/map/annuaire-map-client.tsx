@@ -15,7 +15,7 @@ import { AnnuaireMapFocus } from "@/src/components/annuaire/map/annuaire-map-foc
 
 export const MAP_FALLBACK_DEFAULT_LOCATION: LatLngTuple = [48.8566, 2.3522];
 
-export type SourcingMapClientProps = {
+export type AnnuaireMapClientProps = {
   markers: CustomMarker[];
   setSelectedMarker: (_: CustomMarker) => void;
   selectedMarker?: CustomMarker;
@@ -33,7 +33,7 @@ const MapFocus = ({ mapFocus }: { mapFocus?: { coordinates?: LatLngTuple; zoom?:
   return null;
 };
 
-const AnnuaireMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocus }: SourcingMapClientProps) => {
+const AnnuaireMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocus }: AnnuaireMapClientProps) => {
   const currentProjetCoordinates = useCurrentProjetCoordinates();
 
   const handleMarkerClick = (selectedMarker: CustomMarker) => {

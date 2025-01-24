@@ -1,25 +1,25 @@
 import { useCallback, useState } from "react";
 import { contactsTypeMap, ContactTypeKeys } from "@/src/components/annuaire/helpers";
-import { RexContactId, SourcingContact } from "@/src/components/annuaire/types";
+import { RexContactId, AnnuaireContact } from "@/src/components/annuaire/types";
 
-export type SourcingContactFiltersState = {
+export type AnnuaireContactFiltersState = {
   filterKey: ContactTypeKeys;
   selected: boolean;
 }[];
 
 export const useAnnuaireCardFilters = () => {
-  const [contactTypeFilters, setContactTypeFilters] = useState<SourcingContactFiltersState>(
+  const [contactTypeFilters, setContactTypeFilters] = useState<AnnuaireContactFiltersState>(
     contactsTypeMap.map((contactType) => ({ filterKey: contactType.code, selected: false })),
   );
 
   const setFilter = (key: ContactTypeKeys, selected: boolean) => {
     setContactTypeFilters(contactTypeFilters.map((f) => (f.filterKey != key ? f : { filterKey: key, selected })));
   };
-  const [sourcingContacts, setSourcingContacts] = useState<SourcingContact[]>([]);
+  const [annuaireContacts, setAnnuaireContacts] = useState<AnnuaireContact[]>([]);
 
-  const addRexContact = useCallback((newContact: SourcingContact) => {
+  const addRexContact = useCallback((newContact: AnnuaireContact) => {
     if (newContact.type === "rex") {
-      setSourcingContacts((oldArray) => [
+      setAnnuaireContacts((oldArray) => [
         ...oldArray.filter(
           (contact) =>
             contact.type !== "rex" ||
@@ -31,15 +31,15 @@ export const useAnnuaireCardFilters = () => {
     }
   }, []);
 
-  const setInProgressContacts = useCallback((inProgressProjetContacts: SourcingContact[]) => {
-    setSourcingContacts((oldArray) => [
+  const setInProgressContacts = useCallback((inProgressProjetContacts: AnnuaireContact[]) => {
+    setAnnuaireContacts((oldArray) => [
       ...oldArray.filter((oldContact) => oldContact.type !== "in-progress"),
       ...inProgressProjetContacts,
     ]);
   }, []);
 
   const removeRexContacts = useCallback((newRexContactIds: RexContactId[]) => {
-    setSourcingContacts((oldArray) => [
+    setAnnuaireContacts((oldArray) => [
       ...oldArray.filter(
         (oldContact) =>
           oldContact.type !== "rex" ||
@@ -49,12 +49,12 @@ export const useAnnuaireCardFilters = () => {
   }, []);
 
   const contactCountForFilter = useCallback(
-    (filterKey: ContactTypeKeys) => sourcingContacts.filter((c) => c.typeContact === filterKey).length ?? 0,
-    [sourcingContacts],
+    (filterKey: ContactTypeKeys) => annuaireContacts.filter((c) => c.typeContact === filterKey).length ?? 0,
+    [annuaireContacts],
   );
 
   const contactIsVisible = useCallback(
-    (contact: SourcingContact): boolean =>
+    (contact: AnnuaireContact): boolean =>
       contactTypeFilters.every((f) => !f.selected) ||
       contactTypeFilters.find((f) => f.filterKey === contact.typeContact)?.selected ||
       false,

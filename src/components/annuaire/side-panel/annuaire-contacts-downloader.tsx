@@ -3,18 +3,18 @@ import { generateAnnuaireContactsCsvAction } from "@/src/actions/projets/generat
 import { downloadCsv } from "@/src/helpers/csv-utils";
 import clsx from "clsx";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
-import { SOURCING_DOWNLOAD_CSV } from "@/src/helpers/matomo/matomo-tags";
+import { ANNUAIRE_DOWNLOAD_CSV } from "@/src/helpers/matomo/matomo-tags";
 
-type SourcingContactsDownloaderProps = {
+type AnnuaireContactsDownloaderProps = {
   projetId?: number;
   className?: string;
 };
 
-export const AnnuaireContactsDownloader = ({ projetId, className }: SourcingContactsDownloaderProps) => {
+export const AnnuaireContactsDownloader = ({ projetId, className }: AnnuaireContactsDownloaderProps) => {
   const [isPending, startTransition] = useTransition();
 
   const handleDownload = () => {
-    trackEvent(SOURCING_DOWNLOAD_CSV);
+    trackEvent(ANNUAIRE_DOWNLOAD_CSV);
     startTransition(async () => {
       if (projetId) {
         const result = await generateAnnuaireContactsCsvAction(projetId);

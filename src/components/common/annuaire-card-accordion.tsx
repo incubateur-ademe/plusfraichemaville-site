@@ -16,7 +16,7 @@ export default function AnnuaireCardAccordion({
       <h3 className="mb-0">
         <button
           className={clsx(
-            "sourcingCardAccordionBtn fr-accordion__btn !text-[1.375rem] !text-dsfr-text-title-grey",
+            "annuaireCardAccordionBtn fr-accordion__btn !text-[1.375rem] !text-dsfr-text-title-grey",
             "!bg-dsfr-background-alt-blue-france !p-6 !font-bold",
             "fr-icon-arrow-down-s-line  fr-btn--icon-left !mb-4",
           )}

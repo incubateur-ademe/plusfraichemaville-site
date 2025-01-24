@@ -8,11 +8,11 @@ import clsx from "clsx";
 import { LatLngTuple } from "leaflet";
 import { ZoomLevelKey } from "../types";
 
-type SourcingFilterAdresseProps = {
+type AnnuaireFilterAdresseProps = {
   setMapFocus: (_: { coordinates?: LatLngTuple; zoom?: ZoomLevelKey }) => void;
 };
 
-export const AnnuaireFilterAdresse = ({ setMapFocus }: SourcingFilterAdresseProps) => {
+export const AnnuaireFilterAdresse = ({ setMapFocus }: AnnuaireFilterAdresseProps) => {
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [fetchedAddresses, setFetchedAddresses] = useState<BanFeature[]>([]);

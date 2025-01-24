@@ -6,7 +6,7 @@ import { AnnuaireEmpty } from "./annuaire-empty";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import { isEmpty } from "@/src/helpers/listUtils";
-import { userProjetToSourcingContactWithProjet } from "@/src/components/annuaire/helpers";
+import { userProjetToAnnuaireContactWithProjet } from "@/src/components/annuaire/helpers";
 import { RexContactId } from "@/src/components/annuaire/types";
 import { AnnuaireRexContactCardFetcher } from "@/src/components/annuaire/contacts/annuaire-rex-contact-card-fetcher";
 import { AnnuaireProjetVisibility } from "./annuaire-projet-visibility";
@@ -32,14 +32,14 @@ export const Annuaire = () => {
     contactIsVisible,
   } = useAnnuaireCardFilters();
 
-  const inProgressSourcingContact = useMemo(
-    () => inProgressProjetContacts?.map((c) => userProjetToSourcingContactWithProjet(c.sourced_user_projet)) || [],
+  const inProgressAnnuaireContact = useMemo(
+    () => inProgressProjetContacts?.map((c) => userProjetToAnnuaireContactWithProjet(c.sourced_user_projet)) || [],
     [inProgressProjetContacts],
   );
 
   useEffect(() => {
-    setInProgressContacts(inProgressSourcingContact);
-  }, [inProgressSourcingContact, setInProgressContacts]);
+    setInProgressContacts(inProgressAnnuaireContact);
+  }, [inProgressAnnuaireContact, setInProgressContacts]);
 
   useEffect(() => {
     if (rexContactIds) {
@@ -64,16 +64,16 @@ export const Annuaire = () => {
         contactCountForFilter={contactCountForFilter}
       />
       <div className="flex flex-wrap gap-6">
-        {!isEmpty(inProgressSourcingContact) &&
-          inProgressSourcingContact?.map(
+        {!isEmpty(inProgressAnnuaireContact) &&
+          inProgressAnnuaireContact?.map(
             (contact) =>
               contactIsVisible(contact) && (
                 <AnnuaireContactCard
                   key={contact.uniqueId}
                   contact={contact}
-                  sourcingProjetId={currentProjet?.id}
+                  projetId={currentProjet?.id}
                   className="w-96"
-                  showSourcedProjet
+                  showContactProjet
                 />
               ),
           )}

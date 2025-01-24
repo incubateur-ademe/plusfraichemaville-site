@@ -8,22 +8,22 @@ import { AnnuaireRexContentSeeProjetModalSkeleton } from "./annuaire-rex-content
 import { RetourExperienceWithFetcher } from "../../projet/projet-retour-experience-with-fetcher";
 
 const modal = createModal({
-  id: "sourcing-rex-projet-modal",
+  id: "annuaire-rex-projet-modal",
   isOpenedByDefault: false,
 });
 
 export const AnnuaireRexContentSeeProjetModal = () => {
-  const currentSourcingRexProjet = useModalStore((state) => state.currentSourcingRexProjet);
-  const setCurrentSourcingRexProjet = useModalStore((state) => state.setCurrentSourcingRexProjet);
+  const currentAnnuaireRexProjet = useModalStore((state) => state.currentAnnuaireRexProjet);
+  const setCurrentAnnuaireRexProjet = useModalStore((state) => state.setAnnuaireRexProjetSlug);
 
   useEffect(() => {
-    if (currentSourcingRexProjet) {
+    if (currentAnnuaireRexProjet) {
       modal.open();
     }
-  }, [currentSourcingRexProjet]);
+  }, [currentAnnuaireRexProjet]);
 
   useIsModalOpen(modal, {
-    onConceal: () => setCurrentSourcingRexProjet(null),
+    onConceal: () => setCurrentAnnuaireRexProjet(null),
   });
 
   return (
@@ -37,9 +37,9 @@ export const AnnuaireRexContentSeeProjetModal = () => {
         size="large"
         className="xl-modal"
       >
-        {currentSourcingRexProjet && (
+        {currentAnnuaireRexProjet && (
           <Suspense fallback={<AnnuaireRexContentSeeProjetModalSkeleton />}>
-            <RetourExperienceWithFetcher isModal retourExperienceSlug={currentSourcingRexProjet} />
+            <RetourExperienceWithFetcher isModal retourExperienceSlug={currentAnnuaireRexProjet} />
           </Suspense>
         )}
       </modal.Component>

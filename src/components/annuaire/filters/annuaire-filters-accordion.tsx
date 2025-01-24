@@ -3,25 +3,25 @@ import clsx from "clsx";
 import { ReactNode, useRef, useState } from "react";
 import { useClickOutsideManagement } from "@/src/hooks/use-click-outside-management";
 
-type SourcingFilterType = {
+type AnnuaireFilterType = {
   code: "type-espace" | "statut-projet" | "budget";
   label: string;
   iconId: string;
 };
 
-type SourcingFiltersAccordionProps = {
-  code: SourcingFilterType["code"];
+type AnnuaireFiltersAccordionProps = {
+  code: AnnuaireFilterType["code"];
   children: NonNullable<ReactNode>;
   className?: string;
 };
 
-const filters: SourcingFilterType[] = [
+const filters: AnnuaireFilterType[] = [
   { code: "type-espace", label: "Type d'espace", iconId: "ri-tree-line" },
   { code: "statut-projet", label: "Statut du projet", iconId: "ri-bar-chart-2-line" },
   { code: "budget", label: "Budget", iconId: "ri-money-euro-circle-line" },
 ];
 
-export const AnnuaireFiltersAccordion = ({ code, children, className }: SourcingFiltersAccordionProps) => {
+export const AnnuaireFiltersAccordion = ({ code, children, className }: AnnuaireFiltersAccordionProps) => {
   const [expanded, setExpanded] = useState(false);
   const filter = filters.find((f) => f.code === code);
   const filterRef = useRef<HTMLInputElement>(null);
@@ -39,7 +39,7 @@ export const AnnuaireFiltersAccordion = ({ code, children, className }: Sourcing
       className={clsx(
         "!z-[1500] h-fit w-[212px] !border-x-[1px] !border-x-dsfr-border-default-grey bg-white",
         className,
-        "sourcingFilterAccordion",
+        "annuaireFilterAccordion",
       )}
       label={
         <>

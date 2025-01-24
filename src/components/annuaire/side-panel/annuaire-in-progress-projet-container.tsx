@@ -6,7 +6,7 @@ import { AnnuaireInProgressProjetSkeleton } from "@/src/components/annuaire/side
 import { AnnuaireInProgressProjetContent } from "@/src/components/annuaire/side-panel/annuaire-in-progress-projet-content";
 import { useSidePanelFetcher } from "@/src/components/annuaire/hooks";
 
-export const SourcingInProgressSidePanelContainer = ({ projetId }: { projetId: number }) => {
+export const AnnuaireInProgressSidePanelContainer = ({ projetId }: { projetId: number }) => {
   const sidePanel = useSidePanelFetcher<ProjetWithPublicRelations>({
     url: GET_PUBLIC_PROJET_BY_ID(projetId),
     Skeleton: AnnuaireInProgressProjetSkeleton,

@@ -2,12 +2,12 @@ import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { AnnuaireFiltersAccordion } from "./annuaire-filters-accordion";
 import { BUDGET_RANGES, BudgetRangeKey } from "../helpers";
 
-type SourcingFilterBudgetProps = {
+type AnnuaireFilterBudgetProps = {
   selectedBudget: BudgetRangeKey[];
   setSelectedBudget: (_status: BudgetRangeKey[]) => void;
 };
 
-export const AnnuaireFilterBudget = ({ selectedBudget, setSelectedBudget }: SourcingFilterBudgetProps) => {
+export const AnnuaireFilterBudget = ({ selectedBudget, setSelectedBudget }: AnnuaireFilterBudgetProps) => {
   const handleSelectedBudget = (budgetKey: BudgetRangeKey) => {
     setSelectedBudget(
       selectedBudget?.includes(budgetKey)

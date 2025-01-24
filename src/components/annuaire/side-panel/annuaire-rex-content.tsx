@@ -3,9 +3,9 @@ import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { AnnuaireContactCard } from "../contacts/annuaire-contact-card";
 import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
-import { StrapiSourcingContact } from "@/src/components/annuaire/types";
+import { StrapiAnnuaireContact } from "@/src/components/annuaire/types";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { strapiContactToSourcingContact } from "@/src/components/annuaire/helpers";
+import { strapiContactToAnnuaireContact } from "@/src/components/annuaire/helpers";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { AnnuaireRexContentSeeProject } from "./annuaire-rex-content-see-project";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
@@ -15,8 +15,8 @@ import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const retourExperienceAttributes = data.attributes;
-  const contacts = (data.attributes.contacts as unknown as StrapiSourcingContact[]).map((contact) =>
-    strapiContactToSourcingContact(contact, data),
+  const contacts = (data.attributes.contacts as unknown as StrapiAnnuaireContact[]).map((contact) =>
+    strapiContactToAnnuaireContact(contact, data),
   );
 
   return (
@@ -57,9 +57,9 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
               <AnnuaireContactCard
                 contact={contact}
                 key={contact.uniqueId}
-                sourcingProjetId={currentProjetId}
+                projetId={currentProjetId}
                 className="mb-4"
-                showSourcedProjet={false}
+                showContactProjet={false}
               />
             ))}
           </Case>

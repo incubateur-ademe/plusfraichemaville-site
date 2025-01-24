@@ -3,14 +3,14 @@ import { TypeEspaceCode } from "@/src/helpers/type-espace-filter";
 import { AnnuaireFiltersAccordion } from "./annuaire-filters-accordion";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 
-type SourcingFilterTypeEspaceProps = {
+type AnnuaireFilterTypeEspaceProps = {
   selectedTypeEspace: TypeEspaceCode[];
   setSelectedTypeEspace: (_type: TypeEspaceCode[]) => void;
 };
 export const AnnuaireFilterTypeEspace = ({
   selectedTypeEspace,
   setSelectedTypeEspace,
-}: SourcingFilterTypeEspaceProps) => {
+}: AnnuaireFilterTypeEspaceProps) => {
   const handleSelectedType = (type: TypeEspaceCode) => {
     setSelectedTypeEspace(
       selectedTypeEspace?.includes(type)

@@ -4,8 +4,8 @@ import {
   UserProjetWithUserInfos,
 } from "@/src/lib/prisma/prismaCustomTypes";
 import { LatLngTuple } from "leaflet";
-import { SourcingMapClientProps } from "./map/annuaire-map-client";
-import { CustomMarker, GeoJsonAdresse, SourcingContact, SourcingContactTypeMap, StrapiSourcingContact } from "./types";
+import { AnnuaireMapClientProps } from "./map/annuaire-map-client";
+import { CustomMarker, GeoJsonAdresse, AnnuaireContact, AnnuaireContactTypeMap, StrapiAnnuaireContact } from "./types";
 import { prettyUserName } from "@/src/helpers/user";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
@@ -35,7 +35,7 @@ export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPubl
     };
   });
 
-export const makeRexMarkers = (rexProjets: RetourExperience[]): SourcingMapClientProps["markers"] =>
+export const makeRexMarkers = (rexProjets: RetourExperience[]): AnnuaireMapClientProps["markers"] =>
   rexProjets
     .filter((projet) => Boolean(projet.attributes.location as unknown as GeoJsonAdresse))
     .map((projet) => {
@@ -54,7 +54,7 @@ export const makeRexMarkers = (rexProjets: RetourExperience[]): SourcingMapClien
       };
     });
 
-export const contactsTypeMap: SourcingContactTypeMap[] = [
+export const contactsTypeMap: AnnuaireContactTypeMap[] = [
   { code: TypeDeContact.Collectivite, label: "Collectivité" },
   { code: TypeDeContact.Conseil, label: "Conseil" },
   { code: TypeDeContact.StructurePublique, label: "Structure publique" },
@@ -69,7 +69,7 @@ export type ContactTypeKeys = (typeof contactsTypeMap)[number]["code"];
 export const getContactTypeLabelByCode = (code: ContactTypeKeys) =>
   contactsTypeMap.find((c) => c.code === code)?.label || code;
 
-export const contactsSousTypeMap: SourcingContactTypeMap[] = [
+export const contactsSousTypeMap: AnnuaireContactTypeMap[] = [
   { code: SousTypeDeContact.BureauEtudeIngenierie, label: "Bureau d'étude ingénierie" },
   { code: SousTypeDeContact.BureauEtudeTechnique, label: "Bureau d'étude technique" },
   { code: SousTypeDeContact.AssistanceMaitriseOuvrage, label: "Assistance à maîtrise d'ouvrage" },
@@ -97,16 +97,16 @@ export const contactsSousTypeMap: SourcingContactTypeMap[] = [
   { code: SousTypeDeContact.PoleInnovation, label: "Pôle d'innovation" },
 ] as const;
 
-export const getSourcingContactTypeLabel = (code: SourcingContactTypeMap["code"], isSousType?: boolean) => {
+export const getAnnuaireContactTypeLabel = (code: AnnuaireContactTypeMap["code"], isSousType?: boolean) => {
   const map = isSousType ? contactsSousTypeMap : contactsTypeMap;
   const contactType = map.find((item) => item.code === code);
   return contactType?.label;
 };
 
-export const strapiContactToSourcingContact = (
-  strapiContact: StrapiSourcingContact,
+export const strapiContactToAnnuaireContact = (
+  strapiContact: StrapiAnnuaireContact,
   retourExperience: RetourExperience,
-): SourcingContact => {
+): AnnuaireContact => {
   return {
     type: "rex",
     uniqueId: `rex-${retourExperience.id}-${strapiContact.id}`,
@@ -129,7 +129,7 @@ export const strapiContactToSourcingContact = (
   };
 };
 
-export const userProjetToSourcingContact = (userProjet: UserProjetWithUserInfos): SourcingContact => ({
+export const userProjetToAnnuaireContact = (userProjet: UserProjetWithUserInfos): AnnuaireContact => ({
   type: "in-progress",
   uniqueId: `in-progress-${userProjet?.id}`,
   userProjetId: userProjet?.id,
@@ -140,7 +140,7 @@ export const userProjetToSourcingContact = (userProjet: UserProjetWithUserInfos)
   label: userProjet.user ? prettyUserName(userProjet.user) : "",
 });
 
-export const userProjetToSourcingContactWithProjet = (userProjet: UserProjetWithPublicInfos): SourcingContact => ({
+export const userProjetToAnnuaireContactWithProjet = (userProjet: UserProjetWithPublicInfos): AnnuaireContact => ({
   type: "in-progress",
   uniqueId: `in-progress-${userProjet?.id}`,
   userProjetId: userProjet?.id,

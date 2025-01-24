@@ -8,19 +8,19 @@ import { isEqual } from "lodash";
 import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
 import { updateRexContactInProjetAction } from "@/src/actions/projets/update-rex-contact-in-projet-action";
 import { useEffect, useState } from "react";
-import { RexContactId, SourcingContact } from "@/src/components/annuaire/types";
+import { RexContactId, AnnuaireContact } from "@/src/components/annuaire/types";
 import { updateUserContactInProjetAction } from "@/src/actions/projets/update-user-contact-in-projet-action";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
-import { SOURCING_DELETING_CONTACT, SOURCING_SAVING_CONTACT } from "@/src/helpers/matomo/matomo-tags";
+import { ANNUAIRE_DELETING_CONTACT, ANNUAIRE_SAVING_CONTACT } from "@/src/helpers/matomo/matomo-tags";
 import { TypeUpdate } from "@/src/helpers/common";
 
-type SourcingContactSaveButtonProps = {
+type AnnuaireContactSaveButtonProps = {
   projetId: number;
-  contact: SourcingContact;
+  contact: AnnuaireContact;
   className?: string;
 };
 
-export const AnnuaireContactSaveButton = ({ projetId, contact, className }: SourcingContactSaveButtonProps) => {
+export const AnnuaireContactSaveButton = ({ projetId, contact, className }: AnnuaireContactSaveButtonProps) => {
   const [isSaved, setSaved] = useState(false);
   const { isLoading, startLoading, stopLoading } = useDelayedLoading(200);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -69,7 +69,7 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Sour
 
     const result = isSaved ? await updater.delete.action() : await updater.add.action();
 
-    isSaved ? trackEvent(SOURCING_DELETING_CONTACT) : trackEvent(SOURCING_SAVING_CONTACT);
+    isSaved ? trackEvent(ANNUAIRE_DELETING_CONTACT) : trackEvent(ANNUAIRE_SAVING_CONTACT);
 
     if (result.type === "success" && result.projet) {
       addOrUpdateProjet(result.projet);

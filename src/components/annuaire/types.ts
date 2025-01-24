@@ -53,11 +53,11 @@ export type CustomMarker = {
 
 export type CustomMarkerType = CustomMarker["type"];
 
-export type StrapiSourcingContact = Contact & { id: number };
+export type StrapiAnnuaireContact = Contact & { id: number };
 
 export type RexContactId = { rexId: number; contactId: number };
 
-export type SourcingContact = {
+export type AnnuaireContact = {
   uniqueId: string;
   typeContact: Contact["type_de_contact"];
   label?: string;
@@ -84,7 +84,7 @@ export type SourcingContact = {
     }
 );
 
-export type SourcingContactTypeMap = {
+export type AnnuaireContactTypeMap = {
   code: Contact["sous_type_de_contact"] | Contact["type_de_contact"];
   label: string;
 };

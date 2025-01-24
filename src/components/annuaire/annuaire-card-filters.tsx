@@ -1,8 +1,8 @@
 import { ContactTypeKeys, getContactTypeLabelByCode } from "@/src/components/annuaire/helpers";
-import { SourcingContactFiltersState } from "@/src/components/annuaire/use-annuaire-card-filters";
+import { AnnuaireContactFiltersState } from "@/src/components/annuaire/use-annuaire-card-filters";
 
-type SourcingCardFiltersProps = {
-  contactTypeFilters: SourcingContactFiltersState;
+type AnnuaireCardFiltersProps = {
+  contactTypeFilters: AnnuaireContactFiltersState;
   setFilter: (_: ContactTypeKeys, _1: boolean) => void;
   contactCountForFilter: (_: ContactTypeKeys) => number;
 };
@@ -11,7 +11,7 @@ export const AnnuaireCardFilters = ({
   setFilter,
   contactTypeFilters,
   contactCountForFilter,
-}: SourcingCardFiltersProps) => {
+}: AnnuaireCardFiltersProps) => {
   return (
     <div className="mb-12 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
       {contactTypeFilters.map((filter) => (

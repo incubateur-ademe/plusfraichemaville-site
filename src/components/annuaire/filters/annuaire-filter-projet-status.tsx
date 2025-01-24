@@ -2,7 +2,7 @@ import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { AnnuaireFiltersAccordion } from "./annuaire-filters-accordion";
 import { CustomMarkerType } from "../types";
 
-type SourcingFilterProjetStatusProps = {
+type AnnuaireFilterProjetStatusProps = {
   selectedProjetStatus: CustomMarkerType[];
   setSelectedProjetStatus: (_status: CustomMarkerType[]) => void;
 };
@@ -10,7 +10,7 @@ type SourcingFilterProjetStatusProps = {
 export const AnnuaireFilterProjetStatus = ({
   selectedProjetStatus,
   setSelectedProjetStatus,
-}: SourcingFilterProjetStatusProps) => {
+}: AnnuaireFilterProjetStatusProps) => {
   const handleSelectedProjetStatus = (projetStatus: CustomMarkerType) => {
     setSelectedProjetStatus(
       selectedProjetStatus?.includes(projetStatus)

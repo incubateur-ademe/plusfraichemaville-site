@@ -5,11 +5,11 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import {
-  getSourcingContactTypeLabel,
-  strapiContactToSourcingContact,
-  userProjetToSourcingContactWithProjet,
+  getAnnuaireContactTypeLabel,
+  strapiContactToAnnuaireContact,
+  userProjetToAnnuaireContactWithProjet,
 } from "@/src/components/annuaire/helpers";
-import { RexContactId, SourcingContact, StrapiSourcingContact } from "@/src/components/annuaire/types";
+import { RexContactId, AnnuaireContact, StrapiAnnuaireContact } from "@/src/components/annuaire/types";
 import { getRetoursExperiencesWithContactsById } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { escapeCsvField } from "@/src/helpers/csv-utils";
 
@@ -24,7 +24,7 @@ export const generateAnnuaireContactsCsvAction = async (
   try {
     const projet = await getProjetWithRelationsById(projetId);
     const inProgressContacts =
-      projet?.sourcing_user_projets?.map((c) => userProjetToSourcingContactWithProjet(c.sourced_user_projet)) || [];
+      projet?.sourcing_user_projets?.map((c) => userProjetToAnnuaireContactWithProjet(c.sourced_user_projet)) || [];
 
     const rexContactIds = projet?.sourcing_rex as RexContactId[] | null;
     const uniqueRexContactIds = Array.from(new Set(rexContactIds?.map((r) => r.rexId)));
@@ -33,16 +33,16 @@ export const generateAnnuaireContactsCsvAction = async (
     );
 
     const rexContacts = allRex?.flatMap((currentRex) => {
-      const currentRexContacts = currentRex?.attributes.contacts as unknown as StrapiSourcingContact[];
+      const currentRexContacts = currentRex?.attributes.contacts as unknown as StrapiAnnuaireContact[];
       if (!currentRexContacts) return [];
 
       return (
         rexContactIds
           ?.filter((rexContactId) => rexContactId.rexId === currentRex?.id)
           .map((rexContactId) => currentRexContacts.find((contact) => contact.id === rexContactId.contactId))
-          .filter((contact): contact is StrapiSourcingContact => contact !== undefined)
-          .map((contact) => currentRex && strapiContactToSourcingContact(contact, currentRex))
-          .filter((contact): contact is SourcingContact => contact !== null) || []
+          .filter((contact): contact is StrapiAnnuaireContact => contact !== undefined)
+          .map((contact) => currentRex && strapiContactToAnnuaireContact(contact, currentRex))
+          .filter((contact): contact is AnnuaireContact => contact !== null) || []
       );
     });
 
@@ -61,7 +61,7 @@ export const generateAnnuaireContactsCsvAction = async (
   }
 };
 
-const makeCsv = (contacts: SourcingContact[]) => {
+const makeCsv = (contacts: AnnuaireContact[]) => {
   const headersFields = [
     "Type de contact",
     "Sous-type de contact",
@@ -81,8 +81,8 @@ const makeCsv = (contacts: SourcingContact[]) => {
         : [contact.projet?.nom || "", contact.projet?.region || "", contact.poste || ""];
 
     const fields = [
-      getSourcingContactTypeLabel(contact.typeContact) || "",
-      contact.type === "rex" ? getSourcingContactTypeLabel(contact.sousTypeContact, true) || "" : "",
+      getAnnuaireContactTypeLabel(contact.typeContact) || "",
+      contact.type === "rex" ? getAnnuaireContactTypeLabel(contact.sousTypeContact, true) || "" : "",
       contact.label || "",
       contact.email || "",
       contact.telephone || "",

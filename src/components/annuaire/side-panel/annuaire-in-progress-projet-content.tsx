@@ -2,14 +2,14 @@ import clsx from "clsx";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { getRegionLabelForProjet } from "@/src/helpers/regions";
-import { SourcingContact } from "@/src/components/annuaire/types";
+import { AnnuaireContact } from "@/src/components/annuaire/types";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { Maturite } from "@/src/components/maturite/maturite";
 import { getOldestAdmin } from "../../liste-projets/helpers";
 import { AnnuaireContactCard } from "../contacts/annuaire-contact-card";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 
-import { userProjetToSourcingContact } from "@/src/components/annuaire/helpers";
+import { userProjetToAnnuaireContact } from "@/src/components/annuaire/helpers";
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 import { AnnuaireSidePanelTracking } from "./annuaire-side-panel-tracking";
 
@@ -17,7 +17,7 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const regionLabel = getRegionLabelForProjet(data);
   const user = getOldestAdmin(data);
-  const contact: SourcingContact | null = user ? userProjetToSourcingContact(user) : null;
+  const contact: AnnuaireContact | null = user ? userProjetToAnnuaireContact(user) : null;
 
   return (
     <>
@@ -55,9 +55,9 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
           <h2 className="text-xl font-bold text-pfmv-navy">Contact</h2>
           <AnnuaireContactCard
             contact={contact}
-            sourcingProjetId={currentProjetId}
+            projetId={currentProjetId}
             className="mb-4"
-            showSourcedProjet={false}
+            showContactProjet={false}
           />
         </div>
       )}

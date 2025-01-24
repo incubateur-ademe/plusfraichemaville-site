@@ -1,7 +1,7 @@
-import { getSourcingContactTypeLabel } from "../helpers";
+import { getAnnuaireContactTypeLabel } from "../helpers";
 import Image from "next/image";
 import { CopyField } from "../../common/copy-field";
-import { SourcingContact } from "@/src/components/annuaire/types";
+import { AnnuaireContact } from "@/src/components/annuaire/types";
 import { AnnuaireContactSaveButton } from "@/src/components/annuaire/contacts/annuaire-contact-save-button";
 import clsx from "clsx";
 
@@ -14,26 +14,21 @@ import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { COPY_EMAIL, COPY_TELEPHONE } from "@/src/helpers/matomo/matomo-tags";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
-type SourcingContactCardProps = {
-  contact: SourcingContact;
-  showSourcedProjet: boolean;
-  sourcingProjetId?: number | null;
+type AnnuaireContactCardProps = {
+  contact: AnnuaireContact;
+  showContactProjet: boolean;
+  projetId?: number | null;
   className?: string;
 };
 
-export const AnnuaireContactCard = ({
-  contact,
-  sourcingProjetId,
-  className,
-  showSourcedProjet,
-}: SourcingContactCardProps) => {
+export const AnnuaireContactCard = ({ contact, projetId, className, showContactProjet }: AnnuaireContactCardProps) => {
   const isProjetTypeRex = contact.type === "rex";
-  const type = getSourcingContactTypeLabel(contact.typeContact, false);
-  const ligne1 = isProjetTypeRex ? getSourcingContactTypeLabel(contact.sousTypeContact, true) : contact.nomCollectivite;
+  const type = getAnnuaireContactTypeLabel(contact.typeContact, false);
+  const ligne1 = isProjetTypeRex ? getAnnuaireContactTypeLabel(contact.sousTypeContact, true) : contact.nomCollectivite;
   const ligne3 = isProjetTypeRex ? null : contact.poste;
   const contactUniqueId = isProjetTypeRex ? `${contact.id.rexId}-${contact.id.contactId}` : `${contact.userProjetId}`;
 
-  const canEditProjet = useCanEditProjet(sourcingProjetId);
+  const canEditProjet = useCanEditProjet(projetId);
 
   return (
     <div
@@ -61,9 +56,7 @@ export const AnnuaireContactCard = ({
             )}
             {type}
           </div>
-          {sourcingProjetId && canEditProjet && (
-            <AnnuaireContactSaveButton contact={contact} projetId={sourcingProjetId} />
-          )}
+          {projetId && canEditProjet && <AnnuaireContactSaveButton contact={contact} projetId={projetId} />}
         </div>
         <div>
           <h3 className={clsx("mb-1 font-bold", isProjetTypeRex ? "text-xl" : "text-lg")}>{ligne1}</h3>
@@ -91,7 +84,7 @@ export const AnnuaireContactCard = ({
           </div>
         </div>
       </div>
-      {showSourcedProjet && (
+      {showContactProjet && (
         <div className="flex w-full flex-col">
           <AnnuaireCardAccordion
             ariaId={`accordion-diag-${contactUniqueId}`}
