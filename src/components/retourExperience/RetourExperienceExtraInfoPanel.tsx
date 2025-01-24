@@ -4,7 +4,7 @@ import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRet
 import { getTemporaliteLabelFromCode } from "@/src/helpers/retourExperience/temporaliteRetourExperience";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
-export default async function RetourExperienceExtraInfoPanel({
+export default function RetourExperienceExtraInfoPanel({
   retourExperience,
   className,
 }: {
