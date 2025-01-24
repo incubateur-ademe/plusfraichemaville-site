@@ -6,7 +6,7 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getProjetWithRelationsById, updateSourcingRexProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import isEqual from "lodash/isEqual";
-import { RexContactId } from "@/src/components/sourcing/types";
+import { RexContactId } from "@/src/components/annuaire/types";
 import { TypeUpdate } from "@/src/helpers/common";
 
 export const updateRexContactInProjetAction = async (

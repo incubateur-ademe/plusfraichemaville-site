@@ -26,7 +26,7 @@ export const ProjetVisibility = ({
       )}
     >
       {isPublic ? (
-        <Image src="/images/sourcing/sourcing-france-visible.svg" className="mr-1" width={11} height={11} alt="" />
+        <Image src="/images/annuaire/annuaire-france-visible.svg" className="mr-1" width={11} height={11} alt="" />
       ) : (
         <svg xmlns="http://www.w3.org/2000/svg" className="mr-1 size-3" viewBox="0 0 24 24" fill="currentColor">
           {/* eslint-disable-next-line max-len */}

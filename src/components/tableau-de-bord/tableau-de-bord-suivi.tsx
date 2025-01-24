@@ -12,7 +12,7 @@ import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 // eslint-disable-next-line max-len
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
-import { RexContactId } from "@/src/components/sourcing/types";
+import { RexContactId } from "@/src/components/annuaire/types";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -93,8 +93,8 @@ const cards: TableauDeBordSuiviCardProps[] = [
         ? "100"
         : "0",
     disabled: false,
-    type: "sourcing",
-    picto: <PictoTableauDeBordSelector pictoId="sourcing" className="w-20" />,
+    type: "annuaire",
+    picto: <PictoTableauDeBordSelector pictoId="annuaire" className="w-20" />,
     children: (
       <TableauDeBordSuiviWithText>
         {"Contacter des partenaires : bureaux d'étude, AMO, agents de collectivités"}

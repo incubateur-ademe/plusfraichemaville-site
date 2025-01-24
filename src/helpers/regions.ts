@@ -1,4 +1,4 @@
-import { AddressProperties, GeoJsonAdresse } from "@/src/components/sourcing/types";
+import { AddressProperties, GeoJsonAdresse } from "@/src/components/annuaire/types";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 type Region = {
