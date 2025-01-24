@@ -13,7 +13,7 @@ export type TableauDeBordCardType =
   | "diagnostic"
   | "estimation"
   | "financement"
-  | "sourcing"
+  | "annuaire"
   | "renseignement"
   | "solution";
 

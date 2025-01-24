@@ -10,7 +10,7 @@ type SolutionRetourExperienceCardProps = {
   displayFicheSolutionCard?: boolean;
 };
 
-export default async function SolutionRetourExperienceCard({
+export default function SolutionRetourExperienceCard({
   solution,
   className,
   displayFicheSolutionCard,

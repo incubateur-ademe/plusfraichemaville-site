@@ -3,7 +3,7 @@ import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } 
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId, TypeFiche, TypeUpdate } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
-import { RexContactId } from "@/src/components/sourcing/types";
+import { RexContactId } from "@/src/components/annuaire/types";
 
 export const projetIncludes = {
   collectivite: true,

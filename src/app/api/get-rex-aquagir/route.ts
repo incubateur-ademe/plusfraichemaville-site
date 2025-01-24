@@ -3,7 +3,7 @@ import { getAquagirRetoursExperiences } from "@/src/lib/strapi/queries/retoursEx
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import join from "lodash/join";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
-import { GeoJsonAdresse } from "@/src/components/sourcing/types";
+import { GeoJsonAdresse } from "@/src/components/annuaire/types";
 import { getStrapiImageUrl } from "@/src/lib/strapi/strapiClient";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 

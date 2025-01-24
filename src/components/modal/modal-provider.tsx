@@ -5,7 +5,7 @@ import { PartageOverviewDeleteOrQuitModale } from "../partage/partage-overview-d
 import { AvailableProjetsForCollectiviteModal } from "../liste-projets/available-projets-for-collectivite-modal";
 import { ViewerModeModal } from "../tableau-de-bord/viewer-mode-modal";
 // eslint-disable-next-line max-len
-import { SourcingRexContentSeeProjetModal } from "@/src/components/sourcing/side-panel/sourcing-rex-content-see-projet-modal";
+import { AnnuaireRexContentSeeProjetModal } from "@/src/components/annuaire/side-panel/annuaire-rex-content-see-projet-modal";
 import { PartageMemberModificationRoleModale } from "../partage/partage-member-modification-role-modale";
 
 export default function ModalProvider() {
@@ -16,7 +16,7 @@ export default function ModalProvider() {
       <AideFicheModal />
       <PartageOverviewDeleteOrQuitModale />
       <AvailableProjetsForCollectiviteModal />
-      <SourcingRexContentSeeProjetModal />
+      <AnnuaireRexContentSeeProjetModal />
       <ViewerModeModal />
     </>
   );

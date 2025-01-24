@@ -4,7 +4,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { clsx } from "clsx";
 import { Situation } from "@/src/lib/strapi/types/components/retour-experience/Situation";
 
-export default async function SituationRetourExperienceCard({
+export default function SituationRetourExperienceCard({
   situation,
   titre,
   className,

@@ -7,7 +7,7 @@ const pictos: Record<TableauDeBordCardType, string> = {
   diagnostic: "diagnostic.svg",
   estimation: "estimation.svg",
   financement: "financement.svg",
-  sourcing: "sourcing.svg",
+  annuaire: "annuaire.svg",
   renseignement: "renseignement.svg",
   solution: "solution.svg",
 };
