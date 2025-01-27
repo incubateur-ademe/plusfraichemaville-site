@@ -1,7 +1,6 @@
 import { TypeFiche } from "@/src/helpers/common";
 
 export const BOOKMARK_FS_KEY = "bookmark-fs-id";
-export const FICHE_DIAGNOSTIC_IDS_STORAGE_KEY = "fiches-diagnostic";
 export type FicheBookmarkedSolution = {
   projectName: string;
   ficheSolutionIds: number[];
@@ -108,22 +107,12 @@ export const mergeFicheBookmarkedSolutions = (
   }));
 };
 
-export const mergeFicheBookmarkedDiagnostic = (
-  newCurrentFichesBookmarked: FichesBookmarked[],
-  currentFichesBookmarked?: FichesBookmarked[],
-): FichesBookmarked[] => {
-  return Array.from(new Set([...(currentFichesBookmarked ?? []), ...newCurrentFichesBookmarked]));
-};
-
 export const getAllSavedFichesFromLocalStorage = () => {
   const fichesSolutionsBookmarked = localStorage.getItem(BOOKMARK_FS_KEY);
-  const fichesDiagnosticBookmarked = localStorage.getItem(FICHE_DIAGNOSTIC_IDS_STORAGE_KEY);
 
-  const fichesDiagnostic = JSON.parse(fichesDiagnosticBookmarked ?? "[]") as FichesBookmarked[];
   const fichesSolutions = JSON.parse(fichesSolutionsBookmarked ?? "[]") as FichesBookmarked[];
 
   return {
-    fichesDiagnostic,
     fichesSolutions,
   };
 };
