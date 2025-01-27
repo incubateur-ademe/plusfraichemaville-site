@@ -44,8 +44,7 @@ export async function GET(request: NextRequest) {
       day: startOfDay,
     };
 
-    let dateBeginOfLastPeriod = new Date();
-    dateBeginOfLastPeriod = ranges[periodicity](new Date());
+    let dateBeginOfLastPeriod = ranges[periodicity](new Date());
     dateBeginOfLastPeriod = add(dateBeginOfLastPeriod, {
       minutes: -dateBeginOfLastPeriod.getTimezoneOffset(),
     });
