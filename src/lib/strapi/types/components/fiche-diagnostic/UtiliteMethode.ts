@@ -10,4 +10,3 @@ export interface UtiliteMethode_Plain {
 export interface UtiliteMethode_NoRelations {
   description: string;
 }
-
