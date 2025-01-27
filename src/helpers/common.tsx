@@ -34,3 +34,7 @@ export const extractNameInitiales = (name: string) => {
   const match = name.match(/^[^\s-]+|\S+$/g);
   return match ? match.map((word) => word[0].toUpperCase()).join("") : "";
 };
+
+export const isBoolean = (param: any): boolean => {
+  return typeof param == "boolean";
+};

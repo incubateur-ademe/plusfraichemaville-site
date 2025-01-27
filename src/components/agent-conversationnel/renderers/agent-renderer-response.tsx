@@ -1,4 +1,4 @@
-import { ResponseRenderer, ResponseRendererProps } from "@nlux/react";
+import { ResponseRendererProps } from "@nlux/react";
 import Markdown from "react-markdown";
 import Link from "next/link";
 import { sanitizeUrlInMessageFromRagtime } from "@/src/components/agent-conversationnel/helpers";
@@ -6,9 +6,8 @@ import { ChatOpenGraphLink } from "@/src/components/agent-conversationnel/render
 import { ChatDisplayOptions } from "@/src/components/agent-conversationnel/hooks/use-ai-chat-controls";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 
-export const AgentResponseRenderer: ResponseRenderer<string | string[]> = (
-  props: ResponseRendererProps<string | string[]>,
-  displayOptions: ChatDisplayOptions,
+export const AgentResponseRenderer = (
+  props: ResponseRendererProps<string | string[]> & { displayOptions: ChatDisplayOptions },
 ) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const content = props.content[0];
@@ -23,7 +22,7 @@ export const AgentResponseRenderer: ResponseRenderer<string | string[]> = (
             components={{
               a: ({ href = "", children }) => {
                 return href.startsWith("/") ? (
-                  <Link href={href} onClick={displayOptions.toggleChat}>
+                  <Link href={href} onClick={props.displayOptions.toggleChat}>
                     {children}
                   </Link>
                 ) : (
@@ -36,7 +35,7 @@ export const AgentResponseRenderer: ResponseRenderer<string | string[]> = (
           >
             {message}
           </Markdown>
-          <ChatOpenGraphLink chatMessage={props.content.toString()} displayOptions={displayOptions} />
+          <ChatOpenGraphLink chatMessage={props.content.toString()} displayOptions={props.displayOptions} />
         </div>
       ))}
     </>

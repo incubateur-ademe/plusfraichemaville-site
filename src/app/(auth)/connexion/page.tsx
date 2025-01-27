@@ -32,12 +32,13 @@ const data = {
       title: "Annuaire des projets Plus fraîche ma ville",
       description:
         "Trouvez les contacts utiles à votre projet : agents de collectivités, bureaux d'étude, AMO, entreprises.",
-      picto: "sourcing",
+      picto: "annuaire",
     },
   ],
 };
 
-export default async function Connexion({ searchParams }: { searchParams: { callbackUrl: string | undefined } }) {
+export default async function Connexion(props: { searchParams: Promise<{ callbackUrl: string | undefined }> }) {
+  const searchParams = await props.searchParams;
   const session = await auth();
   if (session) {
     redirect(PFMV_ROUTES.ESPACE_PROJET_LISTE);

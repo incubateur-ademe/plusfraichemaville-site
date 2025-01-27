@@ -1,6 +1,6 @@
 import CmsRichText from "@/src/components/common/CmsRichText";
 
-export default async function ItemRetourExperienceExtraInfo({
+export default function ItemRetourExperienceExtraInfo({
   title,
   content,
   className,

@@ -12,7 +12,7 @@ interface ModalState {
   currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState;
   collectiviteIdToListAvailableProjets: number | null;
   showInfoViewerMode: boolean;
-  currentSourcingRexProjet: string | null;
+  currentAnnuaireRexProjet: string | null;
 }
 
 export type ModalActions = {
@@ -22,7 +22,7 @@ export type ModalActions = {
   setCurrentDeleteOrQuitModal: (_currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState) => void;
   setCollectiviteIdToListAvailableProjets: (_collectiviteId: number | null) => void;
   setShowInfoViewerMode: (_showInfoViewerMode: boolean) => void;
-  setCurrentSourcingRexProjet: (_currentSourcingRexProjet: string | null) => void;
+  setAnnuaireRexProjetSlug: (_annuaireRexProjetSlug: string | null) => void;
 };
 
 export type ModalStore = ModalState & ModalActions;
@@ -34,7 +34,7 @@ export const defaultInitState: ModalState = {
   currentDeleteOrQuitModal: null,
   collectiviteIdToListAvailableProjets: null,
   showInfoViewerMode: false,
-  currentSourcingRexProjet: null,
+  currentAnnuaireRexProjet: null,
 };
 
 export const initModalStore = (): ModalState => {
@@ -51,6 +51,7 @@ export const createModalStore = (initState: ModalState = defaultInitState) => {
     setCollectiviteIdToListAvailableProjets: (collectiviteId) =>
       set(() => ({ collectiviteIdToListAvailableProjets: collectiviteId })),
     setShowInfoViewerMode: (showInfoViewerMode) => set(() => ({ showInfoViewerMode: showInfoViewerMode })),
-    setCurrentSourcingRexProjet: (currentSourcingRexProjet) => set(() => ({ currentSourcingRexProjet })),
+    setAnnuaireRexProjetSlug: (annuaireRexProjetSlug) =>
+      set(() => ({ currentAnnuaireRexProjet: annuaireRexProjetSlug })),
   }));
 };

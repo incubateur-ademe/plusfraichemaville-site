@@ -2,7 +2,7 @@ import Accordion from "@codegouvfr/react-dsfr/Accordion";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import { Calendrier } from "@/src/lib/strapi/types/components/retour-experience/Calendrier";
 
-export default async function CalendrierRetourExperienceAccordion({
+export default function CalendrierRetourExperienceAccordion({
   etapes,
   className,
 }: {

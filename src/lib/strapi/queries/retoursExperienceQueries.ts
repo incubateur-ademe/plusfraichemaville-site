@@ -112,6 +112,45 @@ const GET_RETOUR_EXPERIENCE_CARD_DATA = (
     }
 }`;
 
+const GET_RETOUR_EXPERIENCE_FOR_AQUAGIR_DATA = (strapiFilter: StrapiFilter) => ` ${STRAPI_IMAGE_FRAGMENT} query {
+    retourExperiences ${strapiFilter.wholeFilterString()} {
+      data {
+        id
+        attributes {
+          titre
+          description
+          slug
+          location
+          citations {
+            auteur
+            texte
+          }
+          situation_avant {
+            description
+          }
+          situation_apres {
+            description
+          }
+          solution_retour_experiences {
+            data {
+              id
+              attributes {
+                titre
+                description
+              }
+            }
+          }
+          partenaires
+          credits
+          publishedAt
+          image_principale {
+            ...ImageInfo
+          }
+        }
+      }
+    }
+}`;
+
 const GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS = (
   strapiFilter: StrapiFilter,
 ) => ` ${RETOUR_EXPERIENCE_WITH_CONTACTS} query {
@@ -144,6 +183,7 @@ export async function getRetoursExperiencesWithContacts(): Promise<RetourExperie
   )?.retourExperiences as APIResponseCollection<RetourExperience>;
   return safeReturnStrapiEntities(apiResponse);
 }
+
 export async function getRetoursExperiencesWithContactsById(id: string): Promise<RetourExperience | null> {
   const filter = new StrapiFilter(true, [{ attribute: "id", operator: "eq", value: id, relation: false }]);
   const apiResponse = (
@@ -158,6 +198,25 @@ export async function getAllCompleteRetoursExperiences(): Promise<RetourExperien
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter), { tag: "get-all-complete-retour-experience" })
+  )?.retourExperiences as APIResponseCollection<RetourExperience>;
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getAquagirRetoursExperiences(): Promise<RetourExperience[] | null> {
+  const filter = new StrapiFilter(
+    true,
+    [
+      {
+        attribute: "export_aquagir",
+        value: true,
+        operator: "eq",
+        relation: false,
+      },
+    ],
+    { attribute: "rank", order: "asc" },
+  );
+  const apiResponse = (
+    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_FOR_AQUAGIR_DATA(filter), { tag: "get-rex-aquagir" })
   )?.retourExperiences as APIResponseCollection<RetourExperience>;
   return safeReturnStrapiEntities(apiResponse);
 }

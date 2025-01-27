@@ -42,3 +42,6 @@ certificates
 /scripts/ficheSolution.json
 /scripts/retourExperience.json
 /scripts/ficheDiagnostic.json
+
+# Sentry Config File
+.env.sentry-build-plugin

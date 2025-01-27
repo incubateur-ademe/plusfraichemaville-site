@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ObjectifDeveloppementDurable } from "@/src/lib/strapi/types/api/objectif-developpement-durable";
 
-export default async function ObjectifsDeveloppementDurable({
+export default function ObjectifsDeveloppementDurable({
   objectifs,
   imageSize = 100,
   className,

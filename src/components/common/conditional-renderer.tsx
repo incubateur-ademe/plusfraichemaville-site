@@ -8,7 +8,7 @@ const Conditional = ({ children }: PropsWithChildren) => {
     if (!isValidElement(child)) return;
 
     if (!matchChild && child.type === Case) {
-      const { condition } = child.props;
+      const { condition } = child.props as { condition: boolean };
       const conditionResult = Boolean(condition);
 
       if (conditionResult) {

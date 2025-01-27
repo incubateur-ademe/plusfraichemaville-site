@@ -13,7 +13,7 @@ export type TableauDeBordCardType =
   | "diagnostic"
   | "estimation"
   | "financement"
-  | "sourcing"
+  | "annuaire"
   | "renseignement"
   | "solution";
 
@@ -39,6 +39,9 @@ export const TableauDeBordSuiviCard = ({
   const disabledTextClass = disabled ? "text-pfmv-grey" : "text-dsfr-background-flat-blue-france";
   const { projetId } = useParams();
   const linkResolver = makeUrl[type];
+  if (!projetId) {
+    return null;
+  }
 
   return (
     <Link

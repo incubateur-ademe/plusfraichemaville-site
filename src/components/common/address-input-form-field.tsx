@@ -2,7 +2,7 @@
 import { Fragment, ReactNode, useEffect, useState } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/src/components/common/RedAsterisk";
-import { Combobox, Transition } from "@headlessui/react";
+import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react";
 import { fetchProjetAddressFromBanApi } from "@/src/lib/adresseApi/fetch";
 import debounce from "lodash/debounce";
 import { AddressProjet } from "@/src/lib/adresseApi/types";
@@ -74,64 +74,68 @@ const AddressInputFormField = <T extends FieldValues>({
         };
 
         const input = (
-          <Combobox defaultValue={value} onChange={onChangeHandleNull} nullable disabled={disabled}>
-            <div className="relative mt-1">
-              <div className={"flex items-center"}>
-                <Combobox.Input
-                  aria-describedby={ariaDescribedBy}
-                  className=" fr-input w-full "
-                  displayValue={(address: AddressProjet) => address?.label ?? ""}
-                  onChange={(event) => throttledFetchAddress(event.target.value)}
-                  onBlur={onBlur}
-                  ref={ref}
-                  {...rest}
-                />
-                {loading && <Spinner />}
-              </div>
-              <Transition
-                as={Fragment}
-                leave="transition ease-in duration-100"
-                leaveFrom="opacity-100"
-                leaveTo="opacity-0"
-                afterLeave={() => setQuery("")}
-              >
-                <Combobox.Options
-                  className="shadow-lg absolute z-30 mt-1 max-h-60 w-full list-none overflow-auto
-                rounded-md bg-white p-0 text-base ring-1 ring-black/5"
-                >
-                  {fetchedAddresses.length === 0 && query !== "" && !loading ? (
-                    <div className="relative cursor-default select-none px-4 py-2">Aucun résultat.</div>
-                  ) : (
-                    fetchedAddresses.map((address) => (
-                      <Combobox.Option
-                        key={address.label}
-                        className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-4 pr-4 ${
-                            active ? "bg-dsfr-background-alt-grey " : ""
-                          }`
-                        }
-                        value={address}
-                      >
-                        {({ selected, active }) => (
-                          <>
-                            <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                              {`${address.label}`}
-                            </span>
-                            {selected ? (
-                              <span
-                                className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                  active ? "bg-dsfr-background-alt-grey " : ""
-                                }`}
-                              />
-                            ) : null}
-                          </>
-                        )}
-                      </Combobox.Option>
-                    ))
-                  )}
-                </Combobox.Options>
-              </Transition>
+          <Combobox
+            defaultValue={value}
+            onChange={onChangeHandleNull}
+            disabled={disabled}
+            as="div"
+            className="relative mt-2"
+          >
+            <div className={"flex items-center"}>
+              <ComboboxInput
+                aria-describedby={ariaDescribedBy}
+                className=" fr-input w-full "
+                displayValue={(address: AddressProjet) => address?.label ?? ""}
+                onChange={(event) => throttledFetchAddress(event.target.value)}
+                onBlur={onBlur}
+                ref={ref}
+                {...rest}
+              />
+              {loading && <Spinner />}
             </div>
+            <Transition
+              as={Fragment}
+              leave="transition ease-in duration-100"
+              leaveFrom="opacity-100"
+              leaveTo="opacity-0"
+              afterLeave={() => setQuery("")}
+            >
+              <ComboboxOptions
+                className="shadow-lg absolute z-30 mt-1 max-h-60 w-full list-none overflow-auto
+                rounded-md bg-white p-0 text-base ring-1 ring-black/5"
+              >
+                {fetchedAddresses.length === 0 && query !== "" && !loading ? (
+                  <div className="relative cursor-default select-none px-4 py-2">Aucun résultat.</div>
+                ) : (
+                  fetchedAddresses.map((address) => (
+                    <ComboboxOption
+                      key={address.label}
+                      className={({ focus }) =>
+                        `relative cursor-default select-none py-2 pl-4 pr-4 ${
+                          focus ? "bg-dsfr-background-alt-grey " : ""
+                        }`
+                      }
+                      value={address}
+                    >
+                      {({ selected, focus }) => (
+                        <>
+                          <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
+                            {`${address.label}`}
+                          </span>
+                          {selected ? (
+                            <span
+                              className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                focus ? "bg-dsfr-background-alt-grey " : ""
+                              }`}
+                            />
+                          ) : null}
+                        </>
+                      )}
+                    </ComboboxOption>
+                  ))
+                )}
+              </ComboboxOptions>
+            </Transition>
           </Combobox>
         );
         return (

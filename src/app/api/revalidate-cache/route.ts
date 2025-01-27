@@ -12,7 +12,7 @@ type StrapiWebhookPayload = {
 };
 
 export async function POST(request: NextRequest) {
-  const authorization = headers().get("authorization");
+  const authorization = (await headers()).get("authorization");
   const tag = request.nextUrl.searchParams.get("tag");
 
   if (authorization !== `Bearer ${process.env.CACHE_REVALIDATION_TOKEN}`) {
@@ -24,6 +24,9 @@ export async function POST(request: NextRequest) {
     if (payload.model === "webinaire") {
       revalidateTag("webinaires");
       return NextResponse.json({ message: "Successfully revalidated webinaires" }, { status: 200 });
+    } else if (payload.model === "retourExperience") {
+      revalidateTag("get-rex-aquagir");
+      return NextResponse.json({ message: "Successfully revalidated get-rex-aquagir" }, { status: 200 });
     }
     return NextResponse.json({ message: "Nothing to revalidate" }, { status: 200 });
   } catch (error) {
