@@ -3,6 +3,7 @@ import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import * as Sentry from "@sentry/nextjs";
 import { revalidateTag } from "next/cache";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { revalidateTagAction } from "@/src/actions/revalidate-tag-action";
 
 const TOKEN_VALIDITY_IN_SECONDS = 86400;
 const FETCH_TOCKEN_CACHE_TAG = "aides-territoires-token";
@@ -57,7 +58,7 @@ export const callAidesTerritoiresApi = async <T extends IApiAidesTerritoiresResp
 
     const result = (await response.json()) as T;
     if (!isSecondCall && response.status === 401) {
-      revalidateTag(FETCH_TOCKEN_CACHE_TAG);
+      await revalidateTagAction([FETCH_TOCKEN_CACHE_TAG]);
       return callAidesTerritoiresApi(url, true);
     }
     if (response.status >= 400) {

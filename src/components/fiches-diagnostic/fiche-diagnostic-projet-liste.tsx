@@ -1,7 +1,7 @@
 "use client";
 
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { FichesDiagnosticProjetEmpty } from "./fiche-diagnostic-projet-empty";
+import { FichesDiagnosticProjetEmpty } from "./fiche-diagnostic-no-selection";
 
 import { FicheDiagnosticCardWithFetcher } from "./fiche-diagnostic-card-with-fetcher";
 

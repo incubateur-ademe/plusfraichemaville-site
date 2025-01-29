@@ -1,6 +1,7 @@
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { revalidateTag } from "next/cache";
 import { Media } from "@/src/lib/strapi/types/common/Media";
+import { revalidateTagAction } from "@/src/actions/revalidate-tag-action";
 
 export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 export const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
@@ -50,13 +51,13 @@ export const strapiGraphQLCall = async (query: string, config: StrapiGraphQLCall
     const res = await response.json();
 
     if (res?.errors) {
-      tags.forEach((tag) => revalidateTag(tag));
       captureError(`Some Strapi error occurred. Tags: ${tags.join(", ")}.`, res?.errors);
+      await revalidateTagAction(tags);
     }
 
     return res?.data;
   } catch (err) {
-    tags.forEach((tag) => revalidateTag(tag));
     customCaptureException(`Caught exception while calling Strapi.  Tags: ${tags.join(", ")}.`, err);
+    await revalidateTagAction(tags);
   }
 };

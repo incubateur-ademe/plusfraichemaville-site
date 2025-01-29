@@ -1,11 +1,9 @@
-import { FichesDiagnosticProjetHeader } from "@/src/components/fiches-diagnostic/fiche-diagnostic-projet-header";
-import { FicheDiagnosticProjetListe } from "@/src/components/fiches-diagnostic/fiche-diagnostic-projet-liste";
+import { FicheDiagnosticNoSelection } from "@/src/components/fiches-diagnostic/fiche-diagnostic-no-selection";
 
 export default async function FicheDiagnosticSelectionPage() {
   return (
-    <div className="fr-container py-10">
-      <FichesDiagnosticProjetHeader />
-      <FicheDiagnosticProjetListe />
+    <div className="fr-container--fluid pt-8 text-black">
+      <FicheDiagnosticNoSelection />
     </div>
   );
 }
