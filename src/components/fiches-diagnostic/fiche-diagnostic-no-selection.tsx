@@ -1,4 +1,3 @@
-import { isEmpty } from "@/src/helpers/listUtils";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { isFicheDiagConfortThermique, isFicheDiagICU } from "@/src/components/fiches-diagnostic/helpers";
 import { FicheDiagnosticCard } from "@/src/components/fiches-diagnostic/fiche-diagnostic-card";
@@ -9,9 +8,6 @@ export const FicheDiagnosticNoSelection = async () => {
   const icuFichesDiagnostics = allFichesDiagnostics.filter(isFicheDiagICU);
   const confortThermiqueFichesDiagnostics = allFichesDiagnostics.filter(isFicheDiagConfortThermique);
 
-  if (!isEmpty(allFichesDiagnostics)) {
-    console.log("isFicheDiagICU", isFicheDiagICU(allFichesDiagnostics[0]));
-  }
   return (
     <>
       <div className="fr-container">
@@ -35,7 +31,7 @@ export const FicheDiagnosticNoSelection = async () => {
           <div className="w-60">
             Consulter et sélectionner les méthodes de diagnostic pour évaluer l’ICU de votre projet.
           </div>
-          <div className="">
+          <div>
             {icuFichesDiagnostics.map((fd) => (
               <FicheDiagnosticCard key={fd.id} ficheDiagnostic={fd} />
             ))}
@@ -53,7 +49,7 @@ export const FicheDiagnosticNoSelection = async () => {
           <div className="w-60">
             Consulter et sélectionner les méthodes de diagnostic pour évaluer l’ICU de votre projet.
           </div>
-          <div className="">
+          <div>
             {confortThermiqueFichesDiagnostics.map((fd) => (
               <FicheDiagnosticCard
                 overrideUtiliteFiche={FicheDiagnosticUtilite.ConfortThermique}
