@@ -31,7 +31,7 @@ export const FicheDiagnosticNoSelection = async () => {
           <div className="w-60">
             Consulter et sélectionner les méthodes de diagnostic pour évaluer l’ICU de votre projet.
           </div>
-          <div>
+          <div className="flex gap-6">
             {icuFichesDiagnostics.map((fd) => (
               <FicheDiagnosticCard key={fd.id} ficheDiagnostic={fd} />
             ))}
@@ -49,7 +49,7 @@ export const FicheDiagnosticNoSelection = async () => {
           <div className="w-60">
             Consulter et sélectionner les méthodes de diagnostic pour évaluer l’ICU de votre projet.
           </div>
-          <div>
+          <div className="flex gap-6">
             {confortThermiqueFichesDiagnostics.map((fd) => (
               <FicheDiagnosticCard
                 overrideUtiliteFiche={FicheDiagnosticUtilite.ConfortThermique}
