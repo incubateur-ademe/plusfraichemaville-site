@@ -5,17 +5,22 @@ import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
 import CustomTabButton from "@/src/components/common/CustomTabButton";
 import { WebinairesList } from "@/src/components/webinaires/webinaires-list";
 import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
+import orderBy from "lodash/orderBy";
 
 export const metadata: Metadata = computeMetadata("Webinaires");
 
 export default async function PageWebinaires() {
   const allWebinaires = await getAllWebinaires();
   const futureWebinaires = allWebinaires.filter(isWebinaireInFuture);
-  const pastWebinaires = allWebinaires.filter(
-    (webinaire) =>
-      webinaire.attributes.jour_evenement &&
-      webinaire.attributes.lien_replay &&
-      new Date(webinaire.attributes.jour_evenement) <= new Date(),
+  const pastWebinaires = orderBy(
+    allWebinaires.filter(
+      (webinaire) =>
+        webinaire.attributes.jour_evenement &&
+        webinaire.attributes.lien_replay &&
+        new Date(webinaire.attributes.jour_evenement) <= new Date(),
+    ),
+    (webinaire) => webinaire.attributes.jour_evenement,
+    "desc",
   );
   return (
     <div className="pb-8">
