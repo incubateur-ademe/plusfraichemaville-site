@@ -4,23 +4,23 @@ import { ProjetWithRelations } from "./prismaCustomTypes";
 import { getProjetById, projetIncludes } from "./prismaProjetQueries";
 import { FicheType } from "@prisma/client";
 
-export const addProjetFiche = async ({
-  projetId,
-  ficheId,
-  typeFiche,
-  userId,
-}: {
+type ProjetFicheUpdater = {
   projetId: number;
   ficheId: number;
-  userId: string;
   typeFiche: TypeFiche;
-}) => {
+  userId: string;
+};
+
+const updateRecommandationsViewedBy = async ({ projetId, userId }: { projetId: number; userId: string }) => {
   const projet = await getProjetById(projetId);
   if (!projet) return null;
-
   const recommandationsViewedUserIds = projet.recommandations_viewed_by;
-  const updatedRecommandationsViewed =
-    recommandationsViewedUserIds?.filter((currentUserId) => currentUserId !== userId) ?? [];
+  return recommandationsViewedUserIds?.filter((currentUserId) => currentUserId !== userId) ?? [];
+};
+
+export const addProjetFiche = async ({ projetId, ficheId, typeFiche, userId }: ProjetFicheUpdater) => {
+  const updatedRecommandationsViewed = await updateRecommandationsViewedBy({ projetId, userId });
+  if (!updatedRecommandationsViewed) return null;
 
   const updatedProjet = await prismaClient.projet_fiche.create({
     data: {
@@ -35,6 +35,7 @@ export const addProjetFiche = async ({
       },
     },
   });
+
   return updatedProjet.projet
     ? await prismaClient.projet.update({
         where: { id: projetId },
@@ -49,12 +50,10 @@ export const deleteProjetFiche = async ({
   ficheId,
   typeFiche,
   userId,
-}: {
-  projetId: number;
-  ficheId: number;
-  typeFiche: TypeFiche;
-  userId: string;
-}): Promise<ProjetWithRelations | null> => {
+}: ProjetFicheUpdater): Promise<ProjetWithRelations | null> => {
+  const updatedRecommandationsViewed = await updateRecommandationsViewedBy({ projetId, userId });
+  if (!updatedRecommandationsViewed) return null;
+
   const updatedProjet = await prismaClient.projet_fiche.delete({
     where: {
       projet_id_fiche_id_type: {
@@ -69,13 +68,6 @@ export const deleteProjetFiche = async ({
       },
     },
   });
-
-  const projet = await getProjetById(projetId);
-  if (!projet) return null;
-
-  const recommandationsViewedUserIds = projet.recommandations_viewed_by;
-  const updatedRecommandationsViewed =
-    recommandationsViewedUserIds?.filter((currentUserId) => currentUserId !== userId) ?? [];
 
   return updatedProjet
     ? await prismaClient.projet.update({
