@@ -1,7 +1,6 @@
 "use client";
 
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { FichesDiagnosticProjetEmpty } from "./fiche-diagnostic-no-selection";
 
 import { FicheDiagnosticCardWithFetcher } from "./fiche-diagnostic-card-with-fetcher";
 
@@ -19,7 +18,6 @@ export const FicheDiagnosticProjetListe = () => {
   return (
     <div>
       <div className="mb-10 flex flex-row flex-wrap gap-8">
-        {savedFichesDiagnostic?.length === 0 && <FichesDiagnosticProjetEmpty />}
         {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
           <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
         ))}

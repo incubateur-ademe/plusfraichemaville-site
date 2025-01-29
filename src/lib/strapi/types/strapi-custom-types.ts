@@ -1,4 +1,3 @@
-
 export interface APIResponseCollectionMetadata {
   pagination: {
     page: number;

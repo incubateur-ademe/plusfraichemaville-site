@@ -54,7 +54,7 @@ export const FicheDiagnosticNoSelection = async () => {
             Consulter et sélectionner les méthodes de diagnostic pour évaluer l’ICU de votre projet.
           </div>
           <div className="">
-            {icuFichesDiagnostics.map((fd) => (
+            {confortThermiqueFichesDiagnostics.map((fd) => (
               <FicheDiagnosticCard
                 overrideUtiliteFiche={FicheDiagnosticUtilite.ConfortThermique}
                 key={fd.id}

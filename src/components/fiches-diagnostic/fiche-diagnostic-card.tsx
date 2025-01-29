@@ -37,7 +37,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
             "flex h-full flex-col rounded-[0.9375rem] pb-5",
             utiliteFiche === FicheDiagnosticUtilite.DiminutionICU
               ? "bg-dsfr-background-contrast-red-marianne"
-              : "bg-dsfr-background-contrast-red-marianne" // TODO en attente des couleurs validées par design,
+              : "bg-dsfr-background-contrast-red-marianne", // TODO en attente des couleurs validées par design,
           )}
         >
           <div className="relative block h-40 w-72 overflow-hidden">

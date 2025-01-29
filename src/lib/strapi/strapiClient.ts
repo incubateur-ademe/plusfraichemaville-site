@@ -1,5 +1,4 @@
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { revalidateTag } from "next/cache";
 import { Media } from "@/src/lib/strapi/types/common/Media";
 import { revalidateTagAction } from "@/src/actions/revalidate-tag-action";
 

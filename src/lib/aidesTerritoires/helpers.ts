@@ -1,7 +1,6 @@
 import { IApiAidesTerritoiresQueryToken, IApiAidesTerritoiresResponse } from "@/src/lib/aidesTerritoires/types";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import * as Sentry from "@sentry/nextjs";
-import { revalidateTag } from "next/cache";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { revalidateTagAction } from "@/src/actions/revalidate-tag-action";
 
