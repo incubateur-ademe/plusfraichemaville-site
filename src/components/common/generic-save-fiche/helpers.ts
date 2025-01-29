@@ -1,4 +1,6 @@
 import { TypeFiche } from "@/src/helpers/common";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { FicheType } from "@prisma/client";
 
 export const BOOKMARK_FS_KEY = "bookmark-fs-id";
 export type FicheBookmarkedSolution = {
@@ -115,4 +117,19 @@ export const getAllSavedFichesFromLocalStorage = () => {
   return {
     fichesSolutions,
   };
+};
+
+export const checkIfFicheIsSaved = ({
+  projet,
+  ficheId,
+  typeFiche,
+}: {
+  projet: ProjetWithRelations;
+  ficheId: number;
+  typeFiche: TypeFiche;
+}) => {
+  return (
+    projet.fiches.find((fiche) => fiche.fiche_id === ficheId)?.type ===
+    (typeFiche === TypeFiche.solution ? FicheType.SOLUTION : FicheType.DIAGNOSTIC)
+  );
 };

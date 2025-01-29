@@ -209,9 +209,9 @@ model projet_fiche {
   fiche_id   Int
   type       FicheType
   projet     projet    @relation(fields: [projet_id], references: [id])
-  created_at DateTime? @default(now())
-  user_id    String?
-  created_by User?     @relation(fields: [user_id], references: [id])
+  created_at DateTime  @default(now())
+  user_id    String
+  created_by User      @relation(fields: [user_id], references: [id])
 
   @@unique([projet_id, fiche_id, type])
 }

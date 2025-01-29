@@ -2,6 +2,7 @@
 
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
+import { FicheType } from "@prisma/client";
 import Link from "next/link";
 
 const datas = {
@@ -22,8 +23,8 @@ const datas = {
 
 export const AideEstimationListeEmpty = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const fichesSolutions = useProjetsStore((state) => state.getCurrentProjetFichesByTypeIds(FicheType.SOLUTION));
 
-  const { fiches_solutions_id: fichesSolutions } = projet || {};
   const hasFichesSolutions = fichesSolutions && fichesSolutions?.length > 0;
 
   const data = datas[hasFichesSolutions ? "estimation" : "solution"];

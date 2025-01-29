@@ -8,7 +8,7 @@ export const metadata: Metadata = computeMetadata("Votre sélection");
 export default function Layout({ children }: { children: ReactElement | null }) {
   return (
     <>
-      <div className={"pb-40"}>{children}</div>
+      <div>{children}</div>
       <AppFooter />
     </>
   );

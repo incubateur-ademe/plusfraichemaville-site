@@ -2,7 +2,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import { estimation } from "@prisma/client";
+import { estimation, FicheType } from "@prisma/client";
 import clsx from "clsx";
 
 import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation/EstimationFormSchema";
@@ -34,9 +34,11 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     }
   };
 
+  const projetFichesSolutionsIds = projet.fiches.filter((f) => f.type === FicheType.SOLUTION).map((f) => f.fiche_id);
+
   const form = useForm<EstimationFormData>({
     resolver: zodResolver(EstimationFormSchema),
-    defaultValues: { ficheSolutionIds: projet.fiches_solutions_id.map(String) },
+    defaultValues: { ficheSolutionIds: projetFichesSolutionsIds.map(String) },
   });
 
   const onSubmit: SubmitHandler<EstimationFormData> = async (data) => {
@@ -66,7 +68,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
         className="pfmv-strong-card "
       >
         <div className={clsx("mb-12 flex flex-wrap gap-6")}>
-          {projet.fiches_solutions_id?.map((ficheSolutionId) => (
+          {projetFichesSolutionsIds.map((ficheSolutionId) => (
             <FicheSolutionSmallCard
               key={ficheSolutionId}
               ficheSolutionId={ficheSolutionId}

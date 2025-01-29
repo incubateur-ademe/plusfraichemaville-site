@@ -6,12 +6,15 @@ import { FichesSolutionsProjetsSelected } from "./fiches-solutions-projet-select
 import { AllSolutionsBoard } from "../common/all-solutions-board";
 import { FichesSolutionProjetBookmarksByEspace } from "./fiches-solutions-projet-bookmarks-by-espace";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { FicheType } from "@prisma/client";
 
 export const FichesSolutionsProjet = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(currentProjet?.id);
   const updateStore = useProjetsStore((state) => state.addOrUpdateProjet);
-  const selectedFichesSolutionsIds = currentProjet?.fiches_solutions_id;
+  const selectedFichesSolutionsIds = useProjetsStore((state) =>
+    state.getCurrentProjetFichesByTypeIds(FicheType.SOLUTION),
+  );
 
   return (
     <>

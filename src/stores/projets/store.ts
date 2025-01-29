@@ -1,6 +1,7 @@
 import { EstimationAide, ProjetWithPublicRelations, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
 import { updateAideInEstimation } from "./helper";
+import { FicheType } from "@prisma/client";
 
 export interface ProjetsState {
   projets: ProjetWithRelations[];
@@ -13,6 +14,7 @@ export type ProjetsActions = {
   setPendingProjets: (_projets: ProjetWithPublicRelations[]) => void;
   setCurrentProjetId: (_currentProjetId: number | null) => void;
   getCurrentProjet: () => ProjetWithRelations | undefined;
+  getCurrentProjetFichesByTypeIds: (_typeFiche: FicheType) => number[] | undefined;
   getProjetById: (_projetId: number) => ProjetWithRelations | undefined;
   addOrUpdateProjet: (_projet: ProjetWithRelations) => void;
   addOrUpdatePendingProjet: (_pendingProjet: ProjetWithPublicRelations) => void;
@@ -43,6 +45,13 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
     getCurrentProjet: () => {
       const { projets, currentProjetId } = get();
       return projets.find((projet) => projet.id === currentProjetId);
+    },
+    getCurrentProjetFichesByTypeIds: (typeFiche) => {
+      const { projets, currentProjetId } = get();
+      return projets
+        .find((projet) => projet.id === currentProjetId)
+        ?.fiches?.filter((fiche) => fiche.type === typeFiche)
+        ?.map((fiche) => fiche.fiche_id);
     },
     getProjetById: (projetId) => get().projets.find((projet) => projet.id === projetId),
     addOrUpdateProjet: (_projet) =>

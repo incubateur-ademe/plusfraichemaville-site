@@ -12,6 +12,7 @@ import { makeFicheDiagnosticUrlApi } from "../fiches-diagnostic/helpers";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { Media } from "@/src/lib/strapi/types/common/Media";
+import { FicheType } from "@prisma/client";
 
 const IMAGE_SLICE_INDEX = 5;
 
@@ -29,9 +30,10 @@ export const TableauDeBordFichesDiagnoscticImages = () => {
 };
 
 export const TableauDeBordFichesSolutionImages = () => {
-  const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const selectedFichesSolutions = projet?.fiches_solutions_id;
-  return <TableauDeBordSFicheImages typeFiche={TypeFiche.solution} selectedFichesIds={selectedFichesSolutions} />;
+  const selectedFichesSolutionsIds = useProjetsStore((state) =>
+    state.getCurrentProjetFichesByTypeIds(FicheType.SOLUTION),
+  );
+  return <TableauDeBordSFicheImages typeFiche={TypeFiche.solution} selectedFichesIds={selectedFichesSolutionsIds} />;
 };
 
 const TableauDeBordSFicheImages = ({

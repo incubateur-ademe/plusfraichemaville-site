@@ -125,12 +125,15 @@ export type ProjetSourcingContact = Prisma.projet_sourcing_contactGetPayload<{
 
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];
 
+export type ProjetFiche = Prisma.projet_ficheGetPayload;
+
 export interface ProjetWithRelations extends projet {
   collectivite: collectivite;
   estimations: EstimationWithAides[];
   creator: User;
   users: UserProjetWithUser[];
   sourcing_user_projets: ProjetSourcingContact[];
+  fiches: ProjetFiche[];
 }
 
 export interface ProjetWithPublicRelations
