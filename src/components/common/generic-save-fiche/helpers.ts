@@ -128,8 +128,6 @@ export const checkIfFicheIsSaved = ({
   ficheId: number;
   typeFiche: TypeFiche;
 }) => {
-  return (
-    projet.fiches.find((fiche) => fiche.fiche_id === ficheId)?.type ===
-    (typeFiche === TypeFiche.solution ? FicheType.SOLUTION : FicheType.DIAGNOSTIC)
-  );
+  const ficheType = typeFiche === TypeFiche.solution ? FicheType.SOLUTION : FicheType.DIAGNOSTIC;
+  return !!projet.fiches.find((fiche) => fiche.fiche_id === ficheId && fiche.type === ficheType);
 };

@@ -34,7 +34,8 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     }
   };
 
-  const projetFichesSolutionsIds = projet.fiches.filter((f) => f.type === FicheType.SOLUTION).map((f) => f.fiche_id);
+  const projetFichesSolutionsIds =
+    useProjetsStore((state) => state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION)) ?? [];
 
   const form = useForm<EstimationFormData>({
     resolver: zodResolver(EstimationFormSchema),

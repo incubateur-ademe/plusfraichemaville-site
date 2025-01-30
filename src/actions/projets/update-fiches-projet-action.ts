@@ -2,11 +2,12 @@
 
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { addProjetFiche, deleteProjetFiche } from "@/src/lib/prisma/prisma-projet-fiche-queries";
+import { addProjetFiche, deleteProjetFiche, ProjetFicheUpdater } from "@/src/lib/prisma/prisma-projet-fiche-queries";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
+import { deleteRecommandationsViewedBy } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const updateFichesProjetAction = async ({
   projetId,
@@ -31,15 +32,16 @@ export const updateFichesProjetAction = async ({
   }
 
   try {
-    const dataUpdate = {
+    const dataUpdate: ProjetFicheUpdater = {
       projetId,
       ficheId,
       typeFiche,
-      typeUpdate,
       userId: session.user.id,
     };
 
-    let projet = typeUpdate === TypeUpdate.add ? await addProjetFiche(dataUpdate) : await deleteProjetFiche(dataUpdate);
+    typeUpdate === TypeUpdate.add ? await addProjetFiche(dataUpdate) : await deleteProjetFiche(dataUpdate);
+
+    const projet = await deleteRecommandationsViewedBy(projetId, session.user.id);
 
     const message =
       typeFiche === TypeFiche.solution ? "FICHE_SOLUTION_ADDED_TO_PROJET" : "FICHE_DIAGNOSTIC_ADDED_TO_PROJET";

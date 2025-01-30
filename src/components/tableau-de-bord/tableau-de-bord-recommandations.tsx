@@ -8,7 +8,7 @@ import { FicheType } from "@prisma/client";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const urls = useProjetsStore((state) => state.getCurrentProjetFichesByTypeIds(FicheType.SOLUTION)) ?? [];
+  const urls = useProjetsStore((state) => state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION)) ?? [];
 
   const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionCompleteUrlApi(urls));
 

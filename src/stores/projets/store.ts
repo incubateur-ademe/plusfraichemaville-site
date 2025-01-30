@@ -14,7 +14,7 @@ export type ProjetsActions = {
   setPendingProjets: (_projets: ProjetWithPublicRelations[]) => void;
   setCurrentProjetId: (_currentProjetId: number | null) => void;
   getCurrentProjet: () => ProjetWithRelations | undefined;
-  getCurrentProjetFichesByTypeIds: (_typeFiche: FicheType) => number[] | undefined;
+  getCurrentProjetFichesIdsByType: (_typeFiche: FicheType) => number[] | undefined;
   getProjetById: (_projetId: number) => ProjetWithRelations | undefined;
   addOrUpdateProjet: (_projet: ProjetWithRelations) => void;
   addOrUpdatePendingProjet: (_pendingProjet: ProjetWithPublicRelations) => void;
@@ -46,7 +46,7 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
       const { projets, currentProjetId } = get();
       return projets.find((projet) => projet.id === currentProjetId);
     },
-    getCurrentProjetFichesByTypeIds: (typeFiche) => {
+    getCurrentProjetFichesIdsByType: (typeFiche) => {
       const { projets, currentProjetId } = get();
       return projets
         .find((projet) => projet.id === currentProjetId)

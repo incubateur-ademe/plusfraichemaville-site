@@ -23,7 +23,7 @@ const datas = {
 
 export const AideEstimationListeEmpty = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const fichesSolutions = useProjetsStore((state) => state.getCurrentProjetFichesByTypeIds(FicheType.SOLUTION));
+  const fichesSolutions = useProjetsStore((state) => state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION));
 
   const hasFichesSolutions = fichesSolutions && fichesSolutions?.length > 0;
 

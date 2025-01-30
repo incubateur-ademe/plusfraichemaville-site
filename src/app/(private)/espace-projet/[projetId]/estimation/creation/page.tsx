@@ -5,10 +5,11 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProtectedEspaceProjetUrl } from "@/src/components/common/protected-espace-projet-url";
 import { FicheType } from "@prisma/client";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const fichesSolutionsIds = useProjetsStore((state) => state.getCurrentProjetFichesByTypeIds(FicheType.SOLUTION));
+  const fichesSolutionsIds = useProjetsStore((state) => state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION));
 
   if (!currentProjet) {
     return null;
@@ -18,7 +19,7 @@ export default function CreateEstimationPage() {
     <ProtectedEspaceProjetUrl>
       <div className="fr-container pt-8">
         <h1 className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</h1>
-        {fichesSolutionsIds && fichesSolutionsIds.length > 0 ? (
+        {!isEmpty(fichesSolutionsIds) ? (
           <>
             <div className="text-lg">{`Mes solutions sélectionnées pour mon projet ${currentProjet?.nom}.`}</div>
             <div className="mb-10  text-lg">

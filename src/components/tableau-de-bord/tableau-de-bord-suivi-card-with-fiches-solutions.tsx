@@ -17,8 +17,9 @@ import { FicheType } from "@prisma/client";
 const IMAGE_SLICE_INDEX = 5;
 
 export const TableauDeBordFichesDiagnoscticImages = () => {
-  const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const selectedFichesDiagnostic = projet?.fiches_diagnostic_id;
+  const selectedFichesDiagnostic = useProjetsStore((state) =>
+    state.getCurrentProjetFichesIdsByType(FicheType.DIAGNOSTIC),
+  );
   if (!selectedFichesDiagnostic || selectedFichesDiagnostic.length === 0) {
     return (
       <TableauDeBordSuiviWithText>
@@ -31,7 +32,7 @@ export const TableauDeBordFichesDiagnoscticImages = () => {
 
 export const TableauDeBordFichesSolutionImages = () => {
   const selectedFichesSolutionsIds = useProjetsStore((state) =>
-    state.getCurrentProjetFichesByTypeIds(FicheType.SOLUTION),
+    state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION),
   );
   return <TableauDeBordSFicheImages typeFiche={TypeFiche.solution} selectedFichesIds={selectedFichesSolutionsIds} />;
 };

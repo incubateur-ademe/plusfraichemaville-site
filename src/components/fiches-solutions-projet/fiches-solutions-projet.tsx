@@ -13,7 +13,7 @@ export const FichesSolutionsProjet = () => {
   const canEditProjet = useCanEditProjet(currentProjet?.id);
   const updateStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const selectedFichesSolutionsIds = useProjetsStore((state) =>
-    state.getCurrentProjetFichesByTypeIds(FicheType.SOLUTION),
+    state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION),
   );
 
   return (

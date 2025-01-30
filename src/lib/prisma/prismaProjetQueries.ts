@@ -87,22 +87,32 @@ export const updateFichesSolutionsProjet = async (
   fichesSolutionsId: number[],
   userId: string,
 ): Promise<ProjetWithRelations | null> => {
-  const projet = await getProjetById(projetId);
-  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
-  let updatedRecommandationsViewed: string[] = [];
+  await Promise.all(
+    fichesSolutionsId.map((ficheId) =>
+      prismaClient.projet_fiche.upsert({
+        where: {
+          projet_id_fiche_id_type: {
+            projet_id: projetId,
+            fiche_id: ficheId,
+            type: "SOLUTION",
+          },
+        },
+        create: {
+          projet_id: projetId,
+          fiche_id: ficheId,
+          type: "SOLUTION",
+          user_id: userId,
+        },
+        update: {
+          user_id: userId,
+          fiche_id: ficheId,
+        },
+      }),
+    ),
+  );
 
-  if (recommandationsViewedUserIds) {
-    updatedRecommandationsViewed = recommandationsViewedUserIds.filter((currentUserId) => currentUserId !== userId);
-  }
-
-  return prismaClient.projet.update({
-    where: {
-      id: projetId,
-    },
-    data: {
-      fiches_solutions_id: fichesSolutionsId,
-      recommandations_viewed_by: updatedRecommandationsViewed,
-    },
+  return prismaClient.projet.findUnique({
+    where: { id: projetId },
     include: projetIncludes,
   });
 };
