@@ -26,7 +26,7 @@ export const FicheDiagnosticNoSelection = async () => {
           <span className="fr-icon-information-line ml-3 before:mb-[-1px]" aria-hidden="true"></span>
         </div>
       </div>
-      <div className="bg-dsfr-background-alt-red-marianne">
+      <div className="bg-background-diag-icu">
         <div className="fr-container flex gap-10 py-6">
           <div className="w-60">
             Consulter et sélectionner les méthodes de diagnostic pour évaluer l’ICU de votre projet.
@@ -44,11 +44,9 @@ export const FicheDiagnosticNoSelection = async () => {
           <span className="fr-icon-information-line ml-3 before:mb-[-1px]" aria-hidden="true"></span>
         </div>
       </div>
-      <div className="bg-dsfr-background-contrast-brown-cafe-creme">
+      <div className="bg-background-confort-thermique">
         <div className="fr-container flex gap-10 py-6">
-          <div className="w-60">
-            Consulter et sélectionner les méthodes de diagnostic pour évaluer l’ICU de votre projet.
-          </div>
+          <div className="w-60">Consulter et sélectionner les méthodes de mesure d’inconfort thermique.</div>
           <div className="flex gap-6">
             {confortThermiqueFichesDiagnostics.map((fd) => (
               <FicheDiagnosticCard

@@ -18,3 +18,10 @@ export enum FicheDiagnosticUtilite {
   // eslint-disable-next-line no-unused-vars
   DiminutionICU = "diminution_effet_icu",
 }
+
+export enum StrapiFicheDiagnosticEchelleSpatiale {
+  // eslint-disable-next-line no-unused-vars
+  Quartier = "quartier",
+  // eslint-disable-next-line no-unused-vars
+  EspacePublic = "espace_public",
+}

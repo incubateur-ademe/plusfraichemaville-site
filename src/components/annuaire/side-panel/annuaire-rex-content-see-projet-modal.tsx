@@ -35,7 +35,7 @@ export const AnnuaireRexContentSeeProjetModal = () => {
           </span>
         }
         size="large"
-        className="xl-modal"
+        className="custom-modal xl-modal"
       >
         {currentAnnuaireRexProjet && (
           <Suspense fallback={<AnnuaireRexContentSeeProjetModalSkeleton />}>

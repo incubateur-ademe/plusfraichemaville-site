@@ -1,15 +1,15 @@
+"use client";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
 import { getFicheDiagUtilite } from "@/src/components/fiches-diagnostic/helpers";
+import { useModalStore } from "@/src/stores/modal/provider";
 
 type FicheDiagnosticCardProps = {
   ficheDiagnostic: FicheDiagnostic;
@@ -22,22 +22,24 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
   const delaiMin = ficheDiagnostic.attributes.delai_min;
   const delaiMax = ficheDiagnostic.attributes.delai_max;
   const utiliteFiche: FicheDiagnosticUtilite = overrideUtiliteFiche ?? getFicheDiagUtilite(ficheDiagnostic);
+  const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
 
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
 
-  const ficheUrl = PFMV_ROUTES.FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug);
-
   return (
-    <div className={clsx("pfmv-card relative h-auto w-72")}>
+    <div className={clsx("pfmv-card relative h-auto w-72 cursor-pointer")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type={TypeFiche.diagnostic} classNameButton="absolute top-3 right-4" />
-      <GenericFicheLink href={ficheUrl}>
+      <div
+        className="flex h-full flex-col"
+        onClick={() => setCurrentFicheDiagnostic({ ficheDiagnostic, overrideUtiliteFiche: utiliteFiche })}
+      >
         <div
           className={clsx(
             "flex h-full flex-col rounded-[0.9375rem] pb-5",
             utiliteFiche === FicheDiagnosticUtilite.DiminutionICU
-              ? "bg-dsfr-background-contrast-red-marianne"
-              : "bg-dsfr-background-contrast-red-marianne", // TODO en attente des couleurs validées par design,
+              ? "bg-background-fiche-diag-icu"
+              : "bg-background-fiche-confort-thermique",
           )}
         >
           <div className="relative block h-40 w-72 overflow-hidden">
@@ -51,7 +53,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
           </div>
           <div className="flex h-fit grow flex-col justify-between px-6 pb-2 pt-5">
             <div className="text-xl font-bold leading-tight">{ficheDiagnostic.attributes.titre}</div>
-            <p className={"mb-11 mt-4 text-sm italic"}>{ficheDiagnostic.attributes.nom_scientifique}</p>
+            <div className={"mb-11 mt-4 text-sm italic"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
             <div className="mb-3 block">
               <div className="flex items-center">
                 <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
@@ -70,7 +72,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
             </div>
           </div>
         </div>
-      </GenericFicheLink>
+      </div>
     </div>
   );
 };

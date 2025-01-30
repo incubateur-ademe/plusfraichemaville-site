@@ -7,6 +7,7 @@ import { ViewerModeModal } from "../tableau-de-bord/viewer-mode-modal";
 // eslint-disable-next-line max-len
 import { AnnuaireRexContentSeeProjetModal } from "@/src/components/annuaire/side-panel/annuaire-rex-content-see-projet-modal";
 import { PartageMemberModificationRoleModale } from "../partage/partage-member-modification-role-modale";
+import { FicheDiagnosticDescriptionModal } from "@/src/components/fiches-diagnostic/fiche-diagnostic-description-modal";
 
 export default function ModalProvider() {
   return (
@@ -17,6 +18,7 @@ export default function ModalProvider() {
       <PartageOverviewDeleteOrQuitModale />
       <AvailableProjetsForCollectiviteModal />
       <AnnuaireRexContentSeeProjetModal />
+      <FicheDiagnosticDescriptionModal />
       <ViewerModeModal />
     </>
   );
