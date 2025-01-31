@@ -38,6 +38,7 @@ export default function Page() {
         <div>
           {session.status !== "authenticated" && (
             <SignInCard
+              className="mb-10"
               message="save"
               callbackUrl={process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE}
             />

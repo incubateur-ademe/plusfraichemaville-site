@@ -9,11 +9,13 @@ import { FicheDiagnosticProjetListeAddButton } from "./fiche-diagnostic-projet-l
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const FicheDiagnosticProjetListe = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const savedFichesDiagnostic = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.diagnostic });
   const canEditProjet = useCanEditProjet(projet?.id);
-  const savedFichesDiagnostic = projet?.fiches_diagnostic_id;
 
   return (
     <div>
