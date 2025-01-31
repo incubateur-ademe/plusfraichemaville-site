@@ -16,6 +16,6 @@ export const FicheDiagnosticCardWithFetcher = ({
   return !data && isLoading ? (
     <FicheCardSkeleton horizontal={!vertical} />
   ) : (
-    data && <FicheDiagnosticCard ficheDiagnostic={data} vertical={vertical} />
+    data && <FicheDiagnosticCard ficheDiagnostic={data} />
   );
 };

@@ -11,7 +11,7 @@
     "dev:db:generateClient": "prisma generate",
     "dev:localAsProd": "rm -rf ./.next && next build && next start",
     "db:migrate": "prisma migrate deploy",
-    "dev:start": "next dev",
+    "dev:start": "next dev --turbopack",
     "clean": "rm -rf ./.next && rm -rf ./node_modules",
     "build": "next build",
     "start": "next start",

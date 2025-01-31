@@ -48,6 +48,8 @@ module.exports = {
       "dsfr-background-action-high-error-hover": "var(--background-action-high-error-hover)",
       "dsfr-background-flat-warning": "#fc5d00",
       "dsfr-background-alt-red-marianne": "var(--background-alt-red-marianne)",
+      "dsfr-background-contrast-red-marianne": "var(--background-contrast-red-marianne)",
+      "dsfr-background-contrast-brown-cafe-creme": "var(--background-contrast-brown-cafe-creme)",
       "dsfr-background-action-high-purple-glycine-hover": "var(--background-action-high-purple-glycine-hover)",
       "dsfr-background-default-grey-hover": "var(--background-default-grey-hover)",
       "dsfr-background-action-high-success-hover": "var(--background-action-high-success-hover)",
