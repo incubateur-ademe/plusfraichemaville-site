@@ -22,6 +22,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
   const delaiMin = ficheDiagnostic.attributes.delai_min;
   const delaiMax = ficheDiagnostic.attributes.delai_max;
   const utiliteFiche: FicheDiagnosticUtilite = overrideUtiliteFiche ?? getFicheDiagUtilite(ficheDiagnostic).type;
+  const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
 
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
@@ -36,9 +37,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
         <div
           className={clsx(
             "flex h-full flex-col rounded-[0.9375rem] pb-5",
-            utiliteFiche === FicheDiagnosticUtilite.DiminutionICU
-              ? "bg-background-fiche-diag-icu"
-              : "bg-background-fiche-confort-thermique",
+            getFicheDiagUtilite(ficheDiagnostic).colors.bgDark,
           )}
         >
           <div className="relative block h-40 w-72 overflow-hidden">

@@ -11,13 +11,28 @@ export const isFicheDiagConfortThermique = (ficheDiagnostic: FicheDiagnostic): b
   return !!ficheDiagnostic.attributes.effets_attendus?.includes(FicheDiagnosticUtilite.ConfortThermique);
 };
 
-export const getFicheDiagUtilite = (ficheDiagnostic: FicheDiagnostic) => {
-  return {
-    type: isFicheDiagICU(ficheDiagnostic)
-      ? FicheDiagnosticUtilite.DiminutionICU
-      : FicheDiagnosticUtilite.ConfortThermique,
-    color: isFicheDiagICU(ficheDiagnostic)
-      ? "bg-dsfr-background-contrast-red-marianne"
-      : "bg-dsfr-background-contrast-red-marianne",
-  };
+export const UTILITE_FICHE_DIAG_ICU = {
+  type: FicheDiagnosticUtilite.DiminutionICU,
+  colors: {
+    bgDark: "bg-dsfr-background-contrast-red-marianne",
+    bgLight: "bg-dsfr-background-alt-red-marianne",
+    border: "!border-dsfr-background-alt-red-marianne",
+    text: "!text-black",
+  },
 };
+
+export const UTILITE_FICHE_DIAG_CONFORT_THERMIQUE = {
+  type: FicheDiagnosticUtilite.ConfortThermique,
+  colors: {
+    bgDark: "bg-dsfr-background-contrast-blue-france",
+    bgLight: "bg-dsfr-background-alt-blue-france",
+    border: "border-dsfr-border-default-blue-france",
+    text: "text-black",
+  },
+};
+
+export const getFicheDiagUtilite = (ficheDiagnostic: FicheDiagnostic) =>
+  isFicheDiagICU(ficheDiagnostic) ? UTILITE_FICHE_DIAG_ICU : UTILITE_FICHE_DIAG_CONFORT_THERMIQUE;
+
+export const getFicheDiagUtiliteProperties = (utilite?: FicheDiagnosticUtilite) =>
+  utilite === FicheDiagnosticUtilite.DiminutionICU ? UTILITE_FICHE_DIAG_ICU : UTILITE_FICHE_DIAG_CONFORT_THERMIQUE;
