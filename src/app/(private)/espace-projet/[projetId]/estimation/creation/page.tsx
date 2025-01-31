@@ -4,9 +4,13 @@ import { EstimationInfoForm } from "@/src/forms/estimation/EstimationInfoForm";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProtectedEspaceProjetUrl } from "@/src/components/common/protected-espace-projet-url";
+import { isEmpty } from "@/src/helpers/listUtils";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  const fichesSolutionsIds = getProjetFichesIdsByType({ projet: currentProjet, typeFiche: TypeFiche.solution });
 
   if (!currentProjet) {
     return null;
@@ -16,7 +20,7 @@ export default function CreateEstimationPage() {
     <ProtectedEspaceProjetUrl>
       <div className="fr-container pt-8">
         <h1 className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</h1>
-        {currentProjet.fiches_solutions_id?.length > 0 ? (
+        {!isEmpty(fichesSolutionsIds) ? (
           <>
             <div className="text-lg">{`Mes solutions sélectionnées pour mon projet ${currentProjet?.nom}.`}</div>
             <div className="mb-10  text-lg">

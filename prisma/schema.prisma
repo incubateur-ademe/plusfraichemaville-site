@@ -59,6 +59,7 @@ model User {
   accept_communication_produit Boolean                   @default(true)
   emails                       email[]
   estimations_aides            estimations_aides[]
+  fiches                       projet_fiche[]
 }
 
 model VerificationToken {
@@ -194,6 +195,25 @@ model projet {
   is_public                 Boolean?
   sourcing_rex              Json?
   sourcing_user_projets     projet_sourcing_contact[] @relation("sourcing_projet")
+  fiches                    projet_fiche[]
+}
+
+enum FicheType {
+  DIAGNOSTIC
+  SOLUTION
+}
+
+model projet_fiche {
+  id         Int       @id @default(autoincrement())
+  projet_id  Int
+  fiche_id   Int
+  type       FicheType
+  projet     projet    @relation(fields: [projet_id], references: [id])
+  created_at DateTime  @default(now())
+  user_id    String
+  created_by User      @relation(fields: [user_id], references: [id])
+
+  @@unique([projet_id, fiche_id, type])
 }
 
 model projet_sourcing_contact {
