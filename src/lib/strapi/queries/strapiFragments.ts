@@ -47,7 +47,14 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
       }
       methode
       echelle
+      nom_scientifique
       slug
+      effets_attendus
+      utilite_methode {
+        description
+      }
+      type_livrables
+      echelle_spatiale
     }
 }`;
 
