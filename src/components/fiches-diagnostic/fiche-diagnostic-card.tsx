@@ -21,8 +21,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
   const coutMax = ficheDiagnostic.attributes.cout_max;
   const delaiMin = ficheDiagnostic.attributes.delai_min;
   const delaiMax = ficheDiagnostic.attributes.delai_max;
-  const utiliteFiche: FicheDiagnosticUtilite = overrideUtiliteFiche ?? getFicheDiagUtilite(ficheDiagnostic);
-  const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
+  const utiliteFiche: FicheDiagnosticUtilite = overrideUtiliteFiche ?? getFicheDiagUtilite(ficheDiagnostic).type;
 
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);

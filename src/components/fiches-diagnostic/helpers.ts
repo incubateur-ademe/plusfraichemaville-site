@@ -11,5 +11,13 @@ export const isFicheDiagConfortThermique = (ficheDiagnostic: FicheDiagnostic): b
   return !!ficheDiagnostic.attributes.effets_attendus?.includes(FicheDiagnosticUtilite.ConfortThermique);
 };
 
-export const getFicheDiagUtilite = (ficheDiagnostic: FicheDiagnostic): FicheDiagnosticUtilite =>
-  isFicheDiagICU(ficheDiagnostic) ? FicheDiagnosticUtilite.DiminutionICU : FicheDiagnosticUtilite.ConfortThermique;
+export const getFicheDiagUtilite = (ficheDiagnostic: FicheDiagnostic) => {
+  return {
+    type: isFicheDiagICU(ficheDiagnostic)
+      ? FicheDiagnosticUtilite.DiminutionICU
+      : FicheDiagnosticUtilite.ConfortThermique,
+    color: isFicheDiagICU(ficheDiagnostic)
+      ? "bg-dsfr-background-contrast-red-marianne"
+      : "bg-dsfr-background-contrast-red-marianne",
+  };
+};
