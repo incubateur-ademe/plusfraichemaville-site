@@ -13,6 +13,7 @@ import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
 import { RexContactId } from "@/src/components/annuaire/types";
+import { FicheType } from "@prisma/client";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -40,7 +41,8 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je choisis une méthode de diagnostic",
     index: 2,
-    progress: (projet: ProjetWithRelations | undefined) => (projet?.fiches_diagnostic_id.length ? "100" : "0"),
+    progress: (projet: ProjetWithRelations | undefined) =>
+      projet?.fiches.filter((f) => f.type === FicheType.DIAGNOSTIC).length ? "100" : "0",
     disabled: false,
     type: "diagnostic",
     picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
@@ -49,7 +51,8 @@ const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je choisis mes solutions de rafraîchissement",
     index: 3,
-    progress: (projet: ProjetWithRelations | undefined) => (projet?.fiches_solutions_id.length ? "100" : "0"),
+    progress: (projet: ProjetWithRelations | undefined) =>
+      projet?.fiches.filter((f) => f.type === FicheType.SOLUTION).length ? "100" : "0",
     disabled: false,
     type: "solution",
     picto: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,
