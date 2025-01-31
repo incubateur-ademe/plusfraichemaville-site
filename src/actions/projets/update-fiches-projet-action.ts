@@ -8,6 +8,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
 import { deleteRecommandationsViewedBy } from "@/src/lib/prisma/prismaProjetQueries";
+import { Prisma } from "@prisma/client";
 
 export const updateFichesProjetAction = async ({
   projetId,
@@ -31,6 +32,9 @@ export const updateFichesProjetAction = async ({
     return { type: "error", message: "UNAUTHORIZED", projet: null };
   }
 
+  const message =
+    typeFiche === TypeFiche.solution ? "FICHE_SOLUTION_ADDED_TO_PROJET" : "FICHE_DIAGNOSTIC_ADDED_TO_PROJET";
+
   try {
     const dataUpdate: ProjetFicheUpdater = {
       projetId,
@@ -43,15 +47,13 @@ export const updateFichesProjetAction = async ({
 
     const projet = await deleteRecommandationsViewedBy(projetId, session.user.id);
 
-    const message =
-      typeFiche === TypeFiche.solution ? "FICHE_SOLUTION_ADDED_TO_PROJET" : "FICHE_DIAGNOSTIC_ADDED_TO_PROJET";
-
-    return {
-      type: "success",
-      message,
-      projet,
-    };
+    return { type: "success", message, projet };
   } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      if (e.code === "P2025") {
+        return { type: "success", message, projet: null };
+      }
+    }
     customCaptureException("Error in updateFichesProjet DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR", projet: null };
   }

@@ -2,7 +2,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import { estimation, FicheType } from "@prisma/client";
+import { estimation } from "@prisma/client";
 import clsx from "clsx";
 
 import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation/EstimationFormSchema";
@@ -16,6 +16,8 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useRouter } from "next/navigation";
 import { notifications } from "@/src/components/common/notifications";
 import { useModalStore } from "@/src/stores/modal/provider";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
   const router = useRouter();
@@ -34,8 +36,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     }
   };
 
-  const projetFichesSolutionsIds =
-    useProjetsStore((state) => state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION)) ?? [];
+  const projetFichesSolutionsIds = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) ?? [];
 
   const form = useForm<EstimationFormData>({
     resolver: zodResolver(EstimationFormSchema),

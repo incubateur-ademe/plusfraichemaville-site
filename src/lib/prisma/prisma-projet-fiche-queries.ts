@@ -12,13 +12,21 @@ export type ProjetFicheUpdater = {
 };
 
 export const addProjetFiche = async ({ projetId, ficheId, typeFiche, userId }: ProjetFicheUpdater) => {
-  const { projet } = await prismaClient.projet_fiche.create({
-    data: {
+  const { projet } = await prismaClient.projet_fiche.upsert({
+    where: {
+      projet_id_fiche_id_type: {
+        projet_id: projetId,
+        fiche_id: ficheId,
+        type: typeFiche === TypeFiche.solution ? FicheType.SOLUTION : FicheType.DIAGNOSTIC,
+      },
+    },
+    create: {
       projet_id: projetId,
       fiche_id: ficheId,
-      type: typeFiche === TypeFiche.solution ? "SOLUTION" : "DIAGNOSTIC",
+      type: typeFiche === TypeFiche.solution ? FicheType.SOLUTION : FicheType.DIAGNOSTIC,
       user_id: userId,
     },
+    update: {},
     include: {
       projet: {
         include: projetIncludes,

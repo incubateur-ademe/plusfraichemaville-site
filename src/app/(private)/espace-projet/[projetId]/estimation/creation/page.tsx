@@ -4,12 +4,13 @@ import { EstimationInfoForm } from "@/src/forms/estimation/EstimationInfoForm";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProtectedEspaceProjetUrl } from "@/src/components/common/protected-espace-projet-url";
-import { FicheType } from "@prisma/client";
 import { isEmpty } from "@/src/helpers/listUtils";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const fichesSolutionsIds = useProjetsStore((state) => state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION));
+  const fichesSolutionsIds = getProjetFichesIdsByType({ projet: currentProjet, typeFiche: TypeFiche.solution });
 
   if (!currentProjet) {
     return null;

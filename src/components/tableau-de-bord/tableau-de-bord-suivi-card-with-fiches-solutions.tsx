@@ -12,14 +12,14 @@ import { makeFicheDiagnosticUrlApi } from "../fiches-diagnostic/helpers";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { Media } from "@/src/lib/strapi/types/common/Media";
-import { FicheType } from "@prisma/client";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 
 const IMAGE_SLICE_INDEX = 5;
 
 export const TableauDeBordFichesDiagnoscticImages = () => {
-  const selectedFichesDiagnostic = useProjetsStore((state) =>
-    state.getCurrentProjetFichesIdsByType(FicheType.DIAGNOSTIC),
-  );
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const selectedFichesDiagnostic = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.diagnostic });
+
   if (!selectedFichesDiagnostic || selectedFichesDiagnostic.length === 0) {
     return (
       <TableauDeBordSuiviWithText>
@@ -31,9 +31,9 @@ export const TableauDeBordFichesDiagnoscticImages = () => {
 };
 
 export const TableauDeBordFichesSolutionImages = () => {
-  const selectedFichesSolutionsIds = useProjetsStore((state) =>
-    state.getCurrentProjetFichesIdsByType(FicheType.SOLUTION),
-  );
+  const projet = useProjetsStore((state) => state.getCurrentProjet());
+  const selectedFichesSolutionsIds = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution });
+
   return <TableauDeBordSFicheImages typeFiche={TypeFiche.solution} selectedFichesIds={selectedFichesSolutionsIds} />;
 };
 

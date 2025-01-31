@@ -1,4 +1,4 @@
-import { collectivite, Prisma, projet, RoleProjet, User } from "@prisma/client";
+import { collectivite, Prisma, projet, projet_fiche, RoleProjet, User } from "@prisma/client";
 
 export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
@@ -125,15 +125,13 @@ export type ProjetSourcingContact = Prisma.projet_sourcing_contactGetPayload<{
 
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];
 
-export type ProjetFiche = Prisma.projet_ficheGetPayload;
-
 export interface ProjetWithRelations extends projet {
   collectivite: collectivite;
   estimations: EstimationWithAides[];
   creator: User;
   users: UserProjetWithUser[];
   sourcing_user_projets: ProjetSourcingContact[];
-  fiches: ProjetFiche[];
+  fiches: projet_fiche[];
 }
 
 export interface ProjetWithPublicRelations
