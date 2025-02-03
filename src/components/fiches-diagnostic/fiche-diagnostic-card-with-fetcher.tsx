@@ -1,21 +1,16 @@
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheDiagnosticUrlApi } from "./helpers";
-import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
+import { FicheDiagnosticCardSkeleton } from "@/src/components/fiches-diagnostic/fiche-diagnostic-card-skeleton";
 
 export const FicheDiagnosticCardWithFetcher = ({
   ficheDiagnosticId,
-  vertical,
 }: {
   ficheDiagnosticId: number;
   vertical?: boolean;
 }) => {
   const { data, isLoading } = useImmutableSwrWithFetcher<FicheDiagnostic>(makeFicheDiagnosticUrlApi(ficheDiagnosticId));
 
-  return !data && isLoading ? (
-    <FicheCardSkeleton horizontal={!vertical} />
-  ) : (
-    data && <FicheDiagnosticCard ficheDiagnostic={data} />
-  );
+  return !data && isLoading ? <FicheDiagnosticCardSkeleton /> : data && <FicheDiagnosticCard ficheDiagnostic={data} />;
 };
