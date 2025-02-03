@@ -1,6 +1,4 @@
-import clsx from "clsx";
-import CustomTabButton from "../common/CustomTabButton";
-import { PropsWithChildren } from "react";
+import { PropsWithChildren, ReactNode } from "react";
 import { FicheDiagnosticMethodeTab } from "./fiche-diagnostic-tab-methode";
 import { FicheDiagnosticAvantageTab } from "./fiche-diagnostic-tab-avantages";
 import { FicheDiagnosticMiseEnOeuvreTab } from "./fiche-diagnostic-tab-meo";
@@ -8,14 +6,24 @@ import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { TypeFiche } from "@/src/helpers/common";
+import { Separator } from "../common/separator";
+import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
+import { FicheDiagnosticClientTab } from "./fiche-diagnostic-tab-client";
 
 type FicheDiagnosticTabsProps = {
   ficheDiagnostic: FicheDiagnostic;
 } & PropsWithChildren;
 
+export type FicheDiagnosticTab = {
+  label: string;
+  contentId: string;
+  isSelected: boolean;
+  component: ReactNode;
+};
+
 export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProps) => {
   const { attributes, id } = ficheDiagnostic;
-  const tabs = [
+  const tabs: FicheDiagnosticTab[] = [
     {
       label: "Méthode",
       contentId: "methode-panel",
@@ -37,11 +45,10 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
   ];
   return (
     <div className="relative">
-      <div className="absolute left-0 top-0 h-14 w-full bg-pfmv-orange"></div>
       <div className="fr-container relative flex flex-row">
-        <div className="flex-none md:mt-[6.5rem] md:w-56">
+        <div className="sticky top-12 h-96 flex-none pt-12 md:w-56">
+          <FicheDiagnosticClientTab tabs={tabs} />
           <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-2"} />
-
           <div className="absolute right-4 top-[68px] md:hidden">
             <GenericSaveFiche id={id} type={TypeFiche.diagnostic} />
           </div>
@@ -49,24 +56,20 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
             <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel />
           </div>
         </div>
-        <div className="fr-tabs !shadow-none before:!shadow-none">
-          <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche diagnostic">
-            {tabs.map((tab) => (
-              <li role="presentation" key={tab.contentId}>
-                <CustomTabButton {...tab} className="customTab custom-tab-diag text-black" />
-              </li>
-            ))}
-          </ul>
-          {tabs.map((tab, index) => (
-            <div
-              id={tab.contentId}
-              key={tab.contentId}
-              className={clsx("fr-tabs__panel !px-0 !pt-14 md:!py-12", !index && "fr-tabs__panel--selected")}
-              role="tabpanel"
-            >
-              {tab.component}
-            </div>
+        <div className="border-l-[1px] border-dsfr-border-default-grey pl-7 pt-12">
+          {tabs.map((tab) => (
+            <>
+              <div className="mb-12" id={tab.contentId} key={tab.contentId}>
+                {tab.component}
+              </div>
+              <Separator className="my-12 !h-[1px] !opacity-100" />
+            </>
           ))}
+          {!!attributes.partenaire && (
+            <div className="pb-12">
+              <FicheDiagnosticTabBlocText title="Crédits" text={attributes.partenaire} textClassName="[&>*]:mb-2" />
+            </div>
+          )}
         </div>
       </div>
     </div>
