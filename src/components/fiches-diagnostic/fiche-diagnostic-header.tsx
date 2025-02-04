@@ -22,8 +22,13 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
   return (
     <div className={utiliteFiche.colors.bgLight} id="fiche-diag-header">
       <div className="fr-container">
-        <div className={clsx("flex justify-between gap-11 pb-11 pt-8 md:gap-10", utiliteFiche.colors.bgLight)}>
-          <div className="size-52 shrink-0">
+        <div
+          className={clsx(
+            "flex flex-col justify-between gap-5 pb-11 pt-8 md:flex-row md:gap-10",
+            utiliteFiche.colors.bgLight,
+          )}
+        >
+          <div className="hidden size-52 shrink-0 md:block">
             <Image
               src={getStrapiImageUrl(attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.titre}
@@ -33,11 +38,9 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             />
           </div>
           <div>
-            <h1 className="mb-5 max-w-2xl text-lg md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
-            <small className="mb-1 hidden text-base font-bold text-black md:block">
-              Nom scientifique de la méthode :
-            </small>
-            <span className="text-xl italic">{attributes.nom_scientifique}</span>
+            <h1 className="mb-5 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
+            <small className="mb-1 block text-base font-bold text-black">Nom scientifique de la méthode :</small>
+            <span className="italic md:text-xl">{attributes.nom_scientifique}</span>
             <Separator className={clsx("my-5 !h-[1px] !opacity-50")} />
             {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
               <ul className="arrow-list orange-arrow-list text-sky-400">
@@ -49,14 +52,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
               </ul>
             )}
           </div>
-
-          <div
-            className={clsx(
-              "h-fit shrink-0 rounded-2xl",
-              "md:w-80 md:pb-14 md:pl-6 md:pr-4 md:pt-8",
-              utiliteFiche.colors.bgDark,
-            )}
-          >
+          <div className={clsx("h-fit shrink-0 rounded-2xl", "px-6 py-8 md:w-80 ", utiliteFiche.colors.bgDark)}>
             <div>
               <small className="mb-1 block text-sm font-bold">Temporalité</small>
               <div className="flex justify-between">

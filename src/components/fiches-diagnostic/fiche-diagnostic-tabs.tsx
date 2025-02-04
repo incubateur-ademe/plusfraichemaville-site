@@ -9,6 +9,7 @@ import { TypeFiche } from "@/src/helpers/common";
 import { Separator } from "../common/separator";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
 import { FicheDiagnosticClientTab } from "./fiche-diagnostic-tab-client";
+import clsx from "clsx";
 
 type FicheDiagnosticTabsProps = {
   ficheDiagnostic: FicheDiagnostic;
@@ -45,18 +46,20 @@ export const FicheDiagnosticTabs = ({ ficheDiagnostic }: FicheDiagnosticTabsProp
   ];
   return (
     <div className="relative">
-      <div className="fr-container relative flex flex-row">
-        <div className="sticky top-12 h-96 flex-none pt-12 md:w-56">
+      <div className="fr-container relative flex flex-col md:flex-row">
+        <div
+          className={clsx(
+            "sticky top-0 z-50 mb-8 flex-none bg-white md:top-12 md:mb-0 md:h-96 md:w-56 md:flex-col md:pt-12",
+            "flex shrink-0 flex-col-reverse",
+          )}
+        >
           <FicheDiagnosticClientTab tabs={tabs} />
-          <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-2"} />
-          <div className="absolute right-4 top-[68px] md:hidden">
-            <GenericSaveFiche id={id} type={TypeFiche.diagnostic} />
-          </div>
-          <div className="mt-4 hidden md:block">
+          <ButtonShareCurrentUrl className={"mb-2 block md:mb-0 [&>*]:mb-2"} />
+          <div className="my-4 md:mb-0 md:mt-4">
             <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel />
           </div>
         </div>
-        <div className="border-l-[1px] border-dsfr-border-default-grey pl-7 pt-12">
+        <div className="border-dsfr-border-default-grey md:border-l-[1px] md:pl-7 md:pt-12">
           {tabs.map((tab) => (
             <>
               <div className="mb-12" id={tab.contentId} key={tab.contentId}>

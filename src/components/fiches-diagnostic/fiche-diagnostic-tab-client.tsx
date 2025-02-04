@@ -1,9 +1,9 @@
 "use client";
 
-import Link from "next/link";
 import { FicheDiagnosticTab } from "./fiche-diagnostic-tabs";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { SideMenu } from "@codegouvfr/react-dsfr/SideMenu";
 
 export const FicheDiagnosticClientTab = ({ tabs }: { tabs: FicheDiagnosticTab[] }) => {
   const pathname = usePathname();
@@ -21,18 +21,23 @@ export const FicheDiagnosticClientTab = ({ tabs }: { tabs: FicheDiagnosticTab[] 
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
+  const items = tabs.map((tab) => ({
+    isActive: activeTab === tab.contentId,
+    linkProps: {
+      href: `${pathname}#${tab.contentId}`,
+      onClick: () => setActiveTab(tab.contentId),
+    },
+    text: tab.label,
+  }));
+
   return (
-    <div className="mb-32 flex flex-col gap-6">
-      {tabs.map((tab) => (
-        <Link
-          href={`${pathname}#${tab.contentId}`}
-          key={tab.contentId}
-          className={`!bg-none ${activeTab === tab.contentId ? "font-bold" : ""}`}
-          onClick={() => setActiveTab(tab.contentId)}
-        >
-          {tab.label}
-        </Link>
-      ))}
+    <div className="flex flex-col gap-6 md:mb-32">
+      <SideMenu
+        align="left"
+        burgerMenuButtonText="Dans cette rubrique"
+        items={items}
+        className="p-0 !shadow-none [&>div]:shadow-none"
+      />
     </div>
   );
 };

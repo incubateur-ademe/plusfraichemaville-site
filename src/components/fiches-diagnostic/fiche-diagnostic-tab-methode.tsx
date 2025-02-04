@@ -2,7 +2,6 @@ import { Separator } from "../common/separator";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
 import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
 import clsx from "clsx";
-import { getMethodeDiagnosticFromCode } from "@/src/components/fiches-diagnostic/filters/methode";
 
 import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
@@ -19,13 +18,6 @@ export const FicheDiagnosticMethodeTab = ({
 
   return (
     <>
-      <div className="relative mb-6 text-base text-dsfr-text-mention-grey md:hidden">
-        <i className="ri-bar-chart-fill mr-1 text-dsfr-background-flat-warning before:!w-4"></i>
-        Méthode de diagnostic{" "}
-        <span className="font-bold capitalize text-dsfr-background-flat-warning">
-          {getMethodeDiagnosticFromCode(attributes.methode)?.label}
-        </span>
-      </div>
       <div className="flex flex-col justify-between md:flex-row">
         <h3 className={clsx("text-2xl md:hidden md:text-2xl")}>{attributes.description_courte}</h3>
         <FicheDiagnosticTabBlocText
