@@ -1,11 +1,11 @@
 "use client";
 
-import { FicheDiagnosticTab } from "./fiche-diagnostic-tabs";
+import { FicheDiagnosticBloc } from "./fiche-diagnostic-blocs";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SideMenu } from "@codegouvfr/react-dsfr/SideMenu";
 
-export const FicheDiagnosticClientTab = ({ tabs }: { tabs: FicheDiagnosticTab[] }) => {
+export const FicheDiagnosticClientTab = ({ blocs }: { blocs: FicheDiagnosticBloc[] }) => {
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<string>("");
 
@@ -21,13 +21,13 @@ export const FicheDiagnosticClientTab = ({ tabs }: { tabs: FicheDiagnosticTab[] 
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  const items = tabs.map((tab) => ({
-    isActive: activeTab === tab.contentId,
+  const items = blocs.map((bloc) => ({
+    isActive: activeTab === bloc.contentId,
     linkProps: {
-      href: `${pathname}#${tab.contentId}`,
-      onClick: () => setActiveTab(tab.contentId),
+      href: `${pathname}#${bloc.contentId}`,
+      onClick: () => setActiveTab(bloc.contentId),
     },
-    text: tab.label,
+    text: bloc.label,
   }));
 
   return (

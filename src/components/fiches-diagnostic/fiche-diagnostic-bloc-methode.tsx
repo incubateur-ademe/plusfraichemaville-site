@@ -1,12 +1,10 @@
 import { Separator } from "../common/separator";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
-import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
-import clsx from "clsx";
-
+import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
-export const FicheDiagnosticMethodeTab = ({
+export const FicheDiagnosticMethodeBloc = ({
   ficheDiagnostic,
 }: {
   ficheDiagnostic: FicheDiagnostic;
@@ -18,23 +16,18 @@ export const FicheDiagnosticMethodeTab = ({
 
   return (
     <>
-      <div className="flex flex-col justify-between md:flex-row">
-        <h3 className={clsx("text-2xl md:hidden md:text-2xl")}>{attributes.description_courte}</h3>
-        <FicheDiagnosticTabBlocText
-          title="La méthode"
-          text={attributes.description}
-          titleClassName="text-2xl mb-4 hidden md:block"
-        />
+      <div className="flex flex-col justify-between md:flex-row md:pt-12">
+        <FicheDiagnosticBlocText title="La méthode" text={attributes.description} titleClassName="text-3xl mb-4" />
       </div>
       <Separator className="mb-8 mt-4 !h-[1px] !opacity-100" />
       <div className="flex flex-col justify-between gap-8 md:flex-row">
-        <FicheDiagnosticTabBlocText title="Besoin de la collectivité" text={attributes.besoin} small />
-        <FicheDiagnosticTabBlocText title="Les indicateurs étudiés" text={attributes.indicateurs} small />
+        <FicheDiagnosticBlocText title="Besoin de la collectivité" text={attributes.besoin} small />
+        <FicheDiagnosticBlocText title="Les indicateurs étudiés" text={attributes.indicateurs} small />
       </div>
       {!!attributes.en_savoir_plus_description && (
         <>
           <Separator className="mb-12 mt-6 !h-[1px] !opacity-100" />
-          <FicheDiagnosticTabBlocText
+          <FicheDiagnosticBlocText
             title="En savoir plus"
             text={attributes.en_savoir_plus_description}
             textClassName="[&>*]:mb-2"

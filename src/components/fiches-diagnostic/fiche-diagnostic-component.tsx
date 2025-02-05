@@ -1,5 +1,5 @@
 import { FicheDiagnosticHeader } from "./fiche-diagnostic-header";
-import { FicheDiagnosticTabs } from "./fiche-diagnostic-tabs";
+import { FicheDiagnosticBlocs } from "./fiche-diagnostic-blocs";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 type FicheDiagnosticProps = {
@@ -10,7 +10,7 @@ export const FicheDiagnosticComponent = ({ ficheDiagnostic }: FicheDiagnosticPro
   return (
     <div className="-mb-40">
       <FicheDiagnosticHeader ficheDiagnostic={ficheDiagnostic} />
-      <FicheDiagnosticTabs ficheDiagnostic={ficheDiagnostic} />
+      <FicheDiagnosticBlocs ficheDiagnostic={ficheDiagnostic} />
     </div>
   );
 };
