@@ -46,11 +46,11 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
   ];
   return (
     <div className="relative">
-      <div className="fr-container relative flex flex-col md:flex-row">
+      <div className="fr-container relative flex flex-col-reverse md:flex-row">
         <div
           className={clsx(
-            "sticky top-0 z-50 mb-8 flex-none bg-white md:top-12 md:mb-0 md:h-96 md:w-56 md:flex-col md:pt-12",
-            "flex shrink-0 flex-col-reverse",
+            "sticky bottom-0 top-[unset] z-50 mb-8 flex flex-none shrink-0 flex-col-reverse bg-white",
+            "md:bottom-[unset] md:top-12 md:mb-0 md:h-96 md:w-56 md:flex-col md:pt-12",
           )}
         >
           <FicheDiagnosticClientTab blocs={blocs} />
@@ -69,7 +69,7 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
             </>
           ))}
           {!!attributes.partenaire && (
-            <div className="pb-12">
+            <div className="py-12">
               <FicheDiagnosticBlocText title="Crédits" text={attributes.partenaire} textClassName="[&>*]:mb-2" />
             </div>
           )}

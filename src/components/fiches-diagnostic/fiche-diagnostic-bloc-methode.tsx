@@ -16,7 +16,7 @@ export const FicheDiagnosticMethodeBloc = ({
 
   return (
     <>
-      <div className="flex flex-col justify-between md:flex-row md:pt-12">
+      <div className="flex flex-col justify-between pt-12 md:flex-row">
         <FicheDiagnosticBlocText title="La méthode" text={attributes.description} titleClassName="text-3xl mb-4" />
       </div>
       <Separator className="mb-8 mt-4 !h-[1px] !opacity-100" />
