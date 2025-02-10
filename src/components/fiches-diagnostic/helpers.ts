@@ -40,9 +40,9 @@ export const UTILITE_FICHE_DIAG_CONFORT_THERMIQUE: UtiliteFicheProperties = {
   colors: {
     bgDark: "!bg-background-fiche-confort-thermique",
     bgLight: "!bg-background-confort-thermique",
-    border: "!border-[#E9B16C]",
-    separator: "!bg-[#E9B16C]",
-    picto: "!text-[#FC5D00]",
+    border: "!border-border-confort-thermique",
+    separator: "!bg-border-confort-thermique",
+    picto: "!text-text-confort-thermique",
     text: "!text-black",
   },
 };
