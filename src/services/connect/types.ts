@@ -1,0 +1,45 @@
+export type ConnectContact = {
+  email: string;
+  siret?: string;
+  ExternalID?: string;
+  duns?: string;
+  federationId?: string;
+  titre?: string;
+  nom?: string;
+  prenom?: string;
+  complementAdresse?: string;
+  cedexBP?: string;
+  typeCompte?: string;
+  fonction?: string;
+  telephonePortable?: string;
+  telephone?: string;
+  adressePostale?: string;
+  codePostal?: string;
+  ville?: string;
+  region?: string;
+  pays?: string;
+  acceptationRGPD?: boolean;
+  typeOrganisme?: string;
+  source: string;
+  dateCreation?: string;
+  dateModification?: string;
+  dateConnexion?: string;
+  CGU?: boolean;
+  dateNewsletter?: string;
+  dateFinNewsletter?: string;
+  siteWeb?: string;
+  etsScolaire?: string;
+  actif?: boolean;
+  creationForcee?: boolean;
+  abonnementNewsletter?: boolean;
+  bounce?: boolean;
+  ancienMail?: string;
+};
+
+export type ConnectResponse = {
+  correlationId: string;
+  success: boolean;
+  timestamp: string;
+  message: string;
+  mail: string;
+};

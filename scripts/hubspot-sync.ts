@@ -7,12 +7,27 @@ import {
   makeHubspotSyncBatchWebhookData,
 } from "@/src/services/mattermost/mattermost-helpers";
 import { sendMattermostWebhook } from "@/src/services/mattermost";
+import { batchSyncConnectContacts } from "@/src/services/connect";
+import { ConnectContact } from "@/src/services/connect/types";
 
 type HubspotError = {
   body: {
     status: string;
     message: string;
     correlationid: string;
+  };
+};
+
+const mapUserToConnectContact = (user: any): ConnectContact => {
+  return {
+    email: user.email,
+    nom: user.nom,
+    prenom: user.prenom,
+    source: "PFMV",
+    dateCreation: user.createdAt,
+    dateModification: user.updatedAt,
+    acceptationRGPD: true,
+    actif: true,
   };
 };
 
@@ -45,12 +60,26 @@ const syncWithHubspot = async () => {
       console.log(`Projet(s) archivé(s) : ${archiveResult}`);
     }
 
-    console.log("Début de la synchronisation avec Hubspot...");
-
     const activeUsersAndProjects = usersAndProjectsFromLastSync.map((user) => ({
       ...user,
       projets: user.projets.filter((p) => !p.projet.deleted_at),
     }));
+
+    // Synchronisation avec Connect
+    console.log("Début de la synchronisation avec Connect...");
+    const connectContacts = activeUsersAndProjects.map(mapUserToConnectContact);
+    const connectResult = await batchSyncConnectContacts(connectContacts);
+
+    if (!connectResult.success) {
+      console.error("Erreurs lors de la synchronisation avec Connect:", connectResult.errors);
+      captureError("Erreurs lors de la synchronisation avec Connect", {
+        errors: connectResult.errors,
+      });
+    } else {
+      console.log("Synchronisation avec Connect réussie !");
+    }
+
+    console.log("Début de la synchronisation avec Hubspot...");
 
     const batch = await hubspotBatchSync(activeUsersAndProjects);
 
