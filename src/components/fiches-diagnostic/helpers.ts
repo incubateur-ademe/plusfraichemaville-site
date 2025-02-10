@@ -11,7 +11,19 @@ export const isFicheDiagConfortThermique = (ficheDiagnostic: FicheDiagnostic): b
   return !!ficheDiagnostic.attributes.effets_attendus?.includes(FicheDiagnosticUtilite.ConfortThermique);
 };
 
-export const UTILITE_FICHE_DIAG_ICU = {
+type UtiliteFicheProperties = {
+  type: FicheDiagnosticUtilite;
+  colors: {
+    bgDark: string;
+    bgLight: string;
+    border: string;
+    text: string;
+    separator: string;
+    picto: string;
+  };
+};
+
+export const UTILITE_FICHE_DIAG_ICU: UtiliteFicheProperties = {
   type: FicheDiagnosticUtilite.DiminutionICU,
   colors: {
     bgDark: "bg-background-fiche-diag-icu",
@@ -23,7 +35,7 @@ export const UTILITE_FICHE_DIAG_ICU = {
   },
 };
 
-export const UTILITE_FICHE_DIAG_CONFORT_THERMIQUE = {
+export const UTILITE_FICHE_DIAG_CONFORT_THERMIQUE: UtiliteFicheProperties = {
   type: FicheDiagnosticUtilite.ConfortThermique,
   colors: {
     bgDark: "!bg-background-fiche-confort-thermique",
@@ -35,10 +47,10 @@ export const UTILITE_FICHE_DIAG_CONFORT_THERMIQUE = {
   },
 };
 
-export const getFicheDiagUtilite = (ficheDiagnostic: FicheDiagnostic) =>
+export const getFicheDiagUtilite = (ficheDiagnostic: FicheDiagnostic): UtiliteFicheProperties =>
   isFicheDiagICU(ficheDiagnostic) ? UTILITE_FICHE_DIAG_ICU : UTILITE_FICHE_DIAG_CONFORT_THERMIQUE;
 
-export const getFicheDiagUtiliteProperties = (utilite?: FicheDiagnosticUtilite) =>
+export const getFicheDiagUtiliteProperties = (utilite?: FicheDiagnosticUtilite): UtiliteFicheProperties =>
   utilite === FicheDiagnosticUtilite.DiminutionICU ? UTILITE_FICHE_DIAG_ICU : UTILITE_FICHE_DIAG_CONFORT_THERMIQUE;
 
 const ALL_ECHELLES_SPATIALES = [

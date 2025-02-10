@@ -8,7 +8,7 @@ import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
-import { getFicheDiagUtilite } from "@/src/components/fiches-diagnostic/helpers";
+import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "@/src/components/fiches-diagnostic/helpers";
 import { useModalStore } from "@/src/stores/modal/provider";
 
 type FicheDiagnosticCardProps = {
@@ -22,6 +22,9 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
   const delaiMin = ficheDiagnostic.attributes.delai_min;
   const delaiMax = ficheDiagnostic.attributes.delai_max;
   const utiliteFiche: FicheDiagnosticUtilite = overrideUtiliteFiche ?? getFicheDiagUtilite(ficheDiagnostic).type;
+  const utiliteFicheProperties = overrideUtiliteFiche
+    ? getFicheDiagUtiliteProperties(overrideUtiliteFiche)
+    : getFicheDiagUtilite(ficheDiagnostic);
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
 
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
@@ -34,12 +37,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
         className="flex h-full flex-col"
         onClick={() => setCurrentFicheDiagnostic({ ficheDiagnostic, overrideUtiliteFiche: utiliteFiche })}
       >
-        <div
-          className={clsx(
-            "flex h-full flex-col rounded-[0.9375rem] pb-5",
-            getFicheDiagUtilite(ficheDiagnostic).colors.bgDark,
-          )}
-        >
+        <div className={clsx("flex h-full flex-col rounded-[0.9375rem] pb-5", utiliteFicheProperties.colors.bgDark)}>
           <div className="relative block h-40 w-72 overflow-hidden">
             <Image
               fill

@@ -11,8 +11,10 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
+import { isEmpty } from "@/src/helpers/listUtils";
+import { FichesDiagnosticsProjetEmpty } from "@/src/components/fiches-diagnostic/fiches-diagnostics-projet-empty";
 
-export const FicheDiagnosticProjetListe = () => {
+export const FichesDiagnosticsProjetSelected = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const savedFichesDiagnostic = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.diagnostic });
   const canEditProjet = useCanEditProjet(projet?.id);
@@ -20,9 +22,13 @@ export const FicheDiagnosticProjetListe = () => {
   return (
     <div>
       <div className="mb-10 flex flex-row flex-wrap gap-8">
-        {savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
-          <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
-        ))}
+        {isEmpty(savedFichesDiagnostic) ? (
+          <FichesDiagnosticsProjetEmpty />
+        ) : (
+          savedFichesDiagnostic?.map((ficheDiagnostic, index) => (
+            <FicheDiagnosticCardWithFetcher ficheDiagnosticId={ficheDiagnostic} key={index} />
+          ))
+        )}
         {canEditProjet && (
           <div className="flex items-center">
             <FicheDiagnosticProjetListeAddButton />
