@@ -21,9 +21,9 @@ export type ConnectContact = {
   pays?: string | null;
   acceptationRGPD?: boolean | null;
   typeOrganisme?: string | null;
-  dateCreation?: Date | null;
-  dateModification?: Date | null;
-  dateConnexion?: Date | null;
+  dateCreation?: string | null;
+  dateModification?: string | null;
+  dateConnexion?: string | null;
   CGU?: boolean | null;
   dateNewsletter?: string | null;
   dateFinNewsletter?: string | null;

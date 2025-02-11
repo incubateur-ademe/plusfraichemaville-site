@@ -36,7 +36,7 @@ export const batchSyncConnectContacts = async (
   errors: { email: string; error: string }[];
 }> => {
   if (process.env.CONNECT_SYNC_ACTIVE !== "true") {
-    console.log("La synchronisation avec Connect n'est pas activé sur cet environnement.");
+    console.log("La synchronisation avec Connect n'est pas activée sur cet environnement.");
     return {
       success: true,
       errors: [],

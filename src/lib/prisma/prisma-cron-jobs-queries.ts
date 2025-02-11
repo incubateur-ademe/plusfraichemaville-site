@@ -53,6 +53,16 @@ export const getUsersAndProjectsFromLastSync = async (): Promise<UserWithAdminPr
       ],
     },
     include: {
+      collectivites: {
+        include: {
+          collectivite: {
+            select: {
+              code_postal: true,
+              adresse_all_infos: true,
+            },
+          },
+        },
+      },
       projets: {
         where: {
           AND: [
