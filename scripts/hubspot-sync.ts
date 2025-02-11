@@ -7,8 +7,6 @@ import {
   makeHubspotSyncBatchWebhookData,
 } from "@/src/services/mattermost/mattermost-helpers";
 import { sendMattermostWebhook } from "@/src/services/mattermost";
-import { batchSyncConnectContacts } from "@/src/services/connect";
-import { mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
 
 type HubspotError = {
   body: {
@@ -27,7 +25,9 @@ const syncWithHubspot = async () => {
   try {
     const startedDate = new Date();
     console.log("Récupération des utilisateurs et projets depuis la dernière synchronisation...");
-    const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync();
+    const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync({
+      service: "hubspot",
+    });
 
     if (!usersAndProjectsFromLastSync.length) {
       console.log("Aucune nouvelle donnée à synchroniser.");
@@ -51,18 +51,6 @@ const syncWithHubspot = async () => {
       ...user,
       projets: user.projets.filter((p) => !p.projet.deleted_at),
     }));
-
-    console.log("Début de la synchronisation avec Connect...");
-    const connectContacts = activeUsersAndProjects.map(mapUserToConnectContact);
-    const connectResult = await batchSyncConnectContacts(connectContacts);
-
-    if (!connectResult.success) {
-      captureError("Erreurs lors de la synchronisation avec Connect", {
-        errors: connectResult.errors,
-      });
-    } else {
-      console.log("Synchronisation avec Connect réussie !");
-    }
 
     console.log("Début de la synchronisation avec Hubspot...");
 

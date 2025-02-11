@@ -7,9 +7,16 @@ export const getLastHubspotSync = async () =>
     where: { job_type: "SYNC_HUBSPOT" },
     orderBy: { execution_end_time: "desc" },
   });
+
 export const getLastCsmMailBatch = async () =>
   await prismaClient.cron_jobs.findFirst({
     where: { job_type: "CSM_MAIL_BATCH" },
+    orderBy: { execution_end_time: "desc" },
+  });
+
+export const getLastConnectSync = async () =>
+  await prismaClient.cron_jobs.findFirst({
+    where: { job_type: "SYNC_CONNECT" },
     orderBy: { execution_end_time: "desc" },
   });
 
@@ -22,8 +29,19 @@ export const saveCronJob = async (startTime: Date, endTime: Date, jobType: cron_
     },
   });
 
-export const getUsersAndProjectsFromLastSync = async (): Promise<UserWithAdminProjets[]> => {
-  const lastSync = await getLastHubspotSync();
+export const cronsServices = {
+  hubspot: getLastHubspotSync,
+  csmMailBatch: getLastCsmMailBatch,
+  connect: getLastConnectSync,
+};
+
+// TODO: fix db
+export const getUsersAndProjectsFromLastSync = async ({
+  service,
+}: {
+  service: keyof typeof cronsServices;
+}): Promise<UserWithAdminProjets[]> => {
+  const lastSync = await cronsServices[service]();
   const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
   const lastSyncTimeParams = [
     { created_at: { gte: lastSyncDate } },

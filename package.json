@@ -19,7 +19,8 @@
     "prettier": "npx prettier --check . --ignore-path .prettierignore",
     "fixPrettier": "prettier . --write",
     "hubspot-sync": "npx tsx ./scripts/hubspot-sync.ts",
-    "csm-mail-batch": "npx tsx ./scripts/csm-mail-batch.ts"
+    "csm-mail-batch": "npx tsx ./scripts/csm-mail-batch.ts",
+    "connect-sync": "npx tsx ./scripts/connect-sync.ts"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
