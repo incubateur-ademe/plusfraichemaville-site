@@ -1,5 +1,5 @@
+import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { ConnectContact, ConnectResponse } from "./types";
-
 const CONNECT_API_BASE_URL = process.env.CONNECT_API_BASE_URL;
 
 const config = {
@@ -19,12 +19,12 @@ export const createConnectContact = async (contact: ConnectContact): Promise<Con
     });
 
     if (!response.ok) {
-      console.log(`Erreur lors de la création du contact dans Connect: ${response.statusText}`);
+      captureError(`Erreur lors de la création du contact dans Connect: ${response.statusText}`);
     }
 
     return await response.json();
   } catch (error) {
-    console.error("Erreur lors de la création du contact dans Connect:", error);
+    captureError("Erreur lors de la création du contact dans Connect:", error);
   }
 };
 
@@ -35,7 +35,7 @@ export const batchSyncConnectContacts = async (
   errors: { email: string; error: string }[];
 }> => {
   if (process.env.CONNECT_SYNC_ACTIVE !== "true") {
-    console.log("La synchronisation avec Connect n'est pas activée sur cet environnement.");
+    captureError("La synchronisation avec Connect n'est pas activée sur cet environnement.");
     return {
       success: true,
       errors: [],

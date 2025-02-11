@@ -57,7 +57,6 @@ const syncWithHubspot = async () => {
     const connectResult = await batchSyncConnectContacts(connectContacts);
 
     if (!connectResult.success) {
-      console.error("Erreurs lors de la synchronisation avec Connect:", connectResult.errors);
       captureError("Erreurs lors de la synchronisation avec Connect", {
         errors: connectResult.errors,
       });
