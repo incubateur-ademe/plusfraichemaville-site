@@ -1,7 +1,6 @@
 import { ConnectContact, ConnectResponse } from "./types";
 
-const CONNECT_API_BASE_URL =
-  process.env.CONNECT_API_BASE_URL || "https://ppd-x-ademe-interne-api.de-c1.eu1.cloudhub.io/api/v1";
+const CONNECT_API_BASE_URL = process.env.CONNECT_API_BASE_URL;
 
 const config = {
   headers: {
