@@ -1,5 +1,6 @@
 export type ConnectContact = {
   email: string;
+  source: string;
   siret?: string;
   ExternalID?: string;
   duns?: string;
@@ -20,7 +21,6 @@ export type ConnectContact = {
   pays?: string;
   acceptationRGPD?: boolean;
   typeOrganisme?: string;
-  source: string;
   dateCreation?: string;
   dateModification?: string;
   dateConnexion?: string;

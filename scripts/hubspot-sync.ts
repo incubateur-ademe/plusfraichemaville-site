@@ -65,7 +65,6 @@ const syncWithHubspot = async () => {
       projets: user.projets.filter((p) => !p.projet.deleted_at),
     }));
 
-    // Synchronisation avec Connect
     console.log("Début de la synchronisation avec Connect...");
     const connectContacts = activeUsersAndProjects.map(mapUserToConnectContact);
     const connectResult = await batchSyncConnectContacts(connectContacts);
