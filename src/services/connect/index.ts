@@ -19,7 +19,7 @@ export const createConnectContact = async (contact: ConnectContact): Promise<Con
     });
 
     if (!response.ok) {
-      console.log(`Erreur lors de la création du contact: ${response.statusText}`);
+      console.log(`Erreur lors de la création du contact dans Connect: ${response.statusText}`);
     }
 
     return await response.json();
