@@ -8,26 +8,13 @@ import {
 } from "@/src/services/mattermost/mattermost-helpers";
 import { sendMattermostWebhook } from "@/src/services/mattermost";
 import { batchSyncConnectContacts } from "@/src/services/connect";
-import { ConnectContact } from "@/src/services/connect/types";
+import { mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
 
 type HubspotError = {
   body: {
     status: string;
     message: string;
     correlationid: string;
-  };
-};
-
-const mapUserToConnectContact = (user: any): ConnectContact => {
-  return {
-    email: user.email,
-    nom: user.nom,
-    prenom: user.prenom,
-    source: "PFMV",
-    dateCreation: user.createdAt,
-    dateModification: user.updatedAt,
-    acceptationRGPD: true,
-    actif: true,
   };
 };
 
