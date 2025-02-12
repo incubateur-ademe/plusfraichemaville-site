@@ -6,10 +6,18 @@ import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
 import { Separator } from "../common/separator";
 import clsx from "clsx";
-import { getEchelleSpatialeFromCode, getFicheDiagUtilite } from "./helpers";
+import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "./helpers";
 import { isEmpty } from "@/src/helpers/listUtils";
+import { getEchelleSpatialeLabel } from "@/src/helpers/echelle-spatiale-diagnostic";
+import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
 
-export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
+export const FicheDiagnosticHeader = ({
+  ficheDiagnostic,
+  overrideUtiliteFiche,
+}: {
+  ficheDiagnostic: FicheDiagnostic;
+  overrideUtiliteFiche?: FicheDiagnosticUtilite;
+}) => {
   const { attributes } = ficheDiagnostic;
   const coutMin = attributes.cout_min;
   const coutMax = attributes.cout_max;
@@ -17,7 +25,9 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
   const delaiMax = attributes.delai_max;
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
-  const utiliteFiche = getFicheDiagUtilite(ficheDiagnostic);
+  const utiliteFiche = overrideUtiliteFiche
+    ? getFicheDiagUtiliteProperties(overrideUtiliteFiche)
+    : getFicheDiagUtilite(ficheDiagnostic);
 
   return (
     <div className={utiliteFiche.colors.bgLight} id="fiche-diag-header">
@@ -40,7 +50,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
           <div>
             <h1 className="mb-5 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
             <small className="mb-1 block text-base font-bold text-black">Nom scientifique de la méthode :</small>
-            <span className="italic md:text-xl">{attributes.nom_scientifique}</span>
+            <span className="italic md:text-xl">{attributes.nom_scientifique ?? "Non renseigné"}</span>
             <Separator className={clsx("my-5 !h-[1px] !opacity-50")} />
             {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
               <ul className="arrow-list orange-arrow-list text-sky-400">
@@ -76,19 +86,12 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             <Separator className={clsx(utiliteFiche.colors.separator, "my-3 !h-[1px] !opacity-100")} />
             <div>
               <small className="mb-1 block text-sm font-bold">Échelle</small>
-              <div>
-                {attributes.echelle_spatiale.map((echelle: string, index: number) => (
-                  <span key={echelle}>
-                    {getEchelleSpatialeFromCode(echelle)?.label}
-                    {index < attributes.echelle_spatiale.length - 1 && ", "}
-                  </span>
-                ))}
-              </div>
+              <div className="text-sm">{getEchelleSpatialeLabel(ficheDiagnostic) ?? "Non renseigné"}</div>
             </div>
             <Separator className={clsx(utiliteFiche.colors.separator, "my-3 !h-[1px] !opacity-100")} />
             <div>
               <small className="mb-1 block text-sm font-bold">Type de livrables</small>
-              <div className="flex justify-between">{attributes.type_livrables}</div>
+              <div className="flex justify-between text-sm">{attributes.type_livrables ?? "Non renseigné"}</div>
             </div>
           </div>
         </div>

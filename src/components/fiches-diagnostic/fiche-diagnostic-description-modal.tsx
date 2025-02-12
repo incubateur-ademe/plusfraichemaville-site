@@ -47,6 +47,7 @@ export const FicheDiagnosticDescriptionModal = () => {
   const ficheDiagUrl = PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_DIAGNOSTIC(
     projetId!,
     ficheDiagnostic?.attributes.slug!,
+    currentFicheDiagnostic?.overrideUtiliteFiche,
   );
   useEffect(() => {
     if (currentFicheDiagnostic) {
@@ -76,7 +77,7 @@ export const FicheDiagnosticDescriptionModal = () => {
           {ficheDiagnostic && utiliteFiche && (
             <div
               className={clsx(
-                "max-w-[60%] rounded-2xl p-8",
+                "w-full max-w-[60%] rounded-2xl p-8",
                 utiliteFiche.type === FicheDiagnosticUtilite.DiminutionICU
                   ? "bg-background-fiche-diag-icu"
                   : "bg-background-fiche-confort-thermique",

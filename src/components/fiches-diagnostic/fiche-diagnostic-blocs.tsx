@@ -1,4 +1,4 @@
-import { PropsWithChildren, ReactNode } from "react";
+import { Fragment, PropsWithChildren, ReactNode } from "react";
 import { FicheDiagnosticMethodeBloc } from "./fiche-diagnostic-bloc-methode";
 import { FicheDiagnosticAvantageBloc } from "./fiche-diagnostic-bloc-avantages";
 import { FicheDiagnosticMiseEnOeuvreBloc } from "./fiche-diagnostic-bloc-meo";
@@ -8,7 +8,7 @@ import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { TypeFiche } from "@/src/helpers/common";
 import { Separator } from "../common/separator";
 import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
-import { FicheDiagnosticClientTab } from "./fiche-diagnostic-bloc-client";
+import { FicheDiagnosticClientBloc } from "./fiche-diagnostic-bloc-client";
 import clsx from "clsx";
 
 type FicheDiagnosticBlocsProps = {
@@ -26,20 +26,20 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
   const { attributes, id } = ficheDiagnostic;
   const blocs: FicheDiagnosticBloc[] = [
     {
-      label: "Méthode",
-      contentId: "methode-panel",
+      label: "La méthode",
+      contentId: "methode",
       isSelected: true,
       component: <FicheDiagnosticMethodeBloc ficheDiagnostic={ficheDiagnostic} />,
     },
     {
       label: "Avantages et points de vigilance",
-      contentId: "avantages-et-points-de-vigilance-panel",
+      contentId: "avantages-et-points-de-vigilance",
       isSelected: false,
       component: <FicheDiagnosticAvantageBloc attributes={attributes} />,
     },
     {
       label: "Mise en œuvre",
-      contentId: "mise-en-oeuvre-panel",
+      contentId: "mise-en-oeuvre",
       isSelected: false,
       component: <FicheDiagnosticMiseEnOeuvreBloc attributes={attributes} />,
     },
@@ -53,7 +53,7 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
             "md:bottom-[unset] md:top-12 md:mb-0 md:h-96 md:w-56 md:flex-col md:pt-12",
           )}
         >
-          <FicheDiagnosticClientTab blocs={blocs} />
+          <FicheDiagnosticClientBloc blocs={blocs} />
           <ButtonShareCurrentUrl className={"mb-2 block md:mb-0 [&>*]:mb-2"} />
           <div className="my-4 md:mb-0 md:mt-4">
             <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel />
@@ -61,12 +61,12 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
         </div>
         <div className="border-dsfr-border-default-grey pt-4 md:border-l-[1px] md:pl-7 md:pt-0">
           {blocs.map((tab) => (
-            <>
-              <div className="mb-12" id={tab.contentId} key={tab.contentId}>
+            <Fragment key={tab.contentId}>
+              <div className="mb-12" id={tab.contentId}>
                 {tab.component}
               </div>
               <Separator className="mt-12 !h-[1px] !opacity-100" />
-            </>
+            </Fragment>
           ))}
           {!!attributes.partenaire && (
             <div className="py-12">

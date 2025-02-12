@@ -21,7 +21,7 @@ export const FicheDiagnosticMethodeBloc = ({
       </div>
       <Separator className="mb-8 mt-4 !h-[1px] !opacity-100" />
       <div className="flex flex-col justify-between gap-8 md:flex-row">
-        <FicheDiagnosticBlocText title="Besoin de la collectivité" text={attributes.besoin} small />
+        <FicheDiagnosticBlocText title="Le besoin" text={attributes.besoin} small />
         <FicheDiagnosticBlocText title="Les indicateurs étudiés" text={attributes.indicateurs} small />
       </div>
       {!!attributes.en_savoir_plus_description && (

@@ -7,6 +7,9 @@ export const ALL_ECHELLES_SPATIALES = [
 ];
 
 export const getEchelleSpatialeLabel = (ficheDiagnostic?: FicheDiagnostic) => {
+  if (!ficheDiagnostic?.attributes.echelle_spatiale) {
+    return null;
+  }
   return (
     ficheDiagnostic?.attributes.echelle_spatiale
       // @ts-ignore

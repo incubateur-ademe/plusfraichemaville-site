@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { SideMenu } from "@codegouvfr/react-dsfr/SideMenu";
 
-export const FicheDiagnosticClientTab = ({ blocs }: { blocs: FicheDiagnosticBloc[] }) => {
+export const FicheDiagnosticClientBloc = ({ blocs }: { blocs: FicheDiagnosticBloc[] }) => {
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<string>("");
 
