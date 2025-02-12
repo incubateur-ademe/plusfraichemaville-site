@@ -20,7 +20,12 @@ export default function BannerProjet({ className }: { className?: string }) {
       {!currentProjet ? (
         <BannerProjetSkeleton />
       ) : (
-        <div className="fr-container flex items-center justify-between font-bold text-dsfr-text-label-blue-france">
+        <div
+          className={clsx(
+            "fr-container justify-between font-bold text-dsfr-text-label-blue-france md:items-center",
+            "flex flex-col gap-10 md:flex-row md:gap-0",
+          )}
+        >
           <div className="flex">
             <div className="mr-5">
               <PictoEspaceSelector

@@ -30,7 +30,12 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiche-solution`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiche-solution/liste`,
-  ESPACE_PROJET_FICHES_DIAGNOSTIC: (projetId: number) => `/espace-projet/${projetId}/fiches-diagnostic`,
+  ESPACE_PROJET_FICHES_DIAGNOSTIC_CHOIX_PARCOURS: (projetId: number) =>
+    `/espace-projet/${projetId}/fiches-diagnostic/choix-parcours`,
+  ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_LISTE: (projetId: number) =>
+    `/espace-projet/${projetId}/fiches-diagnostic/prestation/liste`,
+  ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_SELECTION: (projetId: number) =>
+    `/espace-projet/${projetId}/fiches-diagnostic/prestation/selection`,
   ESPACE_PROJET_FINANCEMENT: (projetId: number) => `/espace-projet/${projetId}/financement`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
   ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
@@ -39,6 +44,14 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/projet/${projetRexSlug}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION: (projetId: number, ficheSolutionSlug: string) =>
     `/espace-projet/${projetId}/fiche-solution/${ficheSolutionSlug}`,
+  ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_DIAGNOSTIC: (
+    projetId: number,
+    ficheDiagnosticSlug: string,
+    overrideUtilite?: string,
+  ) =>
+    `/espace-projet/${projetId}/fiches-diagnostic/${ficheDiagnosticSlug}${
+      overrideUtilite ? `?utilite=${overrideUtilite}` : ""
+    }`,
   ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
   ESPACE_PROJET_ANNUAIRE: (projetId: number) => `/espace-projet/${projetId}/annuaire`,
   ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>

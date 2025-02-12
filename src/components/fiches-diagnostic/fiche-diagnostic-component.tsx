@@ -1,18 +1,18 @@
 import { FicheDiagnosticHeader } from "./fiche-diagnostic-header";
-import { FicheDiagnosticTabs } from "./fiche-diagnostic-tabs";
+import { FicheDiagnosticBlocs } from "./fiche-diagnostic-blocs";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
+import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
 
 type FicheDiagnosticProps = {
   ficheDiagnostic: FicheDiagnostic;
+  overrideUtilite?: FicheDiagnosticUtilite;
 };
 
-export const FicheDiagnosticComponent = ({ ficheDiagnostic }: FicheDiagnosticProps) => {
-  const attributes = ficheDiagnostic.attributes;
-
+export const FicheDiagnosticComponent = ({ ficheDiagnostic, overrideUtilite }: FicheDiagnosticProps) => {
   return (
-    <div>
-      <FicheDiagnosticHeader attributes={attributes} />
-      <FicheDiagnosticTabs ficheDiagnostic={ficheDiagnostic} />
+    <div className="-mb-40">
+      <FicheDiagnosticHeader ficheDiagnostic={ficheDiagnostic} overrideUtiliteFiche={overrideUtilite} />
+      <FicheDiagnosticBlocs ficheDiagnostic={ficheDiagnostic} />
     </div>
   );
 };

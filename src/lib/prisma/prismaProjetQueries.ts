@@ -1,7 +1,7 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
-import { generateRandomId, TypeFiche, TypeUpdate } from "@/src/helpers/common";
+import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/annuaire/types";
 
@@ -20,6 +20,8 @@ export const projetIncludes = {
     where: { deleted_at: null },
     include: { user: true },
   },
+
+  fiches: true,
   sourcing_user_projets: {
     include: {
       sourced_user_projet: {
@@ -80,62 +82,37 @@ export const projetPublicSelect = {
   sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
-export const updateFichesProjet = async (
-  projetId: number,
-  ficheId: number,
-  userId: string,
-  type: TypeFiche,
-  typeUpdate: TypeUpdate,
-): Promise<ProjetWithRelations | null> => {
-  const projet = await getProjetById(projetId);
-  const selectedFichesInProjet =
-    type === TypeFiche.solution ? projet?.fiches_solutions_id : projet?.fiches_diagnostic_id;
-  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
-  let updatedRecommandationsViewed: string[] = [];
-
-  if (recommandationsViewedUserIds) {
-    updatedRecommandationsViewed = recommandationsViewedUserIds.filter((currentUserId) => currentUserId !== userId);
-  }
-
-  let fichesUpdated = selectedFichesInProjet?.filter((currentFicheId) => currentFicheId !== +ficheId) || [];
-  if (typeUpdate === TypeUpdate.add) {
-    fichesUpdated = [...fichesUpdated, +ficheId];
-  }
-
-  return prismaClient.projet.update({
-    where: {
-      id: projetId,
-    },
-    data: {
-      fiches_solutions_id: type === TypeFiche.solution ? fichesUpdated : projet?.fiches_solutions_id,
-      fiches_diagnostic_id: type === TypeFiche.diagnostic ? fichesUpdated : projet?.fiches_diagnostic_id,
-      recommandations_viewed_by: updatedRecommandationsViewed,
-    },
-    include: projetIncludes,
-  });
-};
-
 export const updateFichesSolutionsProjet = async (
   projetId: number,
   fichesSolutionsId: number[],
   userId: string,
 ): Promise<ProjetWithRelations | null> => {
-  const projet = await getProjetById(projetId);
-  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
-  let updatedRecommandationsViewed: string[] = [];
+  await Promise.all(
+    fichesSolutionsId.map((ficheId) =>
+      prismaClient.projet_fiche.upsert({
+        where: {
+          projet_id_fiche_id_type: {
+            projet_id: projetId,
+            fiche_id: ficheId,
+            type: "SOLUTION",
+          },
+        },
+        create: {
+          projet_id: projetId,
+          fiche_id: ficheId,
+          type: "SOLUTION",
+          user_id: userId,
+        },
+        update: {
+          user_id: userId,
+          fiche_id: ficheId,
+        },
+      }),
+    ),
+  );
 
-  if (recommandationsViewedUserIds) {
-    updatedRecommandationsViewed = recommandationsViewedUserIds.filter((currentUserId) => currentUserId !== userId);
-  }
-
-  return prismaClient.projet.update({
-    where: {
-      id: projetId,
-    },
-    data: {
-      fiches_solutions_id: fichesSolutionsId,
-      recommandations_viewed_by: updatedRecommandationsViewed,
-    },
+  return prismaClient.projet.findUnique({
+    where: { id: projetId },
     include: projetIncludes,
   });
 };
