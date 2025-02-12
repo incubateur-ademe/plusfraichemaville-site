@@ -22,7 +22,7 @@ import { GenericSaveButton } from "../common/generic-save-fiche/generic-save-but
 
 export type FicheDiagnosticDescriptionModalState = {
   ficheDiagnostic: FicheDiagnostic;
-  overrideUtiliteFiche: FicheDiagnosticUtilite;
+  overrideUtiliteFiche?: FicheDiagnosticUtilite;
 } | null;
 
 const modal = createModal({
@@ -35,9 +35,10 @@ export const FicheDiagnosticDescriptionModal = () => {
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
   const ficheDiagnostic = currentFicheDiagnostic?.ficheDiagnostic;
   const projetId = useProjetsStore((state) => state.currentProjetId);
-  const utiliteFiche =
-    getFicheDiagUtiliteProperties(currentFicheDiagnostic?.overrideUtiliteFiche) ??
-    (ficheDiagnostic && getFicheDiagUtilite(ficheDiagnostic));
+  const utiliteFiche = currentFicheDiagnostic?.overrideUtiliteFiche
+    ? getFicheDiagUtiliteProperties(currentFicheDiagnostic?.overrideUtiliteFiche)
+    : ficheDiagnostic && getFicheDiagUtilite(ficheDiagnostic);
+  console.log({ utiliteFiche });
   const coutMin = ficheDiagnostic?.attributes.cout_min;
   const coutMax = ficheDiagnostic?.attributes.cout_max;
   const delaiMin = ficheDiagnostic?.attributes.delai_min;
@@ -70,7 +71,7 @@ export const FicheDiagnosticDescriptionModal = () => {
         size="large"
         className={clsx(
           "custom-modal l-modal",
-          utiliteFiche.type === FicheDiagnosticUtilite.ConfortThermique ? "confort-thermique-modal" : "icu-modal",
+          utiliteFiche?.type === FicheDiagnosticUtilite.ConfortThermique ? "confort-thermique-modal" : "icu-modal",
         )}
       >
         <div className="flex gap-7">

@@ -21,7 +21,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
   const coutMax = ficheDiagnostic.attributes.cout_max;
   const delaiMin = ficheDiagnostic.attributes.delai_min;
   const delaiMax = ficheDiagnostic.attributes.delai_max;
-  const utiliteFiche: FicheDiagnosticUtilite = overrideUtiliteFiche ?? getFicheDiagUtilite(ficheDiagnostic).type;
+
   const utiliteFicheProperties = overrideUtiliteFiche
     ? getFicheDiagUtiliteProperties(overrideUtiliteFiche)
     : getFicheDiagUtilite(ficheDiagnostic);
@@ -35,7 +35,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
       <GenericSaveFiche id={ficheDiagnostic.id} type={TypeFiche.diagnostic} classNameButton="absolute top-3 right-4" />
       <div
         className="flex h-full flex-col"
-        onClick={() => setCurrentFicheDiagnostic({ ficheDiagnostic, overrideUtiliteFiche: utiliteFiche })}
+        onClick={() => setCurrentFicheDiagnostic({ ficheDiagnostic, overrideUtiliteFiche })}
       >
         <div className={clsx("flex h-full flex-col rounded-[0.9375rem] pb-5", utiliteFicheProperties.colors.bgDark)}>
           <div className="relative block h-40 w-72 overflow-hidden">

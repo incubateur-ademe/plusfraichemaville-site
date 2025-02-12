@@ -33,7 +33,11 @@ export const FicheDiagnosticNoSelection = async () => {
           </div>
           <div className="flex gap-6">
             {icuFichesDiagnostics.map((fd) => (
-              <FicheDiagnosticCard key={fd.id} ficheDiagnostic={fd} />
+              <FicheDiagnosticCard
+                key={fd.id}
+                overrideUtiliteFiche={FicheDiagnosticUtilite.DiminutionICU}
+                ficheDiagnostic={fd}
+              />
             ))}
           </div>
         </div>
