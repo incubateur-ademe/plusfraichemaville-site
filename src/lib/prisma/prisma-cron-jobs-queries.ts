@@ -35,7 +35,6 @@ export const cronsServices = {
   connect: getLastConnectSync,
 };
 
-// TODO: fix db
 export const getUsersAndProjectsFromLastSync = async ({
   service,
 }: {

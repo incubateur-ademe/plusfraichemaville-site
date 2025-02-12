@@ -20,8 +20,6 @@ export const mapUserToConnectContact = (user: UserWithAdminProjets): ConnectCont
     dateModification: dateToStringWithoutTime(user.updated_at, "iso"),
     acceptationRGPD: true,
     actif: true,
-    ExternalID: user.id,
-    siret: agentconnectInfo.siret,
     telephone: agentconnectInfo.phone_number,
     codePostal: collectivite.code_postal,
     typeCompte: "Entreprise",
