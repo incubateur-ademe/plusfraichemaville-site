@@ -19,6 +19,11 @@ export enum Echelle {
   Espace = "espace",
 }
 
+export enum EchelleSpatiale {
+  EspacePublic = "espace_public",
+  Quartier = "quartier",
+}
+
 export enum Methode {
   Observation = "observation",
   Enquete = "enquete",

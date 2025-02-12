@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import CmsRichText from "../common/CmsRichText";
 
-type FicheDiagnosticTabBlocTextProps = {
+type FicheDiagnosticBlocTextProps = {
   title: string;
   text?: string;
   textClassName?: string;
@@ -10,17 +10,17 @@ type FicheDiagnosticTabBlocTextProps = {
   withPicto?: boolean;
 };
 
-export const FicheDiagnosticTabBlocText = ({
+export const FicheDiagnosticBlocText = ({
   text,
   title,
   textClassName,
   titleClassName,
   small,
   withPicto,
-}: FicheDiagnosticTabBlocTextProps) => {
+}: FicheDiagnosticBlocTextProps) => {
   return (
     <div className={clsx(small && "md:w-1/2")}>
-      <h3 className={clsx("text-2xl md:text-2xl", withPicto && "flex flex-row", titleClassName)}>
+      <h3 className={clsx(small ? "text-xl" : "text-2xl", withPicto && "flex flex-row", titleClassName)}>
         {withPicto && <i className={"fr-icon-success-fill fr-icon--sm mr-2 text-dsfr-action-high-red-hover "} />}
 
         {title}

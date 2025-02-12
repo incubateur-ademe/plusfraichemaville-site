@@ -80,6 +80,8 @@ module.exports = {
       "background-fiche-confort-thermique": "#FFDCB1",
       "background-diag-icu": "#FFF7F7",
       "background-fiche-diag-icu": "#FEE9E9",
+      "border-confort-thermique": "#E9B16C",
+      "text-confort-thermique": "#FC5D00",
     },
   },
   plugins: [],

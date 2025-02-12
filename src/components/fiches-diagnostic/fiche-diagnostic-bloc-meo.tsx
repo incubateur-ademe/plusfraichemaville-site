@@ -1,17 +1,17 @@
 import CmsRichText from "../common/CmsRichText";
-import { FicheDiagnosticTabBlocText } from "./fiche-diagnostic-tab-text";
+import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
-export const FicheDiagnosticMiseEnOeuvreTab = ({ attributes }: { attributes: FicheDiagnostic["attributes"] }) => {
+export const FicheDiagnosticMiseEnOeuvreBloc = ({ attributes }: { attributes: FicheDiagnostic["attributes"] }) => {
   const meo = attributes.etapes_mise_en_oeuvre;
 
   return (
-    <div>
+    <div className="pt-12">
       <h3 className="mb-9 text-3xl">Mise en œuvre</h3>
       <div className="mb-14">
         {meo?.map((m, i) => (
           <div className="mb-14" key={i}>
-            <FicheDiagnosticTabBlocText withPicto title={m.titre} text={m.description} titleClassName="!text-lg mb-2" />
+            <FicheDiagnosticBlocText withPicto title={m.titre} text={m.description} titleClassName="!text-lg mb-2" />
           </div>
         ))}
       </div>
