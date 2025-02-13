@@ -49,12 +49,13 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
         vigilance_description
         en_savoir_plus_description
         partenaire
+        nom_scientifique
         effets_attendus
+        type_livrables
+        echelle_spatiale
         utilite_methode {
           description
         }
-        type_livrables
-        echelle_spatiale
       }
     }
   }
