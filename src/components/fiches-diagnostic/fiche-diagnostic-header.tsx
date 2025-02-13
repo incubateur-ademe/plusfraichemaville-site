@@ -3,7 +3,7 @@ import Image from "next/image";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
-import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
+import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { Separator } from "../common/separator";
 import clsx from "clsx";
 import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "./helpers";
@@ -66,7 +66,7 @@ export const FicheDiagnosticHeader = ({
             <div>
               <small className="mb-1 block text-sm font-bold">Temporalité</small>
               <div className="flex justify-between">
-                <div className="mr-2 h-4">{delai?.icons(TypeFiche.diagnostic, "before:!w-4")}</div>
+                <div className="mr-2 h-4">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
                 <small className="text-sm">
                   {delaiMin} à {delaiMax} mois
                 </small>
@@ -76,7 +76,7 @@ export const FicheDiagnosticHeader = ({
             <div>
               <small className="mb-1 block text-sm font-bold">Coût</small>
               <div className="flex justify-between">
-                <div className="mr-2 h-4">{cout?.icons(TypeFiche.diagnostic, "before:!w-4")}</div>
+                <div className="mr-2 h-4">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
                 <small className="text-sm">
                   de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} euros HT
                 </small>

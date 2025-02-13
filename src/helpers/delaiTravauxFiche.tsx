@@ -1,41 +1,42 @@
-import { highlightedIconClass, TypeFiche } from "@/src/helpers/common";
+import { IconColorsType, TypeFiche } from "@/src/helpers/common";
 import clsx from "clsx";
 import { ReactNode } from "react";
 
 type DelaiTravauxFiche = {
   delaiMax(_: TypeFiche): number;
-  icons: (_t: TypeFiche, _?: string) => ReactNode;
+  // eslint-disable-next-line no-unused-vars
+  icons: (_: IconColorsType) => ReactNode;
 };
 
 const DELAI_TRAVAUX_FAST: DelaiTravauxFiche = {
   delaiMax: (typeFiche) => (typeFiche === TypeFiche.solution ? 3 : 2),
-  icons: (typeFiche, extraClasses?) => (
+  icons: ({ highlightClass, fadedClass }) => (
     <>
-      <span className={clsx("fr-icon-time-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-time-fill", "text-pfmv-light-grey", extraClasses)} />
-      <span className={clsx("fr-icon-time-fill", "text-pfmv-light-grey", extraClasses)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", fadedClass)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", fadedClass)} />
     </>
   ),
 };
 
 const DELAI_TRAVAUX_AVERAGE: DelaiTravauxFiche = {
   delaiMax: (typeFiche) => (typeFiche === TypeFiche.solution ? 7 : 5),
-  icons: (typeFiche, extraClasses?) => (
+  icons: ({ highlightClass, fadedClass }) => (
     <>
-      <span className={clsx("fr-icon-time-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-time-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-time-fill", "text-pfmv-light-grey", extraClasses)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", fadedClass)} />
     </>
   ),
 };
 
 const DELAI_TRAVAUX_SLOW: DelaiTravauxFiche = {
   delaiMax: (_) => Number.MAX_SAFE_INTEGER,
-  icons: (typeFiche, extraClasses?) => (
+  icons: ({ highlightClass }) => (
     <>
-      <span className={clsx("fr-icon-time-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-time-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-time-fill", highlightedIconClass(typeFiche), extraClasses)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-time-fill fr-icon--sm", highlightClass)} />
     </>
   ),
 };

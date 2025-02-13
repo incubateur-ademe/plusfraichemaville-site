@@ -4,7 +4,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import clsx from "clsx";
-import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
+import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
@@ -52,14 +52,14 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
             <div className={"mb-11 mt-4 text-sm italic"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
             <div className="mb-3 block">
               <div className="flex items-center">
-                <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
+                <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFicheProperties))}</div>
                 <small className="text-sm text-dsfr-text-mention-grey">
                   de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} €
                 </small>
               </div>
               <div className="block">
                 <div className="flex items-center">
-                  <div className="mr-2">{delai?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
+                  <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFicheProperties))}</div>
                   <small className="text-sm text-dsfr-text-mention-grey">
                     de {delaiMin} à {delaiMax} mois
                   </small>

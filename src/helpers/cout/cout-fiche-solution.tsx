@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { formatNumberWithSpaces, highlightedIconClass, TypeFiche } from "@/src/helpers/common";
+import { formatNumberWithSpaces, IconColorsType, TypeFiche } from "@/src/helpers/common";
 import { getUniteCoutFromCode, UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
 import { ReactNode } from "react";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
@@ -7,17 +7,18 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 type CoutFicheSolution = {
   coutMax(_: TypeFiche): number;
   shortLabel: string;
-  icons: (_t: TypeFiche, _?: string) => ReactNode;
+  // eslint-disable-next-line no-unused-vars
+  icons: (_: IconColorsType) => ReactNode;
 };
 
 const COUT_CHEAP: CoutFicheSolution = {
   coutMax: (typeFiche) => (typeFiche === TypeFiche.solution ? 400 : 5000),
   shortLabel: "Peu coûteux",
-  icons: (typeFiche, extraClasses?) => (
+  icons: ({ highlightClass, fadedClass }) => (
     <>
-      <span className={clsx("fr-icon-money-euro-circle-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-money-euro-circle-fill", "text-pfmv-light-grey", extraClasses)} />
-      <span className={clsx("fr-icon-money-euro-circle-fill", "text-pfmv-light-grey", extraClasses)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", fadedClass)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", fadedClass)} />
     </>
   ),
 };
@@ -25,11 +26,11 @@ const COUT_CHEAP: CoutFicheSolution = {
 const COUT_AVERAGE: CoutFicheSolution = {
   coutMax: (typeFiche) => (typeFiche === TypeFiche.solution ? 1000 : 15000),
   shortLabel: "Peu coûteux",
-  icons: (typeFiche, extraClasses?) => (
+  icons: ({ highlightClass, fadedClass }) => (
     <>
-      <span className={clsx("fr-icon-money-euro-circle-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-money-euro-circle-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-money-euro-circle-fill", "text-pfmv-light-grey", extraClasses)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", fadedClass)} />
     </>
   ),
 };
@@ -37,11 +38,11 @@ const COUT_AVERAGE: CoutFicheSolution = {
 const COUT_EXPENSIVE: CoutFicheSolution = {
   coutMax: (_) => Number.MAX_SAFE_INTEGER,
   shortLabel: "Coûteux",
-  icons: (typeFiche, extraClasses?) => (
+  icons: ({ highlightClass }) => (
     <>
-      <span className={clsx("fr-icon-money-euro-circle-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-money-euro-circle-fill", highlightedIconClass(typeFiche), extraClasses)} />
-      <span className={clsx("fr-icon-money-euro-circle-fill", highlightedIconClass(typeFiche), extraClasses)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", highlightClass)} />
+      <span className={clsx("fr-icon-money-euro-circle-fill fr-icon--sm", highlightClass)} />
     </>
   ),
 };
