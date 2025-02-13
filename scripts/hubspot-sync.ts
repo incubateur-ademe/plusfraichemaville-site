@@ -25,7 +25,9 @@ const syncWithHubspot = async () => {
   try {
     const startedDate = new Date();
     console.log("Récupération des utilisateurs et projets depuis la dernière synchronisation...");
-    const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync();
+    const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync({
+      service: "hubspot",
+    });
 
     if (!usersAndProjectsFromLastSync.length) {
       console.log("Aucune nouvelle donnée à synchroniser.");
@@ -45,12 +47,12 @@ const syncWithHubspot = async () => {
       console.log(`Projet(s) archivé(s) : ${archiveResult}`);
     }
 
-    console.log("Début de la synchronisation avec Hubspot...");
-
     const activeUsersAndProjects = usersAndProjectsFromLastSync.map((user) => ({
       ...user,
       projets: user.projets.filter((p) => !p.projet.deleted_at),
     }));
+
+    console.log("Début de la synchronisation avec Hubspot...");
 
     const batch = await hubspotBatchSync(activeUsersAndProjects);
 
