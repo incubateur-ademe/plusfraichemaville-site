@@ -18,7 +18,9 @@ import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import Link from "next/link";
-import { GenericSaveButton } from "../common/generic-save-fiche/generic-save-button";
+// eslint-disable-next-line max-len
+import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
+import toast from "react-hot-toast";
 
 export type FicheDiagnosticDescriptionModalState = {
   ficheDiagnostic: FicheDiagnostic;
@@ -156,7 +158,13 @@ export const FicheDiagnosticDescriptionModal = () => {
               </Link>
             </div>
           )}
-          {ficheDiagnostic && <GenericSaveButton type={TypeFiche.diagnostic} id={ficheDiagnostic?.id} withoutModal />}
+          {ficheDiagnostic && (
+            <GenericSaveAuthenticatedInsideProjet
+              type={TypeFiche.diagnostic}
+              id={ficheDiagnostic?.id}
+              opener={() => toast.success("La fiche a bien été rajoutée à votre projet.")}
+            />
+          )}
         </div>
       </modal.Component>
     </>
