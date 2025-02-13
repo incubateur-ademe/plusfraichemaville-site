@@ -11,15 +11,17 @@ export const isFicheDiagConfortThermique = (ficheDiagnostic: FicheDiagnostic): b
   return !!ficheDiagnostic.attributes.effets_attendus?.includes(FicheDiagnosticUtilite.ConfortThermique);
 };
 
-type UtiliteFicheProperties = {
+export type UtiliteFicheProperties = {
   type: FicheDiagnosticUtilite;
   colors: {
     bgDark: string;
     bgLight: string;
     border: string;
-    text: string;
     separator: string;
-    picto: string;
+    pictoHighlight: string;
+    pictoFaded: string;
+    pictoList: string;
+    button: string;
   };
 };
 
@@ -28,10 +30,12 @@ export const UTILITE_FICHE_DIAG_ICU: UtiliteFicheProperties = {
   colors: {
     bgDark: "bg-background-fiche-diag-icu",
     bgLight: "bg-background-diag-icu",
-    border: "!border-background-fiche-diag-icu",
-    separator: "!bg-fiche-diag-icu",
-    picto: "!text-fiche-diag-icu",
-    text: "!text-black",
+    border: "!border-border-diag-icu",
+    separator: "!bg-border-diag-icu",
+    pictoHighlight: "!text-picto-highlight-diag-icu",
+    pictoFaded: "!text-picto-faded-diag-icu",
+    pictoList: "diag-icu-list",
+    button: "diag-icu-button",
   },
 };
 
@@ -42,8 +46,10 @@ export const UTILITE_FICHE_DIAG_CONFORT_THERMIQUE: UtiliteFicheProperties = {
     bgLight: "!bg-background-confort-thermique",
     border: "!border-border-confort-thermique",
     separator: "!bg-border-confort-thermique",
-    picto: "!text-text-confort-thermique",
-    text: "!text-black",
+    pictoHighlight: "!text-picto-highlight-confort-thermique",
+    pictoFaded: "!text-picto-faded-confort-thermique",
+    pictoList: "confort-thermique-list",
+    button: "confort-thermique-button",
   },
 };
 
