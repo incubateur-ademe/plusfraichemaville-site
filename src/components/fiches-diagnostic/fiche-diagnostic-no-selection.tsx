@@ -7,8 +7,6 @@ export const FicheDiagnosticNoSelection = async () => {
   const allFichesDiagnostics = await getAllFichesDiagnostic();
   const icuFichesDiagnostics = allFichesDiagnostics.filter(isFicheDiagICU);
   const confortThermiqueFichesDiagnostics = allFichesDiagnostics.filter(isFicheDiagConfortThermique);
-  console.log("icuFichesDiagnostics", icuFichesDiagnostics);
-  console.log("allFichesDiagnostics", allFichesDiagnostics);
 
   return (
     <>
