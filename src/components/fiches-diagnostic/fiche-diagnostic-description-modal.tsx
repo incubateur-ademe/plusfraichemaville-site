@@ -18,6 +18,7 @@ import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import Link from "next/link";
+// eslint-disable-next-line max-len
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
 import toast from "react-hot-toast";
 
