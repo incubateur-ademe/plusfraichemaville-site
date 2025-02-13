@@ -10,7 +10,7 @@ import { sendMattermostWebhook } from "@/src/services/mattermost";
 
 const syncWithConnect = async () => {
   if (process.env.CONNECT_SYNC_ACTIVE !== "true") {
-    console.log("La synchronisation n'est pas activée sur cet environnement.");
+    console.log("La synchronisation avec Connect n'est pas activée sur cet environnement.");
     return;
   }
   try {
@@ -23,6 +23,8 @@ const syncWithConnect = async () => {
 
     if (!usersAndProjectsFromLastSync.length) {
       console.log("Aucune nouvelle donnée à synchroniser.");
+      const webhookData = makeConnectSyncBatchWebhookData("Aucune nouvelle donnée à synchroniser.");
+      await sendMattermostWebhook(webhookData, "batch", 5000);
       await saveCronJob(startedDate, new Date(), "SYNC_CONNECT");
       process.exit(0);
     }
@@ -44,7 +46,7 @@ const syncWithConnect = async () => {
       await sendMattermostWebhook(webhookData, "batch", 5000);
       process.exit(1);
     }
-    const webhookData = makeConnectSyncBatchWebhookData("Synchronisation avec Connect réussie !");
+    const webhookData = makeConnectSyncBatchWebhookData(connectResult.message);
     await sendMattermostWebhook(webhookData, "batch", 5000);
     await saveCronJob(startedDate, new Date(), "SYNC_CONNECT");
     process.exit(0);

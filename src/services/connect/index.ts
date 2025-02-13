@@ -33,20 +33,15 @@ export const batchSyncConnectContacts = async (
 ): Promise<{
   success: boolean;
   errors: { email: string; error: string }[];
+  message: string;
 }> => {
-  if (process.env.CONNECT_SYNC_ACTIVE !== "true") {
-    captureError("La synchronisation avec Connect n'est pas activée sur cet environnement.");
-    return {
-      success: true,
-      errors: [],
-    };
-  }
-
+  let createdContactsCount = 0;
   const errors: { email: string; error: string }[] = [];
 
   for (const contact of contacts) {
     try {
       await createConnectContact(contact);
+      createdContactsCount++;
     } catch (error) {
       if (error instanceof Error) {
         errors.push({ email: contact.email, error: error.message });
@@ -57,5 +52,9 @@ export const batchSyncConnectContacts = async (
   return {
     success: errors.length === 0,
     errors,
+    message:
+      createdContactsCount > 0
+        ? `Synchronisation avec Connect réussie ! ${createdContactsCount} contacts ont été créés.`
+        : "Aucun contact n'a été créé.",
   };
 };
