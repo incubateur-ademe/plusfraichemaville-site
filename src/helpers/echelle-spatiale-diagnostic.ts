@@ -10,7 +10,7 @@ export const getEchelleSpatialeLabel = (ficheDiagnostic?: FicheDiagnostic) => {
   return (
     ficheDiagnostic?.attributes.echelle_spatiale
       // @ts-ignore
-      .map((codeEchelle) => ALL_ECHELLES_SPATIALES.find((e) => e.code === codeEchelle)?.label)
+      ?.map((codeEchelle) => ALL_ECHELLES_SPATIALES.find((e) => e.code === codeEchelle)?.label)
       .join(", ")
   );
 };
