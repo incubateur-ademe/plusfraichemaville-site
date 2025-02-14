@@ -18,8 +18,10 @@ import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import Link from "next/link";
-import { GenericSaveButton } from "../common/generic-save-fiche/generic-save-button";
 import { Separator } from "@/src/components/common/separator";
+// eslint-disable-next-line max-len
+import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
+import { notifications } from "@/src/components/common/notifications";
 
 export type FicheDiagnosticDescriptionModalState = {
   ficheDiagnostic: FicheDiagnostic;
@@ -148,7 +150,13 @@ export const FicheDiagnosticDescriptionModal = () => {
               </Link>
             </div>
           )}
-          {ficheDiagnostic && <GenericSaveButton type={TypeFiche.diagnostic} id={ficheDiagnostic?.id} withoutModal />}
+          {ficheDiagnostic && (
+            <GenericSaveAuthenticatedInsideProjet
+              type={TypeFiche.diagnostic}
+              id={ficheDiagnostic?.id}
+              opener={() => notifications("success", "FICHE_DIAGNOSTIC_ADDED_TO_PROJET")}
+            />
+          )}
         </div>
       </modal.Component>
     </>
