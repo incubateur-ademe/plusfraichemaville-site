@@ -20,7 +20,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import Link from "next/link";
 // eslint-disable-next-line max-len
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
-import toast from "react-hot-toast";
+import { notifications } from "@/src/components/common/notifications";
 
 export type FicheDiagnosticDescriptionModalState = {
   ficheDiagnostic: FicheDiagnostic;
@@ -162,7 +162,7 @@ export const FicheDiagnosticDescriptionModal = () => {
             <GenericSaveAuthenticatedInsideProjet
               type={TypeFiche.diagnostic}
               id={ficheDiagnostic?.id}
-              opener={() => toast.success("La fiche a bien été rajoutée à votre projet.")}
+              opener={() => notifications("success", "FICHE_DIAGNOSTIC_ADDED_TO_PROJET")}
             />
           )}
         </div>
