@@ -12,12 +12,13 @@ import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "@/src/compon
 import { clsx } from "clsx";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getEchelleSpatialeLabel } from "@/src/helpers/echelle-spatiale-diagnostic";
-import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
+import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import Link from "next/link";
+import { Separator } from "@/src/components/common/separator";
 // eslint-disable-next-line max-len
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
 import { notifications } from "@/src/components/common/notifications";
@@ -40,7 +41,6 @@ export const FicheDiagnosticDescriptionModal = () => {
   const utiliteFiche = currentFicheDiagnostic?.overrideUtiliteFiche
     ? getFicheDiagUtiliteProperties(currentFicheDiagnostic?.overrideUtiliteFiche)
     : ficheDiagnostic && getFicheDiagUtilite(ficheDiagnostic);
-  console.log({ utiliteFiche });
   const coutMin = ficheDiagnostic?.attributes.cout_min;
   const coutMax = ficheDiagnostic?.attributes.cout_max;
   const delaiMin = ficheDiagnostic?.attributes.delai_min;
@@ -78,14 +78,7 @@ export const FicheDiagnosticDescriptionModal = () => {
       >
         <div className="flex gap-7">
           {ficheDiagnostic && utiliteFiche && (
-            <div
-              className={clsx(
-                "w-full max-w-[60%] rounded-2xl p-8",
-                utiliteFiche.type === FicheDiagnosticUtilite.DiminutionICU
-                  ? "bg-background-fiche-diag-icu"
-                  : "bg-background-fiche-confort-thermique",
-              )}
-            >
+            <div className={clsx("w-full max-w-[60%] rounded-2xl p-8", utiliteFiche.colors.bgDark)}>
               <div className="relative mb-4 block h-24 w-24 overflow-hidden">
                 <Image
                   fill
@@ -99,12 +92,12 @@ export const FicheDiagnosticDescriptionModal = () => {
                 />
               </div>
               <div className={"text-2xl font-bold "}>{currentFicheDiagnostic.ficheDiagnostic.attributes.titre}</div>
-              <div className={"mt-4 text-xl italic"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
+              <div className={"mb-4 text-xl italic"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
               {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
                 <>
-                  <hr className="mt-4 h-[0.01rem] bg-dsfr-background-flat-warning !bg-none !p-0" />
+                  <Separator className={clsx("!h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
                   <div className="mt-4 font-bold">Cette méthode permet de :</div>
-                  <ul className=" arrow-list orange-arrow-list text-sky-400">
+                  <ul className={utiliteFiche.colors.pictoList}>
                     {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (
                       <li key={utilite.description} className="relative">
                         {utilite?.description}
@@ -113,7 +106,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                   </ul>
                 </>
               )}
-              <hr className="mt-4 h-[0.01rem] bg-dsfr-background-flat-warning !bg-none !p-0" />
+              <Separator className={clsx("mt-4 !h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
               <div className="mt-4 flex justify-between">
                 <div>
                   <div className="font-bold">Échelle</div>
@@ -124,12 +117,12 @@ export const FicheDiagnosticDescriptionModal = () => {
                   <div>{ficheDiagnostic.attributes.type_livrables ?? "Non renseigné"}</div>
                 </div>
               </div>
-              <hr className="mt-4 h-[0.01rem] bg-dsfr-background-flat-warning !bg-none !p-0" />
+              <Separator className={clsx("mt-4 !h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
               <div className=" mt-4 flex justify-between">
                 <div>
                   <div className="font-bold">Coût</div>
                   <div className="flex items-center">
-                    <div className="mr-2">{cout?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
+                    <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
                     <small className="text-sm">
                       de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} €
                     </small>
@@ -138,7 +131,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                 <div>
                   <div className="font-bold">{"Durée de l'étude"}</div>
                   <div className="flex items-center">
-                    <div className="mr-2">{delai?.icons(TypeFiche.diagnostic, "fr-icon--sm")}</div>
+                    <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
                     <small className="text-sm text-dsfr-text-mention-grey">
                       de {delaiMin} à {delaiMax} mois
                     </small>
@@ -147,9 +140,8 @@ export const FicheDiagnosticDescriptionModal = () => {
               </div>
               <Link
                 className={clsx(
-                  "fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left mt-4 rounded-3xl",
-                  utiliteFiche.colors.text,
-                  utiliteFiche.colors.border,
+                  "fr-btn--tertiary fr-btn--sm fr-btn mt-4 rounded-3xl !text-black",
+                  utiliteFiche.colors.button,
                 )}
                 href={ficheDiagUrl}
                 onClick={modal.close}
