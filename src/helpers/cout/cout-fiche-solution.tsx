@@ -7,7 +7,6 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 type CoutFicheSolution = {
   coutMax(_: TypeFiche): number;
   shortLabel: string;
-  // eslint-disable-next-line no-unused-vars
   icons: (_: IconColorsType) => ReactNode;
 };
 

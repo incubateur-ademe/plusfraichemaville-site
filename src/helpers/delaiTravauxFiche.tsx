@@ -4,7 +4,6 @@ import { ReactNode } from "react";
 
 type DelaiTravauxFiche = {
   delaiMax(_: TypeFiche): number;
-  // eslint-disable-next-line no-unused-vars
   icons: (_: IconColorsType) => ReactNode;
 };
 
