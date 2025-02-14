@@ -9,7 +9,7 @@ export const FichesSolutionsFavoris = ({
   bookmarkedFichesSolutions: FicheBookmarkedSolution[];
 }) => {
   return bookmarkedFichesSolutions && bookmarkedFichesSolutions.length === 0 ? (
-    <div>
+    <div className="pb-20">
       <div className="fr-h3">Mes solutions sauvegardées</div>
       <div>{"Retrouvez ici vos solutions sauvegardées."}</div>
       <div>{"Vous n'avez pas encore sélectionné de fiches solutions."}</div>
@@ -27,9 +27,8 @@ export const FichesSolutionsFavoris = ({
       bookmarkedFichesSolutions
         .sort((a, b) => b.projectName.localeCompare(a.projectName))
         .map((pb) => (
-          <div key={pb.projectName}>
+          <div key={pb.projectName} className="pb-20">
             <BookmarkedFicheSolutionByProject projectName={pb.projectName} ficheSolutionIds={pb.ficheSolutionIds} />
-            <hr className="mt-8" />
           </div>
         ))
   );

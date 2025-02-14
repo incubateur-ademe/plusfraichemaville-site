@@ -16,6 +16,8 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useRouter } from "next/navigation";
 import { notifications } from "@/src/components/common/notifications";
 import { useModalStore } from "@/src/stores/modal/provider";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; estimation?: estimation }) => {
   const router = useRouter();
@@ -34,9 +36,11 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
     }
   };
 
+  const projetFichesSolutionsIds = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) ?? [];
+
   const form = useForm<EstimationFormData>({
     resolver: zodResolver(EstimationFormSchema),
-    defaultValues: { ficheSolutionIds: projet.fiches_solutions_id.map(String) },
+    defaultValues: { ficheSolutionIds: projetFichesSolutionsIds.map(String) },
   });
 
   const onSubmit: SubmitHandler<EstimationFormData> = async (data) => {
@@ -66,7 +70,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
         className="pfmv-strong-card "
       >
         <div className={clsx("mb-12 flex flex-wrap gap-6")}>
-          {projet.fiches_solutions_id?.map((ficheSolutionId) => (
+          {projetFichesSolutionsIds.map((ficheSolutionId) => (
             <FicheSolutionSmallCard
               key={ficheSolutionId}
               ficheSolutionId={ficheSolutionId}

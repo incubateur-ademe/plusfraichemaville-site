@@ -10,7 +10,6 @@ export const saveAllFichesFromLocalStorageAction = async (
   userId: string,
   fiches: {
     fichesSolutions: FichesBookmarked[];
-    fichesDiagnostic: FichesBookmarked[];
   },
 ) => {
   const session = await auth();
