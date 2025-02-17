@@ -30,6 +30,11 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
 
+  const image =
+    overrideUtiliteFiche === FicheDiagnosticUtilite.ConfortThermique
+      ? ficheDiagnostic.attributes.image_confort_thermique
+      : ficheDiagnostic.attributes.image_diag_icu;
+
   return (
     <div className={clsx("pfmv-card relative h-auto w-72 cursor-pointer")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type={TypeFiche.diagnostic} classNameButton="absolute top-3 right-4" />
@@ -42,7 +47,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
             <Image
               fill
               sizes="(max-width: 768px) 80vw, 33vw"
-              src={getStrapiImageUrl(ficheDiagnostic.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+              src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}
               className="z-0 h-full w-full rounded-t-2xl object-cover"
             />

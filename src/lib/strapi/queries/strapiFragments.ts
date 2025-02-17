@@ -45,6 +45,12 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
       image_principale {
         ...ImageInfo
       }
+      image_confort_thermique {
+        ...ImageInfo
+      }
+      image_diag_icu {
+        ...ImageInfo
+      }
       methode
       echelle
       nom_scientifique
