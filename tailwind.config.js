@@ -75,6 +75,7 @@ module.exports = {
       "dsfr-action-high-red-hover": "var(--background-action-high-red-marianne-hover)",
       "dsfr-orange-warning": "var(--border-default-orange-terre-battue)",
       "dsfr-background-flat-red-marianne": "var(--background-flat-red-marianne)",
+      "dsfr-background-flat-grey": "var(--background-flat-grey)",
       "tab-hover": "rgba(66, 17, 170, 0.10)!important",
       "background-confort-thermique": "#FFF6EA",
       "background-fiche-confort-thermique": "#FFDCB1",
