@@ -44,7 +44,10 @@ export const strapiGraphQLCall = async (query: string, config: StrapiGraphQLCall
         variables: config?.variables,
       }),
       signal: config?.signal,
-      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags },
+      next: {
+        revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1,
+        tags,
+      },
     });
 
     const res = await response.json();
