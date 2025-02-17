@@ -33,7 +33,7 @@ export const FicheDiagnosticChoixFilterByType = ({
   const currentFilters = filters[filterType];
   return (
     <div>
-      <i className="text-dsfr-background-flat-grey mb-2 block">{label}</i>
+      <i className="mb-2 block text-dsfr-background-flat-grey">{label}</i>
       <div className="flex gap-2">
         {currentFilters.map((f) => {
           const isSelected = selectedFilters.includes(f.filter);
