@@ -28,6 +28,16 @@ export type UserWithAdminProjets = Prisma.UserGetPayload<{
       where: { role: "ADMIN" };
       include: { projet: true };
     };
+    collectivites: {
+      include: {
+        collectivite: {
+          select: {
+            code_postal: true;
+            adresse_all_infos: true;
+          };
+        };
+      };
+    };
   };
 }>;
 

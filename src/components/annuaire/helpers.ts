@@ -22,18 +22,24 @@ export const getProjetCoordinates = (projet: ProjetWithPublicRelations): LatLngT
 };
 
 export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
-  inProgressProjets.map((projet) => {
-    const coordinates = getProjetCoordinates(projet);
+  inProgressProjets
+    .map((projet): CustomMarker | undefined => {
+      const coordinates = getProjetCoordinates(projet);
 
-    return {
-      geocode: [coordinates[0], coordinates[1]],
-      type: "in-progress",
-      idProjet: projet.id,
-      projet: {
-        typeEspace: projet.type_espace as TypeEspaceCode,
-      },
-    };
-  });
+      if (!coordinates[0] || !coordinates[1]) {
+        return undefined;
+      }
+
+      return {
+        geocode: [coordinates[0], coordinates[1]],
+        type: "in-progress",
+        idProjet: projet.id,
+        projet: {
+          typeEspace: projet.type_espace as TypeEspaceCode,
+        },
+      };
+    })
+    .filter((marker) => marker !== undefined);
 
 export const makeRexMarkers = (rexProjets: RetourExperience[]): AnnuaireMapClientProps["markers"] =>
   rexProjets

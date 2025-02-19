@@ -46,6 +46,24 @@ ${message}
 `,
   };
 };
+export const makeConnectSyncBatchWebhookData = (message: string) => {
+  return {
+    text: `**[Fin de traitement de synchronisation Connect]**
+    
+**Détail du traitement :**
+${message}
+`,
+  };
+};
+export const makeConnectSyncBatchErrorWebhookData = (message: string) => {
+  return {
+    text: `:alert:**[Batch en erreur]**:alert:
+    
+    ${message}
+    @raphael.taieb @mehdilouraoui 
+`,
+  };
+};
 
 export const makeBatchErrorWebhookData = (message: string) => {
   return {
