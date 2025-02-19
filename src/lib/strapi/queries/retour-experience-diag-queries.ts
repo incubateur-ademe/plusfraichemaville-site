@@ -50,6 +50,25 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
           lien_rex_diagnostics {
             data {
               id
+              attributes {
+                description
+                fiche_diagnostic {
+                  data {
+                    id
+                    attributes {
+                      titre
+                      nom_scientifique
+                      effets_attendus 
+                      image_confort_thermique {
+                        ...ImageInfo
+                      }
+                      image_diag_icu {
+                        ...ImageInfo
+                      }
+                    }
+                  }
+                }
+              }
             }
           }
           contacts {

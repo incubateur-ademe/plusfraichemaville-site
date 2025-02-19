@@ -59,7 +59,7 @@ export const FicheDiagnosticChoix = async ({ projetId }: { projetId: number }) =
           href={PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_SELECTION(projetId)}
           className="fr-btn fr-btn rounded-3xl"
         >
-          Valider{" "}
+          Valider
         </Link>
       </div>
     </div>

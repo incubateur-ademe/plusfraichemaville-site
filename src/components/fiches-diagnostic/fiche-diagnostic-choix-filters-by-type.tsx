@@ -37,22 +37,36 @@ export const FicheDiagnosticChoixFilterByType = ({
       <div className="flex gap-2">
         {currentFilters.map((f) => {
           const isSelected = selectedFilters.includes(f.filter);
+
+          const isSelectedClass = {
+            container: isSelected && " !border-pfmv-navy",
+            image: !isSelected && "brightness-0",
+            text: isSelected ? "text-pfmv-navy" : "text-black",
+          };
+
           return (
             <div
               className={clsx(
-                "relative overflow-hidden rounded-[10px] !border-[1px] !border-pfmv-navy",
-                "size-32",
-                !isSelected && "opacity-50",
+                "relative overflow-hidden rounded-[10px]",
+                "size-32 !border-[1px] border-white/0 shadow-pfmv-card-shadow",
+                "hover:!border-pfmv-navy",
+                isSelectedClass.container,
               )}
               key={f.filter}
             >
               <button
                 onClick={() => setter(f.filter)}
-                className={clsx("flex size-32 flex-col items-center justify-center gap-2")}
+                className={clsx("flex size-32 flex-col items-center justify-center gap-2", isSelectedClass.container)}
               >
                 {isSelected && <i className="ri-close-line absolute right-2 top-0 text-pfmv-navy before:size-4"></i>}
-                <Image src={f.picto} alt={f.label} width={32} height={32} className="mx-auto block w-20" />
-                <small className="text-sm text-pfmv-navy">{f.label}</small>
+                <Image
+                  src={f.picto}
+                  alt={f.label}
+                  width={32}
+                  height={32}
+                  className={clsx("mx-auto block w-20", isSelectedClass.image)}
+                />
+                <small className={clsx("text-sm", isSelectedClass.text)}>{f.label}</small>
               </button>
             </div>
           );

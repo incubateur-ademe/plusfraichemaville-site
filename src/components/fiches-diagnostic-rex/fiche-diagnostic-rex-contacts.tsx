@@ -17,7 +17,7 @@ export const FicheDiagnosticRexContacts = ({ contacts }: FicheDiagnosticRexConta
   }
 
   return (
-    <div>
+    <div className="my-20">
       <h2 className="mb-5 text-[18px]">Contacts</h2>
       <FicheDiagnosticRexContactBloc contacts={collectivites} label="Collectivité" className="mb-8" />
       <FicheDiagnosticRexContactBloc contacts={prestataires} label="Prestataires" />
@@ -58,11 +58,11 @@ export const FicheDiagnosticRexContactBloc = ({
     <div className={className}>
       <FicheDiagnosticRexContactBlocBadge>{label}</FicheDiagnosticRexContactBlocBadge>
       {contacts.map((contact, index) => (
-        <div className="mb-3 flex flex-col border-b-[1px] border-b-dsfr-border-default-grey pb-1 text-sm" key={index}>
+        <div className="mb-4 flex flex-col border-b-[1px] border-b-dsfr-border-default-grey text-sm" key={index}>
           <span className="block">
             <strong>{contact.nom} - </strong> {contact.label}
           </span>
-          <CopyField className="text-pfmv-navy" label="Email" value={contact.email} noIcon />
+          <CopyField className="!mb-2 text-pfmv-navy" label="Email" value={contact.email} noIcon />
         </div>
       ))}
     </div>
