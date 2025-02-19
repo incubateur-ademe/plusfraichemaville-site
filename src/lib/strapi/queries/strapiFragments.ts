@@ -121,3 +121,26 @@ export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceWithCon
       }
     }
 }`;
+
+export const CITATION_FRAGMENT = `fragment CitationInfo on ComponentCommonCitation {
+  auteur
+  texte
+}`;
+
+export const CONTACT_FRAGMENT = `fragment ContactInfo on ComponentRetourExperienceContact {
+  id
+  label
+  email
+  telephone
+  site_internet
+  type_de_contact
+  sous_type_de_contact
+  nom
+}`;
+
+export const IMAGE_WITH_CAPTION_FRAGMENT = `fragment ImageWithCaptionInfo on ComponentCommonImageWithCaption {
+  image {
+    ...ImageInfo
+  }
+  caption
+}`;

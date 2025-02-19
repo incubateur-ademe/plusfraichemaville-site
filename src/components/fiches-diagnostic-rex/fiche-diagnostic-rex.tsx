@@ -1,0 +1,64 @@
+import { STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { getStrapiImageUrl } from "@/src/lib/strapi/strapiClient";
+import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-experience-diagnostic";
+import { ImageLoader } from "../common/image-loader";
+import { PropsWithChildren } from "react";
+import CmsRichText from "../common/CmsRichText";
+import { FicheDiagnosticRexInformations } from "./fiche-diagnostic-rex-informations";
+import { FicheDiagnosticRexContacts } from "./fiche-diagnostic-rex-contacts";
+import CustomDSFRQuote from "../common/CustomDSFRQuote";
+
+type FicheDiagnosticRexProps = {
+  rex: RetourExperienceDiagnostic;
+};
+
+export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
+  const { lieu } = rex.attributes;
+
+  return (
+    <div>
+      <div className="relative">
+        <ImageLoader
+          width={1920}
+          height={415}
+          className="block max-h-40 min-h-96 w-full object-cover md:max-h-96"
+          src={getStrapiImageUrl(rex.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
+          alt={rex.attributes.titre || "image titre"}
+        />
+        <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
+          <FicheDiagnosticRexLabel>
+            <i className="ri-map-pin-line mr-2 before:!mb-1 before:!size-4"></i>
+            {lieu}
+          </FicheDiagnosticRexLabel>
+          <FicheDiagnosticRexLabel>Diagnostics réalisés</FicheDiagnosticRexLabel>
+        </div>
+      </div>
+      <div className="fr-container flex flex-col gap-24 pt-6 lg:flex-row">
+        <div className="w-full lg:w-72">
+          <FicheDiagnosticRexInformations rex={rex} />
+          <FicheDiagnosticRexContacts contacts={rex.attributes.contacts} />
+        </div>
+        <div>
+          <h1 className="mb-5 text-[40px] font-bold leading-[48px]">{rex.attributes.titre}</h1>
+          <CmsRichText label={rex.attributes.description} className="mb-9" />
+          {rex.attributes.citations &&
+            rex.attributes.citations.length > 0 &&
+            rex.attributes.citations.map((citation) => (
+              <CustomDSFRQuote key={citation.auteur} citation={citation} className="mb-11" />
+            ))}
+          <h2 className="mb-4">Besoin</h2>
+          <CmsRichText label={rex.attributes.besoin} className="mb-20" />
+          <h2 className="mb-8">Combinaison de méthodes de diagnostic utilisées</h2>
+          <h2 className="mb-4">Points de vigilance</h2>
+          <CmsRichText label={rex.attributes.points_vigilance} className="mb-20" />
+          <h2 className="mb-4">Et après ?</h2>
+          <CmsRichText label={rex.attributes.apres} className="mb-20" />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export const FicheDiagnosticRexLabel = ({ children }: PropsWithChildren) => {
+  return <div className="rounded-lg bg-black/80 px-4 py-3 font-bold">{children}</div>;
+};
