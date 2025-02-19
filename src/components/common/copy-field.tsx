@@ -1,3 +1,5 @@
+"use client";
+
 import clsx from "clsx";
 import { useState } from "react";
 
@@ -5,10 +7,11 @@ interface CopyFieldProps {
   label: string;
   value?: string;
   className?: string;
+  noIcon?: boolean;
   onClick?: () => void;
 }
 
-export const CopyField = ({ label, value, className, onClick }: CopyFieldProps) => {
+export const CopyField = ({ label, value, className, onClick, noIcon }: CopyFieldProps) => {
   const [copySuccess, setCopySuccess] = useState(false);
 
   const handleCopy = async (text?: string, field?: string) => {
@@ -25,12 +28,13 @@ export const CopyField = ({ label, value, className, onClick }: CopyFieldProps) 
   };
 
   return (
-    <div className={"mb-2 flex gap-2"}>
+    <div className={clsx("mb-2 flex", !noIcon && "gap-2")}>
       <span className="flex items-center justify-between">
         <i
           className={clsx(
-            "ri-file-copy-line relative h-4 w-4 cursor-pointer text-pfmv-navy before:!h-5 before:!w-5",
-            "before:!mb-3",
+            !noIcon && "ri-file-copy-line relative h-4 w-4 cursor-pointer text-pfmv-navy before:!h-5 before:!w-5",
+            !noIcon && "before:!mb-3",
+            "relative",
           )}
           onClick={handleClick}
           title="Cliquer pour copier"
