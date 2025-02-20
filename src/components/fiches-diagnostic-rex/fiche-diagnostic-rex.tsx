@@ -8,14 +8,26 @@ import { FicheDiagnosticRexContacts } from "./fiche-diagnostic-rex-contacts";
 import CustomDSFRQuote from "../common/CustomDSFRQuote";
 import { FicheDiagnosticRexCombinaison } from "./fiche-diagnostic-rex-combinaison";
 import { FicheDiagnosticRexPdf } from "./fiche-diagnostic-rex-pdf";
+import { FicheDiagnosticRexPrincipauxResultats } from "./fiche-diagnostic-rex-principaux-resultats";
 
 type FicheDiagnosticRexProps = {
   rex: RetourExperienceDiagnostic;
 };
 
 export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
-  const { lieu, titre, description, citations, besoin, points_vigilance, apres, contacts, lien_rex_diagnostics } =
-    rex.attributes;
+  const {
+    lieu,
+    titre,
+    description,
+    citations,
+    besoin,
+    points_vigilance,
+    apres,
+    contacts,
+    lien_rex_diagnostics,
+    resultats,
+    resultats_images,
+  } = rex.attributes;
 
   return (
     <div>
@@ -53,6 +65,7 @@ export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
           <CmsRichText label={besoin} className="mb-20" />
           <h2 className="mb-8">Combinaison de méthodes de diagnostic utilisées</h2>
           <FicheDiagnosticRexCombinaison lienRexDiagnostics={lien_rex_diagnostics.data} />
+          <FicheDiagnosticRexPrincipauxResultats content={resultats} images={resultats_images} />
           <h2 className="mb-4">Points de vigilance</h2>
           <CmsRichText label={points_vigilance} className="mb-20" />
           <h2 className="mb-4">Et après ?</h2>

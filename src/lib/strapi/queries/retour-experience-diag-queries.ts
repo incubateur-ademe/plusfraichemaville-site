@@ -44,6 +44,9 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
           financements
           besoin
           resultats
+          resultats_images {
+            ...ImageWithCaptionInfo
+          }
           points_vigilance
           apres
           partenaires
