@@ -62,7 +62,7 @@ export const FicheDiagnosticRexContactBloc = ({
           <span className="block">
             <strong>{contact.nom} - </strong> {contact.label}
           </span>
-          <CopyField className="!mb-2 text-pfmv-navy" label="Email" value={contact.email} noIcon />
+          <CopyField className="!mb-2 text-pfmv-navy hover:underline" label="Email" value={contact.email} noIcon />
         </div>
       ))}
     </div>

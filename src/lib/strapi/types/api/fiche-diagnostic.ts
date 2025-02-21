@@ -5,9 +5,11 @@
 import { EtapeMiseEnOeuvre } from "../components/fiche-diagnostic/EtapeMiseEnOeuvre";
 import { Media } from "../common/Media";
 import { UtiliteMethode } from "../components/fiche-diagnostic/UtiliteMethode";
+import { LienRexDiagnostic } from "./lien-rex-diagnostic";
 import { EtapeMiseEnOeuvre_Plain } from "../components/fiche-diagnostic/EtapeMiseEnOeuvre";
 import { Media_Plain } from "../common/Media";
 import { UtiliteMethode_Plain } from "../components/fiche-diagnostic/UtiliteMethode";
+import { LienRexDiagnostic_Plain } from "./lien-rex-diagnostic";
 import { EtapeMiseEnOeuvre_NoRelations } from "../components/fiche-diagnostic/EtapeMiseEnOeuvre";
 import { UtiliteMethode_NoRelations } from "../components/fiche-diagnostic/UtiliteMethode";
 import { AdminPanelRelationPropertyModification } from "../common/AdminPanelRelationPropertyModification";
@@ -62,6 +64,7 @@ export interface FicheDiagnostic {
     type_livrables?: string;
     effets_attendus?: any;
     echelle_spatiale?: any;
+    lien_rex_diagnostics: { data: LienRexDiagnostic[] };
     image_confort_thermique?: { data: Media };
     image_diag_icu?: { data: Media };
   };
@@ -99,6 +102,7 @@ export interface FicheDiagnostic_Plain {
   type_livrables?: string;
   effets_attendus?: any;
   echelle_spatiale?: any;
+  lien_rex_diagnostics: LienRexDiagnostic_Plain[];
   image_confort_thermique?: Media_Plain;
   image_diag_icu?: Media_Plain;
 }
@@ -136,6 +140,7 @@ export interface FicheDiagnostic_NoRelations {
   type_livrables?: string;
   effets_attendus?: any;
   echelle_spatiale?: any;
+  lien_rex_diagnostics: number[];
   image_confort_thermique?: number;
   image_diag_icu?: number;
 }
@@ -173,6 +178,7 @@ export interface FicheDiagnostic_AdminPanelLifeCycle {
   type_livrables?: string;
   effets_attendus?: any;
   echelle_spatiale?: any;
+  lien_rex_diagnostics: AdminPanelRelationPropertyModification<LienRexDiagnostic_Plain>;
   image_confort_thermique?: AdminPanelRelationPropertyModification<Media_Plain>;
   image_diag_icu?: AdminPanelRelationPropertyModification<Media_Plain>;
 }

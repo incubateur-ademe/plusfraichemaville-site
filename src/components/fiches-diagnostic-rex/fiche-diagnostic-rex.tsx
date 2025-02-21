@@ -9,6 +9,7 @@ import CustomDSFRQuote from "../common/CustomDSFRQuote";
 import { FicheDiagnosticRexCombinaison } from "./fiche-diagnostic-rex-combinaison";
 import { FicheDiagnosticRexPdf } from "./fiche-diagnostic-rex-pdf";
 import { FicheDiagnosticRexPrincipauxResultats } from "./fiche-diagnostic-rex-principaux-resultats";
+import { PropsWithChildren } from "react";
 
 type FicheDiagnosticRexProps = {
   rex: RetourExperienceDiagnostic;
@@ -40,11 +41,11 @@ export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
           alt={titre || "image titre"}
         />
         <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
-          <div className="rounded-lg bg-black/80 px-4 py-3 font-bold">
+          <FicheDiagnosticRexLabel>
             <i className="ri-map-pin-line mr-2 before:!mb-1 before:!size-4"></i>
             {lieu}
-          </div>
-          <div className="rounded-lg bg-black/80 px-4 py-3 font-bold">Diagnostics réalisés</div>
+          </FicheDiagnosticRexLabel>
+          <FicheDiagnosticRexLabel>Diagnostics réalisés</FicheDiagnosticRexLabel>
         </div>
       </div>
       <div className="fr-container flex flex-col gap-24 pt-6 lg:flex-row">
@@ -74,4 +75,8 @@ export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
       </div>
     </div>
   );
+};
+
+export const FicheDiagnosticRexLabel = ({ children }: PropsWithChildren) => {
+  return <div className="rounded-lg bg-black/80 px-4 py-3 font-bold">{children}</div>;
 };

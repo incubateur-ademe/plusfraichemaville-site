@@ -1,5 +1,9 @@
 "use client";
 
+import "@splidejs/splide/css/core";
+// TODO: Check changelog from Splide and remove ts-ignore
+// @ts-ignore
+import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
@@ -11,7 +15,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "@/src/components/fiches-diagnostic/helpers";
 import { clsx } from "clsx";
 import { isEmpty } from "@/src/helpers/listUtils";
-import { getEchelleSpatialeLabel } from "@/src/helpers/echelle-spatiale-diagnostic";
+
 import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
@@ -22,6 +26,8 @@ import { Separator } from "@/src/components/common/separator";
 // eslint-disable-next-line max-len
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
 import { notifications } from "@/src/components/common/notifications";
+import { FicheDiagnosticRexCard } from "@/src/components/fiches-diagnostic-rex/fiche-diagnostic-rex-card";
+import { SplideController } from "../common/splide-controllers";
 
 export type FicheDiagnosticDescriptionModalState = {
   ficheDiagnostic: FicheDiagnostic;
@@ -62,12 +68,19 @@ export const FicheDiagnosticDescriptionModal = () => {
     onConceal: () => setCurrentFicheDiagnostic(null),
   });
 
+  const ficheDiagData = currentFicheDiagnostic?.ficheDiagnostic.attributes;
+  const rex = currentFicheDiagnostic?.ficheDiagnostic.attributes.lien_rex_diagnostics.data ?? [];
+  const picto =
+    utiliteFiche?.type === FicheDiagnosticUtilite.ConfortThermique
+      ? ficheDiagData?.image_confort_thermique
+      : ficheDiagData?.image_diag_icu;
+
   return (
     <>
       <modal.Component
         title={
           <span aria-hidden className="hidden">
-            {currentFicheDiagnostic?.ficheDiagnostic.attributes.titre}
+            {ficheDiagData?.titre}
           </span>
         }
         size="large"
@@ -76,86 +89,110 @@ export const FicheDiagnosticDescriptionModal = () => {
           utiliteFiche?.type === FicheDiagnosticUtilite.ConfortThermique ? "confort-thermique-modal" : "icu-modal",
         )}
       >
-        <div className="flex gap-7">
+        <div className="flex gap-7 pb-8">
           {ficheDiagnostic && utiliteFiche && (
-            <div className={clsx("w-full max-w-[60%] rounded-2xl p-8", utiliteFiche.colors.bgDark)}>
-              <div className="relative mb-4 block h-24 w-24 overflow-hidden">
-                <Image
-                  fill
-                  sizes="(max-width: 768px) 80vw, 33vw"
-                  src={getStrapiImageUrl(
-                    currentFicheDiagnostic.ficheDiagnostic.attributes.image_principale,
-                    STRAPI_IMAGE_KEY_SIZE.medium,
-                  )}
-                  alt={ficheDiagnostic?.attributes.titre}
-                  className="z-0 h-full w-full object-cover"
-                />
-              </div>
-              <div className={"text-2xl font-bold "}>{currentFicheDiagnostic.ficheDiagnostic.attributes.titre}</div>
-              <div className={"mb-4 text-xl italic"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
-              {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
-                <>
-                  <Separator className={clsx("!h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
-                  <div className="mt-4 font-bold">Cette méthode permet de :</div>
-                  <ul className={utiliteFiche.colors.pictoList}>
-                    {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (
-                      <li key={utilite.description} className="relative">
-                        {utilite?.description}
-                      </li>
-                    ))}
-                  </ul>
-                </>
-              )}
-              <Separator className={clsx("mt-4 !h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
-              <div className="mt-4 flex justify-between">
-                <div>
-                  <div className="font-bold">Échelle</div>
-                  <div>{getEchelleSpatialeLabel(ficheDiagnostic) ?? "Non renseigné"}</div>
-                </div>
-                <div>
-                  <div className="font-bold">Type de livrables</div>
-                  <div>{ficheDiagnostic.attributes.type_livrables ?? "Non renseigné"}</div>
-                </div>
-              </div>
-              <Separator className={clsx("mt-4 !h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
-              <div className=" mt-4 flex justify-between">
-                <div>
-                  <div className="font-bold">Coût</div>
-                  <div className="flex items-center">
-                    <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
-                    <small className="text-sm">
-                      de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} €
-                    </small>
-                  </div>
-                </div>
-                <div>
-                  <div className="font-bold">{"Durée de l'étude"}</div>
-                  <div className="flex items-center">
-                    <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
-                    <small className="text-sm text-dsfr-text-mention-grey">
-                      de {delaiMin} à {delaiMax} mois
-                    </small>
-                  </div>
-                </div>
-              </div>
-              <Link
-                className={clsx(
-                  "fr-btn--tertiary fr-btn--sm fr-btn mt-4 rounded-3xl !text-black",
-                  utiliteFiche.colors.button,
+            <div className="flex flex-col gap-8 lg:flex-row">
+              <div className={clsx("relative h-fit w-full max-w-[55%] rounded-2xl p-8", utiliteFiche.colors.bgDark)}>
+                {ficheDiagnostic && (
+                  <GenericSaveAuthenticatedInsideProjet
+                    type={TypeFiche.diagnostic}
+                    id={ficheDiagnostic?.id}
+                    opener={() => notifications("success", "FICHE_DIAGNOSTIC_ADDED_TO_PROJET")}
+                    className="!absolute right-8 top-8"
+                  />
                 )}
-                href={ficheDiagUrl}
-                onClick={modal.close}
+                <div
+                  className={clsx(
+                    "relative mb-4 flex size-24 items-center justify-center overflow-hidden rounded-full bg-white",
+                  )}
+                >
+                  <Image
+                    src={getStrapiImageUrl(picto, STRAPI_IMAGE_KEY_SIZE.small)}
+                    width={64}
+                    height={64}
+                    alt={ficheDiagData?.titre ?? ""}
+                    className="z-0 size-16 object-contain"
+                  />
+                </div>
+                <div className={"text-2xl font-bold "}>{ficheDiagData?.titre}</div>
+                <div className={"mb-4 text-xl italic"}>{ficheDiagData?.nom_scientifique}</div>
+                {!isEmpty(ficheDiagData?.utilite_methode) && (
+                  <>
+                    <Separator className={clsx("!h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
+                    <div className="mt-4 font-bold">Cette méthode permet de :</div>
+                    <ul className={utiliteFiche.colors.pictoList}>
+                      {ficheDiagData?.utilite_methode.map((utilite) => (
+                        <li key={utilite.description} className="relative">
+                          {utilite?.description}
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+                <Separator className={clsx("mt-4 !h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
+                <span className="mt-5 block font-bold">Cette méthode permet de : </span>
+                <Separator className={clsx("mt-4 !h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
+                <div className=" mt-4 flex justify-between">
+                  <div>
+                    <div className="font-bold">Coût</div>
+                    <div className="flex items-center">
+                      <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
+                      <small className="text-sm">
+                        de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} €
+                      </small>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="font-bold">{"Durée de l'étude"}</div>
+                    <div className="flex items-center">
+                      <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
+                      <small className="text-sm text-dsfr-text-mention-grey">
+                        de {delaiMin} à {delaiMax} mois
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div className="mt-4 flex items-center gap-4">
+                  <Link
+                    className={clsx(
+                      "fr-btn--tertiary fr-btn--sm fr-btn rounded-3xl !text-black",
+                      utiliteFiche.colors.button,
+                    )}
+                    href={ficheDiagUrl}
+                    onClick={modal.close}
+                  >
+                    Lire la méthode
+                  </Link>
+                </div>
+              </div>
+
+              <Splide
+                id="fiche-diagnostic-rex-modal-slider"
+                hasTrack={false}
+                className="max-w-md"
+                options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
               >
-                Lire la méthode
-              </Link>
+                <SplideTrack className="overflow-auto lg:!overflow-hidden">
+                  {rex?.map((r, index) => (
+                    <SplideSlide className="size-full" key={index}>
+                      <FicheDiagnosticRexCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
+                    </SplideSlide>
+                  ))}
+                </SplideTrack>
+                <SplideController
+                  arrow="left"
+                  size={{ width: "w-10", height: "h-10" }}
+                  position={{ top: "top-[8.5rem]", left: "!left-6" }}
+                  className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+                />
+                <SplideController
+                  arrow="right"
+                  size={{ width: "w-10", height: "h-10" }}
+                  position={{ top: "top-[8.5rem]", right: "!right-6" }}
+                  className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+                />
+              </Splide>
             </div>
-          )}
-          {ficheDiagnostic && (
-            <GenericSaveAuthenticatedInsideProjet
-              type={TypeFiche.diagnostic}
-              id={ficheDiagnostic?.id}
-              opener={() => notifications("success", "FICHE_DIAGNOSTIC_ADDED_TO_PROJET")}
-            />
           )}
         </div>
       </modal.Component>

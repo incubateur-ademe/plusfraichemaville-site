@@ -103,30 +103,30 @@ const GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA = (strapiFilter: StrapiFilter) => `
           image_principale {
             ...ImageInfo
           }
-          annee_realisation
-          climat_actuel
-          climat_futur
+          contacts {
+            ...ContactInfo
+          }
         }
       }
     }
 }`;
 
-export async function getRetourExperienceDiagBySlug(slug: string): Promise<RetourExperienceDiagnostic | null> {
+export const getRetourExperienceDiagBySlug = async (slug: string): Promise<RetourExperienceDiagnostic | null> => {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA(filter), { tag: `get-rex-diag-by-slug-${slug}` })
   )?.retourExperienceDiagnostics as APIResponseCollection<RetourExperienceDiagnostic>;
   return safeReturnStrapiEntity(apiResponse);
-}
+};
 
-export async function getRetoursExperienceDiag(): Promise<RetourExperienceDiagnostic[]> {
+export const getRetoursExperienceDiagCard = async (): Promise<RetourExperienceDiagnostic[]> => {
   const filter = new StrapiFilter(true, [], { attribute: "createdAt", order: "desc" });
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA(filter), { tag: "get-rex-diag" }))
     ?.retourExperienceDiagnostics as APIResponseCollection<RetourExperienceDiagnostic>;
   return safeReturnStrapiEntities(apiResponse);
-}
+};
 
-export async function getAllCompleteRetoursExperienceDiag(): Promise<RetourExperienceDiagnostic[]> {
+export const getAllCompleteRetoursExperienceDiag = async (): Promise<RetourExperienceDiagnostic[]> => {
   const filter = new StrapiFilter(true, [], { attribute: "createdAt", order: "desc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA(filter), {
@@ -134,4 +134,4 @@ export async function getAllCompleteRetoursExperienceDiag(): Promise<RetourExper
     })
   )?.retourExperienceDiagnostics as APIResponseCollection<RetourExperienceDiagnostic>;
   return safeReturnStrapiEntities(apiResponse);
-}
+};
