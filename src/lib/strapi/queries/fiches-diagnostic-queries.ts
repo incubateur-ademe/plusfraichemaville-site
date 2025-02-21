@@ -3,7 +3,12 @@
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "../helpers/strapiArrayUtils";
 import { strapiGraphQLCall } from "../strapiClient";
 import { StrapiFilter } from "./commonStrapiFilters";
-import { FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT, STRAPI_IMAGE_FRAGMENT } from "./strapiFragments";
+import {
+  CONTACT_FRAGMENT,
+  DIAGNOSTIC_REX_FRAGMENT,
+  FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT,
+  STRAPI_IMAGE_FRAGMENT,
+} from "./strapiFragments";
 import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
@@ -17,10 +22,6 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
         titre
         description_courte
         description
-        etapes_mise_en_oeuvre {
-          titre
-          description
-        }
         etapes_mise_en_oeuvre {
           titre
           description
@@ -63,7 +64,8 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
 
 export const GET_FICHE_DIAGNOSTIC_CARD_DATA = async (
   strapiFilter: StrapiFilter,
-) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} query {
+  // eslint-disable-next-line max-len
+) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT}  ${CONTACT_FRAGMENT} ${DIAGNOSTIC_REX_FRAGMENT} query {
       ficheDiagnostics ${strapiFilter.wholeFilterString()} {
         data {
           ...FicheDiagnosticCardInfo
