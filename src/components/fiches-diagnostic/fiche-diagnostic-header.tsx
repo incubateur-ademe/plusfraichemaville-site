@@ -29,6 +29,9 @@ export const FicheDiagnosticHeader = ({
     ? getFicheDiagUtiliteProperties(overrideUtiliteFiche)
     : getFicheDiagUtilite(ficheDiagnostic);
 
+  const isICU = utiliteFiche.type === FicheDiagnosticUtilite.DiminutionICU;
+  const image = isICU ? attributes.image_diag_icu : attributes.image_confort_thermique;
+
   return (
     <div className={utiliteFiche.colors.bgLight} id="fiche-diag-header">
       <div className="fr-container">
@@ -38,24 +41,24 @@ export const FicheDiagnosticHeader = ({
             utiliteFiche.colors.bgLight,
           )}
         >
-          <div className="hidden size-52 shrink-0 md:block">
+          <div className="hidden size-32 shrink-0 items-center justify-center rounded-full bg-white md:flex">
             <Image
-              src={getStrapiImageUrl(attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+              src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.titre}
               className="object-contain"
-              width={208}
-              height={208}
+              width={90}
+              height={90}
             />
           </div>
           <div>
-            <h1 className="mb-5 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
-            <small className="mb-1 block text-base font-bold text-black">Nom scientifique de la méthode :</small>
+            <h1 className="mb-3 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
             <span className="italic md:text-xl">{attributes.nom_scientifique ?? "Non renseigné"}</span>
-            <Separator className={clsx("my-5 !h-[1px] !opacity-50")} />
+            <Separator className={clsx("my-5 !h-[1px] !opacity-50", utiliteFiche.colors.separator)} />
             {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
-              <ul className="arrow-list orange-arrow-list text-sky-400">
+              <ul className="text-sky-400">
                 {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (
-                  <li key={utilite.description} className="relative font-bold">
+                  <li key={utilite.description} className="relative !mb-0 font-bold leading-[0]">
+                    <span className={clsx(utiliteFiche.colors.pictoFaded, "mr-3 text-xl leading-[1.25rem]")}>▸</span>
                     {utilite?.description}
                   </li>
                 ))}
