@@ -33,22 +33,6 @@ export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSm
     }
 }`;
 
-export const DIAGNOSTIC_REX_FRAGMENT = `fragment DiagnosticRexInfo on RetourExperienceDiagnosticEntity {
-  id
-  attributes {
-    titre
-    lieu
-    description
-    slug
-    image_principale {
-      ...ImageInfo
-    }
-    contacts {
-      ...ContactInfo
-    }
-  }
-}`;
-
 export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCardInfo on FicheDiagnosticEntity {
   id
     attributes {
@@ -83,7 +67,18 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
           attributes {
             retour_experience_diagnostic {
               data {
-                ...DiagnosticRexInfo
+                  attributes {
+                    titre
+                    lieu
+                    description
+                    slug
+                    image_principale {
+                      ...ImageInfo
+                    }
+                    contacts {
+                      ...ContactInfo
+                    }
+                  }
               }
             }
           }

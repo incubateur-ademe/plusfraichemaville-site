@@ -54,8 +54,8 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
           )}
         >
           <FicheDiagnosticClientBloc blocs={blocs} />
-          <ButtonShareCurrentUrl className={"mb-2 block md:mb-0 [&>*]:mb-2"} />
-          <div className="my-4 md:mb-0 md:mt-4">
+          <ButtonShareCurrentUrl className={"mb-2 block pl-4 md:mb-0 [&>*]:mb-2"} />
+          <div className="my-4 pl-4 md:mb-0 md:mt-4">
             <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel />
           </div>
         </div>

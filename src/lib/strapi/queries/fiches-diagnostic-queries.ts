@@ -3,18 +3,13 @@
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "../helpers/strapiArrayUtils";
 import { strapiGraphQLCall } from "../strapiClient";
 import { StrapiFilter } from "./commonStrapiFilters";
-import {
-  CONTACT_FRAGMENT,
-  DIAGNOSTIC_REX_FRAGMENT,
-  FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT,
-  STRAPI_IMAGE_FRAGMENT,
-} from "./strapiFragments";
+import { CONTACT_FRAGMENT, FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT, STRAPI_IMAGE_FRAGMENT } from "./strapiFragments";
 import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
   strapiFilter: StrapiFilter,
-) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} query {
+) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} ${CONTACT_FRAGMENT} query {
   ficheDiagnostics ${strapiFilter.wholeFilterString()} {
     data {
       id
@@ -57,6 +52,35 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
         utilite_methode {
           description
         }
+        image_confort_thermique {
+          ...ImageInfo
+        }
+        image_diag_icu {
+          ...ImageInfo
+        }
+        lien_rex_diagnostics {
+          data {
+            id
+            attributes {
+              retour_experience_diagnostic {
+                data {
+                    attributes {
+                      titre
+                      lieu
+                      description
+                      slug
+                      image_principale {
+                        ...ImageInfo
+                      }
+                      contacts {
+                        ...ContactInfo
+                      }
+                    }
+                }
+              }
+            }
+          }
+        }  
       }
     }
   }
@@ -65,7 +89,7 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
 export const GET_FICHE_DIAGNOSTIC_CARD_DATA = async (
   strapiFilter: StrapiFilter,
   // eslint-disable-next-line max-len
-) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT}  ${CONTACT_FRAGMENT} ${DIAGNOSTIC_REX_FRAGMENT} query {
+) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT}  ${CONTACT_FRAGMENT} query {
       ficheDiagnostics ${strapiFilter.wholeFilterString()} {
         data {
           ...FicheDiagnosticCardInfo

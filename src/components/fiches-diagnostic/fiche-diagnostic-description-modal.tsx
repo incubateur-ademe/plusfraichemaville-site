@@ -122,15 +122,14 @@ export const FicheDiagnosticDescriptionModal = () => {
                     <div className="mt-4 font-bold">Cette méthode permet de :</div>
                     <ul className={utiliteFiche.colors.pictoList}>
                       {ficheDiagData?.utilite_methode.map((utilite) => (
-                        <li key={utilite.description} className="relative">
+                        <li key={utilite.description} className="relative !mb-0 !leading-[1.25rem]">
                           {utilite?.description}
                         </li>
                       ))}
                     </ul>
                   </>
                 )}
-                <Separator className={clsx("mt-4 !h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
-                <span className="mt-5 block font-bold">Cette méthode permet de : </span>
+
                 <Separator className={clsx("mt-4 !h-[1px] !opacity-100", utiliteFiche.colors.separator)} />
                 <div className=" mt-4 flex justify-between">
                   <div>
