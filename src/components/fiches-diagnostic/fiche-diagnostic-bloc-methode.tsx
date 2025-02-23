@@ -65,12 +65,12 @@ export const FicheDiagnosticMethodeBloc = ({
       <Splide
         id="fiche-diagnostic-rex-modal-slider"
         hasTrack={false}
-        className="max-w-md"
-        options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
+        className="max-w-[940px]"
+        options={{ rewind: true, autoWidth: true, start: 0 }}
       >
-        <SplideTrack className="overflow-auto lg:!overflow-hidden">
+        <SplideTrack className="overflow-auto py-5 !pl-3 lg:!overflow-hidden lg:!pl-1">
           {rex?.data?.map((r, index) => (
-            <SplideSlide className="size-full" key={index}>
+            <SplideSlide className="!mr-6 max-w-md" key={index}>
               <FicheDiagnosticRexCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
             </SplideSlide>
           ))}

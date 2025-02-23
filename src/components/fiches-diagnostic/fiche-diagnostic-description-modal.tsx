@@ -169,11 +169,11 @@ export const FicheDiagnosticDescriptionModal = () => {
                 id="fiche-diagnostic-rex-modal-slider"
                 hasTrack={false}
                 className="max-w-md"
-                options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
+                options={{ rewind: true, autoWidth: true, start: 0 }}
               >
-                <SplideTrack className="overflow-auto lg:!overflow-hidden">
+                <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
                   {rex?.map((r, index) => (
-                    <SplideSlide className="size-full" key={index}>
+                    <SplideSlide className="!mr-6 size-full" key={index} onClick={modal.close}>
                       <FicheDiagnosticRexCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
                     </SplideSlide>
                   ))}

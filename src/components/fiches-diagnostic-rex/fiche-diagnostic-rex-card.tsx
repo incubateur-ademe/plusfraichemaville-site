@@ -4,6 +4,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { FicheDiagnosticRexLabel } from "./fiche-diagnostic-rex";
 import { Contact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 import { CopyField } from "../common/copy-field";
+import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 
 type FicheDiagnosticRexCardProps = {
   rex?: RetourExperienceDiagnostic;
@@ -12,32 +13,34 @@ type FicheDiagnosticRexCardProps = {
 export const FicheDiagnosticRexCard = ({ rex }: FicheDiagnosticRexCardProps) => {
   if (!rex) return null;
 
-  const { titre, image_principale, contacts } = rex.attributes;
+  const { titre, image_principale, contacts, slug } = rex.attributes;
 
   const collectivite = contacts.filter((contact) => contact.type_de_contact === "collectivite")[0];
   const prestataire = contacts.filter((contact) => contact.type_de_contact !== "collectivite")[0];
 
   return (
-    <div className="overflow-hidden rounded-2xl bg-white">
-      <div className="relative mb-7">
-        <ImageLoader
-          width={462}
-          height={267}
-          className="h-[267px] w-[462px]"
-          src={getStrapiImageUrl(image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={titre || "image titre"}
-        />
-        <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
-          <FicheDiagnosticRexLabel>Diagnostics réalisés</FicheDiagnosticRexLabel>
+    <GenericFicheLink href={`/fiches-diagnostic/retour-experience/${slug}`}>
+      <div className="pfmv-card max-w-[462px] overflow-hidden rounded-2xl bg-white">
+        <div className="relative mb-7">
+          <ImageLoader
+            width={462}
+            height={267}
+            className="h-[267px] w-[462px]"
+            src={getStrapiImageUrl(image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+            alt={titre || "image titre"}
+          />
+          <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
+            <FicheDiagnosticRexLabel>Diagnostics réalisés</FicheDiagnosticRexLabel>
+          </div>
+        </div>
+        <div className="px-5">
+          <h2 className="mb-7 text-[22px] leading-7">{titre}</h2>
+          <ContactSection title="Contact de la collectivité" contact={collectivite} />
+          <ContactSection title="Contact de la collectivité" contact={collectivite} />
+          <ContactSection title="Contact du prestataire" contact={prestataire} />
         </div>
       </div>
-      <div className="px-5">
-        <h2 className="mb-7 text-[22px] leading-7">{titre}</h2>
-        <ContactSection title="Contact de la collectivité" contact={collectivite} />
-        <ContactSection title="Contact de la collectivité" contact={collectivite} />
-        <ContactSection title="Contact du prestataire" contact={prestataire} />
-      </div>
-    </div>
+    </GenericFicheLink>
   );
 };
 
