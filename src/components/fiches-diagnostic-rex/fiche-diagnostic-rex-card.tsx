@@ -13,13 +13,13 @@ type FicheDiagnosticRexCardProps = {
 export const FicheDiagnosticRexCard = ({ rex }: FicheDiagnosticRexCardProps) => {
   if (!rex) return null;
 
-  const { titre, image_principale, contacts, slug } = rex.attributes;
+  const { titre, image_principale, contacts, slug, lieu } = rex.attributes;
 
   const collectivite = contacts.filter((contact) => contact.type_de_contact === "collectivite")[0];
   const prestataire = contacts.filter((contact) => contact.type_de_contact !== "collectivite")[0];
 
   return (
-    <GenericFicheLink href={`/fiches-diagnostic/retour-experience/${slug}`}>
+    <GenericFicheLink href={`/fiches-diagnostic/retour-experience/${slug}`} className="!bg-none">
       <div className="pfmv-card max-w-[462px] overflow-hidden rounded-2xl bg-white">
         <div className="relative mb-7">
           <ImageLoader
@@ -30,7 +30,10 @@ export const FicheDiagnosticRexCard = ({ rex }: FicheDiagnosticRexCardProps) => 
             alt={titre || "image titre"}
           />
           <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
-            <FicheDiagnosticRexLabel>Diagnostics réalisés</FicheDiagnosticRexLabel>
+            <FicheDiagnosticRexLabel>
+              <i className="ri-map-pin-line mr-2 before:!mb-1 before:!size-4"></i>
+              {lieu}
+            </FicheDiagnosticRexLabel>
           </div>
         </div>
         <div className="px-5">

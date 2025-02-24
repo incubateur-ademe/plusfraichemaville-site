@@ -89,9 +89,9 @@ export const FicheDiagnosticDescriptionModal = () => {
           utiliteFiche?.type === FicheDiagnosticUtilite.ConfortThermique ? "confort-thermique-modal" : "icu-modal",
         )}
       >
-        <div className="flex gap-7 pb-8">
+        <div className="justif flex gap-7 pb-8">
           {ficheDiagnostic && utiliteFiche && (
-            <div className="flex flex-col gap-8 lg:flex-row">
+            <div className="flex w-full flex-col gap-8 lg:flex-row">
               <div className={clsx("relative h-fit w-full max-w-[55%] rounded-2xl p-8", utiliteFiche.colors.bgDark)}>
                 {ficheDiagnostic && (
                   <GenericSaveAuthenticatedInsideProjet
@@ -165,32 +165,36 @@ export const FicheDiagnosticDescriptionModal = () => {
                 </div>
               </div>
 
-              <Splide
-                id="fiche-diagnostic-rex-modal-slider"
-                hasTrack={false}
-                className="max-w-md"
-                options={{ rewind: true, autoWidth: true, start: 0 }}
-              >
-                <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
-                  {rex?.map((r, index) => (
-                    <SplideSlide className="!mr-6 size-full" key={index} onClick={modal.close}>
-                      <FicheDiagnosticRexCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
-                    </SplideSlide>
-                  ))}
-                </SplideTrack>
-                <SplideController
-                  arrow="left"
-                  size={{ width: "w-10", height: "h-10" }}
-                  position={{ top: "top-[8.5rem]", left: "!left-6" }}
-                  className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
-                />
-                <SplideController
-                  arrow="right"
-                  size={{ width: "w-10", height: "h-10" }}
-                  position={{ top: "top-[8.5rem]", right: "!right-6" }}
-                  className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
-                />
-              </Splide>
+              {rex.length <= 1 ? (
+                <FicheDiagnosticRexCard rex={rex[0].attributes.retour_experience_diagnostic?.data} />
+              ) : (
+                <Splide
+                  id="fiche-diagnostic-rex-modal-slider"
+                  hasTrack={false}
+                  className="max-w-md"
+                  options={{ rewind: true, autoWidth: true, start: 0 }}
+                >
+                  <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
+                    {rex?.map((r, index) => (
+                      <SplideSlide className="!mr-6 size-full" key={index} onClick={modal.close}>
+                        <FicheDiagnosticRexCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
+                      </SplideSlide>
+                    ))}
+                  </SplideTrack>
+                  <SplideController
+                    arrow="left"
+                    size={{ width: "w-10", height: "h-10" }}
+                    position={{ top: "top-[8.5rem]", left: "!left-6" }}
+                    className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+                  />
+                  <SplideController
+                    arrow="right"
+                    size={{ width: "w-10", height: "h-10" }}
+                    position={{ top: "top-[8.5rem]", right: "!right-6" }}
+                    className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+                  />
+                </Splide>
+              )}
             </div>
           )}
         </div>
