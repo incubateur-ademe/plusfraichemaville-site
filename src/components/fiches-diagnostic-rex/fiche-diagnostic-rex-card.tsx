@@ -36,7 +36,6 @@ export const FicheDiagnosticRexCard = ({ rex }: FicheDiagnosticRexCardProps) => 
         <div className="px-5">
           <h2 className="mb-7 text-[22px] leading-7">{titre}</h2>
           <ContactSection title="Contact de la collectivité" contact={collectivite} />
-          <ContactSection title="Contact de la collectivité" contact={collectivite} />
           <ContactSection title="Contact du prestataire" contact={prestataire} />
         </div>
       </div>
