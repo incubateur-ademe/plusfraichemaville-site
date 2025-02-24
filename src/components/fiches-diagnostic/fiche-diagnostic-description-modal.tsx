@@ -176,7 +176,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                 >
                   <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
                     {rex?.map((r, index) => (
-                      <SplideSlide className="!mr-6 size-full" key={index} onClick={modal.close}>
+                      <SplideSlide className="!mr-8 size-full" key={index} onClick={modal.close}>
                         <FicheDiagnosticRexCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
                       </SplideSlide>
                     ))}
