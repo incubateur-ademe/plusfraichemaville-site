@@ -10,7 +10,7 @@ import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { SplideController } from "../common/splide-controllers";
-import { FicheDiagnosticRexCard } from "../fiches-diagnostic-rex/fiche-diagnostic-rex-card";
+import { RetourExperienceDiagCard } from "../retour-experience-diag/retour-experience-diag-card";
 
 export const FicheDiagnosticMethodeBloc = ({
   ficheDiagnostic,
@@ -62,32 +62,36 @@ export const FicheDiagnosticMethodeBloc = ({
       <span className="mb-6 block">
         Consultez les retours d’expériences de collectivités qui ont mis en place cette méthode.
       </span>
-      <Splide
-        id="fiche-diagnostic-rex-modal-slider"
-        hasTrack={false}
-        className="max-w-[940px]"
-        options={{ rewind: true, autoWidth: true, start: 0 }}
-      >
-        <SplideTrack className="overflow-auto py-5 !pl-3 lg:!overflow-hidden lg:!pl-1">
-          {rex?.data?.map((r, index) => (
-            <SplideSlide className="!mr-6 max-w-md" key={index}>
-              <FicheDiagnosticRexCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
-            </SplideSlide>
-          ))}
-        </SplideTrack>
-        <SplideController
-          arrow="left"
-          size={{ width: "w-10", height: "h-10" }}
-          position={{ top: "top-[8.5rem]", left: "!left-6" }}
-          className={`!bg-black/60 ${rex.data.length <= 1 ? "pointer-events-none !hidden" : ""}`}
-        />
-        <SplideController
-          arrow="right"
-          size={{ width: "w-10", height: "h-10" }}
-          position={{ top: "top-[8.5rem]", right: "!right-6" }}
-          className={`!bg-black/60 ${rex.data.length <= 1 ? "pointer-events-none !hidden" : ""}`}
-        />
-      </Splide>
+      {!rex?.data.length ? null : rex.data.length === 1 ? (
+        <RetourExperienceDiagCard rex={rex.data[0].attributes.retour_experience_diagnostic?.data} />
+      ) : (
+        <Splide
+          id="fiche-diagnostic-rex-modal-slider"
+          hasTrack={false}
+          className="max-w-[28.875rem]"
+          options={{ rewind: true, autoWidth: true, start: 0 }}
+        >
+          <SplideTrack className="overflow-auto !px-6 py-5 lg:!overflow-hidden">
+            {rex?.data?.map((r, index) => (
+              <SplideSlide className="!mr-8 w-full" key={index}>
+                <RetourExperienceDiagCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
+              </SplideSlide>
+            ))}
+          </SplideTrack>
+          <SplideController
+            arrow="left"
+            size={{ width: "w-10", height: "h-10" }}
+            position={{ top: "top-[8.5rem]", left: "!left-6" }}
+            className={`!bg-black/60 ${rex.data.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+          />
+          <SplideController
+            arrow="right"
+            size={{ width: "w-10", height: "h-10" }}
+            position={{ top: "top-[8.5rem]", right: "!right-6" }}
+            className={`!bg-black/60 ${rex.data.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+          />
+        </Splide>
+      )}
 
       {creditsImage.length > 0 && (
         <>

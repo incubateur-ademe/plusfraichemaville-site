@@ -1,16 +1,16 @@
 import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-experience-diagnostic";
 import { ImageLoader } from "../common/image-loader";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { FicheDiagnosticRexLabel } from "./fiche-diagnostic-rex";
+import { RetourExperienceDiagLabel } from "./retour-experience-diag";
 import { Contact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 import { CopyField } from "../common/copy-field";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 
-type FicheDiagnosticRexCardProps = {
+type RetourExperienceDiagCardProps = {
   rex?: RetourExperienceDiagnostic;
 };
 
-export const FicheDiagnosticRexCard = ({ rex }: FicheDiagnosticRexCardProps) => {
+export const RetourExperienceDiagCard = ({ rex }: RetourExperienceDiagCardProps) => {
   if (!rex) return null;
 
   const { titre, image_principale, contacts, slug, lieu } = rex.attributes;
@@ -20,7 +20,7 @@ export const FicheDiagnosticRexCard = ({ rex }: FicheDiagnosticRexCardProps) => 
 
   return (
     <GenericFicheLink href={`/fiches-diagnostic/retour-experience/${slug}`} className="!bg-none">
-      <div className="pfmv-card max-w-[462px] overflow-hidden rounded-2xl bg-white">
+      <div className="pfmv-card max-w-[28.875rem] overflow-hidden rounded-2xl bg-white">
         <div className="relative mb-7">
           <ImageLoader
             width={462}
@@ -30,10 +30,10 @@ export const FicheDiagnosticRexCard = ({ rex }: FicheDiagnosticRexCardProps) => 
             alt={titre || "image titre"}
           />
           <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
-            <FicheDiagnosticRexLabel>
+            <RetourExperienceDiagLabel>
               <i className="ri-map-pin-line mr-2 before:!mb-1 before:!size-4"></i>
               {lieu}
-            </FicheDiagnosticRexLabel>
+            </RetourExperienceDiagLabel>
           </div>
         </div>
         <div className="px-5">
@@ -46,12 +46,12 @@ export const FicheDiagnosticRexCard = ({ rex }: FicheDiagnosticRexCardProps) => 
   );
 };
 
-type FicheDiagnosticRexCardContactProps = {
+type RetourExperienceDiagCardContactProps = {
   title: string;
   contact: Contact;
 };
 
-const ContactSection = ({ title, contact }: FicheDiagnosticRexCardContactProps) => {
+const ContactSection = ({ title, contact }: RetourExperienceDiagCardContactProps) => {
   if (!contact) return null;
 
   return (

@@ -1,12 +1,12 @@
-import { FicheDiagnosticRex } from "@/src/components/fiches-diagnostic-rex/fiche-diagnostic-rex";
+import { RetourExperienceDiag } from "@/src/components/retour-experience-diag/retour-experience-diag";
 import { getRetourExperienceDiagBySlug } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
 import { notFound } from "next/navigation";
 
-type FicheDiagnosticRexPageProps = {
+type RetourExperienceDiagPageProps = {
   params: Promise<{ rexSlug: string }>;
 };
 
-export default async function FicheDiagnosticRexPage(props: FicheDiagnosticRexPageProps) {
+export default async function RetourExperienceDiagPage(props: RetourExperienceDiagPageProps) {
   const params = await props.params;
   const rex = await getRetourExperienceDiagBySlug(params.rexSlug);
 
@@ -14,5 +14,5 @@ export default async function FicheDiagnosticRexPage(props: FicheDiagnosticRexPa
     notFound();
   }
 
-  return <FicheDiagnosticRex rex={rex} />;
+  return <RetourExperienceDiag rex={rex} />;
 }

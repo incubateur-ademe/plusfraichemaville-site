@@ -10,16 +10,18 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { ImageLoader } from "../common/image-loader";
 import { useState } from "react";
 import { SplideController } from "../common/splide-controllers";
+import clsx from "clsx";
+import { ZoomedImage } from "../common/zoomed-image";
 
-type FicheDiagnosticRexPrincipauxResultatsType = {
+type RetourExperienceDiagPrincipauxResultatsType = {
   content: string;
   images: ImageWithCaption[];
 };
 
-export const FicheDiagnosticRexPrincipauxResultats = ({
+export const RetourExperienceDiagPrincipauxResultats = ({
   content,
   images,
-}: FicheDiagnosticRexPrincipauxResultatsType) => {
+}: RetourExperienceDiagPrincipauxResultatsType) => {
   const [zoomedImage, setZoomedImage] = useState<ImageWithCaption | null>(null);
 
   return (
@@ -28,7 +30,12 @@ export const FicheDiagnosticRexPrincipauxResultats = ({
       <div className="flex gap-12">
         <CmsRichText label={content} />
         <div className="relative w-96 shrink-0">
-          <div className="absolute right-2 top-2 z-20 flex size-8 items-center justify-center rounded-full bg-black/60">
+          <div
+            className={clsx(
+              "absolute right-2 top-2 z-20 flex size-8 cursor-pointer items-center justify-center rounded-full",
+              "pointer-events-none bg-black/60",
+            )}
+          >
             <i className="ri-search-line size-5 text-white before:!mb-2 before:!size-5"></i>
           </div>
           <Splide
@@ -67,29 +74,7 @@ export const FicheDiagnosticRexPrincipauxResultats = ({
         </div>
       </div>
 
-      {zoomedImage && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 p-4"
-          onClick={() => setZoomedImage(null)}
-        >
-          <div className="relative max-h-[90vh] max-w-[90vw]" onClick={(e) => e.stopPropagation()}>
-            <button
-              className="hover-transparent absolute -top-10 right-0 text-white"
-              onClick={() => setZoomedImage(null)}
-            >
-              Fermer
-            </button>
-            <ImageLoader
-              width={1200}
-              height={800}
-              className="h-[60vh] w-[90vh] object-contain"
-              src={getStrapiImageUrl(zoomedImage.image, STRAPI_IMAGE_KEY_SIZE.large)}
-              alt={zoomedImage.caption ?? "image fiche rex"}
-            />
-            {zoomedImage.caption && <p className="mt-2 text-center text-white">{zoomedImage.caption}</p>}
-          </div>
-        </div>
-      )}
+      <ZoomedImage image={zoomedImage} onClose={() => setZoomedImage(null)} />
     </div>
   );
 };

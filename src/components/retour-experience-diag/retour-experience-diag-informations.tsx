@@ -1,9 +1,9 @@
 import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-experience-diagnostic";
 import CmsRichText from "../common/CmsRichText";
-type FicheDiagnosticRexInformationsProps = {
+type RetourExperienceDiagInformationsProps = {
   rex: RetourExperienceDiagnostic;
 };
-export const FicheDiagnosticRexInformations = ({ rex }: FicheDiagnosticRexInformationsProps) => {
+export const RetourExperienceDiagInformations = ({ rex }: RetourExperienceDiagInformationsProps) => {
   const informations = [
     {
       title: "Collectivité concernée",

@@ -333,14 +333,6 @@
   @apply w-[90%] max-w-[90%] flex-shrink-0 flex-grow-0 basis-full;
 }
 
-.m-modal .fr-grid-row > div {
-  @apply w-[90%] max-w-[90%] flex-shrink-0 flex-grow-0 basis-full;
-}
-
-.s-modal .fr-grid-row > div {
-  @apply w-[90%] max-w-[90%] flex-shrink-0 flex-grow-0 basis-full;
-}
-
 .custom-modal .fr-modal__body {
   @apply rounded-[20px];
 }
@@ -361,14 +353,6 @@
   @apply h-full !max-h-[80vh] rounded-[20px];
 }
 
-.m-modal .fr-modal__body {
-  @apply h-[80vh] !max-h-[675px] rounded-[20px];
-}
-
-.s-modal .fr-modal__body {
-  @apply h-[80vh] !max-h-[605px] rounded-[20px];
-}
-
 .xl-modal.fr-modal::before {
   flex: none;
   height: unset;
@@ -381,26 +365,7 @@
   margin: 10vh 0 0;
 }
 
-.m-modal.fr-modal::before {
-  flex: none;
-  height: unset;
-  margin: 10vh 0 0;
-}
-
-.s-modal.fr-modal::before {
-  flex: none;
-  height: unset;
-  margin: 10vh 0 0;
-}
-
 .l-modal .fr-modal__content {
-  @apply mb-0;
-}
-.m-modal .fr-modal__content {
-  @apply mb-0;
-}
-
-.s-modal .fr-modal__content {
   @apply mb-0;
 }
 

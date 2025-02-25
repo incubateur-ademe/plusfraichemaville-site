@@ -26,7 +26,7 @@ import { Separator } from "@/src/components/common/separator";
 // eslint-disable-next-line max-len
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
 import { notifications } from "@/src/components/common/notifications";
-import { FicheDiagnosticRexCard } from "@/src/components/fiches-diagnostic-rex/fiche-diagnostic-rex-card";
+import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import { SplideController } from "../common/splide-controllers";
 
 export type FicheDiagnosticDescriptionModalState = {
@@ -165,8 +165,8 @@ export const FicheDiagnosticDescriptionModal = () => {
                 </div>
               </div>
 
-              {rex.length <= 1 ? (
-                <FicheDiagnosticRexCard rex={rex[0].attributes.retour_experience_diagnostic?.data} />
+              {!rex.length ? null : rex.length <= 1 ? (
+                <RetourExperienceDiagCard rex={rex[0].attributes.retour_experience_diagnostic?.data} />
               ) : (
                 <Splide
                   id="fiche-diagnostic-rex-modal-slider"
@@ -177,7 +177,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                   <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
                     {rex?.map((r, index) => (
                       <SplideSlide className="!mr-8 size-full" key={index} onClick={modal.close}>
-                        <FicheDiagnosticRexCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
+                        <RetourExperienceDiagCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
                       </SplideSlide>
                     ))}
                   </SplideTrack>

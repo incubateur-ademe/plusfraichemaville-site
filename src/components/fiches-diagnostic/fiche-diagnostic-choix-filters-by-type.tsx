@@ -10,11 +10,13 @@ const filters = {
       picto: "/images/fiches-diagnostic/icu.svg",
       filter: StrapiFicheDiagnosticEchelleSpatiale.Quartier,
       label: "ICU - grand quartier",
+      width: null,
     },
     {
-      picto: "/images/fiches-diagnostic/icu.svg",
+      picto: "/images/fiches-diagnostic/espace-public.svg",
       filter: StrapiFicheDiagnosticEchelleSpatiale.EspacePublic,
       label: "Espace public",
+      width: "w-12",
     },
   ],
 } as const;
@@ -64,7 +66,7 @@ export const FicheDiagnosticChoixFilterByType = ({
                   alt={f.label}
                   width={32}
                   height={32}
-                  className={clsx("mx-auto block w-20", isSelectedClass.image)}
+                  className={clsx("mx-auto block", isSelectedClass.image, f.width ?? "w-20")}
                 />
                 <small className={clsx("text-sm", isSelectedClass.text)}>{f.label}</small>
               </button>

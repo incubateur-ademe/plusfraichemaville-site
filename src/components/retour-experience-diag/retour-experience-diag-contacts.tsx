@@ -4,11 +4,11 @@ import { PropsWithChildren } from "react";
 import { CopyField } from "../common/copy-field";
 import { Contact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 
-type FicheDiagnosticRexContactsProps = {
+type RetourExperienceDiagContactsProps = {
   contacts: Contact[];
 };
 
-export const FicheDiagnosticRexContacts = ({ contacts }: FicheDiagnosticRexContactsProps) => {
+export const RetourExperienceDiagContacts = ({ contacts }: RetourExperienceDiagContactsProps) => {
   const collectivites = contacts.filter((contact) => contact.type_de_contact === "collectivite");
   const prestataires = contacts.filter((contact) => contact.type_de_contact !== "collectivite");
 
@@ -19,13 +19,13 @@ export const FicheDiagnosticRexContacts = ({ contacts }: FicheDiagnosticRexConta
   return (
     <div className="my-20">
       <h2 className="mb-5 text-[18px]">Contacts</h2>
-      <FicheDiagnosticRexContactBloc contacts={collectivites} label="Collectivité" className="mb-8" />
-      <FicheDiagnosticRexContactBloc contacts={prestataires} label="Prestataires" />
+      <RetourExperienceDiagContactBloc contacts={collectivites} label="Collectivité" className="mb-8" />
+      <RetourExperienceDiagContactBloc contacts={prestataires} label="Prestataires" />
     </div>
   );
 };
 
-export const FicheDiagnosticRexContactBlocBadge = ({ children }: PropsWithChildren) => {
+export const RetourExperienceDiagContactBlocBadge = ({ children }: PropsWithChildren) => {
   return (
     <div className="mb-3 border-b-[1px] border-b-dsfr-border-default-grey pb-2">
       <div
@@ -41,7 +41,7 @@ export const FicheDiagnosticRexContactBlocBadge = ({ children }: PropsWithChildr
   );
 };
 
-export const FicheDiagnosticRexContactBloc = ({
+export const RetourExperienceDiagContactBloc = ({
   contacts,
   label,
   className,
@@ -56,7 +56,7 @@ export const FicheDiagnosticRexContactBloc = ({
 
   return (
     <div className={className}>
-      <FicheDiagnosticRexContactBlocBadge>{label}</FicheDiagnosticRexContactBlocBadge>
+      <RetourExperienceDiagContactBlocBadge>{label}</RetourExperienceDiagContactBlocBadge>
       {contacts.map((contact, index) => (
         <div className="mb-4 flex flex-col border-b-[1px] border-b-dsfr-border-default-grey text-sm" key={index}>
           <span className="block">

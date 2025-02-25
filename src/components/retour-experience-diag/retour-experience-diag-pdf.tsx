@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import Link from "next/link";
 
-type FicheDiagnosticRexPdfProps = {
+type RetourExperienceDiagPdfProps = {
   pdf?: string;
 };
 
-export const FicheDiagnosticRexPdf = ({ pdf }: FicheDiagnosticRexPdfProps) => {
+export const RetourExperienceDiagPdf = ({ pdf }: RetourExperienceDiagPdfProps) => {
   if (!pdf) return null;
   return (
     <>

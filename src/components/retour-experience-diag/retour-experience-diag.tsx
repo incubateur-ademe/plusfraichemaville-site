@@ -3,19 +3,19 @@ import { getStrapiImageUrl } from "@/src/lib/strapi/strapiClient";
 import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-experience-diagnostic";
 import { ImageLoader } from "../common/image-loader";
 import CmsRichText from "../common/CmsRichText";
-import { FicheDiagnosticRexInformations } from "./fiche-diagnostic-rex-informations";
-import { FicheDiagnosticRexContacts } from "./fiche-diagnostic-rex-contacts";
+import { RetourExperienceDiagInformations } from "./retour-experience-diag-informations";
+import { RetourExperienceDiagContacts } from "./retour-experience-diag-contacts";
 import CustomDSFRQuote from "../common/CustomDSFRQuote";
-import { FicheDiagnosticRexCombinaison } from "./fiche-diagnostic-rex-combinaison";
-import { FicheDiagnosticRexPdf } from "./fiche-diagnostic-rex-pdf";
-import { FicheDiagnosticRexPrincipauxResultats } from "./fiche-diagnostic-rex-principaux-resultats";
+import { RetourExperienceDiagCombinaison } from "./retour-experience-diag-combinaison";
+import { RetourExperienceDiagPdf } from "./retour-experience-diag-pdf";
+import { RetourExperienceDiagPrincipauxResultats } from "./retour-experience-diag-principaux-resultats";
 import { PropsWithChildren } from "react";
 
-type FicheDiagnosticRexProps = {
+type RetourExperienceDiagProps = {
   rex: RetourExperienceDiagnostic;
 };
 
-export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
+export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
   const {
     lieu,
     titre,
@@ -41,18 +41,18 @@ export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
           alt={titre || "image titre"}
         />
         <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
-          <FicheDiagnosticRexLabel>
+          <RetourExperienceDiagLabel>
             <i className="ri-map-pin-line mr-2 before:!mb-1 before:!size-4"></i>
             {lieu}
-          </FicheDiagnosticRexLabel>
-          <FicheDiagnosticRexLabel>Diagnostics réalisés</FicheDiagnosticRexLabel>
+          </RetourExperienceDiagLabel>
+          <RetourExperienceDiagLabel>Diagnostics réalisés</RetourExperienceDiagLabel>
         </div>
       </div>
       <div className="fr-container flex flex-col gap-24 pt-6 lg:flex-row">
         <div className="w-full lg:w-72">
-          <FicheDiagnosticRexInformations rex={rex} />
-          <FicheDiagnosticRexContacts contacts={contacts} />
-          <FicheDiagnosticRexPdf pdf={rex.attributes.guide_pdf?.data.attributes.url} />
+          <RetourExperienceDiagInformations rex={rex} />
+          <RetourExperienceDiagContacts contacts={contacts} />
+          <RetourExperienceDiagPdf pdf={rex.attributes.guide_pdf?.data.attributes.url} />
         </div>
         <div>
           <h1 className="mb-5 text-[40px] font-bold leading-[48px]">{titre}</h1>
@@ -65,8 +65,8 @@ export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
           <h2 className="mb-4">Besoin</h2>
           <CmsRichText label={besoin} className="mb-20" />
           <h2 className="mb-8">Combinaison de méthodes de diagnostic utilisées</h2>
-          <FicheDiagnosticRexCombinaison lienRexDiagnostics={lien_rex_diagnostics.data} />
-          <FicheDiagnosticRexPrincipauxResultats content={resultats} images={resultats_images} />
+          <RetourExperienceDiagCombinaison lienRexDiagnostics={lien_rex_diagnostics.data} />
+          <RetourExperienceDiagPrincipauxResultats content={resultats} images={resultats_images} />
           <h2 className="mb-4">Points de vigilance</h2>
           <CmsRichText label={points_vigilance} className="mb-20" />
           <h2 className="mb-4">Et après ?</h2>
@@ -77,6 +77,6 @@ export const FicheDiagnosticRex = ({ rex }: FicheDiagnosticRexProps) => {
   );
 };
 
-export const FicheDiagnosticRexLabel = ({ children }: PropsWithChildren) => {
+export const RetourExperienceDiagLabel = ({ children }: PropsWithChildren) => {
   return <div className="rounded-lg bg-black/80 px-4 py-3 font-bold">{children}</div>;
 };
