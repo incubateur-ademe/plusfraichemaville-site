@@ -31,7 +31,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
 
   const image =
-    overrideUtiliteFiche === FicheDiagnosticUtilite.ConfortThermique
+    utiliteFicheProperties.type === FicheDiagnosticUtilite.ConfortThermique
       ? ficheDiagnostic.attributes.image_confort_thermique
       : ficheDiagnostic.attributes.image_diag_icu;
 
@@ -43,7 +43,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
         onClick={() => setCurrentFicheDiagnostic({ ficheDiagnostic, overrideUtiliteFiche })}
       >
         <div className={clsx("flex h-full flex-col rounded-[0.9375rem] pb-5", utiliteFicheProperties.colors.bgDark)}>
-          <div className="mx-auto mt-6 flex size-[139px] items-center justify-center rounded-full bg-white">
+          <div className="mx-auto mt-6 flex size-[8.5rem] items-center justify-center rounded-full bg-white">
             <Image
               src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}

@@ -2,15 +2,15 @@ import clsx from "clsx";
 import Image from "next/image";
 import { PropsWithChildren } from "react";
 import { CopyField } from "../common/copy-field";
-import { Contact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
+import { Contact, TypeDeContact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 
 type RetourExperienceDiagContactsProps = {
   contacts: Contact[];
 };
 
 export const RetourExperienceDiagContacts = ({ contacts }: RetourExperienceDiagContactsProps) => {
-  const collectivites = contacts.filter((contact) => contact.type_de_contact === "collectivite");
-  const prestataires = contacts.filter((contact) => contact.type_de_contact !== "collectivite");
+  const collectivites = contacts.filter((contact) => contact.type_de_contact === TypeDeContact.Collectivite);
+  const prestataires = contacts.filter((contact) => contact.type_de_contact !== TypeDeContact.Collectivite);
 
   if (collectivites.length === 0 && prestataires.length === 0) {
     return null;

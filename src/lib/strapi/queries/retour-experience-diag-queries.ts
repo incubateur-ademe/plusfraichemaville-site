@@ -8,7 +8,7 @@ import {
   IMAGE_WITH_CAPTION_FRAGMENT,
 } from "@/src/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
-import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/src/lib/strapi/helpers/strapiArrayUtils";
+import { safeReturnStrapiEntity } from "@/src/lib/strapi/helpers/strapiArrayUtils";
 
 import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 import { RetourExperienceDiagnostic } from "../types/api/retour-experience-diagnostic";
@@ -62,6 +62,7 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
                       titre
                       nom_scientifique
                       effets_attendus 
+                      slug
                       image_confort_thermique {
                         ...ImageInfo
                       }
@@ -89,49 +90,10 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
     }
   }`;
 
-const GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA = (strapiFilter: StrapiFilter) => ` 
-  ${STRAPI_IMAGE_FRAGMENT}
-  query {
-    retourExperienceDiagnostics ${strapiFilter.wholeFilterString()} {
-      data {
-        id
-        attributes {
-          titre
-          lieu
-          description
-          slug
-          image_principale {
-            ...ImageInfo
-          }
-          contacts {
-            ...ContactInfo
-          }
-        }
-      }
-    }
-}`;
-
 export const getRetourExperienceDiagBySlug = async (slug: string): Promise<RetourExperienceDiagnostic | null> => {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA(filter), { tag: `get-rex-diag-by-slug-${slug}` })
   )?.retourExperienceDiagnostics as APIResponseCollection<RetourExperienceDiagnostic>;
   return safeReturnStrapiEntity(apiResponse);
-};
-
-export const getRetoursExperienceDiagCard = async (): Promise<RetourExperienceDiagnostic[]> => {
-  const filter = new StrapiFilter(true, [], { attribute: "createdAt", order: "desc" });
-  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA(filter), { tag: "get-rex-diag" }))
-    ?.retourExperienceDiagnostics as APIResponseCollection<RetourExperienceDiagnostic>;
-  return safeReturnStrapiEntities(apiResponse);
-};
-
-export const getAllCompleteRetoursExperienceDiag = async (): Promise<RetourExperienceDiagnostic[]> => {
-  const filter = new StrapiFilter(true, [], { attribute: "createdAt", order: "desc" });
-  const apiResponse = (
-    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA(filter), {
-      tag: "get-all-complete-retour-experience-diag",
-    })
-  )?.retourExperienceDiagnostics as APIResponseCollection<RetourExperienceDiagnostic>;
-  return safeReturnStrapiEntities(apiResponse);
 };

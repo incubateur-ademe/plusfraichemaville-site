@@ -1,12 +1,14 @@
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { LienRexDiagnostic } from "@/src/lib/strapi/types/api/lien-rex-diagnostic";
 import Image from "next/image";
-import { getFicheDiagUtilite, isFicheDiagICU } from "../fiches-diagnostic/helpers";
+import { getFicheDiagUtilite } from "../fiches-diagnostic/helpers";
 import clsx from "clsx";
 import CmsRichText from "../common/CmsRichText";
 import { TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
+import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
+import { getFicheDiagImage } from "./helpers";
 
 type RetourExperienceDiagCombinaisonProps = {
   lienRexDiagnostics: LienRexDiagnostic[];
@@ -20,9 +22,9 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
         const ficheDiagData = lienRexDiagnostic.attributes.fiche_diagnostic.data;
         const utilite = getFicheDiagUtilite(ficheDiagData);
 
-        const { image_diag_icu, image_confort_thermique, titre, nom_scientifique, slug } = ficheDiagData.attributes;
-        const isICU = isFicheDiagICU(ficheDiagData);
-        const image = isICU ? image_diag_icu : image_confort_thermique;
+        const { titre, nom_scientifique, slug } = ficheDiagData.attributes;
+        const isICU = utilite.type === FicheDiagnosticUtilite.DiminutionICU;
+        const image = getFicheDiagImage(ficheDiagData);
 
         return (
           <div className="mb-20 flex flex-col gap-10 md:flex-row" key={lienRexDiagnostic.id}>

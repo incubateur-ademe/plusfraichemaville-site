@@ -89,7 +89,7 @@ export const FicheDiagnosticDescriptionModal = () => {
           utiliteFiche?.type === FicheDiagnosticUtilite.ConfortThermique ? "confort-thermique-modal" : "icu-modal",
         )}
       >
-        <div className="justif flex gap-7 pb-8">
+        <div className="flex gap-7 pb-8">
           {ficheDiagnostic && utiliteFiche && (
             <div className="flex w-full flex-col gap-8 lg:flex-row">
               <div className={clsx("relative h-fit w-full max-w-[55%] rounded-2xl p-8", utiliteFiche.colors.bgDark)}>

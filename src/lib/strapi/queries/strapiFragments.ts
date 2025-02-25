@@ -1,3 +1,5 @@
+import { ficheDiagnosticRetourExperienceDiagnosticFilter } from "./commonStrapiFilters";
+
 export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo on FicheSolutionEntity {
   id
     attributes {
@@ -65,7 +67,7 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
         data {
           id
           attributes {
-            retour_experience_diagnostic {
+            retour_experience_diagnostic ${ficheDiagnosticRetourExperienceDiagnosticFilter()} {
               data {
                   attributes {
                     titre

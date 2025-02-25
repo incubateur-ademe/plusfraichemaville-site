@@ -10,6 +10,7 @@ import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "./helpers";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getEchelleSpatialeLabel } from "@/src/helpers/echelle-spatiale-diagnostic";
 import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
+import { getFicheDiagImage } from "../retour-experience-diag/helpers";
 
 export const FicheDiagnosticHeader = ({
   ficheDiagnostic,
@@ -29,8 +30,7 @@ export const FicheDiagnosticHeader = ({
     ? getFicheDiagUtiliteProperties(overrideUtiliteFiche)
     : getFicheDiagUtilite(ficheDiagnostic);
 
-  const isICU = utiliteFiche.type === FicheDiagnosticUtilite.DiminutionICU;
-  const image = isICU ? attributes.image_diag_icu : attributes.image_confort_thermique;
+  const image = getFicheDiagImage(ficheDiagnostic);
 
   return (
     <div className={utiliteFiche.colors.bgLight} id="fiche-diag-header">
