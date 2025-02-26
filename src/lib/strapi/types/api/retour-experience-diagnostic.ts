@@ -2,19 +2,18 @@
 
 import { Media } from "../common/Media";
 import { Citation } from "../components/common/Citation";
-
+import { LienRexDiagnostic } from "./lien-rex-diagnostic";
 import { Contact } from "../components/retour-experience/Contact";
 import { ImageWithCaption } from "../components/common/ImageWithCaption";
 import { Media_Plain } from "../common/Media";
 import { Citation_Plain } from "../components/common/Citation";
-
+import { LienRexDiagnostic_Plain } from "./lien-rex-diagnostic";
 import { Contact_Plain } from "../components/retour-experience/Contact";
 import { ImageWithCaption_Plain } from "../components/common/ImageWithCaption";
 import { Citation_NoRelations } from "../components/common/Citation";
 import { Contact_NoRelations } from "../components/retour-experience/Contact";
 import { ImageWithCaption_NoRelations } from "../components/common/ImageWithCaption";
 import { AdminPanelRelationPropertyModification } from "../common/AdminPanelRelationPropertyModification";
-import { LienRexDiagnostic, LienRexDiagnostic_Plain } from "./lien-rex-diagnostic";
 
 export interface RetourExperienceDiagnostic {
   id: number;
@@ -37,7 +36,6 @@ export interface RetourExperienceDiagnostic {
     resultats?: any;
     points_vigilance?: any;
     apres?: any;
-    partenaires?: any;
     lien_rex_diagnostics: { data: LienRexDiagnostic[] };
     slug: string;
     contacts: Contact[];
@@ -66,7 +64,6 @@ export interface RetourExperienceDiagnostic_Plain {
   resultats?: any;
   points_vigilance?: any;
   apres?: any;
-  partenaires?: any;
   lien_rex_diagnostics: LienRexDiagnostic_Plain[];
   slug: string;
   contacts: Contact_Plain[];
@@ -95,7 +92,6 @@ export interface RetourExperienceDiagnostic_NoRelations {
   resultats?: any;
   points_vigilance?: any;
   apres?: any;
-  partenaires?: any;
   lien_rex_diagnostics: number[];
   slug: string;
   contacts: Contact_NoRelations[];
@@ -124,7 +120,6 @@ export interface RetourExperienceDiagnostic_AdminPanelLifeCycle {
   resultats?: any;
   points_vigilance?: any;
   apres?: any;
-  partenaires?: any;
   lien_rex_diagnostics: AdminPanelRelationPropertyModification<LienRexDiagnostic_Plain>;
   slug: string;
   contacts: Contact_Plain[];
