@@ -1,5 +1,8 @@
-import { EchelleSpatiale, FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
-import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
+import {
+  FicheDiagnosticUtilite,
+  StrapiFicheDiagnosticEchelleSpatiale,
+} from "@/src/lib/strapi/types/strapi-custom-types";
 
 export const makeFicheDiagnosticUrlApi = (id: string | number) => `/api/get-fiche-diagnostic?ficheDiagnosticId=${id}`;
 
@@ -60,8 +63,8 @@ export const getFicheDiagUtiliteProperties = (utilite?: FicheDiagnosticUtilite):
   utilite === FicheDiagnosticUtilite.DiminutionICU ? UTILITE_FICHE_DIAG_ICU : UTILITE_FICHE_DIAG_CONFORT_THERMIQUE;
 
 const ALL_ECHELLES_SPATIALES = [
-  { label: "Espace public", code: EchelleSpatiale.EspacePublic },
-  { label: "Quartier", code: EchelleSpatiale.Quartier },
+  { label: "Espace public", code: StrapiFicheDiagnosticEchelleSpatiale.EspacePublic },
+  { label: "Quartier", code: StrapiFicheDiagnosticEchelleSpatiale.Quartier },
 ];
 
 export const getEchelleSpatialeFromCode = (echelleSpatialeCode: string) =>
