@@ -50,12 +50,12 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
         <div
           className={clsx(
             "sticky bottom-0 top-[unset] z-50 mb-8 flex flex-none shrink-0 flex-col-reverse bg-white",
-            "md:bottom-[unset] md:top-12 md:mb-0 md:h-96 md:w-56 md:flex-col md:pt-12",
+            "pb-4 md:bottom-[unset] md:top-12 md:mb-0 md:h-full md:w-56 md:flex-col md:pt-12",
           )}
         >
           <FicheDiagnosticClientBloc blocs={blocs} />
-          <ButtonShareCurrentUrl className={"mb-2 block md:mb-0 [&>*]:mb-2"} />
-          <div className="my-4 md:mb-0 md:mt-4">
+          <ButtonShareCurrentUrl className={"mb-2 block pl-4 md:mb-0 [&>*]:mb-2"} />
+          <div className="my-4 pl-4 md:mb-0 md:mt-4">
             <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel />
           </div>
         </div>

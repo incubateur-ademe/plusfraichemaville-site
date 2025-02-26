@@ -1,3 +1,5 @@
+import { ficheDiagnosticRetourExperienceDiagnosticFilter } from "./commonStrapiFilters";
+
 export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo on FicheSolutionEntity {
   id
     attributes {
@@ -45,6 +47,12 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
       image_principale {
         ...ImageInfo
       }
+      image_confort_thermique {
+        ...ImageInfo
+      }
+      image_diag_icu {
+        ...ImageInfo
+      }
       methode
       echelle
       nom_scientifique
@@ -55,6 +63,29 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
       }
       type_livrables
       echelle_spatiale
+      lien_rex_diagnostics {
+        data {
+          id
+          attributes {
+            retour_experience_diagnostic ${ficheDiagnosticRetourExperienceDiagnosticFilter()} {
+              data {
+                  attributes {
+                    titre
+                    lieu
+                    description
+                    slug
+                    image_principale {
+                      ...ImageInfo
+                    }
+                    contacts {
+                      ...ContactInfo
+                    }
+                  }
+              }
+            }
+          }
+        }
+      }
     }
 }`;
 
@@ -114,4 +145,27 @@ export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceWithCon
         }
       }
     }
+}`;
+
+export const CITATION_FRAGMENT = `fragment CitationInfo on ComponentCommonCitation {
+  auteur
+  texte
+}`;
+
+export const CONTACT_FRAGMENT = `fragment ContactInfo on ComponentRetourExperienceContact {
+  id
+  label
+  email
+  telephone
+  site_internet
+  type_de_contact
+  sous_type_de_contact
+  nom
+}`;
+
+export const IMAGE_WITH_CAPTION_FRAGMENT = `fragment ImageWithCaptionInfo on ComponentCommonImageWithCaption {
+  image {
+    ...ImageInfo
+  }
+  caption
 }`;

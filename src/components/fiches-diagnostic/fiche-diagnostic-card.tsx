@@ -30,6 +30,11 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
 
+  const image =
+    utiliteFicheProperties.type === FicheDiagnosticUtilite.ConfortThermique
+      ? ficheDiagnostic.attributes.image_confort_thermique
+      : ficheDiagnostic.attributes.image_diag_icu;
+
   return (
     <div className={clsx("pfmv-card relative h-auto w-72 cursor-pointer")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type={TypeFiche.diagnostic} classNameButton="absolute top-3 right-4" />
@@ -38,15 +43,16 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
         onClick={() => setCurrentFicheDiagnostic({ ficheDiagnostic, overrideUtiliteFiche })}
       >
         <div className={clsx("flex h-full flex-col rounded-[0.9375rem] pb-5", utiliteFicheProperties.colors.bgDark)}>
-          <div className="relative block h-40 w-72 overflow-hidden">
+          <div className="mx-auto mt-6 flex size-[8.5rem] items-center justify-center rounded-full bg-white">
             <Image
-              fill
-              sizes="(max-width: 768px) 80vw, 33vw"
-              src={getStrapiImageUrl(ficheDiagnostic.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+              src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}
-              className="z-0 h-full w-full rounded-t-2xl object-cover"
+              width={90}
+              height={90}
+              className="object-contain"
             />
           </div>
+
           <div className="flex h-fit grow flex-col justify-between px-6 pb-2 pt-5">
             <div className="text-xl font-bold leading-tight">{ficheDiagnostic.attributes.titre}</div>
             <div className={"mb-11 mt-4 text-sm italic"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
