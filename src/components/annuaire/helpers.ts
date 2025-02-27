@@ -64,6 +64,9 @@ export const contactsTypeMap: AnnuaireContactTypeMap[] = [
   { code: TypeDeContact.Groupements, label: "Groupement" },
 ] as const;
 
+export const getContactType = (code: AnnuaireContactTypeMap["code"]) =>
+  contactsTypeMap.find((item) => item.code === code);
+
 export type ContactTypeKeys = (typeof contactsTypeMap)[number]["code"];
 
 export const getContactTypeLabelByCode = (code: ContactTypeKeys) =>
