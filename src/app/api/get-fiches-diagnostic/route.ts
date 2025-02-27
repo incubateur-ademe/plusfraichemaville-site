@@ -1,4 +1,4 @@
-import { getFicheDiagnosticById, getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
+import { getFicheDiagnosticById } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {

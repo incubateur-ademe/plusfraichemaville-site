@@ -67,7 +67,7 @@ export const FichesDiagnosticsProjetSelected = () => {
       </div>
 
       <h2 className="mb-9 text-2xl font-bold">
-        Ces collectivités partagent leur expérience sur l'utilisation de ces méthodes de diagnostic
+        Ces collectivités partagent leur expérience sur {"l'utilisation"} de ces méthodes de diagnostic
       </h2>
 
       {isLoading && savedFichesDiagnostic ? (

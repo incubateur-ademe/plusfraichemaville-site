@@ -24,7 +24,12 @@ export const RetourExperienceDiagCardPicto = ({ ficheDiagnostic }: RetourExperie
         width={40}
         height={40}
       />
-      <div className="absolute left-0 top-full z-10 hidden w-64 -translate-y-1/2 rounded-md bg-black/70 px-5 py-1 text-center text-sm font-bold text-white group-hover:block">
+      <div
+        className={clsx(
+          "absolute left-0 top-full z-10 hidden w-64 -translate-y-1/2 rounded-md",
+          "bg-black/70 px-5 py-1 text-center text-sm font-bold text-white group-hover:block",
+        )}
+      >
         {nomScientifique ?? "nom scientifique"}
         {ficheDiagnostic.id}
       </div>
