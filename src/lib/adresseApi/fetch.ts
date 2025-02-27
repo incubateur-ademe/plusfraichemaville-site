@@ -22,7 +22,7 @@ export const fetchAddressFromBanApi = async (
   );
   const result = (await response.json()) as BanAPIResponse;
   if ("code" in result) {
-    throw new Error(`${result.message} ${result?.detail}`);
+    throw new Error(`${result.message} ${result.detail}`);
   }
   return result.features;
 };
