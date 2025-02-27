@@ -2,26 +2,29 @@ import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-ex
 import { ImageLoader } from "../common/image-loader";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { RetourExperienceDiagLabel } from "./retour-experience-diag";
-import { Contact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
+import { Contact, TypeDeContact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 import { CopyField } from "../common/copy-field";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
+import clsx from "clsx";
+import { RetourExperienceDiagCardPicto } from "./retour-experience-diag-card-picto";
 
 type RetourExperienceDiagCardProps = {
   rex?: RetourExperienceDiagnostic;
+  className?: string;
 };
 
-export const RetourExperienceDiagCard = ({ rex }: RetourExperienceDiagCardProps) => {
+export const RetourExperienceDiagCard = ({ rex, className }: RetourExperienceDiagCardProps) => {
   if (!rex) return null;
 
   const { titre, image_principale, contacts, slug, lieu } = rex.attributes;
 
-  const collectivite = contacts.filter((contact) => contact.type_de_contact === "collectivite")[0];
-  const prestataire = contacts.filter((contact) => contact.type_de_contact !== "collectivite")[0];
+  const collectivite = contacts.filter((contact) => contact.type_de_contact === TypeDeContact.Collectivite)[0];
+  const prestataire = contacts.filter((contact) => contact.type_de_contact !== TypeDeContact.Collectivite)[0];
 
   return (
     <GenericFicheLink href={`/fiches-diagnostic/retour-experience/${slug}`} className="!bg-none">
-      <div className="pfmv-card max-w-[28.875rem] overflow-hidden rounded-2xl bg-white">
-        <div className="relative mb-7">
+      <div className={clsx("pfmv-card max-w-[28.875rem] overflow-hidden rounded-2xl bg-white", className)}>
+        <div className="relative mb-5">
           <ImageLoader
             width={462}
             height={267}
@@ -36,8 +39,22 @@ export const RetourExperienceDiagCard = ({ rex }: RetourExperienceDiagCardProps)
             </RetourExperienceDiagLabel>
           </div>
         </div>
+
         <div className="px-5">
-          <h2 className="mb-7 text-[22px] leading-7">{titre}</h2>
+          <h2 className="mb-5 text-[22px] leading-7">{titre}</h2>
+          {rex.attributes.lien_rex_diagnostics && (
+            <div className="mb-7 flex items-center gap-2">
+              {rex.attributes.lien_rex_diagnostics.data.map(
+                (lienRex, index) =>
+                  lienRex.attributes.fiche_diagnostic && (
+                    <RetourExperienceDiagCardPicto
+                      ficheDiagnostic={lienRex.attributes.fiche_diagnostic.data}
+                      key={index}
+                    />
+                  ),
+              )}
+            </div>
+          )}
           <ContactSection title="Contact de la collectivité" contact={collectivite} />
           <ContactSection title="Contact du prestataire" contact={prestataire} />
         </div>
