@@ -72,3 +72,6 @@ export const GET_PUBLIC_PROJET_BY_ID = (projetId: number) => `/api/get-public-pr
 export const GET_REX_WITH_CONTACTS_BY_ID = (rexId: number) => `/api/get-rex-with-contacts-by-id?rexId=${rexId}`;
 
 export const GET_REX_BY_SLUG = (rexSlug: string) => `/api/get-rex-by-slug?rexSlug=${rexSlug}`;
+
+export const GET_FICHE_DIAGNOSTIC_BY_IDS = (ficheDiagnosticIds: number[]) =>
+  `/api/get-fiches-diagnostic?ficheDiagnosticIds=${JSON.stringify(ficheDiagnosticIds)}`;

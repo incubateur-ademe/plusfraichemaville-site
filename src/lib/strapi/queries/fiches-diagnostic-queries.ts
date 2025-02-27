@@ -7,6 +7,7 @@ import { CONTACT_FRAGMENT, FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT, STRAPI_IMAGE_FRA
 import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
+// TODO: vérifier le premier appel lien rex diag avec les fiches diag
 export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} ${CONTACT_FRAGMENT} query {
@@ -62,20 +63,55 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
           data {
             id
             attributes {
-              retour_experience_diagnostic {
+              fiche_diagnostic {
                 data {
-                    attributes {
-                      titre
-                      lieu
-                      description
-                      slug
-                      image_principale {
+                  id
+                  attributes {
+                    nom_scientifique
+                    image_confort_thermique {
                         ...ImageInfo
                       }
-                      contacts {
-                        ...ContactInfo
+                    image_diag_icu {
+                      ...ImageInfo
+                    }
+                  }
+                }
+              }
+              retour_experience_diagnostic {
+                data {
+                  id
+                  attributes {
+                    lien_rex_diagnostics {
+                      data {
+                      attributes  {
+                          fiche_diagnostic {
+                            data {
+                              id
+                              attributes {
+                                nom_scientifique
+                                image_confort_thermique {
+                                    ...ImageInfo
+                                  }
+                                  image_diag_icu {
+                                    ...ImageInfo
+                                  }
+                              }
+                            }
+                          } 
+                        }                  
                       }
                     }
+                    titre
+                    lieu
+                    description
+                    slug
+                    image_principale {
+                      ...ImageInfo
+                    }
+                    contacts {
+                      ...ContactInfo
+                    }
+                  }
                 }
               }
             }

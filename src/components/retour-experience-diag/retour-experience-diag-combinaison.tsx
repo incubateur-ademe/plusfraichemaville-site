@@ -42,21 +42,23 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
             <div>
               <h2 className="mb-3 text-[22px] font-bold">{titre}</h2>
               <CmsRichText className="mb-5 leading-6" label={lienRexDiagnostic.attributes.description} />
-              <GenericFicheLink href={`/fiches-diagnostic/${slug}`}>
-                <div className="pfmv-card relative max-w-lg cursor-pointer p-5">
-                  <div className="mb-2 flex items-center gap-3 text-sm">
-                    <div className={clsx("size-[18px] rounded-full", utilite.colors.bgLight)}></div>
-                    {isICU ? "Mesure d'ICU" : "Évaluation de confort thermique"}
+              <div className="relative max-w-lg">
+                <GenericFicheLink href={`/fiches-diagnostic/${slug}`}>
+                  <div className="pfmv-card max-w-lg cursor-pointer p-5">
+                    <div className="mb-2 flex items-center gap-3 text-sm">
+                      <div className={clsx("size-[18px] rounded-full", utilite.colors.bgLight)}></div>
+                      {isICU ? "Mesure d'ICU" : "Évaluation de confort thermique"}
+                    </div>
+                    <h3 className="mb-1 text-base">{titre}</h3>
+                    <i>{nom_scientifique}</i>
                   </div>
-                  <h3 className="mb-1 text-base">{titre}</h3>
-                  <i>{nom_scientifique}</i>
-                  <GenericSaveFiche
-                    id={ficheDiagData.id}
-                    type={TypeFiche.diagnostic}
-                    classNameButton="absolute top-3 right-4"
-                  />
-                </div>
-              </GenericFicheLink>
+                </GenericFicheLink>
+                <GenericSaveFiche
+                  id={ficheDiagData.id}
+                  type={TypeFiche.diagnostic}
+                  classNameButton="absolute top-3 right-4"
+                />
+              </div>
             </div>
           </div>
         );
