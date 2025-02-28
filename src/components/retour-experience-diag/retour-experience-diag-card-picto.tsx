@@ -30,8 +30,7 @@ export const RetourExperienceDiagCardPicto = ({ ficheDiagnostic }: RetourExperie
           "bg-black/70 px-5 py-1 text-center text-sm font-bold text-white group-hover:block",
         )}
       >
-        {nomScientifique ?? "nom scientifique"}
-        {ficheDiagnostic.id}
+        {nomScientifique}
       </div>
     </div>
   );

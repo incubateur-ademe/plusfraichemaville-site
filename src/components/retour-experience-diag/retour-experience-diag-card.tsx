@@ -45,11 +45,11 @@ export const RetourExperienceDiagCard = ({ rex, className }: RetourExperienceDia
           {rex.attributes.lien_rex_diagnostics && (
             <div className="mb-7 flex items-center gap-2">
               {rex.attributes.lien_rex_diagnostics.data.map(
-                (lienRex, index) =>
+                (lienRex) =>
                   lienRex.attributes.fiche_diagnostic && (
                     <RetourExperienceDiagCardPicto
                       ficheDiagnostic={lienRex.attributes.fiche_diagnostic.data}
-                      key={index}
+                      key={lienRex.attributes.fiche_diagnostic.data.id}
                     />
                   ),
               )}
