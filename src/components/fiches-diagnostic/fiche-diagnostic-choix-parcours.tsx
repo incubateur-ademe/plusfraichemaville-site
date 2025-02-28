@@ -23,9 +23,14 @@ export const FicheDiagnosticChoixParcours = () => {
 
   return (
     <div>
-      <Link className="pfmv-card flex h-80 w-72 flex-col md:ml-0" href={urlParcoursPrestation}>
-        {"Parcours choix d'une prestation"}
-      </Link>
+      <div className="mb-8 flex justify-between px-28">
+        <div className="pfmv-card flex h-80 w-96 flex-col p-8 text-xl md:ml-0">
+          {"Je fais un état des lieux thermique et environnemental de l’espace à rafraîchir"}
+        </div>
+        <Link className="pfmv-card flex h-80 w-96 flex-col p-8  text-xl md:ml-0" href={urlParcoursPrestation}>
+          {"Je choisis les bonnes prestations de diagnostic\n" + "de surchauffe"}
+        </Link>
+      </div>
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
         className="fr-btn fr-btn--secondary rounded-3xl"

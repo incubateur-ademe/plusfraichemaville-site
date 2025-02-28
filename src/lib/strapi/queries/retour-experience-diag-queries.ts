@@ -49,7 +49,6 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
           }
           points_vigilance
           apres
-          partenaires
           lien_rex_diagnostics {
             data {
               id
