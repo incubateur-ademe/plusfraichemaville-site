@@ -55,10 +55,10 @@ export const FicheDiagnosticHeader = ({
             <span className="italic md:text-xl">{attributes.nom_scientifique ?? "Non renseigné"}</span>
             <Separator className={clsx("my-5 !h-[1px] !opacity-50", utiliteFiche.colors.separator)} />
             {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
-              <ul className="text-sky-400">
+              <ul className="">
                 {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (
-                  <li key={utilite.description} className="relative !mb-0 font-bold leading-[0]">
-                    <span className={clsx(utiliteFiche.colors.pictoFaded, "mr-3 text-xl leading-[1.25rem]")}>▸</span>
+                  <li key={utilite.description} className="relative !mb-0">
+                    <span className={clsx(utiliteFiche.colors.pictoFaded, "mr-3 text-xl")}>▸</span>
                     {utilite?.description}
                   </li>
                 ))}

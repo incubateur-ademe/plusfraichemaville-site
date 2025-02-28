@@ -1,10 +1,7 @@
 "use client";
 
-import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
 import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
-import { isFicheDiagConfortThermique } from "./helpers";
-import { isFicheDiagICU } from "./helpers";
 
 import { useState } from "react";
 import { FicheDiagnosticChoixFilterByType, FicheDiagnosticTypeFilters } from "./fiche-diagnostic-choix-filters-by-type";
@@ -28,9 +25,6 @@ export const FicheDiagnosticChoixFilters = ({ allFichesDiagnostics }: { allFiche
     );
   });
 
-  const icuFichesDiagnostics = filteredFichesDiagnostics.filter(isFicheDiagICU);
-  const confortThermiqueFichesDiagnostics = filteredFichesDiagnostics.filter(isFicheDiagConfortThermique);
-
   return (
     <>
       <h2 className="mb-5 text-pfmv-navy">Les méthodes de diagnostic existantes</h2>
@@ -42,20 +36,9 @@ export const FicheDiagnosticChoixFilters = ({ allFichesDiagnostics }: { allFiche
           selectedFilters={selectedFilters}
         />
       </div>
-      <div className="flex gap-6 pb-10">
-        {confortThermiqueFichesDiagnostics.map((fd) => (
-          <FicheDiagnosticCard
-            overrideUtiliteFiche={FicheDiagnosticUtilite.ConfortThermique}
-            key={fd.id}
-            ficheDiagnostic={fd}
-          />
-        ))}
-        {icuFichesDiagnostics.map((fd) => (
-          <FicheDiagnosticCard
-            overrideUtiliteFiche={FicheDiagnosticUtilite.DiminutionICU}
-            key={fd.id}
-            ficheDiagnostic={fd}
-          />
+      <div className="flex flex-wrap gap-6 pb-10">
+        {filteredFichesDiagnostics.map((fd) => (
+          <FicheDiagnosticCard key={fd.id} ficheDiagnostic={fd} />
         ))}
       </div>
     </>

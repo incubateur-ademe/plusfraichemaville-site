@@ -26,7 +26,7 @@ export const RetourExperienceDiagPrincipauxResultats = ({
 
   return (
     <div className="mb-20">
-      <h2 className="mb-4 text-2xl">Principaux résultats</h2>
+      <h2 className="mb-4">Principaux résultats</h2>
       <div className="flex gap-12">
         <CmsRichText label={content} />
         <div className="relative w-96 shrink-0">

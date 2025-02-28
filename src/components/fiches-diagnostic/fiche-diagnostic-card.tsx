@@ -47,9 +47,8 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: F
             <Image
               src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}
-              width={90}
-              height={90}
-              className="object-contain"
+              width={140}
+              height={140}
             />
           </div>
 

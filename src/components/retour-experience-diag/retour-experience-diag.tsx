@@ -62,7 +62,7 @@ export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
             citations.map((citation) => (
               <CustomDSFRQuote key={citation.auteur} citation={citation} className="mb-11" />
             ))}
-          <h2 className="mb-4">Besoin</h2>
+          <h2 className="mb-4 mt-20">Besoin</h2>
           <CmsRichText label={besoin} className="mb-20" />
           <h2 className="mb-8">Combinaison de méthodes de diagnostic utilisées</h2>
           <RetourExperienceDiagCombinaison lienRexDiagnostics={lien_rex_diagnostics.data} />
