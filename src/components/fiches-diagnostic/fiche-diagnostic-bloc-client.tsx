@@ -2,30 +2,28 @@
 
 import { FicheDiagnosticBloc } from "./fiche-diagnostic-blocs";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SideMenu } from "@codegouvfr/react-dsfr/SideMenu";
 
 export const FicheDiagnosticClientBloc = ({ blocs }: { blocs: FicheDiagnosticBloc[] }) => {
   const pathname = usePathname();
-  const [activeTab, setActiveTab] = useState<string>("");
-
-  useEffect(() => {
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace("#", "");
-      setActiveTab(hash);
-    };
-
-    handleHashChange();
-
-    window.addEventListener("hashchange", handleHashChange);
-    return () => window.removeEventListener("hashchange", handleHashChange);
-  }, []);
+  const [activeTab, setActiveTab] = useState<string>(blocs[0]?.contentId);
 
   const items = blocs.map((bloc) => ({
     isActive: activeTab === bloc.contentId,
     linkProps: {
       href: `${pathname}#${bloc.contentId}`,
-      onClick: () => setActiveTab(bloc.contentId),
+      onClick: (e: any) => {
+        setActiveTab(bloc.contentId);
+        const element = document.getElementById(bloc.contentId);
+        if (element) {
+          e.preventDefault();
+          element.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      },
     },
     text: bloc.label,
   }));
