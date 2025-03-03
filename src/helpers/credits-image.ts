@@ -28,6 +28,6 @@ export const getCreditsImageForFicheDiagnostic = (ficheAttributes: FicheDiagnost
 };
 
 const addImageCreditToSet = (creditsSet: Set<string>, image?: { data: Media } | null) => {
-  const imageCredit = image?.data.attributes?.caption;
+  const imageCredit = image?.data?.attributes?.caption;
   if (imageCredit) creditsSet.add(imageCredit);
 };
