@@ -3,6 +3,8 @@ import Image from "next/image";
 import { PropsWithChildren } from "react";
 import { CopyField } from "../common/copy-field";
 import { Contact, TypeDeContact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
+import { getContactType } from "../annuaire/helpers";
+import groupBy from "lodash/groupBy";
 
 type RetourExperienceDiagContactsProps = {
   contacts: Contact[];
@@ -10,7 +12,12 @@ type RetourExperienceDiagContactsProps = {
 
 export const RetourExperienceDiagContacts = ({ contacts }: RetourExperienceDiagContactsProps) => {
   const collectivites = contacts.filter((contact) => contact.type_de_contact === TypeDeContact.Collectivite);
+
   const prestataires = contacts.filter((contact) => contact.type_de_contact !== TypeDeContact.Collectivite);
+  const groupedPrestataires = Object.entries(groupBy(prestataires, "type_de_contact")).map(([type, prestas]) => ({
+    type,
+    prestas,
+  }));
 
   if (collectivites.length === 0 && prestataires.length === 0) {
     return null;
@@ -19,22 +26,39 @@ export const RetourExperienceDiagContacts = ({ contacts }: RetourExperienceDiagC
   return (
     <div className="my-20">
       <h2 className="mb-5 text-[18px]">Contacts</h2>
-      <RetourExperienceDiagContactBloc contacts={collectivites} label="Collectivité" className="mb-8" />
-      <RetourExperienceDiagContactBloc contacts={prestataires} label="Prestataires" />
+      <RetourExperienceDiagContactBloc contacts={collectivites} typeDeContact={TypeDeContact.Collectivite} />
+      {groupedPrestataires.map((presta) => (
+        <RetourExperienceDiagContactBloc
+          key={presta.type}
+          contacts={presta.prestas}
+          typeDeContact={presta.type as TypeDeContact}
+        />
+      ))}
     </div>
   );
 };
 
-export const RetourExperienceDiagContactBlocBadge = ({ children }: PropsWithChildren) => {
+export const RetourExperienceDiagContactBlocBadge = ({
+  children,
+  withBadge,
+}: PropsWithChildren<{ withBadge?: boolean }>) => {
   return (
-    <div className="mb-3 border-b-[1px] border-b-dsfr-border-default-grey pb-2">
+    <div className="mb-3 h-[2.25rem] border-b-[1px] border-b-dsfr-border-default-grey pb-2 leading-none">
       <div
         className={clsx(
-          "fr-badge fr-badge--info fr-badge--sm fr-badge--no-icon !max-w-[116px] !text-pfmv-navy",
+          "fr-badge fr-badge--info fr-badge--sm fr-badge--no-icon !max-w-[13.125rem] !text-pfmv-navy",
           "!bg-dsfr-background-open-blue-france",
         )}
       >
-        <Image src="/images/annuaire/annuaire-label-collectivite.svg" className="mr-1" width={16} height={16} alt="" />
+        {withBadge && (
+          <Image
+            src="/images/annuaire/annuaire-label-collectivite.svg"
+            className="mr-1"
+            width={16}
+            height={16}
+            alt="Badge type de contact"
+          />
+        )}
         {children}
       </div>
     </div>
@@ -43,11 +67,11 @@ export const RetourExperienceDiagContactBlocBadge = ({ children }: PropsWithChil
 
 export const RetourExperienceDiagContactBloc = ({
   contacts,
-  label,
+  typeDeContact,
   className,
 }: {
   contacts: Contact[];
-  label: string;
+  typeDeContact: TypeDeContact;
   className?: string;
 }) => {
   if (contacts.length === 0) {
@@ -56,7 +80,9 @@ export const RetourExperienceDiagContactBloc = ({
 
   return (
     <div className={className}>
-      <RetourExperienceDiagContactBlocBadge>{label}</RetourExperienceDiagContactBlocBadge>
+      <RetourExperienceDiagContactBlocBadge withBadge={typeDeContact === TypeDeContact.Collectivite}>
+        {getContactType(typeDeContact)?.label}
+      </RetourExperienceDiagContactBlocBadge>
       {contacts.map((contact, index) => (
         <div className="mb-4 flex flex-col border-b-[1px] border-b-dsfr-border-default-grey text-sm" key={index}>
           <span className="block">
