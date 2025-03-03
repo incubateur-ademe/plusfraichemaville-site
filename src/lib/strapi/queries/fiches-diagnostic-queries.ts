@@ -7,7 +7,6 @@ import { CONTACT_FRAGMENT, FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT, STRAPI_IMAGE_FRA
 import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
-// TODO: vérifier le premier appel lien rex diag avec les fiches diag
 export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} ${CONTACT_FRAGMENT} query {
@@ -53,10 +52,7 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
         utilite_methode {
           description
         }
-        image_confort_thermique {
-          ...ImageInfo
-        }
-        image_diag_icu {
+        image_icone {
           ...ImageInfo
         }
         lien_rex_diagnostics {
@@ -68,12 +64,9 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
                   id
                   attributes {
                     nom_scientifique
-                    image_confort_thermique {
+                    image_icone {
                         ...ImageInfo
                       }
-                    image_diag_icu {
-                      ...ImageInfo
-                    }
                   }
                 }
               }
@@ -89,10 +82,7 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
                               id
                               attributes {
                                 nom_scientifique
-                                image_confort_thermique {
-                                    ...ImageInfo
-                                  }
-                                  image_diag_icu {
+                                image_icone {
                                     ...ImageInfo
                                   }
                               }

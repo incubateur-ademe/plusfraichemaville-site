@@ -10,10 +10,6 @@ export const isFicheDiagICU = (ficheDiagnostic: FicheDiagnostic): boolean => {
   return !!ficheDiagnostic.attributes.effets_attendus?.includes(FicheDiagnosticUtilite.DiminutionICU);
 };
 
-export const isFicheDiagConfortThermique = (ficheDiagnostic: FicheDiagnostic): boolean => {
-  return !!ficheDiagnostic.attributes.effets_attendus?.includes(FicheDiagnosticUtilite.ConfortThermique);
-};
-
 export type UtiliteFicheProperties = {
   type: FicheDiagnosticUtilite;
   colors: {
@@ -58,9 +54,6 @@ export const UTILITE_FICHE_DIAG_CONFORT_THERMIQUE: UtiliteFicheProperties = {
 
 export const getFicheDiagUtilite = (ficheDiagnostic: FicheDiagnostic): UtiliteFicheProperties =>
   isFicheDiagICU(ficheDiagnostic) ? UTILITE_FICHE_DIAG_ICU : UTILITE_FICHE_DIAG_CONFORT_THERMIQUE;
-
-export const getFicheDiagUtiliteProperties = (utilite?: FicheDiagnosticUtilite): UtiliteFicheProperties =>
-  utilite === FicheDiagnosticUtilite.DiminutionICU ? UTILITE_FICHE_DIAG_ICU : UTILITE_FICHE_DIAG_CONFORT_THERMIQUE;
 
 const ALL_ECHELLES_SPATIALES = [
   { label: "Espace public", code: StrapiFicheDiagnosticEchelleSpatiale.EspacePublic },

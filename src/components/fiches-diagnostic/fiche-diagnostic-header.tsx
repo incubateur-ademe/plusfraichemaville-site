@@ -6,11 +6,10 @@ import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { Separator } from "../common/separator";
 import clsx from "clsx";
-import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "./helpers";
+import { getFicheDiagUtilite } from "./helpers";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getEchelleSpatialeLabel } from "@/src/helpers/echelle-spatiale-diagnostic";
 import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
-import { getFicheDiagImage } from "../retour-experience-diag/helpers";
 
 export const FicheDiagnosticHeader = ({
   ficheDiagnostic,
@@ -26,11 +25,7 @@ export const FicheDiagnosticHeader = ({
   const delaiMax = attributes.delai_max;
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
-  const utiliteFiche = overrideUtiliteFiche
-    ? getFicheDiagUtiliteProperties(overrideUtiliteFiche)
-    : getFicheDiagUtilite(ficheDiagnostic);
-
-  const image = getFicheDiagImage(ficheDiagnostic);
+  const utiliteFiche = getFicheDiagUtilite(ficheDiagnostic);
 
   return (
     <div className={utiliteFiche.colors.bgLight} id="fiche-diag-header">
@@ -43,7 +38,7 @@ export const FicheDiagnosticHeader = ({
         >
           <div className="hidden size-32 shrink-0 items-center justify-center rounded-full bg-white md:flex">
             <Image
-              src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.medium)}
+              src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.titre}
               className="object-contain"
               width={90}

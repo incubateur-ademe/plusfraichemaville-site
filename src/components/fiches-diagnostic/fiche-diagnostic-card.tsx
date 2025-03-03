@@ -7,45 +7,33 @@ import clsx from "clsx";
 import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
-import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
-import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "@/src/components/fiches-diagnostic/helpers";
+import { getFicheDiagUtilite } from "@/src/components/fiches-diagnostic/helpers";
 import { useModalStore } from "@/src/stores/modal/provider";
 
 type FicheDiagnosticCardProps = {
   ficheDiagnostic: FicheDiagnostic;
-  overrideUtiliteFiche?: FicheDiagnosticUtilite;
 };
 
-export const FicheDiagnosticCard = ({ ficheDiagnostic, overrideUtiliteFiche }: FicheDiagnosticCardProps) => {
+export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProps) => {
   const coutMin = ficheDiagnostic.attributes.cout_min;
   const coutMax = ficheDiagnostic.attributes.cout_max;
   const delaiMin = ficheDiagnostic.attributes.delai_min;
   const delaiMax = ficheDiagnostic.attributes.delai_max;
 
-  const utiliteFicheProperties = overrideUtiliteFiche
-    ? getFicheDiagUtiliteProperties(overrideUtiliteFiche)
-    : getFicheDiagUtilite(ficheDiagnostic);
+  const utiliteFicheProperties = getFicheDiagUtilite(ficheDiagnostic);
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
 
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
 
-  const image =
-    utiliteFicheProperties.type === FicheDiagnosticUtilite.ConfortThermique
-      ? ficheDiagnostic.attributes.image_confort_thermique
-      : ficheDiagnostic.attributes.image_diag_icu;
-
   return (
     <div className={clsx("pfmv-card relative h-auto w-72 cursor-pointer")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type={TypeFiche.diagnostic} classNameButton="absolute top-3 right-4" />
-      <div
-        className="flex h-full flex-col"
-        onClick={() => setCurrentFicheDiagnostic({ ficheDiagnostic, overrideUtiliteFiche })}
-      >
+      <div className="flex h-full flex-col" onClick={() => setCurrentFicheDiagnostic(ficheDiagnostic)}>
         <div className={clsx("flex h-full flex-col rounded-[0.9375rem] pb-5", utiliteFicheProperties.colors.bgDark)}>
           <div className="mx-auto mt-6 flex size-[8.5rem] items-center justify-center rounded-full bg-white">
             <Image
-              src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.medium)}
+              src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}
               width={140}
               height={140}

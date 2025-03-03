@@ -1,9 +1,7 @@
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
-import { getFicheDiagImage } from "./helpers";
 import { getFicheDiagUtilite } from "../fiches-diagnostic/helpers";
 import Image from "next/image";
-import { STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { getStrapiImageUrl } from "@/src/lib/strapi/strapiClient";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import clsx from "clsx";
 
 type RetourExperienceDiagCardPictoProps = {
@@ -11,14 +9,13 @@ type RetourExperienceDiagCardPictoProps = {
 };
 
 export const RetourExperienceDiagCardPicto = ({ ficheDiagnostic }: RetourExperienceDiagCardPictoProps) => {
-  const image = getFicheDiagImage(ficheDiagnostic);
   const bgColor = getFicheDiagUtilite(ficheDiagnostic).colors.bgDark;
   const nomScientifique = ficheDiagnostic.attributes.nom_scientifique;
 
   return (
     <div className={clsx("group relative flex size-12 shrink-0 items-center justify-center rounded-full", bgColor)}>
       <Image
-        src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.small)}
+        src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
         alt={nomScientifique ?? "pictogramme de la fiche diagnostic"}
         className="object-contain"
         width={40}

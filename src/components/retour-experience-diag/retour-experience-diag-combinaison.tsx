@@ -8,7 +8,6 @@ import { TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
-import { getFicheDiagImage } from "./helpers";
 
 type RetourExperienceDiagCombinaisonProps = {
   lienRexDiagnostics: LienRexDiagnostic[];
@@ -22,9 +21,8 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
         const ficheDiagData = lienRexDiagnostic.attributes.fiche_diagnostic.data;
         const utilite = getFicheDiagUtilite(ficheDiagData);
 
-        const { titre, nom_scientifique, slug } = ficheDiagData.attributes;
+        const { titre, nom_scientifique, slug, image_icone } = ficheDiagData.attributes;
         const isICU = utilite.type === FicheDiagnosticUtilite.DiminutionICU;
-        const image = getFicheDiagImage(ficheDiagData);
 
         return (
           <div className="mb-20 flex flex-col gap-10 md:flex-row" key={lienRexDiagnostic.id}>
@@ -33,7 +31,7 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
             >
               <Image
                 className="object-contain"
-                src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.small)}
+                src={getStrapiImageUrl(image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
                 width={80}
                 height={80}
                 alt={titre ?? ""}
