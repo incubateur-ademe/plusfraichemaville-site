@@ -9,15 +9,8 @@ import clsx from "clsx";
 import { getFicheDiagUtilite } from "./helpers";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getEchelleSpatialeLabel } from "@/src/helpers/echelle-spatiale-diagnostic";
-import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
 
-export const FicheDiagnosticHeader = ({
-  ficheDiagnostic,
-  overrideUtiliteFiche,
-}: {
-  ficheDiagnostic: FicheDiagnostic;
-  overrideUtiliteFiche?: FicheDiagnosticUtilite;
-}) => {
+export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
   const { attributes } = ficheDiagnostic;
   const coutMin = attributes.cout_min;
   const coutMax = attributes.cout_max;

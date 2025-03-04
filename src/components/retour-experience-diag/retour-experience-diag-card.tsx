@@ -3,10 +3,10 @@ import { ImageLoader } from "../common/image-loader";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { RetourExperienceDiagLabel } from "./retour-experience-diag";
 import { Contact, TypeDeContact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
-import { CopyField } from "../common/copy-field";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { RetourExperienceDiagCardPicto } from "./retour-experience-diag-card-picto";
+import CmsRichText from "@/src/components/common/CmsRichText";
 
 type RetourExperienceDiagCardProps = {
   rex?: RetourExperienceDiagnostic;
@@ -41,7 +41,15 @@ export const RetourExperienceDiagCard = ({ rex, className }: RetourExperienceDia
         </div>
 
         <div className="px-5">
-          <h2 className="mb-5 text-[22px] leading-7">{titre}</h2>
+          <h2 className="mb-5 text-[1.375rem] leading-7">{titre}</h2>
+          <div className="line-clamp-3 text-dsfr-text-mention-grey">
+            <CmsRichText label={rex.attributes.description} className={className} />
+          </div>
+          <div className="text-sm font-bold hover:underline">
+            Lire le retour d’expérience
+            <i className="ri-arrow-right-line ml-1 before:mb-[3px] before:!size-4"></i>
+          </div>
+
           {rex.attributes.lien_rex_diagnostics && (
             <div className="mb-7 flex items-center gap-2">
               {rex.attributes.lien_rex_diagnostics.data.map(
@@ -82,14 +90,7 @@ const ContactSection = ({ title, contact }: RetourExperienceDiagCardContactProps
           </span>
         )}
         {contact.label}
-        {contact.email && (
-          <CopyField
-            className="!mb-2 text-dsfr-text-mention-grey hover:underline"
-            label="Email"
-            value={contact.email}
-            noIcon
-          />
-        )}
+        <div>{contact.email}</div>
       </div>
     </div>
   );
