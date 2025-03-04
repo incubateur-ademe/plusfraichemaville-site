@@ -329,8 +329,52 @@
   @apply w-full max-w-full flex-shrink-0 flex-grow-0 basis-full;
 }
 
-.xl-modal .fr-modal__body {
+.l-modal .fr-grid-row > div {
+  @apply w-[90%] max-w-[90%] flex-shrink-0 flex-grow-0 basis-full;
+}
+
+.custom-modal .fr-modal__body {
   @apply rounded-[20px];
+}
+
+.custom-modal .fr-modal__title {
+  display: none;
+}
+
+.custom-modal .fr-container--fluid {
+  @apply overflow-visible;
+}
+
+.xl-modal .fr-modal__body {
+  @apply h-[90vh] !max-h-[90vh] rounded-[20px];
+}
+
+.l-modal .fr-modal__body {
+  @apply h-full !max-h-[80vh] rounded-[20px];
+}
+
+.xl-modal.fr-modal::before {
+  flex: none;
+  height: unset;
+  margin: 5vh 0 0;
+}
+
+.l-modal.fr-modal::before {
+  flex: none;
+  height: unset;
+  margin: 10vh 0 0;
+}
+
+.l-modal .fr-modal__content {
+  @apply mb-0;
+}
+
+.icu-modal .fr-modal__body {
+  @apply bg-background-diag-icu;
+}
+
+.confort-thermique-modal .fr-modal__body {
+  @apply bg-background-confort-thermique;
 }
 
 .fr-consent-banner {
@@ -368,23 +412,6 @@
 
 #fr-consent-modal-control-button {
   box-shadow: inset 0 0 0 1px var(--border-default-grey);
-}
-.xl-modal .fr-modal__title {
-  display: none;
-}
-
-.xl-modal .fr-modal__body {
-  @apply h-[90vh] !max-h-[90vh] rounded-[20px];
-}
-
-.xl-modal .fr-container--fluid {
-  @apply overflow-visible;
-}
-
-.xl-modal.fr-modal::before {
-  flex: none;
-  height: unset;
-  margin: 5vh 0 0;
 }
 
 .customSelect .fr-select {
@@ -497,4 +524,64 @@
 
 .annuaireFilterAccordion .fr-accordion__title .fr-accordion__btn {
   @apply !py-0;
+}
+
+ul.arrow-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul.arrow-list li {
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+ul.arrow-list li::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: -2px;
+  width: 1.5em;
+  height: 1.5em;
+  background-repeat: no-repeat;
+}
+
+.diag-icu-list {
+  @apply arrow-list;
+}
+
+.confort-thermique-list {
+  @apply arrow-list;
+}
+
+ul.diag-icu-list li::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='28' height='28' fill='%23eb754b'%3E%3Cpath d='M16 12L10 18V6L16 12Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+ul.confort-thermique-list li::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='28' height='28' fill='%23e39504'%3E%3Cpath d='M16 12L10 18V6L16 12Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.diag-icu-button {
+  box-shadow: inset 0 0 0 1px theme(colors.border-diag-icu) !important;
+}
+
+.confort-thermique-button {
+  box-shadow: inset 0 0 0 1px theme(colors.border-confort-thermique) !important;
+}
+
+.hover-transparent:hover {
+  background-color: transparent !important;
+}
+
+.pfmv-big-tooltip {
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+  border-radius: 5px;
+  background: #fff;
+}
+
+.fiche-diagnostic-icone {
+  background-image: url("/images/fiches-diagnostic/diag-icone-bg.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
 }

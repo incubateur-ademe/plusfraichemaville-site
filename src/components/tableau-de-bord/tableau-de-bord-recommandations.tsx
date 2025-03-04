@@ -4,10 +4,12 @@ import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
 import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const urls = projet?.fiches_solutions_id ?? [];
+  const urls = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) || [];
 
   const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionCompleteUrlApi(urls));
 

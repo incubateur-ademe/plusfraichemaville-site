@@ -6,24 +6,22 @@ import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
-import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
+import { TypeUpdate } from "@/src/helpers/common";
+import { checkIfFicheIsSaved } from "./helpers";
 
 export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
-  const isSolution = props.type === TypeFiche.solution;
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
 
-  const isSaved = isSolution
-    ? projet?.fiches_solutions_id.includes(+props.id)
-    : projet?.fiches_diagnostic_id.includes(+props.id);
+  const isSaved = projet && checkIfFicheIsSaved({ projet, ficheId: +props.id, typeFiche: props.type });
 
   const update = async () => {
-    const update = await updateFichesProjetAction(
-      projet?.id!,
-      +props.id,
-      props.type,
-      isSaved ? TypeUpdate.delete : TypeUpdate.add,
-    );
+    const update = await updateFichesProjetAction({
+      projetId: projet?.id!,
+      ficheId: +props.id,
+      typeFiche: props.type,
+      typeUpdate: isSaved ? TypeUpdate.delete : TypeUpdate.add,
+    });
     if (update.projet) {
       addOrUpdateProjet(update.projet);
       !isSaved && !props.withoutModal && opener && opener();

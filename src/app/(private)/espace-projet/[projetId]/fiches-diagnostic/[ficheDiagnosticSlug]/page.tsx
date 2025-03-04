@@ -2,12 +2,18 @@ import { FicheDiagnosticComponent } from "@/src/components/fiches-diagnostic/fic
 import { getFicheDiagnosticBySlug } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { notFound } from "next/navigation";
 
-export default async function FicheDiagnosticPage(props: { params: Promise<{ ficheDiagnosticSlug: string }> }) {
-  const params = await props.params;
-  const ficheDiagnostic = await getFicheDiagnosticBySlug(params.ficheDiagnosticSlug);
+type PageProps = {
+  params: Promise<{ ficheDiagnosticSlug: string; projetId: string }>;
+};
+
+export default async function FicheDiagnosticPage({ params }: PageProps) {
+  const resolvedParams = await params;
+
+  const ficheDiagnostic = await getFicheDiagnosticBySlug(resolvedParams.ficheDiagnosticSlug);
 
   if (!ficheDiagnostic) {
     return notFound();
   }
+
   return <FicheDiagnosticComponent ficheDiagnostic={ficheDiagnostic} />;
 }

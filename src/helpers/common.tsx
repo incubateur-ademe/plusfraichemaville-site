@@ -1,3 +1,5 @@
+import { UtiliteFicheProperties } from "@/src/components/fiches-diagnostic/helpers";
+
 export const generateRandomId = () => Math.floor(Math.random() * 900000000) + 100000000;
 
 /**
@@ -23,8 +25,20 @@ export enum TypeUpdate {
   delete = "delete",
 }
 
-export const highlightedIconClass = (typeFiche: TypeFiche) =>
-  typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-border-action-high-error";
+export type IconColorsType = {
+  highlightClass: string;
+  fadedClass: string;
+};
+
+export const ICON_COLOR_FICHE_SOLUTION: IconColorsType = {
+  highlightClass: "text-dsfr-text-label-blue-france",
+  fadedClass: "text-pfmv-light-grey",
+};
+
+export const ICON_COLOR_FICHE_DIAGNOSTIC = (utiliteFiche: UtiliteFicheProperties): IconColorsType => ({
+  highlightClass: utiliteFiche.colors.pictoHighlight,
+  fadedClass: utiliteFiche.colors.pictoFaded,
+});
 
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
 
