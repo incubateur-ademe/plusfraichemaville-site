@@ -573,3 +573,15 @@ ul.confort-thermique-list li::before {
 .hover-transparent:hover {
   background-color: transparent !important;
 }
+
+.pfmv-big-tooltip {
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+  border-radius: 5px;
+  background: #fff;
+}
+
+.fiche-diagnostic-icone {
+  background-image: url("/images/fiches-diagnostic/diag-icone-bg.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}

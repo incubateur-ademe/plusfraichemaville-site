@@ -8,11 +8,10 @@ import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
-import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { getFicheDiagUtilite, getFicheDiagUtiliteProperties } from "@/src/components/fiches-diagnostic/helpers";
+import { getFicheDiagUtilite } from "@/src/components/fiches-diagnostic/helpers";
 import { clsx } from "clsx";
 import { isEmpty } from "@/src/helpers/listUtils";
 
@@ -29,24 +28,16 @@ import { notifications } from "@/src/components/common/notifications";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import { SplideController } from "../common/splide-controllers";
 
-export type FicheDiagnosticDescriptionModalState = {
-  ficheDiagnostic: FicheDiagnostic;
-  overrideUtiliteFiche?: FicheDiagnosticUtilite;
-} | null;
-
 const modal = createModal({
   id: "fiche-diagnostic-description-modal",
   isOpenedByDefault: false,
 });
 
 export const FicheDiagnosticDescriptionModal = () => {
-  const currentFicheDiagnostic = useModalStore((state) => state.currentFicheDiagnostic);
+  const ficheDiagnostic = useModalStore((state) => state.currentFicheDiagnostic);
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
-  const ficheDiagnostic = currentFicheDiagnostic?.ficheDiagnostic;
   const projetId = useProjetsStore((state) => state.currentProjetId);
-  const utiliteFiche = currentFicheDiagnostic?.overrideUtiliteFiche
-    ? getFicheDiagUtiliteProperties(currentFicheDiagnostic?.overrideUtiliteFiche)
-    : ficheDiagnostic && getFicheDiagUtilite(ficheDiagnostic);
+  const utiliteFiche = ficheDiagnostic && getFicheDiagUtilite(ficheDiagnostic);
   const coutMin = ficheDiagnostic?.attributes.cout_min;
   const coutMax = ficheDiagnostic?.attributes.cout_max;
   const delaiMin = ficheDiagnostic?.attributes.delai_min;
@@ -56,24 +47,19 @@ export const FicheDiagnosticDescriptionModal = () => {
   const ficheDiagUrl = PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_DIAGNOSTIC(
     projetId!,
     ficheDiagnostic?.attributes.slug!,
-    currentFicheDiagnostic?.overrideUtiliteFiche,
   );
   useEffect(() => {
-    if (currentFicheDiagnostic) {
+    if (ficheDiagnostic) {
       modal.open();
     }
-  }, [currentFicheDiagnostic]);
+  }, [ficheDiagnostic]);
 
   useIsModalOpen(modal, {
     onConceal: () => setCurrentFicheDiagnostic(null),
   });
 
-  const ficheDiagData = currentFicheDiagnostic?.ficheDiagnostic.attributes;
-  const rex = currentFicheDiagnostic?.ficheDiagnostic.attributes.lien_rex_diagnostics.data ?? [];
-  const picto =
-    utiliteFiche?.type === FicheDiagnosticUtilite.ConfortThermique
-      ? ficheDiagData?.image_confort_thermique
-      : ficheDiagData?.image_diag_icu;
+  const ficheDiagData = ficheDiagnostic?.attributes;
+  const rex = ficheDiagnostic?.attributes.lien_rex_diagnostics.data ?? [];
 
   return (
     <>
@@ -107,7 +93,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                   )}
                 >
                   <Image
-                    src={getStrapiImageUrl(picto, STRAPI_IMAGE_KEY_SIZE.small)}
+                    src={getStrapiImageUrl(ficheDiagData?.image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
                     width={64}
                     height={64}
                     alt={ficheDiagData?.titre ?? ""}

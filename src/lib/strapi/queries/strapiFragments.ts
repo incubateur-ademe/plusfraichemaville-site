@@ -23,6 +23,40 @@ export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo
     }
 }`;
 
+export const REX_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment REXFicheDiagnosticCardInfo on
+RetourExperienceDiagnosticEntity {
+  id
+  attributes {
+    titre
+    lieu
+    description
+    slug
+    image_principale {
+      ...ImageInfo
+    }
+    contacts {
+      ...ContactInfo
+    }
+    lien_rex_diagnostics {
+      data {
+      attributes  {
+          fiche_diagnostic {
+            data {
+              id
+              attributes {
+                nom_scientifique
+                image_icone {
+                    ...ImageInfo
+                  }
+              }
+            }
+          } 
+        }                  
+      }
+    }
+  }
+}`;
+
 export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSmallCardInfo on FicheSolutionEntity {
   id
     attributes {
@@ -47,10 +81,7 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
       image_principale {
         ...ImageInfo
       }
-      image_confort_thermique {
-        ...ImageInfo
-      }
-      image_diag_icu {
+      image_icone {
         ...ImageInfo
       }
       methode
@@ -63,24 +94,13 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
       }
       type_livrables
       echelle_spatiale
-      lien_rex_diagnostics {
+      lien_rex_diagnostics ${ficheDiagnosticRetourExperienceDiagnosticFilter()} {
         data {
           id
           attributes {
-            retour_experience_diagnostic ${ficheDiagnosticRetourExperienceDiagnosticFilter()} {
+            retour_experience_diagnostic {
               data {
-                  attributes {
-                    titre
-                    lieu
-                    description
-                    slug
-                    image_principale {
-                      ...ImageInfo
-                    }
-                    contacts {
-                      ...ContactInfo
-                    }
-                  }
+                ...REXFicheDiagnosticCardInfo
               }
             }
           }

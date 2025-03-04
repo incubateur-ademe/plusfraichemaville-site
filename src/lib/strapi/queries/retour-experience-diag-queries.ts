@@ -62,10 +62,7 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
                       nom_scientifique
                       effets_attendus 
                       slug
-                      image_confort_thermique {
-                        ...ImageInfo
-                      }
-                      image_diag_icu {
+                      image_icone {
                         ...ImageInfo
                       }
                     }

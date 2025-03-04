@@ -4,8 +4,9 @@ import { AidesTerritoiresAide } from "@/src/components/financement/types";
 import { PartageOverviewDeleteOrQuitModaleState } from "@/src/components/partage/partage-overview-delete-or-quit-modale";
 // eslint-disable-next-line max-len
 import { PartageOverviewMemberStatusAdminProps } from "@/src/components/partage/partage-overview-member-status-accepted-admin";
+import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
+
 // eslint-disable-next-line max-len
-import { FicheDiagnosticDescriptionModalState } from "@/src/components/fiches-diagnostic/fiche-diagnostic-description-modal";
 
 interface ModalState {
   currentEstimationId: number | null;
@@ -15,7 +16,7 @@ interface ModalState {
   collectiviteIdToListAvailableProjets: number | null;
   showInfoViewerMode: boolean;
   currentAnnuaireRexProjet: string | null;
-  currentFicheDiagnostic: FicheDiagnosticDescriptionModalState | null;
+  currentFicheDiagnostic: FicheDiagnostic | null;
 }
 
 export type ModalActions = {
@@ -26,7 +27,7 @@ export type ModalActions = {
   setCollectiviteIdToListAvailableProjets: (_collectiviteId: number | null) => void;
   setShowInfoViewerMode: (_showInfoViewerMode: boolean) => void;
   setAnnuaireRexProjetSlug: (_annuaireRexProjetSlug: string | null) => void;
-  setCurrentFicheDiagnostic: (_currentFicheDiagnostic: FicheDiagnosticDescriptionModalState | null) => void;
+  setCurrentFicheDiagnostic: (_currentFicheDiagnostic: FicheDiagnostic | null) => void;
 };
 
 export type ModalStore = ModalState & ModalActions;
