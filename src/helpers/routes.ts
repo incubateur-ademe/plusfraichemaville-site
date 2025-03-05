@@ -21,6 +21,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
   ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire/carte",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord?tab=tableau-de-suivi",
+  ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/fiches-diagnostic/retour-experience/${slug}`,
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
   TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "recommandation" | "partage") =>
