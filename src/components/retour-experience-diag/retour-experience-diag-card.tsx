@@ -14,9 +14,10 @@ import { CopyField } from "@/src/components/common/copy-field";
 type RetourExperienceDiagCardProps = {
   rex?: RetourExperienceDiagnostic;
   className?: string;
+  onClickButton?: () => void;
 };
 
-export const RetourExperienceDiagCard = ({ rex, className }: RetourExperienceDiagCardProps) => {
+export const RetourExperienceDiagCard = ({ rex, className, onClickButton }: RetourExperienceDiagCardProps) => {
   if (!rex) return null;
 
   const { titre, image_principale, contacts, slug, lieu } = rex.attributes;
@@ -66,6 +67,7 @@ export const RetourExperienceDiagCard = ({ rex, className }: RetourExperienceDia
       </div>
       <div className="mt-auto">
         <GenericFicheLink
+          onClick={onClickButton}
           href={PFMV_ROUTES.ESPACE_PROJET_REX_DIAGNOSTIC(slug)}
           className={clsx("fr-btn fr-btn--tertiary mb-4 ml-4 rounded-3xl !text-dsfr-text-title-grey ")}
         >

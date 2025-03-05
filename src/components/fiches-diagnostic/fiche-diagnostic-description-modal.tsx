@@ -152,7 +152,10 @@ export const FicheDiagnosticDescriptionModal = () => {
               </div>
 
               {!rex.length ? null : rex.length <= 1 ? (
-                <RetourExperienceDiagCard rex={rex[0].attributes.retour_experience_diagnostic?.data} />
+                <RetourExperienceDiagCard
+                  onClickButton={() => modal.close()}
+                  rex={rex[0].attributes.retour_experience_diagnostic?.data}
+                />
               ) : (
                 <Splide
                   id="fiche-diagnostic-rex-modal-slider"
@@ -162,8 +165,12 @@ export const FicheDiagnosticDescriptionModal = () => {
                 >
                   <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
                     {rex?.map((r, index) => (
-                      <SplideSlide className="!mr-8 size-full" key={index} onClick={modal.close}>
-                        <RetourExperienceDiagCard rex={r.attributes.retour_experience_diagnostic?.data} key={index} />
+                      <SplideSlide className="!mr-8 size-full" key={index}>
+                        <RetourExperienceDiagCard
+                          key={index}
+                          onClickButton={() => modal.close()}
+                          rex={r.attributes.retour_experience_diagnostic?.data}
+                        />
                       </SplideSlide>
                     ))}
                   </SplideTrack>

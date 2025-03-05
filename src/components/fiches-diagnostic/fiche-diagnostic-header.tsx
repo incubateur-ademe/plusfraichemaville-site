@@ -42,7 +42,9 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             <span className="md:text-xl">{attributes.nom_scientifique}</span>
             <div className="mt-4 flex gap-4 uppercase">
               {getEchellesSpatialesByFicheDiagnostic(ficheDiagnostic).map((echelle) => (
-                <Tag className="!rounded-sm font-bold !text-dsfr-text-mention-grey">{echelle.label}</Tag>
+                <Tag key={echelle.label} className="!rounded-sm font-bold !text-dsfr-text-mention-grey">
+                  {echelle.label}
+                </Tag>
               ))}
             </div>
             {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
