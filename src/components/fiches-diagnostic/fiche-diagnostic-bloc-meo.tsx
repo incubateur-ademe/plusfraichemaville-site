@@ -6,14 +6,18 @@ export const FicheDiagnosticMiseEnOeuvreBloc = ({ attributes }: { attributes: Fi
   const meo = attributes.etapes_mise_en_oeuvre;
 
   return (
-    <div className="pt-12">
-      <h3 className="mb-9 text-3xl">Mise en œuvre</h3>
-      <div className="mb-14">
-        {meo?.map((m, i) => (
-          <div className="mb-14" key={i}>
-            <FicheDiagnosticBlocText withPicto title={m.titre} text={m.description} titleClassName="!text-lg mb-2" />
-          </div>
-        ))}
+    <div>
+      <FicheDiagnosticBlocText title="Mise en œuvre" />
+      <div className="flex flex-col gap-8">
+        <ol className="list-inside">
+          {meo?.map((m) => (
+            <li key={m.titre} className="mb-6 last:!mb-0">
+              <i className={"fr-icon-success-fill fr-icon--sm mr-2 text-dsfr-action-high-red-hover "} />
+              <span className="font-bold">{m.titre}</span>
+              <CmsRichText label={m.description} />
+            </li>
+          ))}
+        </ol>
       </div>
       {attributes.materiel && (
         <div className="h-fit rounded-2xl bg-dsfr-background-alt-red-marianne pb-8 pl-6 pr-4 pt-8">

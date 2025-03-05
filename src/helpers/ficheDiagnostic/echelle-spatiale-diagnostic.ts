@@ -20,8 +20,10 @@ export const ALL_ECHELLES_SPATIALES = [ECHELLE_SPATIALE_DIAGNOSTIC_ESPACE_PUBLIC
 export const getEchellesSpatialesByFicheDiagnostic = (
   ficheDiagnostic?: FicheDiagnostic,
 ): EchelleSpatialeDiagnostic[] => {
-  return ficheDiagnostic?.attributes.echelle_spatiale?.map(
-    (codeEchelle: string) =>
-      ALL_ECHELLES_SPATIALES.find((e) => e.code === codeEchelle) || ECHELLE_SPATIALE_DIAGNOSTIC_COMMUNE,
-  ) || [];
+  return (
+    ficheDiagnostic?.attributes.echelle_spatiale?.map(
+      (codeEchelle: string) =>
+        ALL_ECHELLES_SPATIALES.find((e) => e.code === codeEchelle) || ECHELLE_SPATIALE_DIAGNOSTIC_COMMUNE,
+    ) || []
+  );
 };

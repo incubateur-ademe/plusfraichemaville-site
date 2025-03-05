@@ -10,10 +10,13 @@ import { Separator } from "../common/separator";
 import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { FicheDiagnosticSideMenu } from "./fiche-diagnostic-side-menu";
 import clsx from "clsx";
+// eslint-disable-next-line max-len
 import { FicheDiagnosticBlocBesoinEtIndicateurs } from "@/src/components/fiches-diagnostic/fiche-diagnostic-bloc-besoin-et-indicateurs";
+// eslint-disable-next-line max-len
 import { FicheDiagnosticBlocRetourExperience } from "@/src/components/fiches-diagnostic/fiche-diagnostic-bloc-retour-experience";
 import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
 import { FicheDiagnosticCard } from "@/src/components/fiches-diagnostic/fiche-diagnostic-card";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 type FicheDiagnosticBlocsProps = {
   ficheDiagnostic: FicheDiagnostic;
@@ -65,10 +68,8 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
           )}
         >
           <FicheDiagnosticSideMenu blocs={blocs} />
-          <ButtonShareCurrentUrl className={"mb-2 block pl-4 md:mb-0 [&>*]:mb-2"} />
-          <div className="my-4 pl-4 md:mb-0 md:mt-4">
-            <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel />
-          </div>
+          <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel className={"mb-2 ml-2 block md:mb-0"} />
+          <ButtonShareCurrentUrl className="my-4 pl-4 md:mb-0 md:mt-4" />
         </div>
         <div className="border-dsfr-border-default-grey pt-4 md:border-l-[1px] md:pl-7 md:pt-0">
           {blocs.map((tab) => (
@@ -80,13 +81,12 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
 
           {!!attributes.en_savoir_plus_description && (
             <>
-              <Separator className="mb-12 mt-6 !h-[1px] !opacity-100" />
               <FicheDiagnosticBlocText title="En savoir plus" text={attributes.en_savoir_plus_description} />
+              <Separator className="my-10 !h-[1px] !opacity-100" />
             </>
           )}
-          {attributes.fiches_diagnostics_associees?.data && attributes.fiches_diagnostics_associees.data.length > 0 && (
+          {!isEmpty(attributes.fiches_diagnostics_associees?.data) && (
             <>
-              <Separator className="my-12 !h-[1px] !opacity-100" />
               <div>
                 <h3 className="mb-1 text-2xl">Méthodologies associées</h3>
                 <span className="mb-6 block">Consultez les méthodologies de diagnostic associées</span>
@@ -96,18 +96,19 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
                   ))}
                 </div>
               </div>
+              <Separator className="my-10 !h-[1px] !opacity-100" />
             </>
           )}
           {creditsImage.length > 0 && (
             <>
-              <hr className="mt-12 pb-8" />
-              <div className="mb-4 font-bold text-dsfr-text-title-grey">Crédits images</div>
+              <FicheDiagnosticBlocText title="Crédits images" />
               <div>{creditsImage.join(", ")}</div>
+              <Separator className="my-10 !h-[1px] !opacity-100" />
             </>
           )}
 
           {!!attributes.partenaire && (
-            <div className="py-12">
+            <div className="pb-12">
               <FicheDiagnosticBlocText title="Crédits" text={attributes.partenaire} />
             </div>
           )}

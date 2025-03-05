@@ -29,7 +29,7 @@ export const FicheDiagnosticSideMenu = ({ blocs }: { blocs: FicheDiagnosticBloc[
   }));
 
   return (
-    <div className="flex flex-col gap-6 md:mb-32">
+    <div className="flex flex-col gap-6 md:mb-10">
       <SideMenu
         align="left"
         burgerMenuButtonText="Dans cette rubrique"

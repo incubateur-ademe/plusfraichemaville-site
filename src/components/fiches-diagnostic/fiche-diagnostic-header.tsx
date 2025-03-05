@@ -47,7 +47,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             </div>
             {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
               <>
-                <Separator className={clsx("mt-3 mb-5 !h-[1px] !opacity-100")} />
+                <Separator className={clsx("mb-5 mt-3 !h-[1px] !opacity-100")} />
                 <div className="mb-2 font-bold">Objectifs :</div>
                 <ul className="arrow-list">
                   {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (
