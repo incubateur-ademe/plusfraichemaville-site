@@ -77,6 +77,7 @@ module.exports = {
       "dsfr-background-flat-red-marianne": "var(--background-flat-red-marianne)",
       "dsfr-background-flat-grey": "var(--background-flat-grey)",
       "tab-hover": "rgba(66, 17, 170, 0.10)!important",
+      "picto-highlight-diagnostic": "#EB754B",
       "background-confort-thermique": "#FFF4D4",
       "background-fiche-confort-thermique": "#FFDCB1",
       "background-diag-icu": "#FFEAE3",

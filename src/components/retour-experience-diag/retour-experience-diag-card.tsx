@@ -7,6 +7,7 @@ import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-lin
 import clsx from "clsx";
 import { RetourExperienceDiagCardPicto } from "./retour-experience-diag-card-picto";
 import CmsRichText from "@/src/components/common/CmsRichText";
+import { stripHtmlLinkTag } from "@/src/helpers/common";
 
 type RetourExperienceDiagCardProps = {
   rex?: RetourExperienceDiagnostic;
@@ -43,7 +44,7 @@ export const RetourExperienceDiagCard = ({ rex, className }: RetourExperienceDia
         <div className="px-5">
           <h2 className="mb-5 text-[1.375rem] leading-7">{titre}</h2>
           <div className="line-clamp-3 text-dsfr-text-mention-grey">
-            <CmsRichText label={rex.attributes.description} className={className} />
+            <CmsRichText label={stripHtmlLinkTag(rex.attributes.description)} className={className} />
           </div>
           <div className="text-sm font-bold hover:underline">
             Lire le retour d’expérience

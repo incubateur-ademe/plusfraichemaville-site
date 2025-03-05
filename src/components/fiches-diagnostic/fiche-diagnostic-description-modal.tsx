@@ -121,7 +121,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                   <div>
                     <div className="font-bold">Coût</div>
                     <div className="flex items-center">
-                      <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
+                      <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC)}</div>
                       <small className="text-sm">
                         de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} €
                       </small>
@@ -130,7 +130,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                   <div>
                     <div className="font-bold">{"Durée de l'étude"}</div>
                     <div className="flex items-center">
-                      <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
+                      <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC)}</div>
                       <small className="text-sm text-dsfr-text-mention-grey">
                         de {delaiMin} à {delaiMax} mois
                       </small>

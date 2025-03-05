@@ -45,14 +45,14 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
             <div className={"mb-11 mt-4 text-sm italic"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
             <div className="mb-3 block">
               <div className="flex items-center">
-                <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFicheProperties))}</div>
+                <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC)}</div>
                 <small className="text-sm text-dsfr-text-mention-grey">
                   de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} €
                 </small>
               </div>
               <div className="block">
                 <div className="flex items-center">
-                  <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFicheProperties))}</div>
+                  <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC)}</div>
                   <small className="text-sm text-dsfr-text-mention-grey">
                     de {delaiMin} à {delaiMax} mois
                   </small>
