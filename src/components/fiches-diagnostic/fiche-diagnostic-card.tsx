@@ -10,6 +10,7 @@ import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
 import Tag from "@codegouvfr/react-dsfr/Tag";
+import { getEffetsAttendusByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
 
 type FicheDiagnosticCardProps = {
   ficheDiagnostic: FicheDiagnostic;
@@ -49,6 +50,11 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
             <div className="text-lg font-bold leading-tight">{ficheDiagnostic.attributes.titre}</div>
             <div className={"mb-7 text-sm"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
             <div className="mb-4 mt-4 flex flex-wrap gap-2 uppercase">
+              {getEffetsAttendusByFicheDiagnostic(ficheDiagnostic).map((effet) => (
+                <Tag key={effet.label} small className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey">
+                  {effet.label}
+                </Tag>
+              ))}
               {getEchellesSpatialesByFicheDiagnostic(ficheDiagnostic).map((echelle) => (
                 <Tag key={echelle.label} small className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey">
                   {echelle.label}

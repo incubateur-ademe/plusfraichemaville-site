@@ -9,6 +9,7 @@ import clsx from "clsx";
 import { isEmpty } from "@/src/helpers/listUtils";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
+import { getEffetsAttendusByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
 
 export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
   const { attributes } = ficheDiagnostic;
@@ -41,6 +42,11 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             <h1 className="mb-3 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
             <span className="md:text-xl">{attributes.nom_scientifique}</span>
             <div className="mt-4 flex gap-4 uppercase">
+              {getEffetsAttendusByFicheDiagnostic(ficheDiagnostic).map((effet) => (
+                <Tag key={effet.label} small className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey">
+                  {effet.label}
+                </Tag>
+              ))}
               {getEchellesSpatialesByFicheDiagnostic(ficheDiagnostic).map((echelle) => (
                 <Tag key={echelle.label} className="!rounded-sm font-bold !text-dsfr-text-mention-grey">
                   {echelle.label}
