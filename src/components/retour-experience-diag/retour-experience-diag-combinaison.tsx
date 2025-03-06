@@ -1,13 +1,15 @@
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { LienRexDiagnostic } from "@/src/lib/strapi/types/api/lien-rex-diagnostic";
 import Image from "next/image";
-import { getFicheDiagUtilite } from "../fiches-diagnostic/helpers";
 import clsx from "clsx";
 import CmsRichText from "../common/CmsRichText";
 import { TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
-import { FicheDiagnosticUtilite } from "@/src/lib/strapi/types/strapi-custom-types";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { getEffetsAttendusByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
+import Tag from "@codegouvfr/react-dsfr/Tag";
+import { isEmpty } from "lodash";
 
 type RetourExperienceDiagCombinaisonProps = {
   lienRexDiagnostics: LienRexDiagnostic[];
@@ -19,34 +21,44 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
       {lienRexDiagnostics.map((lienRexDiagnostic) => {
         if (!lienRexDiagnostic.attributes.fiche_diagnostic) return null;
         const ficheDiagData = lienRexDiagnostic.attributes.fiche_diagnostic.data;
-        const utilite = getFicheDiagUtilite(ficheDiagData);
 
         const { titre, nom_scientifique, slug, image_icone } = ficheDiagData.attributes;
-        const isICU = utilite.type === FicheDiagnosticUtilite.DiminutionICU;
 
         return (
-          <div className="mb-20 flex flex-col gap-10 md:flex-row" key={lienRexDiagnostic.id}>
+          <div className="mb-20 flex w-full flex-col gap-10 md:flex-row" key={lienRexDiagnostic.id}>
             <div
-              className={clsx("flex size-32 shrink-0 items-center justify-center rounded-full", utilite.colors.bgLight)}
+              className={clsx(
+                "fiche-diagnostic-icone",
+                "flex size-[8.5rem] shrink-0 items-center justify-center rounded-full",
+              )}
             >
               <Image
-                className="object-contain"
-                src={getStrapiImageUrl(image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
-                width={80}
-                height={80}
+                src={getStrapiImageUrl(image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
                 alt={titre ?? ""}
+                width={100}
+                height={100}
               />
             </div>
-            <div>
-              <h2 className="mb-3 text-[22px] font-bold">{titre}</h2>
+            <div className="w-full">
+              <h2 className="mb-3 text-[1.375rem] font-bold">{titre}</h2>
               <CmsRichText className="mb-5 leading-6" label={lienRexDiagnostic.attributes.description} />
-              <div className="relative max-w-lg">
-                <GenericFicheLink href={`/fiches-diagnostic/${slug}`}>
+              <div className=" relative max-w-lg">
+                <GenericFicheLink href={PFMV_ROUTES.ESPACE_PROJET_FICHE_DIAGNOSTIC(slug)}>
                   <div className="pfmv-card max-w-lg cursor-pointer p-5">
-                    <div className="mb-2 flex items-center gap-3 text-sm">
-                      <div className={clsx("size-[18px] rounded-full", utilite.colors.bgLight)}></div>
-                      {isICU ? "Mesure d'ICU" : "Évaluation de confort thermique"}
-                    </div>
+                    {!isEmpty(getEffetsAttendusByFicheDiagnostic(ficheDiagData)) && (
+                      <div className="mb-4 flex flex-wrap gap-2 uppercase">
+                        {getEffetsAttendusByFicheDiagnostic(ficheDiagData).map((effet) => (
+                          <Tag
+                            key={effet.label}
+                            small
+                            className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey"
+                          >
+                            {effet.label}
+                          </Tag>
+                        ))}
+                      </div>
+                    )}
+
                     <h3 className="mb-1 text-base">{titre}</h3>
                     <i>{nom_scientifique}</i>
                   </div>

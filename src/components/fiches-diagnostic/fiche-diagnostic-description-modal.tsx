@@ -19,14 +19,13 @@ import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { useProjetsStore } from "@/src/stores/projets/provider";
-import Link from "next/link";
 import { Separator } from "@/src/components/common/separator";
 // eslint-disable-next-line max-len
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
 import { notifications } from "@/src/components/common/notifications";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import { SplideController } from "../common/splide-controllers";
+import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 
 const modal = createModal({
   id: "fiche-diagnostic-description-modal",
@@ -36,7 +35,6 @@ const modal = createModal({
 export const FicheDiagnosticDescriptionModal = () => {
   const ficheDiagnostic = useModalStore((state) => state.currentFicheDiagnostic);
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
-  const projetId = useProjetsStore((state) => state.currentProjetId);
   const utiliteFiche = ficheDiagnostic && getFicheDiagUtilite(ficheDiagnostic);
   const coutMin = ficheDiagnostic?.attributes.cout_min;
   const coutMax = ficheDiagnostic?.attributes.cout_max;
@@ -44,10 +42,7 @@ export const FicheDiagnosticDescriptionModal = () => {
   const delaiMax = ficheDiagnostic?.attributes.delai_max;
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
-  const ficheDiagUrl = PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_DIAGNOSTIC(
-    projetId!,
-    ficheDiagnostic?.attributes.slug!,
-  );
+  const ficheDiagUrl = PFMV_ROUTES.ESPACE_PROJET_FICHE_DIAGNOSTIC(ficheDiagnostic?.attributes.slug!);
   useEffect(() => {
     if (ficheDiagnostic) {
       modal.open();
@@ -138,7 +133,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                   </div>
                 </div>
                 <div className="mt-4 flex items-center gap-4">
-                  <Link
+                  <GenericFicheLink
                     className={clsx(
                       "fr-btn--tertiary fr-btn--sm fr-btn rounded-3xl !text-black",
                       utiliteFiche.colors.button,
@@ -147,7 +142,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                     onClick={modal.close}
                   >
                     Lire la méthode
-                  </Link>
+                  </GenericFicheLink>
                 </div>
               </div>
 
