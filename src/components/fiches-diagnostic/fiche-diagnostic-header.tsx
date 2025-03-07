@@ -67,7 +67,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
               </>
             )}
           </div>
-          <div className="pfmv-flat-card h-fit shrink-0 rounded-2xl px-6 py-8 md:w-80">
+          <div className="pfmv-flat-card h-fit shrink-0 !bg-none px-6 py-8 md:w-80">
             <div>
               <small className="mb-1 block text-sm font-bold">Temporalité</small>
               <div className="flex justify-between">

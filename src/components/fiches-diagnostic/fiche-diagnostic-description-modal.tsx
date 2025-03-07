@@ -72,7 +72,7 @@ export const FicheDiagnosticDescriptionModal = () => {
         <div className="pb-4">
           {ficheDiagnostic && utiliteFiche && (
             <div className="flex w-full flex-col gap-6 lg:flex-row">
-              <div className="pfmv-flat-card relative h-fit w-full max-w-[55%] rounded-2xl bg-white p-8">
+              <div className="pfmv-flat-card relative h-fit w-full max-w-[55%] bg-white p-8">
                 {ficheDiagnostic && (
                   <GenericSaveAuthenticatedInsideProjet
                     type={TypeFiche.diagnostic}

@@ -24,7 +24,7 @@ export const RetourExperienceDiagCard = ({ rex, className, onClickButton }: Reto
   const prestataire = contacts.filter((contact) => contact.type_de_contact !== TypeDeContact.Collectivite)[0];
 
   return (
-    <div className={clsx(className, "pfmv-flat-card flex max-w-[28.75rem] flex-col rounded-2xl bg-white !bg-none")}>
+    <div className={clsx(className, "pfmv-flat-card flex max-w-[28.75rem] flex-col bg-white")}>
       <div className="relative mb-5 h-[12rem] ">
         <Image
           width={462}
