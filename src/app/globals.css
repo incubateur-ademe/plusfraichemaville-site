@@ -100,6 +100,7 @@
 
 .pfmv-card.no-shadow:hover {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+
   .text-blue-hover {
     color: var(--text-title-grey);
   }
@@ -384,6 +385,7 @@
 .fr-modal__content,
 .fr-consent-banner {
   border-radius: 1.5rem;
+
   .fr-btn {
     border-radius: 1.5rem;
   }
@@ -406,6 +408,7 @@
 #fr-consent-banner-button-refuse-app:hover {
   background-color: rgba(0, 0, 0, 0.05) !important;
 }
+
 #fr-consent-banner-button-refuse-app:active {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
@@ -472,6 +475,7 @@
 
 .leaflet-control-zoom {
   @apply !bg-none;
+
   a {
     background-image: none !important;
   }
@@ -495,6 +499,7 @@
 .annuaireCardAccordionBtn.fr-accordion__btn::after {
   content: none;
 }
+
 .annuaireCardAccordionBtn.fr-accordion__btn::before {
   --icon-size: 1rem;
   flex: 0 0 auto;
@@ -591,4 +596,8 @@ ul.confort-thermique-list li::before {
   background-image: url("/images/fiches-diagnostic/diag-icone-bg-thick.svg");
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.fr-toggle__label::before {
+  margin-right: 1rem !important;
 }
