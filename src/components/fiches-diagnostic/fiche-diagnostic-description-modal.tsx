@@ -10,7 +10,6 @@ import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { getFicheDiagUtilite } from "@/src/components/fiches-diagnostic/helpers";
 import { clsx } from "clsx";
 import { isEmpty } from "@/src/helpers/listUtils";
 
@@ -37,7 +36,6 @@ const modal = createModal({
 export const FicheDiagnosticDescriptionModal = () => {
   const ficheDiagnostic = useModalStore((state) => state.currentFicheDiagnostic);
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
-  const utiliteFiche = ficheDiagnostic && getFicheDiagUtilite(ficheDiagnostic);
   const coutMin = ficheDiagnostic?.attributes.cout_min;
   const coutMax = ficheDiagnostic?.attributes.cout_max;
   const delaiMin = ficheDiagnostic?.attributes.delai_min;
@@ -70,7 +68,7 @@ export const FicheDiagnosticDescriptionModal = () => {
         className="custom-modal l-modal fiche-diagnostic-modal"
       >
         <div className="pb-4">
-          {ficheDiagnostic && utiliteFiche && (
+          {ficheDiagnostic && (
             <div className="flex w-full flex-col gap-6 lg:flex-row">
               <div className="pfmv-flat-card relative h-fit w-full max-w-[55%] bg-white p-8">
                 {ficheDiagnostic && (

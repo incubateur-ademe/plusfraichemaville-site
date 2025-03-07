@@ -5,7 +5,6 @@ import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 import { useEffect, useState } from "react";
 import { FicheDiagnosticEffetAttenduFilter } from "./fiche-diagnostic-effet-attendu-filter";
-import { StrapiFicheDiagnosticEchelleSpatiale } from "@/src/lib/strapi/types/strapi-custom-types";
 import { EffetAttenduDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
 import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
 
@@ -28,7 +27,7 @@ export const FicheDiagnosticChoixFilters = ({ allFichesDiagnostics }: { allFiche
       .filter(
         (fd) =>
           selectedFilters.length === 0 ||
-          fd.attributes.effets_attendus?.some((echelle: StrapiFicheDiagnosticEchelleSpatiale) =>
+          fd.attributes.effets_attendus?.some((echelle: EffetAttenduDiagnostic["code"]) =>
             selectedFilters.includes(echelle),
           ),
       );

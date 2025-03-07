@@ -1,4 +1,3 @@
-import { StrapiFicheDiagnosticEchelleSpatiale } from "@/src/lib/strapi/types/strapi-custom-types";
 import clsx from "clsx";
 import Image from "next/image";
 import {
@@ -6,8 +5,6 @@ import {
   EFFET_ATTENDU_DIAGNOSTIC_ICU,
   EffetAttenduDiagnostic,
 } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
-
-export type FicheDiagnosticTypeFilters = StrapiFicheDiagnosticEchelleSpatiale;
 
 const filters = [
   {
