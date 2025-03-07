@@ -34,8 +34,8 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
               src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.titre}
               className="object-contain"
-              width={90}
-              height={90}
+              width={150}
+              height={150}
             />
           </div>
           <div>
@@ -43,7 +43,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             <span className="md:text-xl">{attributes.nom_scientifique}</span>
             <div className="mt-4 flex gap-4 uppercase">
               {getEffetsAttendusByFicheDiagnostic(ficheDiagnostic).map((effet) => (
-                <Tag key={effet.label} small className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey">
+                <Tag key={effet.label} className="!rounded-sm font-bold !text-dsfr-text-mention-grey">
                   {effet.label}
                 </Tag>
               ))}
@@ -55,7 +55,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             </div>
             {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
               <>
-                <Separator className={clsx("mb-5 mt-3 !h-[1px] !opacity-100")} />
+                <Separator className="mb-5 mt-3 !h-[1px] !opacity-100" />
                 <div className="mb-2 font-bold">Objectifs :</div>
                 <ul className="arrow-list">
                   {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (

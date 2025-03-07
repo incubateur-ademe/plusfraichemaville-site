@@ -23,47 +23,34 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
       <span className="mb-6 block">
         Consultez les retours d’expériences de collectivités qui ont mis en place cette méthode.
       </span>
-      {rex.data.length === 1 ? (
-        <RetourExperienceDiagCard rex={rex.data[0].attributes.retour_experience_diagnostic?.data} />
-      ) : (
-        <Splide hasTrack={false} options={{ rewind: true, autoWidth: true, gap: "1.25rem" }} className="max-w-[60rem]">
-          <SplideTrack className="py-5 !pl-1">
-            {rex?.data.map((r, index) => (
-              <SplideSlide key={index}>
-                <RetourExperienceDiagCard
-                  rex={r.attributes.retour_experience_diagnostic?.data}
-                  className="h-full max-w-[28rem]"
-                  key={index}
-                />
-              </SplideSlide>
-            ))}
-          </SplideTrack>
-          <SplideController
-            arrow="left"
-            size={{ width: "w-10", height: "h-10" }}
-            position={{ top: "top-[8.5rem]", left: "!left-6" }}
-            className={`!bg-black/60 ${
-              rex.data.length <= 1
-                ? "pointer-events-none !hidden"
-                : rex.data.length === 2
-                  ? "!block lg:!hidden"
-                  : "!block"
-            }`}
-          />
-          <SplideController
-            arrow="right"
-            size={{ width: "w-10", height: "h-10" }}
-            position={{ top: "top-[8.5rem]", right: "!right-6" }}
-            className={`!bg-black/60 ${
-              rex.data.length <= 1
-                ? "pointer-events-none !hidden"
-                : rex.data.length === 2
-                  ? "!block lg:!hidden"
-                  : "!block"
-            }`}
-          />
-        </Splide>
-      )}
+
+      <Splide
+        hasTrack={false}
+        options={{ autoWidth: true, focus: 0, omitEnd: true, gap: "1.25rem" }}
+        className="max-w-[60rem]"
+      >
+        <SplideTrack className="py-5 !pl-1">
+          {rex?.data.map((r, index) => (
+            <SplideSlide key={index}>
+              <RetourExperienceDiagCard
+                rex={r.attributes.retour_experience_diagnostic?.data}
+                className="h-full max-w-[28rem]"
+                key={index}
+              />
+            </SplideSlide>
+          ))}
+        </SplideTrack>
+        <SplideController
+          arrow="left"
+          size={{ width: "w-10", height: "h-10" }}
+          position={{ top: "top-[8.5rem]", left: "!left-6" }}
+        />
+        <SplideController
+          arrow="right"
+          size={{ width: "w-10", height: "h-10" }}
+          position={{ top: "top-[8.5rem]", right: "!right-6" }}
+        />
+      </Splide>
     </>
   );
 };

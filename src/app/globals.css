@@ -373,12 +373,8 @@
   @apply mb-0;
 }
 
-.icu-modal .fr-modal__body {
-  @apply bg-background-diag-icu;
-}
-
-.confort-thermique-modal .fr-modal__body {
-  @apply bg-background-confort-thermique;
+.fiche-diagnostic-modal .fr-modal__body {
+  @apply bg-dsfr-background-alt-red-marianne;
 }
 
 .fr-consent-banner {

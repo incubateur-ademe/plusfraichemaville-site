@@ -5,8 +5,6 @@ import { Contact, TypeDeContact } from "@/src/lib/strapi/types/components/retour
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { RetourExperienceDiagCardPicto } from "./retour-experience-diag-card-picto";
-import CmsRichText from "@/src/components/common/CmsRichText";
-import { stripHtmlLinkTag } from "@/src/helpers/common";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Image from "next/image";
 import { CopyField } from "@/src/components/common/copy-field";
@@ -27,7 +25,7 @@ export const RetourExperienceDiagCard = ({ rex, className, onClickButton }: Reto
 
   return (
     <div className={clsx(className, "pfmv-flat-card flex max-w-[28.75rem] flex-col rounded-2xl bg-white !bg-none")}>
-      <div className="relative mb-5 h-[17rem] ">
+      <div className="relative mb-5 h-[12rem] ">
         <Image
           width={462}
           height={267}
@@ -43,12 +41,8 @@ export const RetourExperienceDiagCard = ({ rex, className, onClickButton }: Reto
         </div>
       </div>
 
-      <div className="px-5">
+      <div className="px-8">
         <h2 className="mb-5 text-[1.375rem] leading-7">{titre}</h2>
-        <div className="line-clamp-3 text-dsfr-text-mention-grey">
-          <CmsRichText label={stripHtmlLinkTag(rex.attributes.description)} className={className} />
-        </div>
-
         {rex.attributes.lien_rex_diagnostics && (
           <div className="mb-7 flex items-center gap-2">
             {rex.attributes.lien_rex_diagnostics.data.map(

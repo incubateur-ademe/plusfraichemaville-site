@@ -1,16 +1,16 @@
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
-type EffetAttenduDiagnostic = {
+export type EffetAttenduDiagnostic = {
   code: string;
   label: string;
 };
 
-const EFFET_ATTENDU_DIAGNOSTIC_ICU = {
+export const EFFET_ATTENDU_DIAGNOSTIC_ICU = {
   code: "diminution_effet_icu",
   label: "Îlot de chaleur urbain",
 };
 
-const EFFET_ATTENDU_DIAGNOSTIC_CONFORT_THERMIQUE = {
+export const EFFET_ATTENDU_DIAGNOSTIC_CONFORT_THERMIQUE = {
   code: "amelioration_confort_thermique",
   label: "Confort thermique",
 };

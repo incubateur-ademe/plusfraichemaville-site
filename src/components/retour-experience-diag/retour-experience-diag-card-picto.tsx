@@ -17,8 +17,8 @@ export const RetourExperienceDiagCardPicto = ({ ficheDiagnostic }: RetourExperie
           src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
           alt={nomScientifique ?? "pictogramme de la fiche diagnostic"}
           className="object-contain"
-          width={40}
-          height={40}
+          width={50}
+          height={50}
         />
       </div>
     </BigTooltip>
