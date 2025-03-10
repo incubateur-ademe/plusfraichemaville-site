@@ -43,31 +43,32 @@ export const RetourExperienceDiagPrincipauxResultats = ({
             hasTrack={false}
             options={{ autoWidth: true, start: 0 }}
           >
-            <SplideTrack className="h-64 overflow-auto lg:!overflow-hidden">
+            <SplideTrack className="">
               {images.map((image, index) => (
                 <SplideSlide className="size-full" key={index}>
                   <ImageLoader
                     width={384}
                     height={248}
-                    className="size-full cursor-pointer object-cover"
+                    className="max-h-60 w-full cursor-pointer object-cover"
                     containerClassName="size-full"
                     src={getStrapiImageUrl(image.image, STRAPI_IMAGE_KEY_SIZE.medium)}
                     alt={image.caption ?? "image fiche rex"}
                     onClick={() => setZoomedImage(image)}
                   />
+                  <div className="mt-4 text-xs text-dsfr-text-mention-grey">{image.caption}</div>
                 </SplideSlide>
               ))}
             </SplideTrack>
             <SplideController
               arrow="left"
               size={{ width: "w-10", height: "h-10" }}
-              position={{ top: "top-1/2", left: "!left-2" }}
+              position={{ top: "top-1/3", left: "!left-2" }}
               className={`!bg-black/60 ${images.length <= 1 ? "pointer-events-none !hidden" : ""}`}
             />
             <SplideController
               arrow="right"
               size={{ width: "w-10", height: "h-10" }}
-              position={{ top: "top-1/2", right: "!right-2" }}
+              position={{ top: "top-1/3", right: "!right-2" }}
               className={`!bg-black/60 ${images.length <= 1 ? "pointer-events-none !hidden" : ""}`}
             />
           </Splide>

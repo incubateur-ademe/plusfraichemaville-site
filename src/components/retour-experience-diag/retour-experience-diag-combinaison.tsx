@@ -59,7 +59,7 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
                       </div>
                     )}
 
-                    <h3 className="mb-1 text-base mr-28">{titre}</h3>
+                    <h3 className="mb-1 mr-28 text-base">{titre}</h3>
                     <i>{nom_scientifique}</i>
                   </div>
                 </GenericFicheLink>
