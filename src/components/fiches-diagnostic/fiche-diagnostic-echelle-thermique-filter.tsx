@@ -53,7 +53,7 @@ export const FicheDiagnosticEchelleThermiqueFilter = ({
                 className={clsx("flex flex-col items-center justify-center gap-2 px-4 py-2", isSelectedClass.container)}
               >
                 {isSelected && <i className="ri-close-line absolute right-2 top-0 text-pfmv-navy before:size-4"></i>}
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-4">
                   <Image
                     src={f.picto}
                     alt={f.label}
@@ -61,7 +61,7 @@ export const FicheDiagnosticEchelleThermiqueFilter = ({
                     height={64}
                     className={clsx("mx-auto block", isSelectedClass.image, "h-16")}
                   />
-                  <small className={clsx("text-nowrap text-sm", isSelectedClass.text)}>{f.label}</small>
+                  <small className={clsx(" mx-auto text-sm", isSelectedClass.text)}>{f.label}</small>
                 </div>
               </button>
             </div>

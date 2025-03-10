@@ -40,7 +40,7 @@ export const FicheDiagnosticChoixFilters = ({ allFichesDiagnostics }: { allFiche
       <div className="mb-6">
         {"Il est recommandé d'anticiper toutes ces méthodes en amont du choix des solutions et des travaux."}
       </div>
-      <div className="mb-9 flex items-center gap-12">
+      <div className="mb-9 flex flex-wrap items-center gap-12">
         <FicheDiagnosticEchelleThermiqueFilter setter={handleFilterChange} selectedFilters={selectedFilters} />
         <ToggleSwitch
           labelPosition="right"
