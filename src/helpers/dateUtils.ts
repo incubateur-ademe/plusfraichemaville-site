@@ -14,10 +14,15 @@ export function dateToStringWithTime(value: Date): string {
   )}`;
 }
 
-export function dateToStringWithoutTime(value: Date): string | null {
+export function dateToStringWithoutTime(value: Date | null, format: "fr" | "iso" = "fr"): string | null {
   if (!value) {
     return null;
   }
+
+  if (format === "iso") {
+    return `${value.getFullYear()}-${addLeadingZero(value.getMonth() + 1)}-${addLeadingZero(value.getDate())}`;
+  }
+
   return `${addLeadingZero(value.getDate())}/${addLeadingZero(value.getMonth() + 1)}/${value.getFullYear()}`;
 }
 
