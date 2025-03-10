@@ -12,7 +12,7 @@ export default function CustomAccordion({
   btnTextColor,
   btnTextPadding,
 }: {
-  title: string;
+  title: string | ReactNode;
   expanded: boolean;
   ariaId: string;
   className?: string;
