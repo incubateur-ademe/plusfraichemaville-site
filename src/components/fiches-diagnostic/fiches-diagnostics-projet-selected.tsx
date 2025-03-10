@@ -22,8 +22,6 @@ import uniqBy from "lodash/uniqBy";
 import { RetourExperienceDiagCard } from "../retour-experience-diag/retour-experience-diag-card";
 import { FicheDiagnosticProjetListeAddButton } from "./fiche-diagnostic-projet-liste-add-button";
 import { SplideController } from "../common/splide-controllers";
-import { RetourExperienceDiagCardSkeleton } from "../retour-experience-diag/retour-experience-diag-card-skeleton";
-import clsx from "clsx";
 
 export const FichesDiagnosticsProjetSelected = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -65,29 +63,17 @@ export const FichesDiagnosticsProjetSelected = () => {
           </div>
         )}
       </div>
-
-      <h2 className="mb-9 text-2xl font-bold">
-        Ces collectivités partagent leur expérience sur {"l'utilisation"} de ces méthodes de diagnostic
-      </h2>
-
-      {isLoading && savedFichesDiagnostic ? (
-        <div className="relative mb-12 flex gap-4 overflow-x-auto p-5 pl-1">
-          {sortedRex.map((_, index) => (
-            <RetourExperienceDiagCardSkeleton key={index} />
-          ))}
-        </div>
-      ) : sortedRex.length > 1 ? (
-        <div className="relative">
+      {!isEmpty(sortedRex) && (
+        <>
+          <h2 className="mb-9 text-2xl font-bold">
+            Ces collectivités partagent leur expérience sur {"l'utilisation"} de ces méthodes de diagnostic
+          </h2>
           <Splide
             hasTrack={false}
-            options={{
-              rewind: true,
-              gap: "1rem",
-              autoWidth: true,
-            }}
+            options={{ gap: "1rem", autoWidth: true, focus: 0, omitEnd: true }}
             className="mb-12"
           >
-            <SplideTrack className="p-5 !pl-1">
+            <SplideTrack>
               {sortedRex.map(
                 (rex) =>
                   rex?.data && (
@@ -100,21 +86,16 @@ export const FichesDiagnosticsProjetSelected = () => {
             <SplideController
               arrow="left"
               size={{ width: "w-14", height: "h-14" }}
-              position={{ top: "top-28", left: "-7" }}
-              className={clsx(sortedRex.length === 2 ? "!block lg:!hidden" : "!block")}
+              position={{ top: "top-24", left: "-7" }}
             />
             <SplideController
               arrow="right"
               size={{ width: "w-14", height: "h-14" }}
-              position={{ top: "top-28", right: "-7" }}
-              className={clsx(sortedRex.length === 2 ? "!block lg:!hidden" : "!block")}
+              position={{ top: "top-24", right: "-7" }}
             />
           </Splide>
-        </div>
-      ) : (
-        sortedRex[0] && sortedRex[0] && <RetourExperienceDiagCard rex={sortedRex[0].data} className="mb-20 h-full" />
+        </>
       )}
-
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
         className="fr-btn fr-btn--secondary rounded-3xl"

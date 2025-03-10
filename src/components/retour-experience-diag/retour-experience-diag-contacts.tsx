@@ -26,12 +26,17 @@ export const RetourExperienceDiagContacts = ({ contacts }: RetourExperienceDiagC
   return (
     <div className="my-20">
       <h2 className="mb-5 text-[18px]">Contacts</h2>
-      <RetourExperienceDiagContactBloc contacts={collectivites} typeDeContact={TypeDeContact.Collectivite} />
+      <RetourExperienceDiagContactBloc
+        contacts={collectivites}
+        typeDeContact={TypeDeContact.Collectivite}
+        className="mb-8"
+      />
       {groupedPrestataires.map((presta) => (
         <RetourExperienceDiagContactBloc
           key={presta.type}
           contacts={presta.prestas}
           typeDeContact={presta.type as TypeDeContact}
+          className="mb-8"
         />
       ))}
     </div>

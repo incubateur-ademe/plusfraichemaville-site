@@ -29,21 +29,20 @@ export const SplideController = ({
         "splide__arrows group flex items-center justify-center rounded-full bg-black",
         size.width,
         size.height,
-        arrow === "left" ? "splide__arrow splide__arrow--prev" : "splide__arrow splide__arrow--next",
-        "cursor-pointer transition-[background] duration-300 hover:bg-white hover:text-black",
-        "absolute hidden -translate-y-1/2 lg:block",
         position.top,
         position.bottom,
         position.left,
         position.right,
+        arrow === "left" ? "splide__arrow splide__arrow--prev" : "splide__arrow splide__arrow--next",
         arrow === "left" && "rotate-180",
+        "cursor-pointer transition-[background] duration-300 hover:bg-white hover:text-black",
+        "absolute -translate-y-1/2",
         { [`${arrow}-6`]: arrow },
+        "disabled:hidden",
         className,
       )}
     >
-      <i
-        className={clsx(`ri-arrow-right-line text-white group-hover:text-black`, arrow === "left" && "rotate-180")}
-      ></i>
+      <i className={clsx(`ri-arrow-right-line text-white group-hover:text-black`)}></i>
     </button>
   );
 };

@@ -7,8 +7,10 @@ import clsx from "clsx";
 import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
-import { getFicheDiagUtilite } from "@/src/components/fiches-diagnostic/helpers";
 import { useModalStore } from "@/src/stores/modal/provider";
+import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
+import Tag from "@codegouvfr/react-dsfr/Tag";
+import { getEffetsAttendusByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
 
 type FicheDiagnosticCardProps = {
   ficheDiagnostic: FicheDiagnostic;
@@ -20,7 +22,6 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
   const delaiMin = ficheDiagnostic.attributes.delai_min;
   const delaiMax = ficheDiagnostic.attributes.delai_max;
 
-  const utiliteFicheProperties = getFicheDiagUtilite(ficheDiagnostic);
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
 
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
@@ -30,29 +31,46 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
     <div className={clsx("pfmv-card relative h-auto w-72 cursor-pointer")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type={TypeFiche.diagnostic} classNameButton="absolute top-3 right-4" />
       <div className="flex h-full flex-col" onClick={() => setCurrentFicheDiagnostic(ficheDiagnostic)}>
-        <div className={clsx("flex h-full flex-col rounded-[0.9375rem] pb-5", utiliteFicheProperties.colors.bgDark)}>
-          <div className="mx-auto mt-6 flex size-[8.5rem] items-center justify-center rounded-full bg-white">
+        <div className={clsx("flex h-full flex-col rounded-[0.9375rem]")}>
+          <div
+            className={clsx(
+              "fiche-diagnostic-icone",
+              "mx-auto mt-6 flex size-[8.5rem] items-center justify-center rounded-full",
+            )}
+          >
             <Image
               src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}
-              width={140}
-              height={140}
+              width={130}
+              height={130}
             />
           </div>
 
           <div className="flex h-fit grow flex-col justify-between px-6 pb-2 pt-5">
-            <div className="text-xl font-bold leading-tight">{ficheDiagnostic.attributes.titre}</div>
-            <div className={"mb-11 mt-4 text-sm italic"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
+            <div className="text-lg font-bold leading-tight">{ficheDiagnostic.attributes.titre}</div>
+            <div className={"mb-7 text-sm"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
+            <div className="mb-4 mt-4 flex flex-wrap gap-2 uppercase">
+              {getEffetsAttendusByFicheDiagnostic(ficheDiagnostic).map((effet) => (
+                <Tag key={effet.label} small className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey">
+                  {effet.label}
+                </Tag>
+              ))}
+              {getEchellesSpatialesByFicheDiagnostic(ficheDiagnostic).map((echelle) => (
+                <Tag key={echelle.label} small className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey">
+                  {echelle.label}
+                </Tag>
+              ))}
+            </div>
             <div className="mb-3 block">
               <div className="flex items-center">
-                <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFicheProperties))}</div>
+                <div className="mr-2">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC)}</div>
                 <small className="text-sm text-dsfr-text-mention-grey">
                   de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} €
                 </small>
               </div>
               <div className="block">
                 <div className="flex items-center">
-                  <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFicheProperties))}</div>
+                  <div className="mr-2">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC)}</div>
                   <small className="text-sm text-dsfr-text-mention-grey">
                     de {delaiMin} à {delaiMax} mois
                   </small>

@@ -8,6 +8,7 @@ import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-f
 import { TypeFiche } from "@/src/helpers/common";
 import { isEmpty } from "@/src/helpers/listUtils";
 import Link from "next/link";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 export const FicheDiagnosticChoixParcours = () => {
   const projetId = useProjetsStore((state) => state.currentProjetId);
@@ -23,12 +24,22 @@ export const FicheDiagnosticChoixParcours = () => {
 
   return (
     <div>
-      <div className="mb-8 flex justify-between px-28">
-        <div className="pfmv-card flex h-80 w-96 flex-col p-8 text-xl md:ml-0">
-          {"Je fais un état des lieux thermique et environnemental de l’espace à rafraîchir"}
+      <div className="mb-8 flex justify-between px-36 text-center font-bold">
+        <div className="pfmv-flat-card flex w-[25rem] flex-col text-xl md:ml-0">
+          <div className="h-40 rounded-t-2xl bg-dsfr-background-alt-blue-france" />
+          <div className="flex flex-col content-center items-center p-12">
+            <div>{"Je fais un état des lieux thermique et environnemental de l’espace à rafraîchir"}</div>
+            <Button className="mt-12 rounded-2xl" disabled onClick={() => {}}>
+              {"Utiliser l'outil de calcul"}
+            </Button>
+          </div>
         </div>
-        <Link className="pfmv-card flex h-80 w-96 flex-col p-8  text-xl md:ml-0" href={urlParcoursPrestation}>
-          {"Je choisis les bonnes prestations de diagnostic\n" + "de surchauffe"}
+        <Link className="pfmv-card flex w-[25rem] flex-col text-xl md:ml-0" href={urlParcoursPrestation}>
+          <div className="h-40 rounded-t-2xl bg-dsfr-background-alt-blue-france" />
+          <div className="flex flex-col content-center items-center p-12">
+            <div>{"Je choisis les bonnes prestations de diagnostic de surchauffe"}</div>
+            <div className="fr-btn mt-12 rounded-2xl">{"Choisir les prestations"}</div>
+          </div>
         </Link>
       </div>
       <GenericFicheLink

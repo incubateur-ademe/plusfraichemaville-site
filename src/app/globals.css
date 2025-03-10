@@ -69,6 +69,10 @@
   background: #fff !important;
 }
 
+.pfmv-flat-card {
+  border-radius: 0.9375rem;
+}
+
 .pfmv-strong-card {
   border-radius: 10px;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 145, 0.2);
@@ -76,6 +80,10 @@
 
 .pfmv-card {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+}
+
+.pfmv-flat-card {
+  box-shadow: inset 0 0 0 1px var(--border-default-grey);
 }
 
 .pfmv-card-outline {
@@ -96,6 +104,7 @@
 
 .pfmv-card.no-shadow:hover {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+
   .text-blue-hover {
     color: var(--text-title-grey);
   }
@@ -369,12 +378,8 @@
   @apply mb-0;
 }
 
-.icu-modal .fr-modal__body {
-  @apply bg-background-diag-icu;
-}
-
-.confort-thermique-modal .fr-modal__body {
-  @apply bg-background-confort-thermique;
+.fiche-diagnostic-modal .fr-modal__body {
+  @apply bg-dsfr-background-alt-red-marianne;
 }
 
 .fr-consent-banner {
@@ -384,6 +389,7 @@
 .fr-modal__content,
 .fr-consent-banner {
   border-radius: 1.5rem;
+
   .fr-btn {
     border-radius: 1.5rem;
   }
@@ -406,6 +412,7 @@
 #fr-consent-banner-button-refuse-app:hover {
   background-color: rgba(0, 0, 0, 0.05) !important;
 }
+
 #fr-consent-banner-button-refuse-app:active {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
@@ -472,6 +479,7 @@
 
 .leaflet-control-zoom {
   @apply !bg-none;
+
   a {
     background-image: none !important;
   }
@@ -495,6 +503,7 @@
 .annuaireCardAccordionBtn.fr-accordion__btn::after {
   content: none;
 }
+
 .annuaireCardAccordionBtn.fr-accordion__btn::before {
   --icon-size: 1rem;
   flex: 0 0 auto;
@@ -544,6 +553,7 @@ ul.arrow-list li::before {
   width: 1.5em;
   height: 1.5em;
   background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='28' height='28' fill='%23eb754b'%3E%3Cpath d='M20 12L10 18V6L20 12Z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 .diag-icu-list {
@@ -584,4 +594,14 @@ ul.confort-thermique-list li::before {
   background-image: url("/images/fiches-diagnostic/diag-icone-bg.svg");
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+.fiche-diagnostic-icone-thick {
+  background-image: url("/images/fiches-diagnostic/diag-icone-bg-thick.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.fr-toggle__label::before {
+  margin-right: 1rem !important;
 }

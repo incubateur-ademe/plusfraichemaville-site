@@ -6,9 +6,10 @@ import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { Separator } from "../common/separator";
 import clsx from "clsx";
-import { getFicheDiagUtilite } from "./helpers";
 import { isEmpty } from "@/src/helpers/listUtils";
-import { getEchelleSpatialeLabel } from "@/src/helpers/echelle-spatiale-diagnostic";
+import Tag from "@codegouvfr/react-dsfr/Tag";
+import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
+import { getEffetsAttendusByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
 
 export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
   const { attributes } = ficheDiagnostic;
@@ -18,71 +19,81 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
   const delaiMax = attributes.delai_max;
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
-  const utiliteFiche = getFicheDiagUtilite(ficheDiagnostic);
 
   return (
-    <div className={utiliteFiche.colors.bgLight} id="fiche-diag-header">
+    <div className="bg-dsfr-background-alt-red-marianne">
       <div className="fr-container">
-        <div
-          className={clsx(
-            "flex flex-col justify-between gap-5 pb-11 pt-8 md:flex-row md:gap-10",
-            utiliteFiche.colors.bgLight,
-          )}
-        >
-          <div className="hidden size-32 shrink-0 items-center justify-center rounded-full bg-white md:flex">
+        <div className="flex flex-col justify-between gap-5 pb-11 pt-8 md:flex-row md:gap-10">
+          <div
+            className={clsx(
+              "fiche-diagnostic-icone hidden size-40 shrink-0 items-center justify-center",
+              "rounded-full bg-white md:flex",
+            )}
+          >
             <Image
               src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.titre}
               className="object-contain"
-              width={90}
-              height={90}
+              width={150}
+              height={150}
             />
           </div>
           <div>
             <h1 className="mb-3 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
-            <span className="italic md:text-xl">{attributes.nom_scientifique ?? "Non renseigné"}</span>
-            <Separator className={clsx("my-5 !h-[1px] !opacity-50", utiliteFiche.colors.separator)} />
+            <span className="md:text-xl">{attributes.nom_scientifique}</span>
+            <div className="mt-4 flex gap-4 uppercase">
+              {getEffetsAttendusByFicheDiagnostic(ficheDiagnostic).map((effet) => (
+                <Tag key={effet.label} className="!rounded-sm font-bold !text-dsfr-text-mention-grey">
+                  {effet.label}
+                </Tag>
+              ))}
+              {getEchellesSpatialesByFicheDiagnostic(ficheDiagnostic).map((echelle) => (
+                <Tag key={echelle.label} className="!rounded-sm font-bold !text-dsfr-text-mention-grey">
+                  {echelle.label}
+                </Tag>
+              ))}
+            </div>
             {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
-              <ul className="">
-                {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (
-                  <li key={utilite.description} className="relative !mb-0">
-                    <span className={clsx(utiliteFiche.colors.pictoFaded, "mr-3 text-xl")}>▸</span>
-                    {utilite?.description}
-                  </li>
-                ))}
-              </ul>
+              <>
+                <Separator className="mb-5 mt-3 !h-[1px] !opacity-100" />
+                <div className="mb-2 font-bold">Objectifs :</div>
+                <ul className="arrow-list">
+                  {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (
+                    <li key={utilite.description} className="relative !mb-1">
+                      {utilite?.description}
+                    </li>
+                  ))}
+                </ul>
+              </>
             )}
           </div>
-          <div className={clsx("h-fit shrink-0 rounded-2xl", "px-6 py-8 md:w-80 ", utiliteFiche.colors.bgDark)}>
+          <div className="pfmv-flat-card h-fit shrink-0 !bg-none px-6 py-8 md:w-80">
             <div>
               <small className="mb-1 block text-sm font-bold">Temporalité</small>
               <div className="flex justify-between">
-                <div className="mr-2 h-4">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
+                <div className="mr-2 h-4">{delai?.icons(ICON_COLOR_FICHE_DIAGNOSTIC)}</div>
                 <small className="text-sm">
                   {delaiMin} à {delaiMax} mois
                 </small>
               </div>
             </div>
-            <Separator className={clsx(utiliteFiche.colors.separator, "my-3 !h-[1px] !opacity-100")} />
+            <Separator className="my-5 !h-[1px] !opacity-100" />
             <div>
               <small className="mb-1 block text-sm font-bold">Coût</small>
               <div className="flex justify-between">
-                <div className="mr-2 h-4">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC(utiliteFiche))}</div>
+                <div className="mr-2 h-4">{cout?.icons(ICON_COLOR_FICHE_DIAGNOSTIC)}</div>
                 <small className="text-sm">
                   de {formatNumberWithSpaces(coutMin)} à {formatNumberWithSpaces(coutMax)} euros HT
                 </small>
               </div>
-              <div className="mt-6 text-sm">{attributes.explication_source}</div>
+              {attributes.explication_source && <div className="mt-6 text-sm">{attributes.explication_source}</div>}
             </div>
-            <Separator className={clsx(utiliteFiche.colors.separator, "my-3 !h-[1px] !opacity-100")} />
-            <div>
-              <small className="mb-1 block text-sm font-bold">Échelle</small>
-              <div className="text-sm">{getEchelleSpatialeLabel(ficheDiagnostic) ?? "Non renseigné"}</div>
-            </div>
-            <Separator className={clsx(utiliteFiche.colors.separator, "my-3 !h-[1px] !opacity-100")} />
+            <Separator className="my-5 !h-[1px] !opacity-100" />
             <div>
               <small className="mb-1 block text-sm font-bold">Type de livrables</small>
-              <div className="flex justify-between text-sm">{attributes.type_livrables ?? "Non renseigné"}</div>
+              <div className="flex justify-between text-sm text-dsfr-text-mention-grey">
+                {attributes.type_livrables ?? "Non renseigné"}
+              </div>
             </div>
           </div>
         </div>

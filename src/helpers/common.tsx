@@ -1,5 +1,3 @@
-import { UtiliteFicheProperties } from "@/src/components/fiches-diagnostic/helpers";
-
 export const generateRandomId = () => Math.floor(Math.random() * 900000000) + 100000000;
 
 /**
@@ -35,10 +33,10 @@ export const ICON_COLOR_FICHE_SOLUTION: IconColorsType = {
   fadedClass: "text-pfmv-light-grey",
 };
 
-export const ICON_COLOR_FICHE_DIAGNOSTIC = (utiliteFiche: UtiliteFicheProperties): IconColorsType => ({
-  highlightClass: utiliteFiche.colors.pictoHighlight,
-  fadedClass: utiliteFiche.colors.pictoFaded,
-});
+export const ICON_COLOR_FICHE_DIAGNOSTIC: IconColorsType = {
+  highlightClass: "text-picto-highlight-diagnostic",
+  fadedClass: "text-pfmv-light-grey",
+};
 
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
 
@@ -52,3 +50,5 @@ export const extractNameInitiales = (name: string) => {
 export const isBoolean = (param: any): boolean => {
   return typeof param == "boolean";
 };
+
+export const stripHtmlLinkTag = (param: string): string => param.replace(/<a\b[^>]*>/i, "").replace(/<\/a>/i, "");
