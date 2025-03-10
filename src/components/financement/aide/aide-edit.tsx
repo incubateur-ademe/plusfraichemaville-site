@@ -16,11 +16,11 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 import { Pagination } from "@/src/components/common/pagination";
 import { usePagination } from "@/src/hooks/use-pagination";
-import toast from "react-hot-toast";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { AideEditSortField } from "@/src/components/financement/aide/aide-edit-sort-field";
 import { useAideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation-edit-sort-method";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { notifications } from "@/src/components/common/notifications";
 
 export const AideEdit = memo(() => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -113,7 +113,7 @@ export const AideEdit = memo(() => {
         <GenericFicheLink
           href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
           className="fr-btn fr-btn--primary h-fit rounded-3xl"
-          onClick={() => toast.success("Votre sélection a bien été validée")}
+          onClick={() => notifications("success", "AIDE_SELECTION_VALIDATED")}
         >
           Valider
         </GenericFicheLink>

@@ -88,15 +88,6 @@ export const homepageData = {
     title: "Par où commencer ?",
     lines: [
       {
-        title: "Faites un diagnostic de la surchauffe sur votre territoire",
-        description: "Consultez les différentes méthodes de diagnostic en fonction de votre besoin.",
-        image: { url: "/images/homepage/home-start-1.jpg", width: 331, height: 320 },
-        cta: {
-          label: "Je trouve la bonne méthode",
-          url: PFMV_ROUTES.FICHES_DIAGNOSTIC,
-        },
-      },
-      {
         title: "Trouvez les solutions de rafraîchissement adaptées à votre projet",
         description:
           "Accédez à l’outil de découverte des solutions ou recherchez des fiches solutions par thématiques.",
