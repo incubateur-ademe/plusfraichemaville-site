@@ -52,10 +52,10 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
         en_savoir_plus_description
         partenaire
         nom_scientifique
-        effets_attendus
         type_livrables
+        echelle_thermique
         echelle_spatiale
-        utilite_methode {
+        objectifs {
           description
         }
         image_icone {

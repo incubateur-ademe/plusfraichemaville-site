@@ -24,7 +24,7 @@ import { notifications } from "@/src/components/common/notifications";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import { SplideController } from "../common/splide-controllers";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
-import { getEffetsAttendusByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
+import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
 
@@ -93,14 +93,14 @@ export const FicheDiagnosticDescriptionModal = () => {
                 </div>
                 <div className={"text-[1.375rem] font-bold"}>{ficheDiagData?.titre}</div>
                 <div className={"mb-4 "}>{ficheDiagData?.nom_scientifique}</div>
-                {!isEmpty(ficheDiagData?.utilite_methode) && (
+                {!isEmpty(ficheDiagData?.objectifs) && (
                   <>
                     <Separator className="!h-[1px] !opacity-100" />
                     <div className="mt-4 font-bold">Objectifs</div>
                     <ul className="arrow-list mb-4">
-                      {ficheDiagData?.utilite_methode.map((utilite) => (
-                        <li key={utilite.description} className="relative !mb-0">
-                          {utilite?.description}
+                      {ficheDiagData?.objectifs.map((objectif) => (
+                        <li key={objectif.description} className="relative !mb-0">
+                          {objectif?.description}
                         </li>
                       ))}
                     </ul>
@@ -109,7 +109,7 @@ export const FicheDiagnosticDescriptionModal = () => {
 
                 <Separator className="!h-[1px] !opacity-100" />
                 <div className="mt-3 flex gap-3 uppercase">
-                  {getEffetsAttendusByFicheDiagnostic(ficheDiagnostic).map((effet) => (
+                  {getEchellesThermiquesByFicheDiagnostic(ficheDiagnostic).map((effet) => (
                     <Tag key={effet.label} small className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey">
                       {effet.label}
                     </Tag>

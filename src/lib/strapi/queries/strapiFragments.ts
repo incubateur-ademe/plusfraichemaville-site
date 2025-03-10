@@ -88,8 +88,8 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
       echelle
       nom_scientifique
       slug
-      effets_attendus
-      utilite_methode {
+      echelle_thermique
+      objectifs {
         description
       }
       type_livrables

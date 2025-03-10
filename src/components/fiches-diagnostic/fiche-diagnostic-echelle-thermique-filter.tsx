@@ -1,30 +1,30 @@
 import clsx from "clsx";
 import Image from "next/image";
 import {
-  EFFET_ATTENDU_DIAGNOSTIC_CONFORT_THERMIQUE,
-  EFFET_ATTENDU_DIAGNOSTIC_ICU,
-  EffetAttenduDiagnostic,
-} from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
+  ECHELLE_THERMIQUE_DIAG_CONFORT_THERMIQUE,
+  ECHELLE_THERMIQUE_DIAG_ICU,
+  EchelleThermiqueDiagnostic,
+} from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 
 const filters = [
   {
     picto: "/images/fiches-diagnostic/icu.svg",
-    filter: EFFET_ATTENDU_DIAGNOSTIC_ICU.code,
+    filter: ECHELLE_THERMIQUE_DIAG_ICU.code,
     label: "Mesure de l'ICU",
   },
   {
     picto: "/images/fiches-diagnostic/confort-thermique.svg",
-    filter: EFFET_ATTENDU_DIAGNOSTIC_CONFORT_THERMIQUE.code,
+    filter: ECHELLE_THERMIQUE_DIAG_CONFORT_THERMIQUE.code,
     label: "Évaluation du confort thermique",
   },
 ];
 
-export const FicheDiagnosticEffetAttenduFilter = ({
+export const FicheDiagnosticEchelleThermiqueFilter = ({
   setter,
   selectedFilters,
 }: {
-  setter: (_filter: EffetAttenduDiagnostic["code"]) => void;
-  selectedFilters: EffetAttenduDiagnostic["code"][];
+  setter: (_filter: EchelleThermiqueDiagnostic["code"]) => void;
+  selectedFilters: EchelleThermiqueDiagnostic["code"][];
 }) => {
   return (
     <div>

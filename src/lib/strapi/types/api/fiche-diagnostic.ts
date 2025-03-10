@@ -16,6 +16,7 @@ export enum Echelle {
   Territoire = "territoire",
   Espace = "espace",
 }
+
 export enum Methode {
   Observation = "observation",
   Enquete = "enquete",
@@ -52,16 +53,17 @@ export interface FicheDiagnostic {
     fiches_diagnostics_associees: { data: FicheDiagnostic[] };
     materiel?: any;
     partenaire?: any;
-    utilite_methode: UtiliteMethode[];
+    objectifs: UtiliteMethode[];
     explication_cout?: string;
     nom_scientifique?: string;
     type_livrables?: string;
-    effets_attendus?: any;
+    echelle_thermique?: any;
     echelle_spatiale?: any;
     lien_rex_diagnostics: { data: LienRexDiagnostic[] };
     image_icone?: { data: Media };
   };
 }
+
 export interface FicheDiagnostic_Plain {
   id: number;
   createdAt: Date;
@@ -89,11 +91,11 @@ export interface FicheDiagnostic_Plain {
   fiches_diagnostics_associees: FicheDiagnostic_Plain[];
   materiel?: any;
   partenaire?: any;
-  utilite_methode: UtiliteMethode_Plain[];
+  objectifs: UtiliteMethode_Plain[];
   explication_cout?: string;
   nom_scientifique?: string;
   type_livrables?: string;
-  effets_attendus?: any;
+  echelle_thermique?: any;
   echelle_spatiale?: any;
   lien_rex_diagnostics: LienRexDiagnostic_Plain[];
   image_icone?: Media_Plain;
@@ -126,11 +128,11 @@ export interface FicheDiagnostic_NoRelations {
   fiches_diagnostics_associees: number[];
   materiel?: any;
   partenaire?: any;
-  utilite_methode: UtiliteMethode_NoRelations[];
+  objectifs: UtiliteMethode_NoRelations[];
   explication_cout?: string;
   nom_scientifique?: string;
   type_livrables?: string;
-  effets_attendus?: any;
+  echelle_thermique?: any;
   echelle_spatiale?: any;
   lien_rex_diagnostics: number[];
   image_icone?: number;
@@ -163,11 +165,11 @@ export interface FicheDiagnostic_AdminPanelLifeCycle {
   fiches_diagnostics_associees: AdminPanelRelationPropertyModification<FicheDiagnostic_Plain>;
   materiel?: any;
   partenaire?: any;
-  utilite_methode: UtiliteMethode_Plain[];
+  objectifs: UtiliteMethode_Plain[];
   explication_cout?: string;
   nom_scientifique?: string;
   type_livrables?: string;
-  effets_attendus?: any;
+  echelle_thermique?: any;
   echelle_spatiale?: any;
   lien_rex_diagnostics: AdminPanelRelationPropertyModification<LienRexDiagnostic_Plain>;
   image_icone?: AdminPanelRelationPropertyModification<Media_Plain>;

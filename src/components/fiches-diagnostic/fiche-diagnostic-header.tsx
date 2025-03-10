@@ -9,7 +9,7 @@ import clsx from "clsx";
 import { isEmpty } from "@/src/helpers/listUtils";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
-import { getEffetsAttendusByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
+import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 
 export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
   const { attributes } = ficheDiagnostic;
@@ -42,7 +42,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             <h1 className="mb-3 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
             <span className="md:text-xl">{attributes.nom_scientifique}</span>
             <div className="mt-4 flex gap-4 uppercase">
-              {getEffetsAttendusByFicheDiagnostic(ficheDiagnostic).map((effet) => (
+              {getEchellesThermiquesByFicheDiagnostic(ficheDiagnostic).map((effet) => (
                 <Tag key={effet.label} className="!rounded-sm font-bold !text-dsfr-text-mention-grey">
                   {effet.label}
                 </Tag>
@@ -53,14 +53,14 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
                 </Tag>
               ))}
             </div>
-            {!isEmpty(ficheDiagnostic.attributes.utilite_methode) && (
+            {!isEmpty(ficheDiagnostic.attributes.objectifs) && (
               <>
                 <Separator className="mb-5 mt-3 !h-[1px] !opacity-100" />
                 <div className="mb-2 font-bold">Objectifs :</div>
                 <ul className="arrow-list">
-                  {ficheDiagnostic.attributes.utilite_methode.map((utilite) => (
-                    <li key={utilite.description} className="relative !mb-1">
-                      {utilite?.description}
+                  {ficheDiagnostic.attributes.objectifs.map((objectif) => (
+                    <li key={objectif.description} className="relative !mb-1">
+                      {objectif?.description}
                     </li>
                   ))}
                 </ul>

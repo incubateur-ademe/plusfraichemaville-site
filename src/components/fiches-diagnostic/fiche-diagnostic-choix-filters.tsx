@@ -4,16 +4,16 @@ import { FicheDiagnosticCard } from "./fiche-diagnostic-card";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 import { useEffect, useState } from "react";
-import { FicheDiagnosticEffetAttenduFilter } from "./fiche-diagnostic-effet-attendu-filter";
-import { EffetAttenduDiagnostic } from "@/src/helpers/ficheDiagnostic/effet-attendu-diagnostic";
+import { FicheDiagnosticEchelleThermiqueFilter } from "./fiche-diagnostic-echelle-thermique-filter";
+import { EchelleThermiqueDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
 
 export const FicheDiagnosticChoixFilters = ({ allFichesDiagnostics }: { allFichesDiagnostics: FicheDiagnostic[] }) => {
-  const [selectedFilters, setSelectedFilters] = useState<EffetAttenduDiagnostic["code"][]>([]);
+  const [selectedFilters, setSelectedFilters] = useState<EchelleThermiqueDiagnostic["code"][]>([]);
   const [filteredFichesDiagnostics, setFilteredFichesDiagnostics] = useState<FicheDiagnostic[]>(allFichesDiagnostics);
   const [onlyCheapDiagnostic, setOnlyCheapDiagnostic] = useState<boolean>(false);
 
-  const handleFilterChange = (filter: EffetAttenduDiagnostic["code"]) => {
+  const handleFilterChange = (filter: EchelleThermiqueDiagnostic["code"]) => {
     setSelectedFilters((state) => {
       if (state.includes(filter)) {
         return state.filter((f) => f !== filter);
@@ -27,7 +27,7 @@ export const FicheDiagnosticChoixFilters = ({ allFichesDiagnostics }: { allFiche
       .filter(
         (fd) =>
           selectedFilters.length === 0 ||
-          fd.attributes.effets_attendus?.some((echelle: EffetAttenduDiagnostic["code"]) =>
+          fd.attributes.echelle_thermique?.some((echelle: EchelleThermiqueDiagnostic["code"]) =>
             selectedFilters.includes(echelle),
           ),
       );
@@ -41,7 +41,7 @@ export const FicheDiagnosticChoixFilters = ({ allFichesDiagnostics }: { allFiche
         {"Il est recommandé d'anticiper toutes ces méthodes en amont du choix des solutions et des travaux."}
       </div>
       <div className="mb-9 flex items-center gap-12">
-        <FicheDiagnosticEffetAttenduFilter setter={handleFilterChange} selectedFilters={selectedFilters} />
+        <FicheDiagnosticEchelleThermiqueFilter setter={handleFilterChange} selectedFilters={selectedFilters} />
         <ToggleSwitch
           labelPosition="right"
           label="Petit budget"

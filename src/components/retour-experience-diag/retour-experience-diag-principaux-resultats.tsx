@@ -41,7 +41,7 @@ export const RetourExperienceDiagPrincipauxResultats = ({
           <Splide
             id="fiche-diagnostic-rex-principaux-resultats-slider"
             hasTrack={false}
-            options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
+            options={{ autoWidth: true, start: 0 }}
           >
             <SplideTrack className="h-64 overflow-auto lg:!overflow-hidden">
               {images.map((image, index) => (

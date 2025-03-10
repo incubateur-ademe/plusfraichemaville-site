@@ -60,7 +60,7 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
                     attributes {
                       titre
                       nom_scientifique
-                      effets_attendus 
+                      echelle_thermique
                       slug
                       image_icone {
                         ...ImageInfo
