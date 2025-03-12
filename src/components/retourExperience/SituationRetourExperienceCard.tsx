@@ -36,6 +36,7 @@ export default function SituationRetourExperienceCard({
             className="h-52 w-full rounded-t-2xl object-cover"
             src={getStrapiImageUrl(situation.image, STRAPI_IMAGE_KEY_SIZE.medium)}
             alt={titre}
+            unoptimized
           />
         </div>
       </div>

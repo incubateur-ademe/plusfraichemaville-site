@@ -37,6 +37,7 @@ export async function FicheSolution({
             className={"relative -z-10 h-48 w-full object-cover md:h-96 "}
             src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
             alt={ficheSolution.attributes.titre}
+            unoptimized
           />
           <div className="fr-container">
             <h1

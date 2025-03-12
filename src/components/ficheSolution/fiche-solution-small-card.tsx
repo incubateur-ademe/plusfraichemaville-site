@@ -34,6 +34,7 @@ export function FicheSolutionSmallCard({
           src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={ficheSolution.attributes.titre}
           className={"h-full w-full rounded-t-2xl object-cover"}
+          unoptimized
         />
       </div>
       <div className="flex grow flex-col px-4 pb-4 pt-6">
