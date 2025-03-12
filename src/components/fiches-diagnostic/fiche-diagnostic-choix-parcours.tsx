@@ -16,18 +16,20 @@ export const FicheDiagnosticChoixParcours = () => {
   const savedFichesDiagnostic = getProjetFichesIdsByType({ projet: currentProjet, typeFiche: TypeFiche.diagnostic });
 
   let urlParcoursPrestation = PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD;
+  let urlParcoursIndicateurs = PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD;
   if (projetId) {
     urlParcoursPrestation = isEmpty(savedFichesDiagnostic)
-      ? PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_LISTE(projetId)
-      : PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_SELECTION(projetId);
+      ? PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(projetId)
+      : PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION(projetId);
+    urlParcoursIndicateurs = PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION(projetId);
   }
 
   return (
-    <div>
+    <>
       <div className="mb-12 flex flex-1 flex-col justify-center  gap-10 px-10 text-center font-bold md:flex-row">
-        <div className="pfmv-card flex flex-col items-center text-[1.375rem] md:ml-0">
+        <Link className="pfmv-card flex flex-col items-center text-[1.375rem] md:ml-0" href={urlParcoursIndicateurs}>
           <Image
-            src={"/images/fiches-diagnostic/choix-parcours-indicateurs-thermiques.svg"}
+            src={"/images/fiches-diagnostic/parcours-indicateurs-environnementaux.svg"}
             alt="Parcours indicateurs thermiques"
             width={250}
             height={250}
@@ -38,10 +40,10 @@ export const FicheDiagnosticChoixParcours = () => {
             <div className="font-normal text-dsfr-text-mention-grey">(en open source)</div>
             <div className="fr-btn mt-12 rounded-2xl hover:bg-dsfr-hover-blue-sun">Calculer les indicateurs</div>
           </div>
-        </div>
+        </Link>
         <Link className="pfmv-card flex flex-col items-center text-[1.375rem] md:ml-0" href={urlParcoursPrestation}>
           <Image
-            src={"/images/fiches-diagnostic/choix-parcours-prestation.svg"}
+            src={"/images/fiches-diagnostic/parcours-prestation.svg"}
             alt="Parcours prestation"
             width={250}
             height={250}
@@ -60,6 +62,6 @@ export const FicheDiagnosticChoixParcours = () => {
       >
         Revenir au tableau de bord
       </GenericFicheLink>
-    </div>
+    </>
   );
 };

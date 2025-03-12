@@ -23,7 +23,7 @@ export default async function FicheDiagnosticListePage(props: { params: Promise<
             Revenir au tableau de bord
           </GenericFicheLink>
           <Link
-            href={PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_SELECTION(+params.projetId)}
+            href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION(+params.projetId)}
             className="fr-btn fr-btn rounded-3xl"
           >
             Valider mes méthodes

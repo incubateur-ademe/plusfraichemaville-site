@@ -17,7 +17,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
       <Link
         href={
           type === TypeFiche.diagnostic
-            ? PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_LISTE(projet?.id!)
+            ? PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(projet?.id!)
             : PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(projet?.id!)
         }
         className="fr-btn fr-btn--secondary mb-4 mr-4 !min-h-fit rounded-3xl !text-sm"
@@ -28,7 +28,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
       <Link
         href={
           type === TypeFiche.diagnostic
-            ? PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_SELECTION(projet?.id!)
+            ? PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION(projet?.id!)
             : PFMV_ROUTES.TABLEAU_DE_BORD(projet?.id!)
         }
         className="fr-btn mr-4 !min-h-fit rounded-3xl !text-sm"

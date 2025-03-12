@@ -14,7 +14,7 @@ export const sanitizeUrlInMessageFromRagtime = (ragtimeResponseMessage: string, 
     return ragtimeResponseMessage
       .replace(
         "https://plusfraichemaville.fr/fiches-diagnostic",
-        PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_LISTE(projetId),
+        PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(projetId),
       )
       .replace("https://plusfraichemaville.fr/fiche-solution", PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projetId))
       .replace("https://plusfraichemaville.fr/", "/");

@@ -13,7 +13,7 @@ export const FicheDiagnosticProjetListeAddButton = () => {
 
   return (
     <Link
-      href={PFMV_ROUTES.ESPACE_PROJET_FICHES_DIAGNOSTIC_PRESTATION_LISTE(projetId)}
+      href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(projetId)}
       className={clsx(
         "fr-btn !h-32 !w-40 rounded-[10px] bg-dsfr-text-label-blue-france",
         "flex !flex-col items-center justify-center self-center",
