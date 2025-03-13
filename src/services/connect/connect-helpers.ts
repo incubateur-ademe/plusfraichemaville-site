@@ -16,12 +16,10 @@ export const mapUserToConnectContact = (user: UserWithAdminProjets): ConnectCont
     nom: user.nom,
     prenom: user.prenom,
     fonction: user.poste,
+    siret: agentconnectInfo.siret,
     dateCreation: dateToStringWithoutTime(user.created_at, "iso"),
     dateModification: dateToStringWithoutTime(user.updated_at, "iso"),
-    acceptationRGPD: true,
-    actif: true,
     telephone: agentconnectInfo.phone_number,
     codePostal: collectivite.code_postal,
-    typeCompte: "Entreprise",
   };
 };

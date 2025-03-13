@@ -30,6 +30,7 @@ export default function FicheSolutionTabMateriaux({
                     src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
                     alt={mat.titre}
                     className={"rounded-2xl object-cover"}
+                    unoptimized
                   />
                 </div>
                 <div className="mb-0 mt-8 grow text-dsfr-text-title-grey md:mb-8">

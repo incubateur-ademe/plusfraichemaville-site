@@ -61,6 +61,7 @@ export function EstimationMateriauxFicheSolutionRecap({
                       src={getStrapiImageUrl(materiau.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
                       alt={materiau.attributes.titre}
                       className={"rounded-xl object-cover"}
+                      unoptimized
                     />
                   </div>
                   <div>{materiau.attributes.titre}</div>

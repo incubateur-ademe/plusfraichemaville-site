@@ -42,6 +42,7 @@ export default function RetourExperienceCard({
           }
           alt={selectRex.titre}
           className={"w-full rounded-t-2xl object-cover"}
+          unoptimized={!(typeof selectRex.image_principale === "string")}
         />
       </div>
       <div className="flex grow flex-col p-6">

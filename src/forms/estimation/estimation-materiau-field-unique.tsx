@@ -26,6 +26,7 @@ export const EstimationMateriauFieldUnique = ({
             src={getStrapiImageUrl(ficheSolutionAttributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
             alt={""}
             className={"rounded-2xl object-cover"}
+            unoptimized
           />
         </div>
         <div className="mb-0 mt-8 grow text-dsfr-text-title-grey md:mb-8">
