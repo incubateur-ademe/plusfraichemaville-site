@@ -22,6 +22,7 @@ export default function AideDecisionFirstStepEtapeCard({
           src={getStrapiImageUrl(etapeAttributes.image, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={etapeAttributes.nom || ""}
           className={"svg-blue-hover"}
+          unoptimized
         />
       </div>
       <div className={"text-center text-sm"}>{etapeAttributes.nom}</div>

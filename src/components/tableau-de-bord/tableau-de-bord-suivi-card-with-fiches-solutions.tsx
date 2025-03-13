@@ -91,6 +91,7 @@ const TableauSuiviFicheImages = ({ image }: { image: { data: Media } | null | un
         height={48}
         sizes="30vw md:5vw"
         src={getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.small)}
+        unoptimized
       />
     </div>
   );

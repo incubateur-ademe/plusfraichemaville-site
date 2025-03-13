@@ -39,6 +39,7 @@ export default function FicheSolutionSmallHorizontalCard({
           src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
           alt={ficheSolution.attributes.titre}
           className={"w-full rounded-l-2xl object-cover"}
+          unoptimized
         />
       </div>
       <div className="m-4 max-w-[18rem]">
