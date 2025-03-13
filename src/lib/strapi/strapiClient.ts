@@ -1,6 +1,6 @@
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { revalidateTag } from "next/cache";
 import { Media } from "@/src/lib/strapi/types/common/Media";
+import { customRevalidateTag } from "@/src/helpers/revalidate-tag-call";
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
@@ -54,12 +54,12 @@ export const strapiGraphQLCall = async (query: string, config: StrapiGraphQLCall
 
     if (res?.errors) {
       captureError(`Some Strapi error occurred. Tags: ${tags.join(", ")}.`, res?.errors);
-      tags.forEach((tag) => revalidateTag(tag));
+      await customRevalidateTag(config.tag);
     }
 
     return res?.data;
   } catch (err) {
-    customCaptureException(`Caught exception while calling Strapi.  Tags: ${tags.join(", ")}.`, err);
-    tags.forEach((tag) => revalidateTag(tag));
+    customCaptureException(`Caught exception while calling Strapi. Tags: ${tags.join(", ")}.`, err);
+    await customRevalidateTag(config.tag);
   }
 };

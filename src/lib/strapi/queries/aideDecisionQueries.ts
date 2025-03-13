@@ -148,7 +148,6 @@ export async function getAideDecisionFirstSteps(): Promise<AideDecisionEtape[]> 
   const apiResponse = (
     await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter), { tag: "aide-decision-first-step" })
   )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
-  console.log({apiResponse})
   return safeReturnStrapiEntities(apiResponse);
 }
 
