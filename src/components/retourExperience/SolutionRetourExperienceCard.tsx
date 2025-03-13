@@ -25,6 +25,7 @@ export default function SolutionRetourExperienceCard({
             className="rounded-full object-cover"
             src={getStrapiImageUrl(solution.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
             alt={solution.attributes.titre}
+            unoptimized
           />
         </div>
         <div className="ml-4 grow">

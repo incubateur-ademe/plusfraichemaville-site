@@ -30,6 +30,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
           className="block max-h-40 min-h-96 w-full object-cover md:max-h-96"
           src={getStrapiImageUrl(retourExperience.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
           alt={retourExperience.attributes.titre || "image titre"}
+          unoptimized
         />
       </div>
       <div className="fr-container flex flex-col md:flex-row">

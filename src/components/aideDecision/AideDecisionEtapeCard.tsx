@@ -21,6 +21,7 @@ export default function AideDecisionEtapeCard({
           src={getStrapiImageUrl(etapeAttributes.image, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={etapeAttributes.nom || ""}
           className={"h-full w-full rounded-l-2xl object-cover md:rounded-t-2xl md:rounded-bl-none"}
+          unoptimized
         />
       </div>
       <div className="m-4 max-w-[11rem] md:max-w-none">

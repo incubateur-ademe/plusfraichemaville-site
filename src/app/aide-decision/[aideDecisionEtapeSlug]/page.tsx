@@ -64,6 +64,7 @@ export default async function AideDecisionPage(props: AideDecisionPageProps) {
               src={getStrapiImageUrl(firstStep.image, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={currentStep.attributes.question_suivante || "Etape suivante"}
               className="m-auto pt-7"
+              unoptimized
             />
             <h1 className={"mb-10 text-center text-xl"}>{currentStep.attributes.question_suivante}</h1>
             <ul className="flex list-none flex-wrap justify-center p-0">

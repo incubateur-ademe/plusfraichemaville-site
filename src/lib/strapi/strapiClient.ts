@@ -1,9 +1,12 @@
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { Media } from "@/src/lib/strapi/types/common/Media";
-import { revalidateTagAction } from "@/src/actions/revalidate-tag-action";
+import { customRevalidateTag } from "@/src/helpers/revalidate-tag-call";
 
-export const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
-export const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
+const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
+
+const SCALEWAY_S3_URL = "plusfraichemaville.s3.fr-par.scw.cloud";
+const SCALEWAY_CDN_URL = "cdn.plusfraichemaville.fr";
 
 export const STRAPI_IMAGE_KEY_SIZE = {
   large: "large",
@@ -17,9 +20,9 @@ export const getStrapiImageUrl = (image?: { data: Media } | null, sizeKey?: STRA
     return "/images/placeholder.svg";
   }
   if (sizeKey && image.data.attributes.formats && !!image.data.attributes.formats[sizeKey]) {
-    return image.data.attributes.formats[sizeKey].url;
+    return image.data.attributes.formats[sizeKey].url?.replace(SCALEWAY_S3_URL, SCALEWAY_CDN_URL);
   }
-  return image.data.attributes.url;
+  return image.data.attributes.url?.replace(SCALEWAY_S3_URL, SCALEWAY_CDN_URL);
 };
 
 type StrapiGraphQLCallConfig = {
@@ -44,22 +47,19 @@ export const strapiGraphQLCall = async (query: string, config: StrapiGraphQLCall
         variables: config?.variables,
       }),
       signal: config?.signal,
-      next: {
-        revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1,
-        tags,
-      },
+      next: { revalidate: +(process.env.CMS_CACHE_TTL || 0) || 1, tags },
     });
 
     const res = await response.json();
 
     if (res?.errors) {
       captureError(`Some Strapi error occurred. Tags: ${tags.join(", ")}.`, res?.errors);
-      await revalidateTagAction(tags);
+      await customRevalidateTag(config.tag);
     }
 
     return res?.data;
   } catch (err) {
-    customCaptureException(`Caught exception while calling Strapi.  Tags: ${tags.join(", ")}.`, err);
-    await revalidateTagAction(tags);
+    customCaptureException(`Caught exception while calling Strapi. Tags: ${tags.join(", ")}.`, err);
+    await customRevalidateTag(config.tag);
   }
 };

@@ -2,7 +2,7 @@ import { IApiAidesTerritoiresQueryToken, IApiAidesTerritoiresResponse } from "@/
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import * as Sentry from "@sentry/nextjs";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-import { revalidateTagAction } from "@/src/actions/revalidate-tag-action";
+import { customRevalidateTag } from "@/src/helpers/revalidate-tag-call";
 
 const TOKEN_VALIDITY_IN_SECONDS = 86400;
 const FETCH_TOCKEN_CACHE_TAG = "aides-territoires-token";
@@ -57,7 +57,7 @@ export const callAidesTerritoiresApi = async <T extends IApiAidesTerritoiresResp
 
     const result = (await response.json()) as T;
     if (!isSecondCall && response.status === 401) {
-      await revalidateTagAction([FETCH_TOCKEN_CACHE_TAG]);
+      await customRevalidateTag(FETCH_TOCKEN_CACHE_TAG);
       return callAidesTerritoiresApi(url, true);
     }
     if (response.status >= 400) {
