@@ -10,7 +10,7 @@ const cspHeader = `
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-    img-src 'self' blob: data: https://cdn.plusfraichemaville.fr/
+    img-src 'self' blob: data: https://cdn.plusfraichemaville.fr/ https://plusfraichemaville.s3.fr-par.scw.cloud/
     https://*.basemaps.cartocdn.com
     https://*.hsforms.com 
     https://data.geopf.fr
