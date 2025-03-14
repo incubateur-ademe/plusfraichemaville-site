@@ -59,7 +59,7 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
           />
           <div>
             <div className="text-dsfr-text-mention-grey">Le coefficient de</div>
-            <div className="text-lg font-bold text-coeff-rafraichissement-urbain">Rafraîchissement urbain</div>
+            <div className="text-xl font-bold text-coeff-rafraichissement-urbain">Rafraîchissement urbain</div>
           </div>
         </div>
         <div className="max-w-[41rem]">
@@ -81,7 +81,7 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
           />
           <div>
             <div className="text-dsfr-text-mention-grey">Le coefficient de</div>
-            <div className="text-lg font-bold text-coeff-permeabilite">Perméabilité</div>
+            <div className="text-xl font-bold text-coeff-permeabilite">Perméabilité</div>
           </div>
         </div>
         <div className="max-w-[41rem]">
@@ -103,7 +103,7 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
           />
           <div>
             <div className="text-dsfr-text-mention-grey">Le coefficient de</div>
-            <div className="text-lg font-bold text-coeff-biodiversite">Biodiversité</div>
+            <div className="text-xl font-bold text-coeff-biodiversite">Biodiversité</div>
           </div>
         </div>
         <div className="max-w-[41rem]">
@@ -123,7 +123,7 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
             alt=""
             className="h-16"
           />
-          <div className="text-lg font-bold text-coeff-canopee">La part de Canopée</div>
+          <div className="text-xl font-bold text-coeff-canopee">La part de Canopée</div>
         </div>
         <div className="max-w-[41rem]">{"Texte décrivant ce qu'est la part de Canopée."}</div>
       </div>

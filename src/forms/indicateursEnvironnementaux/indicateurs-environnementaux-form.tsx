@@ -1,53 +1,27 @@
+"use client";
 import { useCallback, useEffect, useMemo } from "react";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  EstimationMateriauxFormData,
-  EstimationMateriauxFormSchema,
-} from "@/src/forms/estimation/estimation-materiau-form-schema";
 import InputFormField from "@/src/components/common/InputFormField";
+import {
+  IndicateursEnvironnementauxFormData,
+  IndicateursEnvironnementauxFormSchema,
+} from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form-schema";
+import { ALL_INDIEN_QUESTIONS } from "@/src/helpers/indicateurs-environnementaux/indi-en-questions";
+import { mapAllIndiEnQuestionsToFormValues } from "@/src/helpers/indicateurs-environnementaux/indi-en-helpers";
 import Button from "@codegouvfr/react-dsfr/Button";
-import EstimationMateriauField from "@/src/forms/estimation/estimation-materiau-field";
-import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
-import { updateEstimationMateriauxAction } from "@/src/actions/estimation/update-estimation-materiaux-action";
-import { notifications } from "@/src/components/common/notifications";
+import Image from "next/image";
+import { clsx } from "clsx";
 
-import { mapStrapiEstimationMateriauxToFormValues } from "@/src/lib/prisma/prismaCustomTypesHelper";
-import { scrollToTop } from "@/src/helpers/common";
-import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
-import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
-import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-
-export default function IndicateursEnvironnementauxForm({
-  ficheSolution,
-  estimationMateriaux,
-  estimationId,
-  onNext,
-  onPrevious,
-  onClose,
-  onUpdateEstimation,
-}: {
-  ficheSolution: FicheSolution;
-  estimationMateriaux?: EstimationMateriauxFicheSolution;
-  estimationId: number;
-  onNext: () => void;
-  onPrevious: () => void;
-  onClose: () => void;
-  onUpdateEstimation: (_: EstimationWithAides) => void;
-}) {
+export default function IndicateursEnvironnementauxForm() {
   const initialValues = useMemo(
     () => ({
-      ficheSolutionId: +ficheSolution.id,
-      estimationMateriaux: mapStrapiEstimationMateriauxToFormValues(
-        ficheSolution.attributes.materiaux?.data,
-        estimationMateriaux,
-      ),
+      questions: mapAllIndiEnQuestionsToFormValues(),
     }),
-    [estimationMateriaux, ficheSolution.attributes.materiaux?.data, ficheSolution.id],
+    [],
   );
-  const form = useForm<EstimationMateriauxFormData>({
-    resolver: zodResolver(EstimationMateriauxFormSchema),
+  const form = useForm<IndicateursEnvironnementauxFormData>({
+    resolver: zodResolver(IndicateursEnvironnementauxFormSchema),
     defaultValues: initialValues,
     mode: "onBlur",
   });
@@ -58,145 +32,75 @@ export default function IndicateursEnvironnementauxForm({
     }
   }, [form, initialValues]);
 
-  const watchAllFields = form.watch();
-
-  const closeAndNotif = () => {
-    onClose();
-    notifications("success", "ESTIMATION_VALIDATED");
-  };
-
-  const onSubmitAndNext = async (data: EstimationMateriauxFormData) => onSubmit(data, onNext);
-  const onSubmitAndClose = async (data: EstimationMateriauxFormData) => onSubmit(data, closeAndNotif);
-  const onSubmitAndPrevious = async (data: EstimationMateriauxFormData) => onSubmit(data, onPrevious);
-
-  const onSubmit = async (data: EstimationMateriauxFormData, callback?: () => void) => {
-    data.globalPrice = globalPrice;
-    const actionResult = await updateEstimationMateriauxAction(estimationId, data);
-    if (actionResult.type !== "success") {
-      notifications(actionResult.type, actionResult.message);
-    } else {
-      if (actionResult.updatedEstimation) {
-        onUpdateEstimation(actionResult.updatedEstimation);
-      }
-      if (callback) {
-        callback();
-      }
-    }
+  const onSubmit = async (data: IndicateursEnvironnementauxFormData, callback?: () => void) => {
+    console.log({ data });
   };
   const { fields } = useFieldArray({
     control: form.control,
-    name: "estimationMateriaux",
+    name: "questions",
   });
-
-  const globalPrice = useMemo(() => {
-    return ficheSolution.attributes.materiaux?.data.reduce(
-      (acc, materiauCMS) => {
-        const quantiteMateriau =
-          watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +materiauCMS.id)?.quantite || 0;
-        return {
-          entretien: {
-            min: quantiteMateriau * (materiauCMS.attributes.cout_minimum_entretien || 0) + acc.entretien.min,
-            max: quantiteMateriau * (materiauCMS.attributes.cout_maximum_entretien || 0) + acc.entretien.max,
-          },
-          fourniture: {
-            min: quantiteMateriau * (materiauCMS.attributes.cout_minimum_fourniture || 0) + acc.fourniture.min,
-            max: quantiteMateriau * (materiauCMS.attributes.cout_maximum_fourniture || 0) + acc.fourniture.max,
-          },
-        };
-      },
-      { entretien: { min: 0, max: 0 }, fourniture: { min: 0, max: 0 } },
-    );
-  }, [ficheSolution, watchAllFields]);
 
   const disabled = form.formState.isSubmitting;
 
-  const getMateriauFromId = useCallback(
-    (materiauId: number) => ficheSolution.attributes.materiaux?.data.find((cmsMat) => +cmsMat.id === +materiauId),
-    [ficheSolution.attributes.materiaux?.data],
+  const getFieldIndexFromQuestionCode = useCallback(
+    (questionCode: string) => {
+      return fields.findIndex((field) => field.code === questionCode);
+    },
+    [fields],
   );
 
   return (
-    <>
-      {ficheSolution.attributes.materiaux?.data && ficheSolution.attributes.materiaux.data.length > 0 ? (
-        <>
-          <form
-            id={`estimation-fiche-solution-${ficheSolution.id}`}
-            onSubmit={form.handleSubmit((data) => onSubmit(data))}
-          >
-            {fields.map((field, index) => (
-              <EstimationMateriauField materiau={getMateriauFromId(+field.materiauId)} key={field.materiauId}>
-                <InputFormField
-                  label={
-                    getUniteCoutFromCode(getMateriauFromId(+field.materiauId)?.attributes.cout_unite).estimationLabel
-                  }
-                  type="number"
-                  control={form.control}
-                  path={`estimationMateriaux.${index}.quantite`}
-                  whiteBackground
-                />
-                <div>Investissement</div>
-                <div className="mb-2 font-bold">
-                  {getLabelCoutFournitureByQuantite(
-                    getMateriauFromId(+field.materiauId)?.attributes,
-                    watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
-                  )}
-                </div>
-                <div>Entretien</div>
-                <div className="mb-2 font-bold">
-                  {getLabelCoutEntretienByQuantite(
-                    getMateriauFromId(+field.materiauId)?.attributes,
-                    watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
-                  )}
-                </div>
-              </EstimationMateriauField>
-            ))}
-            <EstimationMateriauGlobalPriceFooter
-              title={ficheSolution.attributes.titre}
-              investissementMin={globalPrice?.fourniture.min}
-              investissementMax={globalPrice?.fourniture.max}
-              entretienMin={globalPrice?.entretien.min}
-              entretienMax={globalPrice?.entretien.max}
-            />
-            <div className="flex items-center">
-              <Button
-                className={`mr-4 rounded-3xl !p-0`}
-                onClick={form.handleSubmit(onSubmitAndNext)}
-                disabled={disabled}
-              >
-                <div
-                  className="h-10 px-4 py-2"
-                  onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
-                >
-                  {"Suivant"}
-                </div>
-              </Button>
-              <Button
-                className={`mr-4 rounded-3xl`}
-                onClick={form.handleSubmit(onSubmitAndClose)}
-                disabled={disabled}
-                priority="secondary"
-              >
-                {"Enregistrer et finir plus tard"}
-              </Button>
-              <Button
-                className={`mr-4 rounded-3xl !p-0`}
-                onClick={form.handleSubmit(onSubmitAndPrevious)}
-                disabled={disabled}
-                priority="tertiary"
-              >
-                <div
-                  className="h-10 px-4 py-2"
-                  onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}
-                >
-                  {"Précédent"}
-                </div>
-              </Button>
+    <form id={`indicateurs-env-form`} onSubmit={form.handleSubmit((data) => onSubmit(data))}>
+      <>
+        <div className="mb-12">
+          <Button className={`mr-4 rounded-3xl `} type="submit" disabled={disabled}>
+            Valider
+          </Button>
+        </div>
+        {ALL_INDIEN_QUESTIONS.map((questionGroup) => (
+          <div className="mb-6" key={questionGroup.label}>
+            <div className="mb-2 flex items-center">
+              <Image src={questionGroup.image} alt={questionGroup.label} width={50} height={50} className="h-7" />
+              <div className="mt-2 text-xl font-bold">{questionGroup.label}</div>
             </div>
-          </form>
-        </>
-      ) : (
-        <div className="mb-4 text-dsfr-text-title-grey">Aucun matériau n{"'"}a été renseigné pour cette fiche</div>
-      )}{" "}
-    </>
+            {questionGroup.questions.map((question) => (
+              <div
+                key={question.code}
+                onClick={() =>
+                  form.setFocus(`questions.${+(getFieldIndexFromQuestionCode(question.code) ?? 0)}.quantite`)
+                }
+                className={clsx(
+                  "mb-2 flex items-center justify-between rounded-2xl bg-dsfr-background-contrast-blue-france p-4",
+                  "focus-within:bg-dsfr-background-contrast-blue-france-hover",
+                )}
+              >
+                <div className="flex items-center">
+                  <Image src={question.image} alt="" width={50} height={50} className="w-11 mr-3 rounded-sm" />
+                  <label
+                    htmlFor={`input-form-field__questions.${+(
+                      getFieldIndexFromQuestionCode(question.code) ?? 0
+                    )}.quantite`}
+                    className="font-bold"
+                  >
+                    {question.label}
+                  </label>
+                </div>
+                <div className="flex items-center">
+                  <InputFormField
+                    type="number"
+                    control={form.control}
+                    path={`questions.${+(getFieldIndexFromQuestionCode(question.code) ?? 0)}.quantite`}
+                    whiteBackground
+                    className="!m-0 flex flex-col"
+                    inputClassName="rounded-lg shadow-none w-20 !ml-auto"
+                    unite={question.unite.label}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
+        ))}
+      </>
+    </form>
   );
 }

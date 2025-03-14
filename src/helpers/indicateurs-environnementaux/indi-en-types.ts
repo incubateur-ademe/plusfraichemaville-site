@@ -7,7 +7,7 @@ export const INDIEN_UNITE_METRE_CARRE: INDIEN_QUESTION_UNITE = {
 };
 
 export const INDIEN_UNITE_METRE_ARBRE: INDIEN_QUESTION_UNITE = {
-  label: "arbre",
+  label: "arbres",
 };
 
 export type INDIEN_QUESTION = {

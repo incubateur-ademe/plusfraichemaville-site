@@ -38,7 +38,7 @@ export const FicheDiagnosticChoixParcours = () => {
           <div className="flex flex-col content-center items-center p-10">
             <div>Je calcule les indicateurs environnementaux de mon espace</div>
             <div className="font-normal text-dsfr-text-mention-grey">(en open source)</div>
-            <div className="fr-btn mt-12 rounded-2xl hover:bg-dsfr-hover-blue-sun">Calculer les indicateurs</div>
+            <div className="fr-btn mt-12 rounded-3xl hover:bg-dsfr-hover-blue-sun">Calculer les indicateurs</div>
           </div>
         </Link>
         <Link className="pfmv-card flex flex-col items-center text-[1.375rem] md:ml-0" href={urlParcoursPrestation}>
@@ -52,7 +52,7 @@ export const FicheDiagnosticChoixParcours = () => {
           <div className="flex flex-col content-center items-center p-10">
             <div>Je choisis les bonnes prestations de diagnostic de surchauffe</div>
             <div className="font-normal text-dsfr-text-mention-grey">(en bureau d’étude)</div>
-            <div className="fr-btn mt-12 rounded-2xl hover:bg-dsfr-hover-blue-sun">Choisir des prestations</div>
+            <div className="fr-btn mt-12 rounded-3xl hover:bg-dsfr-hover-blue-sun">Choisir des prestations</div>
           </div>
         </Link>
       </div>
