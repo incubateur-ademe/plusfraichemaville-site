@@ -42,6 +42,7 @@ export default function FicheSolutionTabMateriaux({
                         alt={mat.titre}
                         sizes="30vw"
                         className={"rounded-2xl object-cover"}
+                        unoptimized
                       />
                     </div>
                     <div className="text-2xl font-bold">{mat.titre}</div>

@@ -3,13 +3,19 @@
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "../helpers/strapiArrayUtils";
 import { strapiGraphQLCall } from "../strapiClient";
 import { StrapiFilter } from "./commonStrapiFilters";
-import { FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT, STRAPI_IMAGE_FRAGMENT } from "./strapiFragments";
+import {
+  CONTACT_FRAGMENT,
+  FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT,
+  REX_DIAGNOSTIC_CARD_INFO_FRAGMENT,
+  STRAPI_IMAGE_FRAGMENT,
+} from "./strapiFragments";
 import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
   strapiFilter: StrapiFilter,
-) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} query {
+) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} ${CONTACT_FRAGMENT}
+ ${REX_DIAGNOSTIC_CARD_INFO_FRAGMENT} query {
   ficheDiagnostics ${strapiFilter.wholeFilterString()} {
     data {
       id
@@ -17,10 +23,6 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
         titre
         description_courte
         description
-        etapes_mise_en_oeuvre {
-          titre
-          description
-        }
         etapes_mise_en_oeuvre {
           titre
           description
@@ -49,6 +51,28 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
         vigilance_description
         en_savoir_plus_description
         partenaire
+        nom_scientifique
+        type_livrables
+        echelle_thermique
+        echelle_spatiale
+        objectifs {
+          description
+        }
+        image_icone {
+          ...ImageInfo
+        }
+        lien_rex_diagnostics {
+          data {
+            id
+            attributes {
+              retour_experience_diagnostic {
+                data {
+                  ...REXFicheDiagnosticCardInfo
+                }
+              }
+            }
+          }
+        }  
       }
     }
   }
@@ -56,7 +80,8 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
 
 export const GET_FICHE_DIAGNOSTIC_CARD_DATA = async (
   strapiFilter: StrapiFilter,
-) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} query {
+) => ` ${STRAPI_IMAGE_FRAGMENT} ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} ${CONTACT_FRAGMENT} 
+ ${REX_DIAGNOSTIC_CARD_INFO_FRAGMENT} query {
       ficheDiagnostics ${strapiFilter.wholeFilterString()} {
         data {
           ...FicheDiagnosticCardInfo

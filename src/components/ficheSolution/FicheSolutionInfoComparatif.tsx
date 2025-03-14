@@ -3,7 +3,7 @@ import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { getPorteeBaisseTemperatureLabelFromCode } from "@/src/helpers/porteeBaisseTemperatureFicheSolution";
 import baisseICUIcon from "../../../public/images/fiches-solutions/picto-thermometre.svg";
 import Image from "next/image";
-import { TypeFiche } from "@/src/helpers/common";
+import { ICON_COLOR_FICHE_SOLUTION, TypeFiche } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 export default function FicheSolutionInfoComparatif({
@@ -61,7 +61,7 @@ export default function FicheSolutionInfoComparatif({
         <hr className="mt-3 pb-2" />
         <div className="text-dsfr-text-mention-grey">Délai des travaux</div>
         <div className="inline-block w-full">
-          <div className="float-left text-base">{delaiTravaux?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
+          <div className="float-left text-base">{delaiTravaux?.icons(ICON_COLOR_FICHE_SOLUTION)}</div>
           <div className="float-right mt-1 text-dsfr-text-mention-grey">
             {`de ${ficheAttributes.delai_travaux_minimum} à ${ficheAttributes.delai_travaux_maximum} mois`}
           </div>
@@ -72,7 +72,7 @@ export default function FicheSolutionInfoComparatif({
         <div className="text-dsfr-text-mention-grey">Coût</div>
         <div className="inline-block w-full">
           <div className="float-left">
-            <div className="float-left text-base">{cout?.icons(TypeFiche.solution, "fr-icon--sm")}</div>
+            <div className="float-left text-base">{cout?.icons(ICON_COLOR_FICHE_SOLUTION)}</div>
           </div>
           <div className="float-right mt-1 text-dsfr-text-mention-grey">{getLabelCoutFourniture(ficheAttributes)}</div>
         </div>
