@@ -1,4 +1,4 @@
-import type { ChangeEventHandler, HTMLInputTypeAttribute, HTMLProps, ReactNode } from "react";
+import React, { ChangeEventHandler, HTMLInputTypeAttribute, HTMLProps, ReactNode } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/src/components/common/RedAsterisk";
 import clsx from "clsx";
@@ -18,6 +18,7 @@ type CommonProps<T extends FieldValues> = {
   info?: ReactNode | ((_?: string | null) => ReactNode);
   asterisk?: boolean;
   whiteBackground?: boolean;
+  onFocus?: (_: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
 type InputProps = {
@@ -49,6 +50,7 @@ const InputFormField = <T extends FieldValues>({
   info,
   asterisk,
   whiteBackground = false,
+  onFocus = (_: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {},
   ...rest
 }: InputFormFieldProps<T>) => {
   const id = `input-form-field__${path}`;
@@ -106,6 +108,7 @@ const InputFormField = <T extends FieldValues>({
               min={rest.min}
               max={rest.max}
               step={rest.step}
+              onFocus={onFocus}
             />
           );
 

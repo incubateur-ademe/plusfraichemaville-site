@@ -342,6 +342,10 @@
   @apply w-[90%] max-w-[90%] flex-shrink-0 flex-grow-0 basis-full;
 }
 
+.md-modal .fr-grid-row > div {
+  @apply w-[80%] max-w-[80%] flex-shrink-0 flex-grow-0 basis-full;
+}
+
 .custom-modal .fr-modal__body {
   @apply rounded-[20px];
 }
@@ -373,11 +377,19 @@
   height: unset;
   margin: 10vh 0 0;
 }
+.md-modal.fr-modal::before {
+  flex: none;
+  height: unset;
+  margin: 10vh 0 0;
+}
 
 .l-modal .fr-modal__content {
   @apply mb-0;
 }
 
+.md-modal .fr-modal__content {
+  @apply mb-0;
+}
 .fiche-diagnostic-modal .fr-modal__body {
   @apply bg-dsfr-background-alt-red-marianne;
 }

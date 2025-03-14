@@ -29,7 +29,7 @@ export const INDIEN_QUESTION_SURFACE_BASSIN_PAYSAGER: INDIEN_QUESTION = {
 
 export const INDIEN_QUESTION_NOMBRE_ARBRES_JEUNES: INDIEN_QUESTION = {
   code: "nbArbresJeunes",
-  label: "Combien existent-ils d'arbres avec un âge inférieur à 20 ans) ?",
+  label: "Combien existe-t-il d'arbres avec un âge inférieur à 20 ans) ?",
   unite: INDIEN_UNITE_METRE_ARBRE,
   coeffRafraichissementUrbain: 8,
   coeffBiodiversite: 5,

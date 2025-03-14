@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import InputFormField from "@/src/components/common/InputFormField";
@@ -128,6 +128,9 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
                     className="!m-0 flex flex-col"
                     inputClassName="rounded-lg shadow-none w-20 !ml-auto"
                     unite={question.unite.label}
+                    onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) =>
+                      event.target?.select()
+                    }
                   />
                 </div>
               </div>

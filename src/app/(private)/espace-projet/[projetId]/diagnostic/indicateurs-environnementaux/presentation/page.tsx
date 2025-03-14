@@ -4,6 +4,8 @@ import clsx from "clsx";
 import React from "react";
 import { Separator } from "@/src/components/common/separator";
 import Image from "next/image";
+import { createModal } from "@codegouvfr/react-dsfr/Modal";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 export default async function IndicateursEnvironnementauxPresentationPage(props: {
   params: Promise<{ projetId: number }>;
@@ -12,6 +14,12 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
   if (!params.projetId) {
     return null;
   }
+
+  const modal = createModal({
+    id: "partage-overview-invite-member",
+    isOpenedByDefault: false,
+  });
+
   return (
     <div className="fr-container pt-8 text-black">
       <h1 className="mb-4 text-2xl font-bold">
@@ -24,12 +32,9 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
           "l’accompagnement d’un bureau d’études est recommandé."}
       </div>
       <div>
-        <Link
-          className="fr-btn rounded-3xl"
-          href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(params.projetId)}
-        >
+        <Button className="fr-btn rounded-3xl" nativeButtonProps={modal.buttonProps}>
           Commencer le calcul
-        </Link>
+        </Button>
         <i className={clsx("ri-timer-line", "fr-icon--sm ml-4 mr-1 text-dsfr-text-mention-grey")} />
         <span className="text-sm text-dsfr-text-mention-grey">Environ 10 minutes</span>
       </div>
@@ -141,6 +146,55 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
           className="ml-4 w-10"
         />
       </div>
+      <modal.Component title="" className="custom-modal md-modal">
+        <h1 className="!text-xl !text-pfmv-navy">
+          Pour calculer vos indicateurs, vous aurez besoin d’observer l’espace à rafraîchir et de métrer les éléments
+          suivants :
+        </h1>
+        <div className="flex flex-row gap-6">
+          <div>
+            <Image
+              src="/images/fiches-diagnostic/indicateurs-environnementaux/tribu-exemple-plan.jpg"
+              alt="exemple de plan de masse"
+              width={1033}
+              height={628}
+              className="max-w-[30rem] "
+            />
+            <div className="mt-2 text-xs italic text-dsfr-text-mention-grey">Plan de masse des éléments à métrer</div>
+          </div>
+          <div className="flex flex-col gap-3">
+            <div>
+              <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
+              Nombre et maturité des arbres
+            </div>
+            <div>
+              <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
+              Surface végétaliseé au sol
+            </div>
+            <div>
+              <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
+              Surface et types de revêtement au sol
+            </div>
+            <div>
+              <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
+              Surface de fontaine et de bassins d’eau
+            </div>
+            <div>
+              <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
+              Surface et type de toiture
+            </div>
+          </div>
+        </div>
+        <div className="mt-6 font-bold text-pfmv-navy">
+          À tout moment vous avez la possibilité d’enregistrer vos réponses et de revenir plus tard.
+        </div>
+        <Link
+          className="fr-btn mb-6 mt-6 rounded-3xl"
+          href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(params.projetId)}
+        >
+          C’est parti !
+        </Link>
+      </modal.Component>
     </div>
   );
 }
