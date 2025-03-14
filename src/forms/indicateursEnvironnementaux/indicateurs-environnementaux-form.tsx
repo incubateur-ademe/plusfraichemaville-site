@@ -12,8 +12,12 @@ import { mapAllIndiEnQuestionsToFormValues } from "@/src/helpers/indicateurs-env
 import Button from "@codegouvfr/react-dsfr/Button";
 import Image from "next/image";
 import { clsx } from "clsx";
+import Link from "next/link";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { Separator } from "@/src/components/common/separator";
 
-export default function IndicateursEnvironnementauxForm() {
+export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelations }) {
   const initialValues = useMemo(
     () => ({
       questions: mapAllIndiEnQuestionsToFormValues(),
@@ -52,10 +56,39 @@ export default function IndicateursEnvironnementauxForm() {
   return (
     <form id={`indicateurs-env-form`} onSubmit={form.handleSubmit((data) => onSubmit(data))}>
       <>
-        <div className="mb-12">
-          <Button className={`mr-4 rounded-3xl `} type="submit" disabled={disabled}>
-            Valider
-          </Button>
+        <div className="sticky top-0 z-10 mb-12">
+          <div className="flex h-20 w-full items-center justify-between bg-white">
+            <Link
+              className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
+              href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION(projet.id)}
+            >
+              Retour
+            </Link>
+            <div className="flex flex-row gap-6">
+              <Button
+                className={`mr-4 rounded-3xl !shadow-none`}
+                onClick={() => {
+                  console.log("finir plus tard");
+                }}
+                iconId="fr-icon-save-3-line"
+                iconPosition="left"
+                disabled={disabled}
+                priority="secondary"
+              >
+                {"Reprendre plus tard"}
+              </Button>
+              <Button
+                className={`mr-4 rounded-3xl `}
+                type="submit"
+                disabled={disabled}
+                iconId="fr-icon-arrow-right-line"
+                iconPosition="right"
+              >
+                Voir mes résultats
+              </Button>
+            </div>
+          </div>
+          <Separator className="contrast-100" />
         </div>
         {ALL_INDIEN_QUESTIONS.map((questionGroup) => (
           <div className="mb-6" key={questionGroup.label}>
@@ -71,7 +104,8 @@ export default function IndicateursEnvironnementauxForm() {
                 }
                 className={clsx(
                   "mb-2 flex items-center justify-between rounded-2xl bg-dsfr-background-contrast-blue-france p-4",
-                  "focus-within:bg-dsfr-background-contrast-blue-france-hover",
+                  "focus-within:!bg-dsfr-background-contrast-blue-france-active",
+                  "hover:bg-dsfr-background-contrast-blue-france-hover",
                 )}
               >
                 <div className="flex items-center">
