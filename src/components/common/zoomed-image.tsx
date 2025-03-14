@@ -22,6 +22,7 @@ export const ZoomedImage = ({ image, onClose }: ZoomedImageProps) => {
           className="mx-auto h-[60vh] w-[90vh] !object-contain"
           src={getStrapiImageUrl(image.image, STRAPI_IMAGE_KEY_SIZE.large)}
           alt={image.caption ?? "image fiche rex"}
+          unoptimized
         />
         {image.caption && <p className="mt-2 text-center text-white">{image.caption}</p>}
       </div>

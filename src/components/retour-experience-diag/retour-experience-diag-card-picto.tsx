@@ -19,6 +19,7 @@ export const RetourExperienceDiagCardPicto = ({ ficheDiagnostic }: RetourExperie
           className="object-contain"
           width={50}
           height={50}
+          unoptimized
         />
       </div>
     </BigTooltip>

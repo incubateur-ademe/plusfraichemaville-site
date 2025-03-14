@@ -89,6 +89,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                     width={64}
                     height={64}
                     alt={ficheDiagData?.titre ?? ""}
+                    unoptimized
                   />
                 </div>
                 <div className={"text-[1.375rem] font-bold"}>{ficheDiagData?.titre}</div>

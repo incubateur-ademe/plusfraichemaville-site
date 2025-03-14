@@ -43,6 +43,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
               alt={ficheDiagnostic.attributes.titre}
               width={130}
               height={130}
+              unoptimized
             />
           </div>
 

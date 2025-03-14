@@ -54,6 +54,7 @@ export const RetourExperienceDiagPrincipauxResultats = ({
                     src={getStrapiImageUrl(image.image, STRAPI_IMAGE_KEY_SIZE.medium)}
                     alt={image.caption ?? "image fiche rex"}
                     onClick={() => setZoomedImage(image)}
+                    unoptimized
                   />
                   <div className="mt-4 text-xs text-dsfr-text-mention-grey">{image.caption}</div>
                 </SplideSlide>

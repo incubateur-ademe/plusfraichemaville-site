@@ -37,6 +37,7 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
                 alt={titre ?? ""}
                 width={130}
                 height={130}
+                unoptimized
               />
             </div>
             <div className="w-full">

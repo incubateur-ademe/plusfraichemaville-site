@@ -36,6 +36,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
               className="object-contain"
               width={150}
               height={150}
+              unoptimized
             />
           </div>
           <div>

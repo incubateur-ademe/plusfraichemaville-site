@@ -32,6 +32,7 @@ export const RetourExperienceDiagCard = ({ rex, className, onClickButton }: Reto
           className="h-full w-full rounded-t-2xl object-cover"
           src={getStrapiImageUrl(image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt={titre || "image titre"}
+          unoptimized
         />
         <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
           <RetourExperienceDiagLabel>

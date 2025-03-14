@@ -39,6 +39,7 @@ export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
           className="block max-h-40 min-h-96 w-full object-cover md:max-h-96"
           src={getStrapiImageUrl(rex.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
           alt={titre || "image titre"}
+          unoptimized
         />
         <div className="fr-container absolute bottom-2 left-1/2 flex -translate-x-1/2 gap-2 text-white">
           <RetourExperienceDiagLabel>
