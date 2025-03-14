@@ -1,5 +1,4 @@
-import { STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { getStrapiImageUrl } from "@/src/lib/strapi/strapiClient";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-experience-diagnostic";
 import { ImageLoader } from "../common/image-loader";
 import CmsRichText from "../common/CmsRichText";
@@ -24,6 +23,7 @@ export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
     besoin,
     points_vigilance,
     apres,
+    credits,
     contacts,
     lien_rex_diagnostics,
     resultats,
@@ -68,10 +68,24 @@ export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
           <h2 className="mb-8">Combinaison de méthodes de diagnostic utilisées</h2>
           <RetourExperienceDiagCombinaison lienRexDiagnostics={lien_rex_diagnostics.data} />
           <RetourExperienceDiagPrincipauxResultats content={resultats} images={resultats_images} />
-          <h2 className="mb-4">Points de vigilance</h2>
-          <CmsRichText label={points_vigilance} className="mb-20" />
-          <h2 className="mb-4">Et après ?</h2>
-          <CmsRichText label={apres} className="mb-20" />
+          {!!points_vigilance && (
+            <>
+              <h2 className="mb-4">Points de vigilance</h2>
+              <CmsRichText label={points_vigilance} className="mb-20" />
+            </>
+          )}
+          {!!apres && (
+            <>
+              <h2 className="mb-4">Et après ?</h2>
+              <CmsRichText label={apres} className="mb-20" />
+            </>
+          )}
+          {!!credits && (
+            <>
+              <h2 className="mb-4">Crédits</h2>
+              <CmsRichText label={credits} />
+            </>
+          )}
         </div>
       </div>
     </div>
