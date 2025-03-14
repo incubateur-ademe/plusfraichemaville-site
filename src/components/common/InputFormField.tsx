@@ -121,13 +121,15 @@ const InputFormField = <T extends FieldValues>({
               className,
             )}
           >
-            {label && (<label className="fr-label fr-mb-1v" htmlFor={id}>
-              {label} {asterisk && <RedAsterisk />}
-              {hint && <span className="fr-hint-text">{hint}</span>}
-            </label>)}
+            {label && (
+              <label className="fr-label fr-mb-1v" htmlFor={id}>
+                {label} {asterisk && <RedAsterisk />}
+                {hint && <span className="fr-hint-text">{hint}</span>}
+              </label>
+            )}
 
             <div className="flex items-center">
-            {icon ? <div className={`fr-input-wrap ${icon}`}>{input}</div> : input}
+              {icon ? <div className={`fr-input-wrap ${icon}`}>{input}</div> : input}
               <div className="ml-2">{unite}</div>
             </div>
             {info && (

@@ -32,7 +32,7 @@ export default function IndicateursEnvironnementauxForm() {
     }
   }, [form, initialValues]);
 
-  const onSubmit = async (data: IndicateursEnvironnementauxFormData, callback?: () => void) => {
+  const onSubmit = async (data: IndicateursEnvironnementauxFormData) => {
     console.log({ data });
   };
   const { fields } = useFieldArray({
@@ -75,7 +75,7 @@ export default function IndicateursEnvironnementauxForm() {
                 )}
               >
                 <div className="flex items-center">
-                  <Image src={question.image} alt="" width={50} height={50} className="w-11 mr-3 rounded-sm" />
+                  <Image src={question.image} alt="" width={50} height={50} className="mr-3 w-11 rounded-sm" />
                   <label
                     htmlFor={`input-form-field__questions.${+(
                       getFieldIndexFromQuestionCode(question.code) ?? 0

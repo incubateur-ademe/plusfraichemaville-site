@@ -3,7 +3,7 @@ import IndicateursEnvironnementauxForm from "@/src/forms/indicateursEnvironnemen
 export default async function IndicateursEnvironnementauxPresentationPage() {
   return (
     <div className="fr-container pt-8 text-black">
-      <IndicateursEnvironnementauxForm/>
+      <IndicateursEnvironnementauxForm />
     </div>
   );
 }

@@ -50,5 +50,4 @@ export const INDIEN_QUESTION_GROUPE_SURFACE_VEGETALISEE: INDIEN_GORUPE_QUESTIONS
   image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/groupe-surface-vegetalisee.svg",
 };
 
-
 export const ALL_INDIEN_QUESTIONS = [INDIEN_QUESTION_GROUPE_ARBRE, INDIEN_QUESTION_GROUPE_SURFACE_VEGETALISEE];
