@@ -1,6 +1,7 @@
 export const success = {
   ESTIMATION_DELETE: "Votre estimation a bien été supprimée.",
   ESTIMATION_CREATED: "Votre estimation a bien été créée.",
+  DIAGNOSTIC_SIMULATION_UPDATED: "Votre données ont bien été enregistrées.",
   ESTIMATION_VALIDATED: "Votre estimation a bien été enregistrée.",
   ESTIMATION_AIDE_ADDED: "L'aide a bien été ajoutée à votre estimation.",
   ESTIMATION_AIDE_DELETED: "L'aide a bien été supprimée de votre estimation.",

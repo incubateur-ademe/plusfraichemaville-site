@@ -20,7 +20,6 @@ export const projetIncludes = {
     where: { deleted_at: null },
     include: { user: true },
   },
-
   fiches: true,
   sourcing_user_projets: {
     include: {
@@ -49,6 +48,7 @@ export const projetIncludes = {
       },
     },
   },
+  diagnostic_simulations: true,
 };
 
 export const projetPublicSelect = {

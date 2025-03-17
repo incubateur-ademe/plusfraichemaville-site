@@ -1,4 +1,5 @@
-import { collectivite, Prisma, projet, projet_fiche, RoleProjet, User } from "@prisma/client";
+import { collectivite, Prisma, projet, projet_fiche, RoleProjet, User, diagnostic_simulation } from "@prisma/client";
+import { IndiEnQuestion } from "@/src/helpers/indicateurs-environnementaux/indi-en-types";
 
 export type UserWithCollectivite = Prisma.UserGetPayload<{
   include: { collectivites: { include: { collectivite: true } } };
@@ -142,6 +143,7 @@ export interface ProjetWithRelations extends projet {
   users: UserProjetWithUser[];
   sourcing_user_projets: ProjetSourcingContact[];
   fiches: projet_fiche[];
+  diagnostic_simulations: diagnostic_simulation[];
 }
 
 export interface ProjetWithPublicRelations
@@ -182,4 +184,17 @@ export type ProjectionsIndicateurClimadiag = {
   2030: ClimadiagTemperatureProjection;
   2050: ClimadiagTemperatureProjection;
   2100: ClimadiagTemperatureProjection;
+};
+
+export type IndiEnItemSaisie = {
+  questionCode: IndiEnQuestion["code"];
+  quantite: number;
+};
+
+export type ProjetIndiEnSimuation = {
+  questions: IndiEnItemSaisie[];
+  coeffRafraichissementUrbain: number;
+  coeffBiodiversite: number;
+  coeffPermeabilite: number;
+  partCanopee: number;
 };

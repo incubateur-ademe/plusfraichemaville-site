@@ -1,16 +1,16 @@
-export type INDIEN_QUESTION_UNITE = {
+export type IndiEnQuestionUnite = {
   label: string;
 };
 
-export const INDIEN_UNITE_METRE_CARRE: INDIEN_QUESTION_UNITE = {
+export const INDIEN_UNITE_METRE_CARRE: IndiEnQuestionUnite = {
   label: "m²",
 };
 
-export const INDIEN_UNITE_METRE_ARBRE: INDIEN_QUESTION_UNITE = {
+export const INDIEN_UNITE_METRE_ARBRE: IndiEnQuestionUnite = {
   label: "arbres",
 };
 
-export type INDIEN_QUESTION = {
+export type IndiEnQuestion = {
   code: string;
   label: string;
   moreInfo?: string;
@@ -19,16 +19,12 @@ export type INDIEN_QUESTION = {
   coeffBiodiversite: number;
   coeffPermeabilite: number;
   surfaceCanopee: number;
-  unite: INDIEN_QUESTION_UNITE;
+  priseEnCompteEmprise: boolean;
+  unite: IndiEnQuestionUnite;
 };
 
-export type INDIEN_GORUPE_QUESTIONS = {
+export type IndiEnGroupeQuestion = {
   label: string;
   image: string;
-  questions: INDIEN_QUESTION[];
-};
-
-export type INDIEN_ITEM_SAISIE = {
-  questionCode: INDIEN_QUESTION["code"];
-  quantite: number;
+  questions: IndiEnQuestion[];
 };

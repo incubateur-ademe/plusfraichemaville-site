@@ -60,6 +60,7 @@ model User {
   emails                       email[]
   estimations_aides            estimations_aides[]
   fiches                       projet_fiche[]
+  diagnostic_simulation        diagnostic_simulation[]
 }
 
 model VerificationToken {
@@ -196,6 +197,7 @@ model projet {
   sourcing_rex              Json?
   sourcing_user_projets     projet_sourcing_contact[] @relation("sourcing_projet")
   fiches                    projet_fiche[]
+  diagnostic_simulations    diagnostic_simulation[]
 }
 
 enum FicheType {
@@ -294,6 +296,18 @@ model conversation {
   ragtimeId  String   @unique
   created_at DateTime @default(now())
   user       User?    @relation(fields: [userId], references: [id])
+}
+
+model diagnostic_simulation {
+  id             String   @id @default(cuid())
+  user_id        String?
+  projet_id      Int
+  projet         projet   @relation(fields: [projet_id], references: [id], onDelete: Cascade)
+  initial_values Json
+  validated      Boolean  @default(false)
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+  user           User?    @relation(fields: [user_id], references: [id])
 }
 
 enum ReferenceType {

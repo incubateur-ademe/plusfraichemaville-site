@@ -14,15 +14,25 @@ import Image from "next/image";
 import { clsx } from "clsx";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { Separator } from "@/src/components/common/separator";
+// eslint-disable-next-line max-len
+import { upsertDiagnosticSimulationAction } from "@/src/actions/diagnostic-simulation/upsert-diagnostic-simulation-action";
+import { notifications } from "@/src/components/common/notifications";
+import { upsert } from "@/src/helpers/listUtils";
+import { diagnostic_simulation } from "@prisma/client";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 
 export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelations }) {
+  const currentDiagnosticSimulation: diagnostic_simulation | undefined = projet.diagnostic_simulations[0];
+  const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const initialValues = useMemo(
     () => ({
-      questions: mapAllIndiEnQuestionsToFormValues(),
+      questions: mapAllIndiEnQuestionsToFormValues(
+        currentDiagnosticSimulation?.initial_values as ProjetIndiEnSimuation,
+      ),
     }),
-    [],
+    [currentDiagnosticSimulation?.initial_values],
   );
   const form = useForm<IndicateursEnvironnementauxFormData>({
     resolver: zodResolver(IndicateursEnvironnementauxFormSchema),
@@ -36,8 +46,23 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
     }
   }, [form, initialValues]);
 
+  const updateStore = (diagnosticSimulation?: diagnostic_simulation) => {
+    if (diagnosticSimulation) {
+      updateProjetInStore({
+        ...projet,
+        diagnostic_simulations: upsert(projet.diagnostic_simulations, diagnosticSimulation),
+      });
+    }
+  };
+
   const onSubmit = async (data: IndicateursEnvironnementauxFormData) => {
-    console.log({ data });
+    const actionResult = await upsertDiagnosticSimulationAction(projet.id, data, true, currentDiagnosticSimulation?.id);
+    if (actionResult.type !== "success") {
+      notifications(actionResult.type, actionResult.message);
+    } else {
+      notifications(actionResult.type, actionResult.message);
+      updateStore(actionResult.diagnosticSimulation);
+    }
   };
   const { fields } = useFieldArray({
     control: form.control,
@@ -48,7 +73,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
 
   const getFieldIndexFromQuestionCode = useCallback(
     (questionCode: string) => {
-      return fields.findIndex((field) => field.code === questionCode);
+      return fields.findIndex((field) => field.questionCode === questionCode);
     },
     [fields],
   );
@@ -78,7 +103,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
                 {"Reprendre plus tard"}
               </Button>
               <Button
-                className={`mr-4 rounded-3xl `}
+                className="mr-4 rounded-3xl"
                 type="submit"
                 disabled={disabled}
                 iconId="fr-icon-arrow-right-line"
