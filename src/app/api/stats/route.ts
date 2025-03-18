@@ -11,7 +11,7 @@ import { fr } from "date-fns/locale/fr";
 const StatsRouteSchema = z.object({
   since: z
     .number()
-    .positive()
+    .nonnegative()
     .max(5000, { message: "Veuillez rentrer une valeur inférieure à 5000 pour le paramètre since" }),
   periodicity: z.enum(["year", "month", "week", "day"]),
 });
@@ -29,7 +29,7 @@ type StatOutput = {
 export async function GET(request: NextRequest) {
   const parsedRequest = StatsRouteSchema.safeParse({
     since: +(request.nextUrl.searchParams.get("since") ?? 0),
-    periodicity: request.nextUrl.searchParams.get("periodicity"),
+    periodicity: request.nextUrl.searchParams.get("periodicity") ?? "month",
   });
   if (!parsedRequest.success) {
     const { errors } = parsedRequest.error;
@@ -49,12 +49,16 @@ export async function GET(request: NextRequest) {
       minutes: -dateBeginOfLastPeriod.getTimezoneOffset(),
     });
 
-    const dateBeginOfFirstPeriod = add(dateBeginOfLastPeriod, {
-      ...(periodicity === "year" && { years: 1 - nbIntervals }),
-      ...(periodicity === "month" && { months: 1 - nbIntervals }),
-      ...(periodicity === "week" && { weeks: 1 - nbIntervals }),
-      ...(periodicity === "day" && { days: 1 - nbIntervals }),
-    });
+    const dateBeginOfFirstPeriod = nbIntervals
+      ? add(dateBeginOfLastPeriod, {
+          ...(periodicity === "year" && { years: 1 - nbIntervals }),
+          ...(periodicity === "month" && { months: 1 - nbIntervals }),
+          ...(periodicity === "week" && { weeks: 1 - nbIntervals }),
+          ...(periodicity === "day" && { days: 1 - nbIntervals }),
+        })
+      : add(new Date(2024, 2, 15), {
+          minutes: -dateBeginOfLastPeriod.getTimezoneOffset(),
+        });
 
     const results = await getNorthStarStats({ dateFrom: dateBeginOfFirstPeriod, range: periodicity });
 
@@ -63,6 +67,7 @@ export async function GET(request: NextRequest) {
         value: Number(result.score),
         date: result.periode!,
       })),
+      description: "Nombre de projets visibles dans l'annuaire de notre espace projet.",
     };
 
     return NextResponse.json(sanitizeResults);
