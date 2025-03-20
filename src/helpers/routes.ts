@@ -34,6 +34,8 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/presentation`,
   ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/questions`,
+  ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_RESULTATS: (projetId: number) =>
+    `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/resultats`,
   ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/liste`,
   ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION: (projetId: number) =>

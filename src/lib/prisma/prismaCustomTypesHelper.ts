@@ -33,10 +33,13 @@ export const calculateCoeffsDiagnosticSimulation = (
       empriseTotale += formQuestion.quantite;
     }
   });
+
   return {
-    coeffRafraichissementUrbain: (sommeRafraichissementUrbain + sommeCanopee) / empriseTotale || 0,
-    coeffBiodiversite: (sommeBiodiversite + sommeCanopee) / empriseTotale || 0,
-    coeffPermeabilite: (sommePermeabilite + sommeCanopee) / empriseTotale || 0,
-    partCanopee: sommeCanopee / empriseTotale || 0,
+    coeffRafraichissementUrbain: sanitizeCoeffEnvValue((sommeRafraichissementUrbain + sommeCanopee) / empriseTotale),
+    coeffBiodiversite: sanitizeCoeffEnvValue((sommeBiodiversite + sommeCanopee) / empriseTotale),
+    coeffPermeabilite: sanitizeCoeffEnvValue((sommePermeabilite + sommeCanopee) / empriseTotale),
+    partCanopee: Math.round((100 * sommeCanopee) / empriseTotale || 0),
   };
 };
+
+const sanitizeCoeffEnvValue = (value: number) => Math.min(Math.round((value || 0) * 100) / 100, 1);

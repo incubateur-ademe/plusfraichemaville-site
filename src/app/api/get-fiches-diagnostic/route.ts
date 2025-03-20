@@ -3,7 +3,6 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
   const ficheDiagnosticIds = request.nextUrl.searchParams.get("ficheDiagnosticIds");
-  console.log("ids", ficheDiagnosticIds);
 
   if (ficheDiagnosticIds) {
     const ids = JSON.parse(ficheDiagnosticIds) as number[];

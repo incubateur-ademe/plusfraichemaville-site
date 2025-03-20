@@ -11,19 +11,19 @@ export const INDIEN_QUESTION_SURFACE_HERBACEE: IndiEnQuestion = {
   unite: INDIEN_UNITE_METRE_CARRE,
   coeffRafraichissementUrbain: 0.5,
   coeffBiodiversite: 0.6,
-  coeffPermeabilite: 0.8,
+  coeffPermeabilite: 1,
   surfaceCanopee: 0,
   image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-herbacee.jpg",
   priseEnCompteEmprise: true,
 };
 
-export const INDIEN_QUESTION_SURFACE_BASSIN_PAYSAGER: IndiEnQuestion = {
-  code: "surfaceBassinPaysager",
-  label: "Quelle est la surface des bassins secs ou noues paysagées pour la gestion des eaux d'orage ?",
+export const INDIEN_QUESTION_SURFACE_BUISSONANTE: IndiEnQuestion = {
+  code: "surfaceBsuissonante",
+  label: "Quelle est la surface de pleine terre végétalisée en strate buissonante ?",
   unite: INDIEN_UNITE_METRE_CARRE,
-  coeffRafraichissementUrbain: 0.8,
+  coeffRafraichissementUrbain: 0.7,
   coeffBiodiversite: 1,
-  coeffPermeabilite: 0.1,
+  coeffPermeabilite: 1,
   surfaceCanopee: 0,
   image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
   priseEnCompteEmprise: true,
@@ -31,14 +31,14 @@ export const INDIEN_QUESTION_SURFACE_BASSIN_PAYSAGER: IndiEnQuestion = {
 
 export const INDIEN_QUESTION_NOMBRE_ARBRES_JEUNES: IndiEnQuestion = {
   code: "nbArbresJeunes",
-  label: "Combien existe-t-il d'arbres avec un âge inférieur à 20 ans) ?",
+  label: "Combien existe-t-il d'arbres avec un âge inférieur à 20 ans ?",
   unite: INDIEN_UNITE_METRE_ARBRE,
   coeffRafraichissementUrbain: 8,
   coeffBiodiversite: 5,
   coeffPermeabilite: 1,
   surfaceCanopee: 8,
   image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/nombre-arbres-jeunes.jpg",
-  priseEnCompteEmprise: true,
+  priseEnCompteEmprise: false,
 };
 
 export const INDIEN_QUESTION_GROUPE_ARBRE: IndiEnGroupeQuestion = {
@@ -48,7 +48,7 @@ export const INDIEN_QUESTION_GROUPE_ARBRE: IndiEnGroupeQuestion = {
 };
 
 export const INDIEN_QUESTION_GROUPE_SURFACE_VEGETALISEE: IndiEnGroupeQuestion = {
-  questions: [INDIEN_QUESTION_SURFACE_HERBACEE, INDIEN_QUESTION_SURFACE_BASSIN_PAYSAGER],
+  questions: [INDIEN_QUESTION_SURFACE_HERBACEE, INDIEN_QUESTION_SURFACE_BUISSONANTE],
   label: "Surface végétalisées au sol",
   image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/groupe-surface-vegetalisee.svg",
 };

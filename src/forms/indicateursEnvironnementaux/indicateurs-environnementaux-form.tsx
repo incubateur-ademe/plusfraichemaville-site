@@ -22,10 +22,12 @@ import { notifications } from "@/src/components/common/notifications";
 import { upsert } from "@/src/helpers/listUtils";
 import { diagnostic_simulation } from "@prisma/client";
 import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useRouter } from "next/navigation";
 
 export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelations }) {
   const currentDiagnosticSimulation: diagnostic_simulation | undefined = projet.diagnostic_simulations[0];
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
+  const router = useRouter();
   const initialValues = useMemo(
     () => ({
       questions: mapAllIndiEnQuestionsToFormValues(
@@ -55,13 +57,24 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
     }
   };
 
-  const onSubmit = async (data: IndicateursEnvironnementauxFormData) => {
+  const onSubmitAndSeeResults = async (data: IndicateursEnvironnementauxFormData) =>
+    onSubmit(data, () => {
+      router.push(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_RESULTATS(projet.id));
+    });
+
+  const onSubmitAndQuit = async (data: IndicateursEnvironnementauxFormData) =>
+    onSubmit(data, () => {
+      notifications("success", "DIAGNOSTIC_SIMULATION_UPDATED");
+    });
+
+  const onSubmit = async (data: IndicateursEnvironnementauxFormData, onSuccess: () => void) => {
     const actionResult = await upsertDiagnosticSimulationAction(projet.id, data, true, currentDiagnosticSimulation?.id);
     if (actionResult.type !== "success") {
       notifications(actionResult.type, actionResult.message);
     } else {
       notifications(actionResult.type, actionResult.message);
       updateStore(actionResult.diagnosticSimulation);
+      onSuccess();
     }
   };
   const { fields } = useFieldArray({
@@ -79,7 +92,12 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
   );
 
   return (
-    <form id={`indicateurs-env-form`} onSubmit={form.handleSubmit((data) => onSubmit(data))}>
+    <form
+      id={`indicateurs-env-form`}
+      onSubmit={(e) => {
+        e.preventDefault();
+      }}
+    >
       <>
         <div className="sticky top-0 z-10 mb-12">
           <div className="flex h-20 w-full items-center justify-between bg-white">
@@ -92,9 +110,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
             <div className="flex flex-row gap-6">
               <Button
                 className={`mr-4 rounded-3xl !shadow-none`}
-                onClick={() => {
-                  console.log("finir plus tard");
-                }}
+                onClick={form.handleSubmit(onSubmitAndQuit)}
                 iconId="fr-icon-save-3-line"
                 iconPosition="left"
                 disabled={disabled}
@@ -104,7 +120,8 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
               </Button>
               <Button
                 className="mr-4 rounded-3xl"
-                type="submit"
+                type="button"
+                onClick={form.handleSubmit(onSubmitAndSeeResults)}
                 disabled={disabled}
                 iconId="fr-icon-arrow-right-line"
                 iconPosition="right"
