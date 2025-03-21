@@ -75,6 +75,7 @@
 
 .pfmv-strong-card {
   border-radius: 10px;
+  background: #fff !important;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 145, 0.2);
 }
 

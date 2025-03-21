@@ -2,10 +2,7 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bord";
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
 
-import {
-  TableauDeBordFichesDiagnoscticImages,
-  TableauDeBordFichesSolutionImages,
-} from "./tableau-de-bord-suivi-card-with-fiches-solutions";
+import { TableauDeBordFichesSolutionImages } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
 import { TableauDeBordSuiviCardInfoProjet } from "./tableau-de-bord-suivi-card-info-projet";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
 import { getLastCompletedEstimation } from "@/src/helpers/estimation";
@@ -14,6 +11,9 @@ import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bo
 import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
 import { RexContactId } from "@/src/components/annuaire/types";
 import { FicheType } from "@prisma/client";
+import { isEmpty } from "@/src/helpers/listUtils";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -39,14 +39,31 @@ const cards: TableauDeBordSuiviCardProps[] = [
     children: <TableauDeBordSuiviCardInfoProjet />,
   },
   {
-    title: "Je choisis une méthode de diagnostic",
+    title: "Je fais un diagnostic de la surchauffe urbaine",
     index: 2,
-    progress: (projet: ProjetWithRelations | undefined) =>
-      projet?.fiches.filter((f) => f.type === FicheType.DIAGNOSTIC).length ? "100" : "0",
+    progress: (projet: ProjetWithRelations | undefined) => {
+      const hasSelectedFicheDiagnostic = !isEmpty(
+        getProjetFichesIdsByType({
+          projet,
+          typeFiche: TypeFiche.diagnostic,
+        }),
+      );
+      const hasInitiatedDiagSimulation = !isEmpty(projet?.diagnostic_simulations);
+      if (hasSelectedFicheDiagnostic && hasInitiatedDiagSimulation) {
+        return "100";
+      } else if (hasSelectedFicheDiagnostic || hasInitiatedDiagSimulation) {
+        return "50";
+      }
+      return "0";
+    },
     disabled: false,
     type: "diagnostic",
     picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
-    children: <TableauDeBordFichesDiagnoscticImages />,
+    children: (
+      <TableauDeBordSuiviWithText>
+        Faire une analyse simplifiée ou un diagnostic approfondi de la surchauffe
+      </TableauDeBordSuiviWithText>
+    ),
   },
   {
     title: "Je choisis mes solutions de rafraîchissement",

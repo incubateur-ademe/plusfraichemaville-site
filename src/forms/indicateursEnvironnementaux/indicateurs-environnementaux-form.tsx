@@ -65,6 +65,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
   const onSubmitAndQuit = async (data: IndicateursEnvironnementauxFormData) =>
     onSubmit(data, false, () => {
       notifications("success", "DIAGNOSTIC_SIMULATION_UPDATED");
+      router.push(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projet.id));
     });
 
   const onSubmit = async (data: IndicateursEnvironnementauxFormData, validated: boolean, onSuccess: () => void) => {
