@@ -14,6 +14,8 @@ import {
 } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-list";
 import clsx from "clsx";
 import Image from "next/image";
+import { Separator } from "@/src/components/common/separator";
+import IndienResultExplanation from "@/src/components/diagnostic-indien/indien-result-explanation";
 
 export default function IndicateursEnvironnementauxResultatsPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -40,8 +42,8 @@ export default function IndicateursEnvironnementauxResultatsPage() {
   return (
     <div className="fr-container pt-8">
       <h1 className="mb-4 text-2xl font-bold">Je découvre mes résultats !</h1>
-      <div className="flex flex-row items-center justify-between gap-6">
-        <div className="mb-8 text-lg">Analyse simplifiée de la surchauffe au sein de mon espace, à l’état initial.</div>
+      <div className="mb-8 flex flex-row items-center justify-between gap-6">
+        <div className="text-lg">Analyse simplifiée de la surchauffe au sein de mon espace, à l’état initial.</div>
         <div>
           <Link
             href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(currentProjet.id)}
@@ -66,6 +68,25 @@ export default function IndicateursEnvironnementauxResultatsPage() {
               <div className={clsx("text-xl font-bold", INDIEN_CANOPEE.textColor)}>{INDIEN_CANOPEE.label}</div>
             </div>
             <div className="text-2xl font-bold">{diagnosticResults.partCanopee} %</div>
+          </div>
+        </div>
+        <div>
+          <div className="mb-2 mt-2 text-lg font-bold">Analyse de vos résultats</div>
+          <Separator className="mb-6" />
+          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
+            <IndienResultExplanation
+              coefficientValue={diagnosticResults.coeffRafraichissementUrbain}
+              coefficient={INDIEN_RAFRAICHISSEMENT_URBAIN}
+            />
+            <IndienResultExplanation
+              coefficientValue={diagnosticResults.coeffPermeabilite}
+              coefficient={INDIEN_PERMEABILITE}
+            />
+            <IndienResultExplanation coefficientValue={diagnosticResults.partCanopee} coefficient={INDIEN_CANOPEE} />
+            <IndienResultExplanation
+              coefficientValue={diagnosticResults.coeffBiodiversite}
+              coefficient={INDIEN_BIODIVERSITE}
+            />
           </div>
         </div>
       </div>

@@ -38,7 +38,7 @@ export const calculateCoeffsDiagnosticSimulation = (
     coeffRafraichissementUrbain: sanitizeCoeffEnvValue((sommeRafraichissementUrbain + sommeCanopee) / empriseTotale),
     coeffBiodiversite: sanitizeCoeffEnvValue((sommeBiodiversite + sommeCanopee) / empriseTotale),
     coeffPermeabilite: sanitizeCoeffEnvValue((sommePermeabilite + sommeCanopee) / empriseTotale),
-    partCanopee: Math.round((100 * sommeCanopee) / empriseTotale || 0),
+    partCanopee: Math.min(Math.round((100 * sommeCanopee) / empriseTotale || 0), 100),
   };
 };
 
