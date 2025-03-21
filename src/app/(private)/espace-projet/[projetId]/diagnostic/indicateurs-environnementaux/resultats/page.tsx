@@ -53,25 +53,32 @@ export default function IndicateursEnvironnementauxResultatsPage() {
           </Link>
         </div>
       </div>
-      <div className="flex flex-col gap-6 rounded-2xl bg-dsfr-background-alt-blue-france p-8">
-        <IndienResultRange
-          coefficientValue={diagnosticResults.coeffRafraichissementUrbain}
-          coefficient={INDIEN_RAFRAICHISSEMENT_URBAIN}
-        />
-        <IndienResultRange coefficientValue={diagnosticResults.coeffPermeabilite} coefficient={INDIEN_PERMEABILITE} />
-        <IndienResultRange coefficientValue={diagnosticResults.coeffBiodiversite} coefficient={INDIEN_BIODIVERSITE} />
-        <div className="rounded-2xl bg-white p-6">
-          <i className={clsx("ri-information-2-line float-right", INDIEN_CANOPEE.textColor)} />
-          <div className="mr-10 mt-4 flex flex-row items-center justify-between gap-4">
-            <div className="flex flex-row items-center gap-6">
-              <Image src={INDIEN_CANOPEE.icone} width={51} height={51} alt="" className="h-16" />
-              <div className={clsx("text-xl font-bold", INDIEN_CANOPEE.textColor)}>{INDIEN_CANOPEE.label}</div>
+      <div className="rounded-2xl bg-dsfr-background-alt-blue-france p-8">
+        <div className="grid grid-cols-2 gap-6">
+          <div className="font-bold">Indicateurs majeurs</div>
+          <div className="font-bold">Autres indicateurs</div>
+          <div className="row-span-3">
+            <IndienResultRange
+              coefficientValue={diagnosticResults.coeffRafraichissementUrbain}
+              coefficient={INDIEN_RAFRAICHISSEMENT_URBAIN}
+              large
+            />
+          </div>
+          <IndienResultRange coefficientValue={diagnosticResults.coeffPermeabilite} coefficient={INDIEN_PERMEABILITE} />
+          <IndienResultRange coefficientValue={diagnosticResults.coeffBiodiversite} coefficient={INDIEN_BIODIVERSITE} />
+          <div className="rounded-2xl bg-white px-4 py-2">
+            <i className={clsx("ri-information-2-line float-right", INDIEN_CANOPEE.textColor)} />
+            <div className="mr-10 flex flex-row items-center justify-between gap-4">
+              <div className="flex flex-row items-center gap-6">
+                <Image src={INDIEN_CANOPEE.icone} width={51} height={51} alt="" className="h-10" />
+                <div className={clsx("text-lg font-bold", INDIEN_CANOPEE.textColor)}>{INDIEN_CANOPEE.label}</div>
+              </div>
+              <div className="text-2xl font-bold">{diagnosticResults.partCanopee} %</div>
             </div>
-            <div className="text-2xl font-bold">{diagnosticResults.partCanopee} %</div>
           </div>
         </div>
         <div>
-          <div className="mb-2 mt-2 text-lg font-bold">Analyse de vos résultats</div>
+          <div className="mb-2 mt-2 text-lg font-bold">Interprétation des résultats</div>
           <Separator className="mb-6" />
           <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
             <IndienResultExplanation

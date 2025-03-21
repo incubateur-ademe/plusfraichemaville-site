@@ -19,10 +19,10 @@ export default async function IndienReminderModal({ projetId }: { projetId: numb
 
       <modal.Component title="" className="custom-modal md-modal">
         <h1 className="!text-xl !text-pfmv-navy">
-          Pour calculer vos indicateurs, vous aurez besoin d’observer l’espace à rafraîchir et de métrer les éléments
-          suivants :
+          Pour calculer vos indicateurs, vous aurez besoin d’observer l’espace à rafraîchir et d’en connaître le métré
+          suivant :
         </h1>
-        <div className="flex flex-row gap-6">
+        <div className="flex flex-row flex-wrap gap-6">
           <div>
             <Image
               src="/images/fiches-diagnostic/indicateurs-environnementaux/tribu-exemple-plan.jpg"
@@ -34,23 +34,24 @@ export default async function IndienReminderModal({ projetId }: { projetId: numb
             <div className="mt-2 text-xs italic text-dsfr-text-mention-grey">Plan de masse des éléments à métrer</div>
           </div>
           <div className="flex flex-col gap-3">
-            <div>
+            <div className="font-bold">Liste des éléments :</div>
+            <div className=" mb-2">
               <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
               Nombre et maturité des arbres
             </div>
-            <div>
+            <div className=" mb-2">
               <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
               Surface végétaliseé au sol
             </div>
-            <div>
+            <div className=" mb-2">
               <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
               Surface et types de revêtement au sol
             </div>
-            <div>
+            <div className=" mb-2">
               <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
               Surface de fontaine et de bassins d’eau
             </div>
-            <div>
+            <div className=" mb-2">
               <i className="fr-icon-success-fill mr-2 text-dsfr-background-action-high-success-hover" />
               Surface et type de toiture
             </div>
@@ -59,12 +60,20 @@ export default async function IndienReminderModal({ projetId }: { projetId: numb
         <div className="mt-6 font-bold text-pfmv-navy">
           À tout moment vous avez la possibilité d’enregistrer vos réponses et de revenir plus tard.
         </div>
-        <Link
-          className="fr-btn mb-6 mt-6 rounded-3xl"
-          href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(projetId)}
-        >
-          C’est parti !
-        </Link>
+        <div className="flex flex-row flex-wrap gap-6">
+          <Link
+            className="fr-btn mb-6 mt-6 rounded-3xl"
+            href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(projetId)}
+          >
+            C’est parti !
+          </Link>
+          <Link
+            className="fr-btn fr-btn--secondary mb-6 mt-6 rounded-3xl"
+            href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projetId)}
+          >
+            Revenir plus tard
+          </Link>
+        </div>
       </modal.Component>
     </>
   );
