@@ -58,21 +58,25 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
   };
 
   const onSubmitAndSeeResults = async (data: IndicateursEnvironnementauxFormData) =>
-    onSubmit(data, () => {
+    onSubmit(data, true, () => {
       router.push(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_RESULTATS(projet.id));
     });
 
   const onSubmitAndQuit = async (data: IndicateursEnvironnementauxFormData) =>
-    onSubmit(data, () => {
+    onSubmit(data, false, () => {
       notifications("success", "DIAGNOSTIC_SIMULATION_UPDATED");
     });
 
-  const onSubmit = async (data: IndicateursEnvironnementauxFormData, onSuccess: () => void) => {
-    const actionResult = await upsertDiagnosticSimulationAction(projet.id, data, true, currentDiagnosticSimulation?.id);
+  const onSubmit = async (data: IndicateursEnvironnementauxFormData, validated: boolean, onSuccess: () => void) => {
+    const actionResult = await upsertDiagnosticSimulationAction(
+      projet.id,
+      data,
+      validated,
+      currentDiagnosticSimulation?.id,
+    );
     if (actionResult.type !== "success") {
       notifications(actionResult.type, actionResult.message);
     } else {
-      notifications(actionResult.type, actionResult.message);
       updateStore(actionResult.diagnosticSimulation);
       onSuccess();
     }

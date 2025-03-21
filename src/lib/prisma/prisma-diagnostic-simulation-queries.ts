@@ -21,12 +21,12 @@ export const upsertDiagnosticSimulation = async ({
       user_id: userId,
       projet_id: projetId,
       initial_values: initialValues,
-      validated,
+      validated: validated || undefined,
     },
     update: {
       user_id: userId,
       initial_values: initialValues,
-      validated,
+      validated: validated || undefined,
     },
   });
 };
