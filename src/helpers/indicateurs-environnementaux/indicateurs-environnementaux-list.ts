@@ -12,13 +12,14 @@ export type IndienType = {
   explanation: string;
   icone: string;
   textColor: string;
+  ranges: IndienRangeType[];
+  explanationTitle: string;
   scale?: {
     image: string;
     steps: number;
     minLabel: string;
     maxLabel: string;
   };
-  ranges: IndienRangeType[];
 };
 
 export const INDIEN_RAFRAICHISSEMENT_URBAIN: IndienType = {
@@ -31,13 +32,14 @@ export const INDIEN_RAFRAICHISSEMENT_URBAIN: IndienType = {
     "tempérés et méditerranéens, actuels et futurs en France métropolitaine.",
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/rafraichissement-urbain.svg",
   textColor: "text-coeff-rafraichissement-urbain",
+  ranges: [INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_1, INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_2],
+  explanationTitle: "Qu'est ce que le coefficient de rafraichissement urbain ?",
   scale: {
     image: "/images/fiches-diagnostic/indicateurs-environnementaux/echelle-rafraichissement-urbain.svg",
     steps: 4,
     minLabel: "Espace public très réchauffant",
     maxLabel: "Espace public très rafraîchissant",
   },
-  ranges: [INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_1, INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_2],
 };
 
 export const INDIEN_PERMEABILITE: IndienType = {
@@ -49,13 +51,14 @@ export const INDIEN_PERMEABILITE: IndienType = {
     "un dimensionnement précis des infrastructures de rétention.",
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/permeabilite.svg",
   textColor: "text-coeff-permeabilite",
+  ranges: [INDIEN_PERMEABILITE_RANGE_1],
+  explanationTitle: "Qu'est ce que le coefficient de perméabilité ?",
   scale: {
     image: "/images/fiches-diagnostic/indicateurs-environnementaux/echelle-permeabilite.svg",
     steps: 0,
     minLabel: "Sols très imperméables",
     maxLabel: "Sols très perméables",
   },
-  ranges: [INDIEN_PERMEABILITE_RANGE_1],
 };
 
 export const INDIEN_BIODIVERSITE: IndienType = {
@@ -67,13 +70,14 @@ export const INDIEN_BIODIVERSITE: IndienType = {
     "d’accueil, mais ne garantit pas la présence effective des espèces après aménagement.",
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/biodiversite.svg",
   textColor: "text-coeff-biodiversite",
+  ranges: [INDIEN_BIODIVERSITE_RANGE_1],
+  explanationTitle: "Qu'est ce que le coefficient de biodiversité ?",
   scale: {
     image: "/images/fiches-diagnostic/indicateurs-environnementaux/echelle-biodiversite.svg",
     steps: 0,
     minLabel: "Biodiversité inexistante",
     maxLabel: "Potentiel écosystème-relais",
   },
-  ranges: [INDIEN_BIODIVERSITE_RANGE_1],
 };
 
 export const INDIEN_CANOPEE = {
@@ -84,6 +88,7 @@ export const INDIEN_CANOPEE = {
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/canopee.svg",
   textColor: "text-coeff-canopee",
   ranges: [INDIEN_CANOPE_RANGE_1],
+  explanationTitle: "Qu'est ce que la part de canopée ?",
 };
 
 export const getRangeFromValue = (value: number, indienType: IndienType) => {

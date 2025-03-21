@@ -2,6 +2,7 @@ import Image from "next/image";
 import React from "react";
 import clsx from "clsx";
 import { IndienType } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-list";
+import IndienCoeffExplanationModal from "@/src/components/diagnostic-indien/indien-coeff-explanation-modal";
 
 export default function IndienResultRange({
   coefficient,
@@ -14,7 +15,7 @@ export default function IndienResultRange({
 }) {
   return (
     <div className={clsx("rounded-2xl bg-white p-6", className)}>
-      <i className={clsx("ri-information-2-line float-right cursor-pointer", coefficient.textColor)} />
+      <IndienCoeffExplanationModal coefficient={coefficient} />
       <div className="mr-10 mt-4">
         <div className="flex flex-row flex-wrap items-center justify-between gap-4">
           <div className="flex flex-row items-center gap-5">

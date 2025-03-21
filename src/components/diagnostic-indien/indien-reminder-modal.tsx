@@ -5,9 +5,9 @@ import React from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 
-export default async function ModalIndienReminder({ projetId }: { projetId: number }) {
+export default async function IndienReminderModal({ projetId }: { projetId: number }) {
   const modal = createModal({
-    id: "partage-overview-invite-member",
+    id: "indien-reminder-modal",
     isOpenedByDefault: false,
   });
 

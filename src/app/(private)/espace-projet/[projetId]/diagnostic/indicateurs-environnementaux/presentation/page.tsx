@@ -9,7 +9,7 @@ import {
   INDIEN_PERMEABILITE,
   INDIEN_RAFRAICHISSEMENT_URBAIN,
 } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-list";
-import ModalIndienReminder from "@/src/components/diagnostic-indien/modal-indien-reminder";
+import IndienReminderModal from "@/src/components/diagnostic-indien/indien-reminder-modal";
 
 export default async function IndicateursEnvironnementauxPresentationPage(props: {
   params: Promise<{ projetId: number }>;
@@ -31,7 +31,7 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
           "l’accompagnement d’un bureau d’études est recommandé."}
       </div>
       <div>
-        <ModalIndienReminder projetId={params.projetId} />
+        <IndienReminderModal projetId={params.projetId} />
         <i className={clsx("ri-timer-line", "fr-icon--sm ml-4 mr-1 text-dsfr-text-mention-grey")} />
         <span className="text-sm text-dsfr-text-mention-grey">Environ 10 minutes</span>
       </div>
