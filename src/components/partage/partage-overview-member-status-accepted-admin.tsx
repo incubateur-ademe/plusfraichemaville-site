@@ -8,6 +8,7 @@ import { PopupMenu } from "../common/popup-menu";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { RoleProjet } from "@prisma/client";
+import { PartageMemberModificationRoleModale } from "@/src/components/partage/partage-member-modification-role-modale";
 
 export type PartageOverviewMemberStatusAdminProps = {
   member: UserProjetWithUser;
@@ -62,6 +63,7 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
         activé
       </div>
       {!props.isCurrentUser && props.member.role !== RoleProjet.ADMIN && canEditProjet && <PopupMenu links={links} />}
+      <PartageMemberModificationRoleModale />
     </div>
   );
 };

@@ -16,10 +16,14 @@ export const estimationModal = createModal({
 
 export function EstimationMateriauModalContainer() {
   const currentEstimationId = useModalStore((state) => state.currentEstimationId);
+  console.log("currentEstimation", currentEstimationId);
   const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   useIsModalOpen(estimationModal, {
-    onConceal: () => setCurrentEstimationId(null),
+    onConceal: () => {
+      console.log("CONCEAL");
+      setCurrentEstimationId(null);
+    },
   });
   const currentEstimation = useMemo(() => {
     if (currentEstimationId && currentProjet) {
