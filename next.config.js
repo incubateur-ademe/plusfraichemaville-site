@@ -48,6 +48,7 @@ const nextConfig = {
       test: /\.woff2$/,
       type: "asset/resource",
     });
+    config.optimization.splitChunks.minSize = 50000;
     return config;
   },
   images: {
