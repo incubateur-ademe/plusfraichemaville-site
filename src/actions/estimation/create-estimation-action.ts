@@ -30,7 +30,7 @@ export const createEstimationAction = async (
 
   const parseParamResult = EstimationFormSchema.safeParse(data);
   if (!parseParamResult.success) {
-    captureError("EditProjetInfoAction format errors", parseParamResult.error.flatten());
+    captureError("createEstimationAction format errors", parseParamResult.error.flatten());
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {

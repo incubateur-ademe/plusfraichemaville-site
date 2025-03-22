@@ -18,19 +18,28 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_LISTE: "/espace-projet",
   MON_PROFIL: "/info-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
-  ESPACE_PROJET_FICHES_DIAGNOSTIC_LISTE_ALL: "/fiches-diagnostic/liste",
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
   ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire/carte",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord?tab=tableau-de-suivi",
+  ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/fiches-diagnostic/retour-experience/${slug}`,
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
-  FICHE_DIAGNOSTIC: (url: string) => `/fiches-diagnostic/${url}`,
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
   TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "recommandation" | "partage") =>
     `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
   ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiche-solution`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiche-solution/liste`,
-  ESPACE_PROJET_FICHES_DIAGNOSTIC: (projetId: number) => `/espace-projet/${projetId}/fiches-diagnostic`,
+  ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS: (projetId: number) => `/espace-projet/${projetId}/diagnostic/choix-parcours`,
+  ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION: (projetId: number) =>
+    `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/presentation`,
+  ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS: (projetId: number) =>
+    `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/questions`,
+  ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_RESULTATS: (projetId: number) =>
+    `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/resultats`,
+  ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE: (projetId: number) =>
+    `/espace-projet/${projetId}/diagnostic/prestation/liste`,
+  ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION: (projetId: number) =>
+    `/espace-projet/${projetId}/diagnostic/prestation/selection`,
   ESPACE_PROJET_FINANCEMENT: (projetId: number) => `/espace-projet/${projetId}/financement`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
   ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
@@ -39,6 +48,7 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/projet/${projetRexSlug}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION: (projetId: number, ficheSolutionSlug: string) =>
     `/espace-projet/${projetId}/fiche-solution/${ficheSolutionSlug}`,
+  ESPACE_PROJET_FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) => `/fiches-diagnostic/${ficheDiagnosticSlug}`,
   ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
   ESPACE_PROJET_ANNUAIRE: (projetId: number) => `/espace-projet/${projetId}/annuaire`,
   ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>
@@ -63,3 +73,6 @@ export const GET_REX_WITH_CONTACTS_BY_ID = (rexId: number) => `/api/get-rex-with
 export const GET_REX_BY_SLUG = (rexSlug: string) => `/api/get-rex-by-slug?rexSlug=${rexSlug}`;
 
 export const POST_REVALIDATE_TAG = (tag?: string) => `/api/revalidate-cache?tag=${tag}`;
+
+export const GET_FICHE_DIAGNOSTIC_BY_IDS = (ficheDiagnosticIds: number[]) =>
+  `/api/get-fiches-diagnostic?ficheDiagnosticIds=${JSON.stringify(ficheDiagnosticIds)}`;

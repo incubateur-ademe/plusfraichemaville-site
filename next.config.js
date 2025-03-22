@@ -36,6 +36,11 @@ const nextConfig = {
         destination: "https://plusfraichemaville.fr/:path*",
         permanent: true,
       },
+      {
+        source: "/fiches-diagnostic/:path*",
+        destination: "/",
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {

@@ -15,7 +15,10 @@ type GenericFicheLinkProps = {
 export const GenericFicheLink = ({ children, className, href, onClick }: GenericFicheLinkProps) => {
   const pathname = usePathname();
   const projetId = useProjetsStore((state) => state.currentProjetId);
-  const url = pathname.startsWith(PFMV_ROUTES.ESPACE_PROJET) ? `/espace-projet/${projetId}${href}` : href;
+  const url =
+    pathname.startsWith(PFMV_ROUTES.ESPACE_PROJET) && !href.startsWith(PFMV_ROUTES.ESPACE_PROJET)
+      ? `/espace-projet/${projetId}${href}`
+      : href;
 
   return (
     <Link href={url} className={className} onClick={onClick}>

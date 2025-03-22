@@ -23,8 +23,20 @@ export enum TypeUpdate {
   delete = "delete",
 }
 
-export const highlightedIconClass = (typeFiche: TypeFiche) =>
-  typeFiche === TypeFiche.solution ? "text-dsfr-text-label-blue-france" : "text-dsfr-border-action-high-error";
+export type IconColorsType = {
+  highlightClass: string;
+  fadedClass: string;
+};
+
+export const ICON_COLOR_FICHE_SOLUTION: IconColorsType = {
+  highlightClass: "text-dsfr-text-label-blue-france",
+  fadedClass: "text-pfmv-light-grey",
+};
+
+export const ICON_COLOR_FICHE_DIAGNOSTIC: IconColorsType = {
+  highlightClass: "text-picto-highlight-diagnostic",
+  fadedClass: "text-pfmv-light-grey",
+};
 
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
 
@@ -38,3 +50,5 @@ export const extractNameInitiales = (name: string) => {
 export const isBoolean = (param: any): boolean => {
   return typeof param == "boolean";
 };
+
+export const stripHtmlLinkTag = (param: string): string => param.replace(/<a\b[^>]*>/i, "").replace(/<\/a>/i, "");

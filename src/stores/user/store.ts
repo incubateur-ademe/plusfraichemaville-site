@@ -69,7 +69,7 @@ export const createUserStore = (initState: UserState = defaultInitState) => {
     updateBookmarkedFichesFromLocalStorage: async () => {
       const fichesBookmarked = getAllSavedFichesFromLocalStorage();
       const { userInfos } = get();
-      if (userInfos && (fichesBookmarked.fichesDiagnostic.length > 0 || fichesBookmarked.fichesSolutions.length > 0)) {
+      if (userInfos && fichesBookmarked.fichesSolutions.length > 0) {
         const updatedUser = await saveAllFichesFromLocalStorageAction(userInfos?.id, fichesBookmarked);
         if (updatedUser.user) {
           set({ userInfos: updatedUser.user });
