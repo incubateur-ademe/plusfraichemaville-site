@@ -185,6 +185,31 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
             ))}
           </div>
         ))}
+        <div className="float-right">
+          <div className="flex flex-row gap-6">
+            <Button
+              className={`mr-4 rounded-3xl !shadow-none`}
+              type="button"
+              onClick={form.handleSubmit(onSubmitAndQuit)}
+              iconId="fr-icon-save-3-line"
+              iconPosition="left"
+              disabled={disabled}
+              priority="secondary"
+            >
+              {"Reprendre plus tard"}
+            </Button>
+            <Button
+              className="mr-4 rounded-3xl"
+              type="button"
+              onClick={form.handleSubmit(onSubmitAndSeeResults)}
+              disabled={disabled}
+              iconId="fr-icon-arrow-right-line"
+              iconPosition="right"
+            >
+              Voir mes résultats
+            </Button>
+          </div>
+        </div>
       </>
     </form>
   );

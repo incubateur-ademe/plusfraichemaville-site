@@ -33,10 +33,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
       <div className="flex h-full flex-col" onClick={() => setCurrentFicheDiagnostic(ficheDiagnostic)}>
         <div className={clsx("flex h-full flex-col rounded-[0.9375rem]")}>
           <div
-            className={clsx(
-              "fiche-diagnostic-icone",
-              "mx-auto mt-6 flex size-[8.5rem] items-center justify-center ",
-            )}
+            className={clsx("fiche-diagnostic-icone", "mx-auto mt-6 flex size-[8.5rem] items-center justify-center ")}
           >
             <Image
               src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}

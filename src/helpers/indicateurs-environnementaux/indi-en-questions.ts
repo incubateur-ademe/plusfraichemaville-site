@@ -13,7 +13,7 @@ export const INDIEN_QUESTION_NOMBRE_ARBRES_JEUNES: IndiEnQuestion = {
   coeffBiodiversite: 5,
   coeffPermeabilite: 1,
   surfaceCanopee: 8,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/nombre-arbres-jeunes.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/nbArbresJeunes.jpg",
   priseEnCompteEmprise: false,
 };
 
@@ -25,7 +25,7 @@ export const INDIEN_QUESTION_NOMBRE_ARBRES_MOYENS: IndiEnQuestion = {
   coeffBiodiversite: 20,
   coeffPermeabilite: 1,
   surfaceCanopee: 30,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/nombre-arbres-jeunes.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/nbArbresMoyens.jpg",
   priseEnCompteEmprise: false,
 };
 
@@ -37,7 +37,7 @@ export const INDIEN_QUESTION_NOMBRE_ARBRES_VIEUX: IndiEnQuestion = {
   coeffBiodiversite: 70,
   coeffPermeabilite: 1,
   surfaceCanopee: 90,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/nombre-arbres-jeunes.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/nbArbresMoyens.jpg",
   priseEnCompteEmprise: false,
 };
 
@@ -59,7 +59,7 @@ export const INDIEN_QUESTION_SURFACE_DALLE_SOUS_SOL: IndiEnQuestion = {
   coeffBiodiversite: 0.6,
   coeffPermeabilite: 0.6,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-herbacee.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surfaceDalleSousSol.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -71,19 +71,19 @@ export const INDIEN_QUESTION_SURFACE_HERBACEE: IndiEnQuestion = {
   coeffBiodiversite: 0.6,
   coeffPermeabilite: 1,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-herbacee.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surfaceHerbacee.jpg",
   priseEnCompteEmprise: true,
 };
 
 export const INDIEN_QUESTION_SURFACE_BUISSONANTE: IndiEnQuestion = {
-  code: "surfaceBsuissonante",
+  code: "surfaceBuissonante",
   label: "Quelle est la surface de pleine terre végétalisée en strate buissonante ?",
   unite: INDIEN_UNITE_METRE_CARRE,
   coeffRafraichissementUrbain: 0.7,
   coeffBiodiversite: 1,
   coeffPermeabilite: 1,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surfaceBuissonante.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -105,7 +105,7 @@ export const INDIEN_QUESTION_REVETEMENT_PAVES: IndiEnQuestion = {
   coeffBiodiversite: 0.3,
   coeffPermeabilite: 0.3,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/revetementPaves.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -117,7 +117,7 @@ export const INDIEN_QUESTION_REVETEMENT_BIOSOURCES: IndiEnQuestion = {
   coeffBiodiversite: 0.1,
   coeffPermeabilite: 0.3,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/revetementBiosources.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -131,7 +131,7 @@ export const INDIEN_QUESTION_REVETEMENT_BETION: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/revetementBeton.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -145,7 +145,7 @@ export const INDIEN_QUESTION_REVETEMENT_GRENAILLE: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/revetementGrenaille.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -158,7 +158,7 @@ export const INDIEN_QUESTION_REVETEMENT_BITUME: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/revetementBitume.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -182,7 +182,7 @@ export const INDIEN_QUESTION_BASSIN_PAYSAGER: IndiEnQuestion = {
   coeffBiodiversite: 1,
   coeffPermeabilite: 0.5,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/bassinPaysager.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -194,7 +194,7 @@ export const INDIEN_QUESTION_BASSIN_MINERAUX: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/bassinMineraux.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -206,7 +206,7 @@ export const INDIEN_QUESTION_BASSIN_FONTAINE: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/bassinFontaine.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -224,7 +224,7 @@ export const INDIEN_QUESTION_OMBRAGE_VEGETALISE: IndiEnQuestion = {
   coeffBiodiversite: 0.2,
   coeffPermeabilite: 0.1,
   surfaceCanopee: 1,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/ombrageVegetalise.jpg",
   priseEnCompteEmprise: false,
 };
 
@@ -236,7 +236,7 @@ export const INDIEN_QUESTION_OMBRAGE_NON_VEGETALISE: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 1,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/ombrageNonVegetalise.jpg",
   priseEnCompteEmprise: false,
 };
 
@@ -254,7 +254,7 @@ export const INDIEN_QUESTION_TOITURE_TUILES: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/toitureTuile.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -266,7 +266,7 @@ export const INDIEN_QUESTION_TOITURE_CLAIRE: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/toitureClaire.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -278,7 +278,7 @@ export const INDIEN_QUESTION_TOITURE_FONCEE: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/toitureFoncee.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -290,7 +290,7 @@ export const INDIEN_QUESTION_TOITURE_VEGETALISEE_MINCE: IndiEnQuestion = {
   coeffBiodiversite: 0.3,
   coeffPermeabilite: 0.2,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/toitureVegetaliseeMince.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -302,7 +302,7 @@ export const INDIEN_QUESTION_TOITURE_VEGETALISEE_EPAISSE: IndiEnQuestion = {
   coeffBiodiversite: 0.3,
   coeffPermeabilite: 0.4,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/toitureVegetaliseeEpaisse.jpg",
   priseEnCompteEmprise: true,
 };
 
@@ -314,7 +314,7 @@ export const INDIEN_QUESTION_TOITURE_PANNEAU_PHOTO: IndiEnQuestion = {
   coeffBiodiversite: 0,
   coeffPermeabilite: 0,
   surfaceCanopee: 0,
-  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/surface-bassin-paysager.jpg",
+  image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/toiturePanneauxPhoto.jpg",
   priseEnCompteEmprise: true,
 };
 
