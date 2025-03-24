@@ -35,14 +35,14 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
           <div
             className={clsx(
               "fiche-diagnostic-icone",
-              "mx-auto mt-6 flex size-[8.5rem] items-center justify-center rounded-full",
+              "mx-auto mt-6 flex size-[8.5rem] items-center justify-center ",
             )}
           >
             <Image
               src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={ficheDiagnostic.attributes.titre}
-              width={130}
-              height={130}
+              width={110}
+              height={110}
               unoptimized
             />
           </div>

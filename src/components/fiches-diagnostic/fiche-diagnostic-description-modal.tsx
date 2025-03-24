@@ -86,8 +86,8 @@ export const FicheDiagnosticDescriptionModal = () => {
                 >
                   <Image
                     src={getStrapiImageUrl(ficheDiagData?.image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
-                    width={64}
-                    height={64}
+                    width={55}
+                    height={55}
                     alt={ficheDiagData?.titre ?? ""}
                     unoptimized
                   />
