@@ -14,7 +14,7 @@ export default function IndienCoeffExplanationModal({ coefficient }: { coefficie
   return (
     <>
       <i
-        className={clsx("ri-information-2-line float-right cursor-pointer text-dsfr-text-mention-grey")}
+        className="ri-information-2-line float-right cursor-pointer text-dsfr-text-mention-grey"
         onClick={() => modal.open()}
       />
       <modal.Component size="large" title="" className="custom-modal">

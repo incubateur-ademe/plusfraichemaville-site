@@ -16,6 +16,7 @@ import clsx from "clsx";
 import Image from "next/image";
 import { Separator } from "@/src/components/common/separator";
 import IndienResultExplanation from "@/src/components/diagnostic-indien/indien-result-explanation";
+import IndienCoeffExplanationModal from "@/src/components/diagnostic-indien/indien-coeff-explanation-modal";
 
 export default function IndicateursEnvironnementauxResultatsPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -53,27 +54,37 @@ export default function IndicateursEnvironnementauxResultatsPage() {
           </Link>
         </div>
       </div>
-      <div className="rounded-2xl bg-dsfr-background-alt-blue-france p-8">
-        <div className="grid grid-cols-2 gap-6">
-          <div className="font-bold">Indicateurs majeurs</div>
-          <div className="font-bold">Autres indicateurs</div>
-          <div className="row-span-3">
+      <div className="rounded-2xl bg-dsfr-background-alt-blue-france p-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          <div>
+            <div className="font-bold mb-4">Indicateurs majeurs</div>
             <IndienResultRange
               coefficientValue={diagnosticResults.coeffRafraichissementUrbain}
               coefficient={INDIEN_RAFRAICHISSEMENT_URBAIN}
               large
             />
           </div>
-          <IndienResultRange coefficientValue={diagnosticResults.coeffPermeabilite} coefficient={INDIEN_PERMEABILITE} />
-          <IndienResultRange coefficientValue={diagnosticResults.coeffBiodiversite} coefficient={INDIEN_BIODIVERSITE} />
-          <div className="rounded-2xl bg-white px-4 py-2">
-            <i className={clsx("ri-information-2-line float-right", INDIEN_CANOPEE.textColor)} />
-            <div className="mr-10 flex flex-row items-center justify-between gap-4">
-              <div className="flex flex-row items-center gap-6">
-                <Image src={INDIEN_CANOPEE.icone} width={51} height={51} alt="" className="h-10" />
-                <div className={clsx("text-lg font-bold", INDIEN_CANOPEE.textColor)}>{INDIEN_CANOPEE.label}</div>
+          <div>
+            <div className="font-bold mb-4">Autres indicateurs</div>
+            <IndienResultRange
+              className="mb-6"
+              coefficientValue={diagnosticResults.coeffPermeabilite}
+              coefficient={INDIEN_PERMEABILITE}
+            />
+            <IndienResultRange
+              className="mb-6"
+              coefficientValue={diagnosticResults.coeffBiodiversite}
+              coefficient={INDIEN_BIODIVERSITE}
+            />
+            <div className="rounded-2xl bg-white px-4 py-2 mb-6">
+              <IndienCoeffExplanationModal coefficient={INDIEN_CANOPEE} />
+              <div className="mr-10 flex flex-row items-center justify-between gap-4">
+                <div className="flex flex-row items-center gap-6">
+                  <Image src={INDIEN_CANOPEE.icone} width={51} height={51} alt="" className="h-10" />
+                  <div className={clsx("text-lg font-bold", INDIEN_CANOPEE.textColor)}>{INDIEN_CANOPEE.label}</div>
+                </div>
+                <div className="text-2xl font-bold">{diagnosticResults.partCanopee} %</div>
               </div>
-              <div className="text-2xl font-bold">{diagnosticResults.partCanopee} %</div>
             </div>
           </div>
         </div>
@@ -84,6 +95,7 @@ export default function IndicateursEnvironnementauxResultatsPage() {
             <IndienResultExplanation
               coefficientValue={diagnosticResults.coeffRafraichissementUrbain}
               coefficient={INDIEN_RAFRAICHISSEMENT_URBAIN}
+              large
             />
             <IndienResultExplanation
               coefficientValue={diagnosticResults.coeffPermeabilite}

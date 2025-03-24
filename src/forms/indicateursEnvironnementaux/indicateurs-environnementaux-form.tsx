@@ -101,6 +101,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
       id={`indicateurs-env-form`}
       onSubmit={(e) => {
         e.preventDefault();
+        console.log('TOTO')
       }}
     >
       <>
@@ -115,6 +116,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
             <div className="flex flex-row gap-6">
               <Button
                 className={`mr-4 rounded-3xl !shadow-none`}
+                type="button"
                 onClick={form.handleSubmit(onSubmitAndQuit)}
                 iconId="fr-icon-save-3-line"
                 iconPosition="left"
@@ -138,7 +140,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
           <Separator className="contrast-100" />
         </div>
         {ALL_INDIEN_QUESTIONS.map((questionGroup) => (
-          <div className="mb-6" key={questionGroup.label}>
+          <div className="mb-10" key={questionGroup.label}>
             <div className="mb-2 flex items-center">
               <Image src={questionGroup.image} alt={questionGroup.label} width={50} height={50} className="h-7" />
               <div className="mt-2 text-xl font-bold">{questionGroup.label}</div>

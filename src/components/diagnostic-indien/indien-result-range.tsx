@@ -30,13 +30,13 @@ export default function IndienResultRange({
             </div>
           </div>
           <div>
-            <span className={clsx("font-bold", large ? "text-6xl" : "text-3xl")}>{coefficientValue}</span>
-            <span className={clsx(large ? "text-xl" : "text-lg")}>/ 1</span>
+            <span className={clsx("font-bold", large ? "text-6xl" : "text-[2rem]")}>{coefficientValue}</span>
+            <span className={clsx(large ? "text-[1.75rem]" : "text-xl")}>/ 1</span>
           </div>
         </div>
         {coefficient.scale && (
           <>
-            <div className={clsx("relative mb-10", large ? "mt-20" : "mt-8")}>
+            <div className={clsx("relative mb-12", large ? "mt-20" : "mt-8")}>
               <div className="relative h-5 w-full rounded-2xl">
                 <Image src={coefficient.scale?.image} fill alt="" className="rounded-2xl object-cover" />
               </div>
