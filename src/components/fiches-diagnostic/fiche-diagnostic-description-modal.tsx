@@ -64,13 +64,15 @@ export const FicheDiagnosticDescriptionModal = () => {
             {ficheDiagData?.titre}
           </span>
         }
-        size="large"
-        className="custom-modal l-modal fiche-diagnostic-modal"
+        size={isEmpty(rex) ? "medium" : "large"}
+        className={clsx("custom-modal fiche-diagnostic-modal", !isEmpty(rex) && "l-modal")}
       >
         <div className="pb-4">
           {ficheDiagnostic && (
             <div className="flex w-full flex-col gap-6 lg:flex-row">
-              <div className="pfmv-flat-card relative h-fit w-full max-w-[55%] bg-white p-8">
+              <div
+                className={clsx("pfmv-flat-card relative h-fit w-full bg-white p-8", !isEmpty(rex) && "max-w-[55%]")}
+              >
                 {ficheDiagnostic && (
                   <GenericSaveAuthenticatedInsideProjet
                     type={TypeFiche.diagnostic}
