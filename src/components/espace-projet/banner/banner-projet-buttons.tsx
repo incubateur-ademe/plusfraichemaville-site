@@ -50,6 +50,7 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
                   linkRef.current[index] = ref;
                 }
               }}
+              aria-label={link.tooltip}
               className={clsx(
                 "block size-[51px] rounded-full !bg-none",
                 !recommandationsAlreadyViewed &&
@@ -71,7 +72,6 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
                 linkRef.current[index]?.blur();
                 link.update && link.update();
               }}
-              aria-describedby={`tooltip-${link.tooltip}-${projetId}`}
               id="link-2990"
               key={index}
             />

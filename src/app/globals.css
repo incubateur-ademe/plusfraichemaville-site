@@ -590,7 +590,3 @@ ul.arrow-list li::before {
   background-size: contain;
   background-repeat: no-repeat;
 }
-
-.fr-toggle__label::before {
-  margin-right: 1rem !important;
-}

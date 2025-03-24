@@ -48,6 +48,7 @@ export const FicheDiagnosticChoixWithFilters = ({
         <FicheDiagnosticEchelleThermiqueFilter setter={handleFilterChange} selectedFilters={selectedFilters} />
         <ToggleSwitch
           labelPosition="right"
+          classes={{ label: "before:!mr-4" }}
           label="Petit budget"
           showCheckedHint={false}
           checked={onlyCheapDiagnostic}

@@ -82,8 +82,7 @@ export const INDIEN_BIODIVERSITE: IndienType = {
 
 export const INDIEN_CANOPEE = {
   label: "Part de canopée",
-  explanation:
-    "Il s’agit de la part de surface de canopée par rapport à la surface au sol.",
+  explanation: "Il s’agit de la part de surface de canopée par rapport à la surface au sol.",
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/canopee.svg",
   textColor: "text-coeff-canopee",
   ranges: [INDIEN_CANOPE_RANGE_1],

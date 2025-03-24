@@ -51,7 +51,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                       "flex items-center",
                     )}
                   >
-                    <i className="ri-home-2-fill fr-icon--sm mr-1 before:!size-[14px]"></i>
+                    <i className="ri-home-2-fill fr-icon--sm mr-1 before:!size-[14px]" />
                     {currentProjet.collectivite.nom}
                   </div>
                 </Link>
