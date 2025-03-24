@@ -101,7 +101,6 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
       id={`indicateurs-env-form`}
       onSubmit={(e) => {
         e.preventDefault();
-        console.log('TOTO')
       }}
     >
       <>

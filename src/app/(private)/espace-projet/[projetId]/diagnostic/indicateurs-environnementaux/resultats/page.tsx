@@ -57,7 +57,7 @@ export default function IndicateursEnvironnementauxResultatsPage() {
       <div className="rounded-2xl bg-dsfr-background-alt-blue-france p-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <div className="font-bold mb-4">Indicateurs majeurs</div>
+            <div className="mb-4 font-bold">Indicateurs majeurs</div>
             <IndienResultRange
               coefficientValue={diagnosticResults.coeffRafraichissementUrbain}
               coefficient={INDIEN_RAFRAICHISSEMENT_URBAIN}
@@ -65,7 +65,7 @@ export default function IndicateursEnvironnementauxResultatsPage() {
             />
           </div>
           <div>
-            <div className="font-bold mb-4">Autres indicateurs</div>
+            <div className="mb-4 font-bold">Autres indicateurs</div>
             <IndienResultRange
               className="mb-6"
               coefficientValue={diagnosticResults.coeffPermeabilite}
@@ -76,7 +76,7 @@ export default function IndicateursEnvironnementauxResultatsPage() {
               coefficientValue={diagnosticResults.coeffBiodiversite}
               coefficient={INDIEN_BIODIVERSITE}
             />
-            <div className="rounded-2xl bg-white px-4 py-2 mb-6">
+            <div className="mb-6 rounded-2xl bg-white px-4 py-2">
               <IndienCoeffExplanationModal coefficient={INDIEN_CANOPEE} />
               <div className="mr-10 flex flex-row items-center justify-between gap-4">
                 <div className="flex flex-row items-center gap-6">
