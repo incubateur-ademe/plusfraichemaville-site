@@ -108,6 +108,23 @@ export default function IndicateursEnvironnementauxResultatsPage() {
             />
           </div>
         </div>
+        <div className="mx-2 mt-8 flex flex-row items-center gap-4 rounded-2xl bg-white p-4">
+          <Image
+            src="/images/fiches-diagnostic/indicateurs-environnementaux/ampoule-idee.svg"
+            height={39}
+            width={34}
+            alt="Point d'attention"
+            className="mb-2 h-10"
+          />
+          <div>
+            {"Si vous souhaitez faire un"} <strong>{"diagnostic approfondi"}</strong>
+            {", de nombreuses expertises peuvent vous éclairer : vous pouvez cartographier l’îlot de chaleur urbain " +
+              "ou encore évaluer le confort thermique de vos usagers. Nous vous aidons à choisir les "}
+            <Link href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(currentProjet.id)}>
+              {"méthodes adaptées à votre projet."}
+            </Link>
+          </div>
+        </div>
       </div>
     </div>
   );
