@@ -1,4 +1,7 @@
 import { EspaceProjetTabsId } from "@/src/components/liste-projets";
+import { TypeSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+
+export const TYPE_SOLUTION_FILTER_NAME = "typeSolutionFilter";
 
 export const PFMV_ROUTES = {
   AIDE_DECISION: "/aide-decision",
@@ -53,6 +56,8 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_ANNUAIRE: (projetId: number) => `/espace-projet/${projetId}/annuaire`,
   ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>
     `/espace-projet/${projetId}/financement/edit/${estimationId}`,
+  ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_TYPE_FILTER: (projetId: number, typeFiche: TypeSolution) =>
+    `/espace-projet/${projetId}/fiche-solution/liste?${TYPE_SOLUTION_FILTER_NAME}=${typeFiche}`,
 };
 
 export const getFullUrl = (route: string): string => `${process.env.NEXT_PUBLIC_URL_SITE}${route}`;

@@ -21,8 +21,8 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
 
   return (
     <div className="fr-container pt-8 text-black">
-      <h1 className="mb-4 text-2xl font-bold">
-        Je calcule les indicateurs environnementaux de mon espace à l’état initial
+      <h1 className="mb-4 text-[1.75rem] font-normal">
+        <strong>Je fais une analyse simplifiée de la surchauffe sur mon espace</strong> à l’état initial.
       </h1>
       <div className="mb-8 text-lg">
         {"Les indicateurs environnementaux sont des valeurs simplifiées et relatives. Ils offrent une première " +
@@ -35,7 +35,7 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
         <i className={clsx("ri-timer-line", "fr-icon--sm ml-4 mr-1 text-dsfr-text-mention-grey")} />
         <span className="text-sm text-dsfr-text-mention-grey">Environ 10 minutes</span>
       </div>
-      <div className="mb-12 mt-10 flex flex-row items-center gap-4">
+      <div className="mb-4 mt-10 flex flex-row items-center gap-4">
         <span className="text-lg font-bold">Les indicateurs environnementaux</span>
         <span>
           <Link

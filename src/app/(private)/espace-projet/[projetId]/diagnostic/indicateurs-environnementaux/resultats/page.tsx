@@ -17,6 +17,13 @@ import Image from "next/image";
 import { Separator } from "@/src/components/common/separator";
 import IndienResultExplanation from "@/src/components/diagnostic-indien/indien-result-explanation";
 import IndienCoeffExplanationModal from "@/src/components/diagnostic-indien/indien-coeff-explanation-modal";
+import { IndienResultCombinaisonAdvice } from "@/src/components/diagnostic-indien/indien-result-combinaison-advice";
+import {
+  TYPE_SOLUTION_BLEUE,
+  TYPE_SOLUTION_DOUCE,
+  TYPE_SOLUTION_GRISE,
+  TYPE_SOLUTION_VERTE,
+} from "@/src/helpers/type-fiche-solution";
 
 export default function IndicateursEnvironnementauxResultatsPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -42,9 +49,11 @@ export default function IndicateursEnvironnementauxResultatsPage() {
   const diagnosticResults = diagnosticSimulation.initial_values as ProjetIndiEnSimuation;
   return (
     <div className="fr-container pt-8">
-      <h1 className="mb-4 text-2xl font-bold">Je découvre mes résultats !</h1>
+      <h1 className="mb-4 text-[1.75rem] font-bold">Je découvre mes résultats !</h1>
       <div className="mb-8 flex flex-row items-center justify-between gap-6">
-        <div className="text-lg">Analyse simplifiée de la surchauffe au sein de mon espace, à l’état initial.</div>
+        <div className="text-[1.375rem] font-bold">
+          Analyse simplifiée de la surchauffe au sein de mon espace, à l’état initial.
+        </div>
         <div>
           <Link
             href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(currentProjet.id)}
@@ -116,7 +125,7 @@ export default function IndicateursEnvironnementauxResultatsPage() {
             alt="Point d'attention"
             className="mb-2 h-10"
           />
-          <div>
+          <div className="text-sm">
             {"Si vous souhaitez faire un"} <strong>{"diagnostic approfondi"}</strong>
             {", de nombreuses expertises peuvent vous éclairer : vous pouvez cartographier l’îlot de chaleur urbain " +
               "ou encore évaluer le confort thermique de vos usagers. Nous vous aidons à choisir les "}
@@ -125,6 +134,15 @@ export default function IndicateursEnvironnementauxResultatsPage() {
             </Link>
           </div>
         </div>
+      </div>
+      <div className="mb-4 mt-10 text-[1.375rem] font-bold">
+        Que puis-je faire pour rafraîchir mon espace ? Combiner différents types de solutions !
+      </div>
+      <div className="flex flex-col gap-6 rounded-2xl bg-dsfr-background-alt-blue-france p-6">
+        <IndienResultCombinaisonAdvice projetId={currentProjet.id} typeSolution={TYPE_SOLUTION_VERTE} />
+        <IndienResultCombinaisonAdvice projetId={currentProjet.id} typeSolution={TYPE_SOLUTION_BLEUE} />
+        <IndienResultCombinaisonAdvice projetId={currentProjet.id} typeSolution={TYPE_SOLUTION_GRISE} />
+        <IndienResultCombinaisonAdvice projetId={currentProjet.id} typeSolution={TYPE_SOLUTION_DOUCE} />
       </div>
     </div>
   );
