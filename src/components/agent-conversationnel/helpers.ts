@@ -13,8 +13,8 @@ export const sanitizeUrlInMessageFromRagtime = (ragtimeResponseMessage: string, 
   if (projetId) {
     return ragtimeResponseMessage
       .replace(
-        "https://plusfraichemaville.fr/fiches-diagnostic",
-        PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(projetId),
+        "https://plusfraichemaville.fr/fiches-diagnostic/",
+        PFMV_ROUTES.ESPACE_PROJET_FICHE_DIAGNOSTIC(""),
       )
       .replace("https://plusfraichemaville.fr/fiche-solution", PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projetId))
       .replace("https://plusfraichemaville.fr/", "/");

@@ -35,8 +35,8 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
               <Image
                 src={getStrapiImageUrl(image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
                 alt={titre ?? ""}
-                width={130}
-                height={130}
+                width={110}
+                height={110}
                 unoptimized
               />
             </div>

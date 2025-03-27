@@ -6,7 +6,6 @@ export const TYPE_SOLUTION_FILTER_NAME = "typeSolutionFilter";
 export const PFMV_ROUTES = {
   AIDE_DECISION: "/aide-decision",
   FICHES_SOLUTIONS: "/fiche-solution",
-  FICHES_DIAGNOSTIC: "/fiches-diagnostic",
   MES_FICHES_SOLUTIONS: "/mon-projet/favoris",
   RETOURS_EXPERIENCE: "/projet",
   RETOUR_EXPERIENCE: (slug: string) => `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${slug}`,
@@ -24,7 +23,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
   ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire/carte",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord?tab=tableau-de-suivi",
-  ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/fiches-diagnostic/retour-experience/${slug}`,
+  ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/diagnostic/prestation/retour-experience/${slug}`,
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
   TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "recommandation" | "partage") =>
@@ -51,7 +50,8 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/projet/${projetRexSlug}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION: (projetId: number, ficheSolutionSlug: string) =>
     `/espace-projet/${projetId}/fiche-solution/${ficheSolutionSlug}`,
-  ESPACE_PROJET_FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) => `/fiches-diagnostic/${ficheDiagnosticSlug}`,
+  ESPACE_PROJET_FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) =>
+    `/diagnostic/prestation/fiche-diagnostic/${ficheDiagnosticSlug}`,
   ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
   ESPACE_PROJET_ANNUAIRE: (projetId: number) => `/espace-projet/${projetId}/annuaire`,
   ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>
