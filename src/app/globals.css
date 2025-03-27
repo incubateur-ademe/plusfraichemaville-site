@@ -590,3 +590,7 @@ ul.arrow-list li::before {
   background-size: contain;
   background-repeat: no-repeat;
 }
+
+.fr-breadcrumb__link {
+  @apply !font-normal;
+}
