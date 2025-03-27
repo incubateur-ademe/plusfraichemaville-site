@@ -72,13 +72,14 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
                 linkRef.current[index]?.blur();
                 link.update && link.update();
               }}
+              aria-describedby={`tooltip-${link.url}-${projetId}`}
               id="link-2990"
               key={index}
             />
             <Picto active={currentTab == link.url} />
             <span
               className="fr-tooltip fr-placement"
-              id={`tooltip-${link.tooltip}-${projetId}`}
+              id={`tooltip-${link.url}-${projetId}`}
               role="tooltip"
               aria-hidden="true"
             >
