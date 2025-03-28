@@ -42,7 +42,8 @@ export const INDIEN_PERMEABILITE_RANGE_2: IndienRangeType = {
 
 export const INDIEN_PERMEABILITE_RANGE_3: IndienRangeType = {
   maxValue: 0.6,
-  title: "Espace moyennement perméable, plutôt favorable à l'infiltration et au tamponnage des eaux de pluie en " +
+  title:
+    "Espace moyennement perméable, plutôt favorable à l'infiltration et au tamponnage des eaux de pluie en " +
     "milieu urbain",
 };
 

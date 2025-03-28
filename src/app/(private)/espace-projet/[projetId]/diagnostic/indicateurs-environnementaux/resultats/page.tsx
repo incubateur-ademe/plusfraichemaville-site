@@ -14,8 +14,6 @@ import {
 } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-list";
 import clsx from "clsx";
 import Image from "next/image";
-import { Separator } from "@/src/components/common/separator";
-import IndienResultExplanation from "@/src/components/diagnostic-indien/indien-result-explanation";
 import IndienCoeffExplanationModal from "@/src/components/diagnostic-indien/indien-coeff-explanation-modal";
 import { IndienResultCombinaisonAdvice } from "@/src/components/diagnostic-indien/indien-result-combinaison-advice";
 import {
@@ -76,12 +74,12 @@ export default function IndicateursEnvironnementauxResultatsPage() {
           <div>
             <div className="mb-4 font-bold">Autres indicateurs</div>
             <IndienResultRange
-              className="mb-6"
+              className="mb-3"
               coefficientValue={diagnosticResults.coeffPermeabilite}
               coefficient={INDIEN_PERMEABILITE}
             />
             <IndienResultRange
-              className="mb-6"
+              className="mb-3"
               coefficientValue={diagnosticResults.coeffBiodiversite}
               coefficient={INDIEN_BIODIVERSITE}
             />
@@ -95,26 +93,6 @@ export default function IndicateursEnvironnementauxResultatsPage() {
                 <div className="text-2xl font-bold">{diagnosticResults.partCanopee} %</div>
               </div>
             </div>
-          </div>
-        </div>
-        <div>
-          <div className="mb-2 mt-2 text-lg font-bold">Interprétation des résultats</div>
-          <Separator className="mb-6" />
-          <div className="grid grid-cols-1 gap-10 md:grid-cols-2">
-            <IndienResultExplanation
-              coefficientValue={diagnosticResults.coeffRafraichissementUrbain}
-              coefficient={INDIEN_RAFRAICHISSEMENT_URBAIN}
-              large
-            />
-            <IndienResultExplanation
-              coefficientValue={diagnosticResults.coeffPermeabilite}
-              coefficient={INDIEN_PERMEABILITE}
-            />
-            <IndienResultExplanation coefficientValue={diagnosticResults.partCanopee} coefficient={INDIEN_CANOPEE} />
-            <IndienResultExplanation
-              coefficientValue={diagnosticResults.coeffBiodiversite}
-              coefficient={INDIEN_BIODIVERSITE}
-            />
           </div>
         </div>
         <div className="mx-2 mt-8 flex flex-row items-center gap-4 rounded-2xl bg-white p-4">
