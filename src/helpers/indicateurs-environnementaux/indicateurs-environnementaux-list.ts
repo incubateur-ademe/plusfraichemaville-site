@@ -1,9 +1,22 @@
 import {
   INDIEN_BIODIVERSITE_RANGE_1,
+  INDIEN_BIODIVERSITE_RANGE_2,
+  INDIEN_BIODIVERSITE_RANGE_3,
+  INDIEN_BIODIVERSITE_RANGE_4,
+  INDIEN_BIODIVERSITE_RANGE_5,
   INDIEN_CANOPE_RANGE_1,
+  INDIEN_CANOPE_RANGE_2,
+  INDIEN_CANOPE_RANGE_3,
   INDIEN_PERMEABILITE_RANGE_1,
+  INDIEN_PERMEABILITE_RANGE_2,
+  INDIEN_PERMEABILITE_RANGE_3,
+  INDIEN_PERMEABILITE_RANGE_4,
+  INDIEN_PERMEABILITE_RANGE_5,
   INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_1,
   INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_2,
+  INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_3,
+  INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_4,
+  INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_5,
   IndienRangeType,
 } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-ranges";
 
@@ -32,7 +45,13 @@ export const INDIEN_RAFRAICHISSEMENT_URBAIN: IndienType = {
     "tempérés et méditerranéens, actuels et futurs en France métropolitaine.",
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/rafraichissement-urbain.svg",
   textColor: "text-coeff-rafraichissement-urbain",
-  ranges: [INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_1, INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_2],
+  ranges: [
+    INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_1,
+    INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_2,
+    INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_3,
+    INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_4,
+    INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_5,
+  ],
   explanationTitle: "Qu'est ce que le coefficient de rafraichissement urbain ?",
   scale: {
     image: "/images/fiches-diagnostic/indicateurs-environnementaux/echelle-rafraichissement-urbain.svg",
@@ -51,7 +70,13 @@ export const INDIEN_PERMEABILITE: IndienType = {
     "un dimensionnement précis des infrastructures de rétention.",
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/permeabilite.svg",
   textColor: "text-coeff-permeabilite",
-  ranges: [INDIEN_PERMEABILITE_RANGE_1],
+  ranges: [
+    INDIEN_PERMEABILITE_RANGE_1,
+    INDIEN_PERMEABILITE_RANGE_2,
+    INDIEN_PERMEABILITE_RANGE_3,
+    INDIEN_PERMEABILITE_RANGE_4,
+    INDIEN_PERMEABILITE_RANGE_5,
+  ],
   explanationTitle: "Qu'est ce que le coefficient de perméabilité ?",
   scale: {
     image: "/images/fiches-diagnostic/indicateurs-environnementaux/echelle-permeabilite.svg",
@@ -70,7 +95,13 @@ export const INDIEN_BIODIVERSITE: IndienType = {
     "d’accueil, mais ne garantit pas la présence effective des espèces après aménagement.",
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/biodiversite.svg",
   textColor: "text-coeff-biodiversite",
-  ranges: [INDIEN_BIODIVERSITE_RANGE_1],
+  ranges: [
+    INDIEN_BIODIVERSITE_RANGE_1,
+    INDIEN_BIODIVERSITE_RANGE_2,
+    INDIEN_BIODIVERSITE_RANGE_3,
+    INDIEN_BIODIVERSITE_RANGE_4,
+    INDIEN_BIODIVERSITE_RANGE_5,
+  ],
   explanationTitle: "Qu'est ce que le coefficient de biodiversité ?",
   scale: {
     image: "/images/fiches-diagnostic/indicateurs-environnementaux/echelle-biodiversite.svg",
@@ -85,10 +116,10 @@ export const INDIEN_CANOPEE = {
   explanation: "Il s’agit de la part de surface de canopée par rapport à la surface au sol.",
   icone: "/images/fiches-diagnostic/indicateurs-environnementaux/canopee.svg",
   textColor: "text-coeff-canopee",
-  ranges: [INDIEN_CANOPE_RANGE_1],
+  ranges: [INDIEN_CANOPE_RANGE_1, INDIEN_CANOPE_RANGE_2, INDIEN_CANOPE_RANGE_3],
   explanationTitle: "Qu'est ce que la part de canopée ?",
 };
 
 export const getRangeFromValue = (value: number, indienType: IndienType) => {
-  return indienType.ranges.find((range) => range.maxValue >= value) || indienType.ranges[0];
+  return indienType.ranges.find((range) => range.maxValue > value) || indienType.ranges[0];
 };

@@ -33,14 +33,13 @@ export default function IndienResultExplanation({
               <span className="text-2xl font-bold">{coefficientValue} </span> %
             </>
           ) : (
-            <>
+            <div className="text-nowrap">
               <span className={clsx("font-bold", large ? "text-4xl" : "text-3xl")}>{coefficientValue} </span>/ 1
-            </>
+            </div>
           )}
         </div>
       </div>
       <Separator className="mb-4 mt-2" />
-      {range.explanation}
     </div>
   );
 }
