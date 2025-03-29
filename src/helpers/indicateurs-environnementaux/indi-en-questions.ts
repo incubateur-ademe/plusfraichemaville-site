@@ -42,6 +42,7 @@ export const INDIEN_QUESTION_NOMBRE_ARBRES_VIEUX: IndiEnQuestion = {
 };
 
 export const INDIEN_QUESTION_GROUPE_ARBRE: IndiEnGroupeQuestion = {
+  code: "arbre",
   questions: [
     INDIEN_QUESTION_NOMBRE_ARBRES_JEUNES,
     INDIEN_QUESTION_NOMBRE_ARBRES_MOYENS,
@@ -88,6 +89,7 @@ export const INDIEN_QUESTION_SURFACE_BUISSONANTE: IndiEnQuestion = {
 };
 
 export const INDIEN_QUESTION_GROUPE_SURFACE_VEGETALISEE: IndiEnGroupeQuestion = {
+  code: "surfaceVegetalisee",
   questions: [
     INDIEN_QUESTION_SURFACE_DALLE_SOUS_SOL,
     INDIEN_QUESTION_SURFACE_HERBACEE,
@@ -163,6 +165,7 @@ export const INDIEN_QUESTION_REVETEMENT_BITUME: IndiEnQuestion = {
 };
 
 export const INDIEN_QUESTION_GROUPE_REVETEMENT_SOL: IndiEnGroupeQuestion = {
+  code: "revetementSol",
   questions: [
     INDIEN_QUESTION_REVETEMENT_PAVES,
     INDIEN_QUESTION_REVETEMENT_BIOSOURCES,
@@ -211,6 +214,7 @@ export const INDIEN_QUESTION_BASSIN_FONTAINE: IndiEnQuestion = {
 };
 
 export const INDIEN_QUESTION_GROUPE_BASSIN: IndiEnGroupeQuestion = {
+  code: "bassin",
   questions: [INDIEN_QUESTION_BASSIN_PAYSAGER, INDIEN_QUESTION_BASSIN_MINERAUX, INDIEN_QUESTION_BASSIN_FONTAINE],
   label: "Fontainerie, bassins en eau",
   image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/groupe-bassin.svg",
@@ -241,6 +245,7 @@ export const INDIEN_QUESTION_OMBRAGE_NON_VEGETALISE: IndiEnQuestion = {
 };
 
 export const INDIEN_QUESTION_GROUPE_OMBRAGE: IndiEnGroupeQuestion = {
+  code: "ombrage",
   questions: [INDIEN_QUESTION_OMBRAGE_VEGETALISE, INDIEN_QUESTION_OMBRAGE_NON_VEGETALISE],
   label: "Structures d'ombrage",
   image: "/images/fiches-diagnostic/indicateurs-environnementaux/question/groupe-ombrage.svg",
@@ -319,6 +324,7 @@ export const INDIEN_QUESTION_TOITURE_PANNEAU_PHOTO: IndiEnQuestion = {
 };
 
 export const INDIEN_QUESTION_GROUPE_TOITURE: IndiEnGroupeQuestion = {
+  code: "toiture",
   questions: [
     INDIEN_QUESTION_TOITURE_TUILES,
     INDIEN_QUESTION_TOITURE_CLAIRE,
@@ -343,4 +349,8 @@ export const ALL_INDIEN_QUESTIONS = [
 export const findIndiEnQuestionFromCode = (code: string) => {
   const allQuestions = ALL_INDIEN_QUESTIONS.flatMap((groupe) => groupe.questions);
   return allQuestions.find((question) => question.code === code);
+};
+
+export const findIndiEnGroupeQuestionFromQuestionCode = (questionCode: string) => {
+  return ALL_INDIEN_QUESTIONS.find((groupe) => groupe.questions.find((question) => question.code === questionCode));
 };

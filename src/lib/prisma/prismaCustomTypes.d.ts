@@ -197,4 +197,8 @@ export type ProjetIndiEnSimuation = {
   coeffBiodiversite: number;
   coeffPermeabilite: number;
   partCanopee: number;
+  partSurfaceVegetalisee: number;
+  partRevetementSol: number;
+  partFontainerie: number;
+  partToiture: number;
 };

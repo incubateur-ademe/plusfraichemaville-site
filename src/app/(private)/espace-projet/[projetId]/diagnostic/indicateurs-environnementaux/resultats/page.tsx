@@ -22,6 +22,7 @@ import {
   TYPE_SOLUTION_GRISE,
   TYPE_SOLUTION_VERTE,
 } from "@/src/helpers/type-fiche-solution";
+import IndienResultPieChartSurface from "@/src/components/diagnostic-indien/indien-result-surface-repartition";
 
 export default function IndicateursEnvironnementauxResultatsPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -95,6 +96,7 @@ export default function IndicateursEnvironnementauxResultatsPage() {
             </div>
           </div>
         </div>
+        <IndienResultPieChartSurface results={diagnosticResults} className="" />
         <div className="mx-2 mt-8 flex flex-row items-center gap-4 rounded-2xl bg-white p-4">
           <Image
             src="/images/fiches-diagnostic/indicateurs-environnementaux/ampoule-idee.svg"

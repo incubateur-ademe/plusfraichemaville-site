@@ -24,6 +24,7 @@ export type IndiEnQuestion = {
 };
 
 export type IndiEnGroupeQuestion = {
+  code: string;
   label: string;
   image: string;
   questions: IndiEnQuestion[];
