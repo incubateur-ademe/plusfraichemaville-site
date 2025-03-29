@@ -46,7 +46,7 @@ export default function IndienResultRange({
               </div>
               <Image
                 src="/images/fiches-diagnostic/indicateurs-environnementaux/echelle-curseur.svg"
-                width={33}
+                width={large ? 33 : 22}
                 height={30}
                 alt=""
                 className="absolute bottom-[0.75rem] ml-[-16px] "
