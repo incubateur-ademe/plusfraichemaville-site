@@ -17,7 +17,7 @@ export default function BannerProjet({ className }: { className?: string }) {
   const isLecteur = useIsLecteur(currentProjet?.id);
 
   return (
-    <div className={`bg-dsfr-background-alt-blue-france py-4 ${className} min-h-[7rem]`}>
+    <div className={`bg-dsfr-background-alt-blue-france pt-4 ${className} min-h-[7rem]`}>
       {!currentProjet ? (
         <BannerProjetSkeleton />
       ) : (
