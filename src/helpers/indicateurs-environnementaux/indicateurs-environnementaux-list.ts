@@ -52,7 +52,7 @@ export const INDIEN_RAFRAICHISSEMENT_URBAIN: IndienType = {
     INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_4,
     INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_5,
   ],
-  explanationTitle: "Qu'est ce que le coefficient de rafraichissement urbain ?",
+  explanationTitle: "Qu'est ce que le coefficient de rafraîchissement urbain ?",
   scale: {
     image: "/images/fiches-diagnostic/indicateurs-environnementaux/echelle-rafraichissement-urbain.svg",
     steps: 4,

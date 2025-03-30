@@ -23,7 +23,7 @@ export const INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_3: IndienRangeType = {
 };
 export const INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_4: IndienRangeType = {
   maxValue: 0.8,
-  title: "Espace qui participe au rafraichissement urbain",
+  title: "Espace qui participe au rafraîchissement urbain",
 };
 export const INDIEN_RAFRAICHISSEMENT_URBAIN_RANGE_5: IndienRangeType = {
   maxValue: Infinity,

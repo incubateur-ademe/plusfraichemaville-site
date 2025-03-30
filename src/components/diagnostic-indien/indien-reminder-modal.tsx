@@ -1,21 +1,32 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import React from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
+import clsx from "clsx";
 
-export default async function IndienReminderModal({ projetId }: { projetId: number }) {
+export default function IndienReminderModal({ projetId }: { projetId: number }) {
   const modal = createModal({
     id: "indien-reminder-modal",
     isOpenedByDefault: false,
   });
 
   return (
-    <>
-      <Button className="fr-btn rounded-3xl" nativeButtonProps={modal.buttonProps}>
+    <div>
+      <Button className="fr-btn mb-4 rounded-3xl" nativeButtonProps={modal.buttonProps}>
         Commencer le calcul
       </Button>
+      <div>
+        <i className={clsx("ri-timer-line", "fr-icon--sm mr-1 mt-4 text-dsfr-text-mention-grey")} />
+        <span className="text-sm text-dsfr-text-mention-grey">
+          <strong>10 min</strong>, si le métré est déjà réalisé.{" "}
+          <span className="cursor-pointer underline hover:decoration-1" role="button" onClick={() => modal.open()}>
+            Voir les données à préparer pour le questionnaire
+          </span>
+        </span>
+      </div>
 
       <modal.Component title="" className="custom-modal md-modal">
         <h1 className="!text-xl !text-pfmv-navy">
@@ -75,6 +86,6 @@ export default async function IndienReminderModal({ projetId }: { projetId: numb
           </Link>
         </div>
       </modal.Component>
-    </>
+    </div>
   );
 }
