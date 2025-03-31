@@ -46,7 +46,7 @@ export default function IndienResultPieChartSurface({
         {pieChartData.map((data) => (
           <div key={data.title} className={"flex items-center"}>
             <span className={"mr-2 inline-block h-4 w-4"} style={{ backgroundColor: data.color }} />
-            {data.title} : <strong>{data.value} %</strong>
+            {data.title} :<strong>&nbsp;{data.value} %</strong>
           </div>
         ))}
       </div>

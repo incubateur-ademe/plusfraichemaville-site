@@ -1,36 +1,24 @@
 "use client";
-import { useMemo } from "react";
-import { useSelectedLayoutSegments } from "next/navigation";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import Breadcrumb from "@codegouvfr/react-dsfr/Breadcrumb";
-import { ALL_BREADCRUMB_STEPS } from "@/src/components/espace-projet/banner/breadcurmb-list";
+import { BreadcrumbStep } from "@/src/components/espace-projet/banner/breadcurmb-list";
 import clsx from "clsx";
-import { isEmpty } from "lodash";
+import { useProjetsStore } from "@/src/stores/projets/provider";
 
-export default function BannerProjetBreadcrumb({
-  currentProjet,
-  className,
-}: {
-  currentProjet: ProjetWithRelations;
-  className?: string;
-}) {
-  const layoutSegments = useSelectedLayoutSegments();
-
-  const breadcrumbStep = useMemo(() => {
-    return ALL_BREADCRUMB_STEPS(currentProjet.id).find((step) =>
-      step.matchSegments.every((segment) => layoutSegments.includes(segment)),
-    );
-  }, [currentProjet.id, layoutSegments]);
-
-  if (isEmpty(breadcrumbStep?.breadcrumbSegments)) {
+export default function BannerProjetBreadcrumb({ step, className }: { step: BreadcrumbStep; className?: string }) {
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  if (!currentProjet) {
     return null;
   }
   return (
-    <Breadcrumb
-      className={clsx(className, "!mb-0 !mt-2")}
-      currentPageLabel={breadcrumbStep?.currentPageLabel}
-      classes={{ link: "text-pfmv-navy font-normal" }}
-      segments={breadcrumbStep?.breadcrumbSegments || []}
-    />
+    <div className="bg-dsfr-background-alt-blue-france">
+      <div className="fr-container">
+        <Breadcrumb
+          className={clsx(className, "-pt-2 !mb-0 !mt-0")}
+          currentPageLabel={step?.currentPageLabel}
+          classes={{ link: "text-pfmv-navy font-normal" }}
+          segments={step?.breadcrumbSegments(currentProjet.id) || []}
+        />
+      </div>
+    </div>
   );
 }

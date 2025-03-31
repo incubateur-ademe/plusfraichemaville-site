@@ -6,13 +6,17 @@ import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/gen
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Link from "next/link";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
+import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
+import { BREADCRUMB_DIAG_PRESTATION_LISTE } from "@/src/components/espace-projet/banner/breadcurmb-list";
+import React from "react";
 
 export default async function FicheDiagnosticListePage(props: { params: Promise<{ projetId: number }> }) {
   const params = await props.params;
   const allFichesDiagnostics = await getAllFichesDiagnostic();
   return (
     <ProtectedEspaceProjetUrl>
-      <div className="fr-container pt-8 text-black">
+      <BannerProjetBreadcrumb step={BREADCRUMB_DIAG_PRESTATION_LISTE} />
+      <div className="fr-container pt-8">
         <FicheDiagnosticGuide />
         <FicheDiagnosticChoixWithFilters allFichesDiagnostics={allFichesDiagnostics} />
         <div className="mt-14 flex items-center justify-between">
