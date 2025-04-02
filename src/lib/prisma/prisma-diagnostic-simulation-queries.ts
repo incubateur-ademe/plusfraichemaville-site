@@ -16,7 +16,7 @@ export const upsertDiagnosticSimulation = async ({
   diagnosticSimulationId?: string;
 }): Promise<diagnostic_simulation> => {
   return prismaClient.diagnostic_simulation.upsert({
-    where: { id: diagnosticSimulationId || "" },
+    where: { id: diagnosticSimulationId || "", projet_id: projetId },
     create: {
       user_id: userId,
       projet_id: projetId,
@@ -28,5 +28,32 @@ export const upsertDiagnosticSimulation = async ({
       initial_values: initialValues,
       validated: validated || undefined,
     },
+  });
+};
+
+export const comeBackLaterDiagnosticSimulation = async ({
+  userId,
+  projetId,
+  diagnosticSimulationId,
+}: {
+  userId: string;
+  projetId: number;
+  diagnosticSimulationId?: string;
+}): Promise<diagnostic_simulation> => {
+  return prismaClient.diagnostic_simulation.upsert({
+    where: { id: diagnosticSimulationId || "", projet_id: projetId },
+    create: {
+      user_id: userId,
+      projet_id: projetId,
+    },
+    update: {
+      user_id: userId,
+    },
+  });
+};
+
+export const getDiagnosticSimulationsByProjet = async (projetId: number): Promise<diagnostic_simulation[]> => {
+  return prismaClient.diagnostic_simulation.findMany({
+    where: { projet_id: projetId },
   });
 };

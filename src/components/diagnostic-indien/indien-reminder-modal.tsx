@@ -6,12 +6,21 @@ import React from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import clsx from "clsx";
+// eslint-disable-next-line max-len
+import { comebackLaterDiagnosticSimulationAction } from "@/src/actions/diagnostic-simulation/comeback-later-diagnostic-simulation-action";
+import { useRouter } from "next/navigation";
 
 export default function IndienReminderModal({ projetId }: { projetId: number }) {
   const modal = createModal({
     id: "indien-reminder-modal",
     isOpenedByDefault: false,
   });
+  const router = useRouter();
+
+  const onComebackLater = async () => {
+    await comebackLaterDiagnosticSimulationAction(+projetId);
+    router.push(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projetId));
+  };
 
   return (
     <div>
@@ -71,19 +80,16 @@ export default function IndienReminderModal({ projetId }: { projetId: number }) 
         <div className="mt-6 font-bold text-pfmv-navy">
           À tout moment vous avez la possibilité d’enregistrer vos réponses et de revenir plus tard.
         </div>
-        <div className="flex flex-row flex-wrap gap-6">
+        <div>
           <Link
-            className="fr-btn mb-6 mt-6 rounded-3xl"
+            className="fr-btn mb-6 mr-6 mt-6 rounded-3xl"
             href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(projetId)}
           >
             C’est parti !
           </Link>
-          <Link
-            className="fr-btn fr-btn--secondary mb-6 mt-6 rounded-3xl"
-            href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projetId)}
-          >
+          <Button onClick={() => onComebackLater()} priority="secondary">
             Revenir plus tard
-          </Link>
+          </Button>
         </div>
       </modal.Component>
     </div>

@@ -17,5 +17,5 @@ export const getProjetValurForIndienQuestion = (
   questionnCode: IndiEnQuestion["code"],
   projetSimulation?: ProjetIndiEnSimuation,
 ): number => {
-  return projetSimulation?.questions.find((question) => question.questionCode === questionnCode)?.quantite || 0;
+  return projetSimulation?.questions?.find((question) => question.questionCode === questionnCode)?.quantite || 0;
 };

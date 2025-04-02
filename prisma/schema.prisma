@@ -303,7 +303,7 @@ model diagnostic_simulation {
   user_id        String?
   projet_id      Int
   projet         projet   @relation(fields: [projet_id], references: [id], onDelete: Cascade)
-  initial_values Json
+  initial_values Json?
   validated      Boolean  @default(false)
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
