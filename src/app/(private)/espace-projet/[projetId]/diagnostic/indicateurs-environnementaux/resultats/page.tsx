@@ -61,7 +61,7 @@ export default function IndicateursEnvironnementauxResultatsPage() {
         </div>
         <div className="rounded-2xl bg-dsfr-background-alt-blue-france p-6">
           <IndienResultRanges diagnosticResults={diagnosticResults} />
-          <div className="flex flex-col md:flex-row items-baseline justify-between">
+          <div className="flex flex-col items-baseline justify-between md:flex-row">
             <IndienResultPieChartSurface results={diagnosticResults} />
             <IndienResultDownloader data={diagnosticResults} projet={currentProjet} />
           </div>
