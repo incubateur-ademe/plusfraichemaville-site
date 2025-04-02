@@ -63,7 +63,7 @@ export default function IndicateursEnvironnementauxResultatsPage() {
           <IndienResultRanges diagnosticResults={diagnosticResults} />
           <div className="flex items-baseline justify-between">
             <IndienResultPieChartSurface results={diagnosticResults} />
-            <IndienResultDownloader data={diagnosticResults} />
+            <IndienResultDownloader data={diagnosticResults} projet={currentProjet} />
           </div>
           <div className="mt-8 flex flex-row items-center gap-4 rounded-2xl bg-white p-4">
             <Image

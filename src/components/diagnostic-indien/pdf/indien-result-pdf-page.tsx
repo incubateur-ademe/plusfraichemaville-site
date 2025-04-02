@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { Separator } from "@/src/components/common/separator";
 import { IndienResultPdfHeader } from "@/src/components/diagnostic-indien/pdf/indien-result-pdf-header";
 import IndienResultRanges from "@/src/components/diagnostic-indien/indien-result-ranges";
@@ -9,10 +9,11 @@ import { generatePdf } from "@/src/helpers/pdf-utils";
 
 type ClimadiagViewerProps = {
   data: ProjetIndiEnSimuation;
+  projet: ProjetWithRelations;
   close: () => void;
 };
 
-export const IndienResultPdfPage = ({ data, close }: ClimadiagViewerProps) => {
+export const IndienResultPdfPage = ({ data, projet, close }: ClimadiagViewerProps) => {
   const filename = `resultat-diagnostic.pdf`;
 
   const ignore = useRef(false);
@@ -32,6 +33,10 @@ export const IndienResultPdfPage = ({ data, close }: ClimadiagViewerProps) => {
           <div className="px-14 py-10">
             <IndienResultPdfHeader />
             <Separator className="mb-10 mt-6" />
+            <div className="mb-4 text-3xl font-bold text-pfmv-navy">{projet.nom}</div>
+            <div className="mb-8 text-xl font-bold">
+              Analyse simplifiée de la surchauffe au sein de mon espace, à l’état initial.
+            </div>
             <div className="rounded-2xl bg-dsfr-background-alt-blue-france p-6">
               <IndienResultRanges diagnosticResults={data} isPdf />
               <IndienResultPieChartSurface results={data} />

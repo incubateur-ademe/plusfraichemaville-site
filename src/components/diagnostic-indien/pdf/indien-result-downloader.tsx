@@ -2,15 +2,16 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
 import { Spinner } from "@/src/components/common/spinner";
-import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 type IndienResultDownloaderProps = {
   data: ProjetIndiEnSimuation;
+  projet: ProjetWithRelations;
 };
 
 const LazyIndienResultPage = dynamic(() => import("./indien-result-pdf-page").then((mod) => mod.IndienResultPdfPage));
 
-export const IndienResultDownloader = ({ data }: IndienResultDownloaderProps) => {
+export const IndienResultDownloader = ({ data, projet }: IndienResultDownloaderProps) => {
   const [viewer, setViewer] = useState(false);
   const [loading, setLoading] = useState(false);
   const download = () => {
@@ -23,7 +24,7 @@ export const IndienResultDownloader = ({ data }: IndienResultDownloaderProps) =>
   };
   return (
     <>
-      {viewer && <LazyIndienResultPage data={data} close={close} />}
+      {viewer && <LazyIndienResultPage data={data} projet={projet} close={close} />}
       <button
         onClick={download}
         disabled={loading}
