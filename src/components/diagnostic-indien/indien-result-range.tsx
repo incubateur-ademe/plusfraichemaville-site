@@ -12,17 +12,19 @@ export default function IndienResultRange({
   coefficientValue,
   className,
   large = false,
+  isPdf = false,
 }: {
   coefficient: IndienType;
   coefficientValue: number;
   className?: string;
   large?: boolean;
+  isPdf?: boolean;
 }) {
   const range = getRangeFromValue(coefficientValue, coefficient);
   return (
     <div className={clsx("rounded-2xl bg-white p-4", className)}>
-      <IndienCoeffExplanationModal coefficient={coefficient} />
-      <div className="mr-10 mt-4">
+      {!isPdf && <IndienCoeffExplanationModal coefficient={coefficient} />}
+      <div className={clsx("mt-4", !isPdf && "mr-10")}>
         <div className="flex flex-row flex-wrap items-center justify-between gap-4">
           <div className="flex flex-row items-center gap-2">
             <Image src={coefficient.icone} height={51} width={51} alt="" className={clsx(large ? "h-16" : "h-10")} />
