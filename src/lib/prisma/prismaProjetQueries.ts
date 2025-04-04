@@ -451,3 +451,37 @@ export const getProjetsForProjetCreationEmail = async (
     include: projetIncludes,
   });
 };
+
+export const getProjetsForRemindDiagnosticEmail = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      diagnostic_simulations: {
+        some: {
+          validated: false,
+          updated_at: {
+            gte: afterDate,
+            lte: beforeDate,
+          },
+        },
+      },
+      NOT: {
+        users: {
+          some: {
+            role: "ADMIN",
+            email: {
+              some: {
+                type: emailType.remindNotCompletedDiagnostic,
+                email_status: "SUCCESS",
+              },
+            },
+          },
+        },
+      },
+    },
+    include: projetIncludes,
+  });
+};

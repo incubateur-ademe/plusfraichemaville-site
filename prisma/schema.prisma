@@ -137,6 +137,7 @@ enum emailType {
   contactMessageSent
   welcomeMessage
   noActivityAfterSignup
+  remindNotCompletedDiagnostic
 }
 
 enum emailStatus {
