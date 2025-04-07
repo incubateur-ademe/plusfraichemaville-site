@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useSession } from "next-auth/react";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { setBadgeOff, NotificationElements } from "@/src/helpers/notification-badge";
+import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
 
 export default function NavigationMenu() {
   const pathname = usePathname();
@@ -14,8 +14,21 @@ export default function NavigationMenu() {
 
   return (
     <MainNavigation
-      className="nav-main-navigation"
       items={[
+        {
+          isActive: pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION),
+          text: "Surchauffe urbaine",
+          menuLinks: [
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+              },
+              text: "Introduction à la surchauffe urbaine",
+            },
+          ],
+        },
         {
           linkProps: { href: PFMV_ROUTES.AIDE_DECISION, target: "_self", onClick: cancelCurrentProjet },
           text: "Découvrir",
