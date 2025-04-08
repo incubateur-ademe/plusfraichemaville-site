@@ -57,7 +57,7 @@ export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
         </div>
         <div>
           <h1 className="mb-5 text-[40px] font-bold leading-[48px]">{titre}</h1>
-          <CmsRichText label={description} className="mb-9" />
+          <CmsRichText label={description} className={"mb-9 mt-10 [&_p]:text-xl [&_p]:leading-8"} />
           {citations &&
             citations.length > 0 &&
             citations.map((citation) => (

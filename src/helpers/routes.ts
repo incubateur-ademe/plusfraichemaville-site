@@ -8,6 +8,7 @@ export const PFMV_ROUTES = {
   FICHES_SOLUTIONS: "/fiche-solution",
   MES_FICHES_SOLUTIONS: "/mon-projet/favoris",
   RETOURS_EXPERIENCE: "/projet",
+  RETOURS_EXPERIENCE_DIAGNOSTIC: (slug: string) => `/surchauffe-urbaine/retour-experience/${slug}`,
   SURCHAUFFE_URBAINE_INTRODUCTION: "/surchauffe-urbaine",
   SURCHAUFFE_URBAINE_COMPRENDRE: "/surchauffe-urbaine/notions-cles",
   SURCHAUFFE_URBAINE_QUAND: "/surchauffe-urbaine/quand-faire-un-diagnostic",

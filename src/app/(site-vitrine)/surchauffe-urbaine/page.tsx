@@ -1,9 +1,9 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { SurchauffeUrbaineLinkComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-link-component";
-import Button from "@codegouvfr/react-dsfr/Button";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { TeaserDiagnosticComponent } from "@/src/components/surchauffe-urbaine/teaser-diagnostic-component";
+// eslint-disable-next-line max-len
+import { SurchauffeUrbaineStoriesComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-stories-component";
 
 export const metadata: Metadata = computeMetadata("Introduction à la surchauffe urbaine");
 
@@ -24,14 +24,7 @@ export default async function SurchauffeUrbaineIntrductionPage() {
         </div>
       </div>
       <SurchauffeUrbaineLinkComponent className="mb-20 flex justify-center" />
-      <div className="bg-dsfr-background-alt-blue-france py-10 text-center">
-        <div className="text-center text-[1.375rem] font-bold text-pfmv-navy">
-          Votre collectivité est confrontée à un problème de surchauffe urbaine ?
-        </div>
-        <Button className="mt-4 rounded-3xl" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
-          {"Démarrer sur l'espace projet !"}
-        </Button>
-      </div>
+      <SurchauffeUrbaineStoriesComponent />
       <TeaserDiagnosticComponent className="mt-8" />
     </>
   );
