@@ -53,7 +53,7 @@ export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
         <div className="w-full lg:w-72">
           <RetourExperienceDiagInformations rex={rex} />
           <RetourExperienceDiagContacts contacts={contacts} />
-          <RetourExperienceDiagPdf pdf={rex.attributes.guide_pdf?.data.attributes.url} />
+          <RetourExperienceDiagPdf pdf={rex.attributes.guide_pdf?.data?.attributes?.url} />
         </div>
         <div>
           <h1 className="mb-5 text-[40px] font-bold leading-[48px]">{titre}</h1>
