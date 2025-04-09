@@ -9,7 +9,7 @@ export const SURCHAUFFE_URBAINE_TIMINGS = [
           <strong>Pourquoi ?</strong> Pour intégrer la lutte contre la surchauffe dans les outils de planification
           urbaine et identifier les zones prioritaires à rafraîchir.
         </p>
-        <p>
+        <p className="!mb-0">
           <strong>Quand ?</strong> Lors de l’élaboration des documents de planification (PLU, SCOT, PCAET) et des
           stratégies climatiques.
         </p>
@@ -26,7 +26,7 @@ export const SURCHAUFFE_URBAINE_TIMINGS = [
           <strong>Pourquoi ?</strong> Pour concevoir des quartiers adaptés au contexte climatique local et à ses
           évolutions futures.
         </p>
-        <p>
+        <p className="!mb-0">
           <strong>Quand ?</strong> Dès les premières études pour guider le choix d’aménagement et définir un cahier des
           charges adapté.
         </p>
@@ -43,7 +43,7 @@ export const SURCHAUFFE_URBAINE_TIMINGS = [
           <strong>Pourquoi un diagnostic ?</strong> Pour repérer les zones de surchauffe et comparer différents
           scénarios d’amélioration du confort estival des usagers.
         </p>
-        <p>
+        <p className="!mb-0">
           <strong>Quand ?</strong> Avant et pendant la conception pour ajuster les solutions en fonction des conditions
           locales.
         </p>
@@ -60,7 +60,7 @@ export const SURCHAUFFE_URBAINE_TIMINGS = [
           <strong>Pourquoi un diagnostic ?</strong> Pour évaluer l’efficacité des aménagements et améliorer leur usage
           en fonction des besoins réels des habitants.
         </p>
-        <p>
+        <p className="!mb-0">
           <strong>Quand ?</strong> Après la mise en service et lors des périodes de forte chaleur pour ajuster les
           dispositifs.
         </p>

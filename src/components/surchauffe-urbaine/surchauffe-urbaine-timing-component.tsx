@@ -35,7 +35,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           aria-label="Sélectionner une phase"
         >
           {SURCHAUFFE_URBAINE_TIMINGS.map((timing, index) => (
-            <li role="presentation" key={timing.code} className="flex flex-col items-center">
+            <li role="presentation" key={timing.code} className="flex h-[11rem] flex-col items-center">
               <button
                 type="button"
                 role="tab"
