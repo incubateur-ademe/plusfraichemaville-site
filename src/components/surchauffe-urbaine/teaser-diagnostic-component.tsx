@@ -6,7 +6,7 @@ import { TeaserDiagnosticCard } from "@/src/components/surchauffe-urbaine/teaser
 export const TeaserDiagnosticComponent = ({ className }: { className?: string }) => {
   return (
     <div className={clsx(className, "mx-auto w-fit rounded-xl bg-dsfr-background-alt-blue-france p-4 text-center")}>
-      <div className="mt-6 text-center text-[1.375rem] font-bold text-pfmv-navy">
+      <div className="mt-6 text-center text-[1.75rem] font-bold text-pfmv-navy">
         Lancez votre diagnostic directement depuis l’espace projet.
       </div>
       <Button className="mt-4 rounded-3xl" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>

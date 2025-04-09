@@ -5,9 +5,10 @@ import "@splidejs/splide/css/core";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { SURCHAUFFE_URBAINE_TIMINGS } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timings";
 import Image from "next/image";
-import { useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 // eslint-disable-next-line max-len
 import { SurchauffeUrbaineTimingSlideControllers } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timing-slide-controllers";
+import Link from "next/link";
 
 export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: string }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -19,13 +20,13 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
   };
   return (
     <div className={clsx("bg-dsfr-background-alt-blue-france py-10 text-center", className)}>
-      <div className="relative mx-auto max-w-[42rem]">
+      <div className="relative mx-auto max-w-[48rem]">
         <Image
           src="/images/surchauffe-urbaine/timing-arrow.svg"
           alt=""
-          width={600}
+          width={700}
           height={20}
-          className="absolute top-6 z-10 md:left-16 md:max-w-[43rem]"
+          className="absolute top-5 z-10 md:left-16 md:max-w-[47rem]"
         />
 
         <ul
@@ -65,7 +66,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           <SplideTrack className="mt-12 overflow-auto ">
             {SURCHAUFFE_URBAINE_TIMINGS.map((timing) => (
               <SplideSlide className="" key={timing.code}>
-                <div className="mx-auto max-w-[39rem] rounded-xl bg-white px-4 py-4 text-left" key={timing.code}>
+                <div className="mx-auto max-w-[43rem] rounded-xl bg-white px-4 py-4 text-left" key={timing.code}>
                   {timing.description}
                 </div>
               </SplideSlide>
@@ -73,6 +74,18 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           </SplideTrack>
           <SurchauffeUrbaineTimingSlideControllers />
         </Splide>
+        <div>
+          Pour aller plus loin sur la surchauffe urbaine
+          <Link
+            className="ml-2 !text-pfmv-navy after:hidden"
+            download
+            target="_blank"
+            href="https://cdn.plusfraichemaville.fr/Guide_diagnostic_Surchauffe_Urbaine_202406.pdf"
+          >
+            Télécharger le Guide de l’Ademe
+            <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
+          </Link>
+        </div>
       </div>
     </div>
   );
