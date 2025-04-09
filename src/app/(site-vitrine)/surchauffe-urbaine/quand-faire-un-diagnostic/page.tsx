@@ -4,9 +4,9 @@ import { TeaserDiagnosticComponent } from "@/src/components/surchauffe-urbaine/t
 // eslint-disable-next-line max-len
 import { SurchauffeUrbaineTimingComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timing-component";
 
-export const metadata: Metadata = computeMetadata("Notions clés de la surchauffe urbaine");
+export const metadata: Metadata = computeMetadata("Pourquoi et quand faire un diagnostic ?");
 
-export default async function SurchauffeUrbaineQuandPage() {
+export default async function SurchauffeUrbaineTimingPage() {
   return (
     <>
       <div className="fr-container">
