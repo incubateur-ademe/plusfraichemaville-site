@@ -27,6 +27,14 @@ export default function NavigationMenu() {
               },
               text: "Introduction à la surchauffe urbaine",
             },
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+              },
+              text: "Pourquoi et quand faire un diagnostic",
+            },
           ],
         },
         {

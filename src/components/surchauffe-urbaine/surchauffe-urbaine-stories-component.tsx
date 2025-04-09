@@ -9,7 +9,7 @@ export const SurchauffeUrbaineStoriesComponent = async ({ className }: { classNa
   const rexDiagData = await getRetourExperienceDiagStoriesBySlugs([
     "mustardijon-reseau-stations",
     "nanterre-diag-icu-ifu",
-    "grenoble-cartographuie-icu-2020",
+    "grenoble-cartographie-icu-2020",
     "balade-sensible-toulon-la-seyne",
     "libourne-lcz-renaturation",
     "saint-omer-cool-towns-diagnostic",

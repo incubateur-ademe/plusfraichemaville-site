@@ -12,7 +12,7 @@ export const SurchauffeUrbaineLinkComponent = ({ className }: { className?: stri
         />
         <SurchauffeUrbaineLinkItem
           linkText="Pourquoi et quand faire un diagnostic"
-          linkUrl={PFMV_ROUTES.SURCHAUFFE_URBAINE_QUAND}
+          linkUrl={PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING}
           pictoUrl="/images/surchauffe-urbaine/surchauffe-menu-quand.svg"
         />
         <SurchauffeUrbaineLinkItem
