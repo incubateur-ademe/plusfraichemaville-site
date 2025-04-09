@@ -29,6 +29,14 @@ export default function NavigationMenu() {
             },
             {
               linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+              },
+              text: "Comprendre les notions clés",
+            },
+            {
+              linkProps: {
                 href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
                 target: "_self",
                 onClick: cancelCurrentProjet,
