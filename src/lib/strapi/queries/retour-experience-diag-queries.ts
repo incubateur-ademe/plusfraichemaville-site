@@ -31,6 +31,44 @@ const GET_RETOUR_EXPERIENCE_DIAG_STORY_DATA = (strapiFilter: StrapiFilter) => `
     }
   }`;
 
+const GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA = (strapiFilter: StrapiFilter) => ` 
+  ${STRAPI_IMAGE_FRAGMENT}
+  query {
+    retourExperienceDiagnostics ${strapiFilter.wholeFilterString()} {
+      data {
+        id
+        attributes {
+          titre
+          lieu
+          slug
+          image_principale {
+            ...ImageInfo
+          }
+          lien_rex_diagnostics {
+            data {
+              id
+              attributes {
+                description
+                fiche_diagnostic {
+                  data {
+                    id
+                    attributes {
+                      titre
+                      nom_scientifique
+                      image_icone {
+                        ...ImageInfo
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }`;
+
 const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) => ` 
   ${STRAPI_IMAGE_FRAGMENT}
   ${CITATION_FRAGMENT}
@@ -41,9 +79,6 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
       data {
         id
         attributes {
-          createdAt
-          updatedAt
-          publishedAt
           titre
           lieu
           description
@@ -103,6 +138,13 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
       }
     }
   }`;
+
+export async function getRetoursExperiencesDiag(): Promise<RetourExperienceDiagnostic[]> {
+  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA(filter), { tag: "get-rex-diag" }))
+    ?.retourExperienceDiagnostics as APIResponseCollection<RetourExperienceDiagnostic>;
+  return safeReturnStrapiEntities(apiResponse);
+}
 
 export const getRetourExperienceDiagBySlug = async (slug: string): Promise<RetourExperienceDiagnostic | null> => {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);

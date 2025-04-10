@@ -93,5 +93,5 @@ export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
 };
 
 export const RetourExperienceDiagLabel = ({ children }: PropsWithChildren) => {
-  return <div className="rounded-lg bg-black/80 px-4 py-2 font-bold">{children}</div>;
+  return <div className="rounded-lg bg-black/80 px-3 py-2 font-bold">{children}</div>;
 };
