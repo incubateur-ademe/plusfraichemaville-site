@@ -50,7 +50,13 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
                 )}
                 onClick={() => changeSlide(index)}
               >
-                <Image width={index === currentSlide ? 70 : 40} height={70} src={timing.image} alt={timing.title} />
+                <Image
+                  width={index === currentSlide ? 70 : 40}
+                  height={70}
+                  src={timing.image}
+                  alt={timing.title}
+                  className="transition-all duration-200"
+                />
               </button>
               <div className="mt-4 max-w-32 font-bold text-pfmv-navy">{timing.title}</div>
             </li>
