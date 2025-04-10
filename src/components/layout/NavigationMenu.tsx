@@ -43,6 +43,14 @@ export default function NavigationMenu() {
               },
               text: "Pourquoi et quand faire un diagnostic",
             },
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REX,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+              },
+              text: "Diagnostics réalisés",
+            },
           ],
         },
         {
