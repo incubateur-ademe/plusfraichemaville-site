@@ -46,7 +46,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
                   "pfmv-card z-20 flex cursor-pointer flex-col items-center justify-center !bg-none",
                   index === currentSlide ? "size-[6.25rem] !outline !outline-1 !outline-pfmv-navy" : "size-16",
                   "focus:!outline focus:!outline-1 focus:!outline-pfmv-navy",
-                  "transition-all duration-200",
+                  "transition-all duration-300",
                 )}
                 onClick={() => changeSlide(index)}
               >
@@ -55,7 +55,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
                   height={70}
                   src={timing.image}
                   alt={timing.title}
-                  className="transition-all duration-200"
+                  className="transition-all duration-300"
                 />
               </button>
               <div className="mt-4 max-w-32 font-bold text-pfmv-navy">{timing.title}</div>
