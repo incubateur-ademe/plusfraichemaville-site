@@ -3,6 +3,7 @@ export const SURCHAUFFE_URBAINE_TIMINGS = [
     code: "strategie-territoriale",
     image: "/images/surchauffe-urbaine/timing-strategie-territoriale.svg",
     title: "Stratégie territoriale",
+    arrowClassname: "left-[10%] md:left-[5%]",
     description: (
       <div className="text-lg">
         <p>
@@ -20,6 +21,7 @@ export const SURCHAUFFE_URBAINE_TIMINGS = [
     code: "projet-urbain",
     image: "/images/surchauffe-urbaine/timing-projet-urbain.svg",
     title: "Projet urbain",
+    arrowClassname: "left-[40%] md:left-[34%]",
     description: (
       <div className="text-lg">
         <p>
@@ -37,6 +39,7 @@ export const SURCHAUFFE_URBAINE_TIMINGS = [
     code: "projet-espace-public",
     image: "/images/surchauffe-urbaine/timing-projet-espace-public.svg",
     title: "Projet d’espace public",
+    arrowClassname: "left-[65%] md:left-[62%]",
     description: (
       <div className="text-lg">
         <p>
@@ -54,6 +57,7 @@ export const SURCHAUFFE_URBAINE_TIMINGS = [
     code: "usage",
     image: "/images/surchauffe-urbaine/timing-usage.svg",
     title: "Usage, vécu",
+    arrowClassname: "left-[89%]",
     description: (
       <div className="text-lg">
         <p>

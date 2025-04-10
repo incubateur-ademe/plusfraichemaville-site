@@ -69,10 +69,19 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           options={{}}
           ref={sliderRef}
         >
-          <SplideTrack className="mt-12 overflow-auto ">
+          <SplideTrack className="overflow-auto ">
             {SURCHAUFFE_URBAINE_TIMINGS.map((timing) => (
-              <SplideSlide className="" key={timing.code}>
-                <div className="mx-auto max-w-[43rem] rounded-xl bg-white px-4 py-4 text-left" key={timing.code}>
+              <SplideSlide className="pt-8" key={timing.code}>
+                <div
+                  className="relative mx-auto max-w-[45rem] rounded-xl bg-white px-4 py-4 text-left"
+                  key={timing.code}
+                >
+                  <div
+                    className={clsx(
+                      "absolute top-0 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rotate-45 transform bg-white",
+                      timing.arrowClassname,
+                    )}
+                  />
                   {timing.description}
                 </div>
               </SplideSlide>
