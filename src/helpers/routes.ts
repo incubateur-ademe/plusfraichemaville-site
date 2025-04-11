@@ -13,6 +13,8 @@ export const PFMV_ROUTES = {
   SURCHAUFFE_URBAINE_COMPRENDRE: "/surchauffe-urbaine/notions-cles",
   SURCHAUFFE_URBAINE_TIMING: "/surchauffe-urbaine/quand-faire-un-diagnostic",
   SURCHAUFFE_URBAINE_REX: "/surchauffe-urbaine/retour-experience",
+  SURCHAUFFE_URBAINE__FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) =>
+    `/surchauffe-urbaine/fiche-diagnostic/${ficheDiagnosticSlug}`,
   RETOUR_EXPERIENCE: (slug: string) => `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${slug}`,
   CONTACT: "/contact",
   CONTACT_SUCCESS: "/contact/success",
@@ -55,8 +57,8 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/projet/${projetRexSlug}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION: (projetId: number, ficheSolutionSlug: string) =>
     `/espace-projet/${projetId}/fiche-solution/${ficheSolutionSlug}`,
-  ESPACE_PROJET_FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) =>
-    `/diagnostic/prestation/fiche-diagnostic/${ficheDiagnosticSlug}`,
+  ESPACE_PROJET_FICHE_DIAGNOSTIC: (projetId: number, ficheDiagnosticSlug: string) =>
+    `/espace-projet/${projetId}/diagnostic/prestation/fiche-diagnostic/${ficheDiagnosticSlug}`,
   ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
   ESPACE_PROJET_ANNUAIRE: (projetId: number) => `/espace-projet/${projetId}/annuaire`,
   ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>

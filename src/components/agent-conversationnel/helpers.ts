@@ -12,7 +12,10 @@ export const sanitizeConversationHistoryFromRagtime = (conversation: RagtimeConv
 export const sanitizeUrlInMessageFromRagtime = (ragtimeResponseMessage: string, projetId?: number): string => {
   if (projetId) {
     return ragtimeResponseMessage
-      .replace("https://plusfraichemaville.fr/fiches-diagnostic/", PFMV_ROUTES.ESPACE_PROJET_FICHE_DIAGNOSTIC(""))
+      .replace(
+        "https://plusfraichemaville.fr/fiches-diagnostic/",
+        PFMV_ROUTES.ESPACE_PROJET_FICHE_DIAGNOSTIC(projetId, ""),
+      )
       .replace("https://plusfraichemaville.fr/fiche-solution", PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(projetId))
       .replace("https://plusfraichemaville.fr/", "/");
   } else {

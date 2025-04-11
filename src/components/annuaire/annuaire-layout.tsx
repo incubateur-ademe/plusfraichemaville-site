@@ -5,7 +5,7 @@ import { AnnuaireRexContentSeeProjetModal } from "@/src/components/annuaire/side
 
 export const AnnuaireLayout = ({ children }: PropsWithChildren) => {
   return (
-    <div className="fr-container pt-8">
+    <div className="fr-container mb-40 pt-8">
       <div className="mb-10">{children}</div>
       <AnnuaireLayoutButton />
       <AnnuaireRexContentSeeProjetModal />

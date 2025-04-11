@@ -16,17 +16,16 @@ import { isEmpty } from "@/src/helpers/listUtils";
 import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "@/src/helpers/common";
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { Separator } from "@/src/components/common/separator";
 // eslint-disable-next-line max-len
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
 import { notifications } from "@/src/components/common/notifications";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import { SplideController } from "../common/splide-controllers";
-import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
+import { FicheDiagLink } from "@/src/components/common/generic-save-fiche/fiche-diag-link";
 
 const modal = createModal({
   id: "fiche-diagnostic-description-modal",
@@ -42,7 +41,6 @@ export const FicheDiagnosticDescriptionModal = () => {
   const delaiMax = ficheDiagnostic?.attributes.delai_max;
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
-  const ficheDiagUrl = PFMV_ROUTES.ESPACE_PROJET_FICHE_DIAGNOSTIC(ficheDiagnostic?.attributes.slug!);
   useEffect(() => {
     if (ficheDiagnostic) {
       modal.open();
@@ -146,13 +144,13 @@ export const FicheDiagnosticDescriptionModal = () => {
                   </div>
                 </div>
                 <div className="mt-4 flex items-center gap-4">
-                  <GenericFicheLink
+                  <FicheDiagLink
                     className={clsx("fr-btn fr-btn--tertiary mt-4 rounded-3xl !text-dsfr-text-title-grey ")}
-                    href={ficheDiagUrl}
+                    slug={ficheDiagData?.slug!}
                     onClick={modal.close}
                   >
                     Lire la méthode
-                  </GenericFicheLink>
+                  </FicheDiagLink>
                 </div>
               </div>
 

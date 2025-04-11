@@ -8,9 +8,9 @@ type FicheDiagnosticProps = {
 
 export const FicheDiagnosticComponent = ({ ficheDiagnostic }: FicheDiagnosticProps) => {
   return (
-    <div className="-mb-40">
+    <>
       <FicheDiagnosticHeader ficheDiagnostic={ficheDiagnostic} />
       <FicheDiagnosticBlocs ficheDiagnostic={ficheDiagnostic} />
-    </div>
+    </>
   );
 };

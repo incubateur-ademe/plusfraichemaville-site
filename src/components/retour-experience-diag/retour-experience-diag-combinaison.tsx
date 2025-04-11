@@ -5,11 +5,10 @@ import clsx from "clsx";
 import CmsRichText from "../common/CmsRichText";
 import { TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
-import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { isEmpty } from "lodash";
+import { FicheDiagLink } from "@/src/components/common/generic-save-fiche/fiche-diag-link";
 
 type RetourExperienceDiagCombinaisonProps = {
   lienRexDiagnostics: LienRexDiagnostic[];
@@ -44,7 +43,7 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
               <h2 className="mb-3 text-[1.375rem] font-bold">{titre}</h2>
               <CmsRichText className="mb-5 leading-6" label={lienRexDiagnostic.attributes.description} />
               <div className=" relative max-w-xl">
-                <GenericFicheLink href={PFMV_ROUTES.ESPACE_PROJET_FICHE_DIAGNOSTIC(slug)}>
+                <FicheDiagLink slug={slug}>
                   <div className="pfmv-card max-w-xl cursor-pointer p-5">
                     {!isEmpty(getEchellesThermiquesByFicheDiagnostic(ficheDiagData)) && (
                       <div className="mb-4 flex flex-wrap gap-2 uppercase">
@@ -63,7 +62,7 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
                     <h3 className="mb-1 mr-28 text-base">{titre}</h3>
                     <i>{nom_scientifique}</i>
                   </div>
-                </GenericFicheLink>
+                </FicheDiagLink>
                 <GenericSaveFiche
                   id={ficheDiagData.id}
                   type={TypeFiche.diagnostic}

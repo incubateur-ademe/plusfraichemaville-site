@@ -11,12 +11,16 @@ import { useModalStore } from "@/src/stores/modal/provider";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
+import { useRouter } from "next/navigation";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 type FicheDiagnosticCardProps = {
   ficheDiagnostic: FicheDiagnostic;
 };
 
 export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProps) => {
+  const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const coutMin = ficheDiagnostic.attributes.cout_min;
   const coutMax = ficheDiagnostic.attributes.cout_max;
   const delaiMin = ficheDiagnostic.attributes.delai_min;
@@ -26,11 +30,20 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
 
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
+  const router = useRouter();
+
+  const onClickCard = () => {
+    if (currentProjetId) {
+      setCurrentFicheDiagnostic(ficheDiagnostic);
+    } else {
+      router.push(PFMV_ROUTES.SURCHAUFFE_URBAINE__FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug));
+    }
+  };
 
   return (
     <div className={clsx("pfmv-card relative h-auto w-72 cursor-pointer")}>
       <GenericSaveFiche id={ficheDiagnostic.id} type={TypeFiche.diagnostic} classNameButton="absolute top-3 right-4" />
-      <div className="flex h-full flex-col" onClick={() => setCurrentFicheDiagnostic(ficheDiagnostic)}>
+      <div className="flex h-full flex-col" onClick={onClickCard}>
         <div className={clsx("flex h-full flex-col rounded-[0.9375rem]")}>
           <div
             className={clsx("fiche-diagnostic-icone", "mx-auto mt-6 flex size-[8.5rem] items-center justify-center ")}
