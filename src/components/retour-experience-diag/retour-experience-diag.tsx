@@ -9,12 +9,17 @@ import { RetourExperienceDiagCombinaison } from "./retour-experience-diag-combin
 import { RetourExperienceDiagPdf } from "./retour-experience-diag-pdf";
 import { RetourExperienceDiagPrincipauxResultats } from "./retour-experience-diag-principaux-resultats";
 import { PropsWithChildren } from "react";
+import clsx from "clsx";
+import { Separator } from "@/src/components/common/separator";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 type RetourExperienceDiagProps = {
   rex: RetourExperienceDiagnostic;
+  showContacts: boolean;
 };
 
-export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
+export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiagProps) => {
   const {
     lieu,
     titre,
@@ -52,8 +57,26 @@ export const RetourExperienceDiag = ({ rex }: RetourExperienceDiagProps) => {
       <div className="fr-container flex flex-col gap-24 pt-6 lg:flex-row">
         <div className="w-full lg:w-72">
           <RetourExperienceDiagInformations rex={rex} />
-          <RetourExperienceDiagContacts contacts={contacts} />
+          {showContacts && <RetourExperienceDiagContacts contacts={contacts} />}
           <RetourExperienceDiagPdf pdf={rex.attributes.guide_pdf?.data?.attributes?.url} />
+          {!showContacts && (
+            <>
+              <Separator className="my-6" />
+              <div className={clsx("rounded-xl bg-dsfr-background-alt-blue-france p-4")}>
+                <div>
+                  Rendez-vous sur l’espace projet pour avoir le contact de la collectivité et des prestataires de ce
+                  diagnostic
+                </div>
+                <Button
+                  linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}
+                  className="mt-4 rounded-3xl text-center"
+                  priority="secondary"
+                >
+                  {"Démarrer sur l'espace projet !"}
+                </Button>
+              </div>
+            </>
+          )}
         </div>
         <div>
           <h1 className="mb-5 text-[40px] font-bold leading-[48px]">{titre}</h1>
