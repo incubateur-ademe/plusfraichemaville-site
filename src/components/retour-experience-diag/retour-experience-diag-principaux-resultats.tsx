@@ -24,10 +24,14 @@ export const RetourExperienceDiagPrincipauxResultats = ({
 }: RetourExperienceDiagPrincipauxResultatsType) => {
   const [zoomedImage, setZoomedImage] = useState<ImageWithCaption | null>(null);
 
+  if (!content) {
+    return null;
+  }
+
   return (
     <div className="mb-20">
       <h2 className="mb-4">Principaux résultats</h2>
-      <div className="flex gap-12">
+      <div className="flex flex-col gap-12 md:flex-row">
         <CmsRichText label={content} />
         <div className="relative w-96 shrink-0">
           <div

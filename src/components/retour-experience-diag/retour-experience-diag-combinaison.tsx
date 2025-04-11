@@ -28,7 +28,7 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
             <div
               className={clsx(
                 "fiche-diagnostic-icone",
-                "flex size-[8.5rem] shrink-0 items-center justify-center rounded-full",
+                "hidden size-[8.5rem] shrink-0 items-center justify-center rounded-full md:flex",
               )}
             >
               <Image
@@ -40,8 +40,6 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
               />
             </div>
             <div className="w-full">
-              <h2 className="mb-3 text-[1.375rem] font-bold">{titre}</h2>
-              <CmsRichText className="mb-5 leading-6" label={lienRexDiagnostic.attributes.description} />
               <div className=" relative max-w-xl">
                 <FicheDiagLink slug={slug}>
                   <div className="pfmv-card max-w-xl cursor-pointer p-5">
@@ -69,6 +67,8 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
                   classNameButton="absolute top-3 right-4"
                 />
               </div>
+              <div className="mb-2 mt-6 font-bold italic">En contexte</div>
+              <CmsRichText className="mb-5 leading-6" label={lienRexDiagnostic.attributes.description} />
             </div>
           </div>
         );

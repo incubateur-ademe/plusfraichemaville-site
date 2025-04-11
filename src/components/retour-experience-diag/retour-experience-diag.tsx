@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { Separator } from "@/src/components/common/separator";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 type RetourExperienceDiagProps = {
   rex: RetourExperienceDiagnostic;
@@ -88,8 +89,12 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
             ))}
           <h2 className="mb-4 mt-20">Besoin</h2>
           <CmsRichText label={besoin} className="mb-20" />
-          <h2 className="mb-8">Combinaison de méthodes de diagnostic utilisées</h2>
-          <RetourExperienceDiagCombinaison lienRexDiagnostics={lien_rex_diagnostics.data} />
+          {!isEmpty(lien_rex_diagnostics.data) && (
+            <>
+              <h2 className="mb-8">Combinaison de méthodes de diagnostic utilisées</h2>
+              <RetourExperienceDiagCombinaison lienRexDiagnostics={lien_rex_diagnostics.data} />
+            </>
+          )}
           <RetourExperienceDiagPrincipauxResultats content={resultats} images={resultats_images} />
           {!!points_vigilance && (
             <>
