@@ -96,4 +96,3 @@ export const AIDE_DECISION_BREADCRUMB_FIL_ARIANE = (currentPage: string): MATOMO
   action: MATOMO_ACTIONS.AIDE_DECISION_BREADCRUMB,
   name: `[Fil Ariane aide décision] Clic à partir de la page : « ${currentPage} »`,
 });
-

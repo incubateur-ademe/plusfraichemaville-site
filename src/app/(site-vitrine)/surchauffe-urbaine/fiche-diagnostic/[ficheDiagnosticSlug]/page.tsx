@@ -1,14 +1,34 @@
 import { FicheDiagnosticComponent } from "@/src/components/fiches-diagnostic/fiche-diagnostic-component";
-import { getFicheDiagnosticBySlug } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
+import { getAllFichesDiagnostic, getFicheDiagnosticBySlug } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { notFound } from "next/navigation";
 import React from "react";
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
 // eslint-disable-next-line max-len
 import { BREADCRUMB_SURCHAUFFE_URBAINE_FICHE_DIAG } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 
 type PageProps = {
-  params: Promise<{ ficheDiagnosticSlug: string; projetId: string }>;
+  params: Promise<{ ficheDiagnosticSlug: string }>;
 };
+
+export async function generateStaticParams() {
+  const allFichesDiagnostic = await getAllFichesDiagnostic();
+  return allFichesDiagnostic.map((ficheDiagnostic) => ({
+    ficheDiagnosticSlug: ficheDiagnostic.attributes.slug || "",
+  }));
+}
+
+export async function generateMetadata(props: PageProps): Promise<Metadata> {
+  const params = await props.params;
+  const ficheDiagnostic = await getFicheDiagnosticBySlug(params.ficheDiagnosticSlug);
+  return computeMetadata(
+    ficheDiagnostic?.attributes.titre || "Méthode de diagnostic",
+    ficheDiagnostic?.attributes.description_courte,
+    getStrapiImageUrl(ficheDiagnostic?.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium),
+  );
+}
 
 export default async function FicheDiagnosticSiteVitrinePage({ params }: PageProps) {
   const resolvedParams = await params;
