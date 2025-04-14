@@ -16,7 +16,7 @@ export const SURCHAUFFE_URBAINE_NOTIONS = [
     shortTitle: "Le confort thermique",
     title: "Le confort thermique",
     description:
-      "Il s’agit de la sensation de bien-être en fonction de la températureambiante, du rayonnement solaire, des " +
+      "Il s’agit de la sensation de bien-être en fonction de la température ambiante, du rayonnement solaire, des " +
       "surfaces environnantes, de la vitesse de l'air et de l'humidité. Il dépend aussi de facteurs individuels " +
       "comme le métabolisme, l'habillement et l'activité physique. En milieu urbain, ces éléments sont souvent " +
       "amplifiés, ce qui entraîne un inconfort accru, surtout lors de fortes chaleurs.",
