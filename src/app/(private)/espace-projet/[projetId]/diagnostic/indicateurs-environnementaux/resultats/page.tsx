@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
-// eslint-disable-next-line max-len
 import Image from "next/image";
 import { IndienResultCombinaisonAdvice } from "@/src/components/diagnostic-indien/indien-result-combinaison-advice";
 import {
@@ -15,7 +14,8 @@ import {
 } from "@/src/helpers/type-fiche-solution";
 import IndienResultPieChartSurface from "@/src/components/diagnostic-indien/indien-result-surface-repartition";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import { BREADCRUMB_DIAG_INDICATEURS_RESULTATS } from "@/src/components/espace-projet/banner/breadcurmb-list";
+// eslint-disable-next-line max-len
+import { BREADCRUMB_DIAG_INDICATEURS_RESULTATS } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 import { IndienResultDownloader } from "@/src/components/diagnostic-indien/pdf/indien-result-downloader";
 import IndienResultRanges from "@/src/components/diagnostic-indien/indien-result-ranges";
 

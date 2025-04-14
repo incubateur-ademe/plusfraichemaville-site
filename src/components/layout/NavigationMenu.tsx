@@ -33,7 +33,7 @@ export default function NavigationMenu() {
                 target: "_self",
                 onClick: cancelCurrentProjet,
               },
-              text: "Comprendre les notions clés",
+              text: "Comprendre la surchauffe urbaine",
             },
             {
               linkProps: {
@@ -49,7 +49,7 @@ export default function NavigationMenu() {
                 target: "_self",
                 onClick: cancelCurrentProjet,
               },
-              text: "Diagnostics réalisés",
+              text: "Diagnostics réalisés par les collectivités",
             },
           ],
         },

@@ -2,7 +2,8 @@
 import IndicateursEnvironnementauxForm from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import { BREADCRUMB_DIAG_INDICATEURS_QUESTIONS } from "@/src/components/espace-projet/banner/breadcurmb-list";
+// eslint-disable-next-line max-len
+import { BREADCRUMB_DIAG_INDICATEURS_QUESTIONS } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 import React from "react";
 
 export default function IndicateursEnvironnementauxPresentationPage() {

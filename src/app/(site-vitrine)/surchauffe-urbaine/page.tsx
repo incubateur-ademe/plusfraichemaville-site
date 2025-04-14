@@ -7,12 +7,12 @@ import { SurchauffeUrbaineStoriesComponent } from "@/src/components/surchauffe-u
 
 export const metadata: Metadata = computeMetadata("Introduction à la surchauffe urbaine");
 
-export default async function SurchauffeUrbaineIntrductionPage() {
+export default async function SurchauffeUrbaineIntroductionPage() {
   return (
     <>
       <div className="fr-container">
         <h1 className="mt-8 text-center text-[1.75rem] font-bold text-dsfr-text-title-grey">
-          Surchauffe urbaine : <br /> la ville dans une France à +4°C
+          Introduction à la surchauffe urbaine : <br /> la ville dans une France à +4°C
         </h1>
         <div className="mx-auto max-w-[45rem] text-center  text-lg">
           {`La surchauffe urbaine est l'ensemble des phénomènes qui rendent la chaleur plus intense en ville pendant les

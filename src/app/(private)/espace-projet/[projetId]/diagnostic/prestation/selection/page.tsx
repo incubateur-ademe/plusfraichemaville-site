@@ -1,6 +1,7 @@
 import { FichesDiagnosticsProjetSelected } from "@/src/components/fiches-diagnostic/fiches-diagnostics-projet-selected";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import { BREADCRUMB_DIAG_PRESTATION_SELECTION } from "@/src/components/espace-projet/banner/breadcurmb-list";
+// eslint-disable-next-line max-len
+import { BREADCRUMB_DIAG_PRESTATION_SELECTION } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 import React from "react";
 
 export default async function FicheDiagnosticSelectionPage() {

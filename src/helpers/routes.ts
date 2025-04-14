@@ -13,7 +13,7 @@ export const PFMV_ROUTES = {
   SURCHAUFFE_URBAINE_COMPRENDRE: "/surchauffe-urbaine/notions-cles",
   SURCHAUFFE_URBAINE_TIMING: "/surchauffe-urbaine/quand-faire-un-diagnostic",
   SURCHAUFFE_URBAINE_REX: "/surchauffe-urbaine/retour-experience",
-  SURCHAUFFE_URBAINE__FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) =>
+  SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) =>
     `/surchauffe-urbaine/fiche-diagnostic/${ficheDiagnosticSlug}`,
   RETOUR_EXPERIENCE: (slug: string) => `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${slug}`,
   CONTACT: "/contact",

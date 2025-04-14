@@ -36,7 +36,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
     if (currentProjetId) {
       setCurrentFicheDiagnostic(ficheDiagnostic);
     } else {
-      router.push(PFMV_ROUTES.SURCHAUFFE_URBAINE__FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug));
+      router.push(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug));
     }
   };
 

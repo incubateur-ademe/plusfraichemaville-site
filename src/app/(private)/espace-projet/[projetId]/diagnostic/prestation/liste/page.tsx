@@ -7,7 +7,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Link from "next/link";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import { BREADCRUMB_DIAG_PRESTATION_LISTE } from "@/src/components/espace-projet/banner/breadcurmb-list";
+import { BREADCRUMB_DIAG_PRESTATION_LISTE } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 import React from "react";
 
 export default async function FicheDiagnosticListePage(props: { params: Promise<{ projetId: number }> }) {

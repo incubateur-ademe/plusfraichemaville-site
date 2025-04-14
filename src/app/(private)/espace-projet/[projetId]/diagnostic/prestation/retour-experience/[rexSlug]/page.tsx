@@ -2,7 +2,7 @@ import { RetourExperienceDiag } from "@/src/components/retour-experience-diag/re
 import { getRetourExperienceDiagBySlug } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
 import { notFound } from "next/navigation";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import { BREADCRUMB_DIAG_REX } from "@/src/components/espace-projet/banner/breadcurmb-list";
+import { BREADCRUMB_DIAG_REX } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 
 type RetourExperienceDiagPageProps = {
   params: Promise<{ rexSlug: string }>;
