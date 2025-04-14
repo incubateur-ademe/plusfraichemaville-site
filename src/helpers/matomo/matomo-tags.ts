@@ -11,6 +11,7 @@ export const MATOMO_CATEGORIES = {
 };
 
 export const MATOMO_ACTIONS = {
+  AIDE_DECISION_BREADCRUMB: "aide-decision-fil-ariane",
   SUBSCRIBE_WEBINAIRE: "webinaire-inscription",
   UPDATE_MATURITE: "update-maturite",
   OPEN_AGENT_BUTTON: "open-agent-button",
@@ -89,3 +90,10 @@ export const ANNUAIRE_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN = (name: string): MATOMO
   action: MATOMO_ACTIONS.ANNUAIRE_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN,
   name: `[Annuaire] Ouverture de la modal de visualisation du rex : « ${name} »`,
 });
+
+export const AIDE_DECISION_BREADCRUMB_FIL_ARIANE = (currentPage: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.AIDE_DECISION_BREADCRUMB,
+  name: `[Fil Ariane aide décision] Clic à partir de la page : « ${currentPage} »`,
+});
+
