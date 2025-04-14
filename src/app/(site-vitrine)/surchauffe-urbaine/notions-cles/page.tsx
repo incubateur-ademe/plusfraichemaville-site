@@ -4,6 +4,7 @@ import { TeaserDiagnosticComponent } from "@/src/components/surchauffe-urbaine/t
 // eslint-disable-next-line max-len
 import { SurchauffeUrbaineNotionsComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-notions-component";
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
+// eslint-disable-next-line max-len
 import { BREADCRUMB_SURCHAUFFE_URBAINE_COMPRENDRE } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
 
 export const metadata: Metadata = computeMetadata("Notions clés de la surchauffe urbaine");
@@ -17,10 +18,9 @@ export default async function SurchauffeUrbaineNotionsClesPage() {
           Comprendre la surchauffe urbaine
         </h1>
         <div className="mx-auto max-w-[51rem] text-center text-lg">
-          {"Pour bien comprendre la surchauffe urbaine, il convient d'explorer deux notions complémentaires. Bien " +
-            "sûr, il est pertinent de considérer le phénomène climatique qui la sous-tend, connu sous le nom d’îlot " +
-            "de chaleur urbain. Mais attention ! S'intéresser à la température ressentie par les habitants est tout " +
-            "aussi important."}
+          {`Pour bien comprendre la surchauffe urbaine, il est pertinent de considérer le phénomène climatique qui la 
+          sous-tend. Il est connu sous le nom d’îlot de chaleur urbain. Mais attention ! S'intéresser à la température 
+          ressentie par les habitants est tout aussi important.`}
         </div>
       </div>
       <SurchauffeUrbaineNotionsComponent className="mt-12" />

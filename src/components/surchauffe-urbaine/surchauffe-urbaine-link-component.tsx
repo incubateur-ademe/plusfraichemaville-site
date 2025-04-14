@@ -4,7 +4,7 @@ import { SurchauffeUrbaineLinkItem } from "@/src/components/surchauffe-urbaine/s
 export const SurchauffeUrbaineLinkComponent = ({ className }: { className?: string }) => {
   return (
     <div className={className}>
-      <div className="pfmv-strong-card mx-8 mt-20 flex w-fit flex-col gap-10 px-4 py-2 md:flex-row">
+      <div className="pfmv-strong-card mx-8 flex w-fit flex-col gap-10 px-4 py-2 md:flex-row">
         <SurchauffeUrbaineLinkItem
           linkText="Comprendre la surchauffe urbaine"
           linkUrl={PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE}

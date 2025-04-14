@@ -16,7 +16,7 @@ export const TeaserDiagnosticComponent = ({ className }: { className?: string })
         <TeaserDiagnosticCard
           imageUrl="/images/surchauffe-urbaine/surchauffe-teaser-analyse.jpg"
           title="Faites une analyse de la surchauffe sur votre espace"
-          description="Accéder à notre outil de calcul d’indicateurs en ligne pour faire un état des lieux du site
+          description="Accédez à notre outil de calcul d’indicateurs en ligne pour faire un état des lieux du site
            à rafraîchir."
         />
         <TeaserDiagnosticCard

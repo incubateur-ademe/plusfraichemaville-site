@@ -18,8 +18,6 @@ export default async function SurchauffeUrbaineTimingPage() {
           Pourquoi et quand faire un diagnostic ?
         </h1>
         <div className="mx-auto max-w-[51rem] text-center  text-lg">
-          Le « réflexe » diagnostic : pour un rafraîchissement réussi à toutes les échelles.
-          <br />
           Le diagnostic de la surchauffe urbaine est une étape essentielle, quelle que soit l’échelle de votre projet.
           Le schéma ci-dessous illustre de manière théorique comment intégrer l’analyse de la surchauffe à tous niveaux
           d’action, de la planification à l’évaluation.

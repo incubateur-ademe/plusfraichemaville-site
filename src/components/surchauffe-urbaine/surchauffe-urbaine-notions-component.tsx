@@ -65,19 +65,19 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
               </SplideSlide>
             ))}
           </SplideTrack>
-          <div>
-            Pour aller plus loin sur la surchauffe urbaine
-            <Link
-              className="ml-2 !text-pfmv-navy after:hidden"
-              download
-              target="_blank"
-              href="https://cdn.plusfraichemaville.fr/Guide_diagnostic_Surchauffe_Urbaine_202406.pdf"
-            >
-              Télécharger le Guide de l’Ademe
-              <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
-            </Link>
-          </div>
         </Splide>
+      </div>
+      <div className="fr-container text-center">
+        Pour aller plus loin sur la surchauffe urbaine
+        <Link
+          className="ml-2 !text-pfmv-navy after:hidden"
+          download
+          target="_blank"
+          href="https://cdn.plusfraichemaville.fr/Guide_diagnostic_Surchauffe_Urbaine_202406.pdf"
+        >
+          Télécharger le recueil de l’Ademe « Diagnostic de la surchauffe urbaine »
+          <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
+        </Link>
       </div>
     </div>
   );
