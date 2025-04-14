@@ -3,10 +3,7 @@ import Link from "next/link";
 import { AideDecisionEtapeHistory } from "@/src/lib/strapi/queries/commonStrapiFilters";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
-import {
-  AIDE_DECISION_BREADCRUMB_FIL_ARIANE,
-  ANNUAIRE_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN
-} from "@/src/helpers/matomo/matomo-tags";
+import { AIDE_DECISION_BREADCRUMB_FIL_ARIANE } from "@/src/helpers/matomo/matomo-tags";
 
 export default function AideDecisionBreadcrumbs({
   historique,
