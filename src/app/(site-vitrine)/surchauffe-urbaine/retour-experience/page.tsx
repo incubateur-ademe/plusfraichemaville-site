@@ -15,9 +15,12 @@ export default async function SurchauffeUrbaineListeRetourExperiencePage() {
   return (
     <div className="fr-container">
       <SiteVitrineBreadcrumb step={BREADCRUMB_SURCHAUFFE_URBAINE_REX_LISTE} />
-      <h1 className="mt-8 text-center text-[1.75rem] font-bold text-dsfr-text-title-grey">
+      <h1 className="!mb-2 mt-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">
         Diagnostics réalisés par les collectivités
       </h1>
+      <div className=" text-lg">
+        Découvrez les retours d’expérience des collectivités qui ont réalisé des diagnostics
+      </div>
       <div className="mt-12 px-4">
         <ul className="flex grow list-none flex-wrap justify-center gap-10 p-0 md:justify-normal">
           {allRetoursExperiences.map((retourExperience) => (
