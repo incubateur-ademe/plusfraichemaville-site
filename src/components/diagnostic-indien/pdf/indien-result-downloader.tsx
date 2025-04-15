@@ -3,6 +3,8 @@ import dynamic from "next/dynamic";
 import clsx from "clsx";
 import { Spinner } from "@/src/components/common/spinner";
 import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { DIAGNOSTIC_DOWNLOAD_RESULT } from "@/src/helpers/matomo/matomo-tags";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 
 type IndienResultDownloaderProps = {
   data: ProjetIndiEnSimuation;
@@ -17,6 +19,7 @@ export const IndienResultDownloader = ({ data, projet }: IndienResultDownloaderP
   const download = () => {
     setViewer(true);
     setLoading(true);
+    trackEvent(DIAGNOSTIC_DOWNLOAD_RESULT);
   };
   const close = () => {
     setViewer(false);

@@ -19,7 +19,7 @@ export default function BannerProjetBreadcrumb({
     <div className="bg-dsfr-background-alt-blue-france">
       <div className="fr-container">
         <Breadcrumb
-          className={clsx(className, "")}
+          className={clsx(className, "-pt-2 !mb-0 !mt-0")}
           currentPageLabel={step?.currentPageLabel}
           classes={{ link: "text-pfmv-navy font-normal" }}
           segments={step?.breadcrumbSegments(currentProjet.id) || []}

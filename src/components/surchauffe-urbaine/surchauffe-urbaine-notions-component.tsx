@@ -7,6 +7,8 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { SURCHAUFFE_URBAINE_NOTIONS } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-notions";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { SURCHAUFFE_URBAINE_CHANGE_NOTION } from "@/src/helpers/matomo/matomo-tags";
 
 export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: string }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -33,7 +35,10 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
                   "text-nowrap border-0 border-pfmv-navy pl-4 text-lg text-pfmv-navy",
                   index === currentSlide ? "!border-l-4 border-solid font-bold" : "",
                 )}
-                onClick={() => changeSlide(index)}
+                onClick={() => {
+                  changeSlide(index);
+                  trackEvent(SURCHAUFFE_URBAINE_CHANGE_NOTION(notion.shortTitle));
+                }}
               >
                 <div className="">{notion.shortTitle}</div>
               </button>

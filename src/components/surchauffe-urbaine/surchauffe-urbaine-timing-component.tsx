@@ -9,6 +9,8 @@ import React, { useRef, useState } from "react";
 // eslint-disable-next-line max-len
 import { SurchauffeUrbaineTimingSlideControllers } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timing-slide-controllers";
 import Link from "next/link";
+import { SURCHAUFFE_URBAINE_CHANGE_TIMING } from "@/src/helpers/matomo/matomo-tags";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 
 export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: string }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -63,7 +65,10 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           ))}
         </ul>
         <Splide
-          onMove={(_splide: any, newIndex: number, _prevIndex: number, _destIndex: number) => setCurrentSlide(newIndex)}
+          onMove={(_splide: any, newIndex: number, _prevIndex: number, _destIndex: number) => {
+            setCurrentSlide(newIndex);
+            trackEvent(SURCHAUFFE_URBAINE_CHANGE_TIMING(newIndex));
+          }}
           id="surchauffe-urbaine-timing-slider"
           hasTrack={false}
           options={{}}
@@ -89,18 +94,18 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           </SplideTrack>
           <SurchauffeUrbaineTimingSlideControllers />
         </Splide>
-        <div>
-          Pour aller plus loin sur la surchauffe urbaine
-          <Link
-            className="ml-2 !text-pfmv-navy after:hidden"
-            download
-            target="_blank"
-            href="https://cdn.plusfraichemaville.fr/Guide_diagnostic_Surchauffe_Urbaine_202406.pdf"
-          >
-            Télécharger le Guide de l’Ademe
-            <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
-          </Link>
-        </div>
+      </div>
+      <div className="fr-container text-center">
+        Pour aller plus loin sur la surchauffe urbaine
+        <Link
+          className="ml-2 !text-pfmv-navy after:hidden"
+          download
+          target="_blank"
+          href="https://cdn.plusfraichemaville.fr/Guide_diagnostic_Surchauffe_Urbaine_202406.pdf"
+        >
+          Télécharger le recueil de l’Ademe « Diagnostic de la surchauffe urbaine »
+          <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
+        </Link>
       </div>
     </div>
   );

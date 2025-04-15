@@ -23,6 +23,8 @@ import { upsert } from "@/src/helpers/listUtils";
 import { diagnostic_simulation } from "@prisma/client";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useRouter } from "next/navigation";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { DIAGNOSTIC_COMPUTE_RESULT } from "@/src/helpers/matomo/matomo-tags";
 
 export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelations }) {
   const currentDiagnosticSimulation: diagnostic_simulation | undefined = projet.diagnostic_simulations[0];
@@ -57,10 +59,12 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
     }
   };
 
-  const onSubmitAndSeeResults = async (data: IndicateursEnvironnementauxFormData) =>
-    onSubmit(data, true, () => {
+  const onSubmitAndSeeResults = async (data: IndicateursEnvironnementauxFormData) => {
+    trackEvent(DIAGNOSTIC_COMPUTE_RESULT);
+    await onSubmit(data, true, () => {
       router.push(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_RESULTATS(projet.id));
     });
+  };
 
   const onSubmitAndQuit = async (data: IndicateursEnvironnementauxFormData) =>
     onSubmit(data, false, () => {

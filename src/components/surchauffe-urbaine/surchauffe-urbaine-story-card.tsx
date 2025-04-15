@@ -4,11 +4,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-experience-diagnostic";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { SITE_VITRINE_REX_DIAG_STORY } from "@/src/helpers/matomo/matomo-tags";
 
 export const SurchauffeUrbaineStoryCard = ({ rexDiagStory }: { rexDiagStory: RetourExperienceDiagnostic }) => {
   return (
     <div className="group text-left">
-      <Link href={PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC(rexDiagStory.attributes.slug)}>
+      <Link
+        href={PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC(rexDiagStory.attributes.slug)}
+        onClick={() => trackEvent(SITE_VITRINE_REX_DIAG_STORY(rexDiagStory.attributes.slug))}
+      >
         <div
           className={clsx(
             "flex shrink-0 flex-col justify-end rounded-2xl pt-5 md:h-[540px] md:w-[358px]",
