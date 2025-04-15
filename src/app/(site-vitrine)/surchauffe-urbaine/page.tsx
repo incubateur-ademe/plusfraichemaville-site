@@ -17,8 +17,8 @@ export default async function SurchauffeUrbaineIntroductionPage() {
         <div className="mx-auto max-w-[49rem] text-center text-lg">
           {`La surchauffe urbaine est l'ensemble des phénomènes qui rendent la chaleur plus intense en ville pendant les
         périodes de forte chaleur. Elle est causée par l'effet d'îlot de chaleur urbain, les surfaces minérales, le
-        manque de ventilation et le rayonnement solaire. DD’après la Trajectoire de Réchauffement et d’Adaptation au 
-        Changement Climatique (TRACC) retenue par le Gouvernement en 2024, La France pourrait connaître une hausse de 
+        manque de ventilation et le rayonnement solaire. D’après la Trajectoire de Réchauffement et d’Adaptation au 
+        Changement Climatique (TRACC) retenue par le Gouvernement en 2024, la France pourrait connaître une hausse de 
         +4°C d'ici 2100. Cette évolution accentuerait fortement l'inconfort des espaces urbains pour les citadins. 
         Identifier les zones à risques et adapter ces espaces est essentiel pour protéger la santé et le bien-être
          de tous.`}
