@@ -13,7 +13,7 @@ export default async function PageMentionsLegales() {
         contactEmail="plusfraichemaville@ademe.fr"
         siteHost={{
           name: "Scalingo SAS",
-          address: "155 bis Av. Pierre Brossolette 92240 Montrouge",
+          address: "13 rue Jacques Peirotes 67000 Strasbourg",
           country: "France",
           email: "hello@scalingo.com",
         }}
