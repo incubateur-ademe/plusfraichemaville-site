@@ -29,7 +29,7 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
         options={{ autoWidth: true, focus: 0, omitEnd: true, gap: "1.25rem", drag: false }}
         className="max-w-[60rem]"
       >
-        <div className="px-7">
+        <div className="px-6">
           <SplideTrack className="py-5 !pl-1">
             {rex?.data.map((r, index) => (
               <SplideSlide key={index}>
@@ -44,13 +44,13 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
         </div>
         <SplideController
           arrow="left"
-          size={{ width: "w-14", height: "h-14" }}
-          position={{ top: "top-[16rem]", left: "!left-0" }}
+          size={{ width: "w-12", height: "h-12" }}
+          position={{ top: "top-[8.5rem]", left: "!left-0" }}
         />
         <SplideController
           arrow="right"
-          size={{ width: "w-14", height: "h-14" }}
-          position={{ top: "top-[16rem]", right: "!right-0" }}
+          size={{ width: "w-12", height: "h-12" }}
+          position={{ top: "top-[8.5rem]", right: "!right-0" }}
         />
       </Splide>
     </>
