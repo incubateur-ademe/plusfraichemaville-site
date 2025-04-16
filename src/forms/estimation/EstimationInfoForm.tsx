@@ -52,7 +52,9 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
       if (result.estimation) {
         updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
         setCurrentEstimationId(result.estimation.id);
-        router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id));
+        setTimeout(function () {
+          router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id));
+        }, 1000);
       } else {
         notifications(result.type, result.message);
       }
