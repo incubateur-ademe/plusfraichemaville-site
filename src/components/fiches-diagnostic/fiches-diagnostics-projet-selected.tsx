@@ -73,25 +73,27 @@ export const FichesDiagnosticsProjetSelected = () => {
             options={{ gap: "1rem", autoWidth: true, focus: 0, omitEnd: true }}
             className="mb-12"
           >
-            <SplideTrack>
-              {sortedRex.map(
-                (rex) =>
-                  rex?.data && (
-                    <SplideSlide key={rex.data.id}>
-                      <RetourExperienceDiagCard rex={rex.data} className="h-full" />
-                    </SplideSlide>
-                  ),
-              )}
-            </SplideTrack>
+            <div className="px-7">
+              <SplideTrack>
+                {sortedRex.map(
+                  (rex) =>
+                    rex?.data && (
+                      <SplideSlide key={rex.data.id}>
+                        <RetourExperienceDiagCard rex={rex.data} className="h-full" />
+                      </SplideSlide>
+                    ),
+                )}
+              </SplideTrack>
+            </div>
             <SplideController
               arrow="left"
               size={{ width: "w-14", height: "h-14" }}
-              position={{ top: "top-24", left: "-7" }}
+              position={{ top: "top-[16rem]", left: "!left-0" }}
             />
             <SplideController
               arrow="right"
               size={{ width: "w-14", height: "h-14" }}
-              position={{ top: "top-24", right: "-7" }}
+              position={{ top: "top-[16rem]", right: "!right-0" }}
             />
           </Splide>
         </>

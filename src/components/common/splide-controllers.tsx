@@ -38,7 +38,7 @@ export const SplideController = ({
         "cursor-pointer transition-[background] duration-300 hover:bg-white hover:text-black",
         "absolute hidden -translate-y-1/2 lg:block",
         { [`${arrow}-6`]: arrow },
-        "disabled:hidden",
+        "disabled:opacity-20",
         className,
       )}
     >

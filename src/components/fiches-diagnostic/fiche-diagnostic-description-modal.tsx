@@ -164,29 +164,31 @@ export const FicheDiagnosticDescriptionModal = () => {
                   id="fiche-diagnostic-rex-modal-slider"
                   hasTrack={false}
                   className="max-w-md"
-                  options={{ start: 0 }}
+                  options={{ start: 0, drag: false }}
                 >
-                  <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
-                    {rex?.map((r, index) => (
-                      <SplideSlide className="!mr-8 size-full" key={index}>
-                        <RetourExperienceDiagCard
-                          key={index}
-                          onClickButton={() => modal.close()}
-                          rex={r.attributes.retour_experience_diagnostic?.data}
-                        />
-                      </SplideSlide>
-                    ))}
-                  </SplideTrack>
+                  <div className="px-6">
+                    <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
+                      {rex?.map((r, index) => (
+                        <SplideSlide className="!mr-8 size-full" key={index}>
+                          <RetourExperienceDiagCard
+                            key={index}
+                            onClickButton={() => modal.close()}
+                            rex={r.attributes.retour_experience_diagnostic?.data}
+                          />
+                        </SplideSlide>
+                      ))}
+                    </SplideTrack>
+                  </div>
                   <SplideController
                     arrow="left"
                     size={{ width: "w-10", height: "h-10" }}
-                    position={{ top: "top-[7rem]", left: "!left-1" }}
+                    position={{ top: "top-[16rem]", left: "!left-0" }}
                     className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
                   />
                   <SplideController
                     arrow="right"
                     size={{ width: "w-10", height: "h-10" }}
-                    position={{ top: "top-[7rem]", right: "!right-1" }}
+                    position={{ top: "top-[16rem]", right: "!right-0" }}
                     className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
                   />
                 </Splide>

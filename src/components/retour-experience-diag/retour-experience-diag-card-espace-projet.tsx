@@ -68,7 +68,7 @@ export const RetourExperienceDiagCardEspaceProjet = ({
         <GenericFicheLink
           onClick={onClickButton}
           href={PFMV_ROUTES.ESPACE_PROJET_REX_DIAGNOSTIC(slug)}
-          className={clsx("fr-btn fr-btn--tertiary mb-4 ml-4 rounded-3xl !text-dsfr-text-title-grey ")}
+          className={clsx("fr-btn fr-btn--tertiary mb-8 ml-8 rounded-3xl !text-dsfr-text-title-grey ")}
         >
           {"Lire le retour d’expérience"}
         </GenericFicheLink>
