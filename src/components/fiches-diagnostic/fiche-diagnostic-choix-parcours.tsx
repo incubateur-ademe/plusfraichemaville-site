@@ -9,12 +9,12 @@ import { TypeFiche } from "@/src/helpers/common";
 import { isEmpty } from "@/src/helpers/listUtils";
 import Link from "next/link";
 import Image from "next/image";
-import clsx from "clsx";
 import {
   CompletionLabelCompleted,
   CompletionLabelInProgress,
   CompletionLabelNotStarted,
 } from "@/src/components/common/fiche-completion-label";
+import { Separator } from "@/src/components/common/separator";
 
 export const FicheDiagnosticChoixParcours = () => {
   const projetId = useProjetsStore((state) => state.currentProjetId);
@@ -62,29 +62,27 @@ export const FicheDiagnosticChoixParcours = () => {
 
   return (
     <>
-      <div
-        className={clsx(
-          "mb-12 grid grid-cols-1  justify-center gap-10 px-10 text-center font-bold md:grid-cols-2",
-          "md:flex-row md:gap-16 ",
-        )}
-      >
-        <Link className="pfmv-strong-card flex flex-col" href={parcoursIndicateursUrl}>
+      <div className="mb-12 flex flex-col justify-center gap-8 px-10 text-center font-bold md:flex-row ">
+        <Link className="pfmv-strong-card max-w-[30rem]" href={parcoursIndicateursUrl}>
           {parcoursIndicateursProgress}
           <Image
-            src={"/images/fiches-diagnostic/parcours-indicateurs-environnementaux.svg"}
+            src="/images/fiches-diagnostic/parcours-indicateurs-environnementaux.svg"
             alt="Parcours indicateurs thermiques"
             width={250}
             height={250}
-            className="mt-12 h-40 self-center"
+            className="mx-auto mt-12 h-40"
           />
-          <div className="flex flex-col content-center items-center p-10 text-[1.375rem]">
-            <div>{parcoursIndicateursLabel}</div>
-            <div className="fr-btn mt-12 rounded-3xl hover:bg-dsfr-hover-blue-sun">
-              {parcoursIndicateursButtonLabel}
+          <div className="content-center items-center p-10">
+            <div className="text-[1.375rem]">{parcoursIndicateursLabel}</div>
+            <Separator className="my-4" />
+            <div className="mb-8 text-left font-normal text-dsfr-text-mention-grey">
+              Observez la surchauffe au sein de votre espace à un instant “T” à l’aide de quatre indicateurs open source
+              et de vos propres relevés terrain.
             </div>
+            <div className="fr-btn rounded-3xl hover:bg-dsfr-hover-blue-sun">{parcoursIndicateursButtonLabel}</div>
           </div>
         </Link>
-        <Link className="pfmv-strong-card flex flex-col" href={parcoursPrestationUrl}>
+        <Link className="pfmv-strong-card flex max-w-[30rem] flex-col" href={parcoursPrestationUrl}>
           {hasSelectedFicheDiagnostic ? (
             <CompletionLabelCompleted className="mr-4 mt-3 text-right" />
           ) : (
@@ -97,9 +95,14 @@ export const FicheDiagnosticChoixParcours = () => {
             height={250}
             className="mt-12 h-40 self-center"
           />
-          <div className="flex flex-col content-center items-center p-10 text-[1.375rem]">
-            <div>{parcoursPrestationLabel}</div>
-            <div className="fr-btn mt-12 rounded-3xl hover:bg-dsfr-hover-blue-sun">{parcoursPrestationButtonLabel}</div>
+          <div className="content-center items-center p-10">
+            <div className="text-[1.375rem]">{parcoursPrestationLabel}</div>
+            <Separator className="my-4" />
+            <div className="mb-8 text-left font-normal text-dsfr-text-mention-grey">
+              Sollicitez une expertise pour une analyse détaillée de l’effet d’îlot de chaleur urbain et/ou du confort
+              thermique, à différentes échelles.
+            </div>
+            <div className="fr-btn rounded-3xl hover:bg-dsfr-hover-blue-sun">{parcoursPrestationButtonLabel}</div>
           </div>
         </Link>
       </div>
