@@ -63,7 +63,7 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
                   )}
                   key={notion.code}
                 >
-                  <Image src={notion.image} width={500} height={500} alt="" className="w-full" />
+                  <Image src={notion.image} width={500} height={500} alt="" className="max-h-[15rem] w-full" />
                   <div className="mb-2 mt-6 text-[1.375rem] font-bold text-pfmv-navy">{notion.title}</div>
                   {notion.description}
                 </div>
