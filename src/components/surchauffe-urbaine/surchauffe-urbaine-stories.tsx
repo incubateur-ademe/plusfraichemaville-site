@@ -15,13 +15,15 @@ export const SurchauffeUrbaineStories = ({ rexDiagStories }: { rexDiagStories: R
         hasTrack={false}
         options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
       >
-        <SplideTrack className="overflow-auto !pl-3 lg:!overflow-hidden lg:!pl-6">
-          {rexDiagStories.map((rexDiag, index) => (
-            <SplideSlide className="!mr-3 md:!mr-6" key={index}>
-              <SurchauffeUrbaineStoryCard rexDiagStory={rexDiag} key={index} />
-            </SplideSlide>
-          ))}
-        </SplideTrack>
+        <div className="px-3 md:px-12">
+          <SplideTrack className="overflow-auto lg:!overflow-hidden">
+            {rexDiagStories.map((rexDiag, index) => (
+              <SplideSlide className="!mr-3 md:!mr-6" key={index}>
+                <SurchauffeUrbaineStoryCard rexDiagStory={rexDiag} key={index} />
+              </SplideSlide>
+            ))}
+          </SplideTrack>
+        </div>
         <SurchauffeUrbaineStoriesControllers />
       </Splide>
     </div>

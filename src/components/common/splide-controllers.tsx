@@ -36,7 +36,7 @@ export const SplideController = ({
         arrow === "left" ? "splide__arrow splide__arrow--prev" : "splide__arrow splide__arrow--next",
         arrow === "left" && "rotate-180",
         "cursor-pointer transition-[background] duration-300 hover:bg-white hover:text-black",
-        "absolute -translate-y-1/2",
+        "absolute hidden -translate-y-1/2 lg:block",
         { [`${arrow}-6`]: arrow },
         "disabled:hidden",
         className,
