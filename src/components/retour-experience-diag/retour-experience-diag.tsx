@@ -63,7 +63,7 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
           {!showContacts && (
             <>
               <Separator className="my-6" />
-              <div className={clsx("rounded-xl bg-dsfr-background-alt-blue-france p-4")}>
+              <div className={clsx("rounded-lg bg-dsfr-background-alt-blue-france p-4")}>
                 <div>
                   Rendez-vous sur l’espace projet pour avoir le contact de la collectivité et des prestataires de ce
                   diagnostic

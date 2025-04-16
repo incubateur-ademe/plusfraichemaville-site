@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import React, { MouseEvent } from "react";
+import Image from "next/image";
 
 type RetourExperienceDiagPdfProps = {
   pdf?: string;
@@ -37,19 +38,22 @@ export const RetourExperienceDiagPdf = ({ pdf }: RetourExperienceDiagPdfProps) =
     <>
       <h2 className="mb-1 text-lg font-bold">Pour aller plus loin</h2>
       <p className="mb-4 text-sm">Télécharger la version complète de ce diagnostic.</p>
-      <a
-        href={pdf}
-        onClick={download}
-        className={clsx(
-          "flex cursor-pointer items-center justify-start gap-2 font-bold text-pfmv-navy",
-          "bg-none after:content-none hover:underline",
-        )}
-      >
-        <div className="flex size-8 items-center justify-center rounded-full bg-pfmv-navy">
-          <i className="ri-download-2-line size-4 text-white before:!mb-2 before:!size-4"></i>
-        </div>
-        Télécharger
-      </a>
+      <div className="rounded-lg bg-dsfr-contrast-grey p-4">
+        <Image src="/images/rex-diagnostic/rex-diag-pdf.jpg" alt="" width={300} height={300} />
+        <a
+          href={pdf}
+          onClick={download}
+          className={clsx(
+            "flex cursor-pointer items-center justify-start gap-2 font-bold text-pfmv-navy",
+            "mt-3 bg-none after:content-none hover:underline",
+          )}
+        >
+          <div className="flex size-8 items-center justify-center rounded-full bg-pfmv-navy">
+            <i className="ri-download-2-line size-4 text-white before:!mb-2 before:!size-4"></i>
+          </div>
+          Télécharger
+        </a>
+      </div>
     </>
   );
 };
