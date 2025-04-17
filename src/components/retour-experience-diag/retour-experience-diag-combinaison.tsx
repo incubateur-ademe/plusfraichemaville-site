@@ -7,7 +7,7 @@ import { TypeFiche } from "@/src/helpers/common";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 import Tag from "@codegouvfr/react-dsfr/Tag";
-import { isEmpty } from "lodash";
+import isEmpty from "lodash/isEmpty";
 import { FicheDiagLink } from "@/src/components/common/generic-save-fiche/fiche-diag-link";
 
 type RetourExperienceDiagCombinaisonProps = {
