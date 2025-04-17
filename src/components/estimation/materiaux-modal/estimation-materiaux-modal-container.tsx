@@ -2,7 +2,6 @@
 
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
-import CustomDSFRModal from "@/src/components/common/CustomDSFRModal";
 // eslint-disable-next-line max-len
 import { EstimationMateriauModalContent } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-content";
 import { useEffect, useMemo } from "react";
@@ -39,12 +38,12 @@ export function EstimationMateriauModalContainer() {
   }, [currentEstimation?.id]);
 
   return (
-    <CustomDSFRModal modalId={estimationModal.id} close={estimationModal.close}>
+    <estimationModal.Component title="" size="large" className="xl-modal">
       {currentEstimation ? (
         <EstimationMateriauModalContent estimation={currentEstimation} />
       ) : (
         <div>Chargement en cours...</div>
       )}
-    </CustomDSFRModal>
+    </estimationModal.Component>
   );
 }
