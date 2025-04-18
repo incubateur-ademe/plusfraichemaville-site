@@ -37,7 +37,7 @@ const BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_REX_LISTE: BreadcrumbSegment = {
   linkProps: {
     href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REX,
   },
-  label: "Liste des diagnostics réalisés par les collectivités",
+  label: "Diagnostics réalisés par les collectivités",
 };
 
 export const BREADCRUMB_SURCHAUFFE_URBAINE_COMPRENDRE: SiteVitrineBreadcrumbStep = {

@@ -9,23 +9,21 @@ import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-ex
 
 export const SurchauffeUrbaineStories = ({ rexDiagStories }: { rexDiagStories: RetourExperienceDiagnostic[] }) => {
   return (
-    <div className="mb-11">
-      <Splide
-        id="rex-diag-stories-slider"
-        hasTrack={false}
-        options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
-      >
-        <div className="px-3 md:px-12">
-          <SplideTrack className="overflow-auto lg:!overflow-hidden">
-            {rexDiagStories.map((rexDiag, index) => (
-              <SplideSlide className="!mr-3 md:!mr-6" key={index}>
-                <SurchauffeUrbaineStoryCard rexDiagStory={rexDiag} key={index} />
-              </SplideSlide>
-            ))}
-          </SplideTrack>
-        </div>
-        <SurchauffeUrbaineStoriesControllers />
-      </Splide>
-    </div>
+    <Splide
+      id="rex-diag-stories-slider"
+      hasTrack={false}
+      options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
+    >
+      <div className="px-3 md:px-12">
+        <SplideTrack className="overflow-auto lg:!overflow-hidden">
+          {rexDiagStories.map((rexDiag, index) => (
+            <SplideSlide className="!mr-3 md:!mr-6" key={index}>
+              <SurchauffeUrbaineStoryCard rexDiagStory={rexDiag} key={index} />
+            </SplideSlide>
+          ))}
+        </SplideTrack>
+      </div>
+      <SurchauffeUrbaineStoriesControllers />
+    </Splide>
   );
 };

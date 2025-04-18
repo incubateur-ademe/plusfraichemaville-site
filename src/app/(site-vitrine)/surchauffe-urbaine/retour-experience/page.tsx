@@ -22,7 +22,7 @@ export default async function SurchauffeUrbaineListeRetourExperiencePage() {
         Découvrez les retours d’expérience des collectivités qui ont réalisé des diagnostics
       </div>
       <div className="mt-12 px-4">
-        <ul className="flex grow list-none flex-wrap justify-center gap-10 p-0 md:justify-normal">
+        <ul className="flex grow list-none flex-wrap justify-center gap-6 p-0 md:justify-normal">
           {allRetoursExperiences.map((retourExperience) => (
             <li key={retourExperience.id} className="flex">
               <RetourExperienceDiagCard rex={retourExperience} className="w-80" flatStyle={false} />

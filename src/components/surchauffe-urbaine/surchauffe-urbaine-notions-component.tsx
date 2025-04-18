@@ -20,9 +20,12 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
   };
   return (
     <div className={clsx("bg-dsfr-background-alt-blue-france py-10", className)}>
-      <div className=""></div>
       <div className="fr-container flex flex-col gap-10 md:flex-row">
-        <ul role="tablist" className={clsx("flex flex-col items-start gap-4")} aria-label="Sélectionner une notion clé">
+        <ul
+          role="tablist"
+          className={clsx("mt-24 flex flex-col items-start gap-4")}
+          aria-label="Sélectionner une notion clé"
+        >
           {SURCHAUFFE_URBAINE_NOTIONS.map((notion, index) => (
             <li role="presentation" key={notion.code} className="">
               <button
@@ -58,7 +61,7 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
               <SplideSlide className="" key={notion.code}>
                 <div
                   className={clsx(
-                    "m-1 max-w-[43rem] rounded-xl p-6 text-left",
+                    "m-1 max-w-[43rem] rounded-xl px-8 py-6 text-left",
                     "outline outline-1 outline-dsfr-border-action-low-blue-france",
                   )}
                   key={notion.code}

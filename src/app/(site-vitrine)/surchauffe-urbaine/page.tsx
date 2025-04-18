@@ -12,7 +12,7 @@ export default async function SurchauffeUrbaineIntroductionPage() {
     <>
       <div className="fr-container">
         <h1 className="mt-8 text-center text-[1.75rem] font-bold text-dsfr-text-title-grey">
-          Introduction à la surchauffe urbaine : <br /> la ville dans une France à +4°C
+          Surchauffe urbaine : <br /> la ville dans une France à +4°C
         </h1>
         <div className="mx-auto max-w-[49rem] text-center text-lg">
           {`La surchauffe urbaine est l'ensemble des phénomènes qui rendent la chaleur plus intense en ville pendant les
@@ -24,7 +24,7 @@ export default async function SurchauffeUrbaineIntroductionPage() {
          de tous.`}
         </div>
       </div>
-      <SurchauffeUrbaineLinkComponent className="mb-20 mt-16 flex justify-center" />
+      <SurchauffeUrbaineLinkComponent className="mb-9 mt-9 flex justify-center" />
       <SurchauffeUrbaineStoriesComponent />
       <TeaserDiagnosticComponent className="mt-8" />
     </>

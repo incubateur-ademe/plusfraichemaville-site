@@ -15,7 +15,7 @@ export const SurchauffeUrbaineStoriesComponent = async ({ className }: { classNa
     "saint-omer-cool-towns-diagnostic",
   ]);
   return (
-    <div className={clsx("bg-dsfr-background-alt-blue-france py-10 text-center", className)}>
+    <div className={clsx("bg-dsfr-background-alt-blue-france py-9 text-center", className)}>
       <div className="text-center text-[1.375rem] font-bold text-pfmv-navy">
         Votre collectivité est confrontée à un problème de surchauffe urbaine ?
       </div>
