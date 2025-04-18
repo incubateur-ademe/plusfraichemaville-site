@@ -1,11 +1,10 @@
 "use client";
 import { useMultipleValuesFilter } from "@/src/hooks/useMultipleValuesFilter";
 import { ALL_TYPES_SOLUTION } from "@/src/helpers/type-fiche-solution";
+import { TYPE_SOLUTION_FILTER_NAME } from "@/src/helpers/routes";
 
 export default function TypeSolutionFilter({ className }: { className?: string }) {
-  const FILTER_NAME = "typeSolutionFilter";
-
-  const { changeFilter, isFilterCodeSelected } = useMultipleValuesFilter(FILTER_NAME);
+  const { changeFilter, isFilterCodeSelected } = useMultipleValuesFilter(TYPE_SOLUTION_FILTER_NAME);
 
   const linkStyle = (codeRegion: string) => {
     const baseStyle = " fr-tag fr-text--xs whitespace-nowrap ";

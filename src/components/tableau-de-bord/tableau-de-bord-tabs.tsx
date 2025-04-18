@@ -30,7 +30,7 @@ export const TableauDeBordTabs = () => {
 
   return (
     <>
-      <div className="tabs min-h-[40rem] bg-dsfr-border-action-low-blue-france py-10">
+      <div className="tabs min-h-[40rem] bg-dsfr-border-action-low-blue-france pb-40 pt-10">
         <div className="fr-container">
           {tabs.map(
             (tab, index) =>

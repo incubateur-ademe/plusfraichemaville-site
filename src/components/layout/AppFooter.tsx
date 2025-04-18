@@ -1,4 +1,3 @@
-import AdemeAMFLogo from "@/public/images/logo-ademe-amf.webp";
 import Image from "next/image";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 
@@ -19,7 +18,13 @@ export default function AppFooter() {
               href="/"
               title="Retour à l’accueil du site - Plus fraîche ma ville - République Française"
             >
-              <Image className="fr-footer__logo" height={80} src={AdemeAMFLogo} alt={"ADEME - Plus fraîche ma ville"} />
+              <Image
+                className="fr-footer__logo"
+                height={200}
+                width={270}
+                src={"/images/logo-ademe-amf.webp"}
+                alt={"ADEME - Plus fraîche ma ville"}
+              />
             </a>
           </div>
           <div className="fr-footer__content">

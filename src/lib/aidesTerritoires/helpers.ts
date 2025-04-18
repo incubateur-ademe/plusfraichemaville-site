@@ -45,6 +45,7 @@ export const callAidesTerritoiresApi = async <T extends IApiAidesTerritoiresResp
   isSecondCall = false,
 ): Promise<T | null> => {
   const token = await fetchAidesTerritoiresToken();
+  await customRevalidateTag(FETCH_TOCKEN_CACHE_TAG);
   try {
     const response = await fetch(url, {
       method: "GET",

@@ -9,7 +9,7 @@ import Image from "next/image";
 
 export const AllSolutionsBoard = () => {
   return (
-    <div className="flex flex-col items-center justify-center bg-dsfr-background-action-low-blue-france pb-20 pt-12">
+    <div className="flex flex-col items-center justify-center bg-dsfr-background-action-low-blue-france pb-40 pt-12">
       {/* eslint-disable-next-line max-len */}
       <div className="m-x-auto max-w-md text-center text-[1.375rem] font-bold leading-normal text-dsfr-text-label-blue-france">
         Différents types de solutions à combiner pour lutter contre la surchauffe urbaine

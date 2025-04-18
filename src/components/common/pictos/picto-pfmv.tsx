@@ -7,7 +7,7 @@ export const PictoPFMV = () => (
     viewBox="0 0 336 30"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    aria-labelledby="Plus Fraîche Ma Ville"
+    aria-label="Plus Fraîche Ma Ville"
   >
     <title>Plus Fraîche Ma Ville</title>
     <path

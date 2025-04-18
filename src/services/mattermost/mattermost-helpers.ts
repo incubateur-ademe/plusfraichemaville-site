@@ -24,6 +24,7 @@ ${ticket.properties.content}`,
 type CsmBatchWebhookData = {
   nbMailCreationProjet: number;
   nbMailsInactiveUser: number;
+  nbMailsUnfinishedDiag: number;
 };
 
 export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
@@ -33,6 +34,8 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
 **Nb de mails de création de projets : ** ${data.nbMailCreationProjet}
 
 **Nb de mails d'utilisateurs inactifs : ** ${data.nbMailCreationProjet} 
+
+**Nb de mails de diagnostics non finalisés : ** ${data.nbMailsUnfinishedDiag} 
 `,
   };
 };

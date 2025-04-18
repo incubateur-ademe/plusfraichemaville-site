@@ -12,11 +12,15 @@ import { ProjetWithRelations, UserProjetWithRelations, UserWithCollectivite } fr
 import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
-import { getProjetsForProjetCreationEmail } from "@/src/lib/prisma/prismaProjetQueries";
-import { daysUntilDate } from "@/src/helpers/dateUtils";
+import {
+  getProjetsForProjetCreationEmail,
+  getProjetsForRemindDiagnosticEmail,
+} from "@/src/lib/prisma/prismaProjetQueries";
+import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import shuffle from "lodash/shuffle";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
+import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 
 interface Templates {
   templateId: number;
@@ -99,6 +103,9 @@ export class EmailService {
       },
       noActivityAfterSignup: {
         templateId: 53,
+      },
+      remindNotCompletedDiagnostic: {
+        templateId: 60,
       },
     };
   }
@@ -272,6 +279,38 @@ export class EmailService {
         }
 
         return result;
+      }),
+    );
+  }
+
+  async sendRemindNotCompletedDiagnosticEmail(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsForRemindDiagnosticEmail(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de diagnostics non validés à envoyer : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        if (projet.diagnostic_simulations[0].user_id) {
+          const userToContact = await getUserById(projet.diagnostic_simulations[0].user_id);
+          if (userToContact) {
+            const result = await this.sendEmail({
+              to: userToContact.email,
+              userId: userToContact.id,
+              emailType: emailType.remindNotCompletedDiagnostic,
+              params: {
+                nomUtilisateur: userToContact.nom || "",
+                nomProjet: projet.nom,
+                lienRepriseDiag: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION(projet.id)),
+              },
+            });
+
+            if (result.type === "success") {
+              console.log(`Email envoyé à ${userToContact.email} - type: ${emailType.remindNotCompletedDiagnostic}`);
+            }
+            return result;
+          }
+        }
       }),
     );
   }

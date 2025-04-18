@@ -1,6 +1,7 @@
 export const success = {
   ESTIMATION_DELETE: "Votre estimation a bien été supprimée.",
   ESTIMATION_CREATED: "Votre estimation a bien été créée.",
+  DIAGNOSTIC_SIMULATION_UPDATED: "Votre données ont bien été enregistrées.",
   ESTIMATION_VALIDATED: "Votre estimation a bien été enregistrée.",
   ESTIMATION_AIDE_ADDED: "L'aide a bien été ajoutée à votre estimation.",
   ESTIMATION_AIDE_DELETED: "L'aide a bien été supprimée de votre estimation.",
@@ -9,7 +10,7 @@ export const success = {
   FICHES_SOLUTIONS_ADDED_TO_PROJET: "Les fiches solutions ont bien été ajoutées au projet en cours.",
   FICHE_SOLUTION_ADDED_TO_PROJET: "La fiche solution a bien été ajoutée au projet.",
   FICHES_DIAGNOSTIC_ADDED_TO_PROJET: "Les fiches diagnostic ont bien été ajoutées au projet en cours.",
-  FICHE_DIAGNOSTIC_ADDED_TO_PROJET: "La fiche diagnostic a bien été ajoutée au projet en cours.",
+  FICHE_DIAGNOSTIC_ADDED_TO_PROJET: "La méthode de diagnostic a été ajoutée à votre projet.",
   PROJET_DELETE: "Votre projet a bien été supprimé.",
   PROJETS_LOADED: "Les projets ont été chargés.",
   PROJET_UPSERTED: "Les informations du projet ont bien été enregistrées.",
@@ -28,6 +29,8 @@ export const success = {
   NEWSLETTER_SUCCESS: "Votre inscription a bien été prise en compte.",
   VISIBILITY_UPDATED: "La visibilité du projet a été mis à jour.",
   CSV_GENERATED: "Le fichier CSV a été généré.",
+  FICHE_URL_COPY_CLIPBOARD: "Le lien vers cette page a été copié dans votre presse papier.",
+  AIDE_SELECTION_VALIDATED: "Votre sélection a bien été validée.",
 };
 
 export const error = {

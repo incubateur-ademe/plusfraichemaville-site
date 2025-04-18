@@ -1,3 +1,5 @@
+import { ficheDiagnosticRetourExperienceDiagnosticFilter } from "./commonStrapiFilters";
+
 export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo on FicheSolutionEntity {
   id
     attributes {
@@ -19,6 +21,40 @@ export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo
       slug
       aides_territoires_mots_cles
     }
+}`;
+
+export const REX_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment REXFicheDiagnosticCardInfo on
+RetourExperienceDiagnosticEntity {
+  id
+  attributes {
+    titre
+    lieu
+    description
+    slug
+    image_principale {
+      ...ImageInfo
+    }
+    contacts {
+      ...ContactInfo
+    }
+    lien_rex_diagnostics {
+      data {
+      attributes  {
+          fiche_diagnostic {
+            data {
+              id
+              attributes {
+                nom_scientifique
+                image_icone {
+                    ...ImageInfo
+                  }
+              }
+            }
+          } 
+        }                  
+      }
+    }
+  }
 }`;
 
 export const FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT = `fragment FicheSolutionSmallCardInfo on FicheSolutionEntity {
@@ -45,9 +81,31 @@ export const FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT = `fragment FicheDiagnosticCard
       image_principale {
         ...ImageInfo
       }
+      image_icone {
+        ...ImageInfo
+      }
       methode
       echelle
+      nom_scientifique
       slug
+      echelle_thermique
+      objectifs {
+        description
+      }
+      type_livrables
+      echelle_spatiale
+      lien_rex_diagnostics ${ficheDiagnosticRetourExperienceDiagnosticFilter()} {
+        data {
+          id
+          attributes {
+            retour_experience_diagnostic {
+              data {
+                ...REXFicheDiagnosticCardInfo
+              }
+            }
+          }
+        }
+      }
     }
 }`;
 
@@ -107,4 +165,27 @@ export const RETOUR_EXPERIENCE_WITH_CONTACTS = `fragment RetourExperienceWithCon
         }
       }
     }
+}`;
+
+export const CITATION_FRAGMENT = `fragment CitationInfo on ComponentCommonCitation {
+  auteur
+  texte
+}`;
+
+export const CONTACT_FRAGMENT = `fragment ContactInfo on ComponentRetourExperienceContact {
+  id
+  label
+  email
+  telephone
+  site_internet
+  type_de_contact
+  sous_type_de_contact
+  nom
+}`;
+
+export const IMAGE_WITH_CAPTION_FRAGMENT = `fragment ImageWithCaptionInfo on ComponentCommonImageWithCaption {
+  image {
+    ...ImageInfo
+  }
+  caption
 }`;

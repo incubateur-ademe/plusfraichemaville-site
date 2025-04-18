@@ -18,7 +18,9 @@ export function EstimationMateriauModalContainer() {
   const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   useIsModalOpen(estimationModal, {
-    onConceal: () => setCurrentEstimationId(null),
+    onConceal: () => {
+      setCurrentEstimationId(null);
+    },
   });
   const currentEstimation = useMemo(() => {
     if (currentEstimationId && currentProjet) {

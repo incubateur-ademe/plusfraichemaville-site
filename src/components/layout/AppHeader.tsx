@@ -1,6 +1,5 @@
 import NavigationMenu from "@/src/components/layout/NavigationMenu";
 import Image from "next/image";
-import AdemePFMVLogo from "../../../public/images/logo-ademe-pfmv.svg";
 
 import { AuthButtons } from "../authentication/auth-buttons";
 import Link from "next/link";
@@ -24,7 +23,13 @@ export default function AppHeader() {
                     </Link>
                   </div>
                   <div className="fr-header__operator">
-                    <Image className="" height={70} src={AdemePFMVLogo} alt={"ADEME - Plus fraîche ma ville"} />
+                    <Image
+                      className=""
+                      width={261}
+                      height={70}
+                      src={"/images/logo-ademe-pfmv.svg"}
+                      alt={"ADEME - Plus fraîche ma ville"}
+                    />
                   </div>
                   <div className="fr-header__navbar">
                     <button
