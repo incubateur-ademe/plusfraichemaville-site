@@ -1,15 +1,9 @@
 import "./globals.css";
-import { getHtmlAttributes } from "@codegouvfr/react-dsfr/next-appdir/getHtmlAttributes";
-import { StartDsfr } from "./StartDsfr";
-import { defaultColorScheme } from "./defaultColorScheme";
-import Link from "next/link";
 import { ReactElement } from "react";
 import AppHeader from "@/src/components/layout/AppHeader";
 import { Metadata } from "next";
-import { DsfrHead } from "@codegouvfr/react-dsfr/next-appdir/DsfrHead";
 import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
-import MatomoScript from "@/src/components/matomo/matomo-script";
 import MainLayoutProviders from "@/src/components/layout/MainLayoutProviders";
 import { ProjetStoreServer } from "@/src/stores/projets/server";
 import { UserStoreServer } from "@/src/stores/user/server";
@@ -19,6 +13,7 @@ import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
 import { Agent } from "@/src/components/agent-conversationnel/agent";
+import { DsfrHead, getHtmlAttributes } from "@/src/app/server-only-index";
 
 const xtra_bold = localFont({
   src: "../../public/fonts/Marianne-ExtraBold.woff2",
@@ -53,11 +48,20 @@ export default async function RootLayout({ children }: { children: ReactElement 
   const nonce = (await headers()).get("x-nonce") ?? undefined;
 
   return (
-    <html {...getHtmlAttributes({ defaultColorScheme, lang })}>
+    <html {...getHtmlAttributes({ lang })}>
       <head>
-        <StartDsfr />
-        <DsfrHead Link={Link} doDisableFavicon={true} nonce={nonce} />
-        <MatomoScript />
+        <DsfrHead
+          doDisableFavicon={true}
+          nonce={nonce}
+          preloadFonts={[
+            "Marianne-Regular",
+            "Marianne-Regular_Italic",
+            "Marianne-Medium",
+            "Marianne-Medium_Italic",
+            "Marianne-Bold",
+            "Marianne-Bold_Italic",
+          ]}
+        />
       </head>
       <body>
         <MainLayoutProviders lang={lang}>
