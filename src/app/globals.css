@@ -374,7 +374,7 @@
 }
 
 .xl-modal .fr-modal__body {
-  @apply h-[90vh] !max-h-[90vh] rounded-[20px];
+  @apply !max-h-[90vh] rounded-[20px];
 }
 
 .xl-modal .fr-container--fluid {
