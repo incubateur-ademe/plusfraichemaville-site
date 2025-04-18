@@ -3,9 +3,9 @@
   "version": "1.0.3",
   "private": true,
   "scripts": {
-    "predev:start": "only-include-used-icons",
-    "predev:localAsProd": "only-include-used-icons",
-    "prebuild": "only-include-used-icons && npx prisma generate",
+    "predev:start": "react-dsfr update-icons",
+    "predev:localAsProd": "react-dsfr update-icons",
+    "prebuild": "react-dsfr update-icons && npx prisma generate",
     "dev:db:migrate": "prisma migrate dev",
     "dev:db:push": "prisma db push",
     "dev:db:generateClient": "prisma generate",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
-    "@codegouvfr/react-dsfr": "^1.16.7",
+    "@codegouvfr/react-dsfr": "^1.22.5",
     "@headlessui/react": "^2.2.0",
     "@hookform/resolvers": "^3.10.0",
     "@hubspot/api-client": "^12.0.1",
@@ -37,10 +37,10 @@
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "html-to-image": "^1.11.11",
-    "jspdf": "^2.5.2",
+    "jspdf": "^3.0.1",
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
-    "next": "15.0.4",
+    "next": "15.3.0",
     "next-auth": "^4.24.11",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -86,7 +86,8 @@
     "typescript": "^5.7.3"
   },
   "engines": {
-    "node": "20.14.0"
+    "node": "22.14.0",
+    "pnpm": "10.8.1"
   },
   "pnpm": {
     "overrides": {
