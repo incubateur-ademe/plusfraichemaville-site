@@ -70,7 +70,7 @@ export const FichesSolutionProjetBookmarksContainer = ({
             }}
           >
             <Checkbox
-              className="mx-auto"
+              className="mx-auto h-6"
               options={[
                 {
                   label: null,

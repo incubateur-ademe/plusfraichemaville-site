@@ -73,21 +73,19 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
               onClick={() => handleFicheSolutionChange(ficheSolutionId.toString())}
               className="pfmv-card cursor-pointer"
             >
-              <div className="mt-4 flex place-content-center">
-                <Checkbox
-                  className="m-auto"
-                  options={[
-                    {
-                      label: null,
-                      nativeInputProps: {
-                        value: ficheSolutionId.toString(),
-                        ...form.register("ficheSolutionIds"),
-                        onChange: () => handleFicheSolutionChange(ficheSolutionId.toString()),
-                      },
+              <Checkbox
+                className="mt-4 h-6"
+                options={[
+                  {
+                    label: null,
+                    nativeInputProps: {
+                      value: ficheSolutionId.toString(),
+                      ...form.register("ficheSolutionIds"),
+                      onChange: () => handleFicheSolutionChange(ficheSolutionId.toString()),
                     },
-                  ]}
-                />
-              </div>
+                  },
+                ]}
+              />
             </FicheSolutionSmallCard>
           ))}
         </div>
