@@ -25,7 +25,7 @@ export default function NavigationMenu() {
                 target: "_self",
                 onClick: cancelCurrentProjet,
               },
-              text: "Introduction à la surchauffe urbaine",
+              text: "La ville dans une France à +4°C",
             },
             {
               linkProps: {

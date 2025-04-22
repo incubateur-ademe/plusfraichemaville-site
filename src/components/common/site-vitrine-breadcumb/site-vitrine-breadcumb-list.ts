@@ -16,7 +16,7 @@ const BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_HOME: BreadcrumbSegment = {
   linkProps: {
     href: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
   },
-  label: "Introduction à la surchauffe urbaine",
+  label: "La ville dans une France à +4°C",
 };
 
 const BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_COMPRENDRE: BreadcrumbSegment = {
