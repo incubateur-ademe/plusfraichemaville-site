@@ -8,8 +8,6 @@ export const mapUserToConnectContact = (user: UserWithAdminProjets): ConnectCont
     phone_number: string;
   };
 
-  const collectivite = user.collectivites[0].collectivite;
-
   return {
     email: user.email,
     source: "PFMV",
@@ -20,6 +18,5 @@ export const mapUserToConnectContact = (user: UserWithAdminProjets): ConnectCont
     dateCreation: dateToStringWithoutTime(user.created_at, "iso"),
     dateModification: dateToStringWithoutTime(user.updated_at, "iso"),
     telephone: agentconnectInfo.phone_number,
-    codePostal: collectivite.code_postal,
   };
 };
