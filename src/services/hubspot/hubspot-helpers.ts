@@ -62,7 +62,7 @@ export const makeBatchUpsertProjectsByContactProperties = (
       projet_id_unique: projet.id.toString(),
       type_d_espace_pfmv: projet.type_espace ?? "",
       closedate: new Date(projet.date_echeance!).getTime().toString(),
-      montant: projet.budget?.toString() ?? "",
+      amount: projet.budget?.toString() ?? "",
     },
   }));
 
