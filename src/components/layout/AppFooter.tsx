@@ -1,4 +1,3 @@
-import AdemeAMFLogo from "@/public/images/logo-ademe-amf.webp";
 import Image from "next/image";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 
@@ -9,23 +8,44 @@ export default function AppFooter() {
       <div className="fr-container">
         <div className="fr-footer__body">
           <div className="fr-footer__brand fr-enlarge-link">
-            <p className="fr-logo !text-[1rem]">
-              République
-              <br />
-              Française
-            </p>
             <a
-              className="fr-footer__brand-link"
+              className="fr-footer__brand-link flex flex-row flex-wrap items-center gap-8"
               href="/"
               title="Retour à l’accueil du site - Plus fraîche ma ville - République Française"
             >
-              <Image className="fr-footer__logo" height={80} src={AdemeAMFLogo} alt={"ADEME - Plus fraîche ma ville"} />
+              <div className="fr-logo !text-[1rem]">
+                République
+                <br />
+                Française
+              </div>
+              <Image
+                className="fr-footer__logo"
+                height={200}
+                width={80}
+                src={"/images/logo-ademe.svg"}
+                alt={"ADEME - Plus fraîche ma ville"}
+              />
+              <Image
+                className="fr-footer__logo max-w-[8rem]"
+                height={200}
+                width={240}
+                src={"/images/logo-amf.webp"}
+                alt={"Association des maires de France (AMF)"}
+              />
+              <Image
+                className="fr-footer__logo max-w-[8rem]"
+                height={200}
+                width={240}
+                src={"/images/logo-anru.webp"}
+                alt={"Agence nationale de l'urbanisme (ANRU)"}
+              />
             </a>
           </div>
           <div className="fr-footer__content">
             <p className="fr-footer__content-desc">
               {"Plus fraîche ma ville est une startup d'État portée par l’Agence de la Transition " +
-                "Écologique (ADEME), en partenariat avec l'association des maires de France (AMF)."}
+                "Écologique (ADEME), en partenariat avec l'association des maires de France (AMF) et l'agence" +
+                " nationale pour la rénovation urbaine (ANRU)."}
               <br />
               {"Notre mission : aider les collectivités dans le choix de solutions " +
                 "de rafraîchissement urbain pérennes et durables. Plus fraîche ma ville" +
