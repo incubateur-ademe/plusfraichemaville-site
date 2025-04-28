@@ -9,7 +9,7 @@ export default function AppFooter() {
         <div className="fr-footer__body">
           <div className="fr-footer__brand fr-enlarge-link">
             <a
-              className="fr-footer__brand-link flex flex-row flex-wrap gap-8 items-center"
+              className="fr-footer__brand-link flex flex-row flex-wrap items-center gap-8"
               href="/"
               title="Retour à l’accueil du site - Plus fraîche ma ville - République Française"
             >
