@@ -27,7 +27,7 @@ export const mapProjetToConnectProjet = (projet: ProjetWithAdminUser): ConnectPr
   idProjet: `${projet.id}`,
   typeProjet: "PFMV",
   nomProjet: projet.nom,
-  etape: getNiveauMaturiteByCode(projet.niveau_maturite)?.label ?? "",
+  etape: getNiveauMaturiteByCode(projet.niveau_maturite)?.crmConnectLabel ?? "",
   dateCloture: dateToStringWithoutTime(projet.date_echeance, "iso") ?? "2100-01-01",
   codeCommuneInsee: projet.collectivite.code_insee ?? "",
   typeEspace: selectEspaceByCode(projet.type_espace) ?? "",
