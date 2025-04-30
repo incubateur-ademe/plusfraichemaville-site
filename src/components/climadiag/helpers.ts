@@ -1,7 +1,7 @@
 import { climadiag } from "@prisma/client";
 import { GroupedOptions, Option } from "./types";
 
-const climadiagInfoLabel = (climadiagInfo: climadiag) =>
+export const climadiagInfoLabel = (climadiagInfo: climadiag) =>
   climadiagInfo.type_lieu === "epci"
     ? `${climadiagInfo.nom} - EPCI`
     : `${climadiagInfo.nom} - ${climadiagInfo.code_postal}`;
