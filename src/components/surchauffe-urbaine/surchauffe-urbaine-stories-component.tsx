@@ -4,7 +4,8 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
 import { SurchauffeUrbaineStories } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-stories";
 import { isEmpty } from "@/src/helpers/listUtils";
-import { SurchauffeUrbaineCollectiviteSearch } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-collectivite-search";
+// eslint-disable-next-line max-len
+import { SurchauffeUrbaineTerritoireSearch } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-territoire-search";
 
 export const SurchauffeUrbaineStoriesComponent = async ({ className }: { className?: string }) => {
   const rexDiagData = await getRetourExperienceDiagStoriesBySlugs([
@@ -15,7 +16,6 @@ export const SurchauffeUrbaineStoriesComponent = async ({ className }: { classNa
     "libourne-lcz-renaturation",
     "saint-omer-cool-towns-diagnostic",
   ]);
-  console.log(rexDiagData.map((t) => t.attributes.titre).join(", "));
   return (
     <div className={clsx("bg-dsfr-background-alt-blue-france py-9 text-center", className)}>
       <div className="text-center text-[1.375rem] font-bold text-pfmv-navy">
@@ -25,7 +25,7 @@ export const SurchauffeUrbaineStoriesComponent = async ({ className }: { classNa
         {"Démarrer sur l'espace projet !"}
       </Button>
       {!isEmpty(rexDiagData) && <SurchauffeUrbaineStories rexDiagStories={rexDiagData} />}
-      <SurchauffeUrbaineCollectiviteSearch className="fr-container mt-12" />
+      <SurchauffeUrbaineTerritoireSearch className="fr-container mt-12" />
     </div>
   );
 };

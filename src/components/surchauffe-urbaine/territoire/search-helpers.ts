@@ -6,8 +6,12 @@ export type CollectiviteOption = {
   label: string;
 };
 
-export const searchedCollectiviteToOptions = (climadiagInfos: climadiag[]): CollectiviteOption[] =>
-  climadiagInfos.map((climadiagInfo: climadiag) => ({
+export const mapClimadiagToCollectiteOption = (climadiagInfo: climadiag | null): CollectiviteOption | null => {
+  if (!climadiagInfo) {
+    return null;
+  }
+  return {
     value: climadiagInfo.code_insee,
     label: climadiagInfoLabel(climadiagInfo),
-  }));
+  };
+};
