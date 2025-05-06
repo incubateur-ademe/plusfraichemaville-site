@@ -116,7 +116,7 @@ export const AnnuaireContactCard = ({ contact, projetId, className, showContactP
               <>
                 <div className="mb-4 font-bold">{contact.rex?.nom}</div>
                 <div className="flex items-center justify-between">
-                  <Tag small className="h-fit">
+                  <Tag small className="!mb-0 h-fit">
                     {contact.rex?.region}
                   </Tag>
                   {contact?.rex?.slug && <AnnuaireRexContentSeeProject slug={contact.rex.slug} />}
