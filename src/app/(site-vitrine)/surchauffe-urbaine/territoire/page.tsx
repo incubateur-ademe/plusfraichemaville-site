@@ -33,7 +33,7 @@ export default async function SurchauffeUrbaineTerritoirePage(props: {
         {climadiagResult && (
           <>
             <div className="mb-4 mt-8 text-xl font-bold text-dsfr-text-label-blue-france">
-              <i className="ri-map-pin-line mr-1  "/>
+              <i className="ri-map-pin-line mr-1  " />
               {climadiagResult.nom} - {climadiagResult.code_postal}
             </div>
             <SurchauffeUrbaineClimadiag climadiagInfo={climadiagResult as unknown as Climadiag} className="mt-6" />
