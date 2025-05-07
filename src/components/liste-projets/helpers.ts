@@ -5,7 +5,7 @@ import {
   UserWithAdminProjets,
 } from "@/src/lib/prisma/prismaCustomTypes";
 import { collectivite, InvitationStatus, RoleProjet } from "@prisma/client";
-import { orderBy } from "lodash";
+import orderBy from "lodash/orderBy";
 
 export interface ProjetsByCollectivite {
   collectivite: collectivite;

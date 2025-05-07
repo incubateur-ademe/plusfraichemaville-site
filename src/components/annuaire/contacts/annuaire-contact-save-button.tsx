@@ -4,7 +4,7 @@ import { notifications } from "@/src/components/common/notifications";
 import { Spinner } from "@/src/components/common/spinner";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
-import { isEqual } from "lodash";
+import isEqual from "lodash/isEqual";
 import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
 import { updateRexContactInProjetAction } from "@/src/actions/projets/update-rex-contact-in-projet-action";
 import { useEffect, useState } from "react";

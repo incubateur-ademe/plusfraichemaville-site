@@ -7,7 +7,7 @@ import { useFicheLocalStorage } from "./use-fiche-local-storage";
 import { useSaveBookmarks } from "./use-save-bookmarks";
 
 export const GenericSaveUnauthenticated = ({ ...props }: GenericSaveFicheButtonWithOpener) => {
-  const [fichesIds, setFichesIds] = useFicheLocalStorage(props.type);
+  const [fichesIds, setFichesIds] = useFicheLocalStorage();
 
   const { update, isBookmarked } = useSaveBookmarks(
     props.type,

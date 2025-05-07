@@ -14,6 +14,12 @@ export const solutionRetourExperienceFilter = () =>
       ", {retour_experience: {publishedAt: {notNull: true}}} ]} )"
     : "";
 
+export const ficheDiagnosticRetourExperienceDiagnosticFilter = () =>
+  strapiShowStatuses === "LIVE"
+    ? "(filters:{and: [{fiche_diagnostic: {publishedAt: {notNull: true}}}" +
+      ", {retour_experience_diagnostic: {publishedAt: {notNull: true}}} ]} )"
+    : "";
+
 export class StrapiFilter {
   includePublicationState: boolean;
   andFilters: (StrapiEqFilter | StrapiInFilter | StrapiRelationFilter)[];

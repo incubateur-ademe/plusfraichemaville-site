@@ -4,7 +4,6 @@ import {
   FicheBookmarkedSolution,
   FichesBookmarked,
   isFicheBookmarked,
-  mergeFicheBookmarkedDiagnostic,
   mergeFicheBookmarkedSolutions,
 } from "@/src/components/common/generic-save-fiche/helpers";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
@@ -17,18 +16,11 @@ export const saveAllFichesFromLocalStorage = async (
   userId: string,
   fiches: {
     fichesSolutions: FichesBookmarked[];
-    fichesDiagnostic: FichesBookmarked[];
   },
 ) => {
   const user = await getUserById(userId);
 
-  const currentSavedFichesDiagnostic = user?.selection_fiches_diagnostic;
   const currentSavedFichesSolutions = user?.selection_fiches_solutions;
-
-  const updatedSavedFichesDiagnostic = mergeFicheBookmarkedDiagnostic(
-    fiches.fichesDiagnostic,
-    currentSavedFichesDiagnostic,
-  );
 
   const updatedSavedFichesSolutions = mergeFicheBookmarkedSolutions(
     fiches.fichesSolutions as FicheBookmarkedSolution[],
@@ -40,7 +32,6 @@ export const saveAllFichesFromLocalStorage = async (
       id: userId,
     },
     data: {
-      selection_fiches_diagnostic: updatedSavedFichesDiagnostic as number[],
       selection_fiches_solutions: updatedSavedFichesSolutions,
     },
     include: { collectivites: { include: { collectivite: true } } },

@@ -1,7 +1,6 @@
 import styles from "./AideDecisionBreadcrumbsStyles.module.css";
-import Link from "next/link";
 import { AideDecisionEtapeHistory } from "@/src/lib/strapi/queries/commonStrapiFilters";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
+import AideDecisionBreadcrumbLink from "@/src/components/aideDecision/aide-decision-breadcrumb-link";
 
 export default function AideDecisionBreadcrumbs({
   historique,
@@ -20,12 +19,7 @@ export default function AideDecisionBreadcrumbs({
             <div className={`${styles.circle} text-center text-xs`}>{index + 1}</div>
             <div className={`${styles.line}`} />
           </div>
-          <Link
-            className={`${styles.content} !bg-none hover:underline`}
-            href={`${PFMV_ROUTES.AIDE_DECISION}/${step.slug}`}
-          >
-            {step.label}
-          </Link>
+          <AideDecisionBreadcrumbLink label={step.label} slug={step.slug} currentPageLabel={currentPageLabel || ""} />
         </div>
       ))}
       {currentPageLabel && (
