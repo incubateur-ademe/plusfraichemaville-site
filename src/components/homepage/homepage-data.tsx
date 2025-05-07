@@ -88,6 +88,17 @@ export const homepageData = {
     title: "Par où commencer ?",
     lines: [
       {
+        title: "Évaluez la surchauffe urbaine dans votre commune",
+        description:
+          "Explorez tous les enjeux de la surchauffe urbaine, apprenez à en faire le diagnostic et inspirez-vous des " +
+          "collectivités qui ont déjà franchi le pas.",
+        image: { url: "/images/homepage/home-start-1.jpg", width: 331, height: 320 },
+        cta: {
+          label: "J’analyse la surchauffe avant de me lancer",
+          url: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
+        },
+      },
+      {
         title: "Trouvez les solutions de rafraîchissement adaptées à votre projet",
         description:
           "Accédez à l’outil de découverte des solutions ou recherchez des fiches solutions par thématiques.",
