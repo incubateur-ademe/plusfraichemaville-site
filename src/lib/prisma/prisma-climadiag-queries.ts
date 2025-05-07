@@ -21,9 +21,9 @@ export const getPublicClimadiagInfoFromCodeInsee = async (codeInsee: string) => 
   if (!climadiagInfo) return climadiagInfo;
   return {
     ...climadiagInfo,
-    jours_tres_chauds_prevision: climadiagInfo.jours_tres_chauds_prevision["2030"],
-    jours_vdc_prevision: climadiagInfo.jours_vdc_prevision["2030"],
-    nuits_chaudes_prevision: climadiagInfo.nuits_chaudes_prevision["2030"],
+    jours_tres_chauds_prevision: { 2030: climadiagInfo.jours_tres_chauds_prevision["2030"] },
+    jours_vdc_prevision: { 2030: climadiagInfo.jours_vdc_prevision["2030"] },
+    nuits_chaudes_prevision: { 2030: climadiagInfo.nuits_chaudes_prevision["2030"] },
   };
 };
 

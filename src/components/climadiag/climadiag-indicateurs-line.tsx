@@ -12,9 +12,16 @@ type ClimadiagIndicateursLineProps = {
   temperature: ClimadiagTemperatureJour;
   year: ClimadiagYear;
   isPDF?: boolean;
+  classname?: string;
 };
 
-export const ClimadiagIndicateursLine = ({ type, temperature, isPDF, year }: ClimadiagIndicateursLineProps) => {
+export const ClimadiagIndicateursLine = ({
+  type,
+  temperature,
+  isPDF,
+  year,
+  classname,
+}: ClimadiagIndicateursLineProps) => {
   const { title, picto, indice, legend: climatLegend } = climadiagIndicateursData.line[type];
   const [legend, setLegend] = useState(false);
   const toggler = () => setLegend(!legend);
@@ -24,6 +31,7 @@ export const ClimadiagIndicateursLine = ({ type, temperature, isPDF, year }: Cli
       className={clsx(
         "mb-2 w-fit rounded-2xl bg-white px-5 py-2 lg:w-full",
         isPDF && "w-full border-[2px] border-pfmv-light-grey/35",
+        classname,
       )}
     >
       <div className={clsx("climadiag-line flex justify-between lg:flex-row lg:gap-0", !isPDF && "flex-col gap-4")}>
@@ -44,7 +52,7 @@ export const ClimadiagIndicateursLine = ({ type, temperature, isPDF, year }: Cli
               </span>
             )}
             {!isPDF && (
-              <button onClick={toggler} className="mt-4 text-sm underline">
+              <button onClick={toggler} className="mt-4 text-sm text-pfmv-navy underline">
                 Afficher la légende
               </button>
             )}
