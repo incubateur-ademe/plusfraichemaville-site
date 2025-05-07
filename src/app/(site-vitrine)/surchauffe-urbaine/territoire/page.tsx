@@ -25,13 +25,19 @@ export default async function SurchauffeUrbaineTerritoirePage(props: {
   return (
     <>
       <div className="fr-container">
-        <SiteVitrineBreadcrumb step={BREADCRUMB_SURCHAUFFE_URBAINE_TERRITOIRE} />
+        <SiteVitrineBreadcrumb step={BREADCRUMB_SURCHAUFFE_URBAINE_TERRITOIRE(climadiagResult?.nom)} />
         <SurchauffeUrbaineTerritoireSearch
           initialOption={mapClimadiagToCollectiteOption(climadiagResult)}
           className="mt-6"
         />
         {climadiagResult && (
-          <SurchauffeUrbaineClimadiag climadiagInfo={climadiagResult as unknown as Climadiag} className="mt-6" />
+          <>
+            <div className="mb-4 mt-8 text-xl font-bold text-dsfr-text-label-blue-france">
+              <i className="ri-map-pin-line mr-1  "/>
+              {climadiagResult.nom} - {climadiagResult.code_postal}
+            </div>
+            <SurchauffeUrbaineClimadiag climadiagInfo={climadiagResult as unknown as Climadiag} className="mt-6" />
+          </>
         )}
         <TeaserDiagnosticComponent className="mt-12" />
       </div>

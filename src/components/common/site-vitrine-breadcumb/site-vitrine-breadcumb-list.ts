@@ -65,7 +65,9 @@ export const BREADCRUMB_SURCHAUFFE_URBAINE_FICHE_DIAG: SiteVitrineBreadcrumbStep
   breadcrumbSegments: [BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_HOME, BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_REX_LISTE],
 };
 
-export const BREADCRUMB_SURCHAUFFE_URBAINE_TERRITOIRE: SiteVitrineBreadcrumbStep = {
-  currentPageLabel: "Exposition du territoire à la surchauffe urbaine",
+export const BREADCRUMB_SURCHAUFFE_URBAINE_TERRITOIRE = (lieu?: string | null): SiteVitrineBreadcrumbStep => ({
+  currentPageLabel: `Exposition du territoire à la surchauffe urbaine ${lieu && ` : ${lieu}`}`,
   breadcrumbSegments: [BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_HOME],
-};
+});
+
+

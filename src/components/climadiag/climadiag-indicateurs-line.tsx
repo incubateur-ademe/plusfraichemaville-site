@@ -40,7 +40,7 @@ export const ClimadiagIndicateursLine = ({
             src={`/images/climadiag/${picto}.svg`}
             width={100}
             height={100}
-            className="h-[100px] w-[100px]"
+            className="hidden h-[100px] w-[100px] md:block"
             alt="jour très chaud picto"
           />
           <div className={clsx("max-w-[300px] pt-4", !isPDF && "lg:max-w-[420px]")}>
@@ -59,7 +59,7 @@ export const ClimadiagIndicateursLine = ({
           </div>
         </div>
 
-        <div className="flex items-center">
+        <div className="flex flex-wrap items-center lg:flex-nowrap">
           <ClimadiagIndicateursLineJour jour={temperature.ref} withBackground />
           <ClimadiagIndicateursLineJour jour={temperature.prevision.min} valeur="basse" />
           <SeparatorY className="h-24" />
