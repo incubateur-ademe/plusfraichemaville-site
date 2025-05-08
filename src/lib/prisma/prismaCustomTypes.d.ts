@@ -27,7 +27,7 @@ export type UserWithAdminProjets = Prisma.UserGetPayload<{
   include: {
     projets: {
       where: { role: "ADMIN" };
-      include: { projet: true };
+      include: { projet: { include: { collectivite: true } } };
     };
     collectivites: {
       include: {
@@ -136,6 +136,10 @@ export type ProjetSourcingContact = Prisma.projet_sourcing_contactGetPayload<{
 
 export type EstimationAide = EstimationWithAides["estimations_aides"][number];
 
+export interface ProjetWithCollectivite extends projet {
+  collectivite: collectivite;
+}
+
 export interface ProjetWithRelations extends projet {
   collectivite: collectivite;
   estimations: EstimationWithAides[];
@@ -159,7 +163,7 @@ type ProjectUserAndAdmin = {
   role: RoleProjet;
 };
 
-export type ProjetWithAdminUser = projet & {
+export type ProjetWithAdminUser = ProjetWithCollectivite & {
   users: ProjectUserAndAdmin[];
 };
 

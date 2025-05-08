@@ -48,7 +48,7 @@ export const getUsersAndProjectsFromLastSync = async ({
     { deleted_at: { gte: lastSyncDate } },
   ];
 
-  const usersAndProjects = await prismaClient.user.findMany({
+  return prismaClient.user.findMany({
     where: {
       OR: [
         { created_at: { gte: lastSyncDate } },
@@ -92,11 +92,9 @@ export const getUsersAndProjectsFromLastSync = async ({
           ],
         },
         include: {
-          projet: true,
+          projet: { include: { collectivite: true } },
         },
       },
     },
   });
-
-  return usersAndProjects;
 };
