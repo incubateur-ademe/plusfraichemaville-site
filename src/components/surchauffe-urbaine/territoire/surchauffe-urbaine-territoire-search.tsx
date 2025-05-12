@@ -28,8 +28,9 @@ export const SurchauffeUrbaineTerritoireSearch = ({
 
   useEffect(() => {
     setLoading(true);
-    if (query?.trim().length > 2) {
-      fetch(`/api/search-climadiag-info?search=${query}&limit=20`)
+    const trimmedQuery = query?.trim();
+    if (trimmedQuery.length > 2) {
+      fetch(`/api/search-climadiag-info?search=${trimmedQuery}&limit=20`)
         .then((t) => t.json())
         .then((searchedValues: Climadiag[]) => {
           setFetchedAddresses(searchedValues.map(mapClimadiagToCollectiteOption).filter(notEmpty));

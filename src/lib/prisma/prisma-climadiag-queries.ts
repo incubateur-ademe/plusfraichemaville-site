@@ -50,7 +50,7 @@ export const searchClimadiagInfo = async (searchTerms: string[], limit: number) 
         computeClimadiagNameQuery(searchTerms),
       ],
     },
-    orderBy: [{ type_lieu: "desc" }, { nom: "asc" }],
+    orderBy: [{ type_lieu: "desc" }, { population: "desc" }],
     take: limit,
   });
 };
