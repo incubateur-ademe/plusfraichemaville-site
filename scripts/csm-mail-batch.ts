@@ -29,10 +29,18 @@ const main = async () => {
       lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
 
+    const REMIND_UNFINISGED_DIAG_DAYS = 7;
+    console.log(`Recherche des projets avec diagnostics non validés  depuis ${REMIND_UNFINISGED_DIAG_DAYS} jours...`);
+    const unfinishedDiagPromises = await emailService.sendRemindNotCompletedDiagnosticEmail(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_UNFINISGED_DIAG_DAYS),
+      REMIND_UNFINISGED_DIAG_DAYS,
+    );
+
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     const webhookData = makeCsmBatchWebhookData({
       nbMailCreationProjet: sendProjetEmailsPromises.length,
       nbMailsInactiveUser: inactiveUserPromises.length,
+      nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
     });
     await sendMattermostWebhook(webhookData, "batch", 5000);
     console.log("Batch des mails CSM réussi !");

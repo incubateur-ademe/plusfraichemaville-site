@@ -56,8 +56,8 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   }, [userClimadiagInfos, selectedClimadiagInfo, userResultGroup]);
 
   return (
-    <div className="bg-dsfr-background-open-blue-france" id="climadiag-panel">
-      <div className="fr-container -mb-40 min-h-[25rem] pb-28 pt-10">
+    <div className="bg-dsfr-background-open-blue-france pb-20" id="climadiag-panel">
+      <div className="fr-container min-h-[25rem] pb-28 pt-10">
         <h2 className="mb-6 text-[1.375rem] font-bold leading-tight text-dsfr-text-label-blue-france">
           Les indicateurs de surchauffe de ma collectivité
         </h2>

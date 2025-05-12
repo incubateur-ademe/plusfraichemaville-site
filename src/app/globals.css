@@ -53,29 +53,28 @@
   }
 }
 
-@layer components {
-  .nav-main-navigation {
-    ul {
-      li:last-child {
-        @apply lg:hidden;
-      }
-    }
-  }
-}
-
 .pfmv-card,
 .fiche-solution-small-vertical-card {
   border-radius: 0.9375rem;
   background: #fff !important;
 }
 
+.pfmv-flat-card {
+  border-radius: 0.9375rem;
+}
+
 .pfmv-strong-card {
   border-radius: 10px;
+  background: #fff !important;
   box-shadow: 0 4px 20px 0 rgba(0, 0, 145, 0.2);
 }
 
 .pfmv-card {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+}
+
+.pfmv-flat-card {
+  box-shadow: inset 0 0 0 1px var(--border-default-grey);
 }
 
 .pfmv-card-outline {
@@ -96,6 +95,7 @@
 
 .pfmv-card.no-shadow:hover {
   box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+
   .text-blue-hover {
     color: var(--text-title-grey);
   }
@@ -329,8 +329,60 @@
   @apply w-full max-w-full flex-shrink-0 flex-grow-0 basis-full;
 }
 
-.xl-modal .fr-modal__body {
+.l-modal .fr-grid-row > div {
+  @apply w-[90%] max-w-[90%] flex-shrink-0 flex-grow-0 basis-full;
+}
+
+.md-modal .fr-grid-row > div {
+  @apply w-[80%] max-w-[80%] flex-shrink-0 flex-grow-0 basis-full;
+}
+
+.custom-modal .fr-modal__body {
   @apply rounded-[20px];
+}
+
+.custom-modal .fr-modal__title {
+  display: none;
+}
+
+.custom-modal .fr-container--fluid {
+  @apply overflow-visible;
+}
+
+.xl-modal .fr-modal__body {
+  @apply h-[90vh] !max-h-[90vh] rounded-[20px];
+}
+
+.l-modal .fr-modal__body {
+  @apply h-full !max-h-[80vh] rounded-[20px];
+}
+
+.xl-modal.fr-modal::before {
+  flex: none;
+  height: unset;
+  margin: 5vh 0 0;
+}
+
+.l-modal.fr-modal::before {
+  flex: none;
+  height: unset;
+  margin: 10vh 0 0;
+}
+.md-modal.fr-modal::before {
+  flex: none;
+  height: unset;
+  margin: 10vh 0 0;
+}
+
+.l-modal .fr-modal__content {
+  @apply mb-0;
+}
+
+.md-modal .fr-modal__content {
+  @apply mb-0;
+}
+.fiche-diagnostic-modal .fr-modal__body {
+  @apply bg-dsfr-background-alt-red-marianne;
 }
 
 .fr-consent-banner {
@@ -340,6 +392,7 @@
 .fr-modal__content,
 .fr-consent-banner {
   border-radius: 1.5rem;
+
   .fr-btn {
     border-radius: 1.5rem;
   }
@@ -362,6 +415,7 @@
 #fr-consent-banner-button-refuse-app:hover {
   background-color: rgba(0, 0, 0, 0.05) !important;
 }
+
 #fr-consent-banner-button-refuse-app:active {
   background-color: rgba(0, 0, 0, 0.1) !important;
 }
@@ -445,6 +499,7 @@
 
 .leaflet-control-zoom {
   @apply !bg-none;
+
   a {
     background-image: none !important;
   }
@@ -468,6 +523,7 @@
 .annuaireCardAccordionBtn.fr-accordion__btn::after {
   content: none;
 }
+
 .annuaireCardAccordionBtn.fr-accordion__btn::before {
   --icon-size: 1rem;
   flex: 0 0 auto;
@@ -497,4 +553,51 @@
 
 .annuaireFilterAccordion .fr-accordion__title .fr-accordion__btn {
   @apply !py-0;
+}
+
+ul.arrow-list {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul.arrow-list li {
+  padding-left: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+ul.arrow-list li::before {
+  content: "";
+  position: absolute;
+  left: -6px;
+  top: -2px;
+  width: 1.5em;
+  height: 1.5em;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='28' height='28' fill='%23eb754b'%3E%3Cpath d='M20 12L10 18V6L20 12Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.hover-transparent:hover {
+  background-color: transparent !important;
+}
+
+.pfmv-big-tooltip {
+  box-shadow: 4px 4px 10px 0 rgba(0, 0, 145, 0.15);
+  border-radius: 5px;
+  background: #fff;
+}
+
+.fiche-diagnostic-icone {
+  background-image: url("/images/fiches-diagnostic/diag-icone-bg.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.fiche-diagnostic-icone-thick {
+  background-image: url("/images/fiches-diagnostic/diag-icone-bg-thick.svg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.fr-breadcrumb__link {
+  @apply !font-normal;
 }
