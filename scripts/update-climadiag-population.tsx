@@ -4,7 +4,7 @@ import { prismaClient } from "@/src/lib/prisma/prismaClient";
 function updateClimadiagRow(fileJson) {
   console.log("code insee : ", fileJson.identifiant_insee);
   return prismaClient.climadiag.updateMany({
-    where: { code_insee: fileJson.identifiant_insee, population : 0 },
+    where: { code_insee: fileJson.identifiant_insee, population: 0 },
     data: {
       population: fileJson.population,
     },
@@ -25,8 +25,7 @@ async function processFiles(path: string) {
 function main() {
   const path = "C:\\Users\\rapha\\Documents\\PFMV\\climadiag\\entities_18avril2024_v2_Tracc\\JSON";
 
-  // processFiles(path + "\\testrt");
-  // processFiles(path + "\\epci");
+  processFiles(path + "\\epci");
   processFiles(path + "\\commune");
 }
 
