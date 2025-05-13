@@ -267,6 +267,7 @@ model climadiag {
   nuits_chaudes_prevision     Json
   jours_vdc_ref               Float
   jours_vdc_prevision         Json
+  population                  Int               @default(0)
 }
 
 model aide {

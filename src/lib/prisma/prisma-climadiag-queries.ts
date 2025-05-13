@@ -1,5 +1,6 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { Prisma } from "@prisma/client";
+import { Climadiag } from "@/src/components/climadiag/types";
 
 export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]) => {
   return prismaClient.climadiag.findMany({
@@ -9,6 +10,21 @@ export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]) => {
       },
     },
   });
+};
+
+export const getPublicClimadiagInfoFromCodeInsee = async (codeInsee: string) => {
+  const climadiagInfo = (await prismaClient.climadiag.findFirst({
+    where: {
+      code_insee: codeInsee,
+    },
+  })) as Climadiag | null;
+  if (!climadiagInfo) return climadiagInfo;
+  return {
+    ...climadiagInfo,
+    jours_tres_chauds_prevision: { 2030: climadiagInfo.jours_tres_chauds_prevision["2030"] },
+    jours_vdc_prevision: { 2030: climadiagInfo.jours_vdc_prevision["2030"] },
+    nuits_chaudes_prevision: { 2030: climadiagInfo.nuits_chaudes_prevision["2030"] },
+  };
 };
 
 export const searchClimadiagInfo = async (searchTerms: string[], limit: number) => {
@@ -34,7 +50,7 @@ export const searchClimadiagInfo = async (searchTerms: string[], limit: number) 
         computeClimadiagNameQuery(searchTerms),
       ],
     },
-    orderBy: [{ type_lieu: "desc" }, { nom: "asc" }],
+    orderBy: [{ type_lieu: "desc" }, { population: "desc" }],
     take: limit,
   });
 };

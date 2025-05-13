@@ -4,6 +4,8 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
 import { SurchauffeUrbaineStories } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-stories";
 import { isEmpty } from "@/src/helpers/listUtils";
+// eslint-disable-next-line max-len
+import { SurchauffeUrbaineTerritoireSearch } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-territoire-search";
 
 export const SurchauffeUrbaineStoriesComponent = async ({ className }: { className?: string }) => {
   const rexDiagData = await getRetourExperienceDiagStoriesBySlugs([
@@ -23,6 +25,7 @@ export const SurchauffeUrbaineStoriesComponent = async ({ className }: { classNa
         {"Démarrer sur l'espace projet !"}
       </Button>
       {!isEmpty(rexDiagData) && <SurchauffeUrbaineStories rexDiagStories={rexDiagData} />}
+      <SurchauffeUrbaineTerritoireSearch className="fr-container mt-12" />
     </div>
   );
 };
