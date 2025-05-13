@@ -88,11 +88,13 @@ export const homepageData = {
     title: "Par où commencer ?",
     lines: [
       {
-        title: "Faites un diagnostic de la surchauffe sur votre territoire",
-        description: "Consultez les différentes méthodes de diagnostic en fonction de votre besoin.",
+        title: "Évaluez la surchauffe urbaine dans votre commune",
+        description:
+          "Explorez tous les enjeux de la surchauffe urbaine, apprenez à en faire le diagnostic et inspirez-vous des " +
+          "collectivités qui ont déjà franchi le pas.",
         image: { url: "/images/homepage/home-start-1.jpg", width: 331, height: 320 },
         cta: {
-          label: "Surchauffe urbaine",
+          label: "J’analyse la surchauffe avant de me lancer",
           url: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
         },
       },
