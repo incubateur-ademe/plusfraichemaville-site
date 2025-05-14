@@ -1,6 +1,7 @@
 import { $Enums, climadiag } from "@prisma/client";
 import { climadiagInfoLabel } from "@/src/components/climadiag/helpers";
 import { isEmpty } from "@/src/helpers/listUtils";
+import { Climadiag } from "@/src/components/climadiag/types";
 import TypeLieuClimadiag = $Enums.TypeLieuClimadiag;
 
 export type CollectiviteOption = {
@@ -60,3 +61,13 @@ export const computeSearchResultGroup = (climadiagOptions: SearchResultOption[])
 };
 
 export const NO_RESULT_OPTION = [{ label: "Aucune donnée pour cette collectivité", value: "0", isDisabled: true }];
+
+export const climadiagToPublicClimadiag = (climadiagInfo: Climadiag | null) => {
+  if (!climadiagInfo) return climadiagInfo;
+  return {
+    ...climadiagInfo,
+    jours_tres_chauds_prevision: { 2030: climadiagInfo.jours_tres_chauds_prevision["2030"] },
+    jours_vdc_prevision: { 2030: climadiagInfo.jours_vdc_prevision["2030"] },
+    nuits_chaudes_prevision: { 2030: climadiagInfo.nuits_chaudes_prevision["2030"] },
+  };
+};

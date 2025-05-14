@@ -1,6 +1,7 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { Prisma } from "@prisma/client";
 import { Climadiag } from "@/src/components/climadiag/types";
+import { climadiagToPublicClimadiag } from "@/src/components/surchauffe-urbaine/territoire/search-helpers";
 
 export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]) => {
   return prismaClient.climadiag.findMany({
@@ -18,13 +19,7 @@ export const getPublicClimadiagInfoFromCodeInsee = async (codeInsee: string) => 
       code_insee: codeInsee,
     },
   })) as Climadiag | null;
-  if (!climadiagInfo) return climadiagInfo;
-  return {
-    ...climadiagInfo,
-    jours_tres_chauds_prevision: { 2030: climadiagInfo.jours_tres_chauds_prevision["2030"] },
-    jours_vdc_prevision: { 2030: climadiagInfo.jours_vdc_prevision["2030"] },
-    nuits_chaudes_prevision: { 2030: climadiagInfo.nuits_chaudes_prevision["2030"] },
-  };
+  return climadiagToPublicClimadiag(climadiagInfo);
 };
 
 export const searchClimadiagInfo = async (searchTerms: string[], limit: number) => {
@@ -52,7 +47,7 @@ export const searchClimadiagInfo = async (searchTerms: string[], limit: number) 
     },
     orderBy: [{ type_lieu: "desc" }, { population: "desc" }],
     take: limit,
-  });
+  }) as unknown as Climadiag[];
 };
 
 const computeClimadiagNameQuery = (searchTerms: string[]): Prisma.climadiagWhereInput => {

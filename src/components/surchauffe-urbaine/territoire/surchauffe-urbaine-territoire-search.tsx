@@ -10,7 +10,7 @@ import {
   SearchResultOption,
 } from "@/src/components/surchauffe-urbaine/territoire/search-helpers";
 import { useRouter } from "next/navigation";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { PFMV_ROUTES, SEARCH_CLIMADIAG_PUBLIC_INFO } from "@/src/helpers/routes";
 import AsyncSelect from "react-select/async";
 import isEmpty from "lodash/isEmpty";
 
@@ -33,7 +33,7 @@ export const SurchauffeUrbaineTerritoireSearch = ({
 
   const searchClimadiagInfos = (inputValue: string, callback: (_: any) => void) => {
     if (inputValue?.trim().length > 2) {
-      fetch(`/api/search-climadiag-info?search=${inputValue}`)
+      fetch(SEARCH_CLIMADIAG_PUBLIC_INFO(inputValue))
         .then((t) => t.json())
         .then((searchedValues: Climadiag[]) => {
           const searchOptions = !isEmpty(searchedValues)
