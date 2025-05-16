@@ -53,7 +53,7 @@ export const ClimadiagIndicateursLine = ({
             )}
             {!isPDF && (
               <button onClick={toggler} className="mt-4 text-sm text-pfmv-navy underline">
-                Afficher la légende
+                {!legend ? "Afficher la légende" : "Masquer la légende"}
               </button>
             )}
           </div>

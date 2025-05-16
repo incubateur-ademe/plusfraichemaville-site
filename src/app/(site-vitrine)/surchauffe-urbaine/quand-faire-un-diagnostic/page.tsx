@@ -17,10 +17,8 @@ export default async function SurchauffeUrbaineTimingPage() {
         <h1 className="mt-8 text-center text-[1.75rem] font-bold text-dsfr-text-title-grey">
           Pourquoi et quand faire un diagnostic ?
         </h1>
-        <div className="mx-auto max-w-[51rem] text-center  text-lg">
+        <div className="mx-auto max-w-[43rem] text-center  text-lg">
           Le diagnostic de la surchauffe urbaine est une étape essentielle, quelle que soit l’échelle de votre projet.
-          Le schéma ci-dessous illustre de manière théorique comment intégrer l’analyse de la surchauffe à tous niveaux
-          d’action, de la planification à l’évaluation.
         </div>
       </div>
       <SurchauffeUrbaineTimingComponent className="mt-12" />

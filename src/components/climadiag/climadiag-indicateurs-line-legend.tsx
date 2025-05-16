@@ -28,11 +28,6 @@ export const ClimadiagIndicateursLineLegend = ({ legend, year }: ClimadiagIndica
             </div>
           ))}
         </div>
-        <div className="mb-4 mt-4 text-[10px] leading-[14px] lg:mb-0">
-          <sup>*</sup>
-          {" Les horizons temporels correspondent à la trajectoire de réchauffement" +
-            " de référence pour l’adaptation au changement climatique (TRACC)."}
-        </div>
       </div>
     </div>
   );
