@@ -1,5 +1,9 @@
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
-import { ConnectContact, ConnectResponse } from "./types";
+import { ConnectContact, ConnectProjet, ConnectResponse } from "./types";
+import { UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
+import { mapProjetToConnectProjet, mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
+import { flattenUsersProjectsToProjects } from "@/src/components/liste-projets/helpers";
+
 const CONNECT_API_BASE_URL = process.env.CONNECT_API_BASE_URL;
 
 const config = {
@@ -24,24 +28,48 @@ export const createConnectContact = async (contact: ConnectContact): Promise<Con
 
     return await response.json();
   } catch (error) {
-    captureError("Erreur lors de la création du contact dans Connect:", error);
+    captureError("Exception lors de la création du contact dans Connect:", error);
   }
 };
 
-export const batchSyncConnectContacts = async (
-  contacts: ConnectContact[],
+export const createConnectProjet = async (projet: ConnectProjet): Promise<ConnectResponse | undefined> => {
+  try {
+    const response = await fetch(`${CONNECT_API_BASE_URL}/projets`, {
+      method: "POST",
+      headers: config.headers,
+      body: JSON.stringify(projet),
+    });
+
+    if (!response.ok) {
+      captureError(`Erreur lors de la création du projet dans Connect: ${response.statusText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    captureError("Exception lors de la création du projet dans Connect:", error);
+  }
+};
+
+export const connectBatchSync = async (
+  usersWithAdminProjets: UserWithAdminProjets[],
 ): Promise<{
   success: boolean;
-  errors: { email: string; error: string }[];
+  errors: ({ email: string; error: string } | { idProjet: string; error: string })[];
   message: string;
 }> => {
+  const contacts = usersWithAdminProjets.map(mapUserToConnectContact);
   let createdContactsCount = 0;
-  const errors: { email: string; error: string }[] = [];
+  let createdProjetsCount = 0;
+  const errors: ({ email: string; error: string } | { idProjet: string; error: string })[] = [];
 
   for (const contact of contacts) {
     try {
-      await createConnectContact(contact);
-      createdContactsCount++;
+      const connectResult = await createConnectContact(contact);
+      if (!connectResult?.success) {
+        errors.push({ email: contact.email, error: `${connectResult?.message} - ${connectResult?.errorMessage}` });
+      } else {
+        createdContactsCount++;
+      }
     } catch (error) {
       if (error instanceof Error) {
         errors.push({ email: contact.email, error: error.message });
@@ -49,12 +77,27 @@ export const batchSyncConnectContacts = async (
     }
   }
 
+  const allProjets = flattenUsersProjectsToProjects(usersWithAdminProjets).map(mapProjetToConnectProjet);
+  for (const projet of allProjets) {
+    try {
+      const connectResult = await createConnectProjet(projet);
+      if (!connectResult?.success) {
+        errors.push({ idProjet: projet.idProjet, error: `${connectResult?.message} - ${connectResult?.errorMessage}` });
+      } else {
+        createdProjetsCount++;
+      }
+    } catch (error) {
+      if (error instanceof Error) {
+        errors.push({ idProjet: projet.idProjet, error: error.message });
+      }
+    }
+  }
+
   return {
     success: errors.length === 0,
     errors,
-    message:
-      createdContactsCount > 0
-        ? `Synchronisation avec Connect réussie ! ${createdContactsCount} contacts ont été créés.`
-        : "Aucun contact n'a été créé.",
+    message: `Synchronisation avec Connect réussie !
+    ${createdContactsCount} contact(s) créé(s) / mis à jour..
+    ${createdProjetsCount} projet(s) créés / mis à jour.`,
   };
 };
