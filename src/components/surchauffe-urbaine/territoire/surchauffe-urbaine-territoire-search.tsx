@@ -13,6 +13,8 @@ import { useRouter } from "next/navigation";
 import { PFMV_ROUTES, SEARCH_CLIMADIAG_PUBLIC_INFO } from "@/src/helpers/routes";
 import AsyncSelect from "react-select/async";
 import isEmpty from "lodash/isEmpty";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { SURCHAUFFE_URBAINE_TERRITOIRE_SEARCH } from "@/src/helpers/matomo/matomo-tags";
 
 export const SurchauffeUrbaineTerritoireSearch = ({
   initialOption,
@@ -27,6 +29,7 @@ export const SurchauffeUrbaineTerritoireSearch = ({
 
   const submitSearch = () => {
     if (selectedAddress) {
+      trackEvent(SURCHAUFFE_URBAINE_TERRITOIRE_SEARCH(selectedAddress.value));
       router.push(PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE(selectedAddress.value));
     }
   };
