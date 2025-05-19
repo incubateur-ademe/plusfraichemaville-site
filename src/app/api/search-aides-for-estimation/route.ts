@@ -10,6 +10,7 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export async function GET(request: NextRequest) {
   const estimationId = request.nextUrl.searchParams.get("estimationId");
+  const useNewVersion = request.nextUrl.searchParams.get("useNewVersion");
   if (!estimationId) {
     return NextResponse.json(null, { status: 400 });
   }
@@ -40,6 +41,7 @@ export async function GET(request: NextRequest) {
     const result = await searchAidesFromAidesTerritoires(
       ficheSolutions.map((fs) => fs.attributes),
       collectivite,
+      !!useNewVersion,
     );
     return NextResponse.json(result);
   }

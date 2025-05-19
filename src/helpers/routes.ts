@@ -73,8 +73,8 @@ export const getFullUrl = (route: string): string => `${process.env.NEXT_PUBLIC_
 export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
   `/api/get-aides-territoires-aide-by-aide-id?aideId=${aideId}`;
 
-export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
-  `/api/search-aides-for-estimation?estimationId=${estimationId}`;
+export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number, useNewVersion?: boolean) =>
+  `/api/search-aides-for-estimation?estimationId=${estimationId}${useNewVersion ? "&useNewVersion=true" : ""}`;
 
 export const GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL = (collectiviteId: number, userId: string) =>
   `/api/get-available-projects-for-collectivite?collectiviteId=${collectiviteId}&userId=${userId}`;
