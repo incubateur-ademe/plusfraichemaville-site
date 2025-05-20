@@ -12,6 +12,8 @@ import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get
 import { CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { upsertBrevoContact } from "@/src/services/brevo/brevo-api";
+import { createConnectContact } from "@/src/services/connect";
+import { mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },
@@ -68,6 +70,14 @@ export const editUserInfoAction = async (
         }
       } catch (e) {
         customCaptureException("Error in Brevo call in EditUserInfoAction", e);
+      }
+
+      try {
+        if (updatedUser && process.env.CONNECT_SYNC_ACTIVE === "true" && data.subscribeToNewsletter) {
+          await createConnectContact(mapUserToConnectContact(updatedUser, true));
+        }
+      } catch (e) {
+        customCaptureException("Error in Connect call in EditUserInfoAction", e);
       }
 
       revalidatePath(PFMV_ROUTES.MON_PROFIL);

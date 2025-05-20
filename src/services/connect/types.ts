@@ -8,6 +8,7 @@ export type ConnectContact = {
   telephone?: string | null;
   dateCreation?: string | null;
   dateModification?: string | null;
+  abonnementNewsletter?: boolean | null;
 };
 
 export type ConnectProjet = {
