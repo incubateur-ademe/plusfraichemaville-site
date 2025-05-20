@@ -6,12 +6,14 @@ import { FichesSolutionsProjetsSelected } from "./fiches-solutions-projet-select
 import { AllSolutionsBoard } from "../common/all-solutions-board";
 import { FichesSolutionProjetBookmarksByEspace } from "./fiches-solutions-projet-bookmarks-by-espace";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { TypeFiche } from "@/src/helpers/common";
 
 export const FichesSolutionsProjet = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(currentProjet?.id);
   const updateStore = useProjetsStore((state) => state.addOrUpdateProjet);
-  const selectedFichesSolutionsIds = currentProjet?.fiches_solutions_id;
+  const selectedFichesSolutionsIds = getProjetFichesIdsByType({ projet: currentProjet, typeFiche: TypeFiche.solution });
 
   return (
     <>

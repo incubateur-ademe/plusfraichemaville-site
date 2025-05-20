@@ -1,7 +1,7 @@
 "use client";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { notifications } from "./notifications";
 
 export default function ButtonShareCurrentUrl({ className }: { className?: string }) {
   const [isClient, setIsClient] = useState(false);
@@ -12,10 +12,7 @@ export default function ButtonShareCurrentUrl({ className }: { className?: strin
 
   const copyCurrentUrlToClipboard = () => {
     navigator.clipboard.writeText(window.location.href);
-    toast.success("Le lien vers cette page a été copié dans votre presse papier.", {
-      id: "clipboard",
-      duration: 5000,
-    });
+    notifications("success", "FICHE_URL_COPY_CLIPBOARD");
   };
   return (
     <div className={`${className}`}>

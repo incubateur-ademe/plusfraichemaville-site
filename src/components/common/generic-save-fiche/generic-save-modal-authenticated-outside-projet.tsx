@@ -24,7 +24,12 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
 
   const validate = async () => {
     if (selectedProjetId > 0) {
-      const update = await updateFichesProjetAction(selectedProjetId, +ficheId, type, TypeUpdate.add);
+      const update = await updateFichesProjetAction({
+        projetId: selectedProjetId,
+        ficheId: +ficheId,
+        typeFiche: type,
+        typeUpdate: TypeUpdate.add,
+      });
       if (update.projet) {
         addOrUpdateProjet(update.projet);
       }

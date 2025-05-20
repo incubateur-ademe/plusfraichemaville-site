@@ -1,5 +1,7 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { Prisma } from "@prisma/client";
+import { Climadiag } from "@/src/components/climadiag/types";
+import { climadiagToPublicClimadiag } from "@/src/components/surchauffe-urbaine/territoire/search-helpers";
 
 export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]) => {
   return prismaClient.climadiag.findMany({
@@ -9,6 +11,15 @@ export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]) => {
       },
     },
   });
+};
+
+export const getPublicClimadiagInfoFromCodeInsee = async (codeInsee: string) => {
+  const climadiagInfo = (await prismaClient.climadiag.findFirst({
+    where: {
+      code_insee: codeInsee,
+    },
+  })) as Climadiag | null;
+  return climadiagToPublicClimadiag(climadiagInfo);
 };
 
 export const searchClimadiagInfo = async (searchTerms: string[], limit: number) => {
@@ -34,9 +45,9 @@ export const searchClimadiagInfo = async (searchTerms: string[], limit: number) 
         computeClimadiagNameQuery(searchTerms),
       ],
     },
-    orderBy: [{ type_lieu: "desc" }, { nom: "asc" }],
+    orderBy: [{ type_lieu: "desc" }, { population: "desc" }],
     take: limit,
-  });
+  }) as unknown as Climadiag[];
 };
 
 const computeClimadiagNameQuery = (searchTerms: string[]): Prisma.climadiagWhereInput => {

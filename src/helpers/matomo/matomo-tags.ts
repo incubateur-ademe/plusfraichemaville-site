@@ -8,9 +8,15 @@ export const MATOMO_CATEGORIES = {
   SITE_PUBLIC: "site-public",
   ESPACE_PROJET: "espace-projet",
   ANNUAIRE: "annuaire",
+  DIAGNOSTIC: "module-diagnostic",
 };
 
 export const MATOMO_ACTIONS = {
+  AIDE_DECISION_BREADCRUMB: "aide-decision-fil-ariane",
+  SITE_VITRINE_BREADCRUMB: "site-vitrine-fil-ariane",
+  SITE_VITRINE_REX_DIAG_STORY: "rex-diag-story",
+  SURCHAUFFE_URBAINE_COMPRENDRE: "surchauffe-urbaine-notions",
+  SURCHAUFFE_URBAINE_TIMING: "surchauffe-urbaine-timing",
   SUBSCRIBE_WEBINAIRE: "webinaire-inscription",
   UPDATE_MATURITE: "update-maturite",
   OPEN_AGENT_BUTTON: "open-agent-button",
@@ -22,6 +28,9 @@ export const MATOMO_ACTIONS = {
   ANNUAIRE_SIDE_PANEL_OPEN_REX: "annuaire-side-panel-open-rex",
   ANNUAIRE_SIDE_PANEL_OPEN_IN_PROGRESS: "annuaire-side-panel-open-in-progress",
   ANNUAIRE_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN: "annuaire-side-panel-view-projet-modal-open",
+  DIAGNOSTIC_DOWNLOAD_RESULT: "diagnostic-result-download",
+  DIAGNOSTIC_COMPUTE_RESULT: "diagnostic-compute-result",
+  SURCHAUFFE_TERRITOIRE_SEARCH: "surchauffe-urbaine-search-territoire",
 };
 
 export const WEBINAIRE_SUBSCRIPTION: MATOMO_EVENT = {
@@ -89,3 +98,51 @@ export const ANNUAIRE_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN = (name: string): MATOMO
   action: MATOMO_ACTIONS.ANNUAIRE_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN,
   name: `[Annuaire] Ouverture de la modal de visualisation du rex : « ${name} »`,
 });
+
+export const AIDE_DECISION_BREADCRUMB_FIL_ARIANE = (currentPage: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.AIDE_DECISION_BREADCRUMB,
+  name: `[Fil Ariane aide décision] Clic à partir de la page : « ${currentPage} »`,
+});
+
+export const SITE_VITRINE_BREADCRUMB_FIL_ARIANE = (currentPage: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SITE_VITRINE_BREADCRUMB,
+  name: `[Fil Ariane site vitrine] Clic à partir de la page : « ${currentPage} »`,
+});
+
+export const SITE_VITRINE_REX_DIAG_STORY = (rexDiagSlug: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SITE_VITRINE_REX_DIAG_STORY,
+  name: `Clic sur une story de rex Diag : « ${rexDiagSlug} »`,
+});
+
+export const SURCHAUFFE_URBAINE_CHANGE_NOTION = (notion: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SURCHAUFFE_URBAINE_COMPRENDRE,
+  name: `Clic pour changer de notion : « ${notion} »`,
+});
+
+export const SURCHAUFFE_URBAINE_CHANGE_TIMING = (index: number): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SURCHAUFFE_URBAINE_TIMING,
+  name: `Clic pour changer de niveau d'action : « ${index} »`,
+});
+
+export const SURCHAUFFE_URBAINE_TERRITOIRE_SEARCH = (codeInsee: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SURCHAUFFE_TERRITOIRE_SEARCH,
+  name: `Recherche du code INSEE : « ${codeInsee} »`,
+});
+
+export const DIAGNOSTIC_DOWNLOAD_RESULT = {
+  category: MATOMO_CATEGORIES.DIAGNOSTIC,
+  action: MATOMO_ACTIONS.DIAGNOSTIC_DOWNLOAD_RESULT,
+  name: "Téléchargement pdf des résultats de l'analyse simplifiée",
+};
+
+export const DIAGNOSTIC_COMPUTE_RESULT = {
+  category: MATOMO_CATEGORIES.DIAGNOSTIC,
+  action: MATOMO_ACTIONS.DIAGNOSTIC_COMPUTE_RESULT,
+  name: "Calcul des indicateurs de l'analyse simplifiée",
+};

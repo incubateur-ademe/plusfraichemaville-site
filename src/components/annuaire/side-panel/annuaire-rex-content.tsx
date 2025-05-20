@@ -43,7 +43,7 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
         </div>
         <div className="mb-8 mt-4 text-lg font-bold">{retourExperienceAttributes.titre}</div>
         <div className="flex items-center justify-between">
-          <Tag small className="h-fit">
+          <Tag small className="!mb-0 h-fit">
             {getRegionLabelFromCode(retourExperienceAttributes.region?.data.attributes.code)}
           </Tag>
           <AnnuaireRexContentSeeProject slug={retourExperienceAttributes.slug} />

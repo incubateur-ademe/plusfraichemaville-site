@@ -1,10 +1,12 @@
-import type { ChangeEventHandler, HTMLInputTypeAttribute, HTMLProps, ReactNode } from "react";
+import React, { ChangeEventHandler, HTMLInputTypeAttribute, HTMLProps, ReactNode } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/src/components/common/RedAsterisk";
 import clsx from "clsx";
 
 type CommonProps<T extends FieldValues> = {
   className?: string;
+  inputClassName?: string;
+  unite?: string;
   control: Control<T>;
   path: FieldPath<T>;
   disabled?: boolean;
@@ -16,6 +18,7 @@ type CommonProps<T extends FieldValues> = {
   info?: ReactNode | ((_?: string | null) => ReactNode);
   asterisk?: boolean;
   whiteBackground?: boolean;
+  onFocus?: (_: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 
 type InputProps = {
@@ -40,11 +43,14 @@ const InputFormField = <T extends FieldValues>({
   hint,
   disabled,
   className,
+  inputClassName,
+  unite,
   valid,
   icon,
   info,
   asterisk,
   whiteBackground = false,
+  onFocus = (_: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {},
   ...rest
 }: InputFormFieldProps<T>) => {
   const id = `input-form-field__${path}`;
@@ -89,7 +95,7 @@ const InputFormField = <T extends FieldValues>({
             />
           ) : (
             <input
-              className={clsx("fr-input", { "!bg-white": whiteBackground })}
+              className={clsx("fr-input", { "!bg-white": whiteBackground }, inputClassName)}
               aria-describedby={ariaDescribedBy}
               disabled={disabled}
               type={type}
@@ -102,6 +108,7 @@ const InputFormField = <T extends FieldValues>({
               min={rest.min}
               max={rest.max}
               step={rest.step}
+              onFocus={onFocus}
             />
           );
 
@@ -117,11 +124,17 @@ const InputFormField = <T extends FieldValues>({
               className,
             )}
           >
-            <label className="fr-label fr-mb-1v" htmlFor={id}>
-              {label} {asterisk && <RedAsterisk />}
-              {hint && <span className="fr-hint-text">{hint}</span>}
-            </label>
-            {icon ? <div className={`fr-input-wrap ${icon}`}>{input}</div> : input}
+            {label && (
+              <label className="fr-label fr-mb-1v" htmlFor={id}>
+                {label} {asterisk && <RedAsterisk />}
+                {hint && <span className="fr-hint-text">{hint}</span>}
+              </label>
+            )}
+
+            <div className="flex items-center">
+              {icon ? <div className={`fr-input-wrap ${icon}`}>{input}</div> : input}
+              <div className="ml-2">{unite}</div>
+            </div>
             {info && (
               <p id={`${id}__info`} className="fr-hint-text fr-mt-1v fr-mb-0">
                 {typeof info === "function" ? info(value) : info}

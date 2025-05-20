@@ -27,20 +27,13 @@ import { getUserRoleFromCode } from "@/src/helpers/user-role";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 
 type ListeProjetsCardProps = {
-  disabled?: boolean;
   projet: ProjetWithPublicRelations;
   invitationStatus?: InvitationStatus;
   isBrowsing?: boolean;
   updateProjet?: (_updatedProjet: ProjetWithPublicRelations) => void;
 };
 
-export const ListeProjetsCard = ({
-  projet,
-  invitationStatus,
-  disabled,
-  isBrowsing,
-  updateProjet,
-}: ListeProjetsCardProps) => {
+export const ListeProjetsCard = ({ projet, invitationStatus, isBrowsing, updateProjet }: ListeProjetsCardProps) => {
   const [updatedProjet, setUpdatedProjet] = useState(projet);
   const currentUser = useUserStore((state) => state.userInfos);
   const setPendingProjets = useProjetsStore((state) => state.setPendingProjets);
@@ -115,17 +108,9 @@ export const ListeProjetsCard = ({
     });
   };
 
-  const disabledText = disabled && "[&>*>*]:text-dsfr-text-disabled-grey pointer-events-none";
-  const disabledButton = disabled && {
-    color: "var(--grey-625-425)",
-    border: "solid 1px var(--grey-625-425) !important",
-    background: "none",
-    boxShadow: "none",
-  };
-
   const contentCard = (
     <>
-      <div className={clsx(`relative mb-5 flex rounded-xl p-4 ${disabledText}`)}>
+      <div className="relative mb-5 flex rounded-xl p-4">
         <div
           className={clsx(
             "flex",
@@ -270,7 +255,6 @@ export const ListeProjetsCard = ({
               className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
               onClick={openProjet}
               href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}
-              style={{ ...disabledButton }}
             >
               Accéder au projet
             </Link>

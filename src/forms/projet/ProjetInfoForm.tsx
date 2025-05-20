@@ -20,6 +20,7 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import AddressInputFormField from "@/src/components/common/address-input-form-field";
 import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
 import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
+import CurrencyInputFormField from "@/src/components/common/currency-input-form-field";
 
 type ProjetInfoFormProps = {
   projet?: ProjetWithRelations;
@@ -43,6 +44,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
       projetId: projet?.id,
       nom: projet?.nom ?? "",
       typeEspace: projet?.type_espace ?? "",
+      budget: projet?.budget ?? undefined,
       niveauMaturite: projet?.niveau_maturite ?? "",
       adresse: mapDBProjetToProjetAddress(projet),
       dateEcheance: monthDateToString(projet?.date_echeance),
@@ -80,6 +82,12 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
           asterisk={true}
           options={typeEspaceOptions}
           placeholder="Selectionnez un type d'espace"
+          disabled={disabled}
+        />
+        <CurrencyInputFormField
+          control={form.control}
+          path="budget"
+          label="Budget prévisionnel (en euros)"
           disabled={disabled}
         />
         <AddressInputFormField

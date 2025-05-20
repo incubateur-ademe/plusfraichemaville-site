@@ -14,6 +14,7 @@ import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
 import { Agent } from "@/src/components/agent-conversationnel/agent";
 import { DsfrHead, getHtmlAttributes } from "@/src/app/server-only-index";
+import MatomoScript from "@/src/components/matomo/matomo-script";
 
 const xtra_bold = localFont({
   src: "../../public/fonts/Marianne-ExtraBold.woff2",
@@ -50,6 +51,7 @@ export default async function RootLayout({ children }: { children: ReactElement 
   return (
     <html {...getHtmlAttributes({ lang })}>
       <head>
+        <MatomoScript />
         <DsfrHead
           doDisableFavicon={true}
           nonce={nonce}

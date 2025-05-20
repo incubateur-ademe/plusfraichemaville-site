@@ -11,6 +11,7 @@ import CalendrierRetourExperienceAccordion from "../retourExperience/CalendrierR
 import ItemRetourExperience from "../retourExperience/ItemRetourExperience";
 import RetourExperienceCard from "../retourExperience/RetourExperienceCard";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 type RetourExperienceContentProps = {
   retourExperience: RetourExperience;
@@ -41,8 +42,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             label={retourExperience.attributes.description}
             className={"mt-10 text-xl leading-8 [&_p]:text-xl [&_p]:leading-8"}
           />
-          {retourExperience.attributes.citations &&
-            retourExperience.attributes.citations.length > 0 &&
+          {!isEmpty(retourExperience.attributes.citations) &&
             retourExperience.attributes.citations.map((citation) => (
               <CustomDSFRQuote key={citation.auteur} citation={citation} className="mt-12" />
             ))}
@@ -62,7 +62,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
               />
             </div>
           </div>
-          {solutions && solutions.length > 0 && (
+          {!isEmpty(solutions) && (
             <>
               <h2 className="mb-6 mt-10 text-3xl">Solutions réalisées</h2>
               {solutions.map((solution) => (
@@ -75,7 +75,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
               ))}
             </>
           )}
-          {retourExperience.attributes.calendrier && retourExperience.attributes.calendrier.length > 0 && (
+          {!isEmpty(retourExperience.attributes.calendrier) && !isModal && (
             <div className="fr-accordions-group">
               <h2 className="mb-6 mt-10 text-3xl">Calendrier</h2>
               <CalendrierRetourExperienceAccordion etapes={retourExperience.attributes.calendrier} />
