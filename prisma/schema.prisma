@@ -267,6 +267,11 @@ model climadiag {
   nuits_chaudes_prevision     Json
   jours_vdc_ref               Float
   jours_vdc_prevision         Json
+  population                  Int               @default(0)
+
+  @@index([code_insee])
+  @@index([code_postal])
+  @@index([nom])
 }
 
 model aide {

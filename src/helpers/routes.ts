@@ -13,6 +13,7 @@ export const PFMV_ROUTES = {
   SURCHAUFFE_URBAINE_COMPRENDRE: "/surchauffe-urbaine/notions-cles",
   SURCHAUFFE_URBAINE_TIMING: "/surchauffe-urbaine/quand-faire-un-diagnostic",
   SURCHAUFFE_URBAINE_REX: "/surchauffe-urbaine/retour-experience",
+  SURCHAUFFE_URBAINE_TERRITOIRE: (codeInsee: string) => `/surchauffe-urbaine/territoire?codeInsee=${codeInsee}`,
   SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) =>
     `/surchauffe-urbaine/fiche-diagnostic/${ficheDiagnosticSlug}`,
   RETOUR_EXPERIENCE: (slug: string) => `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${slug}`,
@@ -85,6 +86,8 @@ export const GET_REX_WITH_CONTACTS_BY_ID = (rexId: number) => `/api/get-rex-with
 export const GET_REX_BY_SLUG = (rexSlug: string) => `/api/get-rex-by-slug?rexSlug=${rexSlug}`;
 
 export const POST_REVALIDATE_TAG = (tag?: string) => `/api/revalidate-cache?tag=${tag}`;
+
+export const SEARCH_CLIMADIAG_PUBLIC_INFO = (search?: string) => `/api/search-climadiag-public-info?search=${search}`;
 
 export const GET_FICHE_DIAGNOSTIC_BY_IDS = (ficheDiagnosticIds: number[]) =>
   `/api/get-fiches-diagnostic?ficheDiagnosticIds=${JSON.stringify(ficheDiagnosticIds)}`;

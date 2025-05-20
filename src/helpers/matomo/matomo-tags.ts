@@ -30,6 +30,7 @@ export const MATOMO_ACTIONS = {
   ANNUAIRE_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN: "annuaire-side-panel-view-projet-modal-open",
   DIAGNOSTIC_DOWNLOAD_RESULT: "diagnostic-result-download",
   DIAGNOSTIC_COMPUTE_RESULT: "diagnostic-compute-result",
+  SURCHAUFFE_TERRITOIRE_SEARCH: "surchauffe-urbaine-search-territoire",
 };
 
 export const WEBINAIRE_SUBSCRIPTION: MATOMO_EVENT = {
@@ -126,6 +127,12 @@ export const SURCHAUFFE_URBAINE_CHANGE_TIMING = (index: number): MATOMO_EVENT =>
   category: MATOMO_CATEGORIES.SITE_PUBLIC,
   action: MATOMO_ACTIONS.SURCHAUFFE_URBAINE_TIMING,
   name: `Clic pour changer de niveau d'action : « ${index} »`,
+});
+
+export const SURCHAUFFE_URBAINE_TERRITOIRE_SEARCH = (codeInsee: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SURCHAUFFE_TERRITOIRE_SEARCH,
+  name: `Recherche du code INSEE : « ${codeInsee} »`,
 });
 
 export const DIAGNOSTIC_DOWNLOAD_RESULT = {
