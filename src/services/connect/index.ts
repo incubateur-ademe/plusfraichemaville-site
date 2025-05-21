@@ -57,7 +57,7 @@ export const connectBatchSync = async (
   errors: ({ email: string; error: string } | { idProjet: string; error: string })[];
   message: string;
 }> => {
-  const contacts = usersWithAdminProjets.map(user => mapUserToConnectContact(user));
+  const contacts = usersWithAdminProjets.map((user) => mapUserToConnectContact(user));
   let createdContactsCount = 0;
   let createdProjetsCount = 0;
   const errors: ({ email: string; error: string } | { idProjet: string; error: string })[] = [];

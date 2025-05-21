@@ -21,7 +21,7 @@ export const mapUserToConnectContact = (user: UserWithCollectivite, abonnementNe
     dateCreation: dateToStringWithoutTime(user.created_at, "iso"),
     dateModification: dateToStringWithoutTime(user.updated_at, "iso"),
     telephone: agentconnectInfo.phone_number,
-    ...(abonnementNewsletter ? { abonnementNewsletter } : {})
+    ...(abonnementNewsletter ? { abonnementNewsletter } : {}),
   };
 };
 
