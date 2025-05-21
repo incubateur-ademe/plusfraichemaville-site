@@ -1,11 +1,14 @@
-import { ProjetWithAdminUser, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithAdminUser, UserWithAdminProjets, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { ConnectContact, ConnectProjet } from "./types";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 import { getNiveauMaturiteByCode } from "@/src/helpers/maturite-projet";
 
 const PFMV_SOURCE = "PFMV";
-export const mapUserToConnectContact = (user: UserWithCollectivite, abonnementNewsletter?: boolean): ConnectContact => {
+export const mapUserToConnectContact = (
+  user: UserWithCollectivite | UserWithAdminProjets,
+  abonnementNewsletter?: boolean,
+): ConnectContact => {
   const agentconnectInfo = user.agentconnect_info as {
     siret: string;
     phone_number: string;
