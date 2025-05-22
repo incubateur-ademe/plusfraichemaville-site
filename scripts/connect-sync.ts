@@ -1,7 +1,6 @@
 import { getUsersAndProjectsFromLastSync, saveCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
-import { batchSyncConnectContacts } from "@/src/services/connect";
-import { mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
+import { connectBatchSync } from "@/src/services/connect";
 import {
   makeConnectSyncBatchErrorWebhookData,
   makeConnectSyncBatchWebhookData,
@@ -35,9 +34,7 @@ const syncWithConnect = async () => {
     }));
 
     console.log("Début de la synchronisation avec Connect...");
-    const connectContacts = activeUsersAndProjects.map(mapUserToConnectContact);
-    const connectResult = await batchSyncConnectContacts(connectContacts);
-
+    const connectResult = await connectBatchSync(activeUsersAndProjects);
     if (!connectResult.success) {
       captureError("Erreur lors de la synchronisation avec Connect:", {
         errors: connectResult.errors,

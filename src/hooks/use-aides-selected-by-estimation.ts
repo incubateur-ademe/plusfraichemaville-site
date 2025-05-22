@@ -1,9 +1,10 @@
 import { AidesTerritoiresAidesResponse } from "@/src/components/financement/types";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
+import { SEARCH_AIDE_FOR_ESTIMATION_URL } from "@/src/helpers/routes";
 
-export const useAidesSelectedByEstimationFetcher = (estimationId: number) => {
+export const useAidesByEstimationFetcher = (estimationId: number, useNewVersion?: boolean) => {
   const { data, isLoading } = useImmutableSwrWithFetcher<AidesTerritoiresAidesResponse>(
-    `/api/search-aides-for-estimation?estimationId=${estimationId}`,
+    SEARCH_AIDE_FOR_ESTIMATION_URL(estimationId, useNewVersion),
   );
   return { data, isLoading };
 };

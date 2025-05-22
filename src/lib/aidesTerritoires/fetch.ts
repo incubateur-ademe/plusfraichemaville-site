@@ -20,13 +20,14 @@ export const fetchAideFromAidesTerritoiresById = async (aideTerritoireAideId: nu
 export const searchAidesFromAidesTerritoires = async (
   fichesSolutions: FicheSolution["attributes"][],
   collectivite: collectivite,
+  useNewVersion?: boolean,
 ) => {
   const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
   const perimeterId = await getPerimterIdIdOrFetchItFromAidesTerritoires(collectivite);
 
   return await callAidesTerritoiresApi<IApiAidesTerritoiresPaginatedAides>(
     `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?perimeter=${perimeterId}&text=${motsCles}
-    &itemsPerPage=1000&targeted_audiences=commune&targeted_audiences=epci`,
+    &itemsPerPage=1000&targeted_audiences=commune&targeted_audiences=epci${useNewVersion ? "&new=1" : ""}`,
   );
 };
 
