@@ -5,7 +5,7 @@ import { customRevalidateTag } from "@/src/helpers/revalidate-tag-call";
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
 
-const SCALEWAY_S3_URL = "plusfraichemaville.s3.fr-par.scw.cloud";
+const SCALEWAY_S3_URL = "pfmv-cms-prod.s3.fr-par.scw.cloud";
 const SCALEWAY_CDN_URL = "cdn.plusfraichemaville.fr";
 
 export const STRAPI_IMAGE_KEY_SIZE = {
