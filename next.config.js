@@ -61,6 +61,12 @@ const nextConfig = {
       },
       {
         protocol: "https",
+        hostname: "pfmv-cms-prod.s3.fr-par.scw.cloud",
+        port: "",
+        pathname: "/**",
+      },
+      {
+        protocol: "https",
         hostname: "plusfraichemaville-dev.s3.fr-par.scw.cloud",
         port: "",
         pathname: "/**",
