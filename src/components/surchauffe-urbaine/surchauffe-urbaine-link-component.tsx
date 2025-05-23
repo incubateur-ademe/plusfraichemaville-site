@@ -6,7 +6,7 @@ export const SurchauffeUrbaineLinkComponent = ({ className }: { className?: stri
     <div className={className}>
       <div className="pfmv-strong-card mx-8 flex w-fit flex-col gap-10 px-4 py-2 md:flex-row">
         <SurchauffeUrbaineLinkItem
-          linkText="Comprendre la surchauffe urbaine"
+          linkText="Comprendre les notions clés"
           linkUrl={PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE}
           pictoUrl="/images/surchauffe-urbaine/surchauffe-menu-comprendre.svg"
         />

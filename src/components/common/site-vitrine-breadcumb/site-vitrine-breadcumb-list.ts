@@ -23,7 +23,7 @@ const BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_COMPRENDRE: BreadcrumbSegment = {
   linkProps: {
     href: PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE,
   },
-  label: "Comprendre la surchauffe urbaine",
+  label: "Comprendre les notions clés",
 };
 
 const BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_TIMING: BreadcrumbSegment = {

@@ -30,7 +30,7 @@ export const SurchauffeUrbaineTerritoireSearch = ({
   const submitSearch = () => {
     if (selectedAddress) {
       trackEvent(SURCHAUFFE_URBAINE_TERRITOIRE_SEARCH(selectedAddress.value));
-      router.push(PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE(selectedAddress.value));
+      router.push(PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE_AVEC_CODE(selectedAddress.value));
     }
   };
 

@@ -601,3 +601,16 @@ ul.arrow-list li::before {
 .fr-breadcrumb__link {
   @apply !font-normal;
 }
+
+h5.fr-nav__link {
+  @apply !font-bold;
+}
+
+.fr-mega-menu .fr-col-12 {
+  flex: 0 0 33%;
+  max-width: 33%;
+}
+
+a.fr-nav__link {
+  box-shadow: 0 calc(1rem + 1px) 0 -1rem var(--border-default-grey);
+}

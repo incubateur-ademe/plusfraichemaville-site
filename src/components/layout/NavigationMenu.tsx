@@ -17,41 +17,61 @@ export default function NavigationMenu() {
       items={[
         {
           isActive: pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION),
-          text: "Surchauffe urbaine",
-          menuLinks: [
-            {
-              linkProps: {
-                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
-                target: "_self",
-                onClick: cancelCurrentProjet,
+          text: "Comprendre",
+          megaMenu: {
+            categories: [
+              {
+                categoryMainText: "Comprendre la surchauffe urbaine",
+                links: [
+                  {
+                    linkProps: {
+                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
+                      target: "_self",
+                      onClick: cancelCurrentProjet,
+                    },
+                    text: "La ville dans une France à +4°C",
+                  },
+                  {
+                    linkProps: {
+                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE,
+                      target: "_self",
+                      onClick: cancelCurrentProjet,
+                    },
+                    text: "Comprendre les notions clés",
+                  },
+                  {
+                    linkProps: {
+                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
+                      target: "_self",
+                      onClick: cancelCurrentProjet,
+                    },
+                    text: "Pourquoi et quand faire un diagnostic",
+                  },
+                  {
+                    linkProps: {
+                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE,
+                      target: "_self",
+                      onClick: cancelCurrentProjet,
+                    },
+                    text: "Connaître la sensibilité actuelle et future de ma ville à la surchauffe urbaine",
+                  },
+                ],
               },
-              text: "La ville dans une France à +4°C",
-            },
-            {
-              linkProps: {
-                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE,
-                target: "_self",
-                onClick: cancelCurrentProjet,
+              {
+                categoryMainText: "Comprendre comment rafraîchir la ville",
+                links: [
+                  {
+                    linkProps: {
+                      href: PFMV_ROUTES.FICHES_SOLUTIONS,
+                      target: "_self",
+                      onClick: cancelCurrentProjet,
+                    },
+                    text: "Explorer toutes les solutions",
+                  },
+                ],
               },
-              text: "Comprendre la surchauffe urbaine",
-            },
-            {
-              linkProps: {
-                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
-                target: "_self",
-                onClick: cancelCurrentProjet,
-              },
-              text: "Pourquoi et quand faire un diagnostic",
-            },
-            {
-              linkProps: {
-                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REX,
-                target: "_self",
-                onClick: cancelCurrentProjet,
-              },
-              text: "Diagnostics réalisés par les collectivités",
-            },
-          ],
+            ],
+          },
         },
         {
           linkProps: { href: PFMV_ROUTES.AIDE_DECISION, target: "_self", onClick: cancelCurrentProjet },
