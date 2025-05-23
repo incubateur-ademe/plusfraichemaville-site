@@ -21,6 +21,8 @@ import AddressInputFormField from "@/src/components/common/address-input-form-fi
 import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
 import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
 import CurrencyInputFormField from "@/src/components/common/currency-input-form-field";
+import MonthPickerFormField from "@/src/components/common/MonthPickerFormField";
+import "react-datepicker/dist/react-datepicker.css";
 
 type ProjetInfoFormProps = {
   projet?: ProjetWithRelations;
@@ -96,13 +98,11 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
           label="Si je la connais, adresse du lieu de l'intervention"
           disabled={disabled}
         />
-        <InputFormField
+        <MonthPickerFormField
           control={form.control}
           path="dateEcheance"
           label="Date de livraison souhaitée"
           asterisk={true}
-          type="month"
-          placeholder="YYYY-MM"
           disabled={disabled}
         />
         <SelectFormField
