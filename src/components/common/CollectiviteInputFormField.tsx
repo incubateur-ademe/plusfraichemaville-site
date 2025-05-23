@@ -70,7 +70,14 @@ const CollectiviteInputFormField = <T extends FieldValues>({
         }
 
         const input = (
-          <Combobox defaultValue={value} onChange={onChange} disabled={disabled} as="div" className="relative mt-2">
+          <Combobox
+            defaultValue={value}
+            value={value ?? null}
+            onChange={onChange}
+            disabled={disabled}
+            as="div"
+            className="relative mt-2"
+          >
             <div className="flex items-center">
               <ComboboxInput
                 aria-describedby={ariaDescribedBy}
