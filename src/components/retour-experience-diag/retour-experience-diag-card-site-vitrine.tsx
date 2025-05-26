@@ -19,7 +19,7 @@ export const RetourExperienceDiagCardSiteVitrine = ({ rex, className }: RetourEx
 
   return (
     <Link
-      href={PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC(slug)}
+      href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(slug)}
       className={clsx(className, "pfmv-card flex w-80 flex-col bg-white")}
     >
       <div className="relative mb-5 h-[12rem] ">

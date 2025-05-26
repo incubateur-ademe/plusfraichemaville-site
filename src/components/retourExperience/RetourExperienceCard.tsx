@@ -27,7 +27,7 @@ export default function RetourExperienceCard({
   const { projetId } = useParams();
   let url = projetId
     ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_REX(+projetId, selectRex.slug)
-    : `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${selectRex.slug}`;
+    : `${PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET}/${selectRex.slug}`;
 
   return (
     <Link className={`pfmv-card flex min-h-[26rem] w-72 flex-col ${className}`} href={url}>

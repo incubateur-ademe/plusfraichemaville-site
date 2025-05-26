@@ -186,7 +186,7 @@ export const homepageData = {
     ],
     cta: {
       label: "Voir tous les projets réalisés",
-      url: PFMV_ROUTES.RETOURS_EXPERIENCE,
+      url: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
     },
   },
   newsletter: {

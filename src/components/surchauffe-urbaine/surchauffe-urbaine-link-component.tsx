@@ -17,7 +17,7 @@ export const SurchauffeUrbaineLinkComponent = ({ className }: { className?: stri
         />
         <SurchauffeUrbaineLinkItem
           linkText="Diagnostics réalisés par les collectivités"
-          linkUrl={PFMV_ROUTES.SURCHAUFFE_URBAINE_REX}
+          linkUrl={PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC}
           pictoUrl="/images/surchauffe-urbaine/surchauffe-menu-rex.svg"
         />
       </div>

@@ -606,11 +606,21 @@ h5.fr-nav__link {
   @apply !font-bold;
 }
 
-.fr-mega-menu .fr-col-12 {
-  flex: 0 0 33%;
-  max-width: 33%;
+@media (min-width: 576px) {
+  .fr-mega-menu .fr-col-12 {
+    flex: 0 0 33% !important;
+    max-width: 33% !important;
+  }
 }
 
 a.fr-nav__link {
   box-shadow: 0 calc(1rem + 1px) 0 -1rem var(--border-default-grey);
+}
+
+.menuCategoryShadowNone a.fr-nav__link {
+  box-shadow: none !important;
+}
+
+.menuCategoryShadowNone h5.fr-mega-menu__category {
+  box-shadow: none !important;
 }

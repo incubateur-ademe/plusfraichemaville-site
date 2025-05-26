@@ -35,7 +35,7 @@ const BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_TIMING: BreadcrumbSegment = {
 
 const BREADCRUMB_SEGMENT_SURCHAUFFE_URBAINE_REX_LISTE: BreadcrumbSegment = {
   linkProps: {
-    href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REX,
+    href: PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC,
   },
   label: "Diagnostics réalisés par les collectivités",
 };

@@ -5,6 +5,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useSession } from "next-auth/react";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
+import { NavigationCard } from "@/src/components/navigation/navigation-card";
 
 export default function NavigationMenu() {
   const pathname = usePathname();
@@ -16,7 +17,11 @@ export default function NavigationMenu() {
     <MainNavigation
       items={[
         {
-          isActive: pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION),
+          isActive:
+            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION ||
+            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE ||
+            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE ||
+            pathname.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS),
           text: "Comprendre",
           megaMenu: {
             categories: [
@@ -38,14 +43,6 @@ export default function NavigationMenu() {
                       onClick: cancelCurrentProjet,
                     },
                     text: "Comprendre les notions clés",
-                  },
-                  {
-                    linkProps: {
-                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
-                      target: "_self",
-                      onClick: cancelCurrentProjet,
-                    },
-                    text: "Pourquoi et quand faire un diagnostic",
                   },
                   {
                     linkProps: {
@@ -74,19 +71,104 @@ export default function NavigationMenu() {
           },
         },
         {
-          linkProps: { href: PFMV_ROUTES.AIDE_DECISION, target: "_self", onClick: cancelCurrentProjet },
-          text: "Découvrir",
-          isActive: pathname?.startsWith(PFMV_ROUTES.AIDE_DECISION),
-        },
-        {
+          isActive:
+            pathname?.startsWith(PFMV_ROUTES.AIDE_DECISION) ||
+            pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING),
           text: "Passer à l'action",
-          isActive: pathname?.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS),
-          linkProps: { href: PFMV_ROUTES.FICHES_SOLUTIONS, target: "_self", onClick: cancelCurrentProjet },
+          megaMenu: {
+            categories: [
+              {
+                categoryMainLink: {
+                  text: (
+                    <NavigationCard
+                      imageUrl="/images/navigation/faire-diagnostic.webp"
+                      title="Faire un diagnostic de la surchauffe urbaine"
+                    />
+                  ),
+                  linkProps: {
+                    href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
+                    target: "_self",
+                    onClick: cancelCurrentProjet,
+                  },
+                },
+                links: [],
+              },
+              {
+                categoryMainLink: {
+                  text: (
+                    <NavigationCard
+                      imageUrl="/images/navigation/trouver-solution.webp"
+                      title="Trouver une solution adaptée à votre espace à rafraîchir"
+                    />
+                  ),
+                  linkProps: {
+                    href: PFMV_ROUTES.AIDE_DECISION,
+                    target: "_self",
+                    onClick: cancelCurrentProjet,
+                  },
+                },
+                links: [],
+              },
+              {
+                categoryMainLink: {
+                  text: (
+                    <NavigationCard
+                      imageUrl="/images/navigation/creer-projet.webp"
+                      title="Créer un projet de rafraîchissement de A à Z"
+                    />
+                  ),
+                  linkProps: {
+                    href: PFMV_ROUTES.ESPACE_PROJET,
+                    target: "_self",
+                    onClick: cancelCurrentProjet,
+                  },
+                },
+                links: [],
+              },
+            ],
+          },
         },
         {
-          linkProps: { href: PFMV_ROUTES.RETOURS_EXPERIENCE, target: "_self", onClick: cancelCurrentProjet },
+          isActive:
+            pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC) ||
+            pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET),
           text: "S'inspirer",
-          isActive: pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE),
+          megaMenu: {
+            categories: [
+              {
+                categoryMainLink: {
+                  text: (
+                    <NavigationCard
+                      imageUrl="/images/navigation/rex-diagnostic.webp"
+                      title="S'inspirer des diagnostics réalisés par les collectivités"
+                    />
+                  ),
+                  linkProps: {
+                    href: PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC,
+                    target: "_self",
+                    onClick: cancelCurrentProjet,
+                  },
+                },
+                links: [],
+              },
+              {
+                categoryMainLink: {
+                  text: (
+                    <NavigationCard
+                      imageUrl="/images/navigation/rex-projet.webp"
+                      title="S'inspirer des projets réalisés par les collectivités"
+                    />
+                  ),
+                  linkProps: {
+                    href: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
+                    target: "_self",
+                    onClick: cancelCurrentProjet,
+                  },
+                },
+                links: [],
+              },
+            ],
+          },
         },
         {
           linkProps: {
