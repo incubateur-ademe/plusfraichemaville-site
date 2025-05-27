@@ -52,9 +52,9 @@ export const SurchauffeUrbaineTerritoireSearch = ({
   const loadSuggestions = debounce(searchClimadiagInfos, 200);
 
   return (
-    <div className={clsx("pfmv-strong-card px-12 py-10 text-left", className)}>
+    <div className={clsx("pfmv-card-no-hover px-12 py-10 text-left", className)}>
       <div className="text-center text-[1.375rem] font-bold">
-        Découvrez en un coup d’œil comment votre territoire est exposé à la surchauffe urbaine
+        Connaître la sensibilité actuelle et future de ma ville à la surchauffe urbaine
       </div>
       <div className="mx-auto mt-4 flex max-w-[30rem] flex-row">
         <AsyncSelect
