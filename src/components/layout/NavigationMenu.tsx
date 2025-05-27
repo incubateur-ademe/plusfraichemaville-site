@@ -75,6 +75,7 @@ export default function NavigationMenu() {
             pathname?.startsWith(PFMV_ROUTES.AIDE_DECISION) ||
             pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING),
           text: "Passer à l'action",
+          className: "menuCategoryShadowNone",
           megaMenu: {
             categories: [
               {
@@ -133,6 +134,7 @@ export default function NavigationMenu() {
             pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC) ||
             pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET),
           text: "S'inspirer",
+          className: "menuCategoryShadowNone",
           megaMenu: {
             categories: [
               {
