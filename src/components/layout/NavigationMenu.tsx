@@ -33,6 +33,7 @@ export default function NavigationMenu() {
                       href: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
                       target: "_self",
                       onClick: cancelCurrentProjet,
+                      prefetch: false,
                     },
                     text: "La ville dans une France à +4°C",
                   },
@@ -41,6 +42,7 @@ export default function NavigationMenu() {
                       href: PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE,
                       target: "_self",
                       onClick: cancelCurrentProjet,
+                      prefetch: false,
                     },
                     text: "Comprendre les notions clés",
                   },
@@ -49,6 +51,7 @@ export default function NavigationMenu() {
                       href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE,
                       target: "_self",
                       onClick: cancelCurrentProjet,
+                      prefetch: false,
                     },
                     text: "Connaître la sensibilité actuelle et future de ma ville à la surchauffe urbaine",
                   },
@@ -62,6 +65,7 @@ export default function NavigationMenu() {
                       href: PFMV_ROUTES.FICHES_SOLUTIONS,
                       target: "_self",
                       onClick: cancelCurrentProjet,
+                      prefetch: false,
                     },
                     text: "Explorer toutes les solutions",
                   },
@@ -90,6 +94,7 @@ export default function NavigationMenu() {
                     href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
                     target: "_self",
                     onClick: cancelCurrentProjet,
+                    prefetch: false,
                   },
                 },
                 links: [],
@@ -106,6 +111,7 @@ export default function NavigationMenu() {
                     href: PFMV_ROUTES.AIDE_DECISION,
                     target: "_self",
                     onClick: cancelCurrentProjet,
+                    prefetch: false,
                   },
                 },
                 links: [],
@@ -122,6 +128,7 @@ export default function NavigationMenu() {
                     href: PFMV_ROUTES.ESPACE_PROJET,
                     target: "_self",
                     onClick: cancelCurrentProjet,
+                    prefetch: false,
                   },
                 },
                 links: [],
@@ -149,6 +156,7 @@ export default function NavigationMenu() {
                     href: PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC,
                     target: "_self",
                     onClick: cancelCurrentProjet,
+                    prefetch: false,
                   },
                 },
                 links: [],
@@ -165,6 +173,7 @@ export default function NavigationMenu() {
                     href: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
                     target: "_self",
                     onClick: cancelCurrentProjet,
+                    prefetch: false,
                   },
                 },
                 links: [],
@@ -180,18 +189,29 @@ export default function NavigationMenu() {
               cancelCurrentProjet();
               setBadgeOff(NotificationElements.selectionMenuItem);
             },
+            prefetch: false,
           },
           text: "Ma sélection",
           isActive: pathname?.startsWith(PFMV_ROUTES.MES_FICHES_SOLUTIONS),
           className: NotificationElements.selectionMenuItem,
         },
         {
-          linkProps: { href: PFMV_ROUTES.WEBINAIRES, target: "_self", onClick: cancelCurrentProjet },
+          linkProps: {
+            href: PFMV_ROUTES.WEBINAIRES,
+            target: "_self",
+            onClick: cancelCurrentProjet,
+            prefetch: false,
+          },
           text: "Webinaires",
           isActive: pathname?.startsWith(PFMV_ROUTES.WEBINAIRES),
         },
         {
-          linkProps: { href: PFMV_ROUTES.CONTACT, target: "_self", onClick: cancelCurrentProjet },
+          linkProps: {
+            href: PFMV_ROUTES.CONTACT,
+            target: "_self",
+            onClick: cancelCurrentProjet,
+            prefetch: false,
+          },
           text: "Nous contacter",
           isActive: pathname?.startsWith(PFMV_ROUTES.CONTACT),
         },
@@ -202,18 +222,21 @@ export default function NavigationMenu() {
                   {
                     linkProps: {
                       href: PFMV_ROUTES.ESPACE_PROJET_LISTE,
+                      prefetch: false,
                     },
                     text: "Accéder à mes projets",
                   },
                   {
                     linkProps: {
                       href: PFMV_ROUTES.MON_PROFIL,
+                      prefetch: false,
                     },
                     text: "Mon profil",
                   },
                   {
                     linkProps: {
                       href: PFMV_ROUTES.DECONNEXION,
+                      prefetch: false,
                     },
                     text: "Se déconnecter",
                   },
@@ -222,6 +245,7 @@ export default function NavigationMenu() {
                   {
                     linkProps: {
                       href: PFMV_ROUTES.CONNEXION,
+                      prefetch: false,
                     },
                     text: "Se connecter",
                   },
