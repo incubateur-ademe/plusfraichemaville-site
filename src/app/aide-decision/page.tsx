@@ -4,7 +4,7 @@ import { getAideDecisionFirstSteps } from "@/src/lib/strapi/queries/aideDecision
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
-export const metadata: Metadata = computeMetadata("Explorez nos solutions");
+export const metadata: Metadata = computeMetadata("Trouvez une solution pour votre espace");
 
 export default async function Posts() {
   const aideDecisionFirstSteps = await getAideDecisionFirstSteps();

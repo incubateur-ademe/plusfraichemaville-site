@@ -1,8 +1,11 @@
-import { RetourExperienceServer } from "@/src/components/projet/projet-retour-experience-server";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getRetourExperienceBySlug } from "@/src/lib/strapi/queries/retoursExperienceQueries";
+import { notFound } from "next/navigation";
+import { RetourExperienceContent } from "@/src/components/projet/projet-retour-experience-content";
+import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
+import { BREADCRUMB_REX_PROJET } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
 
 type RetourExperiencePageProps = {
   params: Promise<{ retourExperienceSlug: string; projetId: string }>;
@@ -20,5 +23,18 @@ export async function generateMetadata(props: RetourExperiencePageProps): Promis
 
 export default async function RetourExperiencePage(props: RetourExperiencePageProps) {
   const params = await props.params;
-  return <RetourExperienceServer params={params} />;
+  const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
+
+  if (!retourExperience) {
+    notFound();
+  }
+
+  return (
+    <>
+      <div className="fr-container">
+        <SiteVitrineBreadcrumb step={BREADCRUMB_REX_PROJET(retourExperience.attributes.titre)} />
+      </div>
+      <RetourExperienceContent retourExperience={retourExperience} />
+    </>
+  );
 }
