@@ -42,6 +42,7 @@ export const HomepageStart = () => {
                     "mx-auto !block lg:!inline",
                   )}
                   href={line.cta.url}
+                  prefetch={false}
                 >
                   {line.cta.label}
                 </Link>

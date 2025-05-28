@@ -23,6 +23,7 @@ export const HomepageInspirer = () => {
           "border-[1px] border-pfmv-navy text-pfmv-navy !shadow-none",
         )}
         href={inspirer.cta.url}
+        prefetch={false}
       >
         {inspirer.cta.label}
       </Link>
