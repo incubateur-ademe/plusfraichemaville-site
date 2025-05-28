@@ -222,21 +222,21 @@ export default function NavigationMenu() {
                   {
                     linkProps: {
                       href: PFMV_ROUTES.ESPACE_PROJET_LISTE,
-                      prefetch: false
+                      prefetch: false,
                     },
                     text: "Accéder à mes projets",
                   },
                   {
                     linkProps: {
                       href: PFMV_ROUTES.MON_PROFIL,
-                      prefetch: false
+                      prefetch: false,
                     },
                     text: "Mon profil",
                   },
                   {
                     linkProps: {
                       href: PFMV_ROUTES.DECONNEXION,
-                      prefetch: false
+                      prefetch: false,
                     },
                     text: "Se déconnecter",
                   },
@@ -245,7 +245,7 @@ export default function NavigationMenu() {
                   {
                     linkProps: {
                       href: PFMV_ROUTES.CONNEXION,
-                      prefetch: false
+                      prefetch: false,
                     },
                     text: "Se connecter",
                   },
