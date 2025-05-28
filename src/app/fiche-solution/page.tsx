@@ -2,7 +2,7 @@ import { FichesSolutions } from "@/src/components/ficheSolution/fiches-solutions
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
-export const metadata: Metadata = computeMetadata("Passez à l’action");
+export const metadata: Metadata = computeMetadata("Explorer nos solutions");
 
 export default async function FichesSolutionsPage(props: {
   searchParams: Promise<{
@@ -12,5 +12,10 @@ export default async function FichesSolutionsPage(props: {
   }>;
 }) {
   const searchParams = await props.searchParams;
-  return <FichesSolutions searchParams={searchParams} />;
+  return (
+    <div className="fr-container">
+      <h1 className="fr-h3 mt-6">Explorer toutes les solutions de rafraîchissement urbain</h1>
+      <FichesSolutions searchParams={searchParams} />
+    </div>
+  );
 }

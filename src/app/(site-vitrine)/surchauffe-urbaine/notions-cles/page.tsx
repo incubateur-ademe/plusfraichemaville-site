@@ -15,7 +15,7 @@ export default async function SurchauffeUrbaineNotionsClesPage() {
       <div className="fr-container">
         <SiteVitrineBreadcrumb step={BREADCRUMB_SURCHAUFFE_URBAINE_COMPRENDRE} />
         <h1 className="mt-8 text-center text-[1.75rem] font-bold text-dsfr-text-title-grey">
-          Comprendre la surchauffe urbaine
+          Comprendre les notions clés
         </h1>
         <div className="mx-auto max-w-[51rem] text-center text-lg">
           {`Pour bien comprendre la surchauffe urbaine, il est pertinent de considérer le phénomène climatique qui la 

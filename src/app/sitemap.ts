@@ -3,20 +3,20 @@ import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQ
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { getRetoursExperiencesDiag } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_URL_SITE ?? "";
   const staticPages = ["accessibilite", "budget", "contact", "mentions-legales", "stats", "connexion", "webinaires"];
   const importantPages = [
     "",
-    "aide-decision",
-    "fiches-diagnostic",
-    "fiche-solution",
-    "projet",
-    "surchauffe-urbaine",
-    "surchauffe-urbaine/notions-cles",
-    "surchauffe-urbaine/quand-faire-un-diagnostic",
-    "surchauffe-urbaine/retour-experience",
+    PFMV_ROUTES.AIDE_DECISION,
+    PFMV_ROUTES.FICHES_SOLUTIONS,
+    PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
+    PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC,
+    PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
+    PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE,
+    PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
   ];
   const allFichesSolutions = await getAllFichesSolutions();
   const allRetourExperiences = await getRetoursExperiences();
@@ -24,14 +24,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const allRetourExperiencesDiag = await getRetoursExperiencesDiag();
 
   const staticUrls = staticPages.map((page) => ({
-    url: `${baseUrl}/${page}`,
+    url: getFullUrl(page),
     changeFrequency: "monthly" as const,
     lastModified: new Date(),
     priority: 0.5,
   }));
 
   const importantUrls = importantPages.map((page) => ({
-    url: `${baseUrl}/${page}`,
+    url: getFullUrl(page),
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: 1.0,
@@ -45,21 +45,21 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const retourExperiencePages = allRetourExperiences.map((page) => ({
-    url: `${baseUrl}/projet/${page.attributes.slug}`,
+    url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(page.attributes.slug)),
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: 0.8,
   }));
 
   const ficheDiagnosticPages = allFichesDiagnostic.map((page) => ({
-    url: `${baseUrl}/surchauffe-urbaine/fiche-diagnostic/${page.attributes.slug}`,
+    url: getFullUrl(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(page.attributes.slug)),
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: 0.8,
   }));
 
   const rexDiagPages = allRetourExperiencesDiag.map((page) => ({
-    url: `${baseUrl}/surchauffe-urbaine/retour-experience/${page.attributes.slug}`,
+    url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(page.attributes.slug)),
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: 0.8,

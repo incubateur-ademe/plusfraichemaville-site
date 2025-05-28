@@ -37,7 +37,7 @@ const rexToAquagirRex = (rex: RetourExperience): AquagirRetourExperience => ({
     ],
     " ",
   ),
-  url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rex.attributes.slug)),
+  url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rex.attributes.slug)),
   codeInsee: (rex.attributes.location as GeoJsonAdresse).properties.citycode,
   datePublication: rex.attributes.publishedAt,
   image: getStrapiImageUrl(rex.attributes.image_principale, "medium"),

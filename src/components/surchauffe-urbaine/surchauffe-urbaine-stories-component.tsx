@@ -1,11 +1,7 @@
-import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { getRetourExperienceDiagStoriesBySlugs } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
-import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
 import { SurchauffeUrbaineStories } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-stories";
 import { isEmpty } from "@/src/helpers/listUtils";
-// eslint-disable-next-line max-len
-import { SurchauffeUrbaineTerritoireSearch } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-territoire-search";
 
 export const SurchauffeUrbaineStoriesComponent = async ({ className }: { className?: string }) => {
   const rexDiagData = await getRetourExperienceDiagStoriesBySlugs([
@@ -18,14 +14,10 @@ export const SurchauffeUrbaineStoriesComponent = async ({ className }: { classNa
   ]);
   return (
     <div className={clsx("bg-dsfr-background-alt-blue-france py-9 text-center", className)}>
-      <div className="text-center text-[1.375rem] font-bold text-pfmv-navy">
-        Votre collectivité est confrontée à un problème de surchauffe urbaine ?
+      <div className="mb-8 text-center text-[1.375rem] font-bold text-pfmv-navy">
+        Inspirez-vous des collectivités qui ont réalisé des diagnostics de surchauffe urbaine.
       </div>
-      <Button className="mb-12 mt-4 rounded-3xl" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
-        {"Démarrer sur l'espace projet !"}
-      </Button>
       {!isEmpty(rexDiagData) && <SurchauffeUrbaineStories rexDiagStories={rexDiagData} />}
-      <SurchauffeUrbaineTerritoireSearch className="fr-container mt-12" />
     </div>
   );
 };

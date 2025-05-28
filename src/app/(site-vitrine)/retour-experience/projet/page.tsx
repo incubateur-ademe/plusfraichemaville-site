@@ -8,5 +8,10 @@ export default async function RetoursExperiencesPage(props: {
   searchParams: Promise<{ espaceFilter: string | undefined; regionFilter: string | undefined }>;
 }) {
   const searchParams = await props.searchParams;
-  return <RetoursExperiences searchParams={searchParams} />;
+  return (
+    <div className="fr-container">
+      <h1 className="fr-h3 !mb-2 mt-8">Projets réalisés par les collectivités</h1>
+      <RetoursExperiences searchParams={searchParams} />
+    </div>
+  );
 }

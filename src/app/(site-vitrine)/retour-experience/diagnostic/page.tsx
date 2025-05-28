@@ -4,8 +4,6 @@ import { getRetoursExperiencesDiag } from "@/src/lib/strapi/queries/retour-exper
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import AccomagnementEspaceProjetCard from "@/src/components/common/accomagnement-espace-projet-card";
 // eslint-disable-next-line max-len
-import { BREADCRUMB_SURCHAUFFE_URBAINE_REX_LISTE } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
-import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
 
 export const metadata: Metadata = computeMetadata("Exemples de diagnostic réalisé par les collectivités");
 
@@ -14,10 +12,7 @@ export default async function SurchauffeUrbaineListeRetourExperiencePage() {
 
   return (
     <div className="fr-container">
-      <SiteVitrineBreadcrumb step={BREADCRUMB_SURCHAUFFE_URBAINE_REX_LISTE} />
-      <h1 className="!mb-2 mt-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">
-        Diagnostics réalisés par les collectivités
-      </h1>
+      <h1 className="fr-h3 !mb-2 mt-8">Diagnostics réalisés par les collectivités</h1>
       <div className=" text-lg">
         Découvrez les retours d’expérience des collectivités qui ont réalisé des diagnostics
       </div>

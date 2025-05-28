@@ -11,6 +11,7 @@ export const SurchauffeUrbaineTimingSlideControllers = () => {
           "absolute -top-0 size-10 -translate-y-1/2",
           "cursor-pointer transition-[background] duration-300 hover:!bg-pfmv-navy ",
           "disabled:hidden",
+          "hidden md:flex",
           "splide__arrow splide__arrow--prev -left-12 rotate-180",
         )}
       >
@@ -25,6 +26,7 @@ export const SurchauffeUrbaineTimingSlideControllers = () => {
           "absolute -top-0 size-10 -translate-y-1/2",
           "cursor-pointer transition-[background] duration-300 hover:!bg-pfmv-navy ",
           "disabled:hidden",
+          "hidden md:flex",
           "splide__arrow splide__arrow--next -right-12",
         )}
       >

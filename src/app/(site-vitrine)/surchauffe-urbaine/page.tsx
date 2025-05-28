@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
-import { SurchauffeUrbaineLinkComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-link-component";
 import { TeaserDiagnosticComponent } from "@/src/components/surchauffe-urbaine/teaser-diagnostic-component";
 // eslint-disable-next-line max-len
 import { SurchauffeUrbaineStoriesComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-stories-component";
+// eslint-disable-next-line max-len
+import { SurchauffeUrbaineTerritoireSearch } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-territoire-search";
 
 export const metadata: Metadata = computeMetadata("La ville dans une France à +4°C");
 
@@ -24,7 +25,7 @@ export default async function SurchauffeUrbaineIntroductionPage() {
          de tous.`}
         </div>
       </div>
-      <SurchauffeUrbaineLinkComponent className="mb-9 mt-9 flex justify-center" />
+      <SurchauffeUrbaineTerritoireSearch className="fr-container my-12" />
       <SurchauffeUrbaineStoriesComponent />
       <TeaserDiagnosticComponent className="mt-8" />
     </>

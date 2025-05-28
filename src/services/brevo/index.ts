@@ -64,13 +64,15 @@ const computeProjetCreationEmailParam = (
       nomProjet: projet.nom,
       nomUtilisateur: projet.creator.nom || "",
       rex1Titre: rexExamples[0].attributes.titre,
-      rex1Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rexExamples[0].attributes.slug)),
+      rex1Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[0].attributes.slug)),
       rex2Titre: rexExamples[1].attributes.titre,
-      rex2Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rexExamples[1].attributes.slug)),
+      rex2Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[1].attributes.slug)),
       rex3Titre: rexExamples[2].attributes.titre,
-      rex3Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rexExamples[2].attributes.slug)),
+      rex3Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[2].attributes.slug)),
       rex4Titre: rexExamples[3]?.attributes.titre,
-      ...(rexExamples[3] && { rex4Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE(rexExamples[3]?.attributes.slug)) }),
+      ...(rexExamples[3] && {
+        rex4Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[3]?.attributes.slug)),
+      }),
     };
   }
 };

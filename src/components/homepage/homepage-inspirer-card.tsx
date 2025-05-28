@@ -16,7 +16,7 @@ export const HomepageInspirerCard = ({
   return featured ? (
     <div>
       <RetourExperienceCard retourExperience={rex as unknown as RexInHome} className="mx-auto mb-8 flex lg:hidden" />
-      <Link href={`${PFMV_ROUTES.RETOURS_EXPERIENCE}/${rex.slug}`} className="hidden !bg-none lg:inline-block">
+      <Link href={`${PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET}/${rex.slug}`} className="hidden !bg-none lg:inline-block">
         <div className="pfmv-card mb-10 flex gap-8 px-8">
           <div className="relative flex w-[427px] shrink-0 items-center justify-center py-10">
             <Image

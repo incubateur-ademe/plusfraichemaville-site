@@ -21,7 +21,7 @@ export const HomepageStory = ({ story }: HomepageStoryProps) => {
 
   return (
     <div className="group">
-      <Link href={`${PFMV_ROUTES.FICHES_SOLUTIONS}/${story.slug}`}>
+      <Link href={`${PFMV_ROUTES.FICHES_SOLUTIONS}/${story.slug}`} prefetch={false}>
         <div
           className={clsx(
             "flex shrink-0 flex-col justify-end rounded-2xl pt-5 md:h-[540px] md:w-[358px]",
