@@ -153,3 +153,9 @@ export const SITE_VITRINE_BOOKMARK_FICHE = {
   action: MATOMO_ACTIONS.SITE_VITRINE_BOOKMARK,
   name: "Sauvegarde d'une fiche à partir du site vitrine",
 };
+
+export const ESPACE_PROJET_BOOKMARK_FICHE = {
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.SITE_VITRINE_BOOKMARK,
+  name: "Sauvegarde d'une fiche à partir de l'espace projet",
+};

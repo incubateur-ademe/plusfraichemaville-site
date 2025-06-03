@@ -8,7 +8,6 @@ import { ChangeEvent, useState } from "react";
 
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
 import { Hidden } from "../hidden";
-import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
 import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
@@ -94,7 +93,6 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
       <Link
         onClick={() => {
           modal.close();
-          setBadgeOff(NotificationElements.selectionMenuItem);
         }}
         href={type === TypeFiche.solution ? PFMV_ROUTES.MES_FICHES_SOLUTIONS : PFMV_ROUTES.MES_FICHES_SOLUTIONS}
         className="fr-btn fr-btn--secondary mr-4 !min-h-fit rounded-3xl !text-sm"

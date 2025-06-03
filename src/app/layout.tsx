@@ -7,8 +7,6 @@ import { Toaster } from "react-hot-toast";
 import MainLayoutProviders from "@/src/components/layout/MainLayoutProviders";
 import { ProjetStoreServer } from "@/src/stores/projets/server";
 import { UserStoreServer } from "@/src/stores/user/server";
-// eslint-disable-next-line max-len
-import { GenericFichesSaverFromLocalStorage } from "@/src/components/common/generic-save-fiche/generic-saver-from-local-storage";
 import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
@@ -70,7 +68,6 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <ConsentBannerAndConsentManagement />
           <ProjetStoreServer />
           <UserStoreServer />
-          <GenericFichesSaverFromLocalStorage />
           <AppHeader />
           <Toaster position="bottom-left" />
           <div className={`${xtra_bold.variable}`}>{children}</div>

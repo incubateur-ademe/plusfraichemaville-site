@@ -2,7 +2,6 @@ import { TypeFiche } from "@/src/helpers/common";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { FicheType } from "@prisma/client";
 
-export const BOOKMARK_FS_KEY = "bookmark-fs-id";
 export type FicheBookmarkedSolution = {
   projectName: string;
   ficheSolutionIds: number[];
@@ -107,16 +106,6 @@ export const mergeFicheBookmarkedSolutions = (
     projectName,
     ficheSolutionIds,
   }));
-};
-
-export const getAllSavedFichesFromLocalStorage = () => {
-  const fichesSolutionsBookmarked = localStorage.getItem(BOOKMARK_FS_KEY);
-
-  const fichesSolutions = JSON.parse(fichesSolutionsBookmarked ?? "[]") as FichesBookmarked[];
-
-  return {
-    fichesSolutions,
-  };
 };
 
 export const checkIfFicheIsSaved = ({

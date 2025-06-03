@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useSession } from "next-auth/react";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
 import { NavigationCard } from "@/src/components/navigation/navigation-card";
 
 export default function NavigationMenu() {
