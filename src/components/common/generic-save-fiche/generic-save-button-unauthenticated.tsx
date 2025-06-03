@@ -1,27 +1,14 @@
-import { setBadgeOn, NotificationElements } from "@/src/helpers/notification-badge";
 import { selectSavedOrUnsavedAssets } from "./assets";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { GenericSaveButtonElement } from "./generic-save-button-element";
-
-import { useFicheLocalStorage } from "./use-fiche-local-storage";
-import { useSaveBookmarks } from "./use-save-bookmarks";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { SITE_VITRINE_BOOKMARK_FICHE } from "@/src/helpers/matomo/matomo-tags";
 
 export const GenericSaveUnauthenticated = ({ ...props }: GenericSaveFicheButtonWithOpener) => {
-  const [fichesIds, setFichesIds] = useFicheLocalStorage();
-
-  const { update, isBookmarked } = useSaveBookmarks(
-    props.type,
-    props.id,
-    fichesIds,
-    setFichesIds,
-    props.projectName ?? "",
-    props.opener,
-  );
-
-  const assets = selectSavedOrUnsavedAssets(isBookmarked, "common");
+  const assets = selectSavedOrUnsavedAssets(false, "common");
   const updater = () => {
-    update();
-    !isBookmarked && setBadgeOn(NotificationElements.selectionMenuItem);
+    trackEvent(SITE_VITRINE_BOOKMARK_FICHE);
+    props.opener && props.opener();
   };
-  return <GenericSaveButtonElement isSaved={isBookmarked} assets={assets} update={updater} {...props} />;
+  return <GenericSaveButtonElement isSaved={false} assets={assets} update={updater} {...props} />;
 };

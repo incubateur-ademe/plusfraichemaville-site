@@ -17,7 +17,7 @@ export const GenericSaveModal = ({ ...props }: GenericSaveModalCommonProps) => {
   const status = useSession().status;
 
   const modals = {
-    unauthenticated: <GenericSaveModalUnauthenticated {...props} />,
+    unauthenticated: <GenericSaveModalUnauthenticated />,
     authenticated: currentProjetId ? (
       <ModalSaveModalAuthenticatedInsideProjet {...props} />
     ) : (

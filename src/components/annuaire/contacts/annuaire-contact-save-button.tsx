@@ -87,7 +87,7 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Annu
           <Spinner />
         </div>
       ) : (
-        <GenericSaveButtonElement withoutModal className="" update={update} assets={assets} id={1} />
+        <GenericSaveButtonElement update={update} assets={assets} id={1} />
       )}
     </div>
   );

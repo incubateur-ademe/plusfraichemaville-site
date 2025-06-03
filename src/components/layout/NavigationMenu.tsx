@@ -183,20 +183,6 @@ export default function NavigationMenu() {
         },
         {
           linkProps: {
-            href: PFMV_ROUTES.MES_FICHES_SOLUTIONS,
-            target: "_self",
-            onClick: () => {
-              cancelCurrentProjet();
-              setBadgeOff(NotificationElements.selectionMenuItem);
-            },
-            prefetch: false,
-          },
-          text: "Ma sélection",
-          isActive: pathname?.startsWith(PFMV_ROUTES.MES_FICHES_SOLUTIONS),
-          className: NotificationElements.selectionMenuItem,
-        },
-        {
-          linkProps: {
             href: PFMV_ROUTES.WEBINAIRES,
             target: "_self",
             onClick: cancelCurrentProjet,
