@@ -1,16 +1,16 @@
 import { Select } from "@codegouvfr/react-dsfr/Select";
-
-import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
-import Link from "next/link";
 import { ChangeEvent, useState } from "react";
 
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
 import { Hidden } from "../hidden";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
 import { notifications } from "@/src/components/common/notifications";
-import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
+import { TypeUpdate } from "@/src/helpers/common";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { useRouter } from "next/navigation";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 export const ModalSaveModalAuthenticatedOutsideProjet = ({
   modal,
@@ -18,8 +18,10 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
   id: ficheId,
 }: GenericSaveModalCommonProps & { id: number }) => {
   const [selectedProjetId, setSelectedProjetId] = useState(-1);
+  const [enableTdbButton, setEnableTdbButton] = useState(false);
   const projets = useProjetsStore((state) => state.projets);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+  const router = useRouter();
 
   const validate = async () => {
     if (selectedProjetId > 0) {
@@ -33,6 +35,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
         addOrUpdateProjet(update.projet);
       }
       notifications(update.type, update.message);
+      setEnableTdbButton(true);
     }
   };
 
@@ -41,64 +44,74 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
   };
 
   return (
-    <modal.Component
-      title={
-        <div className="mb-4 mt-6 flex items-center">
-          <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
-          <span className="block text-2xl font-bold">
-            {type === TypeFiche.solution ? "Solution" : "Méthode de diagnostic"} ajoutée dans Ma sélection
-          </span>
-        </div>
-      }
-      size="large"
-    >
-      <span>
-        Retrouvez toutes vos {type === TypeFiche.solution ? "solutions" : "méthode de diagnostic"} mises en favoris dans
-        Ma sélection. <br />
-        Voulez-vous ajouter aussi cette solution dans l’un de vos projets ?
-      </span>
-      <div className="my-10 flex flex-col gap-0 md:flex-row md:items-center md:gap-5">
-        <Select
-          label={<Hidden accessible>Selectionnez un projet</Hidden>}
-          className="w-96"
-          nativeSelectProps={{
-            onChange: handleChange,
-            value: selectedProjetId,
-          }}
-        >
-          <option value={0}>Selectionnez un projet</option>
-          {projets.map((projet, index) => {
-            return (
-              <option value={projet.id} key={index}>
-                {projet.nom}
-              </option>
-            );
-          })}
-        </Select>
-        <Button
-          className="!mb-3 !h-fit !min-h-fit rounded-3xl !text-sm"
-          disabled={selectedProjetId < 1}
-          onClick={validate}
-        >
-          Ajouter au projet
-        </Button>
-      </div>
-      <Button
-        priority="primary"
-        className="mb-2 mr-4 !min-h-fit rounded-3xl !text-sm md:mb-0 md:ml-20"
-        onClick={modal.close}
-      >
-        Continuer ma lecture
-      </Button>
-      <Link
-        onClick={() => {
-          modal.close();
-        }}
-        href={type === TypeFiche.solution ? PFMV_ROUTES.MES_FICHES_SOLUTIONS : PFMV_ROUTES.MES_FICHES_SOLUTIONS}
-        className="fr-btn fr-btn--secondary mr-4 !min-h-fit rounded-3xl !text-sm"
-      >
-        Voir mes {type === TypeFiche.solution ? "fiches solutions" : "fiches diagnostic"}
-      </Link>
+    <modal.Component title="Sélection du projet" size="large">
+      {isEmpty(projets) ? (
+        <>
+          <div className="mb-12">Vous devez créer un projet pour pouvoir sauvegarder des solutions.</div>
+          <Button
+            priority="primary"
+            className="mb-4 mr-4 rounded-3xl md:mb-0"
+            onClick={() => {
+              modal.close();
+              router.push(PFMV_ROUTES.CREATE_PROJET);
+            }}
+          >
+            Créer un projet
+          </Button>
+          <Button onClick={modal.close} priority="secondary" className="rounded-3xl">
+            Continuer ma lecture
+          </Button>
+        </>
+      ) : (
+        <>
+          <span>Dans quel projet souhaitez-vous rajouter cette solution ?</span>
+          <div className="my-10 flex flex-col gap-0 md:flex-row md:items-center md:gap-5">
+            <Select
+              label={<Hidden accessible>Selectionnez un projet</Hidden>}
+              className="w-96"
+              nativeSelectProps={{
+                onChange: handleChange,
+                value: selectedProjetId,
+              }}
+            >
+              <option value={0}>Selectionnez un projet</option>
+              {projets.map((projet, index) => {
+                return (
+                  <option value={projet.id} key={index}>
+                    {projet.nom}
+                  </option>
+                );
+              })}
+            </Select>
+            <Button
+              className="!mb-3 !h-fit !min-h-fit rounded-3xl !text-sm"
+              disabled={selectedProjetId < 1}
+              onClick={validate}
+            >
+              Ajouter au projet
+            </Button>
+          </div>
+          <Button
+            priority="primary"
+            className="mb-4 mr-4 rounded-3xl !text-sm md:mb-0"
+            onClick={modal.close}
+            disabled={selectedProjetId < 1 || !enableTdbButton}
+          >
+            Continuer ma lecture
+          </Button>
+          <Button
+            onClick={() => {
+              modal.close();
+              router.push(PFMV_ROUTES.TABLEAU_DE_BORD(selectedProjetId));
+            }}
+            disabled={selectedProjetId < 1 || !enableTdbButton}
+            priority="secondary"
+            className="rounded-3xl !text-sm"
+          >
+            Aller au tableau de bord du projet
+          </Button>
+        </>
+      )}
     </modal.Component>
   );
 };

@@ -265,20 +265,6 @@
   border-radius: 24px;
 }
 
-.customModalBody {
-  --modal-max-height: 90vh;
-  pointer-events: all;
-  overflow-y: auto;
-  flex: 1 1 auto;
-  max-height: var(--modal-max-height);
-  z-index: calc(var(--ground) + 2000);
-  background-color: var(--background-lifted-grey);
-  --idle: transparent;
-  --hover: var(--background-lifted-grey-hover);
-  --active: var(--background-lifted-grey-active);
-  filter: drop-shadow(var(--lifted-shadow));
-}
-
 .gradient-l-to-r-navy {
   background: linear-gradient(0deg, rgba(39, 39, 135, 1) 37%, rgba(17, 17, 106, 0) 84%);
 }
