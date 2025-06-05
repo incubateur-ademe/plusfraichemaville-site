@@ -41,6 +41,11 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/mon-projet/favoris",
+        destination: "/espace-projet",
+        permanent: true,
+      },
+      {
         source: "/:path*",
         has: [{ type: "host", value: "www.plusfraichemaville.fr" }],
         destination: "https://plusfraichemaville.fr/:path*",

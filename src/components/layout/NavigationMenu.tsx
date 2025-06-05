@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useSession } from "next-auth/react";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { NotificationElements, setBadgeOff } from "@/src/helpers/notification-badge";
 import { NavigationCard } from "@/src/components/navigation/navigation-card";
 
 export default function NavigationMenu() {
@@ -180,20 +179,6 @@ export default function NavigationMenu() {
               },
             ],
           },
-        },
-        {
-          linkProps: {
-            href: PFMV_ROUTES.MES_FICHES_SOLUTIONS,
-            target: "_self",
-            onClick: () => {
-              cancelCurrentProjet();
-              setBadgeOff(NotificationElements.selectionMenuItem);
-            },
-            prefetch: false,
-          },
-          text: "Ma sélection",
-          isActive: pathname?.startsWith(PFMV_ROUTES.MES_FICHES_SOLUTIONS),
-          className: NotificationElements.selectionMenuItem,
         },
         {
           linkProps: {

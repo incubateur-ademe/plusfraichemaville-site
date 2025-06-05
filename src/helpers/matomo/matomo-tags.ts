@@ -15,6 +15,7 @@ export const MATOMO_ACTIONS = {
   AIDE_DECISION_BREADCRUMB: "aide-decision-fil-ariane",
   SITE_VITRINE_BREADCRUMB: "site-vitrine-fil-ariane",
   SITE_VITRINE_REX_DIAG_STORY: "rex-diag-story",
+  SITE_VITRINE_BOOKMARK: "site-vitrine-bookmark-fiche",
   SURCHAUFFE_URBAINE_COMPRENDRE: "surchauffe-urbaine-notions",
   SURCHAUFFE_URBAINE_TIMING: "surchauffe-urbaine-timing",
   SUBSCRIBE_WEBINAIRE: "webinaire-inscription",
@@ -145,4 +146,16 @@ export const DIAGNOSTIC_COMPUTE_RESULT = {
   category: MATOMO_CATEGORIES.DIAGNOSTIC,
   action: MATOMO_ACTIONS.DIAGNOSTIC_COMPUTE_RESULT,
   name: "Calcul des indicateurs de l'analyse simplifiée",
+};
+
+export const SITE_VITRINE_BOOKMARK_FICHE = {
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SITE_VITRINE_BOOKMARK,
+  name: "Sauvegarde d'une fiche à partir du site vitrine",
+};
+
+export const ESPACE_PROJET_BOOKMARK_FICHE = {
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.SITE_VITRINE_BOOKMARK,
+  name: "Sauvegarde d'une fiche à partir de l'espace projet",
 };

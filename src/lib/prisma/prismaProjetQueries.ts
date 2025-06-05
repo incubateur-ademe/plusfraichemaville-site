@@ -82,41 +82,6 @@ export const projetPublicSelect = {
   sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
-export const updateFichesSolutionsProjet = async (
-  projetId: number,
-  fichesSolutionsId: number[],
-  userId: string,
-): Promise<ProjetWithRelations | null> => {
-  await Promise.all(
-    fichesSolutionsId.map((ficheId) =>
-      prismaClient.projet_fiche.upsert({
-        where: {
-          projet_id_fiche_id_type: {
-            projet_id: projetId,
-            fiche_id: ficheId,
-            type: "SOLUTION",
-          },
-        },
-        create: {
-          projet_id: projetId,
-          fiche_id: ficheId,
-          type: "SOLUTION",
-          user_id: userId,
-        },
-        update: {
-          user_id: userId,
-          fiche_id: ficheId,
-        },
-      }),
-    ),
-  );
-
-  return prismaClient.projet.findUnique({
-    where: { id: projetId },
-    include: projetIncludes,
-  });
-};
-
 export const addRecommandationsViewedBy = async (projetId: number, userId: string) => {
   const projet = await getProjetById(projetId);
   const recommandationsViewedUserIds = projet?.recommandations_viewed_by;

@@ -55,7 +55,7 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
           <Spinner />
         </div>
       ) : (
-        <GenericSaveButtonElement withoutModal className="" update={update} assets={assets} id={aideTerritoireId} />
+        <GenericSaveButtonElement className="" update={update} assets={assets} id={aideTerritoireId} />
       )}
     </div>
   );

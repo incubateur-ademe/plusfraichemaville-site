@@ -15,9 +15,13 @@ export const NavigationCard = ({
       onClick={(e) => {
         e.stopPropagation();
       }}
-      className={clsx(className, "pfmv-flat-card max-w-[21rem] bg-white")}
+      className={clsx(
+        className,
+        "max-w-[21rem] rounded-xl bg-white",
+        "outline outline-1 outline-offset-0 outline-dsfr-border-default-grey hover:outline-dsfr-text-label-blue-france",
+      )}
     >
-      <Image width={400} height={500} alt="" src={imageUrl} className="px-[1px]" />
+      <Image width={400} height={500} alt="" src={imageUrl} />
       <div className="mb-6 mt-4 px-4 text-lg font-bold">{title}</div>
     </div>
   );
