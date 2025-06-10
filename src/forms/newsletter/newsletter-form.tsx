@@ -14,6 +14,7 @@ import { subscribeNewsletterAction } from "@/src/actions/newsletter/subscribe-ne
 import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { mapDBCollectiviteToCollectiviteAddress } from "@/src/lib/adresseApi/banApiHelper";
+import clsx from "clsx";
 
 export const NewsletterForm = ({ rerouteAfterSuccess = false }: { rerouteAfterSuccess?: boolean }) => {
   const user = useUserStore((state) => state.userInfos);
@@ -58,14 +59,23 @@ export const NewsletterForm = ({ rerouteAfterSuccess = false }: { rerouteAfterSu
     <form id="newsletter-form" onSubmit={form.handleSubmit(onSubmit)} className="w-full">
       <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />
 
-      <ToggleSwitch
-        className="max-w-60"
-        label="Je suis une collectivité"
-        checked={isCollectivite}
-        onChange={(checked) => setIsCollectivite(checked)}
-        labelPosition="left"
-        showCheckedHint={false}
-      />
+      <div className="flex flex-row justify-between items-center">
+        <ToggleSwitch
+          className="max-w-60"
+          label="Je suis une collectivité"
+          checked={isCollectivite}
+          onChange={(checked) => setIsCollectivite(checked)}
+          labelPosition="left"
+          showCheckedHint={false}
+        />
+        <Button
+          className={clsx("rounded-3xl", isCollectivite ? "hidden" : "block")}
+          type="submit"
+          disabled={disabled}
+        >
+          {"S'abonner"}
+        </Button>
+      </div>
       <Conditional>
         <Case condition={isCollectivite}>
           <CollectiviteInputFormField
@@ -76,7 +86,11 @@ export const NewsletterForm = ({ rerouteAfterSuccess = false }: { rerouteAfterSu
           />
         </Case>
       </Conditional>
-      <Button className={`float-right mt-4 rounded-3xl`} type="submit" disabled={disabled}>
+      <Button
+        className={clsx("float-right mt-4 rounded-3xl", isCollectivite ? "block" : "hidden")}
+        type="submit"
+        disabled={disabled}
+      >
         {"S'abonner"}
       </Button>
     </form>

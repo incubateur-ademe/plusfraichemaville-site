@@ -610,3 +610,8 @@ a.fr-nav__link {
 .menuCategoryShadowNone h5.fr-mega-menu__category {
   box-shadow: none !important;
 }
+
+.video-card-presentation {
+  background-image: url("/images/actualites/actualite-video-bg.svg");
+  background-size: cover;
+}

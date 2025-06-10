@@ -5,6 +5,10 @@ import { Fragment } from "react";
 import { Separator } from "@/src/components/common/separator";
 import clsx from "clsx";
 import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
+import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
+import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
+import orderBy from "lodash/orderBy";
+import { VideosList } from "@/src/components/webinaires/videos-list";
 
 export const metadata: Metadata = computeMetadata("Actualités");
 
@@ -18,7 +22,7 @@ export default async function PageActualites() {
     {
       label: "Les vidéos",
       contentId: "videos",
-      component: <NewsletterLinkedin />,
+      component: <VideosList />,
     },
     {
       label: "Suivez-nous",
@@ -33,7 +37,7 @@ export default async function PageActualites() {
         <div
           className={clsx(
             "sticky bottom-0 top-[unset] z-50 mb-8 flex flex-none shrink-0 flex-col-reverse bg-white",
-            "pb-4 md:bottom-[unset] md:top-12 md:mb-0 md:h-full md:w-56 md:flex-col md:pt-10",
+            "pb-4 md:bottom-[unset] md:top-12 md:mb-0 md:h-full md:w-50 md:flex-col md:pt-7",
           )}
         >
           <CustomSideMenu blocs={blocs} />

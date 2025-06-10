@@ -3,7 +3,7 @@ import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { HomepageNewsletter } from "@/src/components/homepage/homepage-newsletter";
 import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
 import CustomTabButton from "@/src/components/common/CustomTabButton";
-import { WebinairesList } from "@/src/components/webinaires/webinaires-list";
+import { VideosList } from "@/src/components/webinaires/videos-list";
 import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
 import orderBy from "lodash/orderBy";
 
@@ -45,14 +45,14 @@ export default async function PageWebinaires() {
               />
             </li>
           </ul>
-          <WebinairesList
+          <VideosList
             webinaires={futureWebinaires}
             id="tabpanel-webinaires-a-venir"
             emptyListPlaceholder="Il n'y a pas de webinaire à venir,
             inscrivez-vous à notre newsletter pour être informé(e) des prochaines dates."
             tabIndex={0}
           />
-          <WebinairesList
+          <VideosList
             webinaires={pastWebinaires}
             id="tabpanel-webinaires-a-revoir"
             emptyListPlaceholder="Il n'y a pas de webinaire à revoir."
