@@ -1,4 +1,4 @@
-import { Fragment, PropsWithChildren, ReactNode } from "react";
+import { Fragment, PropsWithChildren } from "react";
 import { FicheDiagnosticMethodeBloc } from "./fiche-diagnostic-bloc-methode";
 import { FicheDiagnosticAvantageBloc } from "./fiche-diagnostic-bloc-avantages";
 import { FicheDiagnosticMiseEnOeuvreBloc } from "./fiche-diagnostic-bloc-meo";
@@ -8,7 +8,7 @@ import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { TypeFiche } from "@/src/helpers/common";
 import { Separator } from "../common/separator";
 import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
-import { FicheDiagnosticSideMenu } from "./fiche-diagnostic-side-menu";
+import { CustomSideMenu, SideMenuBloc } from "../common/custom-side-menu";
 import clsx from "clsx";
 // eslint-disable-next-line max-len
 import { FicheDiagnosticBlocBesoinEtIndicateurs } from "@/src/components/fiches-diagnostic/fiche-diagnostic-bloc-besoin-et-indicateurs";
@@ -22,16 +22,10 @@ type FicheDiagnosticBlocsProps = {
   ficheDiagnostic: FicheDiagnostic;
 } & PropsWithChildren;
 
-export type FicheDiagnosticBloc = {
-  label: string;
-  contentId: string;
-  component: ReactNode;
-};
-
 export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsProps) => {
   const { attributes, id } = ficheDiagnostic;
   const creditsImage = getCreditsImageForFicheDiagnostic(attributes);
-  const blocs: FicheDiagnosticBloc[] = [
+  const blocs: SideMenuBloc[] = [
     {
       label: "La méthode",
       contentId: "methode",
@@ -67,7 +61,7 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
             "pb-4 md:bottom-[unset] md:top-12 md:mb-0 md:h-full md:w-56 md:flex-col md:pt-10",
           )}
         >
-          <FicheDiagnosticSideMenu blocs={blocs} />
+          <CustomSideMenu blocs={blocs} />
           <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel className={"mb-2 ml-2 block md:mb-0"} />
           <ButtonShareCurrentUrl className="my-4 pl-4 md:mb-0 md:mt-4" />
         </div>

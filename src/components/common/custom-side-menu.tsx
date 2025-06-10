@@ -1,11 +1,16 @@
 "use client";
 
-import { FicheDiagnosticBloc } from "./fiche-diagnostic-blocs";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 import { SideMenu } from "@codegouvfr/react-dsfr/SideMenu";
 
-export const FicheDiagnosticSideMenu = ({ blocs }: { blocs: FicheDiagnosticBloc[] }) => {
+export type SideMenuBloc = {
+  label: string;
+  contentId: string;
+  component: ReactNode;
+};
+
+export const CustomSideMenu = ({ blocs }: { blocs: SideMenuBloc[] }) => {
   const pathname = usePathname();
   const [activeTab, setActiveTab] = useState<string>(blocs[0]?.contentId);
 

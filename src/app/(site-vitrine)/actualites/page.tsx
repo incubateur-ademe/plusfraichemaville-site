@@ -1,66 +1,55 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
-import { HomepageNewsletter } from "@/src/components/homepage/homepage-newsletter";
-import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
-import CustomTabButton from "@/src/components/common/CustomTabButton";
-import { WebinairesList } from "@/src/components/webinaires/webinaires-list";
-import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
-import orderBy from "lodash/orderBy";
+import { CustomSideMenu, SideMenuBloc } from "@/src/components/common/custom-side-menu";
+import { Fragment } from "react";
+import { Separator } from "@/src/components/common/separator";
+import clsx from "clsx";
+import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
 
 export const metadata: Metadata = computeMetadata("Actualités");
 
 export default async function PageActualites() {
-  const allWebinaires = await getAllWebinaires();
-  const futureWebinaires = allWebinaires.filter(isWebinaireInFuture);
-  const pastWebinaires = orderBy(
-    allWebinaires.filter(
-      (webinaire) =>
-        webinaire.attributes.jour_evenement &&
-        webinaire.attributes.lien_replay &&
-        new Date(webinaire.attributes.jour_evenement) <= new Date(),
-    ),
-    (webinaire) => webinaire.attributes.jour_evenement,
-    "desc",
-  );
+  const blocs: SideMenuBloc[] = [
+    {
+      label: "Évènements",
+      contentId: "evenements",
+      component: <NewsletterLinkedin />,
+    },
+    {
+      label: "Les vidéos",
+      contentId: "videos",
+      component: <NewsletterLinkedin />,
+    },
+    {
+      label: "Suivez-nous",
+      contentId: "suivez-nous",
+      component: <NewsletterLinkedin />,
+    },
+  ];
+
   return (
-    <div className="pb-8">
-      <div className="fr-container">
-        <h1 className="mt-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Webinaires</h1>
-        <div className="fr-tabs before:!shadow-none">
-          <ul className="fr-tabs__list !p-0" role="tablist" aria-label="Webinaires">
-            <li role="presentation">
-              <CustomTabButton
-                label={`Webinaires à venir (${futureWebinaires.length ?? 0})`}
-                isSelected
-                contentId="tabpanel-webinaires-a-venir"
-                className="simpleTab w-52"
-              />
-            </li>
-            <li role="presentation">
-              <CustomTabButton
-                label={`Webinaires à revoir (${pastWebinaires.length ?? 0})`}
-                isSelected={false}
-                contentId="tabpanel-webinaires-a-revoir"
-                className="simpleTab w-52"
-              />
-            </li>
-          </ul>
-          <WebinairesList
-            webinaires={futureWebinaires}
-            id="tabpanel-webinaires-a-venir"
-            emptyListPlaceholder="Il n'y a pas de webinaire à venir,
-            inscrivez-vous à notre newsletter pour être informé(e) des prochaines dates."
-            tabIndex={0}
-          />
-          <WebinairesList
-            webinaires={pastWebinaires}
-            id="tabpanel-webinaires-a-revoir"
-            emptyListPlaceholder="Il n'y a pas de webinaire à revoir."
-            tabIndex={1}
-          />
+    <div className="relative">
+      <div className="fr-container relative flex flex-col-reverse md:flex-row">
+        <div
+          className={clsx(
+            "sticky bottom-0 top-[unset] z-50 mb-8 flex flex-none shrink-0 flex-col-reverse bg-white",
+            "pb-4 md:bottom-[unset] md:top-12 md:mb-0 md:h-full md:w-56 md:flex-col md:pt-10",
+          )}
+        >
+          <CustomSideMenu blocs={blocs} />
+        </div>
+        <div className="border-dsfr-border-default-grey pt-4 md:border-l-[1px] md:pl-7 md:pt-0">
+          {blocs.map((tab) => (
+            <Fragment key={tab.contentId}>
+              <div id={tab.contentId} className="mb-6 mt-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">
+                {tab.label}
+              </div>
+              <div>{tab.component}</div>
+              <Separator className="my-10 !h-[1px] !opacity-100" />
+            </Fragment>
+          ))}
         </div>
       </div>
-      <HomepageNewsletter />
     </div>
   );
 }

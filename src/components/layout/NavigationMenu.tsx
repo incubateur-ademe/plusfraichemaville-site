@@ -182,13 +182,13 @@ export default function NavigationMenu() {
         },
         {
           linkProps: {
-            href: PFMV_ROUTES.WEBINAIRES,
+            href: PFMV_ROUTES.ACTUALITES,
             target: "_self",
             onClick: cancelCurrentProjet,
             prefetch: false,
           },
-          text: "Webinaires",
-          isActive: pathname?.startsWith(PFMV_ROUTES.WEBINAIRES),
+          text: "Actualités",
+          isActive: pathname?.startsWith(PFMV_ROUTES.ACTUALITES),
         },
         {
           linkProps: {
