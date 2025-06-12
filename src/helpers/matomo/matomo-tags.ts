@@ -32,6 +32,7 @@ export const MATOMO_ACTIONS = {
   DIAGNOSTIC_DOWNLOAD_RESULT: "diagnostic-result-download",
   DIAGNOSTIC_COMPUTE_RESULT: "diagnostic-compute-result",
   SURCHAUFFE_TERRITOIRE_SEARCH: "surchauffe-urbaine-search-territoire",
+  FICHE_SOLUTION_CLICK_ONGLET: "fiche-solution-change-onglet",
 };
 
 export const WEBINAIRE_SUBSCRIPTION: MATOMO_EVENT = {
@@ -159,3 +160,9 @@ export const ESPACE_PROJET_BOOKMARK_FICHE = {
   action: MATOMO_ACTIONS.SITE_VITRINE_BOOKMARK,
   name: "Sauvegarde d'une fiche à partir de l'espace projet",
 };
+
+export const FICHE_SOLUTION_CLIC_ONGLET = (onglet: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.FICHE_SOLUTION_CLICK_ONGLET,
+  name: `Clic sur l'onglet ${onglet}`,
+});
