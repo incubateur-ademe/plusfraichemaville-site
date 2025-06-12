@@ -39,7 +39,9 @@ const syncWithConnect = async () => {
       captureError("Erreur lors de la synchronisation avec Connect:", {
         errors: connectResult.errors,
       });
-      const webhookData = makeConnectSyncBatchErrorWebhookData("Erreur lors du batch de synchronisation Connect.");
+      const webhookData = makeConnectSyncBatchErrorWebhookData(`Erreur lors du batch de synchronisation Connect.
+${JSON.stringify(connectResult.errors)}
+${connectResult.message}`);
       await sendMattermostWebhook(webhookData, "batch", 5000);
       process.exit(1);
     }
