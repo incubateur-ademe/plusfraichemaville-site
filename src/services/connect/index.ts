@@ -96,7 +96,7 @@ export const connectBatchSync = async (
   return {
     success: errors.length === 0,
     errors,
-    message: `Synchronisation avec Connect réussie !
+    message: `Synchronisation avec Connect : 
     ${createdContactsCount} contact(s) créé(s) / mis à jour..
     ${createdProjetsCount} projet(s) créés / mis à jour.`,
   };
