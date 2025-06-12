@@ -25,7 +25,7 @@ export const NewsletterLinkedin = () => (
                   <Image src="/images/logo-pfmv-seul.svg" alt="" width={36} height={36} className="float-left mr-1" />
                   Plus fraîche ma ville ADEME
                 </div>
-                <Link className="fr-btn rounded-3xl" target="_blank" href="https://www.linkedin.com">
+                <Link className="fr-btn rounded-3xl" target="_blank" href="https://www.linkedin.com/groups/13150515/">
                   Nous suivre
                 </Link>
               </div>

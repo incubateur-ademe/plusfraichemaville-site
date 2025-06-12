@@ -6,9 +6,10 @@ import { Separator } from "@/src/components/common/separator";
 import clsx from "clsx";
 import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
 import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
-import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
+import { isWebinaireInFuture } from "@/src/components/actualites/webinaires/webinaires-helpers";
 import orderBy from "lodash/orderBy";
-import { VideosList } from "@/src/components/webinaires/videos-list";
+import { VideosList } from "@/src/components/actualites/webinaires/videos-list";
+import { EvenementsList } from "@/src/components/actualites/evenements/evenements-list";
 
 export const metadata: Metadata = computeMetadata("Actualités");
 
@@ -17,7 +18,7 @@ export default async function PageActualites() {
     {
       label: "Évènements",
       contentId: "evenements",
-      component: <NewsletterLinkedin />,
+      component: <EvenementsList />,
     },
     {
       label: "Les vidéos",

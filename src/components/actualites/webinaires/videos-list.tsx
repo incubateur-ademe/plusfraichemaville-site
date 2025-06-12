@@ -1,4 +1,4 @@
-import { VideoCard } from "@/src/components/webinaires/video-card";
+import { VideoCard } from "@/src/components/actualites/webinaires/video-card";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
 import orderBy from "lodash/orderBy";

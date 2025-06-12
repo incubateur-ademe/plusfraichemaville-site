@@ -115,6 +115,7 @@ export const STRAPI_IMAGE_FRAGMENT = `fragment ImageInfo on UploadFileEntityResp
       url
       formats
       caption
+      alternativeText
     }
   }
 }`;

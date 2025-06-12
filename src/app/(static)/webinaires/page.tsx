@@ -3,8 +3,8 @@ import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { HomepageNewsletter } from "@/src/components/homepage/homepage-newsletter";
 import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
 import CustomTabButton from "@/src/components/common/CustomTabButton";
-import { VideosList } from "@/src/components/webinaires/videos-list";
-import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
+import { VideosList } from "@/src/components/actualites/webinaires/videos-list";
+import { isWebinaireInFuture } from "@/src/components/actualites/webinaires/webinaires-helpers";
 import orderBy from "lodash/orderBy";
 
 export const metadata: Metadata = computeMetadata("Webinaires");

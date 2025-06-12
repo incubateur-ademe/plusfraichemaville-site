@@ -3,13 +3,19 @@ import { dateToLiteralString } from "@/src/helpers/dateUtils";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { Webinaire } from "@/src/lib/strapi/types/api/webinaire";
 import capitalize from "lodash/capitalize";
+import clsx from "clsx";
 
 export const VideoCard = ({ webinaire }: { webinaire: Webinaire }) => {
   return (
     <div key={webinaire.id} className="flex flex-col items-center gap-2 md:flex-row md:gap-6">
-      <div className="basis-6/12 rounded-2xl bg-dsfr-background-action-low-blue-france video-card-presentation">
+      <div className="video-card-presentation basis-6/12 rounded-2xl bg-dsfr-background-action-low-blue-france">
         <div className="mr-4 flex flex-row items-center justify-between">
-          <div className="w-[5rem] rounded-br-2xl rounded-tl-2xl bg-dsfr-orange-warning py-2 pl-3 font-bold text-white">
+          <div
+            className={clsx(
+              "rounded-br-2xl rounded-tl-2xl",
+              "bg-dsfr-orange-warning py-2 px-4 font-bold text-white",
+            )}
+          >
             Replay
           </div>
           <div className="text-pfmv-navy">
@@ -19,7 +25,7 @@ export const VideoCard = ({ webinaire }: { webinaire: Webinaire }) => {
           </div>
         </div>
         <div className="m-6 text-xl font-bold text-pfmv-navy">{webinaire.attributes.titre}</div>
-        <div className="w-full text-right pr-4">
+        <div className="w-full pr-4 text-right">
           <Button
             className=" mb-6 !w-36 !justify-center rounded-3xl"
             linkProps={{ href: webinaire.attributes.lien_replay!, target: "_blank" }}
