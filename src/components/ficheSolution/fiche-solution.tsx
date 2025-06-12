@@ -15,6 +15,7 @@ import clsx from "clsx";
 import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-url";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { TypeFiche } from "@/src/helpers/common";
+import { FICHE_SOLUTION_CLIC_ONGLET } from "@/src/helpers/matomo/matomo-tags";
 
 export async function FicheSolution({
   params,
@@ -80,7 +81,13 @@ export async function FicheSolution({
           <div className="fr-tabs before:!shadow-none">
             <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
-                <CustomTabButton label="Synthèse" isSelected={true} contentId="synthese-panel" className="customTab" />
+                <CustomTabButton
+                  label="Synthèse"
+                  isSelected={true}
+                  contentId="synthese-panel"
+                  className="customTab"
+                  matomoTrackEvent={FICHE_SOLUTION_CLIC_ONGLET("Synthese")}
+                />
               </li>
               <li role="presentation">
                 <CustomTabButton
@@ -88,6 +95,7 @@ export async function FicheSolution({
                   isSelected={false}
                   contentId="materiaux-panel"
                   className="customTab"
+                  matomoTrackEvent={FICHE_SOLUTION_CLIC_ONGLET("Materiaux")}
                 />
               </li>
               <li role="presentation">
@@ -96,6 +104,7 @@ export async function FicheSolution({
                   isSelected={false}
                   contentId="mise-en-oeuvre-panel"
                   className="customTab"
+                  matomoTrackEvent={FICHE_SOLUTION_CLIC_ONGLET("Mis en oeuvre")}
                 />
               </li>
               <li role="presentation">
@@ -104,10 +113,17 @@ export async function FicheSolution({
                   isSelected={false}
                   contentId="financements-panel"
                   className="customTab"
+                  matomoTrackEvent={FICHE_SOLUTION_CLIC_ONGLET("Financements")}
                 />
               </li>
               <li role="presentation">
-                <CustomTabButton label="Oups !" isSelected={false} contentId="oups-panel" className="customTab" />
+                <CustomTabButton
+                  label="Oups !"
+                  isSelected={false}
+                  contentId="oups-panel"
+                  className="customTab"
+                  matomoTrackEvent={FICHE_SOLUTION_CLIC_ONGLET("Oups")}
+                />
               </li>
             </ul>
             <div
