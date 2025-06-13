@@ -28,7 +28,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
       <Link
         href={
           type === TypeFiche.diagnostic
-            ? PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION(projet?.id!)
+            ? PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS(projet?.id!)
             : PFMV_ROUTES.TABLEAU_DE_BORD(projet?.id!)
         }
         className="fr-btn mr-4 !min-h-fit rounded-3xl !text-sm"

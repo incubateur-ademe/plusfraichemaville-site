@@ -7,6 +7,10 @@ import { ProtectedEspaceProjetUrl } from "@/src/components/common/protected-espa
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
+import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
+import React from "react";
+// eslint-disable-next-line max-len
+import { BREADCRUMB_ESTIMATION_CREATION } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-estimation";
 
 export default function CreateEstimationPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -18,6 +22,7 @@ export default function CreateEstimationPage() {
 
   return (
     <ProtectedEspaceProjetUrl>
+      <BannerProjetBreadcrumb step={BREADCRUMB_ESTIMATION_CREATION} />
       <div className="fr-container pt-8">
         <h1 className="mb-2 text-2xl font-bold">{"Je fais une estimation de budget pour mon projet"}</h1>
         {!isEmpty(fichesSolutionsIds) ? (

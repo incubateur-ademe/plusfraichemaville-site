@@ -1,8 +1,14 @@
-import { AnnuaireLayout } from "@/src/components/annuaire/annuaire-layout";
 import { PropsWithChildren } from "react";
+// eslint-disable-next-line max-len
+import { AnnuaireRexContentSeeProjetModal } from "@/src/components/annuaire/side-panel/annuaire-rex-content-see-projet-modal";
 
 const Layout = ({ children }: PropsWithChildren) => {
-  return <AnnuaireLayout>{children}</AnnuaireLayout>;
+  return (
+    <div className="mb-40">
+      {children}
+      <AnnuaireRexContentSeeProjetModal />
+    </div>
+  );
 };
 
 export default Layout;
