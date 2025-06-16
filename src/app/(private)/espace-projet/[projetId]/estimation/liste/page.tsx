@@ -9,7 +9,7 @@ import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/gen
 import React, { useEffect, useState } from "react";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 // eslint-disable-next-line max-len
-import { BREADCRUMB_ESTIMATION_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-estimation";
+import { BREADCRUMB_MES_ESTIMATIONS } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-estimation";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 
 export default function ListeEstimationPage() {
@@ -31,7 +31,7 @@ export default function ListeEstimationPage() {
     }
     return (
       <>
-        <BannerProjetBreadcrumb step={BREADCRUMB_ESTIMATION_LISTE} />
+        <BannerProjetBreadcrumb step={BREADCRUMB_MES_ESTIMATIONS} />
         <div className="fr-container pt-8">
           <div className="mb-2 text-2xl font-bold">Aucune estimation {"n'a"} été faite pour ce projet</div>
         </div>
@@ -41,7 +41,7 @@ export default function ListeEstimationPage() {
 
   return (
     <>
-      <BannerProjetBreadcrumb step={BREADCRUMB_ESTIMATION_LISTE} />
+      <BannerProjetBreadcrumb step={BREADCRUMB_MES_ESTIMATIONS} />
       <div className="fr-container pt-8">
         <div className="mb-10">
           <div className="mb-2 text-2xl font-bold">Je fais une estimation de budget pour mon projet</div>

@@ -6,7 +6,7 @@ import {
 import { BreadcrumbSegment } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 
-const BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS = (projetId: number): BreadcrumbSegment => ({
+const BREADCRUMB_SEGMENT_SOLUTION_MES_FINANCEMENTS = (projetId: number): BreadcrumbSegment => ({
   linkProps: {
     href: PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT(projetId),
   },
@@ -14,7 +14,7 @@ const BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS = (projetId: number): Breadcrumb
 });
 
 export const BREADCRUMB_MES_FINANCEMENTS: EspaceProjetBreadcrumbStep = {
-  currentPageLabel: BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS(0).label,
+  currentPageLabel: BREADCRUMB_SEGMENT_SOLUTION_MES_FINANCEMENTS(0).label,
   breadcrumbSegments: (projetId: number) => [BREADCRUMB_SEGMENT_DASHBOARD(projetId)],
 };
 
@@ -22,6 +22,6 @@ export const BREADCRUMB_FINANCEMENTS_LISTE = (dateEstimation: string): EspacePro
   currentPageLabel: `Financements pour l'estimation du ${dateEstimation}`,
   breadcrumbSegments: (projetId: number) => [
     BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-    BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS(projetId),
+    BREADCRUMB_SEGMENT_SOLUTION_MES_FINANCEMENTS(projetId),
   ],
 });
