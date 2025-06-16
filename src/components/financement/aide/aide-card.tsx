@@ -1,6 +1,6 @@
 import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "../types";
 import Image from "next/image";
-import { getPerimeterScaleLabel, resolveAidType } from "../helpers";
+import { resolveAidType } from "../helpers";
 import clsx from "clsx";
 import { AideCardSaveButton } from "./aide-card-save-button";
 import { useParams } from "next/navigation";
@@ -22,40 +22,33 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
   return (
     <div className="pfmv-card no-shadow  relative w-[362px] cursor-pointer overflow-hidden" id={`aide-card-${aide.id}`}>
       {withSaveButton && !!estimationId && (
-        <AideCardSaveButton estimationId={+estimationId} aideTerritoireId={aide.id} className="right-2 top-2" />
+        <AideCardSaveButton estimationId={+estimationId} aideTerritoireId={aide.id} className="right-2 top-3" />
       )}
       <div className="flex h-full flex-col" onClick={() => setCurrentDetailedAide(aide)}>
         <div
           className={clsx(
-            "relative h-24 px-5 py-4",
+            "relative h-16 px-5 py-4",
             isAideFinanciere ? "bg-dsfr-background-alt-blue-france" : "bg-dsfr-background-alt-brown-cafe-creme",
           )}
         >
-          <Image
-            src={`/images/financement/${isAideFinanciere ? "financement" : "ingenierie"}.svg`}
-            className="mb-2"
-            width={32}
-            height={32}
-            alt=""
-          />
-          <span
-            className={clsx(
-              "text-sm font-bold",
-              isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
-            )}
-          >
-            {isAideFinanciere ? "Financement" : "Soutien à l'ingénierie"}
+          <span className="flex items-center gap-4">
+            <Image
+              src={`/images/financement/${isAideFinanciere ? "financement" : "ingenierie"}.svg`}
+              width={32}
+              height={32}
+              alt=""
+            />
+            <span
+              className={clsx(
+                "text-sm font-bold",
+                isAideFinanciere ? "text-dsfr-background-flat-info" : "text-dsfr-background-flat-orange-terre-battue",
+              )}
+            >
+              {isAideFinanciere ? "Financement" : "Soutien à l'ingénierie"}
+            </span>
           </span>
         </div>
         <div className="p-5">
-          <div
-            className={clsx(
-              "mb-4 w-fit rounded-[4px] bg-dsfr-background-alt-blue-france px-[6px] py-[2px]",
-              "text-sm font-bold text-pfmv-navy",
-            )}
-          >
-            {getPerimeterScaleLabel(aide.perimeter_scale)}
-          </div>
           <h2 className="mb-6 text-lg">{aide.name}</h2>
           {AidesTerritoiresCardLines(aide).map((line) => (
             <AideFichePanelLine
