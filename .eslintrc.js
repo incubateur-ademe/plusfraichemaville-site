@@ -12,7 +12,15 @@ module.exports = {
   rules: {
     "@next/next/no-html-link-for-pages": "off",
     // indent: ["error", 2, { SwitchCase: 1, offsetTernaryExpressions: true }],
-    "max-len": ["error", { code: 120 }],
+    "max-len": [
+      1,
+      120,
+      2,
+      {
+        ignorePattern: "^import\\s.+\\sfrom\\s.+;$",
+        ignoreUrls: true,
+      },
+    ],
     "no-tabs": ["error"],
     semi: ["error", "always"],
     "no-unused-vars": ["error", { argsIgnorePattern: "^_" }],

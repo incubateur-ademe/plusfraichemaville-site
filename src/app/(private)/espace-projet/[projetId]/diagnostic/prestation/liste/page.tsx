@@ -7,8 +7,10 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Link from "next/link";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import { BREADCRUMB_DIAG_PRESTATION_LISTE } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 import React from "react";
+
+// eslint-disable-next-line max-len
+import { BREADCRUMB_DIAG_PRESTATION_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 
 export default async function FicheDiagnosticListePage(props: { params: Promise<{ projetId: number }> }) {
   const params = await props.params;
@@ -27,7 +29,7 @@ export default async function FicheDiagnosticListePage(props: { params: Promise<
             Revenir au tableau de bord
           </GenericFicheLink>
           <Link
-            href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION(+params.projetId)}
+            href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS(+params.projetId)}
             className="fr-btn fr-btn rounded-3xl"
           >
             Valider mes méthodes

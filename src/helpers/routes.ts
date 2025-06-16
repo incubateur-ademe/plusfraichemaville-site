@@ -50,7 +50,7 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/resultats`,
   ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/liste`,
-  ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION: (projetId: number) =>
+  ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/selection`,
   ESPACE_PROJET_FINANCEMENT: (projetId: number) => `/espace-projet/${projetId}/financement`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
