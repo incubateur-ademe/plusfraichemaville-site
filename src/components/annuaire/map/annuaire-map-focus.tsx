@@ -13,7 +13,7 @@ export const AnnuaireMapFocus = ({ coordinates }: { coordinates: LatLngTuple | n
   return (
     <Button
       className={clsx(
-        "absolute left-5 top-5 z-[999] rounded-[30px] !bg-white shadow-pfmv-card-shadow",
+        "absolute left-5 top-5 z-[500] rounded-[30px] !bg-white shadow-pfmv-card-shadow",
         "font-[marianne] !font-normal",
       )}
       onClick={handleFocus}
