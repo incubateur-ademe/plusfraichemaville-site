@@ -37,7 +37,7 @@ export const AnnuaireFiltersAccordion = ({ code, children, className }: Annuaire
       expanded={expanded}
       ref={filterRef}
       className={clsx(
-        "!z-[1500] h-fit w-[212px] !border-x-[1px] !border-x-dsfr-border-default-grey bg-white",
+        "!z-[500] h-fit w-[212px] !border-x-[1px] !border-x-dsfr-border-default-grey bg-white",
         className,
         "annuaireFilterAccordion",
       )}

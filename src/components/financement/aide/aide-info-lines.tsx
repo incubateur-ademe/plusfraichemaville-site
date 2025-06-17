@@ -95,11 +95,6 @@ export const AidesTerritoiresFullDetailedLines = (aide: AidesTerritoiresAide): A
 
 export const AidesTerritoiresCardLines = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine[] => {
   return resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement
-    ? [
-        AideLinePorteurAide(aide, false),
-        AideLineRecurrence(aide),
-        AideLineSubvention(aide, false),
-        AideLineCalendrier(aide),
-      ]
-    : [AideLinePorteurAide(aide, false), AideLineRecurrence(aide), AideLineCalendrier(aide)];
+    ? [AideLinePorteurAide(aide, false), AideLineCalendrier(aide)]
+    : [AideLinePorteurAide(aide, false), AideLineCalendrier(aide)];
 };
