@@ -28,10 +28,10 @@ export const HomepageHero = () => {
           {hero.baseline}
         </h1>
         <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
-          <Link href={hero.cta1.url} className="fr-btn rounded-3xl">
+          <Link href={hero.cta1.url} className="fr-btn rounded-3xl" prefetch={false}>
             {hero.cta1.label}
           </Link>
-          <Link href={hero.cta2.url} className="fr-btn fr-btn--secondary rounded-3xl">
+          <Link href={hero.cta2.url} className="fr-btn fr-btn--secondary rounded-3xl" prefetch={false}>
             {hero.cta2.label}
           </Link>
         </div>

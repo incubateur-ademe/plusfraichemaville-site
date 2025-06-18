@@ -12,7 +12,8 @@ import {
 import IndienReminderModal from "@/src/components/diagnostic-indien/indien-reminder-modal";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 // eslint-disable-next-line max-len
-import { BREADCRUMB_DIAG_INDICATEURS_PRESENTATION } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
+
+import { BREADCRUMB_DIAG_INDICATEURS_PRESENTATION } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 
 export default async function IndicateursEnvironnementauxPresentationPage(props: {
   params: Promise<{ projetId: number }>;

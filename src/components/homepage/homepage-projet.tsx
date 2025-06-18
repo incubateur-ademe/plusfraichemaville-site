@@ -24,6 +24,7 @@ export const HomepageProjet = () => {
             "!lg:flex !lg:mx-0 mx-auto",
           )}
           href={projet.cta.url}
+          prefetch={false}
         >
           {projet.cta.label}
         </Link>

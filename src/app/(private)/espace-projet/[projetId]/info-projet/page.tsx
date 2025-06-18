@@ -3,6 +3,9 @@ import { ProjetInfoForm } from "@/src/forms/projet/ProjetInfoForm";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { BREADCRUMB_EDIT_PROJET } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
+import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
+import React from "react";
 
 export default function UpdateProjetPage() {
   const { getCurrentProjet } = useProjetsStore(useShallow((state) => state));
@@ -10,12 +13,15 @@ export default function UpdateProjetPage() {
   const canEditProjet = useCanEditProjet(currentProjet?.id);
 
   return (
-    <div className="fr-container pt-8">
-      <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">{"Je renseigne mon projet"}</h1>
-      <div className="mb-4">
-        {"Toutes les informations me permettront d'obtenir des recommandations sur mon projet."}
+    <>
+      <BannerProjetBreadcrumb step={BREADCRUMB_EDIT_PROJET} />
+      <div className="fr-container pt-8">
+        <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">{"Je renseigne mon projet"}</h1>
+        <div className="mb-4">
+          {"Toutes les informations me permettront d'obtenir des recommandations sur mon projet."}
+        </div>
+        <ProjetInfoForm projet={currentProjet} readOnly={!canEditProjet} />
       </div>
-      <ProjetInfoForm projet={currentProjet} readOnly={!canEditProjet} />
-    </div>
+    </>
   );
 }

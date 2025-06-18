@@ -37,7 +37,7 @@ export const FicheDiagnosticChoixParcours = () => {
   let parcoursPrestationLabel = "Je fais réaliser par un prestataire un diagnostic approfondi";
   if (projetId) {
     if (hasSelectedFicheDiagnostic) {
-      parcoursPrestationUrl = PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION(projetId);
+      parcoursPrestationUrl = PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS(projetId);
       parcoursPrestationButtonLabel = "Consulter mes prestations";
       parcoursPrestationLabel = "Je consulte les prestations de diagnostic choisies";
     } else {

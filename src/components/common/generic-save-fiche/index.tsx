@@ -5,7 +5,9 @@ import { GenericSaveModal } from "./generic-save-modal";
 import { GenericSaveButton } from "./generic-save-button";
 import { generateRandomId, TypeFiche } from "@/src/helpers/common";
 import clsx from "clsx";
-import { useProjetsStore } from "@/src/stores/projets/provider";
+// eslint-disable-next-line max-len
+import { unauthenticatedSaveModal } from "@/src/components/common/generic-save-fiche/generic-save-modal-unauthenticated";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export type GenericSaveBaseProps = {
   type: TypeFiche;
@@ -18,20 +20,19 @@ export type GenericSaveBaseProps = {
 };
 
 export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
-  const modal = createModal({
-    id: `${props.id.toString()}-${generateRandomId()}`,
-    isOpenedByDefault: false,
-  });
-  const currentProjetId = useProjetsStore((state) => state.currentProjetId);
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
 
-  if (!currentProjetId && props.type === TypeFiche.diagnostic) {
-    return null;
-  }
+  const modal = currentUserId
+    ? createModal({
+        id: `${props.id.toString()}-${generateRandomId()}`,
+        isOpenedByDefault: false,
+      })
+    : unauthenticatedSaveModal;
 
   return (
     <div data-id="generic-save-fiche" className={clsx(props.className)}>
       <GenericSaveButton modal={modal} {...props} />
-      {!props.withoutModal && <GenericSaveModal modal={modal} {...props} />}
+      {!props.withoutModal && currentUserId && <GenericSaveModal modal={modal} {...props} />}
     </div>
   );
 };

@@ -14,6 +14,18 @@ const data = {
   title: "Une fois connecté, créez votre projet, et accédez à tous ces services",
   blocs: [
     {
+      title: "Faites un diagnostic de surchauffe urbaine",
+      description: "Faites un diagnostic simplifié, et trouvez des prestations pour un diagnostic approfondi",
+      picto: "diagnostic",
+    },
+    {
+      title: "Trouvez la bonne combinaison de solutions",
+      description:
+        "Trouvez les solutions adaptées à votre espace, et accédez à des recommandations pour combiner " +
+        "les types de solution",
+      picto: "solutions",
+    },
+    {
       title: "Faites une estimation de budget de votre projet",
       description: "Sélectionnez des matériaux et estimez le coût des solutions",
       picto: "estimation",

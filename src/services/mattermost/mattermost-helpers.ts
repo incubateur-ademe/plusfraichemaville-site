@@ -62,8 +62,8 @@ export const makeConnectSyncBatchErrorWebhookData = (message: string) => {
   return {
     text: `:alert:**[Batch en erreur]**:alert:
     
-    ${message}
-    @raphael.taieb @mehdilouraoui 
+${message}
+@raphael.taieb 
 `,
   };
 };
@@ -72,7 +72,7 @@ export const makeBatchErrorWebhookData = (message: string) => {
   return {
     text: `:alert:**[Batch en erreur]**:alert:
 ${message}
-@raphael.taieb @mehdilouraoui  
+@raphael.taieb  
 `,
   };
 };

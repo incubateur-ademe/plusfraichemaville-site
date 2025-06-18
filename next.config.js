@@ -21,6 +21,16 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: "/surchauffe-urbaine/retour-experience/:path*",
+        destination: "/retour-experience/diagnostic/:path*",
+        permanent: true,
+      },
+      {
+        source: "/projet/:path*",
+        destination: "/retour-experience/projet/:path*",
+        permanent: true,
+      },
+      {
         source: "/fiches-techniques",
         destination: "/fiche-solution",
         permanent: true,
@@ -28,6 +38,11 @@ const nextConfig = {
       {
         source: "/projets-realises",
         destination: "/projet",
+        permanent: true,
+      },
+      {
+        source: "/mon-projet/favoris",
+        destination: "/espace-projet",
         permanent: true,
       },
       {

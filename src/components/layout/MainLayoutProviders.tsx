@@ -9,6 +9,8 @@ import HubspotPageView from "../hubspot/path-page-view";
 import { HusbpotScript } from "@/src/components/hubspot/script";
 import { StartDsfrOnHydration } from "@codegouvfr/react-dsfr/next-app-router";
 import { DsfrProvider } from "@/src/app/dsfr-provider";
+// eslint-disable-next-line max-len
+import { GenericSaveModalUnauthenticated } from "@/src/components/common/generic-save-fiche/generic-save-modal-unauthenticated";
 
 export default function MainLayoutProviders({ children, lang }: PropsWithChildren<{ lang: string }>) {
   return (
@@ -24,6 +26,7 @@ export default function MainLayoutProviders({ children, lang }: PropsWithChildre
               <>
                 <StartDsfrOnHydration />
                 {children}
+                <GenericSaveModalUnauthenticated />
               </>
             </DsfrProvider>
           </ModalStoreProvider>

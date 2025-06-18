@@ -12,6 +12,7 @@ import { AnnuaireSidePanelContainer } from "../side-panel/annuaire-side-panel-co
 import { AnnuaireMapTileLayer } from "@/src/components/annuaire/map/annuaire-map-tile-layer";
 import { LatLngTuple } from "leaflet";
 import { AnnuaireMapFocus } from "@/src/components/annuaire/map/annuaire-map-focus";
+import clsx from "clsx";
 
 export const MAP_FALLBACK_DEFAULT_LOCATION: LatLngTuple = [48.8566, 2.3522];
 
@@ -20,6 +21,7 @@ export type AnnuaireMapClientProps = {
   setSelectedMarker: (_: CustomMarker) => void;
   selectedMarker?: CustomMarker;
   mapFocus?: { coordinates?: LatLngTuple; zoom?: ZoomLevelKey };
+  className?: string;
 };
 
 const MapFocus = ({ mapFocus }: { mapFocus?: { coordinates?: LatLngTuple; zoom?: ZoomLevelKey } }) => {
@@ -33,7 +35,13 @@ const MapFocus = ({ mapFocus }: { mapFocus?: { coordinates?: LatLngTuple; zoom?:
   return null;
 };
 
-const AnnuaireMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocus }: AnnuaireMapClientProps) => {
+const AnnuaireMapClient = ({
+  markers,
+  setSelectedMarker,
+  selectedMarker,
+  mapFocus,
+  className,
+}: AnnuaireMapClientProps) => {
   const currentProjetCoordinates = useCurrentProjetCoordinates();
 
   const handleMarkerClick = (selectedMarker: CustomMarker) => {
@@ -45,7 +53,7 @@ const AnnuaireMapClient = ({ markers, setSelectedMarker, selectedMarker, mapFocu
   }
 
   return (
-    <div className="flex">
+    <div className={clsx("flex", className)}>
       <div className="h-[715px] w-full max-w-[50rem]">
         <MapContainer
           className="relative h-full"

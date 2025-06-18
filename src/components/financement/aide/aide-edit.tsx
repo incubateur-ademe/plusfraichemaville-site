@@ -22,6 +22,10 @@ import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { notifications } from "@/src/components/common/notifications";
 import { useAidesByEstimationFetcher } from "@/src/hooks/use-aides-selected-by-estimation";
 import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
+// eslint-disable-next-line max-len
+import { BREADCRUMB_FINANCEMENTS_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-financement";
+import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
+import { dateToStringWithTime } from "@/src/helpers/dateUtils";
 
 export const AideEdit = memo(() => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -65,7 +69,7 @@ export const AideEdit = memo(() => {
   );
   const { paginatedResults, currentPage, handlePageChange, itemsPerPage } = usePagination({
     data: filteredResults,
-    itemsPerPage: 6,
+    itemsPerPage: 18,
   });
 
   const handleFiltersChange = (key: FichesDiagnosticFiltersKey) => {
@@ -74,64 +78,69 @@ export const AideEdit = memo(() => {
   };
 
   return (
-    <div className="fr-container pt-8" id="financement-pagination">
-      {/* eslint-disable-next-line max-len */}
-      <AideEstimationsListeHeader title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature" />
-      <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
-        <AideEstimationsPanelHeader estimation={estimation} />
+    <>
+      {estimation?.created_at && (
+        <BannerProjetBreadcrumb step={BREADCRUMB_FINANCEMENTS_LISTE(dateToStringWithTime(estimation.created_at))} />
+      )}
+      <div className="fr-container pt-8" id="financement-pagination">
+        {/* eslint-disable-next-line max-len */}
+        <AideEstimationsListeHeader title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature" />
+        <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
+          <AideEstimationsPanelHeader estimation={estimation} />
 
-        {process.env.NEXT_PUBLIC_AIDES_TERRITOIRES_USE_BETA_API === "true" && (
-          <ToggleSwitch
-            labelPosition="left"
-            className="flex justify-self-start"
-            label="Version Beta de Aides territoires"
-            inputTitle=""
-            checked={isNewAPIVersion ?? undefined}
-            onChange={() => setIsNewAPIVersion(!isNewAPIVersion)}
-          />
-        )}
+          {process.env.NEXT_PUBLIC_AIDES_TERRITOIRES_USE_BETA_API === "true" && (
+            <ToggleSwitch
+              labelPosition="left"
+              className="flex justify-self-start"
+              label="Version Beta de Aides territoires"
+              inputTitle=""
+              checked={isNewAPIVersion ?? undefined}
+              onChange={() => setIsNewAPIVersion(!isNewAPIVersion)}
+            />
+          )}
 
-        <div className="mb-10 flex flex-row items-center justify-between">
-          <AideEditFilter
-            filters={filters}
-            toggleFilter={handleFiltersChange}
-            aideFinanciereCount={aideFinanciereCount}
-            aideTechniqueCount={aideTechniqueCount}
-            selectedAidesCount={estimation?.estimations_aides?.length || 0}
-            isLoading={isLoading}
-          />
-          <AideEditSortField sortMethod={sortMethod} setSortMethod={setSortMethod} />
+          <div className="mb-10 flex flex-row items-center justify-between">
+            <AideEditFilter
+              filters={filters}
+              toggleFilter={handleFiltersChange}
+              aideFinanciereCount={aideFinanciereCount}
+              aideTechniqueCount={aideTechniqueCount}
+              selectedAidesCount={estimation?.estimations_aides?.length || 0}
+              isLoading={isLoading}
+            />
+            <AideEditSortField sortMethod={sortMethod} setSortMethod={setSortMethod} />
+          </div>
+
+          <div className="aide-card flex flex-wrap gap-6">
+            {isLoading
+              ? skeletons
+              : paginatedResults?.map((aide) => <AideCard aide={aide} withSaveButton={canEditProjet} key={aide.id} />)}
+          </div>
         </div>
-
-        <div className="aide-card flex flex-wrap gap-6">
-          {isLoading
-            ? skeletons
-            : paginatedResults?.map((aide) => <AideCard aide={aide} withSaveButton={canEditProjet} key={aide.id} />)}
+        <div className="flex items-center justify-between">
+          <GenericFicheLink
+            href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
+            className="fr-btn fr-btn--secondary h-fit rounded-3xl"
+          >
+            Précédent
+          </GenericFicheLink>
+          {filteredResults && (
+            <Pagination
+              count={Math.ceil(filteredResults.length / itemsPerPage)}
+              defaultPage={currentPage}
+              onPageChange={handlePageChange}
+            />
+          )}
+          <GenericFicheLink
+            href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
+            className="fr-btn fr-btn--primary h-fit rounded-3xl"
+            onClick={() => notifications("success", "AIDE_SELECTION_VALIDATED")}
+          >
+            Valider
+          </GenericFicheLink>
         </div>
       </div>
-      <div className="flex items-center justify-between">
-        <GenericFicheLink
-          href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
-          className="fr-btn fr-btn--secondary h-fit rounded-3xl"
-        >
-          Précédent
-        </GenericFicheLink>
-        {filteredResults && (
-          <Pagination
-            count={Math.ceil(filteredResults.length / itemsPerPage)}
-            defaultPage={currentPage}
-            onPageChange={handlePageChange}
-          />
-        )}
-        <GenericFicheLink
-          href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
-          className="fr-btn fr-btn--primary h-fit rounded-3xl"
-          onClick={() => notifications("success", "AIDE_SELECTION_VALIDATED")}
-        >
-          Valider
-        </GenericFicheLink>
-      </div>
-    </div>
+    </>
   );
 });
 

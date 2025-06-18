@@ -11,7 +11,7 @@ export const SurchauffeUrbaineStoryCard = ({ rexDiagStory }: { rexDiagStory: Ret
   return (
     <div className="group text-left">
       <Link
-        href={PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC(rexDiagStory.attributes.slug)}
+        href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(rexDiagStory.attributes.slug)}
         onClick={() => trackEvent(SITE_VITRINE_REX_DIAG_STORY(rexDiagStory.attributes.slug))}
       >
         <div

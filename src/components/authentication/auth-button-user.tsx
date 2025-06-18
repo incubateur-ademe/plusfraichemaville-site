@@ -1,15 +1,12 @@
 "use client";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Link from "next/link";
 
 import { useState } from "react";
 
 export const AuthButtonUser = () => {
-  const { status } = useSession();
-  const isAuthanticated = status === "authenticated";
   const [open, setOpen] = useState(false);
   const opener = () => setOpen(!open);
   const closer = () => {
@@ -20,13 +17,11 @@ export const AuthButtonUser = () => {
     {
       label: "Mon profil",
       url: PFMV_ROUTES.MON_PROFIL,
-      shouldDisplay: isAuthanticated,
     },
     {
-      label: isAuthanticated ? "Se déconnecter" : "Se connecter",
-      url: isAuthanticated ? PFMV_ROUTES.DECONNEXION : PFMV_ROUTES.ESPACE_PROJET,
+      label: "Se déconnecter",
+      url: PFMV_ROUTES.DECONNEXION,
       className: "text-dsfr-text-label-blue-france font-bold",
-      shouldDisplay: true,
     },
   ];
 
@@ -45,16 +40,13 @@ export const AuthButtonUser = () => {
           )}
         >
           <ul className="relative z-10">
-            {links.map(
-              (link, index) =>
-                link.shouldDisplay && (
-                  <li className={`mb-3 text-sm ${link.className}`} key={index}>
-                    <Link onClick={closer} href={link.url}>
-                      {link.label}
-                    </Link>
-                  </li>
-                ),
-            )}
+            {links.map((link, index) => (
+              <li className={`mb-3 text-sm ${link.className}`} key={index}>
+                <Link onClick={closer} href={link.url}>
+                  {link.label}
+                </Link>
+              </li>
+            ))}
           </ul>
           <div onClick={closer} className="fixed left-0 top-0 z-0 h-screen w-screen"></div>
         </div>

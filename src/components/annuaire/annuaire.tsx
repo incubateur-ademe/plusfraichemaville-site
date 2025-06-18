@@ -15,6 +15,7 @@ import { useAnnuaireCardFilters } from "@/src/components/annuaire/use-annuaire-c
 import { useEffect, useMemo } from "react";
 import { AnnuaireCardFilters } from "@/src/components/annuaire/annuaire-card-filters";
 import { AnnuaireContactCard } from "@/src/components/annuaire/contacts/annuaire-contact-card";
+import { AnnuaireLayoutButton } from "@/src/components/annuaire/annuaire-layout-button";
 
 export const Annuaire = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -48,9 +49,9 @@ export const Annuaire = () => {
   }, [removeRexContacts, rexContactIds]);
 
   return (
-    <>
+    <div className="fr-container mt-8">
       <div className="mb-8 flex justify-between align-middle">
-        <h2 className="!mb-0 text-[28px]">Mes contacts utiles au projet</h2>
+        <h2 className="!mb-0 text-[1.75rem]">Mes contacts utiles au projet</h2>
         {(!isEmpty(inProgressProjetContacts) || !isEmpty(rexContactIds)) && (
           <AnnuaireContactsDownloader projetId={currentProjet?.id} />
         )}
@@ -103,6 +104,7 @@ export const Annuaire = () => {
       <div className="mt-10">
         <AnnuaireProjetVisibility isLecteur={isLecteur} />
       </div>
-    </>
+      <AnnuaireLayoutButton />
+    </div>
   );
 };

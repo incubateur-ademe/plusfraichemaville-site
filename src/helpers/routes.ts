@@ -7,16 +7,18 @@ export const PFMV_ROUTES = {
   AIDE_DECISION: "/aide-decision",
   FICHES_SOLUTIONS: "/fiche-solution",
   MES_FICHES_SOLUTIONS: "/mon-projet/favoris",
-  RETOURS_EXPERIENCE: "/projet",
-  RETOURS_EXPERIENCE_DIAGNOSTIC: (slug: string) => `/surchauffe-urbaine/retour-experience/${slug}`,
+  RETOURS_EXPERIENCE_PROJET: "/retour-experience/projet",
+  RETOUR_EXPERIENCE_DIAGNOSTIC: (slug: string) => `/retour-experience/diagnostic/${slug}`,
+  RETOURS_EXPERIENCE_DIAGNOSTIC: "/retour-experience/diagnostic",
   SURCHAUFFE_URBAINE_INTRODUCTION: "/surchauffe-urbaine",
   SURCHAUFFE_URBAINE_COMPRENDRE: "/surchauffe-urbaine/notions-cles",
   SURCHAUFFE_URBAINE_TIMING: "/surchauffe-urbaine/quand-faire-un-diagnostic",
-  SURCHAUFFE_URBAINE_REX: "/surchauffe-urbaine/retour-experience",
-  SURCHAUFFE_URBAINE_TERRITOIRE: (codeInsee: string) => `/surchauffe-urbaine/territoire?codeInsee=${codeInsee}`,
+  SURCHAUFFE_URBAINE_TERRITOIRE: "/surchauffe-urbaine/territoire",
+  SURCHAUFFE_URBAINE_TERRITOIRE_AVEC_CODE: (codeInsee: string) =>
+    `/surchauffe-urbaine/territoire?codeInsee=${codeInsee}`,
   SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC: (ficheDiagnosticSlug: string) =>
     `/surchauffe-urbaine/fiche-diagnostic/${ficheDiagnosticSlug}`,
-  RETOUR_EXPERIENCE: (slug: string) => `${PFMV_ROUTES.RETOURS_EXPERIENCE}/${slug}`,
+  RETOUR_EXPERIENCE_PROJET: (slug: string) => `${PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET}/${slug}`,
   CONTACT: "/contact",
   CONTACT_SUCCESS: "/contact/success",
   NEWSLETTER: "/newsletter",
@@ -48,7 +50,7 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/resultats`,
   ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/liste`,
-  ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SELECTION: (projetId: number) =>
+  ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/selection`,
   ESPACE_PROJET_FINANCEMENT: (projetId: number) => `/espace-projet/${projetId}/financement`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
