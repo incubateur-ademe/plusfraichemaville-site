@@ -1,11 +1,11 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
-import { HomepageNewsletter } from "@/src/components/homepage/homepage-newsletter";
 import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
 import CustomTabButton from "@/src/components/common/CustomTabButton";
 import { WebinairesList } from "@/src/components/webinaires/webinaires-list";
 import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
 import orderBy from "lodash/orderBy";
+import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
 
 export const metadata: Metadata = computeMetadata("Webinaires");
 
@@ -60,7 +60,7 @@ export default async function PageWebinaires() {
           />
         </div>
       </div>
-      <HomepageNewsletter />
+      <NewsletterLinkedin />
     </div>
   );
 }
