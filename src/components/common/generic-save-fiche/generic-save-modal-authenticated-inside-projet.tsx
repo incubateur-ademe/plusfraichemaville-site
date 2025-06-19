@@ -34,7 +34,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
       iconId="fr-icon-success-fill text-dsfr-background-action-high-success-hover mr-2"
     >
       <div className="mb-10 text-2xl font-bold">{projet?.nom}</div>
-      <Button className="fr-btn fr-btn--secondary mb-4 mr-4 !min-h-fit rounded-3xl !text-sm" onClick={clickAddMoreCard}>
+      <Button className="mb-4 mr-4 !min-h-fit rounded-3xl !text-sm" onClick={clickAddMoreCard} priority="secondary">
         {type === TypeFiche.diagnostic ? "Ajouter d'autres méthodes" : "Ajouter d'autres solutions"}
       </Button>
       <Link
