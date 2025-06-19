@@ -11,6 +11,7 @@ import { mapClimadiagToCollectiteOption } from "@/src/components/surchauffe-urba
 // eslint-disable-next-line max-len
 import { SurchauffeUrbaineClimadiag } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-climadiag";
 import { Climadiag } from "@/src/components/climadiag/types";
+import MapLCZ from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz";
 
 export const metadata: Metadata = computeMetadata("Impact de la surchauffe urbaine sur votre territoire");
 
@@ -33,6 +34,7 @@ export default async function SurchauffeUrbaineTerritoirePage(props: {
         {climadiagResult && (
           <SurchauffeUrbaineClimadiag climadiagInfo={climadiagResult as unknown as Climadiag} className="mt-6" />
         )}
+        <MapLCZ/>
         <TeaserDiagnosticComponent className="mt-12" />
       </div>
     </>

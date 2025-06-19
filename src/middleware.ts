@@ -12,6 +12,8 @@ const cspHeader = `
     style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
     img-src 'self' blob: data: https://cdn.plusfraichemaville.fr/ https://plusfraichemaville.s3.fr-par.scw.cloud/
     https://*.basemaps.cartocdn.com
+    https://cartagene.cerema.fr
+    https://tile.openstreetmap.org
     https://*.hsforms.com 
     https://data.geopf.fr
     https://*.hubspot.com;
@@ -23,7 +25,7 @@ const cspHeader = `
     frame-ancestors 'none';
     upgrade-insecure-requests;
     connect-src 'self' https://sentry.incubateur.net/ https://stats.beta.gouv.fr/matomo.php
-     https://api-adresse.data.gouv.fr/search/ https://*.hscollectedforms.net;
+     https://api-adresse.data.gouv.fr/search/ https://*.hscollectedforms.net https://cartagene.cerema.fr;
 `;
 const cspHeaderValue = cspHeader.replace(/\s{2,}/g, " ").trim();
 
