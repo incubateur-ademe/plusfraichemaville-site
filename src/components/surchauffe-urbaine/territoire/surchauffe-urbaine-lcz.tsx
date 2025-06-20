@@ -82,7 +82,7 @@ export const MapLCZ = () => {
           transparent={true}
           version="1.3.0"
           attribution='&copy; <a href="https://cartagene.cerema.fr/">Cerema</a>'
-          opacity={0.7}
+          opacity={0.6}
         />
         <ArcGISFeatureInfo />
       </MapContainer>
