@@ -74,6 +74,7 @@ export const MapLCZ = () => {
         <TileLayer
           url="https://cartagene.cerema.fr/server/rest/services/Hosted/l_lcz_spot_000_2022_tl/MapServer/tile/{z}/{y}/{x}"
           attribution='&copy; <a href="https://cartagene.cerema.fr/">Cerema</a>'
+          maxZoom={14}
         />
         <WMSTileLayer
           url="https://cartagene.cerema.fr/server/services/l_lcz_spot_000_2022_mil/MapServer/WMSServer"
@@ -83,6 +84,7 @@ export const MapLCZ = () => {
           version="1.3.0"
           attribution='&copy; <a href="https://cartagene.cerema.fr/">Cerema</a>'
           opacity={0.6}
+          minZoom={15}
         />
         <ArcGISFeatureInfo />
       </MapContainer>
