@@ -11,6 +11,7 @@ export type AddressCollectivite = {
   nomCollectivite: string;
   codePostal: string;
   codeInsee: string;
+  oldCodeInsee?: string;
   long?: number | null;
   lat?: number | null;
   banInfo?: GeoJsonProperties | null;

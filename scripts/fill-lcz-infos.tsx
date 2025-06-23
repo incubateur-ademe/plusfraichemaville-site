@@ -2,6 +2,8 @@ import { isEmpty } from "@/src/helpers/listUtils";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { Prisma } from "@prisma/client";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
+import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
+import AnyNull = Prisma.AnyNull;
 
 type LCZCommuneCoverage = {
   insee_commune: string;
@@ -14,7 +16,7 @@ type LCZCommuneCoverage = {
 const LCZ_COVERAGE_THRESHOLD = 0;
 const PAGE_SIZE = 200;
 
-async function paginated_fetch(page = 0) {
+async function fillLczCoverage(page = 0) {
   console.log("page", page);
   const response = await fetch(
     `https://tabular-api.data.gouv.fr/api/resources/fb8028d6-8018-40fa-b655-4672e8f6feaf/data/?couverture_lcz__strictly_greater=${LCZ_COVERAGE_THRESHOLD}&page_size=${PAGE_SIZE}&page=${page}`,
@@ -43,13 +45,54 @@ async function paginated_fetch(page = 0) {
       }
     }
     page++;
-    return paginated_fetch(page);
+    return fillLczCoverage(page);
+  }
+}
+
+async function fillCoordinatesForLCZ() {
+  const rowsToProcess = await prismaClient.climadiag.findMany({
+    where: {
+      adresse_all_infos: { equals: AnyNull },
+      couverture_lcz: { gt: 0 },
+    },
+  });
+  for (const collectivite of rowsToProcess) {
+    let fetchedCollectivites = await fetchCollectiviteFromBanApi(`${collectivite.nom} ${collectivite.code_postal}`, 40);
+    let matchedCollectivite = fetchedCollectivites.find(
+      (fc) => fc.codeInsee === collectivite.code_insee || fc.oldCodeInsee === collectivite.code_insee,
+    );
+    if (!matchedCollectivite) {
+      fetchedCollectivites = await fetchCollectiviteFromBanApi(`${collectivite.code_postal}`, 40);
+      matchedCollectivite = fetchedCollectivites.find(
+        (fc) =>
+          fc.codeInsee === collectivite.code_insee ||
+          fc.oldCodeInsee === collectivite.code_insee ||
+          fc.codePostal === collectivite.code_postal,
+      );
+    }
+    if (matchedCollectivite) {
+      await prismaClient.climadiag.update({
+        where: {
+          id: collectivite.id,
+        },
+        data: {
+          adresse_all_infos: matchedCollectivite.banInfo as unknown as Prisma.JsonObject,
+        },
+      });
+    } else {
+      console.log("Pas de correspondance pour la collectivite avec le code insee", collectivite.code_insee);
+    }
   }
 }
 
 function main() {
   console.log("Début traitement d'import des données LCZ");
-  paginated_fetch().then(() => console.log("Traitement terminé"));
+  fillLczCoverage().then(() => {
+    console.log("Import des données LCZ terminé");
+    fillCoordinatesForLCZ().then(() => {
+      console.log("Traitement terminé");
+    });
+  });
 }
 
 main();

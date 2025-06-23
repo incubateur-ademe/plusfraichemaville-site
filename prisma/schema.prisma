@@ -268,6 +268,7 @@ model climadiag {
   population                  Int               @default(0)
   superficie                  Int               @default(0)
   couverture_lcz              Float             @default(0)
+  adresse_all_infos           Json?
 
   @@index([code_insee])
   @@index([code_postal])

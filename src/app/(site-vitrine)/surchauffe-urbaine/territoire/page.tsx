@@ -34,7 +34,7 @@ export default async function SurchauffeUrbaineTerritoirePage(props: {
         {climadiagResult && (
           <SurchauffeUrbaineClimadiag climadiagInfo={climadiagResult as unknown as Climadiag} className="mt-6" />
         )}
-        <MapLCZ/>
+        <MapLCZ />
         <TeaserDiagnosticComponent className="mt-12" />
       </div>
     </>
