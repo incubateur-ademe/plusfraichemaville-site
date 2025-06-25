@@ -7,7 +7,15 @@ import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_URL_SITE ?? "";
-  const staticPages = ["accessibilite", "budget", "contact", "mentions-legales", "stats", "connexion", "webinaires"];
+  const staticPages = [
+    "/accessibilite",
+    "/budget",
+    "/contact",
+    "/mentions-legales",
+    "/stats",
+    "/connexion",
+    "/webinaires",
+  ];
   const importantPages = [
     "",
     PFMV_ROUTES.AIDE_DECISION,

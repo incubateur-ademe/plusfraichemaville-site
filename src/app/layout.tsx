@@ -70,7 +70,9 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <UserStoreServer />
           <AppHeader />
           <Toaster position="bottom-left" />
-          <div className={`${xtra_bold.variable}`}>{children}</div>
+          <div className={`${xtra_bold.variable}`}>
+            <main>{children}</main>
+          </div>
           <Agent />
         </MainLayoutProviders>
       </body>
