@@ -4,6 +4,8 @@ import L, { LatLngExpression } from "leaflet";
 import "leaflet/dist/leaflet.css";
 import { useState } from "react";
 import { MapContainer, Popup, TileLayer, useMapEvent, WMSTileLayer } from "react-leaflet";
+import { Climadiag } from "@/src/components/climadiag/types";
+import { LCZMapFocus } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-focus";
 
 const ArcGISFeatureInfo = () => {
   const [popup, setPopup] = useState<null | { latlng: LatLngExpression; content: string }>(null);
@@ -54,22 +56,20 @@ const ArcGISFeatureInfo = () => {
   ) : null;
 };
 
-export const MapLCZ = () => {
-  const center = [48.86471, 2.333333]; // Paris
-  const zoom = 10;
-
+type SurchauffeUrbaineLCZMapProps = {
+  climadiagInfo: Climadiag;
+};
+export const SurchauffeUrbaineLCZMap = ({ climadiagInfo }: SurchauffeUrbaineLCZMapProps) => {
   return (
     <div style={{ width: "100%", height: "500px" }}>
-      <MapContainer
-        center={center as LatLngExpression}
-        zoom={zoom}
-        style={{ width: "100%", height: "100%" }}
-        attributionControl={true}
-        zoomControl={true}
-      >
+      <MapContainer style={{ width: "100%", height: "100%" }} attributionControl={true} zoomControl={true}>
+        <LCZMapFocus climadiagInfo={climadiagInfo} />
         <TileLayer
-          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          attribution="Carte © IGN/Geoplateforme"
+          url={
+            "https://data.geopf.fr/wmts?&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&TILEMATRIXSET=PM" +
+            "&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILECOL={x}&TILEROW={y}&TILEMATRIX={z}"
+          }
         />
         <TileLayer
           url="https://cartagene.cerema.fr/server/rest/services/Hosted/l_lcz_spot_000_2022_tl/MapServer/tile/{z}/{y}/{x}"
@@ -83,8 +83,8 @@ export const MapLCZ = () => {
           transparent={true}
           version="1.3.0"
           attribution='&copy; <a href="https://cartagene.cerema.fr/">Cerema</a>'
-          opacity={0.6}
-          minZoom={15}
+          opacity={0.5}
+          minZoom={14}
         />
         <ArcGISFeatureInfo />
       </MapContainer>
@@ -92,4 +92,4 @@ export const MapLCZ = () => {
   );
 };
 
-export default MapLCZ;
+export default SurchauffeUrbaineLCZMap;

@@ -85,12 +85,44 @@ async function fillCoordinatesForLCZ() {
   }
 }
 
+async function fillLCZInfosForEPCI() {
+  const epcisCoverage = await prismaClient.climadiag.groupBy({
+    by: ["epci_parent_id"],
+    where: {
+      NOT: { epci_parent_id: null },
+    },
+    _avg: { couverture_lcz: true },
+  });
+
+  for (const epciCoverage of epcisCoverage) {
+    const mostCoveredCollectivite = await prismaClient.climadiag.findFirst({
+      where: {
+        epci_parent_id: epciCoverage.epci_parent_id,
+      },
+      orderBy: [{ couverture_lcz: "desc" }, { population: "desc" }],
+    });
+    if (mostCoveredCollectivite) {
+      await prismaClient.climadiag.update({
+        where: { id: epciCoverage.epci_parent_id! },
+        data: {
+          couverture_lcz: Math.round(epciCoverage._avg.couverture_lcz || 0),
+          adresse_all_infos: mostCoveredCollectivite.adresse_all_infos as unknown as Prisma.JsonObject,
+        },
+      });
+      console.log("updated coverage of epci", epciCoverage.epci_parent_id);
+    }
+  }
+}
+
 function main() {
   console.log("Début traitement d'import des données LCZ");
   fillLczCoverage().then(() => {
     console.log("Import des données LCZ terminé");
     fillCoordinatesForLCZ().then(() => {
-      console.log("Traitement terminé");
+      console.log("Coordonnées récupérées");
+      fillLCZInfosForEPCI().then(() => {
+        console.log("Traitement terminé");
+      });
     });
   });
 }
