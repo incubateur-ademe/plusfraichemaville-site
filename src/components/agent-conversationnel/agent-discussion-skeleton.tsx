@@ -1,6 +1,4 @@
 "use client";
-import "@nlux/themes/nova.css";
-import "./agent.color.css";
 import clsx from "clsx";
 import { CHAT_HEIGHT, CHAT_WIDTH } from "./hooks/use-ai-chat-controls";
 
