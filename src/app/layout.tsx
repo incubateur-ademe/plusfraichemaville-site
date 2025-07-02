@@ -2,7 +2,6 @@ import "./globals.css";
 import { ReactElement } from "react";
 import AppHeader from "@/src/components/layout/AppHeader";
 import { Metadata } from "next";
-import localFont from "next/font/local";
 import { Toaster } from "react-hot-toast";
 import MainLayoutProviders from "@/src/components/layout/MainLayoutProviders";
 import { ProjetStoreServer } from "@/src/stores/projets/server";
@@ -10,14 +9,8 @@ import { UserStoreServer } from "@/src/stores/user/server";
 import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
-import { Agent } from "@/src/components/agent-conversationnel/agent";
 import { DsfrHead, getHtmlAttributes } from "@/src/app/server-only-index";
 import MatomoScript from "@/src/components/matomo/matomo-script";
-
-const xtra_bold = localFont({
-  src: "../../public/fonts/Marianne-ExtraBold.woff2",
-  variable: "--font-xtra-bold",
-});
 
 export const metadata: Metadata = {
   title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
@@ -70,10 +63,7 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <UserStoreServer />
           <AppHeader />
           <Toaster position="bottom-left" />
-          <div className={`${xtra_bold.variable}`}>
-            <main>{children}</main>
-          </div>
-          <Agent />
+          <main>{children}</main>
         </MainLayoutProviders>
       </body>
     </html>
