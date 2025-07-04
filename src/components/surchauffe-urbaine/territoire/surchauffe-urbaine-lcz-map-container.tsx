@@ -27,13 +27,12 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
       <div className="mb-4 flex flex-col-reverse items-start justify-between gap-4 md:flex-row">
         <div>
           <Badge className="!mb-3 !bg-dsfr-background-open-blue-france !text-pfmv-navy">climat actuel</Badge>
-          <div className="mb-4 mt-2 text-xl font-bold text-dsfr-text-label-blue-france">
+          <div className="mb-2 mt-2 text-xl font-bold text-dsfr-text-label-blue-france">
             <i className="ri-map-pin-line mr-1  " />
             {climadiagInfo.nom} - {climadiagInfo.code_postal}
           </div>
-          <div className="text-[1.375rem] font-bold text-pfmv-navy">
-            Consultez la cartographie des zones climatiques locales (LCZ) pour repérer les secteurs potentiellement
-            sensibles à la surchauffe urbaine.
+          <div className="mb-4 text-[1.375rem] font-bold text-pfmv-navy">
+            Consultez la cartographie des zones climatiques locales (LCZ)
           </div>
         </div>
         <Link
