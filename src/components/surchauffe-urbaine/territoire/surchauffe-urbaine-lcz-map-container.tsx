@@ -4,15 +4,16 @@ import dynamic from "next/dynamic";
 
 import { Climadiag } from "@/src/components/climadiag/types";
 import clsx from "clsx";
-import { AnnuaireMapSkeleton } from "@/src/components/annuaire/map/annuaire-map-skeleton";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Image from "next/image";
 import { SurchauffeUrbaineMapLczLegend } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-map-lcz-legend";
 import Link from "next/link";
+import { SurchauffeUrbaineMapLczExplanation } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-map-lcz-explanation";
+import { LczMapSkeleton } from "@/src/components/surchauffe-urbaine/territoire/lcz-map-skeleton";
 
 const LazyLCZMapClient = dynamic(() => import("./surchauffe-urbaine-lcz-map"), {
   ssr: false,
-  loading: () => <AnnuaireMapSkeleton />,
+  loading: () => <LczMapSkeleton />,
 });
 
 type LCZMapContainerProps = {
@@ -48,10 +49,11 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
           />
         </Link>
       </div>
-      <div className="flex flex-row">
-        <SurchauffeUrbaineMapLczLegend />
+      <div className="flex h-[37.5rem] flex-row gap-6">
+        <SurchauffeUrbaineMapLczLegend className="w-56 overflow-auto" />
         <LazyLCZMapClient climadiagInfo={climadiagInfo} />
       </div>
+      <SurchauffeUrbaineMapLczExplanation className="mt-6" />
     </div>
   );
 };

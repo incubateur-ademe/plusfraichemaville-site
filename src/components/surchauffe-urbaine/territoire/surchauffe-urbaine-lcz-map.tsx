@@ -59,36 +59,36 @@ const ArcGISFeatureInfo = () => {
 type SurchauffeUrbaineLCZMapProps = {
   climadiagInfo: Climadiag;
 };
+
 export const SurchauffeUrbaineLCZMap = ({ climadiagInfo }: SurchauffeUrbaineLCZMapProps) => {
   return (
-    <div style={{ width: "100%", height: "500px" }}>
-      <MapContainer style={{ width: "100%", height: "100%" }} attributionControl={true} zoomControl={true}>
-        <LCZMapFocus climadiagInfo={climadiagInfo} />
-        <TileLayer
-          attribution="Carte © IGN/Geoplateforme"
-          url={
-            "https://data.geopf.fr/wmts?&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&TILEMATRIXSET=PM" +
-            "&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILECOL={x}&TILEROW={y}&TILEMATRIX={z}"
-          }
-        />
-        <TileLayer
-          url="https://cartagene.cerema.fr/server/rest/services/Hosted/l_lcz_spot_000_2022_tl/MapServer/tile/{z}/{y}/{x}"
-          attribution='&copy; <a href="https://cartagene.cerema.fr/">Cerema</a>'
-          maxZoom={14}
-        />
-        <WMSTileLayer
-          url="https://cartagene.cerema.fr/server/services/l_lcz_spot_000_2022_mil/MapServer/WMSServer"
-          layers="0"
-          format="image/png"
-          transparent={true}
-          version="1.3.0"
-          attribution='&copy; <a href="https://cartagene.cerema.fr/">Cerema</a>'
-          opacity={0.5}
-          minZoom={14}
-        />
-        <ArcGISFeatureInfo />
-      </MapContainer>
-    </div>
+    <MapContainer className="h-full w-full" attributionControl={true} zoomControl={true} zoom={11}>
+      <TileLayer
+        attribution="Carte © IGN/Geoplateforme"
+        url={
+          "https://data.geopf.fr/wmts?&REQUEST=GetTile&SERVICE=WMTS&VERSION=1.0.0&TILEMATRIXSET=PM" +
+          "&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&STYLE=normal&FORMAT=image/jpeg&TILECOL={x}&TILEROW={y}&TILEMATRIX={z}"
+        }
+      />
+      <WMSTileLayer
+        url="https://cartagene.cerema.fr/server/services/l_lcz_spot_000_2022_mil/MapServer/WMSServer"
+        layers="0"
+        format="image/png"
+        transparent={true}
+        version="1.3.0"
+        attribution='&copy; <a href="https://cartagene.cerema.fr/">Cerema</a>'
+        opacity={0.5}
+        minZoom={14}
+      />
+      <TileLayer
+        url="https://cartagene.cerema.fr/server/rest/services/Hosted/l_lcz_spot_000_2022_tl/MapServer/tile/{z}/{y}/{x}"
+        attribution='&copy; <a href="https://cartagene.cerema.fr/">Cerema</a>'
+        opacity={0.7}
+        maxZoom={14}
+      />
+      <LCZMapFocus climadiagInfo={climadiagInfo} />
+      <ArcGISFeatureInfo />
+    </MapContainer>
   );
 };
 
