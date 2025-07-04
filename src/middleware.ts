@@ -17,7 +17,7 @@ const cspHeader = `
     https://*.hsforms.com 
     https://data.geopf.fr
     https://*.hubspot.com;
-    font-src 'self' https://fonts.gstatic.com/;
+    font-src 'self' https://fonts.gstatic.com/ ;
     object-src 'none';
     base-uri 'self';
     form-action 'self';
@@ -25,7 +25,8 @@ const cspHeader = `
     frame-ancestors 'none';
     upgrade-insecure-requests;
     connect-src 'self' https://sentry.incubateur.net/ https://stats.beta.gouv.fr/matomo.php
-     https://api-adresse.data.gouv.fr/search/ https://*.hscollectedforms.net https://cartagene.cerema.fr;
+     https://api-adresse.data.gouv.fr/search/ https://*.hscollectedforms.net https://cartagene.cerema.fr https://data.geopf.fr
+      https://openmaptiles.github.io https://openmaptiles.geo.data.gouv.fr https://openmaptiles.data.gouv.fr;
 `;
 const cspHeaderValue = cspHeader.replace(/\s{2,}/g, " ").trim();
 
