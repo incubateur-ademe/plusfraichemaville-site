@@ -483,14 +483,6 @@
   }
 }
 
-.leaflet-control-zoom {
-  @apply !bg-none;
-
-  a {
-    background-image: none !important;
-  }
-}
-
 .custom-marker-cluster {
   @apply !flex  !items-center !justify-center rounded-full border-[6px] border-dsfr-border-action-low-blue-france !bg-white text-base font-bold text-pfmv-navy;
 }
@@ -530,10 +522,18 @@
 }
 
 .leaflet-control-zoom {
+  @apply !bg-none;
+
+  a {
+    background-image: none !important;
+  }
+}
+
+.mapAnnuaire .leaflet-control-zoom {
   @apply !absolute !bottom-[-403px] !left-[10px] !border-none;
 }
 
-.leaflet-container a {
+.mapAnnuaire .leaflet-container a {
   @apply !text-pfmv-navy;
 }
 
