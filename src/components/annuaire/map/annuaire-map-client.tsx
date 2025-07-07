@@ -56,7 +56,7 @@ const AnnuaireMapClient = ({
     <div className={clsx("flex", className)}>
       <div className="h-[715px] w-full max-w-[50rem]">
         <MapContainer
-          className="relative h-full mapAnnuaire"
+          className="mapAnnuaire relative h-full"
           center={currentProjetCoordinates[0] ? currentProjetCoordinates : MAP_FALLBACK_DEFAULT_LOCATION}
           zoom={8}
           zoomControl={false}
