@@ -12,7 +12,7 @@ export const LCZMapMlFocus = ({ climadiagInfo }: { climadiagInfo: Climadiag }) =
   const coordinates = adresseInfo?.geometry.coordinates;
   const center: [number, number] =
     coordinates && coordinates[0] && coordinates[1] ? [coordinates[0], coordinates[1]] : [2.333333, 48.86471];
-  map?.setCenter(center);
+  setTimeout(() => map?.flyTo({ center, zoom: 11 }), 500);
 
   return null;
 };

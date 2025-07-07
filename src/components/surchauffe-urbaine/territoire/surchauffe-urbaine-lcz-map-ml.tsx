@@ -7,7 +7,10 @@ import { MapRef, NavigationControl } from "react-map-gl/maplibre";
 import { LCZMapMlFocus } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-ml-focus";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "carte-facile/carte-facile.css";
-import { addLCZLayers } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-ml-helpers";
+import {
+  addLCZLayers,
+  handleMapClick,
+} from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-ml-helpers";
 
 type SurchauffeUrbaineLCZMapProps = {
   climadiagInfo: Climadiag;
@@ -19,15 +22,18 @@ export const SurchauffeUrbaineLCZMapMapLibre = ({ climadiagInfo }: SurchauffeUrb
     if (!mapRef.current) return;
     const map = mapRef.current.getMap();
     addOverlay(map, Overlay.administrativeBoundaries);
-    addLCZLayers(mapRef.current);
+    addLCZLayers(map);
   }, []);
 
   return (
     <Map
       ref={mapRef}
       initialViewState={{
-        zoom: 11,
+        zoom: 2.5,
+        longitude: 2.333333,
+        latitude: 58.86471,
       }}
+      onClick={handleMapClick}
       onLoad={onMapLoad}
       style={{ width: "100%", height: "100%" }}
       mapStyle={mapStyles.desaturated}
