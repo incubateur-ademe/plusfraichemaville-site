@@ -17,7 +17,7 @@ const cspHeader = `
     https://*.hsforms.com 
     https://data.geopf.fr
     https://*.hubspot.com;
-    font-src 'self' https://fonts.gstatic.com/ ;
+    font-src 'self';
     object-src 'none';
     base-uri 'self';
     form-action 'self';
