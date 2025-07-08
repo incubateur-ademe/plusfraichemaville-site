@@ -42,14 +42,14 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
         >
           <Image
             src="/images/lcz/logo-cerema.svg"
-            width={240}
+            width={200}
             height={48}
             alt="Cerema, Climat et territoires de demain"
           />
         </Link>
       </div>
       <div className="flex h-[37.5rem] flex-row gap-6">
-        <SurchauffeUrbaineMapLczLegend className="w-56 overflow-auto" />
+        <SurchauffeUrbaineMapLczLegend className="w-60 overflow-auto" />
         <LazyLCZMapClient climadiagInfo={climadiagInfo} />
       </div>
       <SurchauffeUrbaineMapLczExplanation className="mt-6" />
