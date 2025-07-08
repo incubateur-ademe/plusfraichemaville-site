@@ -9,7 +9,7 @@ const cspHeader = `
     script-src 'self' https://stats.beta.gouv.fr 'nonce-${nonce}' 'strict-dynamic' ${
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
-    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+    style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://cdn.plusfraichemaville.fr/ https://plusfraichemaville.s3.fr-par.scw.cloud/
     https://*.basemaps.cartocdn.com
     https://cartagene.cerema.fr
