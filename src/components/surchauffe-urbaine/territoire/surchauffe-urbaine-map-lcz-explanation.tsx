@@ -2,6 +2,8 @@ import clsx from "clsx";
 import SimpleCustomAccordion from "@/src/components/common/simple-custom-accordion";
 import Image from "next/image";
 import Link from "next/link";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: string }) => {
   return (
@@ -22,7 +24,7 @@ export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: 
           rendez-vous sur le site du Cerema.
         </Link>
       </span>
-      <SimpleCustomAccordion className="mt-2" title="À savoir" expanded={false} ariaId="a-savoir-explication-lcz">
+      <SimpleCustomAccordion title="À savoir" expanded={false} ariaId="a-savoir-explication-lcz">
         <div className="flex flex-row gap-6">
           <Image
             src="/images/surchauffe-urbaine/point-attention.svg"
@@ -45,6 +47,15 @@ export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: 
           </span>
         </div>
       </SimpleCustomAccordion>
+      <div
+        className="mt-10 flex w-full flex-wrap items-center justify-between gap-4
+      rounded-2xl bg-dsfr-background-default-grey-hover px-6 py-4 text-xl font-bold text-black"
+      >
+        <div>Pour aller plus loin, découvrez les méthodes de diagnostics dont vous avez besoin</div>
+        <Button className="rounded-3xl text-center" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
+          {"Accéder à l'espace projet !"}
+        </Button>
+      </div>
     </div>
   );
 };
