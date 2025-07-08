@@ -4,20 +4,20 @@ import { addOverlay, mapStyles, Overlay } from "carte-facile";
 import { useCallback, useRef, useState } from "react";
 import { Map } from "@vis.gl/react-maplibre";
 import { MapRef, NavigationControl } from "react-map-gl/maplibre";
-import { LCZMapMlFocus } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-ml-focus";
+import { LCZMapFocus } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-focus";
 import "maplibre-gl/dist/maplibre-gl.css";
 import "carte-facile/carte-facile.css";
 import {
   addLCZLayers,
   handleMapClick,
-} from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-ml-helpers";
-import { LczMapLoadingErrorMessage } from "@/src/components/surchauffe-urbaine/territoire/lcz-map-fallback";
+} from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-helpers";
+import { LczMapLoadingErrorAlert } from "@/src/components/surchauffe-urbaine/territoire/lcz-map-loading-error-alert";
 
 type SurchauffeUrbaineLCZMapProps = {
   climadiagInfo: Climadiag;
 };
 
-export const SurchauffeUrbaineLCZMapMapLibre = ({ climadiagInfo }: SurchauffeUrbaineLCZMapProps) => {
+export const SurchauffeUrbaineLCZMap = ({ climadiagInfo }: SurchauffeUrbaineLCZMapProps) => {
   const [errorLoadingLCZ, setErrorLoadingLCZ] = useState<boolean>(false);
 
   const mapRef = useRef<MapRef>(null);
@@ -43,11 +43,11 @@ export const SurchauffeUrbaineLCZMapMapLibre = ({ climadiagInfo }: SurchauffeUrb
       mapStyle={mapStyles.desaturated}
       onError={() => setErrorLoadingLCZ(true)}
     >
-      <LCZMapMlFocus climadiagInfo={climadiagInfo} />
+      <LCZMapFocus climadiagInfo={climadiagInfo} />
       <NavigationControl position="top-left" showCompass={false} />
-      {errorLoadingLCZ && <LczMapLoadingErrorMessage onClose={() => setErrorLoadingLCZ(false)} />}
+      {errorLoadingLCZ && <LczMapLoadingErrorAlert onClose={() => setErrorLoadingLCZ(false)} />}
     </Map>
   );
 };
 
-export default SurchauffeUrbaineLCZMapMapLibre;
+export default SurchauffeUrbaineLCZMap;

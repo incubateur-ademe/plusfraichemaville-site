@@ -11,7 +11,7 @@ import Link from "next/link";
 import { SurchauffeUrbaineMapLczExplanation } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-map-lcz-explanation";
 import { LczMapSkeleton } from "@/src/components/surchauffe-urbaine/territoire/lcz-map-skeleton";
 
-const LazyLCZMapClient = dynamic(() => import("./surchauffe-urbaine-lcz-map-ml"), {
+const LazyLCZMapClient = dynamic(() => import("./surchauffe-urbaine-lcz-map"), {
   ssr: false,
   loading: () => <LczMapSkeleton />,
 });

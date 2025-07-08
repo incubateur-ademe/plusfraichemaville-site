@@ -6,7 +6,7 @@ import { GeoJsonAdresse } from "@/src/components/annuaire/types";
 import { useMap } from "react-map-gl/maplibre";
 import { useEffect } from "react";
 
-export const LCZMapMlFocus = ({ climadiagInfo }: { climadiagInfo: Climadiag }) => {
+export const LCZMapFocus = ({ climadiagInfo }: { climadiagInfo: Climadiag }) => {
   const { current: map } = useMap();
 
   useEffect(() => {
