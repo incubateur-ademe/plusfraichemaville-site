@@ -11,7 +11,7 @@ export type ClimadiagYear = keyof ProjectionsIndicateurClimadiag;
 
 export type ClimadiagTemperatureJour = {
   prevision: ClimadiagTemperatureProjection;
-  ref: number;
+  ref: number | null;
 };
 
 export type ClimadiagTypeJour = "jours_chauds" | "nuits_chaudes" | "jours_vdc";
