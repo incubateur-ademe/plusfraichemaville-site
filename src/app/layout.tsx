@@ -50,9 +50,7 @@ export default async function RootLayout({ children }: { children: ReactElement 
             "Marianne-Regular",
             "Marianne-Regular_Italic",
             "Marianne-Medium",
-            "Marianne-Medium_Italic",
             "Marianne-Bold",
-            "Marianne-Bold_Italic",
           ]}
         />
       </head>
