@@ -4,7 +4,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import { useParams, usePathname } from "next/navigation";
 import { Case, Conditional } from "../common/conditional-renderer";
-import Link from "next/link";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const AnnuaireLayoutButton = () => {
   const { projetId } = useParams();
@@ -21,9 +21,9 @@ export const AnnuaireLayoutButton = () => {
       {projetId && (
         <Conditional>
           <Case condition={isMapPage}>
-            <Link href={PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE(+projetId)} className="fr-btn rounded-3xl">
+            <LinkWithoutPrefetch href={PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE(+projetId)} className="fr-btn rounded-3xl">
               Voir mes contacts sélectionnés
-            </Link>
+            </LinkWithoutPrefetch>
           </Case>
         </Conditional>
       )}

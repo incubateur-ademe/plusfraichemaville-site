@@ -2,9 +2,9 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
 
 import { useState } from "react";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const AuthButtonUser = () => {
   const [open, setOpen] = useState(false);
@@ -42,9 +42,9 @@ export const AuthButtonUser = () => {
           <ul className="relative z-10">
             {links.map((link, index) => (
               <li className={`mb-3 text-sm ${link.className}`} key={index}>
-                <Link onClick={closer} href={link.url}>
+                <LinkWithoutPrefetch onClick={closer} href={link.url}>
                   {link.label}
-                </Link>
+                </LinkWithoutPrefetch>
               </li>
             ))}
           </ul>

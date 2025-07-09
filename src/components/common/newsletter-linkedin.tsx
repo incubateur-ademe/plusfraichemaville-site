@@ -1,6 +1,6 @@
-import Link from "next/link";
 import { NewsletterForm } from "@/src/forms/newsletter/newsletter-form";
 import Image from "next/image";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const NewsletterLinkedin = () => (
   <div>
@@ -25,9 +25,13 @@ export const NewsletterLinkedin = () => (
                   <Image src="/images/logo-pfmv-seul.svg" alt="" width={36} height={36} className="float-left mr-1" />
                   Plus fraîche ma ville ADEME
                 </div>
-                <Link className="fr-btn rounded-3xl" target="_blank" href="https://www.linkedin.com/groups/13150515/">
+                <LinkWithoutPrefetch
+                  className="fr-btn rounded-3xl"
+                  target="_blank"
+                  href="https://www.linkedin.com/groups/13150515/"
+                >
                   Nous suivre
-                </Link>
+                </LinkWithoutPrefetch>
               </div>
             </div>
           </div>

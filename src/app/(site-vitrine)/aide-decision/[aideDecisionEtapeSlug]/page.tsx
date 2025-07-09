@@ -1,6 +1,5 @@
 import AideDecisionEtapeCard from "@/src/components/aideDecision/AideDecisionEtapeCard";
 import Image from "next/image";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import AideDecisionResult from "@/src/components/aideDecision/AideDecisionResult";
 import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionBreadcrumbs";
@@ -13,6 +12,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type AideDecisionPageProps = {
   params: Promise<{ aideDecisionEtapeSlug: string }>;
@@ -75,9 +75,12 @@ export default async function AideDecisionPage(props: AideDecisionPageProps) {
               ))}
             </ul>
             <div className="mt-8 text-center md:text-left">
-              <Link className="fr-link fr-icon-arrow-left-line fr-link--icon-left" href={previsousStepSlug}>
+              <LinkWithoutPrefetch
+                className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
+                href={previsousStepSlug}
+              >
                 Retour
-              </Link>
+              </LinkWithoutPrefetch>
             </div>
           </div>
         </div>

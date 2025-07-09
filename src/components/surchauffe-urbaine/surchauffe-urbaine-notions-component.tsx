@@ -5,10 +5,10 @@ import "@splidejs/splide/css/core";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
-import Link from "next/link";
 import { SURCHAUFFE_URBAINE_NOTIONS } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-notions";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { SURCHAUFFE_URBAINE_CHANGE_NOTION } from "@/src/helpers/matomo/matomo-tags";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: string }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -77,7 +77,7 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
       </div>
       <div className="fr-container text-center">
         Pour aller plus loin sur la surchauffe urbaine
-        <Link
+        <LinkWithoutPrefetch
           className="ml-2 !text-pfmv-navy after:hidden"
           download
           target="_blank"
@@ -85,7 +85,7 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
         >
           Télécharger le recueil de l’Ademe « Diagnostic de la surchauffe urbaine »
           <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
-        </Link>
+        </LinkWithoutPrefetch>
       </div>
     </div>
   );

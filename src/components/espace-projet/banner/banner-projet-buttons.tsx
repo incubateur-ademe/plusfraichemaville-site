@@ -1,7 +1,6 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useRecommandationsViewed } from "@/src/hooks/use-recommandations-viewed";
 import clsx from "clsx";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
   BannerPictoPartage,
@@ -10,6 +9,7 @@ import {
   BannerPictoTableauDeSuivi,
 } from "./banner-projet-buttons-pictos";
 import { useRef } from "react";
+import Link from "next/link";
 
 export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
   const searchParams = useSearchParams();
@@ -45,6 +45,7 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
           <div className="relative" key={index}>
             <Link
               href={PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projetId, link.url)}
+              prefetch={false}
               ref={(ref) => {
                 if (linkRef.current) {
                   linkRef.current[index] = ref;

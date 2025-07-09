@@ -4,7 +4,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type HomepageStoryProps = {
   story: {
@@ -21,7 +21,7 @@ export const HomepageStory = ({ story }: HomepageStoryProps) => {
 
   return (
     <div className="group">
-      <Link href={`${PFMV_ROUTES.FICHES_SOLUTIONS}/${story.slug}`} prefetch={false}>
+      <LinkWithoutPrefetch href={PFMV_ROUTES.FICHE_SOLUTION(story.slug)}>
         <div
           className={clsx(
             "flex shrink-0 flex-col justify-end rounded-2xl pt-5 md:h-[540px] md:w-[358px]",
@@ -45,7 +45,7 @@ export const HomepageStory = ({ story }: HomepageStoryProps) => {
             className="-z-10 object-cover transition-transform duration-300 ease-in group-hover:scale-[1.05]"
           />
         </div>
-      </Link>
+      </LinkWithoutPrefetch>
     </div>
   );
 };

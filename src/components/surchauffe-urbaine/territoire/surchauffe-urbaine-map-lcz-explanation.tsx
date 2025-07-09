@@ -1,9 +1,9 @@
 import clsx from "clsx";
 import SimpleCustomAccordion from "@/src/components/common/simple-custom-accordion";
 import Image from "next/image";
-import Link from "next/link";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: string }) => {
   return (
@@ -17,12 +17,12 @@ export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: 
       </div>
       <span className="text-dsfr-text-default-grey">
         Pour en savoir plus sur la méthodologie scientifique utilisée,{" "}
-        <Link
+        <LinkWithoutPrefetch
           href="https://www.cerema.fr/fr/actualites/cerema-publie-nouvelles-donnees-surchauffe-urbaine"
           target="_blank"
         >
           rendez-vous sur le site du Cerema.
-        </Link>
+        </LinkWithoutPrefetch>
       </span>
       <SimpleCustomAccordion title="À savoir" expanded={false} ariaId="a-savoir-explication-lcz">
         <div className="flex flex-row gap-6">

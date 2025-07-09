@@ -1,8 +1,8 @@
 import Image from "next/image";
 import React from "react";
 import { TypeFicheSolution } from "@/src/helpers/type-fiche-solution";
-import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const IndienResultCombinaisonAdvice = ({
   typeSolution,
@@ -32,20 +32,20 @@ export const IndienResultCombinaisonAdvice = ({
           exemples :{" "}
           {typeSolution.exampleCards.map((exampleCard, index) => [
             index > 0 && ", ",
-            <Link
+            <LinkWithoutPrefetch
               key={exampleCard.slug}
               href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION(projetId, exampleCard.slug)}
             >
               {exampleCard.title}
-            </Link>,
+            </LinkWithoutPrefetch>,
           ])}
         </div>
-        <Link
+        <LinkWithoutPrefetch
           className="fr-btn fr-btn--tertiary fr-btn--sm mt-6 rounded-3xl"
           href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_TYPE_FILTER(projetId, typeSolution.code)}
         >
           {typeSolution.textButton}
-        </Link>
+        </LinkWithoutPrefetch>
       </div>
     </div>
   );

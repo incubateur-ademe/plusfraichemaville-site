@@ -1,9 +1,9 @@
 import aidesTerittoiresLogo from "../../../public/images/fiches-solutions/aides-territoires.svg";
-import Link from "next/link";
 import Image from "next/image";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function FicheSolutionTabFinancements({
   ficheAttributes,
@@ -22,9 +22,9 @@ export default function FicheSolutionTabFinancements({
             <div>
               <div className="mb-2 mt-2 text-[1.375rem] font-bold">Aides-territoires</div>
               <div>
-                <Link href={ficheAttributes.lien_aide_territoire} target="_blank">
+                <LinkWithoutPrefetch href={ficheAttributes.lien_aide_territoire} target="_blank">
                   Consulter toutes les aides
-                </Link>{" "}
+                </LinkWithoutPrefetch>{" "}
                 disponibles liées à cette solution sur Aides-territoires
               </div>
             </div>
@@ -35,9 +35,9 @@ export default function FicheSolutionTabFinancements({
         <>
           <div className="mb-2 mt-10 text-[1.375rem] font-bold">Fonds Vert</div>
           <div>
-            <Link href={ficheAttributes.lien_fond_vert} target="_blank">
+            <LinkWithoutPrefetch href={ficheAttributes.lien_fond_vert} target="_blank">
               Consulter les aides liées à cette solution
-            </Link>{" "}
+            </LinkWithoutPrefetch>{" "}
             dans le cadre du programme Fonds Vert
           </div>
         </>

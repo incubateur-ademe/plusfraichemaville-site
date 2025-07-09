@@ -7,9 +7,9 @@ import clsx from "clsx";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Image from "next/image";
 import { SurchauffeUrbaineMapLczLegend } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-map-lcz-legend";
-import Link from "next/link";
 import { SurchauffeUrbaineMapLczExplanation } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-map-lcz-explanation";
 import { LczMapSkeleton } from "@/src/components/surchauffe-urbaine/territoire/lcz-map-skeleton";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 const LazyLCZMapClient = dynamic(() => import("./surchauffe-urbaine-lcz-map"), {
   ssr: false,
@@ -35,7 +35,7 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
             Consultez la cartographie des zones climatiques locales (LCZ)
           </div>
         </div>
-        <Link
+        <LinkWithoutPrefetch
           className={clsx("flex cursor-pointer items-center justify-center gap-4 bg-none after:hidden")}
           target="_blank"
           href="https://climadiag-commune.meteofrance.com/"
@@ -46,7 +46,7 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
             height={48}
             alt="Cerema, Climat et territoires de demain"
           />
-        </Link>
+        </LinkWithoutPrefetch>
       </div>
       <div className="flex h-[37.5rem] flex-row gap-6">
         <SurchauffeUrbaineMapLczLegend className="w-60 overflow-auto" />

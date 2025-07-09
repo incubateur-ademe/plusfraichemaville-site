@@ -1,6 +1,6 @@
 import { formatNumberWithSpaces } from "@/src/helpers/common";
-import Link from "next/link";
 import clsx from "clsx";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function BudgetPage() {
   const data = [
@@ -31,9 +31,9 @@ export default function BudgetPage() {
           <h2>Principes</h2>
           <p>
             Nous suivons le{" "}
-            <Link href="https://beta.gouv.fr/approche/manifeste" target="_blank">
+            <LinkWithoutPrefetch href="https://beta.gouv.fr/approche/manifeste" target="_blank">
               manifeste beta.gouv
-            </Link>{" "}
+            </LinkWithoutPrefetch>{" "}
             dont nous rappelons les principes ici&nbsp;:
           </p>
           <blockquote className="italic">

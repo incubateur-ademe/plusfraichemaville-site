@@ -6,6 +6,7 @@ export const TYPE_SOLUTION_FILTER_NAME = "typeSolutionFilter";
 export const PFMV_ROUTES = {
   AIDE_DECISION: "/aide-decision",
   FICHES_SOLUTIONS: "/fiche-solution",
+  FICHE_SOLUTION: (slug: string) => `/fiche-solution/${slug}`,
   MES_FICHES_SOLUTIONS: "/mon-projet/favoris",
   RETOURS_EXPERIENCE_PROJET: "/retour-experience/projet",
   RETOUR_EXPERIENCE_DIAGNOSTIC: (slug: string) => `/retour-experience/diagnostic/${slug}`,

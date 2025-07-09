@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { homepageData } from "./homepage-data";
 import { HomepageHeroPictos } from "./homepage-hero-pictos";
 import clsx from "clsx";
 import { PictoPFMV } from "@/src/components/common/pictos/picto-pfmv";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const HomepageHero = () => {
   const { hero } = homepageData;
@@ -28,12 +28,12 @@ export const HomepageHero = () => {
           {hero.baseline}
         </h1>
         <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
-          <Link href={hero.cta1.url} className="fr-btn rounded-3xl" prefetch={false}>
+          <LinkWithoutPrefetch href={hero.cta1.url} className="fr-btn rounded-3xl">
             {hero.cta1.label}
-          </Link>
-          <Link href={hero.cta2.url} className="fr-btn fr-btn--secondary rounded-3xl" prefetch={false}>
+          </LinkWithoutPrefetch>
+          <LinkWithoutPrefetch href={hero.cta2.url} className="fr-btn fr-btn--secondary rounded-3xl">
             {hero.cta2.label}
-          </Link>
+          </LinkWithoutPrefetch>
         </div>
       </div>
       <HomepageHeroPictos />

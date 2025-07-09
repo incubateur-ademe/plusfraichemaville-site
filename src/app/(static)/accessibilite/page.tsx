@@ -1,4 +1,4 @@
-import Link from "next/link";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default async function PageAccessibilite() {
   return (
@@ -13,18 +13,18 @@ export default async function PageAccessibilite() {
       <p>
         {"À cette fin, nous mettons en œuvre la stratégie et les actions suivantes : "}
         {/* eslint-disable-next-line max-len */}
-        <Link href="https://librairie.ademe.fr/institutionnel/6794-schema-pluriannuel-de-mise-en-accessibilite-des-sites-web-de-l-ademe.html">
+        <LinkWithoutPrefetch href="https://librairie.ademe.fr/institutionnel/6794-schema-pluriannuel-de-mise-en-accessibilite-des-sites-web-de-l-ademe.html">
           {/* eslint-disable-next-line max-len */}
           https://librairie.ademe.fr/institutionnel/6794-schema-pluriannuel-de-mise-en-accessibilite-des-sites-web-de-l-ademe.html
-        </Link>
+        </LinkWithoutPrefetch>
         .
       </p>
       <p>
         {"Cette déclaration d’accessibilité s’applique à "} <strong>Plus fraîche ma ville</strong>{" "}
-        <Link href="https://plusfraichemaville.fr">
+        <LinkWithoutPrefetch href="https://plusfraichemaville.fr">
           {/* eslint-disable-next-line max-len */}
           (https://plusfraichemaville.fr)
-        </Link>
+        </LinkWithoutPrefetch>
         .
       </p>
       <h2>{"État de conformité"}</h2>
