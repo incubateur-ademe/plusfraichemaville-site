@@ -19,7 +19,7 @@ export const HomepageStories = () => {
         <Splide
           id="homepage-stories-slider"
           hasTrack={false}
-          options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
+          options={{ rewind: true, type: "loop", autoWidth: true, start: 0, pagination: false }}
         >
           <SplideTrack className="overflow-auto !pl-3 lg:!overflow-hidden lg:!pl-6">
             {stories.cards.map((story, index) => (
