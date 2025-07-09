@@ -48,8 +48,8 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
           />
         </LinkWithoutPrefetch>
       </div>
-      <div className="flex h-[37.5rem] flex-row gap-6">
-        <SurchauffeUrbaineMapLczLegend className="w-60 overflow-auto" />
+      <div className="flex flex-col-reverse gap-6 md:flex-row">
+        <SurchauffeUrbaineMapLczLegend className="w-full overflow-auto md:h-[37.5rem] md:w-60" />
         <LazyLCZMapClient climadiagInfo={climadiagInfo} />
       </div>
       <SurchauffeUrbaineMapLczExplanation className="mt-6" />
