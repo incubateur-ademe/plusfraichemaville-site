@@ -8,11 +8,11 @@ import clsx from "clsx";
 import AnnuaireCardAccordion from "@/src/components/common/annuaire-card-accordion";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import Badge from "@codegouvfr/react-dsfr/Badge";
-import Link from "next/link";
 import { AnnuaireRexContentSeeProject } from "@/src/components/annuaire/side-panel/annuaire-rex-content-see-project";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { COPY_EMAIL, COPY_TELEPHONE } from "@/src/helpers/matomo/matomo-tags";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type AnnuaireContactCardProps = {
   contact: AnnuaireContact;
@@ -76,9 +76,9 @@ export const AnnuaireContactCard = ({ contact, projetId, className, showContactP
             )}
             {contact.siteInternet && (
               <div className="fr-icon-global-line text-pfmv-navy before:mb-[1px] before:mr-1 before:!h-5 before:!w-5">
-                <Link href={contact.siteInternet} prefetch={false} target="_blank">
+                <LinkWithoutPrefetch href={contact.siteInternet} target="_blank">
                   Accéder au site internet
-                </Link>
+                </LinkWithoutPrefetch>
               </div>
             )}
           </div>

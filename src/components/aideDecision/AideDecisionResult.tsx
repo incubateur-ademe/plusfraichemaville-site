@@ -3,11 +3,11 @@ import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionB
 import AideDecisionSortFilter from "@/src/components/filters/AideDecisionSortFilter";
 import { getAideDecisionSortFieldFromCode } from "@/src/helpers/aideDecisionSortFilter";
 import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
-import Link from "next/link";
 import { getAideDecisionHistoryBySlug } from "@/src/lib/strapi/queries/aideDecisionQueries";
 import { notEmpty } from "@/src/helpers/listUtils";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type Props = {
   aideDecisionEtapeAttributes: AideDecisionEtape["attributes"];
@@ -47,12 +47,12 @@ export default async function AideDecisionResult({ aideDecisionEtapeAttributes, 
           <div className="grow overflow-x-auto">
             {previousStep && (
               <div className="mt-8 hidden text-center md:block md:text-left">
-                <Link
+                <LinkWithoutPrefetch
                   className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
                   href={`${PFMV_ROUTES.AIDE_DECISION}/${previousStep.slug}`}
                 >
                   Retour
-                </Link>
+                </LinkWithoutPrefetch>
               </div>
             )}
             <h1 className={"fr-h4 mb-4 pt-10 text-center md:text-left"}>

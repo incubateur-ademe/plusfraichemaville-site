@@ -1,6 +1,6 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import Link from "next/link";
 import { PropsWithChildren } from "react";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type AideEstimationsListeLinkProps = {
   projetId?: number;
@@ -10,11 +10,11 @@ type AideEstimationsListeLinkProps = {
 
 export const AideEstimationsListeLink = ({ projetId, estimationId, children }: AideEstimationsListeLinkProps) => {
   return (
-    <Link
+    <LinkWithoutPrefetch
       className="fr-btn !ml-auto !block rounded-3xl"
       href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT(projetId, estimationId)}
     >
       {children}
-    </Link>
+    </LinkWithoutPrefetch>
   );
 };

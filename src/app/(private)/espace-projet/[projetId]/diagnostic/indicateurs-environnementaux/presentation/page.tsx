@@ -1,4 +1,3 @@
-import Link from "next/link";
 import clsx from "clsx";
 import React from "react";
 import { Separator } from "@/src/components/common/separator";
@@ -12,8 +11,8 @@ import {
 import IndienReminderModal from "@/src/components/diagnostic-indien/indien-reminder-modal";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 // eslint-disable-next-line max-len
-
 import { BREADCRUMB_DIAG_INDICATEURS_PRESENTATION } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default async function IndicateursEnvironnementauxPresentationPage(props: {
   params: Promise<{ projetId: number }>;
@@ -91,9 +90,9 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
         <div className="mt-20 flex flex-col items-center gap-2 text-dsfr-text-mention-grey md:flex-row">
           <span>
             Indicateurs créés par{" "}
-            <Link href={"https://www.tribu.coop/"} target="_blank">
+            <LinkWithoutPrefetch href={"https://www.tribu.coop/"} target="_blank">
               TRIBU
-            </Link>
+            </LinkWithoutPrefetch>
           </span>
           <Image
             src="/images/fiches-diagnostic/indicateurs-environnementaux/logo-tribu.jpg"
@@ -102,7 +101,7 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
             alt="Logo du bureau d'étude TRIBU"
             className="ml-2 w-10"
           />
-          <Link
+          <LinkWithoutPrefetch
             className="ml-5 !text-dsfr-text-mention-grey after:hidden"
             download
             target="_blank"
@@ -110,7 +109,7 @@ export default async function IndicateursEnvironnementauxPresentationPage(props:
           >
             Télécharger la notice de calcul
             <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
-          </Link>
+          </LinkWithoutPrefetch>
         </div>
       </div>
     </>

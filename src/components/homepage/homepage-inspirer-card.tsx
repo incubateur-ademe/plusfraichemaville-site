@@ -1,9 +1,9 @@
 import RetourExperienceCard, { RexInHome } from "@/src/components/retourExperience/RetourExperienceCard";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
-import Link from "next/link";
 import { homepageData } from "./homepage-data";
 import Image from "next/image";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const HomepageInspirerCard = ({
   rex,
@@ -16,7 +16,10 @@ export const HomepageInspirerCard = ({
   return featured ? (
     <div>
       <RetourExperienceCard retourExperience={rex as unknown as RexInHome} className="mx-auto mb-8 flex lg:hidden" />
-      <Link href={`${PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET}/${rex.slug}`} className="hidden !bg-none lg:inline-block">
+      <LinkWithoutPrefetch
+        href={PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rex.slug)}
+        className="hidden !bg-none lg:inline-block"
+      >
         <div className="pfmv-card mb-10 flex gap-8 px-8">
           <div className="relative flex w-[427px] shrink-0 items-center justify-center py-10">
             <Image
@@ -51,7 +54,7 @@ export const HomepageInspirerCard = ({
             </div>
           </div>
         </div>
-      </Link>
+      </LinkWithoutPrefetch>
     </div>
   ) : (
     <RetourExperienceCard className="w-[17.5rem]" retourExperience={rex as unknown as RexInHome} />

@@ -1,5 +1,4 @@
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import Link from "next/link";
 import { PictoEspaceSelector } from "../common/pictos";
 import { PictoId } from "../common/pictos/picto-espace-selector";
 import clsx from "clsx";
@@ -25,6 +24,7 @@ import { accessProjetAction } from "@/src/actions/userProjet/access-projet-actio
 import { Maturite } from "../maturite/maturite";
 import { getUserRoleFromCode } from "@/src/helpers/user-role";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type ListeProjetsCardProps = {
   projet: ProjetWithPublicRelations;
@@ -233,9 +233,9 @@ export const ListeProjetsCard = ({ projet, invitationStatus, isBrowsing, updateP
       <Conditional>
         <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
           <div className="pfmv-card">
-            <Link onClick={openProjet} href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}>
+            <LinkWithoutPrefetch onClick={openProjet} href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}>
               {contentCard}
-            </Link>
+            </LinkWithoutPrefetch>
           </div>
         </Case>
         <Default>
@@ -251,13 +251,13 @@ export const ListeProjetsCard = ({ projet, invitationStatus, isBrowsing, updateP
             </div>
           </div>
           <div className={clsx("absolute bottom-5 right-5 flex gap-4 text-sm")}>
-            <Link
+            <LinkWithoutPrefetch
               className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
               onClick={openProjet}
               href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}
             >
               Accéder au projet
-            </Link>
+            </LinkWithoutPrefetch>
             <PartageOverviewPopupMenu
               members={members}
               projectId={updatedProjet.id}

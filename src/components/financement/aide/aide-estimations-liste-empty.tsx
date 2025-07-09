@@ -2,9 +2,9 @@
 
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import Link from "next/link";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 const datas = {
   solution: {
@@ -33,9 +33,9 @@ export const AideEstimationListeEmpty = () => {
   return (
     <div>
       <p className="text-lg">{data.description}</p>
-      <Link href={data.url(projet?.id ?? 0)} className="fr-btn mb-7 rounded-3xl">
+      <LinkWithoutPrefetch href={data.url(projet?.id ?? 0)} className="fr-btn mb-7 rounded-3xl">
         {data.label}
-      </Link>
+      </LinkWithoutPrefetch>
     </div>
   );
 };

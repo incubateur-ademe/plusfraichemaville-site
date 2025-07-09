@@ -1,7 +1,6 @@
 "use client";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import React from "react";
-import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
@@ -14,11 +13,11 @@ import {
 } from "@/src/helpers/type-fiche-solution";
 import IndienResultPieChartSurface from "@/src/components/diagnostic-indien/indien-result-surface-repartition";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-// eslint-disable-next-line max-len
 import { IndienResultDownloader } from "@/src/components/diagnostic-indien/pdf/indien-result-downloader";
 import IndienResultRanges from "@/src/components/diagnostic-indien/indien-result-ranges";
 
 import { BREADCRUMB_DIAG_INDICATEURS_RESULTATS } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function IndicateursEnvironnementauxResultatsPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -32,12 +31,12 @@ export default function IndicateursEnvironnementauxResultatsPage() {
         <h1 className="mb-4 text-2xl font-bold">
           {"Vous n'avez pas encore renseigné les données de diagnostic de votre projet !"}
         </h1>
-        <Link
+        <LinkWithoutPrefetch
           href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(currentProjet.id)}
           className="fr-btn rounded-3xl"
         >
           Renseigner les données de diagnostic
-        </Link>
+        </LinkWithoutPrefetch>
       </div>
     );
   }
@@ -52,12 +51,12 @@ export default function IndicateursEnvironnementauxResultatsPage() {
             Analyse simplifiée de la surchauffe au sein de mon espace, à l’état initial.
           </div>
           <div>
-            <Link
+            <LinkWithoutPrefetch
               href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(currentProjet.id)}
               className="fr-btn fr-btn--secondary rounded-3xl"
             >
               Modifier la saisie
-            </Link>
+            </LinkWithoutPrefetch>
           </div>
         </div>
         <div className="rounded-2xl bg-dsfr-background-alt-blue-france p-6">
@@ -78,9 +77,9 @@ export default function IndicateursEnvironnementauxResultatsPage() {
               {"Si vous souhaitez faire un"} <strong>{"diagnostic approfondi"}</strong>
               {", de nombreuses expertises peuvent vous éclairer : vous pouvez cartographier l’îlot de chaleur urbain" +
                 " ou encore évaluer le confort thermique de vos usagers. Nous vous aidons à choisir les "}
-              <Link href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(currentProjet.id)}>
+              <LinkWithoutPrefetch href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(currentProjet.id)}>
                 {"méthodes adaptées à votre projet."}
-              </Link>
+              </LinkWithoutPrefetch>
             </div>
           </div>
         </div>

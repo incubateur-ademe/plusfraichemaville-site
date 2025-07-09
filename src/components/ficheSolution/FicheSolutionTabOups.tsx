@@ -3,8 +3,8 @@ import Image from "next/image";
 import Highlight from "@codegouvfr/react-dsfr/Highlight";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
-import Link from "next/link";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttributes: FicheSolution["attributes"] }) {
   return (
@@ -28,9 +28,9 @@ export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttribu
           <br />
           <div className="flex flex-row flex-wrap items-center gap-4">
             <div>{"Vous avez un retour d’expérience à nous partager ? Contactez nous !"}</div>
-            <Link className="fr-btn fr-btn--tertiary rounded-3xl" href={`/contact`}>
+            <LinkWithoutPrefetch className="fr-btn fr-btn--tertiary rounded-3xl" href={`/contact`}>
               Nous contacter
-            </Link>
+            </LinkWithoutPrefetch>
           </div>
         </div>
       )}

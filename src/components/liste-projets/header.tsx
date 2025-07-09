@@ -1,7 +1,7 @@
-import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 // eslint-disable-next-line max-len
 import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) => {
   return (
@@ -14,9 +14,12 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
         {!isListEmpty && (
           <div className="align-items-center flex flex-wrap-reverse items-center gap-4">
             <AvailableProjetsForCollectiviteButton className={"rounded-3xl"} />
-            <Link href={PFMV_ROUTES.CREATE_PROJET} className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl">
+            <LinkWithoutPrefetch
+              href={PFMV_ROUTES.CREATE_PROJET}
+              className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl"
+            >
               Créer un projet
-            </Link>
+            </LinkWithoutPrefetch>
           </div>
         )}
       </div>

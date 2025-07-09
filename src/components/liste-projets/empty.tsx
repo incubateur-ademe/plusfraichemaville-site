@@ -1,15 +1,15 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
 // eslint-disable-next-line max-len
 import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const ListProjetsHeaderEmpty = () => {
   return (
     <>
       <div className="pfmv-card relative mb-5 mt-3 flex h-fit items-center justify-between bg-white py-6 md:py-0">
-        <Link href={PFMV_ROUTES.CREATE_PROJET} className="w-full !bg-none">
+        <LinkWithoutPrefetch href={PFMV_ROUTES.CREATE_PROJET} className="w-full !bg-none">
           <div className=" flex items-center justify-between">
             <div className="flex items-center gap-11">
               <div className="hidden shrink-0 md:block">
@@ -27,9 +27,9 @@ export const ListProjetsHeaderEmpty = () => {
               </div>
             </div>
           </div>
-        </Link>
+        </LinkWithoutPrefetch>
         <div className="mr-[26px] h-[121.5px] w-[132px]  shrink-0">
-          <Link
+          <LinkWithoutPrefetch
             href={PFMV_ROUTES.CREATE_PROJET}
             className={clsx(
               "fr-btn ri-add-circle-fill fr-btn--icon-left rounded-[10px]",
@@ -38,7 +38,7 @@ export const ListProjetsHeaderEmpty = () => {
             )}
           >
             <span className="block text-center text-sm leading-5">Créer un projet</span>
-          </Link>
+          </LinkWithoutPrefetch>
         </div>
       </div>
       <div className="ml-auto w-fit">

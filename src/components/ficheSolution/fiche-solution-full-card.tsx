@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
 import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 
 import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
@@ -9,6 +8,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useParams } from "next/navigation";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function FicheSolutionFullCard({
   ficheAttributes,
@@ -28,7 +28,7 @@ export default function FicheSolutionFullCard({
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
 
   return (
-    <Link className="pfmv-card flex w-72 flex-col md:ml-0" href={url}>
+    <LinkWithoutPrefetch className="pfmv-card flex w-72 flex-col md:ml-0" href={url}>
       <div className="flex h-52 w-full">
         <Image
           width={450}
@@ -63,6 +63,6 @@ export default function FicheSolutionFullCard({
           </div>
         </div>
       </div>
-    </Link>
+    </LinkWithoutPrefetch>
   );
 }

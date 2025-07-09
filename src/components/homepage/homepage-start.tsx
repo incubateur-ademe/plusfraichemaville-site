@@ -1,8 +1,8 @@
-import Link from "next/link";
 import { homepageData } from "./homepage-data";
 import Image from "next/image";
 import clsx from "clsx";
 import { Separator } from "@/src/components/common/separator";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const HomepageStart = () => {
   const { start } = homepageData;
@@ -35,17 +35,16 @@ export const HomepageStart = () => {
                   {line.title}
                 </h3>
                 <p className="mb-8 px-10 text-center lg:px-0 lg:text-left">{line.description}</p>
-                <Link
+                <LinkWithoutPrefetch
                   className={clsx(
                     "fr-btn fr-btn--secondary rounded-3xl !text-pfmv-navy !shadow-none",
                     "border-[1px] border-pfmv-navy",
                     "mx-auto !block lg:!inline",
                   )}
                   href={line.cta.url}
-                  prefetch={false}
                 >
                   {line.cta.label}
-                </Link>
+                </LinkWithoutPrefetch>
               </div>
               <div
                 className="hidden h-auto shrink-0 lg:block"

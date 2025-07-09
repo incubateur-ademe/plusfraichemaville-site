@@ -12,7 +12,6 @@ import { mapAllIndiEnQuestionsToFormValues } from "@/src/helpers/indicateurs-env
 import Button from "@codegouvfr/react-dsfr/Button";
 import Image from "next/image";
 import { clsx } from "clsx";
-import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { Separator } from "@/src/components/common/separator";
@@ -25,6 +24,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useRouter } from "next/navigation";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { DIAGNOSTIC_COMPUTE_RESULT } from "@/src/helpers/matomo/matomo-tags";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelations }) {
   const currentDiagnosticSimulation: diagnostic_simulation | undefined = projet.diagnostic_simulations[0];
@@ -110,12 +110,12 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
       <>
         <div className="sticky top-0 z-10 mb-12">
           <div className="flex h-20 w-full items-center justify-between bg-white">
-            <Link
+            <LinkWithoutPrefetch
               className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
               href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION(projet.id)}
             >
               Retour
-            </Link>
+            </LinkWithoutPrefetch>
             <div className="flex flex-row gap-6">
               <Button
                 className={`mr-4 rounded-3xl !shadow-none`}

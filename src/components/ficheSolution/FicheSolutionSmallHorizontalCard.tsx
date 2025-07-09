@@ -1,12 +1,12 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import { useParams } from "next/navigation";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function FicheSolutionSmallHorizontalCard({
   ficheSolution,
@@ -24,7 +24,7 @@ export default function FicheSolutionSmallHorizontalCard({
     : `${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheSolution.attributes.slug}`;
 
   return (
-    <Link
+    <LinkWithoutPrefetch
       className={clsx(
         "flex h-[7rem] w-full max-w-[28rem] flex-row md:w-[28rem]",
         "fiche-solution-small-vertical-card items-center",
@@ -51,6 +51,6 @@ export default function FicheSolutionSmallHorizontalCard({
           </div>
         )}
       </div>
-    </Link>
+    </LinkWithoutPrefetch>
   );
 }

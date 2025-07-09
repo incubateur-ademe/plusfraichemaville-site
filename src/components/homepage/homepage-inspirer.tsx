@@ -1,7 +1,7 @@
 import { homepageData } from "./homepage-data";
-import Link from "next/link";
 import clsx from "clsx";
 import { HomepageInspirerCard } from "./homepage-inspirer-card";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const HomepageInspirer = () => {
   const { inspirer } = homepageData;
@@ -17,16 +17,15 @@ export const HomepageInspirer = () => {
           <HomepageInspirerCard rex={rex} key={index} />
         ))}
       </div>
-      <Link
+      <LinkWithoutPrefetch
         className={clsx(
           "fr-btn fr-btn--secondary mx-auto mt-10 !block rounded-3xl",
           "border-[1px] border-pfmv-navy text-pfmv-navy !shadow-none",
         )}
         href={inspirer.cta.url}
-        prefetch={false}
       >
         {inspirer.cta.label}
-      </Link>
+      </LinkWithoutPrefetch>
     </div>
   );
 };

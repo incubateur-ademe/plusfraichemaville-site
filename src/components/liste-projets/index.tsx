@@ -9,9 +9,9 @@ import { useUserStore } from "@/src/stores/user/provider";
 import { ListeProjetTab } from "./liste";
 import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
-import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { InvitationStatus } from "@prisma/client";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export type EspaceProjetTabsId = "projet" | "invitation" | "demande";
 
@@ -92,7 +92,7 @@ export const ListProjets = () => {
 };
 
 const TabButton = ({ isActive, tab, children }: { isActive: boolean; tab: EspaceProjetTabsId } & PropsWithChildren) => (
-  <Link
+  <LinkWithoutPrefetch
     href={PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB(tab)}
     className={clsx(
       `${isActive ? "z-20 font-bold" : "font-normal"}`,
@@ -100,7 +100,7 @@ const TabButton = ({ isActive, tab, children }: { isActive: boolean; tab: Espace
     )}
   >
     {children}
-  </Link>
+  </LinkWithoutPrefetch>
 );
 
 const TabContent = ({ content, isActive }: { content: ReactNode; isActive: boolean }) => (

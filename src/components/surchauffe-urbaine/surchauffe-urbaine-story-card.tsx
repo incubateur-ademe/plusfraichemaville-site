@@ -1,16 +1,16 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Image from "next/image";
-import Link from "next/link";
 import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-experience-diagnostic";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { SITE_VITRINE_REX_DIAG_STORY } from "@/src/helpers/matomo/matomo-tags";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const SurchauffeUrbaineStoryCard = ({ rexDiagStory }: { rexDiagStory: RetourExperienceDiagnostic }) => {
   return (
     <div className="group text-left">
-      <Link
+      <LinkWithoutPrefetch
         href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(rexDiagStory.attributes.slug)}
         onClick={() => trackEvent(SITE_VITRINE_REX_DIAG_STORY(rexDiagStory.attributes.slug))}
       >
@@ -33,7 +33,7 @@ export const SurchauffeUrbaineStoryCard = ({ rexDiagStory }: { rexDiagStory: Ret
             unoptimized
           />
         </div>
-      </Link>
+      </LinkWithoutPrefetch>
     </div>
   );
 };

@@ -4,8 +4,8 @@ import { RetourExperienceDiagLabel } from "./retour-experience-diag";
 import clsx from "clsx";
 import { RetourExperienceDiagCardPicto } from "./retour-experience-diag-card-picto";
 import Image from "next/image";
-import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type RetourExperienceDiagCardSiteVitrineProps = {
   rex?: RetourExperienceDiagnostic;
@@ -18,7 +18,7 @@ export const RetourExperienceDiagCardSiteVitrine = ({ rex, className }: RetourEx
   const { titre, image_principale, lieu, slug } = rex.attributes;
 
   return (
-    <Link
+    <LinkWithoutPrefetch
       href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(slug)}
       className={clsx(className, "pfmv-card flex w-80 flex-col bg-white")}
     >
@@ -55,6 +55,6 @@ export const RetourExperienceDiagCardSiteVitrine = ({ rex, className }: RetourEx
           </div>
         )}
       </div>
-    </Link>
+    </LinkWithoutPrefetch>
   );
 };
