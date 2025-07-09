@@ -39,7 +39,7 @@ export const SurchauffeUrbaineLCZMap = ({ climadiagInfo }: SurchauffeUrbaineLCZM
       }}
       onClick={handleMapClick}
       onLoad={onMapLoad}
-      style={{ width: "100%", height: "37.5rem" }}
+      style={{ width: "100%", height: "100%" }}
       mapStyle={mapStyles.desaturated}
       onError={() => setErrorLoadingLCZ(true)}
     >
