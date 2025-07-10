@@ -1,12 +1,11 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["fullTextSearchPostgres", "multiSchema"]
+  previewFeatures = ["fullTextSearchPostgres"]
 }
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-  schemas  = ["pfmv", "data-deploiement"]
 }
 
 model Account {
@@ -26,7 +25,6 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-  @@schema("pfmv")
 }
 
 model User {
@@ -61,8 +59,6 @@ model User {
   estimations_aides            estimations_aides[]
   fiches                       projet_fiche[]
   diagnostic_simulation        diagnostic_simulation[]
-
-  @@schema("pfmv")
 }
 
 model VerificationToken {
@@ -71,7 +67,6 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
-  @@schema("pfmv")
 }
 
 model collectivite {
@@ -90,22 +85,16 @@ model collectivite {
   created_at                     DateTime            @default(now())
   projet                         projet[]
   aides_territoires_perimeter_id String?
-
-  @@schema("pfmv")
 }
 
 enum RoleCollectivite {
   ADMIN
-
-  @@schema("pfmv")
 }
 
 enum RoleProjet {
   ADMIN
   EDITEUR
   LECTEUR
-
-  @@schema("pfmv")
 }
 
 enum InvitationStatus {
@@ -113,8 +102,6 @@ enum InvitationStatus {
   INVITED
   ACCEPTED
   DECLINED
-
-  @@schema("pfmv")
 }
 
 model user_projet {
@@ -137,7 +124,6 @@ model user_projet {
   sourced_by_projets projet_sourcing_contact[] @relation("sourced_by_projets")
 
   @@unique([user_id, projet_id])
-  @@schema("pfmv")
 }
 
 enum emailType {
@@ -150,16 +136,12 @@ enum emailType {
   welcomeMessage
   noActivityAfterSignup
   remindNotCompletedDiagnostic
-
-  @@schema("pfmv")
 }
 
 enum emailStatus {
   PENDING
   ERROR
   SUCCESS
-
-  @@schema("pfmv")
 }
 
 model email {
@@ -174,8 +156,6 @@ model email {
   user                User?        @relation(fields: [user_id], references: [id])
   user_id             String?
   extra               Json?
-
-  @@schema("pfmv")
 }
 
 model user_collectivite {
@@ -187,7 +167,6 @@ model user_collectivite {
   created_at      DateTime     @default(now())
 
   @@id(name: "userCollectiviteId", [user_id, collectivite_id])
-  @@schema("pfmv")
 }
 
 model projet {
@@ -219,15 +198,11 @@ model projet {
   sourcing_user_projets     projet_sourcing_contact[] @relation("sourcing_projet")
   fiches                    projet_fiche[]
   diagnostic_simulations    diagnostic_simulation[]
-
-  @@schema("pfmv")
 }
 
 enum FicheType {
   DIAGNOSTIC
   SOLUTION
-
-  @@schema("pfmv")
 }
 
 model projet_fiche {
@@ -241,7 +216,6 @@ model projet_fiche {
   created_by User      @relation(fields: [user_id], references: [id])
 
   @@unique([projet_id, fiche_id, type])
-  @@schema("pfmv")
 }
 
 model projet_sourcing_contact {
@@ -255,7 +229,6 @@ model projet_sourcing_contact {
   creator                User        @relation(fields: [created_by], references: [id])
 
   @@unique([projet_id, sourced_user_projet_id])
-  @@schema("pfmv")
 }
 
 model estimation {
@@ -272,15 +245,11 @@ model estimation {
   deleted_by          String?
   deleter             User?               @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
   estimations_aides   estimations_aides[]
-
-  @@schema("pfmv")
 }
 
 enum TypeLieuClimadiag {
   commune
   epci
-
-  @@schema("pfmv")
 }
 
 model climadiag {
@@ -304,7 +273,6 @@ model climadiag {
   @@index([code_insee])
   @@index([code_postal])
   @@index([nom])
-  @@schema("pfmv")
 }
 
 model aide {
@@ -315,8 +283,6 @@ model aide {
   name                String?
   financers           String[]
   estimations_aides   estimations_aides[]
-
-  @@schema("pfmv")
 }
 
 model estimations_aides {
@@ -330,7 +296,6 @@ model estimations_aides {
   created_by   User?      @relation(fields: [user_id], references: [id])
 
   @@id([estimationId, aideId])
-  @@schema("pfmv")
 }
 
 model conversation {
@@ -339,8 +304,6 @@ model conversation {
   ragtimeId  String   @unique
   created_at DateTime @default(now())
   user       User?    @relation(fields: [userId], references: [id])
-
-  @@schema("pfmv")
 }
 
 model diagnostic_simulation {
@@ -353,24 +316,18 @@ model diagnostic_simulation {
   created_at     DateTime @default(now())
   updated_at     DateTime @updatedAt
   user           User?    @relation(fields: [user_id], references: [id])
-
-  @@schema("pfmv")
 }
 
 enum ReferenceType {
   USER
   PROJET
   ESTIMATION
-
-  @@schema("pfmv")
 }
 
 enum EventType {
   UPDATE_MATURITE
   UPDATE_PROJET_SET_VISIBLE
   UPDATE_PROJET_SET_INVISIBLE
-
-  @@schema("pfmv")
 }
 
 model Analytics {
@@ -382,16 +339,12 @@ model Analytics {
   event_type     EventType
   context        Json?
   user_id        String
-
-  @@schema("pfmv")
 }
 
 enum JobType {
   SYNC_HUBSPOT
   CSM_MAIL_BATCH
   SYNC_CONNECT
-
-  @@schema("pfmv")
 }
 
 model cron_jobs {
@@ -399,18 +352,4 @@ model cron_jobs {
   execution_start_time DateTime @default(now())
   execution_end_time   DateTime
   job_type             JobType
-
-  @@schema("pfmv")
-}
-
-model collectivite_prospect {
-  code_insee          String   @id
-  nom_collectivite    String
-  nom_accompagnement  String
-  code_postal         String
-  date_accompagnement DateTime
-  latitude            Float
-  longitude           Float
-
-  @@schema("data-deploiement")
 }
