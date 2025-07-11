@@ -54,3 +54,8 @@ Ce script sert donc à rappeler l'API adresse pour toutes les collectivités et 
 ### [fill-user-etablissement-field.tsx](fill-user-etablissement-field.tsx)
 
 Remplit le champ nom_etablissement et siren_info de tous les utilisateurs pour la table user.
+
+### [get-matomo-territoire-search.tsx](./analytics/get-matomo-territoire-search.tsx)
+
+Va se connecter à l'API MATOMO pour ressortir toutes les collectivités et les EPCI qui ont été recherchées sur le site dans la page "surchauffe de votre territoire".
+Il faut ajuster la date variable "dateFin" à la date du jour.
