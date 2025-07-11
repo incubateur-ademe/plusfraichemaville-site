@@ -1,5 +1,5 @@
 import { Feature, GeoJsonProperties, Point } from "geojson";
-import { collectivite, projet } from "@prisma/client";
+import { collectivite, projet } from "@/src/generated/prisma/client";
 import { AddressCollectivite, AddressProjet } from "@/src/lib/adresseApi/types";
 
 export const mapAddressApiToCollectiviteAddress = (nationalBaseAddress: Feature<Point>): AddressCollectivite => ({

@@ -2,7 +2,7 @@ import { AideEstimationsCardLabelFicheSolution } from "./aide-estimations-card-l
 import { getRegionByDepartment } from "@/src/lib/departements";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Separator, SeparatorY } from "@/src/components/common/separator";
-import { estimation } from "@prisma/client";
+import { estimation } from "@/src/generated/prisma/client";
 import { TypeEspace } from "@/src/helpers/type-espace-filter";
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 

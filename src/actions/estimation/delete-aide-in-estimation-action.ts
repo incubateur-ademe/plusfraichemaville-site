@@ -5,7 +5,7 @@ import { ResponseAction } from "../actions-types";
 import { getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/src/generated/prisma/client";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { deleteAideInEstimation } from "@/src/lib/prisma/prisma-aide-estimation-queries";
 

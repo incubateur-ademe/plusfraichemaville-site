@@ -1,6 +1,6 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { AddressCollectivite } from "@/src/lib/adresseApi/types";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/src/generated/prisma/client";
 import { generateRandomId } from "@/src/helpers/common";
 
 export const getOrCreateCollectivite = async (data: AddressCollectivite, creatorUserId: string) => {

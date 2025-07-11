@@ -7,7 +7,7 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 import { EmailService } from "@/src/services/brevo";
 import { getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { getLastEmailForUserProjet } from "@/src/lib/prisma/prisma-email-queries";
-import { emailType } from "@prisma/client";
+import { emailType } from "@/src/generated/prisma/client";
 import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 
 const RESEND_DELAY_MINUTES = 10;

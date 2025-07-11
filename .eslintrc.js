@@ -11,7 +11,6 @@ module.exports = {
   },
   rules: {
     "@next/next/no-html-link-for-pages": "off",
-    // indent: ["error", 2, { SwitchCase: 1, offsetTernaryExpressions: true }],
     "max-len": [
       1,
       120,

@@ -1,5 +1,5 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@prisma/client";
+import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@/src/generated/prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";

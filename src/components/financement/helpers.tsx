@@ -2,7 +2,7 @@ import { EstimationAide, EstimationWithAides } from "@/src/lib/prisma/prismaCust
 import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
 import { ReactNode } from "react";
 import { FAR_FUTURE } from "@/src/helpers/dateUtils";
-import { aide } from "@prisma/client";
+import { aide } from "@/src/generated/prisma/client";
 
 export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): TypeAidesTerritoiresAide => {
   for (const aid of aid_types_full) {

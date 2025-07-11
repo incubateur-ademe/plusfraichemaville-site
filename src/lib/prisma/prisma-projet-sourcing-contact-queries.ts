@@ -1,4 +1,4 @@
-import { projet_sourcing_contact } from "@prisma/client";
+import { projet_sourcing_contact } from "@/src/generated/prisma/client";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { projetUpdated } from "@/src/lib/prisma/prismaProjetQueries";
 

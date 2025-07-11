@@ -10,7 +10,7 @@ import { leaveProjetAction } from "@/src/actions/projets/leave-projet-action";
 import { notifications } from "../common/notifications";
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { RoleProjet } from "@prisma/client";
+import { RoleProjet } from "@/src/generated/prisma/client";
 
 const modal = createModal({
   id: "partage-overview-quit-project",

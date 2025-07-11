@@ -3,7 +3,7 @@ import { PictoEspaceSelector } from "../common/pictos";
 import { PictoId } from "../common/pictos/picto-espace-selector";
 import clsx from "clsx";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus } from "@/src/generated/prisma/client";
 import { Case, Conditional, Default } from "../common/conditional-renderer";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } from "./helpers";

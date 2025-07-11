@@ -3,7 +3,7 @@ import {
   IApiAidesTerritoiresPaginatedAides,
   IApiAidesTerritoiresQueryPerimeter,
 } from "@/src/lib/aidesTerritoires/types";
-import { collectivite } from "@prisma/client";
+import { collectivite } from "@/src/generated/prisma/client";
 import { updateCollectiviteAidesTerritoireId } from "@/src/lib/prisma/prismaCollectiviteQueries";
 import { callAidesTerritoiresApi, extractMotsClesFromFichesSolutions } from "@/src/lib/aidesTerritoires/helpers";
 import { AidesTerritoiresAide } from "@/src/components/financement/types";

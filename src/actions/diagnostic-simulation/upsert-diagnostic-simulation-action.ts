@@ -9,9 +9,9 @@ import {
   IndicateursEnvironnementauxFormData,
   IndicateursEnvironnementauxFormSchema,
 } from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form-schema";
-import { diagnostic_simulation } from "@prisma/client";
 import { calculateCoeffsDiagnosticSimulation } from "@/src/lib/prisma/prismaCustomTypesHelper";
 import { upsertDiagnosticSimulation } from "@/src/lib/prisma/prisma-diagnostic-simulation-queries";
+import { diagnostic_simulation } from "@/src/generated/prisma/client";
 
 export const upsertDiagnosticSimulationAction = async (
   projetId: number,

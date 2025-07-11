@@ -15,7 +15,7 @@ import SelectFormField from "../common/SelectFormField";
 import { updateUserRoleProjectAction } from "@/src/actions/users/update-user-role-project-action";
 import { useUserStore } from "@/src/stores/user/provider";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { RoleProjet } from "@prisma/client";
+import { RoleProjet } from "@/src/generated/prisma/client";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { notifications } from "../common/notifications";
 import capitalize from "lodash/capitalize";

@@ -7,7 +7,7 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
-import { EventType, ReferenceType } from "@prisma/client";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const updateProjetVisibilityAction = async (
   projetId: number,

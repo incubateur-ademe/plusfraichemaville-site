@@ -1,4 +1,4 @@
-import { $Enums, climadiag } from "@prisma/client";
+import { $Enums, climadiag } from "@/src/generated/prisma/client";
 import { climadiagInfoLabel } from "@/src/components/climadiag/helpers";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { Climadiag } from "@/src/components/climadiag/types";

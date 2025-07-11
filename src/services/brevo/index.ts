@@ -3,7 +3,7 @@ import {
   getUserWithNoActivityAfterSignup,
   updateEmailStatus as updateEmailStatusQuery,
 } from "@/src/lib/prisma/prisma-email-queries";
-import { email, emailStatus, emailType } from "@prisma/client";
+import { email, emailStatus, emailType } from "@/src/generated/prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
 import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";

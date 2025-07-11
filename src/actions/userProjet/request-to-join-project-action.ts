@@ -7,7 +7,7 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 import { EmailService } from "@/src/services/brevo";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { getUserProjet, renewOrCreateProjectJoinRequest } from "@/src/lib/prisma/prisma-user-projet-queries";
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus } from "@/src/generated/prisma/client";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getProjetWithPublicRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 

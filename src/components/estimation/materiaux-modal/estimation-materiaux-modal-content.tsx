@@ -1,6 +1,6 @@
 "use client";
 
-import { estimation } from "@prisma/client";
+import { estimation } from "@/src/generated/prisma/client";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useEffect, useMemo, useState } from "react";
 import EstimationMateriauForm from "@/src/forms/estimation/estimation-materiau-form";

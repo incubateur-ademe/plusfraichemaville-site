@@ -1,6 +1,6 @@
 import { generateRandomId } from "@/src/helpers/common";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { estimation, Prisma } from "@prisma/client";
+import { estimation, Prisma } from "@/src/generated/prisma/client";
 import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { projetUpdated } from "./prismaProjetQueries";
 

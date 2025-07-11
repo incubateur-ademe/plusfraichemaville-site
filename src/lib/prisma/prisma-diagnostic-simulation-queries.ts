@@ -1,5 +1,5 @@
 import { prismaClient } from "./prismaClient";
-import { diagnostic_simulation } from "@prisma/client";
+import { diagnostic_simulation } from "@/src/generated/prisma/client";
 import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const upsertDiagnosticSimulation = async ({

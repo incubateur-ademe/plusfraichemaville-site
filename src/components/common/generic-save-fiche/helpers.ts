@@ -1,6 +1,6 @@
 import { TypeFiche } from "@/src/helpers/common";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import { FicheType } from "@prisma/client";
+import { FicheType } from "@/src/generated/prisma/client";
 
 export type FicheBookmarkedSolution = {
   projectName: string;

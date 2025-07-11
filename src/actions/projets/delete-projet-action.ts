@@ -6,7 +6,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { deleteProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
-import { EventType, ReferenceType } from "@prisma/client";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const deleteProjetAction = async (projetId: number): Promise<ResponseAction<{}>> => {
   const session = await auth();

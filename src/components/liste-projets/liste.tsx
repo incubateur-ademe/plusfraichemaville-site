@@ -1,4 +1,4 @@
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus } from "@/src/generated/prisma/client";
 import { ListeProjetsCard } from "./card";
 import { ProjetsByCollectivite } from "./helpers";
 

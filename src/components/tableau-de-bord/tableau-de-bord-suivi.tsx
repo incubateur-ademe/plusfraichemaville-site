@@ -10,7 +10,7 @@ import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
 import { RexContactId } from "@/src/components/annuaire/types";
-import { FicheType } from "@prisma/client";
+import { FicheType } from "@/src/generated/prisma/client";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";

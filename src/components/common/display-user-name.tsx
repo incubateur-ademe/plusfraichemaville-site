@@ -1,4 +1,4 @@
-import { User } from "@prisma/client";
+import { User } from "@/src/generated/prisma/client";
 
 export const DisplayUserName = ({ user }: { user?: User }) =>
   user && (
