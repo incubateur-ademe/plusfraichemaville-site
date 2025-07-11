@@ -10,7 +10,7 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
-import { $Enums, EventType } from "@prisma/client";
+import { $Enums, EventType } from "@/src/generated/prisma/client";
 import ReferenceType = $Enums.ReferenceType;
 
 export const upsertProjetAction = async (

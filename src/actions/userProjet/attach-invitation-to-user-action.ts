@@ -6,7 +6,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { attachInvitationsByToken, getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/src/generated/prisma/client";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const attachInvitationToUserAction = async (

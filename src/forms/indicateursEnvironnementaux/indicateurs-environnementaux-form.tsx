@@ -19,7 +19,7 @@ import { Separator } from "@/src/components/common/separator";
 import { upsertDiagnosticSimulationAction } from "@/src/actions/diagnostic-simulation/upsert-diagnostic-simulation-action";
 import { notifications } from "@/src/components/common/notifications";
 import { upsert } from "@/src/helpers/listUtils";
-import { diagnostic_simulation } from "@prisma/client";
+import { diagnostic_simulation } from "@/src/generated/prisma/client";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useRouter } from "next/navigation";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";

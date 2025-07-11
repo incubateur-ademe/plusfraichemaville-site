@@ -1,9 +1,9 @@
 import { isEmpty } from "@/src/helpers/listUtils";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { Prisma } from "@prisma/client";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
 import AnyNull = Prisma.AnyNull;
+import { Prisma } from "@/src/generated/prisma/client";
 
 type LCZCommuneCoverage = {
   insee_commune: string;

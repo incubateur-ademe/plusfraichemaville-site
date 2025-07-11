@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-import { Analytics, Prisma } from "@prisma/client";
+import { Analytics, Prisma } from "@/src/generated/prisma/client";
 import { prismaClient } from "./prismaClient";
 import { DateRange } from "@/src/helpers/dateUtils";
 

@@ -1,4 +1,4 @@
-import { RoleProjet } from "@prisma/client";
+import { RoleProjet } from "../generated/client";
 
 type UserRole = {
   code: RoleProjet;

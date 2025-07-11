@@ -1,5 +1,5 @@
 import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
-import { RoleProjet } from "@prisma/client";
+import { RoleProjet } from "@/src/generated/prisma/client";
 import { getOtherAdmins, getUserProjet } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { Session } from "next-auth";
 

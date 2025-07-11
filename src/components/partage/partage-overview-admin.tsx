@@ -3,7 +3,7 @@
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { PartageOverviewWrapper } from "./partage-overview-wrapper";
 import { groupByInvitationStatus } from "./helpers";
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus } from "@/src/generated/prisma/client";
 import { PartageOverviewMemberSection } from "./partage-overview-member-section";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 

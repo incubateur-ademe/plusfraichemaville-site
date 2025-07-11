@@ -2,7 +2,7 @@
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import { estimation } from "@prisma/client";
+import { estimation } from "@/src/generated/prisma/client";
 import clsx from "clsx";
 
 import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation/EstimationFormSchema";

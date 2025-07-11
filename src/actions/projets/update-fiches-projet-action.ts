@@ -8,7 +8,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
 import { deleteRecommandationsViewedBy } from "@/src/lib/prisma/prismaProjetQueries";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/src/generated/prisma/client";
 
 export const updateFichesProjetAction = async ({
   projetId,

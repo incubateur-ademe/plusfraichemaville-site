@@ -1,4 +1,4 @@
-import { InvitationStatus, RoleProjet, User, user_projet } from "@prisma/client";
+import { InvitationStatus, RoleProjet, User, user_projet } from "@/src/generated/prisma/client";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { ProjetWithRelations, UserProjetWithRelations, UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { projetIncludes, projetPublicSelect, projetUpdated } from "@/src/lib/prisma/prismaProjetQueries";
