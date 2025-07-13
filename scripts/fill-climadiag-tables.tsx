@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/src/generated/prisma/client";
 import { ProjectionsIndicateurClimadiag } from "@/src/lib/prisma/prismaCustomTypes";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 

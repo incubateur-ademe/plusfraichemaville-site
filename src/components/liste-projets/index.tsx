@@ -10,7 +10,7 @@ import { ListeProjetTab } from "./liste";
 import clsx from "clsx";
 import { useSearchParams } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { InvitationStatus } from "@prisma/client";
+import { InvitationStatus } from "@/src/generated/prisma/client";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export type EspaceProjetTabsId = "projet" | "invitation" | "demande";

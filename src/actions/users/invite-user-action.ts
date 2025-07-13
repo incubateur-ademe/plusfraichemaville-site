@@ -3,7 +3,7 @@
 import { auth } from "@/src/lib/next-auth/auth";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getUserByEmail, getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
-import { InvitationStatus, RoleProjet } from "@prisma/client";
+import { InvitationStatus, RoleProjet } from "@/src/generated/prisma/client";
 import { ResponseAction } from "../actions-types";
 import { EmailService } from "@/src/services/brevo";
 import { getProjetById, getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";

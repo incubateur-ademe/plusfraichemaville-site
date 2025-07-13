@@ -7,7 +7,7 @@ import { notifications } from "../common/notifications";
 import { PopupMenu } from "../common/popup-menu";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
-import { RoleProjet } from "@prisma/client";
+import { RoleProjet } from "@/src/generated/prisma/client";
 import { PartageMemberModificationRoleModale } from "@/src/components/partage/partage-member-modification-role-modale";
 
 export type PartageOverviewMemberStatusAdminProps = {

@@ -1,5 +1,5 @@
 import { ClimadiagTemperatureProjection, ProjectionsIndicateurClimadiag } from "@/src/lib/prisma/prismaCustomTypes";
-import { climadiag } from "@prisma/client";
+import { climadiag } from "@/src/generated/prisma/client";
 
 export interface Climadiag extends climadiag {
   nuits_chaudes_prevision: ProjectionsIndicateurClimadiag;

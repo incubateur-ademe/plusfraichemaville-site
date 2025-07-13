@@ -1,4 +1,12 @@
-import { collectivite, Prisma, projet, projet_fiche, RoleProjet, User, diagnostic_simulation } from "@prisma/client";
+import {
+  collectivite,
+  diagnostic_simulation,
+  Prisma,
+  projet,
+  projet_fiche,
+  RoleProjet,
+  User,
+} from "@/src/generated/prisma/client";
 import { IndiEnQuestion } from "@/src/helpers/indicateurs-environnementaux/indi-en-types";
 
 export type UserWithCollectivite = Prisma.UserGetPayload<{

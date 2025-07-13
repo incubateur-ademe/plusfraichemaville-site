@@ -9,7 +9,7 @@ import { leaveProjetAction } from "@/src/actions/projets/leave-projet-action";
 import { notifications } from "../common/notifications";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { deleteProjetAction } from "@/src/actions/projets/delete-projet-action";
-import { RoleProjet } from "@prisma/client";
+import { RoleProjet } from "@/src/generated/prisma/client";
 
 type PartageOverviewPopupMenuProps = {
   projectId: number;

@@ -1,4 +1,4 @@
-import { email, emailStatus, emailType, User } from "@prisma/client";
+import { email, emailStatus, emailType, User } from "@/src/generated/prisma/client";
 import { prismaClient } from "./prismaClient";
 import { removeDaysToDate } from "@/src/helpers/dateUtils";
 

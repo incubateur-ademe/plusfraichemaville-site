@@ -1,4 +1,4 @@
-import { cron_jobs } from "@prisma/client";
+import { cron_jobs } from "@/src/generated/prisma/client";
 import { prismaClient } from "./prismaClient";
 import { UserWithAdminProjets } from "./prismaCustomTypes";
 
