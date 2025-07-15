@@ -632,3 +632,10 @@ a.fr-nav__link {
 .custom-maplibre-popup .maplibregl-popup-close-button {
   @apply mr-2;
 }
+
+.normalList {
+  list-style: outside;
+  margin-left: 1rem;
+  margin-bottom: 1rem;
+  padding-inline-start: 1rem;
+}
