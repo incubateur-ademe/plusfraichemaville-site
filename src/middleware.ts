@@ -10,7 +10,7 @@ const cspHeader = `
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
     style-src 'self' 'unsafe-inline';
-    img-src 'self' blob: data: https://cdn.plusfraichemaville.fr/ https://plusfraichemaville.s3.fr-par.scw.cloud/
+    img-src 'self' blob: data: https://cdn.plusfraichemaville.fr/ https://pfmv-cms-prod.s3.fr-par.scw.cloud/
     https://*.basemaps.cartocdn.com
     https://cartagene.cerema.fr
     https://tile.openstreetmap.org
