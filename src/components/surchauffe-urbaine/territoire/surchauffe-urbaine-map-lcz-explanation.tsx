@@ -3,7 +3,6 @@ import SimpleCustomAccordion from "@/src/components/common/simple-custom-accordi
 import Image from "next/image";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: string }) => {
   return (
@@ -12,18 +11,10 @@ export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: 
       <div className="mb-2 text-dsfr-text-title-grey">
         {"Les cartes LCZ (Zones Climatiques Locales) offrent une lecture standardisée du territoire fondée sur" +
           " l’occupation du sol et la morphologie urbaine. Elles distinguent 17 types de zones, utiles pour repérer" +
-          " les secteurs potentiellement sensibles à la surchauffe. En phase de pré-diagnostic, les LCZ peuvent" +
-          " suggérer des contrastes thermiques potentiels et orienter l’implantation de capteurs de mesure climatique."}
+          " les secteurs potentiellement sensibles à la surchauffe. En phase de pré-diagnostic, les LCZ contribuent " +
+          "à repérer des zones où une exposition à la surchauffe pourrait être plus marquée, en vue d’y installer des" +
+          " capteurs ou d’orienter des actions de rafraîchissement."}
       </div>
-      <span className="text-dsfr-text-default-grey">
-        Pour en savoir plus sur la méthodologie scientifique utilisée,{" "}
-        <LinkWithoutPrefetch
-          href="https://www.cerema.fr/fr/actualites/cerema-publie-nouvelles-donnees-surchauffe-urbaine"
-          target="_blank"
-        >
-          rendez-vous sur le site du Cerema.
-        </LinkWithoutPrefetch>
-      </span>
       <SimpleCustomAccordion title="À savoir" expanded={false} ariaId="a-savoir-explication-lcz">
         <div className="flex flex-row gap-6">
           <Image

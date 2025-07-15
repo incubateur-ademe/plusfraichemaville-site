@@ -24,30 +24,61 @@ type LCZMapContainerProps = {
 const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => {
   return (
     <div className={clsx("pfmv-strong-card mt-8 px-4 py-10 text-left md:px-12", className)}>
-      <div className="mb-4 flex flex-col-reverse items-start justify-between gap-4 md:flex-row">
+      <div className="flex flex-col-reverse items-start justify-between gap-4 md:flex-row">
         <div>
           <Badge className="!mb-3 !bg-dsfr-background-open-blue-france !text-pfmv-navy">climat actuel</Badge>
           <div className="mb-2 mt-2 text-xl font-bold text-dsfr-text-label-blue-france">
             <i className="ri-map-pin-line mr-1  " />
             {climadiagInfo.nom} - {climadiagInfo.code_postal}
           </div>
-          <div className="mb-4 text-[1.375rem] font-bold text-pfmv-navy">
+          <div className="mb-2 text-[1.375rem] font-bold text-pfmv-navy">
             Consultez la cartographie des zones climatiques locales (LCZ)
           </div>
         </div>
         <LinkWithoutPrefetch
-          className={clsx("flex cursor-pointer items-center justify-center gap-4 bg-none after:hidden")}
+          className={clsx(
+            "flex h-24 items-center justify-center gap-8 after:hidden",
+            "bg-none hover:!bg-dsfr-background-default-grey-hover",
+          )}
           target="_blank"
-          href="https://climadiag-commune.meteofrance.com/"
+          href="https://www.cerema.fr/fr/actualites/cerema-publie-nouvelles-donnees-surchauffe-urbaine"
         >
-          <Image
-            src="/images/lcz/logo-cerema.svg"
-            width={200}
-            height={48}
-            alt="Cerema, Climat et territoires de demain"
-          />
+          <div>
+            <Image
+              src="/images/logo-rf.svg"
+              width={100}
+              height={48}
+              alt="Cerema, Climat et territoires de demain"
+              className="h-24 w-fit"
+            />
+          </div>
+          <div>
+            <Image
+              src="/images/lcz/logo-cerema.svg"
+              width={100}
+              height={48}
+              alt="Cerema, Climat et territoires de demain"
+              className="h-24 w-fit"
+            />
+          </div>
         </LinkWithoutPrefetch>
       </div>
+      <p className="!mb-2">
+        Le Cerema met à disposition les données « Zones climatiques locales » (LCZ). 88 aires urbaines les plus
+        densément peuplées sont ainsi couvertes, soit 44 millions d’habitants.
+      </p>
+      <p className="!mb-8">
+        <span className="text-dsfr-text-default-grey">
+          Pour en savoir plus sur la méthodologie scientifique utilisée,{" "}
+          <LinkWithoutPrefetch
+            href="https://www.cerema.fr/fr/actualites/cerema-publie-nouvelles-donnees-surchauffe-urbaine"
+            target="_blank"
+            className="font-bold"
+          >
+            rendez-vous sur le site du Cerema.
+          </LinkWithoutPrefetch>
+        </span>
+      </p>
       <div className="flex flex-col-reverse gap-6 md:flex-row">
         <SurchauffeUrbaineMapLczLegend className="w-full md:h-[37.5rem] md:w-60 md:overflow-auto" />
         <div className="h-[30rem] w-full md:h-[37.5rem]">
