@@ -2,8 +2,8 @@
 
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import Link from "next/link";
 import { PropsWithChildren } from "react";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type GenericFicheLinkProps = {
   slug: string;
@@ -18,8 +18,8 @@ export const FicheDiagLink = ({ slug, className, onClick, children }: GenericFic
     : PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(slug);
 
   return (
-    <Link href={url} className={className} onClick={onClick}>
+    <LinkWithoutPrefetch href={url} className={className} onClick={onClick}>
       {children}
-    </Link>
+    </LinkWithoutPrefetch>
   );
 };

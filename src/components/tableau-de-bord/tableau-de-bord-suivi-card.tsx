@@ -4,10 +4,10 @@ import clsx from "clsx";
 import { Badge } from "@codegouvfr/react-dsfr/Badge";
 import { ReactNode } from "react";
 import { TableauDeBordSuiviCardProgress } from ".";
-import Link from "next/link";
 import { useParams } from "next/navigation";
 import { makeUrl } from "./helpers";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export type TableauDeBordCardType =
   | "diagnostic"
@@ -44,7 +44,7 @@ export const TableauDeBordSuiviCard = ({
   }
 
   return (
-    <Link
+    <LinkWithoutPrefetch
       href={linkResolver(+projetId)}
       className={clsx("active:bg-transparent !rounded-2xl !bg-none", disabled && "pointer-events-none")}
     >
@@ -81,6 +81,6 @@ export const TableauDeBordSuiviCard = ({
           </div>
         </div>
       </div>
-    </Link>
+    </LinkWithoutPrefetch>
   );
 };

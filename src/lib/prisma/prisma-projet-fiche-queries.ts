@@ -2,7 +2,7 @@ import { TypeFiche } from "@/src/helpers/common";
 import { prismaClient } from "./prismaClient";
 import { ProjetWithRelations } from "./prismaCustomTypes";
 import { projetIncludes } from "./prismaProjetQueries";
-import { FicheType } from "@prisma/client";
+import { FicheType } from "@/src/generated/prisma/client";
 
 export type ProjetFicheUpdater = {
   projetId: number;

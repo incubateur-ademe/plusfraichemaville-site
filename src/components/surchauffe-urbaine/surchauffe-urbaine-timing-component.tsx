@@ -8,9 +8,9 @@ import Image from "next/image";
 import React, { useRef, useState } from "react";
 // eslint-disable-next-line max-len
 import { SurchauffeUrbaineTimingSlideControllers } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timing-slide-controllers";
-import Link from "next/link";
 import { SURCHAUFFE_URBAINE_CHANGE_TIMING } from "@/src/helpers/matomo/matomo-tags";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: string }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -97,7 +97,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
       </div>
       <div className="fr-container text-center">
         Pour aller plus loin sur la surchauffe urbaine
-        <Link
+        <LinkWithoutPrefetch
           className="ml-2 !text-pfmv-navy after:hidden"
           download
           target="_blank"
@@ -105,7 +105,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
         >
           Télécharger le recueil de l’Ademe « Diagnostic de la surchauffe urbaine »
           <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
-        </Link>
+        </LinkWithoutPrefetch>
       </div>
     </div>
   );

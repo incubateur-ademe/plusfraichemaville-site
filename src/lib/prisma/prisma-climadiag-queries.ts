@@ -1,5 +1,5 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/src/generated/prisma/client";
 import { Climadiag } from "@/src/components/climadiag/types";
 import { climadiagToPublicClimadiag } from "@/src/components/surchauffe-urbaine/territoire/search-helpers";
 

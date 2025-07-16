@@ -3,7 +3,7 @@ import {
   UserProjetWithUser,
   UserProjetWithUserInfos,
 } from "@/src/lib/prisma/prismaCustomTypes";
-import { InvitationStatus, RoleProjet } from "@prisma/client";
+import { InvitationStatus, RoleProjet } from "@/src/generated/prisma/client";
 
 type GroupedUserProjet = Partial<Record<InvitationStatus, UserProjetWithUser[]>>;
 

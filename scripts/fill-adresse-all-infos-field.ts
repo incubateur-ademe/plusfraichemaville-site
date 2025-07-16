@@ -1,7 +1,7 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { fetchCollectiviteFromBanApi, fetchProjetAddressFromBanApi } from "@/src/lib/adresseApi/fetch";
-import { Prisma } from "@prisma/client";
 import AnyNull = Prisma.AnyNull;
+import { Prisma } from "@/src/generated/prisma/client";
 
 async function main() {
   console.log(`Mise à jour des collectivités`);

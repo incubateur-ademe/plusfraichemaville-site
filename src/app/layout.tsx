@@ -46,14 +46,7 @@ export default async function RootLayout({ children }: { children: ReactElement 
         <DsfrHead
           doDisableFavicon={true}
           nonce={nonce}
-          preloadFonts={[
-            "Marianne-Regular",
-            "Marianne-Regular_Italic",
-            "Marianne-Medium",
-            "Marianne-Medium_Italic",
-            "Marianne-Bold",
-            "Marianne-Bold_Italic",
-          ]}
+          preloadFonts={["Marianne-Regular", "Marianne-Regular_Italic", "Marianne-Medium", "Marianne-Bold"]}
         />
       </head>
       <body>

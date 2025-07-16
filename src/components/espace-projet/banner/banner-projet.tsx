@@ -3,13 +3,14 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { PictoEspaceSelector } from "@/src/components/common/pictos";
 import { PictoId } from "@/src/components/common/pictos/picto-espace-selector";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import Link from "next/link";
 import clsx from "clsx";
 import { BannerProjetButtons } from "./banner-projet-buttons";
 import { Suspense } from "react";
 import { BannerProjetSkeleton } from "./banner-projet-skeleton";
 import { LecteurModeLabel } from "@/src/components/common/lecteur-mode-label";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import Link from "next/link";
 
 export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -35,6 +36,7 @@ export default function BannerProjet({ className }: { className?: string }) {
               <div className="flex flex-col justify-between py-1">
                 <div className="mb-1 w-fit">
                   <Link
+                    prefetch={false}
                     href={{
                       pathname: PFMV_ROUTES.ESPACE_PROJET_LISTE,
                       hash: currentProjet.collectivite.code_insee || currentProjet.collectivite.nom,
@@ -52,12 +54,12 @@ export default function BannerProjet({ className }: { className?: string }) {
                     </div>
                   </Link>
                 </div>
-                <Link
+                <LinkWithoutPrefetch
                   href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
                   className="mb-1 w-fit !bg-none text-[1.375rem] !leading-6 hover:underline"
                 >
                   {currentProjet.nom}
-                </Link>
+                </LinkWithoutPrefetch>
               </div>
             </div>
             <div className="flex gap-4">

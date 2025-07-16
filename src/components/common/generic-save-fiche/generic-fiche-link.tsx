@@ -2,9 +2,9 @@
 
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { PropsWithChildren } from "react";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type GenericFicheLinkProps = {
   href: string;
@@ -21,8 +21,8 @@ export const GenericFicheLink = ({ children, className, href, onClick }: Generic
       : href;
 
   return (
-    <Link href={url} className={className} onClick={onClick}>
+    <LinkWithoutPrefetch href={url} className={className} onClick={onClick}>
       {children}
-    </Link>
+    </LinkWithoutPrefetch>
   );
 };

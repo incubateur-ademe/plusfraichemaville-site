@@ -1,5 +1,5 @@
 import { ClimadiagTemperatureProjection, ProjectionsIndicateurClimadiag } from "@/src/lib/prisma/prismaCustomTypes";
-import { climadiag } from "@prisma/client";
+import { climadiag } from "@/src/generated/prisma/client";
 
 export interface Climadiag extends climadiag {
   nuits_chaudes_prevision: ProjectionsIndicateurClimadiag;
@@ -11,7 +11,7 @@ export type ClimadiagYear = keyof ProjectionsIndicateurClimadiag;
 
 export type ClimadiagTemperatureJour = {
   prevision: ClimadiagTemperatureProjection;
-  ref: number;
+  ref: number | null;
 };
 
 export type ClimadiagTypeJour = "jours_chauds" | "nuits_chaudes" | "jours_vdc";

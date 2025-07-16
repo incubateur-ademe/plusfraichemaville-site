@@ -1,4 +1,4 @@
-import { estimation } from "@prisma/client";
+import { estimation } from "@/src/generated/prisma/client";
 import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import orderBy from "lodash/orderBy";
 

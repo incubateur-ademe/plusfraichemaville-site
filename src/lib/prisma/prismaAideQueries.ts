@@ -1,5 +1,5 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { aide } from "@prisma/client";
+import { aide } from "@/src/generated/prisma/client";
 
 export const getAideById = async (aideId: number) => {
   return prismaClient.aide.findUnique({

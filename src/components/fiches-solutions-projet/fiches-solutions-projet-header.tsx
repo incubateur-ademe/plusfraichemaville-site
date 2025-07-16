@@ -1,7 +1,7 @@
 "use client";
 
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import Link from "next/link";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 type FichesSolutionsProjetHeaderProps = {
   projetId?: number;
@@ -14,9 +14,9 @@ export const FichesSolutionsProjetHeader = ({ projetId, projetNom }: FichesSolut
       <h1 className="mb-6 text-[1.75rem] font-bold">Je choisis mes solutions de rafraîchissement</h1>
       <span className="block">
         Mes solutions sélectionnées pour mon projet{" "}
-        <Link href={PFMV_ROUTES.TABLEAU_DE_BORD(projetId!)} className="font-semibold">
+        <LinkWithoutPrefetch href={PFMV_ROUTES.TABLEAU_DE_BORD(projetId!)} className="font-semibold">
           {projetNom}
-        </Link>
+        </LinkWithoutPrefetch>
         .
       </span>
       <span>

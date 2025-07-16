@@ -1,10 +1,10 @@
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericSaveModalCommonProps } from "./generic-save-modal";
-import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { TypeFiche } from "@/src/helpers/common";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "@codegouvfr/react-dsfr/Button";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: GenericSaveModalCommonProps) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -37,7 +37,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
       <Button className="mb-4 mr-4 !min-h-fit rounded-3xl !text-sm" onClick={clickAddMoreCard} priority="secondary">
         {type === TypeFiche.diagnostic ? "Ajouter d'autres méthodes" : "Ajouter d'autres solutions"}
       </Button>
-      <Link
+      <LinkWithoutPrefetch
         href={
           type === TypeFiche.diagnostic
             ? PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS(projet?.id!)
@@ -46,7 +46,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
         className="fr-btn mr-4 !min-h-fit rounded-3xl !text-sm"
       >
         {type === TypeFiche.diagnostic ? "Valider mes méthodes" : "Aller au tableau de bord"}
-      </Link>
+      </LinkWithoutPrefetch>
     </modal.Component>
   );
 };

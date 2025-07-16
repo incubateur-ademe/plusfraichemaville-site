@@ -1,5 +1,5 @@
 "use client";
-import { estimation } from "@prisma/client";
+import { estimation } from "@/src/generated/prisma/client";
 import clsx from "clsx";
 
 import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";

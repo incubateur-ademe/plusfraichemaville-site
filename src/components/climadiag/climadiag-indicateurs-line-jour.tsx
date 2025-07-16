@@ -3,7 +3,7 @@ import clsx from "clsx";
 type ClimadiagIndicateursJourProps = {
   withBackground?: boolean;
   valeur?: "basse" | "médiane" | "haute";
-  jour: number;
+  jour: number | null;
 };
 export const ClimadiagIndicateursLineJour = ({ withBackground, valeur, jour }: ClimadiagIndicateursJourProps) => {
   return (
@@ -22,8 +22,14 @@ export const ClimadiagIndicateursLineJour = ({ withBackground, valeur, jour }: C
           !valeur && "text-pfmv-grey",
         )}
       >
-        <span className="text-4xl ">{Math.round(jour)} </span>
-        {Math.round(jour) > 1 ? "jours" : "jour"}
+        {!jour && jour !== 0 ? (
+          <span className="text-4xl ">N.R.</span>
+        ) : (
+          <>
+            <span className="text-4xl ">{Math.round(jour)} </span>
+            {Math.round(jour) > 1 ? "jours" : "jour"}
+          </>
+        )}
       </div>
       <div className="text-sm text-pfmv-grey">
         <span className="block">valeur</span>

@@ -1,5 +1,5 @@
 import z from "zod";
-import { RoleProjet } from "@prisma/client";
+import { RoleProjet } from "@/src/generated/prisma/client";
 
 export const PartageUserInvitationSchema = z.object({
   email: z

@@ -1,6 +1,6 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
-import { Prisma, User } from "@prisma/client";
+import { Prisma, User } from "@/src/generated/prisma/client";
 import { IApiSirenQueryTypes } from "@/src/lib/siren/types";
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {

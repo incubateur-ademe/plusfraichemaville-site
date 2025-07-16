@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import React from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
@@ -9,6 +8,7 @@ import clsx from "clsx";
 // eslint-disable-next-line max-len
 import { comebackLaterDiagnosticSimulationAction } from "@/src/actions/diagnostic-simulation/comeback-later-diagnostic-simulation-action";
 import { useRouter } from "next/navigation";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function IndienReminderModal({ projetId }: { projetId: number }) {
   const modal = createModal({
@@ -81,12 +81,12 @@ export default function IndienReminderModal({ projetId }: { projetId: number }) 
           À tout moment vous avez la possibilité d’enregistrer vos réponses et de revenir plus tard.
         </div>
         <div>
-          <Link
+          <LinkWithoutPrefetch
             className="fr-btn mb-6 mr-6 mt-6 rounded-3xl"
             href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(projetId)}
           >
             C’est parti !
-          </Link>
+          </LinkWithoutPrefetch>
           <Button onClick={() => onComebackLater()} priority="secondary">
             Revenir plus tard
           </Button>

@@ -2,17 +2,18 @@ import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { TeaserDiagnosticComponent } from "@/src/components/surchauffe-urbaine/teaser-diagnostic-component";
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_SURCHAUFFE_URBAINE_TERRITOIRE } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
-// eslint-disable-next-line max-len
 import { SurchauffeUrbaineTerritoireSearch } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-territoire-search";
 import { getPublicClimadiagInfoFromCodeInsee } from "@/src/lib/prisma/prisma-climadiag-queries";
 import { mapClimadiagToCollectiteOption } from "@/src/components/surchauffe-urbaine/territoire/search-helpers";
-// eslint-disable-next-line max-len
 import { SurchauffeUrbaineClimadiag } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-climadiag";
 import { Climadiag } from "@/src/components/climadiag/types";
+import LCZMapContainer from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-container";
 
 export const metadata: Metadata = computeMetadata("Impact de la surchauffe urbaine sur votre territoire");
+
+const LCZ_PERCENTAGE_COVERAGE_THRESHOLD = 5;
+const displayLCZ = process.env.NEXT_PUBLIC_FEATURE_LCZ === "true" || false;
 
 export default async function SurchauffeUrbaineTerritoirePage(props: {
   searchParams: Promise<{ codeInsee: string | undefined }>;
@@ -30,6 +31,9 @@ export default async function SurchauffeUrbaineTerritoirePage(props: {
           initialOption={mapClimadiagToCollectiteOption(climadiagResult)}
           className="mt-6"
         />
+        {displayLCZ && climadiagResult && climadiagResult.couverture_lcz > LCZ_PERCENTAGE_COVERAGE_THRESHOLD && (
+          <LCZMapContainer climadiagInfo={climadiagResult as unknown as Climadiag} />
+        )}
         {climadiagResult && (
           <SurchauffeUrbaineClimadiag climadiagInfo={climadiagResult as unknown as Climadiag} className="mt-6" />
         )}

@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import React from "react";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { IndienType } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-list";
 import clsx from "clsx";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function IndienCoeffExplanationModal({ coefficient }: { coefficient: IndienType }) {
   const modal = createModal({
@@ -24,7 +24,7 @@ export default function IndienCoeffExplanationModal({ coefficient }: { coefficie
             <h1 className={clsx("!text-xl", coefficient.textColor)}>{coefficient.explanationTitle}</h1>
             <div className="mb-6">{coefficient.explanation}</div>
             <span>
-              <Link
+              <LinkWithoutPrefetch
                 className="!text-pfmv-navy after:hidden"
                 download
                 target="_blank"
@@ -32,13 +32,13 @@ export default function IndienCoeffExplanationModal({ coefficient }: { coefficie
               >
                 Télécharger la notice de calcul
                 <i className="ri-download-2-line size-4 before:!mb-1 before:ml-2 before:!size-4" />
-              </Link>
+              </LinkWithoutPrefetch>
             </span>
             <div className="float-right mt-20 flex items-center gap-2">
               Coefficient de calcul créés par
-              <Link href={"https://www.tribu.coop/"} target="_blank">
+              <LinkWithoutPrefetch href={"https://www.tribu.coop/"} target="_blank">
                 TRIBU
-              </Link>
+              </LinkWithoutPrefetch>
               <Image
                 src="/images/fiches-diagnostic/indicateurs-environnementaux/logo-tribu.jpg"
                 width={250}

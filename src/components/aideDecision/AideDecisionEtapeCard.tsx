@@ -1,8 +1,8 @@
-import Link from "next/link";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function AideDecisionEtapeCard({
   etapeAttributes,
@@ -10,7 +10,7 @@ export default function AideDecisionEtapeCard({
   etapeAttributes: AideDecisionEtape["attributes"];
 }) {
   return (
-    <Link
+    <LinkWithoutPrefetch
       className="pfmv-card ml-4 mr-4 flex w-96 flex-row items-center md:ml-0 md:mr-0 md:w-56 md:flex-col"
       href={`${PFMV_ROUTES.AIDE_DECISION}/${etapeAttributes.slug}`}
     >
@@ -28,6 +28,6 @@ export default function AideDecisionEtapeCard({
         <h3 className={"text-blue-hover mb-0 text-[16px] font-bold leading-tight"}>{etapeAttributes.nom}</h3>
         <div className={"fr-text mt-4 hidden text-dsfr-text-mention-grey md:block"}>{etapeAttributes.description}</div>
       </div>
-    </Link>
+    </LinkWithoutPrefetch>
   );
 }

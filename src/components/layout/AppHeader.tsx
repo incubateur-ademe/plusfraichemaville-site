@@ -2,7 +2,7 @@ import NavigationMenu from "@/src/components/layout/NavigationMenu";
 import Image from "next/image";
 
 import { AuthButtons } from "../authentication/auth-buttons";
-import Link from "next/link";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export default function AppHeader() {
   return (
@@ -14,13 +14,13 @@ export default function AppHeader() {
               <div className="fr-header__brand fr-enlarge-link">
                 <div className="fr-header__brand-top">
                   <div className="fr-header__logo">
-                    <Link href="/" title="Accueil - ADEME">
+                    <LinkWithoutPrefetch href="/" title="Accueil - ADEME">
                       <p className="fr-logo">
                         République
                         <br />
                         Française
                       </p>
-                    </Link>
+                    </LinkWithoutPrefetch>
                   </div>
                   <div className="fr-header__operator">
                     <Image

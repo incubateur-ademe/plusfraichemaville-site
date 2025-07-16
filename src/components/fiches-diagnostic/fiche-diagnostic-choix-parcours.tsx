@@ -7,7 +7,6 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
 import { isEmpty } from "@/src/helpers/listUtils";
-import Link from "next/link";
 import Image from "next/image";
 import {
   CompletionLabelCompleted,
@@ -15,6 +14,7 @@ import {
   CompletionLabelNotStarted,
 } from "@/src/components/common/fiche-completion-label";
 import { Separator } from "@/src/components/common/separator";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const FicheDiagnosticChoixParcours = () => {
   const projetId = useProjetsStore((state) => state.currentProjetId);
@@ -63,7 +63,7 @@ export const FicheDiagnosticChoixParcours = () => {
   return (
     <>
       <div className="mb-12 flex flex-col justify-center gap-8 px-10 text-center font-bold md:flex-row ">
-        <Link className="pfmv-strong-card max-w-[30rem]" href={parcoursIndicateursUrl}>
+        <LinkWithoutPrefetch className="pfmv-strong-card max-w-[30rem]" href={parcoursIndicateursUrl}>
           {parcoursIndicateursProgress}
           <Image
             src="/images/fiches-diagnostic/parcours-indicateurs-environnementaux.svg"
@@ -81,8 +81,8 @@ export const FicheDiagnosticChoixParcours = () => {
             </div>
             <div className="fr-btn rounded-3xl hover:bg-dsfr-hover-blue-sun">{parcoursIndicateursButtonLabel}</div>
           </div>
-        </Link>
-        <Link className="pfmv-strong-card flex max-w-[30rem] flex-col" href={parcoursPrestationUrl}>
+        </LinkWithoutPrefetch>
+        <LinkWithoutPrefetch className="pfmv-strong-card flex max-w-[30rem] flex-col" href={parcoursPrestationUrl}>
           {hasSelectedFicheDiagnostic ? (
             <CompletionLabelCompleted className="mr-4 mt-3 text-right" />
           ) : (
@@ -104,7 +104,7 @@ export const FicheDiagnosticChoixParcours = () => {
             </div>
             <div className="fr-btn rounded-3xl hover:bg-dsfr-hover-blue-sun">{parcoursPrestationButtonLabel}</div>
           </div>
-        </Link>
+        </LinkWithoutPrefetch>
       </div>
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}

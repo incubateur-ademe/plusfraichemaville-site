@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
-import Link from "next/link";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const metadata: Metadata = computeMetadata("Abonnement Newsletter");
 
@@ -12,9 +12,9 @@ export default async function PageNewsletterSuccess() {
         Abonnement effectué avec succès
       </div>
 
-      <Link href="/" className="fr-btn fr-btn--tertiary mb-36 rounded-3xl">
+      <LinkWithoutPrefetch href="/" className="fr-btn fr-btn--tertiary mb-36 rounded-3xl">
         {`Retourner à la page d'accueil`}
-      </Link>
+      </LinkWithoutPrefetch>
     </div>
   );
 }

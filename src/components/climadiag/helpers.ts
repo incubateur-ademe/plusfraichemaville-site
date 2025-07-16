@@ -1,4 +1,4 @@
-import { climadiag } from "@prisma/client";
+import { climadiag } from "@/src/generated/prisma/client";
 import { Climadiag, ClimadiagTemperatureJourMap, ClimadiagYear, GroupedOptions, Option } from "./types";
 
 export const climadiagInfoLabel = (climadiagInfo: climadiag) =>

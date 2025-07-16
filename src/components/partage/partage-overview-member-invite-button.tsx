@@ -10,7 +10,7 @@ import InputFormField from "../common/InputFormField";
 import { inviteMemberAction } from "@/src/actions/users/invite-user-action";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
-import { RoleProjet } from "@prisma/client";
+import { RoleProjet } from "@/src/generated/prisma/client";
 import SelectFormField from "../common/SelectFormField";
 import { ROLE_EDITEUR, ROLE_LECTEUR } from "@/src/helpers/user-role";
 import capitalize from "lodash/capitalize";
