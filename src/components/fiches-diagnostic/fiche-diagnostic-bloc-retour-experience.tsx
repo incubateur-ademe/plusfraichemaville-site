@@ -26,7 +26,7 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
 
       <Splide
         hasTrack={false}
-        options={{ autoWidth: true, focus: 0, omitEnd: true, gap: "1.25rem", drag: false }}
+        options={{ autoWidth: true, focus: 0, omitEnd: true, gap: "1.25rem", drag: false, pagination: false }}
         className="max-w-[60rem]"
       >
         <div className="px-6">

@@ -52,7 +52,7 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
           onMove={(_splide: any, newIndex: number, _prevIndex: number, _destIndex: number) => setCurrentSlide(newIndex)}
           id="surchauffe-urbaine-notions-slider"
           hasTrack={false}
-          options={{ arrows: false }}
+          options={{ arrows: false, pagination: false }}
           ref={sliderRef}
           className="max-w-[45rem]"
         >

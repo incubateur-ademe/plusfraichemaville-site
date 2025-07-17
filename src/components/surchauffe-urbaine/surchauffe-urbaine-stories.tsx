@@ -12,7 +12,7 @@ export const SurchauffeUrbaineStories = ({ rexDiagStories }: { rexDiagStories: R
     <Splide
       id="rex-diag-stories-slider"
       hasTrack={false}
-      options={{ rewind: true, type: "loop", autoWidth: true, start: 0 }}
+      options={{ rewind: true, type: "loop", autoWidth: true, start: 0, pagination: false }}
     >
       <div className="px-3 md:px-12">
         <SplideTrack className="overflow-auto lg:!overflow-hidden">

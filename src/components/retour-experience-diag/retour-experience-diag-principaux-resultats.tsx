@@ -45,7 +45,7 @@ export const RetourExperienceDiagPrincipauxResultats = ({
           <Splide
             id="fiche-diagnostic-rex-principaux-resultats-slider"
             hasTrack={false}
-            options={{ autoWidth: true, start: 0 }}
+            options={{ autoWidth: true, start: 0, pagination: false }}
           >
             <SplideTrack className="">
               {images.map((image, index) => (
