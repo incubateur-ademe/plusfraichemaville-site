@@ -12,10 +12,11 @@ import { getFicheSolutionBySlug } from "@/src/lib/strapi/queries/fichesSolutions
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getAideDecisionHistoryBySlug } from "@/src/lib/strapi/queries/aideDecisionQueries";
 import clsx from "clsx";
-import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-url";
+import ButtonShareUrl from "@/src/components/common/button-share-url";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { TypeFiche } from "@/src/helpers/common";
 import { FICHE_SOLUTION_CLIC_ONGLET } from "@/src/helpers/matomo/matomo-tags";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 export async function FicheSolution({
   params,
@@ -61,7 +62,10 @@ export async function FicheSolution({
                 currentPageLabel={ficheSolution.attributes.titre}
               />
             )}
-            <ButtonShareCurrentUrl className={"hidden md:block [&>*]:mb-1"} />
+            <ButtonShareUrl
+              url={getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(ficheSolution.attributes.slug))}
+              className={"hidden md:block [&>*]:mb-1"}
+            />
             <div className="absolute right-4 top-[68px] md:hidden">
               <GenericSaveFiche
                 id={ficheSolution.id}
