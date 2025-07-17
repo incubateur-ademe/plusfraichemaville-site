@@ -10,9 +10,7 @@ import { Separator } from "../common/separator";
 import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { FicheDiagnosticSideMenu } from "./fiche-diagnostic-side-menu";
 import clsx from "clsx";
-// eslint-disable-next-line max-len
 import { FicheDiagnosticBlocBesoinEtIndicateurs } from "@/src/components/fiches-diagnostic/fiche-diagnostic-bloc-besoin-et-indicateurs";
-// eslint-disable-next-line max-len
 import { FicheDiagnosticBlocRetourExperience } from "@/src/components/fiches-diagnostic/fiche-diagnostic-bloc-retour-experience";
 import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
 import { FicheDiagnosticCard } from "@/src/components/fiches-diagnostic/fiche-diagnostic-card";
