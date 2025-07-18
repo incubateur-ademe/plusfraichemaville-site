@@ -12,6 +12,7 @@ import { useState } from "react";
 import { SplideController } from "../common/splide-controllers";
 import clsx from "clsx";
 import { ZoomedImage } from "../common/zoomed-image";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 type RetourExperienceDiagPrincipauxResultatsType = {
   content: string;
@@ -34,14 +35,6 @@ export const RetourExperienceDiagPrincipauxResultats = ({
       <div className="flex flex-col gap-12 md:flex-row">
         <CmsRichText label={content} />
         <div className="relative w-96 shrink-0">
-          <div
-            className={clsx(
-              "absolute right-2 top-2 z-20 flex size-8 cursor-pointer items-center justify-center rounded-full",
-              "pointer-events-none bg-black/60",
-            )}
-          >
-            <i className="ri-search-line size-5 text-white before:!mb-2 before:!size-5"></i>
-          </div>
           <Splide
             id="fiche-diagnostic-rex-principaux-resultats-slider"
             hasTrack={false}
@@ -53,14 +46,22 @@ export const RetourExperienceDiagPrincipauxResultats = ({
                   <ImageLoader
                     width={384}
                     height={248}
-                    className="max-h-60 w-full cursor-pointer object-cover"
+                    className="max-h-60 w-full object-cover"
                     containerClassName="size-full"
                     src={getStrapiImageUrl(image.image, STRAPI_IMAGE_KEY_SIZE.medium)}
                     alt={image.caption ?? "image fiche rex"}
-                    onClick={() => setZoomedImage(image)}
                     unoptimized
                   />
                   <div className="mt-4 text-xs text-dsfr-text-mention-grey">{image.caption}</div>
+                  <div className={clsx("absolute right-2 top-2 z-20 ", "")}>
+                    <Button
+                      className="flex w-10 items-center justify-center  rounded-full bg-black/60"
+                      onClick={() => setZoomedImage(image)}
+                      aria-label="Agrandir"
+                    >
+                      <i className="ri-search-line size-5 text-white before:!mb-2 before:!size-5"></i>
+                    </Button>
+                  </div>
                 </SplideSlide>
               ))}
             </SplideTrack>
