@@ -40,8 +40,8 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
               />
             </div>
             <div className="w-full">
-              <div className=" relative flex max-w-xl">
-                <FicheDiagLink slug={slug} className="pfmv-card w-full cursor-pointer p-5">
+              <div className="relative flex max-w-xl">
+                <div className="pfmv-card w-full cursor-pointer p-5 fr-enlarge-link">
                   {!isEmpty(getEchellesThermiquesByFicheDiagnostic(ficheDiagData)) && (
                     <div className="mb-4 flex flex-wrap gap-2 uppercase">
                       {getEchellesThermiquesByFicheDiagnostic(ficheDiagData).map((effet) => (
@@ -55,10 +55,11 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
                       ))}
                     </div>
                   )}
-
-                  <h3 className="mb-1 mr-28 text-base">{titre}</h3>
+                  <h3 className="text-base !mb-1">
+                    <FicheDiagLink slug={slug} className="mr-28">{titre}</FicheDiagLink>
+                  </h3>
                   <i>{nom_scientifique}</i>
-                </FicheDiagLink>
+                </div>
                 <GenericSaveFiche
                   id={ficheDiagData.id}
                   type={TypeFiche.diagnostic}
