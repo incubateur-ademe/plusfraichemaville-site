@@ -183,12 +183,15 @@
 }
 
 .customTab {
-  margin-top: 1px;
+  margin-top: 0;
   height: 100%;
   padding: 1rem 1.5rem 1rem 1.5rem;
   font-size: 0.875rem;
   white-space: nowrap;
   overflow: hidden;
+}
+.customTab:focus {
+  outline-offset: -2px;
 }
 
 .simpleTab[aria-selected="true"] {
