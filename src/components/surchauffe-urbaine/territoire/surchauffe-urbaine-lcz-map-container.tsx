@@ -64,8 +64,9 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
         </LinkWithoutPrefetch>
       </div>
       <p className="!mb-2">
-        Le Cerema met à disposition les données « Zones climatiques locales » (LCZ). 88 aires urbaines les plus
-        densément peuplées sont ainsi couvertes, soit 44 millions d’habitants.
+        Les données « Zones climatiques locales » (LCZ) sont mises à disposition par le Cerema. Elle sont issues d’une
+        classification géo-climatique des 88 aires urbanisées les plus densément peuplées et couvrent ainsi 44 millions
+        d’habitants.
       </p>
       <p className="!mb-8">
         <span className="text-dsfr-text-default-grey">
