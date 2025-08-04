@@ -67,7 +67,7 @@ export async function GET(request: NextRequest) {
         value: Number(result.score),
         date: result.periode!,
       })),
-      description: "Nombre de projets visibles dans l'annuaire de notre espace projet.",
+      description: "Nombre de projets créés dans notre espace projet.",
     };
 
     return NextResponse.json(sanitizeResults);

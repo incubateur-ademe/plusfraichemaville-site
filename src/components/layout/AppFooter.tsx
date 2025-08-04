@@ -9,7 +9,7 @@ export default function AppFooter() {
         <div className="fr-footer__body">
           <div className="fr-footer__brand fr-enlarge-link">
             <a
-              className="fr-footer__brand-link flex flex-row flex-wrap items-center gap-8"
+              className="fr-footer__brand-link flex flex-row flex-wrap items-start gap-8"
               href="/"
               title="Retour à l’accueil du site - Plus fraîche ma ville - République Française"
             >
@@ -19,23 +19,23 @@ export default function AppFooter() {
                 Française
               </div>
               <Image
-                className="fr-footer__logo"
+                className="fr-footer__logo mt-1"
                 height={200}
                 width={80}
                 src={"/images/logo-ademe.svg"}
                 alt={"ADEME - Plus fraîche ma ville"}
               />
               <Image
-                className="fr-footer__logo max-w-[8rem]"
-                height={200}
-                width={240}
+                className="fr-footer__logo mt-2 max-w-[8rem] object-contain"
+                height={290}
+                width={548}
                 src={"/images/logo-amf.webp"}
                 alt={"Association des maires de France (AMF)"}
               />
               <Image
-                className="fr-footer__logo max-w-[8rem]"
-                height={200}
-                width={240}
+                className="fr-footer__logo mt-7 max-w-[8rem] object-contain"
+                height={259}
+                width={500}
                 src={"/images/logo-anru.webp"}
                 alt={"Agence nationale de l'urbanisme (ANRU)"}
               />
