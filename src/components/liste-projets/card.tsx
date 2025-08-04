@@ -232,7 +232,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, isBrowsing, updateP
     <div className="relative">
       <Conditional>
         <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
-          <div className="pfmv-card">
+          <div className="pfmv-card fr-enlarge-link">
             <LinkWithoutPrefetch onClick={openProjet} href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}>
               {contentCard}
             </LinkWithoutPrefetch>

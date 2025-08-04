@@ -105,7 +105,8 @@
       "core-js",
       "esbuild",
       "prisma",
-      "sharp"
+      "sharp",
+      "unrs-resolver"
     ]
   }
 }
