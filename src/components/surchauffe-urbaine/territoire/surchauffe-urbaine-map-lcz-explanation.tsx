@@ -3,6 +3,7 @@ import SimpleCustomAccordion from "@/src/components/common/simple-custom-accordi
 import Image from "next/image";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: string }) => {
   return (
@@ -15,26 +16,35 @@ export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: 
           "à repérer des zones où une exposition à la surchauffe pourrait être plus marquée, en vue d’y installer des" +
           " capteurs ou d’orienter des actions de rafraîchissement."}
       </div>
-      <SimpleCustomAccordion title="À savoir" expanded={false} ariaId="a-savoir-explication-lcz">
+      <SimpleCustomAccordion title="Points de vigilance" expanded={false} ariaId="a-savoir-explication-lcz">
         <div className="flex flex-row gap-6">
           <Image
             src="/images/surchauffe-urbaine/point-attention.svg"
-            alt="Point d'attention"
+            alt=""
             width={65}
             height={65}
             className="hidden shrink-0 md:block"
           />
           <span>
-            Les LCZ ne permettent pas de quantifier le phénomène d’îlot de chaleur urbain (ICU), qui repose sur des
-            mesures dynamiques de température de l’air (et non de surface). Elles ne reflètent pas non plus les
-            conditions météorologiques locales, ni le confort thermique ressenti par les usagers. Par ailleurs, la
-            représentation partielle de certains éléments de voiries et le découpage de ces cartes à l’échelle de l’îlot
-            urbain induisent des biais qui influencent la classification.
+            Les LCZ sont issues d’un référentiel scientifique international. Fondées sur une classification
+            géo-morphologique, elles ne permettent donc pas de quantifier l’ICU, ne reflètent pas les conditions
+            météorologiques locales ni le confort thermique ressenti par les usagers. C’est un outil de pré-diagnostic
+            qui peut être notamment complété par des campagnes de mesures (fixes ou mobiles) de la température de l’air
+            notamment. La représentation partielle de certains éléments de voiries et le découpage de ces cartes à
+            l’échelle de l’îlot urbain induisent des biais qui influencent la classification.
             <br />
-            Outil automatisé et reproductible, la cartographie LCZ est une porte d’entrée utile, mais elle ne peut se
-            substituer à des données climatiques dynamiques ou à une analyse fine des usages et de la vulnérabilité face
-            à la chaleur. Elle doit donc être complétée pour orienter efficacement les stratégies d’adaptation au
-            changement climatique.
+            Outil gratuit, la cartographie LCZ doit être analysée au regard de la connaissance locale du territoire, et
+            ne peut se substituer à des données climatiques ou à une analyse fine des usages et de la vulnérabilité face
+            à la chaleur. Pour en savoir plus sur les biais à éviter pour leur analyser, et découvrir des exemples
+            d’utilisation de cette données par les collectivités, consultez le guide utilisateur sur le{" "}
+            <LinkWithoutPrefetch
+              href="https://doc.cerema.fr/Default/doc/SYRACUSE/600739/cartographie-nationale-de-donnees-de-zones-climatiques-locales-guide-utilisateurs"
+              target="_blank"
+              className="font-bold"
+            >
+              site du Cerema
+            </LinkWithoutPrefetch>
+            .
           </span>
         </div>
       </SimpleCustomAccordion>

@@ -64,19 +64,22 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
         </LinkWithoutPrefetch>
       </div>
       <p className="!mb-2">
-        Le Cerema met à disposition les données « Zones climatiques locales » (LCZ). 88 aires urbaines les plus
-        densément peuplées sont ainsi couvertes, soit 44 millions d’habitants.
+        Le Cerema met à disposition gratuitement l’outil « Zones climatiques locales » (LCZ), qui classe les quartiers
+        selon leurs caractéristiques urbaines influençant leur degré d’exposition à la surchauffe urbaine. Cet outil
+        couvre 12 000 communes réparties sur 88 aires urbaines les plus densément peuplées de France, soit 44 millions
+        d’habitants.
       </p>
       <p className="!mb-8">
         <span className="text-dsfr-text-default-grey">
-          Pour en savoir plus sur la méthodologie scientifique utilisée,{" "}
+          Pour en savoir plus sur l’utilisation de cette donnée, rendez-vous sur le{" "}
           <LinkWithoutPrefetch
             href="https://www.cerema.fr/fr/actualites/cerema-publie-nouvelles-donnees-surchauffe-urbaine"
             target="_blank"
             className="font-bold"
           >
-            rendez-vous sur le site du Cerema.
+            site du Cerema
           </LinkWithoutPrefetch>
+          .
         </span>
       </p>
       <div className="flex flex-col-reverse gap-6 md:flex-row">

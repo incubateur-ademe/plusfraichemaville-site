@@ -80,11 +80,13 @@ export const handleMapClick = async (event: MapLayerMouseEvent) => {
 };
 
 export const addLCZLayers = (map: maplibregl.Map) => {
+  //Must use env variable in query to bypass browser cache between prod & staging
+  const environment = process.env.NEXT_PUBLIC_SENTRY_ENV ?? "development";
   if (!map.getLayer("lcz-high-layer")) {
     map.addSource("lcz-high-source", {
       type: "raster",
       tiles: [
-        "https://cartagene.cerema.fr/server/rest/services/Hosted/l_lcz_spot_000_2022_tl/MapServer/tile/{z}/{y}/{x}",
+        `https://cartagene.cerema.fr/server/rest/services/Hosted/l_lcz_spot_000_2022_tl/MapServer/tile/{z}/{y}/{x}?env=${environment}`,
       ],
       tileSize: 256,
       attribution:
