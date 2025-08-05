@@ -70,7 +70,7 @@ export const FichesDiagnosticsProjetSelected = () => {
           </h2>
           <Splide
             hasTrack={false}
-            options={{ gap: "1rem", autoWidth: true, focus: 0, omitEnd: true }}
+            options={{ gap: "1rem", autoWidth: true, focus: 0, omitEnd: true, pagination: false }}
             className="mb-12"
           >
             <div className="px-7">

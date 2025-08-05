@@ -23,12 +23,12 @@ export default function CustomAccordion({
   btnTextPadding?: string;
 }) {
   return (
-    <section className={`fr-accordion before:!shadow-none ${className}`}>
+    <section className={clsx("fr-accordion before:!shadow-none", className)}>
       <h3 className="mb-0">
         <button
           className={clsx(
             "fr-accordion__btn bigIconAccordion !text-[1.375rem] !text-dsfr-text-title-grey" +
-              " rounded-2xl !font-bold",
+              " rounded-2xl !font-bold focus:!-outline-offset-2",
             bgColor ?? "!bg-dsfr-background-alt-grey",
             btnTextColor ?? "!text-dsfr-text-title-grey",
             btnTextPadding ?? "!px-6 !py-6",

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { PropsWithChildren } from "react";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const ClimadiagIndicateursTabButtons = ({ children }: PropsWithChildren) => {
   return (
@@ -10,9 +11,10 @@ export const ClimadiagIndicateursTabButtons = ({ children }: PropsWithChildren) 
           horizons (TRACC, 2024)<sup>*</sup>
         </span>
       </div>
-      <div
-        className="flex cursor-pointer items-center justify-center gap-4 hover:bg-dsfr-background-alt-blue-france-hover"
-        onClick={() => window.open("https://climadiag-commune.meteofrance.com/", "_blank")}
+      <LinkWithoutPrefetch
+        className="flex gap-4 !bg-none after:!hidden hover:!bg-dsfr-background-alt-blue-france-hover"
+        target="_blank"
+        href="https://climadiag-commune.meteofrance.com/"
       >
         <Image
           src="/images/climadiag/climadiag-meteo-france.png"
@@ -21,7 +23,7 @@ export const ClimadiagIndicateursTabButtons = ({ children }: PropsWithChildren) 
           alt="Logo Météo France Climadiag"
         />
         <Image src="/images/climadiag/meteo-france.svg" width={48} height={48} alt="Logo Météo France" />
-      </div>
+      </LinkWithoutPrefetch>
     </div>
   );
 };

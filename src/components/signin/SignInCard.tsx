@@ -3,6 +3,7 @@ import { signIn } from "next-auth/react";
 
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
+import ProConnectButton from "@codegouvfr/react-dsfr/ProConnectButton";
 
 const messages = {
   connect:
@@ -31,22 +32,7 @@ export default function SignInCard({
       <div className="mb-8 mt-8">
         Pour vous connecter avec ProConnect, il vous suffit de renseigner votre adresse professionnelle.
       </div>
-      <div className="fr-connect-group">
-        <button className="fr-connect" onClick={handleSignIn}>
-          <span className="fr-connect__login">S’identifier avec</span>{" "}
-          <span className="fr-connect__brand">ProConnect</span>
-        </button>
-        <p>
-          <a
-            href="https://www.proconnect.gouv.fr/"
-            target="_blank"
-            rel="noopener"
-            title="Qu’est-ce que ProConnect  ? - nouvelle fenêtre"
-          >
-            Qu’est-ce que ProConnect ?
-          </a>
-        </p>
-      </div>
+      <ProConnectButton onClick={handleSignIn} />
     </div>
   );
 }

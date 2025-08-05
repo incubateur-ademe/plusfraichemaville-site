@@ -2,7 +2,7 @@ import { Fragment, PropsWithChildren, ReactNode } from "react";
 import { FicheDiagnosticMethodeBloc } from "./fiche-diagnostic-bloc-methode";
 import { FicheDiagnosticAvantageBloc } from "./fiche-diagnostic-bloc-avantages";
 import { FicheDiagnosticMiseEnOeuvreBloc } from "./fiche-diagnostic-bloc-meo";
-import ButtonShareCurrentUrl from "@/src/components/common/button-share-current-url";
+import ButtonShareUrl from "@/src/components/common/button-share-url";
 import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { TypeFiche } from "@/src/helpers/common";
@@ -10,13 +10,12 @@ import { Separator } from "../common/separator";
 import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { FicheDiagnosticSideMenu } from "./fiche-diagnostic-side-menu";
 import clsx from "clsx";
-// eslint-disable-next-line max-len
 import { FicheDiagnosticBlocBesoinEtIndicateurs } from "@/src/components/fiches-diagnostic/fiche-diagnostic-bloc-besoin-et-indicateurs";
-// eslint-disable-next-line max-len
 import { FicheDiagnosticBlocRetourExperience } from "@/src/components/fiches-diagnostic/fiche-diagnostic-bloc-retour-experience";
 import { getCreditsImageForFicheDiagnostic } from "@/src/helpers/credits-image";
 import { FicheDiagnosticCard } from "@/src/components/fiches-diagnostic/fiche-diagnostic-card";
 import { isEmpty } from "@/src/helpers/listUtils";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 type FicheDiagnosticBlocsProps = {
   ficheDiagnostic: FicheDiagnostic;
@@ -69,7 +68,10 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
         >
           <FicheDiagnosticSideMenu blocs={blocs} />
           <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel className={"mb-2 ml-2 block md:mb-0"} />
-          <ButtonShareCurrentUrl className="my-4 pl-4 md:mb-0 md:mt-4" />
+          <ButtonShareUrl
+            url={getFullUrl(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(attributes.slug))}
+            className="my-4 pl-4 md:mb-0 md:mt-4"
+          />
         </div>
         <div className="border-dsfr-border-default-grey pt-4 md:border-l-[1px] md:pl-7 md:pt-0">
           {blocs.map((tab) => (

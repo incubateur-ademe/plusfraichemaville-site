@@ -164,7 +164,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                   id="fiche-diagnostic-rex-modal-slider"
                   hasTrack={false}
                   className="max-w-md"
-                  options={{ start: 0, drag: false }}
+                  options={{ start: 0, drag: false, pagination: false }}
                 >
                   <div className="px-6">
                     <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">

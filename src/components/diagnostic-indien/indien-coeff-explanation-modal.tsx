@@ -13,7 +13,7 @@ export default function IndienCoeffExplanationModal({ coefficient }: { coefficie
 
   return (
     <>
-      <i
+      <button
         className="ri-information-2-line float-right cursor-pointer text-dsfr-text-mention-grey"
         onClick={() => modal.open()}
       />

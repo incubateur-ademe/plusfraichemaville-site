@@ -40,27 +40,28 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
               />
             </div>
             <div className="w-full">
-              <div className=" relative max-w-xl">
-                <FicheDiagLink slug={slug}>
-                  <div className="pfmv-card max-w-xl cursor-pointer p-5">
-                    {!isEmpty(getEchellesThermiquesByFicheDiagnostic(ficheDiagData)) && (
-                      <div className="mb-4 flex flex-wrap gap-2 uppercase">
-                        {getEchellesThermiquesByFicheDiagnostic(ficheDiagData).map((effet) => (
-                          <Tag
-                            key={effet.label}
-                            small
-                            className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey"
-                          >
-                            {effet.label}
-                          </Tag>
-                        ))}
-                      </div>
-                    )}
-
-                    <h3 className="mb-1 mr-28 text-base">{titre}</h3>
-                    <i>{nom_scientifique}</i>
-                  </div>
-                </FicheDiagLink>
+              <div className="relative flex max-w-xl">
+                <div className="pfmv-card fr-enlarge-link w-full cursor-pointer p-5">
+                  {!isEmpty(getEchellesThermiquesByFicheDiagnostic(ficheDiagData)) && (
+                    <div className="mb-4 flex flex-wrap gap-2 uppercase">
+                      {getEchellesThermiquesByFicheDiagnostic(ficheDiagData).map((effet) => (
+                        <Tag
+                          key={effet.label}
+                          small
+                          className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey"
+                        >
+                          {effet.label}
+                        </Tag>
+                      ))}
+                    </div>
+                  )}
+                  <h3 className="!mb-1 text-base">
+                    <FicheDiagLink slug={slug} className="mr-28">
+                      {titre}
+                    </FicheDiagLink>
+                  </h3>
+                  <i>{nom_scientifique}</i>
+                </div>
                 <GenericSaveFiche
                   id={ficheDiagData.id}
                   type={TypeFiche.diagnostic}

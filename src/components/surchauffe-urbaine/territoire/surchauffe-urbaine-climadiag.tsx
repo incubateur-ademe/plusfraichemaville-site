@@ -7,6 +7,7 @@ import { ClimadiagIndicateursLine } from "@/src/components/climadiag/climadiag-i
 import { getYearlyClimadiagData } from "@/src/components/climadiag/helpers";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const SurchauffeUrbaineClimadiag = ({
   climadiagInfo,
@@ -27,12 +28,10 @@ export const SurchauffeUrbaineClimadiag = ({
           </div>
           <div className="text-[1.375rem] font-bold text-pfmv-navy">En 2030, voici les projections de Météo-France</div>
         </div>
-        <div
-          className={clsx(
-            "flex cursor-pointer items-center justify-center gap-4",
-            "hover:bg-dsfr-background-default-grey-hover",
-          )}
-          onClick={() => window.open("https://climadiag-commune.meteofrance.com/", "_blank")}
+        <LinkWithoutPrefetch
+          className="flex gap-4 !bg-none after:!hidden hover:!bg-dsfr-background-default-grey-hover"
+          target="_blank"
+          href="https://climadiag-commune.meteofrance.com/"
         >
           <Image
             src="/images/climadiag/climadiag-meteo-france.png"
@@ -41,7 +40,7 @@ export const SurchauffeUrbaineClimadiag = ({
             alt="Logo Météo France Climadiag"
           />
           <Image src="/images/climadiag/meteo-france.svg" width={48} height={48} alt="Logo Météo France" />
-        </div>
+        </LinkWithoutPrefetch>
       </div>
       <ClimadiagIndicateursLine
         year={2030}

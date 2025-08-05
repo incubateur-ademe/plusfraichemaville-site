@@ -71,7 +71,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           }}
           id="surchauffe-urbaine-timing-slider"
           hasTrack={false}
-          options={{}}
+          options={{ pagination: false }}
           ref={sliderRef}
         >
           <SplideTrack className="overflow-auto ">
