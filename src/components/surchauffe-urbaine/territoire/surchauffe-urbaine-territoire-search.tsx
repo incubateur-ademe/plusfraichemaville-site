@@ -15,6 +15,7 @@ import AsyncSelect from "react-select/async";
 import isEmpty from "lodash/isEmpty";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { SURCHAUFFE_URBAINE_TERRITOIRE_SEARCH } from "@/src/helpers/matomo/matomo-tags";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 export const SurchauffeUrbaineTerritoireSearch = ({
   initialOption,
@@ -73,22 +74,19 @@ export const SurchauffeUrbaineTerritoireSearch = ({
           placeholder="Saisissez votre commune / EPCI (nom ou code)"
           instanceId="climadiag-select-address"
         />
-        <div
-          className={clsx(
-            "w-14 rounded-r-lg px-2",
-            selectedAddress ? "cursor-pointer bg-pfmv-navy" : "cursor-not-allowed bg-dsfr-background-disabled-grey",
-          )}
-          tabIndex={0}
+        <Button
+          disabled={!selectedAddress}
+          className={clsx("w-14 rounded-r-lg px-2", selectedAddress ? "" : "!bg-dsfr-background-disabled-grey")}
           onClick={submitSearch}
         >
           <i
             className={clsx(
-              "ri-search-line fr-icon--lg before:ml-1 before:mt-3",
+              "ri-search-line fr-icon--lg",
               selectedAddress ? "text-white" : "text-dsfr-text-disabled-grey",
             )}
             aria-label="Rechercher"
           />
-        </div>
+        </Button>
       </div>
     </div>
   );

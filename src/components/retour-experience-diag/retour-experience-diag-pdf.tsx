@@ -45,7 +45,7 @@ export const RetourExperienceDiagPdf = ({ pdf }: RetourExperienceDiagPdfProps) =
           onClick={download}
           className={clsx(
             "flex cursor-pointer items-center justify-start gap-2 font-bold text-pfmv-navy",
-            "mt-3 bg-none after:content-none hover:underline",
+            "mt-3 !bg-none after:content-none hover:underline",
           )}
         >
           <div className="flex size-8 items-center justify-center rounded-full bg-pfmv-navy">

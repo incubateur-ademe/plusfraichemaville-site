@@ -33,38 +33,34 @@ export const FicheDiagnosticEchelleThermiqueFilter = ({
           const isSelected = selectedFilters.includes(f.filter);
 
           const isSelectedClass = {
-            container: isSelected && " !border-pfmv-navy",
+            container: isSelected && "!border-solid !border-pfmv-navy",
             image: !isSelected && "brightness-0",
             text: isSelected ? "text-pfmv-navy" : "text-black",
           };
 
           return (
-            <div
+            <button
+              onClick={() => setter(f.filter)}
               className={clsx(
-                "relative overflow-hidden rounded-[10px]",
-                " !border-[1px] border-white/0 shadow-pfmv-card-shadow",
-                "hover:!border-pfmv-navy",
+                "relative overflow-hidden rounded-xl",
+                "!border-[1px] border-white/0 shadow-pfmv-card-shadow hover:!border-pfmv-navy",
+                "flex flex-col items-center justify-center gap-2 px-4 py-2",
                 isSelectedClass.container,
               )}
               key={f.filter}
             >
-              <button
-                onClick={() => setter(f.filter)}
-                className={clsx("flex flex-col items-center justify-center gap-2 px-4 py-2", isSelectedClass.container)}
-              >
-                {isSelected && <i className="ri-close-line absolute right-2 top-0 text-pfmv-navy before:size-4"></i>}
-                <div className="flex flex-wrap items-center gap-4">
-                  <Image
-                    src={f.picto}
-                    alt={f.label}
-                    width={80}
-                    height={64}
-                    className={clsx("mx-auto block", isSelectedClass.image, "h-16")}
-                  />
-                  <small className={clsx(" mx-auto text-sm", isSelectedClass.text)}>{f.label}</small>
-                </div>
-              </button>
-            </div>
+              {isSelected && <i className="ri-close-line absolute right-2 top-0 text-pfmv-navy before:!size-4"></i>}
+              <div className="flex flex-wrap items-center gap-4">
+                <Image
+                  src={f.picto}
+                  alt={f.label}
+                  width={80}
+                  height={64}
+                  className={clsx("mx-auto block", isSelectedClass.image, "h-16")}
+                />
+                <small className={clsx("mx-auto text-sm", isSelectedClass.text)}>{f.label}</small>
+              </div>
+            </button>
           );
         })}
       </div>

@@ -2,11 +2,6 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
-    extend: {
-      fontFamily: {
-        xtraBold: ["var(--font-xtra-bold)"],
-      },
-    },
     boxShadow: {
       "pfmv-card-shadow": "0px 4px 20px 0px rgba(0, 0, 0, 0.10)",
       none: "0px 0px rgba(0, 0, 0)",
