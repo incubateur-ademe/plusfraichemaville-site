@@ -83,7 +83,7 @@ export async function FicheSolution({
             </div>
           </div>
           <div className="fr-tabs before:!shadow-none">
-            <ul className="fr-tabs__list" role="tablist" aria-label="Menu fiche solution">
+            <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
                 <CustomTabButton
                   label="Synthèse"
