@@ -25,6 +25,7 @@ import { Maturite } from "../maturite/maturite";
 import { getUserRoleFromCode } from "@/src/helpers/user-role";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { useRouter } from "next/navigation";
 
 type ListeProjetsCardProps = {
   projet: ProjetWithPublicRelations;
@@ -44,6 +45,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, isBrowsing, updateP
 
   const user = getOldestAdmin(updatedProjet)?.user;
   const adminUsername = `${user?.prenom} ${user?.nom}`;
+  const router = useRouter();
 
   useEffect(() => {
     setUpdatedProjet(projet);
@@ -58,6 +60,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, isBrowsing, updateP
     if (currentUser) {
       await accessProjetAction(currentUser?.id, updatedProjet.id);
     }
+    router.push(PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id));
   };
 
   const currentUserInfo = useMemo(
@@ -110,7 +113,7 @@ export const ListeProjetsCard = ({ projet, invitationStatus, isBrowsing, updateP
 
   const contentCard = (
     <>
-      <div className="relative mb-5 flex rounded-xl p-4">
+      <div className="relative flex rounded-xl p-4">
         <div
           className={clsx(
             "flex",
@@ -232,11 +235,9 @@ export const ListeProjetsCard = ({ projet, invitationStatus, isBrowsing, updateP
     <div className="relative">
       <Conditional>
         <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
-          <div className="pfmv-card fr-enlarge-link">
-            <LinkWithoutPrefetch onClick={openProjet} href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}>
-              {contentCard}
-            </LinkWithoutPrefetch>
-          </div>
+          <button className="pfmv-card h-full w-full text-start" onClick={openProjet}>
+            {contentCard}
+          </button>
         </Case>
         <Default>
           <div className="pfmv-card-no-hover">{contentCard}</div>

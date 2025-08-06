@@ -28,20 +28,11 @@ export const AuthButtonUser = () => {
 
   return (
     <div className="relative">
-      <Button
-        onClick={opener}
-        iconId="ri-arrow-down-s-fill"
-        iconPosition="right"
-        priority="tertiary no outline"
-      >
+      <Button onClick={opener} iconId="ri-arrow-down-s-fill" iconPosition="right" priority="tertiary no outline">
         <Image src="/images/auth/user.svg" width={28} height={28} alt="Mon compte" />
       </Button>
       {open && (
-        <div
-          className={clsx(
-            "absolute right-0 top-[130%] w-[9.5rem] bg-white p-3 text-right shadow-pfmv-card-shadow",
-          )}
-        >
+        <div className={clsx("absolute right-0 top-[130%] w-[9.5rem] bg-white p-3 text-right shadow-pfmv-card-shadow")}>
           <ul className="relative z-10 flex flex-col gap-3">
             {links.map((link, index) => (
               <li className={`text-sm ${link.className}`} key={index}>

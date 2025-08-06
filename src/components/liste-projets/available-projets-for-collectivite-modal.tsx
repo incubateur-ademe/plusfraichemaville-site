@@ -53,16 +53,19 @@ export const AvailableProjetsForCollectiviteModal = () => {
             </div>
           </Case>
         </Conditional>
-        {availableProjects?.map((projet) => (
-          <ListeProjetsCard
-            projet={projet}
-            isBrowsing
-            key={projet.id}
-            updateProjet={async (updatedProjet) => {
-              await mutate(upsert(availableProjects, updatedProjet));
-            }}
-          />
-        ))}
+        <ul>
+          {availableProjects?.map((projet) => (
+            <li key={projet.id} className="mb-5">
+              <ListeProjetsCard
+                projet={projet}
+                isBrowsing
+                updateProjet={async (updatedProjet) => {
+                  await mutate(upsert(availableProjects, updatedProjet));
+                }}
+              />
+            </li>
+          ))}
+        </ul>
         {isLoading && <FicheCardSkeleton horizontal />}
       </modal.Component>
     </>
