@@ -1,9 +1,7 @@
 "use client";
 import { RetourExperienceDiagnostic } from "@/src/lib/strapi/types/api/retour-experience-diagnostic";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-// eslint-disable-next-line max-len
 import { RetourExperienceDiagCardEspaceProjet } from "@/src/components/retour-experience-diag/retour-experience-diag-card-espace-projet";
-// eslint-disable-next-line max-len
 import { RetourExperienceDiagCardSiteVitrine } from "@/src/components/retour-experience-diag/retour-experience-diag-card-site-vitrine";
 
 type RetourExperienceDiagCardProps = {

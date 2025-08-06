@@ -5,7 +5,7 @@ import "@splidejs/splide/css/core";
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
-import { SplideController } from "../common/splide-controllers";
+import { SplideController, SplideFrTranslation } from "../common/splide-controllers";
 import { RetourExperienceDiagCard } from "../retour-experience-diag/retour-experience-diag-card";
 import { isEmpty } from "@/src/helpers/listUtils";
 
@@ -26,7 +26,15 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
 
       <Splide
         hasTrack={false}
-        options={{ autoWidth: true, focus: 0, omitEnd: true, gap: "1.25rem", drag: false, pagination: false }}
+        options={{
+          autoWidth: true,
+          focus: 0,
+          omitEnd: true,
+          gap: "1.25rem",
+          drag: false,
+          pagination: false,
+          i18n: SplideFrTranslation,
+        }}
         className="max-w-[60rem]"
       >
         <div className="px-6">
@@ -42,16 +50,8 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
             ))}
           </SplideTrack>
         </div>
-        <SplideController
-          arrow="left"
-          size={{ width: "w-12", height: "h-12" }}
-          position={{ top: "top-[8.5rem]", left: "!left-0" }}
-        />
-        <SplideController
-          arrow="right"
-          size={{ width: "w-12", height: "h-12" }}
-          position={{ top: "top-[8.5rem]", right: "!right-0" }}
-        />
+        <SplideController arrow="left" className="!left-0 top-[8.5rem] size-12" />
+        <SplideController arrow="right" className="!right top-[8.5rem] size-12" />
       </Splide>
     </>
   );
