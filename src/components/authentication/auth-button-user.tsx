@@ -5,6 +5,7 @@ import Image from "next/image";
 
 import { useState } from "react";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 export const AuthButtonUser = () => {
   const [open, setOpen] = useState(false);
@@ -26,22 +27,24 @@ export const AuthButtonUser = () => {
   ];
 
   return (
-    <div className="relative h-7">
-      <button onClick={opener} className="flex items-center gap-1 hover:!bg-white">
-        <Image src="/images/auth/user.svg" width={28} height={28} alt="" />{" "}
-        <span className={clsx("text-[10px]", open ? "text-dsfr-text-label-blue-france" : "text-pfmv-light-grey")}>
-          ▼
-        </span>
-      </button>
+    <div className="relative">
+      <Button
+        onClick={opener}
+        iconId="ri-arrow-down-s-fill"
+        iconPosition="right"
+        priority="tertiary no outline"
+      >
+        <Image src="/images/auth/user.svg" width={28} height={28} alt="Mon compte" />
+      </Button>
       {open && (
         <div
           className={clsx(
-            "absolute right-0 top-[130%] w-40 bg-white px-5 pb-1 pl-3 pt-3 text-right shadow-pfmv-card-shadow",
+            "absolute right-0 top-[130%] w-[9.5rem] bg-white p-3 text-right shadow-pfmv-card-shadow",
           )}
         >
-          <ul className="relative z-10">
+          <ul className="relative z-10 flex flex-col gap-3">
             {links.map((link, index) => (
-              <li className={`mb-3 text-sm ${link.className}`} key={index}>
+              <li className={`text-sm ${link.className}`} key={index}>
                 <LinkWithoutPrefetch onClick={closer} href={link.url}>
                   {link.label}
                 </LinkWithoutPrefetch>
