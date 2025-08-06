@@ -52,8 +52,7 @@ export const NewsletterForm = ({ rerouteAfterSuccess = false }: { rerouteAfterSu
     }
   }, [form, user?.email, userCollectivite]);
 
-  const disabled =
-    form.formState.isSubmitting || !form.watch("email") || (isCollectivite && !form.watch("collectivite"));
+  const disabled = form.formState.isSubmitting;
   return (
     <form id="newsletter-form" onSubmit={form.handleSubmit(onSubmit)} className="w-full">
       <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />
