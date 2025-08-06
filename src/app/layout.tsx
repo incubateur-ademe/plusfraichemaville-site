@@ -1,4 +1,3 @@
-import "./globals.css";
 import { ReactElement } from "react";
 import AppHeader from "@/src/components/layout/AppHeader";
 import { Metadata } from "next";
@@ -10,6 +9,7 @@ import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
 import { DsfrHead, getHtmlAttributes } from "@/src/app/server-only-index";
+import "./globals.css";
 import MatomoScript from "@/src/components/matomo/matomo-script";
 
 export const metadata: Metadata = {
