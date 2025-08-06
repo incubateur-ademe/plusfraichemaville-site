@@ -44,9 +44,8 @@ export const TableauDeBordSuiviCard = ({
   }
 
   return (
-    <LinkWithoutPrefetch
-      href={linkResolver(+projetId)}
-      className={clsx("active:bg-transparent !rounded-2xl !bg-none", disabled && "pointer-events-none")}
+    <div
+      className={clsx("active:bg-transparent fr-enlarge-link !rounded-2xl !bg-none", disabled && "pointer-events-none")}
     >
       <div className={clsx("pfmv-card h-[370px] w-[355px] cursor-pointer !rounded-2xl")}>
         <div
@@ -66,7 +65,11 @@ export const TableauDeBordSuiviCard = ({
           <div className={clsx(disabled && "contrast-50")}>{picto}</div>
         </div>
         <div className="h-auto p-6 pt-4">
-          <h2 className={clsx("mb-2 flex min-h-[3.5rem] items-center text-xl", disabledTextClass)}>{title}</h2>
+          <h2 className={clsx("mb-2 flex min-h-[3.5rem] text-xl", disabledTextClass)}>
+            <LinkWithoutPrefetch href={linkResolver(+projetId)} className="bg-none">
+              {title}
+            </LinkWithoutPrefetch>
+          </h2>
           <div className={clsx("relative mb-3 h-12", disabledTextClass)}>{children}</div>
           <div>
             <div className="relative flex h-8 items-center">
@@ -81,6 +84,6 @@ export const TableauDeBordSuiviCard = ({
           </div>
         </div>
       </div>
-    </LinkWithoutPrefetch>
+    </div>
   );
 };

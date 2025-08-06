@@ -53,7 +53,7 @@ export const FicheDiagnosticEchelleThermiqueFilter = ({
               <div className="flex flex-wrap items-center gap-4">
                 <Image
                   src={f.picto}
-                  alt={f.label}
+                  alt=""
                   width={80}
                   height={64}
                   className={clsx("mx-auto block", isSelectedClass.image, "h-16")}

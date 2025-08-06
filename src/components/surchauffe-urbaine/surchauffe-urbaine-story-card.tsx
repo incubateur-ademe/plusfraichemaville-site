@@ -26,7 +26,7 @@ export const SurchauffeUrbaineStoryCard = ({ rexDiagStory }: { rexDiagStory: Ret
           <h3 className="m-0 text-base text-white md:text-[1.375rem] md:leading-7">{rexDiagStory.attributes.titre}</h3>
           <Image
             src={getStrapiImageUrl(rexDiagStory.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-            alt={rexDiagStory.attributes.titre}
+            alt=""
             fill
             sizes="60vw"
             className="-z-10 object-cover transition-transform duration-300 ease-in group-hover:scale-[1.05]"

@@ -1,15 +1,19 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Image from "next/image";
-// eslint-disable-next-line max-len
 import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const ListProjetsHeaderEmpty = () => {
   return (
     <>
-      <div className="pfmv-card relative mb-5 mt-3 flex h-fit items-center justify-between bg-white py-6 md:py-0">
-        <LinkWithoutPrefetch href={PFMV_ROUTES.CREATE_PROJET} className="w-full !bg-none">
+      <div
+        className={clsx(
+          "pfmv-card fr-enlarge-link group relative my-5",
+          "flex h-fit items-center justify-between bg-white py-6 md:py-0",
+        )}
+      >
+        <div className="w-full !bg-none">
           <div className=" flex items-center justify-between">
             <div className="flex items-center gap-11">
               <div className="hidden shrink-0 md:block">
@@ -27,19 +31,18 @@ export const ListProjetsHeaderEmpty = () => {
               </div>
             </div>
           </div>
-        </LinkWithoutPrefetch>
-        <div className="mr-[26px] h-[121.5px] w-[132px]  shrink-0">
-          <LinkWithoutPrefetch
-            href={PFMV_ROUTES.CREATE_PROJET}
-            className={clsx(
-              "fr-btn ri-add-circle-fill fr-btn--icon-left rounded-[10px]",
-              "h-full w-full !flex-col items-center justify-center gap-3",
-              "before:!m-0 before:!size-6",
-            )}
-          >
-            <span className="block text-center text-sm leading-5">Créer un projet</span>
-          </LinkWithoutPrefetch>
         </div>
+        <LinkWithoutPrefetch
+          href={PFMV_ROUTES.CREATE_PROJET}
+          className={clsx(
+            "fr-btn rounded-2xl group-hover:!bg-dsfr-background-action-high-blue-france-active",
+            "!flex-col items-center justify-center gap-3",
+            "mr-6 size-32 shrink-0",
+          )}
+        >
+          <span className="ri-add-circle-fill"></span>
+          <span className="block text-center text-sm leading-5">Créer un projet</span>
+        </LinkWithoutPrefetch>
       </div>
       <div className="ml-auto w-fit">
         <AvailableProjetsForCollectiviteButton className="rounded-[10px]" />

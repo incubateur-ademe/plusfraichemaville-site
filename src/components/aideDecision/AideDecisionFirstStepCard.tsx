@@ -20,7 +20,7 @@ export default function AideDecisionFirstStepEtapeCard({
           width={80}
           height={80}
           src={getStrapiImageUrl(etapeAttributes.image, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={etapeAttributes.nom || ""}
+          alt=""
           className={"svg-blue-hover"}
           unoptimized
         />
