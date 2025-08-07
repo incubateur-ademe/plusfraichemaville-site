@@ -42,8 +42,12 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
 
   return (
     <div className={clsx("relative h-auto w-72 cursor-pointer")}>
-      <GenericSaveFiche id={ficheDiagnostic.id} type={TypeFiche.diagnostic} classNameButton="absolute top-3 right-4" />
-      <button className="pfmv-card flex h-full flex-col !text-start " onClick={onClickCard}>
+      <GenericSaveFiche
+        id={ficheDiagnostic.id}
+        type={TypeFiche.diagnostic}
+        classNameButton="absolute top-3 right-4 z-10"
+      />
+      <div className="pfmv-card fr-enlarge-button group flex h-full flex-col !text-start">
         <div className={clsx("fiche-diagnostic-icone", "mx-auto mt-6 flex size-[8.5rem] items-center justify-center ")}>
           <Image
             src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
@@ -55,7 +59,9 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
         </div>
 
         <div className="flex h-fit grow flex-col justify-between px-6 pb-2 pt-5">
-          <div className="text-lg font-bold leading-tight">{ficheDiagnostic.attributes.titre}</div>
+          <button className="text-start text-lg font-bold leading-tight group-hover:!bg-white" onClick={onClickCard}>
+            {ficheDiagnostic.attributes.titre}
+          </button>
           <div className={"mb-7 text-sm"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
           <div className="mb-4 mt-4 flex flex-wrap gap-2 uppercase">
             {getEchellesThermiquesByFicheDiagnostic(ficheDiagnostic).map((effet) => (
@@ -86,7 +92,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
             </div>
           </div>
         </div>
-      </button>
+      </div>
     </div>
   );
 };

@@ -60,13 +60,7 @@ export const ContactForm = () => {
     );
   }, [form, user]);
 
-  const disabled =
-    form.formState.isSubmitting ||
-    !form.watch("nom") ||
-    !form.watch("prenom") ||
-    !form.watch("message") ||
-    !form.watch("objetMessage") ||
-    !form.watch("email");
+  const disabled = form.formState.isSubmitting;
   return (
     <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
       <InputFormField control={form.control} path="prenom" label="Votre prénom" asterisk={true} />

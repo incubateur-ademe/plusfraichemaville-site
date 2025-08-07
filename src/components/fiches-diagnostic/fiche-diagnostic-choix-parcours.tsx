@@ -62,8 +62,8 @@ export const FicheDiagnosticChoixParcours = () => {
 
   return (
     <>
-      <div className="mb-12 flex flex-col justify-center gap-8 px-10 text-center font-bold md:flex-row ">
-        <LinkWithoutPrefetch className="pfmv-strong-card max-w-[30rem]" href={parcoursIndicateursUrl}>
+      <div className="mb-12 flex flex-col justify-center gap-8 px-10 text-center font-bold md:flex-row">
+        <div className="pfmv-strong-card fr-enlarge-link group max-w-[30rem]">
           {parcoursIndicateursProgress}
           <Image
             src="/images/fiches-diagnostic/parcours-indicateurs-environnementaux.svg"
@@ -73,16 +73,20 @@ export const FicheDiagnosticChoixParcours = () => {
             className="mx-auto mt-12 h-40"
           />
           <div className="content-center items-center p-10">
-            <div className="text-[1.375rem]">{parcoursIndicateursLabel}</div>
+            <LinkWithoutPrefetch className="text-[1.375rem]" href={parcoursIndicateursUrl}>
+              {parcoursIndicateursLabel}
+            </LinkWithoutPrefetch>
             <Separator className="my-4" />
             <div className="mb-8 text-left font-normal text-dsfr-text-mention-grey">
               Observez la surchauffe au sein de votre espace à un instant “T” à l’aide de quatre indicateurs open source
               et de vos propres relevés terrain.
             </div>
-            <div className="fr-btn rounded-3xl hover:bg-dsfr-hover-blue-sun">{parcoursIndicateursButtonLabel}</div>
+            <div className="fr-btn rounded-3xl group-hover:bg-dsfr-hover-blue-sun">
+              {parcoursIndicateursButtonLabel}
+            </div>
           </div>
-        </LinkWithoutPrefetch>
-        <LinkWithoutPrefetch className="pfmv-strong-card flex max-w-[30rem] flex-col" href={parcoursPrestationUrl}>
+        </div>
+        <div className="pfmv-strong-card fr-enlarge-link group flex max-w-[30rem] flex-col">
           {hasSelectedFicheDiagnostic ? (
             <CompletionLabelCompleted className="mr-4 mt-3 text-right" />
           ) : (
@@ -96,15 +100,17 @@ export const FicheDiagnosticChoixParcours = () => {
             className="mt-12 h-40 self-center"
           />
           <div className="content-center items-center p-10">
-            <div className="text-[1.375rem]">{parcoursPrestationLabel}</div>
+            <LinkWithoutPrefetch className="text-[1.375rem]" href={parcoursPrestationUrl}>
+              {parcoursPrestationLabel}
+            </LinkWithoutPrefetch>
             <Separator className="my-4" />
             <div className="mb-8 text-left font-normal text-dsfr-text-mention-grey">
               Sollicitez une expertise pour une analyse détaillée de l’effet d’îlot de chaleur urbain et/ou du confort
               thermique, à différentes échelles.
             </div>
-            <div className="fr-btn rounded-3xl hover:bg-dsfr-hover-blue-sun">{parcoursPrestationButtonLabel}</div>
+            <div className="fr-btn rounded-3xl group-hover:bg-dsfr-hover-blue-sun">{parcoursPrestationButtonLabel}</div>
           </div>
-        </LinkWithoutPrefetch>
+        </div>
       </div>
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}

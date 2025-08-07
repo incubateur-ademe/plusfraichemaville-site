@@ -20,11 +20,11 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
   const isAideFinanciere = type === TypeAidesTerritoiresAide.financement;
   const estimationId = useParams().estimationId;
   return (
-    <div className="pfmv-card no-shadow  relative w-[362px] cursor-pointer overflow-hidden" id={`aide-card-${aide.id}`}>
+    <div className="relative w-[362px]" id={`aide-card-${aide.id}`}>
       {withSaveButton && !!estimationId && (
         <AideCardSaveButton estimationId={+estimationId} aideTerritoireId={aide.id} className="right-2 top-3" />
       )}
-      <div className="flex h-full flex-col" onClick={() => setCurrentDetailedAide(aide)}>
+      <div className="fr-enlarge-button pfmv-card no-shadow flex h-full flex-col">
         <div
           className={clsx(
             "relative h-16 px-5 py-4",
@@ -49,7 +49,9 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
           </span>
         </div>
         <div className="p-5">
-          <h2 className="mb-6 text-lg">{aide.name}</h2>
+          <h2 className="mb-6 text-lg" id={`title-aide-${aide.id}`}>
+            {aide.name}
+          </h2>
           {AidesTerritoiresCardLines(aide).map((line) => (
             <AideFichePanelLine
               line={line}
@@ -66,6 +68,7 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
         <div className="mt-auto">
           <Button
             priority="tertiary"
+            aria-describedby={`title-aide-${aide.id}`}
             className="!mx-auto mb-5 mt-auto !block !w-56 rounded-3xl px-9"
             onClick={() => setCurrentDetailedAide(aide)}
           >

@@ -16,11 +16,8 @@ export const HomepageInspirerCard = ({
   return featured ? (
     <div>
       <RetourExperienceCard retourExperience={rex as unknown as RexInHome} className="mx-auto mb-8 flex lg:hidden" />
-      <LinkWithoutPrefetch
-        href={PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rex.slug)}
-        className="hidden !bg-none lg:inline-block"
-      >
-        <div className="pfmv-card mb-10 flex gap-8 px-8">
+      <div className="hidden !bg-none lg:inline-block">
+        <div className="pfmv-card fr-enlarge-link mb-10 flex gap-8 px-8">
           <div className="relative flex w-[427px] shrink-0 items-center justify-center py-10">
             <Image
               src={rex.image_principale}
@@ -32,7 +29,14 @@ export const HomepageInspirerCard = ({
             />
           </div>
           <div className="py-12">
-            <h3 className="mb-4 text-2xl font-bold">{rex.titre}</h3>
+            <h3 className="mb-4 text-2xl font-bold">
+              <LinkWithoutPrefetch
+                href={PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rex.slug)}
+                className="hidden !bg-none lg:inline-block"
+              >
+                {rex.titre}
+              </LinkWithoutPrefetch>
+            </h3>
             <p>
               Le projet {'"arbres de pluie"'} à Lyon, initié fin 2020 dans le cadre du programme européen Life ARTISAN ,
               offre une solution prometteuse face au réchauffement climatique et à la dégradation urbaine. Porté par la
@@ -54,7 +58,7 @@ export const HomepageInspirerCard = ({
             </div>
           </div>
         </div>
-      </LinkWithoutPrefetch>
+      </div>
     </div>
   ) : (
     <RetourExperienceCard className="w-[17.5rem]" retourExperience={rex as unknown as RexInHome} />

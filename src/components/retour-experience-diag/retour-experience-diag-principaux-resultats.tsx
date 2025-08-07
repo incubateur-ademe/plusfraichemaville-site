@@ -9,7 +9,7 @@ import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { ImageLoader } from "../common/image-loader";
 import { useState } from "react";
-import { SplideController } from "../common/splide-controllers";
+import { SplideController, SplideFrTranslation } from "../common/splide-controllers";
 import clsx from "clsx";
 import { ZoomedImage } from "../common/zoomed-image";
 import Button from "@codegouvfr/react-dsfr/Button";
@@ -38,7 +38,7 @@ export const RetourExperienceDiagPrincipauxResultats = ({
           <Splide
             id="fiche-diagnostic-rex-principaux-resultats-slider"
             hasTrack={false}
-            options={{ autoWidth: true, start: 0, pagination: false }}
+            options={{ autoWidth: true, start: 0, pagination: false, i18n: SplideFrTranslation }}
           >
             <SplideTrack className="">
               {images.map((image, index) => (
@@ -67,15 +67,17 @@ export const RetourExperienceDiagPrincipauxResultats = ({
             </SplideTrack>
             <SplideController
               arrow="left"
-              size={{ width: "w-10", height: "h-10" }}
-              position={{ top: "top-1/3", left: "!left-2" }}
-              className={`!bg-black/60 ${images.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+              className={clsx(
+                "!left-2 top-1/3 size-10 !bg-black/60",
+                images.length <= 1 && "pointer-events-none !hidden",
+              )}
             />
             <SplideController
               arrow="right"
-              size={{ width: "w-10", height: "h-10" }}
-              position={{ top: "top-1/3", right: "!right-2" }}
-              className={`!bg-black/60 ${images.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+              className={clsx(
+                "!right-2 top-1/3 size-10 !bg-black/60",
+                images.length <= 1 && "pointer-events-none !hidden",
+              )}
             />
           </Splide>
         </div>

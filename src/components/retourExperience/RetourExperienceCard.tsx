@@ -10,6 +10,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useParams } from "next/navigation";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import clsx from "clsx";
 
 export type RexInHome = Pick<
   RetourExperience["attributes"],
@@ -30,7 +31,7 @@ export default function RetourExperienceCard({
     : `${PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(selectRex.slug)}`;
 
   return (
-    <LinkWithoutPrefetch className={`pfmv-card flex min-h-[26rem] w-72 flex-col ${className}`} href={url}>
+    <div className={clsx("pfmv-card fr-enlarge-link flex min-h-[26rem] w-72 flex-col", className)}>
       <div className="flex h-40 w-full">
         <Image
           width={450}
@@ -46,7 +47,11 @@ export default function RetourExperienceCard({
         />
       </div>
       <div className="flex grow flex-col p-6">
-        <h3 className={"text-blue-hover mb-3 text-lg font-bold text-dsfr-text-title-grey"}>{selectRex.titre}</h3>
+        <h3 className={"text-blue-hover mb-3 text-lg font-bold text-dsfr-text-title-grey"}>
+          <LinkWithoutPrefetch className="bg-none" href={url}>
+            {selectRex.titre}
+          </LinkWithoutPrefetch>
+        </h3>
         <Tag small={true} className={"mb-8"}>
           {getRegionLabelFromCode(selectRex.region?.data?.attributes.code)}
         </Tag>
@@ -59,6 +64,6 @@ export default function RetourExperienceCard({
           </div>
         </div>
       </div>
-    </LinkWithoutPrefetch>
+    </div>
   );
 }

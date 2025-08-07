@@ -11,6 +11,7 @@ import { SurchauffeUrbaineTimingSlideControllers } from "@/src/components/surcha
 import { SURCHAUFFE_URBAINE_CHANGE_TIMING } from "@/src/helpers/matomo/matomo-tags";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { SplideFrTranslation } from "@/src/components/common/splide-controllers";
 
 export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: string }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -22,7 +23,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
   };
   return (
     <div className={clsx("bg-dsfr-background-alt-blue-france py-10 text-center", className)}>
-      <div className="relative mx-auto max-w-[48rem]">
+      <div className="relative mx-auto mb-6 max-w-[48rem]">
         <Image
           src="/images/surchauffe-urbaine/timing-arrow.svg"
           alt=""
@@ -40,10 +41,9 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
             <li role="presentation" key={timing.code} className="flex h-[11rem] flex-col items-center">
               <button
                 type="button"
-                role="tab"
+                role="button"
                 aria-controls={`surchauffe-urbaine-timing-slider-slide0${index + 1}`}
                 aria-label={`Afficher la slide sur la phase ${timing.title}`}
-                aria-selected={index === 0}
                 className={clsx(
                   "pfmv-card z-20 flex cursor-pointer flex-col items-center justify-center !bg-none",
                   index === currentSlide ? "size-[6.25rem] !outline !outline-1 !outline-pfmv-navy" : "size-16",
@@ -71,7 +71,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           }}
           id="surchauffe-urbaine-timing-slider"
           hasTrack={false}
-          options={{ pagination: false }}
+          options={{ pagination: false, i18n: SplideFrTranslation }}
           ref={sliderRef}
         >
           <SplideTrack className="overflow-auto ">

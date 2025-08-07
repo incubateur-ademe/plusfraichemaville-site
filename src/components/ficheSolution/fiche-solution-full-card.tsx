@@ -9,6 +9,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useParams } from "next/navigation";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import clsx from "clsx";
 
 export default function FicheSolutionFullCard({
   ficheAttributes,
@@ -28,7 +29,7 @@ export default function FicheSolutionFullCard({
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
 
   return (
-    <LinkWithoutPrefetch className="pfmv-card flex w-72 flex-col md:ml-0" href={url}>
+    <div className="pfmv-card fr-enlarge-link group flex w-72 flex-col md:ml-0">
       <div className="flex h-52 w-full">
         <Image
           width={450}
@@ -48,7 +49,13 @@ export default function FicheSolutionFullCard({
             </div>
           </>
         )}
-        <h2 className={"text-blue-hover m-0 text-xl font-bold text-dsfr-text-title-grey"}>{ficheAttributes.titre}</h2>
+
+        <h2 className={"text-blue-hover m-0 text-xl font-bold text-dsfr-text-title-grey"}>
+          <LinkWithoutPrefetch className="bg-none" href={url}>
+            {ficheAttributes.titre}
+          </LinkWithoutPrefetch>
+        </h2>
+
         <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheAttributes.description_courte}</div>
         <div className={"mt-auto"}>
           <div>
@@ -58,11 +65,18 @@ export default function FicheSolutionFullCard({
               className={"text-xs"}
             />
             <div className="mt-4 text-center">
-              <div className={"fr-btn fr-btn--tertiary rounded-3xl px-9"}>{"J'explore la solution"}</div>
+              <div
+                className={clsx(
+                  "fr-btn fr-btn--tertiary rounded-3xl px-9",
+                  "group-hover:!bg-dsfr-background-default-grey-hover",
+                )}
+              >
+                {"J'explore la solution"}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </LinkWithoutPrefetch>
+    </div>
   );
 }

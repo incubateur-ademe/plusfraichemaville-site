@@ -9,6 +9,7 @@ import { SURCHAUFFE_URBAINE_NOTIONS } from "@/src/components/surchauffe-urbaine/
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { SURCHAUFFE_URBAINE_CHANGE_NOTION } from "@/src/helpers/matomo/matomo-tags";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { SplideFrTranslation } from "@/src/components/common/splide-controllers";
 
 export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: string }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -52,7 +53,7 @@ export const SurchauffeUrbaineNotionsComponent = ({ className }: { className?: s
           onMove={(_splide: any, newIndex: number, _prevIndex: number, _destIndex: number) => setCurrentSlide(newIndex)}
           id="surchauffe-urbaine-notions-slider"
           hasTrack={false}
-          options={{ arrows: false, pagination: false }}
+          options={{ arrows: false, pagination: false, i18n: SplideFrTranslation }}
           ref={sliderRef}
           className="max-w-[45rem]"
         >
