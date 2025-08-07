@@ -1,9 +1,9 @@
 import { InvitationStatus } from "@/src/generated/prisma/client";
-import { ListeProjetsCard } from "./card";
 import { ProjetsByCollectivite } from "./helpers";
 
 import { ListProjetsHeaderEmpty } from "./empty";
 import { Case, Conditional } from "../common/conditional-renderer";
+import { ProjetCard } from "@/src/components/liste-projets/projet-card";
 
 export const ListeProjetTab = ({
   projets,
@@ -43,7 +43,7 @@ export const ListeProjetTab = ({
           <ul>
             {collectiviteWithProjet.projets.map((projet) => (
               <li key={projet.id} className="mb-5">
-                <ListeProjetsCard projet={projet} invitationStatus={invitationStatus} />
+                <ProjetCard projet={projet} invitationStatus={invitationStatus} />
               </li>
             ))}
           </ul>

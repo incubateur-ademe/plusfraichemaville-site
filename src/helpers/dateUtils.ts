@@ -14,8 +14,8 @@ export function dateToStringWithTime(value: Date): string {
   )}`;
 }
 
-export function dateToStringWithoutTime(value: Date | null, format: "fr" | "iso" = "fr"): string | null {
-  if (!value) {
+export function dateToStringWithoutTime(value: Date | null | undefined, format: "fr" | "iso" = "fr"): string | null {
+  if (value == null) {
     return null;
   }
 

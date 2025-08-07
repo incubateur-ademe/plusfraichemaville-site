@@ -1,4 +1,6 @@
 import { SelectOption } from "@/src/components/common/SelectFormField";
+import clsx from "clsx";
+import { MaturiteProgress } from "@/src/components/maturite/maturite-progress";
 
 export type NiveauMaturite = {
   label: string;
@@ -43,6 +45,19 @@ export const ALL_NIVEAU_MATURITE: NiveauMaturite[] = [
 export const niveauxMaturiteProjetOptions: SelectOption[] = [
   ...ALL_NIVEAU_MATURITE.map((niveau) => ({ name: niveau.label, value: niveau.code })),
 ];
+
+export const formatNiveauMaturiteOptionLabel = (niveauMaturite: NiveauMaturite) => (
+  <div className="flex flex-row items-center gap-3">
+    <MaturiteProgress value={niveauMaturite.avancement} />
+    <span className={clsx("mr-4 text-wrap font-normal")}>{niveauMaturite?.label}</span>
+  </div>
+);
+
+export const formatNiveauMaturiteWithoutLabel = (niveauMaturite: NiveauMaturite) => (
+  <div className="flex flex-row items-center gap-3">
+    <MaturiteProgress value={niveauMaturite.avancement} />
+  </div>
+);
 
 export const getNiveauMaturiteByCode = (currentNiveau: NiveauMaturite["code"] | null) =>
   ALL_NIVEAU_MATURITE.find((niveau) => niveau.code === currentNiveau);
