@@ -32,8 +32,6 @@ export const SplideController = ({ arrow, className }: SplideControllerProps) =>
         "disabled:opacity-20",
         className,
       )}
-      // aria-label={arrow === "left" ? "Cartes précédentes" : "Cartes suivantes"}
-      aria-label="TITITI"
     >
       <i className={clsx(`ri-arrow-right-line text-white group-hover:text-black`)}></i>
     </button>
