@@ -121,18 +121,23 @@ export default function AppFooter() {
         <div className="fr-footer__bottom">
           <ul className="fr-footer__bottom-list">
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/accessibilite">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.ACCESSIBILITE}>
                 Accessibilité : non conforme
               </a>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/mentions-legales">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.MENTIONS_LEGALES}>
                 Mentions légales
               </a>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/politique-de-confidentialite">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.POLITIQUE_CONFIDENTIALITE}>
                 Politique de confidentialité
+              </a>
+            </li>
+            <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.PLAN_DU_SITE}>
+                Plan du site
               </a>
             </li>
             <li className="fr-footer__bottom-item">
@@ -141,7 +146,7 @@ export default function AppFooter() {
               </button>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/stats" target="_self">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.STATISTIQUES} target="_self">
                 Statistiques
               </a>
             </li>

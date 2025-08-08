@@ -1,0 +1,9 @@
+.containerStyle {
+  ul {
+    list-style: outside;
+    margin-left: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 0.5rem;
+    padding-inline-start: 1rem;
+  }
+}
