@@ -104,7 +104,7 @@ export default function AppFooter() {
                   </a>
                 </li>
                 <li>
-                  <a className="fr-footer__partners-link" href="https://anru.fr">
+                  <a className="fr-footer__partners-link" href="https://anru.fr" target="_blank">
                     <Image
                       className="fr-footer__logo mt-7 max-w-[8rem] object-contain"
                       height={259}
