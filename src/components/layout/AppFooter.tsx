@@ -147,7 +147,7 @@ export default function AppFooter() {
             </li>
             <li className="fr-footer__bottom-item">
               <a className="fr-footer__bottom-link" href={PFMV_ROUTES.NEWSLETTER} target="_self">
-                Newsletter
+                Lettre d’information
               </a>
             </li>
             <li className="fr-footer__bottom-item">

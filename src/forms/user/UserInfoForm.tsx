@@ -104,7 +104,7 @@ export const UserInfoForm = ({
             options={[
               {
                 label:
-                  "Je souhaite recevoir la newsletter de Plus fraîche ma ville et être informé(e)" +
+                  "Je souhaite recevoir la lettre d'information de Plus fraîche ma ville et être informé(e)" +
                   " des actualités sur le rafraîchissement urbain",
                 nativeInputProps: {
                   ...form.register("subscribeToNewsletter"),

@@ -142,7 +142,7 @@ Principalement, les données collectées correspondant aux catégories suivantes
 
 Les Personnes concernées sont susceptibles de communiquer à l’ADEME leurs Données à caractère personnel par différents
 moyens et notamment sur les Sites lors de navigations internet et par le biais des Produits ou Services, en remplissant
-divers formulaires de collecte, lors d’une souscription à une newsletter, lors de la création d’un compte, lors du dépôt
+divers formulaires de collecte, lors d’une souscription à une lettre d’information, lors de la création d’un compte, lors du dépôt
 d’une candidature, lors de tout contact avec l’ADEME ou lors de toute autre transmission de Données à caractère
 personnel dans d’autres circonstances.
 
@@ -163,7 +163,7 @@ Les finalités associées à chaque base légale sont listées ci-dessous :
         -   la gestion des communications et le suivi des échanges avec les utilisateurs.
 -   En se fondant sur le consentement des Personnes concernées, l’ADEME met en œuvre des Traitements poursuivant les
     finalités suivantes :
-    -   la fourniture de Services personnalisés, tels que des annonces, newsletters, formations, etc. ;
+    -   la fourniture de Services personnalisés, tels que des annonces, lettres d’information, formations, etc. ;
     -   la fourniture de Services facultatifs tels que les espaces de discussion interactifs ou tchats ;
     -   la gestion de la participation des utilisateurs aux jeux et concours ;
     -   la gestion des cookies soumis à consentement.

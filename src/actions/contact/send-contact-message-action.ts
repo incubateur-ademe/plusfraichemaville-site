@@ -29,7 +29,7 @@ export const sendContactMessageAction = async (data: ContactFormData): Promise<R
         if (!response.ok) {
           const brevoResponse = await response.json();
           captureError(
-            "Erreur avec lors de l'inscription à la newsletter lors de l'envoi d'un message",
+            "Erreur avec lors de l'inscription à la lettre d’information lors de l'envoi d'un message",
             JSON.stringify(brevoResponse),
           );
         }

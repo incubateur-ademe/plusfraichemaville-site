@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
-export const metadata: Metadata = computeMetadata("Abonnement Newsletter");
+export const metadata: Metadata = computeMetadata("Abonnement lettre d’information");
 
 export default async function PageNewsletterSuccess() {
   return (
