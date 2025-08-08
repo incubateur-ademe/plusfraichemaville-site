@@ -4,6 +4,12 @@ import { TypeSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 export const TYPE_SOLUTION_FILTER_NAME = "typeSolutionFilter";
 
 export const PFMV_ROUTES = {
+  STATISTIQUES: "/stats",
+  BUDGET: "/budget",
+  ACCESSIBILITE: "/accessibilite",
+  MENTIONS_LEGALES: "/mentions-legales",
+  POLITIQUE_CONFIDENTIALITE: "/politique-de-confidentialite",
+  PLAN_DU_SITE: "/plan-du-site",
   AIDE_DECISION: "/aide-decision",
   FICHES_SOLUTIONS: "/fiche-solution",
   FICHE_SOLUTION: (slug: string) => `/fiche-solution/${slug}`,

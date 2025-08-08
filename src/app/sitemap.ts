@@ -8,13 +8,15 @@ import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_URL_SITE ?? "";
   const staticPages = [
-    "/accessibilite",
-    "/budget",
-    "/contact",
-    "/mentions-legales",
-    "/stats",
-    "/connexion",
-    "/webinaires",
+    PFMV_ROUTES.MENTIONS_LEGALES,
+    PFMV_ROUTES.POLITIQUE_CONFIDENTIALITE,
+    PFMV_ROUTES.ACCESSIBILITE,
+    PFMV_ROUTES.NEWSLETTER,
+    PFMV_ROUTES.CONTACT,
+    PFMV_ROUTES.STATISTIQUES,
+    PFMV_ROUTES.CONNEXION,
+    PFMV_ROUTES.WEBINAIRES,
+    PFMV_ROUTES.PLAN_DU_SITE,
   ];
   const importantPages = [
     "",
