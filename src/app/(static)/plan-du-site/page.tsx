@@ -109,7 +109,9 @@ export default async function SitemapPage() {
                   </ul>
                 </li>
                 <li>
-                  <LinkWithoutPrefetch href={PFMV_ROUTES.ESPACE_PROJET}>Espace projet</LinkWithoutPrefetch>
+                  <LinkWithoutPrefetch href={PFMV_ROUTES.ESPACE_PROJET}>
+                    Page de connexion / Espace projet
+                  </LinkWithoutPrefetch>
                 </li>
                 <li>
                   A propos du site
@@ -137,11 +139,6 @@ export default async function SitemapPage() {
                 </li>
                 <li>
                   <LinkWithoutPrefetch href={PFMV_ROUTES.CONTACT}>Nous contacter</LinkWithoutPrefetch>
-                </li>
-                <li>
-                  <LinkWithoutPrefetch href={PFMV_ROUTES.CONNEXION}>
-                    {"Se connecter à l'espace projet"}
-                  </LinkWithoutPrefetch>
                 </li>
               </ul>
             </li>
