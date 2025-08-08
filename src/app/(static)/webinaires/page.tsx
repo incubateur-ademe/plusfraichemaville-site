@@ -49,7 +49,7 @@ export default async function PageWebinaires() {
             webinaires={futureWebinaires}
             id="tabpanel-webinaires-a-venir"
             emptyListPlaceholder="Il n'y a pas de webinaire à venir,
-            inscrivez-vous à notre newsletter pour être informé(e) des prochaines dates."
+            inscrivez-vous à notre lettre d’information pour être informé(e) des prochaines dates."
             tabIndex={0}
           />
           <WebinairesList

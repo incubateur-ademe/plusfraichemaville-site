@@ -87,7 +87,7 @@ export const ContactForm = () => {
       <Checkbox
         options={[
           {
-            label: "Je souhaite m'abonner à la newsletter",
+            label: "Je souhaite m'abonner à la lettre d’information",
             nativeInputProps: {
               ...form.register("subscribeToNewsletter"),
             },
