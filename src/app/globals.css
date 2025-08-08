@@ -368,16 +368,17 @@
 }
 
 .fr-consent-banner {
-  max-width: 32rem !important;
-}
-
-.fr-modal__content,
-.fr-consent-banner {
   border-radius: 1.5rem;
+  max-width: 32rem !important;
 
   .fr-btn {
     border-radius: 1.5rem;
   }
+}
+#fr-consent-modal-button-accept-all,
+#fr-consent-modal-button-refuse-all,
+#fr-consent-modal-button-confirm {
+  border-radius: 1.5rem;
 }
 
 .fr-modal__content {
