@@ -28,7 +28,7 @@ export default function AppFooter() {
             </a>
           </div>
           <div className="fr-footer__content">
-            <p className="fr-footer__content-desc">
+            <p className="fr-footer__content-desc !mb-0">
               {"Plus fraîche ma ville est une startup d'État portée par l’Agence de la Transition " +
                 "Écologique (ADEME), en partenariat avec l'association des maires de France (AMF) et l'agence" +
                 " nationale pour la rénovation urbaine (ANRU)."}
@@ -88,7 +88,7 @@ export default function AppFooter() {
           </div>
         </div>
         <div className="fr-footer__partners">
-          <h2 className="fr-footer__partners-title">Nos partenaires</h2>
+          <h2 className="fr-footer__partners-title !mb-2">Nos partenaires</h2>
           <div className="fr-footer__partners-logos">
             <div className="fr-footer__partners-sub">
               <ul>
