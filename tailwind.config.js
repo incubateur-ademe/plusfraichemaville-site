@@ -24,6 +24,7 @@ module.exports = {
       "pfmv-climadiag-red": "var(--border-default-red-marianne)",
       "dsfr-background-alt-brown-cafe-creme": "var(--background-alt-brown-cafe-creme)",
       "dsfr-background-contrast-blue-france": "var(--background-contrast-blue-france)",
+      "dsfr-background-contrast-info": "var(--background-contrast-info)",
       "dsfr-background-contrast-blue-france-hover": "var(--background-contrast-blue-france-hover)",
       "dsfr-background-contrast-blue-france-active": "var(--background-contrast-blue-france-active)",
       "dsfr-background-contrast-grey-hover": "var(--background-contrast-grey-hover)",

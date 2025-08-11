@@ -75,6 +75,8 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/financement/edit/${estimationId}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_TYPE_FILTER: (projetId: number, typeFiche: TypeSolution) =>
     `/espace-projet/${projetId}/fiche-solution/liste?${TYPE_SOLUTION_FILTER_NAME}=${typeFiche}`,
+  ESPACE_PROJET_RETOURS_EXPERIENCE_PROJET: (projetId: number) =>
+    `/espace-projet/${projetId}/projet`,
 };
 
 export const getFullUrl = (route: string): string => `${process.env.NEXT_PUBLIC_URL_SITE}${route}`;

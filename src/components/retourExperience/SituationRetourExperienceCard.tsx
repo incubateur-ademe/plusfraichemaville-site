@@ -17,7 +17,7 @@ export default function SituationRetourExperienceCard({
     return null;
   }
   return (
-    <div className={clsx("fr-card fr-card--no-border fr-card--shadow max-w-md rounded-2xl", className)}>
+    <div className={clsx("fr-card border-pfmv-light-grey !p-0 border  max-w-md rounded-2xl !bg-none", className)}>
       <div className="fr-card__body">
         <div className="fr-card__content">
           <h3 className="fr-card__title">{titre}</h3>
@@ -33,7 +33,7 @@ export default function SituationRetourExperienceCard({
           <Image
             width={600}
             height={300}
-            className="h-52 w-full rounded-t-2xl object-cover"
+            className="h-52 w-full rounded-t-[15px] object-cover"
             src={getStrapiImageUrl(situation.image, STRAPI_IMAGE_KEY_SIZE.medium)}
             alt={titre}
             unoptimized

@@ -12,6 +12,8 @@ import ItemRetourExperience from "../retourExperience/ItemRetourExperience";
 import RetourExperienceCard from "../retourExperience/RetourExperienceCard";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import { isEmpty } from "@/src/helpers/listUtils";
+import { GenericLink } from "@/src/components/common/generic-links/generic-link";
+import EspaceProjetIncentiveBanner from "@/src/components/common/espace-projet-incentive/espace-projet-incentive-banner";
 
 type RetourExperienceContentProps = {
   retourExperience: RetourExperience;
@@ -46,19 +48,26 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             retourExperience.attributes.citations.map((citation) => (
               <CustomDSFRQuote key={citation.auteur} citation={citation} className="mt-12" />
             ))}
-          <div className={clsx("mt-10 flex flex-col flex-wrap gap-6 md:flex-row")}>
+          <EspaceProjetIncentiveBanner
+            message="Obtenez vos solutions de rafraîchissement sur-mesure."
+            className="md:mb-6 mt-10"
+            imagePath="/images/espace-projet-incentive/trouver-solutions.svg"
+          />
+          <div className={clsx("mt-10 flex w-fit flex-col flex-wrap gap-6 md:flex-row")}>
             <div className="flex-1">
               <SituationRetourExperienceCard
                 titre="Avant le projet"
                 situation={retourExperience.attributes.situation_avant}
-                className={clsx("h-full !bg-dsfr-background-alt-grey", isModal && "w-96")}
+                className={clsx("h-full", isModal && "w-96")}
               />
             </div>
+            <span className="fr-icon-arrow-right-line m-auto hidden md:block" />
+            <span className="fr-icon-arrow-down-line m-auto md:hidden" />
             <div className="flex-1">
               <SituationRetourExperienceCard
                 titre="Après le projet"
                 situation={retourExperience.attributes.situation_apres}
-                className={clsx("h-full !bg-dsfr-background-alt-blue-france", isModal && "w-96")}
+                className={clsx("h-full", isModal && "w-96")}
               />
             </div>
           </div>
@@ -73,6 +82,9 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
                   className={clsx("mb-4", isModal && "!mb-12 flex-col lg:flex-row")}
                 />
               ))}
+              <GenericLink page="fichesSolution" className="text-pfmv-dark-blue">
+                Voir plus de solutions
+              </GenericLink>
             </>
           )}
           {!isEmpty(retourExperience.attributes.calendrier) && !isModal && (
@@ -86,6 +98,14 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             content={retourExperience.attributes.financement}
             level="title"
           />
+          {retourExperience.attributes.financement && (
+            <EspaceProjetIncentiveBanner
+              message="Découvrez tous les financements pour votre projet en vous inscrivant."
+              className="md:my-6"
+              imagePath="/images/espace-projet-incentive/euros.svg"
+            />
+          )}
+
           <ItemRetourExperience
             title="Difficultés rencontrées"
             content={retourExperience.attributes.difficultes}
@@ -110,16 +130,19 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             </>
           )}
           {!!(linkedRetourExperiences && linkedRetourExperiences.length > 0 && !isModal) && (
-            <>
-              <h2 className="mb-3 mt-10 text-3xl">Découvrir d{"'"}autres projets réalisés</h2>
-              <ul className="flex grow list-none flex-wrap gap-6 p-0">
+            <div className="mt-12 rounded-2xl bg-dsfr-background-alt-grey p-8">
+              <h2 className="mb-3 text-3xl">Découvrir d{"'"}autres projets réalisés</h2>
+              <ul className="mb-6 flex grow list-none flex-wrap gap-6 !p-0">
                 {retourExperience.attributes.retour_experiences?.data.map((rex) => (
                   <li key={rex.id}>
                     <RetourExperienceCard retourExperience={rex} />
                   </li>
                 ))}
               </ul>
-            </>
+              <GenericLink page="retoursExperience" className="text-pfmv-dark-blue">
+                Voir plus de projets réalisés
+              </GenericLink>
+            </div>
           )}
           {creditsImage.length > 0 && (
             <>

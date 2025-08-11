@@ -4,17 +4,15 @@ import { ObjectifDeveloppementDurable } from "@/src/lib/strapi/types/api/objecti
 export default function ObjectifsDeveloppementDurable({
   objectifs,
   imageSize = 100,
-  className,
 }: {
   objectifs: ObjectifDeveloppementDurable[] | undefined;
   imageSize?: number;
-  className?: string;
 }) {
   if (objectifs && objectifs.length > 0) {
     return (
-      <div className={className}>
+      <div>
         <div className={"font-bold"}>Objectifs du Développement Durable</div>
-        <div className={"flex flex-wrap"}>
+        <div className={"flex flex-wrap gap-2"}>
           {objectifs.map((odd) => (
             <Image
               key={odd.attributes.numero}
@@ -23,7 +21,7 @@ export default function ObjectifsDeveloppementDurable({
               title={odd.attributes.description || ""}
               width={imageSize}
               height={imageSize}
-              className={"mb-2 mr-2 rounded-md"}
+              className={"rounded-xl"}
             />
           ))}
         </div>
