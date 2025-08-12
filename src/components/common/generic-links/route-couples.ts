@@ -11,5 +11,4 @@ export const ROUTE_COUPLES = {
   },
 } as const;
 
-
 export type IMessageTemplateType = keyof typeof ROUTE_COUPLES;

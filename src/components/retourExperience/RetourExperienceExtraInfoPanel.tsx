@@ -13,9 +13,7 @@ export default function RetourExperienceExtraInfoPanel({
   className?: string;
 }) {
   return (
-    <div
-      className={clsx("ml-6 mt-6 flex flex-wrap text-sm md:block md:w-56 lg:ml-0 mb-4",  className)}
-    >
+    <div className={clsx("mb-4 ml-6 mt-6 flex flex-wrap text-sm md:block md:w-56 lg:ml-0", className)}>
       <ItemRetourExperienceExtraInfo
         title="Solutions"
         content={retourExperience.attributes.types_solutions?.join(" · ")}

@@ -38,7 +38,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
       </div>
       <div className="fr-container flex flex-col md:flex-row">
         <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
-        <div className="flex-1 md:pl-12  min-w-0">
+        <div className="min-w-0 flex-1  md:pl-12">
           <h1 className={"mt-4 text-3xl md:text-[40px] md:leading-[3rem]"}>{retourExperience.attributes.titre}</h1>
           <CmsRichText
             label={retourExperience.attributes.description}
@@ -50,7 +50,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             ))}
           <EspaceProjetIncentiveBanner
             message="Obtenez vos solutions de rafraîchissement sur-mesure."
-            className="md:mb-6 mt-10"
+            className="mt-10 md:mb-6"
             imagePath="/images/espace-projet-incentive/trouver-solutions.svg"
           />
           <div className={clsx("mt-10 flex w-fit flex-col flex-wrap gap-6 md:flex-row")}>
@@ -132,7 +132,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
           {!!(linkedRetourExperiences && linkedRetourExperiences.length > 0 && !isModal) && (
             <div className="mt-12 rounded-2xl bg-dsfr-background-alt-grey p-8">
               <h2 className="mb-3 text-3xl">Découvrir d{"'"}autres projets réalisés</h2>
-              <ul className="mb-6 flex grow list-none overflow-x-auto gap-6 !p-0">
+              <ul className="mb-6 flex grow list-none gap-6 overflow-x-auto !p-0">
                 {retourExperience.attributes.retour_experiences?.data.map((rex) => (
                   <li key={rex.id}>
                     <RetourExperienceCard retourExperience={rex} />

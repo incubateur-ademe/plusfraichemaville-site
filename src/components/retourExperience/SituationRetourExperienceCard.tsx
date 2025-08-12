@@ -17,7 +17,7 @@ export default function SituationRetourExperienceCard({
     return null;
   }
   return (
-    <div className={clsx("fr-card border-pfmv-light-grey !p-0 border  max-w-md rounded-2xl !bg-none", className)}>
+    <div className={clsx("fr-card max-w-md rounded-2xl border  border-pfmv-light-grey !bg-none !p-0", className)}>
       <div className="fr-card__body">
         <div className="fr-card__content">
           <h3 className="fr-card__title">{titre}</h3>
