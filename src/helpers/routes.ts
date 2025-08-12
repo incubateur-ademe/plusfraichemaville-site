@@ -34,7 +34,6 @@ export const PFMV_ROUTES = {
   CONNEXION: "/connexion",
   DECONNEXION: "/logout",
   ESPACE_PROJET: "/espace-projet",
-  ESPACE_PROJET_LISTE: "/espace-projet",
   MON_PROFIL: "/info-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",

@@ -38,7 +38,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                   prefetch={false}
                   className="mb-1 w-fit rounded !bg-none"
                   href={{
-                    pathname: PFMV_ROUTES.ESPACE_PROJET_LISTE,
+                    pathname: PFMV_ROUTES.ESPACE_PROJET,
                     hash: currentProjet.collectivite.code_insee || currentProjet.collectivite.nom,
                   }}
                 >

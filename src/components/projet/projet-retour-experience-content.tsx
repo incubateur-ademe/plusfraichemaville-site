@@ -38,7 +38,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
       </div>
       <div className="fr-container flex flex-col md:flex-row">
         <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
-        <div className={clsx("flex-1 md:pl-12")}>
+        <div className="flex-1 md:pl-12  min-w-0">
           <h1 className={"mt-4 text-3xl md:text-[40px] md:leading-[3rem]"}>{retourExperience.attributes.titre}</h1>
           <CmsRichText
             label={retourExperience.attributes.description}
@@ -132,7 +132,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
           {!!(linkedRetourExperiences && linkedRetourExperiences.length > 0 && !isModal) && (
             <div className="mt-12 rounded-2xl bg-dsfr-background-alt-grey p-8">
               <h2 className="mb-3 text-3xl">Découvrir d{"'"}autres projets réalisés</h2>
-              <ul className="mb-6 flex grow list-none flex-wrap gap-6 !p-0">
+              <ul className="mb-6 flex grow list-none overflow-x-auto gap-6 !p-0">
                 {retourExperience.attributes.retour_experiences?.data.map((rex) => (
                   <li key={rex.id}>
                     <RetourExperienceCard retourExperience={rex} />

@@ -207,7 +207,7 @@ export default function NavigationMenu() {
               ? [
                   {
                     linkProps: {
-                      href: PFMV_ROUTES.ESPACE_PROJET_LISTE,
+                      href: PFMV_ROUTES.ESPACE_PROJET,
                       prefetch: false,
                     },
                     text: "Accéder à mes projets",

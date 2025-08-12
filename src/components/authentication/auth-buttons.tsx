@@ -9,7 +9,7 @@ import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 export const AuthButtons = () => {
   const { status } = useSession();
 
-  const handleSignIn = () => signIn("agentconnect", { callbackUrl: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_LISTE) });
+  const handleSignIn = () => signIn("agentconnect", { callbackUrl: getFullUrl(PFMV_ROUTES.ESPACE_PROJET) });
 
   return (
     <div className="hidden items-center gap-4 lg:flex">

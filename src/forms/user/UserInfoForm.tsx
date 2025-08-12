@@ -54,7 +54,7 @@ export const UserInfoForm = ({
 
     if (result.type === "success") {
       setUserInfos(result.updatedUser);
-      router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE);
+      router.push(PFMV_ROUTES.ESPACE_PROJET);
     }
   };
 
