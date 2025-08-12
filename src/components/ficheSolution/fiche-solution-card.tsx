@@ -14,7 +14,6 @@ import clsx from "clsx";
 
 export type FicheSolutionCardProps = {
   ficheSolution: FicheSolution;
-  projectName: string;
   extraUrlParams?: { param: string; value: string }[];
   className?: string;
   withoutModal?: boolean;
@@ -24,7 +23,6 @@ export default function FicheSolutionCard({
   ficheSolution,
   extraUrlParams,
   className = "",
-  projectName,
   withoutModal,
 }: FicheSolutionCardProps) {
   const { projetId } = useParams();
@@ -77,7 +75,6 @@ export default function FicheSolutionCard({
             <GenericSaveFiche
               id={ficheSolution.id}
               type={TypeFiche.solution}
-              projectName={projectName}
               withoutModal={withoutModal}
               classNameButton="mt-4 text-center"
             />

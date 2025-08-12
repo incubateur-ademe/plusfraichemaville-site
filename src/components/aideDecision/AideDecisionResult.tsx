@@ -64,7 +64,6 @@ export default async function AideDecisionResult({ aideDecisionEtapeAttributes, 
                 <li key={ficheSolution.id} className="flex">
                   <FicheSolutionCard
                     ficheSolution={ficheSolution}
-                    projectName={(historique && historique[1]?.label) || ""}
                     extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtapeAttributes.slug }]}
                   />
                 </li>

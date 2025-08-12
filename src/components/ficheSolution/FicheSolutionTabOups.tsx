@@ -44,7 +44,7 @@ export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttribu
               <ul className="flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
                 {oups.solutions_reparatrices.data.slice(0, 2).map((fs) => (
                   <li key={fs.id} className="flex">
-                    <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-12 flex-none"} projectName="" />
+                    <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-12 flex-none"} />
                   </li>
                 ))}
               </ul>

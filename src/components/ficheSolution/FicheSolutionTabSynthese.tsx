@@ -14,7 +14,6 @@ export default function FicheSolutionTabSynthese({
   ficheSolution,
 }: {
   ficheSolutionId: number;
-  projectName: string;
   ficheSolution: FicheSolution;
   projetId?: string;
 }) {
@@ -126,7 +125,7 @@ export default function FicheSolutionTabSynthese({
             </div>
             <div className="flex flex-row gap-6 overflow-x-auto pl-2">
               {ficheAttributes.fiches_solutions_complementaires.data.map((fs) => (
-                <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-12 mt-8 flex-none"} projectName="" />
+                <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-12 mt-8 flex-none"} />
               ))}
             </div>
           </div>
