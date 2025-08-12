@@ -1,25 +1,35 @@
 "use client";
 
-import Image from "next/image";
-import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
-
-import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { useParams } from "next/navigation";
+import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { TypeFiche } from "@/src/helpers/common";
+import { useParams } from "next/navigation";
+import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import Image from "next/image";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
 import clsx from "clsx";
 
-export default function FicheSolutionFullCard({
-  ficheAttributes,
-  extraUrlParams,
-}: {
-  ficheAttributes: FicheSolution["attributes"];
+export type FicheSolutionCardProps = {
+  ficheSolution: FicheSolution;
+  projectName: string;
   extraUrlParams?: { param: string; value: string }[];
-}) {
+  className?: string;
+  withoutModal?: boolean;
+};
+
+export default function FicheSolutionCard({
+  ficheSolution,
+  extraUrlParams,
+  className = "",
+  projectName,
+  withoutModal,
+}: FicheSolutionCardProps) {
   const { projetId } = useParams();
   const isEspaceProjet = projetId;
+  const ficheAttributes = ficheSolution.attributes;
 
   const typeSolution = getTypeSolutionFromCode(ficheAttributes.type_solution);
   let url = isEspaceProjet
@@ -29,7 +39,7 @@ export default function FicheSolutionFullCard({
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
 
   return (
-    <div className="pfmv-card fr-enlarge-link group flex w-72 flex-col md:ml-0">
+    <div className={clsx("pfmv-card fr-enlarge-link flex w-72 flex-col md:ml-0", className)}>
       <div className="flex h-52 w-full">
         <Image
           width={450}
@@ -64,16 +74,13 @@ export default function FicheSolutionFullCard({
               ficheAttributes={ficheAttributes}
               className={"text-xs"}
             />
-            <div className="mt-4 text-center">
-              <div
-                className={clsx(
-                  "fr-btn fr-btn--tertiary rounded-3xl px-9",
-                  "group-hover:!bg-dsfr-background-default-grey-hover",
-                )}
-              >
-                {"J'explore la solution"}
-              </div>
-            </div>
+            <GenericSaveFiche
+              id={ficheSolution.id}
+              type={TypeFiche.solution}
+              projectName={projectName}
+              withoutModal={withoutModal}
+              classNameButton="mt-4 text-center"
+            />
           </div>
         </div>
       </div>

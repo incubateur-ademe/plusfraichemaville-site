@@ -1,44 +1,38 @@
 import clsx from "clsx";
 import { GenericSaveBaseProps } from ".";
-import { GenericSaveLabel } from "./generic-save-label";
-import { GenericSavePicto } from "./generic-save-picto";
-import { Hidden } from "../hidden";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 interface GenericSaveFicheButtonBaseProps extends Omit<GenericSaveBaseProps, "type"> {
   className?: string;
   update: () => void;
-  assets: {
-    className: string;
-    code: boolean;
-    label?: string;
-  };
   isSaved?: boolean;
+  labels?: { saved: string; notSaved: string };
 }
 
-export const GenericSaveButtonElement = ({
-  className,
-  assets,
-  update,
-  isSaved,
-  withLabel,
-}: GenericSaveFicheButtonBaseProps) => {
+export const GenericSaveButtonElement = ({ className, update, isSaved, labels }: GenericSaveFicheButtonBaseProps) => {
   return (
     <div className={clsx(className, "relative z-[1]")}>
-      <button onClick={update} className={clsx(assets.className)}>
-        {assets.code && (
-          <div className={clsx("savePicto flex h-8 w-8 items-center justify-center rounded-full")}>
-            <Hidden accessible>Sauvegarder</Hidden>
-            <GenericSavePicto />
-          </div>
-        )}
-        {assets.label && (
-          <>
-            {assets.label}
-            <i className="fr-icon--sm ri-close-fill ml-px pt-[2px]"></i>
-          </>
-        )}
-      </button>
-      <GenericSaveLabel isSaved={isSaved!} withLabel={withLabel} />
+      {isSaved ? (
+        <Button
+          onClick={update}
+          className={clsx("rounded-3xl")}
+          iconId="fr-icon-check-line"
+          iconPosition="right"
+          priority="primary"
+        >
+          {labels?.saved || "Ajoutée au projet"}
+        </Button>
+      ) : (
+        <Button
+          onClick={update}
+          className={clsx("rounded-3xl")}
+          iconId="fr-icon-add-line"
+          iconPosition="right"
+          priority="secondary"
+        >
+          {labels?.notSaved || "Ajouter au projet"}
+        </Button>
+      )}
     </div>
   );
 };

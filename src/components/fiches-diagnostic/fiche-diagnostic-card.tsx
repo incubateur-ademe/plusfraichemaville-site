@@ -41,13 +41,8 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
   };
 
   return (
-    <div className={clsx("relative h-auto w-72 cursor-pointer")}>
-      <GenericSaveFiche
-        id={ficheDiagnostic.id}
-        type={TypeFiche.diagnostic}
-        classNameButton="absolute top-3 right-4 z-10"
-      />
-      <div className="pfmv-card fr-enlarge-button group flex h-full flex-col !text-start">
+    <div className={clsx("relative h-auto w-72")}>
+      <div className="pfmv-card fr-enlarge-button group flex h-full flex-col pb-12 !text-start">
         <div className={clsx("fiche-diagnostic-icone", "mx-auto mt-6 flex size-[8.5rem] items-center justify-center ")}>
           <Image
             src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
@@ -93,6 +88,12 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
           </div>
         </div>
       </div>
+      <GenericSaveFiche
+        id={ficheDiagnostic.id}
+        type={TypeFiche.diagnostic}
+        className=""
+        classNameButton="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-48 z-10"
+      />
     </div>
   );
 };

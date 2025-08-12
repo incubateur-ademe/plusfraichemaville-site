@@ -4,7 +4,6 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { TypeFiche } from "@/src/helpers/common";
 import { usePathname, useRouter } from "next/navigation";
 import Button from "@codegouvfr/react-dsfr/Button";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: GenericSaveModalCommonProps) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -34,19 +33,27 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
       iconId="fr-icon-success-fill text-dsfr-background-action-high-success-hover mr-2"
     >
       <div className="mb-10 text-2xl font-bold">{projet?.nom}</div>
-      <Button className="mb-4 mr-4 !min-h-fit rounded-3xl !text-sm" onClick={clickAddMoreCard} priority="secondary">
+      <Button
+        className="mb-4 mr-4 !min-h-fit rounded-3xl !text-sm before:!content-none"
+        onClick={clickAddMoreCard}
+        priority="secondary"
+      >
         {type === TypeFiche.diagnostic ? "Ajouter d'autres méthodes" : "Ajouter d'autres solutions"}
       </Button>
-      <LinkWithoutPrefetch
-        href={
-          type === TypeFiche.diagnostic
-            ? PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS(projet?.id!)
-            : PFMV_ROUTES.TABLEAU_DE_BORD(projet?.id!)
-        }
-        className="fr-btn mr-4 !min-h-fit rounded-3xl !text-sm"
+
+      <Button
+        onClick={() => {
+          modal.close();
+          router.push(
+            type === TypeFiche.diagnostic
+              ? PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS(projet?.id!)
+              : PFMV_ROUTES.TABLEAU_DE_BORD(projet?.id!),
+          );
+        }}
+        className="rounded-3xl !text-sm before:!content-none"
       >
         {type === TypeFiche.diagnostic ? "Valider mes méthodes" : "Aller au tableau de bord"}
-      </LinkWithoutPrefetch>
+      </Button>
     </modal.Component>
   );
 };

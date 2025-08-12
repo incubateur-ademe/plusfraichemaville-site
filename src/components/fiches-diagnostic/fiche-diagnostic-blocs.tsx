@@ -67,7 +67,7 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
           )}
         >
           <FicheDiagnosticSideMenu blocs={blocs} />
-          <GenericSaveFiche id={id} type={TypeFiche.diagnostic} withLabel className={"mb-2 ml-2 block md:mb-0"} />
+          <GenericSaveFiche id={id} type={TypeFiche.diagnostic} className={"mb-2 ml-2 block md:mb-0"} />
           <ButtonShareUrl
             url={getFullUrl(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(attributes.slug))}
             className="my-4 pl-4 md:mb-0 md:mt-4"

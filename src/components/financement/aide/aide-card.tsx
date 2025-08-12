@@ -27,11 +27,11 @@ export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
       <div className="fr-enlarge-button pfmv-card no-shadow flex h-full flex-col">
         <div
           className={clsx(
-            "relative h-16 px-5 py-4",
+            "rounded-t-2xl px-5 py-4",
             isAideFinanciere ? "bg-dsfr-background-alt-blue-france" : "bg-dsfr-background-alt-brown-cafe-creme",
           )}
         >
-          <span className="flex items-center gap-4">
+          <span className="flex items-center gap-2">
             <Image
               src={`/images/financement/${isAideFinanciere ? "financement" : "ingenierie"}.svg`}
               width={32}

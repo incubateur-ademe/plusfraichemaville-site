@@ -4,7 +4,7 @@ import { useMemo } from "react";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
 import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
-import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import FicheSolutionCard from "@/src/components/ficheSolution/fiche-solution-card";
 import { getCreditsImageForFicheSolution } from "@/src/helpers/credits-image";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { SolutionRetourExperience } from "@/src/lib/strapi/types/api/solution-retour-experience";
@@ -126,12 +126,7 @@ export default function FicheSolutionTabSynthese({
             </div>
             <div className="flex flex-row gap-6 overflow-x-auto pl-2">
               {ficheAttributes.fiches_solutions_complementaires.data.map((fs) => (
-                <FicheSolutionCardWithUserInfo
-                  ficheSolution={fs}
-                  key={fs.id}
-                  className={"mb-12 mt-8 flex-none"}
-                  projectName=""
-                />
+                <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-12 mt-8 flex-none"} projectName="" />
               ))}
             </div>
           </div>

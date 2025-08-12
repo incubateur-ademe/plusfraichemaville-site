@@ -1,6 +1,5 @@
 import { addAideInEstimationAction } from "@/src/actions/estimation/add-aide-in-estimation-action";
 import { deleteAideInEstimationAction } from "@/src/actions/estimation/delete-aide-in-estimation-action";
-import { selectSavedOrUnsavedAssets } from "@/src/components/common/generic-save-fiche/assets";
 import { GenericSaveButtonElement } from "@/src/components/common/generic-save-fiche/generic-save-button-element";
 import { notifications } from "@/src/components/common/notifications";
 import { Spinner } from "@/src/components/common/spinner";
@@ -21,7 +20,6 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
   const addAideInEstimation = useProjetsStore((state) => state.addAideInEstimation);
   const deleteAideInEstimation = useProjetsStore((state) => state.deleteAideInEstimation);
   const savedId = useGetSavedAideInEstimationId(estimationId, aideTerritoireId);
-  const assets = selectSavedOrUnsavedAssets(!!savedId, "common");
 
   const updater = {
     delete: {
@@ -55,7 +53,13 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
           <Spinner />
         </div>
       ) : (
-        <GenericSaveButtonElement className="" update={update} assets={assets} id={aideTerritoireId} />
+        <GenericSaveButtonElement
+          isSaved={!!savedId}
+          className=""
+          update={update}
+          id={aideTerritoireId}
+          labels={{ saved: "Sauvegardée", notSaved: "Sauvegarder" }}
+        />
       )}
     </div>
   );

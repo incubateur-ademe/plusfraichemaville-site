@@ -1,4 +1,4 @@
-import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import FicheSolutionCard from "@/src/components/ficheSolution/fiche-solution-card";
 import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionBreadcrumbs";
 import AideDecisionSortFilter from "@/src/components/filters/AideDecisionSortFilter";
 import { getAideDecisionSortFieldFromCode } from "@/src/helpers/aideDecisionSortFilter";
@@ -62,7 +62,7 @@ export default async function AideDecisionResult({ aideDecisionEtapeAttributes, 
             <ul className="mb-14 flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
               {sortedFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.id} className="flex">
-                  <FicheSolutionCardWithUserInfo
+                  <FicheSolutionCard
                     ficheSolution={ficheSolution}
                     projectName={(historique && historique[1]?.label) || ""}
                     extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtapeAttributes.slug }]}
