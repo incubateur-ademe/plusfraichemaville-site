@@ -66,7 +66,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
         addOrUpdateProjet(result.updatedProjet);
         router.push(PFMV_ROUTES.TABLEAU_DE_BORD(result.updatedProjet.id));
       } else {
-        router.push(PFMV_ROUTES.ESPACE_PROJET_LISTE);
+        router.push(PFMV_ROUTES.ESPACE_PROJET);
       }
     }
   };

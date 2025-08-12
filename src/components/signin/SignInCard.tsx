@@ -20,7 +20,7 @@ type SignInCardProps = {
 };
 
 export default function SignInCard({
-  callbackUrl = process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET_LISTE,
+  callbackUrl = process.env.NEXT_PUBLIC_URL_SITE + PFMV_ROUTES.ESPACE_PROJET,
   message,
   className,
 }: SignInCardProps) {

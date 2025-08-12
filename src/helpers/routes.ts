@@ -34,7 +34,6 @@ export const PFMV_ROUTES = {
   CONNEXION: "/connexion",
   DECONNEXION: "/logout",
   ESPACE_PROJET: "/espace-projet",
-  ESPACE_PROJET_LISTE: "/espace-projet",
   MON_PROFIL: "/info-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
@@ -75,6 +74,7 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/financement/edit/${estimationId}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_TYPE_FILTER: (projetId: number, typeFiche: TypeSolution) =>
     `/espace-projet/${projetId}/fiche-solution/liste?${TYPE_SOLUTION_FILTER_NAME}=${typeFiche}`,
+  ESPACE_PROJET_RETOURS_EXPERIENCE_PROJET: (projetId: number) => `/espace-projet/${projetId}/projet`,
 };
 
 export const getFullUrl = (route: string): string => `${process.env.NEXT_PUBLIC_URL_SITE}${route}`;
