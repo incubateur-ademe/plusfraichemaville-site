@@ -61,8 +61,12 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
                 className={clsx("h-full", isModal && "w-96")}
               />
             </div>
-            <span className="fr-icon-arrow-right-line m-auto hidden md:block" />
-            <span className="fr-icon-arrow-down-line m-auto md:hidden" />
+            {!isModal && (
+              <>
+                <span className="fr-icon-arrow-right-line m-auto hidden md:block" />
+                <span className="fr-icon-arrow-down-line m-auto md:hidden" />
+              </>
+            )}
             <div className="flex-1">
               <SituationRetourExperienceCard
                 titre="Après le projet"
