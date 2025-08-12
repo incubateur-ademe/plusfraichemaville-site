@@ -32,7 +32,7 @@ export default function EspaceProjetIncentiveBanner({
       )}
     >
       <div className="mt-auto">
-        <Image src={imagePath} alt="" width={210} height={200} className="relative hidden md:block" />
+        <Image src={imagePath} alt="" width={210} height={200} className="relative hidden max-w-[12rem] md:block" />
       </div>
       <div className={"mx-auto md:mt-6"}>
         <p className="fr-h5 max-w-[30rem] text-wrap">{message}</p>
