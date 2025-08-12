@@ -10,5 +10,3 @@ export const ROUTE_COUPLES = {
     espaceProjet: PFMV_ROUTES.ESPACE_PROJET_RETOURS_EXPERIENCE_PROJET,
   },
 } as const;
-
-export type IMessageTemplateType = keyof typeof ROUTE_COUPLES;
