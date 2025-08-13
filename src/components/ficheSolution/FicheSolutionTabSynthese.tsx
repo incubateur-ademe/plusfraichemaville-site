@@ -9,6 +9,8 @@ import { getCreditsImageForFicheSolution } from "@/src/helpers/credits-image";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { SolutionRetourExperience } from "@/src/lib/strapi/types/api/solution-retour-experience";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
+import EspaceProjetIncentiveBanner from "@/src/components/common/espace-projet-incentive/espace-projet-incentive-banner";
+import { GenericLink } from "@/src/components/common/generic-links/generic-link";
 
 export default function FicheSolutionTabSynthese({
   ficheSolution,
@@ -92,6 +94,11 @@ export default function FicheSolutionTabSynthese({
           </div>
         )}
       </div>
+      <EspaceProjetIncentiveBanner
+        message="Obtenez vos solutions de rafraîchissement sur-mesure."
+        className="md:my-10"
+        imagePath="/images/espace-projet-incentive/trouver-solutions.svg"
+      />
       {!!ficheAttributes.en_savoir_plus && (
         <>
           <hr className="mt-6 pb-6 md:pb-8 " />
@@ -100,9 +107,11 @@ export default function FicheSolutionTabSynthese({
         </>
       )}
       {uniqueRetourExperienceList.length > 0 && (
-        <div className="mt-12 rounded-2xl bg-dsfr-background-alt-grey pl-6 pt-10">
-          <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">Découvrir les projets réalisés</div>
-          <div className="text-dsfr-text-title-grey">
+        <div className="mt-12 rounded-2xl bg-dsfr-background-alt-grey py-10 pl-4">
+          <div className="mb-4 ml-2 text-[1.375rem] font-bold text-dsfr-text-title-grey">
+            Découvrir les projets réalisés
+          </div>
+          <div className="ml-2 text-dsfr-text-title-grey">
             Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
           </div>
           <div className="flex flex-row gap-6 overflow-x-auto pl-2">
@@ -110,24 +119,37 @@ export default function FicheSolutionTabSynthese({
               <RetourExperienceCard
                 key={rex.attributes.retour_experience?.data.id}
                 retourExperience={rex.attributes.retour_experience?.data as RetourExperience}
-                className={"mb-12 mt-8 w-72 flex-none"}
+                className={"mb-10 mt-8 w-72 flex-none"}
               />
             ))}
           </div>
+          <GenericLink page="retoursExperience" className="ml-2 text-pfmv-dark-blue">
+            Voir plus de projets réalisés
+          </GenericLink>
         </div>
       )}
+      <EspaceProjetIncentiveBanner
+        message="Vous ne savez pas par où commencer ? Créez votre compte et laissez-vous guider !"
+        className="md:my-10"
+        imagePath="/images/espace-projet-incentive/guide.svg"
+      />
       {!!ficheAttributes.fiches_solutions_complementaires?.data.length &&
         ficheAttributes.fiches_solutions_complementaires.data.length > 0 && (
-          <div className="mt-12 rounded-2xl bg-dsfr-background-alt-blue-france pl-6 pt-10">
-            <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">Solutions complémentaires</div>
-            <div className="text-dsfr-text-title-grey">
+          <div className="mt-12 rounded-2xl bg-dsfr-background-alt-blue-france py-10 pl-4">
+            <div className="mb-4 ml-2 text-[1.375rem] font-bold text-dsfr-text-title-grey">
+              Solutions complémentaires
+            </div>
+            <div className="ml-2 text-dsfr-text-title-grey">
               Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
             </div>
             <div className="flex flex-row gap-6 overflow-x-auto pl-2">
               {ficheAttributes.fiches_solutions_complementaires.data.map((fs) => (
-                <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-12 mt-8 flex-none"} />
+                <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-10 mt-8 flex-none"} />
               ))}
             </div>
+            <GenericLink page="fichesSolution" className="ml-2 text-pfmv-dark-blue">
+              Voir plus de solutions complémentaires
+            </GenericLink>
           </div>
         )}
       {!!ficheAttributes.credits && (
