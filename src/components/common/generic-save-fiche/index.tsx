@@ -5,15 +5,12 @@ import { GenericSaveModal } from "./generic-save-modal";
 import { GenericSaveButton } from "./generic-save-button";
 import { generateRandomId, TypeFiche } from "@/src/helpers/common";
 import clsx from "clsx";
-// eslint-disable-next-line max-len
 import { unauthenticatedSaveModal } from "@/src/components/common/generic-save-fiche/generic-save-modal-unauthenticated";
 import { useUserStore } from "@/src/stores/user/provider";
 
 export type GenericSaveBaseProps = {
   type: TypeFiche;
   id: number;
-  projectName?: string;
-  withLabel?: boolean;
   withoutModal?: boolean;
   classNameButton?: string;
   className?: string;

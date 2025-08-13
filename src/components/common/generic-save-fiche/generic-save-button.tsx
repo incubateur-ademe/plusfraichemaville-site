@@ -6,7 +6,7 @@ import { GenericSaveUnauthenticated } from "./generic-save-button-unauthenticate
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericSaveAuthenticatedInsideProjet } from "./generic-save-button-authenticated-inside-projet";
 import { useSession } from "next-auth/react";
-import { Spinner } from "@/src/components/common/spinner";
+import clsx from "clsx";
 
 interface GenericSaveFicheButtonBaseProps extends GenericSaveBaseProps {
   modal?: DSFRModal;
@@ -27,7 +27,9 @@ export const GenericSaveButton = ({ modal, ...props }: GenericSaveFicheButtonBas
       <GenericSaveAuthenticatedOutsideProjet {...props} opener={modal?.open} />
     ),
     unauthenticated: <GenericSaveUnauthenticated {...props} opener={modal?.open} />,
-    loading: <Spinner className={"bg-dsfr-text-label-blue-france"} />,
+    loading: (
+      <div className={clsx("h-10 w-48 animate-pulse rounded-3xl bg-dsfr-contrast-grey", props.classNameButton)} />
+    ),
   };
 
   return <div className={props.classNameButton}>{buttons[status]}</div>;

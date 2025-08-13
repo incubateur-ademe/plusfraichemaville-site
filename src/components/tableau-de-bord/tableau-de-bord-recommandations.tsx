@@ -50,7 +50,7 @@ export const TableauDeBordRecommandation = () => {
         </div>
       ) : (
         filteredFichesSolutionsComplementaires?.map((fs) => (
-          <FicheSolutionCardWithFetcher complete id={fs.id} key={fs?.id} projectName="" withoutModal />
+          <FicheSolutionCardWithFetcher complete id={fs.id} key={fs?.id} withoutModal />
         ))
       )}
     </div>

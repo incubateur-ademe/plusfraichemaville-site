@@ -2,7 +2,7 @@ import oupsImage from "../../../public/images/fiches-solutions/oups.svg";
 import Image from "next/image";
 import Highlight from "@codegouvfr/react-dsfr/Highlight";
 import CmsRichText from "@/src/components/common/CmsRichText";
-import FicheSolutionCardWithUserInfo from "@/src/components/ficheSolution/FicheSolutionCardWithUserInfo";
+import FicheSolutionCard from "@/src/components/ficheSolution/fiche-solution-card";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
@@ -44,12 +44,7 @@ export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttribu
               <ul className="flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
                 {oups.solutions_reparatrices.data.slice(0, 2).map((fs) => (
                   <li key={fs.id} className="flex">
-                    <FicheSolutionCardWithUserInfo
-                      ficheSolution={fs}
-                      key={fs.id}
-                      className={"mb-12 flex-none"}
-                      projectName=""
-                    />
+                    <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-12 flex-none"} />
                   </li>
                 ))}
               </ul>

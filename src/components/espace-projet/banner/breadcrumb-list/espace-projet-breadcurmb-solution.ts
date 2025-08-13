@@ -50,3 +50,12 @@ export const BREADCRUMB_SOLUTION_RETOUR_EXPERIENCE: EspaceProjetBreadcrumbStep =
     BREADCRUMB_SEGMENT_SOLUTION_LISTE(projetId),
   ],
 };
+
+export const BREADCRUMB_SOLUTION_RETOUR_EXPERIENCE_LISTE: EspaceProjetBreadcrumbStep = {
+  currentPageLabel: "Tous les retours d'expérience",
+  breadcrumbSegments: (projetId: number) => [
+    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
+    BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS(projetId),
+    BREADCRUMB_SEGMENT_SOLUTION_LISTE(projetId),
+  ],
+};

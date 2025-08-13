@@ -194,14 +194,6 @@ export async function getRetoursExperiencesWithContactsById(id: string): Promise
   return safeReturnStrapiEntity(apiResponse);
 }
 
-export async function getAllCompleteRetoursExperiences(): Promise<RetourExperience[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
-  const apiResponse = (
-    await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_COMPLETE_DATA(filter), { tag: "get-all-complete-retour-experience" })
-  )?.retourExperiences as APIResponseCollection<RetourExperience>;
-  return safeReturnStrapiEntities(apiResponse);
-}
-
 export async function getAquagirRetoursExperiences(): Promise<RetourExperience[] | null> {
   const filter = new StrapiFilter(
     true,

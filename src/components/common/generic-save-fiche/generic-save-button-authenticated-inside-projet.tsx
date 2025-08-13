@@ -1,6 +1,4 @@
 import { GenericSaveButtonElement } from "./generic-save-button-element";
-
-import { selectSavedOrUnsavedAssets } from "./assets";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericSaveFicheButtonWithOpener } from "./generic-save-button";
 import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
@@ -29,13 +27,11 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
       notifications(update.type, update.message);
     }
   };
-  const assets = selectSavedOrUnsavedAssets(isSaved ?? false, "projet");
-
   const canEditProjet = useCanEditProjet(projet?.id);
 
   if (!canEditProjet) {
     return null;
   }
 
-  return <GenericSaveButtonElement isSaved={isSaved} update={update} assets={assets} {...props} />;
+  return <GenericSaveButtonElement isSaved={isSaved} update={update} {...props} />;
 };

@@ -66,21 +66,11 @@ export async function FicheSolution({
               url={getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(ficheSolution.attributes.slug))}
               className={"hidden md:block [&>*]:mb-1"}
             />
-            <div className="absolute right-4 top-[68px] md:hidden">
-              <GenericSaveFiche
-                id={ficheSolution.id}
-                type={TypeFiche.solution}
-                projectName={(historique && historique[1].label) || ""}
-              />
-            </div>
-            <div className="mt-4 hidden md:block">
-              <GenericSaveFiche
-                id={ficheSolution.id}
-                type={TypeFiche.solution}
-                projectName={(historique && historique[1].label) || ""}
-                withLabel
-              />
-            </div>
+            <GenericSaveFiche
+              id={ficheSolution.id}
+              type={TypeFiche.solution}
+              classNameButton="absolute md:relative right-4 top-[68px] md:mt-4 md:top-0 md:right-0"
+            />
           </div>
           <div className="fr-tabs before:!shadow-none">
             <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche solution">
@@ -137,7 +127,6 @@ export async function FicheSolution({
             >
               <FicheSolutionTabSynthese
                 ficheSolutionId={ficheSolution.id}
-                projectName={(historique && historique[1].label) || ""}
                 ficheSolution={ficheSolution}
                 projetId={params.projetId}
               />

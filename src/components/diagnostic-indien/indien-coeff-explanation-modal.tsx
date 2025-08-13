@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { IndienType } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-list";
 import clsx from "clsx";

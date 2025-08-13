@@ -3,7 +3,7 @@ import BaisseTemperatureFilter from "@/src/components/filters/BaisseTemperatureF
 import { getBaisseTemperatureFicheSolutionFromTemperature } from "@/src/helpers/baisseTemperatureFicheSolution";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
-import FicheSolutionCardWithUserInfo from "./FicheSolutionCardWithUserInfo";
+import FicheSolutionCard from "./fiche-solution-card";
 import TypeEspaceFilter from "../filters/type-espace-filter-component";
 
 type FichesSolutionsProps = {
@@ -48,7 +48,7 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
             <ul className="m-0 flex flex-wrap justify-center gap-6 p-0 md:justify-normal">
               {filteredFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.id} className="flex">
-                  <FicheSolutionCardWithUserInfo projectName="" ficheSolution={ficheSolution} />
+                  <FicheSolutionCard ficheSolution={ficheSolution} />
                 </li>
               ))}
             </ul>

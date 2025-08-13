@@ -158,14 +158,6 @@ export async function getAllFichesSolutions(): Promise<FicheSolution[]> {
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getAllCompleteFichesSolutions(): Promise<FicheSolution[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
-  const apiResponse = (
-    await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), { tag: "get-all-complete-fiches-solution" })
-  )?.ficheSolutions as APIResponseCollection<FicheSolution>;
-  return safeReturnStrapiEntities(apiResponse);
-}
-
 export async function getFicheSolutionByIds(ficheSolutionIds: number[]): Promise<FicheSolution[]> {
   const filter = new StrapiFilter(true, [
     {

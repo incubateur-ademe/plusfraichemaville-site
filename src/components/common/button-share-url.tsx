@@ -19,17 +19,26 @@ export default function ButtonShareUrl({ url, className }: { url: string; classN
     <div className={`${className}`}>
       {isClient ? (
         <div className={clsx("flex flex-row items-center gap-2")}>
-          <Button size="small" onClick={copyCurrentUrlToClipboard} className={clsx("!w-8 justify-center rounded-full")}>
-            <i className={clsx("fr-icon--sm ri-share-forward-fill text-white")} />
+          <Button
+            id="share-button"
+            priority="tertiary"
+            size="small"
+            onClick={copyCurrentUrlToClipboard}
+            className={clsx("!w-8 justify-center")}
+            aria-labelledby="share-button-label"
+          >
+            <i className={clsx("fr-icon--sm fr-icon-links-line")} />
           </Button>
-          <span className="mt-[1px] text-sm font-bold text-dsfr-text-label-blue-france">Partager</span>
+          <label htmlFor="share-button" className="text-sm font-bold text-dsfr-text-label-blue-france">
+            Copier le lien de la page
+          </label>
         </div>
       ) : (
         <div className="mb-4 flex flex-row items-center gap-2 text-dsfr-text-mention-grey">
           <div className="flex h-8 w-8 items-center justify-center rounded-full bg-pfmv-navy">
             <i className={clsx(" fr-icon--sm ri-share-forward-fill text-white")} />
           </div>
-          <span className="mt-[1px] text-sm font-bold text-dsfr-text-label-blue-france">Partager</span>
+          <span className="mt-[1px] text-sm font-bold text-dsfr-text-label-blue-france">Copier le lien de la page</span>
         </div>
       )}
     </div>

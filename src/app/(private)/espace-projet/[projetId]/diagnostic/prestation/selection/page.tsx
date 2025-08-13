@@ -1,7 +1,5 @@
 import { FichesDiagnosticsProjetSelected } from "@/src/components/fiches-diagnostic/fiches-diagnostics-projet-selected";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-// eslint-disable-next-line max-len
-import React from "react";
 
 import { BREADCRUMB_DIAG_PRESTATION_SELECTION } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 

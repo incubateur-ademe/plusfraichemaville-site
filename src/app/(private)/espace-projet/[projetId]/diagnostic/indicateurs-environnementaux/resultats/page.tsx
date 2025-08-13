@@ -1,6 +1,5 @@
 "use client";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import React from "react";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 import Image from "next/image";

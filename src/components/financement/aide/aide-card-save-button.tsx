@@ -1,9 +1,7 @@
 import { addAideInEstimationAction } from "@/src/actions/estimation/add-aide-in-estimation-action";
 import { deleteAideInEstimationAction } from "@/src/actions/estimation/delete-aide-in-estimation-action";
-import { selectSavedOrUnsavedAssets } from "@/src/components/common/generic-save-fiche/assets";
 import { GenericSaveButtonElement } from "@/src/components/common/generic-save-fiche/generic-save-button-element";
 import { notifications } from "@/src/components/common/notifications";
-import { Spinner } from "@/src/components/common/spinner";
 import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
 import { useGetSavedAideInEstimationId } from "@/src/hooks/use-get-aide-saved-in-estimation-id";
 import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
@@ -21,7 +19,6 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
   const addAideInEstimation = useProjetsStore((state) => state.addAideInEstimation);
   const deleteAideInEstimation = useProjetsStore((state) => state.deleteAideInEstimation);
   const savedId = useGetSavedAideInEstimationId(estimationId, aideTerritoireId);
-  const assets = selectSavedOrUnsavedAssets(!!savedId, "common");
 
   const updater = {
     delete: {
@@ -51,11 +48,15 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
   return (
     <div className={clsx("absolute z-10", className)}>
       {isLoading ? (
-        <div className="z-10 rounded-full  bg-pfmv-navy">
-          <Spinner />
-        </div>
+        <div className={clsx("h-10 w-40 animate-pulse rounded-3xl bg-dsfr-contrast-grey", className)} />
       ) : (
-        <GenericSaveButtonElement className="" update={update} assets={assets} id={aideTerritoireId} />
+        <GenericSaveButtonElement
+          isSaved={!!savedId}
+          className=""
+          update={update}
+          id={aideTerritoireId}
+          labels={{ saved: "Sauvegardée", notSaved: "Sauvegarder" }}
+        />
       )}
     </div>
   );
