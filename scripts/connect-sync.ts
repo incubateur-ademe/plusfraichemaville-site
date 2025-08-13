@@ -19,8 +19,14 @@ const syncWithConnect = async () => {
     const usersAndProjectsFromLastSync = await getUsersAndProjectsFromLastSync({
       service: "connect",
     });
+    const filteredUsersAndProject = usersAndProjectsFromLastSync.filter(
+      (userAndProjects) =>
+        !userAndProjects.email.endsWith("ademe.fr") &&
+        !userAndProjects.email.endsWith("beta.gouv.fr") &&
+        userAndProjects.email !== "marie.racine@dihal.gouv.fr",
+    );
 
-    if (!usersAndProjectsFromLastSync.length) {
+    if (!filteredUsersAndProject.length) {
       console.log("Aucune nouvelle donnée à synchroniser.");
       const webhookData = makeConnectSyncBatchWebhookData("Aucune nouvelle donnée à synchroniser.");
       await sendMattermostWebhook(webhookData, "batch", 5000);
@@ -28,7 +34,7 @@ const syncWithConnect = async () => {
       process.exit(0);
     }
 
-    const activeUsersAndProjects = usersAndProjectsFromLastSync.map((user) => ({
+    const activeUsersAndProjects = filteredUsersAndProject.map((user) => ({
       ...user,
       projets: user.projets.filter((p) => !p.projet.deleted_at),
     }));
