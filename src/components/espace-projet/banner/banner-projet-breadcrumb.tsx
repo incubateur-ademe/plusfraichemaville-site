@@ -4,7 +4,6 @@ import { EspaceProjetBreadcrumbStep } from "@/src/components/espace-projet/banne
 import clsx from "clsx";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import BannerProjet from "@/src/components/espace-projet/banner/banner-projet";
-import React from "react";
 
 export default function BannerProjetBreadcrumb({
   step,

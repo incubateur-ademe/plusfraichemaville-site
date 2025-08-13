@@ -1,11 +1,9 @@
 "use client";
 import Image from "next/image";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import React from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import clsx from "clsx";
-// eslint-disable-next-line max-len
 import { comebackLaterDiagnosticSimulationAction } from "@/src/actions/diagnostic-simulation/comeback-later-diagnostic-simulation-action";
 import { useRouter } from "next/navigation";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";

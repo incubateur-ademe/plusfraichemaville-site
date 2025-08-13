@@ -1,9 +1,7 @@
 import { FicheDiagnosticComponent } from "@/src/components/fiches-diagnostic/fiche-diagnostic-component";
 import { getAllFichesDiagnostic, getFicheDiagnosticBySlug } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { notFound } from "next/navigation";
-import React from "react";
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_SURCHAUFFE_URBAINE_FICHE_DIAG } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";

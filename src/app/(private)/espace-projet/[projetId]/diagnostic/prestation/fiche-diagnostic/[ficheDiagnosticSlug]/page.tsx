@@ -2,7 +2,6 @@ import { FicheDiagnosticComponent } from "@/src/components/fiches-diagnostic/fic
 import { getFicheDiagnosticBySlug } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { notFound } from "next/navigation";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import React from "react";
 
 // eslint-disable-next-line max-len
 import { BREADCRUMB_DIAG_FICHE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";

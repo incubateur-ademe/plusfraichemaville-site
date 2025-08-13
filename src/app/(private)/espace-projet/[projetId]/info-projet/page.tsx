@@ -5,7 +5,6 @@ import { useShallow } from "zustand/react/shallow";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { BREADCRUMB_EDIT_PROJET } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import React from "react";
 
 export default function UpdateProjetPage() {
   const { getCurrentProjet } = useProjetsStore(useShallow((state) => state));
