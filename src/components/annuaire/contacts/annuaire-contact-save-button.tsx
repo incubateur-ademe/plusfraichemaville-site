@@ -1,6 +1,5 @@
 import { GenericSaveButtonElement } from "@/src/components/common/generic-save-fiche/generic-save-button-element";
 import { notifications } from "@/src/components/common/notifications";
-import { Spinner } from "@/src/components/common/spinner";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 import isEqual from "lodash/isEqual";
@@ -80,11 +79,14 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Annu
   return (
     <div className={clsx("z-10", className)}>
       {isLoading ? (
-        <div className="z-10 rounded-full  bg-pfmv-navy">
-          <Spinner />
-        </div>
+        <div className={clsx("h-10 w-40 animate-pulse rounded-3xl bg-dsfr-contrast-grey", className)} />
       ) : (
-        <GenericSaveButtonElement update={update} id={1} labels={{ saved: "Sauvegardé", notSaved: "Sauvegarder" }} />
+        <GenericSaveButtonElement
+          isSaved={isSaved}
+          update={update}
+          id={1}
+          labels={{ saved: "Sauvegardé", notSaved: "Sauvegarder" }}
+        />
       )}
     </div>
   );

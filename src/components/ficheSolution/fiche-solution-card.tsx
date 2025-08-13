@@ -76,7 +76,7 @@ export default function FicheSolutionCard({
               id={ficheSolution.id}
               type={TypeFiche.solution}
               withoutModal={withoutModal}
-              classNameButton="mt-4 text-center"
+              classNameButton="mt-4 mx-auto text-center"
             />
           </div>
         </div>

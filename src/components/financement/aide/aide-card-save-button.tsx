@@ -2,7 +2,6 @@ import { addAideInEstimationAction } from "@/src/actions/estimation/add-aide-in-
 import { deleteAideInEstimationAction } from "@/src/actions/estimation/delete-aide-in-estimation-action";
 import { GenericSaveButtonElement } from "@/src/components/common/generic-save-fiche/generic-save-button-element";
 import { notifications } from "@/src/components/common/notifications";
-import { Spinner } from "@/src/components/common/spinner";
 import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
 import { useGetSavedAideInEstimationId } from "@/src/hooks/use-get-aide-saved-in-estimation-id";
 import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
@@ -49,9 +48,7 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
   return (
     <div className={clsx("absolute z-10", className)}>
       {isLoading ? (
-        <div className="z-10 rounded-full  bg-pfmv-navy">
-          <Spinner />
-        </div>
+        <div className={clsx("h-10 w-40 animate-pulse rounded-3xl bg-dsfr-contrast-grey", className)} />
       ) : (
         <GenericSaveButtonElement
           isSaved={!!savedId}
