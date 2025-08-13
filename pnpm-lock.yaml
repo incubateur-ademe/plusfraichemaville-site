@@ -88,8 +88,8 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react-leaflet-cluster:
-        specifier: ^2.1.0
-        version: 2.1.0(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react-leaflet@5.0.0(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+        specifier: ^3.1.1
+        version: 3.1.1(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react-leaflet@5.0.0(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       react-map-gl:
         specifier: ^8.0.4
         version: 8.0.4(maplibre-gl@5.6.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -3426,12 +3426,12 @@ packages:
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
 
-  react-leaflet-cluster@2.1.0:
-    resolution: {integrity: sha512-16X7XQpRThQFC4PH4OpXHimGg19ouWmjxjtpxOeBKpvERSvIRqTx7fvhTwkEPNMFTQ8zTfddz6fRTUmUEQul7g==}
+  react-leaflet-cluster@3.1.1:
+    resolution: {integrity: sha512-g39QohKNrmIwHNlL0KTv+a9PYYWDtcRAsnHHytJyRhIgjxGxs4/SXe/Zr4kP8IZoEzxbqCMkJqUsFBEZJqKp2g==}
     peerDependencies:
       leaflet: ^1.8.0
-      react: ^18.0.0
-      react-dom: ^18.0.0
+      react: ^18.2.0 || ^19.0.0
+      react-dom: ^18.2.0 || ^19.0.0
       react-leaflet: ^4.0.0
 
   react-leaflet@5.0.0:
@@ -7686,7 +7686,7 @@ snapshots:
 
   react-is@16.13.1: {}
 
-  react-leaflet-cluster@2.1.0(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react-leaflet@5.0.0(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0):
+  react-leaflet-cluster@3.1.1(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react-leaflet@5.0.0(leaflet@1.9.4)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0):
     dependencies:
       leaflet: 1.9.4
       leaflet.markercluster: 1.5.3(leaflet@1.9.4)
