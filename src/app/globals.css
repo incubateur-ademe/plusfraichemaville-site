@@ -317,6 +317,10 @@
   @apply w-[80%] max-w-[80%] flex-shrink-0 flex-grow-0 basis-full;
 }
 
+.rounded-modal .fr-modal__body {
+  @apply rounded-[20px];
+}
+
 .custom-modal .fr-modal__body {
   @apply rounded-[20px];
 }

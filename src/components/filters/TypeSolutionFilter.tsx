@@ -17,6 +17,8 @@ export default function TypeSolutionFilter({ className }: { className?: string }
       <div className={`flex shrink flex-row flex-wrap justify-center gap-4 md:flex-col md:justify-start ${className}`}>
         {ALL_TYPES_SOLUTION.map((typeSolution) => (
           <button
+            role="checkbox"
+            aria-checked={isFilterCodeSelected(typeSolution.code)}
             key={typeSolution.code}
             onClick={() => changeFilter(typeSolution.code)}
             className={linkStyle(typeSolution.code)}

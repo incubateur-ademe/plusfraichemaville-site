@@ -17,6 +17,7 @@ import { mapDBCollectiviteToCollectiviteAddress } from "@/src/lib/adresseApi/ban
 import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
+import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 
 export const ContactForm = () => {
   const user = useUserStore((state) => state.userInfos);
@@ -63,6 +64,7 @@ export const ContactForm = () => {
   const disabled = form.formState.isSubmitting;
   return (
     <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
+      <MandatoryFieldsMention />
       <InputFormField control={form.control} path="prenom" label="Votre prénom" asterisk={true} />
       <InputFormField control={form.control} path="nom" label="Votre nom" asterisk={true} />
       <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />

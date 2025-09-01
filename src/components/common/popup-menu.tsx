@@ -28,17 +28,17 @@ export const PopupMenu = ({ links }: PopupMenuProps) => {
       {open && (
         <>
           <div className="fixed left-0 top-0 z-30 size-full" onClick={closer}></div>
-          <div className={clsx("absolute right-0 top-[100%] z-40 bg-white px-5 pb-1 pt-3 shadow-pfmv-card-shadow")}>
+          <div className={clsx("absolute right-0 top-[100%] z-40 bg-white px-4 pb-1 pt-3 shadow-pfmv-card-shadow")}>
             <ul className="relative z-10 pl-0">
               {links.map((link, index) => (
                 <li className={`mb-3 list-none text-sm ${link.className} font-bold`} key={index}>
-                  <i className={clsx(link.iconId, "mr-2 size-6 before:!size-5")} />
                   <button
                     onClick={() => {
                       closer();
                       link.onClick();
                     }}
                   >
+                    <i className={clsx(link.iconId, "mr-2 before:!mb-[2px] before:!size-5")} />
                     {link.label}
                   </button>
                 </li>
