@@ -23,6 +23,7 @@ import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
 import CurrencyInputFormField from "@/src/components/common/currency-input-form-field";
 import MonthPickerFormField from "@/src/components/common/MonthPickerFormField";
 import "react-datepicker/dist/react-datepicker.css";
+import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 
 type ProjetInfoFormProps = {
   projet?: ProjetWithRelations;
@@ -76,6 +77,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
   return (
     <>
       <form id="projet-info-form" onSubmit={form.handleSubmit(onSubmit)}>
+        <MandatoryFieldsMention />
         <InputFormField control={form.control} path="nom" label="Nom du projet" asterisk={true} disabled={disabled} />
         <SelectFormField
           control={form.control}

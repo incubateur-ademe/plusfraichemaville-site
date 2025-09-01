@@ -24,6 +24,7 @@ type MaturiteProps = {
   buttonBgHoverColor?: string;
   withLabel?: boolean;
   editable?: boolean;
+  id: string;
 };
 
 export const Maturite = ({
@@ -32,6 +33,7 @@ export const Maturite = ({
   projetId,
   buttonBgHoverColor = "bg-white",
   editable = true,
+  id,
 }: MaturiteProps) => {
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const readOnly = useIsLecteur(projetId) || !editable;
@@ -51,6 +53,7 @@ export const Maturite = ({
   return (
     <Tooltip className={clsx(withLabel && "invisible")} kind="hover" title={currentNiveau?.label}>
       <Select
+        inputId={id}
         className="z-50"
         isSearchable={false}
         // isDisabled={readOnly}

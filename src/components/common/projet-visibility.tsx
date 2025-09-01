@@ -40,10 +40,12 @@ export const ProjetVisibility = ({
   );
 
   const Toggle = !isLoading ? (
-    <div className="[&>div]:-mr-8">
+    <div className="">
       <ToggleSwitch
-        labelPosition="right"
-        label=""
+        labelPosition="left"
+        classes={{ label: `${reduced ? "!text-lg" : "!text-xl"} font-bold` }}
+        label="Souhaitez-vous rendre votre projet visible par les autres membres
+         de la communauté Plus fraîche ma ville ?"
         inputTitle=""
         showCheckedHint={false}
         checked={isPublic ?? undefined}
@@ -59,14 +61,9 @@ export const ProjetVisibility = ({
 
   if (reduced) {
     return (
-      <div className="rounded-[20px] bg-dsfr-background-default-grey-hover px-4 pt-4">
-        <div className="mb-1 text-lg font-bold">
-          Souhaitez-vous rendre votre projet visible par les autres membres de la communauté Plus fraîche ma ville ?
-        </div>
-        <div className="flex items-center justify-between">
-          {Badge}
-          {Toggle}
-        </div>
+      <div className="rounded-[20px] bg-dsfr-background-default-grey-hover p-4">
+        {Badge}
+        {Toggle}
       </div>
     );
   }
@@ -75,10 +72,8 @@ export const ProjetVisibility = ({
     <div className="mb-14 mt-16 rounded-[20px] bg-dsfr-background-default-grey-hover p-8">
       {Badge}
       <div className="flex justify-between">
-        <div className="flex max-w-4xl flex-col gap-4 [&>p]:mb-0">
-          <p className="max-w-2xl text-xl font-bold">
-            Souhaitez-vous rendre votre projet visible par les autres membres de la communauté Plus fraîche ma ville ?
-          </p>
+        <div className="flex  flex-col gap-4 [&>p]:mb-0">
+          {Toggle}
           <p>
             Rendez votre projet visible dans {`l'annuaire`} des projets pour partager son objet, sa localisation et son
             état {`d'avancement`} aux autres membres de la communauté. Grâce à cette fonctionnalité, découvrez les
@@ -86,11 +81,10 @@ export const ProjetVisibility = ({
             prestataires.
           </p>
           <p>
-            En tant {`qu'administrateur`} {`d'un`} projet, vos prénom, nom et adresse mail seront partagés avec les
+            En tant {`qu'administrateur d'un`} projet, vos prénom, nom et adresse mail seront partagés avec les
             utilisateurs connectés.
           </p>
         </div>
-        {Toggle}
       </div>
     </div>
   );

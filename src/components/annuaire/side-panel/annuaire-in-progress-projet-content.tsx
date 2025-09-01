@@ -40,8 +40,11 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
             {regionLabel}
           </Tag>
           <div className="flex flex-row items-center gap-2">
-            <div className="text-nowrap text-sm text-dsfr-text-mention-grey">Maturité du projet</div>
+            <label htmlFor="maturite-select" className="text-nowrap text-sm text-dsfr-text-mention-grey">
+              Maturité du projet
+            </label>
             <Maturite
+              id="maturite-select"
               niveau={data.niveau_maturite}
               projetId={data.id}
               editable={false}

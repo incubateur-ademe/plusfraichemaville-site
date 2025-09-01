@@ -20,6 +20,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { notifications } from "../common/notifications";
 import capitalize from "lodash/capitalize";
 import { ROLE_EDITEUR, ROLE_LECTEUR } from "@/src/helpers/user-role";
+import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 
 const modal = createModal({
   id: "user-status-modification",
@@ -66,16 +67,19 @@ export const PartageMemberModificationRoleModale = () => {
     }
   };
 
-  // eslint-disable-next-line max-len
   const name = `${currentUserModification?.member.user?.prenom} ${currentUserModification?.member.user?.nom}`;
 
   return (
     <>
-      <modal.Component title="" size="small" className="current-user-status-modale min-h-[376px]">
+      <modal.Component
+        title="Modifier les informations d'un membre"
+        size="medium"
+        className="rounded-modal min-h-[376px]"
+      >
         {currentUserModification ? (
           <>
-            <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Modifier les informations {"d'un membre"}</h2>
             <form id="user-partage-modification-form" onSubmit={form.handleSubmit(onSubmit)}>
+              <MandatoryFieldsMention />
               <Input
                 label=""
                 disabled
@@ -100,7 +104,8 @@ export const PartageMemberModificationRoleModale = () => {
               <SelectFormField
                 control={form.control}
                 path="role"
-                label=""
+                label="Rôle de l'utilisateur"
+                asterisk
                 options={[
                   { name: capitalize(ROLE_LECTEUR.label), value: ROLE_LECTEUR.code },
                   { name: capitalize(ROLE_EDITEUR.label), value: ROLE_EDITEUR.code },
@@ -112,11 +117,11 @@ export const PartageMemberModificationRoleModale = () => {
                   onClick={modal.close}
                   nativeButtonProps={modal.buttonProps}
                   type="button"
-                  className="mr-4"
+                  className="mr-4 rounded-3xl"
                 >
                   Annuler
                 </Button>
-                <Button priority="primary" type="submit" onClick={modal.close}>
+                <Button priority="primary" type="submit" onClick={modal.close} className="rounded-3xl">
                   Sauvegarder
                 </Button>
               </div>

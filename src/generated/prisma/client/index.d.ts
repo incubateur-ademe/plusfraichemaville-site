@@ -8284,7 +8284,7 @@ export namespace Prisma {
       email_address: string | null
       role: $Enums.RoleProjet
       projet_id: number
-      user_id: string | null
+      obaluser_id: string | null
       created_at: Date
       invitation_token: string | null
       invitation_status: $Enums.InvitationStatus

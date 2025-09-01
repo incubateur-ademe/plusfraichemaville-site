@@ -168,8 +168,10 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
             {invitationStatus === InvitationStatus.ACCEPTED && (
               <div className="flex w-full flex-row justify-between gap-4">
                 <div className="flex items-center justify-end gap-2">
-                  <span className="mt-1 text-sm font-bold text-pfmv-navy">Maturité du projet : </span>
-                  <Maturite niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} />
+                  <label htmlFor="maturite-select" className="mt-1 text-sm font-bold text-pfmv-navy">
+                    Maturité du projet :{" "}
+                  </label>
+                  <Maturite id="maturite-select" niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} />
                 </div>
                 <div className={clsx("flex gap-4 text-sm")}>
                   <LinkWithoutPrefetch

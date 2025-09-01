@@ -83,6 +83,7 @@ const AddressInputFormField = <T extends FieldValues>({
           >
             <div className={"flex items-center"}>
               <ComboboxInput
+                id={id}
                 aria-describedby={ariaDescribedBy}
                 className=" fr-input w-full "
                 displayValue={(address: AddressProjet) => address?.label ?? ""}

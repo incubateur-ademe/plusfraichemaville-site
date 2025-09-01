@@ -21,6 +21,8 @@ export default function BaisseTemperatureFilter({ className }: { className?: str
             key={baisseTemperature.code}
             onClick={() => changeFilter(baisseTemperature.code)}
             className={linkStyle(baisseTemperature.code)}
+            role="checkbox"
+            aria-checked={isFilterCodeSelected(baisseTemperature.code)}
           >
             {baisseTemperature.label}
           </button>

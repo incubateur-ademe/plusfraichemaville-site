@@ -41,6 +41,8 @@ export const FicheDiagnosticEchelleThermiqueFilter = ({
           return (
             <button
               onClick={() => setter(f.filter)}
+              role="checkbox"
+              aria-checked={isSelected}
               className={clsx(
                 "relative overflow-hidden rounded-xl",
                 "!border-[1px] border-white/0 shadow-pfmv-card-shadow hover:!border-pfmv-navy",

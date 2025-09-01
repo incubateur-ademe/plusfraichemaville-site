@@ -18,6 +18,7 @@ import { canalAcquisitionUserOptions, CUSTOM_CANAL_ACQUISITION } from "@/src/hel
 import clsx from "clsx";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
+import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 
 export const UserInfoForm = ({
   user,
@@ -63,6 +64,7 @@ export const UserInfoForm = ({
 
   return (
     <form id="user-info-form" onSubmit={form.handleSubmit(onSubmit)}>
+      <MandatoryFieldsMention />
       <InputFormField control={form.control} path="nom" label="Nom" asterisk={true} />
       <InputFormField control={form.control} path="prenom" label="Prénom" asterisk={true} />
       <InputFormField control={form.control} path="email" label="Email" asterisk={true} disabled={!!user.email} />

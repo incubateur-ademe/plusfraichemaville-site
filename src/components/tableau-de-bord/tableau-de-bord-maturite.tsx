@@ -14,10 +14,12 @@ export const TableauDeBordMaturite = () => {
   return (
     <div className="mb-8 flex h-24 w-[70.5rem] items-center justify-between rounded-2xl bg-white px-8">
       <div>
-        <span className="font-bold text-black">Maturité du projet</span>
+        <label htmlFor="maturite-select" className="font-bold text-black">
+          Maturité du projet
+        </label>
         <div className="h-10">
           {projet ? (
-            <Maturite niveau={projet?.niveau_maturite} projetId={projet.id} withLabel />
+            <Maturite id="maturite-select" niveau={projet?.niveau_maturite} projetId={projet.id} withLabel />
           ) : (
             <Spinner className="w-6" />
           )}
