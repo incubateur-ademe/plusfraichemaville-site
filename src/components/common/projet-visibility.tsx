@@ -40,19 +40,17 @@ export const ProjetVisibility = ({
   );
 
   const Toggle = !isLoading ? (
-    <div className="">
-      <ToggleSwitch
-        labelPosition="left"
-        classes={{ label: `${reduced ? "!text-lg" : "!text-xl"} font-bold` }}
-        label="Souhaitez-vous rendre votre projet visible par les autres membres
+    <ToggleSwitch
+      labelPosition="left"
+      classes={{ label: `${reduced ? "!text-lg" : "!text-xl"} font-bold` }}
+      label="Souhaitez-vous rendre votre projet visible par les autres membres
          de la communauté Plus fraîche ma ville ?"
-        inputTitle=""
-        showCheckedHint={false}
-        checked={isPublic ?? undefined}
-        disabled={disabled}
-        onChange={onVisibilityChange}
-      />
-    </div>
+      inputTitle=""
+      showCheckedHint={false}
+      checked={isPublic ?? undefined}
+      disabled={disabled}
+      onChange={onVisibilityChange}
+    />
   ) : (
     <div className="-mr-8 h-6 w-[72px] rounded-full py-4">
       <div className="h-6 w-10 rounded-full bg-dsfr-contrast-grey"></div>
