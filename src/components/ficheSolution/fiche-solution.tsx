@@ -5,18 +5,13 @@ import CustomTabButton from "@/src/components/common/CustomTabButton";
 import FicheSolutionTabSynthese from "@/src/components/ficheSolution/FicheSolutionTabSynthese";
 import FicheSolutionTabMateriaux from "@/src/components/ficheSolution/FicheSolutionTabMateriaux";
 import FicheSolutionTabMiseEnOeuvre from "@/src/components/ficheSolution/FicheSolutionTabMiseEnOeuvre";
-import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionBreadcrumbs";
 import FicheSolutionTabFinancements from "@/src/components/ficheSolution/FicheSolutionTabFinancements";
 import FicheSolutionTabOups from "@/src/components/ficheSolution/FicheSolutionTabOups";
 import { getFicheSolutionBySlug } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { getAideDecisionHistoryBySlug } from "@/src/lib/strapi/queries/aideDecisionQueries";
 import clsx from "clsx";
-import ButtonShareUrl from "@/src/components/common/button-share-url";
-import { GenericSaveFiche } from "../common/generic-save-fiche";
-import { TypeFiche } from "@/src/helpers/common";
 import { FICHE_SOLUTION_CLIC_ONGLET } from "@/src/helpers/matomo/matomo-tags";
-import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
+import { FicheSolutionSideMenu } from "@/src/components/ficheSolution/fiche-solution-side-menu";
 
 export async function FicheSolution({
   params,
@@ -26,7 +21,6 @@ export async function FicheSolution({
   searchParams: { etapeAideDecision: string | undefined };
 }) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
-  const historique = await getAideDecisionHistoryBySlug(searchParams?.etapeAideDecision, true);
 
   if (ficheSolution) {
     const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
@@ -54,24 +48,11 @@ export async function FicheSolution({
         </div>
         <div className="absolute h-14 w-full bg-dsfr-background-alt-blue-france" />
         <div className="fr-container relative flex flex-row">
-          <div className="flex-none md:relative md:mt-[6.5rem] md:w-56">
-            {historique && (
-              <AideDecisionBreadcrumbs
-                historique={historique}
-                className="-mt-2 mb-16 hidden md:block"
-                currentPageLabel={ficheSolution.attributes.titre}
-              />
-            )}
-            <ButtonShareUrl
-              url={getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(ficheSolution.attributes.slug))}
-              className={"hidden md:block [&>*]:mb-1"}
-            />
-            <GenericSaveFiche
-              id={ficheSolution.id}
-              type={TypeFiche.solution}
-              classNameButton="absolute md:relative right-4 top-[68px] md:mt-4 md:top-0 md:right-0"
-            />
-          </div>
+          <FicheSolutionSideMenu
+            ficheSolution={ficheSolution}
+            etapeAideDecision={searchParams.etapeAideDecision}
+            className="hidden flex-none md:mt-[6.5rem] md:block md:w-56"
+          />
           <div className="fr-tabs before:!shadow-none">
             <ul className="fr-tabs__list !m-0 !h-14 !p-0" role="tablist" aria-label="Menu fiche solution">
               <li role="presentation">
@@ -125,22 +106,27 @@ export async function FicheSolution({
               className="fr-tabs__panel fr-tabs__panel--selected !px-0 md:!py-12"
               role="tabpanel"
             >
+              <FicheSolutionSideMenu
+                ficheSolution={ficheSolution}
+                etapeAideDecision={searchParams.etapeAideDecision}
+                className="mb-4 flex-none md:hidden"
+              />
               <FicheSolutionTabSynthese
                 ficheSolutionId={ficheSolution.id}
                 ficheSolution={ficheSolution}
                 projetId={params.projetId}
               />
             </div>
-            <div id="materiaux-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
+            <div id="materiaux-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
               <FicheSolutionTabMateriaux ficheAttributes={ficheSolution.attributes} />
             </div>
-            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
+            <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
               <FicheSolutionTabMiseEnOeuvre ficheAttributes={ficheSolution.attributes} />
             </div>
-            <div id="financements-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
+            <div id="financements-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
               <FicheSolutionTabFinancements ficheAttributes={ficheSolution.attributes} />
             </div>
-            <div id="oups-panel" className="fr-tabs__panel !px-0 !pt-14 md:!py-12" role="tabpanel">
+            <div id="oups-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
               <FicheSolutionTabOups ficheAttributes={ficheSolution.attributes} />
             </div>
           </div>
