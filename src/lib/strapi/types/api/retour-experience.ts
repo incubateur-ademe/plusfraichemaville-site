@@ -29,6 +29,7 @@ export enum ClimatActuel {
   SemiContinental = "semi_continental",
   Equatorial = "equatorial",
   Tempere = "tempere",
+  Tropical = "tropical",
 }
 export enum ClimatFutur {
   Oceanique = "oceanique",
@@ -37,6 +38,7 @@ export enum ClimatFutur {
   SemiContinental = "semi_continental",
   Equatorial = "equatorial",
   Tempere = "tempere",
+  Tropical = "tropical",
 }
 export enum Temporalite {
   CourtTerme = "court_terme",
