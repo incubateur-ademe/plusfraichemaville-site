@@ -31,6 +31,11 @@ export const CLIMAT_TEMPERE: ClimatRetourExperience = {
   label: "Tempéré",
 };
 
+export const CLIMAT_TROPICAL: ClimatRetourExperience = {
+  code: ClimatActuel.Tropical,
+  label: "Tropical",
+};
+
 const CLIMATS_RETOUR_EXPERIENCE = [
   CLIMAT_MEDITERRANEEN,
   CLIMAT_OCEANIQUE,
@@ -38,6 +43,7 @@ const CLIMATS_RETOUR_EXPERIENCE = [
   CLIMAT_SEMI_CONTINENTAL,
   CLIMAT_EQUATORIAL,
   CLIMAT_TEMPERE,
+  CLIMAT_TROPICAL,
 ];
 
 export const getClimatLabelFromCode = (climatCode?: string | undefined) =>
