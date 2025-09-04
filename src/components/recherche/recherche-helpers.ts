@@ -11,3 +11,4 @@ export const SEARCH_KEYS_REX = ["attributes.titre", "attributes.climat_actuel", 
 export const SEARCH_KEYS_FICHE_SOLUTION = ["attributes.titre", "attributes.description_courte", "type_solution"];
 export const SEARCH_KEYS_FICHE_DIAGNOSTIC = ["attributes.titre", "attributes.nom_scientifique"];
 export const SEARCH_KEYS_REX_DIAGNOSTIC = ["attributes.titre", "attributes.lieu"];
+export const SEARCH_KEYS_WEBINAIRES = ["attributes.titre", "attributes.description"];

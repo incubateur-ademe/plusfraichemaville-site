@@ -5,14 +5,33 @@ import { signIn, useSession } from "next-auth/react";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 export const AuthButtons = () => {
   const { status } = useSession();
 
   const handleSignIn = () => signIn("agentconnect", { callbackUrl: getFullUrl(PFMV_ROUTES.ESPACE_PROJET) });
+  const displaySearch = process.env.NEXT_PUBLIC_FEATURE_SEARCH === "true" || false;
+  console.log("usePathname", usePathname());
+  const isSearchPage = usePathname().startsWith(PFMV_ROUTES.RECHERCHE_GLOBALE(""));
 
   return (
     <div className="hidden items-center gap-4 lg:flex">
+      {displaySearch && (
+        <Button
+          title="Rechercher"
+          className={clsx("rounded-3xl", isSearchPage && "!bg-dsfr-background-action-low-blue-france")}
+          iconId="fr-icon-search-line"
+          priority="tertiary"
+          iconPosition="left"
+          linkProps={{
+            href: PFMV_ROUTES.RECHERCHE_GLOBALE(),
+          }}
+        >
+          Rechercher
+        </Button>
+      )}
       <Conditional>
         <Case condition={status === "authenticated"}>
           <AuthButtonEspaceProjet /> <AuthButtonUser />

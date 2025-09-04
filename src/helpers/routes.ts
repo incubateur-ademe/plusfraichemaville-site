@@ -36,6 +36,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET: "/espace-projet",
   MON_PROFIL: "/info-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
+  RECHERCHE_GLOBALE: (query?: string) => `/recherche${query ? `?q=${query}` : ""}`,
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
   ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire/carte",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord?tab=tableau-de-suivi",

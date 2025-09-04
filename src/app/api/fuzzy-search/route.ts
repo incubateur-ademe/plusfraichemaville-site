@@ -10,8 +10,10 @@ import {
   SEARCH_KEYS_FICHE_SOLUTION,
   SEARCH_KEYS_REX,
   SEARCH_KEYS_REX_DIAGNOSTIC,
+  SEARCH_KEYS_WEBINAIRES,
 } from "@/src/components/recherche/recherche-helpers";
 import { SearchResult } from "@/src/components/recherche/recherche-types";
+import { getAllWebinaires } from "@/src/lib/strapi/queries/webinaires-queries";
 
 export async function GET(request: NextRequest) {
   const searchText = request.nextUrl.searchParams.get("q");
@@ -23,6 +25,7 @@ export async function GET(request: NextRequest) {
   const retoursExperienceDiagnostic = await getRetoursExperiencesDiag();
   const fichesSolution = await getAllFichesSolutions();
   const fichesDiagnostic = await getAllFichesDiagnostic();
+  const webinaires = await getAllWebinaires();
 
   const fuseOptions = {
     includeScore: true,
@@ -42,16 +45,19 @@ export async function GET(request: NextRequest) {
   const fuseRex = new Fuse(retoursExperience, { ...fuseOptions, keys: SEARCH_KEYS_REX });
   const fuseFichesDiagnostic = new Fuse(fichesDiagnostic, { ...fuseOptions, keys: SEARCH_KEYS_FICHE_DIAGNOSTIC });
   const fuseRexDiagnostic = new Fuse(retoursExperienceDiagnostic, { ...fuseOptions, keys: SEARCH_KEYS_REX_DIAGNOSTIC });
+  const fuseWebinaires = new Fuse(webinaires, { ...fuseOptions, keys: SEARCH_KEYS_WEBINAIRES });
 
   const ficheSolutionResults = fuseFichesSolution.search(searchText);
   const rexResults = fuseRex.search(searchText);
   const ficheDiagnosticResults = fuseFichesDiagnostic.search(searchText);
   const rexDiagnosticResults = fuseRexDiagnostic.search(searchText);
+  const webinaireResults = fuseWebinaires.search(searchText);
   const results: SearchResult = {
     fichesSolutions: ficheSolutionResults.map((r) => r.item),
     retoursExperience: rexResults.map((r) => r.item),
     ficheDiagnostics: ficheDiagnosticResults.map((r) => r.item),
     retoursExperienceDiagnostic: rexDiagnosticResults.map((r) => r.item),
+    webinaires: webinaireResults.map((r) => r.item),
   };
 
   return NextResponse.json(results);
