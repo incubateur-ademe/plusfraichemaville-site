@@ -37,8 +37,8 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
         </div>
         <LinkWithoutPrefetch
           className={clsx(
-            "flex h-24 items-center justify-center gap-8 after:hidden",
-            "bg-none hover:!bg-dsfr-background-default-grey-hover",
+            "flex h-24 items-center justify-center gap-8 after:!hidden",
+            "!bg-none hover:!bg-dsfr-background-default-grey-hover",
           )}
           target="_blank"
           href="https://www.cerema.fr/fr/actualites/cerema-publie-nouvelles-donnees-surchauffe-urbaine"

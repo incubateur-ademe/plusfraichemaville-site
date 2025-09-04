@@ -42,7 +42,7 @@ export default async function AideDecisionPage(props: AideDecisionPageProps) {
   const currentStep = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
   const historique = await getAideDecisionHistoryBySlug(params.aideDecisionEtapeSlug);
   if (!!currentStep?.attributes.etapes_suivantes?.data && currentStep?.attributes.etapes_suivantes?.data?.length > 0) {
-    const firstStep = historique && historique[1] ? historique[1] : currentStep.attributes;
+    const firstStep = historique && historique[1] ? historique[1] : { ...currentStep.attributes, label: "" };
     const previousStep = currentStep.attributes.etape_precedente;
     const previsousStepSlug = previousStep?.data?.attributes?.slug
       ? `${PFMV_ROUTES.AIDE_DECISION}/${previousStep.data.attributes.slug}`
@@ -62,7 +62,7 @@ export default async function AideDecisionPage(props: AideDecisionPageProps) {
               width={46}
               height={46}
               src={getStrapiImageUrl(firstStep.image, STRAPI_IMAGE_KEY_SIZE.medium)}
-              alt={currentStep.attributes.question_suivante || "Etape suivante"}
+              alt={firstStep.label}
               className="m-auto pt-7"
               unoptimized
             />

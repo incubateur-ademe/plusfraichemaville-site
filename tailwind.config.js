@@ -2,11 +2,6 @@
 module.exports = {
   content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
-    extend: {
-      fontFamily: {
-        xtraBold: ["var(--font-xtra-bold)"],
-      },
-    },
     boxShadow: {
       "pfmv-card-shadow": "0px 4px 20px 0px rgba(0, 0, 0, 0.10)",
       none: "0px 0px rgba(0, 0, 0)",
@@ -29,6 +24,7 @@ module.exports = {
       "pfmv-climadiag-red": "var(--border-default-red-marianne)",
       "dsfr-background-alt-brown-cafe-creme": "var(--background-alt-brown-cafe-creme)",
       "dsfr-background-contrast-blue-france": "var(--background-contrast-blue-france)",
+      "dsfr-background-contrast-info": "var(--background-contrast-info)",
       "dsfr-background-contrast-blue-france-hover": "var(--background-contrast-blue-france-hover)",
       "dsfr-background-contrast-blue-france-active": "var(--background-contrast-blue-france-active)",
       "dsfr-background-contrast-grey-hover": "var(--background-contrast-grey-hover)",

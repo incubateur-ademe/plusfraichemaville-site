@@ -34,26 +34,24 @@ export default function BannerProjet({ className }: { className?: string }) {
                 />
               </div>
               <div className="flex flex-col justify-between py-1">
-                <div className="mb-1 w-fit">
-                  <Link
-                    prefetch={false}
-                    href={{
-                      pathname: PFMV_ROUTES.ESPACE_PROJET_LISTE,
-                      hash: currentProjet.collectivite.code_insee || currentProjet.collectivite.nom,
-                    }}
+                <Link
+                  prefetch={false}
+                  className="mb-1 w-fit rounded !bg-none"
+                  href={{
+                    pathname: PFMV_ROUTES.ESPACE_PROJET,
+                    hash: currentProjet.collectivite.code_insee || currentProjet.collectivite.nom,
+                  }}
+                >
+                  <div
+                    className={clsx(
+                      "rounded bg-dsfr-background-action-low-blue-france text-base hover:underline",
+                      "flex h-7 items-center pl-2 pr-3",
+                    )}
                   >
-                    <div
-                      className={clsx(
-                        "mr-1 rounded-[4px] bg-dsfr-background-action-low-blue-france text-base hover:underline",
-                        "h-[30px] pl-2 pr-4",
-                        "flex items-center",
-                      )}
-                    >
-                      <i className="ri-home-2-fill fr-icon--sm mr-1 before:!size-[14px]" />
-                      {currentProjet.collectivite.nom}
-                    </div>
-                  </Link>
-                </div>
+                    <i className="ri-home-2-fill fr-icon--sm mr-1 before:!size-3.5" />
+                    {currentProjet.collectivite.nom}
+                  </div>
+                </Link>
                 <LinkWithoutPrefetch
                   href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
                   className="mb-1 w-fit !bg-none text-[1.375rem] !leading-6 hover:underline"

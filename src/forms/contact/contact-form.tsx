@@ -17,6 +17,7 @@ import { mapDBCollectiviteToCollectiviteAddress } from "@/src/lib/adresseApi/ban
 import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
+import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 
 export const ContactForm = () => {
   const user = useUserStore((state) => state.userInfos);
@@ -60,15 +61,10 @@ export const ContactForm = () => {
     );
   }, [form, user]);
 
-  const disabled =
-    form.formState.isSubmitting ||
-    !form.watch("nom") ||
-    !form.watch("prenom") ||
-    !form.watch("message") ||
-    !form.watch("objetMessage") ||
-    !form.watch("email");
+  const disabled = form.formState.isSubmitting;
   return (
     <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
+      <MandatoryFieldsMention />
       <InputFormField control={form.control} path="prenom" label="Votre prénom" asterisk={true} />
       <InputFormField control={form.control} path="nom" label="Votre nom" asterisk={true} />
       <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />
@@ -93,7 +89,7 @@ export const ContactForm = () => {
       <Checkbox
         options={[
           {
-            label: "Je souhaite m'abonner à la newsletter",
+            label: "Je souhaite m'abonner à la lettre d’information",
             nativeInputProps: {
               ...form.register("subscribeToNewsletter"),
             },

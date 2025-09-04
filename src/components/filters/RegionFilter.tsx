@@ -20,7 +20,13 @@ export default function RegionFilter({ className }: { className?: string }) {
           Toutes régions
         </button>
         {ALL_REGIONS.map((region) => (
-          <button key={region.code} onClick={() => changeFilter(region.code)} className={linkStyle(region.code)}>
+          <button
+            role="checkbox"
+            aria-checked={isFilterCodeSelected(region.code)}
+            key={region.code}
+            onClick={() => changeFilter(region.code)}
+            className={linkStyle(region.code)}
+          >
             {region.label}
           </button>
         ))}

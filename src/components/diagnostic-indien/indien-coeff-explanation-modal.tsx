@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { IndienType } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-list";
 import clsx from "clsx";
@@ -13,7 +12,7 @@ export default function IndienCoeffExplanationModal({ coefficient }: { coefficie
 
   return (
     <>
-      <i
+      <button
         className="ri-information-2-line float-right cursor-pointer text-dsfr-text-mention-grey"
         onClick={() => modal.open()}
       />

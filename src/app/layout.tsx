@@ -1,4 +1,3 @@
-import "./globals.css";
 import { ReactElement } from "react";
 import AppHeader from "@/src/components/layout/AppHeader";
 import { Metadata } from "next";
@@ -10,7 +9,9 @@ import { headers } from "next/headers";
 import { defaultMetadataDescription, defaultMetadataImage } from "@/src/helpers/metadata/helpers";
 import { ConsentBannerAndConsentManagement } from "@/src/components/cookie/consentManagement";
 import { DsfrHead, getHtmlAttributes } from "@/src/app/server-only-index";
+import "./globals.css";
 import MatomoScript from "@/src/components/matomo/matomo-script";
+import { CommonSkipLinks } from "@/src/components/common/common-skip-links";
 
 export const metadata: Metadata = {
   title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
@@ -54,9 +55,10 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <ConsentBannerAndConsentManagement />
           <ProjetStoreServer />
           <UserStoreServer />
+          <CommonSkipLinks />
           <AppHeader />
           <Toaster position="bottom-left" />
-          <main>{children}</main>
+          <main id="contenu">{children}</main>
         </MainLayoutProviders>
       </body>
     </html>

@@ -1,4 +1,3 @@
-import React from "react";
 import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 import {
   INDIEN_QUESTION_GROUPE_BASSIN,

@@ -21,7 +21,7 @@ import orderBy from "lodash/orderBy";
 import uniqBy from "lodash/uniqBy";
 import { RetourExperienceDiagCard } from "../retour-experience-diag/retour-experience-diag-card";
 import { FicheDiagnosticProjetListeAddButton } from "./fiche-diagnostic-projet-liste-add-button";
-import { SplideController } from "../common/splide-controllers";
+import { SplideController, SplideFrTranslation } from "../common/splide-controllers";
 
 export const FichesDiagnosticsProjetSelected = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -70,7 +70,14 @@ export const FichesDiagnosticsProjetSelected = () => {
           </h2>
           <Splide
             hasTrack={false}
-            options={{ gap: "1rem", autoWidth: true, focus: 0, omitEnd: true }}
+            options={{
+              gap: "1rem",
+              autoWidth: true,
+              focus: 0,
+              omitEnd: true,
+              pagination: false,
+              i18n: SplideFrTranslation,
+            }}
             className="mb-12"
           >
             <div className="px-7">
@@ -85,16 +92,8 @@ export const FichesDiagnosticsProjetSelected = () => {
                 )}
               </SplideTrack>
             </div>
-            <SplideController
-              arrow="left"
-              size={{ width: "w-14", height: "h-14" }}
-              position={{ top: "top-[16rem]", left: "!left-0" }}
-            />
-            <SplideController
-              arrow="right"
-              size={{ width: "w-14", height: "h-14" }}
-              position={{ top: "top-[16rem]", right: "!right-0" }}
-            />
+            <SplideController arrow="left" className="!left-0 top-[16rem] size-14" />
+            <SplideController arrow="right" className="!right-0 top-[16rem] size-14" />
           </Splide>
         </>
       )}

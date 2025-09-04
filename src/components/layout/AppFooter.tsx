@@ -25,24 +25,10 @@ export default function AppFooter() {
                 src={"/images/logo-ademe.svg"}
                 alt={"ADEME - Plus fraîche ma ville"}
               />
-              <Image
-                className="fr-footer__logo mt-2 max-w-[8rem] object-contain"
-                height={290}
-                width={548}
-                src={"/images/logo-amf.webp"}
-                alt={"Association des maires de France (AMF)"}
-              />
-              <Image
-                className="fr-footer__logo mt-7 max-w-[8rem] object-contain"
-                height={259}
-                width={500}
-                src={"/images/logo-anru.webp"}
-                alt={"Agence nationale de l'urbanisme (ANRU)"}
-              />
             </a>
           </div>
           <div className="fr-footer__content">
-            <p className="fr-footer__content-desc">
+            <p className="fr-footer__content-desc !mb-0">
               {"Plus fraîche ma ville est une startup d'État portée par l’Agence de la Transition " +
                 "Écologique (ADEME), en partenariat avec l'association des maires de France (AMF) et l'agence" +
                 " nationale pour la rénovation urbaine (ANRU)."}
@@ -67,33 +53,91 @@ export default function AppFooter() {
               </li>
               <li className="fr-footer__content-item">
                 <a
-                  className="fr-footer__content-link"
+                  title="service-public.fr - nouvelle fenêtre"
+                  href="https://service-public.fr"
                   target="_blank"
                   rel="noopener external"
-                  title="Beta Gouv - nouvelle fenêtre"
-                  href="https://beta.gouv.fr"
+                  className="fr-footer__content-link"
                 >
-                  beta.gouv.fr
+                  service-public.fr
                 </a>
               </li>
+              <li className="fr-footer__content-item">
+                <a
+                  title="legifrance.gouv.fr - nouvelle fenêtre"
+                  href="https://legifrance.gouv.fr"
+                  target="_blank"
+                  rel="noopener external"
+                  className="fr-footer__content-link"
+                >
+                  legifrance.gouv.fr
+                </a>
+              </li>
+              <li className="fr-footer__content-item">
+                <a
+                  title="data.gouv.fr - nouvelle fenêtre"
+                  href="https://data.gouv.fr"
+                  target="_blank"
+                  rel="noopener external"
+                  className="fr-footer__content-link"
+                >
+                  data.gouv.fr
+                </a>
+              </li>{" "}
             </ul>
+          </div>
+        </div>
+        <div className="fr-footer__partners">
+          <h2 className="fr-footer__partners-title !mb-2">Nos partenaires</h2>
+          <div className="fr-footer__partners-logos">
+            <div className="fr-footer__partners-sub">
+              <ul>
+                <li>
+                  <a className="fr-footer__partners-link" href="https://www.amf.asso.fr/" target="_blank">
+                    <Image
+                      className="fr-footer__logo mt-2 max-w-[8rem] object-contain"
+                      height={290}
+                      width={548}
+                      src={"/images/logo-amf.webp"}
+                      alt={"Association des maires de France (AMF)"}
+                    />
+                  </a>
+                </li>
+                <li>
+                  <a className="fr-footer__partners-link" href="https://anru.fr" target="_blank">
+                    <Image
+                      className="fr-footer__logo mt-7 max-w-[8rem] object-contain"
+                      height={259}
+                      width={500}
+                      src={"/images/logo-anru.webp"}
+                      alt={"Agence nationale de l'urbanisme (ANRU)"}
+                    />
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         <div className="fr-footer__bottom">
           <ul className="fr-footer__bottom-list">
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/accessibilite">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.ACCESSIBILITE}>
                 Accessibilité : non conforme
               </a>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/mentions-legales">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.MENTIONS_LEGALES}>
                 Mentions légales
               </a>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/politique-de-confidentialite">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.POLITIQUE_CONFIDENTIALITE}>
                 Politique de confidentialité
+              </a>
+            </li>
+            <li className="fr-footer__bottom-item">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.PLAN_DU_SITE}>
+                Plan du site
               </a>
             </li>
             <li className="fr-footer__bottom-item">
@@ -102,13 +146,13 @@ export default function AppFooter() {
               </button>
             </li>
             <li className="fr-footer__bottom-item">
-              <a className="fr-footer__bottom-link" href="/stats" target="_self">
+              <a className="fr-footer__bottom-link" href={PFMV_ROUTES.STATISTIQUES} target="_self">
                 Statistiques
               </a>
             </li>
             <li className="fr-footer__bottom-item">
               <a className="fr-footer__bottom-link" href={PFMV_ROUTES.NEWSLETTER} target="_self">
-                Newsletter
+                Lettre d’information
               </a>
             </li>
             <li className="fr-footer__bottom-item">

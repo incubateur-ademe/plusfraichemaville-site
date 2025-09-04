@@ -47,12 +47,6 @@ export const UPDATE_MATURITE: MATOMO_EVENT = {
   name: "Changment de maturité via l'icone",
 };
 
-export const OPEN_ZEPHYR: MATOMO_EVENT = {
-  category: MATOMO_CATEGORIES.SITE_PUBLIC,
-  action: MATOMO_ACTIONS.OPEN_AGENT_BUTTON,
-  name: "Ouverture de l'Agent à partir du bouton",
-};
-
 export const COPY_EMAIL: MATOMO_EVENT = {
   category: MATOMO_CATEGORIES.ANNUAIRE,
   action: MATOMO_ACTIONS.ANNUAIRE_COPY_EMAIL,

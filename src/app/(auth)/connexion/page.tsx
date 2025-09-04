@@ -53,7 +53,7 @@ export default async function Connexion(props: { searchParams: Promise<{ callbac
   const searchParams = await props.searchParams;
   const session = await auth();
   if (session) {
-    redirect(PFMV_ROUTES.ESPACE_PROJET_LISTE);
+    redirect(PFMV_ROUTES.ESPACE_PROJET);
   }
 
   return (

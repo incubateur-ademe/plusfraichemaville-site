@@ -14,6 +14,7 @@ import { subscribeNewsletterAction } from "@/src/actions/newsletter/subscribe-ne
 import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { mapDBCollectiviteToCollectiviteAddress } from "@/src/lib/adresseApi/banApiHelper";
+import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 
 export const NewsletterForm = ({ rerouteAfterSuccess = false }: { rerouteAfterSuccess?: boolean }) => {
   const user = useUserStore((state) => state.userInfos);
@@ -52,10 +53,10 @@ export const NewsletterForm = ({ rerouteAfterSuccess = false }: { rerouteAfterSu
     }
   }, [form, user?.email, userCollectivite]);
 
-  const disabled =
-    form.formState.isSubmitting || !form.watch("email") || (isCollectivite && !form.watch("collectivite"));
+  const disabled = form.formState.isSubmitting;
   return (
     <form id="newsletter-form" onSubmit={form.handleSubmit(onSubmit)} className="w-full">
+      <MandatoryFieldsMention />
       <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />
 
       <ToggleSwitch

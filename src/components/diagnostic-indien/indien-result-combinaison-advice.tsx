@@ -1,5 +1,4 @@
 import Image from "next/image";
-import React from "react";
 import { TypeFicheSolution } from "@/src/helpers/type-fiche-solution";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";

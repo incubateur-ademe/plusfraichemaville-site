@@ -67,13 +67,3 @@ export const sumbissionDateSortApi = (a: AidesTerritoiresAide, b: AidesTerritoir
 
 export const sumbissionDateSortBase = (a: EstimationAide, b: EstimationAide) =>
   dateSort(a.aide.submission_deadline, b.aide.submission_deadline);
-
-export const getPerimeterScaleLabel = (perimeterScale: string | null) => {
-  switch (perimeterScale) {
-    case "Pays":
-      return "France";
-    case "Continent":
-      return "Europe";
-  }
-  return perimeterScale;
-};

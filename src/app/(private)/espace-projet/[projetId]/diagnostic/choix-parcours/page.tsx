@@ -1,6 +1,5 @@
 import { FicheDiagnosticChoixParcours } from "@/src/components/fiches-diagnostic/fiche-diagnostic-choix-parcours";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import React from "react";
 
 import { BREADCRUMB_CHOIX_PARCOURS_DIAGNOSTIC } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 

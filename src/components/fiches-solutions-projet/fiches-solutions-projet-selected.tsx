@@ -29,7 +29,7 @@ export const FichesSolutionsProjetsSelected = ({
           <FichesSolutionsProjetEmpty />
         ) : (
           selectedFichesSolutionsIds?.map((selectedFichesSolution, index) => (
-            <FicheSolutionCardWithFetcher id={selectedFichesSolution} complete projectName="" key={index} />
+            <FicheSolutionCardWithFetcher id={selectedFichesSolution} complete key={index} />
           ))
         )}
         {canEditProjet && (

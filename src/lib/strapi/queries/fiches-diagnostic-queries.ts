@@ -97,16 +97,6 @@ export async function getAllFichesDiagnostic(): Promise<FicheDiagnostic[]> {
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getAllCompleteFichesDiagnostic(): Promise<FicheDiagnostic[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
-  const apiResponse = (
-    await strapiGraphQLCall(await GET_FICHE_DIAGNOSTIC_COMPLETE_DATA(filter), {
-      tag: "get-all-complete-fiches-diagnostic",
-    })
-  )?.ficheDiagnostics as APIResponseCollection<FicheDiagnostic>;
-  return safeReturnStrapiEntities(apiResponse);
-}
-
 export async function getFicheDiagnosticBySlug(slug: string): Promise<FicheDiagnostic | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (

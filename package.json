@@ -11,7 +11,7 @@
     "dev:db:generateClient": "prisma generate",
     "dev:localAsProd": "rm -rf ./.next && next build && next start",
     "db:migrate": "prisma migrate deploy",
-    "dev:start": "next dev",
+    "dev:start": "next dev --turbopack",
     "clean": "rm -rf ./.next && rm -rf ./node_modules",
     "build": "next build",
     "start": "next start",
@@ -40,7 +40,7 @@
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
     "maplibre-gl": "^5.6.1",
-    "next": "15.3.0",
+    "next": "15.4.5",
     "next-auth": "^4.24.11",
     "react": "19.0.0",
     "react-datepicker": "^8.3.0",
@@ -48,7 +48,7 @@
     "react-hook-form": "^7.54.2",
     "react-hot-toast": "^2.5.1",
     "react-leaflet": "^5.0.0",
-    "react-leaflet-cluster": "^2.1.0",
+    "react-leaflet-cluster": "^3.1.1",
     "react-map-gl": "^8.0.4",
     "react-markdown": "^9.0.3",
     "react-minimal-pie-chart": "^9.1.0",
@@ -75,7 +75,7 @@
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.20",
     "eslint": "^8.57.1",
-    "eslint-config-next": "15.1.4",
+    "eslint-config-next": "15.4.5",
     "eslint-config-prettier": "^9.1.0",
     "i": "^0.3.7",
     "postcss": "^8.4.49",
@@ -105,7 +105,8 @@
       "core-js",
       "esbuild",
       "prisma",
-      "sharp"
+      "sharp",
+      "unrs-resolver"
     ]
   }
 }

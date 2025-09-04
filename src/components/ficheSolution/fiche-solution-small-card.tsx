@@ -41,7 +41,7 @@ export function FicheSolutionSmallCard({
         {typeSolution && (
           <>
             <div className="mb-2 flex flex-row text-xs text-dsfr-text-mention-grey">
-              {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
+              {typeSolution.coloredIcon("fr-icon--sm mr-2 mb-auto")}
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           </>

@@ -1,14 +1,12 @@
-import { selectSavedOrUnsavedAssets } from "@/src/components/common/generic-save-fiche/assets";
 import { GenericSaveButtonElement } from "@/src/components/common/generic-save-fiche/generic-save-button-element";
 import { notifications } from "@/src/components/common/notifications";
-import { Spinner } from "@/src/components/common/spinner";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 import isEqual from "lodash/isEqual";
 import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
 import { updateRexContactInProjetAction } from "@/src/actions/projets/update-rex-contact-in-projet-action";
 import { useEffect, useState } from "react";
-import { RexContactId, AnnuaireContact } from "@/src/components/annuaire/types";
+import { AnnuaireContact, RexContactId } from "@/src/components/annuaire/types";
 import { updateUserContactInProjetAction } from "@/src/actions/projets/update-user-contact-in-projet-action";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { ANNUAIRE_DELETING_CONTACT, ANNUAIRE_SAVING_CONTACT } from "@/src/helpers/matomo/matomo-tags";
@@ -47,8 +45,6 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Annu
     }
   }, [contact, getProjetById, projetId]);
 
-  const assets = selectSavedOrUnsavedAssets(isSaved, "contact");
-
   const updater = {
     delete: {
       action: () =>
@@ -83,11 +79,14 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Annu
   return (
     <div className={clsx("z-10", className)}>
       {isLoading ? (
-        <div className="z-10 rounded-full  bg-pfmv-navy">
-          <Spinner />
-        </div>
+        <div className={clsx("h-10 w-40 animate-pulse rounded-3xl bg-dsfr-contrast-grey", className)} />
       ) : (
-        <GenericSaveButtonElement update={update} assets={assets} id={1} />
+        <GenericSaveButtonElement
+          isSaved={isSaved}
+          update={update}
+          id={1}
+          labels={{ saved: "Sauvegardé", notSaved: "Sauvegarder" }}
+        />
       )}
     </div>
   );

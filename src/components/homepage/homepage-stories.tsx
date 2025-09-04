@@ -7,6 +7,7 @@ import { homepageData } from "./homepage-data";
 import { HomepageStoriesControllers } from "./homepage-stories-controllers";
 import { HomepageStory } from "./homepage-story";
 import clsx from "clsx";
+import { SplideFrTranslation } from "@/src/components/common/splide-controllers";
 
 export const HomepageStories = () => {
   const { stories } = homepageData;
@@ -19,9 +20,16 @@ export const HomepageStories = () => {
         <Splide
           id="homepage-stories-slider"
           hasTrack={false}
-          options={{ rewind: true, type: "loop", autoWidth: true, start: 0, pagination: false }}
+          options={{
+            rewind: true,
+            type: "loop",
+            autoWidth: true,
+            start: 0,
+            pagination: false,
+            i18n: SplideFrTranslation,
+          }}
         >
-          <SplideTrack className="overflow-auto !pl-3 lg:!overflow-hidden lg:!pl-6">
+          <SplideTrack className="overflow-auto !pl-3 !pt-3 lg:!overflow-hidden lg:!pl-6">
             {stories.cards.map((story, index) => (
               <SplideSlide className="!mr-3 md:!mr-6" key={index}>
                 <HomepageStory story={story} key={index} />

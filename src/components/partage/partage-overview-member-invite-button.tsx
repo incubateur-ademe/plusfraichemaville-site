@@ -14,6 +14,7 @@ import { RoleProjet } from "@/src/generated/prisma/client";
 import SelectFormField from "../common/SelectFormField";
 import { ROLE_EDITEUR, ROLE_LECTEUR } from "@/src/helpers/user-role";
 import capitalize from "lodash/capitalize";
+import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 
 const modal = createModal({
   id: "partage-overview-invite-member",
@@ -49,24 +50,31 @@ export const PartageOverviewMemberInviteButton = () => {
       <Button priority="primary" onClick={modal.open} className="rounded-3xl">
         Inviter un membre
       </Button>
-      <modal.Component title="" size="small" className="current-user-status-modale min-h-[296px]">
-        <h2 className="mb-8 text-[22px] leading-7 text-pfmv-navy">Inviter un membre</h2>
+      <modal.Component title="Inviter un membre" size="small" className="rounded-modal min-h-[296px]">
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <InputFormField control={form.control} path="email" placeholder="Adresse email de la personne à inviter" />
+          <MandatoryFieldsMention />
+          <InputFormField control={form.control} path="email" label="Adresse email de la personne à inviter" asterisk />
           <SelectFormField
             control={form.control}
             path="role"
-            label=""
+            label="Rôle du nouveau membre"
+            asterisk
             options={[
               { name: capitalize(ROLE_LECTEUR.label), value: ROLE_LECTEUR.code },
               { name: capitalize(ROLE_EDITEUR.label), value: ROLE_EDITEUR.code },
             ]}
           />
           <div className="flex justify-between">
-            <Button priority="tertiary" onClick={modal.close} nativeButtonProps={modal.buttonProps} type="button">
+            <Button
+              priority="tertiary"
+              onClick={modal.close}
+              nativeButtonProps={modal.buttonProps}
+              type="button"
+              className="rounded-3xl"
+            >
               Annuler
             </Button>
-            <Button priority="primary" type="submit">
+            <Button priority="primary" type="submit" className="rounded-3xl">
               Inviter
             </Button>
           </div>

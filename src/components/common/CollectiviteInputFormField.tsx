@@ -80,6 +80,7 @@ const CollectiviteInputFormField = <T extends FieldValues>({
           >
             <div className="flex items-center">
               <ComboboxInput
+                id={id}
                 aria-describedby={ariaDescribedBy}
                 className=" fr-input w-full "
                 displayValue={(address: AddressCollectivite) =>

@@ -6,7 +6,6 @@ import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
 import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { Hidden } from "../common/hidden";
 
 export type PartageOverviewDeleteOrQuitModaleState = {
   member?: UserProjetWithUser;
@@ -33,28 +32,27 @@ export const PartageOverviewDeleteOrQuitModale = () => {
     }
   }, [currentDeleteOrQuitModal]);
 
-  const isModalOpen = useIsModalOpen(modal, {
+  useIsModalOpen(modal, {
     onConceal: () => setCurrentDeleteOrQuitModal(null),
   });
 
   return (
     <>
       <modal.Component
-        title={<Hidden>{currentDeleteOrQuitModal?.options.title ?? "Fiche détail de l'aide"}</Hidden>}
+        title={currentDeleteOrQuitModal?.options.title}
         size="large"
-        className="current-user-status-modale min-h-[296px]"
+        className="rounded-modal min-h-[296px]"
       >
         <div>
-          {isModalOpen && <h2 className="mb-4 text-2xl">{currentDeleteOrQuitModal?.options.title}</h2>}
           <p className="mb-4">{currentDeleteOrQuitModal?.options.description}</p>
           <div className="ml-auto w-fit">
-            <Button priority="tertiary" className="mr-4" onClick={modal.close}>
+            <Button priority="tertiary" className="mr-4 rounded-3xl" onClick={modal.close}>
               Annuler
             </Button>
             {currentDeleteOrQuitModal?.options.confirmLabel && (
               <Button
                 priority="tertiary"
-                className="!text-pfmv-climadiag-red"
+                className="rounded-3xl !text-pfmv-climadiag-red"
                 onClick={() => {
                   currentDeleteOrQuitModal?.options.action();
                   modal.close();

@@ -1,12 +1,10 @@
 import { FicheDiagnosticGuide } from "@/src/components/fiches-diagnostic/fiche-diagnostic-guide";
 import { ProtectedEspaceProjetUrl } from "@/src/components/common/protected-espace-projet-url";
-// eslint-disable-next-line max-len
 import { FicheDiagnosticChoixWithFilters } from "@/src/components/fiches-diagnostic/fiche-diagnostic-choix-with-filters";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import React from "react";
 
 // eslint-disable-next-line max-len
 import { BREADCRUMB_DIAG_PRESTATION_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";

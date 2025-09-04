@@ -3,6 +3,7 @@ import ObjectifsDeveloppementDurable from "@/src/components/common/ObjectifsDeve
 import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRetourExperience";
 import { getTemporaliteLabelFromCode } from "@/src/helpers/retourExperience/temporaliteRetourExperience";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
+import { clsx } from "clsx";
 
 export default function RetourExperienceExtraInfoPanel({
   retourExperience,
@@ -12,13 +13,9 @@ export default function RetourExperienceExtraInfoPanel({
   className?: string;
 }) {
   return (
-    <div
-      // eslint-disable-next-line max-len
-      className={`ml-6 mt-6 flex flex-wrap text-sm text-dsfr-text-label-blue-france md:block md:w-56 lg:ml-0 ${className}`}
-    >
+    <div className={clsx("mb-4 ml-6 mt-6 flex flex-wrap text-sm md:block md:w-56 lg:ml-0", className)}>
       <ItemRetourExperienceExtraInfo
         title="Solutions"
-        // @ts-ignore
         content={retourExperience.attributes.types_solutions?.join(" · ")}
       />
       <ItemRetourExperienceExtraInfo title="Échelle du projet" content={retourExperience.attributes.echelle} />

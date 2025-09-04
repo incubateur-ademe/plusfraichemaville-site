@@ -1,12 +1,12 @@
 "use client";
 
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import FicheSolutionCardWithUserInfo, { FicheSolutionCardWithUserInfoProps } from "./FicheSolutionCardWithUserInfo";
+import FicheSolutionCard, { FicheSolutionCardProps } from "./fiche-solution-card";
 import { makeFicheSolutionCompleteUrlApi, makeFicheSolutionUrlApi } from "./helpers";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
-interface FicheSolutionCardWithFetcherProps extends Omit<FicheSolutionCardWithUserInfoProps, "ficheSolution"> {
+interface FicheSolutionCardWithFetcherProps extends Omit<FicheSolutionCardProps, "ficheSolution"> {
   complete: boolean;
   id: string | number;
 }
@@ -18,6 +18,6 @@ export const FicheSolutionCardWithFetcher = ({ complete, id, ...props }: FicheSo
   return !data && isLoading ? (
     <FicheCardSkeleton />
   ) : (
-    data && data[0] && <FicheSolutionCardWithUserInfo ficheSolution={data[0]} {...props} />
+    data && data[0] && <FicheSolutionCard ficheSolution={data[0]} {...props} />
   );
 };

@@ -6,12 +6,12 @@ import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
 import { useSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { useUserStore } from "@/src/stores/user/provider";
-import { ListeProjetsCard } from "./card";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL } from "@/src/helpers/routes";
 import { upsert } from "@/src/helpers/listUtils";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
+import { ProjetCard } from "@/src/components/liste-projets/projet-card";
 
 const modal = createModal({
   id: "join-project-modal",
@@ -53,16 +53,19 @@ export const AvailableProjetsForCollectiviteModal = () => {
             </div>
           </Case>
         </Conditional>
-        {availableProjects?.map((projet) => (
-          <ListeProjetsCard
-            projet={projet}
-            isBrowsing
-            key={projet.id}
-            updateProjet={async (updatedProjet) => {
-              await mutate(upsert(availableProjects, updatedProjet));
-            }}
-          />
-        ))}
+        <ul>
+          {availableProjects?.map((projet) => (
+            <li key={projet.id} className="mb-5">
+              <ProjetCard
+                projet={projet}
+                isBrowsing
+                updateProjet={async (updatedProjet) => {
+                  await mutate(upsert(availableProjects, updatedProjet));
+                }}
+              />
+            </li>
+          ))}
+        </ul>
         {isLoading && <FicheCardSkeleton horizontal />}
       </modal.Component>
     </>

@@ -18,17 +18,14 @@ export const RetourExperienceDiagCardSiteVitrine = ({ rex, className }: RetourEx
   const { titre, image_principale, lieu, slug } = rex.attributes;
 
   return (
-    <LinkWithoutPrefetch
-      href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(slug)}
-      className={clsx(className, "pfmv-card flex w-80 flex-col bg-white")}
-    >
+    <div className={clsx(className, "pfmv-card fr-enlarge-link flex w-80 flex-col bg-white")}>
       <div className="relative mb-5 h-[12rem] ">
         <Image
           width={462}
           height={267}
           className="h-full w-full rounded-t-2xl object-cover"
           src={getStrapiImageUrl(image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={titre || "image titre"}
+          alt=""
           unoptimized
         />
         <div className="absolute bottom-2 left-4 flex  gap-2 text-white">
@@ -40,7 +37,11 @@ export const RetourExperienceDiagCardSiteVitrine = ({ rex, className }: RetourEx
       </div>
 
       <div className="px-6">
-        <h2 className="mb-5 text-[1.375rem] leading-7">{titre}</h2>
+        <h2 className="mb-5 text-[1.375rem] leading-7">
+          <LinkWithoutPrefetch href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(slug)} className="bg-none">
+            {titre}
+          </LinkWithoutPrefetch>
+        </h2>
         {rex.attributes.lien_rex_diagnostics && (
           <div className="mb-7 flex flex-wrap items-center gap-2">
             {rex.attributes.lien_rex_diagnostics.data.map(
@@ -55,6 +56,6 @@ export const RetourExperienceDiagCardSiteVitrine = ({ rex, className }: RetourEx
           </div>
         )}
       </div>
-    </LinkWithoutPrefetch>
+    </div>
   );
 };

@@ -1,24 +1,33 @@
 "use client";
 
-import Image from "next/image";
-import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
-
-import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { useParams } from "next/navigation";
+import { GenericSaveFiche } from "../common/generic-save-fiche";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { TypeFiche } from "@/src/helpers/common";
+import { useParams } from "next/navigation";
+import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import Image from "next/image";
+import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import FicheSolutionInfoComparatif from "@/src/components/ficheSolution/FicheSolutionInfoComparatif";
+import clsx from "clsx";
 
-export default function FicheSolutionFullCard({
-  ficheAttributes,
-  extraUrlParams,
-}: {
-  ficheAttributes: FicheSolution["attributes"];
+export type FicheSolutionCardProps = {
+  ficheSolution: FicheSolution;
   extraUrlParams?: { param: string; value: string }[];
-}) {
+  className?: string;
+  withoutModal?: boolean;
+};
+
+export default function FicheSolutionCard({
+  ficheSolution,
+  extraUrlParams,
+  className = "",
+  withoutModal,
+}: FicheSolutionCardProps) {
   const { projetId } = useParams();
   const isEspaceProjet = projetId;
+  const ficheAttributes = ficheSolution.attributes;
 
   const typeSolution = getTypeSolutionFromCode(ficheAttributes.type_solution);
   let url = isEspaceProjet
@@ -28,7 +37,7 @@ export default function FicheSolutionFullCard({
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
 
   return (
-    <LinkWithoutPrefetch className="pfmv-card flex w-72 flex-col md:ml-0" href={url}>
+    <div className={clsx("pfmv-card fr-enlarge-link flex w-72 flex-col md:ml-0", className)}>
       <div className="flex h-52 w-full">
         <Image
           width={450}
@@ -43,12 +52,18 @@ export default function FicheSolutionFullCard({
         {typeSolution && (
           <>
             <div className="mb-2 flex flex-row text-xs text-dsfr-text-mention-grey">
-              {typeSolution.icon("fr-icon--sm mr-2 mb-auto")}
+              {typeSolution.coloredIcon("fr-icon--sm mr-2 mb-auto")}
               <span className="mt-[1px]">{typeSolution.label}</span>
             </div>
           </>
         )}
-        <h2 className={"text-blue-hover m-0 text-xl font-bold text-dsfr-text-title-grey"}>{ficheAttributes.titre}</h2>
+
+        <h2 className={"text-blue-hover m-0 text-xl font-bold text-dsfr-text-title-grey"}>
+          <LinkWithoutPrefetch className="bg-none" href={url}>
+            {ficheAttributes.titre}
+          </LinkWithoutPrefetch>
+        </h2>
+
         <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheAttributes.description_courte}</div>
         <div className={"mt-auto"}>
           <div>
@@ -57,12 +72,15 @@ export default function FicheSolutionFullCard({
               ficheAttributes={ficheAttributes}
               className={"text-xs"}
             />
-            <div className="mt-4 text-center">
-              <div className={"fr-btn fr-btn--tertiary rounded-3xl px-9"}>{"J'explore la solution"}</div>
-            </div>
+            <GenericSaveFiche
+              id={ficheSolution.id}
+              type={TypeFiche.solution}
+              withoutModal={withoutModal}
+              classNameButton="mt-4 mx-auto text-center"
+            />
           </div>
         </div>
       </div>
-    </LinkWithoutPrefetch>
+    </div>
   );
 }

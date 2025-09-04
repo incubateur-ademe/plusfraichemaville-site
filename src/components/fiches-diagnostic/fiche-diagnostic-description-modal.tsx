@@ -21,7 +21,7 @@ import { Separator } from "@/src/components/common/separator";
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
 import { notifications } from "@/src/components/common/notifications";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
-import { SplideController } from "../common/splide-controllers";
+import { SplideController, SplideFrTranslation } from "../common/splide-controllers";
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
@@ -164,7 +164,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                   id="fiche-diagnostic-rex-modal-slider"
                   hasTrack={false}
                   className="max-w-md"
-                  options={{ start: 0, drag: false }}
+                  options={{ start: 0, drag: false, pagination: false, i18n: SplideFrTranslation }}
                 >
                   <div className="px-6">
                     <SplideTrack className="!-m-5 overflow-auto !p-5 lg:!overflow-hidden">
@@ -181,15 +181,17 @@ export const FicheDiagnosticDescriptionModal = () => {
                   </div>
                   <SplideController
                     arrow="left"
-                    size={{ width: "w-10", height: "h-10" }}
-                    position={{ top: "top-[16rem]", left: "!left-0" }}
-                    className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+                    className={clsx(
+                      "!left-0 top-[16rem] size-10 !bg-black/60 ",
+                      rex.length <= 1 ? "pointer-events-none !hidden" : "",
+                    )}
                   />
                   <SplideController
                     arrow="right"
-                    size={{ width: "w-10", height: "h-10" }}
-                    position={{ top: "top-[16rem]", right: "!right-0" }}
-                    className={`!bg-black/60 ${rex.length <= 1 ? "pointer-events-none !hidden" : ""}`}
+                    className={clsx(
+                      "!right-0 top-[16rem] size-10 !bg-black/60 ",
+                      rex.length <= 1 ? "pointer-events-none !hidden" : "",
+                    )}
                   />
                 </Splide>
               )}
