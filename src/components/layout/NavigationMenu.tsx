@@ -202,6 +202,16 @@ export default function NavigationMenu() {
           isActive: pathname?.startsWith(PFMV_ROUTES.CONTACT),
         },
         {
+          linkProps: {
+            href: PFMV_ROUTES.RECHERCHE_GLOBALE(),
+            target: "_self",
+            onClick: cancelCurrentProjet,
+            prefetch: false,
+          },
+          text: "Rechercher",
+          isActive: pathname?.startsWith(PFMV_ROUTES.RECHERCHE_GLOBALE()),
+        },
+        {
           menuLinks:
             status === "authenticated"
               ? [

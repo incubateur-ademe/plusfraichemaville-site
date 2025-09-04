@@ -33,6 +33,7 @@ export const MATOMO_ACTIONS = {
   DIAGNOSTIC_COMPUTE_RESULT: "diagnostic-compute-result",
   SURCHAUFFE_TERRITOIRE_SEARCH: "surchauffe-urbaine-search-territoire",
   FICHE_SOLUTION_CLICK_ONGLET: "fiche-solution-change-onglet",
+  RECHERCHE_GLOBALE: "recherche-globale",
 };
 
 export const WEBINAIRE_SUBSCRIPTION: MATOMO_EVENT = {
@@ -159,4 +160,10 @@ export const FICHE_SOLUTION_CLIC_ONGLET = (onglet: string): MATOMO_EVENT => ({
   category: MATOMO_CATEGORIES.SITE_PUBLIC,
   action: MATOMO_ACTIONS.FICHE_SOLUTION_CLICK_ONGLET,
   name: `Clic sur l'onglet ${onglet}`,
+});
+
+export const RECHERCHE_GLOBALE_SITE = (recherche: string): MATOMO_EVENT => ({
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.RECHERCHE_GLOBALE,
+  name: `${recherche}`,
 });
