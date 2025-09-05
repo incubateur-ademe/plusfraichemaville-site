@@ -13,7 +13,6 @@ export const AuthButtons = () => {
 
   const handleSignIn = () => signIn("agentconnect", { callbackUrl: getFullUrl(PFMV_ROUTES.ESPACE_PROJET) });
   const displaySearch = process.env.NEXT_PUBLIC_FEATURE_SEARCH === "true" || false;
-  console.log("usePathname", usePathname());
   const isSearchPage = usePathname().startsWith(PFMV_ROUTES.RECHERCHE_GLOBALE(""));
 
   return (
