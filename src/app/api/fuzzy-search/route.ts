@@ -5,6 +5,7 @@ import { getRetoursExperiencesDiag } from "@/src/lib/strapi/queries/retour-exper
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import {
+  mapFicheSolutionToSearchableFS,
   mapRexToSearchableRex,
   SEARCH_KEYS_FICHE_DIAGNOSTIC,
   SEARCH_KEYS_FICHE_SOLUTION,
@@ -23,7 +24,7 @@ export async function GET(request: NextRequest) {
   }
   const retoursExperience = (await getRetoursExperiences()).map(mapRexToSearchableRex);
   const retoursExperienceDiagnostic = await getRetoursExperiencesDiag();
-  const fichesSolution = await getAllFichesSolutions();
+  const fichesSolution = (await getAllFichesSolutions()).map(mapFicheSolutionToSearchableFS);
   const fichesDiagnostic = await getAllFichesDiagnostic();
   const webinaires = await getAllWebinaires();
 
