@@ -14,10 +14,8 @@ export const AuthButtonEspaceProjet = () => {
       href={PFMV_ROUTES.ESPACE_PROJET}
       className={clsx(
         "fr-btn fr-btn--tertiary ri-dashboard-fill fr-btn--icon-left relative z-10",
-        "!text-sm !shadow-none",
-        isConnexionPage || isEspaceProjet
-          ? "!bg-dsfr-background-action-low-blue-france"
-          : "border-[1px] border-dsfr-background-disabled-grey",
+        "rounded-3xl  !text-sm",
+        (isConnexionPage || isEspaceProjet) && "!bg-dsfr-background-action-low-blue-france",
       )}
     >
       Mon espace projet

@@ -36,6 +36,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET: "/espace-projet",
   MON_PROFIL: "/info-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
+  RECHERCHE_GLOBALE: (query?: string) => `/recherche${query ? `?q=${query}` : ""}`,
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
   ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire/carte",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord?tab=tableau-de-suivi",
@@ -97,6 +98,7 @@ export const GET_REX_BY_SLUG = (rexSlug: string) => `/api/get-rex-by-slug?rexSlu
 export const POST_REVALIDATE_TAG = (tag?: string) => `/api/revalidate-cache?tag=${tag}`;
 
 export const SEARCH_CLIMADIAG_PUBLIC_INFO = (search?: string) => `/api/search-climadiag-public-info?search=${search}`;
+export const FUZZY_SEARCH = (search?: string) => `/api/fuzzy-search?q=${search}`;
 
 export const GET_FICHE_DIAGNOSTIC_BY_IDS = (ficheDiagnosticIds: number[]) =>
   `/api/get-fiches-diagnostic?ficheDiagnosticIds=${JSON.stringify(ficheDiagnosticIds)}`;

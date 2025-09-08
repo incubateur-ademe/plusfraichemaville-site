@@ -1,10 +1,8 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { TeaserDiagnosticComponent } from "@/src/components/surchauffe-urbaine/teaser-diagnostic-component";
-// eslint-disable-next-line max-len
 import { SurchauffeUrbaineNotionsComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-notions-component";
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_SURCHAUFFE_URBAINE_COMPRENDRE } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
 
 export const metadata: Metadata = computeMetadata("Notions clés de la surchauffe urbaine");

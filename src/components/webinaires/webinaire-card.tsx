@@ -7,8 +7,9 @@ import { Case, Conditional, Default } from "@/src/components/common/conditional-
 import { isWebinaireInFuture } from "@/src/components/webinaires/webinaires-helpers";
 import { WebinaireSubscriptionButton } from "@/src/components/webinaires/webinaire-subscription-button";
 import { Webinaire } from "@/src/lib/strapi/types/api/webinaire";
+import clsx from "clsx";
 
-export const WebinaireCard = ({ webinaire }: { webinaire: Webinaire }) => {
+export const WebinaireCard = ({ webinaire, className }: { webinaire: Webinaire; className?: string }) => {
   const isWebinairePast = !isWebinaireInFuture(webinaire);
   const timeInterval =
     webinaire.attributes.heure_debut && webinaire.attributes.heure_fin
@@ -17,7 +18,10 @@ export const WebinaireCard = ({ webinaire }: { webinaire: Webinaire }) => {
   return (
     <div
       key={webinaire.id}
-      className="flex flex-col items-center gap-2 rounded-xl bg-white px-8 py-4 md:flex-row md:gap-12"
+      className={clsx(
+        "flex flex-col items-center gap-2 rounded-xl bg-white px-8 py-4 md:flex-row md:gap-12",
+        className,
+      )}
     >
       <div className="flex min-w-60 basis-3/12">
         <Image
