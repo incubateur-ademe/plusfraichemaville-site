@@ -35,7 +35,7 @@ export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: 
             <br />
             Outil gratuit, la cartographie LCZ doit être analysée au regard de la connaissance locale du territoire, et
             ne peut se substituer à des données climatiques ou à une analyse fine des usages et de la vulnérabilité face
-            à la chaleur. Pour en savoir plus sur les biais à éviter pour leur analyser, et découvrir des exemples
+            à la chaleur. Pour en savoir plus sur les biais à éviter pour leur analyse, et découvrir des exemples
             d’utilisation de cette données par les collectivités, consultez le guide utilisateur sur le{" "}
             <LinkWithoutPrefetch
               href="https://doc.cerema.fr/Default/doc/SYRACUSE/600739/cartographie-nationale-de-donnees-de-zones-climatiques-locales-guide-utilisateurs"
