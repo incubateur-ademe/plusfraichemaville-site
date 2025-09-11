@@ -5,7 +5,7 @@ import { FicheDiagnosticDescriptionModal } from "@/src/components/fiches-diagnos
 export default function Layout({ children }: { children: ReactElement | null }) {
   return (
     <>
-      <div>{children}</div>
+      {children}
       <FicheDiagnosticDescriptionModal />
     </>
   );

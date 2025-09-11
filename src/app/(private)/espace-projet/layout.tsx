@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: ReactElement | null }) 
   }
   return (
     <>
-      <div>{children}</div>
+      {children}
       <PartageOverviewDeleteOrQuitModale />
       <ViewerModeModal />
       <AvailableProjetsForCollectiviteModal />

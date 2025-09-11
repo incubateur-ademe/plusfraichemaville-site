@@ -12,6 +12,7 @@ import { DsfrHead, getHtmlAttributes } from "@/src/app/server-only-index";
 import "./globals.css";
 import MatomoScript from "@/src/components/matomo/matomo-script";
 import { CommonSkipLinks } from "@/src/components/common/common-skip-links";
+import AppFooter from "@/src/components/layout/AppFooter";
 
 export const metadata: Metadata = {
   title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
@@ -58,7 +59,10 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <CommonSkipLinks />
           <AppHeader />
           <Toaster position="bottom-left" />
-          <main id="contenu">{children}</main>
+          <main id="contenu" className="mb-40">
+            {children}
+          </main>
+          <AppFooter />
         </MainLayoutProviders>
       </body>
     </html>
