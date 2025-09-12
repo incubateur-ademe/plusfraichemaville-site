@@ -31,9 +31,9 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
             <i className="ri-map-pin-line mr-1  " />
             {climadiagInfo.nom} - {climadiagInfo.code_postal}
           </div>
-          <div className="mb-2 text-[1.375rem] font-bold text-pfmv-navy">
+          <h2 className="mb-2 text-[1.375rem] font-bold text-pfmv-navy">
             Consultez la cartographie des zones climatiques locales (LCZ)
-          </div>
+          </h2>
         </div>
         <LinkWithoutPrefetch
           className={clsx(

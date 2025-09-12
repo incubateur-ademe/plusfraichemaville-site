@@ -56,7 +56,7 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
         </div>
       </div>
       <div className="fr-container flex flex-col gap-24 pt-6 lg:flex-row">
-        <div className="w-full lg:w-72">
+        <section className="w-full lg:w-72">
           <RetourExperienceDiagInformations rex={rex} />
           {showContacts && <RetourExperienceDiagContacts contacts={contacts} />}
           <RetourExperienceDiagPdf pdf={rex.attributes.guide_pdf?.data?.attributes?.url} />
@@ -78,8 +78,8 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
               </div>
             </>
           )}
-        </div>
-        <div>
+        </section>
+        <section>
           <h1 className="mb-5 text-[40px] font-bold leading-[48px]">{titre}</h1>
           <CmsRichText label={description} className={"mb-9 mt-10 [&_p]:text-xl [&_p]:leading-8"} />
           {citations &&
@@ -114,7 +114,7 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
               <CmsRichText label={credits} />
             </>
           )}
-        </div>
+        </section>
       </div>
     </div>
   );

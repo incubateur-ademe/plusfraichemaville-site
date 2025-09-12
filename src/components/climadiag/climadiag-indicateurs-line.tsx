@@ -11,6 +11,7 @@ type ClimadiagIndicateursLineProps = {
   type: ClimadiagTypeJour;
   temperature: ClimadiagTemperatureJour;
   year: ClimadiagYear;
+  titleHeadingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   isPDF?: boolean;
   classname?: string;
 };
@@ -20,11 +21,13 @@ export const ClimadiagIndicateursLine = ({
   temperature,
   isPDF,
   year,
+  titleHeadingLevel = "h4",
   classname,
 }: ClimadiagIndicateursLineProps) => {
   const { title, picto, indice, legend: climatLegend } = climadiagIndicateursData.line[type];
   const [legend, setLegend] = useState(false);
   const toggler = () => setLegend(!legend);
+  const TitleHeadingTag = titleHeadingLevel;
 
   return (
     <div
@@ -44,7 +47,11 @@ export const ClimadiagIndicateursLine = ({
             alt="jour très chaud picto"
           />
           <div className={clsx("max-w-[300px] pt-4", !isPDF && "lg:max-w-[420px]")}>
-            <h3 className="mb-0 block text-[22px] font-bold leading-[1.2] text-dsfr-text-label-blue-france">{title}</h3>
+            <TitleHeadingTag
+              className={clsx("mb-0 block text-[22px] font-bold leading-[1.2] text-dsfr-text-label-blue-france")}
+            >
+              {title}
+            </TitleHeadingTag>
             {indice && (
               <span className="block text-[22px] leading-[1.2]">
                 ({">"}

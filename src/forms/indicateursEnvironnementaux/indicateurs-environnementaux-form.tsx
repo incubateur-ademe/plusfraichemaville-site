@@ -144,9 +144,9 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
         </div>
         {ALL_INDIEN_QUESTIONS.map((questionGroup) => (
           <div className="mb-10" key={questionGroup.label}>
-            <div className="mb-2 flex items-center">
+            <div className="mb-4 flex items-center">
               <Image src={questionGroup.image} alt={questionGroup.label} width={50} height={50} className="h-7" />
-              <div className="mt-2 text-xl font-bold">{questionGroup.label}</div>
+              <h2 className="mb-0 text-xl font-bold">{questionGroup.label}</h2>
             </div>
             {questionGroup.questions.map((question) => (
               <div

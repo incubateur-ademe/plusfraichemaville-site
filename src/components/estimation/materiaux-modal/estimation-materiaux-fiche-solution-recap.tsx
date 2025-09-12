@@ -41,7 +41,7 @@ export function EstimationMateriauxFicheSolutionRecap({
     <div className="text-dsfr-text-title-grey">
       <hr className="mb-4 h-[1px] p-0" />
       <div className={"mb-6 flex flex-row items-center justify-between gap-6"}>
-        <div className="text-[1.375rem] font-bold">{ficheSolution.attributes.titre}</div>
+        <h2 className="!mb-0 text-[1.375rem]">{ficheSolution.attributes.titre}</h2>
         <span
           onClick={() => goToFicheSolutionStep(ficheSolution.id)}
           className="fr-icon-edit-box-line cursor-pointer text-dsfr-text-label-blue-france"
@@ -64,7 +64,7 @@ export function EstimationMateriauxFicheSolutionRecap({
                       unoptimized
                     />
                   </div>
-                  <div>{materiau.attributes.titre}</div>
+                  <h3>{materiau.attributes.titre}</h3>
                 </div>
                 <div>
                   <div>

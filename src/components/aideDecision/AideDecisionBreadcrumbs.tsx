@@ -12,7 +12,7 @@ export default function AideDecisionBreadcrumbs({
   className?: string;
 }) {
   return (
-    <div className={`max-w-[14rem] ${className}`}>
+    <nav className={`max-w-[14rem] ${className}`}>
       {historique.map((step, index) => (
         <div className={`${styles.step}`} key={index}>
           <div className={`${styles.vStepper}`}>
@@ -31,6 +31,6 @@ export default function AideDecisionBreadcrumbs({
           <div className={`${styles.content} font-bold`}>{currentPageLabel}</div>
         </div>
       )}
-    </div>
+    </nav>
   );
 }

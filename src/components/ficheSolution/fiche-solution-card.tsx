@@ -14,6 +14,7 @@ import clsx from "clsx";
 
 export type FicheSolutionCardProps = {
   ficheSolution: FicheSolution;
+  titleHeadingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   extraUrlParams?: { param: string; value: string }[];
   className?: string;
   withoutModal?: boolean;
@@ -22,6 +23,7 @@ export type FicheSolutionCardProps = {
 export default function FicheSolutionCard({
   ficheSolution,
   extraUrlParams,
+  titleHeadingLevel = "h3",
   className = "",
   withoutModal,
 }: FicheSolutionCardProps) {
@@ -35,6 +37,8 @@ export default function FicheSolutionCard({
     : `${PFMV_ROUTES.FICHES_SOLUTIONS}/${ficheAttributes.slug}`;
 
   url = extraUrlParams ? url + "?" + extraUrlParams?.map((param) => `${param.param}=${param.value}`).join("&") : url;
+
+  const TitleHeadingTag = titleHeadingLevel;
 
   return (
     <div className={clsx("pfmv-card fr-enlarge-link flex w-72 flex-col md:ml-0", className)}>
@@ -58,11 +62,11 @@ export default function FicheSolutionCard({
           </>
         )}
 
-        <h2 className={"text-blue-hover m-0 text-xl font-bold text-dsfr-text-title-grey"}>
+        <TitleHeadingTag className={"text-blue-hover m-0 text-xl font-bold text-dsfr-text-title-grey"}>
           <LinkWithoutPrefetch className="bg-none" href={url}>
             {ficheAttributes.titre}
           </LinkWithoutPrefetch>
-        </h2>
+        </TitleHeadingTag>
 
         <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheAttributes.description_courte}</div>
         <div className={"mt-auto"}>
