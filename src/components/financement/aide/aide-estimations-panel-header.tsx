@@ -14,12 +14,12 @@ export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estima
 
   return (
     <>
-      <div className="mb-4 flex flex-wrap gap-4">
-        <h3 className="mb-0 text-xl text-pfmv-navy">Région {region}</h3>
+      <div className="mb-4 flex flex-wrap gap-4 text-xl font-bold text-pfmv-navy">
+        <div>Région {region}</div>
         <SeparatorY />
-        <h3 className="mb-0 text-xl text-pfmv-navy">{commune}</h3>
+        <div>{commune}</div>
         <SeparatorY />
-        <h3 className="mb-0 text-xl text-pfmv-navy">{selectEspaceByCode(espace)}</h3>
+        <div>{selectEspaceByCode(espace)}</div>
       </div>
       <div className="mb-6 flex min-h-7 flex-wrap gap-4">
         {estimation?.fiches_solutions_id?.map((ficheId) => (

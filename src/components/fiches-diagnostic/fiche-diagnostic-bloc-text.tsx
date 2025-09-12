@@ -9,7 +9,7 @@ type FicheDiagnosticBlocTextProps = {
 export const FicheDiagnosticBlocText = ({ text, title }: FicheDiagnosticBlocTextProps) => {
   return (
     <div className="grow basis-0">
-      <h3 className={clsx("text-[1.375rem] leading-tight")}>{title}</h3>
+      <h2 className={clsx("text-[1.375rem] leading-tight")}>{title}</h2>
       <CmsRichText label={text ?? ""} />
     </div>
   );

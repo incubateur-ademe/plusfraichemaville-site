@@ -14,7 +14,7 @@ export const FichesSolutionsProjet = () => {
 
   return (
     <>
-      <div className="fr-container py-10">
+      <div className="fr-container py-8">
         <FichesSolutionsProjetHeader projetId={currentProjet?.id} projetNom={currentProjet?.nom} />
         <FichesSolutionsProjetsSelected
           selectedFichesSolutionsIds={selectedFichesSolutionsIds}

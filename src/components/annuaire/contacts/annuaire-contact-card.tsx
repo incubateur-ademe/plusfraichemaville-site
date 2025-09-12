@@ -58,10 +58,10 @@ export const AnnuaireContactCard = ({ contact, projetId, className, showContactP
           </div>
           {projetId && canEditProjet && <AnnuaireContactSaveButton contact={contact} projetId={projetId} />}
         </div>
-        <div>
-          <h3 className={clsx("mb-1 font-bold", isProjetTypeRex ? "text-xl" : "text-lg")}>{ligne1}</h3>
-          <h4 className="mb-0 !text-base">{contact.label}</h4>
-          <h5 className="mb-2 !text-base">{ligne3}</h5>
+        <div className="font-bold">
+          <h3 className={clsx("mb-1", isProjetTypeRex ? "text-xl" : "text-lg")}>{ligne1}</h3>
+          <div className="mb-0 !text-base">{contact.label}</div>
+          <div className="mb-2 !text-base">{ligne3}</div>
           <div>
             {contact.email && (
               <CopyField

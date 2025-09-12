@@ -44,7 +44,7 @@ export default function ListeEstimationPage() {
       <BannerProjetBreadcrumb step={BREADCRUMB_MES_ESTIMATIONS} />
       <div className="fr-container pt-8">
         <div className="mb-10">
-          <div className="mb-2 text-2xl font-bold">Je fais une estimation de budget pour mon projet</div>
+          <h1 className="text-2xl ">Je fais une estimation de budget pour mon projet</h1>
           <div className="text-lg">Mes solutions sélectionnées pour mon projet {currentProjet.nom}.</div>
           <div className="text-lg">
             Vous pouvez estimer une fourchette de prix en fonction des matériaux et systèmes choisis.

@@ -19,17 +19,17 @@ export default function IndienResultRanges({
 }) {
   return (
     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-      <div>
-        <div className="mb-4 font-bold">Indicateurs majeurs</div>
+      <section>
+        <h3 className="mb-4 font-bold">Indicateurs majeurs</h3>
         <IndienResultRange
           coefficientValue={diagnosticResults.coeffRafraichissementUrbain}
           coefficient={INDIEN_RAFRAICHISSEMENT_URBAIN}
           large
           isPdf={isPdf}
         />
-      </div>
-      <div>
-        <div className="mb-4 font-bold">Autres indicateurs</div>
+      </section>
+      <section>
+        <h3 className="mb-4 font-bold">Autres indicateurs</h3>
         <IndienResultRange
           className="mb-3"
           coefficientValue={diagnosticResults.coeffPermeabilite}
@@ -52,7 +52,7 @@ export default function IndienResultRanges({
             <div className="text-2xl font-bold">{diagnosticResults.partCanopee} %</div>
           </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

@@ -5,10 +5,12 @@ import { TeaserDiagnosticCard } from "@/src/components/surchauffe-urbaine/teaser
 
 export const TeaserDiagnosticComponent = ({ className }: { className?: string }) => {
   return (
-    <div className={clsx(className, "mx-auto w-full rounded-xl bg-dsfr-background-alt-blue-france p-4 text-center")}>
-      <div className="mt-6 text-center text-[1.75rem] font-bold text-pfmv-navy">
+    <section
+      className={clsx(className, "mx-auto w-full rounded-xl bg-dsfr-background-alt-blue-france p-4 text-center")}
+    >
+      <h1 className="mt-6 text-center text-[1.75rem] font-bold text-pfmv-navy">
         Lancez votre diagnostic directement depuis l’espace projet.
-      </div>
+      </h1>
       <Button className="mt-4 rounded-3xl" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
         {"Démarrer sur l'espace projet !"}
       </Button>
@@ -32,6 +34,6 @@ export const TeaserDiagnosticComponent = ({ className }: { className?: string })
            ont accompagnées."
         />
       </div>
-    </div>
+    </section>
   );
 };

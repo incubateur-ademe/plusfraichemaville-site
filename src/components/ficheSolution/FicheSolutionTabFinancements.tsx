@@ -12,7 +12,7 @@ export default function FicheSolutionTabFinancements({
 }) {
   return (
     <div className="text-dsfr-text-title-grey">
-      <div className="mb-8 text-[1.75rem] font-bold">Financements</div>
+      <h2 className="mb-8 text-[1.75rem] font-bold">Financements</h2>
       {ficheAttributes.lien_aide_territoire && (
         <div className="mt-10 rounded-2xl bg-dsfr-background-action-low-blue-france p-4 md:p-8">
           <div className="flex flex-row gap-6">
@@ -20,7 +20,7 @@ export default function FicheSolutionTabFinancements({
               <Image src={aidesTerittoiresLogo} alt="Logo Aides Territoires" width={200} height={200} />
             </div>
             <div>
-              <div className="mb-2 mt-2 text-[1.375rem] font-bold">Aides-territoires</div>
+              <h3 className="mb-2 mt-2 text-[1.375rem] font-bold">Aides-territoires</h3>
               <div>
                 <LinkWithoutPrefetch href={ficheAttributes.lien_aide_territoire} target="_blank">
                   Consulter toutes les aides
@@ -33,7 +33,7 @@ export default function FicheSolutionTabFinancements({
       )}
       {ficheAttributes.lien_fond_vert && (
         <>
-          <div className="mb-2 mt-10 text-[1.375rem] font-bold">Fonds Vert</div>
+          <h3 className="mb-2 mt-10 text-[1.375rem] font-bold">Fonds Vert</h3>
           <div>
             <LinkWithoutPrefetch href={ficheAttributes.lien_fond_vert} target="_blank">
               Consulter les aides liées à cette solution
@@ -44,7 +44,7 @@ export default function FicheSolutionTabFinancements({
       )}
       {ficheAttributes.aides_regionales && ficheAttributes.aides_regionales.length > 0 && (
         <>
-          <div className="mb-4 mt-10 text-[1.375rem] font-bold">Aides spécifiques par régions</div>
+          <h3 className="mb-4 mt-10 text-[1.375rem] font-bold">Aides spécifiques par régions</h3>
           {ficheAttributes.aides_regionales.map((aideRegionale) => (
             <div key={aideRegionale.region?.data?.attributes.code} className="mb-10 mt-2">
               <div className="flex">

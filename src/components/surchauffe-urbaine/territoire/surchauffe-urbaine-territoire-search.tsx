@@ -53,10 +53,10 @@ export const SurchauffeUrbaineTerritoireSearch = ({
   const loadSuggestions = debounce(searchClimadiagInfos, 200);
 
   return (
-    <div className={clsx("pfmv-card-no-hover px-12 py-10 text-left", className)}>
-      <div className="text-center text-[1.375rem] font-bold">
+    <section className={clsx("pfmv-card-no-hover px-12 py-10 text-left", className)}>
+      <h1 className="text-center text-[1.375rem] font-bold">
         Connaître la sensibilité actuelle et future de ma ville à la surchauffe urbaine
-      </div>
+      </h1>
       <div className="mx-auto mt-4 flex max-w-[30rem] flex-row">
         <AsyncSelect
           components={{ DropdownIndicator: null }}
@@ -88,6 +88,6 @@ export const SurchauffeUrbaineTerritoireSearch = ({
           />
         </Button>
       </div>
-    </div>
+    </section>
   );
 };

@@ -22,10 +22,10 @@ export const IndienResultCombinaisonAdvice = ({
         />
       </div>
       <div className="mx-8 my-2">
-        <div className={`text-xl font-bold ${typeSolution.colorClass}`}>
+        <h3 className={`text-xl font-bold ${typeSolution.colorClass}`}>
           {typeSolution.coloredIcon(" mr-4")}
           {typeSolution.titleExplanation}
-        </div>
+        </h3>
         <div className={"mt-4 text-dsfr-text-default-grey"}>{typeSolution.explanation}</div>
         <div className="mt-1 text-sm text-dsfr-text-mention-grey">
           exemples :{" "}

@@ -9,7 +9,7 @@ import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttributes: FicheSolution["attributes"] }) {
   return (
     <div className="text-dsfr-text-title-grey">
-      <div className="mb-8 text-[1.75rem] font-bold">Oups !</div>
+      <h2 className="mb-8 text-[1.75rem] font-bold">Oups !</h2>
       <div className="mt-10 rounded-2xl bg-dsfr-background-action-low-blue-france p-6 md:p-0">
         <div className="flex flex-row gap-6">
           <div className="ml-8 hidden w-56 rounded-xl md:flex">
@@ -40,7 +40,7 @@ export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttribu
           <CmsRichText label={oups.description} className="mt-8" />
           {!!oups.solutions_reparatrices?.data.length && oups.solutions_reparatrices.data.length > 0 && (
             <>
-              <div className="mb-4 mt-8 text-[1.375rem] font-bold">Fiches associées</div>
+              <h2 className="mb-4 mt-8 text-[1.375rem] font-bold">Fiches associées</h2>
               <ul className="flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
                 {oups.solutions_reparatrices.data.slice(0, 2).map((fs) => (
                   <li key={fs.id} className="flex">

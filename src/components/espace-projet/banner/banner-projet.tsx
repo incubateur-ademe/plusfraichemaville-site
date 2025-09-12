@@ -52,12 +52,14 @@ export default function BannerProjet({ className }: { className?: string }) {
                     {currentProjet.collectivite.nom}
                   </div>
                 </Link>
-                <LinkWithoutPrefetch
-                  href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
-                  className="mb-1 w-fit !bg-none text-[1.375rem] !leading-6 hover:underline"
-                >
-                  {currentProjet.nom}
-                </LinkWithoutPrefetch>
+                <h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">
+                  <LinkWithoutPrefetch
+                    href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
+                    className="!bg-none text-pfmv-navy"
+                  >
+                    {currentProjet.nom}
+                  </LinkWithoutPrefetch>
+                </h1>
               </div>
             </div>
             <div className="flex gap-4">

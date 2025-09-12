@@ -15,7 +15,7 @@ export default function FicheSolutionTabMiseEnOeuvre({
 
   return (
     <div>
-      <div className="mb-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Mise en œuvre et travaux</div>
+      <h2 className="mb-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Mise en œuvre et travaux</h2>
       <div className="fr-accordions-group">
         {diagStepToShow && (
           <CustomAccordion title="Diagnostic en amont" expanded={true} ariaId="accordion-diag">
@@ -60,8 +60,8 @@ export default function FicheSolutionTabMiseEnOeuvre({
         )}
       </div>
       {ficheAttributes.point_vigilance && (
-        <div className="mt-24 rounded-2xl bg-dsfr-background-action-low-blue-france px-12 py-6">
-          <div className="mb-6 text-lg font-bold text-dsfr-text-title-grey">Points de vigilance</div>
+        <div className="mt-24 rounded-2xl bg-dsfr-background-action-low-blue-france px-8 py-6">
+          <h3 className="mb-6 text-lg font-bold text-dsfr-text-title-grey">Points de vigilance</h3>
           <CmsRichText label={ficheAttributes.point_vigilance} />
         </div>
       )}
