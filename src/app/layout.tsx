@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { PropsWithChildren } from "react";
 import AppHeader from "@/src/components/layout/AppHeader";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
@@ -37,7 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: ReactElement | null }) {
+export default async function RootLayout(props: PropsWithChildren) {
+  const { children } = props;
   const lang = "fr";
   const nonce = (await headers()).get("x-nonce") ?? undefined;
 
