@@ -1,6 +1,5 @@
 import { EstimationMateriauxFicheSolution, ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
-// eslint-disable-next-line max-len
 import { IndicateursEnvironnementauxFormData } from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form-schema";
 import {
   findIndiEnGroupeQuestionFromQuestionCode,

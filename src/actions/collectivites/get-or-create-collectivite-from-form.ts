@@ -7,7 +7,7 @@ export const getOrCreateCollectiviteFromForm = async (data: CollectiviteFormData
   let collectiviteId = data.id;
   if (!collectiviteId) {
     const entitiesFromBan = await fetchCollectiviteFromBanApi(data.nomCollectivite, 20);
-    let collectiviteToUse = entitiesFromBan.find((address) => address.banId === data.banId);
+    const collectiviteToUse = entitiesFromBan.find((address) => address.banId === data.banId);
     if (!collectiviteToUse) {
       captureError(`Could not retrieve adresse info for collectivite ${data.nomCollectivite} ${data.banId}`, data);
     }

@@ -15,6 +15,7 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
 
   const update = async () => {
     const update = await updateFichesProjetAction({
+      // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       projetId: projet?.id!,
       ficheId: +props.id,
       typeFiche: props.type,
@@ -22,7 +23,9 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
     });
     if (update.projet) {
       addOrUpdateProjet(update.projet);
-      !isSaved && !props.withoutModal && opener && opener();
+      if (!isSaved && !props.withoutModal && opener) {
+        opener();
+      }
     } else if (update.type === "error") {
       notifications(update.type, update.message);
     }

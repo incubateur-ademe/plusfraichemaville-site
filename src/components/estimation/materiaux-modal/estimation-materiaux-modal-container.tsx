@@ -2,7 +2,6 @@
 
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
-// eslint-disable-next-line max-len
 import { EstimationMateriauModalContent } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-content";
 import { useEffect, useMemo } from "react";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";

@@ -15,7 +15,6 @@ import { clsx } from "clsx";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { Separator } from "@/src/components/common/separator";
-// eslint-disable-next-line max-len
 import { upsertDiagnosticSimulationAction } from "@/src/actions/diagnostic-simulation/upsert-diagnostic-simulation-action";
 import { notifications } from "@/src/components/common/notifications";
 import { upsert } from "@/src/helpers/listUtils";

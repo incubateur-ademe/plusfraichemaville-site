@@ -71,7 +71,9 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
               )}
               onClick={() => {
                 linkRef.current[index]?.blur();
-                link.update && link.update();
+                if (link.update) {
+                  link.update();
+                }
               }}
               aria-describedby={`tooltip-${link.url}-${projetId}`}
               id="link-2990"

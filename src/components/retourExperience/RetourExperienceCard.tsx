@@ -28,7 +28,7 @@ export default function RetourExperienceCard({
 }) {
   const selectRex = "attributes" in retourExperience ? retourExperience.attributes : retourExperience;
   const { projetId } = useParams();
-  let url = projetId
+  const url = projetId
     ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_REX(+projetId, selectRex.slug)
     : `${PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(selectRex.slug)}`;
 

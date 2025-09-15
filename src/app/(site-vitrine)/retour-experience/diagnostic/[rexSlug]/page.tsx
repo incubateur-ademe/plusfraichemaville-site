@@ -5,7 +5,6 @@ import {
 } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
 import { notFound } from "next/navigation";
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_SURCHAUFFE_URBAINE_REX } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";

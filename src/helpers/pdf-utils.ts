@@ -21,7 +21,9 @@ export const generatePdf = async (filename: string = "export", nodeId: string, c
         pdf.save(`${filename}.pdf`);
       })
       .then(() => {
-        callback && callback();
+        if (callback) {
+          callback();
+        }
       });
   }
 };

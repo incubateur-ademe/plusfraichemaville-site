@@ -10,11 +10,8 @@ import { flattenUsersProjectsToProjects } from "@/src/components/liste-projets/h
 import { UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import chunk from "lodash/chunk";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
-// eslint-disable-next-line max-len
 import { BatchResponseSimplePublicUpsertObjectWithErrors as ContactBatchWithErrors } from "@hubspot/api-client/lib/codegen/crm/contacts";
-// eslint-disable-next-line max-len
 import { BatchResponseSimplePublicUpsertObjectWithErrors as DealBatchWithErrors } from "@hubspot/api-client/lib/codegen/crm/deals";
-// eslint-disable-next-line max-len
 import { BatchResponseLabelsBetweenObjectPairWithErrors } from "@hubspot/api-client/lib/codegen/crm/associations/v4/models/BatchResponseLabelsBetweenObjectPairWithErrors";
 
 export const hubspotClient = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
@@ -44,9 +41,9 @@ export const hubspotBatchSync = async (
   message: string;
 }> => {
   const userBatches = chunk(usersWithAdminProjets, HUBSPOT_BATCH_LIMIT);
-  let allContactResults = [];
-  let allProjectResults = [];
-  let allAssociationResults = [];
+  const allContactResults = [];
+  const allProjectResults = [];
+  const allAssociationResults = [];
 
   for (const batchUsers of userBatches) {
     // Contacts
@@ -114,7 +111,6 @@ export const hubspotBatchSync = async (
   const totalProjects = allProjectResults.reduce((acc, batch) => acc + (batch.results?.length ?? 0), 0);
   const totalAssociations = allAssociationResults.reduce((acc, batch) => acc + (batch.results?.length ?? 0), 0);
 
-  // eslint-disable-next-line max-len
   const message = `Contact(s): ${totalContacts} | Projet(s): ${totalProjects} | Association(s): ${totalAssociations}`;
 
   return {

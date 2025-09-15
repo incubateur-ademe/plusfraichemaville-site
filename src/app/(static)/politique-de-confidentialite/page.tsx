@@ -14,17 +14,17 @@ export default async function PagePolitiqueDeConfidentialite() {
         rehypePlugins={[rehypeRaw]}
         components={{
           h2(props) {
-            // eslint-disable-next-line no-unused-vars
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { node, ...rest } = props;
             return <h2 className="mt-10" {...rest} />;
           },
           h3(props) {
-            // eslint-disable-next-line no-unused-vars
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { node, ...rest } = props;
             return <h3 className="mt-7" {...rest} />;
           },
           li(props) {
-            // eslint-disable-next-line no-unused-vars
+            // eslint-disable-next-line @typescript-eslint/no-unused-vars
             const { node, ...rest } = props;
             return <li className="ml-8 list-disc" {...rest} />;
           },

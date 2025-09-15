@@ -3,7 +3,6 @@ import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { getRetoursExperiencesDiag } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import AccomagnementEspaceProjetCard from "@/src/components/common/accomagnement-espace-projet-card";
-// eslint-disable-next-line max-len
 
 export const metadata: Metadata = computeMetadata("Exemples de diagnostic réalisé par les collectivités");
 

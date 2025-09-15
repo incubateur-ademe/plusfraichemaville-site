@@ -1,7 +1,6 @@
 "use client";
 import "@splidejs/splide/css/core";
-// TODO: Check changelog from Splide and remove ts-ignore
-// @ts-ignore
+// @ts-expect-error Check changelog from Splide and remove ts-ignore
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { SurchauffeUrbaineStoriesControllers } from "./surchauffe-urbaine-stories-controllers";
 import { SurchauffeUrbaineStoryCard } from "./surchauffe-urbaine-story-card";

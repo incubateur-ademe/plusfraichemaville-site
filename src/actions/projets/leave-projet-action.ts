@@ -6,7 +6,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { leaveProject } from "@/src/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 
-export const leaveProjetAction = async (userId: string, projetId: number): Promise<ResponseAction<{}>> => {
+export const leaveProjetAction = async (userId: string, projetId: number): Promise<ResponseAction<object>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };

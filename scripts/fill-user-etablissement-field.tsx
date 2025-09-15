@@ -11,7 +11,7 @@ async function main() {
   const interval = 1000; // how much time should the delay between two iterations be (in milliseconds)?
   usersToProcess.forEach(function (userToProcess, index) {
     setTimeout(async function () {
-      // @ts-ignore
+      // @ts-expect-error not null
       const siret = userToProcess.agentconnect_info?.siret;
       if (siret) {
         const entityFromSiret = await fetchEntrepriseFromSirenApi(siret);

@@ -48,7 +48,7 @@ export const upsertDiagnosticSimulationAction = async (
       });
       return { type: "success", message: "DIAGNOSTIC_SIMULATION_UPDATED", diagnosticSimulation };
     } catch (e) {
-      // @ts-ignore
+      // @ts-expect-error ignore
       customCaptureException("Error in upsertDiagnosticSimulationAction DB call", e?.stack);
       return { type: "error", message: "TECHNICAL_ERROR" };
     }
