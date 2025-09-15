@@ -1,4 +1,3 @@
-/* eslint-disable max-len */
 import clsx from "clsx";
 import { useState } from "react";
 

@@ -1,7 +1,6 @@
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { RetourExperienceContent } from "./projet-retour-experience-content";
 import { GET_REX_BY_SLUG } from "@/src/helpers/routes";
-// eslint-disable-next-line max-len
 import { AnnuaireRexContentSeeProjetModalSkeleton } from "@/src/components/annuaire/side-panel/annuaire-rex-content-see-projet-modal-skeleton";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 

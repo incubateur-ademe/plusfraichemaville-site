@@ -2,7 +2,7 @@
 import { PropsWithChildren, use, useEffect } from "react";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 
-export default function Layout(props: { params: Promise<{ projetId: number }> } & PropsWithChildren) {
+export default function Layout(props: { params: Promise<{ projetId: string }> } & PropsWithChildren) {
   const params = use(props.params);
 
   const { children } = props;

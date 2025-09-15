@@ -1,8 +1,7 @@
 "use client";
 
 import "@splidejs/splide/css/core";
-// TODO: Check changelog from Splide and remove ts-ignore
-// @ts-ignore
+// @ts-expect-error Check changelog from Splide and remove ts-ignore
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useModalStore } from "@/src/stores/modal/provider";
@@ -17,7 +16,6 @@ import { formatNumberWithSpaces, ICON_COLOR_FICHE_DIAGNOSTIC, TypeFiche } from "
 import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { Separator } from "@/src/components/common/separator";
-// eslint-disable-next-line max-len
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
 import { notifications } from "@/src/components/common/notifications";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
@@ -143,15 +141,17 @@ export const FicheDiagnosticDescriptionModal = () => {
                     </div>
                   </div>
                 </div>
-                <div className="mt-4 flex items-center gap-4">
-                  <FicheDiagLink
-                    className={clsx("fr-btn fr-btn--tertiary mt-4 rounded-3xl !text-dsfr-text-title-grey ")}
-                    slug={ficheDiagData?.slug!}
-                    onClick={modal.close}
-                  >
-                    Lire la méthode
-                  </FicheDiagLink>
-                </div>
+                {ficheDiagData?.slug && (
+                  <div className="mt-4 flex items-center gap-4">
+                    <FicheDiagLink
+                      className={clsx("fr-btn fr-btn--tertiary mt-4 rounded-3xl !text-dsfr-text-title-grey ")}
+                      slug={ficheDiagData.slug}
+                      onClick={modal.close}
+                    >
+                      Lire la méthode
+                    </FicheDiagLink>
+                  </div>
+                )}
               </div>
 
               {!rex.length ? null : rex.length <= 1 ? (

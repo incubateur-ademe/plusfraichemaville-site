@@ -10,16 +10,12 @@ export const scrollToTop = (element?: string) => {
 };
 
 export enum TypeFiche {
-  // eslint-disable-next-line no-unused-vars
   solution = "solution",
-  // eslint-disable-next-line no-unused-vars
   diagnostic = "diagnostic",
 }
 
 export enum TypeUpdate {
-  // eslint-disable-next-line no-unused-vars
   add = "add",
-  // eslint-disable-next-line no-unused-vars
   delete = "delete",
 }
 

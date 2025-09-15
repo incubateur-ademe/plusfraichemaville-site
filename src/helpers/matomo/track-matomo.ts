@@ -4,7 +4,6 @@ import { sanitizeUrlForAnalyticTool } from "@/src/components/analytics/helpers";
 const shouldUseDevTracker = process.env.NODE_ENV !== "production";
 
 declare global {
-  // eslint-disable-next-line no-unused-vars
   interface Window {
     _paq: any[];
   }

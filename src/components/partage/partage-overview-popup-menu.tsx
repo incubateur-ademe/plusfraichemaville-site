@@ -58,7 +58,9 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
         setCurrentDeleteOrQuitModal({
           options: {
             action: async () => {
-              canLeaveProject && handleQuitProject();
+              if (canLeaveProject) {
+                handleQuitProject();
+              }
             },
             confirmLabel: canLeaveProject ? "Quitter le projet" : null,
             title: canLeaveProject ? "Quitter le projet" : " Impossible de quitter le projet",
@@ -78,7 +80,9 @@ export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }
         setCurrentDeleteOrQuitModal({
           options: {
             action: async () => {
-              isAdmin && handleDeleteProject();
+              if (isAdmin) {
+                handleDeleteProject();
+              }
             },
             confirmLabel: "Supprimer le projet",
             title: "Supprimer le projet",

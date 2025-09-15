@@ -68,9 +68,7 @@ export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
 }
 
 export enum TypeAidesTerritoiresAide {
-  // eslint-disable-next-line no-unused-vars
   financement = "financement",
-  // eslint-disable-next-line no-unused-vars
   ingenierie = "ingenierie",
 }
 export type AidesTerritoiresAideType = "Aide financière" | "Aide en ingénierie";
@@ -78,6 +76,7 @@ export type AidesTerritoiresAideType = "Aide financière" | "Aide en ingénierie
 export type AidesTerritoiresAideNameKey = keyof typeof aidesTerritoiresAideName;
 export type AidesTerritoiresAideName = (typeof aidesTerritoiresAideName)[AidesTerritoiresAideNameKey];
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const aidesTerritoiresAideName = {
   Subvention: "Subvention",
   Pret: "Prêt",

@@ -1,7 +1,7 @@
 "use client";
 import clsx from "clsx";
 import "@splidejs/splide/css/core";
-// @ts-ignore
+// @ts-expect-error Check changelog from Splide and remove ts-ignore
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { SURCHAUFFE_URBAINE_TIMINGS } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timings";
 import Image from "next/image";

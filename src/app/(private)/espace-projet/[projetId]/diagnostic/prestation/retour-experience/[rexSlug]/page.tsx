@@ -2,8 +2,6 @@ import { RetourExperienceDiag } from "@/src/components/retour-experience-diag/re
 import { getRetourExperienceDiagBySlug } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
 import { notFound } from "next/navigation";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-
-// eslint-disable-next-line max-len
 import { BREADCRUMB_DIAG_REX } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 
 type RetourExperienceDiagPageProps = {

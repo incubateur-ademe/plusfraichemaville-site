@@ -8,7 +8,6 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 import React, { useEffect, useState } from "react";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_MES_ESTIMATIONS } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-estimation";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 
@@ -26,7 +25,9 @@ export default function ListeEstimationPage() {
   if (!currentProjet) return null;
   if (!currentProjet.estimations.length) {
     if (canEditProjet) {
-      !shouldRedirect && setShouldRedirect(true);
+      if (!shouldRedirect) {
+        setShouldRedirect(true);
+      }
       return null;
     }
     return (

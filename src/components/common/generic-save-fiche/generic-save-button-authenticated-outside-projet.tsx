@@ -6,7 +6,9 @@ import { ESPACE_PROJET_BOOKMARK_FICHE } from "@/src/helpers/matomo/matomo-tags";
 export const GenericSaveAuthenticatedOutsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
   const update = () => {
     trackEvent(ESPACE_PROJET_BOOKMARK_FICHE);
-    opener && opener();
+    if (opener != null) {
+      opener();
+    }
   };
 
   return <GenericSaveButtonElement isSaved={false} update={update} {...props} />;

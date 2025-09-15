@@ -19,7 +19,9 @@ export const IndienResultPdfPage = ({ data, projet, close }: ClimadiagViewerProp
   const ignore = useRef(false);
 
   useEffect(() => {
-    !ignore.current && generatePdf(`PFMV-${filename}`, "#indien-result-page", close);
+    if (!ignore.current) {
+      generatePdf(`PFMV-${filename}`, "#indien-result-page", close);
+    }
     return () => {
       ignore.current = true;
     };

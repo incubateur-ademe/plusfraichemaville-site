@@ -7,7 +7,6 @@ import { DefaultSession } from "next-auth";
  * @see https://next-auth.js.org/getting-started/typescript#module-augmentation
  */
 declare module "next-auth" {
-  // eslint-disable-next-line no-unused-vars
   interface Session extends DefaultSession {
     user: {
       id: string;
@@ -18,7 +17,6 @@ declare module "next-auth" {
 }
 
 declare module "next-auth/jwt" {
-  // eslint-disable-next-line no-unused-vars
   interface JWT {
     user_id: string;
     id_token?: string;

@@ -10,7 +10,6 @@ export default async function RetoursExperiences({
 }) {
   const allRetoursExperiences = await getRetoursExperiences();
   const filteredRetoursExperiences = allRetoursExperiences
-    // @ts-ignore
     .filter((re) => !searchParams.espaceFilter || re.attributes.types_espaces?.includes(searchParams.espaceFilter))
     .filter(
       (re) =>

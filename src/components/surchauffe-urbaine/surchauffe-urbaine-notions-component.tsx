@@ -1,7 +1,7 @@
 "use client";
 import clsx from "clsx";
 import "@splidejs/splide/css/core";
-// @ts-ignore
+// @ts-expect-error Check changelog from Splide and remove ts-ignore
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import Image from "next/image";
 import React, { useRef, useState } from "react";
