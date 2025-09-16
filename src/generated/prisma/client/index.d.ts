@@ -16454,6 +16454,7 @@ export namespace Prisma {
     population: number | null
     superficie: number | null
     couverture_lcz: number | null
+    searchable_field: string | null
   }
 
   export type ClimadiagMaxAggregateOutputType = {
@@ -16469,6 +16470,7 @@ export namespace Prisma {
     population: number | null
     superficie: number | null
     couverture_lcz: number | null
+    searchable_field: string | null
   }
 
   export type ClimadiagCountAggregateOutputType = {
@@ -16488,6 +16490,7 @@ export namespace Prisma {
     superficie: number
     couverture_lcz: number
     adresse_all_infos: number
+    searchable_field: number
     _all: number
   }
 
@@ -16527,6 +16530,7 @@ export namespace Prisma {
     population?: true
     superficie?: true
     couverture_lcz?: true
+    searchable_field?: true
   }
 
   export type ClimadiagMaxAggregateInputType = {
@@ -16542,6 +16546,7 @@ export namespace Prisma {
     population?: true
     superficie?: true
     couverture_lcz?: true
+    searchable_field?: true
   }
 
   export type ClimadiagCountAggregateInputType = {
@@ -16561,6 +16566,7 @@ export namespace Prisma {
     superficie?: true
     couverture_lcz?: true
     adresse_all_infos?: true
+    searchable_field?: true
     _all?: true
   }
 
@@ -16667,6 +16673,7 @@ export namespace Prisma {
     superficie: number
     couverture_lcz: number
     adresse_all_infos: JsonValue | null
+    searchable_field: string
     _count: ClimadiagCountAggregateOutputType | null
     _avg: ClimadiagAvgAggregateOutputType | null
     _sum: ClimadiagSumAggregateOutputType | null
@@ -16705,6 +16712,7 @@ export namespace Prisma {
     superficie?: boolean
     couverture_lcz?: boolean
     adresse_all_infos?: boolean
+    searchable_field?: boolean
   }, ExtArgs["result"]["climadiag"]>
 
   export type climadiagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16724,6 +16732,7 @@ export namespace Prisma {
     superficie?: boolean
     couverture_lcz?: boolean
     adresse_all_infos?: boolean
+    searchable_field?: boolean
   }, ExtArgs["result"]["climadiag"]>
 
   export type climadiagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -16743,6 +16752,7 @@ export namespace Prisma {
     superficie?: boolean
     couverture_lcz?: boolean
     adresse_all_infos?: boolean
+    searchable_field?: boolean
   }, ExtArgs["result"]["climadiag"]>
 
   export type climadiagSelectScalar = {
@@ -16762,9 +16772,10 @@ export namespace Prisma {
     superficie?: boolean
     couverture_lcz?: boolean
     adresse_all_infos?: boolean
+    searchable_field?: boolean
   }
 
-  export type climadiagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "type_lieu" | "code_insee" | "code_postal" | "epci_parent_id" | "jours_tres_chauds_ref" | "jours_tres_chauds_prevision" | "nuits_chaudes_ref" | "nuits_chaudes_prevision" | "jours_vdc_ref" | "jours_vdc_prevision" | "population" | "superficie" | "couverture_lcz" | "adresse_all_infos", ExtArgs["result"]["climadiag"]>
+  export type climadiagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "type_lieu" | "code_insee" | "code_postal" | "epci_parent_id" | "jours_tres_chauds_ref" | "jours_tres_chauds_prevision" | "nuits_chaudes_ref" | "nuits_chaudes_prevision" | "jours_vdc_ref" | "jours_vdc_prevision" | "population" | "superficie" | "couverture_lcz" | "adresse_all_infos" | "searchable_field", ExtArgs["result"]["climadiag"]>
 
   export type $climadiagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "climadiag"
@@ -16786,6 +16797,7 @@ export namespace Prisma {
       superficie: number
       couverture_lcz: number
       adresse_all_infos: Prisma.JsonValue | null
+      searchable_field: string
     }, ExtArgs["result"]["climadiag"]>
     composites: {}
   }
@@ -17225,6 +17237,7 @@ export namespace Prisma {
     readonly superficie: FieldRef<"climadiag", 'Int'>
     readonly couverture_lcz: FieldRef<"climadiag", 'Float'>
     readonly adresse_all_infos: FieldRef<"climadiag", 'Json'>
+    readonly searchable_field: FieldRef<"climadiag", 'String'>
   }
     
 
@@ -24347,7 +24360,8 @@ export namespace Prisma {
     population: 'population',
     superficie: 'superficie',
     couverture_lcz: 'couverture_lcz',
-    adresse_all_infos: 'adresse_all_infos'
+    adresse_all_infos: 'adresse_all_infos',
+    searchable_field: 'searchable_field'
   };
 
   export type ClimadiagScalarFieldEnum = (typeof ClimadiagScalarFieldEnum)[keyof typeof ClimadiagScalarFieldEnum]
@@ -24587,7 +24601,8 @@ export namespace Prisma {
   export const climadiagOrderByRelevanceFieldEnum: {
     nom: 'nom',
     code_insee: 'code_insee',
-    code_postal: 'code_postal'
+    code_postal: 'code_postal',
+    searchable_field: 'searchable_field'
   };
 
   export type climadiagOrderByRelevanceFieldEnum = (typeof climadiagOrderByRelevanceFieldEnum)[keyof typeof climadiagOrderByRelevanceFieldEnum]
@@ -25877,6 +25892,7 @@ export namespace Prisma {
     superficie?: IntFilter<"climadiag"> | number
     couverture_lcz?: FloatFilter<"climadiag"> | number
     adresse_all_infos?: JsonNullableFilter<"climadiag">
+    searchable_field?: StringFilter<"climadiag"> | string
   }
 
   export type climadiagOrderByWithRelationInput = {
@@ -25896,6 +25912,7 @@ export namespace Prisma {
     superficie?: SortOrder
     couverture_lcz?: SortOrder
     adresse_all_infos?: SortOrderInput | SortOrder
+    searchable_field?: SortOrder
     _relevance?: climadiagOrderByRelevanceInput
   }
 
@@ -25919,6 +25936,7 @@ export namespace Prisma {
     superficie?: IntFilter<"climadiag"> | number
     couverture_lcz?: FloatFilter<"climadiag"> | number
     adresse_all_infos?: JsonNullableFilter<"climadiag">
+    searchable_field?: StringFilter<"climadiag"> | string
   }, "id" | "code_insee">
 
   export type climadiagOrderByWithAggregationInput = {
@@ -25938,6 +25956,7 @@ export namespace Prisma {
     superficie?: SortOrder
     couverture_lcz?: SortOrder
     adresse_all_infos?: SortOrderInput | SortOrder
+    searchable_field?: SortOrder
     _count?: climadiagCountOrderByAggregateInput
     _avg?: climadiagAvgOrderByAggregateInput
     _max?: climadiagMaxOrderByAggregateInput
@@ -25965,6 +25984,7 @@ export namespace Prisma {
     superficie?: IntWithAggregatesFilter<"climadiag"> | number
     couverture_lcz?: FloatWithAggregatesFilter<"climadiag"> | number
     adresse_all_infos?: JsonNullableWithAggregatesFilter<"climadiag">
+    searchable_field?: StringWithAggregatesFilter<"climadiag"> | string
   }
 
   export type aideWhereInput = {
@@ -27404,6 +27424,7 @@ export namespace Prisma {
     superficie?: number
     couverture_lcz?: number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    searchable_field: string
   }
 
   export type climadiagUncheckedCreateInput = {
@@ -27423,6 +27444,7 @@ export namespace Prisma {
     superficie?: number
     couverture_lcz?: number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    searchable_field: string
   }
 
   export type climadiagUpdateInput = {
@@ -27441,6 +27463,7 @@ export namespace Prisma {
     superficie?: IntFieldUpdateOperationsInput | number
     couverture_lcz?: FloatFieldUpdateOperationsInput | number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    searchable_field?: StringFieldUpdateOperationsInput | string
   }
 
   export type climadiagUncheckedUpdateInput = {
@@ -27460,6 +27483,7 @@ export namespace Prisma {
     superficie?: IntFieldUpdateOperationsInput | number
     couverture_lcz?: FloatFieldUpdateOperationsInput | number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    searchable_field?: StringFieldUpdateOperationsInput | string
   }
 
   export type climadiagCreateManyInput = {
@@ -27479,6 +27503,7 @@ export namespace Prisma {
     superficie?: number
     couverture_lcz?: number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    searchable_field: string
   }
 
   export type climadiagUpdateManyMutationInput = {
@@ -27497,6 +27522,7 @@ export namespace Prisma {
     superficie?: IntFieldUpdateOperationsInput | number
     couverture_lcz?: FloatFieldUpdateOperationsInput | number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    searchable_field?: StringFieldUpdateOperationsInput | string
   }
 
   export type climadiagUncheckedUpdateManyInput = {
@@ -27516,6 +27542,7 @@ export namespace Prisma {
     superficie?: IntFieldUpdateOperationsInput | number
     couverture_lcz?: FloatFieldUpdateOperationsInput | number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    searchable_field?: StringFieldUpdateOperationsInput | string
   }
 
   export type aideCreateInput = {
@@ -29064,6 +29091,7 @@ export namespace Prisma {
     superficie?: SortOrder
     couverture_lcz?: SortOrder
     adresse_all_infos?: SortOrder
+    searchable_field?: SortOrder
   }
 
   export type climadiagAvgOrderByAggregateInput = {
@@ -29090,6 +29118,7 @@ export namespace Prisma {
     population?: SortOrder
     superficie?: SortOrder
     couverture_lcz?: SortOrder
+    searchable_field?: SortOrder
   }
 
   export type climadiagMinOrderByAggregateInput = {
@@ -29105,6 +29134,7 @@ export namespace Prisma {
     population?: SortOrder
     superficie?: SortOrder
     couverture_lcz?: SortOrder
+    searchable_field?: SortOrder
   }
 
   export type climadiagSumOrderByAggregateInput = {
