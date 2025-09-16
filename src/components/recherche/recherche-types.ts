@@ -13,4 +13,4 @@ export type SearchResult = {
 };
 
 export type SearchableRetourExperience = RetourExperience & { regionLabel?: string | null; typesEspace?: string };
-export type SearchableFicheSolution = FicheSolution & { typesEspace?: string };
+export type SearchableFicheSolution = FicheSolution & { typesEspace?: string; typeSolution?: string };
