@@ -37,6 +37,7 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
     const result = savedId ? await updater.delete.action() : await updater.add.action();
 
     if (result.type === "success") {
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       savedId ? updater.delete.storeAction() : result.estimationAide && updater.add.storeAction(result.estimationAide);
     }
 

@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { TeaserDiagnosticComponent } from "@/src/components/surchauffe-urbaine/teaser-diagnostic-component";
-// eslint-disable-next-line max-len
 import { SurchauffeUrbaineTimingComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timing-component";
 
 export const metadata: Metadata = computeMetadata("Pourquoi et quand faire un diagnostic ?");

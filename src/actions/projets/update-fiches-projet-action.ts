@@ -43,7 +43,11 @@ export const updateFichesProjetAction = async ({
       userId: session.user.id,
     };
 
-    typeUpdate === TypeUpdate.add ? await addProjetFiche(dataUpdate) : await deleteProjetFiche(dataUpdate);
+    if (typeUpdate === TypeUpdate.add) {
+      await addProjetFiche(dataUpdate);
+    } else {
+      await deleteProjetFiche(dataUpdate);
+    }
 
     const projet = await deleteRecommandationsViewedBy(projetId, session.user.id);
 

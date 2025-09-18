@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { PropsWithChildren } from "react";
 import AppHeader from "@/src/components/layout/AppHeader";
 import { Metadata } from "next";
 import { Toaster } from "react-hot-toast";
@@ -12,6 +12,7 @@ import { DsfrHead, getHtmlAttributes } from "@/src/app/server-only-index";
 import "./globals.css";
 import MatomoScript from "@/src/components/matomo/matomo-script";
 import { CommonSkipLinks } from "@/src/components/common/common-skip-links";
+import AppFooter from "@/src/components/layout/AppFooter";
 
 export const metadata: Metadata = {
   title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
@@ -36,7 +37,8 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({ children }: { children: ReactElement | null }) {
+export default async function RootLayout(props: PropsWithChildren) {
+  const { children } = props;
   const lang = "fr";
   const nonce = (await headers()).get("x-nonce") ?? undefined;
 
@@ -58,7 +60,10 @@ export default async function RootLayout({ children }: { children: ReactElement 
           <CommonSkipLinks />
           <AppHeader />
           <Toaster position="bottom-left" />
-          <main id="contenu">{children}</main>
+          <main id="contenu" className="mb-40">
+            {children}
+          </main>
+          <AppFooter />
         </MainLayoutProviders>
       </body>
     </html>

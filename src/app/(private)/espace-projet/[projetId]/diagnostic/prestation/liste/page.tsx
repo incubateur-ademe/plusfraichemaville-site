@@ -5,8 +5,6 @@ import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/gen
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-
-// eslint-disable-next-line max-len
 import { BREADCRUMB_DIAG_PRESTATION_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 

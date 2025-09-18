@@ -2,7 +2,7 @@ import { Feature, FeatureCollection, GeoJsonProperties, Point } from "geojson";
 
 type ErrorResponse = { code: number; message: string; detail: string[] };
 type BanFeatureCollection = FeatureCollection<Point, GeoJsonProperties>;
-export type BanFeature = Feature<Point, GeoJsonProperties<{}>>;
+export type BanFeature = Feature<Point, GeoJsonProperties<object>>;
 export type BanAPIResponse = BanFeatureCollection | ErrorResponse;
 
 export type AddressCollectivite = {

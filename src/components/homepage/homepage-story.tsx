@@ -1,5 +1,3 @@
-/* eslint-disable no-undef */
-
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import clsx from "clsx";

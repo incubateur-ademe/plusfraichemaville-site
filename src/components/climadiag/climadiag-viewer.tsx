@@ -17,7 +17,9 @@ export const ClimadiagViewer = ({ data, close }: ClimadiagViewerProps) => {
   const ignore = useRef(false);
 
   useEffect(() => {
-    !ignore.current && generatePdf(`Climadiag-${filename}`, "#climadiag-viewer", close);
+    if (!ignore.current) {
+      generatePdf(`Climadiag-${filename}`, "#climadiag-viewer", close);
+    }
     return () => {
       ignore.current = true;
     };

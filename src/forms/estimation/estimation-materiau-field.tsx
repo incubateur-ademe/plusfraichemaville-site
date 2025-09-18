@@ -35,7 +35,7 @@ export default function EstimationMateriauField({
         </div>
         <div className="mb-0 mt-8 grow text-dsfr-text-title-grey md:mb-8">
           <div className="mb-4 flex items-center gap-6">
-            <div className="text-[1.375rem] font-bold">{materiau.attributes.titre}</div>
+            <h3 className="text-[1.375rem] font-bold">{materiau.attributes.titre}</h3>
           </div>
           <ShowMoreRichText
             richText={materiau.attributes.description}

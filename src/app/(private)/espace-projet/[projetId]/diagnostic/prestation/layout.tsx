@@ -1,11 +1,12 @@
 "use client";
-import { ReactElement } from "react";
+import { PropsWithChildren } from "react";
 import { FicheDiagnosticDescriptionModal } from "@/src/components/fiches-diagnostic/fiche-diagnostic-description-modal";
 
-export default function Layout({ children }: { children: ReactElement | null }) {
+export default function Layout(props: PropsWithChildren) {
+  const { children } = props;
   return (
     <>
-      <div>{children}</div>
+      {children}
       <FicheDiagnosticDescriptionModal />
     </>
   );

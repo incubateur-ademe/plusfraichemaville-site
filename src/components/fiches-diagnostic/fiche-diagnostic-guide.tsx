@@ -5,9 +5,9 @@ import clsx from "clsx";
 export const FicheDiagnosticGuide = async () => {
   return (
     <>
-      <h1 className="mb-5 text-2xl font-bold">
+      <h2 className="mb-5 text-2xl font-bold">
         Choisir la bonne prestation de diagnostic de la surchauffe pour mon projet
-      </h1>
+      </h2>
       <p className="mb-12 leading-6">
         Cette rubrique vous aide à <strong>choisir la méthode de diagnostic adaptée</strong> pour commander une
         prestation auprès {"d'un"} bureau d’études. Elle vous oriente vers les études qui correspondent à votre projet,

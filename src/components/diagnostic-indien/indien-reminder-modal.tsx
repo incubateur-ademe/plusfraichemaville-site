@@ -85,7 +85,7 @@ export default function IndienReminderModal({ projetId }: { projetId: number }) 
           >
             C’est parti !
           </LinkWithoutPrefetch>
-          <Button onClick={() => onComebackLater()} priority="secondary">
+          <Button onClick={() => onComebackLater()} priority="secondary" className="rounded-3xl">
             Revenir plus tard
           </Button>
         </div>

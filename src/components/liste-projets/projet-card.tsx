@@ -87,10 +87,10 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
           <div className="flex justify-between gap-6">
             <div className={clsx(!isMemberOfProjet && "opacity-25")}>
               <h3 className="mb-0 text-[22px] text-dsfr-text-label-blue-france">{updatedProjet.nom}</h3>
-              <h4 className="mb-4 text-lg text-dsfr-text-label-blue-france">
+              <div className="mb-4 text-lg font-bold text-dsfr-text-label-blue-france">
                 <i className="ri-map-pin-line mr-1 before:!w-4"></i>
                 {updatedProjet.collectivite.nom}
-              </h4>
+              </div>
             </div>
             <Conditional>
               <Case

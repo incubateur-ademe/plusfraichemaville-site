@@ -44,7 +44,7 @@ async function main() {
   for (const projet of projetsToProcess) {
     if (projet.adresse && projet.adresse_info) {
       const fetchedAdresses = await fetchProjetAddressFromBanApi(projet.adresse);
-      // @ts-ignore
+      // @ts-expect-error never null
       const matchedAdresses = fetchedAdresses.find((a) => a.banInfo["properties"]["id"] === projet.adresse_info["id"]);
       if (matchedAdresses) {
         await prismaClient.projet.update({

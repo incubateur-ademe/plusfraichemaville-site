@@ -1,5 +1,4 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-// eslint-disable-next-line max-len
 import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 

@@ -48,10 +48,9 @@ export const ViewerModeModal = () => {
       }
     });
   };
-
   const confirm = () => {
-    const discard = document.querySelector<HTMLInputElement>("#discarded-info-input-0")?.checked;
-    if (discard) {
+    const discardInput = document.querySelector<HTMLInputElement>("#discarded-info-input-0");
+    if (discardInput?.checked) {
       handleDiscardInformation();
     }
     modal.close();

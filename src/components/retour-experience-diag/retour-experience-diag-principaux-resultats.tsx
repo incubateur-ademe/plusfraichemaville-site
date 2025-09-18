@@ -3,8 +3,7 @@
 import { ImageWithCaption } from "@/src/lib/strapi/types/components/common/ImageWithCaption";
 import CmsRichText from "../common/CmsRichText";
 import "@splidejs/splide/css/core";
-// TODO: Check changelog from Splide and remove ts-ignore
-// @ts-ignore
+// @ts-expect-error Check changelog from Splide and remove ts-ignore
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { ImageLoader } from "../common/image-loader";

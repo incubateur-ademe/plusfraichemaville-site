@@ -276,7 +276,8 @@ exports.Prisma.ClimadiagScalarFieldEnum = {
   population: 'population',
   superficie: 'superficie',
   couverture_lcz: 'couverture_lcz',
-  adresse_all_infos: 'adresse_all_infos'
+  adresse_all_infos: 'adresse_all_infos',
+  searchable_field: 'searchable_field'
 };
 
 exports.Prisma.AideScalarFieldEnum = {
@@ -444,7 +445,8 @@ exports.Prisma.estimationOrderByRelevanceFieldEnum = {
 exports.Prisma.climadiagOrderByRelevanceFieldEnum = {
   nom: 'nom',
   code_insee: 'code_insee',
-  code_postal: 'code_postal'
+  code_postal: 'code_postal',
+  searchable_field: 'searchable_field'
 };
 
 exports.Prisma.aideOrderByRelevanceFieldEnum = {

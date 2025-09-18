@@ -68,10 +68,10 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
         <div className="mb-11">
           <h1 className="mb-10 text-[40px] text-dsfr-background-flat-info">{aide.name}</h1>
           {aide.name_initial && (
-            <h2 className="max-w-xl text-[22px] leading-7 text-dsfr-background-flat-info">
-              {"Nom initial de l'aide"}
-              <span className="block font-normal">{aide.name_initial}</span>
-            </h2>
+            <hgroup className="mb-2 max-w-xl text-xl text-dsfr-background-flat-info">
+              <h2 className="mb-0 text-xl text-dsfr-background-flat-info">{"Nom initial de l'aide"}</h2>
+              <p>{aide.name_initial}</p>
+            </hgroup>
           )}
         </div>
         <div className="mb-16">{aide.description && <CmsRichText label={aide.description} />}</div>

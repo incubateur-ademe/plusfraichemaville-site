@@ -7,7 +7,9 @@ import { useMap } from "react-leaflet";
 export const AnnuaireMapFocus = ({ coordinates }: { coordinates: LatLngTuple | null }) => {
   const map = useMap();
   const handleFocus = useCallback(() => {
-    coordinates && map.setView(coordinates, map.getZoom(), { animate: true, duration: 0.75 });
+    if (coordinates != null) {
+      map.setView(coordinates, map.getZoom(), { animate: true, duration: 0.75 });
+    }
   }, [map, coordinates]);
 
   return (

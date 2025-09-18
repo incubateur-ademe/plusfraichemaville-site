@@ -1,7 +1,6 @@
 import { Annuaire } from "@/src/components/annuaire/annuaire";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 import React from "react";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_ANNUAIRE_MES_CONTACTS } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-annuaire";
 
 const AnnuairePage = () => {

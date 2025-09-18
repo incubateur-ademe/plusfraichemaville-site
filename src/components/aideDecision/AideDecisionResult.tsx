@@ -65,6 +65,7 @@ export default async function AideDecisionResult({ aideDecisionEtapeAttributes, 
                   <FicheSolutionCard
                     ficheSolution={ficheSolution}
                     extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtapeAttributes.slug }]}
+                    titleHeadingLevel="h2"
                   />
                 </li>
               ))}
@@ -77,7 +78,7 @@ export default async function AideDecisionResult({ aideDecisionEtapeAttributes, 
                 <ul className="flex list-none gap-6 overflow-x-auto pl-2 pt-2 md:justify-start">
                   {relatedRetourExperiences.map((rex) => (
                     <li key={rex?.data.id} className="flex">
-                      <RetourExperienceCard retourExperience={rex?.data} />
+                      <RetourExperienceCard retourExperience={rex?.data} titleHeadingLevel="h2" />
                     </li>
                   ))}
                 </ul>

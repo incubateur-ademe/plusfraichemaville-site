@@ -271,10 +271,12 @@ model climadiag {
   superficie                  Int               @default(0)
   couverture_lcz              Float             @default(0)
   adresse_all_infos           Json?
+  searchable_field            String
 
   @@index([code_insee])
   @@index([code_postal])
   @@index([nom])
+  @@index([searchable_field])
 }
 
 model aide {

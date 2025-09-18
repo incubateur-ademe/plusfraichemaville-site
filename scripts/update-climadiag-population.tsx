@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 // @ts-nocheck
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 
@@ -12,6 +13,7 @@ function updateClimadiagRow(fileJson) {
 }
 
 async function processFiles(path: string) {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require("fs");
   const pathToEpciFiles = fs.readdirSync(path);
   for (const file of pathToEpciFiles) {

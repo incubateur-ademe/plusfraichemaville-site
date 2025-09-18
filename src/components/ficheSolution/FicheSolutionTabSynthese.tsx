@@ -102,15 +102,15 @@ export default function FicheSolutionTabSynthese({
       {!!ficheAttributes.en_savoir_plus && (
         <>
           <hr className="mt-6 pb-6 md:pb-8 " />
-          <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">En savoir plus</div>
+          <h2 className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">En savoir plus</h2>
           <CmsRichText label={ficheAttributes.en_savoir_plus} className="text-dsfr-text-title-grey" />
         </>
       )}
       {uniqueRetourExperienceList.length > 0 && (
-        <div className="mt-12 rounded-2xl bg-dsfr-background-alt-grey py-10 pl-4">
-          <div className="mb-4 ml-2 text-[1.375rem] font-bold text-dsfr-text-title-grey">
+        <div className="mt-12 rounded-2xl bg-dsfr-background-alt-grey pb-10 pl-4 pt-6">
+          <h2 className="mb-4 ml-2 text-[1.375rem] font-bold text-dsfr-text-title-grey">
             Découvrir les projets réalisés
-          </div>
+          </h2>
           <div className="ml-2 text-dsfr-text-title-grey">
             Consultez les retours d’expériences de collectivités qui ont mis en place cette solution.
           </div>
@@ -135,10 +135,8 @@ export default function FicheSolutionTabSynthese({
       />
       {!!ficheAttributes.fiches_solutions_complementaires?.data.length &&
         ficheAttributes.fiches_solutions_complementaires.data.length > 0 && (
-          <div className="mt-12 rounded-2xl bg-dsfr-background-alt-blue-france py-10 pl-4">
-            <div className="mb-4 ml-2 text-[1.375rem] font-bold text-dsfr-text-title-grey">
-              Solutions complémentaires
-            </div>
+          <div className="mt-12 rounded-2xl bg-dsfr-background-alt-blue-france pb-10 pl-4 pt-6">
+            <h2 className="mb-4 ml-2 text-[1.375rem] font-bold text-dsfr-text-title-grey">Solutions complémentaires</h2>
             <div className="ml-2 text-dsfr-text-title-grey">
               Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
             </div>
@@ -155,14 +153,14 @@ export default function FicheSolutionTabSynthese({
       {!!ficheAttributes.credits && (
         <>
           <hr className="mt-12 pb-8" />
-          <div className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">Crédits</div>
+          <h2 className="mb-4 text-[1.375rem] font-bold text-dsfr-text-title-grey">Crédits</h2>
           <CmsRichText label={ficheAttributes.credits} className="text-dsfr-text-title-grey" />
         </>
       )}
       {creditsImage.length > 0 && (
         <>
           <hr className="mt-12 pb-8" />
-          <div className="mb-4 font-bold text-dsfr-text-title-grey">Crédits images</div>
+          <h2 className="mb-4 font-bold text-dsfr-text-title-grey">Crédits images</h2>
           <div>{creditsImage.join(", ")}</div>
         </>
       )}

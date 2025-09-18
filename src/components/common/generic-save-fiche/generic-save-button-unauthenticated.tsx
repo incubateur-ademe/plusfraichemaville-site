@@ -6,7 +6,9 @@ import { SITE_VITRINE_BOOKMARK_FICHE } from "@/src/helpers/matomo/matomo-tags";
 export const GenericSaveUnauthenticated = ({ ...props }: GenericSaveFicheButtonWithOpener) => {
   const updater = () => {
     trackEvent(SITE_VITRINE_BOOKMARK_FICHE);
-    props.opener && props.opener();
+    if (props.opener != null) {
+      props.opener();
+    }
   };
   return <GenericSaveButtonElement isSaved={false} update={updater} {...props} />;
 };

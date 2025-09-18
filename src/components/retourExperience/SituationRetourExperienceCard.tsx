@@ -20,7 +20,7 @@ export default function SituationRetourExperienceCard({
     <div className={clsx("fr-card max-w-md rounded-2xl border  border-pfmv-light-grey !bg-none !p-0", className)}>
       <div className="fr-card__body">
         <div className="fr-card__content">
-          <h3 className="fr-card__title">{titre}</h3>
+          <h2 className="fr-card__title">{titre}</h2>
           <div className="fr-card__desc h-full">
             <div className={"flex h-full flex-col justify-between"}>
               <CmsRichText label={situation.description} />

@@ -1,7 +1,7 @@
 "use client";
 
 import maplibregl, { MapLayerMouseEvent } from "maplibre-gl";
-import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 export const handleMapClick = async (event: MapLayerMouseEvent) => {
   const point = event.lngLat;
@@ -51,7 +51,7 @@ export const handleMapClick = async (event: MapLayerMouseEvent) => {
       };
       const lcz = props.lcz || "";
       let content = `
-              <h5 style='font-size:18px; margin:0px;'>
+              <h5 style='font-size:18px; margin:0;'>
                 <b>LCZ ${lcz}</b>
               </h5>
             `;
@@ -70,8 +70,8 @@ export const handleMapClick = async (event: MapLayerMouseEvent) => {
     } else {
       new maplibregl.Popup().setLngLat([point.lng, point.lat]).setHTML("Aucune donnée LCZ pour cette zone.").addTo(map);
     }
-  } catch (err) {
-    captureError("Erreur lors de la récupération des données LCZ.", [point.lng, point.lat]);
+  } catch (e) {
+    customCaptureException(`Erreur lors de la récupération des données LCZ, [${point.lng},${point.lat}]`, e);
     new maplibregl.Popup()
       .setLngLat([point.lng, point.lat])
       .setHTML("Erreur lors de la récupération des données LCZ.")

@@ -22,7 +22,6 @@ import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { notifications } from "@/src/components/common/notifications";
 import { useAidesByEstimationFetcher } from "@/src/hooks/use-aides-selected-by-estimation";
 import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_FINANCEMENTS_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-financement";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 import { dateToStringWithTime } from "@/src/helpers/dateUtils";

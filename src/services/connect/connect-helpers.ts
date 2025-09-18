@@ -34,8 +34,34 @@ export const mapProjetToConnectProjet = (projet: ProjetWithAdminUser): ConnectPr
   nomProjet: projet.nom,
   etape: getNiveauMaturiteByCode(projet.niveau_maturite)?.crmConnectLabel ?? "",
   dateCloture: dateToStringWithoutTime(projet.date_echeance, "iso") ?? "2100-01-01",
-  codeCommuneInsee: projet.collectivite.code_insee ?? "",
+  codeCommuneInsee: mapCodeInseeForConnect(projet.collectivite.code_insee),
   typeEspace: selectEspaceByCode(projet.type_espace) ?? "",
   projetVisible: projet.is_public ?? false,
   localisation: projet.adresse || projet.collectivite.nom,
 });
+
+const mapCodeInseeForConnect = (codeInsee: string | null): string => {
+  return (
+    EXECPTIONS_CODE_INSEE_CONNECT.find((commune) => commune.codeInseeCommune === codeInsee)?.codeInseeMairie ??
+    codeInsee ??
+    ""
+  );
+};
+
+const EXECPTIONS_CODE_INSEE_CONNECT = [
+  {
+    nomCommune: "Paris",
+    codeInseeCommune: "75056",
+    codeInseeMairie: "75104",
+  },
+  {
+    nomCommune: "Lyon",
+    codeInseeCommune: "69123",
+    codeInseeMairie: "69385",
+  },
+  {
+    nomCommune: "Marseille",
+    codeInseeCommune: "13055",
+    codeInseeMairie: "13202",
+  },
+];
