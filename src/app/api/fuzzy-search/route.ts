@@ -1,12 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 import Fuse from "fuse.js";
-import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
+import { getSearchableRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { getRetoursExperiencesDiag } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import {
   mapFicheSolutionToSearchableFS,
   mapRexToSearchableRex,
+  normalizeText,
   SEARCH_KEYS_FICHE_DIAGNOSTIC,
   SEARCH_KEYS_FICHE_SOLUTION,
   SEARCH_KEYS_REX,
@@ -22,9 +23,10 @@ export async function GET(request: NextRequest) {
   if (!searchText || limit <= 0 || limit > 20) {
     return NextResponse.json([], { status: 400 });
   }
-  const retoursExperience = (await getRetoursExperiences()).map(mapRexToSearchableRex);
+  const normalizedSearchText = normalizeText(searchText);
+  const retoursExperience = (await getSearchableRetoursExperiences()).map(mapRexToSearchableRex);
   const retoursExperienceDiagnostic = await getRetoursExperiencesDiag();
-  const fichesSolution = (await getAllFichesSolutions()).map(mapFicheSolutionToSearchableFS);
+  const fichesSolution = (await getAllFichesSolutions()).map((fs) => mapFicheSolutionToSearchableFS(fs));
   const fichesDiagnostic = await getAllFichesDiagnostic();
   const webinaires = await getAllWebinaires();
 
@@ -33,26 +35,45 @@ export async function GET(request: NextRequest) {
     ignoreDiacritics: true,
     includeMatches: true,
     // findAllMatches: false,
-    // minMatchCharLength: 1,
+    //  inMatchCharLength: 6,
     // location: 0,
     threshold: 0.3,
-    // distance: 100,
-    // useExtendedSearch: false,
-    ignoreLocation: true,
-    // ignoreFieldNorm: false,
+    distance: 1000,
+    useExtendedSearch: true,
+    ignoreLocation: false,
+    ignoreFieldNorm: false,
+    // fieldNormWeight: 1,
+  };
+
+
+  const fuseOptionsLargeText = {
+    includeScore: true,
+    ignoreDiacritics: true,
+    includeMatches: true,
+    // findAllMatches: false,
+    //  inMatchCharLength: 6,
+    // location: 0,
+    threshold: 0.3,
+    distance: 100000,
+    useExtendedSearch: true,
+    ignoreLocation: false,
+    ignoreFieldNorm: false,
     // fieldNormWeight: 1,
   };
   const fuseFichesSolution = new Fuse(fichesSolution, { ...fuseOptions, keys: SEARCH_KEYS_FICHE_SOLUTION });
-  const fuseRex = new Fuse(retoursExperience, { ...fuseOptions, keys: SEARCH_KEYS_REX });
+  const fuseRex = new Fuse(retoursExperience, { ...fuseOptionsLargeText, keys: SEARCH_KEYS_REX });
   const fuseFichesDiagnostic = new Fuse(fichesDiagnostic, { ...fuseOptions, keys: SEARCH_KEYS_FICHE_DIAGNOSTIC });
   const fuseRexDiagnostic = new Fuse(retoursExperienceDiagnostic, { ...fuseOptions, keys: SEARCH_KEYS_REX_DIAGNOSTIC });
   const fuseWebinaires = new Fuse(webinaires, { ...fuseOptions, keys: SEARCH_KEYS_WEBINAIRES });
 
-  const ficheSolutionResults = fuseFichesSolution.search(searchText);
-  const rexResults = fuseRex.search(searchText);
-  const ficheDiagnosticResults = fuseFichesDiagnostic.search(searchText);
-  const rexDiagnosticResults = fuseRexDiagnostic.search(searchText);
-  const webinaireResults = fuseWebinaires.search(searchText);
+  const ficheSolutionResults = fuseFichesSolution.search(normalizedSearchText);
+  const rexResults = fuseRex.search(normalizedSearchText);
+  const ficheDiagnosticResults = fuseFichesDiagnostic.search(normalizedSearchText);
+  const rexDiagnosticResults = fuseRexDiagnostic.search(normalizedSearchText);
+  const webinaireResults = fuseWebinaires.search(normalizedSearchText);
+  // console.dir(rexResults, { depth: 10 });
+  // retoursExperience.map((rex) => console.log(rex.attributes.slug, rex.searchableKey));
+  // console.dir(retoursExperience, { depth: 10 });
   const results: SearchResult = {
     fichesSolutions: ficheSolutionResults.map((r) => r.item),
     retoursExperience: rexResults.map((r) => r.item),

@@ -1,4 +1,4 @@
-import { ficheDiagnosticRetourExperienceDiagnosticFilter } from "./commonStrapiFilters";
+import { ficheDiagnosticRetourExperienceDiagnosticFilter, solutionRetourExperienceFilter } from "./commonStrapiFilters";
 
 export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo on FicheSolutionEntity {
   id
@@ -119,6 +119,36 @@ export const STRAPI_IMAGE_FRAGMENT = `fragment ImageInfo on UploadFileEntityResp
   }
 }`;
 
+export const SEARCHABLE_REX_PROJET_FRAGMENT = `fragment SearchableRexInfo on RetourExperienceEntity {
+  ...RetourExperienceCardInfo
+  attributes {
+    titre
+    solution_retour_experiences  {
+      data {
+        id
+        attributes {
+          titre
+          description
+          image {
+            ...ImageInfo
+          }
+          fiche_solution {
+            data {
+              id
+              attributes {
+                titre
+                description_courte
+                types_espace
+                type_solution
+                aides_territoires_mots_cles
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}`;
 export const RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT = `fragment RetourExperienceCardInfo on RetourExperienceEntity {
   id
     attributes {

@@ -12,5 +12,9 @@ export type SearchResult = {
   webinaires: Webinaire[];
 };
 
-export type SearchableRetourExperience = RetourExperience & { regionLabel?: string | null; typesEspace?: string };
-export type SearchableFicheSolution = FicheSolution & { typesEspace?: string; typeSolution?: string };
+export type SearchableRetourExperience = RetourExperience & {
+  searchableKey?: string;
+};
+export type SearchableFicheSolution = FicheSolution & {
+  searchableKey?: string;
+};
