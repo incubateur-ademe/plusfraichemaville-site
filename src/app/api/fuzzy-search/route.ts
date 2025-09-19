@@ -5,8 +5,11 @@ import { getRetoursExperiencesDiag } from "@/src/lib/strapi/queries/retour-exper
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import {
+  mapFicheDiagnosticToSearchableFD,
   mapFicheSolutionToSearchableFS,
+  mapRexDiagToSearchableRexDiag,
   mapRexToSearchableRex,
+  mapWebinaireToSearchableWebinaire,
   normalizeText,
   SEARCH_KEYS_FICHE_DIAGNOSTIC,
   SEARCH_KEYS_FICHE_SOLUTION,
@@ -24,56 +27,36 @@ export async function GET(request: NextRequest) {
     return NextResponse.json([], { status: 400 });
   }
   const normalizedSearchText = normalizeText(searchText);
+
   const retoursExperience = (await getSearchableRetoursExperiences()).map(mapRexToSearchableRex);
-  const retoursExperienceDiagnostic = await getRetoursExperiencesDiag();
+  const retoursExperienceDiagnostic = (await getRetoursExperiencesDiag()).map(mapRexDiagToSearchableRexDiag);
   const fichesSolution = (await getAllFichesSolutions()).map((fs) => mapFicheSolutionToSearchableFS(fs));
-  const fichesDiagnostic = await getAllFichesDiagnostic();
-  const webinaires = await getAllWebinaires();
+  const fichesDiagnostic = (await getAllFichesDiagnostic()).map(mapFicheDiagnosticToSearchableFD);
+  const webinaires = (await getAllWebinaires()).map(mapWebinaireToSearchableWebinaire);
 
   const fuseOptions = {
-    includeScore: true,
     ignoreDiacritics: true,
-    includeMatches: true,
-    // findAllMatches: false,
-    //  inMatchCharLength: 6,
-    // location: 0,
     threshold: 0.3,
     distance: 1000,
     useExtendedSearch: true,
-    ignoreLocation: false,
-    ignoreFieldNorm: false,
-    // fieldNormWeight: 1,
   };
 
-
   const fuseOptionsLargeText = {
-    includeScore: true,
     ignoreDiacritics: true,
-    includeMatches: true,
-    // findAllMatches: false,
-    //  inMatchCharLength: 6,
-    // location: 0,
     threshold: 0.3,
     distance: 100000,
     useExtendedSearch: true,
-    ignoreLocation: false,
-    ignoreFieldNorm: false,
-    // fieldNormWeight: 1,
   };
   const fuseFichesSolution = new Fuse(fichesSolution, { ...fuseOptions, keys: SEARCH_KEYS_FICHE_SOLUTION });
   const fuseRex = new Fuse(retoursExperience, { ...fuseOptionsLargeText, keys: SEARCH_KEYS_REX });
   const fuseFichesDiagnostic = new Fuse(fichesDiagnostic, { ...fuseOptions, keys: SEARCH_KEYS_FICHE_DIAGNOSTIC });
   const fuseRexDiagnostic = new Fuse(retoursExperienceDiagnostic, { ...fuseOptions, keys: SEARCH_KEYS_REX_DIAGNOSTIC });
   const fuseWebinaires = new Fuse(webinaires, { ...fuseOptions, keys: SEARCH_KEYS_WEBINAIRES });
-
   const ficheSolutionResults = fuseFichesSolution.search(normalizedSearchText);
   const rexResults = fuseRex.search(normalizedSearchText);
   const ficheDiagnosticResults = fuseFichesDiagnostic.search(normalizedSearchText);
   const rexDiagnosticResults = fuseRexDiagnostic.search(normalizedSearchText);
   const webinaireResults = fuseWebinaires.search(normalizedSearchText);
-  // console.dir(rexResults, { depth: 10 });
-  // retoursExperience.map((rex) => console.log(rex.attributes.slug, rex.searchableKey));
-  // console.dir(retoursExperience, { depth: 10 });
   const results: SearchResult = {
     fichesSolutions: ficheSolutionResults.map((r) => r.item),
     retoursExperience: rexResults.map((r) => r.item),

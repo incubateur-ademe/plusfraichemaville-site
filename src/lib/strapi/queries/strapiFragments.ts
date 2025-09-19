@@ -1,4 +1,4 @@
-import { ficheDiagnosticRetourExperienceDiagnosticFilter, solutionRetourExperienceFilter } from "./commonStrapiFilters";
+import { ficheDiagnosticRetourExperienceDiagnosticFilter } from "./commonStrapiFilters";
 
 export const FICHE_SOLUTION_CARD_INFO_FRAGMENT = `fragment FicheSolutionCardInfo on FicheSolutionEntity {
   id
