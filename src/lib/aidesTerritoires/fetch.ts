@@ -12,6 +12,15 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 const DEFAULT_PERIMETER_ID = "70956-france";
 
 export const fetchAideFromAidesTerritoiresById = async (aideTerritoireAideId: number) => {
+  // SSRF protection: validate input
+  if (
+    typeof aideTerritoireAideId !== "number" ||
+    !Number.isFinite(aideTerritoireAideId) ||
+    !Number.isInteger(aideTerritoireAideId) ||
+    aideTerritoireAideId <= 0
+  ) {
+    throw new Error("Invalid aideTerritoireAideId passed to fetchAideFromAidesTerritoiresById");
+  }
   return await callAidesTerritoiresApi<AidesTerritoiresAide>(
     `${process.env.AIDES_TERRITOIRES_API_URL}/aids/by-id/${aideTerritoireAideId}`,
   );
