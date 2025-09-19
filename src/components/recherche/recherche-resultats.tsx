@@ -42,7 +42,7 @@ export const RechercheResultats = ({ className, searchResult }: RechercheResulta
           ),
         },
         {
-          label: `Métbhodes de diagnostic (${ficheDiagnostics.length ?? 0})`,
+          label: `Méthodes de diagnostic (${ficheDiagnostics.length ?? 0})`,
           content: (
             <>
               {ficheDiagnostics.length > 0 ? (

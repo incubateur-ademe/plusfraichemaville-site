@@ -1,7 +1,7 @@
 import { ProjetWithAdminUser, UserWithAdminProjets, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { ConnectContact, ConnectProjet } from "./types";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
-import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
+import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 import { getNiveauMaturiteByCode } from "@/src/helpers/maturite-projet";
 
 const PFMV_SOURCE = "PFMV";
@@ -35,7 +35,7 @@ export const mapProjetToConnectProjet = (projet: ProjetWithAdminUser): ConnectPr
   etape: getNiveauMaturiteByCode(projet.niveau_maturite)?.crmConnectLabel ?? "",
   dateCloture: dateToStringWithoutTime(projet.date_echeance, "iso") ?? "2100-01-01",
   codeCommuneInsee: mapCodeInseeForConnect(projet.collectivite.code_insee),
-  typeEspace: selectEspaceByCode(projet.type_espace) ?? "",
+  typeEspace: selectEspaceLabelByCode(projet.type_espace) ?? "",
   projetVisible: projet.is_public ?? false,
   localisation: projet.adresse || projet.collectivite.nom,
 });
