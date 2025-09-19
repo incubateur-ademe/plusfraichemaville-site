@@ -62,6 +62,15 @@ export const brevoAddContact = async ({
   });
 };
 
+// Utility function to validate emails for path usage
+function isValidEmailForPath(email: string): boolean {
+  // Basic RFC5322 email regex (or use a robust validator if available)
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  // Disallow characters that could break path or inject data
+  const forbiddenChars = /[\/\\?#]/;
+  return emailRegex.test(email) && !forbiddenChars.test(email);
+}
+
 export const brevoUpdateContact = async ({
   email,
   nomCollectivite,
@@ -69,6 +78,9 @@ export const brevoUpdateContact = async ({
   nom,
   prenom,
 }: BrevoUpsertContactType) => {
+  if (!isValidEmailForPath(email)) {
+    throw new Error("Invalid email format or unsafe characters in brevoUpdateContact");
+  }
   return await fetch(`${process.env.BREVO_API_BASE_URL}/contacts/${email}`, {
     method: "PUT",
     headers: {
