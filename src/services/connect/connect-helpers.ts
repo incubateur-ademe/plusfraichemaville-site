@@ -38,6 +38,9 @@ export const mapProjetToConnectProjet = (projet: ProjetWithAdminUser): ConnectPr
   typeEspace: selectEspaceLabelByCode(projet.type_espace) ?? "",
   projetVisible: projet.is_public ?? false,
   localisation: projet.adresse || projet.collectivite.nom,
+  ...(projet.deleted_at
+    ? { projetAnnule: true, dateAnnulation: dateToStringWithoutTime(projet.deleted_at, "iso") }
+    : {}),
 });
 
 const mapCodeInseeForConnect = (codeInsee: string | null): string => {

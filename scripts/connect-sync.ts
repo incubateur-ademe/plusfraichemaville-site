@@ -34,13 +34,8 @@ const syncWithConnect = async () => {
       process.exit(0);
     }
 
-    const activeUsersAndProjects = filteredUsersAndProject.map((user) => ({
-      ...user,
-      projets: user.projets.filter((p) => !p.projet.deleted_at),
-    }));
-
     console.log("Début de la synchronisation avec Connect...");
-    const connectResult = await connectBatchSync(activeUsersAndProjects);
+    const connectResult = await connectBatchSync(filteredUsersAndProject);
     if (!connectResult.success) {
       captureError("Erreur lors de la synchronisation avec Connect:", {
         errors: connectResult.errors,
