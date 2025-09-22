@@ -29,10 +29,14 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ message: "Successfully revalidated get-rex-aquagir" }, { status: 200 });
     }
     return NextResponse.json({ message: "Nothing to revalidate" }, { status: 200 });
-  } catch (error) {
+  } catch (_error) {
     console.log("No body found, process manual tag revalidition", tag ?? "strapi");
     try {
-      tag ? revalidateTag(tag) : revalidateTag("strapi");
+      if (tag != null) {
+        revalidateTag(tag);
+      } else {
+        revalidateTag("strapi");
+      }
       return NextResponse.json({ message: "Successfully revalidated cache" }, { status: 200 });
     } catch (error) {
       customCaptureException("Error when revalidating cache", error);

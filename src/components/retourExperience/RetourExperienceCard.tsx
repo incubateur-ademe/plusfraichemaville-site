@@ -19,16 +19,20 @@ export type RexInHome = Pick<
 
 export default function RetourExperienceCard({
   retourExperience,
+  titleHeadingLevel = "h3",
   className,
 }: {
   retourExperience: RetourExperience | RexInHome;
+  titleHeadingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   className?: string;
 }) {
   const selectRex = "attributes" in retourExperience ? retourExperience.attributes : retourExperience;
   const { projetId } = useParams();
-  let url = projetId
+  const url = projetId
     ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_REX(+projetId, selectRex.slug)
     : `${PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(selectRex.slug)}`;
+
+  const TitleHeadingTag = titleHeadingLevel;
 
   return (
     <div className={clsx("pfmv-card fr-enlarge-link flex min-h-[26rem] w-72 flex-col", className)}>
@@ -47,11 +51,11 @@ export default function RetourExperienceCard({
         />
       </div>
       <div className="flex grow flex-col p-6">
-        <h3 className={"text-blue-hover mb-3 text-lg font-bold text-dsfr-text-title-grey"}>
+        <TitleHeadingTag className={"text-blue-hover mb-3 text-lg font-bold text-dsfr-text-title-grey"}>
           <LinkWithoutPrefetch className="bg-none" href={url}>
             {selectRex.titre}
           </LinkWithoutPrefetch>
-        </h3>
+        </TitleHeadingTag>
         <Tag small={true} className={"mb-8"}>
           {getRegionLabelFromCode(selectRex.region?.data?.attributes.code)}
         </Tag>

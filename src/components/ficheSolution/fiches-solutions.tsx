@@ -18,7 +18,6 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
   const allFichesSolutions = await getAllFichesSolutions();
 
   const filteredFichesSolutions = allFichesSolutions
-    // @ts-ignore
     .filter((fs) => !searchParams.espaceFilter || fs.attributes.types_espace?.includes(searchParams.espaceFilter))
     .filter(
       (fs) =>
@@ -48,7 +47,7 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
             <ul className="m-0 flex flex-wrap justify-center gap-6 p-0 md:justify-normal">
               {filteredFichesSolutions.map((ficheSolution) => (
                 <li key={ficheSolution.id} className="flex">
-                  <FicheSolutionCard ficheSolution={ficheSolution} />
+                  <FicheSolutionCard ficheSolution={ficheSolution} titleHeadingLevel="h2" />
                 </li>
               ))}
             </ul>

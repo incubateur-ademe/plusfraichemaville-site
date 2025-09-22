@@ -1,3 +1,4 @@
+// eslint-disable-next-line
 // @ts-nocheck
 import { Prisma } from "@/src/generated/prisma/client";
 import { ProjectionsIndicateurClimadiag } from "@/src/lib/prisma/prismaCustomTypes";
@@ -34,6 +35,7 @@ function insertClimadiagRow(fileJson, typeLieu, epciParentId: number | undefined
 }
 
 function processEpciFiles(path: string) {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require("fs");
   const epciPath = path + "\\epci";
   const pathToEpciFiles = fs.readdirSync(epciPath);
@@ -46,6 +48,7 @@ function processEpciFiles(path: string) {
 }
 
 function processCommuneFiles(path: string) {
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require("fs");
   const communePath = path + "\\commune";
   const pathToCommuneFiles = fs.readdirSync(communePath);

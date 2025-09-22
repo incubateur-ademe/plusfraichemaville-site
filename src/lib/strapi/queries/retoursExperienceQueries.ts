@@ -4,6 +4,7 @@ import {
   FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT,
   RETOUR_EXPERIENCE_WITH_CONTACTS,
+  SEARCHABLE_REX_PROJET_FRAGMENT,
   STRAPI_IMAGE_FRAGMENT,
 } from "@/src/lib/strapi/queries/strapiFragments";
 import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
@@ -112,6 +113,16 @@ const GET_RETOUR_EXPERIENCE_CARD_DATA = (
     }
 }`;
 
+const GET_SEARCHABLE_RETOUR_EXPERIENCE_DATA = (
+  strapiFilter: StrapiFilter,
+) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} ${SEARCHABLE_REX_PROJET_FRAGMENT} query {
+    retourExperiences ${strapiFilter.wholeFilterString()} {
+      data {
+        ...SearchableRexInfo
+      }
+    }
+}`;
+
 const GET_RETOUR_EXPERIENCE_FOR_AQUAGIR_DATA = (strapiFilter: StrapiFilter) => ` ${STRAPI_IMAGE_FRAGMENT} query {
     retourExperiences ${strapiFilter.wholeFilterString()} {
       data {
@@ -173,6 +184,14 @@ export async function getRetoursExperiences(): Promise<RetourExperience[]> {
   const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter), { tag: "get-rex" }))
     ?.retourExperiences as APIResponseCollection<RetourExperience>;
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getSearchableRetoursExperiences(): Promise<RetourExperience[]> {
+  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const apiResponse = (
+    await strapiGraphQLCall(GET_SEARCHABLE_RETOUR_EXPERIENCE_DATA(filter), { tag: "get-searchable-rex" })
+  )?.retourExperiences as APIResponseCollection<RetourExperience>;
   return safeReturnStrapiEntities(apiResponse);
 }
 

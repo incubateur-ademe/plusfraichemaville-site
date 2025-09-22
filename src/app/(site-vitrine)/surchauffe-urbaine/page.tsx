@@ -1,9 +1,7 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { TeaserDiagnosticComponent } from "@/src/components/surchauffe-urbaine/teaser-diagnostic-component";
-// eslint-disable-next-line max-len
 import { SurchauffeUrbaineStoriesComponent } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-stories-component";
-// eslint-disable-next-line max-len
 import { SurchauffeUrbaineTerritoireSearch } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-territoire-search";
 
 export const metadata: Metadata = computeMetadata("La ville dans une France à +4°C");

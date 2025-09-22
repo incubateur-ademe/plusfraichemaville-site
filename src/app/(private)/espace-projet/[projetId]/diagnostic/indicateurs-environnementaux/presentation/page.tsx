@@ -9,7 +9,6 @@ import {
 } from "@/src/helpers/indicateurs-environnementaux/indicateurs-environnementaux-list";
 import IndienReminderModal from "@/src/components/diagnostic-indien/indien-reminder-modal";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_DIAG_INDICATEURS_PRESENTATION } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 

@@ -33,9 +33,9 @@ export const EstimationOverviewCard = ({
   }
 
   return (
-    <div className={clsx("pfmv-strong-card px-12 pb-12 pt-8")}>
+    <section className={clsx("pfmv-strong-card px-12 pb-12 pt-8")}>
       <div className="mb-6 flex flex-row justify-between">
-        <div className="mb-6 text-xl font-bold">{`Estimation du ${dateToStringWithTime(estimation.created_at)}`}</div>
+        <h2 className="mb-6 text-xl font-bold">{`Estimation du ${dateToStringWithTime(estimation.created_at)}`}</h2>
 
         {isEstimationCompleted ? (
           <div className="text-right text-xs text-dsfr-text-default-grey">
@@ -94,6 +94,6 @@ export const EstimationOverviewCard = ({
           <EstimationDeleteModal estimation={estimation} />
         </div>
       )}
-    </div>
+    </section>
   );
 };

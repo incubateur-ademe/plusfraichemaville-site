@@ -1,16 +1,11 @@
-import { ReactElement } from "react";
-import AppFooter from "@/src/components/layout/AppFooter";
+import { PropsWithChildren } from "react";
 
-export default function Layout({ children }: { children: ReactElement | null }) {
+export default function Layout(props: PropsWithChildren) {
+  const { children } = props;
   return (
-    <div>
-      <div className={"pb-40"}>
-        <div className="fr-container pt-8">
-          <div className="fr-h3">Déconnexion en cours...</div>
-        </div>
-        {children}
-      </div>
-      <AppFooter />
+    <div className="fr-container pt-8">
+      <div className="fr-h3">Déconnexion en cours...</div>
+      {children}
     </div>
   );
 }

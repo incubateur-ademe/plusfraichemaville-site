@@ -13,11 +13,11 @@ export const SurchauffeUrbaineStoriesComponent = async ({ className }: { classNa
     "saint-omer-cool-towns-diagnostic",
   ]);
   return (
-    <div className={clsx("bg-dsfr-background-alt-blue-france py-9 text-center", className)}>
-      <div className="mb-8 text-center text-[1.375rem] font-bold text-pfmv-navy">
+    <section className={clsx("bg-dsfr-background-alt-blue-france py-9 text-center", className)}>
+      <h1 className="mb-8 text-center text-[1.375rem] font-bold text-pfmv-navy">
         Inspirez-vous des collectivités qui ont réalisé des diagnostics de surchauffe urbaine.
-      </div>
+      </h1>
       {!isEmpty(rexDiagData) && <SurchauffeUrbaineStories rexDiagStories={rexDiagData} />}
-    </div>
+    </section>
   );
 };

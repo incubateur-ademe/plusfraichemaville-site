@@ -4,7 +4,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Separator, SeparatorY } from "@/src/components/common/separator";
 import { estimation } from "@/src/generated/prisma/client";
 import { TypeEspace } from "@/src/helpers/type-espace-filter";
-import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
+import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 
 export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estimation }) => {
   const espace = useProjetsStore((state) => state.getCurrentProjet()?.type_espace) as TypeEspace["code"];
@@ -14,12 +14,12 @@ export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estima
 
   return (
     <>
-      <div className="mb-4 flex flex-wrap gap-4">
-        <h3 className="mb-0 text-xl text-pfmv-navy">Région {region}</h3>
+      <div className="mb-4 flex flex-wrap gap-4 text-xl font-bold text-pfmv-navy">
+        <div>Région {region}</div>
         <SeparatorY />
-        <h3 className="mb-0 text-xl text-pfmv-navy">{commune}</h3>
+        <div>{commune}</div>
         <SeparatorY />
-        <h3 className="mb-0 text-xl text-pfmv-navy">{selectEspaceByCode(espace)}</h3>
+        <div>{selectEspaceLabelByCode(espace)}</div>
       </div>
       <div className="mb-6 flex min-h-7 flex-wrap gap-4">
         {estimation?.fiches_solutions_id?.map((ficheId) => (

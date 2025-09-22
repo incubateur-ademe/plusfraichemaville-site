@@ -1,3 +1,5 @@
+import { isValidEmailForPath } from "@/src/helpers/email-utils";
+
 export const brevoSendEmail = async (to: string, templateId: number, params?: Record<string, string>) => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
@@ -69,6 +71,9 @@ export const brevoUpdateContact = async ({
   nom,
   prenom,
 }: BrevoUpsertContactType) => {
+  if (!isValidEmailForPath(email)) {
+    throw new Error("Invalid email format or unsafe characters in brevoUpdateContact");
+  }
   return await fetch(`${process.env.BREVO_API_BASE_URL}/contacts/${email}`, {
     method: "PUT",
     headers: {

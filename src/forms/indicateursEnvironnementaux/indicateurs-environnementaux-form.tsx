@@ -15,7 +15,6 @@ import { clsx } from "clsx";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { Separator } from "@/src/components/common/separator";
-// eslint-disable-next-line max-len
 import { upsertDiagnosticSimulationAction } from "@/src/actions/diagnostic-simulation/upsert-diagnostic-simulation-action";
 import { notifications } from "@/src/components/common/notifications";
 import { upsert } from "@/src/helpers/listUtils";
@@ -144,9 +143,9 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
         </div>
         {ALL_INDIEN_QUESTIONS.map((questionGroup) => (
           <div className="mb-10" key={questionGroup.label}>
-            <div className="mb-2 flex items-center">
+            <div className="mb-4 flex items-center">
               <Image src={questionGroup.image} alt={questionGroup.label} width={50} height={50} className="h-7" />
-              <div className="mt-2 text-xl font-bold">{questionGroup.label}</div>
+              <h2 className="mb-0 text-xl font-bold">{questionGroup.label}</h2>
             </div>
             {questionGroup.questions.map((question) => (
               <div

@@ -15,8 +15,8 @@ export default function FicheSolutionTabMateriaux({
     ficheAttributes.cout_minimum_entretien != null && ficheAttributes.cout_maximum_entretien != null;
 
   return (
-    <div>
-      <div className="mb-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Matériaux et coûts</div>
+    <>
+      <h2 className="mb-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Matériaux et coûts</h2>
       {ficheAttributes.materiaux?.data && ficheAttributes.materiaux.data.length > 0 ? (
         <>
           <hr className="h-[1px] p-0" />
@@ -45,7 +45,7 @@ export default function FicheSolutionTabMateriaux({
                         unoptimized
                       />
                     </div>
-                    <div className="text-2xl font-bold">{mat.titre}</div>
+                    <h3 className="text-2xl font-bold">{mat.titre}</h3>
                   </div>
                   <CmsRichText label={mat.description} className="text-sm" />
                 </div>
@@ -113,6 +113,6 @@ export default function FicheSolutionTabMateriaux({
           <hr className="h-[1px] p-0" />
         </>
       )}
-    </div>
+    </>
   );
 }

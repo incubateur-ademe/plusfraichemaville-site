@@ -9,7 +9,7 @@ export const AnnuaireMapTileLayer = () => {
   const [tileLayer, setTileLayer] = useState<TileStyle>("terrain");
 
   const switchTileLayer = () => {
-    tileLayer === "terrain" ? setTileLayer("satellite") : setTileLayer("terrain");
+    setTileLayer(tileLayer === "terrain" ? "satellite" : "terrain");
   };
 
   return (

@@ -6,7 +6,7 @@ import { deleteEstimation, getEstimationById } from "@/src/lib/prisma/prismaEsti
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 
-export const deleteEstimationAction = async (estimationId: number): Promise<ResponseAction<{}>> => {
+export const deleteEstimationAction = async (estimationId: number): Promise<ResponseAction<object>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };

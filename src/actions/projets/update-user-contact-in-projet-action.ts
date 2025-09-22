@@ -24,7 +24,7 @@ export const updateUserContactInProjetAction = async (
     if (projetId && !(await permission.canEditProject(projetId))) {
       return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
     }
-    let projetToUpdate = await getProjetWithRelationsById(projetId);
+    const projetToUpdate = await getProjetWithRelationsById(projetId);
     const userProjetToUse = await getUserProjetById(userProjetId);
     if (!projetToUpdate || !userProjetToUse) {
       return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };

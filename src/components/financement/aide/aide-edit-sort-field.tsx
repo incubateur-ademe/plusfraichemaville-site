@@ -1,27 +1,26 @@
-import { AideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation-edit-sort-method";
+import { AidesSortFilters, AideEditSortFilterType } from "@/src/hooks/use-aide-estimation-edit-sort-method";
 import { Select } from "@codegouvfr/react-dsfr/Select";
 
 type AideEditFilterProps = {
-  sortMethod: AideEstimationEditSortMethod;
-  setSortMethod: (_: AideEstimationEditSortMethod) => void;
+  sortMethodCode: AideEditSortFilterType["code"];
+  setSortMethodCode: (_: AideEditSortFilterType["code"]) => void;
 };
 
-export const AideEditSortField = ({ sortMethod, setSortMethod }: AideEditFilterProps) => {
+export const AideEditSortField = ({ sortMethodCode, setSortMethodCode }: AideEditFilterProps) => {
   return (
     <Select
       label=""
       className="customSelect"
       nativeSelectProps={{
-        onChange: (event) => setSortMethod(event.target.value as AideEstimationEditSortMethod),
-        value: sortMethod,
+        onChange: (event) => setSortMethodCode(event.target.value as AideEditSortFilterType["code"]),
+        value: sortMethodCode,
       }}
     >
-      <option className="text-lg" value="submissionDate">
-        Trier par échéance
-      </option>
-      <option className="text-lg" value="subventionAmount">
-        Trier par subvention
-      </option>
+      {AidesSortFilters.map((method) => (
+        <option className="text-lg" value={method.code} key={method.code}>
+          {method.label}
+        </option>
+      ))}
     </Select>
   );
 };

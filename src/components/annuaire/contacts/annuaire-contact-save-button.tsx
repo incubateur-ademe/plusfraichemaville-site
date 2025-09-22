@@ -65,7 +65,11 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Annu
 
     const result = isSaved ? await updater.delete.action() : await updater.add.action();
 
-    isSaved ? trackEvent(ANNUAIRE_DELETING_CONTACT) : trackEvent(ANNUAIRE_SAVING_CONTACT);
+    if (isSaved) {
+      trackEvent(ANNUAIRE_DELETING_CONTACT);
+    } else {
+      trackEvent(ANNUAIRE_SAVING_CONTACT);
+    }
 
     if (result.type === "success" && result.projet) {
       addOrUpdateProjet(result.projet);

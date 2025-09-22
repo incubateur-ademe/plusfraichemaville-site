@@ -9,7 +9,7 @@ import { CustomMarker, GeoJsonAdresse, AnnuaireContact, AnnuaireContactTypeMap, 
 import { prettyUserName } from "@/src/helpers/user";
 import { getRegionLabelForProjet, getRegionLabelFromCode } from "@/src/helpers/regions";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
-import { selectEspaceByCode, TypeEspaceCode } from "@/src/helpers/type-espace-filter";
+import { selectEspaceLabelByCode, TypeEspaceCode } from "@/src/helpers/type-espace-filter";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import { SousTypeDeContact, TypeDeContact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 
@@ -160,7 +160,7 @@ export const userProjetToAnnuaireContactWithProjet = (userProjet: UserProjetWith
   label: userProjet.user ? prettyUserName(userProjet.user) : "",
   projet: {
     nom: userProjet.projet.nom,
-    typeEspace: selectEspaceByCode(userProjet.projet.type_espace),
+    typeEspace: selectEspaceLabelByCode(userProjet.projet.type_espace),
     region: getRegionLabelForProjet(userProjet.projet),
   },
 });

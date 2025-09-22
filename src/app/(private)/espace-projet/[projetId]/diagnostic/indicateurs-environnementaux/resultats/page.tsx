@@ -46,9 +46,9 @@ export default function IndicateursEnvironnementauxResultatsPage() {
       <div className="fr-container pt-8">
         <h1 className="mb-4 text-[1.75rem] font-bold">Je découvre mes résultats !</h1>
         <div className="mb-8 flex flex-row items-center justify-between gap-6">
-          <div className="text-[1.375rem] font-bold">
+          <h2 className="mb-0 text-[1.375rem] font-bold">
             Analyse simplifiée de la surchauffe au sein de mon espace, à l’état initial.
-          </div>
+          </h2>
           <div>
             <LinkWithoutPrefetch
               href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(currentProjet.id)}
@@ -82,9 +82,9 @@ export default function IndicateursEnvironnementauxResultatsPage() {
             </div>
           </div>
         </div>
-        <div className="mb-4 mt-10 text-[1.375rem] font-bold">
+        <h2 className="mb-4 mt-10 text-[1.375rem] font-bold">
           Que puis-je faire pour rafraîchir mon espace ? Combiner différents types de solutions !
-        </div>
+        </h2>
         <div className="flex flex-col gap-6 rounded-2xl bg-dsfr-background-alt-blue-france p-6">
           <IndienResultCombinaisonAdvice projetId={currentProjet.id} typeSolution={TYPE_SOLUTION_VERTE} />
           <IndienResultCombinaisonAdvice projetId={currentProjet.id} typeSolution={TYPE_SOLUTION_BLEUE} />

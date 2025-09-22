@@ -19,6 +19,8 @@ export const ClimadiagIndicateursTabButton = ({ active, year, changeTab }: Clima
           : "bg-dsfr-background-action-low-blue-france-hover",
         "hover:!bg-dsfr-background-action-low-blue-france-active",
       )}
+      role="radio"
+      aria-checked={active}
       onClick={() => changeTab && changeTab(year)}
     >
       {year}

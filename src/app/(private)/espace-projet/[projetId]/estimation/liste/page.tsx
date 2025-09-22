@@ -8,7 +8,6 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 import React, { useEffect, useState } from "react";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
-// eslint-disable-next-line max-len
 import { BREADCRUMB_MES_ESTIMATIONS } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-estimation";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 
@@ -26,7 +25,9 @@ export default function ListeEstimationPage() {
   if (!currentProjet) return null;
   if (!currentProjet.estimations.length) {
     if (canEditProjet) {
-      !shouldRedirect && setShouldRedirect(true);
+      if (!shouldRedirect) {
+        setShouldRedirect(true);
+      }
       return null;
     }
     return (
@@ -44,7 +45,7 @@ export default function ListeEstimationPage() {
       <BannerProjetBreadcrumb step={BREADCRUMB_MES_ESTIMATIONS} />
       <div className="fr-container pt-8">
         <div className="mb-10">
-          <div className="mb-2 text-2xl font-bold">Je fais une estimation de budget pour mon projet</div>
+          <h1 className="text-2xl ">Je fais une estimation de budget pour mon projet</h1>
           <div className="text-lg">Mes solutions sélectionnées pour mon projet {currentProjet.nom}.</div>
           <div className="text-lg">
             Vous pouvez estimer une fourchette de prix en fonction des matériaux et systèmes choisis.

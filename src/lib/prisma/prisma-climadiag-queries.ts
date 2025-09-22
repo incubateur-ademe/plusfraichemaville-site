@@ -28,7 +28,7 @@ export const searchClimadiagInfo = async (searchTerms: string[], limit: number) 
     where: {
       OR: [
         {
-          nom: {
+          searchable_field: {
             search: fullTextQuery,
           },
         },
@@ -54,7 +54,7 @@ const computeClimadiagNameQuery = (searchTerms: string[]): Prisma.climadiagWhere
   return {
     AND: searchTerms.map((searchTerm) => {
       return {
-        nom: {
+        searchable_field: {
           contains: searchTerm,
           mode: "insensitive",
         },

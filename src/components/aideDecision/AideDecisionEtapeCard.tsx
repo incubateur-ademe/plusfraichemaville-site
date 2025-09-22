@@ -10,7 +10,7 @@ export default function AideDecisionEtapeCard({
   etapeAttributes: AideDecisionEtape["attributes"];
 }) {
   return (
-    <div className="pfmv-card fr-enlarge-link mx-4 flex w-96 flex-row items-center md:mx-0 md:w-56 md:flex-col">
+    <article className="pfmv-card fr-enlarge-link mx-4 flex w-96 flex-row items-center md:mx-0 md:w-56 md:flex-col">
       <div className="flex h-full w-32 md:h-36 md:w-full">
         <Image
           width={450}
@@ -22,13 +22,13 @@ export default function AideDecisionEtapeCard({
         />
       </div>
       <div className="m-4 max-w-[11rem] md:max-w-none">
-        <h3 className={"text-blue-hover mb-0 text-[16px] font-bold leading-tight"}>
+        <h2 className={"text-blue-hover mb-0 text-[16px] font-bold leading-tight"}>
           <LinkWithoutPrefetch className="bg-none" href={`${PFMV_ROUTES.AIDE_DECISION}/${etapeAttributes.slug}`}>
             {etapeAttributes.nom}
           </LinkWithoutPrefetch>
-        </h3>
+        </h2>
         <div className={"fr-text mt-4 hidden text-dsfr-text-mention-grey md:block"}>{etapeAttributes.description}</div>
       </div>
-    </div>
+    </article>
   );
 }

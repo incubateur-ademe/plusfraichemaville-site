@@ -8,7 +8,7 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
-export const deleteProjetAction = async (projetId: number): Promise<ResponseAction<{}>> => {
+export const deleteProjetAction = async (projetId: number): Promise<ResponseAction<object>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };

@@ -246,7 +246,6 @@ export class EmailService {
     return await Promise.all(
       projets.map(async (projet) => {
         const rexExamples = shuffledRex
-          // @ts-ignore
           .filter((rex) => rex.attributes.types_espaces?.includes(projet.type_espace))
           .slice(0, 4);
         const emailParams = computeProjetCreationEmailParam(projet, rexExamples);

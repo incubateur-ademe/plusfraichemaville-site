@@ -1,5 +1,4 @@
 import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
-// eslint-disable-next-line max-len
 import { EstimationMateriauxFicheSolutionRecap } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-fiche-solution-recap";
 import { useMemo } from "react";
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";

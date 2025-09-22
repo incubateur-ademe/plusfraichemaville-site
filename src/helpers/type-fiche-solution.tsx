@@ -15,6 +15,7 @@ export type TypeFicheSolution = {
   coloredIcon: (_?: string) => ReactNode;
   exampleCards: TypeFicheSolutionExample[];
   textButton: string;
+  searchKeywords?: string;
 };
 
 export const TYPE_SOLUTION_VERTE: TypeFicheSolution = {
@@ -35,6 +36,7 @@ export const TYPE_SOLUTION_VERTE: TypeFicheSolution = {
     { title: "Façade végétalisée", slug: "facade-vegetalisee" },
   ],
   textButton: "Voir les solutions vertes",
+  searchKeywords: "végétalisation renaturation",
 };
 
 export const TYPE_SOLUTION_BLEUE: TypeFicheSolution = {

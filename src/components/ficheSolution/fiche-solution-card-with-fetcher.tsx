@@ -18,6 +18,6 @@ export const FicheSolutionCardWithFetcher = ({ complete, id, ...props }: FicheSo
   return !data && isLoading ? (
     <FicheCardSkeleton />
   ) : (
-    data && data[0] && <FicheSolutionCard ficheSolution={data[0]} {...props} />
+    data && data[0] && <FicheSolutionCard ficheSolution={data[0]} {...props} titleHeadingLevel="h2" />
   );
 };

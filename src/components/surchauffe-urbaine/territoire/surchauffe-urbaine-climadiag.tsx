@@ -26,7 +26,7 @@ export const SurchauffeUrbaineClimadiag = ({
             <i className="ri-map-pin-line mr-1  " />
             {climadiagInfo.nom} - {climadiagInfo.code_postal}
           </div>
-          <div className="text-[1.375rem] font-bold text-pfmv-navy">En 2030, voici les projections de Météo-France</div>
+          <h2 className="text-[1.375rem] font-bold text-pfmv-navy">En 2030, voici les projections de Météo-France</h2>
         </div>
         <LinkWithoutPrefetch
           className="flex gap-4 !bg-none after:!hidden hover:!bg-dsfr-background-default-grey-hover"
@@ -47,18 +47,21 @@ export const SurchauffeUrbaineClimadiag = ({
         temperature={yearlyData.jours_tres_chauds}
         type="jours_chauds"
         classname="border border-dsfr-border-default-grey"
+        titleHeadingLevel="h3"
       />
       <ClimadiagIndicateursLine
         year={2030}
         temperature={yearlyData.nuits_chaudes}
         type="nuits_chaudes"
         classname="border border-dsfr-border-default-grey"
+        titleHeadingLevel="h3"
       />
       <ClimadiagIndicateursLine
         year={2030}
         temperature={yearlyData.jours_vdc}
         type="jours_vdc"
         classname="border border-dsfr-border-default-grey"
+        titleHeadingLevel="h3"
       />
       <div className="mt-6 text-dsfr-text-mention-grey">
         * Ces projections tiennent compte de la Trajectoire de Réchauffement et d’Adaptation au Changement Climatique

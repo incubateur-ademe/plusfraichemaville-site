@@ -1,12 +1,10 @@
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bord";
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
-
 import { TableauDeBordFichesSolutionImages } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
 import { TableauDeBordSuiviCardInfoProjet } from "./tableau-de-bord-suivi-card-info-projet";
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
 import { getLastCompletedEstimation } from "@/src/helpers/estimation";
-// eslint-disable-next-line max-len
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
 import { RexContactId } from "@/src/components/annuaire/types";

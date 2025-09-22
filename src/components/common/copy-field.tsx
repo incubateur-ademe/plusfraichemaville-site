@@ -23,7 +23,9 @@ export const CopyField = ({ label, value, className, onClick, noIcon }: CopyFiel
   };
 
   const handleClick = () => {
-    onClick && onClick();
+    if (onClick != null) {
+      onClick();
+    }
     handleCopy(value, label);
   };
 

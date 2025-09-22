@@ -3,6 +3,7 @@ import { Maturite } from "../maturite/maturite";
 
 import { Spinner } from "../common/spinner";
 import { daysUntilDate, getRelativeDate } from "@/src/helpers/dateUtils";
+import clsx from "clsx";
 
 export const TableauDeBordMaturite = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -12,8 +13,13 @@ export const TableauDeBordMaturite = () => {
   const formattedDate = getRelativeDate(lastUpdate);
 
   return (
-    <div className="mb-8 flex h-24 w-[70.5rem] items-center justify-between rounded-2xl bg-white px-8">
-      <div>
+    <div
+      className={clsx(
+        "mb-8 flex w-full max-w-[70.5rem] flex-col gap-6 rounded-2xl bg-white px-8 py-4 sm:flex-row",
+        "sm:items-center sm:justify-between",
+      )}
+    >
+      <section>
         <label htmlFor="maturite-select" className="font-bold text-black">
           Maturité du projet
         </label>
@@ -24,12 +30,14 @@ export const TableauDeBordMaturite = () => {
             <Spinner className="w-6" />
           )}
         </div>
-      </div>
+      </section>
       {updatedAt && (
-        <div>
-          <span className="block text-end text-[18px] font-bold leading-6 text-pfmv-navy">Dernière modification</span>
-          <span className="block text-end text-[18px] leading-6 text-pfmv-navy">{formattedDate}</span>
-        </div>
+        <section>
+          <span className="block text-[18px] font-bold leading-6 text-pfmv-navy sm:text-end">
+            Dernière modification
+          </span>
+          <span className="block text-[18px] leading-6 text-pfmv-navy sm:text-end">{formattedDate}</span>
+        </section>
       )}
     </div>
   );

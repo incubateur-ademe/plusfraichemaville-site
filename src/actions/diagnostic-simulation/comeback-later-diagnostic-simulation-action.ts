@@ -30,7 +30,7 @@ export const comebackLaterDiagnosticSimulationAction = async (projetId: number):
     });
     return { type: "success" };
   } catch (e) {
-    // @ts-ignore
+    // @ts-expect-error ignore
     customCaptureException("Error in upsertDiagnosticSimulationAction DB call", e?.stack);
     return { type: "error", message: "TECHNICAL_ERROR" };
   }

@@ -14,7 +14,7 @@ export const FicheSolutionSmallCardContainer = ({
   className,
 }: FicheSolutionSmallCardContainerProps) => {
   return (
-    <div className={clsx("px-12 pb-12 pt-12", className)}>
+    <div className={clsx("px-12 pb-12 pt-8", className)}>
       <div className="mb-3 text-2xl font-bold">{title}</div>
       <div className="mb-6 text-lg">{subtitle}</div>
       {children}

@@ -20,7 +20,9 @@ export const usePagination = <T,>({ data, itemsPerPage = 12 }: UsePaginationProp
   const handlePageChange = (page: number, config?: { needScrollToTop?: boolean; nameId?: string }) => {
     const needScrollToTop = config?.needScrollToTop ?? true;
     setCurrentPage(page);
-    needScrollToTop && scrollToTop(`#${config?.nameId}`);
+    if (needScrollToTop) {
+      scrollToTop(`#${config?.nameId}`);
+    }
   };
 
   return { paginatedResults, currentPage, totalPages, handlePageChange, itemsPerPage };

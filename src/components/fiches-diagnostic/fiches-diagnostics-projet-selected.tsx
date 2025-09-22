@@ -1,8 +1,7 @@
 "use client";
 
 import "@splidejs/splide/css/core";
-// TODO: Check changelog from Splide and remove ts-ignore
-// @ts-ignore
+// @ts-expect-error Check changelog from Splide and remove ts-ignore
 import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
