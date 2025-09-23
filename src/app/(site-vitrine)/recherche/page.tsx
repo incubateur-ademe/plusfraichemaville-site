@@ -9,7 +9,7 @@ export default async function RecherchePage(props: { searchParams: Promise<{ q: 
   const displaySearch = process.env.NEXT_PUBLIC_FEATURE_SEARCH === "true" || false;
 
   return (
-    <div className="fr-container">
+    <div className="fr-container mb-[30rem]">
       <h1 className="mt-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Rechercher sur le site</h1>
       {displaySearch ? <RechercheBarre query={searchParams.q} /> : <div>Bientôt disponible</div>}
     </div>

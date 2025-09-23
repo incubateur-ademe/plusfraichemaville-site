@@ -1,0 +1,7 @@
+.rechercheInput {
+  @apply !rounded-l-3xl;
+}
+
+.customSearchBar > button {
+  @apply !rounded-r-3xl;
+}

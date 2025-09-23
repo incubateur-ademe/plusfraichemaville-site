@@ -19,11 +19,15 @@ import { Webinaire } from "@/src/lib/strapi/types/api/webinaire";
 
 export const mapRexDiagToSearchableRexDiag = (rexDiag: RetourExperienceDiagnostic): SearchableRexDiagnostic => ({
   ...rexDiag,
-  searchableKey: [rexDiag.attributes.titre, rexDiag.attributes.lieu].map(normalizeText).join(" "),
+  searchableKey: ["diagnostic réalisé retour d'experience", rexDiag.attributes.titre, rexDiag.attributes.lieu]
+    .map(normalizeText)
+    .join(" "),
 });
 export const mapWebinaireToSearchableWebinaire = (webinaire: Webinaire): SearchableWebinaire => ({
   ...webinaire,
-  searchableKey: [webinaire.attributes.titre, webinaire.attributes.description].map(normalizeText).join(" "),
+  searchableKey: ["webinaire", webinaire.attributes.titre, webinaire.attributes.description]
+    .map(normalizeText)
+    .join(" "),
 });
 
 export const mapRexToSearchableRex = (rex: RetourExperience): SearchableRetourExperience => {
@@ -35,8 +39,9 @@ export const mapRexToSearchableRex = (rex: RetourExperience): SearchableRetourEx
   return {
     ...rex,
     searchableKey: [
+      "projet réalisé retour d'expérience",
       rex.attributes.titre,
-      getClimatLabelFromCode(rex.attributes.climat_actuel),
+      `climat ${getClimatLabelFromCode(rex.attributes.climat_actuel)}`,
       getRegionLabelFromCode(rex.attributes.region?.data.attributes.code) || "",
       espaceCodesToEspacesSearchKeywords(rex.attributes.types_espaces),
       relatedFicheSolution,
@@ -51,6 +56,7 @@ export const mapFicheDiagnosticToSearchableFD = (ficheDiagnostic: FicheDiagnosti
   return {
     ...ficheDiagnostic,
     searchableKey: [
+      "fiche méthode de diagnostic",
       ficheDiagnostic.attributes.titre,
       ficheDiagnostic.attributes.nom_scientifique,
       getEchellesSpatialesByFicheDiagnostic(ficheDiagnostic)
@@ -74,6 +80,7 @@ export const mapFicheSolutionToSearchableFS = (
   return {
     ...ficheSolution,
     searchableKey: [
+      "fiche solution",
       avecTypeEspace ? espaceCodesToEspacesSearchKeywords(ficheSolution.attributes.types_espace) : "",
       typeSolution?.searchKeywords,
       typeSolution?.label,
