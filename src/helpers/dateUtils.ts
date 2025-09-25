@@ -55,3 +55,6 @@ export const daysUntilDate = (targetDate: Date | null): number | null => {
 
   return Math.ceil((targetDate.getTime() - new Date().getTime()) / MS_PER_DAY);
 };
+
+export const dateSort = (a: Date | string | null, b: Date | string | null) =>
+  new Date(a || FAR_FUTURE) < new Date(b || FAR_FUTURE) ? -1 : 0;

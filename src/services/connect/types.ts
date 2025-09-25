@@ -22,6 +22,8 @@ export type ConnectProjet = {
   projetVisible: boolean;
   localisation?: string | null;
   projetTest?: boolean;
+  projetAnnule?: boolean;
+  dateAnnulation?: string | null;
 };
 
 export type ConnectResponse = {

@@ -7,7 +7,7 @@ import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
 import { AideEditFilter } from "./aide-edit-filter";
 import { memo, useMemo, useState } from "react";
-import { countAidesByType, maxSubventionRateSortApi, resolveAidType, sumbissionDateSortApi } from "../helpers";
+import { countAidesByType, resolveAidType } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/src/components/financement/types";
 import { FichesDiagnosticFiltersKey, useAideEstimationEditFilter } from "@/src/hooks/use-aide-estimation-edit-filter";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
@@ -35,7 +35,7 @@ export const AideEdit = memo(() => {
   const { filters, toggleFilter } = useAideEstimationEditFilter();
   const skeletons = [...new Array(3)].map((_, i) => <AideCardSkeleton key={i} />);
   const estimation = projet?.estimations.find((estimation) => estimation.id === +estimationId);
-  const { sortMethod, setSortMethod } = useAideEstimationEditSortMethod();
+  const { sortMethodCode, setSortMethodCode, sortMethod } = useAideEstimationEditSortMethod();
 
   const { data, isLoading } = useAidesByEstimationFetcher(+estimationId, isNewAPIVersion);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
@@ -56,7 +56,7 @@ export const AideEdit = memo(() => {
             !filters.selectedAides ||
             estimation?.estimations_aides.find((estimationAide) => estimationAide.aide.aideTerritoireId === aide.id),
         )
-        .sort(sortMethod === "submissionDate" ? sumbissionDateSortApi : maxSubventionRateSortApi),
+        .sort(sortMethod.sortMethod),
     [
       data?.results,
       estimation?.estimations_aides,
@@ -68,7 +68,7 @@ export const AideEdit = memo(() => {
   );
   const { paginatedResults, currentPage, handlePageChange, itemsPerPage } = usePagination({
     data: filteredResults,
-    itemsPerPage: 18,
+    itemsPerPage: 9,
   });
 
   const handleFiltersChange = (key: FichesDiagnosticFiltersKey) => {
@@ -107,7 +107,7 @@ export const AideEdit = memo(() => {
               selectedAidesCount={estimation?.estimations_aides?.length || 0}
               isLoading={isLoading}
             />
-            <AideEditSortField sortMethod={sortMethod} setSortMethod={setSortMethod} />
+            <AideEditSortField sortMethodCode={sortMethodCode} setSortMethodCode={setSortMethodCode} />
           </div>
 
           <div className="aide-card flex flex-wrap gap-6">

@@ -11,6 +11,8 @@ import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { RECHERCHE_GLOBALE_SITE } from "@/src/helpers/matomo/matomo-tags";
 import useSWRImmutable from "swr/immutable";
 import clsx from "clsx";
+import styles from "./page.module.css";
+import { RechercheSuggestions } from "@/src/components/recherche/recherche-suggestions";
 
 type RechercheBarreProps = {
   query?: string;
@@ -39,12 +41,12 @@ export const RechercheBarre = ({ query, className }: RechercheBarreProps) => {
   return (
     <>
       <SearchBar
-        className={className}
+        className={clsx(className, styles.customSearchBar)}
         big
         onButtonClick={(searchText) => searchClick(searchText)}
         renderInput={({ className, id, placeholder, type }) => (
           <input
-            className={clsx(className, error && "fr-input--error")}
+            className={clsx(className, error && "fr-input--error", styles.rechercheInput)}
             defaultValue={query}
             placeholder={placeholder}
             type={type}
@@ -61,6 +63,7 @@ export const RechercheBarre = ({ query, className }: RechercheBarreProps) => {
       )}
       {isLoading && <RechercheResultatsSkeleton className="mt-10" />}
       {data && query && <RechercheResultats searchResult={data} className="mt-10" />}
+      {!data && !query && !isLoading && <RechercheSuggestions className="mt-16" />}
     </>
   );
 };
