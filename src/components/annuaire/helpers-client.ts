@@ -27,3 +27,14 @@ export const createClusterCustomIcon = function (cluster: any) {
     iconAnchor: [size / 2, size / 2],
   });
 };
+
+export const createProjetMarkerIcon = (type: CustomMarker["type"], isActive: boolean) => {
+  const WIDTH = 44;
+  const HEIGHT = 53;
+  return new Icon({
+    iconUrl: `/images/annuaire/annuaire-projet-${type}${isActive ? "-active" : ""}.svg`,
+    iconSize: [WIDTH, HEIGHT],
+    iconAnchor: [WIDTH / 2, HEIGHT],
+  });
+};
+

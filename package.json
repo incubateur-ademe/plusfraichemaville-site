@@ -65,9 +65,6 @@
     "zustand": "^4.5.6"
   },
   "devDependencies": {
-    "eslint": "^9.35.0",
-    "eslint-config-next": "15.5.3",
-    "eslint-config-prettier": "^9.1.0",
     "@creedengo/eslint-plugin": "^2.1.0",
     "@eslint/eslintrc": "^3.3.1",
     "@eslint/js": "^9.35.0",
@@ -81,6 +78,9 @@
     "@types/react-image-gallery": "^1.2.4",
     "@types/uuid": "^9.0.8",
     "autoprefixer": "^10.4.20",
+    "eslint": "^9.35.0",
+    "eslint-config-next": "15.5.3",
+    "eslint-config-prettier": "^9.1.0",
     "globals": "^16.4.0",
     "i": "^0.3.7",
     "postcss": "^8.4.49",
