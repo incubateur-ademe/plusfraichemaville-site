@@ -11,7 +11,6 @@ const cspHeader = `
     };
     style-src 'self' 'unsafe-inline';
     img-src 'self' blob: data: https://cdn.plusfraichemaville.fr/ https://pfmv-cms-prod.s3.fr-par.scw.cloud/
-    https://*.basemaps.cartocdn.com
     https://cartagene.cerema.fr
     https://tile.openstreetmap.org
     https://*.hsforms.com 
