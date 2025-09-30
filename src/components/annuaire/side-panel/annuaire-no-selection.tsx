@@ -9,7 +9,7 @@ export const AnnuaireNoSelection = () => {
       <p className="mb-1 text-center">{"Vous pouvez également utiliser l'action rapide"}</p>
       <p>
         {"'"}
-        <i className="ri-home-7-line text-dsfr-action-high-red-hover before:!w-[22px]"></i> Les projets autour de moi.
+        <i className="ri-home-7-line text-dsfr-action-high-red-hover before:!w-[22px]"></i> Recentrer sur mon projet.
         {"'"}
       </p>
     </div>

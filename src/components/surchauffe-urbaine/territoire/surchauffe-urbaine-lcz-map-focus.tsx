@@ -1,6 +1,5 @@
 "use client";
 
-import "leaflet/dist/leaflet.css";
 import { Climadiag } from "@/src/components/climadiag/types";
 import { GeoJsonAdresse } from "@/src/components/annuaire/types";
 import { useMap } from "react-map-gl/maplibre";

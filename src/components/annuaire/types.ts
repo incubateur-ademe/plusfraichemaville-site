@@ -1,5 +1,5 @@
 import { TypeEspaceCode } from "@/src/helpers/type-espace-filter";
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple } from "@/src/types/global";
 import { Contact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 
 type Coordinates = [number, number];
