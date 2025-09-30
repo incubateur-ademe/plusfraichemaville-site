@@ -5,7 +5,7 @@ import { BanFeature } from "@/src/lib/adresseApi/types";
 import debounce from "lodash/debounce";
 import { Spinner } from "@/src/components/common/spinner";
 import clsx from "clsx";
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple } from "@/src/types/global";
 import { ZoomLevelKey } from "../types";
 
 type AnnuaireFilterAdresseProps = {

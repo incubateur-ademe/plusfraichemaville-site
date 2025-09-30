@@ -1,7 +1,7 @@
 /* Overrides MapLibre pour DSFR */
 
 [data-theme="dsfr"] .maplibregl-ctrl {
-  font-family: 'Marianne', Arial, sans-serif; /* A remplacer par la variable dsfr !!! */
+  font-family: "Marianne", Arial, sans-serif; /* A remplacer par la variable dsfr !!! */
 }
 .cartefacile-ctrl-zoom-level {
   padding: 4px 8px;
@@ -11,11 +11,11 @@
 /* Classes CSS réutilisables pour les boutons */
 
 .cartefacile-btn {
-    border-radius: 4px;
+  border-radius: 4px;
 }
 
 .cartefacile-btn-icon::before {
-  content: '';
+  content: "";
   mask-position: 50%;
   -webkit-mask-position: 50%;
   mask-size: 20px;
@@ -77,7 +77,9 @@
 
 .cartefacile-ctrl-map-selector-card {
   cursor: pointer;
-  transition: border-color 0.2s, transform 0.1s;
+  transition:
+    border-color 0.2s,
+    transform 0.1s;
   display: flex;
   align-items: center;
   gap: 12px;
@@ -103,24 +105,24 @@
 
 /* Position top-right (par défaut) */
 .cartefacile-ctrl-top-right {
-    top: 10px;
-    right: 10px;
+  top: 10px;
+  right: 10px;
 }
 
 /* Position top-left */
 .cartefacile-ctrl-top-left {
-    top: 10px;
-    left: 10px;
+  top: 10px;
+  left: 10px;
 }
 
 /* Position bottom-right */
 .cartefacile-ctrl-bottom-right {
-    bottom: 10px;
-    right: 10px;
+  bottom: 10px;
+  right: 10px;
 }
 
 /* Position bottom-left */
 .cartefacile-ctrl-bottom-left {
-    bottom: 10px;
-    left: 10px;
+  bottom: 10px;
+  left: 10px;
 }

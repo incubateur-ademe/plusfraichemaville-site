@@ -33,3 +33,5 @@ declare global {
     _hsp: HubspotQuery[];
   }
 }
+
+export type LatLngTuple = [number, number, number?];

@@ -11,7 +11,7 @@ import dynamic from "next/dynamic";
 import { AnnuaireMapSkeleton } from "./annuaire-map-skeleton";
 import { AnnuaireFilterAdresse } from "../filters/annuaire-filter-adresse";
 import { AnnuaireLayoutButton } from "@/src/components/annuaire/annuaire-layout-button";
-const LazyAnnuaireMapClient = dynamic(() => import("./annuaire-map-client-maplibre"), {
+const LazyAnnuaireMapClient = dynamic(() => import("././annuaire-map-client"), {
   ssr: false,
   loading: () => <AnnuaireMapSkeleton />,
 });
