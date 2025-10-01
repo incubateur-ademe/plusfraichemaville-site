@@ -1,6 +1,6 @@
-import { NewsletterForm } from "@/src/forms/newsletter/newsletter-form";
 import Image from "next/image";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { NewsletterIframe } from "@/src/forms/newsletter/newsletter-iframe";
 
 export const NewsletterLinkedin = () => (
   <div>
@@ -8,8 +8,7 @@ export const NewsletterLinkedin = () => (
       <div className="fr-container">
         <div className="fr-grid-row">
           <div className="fr-col-12 fr-col-md-6 !pr-[4%]">
-            <h2 className="mb-4 !text-xl">Abonnez-vous à notre lettre d’information</h2>
-            <NewsletterForm />
+            <NewsletterIframe />
           </div>
           <div className="fr-col-12 fr-col-md-6 !pl-[4%]">
             <div className="h-full">
