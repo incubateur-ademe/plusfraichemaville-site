@@ -139,6 +139,7 @@ const AnnuaireMapClient = ({
           <Marker
             latitude={currentProjetCoordinates[0]}
             longitude={currentProjetCoordinates[1]}
+            className="cursor-pointer"
             onClick={(_) => {
               handleMarkerClick({
                 geocode: currentProjetCoordinates,
