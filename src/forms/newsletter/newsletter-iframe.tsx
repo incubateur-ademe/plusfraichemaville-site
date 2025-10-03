@@ -1,8 +1,9 @@
 "use client";
 import { useUserStore } from "@/src/stores/user/provider";
 import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
+import clsx from "clsx";
 
-export const NewsletterIframe = () => {
+export const NewsletterIframe = ({ className }: { className?: string }) => {
   const user = useUserStore((state) => state.userInfos);
   const userEmail = user?.email;
   const userSiret = (user?.agentconnect_info as AgentConnectInfo | null)?.siret;
@@ -14,9 +15,8 @@ export const NewsletterIframe = () => {
 
   return (
     <iframe
-      className="h-[40rem] w-full"
+      className={clsx("h-[40rem] w-full", className)}
       src={`https://cloud.contact.ademe.fr/inscription-PFMV?${searchParams}`}
-      allowTransparency
     />
   );
 };
