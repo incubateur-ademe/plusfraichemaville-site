@@ -13,7 +13,7 @@ import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
-  getProjetsForProjetCreationEmail,
+  getProjetsWithoutFiche,
   getProjetsForRemindDiagnosticEmail,
 } from "@/src/lib/prisma/prismaProjetQueries";
 import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
@@ -239,8 +239,8 @@ export class EmailService {
   }
 
   async sendProjetCreationEmail(lastSyncDate: Date) {
-    const projets = await getProjetsForProjetCreationEmail(lastSyncDate, new Date());
-    console.log(`Nb de mails de création de projet à envoyer : ${projets.length}`);
+    const projets = await getProjetsWithoutFiche(lastSyncDate, new Date());
+    console.log(`Nb de mails de création de projet sans fiche à envoyer : ${projets.length}`);
     const allRex = await getRetoursExperiences();
     const shuffledRex = shuffle(allRex);
     return await Promise.all(

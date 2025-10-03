@@ -24,17 +24,18 @@ const main = async () => {
       INACTIVITY_DAYS,
     );
 
-    console.log("Recherche des nouveaux projets...");
+    const REMIND_UNFINISHED_DIAG_DAYS = 7;
+    console.log(`Recherche des projets avec diagnostics non validés  depuis ${REMIND_UNFINISHED_DIAG_DAYS} jours...`);
+    const unfinishedDiagPromises = await emailService.sendRemindNotCompletedDiagnosticEmail(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_UNFINISHED_DIAG_DAYS),
+      REMIND_UNFINISHED_DIAG_DAYS,
+    );
+
+    console.log("Recherche des projets avec diagnostics mais sans fiche solution");
     const sendProjetEmailsPromises = await emailService.sendProjetCreationEmail(
       lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
 
-    const REMIND_UNFINISGED_DIAG_DAYS = 7;
-    console.log(`Recherche des projets avec diagnostics non validés  depuis ${REMIND_UNFINISGED_DIAG_DAYS} jours...`);
-    const unfinishedDiagPromises = await emailService.sendRemindNotCompletedDiagnosticEmail(
-      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_UNFINISGED_DIAG_DAYS),
-      REMIND_UNFINISGED_DIAG_DAYS,
-    );
 
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     const webhookData = makeCsmBatchWebhookData({

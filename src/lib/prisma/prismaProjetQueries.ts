@@ -1,9 +1,50 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@/src/generated/prisma/client";
+import {
+  emailStatus,
+  emailType,
+  FicheType,
+  InvitationStatus,
+  Prisma,
+  projet,
+  RoleProjet,
+  user_projet
+} from "@/src/generated/prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/annuaire/types";
+
+export const projetWithoutFicheSolution = {
+  fiches: { none: { type: FicheType.SOLUTION } },
+};
+
+export const projetWithoutFicheDiagnostic = {
+  fiches: { none: { type: FicheType.DIAGNOSTIC } },
+};
+
+export const projetDidNotAlreadySendEmail = (emailType: emailType) => ({
+  NOT: {
+    users: {
+      some: {
+        role: RoleProjet.ADMIN,
+        email: {
+          some: {
+            type: emailType,
+            email_status: emailStatus.SUCCESS,
+          },
+        },
+      },
+    },
+  },
+});
+
+export const projetWithoutFiche = {
+  fiches: { none: {} },
+};
+
+export const projetWithoutDiagnosticSimulation = {
+  diagnostic_simulations: { none: {} },
+};
 
 export const projetIncludes = {
   collectivite: true,
@@ -394,10 +435,7 @@ export const updateProjetVisibility = async (
   });
 };
 
-export const getProjetsForProjetCreationEmail = async (
-  afterDate: Date,
-  beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
+export const getProjetsWithoutFiche = async (afterDate: Date, beforeDate: Date): Promise<ProjetWithRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
       deleted_at: null,
@@ -405,19 +443,9 @@ export const getProjetsForProjetCreationEmail = async (
         gte: afterDate,
         lte: beforeDate,
       },
-      NOT: {
-        users: {
-          some: {
-            role: "ADMIN",
-            email: {
-              some: {
-                type: emailType.projetCreation,
-                email_status: "SUCCESS",
-              },
-            },
-          },
-        },
-      },
+      ...projetWithoutFiche,
+      ...projetWithoutDiagnosticSimulation,
+      ...projetDidNotAlreadySendEmail(emailType.projetCreation),
     },
     include: projetIncludes,
   });
@@ -439,19 +467,7 @@ export const getProjetsForRemindDiagnosticEmail = async (
           },
         },
       },
-      NOT: {
-        users: {
-          some: {
-            role: "ADMIN",
-            email: {
-              some: {
-                type: emailType.remindNotCompletedDiagnostic,
-                email_status: "SUCCESS",
-              },
-            },
-          },
-        },
-      },
+      ...projetDidNotAlreadySendEmail(emailType.remindNotCompletedDiagnostic),
     },
     include: projetIncludes,
   });
