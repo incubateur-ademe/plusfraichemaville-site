@@ -6,7 +6,7 @@ import {
   InvitationStatus,
   Prisma,
   projet,
-  RoleProjet,
+  RoleProjet, StatutProjet,
   user_projet,
 } from "@/src/generated/prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
@@ -203,6 +203,7 @@ export const createOrUpdateProjet = async ({
   collectiviteId,
   isPublic,
   budget,
+  statut,
 }: {
   projetId?: number;
   nomProjet: string;
@@ -215,6 +216,7 @@ export const createOrUpdateProjet = async ({
   collectiviteId: number;
   isPublic: boolean;
   budget?: number;
+  statut?: StatutProjet;
 }) => {
   return prismaClient.projet.upsert({
     where: {
@@ -254,6 +256,7 @@ export const createOrUpdateProjet = async ({
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
       is_public: isPublic,
+      statut: statut
     },
     include: projetIncludes,
   });
@@ -434,6 +437,22 @@ export const updateProjetVisibility = async (
     },
     data: {
       is_public: visible,
+    },
+    include: projetIncludes,
+  });
+};
+
+export const updateProjetStatut = async (
+  projetId: number,
+  statut: StatutProjet,
+): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    data: {
+      statut: statut,
     },
     include: projetIncludes,
   });

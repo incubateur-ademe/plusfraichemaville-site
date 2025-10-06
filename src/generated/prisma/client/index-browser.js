@@ -228,7 +228,8 @@ exports.Prisma.ProjetScalarFieldEnum = {
   deleted_by: 'deleted_by',
   is_public: 'is_public',
   budget: 'budget',
-  sourcing_rex: 'sourcing_rex'
+  sourcing_rex: 'sourcing_rex',
+  statut: 'statut'
 };
 
 exports.Prisma.Projet_ficheScalarFieldEnum = {
@@ -512,6 +513,13 @@ exports.emailStatus = exports.$Enums.emailStatus = {
   SUCCESS: 'SUCCESS'
 };
 
+exports.StatutProjet = exports.$Enums.StatutProjet = {
+  termine: 'termine',
+  en_cours: 'en_cours',
+  besoin_aide: 'besoin_aide',
+  autre: 'autre'
+};
+
 exports.FicheType = exports.$Enums.FicheType = {
   DIAGNOSTIC: 'DIAGNOSTIC',
   SOLUTION: 'SOLUTION'
@@ -530,6 +538,7 @@ exports.ReferenceType = exports.$Enums.ReferenceType = {
 
 exports.EventType = exports.$Enums.EventType = {
   UPDATE_MATURITE: 'UPDATE_MATURITE',
+  UPDATE_STATUT_PROJET: 'UPDATE_STATUT_PROJET',
   UPDATE_PROJET_SET_VISIBLE: 'UPDATE_PROJET_SET_VISIBLE',
   UPDATE_PROJET_SET_INVISIBLE: 'UPDATE_PROJET_SET_INVISIBLE'
 };

@@ -161,6 +161,16 @@ export const emailStatus: {
 export type emailStatus = (typeof emailStatus)[keyof typeof emailStatus]
 
 
+export const StatutProjet: {
+  termine: 'termine',
+  en_cours: 'en_cours',
+  besoin_aide: 'besoin_aide',
+  autre: 'autre'
+};
+
+export type StatutProjet = (typeof StatutProjet)[keyof typeof StatutProjet]
+
+
 export const FicheType: {
   DIAGNOSTIC: 'DIAGNOSTIC',
   SOLUTION: 'SOLUTION'
@@ -188,6 +198,7 @@ export type ReferenceType = (typeof ReferenceType)[keyof typeof ReferenceType]
 
 export const EventType: {
   UPDATE_MATURITE: 'UPDATE_MATURITE',
+  UPDATE_STATUT_PROJET: 'UPDATE_STATUT_PROJET',
   UPDATE_PROJET_SET_VISIBLE: 'UPDATE_PROJET_SET_VISIBLE',
   UPDATE_PROJET_SET_INVISIBLE: 'UPDATE_PROJET_SET_INVISIBLE'
 };
@@ -224,6 +235,10 @@ export const emailType: typeof $Enums.emailType
 export type emailStatus = $Enums.emailStatus
 
 export const emailStatus: typeof $Enums.emailStatus
+
+export type StatutProjet = $Enums.StatutProjet
+
+export const StatutProjet: typeof $Enums.StatutProjet
 
 export type FicheType = $Enums.FicheType
 
@@ -11551,6 +11566,7 @@ export namespace Prisma {
     deleted_by: string | null
     is_public: boolean | null
     budget: number | null
+    statut: $Enums.StatutProjet | null
   }
 
   export type ProjetMaxAggregateOutputType = {
@@ -11568,6 +11584,7 @@ export namespace Prisma {
     deleted_by: string | null
     is_public: boolean | null
     budget: number | null
+    statut: $Enums.StatutProjet | null
   }
 
   export type ProjetCountAggregateOutputType = {
@@ -11591,6 +11608,7 @@ export namespace Prisma {
     is_public: number
     budget: number
     sourcing_rex: number
+    statut: number
     _all: number
   }
 
@@ -11626,6 +11644,7 @@ export namespace Prisma {
     deleted_by?: true
     is_public?: true
     budget?: true
+    statut?: true
   }
 
   export type ProjetMaxAggregateInputType = {
@@ -11643,6 +11662,7 @@ export namespace Prisma {
     deleted_by?: true
     is_public?: true
     budget?: true
+    statut?: true
   }
 
   export type ProjetCountAggregateInputType = {
@@ -11666,6 +11686,7 @@ export namespace Prisma {
     is_public?: true
     budget?: true
     sourcing_rex?: true
+    statut?: true
     _all?: true
   }
 
@@ -11776,6 +11797,7 @@ export namespace Prisma {
     is_public: boolean | null
     budget: number | null
     sourcing_rex: JsonValue | null
+    statut: $Enums.StatutProjet | null
     _count: ProjetCountAggregateOutputType | null
     _avg: ProjetAvgAggregateOutputType | null
     _sum: ProjetSumAggregateOutputType | null
@@ -11818,6 +11840,7 @@ export namespace Prisma {
     is_public?: boolean
     budget?: boolean
     sourcing_rex?: boolean
+    statut?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
     estimations?: boolean | projet$estimationsArgs<ExtArgs>
     collectivite?: boolean | collectiviteDefaultArgs<ExtArgs>
@@ -11850,6 +11873,7 @@ export namespace Prisma {
     is_public?: boolean
     budget?: boolean
     sourcing_rex?: boolean
+    statut?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
     collectivite?: boolean | collectiviteDefaultArgs<ExtArgs>
     deleter?: boolean | projet$deleterArgs<ExtArgs>
@@ -11876,6 +11900,7 @@ export namespace Prisma {
     is_public?: boolean
     budget?: boolean
     sourcing_rex?: boolean
+    statut?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
     collectivite?: boolean | collectiviteDefaultArgs<ExtArgs>
     deleter?: boolean | projet$deleterArgs<ExtArgs>
@@ -11902,9 +11927,10 @@ export namespace Prisma {
     is_public?: boolean
     budget?: boolean
     sourcing_rex?: boolean
+    statut?: boolean
   }
 
-  export type projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "nom" | "type_espace" | "adresse" | "niveau_maturite" | "adresse_info" | "adresse_all_infos" | "date_echeance" | "fiches_solutions_id" | "fiches_diagnostic_id" | "collectiviteId" | "recommandations_viewed_by" | "deleted_at" | "deleted_by" | "is_public" | "budget" | "sourcing_rex", ExtArgs["result"]["projet"]>
+  export type projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "nom" | "type_espace" | "adresse" | "niveau_maturite" | "adresse_info" | "adresse_all_infos" | "date_echeance" | "fiches_solutions_id" | "fiches_diagnostic_id" | "collectiviteId" | "recommandations_viewed_by" | "deleted_at" | "deleted_by" | "is_public" | "budget" | "sourcing_rex" | "statut", ExtArgs["result"]["projet"]>
   export type projetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | UserDefaultArgs<ExtArgs>
     estimations?: boolean | projet$estimationsArgs<ExtArgs>
@@ -11960,6 +11986,7 @@ export namespace Prisma {
       is_public: boolean | null
       budget: number | null
       sourcing_rex: Prisma.JsonValue | null
+      statut: $Enums.StatutProjet | null
     }, ExtArgs["result"]["projet"]>
     composites: {}
   }
@@ -12411,6 +12438,7 @@ export namespace Prisma {
     readonly is_public: FieldRef<"projet", 'Boolean'>
     readonly budget: FieldRef<"projet", 'Int'>
     readonly sourcing_rex: FieldRef<"projet", 'Json'>
+    readonly statut: FieldRef<"projet", 'StatutProjet'>
   }
     
 
@@ -24303,7 +24331,8 @@ export namespace Prisma {
     deleted_by: 'deleted_by',
     is_public: 'is_public',
     budget: 'budget',
-    sourcing_rex: 'sourcing_rex'
+    sourcing_rex: 'sourcing_rex',
+    statut: 'statut'
   };
 
   export type ProjetScalarFieldEnum = (typeof ProjetScalarFieldEnum)[keyof typeof ProjetScalarFieldEnum]
@@ -24794,6 +24823,20 @@ export namespace Prisma {
    * Reference to a field of type 'emailStatus[]'
    */
   export type ListEnumemailStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'emailStatus[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutProjet'
+   */
+  export type EnumStatutProjetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutProjet'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutProjet[]'
+   */
+  export type ListEnumStatutProjetFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutProjet[]'>
     
 
 
@@ -25526,6 +25569,7 @@ export namespace Prisma {
     is_public?: BoolNullableFilter<"projet"> | boolean | null
     budget?: IntNullableFilter<"projet"> | number | null
     sourcing_rex?: JsonNullableFilter<"projet">
+    statut?: EnumStatutProjetNullableFilter<"projet"> | $Enums.StatutProjet | null
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
     estimations?: EstimationListRelationFilter
     collectivite?: XOR<CollectiviteScalarRelationFilter, collectiviteWhereInput>
@@ -25557,6 +25601,7 @@ export namespace Prisma {
     is_public?: SortOrderInput | SortOrder
     budget?: SortOrderInput | SortOrder
     sourcing_rex?: SortOrderInput | SortOrder
+    statut?: SortOrderInput | SortOrder
     creator?: UserOrderByWithRelationInput
     estimations?: estimationOrderByRelationAggregateInput
     collectivite?: collectiviteOrderByWithRelationInput
@@ -25592,6 +25637,7 @@ export namespace Prisma {
     is_public?: BoolNullableFilter<"projet"> | boolean | null
     budget?: IntNullableFilter<"projet"> | number | null
     sourcing_rex?: JsonNullableFilter<"projet">
+    statut?: EnumStatutProjetNullableFilter<"projet"> | $Enums.StatutProjet | null
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
     estimations?: EstimationListRelationFilter
     collectivite?: XOR<CollectiviteScalarRelationFilter, collectiviteWhereInput>
@@ -25623,6 +25669,7 @@ export namespace Prisma {
     is_public?: SortOrderInput | SortOrder
     budget?: SortOrderInput | SortOrder
     sourcing_rex?: SortOrderInput | SortOrder
+    statut?: SortOrderInput | SortOrder
     _count?: projetCountOrderByAggregateInput
     _avg?: projetAvgOrderByAggregateInput
     _max?: projetMaxOrderByAggregateInput
@@ -25654,6 +25701,7 @@ export namespace Prisma {
     is_public?: BoolNullableWithAggregatesFilter<"projet"> | boolean | null
     budget?: IntNullableWithAggregatesFilter<"projet"> | number | null
     sourcing_rex?: JsonNullableWithAggregatesFilter<"projet">
+    statut?: EnumStatutProjetNullableWithAggregatesFilter<"projet"> | $Enums.StatutProjet | null
   }
 
   export type projet_ficheWhereInput = {
@@ -27058,6 +27106,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -27089,6 +27138,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -27114,6 +27164,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -27145,6 +27196,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -27173,6 +27225,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
   }
 
   export type projetUpdateManyMutationInput = {
@@ -27193,6 +27246,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
   }
 
   export type projetUncheckedUpdateManyInput = {
@@ -27216,6 +27270,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
   }
 
   export type projet_ficheCreateInput = {
@@ -28773,6 +28828,13 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
+  export type EnumStatutProjetNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutProjet | EnumStatutProjetFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatutProjet[] | ListEnumStatutProjetFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatutProjet[] | ListEnumStatutProjetFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatutProjetNullableFilter<$PrismaModel> | $Enums.StatutProjet | null
+  }
+
   export type projetOrderByRelevanceInput = {
     fields: projetOrderByRelevanceFieldEnum | projetOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -28800,6 +28862,7 @@ export namespace Prisma {
     is_public?: SortOrder
     budget?: SortOrder
     sourcing_rex?: SortOrder
+    statut?: SortOrder
   }
 
   export type projetAvgOrderByAggregateInput = {
@@ -28825,6 +28888,7 @@ export namespace Prisma {
     deleted_by?: SortOrder
     is_public?: SortOrder
     budget?: SortOrder
+    statut?: SortOrder
   }
 
   export type projetMinOrderByAggregateInput = {
@@ -28842,6 +28906,7 @@ export namespace Prisma {
     deleted_by?: SortOrder
     is_public?: SortOrder
     budget?: SortOrder
+    statut?: SortOrder
   }
 
   export type projetSumOrderByAggregateInput = {
@@ -28858,6 +28923,16 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type EnumStatutProjetNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutProjet | EnumStatutProjetFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatutProjet[] | ListEnumStatutProjetFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatutProjet[] | ListEnumStatutProjetFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatutProjetNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatutProjet | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatutProjetNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatutProjetNullableFilter<$PrismaModel>
   }
 
   export type EnumFicheTypeFilter<$PrismaModel = never> = {
@@ -30652,6 +30727,10 @@ export namespace Prisma {
     set?: boolean | null
   }
 
+  export type NullableEnumStatutProjetFieldUpdateOperationsInput = {
+    set?: $Enums.StatutProjet | null
+  }
+
   export type UserUpdateOneRequiredWithoutProjets_createdNestedInput = {
     create?: XOR<UserCreateWithoutProjets_createdInput, UserUncheckedCreateWithoutProjets_createdInput>
     connectOrCreate?: UserCreateOrConnectWithoutProjets_createdInput
@@ -31483,12 +31562,29 @@ export namespace Prisma {
     not?: NestedBoolNullableFilter<$PrismaModel> | boolean | null
   }
 
+  export type NestedEnumStatutProjetNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutProjet | EnumStatutProjetFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatutProjet[] | ListEnumStatutProjetFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatutProjet[] | ListEnumStatutProjetFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatutProjetNullableFilter<$PrismaModel> | $Enums.StatutProjet | null
+  }
+
   export type NestedBoolNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: boolean | BooleanFieldRefInput<$PrismaModel> | null
     not?: NestedBoolNullableWithAggregatesFilter<$PrismaModel> | boolean | null
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedBoolNullableFilter<$PrismaModel>
     _max?: NestedBoolNullableFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatutProjetNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutProjet | EnumStatutProjetFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatutProjet[] | ListEnumStatutProjetFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatutProjet[] | ListEnumStatutProjetFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatutProjetNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatutProjet | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatutProjetNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatutProjetNullableFilter<$PrismaModel>
   }
 
   export type NestedEnumFicheTypeFilter<$PrismaModel = never> = {
@@ -31861,6 +31957,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
     deleter?: UserCreateNestedOneWithoutProjets_deletedInput
@@ -31890,6 +31987,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -31993,6 +32091,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -32022,6 +32121,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -32433,6 +32533,7 @@ export namespace Prisma {
     is_public?: BoolNullableFilter<"projet"> | boolean | null
     budget?: IntNullableFilter<"projet"> | number | null
     sourcing_rex?: JsonNullableFilter<"projet">
+    statut?: EnumStatutProjetNullableFilter<"projet"> | $Enums.StatutProjet | null
   }
 
   export type estimationUpsertWithWhereUniqueWithoutCreatorInput = {
@@ -32882,6 +32983,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     deleter?: UserCreateNestedOneWithoutProjets_deletedInput
@@ -32911,6 +33013,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -33055,6 +33158,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -33085,6 +33189,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
@@ -33322,6 +33427,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -33352,6 +33458,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
@@ -34623,6 +34730,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -34653,6 +34761,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -34764,6 +34873,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -34794,6 +34904,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -34895,6 +35006,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -34925,6 +35037,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
@@ -35072,6 +35185,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -35102,6 +35216,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
@@ -35316,6 +35431,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
     deleter?: UserCreateNestedOneWithoutProjets_deletedInput
@@ -35346,6 +35462,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
@@ -35558,6 +35675,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
     deleter?: UserUpdateOneWithoutProjets_deletedNestedInput
@@ -35588,6 +35706,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
@@ -36155,6 +36274,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -36185,6 +36305,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -36296,6 +36417,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -36326,6 +36448,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -36605,6 +36728,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
   }
 
   export type estimationCreateManyCreatorInput = {
@@ -36649,6 +36773,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
   }
 
   export type user_collectiviteCreateManyUserInput = {
@@ -36848,6 +36973,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
     deleter?: UserUpdateOneWithoutProjets_deletedNestedInput
@@ -36877,6 +37003,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -36904,6 +37031,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
   }
 
   export type estimationUpdateWithoutCreatorInput = {
@@ -36994,6 +37122,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -37023,6 +37152,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -37050,6 +37180,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
   }
 
   export type user_collectiviteUpdateWithoutUserInput = {
@@ -37355,6 +37486,7 @@ export namespace Prisma {
     is_public?: boolean | null
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
   }
 
   export type user_collectiviteUpdateWithoutCollectiviteInput = {
@@ -37393,6 +37525,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     deleter?: UserUpdateOneWithoutProjets_deletedNestedInput
@@ -37422,6 +37555,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -37449,6 +37583,7 @@ export namespace Prisma {
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
   }
 
   export type emailCreateManyUser_projetInput = {

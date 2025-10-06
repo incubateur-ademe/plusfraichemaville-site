@@ -1,5 +1,6 @@
 import z from "zod";
 import { CollectiviteFormSchema } from "@/src/forms/collectivite/collectivite-form-schema";
+import { StatutProjet } from "@/src/generated/prisma/client";
 
 export const ProjetInfoFormSchema = z.object({
   projetId: z.number().optional(),
@@ -22,5 +23,6 @@ export const ProjetInfoFormSchema = z.object({
     .min(1, { message: "Veuillez renseigner la date d'échéance souhaitée" })
     .regex(new RegExp("[0-9]{4}-(0?[1-9]|1[012])$"), { message: "Veuillez rentrer une date au format YYYY-MM" }),
   collectivite: CollectiviteFormSchema,
+  statut: z.nativeEnum(StatutProjet).optional(),
 });
 export type ProjetInfoFormData = z.infer<typeof ProjetInfoFormSchema>;
