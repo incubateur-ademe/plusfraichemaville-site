@@ -500,7 +500,10 @@ exports.emailType = exports.$Enums.emailType = {
   contactMessageSent: 'contactMessageSent',
   welcomeMessage: 'welcomeMessage',
   noActivityAfterSignup: 'noActivityAfterSignup',
-  remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic'
+  remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic',
+  projetWithDiagWithoutSol: 'projetWithDiagWithoutSol',
+  projetRemindToDoEstimation: 'projetRemindToDoEstimation',
+  projetRemindToDoFinancement: 'projetRemindToDoFinancement'
 };
 
 exports.emailStatus = exports.$Enums.emailStatus = {

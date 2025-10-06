@@ -7,7 +7,7 @@ import {
   Prisma,
   projet,
   RoleProjet,
-  user_projet
+  user_projet,
 } from "@/src/generated/prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
@@ -20,6 +20,18 @@ export const projetWithoutFicheSolution = {
 
 export const projetWithoutFicheDiagnostic = {
   fiches: { none: { type: FicheType.DIAGNOSTIC } },
+};
+
+export const projetWithoutFiche = {
+  fiches: { none: {} },
+};
+
+export const projetWithoutDiagnosticSimulation = {
+  diagnostic_simulations: { none: {} },
+};
+
+export const projetWithDiagnosticSimulation = {
+  diagnostic_simulations: { some: {} },
 };
 
 export const projetDidNotAlreadySendEmail = (emailType: emailType) => ({
@@ -37,14 +49,6 @@ export const projetDidNotAlreadySendEmail = (emailType: emailType) => ({
     },
   },
 });
-
-export const projetWithoutFiche = {
-  fiches: { none: {} },
-};
-
-export const projetWithoutDiagnosticSimulation = {
-  diagnostic_simulations: { none: {} },
-};
 
 export const projetIncludes = {
   collectivite: true,
@@ -434,6 +438,29 @@ export const updateProjetVisibility = async (
     include: projetIncludes,
   });
 };
+export const getProjetsForRemindToChooseSolution = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      OR: [
+        {
+          fiches: {
+            some: { type: FicheType.DIAGNOSTIC, created_at: { gte: afterDate, lte: beforeDate } },
+          },
+        },
+        {
+          diagnostic_simulations: { some: { created_at: { gte: afterDate, lte: beforeDate } } },
+        },
+      ],
+      ...projetWithoutFicheSolution,
+      ...projetDidNotAlreadySendEmail(emailType.projetWithDiagWithoutSol),
+    },
+    include: projetIncludes,
+  });
+};
 
 export const getProjetsWithoutFiche = async (afterDate: Date, beforeDate: Date): Promise<ProjetWithRelations[]> => {
   return prismaClient.projet.findMany({
@@ -468,6 +495,58 @@ export const getProjetsForRemindDiagnosticEmail = async (
         },
       },
       ...projetDidNotAlreadySendEmail(emailType.remindNotCompletedDiagnostic),
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsForRemindToDoEstimation = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      fiches: {
+        some: { type: FicheType.SOLUTION, created_at: { gte: afterDate, lte: beforeDate } },
+        none: { type: FicheType.SOLUTION, created_at: { gte: beforeDate } },
+      },
+      estimations: { none: { deleted_at: null } },
+      ...projetDidNotAlreadySendEmail(emailType.projetRemindToDoEstimation),
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsForRemindToDoFinancement = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      estimations: {
+        some: {
+          deleted_at: null,
+          created_at: { gte: afterDate, lte: beforeDate },
+          estimations_aides: {
+            none: {},
+          },
+        },
+        none: {
+          deleted_at: null,
+          OR: [
+            { created_at: { gte: beforeDate } },
+            {
+              estimations_aides: {
+                some: {},
+              },
+            },
+          ],
+        },
+      },
+
+      ...projetDidNotAlreadySendEmail(emailType.projetRemindToDoFinancement),
     },
     include: projetIncludes,
   });

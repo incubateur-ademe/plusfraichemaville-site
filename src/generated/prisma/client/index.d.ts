@@ -143,7 +143,10 @@ export const emailType: {
   contactMessageSent: 'contactMessageSent',
   welcomeMessage: 'welcomeMessage',
   noActivityAfterSignup: 'noActivityAfterSignup',
-  remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic'
+  remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic',
+  projetWithDiagWithoutSol: 'projetWithDiagWithoutSol',
+  projetRemindToDoEstimation: 'projetRemindToDoEstimation',
+  projetRemindToDoFinancement: 'projetRemindToDoFinancement'
 };
 
 export type emailType = (typeof emailType)[keyof typeof emailType]

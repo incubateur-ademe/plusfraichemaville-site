@@ -24,6 +24,11 @@ const main = async () => {
       INACTIVITY_DAYS,
     );
 
+    console.log("Recherche des nouveaux projets...");
+    const sendProjetEmailsPromises = await emailService.sendProjetCreationEmail(
+      lastSyncDate ?? removeDaysToDate(new Date(), 3),
+    );
+
     const REMIND_UNFINISHED_DIAG_DAYS = 7;
     console.log(`Recherche des projets avec diagnostics non validés  depuis ${REMIND_UNFINISHED_DIAG_DAYS} jours...`);
     const unfinishedDiagPromises = await emailService.sendRemindNotCompletedDiagnosticEmail(
@@ -32,9 +37,11 @@ const main = async () => {
     );
 
     console.log("Recherche des projets avec diagnostics mais sans fiche solution");
-    const sendProjetEmailsPromises = await emailService.sendProjetCreationEmail(
+    const projetOnlyDiagEmailPromises = await emailService.sendProjetOnlyDiagEmail(
       lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
+
+    const REMIND_TO_FILL_ESTIMATION_DAYS = 7;
 
 
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
