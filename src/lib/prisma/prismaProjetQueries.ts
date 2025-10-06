@@ -330,7 +330,9 @@ export const projetUpdated = async (projetId: number): Promise<projet | null> =>
       id: projetId,
       deleted_at: null,
     },
-    data: {},
+    data: {
+      updated_at: new Date(),
+    },
   });
 };
 

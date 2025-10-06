@@ -1,14 +1,18 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple } from "@/src/types/global";
 import { useCallback } from "react";
-import { useMap } from "react-leaflet";
+import { useMap } from "react-map-gl/maplibre";
 
 export const AnnuaireMapFocus = ({ coordinates }: { coordinates: LatLngTuple | null }) => {
   const map = useMap();
   const handleFocus = useCallback(() => {
     if (coordinates != null) {
-      map.setView(coordinates, map.getZoom(), { animate: true, duration: 0.75 });
+      map.current?.easeTo({
+        center: [coordinates[1], coordinates[0]],
+        zoom: 8,
+        duration: 1000,
+      });
     }
   }, [map, coordinates]);
 

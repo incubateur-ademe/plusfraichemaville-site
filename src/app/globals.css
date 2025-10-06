@@ -512,22 +512,6 @@
   transform: rotate(-180deg);
 }
 
-.leaflet-control-zoom {
-  @apply !bg-none;
-
-  a {
-    background-image: none !important;
-  }
-}
-
-.mapAnnuaire .leaflet-control-zoom {
-  @apply !absolute !bottom-[-403px] !left-[10px] !border-none;
-}
-
-.mapAnnuaire .leaflet-container a {
-  @apply !text-pfmv-navy;
-}
-
 .annuaireFilterAccordion .fr-accordion__title .fr-accordion__btn {
   @apply !py-0;
 }

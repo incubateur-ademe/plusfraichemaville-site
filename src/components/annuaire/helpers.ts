@@ -3,7 +3,7 @@ import {
   UserProjetWithPublicInfos,
   UserProjetWithUserInfos,
 } from "@/src/lib/prisma/prismaCustomTypes";
-import { LatLngTuple } from "leaflet";
+import { LatLngTuple } from "@/src/types/global";
 import { AnnuaireMapClientProps } from "./map/annuaire-map-client";
 import { CustomMarker, GeoJsonAdresse, AnnuaireContact, AnnuaireContactTypeMap, StrapiAnnuaireContact } from "./types";
 import { prettyUserName } from "@/src/helpers/user";
