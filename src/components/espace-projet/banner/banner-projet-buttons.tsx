@@ -5,7 +5,8 @@ import { useSearchParams } from "next/navigation";
 import {
   BannerPictoPartage,
   BannerPictoProps,
-  BannerPictoRecommandations, BannerPictoStatut,
+  BannerPictoRecommandations,
+  BannerPictoStatut,
   BannerPictoTableauDeSuivi,
 } from "./banner-projet-buttons-pictos";
 import { useRef } from "react";

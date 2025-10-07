@@ -6,7 +6,8 @@ import {
   InvitationStatus,
   Prisma,
   projet,
-  RoleProjet, StatutProjet,
+  RoleProjet,
+  StatutProjet,
   user_projet,
 } from "@/src/generated/prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
@@ -256,7 +257,7 @@ export const createOrUpdateProjet = async ({
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
       is_public: isPublic,
-      statut: statut
+      statut: statut,
     },
     include: projetIncludes,
   });

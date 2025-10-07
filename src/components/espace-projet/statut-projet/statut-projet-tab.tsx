@@ -1,12 +1,11 @@
 import { ProjetLastModification } from "@/src/components/espace-projet/statut-projet/projet-last-modification";
-import { STATUT_PROJET_BUTTONS } from "@/src/components/espace-projet/statut-projet/statut-projet";
-import { upsertProjetAction } from "@/src/actions/projets/upsert-projet-action";
 import { StatutProjetButtons } from "@/src/components/espace-projet/statut-projet/statut-projet-buttons";
+import { StatutProjetActions } from "@/src/components/espace-projet/statut-projet/statut-projet-actions";
 
 export const StatutProjetTab = () => {
   return (
     <>
-      <section className="flex justify-between flex-wrap">
+      <section className="flex flex-wrap justify-between">
         <div className="max-w-[50rem]">
           <h2 className="fr-h5 !mb-4">Comment se passe votre projet sur Plus fraîche ma ville ?</h2>
           <p>
@@ -14,13 +13,12 @@ export const StatutProjetTab = () => {
             N'hésitez pas à mettre à jour régulièrement cette information.
           </p>
         </div>
-        <ProjetLastModification/>
+        <ProjetLastModification />
       </section>
       <section className="mt-12">
-        <StatutProjetButtons/>
-
+        <StatutProjetButtons />
+        <StatutProjetActions className="mt-24" />
       </section>
-
     </>
   );
 };

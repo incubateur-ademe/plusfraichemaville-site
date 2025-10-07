@@ -19,7 +19,7 @@ import { Case, Conditional } from "@/src/components/common/conditional-renderer"
 import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 
-export const ContactForm = () => {
+export const ContactForm = ({ whiteBackground = false }: { whiteBackground?: boolean }) => {
   const user = useUserStore((state) => state.userInfos);
   const router = useRouter();
 
@@ -65,10 +65,27 @@ export const ContactForm = () => {
   return (
     <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
       <MandatoryFieldsMention />
-      <InputFormField control={form.control} path="prenom" label="Votre prénom" asterisk={true} />
-      <InputFormField control={form.control} path="nom" label="Votre nom" asterisk={true} />
-      <InputFormField control={form.control} path="email" label="Votre adresse email" asterisk={true} />
-      <InputFormField control={form.control} path="telephone" label="Votre numéro de téléphone (optionnel)" />
+      <InputFormField
+        control={form.control}
+        path="prenom"
+        label="Votre prénom"
+        asterisk
+        whiteBackground={whiteBackground}
+      />
+      <InputFormField control={form.control} path="nom" label="Votre nom" asterisk whiteBackground={whiteBackground} />
+      <InputFormField
+        control={form.control}
+        path="email"
+        label="Votre adresse email"
+        asterisk
+        whiteBackground={whiteBackground}
+      />
+      <InputFormField
+        control={form.control}
+        path="telephone"
+        label="Votre numéro de téléphone (optionnel)"
+        whiteBackground={whiteBackground}
+      />
       <SelectFormField
         control={form.control}
         asterisk={true}
@@ -76,9 +93,11 @@ export const ContactForm = () => {
         path="objetMessage"
         options={objetMessageContactOptions()}
         placeholder="Sélectionnez un objet"
+        selectClassName={whiteBackground ? "!bg-white" : ""}
       />
       <InputFormField
         control={form.control}
+        whiteBackground={whiteBackground}
         path="message"
         label="Votre message"
         asterisk={true}

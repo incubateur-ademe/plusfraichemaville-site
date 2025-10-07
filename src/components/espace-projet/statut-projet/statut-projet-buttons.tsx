@@ -34,14 +34,14 @@ export const StatutProjetButtons = () => {
             handleStatutChange(statutProjetButton.statut);
           }}
           className={clsx(
-            "rounded-xl p-6 shadow-pfmv-card-shadow",
-            "!border-[1px] border-solid",
+            "rounded-xl p-6 shadow-pfmv-card-strong-shadow",
+            "!border-1 border-solid",
             projet.statut === statutProjetButton.statut ? "border-pfmv-navy" : "border-dsfr-border-default-grey",
             loading ? "cursor-progress" : "cursor-pointer",
           )}
           aria-selected={projet.statut === statutProjetButton.statut}
         >
-          <div className="text-xl mb-0 flex items-center gap-2 font-bold">
+          <div className="mb-0 flex items-center gap-2 text-xl font-bold">
             <Image src={statutProjetButton.icon} alt="" width={40} height={40} />
             {statutProjetButton.label}
           </div>
