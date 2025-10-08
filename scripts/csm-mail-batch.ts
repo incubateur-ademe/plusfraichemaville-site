@@ -25,6 +25,7 @@ const main = async () => {
     );
 
     console.log("Recherche des nouveaux projets...");
+    //TODO Revoir la logique pour les différents template avec niveau de maturité différents.
     const sendProjetEmailsPromises = await emailService.sendProjetCreationEmail(
       lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
@@ -37,11 +38,24 @@ const main = async () => {
     );
 
     console.log("Recherche des projets avec diagnostics mais sans fiche solution");
-    const projetOnlyDiagEmailPromises = await emailService.sendProjetOnlyDiagEmail(
+    const sendRemindFicheSolutionMail = await emailService.sendRemindChooseSolutionMail(
       lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
 
     const REMIND_TO_FILL_ESTIMATION_DAYS = 7;
+    console.log("Recherche des projets avec fiche solution sans estimation");
+    const sendRemindEstimationMail = await emailService.sendRemindMakeEstimationMail(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_FILL_ESTIMATION_DAYS),
+      REMIND_TO_FILL_ESTIMATION_DAYS,
+    );
+
+    const REMIND_TO_FILL_FINANCEMENT_DAYS = 2;
+    console.log("Recherche des projets avec estimation sans financement");
+    const sendRemindFinancementMail = await emailService.sendRemindChooseFinancementMail(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_FILL_FINANCEMENT_DAYS),
+      REMIND_TO_FILL_ESTIMATION_DAYS,
+    );
+
 
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     const webhookData = makeCsmBatchWebhookData({

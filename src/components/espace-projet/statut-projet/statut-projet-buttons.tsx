@@ -29,6 +29,7 @@ export const StatutProjetButtons = () => {
     <div className="flex flex-row flex-wrap gap-6">
       {STATUT_PROJET_BUTTONS.map((statutProjetButton) => (
         <button
+          key={statutProjetButton.statut}
           role="radio"
           onClick={() => {
             handleStatutChange(statutProjetButton.statut);

@@ -16,6 +16,8 @@ import {
   getProjetsWithoutFiche,
   getProjetsForRemindDiagnosticEmail,
   getProjetsForRemindToChooseSolution,
+  getProjetsForRemindToDoEstimation,
+  getProjetsForRemindToDoFinancement,
 } from "@/src/lib/prisma/prismaProjetQueries";
 import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
@@ -239,9 +241,27 @@ export class EmailService {
     });
   }
 
-  async sendProjetOnlyDiagEmail(lastSyncDate: Date) {
+  async sendRemindChooseSolutionMail(lastSyncDate: Date) {
     const projetsWithOnlyDiag = await getProjetsForRemindToChooseSolution(lastSyncDate, new Date());
-    console.log(`Nb de mails de projet avec uniquement module 2 à envoyer : ${projetsWithOnlyDiag.length}`);
+    console.log(`Nb de mails de projet avec le module Fiche Solution est à faire : ${projetsWithOnlyDiag.length}`);
+    // TODO Envoyer le mail quand le template sera prêt
+  }
+
+  async sendRemindMakeEstimationMail(lastSyncDate: Date, nbDaysToWaitAfterAddingFicheSolution: number) {
+    const projetsToRemindEstimation = await getProjetsForRemindToDoEstimation(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterAddingFicheSolution),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterAddingFicheSolution),
+    );
+    console.log(`Nb de mails de projet où le module estimation est à faire  : ${projetsToRemindEstimation.length}`);
+    // TODO Envoyer le mail quand le template sera prêt
+  }
+
+  async sendRemindChooseFinancementMail(lastSyncDate: Date, nbDaysToWaitAfterMakingEstimation: number) {
+    const projetsToRemindEstimation = await getProjetsForRemindToDoFinancement(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterMakingEstimation),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterMakingEstimation),
+    );
+    console.log(`Nb de mails de projet où le module 3 est à faire à envoyer : ${projetsToRemindEstimation.length}`);
     // TODO Envoyer le mail quand le template sera prêt
   }
 
