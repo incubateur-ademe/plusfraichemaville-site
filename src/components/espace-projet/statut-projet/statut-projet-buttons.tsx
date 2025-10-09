@@ -21,7 +21,6 @@ export const StatutProjetButtons = () => {
     if (result.projet) {
       addOrUpdateProjet(result.projet);
     }
-    notifications(result.type, result.message);
     setLoading(false);
   };
 

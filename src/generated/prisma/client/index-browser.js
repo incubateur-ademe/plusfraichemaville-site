@@ -150,7 +150,9 @@ exports.Prisma.UserScalarFieldEnum = {
   updated_at: 'updated_at',
   canal_acquisition: 'canal_acquisition',
   discardedInformation: 'discardedInformation',
-  accept_communication_produit: 'accept_communication_produit'
+  accept_communication_produit: 'accept_communication_produit',
+  statut: 'statut',
+  statut_updated_at: 'statut_updated_at'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -229,7 +231,8 @@ exports.Prisma.ProjetScalarFieldEnum = {
   is_public: 'is_public',
   budget: 'budget',
   sourcing_rex: 'sourcing_rex',
-  statut: 'statut'
+  statut: 'statut',
+  statut_updated_at: 'statut_updated_at'
 };
 
 exports.Prisma.Projet_ficheScalarFieldEnum = {
@@ -473,12 +476,21 @@ exports.Prisma.diagnostic_simulationOrderByRelevanceFieldEnum = {
 
 exports.Prisma.AnalyticsOrderByRelevanceFieldEnum = {
   id: 'id',
+  reference_id: 'reference_id',
   user_id: 'user_id'
 };
 
 exports.Prisma.cron_jobsOrderByRelevanceFieldEnum = {
   id: 'id'
 };
+exports.StatutUser = exports.$Enums.StatutUser = {
+  pas_trouve: 'pas_trouve',
+  pas_maintenant: 'pas_maintenant',
+  pas_compris: 'pas_compris',
+  sans_pfmv: 'sans_pfmv',
+  autre: 'autre'
+};
+
 exports.RoleProjet = exports.$Enums.RoleProjet = {
   ADMIN: 'ADMIN',
   EDITEUR: 'EDITEUR',
@@ -539,6 +551,7 @@ exports.ReferenceType = exports.$Enums.ReferenceType = {
 exports.EventType = exports.$Enums.EventType = {
   UPDATE_MATURITE: 'UPDATE_MATURITE',
   UPDATE_STATUT_PROJET: 'UPDATE_STATUT_PROJET',
+  UPDATE_STATUT_USER: 'UPDATE_STATUT_USER',
   UPDATE_PROJET_SET_VISIBLE: 'UPDATE_PROJET_SET_VISIBLE',
   UPDATE_PROJET_SET_INVISIBLE: 'UPDATE_PROJET_SET_INVISIBLE'
 };

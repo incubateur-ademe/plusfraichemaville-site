@@ -56,7 +56,6 @@ const main = async () => {
       REMIND_TO_FILL_ESTIMATION_DAYS,
     );
 
-
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     const webhookData = makeCsmBatchWebhookData({
       nbMailCreationProjet: sendProjetEmailsPromises.length,

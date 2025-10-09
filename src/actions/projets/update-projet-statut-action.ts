@@ -28,9 +28,9 @@ export const updateProjetStatutAction = async (
     const projet = await updateProjetStatut(projetId, statut);
     if (projet) {
       await createAnalytic({
-        context: {},
+        context: { statut: statut },
         event_type: EventType.UPDATE_STATUT_PROJET,
-        reference_id: projetId,
+        reference_id: projetId.toString(),
         reference_type: ReferenceType.PROJET,
         user_id: session.user.id,
       });

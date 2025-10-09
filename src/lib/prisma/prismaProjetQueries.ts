@@ -204,7 +204,6 @@ export const createOrUpdateProjet = async ({
   collectiviteId,
   isPublic,
   budget,
-  statut,
 }: {
   projetId?: number;
   nomProjet: string;
@@ -217,7 +216,6 @@ export const createOrUpdateProjet = async ({
   collectiviteId: number;
   isPublic: boolean;
   budget?: number;
-  statut?: StatutProjet;
 }) => {
   return prismaClient.projet.upsert({
     where: {
@@ -257,7 +255,6 @@ export const createOrUpdateProjet = async ({
       date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
       is_public: isPublic,
-      statut: statut,
     },
     include: projetIncludes,
   });
@@ -454,6 +451,7 @@ export const updateProjetStatut = async (
     },
     data: {
       statut: statut,
+      statut_updated_at: new Date(),
     },
     include: projetIncludes,
   });

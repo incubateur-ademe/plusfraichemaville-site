@@ -108,7 +108,18 @@ export type cron_jobs = $Result.DefaultSelection<Prisma.$cron_jobsPayload>
  * Enums
  */
 export namespace $Enums {
-  export const RoleCollectivite: {
+  export const StatutUser: {
+  pas_trouve: 'pas_trouve',
+  pas_maintenant: 'pas_maintenant',
+  pas_compris: 'pas_compris',
+  sans_pfmv: 'sans_pfmv',
+  autre: 'autre'
+};
+
+export type StatutUser = (typeof StatutUser)[keyof typeof StatutUser]
+
+
+export const RoleCollectivite: {
   ADMIN: 'ADMIN'
 };
 
@@ -199,6 +210,7 @@ export type ReferenceType = (typeof ReferenceType)[keyof typeof ReferenceType]
 export const EventType: {
   UPDATE_MATURITE: 'UPDATE_MATURITE',
   UPDATE_STATUT_PROJET: 'UPDATE_STATUT_PROJET',
+  UPDATE_STATUT_USER: 'UPDATE_STATUT_USER',
   UPDATE_PROJET_SET_VISIBLE: 'UPDATE_PROJET_SET_VISIBLE',
   UPDATE_PROJET_SET_INVISIBLE: 'UPDATE_PROJET_SET_INVISIBLE'
 };
@@ -215,6 +227,10 @@ export const JobType: {
 export type JobType = (typeof JobType)[keyof typeof JobType]
 
 }
+
+export type StatutUser = $Enums.StatutUser
+
+export const StatutUser: typeof $Enums.StatutUser
 
 export type RoleCollectivite = $Enums.RoleCollectivite
 
@@ -4152,6 +4168,8 @@ export namespace Prisma {
     updated_at: Date | null
     canal_acquisition: string | null
     accept_communication_produit: boolean | null
+    statut: $Enums.StatutUser | null
+    statut_updated_at: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -4167,6 +4185,8 @@ export namespace Prisma {
     updated_at: Date | null
     canal_acquisition: string | null
     accept_communication_produit: boolean | null
+    statut: $Enums.StatutUser | null
+    statut_updated_at: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -4185,6 +4205,8 @@ export namespace Prisma {
     canal_acquisition: number
     discardedInformation: number
     accept_communication_produit: number
+    statut: number
+    statut_updated_at: number
     _all: number
   }
 
@@ -4202,6 +4224,8 @@ export namespace Prisma {
     updated_at?: true
     canal_acquisition?: true
     accept_communication_produit?: true
+    statut?: true
+    statut_updated_at?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -4217,6 +4241,8 @@ export namespace Prisma {
     updated_at?: true
     canal_acquisition?: true
     accept_communication_produit?: true
+    statut?: true
+    statut_updated_at?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -4235,6 +4261,8 @@ export namespace Prisma {
     canal_acquisition?: true
     discardedInformation?: true
     accept_communication_produit?: true
+    statut?: true
+    statut_updated_at?: true
     _all?: true
   }
 
@@ -4326,6 +4354,8 @@ export namespace Prisma {
     canal_acquisition: string | null
     discardedInformation: string[]
     accept_communication_produit: boolean
+    statut: $Enums.StatutUser | null
+    statut_updated_at: Date | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -4361,6 +4391,8 @@ export namespace Prisma {
     canal_acquisition?: boolean
     discardedInformation?: boolean
     accept_communication_produit?: boolean
+    statut?: boolean
+    statut_updated_at?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     collectivites_created?: boolean | User$collectivites_createdArgs<ExtArgs>
     projets_created?: boolean | User$projets_createdArgs<ExtArgs>
@@ -4396,6 +4428,8 @@ export namespace Prisma {
     canal_acquisition?: boolean
     discardedInformation?: boolean
     accept_communication_produit?: boolean
+    statut?: boolean
+    statut_updated_at?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4414,6 +4448,8 @@ export namespace Prisma {
     canal_acquisition?: boolean
     discardedInformation?: boolean
     accept_communication_produit?: boolean
+    statut?: boolean
+    statut_updated_at?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -4432,9 +4468,11 @@ export namespace Prisma {
     canal_acquisition?: boolean
     discardedInformation?: boolean
     accept_communication_produit?: boolean
+    statut?: boolean
+    statut_updated_at?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "image" | "agentconnect_info" | "nom" | "prenom" | "poste" | "nom_etablissement" | "siren_info" | "created_at" | "updated_at" | "canal_acquisition" | "discardedInformation" | "accept_communication_produit", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "image" | "agentconnect_info" | "nom" | "prenom" | "poste" | "nom_etablissement" | "siren_info" | "created_at" | "updated_at" | "canal_acquisition" | "discardedInformation" | "accept_communication_produit" | "statut" | "statut_updated_at", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     collectivites_created?: boolean | User$collectivites_createdArgs<ExtArgs>
@@ -4493,6 +4531,8 @@ export namespace Prisma {
       canal_acquisition: string | null
       discardedInformation: string[]
       accept_communication_produit: boolean
+      statut: $Enums.StatutUser | null
+      statut_updated_at: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -4947,6 +4987,8 @@ export namespace Prisma {
     readonly canal_acquisition: FieldRef<"User", 'String'>
     readonly discardedInformation: FieldRef<"User", 'String[]'>
     readonly accept_communication_produit: FieldRef<"User", 'Boolean'>
+    readonly statut: FieldRef<"User", 'StatutUser'>
+    readonly statut_updated_at: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -11567,6 +11609,7 @@ export namespace Prisma {
     is_public: boolean | null
     budget: number | null
     statut: $Enums.StatutProjet | null
+    statut_updated_at: Date | null
   }
 
   export type ProjetMaxAggregateOutputType = {
@@ -11585,6 +11628,7 @@ export namespace Prisma {
     is_public: boolean | null
     budget: number | null
     statut: $Enums.StatutProjet | null
+    statut_updated_at: Date | null
   }
 
   export type ProjetCountAggregateOutputType = {
@@ -11609,6 +11653,7 @@ export namespace Prisma {
     budget: number
     sourcing_rex: number
     statut: number
+    statut_updated_at: number
     _all: number
   }
 
@@ -11645,6 +11690,7 @@ export namespace Prisma {
     is_public?: true
     budget?: true
     statut?: true
+    statut_updated_at?: true
   }
 
   export type ProjetMaxAggregateInputType = {
@@ -11663,6 +11709,7 @@ export namespace Prisma {
     is_public?: true
     budget?: true
     statut?: true
+    statut_updated_at?: true
   }
 
   export type ProjetCountAggregateInputType = {
@@ -11687,6 +11734,7 @@ export namespace Prisma {
     budget?: true
     sourcing_rex?: true
     statut?: true
+    statut_updated_at?: true
     _all?: true
   }
 
@@ -11798,6 +11846,7 @@ export namespace Prisma {
     budget: number | null
     sourcing_rex: JsonValue | null
     statut: $Enums.StatutProjet | null
+    statut_updated_at: Date | null
     _count: ProjetCountAggregateOutputType | null
     _avg: ProjetAvgAggregateOutputType | null
     _sum: ProjetSumAggregateOutputType | null
@@ -11841,6 +11890,7 @@ export namespace Prisma {
     budget?: boolean
     sourcing_rex?: boolean
     statut?: boolean
+    statut_updated_at?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
     estimations?: boolean | projet$estimationsArgs<ExtArgs>
     collectivite?: boolean | collectiviteDefaultArgs<ExtArgs>
@@ -11874,6 +11924,7 @@ export namespace Prisma {
     budget?: boolean
     sourcing_rex?: boolean
     statut?: boolean
+    statut_updated_at?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
     collectivite?: boolean | collectiviteDefaultArgs<ExtArgs>
     deleter?: boolean | projet$deleterArgs<ExtArgs>
@@ -11901,6 +11952,7 @@ export namespace Prisma {
     budget?: boolean
     sourcing_rex?: boolean
     statut?: boolean
+    statut_updated_at?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
     collectivite?: boolean | collectiviteDefaultArgs<ExtArgs>
     deleter?: boolean | projet$deleterArgs<ExtArgs>
@@ -11928,9 +11980,10 @@ export namespace Prisma {
     budget?: boolean
     sourcing_rex?: boolean
     statut?: boolean
+    statut_updated_at?: boolean
   }
 
-  export type projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "nom" | "type_espace" | "adresse" | "niveau_maturite" | "adresse_info" | "adresse_all_infos" | "date_echeance" | "fiches_solutions_id" | "fiches_diagnostic_id" | "collectiviteId" | "recommandations_viewed_by" | "deleted_at" | "deleted_by" | "is_public" | "budget" | "sourcing_rex" | "statut", ExtArgs["result"]["projet"]>
+  export type projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "nom" | "type_espace" | "adresse" | "niveau_maturite" | "adresse_info" | "adresse_all_infos" | "date_echeance" | "fiches_solutions_id" | "fiches_diagnostic_id" | "collectiviteId" | "recommandations_viewed_by" | "deleted_at" | "deleted_by" | "is_public" | "budget" | "sourcing_rex" | "statut" | "statut_updated_at", ExtArgs["result"]["projet"]>
   export type projetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | UserDefaultArgs<ExtArgs>
     estimations?: boolean | projet$estimationsArgs<ExtArgs>
@@ -11987,6 +12040,7 @@ export namespace Prisma {
       budget: number | null
       sourcing_rex: Prisma.JsonValue | null
       statut: $Enums.StatutProjet | null
+      statut_updated_at: Date | null
     }, ExtArgs["result"]["projet"]>
     composites: {}
   }
@@ -12439,6 +12493,7 @@ export namespace Prisma {
     readonly budget: FieldRef<"projet", 'Int'>
     readonly sourcing_rex: FieldRef<"projet", 'Json'>
     readonly statut: FieldRef<"projet", 'StatutProjet'>
+    readonly statut_updated_at: FieldRef<"projet", 'DateTime'>
   }
     
 
@@ -22098,24 +22153,14 @@ export namespace Prisma {
 
   export type AggregateAnalytics = {
     _count: AnalyticsCountAggregateOutputType | null
-    _avg: AnalyticsAvgAggregateOutputType | null
-    _sum: AnalyticsSumAggregateOutputType | null
     _min: AnalyticsMinAggregateOutputType | null
     _max: AnalyticsMaxAggregateOutputType | null
-  }
-
-  export type AnalyticsAvgAggregateOutputType = {
-    reference_id: number | null
-  }
-
-  export type AnalyticsSumAggregateOutputType = {
-    reference_id: number | null
   }
 
   export type AnalyticsMinAggregateOutputType = {
     id: string | null
     created_at: Date | null
-    reference_id: number | null
+    reference_id: string | null
     reference_type: $Enums.ReferenceType | null
     event_type: $Enums.EventType | null
     user_id: string | null
@@ -22124,7 +22169,7 @@ export namespace Prisma {
   export type AnalyticsMaxAggregateOutputType = {
     id: string | null
     created_at: Date | null
-    reference_id: number | null
+    reference_id: string | null
     reference_type: $Enums.ReferenceType | null
     event_type: $Enums.EventType | null
     user_id: string | null
@@ -22141,14 +22186,6 @@ export namespace Prisma {
     _all: number
   }
 
-
-  export type AnalyticsAvgAggregateInputType = {
-    reference_id?: true
-  }
-
-  export type AnalyticsSumAggregateInputType = {
-    reference_id?: true
-  }
 
   export type AnalyticsMinAggregateInputType = {
     id?: true
@@ -22217,18 +22254,6 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Select which fields to average
-    **/
-    _avg?: AnalyticsAvgAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to sum
-    **/
-    _sum?: AnalyticsSumAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
      * Select which fields to find the minimum value
     **/
     _min?: AnalyticsMinAggregateInputType
@@ -22259,8 +22284,6 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: AnalyticsCountAggregateInputType | true
-    _avg?: AnalyticsAvgAggregateInputType
-    _sum?: AnalyticsSumAggregateInputType
     _min?: AnalyticsMinAggregateInputType
     _max?: AnalyticsMaxAggregateInputType
   }
@@ -22268,14 +22291,12 @@ export namespace Prisma {
   export type AnalyticsGroupByOutputType = {
     id: string
     created_at: Date
-    reference_id: number
+    reference_id: string
     reference_type: $Enums.ReferenceType
     event_type: $Enums.EventType
     context: JsonValue | null
     user_id: string
     _count: AnalyticsCountAggregateOutputType | null
-    _avg: AnalyticsAvgAggregateOutputType | null
-    _sum: AnalyticsSumAggregateOutputType | null
     _min: AnalyticsMinAggregateOutputType | null
     _max: AnalyticsMaxAggregateOutputType | null
   }
@@ -22356,7 +22377,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       created_at: Date
-      reference_id: number
+      reference_id: string
       reference_type: $Enums.ReferenceType
       event_type: $Enums.EventType
       context: Prisma.JsonValue | null
@@ -22787,7 +22808,7 @@ export namespace Prisma {
   interface AnalyticsFieldRefs {
     readonly id: FieldRef<"Analytics", 'String'>
     readonly created_at: FieldRef<"Analytics", 'DateTime'>
-    readonly reference_id: FieldRef<"Analytics", 'Int'>
+    readonly reference_id: FieldRef<"Analytics", 'String'>
     readonly reference_type: FieldRef<"Analytics", 'ReferenceType'>
     readonly event_type: FieldRef<"Analytics", 'EventType'>
     readonly context: FieldRef<"Analytics", 'Json'>
@@ -24235,7 +24256,9 @@ export namespace Prisma {
     updated_at: 'updated_at',
     canal_acquisition: 'canal_acquisition',
     discardedInformation: 'discardedInformation',
-    accept_communication_produit: 'accept_communication_produit'
+    accept_communication_produit: 'accept_communication_produit',
+    statut: 'statut',
+    statut_updated_at: 'statut_updated_at'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -24332,7 +24355,8 @@ export namespace Prisma {
     is_public: 'is_public',
     budget: 'budget',
     sourcing_rex: 'sourcing_rex',
-    statut: 'statut'
+    statut: 'statut',
+    statut_updated_at: 'statut_updated_at'
   };
 
   export type ProjetScalarFieldEnum = (typeof ProjetScalarFieldEnum)[keyof typeof ProjetScalarFieldEnum]
@@ -24675,6 +24699,7 @@ export namespace Prisma {
 
   export const AnalyticsOrderByRelevanceFieldEnum: {
     id: 'id',
+    reference_id: 'reference_id',
     user_id: 'user_id'
   };
 
@@ -24753,6 +24778,20 @@ export namespace Prisma {
    * Reference to a field of type 'Boolean'
    */
   export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutUser'
+   */
+  export type EnumStatutUserFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutUser'>
+    
+
+
+  /**
+   * Reference to a field of type 'StatutUser[]'
+   */
+  export type ListEnumStatutUserFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'StatutUser[]'>
     
 
 
@@ -25026,6 +25065,8 @@ export namespace Prisma {
     canal_acquisition?: StringNullableFilter<"User"> | string | null
     discardedInformation?: StringNullableListFilter<"User">
     accept_communication_produit?: BoolFilter<"User"> | boolean
+    statut?: EnumStatutUserNullableFilter<"User"> | $Enums.StatutUser | null
+    statut_updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
     accounts?: AccountListRelationFilter
     collectivites_created?: CollectiviteListRelationFilter
     projets_created?: ProjetListRelationFilter
@@ -25060,6 +25101,8 @@ export namespace Prisma {
     canal_acquisition?: SortOrderInput | SortOrder
     discardedInformation?: SortOrder
     accept_communication_produit?: SortOrder
+    statut?: SortOrderInput | SortOrder
+    statut_updated_at?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     collectivites_created?: collectiviteOrderByRelationAggregateInput
     projets_created?: projetOrderByRelationAggregateInput
@@ -25098,6 +25141,8 @@ export namespace Prisma {
     canal_acquisition?: StringNullableFilter<"User"> | string | null
     discardedInformation?: StringNullableListFilter<"User">
     accept_communication_produit?: BoolFilter<"User"> | boolean
+    statut?: EnumStatutUserNullableFilter<"User"> | $Enums.StatutUser | null
+    statut_updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
     accounts?: AccountListRelationFilter
     collectivites_created?: CollectiviteListRelationFilter
     projets_created?: ProjetListRelationFilter
@@ -25132,6 +25177,8 @@ export namespace Prisma {
     canal_acquisition?: SortOrderInput | SortOrder
     discardedInformation?: SortOrder
     accept_communication_produit?: SortOrder
+    statut?: SortOrderInput | SortOrder
+    statut_updated_at?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -25156,6 +25203,8 @@ export namespace Prisma {
     canal_acquisition?: StringNullableWithAggregatesFilter<"User"> | string | null
     discardedInformation?: StringNullableListFilter<"User">
     accept_communication_produit?: BoolWithAggregatesFilter<"User"> | boolean
+    statut?: EnumStatutUserNullableWithAggregatesFilter<"User"> | $Enums.StatutUser | null
+    statut_updated_at?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
   export type VerificationTokenWhereInput = {
@@ -25570,6 +25619,7 @@ export namespace Prisma {
     budget?: IntNullableFilter<"projet"> | number | null
     sourcing_rex?: JsonNullableFilter<"projet">
     statut?: EnumStatutProjetNullableFilter<"projet"> | $Enums.StatutProjet | null
+    statut_updated_at?: DateTimeNullableFilter<"projet"> | Date | string | null
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
     estimations?: EstimationListRelationFilter
     collectivite?: XOR<CollectiviteScalarRelationFilter, collectiviteWhereInput>
@@ -25602,6 +25652,7 @@ export namespace Prisma {
     budget?: SortOrderInput | SortOrder
     sourcing_rex?: SortOrderInput | SortOrder
     statut?: SortOrderInput | SortOrder
+    statut_updated_at?: SortOrderInput | SortOrder
     creator?: UserOrderByWithRelationInput
     estimations?: estimationOrderByRelationAggregateInput
     collectivite?: collectiviteOrderByWithRelationInput
@@ -25638,6 +25689,7 @@ export namespace Prisma {
     budget?: IntNullableFilter<"projet"> | number | null
     sourcing_rex?: JsonNullableFilter<"projet">
     statut?: EnumStatutProjetNullableFilter<"projet"> | $Enums.StatutProjet | null
+    statut_updated_at?: DateTimeNullableFilter<"projet"> | Date | string | null
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
     estimations?: EstimationListRelationFilter
     collectivite?: XOR<CollectiviteScalarRelationFilter, collectiviteWhereInput>
@@ -25670,6 +25722,7 @@ export namespace Prisma {
     budget?: SortOrderInput | SortOrder
     sourcing_rex?: SortOrderInput | SortOrder
     statut?: SortOrderInput | SortOrder
+    statut_updated_at?: SortOrderInput | SortOrder
     _count?: projetCountOrderByAggregateInput
     _avg?: projetAvgOrderByAggregateInput
     _max?: projetMaxOrderByAggregateInput
@@ -25702,6 +25755,7 @@ export namespace Prisma {
     budget?: IntNullableWithAggregatesFilter<"projet"> | number | null
     sourcing_rex?: JsonNullableWithAggregatesFilter<"projet">
     statut?: EnumStatutProjetNullableWithAggregatesFilter<"projet"> | $Enums.StatutProjet | null
+    statut_updated_at?: DateTimeNullableWithAggregatesFilter<"projet"> | Date | string | null
   }
 
   export type projet_ficheWhereInput = {
@@ -26294,7 +26348,7 @@ export namespace Prisma {
     NOT?: AnalyticsWhereInput | AnalyticsWhereInput[]
     id?: StringFilter<"Analytics"> | string
     created_at?: DateTimeFilter<"Analytics"> | Date | string
-    reference_id?: IntFilter<"Analytics"> | number
+    reference_id?: StringFilter<"Analytics"> | string
     reference_type?: EnumReferenceTypeFilter<"Analytics"> | $Enums.ReferenceType
     event_type?: EnumEventTypeFilter<"Analytics"> | $Enums.EventType
     context?: JsonNullableFilter<"Analytics">
@@ -26320,7 +26374,7 @@ export namespace Prisma {
     OR?: AnalyticsWhereInput[]
     NOT?: AnalyticsWhereInput | AnalyticsWhereInput[]
     created_at?: DateTimeFilter<"Analytics"> | Date | string
-    reference_id?: IntFilter<"Analytics"> | number
+    reference_id?: StringFilter<"Analytics"> | string
     reference_type?: EnumReferenceTypeFilter<"Analytics"> | $Enums.ReferenceType
     event_type?: EnumEventTypeFilter<"Analytics"> | $Enums.EventType
     context?: JsonNullableFilter<"Analytics">
@@ -26337,10 +26391,8 @@ export namespace Prisma {
     context?: SortOrderInput | SortOrder
     user_id?: SortOrder
     _count?: AnalyticsCountOrderByAggregateInput
-    _avg?: AnalyticsAvgOrderByAggregateInput
     _max?: AnalyticsMaxOrderByAggregateInput
     _min?: AnalyticsMinOrderByAggregateInput
-    _sum?: AnalyticsSumOrderByAggregateInput
   }
 
   export type AnalyticsScalarWhereWithAggregatesInput = {
@@ -26349,7 +26401,7 @@ export namespace Prisma {
     NOT?: AnalyticsScalarWhereWithAggregatesInput | AnalyticsScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Analytics"> | string
     created_at?: DateTimeWithAggregatesFilter<"Analytics"> | Date | string
-    reference_id?: IntWithAggregatesFilter<"Analytics"> | number
+    reference_id?: StringWithAggregatesFilter<"Analytics"> | string
     reference_type?: EnumReferenceTypeWithAggregatesFilter<"Analytics"> | $Enums.ReferenceType
     event_type?: EnumEventTypeWithAggregatesFilter<"Analytics"> | $Enums.EventType
     context?: JsonNullableWithAggregatesFilter<"Analytics">
@@ -26524,6 +26576,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -26558,6 +26612,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -26592,6 +26648,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -26626,6 +26684,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -26660,6 +26720,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -26678,6 +26740,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -26696,6 +26760,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VerificationTokenCreateInput = {
@@ -27107,6 +27173,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -27139,6 +27206,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -27165,6 +27233,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -27197,6 +27266,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -27226,6 +27296,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
   }
 
   export type projetUpdateManyMutationInput = {
@@ -27247,6 +27318,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type projetUncheckedUpdateManyInput = {
@@ -27271,6 +27343,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type projet_ficheCreateInput = {
@@ -27839,7 +27912,7 @@ export namespace Prisma {
   export type AnalyticsCreateInput = {
     id?: string
     created_at?: Date | string
-    reference_id: number
+    reference_id: string
     reference_type: $Enums.ReferenceType
     event_type: $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -27849,7 +27922,7 @@ export namespace Prisma {
   export type AnalyticsUncheckedCreateInput = {
     id?: string
     created_at?: Date | string
-    reference_id: number
+    reference_id: string
     reference_type: $Enums.ReferenceType
     event_type: $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -27859,7 +27932,7 @@ export namespace Prisma {
   export type AnalyticsUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reference_id?: IntFieldUpdateOperationsInput | number
+    reference_id?: StringFieldUpdateOperationsInput | string
     reference_type?: EnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType
     event_type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -27869,7 +27942,7 @@ export namespace Prisma {
   export type AnalyticsUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reference_id?: IntFieldUpdateOperationsInput | number
+    reference_id?: StringFieldUpdateOperationsInput | string
     reference_type?: EnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType
     event_type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -27879,7 +27952,7 @@ export namespace Prisma {
   export type AnalyticsCreateManyInput = {
     id?: string
     created_at?: Date | string
-    reference_id: number
+    reference_id: string
     reference_type: $Enums.ReferenceType
     event_type: $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -27889,7 +27962,7 @@ export namespace Prisma {
   export type AnalyticsUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reference_id?: IntFieldUpdateOperationsInput | number
+    reference_id?: StringFieldUpdateOperationsInput | string
     reference_type?: EnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType
     event_type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -27898,7 +27971,7 @@ export namespace Prisma {
   export type AnalyticsUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reference_id?: IntFieldUpdateOperationsInput | number
+    reference_id?: StringFieldUpdateOperationsInput | string
     reference_type?: EnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType
     event_type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -28183,6 +28256,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type EnumStatutUserNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutUser | EnumStatutUserFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatutUser[] | ListEnumStatutUserFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatutUser[] | ListEnumStatutUserFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatutUserNullableFilter<$PrismaModel> | $Enums.StatutUser | null
+  }
+
   export type AccountListRelationFilter = {
     every?: AccountWhereInput
     some?: AccountWhereInput
@@ -28335,6 +28415,8 @@ export namespace Prisma {
     canal_acquisition?: SortOrder
     discardedInformation?: SortOrder
     accept_communication_produit?: SortOrder
+    statut?: SortOrder
+    statut_updated_at?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -28350,6 +28432,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     canal_acquisition?: SortOrder
     accept_communication_produit?: SortOrder
+    statut?: SortOrder
+    statut_updated_at?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -28365,6 +28449,8 @@ export namespace Prisma {
     updated_at?: SortOrder
     canal_acquisition?: SortOrder
     accept_communication_produit?: SortOrder
+    statut?: SortOrder
+    statut_updated_at?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -28427,6 +28513,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type EnumStatutUserNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutUser | EnumStatutUserFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatutUser[] | ListEnumStatutUserFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatutUser[] | ListEnumStatutUserFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatutUserNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatutUser | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatutUserNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatutUserNullableFilter<$PrismaModel>
   }
 
   export type VerificationTokenOrderByRelevanceInput = {
@@ -28863,6 +28959,7 @@ export namespace Prisma {
     budget?: SortOrder
     sourcing_rex?: SortOrder
     statut?: SortOrder
+    statut_updated_at?: SortOrder
   }
 
   export type projetAvgOrderByAggregateInput = {
@@ -28889,6 +28986,7 @@ export namespace Prisma {
     is_public?: SortOrder
     budget?: SortOrder
     statut?: SortOrder
+    statut_updated_at?: SortOrder
   }
 
   export type projetMinOrderByAggregateInput = {
@@ -28907,6 +29005,7 @@ export namespace Prisma {
     is_public?: SortOrder
     budget?: SortOrder
     statut?: SortOrder
+    statut_updated_at?: SortOrder
   }
 
   export type projetSumOrderByAggregateInput = {
@@ -29475,10 +29574,6 @@ export namespace Prisma {
     user_id?: SortOrder
   }
 
-  export type AnalyticsAvgOrderByAggregateInput = {
-    reference_id?: SortOrder
-  }
-
   export type AnalyticsMaxOrderByAggregateInput = {
     id?: SortOrder
     created_at?: SortOrder
@@ -29495,10 +29590,6 @@ export namespace Prisma {
     reference_type?: SortOrder
     event_type?: SortOrder
     user_id?: SortOrder
-  }
-
-  export type AnalyticsSumOrderByAggregateInput = {
-    reference_id?: SortOrder
   }
 
   export type EnumReferenceTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -29838,6 +29929,10 @@ export namespace Prisma {
 
   export type BoolFieldUpdateOperationsInput = {
     set?: boolean
+  }
+
+  export type NullableEnumStatutUserFieldUpdateOperationsInput = {
+    set?: $Enums.StatutUser | null
   }
 
   export type AccountUpdateManyWithoutUserNestedInput = {
@@ -31387,6 +31482,13 @@ export namespace Prisma {
     not?: NestedBoolFilter<$PrismaModel> | boolean
   }
 
+  export type NestedEnumStatutUserNullableFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutUser | EnumStatutUserFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatutUser[] | ListEnumStatutUserFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatutUser[] | ListEnumStatutUserFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatutUserNullableFilter<$PrismaModel> | $Enums.StatutUser | null
+  }
+
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel> | null
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel> | null
@@ -31444,6 +31546,16 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedBoolFilter<$PrismaModel>
     _max?: NestedBoolFilter<$PrismaModel>
+  }
+
+  export type NestedEnumStatutUserNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.StatutUser | EnumStatutUserFieldRefInput<$PrismaModel> | null
+    in?: $Enums.StatutUser[] | ListEnumStatutUserFieldRefInput<$PrismaModel> | null
+    notIn?: $Enums.StatutUser[] | ListEnumStatutUserFieldRefInput<$PrismaModel> | null
+    not?: NestedEnumStatutUserNullableWithAggregatesFilter<$PrismaModel> | $Enums.StatutUser | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedEnumStatutUserNullableFilter<$PrismaModel>
+    _max?: NestedEnumStatutUserNullableFilter<$PrismaModel>
   }
 
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
@@ -31727,6 +31839,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationCreateNestedManyWithoutCreatorInput
@@ -31760,6 +31874,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationUncheckedCreateNestedManyWithoutCreatorInput
@@ -31809,6 +31925,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUpdateManyWithoutCreatorNestedInput
@@ -31842,6 +31960,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUncheckedUpdateManyWithoutCreatorNestedInput
@@ -31958,6 +32078,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
     deleter?: UserCreateNestedOneWithoutProjets_deletedInput
@@ -31988,6 +32109,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -32092,6 +32214,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -32122,6 +32245,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -32268,7 +32392,7 @@ export namespace Prisma {
   export type AnalyticsCreateWithoutCreated_byInput = {
     id?: string
     created_at?: Date | string
-    reference_id: number
+    reference_id: string
     reference_type: $Enums.ReferenceType
     event_type: $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -32277,7 +32401,7 @@ export namespace Prisma {
   export type AnalyticsUncheckedCreateWithoutCreated_byInput = {
     id?: string
     created_at?: Date | string
-    reference_id: number
+    reference_id: string
     reference_type: $Enums.ReferenceType
     event_type: $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -32534,6 +32658,7 @@ export namespace Prisma {
     budget?: IntNullableFilter<"projet"> | number | null
     sourcing_rex?: JsonNullableFilter<"projet">
     statut?: EnumStatutProjetNullableFilter<"projet"> | $Enums.StatutProjet | null
+    statut_updated_at?: DateTimeNullableFilter<"projet"> | Date | string | null
   }
 
   export type estimationUpsertWithWhereUniqueWithoutCreatorInput = {
@@ -32723,7 +32848,7 @@ export namespace Prisma {
     NOT?: AnalyticsScalarWhereInput | AnalyticsScalarWhereInput[]
     id?: StringFilter<"Analytics"> | string
     created_at?: DateTimeFilter<"Analytics"> | Date | string
-    reference_id?: IntFilter<"Analytics"> | number
+    reference_id?: StringFilter<"Analytics"> | string
     reference_type?: EnumReferenceTypeFilter<"Analytics"> | $Enums.ReferenceType
     event_type?: EnumEventTypeFilter<"Analytics"> | $Enums.EventType
     context?: JsonNullableFilter<"Analytics">
@@ -32910,6 +33035,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationCreateNestedManyWithoutCreatorInput
@@ -32943,6 +33070,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationUncheckedCreateNestedManyWithoutCreatorInput
@@ -32984,6 +33113,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     deleter?: UserCreateNestedOneWithoutProjets_deletedInput
@@ -33014,6 +33144,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -33074,6 +33205,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUpdateManyWithoutCreatorNestedInput
@@ -33107,6 +33240,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33159,6 +33294,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -33190,6 +33326,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
@@ -33217,6 +33354,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -33250,6 +33389,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -33288,6 +33429,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -33321,6 +33464,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -33428,6 +33573,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -33459,6 +33605,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
@@ -33492,6 +33639,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -33525,6 +33674,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33569,6 +33720,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -33602,6 +33755,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33703,6 +33858,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -33736,6 +33893,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -33827,6 +33986,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -33860,6 +34021,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33893,6 +34056,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -33926,6 +34091,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -34012,6 +34179,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -34045,6 +34214,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -34121,6 +34292,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationCreateNestedManyWithoutCreatorInput
@@ -34154,6 +34327,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationUncheckedCreateNestedManyWithoutCreatorInput
@@ -34263,6 +34438,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -34296,6 +34473,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -34462,6 +34641,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUpdateManyWithoutCreatorNestedInput
@@ -34495,6 +34676,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUncheckedUpdateManyWithoutCreatorNestedInput
@@ -34598,6 +34781,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -34631,6 +34816,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -34731,6 +34918,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -34762,6 +34950,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -34789,6 +34978,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -34822,6 +35013,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -34874,6 +35067,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -34905,6 +35099,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -34938,6 +35133,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -34971,6 +35168,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -35007,6 +35206,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -35038,6 +35238,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
@@ -35101,6 +35302,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -35134,6 +35337,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -35186,6 +35391,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -35217,6 +35423,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
@@ -35292,6 +35499,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -35325,6 +35534,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -35358,6 +35569,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -35391,6 +35604,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -35432,6 +35647,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
     deleter?: UserCreateNestedOneWithoutProjets_deletedInput
@@ -35463,6 +35679,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
@@ -35490,6 +35707,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -35523,6 +35742,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -35596,6 +35817,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -35629,6 +35852,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -35676,6 +35901,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
     deleter?: UserUpdateOneWithoutProjets_deletedNestedInput
@@ -35707,6 +35933,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
@@ -35740,6 +35967,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -35773,6 +36002,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -35913,6 +36144,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -35946,6 +36179,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -36058,6 +36293,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -36091,6 +36328,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36124,6 +36363,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -36157,6 +36398,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -36206,6 +36449,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -36239,6 +36484,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36275,6 +36522,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     creator: UserCreateNestedOneWithoutProjets_createdInput
     estimations?: estimationCreateNestedManyWithoutProjetInput
     collectivite: collectiviteCreateNestedOneWithoutProjetInput
@@ -36306,6 +36554,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
     estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
@@ -36333,6 +36582,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -36366,6 +36617,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -36418,6 +36671,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -36449,6 +36703,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -36482,6 +36737,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -36515,6 +36772,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36548,6 +36807,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -36581,6 +36842,8 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -36630,6 +36893,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -36663,6 +36928,8 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36729,6 +36996,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
   }
 
   export type estimationCreateManyCreatorInput = {
@@ -36774,6 +37042,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
   }
 
   export type user_collectiviteCreateManyUserInput = {
@@ -36819,7 +37088,7 @@ export namespace Prisma {
   export type AnalyticsCreateManyCreated_byInput = {
     id?: string
     created_at?: Date | string
-    reference_id: number
+    reference_id: string
     reference_type: $Enums.ReferenceType
     event_type: $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -36974,6 +37243,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
     deleter?: UserUpdateOneWithoutProjets_deletedNestedInput
@@ -37004,6 +37274,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -37032,6 +37303,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type estimationUpdateWithoutCreatorInput = {
@@ -37123,6 +37395,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
@@ -37153,6 +37426,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -37181,6 +37455,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type user_collectiviteUpdateWithoutUserInput = {
@@ -37312,7 +37587,7 @@ export namespace Prisma {
   export type AnalyticsUpdateWithoutCreated_byInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reference_id?: IntFieldUpdateOperationsInput | number
+    reference_id?: StringFieldUpdateOperationsInput | string
     reference_type?: EnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType
     event_type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -37321,7 +37596,7 @@ export namespace Prisma {
   export type AnalyticsUncheckedUpdateWithoutCreated_byInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reference_id?: IntFieldUpdateOperationsInput | number
+    reference_id?: StringFieldUpdateOperationsInput | string
     reference_type?: EnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType
     event_type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -37330,7 +37605,7 @@ export namespace Prisma {
   export type AnalyticsUncheckedUpdateManyWithoutCreated_byInput = {
     id?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    reference_id?: IntFieldUpdateOperationsInput | number
+    reference_id?: StringFieldUpdateOperationsInput | string
     reference_type?: EnumReferenceTypeFieldUpdateOperationsInput | $Enums.ReferenceType
     event_type?: EnumEventTypeFieldUpdateOperationsInput | $Enums.EventType
     context?: NullableJsonNullValueInput | InputJsonValue
@@ -37487,6 +37762,7 @@ export namespace Prisma {
     budget?: number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
   }
 
   export type user_collectiviteUpdateWithoutCollectiviteInput = {
@@ -37526,6 +37802,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
     estimations?: estimationUpdateManyWithoutProjetNestedInput
     deleter?: UserUpdateOneWithoutProjets_deletedNestedInput
@@ -37556,6 +37833,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
@@ -37584,6 +37862,7 @@ export namespace Prisma {
     budget?: NullableIntFieldUpdateOperationsInput | number | null
     sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
     statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type emailCreateManyUser_projetInput = {

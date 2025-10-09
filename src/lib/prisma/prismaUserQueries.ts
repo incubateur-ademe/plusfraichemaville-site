@@ -1,7 +1,8 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
-import { Prisma, User } from "@/src/generated/prisma/client";
+import { ProjetWithRelations, UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
+import { Prisma, StatutProjet, StatutUser, User } from "@/src/generated/prisma/client";
 import { IApiSirenQueryTypes } from "@/src/lib/siren/types";
+import { projetIncludes } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.findUnique({
@@ -98,6 +99,19 @@ export const updateUserEtablissementInfo = async (
     data: {
       nom_etablissement: nomEtablissement,
       siren_info: etablissementInfo as Prisma.JsonObject,
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};
+
+export const updateUserStatut = async (userId: string, statut: StatutUser): Promise<UserWithCollectivite | null> => {
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      statut: statut,
+      statut_updated_at: new Date(),
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
