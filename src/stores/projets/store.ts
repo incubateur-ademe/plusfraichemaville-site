@@ -10,6 +10,7 @@ export interface ProjetsState {
 
 export type ProjetsActions = {
   setProjets: (_projets: ProjetWithRelations[]) => void;
+  getProjets: () => ProjetWithPublicRelations[];
   setPendingProjets: (_projets: ProjetWithPublicRelations[]) => void;
   setCurrentProjetId: (_currentProjetId: number | null) => void;
   getCurrentProjet: () => ProjetWithRelations | undefined;
@@ -38,8 +39,11 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
   return createStore<ProjetsStore>()((set, get) => ({
     ...initState,
     setProjets: (projets) => set(() => ({ projets })),
+    getProjets: (): ProjetWithRelations[] => get().projets,
     setPendingProjets: (pendingProjets) => set(() => ({ pendingProjets })),
-    setCurrentProjetId: (currentProjetId) => set(() => ({ currentProjetId })),
+    setCurrentProjetId: (currentProjetId) => {
+      console.log("currentProjetId", currentProjetId);
+      return set(() => ({ currentProjetId }));},
     getCurrentProjet: () => {
       const { projets, currentProjetId } = get();
       return projets.find((projet) => projet.id === currentProjetId);

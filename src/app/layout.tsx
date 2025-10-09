@@ -13,6 +13,7 @@ import "./globals.css";
 import MatomoScript from "@/src/components/matomo/matomo-script";
 import { CommonSkipLinks } from "@/src/components/common/common-skip-links";
 import AppFooter from "@/src/components/layout/AppFooter";
+import BannerProjet from "@/src/components/espace-projet/banner/banner-projet";
 
 export const metadata: Metadata = {
   title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",

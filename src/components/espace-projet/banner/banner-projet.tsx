@@ -5,16 +5,33 @@ import { PictoId } from "@/src/components/common/pictos/picto-espace-selector";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import { BannerProjetButtons } from "./banner-projet-buttons";
-import { Suspense } from "react";
+import { ChangeEvent, Suspense } from "react";
 import { BannerProjetSkeleton } from "./banner-projet-skeleton";
 import { LecteurModeLabel } from "@/src/components/common/lecteur-mode-label";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import Link from "next/link";
+import { Select } from "@codegouvfr/react-dsfr/Select";
+import { Hidden } from "@/src/components/common/hidden";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  // const pathname = window?.location.href;
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentUrl = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
+  console.log(currentUrl);
+  const projets = useProjetsStore((state) => state.getProjets());
+  const currentProjetId = useProjetsStore((state) => state.currentProjetId);
+  const setCurrentProjetId = useProjetsStore((state) => state.setCurrentProjetId);
   const isLecteur = useIsLecteur(currentProjet?.id);
+  const router = useRouter();
+  const handleChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    setCurrentProjetId(+event.target.value);
+    const newUrl = currentUrl.replace(/\/espace-projet\/(\d+)\//, `/espace-projet/${+event.target.value}/`);
+    router.push(newUrl);
+  };
 
   return (
     <div className={`bg-dsfr-background-alt-blue-france py-3  ${className} min-h-[6rem]`}>
@@ -52,14 +69,27 @@ export default function BannerProjet({ className }: { className?: string }) {
                     {currentProjet.collectivite.nom}
                   </div>
                 </Link>
-                <h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">
-                  <LinkWithoutPrefetch
-                    href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
-                    className="!bg-none text-pfmv-navy"
-                  >
-                    {currentProjet.nom}
-                  </LinkWithoutPrefetch>
-                </h1>
+                <Select
+                  label={<Hidden accessible>Selectionnez un projet</Hidden>}
+                  nativeSelectProps={{
+                    onChange: handleChange,
+                    value : currentProjetId,
+                  }}
+                >
+                  {projets.map((projet) => (
+                    <option value={projet.id} key={projet.id}>
+                      {projet.nom}
+                    </option>
+                  ))}
+                </Select>
+                {/*<h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">*/}
+                {/*  <LinkWithoutPrefetch*/}
+                {/*    href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}*/}
+                {/*    className="!bg-none text-pfmv-navy"*/}
+                {/*  >*/}
+                {/*    {currentProjet.nom}*/}
+                {/*  </LinkWithoutPrefetch>*/}
+                {/*</h1>*/}
               </div>
             </div>
             <div className="flex gap-4">
