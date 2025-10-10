@@ -35,7 +35,7 @@ export type EmailRemindToDoDiagnosticConfig = {
   projetName: string;
   userPrenom: string;
   typeEspaceProjet: string;
-  urlModule4: string;
+  urlModule2: string;
 };
 
 export type EmailRemindChooseSolutionConfig = {
@@ -55,6 +55,13 @@ export type EmailRemindDoEstimationConfig = {
   urlModule4: string;
 };
 
+export type EmailRemindFindFinancementConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule5: string;
+};
+
 export type EmailProjetPartageConfig = {
   username: string;
   userCollectiviteName: string;
@@ -62,19 +69,6 @@ export type EmailProjetPartageConfig = {
   projetCollectiviteName: string;
   link: string;
   destinationMail: string;
-};
-
-export type EmailProjetCreationParam = {
-  nomUtilisateur: string;
-  nomProjet: string;
-  rex1Titre?: string;
-  rex1Url?: string;
-  rex2Titre?: string;
-  rex2Url?: string;
-  rex3Titre?: string;
-  rex3Url?: string;
-  rex4Titre?: string;
-  rex4Url?: string;
 };
 
 const computeRemindToDoEstimationEmailParam = (
@@ -140,6 +134,9 @@ export class EmailService {
       projetRemindToDoEstimation: {
         templateId: 65,
       },
+      projetRemindToDoFinancement: {
+        templateId: 66,
+      }
     };
   }
 
@@ -278,7 +275,7 @@ export class EmailService {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
           typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
-          urlModule4: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projet.id)),
+          urlModule2: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projet.id)),
         };
         return await this.sendEmail({
           to: projet.creator.email,
@@ -338,12 +335,28 @@ export class EmailService {
   }
 
   async sendRemindChooseFinancementMail(lastSyncDate: Date, nbDaysToWaitAfterMakingEstimation: number) {
-    const projetsToRemindEstimation = await getProjetsForRemindToDoFinancement(
+    const projetsToRemindFinancement = await getProjetsForRemindToDoFinancement(
       removeDaysToDate(lastSyncDate, nbDaysToWaitAfterMakingEstimation),
       removeDaysToDate(new Date(), nbDaysToWaitAfterMakingEstimation),
     );
-    console.log(`Nb de mails de projet où le module 3 est à faire à envoyer : ${projetsToRemindEstimation.length}`);
-    // TODO Envoyer le mail quand le template sera prêt
+    console.log(`Nb de mails de projet où le module financement est à faire : ${projetsToRemindFinancement.length}`);
+    return await Promise.all(
+      projetsToRemindFinancement.map(async (projet) => {
+        const emailParams: EmailRemindFindFinancementConfig = {
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          urlModule5: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT(projet.id)),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToDoFinancement,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      })
+    );
   }
 
   async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {

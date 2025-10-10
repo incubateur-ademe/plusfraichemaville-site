@@ -60,8 +60,9 @@ const main = async () => {
       nbMailRemindModuleDiagnostic: sendRemindModuleDiagnosticMail.length,
       nbMailsInactiveUser: inactiveUserPromises.length,
       nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
-      nbMailsRemindSolution : sendRemindFicheSolutionMail.length,
-      nbMailsRemindEstimation : sendRemindEstimationMail.length,
+      nbMailsRemindSolution: sendRemindFicheSolutionMail.length,
+      nbMailsRemindEstimation: sendRemindEstimationMail.length,
+      nbMailsRemindFinancement: sendRemindFinancementMail.length,
     });
     await sendMattermostWebhook(webhookData, "batch", 5000);
     console.log("Batch des mails CSM réussi !");
