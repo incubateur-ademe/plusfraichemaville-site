@@ -24,17 +24,16 @@ const main = async () => {
       INACTIVITY_DAYS,
     );
 
-    console.log("Recherche des nouveaux projets...");
-    //TODO Revoir la logique pour les différents template avec niveau de maturité différents.
-    const sendProjetEmailsPromises = await emailService.sendProjetCreationEmail(
-      lastSyncDate ?? removeDaysToDate(new Date(), 3),
-    );
-
     const REMIND_UNFINISHED_DIAG_DAYS = 7;
     console.log(`Recherche des projets avec diagnostics non validés  depuis ${REMIND_UNFINISHED_DIAG_DAYS} jours...`);
     const unfinishedDiagPromises = await emailService.sendRemindNotCompletedDiagnosticEmail(
       lastSyncDate ?? removeDaysToDate(new Date(), REMIND_UNFINISHED_DIAG_DAYS),
       REMIND_UNFINISHED_DIAG_DAYS,
+    );
+
+    console.log("Recherche à relancer pour module diagnostic");
+    const sendRemindModuleDiagnosticMail = await emailService.sendRemindDoDiagnosticMail(
+      lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
 
     console.log("Recherche à relancer pour choisir fiche solution");
@@ -58,7 +57,7 @@ const main = async () => {
 
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     const webhookData = makeCsmBatchWebhookData({
-      nbMailCreationProjet: sendProjetEmailsPromises.length,
+      nbMailRemindModuleDiagnostic: sendRemindModuleDiagnosticMail.length,
       nbMailsInactiveUser: inactiveUserPromises.length,
       nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
       nbMailsRemindSolution : sendRemindFicheSolutionMail.length,

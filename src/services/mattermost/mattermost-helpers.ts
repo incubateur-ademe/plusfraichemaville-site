@@ -22,7 +22,7 @@ ${ticket.properties.content}`,
 };
 
 type CsmBatchWebhookData = {
-  nbMailCreationProjet: number;
+  nbMailRemindModuleDiagnostic: number;
   nbMailsInactiveUser: number;
   nbMailsUnfinishedDiag: number;
   nbMailsRemindSolution: number;
@@ -32,11 +32,11 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
   return {
     text: `**[Fin de traitement d'envoi des mails CSM]**
     
-**Nb de mails de création de projets sans fiche : ** ${data.nbMailCreationProjet}
+**Nb de mails de rappel pour le module diagnostic : ** ${data.nbMailRemindModuleDiagnostic}
 
 **Nb de mails de rappel pour choisir une solution : ** ${data.nbMailsRemindSolution}
 
-**Nb de mails d'utilisateurs inactifs : ** ${data.nbMailCreationProjet} 
+**Nb de mails d'utilisateurs inactifs : ** ${data.nbMailRemindModuleDiagnostic} 
 
 **Nb de mails de diagnostics non finalisés : ** ${data.nbMailsUnfinishedDiag} 
 `,

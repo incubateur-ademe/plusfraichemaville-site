@@ -500,7 +500,10 @@ export const getProjetsForRemindToChooseSolution = async (
   });
 };
 
-export const getProjetsWithoutFiche = async (afterDate: Date, beforeDate: Date): Promise<ProjetWithRelations[]> => {
+export const getProjetsForRemindDiagnostic = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
       deleted_at: null,
@@ -508,9 +511,16 @@ export const getProjetsWithoutFiche = async (afterDate: Date, beforeDate: Date):
         gte: afterDate,
         lte: beforeDate,
       },
+      niveau_maturite: {
+        in: [
+          NiveauMaturiteCode.questionnement,
+          NiveauMaturiteCode.priorisationSolutions,
+          NiveauMaturiteCode.redactionCDC,
+        ],
+      },
       ...projetWithoutFiche,
       ...projetWithoutDiagnosticSimulation,
-      ...projetDidNotAlreadySendEmail(emailType.projetCreation),
+      ...projetDidNotAlreadySendEmail(emailType.projetRemindToDoDiagnostic),
     },
     include: projetIncludes,
   });

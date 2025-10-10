@@ -515,6 +515,7 @@ exports.emailType = exports.$Enums.emailType = {
   noActivityAfterSignup: 'noActivityAfterSignup',
   remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic',
   projetRemindToDoSolution: 'projetRemindToDoSolution',
+  projetRemindToDoDiagnostic: 'projetRemindToDoDiagnostic',
   projetRemindToDoEstimation: 'projetRemindToDoEstimation',
   projetRemindToDoFinancement: 'projetRemindToDoFinancement'
 };

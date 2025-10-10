@@ -13,7 +13,7 @@ import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
-  getProjetsWithoutFiche,
+  getProjetsForRemindDiagnostic,
   getProjetsForRemindDiagnosticEmail,
   getProjetsForRemindToChooseSolution,
   getProjetsForRemindToDoEstimation,
@@ -37,6 +37,13 @@ export type EmailRemindChooseSolutionConfig = {
   userPrenom: string;
   typeEspaceProjet: string;
   urlModule3: string;
+};
+
+export type EmailRemindToDoDiagnosticConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule4: string;
 };
 
 export type EmailProjetPartageConfig = {
@@ -252,20 +259,20 @@ export class EmailService {
     });
   }
 
-  async sendProjetCreationEmail(lastSyncDate: Date) {
-    const projets = await getProjetsWithoutFiche(lastSyncDate, new Date());
-    console.log(`Nb de mails de création de projet sans fiche à envoyer : ${projets.length}`);
-    const allRex = await getRetoursExperiences();
-    const shuffledRex = shuffle(allRex);
+  async sendRemindDoDiagnosticMail(lastSyncDate: Date) {
+    const projets = await getProjetsForRemindDiagnostic(lastSyncDate, new Date());
+    console.log(`Nb de mails de projet avec le module Diagnostic à faire : ${projets.length}`);
     return await Promise.all(
       projets.map(async (projet) => {
-        const rexExamples = shuffledRex
-          .filter((rex) => rex.attributes.types_espaces?.includes(projet.type_espace))
-          .slice(0, 4);
-        const emailParams = computeProjetCreationEmailParam(projet, rexExamples);
+        const emailParams: EmailRemindToDoDiagnosticConfig = {
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          urlModule4: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projet.id)),
+        };
         return await this.sendEmail({
           to: projet.creator.email,
-          emailType: emailType.projetCreation,
+          emailType: emailType.projetRemindToDoDiagnostic,
           params: emailParams,
           extra: emailParams,
           userProjetId: projet.users.find((up) => up.role === "ADMIN")?.id,
@@ -276,14 +283,14 @@ export class EmailService {
 
   async sendRemindChooseSolutionMail(lastSyncDate: Date) {
     const projetsToRemindSolution = await getProjetsForRemindToChooseSolution(lastSyncDate, new Date());
-    console.log(`Nb de mails de projet avec le module Fiche Solution est à faire : ${projetsToRemindSolution.length}`);
+    console.log(`Nb de mails de projet avec le module Fiche Solution à faire : ${projetsToRemindSolution.length}`);
     return await Promise.all(
       projetsToRemindSolution.map(async (projet) => {
         const emailParams: EmailRemindChooseSolutionConfig = {
+          userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
           typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
           urlModule3: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(projet.id)),
-          userPrenom: projet.creator.prenom || "",
         };
         return await this.sendEmail({
           to: projet.creator.email,
