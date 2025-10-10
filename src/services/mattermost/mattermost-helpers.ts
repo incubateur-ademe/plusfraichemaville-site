@@ -26,6 +26,7 @@ type CsmBatchWebhookData = {
   nbMailsInactiveUser: number;
   nbMailsUnfinishedDiag: number;
   nbMailsRemindSolution: number;
+  nbMailsRemindEstimation: number;
 };
 
 export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
@@ -35,6 +36,8 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
 **Nb de mails de rappel pour le module diagnostic : ** ${data.nbMailRemindModuleDiagnostic}
 
 **Nb de mails de rappel pour choisir une solution : ** ${data.nbMailsRemindSolution}
+
+**Nb de mails de rappel pour faire une estimation : ** ${data.nbMailsRemindEstimation}
 
 **Nb de mails d'utilisateurs inactifs : ** ${data.nbMailRemindModuleDiagnostic} 
 

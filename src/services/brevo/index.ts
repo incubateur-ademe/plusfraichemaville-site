@@ -3,7 +3,7 @@ import {
   getUserWithNoActivityAfterSignup,
   updateEmailStatus as updateEmailStatusQuery,
 } from "@/src/lib/prisma/prisma-email-queries";
-import { email, emailStatus, emailType } from "@/src/generated/prisma/client";
+import { email, emailStatus, emailType, FicheType, RoleProjet } from "@/src/generated/prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
 import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";
@@ -20,17 +20,23 @@ import {
   getProjetsForRemindToDoFinancement,
 } from "@/src/lib/prisma/prismaProjetQueries";
 import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
-import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
-import shuffle from "lodash/shuffle";
-import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
 interface Templates {
   templateId: number;
 }
 
 type EmailSendResult = ResponseAction<{ email?: email }>;
+
+export type EmailRemindToDoDiagnosticConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule4: string;
+};
 
 export type EmailRemindChooseSolutionConfig = {
   projetName: string;
@@ -39,10 +45,13 @@ export type EmailRemindChooseSolutionConfig = {
   urlModule3: string;
 };
 
-export type EmailRemindToDoDiagnosticConfig = {
+export type EmailRemindDoEstimationConfig = {
   projetName: string;
   userPrenom: string;
-  typeEspaceProjet: string;
+  nomSolution1?: string;
+  nomSolution2?: string;
+  nomSolution3?: string;
+  plusDeTroisSolutions: boolean;
   urlModule4: string;
 };
 
@@ -68,31 +77,26 @@ export type EmailProjetCreationParam = {
   rex4Url?: string;
 };
 
-const computeProjetCreationEmailParam = (
+const computeRemindToDoEstimationEmailParam = (
   projet: ProjetWithRelations,
-  rexExamples: RetourExperience[],
-): EmailProjetCreationParam => {
-  if (rexExamples.length < 3) {
-    return {
-      nomProjet: projet.nom,
-      nomUtilisateur: projet.creator.nom || "",
-    };
-  } else {
-    return {
-      nomProjet: projet.nom,
-      nomUtilisateur: projet.creator.nom || "",
-      rex1Titre: rexExamples[0].attributes.titre,
-      rex1Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[0].attributes.slug)),
-      rex2Titre: rexExamples[1].attributes.titre,
-      rex2Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[1].attributes.slug)),
-      rex3Titre: rexExamples[2].attributes.titre,
-      rex3Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[2].attributes.slug)),
-      rex4Titre: rexExamples[3]?.attributes.titre,
-      ...(rexExamples[3] && {
-        rex4Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[3]?.attributes.slug)),
-      }),
-    };
-  }
+  allFichesSolutions: FicheSolution[],
+): EmailRemindDoEstimationConfig => {
+  const chosenFichesSolutions = projet.fiches.filter((fiche) => fiche.type === FicheType.SOLUTION);
+  return {
+    projetName: projet.nom,
+    userPrenom: projet.creator.prenom || "",
+    ...(chosenFichesSolutions[0] && {
+      nomSolution1: allFichesSolutions.find((fs) => fs.id === chosenFichesSolutions[0].id)?.attributes.titre,
+    }),
+    ...(chosenFichesSolutions[1] && {
+      nomSolution2: allFichesSolutions.find((fs) => fs.id === chosenFichesSolutions[1].id)?.attributes.titre,
+    }),
+    ...(chosenFichesSolutions[2] && {
+      nomSolution3: allFichesSolutions.find((fs) => fs.id === chosenFichesSolutions[2].id)?.attributes.titre,
+    }),
+    plusDeTroisSolutions: allFichesSolutions.length > 3,
+    urlModule4: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(projet.id),
+  };
 };
 
 export class EmailService {
@@ -127,8 +131,14 @@ export class EmailService {
       remindNotCompletedDiagnostic: {
         templateId: 60,
       },
+      projetRemindToDoDiagnostic: {
+        templateId: 63,
+      },
       projetRemindToDoSolution: {
         templateId: 64,
+      },
+      projetRemindToDoEstimation: {
+        templateId: 65,
       },
     };
   }
@@ -147,7 +157,7 @@ export class EmailService {
   }: {
     to: string;
     emailType: emailType;
-    params?: Record<string, string>;
+    params?: Record<string, string | boolean>;
     userProjetId?: number;
     userId?: string;
     extra?: any;
@@ -275,7 +285,7 @@ export class EmailService {
           emailType: emailType.projetRemindToDoDiagnostic,
           params: emailParams,
           extra: emailParams,
-          userProjetId: projet.users.find((up) => up.role === "ADMIN")?.id,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
         });
       }),
     );
@@ -297,7 +307,7 @@ export class EmailService {
           emailType: emailType.projetRemindToDoSolution,
           params: emailParams,
           extra: emailParams,
-          userProjetId: projet.users.find((up) => up.role === "ADMIN")?.id,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
         });
       }),
     );
@@ -309,7 +319,22 @@ export class EmailService {
       removeDaysToDate(new Date(), nbDaysToWaitAfterAddingFicheSolution),
     );
     console.log(`Nb de mails de projet où le module estimation est à faire  : ${projetsToRemindEstimation.length}`);
-    // TODO Envoyer le mail quand le template sera prêt
+    const allFichesSolutions = await getAllFichesSolutions();
+    return await Promise.all(
+      projetsToRemindEstimation.map(async (projet) => {
+        const emailParams: EmailRemindDoEstimationConfig = computeRemindToDoEstimationEmailParam(
+          projet,
+          allFichesSolutions,
+        );
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToDoEstimation,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
   }
 
   async sendRemindChooseFinancementMail(lastSyncDate: Date, nbDaysToWaitAfterMakingEstimation: number) {
