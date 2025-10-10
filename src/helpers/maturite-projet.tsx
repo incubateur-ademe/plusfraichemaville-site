@@ -2,10 +2,19 @@ import { SelectOption } from "@/src/components/common/SelectFormField";
 import clsx from "clsx";
 import { MaturiteProgress } from "@/src/components/maturite/maturite-progress";
 
+export enum NiveauMaturiteCode {
+  questionnement = "questionnement",
+  priorisationSolutions = "priorisationSolutions",
+  redactionCDC = "redactionCDC",
+  lancementTravaux = "lancementTravaux",
+  evaluationActions = "evaluationActions",
+}
+type NiveauMaturiteType = `${NiveauMaturiteCode}`;
+
 export type NiveauMaturite = {
   label: string;
   crmConnectLabel: string;
-  code: string;
+  code: NiveauMaturiteType;
   avancement: number;
 };
 

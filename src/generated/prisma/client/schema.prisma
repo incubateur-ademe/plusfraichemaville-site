@@ -148,7 +148,7 @@ enum emailType {
   welcomeMessage
   noActivityAfterSignup
   remindNotCompletedDiagnostic
-  projetWithDiagWithoutSol
+  projetRemindToDoSolution
   projetRemindToDoEstimation
   projetRemindToDoFinancement
 }

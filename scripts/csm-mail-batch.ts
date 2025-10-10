@@ -37,7 +37,7 @@ const main = async () => {
       REMIND_UNFINISHED_DIAG_DAYS,
     );
 
-    console.log("Recherche des projets avec diagnostics mais sans fiche solution");
+    console.log("Recherche à relancer pour choisir fiche solution");
     const sendRemindFicheSolutionMail = await emailService.sendRemindChooseSolutionMail(
       lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
@@ -61,6 +61,7 @@ const main = async () => {
       nbMailCreationProjet: sendProjetEmailsPromises.length,
       nbMailsInactiveUser: inactiveUserPromises.length,
       nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
+      nbMailsRemindSolution : sendRemindFicheSolutionMail.length,
     });
     await sendMattermostWebhook(webhookData, "batch", 5000);
     console.log("Batch des mails CSM réussi !");

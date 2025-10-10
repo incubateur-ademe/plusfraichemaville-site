@@ -155,7 +155,7 @@ export const emailType: {
   welcomeMessage: 'welcomeMessage',
   noActivityAfterSignup: 'noActivityAfterSignup',
   remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic',
-  projetWithDiagWithoutSol: 'projetWithDiagWithoutSol',
+  projetRemindToDoSolution: 'projetRemindToDoSolution',
   projetRemindToDoEstimation: 'projetRemindToDoEstimation',
   projetRemindToDoFinancement: 'projetRemindToDoFinancement'
 };

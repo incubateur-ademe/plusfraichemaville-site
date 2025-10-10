@@ -24,12 +24,20 @@ import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienc
 import shuffle from "lodash/shuffle";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
+import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 
 interface Templates {
   templateId: number;
 }
 
 type EmailSendResult = ResponseAction<{ email?: email }>;
+
+export type EmailRemindChooseSolutionConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule3: string;
+};
 
 export type EmailProjetPartageConfig = {
   username: string;
@@ -111,6 +119,9 @@ export class EmailService {
       },
       remindNotCompletedDiagnostic: {
         templateId: 60,
+      },
+      projetRemindToDoSolution: {
+        templateId: 64,
       },
     };
   }
@@ -241,30 +252,6 @@ export class EmailService {
     });
   }
 
-  async sendRemindChooseSolutionMail(lastSyncDate: Date) {
-    const projetsWithOnlyDiag = await getProjetsForRemindToChooseSolution(lastSyncDate, new Date());
-    console.log(`Nb de mails de projet avec le module Fiche Solution est à faire : ${projetsWithOnlyDiag.length}`);
-    // TODO Envoyer le mail quand le template sera prêt
-  }
-
-  async sendRemindMakeEstimationMail(lastSyncDate: Date, nbDaysToWaitAfterAddingFicheSolution: number) {
-    const projetsToRemindEstimation = await getProjetsForRemindToDoEstimation(
-      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterAddingFicheSolution),
-      removeDaysToDate(new Date(), nbDaysToWaitAfterAddingFicheSolution),
-    );
-    console.log(`Nb de mails de projet où le module estimation est à faire  : ${projetsToRemindEstimation.length}`);
-    // TODO Envoyer le mail quand le template sera prêt
-  }
-
-  async sendRemindChooseFinancementMail(lastSyncDate: Date, nbDaysToWaitAfterMakingEstimation: number) {
-    const projetsToRemindEstimation = await getProjetsForRemindToDoFinancement(
-      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterMakingEstimation),
-      removeDaysToDate(new Date(), nbDaysToWaitAfterMakingEstimation),
-    );
-    console.log(`Nb de mails de projet où le module 3 est à faire à envoyer : ${projetsToRemindEstimation.length}`);
-    // TODO Envoyer le mail quand le template sera prêt
-  }
-
   async sendProjetCreationEmail(lastSyncDate: Date) {
     const projets = await getProjetsWithoutFiche(lastSyncDate, new Date());
     console.log(`Nb de mails de création de projet sans fiche à envoyer : ${projets.length}`);
@@ -285,6 +272,46 @@ export class EmailService {
         });
       }),
     );
+  }
+
+  async sendRemindChooseSolutionMail(lastSyncDate: Date) {
+    const projetsToRemindSolution = await getProjetsForRemindToChooseSolution(lastSyncDate, new Date());
+    console.log(`Nb de mails de projet avec le module Fiche Solution est à faire : ${projetsToRemindSolution.length}`);
+    return await Promise.all(
+      projetsToRemindSolution.map(async (projet) => {
+        const emailParams: EmailRemindChooseSolutionConfig = {
+          projetName: projet.nom,
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          urlModule3: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(projet.id)),
+          userPrenom: projet.creator.prenom || "",
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToDoSolution,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === "ADMIN")?.id,
+        });
+      }),
+    );
+  }
+
+  async sendRemindMakeEstimationMail(lastSyncDate: Date, nbDaysToWaitAfterAddingFicheSolution: number) {
+    const projetsToRemindEstimation = await getProjetsForRemindToDoEstimation(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterAddingFicheSolution),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterAddingFicheSolution),
+    );
+    console.log(`Nb de mails de projet où le module estimation est à faire  : ${projetsToRemindEstimation.length}`);
+    // TODO Envoyer le mail quand le template sera prêt
+  }
+
+  async sendRemindChooseFinancementMail(lastSyncDate: Date, nbDaysToWaitAfterMakingEstimation: number) {
+    const projetsToRemindEstimation = await getProjetsForRemindToDoFinancement(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterMakingEstimation),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterMakingEstimation),
+    );
+    console.log(`Nb de mails de projet où le module 3 est à faire à envoyer : ${projetsToRemindEstimation.length}`);
+    // TODO Envoyer le mail quand le template sera prêt
   }
 
   async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {

@@ -14,6 +14,7 @@ import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTy
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/annuaire/types";
+import { NiveauMaturiteCode } from "@/src/helpers/maturite-projet";
 
 export const projetWithoutFicheSolution = {
   fiches: { none: { type: FicheType.SOLUTION } },
@@ -456,6 +457,7 @@ export const updateProjetStatut = async (
     include: projetIncludes,
   });
 };
+
 export const getProjetsForRemindToChooseSolution = async (
   afterDate: Date,
   beforeDate: Date,
@@ -465,16 +467,34 @@ export const getProjetsForRemindToChooseSolution = async (
       deleted_at: null,
       OR: [
         {
-          fiches: {
-            some: { type: FicheType.DIAGNOSTIC, created_at: { gte: afterDate, lte: beforeDate } },
+          OR: [
+            {
+              fiches: {
+                some: { type: FicheType.DIAGNOSTIC, created_at: { gte: afterDate, lte: beforeDate } },
+              },
+            },
+            {
+              diagnostic_simulations: { some: { created_at: { gte: afterDate, lte: beforeDate } } },
+            },
+          ],
+          niveau_maturite: {
+            in: [
+              NiveauMaturiteCode.questionnement,
+              NiveauMaturiteCode.priorisationSolutions,
+              NiveauMaturiteCode.redactionCDC,
+            ],
           },
         },
         {
-          diagnostic_simulations: { some: { created_at: { gte: afterDate, lte: beforeDate } } },
+          created_at: {
+            gte: afterDate,
+            lte: beforeDate,
+          },
+          niveau_maturite: NiveauMaturiteCode.lancementTravaux,
         },
       ],
       ...projetWithoutFicheSolution,
-      ...projetDidNotAlreadySendEmail(emailType.projetWithDiagWithoutSol),
+      ...projetDidNotAlreadySendEmail(emailType.projetRemindToDoSolution),
     },
     include: projetIncludes,
   });

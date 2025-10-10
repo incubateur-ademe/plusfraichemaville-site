@@ -25,6 +25,7 @@ type CsmBatchWebhookData = {
   nbMailCreationProjet: number;
   nbMailsInactiveUser: number;
   nbMailsUnfinishedDiag: number;
+  nbMailsRemindSolution: number;
 };
 
 export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
@@ -32,6 +33,8 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
     text: `**[Fin de traitement d'envoi des mails CSM]**
     
 **Nb de mails de création de projets sans fiche : ** ${data.nbMailCreationProjet}
+
+**Nb de mails de rappel pour choisir une solution : ** ${data.nbMailsRemindSolution}
 
 **Nb de mails d'utilisateurs inactifs : ** ${data.nbMailCreationProjet} 
 
