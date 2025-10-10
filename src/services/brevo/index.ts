@@ -101,7 +101,7 @@ export class EmailService {
         templateId: 45,
       },
       welcomeMessage: {
-        templateId: 52,
+        templateId: 62,
       },
       projetCreation: {
         templateId: 54,
@@ -232,11 +232,11 @@ export class EmailService {
     return this.sendEmail({ to: data.email, emailType: emailType.contactMessageSent, extra: data });
   }
 
-  async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom">) {
+  async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom"> & { nomCollectivite?: string }) {
     return this.sendEmail({
       to: data.email,
       emailType: emailType.welcomeMessage,
-      params: { NOM: data.nom },
+      params: { NOM: data.nom, ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) },
       extra: data,
     });
   }

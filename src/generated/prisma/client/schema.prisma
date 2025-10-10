@@ -29,6 +29,14 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+enum StatutUser {
+  pas_trouve
+  pas_maintenant
+  pas_compris
+  sans_pfmv
+  autre
+}
+
 model User {
   id                           String                    @id @default(cuid())
   email                        String                    @unique
@@ -61,6 +69,8 @@ model User {
   estimations_aides            estimations_aides[]
   fiches                       projet_fiche[]
   diagnostic_simulation        diagnostic_simulation[]
+  statut                       StatutUser?
+  statut_updated_at            DateTime?
 }
 
 model VerificationToken {
@@ -211,6 +221,7 @@ model projet {
   fiches                    projet_fiche[]
   diagnostic_simulations    diagnostic_simulation[]
   statut                    StatutProjet?
+  statut_updated_at         DateTime?
 }
 
 enum FicheType {
@@ -342,6 +353,7 @@ enum ReferenceType {
 enum EventType {
   UPDATE_MATURITE
   UPDATE_STATUT_PROJET
+  UPDATE_STATUT_USER
   UPDATE_PROJET_SET_VISIBLE
   UPDATE_PROJET_SET_INVISIBLE
 }
@@ -350,7 +362,7 @@ model Analytics {
   id             String        @id @default(cuid())
   created_at     DateTime      @default(now())
   created_by     User          @relation(fields: [user_id], references: [id])
-  reference_id   Int
+  reference_id   String
   reference_type ReferenceType
   event_type     EventType
   context        Json?
