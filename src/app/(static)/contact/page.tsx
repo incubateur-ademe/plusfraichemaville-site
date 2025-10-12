@@ -1,14 +1,13 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
-import { ContactForm } from "@/src/forms/contact/contact-form";
+import { ContactIframe } from "@/src/forms/contact/contact-iframe";
 
 export const metadata: Metadata = computeMetadata("Contactez-nous");
 
 export default async function PageContact() {
   return (
-    <div className="fr-container !max-w-[40rem] pb-28">
-      <h1 className="mt-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Nous contacter</h1>
-      <ContactForm />
+    <div className="fr-container bg-dsfr-background-alt-blue-france pb-28 pt-4">
+      <ContactIframe className="!h-[60rem] md:!h-[70rem]" />
     </div>
   );
 }

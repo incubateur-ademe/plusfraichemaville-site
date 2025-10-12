@@ -11,7 +11,6 @@ import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { ProjetWithRelations, UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
-import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
   getProjetsForProjetCreationEmail,
   getProjetsForRemindDiagnosticEmail,
@@ -21,6 +20,7 @@ import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienc
 import shuffle from "lodash/shuffle";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
+import { UserInfoFormData } from "@/src/forms/user/UserInfoFormSchema";
 
 interface Templates {
   templateId: number;
@@ -225,11 +225,7 @@ export class EmailService {
     return { type: "error", message: "ADMIN_NOT_FOUND" };
   }
 
-  async sendContactMessageReceivedEmail(data: ContactFormData) {
-    return this.sendEmail({ to: data.email, emailType: emailType.contactMessageSent, extra: data });
-  }
-
-  async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom">) {
+  async sendWelcomeMessageEmail(data: Pick<UserInfoFormData, "email" | "nom">) {
     return this.sendEmail({
       to: data.email,
       emailType: emailType.welcomeMessage,
