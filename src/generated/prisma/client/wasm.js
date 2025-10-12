@@ -151,6 +151,7 @@ exports.Prisma.UserScalarFieldEnum = {
   canal_acquisition: 'canal_acquisition',
   discardedInformation: 'discardedInformation',
   accept_communication_produit: 'accept_communication_produit',
+  accept_communication_suivi_projet: 'accept_communication_suivi_projet',
   statut: 'statut',
   statut_updated_at: 'statut_updated_at'
 };

@@ -136,7 +136,7 @@ export class EmailService {
       },
       projetRemindToDoFinancement: {
         templateId: 66,
-      }
+      },
     };
   }
 
@@ -355,7 +355,7 @@ export class EmailService {
           extra: emailParams,
           userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
         });
-      })
+      }),
     );
   }
 
@@ -393,7 +393,7 @@ export class EmailService {
       projets.map(async (projet) => {
         if (projet.diagnostic_simulations[0].user_id) {
           const userToContact = await getUserById(projet.diagnostic_simulations[0].user_id);
-          if (userToContact) {
+          if (userToContact && userToContact.accept_communication_suivi_projet) {
             const result = await this.sendEmail({
               to: userToContact.email,
               userId: userToContact.id,
@@ -409,6 +409,10 @@ export class EmailService {
               console.log(`Email envoyé à ${userToContact.email} - type: ${emailType.remindNotCompletedDiagnostic}`);
             }
             return result;
+          } else {
+            console.log(
+              `Email de rappel de diag non terminé non envoyé à ${userToContact?.email} car refus email suivi`,
+            );
           }
         }
       }),

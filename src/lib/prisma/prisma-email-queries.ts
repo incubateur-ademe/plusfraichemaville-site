@@ -51,6 +51,7 @@ export const getUserWithNoActivityAfterSignup = async (lastSyncDate: Date, inact
         gte: removeDaysToDate(lastSyncDate, inactivityDays),
         lte: removeDaysToDate(new Date(), inactivityDays),
       },
+      accept_communication_suivi_projet: true,
       projets: {
         none: {},
       },

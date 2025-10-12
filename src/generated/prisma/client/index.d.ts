@@ -4169,6 +4169,7 @@ export namespace Prisma {
     updated_at: Date | null
     canal_acquisition: string | null
     accept_communication_produit: boolean | null
+    accept_communication_suivi_projet: boolean | null
     statut: $Enums.StatutUser | null
     statut_updated_at: Date | null
   }
@@ -4186,6 +4187,7 @@ export namespace Prisma {
     updated_at: Date | null
     canal_acquisition: string | null
     accept_communication_produit: boolean | null
+    accept_communication_suivi_projet: boolean | null
     statut: $Enums.StatutUser | null
     statut_updated_at: Date | null
   }
@@ -4206,6 +4208,7 @@ export namespace Prisma {
     canal_acquisition: number
     discardedInformation: number
     accept_communication_produit: number
+    accept_communication_suivi_projet: number
     statut: number
     statut_updated_at: number
     _all: number
@@ -4225,6 +4228,7 @@ export namespace Prisma {
     updated_at?: true
     canal_acquisition?: true
     accept_communication_produit?: true
+    accept_communication_suivi_projet?: true
     statut?: true
     statut_updated_at?: true
   }
@@ -4242,6 +4246,7 @@ export namespace Prisma {
     updated_at?: true
     canal_acquisition?: true
     accept_communication_produit?: true
+    accept_communication_suivi_projet?: true
     statut?: true
     statut_updated_at?: true
   }
@@ -4262,6 +4267,7 @@ export namespace Prisma {
     canal_acquisition?: true
     discardedInformation?: true
     accept_communication_produit?: true
+    accept_communication_suivi_projet?: true
     statut?: true
     statut_updated_at?: true
     _all?: true
@@ -4355,6 +4361,7 @@ export namespace Prisma {
     canal_acquisition: string | null
     discardedInformation: string[]
     accept_communication_produit: boolean
+    accept_communication_suivi_projet: boolean
     statut: $Enums.StatutUser | null
     statut_updated_at: Date | null
     _count: UserCountAggregateOutputType | null
@@ -4392,6 +4399,7 @@ export namespace Prisma {
     canal_acquisition?: boolean
     discardedInformation?: boolean
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: boolean
     statut_updated_at?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
@@ -4429,6 +4437,7 @@ export namespace Prisma {
     canal_acquisition?: boolean
     discardedInformation?: boolean
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: boolean
     statut_updated_at?: boolean
   }, ExtArgs["result"]["user"]>
@@ -4449,6 +4458,7 @@ export namespace Prisma {
     canal_acquisition?: boolean
     discardedInformation?: boolean
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: boolean
     statut_updated_at?: boolean
   }, ExtArgs["result"]["user"]>
@@ -4469,11 +4479,12 @@ export namespace Prisma {
     canal_acquisition?: boolean
     discardedInformation?: boolean
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: boolean
     statut_updated_at?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "image" | "agentconnect_info" | "nom" | "prenom" | "poste" | "nom_etablissement" | "siren_info" | "created_at" | "updated_at" | "canal_acquisition" | "discardedInformation" | "accept_communication_produit" | "statut" | "statut_updated_at", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "image" | "agentconnect_info" | "nom" | "prenom" | "poste" | "nom_etablissement" | "siren_info" | "created_at" | "updated_at" | "canal_acquisition" | "discardedInformation" | "accept_communication_produit" | "accept_communication_suivi_projet" | "statut" | "statut_updated_at", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     collectivites_created?: boolean | User$collectivites_createdArgs<ExtArgs>
@@ -4532,6 +4543,7 @@ export namespace Prisma {
       canal_acquisition: string | null
       discardedInformation: string[]
       accept_communication_produit: boolean
+      accept_communication_suivi_projet: boolean
       statut: $Enums.StatutUser | null
       statut_updated_at: Date | null
     }, ExtArgs["result"]["user"]>
@@ -4988,6 +5000,7 @@ export namespace Prisma {
     readonly canal_acquisition: FieldRef<"User", 'String'>
     readonly discardedInformation: FieldRef<"User", 'String[]'>
     readonly accept_communication_produit: FieldRef<"User", 'Boolean'>
+    readonly accept_communication_suivi_projet: FieldRef<"User", 'Boolean'>
     readonly statut: FieldRef<"User", 'StatutUser'>
     readonly statut_updated_at: FieldRef<"User", 'DateTime'>
   }
@@ -24258,6 +24271,7 @@ export namespace Prisma {
     canal_acquisition: 'canal_acquisition',
     discardedInformation: 'discardedInformation',
     accept_communication_produit: 'accept_communication_produit',
+    accept_communication_suivi_projet: 'accept_communication_suivi_projet',
     statut: 'statut',
     statut_updated_at: 'statut_updated_at'
   };
@@ -25066,6 +25080,7 @@ export namespace Prisma {
     canal_acquisition?: StringNullableFilter<"User"> | string | null
     discardedInformation?: StringNullableListFilter<"User">
     accept_communication_produit?: BoolFilter<"User"> | boolean
+    accept_communication_suivi_projet?: BoolFilter<"User"> | boolean
     statut?: EnumStatutUserNullableFilter<"User"> | $Enums.StatutUser | null
     statut_updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
     accounts?: AccountListRelationFilter
@@ -25102,6 +25117,7 @@ export namespace Prisma {
     canal_acquisition?: SortOrderInput | SortOrder
     discardedInformation?: SortOrder
     accept_communication_produit?: SortOrder
+    accept_communication_suivi_projet?: SortOrder
     statut?: SortOrderInput | SortOrder
     statut_updated_at?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
@@ -25142,6 +25158,7 @@ export namespace Prisma {
     canal_acquisition?: StringNullableFilter<"User"> | string | null
     discardedInformation?: StringNullableListFilter<"User">
     accept_communication_produit?: BoolFilter<"User"> | boolean
+    accept_communication_suivi_projet?: BoolFilter<"User"> | boolean
     statut?: EnumStatutUserNullableFilter<"User"> | $Enums.StatutUser | null
     statut_updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
     accounts?: AccountListRelationFilter
@@ -25178,6 +25195,7 @@ export namespace Prisma {
     canal_acquisition?: SortOrderInput | SortOrder
     discardedInformation?: SortOrder
     accept_communication_produit?: SortOrder
+    accept_communication_suivi_projet?: SortOrder
     statut?: SortOrderInput | SortOrder
     statut_updated_at?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -25204,6 +25222,7 @@ export namespace Prisma {
     canal_acquisition?: StringNullableWithAggregatesFilter<"User"> | string | null
     discardedInformation?: StringNullableListFilter<"User">
     accept_communication_produit?: BoolWithAggregatesFilter<"User"> | boolean
+    accept_communication_suivi_projet?: BoolWithAggregatesFilter<"User"> | boolean
     statut?: EnumStatutUserNullableWithAggregatesFilter<"User"> | $Enums.StatutUser | null
     statut_updated_at?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
@@ -26577,6 +26596,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -26613,6 +26633,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -26649,6 +26670,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -26685,6 +26707,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -26721,6 +26744,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
   }
@@ -26741,6 +26765,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -26761,6 +26786,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -28416,6 +28442,7 @@ export namespace Prisma {
     canal_acquisition?: SortOrder
     discardedInformation?: SortOrder
     accept_communication_produit?: SortOrder
+    accept_communication_suivi_projet?: SortOrder
     statut?: SortOrder
     statut_updated_at?: SortOrder
   }
@@ -28433,6 +28460,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     canal_acquisition?: SortOrder
     accept_communication_produit?: SortOrder
+    accept_communication_suivi_projet?: SortOrder
     statut?: SortOrder
     statut_updated_at?: SortOrder
   }
@@ -28450,6 +28478,7 @@ export namespace Prisma {
     updated_at?: SortOrder
     canal_acquisition?: SortOrder
     accept_communication_produit?: SortOrder
+    accept_communication_suivi_projet?: SortOrder
     statut?: SortOrder
     statut_updated_at?: SortOrder
   }
@@ -31840,6 +31869,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
@@ -31875,6 +31905,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
@@ -31926,6 +31957,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
@@ -31961,6 +31993,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33036,6 +33069,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -33071,6 +33105,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -33206,6 +33241,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -33241,6 +33277,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -33355,6 +33392,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -33390,6 +33428,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -33430,6 +33469,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -33465,6 +33505,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -33640,6 +33681,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -33675,6 +33717,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -33721,6 +33764,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -33756,6 +33800,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -33859,6 +33904,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -33894,6 +33940,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -33987,6 +34034,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34022,6 +34070,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -34057,6 +34106,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -34092,6 +34142,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -34180,6 +34231,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34215,6 +34267,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -34293,6 +34346,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -34328,6 +34382,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -34439,6 +34494,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -34474,6 +34530,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -34642,6 +34699,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34677,6 +34735,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -34782,6 +34841,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -34817,6 +34877,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -34979,6 +35040,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35014,6 +35076,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35134,6 +35197,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -35169,6 +35233,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35303,6 +35368,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35338,6 +35404,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35500,6 +35567,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -35535,6 +35603,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35570,6 +35639,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35605,6 +35675,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35708,6 +35779,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -35743,6 +35815,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -35818,6 +35891,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -35853,6 +35927,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -35968,6 +36043,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36003,6 +36079,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36145,6 +36222,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36180,6 +36258,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36294,6 +36373,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36329,6 +36409,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36364,6 +36445,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36399,6 +36481,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36450,6 +36533,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36485,6 +36569,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36583,6 +36668,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36618,6 +36704,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36738,6 +36825,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36773,6 +36861,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
@@ -36808,6 +36897,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
@@ -36843,6 +36933,7 @@ export namespace Prisma {
     canal_acquisition?: string | null
     discardedInformation?: UserCreatediscardedInformationInput | string[]
     accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
@@ -36894,6 +36985,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
@@ -36929,6 +37021,7 @@ export namespace Prisma {
     canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
     discardedInformation?: UserUpdatediscardedInformationInput | string[]
     accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput

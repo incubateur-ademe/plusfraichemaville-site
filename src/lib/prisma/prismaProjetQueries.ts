@@ -36,17 +36,22 @@ export const projetWithDiagnosticSimulation = {
   diagnostic_simulations: { some: {} },
 };
 
-export const projetDidNotAlreadySendEmail = (emailType: emailType) => ({
+export const projetDidNotAlreadySendEmailOrDoesNotWantEmail = (emailType: emailType) => ({
   NOT: {
     users: {
       some: {
         role: RoleProjet.ADMIN,
-        email: {
-          some: {
-            type: emailType,
-            email_status: emailStatus.SUCCESS,
+        OR: [
+          { user: { accept_communication_suivi_projet: false } },
+          {
+            email: {
+              some: {
+                type: emailType,
+                email_status: emailStatus.SUCCESS,
+              },
+            },
           },
-        },
+        ],
       },
     },
   },
@@ -494,7 +499,7 @@ export const getProjetsForRemindToChooseSolution = async (
         },
       ],
       ...projetWithoutFicheSolution,
-      ...projetDidNotAlreadySendEmail(emailType.projetRemindToDoSolution),
+      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetRemindToDoSolution),
     },
     include: projetIncludes,
   });
@@ -520,7 +525,7 @@ export const getProjetsForRemindDiagnostic = async (
       },
       ...projetWithoutFiche,
       ...projetWithoutDiagnosticSimulation,
-      ...projetDidNotAlreadySendEmail(emailType.projetRemindToDoDiagnostic),
+      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetRemindToDoDiagnostic),
     },
     include: projetIncludes,
   });
@@ -542,7 +547,7 @@ export const getProjetsForRemindDiagnosticEmail = async (
           },
         },
       },
-      ...projetDidNotAlreadySendEmail(emailType.remindNotCompletedDiagnostic),
+      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.remindNotCompletedDiagnostic),
     },
     include: projetIncludes,
   });
@@ -560,7 +565,7 @@ export const getProjetsForRemindToDoEstimation = async (
         none: { type: FicheType.SOLUTION, created_at: { gte: beforeDate } },
       },
       estimations: { none: { deleted_at: null } },
-      ...projetDidNotAlreadySendEmail(emailType.projetRemindToDoEstimation),
+      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetRemindToDoEstimation),
     },
     include: projetIncludes,
   });
@@ -594,7 +599,7 @@ export const getProjetsForRemindToDoFinancement = async (
         },
       },
 
-      ...projetDidNotAlreadySendEmail(emailType.projetRemindToDoFinancement),
+      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetRemindToDoFinancement),
     },
     include: projetIncludes,
   });

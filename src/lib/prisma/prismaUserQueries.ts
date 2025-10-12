@@ -1,8 +1,7 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { ProjetWithRelations, UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
-import { Prisma, StatutProjet, StatutUser, User } from "@/src/generated/prisma/client";
+import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
+import { Prisma, StatutUser, User } from "@/src/generated/prisma/client";
 import { IApiSirenQueryTypes } from "@/src/lib/siren/types";
-import { projetIncludes } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.findUnique({
@@ -39,6 +38,7 @@ export const updateUser = async ({
   canalAcquisition,
   nomEtablissement,
   acceptCommunicationProduit,
+  acceptCommunicationSuiviProjet,
 }: {
   userId: string;
   userNom: string;
@@ -46,6 +46,7 @@ export const updateUser = async ({
   userPoste: string;
   collectiviteId: number;
   acceptCommunicationProduit: boolean;
+  acceptCommunicationSuiviProjet: boolean;
   canalAcquisition?: string;
   nomEtablissement?: string;
 }): Promise<UserWithCollectivite | null> => {
@@ -58,6 +59,7 @@ export const updateUser = async ({
       prenom: userPrenom,
       poste: userPoste,
       accept_communication_produit: acceptCommunicationProduit,
+      accept_communication_suivi_projet: acceptCommunicationSuiviProjet,
       collectivites: {
         upsert: {
           where: { userCollectiviteId: { user_id: userId, collectivite_id: collectiviteId } },

@@ -45,6 +45,7 @@ export const UserInfoForm = ({
       canalAcquisition: user.canal_acquisition ?? "",
       customCanalAcquisition: user.canal_acquisition ?? "",
       acceptCommunicationProduit: user.accept_communication_produit ?? true,
+      acceptCommunicationSuiviProjet: user.accept_communication_suivi_projet ?? true,
       subscribeToNewsletter: false,
     },
   });
@@ -124,6 +125,17 @@ export const UserInfoForm = ({
                   label: "Je souhaite être informé(e) des nouvelles fonctionnalités de Plus fraîche ma ville",
                   nativeInputProps: {
                     ...form.register("acceptCommunicationProduit"),
+                  },
+                },
+              ]}
+            />
+            <Checkbox
+              className="mt-4"
+              options={[
+                {
+                  label: "J'accepte d'être contacté(e) pour le suivi de mes projets.",
+                  nativeInputProps: {
+                    ...form.register("acceptCommunicationSuiviProjet"),
                   },
                 },
               ]}
