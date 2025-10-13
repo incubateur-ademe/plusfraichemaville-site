@@ -18,6 +18,7 @@ import {
   getProjetsForRemindToChooseSolution,
   getProjetsForRemindToDoEstimation,
   getProjetsForRemindToDoFinancement,
+  getProjetsUnfinishedAndLastUpdatedBetween,
 } from "@/src/lib/prisma/prismaProjetQueries";
 import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
@@ -60,6 +61,11 @@ export type EmailRemindFindFinancementConfig = {
   userPrenom: string;
   typeEspaceProjet: string;
   urlModule5: string;
+};
+
+export type EmailRemindUnfinishedAndInactiveProjetConfig = {
+  userPrenom: string;
+  urlProjetStatus: string;
 };
 
 export type EmailProjetPartageConfig = {
@@ -136,6 +142,9 @@ export class EmailService {
       },
       projetRemindToDoFinancement: {
         templateId: 66,
+      },
+      projetUnfinishedInactive: {
+        templateId: 71,
       },
     };
   }
@@ -415,6 +424,29 @@ export class EmailService {
             );
           }
         }
+      }),
+    );
+  }
+
+  async sendRemindUnfinishedAndInactiveProjets(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsUnfinishedAndLastUpdatedBetween(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de projets inactifs à envoyer : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const emailParams: EmailRemindUnfinishedAndInactiveProjetConfig = {
+          userPrenom: projet.creator.prenom || "",
+          urlProjetStatus: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projet.id, "statut")),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetUnfinishedInactive,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
       }),
     );
   }

@@ -55,6 +55,13 @@ const main = async () => {
       REMIND_TO_FILL_ESTIMATION_DAYS,
     );
 
+    const REMIND_UNFINISHED_INACTIVE_PROJET_DAYS = 14;
+    console.log("Recherche des projets inactifs non terminés");
+    const sendRemindInactiveProjetMail = await emailService.sendRemindUnfinishedAndInactiveProjets(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_UNFINISHED_INACTIVE_PROJET_DAYS),
+      REMIND_UNFINISHED_INACTIVE_PROJET_DAYS,
+    );
+
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     const webhookData = makeCsmBatchWebhookData({
       nbMailRemindModuleDiagnostic: sendRemindModuleDiagnosticMail.length,
@@ -63,6 +70,7 @@ const main = async () => {
       nbMailsRemindSolution: sendRemindFicheSolutionMail.length,
       nbMailsRemindEstimation: sendRemindEstimationMail.length,
       nbMailsRemindFinancement: sendRemindFinancementMail.length,
+      nbMailsInactiveProjet: sendRemindInactiveProjetMail.length,
     });
     await sendMattermostWebhook(webhookData, "batch", 5000);
     console.log("Batch des mails CSM réussi !");

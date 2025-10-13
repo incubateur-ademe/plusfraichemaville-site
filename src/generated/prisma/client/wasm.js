@@ -518,7 +518,8 @@ exports.emailType = exports.$Enums.emailType = {
   projetRemindToDoSolution: 'projetRemindToDoSolution',
   projetRemindToDoDiagnostic: 'projetRemindToDoDiagnostic',
   projetRemindToDoEstimation: 'projetRemindToDoEstimation',
-  projetRemindToDoFinancement: 'projetRemindToDoFinancement'
+  projetRemindToDoFinancement: 'projetRemindToDoFinancement',
+  projetUnfinishedInactive: 'projetUnfinishedInactive'
 };
 
 exports.emailStatus = exports.$Enums.emailStatus = {

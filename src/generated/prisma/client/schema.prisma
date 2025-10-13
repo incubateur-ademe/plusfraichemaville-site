@@ -153,6 +153,7 @@ enum emailType {
   projetRemindToDoDiagnostic
   projetRemindToDoEstimation
   projetRemindToDoFinancement
+  projetUnfinishedInactive
 }
 
 enum emailStatus {

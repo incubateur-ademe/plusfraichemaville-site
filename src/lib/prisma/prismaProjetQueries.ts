@@ -604,3 +604,21 @@ export const getProjetsForRemindToDoFinancement = async (
     include: projetIncludes,
   });
 };
+
+export const getProjetsUnfinishedAndLastUpdatedBetween = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      updated_at: { gte: afterDate, lte: beforeDate },
+      OR: [
+        { statut: null },
+        { statut: { in: [StatutProjet.en_cours, StatutProjet.autre, StatutProjet.besoin_aide] } },
+      ],
+      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetUnfinishedInactive),
+    },
+    include: projetIncludes,
+  });
+};
