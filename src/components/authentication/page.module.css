@@ -1,0 +1,6 @@
+.pfmvProConnectButton p {
+  @apply hidden;
+}
+.pfmvProConnectButton button {
+  @apply m-0;
+}
