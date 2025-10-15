@@ -523,7 +523,8 @@ exports.emailType = exports.$Enums.emailType = {
   projetFinishedToGetRex: 'projetFinishedToGetRex',
   noProjetAfterSignupMail1: 'noProjetAfterSignupMail1',
   noProjetAfterSignupMail2: 'noProjetAfterSignupMail2',
-  noProjetAfterSignupMail3: 'noProjetAfterSignupMail3'
+  noProjetAfterSignupMail3: 'noProjetAfterSignupMail3',
+  projetFinishedQuestionnaireSatisfaction: 'projetFinishedQuestionnaireSatisfaction'
 };
 
 exports.emailStatus = exports.$Enums.emailStatus = {

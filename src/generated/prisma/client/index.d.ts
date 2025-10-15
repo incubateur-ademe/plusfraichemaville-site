@@ -163,7 +163,8 @@ export const emailType: {
   projetFinishedToGetRex: 'projetFinishedToGetRex',
   noProjetAfterSignupMail1: 'noProjetAfterSignupMail1',
   noProjetAfterSignupMail2: 'noProjetAfterSignupMail2',
-  noProjetAfterSignupMail3: 'noProjetAfterSignupMail3'
+  noProjetAfterSignupMail3: 'noProjetAfterSignupMail3',
+  projetFinishedQuestionnaireSatisfaction: 'projetFinishedQuestionnaireSatisfaction'
 };
 
 export type emailType = (typeof emailType)[keyof typeof emailType]

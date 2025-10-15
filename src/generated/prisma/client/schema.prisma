@@ -158,6 +158,7 @@ enum emailType {
   noProjetAfterSignupMail1
   noProjetAfterSignupMail2
   noProjetAfterSignupMail3
+  projetFinishedQuestionnaireSatisfaction
 }
 
 enum emailStatus {

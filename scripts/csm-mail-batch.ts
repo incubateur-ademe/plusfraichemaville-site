@@ -7,11 +7,6 @@ import { sendMattermostWebhook } from "@/src/services/mattermost";
 import { $Enums } from "@/src/generated/prisma/client";
 import emailType = $Enums.emailType;
 
-export type MAIL_USER_WITHOUT_PROJET_TYPE = {
-  email: emailType;
-  nbDays: number;
-};
-
 const main = async () => {
   if (process.env.CSM_MAIL_BATCH_ACTIVE !== "true") {
     console.log("Le batch des mails CSM n'est pas activé sur cet environnement.");
@@ -36,6 +31,13 @@ const main = async () => {
     const inactiveUserMail2 = await emailService.sendNoActivityAfterSignupEmail2(
       lastSyncDate ?? removeDaysToDate(new Date(), USER_NO_PROJET_2_DAYS),
       USER_NO_PROJET_2_DAYS,
+    );
+
+    const FINISHED_PROJET_GET_QUESTIONNAIRE_SATISFACTION = 5;
+    console.log(`Recherche des projets terminés depuis ${FINISHED_PROJET_GET_QUESTIONNAIRE_SATISFACTION} jours...`);
+    const finishedProjetGetQuestionnaire = await emailService.sendQuestionnaireSatisfactionEmails(
+      lastSyncDate ?? removeDaysToDate(new Date(), FINISHED_PROJET_GET_QUESTIONNAIRE_SATISFACTION),
+      FINISHED_PROJET_GET_QUESTIONNAIRE_SATISFACTION,
     );
 
     const FINISHED_PROJET_GET_REX = 183;
@@ -89,6 +91,7 @@ const main = async () => {
       nbMailsInactiveUser1: inactiveUserMail1.length,
       nbMailsInactiveUser2: inactiveUserMail2.length,
       nbMailsGetRexFromFinishedProjet: finishedProjetGetRexMail.length,
+      nbMailsSendQuestionnaireForFinishedProjet : finishedProjetGetQuestionnaire.length,
       nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
       nbMailsRemindSolution: sendRemindFicheSolutionMail.length,
       nbMailsRemindEstimation: sendRemindEstimationMail.length,

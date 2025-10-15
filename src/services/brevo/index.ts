@@ -13,6 +13,7 @@ import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
+  getProjetsFinishedToGetQuestionnaire,
   getProjetsFinishedToGetRex,
   getProjetsForRemindDiagnostic,
   getProjetsForRemindDiagnosticEmail,
@@ -152,6 +153,12 @@ export class EmailService {
       },
       noProjetAfterSignupMail2: {
         templateId: 69,
+      },
+      projetFinishedToGetRex: {
+        templateId: 73,
+      },
+      projetFinishedQuestionnaireSatisfaction: {
+        templateId: 72,
       },
     };
   }
@@ -474,12 +481,13 @@ export class EmailService {
       }),
     );
   }
+
   async sendGetRexFromFinishedProjetEmails(lastSyncDate: Date, inactivityDays: number) {
     const projets = await getProjetsFinishedToGetRex(
       removeDaysToDate(lastSyncDate, inactivityDays),
       removeDaysToDate(new Date(), inactivityDays),
     );
-    console.log(`Nb de mails de projets terminés à envoyer : ${projets.length}`);
+    console.log(`Nb de mails de projets terminés à envoyer pour avoir un REX : ${projets.length}`);
     return await Promise.all(
       projets.map(async (projet) => {
         const emailParams = {
@@ -488,6 +496,28 @@ export class EmailService {
         return await this.sendEmail({
           to: projet.creator.email,
           emailType: emailType.projetFinishedToGetRex,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendQuestionnaireSatisfactionEmails(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsFinishedToGetQuestionnaire(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de projets terminés à envoyer pour le questionnaire de satisfaction : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const emailParams = {
+          userPrenom: projet.creator.prenom || "",
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetFinishedQuestionnaireSatisfaction,
           params: emailParams,
           extra: emailParams,
           userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,

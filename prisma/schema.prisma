@@ -154,6 +154,7 @@ enum emailType {
   projetRemindToDoEstimation
   projetRemindToDoFinancement
   projetUnfinishedInactive
+  projetFinishedQuestionnaireSatisfaction
   projetFinishedToGetRex
   noProjetAfterSignupMail1
   noProjetAfterSignupMail2
