@@ -36,22 +36,16 @@ export const projetWithDiagnosticSimulation = {
   diagnostic_simulations: { some: {} },
 };
 
-export const projetDidNotAlreadySendEmailOrDoesNotWantEmail = (emailType: emailType) => ({
-  NOT: {
-    users: {
-      some: {
-        role: RoleProjet.ADMIN,
-        OR: [
-          { user: { accept_communication_suivi_projet: false } },
-          {
-            email: {
-              some: {
-                type: emailType,
-                email_status: emailStatus.SUCCESS,
-              },
-            },
-          },
-        ],
+export const projetAdminDidNotAlreadyReceivedEmailAndWantEmail = (emailType: emailType) => ({
+  users: {
+    some: {
+      role: RoleProjet.ADMIN,
+      user: { accept_communication_suivi_projet: true },
+      email: {
+        none: {
+          type: emailType,
+          email_status: emailStatus.SUCCESS,
+        },
       },
     },
   },
@@ -499,7 +493,8 @@ export const getProjetsForRemindToChooseSolution = async (
         },
       ],
       ...projetWithoutFicheSolution,
-      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetRemindToDoSolution),
+      NOT: { statut: StatutProjet.termine },
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoSolution),
     },
     include: projetIncludes,
   });
@@ -525,7 +520,8 @@ export const getProjetsForRemindDiagnostic = async (
       },
       ...projetWithoutFiche,
       ...projetWithoutDiagnosticSimulation,
-      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetRemindToDoDiagnostic),
+      NOT: { statut: StatutProjet.termine },
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoDiagnostic),
     },
     include: projetIncludes,
   });
@@ -547,7 +543,8 @@ export const getProjetsForRemindDiagnosticEmail = async (
           },
         },
       },
-      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.remindNotCompletedDiagnostic),
+      NOT: { statut: StatutProjet.termine },
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.remindNotCompletedDiagnostic),
     },
     include: projetIncludes,
   });
@@ -565,7 +562,8 @@ export const getProjetsForRemindToDoEstimation = async (
         none: { type: FicheType.SOLUTION, created_at: { gte: beforeDate } },
       },
       estimations: { none: { deleted_at: null } },
-      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetRemindToDoEstimation),
+      NOT: { statut: StatutProjet.termine },
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoEstimation),
     },
     include: projetIncludes,
   });
@@ -598,8 +596,8 @@ export const getProjetsForRemindToDoFinancement = async (
           ],
         },
       },
-
-      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetRemindToDoFinancement),
+      NOT: { statut: StatutProjet.termine },
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoFinancement),
     },
     include: projetIncludes,
   });
@@ -613,29 +611,21 @@ export const getProjetsUnfinishedAndLastUpdatedBetween = async (
     where: {
       deleted_at: null,
       updated_at: { gte: afterDate, lte: beforeDate },
-      OR: [
-        { statut: null },
-        { statut: { in: [StatutProjet.en_cours, StatutProjet.autre, StatutProjet.besoin_aide] } },
-      ],
-      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetUnfinishedInactive),
+      NOT: { statut: StatutProjet.termine },
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetUnfinishedInactive),
     },
     include: projetIncludes,
   });
 };
 
-export const getProjetsFinishedToGetRex = async (
-  afterDate: Date,
-  beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
+export const getProjetsFinishedToGetRex = async (afterDate: Date, beforeDate: Date): Promise<ProjetWithRelations[]> => {
   return prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       statut_updated_at: { gte: afterDate, lte: beforeDate },
       statut: StatutProjet.termine,
-      ...projetDidNotAlreadySendEmailOrDoesNotWantEmail(emailType.projetFinishedToGetRex),
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetFinishedToGetRex),
     },
     include: projetIncludes,
   });
 };
-
-
