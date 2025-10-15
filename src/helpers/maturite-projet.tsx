@@ -22,31 +22,31 @@ export const ALL_NIVEAU_MATURITE: NiveauMaturite[] = [
   {
     label: "Questionnement sur la surchauffe urbaine au sein d’une commune",
     crmConnectLabel: "Questionnement",
-    code: "questionnement",
+    code: NiveauMaturiteCode.questionnement,
     avancement: 1,
   },
   {
     label: "Priorisation des solutions de rafraîchissement à déployer",
     crmConnectLabel: "Priorisation",
-    code: "priorisationSolutions",
+    code: NiveauMaturiteCode.priorisationSolutions,
     avancement: 2,
   },
   {
     label: "Rédaction du cahier des charges",
     crmConnectLabel: "Rédaction du cahier des charges",
-    code: "redactionCDC",
+    code: NiveauMaturiteCode.redactionCDC,
     avancement: 3,
   },
   {
     label: "Lancement des travaux",
     crmConnectLabel: "Lancement des travaux",
-    code: "lancementTravaux",
+    code: NiveauMaturiteCode.lancementTravaux,
     avancement: 4,
   },
   {
     label: "Evaluation des actions déployées",
     crmConnectLabel: "Évaluation",
-    code: "evaluationActions",
+    code: NiveauMaturiteCode.evaluationActions,
     avancement: 5,
   },
 ];
@@ -68,5 +68,5 @@ export const formatNiveauMaturiteWithoutLabel = (niveauMaturite: NiveauMaturite)
   </div>
 );
 
-export const getNiveauMaturiteByCode = (currentNiveau: NiveauMaturite["code"] | null) =>
+export const getNiveauMaturiteByCode = (currentNiveau: string | null) =>
   ALL_NIVEAU_MATURITE.find((niveau) => niveau.code === currentNiveau);
