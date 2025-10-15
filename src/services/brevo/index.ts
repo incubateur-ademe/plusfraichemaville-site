@@ -13,6 +13,7 @@ import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
+  getProjetsFinishedToGetRex,
   getProjetsForRemindDiagnostic,
   getProjetsForRemindDiagnosticEmail,
   getProjetsForRemindToChooseSolution,
@@ -385,7 +386,7 @@ export class EmailService {
     return await Promise.all(
       users.map(async (user) => {
         const nomCollectivite = user.collectivites[0]?.collectivite.nom;
-        const result = await this.sendEmail({
+        return await this.sendEmail({
           to: user.email,
           userId: user.id,
           emailType: emailType.noProjetAfterSignupMail1,
@@ -395,12 +396,6 @@ export class EmailService {
             nbUtilisateurs: countAllUsers.toString(),
           },
         });
-
-        if (result.type === "success") {
-          console.log(`Email envoyé à ${user.email} - type: ${emailType.noProjetAfterSignupMail1}`);
-        }
-
-        return result;
       }),
     );
   }
@@ -413,19 +408,15 @@ export class EmailService {
     );
     return await Promise.all(
       users.map(async (user) => {
-        const result = await this.sendEmail({
+        return await this.sendEmail({
           to: user.email,
           userId: user.id,
           emailType: emailType.noProjetAfterSignupMail2,
           params: {
             userPrenom: user.prenom || "",
-            urlUserStatus : PFMV_ROUTES.MON_STATUT,
+            urlUserStatus: PFMV_ROUTES.MON_STATUT,
           },
         });
-        if (result.type === "success") {
-          console.log(`Email envoyé à ${user.email} - type: ${emailType.noProjetAfterSignupMail2}`);
-        }
-        return result;
       }),
     );
   }
@@ -441,7 +432,7 @@ export class EmailService {
         if (projet.diagnostic_simulations[0].user_id) {
           const userToContact = await getUserById(projet.diagnostic_simulations[0].user_id);
           if (userToContact && userToContact.accept_communication_suivi_projet) {
-            const result = await this.sendEmail({
+            return await this.sendEmail({
               to: userToContact.email,
               userId: userToContact.id,
               emailType: emailType.remindNotCompletedDiagnostic,
@@ -451,11 +442,6 @@ export class EmailService {
                 lienRepriseDiag: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION(projet.id)),
               },
             });
-
-            if (result.type === "success") {
-              console.log(`Email envoyé à ${userToContact.email} - type: ${emailType.remindNotCompletedDiagnostic}`);
-            }
-            return result;
           } else {
             console.log(
               `Email de rappel de diag non terminé non envoyé à ${userToContact?.email} car refus email suivi`,
@@ -481,6 +467,27 @@ export class EmailService {
         return await this.sendEmail({
           to: projet.creator.email,
           emailType: emailType.projetUnfinishedInactive,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+  async sendGetRexFromFinishedProjetEmails(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsFinishedToGetRex(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de projets terminés à envoyer : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const emailParams = {
+          userPrenom: projet.creator.prenom || "",
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetFinishedToGetRex,
           params: emailParams,
           extra: emailParams,
           userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,

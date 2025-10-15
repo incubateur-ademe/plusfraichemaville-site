@@ -160,6 +160,7 @@ export const emailType: {
   projetRemindToDoEstimation: 'projetRemindToDoEstimation',
   projetRemindToDoFinancement: 'projetRemindToDoFinancement',
   projetUnfinishedInactive: 'projetUnfinishedInactive',
+  projetFinishedToGetRex: 'projetFinishedToGetRex',
   noProjetAfterSignupMail1: 'noProjetAfterSignupMail1',
   noProjetAfterSignupMail2: 'noProjetAfterSignupMail2',
   noProjetAfterSignupMail3: 'noProjetAfterSignupMail3'

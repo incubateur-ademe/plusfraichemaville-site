@@ -23,7 +23,9 @@ ${ticket.properties.content}`,
 
 type CsmBatchWebhookData = {
   nbMailRemindModuleDiagnostic: number;
-  nbMailsInactiveUser: number;
+  nbMailsInactiveUser1: number;
+  nbMailsInactiveUser2: number;
+  nbMailsGetRexFromFinishedProjet: number;
   nbMailsUnfinishedDiag: number;
   nbMailsRemindSolution: number;
   nbMailsRemindEstimation: number;
@@ -45,7 +47,11 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
 
 **Nb de mails de projets inactifs : ** ${data.nbMailsInactiveProjet}
 
-**Nb de mails d'utilisateurs inactifs : ** ${data.nbMailRemindModuleDiagnostic} 
+**Nb de mails d'utilisateurs sans projet à J+2 : ** ${data.nbMailsInactiveUser1} 
+
+**Nb de mails d'utilisateurs sans projet à J+14 : ** ${data.nbMailsInactiveUser2} 
+
+**Nb de mails de projet terminés pour aller chercher des REX : ** ${data.nbMailsGetRexFromFinishedProjet} 
 
 **Nb de mails de diagnostics non finalisés : ** ${data.nbMailsUnfinishedDiag} 
 `,

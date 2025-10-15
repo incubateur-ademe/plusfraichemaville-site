@@ -11,11 +11,7 @@ export type MAIL_USER_WITHOUT_PROJET_TYPE = {
   email: emailType;
   nbDays: number;
 };
-export const EMAILS_USER_WITHOUT_PROJET_CONFIG: MAIL_USER_WITHOUT_PROJET_TYPE[] = [
-  { email: emailType.noProjetAfterSignupMail1, nbDays: 2 },
-  { email: emailType.noProjetAfterSignupMail2, nbDays: 14 },
-  { email: emailType.noProjetAfterSignupMail3, nbDays: 45 },
-];
+
 const main = async () => {
   if (process.env.CSM_MAIL_BATCH_ACTIVE !== "true") {
     console.log("Le batch des mails CSM n'est pas activé sur cet environnement.");
@@ -30,16 +26,23 @@ const main = async () => {
 
     const USER_NO_PROJET_1_DAYS = 2;
     console.log(`Recherche des utilisateurs sans projet depuis ${USER_NO_PROJET_1_DAYS} jours...`);
-    const inactiveUser1Promises = await emailService.sendNoActivityAfterSignupEmail1(
+    const inactiveUserMail1 = await emailService.sendNoActivityAfterSignupEmail1(
       lastSyncDate ?? removeDaysToDate(new Date(), USER_NO_PROJET_1_DAYS),
       USER_NO_PROJET_1_DAYS,
     );
 
     const USER_NO_PROJET_2_DAYS = 14;
     console.log(`Recherche des utilisateurs sans projet depuis ${USER_NO_PROJET_2_DAYS} jours...`);
-    const inactiveUser2Promises = await emailService.sendNoActivityAfterSignupEmail2(
+    const inactiveUserMail2 = await emailService.sendNoActivityAfterSignupEmail2(
       lastSyncDate ?? removeDaysToDate(new Date(), USER_NO_PROJET_2_DAYS),
       USER_NO_PROJET_2_DAYS,
+    );
+
+    const FINISHED_PROJET_GET_REX = 183;
+    console.log(`Recherche des projets terminés depuis 6 mois...`);
+    const finishedProjetGetRexMail = await emailService.sendGetRexFromFinishedProjetEmails(
+      lastSyncDate ?? removeDaysToDate(new Date(), FINISHED_PROJET_GET_REX),
+      FINISHED_PROJET_GET_REX,
     );
 
     const REMIND_UNFINISHED_DIAG_DAYS = 7;
@@ -83,7 +86,9 @@ const main = async () => {
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     const webhookData = makeCsmBatchWebhookData({
       nbMailRemindModuleDiagnostic: sendRemindModuleDiagnosticMail.length,
-      nbMailsInactiveUser: inactiveUserPromises.length,
+      nbMailsInactiveUser1: inactiveUserMail1.length,
+      nbMailsInactiveUser2: inactiveUserMail2.length,
+      nbMailsGetRexFromFinishedProjet: finishedProjetGetRexMail.length,
       nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
       nbMailsRemindSolution: sendRemindFicheSolutionMail.length,
       nbMailsRemindEstimation: sendRemindEstimationMail.length,
