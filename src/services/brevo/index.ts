@@ -20,8 +20,8 @@ import {
   getProjetsForRemindToDoFinancement,
   getProjetsUnfinishedAndLastUpdatedBetween,
 } from "@/src/lib/prisma/prismaProjetQueries";
-import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
-import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
+import { removeDaysToDate } from "@/src/helpers/dateUtils";
+import { getCountAllUsers, getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
@@ -368,25 +368,57 @@ export class EmailService {
     );
   }
 
-  async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
-    const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
+  async sendNoActivityAfterSignupEmail1(lastSyncDate: Date, inactivityDays: number) {
+    const users = await getUserWithNoActivityAfterSignup(
+      lastSyncDate,
+      inactivityDays,
+      emailType.noProjetAfterSignupMail1,
+    );
+    const countAllUsers = await getCountAllUsers();
 
+    return await Promise.all(
+      users.map(async (user) => {
+        const nomCollectivite = user.collectivites[0]?.collectivite.nom;
+        const result = await this.sendEmail({
+          to: user.email,
+          userId: user.id,
+          emailType: emailType.noProjetAfterSignupMail1,
+          params: {
+            userPrenom: user.prenom || "",
+            ...(nomCollectivite && { userCollectiviteName: `pour ${nomCollectivite}` }),
+            nbUtilisateurs: countAllUsers.toString(),
+          },
+        });
+
+        if (result.type === "success") {
+          console.log(`Email envoyé à ${user.email} - type: ${emailType.noProjetAfterSignupMail1}`);
+        }
+
+        return result;
+      }),
+    );
+  }
+
+  async sendNoActivityAfterSignupEmail2(lastSyncDate: Date, inactivityDays: number) {
+    const users = await getUserWithNoActivityAfterSignup(
+      lastSyncDate,
+      inactivityDays,
+      emailType.noProjetAfterSignupMail2,
+    );
     return await Promise.all(
       users.map(async (user) => {
         const result = await this.sendEmail({
           to: user.email,
           userId: user.id,
-          emailType: emailType.noActivityAfterSignup,
+          emailType: emailType.noProjetAfterSignupMail2,
           params: {
-            nom: user.nom || "",
-            dateCreationCompte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
+            userPrenom: user.prenom || "",
+            urlProjetStatus : PFMV_ROUTES.MON_STATUT,
           },
         });
-
         if (result.type === "success") {
-          console.log(`Email envoyé à ${user.email} - type: ${emailType.noActivityAfterSignup}`);
+          console.log(`Email envoyé à ${user.email} - type: ${emailType.noProjetAfterSignupMail2}`);
         }
-
         return result;
       }),
     );

@@ -4,7 +4,18 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EmailService } from "@/src/services/brevo";
 import { makeBatchErrorWebhookData, makeCsmBatchWebhookData } from "@/src/services/mattermost/mattermost-helpers";
 import { sendMattermostWebhook } from "@/src/services/mattermost";
+import { $Enums } from "@/src/generated/prisma/client";
+import emailType = $Enums.emailType;
 
+export type MAIL_USER_WITHOUT_PROJET_TYPE = {
+  email: emailType;
+  nbDays: number;
+};
+export const EMAILS_USER_WITHOUT_PROJET_CONFIG: MAIL_USER_WITHOUT_PROJET_TYPE[] = [
+  { email: emailType.noProjetAfterSignupMail1, nbDays: 2 },
+  { email: emailType.noProjetAfterSignupMail2, nbDays: 14 },
+  { email: emailType.noProjetAfterSignupMail3, nbDays: 45 },
+];
 const main = async () => {
   if (process.env.CSM_MAIL_BATCH_ACTIVE !== "true") {
     console.log("Le batch des mails CSM n'est pas activé sur cet environnement.");
@@ -17,11 +28,18 @@ const main = async () => {
     const lastSync = await getLastCsmMailBatch();
     const lastSyncDate = lastSync?.execution_end_time;
 
-    const INACTIVITY_DAYS = 10;
-    console.log(`Recherche des utilisateurs inactifs depuis ${INACTIVITY_DAYS} jours...`);
-    const inactiveUserPromises = await emailService.sendNoActivityAfterSignupEmail(
-      lastSyncDate ?? removeDaysToDate(new Date(), INACTIVITY_DAYS),
-      INACTIVITY_DAYS,
+    const USER_NO_PROJET_1_DAYS = 2;
+    console.log(`Recherche des utilisateurs sans projet depuis ${USER_NO_PROJET_1_DAYS} jours...`);
+    const inactiveUser1Promises = await emailService.sendNoActivityAfterSignupEmail1(
+      lastSyncDate ?? removeDaysToDate(new Date(), USER_NO_PROJET_1_DAYS),
+      USER_NO_PROJET_1_DAYS,
+    );
+
+    const USER_NO_PROJET_2_DAYS = 14;
+    console.log(`Recherche des utilisateurs sans projet depuis ${USER_NO_PROJET_2_DAYS} jours...`);
+    const inactiveUser2Promises = await emailService.sendNoActivityAfterSignupEmail2(
+      lastSyncDate ?? removeDaysToDate(new Date(), USER_NO_PROJET_2_DAYS),
+      USER_NO_PROJET_2_DAYS,
     );
 
     const REMIND_UNFINISHED_DIAG_DAYS = 7;

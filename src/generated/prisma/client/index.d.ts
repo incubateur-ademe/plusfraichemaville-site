@@ -159,7 +159,10 @@ export const emailType: {
   projetRemindToDoDiagnostic: 'projetRemindToDoDiagnostic',
   projetRemindToDoEstimation: 'projetRemindToDoEstimation',
   projetRemindToDoFinancement: 'projetRemindToDoFinancement',
-  projetUnfinishedInactive: 'projetUnfinishedInactive'
+  projetUnfinishedInactive: 'projetUnfinishedInactive',
+  noProjetAfterSignupMail1: 'noProjetAfterSignupMail1',
+  noProjetAfterSignupMail2: 'noProjetAfterSignupMail2',
+  noProjetAfterSignupMail3: 'noProjetAfterSignupMail3'
 };
 
 export type emailType = (typeof emailType)[keyof typeof emailType]

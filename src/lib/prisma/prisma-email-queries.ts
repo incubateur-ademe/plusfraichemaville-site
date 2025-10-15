@@ -1,6 +1,7 @@
 import { email, emailStatus, emailType, User } from "@/src/generated/prisma/client";
 import { prismaClient } from "./prismaClient";
 import { removeDaysToDate } from "@/src/helpers/dateUtils";
+import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const updateEmailStatus = async (id: string, status: emailStatus, brevoId?: string): Promise<email> => {
   return prismaClient.email.update({
@@ -44,7 +45,11 @@ export const getLastEmailForUserProjet = async (userProjetId: number, emailType:
   });
 };
 
-export const getUserWithNoActivityAfterSignup = async (lastSyncDate: Date, inactivityDays = 10): Promise<User[]> => {
+export const getUserWithNoActivityAfterSignup = async (
+  lastSyncDate: Date,
+  inactivityDays: number,
+  email: emailType,
+): Promise<UserWithCollectivite[]> => {
   return prismaClient.user.findMany({
     where: {
       created_at: {
@@ -53,14 +58,15 @@ export const getUserWithNoActivityAfterSignup = async (lastSyncDate: Date, inact
       },
       accept_communication_suivi_projet: true,
       projets: {
-        none: {},
+        none: { deleted_at: null },
       },
       emails: {
         none: {
-          type: emailType.noActivityAfterSignup,
+          type: email,
           email_status: emailStatus.SUCCESS,
         },
       },
     },
+    include: { collectivites: { include: { collectivite: true } } },
   });
 };

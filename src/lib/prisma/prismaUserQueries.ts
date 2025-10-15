@@ -118,3 +118,5 @@ export const updateUserStatut = async (userId: string, statut: StatutUser): Prom
     include: { collectivites: { include: { collectivite: true } } },
   });
 };
+
+export const getCountAllUsers = async () => prismaClient.user.count();
