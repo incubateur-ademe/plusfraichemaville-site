@@ -20,20 +20,12 @@ export const projetWithoutFicheSolution = {
   fiches: { none: { type: FicheType.SOLUTION } },
 };
 
-export const projetWithoutFicheDiagnostic = {
-  fiches: { none: { type: FicheType.DIAGNOSTIC } },
-};
-
 export const projetWithoutFiche = {
   fiches: { none: {} },
 };
 
 export const projetWithoutDiagnosticSimulation = {
   diagnostic_simulations: { none: {} },
-};
-
-export const projetWithDiagnosticSimulation = {
-  diagnostic_simulations: { some: {} },
 };
 
 export const projetAdminDidNotAlreadyReceivedEmailAndWantEmail = (emailType: emailType) => ({
@@ -613,6 +605,21 @@ export const getProjetsUnfinishedAndLastUpdatedBetween = async (
       updated_at: { gte: afterDate, lte: beforeDate },
       NOT: { statut: StatutProjet.termine },
       ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetUnfinishedInactive),
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsUnfinishedAndLastUpdatedBetween2 = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      updated_at: { gte: afterDate, lte: beforeDate },
+      OR: [{ statut: null }, { statut: StatutProjet.en_cours }],
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetUnfinishedInactive2),
     },
     include: projetIncludes,
   });

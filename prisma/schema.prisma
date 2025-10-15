@@ -154,11 +154,11 @@ enum emailType {
   projetRemindToDoEstimation
   projetRemindToDoFinancement
   projetUnfinishedInactive
+  projetUnfinishedInactive2
   projetFinishedQuestionnaireSatisfaction
   projetFinishedToGetRex
   noProjetAfterSignupMail1
   noProjetAfterSignupMail2
-  noProjetAfterSignupMail3
 }
 
 enum emailStatus {

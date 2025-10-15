@@ -21,6 +21,7 @@ import {
   getProjetsForRemindToDoEstimation,
   getProjetsForRemindToDoFinancement,
   getProjetsUnfinishedAndLastUpdatedBetween,
+  getProjetsUnfinishedAndLastUpdatedBetween2,
 } from "@/src/lib/prisma/prismaProjetQueries";
 import { removeDaysToDate } from "@/src/helpers/dateUtils";
 import { getCountAllUsers, getUserById } from "@/src/lib/prisma/prismaUserQueries";
@@ -68,6 +69,12 @@ export type EmailRemindFindFinancementConfig = {
 export type EmailRemindUnfinishedAndInactiveProjetConfig = {
   userPrenom: string;
   urlProjetStatus: string;
+};
+
+export type EmailRemindUnfinishedAndInactiveProjet2Config = {
+  userPrenom: string;
+  projetName: string;
+  urlTableauDeBord: string;
 };
 
 export type EmailProjetPartageConfig = {
@@ -159,6 +166,9 @@ export class EmailService {
       },
       projetFinishedQuestionnaireSatisfaction: {
         templateId: 72,
+      },
+      projetUnfinishedInactive2: {
+        templateId: 74,
       },
     };
   }
@@ -459,12 +469,12 @@ export class EmailService {
     );
   }
 
-  async sendRemindUnfinishedAndInactiveProjets(lastSyncDate: Date, inactivityDays: number) {
+  async sendRemindUnfinishedAndInactiveProjets1(lastSyncDate: Date, inactivityDays: number) {
     const projets = await getProjetsUnfinishedAndLastUpdatedBetween(
       removeDaysToDate(lastSyncDate, inactivityDays),
       removeDaysToDate(new Date(), inactivityDays),
     );
-    console.log(`Nb de mails de projets inactifs à envoyer : ${projets.length}`);
+    console.log(`Nb de mails de projets inactifs depuis ${inactivityDays} jours à envoyer : ${projets.length}`);
     return await Promise.all(
       projets.map(async (projet) => {
         const emailParams: EmailRemindUnfinishedAndInactiveProjetConfig = {
@@ -474,6 +484,30 @@ export class EmailService {
         return await this.sendEmail({
           to: projet.creator.email,
           emailType: emailType.projetUnfinishedInactive,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendRemindUnfinishedAndInactiveProjets2(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsUnfinishedAndLastUpdatedBetween2(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de projets inactifs depuis ${inactivityDays} jours à envoyer : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const emailParams: EmailRemindUnfinishedAndInactiveProjet2Config = {
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          urlTableauDeBord: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projet.id, "tableau-de-suivi")),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetUnfinishedInactive2,
           params: emailParams,
           extra: emailParams,
           userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,

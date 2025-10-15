@@ -4,8 +4,6 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EmailService } from "@/src/services/brevo";
 import { makeBatchErrorWebhookData, makeCsmBatchWebhookData } from "@/src/services/mattermost/mattermost-helpers";
 import { sendMattermostWebhook } from "@/src/services/mattermost";
-import { $Enums } from "@/src/generated/prisma/client";
-import emailType = $Enums.emailType;
 
 const main = async () => {
   if (process.env.CSM_MAIL_BATCH_ACTIVE !== "true") {
@@ -78,11 +76,18 @@ const main = async () => {
       REMIND_TO_FILL_ESTIMATION_DAYS,
     );
 
-    const REMIND_UNFINISHED_INACTIVE_PROJET_DAYS = 14;
-    console.log("Recherche des projets inactifs non terminés");
-    const sendRemindInactiveProjetMail = await emailService.sendRemindUnfinishedAndInactiveProjets(
-      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_UNFINISHED_INACTIVE_PROJET_DAYS),
-      REMIND_UNFINISHED_INACTIVE_PROJET_DAYS,
+    const REMIND_UNFINISHED_INACTIVE_PROJET_1_DAYS = 14;
+    console.log(`Recherche des projets inactifs depuis ${REMIND_UNFINISHED_INACTIVE_PROJET_1_DAYS} jours non terminés`);
+    const sendRemindInactiveProjetMail1 = await emailService.sendRemindUnfinishedAndInactiveProjets1(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_UNFINISHED_INACTIVE_PROJET_1_DAYS),
+      REMIND_UNFINISHED_INACTIVE_PROJET_1_DAYS,
+    );
+
+    const REMIND_UNFINISHED_INACTIVE_PROJET_2_DAYS = 61;
+    console.log(`Recherche des projets inactifs depuis ${REMIND_UNFINISHED_INACTIVE_PROJET_2_DAYS} jours non terminés`);
+    const sendRemindInactiveProjetMail2 = await emailService.sendRemindUnfinishedAndInactiveProjets2(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_UNFINISHED_INACTIVE_PROJET_2_DAYS),
+      REMIND_UNFINISHED_INACTIVE_PROJET_2_DAYS,
     );
 
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
@@ -91,12 +96,13 @@ const main = async () => {
       nbMailsInactiveUser1: inactiveUserMail1.length,
       nbMailsInactiveUser2: inactiveUserMail2.length,
       nbMailsGetRexFromFinishedProjet: finishedProjetGetRexMail.length,
-      nbMailsSendQuestionnaireForFinishedProjet : finishedProjetGetQuestionnaire.length,
+      nbMailsSendQuestionnaireForFinishedProjet: finishedProjetGetQuestionnaire.length,
       nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
       nbMailsRemindSolution: sendRemindFicheSolutionMail.length,
       nbMailsRemindEstimation: sendRemindEstimationMail.length,
       nbMailsRemindFinancement: sendRemindFinancementMail.length,
-      nbMailsInactiveProjet: sendRemindInactiveProjetMail.length,
+      nbMailsInactiveProjet1: sendRemindInactiveProjetMail1.length,
+      nbMailsInactiveProjet2: sendRemindInactiveProjetMail2.length,
     });
     await sendMattermostWebhook(webhookData, "batch", 5000);
     console.log("Batch des mails CSM réussi !");

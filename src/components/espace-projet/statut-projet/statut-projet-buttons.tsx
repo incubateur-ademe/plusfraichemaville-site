@@ -4,7 +4,6 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { updateProjetStatutAction } from "@/src/actions/projets/update-projet-statut-action";
 import Image from "next/image";
 import clsx from "clsx";
-import { notifications } from "@/src/components/common/notifications";
 import { StatutProjet } from "@/src/generated/prisma/client";
 import { useState } from "react";
 

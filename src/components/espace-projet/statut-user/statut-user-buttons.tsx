@@ -1,7 +1,6 @@
 "use client";
 import Image from "next/image";
 import clsx from "clsx";
-import { notifications } from "@/src/components/common/notifications";
 import { StatutUser } from "@/src/generated/prisma/client";
 import { useState } from "react";
 import { STATUT_USER_BUTTONS } from "@/src/components/espace-projet/statut-user/statut-user";
