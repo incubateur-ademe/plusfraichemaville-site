@@ -146,6 +146,12 @@ export class EmailService {
       projetUnfinishedInactive: {
         templateId: 71,
       },
+      noProjetAfterSignupMail1: {
+        templateId: 67,
+      },
+      noProjetAfterSignupMail2: {
+        templateId: 69,
+      },
     };
   }
 
@@ -413,7 +419,7 @@ export class EmailService {
           emailType: emailType.noProjetAfterSignupMail2,
           params: {
             userPrenom: user.prenom || "",
-            urlProjetStatus : PFMV_ROUTES.MON_STATUT,
+            urlUserStatus : PFMV_ROUTES.MON_STATUT,
           },
         });
         if (result.type === "success") {
