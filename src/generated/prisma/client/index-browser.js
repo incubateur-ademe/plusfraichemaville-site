@@ -513,6 +513,7 @@ exports.emailType = exports.$Enums.emailType = {
   projetAccessDeclined: 'projetAccessDeclined',
   contactMessageSent: 'contactMessageSent',
   welcomeMessage: 'welcomeMessage',
+  welcomeMessageV2: 'welcomeMessageV2',
   noActivityAfterSignup: 'noActivityAfterSignup',
   remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic',
   projetRemindToDoSolution: 'projetRemindToDoSolution',

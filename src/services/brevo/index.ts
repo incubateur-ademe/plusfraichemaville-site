@@ -129,6 +129,9 @@ export class EmailService {
         templateId: 45,
       },
       welcomeMessage: {
+        templateId: 52,
+      },
+      welcomeMessageV2: {
         templateId: 62,
       },
       projetCreation: {
@@ -293,8 +296,8 @@ export class EmailService {
   async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom"> & { nomCollectivite?: string }) {
     return this.sendEmail({
       to: data.email,
-      emailType: emailType.welcomeMessage,
-      params: { NOM: data.nom, ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) },
+      emailType: emailType.welcomeMessageV2,
+      params: { ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) },
       extra: data,
     });
   }

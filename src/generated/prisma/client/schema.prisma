@@ -147,6 +147,7 @@ enum emailType {
   projetAccessDeclined
   contactMessageSent
   welcomeMessage
+  welcomeMessageV2
   noActivityAfterSignup
   remindNotCompletedDiagnostic
   projetRemindToDoSolution
