@@ -19,6 +19,7 @@ export const authOptions: NextAuthOptions = {
   events: {
     createUser: async ({ user }) => {
       const prismaUser = await getUserWithCollectivites(user.id);
+      let collectivite = null;
       if (prismaUser) {
         const agentConnectInfo = prismaUser.agentconnect_info as AgentConnectInfo;
         const siret = agentConnectInfo.siret;
@@ -39,7 +40,7 @@ export const authOptions: NextAuthOptions = {
               (address) => address.codeInsee === codeInsee && address.codePostal === codePostal,
             );
             if (collectiviteToUse) {
-              const collectivite = await getOrCreateCollectivite(collectiviteToUse, prismaUser.id);
+              collectivite = await getOrCreateCollectivite(collectiviteToUse, prismaUser.id);
               await attachUserToCollectivite(prismaUser, collectivite, true);
             }
           }
@@ -47,6 +48,7 @@ export const authOptions: NextAuthOptions = {
         await attachInvitationsByEmail(prismaUser.email, user.id);
         const emailService = new EmailService();
         await emailService.sendWelcomeMessageEmail({
+          nomCollectivite: collectivite?.nom,
           email: prismaUser.email,
           nom: prismaUser.nom ?? "",
         });

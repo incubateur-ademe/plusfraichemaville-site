@@ -1,9 +1,51 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { emailType, InvitationStatus, Prisma, projet, RoleProjet, user_projet } from "@/src/generated/prisma/client";
+import {
+  emailStatus,
+  emailType,
+  FicheType,
+  InvitationStatus,
+  Prisma,
+  projet,
+  RoleProjet,
+  StatutProjet,
+  user_projet,
+} from "@/src/generated/prisma/client";
 import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/annuaire/types";
+import { NiveauMaturiteCode } from "@/src/helpers/maturite-projet";
+
+export const projetWithoutFicheSolution = {
+  fiches: { none: { type: FicheType.SOLUTION } },
+};
+
+export const projetWithoutFiche = {
+  fiches: { none: {} },
+};
+
+export const projetNotTermmine = {
+  OR: [{ statut: { in: [StatutProjet.en_cours, StatutProjet.besoin_aide] } }, { statut: null }],
+};
+
+export const projetWithoutDiagnosticSimulation = {
+  diagnostic_simulations: { none: {} },
+};
+
+export const projetAdminDidNotAlreadyReceivedEmailAndWantEmail = (emailType: emailType) => ({
+  users: {
+    some: {
+      role: RoleProjet.ADMIN,
+      user: { accept_communication_suivi_projet: true },
+      email: {
+        none: {
+          type: emailType,
+          email_status: emailStatus.SUCCESS,
+        },
+      },
+    },
+  },
+});
 
 export const projetIncludes = {
   collectivite: true,
@@ -394,7 +436,69 @@ export const updateProjetVisibility = async (
   });
 };
 
-export const getProjetsForProjetCreationEmail = async (
+export const updateProjetStatut = async (
+  projetId: number,
+  statut: StatutProjet,
+): Promise<ProjetWithRelations | null> => {
+  return prismaClient.projet.update({
+    where: {
+      id: projetId,
+      deleted_at: null,
+    },
+    data: {
+      statut: statut,
+      statut_updated_at: new Date(),
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsForRemindToChooseSolution = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      OR: [
+        {
+          OR: [
+            {
+              fiches: {
+                some: { type: FicheType.DIAGNOSTIC, created_at: { gte: afterDate, lte: beforeDate } },
+              },
+            },
+            {
+              diagnostic_simulations: { some: { created_at: { gte: afterDate, lte: beforeDate } } },
+            },
+          ],
+          niveau_maturite: {
+            in: [
+              NiveauMaturiteCode.questionnement,
+              NiveauMaturiteCode.priorisationSolutions,
+              NiveauMaturiteCode.redactionCDC,
+            ],
+          },
+        },
+        {
+          created_at: {
+            gte: afterDate,
+            lte: beforeDate,
+          },
+          niveau_maturite: NiveauMaturiteCode.lancementTravaux,
+        },
+      ],
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetWithoutFicheSolution },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoSolution) },
+      ],
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsForRemindDiagnostic = async (
   afterDate: Date,
   beforeDate: Date,
 ): Promise<ProjetWithRelations[]> => {
@@ -405,19 +509,17 @@ export const getProjetsForProjetCreationEmail = async (
         gte: afterDate,
         lte: beforeDate,
       },
-      NOT: {
-        users: {
-          some: {
-            role: "ADMIN",
-            email: {
-              some: {
-                type: emailType.projetCreation,
-                email_status: "SUCCESS",
-              },
-            },
-          },
-        },
+      niveau_maturite: {
+        in: [
+          NiveauMaturiteCode.questionnement,
+          NiveauMaturiteCode.priorisationSolutions,
+          NiveauMaturiteCode.redactionCDC,
+        ],
       },
+      ...projetWithoutFiche,
+      ...projetWithoutDiagnosticSimulation,
+      ...projetNotTermmine,
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoDiagnostic),
     },
     include: projetIncludes,
   });
@@ -439,19 +541,126 @@ export const getProjetsForRemindDiagnosticEmail = async (
           },
         },
       },
-      NOT: {
-        users: {
-          some: {
-            role: "ADMIN",
-            email: {
-              some: {
-                type: emailType.remindNotCompletedDiagnostic,
-                email_status: "SUCCESS",
-              },
-            },
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.remindNotCompletedDiagnostic) },
+      ],
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsForRemindToDoEstimation = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      fiches: {
+        some: { type: FicheType.SOLUTION, created_at: { gte: afterDate, lte: beforeDate } },
+        none: { type: FicheType.SOLUTION, created_at: { gte: beforeDate } },
+      },
+      estimations: { none: { deleted_at: null } },
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoEstimation) },
+      ],
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsForRemindToDoFinancement = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      estimations: {
+        some: {
+          deleted_at: null,
+          created_at: { gte: afterDate, lte: beforeDate },
+          estimations_aides: {
+            none: {},
           },
         },
+        none: {
+          deleted_at: null,
+          OR: [
+            { created_at: { gte: beforeDate } },
+            {
+              estimations_aides: {
+                some: {},
+              },
+            },
+          ],
+        },
       },
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoFinancement) },
+      ],
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsUnfinishedAndLastUpdatedBetween = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      updated_at: { gte: afterDate, lte: beforeDate },
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetUnfinishedInactive) },
+      ],
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsUnfinishedAndLastUpdatedBetween2 = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      updated_at: { gte: afterDate, lte: beforeDate },
+      OR: [{ statut: null }, { statut: StatutProjet.en_cours }],
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetUnfinishedInactive2),
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsFinishedToGetRex = async (afterDate: Date, beforeDate: Date): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      statut_updated_at: { gte: afterDate, lte: beforeDate },
+      statut: StatutProjet.termine,
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetFinishedToGetRex),
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsFinishedToGetQuestionnaire = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      statut_updated_at: { gte: afterDate, lte: beforeDate },
+      statut: StatutProjet.termine,
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetFinishedQuestionnaireSatisfaction),
     },
     include: projetIncludes,
   });

@@ -16,7 +16,7 @@ export const ALL_ESPACES: TypeEspace[] = [
   { label: "Rue", code: "rue", icon: "espace-icone-rue.svg" },
   { label: "Place", code: "place", icon: "espace-icone-place.svg" },
   { label: "Cour d'école", code: "ecole", icon: "espace-icone-cour-ecole.svg" },
-  { label: "Espaces verts", code: "parc", icon: "espace-icone-cour-parc-jardin.svg" },
+  { label: "Espace vert", code: "parc", icon: "espace-icone-cour-parc-jardin.svg" },
 ];
 
 export const typeEspaceOptions: SelectOption[] = [

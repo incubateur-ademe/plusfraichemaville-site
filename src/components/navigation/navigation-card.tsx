@@ -12,9 +12,6 @@ export const NavigationCard = ({
 }) => {
   return (
     <div
-      onClick={(e) => {
-        e.stopPropagation();
-      }}
       className={clsx(
         className,
         "pointer-events-none max-w-[21rem] rounded-xl bg-white",

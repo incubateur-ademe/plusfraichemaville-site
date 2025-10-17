@@ -66,7 +66,7 @@ export const upsertProjetAction = async (
             maturite: updatedProjet.niveau_maturite,
           },
           event_type: EventType.UPDATE_MATURITE,
-          reference_id: updatedProjet?.id,
+          reference_id: updatedProjet?.id.toString(),
           reference_type: ReferenceType.PROJET,
           user_id: session.user.id,
         });
@@ -83,7 +83,7 @@ export const upsertProjetAction = async (
           event_type: updatedProjet.is_public
             ? EventType.UPDATE_PROJET_SET_VISIBLE
             : EventType.UPDATE_PROJET_SET_INVISIBLE,
-          reference_id: updatedProjet?.id,
+          reference_id: updatedProjet?.id.toString(),
           reference_type: ReferenceType.PROJET,
           user_id: session.user.id,
         });

@@ -11,6 +11,7 @@ export type SelectOption<T extends string = string> = {
 };
 export type SelectFormFieldProps<T extends FieldValues> = {
   className?: string;
+  selectClassName?: string;
   label: ReactNode;
   path: FieldPath<T>;
   control: Control<T>;
@@ -33,6 +34,7 @@ const SelectFormField = <T extends FieldValues>({
   asterisk,
   className,
   placeholder,
+  selectClassName,
 }: SelectFormFieldProps<T>) => {
   const id = `select-form-field__${path}`;
 
@@ -65,7 +67,7 @@ const SelectFormField = <T extends FieldValues>({
               {hint ? <span className="fr-hint-text">{hint}</span> : null}
             </label>
             <select
-              className={clsx("fr-select", {
+              className={clsx("fr-select", selectClassName, {
                 "fr-select--error": error,
                 "fr-select--valid": isDirty && !invalid,
               })}

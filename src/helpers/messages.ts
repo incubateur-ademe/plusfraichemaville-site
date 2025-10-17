@@ -27,6 +27,7 @@ export const success = {
   QUIT_PROJET: "Vous avez quitté le projet.",
   MATURITE_PROJET_UPDATED: "Le niveau de maturité de votre projet a été mis à jour.",
   VISIBILITY_UPDATED: "La visibilité du projet a été mis à jour.",
+  PROJET_STATUT_UPDATED: "Le statut du projet a été mis à jour.",
   CSV_GENERATED: "Le fichier CSV a été généré.",
   FICHE_URL_COPY_CLIPBOARD: "Le lien vers cette page a été copié dans votre presse papier.",
   AIDE_SELECTION_VALIDATED: "Votre sélection a bien été validée.",

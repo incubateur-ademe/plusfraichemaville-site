@@ -150,7 +150,10 @@ exports.Prisma.UserScalarFieldEnum = {
   updated_at: 'updated_at',
   canal_acquisition: 'canal_acquisition',
   discardedInformation: 'discardedInformation',
-  accept_communication_produit: 'accept_communication_produit'
+  accept_communication_produit: 'accept_communication_produit',
+  accept_communication_suivi_projet: 'accept_communication_suivi_projet',
+  statut: 'statut',
+  statut_updated_at: 'statut_updated_at'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -228,7 +231,9 @@ exports.Prisma.ProjetScalarFieldEnum = {
   deleted_by: 'deleted_by',
   is_public: 'is_public',
   budget: 'budget',
-  sourcing_rex: 'sourcing_rex'
+  sourcing_rex: 'sourcing_rex',
+  statut: 'statut',
+  statut_updated_at: 'statut_updated_at'
 };
 
 exports.Prisma.Projet_ficheScalarFieldEnum = {
@@ -472,12 +477,21 @@ exports.Prisma.diagnostic_simulationOrderByRelevanceFieldEnum = {
 
 exports.Prisma.AnalyticsOrderByRelevanceFieldEnum = {
   id: 'id',
+  reference_id: 'reference_id',
   user_id: 'user_id'
 };
 
 exports.Prisma.cron_jobsOrderByRelevanceFieldEnum = {
   id: 'id'
 };
+exports.StatutUser = exports.$Enums.StatutUser = {
+  pas_trouve: 'pas_trouve',
+  pas_maintenant: 'pas_maintenant',
+  pas_compris: 'pas_compris',
+  sans_pfmv: 'sans_pfmv',
+  autre: 'autre'
+};
+
 exports.RoleProjet = exports.$Enums.RoleProjet = {
   ADMIN: 'ADMIN',
   EDITEUR: 'EDITEUR',
@@ -499,14 +513,31 @@ exports.emailType = exports.$Enums.emailType = {
   projetAccessDeclined: 'projetAccessDeclined',
   contactMessageSent: 'contactMessageSent',
   welcomeMessage: 'welcomeMessage',
+  welcomeMessageV2: 'welcomeMessageV2',
   noActivityAfterSignup: 'noActivityAfterSignup',
-  remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic'
+  remindNotCompletedDiagnostic: 'remindNotCompletedDiagnostic',
+  projetRemindToDoSolution: 'projetRemindToDoSolution',
+  projetRemindToDoDiagnostic: 'projetRemindToDoDiagnostic',
+  projetRemindToDoEstimation: 'projetRemindToDoEstimation',
+  projetRemindToDoFinancement: 'projetRemindToDoFinancement',
+  projetUnfinishedInactive: 'projetUnfinishedInactive',
+  projetUnfinishedInactive2: 'projetUnfinishedInactive2',
+  projetFinishedQuestionnaireSatisfaction: 'projetFinishedQuestionnaireSatisfaction',
+  projetFinishedToGetRex: 'projetFinishedToGetRex',
+  noProjetAfterSignupMail1: 'noProjetAfterSignupMail1',
+  noProjetAfterSignupMail2: 'noProjetAfterSignupMail2'
 };
 
 exports.emailStatus = exports.$Enums.emailStatus = {
   PENDING: 'PENDING',
   ERROR: 'ERROR',
   SUCCESS: 'SUCCESS'
+};
+
+exports.StatutProjet = exports.$Enums.StatutProjet = {
+  termine: 'termine',
+  en_cours: 'en_cours',
+  besoin_aide: 'besoin_aide'
 };
 
 exports.FicheType = exports.$Enums.FicheType = {
@@ -527,6 +558,8 @@ exports.ReferenceType = exports.$Enums.ReferenceType = {
 
 exports.EventType = exports.$Enums.EventType = {
   UPDATE_MATURITE: 'UPDATE_MATURITE',
+  UPDATE_STATUT_PROJET: 'UPDATE_STATUT_PROJET',
+  UPDATE_STATUT_USER: 'UPDATE_STATUT_USER',
   UPDATE_PROJET_SET_VISIBLE: 'UPDATE_PROJET_SET_VISIBLE',
   UPDATE_PROJET_SET_INVISIBLE: 'UPDATE_PROJET_SET_INVISIBLE'
 };

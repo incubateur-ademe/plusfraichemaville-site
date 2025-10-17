@@ -19,7 +19,9 @@ import clsx from "clsx";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
+import { useEffect, useState } from "react";
 
+export const COMMUNICATION_SETTINGS_ANCHOR = "communication";
 export const UserInfoForm = ({
   user,
   buttonLabel,
@@ -32,6 +34,11 @@ export const UserInfoForm = ({
   const router = useRouter();
   const userCollectivite = user.collectivites[0];
   const setUserInfos = useUserStore((state) => state.setUserInfos);
+  const [anchor, setAnchor] = useState("");
+
+  useEffect(() => {
+    setAnchor(window.location.hash);
+  }, []);
 
   const form = useForm<UserInfoFormData>({
     resolver: zodResolver(UserInfoFormSchema),
@@ -45,6 +52,7 @@ export const UserInfoForm = ({
       canalAcquisition: user.canal_acquisition ?? "",
       customCanalAcquisition: user.canal_acquisition ?? "",
       acceptCommunicationProduit: user.accept_communication_produit ?? true,
+      acceptCommunicationSuiviProjet: user.accept_communication_suivi_projet ?? true,
       subscribeToNewsletter: false,
     },
   });
@@ -115,9 +123,13 @@ export const UserInfoForm = ({
             ]}
           />
         </Case>
-        <Default>
+      </Conditional>
+      <Conditional>
+        <Case condition={!newUser || anchor === `#${COMMUNICATION_SETTINGS_ANCHOR}`}>
           <>
-            <h1 className="fr-h5 !mb-5 !mt-12 !text-dsfr-text-label-blue-france">Mes préférences de communication</h1>
+            <h1 id={COMMUNICATION_SETTINGS_ANCHOR} className="fr-h5 !mb-5 !mt-12 !text-dsfr-text-label-blue-france">
+              Mes préférences de communication
+            </h1>
             <Checkbox
               options={[
                 {
@@ -128,7 +140,21 @@ export const UserInfoForm = ({
                 },
               ]}
             />
+            <Checkbox
+              className="mt-4"
+              options={[
+                {
+                  label: "J'accepte d'être contacté(e) pour le suivi de mes projets.",
+                  nativeInputProps: {
+                    ...form.register("acceptCommunicationSuiviProjet"),
+                  },
+                },
+              ]}
+            />
           </>
+        </Case>
+        <Default>
+          <a id={COMMUNICATION_SETTINGS_ANCHOR} />
         </Default>
       </Conditional>
       <Button className={`mt-6 rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>

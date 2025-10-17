@@ -57,6 +57,7 @@ export const editUserInfoAction = async (
         canalAcquisition: canalAcquisition,
         nomEtablissement: data.nomEtablissement,
         acceptCommunicationProduit: data.acceptCommunicationProduit,
+        acceptCommunicationSuiviProjet: data.acceptCommunicationSuiviProjet,
       });
       try {
         const response = await upsertBrevoContact({

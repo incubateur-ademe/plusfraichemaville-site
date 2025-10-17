@@ -1,6 +1,6 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
-import { Prisma, User } from "@/src/generated/prisma/client";
+import { Prisma, StatutUser, User } from "@/src/generated/prisma/client";
 import { IApiSirenQueryTypes } from "@/src/lib/siren/types";
 
 export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {
@@ -38,6 +38,7 @@ export const updateUser = async ({
   canalAcquisition,
   nomEtablissement,
   acceptCommunicationProduit,
+  acceptCommunicationSuiviProjet,
 }: {
   userId: string;
   userNom: string;
@@ -45,6 +46,7 @@ export const updateUser = async ({
   userPoste: string;
   collectiviteId: number;
   acceptCommunicationProduit: boolean;
+  acceptCommunicationSuiviProjet: boolean;
   canalAcquisition?: string;
   nomEtablissement?: string;
 }): Promise<UserWithCollectivite | null> => {
@@ -57,6 +59,7 @@ export const updateUser = async ({
       prenom: userPrenom,
       poste: userPoste,
       accept_communication_produit: acceptCommunicationProduit,
+      accept_communication_suivi_projet: acceptCommunicationSuiviProjet,
       collectivites: {
         upsert: {
           where: { userCollectiviteId: { user_id: userId, collectivite_id: collectiviteId } },
@@ -102,3 +105,18 @@ export const updateUserEtablissementInfo = async (
     include: { collectivites: { include: { collectivite: true } } },
   });
 };
+
+export const updateUserStatut = async (userId: string, statut: StatutUser): Promise<UserWithCollectivite | null> => {
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      statut: statut,
+      statut_updated_at: new Date(),
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};
+
+export const getCountAllUsers = async () => prismaClient.user.count();
