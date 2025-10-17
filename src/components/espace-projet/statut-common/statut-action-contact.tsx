@@ -8,7 +8,7 @@ export const StatutActionContact = () => {
         Écrivez-nous !
       </h3>
       <p>Notre équipe vous répondra dans les plus brefs délais. À vous de jouer.</p>
-      <section className="bg-white rounded-2xl  pt-4">
+      <section className="rounded-2xl bg-white  pt-4">
         <ContactIframe className="!h-[79rem] md:!h-[70rem]" />
       </section>
     </div>
