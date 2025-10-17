@@ -1,4 +1,4 @@
-import { ContactForm } from "@/src/forms/contact/contact-form";
+import { ContactIframe } from "@/src/forms/contact/contact-iframe";
 
 export const StatutActionContact = () => {
   return (
@@ -8,7 +8,9 @@ export const StatutActionContact = () => {
         Écrivez-nous !
       </h3>
       <p>Notre équipe vous répondra dans les plus brefs délais. À vous de jouer.</p>
-      <ContactForm whiteBackground />
+      <section className="bg-white rounded-2xl  pt-4">
+        <ContactIframe className="!h-[79rem] md:!h-[70rem]" />
+      </section>
     </div>
   );
 };

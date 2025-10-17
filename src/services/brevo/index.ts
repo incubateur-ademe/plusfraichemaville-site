@@ -11,7 +11,6 @@ import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { ProjetWithRelations, UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
-import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
   getProjetsFinishedToGetQuestionnaire,
   getProjetsFinishedToGetRex,
@@ -28,6 +27,7 @@ import { getCountAllUsers, getUserById } from "@/src/lib/prisma/prismaUserQuerie
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
+import { UserInfoFormData } from "@/src/forms/user/UserInfoFormSchema";
 
 interface Templates {
   templateId: number;
@@ -292,11 +292,7 @@ export class EmailService {
     return { type: "error", message: "ADMIN_NOT_FOUND" };
   }
 
-  async sendContactMessageReceivedEmail(data: ContactFormData) {
-    return this.sendEmail({ to: data.email, emailType: emailType.contactMessageSent, extra: data });
-  }
-
-  async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom"> & { nomCollectivite?: string }) {
+  async sendWelcomeMessageEmail(data: Pick<UserInfoFormData, "email" | "nom"> & { nomCollectivite?: string }) {
     const mailParams = { ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) };
     return this.sendEmail({
       to: data.email,
