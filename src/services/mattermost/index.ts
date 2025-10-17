@@ -1,7 +1,6 @@
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 const webhooks = {
-  hubspot: process.env.MATTERMOST_WEBHOOK_HUBSPOT_URL,
   batch: process.env.MATTERMOST_WEBHOOK_BATCH_URL,
 } as const;
 
