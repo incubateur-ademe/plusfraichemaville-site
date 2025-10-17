@@ -3,7 +3,6 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 import { StatutProjet } from "@/src/generated/prisma/client";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
-import { StatutActionRdv } from "@/src/components/espace-projet/statut-common/statut-action-rdv";
 import { StatutActionContact } from "@/src/components/espace-projet/statut-common/statut-action-contact";
 import { StatutActionProjetQuestionnaireSatisfaction } from "@/src/components/espace-projet/statut-projet/statut-action-projet-questionnaire-satisfaction";
 import { StatutActionProjetAnnuaire } from "@/src/components/espace-projet/statut-projet/statut-action-projet-annuaire";
@@ -23,7 +22,7 @@ export const StatutProjetActions = ({ className }: { className?: string }) => {
           <StatutActionProjetAnnuaire />
         </Case>
         <Case condition={projet.statut === StatutProjet.besoin_aide}>
-          <StatutActionRdv />
+          <StatutActionContact />
         </Case>
         <Case condition={projet.statut === StatutProjet.autre}>
           <StatutActionContact />

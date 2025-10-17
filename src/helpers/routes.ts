@@ -35,6 +35,7 @@ export const PFMV_ROUTES = {
   DECONNEXION: "/logout",
   ESPACE_PROJET: "/espace-projet",
   MON_PROFIL: "/info-perso",
+  PREFERENCES_COMMUNICATION: "/info-perso#communication",
   MON_STATUT: "/statut-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
   RECHERCHE_GLOBALE: (query?: string) => `/recherche${query ? `?q=${query}` : ""}`,

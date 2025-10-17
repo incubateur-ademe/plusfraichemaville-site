@@ -24,6 +24,10 @@ export const projetWithoutFiche = {
   fiches: { none: {} },
 };
 
+export const projetNotTermmine = {
+  OR: [{ statut: { in: [StatutProjet.en_cours, StatutProjet.besoin_aide, StatutProjet.autre] } }, { statut: null }],
+};
+
 export const projetWithoutDiagnosticSimulation = {
   diagnostic_simulations: { none: {} },
 };
@@ -484,9 +488,11 @@ export const getProjetsForRemindToChooseSolution = async (
           niveau_maturite: NiveauMaturiteCode.lancementTravaux,
         },
       ],
-      ...projetWithoutFicheSolution,
-      NOT: { statut: StatutProjet.termine },
-      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoSolution),
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetWithoutFicheSolution },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoSolution) },
+      ],
     },
     include: projetIncludes,
   });
@@ -512,7 +518,7 @@ export const getProjetsForRemindDiagnostic = async (
       },
       ...projetWithoutFiche,
       ...projetWithoutDiagnosticSimulation,
-      NOT: { statut: StatutProjet.termine },
+      ...projetNotTermmine,
       ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoDiagnostic),
     },
     include: projetIncludes,
@@ -535,8 +541,10 @@ export const getProjetsForRemindDiagnosticEmail = async (
           },
         },
       },
-      NOT: { statut: StatutProjet.termine },
-      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.remindNotCompletedDiagnostic),
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.remindNotCompletedDiagnostic) },
+      ],
     },
     include: projetIncludes,
   });
@@ -554,8 +562,10 @@ export const getProjetsForRemindToDoEstimation = async (
         none: { type: FicheType.SOLUTION, created_at: { gte: beforeDate } },
       },
       estimations: { none: { deleted_at: null } },
-      NOT: { statut: StatutProjet.termine },
-      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoEstimation),
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoEstimation) },
+      ],
     },
     include: projetIncludes,
   });
@@ -588,8 +598,10 @@ export const getProjetsForRemindToDoFinancement = async (
           ],
         },
       },
-      NOT: { statut: StatutProjet.termine },
-      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoFinancement),
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoFinancement) },
+      ],
     },
     include: projetIncludes,
   });
@@ -603,8 +615,10 @@ export const getProjetsUnfinishedAndLastUpdatedBetween = async (
     where: {
       deleted_at: null,
       updated_at: { gte: afterDate, lte: beforeDate },
-      NOT: { statut: StatutProjet.termine },
-      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetUnfinishedInactive),
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetUnfinishedInactive) },
+      ],
     },
     include: projetIncludes,
   });

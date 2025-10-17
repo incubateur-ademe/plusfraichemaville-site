@@ -73,7 +73,7 @@ const main = async () => {
     console.log("Recherche des projets avec estimation sans financement");
     const sendRemindFinancementMail = await emailService.sendRemindChooseFinancementMail(
       lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_FILL_FINANCEMENT_DAYS),
-      REMIND_TO_FILL_ESTIMATION_DAYS,
+      REMIND_TO_FILL_FINANCEMENT_DAYS,
     );
 
     const REMIND_UNFINISHED_INACTIVE_PROJET_1_DAYS = 14;

@@ -95,16 +95,16 @@ const computeRemindToDoEstimationEmailParam = (
     projetName: projet.nom,
     userPrenom: projet.creator.prenom || "",
     ...(chosenFichesSolutions[0] && {
-      nomSolution1: allFichesSolutions.find((fs) => fs.id === chosenFichesSolutions[0].id)?.attributes.titre,
+      nomSolution1: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[0].fiche_id)?.attributes.titre,
     }),
     ...(chosenFichesSolutions[1] && {
-      nomSolution2: allFichesSolutions.find((fs) => fs.id === chosenFichesSolutions[1].id)?.attributes.titre,
+      nomSolution2: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[1].fiche_id)?.attributes.titre,
     }),
     ...(chosenFichesSolutions[2] && {
-      nomSolution3: allFichesSolutions.find((fs) => fs.id === chosenFichesSolutions[2].id)?.attributes.titre,
+      nomSolution3: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[2].fiche_id)?.attributes.titre,
     }),
-    plusDeTroisSolutions: allFichesSolutions.length > 3,
-    urlModule4: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(projet.id),
+    plusDeTroisSolutions: chosenFichesSolutions.length > 3,
+    urlModule4: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(projet.id)),
   };
 };
 
@@ -199,7 +199,10 @@ export class EmailService {
     const dbEmail = await createEmail({ to, emailType, userProjetId, userId, extra });
 
     try {
-      const response = await brevoSendEmail(to, templateId, params);
+      const response = await brevoSendEmail(to, templateId, {
+        ...params,
+        communicationSettingsUrl: getFullUrl(PFMV_ROUTES.PREFERENCES_COMMUNICATION),
+      });
 
       if (!response.ok) {
         const data = await response.json();
@@ -294,11 +297,12 @@ export class EmailService {
   }
 
   async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom"> & { nomCollectivite?: string }) {
+    const mailParams = { ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) };
     return this.sendEmail({
       to: data.email,
       emailType: emailType.welcomeMessageV2,
-      params: { ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) },
-      extra: data,
+      params: mailParams,
+      extra: mailParams,
     });
   }
 
@@ -434,7 +438,7 @@ export class EmailService {
           emailType: emailType.noProjetAfterSignupMail2,
           params: {
             userPrenom: user.prenom || "",
-            urlUserStatus: PFMV_ROUTES.MON_STATUT,
+            urlUserStatus: getFullUrl(PFMV_ROUTES.MON_STATUT),
           },
         });
       }),
