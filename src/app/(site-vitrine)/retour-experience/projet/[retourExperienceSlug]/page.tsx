@@ -14,7 +14,7 @@ type RetourExperiencePageProps = {
 export async function generateStaticParams() {
   const allRex = await getRetoursExperiences();
   return allRex.map((rex) => ({
-    rexSlug: rex.attributes.slug || "",
+    retourExperienceSlug: rex.attributes.slug || "",
   }));
 }
 
