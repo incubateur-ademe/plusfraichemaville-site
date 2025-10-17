@@ -183,8 +183,7 @@ export type emailStatus = (typeof emailStatus)[keyof typeof emailStatus]
 export const StatutProjet: {
   termine: 'termine',
   en_cours: 'en_cours',
-  besoin_aide: 'besoin_aide',
-  autre: 'autre'
+  besoin_aide: 'besoin_aide'
 };
 
 export type StatutProjet = (typeof StatutProjet)[keyof typeof StatutProjet]

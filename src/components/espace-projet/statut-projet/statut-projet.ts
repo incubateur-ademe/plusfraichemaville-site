@@ -22,9 +22,4 @@ export const STATUT_PROJET_BUTTONS: STATUT_PROJET_BUTTON[] = [
     icon: "/images/espace-projet/statut/statut-projet-besoin-aide.svg",
     statut: StatutProjet.besoin_aide,
   },
-  {
-    label: "Autre",
-    icon: "/images/espace-projet/statut/statut-projet-autre.svg",
-    statut: StatutProjet.autre,
-  },
 ];

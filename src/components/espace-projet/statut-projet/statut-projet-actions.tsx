@@ -24,9 +24,6 @@ export const StatutProjetActions = ({ className }: { className?: string }) => {
         <Case condition={projet.statut === StatutProjet.besoin_aide}>
           <StatutActionContact />
         </Case>
-        <Case condition={projet.statut === StatutProjet.autre}>
-          <StatutActionContact />
-        </Case>
       </Conditional>
     </div>
   );

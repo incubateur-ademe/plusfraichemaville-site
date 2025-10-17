@@ -537,8 +537,7 @@ exports.emailStatus = exports.$Enums.emailStatus = {
 exports.StatutProjet = exports.$Enums.StatutProjet = {
   termine: 'termine',
   en_cours: 'en_cours',
-  besoin_aide: 'besoin_aide',
-  autre: 'autre'
+  besoin_aide: 'besoin_aide'
 };
 
 exports.FicheType = exports.$Enums.FicheType = {

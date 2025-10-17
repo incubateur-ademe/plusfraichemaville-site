@@ -25,7 +25,7 @@ export const projetWithoutFiche = {
 };
 
 export const projetNotTermmine = {
-  OR: [{ statut: { in: [StatutProjet.en_cours, StatutProjet.besoin_aide, StatutProjet.autre] } }, { statut: null }],
+  OR: [{ statut: { in: [StatutProjet.en_cours, StatutProjet.besoin_aide] } }, { statut: null }],
 };
 
 export const projetWithoutDiagnosticSimulation = {

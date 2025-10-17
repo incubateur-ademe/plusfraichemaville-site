@@ -197,7 +197,6 @@ enum StatutProjet {
   termine
   en_cours
   besoin_aide
-  autre
 }
 
 model projet {
