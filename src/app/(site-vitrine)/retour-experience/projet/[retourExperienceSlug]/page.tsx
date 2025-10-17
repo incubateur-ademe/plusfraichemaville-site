@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { getRetourExperienceBySlug } from "@/src/lib/strapi/queries/retoursExperienceQueries";
+import { getRetourExperienceBySlug, getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { notFound } from "next/navigation";
 import { RetourExperienceContent } from "@/src/components/projet/projet-retour-experience-content";
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
@@ -10,6 +10,13 @@ import { BREADCRUMB_REX_PROJET } from "@/src/components/common/site-vitrine-brea
 type RetourExperiencePageProps = {
   params: Promise<{ retourExperienceSlug: string; projetId: string }>;
 };
+
+export async function generateStaticParams() {
+  const allRex = await getRetoursExperiences();
+  return allRex.map((rex) => ({
+    rexSlug: rex.attributes.slug || "",
+  }));
+}
 
 export async function generateMetadata(props: RetourExperiencePageProps): Promise<Metadata> {
   const params = await props.params;
