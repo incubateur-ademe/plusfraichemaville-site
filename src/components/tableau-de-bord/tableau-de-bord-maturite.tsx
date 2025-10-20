@@ -2,15 +2,11 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Maturite } from "../maturite/maturite";
 
 import { Spinner } from "../common/spinner";
-import { daysUntilDate, getRelativeDate } from "@/src/helpers/dateUtils";
 import clsx from "clsx";
+import { ProjetLastModification } from "@/src/components/espace-projet/statut-projet/projet-last-modification";
 
 export const TableauDeBordMaturite = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-
-  const updatedAt = projet?.updated_at;
-  const lastUpdate = updatedAt && -daysUntilDate(updatedAt)!;
-  const formattedDate = getRelativeDate(lastUpdate);
 
   return (
     <div
@@ -31,14 +27,7 @@ export const TableauDeBordMaturite = () => {
           )}
         </div>
       </section>
-      {updatedAt && (
-        <section>
-          <span className="block text-[18px] font-bold leading-6 text-pfmv-navy sm:text-end">
-            Dernière modification
-          </span>
-          <span className="block text-[18px] leading-6 text-pfmv-navy sm:text-end">{formattedDate}</span>
-        </section>
-      )}
+      <ProjetLastModification />
     </div>
   );
 };

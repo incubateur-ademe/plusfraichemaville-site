@@ -64,3 +64,22 @@ export const BannerPictoPartage = ({ active }: BannerPictoProps) => {
     </svg>
   );
 };
+export const BannerPictoStatut = ({ active }: BannerPictoProps) => {
+  const isActive = active ? "#fff" : "#000091";
+
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="28"
+      height="24"
+      viewBox="-1 -3 20 24"
+      fill="none"
+      className="pointer-events-none absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+    >
+      <path
+        d="M19 -0.000488281C19.5523 -0.000488281 20 0.447227 20 0.999512V14.9995C20 15.5518 19.5523 15.9995 19 15.9995H4.455L0 19.4995V0.999512C0 0.447227 0.447715 -0.000488281 1 -0.000488281H19ZM11 9.99951H9V11.9995H11V9.99951ZM11 3.99951H9V8.99951H11V3.99951Z"
+        fill={isActive}
+      />
+    </svg>
+  );
+};

@@ -6,6 +6,7 @@ import {
   BannerPictoPartage,
   BannerPictoProps,
   BannerPictoRecommandations,
+  BannerPictoStatut,
   BannerPictoTableauDeSuivi,
 } from "./banner-projet-buttons-pictos";
 import { useRef } from "react";
@@ -34,6 +35,11 @@ export const BannerProjetButtons = ({ projetId }: { projetId: number }) => {
       url: "partage" as const,
       tooltip: "Partage",
       picto: ({ active }: BannerPictoProps) => <BannerPictoPartage active={active} />,
+    },
+    {
+      url: "statut" as const,
+      tooltip: "Vos retours",
+      picto: ({ active }: BannerPictoProps) => <BannerPictoStatut active={active} />,
     },
   ];
 
