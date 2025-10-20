@@ -10,7 +10,7 @@ export const ContactIframe = ({ className }: { className?: string }) => {
   const queryParams = {
     ...(userEmail && { email: userEmail }),
     ...(user?.nom && { nom: user.nom }),
-    ...(user?.prenom && { nom: user.prenom }),
+    ...(user?.prenom && { prenom: user.prenom }),
     ...(userSiret && { siret: userSiret }),
   };
   const searchParams = new URLSearchParams(queryParams);
