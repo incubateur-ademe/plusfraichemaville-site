@@ -17,7 +17,7 @@ export const NavigationCard = ({
       }}
       className={clsx(
         className,
-        "max-w-[21rem] rounded-xl bg-white",
+        "pointer-events-none max-w-[21rem] rounded-xl bg-white",
         "outline outline-1 outline-offset-0 outline-dsfr-border-default-grey hover:outline-dsfr-text-label-blue-france",
       )}
     >
