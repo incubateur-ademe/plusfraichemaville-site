@@ -2,19 +2,28 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { BreadcrumbSegment } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
 
-export const BREADCRUMB_SEGMENT_DASHBOARD = (projetId: number): BreadcrumbSegment => ({
-  linkProps: {
-    href: PFMV_ROUTES.TABLEAU_DE_BORD(projetId),
+export const BREADCRUMB_SEGMENT_DASHBOARD = (projetId: number, projetName: string): BreadcrumbSegment[] => [
+  {
+    linkProps: {
+      href: PFMV_ROUTES.ESPACE_PROJET,
+    },
+    label: "Mes projets",
   },
-  label: "Tableau de bord",
-});
+  {
+    linkProps: {
+      href: PFMV_ROUTES.TABLEAU_DE_BORD(projetId),
+    },
+    label: projetName,
+  },
+];
 
 export type EspaceProjetBreadcrumbStep = {
   currentPageLabel: string;
-  breadcrumbSegments: (_: number) => BreadcrumbSegment[];
+  breadcrumbSegments: (_projetId: number, _projetName: string) => BreadcrumbSegment[];
 };
 
 export const BREADCRUMB_EDIT_PROJET: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Renseignements sur mon projet",
-  breadcrumbSegments: (projetId: number) => [BREADCRUMB_SEGMENT_DASHBOARD(projetId)],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
 };

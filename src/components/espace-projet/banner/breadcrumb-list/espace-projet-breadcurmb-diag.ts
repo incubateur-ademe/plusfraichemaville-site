@@ -39,62 +39,63 @@ const BREADCRUMB_SEGMENT_DIAG_PRESTATION_LISTE = (projetId: number): BreadcrumbS
 });
 export const BREADCRUMB_CHOIX_PARCOURS_DIAGNOSTIC: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(0).label,
-  breadcrumbSegments: (projetId: number) => [BREADCRUMB_SEGMENT_DASHBOARD(projetId)],
+  breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
 };
 export const BREADCRUMB_DIAG_FICHE: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Méthode de diagnostic",
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-    BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
-    BREADCRUMB_SEGMENT_DIAG_MES_PRESTATIONS(projetId),
-    BREADCRUMB_SEGMENT_DIAG_PRESTATION_LISTE(projetId),
-  ],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    [
+      BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+      BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
+      BREADCRUMB_SEGMENT_DIAG_MES_PRESTATIONS(projetId),
+      BREADCRUMB_SEGMENT_DIAG_PRESTATION_LISTE(projetId),
+    ].flat(1),
 };
 export const BREADCRUMB_DIAG_REX: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Diagnostic réalisé",
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-    BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
-    BREADCRUMB_SEGMENT_DIAG_MES_PRESTATIONS(projetId),
-    BREADCRUMB_SEGMENT_DIAG_PRESTATION_LISTE(projetId),
-  ],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    [
+      BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+      BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
+      BREADCRUMB_SEGMENT_DIAG_MES_PRESTATIONS(projetId),
+      BREADCRUMB_SEGMENT_DIAG_PRESTATION_LISTE(projetId),
+    ].flat(1),
 };
 export const BREADCRUMB_DIAG_PRESTATION_SELECTION: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_DIAG_MES_PRESTATIONS(0).label,
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-    BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
-  ],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    [BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName), BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId)].flat(1),
 };
 export const BREADCRUMB_DIAG_PRESTATION_LISTE: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_DIAG_PRESTATION_LISTE(0).label,
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-    BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
-    BREADCRUMB_SEGMENT_DIAG_MES_PRESTATIONS(projetId),
-  ],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    [
+      BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+      BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
+      BREADCRUMB_SEGMENT_DIAG_MES_PRESTATIONS(projetId),
+    ].flat(1),
 };
 export const BREADCRUMB_DIAG_INDICATEURS_PRESENTATION: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_DIAG_INDICATEURS_PRESENTATION(0).label,
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-    BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
-  ],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    [BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName), BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId)].flat(1),
 };
 export const BREADCRUMB_DIAG_INDICATEURS_QUESTIONS: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_DIAG_INDICATEURS_QUESTIONS(0).label,
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-    BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
-    BREADCRUMB_SEGMENT_DIAG_INDICATEURS_PRESENTATION(projetId),
-  ],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    [
+      BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+      BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
+      BREADCRUMB_SEGMENT_DIAG_INDICATEURS_PRESENTATION(projetId),
+    ].flat(1),
 };
 export const BREADCRUMB_DIAG_INDICATEURS_RESULTATS: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Résultats de mon diagnostic",
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-    BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
-    BREADCRUMB_SEGMENT_DIAG_INDICATEURS_PRESENTATION(projetId),
-    BREADCRUMB_SEGMENT_DIAG_INDICATEURS_QUESTIONS(projetId),
-  ],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    [
+      BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+      BREADCRUMB_SEGMENT_DIAG_CHOIX_PARCOURS(projetId),
+      BREADCRUMB_SEGMENT_DIAG_INDICATEURS_PRESENTATION(projetId),
+      BREADCRUMB_SEGMENT_DIAG_INDICATEURS_QUESTIONS(projetId),
+    ].flat(1),
 };

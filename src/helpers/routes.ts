@@ -48,6 +48,7 @@ export const PFMV_ROUTES = {
     projetId: number,
     tab: "tableau-de-suivi" | "recommandation" | "partage" | "statut",
   ) => `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
+  ESPACE_PROJET_STATUT_PROJET: (projetId: number)=> `/espace-projet/${projetId}/tableau-de-bord?tab=statut`,
   ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiche-solution`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiche-solution/liste`,

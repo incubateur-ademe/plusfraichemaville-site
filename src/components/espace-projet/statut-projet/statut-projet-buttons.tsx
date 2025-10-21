@@ -1,5 +1,5 @@
 "use client";
-import { STATUT_PROJET_BUTTONS } from "@/src/components/espace-projet/statut-projet/statut-projet";
+import { ALL_STATUT_PROJET } from "@/src/components/espace-projet/statut-projet/statut-projet";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { updateProjetStatutAction } from "@/src/actions/projets/update-projet-statut-action";
 import Image from "next/image";
@@ -25,7 +25,7 @@ export const StatutProjetButtons = () => {
 
   return (
     <div className="flex flex-row flex-wrap gap-6">
-      {STATUT_PROJET_BUTTONS.map((statutProjetButton) => (
+      {ALL_STATUT_PROJET.map((statutProjetButton) => (
         <button
           key={statutProjetButton.statut}
           role="radio"
@@ -41,8 +41,8 @@ export const StatutProjetButtons = () => {
           aria-selected={projet.statut === statutProjetButton.statut}
         >
           <div className="mb-0 flex items-center gap-2 text-xl font-bold">
-            <Image src={statutProjetButton.icon} alt="" width={40} height={40} />
-            {statutProjetButton.label}
+            <Image src={statutProjetButton.buttonIcon} alt="" width={40} height={40} />
+            {statutProjetButton.buttonLabel}
           </div>
         </button>
       ))}

@@ -4,13 +4,14 @@ import { PictoEspaceSelector } from "@/src/components/common/pictos";
 import { PictoId } from "@/src/components/common/pictos/picto-espace-selector";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
-import { BannerProjetButtons } from "./banner-projet-buttons";
 import { Suspense } from "react";
 import { BannerProjetSkeleton } from "./banner-projet-skeleton";
 import { LecteurModeLabel } from "@/src/components/common/lecteur-mode-label";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
-import Link from "next/link";
+import Button from "@codegouvfr/react-dsfr/Button";
+import Tag from "@codegouvfr/react-dsfr/Tag";
+import { getStatutProjetByStatut } from "@/src/components/espace-projet/statut-projet/statut-projet";
 
 export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -34,32 +35,45 @@ export default function BannerProjet({ className }: { className?: string }) {
                 />
               </div>
               <div className="flex flex-col justify-between py-1">
-                <Link
-                  prefetch={false}
-                  className="mb-1 w-fit rounded !bg-none"
-                  href={{
-                    pathname: PFMV_ROUTES.ESPACE_PROJET,
-                    hash: currentProjet.collectivite.code_insee || currentProjet.collectivite.nom,
-                  }}
-                >
-                  <div
-                    className={clsx(
-                      "rounded bg-dsfr-background-action-low-blue-france text-base hover:underline",
-                      "flex h-7 items-center pl-2 pr-3",
-                    )}
-                  >
-                    <i className="ri-home-2-fill fr-icon--sm mr-1 before:!size-3.5" />
-                    {currentProjet.collectivite.nom}
-                  </div>
-                </Link>
-                <h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">
+                <div className="flex items-center gap-6">
+                  <h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">
+                    <LinkWithoutPrefetch
+                      href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
+                      className="!bg-none text-pfmv-navy"
+                    >
+                      {currentProjet.nom}
+                    </LinkWithoutPrefetch>
+                  </h1>
                   <LinkWithoutPrefetch
-                    href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
-                    className="!bg-none text-pfmv-navy"
+                    href={PFMV_ROUTES.ESPACE_PROJET_INFO_PROJET(currentProjet.id)}
+                    className="!bg-none text-sm text-pfmv-navy hover:underline"
                   >
-                    {currentProjet.nom}
+                    <i className="ri-edit-box-line fr-icon--sm mr-1" />
+                    Éditer le projet
                   </LinkWithoutPrefetch>
-                </h1>
+                </div>
+                <div className="flex items-center gap-6">
+                  <Tag
+                    linkProps={{
+                      href: `${PFMV_ROUTES.ESPACE_PROJET}#${
+                        currentProjet.collectivite.code_insee || currentProjet.collectivite.nom
+                      }`,
+                    }}
+                    iconId="ri-home-4-fill"
+                    className="!bg-white hover:underline"
+                  >
+                    {currentProjet.collectivite.nom}
+                  </Tag>
+                  <Tag
+                    linkProps={{
+                      href: PFMV_ROUTES.ESPACE_PROJET_STATUT_PROJET(currentProjet.id),
+                    }}
+                    iconId={getStatutProjetByStatut(currentProjet.statut).progressIconId}
+                    className="!bg-white hover:underline"
+                  >
+                    {getStatutProjetByStatut(currentProjet.statut).progressLabel}
+                  </Tag>
+                </div>
               </div>
             </div>
             <div className="flex gap-4">
@@ -69,7 +83,15 @@ export default function BannerProjet({ className }: { className?: string }) {
                 </div>
               )}
               <Suspense>
-                <BannerProjetButtons projetId={currentProjet.id} />
+                <Button
+                  iconId="fr-icon-user-add-line"
+                  className="rounded-3xl"
+                  linkProps={{ href: PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(currentProjet.id, "partage") }}
+                  priority="secondary"
+                >
+                  Inviter des membres
+                </Button>
+                {/*<BannerProjetButtons projetId={currentProjet.id} />*/}
               </Suspense>
             </div>
           </div>

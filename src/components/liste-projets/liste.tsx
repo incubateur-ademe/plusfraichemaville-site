@@ -37,7 +37,7 @@ export const ListeProjetTab = ({
           id={collectiviteWithProjet.collectivite.code_insee || collectiviteWithProjet.collectivite.nom}
         >
           <h2 className="mb-4 text-[22px] font-bold leading-normal  text-pfmv-navy">
-            <i className="ri-home-2-fill mr-2  before:!w-[20px]"></i>
+            <i className="ri-home-4-fill mr-2  before:!w-[20px]"></i>
             {collectiviteWithProjet.collectivite.nom}
           </h2>
           <ul>
