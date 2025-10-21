@@ -164,6 +164,9 @@ export class EmailService {
       noProjetAfterSignupMail2: {
         templateId: 69,
       },
+      noProjetAfterSignupMail3: {
+        templateId: 70,
+      },
       projetFinishedToGetRex: {
         templateId: 73,
       },
@@ -406,15 +409,17 @@ export class EmailService {
     return await Promise.all(
       users.map(async (user) => {
         const nomCollectivite = user.collectivites[0]?.collectivite.nom;
+        const emailParams = {
+          userPrenom: user.prenom || "",
+          ...(nomCollectivite && { userCollectiviteName: `pour ${nomCollectivite}` }),
+          nbUtilisateurs: countAllUsers.toString(),
+        };
         return await this.sendEmail({
           to: user.email,
           userId: user.id,
           emailType: emailType.noProjetAfterSignupMail1,
-          params: {
-            userPrenom: user.prenom || "",
-            ...(nomCollectivite && { userCollectiviteName: `pour ${nomCollectivite}` }),
-            nbUtilisateurs: countAllUsers.toString(),
-          },
+          params: emailParams,
+          extra: emailParams,
         });
       }),
     );
@@ -428,14 +433,40 @@ export class EmailService {
     );
     return await Promise.all(
       users.map(async (user) => {
+        const emailParams = {
+          userPrenom: user.prenom || "",
+          urlUserStatus: getFullUrl(PFMV_ROUTES.MON_STATUT),
+        };
         return await this.sendEmail({
           to: user.email,
           userId: user.id,
           emailType: emailType.noProjetAfterSignupMail2,
-          params: {
-            userPrenom: user.prenom || "",
-            urlUserStatus: getFullUrl(PFMV_ROUTES.MON_STATUT),
-          },
+          params: emailParams,
+          extra: emailParams,
+        });
+      }),
+    );
+  }
+
+  async sendNoActivityAfterSignupEmail3(lastSyncDate: Date, inactivityDays: number) {
+    const users = await getUserWithNoActivityAfterSignup(
+      lastSyncDate,
+      inactivityDays,
+      emailType.noProjetAfterSignupMail3,
+    );
+    return await Promise.all(
+      users.map(async (user) => {
+        const nomCollectivite = user.collectivites[0]?.collectivite.nom;
+        const emailParams = {
+          userPrenom: user.prenom || "",
+          ...(nomCollectivite && { userCollectiviteName: `pour ${nomCollectivite}` }),
+        };
+        return await this.sendEmail({
+          to: user.email,
+          userId: user.id,
+          emailType: emailType.noProjetAfterSignupMail3,
+          params: emailParams,
+          extra: emailParams,
         });
       }),
     );

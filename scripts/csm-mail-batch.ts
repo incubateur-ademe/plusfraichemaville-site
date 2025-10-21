@@ -31,6 +31,13 @@ const main = async () => {
       USER_NO_PROJET_2_DAYS,
     );
 
+    const USER_NO_PROJET_3_DAYS = 45;
+    console.log(`Recherche des utilisateurs sans projet depuis ${USER_NO_PROJET_3_DAYS} jours...`);
+    const inactiveUserMail3 = await emailService.sendNoActivityAfterSignupEmail3(
+      lastSyncDate ?? removeDaysToDate(new Date(), USER_NO_PROJET_3_DAYS),
+      USER_NO_PROJET_3_DAYS,
+    );
+
     const FINISHED_PROJET_GET_QUESTIONNAIRE_SATISFACTION = 5;
     console.log(`Recherche des projets terminés depuis ${FINISHED_PROJET_GET_QUESTIONNAIRE_SATISFACTION} jours...`);
     const finishedProjetGetQuestionnaire = await emailService.sendQuestionnaireSatisfactionEmails(
@@ -95,6 +102,7 @@ const main = async () => {
       nbMailRemindModuleDiagnostic: sendRemindModuleDiagnosticMail.length,
       nbMailsInactiveUser1: inactiveUserMail1.length,
       nbMailsInactiveUser2: inactiveUserMail2.length,
+      nbMailsInactiveUser3: inactiveUserMail3.length,
       nbMailsGetRexFromFinishedProjet: finishedProjetGetRexMail.length,
       nbMailsSendQuestionnaireForFinishedProjet: finishedProjetGetQuestionnaire.length,
       nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
