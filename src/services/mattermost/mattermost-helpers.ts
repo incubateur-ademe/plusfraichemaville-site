@@ -2,6 +2,7 @@ type CsmBatchWebhookData = {
   nbMailRemindModuleDiagnostic: number;
   nbMailsInactiveUser1: number;
   nbMailsInactiveUser2: number;
+  nbMailsInactiveUser3: number;
   nbMailsGetRexFromFinishedProjet: number;
   nbMailsSendQuestionnaireForFinishedProjet: number;
   nbMailsUnfinishedDiag: number;
@@ -31,6 +32,8 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
 **Nb de mails d'utilisateurs sans projet à J+2 : ** ${data.nbMailsInactiveUser1} 
 
 **Nb de mails d'utilisateurs sans projet à J+14 : ** ${data.nbMailsInactiveUser2} 
+
+**Nb de mails d'utilisateurs sans projet à J+45 : ** ${data.nbMailsInactiveUser3} 
 
 **Nb de mails de projet terminés pour aller chercher des REX : ** ${data.nbMailsGetRexFromFinishedProjet} 
 

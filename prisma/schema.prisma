@@ -160,6 +160,7 @@ enum emailType {
   projetFinishedToGetRex
   noProjetAfterSignupMail1
   noProjetAfterSignupMail2
+  noProjetAfterSignupMail3
 }
 
 enum emailStatus {
