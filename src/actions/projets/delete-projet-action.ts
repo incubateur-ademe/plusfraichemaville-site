@@ -26,7 +26,7 @@ export const deleteProjetAction = async (projetId: number): Promise<ResponseActi
       await createAnalytic({
         context: null,
         event_type: EventType.UPDATE_PROJET_SET_INVISIBLE,
-        reference_id: projetId,
+        reference_id: projetId.toString(),
         reference_type: ReferenceType.PROJET,
         user_id: session.user.id,
       });

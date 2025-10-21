@@ -3,7 +3,7 @@ import {
   getUserWithNoActivityAfterSignup,
   updateEmailStatus as updateEmailStatusQuery,
 } from "@/src/lib/prisma/prisma-email-queries";
-import { email, emailStatus, emailType } from "@/src/generated/prisma/client";
+import { email, emailStatus, emailType, FicheType, RoleProjet } from "@/src/generated/prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
 import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";
@@ -11,22 +11,71 @@ import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { ProjetWithRelations, UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
-import { ContactFormData } from "@/src/forms/contact/contact-form-schema";
 import {
-  getProjetsForProjetCreationEmail,
+  getProjetsFinishedToGetQuestionnaire,
+  getProjetsFinishedToGetRex,
+  getProjetsForRemindDiagnostic,
   getProjetsForRemindDiagnosticEmail,
+  getProjetsForRemindToChooseSolution,
+  getProjetsForRemindToDoEstimation,
+  getProjetsForRemindToDoFinancement,
+  getProjetsUnfinishedAndLastUpdatedBetween,
+  getProjetsUnfinishedAndLastUpdatedBetween2,
 } from "@/src/lib/prisma/prismaProjetQueries";
-import { daysUntilDate, removeDaysToDate } from "@/src/helpers/dateUtils";
-import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
-import shuffle from "lodash/shuffle";
-import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
-import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
+import { removeDaysToDate } from "@/src/helpers/dateUtils";
+import { getCountAllUsers, getUserById } from "@/src/lib/prisma/prismaUserQueries";
+import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
+import { UserInfoFormData } from "@/src/forms/user/UserInfoFormSchema";
 
 interface Templates {
   templateId: number;
 }
 
 type EmailSendResult = ResponseAction<{ email?: email }>;
+
+export type EmailRemindToDoDiagnosticConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule2: string;
+};
+
+export type EmailRemindChooseSolutionConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule3: string;
+};
+
+export type EmailRemindDoEstimationConfig = {
+  projetName: string;
+  userPrenom: string;
+  nomSolution1?: string;
+  nomSolution2?: string;
+  nomSolution3?: string;
+  plusDeTroisSolutions: boolean;
+  urlModule4: string;
+};
+
+export type EmailRemindFindFinancementConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule5: string;
+};
+
+export type EmailRemindUnfinishedAndInactiveProjetConfig = {
+  userPrenom: string;
+  urlProjetStatus: string;
+};
+
+export type EmailRemindUnfinishedAndInactiveProjet2Config = {
+  userPrenom: string;
+  projetName: string;
+  urlTableauDeBord: string;
+};
 
 export type EmailProjetPartageConfig = {
   username: string;
@@ -37,44 +86,26 @@ export type EmailProjetPartageConfig = {
   destinationMail: string;
 };
 
-export type EmailProjetCreationParam = {
-  nomUtilisateur: string;
-  nomProjet: string;
-  rex1Titre?: string;
-  rex1Url?: string;
-  rex2Titre?: string;
-  rex2Url?: string;
-  rex3Titre?: string;
-  rex3Url?: string;
-  rex4Titre?: string;
-  rex4Url?: string;
-};
-
-const computeProjetCreationEmailParam = (
+const computeRemindToDoEstimationEmailParam = (
   projet: ProjetWithRelations,
-  rexExamples: RetourExperience[],
-): EmailProjetCreationParam => {
-  if (rexExamples.length < 3) {
-    return {
-      nomProjet: projet.nom,
-      nomUtilisateur: projet.creator.nom || "",
-    };
-  } else {
-    return {
-      nomProjet: projet.nom,
-      nomUtilisateur: projet.creator.nom || "",
-      rex1Titre: rexExamples[0].attributes.titre,
-      rex1Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[0].attributes.slug)),
-      rex2Titre: rexExamples[1].attributes.titre,
-      rex2Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[1].attributes.slug)),
-      rex3Titre: rexExamples[2].attributes.titre,
-      rex3Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[2].attributes.slug)),
-      rex4Titre: rexExamples[3]?.attributes.titre,
-      ...(rexExamples[3] && {
-        rex4Url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rexExamples[3]?.attributes.slug)),
-      }),
-    };
-  }
+  allFichesSolutions: FicheSolution[],
+): EmailRemindDoEstimationConfig => {
+  const chosenFichesSolutions = projet.fiches.filter((fiche) => fiche.type === FicheType.SOLUTION);
+  return {
+    projetName: projet.nom,
+    userPrenom: projet.creator.prenom || "",
+    ...(chosenFichesSolutions[0] && {
+      nomSolution1: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[0].fiche_id)?.attributes.titre,
+    }),
+    ...(chosenFichesSolutions[1] && {
+      nomSolution2: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[1].fiche_id)?.attributes.titre,
+    }),
+    ...(chosenFichesSolutions[2] && {
+      nomSolution3: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[2].fiche_id)?.attributes.titre,
+    }),
+    plusDeTroisSolutions: chosenFichesSolutions.length > 3,
+    urlModule4: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(projet.id)),
+  };
 };
 
 export class EmailService {
@@ -100,6 +131,9 @@ export class EmailService {
       welcomeMessage: {
         templateId: 52,
       },
+      welcomeMessageV2: {
+        templateId: 62,
+      },
       projetCreation: {
         templateId: 54,
       },
@@ -108,6 +142,39 @@ export class EmailService {
       },
       remindNotCompletedDiagnostic: {
         templateId: 60,
+      },
+      projetRemindToDoDiagnostic: {
+        templateId: 63,
+      },
+      projetRemindToDoSolution: {
+        templateId: 64,
+      },
+      projetRemindToDoEstimation: {
+        templateId: 65,
+      },
+      projetRemindToDoFinancement: {
+        templateId: 66,
+      },
+      projetUnfinishedInactive: {
+        templateId: 71,
+      },
+      noProjetAfterSignupMail1: {
+        templateId: 67,
+      },
+      noProjetAfterSignupMail2: {
+        templateId: 69,
+      },
+      noProjetAfterSignupMail3: {
+        templateId: 70,
+      },
+      projetFinishedToGetRex: {
+        templateId: 73,
+      },
+      projetFinishedQuestionnaireSatisfaction: {
+        templateId: 72,
+      },
+      projetUnfinishedInactive2: {
+        templateId: 74,
       },
     };
   }
@@ -126,7 +193,7 @@ export class EmailService {
   }: {
     to: string;
     emailType: emailType;
-    params?: Record<string, string>;
+    params?: Record<string, string | boolean>;
     userProjetId?: number;
     userId?: string;
     extra?: any;
@@ -135,7 +202,10 @@ export class EmailService {
     const dbEmail = await createEmail({ to, emailType, userProjetId, userId, extra });
 
     try {
-      const response = await brevoSendEmail(to, templateId, params);
+      const response = await brevoSendEmail(to, templateId, {
+        ...params,
+        communicationSettingsUrl: getFullUrl(PFMV_ROUTES.PREFERENCES_COMMUNICATION),
+      });
 
       if (!response.ok) {
         const data = await response.json();
@@ -225,61 +295,179 @@ export class EmailService {
     return { type: "error", message: "ADMIN_NOT_FOUND" };
   }
 
-  async sendContactMessageReceivedEmail(data: ContactFormData) {
-    return this.sendEmail({ to: data.email, emailType: emailType.contactMessageSent, extra: data });
-  }
-
-  async sendWelcomeMessageEmail(data: Pick<ContactFormData, "email" | "nom">) {
+  async sendWelcomeMessageEmail(data: Pick<UserInfoFormData, "email" | "nom"> & { nomCollectivite?: string }) {
+    const mailParams = { ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) };
     return this.sendEmail({
       to: data.email,
-      emailType: emailType.welcomeMessage,
-      params: { NOM: data.nom },
-      extra: data,
+      emailType: emailType.welcomeMessageV2,
+      params: mailParams,
+      extra: mailParams,
     });
   }
 
-  async sendProjetCreationEmail(lastSyncDate: Date) {
-    const projets = await getProjetsForProjetCreationEmail(lastSyncDate, new Date());
-    console.log(`Nb de mails de création de projet à envoyer : ${projets.length}`);
-    const allRex = await getRetoursExperiences();
-    const shuffledRex = shuffle(allRex);
+  async sendRemindDoDiagnosticMail(lastSyncDate: Date) {
+    const projets = await getProjetsForRemindDiagnostic(lastSyncDate, new Date());
+    console.log(`Nb de mails de projet avec le module Diagnostic à faire : ${projets.length}`);
     return await Promise.all(
       projets.map(async (projet) => {
-        const rexExamples = shuffledRex
-          .filter((rex) => rex.attributes.types_espaces?.includes(projet.type_espace))
-          .slice(0, 4);
-        const emailParams = computeProjetCreationEmailParam(projet, rexExamples);
+        const emailParams: EmailRemindToDoDiagnosticConfig = {
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          urlModule2: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projet.id)),
+        };
         return await this.sendEmail({
           to: projet.creator.email,
-          emailType: emailType.projetCreation,
+          emailType: emailType.projetRemindToDoDiagnostic,
           params: emailParams,
           extra: emailParams,
-          userProjetId: projet.users.find((up) => up.role === "ADMIN")?.id,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
         });
       }),
     );
   }
 
-  async sendNoActivityAfterSignupEmail(lastSyncDate: Date, inactivityDays = 10) {
-    const users = await getUserWithNoActivityAfterSignup(lastSyncDate, inactivityDays);
+  async sendRemindChooseSolutionMail(lastSyncDate: Date) {
+    const projetsToRemindSolution = await getProjetsForRemindToChooseSolution(lastSyncDate, new Date());
+    console.log(`Nb de mails de projet avec le module Fiche Solution à faire : ${projetsToRemindSolution.length}`);
+    return await Promise.all(
+      projetsToRemindSolution.map(async (projet) => {
+        const emailParams: EmailRemindChooseSolutionConfig = {
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          urlModule3: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(projet.id)),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToDoSolution,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendRemindMakeEstimationMail(lastSyncDate: Date, nbDaysToWaitAfterAddingFicheSolution: number) {
+    const projetsToRemindEstimation = await getProjetsForRemindToDoEstimation(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterAddingFicheSolution),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterAddingFicheSolution),
+    );
+    console.log(`Nb de mails de projet où le module estimation est à faire  : ${projetsToRemindEstimation.length}`);
+    const allFichesSolutions = await getAllFichesSolutions();
+    return await Promise.all(
+      projetsToRemindEstimation.map(async (projet) => {
+        const emailParams: EmailRemindDoEstimationConfig = computeRemindToDoEstimationEmailParam(
+          projet,
+          allFichesSolutions,
+        );
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToDoEstimation,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendRemindChooseFinancementMail(lastSyncDate: Date, nbDaysToWaitAfterMakingEstimation: number) {
+    const projetsToRemindFinancement = await getProjetsForRemindToDoFinancement(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterMakingEstimation),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterMakingEstimation),
+    );
+    console.log(`Nb de mails de projet où le module financement est à faire : ${projetsToRemindFinancement.length}`);
+    return await Promise.all(
+      projetsToRemindFinancement.map(async (projet) => {
+        const emailParams: EmailRemindFindFinancementConfig = {
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          urlModule5: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT(projet.id)),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToDoFinancement,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendNoActivityAfterSignupEmail1(lastSyncDate: Date, inactivityDays: number) {
+    const users = await getUserWithNoActivityAfterSignup(
+      lastSyncDate,
+      inactivityDays,
+      emailType.noProjetAfterSignupMail1,
+    );
+    const countAllUsers = await getCountAllUsers();
 
     return await Promise.all(
       users.map(async (user) => {
-        const result = await this.sendEmail({
+        const nomCollectivite = user.collectivites[0]?.collectivite.nom;
+        const emailParams = {
+          userPrenom: user.prenom || "",
+          ...(nomCollectivite && { userCollectiviteName: `pour ${nomCollectivite}` }),
+          nbUtilisateurs: countAllUsers.toString(),
+        };
+        return await this.sendEmail({
           to: user.email,
           userId: user.id,
-          emailType: emailType.noActivityAfterSignup,
-          params: {
-            nom: user.nom || "",
-            dateCreationCompte: Math.abs(daysUntilDate(user.created_at)!)?.toString() || "10",
-          },
+          emailType: emailType.noProjetAfterSignupMail1,
+          params: emailParams,
+          extra: emailParams,
         });
+      }),
+    );
+  }
 
-        if (result.type === "success") {
-          console.log(`Email envoyé à ${user.email} - type: ${emailType.noActivityAfterSignup}`);
-        }
+  async sendNoActivityAfterSignupEmail2(lastSyncDate: Date, inactivityDays: number) {
+    const users = await getUserWithNoActivityAfterSignup(
+      lastSyncDate,
+      inactivityDays,
+      emailType.noProjetAfterSignupMail2,
+    );
+    return await Promise.all(
+      users.map(async (user) => {
+        const emailParams = {
+          userPrenom: user.prenom || "",
+          urlUserStatus: getFullUrl(PFMV_ROUTES.MON_STATUT),
+        };
+        return await this.sendEmail({
+          to: user.email,
+          userId: user.id,
+          emailType: emailType.noProjetAfterSignupMail2,
+          params: emailParams,
+          extra: emailParams,
+        });
+      }),
+    );
+  }
 
-        return result;
+  async sendNoActivityAfterSignupEmail3(lastSyncDate: Date, inactivityDays: number) {
+    const users = await getUserWithNoActivityAfterSignup(
+      lastSyncDate,
+      inactivityDays,
+      emailType.noProjetAfterSignupMail3,
+    );
+    return await Promise.all(
+      users.map(async (user) => {
+        const nomCollectivite = user.collectivites[0]?.collectivite.nom;
+        const emailParams = {
+          userPrenom: user.prenom || "",
+          ...(nomCollectivite && { userCollectiviteName: `pour ${nomCollectivite}` }),
+        };
+        return await this.sendEmail({
+          to: user.email,
+          userId: user.id,
+          emailType: emailType.noProjetAfterSignupMail3,
+          params: emailParams,
+          extra: emailParams,
+        });
       }),
     );
   }
@@ -294,8 +482,8 @@ export class EmailService {
       projets.map(async (projet) => {
         if (projet.diagnostic_simulations[0].user_id) {
           const userToContact = await getUserById(projet.diagnostic_simulations[0].user_id);
-          if (userToContact) {
-            const result = await this.sendEmail({
+          if (userToContact && userToContact.accept_communication_suivi_projet) {
+            return await this.sendEmail({
               to: userToContact.email,
               userId: userToContact.id,
               emailType: emailType.remindNotCompletedDiagnostic,
@@ -305,13 +493,103 @@ export class EmailService {
                 lienRepriseDiag: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION(projet.id)),
               },
             });
-
-            if (result.type === "success") {
-              console.log(`Email envoyé à ${userToContact.email} - type: ${emailType.remindNotCompletedDiagnostic}`);
-            }
-            return result;
+          } else {
+            console.log(
+              `Email de rappel de diag non terminé non envoyé à ${userToContact?.email} car refus email suivi`,
+            );
           }
         }
+      }),
+    );
+  }
+
+  async sendRemindUnfinishedAndInactiveProjets1(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsUnfinishedAndLastUpdatedBetween(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de projets inactifs depuis ${inactivityDays} jours à envoyer : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const emailParams: EmailRemindUnfinishedAndInactiveProjetConfig = {
+          userPrenom: projet.creator.prenom || "",
+          urlProjetStatus: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projet.id, "statut")),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetUnfinishedInactive,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendRemindUnfinishedAndInactiveProjets2(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsUnfinishedAndLastUpdatedBetween2(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de projets inactifs depuis ${inactivityDays} jours à envoyer : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const emailParams: EmailRemindUnfinishedAndInactiveProjet2Config = {
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          urlTableauDeBord: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projet.id, "tableau-de-suivi")),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetUnfinishedInactive2,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendGetRexFromFinishedProjetEmails(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsFinishedToGetRex(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de projets terminés à envoyer pour avoir un REX : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const emailParams = {
+          userPrenom: projet.creator.prenom || "",
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetFinishedToGetRex,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendQuestionnaireSatisfactionEmails(lastSyncDate: Date, inactivityDays: number) {
+    const projets = await getProjetsFinishedToGetQuestionnaire(
+      removeDaysToDate(lastSyncDate, inactivityDays),
+      removeDaysToDate(new Date(), inactivityDays),
+    );
+    console.log(`Nb de mails de projets terminés à envoyer pour le questionnaire de satisfaction : ${projets.length}`);
+    return await Promise.all(
+      projets.map(async (projet) => {
+        const emailParams = {
+          userPrenom: projet.creator.prenom || "",
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetFinishedQuestionnaireSatisfaction,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
       }),
     );
   }

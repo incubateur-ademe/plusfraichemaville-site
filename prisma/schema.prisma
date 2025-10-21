@@ -29,38 +29,49 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+enum StatutUser {
+  pas_trouve
+  pas_maintenant
+  pas_compris
+  sans_pfmv
+  autre
+}
+
 model User {
-  id                           String                    @id @default(cuid())
-  email                        String                    @unique
-  emailVerified                DateTime?
-  image                        String?
-  accounts                     Account[]
-  agentconnect_info            Json?
-  nom                          String?
-  prenom                       String?
-  poste                        String?
-  nom_etablissement            String?
-  siren_info                   Json?
-  created_at                   DateTime                  @default(now())
-  updated_at                   DateTime?                 @updatedAt
-  collectivites_created        collectivite[]            @relation(name: "collectivite_creator")
-  projets_created              projet[]
-  estimations_created          estimation[]              @relation(name: "estimation_creator")
-  estimations_deleted          estimation[]              @relation(name: "estimation_deleter")
-  projets_deleted              projet[]                  @relation(name: "projet_deleter")
-  collectivites                user_collectivite[]       @relation(name: "collectivite_belonging")
-  projets                      user_projet[]             @relation(name: "projet_access")
-  canal_acquisition            String?
-  user_projet_deleted          user_projet[]             @relation(name: "user_projet_deleter")
-  discardedInformation         String[]
-  conversations                conversation[]
-  Analytics                    Analytics[]
-  sourcing_contacts_created    projet_sourcing_contact[]
-  accept_communication_produit Boolean                   @default(true)
-  emails                       email[]
-  estimations_aides            estimations_aides[]
-  fiches                       projet_fiche[]
-  diagnostic_simulation        diagnostic_simulation[]
+  id                                String                    @id @default(cuid())
+  email                             String                    @unique
+  emailVerified                     DateTime?
+  image                             String?
+  accounts                          Account[]
+  agentconnect_info                 Json?
+  nom                               String?
+  prenom                            String?
+  poste                             String?
+  nom_etablissement                 String?
+  siren_info                        Json?
+  created_at                        DateTime                  @default(now())
+  updated_at                        DateTime?                 @updatedAt
+  collectivites_created             collectivite[]            @relation(name: "collectivite_creator")
+  projets_created                   projet[]
+  estimations_created               estimation[]              @relation(name: "estimation_creator")
+  estimations_deleted               estimation[]              @relation(name: "estimation_deleter")
+  projets_deleted                   projet[]                  @relation(name: "projet_deleter")
+  collectivites                     user_collectivite[]       @relation(name: "collectivite_belonging")
+  projets                           user_projet[]             @relation(name: "projet_access")
+  canal_acquisition                 String?
+  user_projet_deleted               user_projet[]             @relation(name: "user_projet_deleter")
+  discardedInformation              String[]
+  conversations                     conversation[]
+  Analytics                         Analytics[]
+  sourcing_contacts_created         projet_sourcing_contact[]
+  accept_communication_produit      Boolean                   @default(true)
+  accept_communication_suivi_projet Boolean                   @default(true)
+  emails                            email[]
+  estimations_aides                 estimations_aides[]
+  fiches                            projet_fiche[]
+  diagnostic_simulation             diagnostic_simulation[]
+  statut                            StatutUser?
+  statut_updated_at                 DateTime?
 }
 
 model VerificationToken {
@@ -136,8 +147,20 @@ enum emailType {
   projetAccessDeclined
   contactMessageSent
   welcomeMessage
+  welcomeMessageV2
   noActivityAfterSignup
   remindNotCompletedDiagnostic
+  projetRemindToDoSolution
+  projetRemindToDoDiagnostic
+  projetRemindToDoEstimation
+  projetRemindToDoFinancement
+  projetUnfinishedInactive
+  projetUnfinishedInactive2
+  projetFinishedQuestionnaireSatisfaction
+  projetFinishedToGetRex
+  noProjetAfterSignupMail1
+  noProjetAfterSignupMail2
+  noProjetAfterSignupMail3
 }
 
 enum emailStatus {
@@ -171,6 +194,12 @@ model user_collectivite {
   @@id(name: "userCollectiviteId", [user_id, collectivite_id])
 }
 
+enum StatutProjet {
+  termine
+  en_cours
+  besoin_aide
+}
+
 model projet {
   id                        Int                       @id
   created_by                String
@@ -200,6 +229,8 @@ model projet {
   sourcing_user_projets     projet_sourcing_contact[] @relation("sourcing_projet")
   fiches                    projet_fiche[]
   diagnostic_simulations    diagnostic_simulation[]
+  statut                    StatutProjet?
+  statut_updated_at         DateTime?
 }
 
 enum FicheType {
@@ -330,6 +361,8 @@ enum ReferenceType {
 
 enum EventType {
   UPDATE_MATURITE
+  UPDATE_STATUT_PROJET
+  UPDATE_STATUT_USER
   UPDATE_PROJET_SET_VISIBLE
   UPDATE_PROJET_SET_INVISIBLE
 }
@@ -338,7 +371,7 @@ model Analytics {
   id             String        @id @default(cuid())
   created_at     DateTime      @default(now())
   created_by     User          @relation(fields: [user_id], references: [id])
-  reference_id   Int
+  reference_id   String
   reference_type ReferenceType
   event_type     EventType
   context        Json?
