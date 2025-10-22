@@ -6,11 +6,13 @@ import Image from "next/image";
 import clsx from "clsx";
 import { StatutProjet } from "@/src/generated/prisma/client";
 import { useState } from "react";
+import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 
 export const StatutProjetButtons = () => {
   const [loading, setLoading] = useState(false);
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
+  const isLecteur = useIsLecteur();
   if (!projet) {
     return null;
   }
@@ -28,6 +30,7 @@ export const StatutProjetButtons = () => {
       {ALL_STATUT_PROJET.map((statutProjetButton) => (
         <button
           key={statutProjetButton.statut}
+          disabled={!isLecteur}
           role="radio"
           onClick={() => {
             handleStatutChange(statutProjetButton.statut);

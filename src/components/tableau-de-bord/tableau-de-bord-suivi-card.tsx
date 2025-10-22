@@ -14,7 +14,6 @@ export type TableauDeBordCardType =
   | "estimation"
   | "financement"
   | "annuaire"
-  | "renseignement"
   | "solution";
 
 export type TableauDeBordSuiviCardProps = {
