@@ -41,7 +41,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                 />
               </div>
               <div className="flex flex-wrap w-full gap-3 items-center justify-between">
-                <div className="flex flex-col justify-between py-1">
+                <div className="flex flex-col justify-between py-1 gap-2">
                   <div className="flex items-center gap-6">
                     <h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">
                       <LinkWithoutPrefetch
@@ -72,7 +72,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                     Retour au tableau de bord
                   </LinkWithoutPrefetch>
 
-                  <section className={clsx("items-center gap-6 transition-all", isBannerExpanded ? "flex" : "hidden")}>
+                  <section className={clsx("items-center gap-6", isBannerExpanded ? "flex" : "hidden")}>
                     <Tag
                       linkProps={{
                         href: `${PFMV_ROUTES.ESPACE_PROJET}#${

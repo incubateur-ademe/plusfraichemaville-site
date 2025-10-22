@@ -9,17 +9,11 @@ import { makeUrl } from "./helpers";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
-export type TableauDeBordCardType =
-  | "diagnostic"
-  | "estimation"
-  | "financement"
-  | "annuaire"
-  | "solution";
+export type TableauDeBordCardType = "diagnostic" | "estimation" | "financement" | "annuaire" | "solution";
 
 export type TableauDeBordSuiviCardProps = {
   title: string;
   progress: "0" | "50" | "100" | ((_projet: ProjetWithRelations | undefined) => "0" | "50" | "100");
-  index: number;
   disabled?: boolean;
   children: ReactNode;
   picto?: ReactNode;
@@ -29,7 +23,6 @@ export type TableauDeBordSuiviCardProps = {
 export const TableauDeBordSuiviCard = ({
   title,
   progress,
-  index,
   disabled,
   picto,
   children,
@@ -46,21 +39,13 @@ export const TableauDeBordSuiviCard = ({
     <div
       className={clsx("active:bg-transparent fr-enlarge-link !rounded-2xl !bg-none", disabled && "pointer-events-none")}
     >
-      <div className={clsx("pfmv-card h-[370px] w-[355px] cursor-pointer !rounded-2xl")}>
+      <div className={clsx("pfmv-card h-[23rem] w-[23.5rem] cursor-pointer rounded-2xl")}>
         <div
           className={clsx(
             "relative flex h-1/2 items-center justify-center !rounded-t-2xl",
             disabled ? "bg-dsfr-background-alt-grey" : " bg-dsfr-border-default-blue-france",
           )}
         >
-          <small
-            className={clsx(
-              "absolute left-6 top-3 text-2xl font-bold",
-              disabled ? "text-pfmv-grey" : "text-dsfr-blue-france-925",
-            )}
-          >
-            {index}
-          </small>
           <div className={clsx(disabled && "contrast-50")}>{picto}</div>
         </div>
         <div className="h-auto p-6 pt-4">
