@@ -22,40 +22,41 @@ const BREADCRUMB_SEGMENT_SOLUTION_LISTE = (projetId: number): BreadcrumbSegment 
 
 export const BREADCRUMB_SOLUTION_MES_SOLUTIONS: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS(0).label,
-  breadcrumbSegments: (projetId: number) => [BREADCRUMB_SEGMENT_DASHBOARD(projetId)],
+  breadcrumbSegments: (projetId: number, projetName: string) =>
+    [BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName)].flat(1),
 };
 
 export const BREADCRUMB_SOLUTION_TOUTES_SOLUTIONS: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_SOLUTION_LISTE(0).label,
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
+  breadcrumbSegments: (projetId: number, projetName: string) => [
+    BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
     BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS(projetId),
-  ],
+  ].flat(1),
 };
 
 export const BREADCRUMB_SOLUTION_FICHE_SOLUTION: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Solution de rafraîchissement",
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
+  breadcrumbSegments: (projetId: number, projetName: string) => [
+    BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
     BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS(projetId),
     BREADCRUMB_SEGMENT_SOLUTION_LISTE(projetId),
-  ],
+  ].flat(1),
 };
 
 export const BREADCRUMB_SOLUTION_RETOUR_EXPERIENCE: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Retour d'expérience",
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
+  breadcrumbSegments: (projetId: number, projetName: string) => [
+    BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
     BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS(projetId),
     BREADCRUMB_SEGMENT_SOLUTION_LISTE(projetId),
-  ],
+  ].flat(1),
 };
 
 export const BREADCRUMB_SOLUTION_RETOUR_EXPERIENCE_LISTE: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Tous les retours d'expérience",
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
+  breadcrumbSegments: (projetId: number, projetName: string) => [
+    BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
     BREADCRUMB_SEGMENT_SOLUTION_MES_SOLUTIONS(projetId),
     BREADCRUMB_SEGMENT_SOLUTION_LISTE(projetId),
-  ],
+  ].flat(1),
 };

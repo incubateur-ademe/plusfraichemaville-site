@@ -1,32 +1,11 @@
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
-import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import { makeFicheSolutionCompleteUrlApi } from "../ficheSolution/helpers";
 import { FicheSolutionCardWithFetcher } from "../ficheSolution/fiche-solution-card-with-fetcher";
-import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
-import { TypeFiche } from "@/src/helpers/common";
+import { useRecommandationsForCurrentProjet } from "@/src/hooks/use-recommandations-for-current-projet";
 
 export const TableauDeBordRecommandation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const urls = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) || [];
-
-  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionCompleteUrlApi(urls));
-
-  const fichesSolutions = data?.map((fs) => fs?.attributes.fiches_solutions_complementaires);
-
-  const fichesSolutionsComplementaires = fichesSolutions?.reduce((acc, curr) => {
-    if (curr && curr.data) {
-      return acc.concat(curr.data);
-    } else {
-      return acc;
-    }
-  }, [] as FicheSolution[]);
-
-  const filteredFichesSolutionsComplementaires = fichesSolutionsComplementaires?.filter(
-    (currentElement, currentIndex, array) =>
-      array.findIndex((element) => element.id === currentElement.id) === currentIndex,
-  );
+  const { recommandations, isLoading } = useRecommandationsForCurrentProjet();
 
   if (!projet) {
     return null;
@@ -49,9 +28,7 @@ export const TableauDeBordRecommandation = () => {
           <FicheCardSkeleton />
         </div>
       ) : (
-        filteredFichesSolutionsComplementaires?.map((fs) => (
-          <FicheSolutionCardWithFetcher complete id={fs.id} key={fs?.id} withoutModal />
-        ))
+        recommandations?.map((fs) => <FicheSolutionCardWithFetcher complete id={fs.id} key={fs?.id} withoutModal />)
       )}
     </div>
   );

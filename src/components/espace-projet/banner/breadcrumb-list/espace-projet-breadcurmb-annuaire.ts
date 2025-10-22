@@ -15,13 +15,13 @@ const BREADCRUMB_SEGMENT_ANNUAIRE_MES_CONTACTS = (projetId: number): BreadcrumbS
 
 export const BREADCRUMB_ANNUAIRE_MES_CONTACTS: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_ANNUAIRE_MES_CONTACTS(0).label,
-  breadcrumbSegments: (projetId: number) => [BREADCRUMB_SEGMENT_DASHBOARD(projetId)],
+  breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
 };
 
 export const BREADCRUMB_ANNUAIRE_CARTE: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Sélection des contacts",
-  breadcrumbSegments: (projetId: number) => [
-    BREADCRUMB_SEGMENT_DASHBOARD(projetId),
+  breadcrumbSegments: (projetId: number, projetName: string) => [
+    BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
     BREADCRUMB_SEGMENT_ANNUAIRE_MES_CONTACTS(projetId),
-  ],
+  ].flat(1),
 };

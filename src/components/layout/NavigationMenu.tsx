@@ -233,7 +233,7 @@ export default function NavigationMenu() {
                     text: "Se connecter",
                   },
                 ],
-          text: "Mon Espace Projet",
+          text: "Mes projets",
           className: "lg:hidden",
         },
       ]}

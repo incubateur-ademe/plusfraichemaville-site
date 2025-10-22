@@ -18,7 +18,7 @@ export const AuthButtonEspaceProjet = () => {
         (isConnexionPage || isEspaceProjet) && "!bg-dsfr-background-action-low-blue-france",
       )}
     >
-      Mon espace projet
+      Mes projets
     </LinkWithoutPrefetch>
   );
 };
