@@ -17,7 +17,7 @@ export default function BannerProjetBreadcrumb({
     return null;
   }
   return (
-    <div className="bg-dsfr-background-alt-blue-france">
+    <div className="bg-dsfr-background-alt-blue-france transition-all">
       <div className="fr-container">
         <Breadcrumb
           className={clsx(className, "!mb-0 !mt-0 !pb-1 !pt-3")}
