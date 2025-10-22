@@ -41,7 +41,7 @@ export const ServiceStatusRecommandations = () => {
         <div>
           <h3>
             <LinkWithoutPrefetch className="text-pfmv-navy" href={getLinkUrl()}>
-              Recommandations
+              {`Recommandations${!isEmpty(recommandations) ? ` (${recommandations.length})` : ""} `}
             </LinkWithoutPrefetch>
           </h3>
           {isLoading && (

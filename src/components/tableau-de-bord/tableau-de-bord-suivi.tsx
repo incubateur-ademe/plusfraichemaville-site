@@ -6,7 +6,6 @@ import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-te
 import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
-import { RexContactId } from "@/src/components/annuaire/types";
 import { FicheType } from "@/src/generated/prisma/client";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
@@ -18,12 +17,12 @@ export const TableauDeBordSuivi = () => {
     <>
       <TableauDeBordMaturite />
       <div className="flex gap-8">
-        <section className="flex flex-wrap gap-8 w-fit">
+        <section className="flex h-fit shrink w-fit flex-wrap gap-8">
           {cards.map((card, index) => (
             <TableauDeBordSuiviCard {...card} key={index} />
           ))}
         </section>
-        <ServicesSidebar/>
+        <ServicesSidebar />
       </div>
     </>
   );
@@ -89,22 +88,6 @@ const cards: TableauDeBordSuiviCardProps[] = [
     children: (
       <TableauDeBordSuiviWithText>
         Identifier les aides et les contacts nécessaires pour préparer un dossier de financement.
-      </TableauDeBordSuiviWithText>
-    ),
-  },
-  {
-    title: "Annuaire des projets Plus fraîche ma ville",
-    progress: (projet: ProjetWithRelations | undefined) =>
-      (projet?.sourcing_user_projets?.length || 0) > 0 ||
-      ((projet?.sourcing_rex as RexContactId[] | null)?.length || 0) > 0
-        ? "100"
-        : "0",
-    disabled: false,
-    type: "annuaire",
-    picto: <PictoTableauDeBordSelector pictoId="annuaire" className="w-20" />,
-    children: (
-      <TableauDeBordSuiviWithText>
-        {"Contacter des partenaires : bureaux d'étude, AMO, agents de collectivités"}
       </TableauDeBordSuiviWithText>
     ),
   },

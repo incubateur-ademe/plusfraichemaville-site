@@ -39,7 +39,7 @@ export const TableauDeBordSuiviCard = ({
     <div
       className={clsx("active:bg-transparent fr-enlarge-link !rounded-2xl !bg-none", disabled && "pointer-events-none")}
     >
-      <div className={clsx("pfmv-card h-[23rem] w-[23.5rem] cursor-pointer rounded-2xl")}>
+      <div className={clsx("pfmv-card h-[23rem] w-[23.5rem] cursor-pointer !rounded-2xl")}>
         <div
           className={clsx(
             "relative flex h-1/2 items-center justify-center !rounded-t-2xl",
