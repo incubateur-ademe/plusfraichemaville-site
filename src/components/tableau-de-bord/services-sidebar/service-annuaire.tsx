@@ -2,7 +2,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 import Image from "next/image";
 
-export const ServicesAnnuaire = () => {
+export const ServiceAnnuaire = () => {
   return (
     <div className="pfmv-card fr-enlarge-link group max-w-[21rem] p-6">
       <div className="flex items-start gap-4">

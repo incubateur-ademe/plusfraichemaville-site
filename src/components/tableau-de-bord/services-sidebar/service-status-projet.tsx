@@ -4,7 +4,7 @@ import Image from "next/image";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 
-export const ServicesStatusProjet = () => {
+export const ServiceStatusProjet = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   if (!currentProjet) {
     return null;
