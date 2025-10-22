@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { StatutProjet } from "@/src/generated/prisma/client";
 import { useState } from "react";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
+import { notifications, NotificationsType } from "@/src/components/common/notifications";
 
 export const StatutProjetButtons = () => {
   const [loading, setLoading] = useState(false);
@@ -19,6 +20,9 @@ export const StatutProjetButtons = () => {
   const handleStatutChange = async (statut: StatutProjet) => {
     setLoading(true);
     const result = await updateProjetStatutAction(projet.id, statut);
+    if (result.type === "error") {
+      notifications(result.type, result.message);
+    }
     if (result.projet) {
       addOrUpdateProjet(result.projet);
     }
