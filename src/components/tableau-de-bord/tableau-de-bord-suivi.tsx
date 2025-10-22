@@ -16,8 +16,8 @@ export const TableauDeBordSuivi = () => {
   return (
     <>
       <TableauDeBordMaturite />
-      <div className="flex gap-8">
-        <section className="flex h-fit shrink w-fit flex-wrap gap-8">
+      <div className="flex flex-wrap gap-8">
+        <section className="flex h-fit shrink w-fit max-w-[49rem] flex-wrap gap-8">
           {cards.map((card, index) => (
             <TableauDeBordSuiviCard {...card} key={index} />
           ))}
