@@ -12,24 +12,21 @@ export const AuthButtons = () => {
   const { status } = useSession();
 
   const handleSignIn = () => signIn("agentconnect", { callbackUrl: getFullUrl(PFMV_ROUTES.ESPACE_PROJET) });
-  const displaySearch = process.env.NEXT_PUBLIC_FEATURE_SEARCH === "true" || false;
   const isSearchPage = usePathname().startsWith(PFMV_ROUTES.RECHERCHE_GLOBALE(""));
 
   return (
     <div className="hidden items-center gap-4 lg:flex">
-      {displaySearch && (
-        <Button
-          className={clsx("rounded-3xl", isSearchPage && "!bg-dsfr-background-action-low-blue-france")}
-          iconId="fr-icon-search-line"
-          priority="tertiary"
-          iconPosition="left"
-          linkProps={{
-            href: PFMV_ROUTES.RECHERCHE_GLOBALE(),
-          }}
-        >
-          Rechercher
-        </Button>
-      )}
+      <Button
+        className={clsx("rounded-3xl", isSearchPage && "!bg-dsfr-background-action-low-blue-france")}
+        iconId="fr-icon-search-line"
+        priority="tertiary"
+        iconPosition="left"
+        linkProps={{
+          href: PFMV_ROUTES.RECHERCHE_GLOBALE(),
+        }}
+      >
+        Rechercher
+      </Button>
       <Conditional>
         <Case condition={status === "authenticated"}>
           <AuthButtonEspaceProjet /> <AuthButtonUser />
