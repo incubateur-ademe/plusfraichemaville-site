@@ -40,8 +40,8 @@ export default function BannerProjet({ className }: { className?: string }) {
                   pictoClassName="svg-blue"
                 />
               </div>
-              <div className="flex flex-wrap w-full gap-3 items-center justify-between">
-                <div className="flex flex-col justify-between py-1 gap-2">
+              <div className="flex w-full flex-wrap items-center justify-between gap-3">
+                <div className="flex flex-col justify-between h-full py-1">
                   <div className="flex items-center gap-6">
                     <h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">
                       <LinkWithoutPrefetch
@@ -64,36 +64,37 @@ export default function BannerProjet({ className }: { className?: string }) {
                   </div>
                   <LinkWithoutPrefetch
                     className={clsx(
-                      "fr-link fr-icon-arrow-left-line fr-link--icon-left w-fit",
+                      "fr-link fr-icon-arrow-left-line fr-link--icon-left w-fit text-sm font-normal ",
                       isBannerExpanded ? "hidden" : "block",
                     )}
                     href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
                   >
                     Retour au tableau de bord
                   </LinkWithoutPrefetch>
-
-                  <section className={clsx("items-center gap-6", isBannerExpanded ? "flex" : "hidden")}>
-                    <Tag
-                      linkProps={{
-                        href: `${PFMV_ROUTES.ESPACE_PROJET}#${
-                          currentProjet.collectivite.code_insee || currentProjet.collectivite.nom
-                        }`,
-                      }}
-                      iconId="ri-home-4-fill"
-                      className="!bg-white hover:underline"
-                    >
-                      {currentProjet.collectivite.nom}
-                    </Tag>
-                    <Tag
-                      linkProps={{
-                        href: PFMV_ROUTES.ESPACE_PROJET_STATUT_PROJET(currentProjet.id),
-                      }}
-                      iconId={getStatutProjetByStatut(currentProjet.statut).progressIconId}
-                      className="!bg-white hover:underline"
-                    >
-                      {getStatutProjetByStatut(currentProjet.statut).progressLabel}
-                    </Tag>
-                  </section>
+                  {isBannerExpanded && (
+                    <section className={clsx("flex items-center gap-6")}>
+                      <Tag
+                        linkProps={{
+                          href: `${PFMV_ROUTES.ESPACE_PROJET}#${
+                            currentProjet.collectivite.code_insee || currentProjet.collectivite.nom
+                          }`,
+                        }}
+                        iconId="ri-home-4-fill"
+                        className="!bg-white hover:underline"
+                      >
+                        {currentProjet.collectivite.nom}
+                      </Tag>
+                      <Tag
+                        linkProps={{
+                          href: PFMV_ROUTES.ESPACE_PROJET_STATUT_PROJET(currentProjet.id),
+                        }}
+                        iconId={getStatutProjetByStatut(currentProjet.statut).progressIconId}
+                        className="!bg-white hover:underline"
+                      >
+                        {getStatutProjetByStatut(currentProjet.statut).progressLabel}
+                      </Tag>
+                    </section>
+                  )}
                 </div>
                 <section>
                   {isLecteur ? (

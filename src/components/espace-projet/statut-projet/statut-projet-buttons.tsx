@@ -34,7 +34,7 @@ export const StatutProjetButtons = () => {
       {ALL_STATUT_PROJET.map((statutProjetButton) => (
         <button
           key={statutProjetButton.statut}
-          disabled={!isLecteur}
+          disabled={isLecteur}
           role="radio"
           onClick={() => {
             handleStatutChange(statutProjetButton.statut);
