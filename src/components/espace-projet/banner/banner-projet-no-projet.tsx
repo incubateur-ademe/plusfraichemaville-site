@@ -1,5 +1,4 @@
 import Image from "next/image";
-import PfmvProConnectButton from "@/src/components/authentication/pfmv-pro-connect-button";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 

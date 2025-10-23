@@ -41,7 +41,7 @@ export default function BannerProjet({ className }: { className?: string }) {
   };
 
   return (
-    <div className={`bg-dsfr-background-alt-blue-france py-3  ${className} min-h-[6rem]`}>
+    <div className={`bg-dsfr-background-alt-blue-france py-3  ${className} min-h-[5rem]`}>
       <Conditional>
         <Case condition={status === "unauthenticated"}>
           <BannerProjetUnauthenticated />
