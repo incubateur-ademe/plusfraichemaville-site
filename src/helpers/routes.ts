@@ -44,14 +44,14 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/diagnostic/prestation/retour-experience/${slug}`,
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
-  TABLEAU_DE_BORD_WITH_CURRENT_TAB: (
-    projetId: number,
-    tab: "tableau-de-suivi" | "recommandation" | "partage" | "statut",
-  ) => `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
-  ESPACE_PROJET_STATUT_PROJET: (projetId: number)=> `/espace-projet/${projetId}/tableau-de-bord?tab=statut`,
+  TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "partage" | "statut") =>
+    `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
+  ESPACE_PROJET_STATUT_PROJET: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=statut`,
   ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiche-solution`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiche-solution/liste`,
+  ESPACE_PROJET_FICHES_SOLUTIONS_RECOMMANDATIONS: (projetId: number) =>
+    `/espace-projet/${projetId}/fiche-solution/recommandations`,
   ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS: (projetId: number) => `/espace-projet/${projetId}/diagnostic/choix-parcours`,
   ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/presentation`,

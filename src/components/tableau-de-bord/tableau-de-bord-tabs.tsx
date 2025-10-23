@@ -3,7 +3,6 @@
 import { TableauDeBordSuivi, TableauDeBordTab } from ".";
 
 import { TableauDeBordPartage } from "./tableau-de-bord-partage";
-import { TableauDeBordRecommandation } from "./tableau-de-bord-recommandations";
 import { useSearchParams } from "next/navigation";
 import { TableauDeBordStatut } from "@/src/components/tableau-de-bord/tableau-de-bord-statut";
 import clsx from "clsx";
@@ -16,11 +15,6 @@ export const TableauDeBordTabs = () => {
     {
       filter: "tableau-de-suivi",
       component: <TableauDeBordSuivi />,
-      className: "bg-dsfr-border-action-low-blue-france",
-    },
-    {
-      filter: "recommandation",
-      component: <TableauDeBordRecommandation />,
       className: "bg-dsfr-border-action-low-blue-france",
     },
     {

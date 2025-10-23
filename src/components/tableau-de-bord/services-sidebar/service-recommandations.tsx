@@ -10,7 +10,7 @@ import { AideEstimationsCardLabelFicheSolution } from "@/src/components/financem
 import { useRecommandationsForCurrentProjet } from "@/src/hooks/use-recommandations-for-current-projet";
 import { AideEstimationsCardLabel } from "@/src/components/financement/aide/aide-estimations-card-label";
 
-export const ServiceStatusRecommandations = () => {
+export const ServiceRecommandations = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const ficheSolutionsIds = getProjetFichesIdsByType({ projet: currentProjet, typeFiche: TypeFiche.solution }) || [];
 
@@ -22,7 +22,7 @@ export const ServiceStatusRecommandations = () => {
   const getLinkUrl = () => {
     if (!isLoading && !isEmpty(ficheSolutionsIds)) {
       return !isEmpty(recommandations)
-        ? PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(currentProjet.id, "recommandation")
+        ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_RECOMMANDATIONS(currentProjet.id)
         : PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(currentProjet.id);
     }
     return PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(currentProjet.id);
@@ -64,14 +64,20 @@ export const ServiceStatusRecommandations = () => {
                     ))}
                     {recommandations.length > 2 && <AideEstimationsCardLabel>...</AideEstimationsCardLabel>}
                   </ul>
+                  <div className="flex justify-between text-sm text-dsfr-text-default-grey group-hover:underline">
+                    <span>Voir le détail</span>
+                    <i className="ri-arrow-right-line fr-icon--sm"></i>
+                  </div>
                 </>
               ) : (
+                <>
                 <p>Votre choix de solutions est complet, nous n'avons plus de recommandations.</p>
+                  <div className="flex justify-between text-sm text-dsfr-text-default-grey group-hover:underline">
+                    <span>Voir mes solutions</span>
+                    <i className="ri-arrow-right-line fr-icon--sm"></i>
+                  </div>
+                </>
               )}
-              <div className="flex justify-between text-sm text-dsfr-text-default-grey group-hover:underline">
-                <span>Voir le détail</span>
-                <i className="ri-arrow-right-line fr-icon--sm"></i>
-              </div>
             </>
           )}
           {!isLoading && isEmpty(ficheSolutionsIds) && (

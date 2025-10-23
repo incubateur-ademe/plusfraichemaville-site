@@ -43,6 +43,13 @@ export const BREADCRUMB_SOLUTION_FICHE_SOLUTION: EspaceProjetBreadcrumbStep = {
   ].flat(1),
 };
 
+export const BREADCRUMB_SOLUTION_RECOMMANDATIONS: EspaceProjetBreadcrumbStep = {
+  currentPageLabel: "Recommandations de solutions de rafraîchissement",
+  breadcrumbSegments: (projetId: number, projetName: string) => [
+    BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+  ].flat(1),
+};
+
 export const BREADCRUMB_SOLUTION_RETOUR_EXPERIENCE: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Retour d'expérience",
   breadcrumbSegments: (projetId: number, projetName: string) => [

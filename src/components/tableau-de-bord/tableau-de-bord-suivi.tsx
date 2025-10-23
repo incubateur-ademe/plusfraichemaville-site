@@ -5,7 +5,6 @@ import { TableauDeBordFichesSolutionImages } from "./tableau-de-bord-suivi-card-
 import { TableauDeBordSuiviWithText } from "./tableau-de-bord-suivi-card-with-text";
 import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
-import { TableauDeBordMaturite } from "./tableau-de-bord-maturite";
 import { FicheType } from "@/src/generated/prisma/client";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
@@ -15,9 +14,8 @@ import { ServicesSidebar } from "@/src/components/tableau-de-bord/services-sideb
 export const TableauDeBordSuivi = () => {
   return (
     <>
-      <TableauDeBordMaturite />
       <div className="flex flex-wrap gap-8">
-        <section className="flex h-fit shrink w-fit max-w-[49rem] flex-wrap gap-8">
+        <section className="flex h-fit w-fit max-w-[49rem] shrink flex-wrap gap-8">
           {cards.map((card, index) => (
             <TableauDeBordSuiviCard {...card} key={index} />
           ))}

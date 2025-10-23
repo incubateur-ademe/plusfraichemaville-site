@@ -19,7 +19,6 @@ export const AuthButtons = () => {
     <div className="hidden items-center gap-4 lg:flex">
       {displaySearch && (
         <Button
-          title="Rechercher"
           className={clsx("rounded-3xl", isSearchPage && "!bg-dsfr-background-action-low-blue-france")}
           iconId="fr-icon-search-line"
           priority="tertiary"

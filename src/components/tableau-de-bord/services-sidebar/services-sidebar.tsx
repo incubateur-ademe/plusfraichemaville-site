@@ -1,6 +1,6 @@
 import { ServiceAnnuaire } from "@/src/components/tableau-de-bord/services-sidebar/service-annuaire";
 import { ServiceStatusProjet } from "@/src/components/tableau-de-bord/services-sidebar/service-status-projet";
-import { ServiceStatusRecommandations } from "@/src/components/tableau-de-bord/services-sidebar/service-status-recommandations";
+import { ServiceRecommandations } from "@/src/components/tableau-de-bord/services-sidebar/service-recommandations";
 
 export const ServicesSidebar = () => {
   return (
@@ -8,7 +8,7 @@ export const ServicesSidebar = () => {
       <h2>Mes outils</h2>
       <div className="flex flex-col gap-4">
         <ServiceAnnuaire />
-        <ServiceStatusRecommandations />
+        <ServiceRecommandations />
         <ServiceStatusProjet />
       </div>
     </section>
