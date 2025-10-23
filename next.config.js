@@ -26,6 +26,12 @@ const nextConfig = {
         permanent: true,
       },
       {
+        source: "/espace-projet/:projetId(\\d{1,})/tableau-de-bord",
+        has: [{ type: "query", key: "tab", value: "statut" }],
+        destination: "/espace-projet/:projetId/statut-projet",
+        permanent: true,
+      },
+      {
         source: "/projet/:path*",
         destination: "/retour-experience/projet/:path*",
         permanent: true,

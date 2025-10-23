@@ -4,7 +4,6 @@ import { TableauDeBordSuivi, TableauDeBordTab } from ".";
 
 import { TableauDeBordPartage } from "./tableau-de-bord-partage";
 import { useSearchParams } from "next/navigation";
-import { TableauDeBordStatut } from "@/src/components/tableau-de-bord/tableau-de-bord-statut";
 import clsx from "clsx";
 
 export const TableauDeBordTabs = () => {
@@ -21,11 +20,6 @@ export const TableauDeBordTabs = () => {
       filter: "partage",
       component: <TableauDeBordPartage />,
       className: "bg-dsfr-border-action-low-blue-france",
-    },
-    {
-      filter: "statut",
-      component: <TableauDeBordStatut />,
-      className: "",
     },
   ];
 

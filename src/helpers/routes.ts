@@ -44,9 +44,9 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/diagnostic/prestation/retour-experience/${slug}`,
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=tableau-de-suivi`,
-  TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "partage" | "statut") =>
+  TABLEAU_DE_BORD_WITH_CURRENT_TAB: (projetId: number, tab: "tableau-de-suivi" | "partage") =>
     `/espace-projet/${projetId}/tableau-de-bord?tab=${tab}`,
-  ESPACE_PROJET_STATUT_PROJET: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord?tab=statut`,
+  ESPACE_PROJET_STATUT_PROJET: (projetId: number) => `/espace-projet/${projetId}/statut-projet`,
   ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiche-solution`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiche-solution/liste`,

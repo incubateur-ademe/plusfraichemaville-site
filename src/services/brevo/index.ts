@@ -513,7 +513,7 @@ export class EmailService {
       projets.map(async (projet) => {
         const emailParams: EmailRemindUnfinishedAndInactiveProjetConfig = {
           userPrenom: projet.creator.prenom || "",
-          urlProjetStatus: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projet.id, "statut")),
+          urlProjetStatus: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_STATUT_PROJET(projet.id)),
         };
         return await this.sendEmail({
           to: projet.creator.email,

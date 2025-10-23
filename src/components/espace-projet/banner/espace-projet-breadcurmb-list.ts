@@ -33,3 +33,8 @@ export const BREADCRUMB_EDIT_PROJET: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Renseignements sur mon projet",
   breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
 };
+
+export const BREADCRUMB_STATUT_PROJET: EspaceProjetBreadcrumbStep = {
+  currentPageLabel: "Statut de mon projet",
+  breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+};

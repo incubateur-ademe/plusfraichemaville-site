@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { StatutProjet } from "@/src/generated/prisma/client";
 import { useState } from "react";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
-import { notifications, NotificationsType } from "@/src/components/common/notifications";
+import { notifications } from "@/src/components/common/notifications";
 
 export const StatutProjetButtons = () => {
   const [loading, setLoading] = useState(false);

@@ -22,9 +22,7 @@ export const ServiceStatusProjet = () => {
               Où en êtes-vous ? Besoin d’aide ?
             </LinkWithoutPrefetch>
           </h3>
-          <p className="text-dsfr-text-default-grey">
-            Dites-nous en plus, nous vous accompagnerons dans votre projet.
-          </p>
+          <p className="text-dsfr-text-default-grey">Dites-nous en plus, nous vous accompagnerons dans votre projet.</p>
           <div className="flex justify-between text-sm text-dsfr-text-default-grey group-hover:underline">
             <span>En savoir plus</span>
             <i className="ri-arrow-right-line fr-icon--sm"></i>
