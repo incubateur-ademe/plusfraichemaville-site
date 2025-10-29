@@ -41,7 +41,7 @@
     "lodash": "^4.17.21",
     "maplibre-gl": "^5.6.1",
     "next": "15.5.3",
-    "next-auth": "^4.24.11",
+    "next-auth": "^4.24.12",
     "react": "19.0.0",
     "react-datepicker": "^8.3.0",
     "react-dom": "19.0.0",
