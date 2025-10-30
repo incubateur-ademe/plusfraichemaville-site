@@ -13,18 +13,17 @@ export default function BannerProjetBreadcrumb({
   className?: string;
 }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  if (!currentProjet) {
-    return null;
-  }
   return (
     <div className="bg-dsfr-background-alt-blue-france transition-all">
       <div className="fr-container">
-        <Breadcrumb
-          className={clsx(className, "!mb-0 !mt-0 !pb-1 !pt-3")}
-          currentPageLabel={step?.currentPageLabel}
-          classes={{ link: "text-pfmv-navy font-normal" }}
-          segments={step?.breadcrumbSegments(currentProjet.id, currentProjet.nom) || []}
-        />
+        {currentProjet && (
+          <Breadcrumb
+            className={clsx(className, "!mb-0 !mt-0 !pb-1 !pt-3")}
+            currentPageLabel={step?.currentPageLabel}
+            classes={{ link: "text-pfmv-navy font-normal" }}
+            segments={step?.breadcrumbSegments(currentProjet.id, currentProjet.nom) || []}
+          />
+        )}
       </div>
       <BannerProjet />
     </div>
