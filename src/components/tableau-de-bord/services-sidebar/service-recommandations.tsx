@@ -71,7 +71,7 @@ export const ServiceRecommandations = () => {
                 </>
               ) : (
                 <>
-                <p>Votre choix de solutions est complet, nous n'avons plus de recommandations.</p>
+                  <p>Votre choix de solutions est complet, nous n'avons plus de recommandations.</p>
                   <div className="flex justify-between text-sm text-dsfr-text-default-grey group-hover:underline">
                     <span>Voir mes solutions</span>
                     <i className="ri-arrow-right-line fr-icon--sm"></i>

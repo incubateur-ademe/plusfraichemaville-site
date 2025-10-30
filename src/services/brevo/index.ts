@@ -536,7 +536,7 @@ export class EmailService {
         const emailParams: EmailRemindUnfinishedAndInactiveProjet2Config = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          urlTableauDeBord: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projet.id, "tableau-de-suivi")),
+          urlTableauDeBord: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)),
         };
         return await this.sendEmail({
           to: projet.creator.email,

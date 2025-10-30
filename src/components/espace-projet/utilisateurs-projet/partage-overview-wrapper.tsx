@@ -9,7 +9,7 @@ type PartageOverviewWrapperProps = {
 
 export const PartageOverviewWrapper = ({ withSharingOption, children }: PartageOverviewWrapperProps) => {
   return (
-    <div className="relative rounded-2xl bg-white p-8 pfmv-strong-card">
+    <div className="pfmv-strong-card relative rounded-2xl bg-white p-8">
       <div className="flex items-center justify-between pb-5">
         {withSharingOption && <PartageOverviewMemberInviteButton />}
       </div>
