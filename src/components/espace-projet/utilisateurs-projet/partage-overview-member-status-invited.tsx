@@ -5,8 +5,8 @@ import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
 import { useTransition } from "react";
-import { Spinner } from "../common/spinner";
-import { notifications } from "../common/notifications";
+import { Spinner } from "../../common/spinner";
+import { notifications } from "../../common/notifications";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 

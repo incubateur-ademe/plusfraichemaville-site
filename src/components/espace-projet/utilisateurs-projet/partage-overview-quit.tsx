@@ -7,7 +7,7 @@ import { useUserStore } from "@/src/stores/user/provider";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useTransition } from "react";
 import { leaveProjetAction } from "@/src/actions/projets/leave-projet-action";
-import { notifications } from "../common/notifications";
+import { notifications } from "../../common/notifications";
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { RoleProjet } from "@/src/generated/prisma/client";

@@ -1,8 +1,6 @@
 "use client";
 
 import { TableauDeBordSuivi, TableauDeBordTab } from ".";
-
-import { TableauDeBordPartage } from "./tableau-de-bord-partage";
 import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 
@@ -14,11 +12,6 @@ export const TableauDeBordTabs = () => {
     {
       filter: "tableau-de-suivi",
       component: <TableauDeBordSuivi />,
-      className: "bg-dsfr-border-action-low-blue-france",
-    },
-    {
-      filter: "partage",
-      component: <TableauDeBordPartage />,
       className: "bg-dsfr-border-action-low-blue-france",
     },
   ];

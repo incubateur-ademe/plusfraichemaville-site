@@ -11,13 +11,13 @@ import {
   PartageUserModificationData,
   PartageUserModificationSchema,
 } from "@/src/forms/partage/partage-user-modification-schema";
-import SelectFormField from "../common/SelectFormField";
+import SelectFormField from "../../common/SelectFormField";
 import { updateUserRoleProjectAction } from "@/src/actions/users/update-user-role-project-action";
 import { useUserStore } from "@/src/stores/user/provider";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { RoleProjet } from "@/src/generated/prisma/client";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { notifications } from "../common/notifications";
+import { notifications } from "../../common/notifications";
 import capitalize from "lodash/capitalize";
 import { ROLE_EDITEUR, ROLE_LECTEUR } from "@/src/helpers/user-role";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";

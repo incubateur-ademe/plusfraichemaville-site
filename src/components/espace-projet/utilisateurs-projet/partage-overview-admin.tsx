@@ -16,26 +16,18 @@ export const PartageOverviewAdmin = () => {
 
   const membersByStatus = groupByInvitationStatus(members);
 
-  const sections: { title: string; status: InvitationStatus }[] = [
-    { title: "", status: InvitationStatus.ACCEPTED },
-    { title: "Accès demandé", status: InvitationStatus.REQUESTED },
-    { title: "Invité(s)", status: InvitationStatus.INVITED },
+  const sections: { title?: string; status: InvitationStatus }[] = [
+    { status: InvitationStatus.ACCEPTED },
+    { title: "Demande d'accès en attente", status: InvitationStatus.REQUESTED },
+    { title: "Invitation(s) en attente", status: InvitationStatus.INVITED },
   ];
 
   return (
-    <PartageOverviewWrapper
-      title="Gérer les membres de votre collectivité sur ce projet"
-      withSharingOption={canEditProjet}
-    >
+    <PartageOverviewWrapper withSharingOption={canEditProjet}>
       {sections.map(
-        ({ title, status }, index) =>
+        ({ title, status }) =>
           membersByStatus[status] && (
-            <PartageOverviewMemberSection
-              key={status}
-              title={title}
-              members={membersByStatus[status]!}
-              isFirst={index === 0}
-            />
+            <PartageOverviewMemberSection key={status} title={title} members={membersByStatus[status]!} />
           ),
       )}
     </PartageOverviewWrapper>

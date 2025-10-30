@@ -1,4 +1,4 @@
-import { getCurrentUserRole } from "@/src/components/partage/helpers";
+import { getCurrentUserRole } from "@/src/components/espace-projet/utilisateurs-projet/helpers";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useUserStore } from "@/src/stores/user/provider";
 import { RoleProjet } from "@/src/generated/prisma/client";

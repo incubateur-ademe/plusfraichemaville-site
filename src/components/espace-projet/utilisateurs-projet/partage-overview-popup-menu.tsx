@@ -1,12 +1,12 @@
 "use client";
 
 import { useModalStore } from "@/src/stores/modal/provider";
-import { PopupMenu } from "../common/popup-menu";
+import { PopupMenu } from "../../common/popup-menu";
 import { ProjetWithPublicRelations, UserProjetWithUserInfos } from "@/src/lib/prisma/prismaCustomTypes";
 import { checkOtherAdminExists } from "./helpers";
 import { useTransition } from "react";
 import { leaveProjetAction } from "@/src/actions/projets/leave-projet-action";
-import { notifications } from "../common/notifications";
+import { notifications } from "../../common/notifications";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { deleteProjetAction } from "@/src/actions/projets/delete-projet-action";
 import { RoleProjet } from "@/src/generated/prisma/client";

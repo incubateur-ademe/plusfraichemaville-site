@@ -279,9 +279,8 @@ export class EmailService {
         userCollectiviteName: getPrimaryCollectiviteForUser(userProjet.user).nom,
         destinationMail: oldestAdmin.user.email,
         projetName: userProjet.projet.nom,
-        link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(
+        link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_UTILISATEURS_PROJET(
           userProjet.projet_id,
-          "partage",
         )}`,
       };
 

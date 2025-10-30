@@ -113,7 +113,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                         iconId="fr-icon-user-add-line"
                         className={clsx("rounded-3xl")}
                         linkProps={{
-                          href: PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(currentProjet.id, "partage"),
+                          href: PFMV_ROUTES.ESPACE_PROJET_UTILISATEURS_PROJET(currentProjet.id),
                         }}
                         priority="secondary"
                       >

@@ -3,12 +3,12 @@
 import { useModalStore } from "@/src/stores/modal/provider";
 import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { deleteUserFromProjetAction } from "@/src/actions/userProjet/delete-user-from-projet-action";
-import { notifications } from "../common/notifications";
-import { PopupMenu } from "../common/popup-menu";
+import { notifications } from "../../common/notifications";
+import { PopupMenu } from "../../common/popup-menu";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { RoleProjet } from "@/src/generated/prisma/client";
-import { PartageMemberModificationRoleModale } from "@/src/components/partage/partage-member-modification-role-modale";
+import { PartageMemberModificationRoleModale } from "@/src/components/espace-projet/utilisateurs-projet/partage-member-modification-role-modale";
 
 export type PartageOverviewMemberStatusAdminProps = {
   member: UserProjetWithUser;
