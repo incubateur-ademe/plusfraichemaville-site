@@ -47,7 +47,7 @@ export const PartageOverviewMemberInviteButton = () => {
 
   return (
     <>
-      <Button priority="primary" onClick={modal.open} className="rounded-3xl" iconId="fr-icon-add-circle-fill">
+      <Button priority="primary" onClick={modal.open} className="rounded-3xl" iconId="ri-add-circle-fill">
         Inviter un nouveau membre
       </Button>
       <modal.Component title="Inviter un membre" size="small" className="rounded-modal min-h-[296px]">

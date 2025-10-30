@@ -10,6 +10,7 @@ import { isEmpty } from "@/src/helpers/listUtils";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
 import { ServicesSidebar } from "@/src/components/tableau-de-bord/services-sidebar/services-sidebar";
+import { TableauDeBordSuiviEstimationDisabled } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-estimation-disabled";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -44,7 +45,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
       }
       return "0";
     },
-    disabled: false,
+    disabled: () => false,
     type: "diagnostic",
     picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
     children: (
@@ -57,13 +58,13 @@ const cards: TableauDeBordSuiviCardProps[] = [
     title: "Je choisis mes solutions de rafraîchissement",
     progress: (projet: ProjetWithRelations | undefined) =>
       projet?.fiches.filter((f) => f.type === FicheType.SOLUTION).length ? "100" : "0",
-    disabled: false,
+    disabled: () => false,
     type: "solution",
     picto: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,
     children: <TableauDeBordFichesSolutionImages />,
   },
   {
-    title: "Je fais une estimation de budget pour mon projet",
+    title: "Je fais une estimation de budget",
     progress: (projet: ProjetWithRelations | undefined) => {
       if (projet && projet.estimations?.length > 0) {
         return getLastCompletedEstimation(projet.estimations) ? "100" : "50";
@@ -71,16 +72,21 @@ const cards: TableauDeBordSuiviCardProps[] = [
         return "0";
       }
     },
-    disabled: false,
+    disabled: (projet: ProjetWithRelations | undefined) => {
+      return (
+        isEmpty(getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution })) && isEmpty(projet?.estimations)
+      );
+    },
     type: "estimation",
     picto: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,
     children: <TableauDeBordSuiviWithEstimation />,
+    disabledChildren: <TableauDeBordSuiviEstimationDisabled />,
   },
   {
     title: "Je trouve des financements",
     progress: (projet: ProjetWithRelations | undefined) =>
       projet?.estimations?.find((estimation) => estimation.estimations_aides.length > 0) ? "100" : "0",
-    disabled: false,
+    disabled: () => false,
     type: "financement",
     picto: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
     children: (
