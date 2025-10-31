@@ -7,8 +7,6 @@ const pictos: Record<TableauDeBordCardType, string> = {
   diagnostic: "diagnostic.svg",
   estimation: "estimation.svg",
   financement: "financement.svg",
-  annuaire: "annuaire.svg",
-  renseignement: "renseignement.svg",
   solution: "solution.svg",
 };
 
@@ -25,7 +23,7 @@ export const PictoTableauDeBordSelector = ({ pictoId, className }: PictoTableauD
   return (
     <Image
       src={`/images/tableau-de-bord/${selectedPicto}`}
-      className={clsx("mx-auto", className)}
+      className={clsx("mx-auto text-dsfr-background-disabled-grey", className)}
       alt={`${pictoId}`}
       width={20}
       height={20}

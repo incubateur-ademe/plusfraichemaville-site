@@ -11,6 +11,7 @@ import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-f
 import { TypeFiche } from "@/src/helpers/common";
 import { ServicesSidebar } from "@/src/components/tableau-de-bord/services-sidebar/services-sidebar";
 import { TableauDeBordSuiviEstimationDisabled } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-estimation-disabled";
+import { TableauDeBordSuiviFinancementDisabled } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-financement-disabled";
 
 export const TableauDeBordSuivi = () => {
   return (
@@ -86,7 +87,9 @@ const cards: TableauDeBordSuiviCardProps[] = [
     title: "Je trouve des financements",
     progress: (projet: ProjetWithRelations | undefined) =>
       projet?.estimations?.find((estimation) => estimation.estimations_aides.length > 0) ? "100" : "0",
-    disabled: () => false,
+    disabled: (projet: ProjetWithRelations | undefined) => {
+      return isEmpty(projet?.estimations);
+    },
     type: "financement",
     picto: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
     children: (
@@ -94,5 +97,6 @@ const cards: TableauDeBordSuiviCardProps[] = [
         Identifier les aides et les contacts nécessaires pour préparer un dossier de financement.
       </TableauDeBordSuiviWithText>
     ),
+    disabledChildren: <TableauDeBordSuiviFinancementDisabled />,
   },
 ];

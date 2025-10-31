@@ -1,9 +1,9 @@
 "use client";
-import { TableauDeBordSuivi } from "@/src/components/tableau-de-bord";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 import { BREADCRUMB_TABLEAU_DE_BORD } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
+import { TableauDeBordSuivi } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi";
 
 export default function TableauDeBordPage() {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
