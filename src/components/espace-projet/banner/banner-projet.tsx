@@ -41,7 +41,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                 />
               </div>
               <div className="flex w-full flex-wrap items-center justify-between gap-3">
-                <div className="flex md:h-full flex-col justify-between py-1">
+                <div className="flex flex-col justify-between py-1 md:h-full">
                   <div className="flex items-center gap-6">
                     <h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">
                       <LinkWithoutPrefetch
