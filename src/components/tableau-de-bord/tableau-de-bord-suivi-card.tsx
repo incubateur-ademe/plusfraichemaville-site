@@ -40,7 +40,10 @@ export const TableauDeBordSuiviCard = ({
   return (
     <div className={clsx("active:bg-transparent !rounded-2xl !bg-none", disabledValue ? "" : "fr-enlarge-link")}>
       <div
-        className={clsx("h-[23rem] w-[23.5rem] !rounded-2xl", disabledValue ? "pfmv-flat-card bg-white" : "pfmv-card")}
+        className={clsx(
+          "h-[23rem] max-w-[23.5rem] !rounded-2xl md:w-[23.5rem]",
+          disabledValue ? "pfmv-flat-card bg-white" : "pfmv-card",
+        )}
       >
         <div
           className={clsx(
