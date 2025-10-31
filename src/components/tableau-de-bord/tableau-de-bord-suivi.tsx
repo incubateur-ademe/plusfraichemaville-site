@@ -12,10 +12,12 @@ import { TypeFiche } from "@/src/helpers/common";
 import { ServicesSidebar } from "@/src/components/tableau-de-bord/services-sidebar/services-sidebar";
 import { TableauDeBordSuiviEstimationDisabled } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-estimation-disabled";
 import { TableauDeBordSuiviFinancementDisabled } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-financement-disabled";
+import { TableauDeBordSuiviBanner } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-banner";
 
 export const TableauDeBordSuivi = () => {
   return (
     <>
+      <TableauDeBordSuiviBanner />
       <div className="flex flex-wrap gap-8">
         <section className="flex h-fit w-fit max-w-[49rem] shrink flex-wrap gap-8">
           {cards.map((card, index) => (
