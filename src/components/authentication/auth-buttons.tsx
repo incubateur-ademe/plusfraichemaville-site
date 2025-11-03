@@ -7,6 +7,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const AuthButtons = () => {
   const { status } = useSession();
@@ -16,17 +17,15 @@ export const AuthButtons = () => {
 
   return (
     <div className="hidden items-center gap-4 lg:flex">
-      <Button
-        className={clsx("rounded-3xl", isSearchPage && "!bg-dsfr-background-action-low-blue-france")}
-        iconId="fr-icon-search-line"
-        priority="tertiary"
-        iconPosition="left"
-        linkProps={{
-          href: PFMV_ROUTES.RECHERCHE_GLOBALE(),
-        }}
+      <LinkWithoutPrefetch
+        href={PFMV_ROUTES.RECHERCHE_GLOBALE()}
+        className={clsx(
+          "fr-btn fr-btn--tertiary fr-icon-search-line fr-btn--icon-left relative z-10 rounded-3xl",
+          isSearchPage && "!bg-dsfr-background-action-low-blue-france",
+        )}
       >
         Rechercher
-      </Button>
+      </LinkWithoutPrefetch>
       <Conditional>
         <Case condition={status === "authenticated"}>
           <AuthButtonEspaceProjet /> <AuthButtonUser />
