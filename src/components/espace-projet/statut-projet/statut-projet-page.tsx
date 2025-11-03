@@ -2,7 +2,7 @@ import { ProjetLastModification } from "@/src/components/espace-projet/statut-pr
 import { StatutProjetButtons } from "@/src/components/espace-projet/statut-projet/statut-projet-buttons";
 import { StatutProjetActions } from "@/src/components/espace-projet/statut-projet/statut-projet-actions";
 
-export const StatutProjetTab = () => {
+export const StatutProjetPage = () => {
   return (
     <>
       <section className="flex flex-wrap justify-between">

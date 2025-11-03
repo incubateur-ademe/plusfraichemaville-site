@@ -3,16 +3,14 @@ import { PropsWithChildren } from "react";
 import { PartageOverviewMemberInviteButton } from "./partage-overview-member-invite-button";
 
 type PartageOverviewWrapperProps = {
-  title: string;
   withSharingOption?: boolean;
   currentUserIsAdmin?: boolean;
 } & PropsWithChildren;
 
-export const PartageOverviewWrapper = ({ title, withSharingOption, children }: PartageOverviewWrapperProps) => {
+export const PartageOverviewWrapper = ({ withSharingOption, children }: PartageOverviewWrapperProps) => {
   return (
-    <div className="relative rounded-2xl bg-white p-8">
+    <div className="pfmv-strong-card relative rounded-2xl bg-white p-8">
       <div className="flex items-center justify-between pb-5">
-        <h1 className="mb-0 text-[22px] text-pfmv-navy">{title}</h1>
         {withSharingOption && <PartageOverviewMemberInviteButton />}
       </div>
       <div

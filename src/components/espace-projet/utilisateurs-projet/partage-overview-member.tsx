@@ -27,13 +27,7 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
   };
 
   return (
-    <div
-      className={clsx(
-        "relative flex h-[70px] items-center justify-between gap-0",
-        "border-b-[1px] border-b-dsfr-border-default-grey pl-20 text-base",
-        className,
-      )}
-    >
+    <div className={clsx("relative flex h-[70px] items-center justify-between gap-0 pl-20 text-base", className)}>
       <div className="absolute left-0">
         <PartageOverviewMemberInitiales name={name} active={member.invitation_status === InvitationStatus.ACCEPTED} />
       </div>
