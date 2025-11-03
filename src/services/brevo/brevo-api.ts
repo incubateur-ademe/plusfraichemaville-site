@@ -1,6 +1,6 @@
 import { isValidEmailForPath } from "@/src/helpers/email-utils";
 
-export const brevoSendEmail = async (to: string, templateId: number, params?: Record<string, string>) => {
+export const brevoSendEmail = async (to: string, templateId: number, params?: Record<string, string | boolean>) => {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
 
