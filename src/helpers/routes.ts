@@ -40,6 +40,7 @@ export const PFMV_ROUTES = {
   RECHERCHE_GLOBALE: (query?: string) => `/recherche${query ? `?q=${query}` : ""}`,
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
   ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire/carte",
+  ESPACE_PROJET_ANNUAIRE_CONTACT: "/annuaire/carte#annuaire-saved-contacts",
   ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/diagnostic/prestation/retour-experience/${slug}`,
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord",
