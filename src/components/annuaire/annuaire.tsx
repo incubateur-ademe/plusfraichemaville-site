@@ -13,8 +13,8 @@ export const Annuaire = async ({ projetId }: { projetId: string }) => {
   const markers = [...rexMarkers, ...inProgressProjetsPositions];
 
   return (
-    <div className="fr-container mt-8">
-      <AnnuaireTitle/>
+    <div className="fr-container mt-8" id="annuaire-map">
+      <AnnuaireTitle />
       <AnnuaireMapContainer markers={markers} />
       <hr className="mt-3 pb-2" id="annuaire-saved-contacts" />
       <AnnuaireSavedContacts />

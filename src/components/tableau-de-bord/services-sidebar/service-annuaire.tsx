@@ -9,7 +9,7 @@ export const ServiceAnnuaire = () => {
         <Image src="/images/espace-projet/services/carte.svg" width={32} height={32} alt="" className="size-8" />
         <div>
           <h3>
-            <GenericFicheLink className="text-pfmv-navy" href={PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE_MAP}>
+            <GenericFicheLink className="text-pfmv-navy" href={PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE_MAP_CONTACT}>
               Carte des projets et des contacts
             </GenericFicheLink>
           </h3>

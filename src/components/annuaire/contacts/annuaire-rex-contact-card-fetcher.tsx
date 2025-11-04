@@ -1,4 +1,4 @@
-import { RexContactId, AnnuaireContact, StrapiAnnuaireContact } from "@/src/components/annuaire/types";
+import { AnnuaireContact, RexContactId, StrapiAnnuaireContact } from "@/src/components/annuaire/types";
 
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { GET_REX_WITH_CONTACTS_BY_ID } from "@/src/helpers/routes";
@@ -38,7 +38,7 @@ export const AnnuaireRexContactCardFetcher = ({
       addRexContact(loadedContact);
       setAnnuaireContact(loadedContact);
     }
-  }, [addRexContact, contactIsVisible, data, rexContactId.contactId]);
+  }, [addRexContact, data, rexContactId.contactId]);
 
   return !data && isLoading ? (
     <AnnuaireRexContactCardSkeleton />

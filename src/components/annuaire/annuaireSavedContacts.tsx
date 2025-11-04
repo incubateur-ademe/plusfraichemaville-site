@@ -7,20 +7,23 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { userProjetToAnnuaireContactWithProjet } from "@/src/components/annuaire/helpers";
-import { RexContactId } from "@/src/components/annuaire/types";
+import { AnnuaireContact, RexContactId } from "@/src/components/annuaire/types";
 import { AnnuaireRexContactCardFetcher } from "@/src/components/annuaire/contacts/annuaire-rex-contact-card-fetcher";
 import { AnnuaireProjetVisibility } from "./annuaire-projet-visibility";
 import { AnnuaireContactsDownloader } from "./side-panel/annuaire-contacts-downloader";
 import { useAnnuaireCardFilters } from "@/src/components/annuaire/use-annuaire-card-filters";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AnnuaireCardFilters } from "@/src/components/annuaire/annuaire-card-filters";
 import { AnnuaireContactCard } from "@/src/components/annuaire/contacts/annuaire-contact-card";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 export const AnnuaireSavedContacts = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isLecteur = useIsLecteur(currentProjet?.id);
   const inProgressProjetContacts = currentProjet?.sourcing_user_projets;
   const rexContactIds = currentProjet?.sourcing_rex as RexContactId[] | undefined;
+  const nbContacts = (inProgressProjetContacts?.length || 0) + (rexContactIds?.length || 0);
+  const [showFilters, setShowFilters] = useState(false);
 
   const {
     contactTypeFilters,
@@ -31,6 +34,8 @@ export const AnnuaireSavedContacts = () => {
     addRexContact,
     contactIsVisible,
   } = useAnnuaireCardFilters();
+
+  const shouldShowContact = (contact: AnnuaireContact) => (showFilters ? contactIsVisible(contact) : true);
 
   const inProgressAnnuaireContact = useMemo(
     () => inProgressProjetContacts?.map((c) => userProjetToAnnuaireContactWithProjet(c.sourced_user_projet)) || [],
@@ -51,20 +56,34 @@ export const AnnuaireSavedContacts = () => {
     <div className="fr-container mt-8">
       <div className="mb-8 flex justify-between align-middle">
         <h2 className="!mb-0 text-[1.75rem]">Mes contacts sauvegardés</h2>
-        {(!isEmpty(inProgressProjetContacts) || !isEmpty(rexContactIds)) && (
-          <AnnuaireContactsDownloader projetId={currentProjet?.id} />
+
+        {nbContacts > 0 && (
+          <div className="flex gap-4">
+            <AnnuaireContactsDownloader projetId={currentProjet?.id} />
+            <Button
+              title="Filtrer"
+              className="rounded-3xl"
+              iconPosition="left"
+              priority={showFilters ? "primary" : "secondary"}
+              iconId={showFilters ? "ri-filter-off-fill" : "ri-filter-fill"}
+              onClick={() => setShowFilters(!showFilters)}
+            >
+              Filtrer
+            </Button>
+          </div>
         )}
       </div>
       <AnnuaireCardFilters
         setFilter={setFilter}
         contactTypeFilters={contactTypeFilters}
         contactCountForFilter={contactCountForFilter}
+        className={clsx(showFilters ? "mb-12 max-h-[20rem] opacity-100" : "max-h-0 opacity-0", "transition-all")}
       />
       <div className="flex flex-wrap gap-6">
         {!isEmpty(inProgressAnnuaireContact) &&
           inProgressAnnuaireContact?.map(
             (contact) =>
-              contactIsVisible(contact) && (
+              shouldShowContact(contact) && (
                 <AnnuaireContactCard
                   key={contact.uniqueId}
                   contact={contact}
@@ -78,7 +97,7 @@ export const AnnuaireSavedContacts = () => {
           rexContactIds?.map((rexContactId) => (
             <AnnuaireRexContactCardFetcher
               addRexContact={addRexContact}
-              contactIsVisible={contactIsVisible}
+              contactIsVisible={shouldShowContact}
               rexContactId={rexContactId}
               key={`${rexContactId.rexId}-${rexContactId.contactId}`}
             />
