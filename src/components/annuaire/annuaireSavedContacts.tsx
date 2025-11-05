@@ -1,6 +1,4 @@
 "use client";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { GenericFicheLink } from "../common/generic-save-fiche/generic-fiche-link";
 import clsx from "clsx";
 import { AnnuaireEmpty } from "./annuaire-empty";
 import { useProjetsStore } from "@/src/stores/projets/provider";
@@ -53,7 +51,7 @@ export const AnnuaireSavedContacts = () => {
   }, [removeRexContacts, rexContactIds]);
 
   return (
-    <div className="fr-container mt-8">
+    <div className="mt-8">
       <div className="mb-8 flex justify-between align-middle">
         <h2 className="!mb-0 text-[1.75rem]">Mes contacts sauvegardés</h2>
 
@@ -107,16 +105,25 @@ export const AnnuaireSavedContacts = () => {
           ))}
         {isEmpty(inProgressProjetContacts) && isEmpty(rexContactIds) && <AnnuaireEmpty />}
         {!isLecteur && (
-          <GenericFicheLink
-            href={PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE_MAP}
+          <Button
+            onClick={(e: any) => {
+              const element = document.getElementById("annuaire-map");
+              if (element) {
+                e.preventDefault();
+                element.scrollIntoView({
+                  behavior: "smooth",
+                  block: "start",
+                });
+              }
+            }}
             className={clsx(
-              "fr-btn !h-32 !w-32 rounded-[10px] bg-dsfr-text-label-blue-france",
+              "!h-32 !w-32 rounded-[10px] bg-dsfr-text-label-blue-france",
               "flex !flex-col items-center justify-center self-center",
             )}
           >
             <i className="ri-add-circle-fill mb-2 text-sm text-white"></i>
             <span className="text-center text-white">Ajouter des contacts</span>
-          </GenericFicheLink>
+          </Button>
         )}
       </div>
       <div className="mt-10">
