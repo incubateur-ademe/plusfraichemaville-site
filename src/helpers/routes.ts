@@ -39,9 +39,9 @@ export const PFMV_ROUTES = {
   CREATE_PROJET: "/espace-projet/creation-projet",
   RECHERCHE_GLOBALE: (query?: string) => `/recherche${query ? `?q=${query}` : ""}`,
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
-  ESPACE_PROJET_ANNUAIRE_MAP_CONTACT: "/annuaire/carte",
-  ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire/carte#annuaire-map",
-  ESPACE_PROJET_ANNUAIRE_CONTACT: "/annuaire/carte#annuaire-saved-contacts",
+  ESPACE_PROJET_ANNUAIRE_MAP_CONTACT: "/annuaire",
+  ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire#annuaire-map",
+  ESPACE_PROJET_ANNUAIRE_CONTACT: "/annuaire#annuaire-saved-contacts",
   ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/diagnostic/prestation/retour-experience/${slug}`,
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord",
@@ -75,7 +75,6 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FICHE_DIAGNOSTIC: (projetId: number, ficheDiagnosticSlug: string) =>
     `/espace-projet/${projetId}/diagnostic/prestation/fiche-diagnostic/${ficheDiagnosticSlug}`,
   ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
-  ESPACE_PROJET_ANNUAIRE: (projetId: number) => `/espace-projet/${projetId}/annuaire`,
   ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>
     `/espace-projet/${projetId}/financement/edit/${estimationId}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_TYPE_FILTER: (projetId: number, typeFiche: TypeSolution) =>

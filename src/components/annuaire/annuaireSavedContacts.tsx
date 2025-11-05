@@ -77,7 +77,10 @@ export const AnnuaireSavedContacts = () => {
         setFilter={setFilter}
         contactTypeFilters={contactTypeFilters}
         contactCountForFilter={contactCountForFilter}
-        className={clsx(showFilters ? "mb-12 max-h-[20rem] opacity-100" : "max-h-0 opacity-0", "transition-all")}
+        className={clsx(
+          showFilters ? "mb-12 max-h-[20rem] opacity-100" : "max-h-0 opacity-0",
+          "transition-all duration-300",
+        )}
       />
       <div className="flex flex-wrap gap-6">
         {!isEmpty(inProgressAnnuaireContact) &&
