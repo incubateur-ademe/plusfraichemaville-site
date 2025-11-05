@@ -3,23 +3,9 @@ import {
   BREADCRUMB_SEGMENT_DASHBOARD,
   EspaceProjetBreadcrumbStep,
 } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
-import { BreadcrumbSegment } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
-
-const BREADCRUMB_SEGMENT_ANNUAIRE_MES_CONTACTS = (projetId: number): BreadcrumbSegment => ({
-  linkProps: {
-    href: PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE(projetId),
-  },
-  label: "Mes contacts",
-});
-
-export const BREADCRUMB_ANNUAIRE_MES_CONTACTS: EspaceProjetBreadcrumbStep = {
-  currentPageLabel: BREADCRUMB_SEGMENT_ANNUAIRE_MES_CONTACTS(0).label,
-  breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
-};
 
 export const BREADCRUMB_ANNUAIRE_CARTE: EspaceProjetBreadcrumbStep = {
-  currentPageLabel: "Sélection des contacts",
+  currentPageLabel: "Carte des projets et des contacts",
   breadcrumbSegments: (projetId: number, projetName: string) =>
-    [BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName), BREADCRUMB_SEGMENT_ANNUAIRE_MES_CONTACTS(projetId)].flat(1),
+    [BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName)].flat(1),
 };
