@@ -7,30 +7,25 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const AuthButtons = () => {
   const { status } = useSession();
 
   const handleSignIn = () => signIn("agentconnect", { callbackUrl: getFullUrl(PFMV_ROUTES.ESPACE_PROJET) });
-  const displaySearch = process.env.NEXT_PUBLIC_FEATURE_SEARCH === "true" || false;
   const isSearchPage = usePathname().startsWith(PFMV_ROUTES.RECHERCHE_GLOBALE(""));
 
   return (
     <div className="hidden items-center gap-4 lg:flex">
-      {displaySearch && (
-        <Button
-          title="Rechercher"
-          className={clsx("rounded-3xl", isSearchPage && "!bg-dsfr-background-action-low-blue-france")}
-          iconId="fr-icon-search-line"
-          priority="tertiary"
-          iconPosition="left"
-          linkProps={{
-            href: PFMV_ROUTES.RECHERCHE_GLOBALE(),
-          }}
-        >
-          Rechercher
-        </Button>
-      )}
+      <LinkWithoutPrefetch
+        href={PFMV_ROUTES.RECHERCHE_GLOBALE()}
+        className={clsx(
+          "fr-btn fr-btn--tertiary fr-icon-search-line fr-btn--icon-left relative z-10 rounded-3xl",
+          isSearchPage && "!bg-dsfr-background-action-low-blue-france",
+        )}
+      >
+        Rechercher
+      </LinkWithoutPrefetch>
       <Conditional>
         <Case condition={status === "authenticated"}>
           <AuthButtonEspaceProjet /> <AuthButtonUser />

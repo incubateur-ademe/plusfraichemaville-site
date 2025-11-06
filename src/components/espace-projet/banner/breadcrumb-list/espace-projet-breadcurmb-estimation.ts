@@ -15,22 +15,23 @@ const BREADCRUMB_SEGMENT_SOLUTION_MES_ESTIMATIONS = (projetId: number): Breadcru
 
 export const BREADCRUMB_MES_ESTIMATIONS: EspaceProjetBreadcrumbStep = {
   currentPageLabel: BREADCRUMB_SEGMENT_SOLUTION_MES_ESTIMATIONS(0).label,
-  breadcrumbSegments: (projetId: number) => [BREADCRUMB_SEGMENT_DASHBOARD(projetId)],
+  breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
 };
 
 export const BREADCRUMB_ESTIMATION_CREATION = (projetHasEstimations: boolean): EspaceProjetBreadcrumbStep => {
   if (projetHasEstimations) {
     return {
       currentPageLabel: "Création d'une estimation",
-      breadcrumbSegments: (projetId: number) => [
-        BREADCRUMB_SEGMENT_DASHBOARD(projetId),
-        BREADCRUMB_SEGMENT_SOLUTION_MES_ESTIMATIONS(projetId),
-      ],
+      breadcrumbSegments: (projetId: number, projetName: string) =>
+        [
+          BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+          BREADCRUMB_SEGMENT_SOLUTION_MES_ESTIMATIONS(projetId),
+        ].flat(1),
     };
   } else {
     return {
       currentPageLabel: "Création d'une estimation",
-      breadcrumbSegments: (projetId: number) => [BREADCRUMB_SEGMENT_DASHBOARD(projetId)],
+      breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
     };
   }
 };

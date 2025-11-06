@@ -10,7 +10,8 @@ import dynamic from "next/dynamic";
 
 import { AnnuaireMapSkeleton } from "./annuaire-map-skeleton";
 import { AnnuaireFilterAdresse } from "../filters/annuaire-filter-adresse";
-import { AnnuaireLayoutButton } from "@/src/components/annuaire/annuaire-layout-button";
+import React from "react";
+
 const LazyAnnuaireMapClient = dynamic(() => import("././annuaire-map-client"), {
   ssr: false,
   loading: () => <AnnuaireMapSkeleton />,
@@ -37,8 +38,7 @@ const AnnuaireMapContainer = ({ markers }: AnnuaireMapContainerProps) => {
   } = useAnnuaireFilters(markers);
 
   return (
-    <div className="fr-container mt-8">
-      <h2 className="mb-6 text-[1.75rem]">Je sélectionne des prestataires et des partenaires</h2>
+    <>
       <AnnuaireFilters>
         <AnnuaireFilterAdresse setMapFocus={setMapFocus} />
         <div className="flex flex-wrap gap-4">
@@ -64,8 +64,7 @@ const AnnuaireMapContainer = ({ markers }: AnnuaireMapContainerProps) => {
         mapFocus={mapFocus}
         className="mb-10"
       />
-      <AnnuaireLayoutButton />
-    </div>
+    </>
   );
 };
 

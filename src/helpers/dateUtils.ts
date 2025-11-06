@@ -43,7 +43,7 @@ export function stipStrapiTime(time: Date): string {
 }
 
 export const getRelativeDate = (lastUpdate?: number | null) =>
-  !lastUpdate ? "Aujourd'hui" : lastUpdate === 1 ? "Hier" : `Il y a ${lastUpdate} jours`;
+  (lastUpdate || 0) <= 0 ? "Aujourd'hui" : lastUpdate === 1 ? "Hier" : `Il y a ${lastUpdate} jours`;
 
 const addLeadingZero = (value: number): string => ("0" + value).slice(-2);
 

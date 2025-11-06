@@ -279,9 +279,8 @@ export class EmailService {
         userCollectiviteName: getPrimaryCollectiviteForUser(userProjet.user).nom,
         destinationMail: oldestAdmin.user.email,
         projetName: userProjet.projet.nom,
-        link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(
+        link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_UTILISATEURS_PROJET(
           userProjet.projet_id,
-          "partage",
         )}`,
       };
 
@@ -513,7 +512,7 @@ export class EmailService {
       projets.map(async (projet) => {
         const emailParams: EmailRemindUnfinishedAndInactiveProjetConfig = {
           userPrenom: projet.creator.prenom || "",
-          urlProjetStatus: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projet.id, "statut")),
+          urlProjetStatus: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_STATUT_PROJET(projet.id)),
         };
         return await this.sendEmail({
           to: projet.creator.email,
@@ -537,7 +536,7 @@ export class EmailService {
         const emailParams: EmailRemindUnfinishedAndInactiveProjet2Config = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          urlTableauDeBord: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD_WITH_CURRENT_TAB(projet.id, "tableau-de-suivi")),
+          urlTableauDeBord: getFullUrl(PFMV_ROUTES.TABLEAU_DE_BORD(projet.id)),
         };
         return await this.sendEmail({
           to: projet.creator.email,

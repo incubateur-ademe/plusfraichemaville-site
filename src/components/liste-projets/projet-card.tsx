@@ -10,7 +10,7 @@ import { getAllUserProjectCount, getCurrentUserProjectInfos, getOldestAdmin } fr
 import { useUserStore } from "@/src/stores/user/provider";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { useEffect, useMemo } from "react";
-import { PartageOverviewPopupMenu } from "../partage/partage-overview-popup-menu";
+import { PartageOverviewPopupMenu } from "@/src/components/espace-projet/utilisateurs-projet/partage-overview-popup-menu";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { hasDiscardedInformation } from "@/src/helpers/user";
 import { MODE_LECTEUR_MODAL_ID } from "@/src/components/tableau-de-bord/viewer-mode-modal";

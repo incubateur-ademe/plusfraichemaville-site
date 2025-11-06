@@ -1,5 +1,5 @@
+"use client";
 import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers";
-import { nullFunctionalComponent } from "@/src/helpers/common";
 import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
@@ -9,17 +9,14 @@ export const AideEstimationsCardLabelFicheSolution = ({ ficheId }: { ficheId: nu
   const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionUrlApi(ficheId));
 
   const ficheSolution = data && data[0];
-  const Icon = getTypeSolutionFromCode(ficheSolution?.attributes.type_solution)?.coloredIcon ?? nullFunctionalComponent;
+  const iconTypeSolution =
+    getTypeSolutionFromCode(ficheSolution?.attributes.type_solution)?.coloredIcon("fr-icon--sm mr-1") ?? null;
 
   return (
-    <div className="shrink-0">
+    <div className="shrink-0 text-black">
       <AideEstimationsCardLabel isLoading={isLoading}>
         <div className="flex items-center justify-center gap-1">
-          {
-            <i className="[&>i]:!inline-block [&>i]:!size-4 [&>i]:before:!size-4 [&>i]:before:!align-[-3px]">
-              <Icon />
-            </i>
-          }
+          {<>{iconTypeSolution}</>}
           {ficheSolution?.attributes.titre}
         </div>
       </AideEstimationsCardLabel>
