@@ -46,7 +46,7 @@ const unclusteredPointLayer: SymbolLayerSpecification = {
 
 type AnnuaireMapClustersProps = {
   markers: CustomMarker[];
-  selectedMarker?: CustomMarker;
+  selectedMarker?: CustomMarker | null;
 };
 
 export const AnnuaireMapClusters = ({ markers, selectedMarker }: AnnuaireMapClustersProps) => {

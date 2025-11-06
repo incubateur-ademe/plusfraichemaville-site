@@ -24,7 +24,7 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
       <div
         className={clsx(
           "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey",
-          "min-h-52 px-5 pb-4 pt-6",
+          "min-h-52 px-5 pb-4 pt-2",
         )}
       >
         <AnnuaireSidePanelTracking type="rex" name={retourExperienceAttributes.titre} />

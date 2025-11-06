@@ -31,7 +31,6 @@ const useFilteredMarkers = (
 };
 
 export const useAnnuaireFilters = (markers: CustomMarker[]) => {
-  const [selectedMarker, setSelectedMarker] = useState<CustomMarker>();
   const [selectedTypeEspace, setSelectedTypeEspace] = useState<TypeEspaceCode[]>([]);
   const [selectedStatus, setSelectedStatus] = useState<CustomMarkerType[]>([]);
   const [selectedBudget, setSelectedBudget] = useState<BudgetRangeKey[]>([]);
@@ -51,8 +50,6 @@ export const useAnnuaireFilters = (markers: CustomMarker[]) => {
 
   return {
     filteredMarkers,
-    selectedMarker,
-    setSelectedMarker,
     selectedTypeEspace,
     setSelectedTypeEspace,
     selectedStatus,
