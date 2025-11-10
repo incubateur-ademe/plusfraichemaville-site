@@ -25,8 +25,8 @@ const pipelineDealStage = {
 
 const formatCanalAcquisition = (canal: string | null) => {
   if (!canal) return "";
-  const canalExists = ALL_CANAL_ACQUISITION.some((item) => item.label === canal);
-  return canalExists ? canal : CUSTOM_CANAL_ACQUISITION.label;
+  const canalExists = ALL_CANAL_ACQUISITION.find((item) => item.label === canal);
+  return canalExists ? canalExists.hubspotLabel || canalExists.label : CUSTOM_CANAL_ACQUISITION.label;
 };
 
 export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObjectBatchInputUpsert[] =>
