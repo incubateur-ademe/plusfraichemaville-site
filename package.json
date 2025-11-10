@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
-    "@codegouvfr/react-dsfr": "^1.22.5",
+    "@codegouvfr/react-dsfr": "^1.29.0",
     "@headlessui/react": "^2.2.0",
     "@hookform/resolvers": "^3.10.0",
     "@hubspot/api-client": "^13.2.0",

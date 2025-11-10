@@ -16,8 +16,8 @@ importers:
         specifier: ^2.7.4
         version: 2.7.4(@prisma/client@6.11.1(prisma@6.11.1(typescript@5.7.3))(typescript@5.7.3))
       '@codegouvfr/react-dsfr':
-        specifier: ^1.22.5
-        version: 1.22.5
+        specifier: ^1.29.0
+        version: 1.29.0
       '@headlessui/react':
         specifier: ^2.2.0
         version: 2.2.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -276,8 +276,8 @@ packages:
     resolution: {integrity: sha512-vN5p+1kl59GVKMvTHt55NzzmYVxprfJD+ql7U9NFIfKCBkYE55LYtS+WtPlaYOyzydrKI8Nezd+aZextrd+FMA==}
     engines: {node: '>=6.9.0'}
 
-  '@codegouvfr/react-dsfr@1.22.5':
-    resolution: {integrity: sha512-2QcuojWvQIBJBvU/ERVMTp3BvejkTL8Qgkjti4XdofLqpZzv/xsOCklQ1XUER3gHGvIm7N4webW2Co0TKEPU+Q==}
+  '@codegouvfr/react-dsfr@1.29.0':
+    resolution: {integrity: sha512-3kK6W8tOxkUN+2yufEgikg6HNXQkF1YSJNB2imBCyDo8Z/N7zK38XAygXXmeY3+0d8x3JZ/Q+wzv73pG1k3cbA==}
     hasBin: true
     peerDependencies:
       '@gouvfr/dsfr-chart': ^1.0.0
@@ -4264,7 +4264,7 @@ snapshots:
       '@babel/helper-string-parser': 7.25.9
       '@babel/helper-validator-identifier': 7.25.9
 
-  '@codegouvfr/react-dsfr@1.22.5':
+  '@codegouvfr/react-dsfr@1.29.0':
     dependencies:
       tsafe: 1.8.5
       yargs-parser: 21.1.1
