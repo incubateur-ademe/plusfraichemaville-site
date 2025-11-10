@@ -65,7 +65,6 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
     });
 
     const markers = features.map((feature) => feature.properties as CustomMarker);
-    console.log("markers", markers);
     setUnclusteredMarkers(markers);
   }, []);
 
@@ -160,7 +159,7 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
           onMoveEnd={updateUnclusteredMarkers}
           onZoomEnd={updateUnclusteredMarkers}
         >
-          <AnnuaireMapClusters markers={markers} selectedMarker={selectedMarker} />
+          <AnnuaireMapClusters markers={markers} selectedMarker={selectedMarkerPanelOpen ? selectedMarker : null} />
           <NavigationControl position="top-right" showCompass={false} />
           <AnnuaireMapLegend />
           <AnnuaireMapFocus coordinates={currentProjetCoordinates} />
@@ -179,18 +178,18 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
               src={`/images/annuaire/annuaire-projet-ma-collectivite${
                 selectedMarker?.type === "ma-collectivite" ? "-active" : ""
               }.svg`}
-              width={45}
-              height={54}
+              width={selectedMarker?.type === "ma-collectivite" ? 55: 45}
+              height={selectedMarker?.type === "ma-collectivite" ? 67: 54}
               alt="Localisation de mon projet"
             />
           </Marker>
         </Map>
       </div>
-      <div className="relative h-[715px] w-[400px] shrink-0 overflow-y-auto overflow-x-hidden">
+      <div className="relative h-[715px] w-[400px] shrink-0 overflow-x-hidden">
         <section
           className={clsx(
-            "absolute left-0 top-0 z-10 h-full w-full transition-all duration-200",
-            (selectedMarkerPanelOpen && selectedMarker) ? "opacity-0" : "opacity-100",
+            "absolute left-0 top-0 z-10 h-full w-full overflow-y-auto transition-all duration-200",
+            selectedMarkerPanelOpen && selectedMarker ? "opacity-0" : "opacity-100",
           )}
         >
           <AnnuaireSidePanelListContainer
@@ -200,7 +199,7 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
         </section>
         <section
           className={clsx(
-            "absolute left-0 top-0 z-10 h-full w-full transition-all duration-300",
+            "absolute left-0 top-0 z-10 h-full w-full overflow-y-auto transition-all duration-300",
             selectedMarkerPanelOpen && selectedMarker ? "left-0" : "left-[400px]",
           )}
         >

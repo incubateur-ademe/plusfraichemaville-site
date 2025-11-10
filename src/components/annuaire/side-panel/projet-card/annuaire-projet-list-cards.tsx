@@ -11,7 +11,7 @@ export const AnnuaireProjetListCards = ({
   selectMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: number) => void;
 }) => {
   return (
-    <div className="flex flex-col gap-4 px-2">
+    <div className="flex flex-col gap-4 px-2 pt-1">
       {markers.map((marker) => (
         <div key={marker.idProjet}>
           <Conditional>

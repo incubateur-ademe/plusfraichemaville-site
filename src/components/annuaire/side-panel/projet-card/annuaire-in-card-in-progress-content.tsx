@@ -20,7 +20,8 @@ export const AnnuaireInCardInProgressContent = ({
       <div
         className={clsx(
           "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey",
-          "fr-enlarge-button group min-h-52 rounded-2xl px-5 pb-4 pt-6 hover:bg-dsfr-background-alt-blue-france-hover",
+          "fr-enlarge-button group min-h-52 rounded-2xl px-5 pb-4 pt-6 hover:bg-dsfr-background-alt-blue-france",
+          "hover:outline outline-1 outline-offset-0 outline-bg-dsfr-background-alt-blue-france-hover"
         )}
       >
         <div className="flex items-center justify-between">
@@ -31,7 +32,7 @@ export const AnnuaireInCardInProgressContent = ({
         </div>
         <Button
           priority="tertiary no outline"
-          className="mb-8 mt-4 !px-0 text-left text-lg font-bold group-hover:!bg-dsfr-background-alt-blue-france-hover"
+          className="mb-8 mt-4 !px-0 text-left text-lg font-bold"
           onClick={onClick}
         >
           {data.nom}
