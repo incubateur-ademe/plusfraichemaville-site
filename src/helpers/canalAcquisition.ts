@@ -10,25 +10,31 @@ export const CUSTOM_CANAL_ACQUISITION: CanalAcquisition = {
 
 export const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
-    label: "Webinaire",
+    label: "Accompagnement ou appel à manifestation d’intérêt (AMI)",
   },
   {
-    label: "Démo Plus Fraîche Ma Ville",
+    label: "Message de ma hiérarchie ou de collègues",
   },
   {
-    label: "Mail",
+    label: "Réseau ADEME",
+  },
+  {
+    label: "Salon ou événement local",
+  },
+  {
+    label: "Médias (presse, radio, TV)",
+  },
+  {
+    label: "Réseaux sociaux (ex. LinkedIn)",
   },
   {
     label: "Appel d'un chargé de déploiement",
   },
   {
-    label: "Salon, événement local",
-  },
-  {
     label: "Recherche internet",
   },
   {
-    label: "Appel à manifestation d'intérêt (AMI)",
+    label: "Recommandation / bouche-à-oreille",
   },
 ];
 
