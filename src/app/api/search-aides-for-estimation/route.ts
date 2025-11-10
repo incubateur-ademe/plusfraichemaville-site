@@ -7,6 +7,7 @@ import { getCollectiviteById } from "@/src/lib/prisma/prismaCollectiviteQueries"
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/lib/next-auth/auth";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 
 export async function GET(request: NextRequest) {
   const estimationId = request.nextUrl.searchParams.get("estimationId");
@@ -41,6 +42,7 @@ export async function GET(request: NextRequest) {
     const result = await searchAidesFromAidesTerritoires(
       ficheSolutions.map((fs) => fs.attributes),
       collectivite,
+      selectEspaceLabelByCode(projet.type_espace),
       !!useNewVersion,
     );
     return NextResponse.json(result);
