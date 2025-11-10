@@ -87,7 +87,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
             <CmsRichText label={aide.contact.replace(/href/g, "target='_blank' href")} />
           </hgroup>
         )}
-        <div className="flex gap-8 justify-end">
+        <div className="flex justify-end gap-8">
           {aide.origin_url && (
             <Button
               className="rounded-3xl"
@@ -99,11 +99,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
             </Button>
           )}
           {aide.application_url && (
-            <Button
-              className="rounded-3xl"
-              size="small"
-              linkProps={{ target: "_blank", href: aide.application_url }}
-            >
+            <Button className="rounded-3xl" size="small" linkProps={{ target: "_blank", href: aide.application_url }}>
               Candidater
             </Button>
           )}

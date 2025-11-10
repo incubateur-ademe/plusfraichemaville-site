@@ -11,7 +11,6 @@ import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 
 export async function GET(request: NextRequest) {
   const estimationId = request.nextUrl.searchParams.get("estimationId");
-  const useNewVersion = request.nextUrl.searchParams.get("useNewVersion");
   if (!estimationId) {
     return NextResponse.json(null, { status: 400 });
   }
@@ -43,7 +42,6 @@ export async function GET(request: NextRequest) {
       ficheSolutions.map((fs) => fs.attributes),
       collectivite,
       selectEspaceLabelByCode(projet.type_espace),
-      !!useNewVersion,
     );
     return NextResponse.json(result);
   }
