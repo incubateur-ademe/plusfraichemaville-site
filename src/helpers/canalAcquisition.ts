@@ -12,7 +12,7 @@ export const CUSTOM_CANAL_ACQUISITION: CanalAcquisition = {
 export const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
     label: "Accompagnement ou appel à manifestation d’intérêt (AMI)",
-    hubspotLabel : "Appel à manifestation d'intérêt (AMI)",
+    hubspotLabel: "Appel à manifestation d'intérêt (AMI)",
   },
   {
     label: "Message de ma hiérarchie ou de collègues",
