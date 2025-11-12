@@ -86,7 +86,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     disabledChildren: <TableauDeBordSuiviEstimationDisabled />,
   },
   {
-    title: "Je trouve des financements",
+    title: "Je trouve des aides financières et en ingénierie",
     progress: (projet: ProjetWithRelations | undefined) =>
       projet?.estimations?.find((estimation) => estimation.estimations_aides.length > 0) ? "100" : "0",
     disabled: (projet: ProjetWithRelations | undefined) => {
@@ -96,7 +96,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     picto: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
     children: (
       <TableauDeBordSuiviWithText>
-        Identifier les aides et les contacts nécessaires pour préparer un dossier de financement.
+        Identifier les aides et contacts nécessaires pour soutenir mon projet.
       </TableauDeBordSuiviWithText>
     ),
     disabledChildren: <TableauDeBordSuiviFinancementDisabled />,
