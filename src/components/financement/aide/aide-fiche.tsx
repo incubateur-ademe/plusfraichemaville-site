@@ -95,7 +95,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
               linkProps={{ target: "_blank", href: aide.origin_url }}
               priority="secondary"
             >
-              Plus d'informartions
+              Plus d'informations
             </Button>
           )}
           {aide.application_url && (
