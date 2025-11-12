@@ -2,6 +2,7 @@ import { SelectOption } from "@/src/components/common/SelectFormField";
 
 export type CanalAcquisition = {
   label: string;
+  hubspotLabel?: string;
 };
 
 export const CUSTOM_CANAL_ACQUISITION: CanalAcquisition = {
@@ -10,25 +11,34 @@ export const CUSTOM_CANAL_ACQUISITION: CanalAcquisition = {
 
 export const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
-    label: "Webinaire",
+    label: "Accompagnement ou appel à manifestation d’intérêt (AMI)",
+    hubspotLabel: "Appel à manifestation d'intérêt (AMI)",
   },
   {
-    label: "Démo Plus Fraîche Ma Ville",
+    label: "Message de ma hiérarchie ou de collègues",
+    hubspotLabel: "Mail",
   },
   {
-    label: "Mail",
+    label: "Réseau ADEME",
+  },
+  {
+    label: "Salon ou événement local",
+    hubspotLabel: "Salon, événement local",
+  },
+  {
+    label: "Médias (presse, radio, TV)",
+  },
+  {
+    label: "Réseaux sociaux (ex. LinkedIn)",
   },
   {
     label: "Appel d'un chargé de déploiement",
   },
   {
-    label: "Salon, événement local",
-  },
-  {
     label: "Recherche internet",
   },
   {
-    label: "Appel à manifestation d'intérêt (AMI)",
+    label: "Recommandation / bouche-à-oreille",
   },
 ];
 
