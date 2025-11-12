@@ -6,7 +6,7 @@ import Tag from "@codegouvfr/react-dsfr/Tag";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 import Button from "@codegouvfr/react-dsfr/Button";
 
-export const AnnuaireInCardInProgressContent = ({
+export const AnnuaireInProgressCardContent = ({
   data,
   onClick,
 }: {
@@ -21,28 +21,30 @@ export const AnnuaireInCardInProgressContent = ({
         className={clsx(
           "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey",
           "fr-enlarge-button group min-h-52 rounded-2xl px-5 pb-4 pt-6 hover:bg-dsfr-background-alt-blue-france",
-          "hover:outline outline-1 outline-offset-0 outline-bg-dsfr-background-alt-blue-france-hover"
+          "outline-bg-dsfr-background-alt-blue-france-hover outline-1 outline-offset-0 hover:outline",
         )}
       >
         <div className="flex items-center justify-between">
           <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
             Projet en cours
           </Badge>
-          <div className="text-sm font-bold">{selectEspaceLabelByCode(data.type_espace)}</div>
+          <Tag small className="!m-0 h-fit">
+            {selectEspaceLabelByCode(data.type_espace)}
+          </Tag>
         </div>
-        <Button
-          priority="tertiary no outline"
-          className="mb-8 mt-4 !px-0 text-left text-lg font-bold"
-          onClick={onClick}
-        >
+        <Button priority="tertiary no outline" className="mt-2 !px-0 text-left text-lg font-bold" onClick={onClick}>
           {data.nom}
         </Button>
+        <section className="mb-10 flex flex-row gap-1 text-sm">
+          <i className="ri-map-pin-line fr-icon--sm mr-1" />
+          {data.collectivite.nom}
+        </section>
         <div className="mt-auto flex flex-row items-center justify-between gap-1">
           <Tag small className="!m-0 h-fit">
             {regionLabel}
           </Tag>
-          <div className="text-nowrap text-pfmv-navy group-hover:underline">
-            Voir les contacts <i className="ri-arrow-right-line ml-2 before:mb-[3px] before:!size-4"></i>
+          <div className="text-nowrap font-bold text-pfmv-navy group-hover:underline">
+            Voir les contacts <i className="ri-arrow-right-line ml-1"></i>
           </div>
         </div>
       </div>

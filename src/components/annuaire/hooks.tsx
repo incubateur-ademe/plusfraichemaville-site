@@ -4,7 +4,6 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { ComponentType } from "react";
 import { getProjetCoordinates } from "@/src/components/annuaire/helpers";
-import { CustomMarker } from "@/src/components/annuaire/types";
 
 export const useCurrentProjetCoordinates = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -24,21 +23,12 @@ interface UseSidePanelFetcherConfig<T> {
   }>;
 }
 
-export function useSidePanelFetcher<T>({
-  url,
-  Skeleton,
-  Content,
-  onClick,
-}: UseSidePanelFetcherConfig<T>) {
+export function useSidePanelFetcher<T>({ url, Skeleton, Content, onClick }: UseSidePanelFetcherConfig<T>) {
   const { data, isLoading } = useImmutableSwrWithFetcher<T>(url);
 
   if (isLoading) {
     return <Skeleton />;
   }
 
-  return data ? (
-    <Content data={data} onClick={onClick} />
-  ) : (
-    <div>Erreur de chargement des informations.</div>
-  );
+  return data ? <Content data={data} onClick={onClick} /> : <div>Erreur de chargement des informations.</div>;
 }

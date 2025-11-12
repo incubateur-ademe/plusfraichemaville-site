@@ -178,8 +178,8 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
               src={`/images/annuaire/annuaire-projet-ma-collectivite${
                 selectedMarker?.type === "ma-collectivite" ? "-active" : ""
               }.svg`}
-              width={selectedMarker?.type === "ma-collectivite" ? 55: 45}
-              height={selectedMarker?.type === "ma-collectivite" ? 67: 54}
+              width={selectedMarker?.type === "ma-collectivite" ? 55 : 45}
+              height={selectedMarker?.type === "ma-collectivite" ? 67 : 54}
               alt="Localisation de mon projet"
             />
           </Marker>

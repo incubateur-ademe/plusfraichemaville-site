@@ -3,7 +3,7 @@ import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import { AnnuaireContactCard } from "../contacts/annuaire-contact-card";
 import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
-import { StrapiAnnuaireContact } from "@/src/components/annuaire/types";
+import { GeoJsonAdresse, StrapiAnnuaireContact } from "@/src/components/annuaire/types";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { strapiContactToAnnuaireContact } from "@/src/components/annuaire/helpers";
 import Tag from "@codegouvfr/react-dsfr/Tag";
@@ -11,6 +11,7 @@ import { AnnuaireRexContentSeeProject } from "./annuaire-rex-content-see-project
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { AnnuaireSidePanelTracking } from "./annuaire-side-panel-tracking";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
+import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 
 export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
@@ -18,6 +19,7 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
   const contacts = (data.attributes.contacts as unknown as StrapiAnnuaireContact[]).map((contact) =>
     strapiContactToAnnuaireContact(contact, data),
   );
+  const nomCollectivite = (retourExperienceAttributes.location as GeoJsonAdresse | null)?.properties?.city;
 
   return (
     <>
@@ -32,16 +34,29 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
           <Badge small noIcon className="!mb-0 !bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
             Projet réalisé
           </Badge>
-          <div className="flex flex-row items-center gap-1">
-            <div className="text-sm">Budget</div>
-            <div className="text-sm font-bold">
-              {retourExperienceAttributes.cout_euro != null && retourExperienceAttributes.cout_euro >= 0
-                ? `${formatNumberWithSpaces(retourExperienceAttributes.cout_euro)} €`
-                : "Non communiqué"}
-            </div>
+          <div className="flex flex-row flex-wrap items-center gap-1">
+            {retourExperienceAttributes.types_espaces?.map((typeEspace: string) => (
+              <Tag key={typeEspace} small className="!m-0 h-fit">
+                {selectEspaceLabelByCode(typeEspace)}
+              </Tag>
+            ))}
           </div>
         </div>
-        <div className="mb-8 mt-4 text-lg font-bold">{retourExperienceAttributes.titre}</div>
+        <div className="mb-2 mt-2 text-lg font-bold">{retourExperienceAttributes.titre}</div>
+        {nomCollectivite && (
+          <section className="mb-1 text-sm">
+            <i className="ri-map-pin-line fr-icon--sm mr-1" />
+            {nomCollectivite}
+          </section>
+        )}
+        <section className="mb-6">
+          <i className="ri-money-euro-circle-line fr-icon--sm mr-1 " />
+          <span className="text-sm">
+            {retourExperienceAttributes.cout_euro != null && retourExperienceAttributes.cout_euro >= 0
+              ? `${formatNumberWithSpaces(retourExperienceAttributes.cout_euro)} €`
+              : "Budget non communiqué"}
+          </span>
+        </section>
         <div className="flex items-center justify-between">
           <Tag small className="!mb-0 h-fit">
             {getRegionLabelFromCode(retourExperienceAttributes.region?.data.attributes.code)}

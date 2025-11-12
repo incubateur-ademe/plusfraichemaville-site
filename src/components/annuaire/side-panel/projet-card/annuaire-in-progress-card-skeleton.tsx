@@ -5,7 +5,7 @@ export const AnnuaireInProgressCardSkeleton = () => {
   return (
     <>
       <div className="h-46 flex w-full flex-col">
-        <div className={clsx("h-[11.5rem] bg-dsfr-background-alt-blue-france px-5 pb-4 pt-6 rounded-2xl")}>
+        <div className={clsx("h-[11.5rem] rounded-2xl bg-dsfr-background-alt-blue-france px-5 pb-4 pt-6")}>
           <div className="flex items-center justify-between">
             <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
               Projet en cours
