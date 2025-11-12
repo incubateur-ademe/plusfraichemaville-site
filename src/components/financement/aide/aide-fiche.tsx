@@ -74,19 +74,36 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
             </hgroup>
           )}
         </div>
-        <div className="mb-16">{aide.description && <CmsRichText label={aide.description} />}</div>
-        {aide.application_url && (
-          <div className="flex justify-end">
+        <div className="mb-8">{aide.description && <CmsRichText label={aide.description} />}</div>
+        {aide.eligibility && (
+          <hgroup className="mb-8">
+            <h2 className="mb-2 text-xl text-dsfr-background-flat-info">{"Critères d'éligibilité"}</h2>
+            <CmsRichText label={aide.eligibility.replace(/href/g, "target='_blank' href")} />
+          </hgroup>
+        )}
+        {aide.contact && (
+          <hgroup className="mb-8">
+            <h2 className="mb-2 text-xl text-dsfr-background-flat-info">Contact</h2>
+            <CmsRichText label={aide.contact.replace(/href/g, "target='_blank' href")} />
+          </hgroup>
+        )}
+        <div className="flex justify-end gap-8">
+          {aide.origin_url && (
             <Button
-              iconId="ri-external-link-fill"
-              className="!ml-auto rounded-2xl"
+              className="rounded-3xl"
               size="small"
-              onClick={() => window.open(aide.application_url ?? "")}
+              linkProps={{ target: "_blank", href: aide.origin_url }}
+              priority="secondary"
             >
+              Plus d'informations
+            </Button>
+          )}
+          {aide.application_url && (
+            <Button className="rounded-3xl" size="small" linkProps={{ target: "_blank", href: aide.application_url }}>
               Candidater
             </Button>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   );

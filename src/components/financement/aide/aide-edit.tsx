@@ -6,7 +6,7 @@ import { useParams } from "next/navigation";
 import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
 import { AideEditFilter } from "./aide-edit-filter";
-import { memo, useMemo, useState } from "react";
+import { memo, useMemo } from "react";
 import { countAidesByType, resolveAidType } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/src/components/financement/types";
 import { FichesDiagnosticFiltersKey, useAideEstimationEditFilter } from "@/src/hooks/use-aide-estimation-edit-filter";
@@ -21,7 +21,6 @@ import { useAideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { notifications } from "@/src/components/common/notifications";
 import { useAidesByEstimationFetcher } from "@/src/hooks/use-aides-selected-by-estimation";
-import ToggleSwitch from "@codegouvfr/react-dsfr/ToggleSwitch";
 import { BREADCRUMB_FINANCEMENTS_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-financement";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 import { dateToStringWithTime } from "@/src/helpers/dateUtils";
@@ -30,14 +29,13 @@ export const AideEdit = memo(() => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(projet?.id);
 
-  const [isNewAPIVersion, setIsNewAPIVersion] = useState(false);
   const estimationId = useParams().estimationId as string;
   const { filters, toggleFilter } = useAideEstimationEditFilter();
   const skeletons = [...new Array(3)].map((_, i) => <AideCardSkeleton key={i} />);
   const estimation = projet?.estimations.find((estimation) => estimation.id === +estimationId);
   const { sortMethodCode, setSortMethodCode, sortMethod } = useAideEstimationEditSortMethod();
 
-  const { data, isLoading } = useAidesByEstimationFetcher(+estimationId, isNewAPIVersion);
+  const { data, isLoading } = useAidesByEstimationFetcher(+estimationId);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
   const filteredResults = useMemo(
     () =>
@@ -86,17 +84,6 @@ export const AideEdit = memo(() => {
         <AideEstimationsListeHeader title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature" />
         <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
           <AideEstimationsPanelHeader estimation={estimation} />
-
-          {process.env.NEXT_PUBLIC_AIDES_TERRITOIRES_USE_BETA_API === "true" && (
-            <ToggleSwitch
-              labelPosition="left"
-              className="flex justify-self-start"
-              label="Version Beta de Aides territoires"
-              inputTitle=""
-              checked={isNewAPIVersion ?? undefined}
-              onChange={() => setIsNewAPIVersion(!isNewAPIVersion)}
-            />
-          )}
 
           <div className="mb-10 flex flex-row items-center justify-between">
             <AideEditFilter
