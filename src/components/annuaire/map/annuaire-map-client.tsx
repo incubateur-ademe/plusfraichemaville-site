@@ -16,6 +16,7 @@ import { AnnuaireMapFocus } from "@/src/components/annuaire/map/annuaire-map-foc
 import { LatLngTuple } from "@/src/types/global";
 import { AnnuaireSidePanelSelectedProjetContainer } from "@/src/components/annuaire/side-panel/annuaire-side-panel-selected-projet-container";
 import { AnnuaireSidePanelListContainer } from "@/src/components/annuaire/side-panel/annuaire-side-panel-list-container";
+import { MapGeoJSONFeature } from "react-map-gl/mapbox-legacy";
 
 export type AnnuaireMapClientProps = {
   markers: CustomMarker[];
@@ -27,6 +28,7 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
   const [selectedMarker, setSelectedMarker] = useState<CustomMarker | null>();
   const [selectedMarkerPanelOpen, setSelectedMarkerPanelOpen] = useState(false);
   const [unclusteredMarkers, setUnclusteredMarkers] = useState<CustomMarker[]>([]);
+  const [clusteredFeatures, setClusteredFeatures] = useState<MapGeoJSONFeature[]>([]);
 
   const mapRef = useRef<MapRef>(null);
   const currentProjetCoordinates = useCurrentProjetCoordinates();
@@ -59,13 +61,17 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
     const map = mapRef.current?.getMap();
     if (!map) return;
 
-    // Récupère uniquement les markers visibles (non-clusterisés)
-    const features = map.queryRenderedFeatures(undefined, {
+    const markerFeatures = map.queryRenderedFeatures(undefined, {
       layers: ["markers"], // L'ID du layer des markers non-clusterisés
     });
 
-    const markers = features.map((feature) => feature.properties as CustomMarker);
+    const clusterFeatures = map.queryRenderedFeatures(undefined, {
+      layers: ["clusters"],
+    });
+
+    const markers = markerFeatures.map((feature) => feature.properties as CustomMarker);
     setUnclusteredMarkers(markers);
+    setClusteredFeatures(clusterFeatures);
   }, []);
 
   const onMapLoad = useCallback(() => {
@@ -158,6 +164,7 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
           mapStyle={mapStyles.simple}
           onMoveEnd={updateUnclusteredMarkers}
           onZoomEnd={updateUnclusteredMarkers}
+          onIdle={updateUnclusteredMarkers}
         >
           <AnnuaireMapClusters markers={markers} selectedMarker={selectedMarkerPanelOpen ? selectedMarker : null} />
           <NavigationControl position="top-right" showCompass={false} />
@@ -194,6 +201,7 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
         >
           <AnnuaireSidePanelListContainer
             visibleMarkers={unclusteredMarkers}
+            visibleClusters={clusteredFeatures}
             selectMarkerByProjetId={selectMarkerByProjetId}
           />
         </section>
