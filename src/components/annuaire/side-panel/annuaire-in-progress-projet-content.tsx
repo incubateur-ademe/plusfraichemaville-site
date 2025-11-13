@@ -24,7 +24,7 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
       <div
         className={clsx(
           "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey" +
-            "min-h-[11.5rem] px-5 pb-4 pt-6",
+            "min-h-[11.5rem] px-5 pb-4 pt-2",
         )}
       >
         <AnnuaireSidePanelTracking type="in-progress" name={data.nom} />
@@ -32,9 +32,15 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
           <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
             Projet en cours
           </Badge>
-          <div className="text-sm font-bold">{selectEspaceLabelByCode(data.type_espace)}</div>
+          <Tag small className="!m-0 h-fit">
+            {selectEspaceLabelByCode(data.type_espace)}
+          </Tag>
         </div>
-        <div className="mb-8 mt-4 text-lg font-bold">{data.nom}</div>
+        <div className="mb-2 mt-2 text-lg font-bold">{data.nom}</div>
+        <section className="mb-10 flex flex-row gap-1 text-sm">
+          <i className="ri-map-pin-line fr-icon--sm mr-1" />
+          {data.collectivite.nom}
+        </section>
         <div className="mt-auto flex flex-row items-center justify-between gap-1">
           <Tag small className="!m-0 h-fit">
             {regionLabel}

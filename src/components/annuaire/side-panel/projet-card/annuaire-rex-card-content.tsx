@@ -1,35 +1,25 @@
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { getRegionLabelFromCode } from "@/src/helpers/regions";
-import { AnnuaireContactCard } from "../contacts/annuaire-contact-card";
-import { Case, Conditional, Default } from "../../common/conditional-renderer";
 import clsx from "clsx";
-import { GeoJsonAdresse, StrapiAnnuaireContact } from "@/src/components/annuaire/types";
-import { useProjetsStore } from "@/src/stores/projets/provider";
-import { strapiContactToAnnuaireContact } from "@/src/components/annuaire/helpers";
 import Tag from "@codegouvfr/react-dsfr/Tag";
-import { AnnuaireRexContentSeeProject } from "./annuaire-rex-content-see-project";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
-import { AnnuaireSidePanelTracking } from "./annuaire-side-panel-tracking";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
+import Button from "@codegouvfr/react-dsfr/Button";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
+import { GeoJsonAdresse } from "@/src/components/annuaire/types";
 
-export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
-  const currentProjetId = useProjetsStore((state) => state.currentProjetId);
+export const AnnuaireRexCardContent = ({ data, onClick }: { data: RetourExperience; onClick?: () => void }) => {
   const retourExperienceAttributes = data.attributes;
-  const contacts = (data.attributes.contacts as unknown as StrapiAnnuaireContact[]).map((contact) =>
-    strapiContactToAnnuaireContact(contact, data),
-  );
   const nomCollectivite = (retourExperienceAttributes.location as GeoJsonAdresse | null)?.properties?.city;
-
   return (
     <>
       <div
         className={clsx(
           "flex w-full flex-col bg-dsfr-background-alt-blue-france text-dsfr-text-title-grey",
-          "min-h-52 px-5 pb-4 pt-2",
+          "fr-enlarge-button group min-h-52 rounded-2xl px-5 pb-4 pt-6 hover:bg-dsfr-background-alt-blue-france",
+          "outline-bg-dsfr-background-alt-blue-france-hover outline-1 outline-offset-0 hover:outline",
         )}
       >
-        <AnnuaireSidePanelTracking type="rex" name={retourExperienceAttributes.titre} />
         <div className="flex items-center justify-between">
           <Badge small noIcon className="!mb-0 !bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
             Projet réalisé
@@ -42,14 +32,16 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
             ))}
           </div>
         </div>
-        <div className="mb-2 mt-2 text-lg font-bold">{retourExperienceAttributes.titre}</div>
+        <Button priority="tertiary no outline" className="mt-2 !px-0 text-left text-lg font-bold" onClick={onClick}>
+          {retourExperienceAttributes.titre}
+        </Button>
         {nomCollectivite && (
           <section className="mb-1 text-sm">
             <i className="ri-map-pin-line fr-icon--sm mr-1" />
             {nomCollectivite}
           </section>
         )}
-        <section className="mb-6">
+        <section className="mb-8">
           <i className="ri-money-euro-circle-line fr-icon--sm mr-1 " />
           <span className="text-sm">
             {retourExperienceAttributes.cout_euro != null && retourExperienceAttributes.cout_euro >= 0
@@ -61,34 +53,10 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
           <Tag small className="!mb-0 h-fit">
             {getRegionLabelFromCode(retourExperienceAttributes.region?.data.attributes.code)}
           </Tag>
-          <AnnuaireRexContentSeeProject slug={retourExperienceAttributes.slug} />
+          <div className="text-nowrap font-bold text-pfmv-navy group-hover:underline">
+            Voir les contacts <i className="ri-arrow-right-line ml-1" />
+          </div>
         </div>
-      </div>
-      <div className="p-5">
-        <h2 className="text-xl font-bold text-pfmv-navy">{contacts.length > 0 ? "Contacts" : "Contact"}</h2>
-        <Conditional>
-          <Case condition={contacts.length > 0}>
-            {contacts?.map((contact) => (
-              <AnnuaireContactCard
-                contact={contact}
-                key={contact.uniqueId}
-                projetId={currentProjetId}
-                className="mb-4"
-                showContactProjet={false}
-              />
-            ))}
-          </Case>
-          <Default>
-            <div
-              className={clsx(
-                "flex h-64 items-center justify-center overflow-hidden",
-                "rounded-2xl border-[1px] border-dsfr-border-default-grey",
-              )}
-            >
-              <div className="p-6">{"Aucun contact n'est associé à ce projet"}</div>
-            </div>
-          </Default>
-        </Conditional>
       </div>
     </>
   );
