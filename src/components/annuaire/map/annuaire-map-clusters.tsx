@@ -47,16 +47,21 @@ const unclusteredPointLayer: SymbolLayerSpecification = {
 type AnnuaireMapClustersProps = {
   markers: CustomMarker[];
   selectedMarker?: CustomMarker | null;
+  focusedMarker?: CustomMarker | null;
 };
 
-export const AnnuaireMapClusters = ({ markers, selectedMarker }: AnnuaireMapClustersProps) => {
+export const AnnuaireMapClusters = ({ markers, selectedMarker, focusedMarker }: AnnuaireMapClustersProps) => {
   const geojson: GeoJSON.FeatureCollection<Point> = useMemo(() => {
     const features: Feature<Point>[] = markers.map((marker) => ({
       type: "Feature",
       properties: {
         ...marker,
         icon: `annuaire-projet-${marker.type}${
-          marker.type === selectedMarker?.type && marker.idProjet === selectedMarker.idProjet ? "-active" : ""
+          marker.type === selectedMarker?.type && marker.idProjet === selectedMarker.idProjet
+            ? "-active"
+            : marker.type === focusedMarker?.type && marker.idProjet === focusedMarker.idProjet
+              ? "-focus"
+              : ""
         }`,
       },
       geometry: {
@@ -69,7 +74,7 @@ export const AnnuaireMapClusters = ({ markers, selectedMarker }: AnnuaireMapClus
       type: "FeatureCollection",
       features: features,
     };
-  }, [markers, selectedMarker]);
+  }, [markers, selectedMarker, focusedMarker]);
 
   return (
     <Source id="projets" type="geojson" data={geojson} cluster={true} clusterMaxZoom={14} clusterRadius={70}>

@@ -10,15 +10,27 @@ export const AnnuaireSidePanelListContainer = ({
   visibleMarkers,
   visibleClusters,
   selectMarkerByProjetId,
+  focusedMarker,
+  focusMarkerByProjetId,
+  unfocusMarker,
 }: {
   visibleMarkers: CustomMarker[];
+  focusedMarker?: CustomMarker | null;
   visibleClusters: MapGeoJSONFeature[];
   selectMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: number) => void;
+  focusMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: number) => void;
+  unfocusMarker: () => void;
 }) => {
   return (
     <Conditional>
       <Case condition={!isEmpty(visibleMarkers)}>
-        <AnnuaireProjetListCards markers={visibleMarkers} selectMarkerByProjetId={selectMarkerByProjetId} />
+        <AnnuaireProjetListCards
+          markers={visibleMarkers}
+          selectMarkerByProjetId={selectMarkerByProjetId}
+          focusedMarker={focusedMarker}
+          focusMarkerByProjetId={focusMarkerByProjetId}
+          unfocusMarker={unfocusMarker}
+        />
       </Case>
       <Case condition={isEmpty(visibleMarkers) && !isEmpty(visibleClusters)}>
         <AnnuaireOnlyVisibleClusters />
