@@ -58,7 +58,7 @@ export const getUserWithNoActivityAfterSignup = async (
       },
       accept_communication_suivi_projet: true,
       projets: {
-        none: { NOT: { deleted_at: null } },
+        none: { projet: { deleted_at: null } },
       },
       statut: null,
       emails: {
