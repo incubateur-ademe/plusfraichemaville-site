@@ -1,10 +1,9 @@
 "use client";
 
 import { Map, MapMouseEvent, MapRef, Marker, NavigationControl } from "react-map-gl/maplibre";
-import { useCallback, useEffect, useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CustomMarker, ZoomLevelKey } from "../types";
 import Image from "next/image";
-import { AnnuaireSidePanelContainer } from "../side-panel/annuaire-side-panel-container";
 import clsx from "clsx";
 import { MapSelectorControl, mapStyles } from "carte-facile";
 import { AnnuaireMapLegend } from "@/src/components/annuaire/map/annuaire-map-legend";
@@ -15,27 +14,44 @@ import { Point } from "geojson";
 import { useCurrentProjetCoordinates } from "@/src/components/annuaire/hooks";
 import { AnnuaireMapFocus } from "@/src/components/annuaire/map/annuaire-map-focus";
 import { LatLngTuple } from "@/src/types/global";
+import { AnnuaireSidePanelSelectedProjetContainer } from "@/src/components/annuaire/side-panel/annuaire-side-panel-selected-projet-container";
+import { AnnuaireSidePanelListContainer } from "@/src/components/annuaire/side-panel/annuaire-side-panel-list-container";
+import { MapGeoJSONFeature } from "react-map-gl/mapbox-legacy";
 
 export type AnnuaireMapClientProps = {
   markers: CustomMarker[];
-  setSelectedMarker: (_: CustomMarker) => void;
-  selectedMarker?: CustomMarker;
   mapFocus?: { coordinates?: LatLngTuple; zoom?: ZoomLevelKey };
   className?: string;
 };
 
-const AnnuaireMapClient = ({
-  markers,
-  setSelectedMarker,
-  selectedMarker,
-  mapFocus,
-  className,
-}: AnnuaireMapClientProps) => {
+const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientProps) => {
+  const [selectedMarker, setSelectedMarker] = useState<CustomMarker | null>();
+  const [focusedMarker, setFocusedMarker] = useState<CustomMarker | null>();
+  const [selectedMarkerPanelOpen, setSelectedMarkerPanelOpen] = useState(false);
+  const [unclusteredMarkers, setUnclusteredMarkers] = useState<CustomMarker[]>([]);
+  const [clusteredFeatures, setClusteredFeatures] = useState<MapGeoJSONFeature[]>([]);
+
   const mapRef = useRef<MapRef>(null);
   const currentProjetCoordinates = useCurrentProjetCoordinates();
   if (!currentProjetCoordinates) {
     return null;
   }
+
+  const selectMarkerByProjetId = useCallback((markerType: CustomMarker["type"], idProjet?: number) => {
+    const marker = markers.find((marker) => marker.type === markerType && marker.idProjet === idProjet);
+    if (marker) {
+      setSelectedMarker(marker);
+      setSelectedMarkerPanelOpen(true);
+    }
+  }, []);
+
+  const focusMarkerByProjetId = useCallback((markerType: CustomMarker["type"], idProjet?: number) => {
+    const marker = markers.find((marker) => marker.type === markerType && marker.idProjet === idProjet);
+    if (marker) {
+      console.log("focusMarkerByProjetId", marker);
+      setFocusedMarker(marker);
+    }
+  }, []);
 
   const loadImage = (map: maplibregl.Map, url: string, name: string) => {
     map.loadImage(url).then((image) => {
@@ -47,7 +63,25 @@ const AnnuaireMapClient = ({
 
   const handleMarkerClick = (selectedMarker: CustomMarker) => {
     setSelectedMarker(selectedMarker);
+    setSelectedMarkerPanelOpen(true);
   };
+
+  const updateUnclusteredMarkers = useCallback(() => {
+    const map = mapRef.current?.getMap();
+    if (!map) return;
+
+    const markerFeatures = map.queryRenderedFeatures(undefined, {
+      layers: ["markers"], // L'ID du layer des markers non-clusterisés
+    });
+
+    const clusterFeatures = map.queryRenderedFeatures(undefined, {
+      layers: ["clusters"],
+    });
+
+    const markers = markerFeatures.map((feature) => feature.properties as CustomMarker);
+    setUnclusteredMarkers(markers);
+    setClusteredFeatures(clusterFeatures);
+  }, []);
 
   const onMapLoad = useCallback(() => {
     if (!mapRef.current) return;
@@ -61,14 +95,20 @@ const AnnuaireMapClient = ({
     }
     map.on("click", "clusters", handleIconClick);
     map.on("click", "markers", handleIconClick);
-    map.on("mouseenter", "markers", () => {
-      map.getCanvas().style.cursor = "pointer";
+    map.on("mousemove", "markers", (e) => {
+      if (e.features) {
+        setFocusedMarker(e.features[0].properties as CustomMarker);
+      }
     });
     map.on("mouseenter", "clusters", () => {
       map.getCanvas().style.cursor = "pointer";
     });
+    map.on("mouseenter", "markers", () => {
+      map.getCanvas().style.cursor = "pointer";
+    });
     map.on("mouseleave", "markers", () => {
       map.getCanvas().style.cursor = "grab";
+      setFocusedMarker(null);
     });
     map.on("mouseleave", "clusters", () => {
       map.getCanvas().style.cursor = "grab";
@@ -78,6 +118,7 @@ const AnnuaireMapClient = ({
     markerTypes.forEach((type) => {
       loadImage(map, `/images/annuaire/annuaire-projet-${type}.png`, `annuaire-projet-${type}`);
       loadImage(map, `/images/annuaire/annuaire-projet-${type}-active.png`, `annuaire-projet-${type}-active`);
+      loadImage(map, `/images/annuaire/annuaire-projet-${type}-focus.png`, `annuaire-projet-${type}-focus`);
     });
     map.addControl(
       new MapSelectorControl({
@@ -86,6 +127,7 @@ const AnnuaireMapClient = ({
       }),
       "top-right",
     );
+    updateUnclusteredMarkers();
   }, []);
 
   const handleClusterClick = useCallback((clusterId: number, coordinates: [number, number]) => {
@@ -131,8 +173,20 @@ const AnnuaireMapClient = ({
   return (
     <div className={clsx("flex", className)}>
       <div className="h-[715px] w-full max-w-[50rem]">
-        <Map ref={mapRef} onLoad={onMapLoad} style={{ width: "100%", height: "100%" }} mapStyle={mapStyles.simple}>
-          <AnnuaireMapClusters markers={markers} selectedMarker={selectedMarker} />
+        <Map
+          ref={mapRef}
+          onLoad={onMapLoad}
+          style={{ width: "100%", height: "100%" }}
+          mapStyle={mapStyles.simple}
+          onMoveEnd={updateUnclusteredMarkers}
+          onZoomEnd={updateUnclusteredMarkers}
+          onIdle={updateUnclusteredMarkers}
+        >
+          <AnnuaireMapClusters
+            markers={markers}
+            selectedMarker={selectedMarkerPanelOpen ? selectedMarker : null}
+            focusedMarker={focusedMarker}
+          />
           <NavigationControl position="top-right" showCompass={false} />
           <AnnuaireMapLegend />
           <AnnuaireMapFocus coordinates={currentProjetCoordinates} />
@@ -149,17 +203,46 @@ const AnnuaireMapClient = ({
           >
             <Image
               src={`/images/annuaire/annuaire-projet-ma-collectivite${
-                selectedMarker?.type === "ma-collectivite" ? "-active" : ""
+                selectedMarker?.type === "ma-collectivite" && selectedMarkerPanelOpen ? "-active" : ""
               }.svg`}
               width={45}
               height={54}
+              className={clsx(
+                "w-10 hover:w-14",
+                selectedMarker?.type === "ma-collectivite" && selectedMarkerPanelOpen ? "w-14" : "w-10",
+              )}
               alt="Localisation de mon projet"
             />
           </Marker>
         </Map>
       </div>
-      <div className="h-[715px] w-[400px] shrink-0 overflow-y-auto">
-        <AnnuaireSidePanelContainer marker={selectedMarker} />
+      <div className="relative h-[715px] w-[400px] shrink-0 overflow-x-hidden">
+        <section
+          className={clsx(
+            "absolute left-0 top-0 z-10 h-full w-full overflow-y-auto transition-all duration-200",
+            selectedMarkerPanelOpen && selectedMarker ? "opacity-0" : "opacity-100",
+          )}
+        >
+          <AnnuaireSidePanelListContainer
+            visibleMarkers={unclusteredMarkers}
+            visibleClusters={clusteredFeatures}
+            selectMarkerByProjetId={selectMarkerByProjetId}
+            focusedMarker={focusedMarker}
+            focusMarkerByProjetId={focusMarkerByProjetId}
+            unfocusMarker={() => setFocusedMarker(null)}
+          />
+        </section>
+        <section
+          className={clsx(
+            "absolute left-0 top-0 z-10 h-full w-full overflow-y-auto transition-all duration-300",
+            selectedMarkerPanelOpen && selectedMarker ? "left-0" : "left-[400px]",
+          )}
+        >
+          <AnnuaireSidePanelSelectedProjetContainer
+            closePanel={() => setSelectedMarkerPanelOpen(false)}
+            selectedMarker={selectedMarker}
+          />
+        </section>
       </div>
     </div>
   );

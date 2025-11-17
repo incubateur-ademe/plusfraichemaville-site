@@ -10,7 +10,6 @@ import dynamic from "next/dynamic";
 
 import { AnnuaireMapSkeleton } from "./annuaire-map-skeleton";
 import { AnnuaireFilterAdresse } from "../filters/annuaire-filter-adresse";
-import React from "react";
 
 const LazyAnnuaireMapClient = dynamic(() => import("././annuaire-map-client"), {
   ssr: false,
@@ -24,8 +23,6 @@ type AnnuaireMapContainerProps = {
 const AnnuaireMapContainer = ({ markers }: AnnuaireMapContainerProps) => {
   const {
     filteredMarkers,
-    selectedMarker,
-    setSelectedMarker,
     selectedTypeEspace,
     setSelectedTypeEspace,
     selectedStatus,
@@ -57,13 +54,7 @@ const AnnuaireMapContainer = ({ markers }: AnnuaireMapContainerProps) => {
         </div>
       </AnnuaireFilters>
 
-      <LazyAnnuaireMapClient
-        markers={filteredMarkers}
-        setSelectedMarker={setSelectedMarker}
-        selectedMarker={selectedMarker}
-        mapFocus={mapFocus}
-        className="mb-10"
-      />
+      <LazyAnnuaireMapClient markers={filteredMarkers} mapFocus={mapFocus} className="mb-10" />
     </>
   );
 };
