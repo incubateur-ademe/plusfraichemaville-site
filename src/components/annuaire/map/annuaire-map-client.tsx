@@ -33,10 +33,6 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
 
   const mapRef = useRef<MapRef>(null);
   const currentProjetCoordinates = useCurrentProjetCoordinates();
-  if (!currentProjetCoordinates) {
-    return null;
-  }
-
   const selectMarkerByProjetId = useCallback((markerType: CustomMarker["type"], idProjet?: number) => {
     const marker = markers.find((marker) => marker.type === markerType && marker.idProjet === idProjet);
     if (marker) {
@@ -169,6 +165,10 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
       });
     }
   }, [mapFocus]);
+
+  if (!currentProjetCoordinates) {
+    return null;
+  }
 
   return (
     <div className={clsx("flex", className)}>
