@@ -43,8 +43,8 @@ export const AvailableProjetsForCollectiviteModal = () => {
     <>
       <modal.Component title="Rejoindre d'autres projets" size="large" className="join-project-modal">
         <span className="mb-8 block text-base">
-          Vous pouvez consulter tous les projets liés à votre collectivité et soumettre une demande {"d'accès"}.
-          {"L'administrateur"} sera alors notifié de votre demande.
+          {"Vous pouvez consulter tous les projets liés à votre collectivité de rattachement et soumettre une demande" +
+            " d'accès. L'administrateur sera alors notifié de votre demande."}
         </span>
         <Conditional>
           <Case condition={!isLoading && (availableProjects?.length || 0) === 0}>
