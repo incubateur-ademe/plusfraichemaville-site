@@ -11,7 +11,6 @@ import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCus
 import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { upsertBrevoContact } from "@/src/services/brevo/brevo-api";
 import { createConnectContact } from "@/src/services/connect";
 import { mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
 
@@ -59,19 +58,6 @@ export const editUserInfoAction = async (
         acceptCommunicationProduit: data.acceptCommunicationProduit,
         acceptCommunicationSuiviProjet: data.acceptCommunicationSuiviProjet,
       });
-      try {
-        const response = await upsertBrevoContact({
-          email: data.email,
-          acceptInfoProduct: data.acceptCommunicationProduit,
-          subscribeNewsletter: data.subscribeToNewsletter,
-        });
-        if (!response.ok) {
-          const brevoResponse = await response.json();
-          captureError("Erreur lors de la mise à jour dans Brevo", JSON.stringify(brevoResponse));
-        }
-      } catch (e) {
-        customCaptureException("Error in Brevo call in EditUserInfoAction", e);
-      }
 
       try {
         if (updatedUser && process.env.CONNECT_SYNC_ACTIVE === "true" && data.subscribeToNewsletter) {
