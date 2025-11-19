@@ -1,11 +1,7 @@
-import { Metadata } from "next";
-import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import Image from "next/image";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Button from "@codegouvfr/react-dsfr/Button";
-
-export const metadata: Metadata = computeMetadata("Exemples de diagnostic réalisé par les collectivités");
 
 export default async function AccomagnementEspaceProjetCard() {
   return (

@@ -27,7 +27,6 @@ export const PFMV_ROUTES = {
     `/surchauffe-urbaine/fiche-diagnostic/${ficheDiagnosticSlug}`,
   RETOUR_EXPERIENCE_PROJET: (slug: string) => `${PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET}/${slug}`,
   CONTACT: "/contact",
-  CONTACT_SUCCESS: "/contact/success",
   NEWSLETTER: "/newsletter",
   WEBINAIRES: "/webinaires",
   CONNEXION: "/connexion",

@@ -1,6 +1,10 @@
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import clsx from "clsx";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Budget");
 
 export default function BudgetPage() {
   const data = [

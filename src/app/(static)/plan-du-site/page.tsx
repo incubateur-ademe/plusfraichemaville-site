@@ -6,6 +6,10 @@ import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQ
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { getRetoursExperiencesDiag } from "@/src/lib/strapi/queries/retour-experience-diag-queries";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Plan du site");
 
 export default async function SitemapPage() {
   const allFichesSolutions = await getAllFichesSolutions();

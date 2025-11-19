@@ -2,7 +2,7 @@ import RetoursExperiences from "@/src/components/projet/projet-retour-experience
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
-export const metadata: Metadata = computeMetadata("Trouvez de l'inspiration");
+export const metadata: Metadata = computeMetadata("Projets réalisés par les collectivités");
 
 export default async function RetoursExperiencesPage(props: {
   searchParams: Promise<{ espaceFilter: string | undefined; regionFilter: string | undefined }>;

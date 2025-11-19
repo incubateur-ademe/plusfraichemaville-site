@@ -7,6 +7,10 @@ import { getAllFichesDiagnostic } from "@/src/lib/strapi/queries/fiches-diagnost
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 import { BREADCRUMB_DIAG_PRESTATION_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Toutes les méthodes de diagnostic");
 
 export default async function FicheDiagnosticListePage(props: { params: Promise<{ projetId: number }> }) {
   const params = await props.params;

@@ -1,19 +1,9 @@
-"use client";
-import { signOut, useSession } from "next-auth/react";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { removeHubspotCookies } from "@/src/components/hubspot/track-hubspot";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import LogoutClient from "./LogoutClient";
 
-export default function Logout() {
-  const router = useRouter();
-  const session = useSession();
-  useEffect(() => {
-    if (session.data) {
-      removeHubspotCookies();
-      const callbackUrl = `/logout/agentconnect?id_token_hint=${session.data?.id_token}`;
-      signOut({ redirect: false, callbackUrl }).then((signOutResponse) => router.push(signOutResponse.url));
-    }
-  }, [router, session]);
+export const metadata: Metadata = computeMetadata("Déconnexion");
 
-  return <div />;
+export default function LogoutPage() {
+  return <LogoutClient />;
 }

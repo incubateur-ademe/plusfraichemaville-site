@@ -4,7 +4,7 @@ import { getRetoursExperiencesDiag } from "@/src/lib/strapi/queries/retour-exper
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import AccomagnementEspaceProjetCard from "@/src/components/common/accomagnement-espace-projet-card";
 
-export const metadata: Metadata = computeMetadata("Exemples de diagnostic réalisé par les collectivités");
+export const metadata: Metadata = computeMetadata("Diagnostics réalisés par les collectivités");
 
 export default async function SurchauffeUrbaineListeRetourExperiencePage() {
   const allRetoursExperiences = await getRetoursExperiencesDiag();
