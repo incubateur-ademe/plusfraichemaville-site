@@ -7,7 +7,7 @@ import clsx from "clsx";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 
-export const metadata: Metadata = computeMetadata("Créez votre projet");
+export const metadata: Metadata = computeMetadata("Connectez-vous à l'espace projet");
 
 const data = {
   mainTitle: "Mon espace projet",

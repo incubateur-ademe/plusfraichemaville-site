@@ -1,6 +1,10 @@
 import { BREADCRUMB_SOLUTION_RECOMMANDATIONS } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-solution";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 import { RecommandationsFicheSolution } from "@/src/components/espace-projet/recommandations-solutions/recommandations-fiche-solution";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Recommandations de solutions");
 
 export default async function FichesSolutionsRecommandationsPage() {
   return (

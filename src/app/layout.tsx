@@ -15,7 +15,7 @@ import { CommonSkipLinks } from "@/src/components/common/common-skip-links";
 import AppFooter from "@/src/components/layout/AppFooter";
 
 export const metadata: Metadata = {
-  title: "Plus fraîche ma ville - N'attendez pas la prochaine vague",
+  title: "Accueil | Plus fraîche ma ville",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon.ico",

@@ -1,16 +1,12 @@
-"use client";
-import { ProjetInfoForm } from "@/src/forms/projet/ProjetInfoForm";
-import { useProjetsStore } from "@/src/stores/projets/provider";
-import { useShallow } from "zustand/react/shallow";
-import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { BREADCRUMB_EDIT_PROJET } from "@/src/components/espace-projet/banner/espace-projet-breadcurmb-list";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
+import UpdateProjetForm from "@/src/app/(private)/espace-projet/[projetId]/info-projet/UpdateProjetForm";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Renseignements sur mon projet");
 
 export default function UpdateProjetPage() {
-  const { getCurrentProjet } = useProjetsStore(useShallow((state) => state));
-  const currentProjet = getCurrentProjet();
-  const canEditProjet = useCanEditProjet(currentProjet?.id);
-
   return (
     <>
       <BannerProjetBreadcrumb step={BREADCRUMB_EDIT_PROJET} />
@@ -19,7 +15,7 @@ export default function UpdateProjetPage() {
         <div className="mb-4">
           {"Toutes les informations me permettront d'obtenir des recommandations sur mon projet."}
         </div>
-        <ProjetInfoForm projet={currentProjet} readOnly={!canEditProjet} />
+        <UpdateProjetForm />
       </div>
     </>
   );

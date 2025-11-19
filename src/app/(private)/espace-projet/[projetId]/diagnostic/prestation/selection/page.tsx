@@ -2,6 +2,10 @@ import { FichesDiagnosticsProjetSelected } from "@/src/components/fiches-diagnos
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 
 import { BREADCRUMB_DIAG_PRESTATION_SELECTION } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Mes méthodes de diagnostic sélectionnées");
 
 export default async function FicheDiagnosticSelectionPage() {
   return (

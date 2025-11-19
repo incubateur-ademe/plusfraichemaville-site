@@ -2,6 +2,10 @@ import { FicheDiagnosticChoixParcours } from "@/src/components/fiches-diagnostic
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 
 import { BREADCRUMB_CHOIX_PARCOURS_DIAGNOSTIC } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Choix du parcours de diagnostic");
 
 export default async function FicheDiagnosticChoixParcoursPage() {
   return (
