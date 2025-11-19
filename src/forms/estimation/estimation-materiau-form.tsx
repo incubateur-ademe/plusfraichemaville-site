@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -133,6 +133,7 @@ export default function EstimationMateriauForm({
                   control={form.control}
                   path={`estimationMateriaux.${index}.quantite`}
                   whiteBackground
+                  onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => event.target?.select()}
                 />
                 <div>Investissement</div>
                 <div className="mb-2 font-bold">

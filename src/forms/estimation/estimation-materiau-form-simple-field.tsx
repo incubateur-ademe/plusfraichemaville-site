@@ -109,6 +109,7 @@ export default function EstimationMateriauSimpleFieldForm({
             control={form.control}
             path="quantite"
             whiteBackground
+            onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => event.target?.select()}
           />
           <div>Investissement</div>
           <div className="mb-2 font-bold">
