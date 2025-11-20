@@ -20,7 +20,6 @@ import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 import { useEffect, useState } from "react";
-import Tooltip from "@codegouvfr/react-dsfr/Tooltip";
 
 export const COMMUNICATION_SETTINGS_ANCHOR = "communication";
 export const UserInfoForm = ({
@@ -82,13 +81,16 @@ export const UserInfoForm = ({
         path={"collectivite"}
         label={
           <>
-            <span>Collectivité à laquelle je suis rattaché </span>
-            <Tooltip
-              title="Cette collectivité correspond à la commune dans laquelle se situe le siège de
-             l’établissement auquel je suis rattaché."
-            >
-              <i className="ri-information-2-line fr-icon--sm"></i>
-            </Tooltip>
+            <span>Collectivité à laquelle je suis rattaché</span>
+            <button
+              aria-describedby="tooltip-collectivite"
+              type="button"
+              className="fr-btn--tooltip fr-btn rounded-3xl text-dsfr-text-disabled-grey"
+            />
+            <span className="fr-tooltip fr-placement" id="tooltip-collectivite" role="tooltip">
+              Cette collectivité correspond à la commune dans laquelle se situe le siège de l’établissement auquel je
+              suis rattaché.
+            </span>
           </>
         }
         asterisk={true}

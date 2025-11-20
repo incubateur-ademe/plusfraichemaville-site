@@ -111,7 +111,10 @@ const InputFormField = <T extends FieldValues>({
               onFocus={onFocus}
               onWheel={(e) => e.currentTarget.blur()}
               onKeyDown={(e) => {
-                if (e.key === "-" || e.key === "Minus") {
+                if (
+                  type === "number" &&
+                  (e.key === "-" || e.key === "Minus" || (e.key === "ArrowDown" && value <= 0))
+                ) {
                   e.preventDefault();
                 }
               }}
