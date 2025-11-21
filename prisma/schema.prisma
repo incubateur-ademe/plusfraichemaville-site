@@ -72,6 +72,7 @@ model User {
   diagnostic_simulation             diagnostic_simulation[]
   statut                            StatutUser?
   statut_updated_at                 DateTime?
+  last_browsing_date                DateTime?
 }
 
 model VerificationToken {

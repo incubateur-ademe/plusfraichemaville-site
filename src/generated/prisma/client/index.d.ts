@@ -4179,6 +4179,7 @@ export namespace Prisma {
     accept_communication_suivi_projet: boolean | null
     statut: $Enums.StatutUser | null
     statut_updated_at: Date | null
+    last_browsing_date: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
@@ -4197,6 +4198,7 @@ export namespace Prisma {
     accept_communication_suivi_projet: boolean | null
     statut: $Enums.StatutUser | null
     statut_updated_at: Date | null
+    last_browsing_date: Date | null
   }
 
   export type UserCountAggregateOutputType = {
@@ -4218,6 +4220,7 @@ export namespace Prisma {
     accept_communication_suivi_projet: number
     statut: number
     statut_updated_at: number
+    last_browsing_date: number
     _all: number
   }
 
@@ -4238,6 +4241,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: true
     statut?: true
     statut_updated_at?: true
+    last_browsing_date?: true
   }
 
   export type UserMaxAggregateInputType = {
@@ -4256,6 +4260,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: true
     statut?: true
     statut_updated_at?: true
+    last_browsing_date?: true
   }
 
   export type UserCountAggregateInputType = {
@@ -4277,6 +4282,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: true
     statut?: true
     statut_updated_at?: true
+    last_browsing_date?: true
     _all?: true
   }
 
@@ -4371,6 +4377,7 @@ export namespace Prisma {
     accept_communication_suivi_projet: boolean
     statut: $Enums.StatutUser | null
     statut_updated_at: Date | null
+    last_browsing_date: Date | null
     _count: UserCountAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
@@ -4409,6 +4416,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: boolean
     statut_updated_at?: boolean
+    last_browsing_date?: boolean
     accounts?: boolean | User$accountsArgs<ExtArgs>
     collectivites_created?: boolean | User$collectivites_createdArgs<ExtArgs>
     projets_created?: boolean | User$projets_createdArgs<ExtArgs>
@@ -4447,6 +4455,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: boolean
     statut_updated_at?: boolean
+    last_browsing_date?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4468,6 +4477,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: boolean
     statut_updated_at?: boolean
+    last_browsing_date?: boolean
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectScalar = {
@@ -4489,9 +4499,10 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: boolean
     statut_updated_at?: boolean
+    last_browsing_date?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "image" | "agentconnect_info" | "nom" | "prenom" | "poste" | "nom_etablissement" | "siren_info" | "created_at" | "updated_at" | "canal_acquisition" | "discardedInformation" | "accept_communication_produit" | "accept_communication_suivi_projet" | "statut" | "statut_updated_at", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "image" | "agentconnect_info" | "nom" | "prenom" | "poste" | "nom_etablissement" | "siren_info" | "created_at" | "updated_at" | "canal_acquisition" | "discardedInformation" | "accept_communication_produit" | "accept_communication_suivi_projet" | "statut" | "statut_updated_at" | "last_browsing_date", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     collectivites_created?: boolean | User$collectivites_createdArgs<ExtArgs>
@@ -4553,6 +4564,7 @@ export namespace Prisma {
       accept_communication_suivi_projet: boolean
       statut: $Enums.StatutUser | null
       statut_updated_at: Date | null
+      last_browsing_date: Date | null
     }, ExtArgs["result"]["user"]>
     composites: {}
   }
@@ -5010,6 +5022,7 @@ export namespace Prisma {
     readonly accept_communication_suivi_projet: FieldRef<"User", 'Boolean'>
     readonly statut: FieldRef<"User", 'StatutUser'>
     readonly statut_updated_at: FieldRef<"User", 'DateTime'>
+    readonly last_browsing_date: FieldRef<"User", 'DateTime'>
   }
     
 
@@ -24280,7 +24293,8 @@ export namespace Prisma {
     accept_communication_produit: 'accept_communication_produit',
     accept_communication_suivi_projet: 'accept_communication_suivi_projet',
     statut: 'statut',
-    statut_updated_at: 'statut_updated_at'
+    statut_updated_at: 'statut_updated_at',
+    last_browsing_date: 'last_browsing_date'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
@@ -25090,6 +25104,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFilter<"User"> | boolean
     statut?: EnumStatutUserNullableFilter<"User"> | $Enums.StatutUser | null
     statut_updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
+    last_browsing_date?: DateTimeNullableFilter<"User"> | Date | string | null
     accounts?: AccountListRelationFilter
     collectivites_created?: CollectiviteListRelationFilter
     projets_created?: ProjetListRelationFilter
@@ -25127,6 +25142,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: SortOrder
     statut?: SortOrderInput | SortOrder
     statut_updated_at?: SortOrderInput | SortOrder
+    last_browsing_date?: SortOrderInput | SortOrder
     accounts?: AccountOrderByRelationAggregateInput
     collectivites_created?: collectiviteOrderByRelationAggregateInput
     projets_created?: projetOrderByRelationAggregateInput
@@ -25168,6 +25184,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFilter<"User"> | boolean
     statut?: EnumStatutUserNullableFilter<"User"> | $Enums.StatutUser | null
     statut_updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
+    last_browsing_date?: DateTimeNullableFilter<"User"> | Date | string | null
     accounts?: AccountListRelationFilter
     collectivites_created?: CollectiviteListRelationFilter
     projets_created?: ProjetListRelationFilter
@@ -25205,6 +25222,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: SortOrder
     statut?: SortOrderInput | SortOrder
     statut_updated_at?: SortOrderInput | SortOrder
+    last_browsing_date?: SortOrderInput | SortOrder
     _count?: UserCountOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
@@ -25232,6 +25250,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolWithAggregatesFilter<"User"> | boolean
     statut?: EnumStatutUserNullableWithAggregatesFilter<"User"> | $Enums.StatutUser | null
     statut_updated_at?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
+    last_browsing_date?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
   }
 
   export type VerificationTokenWhereInput = {
@@ -26606,6 +26625,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -26643,6 +26663,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -26680,6 +26701,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -26717,6 +26739,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -26754,6 +26777,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
   }
 
   export type UserUpdateManyMutationInput = {
@@ -26775,6 +26799,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type UserUncheckedUpdateManyInput = {
@@ -26796,6 +26821,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type VerificationTokenCreateInput = {
@@ -28452,6 +28478,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: SortOrder
     statut?: SortOrder
     statut_updated_at?: SortOrder
+    last_browsing_date?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -28470,6 +28497,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: SortOrder
     statut?: SortOrder
     statut_updated_at?: SortOrder
+    last_browsing_date?: SortOrder
   }
 
   export type UserMinOrderByAggregateInput = {
@@ -28488,6 +28516,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: SortOrder
     statut?: SortOrder
     statut_updated_at?: SortOrder
+    last_browsing_date?: SortOrder
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -31879,6 +31908,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationCreateNestedManyWithoutCreatorInput
@@ -31915,6 +31945,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationUncheckedCreateNestedManyWithoutCreatorInput
@@ -31967,6 +31998,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUpdateManyWithoutCreatorNestedInput
@@ -32003,6 +32035,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33079,6 +33112,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationCreateNestedManyWithoutCreatorInput
@@ -33115,6 +33149,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationUncheckedCreateNestedManyWithoutCreatorInput
@@ -33251,6 +33286,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUpdateManyWithoutCreatorNestedInput
@@ -33287,6 +33323,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33402,6 +33439,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -33438,6 +33476,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -33479,6 +33518,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -33515,6 +33555,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -33691,6 +33732,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -33727,6 +33769,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33774,6 +33817,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -33810,6 +33854,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -33914,6 +33959,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -33950,6 +33996,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -34044,6 +34091,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -34080,6 +34128,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -34116,6 +34165,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -34152,6 +34202,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -34241,6 +34292,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -34277,6 +34329,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -34356,6 +34409,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationCreateNestedManyWithoutCreatorInput
@@ -34392,6 +34446,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     estimations_created?: estimationUncheckedCreateNestedManyWithoutCreatorInput
@@ -34504,6 +34559,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -34540,6 +34596,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -34709,6 +34766,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUpdateManyWithoutCreatorNestedInput
@@ -34745,6 +34803,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     estimations_created?: estimationUncheckedUpdateManyWithoutCreatorNestedInput
@@ -34851,6 +34910,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -34887,6 +34947,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -35050,6 +35111,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -35086,6 +35148,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -35207,6 +35270,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -35243,6 +35307,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -35378,6 +35443,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -35414,6 +35480,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -35577,6 +35644,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -35613,6 +35681,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -35649,6 +35718,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -35685,6 +35755,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -35789,6 +35860,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -35825,6 +35897,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -35901,6 +35974,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -35937,6 +36011,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36053,6 +36128,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -36089,6 +36165,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36232,6 +36309,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -36268,6 +36346,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -36383,6 +36462,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -36419,6 +36499,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36455,6 +36536,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -36491,6 +36573,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -36543,6 +36626,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -36579,6 +36663,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36678,6 +36763,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -36714,6 +36800,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -36835,6 +36922,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -36871,6 +36959,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
@@ -36907,6 +36996,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
     projets_created?: projetCreateNestedManyWithoutCreatorInput
@@ -36943,6 +37033,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: boolean
     statut?: $Enums.StatutUser | null
     statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
     accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
     collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
     projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
@@ -36995,6 +37086,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUpdateManyWithoutCreatorNestedInput
@@ -37031,6 +37123,7 @@ export namespace Prisma {
     accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
     statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
     statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
     collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
     projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
