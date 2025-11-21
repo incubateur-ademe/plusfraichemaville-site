@@ -120,3 +120,15 @@ export const updateUserStatut = async (userId: string, statut: StatutUser): Prom
 };
 
 export const getCountAllUsers = async () => prismaClient.user.count();
+
+export const updateUserBrowsingDate = async (userId: string): Promise<UserWithCollectivite | null> => {
+  return prismaClient.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      last_browsing_date: new Date(),
+    },
+    include: { collectivites: { include: { collectivite: true } } },
+  });
+};

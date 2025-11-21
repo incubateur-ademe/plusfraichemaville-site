@@ -5,8 +5,17 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { getUserProjet, updateLastAccessToProjetByUser } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
+import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 
-export const accessProjetAction = async (userId: string, projectId: number): Promise<ResponseAction> => {
+export const updateUserProjetLastViewedAction = async (
+  userId: string,
+  projectId: number,
+): Promise<
+  ResponseAction<{
+    projet?: ProjetWithRelations | null;
+  }>
+> => {
   try {
     const session = await auth();
 
@@ -24,8 +33,9 @@ export const accessProjetAction = async (userId: string, projectId: number): Pro
       return { type: "error", message: "UNAUTHORIZED" };
     }
     await updateLastAccessToProjetByUser(projectLink);
+    const updatedProjet = await getProjetWithRelationsById(projectId);
 
-    return { type: "success" };
+    return { type: "success", projet: updatedProjet };
   } catch (e) {
     customCaptureException("Error updating project last accessed fields in DB", e);
     return { type: "error", message: "TECHNICAL_ERROR" };

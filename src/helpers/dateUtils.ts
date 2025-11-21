@@ -56,5 +56,10 @@ export const daysUntilDate = (targetDate: Date | null): number | null => {
   return Math.ceil((targetDate.getTime() - new Date().getTime()) / MS_PER_DAY);
 };
 
+export const hoursSinceDate = (targetDate: Date): number => {
+  const MS_PER_HOUR = 1000 * 60 * 60;
+  return Math.floor((new Date().getTime() - targetDate.getTime()) / MS_PER_HOUR);
+};
+
 export const dateSort = (a: Date | string | null, b: Date | string | null) =>
   new Date(a || FAR_FUTURE) < new Date(b || FAR_FUTURE) ? -1 : 0;

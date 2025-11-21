@@ -14,7 +14,6 @@ import { PartageOverviewPopupMenu } from "@/src/components/espace-projet/utilisa
 import { useModalStore } from "@/src/stores/modal/provider";
 import { hasDiscardedInformation } from "@/src/helpers/user";
 import { MODE_LECTEUR_MODAL_ID } from "@/src/components/tableau-de-bord/viewer-mode-modal";
-import { accessProjetAction } from "@/src/actions/userProjet/access-projet-action";
 import { Maturite } from "../maturite/maturite";
 import { getUserRoleFromCode } from "@/src/helpers/user-role";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
@@ -54,9 +53,6 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
   const openProjet = async () => {
     if (isLecteur && !hasDiscardedInformation(currentUser, MODE_LECTEUR_MODAL_ID)) {
       setShowInfoViewerMode(true);
-    }
-    if (currentUser) {
-      await accessProjetAction(currentUser?.id, updatedProjet.id);
     }
     router.push(PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id));
   };
