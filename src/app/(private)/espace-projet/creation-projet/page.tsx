@@ -1,4 +1,8 @@
 import { ProjetInfoForm } from "@/src/forms/projet/ProjetInfoForm";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Création de projet");
 
 export default async function CreateProjetPage() {
   return (

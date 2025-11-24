@@ -23,7 +23,9 @@ export const AvailableProjetsForCollectiviteModal = () => {
   const setCollectiviteIdToListAvailableProjets = useModalStore(
     (state) => state.setCollectiviteIdToListAvailableProjets,
   );
-  const userId = useUserStore((state) => state.userInfos?.id);
+  const userInfos = useUserStore((state) => state.userInfos);
+  const userId = userInfos?.id;
+  const userCollectiviteName = userInfos?.collectivites[0].collectivite.nom || "";
 
   useEffect(() => {
     if (collectiviteId) {
@@ -43,8 +45,8 @@ export const AvailableProjetsForCollectiviteModal = () => {
     <>
       <modal.Component title="Rejoindre d'autres projets" size="large" className="join-project-modal">
         <span className="mb-8 block text-base">
-          Vous pouvez consulter tous les projets liés à votre collectivité et soumettre une demande {"d'accès"}.
-          {"L'administrateur"} sera alors notifié de votre demande.
+          {`Vous pouvez consulter tous les projets de rafraîchissement localisés à ${userCollectiviteName} et
+           soumettre une demande d'accès. L'administrateur sera alors notifié de votre demande.`}
         </span>
         <Conditional>
           <Case condition={!isLoading && (availableProjects?.length || 0) === 0}>

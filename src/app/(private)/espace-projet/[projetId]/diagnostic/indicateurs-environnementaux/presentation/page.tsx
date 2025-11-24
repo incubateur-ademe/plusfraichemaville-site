@@ -11,6 +11,10 @@ import IndienReminderModal from "@/src/components/diagnostic-indien/indien-remin
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 import { BREADCRUMB_DIAG_INDICATEURS_PRESENTATION } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-diag";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Définition des indicateurs environnementaux");
 
 export default async function IndicateursEnvironnementauxPresentationPage(props: {
   params: Promise<{ projetId: number }>;

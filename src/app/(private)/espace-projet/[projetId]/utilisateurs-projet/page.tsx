@@ -3,6 +3,10 @@ import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner
 import { PartageOverviewAdmin } from "@/src/components/espace-projet/utilisateurs-projet/partage-overview-admin";
 import { PartageOverviewQuit } from "@/src/components/espace-projet/utilisateurs-projet/partage-overview-quit";
 import React from "react";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Gérer les accès au projet");
 
 export default function Page() {
   return (

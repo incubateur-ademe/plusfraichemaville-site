@@ -2,6 +2,10 @@ import { ProtectedEspaceProjetUrl } from "@/src/components/common/protected-espa
 import { FichesSolutions } from "@/src/components/ficheSolution/fiches-solutions";
 import { BREADCRUMB_SOLUTION_TOUTES_SOLUTIONS } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-solution";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
+import { Metadata } from "next";
+import { computeMetadata } from "@/src/helpers/metadata/helpers";
+
+export const metadata: Metadata = computeMetadata("Explorez nos solutions");
 
 export default async function FichesSolutionsListePage(props: {
   searchParams: Promise<{

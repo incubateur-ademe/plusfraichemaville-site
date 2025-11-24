@@ -79,7 +79,20 @@ export const UserInfoForm = ({
       <CollectiviteInputFormField
         control={form.control}
         path={"collectivite"}
-        label="Collectivité à laquelle je suis rattaché"
+        label={
+          <>
+            <span>Collectivité à laquelle je suis rattaché</span>
+            <button
+              aria-describedby="tooltip-collectivite"
+              type="button"
+              className="fr-btn--tooltip fr-btn rounded-3xl text-dsfr-text-disabled-grey"
+            />
+            <span className="fr-tooltip fr-placement" id="tooltip-collectivite" role="tooltip">
+              Cette collectivité correspond à la commune dans laquelle se situe le siège de l’établissement auquel je
+              suis rattaché.
+            </span>
+          </>
+        }
         asterisk={true}
         disabled={!!userCollectivite}
       />
