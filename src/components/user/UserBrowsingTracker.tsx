@@ -26,7 +26,7 @@ export const UserBrowsingTracker = () => {
 
     const updateUserBrowsingDate = async () => {
       const result = await updateUserBrowsingDateAction(userInfos.id);
-      if (result.updatedUser) {
+      if (result.type === "success" && result.updatedUser) {
         setUserInfos(result.updatedUser);
       }
     };
