@@ -153,7 +153,8 @@ exports.Prisma.UserScalarFieldEnum = {
   accept_communication_produit: 'accept_communication_produit',
   accept_communication_suivi_projet: 'accept_communication_suivi_projet',
   statut: 'statut',
-  statut_updated_at: 'statut_updated_at'
+  statut_updated_at: 'statut_updated_at',
+  last_browsing_date: 'last_browsing_date'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
