@@ -79,6 +79,8 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
       data {
         id
         attributes {
+          publishedAt
+          updatedAt
           titre
           lieu
           description

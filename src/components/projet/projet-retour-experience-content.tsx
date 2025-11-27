@@ -14,6 +14,7 @@ import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { GenericLink } from "@/src/components/common/generic-links/generic-link";
 import EspaceProjetIncentiveBanner from "@/src/components/common/espace-projet-incentive/espace-projet-incentive-banner";
+import { PublishInformation } from "@/src/components/common/publish-information";
 
 type RetourExperienceContentProps = {
   retourExperience: RetourExperience;
@@ -39,10 +40,16 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
       <div className="fr-container flex flex-col md:flex-row">
         <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
         <div className="min-w-0 flex-1  md:pl-12">
-          <h1 className={"mt-4 text-3xl md:text-[40px] md:leading-[3rem]"}>{retourExperience.attributes.titre}</h1>
+          <h1 className={"!mb-3 mt-4 text-3xl md:text-[2.5rem] md:leading-[3rem]"}>
+            {retourExperience.attributes.titre}
+          </h1>
+          <PublishInformation
+            publishedAt={retourExperience.attributes.publishedAt}
+            updatedAt={retourExperience.attributes.updatedAt}
+          />
           <CmsRichText
             label={retourExperience.attributes.description}
-            className={"mt-10 text-xl leading-8 [&_p]:text-xl [&_p]:leading-8"}
+            className={"mt-8 text-xl leading-8 [&_p]:text-xl [&_p]:leading-8"}
           />
           {!isEmpty(retourExperience.attributes.citations) &&
             retourExperience.attributes.citations.map((citation) => (
