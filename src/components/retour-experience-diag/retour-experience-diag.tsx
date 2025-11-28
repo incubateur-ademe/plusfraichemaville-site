@@ -14,6 +14,7 @@ import { Separator } from "@/src/components/common/separator";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { isEmpty } from "@/src/helpers/listUtils";
+import { PublishInformation } from "@/src/components/common/publish-information";
 
 type RetourExperienceDiagProps = {
   rex: RetourExperienceDiagnostic;
@@ -34,6 +35,8 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
     lien_rex_diagnostics,
     resultats,
     resultats_images,
+    publishedAt,
+    updatedAt,
   } = rex.attributes;
 
   return (
@@ -80,8 +83,9 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
           )}
         </section>
         <section>
-          <h1 className="mb-5 text-[40px] font-bold leading-[48px]">{titre}</h1>
-          <CmsRichText label={description} className={"mb-9 mt-10 [&_p]:text-xl [&_p]:leading-8"} />
+          <h1 className={"!mb-3 text-3xl md:text-[2.5rem] md:leading-[3rem]"}>{titre}</h1>
+          <PublishInformation publishedAt={publishedAt} updatedAt={updatedAt} />
+          <CmsRichText label={description} className={"mb-9 mt-6 [&_p]:text-xl [&_p]:leading-8"} />
           {citations &&
             citations.length > 0 &&
             citations.map((citation) => (

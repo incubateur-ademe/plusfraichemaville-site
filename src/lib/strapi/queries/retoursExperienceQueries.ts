@@ -20,6 +20,8 @@ ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
     data {
       id
       attributes {
+        publishedAt
+        updatedAt
         titre
         description
         slug
