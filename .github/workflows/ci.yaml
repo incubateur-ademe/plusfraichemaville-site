@@ -31,7 +31,7 @@ jobs:
           node-version: 22.14.0
 
       - name: Install dependencies
-        run: pnpm ci --frozen-lockfile --ignore-scripts
+        run: pnpm install --frozen-lockfile --ignore-scripts
 
       - name: Prettier
         run: pnpm run prettier
