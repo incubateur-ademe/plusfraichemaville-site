@@ -26,6 +26,9 @@ jobs:
         shell: bash
         run: corepack enable
 
+      - name: Prepare pnpm
+        run: corepack prepare pnpm@10.8.1 --activate
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22.14.0
