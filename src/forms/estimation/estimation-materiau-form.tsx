@@ -10,6 +10,7 @@ import InputFormField from "@/src/components/common/InputFormField";
 import Button from "@codegouvfr/react-dsfr/Button";
 import EstimationMateriauField from "@/src/forms/estimation/estimation-materiau-field";
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
+import EditablePriceField from "@/src/forms/estimation/editable-price-field";
 import { updateEstimationMateriauxAction } from "@/src/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/src/components/common/notifications";
 
@@ -91,16 +92,29 @@ export default function EstimationMateriauForm({
   const globalPrice = useMemo(() => {
     return ficheSolution.attributes.materiaux?.data.reduce(
       (acc, materiauCMS) => {
-        const quantiteMateriau =
-          watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +materiauCMS.id)?.quantite || 0;
+        const estimation = watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +materiauCMS.id);
+        const quantiteMateriau = estimation?.quantite || 0;
+        const coutInvestissementOverride = estimation?.coutInvestissementOverride;
+        const coutEntretienOverride = estimation?.coutEntretienOverride;
+
+        const investissementMin =
+          coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_minimum_fourniture || 0);
+        const investissementMax =
+          coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_maximum_fourniture || 0);
+
+        const entretienMin =
+          coutEntretienOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_minimum_entretien || 0);
+        const entretienMax =
+          coutEntretienOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_maximum_entretien || 0);
+
         return {
           entretien: {
-            min: quantiteMateriau * (materiauCMS.attributes.cout_minimum_entretien || 0) + acc.entretien.min,
-            max: quantiteMateriau * (materiauCMS.attributes.cout_maximum_entretien || 0) + acc.entretien.max,
+            min: entretienMin + acc.entretien.min,
+            max: entretienMax + acc.entretien.max,
           },
           fourniture: {
-            min: quantiteMateriau * (materiauCMS.attributes.cout_minimum_fourniture || 0) + acc.fourniture.min,
-            max: quantiteMateriau * (materiauCMS.attributes.cout_maximum_fourniture || 0) + acc.fourniture.max,
+            min: investissementMin + acc.fourniture.min,
+            max: investissementMax + acc.fourniture.max,
           },
         };
       },
@@ -135,20 +149,26 @@ export default function EstimationMateriauForm({
                   whiteBackground
                   onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => event.target?.select()}
                 />
-                <div>Investissement</div>
-                <div className="mb-2 font-bold">
-                  {getLabelCoutFournitureByQuantite(
+                <EditablePriceField
+                  control={form.control}
+                  setValue={form.setValue}
+                  name={`estimationMateriaux.${index}.coutInvestissementOverride`}
+                  label="Investissement"
+                  calculatedValue={getLabelCoutFournitureByQuantite(
                     getMateriauFromId(+field.materiauId)?.attributes,
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
                   )}
-                </div>
-                <div>Entretien</div>
-                <div className="mb-2 font-bold">
-                  {getLabelCoutEntretienByQuantite(
+                />
+                <EditablePriceField
+                  control={form.control}
+                  setValue={form.setValue}
+                  name={`estimationMateriaux.${index}.coutEntretienOverride`}
+                  label="Entretien"
+                  calculatedValue={getLabelCoutEntretienByQuantite(
                     getMateriauFromId(+field.materiauId)?.attributes,
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
                   )}
-                </div>
+                />
               </EstimationMateriauField>
             ))}
             <EstimationMateriauGlobalPriceFooter

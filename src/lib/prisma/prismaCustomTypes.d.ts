@@ -177,7 +177,12 @@ export type ProjetWithAdminUser = ProjetWithCollectivite & {
 
 export type EstimationMateriauxFicheSolution = {
   ficheSolutionId: number;
-  estimationMateriaux?: { materiauId: string; quantite: number }[];
+  estimationMateriaux?: {
+    materiauId: string;
+    quantite: number;
+    coutInvestissementOverride?: number;
+    coutEntretienOverride?: number;
+  }[];
   coutMinInvestissement: number;
   coutMaxInvestissement: number;
   coutMinEntretien: number;

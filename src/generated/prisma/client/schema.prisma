@@ -266,19 +266,20 @@ model projet_sourcing_contact {
 }
 
 model estimation {
-  id                  Int                 @id
-  created_by          String
-  creator             User                @relation(name: "estimation_creator", fields: [created_by], references: [id])
-  created_at          DateTime            @default(now())
-  updated_at          DateTime            @default(now())
-  projet_id           Int
-  projet              projet              @relation(fields: [projet_id], references: [id], onDelete: Cascade)
-  fiches_solutions_id Int[]
-  materiaux           Json?
-  deleted_at          DateTime?
-  deleted_by          String?
-  deleter             User?               @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
-  estimations_aides   estimations_aides[]
+  id                           Int                         @id
+  created_by                   String
+  creator                      User                        @relation(name: "estimation_creator", fields: [created_by], references: [id])
+  created_at                   DateTime                    @default(now())
+  updated_at                   DateTime                    @default(now())
+  projet_id                    Int
+  projet                       projet                      @relation(fields: [projet_id], references: [id], onDelete: Cascade)
+  fiches_solutions_id          Int[]
+  materiaux                    Json?
+  deleted_at                   DateTime?
+  deleted_by                   String?
+  deleter                      User?                       @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
+  estimations_aides            estimations_aides[]
+  estimations_fiches_solutions estimation_fiche_solution[]
 }
 
 enum TypeLieuClimadiag {
@@ -332,6 +333,29 @@ model estimations_aides {
   created_by   User?      @relation(fields: [user_id], references: [id])
 
   @@id([estimationId, aideId])
+}
+
+model estimation_materiaux {
+  id                           String                    @id @default(cuid())
+  estimation_fiche_solution    estimation_fiche_solution @relation(fields: [estimation_fiche_solution_id], references: [id])
+  estimation_fiche_solution_id String
+  materiau_id                  Int
+  quantite                     Int
+  cout_investissement_override Int
+  cout_entretien_override      Int
+}
+
+model estimation_fiche_solution {
+  id                      String                 @id @default(cuid())
+  estimation              estimation             @relation(fields: [estimation_id], references: [id])
+  estimation_id           Int
+  fiche_solution_id       Int
+  quantite                Int?
+  cout_min_investissement Int
+  cout_max_investissement Int
+  cout_min_entretien      Int
+  cout_max_entretien      Int
+  estimation_materiaux    estimation_materiaux[]
 }
 
 model conversation {

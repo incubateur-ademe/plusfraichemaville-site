@@ -84,6 +84,16 @@ export type aide = $Result.DefaultSelection<Prisma.$aidePayload>
  */
 export type estimations_aides = $Result.DefaultSelection<Prisma.$estimations_aidesPayload>
 /**
+ * Model estimation_materiaux
+ * 
+ */
+export type estimation_materiaux = $Result.DefaultSelection<Prisma.$estimation_materiauxPayload>
+/**
+ * Model estimation_fiche_solution
+ * 
+ */
+export type estimation_fiche_solution = $Result.DefaultSelection<Prisma.$estimation_fiche_solutionPayload>
+/**
  * Model conversation
  * 
  */
@@ -548,6 +558,26 @@ export class PrismaClient<
     * ```
     */
   get estimations_aides(): Prisma.estimations_aidesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.estimation_materiaux`: Exposes CRUD operations for the **estimation_materiaux** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Estimation_materiauxes
+    * const estimation_materiauxes = await prisma.estimation_materiaux.findMany()
+    * ```
+    */
+  get estimation_materiaux(): Prisma.estimation_materiauxDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.estimation_fiche_solution`: Exposes CRUD operations for the **estimation_fiche_solution** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Estimation_fiche_solutions
+    * const estimation_fiche_solutions = await prisma.estimation_fiche_solution.findMany()
+    * ```
+    */
+  get estimation_fiche_solution(): Prisma.estimation_fiche_solutionDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.conversation`: Exposes CRUD operations for the **conversation** model.
@@ -1042,6 +1072,8 @@ export namespace Prisma {
     climadiag: 'climadiag',
     aide: 'aide',
     estimations_aides: 'estimations_aides',
+    estimation_materiaux: 'estimation_materiaux',
+    estimation_fiche_solution: 'estimation_fiche_solution',
     conversation: 'conversation',
     diagnostic_simulation: 'diagnostic_simulation',
     Analytics: 'Analytics',
@@ -1064,7 +1096,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "user" | "verificationToken" | "collectivite" | "user_projet" | "email" | "user_collectivite" | "projet" | "projet_fiche" | "projet_sourcing_contact" | "estimation" | "climadiag" | "aide" | "estimations_aides" | "conversation" | "diagnostic_simulation" | "analytics" | "cron_jobs"
+      modelProps: "account" | "user" | "verificationToken" | "collectivite" | "user_projet" | "email" | "user_collectivite" | "projet" | "projet_fiche" | "projet_sourcing_contact" | "estimation" | "climadiag" | "aide" | "estimations_aides" | "estimation_materiaux" | "estimation_fiche_solution" | "conversation" | "diagnostic_simulation" | "analytics" | "cron_jobs"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2104,6 +2136,154 @@ export namespace Prisma {
           }
         }
       }
+      estimation_materiaux: {
+        payload: Prisma.$estimation_materiauxPayload<ExtArgs>
+        fields: Prisma.estimation_materiauxFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.estimation_materiauxFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.estimation_materiauxFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>
+          }
+          findFirst: {
+            args: Prisma.estimation_materiauxFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.estimation_materiauxFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>
+          }
+          findMany: {
+            args: Prisma.estimation_materiauxFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>[]
+          }
+          create: {
+            args: Prisma.estimation_materiauxCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>
+          }
+          createMany: {
+            args: Prisma.estimation_materiauxCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.estimation_materiauxCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>[]
+          }
+          delete: {
+            args: Prisma.estimation_materiauxDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>
+          }
+          update: {
+            args: Prisma.estimation_materiauxUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>
+          }
+          deleteMany: {
+            args: Prisma.estimation_materiauxDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.estimation_materiauxUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.estimation_materiauxUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>[]
+          }
+          upsert: {
+            args: Prisma.estimation_materiauxUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_materiauxPayload>
+          }
+          aggregate: {
+            args: Prisma.Estimation_materiauxAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEstimation_materiaux>
+          }
+          groupBy: {
+            args: Prisma.estimation_materiauxGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Estimation_materiauxGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.estimation_materiauxCountArgs<ExtArgs>
+            result: $Utils.Optional<Estimation_materiauxCountAggregateOutputType> | number
+          }
+        }
+      }
+      estimation_fiche_solution: {
+        payload: Prisma.$estimation_fiche_solutionPayload<ExtArgs>
+        fields: Prisma.estimation_fiche_solutionFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.estimation_fiche_solutionFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.estimation_fiche_solutionFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>
+          }
+          findFirst: {
+            args: Prisma.estimation_fiche_solutionFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.estimation_fiche_solutionFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>
+          }
+          findMany: {
+            args: Prisma.estimation_fiche_solutionFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>[]
+          }
+          create: {
+            args: Prisma.estimation_fiche_solutionCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>
+          }
+          createMany: {
+            args: Prisma.estimation_fiche_solutionCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.estimation_fiche_solutionCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>[]
+          }
+          delete: {
+            args: Prisma.estimation_fiche_solutionDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>
+          }
+          update: {
+            args: Prisma.estimation_fiche_solutionUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>
+          }
+          deleteMany: {
+            args: Prisma.estimation_fiche_solutionDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.estimation_fiche_solutionUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.estimation_fiche_solutionUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>[]
+          }
+          upsert: {
+            args: Prisma.estimation_fiche_solutionUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$estimation_fiche_solutionPayload>
+          }
+          aggregate: {
+            args: Prisma.Estimation_fiche_solutionAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEstimation_fiche_solution>
+          }
+          groupBy: {
+            args: Prisma.estimation_fiche_solutionGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Estimation_fiche_solutionGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.estimation_fiche_solutionCountArgs<ExtArgs>
+            result: $Utils.Optional<Estimation_fiche_solutionCountAggregateOutputType> | number
+          }
+        }
+      }
       conversation: {
         payload: Prisma.$conversationPayload<ExtArgs>
         fields: Prisma.conversationFieldRefs
@@ -2498,6 +2678,8 @@ export namespace Prisma {
     climadiag?: climadiagOmit
     aide?: aideOmit
     estimations_aides?: estimations_aidesOmit
+    estimation_materiaux?: estimation_materiauxOmit
+    estimation_fiche_solution?: estimation_fiche_solutionOmit
     conversation?: conversationOmit
     diagnostic_simulation?: diagnostic_simulationOmit
     analytics?: AnalyticsOmit
@@ -2910,10 +3092,12 @@ export namespace Prisma {
 
   export type EstimationCountOutputType = {
     estimations_aides: number
+    estimations_fiches_solutions: number
   }
 
   export type EstimationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     estimations_aides?: boolean | EstimationCountOutputTypeCountEstimations_aidesArgs
+    estimations_fiches_solutions?: boolean | EstimationCountOutputTypeCountEstimations_fiches_solutionsArgs
   }
 
   // Custom InputTypes
@@ -2932,6 +3116,13 @@ export namespace Prisma {
    */
   export type EstimationCountOutputTypeCountEstimations_aidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: estimations_aidesWhereInput
+  }
+
+  /**
+   * EstimationCountOutputType without action
+   */
+  export type EstimationCountOutputTypeCountEstimations_fiches_solutionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: estimation_fiche_solutionWhereInput
   }
 
 
@@ -2963,6 +3154,37 @@ export namespace Prisma {
    */
   export type AideCountOutputTypeCountEstimations_aidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: estimations_aidesWhereInput
+  }
+
+
+  /**
+   * Count Type Estimation_fiche_solutionCountOutputType
+   */
+
+  export type Estimation_fiche_solutionCountOutputType = {
+    estimation_materiaux: number
+  }
+
+  export type Estimation_fiche_solutionCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estimation_materiaux?: boolean | Estimation_fiche_solutionCountOutputTypeCountEstimation_materiauxArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * Estimation_fiche_solutionCountOutputType without action
+   */
+  export type Estimation_fiche_solutionCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Estimation_fiche_solutionCountOutputType
+     */
+    select?: Estimation_fiche_solutionCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * Estimation_fiche_solutionCountOutputType without action
+   */
+  export type Estimation_fiche_solutionCountOutputTypeCountEstimation_materiauxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: estimation_materiauxWhereInput
   }
 
 
@@ -15552,6 +15774,7 @@ export namespace Prisma {
     projet?: boolean | projetDefaultArgs<ExtArgs>
     deleter?: boolean | estimation$deleterArgs<ExtArgs>
     estimations_aides?: boolean | estimation$estimations_aidesArgs<ExtArgs>
+    estimations_fiches_solutions?: boolean | estimation$estimations_fiches_solutionsArgs<ExtArgs>
     _count?: boolean | EstimationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["estimation"]>
 
@@ -15603,6 +15826,7 @@ export namespace Prisma {
     projet?: boolean | projetDefaultArgs<ExtArgs>
     deleter?: boolean | estimation$deleterArgs<ExtArgs>
     estimations_aides?: boolean | estimation$estimations_aidesArgs<ExtArgs>
+    estimations_fiches_solutions?: boolean | estimation$estimations_fiches_solutionsArgs<ExtArgs>
     _count?: boolean | EstimationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type estimationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -15623,6 +15847,7 @@ export namespace Prisma {
       projet: Prisma.$projetPayload<ExtArgs>
       deleter: Prisma.$UserPayload<ExtArgs> | null
       estimations_aides: Prisma.$estimations_aidesPayload<ExtArgs>[]
+      estimations_fiches_solutions: Prisma.$estimation_fiche_solutionPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -16032,6 +16257,7 @@ export namespace Prisma {
     projet<T extends projetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, projetDefaultArgs<ExtArgs>>): Prisma__projetClient<$Result.GetResult<Prisma.$projetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     deleter<T extends estimation$deleterArgs<ExtArgs> = {}>(args?: Subset<T, estimation$deleterArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     estimations_aides<T extends estimation$estimations_aidesArgs<ExtArgs> = {}>(args?: Subset<T, estimation$estimations_aidesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimations_aidesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    estimations_fiches_solutions<T extends estimation$estimations_fiches_solutionsArgs<ExtArgs> = {}>(args?: Subset<T, estimation$estimations_fiches_solutionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -16506,6 +16732,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Estimations_aidesScalarFieldEnum | Estimations_aidesScalarFieldEnum[]
+  }
+
+  /**
+   * estimation.estimations_fiches_solutions
+   */
+  export type estimation$estimations_fiches_solutionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    where?: estimation_fiche_solutionWhereInput
+    orderBy?: estimation_fiche_solutionOrderByWithRelationInput | estimation_fiche_solutionOrderByWithRelationInput[]
+    cursor?: estimation_fiche_solutionWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Estimation_fiche_solutionScalarFieldEnum | Estimation_fiche_solutionScalarFieldEnum[]
   }
 
   /**
@@ -19973,6 +20223,2308 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: estimations_aidesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model estimation_materiaux
+   */
+
+  export type AggregateEstimation_materiaux = {
+    _count: Estimation_materiauxCountAggregateOutputType | null
+    _avg: Estimation_materiauxAvgAggregateOutputType | null
+    _sum: Estimation_materiauxSumAggregateOutputType | null
+    _min: Estimation_materiauxMinAggregateOutputType | null
+    _max: Estimation_materiauxMaxAggregateOutputType | null
+  }
+
+  export type Estimation_materiauxAvgAggregateOutputType = {
+    materiau_id: number | null
+    quantite: number | null
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
+  }
+
+  export type Estimation_materiauxSumAggregateOutputType = {
+    materiau_id: number | null
+    quantite: number | null
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
+  }
+
+  export type Estimation_materiauxMinAggregateOutputType = {
+    id: string | null
+    estimation_fiche_solution_id: string | null
+    materiau_id: number | null
+    quantite: number | null
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
+  }
+
+  export type Estimation_materiauxMaxAggregateOutputType = {
+    id: string | null
+    estimation_fiche_solution_id: string | null
+    materiau_id: number | null
+    quantite: number | null
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
+  }
+
+  export type Estimation_materiauxCountAggregateOutputType = {
+    id: number
+    estimation_fiche_solution_id: number
+    materiau_id: number
+    quantite: number
+    cout_investissement_override: number
+    cout_entretien_override: number
+    _all: number
+  }
+
+
+  export type Estimation_materiauxAvgAggregateInputType = {
+    materiau_id?: true
+    quantite?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
+  }
+
+  export type Estimation_materiauxSumAggregateInputType = {
+    materiau_id?: true
+    quantite?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
+  }
+
+  export type Estimation_materiauxMinAggregateInputType = {
+    id?: true
+    estimation_fiche_solution_id?: true
+    materiau_id?: true
+    quantite?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
+  }
+
+  export type Estimation_materiauxMaxAggregateInputType = {
+    id?: true
+    estimation_fiche_solution_id?: true
+    materiau_id?: true
+    quantite?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
+  }
+
+  export type Estimation_materiauxCountAggregateInputType = {
+    id?: true
+    estimation_fiche_solution_id?: true
+    materiau_id?: true
+    quantite?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
+    _all?: true
+  }
+
+  export type Estimation_materiauxAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which estimation_materiaux to aggregate.
+     */
+    where?: estimation_materiauxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of estimation_materiauxes to fetch.
+     */
+    orderBy?: estimation_materiauxOrderByWithRelationInput | estimation_materiauxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: estimation_materiauxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` estimation_materiauxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` estimation_materiauxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned estimation_materiauxes
+    **/
+    _count?: true | Estimation_materiauxCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Estimation_materiauxAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Estimation_materiauxSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Estimation_materiauxMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Estimation_materiauxMaxAggregateInputType
+  }
+
+  export type GetEstimation_materiauxAggregateType<T extends Estimation_materiauxAggregateArgs> = {
+        [P in keyof T & keyof AggregateEstimation_materiaux]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEstimation_materiaux[P]>
+      : GetScalarType<T[P], AggregateEstimation_materiaux[P]>
+  }
+
+
+
+
+  export type estimation_materiauxGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: estimation_materiauxWhereInput
+    orderBy?: estimation_materiauxOrderByWithAggregationInput | estimation_materiauxOrderByWithAggregationInput[]
+    by: Estimation_materiauxScalarFieldEnum[] | Estimation_materiauxScalarFieldEnum
+    having?: estimation_materiauxScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Estimation_materiauxCountAggregateInputType | true
+    _avg?: Estimation_materiauxAvgAggregateInputType
+    _sum?: Estimation_materiauxSumAggregateInputType
+    _min?: Estimation_materiauxMinAggregateInputType
+    _max?: Estimation_materiauxMaxAggregateInputType
+  }
+
+  export type Estimation_materiauxGroupByOutputType = {
+    id: string
+    estimation_fiche_solution_id: string
+    materiau_id: number
+    quantite: number
+    cout_investissement_override: number
+    cout_entretien_override: number
+    _count: Estimation_materiauxCountAggregateOutputType | null
+    _avg: Estimation_materiauxAvgAggregateOutputType | null
+    _sum: Estimation_materiauxSumAggregateOutputType | null
+    _min: Estimation_materiauxMinAggregateOutputType | null
+    _max: Estimation_materiauxMaxAggregateOutputType | null
+  }
+
+  type GetEstimation_materiauxGroupByPayload<T extends estimation_materiauxGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Estimation_materiauxGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Estimation_materiauxGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Estimation_materiauxGroupByOutputType[P]>
+            : GetScalarType<T[P], Estimation_materiauxGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type estimation_materiauxSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    estimation_fiche_solution_id?: boolean
+    materiau_id?: boolean
+    quantite?: boolean
+    cout_investissement_override?: boolean
+    cout_entretien_override?: boolean
+    estimation_fiche_solution?: boolean | estimation_fiche_solutionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["estimation_materiaux"]>
+
+  export type estimation_materiauxSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    estimation_fiche_solution_id?: boolean
+    materiau_id?: boolean
+    quantite?: boolean
+    cout_investissement_override?: boolean
+    cout_entretien_override?: boolean
+    estimation_fiche_solution?: boolean | estimation_fiche_solutionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["estimation_materiaux"]>
+
+  export type estimation_materiauxSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    estimation_fiche_solution_id?: boolean
+    materiau_id?: boolean
+    quantite?: boolean
+    cout_investissement_override?: boolean
+    cout_entretien_override?: boolean
+    estimation_fiche_solution?: boolean | estimation_fiche_solutionDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["estimation_materiaux"]>
+
+  export type estimation_materiauxSelectScalar = {
+    id?: boolean
+    estimation_fiche_solution_id?: boolean
+    materiau_id?: boolean
+    quantite?: boolean
+    cout_investissement_override?: boolean
+    cout_entretien_override?: boolean
+  }
+
+  export type estimation_materiauxOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "estimation_fiche_solution_id" | "materiau_id" | "quantite" | "cout_investissement_override" | "cout_entretien_override", ExtArgs["result"]["estimation_materiaux"]>
+  export type estimation_materiauxInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estimation_fiche_solution?: boolean | estimation_fiche_solutionDefaultArgs<ExtArgs>
+  }
+  export type estimation_materiauxIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estimation_fiche_solution?: boolean | estimation_fiche_solutionDefaultArgs<ExtArgs>
+  }
+  export type estimation_materiauxIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estimation_fiche_solution?: boolean | estimation_fiche_solutionDefaultArgs<ExtArgs>
+  }
+
+  export type $estimation_materiauxPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "estimation_materiaux"
+    objects: {
+      estimation_fiche_solution: Prisma.$estimation_fiche_solutionPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      estimation_fiche_solution_id: string
+      materiau_id: number
+      quantite: number
+      cout_investissement_override: number
+      cout_entretien_override: number
+    }, ExtArgs["result"]["estimation_materiaux"]>
+    composites: {}
+  }
+
+  type estimation_materiauxGetPayload<S extends boolean | null | undefined | estimation_materiauxDefaultArgs> = $Result.GetResult<Prisma.$estimation_materiauxPayload, S>
+
+  type estimation_materiauxCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<estimation_materiauxFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Estimation_materiauxCountAggregateInputType | true
+    }
+
+  export interface estimation_materiauxDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['estimation_materiaux'], meta: { name: 'estimation_materiaux' } }
+    /**
+     * Find zero or one Estimation_materiaux that matches the filter.
+     * @param {estimation_materiauxFindUniqueArgs} args - Arguments to find a Estimation_materiaux
+     * @example
+     * // Get one Estimation_materiaux
+     * const estimation_materiaux = await prisma.estimation_materiaux.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends estimation_materiauxFindUniqueArgs>(args: SelectSubset<T, estimation_materiauxFindUniqueArgs<ExtArgs>>): Prisma__estimation_materiauxClient<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Estimation_materiaux that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {estimation_materiauxFindUniqueOrThrowArgs} args - Arguments to find a Estimation_materiaux
+     * @example
+     * // Get one Estimation_materiaux
+     * const estimation_materiaux = await prisma.estimation_materiaux.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends estimation_materiauxFindUniqueOrThrowArgs>(args: SelectSubset<T, estimation_materiauxFindUniqueOrThrowArgs<ExtArgs>>): Prisma__estimation_materiauxClient<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Estimation_materiaux that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_materiauxFindFirstArgs} args - Arguments to find a Estimation_materiaux
+     * @example
+     * // Get one Estimation_materiaux
+     * const estimation_materiaux = await prisma.estimation_materiaux.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends estimation_materiauxFindFirstArgs>(args?: SelectSubset<T, estimation_materiauxFindFirstArgs<ExtArgs>>): Prisma__estimation_materiauxClient<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Estimation_materiaux that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_materiauxFindFirstOrThrowArgs} args - Arguments to find a Estimation_materiaux
+     * @example
+     * // Get one Estimation_materiaux
+     * const estimation_materiaux = await prisma.estimation_materiaux.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends estimation_materiauxFindFirstOrThrowArgs>(args?: SelectSubset<T, estimation_materiauxFindFirstOrThrowArgs<ExtArgs>>): Prisma__estimation_materiauxClient<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Estimation_materiauxes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_materiauxFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Estimation_materiauxes
+     * const estimation_materiauxes = await prisma.estimation_materiaux.findMany()
+     * 
+     * // Get first 10 Estimation_materiauxes
+     * const estimation_materiauxes = await prisma.estimation_materiaux.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const estimation_materiauxWithIdOnly = await prisma.estimation_materiaux.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends estimation_materiauxFindManyArgs>(args?: SelectSubset<T, estimation_materiauxFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Estimation_materiaux.
+     * @param {estimation_materiauxCreateArgs} args - Arguments to create a Estimation_materiaux.
+     * @example
+     * // Create one Estimation_materiaux
+     * const Estimation_materiaux = await prisma.estimation_materiaux.create({
+     *   data: {
+     *     // ... data to create a Estimation_materiaux
+     *   }
+     * })
+     * 
+     */
+    create<T extends estimation_materiauxCreateArgs>(args: SelectSubset<T, estimation_materiauxCreateArgs<ExtArgs>>): Prisma__estimation_materiauxClient<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Estimation_materiauxes.
+     * @param {estimation_materiauxCreateManyArgs} args - Arguments to create many Estimation_materiauxes.
+     * @example
+     * // Create many Estimation_materiauxes
+     * const estimation_materiaux = await prisma.estimation_materiaux.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends estimation_materiauxCreateManyArgs>(args?: SelectSubset<T, estimation_materiauxCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Estimation_materiauxes and returns the data saved in the database.
+     * @param {estimation_materiauxCreateManyAndReturnArgs} args - Arguments to create many Estimation_materiauxes.
+     * @example
+     * // Create many Estimation_materiauxes
+     * const estimation_materiaux = await prisma.estimation_materiaux.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Estimation_materiauxes and only return the `id`
+     * const estimation_materiauxWithIdOnly = await prisma.estimation_materiaux.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends estimation_materiauxCreateManyAndReturnArgs>(args?: SelectSubset<T, estimation_materiauxCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Estimation_materiaux.
+     * @param {estimation_materiauxDeleteArgs} args - Arguments to delete one Estimation_materiaux.
+     * @example
+     * // Delete one Estimation_materiaux
+     * const Estimation_materiaux = await prisma.estimation_materiaux.delete({
+     *   where: {
+     *     // ... filter to delete one Estimation_materiaux
+     *   }
+     * })
+     * 
+     */
+    delete<T extends estimation_materiauxDeleteArgs>(args: SelectSubset<T, estimation_materiauxDeleteArgs<ExtArgs>>): Prisma__estimation_materiauxClient<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Estimation_materiaux.
+     * @param {estimation_materiauxUpdateArgs} args - Arguments to update one Estimation_materiaux.
+     * @example
+     * // Update one Estimation_materiaux
+     * const estimation_materiaux = await prisma.estimation_materiaux.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends estimation_materiauxUpdateArgs>(args: SelectSubset<T, estimation_materiauxUpdateArgs<ExtArgs>>): Prisma__estimation_materiauxClient<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Estimation_materiauxes.
+     * @param {estimation_materiauxDeleteManyArgs} args - Arguments to filter Estimation_materiauxes to delete.
+     * @example
+     * // Delete a few Estimation_materiauxes
+     * const { count } = await prisma.estimation_materiaux.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends estimation_materiauxDeleteManyArgs>(args?: SelectSubset<T, estimation_materiauxDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Estimation_materiauxes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_materiauxUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Estimation_materiauxes
+     * const estimation_materiaux = await prisma.estimation_materiaux.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends estimation_materiauxUpdateManyArgs>(args: SelectSubset<T, estimation_materiauxUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Estimation_materiauxes and returns the data updated in the database.
+     * @param {estimation_materiauxUpdateManyAndReturnArgs} args - Arguments to update many Estimation_materiauxes.
+     * @example
+     * // Update many Estimation_materiauxes
+     * const estimation_materiaux = await prisma.estimation_materiaux.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Estimation_materiauxes and only return the `id`
+     * const estimation_materiauxWithIdOnly = await prisma.estimation_materiaux.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends estimation_materiauxUpdateManyAndReturnArgs>(args: SelectSubset<T, estimation_materiauxUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Estimation_materiaux.
+     * @param {estimation_materiauxUpsertArgs} args - Arguments to update or create a Estimation_materiaux.
+     * @example
+     * // Update or create a Estimation_materiaux
+     * const estimation_materiaux = await prisma.estimation_materiaux.upsert({
+     *   create: {
+     *     // ... data to create a Estimation_materiaux
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Estimation_materiaux we want to update
+     *   }
+     * })
+     */
+    upsert<T extends estimation_materiauxUpsertArgs>(args: SelectSubset<T, estimation_materiauxUpsertArgs<ExtArgs>>): Prisma__estimation_materiauxClient<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Estimation_materiauxes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_materiauxCountArgs} args - Arguments to filter Estimation_materiauxes to count.
+     * @example
+     * // Count the number of Estimation_materiauxes
+     * const count = await prisma.estimation_materiaux.count({
+     *   where: {
+     *     // ... the filter for the Estimation_materiauxes we want to count
+     *   }
+     * })
+    **/
+    count<T extends estimation_materiauxCountArgs>(
+      args?: Subset<T, estimation_materiauxCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Estimation_materiauxCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Estimation_materiaux.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Estimation_materiauxAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Estimation_materiauxAggregateArgs>(args: Subset<T, Estimation_materiauxAggregateArgs>): Prisma.PrismaPromise<GetEstimation_materiauxAggregateType<T>>
+
+    /**
+     * Group by Estimation_materiaux.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_materiauxGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends estimation_materiauxGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: estimation_materiauxGroupByArgs['orderBy'] }
+        : { orderBy?: estimation_materiauxGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, estimation_materiauxGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEstimation_materiauxGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the estimation_materiaux model
+   */
+  readonly fields: estimation_materiauxFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for estimation_materiaux.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__estimation_materiauxClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    estimation_fiche_solution<T extends estimation_fiche_solutionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, estimation_fiche_solutionDefaultArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the estimation_materiaux model
+   */
+  interface estimation_materiauxFieldRefs {
+    readonly id: FieldRef<"estimation_materiaux", 'String'>
+    readonly estimation_fiche_solution_id: FieldRef<"estimation_materiaux", 'String'>
+    readonly materiau_id: FieldRef<"estimation_materiaux", 'Int'>
+    readonly quantite: FieldRef<"estimation_materiaux", 'Int'>
+    readonly cout_investissement_override: FieldRef<"estimation_materiaux", 'Int'>
+    readonly cout_entretien_override: FieldRef<"estimation_materiaux", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * estimation_materiaux findUnique
+   */
+  export type estimation_materiauxFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_materiaux to fetch.
+     */
+    where: estimation_materiauxWhereUniqueInput
+  }
+
+  /**
+   * estimation_materiaux findUniqueOrThrow
+   */
+  export type estimation_materiauxFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_materiaux to fetch.
+     */
+    where: estimation_materiauxWhereUniqueInput
+  }
+
+  /**
+   * estimation_materiaux findFirst
+   */
+  export type estimation_materiauxFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_materiaux to fetch.
+     */
+    where?: estimation_materiauxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of estimation_materiauxes to fetch.
+     */
+    orderBy?: estimation_materiauxOrderByWithRelationInput | estimation_materiauxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for estimation_materiauxes.
+     */
+    cursor?: estimation_materiauxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` estimation_materiauxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` estimation_materiauxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of estimation_materiauxes.
+     */
+    distinct?: Estimation_materiauxScalarFieldEnum | Estimation_materiauxScalarFieldEnum[]
+  }
+
+  /**
+   * estimation_materiaux findFirstOrThrow
+   */
+  export type estimation_materiauxFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_materiaux to fetch.
+     */
+    where?: estimation_materiauxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of estimation_materiauxes to fetch.
+     */
+    orderBy?: estimation_materiauxOrderByWithRelationInput | estimation_materiauxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for estimation_materiauxes.
+     */
+    cursor?: estimation_materiauxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` estimation_materiauxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` estimation_materiauxes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of estimation_materiauxes.
+     */
+    distinct?: Estimation_materiauxScalarFieldEnum | Estimation_materiauxScalarFieldEnum[]
+  }
+
+  /**
+   * estimation_materiaux findMany
+   */
+  export type estimation_materiauxFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_materiauxes to fetch.
+     */
+    where?: estimation_materiauxWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of estimation_materiauxes to fetch.
+     */
+    orderBy?: estimation_materiauxOrderByWithRelationInput | estimation_materiauxOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing estimation_materiauxes.
+     */
+    cursor?: estimation_materiauxWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` estimation_materiauxes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` estimation_materiauxes.
+     */
+    skip?: number
+    distinct?: Estimation_materiauxScalarFieldEnum | Estimation_materiauxScalarFieldEnum[]
+  }
+
+  /**
+   * estimation_materiaux create
+   */
+  export type estimation_materiauxCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * The data needed to create a estimation_materiaux.
+     */
+    data: XOR<estimation_materiauxCreateInput, estimation_materiauxUncheckedCreateInput>
+  }
+
+  /**
+   * estimation_materiaux createMany
+   */
+  export type estimation_materiauxCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many estimation_materiauxes.
+     */
+    data: estimation_materiauxCreateManyInput | estimation_materiauxCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * estimation_materiaux createManyAndReturn
+   */
+  export type estimation_materiauxCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * The data used to create many estimation_materiauxes.
+     */
+    data: estimation_materiauxCreateManyInput | estimation_materiauxCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * estimation_materiaux update
+   */
+  export type estimation_materiauxUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * The data needed to update a estimation_materiaux.
+     */
+    data: XOR<estimation_materiauxUpdateInput, estimation_materiauxUncheckedUpdateInput>
+    /**
+     * Choose, which estimation_materiaux to update.
+     */
+    where: estimation_materiauxWhereUniqueInput
+  }
+
+  /**
+   * estimation_materiaux updateMany
+   */
+  export type estimation_materiauxUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update estimation_materiauxes.
+     */
+    data: XOR<estimation_materiauxUpdateManyMutationInput, estimation_materiauxUncheckedUpdateManyInput>
+    /**
+     * Filter which estimation_materiauxes to update
+     */
+    where?: estimation_materiauxWhereInput
+    /**
+     * Limit how many estimation_materiauxes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * estimation_materiaux updateManyAndReturn
+   */
+  export type estimation_materiauxUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * The data used to update estimation_materiauxes.
+     */
+    data: XOR<estimation_materiauxUpdateManyMutationInput, estimation_materiauxUncheckedUpdateManyInput>
+    /**
+     * Filter which estimation_materiauxes to update
+     */
+    where?: estimation_materiauxWhereInput
+    /**
+     * Limit how many estimation_materiauxes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * estimation_materiaux upsert
+   */
+  export type estimation_materiauxUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * The filter to search for the estimation_materiaux to update in case it exists.
+     */
+    where: estimation_materiauxWhereUniqueInput
+    /**
+     * In case the estimation_materiaux found by the `where` argument doesn't exist, create a new estimation_materiaux with this data.
+     */
+    create: XOR<estimation_materiauxCreateInput, estimation_materiauxUncheckedCreateInput>
+    /**
+     * In case the estimation_materiaux was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<estimation_materiauxUpdateInput, estimation_materiauxUncheckedUpdateInput>
+  }
+
+  /**
+   * estimation_materiaux delete
+   */
+  export type estimation_materiauxDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    /**
+     * Filter which estimation_materiaux to delete.
+     */
+    where: estimation_materiauxWhereUniqueInput
+  }
+
+  /**
+   * estimation_materiaux deleteMany
+   */
+  export type estimation_materiauxDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which estimation_materiauxes to delete
+     */
+    where?: estimation_materiauxWhereInput
+    /**
+     * Limit how many estimation_materiauxes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * estimation_materiaux without action
+   */
+  export type estimation_materiauxDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model estimation_fiche_solution
+   */
+
+  export type AggregateEstimation_fiche_solution = {
+    _count: Estimation_fiche_solutionCountAggregateOutputType | null
+    _avg: Estimation_fiche_solutionAvgAggregateOutputType | null
+    _sum: Estimation_fiche_solutionSumAggregateOutputType | null
+    _min: Estimation_fiche_solutionMinAggregateOutputType | null
+    _max: Estimation_fiche_solutionMaxAggregateOutputType | null
+  }
+
+  export type Estimation_fiche_solutionAvgAggregateOutputType = {
+    estimation_id: number | null
+    fiche_solution_id: number | null
+    quantite: number | null
+    cout_min_investissement: number | null
+    cout_max_investissement: number | null
+    cout_min_entretien: number | null
+    cout_max_entretien: number | null
+  }
+
+  export type Estimation_fiche_solutionSumAggregateOutputType = {
+    estimation_id: number | null
+    fiche_solution_id: number | null
+    quantite: number | null
+    cout_min_investissement: number | null
+    cout_max_investissement: number | null
+    cout_min_entretien: number | null
+    cout_max_entretien: number | null
+  }
+
+  export type Estimation_fiche_solutionMinAggregateOutputType = {
+    id: string | null
+    estimation_id: number | null
+    fiche_solution_id: number | null
+    quantite: number | null
+    cout_min_investissement: number | null
+    cout_max_investissement: number | null
+    cout_min_entretien: number | null
+    cout_max_entretien: number | null
+  }
+
+  export type Estimation_fiche_solutionMaxAggregateOutputType = {
+    id: string | null
+    estimation_id: number | null
+    fiche_solution_id: number | null
+    quantite: number | null
+    cout_min_investissement: number | null
+    cout_max_investissement: number | null
+    cout_min_entretien: number | null
+    cout_max_entretien: number | null
+  }
+
+  export type Estimation_fiche_solutionCountAggregateOutputType = {
+    id: number
+    estimation_id: number
+    fiche_solution_id: number
+    quantite: number
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+    _all: number
+  }
+
+
+  export type Estimation_fiche_solutionAvgAggregateInputType = {
+    estimation_id?: true
+    fiche_solution_id?: true
+    quantite?: true
+    cout_min_investissement?: true
+    cout_max_investissement?: true
+    cout_min_entretien?: true
+    cout_max_entretien?: true
+  }
+
+  export type Estimation_fiche_solutionSumAggregateInputType = {
+    estimation_id?: true
+    fiche_solution_id?: true
+    quantite?: true
+    cout_min_investissement?: true
+    cout_max_investissement?: true
+    cout_min_entretien?: true
+    cout_max_entretien?: true
+  }
+
+  export type Estimation_fiche_solutionMinAggregateInputType = {
+    id?: true
+    estimation_id?: true
+    fiche_solution_id?: true
+    quantite?: true
+    cout_min_investissement?: true
+    cout_max_investissement?: true
+    cout_min_entretien?: true
+    cout_max_entretien?: true
+  }
+
+  export type Estimation_fiche_solutionMaxAggregateInputType = {
+    id?: true
+    estimation_id?: true
+    fiche_solution_id?: true
+    quantite?: true
+    cout_min_investissement?: true
+    cout_max_investissement?: true
+    cout_min_entretien?: true
+    cout_max_entretien?: true
+  }
+
+  export type Estimation_fiche_solutionCountAggregateInputType = {
+    id?: true
+    estimation_id?: true
+    fiche_solution_id?: true
+    quantite?: true
+    cout_min_investissement?: true
+    cout_max_investissement?: true
+    cout_min_entretien?: true
+    cout_max_entretien?: true
+    _all?: true
+  }
+
+  export type Estimation_fiche_solutionAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which estimation_fiche_solution to aggregate.
+     */
+    where?: estimation_fiche_solutionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of estimation_fiche_solutions to fetch.
+     */
+    orderBy?: estimation_fiche_solutionOrderByWithRelationInput | estimation_fiche_solutionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: estimation_fiche_solutionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` estimation_fiche_solutions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` estimation_fiche_solutions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned estimation_fiche_solutions
+    **/
+    _count?: true | Estimation_fiche_solutionCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Estimation_fiche_solutionAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Estimation_fiche_solutionSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Estimation_fiche_solutionMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Estimation_fiche_solutionMaxAggregateInputType
+  }
+
+  export type GetEstimation_fiche_solutionAggregateType<T extends Estimation_fiche_solutionAggregateArgs> = {
+        [P in keyof T & keyof AggregateEstimation_fiche_solution]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEstimation_fiche_solution[P]>
+      : GetScalarType<T[P], AggregateEstimation_fiche_solution[P]>
+  }
+
+
+
+
+  export type estimation_fiche_solutionGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: estimation_fiche_solutionWhereInput
+    orderBy?: estimation_fiche_solutionOrderByWithAggregationInput | estimation_fiche_solutionOrderByWithAggregationInput[]
+    by: Estimation_fiche_solutionScalarFieldEnum[] | Estimation_fiche_solutionScalarFieldEnum
+    having?: estimation_fiche_solutionScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Estimation_fiche_solutionCountAggregateInputType | true
+    _avg?: Estimation_fiche_solutionAvgAggregateInputType
+    _sum?: Estimation_fiche_solutionSumAggregateInputType
+    _min?: Estimation_fiche_solutionMinAggregateInputType
+    _max?: Estimation_fiche_solutionMaxAggregateInputType
+  }
+
+  export type Estimation_fiche_solutionGroupByOutputType = {
+    id: string
+    estimation_id: number
+    fiche_solution_id: number
+    quantite: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+    _count: Estimation_fiche_solutionCountAggregateOutputType | null
+    _avg: Estimation_fiche_solutionAvgAggregateOutputType | null
+    _sum: Estimation_fiche_solutionSumAggregateOutputType | null
+    _min: Estimation_fiche_solutionMinAggregateOutputType | null
+    _max: Estimation_fiche_solutionMaxAggregateOutputType | null
+  }
+
+  type GetEstimation_fiche_solutionGroupByPayload<T extends estimation_fiche_solutionGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Estimation_fiche_solutionGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Estimation_fiche_solutionGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Estimation_fiche_solutionGroupByOutputType[P]>
+            : GetScalarType<T[P], Estimation_fiche_solutionGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type estimation_fiche_solutionSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    estimation_id?: boolean
+    fiche_solution_id?: boolean
+    quantite?: boolean
+    cout_min_investissement?: boolean
+    cout_max_investissement?: boolean
+    cout_min_entretien?: boolean
+    cout_max_entretien?: boolean
+    estimation?: boolean | estimationDefaultArgs<ExtArgs>
+    estimation_materiaux?: boolean | estimation_fiche_solution$estimation_materiauxArgs<ExtArgs>
+    _count?: boolean | Estimation_fiche_solutionCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["estimation_fiche_solution"]>
+
+  export type estimation_fiche_solutionSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    estimation_id?: boolean
+    fiche_solution_id?: boolean
+    quantite?: boolean
+    cout_min_investissement?: boolean
+    cout_max_investissement?: boolean
+    cout_min_entretien?: boolean
+    cout_max_entretien?: boolean
+    estimation?: boolean | estimationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["estimation_fiche_solution"]>
+
+  export type estimation_fiche_solutionSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    estimation_id?: boolean
+    fiche_solution_id?: boolean
+    quantite?: boolean
+    cout_min_investissement?: boolean
+    cout_max_investissement?: boolean
+    cout_min_entretien?: boolean
+    cout_max_entretien?: boolean
+    estimation?: boolean | estimationDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["estimation_fiche_solution"]>
+
+  export type estimation_fiche_solutionSelectScalar = {
+    id?: boolean
+    estimation_id?: boolean
+    fiche_solution_id?: boolean
+    quantite?: boolean
+    cout_min_investissement?: boolean
+    cout_max_investissement?: boolean
+    cout_min_entretien?: boolean
+    cout_max_entretien?: boolean
+  }
+
+  export type estimation_fiche_solutionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "estimation_id" | "fiche_solution_id" | "quantite" | "cout_min_investissement" | "cout_max_investissement" | "cout_min_entretien" | "cout_max_entretien", ExtArgs["result"]["estimation_fiche_solution"]>
+  export type estimation_fiche_solutionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estimation?: boolean | estimationDefaultArgs<ExtArgs>
+    estimation_materiaux?: boolean | estimation_fiche_solution$estimation_materiauxArgs<ExtArgs>
+    _count?: boolean | Estimation_fiche_solutionCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type estimation_fiche_solutionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estimation?: boolean | estimationDefaultArgs<ExtArgs>
+  }
+  export type estimation_fiche_solutionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    estimation?: boolean | estimationDefaultArgs<ExtArgs>
+  }
+
+  export type $estimation_fiche_solutionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "estimation_fiche_solution"
+    objects: {
+      estimation: Prisma.$estimationPayload<ExtArgs>
+      estimation_materiaux: Prisma.$estimation_materiauxPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      estimation_id: number
+      fiche_solution_id: number
+      quantite: number | null
+      cout_min_investissement: number
+      cout_max_investissement: number
+      cout_min_entretien: number
+      cout_max_entretien: number
+    }, ExtArgs["result"]["estimation_fiche_solution"]>
+    composites: {}
+  }
+
+  type estimation_fiche_solutionGetPayload<S extends boolean | null | undefined | estimation_fiche_solutionDefaultArgs> = $Result.GetResult<Prisma.$estimation_fiche_solutionPayload, S>
+
+  type estimation_fiche_solutionCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<estimation_fiche_solutionFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Estimation_fiche_solutionCountAggregateInputType | true
+    }
+
+  export interface estimation_fiche_solutionDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['estimation_fiche_solution'], meta: { name: 'estimation_fiche_solution' } }
+    /**
+     * Find zero or one Estimation_fiche_solution that matches the filter.
+     * @param {estimation_fiche_solutionFindUniqueArgs} args - Arguments to find a Estimation_fiche_solution
+     * @example
+     * // Get one Estimation_fiche_solution
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends estimation_fiche_solutionFindUniqueArgs>(args: SelectSubset<T, estimation_fiche_solutionFindUniqueArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Estimation_fiche_solution that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {estimation_fiche_solutionFindUniqueOrThrowArgs} args - Arguments to find a Estimation_fiche_solution
+     * @example
+     * // Get one Estimation_fiche_solution
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends estimation_fiche_solutionFindUniqueOrThrowArgs>(args: SelectSubset<T, estimation_fiche_solutionFindUniqueOrThrowArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Estimation_fiche_solution that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_fiche_solutionFindFirstArgs} args - Arguments to find a Estimation_fiche_solution
+     * @example
+     * // Get one Estimation_fiche_solution
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends estimation_fiche_solutionFindFirstArgs>(args?: SelectSubset<T, estimation_fiche_solutionFindFirstArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Estimation_fiche_solution that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_fiche_solutionFindFirstOrThrowArgs} args - Arguments to find a Estimation_fiche_solution
+     * @example
+     * // Get one Estimation_fiche_solution
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends estimation_fiche_solutionFindFirstOrThrowArgs>(args?: SelectSubset<T, estimation_fiche_solutionFindFirstOrThrowArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Estimation_fiche_solutions that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_fiche_solutionFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Estimation_fiche_solutions
+     * const estimation_fiche_solutions = await prisma.estimation_fiche_solution.findMany()
+     * 
+     * // Get first 10 Estimation_fiche_solutions
+     * const estimation_fiche_solutions = await prisma.estimation_fiche_solution.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const estimation_fiche_solutionWithIdOnly = await prisma.estimation_fiche_solution.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends estimation_fiche_solutionFindManyArgs>(args?: SelectSubset<T, estimation_fiche_solutionFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Estimation_fiche_solution.
+     * @param {estimation_fiche_solutionCreateArgs} args - Arguments to create a Estimation_fiche_solution.
+     * @example
+     * // Create one Estimation_fiche_solution
+     * const Estimation_fiche_solution = await prisma.estimation_fiche_solution.create({
+     *   data: {
+     *     // ... data to create a Estimation_fiche_solution
+     *   }
+     * })
+     * 
+     */
+    create<T extends estimation_fiche_solutionCreateArgs>(args: SelectSubset<T, estimation_fiche_solutionCreateArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Estimation_fiche_solutions.
+     * @param {estimation_fiche_solutionCreateManyArgs} args - Arguments to create many Estimation_fiche_solutions.
+     * @example
+     * // Create many Estimation_fiche_solutions
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends estimation_fiche_solutionCreateManyArgs>(args?: SelectSubset<T, estimation_fiche_solutionCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Estimation_fiche_solutions and returns the data saved in the database.
+     * @param {estimation_fiche_solutionCreateManyAndReturnArgs} args - Arguments to create many Estimation_fiche_solutions.
+     * @example
+     * // Create many Estimation_fiche_solutions
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Estimation_fiche_solutions and only return the `id`
+     * const estimation_fiche_solutionWithIdOnly = await prisma.estimation_fiche_solution.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends estimation_fiche_solutionCreateManyAndReturnArgs>(args?: SelectSubset<T, estimation_fiche_solutionCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Estimation_fiche_solution.
+     * @param {estimation_fiche_solutionDeleteArgs} args - Arguments to delete one Estimation_fiche_solution.
+     * @example
+     * // Delete one Estimation_fiche_solution
+     * const Estimation_fiche_solution = await prisma.estimation_fiche_solution.delete({
+     *   where: {
+     *     // ... filter to delete one Estimation_fiche_solution
+     *   }
+     * })
+     * 
+     */
+    delete<T extends estimation_fiche_solutionDeleteArgs>(args: SelectSubset<T, estimation_fiche_solutionDeleteArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Estimation_fiche_solution.
+     * @param {estimation_fiche_solutionUpdateArgs} args - Arguments to update one Estimation_fiche_solution.
+     * @example
+     * // Update one Estimation_fiche_solution
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends estimation_fiche_solutionUpdateArgs>(args: SelectSubset<T, estimation_fiche_solutionUpdateArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Estimation_fiche_solutions.
+     * @param {estimation_fiche_solutionDeleteManyArgs} args - Arguments to filter Estimation_fiche_solutions to delete.
+     * @example
+     * // Delete a few Estimation_fiche_solutions
+     * const { count } = await prisma.estimation_fiche_solution.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends estimation_fiche_solutionDeleteManyArgs>(args?: SelectSubset<T, estimation_fiche_solutionDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Estimation_fiche_solutions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_fiche_solutionUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Estimation_fiche_solutions
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends estimation_fiche_solutionUpdateManyArgs>(args: SelectSubset<T, estimation_fiche_solutionUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Estimation_fiche_solutions and returns the data updated in the database.
+     * @param {estimation_fiche_solutionUpdateManyAndReturnArgs} args - Arguments to update many Estimation_fiche_solutions.
+     * @example
+     * // Update many Estimation_fiche_solutions
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Estimation_fiche_solutions and only return the `id`
+     * const estimation_fiche_solutionWithIdOnly = await prisma.estimation_fiche_solution.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends estimation_fiche_solutionUpdateManyAndReturnArgs>(args: SelectSubset<T, estimation_fiche_solutionUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Estimation_fiche_solution.
+     * @param {estimation_fiche_solutionUpsertArgs} args - Arguments to update or create a Estimation_fiche_solution.
+     * @example
+     * // Update or create a Estimation_fiche_solution
+     * const estimation_fiche_solution = await prisma.estimation_fiche_solution.upsert({
+     *   create: {
+     *     // ... data to create a Estimation_fiche_solution
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Estimation_fiche_solution we want to update
+     *   }
+     * })
+     */
+    upsert<T extends estimation_fiche_solutionUpsertArgs>(args: SelectSubset<T, estimation_fiche_solutionUpsertArgs<ExtArgs>>): Prisma__estimation_fiche_solutionClient<$Result.GetResult<Prisma.$estimation_fiche_solutionPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Estimation_fiche_solutions.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_fiche_solutionCountArgs} args - Arguments to filter Estimation_fiche_solutions to count.
+     * @example
+     * // Count the number of Estimation_fiche_solutions
+     * const count = await prisma.estimation_fiche_solution.count({
+     *   where: {
+     *     // ... the filter for the Estimation_fiche_solutions we want to count
+     *   }
+     * })
+    **/
+    count<T extends estimation_fiche_solutionCountArgs>(
+      args?: Subset<T, estimation_fiche_solutionCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Estimation_fiche_solutionCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Estimation_fiche_solution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Estimation_fiche_solutionAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Estimation_fiche_solutionAggregateArgs>(args: Subset<T, Estimation_fiche_solutionAggregateArgs>): Prisma.PrismaPromise<GetEstimation_fiche_solutionAggregateType<T>>
+
+    /**
+     * Group by Estimation_fiche_solution.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {estimation_fiche_solutionGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends estimation_fiche_solutionGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: estimation_fiche_solutionGroupByArgs['orderBy'] }
+        : { orderBy?: estimation_fiche_solutionGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, estimation_fiche_solutionGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEstimation_fiche_solutionGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the estimation_fiche_solution model
+   */
+  readonly fields: estimation_fiche_solutionFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for estimation_fiche_solution.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__estimation_fiche_solutionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    estimation<T extends estimationDefaultArgs<ExtArgs> = {}>(args?: Subset<T, estimationDefaultArgs<ExtArgs>>): Prisma__estimationClient<$Result.GetResult<Prisma.$estimationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    estimation_materiaux<T extends estimation_fiche_solution$estimation_materiauxArgs<ExtArgs> = {}>(args?: Subset<T, estimation_fiche_solution$estimation_materiauxArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimation_materiauxPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the estimation_fiche_solution model
+   */
+  interface estimation_fiche_solutionFieldRefs {
+    readonly id: FieldRef<"estimation_fiche_solution", 'String'>
+    readonly estimation_id: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly fiche_solution_id: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly quantite: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly cout_min_investissement: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly cout_max_investissement: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly cout_min_entretien: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly cout_max_entretien: FieldRef<"estimation_fiche_solution", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * estimation_fiche_solution findUnique
+   */
+  export type estimation_fiche_solutionFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_fiche_solution to fetch.
+     */
+    where: estimation_fiche_solutionWhereUniqueInput
+  }
+
+  /**
+   * estimation_fiche_solution findUniqueOrThrow
+   */
+  export type estimation_fiche_solutionFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_fiche_solution to fetch.
+     */
+    where: estimation_fiche_solutionWhereUniqueInput
+  }
+
+  /**
+   * estimation_fiche_solution findFirst
+   */
+  export type estimation_fiche_solutionFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_fiche_solution to fetch.
+     */
+    where?: estimation_fiche_solutionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of estimation_fiche_solutions to fetch.
+     */
+    orderBy?: estimation_fiche_solutionOrderByWithRelationInput | estimation_fiche_solutionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for estimation_fiche_solutions.
+     */
+    cursor?: estimation_fiche_solutionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` estimation_fiche_solutions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` estimation_fiche_solutions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of estimation_fiche_solutions.
+     */
+    distinct?: Estimation_fiche_solutionScalarFieldEnum | Estimation_fiche_solutionScalarFieldEnum[]
+  }
+
+  /**
+   * estimation_fiche_solution findFirstOrThrow
+   */
+  export type estimation_fiche_solutionFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_fiche_solution to fetch.
+     */
+    where?: estimation_fiche_solutionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of estimation_fiche_solutions to fetch.
+     */
+    orderBy?: estimation_fiche_solutionOrderByWithRelationInput | estimation_fiche_solutionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for estimation_fiche_solutions.
+     */
+    cursor?: estimation_fiche_solutionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` estimation_fiche_solutions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` estimation_fiche_solutions.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of estimation_fiche_solutions.
+     */
+    distinct?: Estimation_fiche_solutionScalarFieldEnum | Estimation_fiche_solutionScalarFieldEnum[]
+  }
+
+  /**
+   * estimation_fiche_solution findMany
+   */
+  export type estimation_fiche_solutionFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * Filter, which estimation_fiche_solutions to fetch.
+     */
+    where?: estimation_fiche_solutionWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of estimation_fiche_solutions to fetch.
+     */
+    orderBy?: estimation_fiche_solutionOrderByWithRelationInput | estimation_fiche_solutionOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing estimation_fiche_solutions.
+     */
+    cursor?: estimation_fiche_solutionWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` estimation_fiche_solutions from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` estimation_fiche_solutions.
+     */
+    skip?: number
+    distinct?: Estimation_fiche_solutionScalarFieldEnum | Estimation_fiche_solutionScalarFieldEnum[]
+  }
+
+  /**
+   * estimation_fiche_solution create
+   */
+  export type estimation_fiche_solutionCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * The data needed to create a estimation_fiche_solution.
+     */
+    data: XOR<estimation_fiche_solutionCreateInput, estimation_fiche_solutionUncheckedCreateInput>
+  }
+
+  /**
+   * estimation_fiche_solution createMany
+   */
+  export type estimation_fiche_solutionCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many estimation_fiche_solutions.
+     */
+    data: estimation_fiche_solutionCreateManyInput | estimation_fiche_solutionCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * estimation_fiche_solution createManyAndReturn
+   */
+  export type estimation_fiche_solutionCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * The data used to create many estimation_fiche_solutions.
+     */
+    data: estimation_fiche_solutionCreateManyInput | estimation_fiche_solutionCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * estimation_fiche_solution update
+   */
+  export type estimation_fiche_solutionUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * The data needed to update a estimation_fiche_solution.
+     */
+    data: XOR<estimation_fiche_solutionUpdateInput, estimation_fiche_solutionUncheckedUpdateInput>
+    /**
+     * Choose, which estimation_fiche_solution to update.
+     */
+    where: estimation_fiche_solutionWhereUniqueInput
+  }
+
+  /**
+   * estimation_fiche_solution updateMany
+   */
+  export type estimation_fiche_solutionUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update estimation_fiche_solutions.
+     */
+    data: XOR<estimation_fiche_solutionUpdateManyMutationInput, estimation_fiche_solutionUncheckedUpdateManyInput>
+    /**
+     * Filter which estimation_fiche_solutions to update
+     */
+    where?: estimation_fiche_solutionWhereInput
+    /**
+     * Limit how many estimation_fiche_solutions to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * estimation_fiche_solution updateManyAndReturn
+   */
+  export type estimation_fiche_solutionUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * The data used to update estimation_fiche_solutions.
+     */
+    data: XOR<estimation_fiche_solutionUpdateManyMutationInput, estimation_fiche_solutionUncheckedUpdateManyInput>
+    /**
+     * Filter which estimation_fiche_solutions to update
+     */
+    where?: estimation_fiche_solutionWhereInput
+    /**
+     * Limit how many estimation_fiche_solutions to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * estimation_fiche_solution upsert
+   */
+  export type estimation_fiche_solutionUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * The filter to search for the estimation_fiche_solution to update in case it exists.
+     */
+    where: estimation_fiche_solutionWhereUniqueInput
+    /**
+     * In case the estimation_fiche_solution found by the `where` argument doesn't exist, create a new estimation_fiche_solution with this data.
+     */
+    create: XOR<estimation_fiche_solutionCreateInput, estimation_fiche_solutionUncheckedCreateInput>
+    /**
+     * In case the estimation_fiche_solution was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<estimation_fiche_solutionUpdateInput, estimation_fiche_solutionUncheckedUpdateInput>
+  }
+
+  /**
+   * estimation_fiche_solution delete
+   */
+  export type estimation_fiche_solutionDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
+    /**
+     * Filter which estimation_fiche_solution to delete.
+     */
+    where: estimation_fiche_solutionWhereUniqueInput
+  }
+
+  /**
+   * estimation_fiche_solution deleteMany
+   */
+  export type estimation_fiche_solutionDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which estimation_fiche_solutions to delete
+     */
+    where?: estimation_fiche_solutionWhereInput
+    /**
+     * Limit how many estimation_fiche_solutions to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * estimation_fiche_solution.estimation_materiaux
+   */
+  export type estimation_fiche_solution$estimation_materiauxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_materiaux
+     */
+    select?: estimation_materiauxSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_materiaux
+     */
+    omit?: estimation_materiauxOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_materiauxInclude<ExtArgs> | null
+    where?: estimation_materiauxWhereInput
+    orderBy?: estimation_materiauxOrderByWithRelationInput | estimation_materiauxOrderByWithRelationInput[]
+    cursor?: estimation_materiauxWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Estimation_materiauxScalarFieldEnum | Estimation_materiauxScalarFieldEnum[]
+  }
+
+  /**
+   * estimation_fiche_solution without action
+   */
+  export type estimation_fiche_solutionDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the estimation_fiche_solution
+     */
+    select?: estimation_fiche_solutionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the estimation_fiche_solution
+     */
+    omit?: estimation_fiche_solutionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: estimation_fiche_solutionInclude<ExtArgs> | null
   }
 
 
@@ -24482,6 +27034,32 @@ export namespace Prisma {
   export type Estimations_aidesScalarFieldEnum = (typeof Estimations_aidesScalarFieldEnum)[keyof typeof Estimations_aidesScalarFieldEnum]
 
 
+  export const Estimation_materiauxScalarFieldEnum: {
+    id: 'id',
+    estimation_fiche_solution_id: 'estimation_fiche_solution_id',
+    materiau_id: 'materiau_id',
+    quantite: 'quantite',
+    cout_investissement_override: 'cout_investissement_override',
+    cout_entretien_override: 'cout_entretien_override'
+  };
+
+  export type Estimation_materiauxScalarFieldEnum = (typeof Estimation_materiauxScalarFieldEnum)[keyof typeof Estimation_materiauxScalarFieldEnum]
+
+
+  export const Estimation_fiche_solutionScalarFieldEnum: {
+    id: 'id',
+    estimation_id: 'estimation_id',
+    fiche_solution_id: 'fiche_solution_id',
+    quantite: 'quantite',
+    cout_min_investissement: 'cout_min_investissement',
+    cout_max_investissement: 'cout_max_investissement',
+    cout_min_entretien: 'cout_min_entretien',
+    cout_max_entretien: 'cout_max_entretien'
+  };
+
+  export type Estimation_fiche_solutionScalarFieldEnum = (typeof Estimation_fiche_solutionScalarFieldEnum)[keyof typeof Estimation_fiche_solutionScalarFieldEnum]
+
+
   export const ConversationScalarFieldEnum: {
     id: 'id',
     userId: 'userId',
@@ -24714,6 +27292,21 @@ export namespace Prisma {
   };
 
   export type estimations_aidesOrderByRelevanceFieldEnum = (typeof estimations_aidesOrderByRelevanceFieldEnum)[keyof typeof estimations_aidesOrderByRelevanceFieldEnum]
+
+
+  export const estimation_materiauxOrderByRelevanceFieldEnum: {
+    id: 'id',
+    estimation_fiche_solution_id: 'estimation_fiche_solution_id'
+  };
+
+  export type estimation_materiauxOrderByRelevanceFieldEnum = (typeof estimation_materiauxOrderByRelevanceFieldEnum)[keyof typeof estimation_materiauxOrderByRelevanceFieldEnum]
+
+
+  export const estimation_fiche_solutionOrderByRelevanceFieldEnum: {
+    id: 'id'
+  };
+
+  export type estimation_fiche_solutionOrderByRelevanceFieldEnum = (typeof estimation_fiche_solutionOrderByRelevanceFieldEnum)[keyof typeof estimation_fiche_solutionOrderByRelevanceFieldEnum]
 
 
   export const conversationOrderByRelevanceFieldEnum: {
@@ -25953,6 +28546,7 @@ export namespace Prisma {
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     deleter?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     estimations_aides?: Estimations_aidesListRelationFilter
+    estimations_fiches_solutions?: Estimation_fiche_solutionListRelationFilter
   }
 
   export type estimationOrderByWithRelationInput = {
@@ -25969,6 +28563,7 @@ export namespace Prisma {
     projet?: projetOrderByWithRelationInput
     deleter?: UserOrderByWithRelationInput
     estimations_aides?: estimations_aidesOrderByRelationAggregateInput
+    estimations_fiches_solutions?: estimation_fiche_solutionOrderByRelationAggregateInput
     _relevance?: estimationOrderByRelevanceInput
   }
 
@@ -25989,6 +28584,7 @@ export namespace Prisma {
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     deleter?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     estimations_aides?: Estimations_aidesListRelationFilter
+    estimations_fiches_solutions?: Estimation_fiche_solutionListRelationFilter
   }, "id">
 
   export type estimationOrderByWithAggregationInput = {
@@ -26264,6 +28860,145 @@ export namespace Prisma {
     aideId?: IntWithAggregatesFilter<"estimations_aides"> | number
     created_at?: DateTimeNullableWithAggregatesFilter<"estimations_aides"> | Date | string | null
     user_id?: StringNullableWithAggregatesFilter<"estimations_aides"> | string | null
+  }
+
+  export type estimation_materiauxWhereInput = {
+    AND?: estimation_materiauxWhereInput | estimation_materiauxWhereInput[]
+    OR?: estimation_materiauxWhereInput[]
+    NOT?: estimation_materiauxWhereInput | estimation_materiauxWhereInput[]
+    id?: StringFilter<"estimation_materiaux"> | string
+    estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
+    materiau_id?: IntFilter<"estimation_materiaux"> | number
+    quantite?: IntFilter<"estimation_materiaux"> | number
+    cout_investissement_override?: IntFilter<"estimation_materiaux"> | number
+    cout_entretien_override?: IntFilter<"estimation_materiaux"> | number
+    estimation_fiche_solution?: XOR<Estimation_fiche_solutionScalarRelationFilter, estimation_fiche_solutionWhereInput>
+  }
+
+  export type estimation_materiauxOrderByWithRelationInput = {
+    id?: SortOrder
+    estimation_fiche_solution_id?: SortOrder
+    materiau_id?: SortOrder
+    quantite?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
+    estimation_fiche_solution?: estimation_fiche_solutionOrderByWithRelationInput
+    _relevance?: estimation_materiauxOrderByRelevanceInput
+  }
+
+  export type estimation_materiauxWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: estimation_materiauxWhereInput | estimation_materiauxWhereInput[]
+    OR?: estimation_materiauxWhereInput[]
+    NOT?: estimation_materiauxWhereInput | estimation_materiauxWhereInput[]
+    estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
+    materiau_id?: IntFilter<"estimation_materiaux"> | number
+    quantite?: IntFilter<"estimation_materiaux"> | number
+    cout_investissement_override?: IntFilter<"estimation_materiaux"> | number
+    cout_entretien_override?: IntFilter<"estimation_materiaux"> | number
+    estimation_fiche_solution?: XOR<Estimation_fiche_solutionScalarRelationFilter, estimation_fiche_solutionWhereInput>
+  }, "id">
+
+  export type estimation_materiauxOrderByWithAggregationInput = {
+    id?: SortOrder
+    estimation_fiche_solution_id?: SortOrder
+    materiau_id?: SortOrder
+    quantite?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
+    _count?: estimation_materiauxCountOrderByAggregateInput
+    _avg?: estimation_materiauxAvgOrderByAggregateInput
+    _max?: estimation_materiauxMaxOrderByAggregateInput
+    _min?: estimation_materiauxMinOrderByAggregateInput
+    _sum?: estimation_materiauxSumOrderByAggregateInput
+  }
+
+  export type estimation_materiauxScalarWhereWithAggregatesInput = {
+    AND?: estimation_materiauxScalarWhereWithAggregatesInput | estimation_materiauxScalarWhereWithAggregatesInput[]
+    OR?: estimation_materiauxScalarWhereWithAggregatesInput[]
+    NOT?: estimation_materiauxScalarWhereWithAggregatesInput | estimation_materiauxScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"estimation_materiaux"> | string
+    estimation_fiche_solution_id?: StringWithAggregatesFilter<"estimation_materiaux"> | string
+    materiau_id?: IntWithAggregatesFilter<"estimation_materiaux"> | number
+    quantite?: IntWithAggregatesFilter<"estimation_materiaux"> | number
+    cout_investissement_override?: IntWithAggregatesFilter<"estimation_materiaux"> | number
+    cout_entretien_override?: IntWithAggregatesFilter<"estimation_materiaux"> | number
+  }
+
+  export type estimation_fiche_solutionWhereInput = {
+    AND?: estimation_fiche_solutionWhereInput | estimation_fiche_solutionWhereInput[]
+    OR?: estimation_fiche_solutionWhereInput[]
+    NOT?: estimation_fiche_solutionWhereInput | estimation_fiche_solutionWhereInput[]
+    id?: StringFilter<"estimation_fiche_solution"> | string
+    estimation_id?: IntFilter<"estimation_fiche_solution"> | number
+    fiche_solution_id?: IntFilter<"estimation_fiche_solution"> | number
+    quantite?: IntNullableFilter<"estimation_fiche_solution"> | number | null
+    cout_min_investissement?: IntFilter<"estimation_fiche_solution"> | number
+    cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
+    cout_min_entretien?: IntFilter<"estimation_fiche_solution"> | number
+    cout_max_entretien?: IntFilter<"estimation_fiche_solution"> | number
+    estimation?: XOR<EstimationScalarRelationFilter, estimationWhereInput>
+    estimation_materiaux?: Estimation_materiauxListRelationFilter
+  }
+
+  export type estimation_fiche_solutionOrderByWithRelationInput = {
+    id?: SortOrder
+    estimation_id?: SortOrder
+    fiche_solution_id?: SortOrder
+    quantite?: SortOrderInput | SortOrder
+    cout_min_investissement?: SortOrder
+    cout_max_investissement?: SortOrder
+    cout_min_entretien?: SortOrder
+    cout_max_entretien?: SortOrder
+    estimation?: estimationOrderByWithRelationInput
+    estimation_materiaux?: estimation_materiauxOrderByRelationAggregateInput
+    _relevance?: estimation_fiche_solutionOrderByRelevanceInput
+  }
+
+  export type estimation_fiche_solutionWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: estimation_fiche_solutionWhereInput | estimation_fiche_solutionWhereInput[]
+    OR?: estimation_fiche_solutionWhereInput[]
+    NOT?: estimation_fiche_solutionWhereInput | estimation_fiche_solutionWhereInput[]
+    estimation_id?: IntFilter<"estimation_fiche_solution"> | number
+    fiche_solution_id?: IntFilter<"estimation_fiche_solution"> | number
+    quantite?: IntNullableFilter<"estimation_fiche_solution"> | number | null
+    cout_min_investissement?: IntFilter<"estimation_fiche_solution"> | number
+    cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
+    cout_min_entretien?: IntFilter<"estimation_fiche_solution"> | number
+    cout_max_entretien?: IntFilter<"estimation_fiche_solution"> | number
+    estimation?: XOR<EstimationScalarRelationFilter, estimationWhereInput>
+    estimation_materiaux?: Estimation_materiauxListRelationFilter
+  }, "id">
+
+  export type estimation_fiche_solutionOrderByWithAggregationInput = {
+    id?: SortOrder
+    estimation_id?: SortOrder
+    fiche_solution_id?: SortOrder
+    quantite?: SortOrderInput | SortOrder
+    cout_min_investissement?: SortOrder
+    cout_max_investissement?: SortOrder
+    cout_min_entretien?: SortOrder
+    cout_max_entretien?: SortOrder
+    _count?: estimation_fiche_solutionCountOrderByAggregateInput
+    _avg?: estimation_fiche_solutionAvgOrderByAggregateInput
+    _max?: estimation_fiche_solutionMaxOrderByAggregateInput
+    _min?: estimation_fiche_solutionMinOrderByAggregateInput
+    _sum?: estimation_fiche_solutionSumOrderByAggregateInput
+  }
+
+  export type estimation_fiche_solutionScalarWhereWithAggregatesInput = {
+    AND?: estimation_fiche_solutionScalarWhereWithAggregatesInput | estimation_fiche_solutionScalarWhereWithAggregatesInput[]
+    OR?: estimation_fiche_solutionScalarWhereWithAggregatesInput[]
+    NOT?: estimation_fiche_solutionScalarWhereWithAggregatesInput | estimation_fiche_solutionScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"estimation_fiche_solution"> | string
+    estimation_id?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
+    fiche_solution_id?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
+    quantite?: IntNullableWithAggregatesFilter<"estimation_fiche_solution"> | number | null
+    cout_min_investissement?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
+    cout_max_investissement?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
+    cout_min_entretien?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
+    cout_max_entretien?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
   }
 
   export type conversationWhereInput = {
@@ -27525,6 +30260,7 @@ export namespace Prisma {
     projet: projetCreateNestedOneWithoutEstimationsInput
     deleter?: UserCreateNestedOneWithoutEstimations_deletedInput
     estimations_aides?: estimations_aidesCreateNestedManyWithoutEstimationInput
+    estimations_fiches_solutions?: estimation_fiche_solutionCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationUncheckedCreateInput = {
@@ -27538,6 +30274,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     deleted_by?: string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationUpdateInput = {
@@ -27551,6 +30288,7 @@ export namespace Prisma {
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
     deleter?: UserUpdateOneWithoutEstimations_deletedNestedInput
     estimations_aides?: estimations_aidesUpdateManyWithoutEstimationNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationUncheckedUpdateInput = {
@@ -27564,6 +30302,7 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationCreateManyInput = {
@@ -27851,6 +30590,148 @@ export namespace Prisma {
     aideId?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type estimation_materiauxCreateInput = {
+    id?: string
+    materiau_id: number
+    quantite: number
+    cout_investissement_override: number
+    cout_entretien_override: number
+    estimation_fiche_solution: estimation_fiche_solutionCreateNestedOneWithoutEstimation_materiauxInput
+  }
+
+  export type estimation_materiauxUncheckedCreateInput = {
+    id?: string
+    estimation_fiche_solution_id: string
+    materiau_id: number
+    quantite: number
+    cout_investissement_override: number
+    cout_entretien_override: number
+  }
+
+  export type estimation_materiauxUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    materiau_id?: IntFieldUpdateOperationsInput | number
+    quantite?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: IntFieldUpdateOperationsInput | number
+    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+    estimation_fiche_solution?: estimation_fiche_solutionUpdateOneRequiredWithoutEstimation_materiauxNestedInput
+  }
+
+  export type estimation_materiauxUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimation_fiche_solution_id?: StringFieldUpdateOperationsInput | string
+    materiau_id?: IntFieldUpdateOperationsInput | number
+    quantite?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: IntFieldUpdateOperationsInput | number
+    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type estimation_materiauxCreateManyInput = {
+    id?: string
+    estimation_fiche_solution_id: string
+    materiau_id: number
+    quantite: number
+    cout_investissement_override: number
+    cout_entretien_override: number
+  }
+
+  export type estimation_materiauxUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    materiau_id?: IntFieldUpdateOperationsInput | number
+    quantite?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: IntFieldUpdateOperationsInput | number
+    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type estimation_materiauxUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimation_fiche_solution_id?: StringFieldUpdateOperationsInput | string
+    materiau_id?: IntFieldUpdateOperationsInput | number
+    quantite?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: IntFieldUpdateOperationsInput | number
+    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type estimation_fiche_solutionCreateInput = {
+    id?: string
+    fiche_solution_id: number
+    quantite?: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+    estimation: estimationCreateNestedOneWithoutEstimations_fiches_solutionsInput
+    estimation_materiaux?: estimation_materiauxCreateNestedManyWithoutEstimation_fiche_solutionInput
+  }
+
+  export type estimation_fiche_solutionUncheckedCreateInput = {
+    id?: string
+    estimation_id: number
+    fiche_solution_id: number
+    quantite?: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+    estimation_materiaux?: estimation_materiauxUncheckedCreateNestedManyWithoutEstimation_fiche_solutionInput
+  }
+
+  export type estimation_fiche_solutionUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    estimation?: estimationUpdateOneRequiredWithoutEstimations_fiches_solutionsNestedInput
+    estimation_materiaux?: estimation_materiauxUpdateManyWithoutEstimation_fiche_solutionNestedInput
+  }
+
+  export type estimation_fiche_solutionUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimation_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    estimation_materiaux?: estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionNestedInput
+  }
+
+  export type estimation_fiche_solutionCreateManyInput = {
+    id?: string
+    estimation_id: number
+    fiche_solution_id: number
+    quantite?: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+  }
+
+  export type estimation_fiche_solutionUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type estimation_fiche_solutionUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimation_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
   }
 
   export type conversationCreateInput = {
@@ -29220,6 +32101,16 @@ export namespace Prisma {
     sourced_user_projet_id?: SortOrder
   }
 
+  export type Estimation_fiche_solutionListRelationFilter = {
+    every?: estimation_fiche_solutionWhereInput
+    some?: estimation_fiche_solutionWhereInput
+    none?: estimation_fiche_solutionWhereInput
+  }
+
+  export type estimation_fiche_solutionOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type estimationOrderByRelevanceInput = {
     fields: estimationOrderByRelevanceFieldEnum | estimationOrderByRelevanceFieldEnum[]
     sort: SortOrder
@@ -29539,6 +32430,127 @@ export namespace Prisma {
     id?: SortOrder
     estimationId?: SortOrder
     aideId?: SortOrder
+  }
+
+  export type Estimation_fiche_solutionScalarRelationFilter = {
+    is?: estimation_fiche_solutionWhereInput
+    isNot?: estimation_fiche_solutionWhereInput
+  }
+
+  export type estimation_materiauxOrderByRelevanceInput = {
+    fields: estimation_materiauxOrderByRelevanceFieldEnum | estimation_materiauxOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type estimation_materiauxCountOrderByAggregateInput = {
+    id?: SortOrder
+    estimation_fiche_solution_id?: SortOrder
+    materiau_id?: SortOrder
+    quantite?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
+  }
+
+  export type estimation_materiauxAvgOrderByAggregateInput = {
+    materiau_id?: SortOrder
+    quantite?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
+  }
+
+  export type estimation_materiauxMaxOrderByAggregateInput = {
+    id?: SortOrder
+    estimation_fiche_solution_id?: SortOrder
+    materiau_id?: SortOrder
+    quantite?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
+  }
+
+  export type estimation_materiauxMinOrderByAggregateInput = {
+    id?: SortOrder
+    estimation_fiche_solution_id?: SortOrder
+    materiau_id?: SortOrder
+    quantite?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
+  }
+
+  export type estimation_materiauxSumOrderByAggregateInput = {
+    materiau_id?: SortOrder
+    quantite?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
+  }
+
+  export type Estimation_materiauxListRelationFilter = {
+    every?: estimation_materiauxWhereInput
+    some?: estimation_materiauxWhereInput
+    none?: estimation_materiauxWhereInput
+  }
+
+  export type estimation_materiauxOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type estimation_fiche_solutionOrderByRelevanceInput = {
+    fields: estimation_fiche_solutionOrderByRelevanceFieldEnum | estimation_fiche_solutionOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type estimation_fiche_solutionCountOrderByAggregateInput = {
+    id?: SortOrder
+    estimation_id?: SortOrder
+    fiche_solution_id?: SortOrder
+    quantite?: SortOrder
+    cout_min_investissement?: SortOrder
+    cout_max_investissement?: SortOrder
+    cout_min_entretien?: SortOrder
+    cout_max_entretien?: SortOrder
+  }
+
+  export type estimation_fiche_solutionAvgOrderByAggregateInput = {
+    estimation_id?: SortOrder
+    fiche_solution_id?: SortOrder
+    quantite?: SortOrder
+    cout_min_investissement?: SortOrder
+    cout_max_investissement?: SortOrder
+    cout_min_entretien?: SortOrder
+    cout_max_entretien?: SortOrder
+  }
+
+  export type estimation_fiche_solutionMaxOrderByAggregateInput = {
+    id?: SortOrder
+    estimation_id?: SortOrder
+    fiche_solution_id?: SortOrder
+    quantite?: SortOrder
+    cout_min_investissement?: SortOrder
+    cout_max_investissement?: SortOrder
+    cout_min_entretien?: SortOrder
+    cout_max_entretien?: SortOrder
+  }
+
+  export type estimation_fiche_solutionMinOrderByAggregateInput = {
+    id?: SortOrder
+    estimation_id?: SortOrder
+    fiche_solution_id?: SortOrder
+    quantite?: SortOrder
+    cout_min_investissement?: SortOrder
+    cout_max_investissement?: SortOrder
+    cout_min_entretien?: SortOrder
+    cout_max_entretien?: SortOrder
+  }
+
+  export type estimation_fiche_solutionSumOrderByAggregateInput = {
+    estimation_id?: SortOrder
+    fiche_solution_id?: SortOrder
+    quantite?: SortOrder
+    cout_min_investissement?: SortOrder
+    cout_max_investissement?: SortOrder
+    cout_min_entretien?: SortOrder
+    cout_max_entretien?: SortOrder
   }
 
   export type conversationOrderByRelevanceInput = {
@@ -31161,11 +34173,25 @@ export namespace Prisma {
     connect?: estimations_aidesWhereUniqueInput | estimations_aidesWhereUniqueInput[]
   }
 
+  export type estimation_fiche_solutionCreateNestedManyWithoutEstimationInput = {
+    create?: XOR<estimation_fiche_solutionCreateWithoutEstimationInput, estimation_fiche_solutionUncheckedCreateWithoutEstimationInput> | estimation_fiche_solutionCreateWithoutEstimationInput[] | estimation_fiche_solutionUncheckedCreateWithoutEstimationInput[]
+    connectOrCreate?: estimation_fiche_solutionCreateOrConnectWithoutEstimationInput | estimation_fiche_solutionCreateOrConnectWithoutEstimationInput[]
+    createMany?: estimation_fiche_solutionCreateManyEstimationInputEnvelope
+    connect?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+  }
+
   export type estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput = {
     create?: XOR<estimations_aidesCreateWithoutEstimationInput, estimations_aidesUncheckedCreateWithoutEstimationInput> | estimations_aidesCreateWithoutEstimationInput[] | estimations_aidesUncheckedCreateWithoutEstimationInput[]
     connectOrCreate?: estimations_aidesCreateOrConnectWithoutEstimationInput | estimations_aidesCreateOrConnectWithoutEstimationInput[]
     createMany?: estimations_aidesCreateManyEstimationInputEnvelope
     connect?: estimations_aidesWhereUniqueInput | estimations_aidesWhereUniqueInput[]
+  }
+
+  export type estimation_fiche_solutionUncheckedCreateNestedManyWithoutEstimationInput = {
+    create?: XOR<estimation_fiche_solutionCreateWithoutEstimationInput, estimation_fiche_solutionUncheckedCreateWithoutEstimationInput> | estimation_fiche_solutionCreateWithoutEstimationInput[] | estimation_fiche_solutionUncheckedCreateWithoutEstimationInput[]
+    connectOrCreate?: estimation_fiche_solutionCreateOrConnectWithoutEstimationInput | estimation_fiche_solutionCreateOrConnectWithoutEstimationInput[]
+    createMany?: estimation_fiche_solutionCreateManyEstimationInputEnvelope
+    connect?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
   }
 
   export type estimationUpdatefiches_solutions_idInput = {
@@ -31213,6 +34239,20 @@ export namespace Prisma {
     deleteMany?: estimations_aidesScalarWhereInput | estimations_aidesScalarWhereInput[]
   }
 
+  export type estimation_fiche_solutionUpdateManyWithoutEstimationNestedInput = {
+    create?: XOR<estimation_fiche_solutionCreateWithoutEstimationInput, estimation_fiche_solutionUncheckedCreateWithoutEstimationInput> | estimation_fiche_solutionCreateWithoutEstimationInput[] | estimation_fiche_solutionUncheckedCreateWithoutEstimationInput[]
+    connectOrCreate?: estimation_fiche_solutionCreateOrConnectWithoutEstimationInput | estimation_fiche_solutionCreateOrConnectWithoutEstimationInput[]
+    upsert?: estimation_fiche_solutionUpsertWithWhereUniqueWithoutEstimationInput | estimation_fiche_solutionUpsertWithWhereUniqueWithoutEstimationInput[]
+    createMany?: estimation_fiche_solutionCreateManyEstimationInputEnvelope
+    set?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+    disconnect?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+    delete?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+    connect?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+    update?: estimation_fiche_solutionUpdateWithWhereUniqueWithoutEstimationInput | estimation_fiche_solutionUpdateWithWhereUniqueWithoutEstimationInput[]
+    updateMany?: estimation_fiche_solutionUpdateManyWithWhereWithoutEstimationInput | estimation_fiche_solutionUpdateManyWithWhereWithoutEstimationInput[]
+    deleteMany?: estimation_fiche_solutionScalarWhereInput | estimation_fiche_solutionScalarWhereInput[]
+  }
+
   export type estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput = {
     create?: XOR<estimations_aidesCreateWithoutEstimationInput, estimations_aidesUncheckedCreateWithoutEstimationInput> | estimations_aidesCreateWithoutEstimationInput[] | estimations_aidesUncheckedCreateWithoutEstimationInput[]
     connectOrCreate?: estimations_aidesCreateOrConnectWithoutEstimationInput | estimations_aidesCreateOrConnectWithoutEstimationInput[]
@@ -31225,6 +34265,20 @@ export namespace Prisma {
     update?: estimations_aidesUpdateWithWhereUniqueWithoutEstimationInput | estimations_aidesUpdateWithWhereUniqueWithoutEstimationInput[]
     updateMany?: estimations_aidesUpdateManyWithWhereWithoutEstimationInput | estimations_aidesUpdateManyWithWhereWithoutEstimationInput[]
     deleteMany?: estimations_aidesScalarWhereInput | estimations_aidesScalarWhereInput[]
+  }
+
+  export type estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationNestedInput = {
+    create?: XOR<estimation_fiche_solutionCreateWithoutEstimationInput, estimation_fiche_solutionUncheckedCreateWithoutEstimationInput> | estimation_fiche_solutionCreateWithoutEstimationInput[] | estimation_fiche_solutionUncheckedCreateWithoutEstimationInput[]
+    connectOrCreate?: estimation_fiche_solutionCreateOrConnectWithoutEstimationInput | estimation_fiche_solutionCreateOrConnectWithoutEstimationInput[]
+    upsert?: estimation_fiche_solutionUpsertWithWhereUniqueWithoutEstimationInput | estimation_fiche_solutionUpsertWithWhereUniqueWithoutEstimationInput[]
+    createMany?: estimation_fiche_solutionCreateManyEstimationInputEnvelope
+    set?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+    disconnect?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+    delete?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+    connect?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
+    update?: estimation_fiche_solutionUpdateWithWhereUniqueWithoutEstimationInput | estimation_fiche_solutionUpdateWithWhereUniqueWithoutEstimationInput[]
+    updateMany?: estimation_fiche_solutionUpdateManyWithWhereWithoutEstimationInput | estimation_fiche_solutionUpdateManyWithWhereWithoutEstimationInput[]
+    deleteMany?: estimation_fiche_solutionScalarWhereInput | estimation_fiche_solutionScalarWhereInput[]
   }
 
   export type EnumTypeLieuClimadiagFieldUpdateOperationsInput = {
@@ -31332,6 +34386,76 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEstimations_aidesInput, UserUpdateWithoutEstimations_aidesInput>, UserUncheckedUpdateWithoutEstimations_aidesInput>
+  }
+
+  export type estimation_fiche_solutionCreateNestedOneWithoutEstimation_materiauxInput = {
+    create?: XOR<estimation_fiche_solutionCreateWithoutEstimation_materiauxInput, estimation_fiche_solutionUncheckedCreateWithoutEstimation_materiauxInput>
+    connectOrCreate?: estimation_fiche_solutionCreateOrConnectWithoutEstimation_materiauxInput
+    connect?: estimation_fiche_solutionWhereUniqueInput
+  }
+
+  export type estimation_fiche_solutionUpdateOneRequiredWithoutEstimation_materiauxNestedInput = {
+    create?: XOR<estimation_fiche_solutionCreateWithoutEstimation_materiauxInput, estimation_fiche_solutionUncheckedCreateWithoutEstimation_materiauxInput>
+    connectOrCreate?: estimation_fiche_solutionCreateOrConnectWithoutEstimation_materiauxInput
+    upsert?: estimation_fiche_solutionUpsertWithoutEstimation_materiauxInput
+    connect?: estimation_fiche_solutionWhereUniqueInput
+    update?: XOR<XOR<estimation_fiche_solutionUpdateToOneWithWhereWithoutEstimation_materiauxInput, estimation_fiche_solutionUpdateWithoutEstimation_materiauxInput>, estimation_fiche_solutionUncheckedUpdateWithoutEstimation_materiauxInput>
+  }
+
+  export type estimationCreateNestedOneWithoutEstimations_fiches_solutionsInput = {
+    create?: XOR<estimationCreateWithoutEstimations_fiches_solutionsInput, estimationUncheckedCreateWithoutEstimations_fiches_solutionsInput>
+    connectOrCreate?: estimationCreateOrConnectWithoutEstimations_fiches_solutionsInput
+    connect?: estimationWhereUniqueInput
+  }
+
+  export type estimation_materiauxCreateNestedManyWithoutEstimation_fiche_solutionInput = {
+    create?: XOR<estimation_materiauxCreateWithoutEstimation_fiche_solutionInput, estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput> | estimation_materiauxCreateWithoutEstimation_fiche_solutionInput[] | estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput[]
+    connectOrCreate?: estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput | estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput[]
+    createMany?: estimation_materiauxCreateManyEstimation_fiche_solutionInputEnvelope
+    connect?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+  }
+
+  export type estimation_materiauxUncheckedCreateNestedManyWithoutEstimation_fiche_solutionInput = {
+    create?: XOR<estimation_materiauxCreateWithoutEstimation_fiche_solutionInput, estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput> | estimation_materiauxCreateWithoutEstimation_fiche_solutionInput[] | estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput[]
+    connectOrCreate?: estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput | estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput[]
+    createMany?: estimation_materiauxCreateManyEstimation_fiche_solutionInputEnvelope
+    connect?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+  }
+
+  export type estimationUpdateOneRequiredWithoutEstimations_fiches_solutionsNestedInput = {
+    create?: XOR<estimationCreateWithoutEstimations_fiches_solutionsInput, estimationUncheckedCreateWithoutEstimations_fiches_solutionsInput>
+    connectOrCreate?: estimationCreateOrConnectWithoutEstimations_fiches_solutionsInput
+    upsert?: estimationUpsertWithoutEstimations_fiches_solutionsInput
+    connect?: estimationWhereUniqueInput
+    update?: XOR<XOR<estimationUpdateToOneWithWhereWithoutEstimations_fiches_solutionsInput, estimationUpdateWithoutEstimations_fiches_solutionsInput>, estimationUncheckedUpdateWithoutEstimations_fiches_solutionsInput>
+  }
+
+  export type estimation_materiauxUpdateManyWithoutEstimation_fiche_solutionNestedInput = {
+    create?: XOR<estimation_materiauxCreateWithoutEstimation_fiche_solutionInput, estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput> | estimation_materiauxCreateWithoutEstimation_fiche_solutionInput[] | estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput[]
+    connectOrCreate?: estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput | estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput[]
+    upsert?: estimation_materiauxUpsertWithWhereUniqueWithoutEstimation_fiche_solutionInput | estimation_materiauxUpsertWithWhereUniqueWithoutEstimation_fiche_solutionInput[]
+    createMany?: estimation_materiauxCreateManyEstimation_fiche_solutionInputEnvelope
+    set?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+    disconnect?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+    delete?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+    connect?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+    update?: estimation_materiauxUpdateWithWhereUniqueWithoutEstimation_fiche_solutionInput | estimation_materiauxUpdateWithWhereUniqueWithoutEstimation_fiche_solutionInput[]
+    updateMany?: estimation_materiauxUpdateManyWithWhereWithoutEstimation_fiche_solutionInput | estimation_materiauxUpdateManyWithWhereWithoutEstimation_fiche_solutionInput[]
+    deleteMany?: estimation_materiauxScalarWhereInput | estimation_materiauxScalarWhereInput[]
+  }
+
+  export type estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionNestedInput = {
+    create?: XOR<estimation_materiauxCreateWithoutEstimation_fiche_solutionInput, estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput> | estimation_materiauxCreateWithoutEstimation_fiche_solutionInput[] | estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput[]
+    connectOrCreate?: estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput | estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput[]
+    upsert?: estimation_materiauxUpsertWithWhereUniqueWithoutEstimation_fiche_solutionInput | estimation_materiauxUpsertWithWhereUniqueWithoutEstimation_fiche_solutionInput[]
+    createMany?: estimation_materiauxCreateManyEstimation_fiche_solutionInputEnvelope
+    set?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+    disconnect?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+    delete?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+    connect?: estimation_materiauxWhereUniqueInput | estimation_materiauxWhereUniqueInput[]
+    update?: estimation_materiauxUpdateWithWhereUniqueWithoutEstimation_fiche_solutionInput | estimation_materiauxUpdateWithWhereUniqueWithoutEstimation_fiche_solutionInput[]
+    updateMany?: estimation_materiauxUpdateManyWithWhereWithoutEstimation_fiche_solutionInput | estimation_materiauxUpdateManyWithWhereWithoutEstimation_fiche_solutionInput[]
+    deleteMany?: estimation_materiauxScalarWhereInput | estimation_materiauxScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutConversationsInput = {
@@ -32211,6 +35335,7 @@ export namespace Prisma {
     projet: projetCreateNestedOneWithoutEstimationsInput
     deleter?: UserCreateNestedOneWithoutEstimations_deletedInput
     estimations_aides?: estimations_aidesCreateNestedManyWithoutEstimationInput
+    estimations_fiches_solutions?: estimation_fiche_solutionCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationUncheckedCreateWithoutCreatorInput = {
@@ -32223,6 +35348,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     deleted_by?: string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationCreateOrConnectWithoutCreatorInput = {
@@ -32245,6 +35371,7 @@ export namespace Prisma {
     creator: UserCreateNestedOneWithoutEstimations_createdInput
     projet: projetCreateNestedOneWithoutEstimationsInput
     estimations_aides?: estimations_aidesCreateNestedManyWithoutEstimationInput
+    estimations_fiches_solutions?: estimation_fiche_solutionCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationUncheckedCreateWithoutDeleterInput = {
@@ -32257,6 +35384,7 @@ export namespace Prisma {
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationCreateOrConnectWithoutDeleterInput = {
@@ -34479,6 +37607,7 @@ export namespace Prisma {
     creator: UserCreateNestedOneWithoutEstimations_createdInput
     deleter?: UserCreateNestedOneWithoutEstimations_deletedInput
     estimations_aides?: estimations_aidesCreateNestedManyWithoutEstimationInput
+    estimations_fiches_solutions?: estimation_fiche_solutionCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationUncheckedCreateWithoutProjetInput = {
@@ -34491,6 +37620,7 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     deleted_by?: string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationCreateOrConnectWithoutProjetInput = {
@@ -35944,6 +39074,38 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type estimation_fiche_solutionCreateWithoutEstimationInput = {
+    id?: string
+    fiche_solution_id: number
+    quantite?: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+    estimation_materiaux?: estimation_materiauxCreateNestedManyWithoutEstimation_fiche_solutionInput
+  }
+
+  export type estimation_fiche_solutionUncheckedCreateWithoutEstimationInput = {
+    id?: string
+    fiche_solution_id: number
+    quantite?: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+    estimation_materiaux?: estimation_materiauxUncheckedCreateNestedManyWithoutEstimation_fiche_solutionInput
+  }
+
+  export type estimation_fiche_solutionCreateOrConnectWithoutEstimationInput = {
+    where: estimation_fiche_solutionWhereUniqueInput
+    create: XOR<estimation_fiche_solutionCreateWithoutEstimationInput, estimation_fiche_solutionUncheckedCreateWithoutEstimationInput>
+  }
+
+  export type estimation_fiche_solutionCreateManyEstimationInputEnvelope = {
+    data: estimation_fiche_solutionCreateManyEstimationInput | estimation_fiche_solutionCreateManyEstimationInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutEstimations_createdInput = {
     update: XOR<UserUpdateWithoutEstimations_createdInput, UserUncheckedUpdateWithoutEstimations_createdInput>
     create: XOR<UserCreateWithoutEstimations_createdInput, UserUncheckedCreateWithoutEstimations_createdInput>
@@ -36199,6 +39361,36 @@ export namespace Prisma {
     data: XOR<estimations_aidesUpdateManyMutationInput, estimations_aidesUncheckedUpdateManyWithoutEstimationInput>
   }
 
+  export type estimation_fiche_solutionUpsertWithWhereUniqueWithoutEstimationInput = {
+    where: estimation_fiche_solutionWhereUniqueInput
+    update: XOR<estimation_fiche_solutionUpdateWithoutEstimationInput, estimation_fiche_solutionUncheckedUpdateWithoutEstimationInput>
+    create: XOR<estimation_fiche_solutionCreateWithoutEstimationInput, estimation_fiche_solutionUncheckedCreateWithoutEstimationInput>
+  }
+
+  export type estimation_fiche_solutionUpdateWithWhereUniqueWithoutEstimationInput = {
+    where: estimation_fiche_solutionWhereUniqueInput
+    data: XOR<estimation_fiche_solutionUpdateWithoutEstimationInput, estimation_fiche_solutionUncheckedUpdateWithoutEstimationInput>
+  }
+
+  export type estimation_fiche_solutionUpdateManyWithWhereWithoutEstimationInput = {
+    where: estimation_fiche_solutionScalarWhereInput
+    data: XOR<estimation_fiche_solutionUpdateManyMutationInput, estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationInput>
+  }
+
+  export type estimation_fiche_solutionScalarWhereInput = {
+    AND?: estimation_fiche_solutionScalarWhereInput | estimation_fiche_solutionScalarWhereInput[]
+    OR?: estimation_fiche_solutionScalarWhereInput[]
+    NOT?: estimation_fiche_solutionScalarWhereInput | estimation_fiche_solutionScalarWhereInput[]
+    id?: StringFilter<"estimation_fiche_solution"> | string
+    estimation_id?: IntFilter<"estimation_fiche_solution"> | number
+    fiche_solution_id?: IntFilter<"estimation_fiche_solution"> | number
+    quantite?: IntNullableFilter<"estimation_fiche_solution"> | number | null
+    cout_min_investissement?: IntFilter<"estimation_fiche_solution"> | number
+    cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
+    cout_min_entretien?: IntFilter<"estimation_fiche_solution"> | number
+    cout_max_entretien?: IntFilter<"estimation_fiche_solution"> | number
+  }
+
   export type estimations_aidesCreateWithoutAideInput = {
     id?: number
     created_at?: Date | string | null
@@ -36249,6 +39441,7 @@ export namespace Prisma {
     creator: UserCreateNestedOneWithoutEstimations_createdInput
     projet: projetCreateNestedOneWithoutEstimationsInput
     deleter?: UserCreateNestedOneWithoutEstimations_deletedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationUncheckedCreateWithoutEstimations_aidesInput = {
@@ -36261,6 +39454,7 @@ export namespace Prisma {
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedCreateNestedManyWithoutEstimationInput
   }
 
   export type estimationCreateOrConnectWithoutEstimations_aidesInput = {
@@ -36390,6 +39584,7 @@ export namespace Prisma {
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
     deleter?: UserUpdateOneWithoutEstimations_deletedNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationUncheckedUpdateWithoutEstimations_aidesInput = {
@@ -36402,6 +39597,7 @@ export namespace Prisma {
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationNestedInput
   }
 
   export type aideUpsertWithoutEstimations_aidesInput = {
@@ -36515,6 +39711,188 @@ export namespace Prisma {
     emails?: emailUncheckedUpdateManyWithoutUserNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type estimation_fiche_solutionCreateWithoutEstimation_materiauxInput = {
+    id?: string
+    fiche_solution_id: number
+    quantite?: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+    estimation: estimationCreateNestedOneWithoutEstimations_fiches_solutionsInput
+  }
+
+  export type estimation_fiche_solutionUncheckedCreateWithoutEstimation_materiauxInput = {
+    id?: string
+    estimation_id: number
+    fiche_solution_id: number
+    quantite?: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+  }
+
+  export type estimation_fiche_solutionCreateOrConnectWithoutEstimation_materiauxInput = {
+    where: estimation_fiche_solutionWhereUniqueInput
+    create: XOR<estimation_fiche_solutionCreateWithoutEstimation_materiauxInput, estimation_fiche_solutionUncheckedCreateWithoutEstimation_materiauxInput>
+  }
+
+  export type estimation_fiche_solutionUpsertWithoutEstimation_materiauxInput = {
+    update: XOR<estimation_fiche_solutionUpdateWithoutEstimation_materiauxInput, estimation_fiche_solutionUncheckedUpdateWithoutEstimation_materiauxInput>
+    create: XOR<estimation_fiche_solutionCreateWithoutEstimation_materiauxInput, estimation_fiche_solutionUncheckedCreateWithoutEstimation_materiauxInput>
+    where?: estimation_fiche_solutionWhereInput
+  }
+
+  export type estimation_fiche_solutionUpdateToOneWithWhereWithoutEstimation_materiauxInput = {
+    where?: estimation_fiche_solutionWhereInput
+    data: XOR<estimation_fiche_solutionUpdateWithoutEstimation_materiauxInput, estimation_fiche_solutionUncheckedUpdateWithoutEstimation_materiauxInput>
+  }
+
+  export type estimation_fiche_solutionUpdateWithoutEstimation_materiauxInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    estimation?: estimationUpdateOneRequiredWithoutEstimations_fiches_solutionsNestedInput
+  }
+
+  export type estimation_fiche_solutionUncheckedUpdateWithoutEstimation_materiauxInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    estimation_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type estimationCreateWithoutEstimations_fiches_solutionsInput = {
+    id: number
+    created_at?: Date | string
+    updated_at?: Date | string
+    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
+    materiaux?: NullableJsonNullValueInput | InputJsonValue
+    deleted_at?: Date | string | null
+    creator: UserCreateNestedOneWithoutEstimations_createdInput
+    projet: projetCreateNestedOneWithoutEstimationsInput
+    deleter?: UserCreateNestedOneWithoutEstimations_deletedInput
+    estimations_aides?: estimations_aidesCreateNestedManyWithoutEstimationInput
+  }
+
+  export type estimationUncheckedCreateWithoutEstimations_fiches_solutionsInput = {
+    id: number
+    created_by: string
+    created_at?: Date | string
+    updated_at?: Date | string
+    projet_id: number
+    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
+    materiaux?: NullableJsonNullValueInput | InputJsonValue
+    deleted_at?: Date | string | null
+    deleted_by?: string | null
+    estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
+  }
+
+  export type estimationCreateOrConnectWithoutEstimations_fiches_solutionsInput = {
+    where: estimationWhereUniqueInput
+    create: XOR<estimationCreateWithoutEstimations_fiches_solutionsInput, estimationUncheckedCreateWithoutEstimations_fiches_solutionsInput>
+  }
+
+  export type estimation_materiauxCreateWithoutEstimation_fiche_solutionInput = {
+    id?: string
+    materiau_id: number
+    quantite: number
+    cout_investissement_override: number
+    cout_entretien_override: number
+  }
+
+  export type estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput = {
+    id?: string
+    materiau_id: number
+    quantite: number
+    cout_investissement_override: number
+    cout_entretien_override: number
+  }
+
+  export type estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput = {
+    where: estimation_materiauxWhereUniqueInput
+    create: XOR<estimation_materiauxCreateWithoutEstimation_fiche_solutionInput, estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput>
+  }
+
+  export type estimation_materiauxCreateManyEstimation_fiche_solutionInputEnvelope = {
+    data: estimation_materiauxCreateManyEstimation_fiche_solutionInput | estimation_materiauxCreateManyEstimation_fiche_solutionInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type estimationUpsertWithoutEstimations_fiches_solutionsInput = {
+    update: XOR<estimationUpdateWithoutEstimations_fiches_solutionsInput, estimationUncheckedUpdateWithoutEstimations_fiches_solutionsInput>
+    create: XOR<estimationCreateWithoutEstimations_fiches_solutionsInput, estimationUncheckedCreateWithoutEstimations_fiches_solutionsInput>
+    where?: estimationWhereInput
+  }
+
+  export type estimationUpdateToOneWithWhereWithoutEstimations_fiches_solutionsInput = {
+    where?: estimationWhereInput
+    data: XOR<estimationUpdateWithoutEstimations_fiches_solutionsInput, estimationUncheckedUpdateWithoutEstimations_fiches_solutionsInput>
+  }
+
+  export type estimationUpdateWithoutEstimations_fiches_solutionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
+    materiaux?: NullableJsonNullValueInput | InputJsonValue
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
+    projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
+    deleter?: UserUpdateOneWithoutEstimations_deletedNestedInput
+    estimations_aides?: estimations_aidesUpdateManyWithoutEstimationNestedInput
+  }
+
+  export type estimationUncheckedUpdateWithoutEstimations_fiches_solutionsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    projet_id?: IntFieldUpdateOperationsInput | number
+    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
+    materiaux?: NullableJsonNullValueInput | InputJsonValue
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
+  }
+
+  export type estimation_materiauxUpsertWithWhereUniqueWithoutEstimation_fiche_solutionInput = {
+    where: estimation_materiauxWhereUniqueInput
+    update: XOR<estimation_materiauxUpdateWithoutEstimation_fiche_solutionInput, estimation_materiauxUncheckedUpdateWithoutEstimation_fiche_solutionInput>
+    create: XOR<estimation_materiauxCreateWithoutEstimation_fiche_solutionInput, estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput>
+  }
+
+  export type estimation_materiauxUpdateWithWhereUniqueWithoutEstimation_fiche_solutionInput = {
+    where: estimation_materiauxWhereUniqueInput
+    data: XOR<estimation_materiauxUpdateWithoutEstimation_fiche_solutionInput, estimation_materiauxUncheckedUpdateWithoutEstimation_fiche_solutionInput>
+  }
+
+  export type estimation_materiauxUpdateManyWithWhereWithoutEstimation_fiche_solutionInput = {
+    where: estimation_materiauxScalarWhereInput
+    data: XOR<estimation_materiauxUpdateManyMutationInput, estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionInput>
+  }
+
+  export type estimation_materiauxScalarWhereInput = {
+    AND?: estimation_materiauxScalarWhereInput | estimation_materiauxScalarWhereInput[]
+    OR?: estimation_materiauxScalarWhereInput[]
+    NOT?: estimation_materiauxScalarWhereInput | estimation_materiauxScalarWhereInput[]
+    id?: StringFilter<"estimation_materiaux"> | string
+    estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
+    materiau_id?: IntFilter<"estimation_materiaux"> | number
+    quantite?: IntFilter<"estimation_materiaux"> | number
+    cout_investissement_override?: IntFilter<"estimation_materiaux"> | number
+    cout_entretien_override?: IntFilter<"estimation_materiaux"> | number
   }
 
   export type UserCreateWithoutConversationsInput = {
@@ -37510,6 +40888,7 @@ export namespace Prisma {
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
     deleter?: UserUpdateOneWithoutEstimations_deletedNestedInput
     estimations_aides?: estimations_aidesUpdateManyWithoutEstimationNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationUncheckedUpdateWithoutCreatorInput = {
@@ -37522,6 +40901,7 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationUncheckedUpdateManyWithoutCreatorInput = {
@@ -37545,6 +40925,7 @@ export namespace Prisma {
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
     estimations_aides?: estimations_aidesUpdateManyWithoutEstimationNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationUncheckedUpdateWithoutDeleterInput = {
@@ -37557,6 +40938,7 @@ export namespace Prisma {
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationUncheckedUpdateManyWithoutDeleterInput = {
@@ -38189,6 +41571,7 @@ export namespace Prisma {
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
     deleter?: UserUpdateOneWithoutEstimations_deletedNestedInput
     estimations_aides?: estimations_aidesUpdateManyWithoutEstimationNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationUncheckedUpdateWithoutProjetInput = {
@@ -38201,6 +41584,7 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
+    estimations_fiches_solutions?: estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationNestedInput
   }
 
   export type estimationUncheckedUpdateManyWithoutProjetInput = {
@@ -38336,6 +41720,16 @@ export namespace Prisma {
     user_id?: string | null
   }
 
+  export type estimation_fiche_solutionCreateManyEstimationInput = {
+    id?: string
+    fiche_solution_id: number
+    quantite?: number | null
+    cout_min_investissement: number
+    cout_max_investissement: number
+    cout_min_entretien: number
+    cout_max_entretien: number
+  }
+
   export type estimations_aidesUpdateWithoutEstimationInput = {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38355,6 +41749,38 @@ export namespace Prisma {
     aideId?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type estimation_fiche_solutionUpdateWithoutEstimationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    estimation_materiaux?: estimation_materiauxUpdateManyWithoutEstimation_fiche_solutionNestedInput
+  }
+
+  export type estimation_fiche_solutionUncheckedUpdateWithoutEstimationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    estimation_materiaux?: estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionNestedInput
+  }
+
+  export type estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    quantite?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_min_investissement?: IntFieldUpdateOperationsInput | number
+    cout_max_investissement?: IntFieldUpdateOperationsInput | number
+    cout_min_entretien?: IntFieldUpdateOperationsInput | number
+    cout_max_entretien?: IntFieldUpdateOperationsInput | number
   }
 
   export type estimations_aidesCreateManyAideInput = {
@@ -38383,6 +41809,38 @@ export namespace Prisma {
     estimationId?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type estimation_materiauxCreateManyEstimation_fiche_solutionInput = {
+    id?: string
+    materiau_id: number
+    quantite: number
+    cout_investissement_override: number
+    cout_entretien_override: number
+  }
+
+  export type estimation_materiauxUpdateWithoutEstimation_fiche_solutionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    materiau_id?: IntFieldUpdateOperationsInput | number
+    quantite?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: IntFieldUpdateOperationsInput | number
+    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type estimation_materiauxUncheckedUpdateWithoutEstimation_fiche_solutionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    materiau_id?: IntFieldUpdateOperationsInput | number
+    quantite?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: IntFieldUpdateOperationsInput | number
+    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    materiau_id?: IntFieldUpdateOperationsInput | number
+    quantite?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: IntFieldUpdateOperationsInput | number
+    cout_entretien_override?: IntFieldUpdateOperationsInput | number
   }
 
 

@@ -15,11 +15,17 @@ export const mapStrapiEstimationMateriauxToFormValues = (
   ficheSolutionMateriaux: Materiau[] | undefined,
   defaultEstimationMateriaux: EstimationMateriauxFicheSolution | undefined,
 ) => {
-  return ficheSolutionMateriaux?.map((materiau) => ({
-    materiauId: `${materiau.id}`,
-    quantite:
-      defaultEstimationMateriaux?.estimationMateriaux?.find((e) => +e.materiauId == +materiau.id)?.quantite || 0,
-  }));
+  return ficheSolutionMateriaux?.map((materiau) => {
+    const existingEstimation = defaultEstimationMateriaux?.estimationMateriaux?.find(
+      (e) => +e.materiauId == +materiau.id,
+    );
+    return {
+      materiauId: `${materiau.id}`,
+      quantite: existingEstimation?.quantite || 0,
+      coutInvestissementOverride: existingEstimation?.coutInvestissementOverride,
+      coutEntretienOverride: existingEstimation?.coutEntretienOverride,
+    };
+  });
 };
 
 export const calculateCoeffsDiagnosticSimulation = (
