@@ -2,13 +2,13 @@
 
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { estimation } from "@/src/generated/prisma/client";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { notifications } from "../common/notifications";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { deleteEstimationAction } from "@/src/actions/estimation/delete-estimation-action";
 
 type ListeProjetsCardDeleteModalProps = {
-  estimation: estimation;
+  estimation: EstimationWithAides;
 };
 
 export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModalProps) {

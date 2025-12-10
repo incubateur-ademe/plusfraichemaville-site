@@ -341,8 +341,8 @@ model estimation_materiaux {
   estimation_fiche_solution_id String
   materiau_id                  Int
   quantite                     Int
-  cout_investissement_override Int
-  cout_entretien_override      Int
+  cout_investissement_override Int?
+  cout_entretien_override      Int?
 }
 
 model estimation_fiche_solution {

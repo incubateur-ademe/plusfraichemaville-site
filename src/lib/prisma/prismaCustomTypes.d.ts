@@ -24,6 +24,11 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
         aide: true;
       };
     };
+    estimations_fiches_solutions: {
+      include: {
+        estimation_materiaux: true;
+      };
+    };
   };
 }>;
 

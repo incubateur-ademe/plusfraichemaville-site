@@ -20414,8 +20414,8 @@ export namespace Prisma {
     estimation_fiche_solution_id: string
     materiau_id: number
     quantite: number
-    cout_investissement_override: number
-    cout_entretien_override: number
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
     _count: Estimation_materiauxCountAggregateOutputType | null
     _avg: Estimation_materiauxAvgAggregateOutputType | null
     _sum: Estimation_materiauxSumAggregateOutputType | null
@@ -20497,8 +20497,8 @@ export namespace Prisma {
       estimation_fiche_solution_id: string
       materiau_id: number
       quantite: number
-      cout_investissement_override: number
-      cout_entretien_override: number
+      cout_investissement_override: number | null
+      cout_entretien_override: number | null
     }, ExtArgs["result"]["estimation_materiaux"]>
     composites: {}
   }
@@ -28870,8 +28870,8 @@ export namespace Prisma {
     estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
     materiau_id?: IntFilter<"estimation_materiaux"> | number
     quantite?: IntFilter<"estimation_materiaux"> | number
-    cout_investissement_override?: IntFilter<"estimation_materiaux"> | number
-    cout_entretien_override?: IntFilter<"estimation_materiaux"> | number
+    cout_investissement_override?: IntNullableFilter<"estimation_materiaux"> | number | null
+    cout_entretien_override?: IntNullableFilter<"estimation_materiaux"> | number | null
     estimation_fiche_solution?: XOR<Estimation_fiche_solutionScalarRelationFilter, estimation_fiche_solutionWhereInput>
   }
 
@@ -28880,8 +28880,8 @@ export namespace Prisma {
     estimation_fiche_solution_id?: SortOrder
     materiau_id?: SortOrder
     quantite?: SortOrder
-    cout_investissement_override?: SortOrder
-    cout_entretien_override?: SortOrder
+    cout_investissement_override?: SortOrderInput | SortOrder
+    cout_entretien_override?: SortOrderInput | SortOrder
     estimation_fiche_solution?: estimation_fiche_solutionOrderByWithRelationInput
     _relevance?: estimation_materiauxOrderByRelevanceInput
   }
@@ -28894,8 +28894,8 @@ export namespace Prisma {
     estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
     materiau_id?: IntFilter<"estimation_materiaux"> | number
     quantite?: IntFilter<"estimation_materiaux"> | number
-    cout_investissement_override?: IntFilter<"estimation_materiaux"> | number
-    cout_entretien_override?: IntFilter<"estimation_materiaux"> | number
+    cout_investissement_override?: IntNullableFilter<"estimation_materiaux"> | number | null
+    cout_entretien_override?: IntNullableFilter<"estimation_materiaux"> | number | null
     estimation_fiche_solution?: XOR<Estimation_fiche_solutionScalarRelationFilter, estimation_fiche_solutionWhereInput>
   }, "id">
 
@@ -28904,8 +28904,8 @@ export namespace Prisma {
     estimation_fiche_solution_id?: SortOrder
     materiau_id?: SortOrder
     quantite?: SortOrder
-    cout_investissement_override?: SortOrder
-    cout_entretien_override?: SortOrder
+    cout_investissement_override?: SortOrderInput | SortOrder
+    cout_entretien_override?: SortOrderInput | SortOrder
     _count?: estimation_materiauxCountOrderByAggregateInput
     _avg?: estimation_materiauxAvgOrderByAggregateInput
     _max?: estimation_materiauxMaxOrderByAggregateInput
@@ -28921,8 +28921,8 @@ export namespace Prisma {
     estimation_fiche_solution_id?: StringWithAggregatesFilter<"estimation_materiaux"> | string
     materiau_id?: IntWithAggregatesFilter<"estimation_materiaux"> | number
     quantite?: IntWithAggregatesFilter<"estimation_materiaux"> | number
-    cout_investissement_override?: IntWithAggregatesFilter<"estimation_materiaux"> | number
-    cout_entretien_override?: IntWithAggregatesFilter<"estimation_materiaux"> | number
+    cout_investissement_override?: IntNullableWithAggregatesFilter<"estimation_materiaux"> | number | null
+    cout_entretien_override?: IntNullableWithAggregatesFilter<"estimation_materiaux"> | number | null
   }
 
   export type estimation_fiche_solutionWhereInput = {
@@ -30596,8 +30596,8 @@ export namespace Prisma {
     id?: string
     materiau_id: number
     quantite: number
-    cout_investissement_override: number
-    cout_entretien_override: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
     estimation_fiche_solution: estimation_fiche_solutionCreateNestedOneWithoutEstimation_materiauxInput
   }
 
@@ -30606,16 +30606,16 @@ export namespace Prisma {
     estimation_fiche_solution_id: string
     materiau_id: number
     quantite: number
-    cout_investissement_override: number
-    cout_entretien_override: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
   }
 
   export type estimation_materiauxUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     materiau_id?: IntFieldUpdateOperationsInput | number
     quantite?: IntFieldUpdateOperationsInput | number
-    cout_investissement_override?: IntFieldUpdateOperationsInput | number
-    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
     estimation_fiche_solution?: estimation_fiche_solutionUpdateOneRequiredWithoutEstimation_materiauxNestedInput
   }
 
@@ -30624,8 +30624,8 @@ export namespace Prisma {
     estimation_fiche_solution_id?: StringFieldUpdateOperationsInput | string
     materiau_id?: IntFieldUpdateOperationsInput | number
     quantite?: IntFieldUpdateOperationsInput | number
-    cout_investissement_override?: IntFieldUpdateOperationsInput | number
-    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type estimation_materiauxCreateManyInput = {
@@ -30633,16 +30633,16 @@ export namespace Prisma {
     estimation_fiche_solution_id: string
     materiau_id: number
     quantite: number
-    cout_investissement_override: number
-    cout_entretien_override: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
   }
 
   export type estimation_materiauxUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     materiau_id?: IntFieldUpdateOperationsInput | number
     quantite?: IntFieldUpdateOperationsInput | number
-    cout_investissement_override?: IntFieldUpdateOperationsInput | number
-    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type estimation_materiauxUncheckedUpdateManyInput = {
@@ -30650,8 +30650,8 @@ export namespace Prisma {
     estimation_fiche_solution_id?: StringFieldUpdateOperationsInput | string
     materiau_id?: IntFieldUpdateOperationsInput | number
     quantite?: IntFieldUpdateOperationsInput | number
-    cout_investissement_override?: IntFieldUpdateOperationsInput | number
-    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type estimation_fiche_solutionCreateInput = {
@@ -39808,16 +39808,16 @@ export namespace Prisma {
     id?: string
     materiau_id: number
     quantite: number
-    cout_investissement_override: number
-    cout_entretien_override: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
   }
 
   export type estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput = {
     id?: string
     materiau_id: number
     quantite: number
-    cout_investissement_override: number
-    cout_entretien_override: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
   }
 
   export type estimation_materiauxCreateOrConnectWithoutEstimation_fiche_solutionInput = {
@@ -39891,8 +39891,8 @@ export namespace Prisma {
     estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
     materiau_id?: IntFilter<"estimation_materiaux"> | number
     quantite?: IntFilter<"estimation_materiaux"> | number
-    cout_investissement_override?: IntFilter<"estimation_materiaux"> | number
-    cout_entretien_override?: IntFilter<"estimation_materiaux"> | number
+    cout_investissement_override?: IntNullableFilter<"estimation_materiaux"> | number | null
+    cout_entretien_override?: IntNullableFilter<"estimation_materiaux"> | number | null
   }
 
   export type UserCreateWithoutConversationsInput = {
@@ -41815,32 +41815,32 @@ export namespace Prisma {
     id?: string
     materiau_id: number
     quantite: number
-    cout_investissement_override: number
-    cout_entretien_override: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
   }
 
   export type estimation_materiauxUpdateWithoutEstimation_fiche_solutionInput = {
     id?: StringFieldUpdateOperationsInput | string
     materiau_id?: IntFieldUpdateOperationsInput | number
     quantite?: IntFieldUpdateOperationsInput | number
-    cout_investissement_override?: IntFieldUpdateOperationsInput | number
-    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type estimation_materiauxUncheckedUpdateWithoutEstimation_fiche_solutionInput = {
     id?: StringFieldUpdateOperationsInput | string
     materiau_id?: IntFieldUpdateOperationsInput | number
     quantite?: IntFieldUpdateOperationsInput | number
-    cout_investissement_override?: IntFieldUpdateOperationsInput | number
-    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionInput = {
     id?: StringFieldUpdateOperationsInput | string
     materiau_id?: IntFieldUpdateOperationsInput | number
     quantite?: IntFieldUpdateOperationsInput | number
-    cout_investissement_override?: IntFieldUpdateOperationsInput | number
-    cout_entretien_override?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
 

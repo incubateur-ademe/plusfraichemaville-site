@@ -4,11 +4,21 @@ import { estimation, Prisma } from "@/src/generated/prisma/client";
 import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { projetUpdated } from "./prismaProjetQueries";
 
-export const getEstimationById = async (estimationId: number): Promise<estimation | null> => {
+export const getEstimationById = async (estimationId: number): Promise<EstimationWithAides | null> => {
   return prismaClient.estimation.findUnique({
     where: {
       id: estimationId,
       deleted_at: null,
+    },
+    include: {
+      estimations_aides: {
+        include: { aide: true },
+      },
+      estimations_fiches_solutions: {
+        include: {
+          estimation_materiaux: true,
+        },
+      },
     },
   });
 };
@@ -42,6 +52,11 @@ export const createEstimation = async (
       estimations_aides: {
         include: { aide: true },
       },
+      estimations_fiches_solutions: {
+        include: {
+          estimation_materiaux: true,
+        },
+      },
     },
   });
 
@@ -54,18 +69,82 @@ export const updateEstimationMateriaux = async (
   estimationId: number,
   estimationMateriaux: EstimationMateriauxFicheSolution[],
 ): Promise<EstimationWithAides> => {
-  const response = await prismaClient.estimation.update({
-    where: {
-      id: estimationId,
-      deleted_at: null,
-    },
-    data: {
-      materiaux: estimationMateriaux as Prisma.JsonArray,
-      updated_at: new Date(),
-    },
+  await prismaClient.$transaction(async (tx) => {
+    for (const em of estimationMateriaux) {
+      const estimationFicheSolution = await tx.estimation_fiche_solution.findFirst({
+        where: {
+          estimation_id: estimationId,
+          fiche_solution_id: em.ficheSolutionId,
+        },
+      });
+
+      let estimationFicheSolutionId = estimationFicheSolution?.id;
+
+      if (estimationFicheSolution) {
+        await tx.estimation_fiche_solution.update({
+          where: { id: estimationFicheSolution.id },
+          data: {
+            cout_min_investissement: em.coutMinInvestissement,
+            cout_max_investissement: em.coutMaxInvestissement,
+            cout_min_entretien: em.coutMinEntretien,
+            cout_max_entretien: em.coutMaxEntretien,
+            quantite: em.quantite,
+          },
+        });
+      } else {
+        const created = await tx.estimation_fiche_solution.create({
+          data: {
+            estimation_id: estimationId,
+            fiche_solution_id: em.ficheSolutionId,
+            cout_min_investissement: em.coutMinInvestissement,
+            cout_max_investissement: em.coutMaxInvestissement,
+            cout_min_entretien: em.coutMinEntretien,
+            cout_max_entretien: em.coutMaxEntretien,
+            quantite: em.quantite,
+          },
+        });
+        estimationFicheSolutionId = created.id;
+      }
+
+      if (em.estimationMateriaux) {
+        // Delete existing materials for this solution
+        await tx.estimation_materiaux.deleteMany({
+          where: {
+            estimation_fiche_solution_id: estimationFicheSolutionId,
+          },
+        });
+
+        // Create new materials
+        if (em.estimationMateriaux.length > 0) {
+          await tx.estimation_materiaux.createMany({
+            data: em.estimationMateriaux.map((m) => ({
+              estimation_fiche_solution_id: estimationFicheSolutionId!,
+              materiau_id: +m.materiauId,
+              quantite: m.quantite,
+              cout_investissement_override: m.coutInvestissementOverride ?? null,
+              cout_entretien_override: m.coutEntretienOverride ?? null,
+            })),
+          });
+        }
+      }
+    }
+
+    await tx.estimation.update({
+      where: { id: estimationId },
+      data: { updated_at: new Date() },
+    });
+  });
+
+  const response = await prismaClient.estimation.findUniqueOrThrow({
+    where: { id: estimationId },
     include: {
       estimations_aides: {
         include: { aide: true },
+      },
+      estimations_fiches_solutions: {
+        include: {
+          estimation_materiaux: true,
+        },
       },
     },
   });

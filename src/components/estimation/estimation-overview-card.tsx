@@ -1,9 +1,8 @@
 "use client";
-import { estimation } from "@/src/generated/prisma/client";
 import clsx from "clsx";
 
 import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useMemo } from "react";
 import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
@@ -18,12 +17,29 @@ export const EstimationOverviewCard = ({
   estimation,
   canEditEstimation,
 }: {
-  estimation: estimation;
+  estimation: EstimationWithAides;
   canEditEstimation?: boolean;
 }) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
 
-  const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
+  const estimationMateriaux: EstimationMateriauxFicheSolution[] = useMemo(() => {
+    return (
+      estimation.estimations_fiches_solutions?.map((efs) => ({
+        ficheSolutionId: efs.fiche_solution_id,
+        coutMinInvestissement: efs.cout_min_investissement,
+        coutMaxInvestissement: efs.cout_max_investissement,
+        coutMinEntretien: efs.cout_min_entretien,
+        coutMaxEntretien: efs.cout_max_entretien,
+        quantite: efs.quantite ?? undefined,
+        estimationMateriaux: efs.estimation_materiaux.map((em) => ({
+          materiauId: em.materiau_id.toString(),
+          quantite: em.quantite,
+          coutInvestissementOverride: em.cout_investissement_override ?? undefined,
+          coutEntretienOverride: em.cout_entretien_override ?? undefined,
+        })),
+      })) || []
+    );
+  }, [estimation.estimations_fiches_solutions]);
   const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
 
   const isEstimationCompleted = useMemo(() => isComplete(estimation), [estimation]);
