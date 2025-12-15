@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -32,7 +32,7 @@ export default function EstimationMateriauSimpleFieldForm({
   estimationMateriaux,
 }: {
   ficheSolution: FicheSolution;
-  estimationMateriaux?: EstimationMateriauxFicheSolution;
+  estimationMateriaux?: EstimationFicheSolution;
   estimationId: number;
   onNext: () => void;
   onPrevious: () => void;

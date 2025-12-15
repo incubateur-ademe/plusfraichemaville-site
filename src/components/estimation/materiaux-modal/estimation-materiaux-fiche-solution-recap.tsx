@@ -1,4 +1,4 @@
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { useCallback } from "react";
@@ -9,7 +9,7 @@ import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
-  ficheSolutionEstimation: EstimationMateriauxFicheSolution;
+  ficheSolutionEstimation: EstimationFicheSolution;
   goToFicheSolutionStep: (_: number) => void;
 };
 

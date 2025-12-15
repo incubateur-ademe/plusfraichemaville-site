@@ -4,7 +4,7 @@ import { estimation } from "@/src/generated/prisma/client";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useEffect, useMemo, useState } from "react";
 import EstimationMateriauForm from "@/src/forms/estimation/estimation-materiau-form";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { upsert } from "@/src/helpers/listUtils";
 import { EstimationMateriauxValidation } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-validation";
@@ -29,7 +29,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
   const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
 
-  const estimationMateriaux: EstimationMateriauxFicheSolution[] = useMemo(() => {
+  const estimationMateriaux: EstimationFicheSolution[] = useMemo(() => {
     return (
       estimation.estimations_fiches_solutions?.map((efs) => ({
         ficheSolutionId: efs.fiche_solution_id,

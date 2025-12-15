@@ -9,7 +9,7 @@ import {
   EstimationMateriauxFormData,
   EstimationMateriauxFormSchema,
 } from "@/src/forms/estimation/estimation-materiau-form-schema";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import {
   EstimationMateriauxFormSimpleFieldSchema,
   EstimationMateriauxSimpleFieldFormData,
@@ -43,23 +43,7 @@ export const updateEstimationMateriauxAction = async (
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      const currentMateriauxEstimation: EstimationMateriauxFicheSolution[] =
-        estimation.estimations_fiches_solutions?.map((efs) => ({
-          ficheSolutionId: efs.fiche_solution_id,
-          coutMinInvestissement: efs.cout_min_investissement,
-          coutMaxInvestissement: efs.cout_max_investissement,
-          coutMinEntretien: efs.cout_min_entretien,
-          coutMaxEntretien: efs.cout_max_entretien,
-          quantite: efs.quantite ?? undefined,
-          estimationMateriaux: efs.estimation_materiaux.map((em) => ({
-            materiauId: em.materiau_id.toString(),
-            quantite: em.quantite,
-            coutInvestissementOverride: em.cout_investissement_override ?? undefined,
-            coutEntretienOverride: em.cout_entretien_override ?? undefined,
-          })),
-        })) || [];
-
-      const newMateriauxEstimation: EstimationMateriauxFicheSolution = {
+      const estimationFicheSolution: EstimationFicheSolution = {
         ficheSolutionId: data.ficheSolutionId,
         estimationMateriaux: isMultipleFieldsFormData ? data.estimationMateriaux : undefined,
         coutMinInvestissement: data.globalPrice?.fourniture?.min || 0,
@@ -69,13 +53,7 @@ export const updateEstimationMateriauxAction = async (
         quantite: isMultipleFieldsFormData ? undefined : data.quantite,
       };
 
-      const index = currentMateriauxEstimation?.findIndex((e) => e.ficheSolutionId === data.ficheSolutionId);
-      if (index === -1) {
-        currentMateriauxEstimation.push(newMateriauxEstimation);
-      } else {
-        currentMateriauxEstimation[index] = newMateriauxEstimation;
-      }
-      const updatedEstimation = await updateEstimationMateriaux(estimationId, currentMateriauxEstimation);
+      const updatedEstimation = await updateEstimationMateriaux(estimationId, estimationFicheSolution);
       return { type: "success", updatedEstimation };
     } catch (e) {
       customCaptureException("Error in UpdateEstimationMateriauxAction DB call", e);

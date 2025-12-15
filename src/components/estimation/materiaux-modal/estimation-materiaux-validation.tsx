@@ -1,4 +1,4 @@
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import { EstimationMateriauxFicheSolutionRecap } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-fiche-solution-recap";
 import { useMemo } from "react";
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
@@ -7,7 +7,7 @@ import { notifications } from "@/src/components/common/notifications";
 import { computeGlobalFicheSolutionPrice } from "@/src/helpers/cout/cout-materiau";
 
 type EstimationMateriauxValidationProps = {
-  estimationsFicheSolution: EstimationMateriauxFicheSolution[];
+  estimationsFicheSolution: EstimationFicheSolution[];
   goToFicheSolutionStep: (_: number) => void;
   onClose: () => void;
   onPrevious: () => void;

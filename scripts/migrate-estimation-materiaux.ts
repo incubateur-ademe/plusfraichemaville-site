@@ -1,5 +1,5 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import { Prisma } from "@/src/generated/prisma/client";
 
 async function migrateEstimationMateriaux() {
@@ -17,7 +17,7 @@ async function migrateEstimationMateriaux() {
   console.log(`Found ${estimations.length} estimations to migrate.`);
 
   for (const estimation of estimations) {
-    const materiaux = estimation.materiaux as unknown as EstimationMateriauxFicheSolution[];
+    const materiaux = estimation.materiaux as unknown as EstimationFicheSolution[];
 
     if (!materiaux || !Array.isArray(materiaux)) {
       console.warn(`Skipping estimation ${estimation.id}: Invalid materiaux format.`);

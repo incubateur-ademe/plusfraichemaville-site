@@ -28957,6 +28957,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    estimation_id_fiche_solution_id?: estimation_fiche_solutionEstimation_idFiche_solution_idCompoundUniqueInput
     AND?: estimation_fiche_solutionWhereInput | estimation_fiche_solutionWhereInput[]
     OR?: estimation_fiche_solutionWhereInput[]
     NOT?: estimation_fiche_solutionWhereInput | estimation_fiche_solutionWhereInput[]
@@ -28969,7 +28970,7 @@ export namespace Prisma {
     cout_max_entretien?: IntFilter<"estimation_fiche_solution"> | number
     estimation?: XOR<EstimationScalarRelationFilter, estimationWhereInput>
     estimation_materiaux?: Estimation_materiauxListRelationFilter
-  }, "id">
+  }, "id" | "estimation_id_fiche_solution_id">
 
   export type estimation_fiche_solutionOrderByWithAggregationInput = {
     id?: SortOrder
@@ -32498,6 +32499,11 @@ export namespace Prisma {
     fields: estimation_fiche_solutionOrderByRelevanceFieldEnum | estimation_fiche_solutionOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
+  }
+
+  export type estimation_fiche_solutionEstimation_idFiche_solution_idCompoundUniqueInput = {
+    estimation_id: number
+    fiche_solution_id: number
   }
 
   export type estimation_fiche_solutionCountOrderByAggregateInput = {

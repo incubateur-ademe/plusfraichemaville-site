@@ -180,7 +180,7 @@ export type ProjetWithAdminUser = ProjetWithCollectivite & {
   users: ProjectUserAndAdmin[];
 };
 
-export type EstimationMateriauxFicheSolution = {
+export type EstimationFicheSolution = {
   ficheSolutionId: number;
   estimationMateriaux?: {
     materiauId: string;

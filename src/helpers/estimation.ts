@@ -1,9 +1,9 @@
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { estimation } from "@/src/generated/prisma/client";
 import orderBy from "lodash/orderBy";
 
 export const isComplete = (estimation: EstimationWithAides) => {
-  const materiaux: EstimationMateriauxFicheSolution[] =
+  const materiaux: EstimationFicheSolution[] =
     estimation.estimations_fiches_solutions?.map((efs) => ({
       ficheSolutionId: efs.fiche_solution_id,
       coutMinInvestissement: efs.cout_min_investissement,
@@ -36,5 +36,5 @@ export const getLastCompletedEstimation = (estimations: EstimationWithAides[] | 
   return sortedEstimations.find(isComplete);
 };
 
-const isFicheSolutionEstimated = (ficheSolutionId: number, estimationMateriaux: EstimationMateriauxFicheSolution[]) =>
+const isFicheSolutionEstimated = (ficheSolutionId: number, estimationMateriaux: EstimationFicheSolution[]) =>
   estimationMateriaux?.findIndex((estimationMat) => estimationMat.ficheSolutionId === ficheSolutionId) !== -1;

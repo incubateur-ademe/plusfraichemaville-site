@@ -3,7 +3,7 @@
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useMemo } from "react";
 import { getLastCompletedEstimation } from "@/src/helpers/estimation";
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import { computeGlobalFicheSolutionPrice } from "@/src/helpers/cout/cout-materiau";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 
@@ -13,7 +13,7 @@ export const TableauDeBordSuiviWithEstimation = () => {
   const lastCompletedEstimation = useMemo(() => getLastCompletedEstimation(projet?.estimations), [projet?.estimations]);
   const globalPrice = useMemo(
     () =>
-      computeGlobalFicheSolutionPrice(lastCompletedEstimation?.materiaux as EstimationMateriauxFicheSolution[] | null),
+      computeGlobalFicheSolutionPrice(lastCompletedEstimation?.materiaux as EstimationFicheSolution[] | null),
     [lastCompletedEstimation],
   );
   if (!globalPrice || !lastCompletedEstimation) {

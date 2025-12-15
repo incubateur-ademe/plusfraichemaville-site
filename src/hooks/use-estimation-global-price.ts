@@ -1,10 +1,10 @@
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { computeGlobalFicheSolutionPrice } from "@/src/helpers/cout/cout-materiau";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useMemo } from "react";
 
 export const useEstimationGlobalPrice = (estimation: EstimationWithAides) => {
-  const estimationMateriaux: EstimationMateriauxFicheSolution[] = useMemo(() => {
+  const estimationMateriaux: EstimationFicheSolution[] = useMemo(() => {
     return (
       estimation.estimations_fiches_solutions?.map((efs) => ({
         ficheSolutionId: efs.fiche_solution_id,

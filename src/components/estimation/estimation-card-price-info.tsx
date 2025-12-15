@@ -1,8 +1,8 @@
 "use client";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 
-export const EstimationCardPriceInfo = ({ estimationInfo }: { estimationInfo?: EstimationMateriauxFicheSolution }) => {
+export const EstimationCardPriceInfo = ({ estimationInfo }: { estimationInfo?: EstimationFicheSolution }) => {
   if (!estimationInfo) {
     return <div className="min-h-[2.5rem] text-sm font-bold text-dsfr-text-error">Non complétée</div>;
   }

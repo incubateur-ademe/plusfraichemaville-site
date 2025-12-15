@@ -2,7 +2,7 @@
 import clsx from "clsx";
 
 import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useMemo } from "react";
 import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
@@ -22,7 +22,7 @@ export const EstimationOverviewCard = ({
 }) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
 
-  const estimationMateriaux: EstimationMateriauxFicheSolution[] = useMemo(() => {
+  const estimationMateriaux: EstimationFicheSolution[] = useMemo(() => {
     return (
       estimation.estimations_fiches_solutions?.map((efs) => ({
         ficheSolutionId: efs.fiche_solution_id,

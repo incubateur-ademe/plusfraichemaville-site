@@ -356,6 +356,8 @@ model estimation_fiche_solution {
   cout_min_entretien      Int
   cout_max_entretien      Int
   estimation_materiaux    estimation_materiaux[]
+
+  @@unique([estimation_id, fiche_solution_id])
 }
 
 model conversation {

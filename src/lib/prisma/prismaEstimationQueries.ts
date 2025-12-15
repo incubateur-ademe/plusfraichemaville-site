@@ -1,7 +1,6 @@
 import { generateRandomId } from "@/src/helpers/common";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { estimation, Prisma } from "@/src/generated/prisma/client";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { projetUpdated } from "./prismaProjetQueries";
 
 export const getEstimationById = async (estimationId: number): Promise<EstimationWithAides | null> => {
@@ -67,76 +66,50 @@ export const createEstimation = async (
 
 export const updateEstimationMateriaux = async (
   estimationId: number,
-  estimationMateriaux: EstimationMateriauxFicheSolution[],
+  estimationFicheSolution: EstimationFicheSolution,
 ): Promise<EstimationWithAides> => {
   await prismaClient.$transaction(async (tx) => {
-    for (const em of estimationMateriaux) {
-      const estimationFicheSolution = await tx.estimation_fiche_solution.findFirst({
-        where: {
+    const newEstimationFicheSolution = await tx.estimation_fiche_solution.upsert({
+      where: {
+        estimation_id_fiche_solution_id: {
           estimation_id: estimationId,
-          fiche_solution_id: em.ficheSolutionId,
+          fiche_solution_id: estimationFicheSolution.ficheSolutionId,
+        },
+      },
+      update: {
+        quantite: estimationFicheSolution.quantite,
+        cout_min_entretien: estimationFicheSolution.coutMinEntretien,
+        cout_max_entretien: estimationFicheSolution.coutMaxEntretien,
+        cout_min_investissement: estimationFicheSolution.coutMinInvestissement,
+        cout_max_investissement: estimationFicheSolution.coutMaxInvestissement,
+        estimation_materiaux: { deleteMany: {} },
+      },
+      create: {
+        estimation_id: estimationId,
+        fiche_solution_id: estimationFicheSolution.ficheSolutionId,
+        quantite: estimationFicheSolution.quantite,
+        cout_min_entretien: estimationFicheSolution.coutMinEntretien,
+        cout_max_entretien: estimationFicheSolution.coutMaxEntretien,
+        cout_min_investissement: estimationFicheSolution.coutMinInvestissement,
+        cout_max_investissement: estimationFicheSolution.coutMaxInvestissement,
+      },
+    });
+    for (const m of estimationFicheSolution.estimationMateriaux ?? []) {
+      await tx.estimation_materiaux.create({
+        data: {
+          estimation_fiche_solution_id: newEstimationFicheSolution.id,
+          quantite: m.quantite,
+          cout_investissement_override: m.coutInvestissementOverride,
+          cout_entretien_override: m.coutEntretienOverride,
+          materiau_id: +m.materiauId,
         },
       });
-
-      let estimationFicheSolutionId = estimationFicheSolution?.id;
-
-      if (estimationFicheSolution) {
-        await tx.estimation_fiche_solution.update({
-          where: { id: estimationFicheSolution.id },
-          data: {
-            cout_min_investissement: em.coutMinInvestissement,
-            cout_max_investissement: em.coutMaxInvestissement,
-            cout_min_entretien: em.coutMinEntretien,
-            cout_max_entretien: em.coutMaxEntretien,
-            quantite: em.quantite,
-          },
-        });
-      } else {
-        const created = await tx.estimation_fiche_solution.create({
-          data: {
-            estimation_id: estimationId,
-            fiche_solution_id: em.ficheSolutionId,
-            cout_min_investissement: em.coutMinInvestissement,
-            cout_max_investissement: em.coutMaxInvestissement,
-            cout_min_entretien: em.coutMinEntretien,
-            cout_max_entretien: em.coutMaxEntretien,
-            quantite: em.quantite,
-          },
-        });
-        estimationFicheSolutionId = created.id;
-      }
-
-      if (em.estimationMateriaux) {
-        // Delete existing materials for this solution
-        await tx.estimation_materiaux.deleteMany({
-          where: {
-            estimation_fiche_solution_id: estimationFicheSolutionId,
-          },
-        });
-
-        // Create new materials
-        if (em.estimationMateriaux.length > 0) {
-          await tx.estimation_materiaux.createMany({
-            data: em.estimationMateriaux.map((m) => ({
-              estimation_fiche_solution_id: estimationFicheSolutionId!,
-              materiau_id: +m.materiauId,
-              quantite: m.quantite,
-              cout_investissement_override: m.coutInvestissementOverride ?? null,
-              cout_entretien_override: m.coutEntretienOverride ?? null,
-            })),
-          });
-        }
-      }
     }
-
-    await tx.estimation.update({
-      where: { id: estimationId },
-      data: { updated_at: new Date() },
-    });
   });
 
-  const response = await prismaClient.estimation.findUniqueOrThrow({
+  const newEstimation = await prismaClient.estimation.update({
     where: { id: estimationId },
+    data: { updated_at: new Date() },
     include: {
       estimations_aides: {
         include: { aide: true },
@@ -149,7 +122,7 @@ export const updateEstimationMateriaux = async (
     },
   });
 
-  await projetUpdated(response.projet_id);
+  await projetUpdated(newEstimation.projet_id);
 
-  return response;
+  return newEstimation;
 };

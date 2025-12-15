@@ -1,4 +1,4 @@
-import { EstimationMateriauxFicheSolution, ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 import { IndicateursEnvironnementauxFormData } from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form-schema";
 import {
@@ -13,7 +13,7 @@ import { IndiEnGroupeQuestion } from "@/src/helpers/indicateurs-environnementaux
 
 export const mapStrapiEstimationMateriauxToFormValues = (
   ficheSolutionMateriaux: Materiau[] | undefined,
-  defaultEstimationMateriaux: EstimationMateriauxFicheSolution | undefined,
+  defaultEstimationMateriaux: EstimationFicheSolution | undefined,
 ) => {
   return ficheSolutionMateriaux?.map((materiau) => {
     const existingEstimation = defaultEstimationMateriaux?.estimationMateriaux?.find(
