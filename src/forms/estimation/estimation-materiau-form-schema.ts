@@ -20,7 +20,7 @@ export const EstimationMateriauxFormSchema = z.object({
     .optional(),
   estimationMateriaux: z
     .object({
-      materiauId: z.string().min(1),
+      materiauId: z.number(),
       quantite: z
         .number({ invalid_type_error: "Veuillez rentrer une valeur pour la quantité." })
         .nonnegative({ message: "Veuillez rentrer une valeur cohérente pour la quantité." }),

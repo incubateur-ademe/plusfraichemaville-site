@@ -180,20 +180,18 @@ export type ProjetWithAdminUser = ProjetWithCollectivite & {
   users: ProjectUserAndAdmin[];
 };
 
-export type EstimationFicheSolution = {
-  ficheSolutionId: number;
-  estimationMateriaux?: {
-    materiauId: string;
-    quantite: number;
-    coutInvestissementOverride?: number;
-    coutEntretienOverride?: number;
-  }[];
-  coutMinInvestissement: number;
-  coutMaxInvestissement: number;
-  coutMinEntretien: number;
-  coutMaxEntretien: number;
-  quantite?: number;
-};
+export type EstimationFicheSolution = Prisma.estimation_fiche_solutionGetPayload<{ include: { estimation_materiaux } }>;
+
+export type EstimationMateriau = Prisma.estimation_materiauxGetPayload<{
+  select: { materiau_id; quantite; cout_investissement_override; cout_entretien_override };
+}>;
+
+ export type EstimationMateriauForm = {
+   materiauId: number;
+   quantite: number;
+   coutInvestissementOverride?: number;
+   coutEntretienOverride?: number;
+ };
 
 export type AgentConnectInfo = { siret: string };
 

@@ -1,4 +1,9 @@
-import { EstimationFicheSolution, ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
+import {
+  EstimationFicheSolution,
+  EstimationMateriau,
+  EstimationMateriauForm,
+  ProjetIndiEnSimuation,
+} from "@/src/lib/prisma/prismaCustomTypes";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 import { IndicateursEnvironnementauxFormData } from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form-schema";
 import {
@@ -16,17 +21,24 @@ export const mapStrapiEstimationMateriauxToFormValues = (
   defaultEstimationMateriaux: EstimationFicheSolution | undefined,
 ) => {
   return ficheSolutionMateriaux?.map((materiau) => {
-    const existingEstimation = defaultEstimationMateriaux?.estimationMateriaux?.find(
-      (e) => +e.materiauId == +materiau.id,
+    const existingEstimation = defaultEstimationMateriaux?.estimation_materiaux?.find(
+      (e) => e.materiau_id == materiau.id,
     );
     return {
-      materiauId: `${materiau.id}`,
+      materiauId: +materiau.id,
       quantite: existingEstimation?.quantite || 0,
-      coutInvestissementOverride: existingEstimation?.coutInvestissementOverride,
-      coutEntretienOverride: existingEstimation?.coutEntretienOverride,
+      coutInvestissementOverride: existingEstimation?.cout_investissement_override || undefined,
+      coutEntretienOverride: existingEstimation?.cout_entretien_override || undefined,
     };
   });
 };
+
+export const mapEstimationMateriauFormToDb = (estimationMateriauForm: EstimationMateriauForm): EstimationMateriau => ({
+  quantite: estimationMateriauForm.quantite,
+  materiau_id: estimationMateriauForm.materiauId,
+  cout_investissement_override: estimationMateriauForm.coutInvestissementOverride || null,
+  cout_entretien_override: estimationMateriauForm.coutEntretienOverride || null,
+});
 
 export const calculateCoeffsDiagnosticSimulation = (
   questions: ProjetIndiEnSimuation["questions"] | IndicateursEnvironnementauxFormData["questions"],

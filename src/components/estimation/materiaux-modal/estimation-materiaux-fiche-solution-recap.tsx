@@ -1,12 +1,13 @@
 import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { computePriceEstimationFicheSolution } from "@/src/helpers/estimation";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationFicheSolution;
@@ -18,13 +19,14 @@ export function EstimationMateriauxFicheSolutionRecap({
   goToFicheSolutionStep,
 }: EstimationMateriauxFicheSolutionRecapProps) {
   const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(ficheSolutionEstimation.ficheSolutionId),
+    makeFicheSolutionCompleteUrlApi(ficheSolutionEstimation.fiche_solution_id),
   );
 
   const getQuantiteByMateriauId = useCallback(
     (materiauId: number): number =>
-      ficheSolutionEstimation.estimationMateriaux?.find((estMat) => +estMat.materiauId === +materiauId)?.quantite || 0,
-    [ficheSolutionEstimation.estimationMateriaux],
+      ficheSolutionEstimation.estimation_materiaux?.find((estMat) => +estMat.materiau_id === +materiauId)?.quantite ||
+      0,
+    [ficheSolutionEstimation.estimation_materiaux],
   );
 
   if (!data) {
@@ -32,6 +34,12 @@ export function EstimationMateriauxFicheSolutionRecap({
   }
 
   const ficheSolution = data[0];
+
+  const globalPrice = useMemo(
+    () =>
+      ficheSolution && computePriceEstimationFicheSolution(ficheSolution, ficheSolutionEstimation.estimation_materiaux),
+    [ficheSolution, ficheSolutionEstimation.estimation_materiaux],
+  );
 
   if (!ficheSolution || !ficheSolution.attributes.materiaux || ficheSolution.attributes.materiaux.data.length === 0) {
     return null;
@@ -91,8 +99,8 @@ export function EstimationMateriauxFicheSolutionRecap({
           <div className="font-bold">Total Investissement</div>
           <div>
             <strong>
-              {`${formatNumberWithSpaces(ficheSolutionEstimation.coutMinInvestissement)}
-                   - ${formatNumberWithSpaces(ficheSolutionEstimation.coutMaxInvestissement)} € `}
+              {`${formatNumberWithSpaces(globalPrice?.fourniture.min)}
+                   - ${formatNumberWithSpaces(globalPrice?.fourniture.max)} € `}
             </strong>
             HT
           </div>
@@ -101,8 +109,8 @@ export function EstimationMateriauxFicheSolutionRecap({
           <div className="font-bold">Total Entretien</div>
           <div className="text-sm">
             <strong>
-              {`${formatNumberWithSpaces(ficheSolutionEstimation.coutMinEntretien)} - ${formatNumberWithSpaces(
-                ficheSolutionEstimation.coutMaxEntretien,
+              {`${formatNumberWithSpaces(globalPrice?.entretien.min)} - ${formatNumberWithSpaces(
+                globalPrice?.entretien.max,
               )} € `}
             </strong>
             HT / an

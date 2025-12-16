@@ -1,10 +1,9 @@
 "use client";
 
-import { estimation } from "@/src/generated/prisma/client";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useEffect, useMemo, useState } from "react";
 import EstimationMateriauForm from "@/src/forms/estimation/estimation-materiau-form";
-import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { upsert } from "@/src/helpers/listUtils";
 import { EstimationMateriauxValidation } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-validation";
@@ -28,25 +27,6 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
 
   const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
-
-  const estimationMateriaux: EstimationFicheSolution[] = useMemo(() => {
-    return (
-      estimation.estimations_fiches_solutions?.map((efs) => ({
-        ficheSolutionId: efs.fiche_solution_id,
-        coutMinInvestissement: efs.cout_min_investissement,
-        coutMaxInvestissement: efs.cout_max_investissement,
-        coutMinEntretien: efs.cout_min_entretien,
-        coutMaxEntretien: efs.cout_max_entretien,
-        quantite: efs.quantite ?? undefined,
-        estimationMateriaux: efs.estimation_materiaux.map((em) => ({
-          materiauId: em.materiau_id.toString(),
-          quantite: em.quantite,
-          coutInvestissementOverride: em.cout_investissement_override ?? undefined,
-          coutEntretienOverride: em.cout_entretien_override ?? undefined,
-        })),
-      })) || []
-    );
-  }, [estimation.estimations_fiches_solutions]);
 
   const { data: currentFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
     estimationStep <= estimation.fiches_solutions_id.length
@@ -77,8 +57,8 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     [nextFicheSolution],
   );
   const currentEstimationMateriaux = useMemo(() => {
-    return estimationMateriaux?.find((em) => em.ficheSolutionId == currentFicheSolution?.id);
-  }, [currentFicheSolution, estimationMateriaux]);
+    return estimation.estimations_fiches_solutions?.find((efm) => efm.fiche_solution_id == currentFicheSolution?.id);
+  }, [estimation, currentFicheSolution]);
 
   const updateEstimationInStore = (estimation: EstimationWithAides) => {
     const currentProject = getCurrentProjet();
@@ -152,9 +132,9 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
           )}
         </>
       )}
-      {estimationStep === estimation.fiches_solutions_id.length + 1 && estimationMateriaux && (
+      {estimationStep === estimation.fiches_solutions_id.length + 1 && (
         <EstimationMateriauxValidation
-          estimationsFicheSolution={estimationMateriaux}
+          estimationsFicheSolution={estimation.estimations_fiches_solutions}
           goToFicheSolutionStep={goToSpecificFicheSolutionStep}
           onClose={estimationModal.close}
           onPrevious={goToPreviousStep}

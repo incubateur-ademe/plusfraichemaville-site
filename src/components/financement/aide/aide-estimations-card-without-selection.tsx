@@ -1,6 +1,6 @@
 import { Separator } from "@/src/components/common/separator";
 import { FicheSolutionSmallCard } from "@/src/components/ficheSolution/fiche-solution-small-card";
-import { useEstimationGlobalPrice } from "@/src/hooks/use-estimation-global-price";
+import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-f-s-global-price";
 import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { PropsWithChildren } from "react";
 import { useAidesByEstimationFetcher } from "@/src/hooks/use-aides-selected-by-estimation";
@@ -16,7 +16,7 @@ export const AideEstimationsCardWithoutSelection = ({
   estimation,
   children,
 }: AideEstimationsCardWithoutSelectionProps) => {
-  const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
+  const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice(estimation);
   const { data: aides, isLoading } = useAidesByEstimationFetcher(estimation.id);
   const countAides = countAidesByType(aides?.results ?? []);
 

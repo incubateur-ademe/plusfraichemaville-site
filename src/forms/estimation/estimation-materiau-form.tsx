@@ -14,11 +14,15 @@ import EditablePriceField from "@/src/forms/estimation/editable-price-field";
 import { updateEstimationMateriauxAction } from "@/src/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/src/components/common/notifications";
 
-import { mapStrapiEstimationMateriauxToFormValues } from "@/src/lib/prisma/prismaCustomTypesHelper";
+import {
+  mapEstimationMateriauFormToDb,
+  mapStrapiEstimationMateriauxToFormValues,
+} from "@/src/lib/prisma/prismaCustomTypesHelper";
 import { scrollToTop } from "@/src/helpers/common";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { computePriceEstimationFicheSolution } from "@/src/helpers/estimation";
 
 export default function EstimationMateriauForm({
   ficheSolution,
@@ -90,35 +94,9 @@ export default function EstimationMateriauForm({
   });
 
   const globalPrice = useMemo(() => {
-    return ficheSolution.attributes.materiaux?.data.reduce(
-      (acc, materiauCMS) => {
-        const estimation = watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +materiauCMS.id);
-        const quantiteMateriau = estimation?.quantite || 0;
-        const coutInvestissementOverride = estimation?.coutInvestissementOverride;
-        const coutEntretienOverride = estimation?.coutEntretienOverride;
-
-        const investissementMin =
-          coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_minimum_fourniture || 0);
-        const investissementMax =
-          coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_maximum_fourniture || 0);
-
-        const entretienMin =
-          coutEntretienOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_minimum_entretien || 0);
-        const entretienMax =
-          coutEntretienOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_maximum_entretien || 0);
-
-        return {
-          entretien: {
-            min: entretienMin + acc.entretien.min,
-            max: entretienMax + acc.entretien.max,
-          },
-          fourniture: {
-            min: investissementMin + acc.fourniture.min,
-            max: investissementMax + acc.fourniture.max,
-          },
-        };
-      },
-      { entretien: { min: 0, max: 0 }, fourniture: { min: 0, max: 0 } },
+    return computePriceEstimationFicheSolution(
+      ficheSolution,
+      watchAllFields.estimationMateriaux.map(mapEstimationMateriauFormToDb),
     );
   }, [ficheSolution, watchAllFields]);
 
@@ -164,6 +142,7 @@ export default function EstimationMateriauForm({
                   setValue={form.setValue}
                   name={`estimationMateriaux.${index}.coutEntretienOverride`}
                   label="Entretien"
+                  suffix={" € / an"}
                   calculatedValue={getLabelCoutEntretienByQuantite(
                     getMateriauFromId(+field.materiauId)?.attributes,
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,

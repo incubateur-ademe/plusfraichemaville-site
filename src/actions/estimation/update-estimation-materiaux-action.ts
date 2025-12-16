@@ -9,7 +9,7 @@ import {
   EstimationMateriauxFormData,
   EstimationMateriauxFormSchema,
 } from "@/src/forms/estimation/estimation-materiau-form-schema";
-import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import {
   EstimationMateriauxFormSimpleFieldSchema,
   EstimationMateriauxSimpleFieldFormData,
@@ -43,17 +43,22 @@ export const updateEstimationMateriauxAction = async (
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      const estimationFicheSolution: EstimationFicheSolution = {
-        ficheSolutionId: data.ficheSolutionId,
-        estimationMateriaux: isMultipleFieldsFormData ? data.estimationMateriaux : undefined,
-        coutMinInvestissement: data.globalPrice?.fourniture?.min || 0,
-        coutMaxInvestissement: data.globalPrice?.fourniture?.max || 0,
-        coutMinEntretien: data.globalPrice?.entretien?.min || 0,
-        coutMaxEntretien: data.globalPrice?.entretien?.max || 0,
-        quantite: isMultipleFieldsFormData ? undefined : data.quantite,
-      };
-
-      const updatedEstimation = await updateEstimationMateriaux(estimationId, estimationFicheSolution);
+      const updatedEstimation = await updateEstimationMateriaux(estimationId, {
+        fiche_solution_id: data.ficheSolutionId,
+        quantite: isMultipleFieldsFormData ? null : data.quantite,
+        cout_min_investissement: data.globalPrice?.fourniture?.min || 0,
+        cout_max_investissement: data.globalPrice?.fourniture?.max || 0,
+        cout_min_entretien: data.globalPrice?.entretien?.min || 0,
+        cout_max_entretien: data.globalPrice?.entretien?.max || 0,
+        estimation_materiaux: isMultipleFieldsFormData
+          ? data.estimationMateriaux.map((m) => ({
+              quantite: m.quantite,
+              materiau_id: m.materiauId,
+              cout_investissement_override: m.coutInvestissementOverride || null,
+              cout_entretien_override: m.coutEntretienOverride || null,
+            }))
+          : [],
+      });
       return { type: "success", updatedEstimation };
     } catch (e) {
       customCaptureException("Error in UpdateEstimationMateriauxAction DB call", e);

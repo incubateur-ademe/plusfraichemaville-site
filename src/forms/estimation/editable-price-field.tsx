@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Control, useWatch, UseFormSetValue, FieldValues, Path } from "react-hook-form";
-import InputFormField from "@/src/components/common/InputFormField";
+import { Control, FieldValues, Path, UseFormSetValue, useWatch } from "react-hook-form";
 import Button from "@codegouvfr/react-dsfr/Button";
+import CurrencyInputFormField from "@/src/components/common/currency-input-form-field";
 
 type EditablePriceFieldProps<T extends FieldValues> = {
   control: Control<T>;
@@ -9,6 +9,7 @@ type EditablePriceFieldProps<T extends FieldValues> = {
   name: Path<T>;
   calculatedValue: string;
   label: string;
+  suffix?: string;
 };
 
 export default function EditablePriceField<T extends FieldValues>({
@@ -17,6 +18,7 @@ export default function EditablePriceField<T extends FieldValues>({
   name,
   calculatedValue,
   label,
+  suffix,
 }: EditablePriceFieldProps<T>) {
   const overrideValue = useWatch({ control, name });
   const [isEditing, setIsEditing] = useState(false);
@@ -36,21 +38,33 @@ export default function EditablePriceField<T extends FieldValues>({
     <div>
       <div>{label}</div>
       {isEditing ? (
-        <div className="flex items-start gap-2">
-          <InputFormField
+        <div className="flex items-start gap-0">
+          <CurrencyInputFormField
             type="number"
             control={control}
             path={name}
             whiteBackground
             className="mb-0"
-            inputClassName="!w-32"
+            inputClassName="!w-32 py-1"
+            suffix={suffix}
+          />
+          <Button
+            iconId="ri-check-line"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+            priority="tertiary no outline"
+            title="Valider la valeur"
+            className="text-dsfr-text-default-success"
+            size="small"
           />
           <Button
             iconId="fr-icon-close-line"
             onClick={handleClear}
             priority="tertiary no outline"
             title="Réinitialiser la valeur"
-            className="!px-2"
+            className="!px-2 text-pfmv-climadiag-red"
+            size="small"
           />
         </div>
       ) : (
@@ -62,6 +76,7 @@ export default function EditablePriceField<T extends FieldValues>({
             priority="tertiary no outline"
             title="Modifier la valeur"
             className="!px-2"
+            size="small"
           />
         </div>
       )}
