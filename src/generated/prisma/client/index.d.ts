@@ -21363,6 +21363,8 @@ export namespace Prisma {
     cout_max_investissement: number | null
     cout_min_entretien: number | null
     cout_max_entretien: number | null
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
   }
 
   export type Estimation_fiche_solutionSumAggregateOutputType = {
@@ -21373,6 +21375,8 @@ export namespace Prisma {
     cout_max_investissement: number | null
     cout_min_entretien: number | null
     cout_max_entretien: number | null
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
   }
 
   export type Estimation_fiche_solutionMinAggregateOutputType = {
@@ -21384,6 +21388,8 @@ export namespace Prisma {
     cout_max_investissement: number | null
     cout_min_entretien: number | null
     cout_max_entretien: number | null
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
   }
 
   export type Estimation_fiche_solutionMaxAggregateOutputType = {
@@ -21395,6 +21401,8 @@ export namespace Prisma {
     cout_max_investissement: number | null
     cout_min_entretien: number | null
     cout_max_entretien: number | null
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
   }
 
   export type Estimation_fiche_solutionCountAggregateOutputType = {
@@ -21406,6 +21414,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override: number
+    cout_entretien_override: number
     _all: number
   }
 
@@ -21418,6 +21428,8 @@ export namespace Prisma {
     cout_max_investissement?: true
     cout_min_entretien?: true
     cout_max_entretien?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
   }
 
   export type Estimation_fiche_solutionSumAggregateInputType = {
@@ -21428,6 +21440,8 @@ export namespace Prisma {
     cout_max_investissement?: true
     cout_min_entretien?: true
     cout_max_entretien?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
   }
 
   export type Estimation_fiche_solutionMinAggregateInputType = {
@@ -21439,6 +21453,8 @@ export namespace Prisma {
     cout_max_investissement?: true
     cout_min_entretien?: true
     cout_max_entretien?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
   }
 
   export type Estimation_fiche_solutionMaxAggregateInputType = {
@@ -21450,6 +21466,8 @@ export namespace Prisma {
     cout_max_investissement?: true
     cout_min_entretien?: true
     cout_max_entretien?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
   }
 
   export type Estimation_fiche_solutionCountAggregateInputType = {
@@ -21461,6 +21479,8 @@ export namespace Prisma {
     cout_max_investissement?: true
     cout_min_entretien?: true
     cout_max_entretien?: true
+    cout_investissement_override?: true
+    cout_entretien_override?: true
     _all?: true
   }
 
@@ -21559,6 +21579,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override: number | null
+    cout_entretien_override: number | null
     _count: Estimation_fiche_solutionCountAggregateOutputType | null
     _avg: Estimation_fiche_solutionAvgAggregateOutputType | null
     _sum: Estimation_fiche_solutionSumAggregateOutputType | null
@@ -21589,6 +21611,8 @@ export namespace Prisma {
     cout_max_investissement?: boolean
     cout_min_entretien?: boolean
     cout_max_entretien?: boolean
+    cout_investissement_override?: boolean
+    cout_entretien_override?: boolean
     estimation?: boolean | estimationDefaultArgs<ExtArgs>
     estimation_materiaux?: boolean | estimation_fiche_solution$estimation_materiauxArgs<ExtArgs>
     _count?: boolean | Estimation_fiche_solutionCountOutputTypeDefaultArgs<ExtArgs>
@@ -21603,6 +21627,8 @@ export namespace Prisma {
     cout_max_investissement?: boolean
     cout_min_entretien?: boolean
     cout_max_entretien?: boolean
+    cout_investissement_override?: boolean
+    cout_entretien_override?: boolean
     estimation?: boolean | estimationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["estimation_fiche_solution"]>
 
@@ -21615,6 +21641,8 @@ export namespace Prisma {
     cout_max_investissement?: boolean
     cout_min_entretien?: boolean
     cout_max_entretien?: boolean
+    cout_investissement_override?: boolean
+    cout_entretien_override?: boolean
     estimation?: boolean | estimationDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["estimation_fiche_solution"]>
 
@@ -21627,9 +21655,11 @@ export namespace Prisma {
     cout_max_investissement?: boolean
     cout_min_entretien?: boolean
     cout_max_entretien?: boolean
+    cout_investissement_override?: boolean
+    cout_entretien_override?: boolean
   }
 
-  export type estimation_fiche_solutionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "estimation_id" | "fiche_solution_id" | "quantite" | "cout_min_investissement" | "cout_max_investissement" | "cout_min_entretien" | "cout_max_entretien", ExtArgs["result"]["estimation_fiche_solution"]>
+  export type estimation_fiche_solutionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "estimation_id" | "fiche_solution_id" | "quantite" | "cout_min_investissement" | "cout_max_investissement" | "cout_min_entretien" | "cout_max_entretien" | "cout_investissement_override" | "cout_entretien_override", ExtArgs["result"]["estimation_fiche_solution"]>
   export type estimation_fiche_solutionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     estimation?: boolean | estimationDefaultArgs<ExtArgs>
     estimation_materiaux?: boolean | estimation_fiche_solution$estimation_materiauxArgs<ExtArgs>
@@ -21657,6 +21687,8 @@ export namespace Prisma {
       cout_max_investissement: number
       cout_min_entretien: number
       cout_max_entretien: number
+      cout_investissement_override: number | null
+      cout_entretien_override: number | null
     }, ExtArgs["result"]["estimation_fiche_solution"]>
     composites: {}
   }
@@ -22090,6 +22122,8 @@ export namespace Prisma {
     readonly cout_max_investissement: FieldRef<"estimation_fiche_solution", 'Int'>
     readonly cout_min_entretien: FieldRef<"estimation_fiche_solution", 'Int'>
     readonly cout_max_entretien: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly cout_investissement_override: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly cout_entretien_override: FieldRef<"estimation_fiche_solution", 'Int'>
   }
     
 
@@ -27054,7 +27088,9 @@ export namespace Prisma {
     cout_min_investissement: 'cout_min_investissement',
     cout_max_investissement: 'cout_max_investissement',
     cout_min_entretien: 'cout_min_entretien',
-    cout_max_entretien: 'cout_max_entretien'
+    cout_max_entretien: 'cout_max_entretien',
+    cout_investissement_override: 'cout_investissement_override',
+    cout_entretien_override: 'cout_entretien_override'
   };
 
   export type Estimation_fiche_solutionScalarFieldEnum = (typeof Estimation_fiche_solutionScalarFieldEnum)[keyof typeof Estimation_fiche_solutionScalarFieldEnum]
@@ -28937,6 +28973,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
     cout_min_entretien?: IntFilter<"estimation_fiche_solution"> | number
     cout_max_entretien?: IntFilter<"estimation_fiche_solution"> | number
+    cout_investissement_override?: IntNullableFilter<"estimation_fiche_solution"> | number | null
+    cout_entretien_override?: IntNullableFilter<"estimation_fiche_solution"> | number | null
     estimation?: XOR<EstimationScalarRelationFilter, estimationWhereInput>
     estimation_materiaux?: Estimation_materiauxListRelationFilter
   }
@@ -28950,6 +28988,8 @@ export namespace Prisma {
     cout_max_investissement?: SortOrder
     cout_min_entretien?: SortOrder
     cout_max_entretien?: SortOrder
+    cout_investissement_override?: SortOrderInput | SortOrder
+    cout_entretien_override?: SortOrderInput | SortOrder
     estimation?: estimationOrderByWithRelationInput
     estimation_materiaux?: estimation_materiauxOrderByRelationAggregateInput
     _relevance?: estimation_fiche_solutionOrderByRelevanceInput
@@ -28968,6 +29008,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
     cout_min_entretien?: IntFilter<"estimation_fiche_solution"> | number
     cout_max_entretien?: IntFilter<"estimation_fiche_solution"> | number
+    cout_investissement_override?: IntNullableFilter<"estimation_fiche_solution"> | number | null
+    cout_entretien_override?: IntNullableFilter<"estimation_fiche_solution"> | number | null
     estimation?: XOR<EstimationScalarRelationFilter, estimationWhereInput>
     estimation_materiaux?: Estimation_materiauxListRelationFilter
   }, "id" | "estimation_id_fiche_solution_id">
@@ -28981,6 +29023,8 @@ export namespace Prisma {
     cout_max_investissement?: SortOrder
     cout_min_entretien?: SortOrder
     cout_max_entretien?: SortOrder
+    cout_investissement_override?: SortOrderInput | SortOrder
+    cout_entretien_override?: SortOrderInput | SortOrder
     _count?: estimation_fiche_solutionCountOrderByAggregateInput
     _avg?: estimation_fiche_solutionAvgOrderByAggregateInput
     _max?: estimation_fiche_solutionMaxOrderByAggregateInput
@@ -29000,6 +29044,8 @@ export namespace Prisma {
     cout_max_investissement?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
     cout_min_entretien?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
     cout_max_entretien?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
+    cout_investissement_override?: IntNullableWithAggregatesFilter<"estimation_fiche_solution"> | number | null
+    cout_entretien_override?: IntNullableWithAggregatesFilter<"estimation_fiche_solution"> | number | null
   }
 
   export type conversationWhereInput = {
@@ -30663,6 +30709,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
     estimation: estimationCreateNestedOneWithoutEstimations_fiches_solutionsInput
     estimation_materiaux?: estimation_materiauxCreateNestedManyWithoutEstimation_fiche_solutionInput
   }
@@ -30676,6 +30724,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
     estimation_materiaux?: estimation_materiauxUncheckedCreateNestedManyWithoutEstimation_fiche_solutionInput
   }
 
@@ -30687,6 +30737,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
     estimation?: estimationUpdateOneRequiredWithoutEstimations_fiches_solutionsNestedInput
     estimation_materiaux?: estimation_materiauxUpdateManyWithoutEstimation_fiche_solutionNestedInput
   }
@@ -30700,6 +30752,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
     estimation_materiaux?: estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionNestedInput
   }
 
@@ -30712,6 +30766,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
   }
 
   export type estimation_fiche_solutionUpdateManyMutationInput = {
@@ -30722,6 +30778,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type estimation_fiche_solutionUncheckedUpdateManyInput = {
@@ -30733,6 +30791,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type conversationCreateInput = {
@@ -32515,6 +32575,8 @@ export namespace Prisma {
     cout_max_investissement?: SortOrder
     cout_min_entretien?: SortOrder
     cout_max_entretien?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
   }
 
   export type estimation_fiche_solutionAvgOrderByAggregateInput = {
@@ -32525,6 +32587,8 @@ export namespace Prisma {
     cout_max_investissement?: SortOrder
     cout_min_entretien?: SortOrder
     cout_max_entretien?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
   }
 
   export type estimation_fiche_solutionMaxOrderByAggregateInput = {
@@ -32536,6 +32600,8 @@ export namespace Prisma {
     cout_max_investissement?: SortOrder
     cout_min_entretien?: SortOrder
     cout_max_entretien?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
   }
 
   export type estimation_fiche_solutionMinOrderByAggregateInput = {
@@ -32547,6 +32613,8 @@ export namespace Prisma {
     cout_max_investissement?: SortOrder
     cout_min_entretien?: SortOrder
     cout_max_entretien?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
   }
 
   export type estimation_fiche_solutionSumOrderByAggregateInput = {
@@ -32557,6 +32625,8 @@ export namespace Prisma {
     cout_max_investissement?: SortOrder
     cout_min_entretien?: SortOrder
     cout_max_entretien?: SortOrder
+    cout_investissement_override?: SortOrder
+    cout_entretien_override?: SortOrder
   }
 
   export type conversationOrderByRelevanceInput = {
@@ -39088,6 +39158,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
     estimation_materiaux?: estimation_materiauxCreateNestedManyWithoutEstimation_fiche_solutionInput
   }
 
@@ -39099,6 +39171,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
     estimation_materiaux?: estimation_materiauxUncheckedCreateNestedManyWithoutEstimation_fiche_solutionInput
   }
 
@@ -39395,6 +39469,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
     cout_min_entretien?: IntFilter<"estimation_fiche_solution"> | number
     cout_max_entretien?: IntFilter<"estimation_fiche_solution"> | number
+    cout_investissement_override?: IntNullableFilter<"estimation_fiche_solution"> | number | null
+    cout_entretien_override?: IntNullableFilter<"estimation_fiche_solution"> | number | null
   }
 
   export type estimations_aidesCreateWithoutAideInput = {
@@ -39727,6 +39803,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
     estimation: estimationCreateNestedOneWithoutEstimations_fiches_solutionsInput
   }
 
@@ -39739,6 +39817,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
   }
 
   export type estimation_fiche_solutionCreateOrConnectWithoutEstimation_materiauxInput = {
@@ -39765,6 +39845,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
     estimation?: estimationUpdateOneRequiredWithoutEstimations_fiches_solutionsNestedInput
   }
 
@@ -39777,6 +39859,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type estimationCreateWithoutEstimations_fiches_solutionsInput = {
@@ -41734,6 +41818,8 @@ export namespace Prisma {
     cout_max_investissement: number
     cout_min_entretien: number
     cout_max_entretien: number
+    cout_investissement_override?: number | null
+    cout_entretien_override?: number | null
   }
 
   export type estimations_aidesUpdateWithoutEstimationInput = {
@@ -41765,6 +41851,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
     estimation_materiaux?: estimation_materiauxUpdateManyWithoutEstimation_fiche_solutionNestedInput
   }
 
@@ -41776,6 +41864,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
     estimation_materiaux?: estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionNestedInput
   }
 
@@ -41787,6 +41877,8 @@ export namespace Prisma {
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
     cout_min_entretien?: IntFieldUpdateOperationsInput | number
     cout_max_entretien?: IntFieldUpdateOperationsInput | number
+    cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
+    cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type estimations_aidesCreateManyAideInput = {

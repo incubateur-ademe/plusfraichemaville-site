@@ -3,8 +3,6 @@
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useMemo } from "react";
 import { getLastCompletedEstimation } from "@/src/helpers/estimation";
-import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
-import { computeGlobalFicheSolutionPrice } from "@/src/helpers/cout/cout-materiau";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 
@@ -20,7 +18,6 @@ export const TableauDeBordSuiviWithEstimation = () => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice(
     lastCompletedEstimation.estimations_fiches_solutions,
   );
-
 
   return (
     <div className="mt-auto flex flex-row justify-between text-sm">

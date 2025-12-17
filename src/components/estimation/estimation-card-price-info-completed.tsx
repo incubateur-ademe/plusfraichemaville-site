@@ -1,23 +1,12 @@
 "use client";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
-import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
-import { computePriceEstimationFicheSolution } from "@/src/helpers/estimation";
-import { useMemo } from "react";
+import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 
 export const EstimationCardPriceInfoCompleted = ({ estimationInfo }: { estimationInfo: EstimationFicheSolution }) => {
-  const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(estimationInfo.fiche_solution_id),
-  );
-
-  const ficheSolution = data && data[0];
-
-  const globalPrice = useMemo(
-    () => ficheSolution && computePriceEstimationFicheSolution(ficheSolution, estimationInfo.estimation_materiaux),
-    [ficheSolution, estimationInfo.estimation_materiaux],
-  );
+  const { fournitureMin, fournitureMax, entretienMin, entretienMax, isLoading } = useEstimationFSGlobalPrice([
+    estimationInfo,
+  ]);
 
   return (
     <div className="text-sm">
@@ -29,15 +18,11 @@ export const EstimationCardPriceInfoCompleted = ({ estimationInfo }: { estimatio
       ) : (
         <>
           <div>
-            <strong>{`${formatNumberWithSpaces(globalPrice?.fourniture.min)} - ${formatNumberWithSpaces(
-              globalPrice?.fourniture.max,
-            )} € `}</strong>
+            <strong>{`${formatNumberWithSpaces(fournitureMin)} - ${formatNumberWithSpaces(fournitureMax)} € `}</strong>
             HT
           </div>
           <div className="text-dsfr-text-mention-grey">
-            {`${formatNumberWithSpaces(globalPrice?.entretien.min)} - ${formatNumberWithSpaces(
-              globalPrice?.entretien.max,
-            )} € HT / an`}
+            {`${formatNumberWithSpaces(entretienMin)} - ${formatNumberWithSpaces(entretienMax)} € HT / an`}
           </div>
         </>
       )}

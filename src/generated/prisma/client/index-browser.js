@@ -320,7 +320,9 @@ exports.Prisma.Estimation_fiche_solutionScalarFieldEnum = {
   cout_min_investissement: 'cout_min_investissement',
   cout_max_investissement: 'cout_max_investissement',
   cout_min_entretien: 'cout_min_entretien',
-  cout_max_entretien: 'cout_max_entretien'
+  cout_max_entretien: 'cout_max_entretien',
+  cout_investissement_override: 'cout_investissement_override',
+  cout_entretien_override: 'cout_entretien_override'
 };
 
 exports.Prisma.ConversationScalarFieldEnum = {

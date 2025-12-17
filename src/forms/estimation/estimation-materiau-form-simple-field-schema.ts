@@ -21,5 +21,7 @@ export const EstimationMateriauxFormSimpleFieldSchema = z.object({
   quantite: z
     .number({ invalid_type_error: "Veuillez rentrer une valeur pour la quantité." })
     .nonnegative({ message: "Veuillez rentrer une valeur cohérente pour la quantité." }),
+  coutInvestissementOverride: z.number().nonnegative().optional(),
+  coutEntretienOverride: z.number().nonnegative().optional(),
 });
 export type EstimationMateriauxSimpleFieldFormData = z.infer<typeof EstimationMateriauxFormSimpleFieldSchema>;

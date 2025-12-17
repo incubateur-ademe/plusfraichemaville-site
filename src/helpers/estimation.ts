@@ -1,4 +1,9 @@
-import { EstimationFicheSolution, EstimationMateriau, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import {
+  EstimationFicheSolution,
+  EstimationMateriau,
+  EstimationWithAides,
+  SimpleEstimationFicheSolution,
+} from "@/src/lib/prisma/prismaCustomTypes";
 import orderBy from "lodash/orderBy";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { isEmpty } from "@/src/helpers/listUtils";
@@ -20,6 +25,23 @@ export const getLastCompletedEstimation = (estimations: EstimationWithAides[] | 
 
 const isFicheSolutionEstimated = (estimationFicheSolution: EstimationFicheSolution) =>
   estimationFicheSolution.quantite != null || !isEmpty(estimationFicheSolution.estimation_materiaux);
+
+export const computePriceEstimationSimpleFicheSolution = (
+  ficheSolution: FicheSolution,
+  estimation: SimpleEstimationFicheSolution,
+) => {
+  const quantite = estimation.quantite || 0;
+  return {
+    entretien: {
+      min: estimation.cout_entretien_override ?? quantite * (ficheSolution.attributes.cout_minimum_entretien || 0),
+      max: estimation.cout_entretien_override ?? quantite * (ficheSolution.attributes.cout_maximum_entretien || 0),
+    },
+    fourniture: {
+      min: estimation.cout_investissement_override ?? quantite * (ficheSolution.attributes.cout_minimum || 0),
+      max: estimation.cout_investissement_override ?? quantite * (ficheSolution.attributes.cout_maximum || 0),
+    },
+  };
+};
 
 export const computePriceEstimationFicheSolution = (
   ficheSolution: FicheSolution,

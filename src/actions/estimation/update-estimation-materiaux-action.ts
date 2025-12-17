@@ -15,6 +15,7 @@ import {
   EstimationMateriauxSimpleFieldFormData,
 } from "@/src/forms/estimation/estimation-materiau-form-simple-field-schema";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { mapEstimationMateriauFormToDb } from "@/src/lib/prisma/prismaCustomTypesHelper";
 
 export const updateEstimationMateriauxAction = async (
   estimationId: number,
@@ -46,17 +47,14 @@ export const updateEstimationMateriauxAction = async (
       const updatedEstimation = await updateEstimationMateriaux(estimationId, {
         fiche_solution_id: data.ficheSolutionId,
         quantite: isMultipleFieldsFormData ? null : data.quantite,
+        cout_investissement_override: isMultipleFieldsFormData ? null : data.coutInvestissementOverride || null,
+        cout_entretien_override: isMultipleFieldsFormData ? null : data.coutEntretienOverride || null,
         cout_min_investissement: data.globalPrice?.fourniture?.min || 0,
         cout_max_investissement: data.globalPrice?.fourniture?.max || 0,
         cout_min_entretien: data.globalPrice?.entretien?.min || 0,
         cout_max_entretien: data.globalPrice?.entretien?.max || 0,
         estimation_materiaux: isMultipleFieldsFormData
-          ? data.estimationMateriaux.map((m) => ({
-              quantite: m.quantite,
-              materiau_id: m.materiauId,
-              cout_investissement_override: m.coutInvestissementOverride || null,
-              cout_entretien_override: m.coutEntretienOverride || null,
-            }))
+          ? data.estimationMateriaux.map(mapEstimationMateriauFormToDb)
           : [],
       });
       return { type: "success", updatedEstimation };

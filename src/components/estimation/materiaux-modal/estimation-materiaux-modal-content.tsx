@@ -8,8 +8,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { upsert } from "@/src/helpers/listUtils";
 import { EstimationMateriauxValidation } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-validation";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
-import { UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
+import { isSimpleMateriauFicheSolution, makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
 import EstimationMateriauSimpleFieldForm from "@/src/forms/estimation/estimation-materiau-form-simple-field";
 import { estimationModal } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
@@ -89,7 +88,6 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     }
   };
 
-  const isSimpleForm = currentFicheSolution?.attributes.cout_unite === UNITE_COUT_MEGAWATTHEURE.code;
 
   return (
     <>
@@ -102,7 +100,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
       />
       {currentFicheSolution && (
         <>
-          {isSimpleForm ? (
+          {isSimpleMateriauFicheSolution(currentFicheSolution) ? (
             <>
               <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.attributes.titre}`}</div>
               <EstimationMateriauSimpleFieldForm

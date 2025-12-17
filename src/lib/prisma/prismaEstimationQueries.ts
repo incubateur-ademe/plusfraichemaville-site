@@ -2,7 +2,6 @@ import { generateRandomId } from "@/src/helpers/common";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { EstimationFicheSolution, EstimationMateriau, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { projetUpdated } from "./prismaProjetQueries";
-import { estimation_materiaux } from "@/src/generated/prisma/client";
 
 export const getEstimationById = async (estimationId: number): Promise<EstimationWithAides | null> => {
   return prismaClient.estimation.findUnique({
@@ -75,6 +74,8 @@ export const updateEstimationMateriaux = async (
     | "cout_max_entretien"
     | "cout_min_investissement"
     | "cout_max_investissement"
+    | "cout_investissement_override"
+    | "cout_entretien_override"
   > & {
     estimation_materiaux: Array<EstimationMateriau>;
   },
@@ -93,6 +94,8 @@ export const updateEstimationMateriaux = async (
         cout_max_entretien: estimationFicheSolution.cout_max_entretien,
         cout_min_investissement: estimationFicheSolution.cout_min_investissement,
         cout_max_investissement: estimationFicheSolution.cout_max_investissement,
+        cout_investissement_override: estimationFicheSolution.cout_investissement_override,
+        cout_entretien_override: estimationFicheSolution.cout_entretien_override,
         estimation_materiaux: { deleteMany: {} },
       },
       create: {
@@ -103,6 +106,8 @@ export const updateEstimationMateriaux = async (
         cout_max_entretien: estimationFicheSolution.cout_max_entretien,
         cout_min_investissement: estimationFicheSolution.cout_min_investissement,
         cout_max_investissement: estimationFicheSolution.cout_max_investissement,
+        cout_investissement_override: estimationFicheSolution.cout_investissement_override,
+        cout_entretien_override: estimationFicheSolution.cout_entretien_override,
       },
     });
     for (const m of estimationFicheSolution.estimation_materiaux ?? []) {

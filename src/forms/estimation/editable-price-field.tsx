@@ -49,16 +49,6 @@ export default function EditablePriceField<T extends FieldValues>({
             suffix={suffix}
           />
           <Button
-            iconId="ri-check-line"
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-            priority="tertiary no outline"
-            title="Valider la valeur"
-            className="text-dsfr-text-default-success"
-            size="small"
-          />
-          <Button
             iconId="fr-icon-close-line"
             onClick={handleClear}
             priority="tertiary no outline"

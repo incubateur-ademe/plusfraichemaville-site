@@ -346,16 +346,18 @@ model estimation_materiaux {
 }
 
 model estimation_fiche_solution {
-  id                      String                 @id @default(cuid())
-  estimation              estimation             @relation(fields: [estimation_id], references: [id])
-  estimation_id           Int
-  fiche_solution_id       Int
-  quantite                Int?
-  cout_min_investissement Int
-  cout_max_investissement Int
-  cout_min_entretien      Int
-  cout_max_entretien      Int
-  estimation_materiaux    estimation_materiaux[]
+  id                           String                 @id @default(cuid())
+  estimation                   estimation             @relation(fields: [estimation_id], references: [id])
+  estimation_id                Int
+  fiche_solution_id            Int
+  quantite                     Int?
+  cout_min_investissement      Int
+  cout_max_investissement      Int
+  cout_min_entretien           Int
+  cout_max_entretien           Int
+  cout_investissement_override Int?
+  cout_entretien_override      Int?
+  estimation_materiaux         estimation_materiaux[]
 
   @@unique([estimation_id, fiche_solution_id])
 }

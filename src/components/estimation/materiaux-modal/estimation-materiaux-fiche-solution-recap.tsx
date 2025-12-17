@@ -1,13 +1,13 @@
 import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-import { computePriceEstimationFicheSolution } from "@/src/helpers/estimation";
+import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   ficheSolutionEstimation: EstimationFicheSolution;
@@ -21,6 +21,9 @@ export function EstimationMateriauxFicheSolutionRecap({
   const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(
     makeFicheSolutionCompleteUrlApi(ficheSolutionEstimation.fiche_solution_id),
   );
+  const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice([
+    ficheSolutionEstimation,
+  ]);
 
   const getQuantiteByMateriauId = useCallback(
     (materiauId: number): number =>
@@ -34,12 +37,6 @@ export function EstimationMateriauxFicheSolutionRecap({
   }
 
   const ficheSolution = data[0];
-
-  const globalPrice = useMemo(
-    () =>
-      ficheSolution && computePriceEstimationFicheSolution(ficheSolution, ficheSolutionEstimation.estimation_materiaux),
-    [ficheSolution, ficheSolutionEstimation.estimation_materiaux],
-  );
 
   if (!ficheSolution || !ficheSolution.attributes.materiaux || ficheSolution.attributes.materiaux.data.length === 0) {
     return null;
@@ -99,8 +96,8 @@ export function EstimationMateriauxFicheSolutionRecap({
           <div className="font-bold">Total Investissement</div>
           <div>
             <strong>
-              {`${formatNumberWithSpaces(globalPrice?.fourniture.min)}
-                   - ${formatNumberWithSpaces(globalPrice?.fourniture.max)} € `}
+              {`${formatNumberWithSpaces(fournitureMin)}
+                   - ${formatNumberWithSpaces(fournitureMax)} € `}
             </strong>
             HT
           </div>
@@ -108,11 +105,7 @@ export function EstimationMateriauxFicheSolutionRecap({
         <div className="flex flex-row justify-between text-dsfr-text-mention-grey">
           <div className="font-bold">Total Entretien</div>
           <div className="text-sm">
-            <strong>
-              {`${formatNumberWithSpaces(globalPrice?.entretien.min)} - ${formatNumberWithSpaces(
-                globalPrice?.entretien.max,
-              )} € `}
-            </strong>
+            <strong>{`${formatNumberWithSpaces(entretienMin)} - ${formatNumberWithSpaces(entretienMax)} € `}</strong>
             HT / an
           </div>
         </div>
