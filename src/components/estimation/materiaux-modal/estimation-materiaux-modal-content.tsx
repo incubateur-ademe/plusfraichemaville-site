@@ -88,7 +88,6 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     }
   };
 
-
   return (
     <>
       <Stepper
