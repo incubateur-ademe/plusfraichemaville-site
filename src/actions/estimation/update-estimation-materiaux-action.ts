@@ -47,8 +47,8 @@ export const updateEstimationMateriauxAction = async (
       const updatedEstimation = await updateEstimationMateriaux(estimationId, {
         fiche_solution_id: data.ficheSolutionId,
         quantite: isMultipleFieldsFormData ? null : data.quantite,
-        cout_investissement_override: isMultipleFieldsFormData ? null : data.coutInvestissementOverride || null,
-        cout_entretien_override: isMultipleFieldsFormData ? null : data.coutEntretienOverride || null,
+        cout_investissement_override: isMultipleFieldsFormData ? null : data.coutInvestissementOverride ?? null,
+        cout_entretien_override: isMultipleFieldsFormData ? null : data.coutEntretienOverride ?? null,
         cout_min_investissement: data.globalPrice?.fourniture?.min || 0,
         cout_max_investissement: data.globalPrice?.fourniture?.max || 0,
         cout_min_entretien: data.globalPrice?.entretien?.min || 0,

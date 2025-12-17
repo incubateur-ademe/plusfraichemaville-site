@@ -29,8 +29,8 @@ export const mapStrapiEstimationMateriauxToFormValues = (
     return {
       materiauId: +materiau.id,
       quantite: existingEstimation?.quantite || 0,
-      coutInvestissementOverride: existingEstimation?.cout_investissement_override || undefined,
-      coutEntretienOverride: existingEstimation?.cout_entretien_override || undefined,
+      coutInvestissementOverride: existingEstimation?.cout_investissement_override ?? undefined,
+      coutEntretienOverride: existingEstimation?.cout_entretien_override ?? undefined,
     };
   });
 };
@@ -38,8 +38,8 @@ export const mapStrapiEstimationMateriauxToFormValues = (
 export const mapEstimationMateriauFormToDb = (estimationMateriauForm: EstimationMateriauForm): EstimationMateriau => ({
   quantite: estimationMateriauForm.quantite,
   materiau_id: estimationMateriauForm.materiauId,
-  cout_investissement_override: estimationMateriauForm.coutInvestissementOverride || null,
-  cout_entretien_override: estimationMateriauForm.coutEntretienOverride || null,
+  cout_investissement_override: estimationMateriauForm.coutInvestissementOverride ?? null,
+  cout_entretien_override: estimationMateriauForm.coutEntretienOverride ?? null,
 });
 
 export const mapEstimationSimpleFicheSolutionFormToDb = (

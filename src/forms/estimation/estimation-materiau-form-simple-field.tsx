@@ -49,7 +49,7 @@ export default function EstimationMateriauSimpleFieldForm({
       coutEntretienOverride: estimationMateriaux?.cout_entretien_override || undefined,
       quantite: estimationMateriaux?.quantite || 0,
     }),
-    [estimationMateriaux?.quantite, ficheSolution.id],
+    [estimationMateriaux, ficheSolution.id],
   );
   const form = useForm<EstimationMateriauxSimpleFieldFormData>({
     resolver: zodResolver(EstimationMateriauxFormSimpleFieldSchema),
@@ -98,7 +98,7 @@ export default function EstimationMateriauSimpleFieldForm({
         id={`estimation-fiche-solution-${ficheSolution.id}-form`}
         onSubmit={form.handleSubmit((data) => onSubmit(data))}
       >
-        <EstimationMateriauFieldUnique ficheSolutionAttributes={ficheSolution.attributes}>
+        <EstimationMateriauFieldUnique ficheSolutionAttributes={ficheSolution.attributes} key={ficheSolution.id}>
           <InputFormField
             label={getUniteCoutFromCode(ficheSolution.attributes.cout_unite).estimationLabel}
             type="number"
