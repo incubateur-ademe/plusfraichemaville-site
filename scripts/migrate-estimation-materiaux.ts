@@ -31,23 +31,28 @@ async function migrateEstimationMateriaux() {
         const createdEfs = await tx.estimation_fiche_solution.create({
           data: {
             estimation_id: estimation.id,
+            // @ts-expect-error old EstimationFicheSolution format
             fiche_solution_id: em.ficheSolutionId,
+            // @ts-expect-error old EstimationFicheSolution format
             cout_min_investissement: em.coutMinInvestissement,
+            // @ts-expect-error old EstimationFicheSolution format
             cout_max_investissement: em.coutMaxInvestissement,
+            // @ts-expect-error old EstimationFicheSolution format
             cout_min_entretien: em.coutMinEntretien,
+            // @ts-expect-error old EstimationFicheSolution format
             cout_max_entretien: em.coutMaxEntretien,
             quantite: em.quantite,
           },
         });
 
+        // @ts-expect-error old EstimationFicheSolution format
         if (em.estimationMateriaux && em.estimationMateriaux.length > 0) {
           await tx.estimation_materiaux.createMany({
+            // @ts-expect-error old EstimationFicheSolution format
             data: em.estimationMateriaux.map((m) => ({
               estimation_fiche_solution_id: createdEfs.id,
               materiau_id: +m.materiauId,
               quantite: m.quantite,
-              cout_investissement_override: m.coutInvestissementOverride ?? null,
-              cout_entretien_override: m.coutEntretienOverride ?? null,
             })),
           });
         }
