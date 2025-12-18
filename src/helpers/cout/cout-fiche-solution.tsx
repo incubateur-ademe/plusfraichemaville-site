@@ -75,21 +75,32 @@ export const getLabelCoutEntretien = (ficheSolutionAttributes: FicheSolution["at
 export const getLabelCoutFournitureByQuantite = (
   ficheSolutionAttributes: FicheSolution["attributes"],
   quantite: number,
-) =>
-  ficheSolutionAttributes.cout_minimum != null && ficheSolutionAttributes.cout_maximum != null && quantite
-    ? `${formatNumberWithSpaces(ficheSolutionAttributes.cout_minimum * quantite)} - ${formatNumberWithSpaces(
-        ficheSolutionAttributes.cout_maximum * quantite,
-      )} €`
-    : "0 €";
+) => {
+  if (ficheSolutionAttributes.cout_minimum == null || ficheSolutionAttributes.cout_maximum == null) {
+    return "Coût non disponible";
+  } else {
+    return quantite
+      ? `${formatNumberWithSpaces(ficheSolutionAttributes.cout_minimum * quantite)} - ${formatNumberWithSpaces(
+          ficheSolutionAttributes.cout_maximum * quantite,
+        )} €`
+      : "0 €";
+  }
+};
 
 export const getLabelCoutEntretienByQuantite = (
   ficheSolutionAttributes: FicheSolution["attributes"],
   quantite: number,
-) =>
-  ficheSolutionAttributes.cout_minimum_entretien != null &&
-  ficheSolutionAttributes.cout_maximum_entretien != null &&
-  quantite
-    ? `${formatNumberWithSpaces(ficheSolutionAttributes.cout_minimum_entretien * quantite)} - ${formatNumberWithSpaces(
-        ficheSolutionAttributes.cout_maximum_entretien * quantite,
-      )} € / an`
-    : "0 € / an";
+) => {
+  if (
+    ficheSolutionAttributes.cout_minimum_entretien == null ||
+    ficheSolutionAttributes.cout_maximum_entretien == null
+  ) {
+    return "Coût non disponible";
+  } else {
+    return quantite
+      ? `${formatNumberWithSpaces(
+          ficheSolutionAttributes.cout_maximum_entretien * quantite,
+        )} - ${formatNumberWithSpaces(ficheSolutionAttributes.cout_maximum_entretien * quantite)} €`
+      : "0 € / an";
+  }
+};

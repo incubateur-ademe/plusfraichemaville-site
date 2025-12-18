@@ -60,7 +60,7 @@ export default function EditablePriceField<T extends FieldValues>({
           />
         </div>
       ) : (
-        <div className="mb-2 flex items-center gap-2">
+        <div className="mb-2 flex items-center gap-0">
           <div className="font-bold">{calculatedValue}</div>
           <Button
             iconId="fr-icon-edit-line"
