@@ -57,6 +57,7 @@ export default function EditablePriceField<T extends FieldValues>({
             title="Réinitialiser la valeur"
             className="!px-2 text-pfmv-climadiag-red"
             size="small"
+            type="button"
           />
         </div>
       ) : (
@@ -69,6 +70,7 @@ export default function EditablePriceField<T extends FieldValues>({
             title="Modifier la valeur"
             className="!px-2"
             size="small"
+            type="button"
           />
         </div>
       )}

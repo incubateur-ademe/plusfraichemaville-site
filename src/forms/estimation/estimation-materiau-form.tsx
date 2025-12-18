@@ -116,7 +116,10 @@ export default function EstimationMateriauForm({
             onSubmit={form.handleSubmit((data) => onSubmit(data))}
           >
             {fields.map((field, index) => (
-              <EstimationMateriauField materiau={getMateriauFromId(+field.materiauId)} key={field.materiauId}>
+              <EstimationMateriauField
+                materiau={getMateriauFromId(+field.materiauId)}
+                key={`${ficheSolution.id}${field.materiauId}${field.id}`}
+              >
                 <InputFormField
                   label={
                     getUniteCoutFromCode(getMateriauFromId(+field.materiauId)?.attributes.cout_unite).estimationLabel
