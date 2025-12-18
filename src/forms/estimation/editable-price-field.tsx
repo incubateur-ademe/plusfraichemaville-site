@@ -24,7 +24,7 @@ export default function EditablePriceField<T extends FieldValues>({
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
-    if (overrideValue !== undefined && overrideValue !== null) {
+    if (overrideValue !== undefined) {
       setIsEditing(true);
     } else {
       setIsEditing(false);

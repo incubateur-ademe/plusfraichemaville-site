@@ -68,11 +68,14 @@ const CurrencyInputFormField = <T extends FieldValues>({
               onBlur={onBlur}
               value={value ?? ""}
               getInputRef={ref}
-              onFocus={onFocus}
+              onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+                event.target?.select();
+                onFocus(event);
+              }}
               suffix={suffix}
               onValueChange={(values) => {
                 const { value } = values;
-                onChange(+value);
+                onChange(value != null && value != "" ? +value : null);
               }}
               allowNegative={false}
             />
