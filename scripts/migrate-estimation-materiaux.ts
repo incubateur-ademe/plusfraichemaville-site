@@ -10,7 +10,6 @@ async function migrateEstimationMateriaux() {
       materiaux: {
         not: Prisma.DbNull,
       },
-      deleted_at: null,
     },
   });
 
