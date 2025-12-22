@@ -10,6 +10,7 @@ import { isEmpty } from "@/src/helpers/listUtils";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
+import { PublishInformation } from "@/src/components/common/publish-information";
 
 export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
   const { attributes } = ficheDiagnostic;
@@ -40,7 +41,12 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             />
           </div>
           <div>
-            <h1 className="mb-3 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
+            <h1 className="mb-2 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
+            <PublishInformation
+              publishedAt={ficheDiagnostic.attributes?.publishedAt}
+              updatedAt={ficheDiagnostic.attributes?.updatedAt}
+              className="mb-4"
+            />
             <span className="md:text-xl">{attributes.nom_scientifique}</span>
             <div className="mt-4 flex gap-4 uppercase">
               {getEchellesThermiquesByFicheDiagnostic(ficheDiagnostic).map((effet) => (

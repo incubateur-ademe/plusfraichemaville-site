@@ -183,14 +183,14 @@ export async function getRetourExperienceBySlug(slug: string): Promise<RetourExp
 }
 
 export async function getRetoursExperiences(): Promise<RetourExperience[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const filter = new StrapiFilter(true, [], { attribute: "updatedAt", order: "desc" });
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA(filter), { tag: "get-rex" }))
     ?.retourExperiences as APIResponseCollection<RetourExperience>;
   return safeReturnStrapiEntities(apiResponse);
 }
 
 export async function getSearchableRetoursExperiences(): Promise<RetourExperience[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const filter = new StrapiFilter(true, [], { attribute: "updatedAt", order: "desc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_SEARCHABLE_RETOUR_EXPERIENCE_DATA(filter), { tag: "get-searchable-rex" })
   )?.retourExperiences as APIResponseCollection<RetourExperience>;
@@ -198,7 +198,7 @@ export async function getSearchableRetoursExperiences(): Promise<RetourExperienc
 }
 
 export async function getRetoursExperiencesWithContacts(): Promise<RetourExperience[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const filter = new StrapiFilter(true, [], { attribute: "updatedAt", order: "desc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS(filter), { tag: "get-rex-with-contacts" })
   )?.retourExperiences as APIResponseCollection<RetourExperience>;
