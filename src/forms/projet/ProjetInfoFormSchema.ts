@@ -7,7 +7,7 @@ export const ProjetInfoFormSchema = z.object({
   isPublic: z.boolean(),
   nom: z.string().min(1, { message: "Veuillez renseigner le nom du projet" }),
   typeEspace: z.string().min(1, { message: "Veuillez renseigner l'espace sur lequel vous souhaitez agir" }),
-  budget: z.number().min(0, { message: "Le budget ne peut pas être négatif" }).optional(),
+  budget: z.number().min(0, { message: "Le budget ne peut pas être négatif" }).nullish(),
   adresse: z
     .object(
       {

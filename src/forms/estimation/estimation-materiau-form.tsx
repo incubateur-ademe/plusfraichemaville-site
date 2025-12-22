@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from "react";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -10,14 +10,19 @@ import InputFormField from "@/src/components/common/InputFormField";
 import Button from "@codegouvfr/react-dsfr/Button";
 import EstimationMateriauField from "@/src/forms/estimation/estimation-materiau-field";
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
+import EditablePriceField from "@/src/forms/estimation/editable-price-field";
 import { updateEstimationMateriauxAction } from "@/src/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/src/components/common/notifications";
 
-import { mapStrapiEstimationMateriauxToFormValues } from "@/src/lib/prisma/prismaCustomTypesHelper";
+import {
+  mapEstimationMateriauFormToDb,
+  mapStrapiEstimationMateriauxToFormValues,
+} from "@/src/lib/prisma/prismaCustomTypesHelper";
 import { scrollToTop } from "@/src/helpers/common";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { computePriceEstimationFicheSolution } from "@/src/helpers/estimation";
 
 export default function EstimationMateriauForm({
   ficheSolution,
@@ -29,7 +34,7 @@ export default function EstimationMateriauForm({
   onUpdateEstimation,
 }: {
   ficheSolution: FicheSolution;
-  estimationMateriaux?: EstimationMateriauxFicheSolution;
+  estimationMateriaux?: EstimationFicheSolution;
   estimationId: number;
   onNext: () => void;
   onPrevious: () => void;
@@ -89,22 +94,9 @@ export default function EstimationMateriauForm({
   });
 
   const globalPrice = useMemo(() => {
-    return ficheSolution.attributes.materiaux?.data.reduce(
-      (acc, materiauCMS) => {
-        const quantiteMateriau =
-          watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +materiauCMS.id)?.quantite || 0;
-        return {
-          entretien: {
-            min: quantiteMateriau * (materiauCMS.attributes.cout_minimum_entretien || 0) + acc.entretien.min,
-            max: quantiteMateriau * (materiauCMS.attributes.cout_maximum_entretien || 0) + acc.entretien.max,
-          },
-          fourniture: {
-            min: quantiteMateriau * (materiauCMS.attributes.cout_minimum_fourniture || 0) + acc.fourniture.min,
-            max: quantiteMateriau * (materiauCMS.attributes.cout_maximum_fourniture || 0) + acc.fourniture.max,
-          },
-        };
-      },
-      { entretien: { min: 0, max: 0 }, fourniture: { min: 0, max: 0 } },
+    return computePriceEstimationFicheSolution(
+      ficheSolution,
+      watchAllFields.estimationMateriaux.map(mapEstimationMateriauFormToDb),
     );
   }, [ficheSolution, watchAllFields]);
 
@@ -124,7 +116,10 @@ export default function EstimationMateriauForm({
             onSubmit={form.handleSubmit((data) => onSubmit(data))}
           >
             {fields.map((field, index) => (
-              <EstimationMateriauField materiau={getMateriauFromId(+field.materiauId)} key={field.materiauId}>
+              <EstimationMateriauField
+                materiau={getMateriauFromId(+field.materiauId)}
+                key={`${ficheSolution.id}${field.materiauId}${field.id}`}
+              >
                 <InputFormField
                   label={
                     getUniteCoutFromCode(getMateriauFromId(+field.materiauId)?.attributes.cout_unite).estimationLabel
@@ -135,20 +130,27 @@ export default function EstimationMateriauForm({
                   whiteBackground
                   onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => event.target?.select()}
                 />
-                <div>Investissement</div>
-                <div className="mb-2 font-bold">
-                  {getLabelCoutFournitureByQuantite(
+                <EditablePriceField
+                  control={form.control}
+                  setValue={form.setValue}
+                  name={`estimationMateriaux.${index}.coutInvestissementOverride`}
+                  label="Investissement"
+                  calculatedValue={getLabelCoutFournitureByQuantite(
                     getMateriauFromId(+field.materiauId)?.attributes,
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
                   )}
-                </div>
-                <div>Entretien</div>
-                <div className="mb-2 font-bold">
-                  {getLabelCoutEntretienByQuantite(
+                />
+                <EditablePriceField
+                  control={form.control}
+                  setValue={form.setValue}
+                  name={`estimationMateriaux.${index}.coutEntretienOverride`}
+                  label="Entretien"
+                  suffix={" € / an"}
+                  calculatedValue={getLabelCoutEntretienByQuantite(
                     getMateriauFromId(+field.materiauId)?.attributes,
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
                   )}
-                </div>
+                />
               </EstimationMateriauField>
             ))}
             <EstimationMateriauGlobalPriceFooter

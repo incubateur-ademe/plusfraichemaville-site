@@ -24,6 +24,11 @@ export type EstimationWithAides = Prisma.estimationGetPayload<{
         aide: true;
       };
     };
+    estimations_fiches_solutions: {
+      include: {
+        estimation_materiaux: true;
+      };
+    };
   };
 }>;
 
@@ -175,14 +180,27 @@ export type ProjetWithAdminUser = ProjetWithCollectivite & {
   users: ProjectUserAndAdmin[];
 };
 
-export type EstimationMateriauxFicheSolution = {
+export type EstimationFicheSolution = Prisma.estimation_fiche_solutionGetPayload<{ include: { estimation_materiaux } }>;
+export type SimpleEstimationFicheSolution = Prisma.estimation_fiche_solutionGetPayload<{
+  select: { fiche_solution_id; quantite; cout_investissement_override; cout_entretien_override };
+}>;
+
+export type EstimationSimpleFicheSolutionForm = {
   ficheSolutionId: number;
-  estimationMateriaux?: { materiauId: string; quantite: number }[];
-  coutMinInvestissement: number;
-  coutMaxInvestissement: number;
-  coutMinEntretien: number;
-  coutMaxEntretien: number;
-  quantite?: number;
+  quantite: number;
+  coutInvestissementOverride?: number;
+  coutEntretienOverride?: number;
+};
+
+export type EstimationMateriau = Prisma.estimation_materiauxGetPayload<{
+  select: { materiau_id; quantite; cout_investissement_override; cout_entretien_override };
+}>;
+
+export type EstimationMateriauForm = {
+  materiauId: number;
+  quantite: number;
+  coutInvestissementOverride?: number;
+  coutEntretienOverride?: number;
 };
 
 export type AgentConnectInfo = { siret: string };

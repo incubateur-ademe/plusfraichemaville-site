@@ -50,7 +50,7 @@ export const upsertProjetAction = async (
         projetId: data.projetId,
         nomProjet: data.nom,
         typeEspace: data.typeEspace,
-        budget: data.budget,
+        budget: data.budget || undefined,
         adresse: data.adresse?.label || undefined,
         adresse_all_infos: data.adresse?.banInfo || undefined,
         niveauMaturite: data.niveauMaturite,

@@ -1,13 +1,12 @@
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import { EstimationMateriauxFicheSolutionRecap } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-fiche-solution-recap";
-import { useMemo } from "react";
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { notifications } from "@/src/components/common/notifications";
-import { computeGlobalFicheSolutionPrice } from "@/src/helpers/cout/cout-materiau";
+import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 
 type EstimationMateriauxValidationProps = {
-  estimationsFicheSolution: EstimationMateriauxFicheSolution[];
+  estimationsFicheSolution: EstimationFicheSolution[];
   goToFicheSolutionStep: (_: number) => void;
   onClose: () => void;
   onPrevious: () => void;
@@ -19,10 +18,9 @@ export function EstimationMateriauxValidation({
   onClose,
   onPrevious,
 }: EstimationMateriauxValidationProps) {
-  const globalPrice = useMemo(
-    () => computeGlobalFicheSolutionPrice(estimationsFicheSolution),
-    [estimationsFicheSolution],
-  );
+  const { fournitureMin, fournitureMax, entretienMin, entretienMax } =
+    useEstimationFSGlobalPrice(estimationsFicheSolution);
+
   const validateEstimation = () => {
     notifications("success", "ESTIMATION_VALIDATED");
     onClose();
@@ -30,10 +28,10 @@ export function EstimationMateriauxValidation({
 
   return (
     <>
-      {estimationsFicheSolution.map((ficheSolutionEstimation) => (
+      {estimationsFicheSolution.map((efm) => (
         <EstimationMateriauxFicheSolutionRecap
-          key={ficheSolutionEstimation.ficheSolutionId}
-          ficheSolutionEstimation={ficheSolutionEstimation}
+          key={efm.fiche_solution_id}
+          ficheSolutionEstimation={efm}
           goToFicheSolutionStep={goToFicheSolutionStep}
         />
       ))}
@@ -46,10 +44,10 @@ export function EstimationMateriauxValidation({
         Inclut : fourniture et pose (hors travaux complémentaires de voirie, consolidation, etc.)
       </div>
       <EstimationMateriauGlobalPriceFooter
-        investissementMin={globalPrice.fourniture.min}
-        investissementMax={globalPrice.fourniture.max}
-        entretienMin={globalPrice.entretien.min}
-        entretienMax={globalPrice.entretien.max}
+        investissementMin={fournitureMin}
+        investissementMax={fournitureMax}
+        entretienMin={entretienMin}
+        entretienMax={entretienMax}
       />
       <Button className={`mr-4 rounded-3xl`} onClick={validateEstimation}>
         {"Valider l'estimation"}

@@ -1,22 +1,20 @@
 "use client";
 
-import { estimation } from "@/src/generated/prisma/client";
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useEffect, useMemo, useState } from "react";
 import EstimationMateriauForm from "@/src/forms/estimation/estimation-materiau-form";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { upsert } from "@/src/helpers/listUtils";
 import { EstimationMateriauxValidation } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-validation";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
-import { UNITE_COUT_MEGAWATTHEURE } from "@/src/helpers/cout/cout-common";
+import { isSimpleMateriauFicheSolution, makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
 import EstimationMateriauSimpleFieldForm from "@/src/forms/estimation/estimation-materiau-form-simple-field";
 import { estimationModal } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 type EstimationCardDeleteModalProps = {
-  estimation: estimation;
+  estimation: EstimationWithAides;
 };
 
 export function EstimationMateriauModalContent({ estimation }: EstimationCardDeleteModalProps) {
@@ -28,8 +26,6 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
 
   const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
-
-  const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
 
   const { data: currentFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
     estimationStep <= estimation.fiches_solutions_id.length
@@ -60,8 +56,8 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     [nextFicheSolution],
   );
   const currentEstimationMateriaux = useMemo(() => {
-    return estimationMateriaux?.find((em) => em.ficheSolutionId == currentFicheSolution?.id);
-  }, [currentFicheSolution, estimationMateriaux]);
+    return estimation.estimations_fiches_solutions?.find((efm) => efm.fiche_solution_id == currentFicheSolution?.id);
+  }, [estimation, currentFicheSolution]);
 
   const updateEstimationInStore = (estimation: EstimationWithAides) => {
     const currentProject = getCurrentProjet();
@@ -92,8 +88,6 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     }
   };
 
-  const isSimpleForm = currentFicheSolution?.attributes.cout_unite === UNITE_COUT_MEGAWATTHEURE.code;
-
   return (
     <>
       <Stepper
@@ -105,7 +99,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
       />
       {currentFicheSolution && (
         <>
-          {isSimpleForm ? (
+          {isSimpleMateriauFicheSolution(currentFicheSolution) ? (
             <>
               <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.attributes.titre}`}</div>
               <EstimationMateriauSimpleFieldForm
@@ -135,9 +129,9 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
           )}
         </>
       )}
-      {estimationStep === estimation.fiches_solutions_id.length + 1 && estimationMateriaux && (
+      {estimationStep === estimation.fiches_solutions_id.length + 1 && (
         <EstimationMateriauxValidation
-          estimationsFicheSolution={estimationMateriaux}
+          estimationsFicheSolution={estimation.estimations_fiches_solutions}
           goToFicheSolutionStep={goToSpecificFicheSolutionStep}
           onClose={estimationModal.close}
           onPrevious={goToPreviousStep}
