@@ -309,7 +309,9 @@ exports.Prisma.Estimation_materiauxScalarFieldEnum = {
   materiau_id: 'materiau_id',
   quantite: 'quantite',
   cout_investissement_override: 'cout_investissement_override',
-  cout_entretien_override: 'cout_entretien_override'
+  cout_entretien_override: 'cout_entretien_override',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.Estimation_fiche_solutionScalarFieldEnum = {
@@ -322,7 +324,9 @@ exports.Prisma.Estimation_fiche_solutionScalarFieldEnum = {
   cout_min_entretien: 'cout_min_entretien',
   cout_max_entretien: 'cout_max_entretien',
   cout_investissement_override: 'cout_investissement_override',
-  cout_entretien_override: 'cout_entretien_override'
+  cout_entretien_override: 'cout_entretien_override',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.ConversationScalarFieldEnum = {

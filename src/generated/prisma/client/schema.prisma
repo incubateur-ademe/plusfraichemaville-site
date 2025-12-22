@@ -337,12 +337,14 @@ model estimations_aides {
 
 model estimation_materiaux {
   id                           String                    @id @default(cuid())
-  estimation_fiche_solution    estimation_fiche_solution @relation(fields: [estimation_fiche_solution_id], references: [id])
+  estimation_fiche_solution    estimation_fiche_solution @relation(fields: [estimation_fiche_solution_id], references: [id], onDelete: Cascade)
   estimation_fiche_solution_id String
   materiau_id                  Int
   quantite                     Int
   cout_investissement_override Int?
   cout_entretien_override      Int?
+  created_at                   DateTime                  @default(now())
+  updated_at                   DateTime                  @updatedAt
 }
 
 model estimation_fiche_solution {
@@ -358,6 +360,8 @@ model estimation_fiche_solution {
   cout_investissement_override Int?
   cout_entretien_override      Int?
   estimation_materiaux         estimation_materiaux[]
+  created_at                   DateTime               @default(now())
+  updated_at                   DateTime               @updatedAt
 
   @@unique([estimation_id, fiche_solution_id])
 }
