@@ -142,7 +142,7 @@ const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) =>
   }`;
 
 export async function getRetoursExperiencesDiag(): Promise<RetourExperienceDiagnostic[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const filter = new StrapiFilter(true, [], { attribute: "updatedAt", order: "desc" });
   const apiResponse = (await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA(filter), { tag: "get-rex-diag" }))
     ?.retourExperienceDiagnostics as APIResponseCollection<RetourExperienceDiagnostic>;
   return safeReturnStrapiEntities(apiResponse);

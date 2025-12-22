@@ -127,6 +127,8 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
             }
           }
         }
+        updatedAt
+        publishedAt
       }
     }
   }
@@ -151,7 +153,7 @@ export async function getFicheSolutionBySlug(slug: string): Promise<FicheSolutio
 }
 
 export async function getAllFichesSolutions(): Promise<FicheSolution[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const filter = new StrapiFilter(true, [], { attribute: "updatedAt", order: "desc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter), { tag: "get-all-fiches-solution" })
   )?.ficheSolutions as APIResponseCollection<FicheSolution>;
