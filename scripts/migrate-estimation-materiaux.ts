@@ -30,9 +30,9 @@ async function migrateEstimationMateriaux() {
   console.log(`Found ${estimations.length} estimations to migrate.`);
 
   for (const estimation of estimations) {
-    const materiaux = estimation.materiaux as unknown as EstimationMateriauxFicheSolutionJson[];
+    const estimationFichesSolution = estimation.materiaux as unknown as EstimationMateriauxFicheSolutionJson[];
 
-    if (!materiaux || !Array.isArray(materiaux)) {
+    if (!estimationFichesSolution || !Array.isArray(estimationFichesSolution)) {
       console.warn(`Skipping estimation ${estimation.id}: Invalid materiaux format.`);
       continue;
     }
@@ -40,26 +40,26 @@ async function migrateEstimationMateriaux() {
     console.log(`Migrating estimation ${estimation.id}...`);
 
     await prismaClient.$transaction(async (tx) => {
-      tx.estimation_fiche_solution.deleteMany({ where: { estimation_id: estimation.id } });
+      await tx.estimation_fiche_solution.deleteMany({ where: { estimation_id: estimation.id } });
 
-      for (const em of materiaux) {
+      for (const efs of estimationFichesSolution) {
         const createdEfs = await tx.estimation_fiche_solution.create({
           data: {
             estimation_id: estimation.id,
-            fiche_solution_id: em.ficheSolutionId,
-            cout_min_investissement: em.coutMinInvestissement,
-            cout_max_investissement: em.coutMaxInvestissement,
-            cout_min_entretien: em.coutMinEntretien,
-            cout_max_entretien: em.coutMaxEntretien,
-            quantite: em.quantite,
+            fiche_solution_id: efs.ficheSolutionId,
+            cout_min_investissement: efs.coutMinInvestissement,
+            cout_max_investissement: efs.coutMaxInvestissement,
+            cout_min_entretien: efs.coutMinEntretien,
+            cout_max_entretien: efs.coutMaxEntretien,
+            quantite: efs.quantite,
             created_at: estimation.created_at,
             updated_at: estimation.updated_at,
           },
         });
 
-        if (em.estimationMateriaux && em.estimationMateriaux.length > 0) {
+        if (efs.estimationMateriaux && efs.estimationMateriaux.length > 0) {
           await tx.estimation_materiaux.createMany({
-            data: em.estimationMateriaux.map((m) => ({
+            data: efs.estimationMateriaux.map((m) => ({
               estimation_fiche_solution_id: createdEfs.id,
               materiau_id: +m.materiauId,
               quantite: m.quantite,
