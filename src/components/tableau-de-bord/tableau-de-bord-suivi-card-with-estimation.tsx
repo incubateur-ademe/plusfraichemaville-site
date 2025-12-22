@@ -15,7 +15,7 @@ export const TableauDeBordSuiviWithEstimation = () => {
       <span className="text-sm">Choisir les matériaux adéquats pour faire une estimation du coût des solutions.</span>
     );
   }
-  const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice(
+  const { fournitureMin, fournitureMax, entretienMin, entretienMax, isLoading } = useEstimationFSGlobalPrice(
     lastCompletedEstimation.estimations_fiches_solutions,
   );
 
@@ -23,12 +23,21 @@ export const TableauDeBordSuiviWithEstimation = () => {
     <div className="mt-auto flex flex-row justify-between text-sm">
       <div className="font-bold">Dernière estimation :</div>
       <div className="text-right">
-        <div>
-          {formatNumberWithSpaces(fournitureMin)} - {formatNumberWithSpaces(fournitureMax)} € HT
-        </div>
-        <div className="text-dsfr-text-mention-grey">
-          {formatNumberWithSpaces(entretienMin)} - {formatNumberWithSpaces(entretienMax)} € HT / an
-        </div>
+        {isLoading ? (
+          <div className="animate-pulse">
+            <div className="mb-2 ml-auto h-4 w-28 rounded-sm bg-dsfr-contrast-grey"></div>
+            <div className="h-4 w-32 rounded-sm bg-dsfr-contrast-grey"></div>
+          </div>
+        ) : (
+          <>
+            <div>
+              {formatNumberWithSpaces(fournitureMin)} - {formatNumberWithSpaces(fournitureMax)} € HT
+            </div>
+            <div className="text-dsfr-text-mention-grey">
+              {formatNumberWithSpaces(entretienMin)} - {formatNumberWithSpaces(entretienMax)} € HT / an
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
