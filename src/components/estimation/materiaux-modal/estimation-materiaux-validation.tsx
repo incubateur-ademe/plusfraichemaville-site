@@ -31,8 +31,9 @@ export function EstimationMateriauxValidation({
       {estimationsFicheSolution.map((efm) => (
         <EstimationMateriauxFicheSolutionRecap
           key={efm.fiche_solution_id}
-          ficheSolutionEstimation={efm}
+          currentFicheSolutionEstimation={efm}
           goToFicheSolutionStep={goToFicheSolutionStep}
+          allEstimationsFicheSolution={estimationsFicheSolution}
         />
       ))}
       <hr className="mb-2 h-[1px] p-0" />

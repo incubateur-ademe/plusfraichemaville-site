@@ -11,6 +11,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import EstimationMateriauField from "@/src/forms/estimation/estimation-materiau-field";
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
 import EditablePriceField from "@/src/forms/estimation/editable-price-field";
+import OtherUsagesMateriau from "@/src/components/estimation/materiaux-modal/other-usages-materiau";
 import { updateEstimationMateriauxAction } from "@/src/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/src/components/common/notifications";
 
@@ -32,9 +33,11 @@ export default function EstimationMateriauForm({
   onPrevious,
   onClose,
   onUpdateEstimation,
+  estimationsFichesSolutions,
 }: {
   ficheSolution: FicheSolution;
   estimationMateriaux?: EstimationFicheSolution;
+  estimationsFichesSolutions: EstimationFicheSolution[];
   estimationId: number;
   onNext: () => void;
   onPrevious: () => void;
@@ -150,6 +153,16 @@ export default function EstimationMateriauForm({
                     getMateriauFromId(+field.materiauId)?.attributes,
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
                   )}
+                />
+                <OtherUsagesMateriau
+                  materiauId={field.materiauId}
+                  ficheSolutionId={+ficheSolution.id}
+                  allEstimationsFichesSolutions={estimationsFichesSolutions}
+                  materiau={getMateriauFromId(+field.materiauId)}
+                  currentMateriauQuantity={
+                    watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0
+                  }
+                  className="mt-2"
                 />
               </EstimationMateriauField>
             ))}

@@ -46,7 +46,7 @@ export default function EstimationMateriauField({
             <div>{`Coût d'entretien : ${getLabelCoutEntretien(materiau.attributes)}`}</div>
           </div>
         </div>
-        <div className={"flex flex-none flex-col bg-dsfr-contrast-grey p-6 md:w-60"}>{children}</div>
+        <div className={"flex flex-none flex-col bg-dsfr-contrast-grey p-6 md:w-[17rem]"}>{children}</div>
       </div>
       <hr className="mb-2 h-[1px] p-0" />
     </div>
