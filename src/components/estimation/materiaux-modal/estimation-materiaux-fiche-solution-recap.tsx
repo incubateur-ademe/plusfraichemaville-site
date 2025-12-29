@@ -8,27 +8,30 @@ import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } fro
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
+import OtherUsagesMateriau from "@/src/forms/estimation/other-usages-materiau";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
-  ficheSolutionEstimation: EstimationFicheSolution;
+  currentFicheSolutionEstimation: EstimationFicheSolution;
+  allEstimationsFicheSolution: EstimationFicheSolution[];
   goToFicheSolutionStep: (_: number) => void;
 };
 
 export function EstimationMateriauxFicheSolutionRecap({
-  ficheSolutionEstimation,
+  currentFicheSolutionEstimation,
   goToFicheSolutionStep,
+  allEstimationsFicheSolution,
 }: EstimationMateriauxFicheSolutionRecapProps) {
   const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(ficheSolutionEstimation.fiche_solution_id),
+    makeFicheSolutionCompleteUrlApi(currentFicheSolutionEstimation.fiche_solution_id),
   );
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice([
-    ficheSolutionEstimation,
+    currentFicheSolutionEstimation,
   ]);
 
   const getEstimationMateriauByMateriauId = useCallback(
     (materiauId: number): EstimationMateriau | undefined =>
-      ficheSolutionEstimation.estimation_materiaux?.find((estMat) => +estMat.materiau_id === +materiauId),
-    [ficheSolutionEstimation.estimation_materiaux],
+      currentFicheSolutionEstimation.estimation_materiaux?.find((estMat) => +estMat.materiau_id === +materiauId),
+    [currentFicheSolutionEstimation.estimation_materiaux],
   );
 
   const shouldDisplayEstimationMateriau = (estMat?: EstimationMateriau) =>
@@ -72,7 +75,16 @@ export function EstimationMateriauxFicheSolutionRecap({
                       unoptimized
                     />
                   </div>
-                  <h3>{materiau.attributes.titre}</h3>
+                  <section>
+                    <h3 className="mb-0">{materiau.attributes.titre}</h3>
+                    <OtherUsagesMateriau
+                      materiauId={+materiau.id}
+                      ficheSolutionId={+ficheSolution.id}
+                      materiau={materiau}
+                      allEstimationsFichesSolutions={allEstimationsFicheSolution}
+                      showQuantity={false}
+                    />
+                  </section>
                 </div>
                 <div>
                   <div>

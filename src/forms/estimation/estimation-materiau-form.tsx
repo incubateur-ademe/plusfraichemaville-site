@@ -37,7 +37,7 @@ export default function EstimationMateriauForm({
 }: {
   ficheSolution: FicheSolution;
   estimationMateriaux?: EstimationFicheSolution;
-  estimationsFichesSolutions?: EstimationFicheSolution[];
+  estimationsFichesSolutions: EstimationFicheSolution[];
   estimationId: number;
   onNext: () => void;
   onPrevious: () => void;
@@ -156,10 +156,13 @@ export default function EstimationMateriauForm({
                 />
                 <OtherUsagesMateriau
                   materiauId={field.materiauId}
-                  ficheSolution={ficheSolution}
-                  estimationsFichesSolutions={estimationsFichesSolutions}
-                  watchAllFields={watchAllFields}
+                  ficheSolutionId={+ficheSolution.id}
+                  allEstimationsFichesSolutions={estimationsFichesSolutions}
                   materiau={getMateriauFromId(+field.materiauId)}
+                  currentMateriauQuantity={
+                    watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0
+                  }
+                  className="mt-2"
                 />
               </EstimationMateriauField>
             ))}

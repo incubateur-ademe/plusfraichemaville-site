@@ -25,21 +25,15 @@ export function EstimationMateriauxValidation({
     notifications("success", "ESTIMATION_VALIDATED");
     onClose();
   };
-  const otherMateriauUsages = (currentFicheSolutionId: number, currentMateriauId: number) =>
-    estimationsFicheSolution?.filter(
-      (efs) =>
-        +efs.fiche_solution_id !== currentFicheSolutionId &&
-        efs.estimation_materiaux.some((em) => em.materiau_id === currentMateriauId),
-    ) || [];
-
 
   return (
     <>
       {estimationsFicheSolution.map((efm) => (
         <EstimationMateriauxFicheSolutionRecap
           key={efm.fiche_solution_id}
-          ficheSolutionEstimation={efm}
+          currentFicheSolutionEstimation={efm}
           goToFicheSolutionStep={goToFicheSolutionStep}
+          allEstimationsFicheSolution={estimationsFicheSolution}
         />
       ))}
       <hr className="mb-2 h-[1px] p-0" />
