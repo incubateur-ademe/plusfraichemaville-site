@@ -120,6 +120,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
                 estimationId={estimation.id}
                 ficheSolution={currentFicheSolution}
                 estimationMateriaux={currentEstimationMateriaux}
+                estimationsFichesSolutions={estimation.estimations_fiches_solutions}
                 onClose={estimationModal.close}
                 onPrevious={goToPreviousStep}
                 onNext={goToNextStep}

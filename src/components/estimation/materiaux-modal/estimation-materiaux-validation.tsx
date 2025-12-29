@@ -25,6 +25,13 @@ export function EstimationMateriauxValidation({
     notifications("success", "ESTIMATION_VALIDATED");
     onClose();
   };
+  const otherMateriauUsages = (currentFicheSolutionId: number, currentMateriauId: number) =>
+    estimationsFicheSolution?.filter(
+      (efs) =>
+        +efs.fiche_solution_id !== currentFicheSolutionId &&
+        efs.estimation_materiaux.some((em) => em.materiau_id === currentMateriauId),
+    ) || [];
+
 
   return (
     <>
