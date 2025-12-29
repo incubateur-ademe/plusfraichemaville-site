@@ -8,7 +8,7 @@ import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } fro
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
-import OtherUsagesMateriau from "@/src/forms/estimation/other-usages-materiau";
+import OtherUsagesMateriau from "@/src/components/estimation/materiaux-modal/other-usages-materiau";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
   currentFicheSolutionEstimation: EstimationFicheSolution;

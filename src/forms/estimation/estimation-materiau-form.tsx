@@ -11,7 +11,7 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import EstimationMateriauField from "@/src/forms/estimation/estimation-materiau-field";
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
 import EditablePriceField from "@/src/forms/estimation/editable-price-field";
-import OtherUsagesMateriau from "@/src/forms/estimation/other-usages-materiau";
+import OtherUsagesMateriau from "@/src/components/estimation/materiaux-modal/other-usages-materiau";
 import { updateEstimationMateriauxAction } from "@/src/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/src/components/common/notifications";
 
