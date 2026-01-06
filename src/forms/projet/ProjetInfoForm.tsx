@@ -24,6 +24,7 @@ import CurrencyInputFormField from "@/src/components/common/currency-input-form-
 import MonthPickerFormField from "@/src/components/common/MonthPickerFormField";
 import "react-datepicker/dist/react-datepicker.css";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
+import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 
 type ProjetInfoFormProps = {
   projet?: ProjetWithRelations;
@@ -41,6 +42,11 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
       isPublic: projet?.is_public ?? true,
     },
   });
+
+  const { isDirty, isSubmitting } = form.formState;
+
+  // Disable warning during submission
+  useUnsavedChanges(isDirty && !isSubmitting);
 
   useEffect(() => {
     form.reset({
@@ -63,6 +69,24 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
     notifications(result.type, result.message);
 
     if (result.type === "success") {
+      // The form state will still be dirty here until unmount or navigation,
+      // but isSubmitting is true (or was true).
+      // Actually isSubmitting might become false if we await.
+      // However, we immediately navigate.
+      // To be safe, we can manually reset dirty or rely on !isSubmitting if we haven't set it back yet?
+      // Wait, react-hook-form sets isSubmitting to false after the handler resolves.
+      // If we navigate inside the handler, isSubmitting might still be true?
+      // Actually, standard practice: we are about to navigate.
+      // The hook respects `isDirty && !isSubmitting`.
+      // If upsertProjetAction finishes, isSubmitting goes back to false?
+      // No, `handleSubmit` handles the `isSubmitting` state. It waits for the promise.
+      // If we trigger navigation, the component will unmount.
+      // But if we return from `onSubmit`, `isSubmitting` flips to false.
+      // We should probably rely on the navigation happening before `isSubmitting` flips,
+      // OR explicitly reset the form to clean state to avoid the popup.
+
+      form.reset(data); // Mark as pristine so warning doesn't show
+
       if (result.updatedProjet) {
         addOrUpdateProjet(result.updatedProjet);
         router.push(PFMV_ROUTES.TABLEAU_DE_BORD(result.updatedProjet.id));
@@ -72,7 +96,19 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
     }
   };
 
-  const disabled = readOnly ?? form.formState.isSubmitting;
+  const handleBack = () => {
+    if (
+      isDirty &&
+      !window.confirm(
+        "Attention, certains champs n'ont pas été enregistrés, êtes vous sûr de vouloir quitter la page ?",
+      )
+    ) {
+      return;
+    }
+    router.back();
+  };
+
+  const disabled = readOnly ?? isSubmitting;
 
   return (
     <>
@@ -132,7 +168,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
         )}
       </form>
       {readOnly && (
-        <Button className={`mt-6 rounded-3xl text-sm`} priority="tertiary" onClick={router.back}>
+        <Button className={`mt-6 rounded-3xl text-sm`} priority="tertiary" onClick={handleBack}>
           Retour
         </Button>
       )}
