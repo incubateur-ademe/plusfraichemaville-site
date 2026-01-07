@@ -6,7 +6,6 @@ import {
 } from "@/src/lib/prisma/prismaCustomTypes";
 import orderBy from "lodash/orderBy";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-import { isEmpty } from "@/src/helpers/listUtils";
 
 export const isComplete = (estimation: EstimationWithAides) => {
   const notEstimatedSolutionIndex = estimation.estimations_fiches_solutions.findIndex(
@@ -23,8 +22,13 @@ export const getLastCompletedEstimation = (estimations: EstimationWithAides[] | 
   return sortedEstimations.find(isComplete);
 };
 
-const isFicheSolutionEstimated = (estimationFicheSolution: EstimationFicheSolution) =>
-  estimationFicheSolution.quantite != null || !isEmpty(estimationFicheSolution.estimation_materiaux);
+export const isFicheSolutionEstimated = (estimationFicheSolution: EstimationFicheSolution) =>
+  (estimationFicheSolution.quantite || 0) > 0 ||
+  estimationFicheSolution.cout_entretien_override != null ||
+  estimationFicheSolution.cout_investissement_override != null ||
+  estimationFicheSolution.estimation_materiaux.find(
+    (em) => em.quantite !== 0 || em.cout_entretien_override != null || em.cout_investissement_override != null,
+  );
 
 export const computePriceEstimationSimpleFicheSolution = (
   ficheSolution: FicheSolution,
