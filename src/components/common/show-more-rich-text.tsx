@@ -15,7 +15,14 @@ export const ShowMoreRichText = ({ richText, className }: ShowMoreRichTextProps)
       <div className={clsx("overflow-hidden", show ? "line-clamp-none" : `line-clamp-4`)}>
         <CmsRichText label={richText} className={className} />
       </div>
-      <button onClick={toggle} className={clsx("mb-4 text-sm font-medium")}>
+      <button
+        onClick={(e) => {
+          toggle();
+          e.preventDefault();
+        }}
+        role="button"
+        className={clsx("mb-4 text-sm font-medium")}
+      >
         voir {show ? "moins" : "plus"}
       </button>
     </>
