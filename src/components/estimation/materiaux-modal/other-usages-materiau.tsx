@@ -30,15 +30,15 @@ export default function OtherUsagesMateriau({
   const otherUsages =
     allEstimationsFichesSolutions?.filter(
       (efs) =>
-        +efs.fiche_solution_id !== ficheSolutionId &&
-        efs.estimation_materiaux.some((em) => em.materiau_id === materiauId),
+        +efs.fiche_solution_id !== +ficheSolutionId &&
+        efs.estimation_materiaux.some((em) => +em.materiau_id === +materiauId),
     ) || [];
 
   const uniteCoutMateriau = getUniteCoutFromCode(materiau?.attributes.cout_unite);
 
   const otherQuantity = otherUsages.reduce((acc, efs) => {
     const em = efs.estimation_materiaux.find(
-      (m) => m.materiau_id === materiauId && +efs.fiche_solution_id !== ficheSolutionId,
+      (m) => +m.materiau_id === +materiauId && +efs.fiche_solution_id !== +ficheSolutionId,
     );
     return acc + (em?.quantite || 0);
   }, 0);

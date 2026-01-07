@@ -1,5 +1,7 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { Prisma } from "@/src/generated/prisma/client";
+import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 export type EstimationMateriauxFicheSolutionJson = {
   ficheSolutionId: number;
@@ -57,16 +59,33 @@ async function migrateEstimationMateriaux() {
           },
         });
 
-        if (efs.estimationMateriaux && efs.estimationMateriaux.length > 0) {
+        const ficheSolutionCms = await getFicheSolutionByIdsComplete([efs.ficheSolutionId]);
+
+        if (ficheSolutionCms[0] && !isEmpty(ficheSolutionCms[0].attributes.materiaux?.data)) {
           await tx.estimation_materiaux.createMany({
-            data: efs.estimationMateriaux.map((m) => ({
-              estimation_fiche_solution_id: createdEfs.id,
-              materiau_id: +m.materiauId,
-              quantite: m.quantite,
-              created_at: estimation.created_at,
-              updated_at: estimation.updated_at,
-            })),
+            data:
+              ficheSolutionCms[0].attributes.materiaux?.data.map((m) => ({
+                estimation_fiche_solution_id: createdEfs.id,
+                materiau_id: +m.id,
+                quantite: 0,
+                created_at: estimation.created_at,
+                updated_at: estimation.updated_at,
+              })) || [],
           });
+        }
+
+        if (efs.estimationMateriaux && efs.estimationMateriaux.length > 0) {
+          for (const em of efs.estimationMateriaux) {
+            await tx.estimation_materiaux.updateMany({
+              where: {
+                estimation_fiche_solution_id: createdEfs.id,
+                materiau_id: +em.materiauId,
+              },
+              data: {
+                quantite: em.quantite,
+              },
+            });
+          }
         }
       }
     });
