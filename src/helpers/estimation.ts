@@ -24,8 +24,8 @@ export const getLastCompletedEstimation = (estimations: EstimationWithAides[] | 
 
 export const isFicheSolutionEstimated = (estimationFicheSolution: EstimationFicheSolution) =>
   (estimationFicheSolution.quantite || 0) > 0 ||
-  (estimationFicheSolution.cout_entretien_override || 0) > 0 ||
-  (estimationFicheSolution.cout_investissement_override || 0) > 0 ||
+  estimationFicheSolution.cout_entretien_override != null ||
+  estimationFicheSolution.cout_investissement_override != null ||
   estimationFicheSolution.estimation_materiaux.find(
     (em) => em.quantite !== 0 || em.cout_entretien_override != null || em.cout_investissement_override != null,
   );
