@@ -45,5 +45,5 @@ export const isBoolean = (param: any): boolean => {
   return typeof param == "boolean";
 };
 
-export const constructPluralString = (nb: number, singular: string, plural: string) =>
-  `${nb} ${nb < 2 ? singular : plural}`;
+export const constructPluralString = (nb: number, singular: string, plural: string, showNumber: boolean = true) =>
+  `${showNumber ? nb : ""} ${nb < 2 ? singular : plural}`;
