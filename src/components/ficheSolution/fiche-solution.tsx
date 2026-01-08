@@ -41,11 +41,7 @@ export async function FicheSolution({
               <h1 className={clsx("fr-h1  mb-0  font-bold text-white md:text-[2.625rem]")}>
                 {ficheSolution.attributes.titre}
               </h1>
-              <PublishInformation
-                publishedAt={ficheSolution.attributes?.publishedAt}
-                updatedAt={ficheSolution.attributes?.updatedAt}
-                className="!text-sm font-normal"
-              />
+              <PublishInformation updatedAt={ficheSolution.attributes?.updatedAt} className="!text-sm font-normal" />
             </section>
           </div>
         </div>
