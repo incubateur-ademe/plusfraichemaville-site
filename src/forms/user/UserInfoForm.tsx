@@ -20,6 +20,7 @@ import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { Case, Conditional, Default } from "@/src/components/common/conditional-renderer";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 import { useEffect, useState } from "react";
+import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 
 export const COMMUNICATION_SETTINGS_ANCHOR = "communication";
 export const UserInfoForm = ({
@@ -56,12 +57,15 @@ export const UserInfoForm = ({
       subscribeToNewsletter: false,
     },
   });
+  const { isDirty, isSubmitting } = form.formState;
+  useUnsavedChanges(isDirty && !isSubmitting);
 
   const onSubmit: SubmitHandler<UserInfoFormData> = async (data) => {
     const result = await editUserInfoAction({ ...data, userId: user.id });
     notifications(result.type, result.message);
 
     if (result.type === "success") {
+      form.reset(data);
       setUserInfos(result.updatedUser);
       router.push(PFMV_ROUTES.ESPACE_PROJET);
     }

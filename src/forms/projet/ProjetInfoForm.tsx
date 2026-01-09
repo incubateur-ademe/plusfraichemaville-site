@@ -24,6 +24,7 @@ import CurrencyInputFormField from "@/src/components/common/currency-input-form-
 import MonthPickerFormField from "@/src/components/common/MonthPickerFormField";
 import "react-datepicker/dist/react-datepicker.css";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
+import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 
 type ProjetInfoFormProps = {
   projet?: ProjetWithRelations;
@@ -42,6 +43,10 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
     },
   });
 
+  const { isDirty, isSubmitting } = form.formState;
+
+  useUnsavedChanges(isDirty && !isSubmitting);
+
   useEffect(() => {
     form.reset({
       projetId: projet?.id,
@@ -57,12 +62,12 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
   }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
-    const result = await upsertProjetAction({
-      ...data,
-    });
+    const result = await upsertProjetAction({ ...data });
     notifications(result.type, result.message);
 
     if (result.type === "success") {
+      form.reset(data);
+
       if (result.updatedProjet) {
         addOrUpdateProjet(result.updatedProjet);
         router.push(PFMV_ROUTES.TABLEAU_DE_BORD(result.updatedProjet.id));
@@ -72,7 +77,19 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
     }
   };
 
-  const disabled = readOnly ?? form.formState.isSubmitting;
+  const handleBack = () => {
+    if (
+      isDirty &&
+      !window.confirm(
+        "Attention, certains champs n'ont pas été enregistrés, êtes vous sûr de vouloir quitter la page ?",
+      )
+    ) {
+      return;
+    }
+    router.back();
+  };
+
+  const disabled = readOnly ?? isSubmitting;
 
   return (
     <>
@@ -132,7 +149,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
         )}
       </form>
       {readOnly && (
-        <Button className={`mt-6 rounded-3xl text-sm`} priority="tertiary" onClick={router.back}>
+        <Button className={`mt-6 rounded-3xl text-sm`} priority="tertiary" onClick={handleBack}>
           Retour
         </Button>
       )}

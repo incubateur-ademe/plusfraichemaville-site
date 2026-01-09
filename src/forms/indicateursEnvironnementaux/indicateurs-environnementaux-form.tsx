@@ -24,6 +24,7 @@ import { useRouter } from "next/navigation";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { DIAGNOSTIC_COMPUTE_RESULT } from "@/src/helpers/matomo/matomo-tags";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 
 export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelations }) {
   const currentDiagnosticSimulation: diagnostic_simulation | undefined = projet.diagnostic_simulations[0];
@@ -42,6 +43,10 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
     defaultValues: initialValues,
     mode: "onBlur",
   });
+
+  const { isDirty, isSubmitting } = form.formState;
+
+  useUnsavedChanges(isDirty && !isSubmitting);
 
   useEffect(() => {
     if (initialValues) {
@@ -79,6 +84,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
       currentDiagnosticSimulation?.id,
     );
     if (actionResult.type !== "success") {
+      form.reset(data);
       notifications(actionResult.type, actionResult.message);
     } else {
       updateStore(actionResult.diagnosticSimulation);
