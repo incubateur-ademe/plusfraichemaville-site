@@ -45,7 +45,6 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
 
   const { isDirty, isSubmitting } = form.formState;
 
-  // Disable warning during submission
   useUnsavedChanges(isDirty && !isSubmitting);
 
   useEffect(() => {
@@ -63,29 +62,11 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
   }, [form, projet]);
 
   const onSubmit: SubmitHandler<ProjetInfoFormData> = async (data) => {
-    const result = await upsertProjetAction({
-      ...data,
-    });
+    const result = await upsertProjetAction({ ...data });
     notifications(result.type, result.message);
 
     if (result.type === "success") {
-      // The form state will still be dirty here until unmount or navigation,
-      // but isSubmitting is true (or was true).
-      // Actually isSubmitting might become false if we await.
-      // However, we immediately navigate.
-      // To be safe, we can manually reset dirty or rely on !isSubmitting if we haven't set it back yet?
-      // Wait, react-hook-form sets isSubmitting to false after the handler resolves.
-      // If we navigate inside the handler, isSubmitting might still be true?
-      // Actually, standard practice: we are about to navigate.
-      // The hook respects `isDirty && !isSubmitting`.
-      // If upsertProjetAction finishes, isSubmitting goes back to false?
-      // No, `handleSubmit` handles the `isSubmitting` state. It waits for the promise.
-      // If we trigger navigation, the component will unmount.
-      // But if we return from `onSubmit`, `isSubmitting` flips to false.
-      // We should probably rely on the navigation happening before `isSubmitting` flips,
-      // OR explicitly reset the form to clean state to avoid the popup.
-
-      form.reset(data); // Mark as pristine so warning doesn't show
+      form.reset(data);
 
       if (result.updatedProjet) {
         addOrUpdateProjet(result.updatedProjet);
