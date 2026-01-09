@@ -28984,6 +28984,7 @@ export namespace Prisma {
 
   export type estimation_materiauxWhereUniqueInput = Prisma.AtLeast<{
     id?: string
+    estimation_fiche_solution_id_materiau_id?: estimation_materiauxEstimation_fiche_solution_idMateriau_idCompoundUniqueInput
     AND?: estimation_materiauxWhereInput | estimation_materiauxWhereInput[]
     OR?: estimation_materiauxWhereInput[]
     NOT?: estimation_materiauxWhereInput | estimation_materiauxWhereInput[]
@@ -28995,7 +28996,7 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"estimation_materiaux"> | Date | string
     updated_at?: DateTimeFilter<"estimation_materiaux"> | Date | string
     estimation_fiche_solution?: XOR<Estimation_fiche_solutionScalarRelationFilter, estimation_fiche_solutionWhereInput>
-  }, "id">
+  }, "id" | "estimation_fiche_solution_id_materiau_id">
 
   export type estimation_materiauxOrderByWithAggregationInput = {
     id?: SortOrder
@@ -32606,6 +32607,11 @@ export namespace Prisma {
     fields: estimation_materiauxOrderByRelevanceFieldEnum | estimation_materiauxOrderByRelevanceFieldEnum[]
     sort: SortOrder
     search: string
+  }
+
+  export type estimation_materiauxEstimation_fiche_solution_idMateriau_idCompoundUniqueInput = {
+    estimation_fiche_solution_id: string
+    materiau_id: number
   }
 
   export type estimation_materiauxCountOrderByAggregateInput = {

@@ -30,15 +30,15 @@ export default function OtherUsagesMateriau({
   const otherUsages =
     allEstimationsFichesSolutions?.filter(
       (efs) =>
-        +efs.fiche_solution_id !== ficheSolutionId &&
-        efs.estimation_materiaux.some((em) => em.materiau_id === materiauId),
+        +efs.fiche_solution_id !== +ficheSolutionId &&
+        efs.estimation_materiaux.some((em) => +em.materiau_id === +materiauId),
     ) || [];
 
   const uniteCoutMateriau = getUniteCoutFromCode(materiau?.attributes.cout_unite);
 
   const otherQuantity = otherUsages.reduce((acc, efs) => {
     const em = efs.estimation_materiaux.find(
-      (m) => m.materiau_id === materiauId && +efs.fiche_solution_id !== ficheSolutionId,
+      (m) => +m.materiau_id === +materiauId && +efs.fiche_solution_id !== +ficheSolutionId,
     );
     return acc + (em?.quantite || 0);
   }, 0);
@@ -50,8 +50,9 @@ export default function OtherUsagesMateriau({
 
   return (
     <div className={clsx("gap-1 text-sm text-dsfr-text-mention-grey", className)}>
-      <div className="text-nowrap">
-        {`Utilisé dans ${constructPluralString(otherUsages.length, "autre solution", "autres solutions")} `}
+      {`Utilisé dans ${constructPluralString(otherUsages.length, "autre", "autres")} `}
+      <span className="text-nowrap">
+        {constructPluralString(otherUsages.length, "solution ", "solutions ", false)}
         <Tooltip
           kind="hover"
           title={
@@ -70,7 +71,7 @@ export default function OtherUsagesMateriau({
         >
           <i className="fr-icon-information-line fr-icon--sm" aria-hidden="true"></i>
         </Tooltip>
-      </div>
+      </span>
       {showQuantity && (
         <div className="mt-1 text-sm font-bold">
           Quantité totale :{" "}

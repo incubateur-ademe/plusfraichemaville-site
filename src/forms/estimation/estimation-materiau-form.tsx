@@ -162,7 +162,7 @@ export default function EstimationMateriauForm({
                   currentMateriauQuantity={
                     watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0
                   }
-                  className="mt-2"
+                  className="mt-2 rounded-md border p-2"
                 />
               </EstimationMateriauField>
             ))}

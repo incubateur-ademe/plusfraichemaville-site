@@ -45,8 +45,8 @@ export default function EstimationMateriauSimpleFieldForm({
   const initialValues = useMemo(
     () => ({
       ficheSolutionId: +ficheSolution.id,
-      coutInvestissementOverride: estimationMateriaux?.cout_investissement_override || undefined,
-      coutEntretienOverride: estimationMateriaux?.cout_entretien_override || undefined,
+      coutInvestissementOverride: estimationMateriaux?.cout_investissement_override ?? undefined,
+      coutEntretienOverride: estimationMateriaux?.cout_entretien_override ?? undefined,
       quantite: estimationMateriaux?.quantite || 0,
     }),
     [estimationMateriaux, ficheSolution.id],

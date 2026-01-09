@@ -346,6 +346,7 @@ model estimation_materiaux {
   created_at                   DateTime                  @default(now())
   updated_at                   DateTime                  @updatedAt
 
+  @@unique([estimation_fiche_solution_id, materiau_id])
   @@index([estimation_fiche_solution_id])
 }
 

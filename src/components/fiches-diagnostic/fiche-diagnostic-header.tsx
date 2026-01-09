@@ -42,11 +42,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
           </div>
           <div>
             <h1 className="mb-2 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
-            <PublishInformation
-              publishedAt={ficheDiagnostic.attributes?.publishedAt}
-              updatedAt={ficheDiagnostic.attributes?.updatedAt}
-              className="mb-4"
-            />
+            <PublishInformation updatedAt={ficheDiagnostic.attributes?.updatedAt} className="mb-4" />
             <span className="md:text-xl">{attributes.nom_scientifique}</span>
             <div className="mt-4 flex gap-4 uppercase">
               {getEchellesThermiquesByFicheDiagnostic(ficheDiagnostic).map((effet) => (

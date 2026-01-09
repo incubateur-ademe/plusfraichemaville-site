@@ -35,7 +35,6 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
     lien_rex_diagnostics,
     resultats,
     resultats_images,
-    publishedAt,
     updatedAt,
   } = rex.attributes;
 
@@ -84,7 +83,7 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
         </section>
         <section>
           <h1 className={"!mb-3 text-3xl md:text-[2.5rem] md:leading-[3rem]"}>{titre}</h1>
-          <PublishInformation publishedAt={publishedAt} updatedAt={updatedAt} />
+          <PublishInformation updatedAt={updatedAt} />
           <CmsRichText label={description} className={"mb-9 mt-6 [&_p]:text-xl [&_p]:leading-8"} />
           {citations &&
             citations.length > 0 &&

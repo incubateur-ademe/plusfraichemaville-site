@@ -345,6 +345,9 @@ model estimation_materiaux {
   cout_entretien_override      Int?
   created_at                   DateTime                  @default(now())
   updated_at                   DateTime                  @updatedAt
+
+  @@unique([estimation_fiche_solution_id, materiau_id])
+  @@index([estimation_fiche_solution_id])
 }
 
 model estimation_fiche_solution {
@@ -364,6 +367,7 @@ model estimation_fiche_solution {
   updated_at                   DateTime               @updatedAt
 
   @@unique([estimation_id, fiche_solution_id])
+  @@index([estimation_id])
 }
 
 model conversation {
