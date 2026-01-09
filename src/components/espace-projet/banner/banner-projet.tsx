@@ -89,7 +89,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                     </>
                   ) : (
                     <LinkWithoutPrefetch
-                      className={clsx("fr-link fr-icon-arrow-left-line fr-link--icon-left w-fit text-sm font-normal ")}
+                      className={clsx("fr-link ri-dashboard-fill fr-link--icon-left w-fit text-sm font-normal")}
                       href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
                     >
                       Retour au tableau de bord
