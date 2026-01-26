@@ -5,6 +5,10 @@ import clsx from "clsx";
 import { NumericFormat } from "react-number-format";
 import { InputFormFieldProps } from "@/src/components/common/InputFormField";
 
+type CurrencyInputFormFieldProps = {
+  suffix?: string;
+};
+
 const CurrencyInputFormField = <T extends FieldValues>({
   label,
   path,
@@ -18,8 +22,9 @@ const CurrencyInputFormField = <T extends FieldValues>({
   info,
   asterisk,
   whiteBackground = false,
+  suffix = " €",
   onFocus = (_: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {},
-}: InputFormFieldProps<T>) => {
+}: InputFormFieldProps<T> & CurrencyInputFormFieldProps) => {
   const id = `input-form-field__${path}`;
 
   return (
@@ -63,11 +68,14 @@ const CurrencyInputFormField = <T extends FieldValues>({
               onBlur={onBlur}
               value={value ?? ""}
               getInputRef={ref}
-              onFocus={onFocus}
-              suffix=" €"
+              onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+                event.target?.select();
+                onFocus(event);
+              }}
+              suffix={suffix}
               onValueChange={(values) => {
                 const { value } = values;
-                onChange(+value);
+                onChange(value != null && value != "" ? +value : null);
               }}
               allowNegative={false}
             />

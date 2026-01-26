@@ -1,4 +1,4 @@
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationMateriau } from "@/src/lib/prisma/prismaCustomTypes";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { useCallback } from "react";
@@ -7,25 +7,36 @@ import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
+import OtherUsagesMateriau from "@/src/components/estimation/materiaux-modal/other-usages-materiau";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
-  ficheSolutionEstimation: EstimationMateriauxFicheSolution;
+  currentFicheSolutionEstimation: EstimationFicheSolution;
+  allEstimationsFicheSolution: EstimationFicheSolution[];
   goToFicheSolutionStep: (_: number) => void;
 };
 
 export function EstimationMateriauxFicheSolutionRecap({
-  ficheSolutionEstimation,
+  currentFicheSolutionEstimation,
   goToFicheSolutionStep,
+  allEstimationsFicheSolution,
 }: EstimationMateriauxFicheSolutionRecapProps) {
   const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(ficheSolutionEstimation.ficheSolutionId),
+    makeFicheSolutionCompleteUrlApi(currentFicheSolutionEstimation.fiche_solution_id),
+  );
+  const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice([
+    currentFicheSolutionEstimation,
+  ]);
+
+  const getEstimationMateriauByMateriauId = useCallback(
+    (materiauId: number): EstimationMateriau | undefined =>
+      currentFicheSolutionEstimation.estimation_materiaux?.find((estMat) => +estMat.materiau_id === +materiauId),
+    [currentFicheSolutionEstimation.estimation_materiaux],
   );
 
-  const getQuantiteByMateriauId = useCallback(
-    (materiauId: number): number =>
-      ficheSolutionEstimation.estimationMateriaux?.find((estMat) => +estMat.materiauId === +materiauId)?.quantite || 0,
-    [ficheSolutionEstimation.estimationMateriaux],
-  );
+  const shouldDisplayEstimationMateriau = (estMat?: EstimationMateriau) =>
+    estMat &&
+    (estMat.quantite > 0 || estMat.cout_entretien_override != null || estMat.cout_investissement_override != null);
 
   if (!data) {
     return null;
@@ -50,7 +61,7 @@ export function EstimationMateriauxFicheSolutionRecap({
       </div>
       {ficheSolution.attributes.materiaux.data.map(
         (materiau) =>
-          getQuantiteByMateriauId(materiau.id) > 0 && (
+          shouldDisplayEstimationMateriau(getEstimationMateriauByMateriauId(materiau.id)) && (
             <div key={materiau.id}>
               <div className={"my-2 flex basis-full flex-row items-center justify-between gap-6"}>
                 <div className="flex flex-row items-center">
@@ -64,22 +75,39 @@ export function EstimationMateriauxFicheSolutionRecap({
                       unoptimized
                     />
                   </div>
-                  <h3>{materiau.attributes.titre}</h3>
+                  <section>
+                    <h3 className="mb-0">{materiau.attributes.titre}</h3>
+                    <OtherUsagesMateriau
+                      materiauId={+materiau.id}
+                      ficheSolutionId={+ficheSolution.id}
+                      materiau={materiau}
+                      allEstimationsFichesSolutions={allEstimationsFicheSolution}
+                      showQuantity={false}
+                    />
+                  </section>
                 </div>
                 <div>
                   <div>
                     Inv.
-                    <strong>{` ${getLabelCoutFournitureByQuantite(
-                      materiau.attributes,
-                      getQuantiteByMateriauId(materiau.id),
-                    )}`}</strong>
+                    <strong>
+                      {getEstimationMateriauByMateriauId(materiau.id)?.cout_investissement_override == null
+                        ? ` ${getLabelCoutFournitureByQuantite(
+                            materiau.attributes,
+                            getEstimationMateriauByMateriauId(materiau.id)?.quantite || 0,
+                          )}`
+                        : ` ${getEstimationMateriauByMateriauId(materiau.id)?.cout_investissement_override} €`}
+                    </strong>
                   </div>
                   <div className="text-sm text-dsfr-text-mention-grey">
                     Ent.
-                    <strong>{` ${getLabelCoutEntretienByQuantite(
-                      materiau.attributes,
-                      getQuantiteByMateriauId(materiau.id),
-                    )}`}</strong>
+                    <strong>
+                      {getEstimationMateriauByMateriauId(materiau.id)?.cout_entretien_override == null
+                        ? ` ${getLabelCoutEntretienByQuantite(
+                            materiau.attributes,
+                            getEstimationMateriauByMateriauId(materiau.id)?.quantite || 0,
+                          )}`
+                        : ` ${getEstimationMateriauByMateriauId(materiau.id)?.cout_entretien_override} € / an`}
+                    </strong>
                   </div>
                 </div>
               </div>
@@ -91,8 +119,8 @@ export function EstimationMateriauxFicheSolutionRecap({
           <div className="font-bold">Total Investissement</div>
           <div>
             <strong>
-              {`${formatNumberWithSpaces(ficheSolutionEstimation.coutMinInvestissement)}
-                   - ${formatNumberWithSpaces(ficheSolutionEstimation.coutMaxInvestissement)} € `}
+              {`${formatNumberWithSpaces(fournitureMin)}
+                   - ${formatNumberWithSpaces(fournitureMax)} € `}
             </strong>
             HT
           </div>
@@ -100,11 +128,7 @@ export function EstimationMateriauxFicheSolutionRecap({
         <div className="flex flex-row justify-between text-dsfr-text-mention-grey">
           <div className="font-bold">Total Entretien</div>
           <div className="text-sm">
-            <strong>
-              {`${formatNumberWithSpaces(ficheSolutionEstimation.coutMinEntretien)} - ${formatNumberWithSpaces(
-                ficheSolutionEstimation.coutMaxEntretien,
-              )} € `}
-            </strong>
+            <strong>{`${formatNumberWithSpaces(entretienMin)} - ${formatNumberWithSpaces(entretienMax)} € `}</strong>
             HT / an
           </div>
         </div>

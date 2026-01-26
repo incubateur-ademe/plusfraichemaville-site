@@ -303,6 +303,32 @@ exports.Prisma.Estimations_aidesScalarFieldEnum = {
   user_id: 'user_id'
 };
 
+exports.Prisma.Estimation_materiauxScalarFieldEnum = {
+  id: 'id',
+  estimation_fiche_solution_id: 'estimation_fiche_solution_id',
+  materiau_id: 'materiau_id',
+  quantite: 'quantite',
+  cout_investissement_override: 'cout_investissement_override',
+  cout_entretien_override: 'cout_entretien_override',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
+exports.Prisma.Estimation_fiche_solutionScalarFieldEnum = {
+  id: 'id',
+  estimation_id: 'estimation_id',
+  fiche_solution_id: 'fiche_solution_id',
+  quantite: 'quantite',
+  cout_min_investissement: 'cout_min_investissement',
+  cout_max_investissement: 'cout_max_investissement',
+  cout_min_entretien: 'cout_min_entretien',
+  cout_max_entretien: 'cout_max_entretien',
+  cout_investissement_override: 'cout_investissement_override',
+  cout_entretien_override: 'cout_entretien_override',
+  created_at: 'created_at',
+  updated_at: 'updated_at'
+};
+
 exports.Prisma.ConversationScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -465,6 +491,15 @@ exports.Prisma.estimations_aidesOrderByRelevanceFieldEnum = {
   user_id: 'user_id'
 };
 
+exports.Prisma.estimation_materiauxOrderByRelevanceFieldEnum = {
+  id: 'id',
+  estimation_fiche_solution_id: 'estimation_fiche_solution_id'
+};
+
+exports.Prisma.estimation_fiche_solutionOrderByRelevanceFieldEnum = {
+  id: 'id'
+};
+
 exports.Prisma.conversationOrderByRelevanceFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -587,6 +622,8 @@ exports.Prisma.ModelName = {
   climadiag: 'climadiag',
   aide: 'aide',
   estimations_aides: 'estimations_aides',
+  estimation_materiaux: 'estimation_materiaux',
+  estimation_fiche_solution: 'estimation_fiche_solution',
   conversation: 'conversation',
   diagnostic_simulation: 'diagnostic_simulation',
   Analytics: 'Analytics',

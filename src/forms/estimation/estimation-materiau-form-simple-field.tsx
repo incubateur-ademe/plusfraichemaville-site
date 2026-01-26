@@ -1,5 +1,5 @@
-import { useEffect, useMemo } from "react";
-import { EstimationMateriauxFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import React, { useEffect, useMemo } from "react";
+import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -11,8 +11,8 @@ import { notifications } from "@/src/components/common/notifications";
 import { formatNumberWithSpaces, scrollToTop } from "@/src/helpers/common";
 import { EstimationMateriauFieldUnique } from "./estimation-materiau-field-unique";
 import {
-  EstimationMateriauxSimpleFieldFormData,
   EstimationMateriauxFormSimpleFieldSchema,
+  EstimationMateriauxSimpleFieldFormData,
 } from "./estimation-materiau-form-simple-field-schema";
 import InputFormField from "@/src/components/common/InputFormField";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
@@ -21,6 +21,9 @@ import {
   getLabelCoutFournitureByQuantite,
 } from "@/src/helpers/cout/cout-fiche-solution";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import EditablePriceField from "@/src/forms/estimation/editable-price-field";
+import { computePriceEstimationSimpleFicheSolution } from "@/src/helpers/estimation";
+import { mapEstimationSimpleFicheSolutionFormToDb } from "@/src/lib/prisma/prismaCustomTypesHelper";
 
 export default function EstimationMateriauSimpleFieldForm({
   ficheSolution,
@@ -32,7 +35,7 @@ export default function EstimationMateriauSimpleFieldForm({
   estimationMateriaux,
 }: {
   ficheSolution: FicheSolution;
-  estimationMateriaux?: EstimationMateriauxFicheSolution;
+  estimationMateriaux?: EstimationFicheSolution;
   estimationId: number;
   onNext: () => void;
   onPrevious: () => void;
@@ -42,9 +45,11 @@ export default function EstimationMateriauSimpleFieldForm({
   const initialValues = useMemo(
     () => ({
       ficheSolutionId: +ficheSolution.id,
+      coutInvestissementOverride: estimationMateriaux?.cout_investissement_override ?? undefined,
+      coutEntretienOverride: estimationMateriaux?.cout_entretien_override ?? undefined,
       quantite: estimationMateriaux?.quantite || 0,
     }),
-    [estimationMateriaux?.quantite, ficheSolution.id],
+    [estimationMateriaux, ficheSolution.id],
   );
   const form = useForm<EstimationMateriauxSimpleFieldFormData>({
     resolver: zodResolver(EstimationMateriauxFormSimpleFieldSchema),
@@ -78,20 +83,11 @@ export default function EstimationMateriauSimpleFieldForm({
       }
     }
   };
-
   const globalPrice = useMemo(() => {
-    const quantiteMateriau = watchAllFields.quantite || 0;
-
-    return {
-      entretien: {
-        min: quantiteMateriau * (ficheSolution.attributes.cout_minimum_entretien || 0),
-        max: quantiteMateriau * (ficheSolution.attributes.cout_maximum_entretien || 0),
-      },
-      fourniture: {
-        min: quantiteMateriau * (ficheSolution.attributes.cout_minimum || 0),
-        max: quantiteMateriau * (ficheSolution.attributes.cout_maximum || 0),
-      },
-    };
+    return computePriceEstimationSimpleFicheSolution(
+      ficheSolution,
+      mapEstimationSimpleFicheSolutionFormToDb(watchAllFields),
+    );
   }, [ficheSolution, watchAllFields]);
 
   const disabled = form.formState.isSubmitting;
@@ -102,7 +98,7 @@ export default function EstimationMateriauSimpleFieldForm({
         id={`estimation-fiche-solution-${ficheSolution.id}-form`}
         onSubmit={form.handleSubmit((data) => onSubmit(data))}
       >
-        <EstimationMateriauFieldUnique ficheSolutionAttributes={ficheSolution.attributes}>
+        <EstimationMateriauFieldUnique ficheSolutionAttributes={ficheSolution.attributes} key={ficheSolution.id}>
           <InputFormField
             label={getUniteCoutFromCode(ficheSolution.attributes.cout_unite).estimationLabel}
             type="number"
@@ -111,18 +107,25 @@ export default function EstimationMateriauSimpleFieldForm({
             whiteBackground
             onFocus={(event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => event.target?.select()}
           />
-          <div>Investissement</div>
-          <div className="mb-2 font-bold">
-            {formatNumberWithSpaces(
+          <EditablePriceField
+            control={form.control}
+            setValue={form.setValue}
+            name="coutInvestissementOverride"
+            label="Investissement"
+            calculatedValue={formatNumberWithSpaces(
               getLabelCoutFournitureByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0),
             )}
-          </div>
-          <div>Entretien</div>
-          <div className="mb-2 font-bold">
-            {formatNumberWithSpaces(
+          />
+          <EditablePriceField
+            control={form.control}
+            setValue={form.setValue}
+            name="coutEntretienOverride"
+            label="Entretien"
+            suffix={" € / an"}
+            calculatedValue={formatNumberWithSpaces(
               getLabelCoutEntretienByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0),
             )}
-          </div>
+          />
         </EstimationMateriauFieldUnique>
 
         <EstimationMateriauGlobalPriceFooter

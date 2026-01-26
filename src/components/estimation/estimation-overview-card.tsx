@@ -1,9 +1,8 @@
 "use client";
-import { estimation } from "@/src/generated/prisma/client";
 import clsx from "clsx";
 
 import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useMemo } from "react";
 import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
@@ -11,19 +10,21 @@ import { isComplete } from "@/src/helpers/estimation";
 import { dateToStringWithTime } from "@/src/helpers/dateUtils";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { estimationModal } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
-import { useEstimationGlobalPrice } from "@/src/hooks/use-estimation-global-price";
 import { useModalStore } from "@/src/stores/modal/provider";
+import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
+import { formatNumberWithSpaces } from "@/src/helpers/common";
 
 export const EstimationOverviewCard = ({
   estimation,
   canEditEstimation,
 }: {
-  estimation: estimation;
+  estimation: EstimationWithAides;
   canEditEstimation?: boolean;
 }) => {
-  const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationGlobalPrice(estimation);
+  const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice(
+    estimation.estimations_fiches_solutions,
+  );
 
-  const estimationMateriaux = estimation.materiaux as EstimationMateriauxFicheSolution[] | null;
   const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
 
   const isEstimationCompleted = useMemo(() => isComplete(estimation), [estimation]);
@@ -59,7 +60,9 @@ export const EstimationOverviewCard = ({
             <div className="w-full">
               <hr className="mt-6 pb-4" />
               <EstimationCardPriceInfo
-                estimationInfo={estimationMateriaux?.find((em) => em.ficheSolutionId === ficheSolutionId)}
+                estimationInfo={estimation.estimations_fiches_solutions?.find(
+                  (em) => em.fiche_solution_id === ficheSolutionId,
+                )}
               />
             </div>
           </FicheSolutionSmallCard>
@@ -71,13 +74,13 @@ export const EstimationOverviewCard = ({
         <div className="mt-6 flex flex-row justify-between">
           <div className="font-bold">Investissement</div>
           <div>
-            <strong>{`${fournitureMin} - ${fournitureMax} € `}</strong>
+            <strong>{`${formatNumberWithSpaces(fournitureMin)} - ${formatNumberWithSpaces(fournitureMax)} € `}</strong>
             HT
           </div>
         </div>
         <div className="flex flex-row justify-between">
           <div className="font-bold">Entretien</div>
-          <div>{`${entretienMin} - ${entretienMax} € HT / an`}</div>
+          <div>{`${formatNumberWithSpaces(entretienMin)} - ${formatNumberWithSpaces(entretienMax)} € HT / an`}</div>
         </div>
       </div>
       {canEditEstimation && (

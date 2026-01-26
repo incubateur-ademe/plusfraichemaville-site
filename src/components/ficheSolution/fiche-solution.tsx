@@ -12,6 +12,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import clsx from "clsx";
 import { FICHE_SOLUTION_CLIC_ONGLET } from "@/src/helpers/matomo/matomo-tags";
 import { FicheSolutionSideMenu } from "@/src/components/ficheSolution/fiche-solution-side-menu";
+import { PublishInformation } from "@/src/components/common/publish-information";
 
 export async function FicheSolution({
   params,
@@ -32,18 +33,16 @@ export async function FicheSolution({
             height={500}
             className={"relative -z-10 h-48 w-full object-cover md:h-96 "}
             src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
-            alt={ficheSolution.attributes.titre}
+            alt=""
             unoptimized
           />
           <div className="fr-container">
-            <h1
-              className={clsx(
-                "md:fr-container absolute mt-8 text-[1.375rem] text-white md:text-[2.625rem]",
-                "bottom-0 font-bold leading-normal md:bottom-4 md:ml-56",
-              )}
-            >
-              {ficheSolution.attributes.titre}
-            </h1>
+            <section className="absolute bottom-0 text-white md:bottom-4 md:ml-56">
+              <h1 className={clsx("fr-h1  mb-0  font-bold text-white md:text-[2.625rem]")}>
+                {ficheSolution.attributes.titre}
+              </h1>
+              <PublishInformation updatedAt={ficheSolution.attributes?.updatedAt} className="!text-sm font-normal" />
+            </section>
           </div>
         </div>
         <div className="absolute h-14 w-full bg-dsfr-background-alt-blue-france" />

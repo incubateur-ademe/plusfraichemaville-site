@@ -1,4 +1,11 @@
-import { EstimationMateriauxFicheSolution, ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
+import {
+  EstimationFicheSolution,
+  EstimationMateriau,
+  EstimationMateriauForm,
+  EstimationSimpleFicheSolutionForm,
+  ProjetIndiEnSimuation,
+  SimpleEstimationFicheSolution,
+} from "@/src/lib/prisma/prismaCustomTypes";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 import { IndicateursEnvironnementauxFormData } from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form-schema";
 import {
@@ -13,14 +20,36 @@ import { IndiEnGroupeQuestion } from "@/src/helpers/indicateurs-environnementaux
 
 export const mapStrapiEstimationMateriauxToFormValues = (
   ficheSolutionMateriaux: Materiau[] | undefined,
-  defaultEstimationMateriaux: EstimationMateriauxFicheSolution | undefined,
+  defaultEstimationMateriaux: EstimationFicheSolution | undefined,
 ) => {
-  return ficheSolutionMateriaux?.map((materiau) => ({
-    materiauId: `${materiau.id}`,
-    quantite:
-      defaultEstimationMateriaux?.estimationMateriaux?.find((e) => +e.materiauId == +materiau.id)?.quantite || 0,
-  }));
+  return ficheSolutionMateriaux?.map((materiau) => {
+    const existingEstimation = defaultEstimationMateriaux?.estimation_materiaux?.find(
+      (e) => e.materiau_id == materiau.id,
+    );
+    return {
+      materiauId: +materiau.id,
+      quantite: existingEstimation?.quantite || 0,
+      coutInvestissementOverride: existingEstimation?.cout_investissement_override ?? undefined,
+      coutEntretienOverride: existingEstimation?.cout_entretien_override ?? undefined,
+    };
+  });
 };
+
+export const mapEstimationMateriauFormToDb = (estimationMateriauForm: EstimationMateriauForm): EstimationMateriau => ({
+  quantite: estimationMateriauForm.quantite,
+  materiau_id: estimationMateriauForm.materiauId,
+  cout_investissement_override: estimationMateriauForm.coutInvestissementOverride ?? null,
+  cout_entretien_override: estimationMateriauForm.coutEntretienOverride ?? null,
+});
+
+export const mapEstimationSimpleFicheSolutionFormToDb = (
+  estimationMateriauForm: EstimationSimpleFicheSolutionForm,
+): SimpleEstimationFicheSolution => ({
+  fiche_solution_id: estimationMateriauForm.ficheSolutionId,
+  quantite: estimationMateriauForm.quantite,
+  cout_investissement_override: estimationMateriauForm.coutInvestissementOverride || null,
+  cout_entretien_override: estimationMateriauForm.coutEntretienOverride || null,
+});
 
 export const calculateCoeffsDiagnosticSimulation = (
   questions: ProjetIndiEnSimuation["questions"] | IndicateursEnvironnementauxFormData["questions"],

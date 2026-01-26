@@ -1,11 +1,10 @@
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
+import clsx from "clsx";
 
-export const PublishInformation = ({ publishedAt, updatedAt }: { publishedAt?: Date; updatedAt?: Date }) => {
-  if (!publishedAt) {
+export const PublishInformation = ({ updatedAt, className }: { updatedAt?: Date; className?: string }) => {
+  if (!updatedAt) {
     return null;
   }
-  const datePublished = dateToStringWithoutTime(new Date(publishedAt));
-  const dateUpdated = updatedAt ? dateToStringWithoutTime(new Date(updatedAt)) : null;
-  const updateSentence = datePublished !== dateUpdated ? `, mis à jour le ${dateUpdated}` : "";
-  return <div className="mt-2 italic">{`Publié le ${datePublished}${updateSentence ? updateSentence : ""}`}</div>;
+  const dateUpdated = dateToStringWithoutTime(new Date(updatedAt));
+  return <div className={clsx("mt-2 italic", className)}>{`Dernière mise à jour le ${dateUpdated}`}</div>;
 };

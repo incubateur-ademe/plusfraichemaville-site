@@ -36,8 +36,6 @@ export const ICON_COLOR_FICHE_DIAGNOSTIC: IconColorsType = {
 
 export const formatNumberWithSpaces = (num?: number | string): string => (num ? num.toLocaleString("fr-FR") : "0");
 
-export const nullFunctionalComponent = () => <></>;
-
 export const extractNameInitiales = (name: string) => {
   const match = name.match(/^[^\s-]+|\S+$/g);
   return match ? match.map((word) => word[0].toUpperCase()).join("") : "";
@@ -47,4 +45,5 @@ export const isBoolean = (param: any): boolean => {
   return typeof param == "boolean";
 };
 
-export const stripHtmlLinkTag = (param: string): string => param.replace(/<a\b[^>]*>/i, "").replace(/<\/a>/i, "");
+export const constructPluralString = (nb: number, singular: string, plural: string, showNumber: boolean = true) =>
+  `${showNumber ? nb : ""} ${nb < 2 ? singular : plural}`;

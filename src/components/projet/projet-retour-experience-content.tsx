@@ -43,10 +43,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
           <h1 className={"!mb-3 mt-4 text-3xl md:text-[2.5rem] md:leading-[3rem]"}>
             {retourExperience.attributes.titre}
           </h1>
-          <PublishInformation
-            publishedAt={retourExperience.attributes.publishedAt}
-            updatedAt={retourExperience.attributes.updatedAt}
-          />
+          <PublishInformation updatedAt={retourExperience.attributes.updatedAt} />
           <CmsRichText
             label={retourExperience.attributes.description}
             className={"mt-8 text-xl leading-8 [&_p]:text-xl [&_p]:leading-8"}

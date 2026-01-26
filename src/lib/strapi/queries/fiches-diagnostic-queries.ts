@@ -73,6 +73,8 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
             }
           }
         }  
+        updatedAt
+        publishedAt
       }
     }
   }
@@ -90,7 +92,7 @@ export const GET_FICHE_DIAGNOSTIC_CARD_DATA = async (
   }`;
 
 export async function getAllFichesDiagnostic(): Promise<FicheDiagnostic[]> {
-  const filter = new StrapiFilter(true, [], { attribute: "rank", order: "asc" });
+  const filter = new StrapiFilter(true, [], { attribute: "updatedAt", order: "desc" });
   const apiResponse = (
     await strapiGraphQLCall(await GET_FICHE_DIAGNOSTIC_CARD_DATA(filter), { tag: "get-all-fiches-diagnostic" })
   )?.ficheDiagnostics as APIResponseCollection<FicheDiagnostic>;

@@ -8,6 +8,7 @@ import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation
 import { createEstimation } from "@/src/lib/prisma/prismaEstimationQueries";
 import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
 export const createEstimationAction = async (
   projetId: number,
@@ -29,12 +30,13 @@ export const createEstimationAction = async (
   }
 
   const parseParamResult = EstimationFormSchema.safeParse(data);
+  const fichesSolutions = await getFicheSolutionByIdsComplete(data.ficheSolutionIds.map(Number));
   if (!parseParamResult.success) {
     captureError("createEstimationAction format errors", parseParamResult.error.flatten());
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      const estimation = await createEstimation(projetId, data.ficheSolutionIds.map(Number), session.user.id);
+      const estimation = await createEstimation(projetId, fichesSolutions, session.user.id);
       return { type: "success", message: "ESTIMATION_CREATED", estimation };
     } catch (e) {
       customCaptureException("Error in EditProjetInfoAction DB call", e);

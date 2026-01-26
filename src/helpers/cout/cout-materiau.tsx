@@ -1,4 +1,4 @@
-import { EstimationMateriauxFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import sumBy from "lodash/sumBy";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { formatNumberWithSpaces } from "../common";
@@ -50,7 +50,7 @@ export const getLabelCoutEntretienByQuantite = (
       )} € / an`
     : "0 € / an";
 
-export const computeGlobalFicheSolutionPrice = (estimationMateriaux: EstimationMateriauxFicheSolution[] | null) => {
+export const computeGlobalFicheSolutionPrice = (estimationMateriaux: EstimationFicheSolution[] | null) => {
   return {
     fourniture: {
       min: sumBy(estimationMateriaux, "coutMinInvestissement"),

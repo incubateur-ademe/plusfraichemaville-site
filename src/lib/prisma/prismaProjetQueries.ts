@@ -56,6 +56,11 @@ export const projetIncludes = {
       estimations_aides: {
         include: { aide: true },
       },
+      estimations_fiches_solutions: {
+        include: {
+          estimation_materiaux: true,
+        },
+      },
     },
   },
   users: {
