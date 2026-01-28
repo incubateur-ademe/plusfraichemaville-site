@@ -1,14 +1,15 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { ReactNode } from "react";
 
 export type BreadcrumbSegment = {
   linkProps: {
     href: string;
   };
-  label: string;
+  label: ReactNode;
 };
 
 export type SiteVitrineBreadcrumbStep = {
-  currentPageLabel: string;
+  currentPageLabel: ReactNode;
   breadcrumbSegments: BreadcrumbSegment[];
 };
 
