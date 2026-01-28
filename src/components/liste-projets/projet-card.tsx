@@ -67,7 +67,7 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
   return (
     <div
       className={clsx(
-        "h-full w-full rounded-xl  p-4 text-start",
+        "h-full w-full rounded-xl p-4 text-start",
         invitationStatus === InvitationStatus.ACCEPTED ? "pfmv-card fr-enlarge-link" : "pfmv-card-no-hover",
       )}
     >

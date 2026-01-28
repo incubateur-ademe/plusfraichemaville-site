@@ -54,19 +54,17 @@ export const Maturite = ({
     <Tooltip className={clsx(withLabel && "invisible")} kind="hover" title={currentNiveau?.label}>
       <Select
         inputId={id}
-        className="z-50"
         isSearchable={false}
-        // isDisabled={readOnly}
         styles={{
           menu: (baseStyles) => ({ ...baseStyles, width: "max-content" }),
         }}
         classNames={{
           indicatorSeparator: (_) => "hidden",
-          control: (_) => `!border-t-0 !border-x-0 !cursor-pointer ${buttonBgHoverColor || "!bg-white"}`,
+          control: (_) => `!border-t-0 !border-x-0 !cursor-pointer z-[50] ${buttonBgHoverColor || "!bg-white"}`,
           valueContainer: (_) => "!p-0 !bg-none",
           dropdownIndicator: (_) => `!text-black ${readOnly && "!hidden"}`,
           option: (state) => (state.isSelected ? "!text-white" : "!text-black"),
-          menu: (_) => `${readOnly && "!hidden"}`,
+          menu: (_) => `${readOnly ? "!hidden" : "!z-[100]"}`,
         }}
         options={readOnly ? [] : ALL_NIVEAU_MATURITE}
         getOptionValue={(niveau) => niveau.code}
