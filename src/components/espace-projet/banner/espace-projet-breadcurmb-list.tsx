@@ -1,6 +1,7 @@
 "use client";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { BreadcrumbSegment } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
+import { ReactNode } from "react";
 
 export const BREADCRUMB_SEGMENT_MES_PROJETS: BreadcrumbSegment = {
   linkProps: {
@@ -20,7 +21,7 @@ export const BREADCRUMB_SEGMENT_DASHBOARD = (projetId: number, projetName: strin
 ];
 
 export type EspaceProjetBreadcrumbStep = {
-  currentPageLabel: string;
+  currentPageLabel: ReactNode;
   breadcrumbSegments: (_projetId: number, _projetName: string) => BreadcrumbSegment[];
 };
 
