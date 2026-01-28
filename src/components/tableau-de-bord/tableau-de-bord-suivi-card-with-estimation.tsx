@@ -10,15 +10,15 @@ export const TableauDeBordSuiviWithEstimation = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
 
   const lastCompletedEstimation = useMemo(() => getLastCompletedEstimation(projet?.estimations), [projet?.estimations]);
+  const { fournitureMin, fournitureMax, entretienMin, entretienMax, isLoading } = useEstimationFSGlobalPrice(
+    lastCompletedEstimation?.estimations_fiches_solutions || [],
+  );
+
   if (!lastCompletedEstimation) {
     return (
       <span className="text-sm">Choisir les matériaux adéquats pour faire une estimation du coût des solutions.</span>
     );
   }
-  const { fournitureMin, fournitureMax, entretienMin, entretienMax, isLoading } = useEstimationFSGlobalPrice(
-    lastCompletedEstimation.estimations_fiches_solutions,
-  );
-
   return (
     <div className="mt-auto flex flex-row justify-between text-sm">
       <div className="font-bold">Dernière estimation :</div>
