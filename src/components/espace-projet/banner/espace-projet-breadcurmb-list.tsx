@@ -6,7 +6,7 @@ export const BREADCRUMB_SEGMENT_MES_PROJETS: BreadcrumbSegment = {
   linkProps: {
     href: PFMV_ROUTES.ESPACE_PROJET,
   },
-  label: "Mes projets",
+  label: <span className="ri-list-view fr-icon--xs before:mr-1">Mes projets</span>,
 };
 
 export const BREADCRUMB_SEGMENT_DASHBOARD = (projetId: number, projetName: string): BreadcrumbSegment[] => [
