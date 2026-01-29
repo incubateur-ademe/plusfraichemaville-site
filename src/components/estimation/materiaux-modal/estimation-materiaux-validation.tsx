@@ -50,12 +50,14 @@ export function EstimationMateriauxValidation({
         entretienMin={entretienMin}
         entretienMax={entretienMax}
       />
-      <Button className={`mr-4 rounded-3xl`} onClick={validateEstimation}>
-        {"Valider l'estimation"}
-      </Button>
-      <Button className={`rounded-3xl`} onClick={onPrevious} priority="secondary">
-        Précédent
-      </Button>
+      <div className="ml-auto mr-0 mt-10 flex w-fit items-center gap-4">
+        <Button className="rounded-3xl" onClick={onPrevious} priority="tertiary">
+          Précédent
+        </Button>
+        <Button className="rounded-3xl" onClick={validateEstimation}>
+          {"Valider l'estimation"}
+        </Button>
+      </div>
     </>
   );
 }

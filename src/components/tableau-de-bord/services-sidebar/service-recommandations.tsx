@@ -83,7 +83,7 @@ export const ServiceRecommandations = () => {
           {!isLoading && isEmpty(ficheSolutionsIds) && (
             <>
               <p className="text-dsfr-text-default-grey">
-                Sélectionnez d'abord des solutions de rafraîhchissement pour accéder à nos recommandations.
+                Sélectionnez d'abord des solutions de rafraîchissement pour accéder à nos recommandations.
               </p>
               <div className="flex justify-between text-sm text-dsfr-text-default-grey group-hover:underline">
                 <span>Choisir des solutions</span>

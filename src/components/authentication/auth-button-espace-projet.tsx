@@ -13,7 +13,7 @@ export const AuthButtonEspaceProjet = () => {
     <LinkWithoutPrefetch
       href={PFMV_ROUTES.ESPACE_PROJET}
       className={clsx(
-        "fr-btn fr-btn--tertiary ri-dashboard-fill fr-btn--icon-left relative z-10 rounded-3xl",
+        "fr-btn fr-btn--tertiary ri-list-view fr-btn--icon-left relative z-10 rounded-3xl",
         (isConnexionPage || isEspaceProjet) && "!bg-dsfr-background-action-low-blue-france",
       )}
     >

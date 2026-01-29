@@ -16,7 +16,7 @@ export default function SiteVitrineBreadcrumb({
     ...segment,
     linkProps: {
       ...segment.linkProps,
-      onClick: () => trackEvent(SITE_VITRINE_BREADCRUMB_FIL_ARIANE(step?.currentPageLabel || "")),
+      onClick: () => trackEvent(SITE_VITRINE_BREADCRUMB_FIL_ARIANE(step?.currentPageLabel?.toString() || "")),
     },
   }));
   return (
