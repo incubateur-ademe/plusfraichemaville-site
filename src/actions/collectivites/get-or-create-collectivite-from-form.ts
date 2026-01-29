@@ -1,12 +1,12 @@
-import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
+import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { createCollectiviteByName, getOrCreateCollectivite } from "@/src/lib/prisma/prismaCollectiviteQueries";
-import { CollectiviteFormData } from "@/src/forms/collectivite/collectivite-form-schema";
+import { CollectiviteFormData } from "@/src/forms/commune/collectivite-form-schema";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 
 export const getOrCreateCollectiviteFromForm = async (data: CollectiviteFormData, userId: string) => {
   let collectiviteId = data.id;
   if (!collectiviteId) {
-    const entitiesFromBan = await fetchCollectiviteFromBanApi(data.nomCollectivite, 20);
+    const entitiesFromBan = await fetchCommuneFromBanApi(data.nomCollectivite, 20);
     const collectiviteToUse = entitiesFromBan.find((address) => address.banId === data.banId);
     if (!collectiviteToUse) {
       captureError(`Could not retrieve adresse info for collectivite ${data.nomCollectivite} ${data.banId}`, data);

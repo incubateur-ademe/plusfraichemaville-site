@@ -8,8 +8,6 @@ import { UserInfoFormData, UserInfoFormSchema } from "@/src/forms/user/UserInfoF
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
-import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
-import { mapDBCollectiviteToCollectiviteAddress } from "@/src/lib/adresseApi/banApiHelper";
 import { editUserInfoAction } from "@/src/actions/users/edit-user-info-action";
 import { notifications } from "@/src/components/common/notifications";
 import { useUserStore } from "@/src/stores/user/provider";
@@ -33,7 +31,6 @@ export const UserInfoForm = ({
   newUser: boolean;
 }) => {
   const router = useRouter();
-  const userCollectivite = user.collectivites[0];
   const setUserInfos = useUserStore((state) => state.setUserInfos);
   const [anchor, setAnchor] = useState("");
 
@@ -48,7 +45,6 @@ export const UserInfoForm = ({
       prenom: user.prenom ?? "",
       email: user.email,
       poste: user.poste ?? "",
-      collectivite: mapDBCollectiviteToCollectiviteAddress(userCollectivite?.collectivite) ?? undefined,
       nomEtablissement: user.nom_etablissement ?? "",
       canalAcquisition: user.canal_acquisition ?? "",
       customCanalAcquisition: user.canal_acquisition ?? "",
@@ -80,30 +76,10 @@ export const UserInfoForm = ({
       <InputFormField control={form.control} path="nom" label="Nom" asterisk={true} />
       <InputFormField control={form.control} path="prenom" label="Prénom" asterisk={true} />
       <InputFormField control={form.control} path="email" label="Email" asterisk={true} disabled={!!user.email} />
-      <CollectiviteInputFormField
-        control={form.control}
-        path={"collectivite"}
-        label={
-          <>
-            <span>Collectivité à laquelle je suis rattaché</span>
-            <button
-              aria-describedby="tooltip-collectivite"
-              type="button"
-              className="fr-btn--tooltip fr-btn rounded-3xl text-dsfr-text-disabled-grey"
-            />
-            <span className="fr-tooltip fr-placement" id="tooltip-collectivite" role="tooltip">
-              Cette collectivité correspond à la commune dans laquelle se situe le siège de l’établissement auquel je
-              suis rattaché.
-            </span>
-          </>
-        }
-        asterisk={true}
-        disabled={!!userCollectivite}
-      />
       <InputFormField
         control={form.control}
         path={"nomEtablissement"}
-        label="Etablissement auquel je suis rattaché"
+        label="Collectivité à laquelle je suis rattachée"
         asterisk={true}
         disabled={!!user.nom_etablissement}
       />

@@ -10,7 +10,7 @@ import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/Pro
 import SelectFormField from "@/src/components/common/SelectFormField";
 import { monthDateToString } from "@/src/helpers/dateUtils";
 import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
-import CollectiviteInputFormField from "@/src/components/common/CollectiviteInputFormField";
+import CommuneInputFormField from "@/src/components/common/CommuneInputFormField";
 import { upsertProjetAction } from "@/src/actions/projets/upsert-projet-action";
 import { notifications } from "@/src/components/common/notifications";
 import { useProjetsStore } from "@/src/stores/projets/provider";
@@ -133,10 +133,10 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
           placeholder="Selectionnez un niveau de maturité"
           disabled={disabled}
         />
-        <CollectiviteInputFormField
+        <CommuneInputFormField
           control={form.control}
           path="collectivite"
-          label="Collectivité du projet"
+          label="Commune où se situe le projet"
           asterisk={true}
           disabled={disabled}
         />

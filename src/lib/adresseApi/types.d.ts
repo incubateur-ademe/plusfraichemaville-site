@@ -5,10 +5,10 @@ type BanFeatureCollection = FeatureCollection<Point, GeoJsonProperties>;
 export type BanFeature = Feature<Point, GeoJsonProperties<object>>;
 export type BanAPIResponse = BanFeatureCollection | ErrorResponse;
 
-export type AddressCollectivite = {
+export type AddressCommune = {
   id?: number;
   banId: string;
-  nomCollectivite: string;
+  nomCommune: string;
   codePostal: string;
   codeInsee: string;
   oldCodeInsee?: string;

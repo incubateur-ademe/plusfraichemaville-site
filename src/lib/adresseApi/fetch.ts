@@ -1,5 +1,5 @@
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { AddressCollectivite, AddressProjet, BanAPIResponse } from "@/src/lib/adresseApi/types";
+import { AddressCommune, AddressProjet, BanAPIResponse } from "@/src/lib/adresseApi/types";
 import { mapAddressApiToAddressProjet, mapAddressApiToCollectiviteAddress } from "@/src/lib/adresseApi/banApiHelper";
 import { Feature, GeoJsonProperties, Point } from "geojson";
 
@@ -27,10 +27,7 @@ export const fetchAddressFromBanApi = async (
   return result.features;
 };
 
-export const fetchCollectiviteFromBanApi = async (
-  keyword: string,
-  limit: number = 10,
-): Promise<AddressCollectivite[]> => {
+export const fetchCommuneFromBanApi = async (keyword: string, limit: number = 10): Promise<AddressCommune[]> => {
   try {
     const results = await fetchAddressFromBanApi(keyword, limit, "municipality");
     return results.map(mapAddressApiToCollectiviteAddress);

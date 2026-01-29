@@ -2,13 +2,12 @@
 
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { auth } from "@/src/lib/next-auth/auth";
-import { getUserWithCollectivites, updateUser } from "@/src/lib/prisma/prismaUserQueries";
+import { updateUser } from "@/src/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
 import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { UserInfoFormData, UserInfoFormSchema } from "@/src/forms/user/UserInfoFormSchema";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createConnectContact } from "@/src/services/connect";
@@ -34,14 +33,6 @@ export const editUserInfoAction = async (
     return { type: "error", message: "PARSING_ERROR" };
   } else {
     try {
-      const prismaUser = await getUserWithCollectivites(data.userId);
-      if (
-        prismaUser?.collectivites[0] &&
-        prismaUser?.collectivites[0].collectivite.ban_id !== data.collectivite.banId
-      ) {
-        return { type: "error", message: "CHANGE_COLLECTIVITE_ERROR" };
-      }
-      const collectiviteId = await getOrCreateCollectiviteFromForm(data.collectivite, session.user.id);
       const canalAcquisition =
         data.canalAcquisition === CUSTOM_CANAL_ACQUISITION.label
           ? data.customCanalAcquisition || data.canalAcquisition
@@ -52,7 +43,6 @@ export const editUserInfoAction = async (
         userPrenom: data.prenom,
         userNom: data.nom,
         userPoste: data.poste,
-        collectiviteId: collectiviteId,
         canalAcquisition: canalAcquisition,
         nomEtablissement: data.nomEtablissement,
         acceptCommunicationProduit: data.acceptCommunicationProduit,

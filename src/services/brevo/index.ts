@@ -295,12 +295,9 @@ export class EmailService {
   }
 
   async sendWelcomeMessageEmail(data: Pick<UserInfoFormData, "email" | "nom"> & { nomCollectivite?: string }) {
-    const mailParams = { ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) };
     return this.sendEmail({
       to: data.email,
       emailType: emailType.welcomeMessageV2,
-      params: mailParams,
-      extra: mailParams,
     });
   }
 
@@ -407,10 +404,8 @@ export class EmailService {
 
     return await Promise.all(
       users.map(async (user) => {
-        const nomCollectivite = user.collectivites[0]?.collectivite.nom;
         const emailParams = {
           userPrenom: user.prenom || "",
-          ...(nomCollectivite && { userCollectiviteName: `pour ${nomCollectivite}` }),
           nbUtilisateurs: countAllUsers.toString(),
         };
         return await this.sendEmail({

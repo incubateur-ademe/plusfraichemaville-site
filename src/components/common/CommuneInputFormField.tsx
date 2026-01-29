@@ -3,9 +3,9 @@ import { Fragment, ReactNode, useEffect, useState } from "react";
 import { Control, Controller, FieldPath, FieldValues } from "react-hook-form";
 import RedAsterisk from "@/src/components/common/RedAsterisk";
 import { Combobox, ComboboxInput, ComboboxOption, ComboboxOptions, Transition } from "@headlessui/react";
-import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
+import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
 import debounce from "lodash/debounce";
-import { AddressCollectivite } from "@/src/lib/adresseApi/types";
+import { AddressCommune } from "@/src/lib/adresseApi/types";
 import clsx from "clsx";
 import { Spinner } from "@/src/components/common/spinner";
 
@@ -25,7 +25,7 @@ type CommonProps<T extends FieldValues> = {
 
 export type InputFormFieldProps<T extends FieldValues> = CommonProps<T>;
 
-const CollectiviteInputFormField = <T extends FieldValues>({
+const CommuneInputFormField = <T extends FieldValues>({
   label,
   path,
   control,
@@ -42,11 +42,11 @@ const CollectiviteInputFormField = <T extends FieldValues>({
 
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [fetchedAddresses, setFetchedAddresses] = useState<AddressCollectivite[]>([]);
+  const [fetchedAddresses, setFetchedAddresses] = useState<AddressCommune[]>([]);
 
   useEffect(() => {
     setLoading(true);
-    fetchCollectiviteFromBanApi(query)
+    fetchCommuneFromBanApi(query)
       .then((result) => {
         setFetchedAddresses(result);
       })
@@ -83,8 +83,8 @@ const CollectiviteInputFormField = <T extends FieldValues>({
                 id={id}
                 aria-describedby={ariaDescribedBy}
                 className=" fr-input w-full "
-                displayValue={(address: AddressCollectivite) =>
-                  address ? `${address?.nomCollectivite} - ${address?.codePostal}` : ""
+                displayValue={(address: AddressCommune) =>
+                  address ? `${address?.nomCommune} - ${address?.codePostal}` : ""
                 }
                 onChange={(event) => throttledFetchCollectivite(event.target.value)}
                 onBlur={onBlur}
@@ -120,7 +120,7 @@ const CollectiviteInputFormField = <T extends FieldValues>({
                       {({ selected, focus }) => (
                         <>
                           <span className={`block truncate ${selected ? "font-medium" : "font-normal"}`}>
-                            {`${address.nomCollectivite} - ${address.codePostal}`}
+                            {`${address.nomCommune} - ${address.codePostal}`}
                           </span>
                           {selected ? (
                             <span
@@ -177,4 +177,4 @@ const CollectiviteInputFormField = <T extends FieldValues>({
   );
 };
 
-export default CollectiviteInputFormField;
+export default CommuneInputFormField;

@@ -1,15 +1,15 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { AddressCollectivite } from "@/src/lib/adresseApi/types";
+import { AddressCommune } from "@/src/lib/adresseApi/types";
 import { Prisma } from "@/src/generated/prisma/client";
 import { generateRandomId } from "@/src/helpers/common";
 
-export const getOrCreateCollectivite = async (data: AddressCollectivite, creatorUserId: string) => {
+export const getOrCreateCollectivite = async (data: AddressCommune, creatorUserId: string) => {
   return prismaClient.collectivite.upsert({
     where: {
       code_insee: data.codeInsee,
     },
     create: {
-      nom: data.nomCollectivite,
+      nom: data.nomCommune,
       code_postal: data.codePostal,
       code_insee: data.codeInsee,
       ban_id: data.banId,

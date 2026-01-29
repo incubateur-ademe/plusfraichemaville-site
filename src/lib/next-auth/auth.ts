@@ -9,7 +9,7 @@ import { getOrCreateCollectivite } from "@/src/lib/prisma/prismaCollectiviteQuer
 import { attachUserToCollectivite } from "@/src/lib/prisma/prismaUserCollectiviteQueries";
 import { getUserWithCollectivites, updateUserEtablissementInfo } from "@/src/lib/prisma/prismaUserQueries";
 import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
-import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
+import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { attachInvitationsByEmail } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { EmailService } from "@/src/services/brevo";
@@ -35,7 +35,7 @@ export const authOptions: NextAuthOptions = {
             );
           }
           if (codePostal && codeInsee) {
-            const entitiesFromBan = await fetchCollectiviteFromBanApi(codePostal);
+            const entitiesFromBan = await fetchCommuneFromBanApi(codePostal);
             const collectiviteToUse = entitiesFromBan.find(
               (address) => address.codeInsee === codeInsee && address.codePostal === codePostal,
             );
@@ -56,7 +56,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   session: {
-    strategy: "jwt", // Use JSON Web Tokens (JWT) for session management
+    strategy: "jwt",
   },
   pages: {
     signIn: PFMV_ROUTES.CONNEXION,
