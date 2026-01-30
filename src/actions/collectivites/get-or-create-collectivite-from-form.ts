@@ -6,14 +6,14 @@ import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 export const getOrCreateCollectiviteFromForm = async (data: CollectiviteFormData, userId: string) => {
   let collectiviteId = data.id;
   if (!collectiviteId) {
-    const entitiesFromBan = await fetchCommuneFromBanApi(data.nomCollectivite, 20);
+    const entitiesFromBan = await fetchCommuneFromBanApi(data.nomCommune, 20);
     const collectiviteToUse = entitiesFromBan.find((address) => address.banId === data.banId);
     if (!collectiviteToUse) {
-      captureError(`Could not retrieve adresse info for collectivite ${data.nomCollectivite} ${data.banId}`, data);
+      captureError(`Could not retrieve adresse info for collectivite ${data.nomCommune} ${data.banId}`, data);
     }
     const collectivite = collectiviteToUse
       ? await getOrCreateCollectivite(collectiviteToUse, userId)
-      : await createCollectiviteByName(data.nomCollectivite, userId);
+      : await createCollectiviteByName(data.nomCommune, userId);
     collectiviteId = collectivite.id;
   }
   return collectiviteId;

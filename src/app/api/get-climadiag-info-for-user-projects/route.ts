@@ -3,8 +3,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { authOptions } from "@/src/lib/next-auth/auth";
 import { getUserProjets } from "@/src/lib/prisma/prismaProjetQueries";
 import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
-import { notEmpty } from "@/src/helpers/listUtils";
 import { getClimadiagInfoFromCodeInsee } from "@/src/lib/prisma/prisma-climadiag-queries";
+import { isSirenCommune } from "@/src/helpers/categories-juridiques";
+import { SirenInfo } from "@/src/lib/siren/types";
 
 export async function GET(request: NextRequest) {
   const requestUserId = request.nextUrl.searchParams.get("userId");
@@ -15,15 +16,23 @@ export async function GET(request: NextRequest) {
     } else {
       const userProjets = await getUserProjets(requestUserId);
       const user = await getUserWithCollectivites(requestUserId);
-      const collectiviteInseeCode = new Set<string>(
-        user?.collectivites.map((userCollectivite) => userCollectivite.collectivite.code_insee).filter(notEmpty),
-      );
+      const userSirenInfo = user?.siren_info as SirenInfo | null;
+      const climadiagSearchKeys = new Set<string>();
+      if (
+        userSirenInfo &&
+        isSirenCommune(userSirenInfo) &&
+        userSirenInfo.adresseEtablissement.codeCommuneEtablissement
+      ) {
+        climadiagSearchKeys.add(userSirenInfo.adresseEtablissement.codeCommuneEtablissement);
+      } else if (userSirenInfo?.siren) {
+        climadiagSearchKeys.add(userSirenInfo.siren);
+      }
       userProjets.map((projet) => {
         if (projet.collectivite.code_insee) {
-          collectiviteInseeCode.add(projet.collectivite.code_insee);
+          climadiagSearchKeys.add(projet.collectivite.code_insee);
         }
       });
-      return NextResponse.json(await getClimadiagInfoFromCodeInsee(Array.from(collectiviteInseeCode)));
+      return NextResponse.json(await getClimadiagInfoFromCodeInsee(Array.from(climadiagSearchKeys)));
     }
   } else {
     return NextResponse.json(null, { status: 401 });

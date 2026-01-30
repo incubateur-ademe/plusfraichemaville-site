@@ -4,7 +4,7 @@ import { collectivite } from "@/src/generated/prisma/client";
 import capitalize from "lodash/capitalize";
 
 export const hasAllRequiredFieldsSet = (user: UserInfos) =>
-  user && user.nom && user.prenom && user.email && user.collectivites[0]?.collectivite_id && user.poste;
+  user && user.nom && user.prenom && user.email && user.poste;
 
 export const getPrimaryCollectiviteForUser = (user: UserWithCollectivite): collectivite =>
   user.collectivites[0].collectivite;

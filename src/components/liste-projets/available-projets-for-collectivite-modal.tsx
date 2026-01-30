@@ -25,7 +25,7 @@ export const AvailableProjetsForCollectiviteModal = () => {
   );
   const userInfos = useUserStore((state) => state.userInfos);
   const userId = userInfos?.id;
-  const userCollectiviteName = userInfos?.collectivites[0].collectivite.nom || "";
+  const userCollectiviteName = userInfos?.nom_etablissement || "";
 
   useEffect(() => {
     if (collectiviteId) {

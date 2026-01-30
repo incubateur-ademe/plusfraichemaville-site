@@ -1,21 +1,26 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useUserStore } from "@/src/stores/user/provider";
+import { SirenInfo } from "@/src/lib/siren/types";
 
 export const AvailableProjetsForCollectiviteButton = ({ className }: { className?: string }) => {
   const setCollectiviteIdToListAvailableProjets = useModalStore(
     (state) => state.setCollectiviteIdToListAvailableProjets,
   );
-  const userCollectiviteId = useUserStore((state) => state.userInfos?.collectivites[0].collectivite_id);
+  const userSirenInfo = useUserStore((state) => state.userInfos?.siren_info as SirenInfo | null);
 
   return (
-    <Button
-      iconId="ri-add-circle-fill"
-      priority="secondary"
-      onClick={() => userCollectiviteId && setCollectiviteIdToListAvailableProjets(userCollectiviteId)}
-      className={className}
-    >
-      Rejoindre {"d'autres"} projets de ma collectivité
-    </Button>
+    <>
+      {!userSirenInfo?.siren ? null : (
+        <Button
+          iconId="ri-add-circle-fill"
+          priority="secondary"
+          onClick={() => setCollectiviteIdToListAvailableProjets(0)}
+          className={className}
+        >
+          Rejoindre {"d'autres"} projets de ma collectivité
+        </Button>
+      )}
+    </>
   );
 };

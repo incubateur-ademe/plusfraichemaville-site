@@ -4,7 +4,7 @@ export const CollectiviteFormSchema = z.object(
   {
     id: z.number().optional(),
     banId: z.string(),
-    nomCollectivite: z.string(),
+    nomCommune: z.string(),
     codeInsee: z.string(),
   },
   {
