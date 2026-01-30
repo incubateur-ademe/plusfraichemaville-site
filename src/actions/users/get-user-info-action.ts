@@ -2,13 +2,11 @@
 
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
-import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { User } from "@/src/generated/prisma/client";
 
-export const getUserInfoAction = async (
-  userId: string,
-): Promise<ResponseAction<{ userInfos?: UserWithCollectivite | null }>> => {
+export const getUserInfoAction = async (userId: string): Promise<ResponseAction<{ userInfos?: User | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -20,7 +18,7 @@ export const getUserInfoAction = async (
     return { type: "error", message: "UNAUTHORIZED" };
   }
 
-  const userInfos = await getUserWithCollectivites(userId);
+  const userInfos = await getUserById(userId);
 
   return { userInfos };
 };

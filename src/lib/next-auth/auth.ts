@@ -7,7 +7,7 @@ import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { fetchEntrepriseFromSirenApi } from "@/src/lib/siren/fetch";
 import { getOrCreateCollectivite } from "@/src/lib/prisma/prismaCollectiviteQueries";
 import { attachUserToCollectivite } from "@/src/lib/prisma/prismaUserCollectiviteQueries";
-import { getUserWithCollectivites, updateUserEtablissementInfo } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserById, updateUserEtablissementInfo } from "@/src/lib/prisma/prismaUserQueries";
 import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
 import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
@@ -18,7 +18,7 @@ export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prismaClient),
   events: {
     createUser: async ({ user }) => {
-      const prismaUser = await getUserWithCollectivites(user.id);
+      const prismaUser = await getUserById(user.id);
       let collectivite = null;
       if (prismaUser) {
         const agentConnectInfo = prismaUser.agentconnect_info as AgentConnectInfo;

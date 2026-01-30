@@ -7,7 +7,6 @@ import InputFormField from "@/src/components/common/InputFormField";
 import { UserInfoFormData, UserInfoFormSchema } from "@/src/forms/user/UserInfoFormSchema";
 import { useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { editUserInfoAction } from "@/src/actions/users/edit-user-info-action";
 import { notifications } from "@/src/components/common/notifications";
 import { useUserStore } from "@/src/stores/user/provider";
@@ -19,17 +18,10 @@ import { Case, Conditional, Default } from "@/src/components/common/conditional-
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 import { useEffect, useState } from "react";
 import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
+import { User } from "@/src/generated/prisma/client";
 
 export const COMMUNICATION_SETTINGS_ANCHOR = "communication";
-export const UserInfoForm = ({
-  user,
-  buttonLabel,
-  newUser,
-}: {
-  user: UserWithCollectivite;
-  buttonLabel: string;
-  newUser: boolean;
-}) => {
+export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; buttonLabel: string; newUser: boolean }) => {
   const router = useRouter();
   const setUserInfos = useUserStore((state) => state.setUserInfos);
   const [anchor, setAnchor] = useState("");
