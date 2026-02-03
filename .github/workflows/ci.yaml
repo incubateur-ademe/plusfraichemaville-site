@@ -52,7 +52,7 @@ jobs:
       SCALINGO_APP_NAME: ${{ github.ref == 'refs/heads/prod' && vars.SCALINGO_PROD_APP_NAME || vars.SCALINGO_STAGING_APP_NAME }}
       SCALINGO_HOST: ${{ github.ref == 'refs/heads/prod' && vars.SCALINGO_PROD_HOST || vars.SCALINGO_STAGING_HOST }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6.0.2
       - uses: kolok/deploy-to-scalingo@v1
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}

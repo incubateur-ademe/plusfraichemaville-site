@@ -12,7 +12,7 @@ export const fetchAddressFromBanApi = async (
     return [];
   }
   const response = await fetch(
-    `https://api-adresse.data.gouv.fr/search/?q=${keyword}&limit=${limit}${type ? `&type=${type}` : ""}`,
+    `https://data.geopf.fr/geocodage/search/?q=${keyword}&limit=${limit}${type ? `&type=${type}` : ""}`,
     {
       method: "GET",
       headers: {
