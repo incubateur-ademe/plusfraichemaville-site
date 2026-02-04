@@ -92,6 +92,7 @@ export const updateUserEtablissementInfo = async (
     data: {
       nom_etablissement: nomEtablissement,
       siren_info: etablissementInfo as Prisma.JsonObject,
+      siren: etablissementInfo?.siren,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });

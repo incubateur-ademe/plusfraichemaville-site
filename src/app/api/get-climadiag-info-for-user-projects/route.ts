@@ -18,11 +18,7 @@ export async function GET(request: NextRequest) {
       const user = await getUserWithCollectivites(requestUserId);
       const userSirenInfo = user?.siren_info as SirenInfo | null;
       const climadiagSearchKeys = new Set<string>();
-      if (
-        userSirenInfo &&
-        isSirenCommune(userSirenInfo) &&
-        userSirenInfo.adresseEtablissement.codeCommuneEtablissement
-      ) {
+      if (isSirenCommune(userSirenInfo) && userSirenInfo?.adresseEtablissement.codeCommuneEtablissement) {
         climadiagSearchKeys.add(userSirenInfo.adresseEtablissement.codeCommuneEtablissement);
       } else if (userSirenInfo?.siren) {
         climadiagSearchKeys.add(userSirenInfo.siren);

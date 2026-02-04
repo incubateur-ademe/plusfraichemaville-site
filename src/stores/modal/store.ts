@@ -11,6 +11,7 @@ interface ModalState {
   currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState;
   collectiviteIdToListAvailableProjets: number | null;
   showInfoViewerMode: boolean;
+  showAvailableProjetForUser: boolean;
   currentAnnuaireRexProjet: string | null;
   currentFicheDiagnostic: FicheDiagnostic | null;
 }
@@ -22,6 +23,7 @@ export type ModalActions = {
   setCurrentDeleteOrQuitModal: (_currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState) => void;
   setCollectiviteIdToListAvailableProjets: (_collectiviteId: number | null) => void;
   setShowInfoViewerMode: (_showInfoViewerMode: boolean) => void;
+  setShowAvailableProjetForUser: (_showAvailableProjetForUser: boolean) => void;
   setAnnuaireRexProjetSlug: (_annuaireRexProjetSlug: string | null) => void;
   setCurrentFicheDiagnostic: (_currentFicheDiagnostic: FicheDiagnostic | null) => void;
 };
@@ -35,6 +37,7 @@ export const defaultInitState: ModalState = {
   currentDeleteOrQuitModal: null,
   collectiviteIdToListAvailableProjets: null,
   showInfoViewerMode: false,
+  showAvailableProjetForUser: false,
   currentAnnuaireRexProjet: null,
   currentFicheDiagnostic: null,
 };
@@ -53,6 +56,8 @@ export const createModalStore = (initState: ModalState = defaultInitState) => {
     setCollectiviteIdToListAvailableProjets: (collectiviteId) =>
       set(() => ({ collectiviteIdToListAvailableProjets: collectiviteId })),
     setShowInfoViewerMode: (showInfoViewerMode) => set(() => ({ showInfoViewerMode: showInfoViewerMode })),
+    setShowAvailableProjetForUser: (showAvailableProjetForUser) =>
+      set(() => ({ showAvailableProjetForUser: showAvailableProjetForUser })),
     setAnnuaireRexProjetSlug: (annuaireRexProjetSlug) =>
       set(() => ({ currentAnnuaireRexProjet: annuaireRexProjetSlug })),
     setCurrentFicheDiagnostic: (ficheDiagnostic) => set(() => ({ currentFicheDiagnostic: ficheDiagnostic })),

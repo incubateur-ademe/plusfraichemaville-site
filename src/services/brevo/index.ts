@@ -9,7 +9,6 @@ import { ResponseAction } from "@/src/actions/actions-types";
 import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { ProjetWithRelations, UserProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import {
   getProjetsFinishedToGetQuestionnaire,
@@ -276,7 +275,7 @@ export class EmailService {
       const params: EmailProjetPartageConfig = {
         username: `${userProjet.user.prenom} ${userProjet.user.nom}`,
         projetCollectiviteName: userProjet.projet.collectivite.nom,
-        userCollectiviteName: getPrimaryCollectiviteForUser(userProjet.user).nom,
+        userCollectiviteName: userProjet.user.nom_etablissement || "",
         destinationMail: oldestAdmin.user.email,
         projetName: userProjet.projet.nom,
         link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_UTILISATEURS_PROJET(

@@ -8,7 +8,7 @@ import { useSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { useUserStore } from "@/src/stores/user/provider";
 import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
-import { GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL } from "@/src/helpers/routes";
+import { GET_AVAILABLE_PROJETS_FOR_USER_URL } from "@/src/helpers/routes";
 import { upsert } from "@/src/helpers/listUtils";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { ProjetCard } from "@/src/components/liste-projets/projet-card";
@@ -18,26 +18,24 @@ const modal = createModal({
   isOpenedByDefault: false,
 });
 
-export const AvailableProjetsForCollectiviteModal = () => {
-  const collectiviteId = useModalStore((state) => state.collectiviteIdToListAvailableProjets);
-  const setCollectiviteIdToListAvailableProjets = useModalStore(
-    (state) => state.setCollectiviteIdToListAvailableProjets,
-  );
+export const AvailableProjetsForUserModal = () => {
+  const setShowAvailableProjetForUser = useModalStore((state) => state.setShowAvailableProjetForUser);
+  const showAvailableProjetForUser = useModalStore((state) => state.showAvailableProjetForUser);
   const userInfos = useUserStore((state) => state.userInfos);
   const userId = userInfos?.id;
   const userCollectiviteName = userInfos?.nom_etablissement || "";
 
   useEffect(() => {
-    if (collectiviteId) {
+    if (showAvailableProjetForUser) {
       modal.open();
     }
-  }, [collectiviteId]);
+  }, [showAvailableProjetForUser]);
 
   useIsModalOpen(modal, {
-    onConceal: () => setCollectiviteIdToListAvailableProjets(null),
+    onConceal: () => setShowAvailableProjetForUser(false),
   });
 
-  const url = collectiviteId && userId ? GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL(collectiviteId, userId) : null;
+  const url = showAvailableProjetForUser && userId ? GET_AVAILABLE_PROJETS_FOR_USER_URL(userId) : null;
 
   const { data: availableProjects, isLoading, mutate } = useSwrWithFetcher<ProjetWithPublicRelations[]>(url);
 
@@ -45,8 +43,8 @@ export const AvailableProjetsForCollectiviteModal = () => {
     <>
       <modal.Component title="Rejoindre d'autres projets" size="large" className="join-project-modal">
         <span className="mb-8 block text-base">
-          {`Vous pouvez consulter tous les projets de rafraîchissement localisés à ${userCollectiviteName} et
-           soumettre une demande d'accès. L'administrateur sera alors notifié de votre demande.`}
+          {`Vous pouvez consulter tous les projets de rafraîchissement créés par la collectivité ${userCollectiviteName}
+          et soumettre une demande d'accès. L'administrateur sera alors notifié de votre demande.`}
         </span>
         <Conditional>
           <Case condition={!isLoading && (availableProjects?.length || 0) === 0}>

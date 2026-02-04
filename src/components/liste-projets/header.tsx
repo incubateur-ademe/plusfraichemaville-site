@@ -1,6 +1,6 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
 
 export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) => {
   return (
@@ -12,7 +12,7 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
         </div>
         {!isListEmpty && (
           <div className="align-items-center flex flex-wrap-reverse items-center gap-4">
-            <AvailableProjetsForCollectiviteButton className={"rounded-3xl"} />
+            <AvailableProjetsForCollectiviteButton className="rounded-3xl" />
             <LinkWithoutPrefetch
               href={PFMV_ROUTES.CREATE_PROJET}
               className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl"

@@ -13,6 +13,7 @@ import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { attachInvitationsByEmail } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { EmailService } from "@/src/services/brevo";
+import { isSirenCommune } from "@/src/helpers/categories-juridiques";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prismaClient),
@@ -34,7 +35,7 @@ export const authOptions: NextAuthOptions = {
               entityFromSiren.etablissement,
             );
           }
-          if (codePostal && codeInsee) {
+          if (codePostal && codeInsee && isSirenCommune(entityFromSiren?.etablissement)) {
             const entitiesFromBan = await fetchCommuneFromBanApi(codePostal);
             const collectiviteToUse = entitiesFromBan.find(
               (address) => address.codeInsee === codeInsee && address.codePostal === codePostal,

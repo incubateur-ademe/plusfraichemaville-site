@@ -36,6 +36,6 @@ export const CAT_JURIDIQUE_COMMUNE: CategorieJuridique = {
 //   libelle: "Département",
 // };
 
-export const isSirenCommune = (sirenInfo: SirenInfo): boolean => {
-  return sirenInfo.uniteLegale?.categorieJuridiqueUniteLegale === CAT_JURIDIQUE_COMMUNE.code;
+export const isSirenCommune = (sirenInfo: SirenInfo | null | undefined): boolean => {
+  return sirenInfo?.uniteLegale?.categorieJuridiqueUniteLegale === CAT_JURIDIQUE_COMMUNE.code;
 };

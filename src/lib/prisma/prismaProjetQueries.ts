@@ -359,6 +359,30 @@ export const getAvailableProjectsForCollectivite = async (
   });
 };
 
+export const getAvailableProjetsForSiren = async (
+  siren: string,
+  userId: string,
+): Promise<ProjetWithPublicRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      creator: {
+        siren: siren,
+      },
+      NOT: {
+        users: {
+          some: {
+            user_id: userId,
+            invitation_status: InvitationStatus.ACCEPTED,
+            deleted_at: null,
+          },
+        },
+      },
+    },
+    select: projetPublicSelect,
+  });
+};
+
 export const updateMaturiteProjet = (projetId: number, niveauMaturite: string) => {
   return prismaClient.projet.update({
     where: {

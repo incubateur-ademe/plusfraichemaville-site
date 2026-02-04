@@ -4,9 +4,7 @@ import { useUserStore } from "@/src/stores/user/provider";
 import { SirenInfo } from "@/src/lib/siren/types";
 
 export const AvailableProjetsForCollectiviteButton = ({ className }: { className?: string }) => {
-  const setCollectiviteIdToListAvailableProjets = useModalStore(
-    (state) => state.setCollectiviteIdToListAvailableProjets,
-  );
+  const setShowAvailableProjetForUser = useModalStore((state) => state.setShowAvailableProjetForUser);
   const userSirenInfo = useUserStore((state) => state.userInfos?.siren_info as SirenInfo | null);
 
   return (
@@ -15,10 +13,10 @@ export const AvailableProjetsForCollectiviteButton = ({ className }: { className
         <Button
           iconId="ri-add-circle-fill"
           priority="secondary"
-          onClick={() => setCollectiviteIdToListAvailableProjets(0)}
+          onClick={() => setShowAvailableProjetForUser(true)}
           className={className}
         >
-          Rejoindre {"d'autres"} projets de ma collectivité
+          {"Rejoindre d'autres projets de ma collectivité"}
         </Button>
       )}
     </>
