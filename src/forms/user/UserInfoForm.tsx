@@ -71,7 +71,7 @@ export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; butto
       <InputFormField
         control={form.control}
         path={"nomEtablissement"}
-        label="Collectivité à laquelle je suis rattachée"
+        label="Collectivité à laquelle je suis rattaché(e)"
         asterisk={true}
         disabled={!!user.nom_etablissement}
       />

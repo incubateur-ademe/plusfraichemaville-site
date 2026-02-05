@@ -9,7 +9,7 @@ export const CollectiviteFormSchema = z.object(
   },
   {
     invalid_type_error: "Collectivité renseignée non reconnue",
-    required_error: "Veuillez renseigner la collectivité à laquelle vous êtes rattaché",
+    required_error: "Veuillez renseigner la collectivité à laquelle vous êtes rattaché(e)",
   },
 );
 
