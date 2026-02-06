@@ -1,3 +1,5 @@
+import { User } from "@/src/generated/prisma/client";
+
 type CsmBatchWebhookData = {
   nbMailRemindModuleDiagnostic: number;
   nbMailsInactiveUser1: number;
@@ -76,6 +78,17 @@ export const makeBatchErrorWebhookData = (message: string) => {
   return {
     text: `:alert:**[Batch en erreur]**:alert:
 ${message}
+@raphael.taieb  
+`,
+  };
+};
+
+export const makeNoSirenUserWebhookData = (user: User) => {
+  return {
+    text: `:alert:**[Un utilisateur sans SIREN vient de s'inscrire]**:alert:
+User Id : ${user.id}
+Email : ${user.email}
+Collectivité renseignée manuellement : ${user.nom_etablissement}
 @raphael.taieb  
 `,
   };

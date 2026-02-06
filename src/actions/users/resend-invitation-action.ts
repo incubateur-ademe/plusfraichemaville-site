@@ -8,7 +8,7 @@ import { EmailService } from "@/src/services/brevo";
 import { getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { getLastEmailForUserProjet } from "@/src/lib/prisma/prisma-email-queries";
 import { emailType } from "@/src/generated/prisma/client";
-import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 
 const RESEND_DELAY_MINUTES = 10;
 
@@ -19,7 +19,7 @@ export const resendInvitationAction = async (userProjetId: number): Promise<Resp
     return { type: "error", message: "UNAUTHENTICATED" };
   }
   try {
-    const currentUser = await getUserWithCollectivites(session.user.id);
+    const currentUser = await getUserById(session.user.id);
     const userProjet = await getUserProjetById(userProjetId);
     if (!userProjet || !currentUser) {
       return { type: "error", message: "UNAUTHORIZED" };

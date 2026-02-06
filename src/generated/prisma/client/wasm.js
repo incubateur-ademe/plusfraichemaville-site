@@ -145,6 +145,7 @@ exports.Prisma.UserScalarFieldEnum = {
   prenom: 'prenom',
   poste: 'poste',
   nom_etablissement: 'nom_etablissement',
+  siren: 'siren',
   siren_info: 'siren_info',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -415,6 +416,7 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   prenom: 'prenom',
   poste: 'poste',
   nom_etablissement: 'nom_etablissement',
+  siren: 'siren',
   canal_acquisition: 'canal_acquisition',
   discardedInformation: 'discardedInformation'
 };

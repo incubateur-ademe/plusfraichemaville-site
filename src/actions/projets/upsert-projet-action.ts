@@ -1,7 +1,7 @@
 "use server";
 
 import { auth } from "@/src/lib/next-auth/auth";
-import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
@@ -20,9 +20,9 @@ export const upsertProjetAction = async (
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
-  const user = await getUserWithCollectivites(session?.user.id);
+  const user = await getUserById(session.user.id);
 
-  if (!user || !user.collectivites[0]) {
+  if (!user) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
   const permission = new PermissionManager(session);

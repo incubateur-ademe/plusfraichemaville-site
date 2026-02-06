@@ -1,13 +1,9 @@
 import { UserInfos } from "@/src/stores/user/store";
-import { UserPublicInfos, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
-import { collectivite } from "@/src/generated/prisma/client";
+import { UserPublicInfos } from "@/src/lib/prisma/prismaCustomTypes";
 import capitalize from "lodash/capitalize";
 
 export const hasAllRequiredFieldsSet = (user: UserInfos) =>
-  user && user.nom && user.prenom && user.email && user.collectivites[0]?.collectivite_id && user.poste;
-
-export const getPrimaryCollectiviteForUser = (user: UserWithCollectivite): collectivite =>
-  user.collectivites[0].collectivite;
+  user && user.nom && user.prenom && user.email && user.poste && user.nom_etablissement;
 
 export const hasDiscardedInformation = (user: UserInfos, informationId: string): boolean =>
   user?.discardedInformation.includes(informationId) ?? false;

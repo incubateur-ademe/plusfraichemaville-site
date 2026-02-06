@@ -34,7 +34,6 @@ export const updateUser = async ({
   userNom,
   userPrenom,
   userPoste,
-  collectiviteId,
   canalAcquisition,
   nomEtablissement,
   acceptCommunicationProduit,
@@ -44,7 +43,6 @@ export const updateUser = async ({
   userNom: string;
   userPrenom: string;
   userPoste: string;
-  collectiviteId: number;
   acceptCommunicationProduit: boolean;
   acceptCommunicationSuiviProjet: boolean;
   canalAcquisition?: string;
@@ -60,13 +58,6 @@ export const updateUser = async ({
       poste: userPoste,
       accept_communication_produit: acceptCommunicationProduit,
       accept_communication_suivi_projet: acceptCommunicationSuiviProjet,
-      collectivites: {
-        upsert: {
-          where: { userCollectiviteId: { user_id: userId, collectivite_id: collectiviteId } },
-          update: {},
-          create: { collectivite_id: collectiviteId, verified: false },
-        },
-      },
       canal_acquisition: canalAcquisition,
       nom_etablissement: nomEtablissement,
     },
@@ -101,6 +92,7 @@ export const updateUserEtablissementInfo = async (
     data: {
       nom_etablissement: nomEtablissement,
       siren_info: etablissementInfo as Prisma.JsonObject,
+      siren: etablissementInfo?.siren,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });

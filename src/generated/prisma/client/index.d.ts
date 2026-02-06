@@ -4394,6 +4394,7 @@ export namespace Prisma {
     prenom: string | null
     poste: string | null
     nom_etablissement: string | null
+    siren: string | null
     created_at: Date | null
     updated_at: Date | null
     canal_acquisition: string | null
@@ -4413,6 +4414,7 @@ export namespace Prisma {
     prenom: string | null
     poste: string | null
     nom_etablissement: string | null
+    siren: string | null
     created_at: Date | null
     updated_at: Date | null
     canal_acquisition: string | null
@@ -4433,6 +4435,7 @@ export namespace Prisma {
     prenom: number
     poste: number
     nom_etablissement: number
+    siren: number
     siren_info: number
     created_at: number
     updated_at: number
@@ -4456,6 +4459,7 @@ export namespace Prisma {
     prenom?: true
     poste?: true
     nom_etablissement?: true
+    siren?: true
     created_at?: true
     updated_at?: true
     canal_acquisition?: true
@@ -4475,6 +4479,7 @@ export namespace Prisma {
     prenom?: true
     poste?: true
     nom_etablissement?: true
+    siren?: true
     created_at?: true
     updated_at?: true
     canal_acquisition?: true
@@ -4495,6 +4500,7 @@ export namespace Prisma {
     prenom?: true
     poste?: true
     nom_etablissement?: true
+    siren?: true
     siren_info?: true
     created_at?: true
     updated_at?: true
@@ -4590,6 +4596,7 @@ export namespace Prisma {
     prenom: string | null
     poste: string | null
     nom_etablissement: string | null
+    siren: string | null
     siren_info: JsonValue | null
     created_at: Date
     updated_at: Date | null
@@ -4629,6 +4636,7 @@ export namespace Prisma {
     prenom?: boolean
     poste?: boolean
     nom_etablissement?: boolean
+    siren?: boolean
     siren_info?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4668,6 +4676,7 @@ export namespace Prisma {
     prenom?: boolean
     poste?: boolean
     nom_etablissement?: boolean
+    siren?: boolean
     siren_info?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4690,6 +4699,7 @@ export namespace Prisma {
     prenom?: boolean
     poste?: boolean
     nom_etablissement?: boolean
+    siren?: boolean
     siren_info?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4712,6 +4722,7 @@ export namespace Prisma {
     prenom?: boolean
     poste?: boolean
     nom_etablissement?: boolean
+    siren?: boolean
     siren_info?: boolean
     created_at?: boolean
     updated_at?: boolean
@@ -4724,7 +4735,7 @@ export namespace Prisma {
     last_browsing_date?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "image" | "agentconnect_info" | "nom" | "prenom" | "poste" | "nom_etablissement" | "siren_info" | "created_at" | "updated_at" | "canal_acquisition" | "discardedInformation" | "accept_communication_produit" | "accept_communication_suivi_projet" | "statut" | "statut_updated_at" | "last_browsing_date", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "emailVerified" | "image" | "agentconnect_info" | "nom" | "prenom" | "poste" | "nom_etablissement" | "siren" | "siren_info" | "created_at" | "updated_at" | "canal_acquisition" | "discardedInformation" | "accept_communication_produit" | "accept_communication_suivi_projet" | "statut" | "statut_updated_at" | "last_browsing_date", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     accounts?: boolean | User$accountsArgs<ExtArgs>
     collectivites_created?: boolean | User$collectivites_createdArgs<ExtArgs>
@@ -4777,6 +4788,7 @@ export namespace Prisma {
       prenom: string | null
       poste: string | null
       nom_etablissement: string | null
+      siren: string | null
       siren_info: Prisma.JsonValue | null
       created_at: Date
       updated_at: Date | null
@@ -5235,6 +5247,7 @@ export namespace Prisma {
     readonly prenom: FieldRef<"User", 'String'>
     readonly poste: FieldRef<"User", 'String'>
     readonly nom_etablissement: FieldRef<"User", 'String'>
+    readonly siren: FieldRef<"User", 'String'>
     readonly siren_info: FieldRef<"User", 'Json'>
     readonly created_at: FieldRef<"User", 'DateTime'>
     readonly updated_at: FieldRef<"User", 'DateTime'>
@@ -26923,6 +26936,7 @@ export namespace Prisma {
     prenom: 'prenom',
     poste: 'poste',
     nom_etablissement: 'nom_etablissement',
+    siren: 'siren',
     siren_info: 'siren_info',
     created_at: 'created_at',
     updated_at: 'updated_at',
@@ -27271,6 +27285,7 @@ export namespace Prisma {
     prenom: 'prenom',
     poste: 'poste',
     nom_etablissement: 'nom_etablissement',
+    siren: 'siren',
     canal_acquisition: 'canal_acquisition',
     discardedInformation: 'discardedInformation'
   };
@@ -27780,6 +27795,7 @@ export namespace Prisma {
     prenom?: StringNullableFilter<"User"> | string | null
     poste?: StringNullableFilter<"User"> | string | null
     nom_etablissement?: StringNullableFilter<"User"> | string | null
+    siren?: StringNullableFilter<"User"> | string | null
     siren_info?: JsonNullableFilter<"User">
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -27818,6 +27834,7 @@ export namespace Prisma {
     prenom?: SortOrderInput | SortOrder
     poste?: SortOrderInput | SortOrder
     nom_etablissement?: SortOrderInput | SortOrder
+    siren?: SortOrderInput | SortOrder
     siren_info?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
@@ -27860,6 +27877,7 @@ export namespace Prisma {
     prenom?: StringNullableFilter<"User"> | string | null
     poste?: StringNullableFilter<"User"> | string | null
     nom_etablissement?: StringNullableFilter<"User"> | string | null
+    siren?: StringNullableFilter<"User"> | string | null
     siren_info?: JsonNullableFilter<"User">
     created_at?: DateTimeFilter<"User"> | Date | string
     updated_at?: DateTimeNullableFilter<"User"> | Date | string | null
@@ -27898,6 +27916,7 @@ export namespace Prisma {
     prenom?: SortOrderInput | SortOrder
     poste?: SortOrderInput | SortOrder
     nom_etablissement?: SortOrderInput | SortOrder
+    siren?: SortOrderInput | SortOrder
     siren_info?: SortOrderInput | SortOrder
     created_at?: SortOrder
     updated_at?: SortOrderInput | SortOrder
@@ -27926,6 +27945,7 @@ export namespace Prisma {
     prenom?: StringNullableWithAggregatesFilter<"User"> | string | null
     poste?: StringNullableWithAggregatesFilter<"User"> | string | null
     nom_etablissement?: StringNullableWithAggregatesFilter<"User"> | string | null
+    siren?: StringNullableWithAggregatesFilter<"User"> | string | null
     siren_info?: JsonNullableWithAggregatesFilter<"User">
     created_at?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updated_at?: DateTimeNullableWithAggregatesFilter<"User"> | Date | string | null
@@ -29475,6 +29495,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -29513,6 +29534,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -29551,6 +29573,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29589,6 +29612,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29627,6 +29651,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -29649,6 +29674,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -29671,6 +29697,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -31516,6 +31543,7 @@ export namespace Prisma {
     prenom?: SortOrder
     poste?: SortOrder
     nom_etablissement?: SortOrder
+    siren?: SortOrder
     siren_info?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
@@ -31537,6 +31565,7 @@ export namespace Prisma {
     prenom?: SortOrder
     poste?: SortOrder
     nom_etablissement?: SortOrder
+    siren?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     canal_acquisition?: SortOrder
@@ -31556,6 +31585,7 @@ export namespace Prisma {
     prenom?: SortOrder
     poste?: SortOrder
     nom_etablissement?: SortOrder
+    siren?: SortOrder
     created_at?: SortOrder
     updated_at?: SortOrder
     canal_acquisition?: SortOrder
@@ -35221,6 +35251,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -35258,6 +35289,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -35311,6 +35343,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -35348,6 +35381,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36429,6 +36463,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -36466,6 +36501,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -36603,6 +36639,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36640,6 +36677,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -36756,6 +36794,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -36793,6 +36832,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -36835,6 +36875,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -36872,6 +36913,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -37049,6 +37091,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37086,6 +37129,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37134,6 +37178,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37171,6 +37216,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37276,6 +37322,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -37313,6 +37360,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -37408,6 +37456,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37445,6 +37494,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37482,6 +37532,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -37519,6 +37570,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -37609,6 +37661,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37646,6 +37699,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -37726,6 +37780,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -37763,6 +37818,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -37878,6 +37934,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -37915,6 +37972,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -38085,6 +38143,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38122,6 +38181,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38229,6 +38289,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38266,6 +38327,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38430,6 +38492,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -38467,6 +38530,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -38589,6 +38653,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38626,6 +38691,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -38762,6 +38828,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -38799,6 +38866,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -38963,6 +39031,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39000,6 +39069,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39037,6 +39107,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -39074,6 +39145,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -39179,6 +39251,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -39216,6 +39289,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -39333,6 +39407,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39370,6 +39445,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39487,6 +39563,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39524,6 +39601,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39704,6 +39782,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -39741,6 +39820,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -39859,6 +39939,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -39896,6 +39977,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40137,6 +40219,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -40174,6 +40257,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -40227,6 +40311,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40264,6 +40349,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40364,6 +40450,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -40401,6 +40488,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -40523,6 +40611,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40560,6 +40649,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40597,6 +40687,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -40634,6 +40725,7 @@ export namespace Prisma {
     prenom?: string | null
     poste?: string | null
     nom_etablissement?: string | null
+    siren?: string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: Date | string
     updated_at?: Date | string | null
@@ -40687,6 +40779,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -40724,6 +40817,7 @@ export namespace Prisma {
     prenom?: NullableStringFieldUpdateOperationsInput | string | null
     poste?: NullableStringFieldUpdateOperationsInput | string | null
     nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
     siren_info?: NullableJsonNullValueInput | InputJsonValue
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null

@@ -2,6 +2,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 const webhooks = {
   batch: process.env.MATTERMOST_WEBHOOK_BATCH_URL,
+  noSiren: process.env.MATTERMOST_WEBHOOK_NO_SIREN_URL,
 } as const;
 
 const WEBHOOK_TIMEOUT_DURATION = 3000;

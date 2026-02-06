@@ -7,18 +7,19 @@ import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { fetchEntrepriseFromSirenApi } from "@/src/lib/siren/fetch";
 import { getOrCreateCollectivite } from "@/src/lib/prisma/prismaCollectiviteQueries";
 import { attachUserToCollectivite } from "@/src/lib/prisma/prismaUserCollectiviteQueries";
-import { getUserWithCollectivites, updateUserEtablissementInfo } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserById, updateUserEtablissementInfo } from "@/src/lib/prisma/prismaUserQueries";
 import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
-import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
+import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { attachInvitationsByEmail } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { EmailService } from "@/src/services/brevo";
+import { isSirenCommune } from "@/src/helpers/categories-juridiques";
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prismaClient),
   events: {
     createUser: async ({ user }) => {
-      const prismaUser = await getUserWithCollectivites(user.id);
+      const prismaUser = await getUserById(user.id);
       let collectivite = null;
       if (prismaUser) {
         const agentConnectInfo = prismaUser.agentconnect_info as AgentConnectInfo;
@@ -34,8 +35,8 @@ export const authOptions: NextAuthOptions = {
               entityFromSiren.etablissement,
             );
           }
-          if (codePostal && codeInsee) {
-            const entitiesFromBan = await fetchCollectiviteFromBanApi(codePostal);
+          if (codePostal && codeInsee && isSirenCommune(entityFromSiren?.etablissement)) {
+            const entitiesFromBan = await fetchCommuneFromBanApi(codePostal);
             const collectiviteToUse = entitiesFromBan.find(
               (address) => address.codeInsee === codeInsee && address.codePostal === codePostal,
             );
@@ -56,7 +57,7 @@ export const authOptions: NextAuthOptions = {
     },
   },
   session: {
-    strategy: "jwt", // Use JSON Web Tokens (JWT) for session management
+    strategy: "jwt",
   },
   pages: {
     signIn: PFMV_ROUTES.CONNEXION,

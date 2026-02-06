@@ -1,7 +1,6 @@
 "use server";
 
 import { auth } from "@/src/lib/next-auth/auth";
-import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation/EstimationFormSchema";
@@ -16,10 +15,6 @@ export const createEstimationAction = async (
 ): Promise<ResponseAction<{ estimation?: EstimationWithAides }>> => {
   const session = await auth();
   if (!session) {
-    return { type: "error", message: "UNAUTHENTICATED" };
-  }
-  const user = await getUserWithCollectivites(session?.user.id);
-  if (!user || !user.collectivites[0]) {
     return { type: "error", message: "UNAUTHENTICATED" };
   }
 

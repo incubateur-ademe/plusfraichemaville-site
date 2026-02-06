@@ -1,7 +1,7 @@
 import { createStore } from "zustand/vanilla";
-import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { User } from "@/src/generated/prisma/client";
 
-export type UserInfos = UserWithCollectivite | null | undefined;
+export type UserInfos = User | null | undefined;
 
 interface UserState {
   userInfos?: UserInfos;

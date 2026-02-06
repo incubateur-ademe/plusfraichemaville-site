@@ -22,18 +22,18 @@ Lancé par Cron toutes les nuits.
 Ces scripts ont été lancés pour effectuer des traitements ou récupérer des données à un instant t.  
 Ils sont conservés au cas où ils auraient à être relancés.
 
-### [fill-climadiag-tables.tsx](fill-climadiag-tables.tsx)
+### [fill-climadiag-tables.tsx](archive/fill-climadiag-tables.tsx)
 
 Récupère les fichiers climadiag fournis par Météo France, et remplit la table "climadiag" avec leur données.
-Sera à relancer lorsque nous aurons des mise à jour des données climadiag.
+Sera à relancer lorsque nous aurons des mises à jour des données climadiag.
 Attention : le code postal de Mâcon est faux. Après le lancement du script, il faut le mettre à jour pour mettre 71000 à la place de 71870.
 
-### [update-climadiag-population.tsx](update-climadiag-population.tsx)
+### [update-climadiag-population.tsx](archive/update-climadiag-population.tsx)
 
 Le script précédent ne récupére pas l'attribut "population" des fichiers de Météo France. Or cet attribut est utile pour ordonner la liste des résultats de recherche de collectivités.  
 Ce script sert donc à mettre à jour la table "climadiag" avec la donnée "population"
 
-### [fill-lcz-infos.tsx](fill-lcz-infos.tsx)
+### [fill-lcz-infos.tsx](archive/fill-lcz-infos.tsx)
 
 Ce script vient compléter la table "climadiag" avec les infos LCZ du CEREMA.  
 Trois infos sont récupérées pour chacune des collectivités :
@@ -45,13 +45,13 @@ Trois infos sont récupérées pour chacune des collectivités :
 Pour chaque collectivité où le taux de couverture est supérieur à 0, on va chercher ses coordonnées géographiques grâce à l'API adresse.
 Puis pour chaque EPCI, on va calculer puis stocker une moyenne du taux de couverture, et renseigner les coordonées géographiques de sa collectivité la plus couverte.
 
-### [fill-adresse-all-infos-field.ts](fill-adresse-all-infos-field.ts)
+### [fill-adresse-all-infos-field.ts](archive/fill-adresse-all-infos-field.ts)
 
 Au lancement de PFMV, on n'enregistrait pas tout le retour de l'API adresse pour les projets et les collectivités.  
 Or une partie des données que l'on n'enregistrait pas sont utiles pour localiser les adresses sur une carte.
 Ce script sert donc à rappeler l'API adresse pour toutes les collectivités et tous les projets pour remplir le nouveau champ adresse contenant toutes les infos.
 
-### [fill-user-etablissement-field.tsx](fill-user-etablissement-field.tsx)
+### [fill-user-etablissement-field.tsx](archive/fill-user-etablissement-field.tsx)
 
 Remplit le champ nom_etablissement et siren_info de tous les utilisateurs pour la table user.
 

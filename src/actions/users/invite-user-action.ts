@@ -2,7 +2,7 @@
 
 import { auth } from "@/src/lib/next-auth/auth";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { getUserByEmail, getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserByEmail, getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { InvitationStatus, RoleProjet } from "@/src/generated/prisma/client";
 import { ResponseAction } from "../actions-types";
 import { EmailService } from "@/src/services/brevo";
@@ -21,7 +21,7 @@ export const inviteMemberAction = async (
     if (!session) {
       return { type: "error", message: "UNAUTHENTICATED", updatedProjet: null };
     }
-    const currentUser = await getUserWithCollectivites(session.user.id);
+    const currentUser = await getUserById(session.user.id);
 
     const projet = await getProjetById(projectId);
     const canShareProject = await new PermissionManager(session).canShareProject(projectId);

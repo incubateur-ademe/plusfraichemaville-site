@@ -48,6 +48,7 @@ model User {
   prenom                            String?
   poste                             String?
   nom_etablissement                 String?
+  siren                             String?
   siren_info                        Json?
   created_at                        DateTime                  @default(now())
   updated_at                        DateTime?                 @updatedAt
