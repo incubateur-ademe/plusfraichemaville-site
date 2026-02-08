@@ -35,7 +35,8 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(null, { status: 403 });
   }
 
-  const ficheSolutions = await getFicheSolutionByIds(estimation.fiches_solutions_id);
+  const ficheSolutionIds = estimation.estimations_fiches_solutions.map((efs) => efs.fiche_solution_id);
+  const ficheSolutions = await getFicheSolutionByIds(ficheSolutionIds);
   const collectivite = await getCollectiviteById(projet.collectiviteId);
   if (collectivite) {
     const result = await searchAidesFromAidesTerritoires(

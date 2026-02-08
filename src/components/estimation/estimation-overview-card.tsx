@@ -87,13 +87,15 @@ export const EstimationOverviewCard = ({
   const isEstimationCompleted = useMemo(() => isComplete(estimation), [estimation]);
 
   useEffect(() => {
-    if (isEditMode && estimation.fiches_solutions_id.length === 0) {
+    if (isEditMode && estimation.estimations_fiches_solutions.length === 0) {
       setIsEditMode(false);
     }
-  }, [estimation.fiches_solutions_id.length, isEditMode]);
+  }, [estimation.estimations_fiches_solutions.length, isEditMode]);
 
   const handleEditFicheSolution = (ficheSolutionId: number) => {
-    const index = estimation.fiches_solutions_id.findIndex((id) => +id === +ficheSolutionId);
+    const index = estimation.estimations_fiches_solutions.findIndex(
+      (efs) => efs.fiche_solution_id === +ficheSolutionId,
+    );
     if (index !== -1) {
       setCurrentEstimation({ id: estimation.id, startingStep: index + 1 });
     }

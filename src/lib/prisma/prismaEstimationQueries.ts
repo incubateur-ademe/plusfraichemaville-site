@@ -45,7 +45,6 @@ export const createEstimation = async (
     const createdEstimation = await tx.estimation.create({
       data: {
         projet_id: projetId,
-        fiches_solutions_id: fichesSolutions.map((fs) => +fs.id),
         created_by: createdBy,
         id: generateRandomId(),
       },
@@ -177,7 +176,7 @@ export const deleteFicheSolutionInEstimation = async (
   return prismaClient.$transaction(async (tx) => {
     const estimation = await tx.estimation.findUnique({
       where: { id: estimationId, deleted_at: null },
-      select: { fiches_solutions_id: true, projet_id: true },
+      select: { projet_id: true },
     });
 
     if (!estimation) {
