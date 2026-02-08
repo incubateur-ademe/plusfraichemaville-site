@@ -55,7 +55,7 @@ export function EstimationMateriauxValidation({
           Précédent
         </Button>
         <Button className="rounded-3xl" onClick={validateEstimation}>
-          {"Valider l'estimation"}
+          {"Enregistrer et fermer"}
         </Button>
       </div>
     </>
