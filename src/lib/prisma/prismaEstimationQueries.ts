@@ -169,3 +169,49 @@ export const updateEstimationMateriaux = async (
 
   return newEstimation;
 };
+
+export const deleteFicheSolutionInEstimation = async (
+  estimationId: number,
+  ficheSolutionId: number,
+): Promise<EstimationWithAides> => {
+  return prismaClient.$transaction(async (tx) => {
+    const estimation = await tx.estimation.findUnique({
+      where: { id: estimationId, deleted_at: null },
+      select: { fiches_solutions_id: true, projet_id: true },
+    });
+
+    if (!estimation) {
+      throw new Error("Estimation introuvable");
+    }
+
+    await tx.estimation_fiche_solution.delete({
+      where: {
+        estimation_id_fiche_solution_id: {
+          estimation_id: estimationId,
+          fiche_solution_id: ficheSolutionId,
+        },
+      },
+    });
+
+    const updatedEstimation = await tx.estimation.update({
+      where: { id: estimationId },
+      data: {
+        updated_at: new Date(),
+      },
+      include: {
+        estimations_aides: {
+          include: { aide: true },
+        },
+        estimations_fiches_solutions: {
+          include: {
+            estimation_materiaux: true,
+          },
+        },
+      },
+    });
+
+    await projetUpdated(estimation.projet_id);
+
+    return updatedEstimation;
+  });
+};

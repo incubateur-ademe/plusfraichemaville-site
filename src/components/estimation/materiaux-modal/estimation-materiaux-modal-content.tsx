@@ -12,6 +12,7 @@ import { isSimpleMateriauFicheSolution, makeFicheSolutionCompleteUrlApi } from "
 import EstimationMateriauSimpleFieldForm from "@/src/forms/estimation/estimation-materiau-form-simple-field";
 import { estimationModal } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { useModalStore } from "@/src/stores/modal/provider";
 
 type EstimationCardDeleteModalProps = {
   estimation: EstimationWithAides;
@@ -19,10 +20,15 @@ type EstimationCardDeleteModalProps = {
 
 export function EstimationMateriauModalContent({ estimation }: EstimationCardDeleteModalProps) {
   const [estimationStep, setEstimationStep] = useState(1);
+  const currentEstimationData = useModalStore((state) => state.currentEstimation);
 
   useEffect(() => {
-    setEstimationStep(1);
-  }, [estimation.id]);
+    if (currentEstimationData?.startingStep) {
+      setEstimationStep(currentEstimationData.startingStep);
+    } else {
+      setEstimationStep(1);
+    }
+  }, [estimation.id, currentEstimationData?.startingStep]);
 
   const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
