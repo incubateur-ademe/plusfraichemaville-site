@@ -4,22 +4,24 @@ import { EstimationFicheSolution, EstimationMateriau, EstimationWithAides } from
 import { projetUpdated } from "./prismaProjetQueries";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
+const estimationIncludes = {
+  estimations_aides: {
+    include: { aide: true },
+  },
+  estimations_fiches_solutions: {
+    include: {
+      estimation_materiaux: true,
+    },
+  },
+};
+
 export const getEstimationById = async (estimationId: number): Promise<EstimationWithAides | null> => {
   return prismaClient.estimation.findUnique({
     where: {
       id: estimationId,
       deleted_at: null,
     },
-    include: {
-      estimations_aides: {
-        include: { aide: true },
-      },
-      estimations_fiches_solutions: {
-        include: {
-          estimation_materiaux: true,
-        },
-      },
-    },
+    include: estimationIncludes,
   });
 };
 
@@ -48,16 +50,7 @@ export const createEstimation = async (
         created_by: createdBy,
         id: generateRandomId(),
       },
-      include: {
-        estimations_aides: {
-          include: { aide: true },
-        },
-        estimations_fiches_solutions: {
-          include: {
-            estimation_materiaux: true,
-          },
-        },
-      },
+      include: estimationIncludes,
     });
     for (const ficheSolution of fichesSolutions) {
       const newEstimationFicheSolution = await tx.estimation_fiche_solution.create({
@@ -152,16 +145,7 @@ export const updateEstimationMateriaux = async (
   const newEstimation = await prismaClient.estimation.update({
     where: { id: estimationId },
     data: { updated_at: new Date() },
-    include: {
-      estimations_aides: {
-        include: { aide: true },
-      },
-      estimations_fiches_solutions: {
-        include: {
-          estimation_materiaux: true,
-        },
-      },
-    },
+    include: estimationIncludes,
   });
 
   await projetUpdated(newEstimation.projet_id);
@@ -197,16 +181,7 @@ export const deleteFicheSolutionInEstimation = async (
       data: {
         updated_at: new Date(),
       },
-      include: {
-        estimations_aides: {
-          include: { aide: true },
-        },
-        estimations_fiches_solutions: {
-          include: {
-            estimation_materiaux: true,
-          },
-        },
-      },
+      include: estimationIncludes,
     });
 
     await projetUpdated(estimation.projet_id);
@@ -253,16 +228,7 @@ export const addFichesSolutionsToEstimation = async (
       data: {
         updated_at: new Date(),
       },
-      include: {
-        estimations_aides: {
-          include: { aide: true },
-        },
-        estimations_fiches_solutions: {
-          include: {
-            estimation_materiaux: true,
-          },
-        },
-      },
+      include: estimationIncludes,
     });
 
     await projetUpdated(estimation.projet_id);

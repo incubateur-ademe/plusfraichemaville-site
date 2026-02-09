@@ -98,7 +98,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
         <Button className={`rounded-3xl bg-pfmv-navy`} type="submit" disabled={disabled}>
           {"Faire une estimation"}
         </Button>
-        {error && <p className="fr-error-text !text-base mb-4">{error.message}</p>}
+        {error && <p className="fr-error-text mb-4 !text-base">{error.message}</p>}
       </FicheSolutionSmallCardContainer>
     </form>
   );
