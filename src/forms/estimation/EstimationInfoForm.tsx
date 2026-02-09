@@ -67,9 +67,8 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
   return (
     <form id="create-estimation-form" onSubmit={form.handleSubmit(onSubmit)}>
       <FicheSolutionSmallCardContainer
-        title=""
-        subtitle="Choisissez les solutions à estimer pour votre simulation"
-        className="pfmv-strong-card "
+        title="Choisissez les solutions à estimer pour votre simulation"
+        className="pfmv-strong-card"
       >
         <div className={clsx("mb-12 flex flex-wrap gap-6")}>
           {projetFichesSolutionsIds.map((ficheSolutionId) => (
@@ -99,7 +98,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
         <Button className={`rounded-3xl bg-pfmv-navy`} type="submit" disabled={disabled}>
           {"Faire une estimation"}
         </Button>
-        {error && <p className={clsx("fr-error-text !text-base", "mb-4")}>{error.message}</p>}
+        {error && <p className="fr-error-text !text-base mb-4">{error.message}</p>}
       </FicheSolutionSmallCardContainer>
     </form>
   );

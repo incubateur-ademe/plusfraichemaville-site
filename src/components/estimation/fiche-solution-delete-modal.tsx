@@ -31,12 +31,7 @@ export function FicheSolutionDeleteModal({
 
   return (
     <>
-      <Button
-        priority="secondary"
-        size="small"
-        nativeButtonProps={modal.buttonProps}
-        className="rounded-3xl"
-      >
+      <Button priority="secondary" size="small" nativeButtonProps={modal.buttonProps} className="rounded-3xl">
         Supprimer
       </Button>
       <modal.Component

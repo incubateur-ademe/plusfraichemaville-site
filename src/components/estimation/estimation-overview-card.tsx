@@ -54,12 +54,7 @@ const FicheSolutionSmallCardWithActions = ({
         <EstimationCardPriceInfo estimationInfo={estimationFicheSolution} />
         {isEditMode && (
           <div className="mt-4 flex flex-row gap-2">
-            <Button
-              priority="primary"
-              size="small"
-              onClick={() => onEdit(ficheSolutionId)}
-              className="rounded-3xl"
-            >
+            <Button priority="primary" size="small" onClick={() => onEdit(ficheSolutionId)} className="rounded-3xl">
               {isEstimated ? "Modifier" : "Estimer"}
             </Button>
             <FicheSolutionDeleteModal
@@ -152,9 +147,7 @@ export const EstimationOverviewCard = ({
         {isEditMode && canEditEstimation && fichesSolutionsIdsNotInEstimation.length > 0 && (
           <button
             onClick={() =>
-              router.push(
-                PFMV_ROUTES.ESPACE_PROJET_ESTIMATION_AJOUTER_SOLUTIONS(currentProjet!.id, estimation.id),
-              )
+              router.push(PFMV_ROUTES.ESPACE_PROJET_ESTIMATION_AJOUTER_SOLUTIONS(currentProjet!.id, estimation.id))
             }
             className={clsx(
               "fr-btn !h-32 !w-32 rounded-[10px] bg-dsfr-text-label-blue-france",

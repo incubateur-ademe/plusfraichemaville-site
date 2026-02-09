@@ -55,6 +55,7 @@ pnpm run connect-sync        # Sync with Connect CRM
 ### App Router Structure
 
 The app uses Next.js 15 App Router with route groups:
+
 - **`(auth)/`**: Authentication pages
 - **`(site-vitrine)/`**: Public-facing pages (marketing site)
 - **`(static)/`**: Static pages (legal, cookies, etc.)
@@ -68,6 +69,7 @@ The project maximizes use of React Server Components for content pages. Client c
 ### Data Layer Architecture
 
 **Content (CMS):**
+
 - All editorial content fetched from external Strapi CMS
 - GraphQL queries in `src/lib/strapi/queries/`
 - Type-safe Strapi types in `src/lib/strapi/types/`
@@ -75,12 +77,14 @@ The project maximizes use of React Server Components for content pages. Client c
 - Cache revalidation via tags system
 
 **Application Data (Database):**
+
 - PostgreSQL database using custom Prisma schema (`prisma/schema.prisma`)
 - Prisma client generated to custom path: `src/generated/prisma/client`
 - **All database queries isolated in** `src/lib/prisma/prisma[Domain]Queries.ts` files
 - Never call Prisma directly from components or actions
 
 **Server Actions Pattern:**
+
 - All mutations use Server Actions (not API routes)
 - Located in `src/actions/[domain]/` directories
 - Must include `"use server"` directive
@@ -98,12 +102,14 @@ The project maximizes use of React Server Components for content pages. Client c
 ### External Integrations
 
 **Services** (`src/services/`):
+
 - `brevo/`: Email service (transactional emails)
 - `hubspot/`: CRM and analytics
 - `connect/`: CRM Connect synchronization
 - `mattermost/`: Team notifications
 
 **External APIs:**
+
 - Aides Territoires API: Funding opportunities
 - API Adresse (BAN): French address geocoding
 - Sirene API (INSEE): French business registry
@@ -155,35 +161,36 @@ type MyComponentProps = {
 
 // PascalCase export name, but kebab-case filename
 export const MyComponent = ({ label, isActive }: MyComponentProps) => {
-  return (
-    <div className={clsx("base-class", { "active-class": isActive })}>
-      {label}
-    </div>
-  );
+  return <div className={clsx("base-class", { "active-class": isActive })}>{label}</div>;
 };
 ```
 
 ### Component
+
 Create one component per file.
 
 ### Styling
+
 - Tailwind utility classes primarily
 - DSFR classes prefixed with `fr-` (French Design System)
 - Use `clsx` for conditional classes
 - Buttons should include `rounded-3xl` class
 
 ### Forms
+
 - Forms should be put in `src/forms/[domain]/`
 - React Hook Form with Controller wrapper
 - Zod schemas in `src/forms/[domain]/`
 - Reusable form field components in `src/components/common/`
 
 ### Error Handling
+
 - Wrap Server Actions in try/catch
 - Use `captureError` or `customCaptureException` from `src/lib/sentry/sentryCustomMessage`
 - Return structured error responses with `ResponseAction` type
 
 ### TypeScript
+
 - Strict mode enabled
 - Avoid `any` types
 - Define types/interfaces adjacent to usage or in `src/types/`
@@ -215,14 +222,17 @@ Create one component per file.
 ## Testing Locally
 
 To test with production-like behavior:
+
 ```bash
 pnpm run localAsProd
 ```
+
 This cleans `.next`, builds, and starts the production server locally.
 
 ## Database Migrations
 
 Development workflow:
+
 ```bash
 # Make schema changes in prisma/schema.prisma
 pnpm run dev:db:migrate  # Creates migration file and applies it
@@ -230,6 +240,7 @@ pnpm run dev:db:generateClient  # Regenerate Prisma client
 ```
 
 Production deployment:
+
 ```bash
 pnpm run db:migrate  # Applies pending migrations
 ```

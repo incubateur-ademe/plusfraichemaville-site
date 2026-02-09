@@ -1,7 +1,6 @@
 "use client";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Button from "@codegouvfr/react-dsfr/Button";
-import clsx from "clsx";
 import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation/EstimationFormSchema";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -95,12 +94,10 @@ export const AddSolutionsToEstimationForm = ({
 
   return (
     <>
-      <div className="mb-10 text-lg">
-        {`Sélectionnez les solutions que vous souhaitez ajouter à votre estimation.`}
-      </div>
+      <div className="mb-10 text-lg">Sélectionnez les solutions que vous souhaitez ajouter à votre estimation.</div>
       <form id="add-solutions-form" onSubmit={form.handleSubmit(onSubmit)}>
-        <FicheSolutionSmallCardContainer title="" subtitle="Solutions disponibles" className="pfmv-strong-card">
-          <div className={clsx("mb-12 flex flex-wrap gap-6")}>
+        <FicheSolutionSmallCardContainer title="Solutions disponibles" className="pfmv-strong-card">
+          <div className="mb-12 flex flex-wrap gap-6">
             {fichesSolutionsIdsNotInEstimation.map((ficheSolutionId) => (
               <FicheSolutionSmallCard
                 key={ficheSolutionId}
@@ -125,15 +122,15 @@ export const AddSolutionsToEstimationForm = ({
             ))}
           </div>
 
-          <div className="flex gap-4 justify-end">
-            <Button className={`rounded-3xl bg-pfmv-navy`} type="submit" disabled={disabled}>
+          <div className="flex justify-end gap-4">
+            <Button className="rounded-3xl bg-pfmv-navy" type="submit" disabled={disabled}>
               {"Valider"}
             </Button>
             <Button className="rounded-3xl" priority="secondary" onClick={handleCancel} type="button">
               {"Annuler"}
             </Button>
           </div>
-          {error && <p className={clsx("fr-error-text !text-base", "mb-4")}>{error.message}</p>}
+          {error && <p className="fr-error-text mb-4 !text-base">{error.message}</p>}
         </FicheSolutionSmallCardContainer>
       </form>
     </>
