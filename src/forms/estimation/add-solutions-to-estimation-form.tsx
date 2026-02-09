@@ -125,7 +125,7 @@ export const AddSolutionsToEstimationForm = ({
             ))}
           </div>
 
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-end">
             <Button className={`rounded-3xl bg-pfmv-navy`} type="submit" disabled={disabled}>
               {"Valider"}
             </Button>

@@ -181,7 +181,7 @@ export const EstimationOverviewCard = ({
           <div className="font-bold">Entretien</div>
           <div>{`${formatNumberWithSpaces(entretienMin)} - ${formatNumberWithSpaces(entretienMax)} € HT / an`}</div>
         </div>
-        <div className="mt-4">
+        <div className="mt-4 justify-self-end">
           <Button
             priority="tertiary no outline"
             onClick={() =>
