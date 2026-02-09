@@ -153,6 +153,9 @@ export const MyComponent = ({ label, isActive }: MyComponentProps) => {
 };
 ```
 
+### Component
+Create one component per file.
+
 ### Styling
 - Tailwind utility classes primarily
 - DSFR classes prefixed with `fr-` (French Design System)
@@ -160,6 +163,7 @@ export const MyComponent = ({ label, isActive }: MyComponentProps) => {
 - Buttons should include `rounded-3xl` class
 
 ### Forms
+- Forms should be put in `src/forms/[domain]/`
 - React Hook Form with Controller wrapper
 - Zod schemas in `src/forms/[domain]/`
 - Reusable form field components in `src/components/common/`

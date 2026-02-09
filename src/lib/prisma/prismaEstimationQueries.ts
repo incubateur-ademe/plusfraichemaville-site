@@ -214,3 +214,59 @@ export const deleteFicheSolutionInEstimation = async (
     return updatedEstimation;
   });
 };
+
+export const addFichesSolutionsToEstimation = async (
+  estimationId: number,
+  fichesSolutions: FicheSolution[],
+): Promise<EstimationWithAides> => {
+  const estimation = await getEstimationById(estimationId);
+  if (!estimation) {
+    throw new Error("Estimation introuvable");
+  }
+
+  return prismaClient.$transaction(async (tx) => {
+    for (const ficheSolution of fichesSolutions) {
+      await tx.estimation_fiche_solution.create({
+        data: {
+          estimation_id: estimationId,
+          fiche_solution_id: +ficheSolution.id,
+          cout_max_entretien: 0,
+          cout_min_entretien: 0,
+          cout_max_investissement: 0,
+          cout_min_investissement: 0,
+          estimation_materiaux: {
+            createMany: {
+              data:
+                ficheSolution.attributes.materiaux?.data.map((materiau) => ({
+                  materiau_id: +materiau.id,
+                  quantite: 0,
+                })) || [],
+            },
+          },
+        },
+        include: { estimation_materiaux: true },
+      });
+    }
+
+    const updatedEstimationData = await tx.estimation.update({
+      where: { id: estimationId },
+      data: {
+        updated_at: new Date(),
+      },
+      include: {
+        estimations_aides: {
+          include: { aide: true },
+        },
+        estimations_fiches_solutions: {
+          include: {
+            estimation_materiaux: true,
+          },
+        },
+      },
+    });
+
+    await projetUpdated(estimation.projet_id);
+
+    return updatedEstimationData;
+  });
+};

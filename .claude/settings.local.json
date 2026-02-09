@@ -8,7 +8,8 @@
       "Bash(pnpm prisma migrate dev:*)",
       "Bash(pnpm run dev:db:generateClient:*)",
       "Bash(tasklist:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(pnpm exec tsc:*)"
     ]
   }
 }
