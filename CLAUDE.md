@@ -131,12 +131,21 @@ The project maximizes use of React Server Components for content pages. Client c
 ## Key Patterns & Conventions
 
 ### File Naming
-- Use `kebab-case` for all files: `my-component.tsx`, `user-queries.ts`
-- Named exports for components and functions
+
+**CRITICAL: ALL files MUST use `kebab-case`, never PascalCase or camelCase**
+
+- ✅ Correct: `my-component.tsx`, `user-queries.ts`, `add-solutions-form.tsx`
+- ❌ Wrong: `MyComponent.tsx`, `userQueries.ts`, `AddSolutionsForm.tsx`
+- This applies to ALL files: components, forms, utilities, queries, etc.
+- Named exports for components and functions (export name can be PascalCase, but filename must be kebab-case)
 - Default exports only for Next.js pages/layouts
 
 ### Component Structure
+
+**Example showing kebab-case filename with PascalCase export:**
+
 ```tsx
+// File: my-component.tsx (kebab-case filename)
 import clsx from "clsx";
 
 type MyComponentProps = {
@@ -144,6 +153,7 @@ type MyComponentProps = {
   isActive?: boolean;
 };
 
+// PascalCase export name, but kebab-case filename
 export const MyComponent = ({ label, isActive }: MyComponentProps) => {
   return (
     <div className={clsx("base-class", { "active-class": isActive })}>

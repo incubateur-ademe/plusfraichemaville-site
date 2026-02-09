@@ -9,7 +9,8 @@
       "Bash(pnpm run dev:db:generateClient:*)",
       "Bash(tasklist:*)",
       "Bash(findstr:*)",
-      "Bash(pnpm exec tsc:*)"
+      "Bash(pnpm exec tsc:*)",
+      "Bash(git mv:*)"
     ]
   }
 }
