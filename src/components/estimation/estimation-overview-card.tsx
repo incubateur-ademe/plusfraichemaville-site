@@ -6,12 +6,12 @@ import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useEffect, useMemo, useState } from "react";
 import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
-import { isComplete, isFicheSolutionEstimated } from "@/src/helpers/estimation";
+import { isComplete, isFicheSolutionEstimated, sortEstimationFichesSolutions } from "@/src/helpers/estimation";
 import { dateToStringWithTime } from "@/src/helpers/dateUtils";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
-import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
 import { FicheSolutionDeleteModal } from "@/src/components/estimation/fiche-solution-delete-modal";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
@@ -19,7 +19,6 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
-import { TypeFiche } from "@/src/helpers/common";
 import { useRouter } from "next/navigation";
 
 const FicheSolutionSmallCardWithActions = ({
@@ -135,7 +134,7 @@ export const EstimationOverviewCard = ({
         )}
       </div>
       <div className={clsx("mb-12 flex flex-wrap gap-6")}>
-        {estimation.estimations_fiches_solutions.map((estimationFicheSolution) => (
+        {sortEstimationFichesSolutions(estimation).map((estimationFicheSolution) => (
           <FicheSolutionSmallCardWithActions
             key={estimationFicheSolution.fiche_solution_id}
             ficheSolutionId={estimationFicheSolution.fiche_solution_id}

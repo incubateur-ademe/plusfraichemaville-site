@@ -13,6 +13,7 @@ import EstimationMateriauSimpleFieldForm from "@/src/forms/estimation/estimation
 import { estimationModal } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { useModalStore } from "@/src/stores/modal/provider";
+import { sortEstimationFichesSolutions } from "@/src/helpers/estimation";
 
 type EstimationCardDeleteModalProps = {
   estimation: EstimationWithAides;
@@ -21,6 +22,7 @@ type EstimationCardDeleteModalProps = {
 export function EstimationMateriauModalContent({ estimation }: EstimationCardDeleteModalProps) {
   const [estimationStep, setEstimationStep] = useState(1);
   const currentEstimationData = useModalStore((state) => state.currentEstimation);
+  const sortedEstimationFichesSolutions = sortEstimationFichesSolutions(estimation);
 
   useEffect(() => {
     if (currentEstimationData?.startingStep) {
@@ -35,13 +37,13 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
 
   const { data: currentFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
     estimationStep <= estimation.estimations_fiches_solutions.length
-      ? makeFicheSolutionCompleteUrlApi(estimation.estimations_fiches_solutions[estimationStep - 1].fiche_solution_id)
+      ? makeFicheSolutionCompleteUrlApi(sortedEstimationFichesSolutions[estimationStep - 1].fiche_solution_id)
       : null,
   );
 
   const { data: nextFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
     estimationStep <= estimation.estimations_fiches_solutions.length - 1
-      ? makeFicheSolutionCompleteUrlApi(estimation.estimations_fiches_solutions[estimationStep].fiche_solution_id)
+      ? makeFicheSolutionCompleteUrlApi(sortedEstimationFichesSolutions[estimationStep].fiche_solution_id)
       : null,
   );
   const currentFicheSolution = currentFicheSolutionData && currentFicheSolutionData[0];
