@@ -66,6 +66,8 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
   ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
     `/espace-projet/${projetId}/estimation/liste${(opener && `?open=${opener}`) || ""}`,
+  ESPACE_PROJET_ESTIMATION_AJOUTER_SOLUTIONS: (projetId: number, estimationId: number) =>
+    `/espace-projet/${projetId}/estimation/${estimationId}/ajouter-solutions`,
   ESPACE_PROJET_FICHES_SOLUTIONS_REX: (projetId: number, projetRexSlug: string) =>
     `/espace-projet/${projetId}/projet/${projetRexSlug}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION: (projetId: number, ficheSolutionSlug: string) =>

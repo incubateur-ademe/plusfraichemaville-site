@@ -10,7 +10,7 @@ import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 export const deleteFicheSolutionInEstimationAction = async (
   estimationId: number,
   ficheSolutionId: number,
-): Promise<ResponseAction<{ estimation?: EstimationWithAides }>> => {
+): Promise<ResponseAction<{ estimation?: EstimationWithAides; estimationDeleted?: boolean }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -24,7 +24,16 @@ export const deleteFicheSolutionInEstimationAction = async (
   }
 
   try {
-    const updatedEstimation = await deleteFicheSolutionInEstimation(estimationId, ficheSolutionId);
+    const updatedEstimation = await deleteFicheSolutionInEstimation(estimationId, ficheSolutionId, session.user.id);
+
+    if (updatedEstimation === null) {
+      return {
+        type: "success",
+        message: "ESTIMATION_DELETE",
+        estimationDeleted: true,
+      };
+    }
+
     return {
       type: "success",
       message: "ESTIMATION_CREATED",

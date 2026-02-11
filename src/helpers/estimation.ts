@@ -6,6 +6,7 @@ import {
 } from "@/src/lib/prisma/prismaCustomTypes";
 import orderBy from "lodash/orderBy";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import sortBy from "lodash/sortBy";
 
 export const isComplete = (estimation: EstimationWithAides) => {
   const notEstimatedSolutionIndex = estimation.estimations_fiches_solutions.findIndex(
@@ -82,3 +83,6 @@ export const computePriceEstimationFicheSolution = (
     { entretien: { min: 0, max: 0 }, fourniture: { min: 0, max: 0 } },
   );
 };
+
+export const sortEstimationFichesSolutions = (estimation: EstimationWithAides): EstimationFicheSolution[] =>
+  sortBy(estimation.estimations_fiches_solutions, ["created_at", "fiche_solution_id"]);

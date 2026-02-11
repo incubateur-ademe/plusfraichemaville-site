@@ -31,12 +31,7 @@ export function FicheSolutionDeleteModal({
 
   return (
     <>
-      <Button
-        priority="secondary"
-        size="small"
-        nativeButtonProps={modal.buttonProps}
-        className="rounded-3xl"
-      >
+      <Button priority="secondary" size="small" nativeButtonProps={modal.buttonProps} className="rounded-3xl">
         Supprimer
       </Button>
       <modal.Component
@@ -53,19 +48,27 @@ export function FicheSolutionDeleteModal({
               const actionResult = await deleteFicheSolutionInEstimationAction(estimation.id, ficheSolutionId);
               notifications(actionResult.type, actionResult.message);
               const impactedProjet = getProjetById(estimation.projet_id);
-              if (actionResult.type === "success" && impactedProjet && actionResult.estimation) {
+
+              if (actionResult.type === "success" && impactedProjet) {
                 modal.close();
 
                 if (currentEstimationData?.id === estimation.id) {
                   estimationModal.close();
                 }
 
-                updateProjetInStore({
-                  ...impactedProjet,
-                  estimations: impactedProjet.estimations?.map((es) =>
-                    es.id === estimation.id ? actionResult.estimation! : es,
-                  ),
-                });
+                if (actionResult.estimationDeleted) {
+                  updateProjetInStore({
+                    ...impactedProjet,
+                    estimations: impactedProjet.estimations?.filter((es) => es.id !== estimation.id),
+                  });
+                } else if (actionResult.estimation) {
+                  updateProjetInStore({
+                    ...impactedProjet,
+                    estimations: impactedProjet.estimations?.map((es) =>
+                      es.id === estimation.id ? actionResult.estimation! : es,
+                    ),
+                  });
+                }
               }
             },
           },
@@ -80,7 +83,7 @@ export function FicheSolutionDeleteModal({
         <div className="flex items-center">
           <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
           <span className="text-2xl font-bold">
-            Êtes-vous certain de vouloir retirer la solution &ldquo;{ficheSolutionTitle}&rdquo; de cette estimation ?
+            Êtes-vous certain de vouloir retirer la solution "{ficheSolutionTitle}" de cette estimation ?
           </span>
         </div>
       </modal.Component>
