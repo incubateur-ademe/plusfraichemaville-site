@@ -51,16 +51,18 @@ export default function BannerProjet({ className }: { className?: string }) {
                         {currentProjet.nom}
                       </LinkWithoutPrefetch>
                     </h1>
-                    <LinkWithoutPrefetch
-                      href={PFMV_ROUTES.ESPACE_PROJET_INFO_PROJET(currentProjet.id)}
-                      className={clsx(
-                        "!bg-none text-sm text-pfmv-navy hover:underline",
-                        isBannerExpanded ? "flex" : "collapse",
-                      )}
-                    >
-                      <i className="ri-edit-box-line fr-icon--sm mr-1" />
-                      Éditer le projet
-                    </LinkWithoutPrefetch>
+                    {!isLecteur && (
+                      <LinkWithoutPrefetch
+                        href={PFMV_ROUTES.ESPACE_PROJET_INFO_PROJET(currentProjet.id)}
+                        className={clsx(
+                          "!bg-none text-sm text-pfmv-navy hover:underline",
+                          isBannerExpanded ? "flex" : "collapse",
+                        )}
+                      >
+                        <i className="ri-edit-box-line fr-icon--sm mr-1" />
+                        Éditer le projet
+                      </LinkWithoutPrefetch>
+                    )}
                   </div>
                   {isBannerExpanded ? (
                     <>
