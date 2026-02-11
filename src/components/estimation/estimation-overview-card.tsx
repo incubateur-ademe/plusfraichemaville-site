@@ -1,72 +1,20 @@
 "use client";
 import clsx from "clsx";
 
-import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";
 import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { useEffect, useMemo, useState } from "react";
 import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
-import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
-import { isComplete, isFicheSolutionEstimated, sortEstimationFichesSolutions } from "@/src/helpers/estimation";
+import { isComplete, sortEstimationFichesSolutions } from "@/src/helpers/estimation";
 import { dateToStringWithTime } from "@/src/helpers/dateUtils";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
-import { FicheSolutionDeleteModal } from "@/src/components/estimation/fiche-solution-delete-modal";
-import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
-import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { useRouter } from "next/navigation";
-
-const FicheSolutionSmallCardWithActions = ({
-  ficheSolutionId,
-  estimation,
-  isEditMode,
-  onEdit,
-}: {
-  ficheSolutionId: number;
-  estimation: EstimationWithAides;
-  isEditMode?: boolean;
-  onEdit: (ficheSolutionId: number) => void;
-}) => {
-  const { data: ficheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(ficheSolutionId),
-  );
-  const ficheSolution = ficheSolutionData?.[0];
-
-  const estimationFicheSolution = estimation.estimations_fiches_solutions?.find(
-    (em) => em.fiche_solution_id === ficheSolutionId,
-  );
-
-  const isEstimated = estimationFicheSolution ? isFicheSolutionEstimated(estimationFicheSolution) : false;
-
-  return (
-    <FicheSolutionSmallCard
-      ficheSolutionId={ficheSolutionId}
-      className="rounded-2xl border-[1px] border-dsfr-border-default-grey"
-    >
-      <div className="w-full">
-        <hr className="mt-6 pb-4" />
-        <EstimationCardPriceInfo estimationInfo={estimationFicheSolution} />
-        {isEditMode && (
-          <div className="mt-4 flex flex-row gap-2">
-            <Button priority="primary" size="small" onClick={() => onEdit(ficheSolutionId)} className="rounded-3xl">
-              {isEstimated ? "Modifier" : "Estimer"}
-            </Button>
-            <FicheSolutionDeleteModal
-              estimation={estimation}
-              ficheSolutionId={ficheSolutionId}
-              ficheSolutionTitle={ficheSolution?.attributes.titre || ""}
-            />
-          </div>
-        )}
-      </div>
-    </FicheSolutionSmallCard>
-  );
-};
+import { FicheSolutionSmallCardWithActions } from "@/src/components/estimation/fiche-solution-small-card-with-actions";
 
 export const EstimationOverviewCard = ({
   estimation,
