@@ -15568,13 +15568,11 @@ export namespace Prisma {
   export type EstimationAvgAggregateOutputType = {
     id: number | null
     projet_id: number | null
-    fiches_solutions_id: number | null
   }
 
   export type EstimationSumAggregateOutputType = {
     id: number | null
     projet_id: number | null
-    fiches_solutions_id: number[]
   }
 
   export type EstimationMinAggregateOutputType = {
@@ -15603,7 +15601,6 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     projet_id: number
-    fiches_solutions_id: number
     materiaux: number
     deleted_at: number
     deleted_by: number
@@ -15614,13 +15611,11 @@ export namespace Prisma {
   export type EstimationAvgAggregateInputType = {
     id?: true
     projet_id?: true
-    fiches_solutions_id?: true
   }
 
   export type EstimationSumAggregateInputType = {
     id?: true
     projet_id?: true
-    fiches_solutions_id?: true
   }
 
   export type EstimationMinAggregateInputType = {
@@ -15649,7 +15644,6 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     projet_id?: true
-    fiches_solutions_id?: true
     materiaux?: true
     deleted_at?: true
     deleted_by?: true
@@ -15748,7 +15742,6 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     projet_id: number
-    fiches_solutions_id: number[]
     materiaux: JsonValue | null
     deleted_at: Date | null
     deleted_by: string | null
@@ -15779,7 +15772,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     projet_id?: boolean
-    fiches_solutions_id?: boolean
     materiaux?: boolean
     deleted_at?: boolean
     deleted_by?: boolean
@@ -15797,7 +15789,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     projet_id?: boolean
-    fiches_solutions_id?: boolean
     materiaux?: boolean
     deleted_at?: boolean
     deleted_by?: boolean
@@ -15812,7 +15803,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     projet_id?: boolean
-    fiches_solutions_id?: boolean
     materiaux?: boolean
     deleted_at?: boolean
     deleted_by?: boolean
@@ -15827,13 +15817,12 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     projet_id?: boolean
-    fiches_solutions_id?: boolean
     materiaux?: boolean
     deleted_at?: boolean
     deleted_by?: boolean
   }
 
-  export type estimationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "projet_id" | "fiches_solutions_id" | "materiaux" | "deleted_at" | "deleted_by", ExtArgs["result"]["estimation"]>
+  export type estimationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "projet_id" | "materiaux" | "deleted_at" | "deleted_by", ExtArgs["result"]["estimation"]>
   export type estimationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | UserDefaultArgs<ExtArgs>
     projet?: boolean | projetDefaultArgs<ExtArgs>
@@ -15868,7 +15857,6 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       projet_id: number
-      fiches_solutions_id: number[]
       materiaux: Prisma.JsonValue | null
       deleted_at: Date | null
       deleted_by: string | null
@@ -16305,7 +16293,6 @@ export namespace Prisma {
     readonly created_at: FieldRef<"estimation", 'DateTime'>
     readonly updated_at: FieldRef<"estimation", 'DateTime'>
     readonly projet_id: FieldRef<"estimation", 'Int'>
-    readonly fiches_solutions_id: FieldRef<"estimation", 'Int[]'>
     readonly materiaux: FieldRef<"estimation", 'Json'>
     readonly deleted_at: FieldRef<"estimation", 'DateTime'>
     readonly deleted_by: FieldRef<"estimation", 'String'>
@@ -27079,7 +27066,6 @@ export namespace Prisma {
     created_at: 'created_at',
     updated_at: 'updated_at',
     projet_id: 'projet_id',
-    fiches_solutions_id: 'fiches_solutions_id',
     materiaux: 'materiaux',
     deleted_at: 'deleted_at',
     deleted_by: 'deleted_by'
@@ -28650,7 +28636,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"estimation"> | Date | string
     updated_at?: DateTimeFilter<"estimation"> | Date | string
     projet_id?: IntFilter<"estimation"> | number
-    fiches_solutions_id?: IntNullableListFilter<"estimation">
     materiaux?: JsonNullableFilter<"estimation">
     deleted_at?: DateTimeNullableFilter<"estimation"> | Date | string | null
     deleted_by?: StringNullableFilter<"estimation"> | string | null
@@ -28667,7 +28652,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     projet_id?: SortOrder
-    fiches_solutions_id?: SortOrder
     materiaux?: SortOrderInput | SortOrder
     deleted_at?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -28688,7 +28672,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"estimation"> | Date | string
     updated_at?: DateTimeFilter<"estimation"> | Date | string
     projet_id?: IntFilter<"estimation"> | number
-    fiches_solutions_id?: IntNullableListFilter<"estimation">
     materiaux?: JsonNullableFilter<"estimation">
     deleted_at?: DateTimeNullableFilter<"estimation"> | Date | string | null
     deleted_by?: StringNullableFilter<"estimation"> | string | null
@@ -28705,7 +28688,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     projet_id?: SortOrder
-    fiches_solutions_id?: SortOrder
     materiaux?: SortOrderInput | SortOrder
     deleted_at?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
@@ -28725,7 +28707,6 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"estimation"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"estimation"> | Date | string
     projet_id?: IntWithAggregatesFilter<"estimation"> | number
-    fiches_solutions_id?: IntNullableListFilter<"estimation">
     materiaux?: JsonNullableWithAggregatesFilter<"estimation">
     deleted_at?: DateTimeNullableWithAggregatesFilter<"estimation"> | Date | string | null
     deleted_by?: StringNullableWithAggregatesFilter<"estimation"> | string | null
@@ -30404,7 +30385,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
@@ -30420,7 +30400,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -30432,7 +30411,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
@@ -30448,7 +30426,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -30462,7 +30439,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -30472,7 +30448,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -30483,7 +30458,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -32319,7 +32293,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     projet_id?: SortOrder
-    fiches_solutions_id?: SortOrder
     materiaux?: SortOrder
     deleted_at?: SortOrder
     deleted_by?: SortOrder
@@ -32328,7 +32301,6 @@ export namespace Prisma {
   export type estimationAvgOrderByAggregateInput = {
     id?: SortOrder
     projet_id?: SortOrder
-    fiches_solutions_id?: SortOrder
   }
 
   export type estimationMaxOrderByAggregateInput = {
@@ -32354,7 +32326,6 @@ export namespace Prisma {
   export type estimationSumOrderByAggregateInput = {
     id?: SortOrder
     projet_id?: SortOrder
-    fiches_solutions_id?: SortOrder
   }
 
   export type EnumTypeLieuClimadiagFilter<$PrismaModel = never> = {
@@ -34372,10 +34343,6 @@ export namespace Prisma {
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutSourcing_contacts_createdInput, UserUpdateWithoutSourcing_contacts_createdInput>, UserUncheckedUpdateWithoutSourcing_contacts_createdInput>
   }
 
-  export type estimationCreatefiches_solutions_idInput = {
-    set: number[]
-  }
-
   export type UserCreateNestedOneWithoutEstimations_createdInput = {
     create?: XOR<UserCreateWithoutEstimations_createdInput, UserUncheckedCreateWithoutEstimations_createdInput>
     connectOrCreate?: UserCreateOrConnectWithoutEstimations_createdInput
@@ -34420,11 +34387,6 @@ export namespace Prisma {
     connectOrCreate?: estimation_fiche_solutionCreateOrConnectWithoutEstimationInput | estimation_fiche_solutionCreateOrConnectWithoutEstimationInput[]
     createMany?: estimation_fiche_solutionCreateManyEstimationInputEnvelope
     connect?: estimation_fiche_solutionWhereUniqueInput | estimation_fiche_solutionWhereUniqueInput[]
-  }
-
-  export type estimationUpdatefiches_solutions_idInput = {
-    set?: number[]
-    push?: number | number[]
   }
 
   export type UserUpdateOneRequiredWithoutEstimations_createdNestedInput = {
@@ -35561,7 +35523,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     projet: projetCreateNestedOneWithoutEstimationsInput
@@ -35575,7 +35536,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -35597,7 +35557,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
@@ -35612,7 +35571,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
@@ -36120,7 +36078,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"estimation"> | Date | string
     updated_at?: DateTimeFilter<"estimation"> | Date | string
     projet_id?: IntFilter<"estimation"> | number
-    fiches_solutions_id?: IntNullableListFilter<"estimation">
     materiaux?: JsonNullableFilter<"estimation">
     deleted_at?: DateTimeNullableFilter<"estimation"> | Date | string | null
     deleted_by?: StringNullableFilter<"estimation"> | string | null
@@ -37855,7 +37812,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
@@ -37869,7 +37825,6 @@ export namespace Prisma {
     created_by: string
     created_at?: Date | string
     updated_at?: Date | string
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -39723,7 +39678,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
@@ -39738,7 +39692,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -39868,7 +39821,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
@@ -39883,7 +39835,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40085,7 +40036,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
@@ -40100,7 +40050,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -40157,7 +40106,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
@@ -40172,7 +40120,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -40902,7 +40849,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -40914,7 +40860,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
   }
@@ -41208,7 +41153,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
@@ -41222,7 +41166,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41235,7 +41178,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41245,7 +41187,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
@@ -41260,7 +41201,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
@@ -41273,7 +41213,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
@@ -41843,7 +41782,6 @@ export namespace Prisma {
     created_by: string
     created_at?: Date | string
     updated_at?: Date | string
-    fiches_solutions_id?: estimationCreatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -41891,7 +41829,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
@@ -41905,7 +41842,6 @@ export namespace Prisma {
     created_by?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -41918,7 +41854,6 @@ export namespace Prisma {
     created_by?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    fiches_solutions_id?: estimationUpdatefiches_solutions_idInput | number[]
     materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null

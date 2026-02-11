@@ -4,22 +4,24 @@ import { EstimationFicheSolution, EstimationMateriau, EstimationWithAides } from
 import { projetUpdated } from "./prismaProjetQueries";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
+const estimationIncludes = {
+  estimations_aides: {
+    include: { aide: true },
+  },
+  estimations_fiches_solutions: {
+    include: {
+      estimation_materiaux: true,
+    },
+  },
+};
+
 export const getEstimationById = async (estimationId: number): Promise<EstimationWithAides | null> => {
   return prismaClient.estimation.findUnique({
     where: {
       id: estimationId,
       deleted_at: null,
     },
-    include: {
-      estimations_aides: {
-        include: { aide: true },
-      },
-      estimations_fiches_solutions: {
-        include: {
-          estimation_materiaux: true,
-        },
-      },
-    },
+    include: estimationIncludes,
   });
 };
 
@@ -45,20 +47,10 @@ export const createEstimation = async (
     const createdEstimation = await tx.estimation.create({
       data: {
         projet_id: projetId,
-        fiches_solutions_id: fichesSolutions.map((fs) => +fs.id),
         created_by: createdBy,
         id: generateRandomId(),
       },
-      include: {
-        estimations_aides: {
-          include: { aide: true },
-        },
-        estimations_fiches_solutions: {
-          include: {
-            estimation_materiaux: true,
-          },
-        },
-      },
+      include: estimationIncludes,
     });
     for (const ficheSolution of fichesSolutions) {
       const newEstimationFicheSolution = await tx.estimation_fiche_solution.create({
@@ -153,19 +145,109 @@ export const updateEstimationMateriaux = async (
   const newEstimation = await prismaClient.estimation.update({
     where: { id: estimationId },
     data: { updated_at: new Date() },
-    include: {
-      estimations_aides: {
-        include: { aide: true },
-      },
-      estimations_fiches_solutions: {
-        include: {
-          estimation_materiaux: true,
-        },
-      },
-    },
+    include: estimationIncludes,
   });
 
   await projetUpdated(newEstimation.projet_id);
 
   return newEstimation;
+};
+
+export const deleteFicheSolutionInEstimation = async (
+  estimationId: number,
+  ficheSolutionId: number,
+  userId: string,
+): Promise<EstimationWithAides | null> => {
+  return prismaClient.$transaction(async (tx) => {
+    const estimation = await tx.estimation.findUnique({
+      where: { id: estimationId, deleted_at: null },
+      select: { projet_id: true },
+    });
+
+    if (!estimation) {
+      throw new Error("Estimation introuvable");
+    }
+
+    await tx.estimation_fiche_solution.delete({
+      where: {
+        estimation_id_fiche_solution_id: {
+          estimation_id: estimationId,
+          fiche_solution_id: ficheSolutionId,
+        },
+      },
+    });
+
+    const updatedEstimation = await tx.estimation.update({
+      where: { id: estimationId },
+      data: {
+        updated_at: new Date(),
+      },
+      include: estimationIncludes,
+    });
+
+    if (updatedEstimation.estimations_fiches_solutions.length === 0) {
+      await tx.estimation.update({
+        where: { id: estimationId },
+        data: {
+          deleted_by: userId,
+          deleted_at: new Date(),
+        },
+      });
+
+      await projetUpdated(estimation.projet_id);
+
+      return null;
+    }
+
+    await projetUpdated(estimation.projet_id);
+
+    return updatedEstimation;
+  });
+};
+
+export const addFichesSolutionsToEstimation = async (
+  estimationId: number,
+  fichesSolutions: FicheSolution[],
+): Promise<EstimationWithAides> => {
+  const estimation = await getEstimationById(estimationId);
+  if (!estimation) {
+    throw new Error("Estimation introuvable");
+  }
+
+  return prismaClient.$transaction(async (tx) => {
+    for (const ficheSolution of fichesSolutions) {
+      await tx.estimation_fiche_solution.create({
+        data: {
+          estimation_id: estimationId,
+          fiche_solution_id: +ficheSolution.id,
+          cout_max_entretien: 0,
+          cout_min_entretien: 0,
+          cout_max_investissement: 0,
+          cout_min_investissement: 0,
+          estimation_materiaux: {
+            createMany: {
+              data:
+                ficheSolution.attributes.materiaux?.data.map((materiau) => ({
+                  materiau_id: +materiau.id,
+                  quantite: 0,
+                })) || [],
+            },
+          },
+        },
+        include: { estimation_materiaux: true },
+      });
+    }
+
+    const updatedEstimationData = await tx.estimation.update({
+      where: { id: estimationId },
+      data: {
+        updated_at: new Date(),
+      },
+      include: estimationIncludes,
+    });
+
+    await projetUpdated(estimation.projet_id);
+
+    return updatedEstimationData;
+  });
 };

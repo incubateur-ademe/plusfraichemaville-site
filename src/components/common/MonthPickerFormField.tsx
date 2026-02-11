@@ -59,6 +59,7 @@ const MonthFormField = <T extends FieldValues>({
             placeholderText="-------- ----"
             onBlur={onBlur}
             id={id}
+            disabled={disabled}
           />
         );
 

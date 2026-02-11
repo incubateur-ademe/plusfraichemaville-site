@@ -261,7 +261,6 @@ exports.Prisma.EstimationScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   projet_id: 'projet_id',
-  fiches_solutions_id: 'fiches_solutions_id',
   materiaux: 'materiaux',
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by'

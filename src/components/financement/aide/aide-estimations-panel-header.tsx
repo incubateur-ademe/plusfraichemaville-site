@@ -2,11 +2,11 @@ import { AideEstimationsCardLabelFicheSolution } from "./aide-estimations-card-l
 import { getRegionByDepartment } from "@/src/lib/departements";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Separator, SeparatorY } from "@/src/components/common/separator";
-import { estimation } from "@/src/generated/prisma/client";
+import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { TypeEspace } from "@/src/helpers/type-espace-filter";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 
-export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estimation }) => {
+export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: EstimationWithAides }) => {
   const espace = useProjetsStore((state) => state.getCurrentProjet()?.type_espace) as TypeEspace["code"];
   const collectivite = useProjetsStore((state) => state.getCurrentProjet()?.collectivite);
   const commune = `${collectivite?.code_postal} ${collectivite?.nom}`;
@@ -22,8 +22,8 @@ export const AideEstimationsPanelHeader = ({ estimation }: { estimation?: estima
         <div>{selectEspaceLabelByCode(espace)}</div>
       </div>
       <div className="mb-6 flex min-h-7 flex-wrap gap-4">
-        {estimation?.fiches_solutions_id?.map((ficheId) => (
-          <AideEstimationsCardLabelFicheSolution ficheId={ficheId} key={ficheId} />
+        {estimation?.estimations_fiches_solutions?.map((efs) => (
+          <AideEstimationsCardLabelFicheSolution ficheId={efs.fiche_solution_id} key={efs.fiche_solution_id} />
         ))}
       </div>
       <Separator className="mb-6 h-px !opacity-100" />

@@ -4,8 +4,13 @@ import { PartageOverviewDeleteOrQuitModaleState } from "@/src/components/espace-
 import { PartageOverviewMemberStatusAdminProps } from "@/src/components/espace-projet/utilisateurs-projet/partage-overview-member-status-accepted-admin";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
+export type CurrentEstimation = {
+  id: number;
+  startingStep?: number;
+};
+
 interface ModalState {
-  currentEstimationId: number | null;
+  currentEstimation: CurrentEstimation | null;
   currentDetailedAide: AidesTerritoiresAide | null;
   currentUserModification: PartageOverviewMemberStatusAdminProps | null;
   currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState;
@@ -17,7 +22,7 @@ interface ModalState {
 }
 
 export type ModalActions = {
-  setCurrentEstimationId: (_estimationId: number | null) => void;
+  setCurrentEstimation: (_estimation: CurrentEstimation | null) => void;
   setCurrentDetailedAide: (_currentDetailedAide: AidesTerritoiresAide | null) => void;
   setCurrentUserModification: (_currentUserModification: PartageOverviewMemberStatusAdminProps | null) => void;
   setCurrentDeleteOrQuitModal: (_currentDeleteOrQuitModal: PartageOverviewDeleteOrQuitModaleState) => void;
@@ -31,7 +36,7 @@ export type ModalActions = {
 export type ModalStore = ModalState & ModalActions;
 
 export const defaultInitState: ModalState = {
-  currentEstimationId: null,
+  currentEstimation: null,
   currentDetailedAide: null,
   currentUserModification: null,
   currentDeleteOrQuitModal: null,
@@ -49,7 +54,7 @@ export const initModalStore = (): ModalState => {
 export const createModalStore = (initState: ModalState = defaultInitState) => {
   return createStore<ModalStore>()((set) => ({
     ...initState,
-    setCurrentEstimationId: (currentEstimationId) => set(() => ({ currentEstimationId })),
+    setCurrentEstimation: (currentEstimation) => set(() => ({ currentEstimation })),
     setCurrentDetailedAide: (currentDetailedAide) => set(() => ({ currentDetailedAide })),
     setCurrentUserModification: (currentUserModification) => set(() => ({ currentUserModification })),
     setCurrentDeleteOrQuitModal: (currentDeleteOrQuitModal) => set(() => ({ currentDeleteOrQuitModal })),
