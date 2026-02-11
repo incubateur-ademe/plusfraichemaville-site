@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo } from "react";
-import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolutionDto, EstimationWithAidesDto } from "@/src/types/dto";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -23,7 +23,6 @@ import {
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import EditablePriceField from "@/src/forms/estimation/editable-price-field";
 import { computePriceEstimationSimpleFicheSolution } from "@/src/helpers/estimation";
-import { mapEstimationSimpleFicheSolutionFormToDb } from "@/src/lib/prisma/prismaCustomTypesHelper";
 
 export default function EstimationMateriauSimpleFieldForm({
   ficheSolution,
@@ -35,18 +34,18 @@ export default function EstimationMateriauSimpleFieldForm({
   estimationMateriaux,
 }: {
   ficheSolution: FicheSolution;
-  estimationMateriaux?: EstimationFicheSolution;
+  estimationMateriaux?: EstimationFicheSolutionDto;
   estimationId: number;
   onNext: () => void;
   onPrevious: () => void;
   onClose: () => void;
-  onUpdateEstimation: (_: EstimationWithAides) => void;
+  onUpdateEstimation: (_: EstimationWithAidesDto) => void;
 }) {
   const initialValues = useMemo(
     () => ({
       ficheSolutionId: +ficheSolution.id,
-      coutInvestissementOverride: estimationMateriaux?.cout_investissement_override ?? undefined,
-      coutEntretienOverride: estimationMateriaux?.cout_entretien_override ?? undefined,
+      coutInvestissementOverride: estimationMateriaux?.coutInvestissementOverride ?? undefined,
+      coutEntretienOverride: estimationMateriaux?.coutEntretienOverride ?? undefined,
       quantite: estimationMateriaux?.quantite || 0,
     }),
     [estimationMateriaux, ficheSolution.id],
@@ -84,10 +83,7 @@ export default function EstimationMateriauSimpleFieldForm({
     }
   };
   const globalPrice = useMemo(() => {
-    return computePriceEstimationSimpleFicheSolution(
-      ficheSolution,
-      mapEstimationSimpleFicheSolutionFormToDb(watchAllFields),
-    );
+    return computePriceEstimationSimpleFicheSolution(ficheSolution, watchAllFields);
   }, [ficheSolution, watchAllFields]);
 
   const disabled = form.formState.isSubmitting;

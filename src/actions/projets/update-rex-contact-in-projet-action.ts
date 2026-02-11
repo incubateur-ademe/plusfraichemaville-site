@@ -2,7 +2,7 @@
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getProjetWithRelationsById, updateSourcingRexProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import isEqual from "lodash/isEqual";
@@ -13,7 +13,7 @@ export const updateRexContactInProjetAction = async (
   projetId: number,
   rexContactId: RexContactId,
   typeUpdate: TypeUpdate,
-): Promise<ResponseAction<{ projet?: ProjetWithRelations | null }>> => {
+): Promise<ResponseAction<{ projet?: ProjetWithRelationsDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -31,7 +31,7 @@ export const updateRexContactInProjetAction = async (
     }
 
     let newSourcingRex =
-      (projetToUpdate.sourcing_rex as RexContactId[] | null)?.filter(
+      (projetToUpdate.sourcingRex as RexContactId[] | null)?.filter(
         (savedContact) => !isEqual(savedContact, rexContactId),
       ) || [];
     if (typeUpdate === TypeUpdate.add) {

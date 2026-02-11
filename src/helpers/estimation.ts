@@ -1,62 +1,62 @@
 import {
-  EstimationFicheSolution,
-  EstimationMateriau,
-  EstimationWithAides,
-  SimpleEstimationFicheSolution,
-} from "@/src/lib/prisma/prismaCustomTypes";
+  EstimationFicheSolutionDto,
+  EstimationMateriauDto,
+  EstimationWithAidesDto,
+  SimpleEstimationFicheSolutionDto,
+} from "@/src/types/dto";
 import orderBy from "lodash/orderBy";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
-export const isComplete = (estimation: EstimationWithAides) => {
-  const notEstimatedSolutionIndex = estimation.estimations_fiches_solutions.findIndex(
+export const isComplete = (estimation: EstimationWithAidesDto) => {
+  const notEstimatedSolutionIndex = estimation.estimationsFichesSolutions.findIndex(
     (efm) => !isFicheSolutionEstimated(efm),
   );
   return notEstimatedSolutionIndex === -1;
 };
 
-export const getLastCompletedEstimation = (estimations: EstimationWithAides[] | undefined) => {
+export const getLastCompletedEstimation = (estimations: EstimationWithAidesDto[] | undefined) => {
   if (!estimations || estimations.length === 0) {
     return null;
   }
-  const sortedEstimations = orderBy(estimations, "updated_at", "desc");
+  const sortedEstimations = orderBy(estimations, "updatedAt", "desc");
   return sortedEstimations.find(isComplete);
 };
 
-export const isFicheSolutionEstimated = (estimationFicheSolution: EstimationFicheSolution) =>
+export const isFicheSolutionEstimated = (estimationFicheSolution: EstimationFicheSolutionDto) =>
   (estimationFicheSolution.quantite || 0) > 0 ||
-  estimationFicheSolution.cout_entretien_override != null ||
-  estimationFicheSolution.cout_investissement_override != null ||
-  estimationFicheSolution.estimation_materiaux.find(
-    (em) => em.quantite !== 0 || em.cout_entretien_override != null || em.cout_investissement_override != null,
+  estimationFicheSolution.coutEntretienOverride != null ||
+  estimationFicheSolution.coutInvestissementOverride != null ||
+  estimationFicheSolution.estimationMateriaux.find(
+    (em) => em.quantite !== 0 || em.coutEntretienOverride != null || em.coutInvestissementOverride != null,
   );
 
 export const computePriceEstimationSimpleFicheSolution = (
   ficheSolution: FicheSolution,
-  estimation: SimpleEstimationFicheSolution,
+  estimation: SimpleEstimationFicheSolutionDto,
 ) => {
   const quantite = estimation.quantite || 0;
   return {
     entretien: {
-      min: estimation.cout_entretien_override ?? quantite * (ficheSolution.attributes.cout_minimum_entretien || 0),
-      max: estimation.cout_entretien_override ?? quantite * (ficheSolution.attributes.cout_maximum_entretien || 0),
+      min: estimation.coutEntretienOverride ?? quantite * (ficheSolution.attributes.cout_minimum_entretien || 0),
+      max: estimation.coutEntretienOverride ?? quantite * (ficheSolution.attributes.cout_maximum_entretien || 0),
     },
     fourniture: {
-      min: estimation.cout_investissement_override ?? quantite * (ficheSolution.attributes.cout_minimum || 0),
-      max: estimation.cout_investissement_override ?? quantite * (ficheSolution.attributes.cout_maximum || 0),
+      min: estimation.coutInvestissementOverride ?? quantite * (ficheSolution.attributes.cout_minimum || 0),
+      max: estimation.coutInvestissementOverride ?? quantite * (ficheSolution.attributes.cout_maximum || 0),
     },
   };
 };
 
 export const computePriceEstimationFicheSolution = (
   ficheSolution: FicheSolution,
-  estimationMateriaux: EstimationMateriau[],
+  estimationMateriaux: EstimationMateriauDto[],
 ) => {
   return ficheSolution.attributes.materiaux?.data.reduce(
     (acc, materiauCMS) => {
-      const estimationMateriau = estimationMateriaux.find((f) => +f.materiau_id === +materiauCMS.id);
+      const estimationMateriau = estimationMateriaux.find((f) => +f.materiauId === +materiauCMS.id);
       const quantiteMateriau = estimationMateriau?.quantite || 0;
-      const coutInvestissementOverride = estimationMateriau?.cout_investissement_override;
-      const coutEntretienOverride = estimationMateriau?.cout_entretien_override;
+      const coutInvestissementOverride = estimationMateriau?.coutInvestissementOverride;
+      const coutEntretienOverride = estimationMateriau?.coutEntretienOverride;
 
       const investissementMin =
         coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_minimum_fourniture || 0);

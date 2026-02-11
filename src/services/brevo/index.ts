@@ -3,12 +3,12 @@ import {
   getUserWithNoActivityAfterSignup,
   updateEmailStatus as updateEmailStatusQuery,
 } from "@/src/lib/prisma/prisma-email-queries";
-import { email, emailStatus, emailType, FicheType, RoleProjet, User } from "@/src/generated/prisma/client";
+import { email, emailStatus, emailType, FicheType, RoleProjet } from "@/src/generated/prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
 import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
-import { ProjetWithRelations, UserProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import {
   getProjetsFinishedToGetQuestionnaire,
@@ -27,6 +27,7 @@ import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { UserInfoFormData } from "@/src/forms/user/UserInfoFormSchema";
+import { ProjetWithRelationsDto, UserDto, UserProjetWithRelationsDto } from "@/src/types/dto";
 
 interface Templates {
   templateId: number;
@@ -86,7 +87,7 @@ export type EmailProjetPartageConfig = {
 };
 
 const computeRemindToDoEstimationEmailParam = (
-  projet: ProjetWithRelations,
+  projet: ProjetWithRelationsDto,
   allFichesSolutions: FicheSolution[],
 ): EmailRemindDoEstimationConfig => {
   const chosenFichesSolutions = projet.fiches.filter((fiche) => fiche.type === FicheType.SOLUTION);
@@ -94,13 +95,13 @@ const computeRemindToDoEstimationEmailParam = (
     projetName: projet.nom,
     userPrenom: projet.creator.prenom || "",
     ...(chosenFichesSolutions[0] && {
-      nomSolution1: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[0].fiche_id)?.attributes.titre,
+      nomSolution1: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[0].ficheId)?.attributes.titre,
     }),
     ...(chosenFichesSolutions[1] && {
-      nomSolution2: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[1].fiche_id)?.attributes.titre,
+      nomSolution2: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[1].ficheId)?.attributes.titre,
     }),
     ...(chosenFichesSolutions[2] && {
-      nomSolution3: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[2].fiche_id)?.attributes.titre,
+      nomSolution3: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[2].ficheId)?.attributes.titre,
     }),
     plusDeTroisSolutions: chosenFichesSolutions.length > 3,
     urlModule4: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(projet.id)),
@@ -225,18 +226,18 @@ export class EmailService {
 
   async sendInvitationEmail(
     email: string,
-    userProjet: UserProjetWithRelations,
-    actionInitiatorUser: User,
+    userProjet: UserProjetWithRelationsDto,
+    actionInitiatorUser: UserDto,
   ): Promise<EmailSendResult> {
     const params: EmailProjetPartageConfig = {
       username: `${actionInitiatorUser.prenom} ${actionInitiatorUser.nom}`,
       projetCollectiviteName: userProjet.projet.collectivite.nom,
-      userCollectiviteName: actionInitiatorUser.nom_etablissement || "",
+      userCollectiviteName: actionInitiatorUser.nomEtablissement || "",
       destinationMail: email,
       projetName: userProjet.projet.nom,
       link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB(
         "invitation",
-      )}&invitation_token=${userProjet.invitation_token}&invitation_id=${userProjet.id}`,
+      )}&invitation_token=${userProjet.invitationToken}&invitation_id=${userProjet.id}`,
     };
 
     return this.sendEmail({
@@ -250,13 +251,13 @@ export class EmailService {
   async sendResponseRequestAccessEmail(
     email: string,
     userProjet: UserProjetWithRelations,
-    actionInitiatorUser: User,
+    actionInitiatorUser: UserDto,
     accessGranted: boolean,
   ): Promise<EmailSendResult> {
     const params: EmailProjetPartageConfig = {
       username: `${actionInitiatorUser.prenom} ${actionInitiatorUser.nom}`,
       projetCollectiviteName: userProjet.projet.collectivite.nom,
-      userCollectiviteName: actionInitiatorUser.nom_etablissement || "",
+      userCollectiviteName: actionInitiatorUser.nomEtablissement || "",
       destinationMail: email,
       projetName: userProjet.projet.nom,
       link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET}`,
@@ -308,7 +309,7 @@ export class EmailService {
         const emailParams: EmailRemindToDoDiagnosticConfig = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          typeEspaceProjet: selectEspaceByCode(projet.typeEspace)?.label || "",
           urlModule2: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projet.id)),
         };
         return await this.sendEmail({
@@ -330,7 +331,7 @@ export class EmailService {
         const emailParams: EmailRemindChooseSolutionConfig = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          typeEspaceProjet: selectEspaceByCode(projet.typeEspace)?.label || "",
           urlModule3: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(projet.id)),
         };
         return await this.sendEmail({
@@ -379,7 +380,7 @@ export class EmailService {
         const emailParams: EmailRemindFindFinancementConfig = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          typeEspaceProjet: selectEspaceByCode(projet.typeEspace)?.label || "",
           urlModule5: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT(projet.id)),
         };
         return await this.sendEmail({
@@ -473,9 +474,9 @@ export class EmailService {
     console.log(`Nb de mails de diagnostics non validés à envoyer : ${projets.length}`);
     return await Promise.all(
       projets.map(async (projet) => {
-        if (projet.diagnostic_simulations[0].user_id) {
-          const userToContact = await getUserById(projet.diagnostic_simulations[0].user_id);
-          if (userToContact && userToContact.accept_communication_suivi_projet) {
+        if (projet.diagnosticSimulations[0].userId) {
+          const userToContact = await getUserById(projet.diagnosticSimulations[0].userId);
+          if (userToContact && userToContact.acceptCommunicationSuiviProjet) {
             return await this.sendEmail({
               to: userToContact.email,
               userId: userToContact.id,

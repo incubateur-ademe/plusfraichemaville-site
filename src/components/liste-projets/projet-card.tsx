@@ -1,4 +1,4 @@
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto } from "@/src/types/dto";
 import { PictoEspaceSelector } from "../common/pictos";
 import { PictoId } from "../common/pictos/picto-espace-selector";
 import clsx from "clsx";
@@ -22,10 +22,10 @@ import { useRouter } from "next/navigation";
 import { useProjetCardActions } from "./use-projet-card-actions";
 
 type ProjetCardProps = {
-  projet: ProjetWithPublicRelations;
+  projet: ProjetWithPublicRelationsDto;
   invitationStatus?: InvitationStatus;
   isBrowsing?: boolean;
-  updateProjet?: (_updatedProjet: ProjetWithPublicRelations) => void;
+  updateProjet?: (_updatedProjet: ProjetWithPublicRelationsDto) => void;
 };
 
 export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet }: ProjetCardProps) => {
@@ -61,8 +61,8 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
     () => getCurrentUserProjectInfos(updatedProjet, currentUser?.id),
     [currentUser?.id, updatedProjet],
   );
-  const hasAlreadyRequest = currentUserInfo?.invitation_status === InvitationStatus.REQUESTED;
-  const isMemberOfProjet = currentUserInfo?.invitation_status === InvitationStatus.ACCEPTED;
+  const hasAlreadyRequest = currentUserInfo?.invitationStatus === InvitationStatus.REQUESTED;
+  const isMemberOfProjet = currentUserInfo?.invitationStatus === InvitationStatus.ACCEPTED;
 
   return (
     <div
@@ -74,7 +74,7 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
       <div className="flex w-full gap-6">
         <PictoEspaceSelector
           className={clsx("shrink-0", !isMemberOfProjet && "opacity-25")}
-          pictoId={updatedProjet.type_espace as PictoId}
+          pictoId={updatedProjet.typeEspace as PictoId}
           withBackground
           size="large"
           pictoClassName="svg-blue"
@@ -111,8 +111,8 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
                       className={clsx(
                         "new-project-acess-badge rounded p-1 text-xs font-bold text-pfmv-navy",
                         "bg-dsfr-background-contrast-blue-france",
-                        (currentUserInfo?.invitation_status !== InvitationStatus.ACCEPTED ||
-                          (currentUserInfo?.nb_views || 0) > 0) &&
+                        (currentUserInfo?.invitationStatus !== InvitationStatus.ACCEPTED ||
+                          (currentUserInfo?.nbViews || 0) > 0) &&
                           "hidden",
                       )}
                     >
@@ -167,7 +167,7 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
                   <label htmlFor="maturite-select" className="mt-1 text-sm font-bold text-pfmv-navy">
                     Maturité du projet :{" "}
                   </label>
-                  <Maturite id="maturite-select" niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} />
+                  <Maturite id="maturite-select" niveau={updatedProjet.niveauMaturite} projetId={updatedProjet.id} />
                 </div>
                 <div className={clsx("flex gap-4 text-sm")}>
                   <LinkWithoutPrefetch
@@ -200,7 +200,9 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
                     Rejoindre
                   </Button>
                 </div>
-                <div>Reçue le {dateToStringWithoutTime(currentUserInfo?.created_at)}</div>
+                <div>
+                  Reçue le {currentUserInfo?.createdAt && dateToStringWithoutTime(new Date(currentUserInfo?.createdAt))}
+                </div>
               </div>
             )}
             {invitationStatus !== InvitationStatus.ACCEPTED &&

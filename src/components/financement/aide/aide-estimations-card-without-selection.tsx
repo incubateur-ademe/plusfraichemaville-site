@@ -1,6 +1,6 @@
 import { Separator } from "@/src/components/common/separator";
 import { FicheSolutionSmallCard } from "@/src/components/ficheSolution/fiche-solution-small-card";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 import { PropsWithChildren } from "react";
 import { useAidesByEstimationFetcher } from "@/src/hooks/use-aides-selected-by-estimation";
 import { countAidesByType } from "../helpers";
@@ -9,7 +9,7 @@ import { AideEstimationsCardRecap } from "./aide-estimations-recap";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 
 type AideEstimationsCardWithoutSelectionProps = {
-  estimation: EstimationWithAides;
+  estimation: EstimationWithAidesDto;
 } & PropsWithChildren;
 
 export const AideEstimationsCardWithoutSelection = ({
@@ -17,7 +17,7 @@ export const AideEstimationsCardWithoutSelection = ({
   children,
 }: AideEstimationsCardWithoutSelectionProps) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice(
-    estimation.estimations_fiches_solutions,
+    estimation.estimationsFichesSolutions,
   );
   const { data: aides, isLoading } = useAidesByEstimationFetcher(estimation.id);
   const countAides = countAidesByType(aides?.results ?? []);
@@ -25,9 +25,9 @@ export const AideEstimationsCardWithoutSelection = ({
   return (
     <>
       <div className="mb-8 flex flex-wrap gap-6">
-        {estimation.estimations_fiches_solutions.map((efs, index) => (
+        {estimation.estimationsFichesSolutions.map((efs, index) => (
           <FicheSolutionSmallCard
-            ficheSolutionId={efs.fiche_solution_id}
+            ficheSolutionId={efs.ficheSolutionId}
             className="pointer-events-none w-52 shrink-0 rounded-2xl border-[1px] border-dsfr-border-default-grey"
             key={index}
           />

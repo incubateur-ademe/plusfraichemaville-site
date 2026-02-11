@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { PartageOverviewMemberInitiales } from "./partage-overview-member-initiales";
 import { PartageOverviewMemberStatusAcceptedAdmin } from "./partage-overview-member-status-accepted-admin";
-import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUserDto } from "@/src/types/dto";
 import { InvitationStatus } from "@/src/generated/prisma/client";
 import { ReactElement } from "react";
 import { PartageOverviewMemberStatusInvited } from "./partage-overview-member-status-invited";
@@ -9,7 +9,7 @@ import { PartageOverviewMemberStatusRequested } from "./partage-overview-member-
 import { getUserRoleFromCode } from "@/src/helpers/user-role";
 
 export type PartageOverviewMemberProps = {
-  member: UserProjetWithUser;
+  member: UserProjetWithUserDto;
   className?: string;
   isCurrentUser?: boolean;
 };
@@ -17,7 +17,7 @@ export type PartageOverviewMemberProps = {
 export const PartageOverviewMember = ({ className, member, isCurrentUser }: PartageOverviewMemberProps) => {
   const nom = member.user?.nom;
   const prenom = member.user?.prenom;
-  const name = !prenom && !nom ? member.email_address : `${prenom ?? "-"} ${nom ?? "-"}`;
+  const name = !prenom && !nom ? member.emailAddress : `${prenom ?? "-"} ${nom ?? "-"}`;
 
   const status: Record<InvitationStatus, ReactElement> = {
     ACCEPTED: <PartageOverviewMemberStatusAcceptedAdmin member={member} isCurrentUser={isCurrentUser} />,
@@ -29,14 +29,14 @@ export const PartageOverviewMember = ({ className, member, isCurrentUser }: Part
   return (
     <div className={clsx("relative flex h-[70px] items-center justify-between gap-0 pl-20 text-base", className)}>
       <div className="absolute left-0">
-        <PartageOverviewMemberInitiales name={name} active={member.invitation_status === InvitationStatus.ACCEPTED} />
+        <PartageOverviewMemberInitiales name={name} active={member.invitationStatus === InvitationStatus.ACCEPTED} />
       </div>
       <span className="w-full max-w-72">
         {name} {isCurrentUser && "(vous)"}
       </span>
       <span className="w-full max-w-72 text-dsfr-text-mention-grey">{member.user?.poste}</span>
       <span className="w-full max-w-56">({getUserRoleFromCode(member.role)?.label})</span>
-      <span className="w-full max-w-56">{status[member.invitation_status]}</span>
+      <span className="w-full max-w-56">{status[member.invitationStatus]}</span>
     </div>
   );
 };

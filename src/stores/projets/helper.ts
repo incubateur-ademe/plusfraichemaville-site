@@ -1,10 +1,10 @@
-import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationAideDto } from "@/src/types/dto";
 import { ProjetsState } from "./store";
 
 export const updateAideInEstimation = (
   state: ProjetsState,
   estimationId: number,
-  estimationAide: EstimationAide | null,
+  estimationAide: EstimationAideDto | null,
   aideTerritoireId: number | null,
 ) => {
   return {
@@ -14,12 +14,12 @@ export const updateAideInEstimation = (
         estimation.id === estimationId
           ? {
               ...estimation,
-              estimations_aides: estimationAide
+              estimationsAides: estimationAide
                 ? [
-                    ...estimation.estimations_aides.filter((ea) => ea.aide.id !== estimationAide.aide.id),
+                    ...estimation.estimationsAides.filter((ea) => ea.aide.id !== estimationAide.aide.id),
                     estimationAide,
                   ]
-                : estimation.estimations_aides.filter((ea) => ea.aide.aideTerritoireId !== aideTerritoireId),
+                : estimation.estimationsAides.filter((ea) => ea.aide.aideTerritoireId !== aideTerritoireId),
             }
           : estimation,
       ),

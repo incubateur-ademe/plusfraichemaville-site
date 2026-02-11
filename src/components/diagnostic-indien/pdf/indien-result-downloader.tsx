@@ -2,13 +2,14 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
 import { Spinner } from "@/src/components/common/spinner";
-import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
+import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 import { DIAGNOSTIC_DOWNLOAD_RESULT } from "@/src/helpers/matomo/matomo-tags";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 
 type IndienResultDownloaderProps = {
   data: ProjetIndiEnSimuation;
-  projet: ProjetWithRelations;
+  projet: ProjetWithRelationsDto;
 };
 
 const LazyIndienResultPage = dynamic(() => import("./indien-result-pdf-page").then((mod) => mod.IndienResultPdfPage));

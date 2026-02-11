@@ -24,9 +24,9 @@ export const generateAnnuaireContactsCsvAction = async (
   try {
     const projet = await getProjetWithRelationsById(projetId);
     const inProgressContacts =
-      projet?.sourcing_user_projets?.map((c) => userProjetToAnnuaireContactWithProjet(c.sourced_user_projet)) || [];
+      projet?.sourcingUserProjets?.map((c) => userProjetToAnnuaireContactWithProjet(c.sourcedUserProjet as any)) || [];
 
-    const rexContactIds = projet?.sourcing_rex as RexContactId[] | null;
+    const rexContactIds = projet?.sourcingRex as RexContactId[] | null;
     const uniqueRexContactIds = Array.from(new Set(rexContactIds?.map((r) => r.rexId)));
     const allRex = await Promise.all(
       uniqueRexContactIds.map((rexContactId) => getRetoursExperiencesWithContactsById(rexContactId.toString())),

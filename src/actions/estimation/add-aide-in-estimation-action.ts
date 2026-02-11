@@ -8,14 +8,14 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 import { upsertAide } from "@/src/lib/prisma/prismaAideQueries";
 import { resolveAidType } from "@/src/components/financement/helpers";
-import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationAideDto } from "@/src/types/dto";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { addAideInEstimation } from "@/src/lib/prisma/prisma-aide-estimation-queries";
 
 export const addAideInEstimationAction = async (
   estimationId: number,
   aideTerritoireId: number,
-): Promise<ResponseAction<{ estimationAide?: EstimationAide }>> => {
+): Promise<ResponseAction<{ estimationAide?: EstimationAideDto }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -45,7 +45,7 @@ export const addAideInEstimationAction = async (
     }
     const permission = new PermissionManager(session);
 
-    if (!(await permission.canEditProject(estimation.projet_id))) {
+    if (!(await permission.canEditProject(estimation.projetId))) {
       return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
     }
 

@@ -5,14 +5,14 @@ import { ResponseAction } from "../actions-types";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation/EstimationFormSchema";
 import { createEstimation } from "@/src/lib/prisma/prismaEstimationQueries";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
 export const createEstimationAction = async (
   projetId: number,
   data: EstimationFormData,
-): Promise<ResponseAction<{ estimation?: EstimationWithAides }>> => {
+): Promise<ResponseAction<{ estimation?: EstimationWithAidesDto }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };

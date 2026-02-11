@@ -26,7 +26,7 @@ export const TableauDeBordSuiviBanner = () => {
     !currentUser ||
     hasDiscardedInformation(currentUser, BANNER_ID) ||
     !isEmpty(currentProjet?.fiches) ||
-    !isEmpty(currentProjet?.diagnostic_simulations)
+    !isEmpty(currentProjet?.diagnosticSimulations)
   ) {
     return null;
   }

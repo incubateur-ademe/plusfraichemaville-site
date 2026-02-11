@@ -6,7 +6,7 @@ import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
 import { useSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { useUserStore } from "@/src/stores/user/provider";
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto } from "@/src/types/dto";
 import { FicheCardSkeleton } from "../common/fiche-card-skeleton";
 import { GET_AVAILABLE_PROJETS_FOR_USER_URL } from "@/src/helpers/routes";
 import { upsert } from "@/src/helpers/listUtils";
@@ -23,7 +23,7 @@ export const AvailableProjetsForUserModal = () => {
   const showAvailableProjetForUser = useModalStore((state) => state.showAvailableProjetForUser);
   const userInfos = useUserStore((state) => state.userInfos);
   const userId = userInfos?.id;
-  const userCollectiviteName = userInfos?.nom_etablissement || "";
+  const userCollectiviteName = userInfos?.nomEtablissement || "";
 
   useEffect(() => {
     if (showAvailableProjetForUser) {
@@ -37,7 +37,7 @@ export const AvailableProjetsForUserModal = () => {
 
   const url = showAvailableProjetForUser && userId ? GET_AVAILABLE_PROJETS_FOR_USER_URL(userId) : null;
 
-  const { data: availableProjects, isLoading, mutate } = useSwrWithFetcher<ProjetWithPublicRelations[]>(url);
+  const { data: availableProjects, isLoading, mutate } = useSwrWithFetcher<ProjetWithPublicRelationsDto[]>(url);
 
   return (
     <>

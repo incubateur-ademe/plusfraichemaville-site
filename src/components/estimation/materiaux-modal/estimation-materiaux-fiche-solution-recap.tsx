@@ -1,4 +1,4 @@
-import { EstimationFicheSolution, EstimationMateriau } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolutionDto, EstimationMateriauDto } from "@/src/types/dto";
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { useCallback } from "react";
@@ -11,8 +11,8 @@ import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global
 import OtherUsagesMateriau from "@/src/components/estimation/materiaux-modal/other-usages-materiau";
 
 type EstimationMateriauxFicheSolutionRecapProps = {
-  currentFicheSolutionEstimation: EstimationFicheSolution;
-  allEstimationsFicheSolution: EstimationFicheSolution[];
+  currentFicheSolutionEstimation: EstimationFicheSolutionDto;
+  allEstimationsFicheSolution: EstimationFicheSolutionDto[];
   goToFicheSolutionStep: (_: number) => void;
 };
 
@@ -22,21 +22,21 @@ export function EstimationMateriauxFicheSolutionRecap({
   allEstimationsFicheSolution,
 }: EstimationMateriauxFicheSolutionRecapProps) {
   const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(currentFicheSolutionEstimation.fiche_solution_id),
+    makeFicheSolutionCompleteUrlApi(currentFicheSolutionEstimation.ficheSolutionId),
   );
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice([
     currentFicheSolutionEstimation,
   ]);
 
   const getEstimationMateriauByMateriauId = useCallback(
-    (materiauId: number): EstimationMateriau | undefined =>
-      currentFicheSolutionEstimation.estimation_materiaux?.find((estMat) => +estMat.materiau_id === +materiauId),
-    [currentFicheSolutionEstimation.estimation_materiaux],
+    (materiauId: number): EstimationMateriauDto | undefined =>
+      currentFicheSolutionEstimation.estimationMateriaux?.find((estMat) => +estMat.materiauId === +materiauId),
+    [currentFicheSolutionEstimation.estimationMateriaux],
   );
 
-  const shouldDisplayEstimationMateriau = (estMat?: EstimationMateriau) =>
+  const shouldDisplayEstimationMateriau = (estMat?: EstimationMateriauDto) =>
     estMat &&
-    (estMat.quantite > 0 || estMat.cout_entretien_override != null || estMat.cout_investissement_override != null);
+    (estMat.quantite > 0 || estMat.coutEntretienOverride != null || estMat.coutInvestissementOverride != null);
 
   if (!data) {
     return null;
@@ -90,23 +90,23 @@ export function EstimationMateriauxFicheSolutionRecap({
                   <div>
                     Inv.
                     <strong>
-                      {getEstimationMateriauByMateriauId(materiau.id)?.cout_investissement_override == null
+                      {getEstimationMateriauByMateriauId(materiau.id)?.coutInvestissementOverride == null
                         ? ` ${getLabelCoutFournitureByQuantite(
                             materiau.attributes,
                             getEstimationMateriauByMateriauId(materiau.id)?.quantite || 0,
                           )}`
-                        : ` ${getEstimationMateriauByMateriauId(materiau.id)?.cout_investissement_override} €`}
+                        : ` ${getEstimationMateriauByMateriauId(materiau.id)?.coutInvestissementOverride} €`}
                     </strong>
                   </div>
                   <div className="text-sm text-dsfr-text-mention-grey">
                     Ent.
                     <strong>
-                      {getEstimationMateriauByMateriauId(materiau.id)?.cout_entretien_override == null
+                      {getEstimationMateriauByMateriauId(materiau.id)?.coutEntretienOverride == null
                         ? ` ${getLabelCoutEntretienByQuantite(
                             materiau.attributes,
                             getEstimationMateriauByMateriauId(materiau.id)?.quantite || 0,
                           )}`
-                        : ` ${getEstimationMateriauByMateriauId(materiau.id)?.cout_entretien_override} € / an`}
+                        : ` ${getEstimationMateriauByMateriauId(materiau.id)?.coutEntretienOverride} € / an`}
                     </strong>
                   </div>
                 </div>

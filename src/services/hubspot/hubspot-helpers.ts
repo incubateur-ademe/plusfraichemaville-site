@@ -1,5 +1,3 @@
-import { ProjetWithAdminUser } from "@/src/lib/prisma/prismaCustomTypes";
-import { User } from "@/src/generated/prisma/client";
 import {
   AssociationSpecAssociationCategoryEnum,
   BatchResponseSimplePublicUpsertObject,
@@ -10,6 +8,7 @@ import { hubspotClient } from ".";
 import { ALL_CANAL_ACQUISITION, CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 import chunk from "lodash/chunk";
 import { FilterOperatorEnum } from "@hubspot/api-client/lib/codegen/crm/deals";
+import { ProjetWithAdminUserDto, UserDto } from "@/src/types/dto";
 
 type HubspotPipelineDealStageKey = keyof typeof pipelineDealStage;
 const HUBSPOT_CONTACT_BATCH_LIMIT = 50;
@@ -29,7 +28,7 @@ const formatCanalAcquisition = (canal: string | null) => {
   return canalExists ? canalExists.hubspotLabel || canalExists.label : CUSTOM_CANAL_ACQUISITION.label;
 };
 
-export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObjectBatchInputUpsert[] =>
+export const makeBatchUpsertContactProperties = (users: UserDto[]): SimplePublicObjectBatchInputUpsert[] =>
   users.map((user) => ({
     idProperty: "email",
     email: user.email,
@@ -42,13 +41,13 @@ export const makeBatchUpsertContactProperties = (users: User[]): SimplePublicObj
       lastname: user.nom ?? "",
       jobtitle: user.poste ?? "",
       lifecyclestage: "opportunity",
-      canal_d_acquisition: formatCanalAcquisition(user?.canal_acquisition),
-      date_d_inscription_pfmv: new Date(user.created_at).setUTCHours(0, 0, 0, 0).toString(),
+      canal_d_acquisition: formatCanalAcquisition(user?.canalAcquisition),
+      date_d_inscription_pfmv: new Date(user.createdAt).setUTCHours(0, 0, 0, 0).toString(),
     },
   }));
 
 export const makeBatchUpsertProjectsByContactProperties = (
-  projets: ProjetWithAdminUser[],
+  projets: ProjetWithAdminUserDto[],
 ): SimplePublicObjectBatchInputUpsert[] =>
   projets.map((projet) => ({
     idProperty: "projet_id_unique",
@@ -56,12 +55,12 @@ export const makeBatchUpsertProjectsByContactProperties = (
     projet_id_unique: projet.id.toString(),
     properties: {
       dealname: projet.nom,
-      dealstage: pipelineDealStage[projet.niveau_maturite as HubspotPipelineDealStageKey] ?? "",
-      niveau_de_maturite: projet.niveau_maturite ?? "",
-      createdate: new Date(projet.created_at).getTime().toString(),
+      dealstage: pipelineDealStage[projet.niveauMaturite as HubspotPipelineDealStageKey] ?? "",
+      niveau_de_maturite: projet.niveauMaturite ?? "",
+      createdate: new Date(projet.createdAt).getTime().toString(),
       projet_id_unique: projet.id.toString(),
-      type_d_espace_pfmv: projet.type_espace ?? "",
-      closedate: new Date(projet.date_echeance!).getTime().toString(),
+      type_d_espace_pfmv: projet.typeEspace ?? "",
+      closedate: new Date(projet.dateEcheance!).getTime().toString(),
       amount: projet.budget?.toString() ?? "",
     },
   }));

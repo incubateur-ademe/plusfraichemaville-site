@@ -1,5 +1,4 @@
 "use client";
-import { Climadiag } from "@/src/components/climadiag/types";
 import { addOverlay, mapStyles, Overlay } from "carte-facile";
 import { useCallback, useRef, useState } from "react";
 import { Map } from "@vis.gl/react-maplibre";
@@ -12,9 +11,10 @@ import {
   handleMapClick,
 } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-helpers";
 import { LczMapLoadingErrorAlert } from "@/src/components/surchauffe-urbaine/territoire/lcz-map-loading-error-alert";
+import { ClimadiagDto } from "@/src/types/dto";
 
 type SurchauffeUrbaineLCZMapProps = {
-  climadiagInfo: Climadiag;
+  climadiagInfo: ClimadiagDto;
 };
 
 export const SurchauffeUrbaineLCZMap = ({ climadiagInfo }: SurchauffeUrbaineLCZMapProps) => {

@@ -4,7 +4,7 @@ import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationAideDto } from "@/src/types/dto";
 import { Prisma } from "@/src/generated/prisma/client";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { deleteAideInEstimation } from "@/src/lib/prisma/prisma-aide-estimation-queries";
@@ -12,7 +12,7 @@ import { deleteAideInEstimation } from "@/src/lib/prisma/prisma-aide-estimation-
 export const deleteAideInEstimationAction = async (
   estimationId: number,
   aideId: number,
-): Promise<ResponseAction<{ estimationAide?: EstimationAide | null }>> => {
+): Promise<ResponseAction<{ estimationAide?: EstimationAideDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -30,7 +30,7 @@ export const deleteAideInEstimationAction = async (
 
   const permission = new PermissionManager(session);
 
-  if (!(await permission.canEditProject(estimation.projet_id))) {
+  if (!(await permission.canEditProject(estimation.projetId))) {
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 

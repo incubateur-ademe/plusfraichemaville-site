@@ -1,22 +1,22 @@
-import { EstimationAide, ProjetWithPublicRelations, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationAideDto, ProjetWithPublicRelationsDto, ProjetWithRelationsDto } from "@/src/types/dto";
 import { createStore } from "zustand/vanilla";
 import { updateAideInEstimation } from "./helper";
 
 export interface ProjetsState {
-  projets: ProjetWithRelations[];
-  pendingProjets: ProjetWithPublicRelations[];
+  projets: ProjetWithRelationsDto[];
+  pendingProjets: ProjetWithPublicRelationsDto[];
   currentProjetId: number | null;
 }
 
 export type ProjetsActions = {
-  setProjets: (_projets: ProjetWithRelations[]) => void;
-  setPendingProjets: (_projets: ProjetWithPublicRelations[]) => void;
+  setProjets: (_projets: ProjetWithRelationsDto[]) => void;
+  setPendingProjets: (_projets: ProjetWithPublicRelationsDto[]) => void;
   setCurrentProjetId: (_currentProjetId: number | null) => void;
-  getCurrentProjet: () => ProjetWithRelations | undefined;
-  getProjetById: (_projetId: number) => ProjetWithRelations | undefined;
-  addOrUpdateProjet: (_projet: ProjetWithRelations) => void;
-  addOrUpdatePendingProjet: (_pendingProjet: ProjetWithPublicRelations) => void;
-  addAideInEstimation: (_estimationId: number, _estimationAide: EstimationAide) => void;
+  getCurrentProjet: () => ProjetWithRelationsDto | undefined;
+  getProjetById: (_projetId: number) => ProjetWithRelationsDto | undefined;
+  addOrUpdateProjet: (_projet: ProjetWithRelationsDto) => void;
+  addOrUpdatePendingProjet: (_pendingProjet: ProjetWithPublicRelationsDto) => void;
+  addAideInEstimation: (_estimationId: number, _estimationAide: EstimationAideDto) => void;
   deleteAideInEstimation: (_estimationId: number, _aideTerritoireId: number) => void;
   deleteProjet: (_projetId: number) => void;
   deletePendingProjet: (_projetId: number) => void;

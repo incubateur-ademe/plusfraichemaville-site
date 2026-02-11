@@ -4,7 +4,7 @@ export const useGetSavedAideInEstimationId = (estimationId: number, aideTerritoi
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const estimation = projet?.estimations.find((estimation) => estimation.id === estimationId);
 
-  const savedAide = estimation?.estimations_aides.find(
+  const savedAide = estimation?.estimationsAides.find(
     (estimation) => estimation.aide.aideTerritoireId === aideTerritoireId,
   );
 

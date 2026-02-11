@@ -18,10 +18,18 @@ import { Case, Conditional, Default } from "@/src/components/common/conditional-
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 import { useEffect, useState } from "react";
 import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
-import { User } from "@/src/generated/prisma/client";
+import { UserDto } from "@/src/types/dto";
 
 export const COMMUNICATION_SETTINGS_ANCHOR = "communication";
-export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; buttonLabel: string; newUser: boolean }) => {
+export const UserInfoForm = ({
+  user,
+  buttonLabel,
+  newUser,
+}: {
+  user: UserDto;
+  buttonLabel: string;
+  newUser: boolean;
+}) => {
   const router = useRouter();
   const setUserInfos = useUserStore((state) => state.setUserInfos);
   const [anchor, setAnchor] = useState("");
@@ -37,11 +45,11 @@ export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; butto
       prenom: user.prenom ?? "",
       email: user.email,
       poste: user.poste ?? "",
-      nomEtablissement: user.nom_etablissement ?? "",
-      canalAcquisition: user.canal_acquisition ?? "",
-      customCanalAcquisition: user.canal_acquisition ?? "",
-      acceptCommunicationProduit: user.accept_communication_produit ?? true,
-      acceptCommunicationSuiviProjet: user.accept_communication_suivi_projet ?? true,
+      nomEtablissement: user.nomEtablissement ?? "",
+      canalAcquisition: user.canalAcquisition ?? "",
+      customCanalAcquisition: user.canalAcquisition ?? "",
+      acceptCommunicationProduit: user.acceptCommunicationProduit ?? true,
+      acceptCommunicationSuiviProjet: user.acceptCommunicationSuiviProjet ?? true,
       subscribeToNewsletter: false,
     },
   });
@@ -73,10 +81,10 @@ export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; butto
         path={"nomEtablissement"}
         label="Collectivité à laquelle je suis rattaché(e)"
         asterisk={true}
-        disabled={!!user.nom_etablissement}
+        disabled={!!user.nomEtablissement}
       />
       <InputFormField control={form.control} path="poste" label="Mon poste dans l'établissement" asterisk={true} />
-      {!user.canal_acquisition && (
+      {!user.canalAcquisition && (
         <>
           <SelectFormField
             control={form.control}

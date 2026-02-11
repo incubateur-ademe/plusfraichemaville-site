@@ -1,9 +1,13 @@
 "use client";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
-import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolutionDto } from "@/src/types/dto";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 
-export const EstimationCardPriceInfoCompleted = ({ estimationInfo }: { estimationInfo: EstimationFicheSolution }) => {
+export const EstimationCardPriceInfoCompleted = ({
+  estimationInfo,
+}: {
+  estimationInfo: EstimationFicheSolutionDto;
+}) => {
   const { fournitureMin, fournitureMax, entretienMin, entretienMax, isLoading } = useEstimationFSGlobalPrice([
     estimationInfo,
   ]);

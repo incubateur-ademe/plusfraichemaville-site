@@ -1,8 +1,8 @@
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { ConnectContact, ConnectProjet, ConnectResponse } from "./types";
-import { UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import { mapProjetToConnectProjet, mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
 import { flattenUsersProjectsToProjects } from "@/src/components/liste-projets/helpers";
+import { UserWithAdminProjetsDto } from "@/src/types/dto";
 
 const CONNECT_API_BASE_URL = process.env.CONNECT_API_BASE_URL;
 
@@ -51,7 +51,7 @@ export const createConnectProjet = async (projet: ConnectProjet): Promise<Connec
 };
 
 export const connectBatchSync = async (
-  usersWithAdminProjets: UserWithAdminProjets[],
+  usersWithAdminProjets: UserWithAdminProjetsDto[],
 ): Promise<{
   success: boolean;
   errors: ({ email: string; error: string } | { idProjet: string; error: string })[];

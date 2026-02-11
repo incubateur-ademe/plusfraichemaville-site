@@ -1,7 +1,13 @@
-import { InvitationStatus, RoleProjet, User, user_projet } from "@/src/generated/prisma/client";
+import { InvitationStatus, RoleProjet, user_projet } from "@/src/generated/prisma/client";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { ProjetWithRelations, UserProjetWithRelations, UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserProjetWithRelations, UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
 import { projetIncludes, projetPublicSelect, projetUpdated } from "@/src/lib/prisma/prismaProjetQueries";
+import { ProjetWithRelationsDto, UserDto, UserProjetWithRelationsDto } from "@/src/types/dto";
+import {
+  convertProjetWithPublicRelationsToDto,
+  convertProjetWithRelationsToDto,
+  convertUserProjetWithRelationsToDto,
+} from "@/src/lib/prisma/dto-converters";
 
 export const getUserProjet = async (userId: string, projectId: number): Promise<user_projet | null> => {
   return prismaClient.user_projet.findUnique({
@@ -14,8 +20,8 @@ export const getUserProjet = async (userId: string, projectId: number): Promise<
     },
   });
 };
-export const getUserProjetById = async (userProjetId: number): Promise<UserProjetWithRelations | null> => {
-  return prismaClient.user_projet.findUnique({
+export const getUserProjetById = async (userProjetId: number): Promise<UserProjetWithRelationsDto | null> => {
+  const userProjet = await prismaClient.user_projet.findUnique({
     where: {
       id: userProjetId,
       deleted_at: null,
@@ -25,6 +31,7 @@ export const getUserProjetById = async (userProjetId: number): Promise<UserProje
       user: { include: { collectivites: { include: { collectivite: true } } } },
     },
   });
+  return userProjet ? convertUserProjetWithRelationsToDto(userProjet) : null;
 };
 
 export const getUserProjetByEmailAndProjet = async (
@@ -54,8 +61,8 @@ export const attachInvitationsByEmail = async (userEmail: string, userId: string
   });
 };
 
-export const attachInvitationsByToken = async (invitationId: number, invitationToken: string, user: User) => {
-  return prismaClient.user_projet.update({
+export const attachInvitationsByToken = async (invitationId: number, invitationToken: string, user: UserDto) => {
+  const userProjet = await prismaClient.user_projet.update({
     where: {
       id: invitationId,
       invitation_token: invitationToken,
@@ -69,6 +76,7 @@ export const attachInvitationsByToken = async (invitationId: number, invitationT
     },
     select: { projet: { select: projetPublicSelect } },
   });
+  return userProjet.projet ? convertProjetWithPublicRelationsToDto(userProjet.projet) : null;
 };
 
 export const getOtherAdmins = async (currentUserId: string, projectId: number): Promise<user_projet[]> => {
@@ -111,7 +119,7 @@ export const updateUserRoleProject = async (
   userId: string,
   projectId: number,
   newRole: RoleProjet,
-): Promise<ProjetWithRelations | null> => {
+): Promise<ProjetWithRelationsDto | null> => {
   const response = await prismaClient.user_projet.update({
     where: {
       user_id_projet_id: {
@@ -130,7 +138,7 @@ export const updateUserRoleProject = async (
 
   await projetUpdated(projectId);
 
-  return response.projet;
+  return response.projet ? convertProjetWithRelationsToDto(response.projet) : null;
 };
 
 export const deleteUserFromProject = async (
@@ -257,7 +265,7 @@ export const inviteMember = async (
   email: string,
   role: RoleProjet,
   userId?: string,
-): Promise<UserProjetWithRelations> => {
+): Promise<UserProjetWithRelationsDto | null> => {
   const response = await prismaClient.user_projet.upsert({
     where: { user_id_projet_id: { projet_id: projectId, user_id: userId ?? "" }, email_address: email },
     create: {
@@ -282,12 +290,12 @@ export const inviteMember = async (
 
   await projetUpdated(response.projet_id);
 
-  return response;
+  return response ? convertUserProjetWithRelationsToDto(response) : null;
 };
 
 export const renewOrCreateProjectJoinRequest = async (
   projectId: number,
-  user: User,
+  user: UserDto,
 ): Promise<UserProjetWithRelations> => {
   const response = await prismaClient.user_projet.upsert({
     where: { user_id_projet_id: { projet_id: projectId, user_id: user.id } },

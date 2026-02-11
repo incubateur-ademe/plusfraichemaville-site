@@ -1,18 +1,21 @@
 import {
-  ProjetWithAdminUser,
-  ProjetWithPublicRelations,
-  UserProjetWithUserInfos,
-  UserWithAdminProjets,
-} from "@/src/lib/prisma/prismaCustomTypes";
-import { collectivite, InvitationStatus, RoleProjet } from "@/src/generated/prisma/client";
+  CollectiviteDto,
+  ProjetWithAdminUserDto,
+  ProjetWithPublicRelationsDto,
+  UserProjetWithUserInfosDto,
+  UserWithAdminProjetsDto,
+} from "@/src/types/dto";
+import { InvitationStatus, RoleProjet } from "@/src/generated/prisma/client";
 import orderBy from "lodash/orderBy";
 
 export interface ProjetsByCollectivite {
-  collectivite: collectivite;
-  projets: ProjetWithPublicRelations[];
+  collectivite: CollectiviteDto;
+  projets: ProjetWithPublicRelationsDto[];
 }
 
-export const groupAndOrderProjetsByCollectivite = (projets: ProjetWithPublicRelations[]): ProjetsByCollectivite[] => {
+export const groupAndOrderProjetsByCollectivite = (
+  projets: ProjetWithPublicRelationsDto[],
+): ProjetsByCollectivite[] => {
   const p = projets.reduce<ProjetsByCollectivite[]>((acc, projet) => {
     let existingGroup = acc.find(({ collectivite }) => collectivite.id === projet.collectivite.id);
 
@@ -29,21 +32,21 @@ export const groupAndOrderProjetsByCollectivite = (projets: ProjetWithPublicRela
 };
 
 type SortedProjects = {
-  projectsInvited: ProjetWithPublicRelations[];
-  projectsRequested: ProjetWithPublicRelations[];
+  projectsInvited: ProjetWithPublicRelationsDto[];
+  projectsRequested: ProjetWithPublicRelationsDto[];
 };
 
 export const sortProjectsByInvitationStatus = (
-  projects: ProjetWithPublicRelations[],
+  projects: ProjetWithPublicRelationsDto[],
   currentUserId?: string | null,
 ): SortedProjects => {
   return projects.reduce<SortedProjects>(
     (acc, project) => {
-      const currentUserProject = project.users.find((u) => u.user_id === currentUserId);
+      const currentUserProject = project.users.find((u) => u.userId === currentUserId);
 
-      if (currentUserProject?.invitation_status === InvitationStatus.INVITED) {
+      if (currentUserProject?.invitationStatus === InvitationStatus.INVITED) {
         acc.projectsInvited.push(project);
-      } else if (currentUserProject?.invitation_status === InvitationStatus.REQUESTED) {
+      } else if (currentUserProject?.invitationStatus === InvitationStatus.REQUESTED) {
         acc.projectsRequested.push(project);
       }
 
@@ -56,15 +59,14 @@ export const sortProjectsByInvitationStatus = (
   );
 };
 
-export const getOldestAdmin = (project: ProjetWithPublicRelations): UserProjetWithUserInfos | null => {
+export const getOldestAdmin = (project: ProjetWithPublicRelationsDto): UserProjetWithUserInfosDto | null => {
   const oldestAdmin = project.users
     .filter(
-      (userProjet) =>
-        userProjet.role === RoleProjet.ADMIN && userProjet.invitation_status === InvitationStatus.ACCEPTED,
+      (userProjet) => userProjet.role === RoleProjet.ADMIN && userProjet.invitationStatus === InvitationStatus.ACCEPTED,
     )
-    .reduce<UserProjetWithUserInfos | undefined>((oldest, current) => {
+    .reduce<UserProjetWithUserInfosDto | undefined>((oldest, current) => {
       if (!oldest) return current;
-      return oldest.created_at <= current.created_at ? oldest : current;
+      return oldest.createdAt <= current.createdAt ? oldest : current;
     }, undefined);
 
   if (!oldestAdmin || !oldestAdmin.user) {
@@ -74,24 +76,26 @@ export const getOldestAdmin = (project: ProjetWithPublicRelations): UserProjetWi
   return oldestAdmin;
 };
 
-export const getAllUserProjectCount = (project: ProjetWithPublicRelations) => {
-  const allUsersProject = project.users.filter((user) => user.invitation_status === InvitationStatus.ACCEPTED);
+export const getAllUserProjectCount = (project: ProjetWithPublicRelationsDto) => {
+  const allUsersProject = project.users.filter((user) => user.invitationStatus === InvitationStatus.ACCEPTED);
   return allUsersProject.length;
 };
 
 export const getCurrentUserProjectInfos = (
-  project: ProjetWithPublicRelations,
+  project: ProjetWithPublicRelationsDto,
   currentUserId?: string,
-): UserProjetWithUserInfos | null => {
-  const userProjectLine = project.users.find((userProjet) => userProjet.user_id === currentUserId);
+): UserProjetWithUserInfosDto | null => {
+  const userProjectLine = project.users.find((userProjet) => userProjet.userId === currentUserId);
   return userProjectLine || null;
 };
 
-export const flattenUsersProjectsToProjects = (usersWithProjects: UserWithAdminProjets[]): ProjetWithAdminUser[] => {
+export const flattenUsersProjectsToProjects = (
+  usersWithProjects: UserWithAdminProjetsDto[],
+): ProjetWithAdminUserDto[] => {
   return usersWithProjects.flatMap((user) =>
-    user.projets.map((userProjet) => ({
-      ...userProjet.projet,
-      users: [{ user: { email: user.email }, role: userProjet.role }],
+    user.projets.map((projet) => ({
+      ...projet,
+      users: [{ user: { email: user.email }, role: "ADMIN" }],
     })),
   );
 };

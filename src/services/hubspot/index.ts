@@ -6,19 +6,19 @@ import {
   makeBatchUpsertProjectsByContactProperties,
 } from "./hubspot-helpers";
 import { flattenUsersProjectsToProjects } from "@/src/components/liste-projets/helpers";
-import { UserWithAdminProjets } from "@/src/lib/prisma/prismaCustomTypes";
 import chunk from "lodash/chunk";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import { BatchResponseSimplePublicUpsertObjectWithErrors as ContactBatchWithErrors } from "@hubspot/api-client/lib/codegen/crm/contacts";
 import { BatchResponseSimplePublicUpsertObjectWithErrors as DealBatchWithErrors } from "@hubspot/api-client/lib/codegen/crm/deals";
 import { BatchResponseLabelsBetweenObjectPairWithErrors } from "@hubspot/api-client/lib/codegen/crm/associations/v4/models/BatchResponseLabelsBetweenObjectPairWithErrors";
+import { UserWithAdminProjetsDto } from "@/src/types/dto";
 
 export const hubspotClient = new Client({ accessToken: process.env.HUBSPOT_ACCESS_TOKEN });
 
 const HUBSPOT_BATCH_LIMIT = 99;
 
 export const hubspotBatchSync = async (
-  usersWithAdminProjets: UserWithAdminProjets[],
+  usersWithAdminProjets: UserWithAdminProjetsDto[],
 ): Promise<{
   status: "COMPLETE" | "ERROR";
   message: string;
@@ -52,13 +52,12 @@ export const hubspotBatchSync = async (
       const associations = batchUsers.flatMap((user) => {
         const contactId = contactIds.find((contact) => contact.email === user.email)?.hubspotId ?? "";
         return user.projets
-          .filter((userProjet) => projetBatch.some((p) => p.id === userProjet.projet.id))
-          .map((userProjet) => ({
+          .filter((projet) => projetBatch.some((p) => p.id === projet.id))
+          .map((projet) => ({
             contactId,
             dealId:
-              projectBatch.results.find(
-                (result) => result.properties.projet_id_unique === userProjet.projet.id.toString(),
-              )?.id ?? "",
+              projectBatch.results.find((result) => result.properties.projet_id_unique === projet.id.toString())?.id ??
+              "",
           }))
           .filter((association) => association.contactId && association.dealId);
       });

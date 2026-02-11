@@ -5,7 +5,7 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { declineProjectRequest } from "@/src/lib/prisma/prisma-user-projet-queries";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { EmailService } from "@/src/services/brevo";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
@@ -15,7 +15,7 @@ export const declineProjectRequestAction = async (
   userIdToUpdate: string,
 ): Promise<
   ResponseAction<{
-    updatedProjet?: ProjetWithRelations | null;
+    updatedProjet?: ProjetWithRelationsDto | null;
   }>
 > => {
   const session = await auth();

@@ -5,12 +5,12 @@ import { ResponseAction } from "../actions-types";
 import { deleteFicheSolutionInEstimation, getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 
 export const deleteFicheSolutionInEstimationAction = async (
   estimationId: number,
   ficheSolutionId: number,
-): Promise<ResponseAction<{ estimation?: EstimationWithAides }>> => {
+): Promise<ResponseAction<{ estimation?: EstimationWithAidesDto }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -19,7 +19,7 @@ export const deleteFicheSolutionInEstimationAction = async (
   const estimation = await getEstimationById(estimationId);
   const permission = new PermissionManager(session);
 
-  if (!estimation || !(await permission.canEditProject(estimation.projet_id))) {
+  if (!estimation || !(await permission.canEditProject(estimation.projetId))) {
     return { type: "error", message: "ESTIMATION_DELETE_UNAUTHORIZED" };
   }
 

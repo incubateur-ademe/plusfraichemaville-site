@@ -2,13 +2,13 @@
 
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 import { notifications } from "../common/notifications";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { deleteEstimationAction } from "@/src/actions/estimation/delete-estimation-action";
 
 type ListeProjetsCardDeleteModalProps = {
-  estimation: EstimationWithAides;
+  estimation: EstimationWithAidesDto;
 };
 
 export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModalProps) {
@@ -42,7 +42,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
             onClick: async () => {
               const res = await deleteEstimationAction(estimation.id);
               notifications(res.type, res.message);
-              const impactedProjet = getProjetById(estimation.projet_id);
+              const impactedProjet = getProjetById(estimation.projetId);
               if (res.type === "success" && impactedProjet) {
                 modal.close();
                 updateProjetInStore({

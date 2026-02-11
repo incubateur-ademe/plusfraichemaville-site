@@ -10,7 +10,15 @@
       "Bash(tasklist:*)",
       "Bash(findstr:*)",
       "Bash(pnpm exec tsc:*)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(pnpm run build:*)",
+      "Bash(cut:*)",
+      "Bash(grep:*)",
+      "Bash(sed:*)",
+      "Bash(find:*)",
+      "Bash(cd:*)",
+      "Bash(find src/components/diagnostic-indien -type f \\\\\\( -name \"*.tsx\" -o -name \"*.ts\" \\\\\\) -exec sed -i 's|import { ProjetIndiEnSimuation } from \"\"@/src/types/dto\"\";|import { ProjetIndiEnSimuation } from \"\"@/src/lib/prisma/prismaCustomTypes\"\";|g' {} +)",
+      "Bash(Select-String -Pattern \"Type error\" -Context 3,3)"
     ]
   }
 }

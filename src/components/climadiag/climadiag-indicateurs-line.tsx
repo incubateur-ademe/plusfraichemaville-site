@@ -75,7 +75,9 @@ export const ClimadiagIndicateursLine = ({
           <ClimadiagIndicateursLineJour jour={temperature.prevision.max} valeur="haute" />
         </div>
       </div>
-      {legend && <ClimadiagIndicateursLineLegend legend={climatLegend[year]} year={year} />}
+      {legend && (
+        <ClimadiagIndicateursLineLegend legend={climatLegend[year as keyof typeof climatLegend]} year={year} />
+      )}
     </div>
   );
 };

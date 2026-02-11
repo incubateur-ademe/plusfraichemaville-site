@@ -1,7 +1,7 @@
 import clsx from "clsx";
 import { ReactNode } from "react";
 import { makeUrl } from "./helpers";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useParams } from "next/navigation";
@@ -11,9 +11,9 @@ export type TableauDeBordCardType = "diagnostic" | "estimation" | "financement" 
 
 export type TableauDeBordSuiviCardProps = {
   title: string;
-  progress: "0" | "50" | "100" | ((_projet: ProjetWithRelations | undefined) => "0" | "50" | "100");
+  progress: "0" | "50" | "100" | ((_projet: ProjetWithRelationsDto | undefined) => "0" | "50" | "100");
   children: ReactNode;
-  disabled: (_projet: ProjetWithRelations | undefined) => boolean;
+  disabled: (_projet: ProjetWithRelationsDto | undefined) => boolean;
   disabledChildren?: ReactNode;
   picto?: ReactNode;
   type: TableauDeBordCardType;

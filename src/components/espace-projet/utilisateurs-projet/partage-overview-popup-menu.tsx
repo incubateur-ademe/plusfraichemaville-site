@@ -2,7 +2,7 @@
 
 import { useModalStore } from "@/src/stores/modal/provider";
 import { PopupMenu } from "../../common/popup-menu";
-import { ProjetWithPublicRelations, UserProjetWithUserInfos } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto, UserProjetWithUserInfosDto } from "@/src/types/dto";
 import { checkOtherAdminExists } from "./helpers";
 import { useTransition } from "react";
 import { leaveProjetAction } from "@/src/actions/projets/leave-projet-action";
@@ -13,16 +13,16 @@ import { RoleProjet } from "@/src/generated/prisma/client";
 
 type PartageOverviewPopupMenuProps = {
   projectId: number;
-  currentUserInfo: UserProjetWithUserInfos | null;
-  members: ProjetWithPublicRelations["users"];
+  currentUserInfo: UserProjetWithUserInfosDto | null;
+  members: ProjetWithPublicRelationsDto["users"];
 };
 export const PartageOverviewPopupMenu = ({ projectId, currentUserInfo, members }: PartageOverviewPopupMenuProps) => {
   const [, startTransition] = useTransition();
   const setCurrentDeleteOrQuitModal = useModalStore((state) => state.setCurrentDeleteOrQuitModal);
   const deleteStoredProjet = useProjetsStore((state) => state.deleteProjet);
 
-  const currentUserId = currentUserInfo?.user_id;
-  const hasOtherAdmin = checkOtherAdminExists(members, currentUserInfo?.user_id);
+  const currentUserId = currentUserInfo?.userId;
+  const hasOtherAdmin = checkOtherAdminExists(members, currentUserInfo?.userId);
   const isAdmin = currentUserInfo?.role === RoleProjet.ADMIN;
   const canLeaveProject = !isAdmin || (isAdmin && hasOtherAdmin);
 

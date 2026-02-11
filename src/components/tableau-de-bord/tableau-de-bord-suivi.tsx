@@ -1,4 +1,4 @@
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { PictoTableauDeBordSelector } from "../common/pictos/picto-tableau-de-bord";
 import { TableauDeBordSuiviCard, TableauDeBordSuiviCardProps } from "./tableau-de-bord-suivi-card";
 import { TableauDeBordFichesSolutionImages } from "./tableau-de-bord-suivi-card-with-fiches-solutions";
@@ -33,14 +33,14 @@ export const TableauDeBordSuivi = () => {
 const cards: TableauDeBordSuiviCardProps[] = [
   {
     title: "Je fais un diagnostic de la surchauffe urbaine",
-    progress: (projet: ProjetWithRelations | undefined) => {
+    progress: (projet: ProjetWithRelationsDto | undefined) => {
       const hasSelectedFicheDiagnostic = !isEmpty(
         getProjetFichesIdsByType({
           projet,
           typeFiche: TypeFiche.diagnostic,
         }),
       );
-      const hasInitiatedDiagSimulation = !isEmpty(projet?.diagnostic_simulations);
+      const hasInitiatedDiagSimulation = !isEmpty(projet?.diagnosticSimulations);
       if (hasSelectedFicheDiagnostic && hasInitiatedDiagSimulation) {
         return "100";
       } else if (hasSelectedFicheDiagnostic || hasInitiatedDiagSimulation) {
@@ -59,7 +59,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
   },
   {
     title: "Je choisis mes solutions de rafraîchissement",
-    progress: (projet: ProjetWithRelations | undefined) =>
+    progress: (projet: ProjetWithRelationsDto | undefined) =>
       projet?.fiches.filter((f) => f.type === FicheType.SOLUTION).length ? "100" : "0",
     disabled: () => false,
     type: "solution",
@@ -68,14 +68,14 @@ const cards: TableauDeBordSuiviCardProps[] = [
   },
   {
     title: "Je fais une estimation de budget",
-    progress: (projet: ProjetWithRelations | undefined) => {
+    progress: (projet: ProjetWithRelationsDto | undefined) => {
       if (projet && projet.estimations?.length > 0) {
         return getLastCompletedEstimation(projet.estimations) ? "100" : "50";
       } else {
         return "0";
       }
     },
-    disabled: (projet: ProjetWithRelations | undefined) => {
+    disabled: (projet: ProjetWithRelationsDto | undefined) => {
       return (
         isEmpty(getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution })) && isEmpty(projet?.estimations)
       );
@@ -87,9 +87,9 @@ const cards: TableauDeBordSuiviCardProps[] = [
   },
   {
     title: "Je trouve des aides financières et en ingénierie",
-    progress: (projet: ProjetWithRelations | undefined) =>
-      projet?.estimations?.find((estimation) => estimation.estimations_aides.length > 0) ? "100" : "0",
-    disabled: (projet: ProjetWithRelations | undefined) => {
+    progress: (projet: ProjetWithRelationsDto | undefined) =>
+      projet?.estimations?.find((estimation) => estimation.estimationsAides.length > 0) ? "100" : "0",
+    disabled: (projet: ProjetWithRelationsDto | undefined) => {
       return isEmpty(projet?.estimations);
     },
     type: "financement",

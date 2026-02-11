@@ -1,8 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-
-import { Climadiag } from "@/src/components/climadiag/types";
 import clsx from "clsx";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Image from "next/image";
@@ -10,6 +8,7 @@ import { SurchauffeUrbaineMapLczLegend } from "@/src/components/surchauffe-urbai
 import { SurchauffeUrbaineMapLczExplanation } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-map-lcz-explanation";
 import { LczMapSkeleton } from "@/src/components/surchauffe-urbaine/territoire/lcz-map-skeleton";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { ClimadiagDto } from "@/src/types/dto";
 
 const LazyLCZMapClient = dynamic(() => import("./surchauffe-urbaine-lcz-map"), {
   ssr: false,
@@ -17,7 +16,7 @@ const LazyLCZMapClient = dynamic(() => import("./surchauffe-urbaine-lcz-map"), {
 });
 
 type LCZMapContainerProps = {
-  climadiagInfo: Climadiag;
+  climadiagInfo: ClimadiagDto;
   className?: string;
 };
 
@@ -29,7 +28,7 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
           <Badge className="!mb-3 !bg-dsfr-background-open-blue-france !text-pfmv-navy">climat actuel</Badge>
           <div className="mb-2 mt-2 text-xl font-bold text-dsfr-text-label-blue-france">
             <i className="ri-map-pin-line mr-1  " />
-            {climadiagInfo.nom} - {climadiagInfo.code_postal}
+            {climadiagInfo.nom} - {climadiagInfo.codePostal}
           </div>
           <h2 className="mb-2 text-[1.375rem] font-bold text-pfmv-navy">
             Consultez la cartographie des zones climatiques locales (LCZ)

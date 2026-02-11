@@ -25,7 +25,8 @@ export default function ListProjetsPageClient() {
         notifications(result.type, result.message);
       }
       if (result.updatedProjet) {
-        addOrUpdatePendingProjet(result.updatedProjet);
+        // TODO: Action should return DTO instead of Prisma type
+        addOrUpdatePendingProjet(result.updatedProjet as any);
       }
     };
 

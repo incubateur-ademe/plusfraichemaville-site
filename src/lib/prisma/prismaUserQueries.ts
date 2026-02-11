@@ -1,23 +1,27 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { UserWithCollectivite, UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
-import { Prisma, StatutUser, User } from "@/src/generated/prisma/client";
+import { UserWithProjets } from "@/src/lib/prisma/prismaCustomTypes";
+import { Prisma, StatutUser } from "@/src/generated/prisma/client";
 import { IApiSirenQueryTypes } from "@/src/lib/siren/types";
+import { UserDto, UserWithCollectiviteDto } from "@/src/types/dto";
+import { convertUserToDto, convertUserWithCollectiviteToDto } from "./dto-converters";
 
-export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectivite | null> => {
-  return prismaClient.user.findUnique({
+export const getUserWithCollectivites = async (userId: string): Promise<UserWithCollectiviteDto | null> => {
+  const user = await prismaClient.user.findUnique({
     where: {
       id: userId,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
+  return user ? convertUserWithCollectiviteToDto(user) : null;
 };
 
-export const getUserById = async (userId: string): Promise<User | null> => {
-  return prismaClient.user.findUnique({
+export const getUserById = async (userId: string): Promise<UserDto | null> => {
+  const user = await prismaClient.user.findUnique({
     where: {
       id: userId,
     },
   });
+  return user ? convertUserToDto(user) : null;
 };
 
 export const getUserByEmail = async (userEmail: string): Promise<UserWithProjets | null> => {
@@ -47,8 +51,8 @@ export const updateUser = async ({
   acceptCommunicationSuiviProjet: boolean;
   canalAcquisition?: string;
   nomEtablissement?: string;
-}): Promise<UserWithCollectivite | null> => {
-  return prismaClient.user.update({
+}): Promise<UserWithCollectiviteDto | null> => {
+  const updatedUser = await prismaClient.user.update({
     where: {
       id: userId,
     },
@@ -63,13 +67,14 @@ export const updateUser = async ({
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
+  return updatedUser ? convertUserWithCollectiviteToDto(updatedUser) : null;
 };
 
 export const updateUserDiscardedInformation = async (
   userId: string,
   updatedModalIds: string[],
-): Promise<UserWithCollectivite | null> => {
-  return prismaClient.user.update({
+): Promise<UserWithCollectiviteDto | null> => {
+  const updatedUser = await prismaClient.user.update({
     where: {
       id: userId,
     },
@@ -78,14 +83,15 @@ export const updateUserDiscardedInformation = async (
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
+  return updatedUser ? convertUserWithCollectiviteToDto(updatedUser) : null;
 };
 
 export const updateUserEtablissementInfo = async (
   userId: string,
   nomEtablissement?: string,
   etablissementInfo?: IApiSirenQueryTypes["etablissement"],
-): Promise<UserWithCollectivite | null> => {
-  return prismaClient.user.update({
+): Promise<UserWithCollectiviteDto | null> => {
+  const updatedUser = await prismaClient.user.update({
     where: {
       id: userId,
     },
@@ -96,10 +102,11 @@ export const updateUserEtablissementInfo = async (
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
+  return updatedUser ? convertUserWithCollectiviteToDto(updatedUser) : null;
 };
 
-export const updateUserStatut = async (userId: string, statut: StatutUser): Promise<UserWithCollectivite | null> => {
-  return prismaClient.user.update({
+export const updateUserStatut = async (userId: string, statut: StatutUser): Promise<UserWithCollectiviteDto | null> => {
+  const updatedUser = await prismaClient.user.update({
     where: {
       id: userId,
     },
@@ -109,12 +116,13 @@ export const updateUserStatut = async (userId: string, statut: StatutUser): Prom
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
+  return updatedUser ? convertUserWithCollectiviteToDto(updatedUser) : null;
 };
 
 export const getCountAllUsers = async () => prismaClient.user.count();
 
-export const updateUserBrowsingDate = async (userId: string): Promise<UserWithCollectivite | null> => {
-  return prismaClient.user.update({
+export const updateUserBrowsingDate = async (userId: string): Promise<UserWithCollectiviteDto | null> => {
+  const updatedUser = await prismaClient.user.update({
     where: {
       id: userId,
     },
@@ -123,4 +131,5 @@ export const updateUserBrowsingDate = async (userId: string): Promise<UserWithCo
     },
     include: { collectivites: { include: { collectivite: true } } },
   });
+  return updatedUser ? convertUserWithCollectiviteToDto(updatedUser) : null;
 };

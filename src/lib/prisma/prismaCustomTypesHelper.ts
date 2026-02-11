@@ -1,5 +1,4 @@
 import {
-  EstimationFicheSolution,
   EstimationMateriau,
   EstimationMateriauForm,
   EstimationSimpleFicheSolutionForm,
@@ -17,20 +16,21 @@ import {
   INDIEN_QUESTION_GROUPE_TOITURE,
 } from "@/src/helpers/indicateurs-environnementaux/indi-en-questions";
 import { IndiEnGroupeQuestion } from "@/src/helpers/indicateurs-environnementaux/indi-en-types";
+import { EstimationFicheSolutionDto } from "@/src/types/dto";
 
 export const mapStrapiEstimationMateriauxToFormValues = (
   ficheSolutionMateriaux: Materiau[] | undefined,
-  defaultEstimationMateriaux: EstimationFicheSolution | undefined,
+  defaultEstimationMateriaux: EstimationFicheSolutionDto | undefined,
 ) => {
   return ficheSolutionMateriaux?.map((materiau) => {
-    const existingEstimation = defaultEstimationMateriaux?.estimation_materiaux?.find(
-      (e) => e.materiau_id == materiau.id,
+    const existingEstimation = defaultEstimationMateriaux?.estimationMateriaux?.find(
+      (e) => e.materiauId == materiau.id,
     );
     return {
       materiauId: +materiau.id,
       quantite: existingEstimation?.quantite || 0,
-      coutInvestissementOverride: existingEstimation?.cout_investissement_override ?? undefined,
-      coutEntretienOverride: existingEstimation?.cout_entretien_override ?? undefined,
+      coutInvestissementOverride: existingEstimation?.coutEntretienOverride ?? undefined,
+      coutEntretienOverride: existingEstimation?.coutEntretienOverride ?? undefined,
     };
   });
 };

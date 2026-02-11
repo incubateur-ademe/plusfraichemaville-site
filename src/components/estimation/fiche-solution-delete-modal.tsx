@@ -2,7 +2,7 @@
 
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 import { notifications } from "../common/notifications";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { deleteFicheSolutionInEstimationAction } from "@/src/actions/estimation/delete-fiche-solution-in-estimation-action";
@@ -10,7 +10,7 @@ import { estimationModal } from "./materiaux-modal/estimation-materiaux-modal-co
 import { useModalStore } from "@/src/stores/modal/provider";
 
 type FicheSolutionDeleteModalProps = {
-  estimation: EstimationWithAides;
+  estimation: EstimationWithAidesDto;
   ficheSolutionId: number;
   ficheSolutionTitle: string;
 };
@@ -47,7 +47,7 @@ export function FicheSolutionDeleteModal({
             onClick: async () => {
               const actionResult = await deleteFicheSolutionInEstimationAction(estimation.id, ficheSolutionId);
               notifications(actionResult.type, actionResult.message);
-              const impactedProjet = getProjetById(estimation.projet_id);
+              const impactedProjet = getProjetById(estimation.projetId);
               if (actionResult.type === "success" && impactedProjet && actionResult.estimation) {
                 modal.close();
 

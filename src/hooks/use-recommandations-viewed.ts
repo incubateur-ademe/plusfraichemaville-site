@@ -9,7 +9,7 @@ export const useRecommandationsViewed = () => {
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const currentUser = useUserStore((state) => state.userInfos?.id);
-  const recommandationViewed = currentProjet?.recommandations_viewed_by;
+  const recommandationViewed = currentProjet?.recommandationsViewedBy;
   const fichesSolutionsIds = getProjetFichesIdsByType({ projet: currentProjet, typeFiche: TypeFiche.solution });
 
   const shouldShowRecommandationBadge = !isEmpty(fichesSolutionsIds);

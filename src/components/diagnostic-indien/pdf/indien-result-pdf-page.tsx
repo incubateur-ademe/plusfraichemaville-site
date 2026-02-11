@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
+import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 import { Separator } from "@/src/components/common/separator";
 import { IndienResultPdfHeader } from "@/src/components/diagnostic-indien/pdf/indien-result-pdf-header";
 import IndienResultRanges from "@/src/components/diagnostic-indien/indien-result-ranges";
@@ -9,7 +10,7 @@ import { generatePdf } from "@/src/helpers/pdf-utils";
 
 type ClimadiagViewerProps = {
   data: ProjetIndiEnSimuation;
-  projet: ProjetWithRelations;
+  projet: ProjetWithRelationsDto;
   close: () => void;
 };
 

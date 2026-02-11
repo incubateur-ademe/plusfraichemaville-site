@@ -1,4 +1,4 @@
-import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolutionDto } from "@/src/types/dto";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { isSimpleMateriauFicheSolution, makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
@@ -7,20 +7,20 @@ import {
   computePriceEstimationSimpleFicheSolution,
 } from "@/src/helpers/estimation";
 
-export const useEstimationFSGlobalPrice = (estimationFichesSolution: EstimationFicheSolution[]) => {
+export const useEstimationFSGlobalPrice = (estimationFichesSolution: EstimationFicheSolutionDto[]) => {
   const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(estimationFichesSolution.map((e) => e.fiche_solution_id)),
+    makeFicheSolutionCompleteUrlApi(estimationFichesSolution.map((e) => e.ficheSolutionId)),
   );
 
   const fichesSolutionGlobalPrice = data?.reduce(
     (acc, ficheSolution) => {
       const currentEstimationFicheSolution = estimationFichesSolution.find(
-        (efs) => +efs.fiche_solution_id === +ficheSolution.id,
+        (efs) => +efs.ficheSolutionId === +ficheSolution.id,
       );
       if (currentEstimationFicheSolution) {
         const ficheSolutionPrice = isSimpleMateriauFicheSolution(ficheSolution)
           ? computePriceEstimationSimpleFicheSolution(ficheSolution, currentEstimationFicheSolution)
-          : computePriceEstimationFicheSolution(ficheSolution, currentEstimationFicheSolution.estimation_materiaux);
+          : computePriceEstimationFicheSolution(ficheSolution, currentEstimationFicheSolution.estimationMateriaux);
         if (ficheSolutionPrice) {
           return {
             entretien: {

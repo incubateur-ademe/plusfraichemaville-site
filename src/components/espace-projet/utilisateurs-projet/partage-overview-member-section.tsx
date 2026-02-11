@@ -1,10 +1,10 @@
 import { PartageOverviewMember } from "./partage-overview-member";
-import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUserDto } from "@/src/types/dto";
 import { useUserStore } from "@/src/stores/user/provider";
 
 type PartageOverviewMemberSectionProps = {
   title?: string;
-  members: UserProjetWithUser[];
+  members: UserProjetWithUserDto[];
 };
 
 export const PartageOverviewMemberSection = ({ title, members }: PartageOverviewMemberSectionProps) => {
@@ -19,7 +19,7 @@ export const PartageOverviewMemberSection = ({ title, members }: PartageOverview
       )}
       {members.map((member) => (
         <div key={member.id}>
-          <PartageOverviewMember member={member} isCurrentUser={member.user_id === userId} />
+          <PartageOverviewMember member={member} isCurrentUser={member.userId === userId} />
           <hr className="h-[1px] p-0" />
         </div>
       ))}

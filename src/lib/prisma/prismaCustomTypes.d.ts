@@ -1,3 +1,15 @@
+/**
+ * INTERNAL USE ONLY - DO NOT IMPORT IN COMPONENTS/FORMS/STORES/ACTIONS
+ *
+ * These types are for internal Prisma query file use only.
+ * For frontend use, import DTOs from @/src/types/dto instead.
+ *
+ * DTOs provide:
+ * - camelCase properties (not snake_case)
+ * - Serializable Date fields (strings, not Date objects)
+ * - Clear separation between data layer and presentation layer
+ */
+
 import {
   collectivite,
   diagnostic_simulation,

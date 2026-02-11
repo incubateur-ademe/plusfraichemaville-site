@@ -1,7 +1,7 @@
 "use client";
 
 import { resendInvitationAction } from "@/src/actions/users/resend-invitation-action";
-import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUserDto } from "@/src/types/dto";
 import Button from "@codegouvfr/react-dsfr/Button";
 import clsx from "clsx";
 import { useTransition } from "react";
@@ -10,11 +10,11 @@ import { notifications } from "../../common/notifications";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 
-export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserProjetWithUser }) => {
+export const PartageOverviewMemberStatusInvited = ({ member }: { member: UserProjetWithUserDto }) => {
   const [isPending, startTransition] = useTransition();
 
   const userProjetId = member.id;
-  const isLecteur = useIsLecteur(member.projet_id);
+  const isLecteur = useIsLecteur(member.projetId);
 
   const handleResendInvitation = () => {
     startTransition(async () => {

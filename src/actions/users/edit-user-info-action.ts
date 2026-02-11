@@ -5,7 +5,6 @@ import { auth } from "@/src/lib/next-auth/auth";
 import { updateUser } from "@/src/lib/prisma/prismaUserQueries";
 import { revalidatePath } from "next/cache";
 import { ResponseAction } from "../actions-types";
-import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
 import { UserInfoFormData, UserInfoFormSchema } from "@/src/forms/user/UserInfoFormSchema";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
@@ -14,10 +13,11 @@ import { createConnectContact } from "@/src/services/connect";
 import { mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
 import { sendMattermostWebhook } from "@/src/services/mattermost";
 import { makeNoSirenUserWebhookData } from "@/src/services/mattermost/mattermost-helpers";
+import { UserWithCollectiviteDto } from "@/src/types/dto";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },
-): Promise<ResponseAction<{ updatedUser?: UserWithCollectivite | null }>> => {
+): Promise<ResponseAction<{ updatedUser?: UserWithCollectiviteDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -58,7 +58,7 @@ export const editUserInfoAction = async (
       } catch (e) {
         customCaptureException("Error in Connect call in EditUserInfoAction", e);
       }
-      if (updatedUser?.nom_etablissement != null && updatedUser.siren_info == null) {
+      if (updatedUser?.nomEtablissement != null && updatedUser.sirenInfo == null) {
         await sendMattermostWebhook(makeNoSirenUserWebhookData(updatedUser), "noSiren", 3000);
       }
 

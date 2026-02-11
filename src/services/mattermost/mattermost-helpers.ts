@@ -1,4 +1,4 @@
-import { User } from "@/src/generated/prisma/client";
+import { UserDto } from "@/src/types/dto";
 
 type CsmBatchWebhookData = {
   nbMailRemindModuleDiagnostic: number;
@@ -83,12 +83,12 @@ ${message}
   };
 };
 
-export const makeNoSirenUserWebhookData = (user: User) => {
+export const makeNoSirenUserWebhookData = (user: UserDto) => {
   return {
     text: `:alert:**[Un utilisateur sans SIREN vient de s'inscrire]**:alert:
 User Id : ${user.id}
 Email : ${user.email}
-Collectivité renseignée manuellement : ${user.nom_etablissement}
+Collectivité renseignée manuellement : ${user.nomEtablissement}
 @raphael.taieb  
 `,
   };

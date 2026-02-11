@@ -18,8 +18,8 @@ import Button from "@codegouvfr/react-dsfr/Button";
 export const AnnuaireSavedContacts = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isLecteur = useIsLecteur(currentProjet?.id);
-  const inProgressProjetContacts = currentProjet?.sourcing_user_projets;
-  const rexContactIds = currentProjet?.sourcing_rex as RexContactId[] | undefined;
+  const inProgressProjetContacts = currentProjet?.sourcingUserProjets;
+  const rexContactIds = currentProjet?.sourcingRex as RexContactId[] | undefined;
   const nbContacts = (inProgressProjetContacts?.length || 0) + (rexContactIds?.length || 0);
   const [showFilters, setShowFilters] = useState(false);
 
@@ -36,7 +36,7 @@ export const AnnuaireSavedContacts = () => {
   const shouldShowContact = (contact: AnnuaireContact) => (showFilters ? contactIsVisible(contact) : true);
 
   const inProgressAnnuaireContact = useMemo(
-    () => inProgressProjetContacts?.map((c) => userProjetToAnnuaireContactWithProjet(c.sourced_user_projet)) || [],
+    () => inProgressProjetContacts?.map((c) => userProjetToAnnuaireContactWithProjet(c.sourcedUserProjet)) || [],
     [inProgressProjetContacts],
   );
 

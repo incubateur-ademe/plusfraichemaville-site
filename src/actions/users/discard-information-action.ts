@@ -6,12 +6,12 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 
 import { getUserById, updateUserDiscardedInformation } from "@/src/lib/prisma/prismaUserQueries";
-import { User } from "@/src/generated/prisma/client";
+import { UserDto } from "@/src/types/dto";
 
 export const discardInformationAction = async (
   userId: string,
   modalId: string,
-): Promise<ResponseAction<{ updatedUser?: User | null }>> => {
+): Promise<ResponseAction<{ updatedUser?: UserDto | null }>> => {
   const session = await auth();
 
   if (!session) {

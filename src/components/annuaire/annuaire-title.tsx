@@ -5,8 +5,8 @@ import Button from "@codegouvfr/react-dsfr/Button";
 
 export const AnnuaireTitle = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const inProgressProjetContacts = currentProjet?.sourcing_user_projets;
-  const rexContactIds = currentProjet?.sourcing_rex as RexContactId[] | null;
+  const inProgressProjetContacts = currentProjet?.sourcingUserProjets;
+  const rexContactIds = currentProjet?.sourcingRex as RexContactId[] | null;
   const nbContacts = (inProgressProjetContacts?.length || 0) + (rexContactIds?.length || 0);
 
   return (

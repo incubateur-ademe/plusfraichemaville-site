@@ -8,14 +8,14 @@ import { ResponseAction } from "../actions-types";
 import { EmailService } from "@/src/services/brevo";
 import { getProjetById, getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { getUserProjetByEmailAndProjet, inviteMember } from "@/src/lib/prisma/prisma-user-projet-queries";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 export const inviteMemberAction = async (
   projectId: number,
   email: string,
   role: RoleProjet,
-): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations | null }>> => {
+): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelationsDto | null }>> => {
   try {
     const session = await auth();
     if (!session) {

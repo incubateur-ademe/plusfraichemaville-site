@@ -1,8 +1,10 @@
 import { generateRandomId } from "@/src/helpers/common";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { EstimationFicheSolution, EstimationMateriau, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolution, EstimationMateriau } from "@/src/lib/prisma/prismaCustomTypes";
 import { projetUpdated } from "./prismaProjetQueries";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { EstimationWithAidesDto } from "@/src/types/dto";
+import { convertEstimationWithAidesToDto } from "./dto-converters";
 
 const estimationIncludes = {
   estimations_aides: {
@@ -15,14 +17,15 @@ const estimationIncludes = {
   },
 };
 
-export const getEstimationById = async (estimationId: number): Promise<EstimationWithAides | null> => {
-  return prismaClient.estimation.findUnique({
+export const getEstimationById = async (estimationId: number): Promise<EstimationWithAidesDto | null> => {
+  const estimation = await prismaClient.estimation.findUnique({
     where: {
       id: estimationId,
       deleted_at: null,
     },
     include: estimationIncludes,
   });
+  return estimation ? convertEstimationWithAidesToDto(estimation) : null;
 };
 
 export const deleteEstimation = (estimationId: number, userId: string) => {
@@ -42,7 +45,7 @@ export const createEstimation = async (
   projetId: number,
   fichesSolutions: FicheSolution[],
   createdBy: string,
-): Promise<EstimationWithAides> => {
+): Promise<EstimationWithAidesDto> => {
   const newEstimation = await prismaClient.$transaction(async (tx) => {
     const createdEstimation = await tx.estimation.create({
       data: {
@@ -80,7 +83,7 @@ export const createEstimation = async (
 
   await projetUpdated(newEstimation.projet_id);
 
-  return newEstimation;
+  return convertEstimationWithAidesToDto(newEstimation);
 };
 
 export const updateEstimationMateriaux = async (
@@ -98,7 +101,7 @@ export const updateEstimationMateriaux = async (
   > & {
     estimation_materiaux: Array<EstimationMateriau>;
   },
-): Promise<EstimationWithAides> => {
+): Promise<EstimationWithAidesDto> => {
   await prismaClient.$transaction(async (tx) => {
     const newEstimationFicheSolution = await tx.estimation_fiche_solution.upsert({
       where: {
@@ -150,13 +153,13 @@ export const updateEstimationMateriaux = async (
 
   await projetUpdated(newEstimation.projet_id);
 
-  return newEstimation;
+  return convertEstimationWithAidesToDto(newEstimation);
 };
 
 export const deleteFicheSolutionInEstimation = async (
   estimationId: number,
   ficheSolutionId: number,
-): Promise<EstimationWithAides> => {
+): Promise<EstimationWithAidesDto> => {
   return prismaClient.$transaction(async (tx) => {
     const estimation = await tx.estimation.findUnique({
       where: { id: estimationId, deleted_at: null },
@@ -186,20 +189,20 @@ export const deleteFicheSolutionInEstimation = async (
 
     await projetUpdated(estimation.projet_id);
 
-    return updatedEstimation;
+    return convertEstimationWithAidesToDto(updatedEstimation);
   });
 };
 
 export const addFichesSolutionsToEstimation = async (
   estimationId: number,
   fichesSolutions: FicheSolution[],
-): Promise<EstimationWithAides> => {
+): Promise<EstimationWithAidesDto> => {
   const estimation = await getEstimationById(estimationId);
   if (!estimation) {
     throw new Error("Estimation introuvable");
   }
 
-  return prismaClient.$transaction(async (tx) => {
+  const updatedEstimation = await prismaClient.$transaction(async (tx) => {
     for (const ficheSolution of fichesSolutions) {
       await tx.estimation_fiche_solution.create({
         data: {
@@ -231,8 +234,10 @@ export const addFichesSolutionsToEstimation = async (
       include: estimationIncludes,
     });
 
-    await projetUpdated(estimation.projet_id);
+    await projetUpdated(estimation.projetId);
 
     return updatedEstimationData;
   });
+
+  return convertEstimationWithAidesToDto(updatedEstimation);
 };

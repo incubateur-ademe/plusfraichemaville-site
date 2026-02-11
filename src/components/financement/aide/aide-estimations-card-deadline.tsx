@@ -1,4 +1,4 @@
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 import { getAideSubmissionDeadlineAndName } from "../helpers";
 import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
@@ -8,7 +8,7 @@ import { Separator } from "@/src/components/common/separator";
 import CustomAccordion from "@/src/components/common/CustomAccordion";
 
 type AideEstimationsCardDeadlineProps = {
-  estimationsAides: EstimationWithAides["estimations_aides"];
+  estimationsAides: EstimationWithAidesDto["estimationsAides"];
 };
 
 export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimationsCardDeadlineProps) => {
@@ -37,7 +37,7 @@ export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimation
                       size="large"
                     />
                     <span className="align-middle">
-                      Échéance : {dateToStringWithoutTime(aideDeadline.submission_deadline)}
+                      Échéance : {dateToStringWithoutTime(new Date(aideDeadline.submission_deadline))}
                     </span>
                   </span>
                   {index !== aideDeadlineAndName.length - 1 && (

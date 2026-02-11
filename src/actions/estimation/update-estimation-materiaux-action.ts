@@ -9,7 +9,7 @@ import {
   EstimationMateriauxFormData,
   EstimationMateriauxFormSchema,
 } from "@/src/forms/estimation/estimation-materiau-form-schema";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 import {
   EstimationMateriauxFormSimpleFieldSchema,
   EstimationMateriauxSimpleFieldFormData,
@@ -20,7 +20,7 @@ import { mapEstimationMateriauFormToDb } from "@/src/lib/prisma/prismaCustomType
 export const updateEstimationMateriauxAction = async (
   estimationId: number,
   data: EstimationMateriauxFormData | EstimationMateriauxSimpleFieldFormData,
-): Promise<ResponseAction<{ updatedEstimation?: EstimationWithAides }>> => {
+): Promise<ResponseAction<{ updatedEstimation?: EstimationWithAidesDto }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -29,7 +29,7 @@ export const updateEstimationMateriauxAction = async (
   const estimation = await getEstimationById(estimationId);
   const permission = new PermissionManager(session);
 
-  if (!estimation || !(await permission.canEditProject(estimation.projet_id))) {
+  if (!estimation || !(await permission.canEditProject(estimation.projetId))) {
     return { type: "error", message: "PROJET_UPDATE_UNAUTHORIZED" };
   }
 

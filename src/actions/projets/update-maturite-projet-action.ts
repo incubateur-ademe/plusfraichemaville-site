@@ -5,7 +5,7 @@ import { NiveauMaturite } from "@/src/helpers/maturite-projet";
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { updateMaturiteProjet } from "@/src/lib/prisma/prismaProjetQueries";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
@@ -13,7 +13,7 @@ import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 export const updateMaturiteProjetAction = async (
   projetId: number,
   niveauMaturite: NiveauMaturite["code"],
-): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
+): Promise<ResponseAction<{ projet: ProjetWithRelationsDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", projet: null };
@@ -31,7 +31,7 @@ export const updateMaturiteProjetAction = async (
     if (projet) {
       await createAnalytic({
         context: {
-          maturite: projet.niveau_maturite,
+          maturite: projet.niveauMaturite,
         },
         event_type: "UPDATE_MATURITE",
         reference_id: projet?.id?.toString(),

@@ -8,7 +8,6 @@ import { fetchEntrepriseFromSirenApi } from "@/src/lib/siren/fetch";
 import { getOrCreateCollectivite } from "@/src/lib/prisma/prismaCollectiviteQueries";
 import { attachUserToCollectivite } from "@/src/lib/prisma/prismaUserCollectiviteQueries";
 import { getUserById, updateUserEtablissementInfo } from "@/src/lib/prisma/prismaUserQueries";
-import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
 import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { attachInvitationsByEmail } from "@/src/lib/prisma/prisma-user-projet-queries";
@@ -22,8 +21,8 @@ export const authOptions: NextAuthOptions = {
       const prismaUser = await getUserById(user.id);
       let collectivite = null;
       if (prismaUser) {
-        const agentConnectInfo = prismaUser.agentconnect_info as AgentConnectInfo;
-        const siret = agentConnectInfo.siret;
+        const agentConnectInfo = prismaUser.agentconnectInfo;
+        const siret = agentConnectInfo?.siret;
         if (siret) {
           const entityFromSiren = await fetchEntrepriseFromSirenApi(siret);
           const codeInsee = entityFromSiren?.etablissement?.adresseEtablissement.codeCommuneEtablissement;
@@ -42,7 +41,7 @@ export const authOptions: NextAuthOptions = {
             );
             if (collectiviteToUse) {
               collectivite = await getOrCreateCollectivite(collectiviteToUse, prismaUser.id);
-              await attachUserToCollectivite(prismaUser, collectivite, true);
+              await attachUserToCollectivite(prismaUser.id, collectivite, true);
             }
           }
         }

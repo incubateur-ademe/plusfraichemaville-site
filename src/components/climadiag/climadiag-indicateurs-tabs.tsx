@@ -3,14 +3,14 @@ import { ClimadiagIndicateursTabButtons } from "./climadiag-indicateurs-tab-butt
 import { useClimadiagIndicateurTabs } from "./hooks/use-climadiag-indicateur-tabs";
 import { ClimadiagIndicateursLine } from "./climadiag-indicateurs-line";
 import { ClimadiagIndicateursHeader } from "./climadiag-indicateurs-header";
-import { Climadiag } from "./types";
+import { ClimadiagDto } from "@/src/types/dto";
 
-export const ClimadiagIndicateursTabs = ({ data }: { data: Climadiag }) => {
+export const ClimadiagIndicateursTabs = ({ data }: { data: ClimadiagDto }) => {
   const { selectedYear, changeYearTab, yearlyData } = useClimadiagIndicateurTabs(data);
 
   return (
     <div className="mt-12 text-dsfr-text-label-blue-france">
-      <ClimadiagIndicateursHeader city={`${data.nom} ${data.code_postal}`} />
+      <ClimadiagIndicateursHeader city={`${data.nom} ${data.codePostal}`} />
       <ClimadiagIndicateursTabButtons>
         <ClimadiagIndicateursTabButton changeTab={changeYearTab} year={2030} active={selectedYear === 2030} />
         <ClimadiagIndicateursTabButton changeTab={changeYearTab} year={2050} active={selectedYear === 2050} />

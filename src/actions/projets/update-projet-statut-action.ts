@@ -3,7 +3,7 @@
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { updateProjetStatut } from "@/src/lib/prisma/prismaProjetQueries";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
@@ -12,7 +12,7 @@ import { EventType, ReferenceType, StatutProjet } from "@/src/generated/prisma/c
 export const updateProjetStatutAction = async (
   projetId: number,
   statut: StatutProjet,
-): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
+): Promise<ResponseAction<{ projet: ProjetWithRelationsDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", projet: null };

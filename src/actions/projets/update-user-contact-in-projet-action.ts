@@ -2,7 +2,7 @@
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { addContactToProjet, deleteContactFromProjet } from "@/src/lib/prisma/prisma-projet-sourcing-contact-queries";
@@ -14,7 +14,7 @@ export const updateUserContactInProjetAction = async (
   projetId: number,
   userProjetId: number,
   typeUpdate: TypeUpdate,
-): Promise<ResponseAction<{ projet?: ProjetWithRelations | null }>> => {
+): Promise<ResponseAction<{ projet?: ProjetWithRelationsDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };

@@ -1,7 +1,7 @@
-import { $Enums, climadiag } from "@/src/generated/prisma/client";
+import { $Enums } from "@/src/generated/prisma/client";
 import { climadiagInfoLabel } from "@/src/components/climadiag/helpers";
 import { isEmpty } from "@/src/helpers/listUtils";
-import { Climadiag } from "@/src/components/climadiag/types";
+import { ClimadiagDto } from "@/src/types/dto";
 import TypeLieuClimadiag = $Enums.TypeLieuClimadiag;
 
 export type CollectiviteOption = {
@@ -20,21 +20,21 @@ export type SearchResultGroupedOptions = {
   options: SearchResultOption[];
 };
 
-export const mapClimadiagToCollectiteOption = (climadiagInfo: climadiag | null): CollectiviteOption | null => {
+export const mapClimadiagToCollectiteOption = (climadiagInfo: ClimadiagDto | null): CollectiviteOption | null => {
   if (!climadiagInfo) {
     return null;
   }
   return {
-    value: climadiagInfo.code_insee,
+    value: climadiagInfo.codeInsee,
     label: climadiagInfoLabel(climadiagInfo),
   };
 };
 
-export const climadiagToOptions = (climadiagInfos: climadiag[]): SearchResultOption[] =>
-  climadiagInfos.map((climadiagInfo: climadiag) => ({
-    value: climadiagInfo.code_insee,
+export const climadiagToOptions = (climadiagInfos: ClimadiagDto[]): SearchResultOption[] =>
+  climadiagInfos.map((climadiagInfo: ClimadiagDto) => ({
+    value: climadiagInfo.codeInsee,
     label: climadiagInfoLabel(climadiagInfo),
-    type: climadiagInfo.type_lieu,
+    type: climadiagInfo.typeLieu,
   }));
 
 export const computeSearchResultGroup = (climadiagOptions: SearchResultOption[]): SearchResultGroupedOptions[] => {
@@ -62,12 +62,12 @@ export const computeSearchResultGroup = (climadiagOptions: SearchResultOption[])
 
 export const NO_RESULT_OPTION = [{ label: "Aucune donnée pour cette collectivité", value: "0", isDisabled: true }];
 
-export const climadiagToPublicClimadiag = (climadiagInfo: Climadiag | null) => {
+export const climadiagToPublicClimadiag = (climadiagInfo: ClimadiagDto | null) => {
   if (!climadiagInfo) return climadiagInfo;
   return {
     ...climadiagInfo,
-    jours_tres_chauds_prevision: { 2030: climadiagInfo.jours_tres_chauds_prevision["2030"] },
-    jours_vdc_prevision: { 2030: climadiagInfo.jours_vdc_prevision["2030"] },
-    nuits_chaudes_prevision: { 2030: climadiagInfo.nuits_chaudes_prevision["2030"] },
+    jours_tres_chauds_prevision: { 2030: climadiagInfo.joursTresChauxPrevision["2030"] },
+    jours_vdc_prevision: { 2030: climadiagInfo.joursVdcPrevision["2030"] },
+    nuits_chaudes_prevision: { 2030: climadiagInfo.nuitsChauxdesPrevision["2030"] },
   };
 };

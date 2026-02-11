@@ -2,13 +2,13 @@
 
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto } from "@/src/types/dto";
 import { getPendingUserProjets } from "@/src/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 
 export const getPendingUserProjetsAction = async (
   userId: string,
-): Promise<ResponseAction<{ pendingProjets: ProjetWithPublicRelations[] }>> => {
+): Promise<ResponseAction<{ pendingProjets: ProjetWithPublicRelationsDto[] }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", pendingProjets: [] };

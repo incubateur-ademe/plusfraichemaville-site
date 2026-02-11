@@ -9,13 +9,13 @@ import { AideEstimationsListeLink } from "./aide-estimation-liste-link";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { AideEstimationsCardRecap } from "@/src/components/financement/aide/aide-estimations-recap";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
-export const AideEstimationsListe = ({ estimations }: { estimations: EstimationWithAides[] }) => {
+export const AideEstimationsListe = ({ estimations }: { estimations: EstimationWithAidesDto[] }) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(projet?.id);
 
@@ -28,7 +28,7 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
       <div>
         {estimations.map((estimation) => (
           <AideEstimationsCard estimation={estimation} key={estimation.id}>
-            {estimation.estimations_aides.length > 0 ? (
+            {estimation.estimationsAides.length > 0 ? (
               <AideEstimationsCardWithSelection estimation={estimation}>
                 <AideEstimationsListeLink
                   className="fr-btn !ml-auto mt-6 !block rounded-3xl"

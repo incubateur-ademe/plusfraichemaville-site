@@ -6,7 +6,7 @@ import { ResponseAction } from "../actions-types";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { createOrUpdateProjet, getProjetById } from "@/src/lib/prisma/prismaProjetQueries";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get-or-create-collectivite-from-form";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
@@ -15,7 +15,7 @@ import ReferenceType = $Enums.ReferenceType;
 
 export const upsertProjetAction = async (
   data: ProjetInfoFormData,
-): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelations | null }>> => {
+): Promise<ResponseAction<{ updatedProjet?: ProjetWithRelationsDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
@@ -60,10 +60,10 @@ export const upsertProjetAction = async (
         isPublic: data.isPublic,
       });
 
-      if (updatedProjet && projetToEdit?.niveau_maturite !== updatedProjet.niveau_maturite) {
+      if (updatedProjet && projetToEdit?.niveauMaturite !== updatedProjet.niveauMaturite) {
         await createAnalytic({
           context: {
-            maturite: updatedProjet.niveau_maturite,
+            maturite: updatedProjet.niveauMaturite,
           },
           event_type: EventType.UPDATE_MATURITE,
           reference_id: updatedProjet?.id.toString(),
@@ -75,12 +75,12 @@ export const upsertProjetAction = async (
       const isUpdatingExistingProjet = !!data.projetId;
       if (
         updatedProjet &&
-        ((isUpdatingExistingProjet && projetToEdit?.is_public !== updatedProjet.is_public) ||
+        ((isUpdatingExistingProjet && projetToEdit?.isPublic !== updatedProjet.isPublic) ||
           (!isUpdatingExistingProjet && data.isPublic))
       ) {
         await createAnalytic({
           context: null,
-          event_type: updatedProjet.is_public
+          event_type: updatedProjet.isPublic
             ? EventType.UPDATE_PROJET_SET_VISIBLE
             : EventType.UPDATE_PROJET_SET_INVISIBLE,
           reference_id: updatedProjet?.id.toString(),

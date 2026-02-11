@@ -4,7 +4,7 @@ import { GenericSaveButtonElement } from "@/src/components/common/generic-save-f
 import { notifications } from "@/src/components/common/notifications";
 import { useDelayedLoading } from "@/src/hooks/use-delayed-loading";
 import { useGetSavedAideInEstimationId } from "@/src/hooks/use-get-aide-saved-in-estimation-id";
-import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationAideDto } from "@/src/types/dto";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import clsx from "clsx";
 
@@ -27,7 +27,7 @@ export const AideCardSaveButton = ({ aideTerritoireId, estimationId, className }
     },
     add: {
       action: () => addAideInEstimationAction(estimationId, aideTerritoireId),
-      storeAction: (estimationAide: EstimationAide) => addAideInEstimation(estimationId, estimationAide),
+      storeAction: (estimationAide: EstimationAideDto) => addAideInEstimation(estimationId, estimationAide),
     },
   };
 

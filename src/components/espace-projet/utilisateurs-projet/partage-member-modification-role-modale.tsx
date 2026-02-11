@@ -54,9 +54,9 @@ export const PartageMemberModificationRoleModale = () => {
   });
 
   const onSubmit: SubmitHandler<PartageUserModificationData> = async (data) => {
-    if (userId && currentUserModification?.member.user_id && projetId) {
+    if (userId && currentUserModification?.member.userId && projetId) {
       const result = await updateUserRoleProjectAction(
-        currentUserModification?.member.user_id.toString(),
+        currentUserModification?.member.userId.toString(),
         projetId,
         data.role as RoleProjet,
       );

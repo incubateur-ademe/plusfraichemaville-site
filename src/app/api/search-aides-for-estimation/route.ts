@@ -25,7 +25,7 @@ export async function GET(request: NextRequest) {
     return NextResponse.json("Estimation not found", { status: 422 });
   }
 
-  const projet = await getProjetById(estimation.projet_id);
+  const projet = await getProjetById(estimation.projetId);
   if (!projet) {
     return NextResponse.json("Projet not found", { status: 422 });
   }
@@ -35,14 +35,14 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(null, { status: 403 });
   }
 
-  const ficheSolutionIds = estimation.estimations_fiches_solutions.map((efs) => efs.fiche_solution_id);
+  const ficheSolutionIds = estimation.estimationsFichesSolutions.map((efs) => efs.ficheSolutionId);
   const ficheSolutions = await getFicheSolutionByIds(ficheSolutionIds);
   const collectivite = await getCollectiviteById(projet.collectiviteId);
   if (collectivite) {
     const result = await searchAidesFromAidesTerritoires(
       ficheSolutions.map((fs) => fs.attributes),
       collectivite,
-      selectEspaceLabelByCode(projet.type_espace),
+      selectEspaceLabelByCode(projet.typeEspace),
     );
     return NextResponse.json(result);
   }

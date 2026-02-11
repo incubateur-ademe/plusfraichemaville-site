@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Climadiag } from "./types";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
 import { Spinner } from "../common/spinner";
+import { ClimadiagDto } from "@/src/types/dto";
 
 type ClimadiagDownloaderProps = {
-  data: Climadiag;
+  data: ClimadiagDto;
 };
 
 const LazyClimadiagViewer = dynamic(() => import("./climadiag-viewer").then((mod) => mod.ClimadiagViewer));

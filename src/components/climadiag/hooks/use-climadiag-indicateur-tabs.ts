@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Climadiag, ClimadiagYear } from "../types";
+import { ClimadiagYear } from "../types";
 import { getYearlyClimadiagData } from "@/src/components/climadiag/helpers";
+import { ClimadiagDto } from "@/src/types/dto";
 
-export const useClimadiagIndicateurTabs = (data: Climadiag) => {
+export const useClimadiagIndicateurTabs = (data: ClimadiagDto) => {
   const [selectedYear, setSelectedYear] = useState<ClimadiagYear>(2030);
 
   const changeYearTab = (year: ClimadiagYear) => {

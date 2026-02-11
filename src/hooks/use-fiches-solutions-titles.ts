@@ -1,12 +1,12 @@
 import { useMemo } from "react";
-import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolutionDto } from "@/src/types/dto";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
 
-export function useFichesSolutionsTitles(estimationsFichesSolutions?: EstimationFicheSolution[]) {
+export function useFichesSolutionsTitles(estimationsFichesSolutions?: EstimationFicheSolutionDto[]) {
   const allFicheSolutionIds = useMemo(
-    () => estimationsFichesSolutions?.map((efs) => +efs.fiche_solution_id) || [],
+    () => estimationsFichesSolutions?.map((efs) => +efs.ficheSolutionId) || [],
     [estimationsFichesSolutions],
   );
 

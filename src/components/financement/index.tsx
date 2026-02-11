@@ -11,7 +11,7 @@ export const Financement = () => {
   const { estimations } = projet || {};
 
   const hasEstimations = estimations && estimations?.length > 0;
-  const hasAlreadySelectedAides = !!estimations?.find((estimation) => estimation.estimations_aides.length > 0);
+  const hasAlreadySelectedAides = !!estimations?.find((estimation) => estimation.estimationsAides.length > 0);
   return (
     <div className="fr-container pt-8">
       <Conditional>

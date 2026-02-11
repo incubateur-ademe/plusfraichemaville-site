@@ -1,12 +1,13 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { EstimationAide } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationAideDto } from "@/src/types/dto";
+import { convertEstimationAideToDto } from "@/src/lib/prisma/dto-converters";
 import { projetUpdated } from "./prismaProjetQueries";
 
 export const addAideInEstimation = async (
   estimationId: number,
   aideId: number,
   userId: string,
-): Promise<EstimationAide> => {
+): Promise<EstimationAideDto> => {
   const response = await prismaClient.estimations_aides.upsert({
     where: {
       estimationId_aideId: {
@@ -34,10 +35,13 @@ export const addAideInEstimation = async (
     await projetUpdated(estimation.projet_id);
   }
 
-  return response;
+  return convertEstimationAideToDto(response);
 };
 
-export const deleteAideInEstimation = async (estimationId: number, aideId: number): Promise<EstimationAide | null> => {
+export const deleteAideInEstimation = async (
+  estimationId: number,
+  aideId: number,
+): Promise<EstimationAideDto | null> => {
   const response = await prismaClient.estimations_aides.delete({
     where: {
       estimationId_aideId: {
@@ -59,5 +63,5 @@ export const deleteAideInEstimation = async (estimationId: number, aideId: numbe
     await projetUpdated(estimation.projet_id);
   }
 
-  return response;
+  return convertEstimationAideToDto(response);
 };

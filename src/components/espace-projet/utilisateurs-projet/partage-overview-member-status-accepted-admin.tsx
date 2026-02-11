@@ -1,7 +1,7 @@
 "use client";
 
 import { useModalStore } from "@/src/stores/modal/provider";
-import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUserDto } from "@/src/types/dto";
 import { deleteUserFromProjetAction } from "@/src/actions/userProjet/delete-user-from-projet-action";
 import { notifications } from "../../common/notifications";
 import { PopupMenu } from "../../common/popup-menu";
@@ -11,7 +11,7 @@ import { RoleProjet } from "@/src/generated/prisma/client";
 import { PartageMemberModificationRoleModale } from "@/src/components/espace-projet/utilisateurs-projet/partage-member-modification-role-modale";
 
 export type PartageOverviewMemberStatusAdminProps = {
-  member: UserProjetWithUser;
+  member: UserProjetWithUserDto;
   isCurrentUser?: boolean;
 };
 
@@ -38,8 +38,8 @@ export const PartageOverviewMemberStatusAcceptedAdmin = (props: PartageOverviewM
           member: props.member,
           options: {
             action: async () => {
-              if (props.member.user_id && props.member.projet_id) {
-                const result = await deleteUserFromProjetAction(props.member.user_id, props.member.projet_id);
+              if (props.member.userId && props.member.projetId) {
+                const result = await deleteUserFromProjetAction(props.member.userId, props.member.projetId);
                 notifications(result.type, result.message);
                 if (result.type === "success" && result.updatedProjet) {
                   addOrUpdateProjet(result.updatedProjet);

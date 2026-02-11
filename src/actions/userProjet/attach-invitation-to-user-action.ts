@@ -7,7 +7,7 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { attachInvitationsByToken, getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { Prisma } from "@/src/generated/prisma/client";
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto } from "@/src/types/dto";
 
 export const attachInvitationToUserAction = async (
   userId: string,
@@ -15,7 +15,7 @@ export const attachInvitationToUserAction = async (
   invitationToken: string,
 ): Promise<
   ResponseAction<{
-    updatedProjet?: ProjetWithPublicRelations | null;
+    updatedProjet?: ProjetWithPublicRelationsDto | null;
   }>
 > => {
   const session = await auth();
@@ -34,11 +34,11 @@ export const attachInvitationToUserAction = async (
       return { type: "error", message: "UNAUTHORIZED" };
     }
     const existingProjetLink = await getUserProjetById(invitationId);
-    if (existingProjetLink?.user_id === userId) {
+    if (existingProjetLink?.userId === userId) {
       return { type: "success" };
     }
     const projetLink = await attachInvitationsByToken(invitationId, invitationToken, user);
-    return { type: "success", updatedProjet: projetLink?.projet };
+    return { type: "success", updatedProjet: projetLink };
   } catch (e) {
     if (e instanceof Prisma.PrismaClientKnownRequestError) {
       if (e.code === "P2025") {

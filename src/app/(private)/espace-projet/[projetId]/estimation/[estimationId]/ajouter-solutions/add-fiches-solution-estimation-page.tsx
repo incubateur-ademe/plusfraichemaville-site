@@ -26,7 +26,7 @@ export default function AddFichesSolutionEstimationPage() {
 
   const fichesSolutionsIdsNotInEstimation = useMemo(() => {
     if (!estimation) return [];
-    const estimationFicheSolutionIds = estimation.estimations_fiches_solutions.map((efs) => efs.fiche_solution_id);
+    const estimationFicheSolutionIds = estimation.estimationsFichesSolutions.map((efs) => efs.ficheSolutionId);
     return projetFichesSolutionsIds.filter((id) => !estimationFicheSolutionIds.includes(id));
   }, [estimation, projetFichesSolutionsIds]);
 

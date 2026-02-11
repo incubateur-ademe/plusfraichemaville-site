@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto } from "@/src/types/dto";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { getRegionLabelForProjet } from "@/src/helpers/regions";
 import { AnnuaireContact } from "@/src/components/annuaire/types";
@@ -13,7 +13,7 @@ import { userProjetToAnnuaireContact } from "@/src/components/annuaire/helpers";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 import { AnnuaireSidePanelTracking } from "./annuaire-side-panel-tracking";
 
-export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
+export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelationsDto }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const regionLabel = getRegionLabelForProjet(data);
   const user = getOldestAdmin(data);
@@ -33,7 +33,7 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
             Projet en cours
           </Badge>
           <Tag small className="!m-0 h-fit">
-            {selectEspaceLabelByCode(data.type_espace)}
+            {selectEspaceLabelByCode(data.typeEspace)}
           </Tag>
         </div>
         <div className="mb-2 mt-2 text-lg font-bold">{data.nom}</div>
@@ -51,7 +51,7 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
             </label>
             <Maturite
               id="maturite-select"
-              niveau={data.niveau_maturite}
+              niveau={data.niveauMaturite}
               projetId={data.id}
               editable={false}
               buttonBgHoverColor="!bg-dsfr-background-alt-blue-france"

@@ -2,14 +2,14 @@
 
 import { useProjetsStore } from "./provider";
 import { useLayoutEffect } from "react";
-import { ProjetWithPublicRelations, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto, ProjetWithRelationsDto } from "@/src/types/dto";
 
 export const ProjetStoreClient = ({
   projets,
   pendingProjets,
 }: {
-  projets: ProjetWithRelations[];
-  pendingProjets: ProjetWithPublicRelations[];
+  projets: ProjetWithRelationsDto[];
+  pendingProjets: ProjetWithPublicRelationsDto[];
 }) => {
   const setProjets = useProjetsStore((state) => state.setProjets);
   const setPendingProjets = useProjetsStore((state) => state.setPendingProjets);

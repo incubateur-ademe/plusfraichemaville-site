@@ -21,9 +21,9 @@ export const ClimadiagIndicateursTabButton = ({ active, year, changeTab }: Clima
       )}
       role="radio"
       aria-checked={active}
-      onClick={() => changeTab && changeTab(year)}
+      onClick={() => changeTab && changeTab(year as keyof ProjectionsIndicateurClimadiag)}
     >
-      {year}
+      {String(year)}
       {active && (
         <div className="absolute -top-[6px] right-0 w-[48px]">
           <span className={clsx("absolute top-[10.5px] text-[9.5px]", year === 2050 ? "left-[16px]" : "left-[19px]")}>

@@ -34,10 +34,13 @@ const getRegionLabelFromAdresseInfo = (adresseInfo: AddressProperties | null) =>
 };
 
 export const getRegionLabelForProjet = (
-  projet: Pick<ProjetWithPublicRelations, "adresse_all_infos" | "collectivite">,
+  projet: { adresseAllInfos?: unknown; collectivite: { adresseAllInfos?: unknown } } |
+         Pick<ProjetWithPublicRelations, "adresse_all_infos" | "collectivite">,
 ): string | null => {
   const adresseInfo =
-    (projet.adresse_all_infos as GeoJsonAdresse | null) ||
-    (projet.collectivite.adresse_all_infos as GeoJsonAdresse | null);
+    ((projet as any).adresseAllInfos as GeoJsonAdresse | null) ||
+    ((projet as any).adresse_all_infos as GeoJsonAdresse | null) ||
+    ((projet.collectivite as any).adresseAllInfos as GeoJsonAdresse | null) ||
+    ((projet.collectivite as any).adresse_all_infos as GeoJsonAdresse | null);
   return adresseInfo ? getRegionLabelFromAdresseInfo(adresseInfo.properties) : null;
 };

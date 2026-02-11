@@ -42,18 +42,18 @@ export const UserBrowsingTracker = () => {
     };
 
     const shouldUpdateUser =
-      !userInfos.last_browsing_date ||
-      hoursSinceDate(userInfos.last_browsing_date) >= NB_HOUR_BEFORE_LOG_NEW_USER_BROWSE;
+      !userInfos.lastBrowsingDate ||
+      hoursSinceDate(new Date(userInfos.lastBrowsingDate)) >= NB_HOUR_BEFORE_LOG_NEW_USER_BROWSE;
 
     if (shouldUpdateUser) {
       updateUserBrowsingDate();
     }
 
-    const currentUserProjet = currentprojet?.users.find((up) => up.user_id === userInfos.id);
+    const currentUserProjet = currentprojet?.users.find((up) => up.userId === userInfos.id);
     if (currentUserProjet) {
       const shouldUpdateUserProjet =
-        !currentUserProjet.last_viewed_at ||
-        hoursSinceDate(currentUserProjet.last_viewed_at) >= NB_HOUR_BEFORE_LOG_NEW_USER_PROJET_BROWSE;
+        !currentUserProjet.lastViewedAt ||
+        hoursSinceDate(new Date(currentUserProjet.lastViewedAt)) >= NB_HOUR_BEFORE_LOG_NEW_USER_PROJET_BROWSE;
       if (shouldUpdateUserProjet) {
         updateUseProjetLastViewedDate();
       }

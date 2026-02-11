@@ -2,15 +2,18 @@ import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { Prisma } from "@/src/generated/prisma/client";
 import { Climadiag } from "@/src/components/climadiag/types";
 import { climadiagToPublicClimadiag } from "@/src/components/surchauffe-urbaine/territoire/search-helpers";
+import { ClimadiagDto } from "@/src/types/dto";
+import { convertClimadiagToDto } from "./dto-converters";
 
-export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]) => {
-  return prismaClient.climadiag.findMany({
+export const getClimadiagInfoFromCodeInsee = async (codeInsee: string[]): Promise<ClimadiagDto[]> => {
+  const results = await prismaClient.climadiag.findMany({
     where: {
       code_insee: {
         in: codeInsee,
       },
     },
   });
+  return results.map(convertClimadiagToDto);
 };
 
 export const getPublicClimadiagInfoFromCodeInsee = async (codeInsee: string) => {
@@ -19,12 +22,12 @@ export const getPublicClimadiagInfoFromCodeInsee = async (codeInsee: string) => 
       code_insee: codeInsee,
     },
   })) as Climadiag | null;
-  return climadiagToPublicClimadiag(climadiagInfo);
+  return climadiagInfo ? climadiagToPublicClimadiag(convertClimadiagToDto(climadiagInfo)) : null;
 };
 
-export const searchClimadiagInfo = async (searchTerms: string[], limit: number) => {
+export const searchClimadiagInfo = async (searchTerms: string[], limit: number): Promise<ClimadiagDto[]> => {
   const fullTextQuery = searchTerms.map((searchTerm) => `${searchTerm}`).join(" & ");
-  return prismaClient.climadiag.findMany({
+  const results = await prismaClient.climadiag.findMany({
     where: {
       OR: [
         {
@@ -47,7 +50,8 @@ export const searchClimadiagInfo = async (searchTerms: string[], limit: number) 
     },
     orderBy: [{ type_lieu: "desc" }, { population: "desc" }],
     take: limit,
-  }) as unknown as Climadiag[];
+  });
+  return results.map(convertClimadiagToDto);
 };
 
 const computeClimadiagNameQuery = (searchTerms: string[]): Prisma.climadiagWhereInput => {

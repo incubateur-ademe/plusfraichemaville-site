@@ -1,6 +1,6 @@
-import { Feature, GeoJsonProperties, Point } from "geojson";
-import { collectivite, projet } from "@/src/generated/prisma/client";
+import { Feature, Point } from "geojson";
 import { AddressCommune, AddressProjet } from "@/src/lib/adresseApi/types";
+import { CollectiviteDto, ProjetDto } from "@/src/types/dto";
 
 export const mapAddressApiToCollectiviteAddress = (nationalBaseAddress: Feature<Point>): AddressCommune => ({
   banId: nationalBaseAddress.properties?.id,
@@ -18,20 +18,20 @@ export const mapAddressApiToAddressProjet = (nationalBaseAddress: Feature<Point>
   banInfo: nationalBaseAddress,
 });
 
-export const mapDBCollectiviteToCollectiviteAddress = (dbCollectivite?: collectivite): AddressCommune | null => {
+export const mapDBCollectiviteToCollectiviteAddress = (dbCollectivite?: CollectiviteDto): AddressCommune | null => {
   return dbCollectivite
     ? {
         id: dbCollectivite.id,
-        banId: dbCollectivite.ban_id ?? "",
+        banId: dbCollectivite.banId ?? "",
         nomCommune: dbCollectivite.nom ?? "",
-        codeInsee: dbCollectivite.code_insee ?? "",
-        codePostal: dbCollectivite.code_postal ?? "",
+        codeInsee: dbCollectivite.codeInsee ?? "",
+        codePostal: dbCollectivite.codePostal ?? "",
         long: dbCollectivite.longitude,
         lat: dbCollectivite.latitude,
       }
     : null;
 };
 
-export const mapDBProjetToProjetAddress = (dbProjet?: projet): AddressProjet => {
-  return { label: dbProjet?.adresse ?? "", banInfo: dbProjet?.adresse_all_infos as GeoJsonProperties };
+export const mapDBProjetToProjetAddress = (dbProjet?: ProjetDto): AddressProjet => {
+  return { label: dbProjet?.adresse ?? "", banInfo: dbProjet?.adresseAllInfos };
 };

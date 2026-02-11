@@ -5,14 +5,15 @@ import { ClimadiagIndicateurs } from "@/src/components/climadiag/climadiag-indic
 import AsyncSelect from "react-select/async";
 import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "@/src/components/climadiag/helpers";
 import debounce from "lodash/debounce";
-import { Climadiag, GroupedOptions } from "./types";
+import { GroupedOptions } from "./types";
+import { ClimadiagDto } from "@/src/types/dto";
 
 export const ClimadiagPanel = ({ userId }: { userId: string }) => {
-  const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<Climadiag>();
+  const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<ClimadiagDto>();
   const [userResultGroup, setUserResultGroup] = useState<GroupedOptions[]>([]);
-  const [searchClimadiagData, setSearchClimadiagData] = useState<Climadiag[]>([]);
+  const [searchClimadiagData, setSearchClimadiagData] = useState<ClimadiagDto[]>([]);
 
-  const { data: userClimadiagInfos, isLoading } = useSwrWithFetcher<Climadiag[]>(
+  const { data: userClimadiagInfos, isLoading } = useSwrWithFetcher<ClimadiagDto[]>(
     `/api/get-climadiag-info-for-user-projects?userId=${userId}`,
   );
 
@@ -20,7 +21,7 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
     if (inputValue?.trim().length > 2) {
       fetch(`/api/search-climadiag-info?search=${inputValue}`)
         .then((t) => t.json())
-        .then((searchedValues: Climadiag[]) => {
+        .then((searchedValues: ClimadiagDto[]) => {
           setSearchClimadiagData(searchedValues);
           const searchOptions = searchedValues?.length > 0 ? climadiagToOptions(searchedValues) : NO_RESULT_OPTION;
           callback(computeSearchResultGroup(searchOptions).concat(userResultGroup));

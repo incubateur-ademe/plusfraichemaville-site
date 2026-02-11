@@ -23,7 +23,7 @@ export const ClimadiagIndicateursLineLegend = ({ legend, year }: ClimadiagIndica
             <div className="flex w-[130px] gap-3" key={index}>
               <div className={clsx({ [d.color]: true }, "mt-1 size-[6px] shrink-0 rounded-full")}></div>
               <p className="max-w-24 text-pretty text-[10px] leading-[14px]">
-                {d.label} {year}
+                {d.label} {String(year)}
               </p>
             </div>
           ))}

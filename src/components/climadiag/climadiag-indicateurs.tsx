@@ -1,10 +1,10 @@
 "use client";
 
 import { ClimadiagIndicateursTabs } from "./climadiag-indicateurs-tabs";
-import { Climadiag } from "./types";
 import { ClimadiagDownloader } from "@/src/components/climadiag/climadiag-downloader";
+import { ClimadiagDto } from "@/src/types/dto";
 
-export const ClimadiagIndicateurs = ({ climadiagInfo }: { climadiagInfo: Climadiag }) => {
+export const ClimadiagIndicateurs = ({ climadiagInfo }: { climadiagInfo: ClimadiagDto }) => {
   return (
     <div className="bg-dsfr-background-open-blue-france">
       <ClimadiagIndicateursTabs data={climadiagInfo} />

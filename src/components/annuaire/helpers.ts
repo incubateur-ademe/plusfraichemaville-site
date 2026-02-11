@@ -1,8 +1,8 @@
 import {
-  ProjetWithPublicRelations,
-  UserProjetWithPublicInfos,
-  UserProjetWithUserInfos,
-} from "@/src/lib/prisma/prismaCustomTypes";
+  ProjetWithPublicRelationsDto,
+  UserProjetWithPublicInfosDto,
+  UserProjetWithUserInfosDto,
+} from "@/src/types/dto";
 import { LatLngTuple } from "@/src/types/global";
 import { AnnuaireMapClientProps } from "./map/annuaire-map-client";
 import { CustomMarker, GeoJsonAdresse, AnnuaireContact, AnnuaireContactTypeMap, StrapiAnnuaireContact } from "./types";
@@ -13,15 +13,15 @@ import { selectEspaceLabelByCode, TypeEspaceCode } from "@/src/helpers/type-espa
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import { SousTypeDeContact, TypeDeContact } from "@/src/lib/strapi/types/components/retour-experience/Contact";
 
-export const getProjetCoordinates = (projet: ProjetWithPublicRelations): LatLngTuple => {
-  const adresseInfo = projet.adresse_all_infos as unknown as GeoJsonAdresse | undefined;
+export const getProjetCoordinates = (projet: ProjetWithPublicRelationsDto): LatLngTuple => {
+  const adresseInfo = projet.adresseAllInfos as unknown as GeoJsonAdresse | undefined;
   const coordinates = adresseInfo?.geometry.coordinates
     ? { latitude: adresseInfo.geometry.coordinates[1], longitude: adresseInfo.geometry.coordinates[0] }
     : { latitude: projet.collectivite.latitude, longitude: projet.collectivite.longitude };
   return [coordinates.latitude, coordinates.longitude] as LatLngTuple;
 };
 
-export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelations[]): CustomMarker[] =>
+export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPublicRelationsDto[]): CustomMarker[] =>
   inProgressProjets
     .map((projet): CustomMarker | undefined => {
       const coordinates = getProjetCoordinates(projet);
@@ -35,7 +35,7 @@ export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPubl
         type: "in-progress",
         idProjet: projet.id,
         projet: {
-          typeEspace: projet.type_espace as TypeEspaceCode,
+          typeEspace: projet.typeEspace as TypeEspaceCode,
         },
       };
     })
@@ -138,29 +138,29 @@ export const strapiContactToAnnuaireContact = (
   };
 };
 
-export const userProjetToAnnuaireContact = (userProjet: UserProjetWithUserInfos): AnnuaireContact => ({
+export const userProjetToAnnuaireContact = (userProjet: UserProjetWithUserInfosDto): AnnuaireContact => ({
   type: "in-progress",
   uniqueId: `in-progress-${userProjet?.id}`,
   userProjetId: userProjet?.id,
   typeContact: TypeDeContact.Collectivite,
   email: userProjet?.user?.email,
   poste: userProjet?.user?.poste,
-  nomCollectivite: userProjet?.user?.nom_etablissement,
+  nomCollectivite: userProjet?.user?.nomEtablissement,
   label: userProjet.user ? prettyUserName(userProjet.user) : "",
 });
 
-export const userProjetToAnnuaireContactWithProjet = (userProjet: UserProjetWithPublicInfos): AnnuaireContact => ({
+export const userProjetToAnnuaireContactWithProjet = (userProjet: UserProjetWithPublicInfosDto): AnnuaireContact => ({
   type: "in-progress",
   uniqueId: `in-progress-${userProjet?.id}`,
   userProjetId: userProjet?.id,
   typeContact: TypeDeContact.Collectivite,
   email: userProjet?.user?.email,
   poste: userProjet?.user?.poste,
-  nomCollectivite: userProjet?.user?.nom_etablissement,
+  nomCollectivite: userProjet?.user?.nomEtablissement,
   label: userProjet.user ? prettyUserName(userProjet.user) : "",
   projet: {
     nom: userProjet.projet.nom,
-    typeEspace: selectEspaceLabelByCode(userProjet.projet.type_espace),
+    typeEspace: selectEspaceLabelByCode(userProjet.projet.typeEspace),
     region: getRegionLabelForProjet(userProjet.projet),
   },
 });

@@ -6,14 +6,14 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { getUserProjet, updateLastAccessToProjetByUser } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 
 export const updateUserProjetLastViewedAction = async (
   userId: string,
   projectId: number,
 ): Promise<
   ResponseAction<{
-    projet?: ProjetWithRelations | null;
+    projet?: ProjetWithRelationsDto | null;
   }>
 > => {
   try {

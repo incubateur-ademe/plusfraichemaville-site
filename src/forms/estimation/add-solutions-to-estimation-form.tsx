@@ -8,15 +8,15 @@ import { FicheSolutionSmallCardContainer } from "@/src/components/ficheSolution/
 import { FicheSolutionSmallCard } from "@/src/components/ficheSolution/fiche-solution-small-card";
 import { addFichesSolutionsToEstimationAction } from "@/src/actions/estimation/add-fiches-solutions-to-estimation-action";
 import { notifications } from "@/src/components/common/notifications";
-import { EstimationWithAides, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto, ProjetWithRelationsDto } from "@/src/types/dto";
 import { useRouter } from "next/navigation";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 type AddSolutionsToEstimationFormProps = {
-  estimation: EstimationWithAides;
-  currentProjet: ProjetWithRelations;
+  estimation: EstimationWithAidesDto;
+  currentProjet: ProjetWithRelationsDto;
   fichesSolutionsIdsNotInEstimation: number[];
 };
 
@@ -54,10 +54,10 @@ export const AddSolutionsToEstimationForm = ({
     if (result.type === "success") {
       notifications(result.type, result.message);
       if (result.estimation) {
-        const firstAddedFicheSolutionIndex = result.estimation.estimations_fiches_solutions.findIndex(
+        const firstAddedFicheSolutionIndex = result.estimation.estimationsFichesSolutions.findIndex(
           (efs) =>
-            !estimation.estimations_fiches_solutions.find(
-              (originalEfs) => originalEfs.fiche_solution_id === efs.fiche_solution_id,
+            !estimation.estimationsFichesSolutions.find(
+              (originalEfs) => originalEfs.ficheSolutionId === efs.ficheSolutionId,
             ),
         );
 

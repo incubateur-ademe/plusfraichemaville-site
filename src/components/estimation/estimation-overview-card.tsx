@@ -2,7 +2,7 @@
 import clsx from "clsx";
 
 import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 import { useEffect, useMemo, useState } from "react";
 import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
 import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
@@ -11,7 +11,7 @@ import { dateToStringWithTime } from "@/src/helpers/dateUtils";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
-import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
 import { FicheSolutionDeleteModal } from "@/src/components/estimation/fiche-solution-delete-modal";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/helpers";
@@ -19,7 +19,6 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
-import { TypeFiche } from "@/src/helpers/common";
 import { useRouter } from "next/navigation";
 
 const FicheSolutionSmallCardWithActions = ({
@@ -29,7 +28,7 @@ const FicheSolutionSmallCardWithActions = ({
   onEdit,
 }: {
   ficheSolutionId: number;
-  estimation: EstimationWithAides;
+  estimation: EstimationWithAidesDto;
   isEditMode?: boolean;
   onEdit: (ficheSolutionId: number) => void;
 }) => {
@@ -38,8 +37,8 @@ const FicheSolutionSmallCardWithActions = ({
   );
   const ficheSolution = ficheSolutionData?.[0];
 
-  const estimationFicheSolution = estimation.estimations_fiches_solutions?.find(
-    (em) => em.fiche_solution_id === ficheSolutionId,
+  const estimationFicheSolution = estimation.estimationsFichesSolutions?.find(
+    (em) => em.ficheSolutionId === ficheSolutionId,
   );
 
   const isEstimated = estimationFicheSolution ? isFicheSolutionEstimated(estimationFicheSolution) : false;
@@ -73,12 +72,12 @@ export const EstimationOverviewCard = ({
   estimation,
   canEditEstimation,
 }: {
-  estimation: EstimationWithAides;
+  estimation: EstimationWithAidesDto;
   canEditEstimation?: boolean;
 }) => {
   const router = useRouter();
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice(
-    estimation.estimations_fiches_solutions,
+    estimation.estimationsFichesSolutions,
   );
 
   const setCurrentEstimation = useModalStore((state) => state.setCurrentEstimation);
@@ -94,33 +93,33 @@ export const EstimationOverviewCard = ({
   );
 
   const fichesSolutionsIdsNotInEstimation = useMemo(() => {
-    const estimationFicheSolutionIds = estimation.estimations_fiches_solutions.map((efs) => efs.fiche_solution_id);
+    const estimationFicheSolutionIds = estimation.estimationsFichesSolutions.map((efs) => efs.ficheSolutionId);
     return projetFichesSolutionsIds.filter((id) => !estimationFicheSolutionIds.includes(id));
-  }, [estimation.estimations_fiches_solutions, projetFichesSolutionsIds]);
+  }, [estimation.estimationsFichesSolutions, projetFichesSolutionsIds]);
 
   useEffect(() => {
-    if (isEditMode && estimation.estimations_fiches_solutions.length === 0) {
+    if (isEditMode && estimation.estimationsFichesSolutions.length === 0) {
       setIsEditMode(false);
     }
-  }, [estimation.estimations_fiches_solutions.length, isEditMode]);
+  }, [estimation.estimationsFichesSolutions.length, isEditMode]);
 
   const handleEditFicheSolution = (ficheSolutionId: number) => {
-    const index = estimation.estimations_fiches_solutions.findIndex(
-      (efs) => efs.fiche_solution_id === +ficheSolutionId,
-    );
+    const index = estimation.estimationsFichesSolutions.findIndex((efs) => efs.ficheSolutionId === +ficheSolutionId);
     if (index !== -1) {
       setCurrentEstimation({ id: estimation.id, startingStep: index + 1 });
     }
   };
 
-  if (estimation.estimations_fiches_solutions.length < 1) {
+  if (estimation.estimationsFichesSolutions.length < 1) {
     return null;
   }
 
   return (
     <section className={clsx("pfmv-strong-card px-12 pb-12 pt-8")}>
       <div className="mb-6 flex flex-row justify-between">
-        <h2 className="mb-6 text-xl font-bold">{`Estimation du ${dateToStringWithTime(estimation.created_at)}`}</h2>
+        <h2 className="mb-6 text-xl font-bold">{`Estimation du ${dateToStringWithTime(
+          new Date(estimation.createdAt),
+        )}`}</h2>
 
         {isEstimationCompleted ? (
           <div className="text-right text-xs text-dsfr-text-default-grey">
@@ -135,10 +134,10 @@ export const EstimationOverviewCard = ({
         )}
       </div>
       <div className={clsx("mb-12 flex flex-wrap gap-6")}>
-        {estimation.estimations_fiches_solutions.map((estimationFicheSolution) => (
+        {estimation.estimationsFichesSolutions.map((estimationFicheSolution) => (
           <FicheSolutionSmallCardWithActions
-            key={estimationFicheSolution.fiche_solution_id}
-            ficheSolutionId={estimationFicheSolution.fiche_solution_id}
+            key={estimationFicheSolution.ficheSolutionId}
+            ficheSolutionId={estimationFicheSolution.ficheSolutionId}
             estimation={estimation}
             isEditMode={isEditMode && canEditEstimation}
             onEdit={handleEditFicheSolution}
@@ -180,7 +179,7 @@ export const EstimationOverviewCard = ({
             onClick={() =>
               setCurrentEstimation({
                 id: estimation.id,
-                startingStep: estimation.estimations_fiches_solutions.length + 1,
+                startingStep: estimation.estimationsFichesSolutions.length + 1,
               })
             }
             className="fr-link underline"

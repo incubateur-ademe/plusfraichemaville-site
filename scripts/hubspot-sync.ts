@@ -38,7 +38,7 @@ const syncWithHubspot = async () => {
     }
 
     const deletedProjects = usersAndProjectsFromLastSync.flatMap((user) =>
-      user.projets.filter((p) => p.projet.deleted_at).map((p) => p.projet.id),
+      user.projets.filter((p) => p.deletedAt).map((p) => p.id),
     );
 
     if (deletedProjects.length > 0) {
@@ -49,7 +49,7 @@ const syncWithHubspot = async () => {
 
     const activeUsersAndProjects = usersAndProjectsFromLastSync.map((user) => ({
       ...user,
-      projets: user.projets.filter((p) => !p.projet.deleted_at),
+      projets: user.projets.filter((p) => !p.deletedAt),
     }));
 
     console.log("Début de la synchronisation avec Hubspot...");

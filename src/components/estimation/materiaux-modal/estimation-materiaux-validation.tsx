@@ -1,4 +1,4 @@
-import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolutionDto } from "@/src/types/dto";
 import { EstimationMateriauxFicheSolutionRecap } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-fiche-solution-recap";
 import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimation-materiau-global-price-footer";
 import Button from "@codegouvfr/react-dsfr/Button";
@@ -6,7 +6,7 @@ import { notifications } from "@/src/components/common/notifications";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 
 type EstimationMateriauxValidationProps = {
-  estimationsFicheSolution: EstimationFicheSolution[];
+  estimationsFicheSolution: EstimationFicheSolutionDto[];
   goToFicheSolutionStep: (_: number) => void;
   onClose: () => void;
   onPrevious: () => void;
@@ -30,7 +30,7 @@ export function EstimationMateriauxValidation({
     <>
       {estimationsFicheSolution.map((efm) => (
         <EstimationMateriauxFicheSolutionRecap
-          key={efm.fiche_solution_id}
+          key={efm.ficheSolutionId}
           currentFicheSolutionEstimation={efm}
           goToFicheSolutionStep={goToFicheSolutionStep}
           allEstimationsFicheSolution={estimationsFicheSolution}

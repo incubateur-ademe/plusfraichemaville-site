@@ -7,7 +7,7 @@ import { ProjetVisibility } from "../common/projet-visibility";
 
 export const AnnuaireProjetVisibility = ({ isLecteur, reduced = false }: { isLecteur: boolean; reduced?: boolean }) => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
-  const isPublic = currentProjet?.is_public;
+  const isPublic = currentProjet?.isPublic;
   const projetId = currentProjet?.id;
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
 

@@ -1,5 +1,5 @@
 import Tooltip from "@codegouvfr/react-dsfr/Tooltip";
-import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolutionDto } from "@/src/types/dto";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 import { constructPluralString } from "@/src/helpers/common";
@@ -10,7 +10,7 @@ interface OtherUsagesMateriauProps {
   materiauId: number;
   ficheSolutionId: number;
   currentMateriauQuantity?: number;
-  allEstimationsFichesSolutions: EstimationFicheSolution[];
+  allEstimationsFichesSolutions: EstimationFicheSolutionDto[];
   materiau: Materiau | undefined;
   showQuantity?: boolean;
   className?: string;
@@ -30,15 +30,15 @@ export default function OtherUsagesMateriau({
   const otherUsages =
     allEstimationsFichesSolutions?.filter(
       (efs) =>
-        +efs.fiche_solution_id !== +ficheSolutionId &&
-        efs.estimation_materiaux.some((em) => +em.materiau_id === +materiauId),
+        +efs.ficheSolutionId !== +ficheSolutionId &&
+        efs.estimationMateriaux.some((em) => +em.materiauId === +materiauId),
     ) || [];
 
   const uniteCoutMateriau = getUniteCoutFromCode(materiau?.attributes.cout_unite);
 
   const otherQuantity = otherUsages.reduce((acc, efs) => {
-    const em = efs.estimation_materiaux.find(
-      (m) => +m.materiau_id === +materiauId && +efs.fiche_solution_id !== +ficheSolutionId,
+    const em = efs.estimationMateriaux.find(
+      (m) => +m.materiauId === +materiauId && +efs.ficheSolutionId !== +ficheSolutionId,
     );
     return acc + (em?.quantite || 0);
   }, 0);
@@ -63,7 +63,7 @@ export default function OtherUsagesMateriau({
             ) : (
               <ul>
                 {otherUsages.map((u) => (
-                  <li key={u.id}>{solutionTitles?.[u.fiche_solution_id]}</li>
+                  <li key={u.id}>{solutionTitles?.[u.ficheSolutionId]}</li>
                 ))}
               </ul>
             )

@@ -4,7 +4,7 @@ import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { RoleProjet } from "@/src/generated/prisma/client";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { updateUserRoleProject } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 
@@ -12,7 +12,7 @@ export const updateUserRoleProjectAction = async (
   userId: string,
   projectId: number,
   role: RoleProjet,
-): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
+): Promise<ResponseAction<{ projet: ProjetWithRelationsDto | null }>> => {
   const session = await auth();
 
   if (!session) {

@@ -33,7 +33,7 @@ export default function BannerProjet({ className }: { className?: string }) {
             <div className="flex w-full">
               <div className="mr-5">
                 <PictoEspaceSelector
-                  pictoId={currentProjet.type_espace as PictoId}
+                  pictoId={currentProjet.typeEspace as PictoId}
                   withBackground
                   size="small"
                   className="!size-20"
@@ -68,7 +68,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                         <Tag
                           linkProps={{
                             href: `${PFMV_ROUTES.ESPACE_PROJET}#${
-                              currentProjet.collectivite.code_insee || currentProjet.collectivite.nom
+                              currentProjet.collectivite.codeInsee || currentProjet.collectivite.nom
                             }`,
                           }}
                           iconId="ri-home-4-fill"

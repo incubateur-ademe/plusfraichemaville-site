@@ -6,8 +6,8 @@ import { daysUntilDate, getRelativeDate } from "@/src/helpers/dateUtils";
 export const ProjetLastModification = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
 
-  const updatedAt = projet?.updated_at;
-  const lastUpdate = updatedAt && -daysUntilDate(updatedAt)!;
+  const updatedAt = projet?.updatedAt;
+  const lastUpdate = updatedAt ? -daysUntilDate(new Date(updatedAt))! : null;
   const formattedDate = getRelativeDate(lastUpdate);
 
   return (

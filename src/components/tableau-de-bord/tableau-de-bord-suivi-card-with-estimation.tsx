@@ -11,7 +11,7 @@ export const TableauDeBordSuiviWithEstimation = () => {
 
   const lastCompletedEstimation = useMemo(() => getLastCompletedEstimation(projet?.estimations), [projet?.estimations]);
   const { fournitureMin, fournitureMax, entretienMin, entretienMax, isLoading } = useEstimationFSGlobalPrice(
-    lastCompletedEstimation?.estimations_fiches_solutions || [],
+    lastCompletedEstimation?.estimationsFichesSolutions || [],
   );
 
   if (!lastCompletedEstimation) {

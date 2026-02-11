@@ -3,7 +3,7 @@
 import Stepper from "@codegouvfr/react-dsfr/Stepper";
 import { useEffect, useMemo, useState } from "react";
 import EstimationMateriauForm from "@/src/forms/estimation/estimation-materiau-form";
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationWithAidesDto } from "@/src/types/dto";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { upsert } from "@/src/helpers/listUtils";
 import { EstimationMateriauxValidation } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-validation";
@@ -15,7 +15,7 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { useModalStore } from "@/src/stores/modal/provider";
 
 type EstimationCardDeleteModalProps = {
-  estimation: EstimationWithAides;
+  estimation: EstimationWithAidesDto;
 };
 
 export function EstimationMateriauModalContent({ estimation }: EstimationCardDeleteModalProps) {
@@ -34,14 +34,14 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
 
   const { data: currentFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    estimationStep <= estimation.estimations_fiches_solutions.length
-      ? makeFicheSolutionCompleteUrlApi(estimation.estimations_fiches_solutions[estimationStep - 1].fiche_solution_id)
+    estimationStep <= estimation.estimationsFichesSolutions.length
+      ? makeFicheSolutionCompleteUrlApi(estimation.estimationsFichesSolutions[estimationStep - 1].ficheSolutionId)
       : null,
   );
 
   const { data: nextFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    estimationStep <= estimation.estimations_fiches_solutions.length - 1
-      ? makeFicheSolutionCompleteUrlApi(estimation.estimations_fiches_solutions[estimationStep].fiche_solution_id)
+    estimationStep <= estimation.estimationsFichesSolutions.length - 1
+      ? makeFicheSolutionCompleteUrlApi(estimation.estimationsFichesSolutions[estimationStep].ficheSolutionId)
       : null,
   );
   const currentFicheSolution = currentFicheSolutionData && currentFicheSolutionData[0];
@@ -49,10 +49,10 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
 
   const stepperTitle = useMemo(
     () =>
-      estimationStep === estimation.estimations_fiches_solutions.length + 1
+      estimationStep === estimation.estimationsFichesSolutions.length + 1
         ? "Résumé de l'estimation"
         : `Estimation pour la solution ${currentFicheSolution?.attributes.titre}`,
-    [currentFicheSolution?.attributes.titre, estimation.estimations_fiches_solutions.length, estimationStep],
+    [currentFicheSolution?.attributes.titre, estimation.estimationsFichesSolutions.length, estimationStep],
   );
   const stepperNextTitle = useMemo(
     () =>
@@ -62,10 +62,10 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     [nextFicheSolution],
   );
   const currentEstimationMateriaux = useMemo(() => {
-    return estimation.estimations_fiches_solutions?.find((efm) => efm.fiche_solution_id == currentFicheSolution?.id);
+    return estimation.estimationsFichesSolutions?.find((efm) => efm.ficheSolutionId == currentFicheSolution?.id);
   }, [estimation, currentFicheSolution]);
 
-  const updateEstimationInStore = (estimation: EstimationWithAides) => {
+  const updateEstimationInStore = (estimation: EstimationWithAidesDto) => {
     const currentProject = getCurrentProjet();
     if (currentProject) {
       updateProjetInStore({
@@ -88,8 +88,8 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
   };
 
   const goToSpecificFicheSolutionStep = (ficheSolutionId: number) => {
-    const index = estimation.estimations_fiches_solutions.findIndex(
-      (efs) => efs.fiche_solution_id === +ficheSolutionId,
+    const index = estimation.estimationsFichesSolutions.findIndex(
+      (efs) => efs.ficheSolutionId === +ficheSolutionId,
     );
     if (index != -1) {
       setEstimationStep(index + 1);
@@ -101,7 +101,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
       <Stepper
         currentStep={estimationStep}
         nextTitle={stepperNextTitle}
-        stepCount={estimation.estimations_fiches_solutions.length + 1}
+        stepCount={estimation.estimationsFichesSolutions.length + 1}
         title={stepperTitle}
         className="max-w-[40rem]"
       />
@@ -128,7 +128,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
                 estimationId={estimation.id}
                 ficheSolution={currentFicheSolution}
                 estimationMateriaux={currentEstimationMateriaux}
-                estimationsFichesSolutions={estimation.estimations_fiches_solutions}
+                estimationsFichesSolutions={estimation.estimationsFichesSolutions}
                 onClose={estimationModal.close}
                 onPrevious={goToPreviousStep}
                 onNext={goToNextStep}
@@ -138,9 +138,9 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
           )}
         </>
       )}
-      {estimationStep === estimation.estimations_fiches_solutions.length + 1 && (
+      {estimationStep === estimation.estimationsFichesSolutions.length + 1 && (
         <EstimationMateriauxValidation
-          estimationsFicheSolution={estimation.estimations_fiches_solutions}
+          estimationsFicheSolution={estimation.estimationsFichesSolutions}
           goToFicheSolutionStep={goToSpecificFicheSolutionStep}
           onClose={estimationModal.close}
           onPrevious={goToPreviousStep}

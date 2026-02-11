@@ -1,6 +1,5 @@
 "use client";
 import clsx from "clsx";
-import { Climadiag } from "@/src/components/climadiag/types";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import Image from "next/image";
 import { ClimadiagIndicateursLine } from "@/src/components/climadiag/climadiag-indicateurs-line";
@@ -8,12 +7,13 @@ import { getYearlyClimadiagData } from "@/src/components/climadiag/helpers";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { ClimadiagDto } from "@/src/types/dto";
 
 export const SurchauffeUrbaineClimadiag = ({
   climadiagInfo,
   className,
 }: {
-  climadiagInfo: Climadiag;
+  climadiagInfo: ClimadiagDto;
   className?: string;
 }) => {
   const yearlyData = getYearlyClimadiagData(climadiagInfo, 2030);
@@ -24,7 +24,7 @@ export const SurchauffeUrbaineClimadiag = ({
           <Badge className="!mb-3 !bg-dsfr-background-open-blue-france !text-pfmv-navy">climat futur (TRACC*)</Badge>
           <div className="mb-4 mt-2 text-xl font-bold text-dsfr-text-label-blue-france">
             <i className="ri-map-pin-line mr-1  " />
-            {climadiagInfo.nom} - {climadiagInfo.code_postal}
+            {climadiagInfo.nom} - {climadiagInfo.codePostal}
           </div>
           <h2 className="text-[1.375rem] font-bold text-pfmv-navy">En 2030, voici les projections de Météo-France</h2>
         </div>

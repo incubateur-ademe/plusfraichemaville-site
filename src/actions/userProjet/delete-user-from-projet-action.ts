@@ -3,7 +3,7 @@
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { deleteUserFromProject } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
@@ -13,7 +13,7 @@ export const deleteUserFromProjetAction = async (
   projectId: number,
 ): Promise<
   ResponseAction<{
-    updatedProjet?: ProjetWithRelations | null;
+    updatedProjet?: ProjetWithRelationsDto | null;
   }>
 > => {
   const session = await auth();

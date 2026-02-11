@@ -13,30 +13,28 @@ import Button from "@codegouvfr/react-dsfr/Button";
 import Image from "next/image";
 import { clsx } from "clsx";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { ProjetIndiEnSimuation, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { Separator } from "@/src/components/common/separator";
 import { upsertDiagnosticSimulationAction } from "@/src/actions/diagnostic-simulation/upsert-diagnostic-simulation-action";
 import { notifications } from "@/src/components/common/notifications";
 import { upsert } from "@/src/helpers/listUtils";
-import { diagnostic_simulation } from "@/src/generated/prisma/client";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useRouter } from "next/navigation";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { DIAGNOSTIC_COMPUTE_RESULT } from "@/src/helpers/matomo/matomo-tags";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
+import { DiagnosticSimulationDto, ProjetWithRelationsDto } from "@/src/types/dto";
+import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
 
-export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelations }) {
-  const currentDiagnosticSimulation: diagnostic_simulation | undefined = projet.diagnostic_simulations[0];
+export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelationsDto }) {
+  const currentDiagnosticSimulation = projet.diagnosticSimulations[0];
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const router = useRouter();
   const initialValues = useMemo(
     () => ({
-      questions: mapAllIndiEnQuestionsToFormValues(
-        currentDiagnosticSimulation?.initial_values as ProjetIndiEnSimuation,
-      ),
+      questions: mapAllIndiEnQuestionsToFormValues(currentDiagnosticSimulation?.initialValues as ProjetIndiEnSimuation),
     }),
-    [currentDiagnosticSimulation?.initial_values],
+    [currentDiagnosticSimulation?.initialValues],
   );
   const form = useForm<IndicateursEnvironnementauxFormData>({
     resolver: zodResolver(IndicateursEnvironnementauxFormSchema),
@@ -54,11 +52,11 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
     }
   }, [form, initialValues]);
 
-  const updateStore = (diagnosticSimulation?: diagnostic_simulation) => {
+  const updateStore = (diagnosticSimulation?: DiagnosticSimulationDto) => {
     if (diagnosticSimulation) {
       updateProjetInStore({
         ...projet,
-        diagnostic_simulations: upsert(projet.diagnostic_simulations, diagnosticSimulation),
+        diagnosticSimulations: upsert(projet.diagnosticSimulations, diagnosticSimulation),
       });
     }
   };

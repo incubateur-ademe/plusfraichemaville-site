@@ -3,7 +3,7 @@
 import { auth } from "@/src/lib/next-auth/auth";
 import { ResponseAction } from "../actions-types";
 import { addProjetFiche, deleteProjetFiche, ProjetFicheUpdater } from "@/src/lib/prisma/prisma-projet-fiche-queries";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
@@ -20,7 +20,7 @@ export const updateFichesProjetAction = async ({
   ficheId: number;
   typeFiche: TypeFiche;
   typeUpdate: TypeUpdate;
-}): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {
+}): Promise<ResponseAction<{ projet: ProjetWithRelationsDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", projet: null };

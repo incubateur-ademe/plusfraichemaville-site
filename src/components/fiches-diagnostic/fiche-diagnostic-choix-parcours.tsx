@@ -26,7 +26,7 @@ export const FicheDiagnosticChoixParcours = () => {
   let parcoursIndicateursUrl = PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD;
   let parcoursIndicateursButtonLabel = "Calculer les indicateurs";
   let parcoursPrestationButtonLabel = "Choisir des prestations";
-  const hasMadeDiagnosticSimulation = !isEmpty(currentProjet?.diagnostic_simulations);
+  const hasMadeDiagnosticSimulation = !isEmpty(currentProjet?.diagnosticSimulations);
   const hasSelectedFicheDiagnostic = !isEmpty(
     getProjetFichesIdsByType({
       projet: currentProjet,
@@ -47,7 +47,7 @@ export const FicheDiagnosticChoixParcours = () => {
     if (!hasMadeDiagnosticSimulation) {
       parcoursIndicateursUrl = PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION(projetId);
     } else {
-      if (!currentProjet?.diagnostic_simulations[0].validated) {
+      if (!currentProjet?.diagnosticSimulations[0].validated) {
         parcoursIndicateursUrl = PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(projetId);
         parcoursIndicateursButtonLabel = "Reprendre le calcul";
         parcoursIndicateursProgress = <CompletionLabelInProgress className="mr-4 mt-3 text-right" />;

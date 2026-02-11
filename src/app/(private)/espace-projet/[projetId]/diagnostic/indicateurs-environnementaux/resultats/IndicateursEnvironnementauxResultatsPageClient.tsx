@@ -23,7 +23,7 @@ export default function IndicateursEnvironnementauxResultatsPageClient() {
   if (!currentProjet) {
     return null;
   }
-  const diagnosticSimulation = currentProjet.diagnostic_simulations[0];
+  const diagnosticSimulation = currentProjet.diagnosticSimulations[0];
   if (!diagnosticSimulation) {
     return (
       <div className="fr-container pt-8">
@@ -39,7 +39,7 @@ export default function IndicateursEnvironnementauxResultatsPageClient() {
       </div>
     );
   }
-  const diagnosticResults = diagnosticSimulation.initial_values as ProjetIndiEnSimuation;
+  const diagnosticResults = diagnosticSimulation.initialValues as ProjetIndiEnSimuation;
   return (
     <>
       <BannerProjetBreadcrumb step={BREADCRUMB_DIAG_INDICATEURS_RESULTATS} />

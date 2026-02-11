@@ -1,8 +1,9 @@
 import { ClimadiagIndicateursLine } from "./climadiag-indicateurs-line";
 import { ClimadiagIndicateursTabButton } from "./climadiag-indicateurs-tab-button";
-import { Climadiag, ClimadiagYear } from "./types";
+import { ClimadiagYear } from "./types";
+import { ClimadiagDto } from "@/src/types/dto";
 
-export const ClimadiagViewerItem = ({ data, year }: { data: Climadiag; year: ClimadiagYear }) => {
+export const ClimadiagViewerItem = ({ data, year }: { data: ClimadiagDto; year: ClimadiagYear }) => {
   return (
     <div className="mb-14">
       <div className="mb-5">
@@ -10,19 +11,19 @@ export const ClimadiagViewerItem = ({ data, year }: { data: Climadiag; year: Cli
         <span className="text-base text-pfmv-grey">horizon (TRACC, 2024)</span>
       </div>
       <ClimadiagIndicateursLine
-        temperature={{ prevision: data.jours_tres_chauds_prevision[year], ref: data.jours_tres_chauds_ref }}
+        temperature={{ prevision: data.joursTresChauxPrevision[year], ref: data.joursTresChauxRef }}
         type="jours_chauds"
         year={year}
         isPDF
       />
       <ClimadiagIndicateursLine
-        temperature={{ prevision: data.nuits_chaudes_prevision[year], ref: data.nuits_chaudes_ref }}
+        temperature={{ prevision: data.nuitsChauxdesPrevision[year], ref: data.nuitsChauxdesRef }}
         type="nuits_chaudes"
         year={year}
         isPDF
       />
       <ClimadiagIndicateursLine
-        temperature={{ prevision: data.jours_vdc_prevision[year], ref: data.jours_vdc_ref }}
+        temperature={{ prevision: data.joursVdcPrevision[year], ref: data.joursVdcRef }}
         type="jours_vdc"
         year={year}
         isPDF

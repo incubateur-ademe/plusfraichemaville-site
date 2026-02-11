@@ -1,15 +1,15 @@
 import {
-  ProjetWithPublicRelations,
-  UserProjetWithUser,
-  UserProjetWithUserInfos,
-} from "@/src/lib/prisma/prismaCustomTypes";
+  ProjetWithPublicRelationsDto,
+  UserProjetWithUserDto,
+  UserProjetWithUserInfosDto,
+} from "@/src/types/dto";
 import { InvitationStatus, RoleProjet } from "@/src/generated/prisma/client";
 
-type GroupedUserProjet = Partial<Record<InvitationStatus, UserProjetWithUser[]>>;
+type GroupedUserProjet = Partial<Record<InvitationStatus, UserProjetWithUserDto[]>>;
 
-export const groupByInvitationStatus = (users: UserProjetWithUser[]) => {
+export const groupByInvitationStatus = (users: UserProjetWithUserDto[]) => {
   return users.reduce<GroupedUserProjet>((acc, user) => {
-    const status = user.invitation_status;
+    const status = user.invitationStatus;
     if (!acc[status]) {
       acc[status] = [];
     }
@@ -19,7 +19,7 @@ export const groupByInvitationStatus = (users: UserProjetWithUser[]) => {
 };
 
 export const checkOtherAdminExists = (
-  members?: ProjetWithPublicRelations["users"],
+  members?: ProjetWithPublicRelationsDto["users"],
   currentUserId?: string | null,
 ): boolean => {
   if (!members) {
@@ -27,14 +27,14 @@ export const checkOtherAdminExists = (
   }
 
   const otherAdmins = members.filter(
-    (member: UserProjetWithUserInfos) =>
+    (member: UserProjetWithUserInfosDto) =>
       member.role === RoleProjet.ADMIN &&
-      member.user_id !== currentUserId &&
-      member.invitation_status === InvitationStatus.ACCEPTED,
+      member.userId !== currentUserId &&
+      member.invitationStatus === InvitationStatus.ACCEPTED,
   );
 
   return otherAdmins.length > 0;
 };
 
-export const getCurrentUserRole = (users?: UserProjetWithUserInfos[], userId?: string) =>
-  users?.find((user) => user.user_id === userId)?.role;
+export const getCurrentUserRole = (users?: UserProjetWithUserInfosDto[], userId?: string) =>
+  users?.find((user) => user.userId === userId)?.role;

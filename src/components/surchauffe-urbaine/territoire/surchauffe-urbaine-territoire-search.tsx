@@ -1,6 +1,5 @@
 "use client";
 import clsx from "clsx";
-import { Climadiag } from "@/src/components/climadiag/types";
 import debounce from "lodash/debounce";
 import { useState } from "react";
 import {
@@ -16,6 +15,7 @@ import isEmpty from "lodash/isEmpty";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { SURCHAUFFE_URBAINE_TERRITOIRE_SEARCH } from "@/src/helpers/matomo/matomo-tags";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { ClimadiagDto } from "@/src/types/dto";
 
 export const SurchauffeUrbaineTerritoireSearch = ({
   initialOption,
@@ -39,7 +39,7 @@ export const SurchauffeUrbaineTerritoireSearch = ({
     if (inputValue?.trim().length > 2) {
       fetch(SEARCH_CLIMADIAG_PUBLIC_INFO(inputValue))
         .then((t) => t.json())
-        .then((searchedValues: Climadiag[]) => {
+        .then((searchedValues: ClimadiagDto[]) => {
           const searchOptions = !isEmpty(searchedValues)
             ? computeSearchResultGroup(climadiagToOptions(searchedValues))
             : NO_RESULT_OPTION;

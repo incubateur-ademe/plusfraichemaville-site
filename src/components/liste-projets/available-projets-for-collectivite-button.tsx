@@ -1,11 +1,10 @@
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useUserStore } from "@/src/stores/user/provider";
-import { SirenInfo } from "@/src/lib/siren/types";
 
 export const AvailableProjetsForCollectiviteButton = ({ className }: { className?: string }) => {
   const setShowAvailableProjetForUser = useModalStore((state) => state.setShowAvailableProjetForUser);
-  const userSirenInfo = useUserStore((state) => state.userInfos?.siren_info as SirenInfo | null);
+  const userSirenInfo = useUserStore((state) => state.userInfos?.sirenInfo);
 
   return (
     <>

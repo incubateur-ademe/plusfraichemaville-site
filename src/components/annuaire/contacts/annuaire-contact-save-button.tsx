@@ -29,7 +29,7 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Annu
 
     if (contact.type === "rex" && projet) {
       setSaved(
-        (projet.sourcing_rex as RexContactId[] | null)?.some((savedRexContactId) =>
+        (projet.sourcingRex as RexContactId[] | null)?.some((savedRexContactId) =>
           isEqual(savedRexContactId, {
             rexId: contact.id.rexId,
             contactId: contact.id.contactId,
@@ -38,8 +38,8 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Annu
       );
     } else if (contact.type === "in-progress") {
       setSaved(
-        projet?.sourcing_user_projets.some(
-          (savedUserProjet) => savedUserProjet.sourced_user_projet.id === contact.userProjetId,
+        projet?.sourcingUserProjets.some(
+          (savedUserProjet) => savedUserProjet.sourcedUserProjet.id === contact.userProjetId,
         ) || false,
       );
     }

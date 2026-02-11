@@ -25,7 +25,7 @@ export const resendInvitationAction = async (userProjetId: number): Promise<Resp
       return { type: "error", message: "UNAUTHORIZED" };
     }
 
-    const canShareProjet = await new PermissionManager(session).canShareProject(userProjet.projet_id);
+    const canShareProjet = await new PermissionManager(session).canShareProject(userProjet.projetId);
 
     if (!canShareProjet) {
       return { type: "error", message: "UNAUTHORIZED" };
@@ -41,7 +41,7 @@ export const resendInvitationAction = async (userProjetId: number): Promise<Resp
       return { type: "error", message: "INVITATION_RESEND_DELAY_TOO_SHORT" };
     }
 
-    const emailToSend = userProjet.user?.email || userProjet.email_address;
+    const emailToSend = userProjet.user?.email || userProjet.emailAddress;
 
     if (emailToSend) {
       const sent = await new EmailService().sendInvitationEmail(emailToSend, userProjet, currentUser);

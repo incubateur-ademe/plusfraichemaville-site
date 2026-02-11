@@ -7,7 +7,6 @@ import { SurchauffeUrbaineTerritoireSearch } from "@/src/components/surchauffe-u
 import { getPublicClimadiagInfoFromCodeInsee } from "@/src/lib/prisma/prisma-climadiag-queries";
 import { mapClimadiagToCollectiteOption } from "@/src/components/surchauffe-urbaine/territoire/search-helpers";
 import { SurchauffeUrbaineClimadiag } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-climadiag";
-import { Climadiag } from "@/src/components/climadiag/types";
 import LCZMapContainer from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-container";
 
 export const metadata: Metadata = computeMetadata("Impact de la surchauffe urbaine sur votre territoire");
@@ -31,12 +30,10 @@ export default async function SurchauffeUrbaineTerritoirePage(props: {
           initialOption={mapClimadiagToCollectiteOption(climadiagResult)}
           className="mt-6"
         />
-        {displayLCZ && climadiagResult && climadiagResult.couverture_lcz > LCZ_PERCENTAGE_COVERAGE_THRESHOLD && (
-          <LCZMapContainer climadiagInfo={climadiagResult as unknown as Climadiag} />
+        {displayLCZ && climadiagResult && climadiagResult.couvertureLcz > LCZ_PERCENTAGE_COVERAGE_THRESHOLD && (
+          <LCZMapContainer climadiagInfo={climadiagResult} />
         )}
-        {climadiagResult && (
-          <SurchauffeUrbaineClimadiag climadiagInfo={climadiagResult as unknown as Climadiag} className="mt-6" />
-        )}
+        {climadiagResult && <SurchauffeUrbaineClimadiag climadiagInfo={climadiagResult} className="mt-6" />}
         <TeaserDiagnosticComponent className="mt-12" />
       </div>
     </>

@@ -1,18 +1,18 @@
 import { ClimadiagIndicateursHeader } from "./climadiag-indicateurs-header";
 import { ClimadiagViewerHeader } from "./climadiag-viewer-header";
 import { Separator } from "../common/separator";
-import { Climadiag } from "./types";
 import { ClimadiagViewerItem } from "./climadiag-viewer-item";
 import { useEffect, useRef } from "react";
 import { generatePdf } from "@/src/helpers/pdf-utils";
+import { ClimadiagDto } from "@/src/types/dto";
 
 type ClimadiagViewerProps = {
-  data: Climadiag;
+  data: ClimadiagDto;
   close: () => void;
 };
 
 export const ClimadiagViewer = ({ data, close }: ClimadiagViewerProps) => {
-  const filename = `${data.nom}-${data.code_postal}`;
+  const filename = `${data.nom}-${data.codePostal}`;
 
   const ignore = useRef(false);
 
@@ -34,7 +34,7 @@ export const ClimadiagViewer = ({ data, close }: ClimadiagViewerProps) => {
             <ClimadiagViewerHeader />
             <Separator className="mb-10 mt-6" />
             <div className="mb-8">
-              <ClimadiagIndicateursHeader city={`${data.nom} ${data.code_postal}`} isPDF />
+              <ClimadiagIndicateursHeader city={`${data.nom} ${data.codePostal}`} isPDF />
             </div>
             <ClimadiagViewerItem data={data} year={2030} />
             <ClimadiagViewerItem data={data} year={2050} />

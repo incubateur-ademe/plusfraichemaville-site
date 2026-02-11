@@ -1,6 +1,7 @@
 import { cron_jobs } from "@/src/generated/prisma/client";
 import { prismaClient } from "./prismaClient";
-import { UserWithAdminProjets } from "./prismaCustomTypes";
+import { UserWithAdminProjetsDto } from "@/src/types/dto";
+import { convertUserWithAdminProjetsToDto } from "@/src/lib/prisma/dto-converters";
 
 export const getLastHubspotSync = async () =>
   await prismaClient.cron_jobs.findFirst({
@@ -39,7 +40,7 @@ export const getUsersAndProjectsFromLastSync = async ({
   service,
 }: {
   service: keyof typeof cronsServices;
-}): Promise<UserWithAdminProjets[]> => {
+}): Promise<UserWithAdminProjetsDto[]> => {
   const lastSync = await cronsServices[service]();
   const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
   const lastSyncTimeParams = [
@@ -48,53 +49,55 @@ export const getUsersAndProjectsFromLastSync = async ({
     { deleted_at: { gte: lastSyncDate } },
   ];
 
-  return prismaClient.user.findMany({
-    where: {
-      OR: [
-        { created_at: { gte: lastSyncDate } },
-        { updated_at: { gte: lastSyncDate } },
-        {
-          projets: {
-            some: {
-              AND: [
-                { role: "ADMIN" },
-                {
-                  projet: {
-                    OR: lastSyncTimeParams,
+  return (
+    await prismaClient.user.findMany({
+      where: {
+        OR: [
+          { created_at: { gte: lastSyncDate } },
+          { updated_at: { gte: lastSyncDate } },
+          {
+            projets: {
+              some: {
+                AND: [
+                  { role: "ADMIN" },
+                  {
+                    projet: {
+                      OR: lastSyncTimeParams,
+                    },
                   },
-                },
-              ],
-            },
-          },
-        },
-      ],
-    },
-    include: {
-      collectivites: {
-        include: {
-          collectivite: {
-            select: {
-              code_postal: true,
-              adresse_all_infos: true,
-            },
-          },
-        },
-      },
-      projets: {
-        where: {
-          AND: [
-            { role: "ADMIN" },
-            {
-              projet: {
-                OR: lastSyncTimeParams,
+                ],
               },
             },
-          ],
+          },
+        ],
+      },
+      include: {
+        collectivites: {
+          include: {
+            collectivite: {
+              select: {
+                code_postal: true,
+                adresse_all_infos: true,
+              },
+            },
+          },
         },
-        include: {
-          projet: { include: { collectivite: true } },
+        projets: {
+          where: {
+            AND: [
+              { role: "ADMIN" },
+              {
+                projet: {
+                  OR: lastSyncTimeParams,
+                },
+              },
+            ],
+          },
+          include: {
+            projet: { include: { collectivite: true } },
+          },
         },
       },
-    },
-  });
+    })
+  ).map(convertUserWithAdminProjetsToDto);
 };

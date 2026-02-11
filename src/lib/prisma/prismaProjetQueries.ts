@@ -10,11 +10,16 @@ import {
   StatutProjet,
   user_projet,
 } from "@/src/generated/prisma/client";
-import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTypes";
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/annuaire/types";
 import { NiveauMaturiteCode } from "@/src/helpers/maturite-projet";
+import { ProjetDto, ProjetWithPublicRelationsDto, ProjetWithRelationsDto } from "@/src/types/dto";
+import {
+  convertProjetToDto,
+  convertProjetWithPublicRelationsToDto,
+  convertProjetWithRelationsToDto,
+} from "./dto-converters";
 
 export const projetWithoutFicheSolution = {
   fiches: { none: { type: FicheType.SOLUTION } },
@@ -129,68 +134,81 @@ export const projetPublicSelect = {
   sourcing_user_projets: { include: { sourced_user_projet: { include: { user: true } } } },
 };
 
-export const addRecommandationsViewedBy = async (projetId: number, userId: string) => {
+export const addRecommandationsViewedBy = async (
+  projetId: number,
+  userId: string,
+): Promise<ProjetWithRelationsDto | null> => {
   const projet = await getProjetById(projetId);
-  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
+  const recommandationsViewedUserIds = projet?.recommandationsViewedBy;
   let updatedRecommandationsViewed: string[] = [];
   if (recommandationsViewedUserIds) {
     updatedRecommandationsViewed = [...recommandationsViewedUserIds, userId];
   }
 
-  return prismaClient.projet.update({
+  const updatedProjet = await prismaClient.projet.update({
     where: { id: projetId },
     data: {
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
     include: projetIncludes,
   });
+  return updatedProjet ? convertProjetWithRelationsToDto(updatedProjet) : null;
 };
 
-export const deleteRecommandationsViewedBy = async (projetId: number, userId: string) => {
+export const deleteRecommandationsViewedBy = async (
+  projetId: number,
+  userId: string,
+): Promise<ProjetWithRelationsDto | null> => {
   const projet = await getProjetById(projetId);
-  const recommandationsViewedUserIds = projet?.recommandations_viewed_by;
+  const recommandationsViewedUserIds = projet?.recommandationsViewedBy;
   let updatedRecommandationsViewed: string[] = [];
 
   if (recommandationsViewedUserIds) {
     updatedRecommandationsViewed = recommandationsViewedUserIds.filter((currentUserId) => currentUserId !== userId);
   }
 
-  return prismaClient.projet.update({
+  const updatedProjet = await prismaClient.projet.update({
     where: { id: projetId },
     data: {
       recommandations_viewed_by: updatedRecommandationsViewed,
     },
     include: projetIncludes,
   });
+  return updatedProjet ? convertProjetWithRelationsToDto(updatedProjet) : null;
 };
 
-export const getProjetById = async (projetId: number): Promise<projet | null> => {
-  return prismaClient.projet.findUnique({
+export const getProjetById = async (projetId: number): Promise<ProjetDto | null> => {
+  const projet = await prismaClient.projet.findUnique({
     where: {
       id: projetId,
       deleted_at: null,
     },
   });
+  return projet ? convertProjetToDto(projet) : null;
 };
 
-export const getProjetWithPublicRelationsById = async (projetId: number): Promise<ProjetWithPublicRelations | null> => {
-  return prismaClient.projet.findUnique({
+export const getProjetWithPublicRelationsById = async (
+  projetId: number,
+): Promise<ProjetWithPublicRelationsDto | null> => {
+  const projet = await prismaClient.projet.findUnique({
     where: {
       id: projetId,
       deleted_at: null,
     },
     select: projetPublicSelect,
   });
+  return projet ? convertProjetWithPublicRelationsToDto(projet) : null;
 };
 
-export const getProjetWithRelationsById = async (projetId: number): Promise<ProjetWithRelations | null> => {
-  return prismaClient.projet.findUnique({
+export const getProjetWithRelationsById = async (projetId: number): Promise<ProjetWithRelationsDto | null> => {
+  const projet = await prismaClient.projet.findUnique({
     where: {
       id: projetId,
       deleted_at: null,
     },
     include: projetIncludes,
   });
+  return projet ? convertProjetWithRelationsToDto(projet) : null;
 };
 
 export const createOrUpdateProjet = async ({
@@ -217,8 +235,8 @@ export const createOrUpdateProjet = async ({
   collectiviteId: number;
   isPublic: boolean;
   budget?: number;
-}) => {
-  return prismaClient.projet.upsert({
+}): Promise<ProjetWithRelationsDto> => {
+  const projet = await prismaClient.projet.upsert({
     where: {
       id: projetId ?? -1,
       deleted_at: null,
@@ -259,6 +277,7 @@ export const createOrUpdateProjet = async ({
     },
     include: projetIncludes,
   });
+  return convertProjetWithRelationsToDto(projet);
 };
 
 export const deleteProjet = async (projetId: number, userId: string) => {
@@ -287,8 +306,8 @@ export const deleteProjet = async (projetId: number, userId: string) => {
     );
 };
 
-export const getPendingUserProjets = async (userId: string): Promise<ProjetWithPublicRelations[]> => {
-  return prismaClient.projet.findMany({
+export const getPendingUserProjets = async (userId: string): Promise<ProjetWithPublicRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       users: {
         some: {
@@ -301,10 +320,11 @@ export const getPendingUserProjets = async (userId: string): Promise<ProjetWithP
     },
     select: projetPublicSelect,
   });
+  return projets.map(convertProjetWithPublicRelationsToDto);
 };
 
-export const getUserProjets = async (userId: string): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+export const getUserProjets = async (userId: string): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       users: {
         some: {
@@ -319,6 +339,7 @@ export const getUserProjets = async (userId: string): Promise<ProjetWithRelation
       ...projetIncludes,
     },
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
 export const leaveProject = async (userId: string, projectId: number): Promise<user_projet | null> => {
@@ -340,8 +361,8 @@ export const leaveProject = async (userId: string, projectId: number): Promise<u
 export const getAvailableProjectsForCollectivite = async (
   collectiviteId: number,
   userId: string,
-): Promise<ProjetWithPublicRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithPublicRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       collectiviteId,
       deleted_at: null,
@@ -357,13 +378,14 @@ export const getAvailableProjectsForCollectivite = async (
     },
     select: projetPublicSelect,
   });
+  return projets.map(convertProjetWithPublicRelationsToDto);
 };
 
 export const getAvailableProjetsForSiren = async (
   siren: string,
   userId: string,
-): Promise<ProjetWithPublicRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithPublicRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       creator: {
@@ -381,10 +403,14 @@ export const getAvailableProjetsForSiren = async (
     },
     select: projetPublicSelect,
   });
+  return projets.map(convertProjetWithPublicRelationsToDto);
 };
 
-export const updateMaturiteProjet = (projetId: number, niveauMaturite: string) => {
-  return prismaClient.projet.update({
+export const updateMaturiteProjet = async (
+  projetId: number,
+  niveauMaturite: string,
+): Promise<ProjetWithRelationsDto> => {
+  const projet = await prismaClient.projet.update({
     where: {
       id: projetId,
     },
@@ -393,6 +419,7 @@ export const updateMaturiteProjet = (projetId: number, niveauMaturite: string) =
     },
     include: projetIncludes,
   });
+  return convertProjetWithRelationsToDto(projet);
 };
 
 export const projetUpdated = async (projetId: number): Promise<projet | null> => {
@@ -411,8 +438,8 @@ type GetPublicProjetsParams = {
   excludeProjetId?: number;
 };
 
-export const getPublicProjets = async (params?: GetPublicProjetsParams): Promise<ProjetWithPublicRelations[]> => {
-  return prismaClient.projet.findMany({
+export const getPublicProjets = async (params?: GetPublicProjetsParams): Promise<ProjetWithPublicRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       is_public: true,
       deleted_at: null,
@@ -420,10 +447,11 @@ export const getPublicProjets = async (params?: GetPublicProjetsParams): Promise
     },
     select: projetPublicSelect,
   });
+  return projets.map(convertProjetWithPublicRelationsToDto);
 };
 
-export const getPublicProjetById = async (projetId: number): Promise<ProjetWithPublicRelations | null> => {
-  return prismaClient.projet.findUnique({
+export const getPublicProjetById = async (projetId: number): Promise<ProjetWithPublicRelationsDto | null> => {
+  const projet = await prismaClient.projet.findUnique({
     where: {
       id: projetId,
       is_public: true,
@@ -431,13 +459,14 @@ export const getPublicProjetById = async (projetId: number): Promise<ProjetWithP
     },
     select: projetPublicSelect,
   });
+  return projet ? convertProjetWithPublicRelationsToDto(projet) : null;
 };
 
-export const updateSourcingRexProjet = (
+export const updateSourcingRexProjet = async (
   projetId: number,
   sourcingRex: RexContactId[],
-): Promise<ProjetWithRelations | null> => {
-  return prismaClient.projet.update({
+): Promise<ProjetWithRelationsDto | null> => {
+  const projet = await prismaClient.projet.update({
     where: {
       id: projetId,
       deleted_at: null,
@@ -447,13 +476,14 @@ export const updateSourcingRexProjet = (
     },
     include: projetIncludes,
   });
+  return projet ? convertProjetWithRelationsToDto(projet) : null;
 };
 
 export const updateProjetVisibility = async (
   projetId: number,
   visible: boolean,
-): Promise<ProjetWithRelations | null> => {
-  return prismaClient.projet.update({
+): Promise<ProjetWithRelationsDto | null> => {
+  const projet = await prismaClient.projet.update({
     where: {
       id: projetId,
       deleted_at: null,
@@ -463,13 +493,14 @@ export const updateProjetVisibility = async (
     },
     include: projetIncludes,
   });
+  return projet ? convertProjetWithRelationsToDto(projet) : null;
 };
 
 export const updateProjetStatut = async (
   projetId: number,
   statut: StatutProjet,
-): Promise<ProjetWithRelations | null> => {
-  return prismaClient.projet.update({
+): Promise<ProjetWithRelationsDto | null> => {
+  const projet = await prismaClient.projet.update({
     where: {
       id: projetId,
       deleted_at: null,
@@ -480,13 +511,14 @@ export const updateProjetStatut = async (
     },
     include: projetIncludes,
   });
+  return projet ? convertProjetWithRelationsToDto(projet) : null;
 };
 
 export const getProjetsForRemindToChooseSolution = async (
   afterDate: Date,
   beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       OR: [
@@ -525,13 +557,14 @@ export const getProjetsForRemindToChooseSolution = async (
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
 export const getProjetsForRemindDiagnostic = async (
   afterDate: Date,
   beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       created_at: {
@@ -552,13 +585,14 @@ export const getProjetsForRemindDiagnostic = async (
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
 export const getProjetsForRemindDiagnosticEmail = async (
   afterDate: Date,
   beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       diagnostic_simulations: {
@@ -577,13 +611,14 @@ export const getProjetsForRemindDiagnosticEmail = async (
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
 export const getProjetsForRemindToDoEstimation = async (
   afterDate: Date,
   beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       fiches: {
@@ -598,13 +633,14 @@ export const getProjetsForRemindToDoEstimation = async (
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
 export const getProjetsForRemindToDoFinancement = async (
   afterDate: Date,
   beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       estimations: {
@@ -634,13 +670,14 @@ export const getProjetsForRemindToDoFinancement = async (
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
 export const getProjetsUnfinishedAndLastUpdatedBetween = async (
   afterDate: Date,
   beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       updated_at: { gte: afterDate, lte: beforeDate },
@@ -651,13 +688,14 @@ export const getProjetsUnfinishedAndLastUpdatedBetween = async (
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
 export const getProjetsUnfinishedAndLastUpdatedBetween2 = async (
   afterDate: Date,
   beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       updated_at: { gte: afterDate, lte: beforeDate },
@@ -666,10 +704,14 @@ export const getProjetsUnfinishedAndLastUpdatedBetween2 = async (
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
-export const getProjetsFinishedToGetRex = async (afterDate: Date, beforeDate: Date): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+export const getProjetsFinishedToGetRex = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       statut_updated_at: { gte: afterDate, lte: beforeDate },
@@ -678,13 +720,14 @@ export const getProjetsFinishedToGetRex = async (afterDate: Date, beforeDate: Da
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };
 
 export const getProjetsFinishedToGetQuestionnaire = async (
   afterDate: Date,
   beforeDate: Date,
-): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
+): Promise<ProjetWithRelationsDto[]> => {
+  const projets = await prismaClient.projet.findMany({
     where: {
       deleted_at: null,
       statut_updated_at: { gte: afterDate, lte: beforeDate },
@@ -693,4 +736,5 @@ export const getProjetsFinishedToGetQuestionnaire = async (
     },
     include: projetIncludes,
   });
+  return projets.map(convertProjetWithRelationsToDto);
 };

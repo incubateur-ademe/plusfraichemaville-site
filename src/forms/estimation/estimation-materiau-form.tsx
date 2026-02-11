@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useMemo } from "react";
-import { EstimationFicheSolution, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { EstimationFicheSolutionDto, EstimationWithAidesDto } from "@/src/types/dto";
 import { useFieldArray, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -15,10 +15,7 @@ import OtherUsagesMateriau from "@/src/components/estimation/materiaux-modal/oth
 import { updateEstimationMateriauxAction } from "@/src/actions/estimation/update-estimation-materiaux-action";
 import { notifications } from "@/src/components/common/notifications";
 
-import {
-  mapEstimationMateriauFormToDb,
-  mapStrapiEstimationMateriauxToFormValues,
-} from "@/src/lib/prisma/prismaCustomTypesHelper";
+import { mapStrapiEstimationMateriauxToFormValues } from "@/src/lib/prisma/prismaCustomTypesHelper";
 import { scrollToTop } from "@/src/helpers/common";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
@@ -36,13 +33,13 @@ export default function EstimationMateriauForm({
   estimationsFichesSolutions,
 }: {
   ficheSolution: FicheSolution;
-  estimationMateriaux?: EstimationFicheSolution;
-  estimationsFichesSolutions: EstimationFicheSolution[];
+  estimationMateriaux?: EstimationFicheSolutionDto;
+  estimationsFichesSolutions: EstimationFicheSolutionDto[];
   estimationId: number;
   onNext: () => void;
   onPrevious: () => void;
   onClose: () => void;
-  onUpdateEstimation: (_: EstimationWithAides) => void;
+  onUpdateEstimation: (_: EstimationWithAidesDto) => void;
 }) {
   const initialValues = useMemo(
     () => ({
@@ -97,10 +94,7 @@ export default function EstimationMateriauForm({
   });
 
   const globalPrice = useMemo(() => {
-    return computePriceEstimationFicheSolution(
-      ficheSolution,
-      watchAllFields.estimationMateriaux.map(mapEstimationMateriauFormToDb),
-    );
+    return computePriceEstimationFicheSolution(ficheSolution, watchAllFields.estimationMateriaux);
   }, [ficheSolution, watchAllFields]);
 
   const disabled = form.formState.isSubmitting;

@@ -16,7 +16,7 @@ import { notifications } from "@/src/components/common/notifications";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
 import { mapDBCollectiviteToCollectiviteAddress, mapDBProjetToProjetAddress } from "@/src/lib/adresseApi/banApiHelper";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import AddressInputFormField from "@/src/components/common/address-input-form-field";
 import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
 import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
@@ -27,7 +27,7 @@ import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-men
 import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 
 type ProjetInfoFormProps = {
-  projet?: ProjetWithRelations;
+  projet?: ProjetWithRelationsDto;
   readOnly?: boolean;
 };
 export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
@@ -39,7 +39,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
     defaultValues: {
       adresse: mapDBProjetToProjetAddress(projet),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
-      isPublic: projet?.is_public ?? true,
+      isPublic: projet?.isPublic ?? true,
     },
   });
 
@@ -51,13 +51,13 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
     form.reset({
       projetId: projet?.id,
       nom: projet?.nom ?? "",
-      typeEspace: projet?.type_espace ?? "",
+      typeEspace: projet?.typeEspace ?? "",
       budget: projet?.budget ?? undefined,
-      niveauMaturite: projet?.niveau_maturite ?? "",
+      niveauMaturite: projet?.niveauMaturite ?? "",
       adresse: mapDBProjetToProjetAddress(projet),
-      dateEcheance: monthDateToString(projet?.date_echeance),
+      dateEcheance: projet?.dateEcheance ? monthDateToString(new Date(projet.dateEcheance)) : "",
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
-      isPublic: projet?.is_public ?? true,
+      isPublic: projet?.isPublic ?? true,
     });
   }, [form, projet]);
 

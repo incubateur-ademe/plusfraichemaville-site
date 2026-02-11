@@ -8,7 +8,7 @@ import { EmailService } from "@/src/services/brevo";
 import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { getUserProjet, renewOrCreateProjectJoinRequest } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { InvitationStatus } from "@/src/generated/prisma/client";
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto } from "@/src/types/dto";
 import { getProjetWithPublicRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const requestToJoinProjectAction = async (
@@ -16,7 +16,7 @@ export const requestToJoinProjectAction = async (
   projectId: number,
 ): Promise<
   ResponseAction<{
-    updatedProjet?: ProjetWithPublicRelations | null;
+    updatedProjet?: ProjetWithPublicRelationsDto | null;
   }>
 > => {
   const session = await auth();

@@ -1,7 +1,7 @@
 import { createStore } from "zustand/vanilla";
-import { User } from "@/src/generated/prisma/client";
+import { UserDto } from "@/src/types/dto";
 
-export type UserInfos = User | null | undefined;
+export type UserInfos = UserDto | null | undefined;
 
 interface UserState {
   userInfos?: UserInfos;

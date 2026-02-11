@@ -1,6 +1,8 @@
 import { prismaClient } from "./prismaClient";
 import { diagnostic_simulation } from "@/src/generated/prisma/client";
 import { ProjetIndiEnSimuation } from "@/src/lib/prisma/prismaCustomTypes";
+import { DiagnosticSimulationDto } from "@/src/types/dto";
+import { convertDiagnosticSimulationToDto } from "@/src/lib/prisma/dto-converters";
 
 export const upsertDiagnosticSimulation = async ({
   userId,
@@ -14,8 +16,8 @@ export const upsertDiagnosticSimulation = async ({
   projetId: number;
   validated: boolean;
   diagnosticSimulationId?: string;
-}): Promise<diagnostic_simulation> => {
-  return prismaClient.diagnostic_simulation.upsert({
+}): Promise<DiagnosticSimulationDto> => {
+  const diagSimulation = await prismaClient.diagnostic_simulation.upsert({
     where: { id: diagnosticSimulationId || "", projet_id: projetId },
     create: {
       user_id: userId,
@@ -29,6 +31,7 @@ export const upsertDiagnosticSimulation = async ({
       validated: validated || undefined,
     },
   });
+  return convertDiagnosticSimulationToDto(diagSimulation);
 };
 
 export const comeBackLaterDiagnosticSimulation = async ({

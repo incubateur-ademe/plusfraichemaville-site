@@ -1,4 +1,4 @@
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto } from "@/src/types/dto";
 import { useUserStore } from "@/src/stores/user/provider";
 import { useEffect, useState, useTransition } from "react";
 import { notifications } from "../common/notifications";
@@ -9,8 +9,8 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getPendingUserProjetsAction } from "@/src/actions/projets/get-pending-user-projets-action";
 
 type UseProjetCardActionsProps = {
-  projet: ProjetWithPublicRelations;
-  updateProjet?: (_updatedProjet: ProjetWithPublicRelations) => void;
+  projet: ProjetWithPublicRelationsDto;
+  updateProjet?: (_updatedProjet: ProjetWithPublicRelationsDto) => void;
 };
 
 export const useProjetCardActions = ({ projet, updateProjet }: UseProjetCardActionsProps) => {

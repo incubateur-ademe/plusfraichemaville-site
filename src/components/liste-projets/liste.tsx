@@ -34,7 +34,7 @@ export const ListeProjetTab = ({
         <div
           className="mb-8"
           key={collectiviteWithProjet.collectivite.id}
-          id={collectiviteWithProjet.collectivite.code_insee || collectiviteWithProjet.collectivite.nom}
+          id={collectiviteWithProjet.collectivite.codeInsee || collectiviteWithProjet.collectivite.nom}
         >
           <h2 className="mb-4 text-[22px] font-bold leading-normal  text-pfmv-navy">
             <i className="ri-home-4-fill mr-2  before:!w-[20px]"></i>

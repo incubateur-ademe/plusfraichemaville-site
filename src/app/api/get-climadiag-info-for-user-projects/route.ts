@@ -5,7 +5,6 @@ import { getUserProjets } from "@/src/lib/prisma/prismaProjetQueries";
 import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 import { getClimadiagInfoFromCodeInsee } from "@/src/lib/prisma/prisma-climadiag-queries";
 import { isSirenCommune } from "@/src/helpers/categories-juridiques";
-import { SirenInfo } from "@/src/lib/siren/types";
 
 export async function GET(request: NextRequest) {
   const requestUserId = request.nextUrl.searchParams.get("userId");
@@ -16,7 +15,7 @@ export async function GET(request: NextRequest) {
     } else {
       const userProjets = await getUserProjets(requestUserId);
       const user = await getUserWithCollectivites(requestUserId);
-      const userSirenInfo = user?.siren_info as SirenInfo | null;
+      const userSirenInfo = user?.sirenInfo;
       const climadiagSearchKeys = new Set<string>();
       if (isSirenCommune(userSirenInfo) && userSirenInfo?.adresseEtablissement.codeCommuneEtablissement) {
         climadiagSearchKeys.add(userSirenInfo.adresseEtablissement.codeCommuneEtablissement);
@@ -24,8 +23,8 @@ export async function GET(request: NextRequest) {
         climadiagSearchKeys.add(userSirenInfo.siren);
       }
       userProjets.map((projet) => {
-        if (projet.collectivite.code_insee) {
-          climadiagSearchKeys.add(projet.collectivite.code_insee);
+        if (projet.collectivite.codeInsee) {
+          climadiagSearchKeys.add(projet.collectivite.codeInsee);
         }
       });
       return NextResponse.json(await getClimadiagInfoFromCodeInsee(Array.from(climadiagSearchKeys)));

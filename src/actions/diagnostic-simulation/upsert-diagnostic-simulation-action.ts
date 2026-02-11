@@ -11,14 +11,14 @@ import {
 } from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form-schema";
 import { calculateCoeffsDiagnosticSimulation } from "@/src/lib/prisma/prismaCustomTypesHelper";
 import { upsertDiagnosticSimulation } from "@/src/lib/prisma/prisma-diagnostic-simulation-queries";
-import { diagnostic_simulation } from "@/src/generated/prisma/client";
+import { DiagnosticSimulationDto } from "@/src/types/dto";
 
 export const upsertDiagnosticSimulationAction = async (
   projetId: number,
   data: IndicateursEnvironnementauxFormData,
   validated: boolean,
   diagnosticSimulationId?: string,
-): Promise<ResponseAction<{ diagnosticSimulation?: diagnostic_simulation }>> => {
+): Promise<ResponseAction<{ diagnosticSimulation?: DiagnosticSimulationDto }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };

@@ -52,12 +52,12 @@ export const AideEdit = memo(() => {
         .filter(
           (aide) =>
             !filters.selectedAides ||
-            estimation?.estimations_aides.find((estimationAide) => estimationAide.aide.aideTerritoireId === aide.id),
+            estimation?.estimationsAides.find((estimationAide) => estimationAide.aide.aideTerritoireId === aide.id),
         )
         .sort(sortMethod.sortMethod),
     [
       data?.results,
-      estimation?.estimations_aides,
+      estimation?.estimationsAides,
       filters.selectedAides,
       filters.showAidesFinancieres,
       filters.showAidesIngenierie,
@@ -76,8 +76,10 @@ export const AideEdit = memo(() => {
 
   return (
     <>
-      {estimation?.created_at && (
-        <BannerProjetBreadcrumb step={BREADCRUMB_FINANCEMENTS_LISTE(dateToStringWithTime(estimation.created_at))} />
+      {estimation?.createdAt && (
+        <BannerProjetBreadcrumb
+          step={BREADCRUMB_FINANCEMENTS_LISTE(dateToStringWithTime(new Date(estimation.createdAt)))}
+        />
       )}
       <div className="fr-container pt-8" id="financement-pagination">
         {/* eslint-disable-next-line max-len */}
@@ -91,7 +93,7 @@ export const AideEdit = memo(() => {
               toggleFilter={handleFiltersChange}
               aideFinanciereCount={aideFinanciereCount}
               aideTechniqueCount={aideTechniqueCount}
-              selectedAidesCount={estimation?.estimations_aides?.length || 0}
+              selectedAidesCount={estimation?.estimationsAides?.length || 0}
               isLoading={isLoading}
             />
             <AideEditSortField sortMethodCode={sortMethodCode} setSortMethodCode={setSortMethodCode} />

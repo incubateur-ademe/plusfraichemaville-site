@@ -5,7 +5,7 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { acceptProjectInvitation } from "@/src/lib/prisma/prisma-user-projet-queries";
-import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithRelationsDto } from "@/src/types/dto";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 
 export const acceptProjectInvitationAction = async (
@@ -13,7 +13,7 @@ export const acceptProjectInvitationAction = async (
   projectId: number,
 ): Promise<
   ResponseAction<{
-    projet?: ProjetWithRelations | null;
+    projet?: ProjetWithRelationsDto | null;
   }>
 > => {
   const session = await auth();

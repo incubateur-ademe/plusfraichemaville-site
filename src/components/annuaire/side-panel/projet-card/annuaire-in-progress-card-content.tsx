@@ -1,5 +1,5 @@
 import clsx from "clsx";
-import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import { ProjetWithPublicRelationsDto } from "@/src/types/dto";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { getRegionLabelForProjet } from "@/src/helpers/regions";
 import Tag from "@codegouvfr/react-dsfr/Tag";
@@ -10,7 +10,7 @@ export const AnnuaireInProgressCardContent = ({
   data,
   onClick,
 }: {
-  data: ProjetWithPublicRelations;
+  data: ProjetWithPublicRelationsDto;
   onClick?: () => void;
 }) => {
   const regionLabel = getRegionLabelForProjet(data);
@@ -29,7 +29,7 @@ export const AnnuaireInProgressCardContent = ({
             Projet en cours
           </Badge>
           <Tag small className="!m-0 h-fit">
-            {selectEspaceLabelByCode(data.type_espace)}
+            {selectEspaceLabelByCode(data.typeEspace)}
           </Tag>
         </div>
         <Button priority="tertiary no outline" className="mt-2 !px-0 text-left text-lg font-bold" onClick={onClick}>

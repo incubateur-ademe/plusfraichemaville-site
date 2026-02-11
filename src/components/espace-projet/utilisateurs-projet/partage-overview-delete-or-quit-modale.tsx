@@ -4,11 +4,11 @@ import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useIsModalOpen } from "@codegouvfr/react-dsfr/Modal/useIsModalOpen";
 import { useEffect } from "react";
-import { UserProjetWithUser } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserProjetWithUserDto } from "@/src/types/dto";
 import Button from "@codegouvfr/react-dsfr/Button";
 
 export type PartageOverviewDeleteOrQuitModaleState = {
-  member?: UserProjetWithUser;
+  member?: UserProjetWithUserDto;
   options: {
     title: string;
     description: string;

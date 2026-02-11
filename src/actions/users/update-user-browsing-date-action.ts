@@ -4,11 +4,11 @@ import { auth } from "@/src/lib/next-auth/auth";
 import { updateUserBrowsingDate } from "@/src/lib/prisma/prismaUserQueries";
 import { ResponseAction } from "../actions-types";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { UserWithCollectiviteDto } from "@/src/types/dto";
 
 export const updateUserBrowsingDateAction = async (
   userId: string,
-): Promise<ResponseAction<{ updatedUser?: UserWithCollectivite | null }>> => {
+): Promise<ResponseAction<{ updatedUser?: UserWithCollectiviteDto | null }>> => {
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED" };
