@@ -10,7 +10,8 @@
       "Bash(tasklist:*)",
       "Bash(findstr:*)",
       "Bash(pnpm exec tsc:*)",
-      "Bash(git mv:*)"
+      "Bash(git mv:*)",
+      "Bash(pnpm run build:*)"
     ]
   }
 }

@@ -156,7 +156,8 @@ export const updateEstimationMateriaux = async (
 export const deleteFicheSolutionInEstimation = async (
   estimationId: number,
   ficheSolutionId: number,
-): Promise<EstimationWithAides> => {
+  userId: string,
+): Promise<EstimationWithAides | null> => {
   return prismaClient.$transaction(async (tx) => {
     const estimation = await tx.estimation.findUnique({
       where: { id: estimationId, deleted_at: null },
@@ -183,6 +184,20 @@ export const deleteFicheSolutionInEstimation = async (
       },
       include: estimationIncludes,
     });
+
+  if (updatedEstimation.estimations_fiches_solutions.length === 0) {
+      await tx.estimation.update({
+        where: { id: estimationId },
+        data: {
+          deleted_by: userId,
+          deleted_at: new Date(),
+        },
+      });
+
+      await projetUpdated(estimation.projet_id);
+
+      return null;
+    }
 
     await projetUpdated(estimation.projet_id);
 

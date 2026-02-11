@@ -24,6 +24,8 @@ export function FicheSolutionDeleteModal({
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const currentEstimationData = useModalStore((state) => state.currentEstimation);
 
+  const isLastFicheSolution = estimation.estimations_fiches_solutions.length === 1;
+
   const modal = createModal({
     id: `delete-fiche-solution-modal-${estimation.id}-${ficheSolutionId}`,
     isOpenedByDefault: false,
@@ -48,19 +50,29 @@ export function FicheSolutionDeleteModal({
               const actionResult = await deleteFicheSolutionInEstimationAction(estimation.id, ficheSolutionId);
               notifications(actionResult.type, actionResult.message);
               const impactedProjet = getProjetById(estimation.projet_id);
-              if (actionResult.type === "success" && impactedProjet && actionResult.estimation) {
+
+              if (actionResult.type === "success" && impactedProjet) {
                 modal.close();
 
                 if (currentEstimationData?.id === estimation.id) {
                   estimationModal.close();
                 }
 
-                updateProjetInStore({
-                  ...impactedProjet,
-                  estimations: impactedProjet.estimations?.map((es) =>
-                    es.id === estimation.id ? actionResult.estimation! : es,
-                  ),
-                });
+                if (actionResult.estimationDeleted) {
+                  // L'estimation a été supprimée (c'était la dernière fiche solution)
+                  updateProjetInStore({
+                    ...impactedProjet,
+                    estimations: impactedProjet.estimations?.filter((es) => es.id !== estimation.id),
+                  });
+                } else if (actionResult.estimation) {
+                  // L'estimation a été mise à jour
+                  updateProjetInStore({
+                    ...impactedProjet,
+                    estimations: impactedProjet.estimations?.map((es) =>
+                      es.id === estimation.id ? actionResult.estimation! : es,
+                    ),
+                  });
+                }
               }
             },
           },
@@ -76,6 +88,15 @@ export function FicheSolutionDeleteModal({
           <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
           <span className="text-2xl font-bold">
             Êtes-vous certain de vouloir retirer la solution &ldquo;{ficheSolutionTitle}&rdquo; de cette estimation ?
+            {isLastFicheSolution && (
+              <>
+                <br />
+                <span className="text-base mt-2 block">
+                  Attention : Il s&apos;agit de la dernière fiche solution de cette estimation. L&apos;estimation sera
+                  également supprimée.
+                </span>
+              </>
+            )}
           </span>
         </div>
       </modal.Component>
