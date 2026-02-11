@@ -185,7 +185,7 @@ export const deleteFicheSolutionInEstimation = async (
       include: estimationIncludes,
     });
 
-  if (updatedEstimation.estimations_fiches_solutions.length === 0) {
+    if (updatedEstimation.estimations_fiches_solutions.length === 0) {
       await tx.estimation.update({
         where: { id: estimationId },
         data: {

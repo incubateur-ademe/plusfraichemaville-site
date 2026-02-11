@@ -91,7 +91,7 @@ export function FicheSolutionDeleteModal({
             {isLastFicheSolution && (
               <>
                 <br />
-                <span className="text-base mt-2 block">
+                <span className="mt-2 block text-base">
                   Attention : Il s&apos;agit de la dernière fiche solution de cette estimation. L&apos;estimation sera
                   également supprimée.
                 </span>

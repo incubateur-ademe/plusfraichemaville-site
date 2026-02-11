@@ -57,6 +57,7 @@ type ResponseAction<T> = {
 ## Authentication & Authorization
 
 1. **Always check authentication first**:
+
    ```typescript
    const session = await auth();
    if (!session) {
