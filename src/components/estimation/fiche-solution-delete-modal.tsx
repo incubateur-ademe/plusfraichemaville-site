@@ -24,8 +24,6 @@ export function FicheSolutionDeleteModal({
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const currentEstimationData = useModalStore((state) => state.currentEstimation);
 
-  const isLastFicheSolution = estimation.estimations_fiches_solutions.length === 1;
-
   const modal = createModal({
     id: `delete-fiche-solution-modal-${estimation.id}-${ficheSolutionId}`,
     isOpenedByDefault: false,
@@ -59,13 +57,11 @@ export function FicheSolutionDeleteModal({
                 }
 
                 if (actionResult.estimationDeleted) {
-                  // L'estimation a été supprimée (c'était la dernière fiche solution)
                   updateProjetInStore({
                     ...impactedProjet,
                     estimations: impactedProjet.estimations?.filter((es) => es.id !== estimation.id),
                   });
                 } else if (actionResult.estimation) {
-                  // L'estimation a été mise à jour
                   updateProjetInStore({
                     ...impactedProjet,
                     estimations: impactedProjet.estimations?.map((es) =>
@@ -87,16 +83,7 @@ export function FicheSolutionDeleteModal({
         <div className="flex items-center">
           <i className={"fr-icon--lg fr-icon-arrow-right-line mr-4"} />
           <span className="text-2xl font-bold">
-            Êtes-vous certain de vouloir retirer la solution &ldquo;{ficheSolutionTitle}&rdquo; de cette estimation ?
-            {isLastFicheSolution && (
-              <>
-                <br />
-                <span className="mt-2 block text-base">
-                  Attention : Il s&apos;agit de la dernière fiche solution de cette estimation. L&apos;estimation sera
-                  également supprimée.
-                </span>
-              </>
-            )}
+            Êtes-vous certain de vouloir retirer la solution "{ficheSolutionTitle}" de cette estimation ?
           </span>
         </div>
       </modal.Component>
