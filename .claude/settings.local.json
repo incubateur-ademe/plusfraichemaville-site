@@ -11,7 +11,8 @@
       "Bash(findstr:*)",
       "Bash(pnpm exec tsc:*)",
       "Bash(git mv:*)",
-      "Bash(pnpm run build:*)"
+      "Bash(pnpm run build:*)",
+      "Bash(wc:*)"
     ]
   }
 }

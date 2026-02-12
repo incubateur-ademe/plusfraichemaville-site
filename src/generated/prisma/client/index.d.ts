@@ -113,6 +113,16 @@ export type Analytics = $Result.DefaultSelection<Prisma.$AnalyticsPayload>
  * 
  */
 export type cron_jobs = $Result.DefaultSelection<Prisma.$cron_jobsPayload>
+/**
+ * Model epci
+ * 
+ */
+export type epci = $Result.DefaultSelection<Prisma.$epciPayload>
+/**
+ * Model commune
+ * 
+ */
+export type commune = $Result.DefaultSelection<Prisma.$communePayload>
 
 /**
  * Enums
@@ -244,6 +254,16 @@ export const JobType: {
 
 export type JobType = (typeof JobType)[keyof typeof JobType]
 
+
+export const TypeEpci: {
+  CC: 'CC',
+  CA: 'CA',
+  CU: 'CU',
+  MET: 'MET'
+};
+
+export type TypeEpci = (typeof TypeEpci)[keyof typeof TypeEpci]
+
 }
 
 export type StatutUser = $Enums.StatutUser
@@ -293,6 +313,10 @@ export const EventType: typeof $Enums.EventType
 export type JobType = $Enums.JobType
 
 export const JobType: typeof $Enums.JobType
+
+export type TypeEpci = $Enums.TypeEpci
+
+export const TypeEpci: typeof $Enums.TypeEpci
 
 /**
  * ##  Prisma Client ʲˢ
@@ -618,6 +642,26 @@ export class PrismaClient<
     * ```
     */
   get cron_jobs(): Prisma.cron_jobsDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.epci`: Exposes CRUD operations for the **epci** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Epcis
+    * const epcis = await prisma.epci.findMany()
+    * ```
+    */
+  get epci(): Prisma.epciDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.commune`: Exposes CRUD operations for the **commune** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Communes
+    * const communes = await prisma.commune.findMany()
+    * ```
+    */
+  get commune(): Prisma.communeDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -1077,7 +1121,9 @@ export namespace Prisma {
     conversation: 'conversation',
     diagnostic_simulation: 'diagnostic_simulation',
     Analytics: 'Analytics',
-    cron_jobs: 'cron_jobs'
+    cron_jobs: 'cron_jobs',
+    epci: 'epci',
+    commune: 'commune'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -1096,7 +1142,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "user" | "verificationToken" | "collectivite" | "user_projet" | "email" | "user_collectivite" | "projet" | "projet_fiche" | "projet_sourcing_contact" | "estimation" | "climadiag" | "aide" | "estimations_aides" | "estimation_materiaux" | "estimation_fiche_solution" | "conversation" | "diagnostic_simulation" | "analytics" | "cron_jobs"
+      modelProps: "account" | "user" | "verificationToken" | "collectivite" | "user_projet" | "email" | "user_collectivite" | "projet" | "projet_fiche" | "projet_sourcing_contact" | "estimation" | "climadiag" | "aide" | "estimations_aides" | "estimation_materiaux" | "estimation_fiche_solution" | "conversation" | "diagnostic_simulation" | "analytics" | "cron_jobs" | "epci" | "commune"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2580,6 +2626,154 @@ export namespace Prisma {
           }
         }
       }
+      epci: {
+        payload: Prisma.$epciPayload<ExtArgs>
+        fields: Prisma.epciFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.epciFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.epciFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>
+          }
+          findFirst: {
+            args: Prisma.epciFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.epciFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>
+          }
+          findMany: {
+            args: Prisma.epciFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>[]
+          }
+          create: {
+            args: Prisma.epciCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>
+          }
+          createMany: {
+            args: Prisma.epciCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.epciCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>[]
+          }
+          delete: {
+            args: Prisma.epciDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>
+          }
+          update: {
+            args: Prisma.epciUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>
+          }
+          deleteMany: {
+            args: Prisma.epciDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.epciUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.epciUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>[]
+          }
+          upsert: {
+            args: Prisma.epciUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$epciPayload>
+          }
+          aggregate: {
+            args: Prisma.EpciAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateEpci>
+          }
+          groupBy: {
+            args: Prisma.epciGroupByArgs<ExtArgs>
+            result: $Utils.Optional<EpciGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.epciCountArgs<ExtArgs>
+            result: $Utils.Optional<EpciCountAggregateOutputType> | number
+          }
+        }
+      }
+      commune: {
+        payload: Prisma.$communePayload<ExtArgs>
+        fields: Prisma.communeFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.communeFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.communeFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>
+          }
+          findFirst: {
+            args: Prisma.communeFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.communeFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>
+          }
+          findMany: {
+            args: Prisma.communeFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>[]
+          }
+          create: {
+            args: Prisma.communeCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>
+          }
+          createMany: {
+            args: Prisma.communeCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.communeCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>[]
+          }
+          delete: {
+            args: Prisma.communeDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>
+          }
+          update: {
+            args: Prisma.communeUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>
+          }
+          deleteMany: {
+            args: Prisma.communeDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.communeUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.communeUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>[]
+          }
+          upsert: {
+            args: Prisma.communeUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$communePayload>
+          }
+          aggregate: {
+            args: Prisma.CommuneAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCommune>
+          }
+          groupBy: {
+            args: Prisma.communeGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CommuneGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.communeCountArgs<ExtArgs>
+            result: $Utils.Optional<CommuneCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -2684,6 +2878,8 @@ export namespace Prisma {
     diagnostic_simulation?: diagnostic_simulationOmit
     analytics?: AnalyticsOmit
     cron_jobs?: cron_jobsOmit
+    epci?: epciOmit
+    commune?: communeOmit
   }
 
   /* Types for Logging */
@@ -3185,6 +3381,37 @@ export namespace Prisma {
    */
   export type Estimation_fiche_solutionCountOutputTypeCountEstimation_materiauxArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: estimation_materiauxWhereInput
+  }
+
+
+  /**
+   * Count Type EpciCountOutputType
+   */
+
+  export type EpciCountOutputType = {
+    communes: number
+  }
+
+  export type EpciCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    communes?: boolean | EpciCountOutputTypeCountCommunesArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * EpciCountOutputType without action
+   */
+  export type EpciCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the EpciCountOutputType
+     */
+    select?: EpciCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * EpciCountOutputType without action
+   */
+  export type EpciCountOutputTypeCountCommunesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: communeWhereInput
   }
 
 
@@ -26882,6 +27109,2254 @@ export namespace Prisma {
 
 
   /**
+   * Model epci
+   */
+
+  export type AggregateEpci = {
+    _count: EpciCountAggregateOutputType | null
+    _avg: EpciAvgAggregateOutputType | null
+    _sum: EpciSumAggregateOutputType | null
+    _min: EpciMinAggregateOutputType | null
+    _max: EpciMaxAggregateOutputType | null
+  }
+
+  export type EpciAvgAggregateOutputType = {
+    population: number | null
+  }
+
+  export type EpciSumAggregateOutputType = {
+    population: number | null
+  }
+
+  export type EpciMinAggregateOutputType = {
+    id: string | null
+    siren: string | null
+    nom: string | null
+    code_departement: string | null
+    type: $Enums.TypeEpci | null
+    population: number | null
+    created_at: Date | null
+  }
+
+  export type EpciMaxAggregateOutputType = {
+    id: string | null
+    siren: string | null
+    nom: string | null
+    code_departement: string | null
+    type: $Enums.TypeEpci | null
+    population: number | null
+    created_at: Date | null
+  }
+
+  export type EpciCountAggregateOutputType = {
+    id: number
+    siren: number
+    nom: number
+    code_departement: number
+    type: number
+    population: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type EpciAvgAggregateInputType = {
+    population?: true
+  }
+
+  export type EpciSumAggregateInputType = {
+    population?: true
+  }
+
+  export type EpciMinAggregateInputType = {
+    id?: true
+    siren?: true
+    nom?: true
+    code_departement?: true
+    type?: true
+    population?: true
+    created_at?: true
+  }
+
+  export type EpciMaxAggregateInputType = {
+    id?: true
+    siren?: true
+    nom?: true
+    code_departement?: true
+    type?: true
+    population?: true
+    created_at?: true
+  }
+
+  export type EpciCountAggregateInputType = {
+    id?: true
+    siren?: true
+    nom?: true
+    code_departement?: true
+    type?: true
+    population?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type EpciAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which epci to aggregate.
+     */
+    where?: epciWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of epcis to fetch.
+     */
+    orderBy?: epciOrderByWithRelationInput | epciOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: epciWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` epcis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` epcis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned epcis
+    **/
+    _count?: true | EpciCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: EpciAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: EpciSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: EpciMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: EpciMaxAggregateInputType
+  }
+
+  export type GetEpciAggregateType<T extends EpciAggregateArgs> = {
+        [P in keyof T & keyof AggregateEpci]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateEpci[P]>
+      : GetScalarType<T[P], AggregateEpci[P]>
+  }
+
+
+
+
+  export type epciGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: epciWhereInput
+    orderBy?: epciOrderByWithAggregationInput | epciOrderByWithAggregationInput[]
+    by: EpciScalarFieldEnum[] | EpciScalarFieldEnum
+    having?: epciScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: EpciCountAggregateInputType | true
+    _avg?: EpciAvgAggregateInputType
+    _sum?: EpciSumAggregateInputType
+    _min?: EpciMinAggregateInputType
+    _max?: EpciMaxAggregateInputType
+  }
+
+  export type EpciGroupByOutputType = {
+    id: string
+    siren: string
+    nom: string
+    code_departement: string
+    type: $Enums.TypeEpci
+    population: number
+    created_at: Date
+    _count: EpciCountAggregateOutputType | null
+    _avg: EpciAvgAggregateOutputType | null
+    _sum: EpciSumAggregateOutputType | null
+    _min: EpciMinAggregateOutputType | null
+    _max: EpciMaxAggregateOutputType | null
+  }
+
+  type GetEpciGroupByPayload<T extends epciGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<EpciGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof EpciGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], EpciGroupByOutputType[P]>
+            : GetScalarType<T[P], EpciGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type epciSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    siren?: boolean
+    nom?: boolean
+    code_departement?: boolean
+    type?: boolean
+    population?: boolean
+    created_at?: boolean
+    communes?: boolean | epci$communesArgs<ExtArgs>
+    _count?: boolean | EpciCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["epci"]>
+
+  export type epciSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    siren?: boolean
+    nom?: boolean
+    code_departement?: boolean
+    type?: boolean
+    population?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["epci"]>
+
+  export type epciSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    siren?: boolean
+    nom?: boolean
+    code_departement?: boolean
+    type?: boolean
+    population?: boolean
+    created_at?: boolean
+  }, ExtArgs["result"]["epci"]>
+
+  export type epciSelectScalar = {
+    id?: boolean
+    siren?: boolean
+    nom?: boolean
+    code_departement?: boolean
+    type?: boolean
+    population?: boolean
+    created_at?: boolean
+  }
+
+  export type epciOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "siren" | "nom" | "code_departement" | "type" | "population" | "created_at", ExtArgs["result"]["epci"]>
+  export type epciInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    communes?: boolean | epci$communesArgs<ExtArgs>
+    _count?: boolean | EpciCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type epciIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type epciIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $epciPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "epci"
+    objects: {
+      communes: Prisma.$communePayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      siren: string
+      nom: string
+      code_departement: string
+      type: $Enums.TypeEpci
+      population: number
+      created_at: Date
+    }, ExtArgs["result"]["epci"]>
+    composites: {}
+  }
+
+  type epciGetPayload<S extends boolean | null | undefined | epciDefaultArgs> = $Result.GetResult<Prisma.$epciPayload, S>
+
+  type epciCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<epciFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: EpciCountAggregateInputType | true
+    }
+
+  export interface epciDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['epci'], meta: { name: 'epci' } }
+    /**
+     * Find zero or one Epci that matches the filter.
+     * @param {epciFindUniqueArgs} args - Arguments to find a Epci
+     * @example
+     * // Get one Epci
+     * const epci = await prisma.epci.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends epciFindUniqueArgs>(args: SelectSubset<T, epciFindUniqueArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Epci that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {epciFindUniqueOrThrowArgs} args - Arguments to find a Epci
+     * @example
+     * // Get one Epci
+     * const epci = await prisma.epci.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends epciFindUniqueOrThrowArgs>(args: SelectSubset<T, epciFindUniqueOrThrowArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Epci that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {epciFindFirstArgs} args - Arguments to find a Epci
+     * @example
+     * // Get one Epci
+     * const epci = await prisma.epci.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends epciFindFirstArgs>(args?: SelectSubset<T, epciFindFirstArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Epci that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {epciFindFirstOrThrowArgs} args - Arguments to find a Epci
+     * @example
+     * // Get one Epci
+     * const epci = await prisma.epci.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends epciFindFirstOrThrowArgs>(args?: SelectSubset<T, epciFindFirstOrThrowArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Epcis that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {epciFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Epcis
+     * const epcis = await prisma.epci.findMany()
+     * 
+     * // Get first 10 Epcis
+     * const epcis = await prisma.epci.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const epciWithIdOnly = await prisma.epci.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends epciFindManyArgs>(args?: SelectSubset<T, epciFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Epci.
+     * @param {epciCreateArgs} args - Arguments to create a Epci.
+     * @example
+     * // Create one Epci
+     * const Epci = await prisma.epci.create({
+     *   data: {
+     *     // ... data to create a Epci
+     *   }
+     * })
+     * 
+     */
+    create<T extends epciCreateArgs>(args: SelectSubset<T, epciCreateArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Epcis.
+     * @param {epciCreateManyArgs} args - Arguments to create many Epcis.
+     * @example
+     * // Create many Epcis
+     * const epci = await prisma.epci.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends epciCreateManyArgs>(args?: SelectSubset<T, epciCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Epcis and returns the data saved in the database.
+     * @param {epciCreateManyAndReturnArgs} args - Arguments to create many Epcis.
+     * @example
+     * // Create many Epcis
+     * const epci = await prisma.epci.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Epcis and only return the `id`
+     * const epciWithIdOnly = await prisma.epci.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends epciCreateManyAndReturnArgs>(args?: SelectSubset<T, epciCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Epci.
+     * @param {epciDeleteArgs} args - Arguments to delete one Epci.
+     * @example
+     * // Delete one Epci
+     * const Epci = await prisma.epci.delete({
+     *   where: {
+     *     // ... filter to delete one Epci
+     *   }
+     * })
+     * 
+     */
+    delete<T extends epciDeleteArgs>(args: SelectSubset<T, epciDeleteArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Epci.
+     * @param {epciUpdateArgs} args - Arguments to update one Epci.
+     * @example
+     * // Update one Epci
+     * const epci = await prisma.epci.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends epciUpdateArgs>(args: SelectSubset<T, epciUpdateArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Epcis.
+     * @param {epciDeleteManyArgs} args - Arguments to filter Epcis to delete.
+     * @example
+     * // Delete a few Epcis
+     * const { count } = await prisma.epci.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends epciDeleteManyArgs>(args?: SelectSubset<T, epciDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Epcis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {epciUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Epcis
+     * const epci = await prisma.epci.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends epciUpdateManyArgs>(args: SelectSubset<T, epciUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Epcis and returns the data updated in the database.
+     * @param {epciUpdateManyAndReturnArgs} args - Arguments to update many Epcis.
+     * @example
+     * // Update many Epcis
+     * const epci = await prisma.epci.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Epcis and only return the `id`
+     * const epciWithIdOnly = await prisma.epci.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends epciUpdateManyAndReturnArgs>(args: SelectSubset<T, epciUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Epci.
+     * @param {epciUpsertArgs} args - Arguments to update or create a Epci.
+     * @example
+     * // Update or create a Epci
+     * const epci = await prisma.epci.upsert({
+     *   create: {
+     *     // ... data to create a Epci
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Epci we want to update
+     *   }
+     * })
+     */
+    upsert<T extends epciUpsertArgs>(args: SelectSubset<T, epciUpsertArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Epcis.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {epciCountArgs} args - Arguments to filter Epcis to count.
+     * @example
+     * // Count the number of Epcis
+     * const count = await prisma.epci.count({
+     *   where: {
+     *     // ... the filter for the Epcis we want to count
+     *   }
+     * })
+    **/
+    count<T extends epciCountArgs>(
+      args?: Subset<T, epciCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], EpciCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Epci.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {EpciAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends EpciAggregateArgs>(args: Subset<T, EpciAggregateArgs>): Prisma.PrismaPromise<GetEpciAggregateType<T>>
+
+    /**
+     * Group by Epci.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {epciGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends epciGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: epciGroupByArgs['orderBy'] }
+        : { orderBy?: epciGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, epciGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetEpciGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the epci model
+   */
+  readonly fields: epciFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for epci.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__epciClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    communes<T extends epci$communesArgs<ExtArgs> = {}>(args?: Subset<T, epci$communesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the epci model
+   */
+  interface epciFieldRefs {
+    readonly id: FieldRef<"epci", 'String'>
+    readonly siren: FieldRef<"epci", 'String'>
+    readonly nom: FieldRef<"epci", 'String'>
+    readonly code_departement: FieldRef<"epci", 'String'>
+    readonly type: FieldRef<"epci", 'TypeEpci'>
+    readonly population: FieldRef<"epci", 'Int'>
+    readonly created_at: FieldRef<"epci", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * epci findUnique
+   */
+  export type epciFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * Filter, which epci to fetch.
+     */
+    where: epciWhereUniqueInput
+  }
+
+  /**
+   * epci findUniqueOrThrow
+   */
+  export type epciFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * Filter, which epci to fetch.
+     */
+    where: epciWhereUniqueInput
+  }
+
+  /**
+   * epci findFirst
+   */
+  export type epciFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * Filter, which epci to fetch.
+     */
+    where?: epciWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of epcis to fetch.
+     */
+    orderBy?: epciOrderByWithRelationInput | epciOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for epcis.
+     */
+    cursor?: epciWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` epcis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` epcis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of epcis.
+     */
+    distinct?: EpciScalarFieldEnum | EpciScalarFieldEnum[]
+  }
+
+  /**
+   * epci findFirstOrThrow
+   */
+  export type epciFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * Filter, which epci to fetch.
+     */
+    where?: epciWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of epcis to fetch.
+     */
+    orderBy?: epciOrderByWithRelationInput | epciOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for epcis.
+     */
+    cursor?: epciWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` epcis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` epcis.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of epcis.
+     */
+    distinct?: EpciScalarFieldEnum | EpciScalarFieldEnum[]
+  }
+
+  /**
+   * epci findMany
+   */
+  export type epciFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * Filter, which epcis to fetch.
+     */
+    where?: epciWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of epcis to fetch.
+     */
+    orderBy?: epciOrderByWithRelationInput | epciOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing epcis.
+     */
+    cursor?: epciWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` epcis from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` epcis.
+     */
+    skip?: number
+    distinct?: EpciScalarFieldEnum | EpciScalarFieldEnum[]
+  }
+
+  /**
+   * epci create
+   */
+  export type epciCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * The data needed to create a epci.
+     */
+    data: XOR<epciCreateInput, epciUncheckedCreateInput>
+  }
+
+  /**
+   * epci createMany
+   */
+  export type epciCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many epcis.
+     */
+    data: epciCreateManyInput | epciCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * epci createManyAndReturn
+   */
+  export type epciCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * The data used to create many epcis.
+     */
+    data: epciCreateManyInput | epciCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * epci update
+   */
+  export type epciUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * The data needed to update a epci.
+     */
+    data: XOR<epciUpdateInput, epciUncheckedUpdateInput>
+    /**
+     * Choose, which epci to update.
+     */
+    where: epciWhereUniqueInput
+  }
+
+  /**
+   * epci updateMany
+   */
+  export type epciUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update epcis.
+     */
+    data: XOR<epciUpdateManyMutationInput, epciUncheckedUpdateManyInput>
+    /**
+     * Filter which epcis to update
+     */
+    where?: epciWhereInput
+    /**
+     * Limit how many epcis to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * epci updateManyAndReturn
+   */
+  export type epciUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * The data used to update epcis.
+     */
+    data: XOR<epciUpdateManyMutationInput, epciUncheckedUpdateManyInput>
+    /**
+     * Filter which epcis to update
+     */
+    where?: epciWhereInput
+    /**
+     * Limit how many epcis to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * epci upsert
+   */
+  export type epciUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * The filter to search for the epci to update in case it exists.
+     */
+    where: epciWhereUniqueInput
+    /**
+     * In case the epci found by the `where` argument doesn't exist, create a new epci with this data.
+     */
+    create: XOR<epciCreateInput, epciUncheckedCreateInput>
+    /**
+     * In case the epci was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<epciUpdateInput, epciUncheckedUpdateInput>
+  }
+
+  /**
+   * epci delete
+   */
+  export type epciDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+    /**
+     * Filter which epci to delete.
+     */
+    where: epciWhereUniqueInput
+  }
+
+  /**
+   * epci deleteMany
+   */
+  export type epciDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which epcis to delete
+     */
+    where?: epciWhereInput
+    /**
+     * Limit how many epcis to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * epci.communes
+   */
+  export type epci$communesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    where?: communeWhereInput
+    orderBy?: communeOrderByWithRelationInput | communeOrderByWithRelationInput[]
+    cursor?: communeWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CommuneScalarFieldEnum | CommuneScalarFieldEnum[]
+  }
+
+  /**
+   * epci without action
+   */
+  export type epciDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the epci
+     */
+    select?: epciSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the epci
+     */
+    omit?: epciOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: epciInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model commune
+   */
+
+  export type AggregateCommune = {
+    _count: CommuneCountAggregateOutputType | null
+    _avg: CommuneAvgAggregateOutputType | null
+    _sum: CommuneSumAggregateOutputType | null
+    _min: CommuneMinAggregateOutputType | null
+    _max: CommuneMaxAggregateOutputType | null
+  }
+
+  export type CommuneAvgAggregateOutputType = {
+    population: number | null
+  }
+
+  export type CommuneSumAggregateOutputType = {
+    population: number | null
+  }
+
+  export type CommuneMinAggregateOutputType = {
+    id: string | null
+    insee: string | null
+    siren: string | null
+    epci_id: string | null
+    nom: string | null
+    population: number | null
+    created_at: Date | null
+  }
+
+  export type CommuneMaxAggregateOutputType = {
+    id: string | null
+    insee: string | null
+    siren: string | null
+    epci_id: string | null
+    nom: string | null
+    population: number | null
+    created_at: Date | null
+  }
+
+  export type CommuneCountAggregateOutputType = {
+    id: number
+    insee: number
+    siren: number
+    epci_id: number
+    nom: number
+    population: number
+    created_at: number
+    _all: number
+  }
+
+
+  export type CommuneAvgAggregateInputType = {
+    population?: true
+  }
+
+  export type CommuneSumAggregateInputType = {
+    population?: true
+  }
+
+  export type CommuneMinAggregateInputType = {
+    id?: true
+    insee?: true
+    siren?: true
+    epci_id?: true
+    nom?: true
+    population?: true
+    created_at?: true
+  }
+
+  export type CommuneMaxAggregateInputType = {
+    id?: true
+    insee?: true
+    siren?: true
+    epci_id?: true
+    nom?: true
+    population?: true
+    created_at?: true
+  }
+
+  export type CommuneCountAggregateInputType = {
+    id?: true
+    insee?: true
+    siren?: true
+    epci_id?: true
+    nom?: true
+    population?: true
+    created_at?: true
+    _all?: true
+  }
+
+  export type CommuneAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which commune to aggregate.
+     */
+    where?: communeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of communes to fetch.
+     */
+    orderBy?: communeOrderByWithRelationInput | communeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: communeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` communes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` communes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned communes
+    **/
+    _count?: true | CommuneCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CommuneAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CommuneSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CommuneMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CommuneMaxAggregateInputType
+  }
+
+  export type GetCommuneAggregateType<T extends CommuneAggregateArgs> = {
+        [P in keyof T & keyof AggregateCommune]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCommune[P]>
+      : GetScalarType<T[P], AggregateCommune[P]>
+  }
+
+
+
+
+  export type communeGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: communeWhereInput
+    orderBy?: communeOrderByWithAggregationInput | communeOrderByWithAggregationInput[]
+    by: CommuneScalarFieldEnum[] | CommuneScalarFieldEnum
+    having?: communeScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CommuneCountAggregateInputType | true
+    _avg?: CommuneAvgAggregateInputType
+    _sum?: CommuneSumAggregateInputType
+    _min?: CommuneMinAggregateInputType
+    _max?: CommuneMaxAggregateInputType
+  }
+
+  export type CommuneGroupByOutputType = {
+    id: string
+    insee: string
+    siren: string
+    epci_id: string
+    nom: string
+    population: number
+    created_at: Date
+    _count: CommuneCountAggregateOutputType | null
+    _avg: CommuneAvgAggregateOutputType | null
+    _sum: CommuneSumAggregateOutputType | null
+    _min: CommuneMinAggregateOutputType | null
+    _max: CommuneMaxAggregateOutputType | null
+  }
+
+  type GetCommuneGroupByPayload<T extends communeGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CommuneGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CommuneGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CommuneGroupByOutputType[P]>
+            : GetScalarType<T[P], CommuneGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type communeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    insee?: boolean
+    siren?: boolean
+    epci_id?: boolean
+    nom?: boolean
+    population?: boolean
+    created_at?: boolean
+    epci?: boolean | epciDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["commune"]>
+
+  export type communeSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    insee?: boolean
+    siren?: boolean
+    epci_id?: boolean
+    nom?: boolean
+    population?: boolean
+    created_at?: boolean
+    epci?: boolean | epciDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["commune"]>
+
+  export type communeSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    insee?: boolean
+    siren?: boolean
+    epci_id?: boolean
+    nom?: boolean
+    population?: boolean
+    created_at?: boolean
+    epci?: boolean | epciDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["commune"]>
+
+  export type communeSelectScalar = {
+    id?: boolean
+    insee?: boolean
+    siren?: boolean
+    epci_id?: boolean
+    nom?: boolean
+    population?: boolean
+    created_at?: boolean
+  }
+
+  export type communeOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "insee" | "siren" | "epci_id" | "nom" | "population" | "created_at", ExtArgs["result"]["commune"]>
+  export type communeInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    epci?: boolean | epciDefaultArgs<ExtArgs>
+  }
+  export type communeIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    epci?: boolean | epciDefaultArgs<ExtArgs>
+  }
+  export type communeIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    epci?: boolean | epciDefaultArgs<ExtArgs>
+  }
+
+  export type $communePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "commune"
+    objects: {
+      epci: Prisma.$epciPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      insee: string
+      siren: string
+      epci_id: string
+      nom: string
+      population: number
+      created_at: Date
+    }, ExtArgs["result"]["commune"]>
+    composites: {}
+  }
+
+  type communeGetPayload<S extends boolean | null | undefined | communeDefaultArgs> = $Result.GetResult<Prisma.$communePayload, S>
+
+  type communeCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<communeFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CommuneCountAggregateInputType | true
+    }
+
+  export interface communeDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['commune'], meta: { name: 'commune' } }
+    /**
+     * Find zero or one Commune that matches the filter.
+     * @param {communeFindUniqueArgs} args - Arguments to find a Commune
+     * @example
+     * // Get one Commune
+     * const commune = await prisma.commune.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends communeFindUniqueArgs>(args: SelectSubset<T, communeFindUniqueArgs<ExtArgs>>): Prisma__communeClient<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Commune that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {communeFindUniqueOrThrowArgs} args - Arguments to find a Commune
+     * @example
+     * // Get one Commune
+     * const commune = await prisma.commune.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends communeFindUniqueOrThrowArgs>(args: SelectSubset<T, communeFindUniqueOrThrowArgs<ExtArgs>>): Prisma__communeClient<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Commune that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {communeFindFirstArgs} args - Arguments to find a Commune
+     * @example
+     * // Get one Commune
+     * const commune = await prisma.commune.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends communeFindFirstArgs>(args?: SelectSubset<T, communeFindFirstArgs<ExtArgs>>): Prisma__communeClient<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Commune that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {communeFindFirstOrThrowArgs} args - Arguments to find a Commune
+     * @example
+     * // Get one Commune
+     * const commune = await prisma.commune.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends communeFindFirstOrThrowArgs>(args?: SelectSubset<T, communeFindFirstOrThrowArgs<ExtArgs>>): Prisma__communeClient<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Communes that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {communeFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Communes
+     * const communes = await prisma.commune.findMany()
+     * 
+     * // Get first 10 Communes
+     * const communes = await prisma.commune.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const communeWithIdOnly = await prisma.commune.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends communeFindManyArgs>(args?: SelectSubset<T, communeFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Commune.
+     * @param {communeCreateArgs} args - Arguments to create a Commune.
+     * @example
+     * // Create one Commune
+     * const Commune = await prisma.commune.create({
+     *   data: {
+     *     // ... data to create a Commune
+     *   }
+     * })
+     * 
+     */
+    create<T extends communeCreateArgs>(args: SelectSubset<T, communeCreateArgs<ExtArgs>>): Prisma__communeClient<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Communes.
+     * @param {communeCreateManyArgs} args - Arguments to create many Communes.
+     * @example
+     * // Create many Communes
+     * const commune = await prisma.commune.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends communeCreateManyArgs>(args?: SelectSubset<T, communeCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Communes and returns the data saved in the database.
+     * @param {communeCreateManyAndReturnArgs} args - Arguments to create many Communes.
+     * @example
+     * // Create many Communes
+     * const commune = await prisma.commune.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Communes and only return the `id`
+     * const communeWithIdOnly = await prisma.commune.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends communeCreateManyAndReturnArgs>(args?: SelectSubset<T, communeCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Commune.
+     * @param {communeDeleteArgs} args - Arguments to delete one Commune.
+     * @example
+     * // Delete one Commune
+     * const Commune = await prisma.commune.delete({
+     *   where: {
+     *     // ... filter to delete one Commune
+     *   }
+     * })
+     * 
+     */
+    delete<T extends communeDeleteArgs>(args: SelectSubset<T, communeDeleteArgs<ExtArgs>>): Prisma__communeClient<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Commune.
+     * @param {communeUpdateArgs} args - Arguments to update one Commune.
+     * @example
+     * // Update one Commune
+     * const commune = await prisma.commune.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends communeUpdateArgs>(args: SelectSubset<T, communeUpdateArgs<ExtArgs>>): Prisma__communeClient<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Communes.
+     * @param {communeDeleteManyArgs} args - Arguments to filter Communes to delete.
+     * @example
+     * // Delete a few Communes
+     * const { count } = await prisma.commune.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends communeDeleteManyArgs>(args?: SelectSubset<T, communeDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Communes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {communeUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Communes
+     * const commune = await prisma.commune.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends communeUpdateManyArgs>(args: SelectSubset<T, communeUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Communes and returns the data updated in the database.
+     * @param {communeUpdateManyAndReturnArgs} args - Arguments to update many Communes.
+     * @example
+     * // Update many Communes
+     * const commune = await prisma.commune.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Communes and only return the `id`
+     * const communeWithIdOnly = await prisma.commune.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends communeUpdateManyAndReturnArgs>(args: SelectSubset<T, communeUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Commune.
+     * @param {communeUpsertArgs} args - Arguments to update or create a Commune.
+     * @example
+     * // Update or create a Commune
+     * const commune = await prisma.commune.upsert({
+     *   create: {
+     *     // ... data to create a Commune
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Commune we want to update
+     *   }
+     * })
+     */
+    upsert<T extends communeUpsertArgs>(args: SelectSubset<T, communeUpsertArgs<ExtArgs>>): Prisma__communeClient<$Result.GetResult<Prisma.$communePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Communes.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {communeCountArgs} args - Arguments to filter Communes to count.
+     * @example
+     * // Count the number of Communes
+     * const count = await prisma.commune.count({
+     *   where: {
+     *     // ... the filter for the Communes we want to count
+     *   }
+     * })
+    **/
+    count<T extends communeCountArgs>(
+      args?: Subset<T, communeCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CommuneCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Commune.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CommuneAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CommuneAggregateArgs>(args: Subset<T, CommuneAggregateArgs>): Prisma.PrismaPromise<GetCommuneAggregateType<T>>
+
+    /**
+     * Group by Commune.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {communeGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends communeGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: communeGroupByArgs['orderBy'] }
+        : { orderBy?: communeGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, communeGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCommuneGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the commune model
+   */
+  readonly fields: communeFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for commune.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__communeClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    epci<T extends epciDefaultArgs<ExtArgs> = {}>(args?: Subset<T, epciDefaultArgs<ExtArgs>>): Prisma__epciClient<$Result.GetResult<Prisma.$epciPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the commune model
+   */
+  interface communeFieldRefs {
+    readonly id: FieldRef<"commune", 'String'>
+    readonly insee: FieldRef<"commune", 'String'>
+    readonly siren: FieldRef<"commune", 'String'>
+    readonly epci_id: FieldRef<"commune", 'String'>
+    readonly nom: FieldRef<"commune", 'String'>
+    readonly population: FieldRef<"commune", 'Int'>
+    readonly created_at: FieldRef<"commune", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * commune findUnique
+   */
+  export type communeFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * Filter, which commune to fetch.
+     */
+    where: communeWhereUniqueInput
+  }
+
+  /**
+   * commune findUniqueOrThrow
+   */
+  export type communeFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * Filter, which commune to fetch.
+     */
+    where: communeWhereUniqueInput
+  }
+
+  /**
+   * commune findFirst
+   */
+  export type communeFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * Filter, which commune to fetch.
+     */
+    where?: communeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of communes to fetch.
+     */
+    orderBy?: communeOrderByWithRelationInput | communeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for communes.
+     */
+    cursor?: communeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` communes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` communes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of communes.
+     */
+    distinct?: CommuneScalarFieldEnum | CommuneScalarFieldEnum[]
+  }
+
+  /**
+   * commune findFirstOrThrow
+   */
+  export type communeFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * Filter, which commune to fetch.
+     */
+    where?: communeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of communes to fetch.
+     */
+    orderBy?: communeOrderByWithRelationInput | communeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for communes.
+     */
+    cursor?: communeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` communes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` communes.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of communes.
+     */
+    distinct?: CommuneScalarFieldEnum | CommuneScalarFieldEnum[]
+  }
+
+  /**
+   * commune findMany
+   */
+  export type communeFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * Filter, which communes to fetch.
+     */
+    where?: communeWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of communes to fetch.
+     */
+    orderBy?: communeOrderByWithRelationInput | communeOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing communes.
+     */
+    cursor?: communeWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` communes from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` communes.
+     */
+    skip?: number
+    distinct?: CommuneScalarFieldEnum | CommuneScalarFieldEnum[]
+  }
+
+  /**
+   * commune create
+   */
+  export type communeCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * The data needed to create a commune.
+     */
+    data: XOR<communeCreateInput, communeUncheckedCreateInput>
+  }
+
+  /**
+   * commune createMany
+   */
+  export type communeCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many communes.
+     */
+    data: communeCreateManyInput | communeCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * commune createManyAndReturn
+   */
+  export type communeCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * The data used to create many communes.
+     */
+    data: communeCreateManyInput | communeCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * commune update
+   */
+  export type communeUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * The data needed to update a commune.
+     */
+    data: XOR<communeUpdateInput, communeUncheckedUpdateInput>
+    /**
+     * Choose, which commune to update.
+     */
+    where: communeWhereUniqueInput
+  }
+
+  /**
+   * commune updateMany
+   */
+  export type communeUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update communes.
+     */
+    data: XOR<communeUpdateManyMutationInput, communeUncheckedUpdateManyInput>
+    /**
+     * Filter which communes to update
+     */
+    where?: communeWhereInput
+    /**
+     * Limit how many communes to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * commune updateManyAndReturn
+   */
+  export type communeUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * The data used to update communes.
+     */
+    data: XOR<communeUpdateManyMutationInput, communeUncheckedUpdateManyInput>
+    /**
+     * Filter which communes to update
+     */
+    where?: communeWhereInput
+    /**
+     * Limit how many communes to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * commune upsert
+   */
+  export type communeUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * The filter to search for the commune to update in case it exists.
+     */
+    where: communeWhereUniqueInput
+    /**
+     * In case the commune found by the `where` argument doesn't exist, create a new commune with this data.
+     */
+    create: XOR<communeCreateInput, communeUncheckedCreateInput>
+    /**
+     * In case the commune was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<communeUpdateInput, communeUncheckedUpdateInput>
+  }
+
+  /**
+   * commune delete
+   */
+  export type communeDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+    /**
+     * Filter which commune to delete.
+     */
+    where: communeWhereUniqueInput
+  }
+
+  /**
+   * commune deleteMany
+   */
+  export type communeDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which communes to delete
+     */
+    where?: communeWhereInput
+    /**
+     * Limit how many communes to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * commune without action
+   */
+  export type communeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the commune
+     */
+    select?: communeSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the commune
+     */
+    omit?: communeOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: communeInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -27198,6 +29673,32 @@ export namespace Prisma {
   export type Cron_jobsScalarFieldEnum = (typeof Cron_jobsScalarFieldEnum)[keyof typeof Cron_jobsScalarFieldEnum]
 
 
+  export const EpciScalarFieldEnum: {
+    id: 'id',
+    siren: 'siren',
+    nom: 'nom',
+    code_departement: 'code_departement',
+    type: 'type',
+    population: 'population',
+    created_at: 'created_at'
+  };
+
+  export type EpciScalarFieldEnum = (typeof EpciScalarFieldEnum)[keyof typeof EpciScalarFieldEnum]
+
+
+  export const CommuneScalarFieldEnum: {
+    id: 'id',
+    insee: 'insee',
+    siren: 'siren',
+    epci_id: 'epci_id',
+    nom: 'nom',
+    population: 'population',
+    created_at: 'created_at'
+  };
+
+  export type CommuneScalarFieldEnum = (typeof CommuneScalarFieldEnum)[keyof typeof CommuneScalarFieldEnum]
+
+
   export const SortOrder: {
     asc: 'asc',
     desc: 'desc'
@@ -27435,6 +29936,27 @@ export namespace Prisma {
   export type cron_jobsOrderByRelevanceFieldEnum = (typeof cron_jobsOrderByRelevanceFieldEnum)[keyof typeof cron_jobsOrderByRelevanceFieldEnum]
 
 
+  export const epciOrderByRelevanceFieldEnum: {
+    id: 'id',
+    siren: 'siren',
+    nom: 'nom',
+    code_departement: 'code_departement'
+  };
+
+  export type epciOrderByRelevanceFieldEnum = (typeof epciOrderByRelevanceFieldEnum)[keyof typeof epciOrderByRelevanceFieldEnum]
+
+
+  export const communeOrderByRelevanceFieldEnum: {
+    id: 'id',
+    insee: 'insee',
+    siren: 'siren',
+    epci_id: 'epci_id',
+    nom: 'nom'
+  };
+
+  export type communeOrderByRelevanceFieldEnum = (typeof communeOrderByRelevanceFieldEnum)[keyof typeof communeOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -27668,6 +30190,20 @@ export namespace Prisma {
    * Reference to a field of type 'JobType[]'
    */
   export type ListEnumJobTypeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'JobType[]'>
+    
+
+
+  /**
+   * Reference to a field of type 'TypeEpci'
+   */
+  export type EnumTypeEpciFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeEpci'>
+    
+
+
+  /**
+   * Reference to a field of type 'TypeEpci[]'
+   */
+  export type ListEnumTypeEpciFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TypeEpci[]'>
     
   /**
    * Deep Input Types
@@ -29360,6 +31896,142 @@ export namespace Prisma {
     execution_start_time?: DateTimeWithAggregatesFilter<"cron_jobs"> | Date | string
     execution_end_time?: DateTimeWithAggregatesFilter<"cron_jobs"> | Date | string
     job_type?: EnumJobTypeWithAggregatesFilter<"cron_jobs"> | $Enums.JobType
+  }
+
+  export type epciWhereInput = {
+    AND?: epciWhereInput | epciWhereInput[]
+    OR?: epciWhereInput[]
+    NOT?: epciWhereInput | epciWhereInput[]
+    id?: StringFilter<"epci"> | string
+    siren?: StringFilter<"epci"> | string
+    nom?: StringFilter<"epci"> | string
+    code_departement?: StringFilter<"epci"> | string
+    type?: EnumTypeEpciFilter<"epci"> | $Enums.TypeEpci
+    population?: IntFilter<"epci"> | number
+    created_at?: DateTimeFilter<"epci"> | Date | string
+    communes?: CommuneListRelationFilter
+  }
+
+  export type epciOrderByWithRelationInput = {
+    id?: SortOrder
+    siren?: SortOrder
+    nom?: SortOrder
+    code_departement?: SortOrder
+    type?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+    communes?: communeOrderByRelationAggregateInput
+    _relevance?: epciOrderByRelevanceInput
+  }
+
+  export type epciWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    siren?: string
+    AND?: epciWhereInput | epciWhereInput[]
+    OR?: epciWhereInput[]
+    NOT?: epciWhereInput | epciWhereInput[]
+    nom?: StringFilter<"epci"> | string
+    code_departement?: StringFilter<"epci"> | string
+    type?: EnumTypeEpciFilter<"epci"> | $Enums.TypeEpci
+    population?: IntFilter<"epci"> | number
+    created_at?: DateTimeFilter<"epci"> | Date | string
+    communes?: CommuneListRelationFilter
+  }, "id" | "siren">
+
+  export type epciOrderByWithAggregationInput = {
+    id?: SortOrder
+    siren?: SortOrder
+    nom?: SortOrder
+    code_departement?: SortOrder
+    type?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+    _count?: epciCountOrderByAggregateInput
+    _avg?: epciAvgOrderByAggregateInput
+    _max?: epciMaxOrderByAggregateInput
+    _min?: epciMinOrderByAggregateInput
+    _sum?: epciSumOrderByAggregateInput
+  }
+
+  export type epciScalarWhereWithAggregatesInput = {
+    AND?: epciScalarWhereWithAggregatesInput | epciScalarWhereWithAggregatesInput[]
+    OR?: epciScalarWhereWithAggregatesInput[]
+    NOT?: epciScalarWhereWithAggregatesInput | epciScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"epci"> | string
+    siren?: StringWithAggregatesFilter<"epci"> | string
+    nom?: StringWithAggregatesFilter<"epci"> | string
+    code_departement?: StringWithAggregatesFilter<"epci"> | string
+    type?: EnumTypeEpciWithAggregatesFilter<"epci"> | $Enums.TypeEpci
+    population?: IntWithAggregatesFilter<"epci"> | number
+    created_at?: DateTimeWithAggregatesFilter<"epci"> | Date | string
+  }
+
+  export type communeWhereInput = {
+    AND?: communeWhereInput | communeWhereInput[]
+    OR?: communeWhereInput[]
+    NOT?: communeWhereInput | communeWhereInput[]
+    id?: StringFilter<"commune"> | string
+    insee?: StringFilter<"commune"> | string
+    siren?: StringFilter<"commune"> | string
+    epci_id?: StringFilter<"commune"> | string
+    nom?: StringFilter<"commune"> | string
+    population?: IntFilter<"commune"> | number
+    created_at?: DateTimeFilter<"commune"> | Date | string
+    epci?: XOR<EpciScalarRelationFilter, epciWhereInput>
+  }
+
+  export type communeOrderByWithRelationInput = {
+    id?: SortOrder
+    insee?: SortOrder
+    siren?: SortOrder
+    epci_id?: SortOrder
+    nom?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+    epci?: epciOrderByWithRelationInput
+    _relevance?: communeOrderByRelevanceInput
+  }
+
+  export type communeWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    insee?: string
+    siren?: string
+    AND?: communeWhereInput | communeWhereInput[]
+    OR?: communeWhereInput[]
+    NOT?: communeWhereInput | communeWhereInput[]
+    epci_id?: StringFilter<"commune"> | string
+    nom?: StringFilter<"commune"> | string
+    population?: IntFilter<"commune"> | number
+    created_at?: DateTimeFilter<"commune"> | Date | string
+    epci?: XOR<EpciScalarRelationFilter, epciWhereInput>
+  }, "id" | "insee" | "siren">
+
+  export type communeOrderByWithAggregationInput = {
+    id?: SortOrder
+    insee?: SortOrder
+    siren?: SortOrder
+    epci_id?: SortOrder
+    nom?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+    _count?: communeCountOrderByAggregateInput
+    _avg?: communeAvgOrderByAggregateInput
+    _max?: communeMaxOrderByAggregateInput
+    _min?: communeMinOrderByAggregateInput
+    _sum?: communeSumOrderByAggregateInput
+  }
+
+  export type communeScalarWhereWithAggregatesInput = {
+    AND?: communeScalarWhereWithAggregatesInput | communeScalarWhereWithAggregatesInput[]
+    OR?: communeScalarWhereWithAggregatesInput[]
+    NOT?: communeScalarWhereWithAggregatesInput | communeScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"commune"> | string
+    insee?: StringWithAggregatesFilter<"commune"> | string
+    siren?: StringWithAggregatesFilter<"commune"> | string
+    epci_id?: StringWithAggregatesFilter<"commune"> | string
+    nom?: StringWithAggregatesFilter<"commune"> | string
+    population?: IntWithAggregatesFilter<"commune"> | number
+    created_at?: DateTimeWithAggregatesFilter<"commune"> | Date | string
   }
 
   export type AccountCreateInput = {
@@ -31133,6 +33805,149 @@ export namespace Prisma {
     execution_start_time?: DateTimeFieldUpdateOperationsInput | Date | string
     execution_end_time?: DateTimeFieldUpdateOperationsInput | Date | string
     job_type?: EnumJobTypeFieldUpdateOperationsInput | $Enums.JobType
+  }
+
+  export type epciCreateInput = {
+    id?: string
+    siren: string
+    nom: string
+    code_departement: string
+    type: $Enums.TypeEpci
+    population: number
+    created_at?: Date | string
+    communes?: communeCreateNestedManyWithoutEpciInput
+  }
+
+  export type epciUncheckedCreateInput = {
+    id?: string
+    siren: string
+    nom: string
+    code_departement: string
+    type: $Enums.TypeEpci
+    population: number
+    created_at?: Date | string
+    communes?: communeUncheckedCreateNestedManyWithoutEpciInput
+  }
+
+  export type epciUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    code_departement?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeEpciFieldUpdateOperationsInput | $Enums.TypeEpci
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    communes?: communeUpdateManyWithoutEpciNestedInput
+  }
+
+  export type epciUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    code_departement?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeEpciFieldUpdateOperationsInput | $Enums.TypeEpci
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    communes?: communeUncheckedUpdateManyWithoutEpciNestedInput
+  }
+
+  export type epciCreateManyInput = {
+    id?: string
+    siren: string
+    nom: string
+    code_departement: string
+    type: $Enums.TypeEpci
+    population: number
+    created_at?: Date | string
+  }
+
+  export type epciUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    code_departement?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeEpciFieldUpdateOperationsInput | $Enums.TypeEpci
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type epciUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    code_departement?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeEpciFieldUpdateOperationsInput | $Enums.TypeEpci
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type communeCreateInput = {
+    id?: string
+    insee: string
+    siren: string
+    nom: string
+    population: number
+    created_at?: Date | string
+    epci: epciCreateNestedOneWithoutCommunesInput
+  }
+
+  export type communeUncheckedCreateInput = {
+    id?: string
+    insee: string
+    siren: string
+    epci_id: string
+    nom: string
+    population: number
+    created_at?: Date | string
+  }
+
+  export type communeUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insee?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    epci?: epciUpdateOneRequiredWithoutCommunesNestedInput
+  }
+
+  export type communeUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insee?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    epci_id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type communeCreateManyInput = {
+    id?: string
+    insee: string
+    siren: string
+    epci_id: string
+    nom: string
+    population: number
+    created_at?: Date | string
+  }
+
+  export type communeUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insee?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type communeUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insee?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    epci_id?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -32933,6 +35748,126 @@ export namespace Prisma {
     _max?: NestedEnumJobTypeFilter<$PrismaModel>
   }
 
+  export type EnumTypeEpciFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeEpci | EnumTypeEpciFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeEpci[] | ListEnumTypeEpciFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeEpci[] | ListEnumTypeEpciFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeEpciFilter<$PrismaModel> | $Enums.TypeEpci
+  }
+
+  export type CommuneListRelationFilter = {
+    every?: communeWhereInput
+    some?: communeWhereInput
+    none?: communeWhereInput
+  }
+
+  export type communeOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type epciOrderByRelevanceInput = {
+    fields: epciOrderByRelevanceFieldEnum | epciOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type epciCountOrderByAggregateInput = {
+    id?: SortOrder
+    siren?: SortOrder
+    nom?: SortOrder
+    code_departement?: SortOrder
+    type?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type epciAvgOrderByAggregateInput = {
+    population?: SortOrder
+  }
+
+  export type epciMaxOrderByAggregateInput = {
+    id?: SortOrder
+    siren?: SortOrder
+    nom?: SortOrder
+    code_departement?: SortOrder
+    type?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type epciMinOrderByAggregateInput = {
+    id?: SortOrder
+    siren?: SortOrder
+    nom?: SortOrder
+    code_departement?: SortOrder
+    type?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type epciSumOrderByAggregateInput = {
+    population?: SortOrder
+  }
+
+  export type EnumTypeEpciWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeEpci | EnumTypeEpciFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeEpci[] | ListEnumTypeEpciFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeEpci[] | ListEnumTypeEpciFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeEpciWithAggregatesFilter<$PrismaModel> | $Enums.TypeEpci
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeEpciFilter<$PrismaModel>
+    _max?: NestedEnumTypeEpciFilter<$PrismaModel>
+  }
+
+  export type EpciScalarRelationFilter = {
+    is?: epciWhereInput
+    isNot?: epciWhereInput
+  }
+
+  export type communeOrderByRelevanceInput = {
+    fields: communeOrderByRelevanceFieldEnum | communeOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type communeCountOrderByAggregateInput = {
+    id?: SortOrder
+    insee?: SortOrder
+    siren?: SortOrder
+    epci_id?: SortOrder
+    nom?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type communeAvgOrderByAggregateInput = {
+    population?: SortOrder
+  }
+
+  export type communeMaxOrderByAggregateInput = {
+    id?: SortOrder
+    insee?: SortOrder
+    siren?: SortOrder
+    epci_id?: SortOrder
+    nom?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type communeMinOrderByAggregateInput = {
+    id?: SortOrder
+    insee?: SortOrder
+    siren?: SortOrder
+    epci_id?: SortOrder
+    nom?: SortOrder
+    population?: SortOrder
+    created_at?: SortOrder
+  }
+
+  export type communeSumOrderByAggregateInput = {
+    population?: SortOrder
+  }
+
   export type UserCreateNestedOneWithoutAccountsInput = {
     create?: XOR<UserCreateWithoutAccountsInput, UserUncheckedCreateWithoutAccountsInput>
     connectOrCreate?: UserCreateOrConnectWithoutAccountsInput
@@ -34720,6 +37655,66 @@ export namespace Prisma {
     set?: $Enums.JobType
   }
 
+  export type communeCreateNestedManyWithoutEpciInput = {
+    create?: XOR<communeCreateWithoutEpciInput, communeUncheckedCreateWithoutEpciInput> | communeCreateWithoutEpciInput[] | communeUncheckedCreateWithoutEpciInput[]
+    connectOrCreate?: communeCreateOrConnectWithoutEpciInput | communeCreateOrConnectWithoutEpciInput[]
+    createMany?: communeCreateManyEpciInputEnvelope
+    connect?: communeWhereUniqueInput | communeWhereUniqueInput[]
+  }
+
+  export type communeUncheckedCreateNestedManyWithoutEpciInput = {
+    create?: XOR<communeCreateWithoutEpciInput, communeUncheckedCreateWithoutEpciInput> | communeCreateWithoutEpciInput[] | communeUncheckedCreateWithoutEpciInput[]
+    connectOrCreate?: communeCreateOrConnectWithoutEpciInput | communeCreateOrConnectWithoutEpciInput[]
+    createMany?: communeCreateManyEpciInputEnvelope
+    connect?: communeWhereUniqueInput | communeWhereUniqueInput[]
+  }
+
+  export type EnumTypeEpciFieldUpdateOperationsInput = {
+    set?: $Enums.TypeEpci
+  }
+
+  export type communeUpdateManyWithoutEpciNestedInput = {
+    create?: XOR<communeCreateWithoutEpciInput, communeUncheckedCreateWithoutEpciInput> | communeCreateWithoutEpciInput[] | communeUncheckedCreateWithoutEpciInput[]
+    connectOrCreate?: communeCreateOrConnectWithoutEpciInput | communeCreateOrConnectWithoutEpciInput[]
+    upsert?: communeUpsertWithWhereUniqueWithoutEpciInput | communeUpsertWithWhereUniqueWithoutEpciInput[]
+    createMany?: communeCreateManyEpciInputEnvelope
+    set?: communeWhereUniqueInput | communeWhereUniqueInput[]
+    disconnect?: communeWhereUniqueInput | communeWhereUniqueInput[]
+    delete?: communeWhereUniqueInput | communeWhereUniqueInput[]
+    connect?: communeWhereUniqueInput | communeWhereUniqueInput[]
+    update?: communeUpdateWithWhereUniqueWithoutEpciInput | communeUpdateWithWhereUniqueWithoutEpciInput[]
+    updateMany?: communeUpdateManyWithWhereWithoutEpciInput | communeUpdateManyWithWhereWithoutEpciInput[]
+    deleteMany?: communeScalarWhereInput | communeScalarWhereInput[]
+  }
+
+  export type communeUncheckedUpdateManyWithoutEpciNestedInput = {
+    create?: XOR<communeCreateWithoutEpciInput, communeUncheckedCreateWithoutEpciInput> | communeCreateWithoutEpciInput[] | communeUncheckedCreateWithoutEpciInput[]
+    connectOrCreate?: communeCreateOrConnectWithoutEpciInput | communeCreateOrConnectWithoutEpciInput[]
+    upsert?: communeUpsertWithWhereUniqueWithoutEpciInput | communeUpsertWithWhereUniqueWithoutEpciInput[]
+    createMany?: communeCreateManyEpciInputEnvelope
+    set?: communeWhereUniqueInput | communeWhereUniqueInput[]
+    disconnect?: communeWhereUniqueInput | communeWhereUniqueInput[]
+    delete?: communeWhereUniqueInput | communeWhereUniqueInput[]
+    connect?: communeWhereUniqueInput | communeWhereUniqueInput[]
+    update?: communeUpdateWithWhereUniqueWithoutEpciInput | communeUpdateWithWhereUniqueWithoutEpciInput[]
+    updateMany?: communeUpdateManyWithWhereWithoutEpciInput | communeUpdateManyWithWhereWithoutEpciInput[]
+    deleteMany?: communeScalarWhereInput | communeScalarWhereInput[]
+  }
+
+  export type epciCreateNestedOneWithoutCommunesInput = {
+    create?: XOR<epciCreateWithoutCommunesInput, epciUncheckedCreateWithoutCommunesInput>
+    connectOrCreate?: epciCreateOrConnectWithoutCommunesInput
+    connect?: epciWhereUniqueInput
+  }
+
+  export type epciUpdateOneRequiredWithoutCommunesNestedInput = {
+    create?: XOR<epciCreateWithoutCommunesInput, epciUncheckedCreateWithoutCommunesInput>
+    connectOrCreate?: epciCreateOrConnectWithoutCommunesInput
+    upsert?: epciUpsertWithoutCommunesInput
+    connect?: epciWhereUniqueInput
+    update?: XOR<XOR<epciUpdateToOneWithWhereWithoutCommunesInput, epciUpdateWithoutCommunesInput>, epciUncheckedUpdateWithoutCommunesInput>
+  }
+
   export type NestedStringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -35201,6 +38196,23 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumJobTypeFilter<$PrismaModel>
     _max?: NestedEnumJobTypeFilter<$PrismaModel>
+  }
+
+  export type NestedEnumTypeEpciFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeEpci | EnumTypeEpciFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeEpci[] | ListEnumTypeEpciFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeEpci[] | ListEnumTypeEpciFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeEpciFilter<$PrismaModel> | $Enums.TypeEpci
+  }
+
+  export type NestedEnumTypeEpciWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: $Enums.TypeEpci | EnumTypeEpciFieldRefInput<$PrismaModel>
+    in?: $Enums.TypeEpci[] | ListEnumTypeEpciFieldRefInput<$PrismaModel>
+    notIn?: $Enums.TypeEpci[] | ListEnumTypeEpciFieldRefInput<$PrismaModel>
+    not?: NestedEnumTypeEpciWithAggregatesFilter<$PrismaModel> | $Enums.TypeEpci
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedEnumTypeEpciFilter<$PrismaModel>
+    _max?: NestedEnumTypeEpciFilter<$PrismaModel>
   }
 
   export type UserCreateWithoutAccountsInput = {
@@ -40792,6 +43804,119 @@ export namespace Prisma {
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
   }
 
+  export type communeCreateWithoutEpciInput = {
+    id?: string
+    insee: string
+    siren: string
+    nom: string
+    population: number
+    created_at?: Date | string
+  }
+
+  export type communeUncheckedCreateWithoutEpciInput = {
+    id?: string
+    insee: string
+    siren: string
+    nom: string
+    population: number
+    created_at?: Date | string
+  }
+
+  export type communeCreateOrConnectWithoutEpciInput = {
+    where: communeWhereUniqueInput
+    create: XOR<communeCreateWithoutEpciInput, communeUncheckedCreateWithoutEpciInput>
+  }
+
+  export type communeCreateManyEpciInputEnvelope = {
+    data: communeCreateManyEpciInput | communeCreateManyEpciInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type communeUpsertWithWhereUniqueWithoutEpciInput = {
+    where: communeWhereUniqueInput
+    update: XOR<communeUpdateWithoutEpciInput, communeUncheckedUpdateWithoutEpciInput>
+    create: XOR<communeCreateWithoutEpciInput, communeUncheckedCreateWithoutEpciInput>
+  }
+
+  export type communeUpdateWithWhereUniqueWithoutEpciInput = {
+    where: communeWhereUniqueInput
+    data: XOR<communeUpdateWithoutEpciInput, communeUncheckedUpdateWithoutEpciInput>
+  }
+
+  export type communeUpdateManyWithWhereWithoutEpciInput = {
+    where: communeScalarWhereInput
+    data: XOR<communeUpdateManyMutationInput, communeUncheckedUpdateManyWithoutEpciInput>
+  }
+
+  export type communeScalarWhereInput = {
+    AND?: communeScalarWhereInput | communeScalarWhereInput[]
+    OR?: communeScalarWhereInput[]
+    NOT?: communeScalarWhereInput | communeScalarWhereInput[]
+    id?: StringFilter<"commune"> | string
+    insee?: StringFilter<"commune"> | string
+    siren?: StringFilter<"commune"> | string
+    epci_id?: StringFilter<"commune"> | string
+    nom?: StringFilter<"commune"> | string
+    population?: IntFilter<"commune"> | number
+    created_at?: DateTimeFilter<"commune"> | Date | string
+  }
+
+  export type epciCreateWithoutCommunesInput = {
+    id?: string
+    siren: string
+    nom: string
+    code_departement: string
+    type: $Enums.TypeEpci
+    population: number
+    created_at?: Date | string
+  }
+
+  export type epciUncheckedCreateWithoutCommunesInput = {
+    id?: string
+    siren: string
+    nom: string
+    code_departement: string
+    type: $Enums.TypeEpci
+    population: number
+    created_at?: Date | string
+  }
+
+  export type epciCreateOrConnectWithoutCommunesInput = {
+    where: epciWhereUniqueInput
+    create: XOR<epciCreateWithoutCommunesInput, epciUncheckedCreateWithoutCommunesInput>
+  }
+
+  export type epciUpsertWithoutCommunesInput = {
+    update: XOR<epciUpdateWithoutCommunesInput, epciUncheckedUpdateWithoutCommunesInput>
+    create: XOR<epciCreateWithoutCommunesInput, epciUncheckedCreateWithoutCommunesInput>
+    where?: epciWhereInput
+  }
+
+  export type epciUpdateToOneWithWhereWithoutCommunesInput = {
+    where?: epciWhereInput
+    data: XOR<epciUpdateWithoutCommunesInput, epciUncheckedUpdateWithoutCommunesInput>
+  }
+
+  export type epciUpdateWithoutCommunesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    code_departement?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeEpciFieldUpdateOperationsInput | $Enums.TypeEpci
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type epciUncheckedUpdateWithoutCommunesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    code_departement?: StringFieldUpdateOperationsInput | string
+    type?: EnumTypeEpciFieldUpdateOperationsInput | $Enums.TypeEpci
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type AccountCreateManyUserInput = {
     id?: string
     type: string
@@ -42126,6 +45251,42 @@ export namespace Prisma {
     cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type communeCreateManyEpciInput = {
+    id?: string
+    insee: string
+    siren: string
+    nom: string
+    population: number
+    created_at?: Date | string
+  }
+
+  export type communeUpdateWithoutEpciInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insee?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type communeUncheckedUpdateWithoutEpciInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insee?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type communeUncheckedUpdateManyWithoutEpciInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    insee?: StringFieldUpdateOperationsInput | string
+    siren?: StringFieldUpdateOperationsInput | string
+    nom?: StringFieldUpdateOperationsInput | string
+    population?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 
