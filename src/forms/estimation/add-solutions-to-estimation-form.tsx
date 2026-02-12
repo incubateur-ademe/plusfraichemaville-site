@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { sortEstimationFichesSolutions } from "@/src/helpers/estimation";
 
 type AddSolutionsToEstimationFormProps = {
   estimation: EstimationWithAides;
@@ -54,7 +55,7 @@ export const AddSolutionsToEstimationForm = ({
     if (result.type === "success") {
       notifications(result.type, result.message);
       if (result.estimation) {
-        const firstAddedFicheSolutionIndex = result.estimation.estimations_fiches_solutions.findIndex(
+        const firstAddedFicheSolutionIndex = sortEstimationFichesSolutions(result.estimation).findIndex(
           (efs) =>
             !estimation.estimations_fiches_solutions.find(
               (originalEfs) => originalEfs.fiche_solution_id === efs.fiche_solution_id,

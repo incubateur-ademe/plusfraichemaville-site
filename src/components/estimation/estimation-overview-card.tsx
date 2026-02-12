@@ -52,7 +52,7 @@ export const EstimationOverviewCard = ({
   }, [estimation.estimations_fiches_solutions.length, isEditMode]);
 
   const handleEditFicheSolution = (ficheSolutionId: number) => {
-    const index = estimation.estimations_fiches_solutions.findIndex(
+    const index = sortEstimationFichesSolutions(estimation).findIndex(
       (efs) => efs.fiche_solution_id === +ficheSolutionId,
     );
     if (index !== -1) {
