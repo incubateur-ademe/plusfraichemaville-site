@@ -1,0 +1,1254 @@
+﻿code_departement;siren;nom;type;population
+01;200029999;CC Rives de l'Ain - Pays du Cerdon;CC;15 282
+01;200040350;CC Bugey Sud;CC;35 174
+01;200042497;CC Dombes Saône Vallée;CC;42 613
+01;200042935;CA Haut-Bugey Agglomération;CA;65 736
+01;200069193;CC de la Dombes;CC;41 866
+01;200070118;CC Val de Saône Centre;CC;21 610
+01;200070555;CC de la Veyle;CC;23 898
+01;200071371;CC Bresse et Saône;CC;26 438
+01;200071751;CA du Bassin de Bourg-en-Bresse;CA;140 725
+01;240100610;CC de la Côtière à Montluel;CC;26 414
+01;240100750;CA du Pays de Gex;CA;109 288
+01;240100800;CC de Miribel et du Plateau;CC;25 824
+01;240100883;CC de la Plaine de l'Ain;CC;85 650
+01;240100891;CC Terre Valserhône (CCTV);CC;22 682
+02;200040426;CC du Val de l'Oise;CC;16 097
+02;200043495;CA du Pays de Laon;CA;42 824
+02;200071769;CC Picardie des Châteaux;CC;16 860
+02;200071785;CA Chauny Tergnier La Fère;CA;55 212
+02;200071892;CA du Saint-Quentinois;CA;80 707
+02;200071983;CC Thiérache Sambre et Oise;CC;16 572
+02;200071991;CC Retz en Valois;CC;29 910
+02;200072031;CA de la Région de Château-Thierry;CA;55 121
+02;240200444;CC de la Thiérache du Centre;CC;26 489
+02;240200469;CC du Pays de la Serre;CC;14 557
+02;240200477;CA GrandSoissons Agglomération;CA;52 853
+02;240200493;CC du Pays du Vermandois;CC;31 077
+02;240200501;CC du Val de l'Aisne;CC;20 647
+02;240200519;CC du Canton d'Oulchy-le-Château;CC;5 621
+02;240200576;CC de la Champagne Picarde;CC;21 295
+02;240200584;CC du Canton de Charly-sur-Marne;CC;15 475
+02;240200592;CC du Chemin des Dames;CC;5 594
+02;240200600;CC des Trois Rivières;CC;20 658
+02;240200634;CC des Portes de la Thiérache;CC;6 733
+03;200071082;CA Montluçon Communauté;CA;60 656
+03;200071140;CA Moulins Communauté;CA;66 224
+03;200071363;CA Vichy Communauté;CA;85 895
+03;200071389;CC Saint-Pourçain Sioule Limagne;CC;34 492
+03;200071470;CC Entr'Allier Besbre et Loire;CC;24 801
+03;200071496;CC du Bocage Bourbonnais;CC;13 845
+03;200071512;CC Commentry Montmarault Néris Communauté;CC;25 795
+03;240300491;CC du Pays de Lapalisse;CC;8 667
+03;240300558;CC du Pays de Tronçais;CC;7 498
+03;240300566;CC du Val de Cher;CC;5 547
+03;240300657;CC du Pays d'Huriel;CC;7 427
+04;200034700;CA Durance-Lubéron-Verdon Agglomération;CA;65 246
+04;200067437;CA Provence-Alpes-Agglomération;CA;50 634
+04;200068625;"CC Alpes-Provence-Verdon ""Sources de lumière""";CC;11 709
+04;200068765;CC du Sisteronais-Buëch;CC;26 306
+04;200071025;CC Haute-Provence - Pays de Banon;CC;10 338
+04;200071033;CC Jabron-Lure-Vançon-Durance;CC;5 598
+04;200072304;CC Vallée de l'Ubaye - Serre-Ponçon;CC;7 920
+04;240400440;CC Pays Forcalquier et Montagne de Lure;CC;10 258
+05;200067320;CC Serre-Ponçon Val d'Avance;CC;8 080
+05;200067445;CC Buëch-Dévoluy;CC;9 928
+05;200067452;CC du Guillestrois et du Queyras;CC;8 205
+05;200067742;CC Serre-Ponçon;CC;17 651
+05;200067825;CA Gap-Tallard-Durance;CA;53 155
+05;200068096;CC Champsaur-Valgaudemar;CC;12 005
+05;240500439;CC du Briançonnais;CC;20 114
+05;240500462;CC du Pays des Ecrins;CC;6 777
+06;200030195;Métropole Nice Côte d'Azur;METRO;579 965
+06;200039857;CA du Pays de Grasse;CA;106 855
+06;200039915;CA Cannes Pays de Lérins;CA;160 885
+06;200039931;CC Alpes d'Azur;CC;10 112
+06;240600551;CA de la Riviera Française;CA;72 733
+06;240600585;CA de Sophia Antipolis;CA;190 146
+06;240600593;CC du Pays des Paillons;CC;21 807
+07;200016905;CC du Pays de Lamastre;CC;6 808
+07;200039808;CC des Gorges de l'Ardèche;CC;16 069
+07;200039824;CC Ardèche des Sources et Volcans;CC;9 932
+07;200039832;CC Pays des Vans en Cévennes;CC;9 743
+07;200041366;CC Rhône Crussol;CC;35 634
+07;200041465;CC Val Eyrieux;CC;12 572
+07;200071405;CC Ardèche Rhône Coiron;CC;23 457
+07;200071413;CA Privas Centre Ardèche;CA;45 447
+07;200072007;CC Montagne d'Ardèche;CC;4 916
+07;200072015;CA Annonay Rhône Agglo;CA;52 152
+07;200073096;CA Arche Agglo;CA;60 860
+07;200073245;CC du Bassin d'Aubenas;CC;42 176
+07;240700302;CC du Pays Beaume-Drobie;CC;9 394
+07;240700617;CC Val de Ligne;CC;6 179
+07;240700716;CC du Val d'Ay;CC;6 033
+07;240700815;CC Berg et Coiron;CC;8 201
+07;240700864;CC du Rhône aux Gorges de l'Ardèche;CC;19 746
+08;200041622;CC Ardennes Thiérache;CC;9 564
+08;200041630;CA Ardenne Métropole;CA;122 709
+08;200043156;CC du Pays Rethélois;CC;30 534
+08;200067759;CC Vallées et Plateau d'Ardenne;CC;24 250
+08;240800821;CC Ardenne, Rives de Meuse;CC;26 090
+08;240800847;CC des Portes du Luxembourg;CC;19 630
+08;240800862;CC des Crêtes Préardennaises;CC;21 952
+08;240800920;CC de l'Argonne Ardennaise;CC;16 875
+09;200044469;CC du Pays de Mirepoix;CC;10 964
+09;200066223;CC Arize Lèze;CC;11 220
+09;200066231;CC des Portes d'Ariège Pyrénées;CC;41 715
+09;200066363;CC de la Haute Ariège;CC;7 404
+09;200067791;CA L'Agglo Foix-Varilhes;CA;33 679
+09;200067940;CC Couserans-Pyrénées;CC;30 911
+09;240900431;CC du Pays de Tarascon;CC;8 765
+09;240900464;CC du Pays d'Olmes;CC;15 026
+10;200000545;CC des Portes de Romilly sur Seine;CC;19 391
+10;200006716;CC du Nogentais;CC;16 536
+10;200040137;CC des Lacs de Champagne;CC;9 009
+10;200066892;CC de Vendeuvre-Soulaines;CC;7 442
+10;200069003;CC du Barséquanais en Champagne;CC;18 688
+10;200069250;CA Troyes Champagne Métropole;CA;179 642
+10;200070126;CC Seine et Aube;CC;10 360
+10;200071041;CC du Chaourçois et du Val d'Armance;CC;10 445
+10;200071777;CC d'Arcis, Mailly, Ramerupt;CC;11 991
+10;241000223;CC Forêts, Lacs, Terres en Champagne;CC;6 923
+10;241000405;CC de la Région de Bar sur Aube;CC;10 710
+10;241000447;CC du Pays d'Othe;CC;7 558
+10;241000488;CC de l'Orvin et de l'Ardusson;CC;8 601
+11;200035707;CC Piège Lauragais Malepère;CC;16 880
+11;200035715;CA Carcassonne Agglo;CA;116 840
+11;200035855;CC Castelnaudary Lauragais Audois;CC;28 729
+11;200035863;CC Région Lézignanaise, Corbières et Minervois;CC;33 832
+11;200042463;CC de la Montagne Noire;CC;6 173
+11;200043776;CC Pyrénées audoises;CC;13 906
+11;200071926;CC du Limouxin;CC;28 854
+11;241100593;CA Le Grand Narbonne;CA;136 925
+12;200067064;CC Decazeville Communauté;CC;18 467
+12;200067155;CC Saint Affricain, Roquefort, Sept Vallons;CC;14 079
+12;200067163;CC Monts, Rance et Rougier;CC;6 616
+12;200067171;CC Aubrac Carladez Viadène;CC;10 072
+12;200067478;CC Comtal Lot et Truyère;CC;20 527
+12;200068484;CC des Causses à l'Aubrac;CC;14 807
+12;200068831;CC Pays Ségali Communauté;CC;19 025
+12;200069383;CC Ouest Aveyron Communauté;CC;28 067
+12;241200187;CA Rodez Agglomération;CA;59 002
+12;241200542;CC du Réquistanais;CC;5 294
+12;241200567;CC de Millau Grands Causses;CC;30 457
+12;241200625;CC du Pays Rignacois;CC;5 852
+12;241200641;CC Conques-Marcillac;CC;12 466
+12;241200674;CC du Plateau de Montbazens;CC;6 383
+12;241200807;CC Aveyron Bas Ségala Viaur;CC;5 765
+12;241200906;CC Larzac et Vallées;CC;6 844
+12;241200914;CC de la Muse et des Raspes du Tarn;CC;5 450
+12;994579670;CC du Lévézou;CC;13 758
+13;200035087;CA Terre de Provence;CA;61 643
+13;200054807;Métropole d'Aix-Marseille-Provence;METRO;1 961 169
+13;241300375;CC Vallée des Baux-Alpilles (CC VBA);CC;28 385
+13;241300417;CA d'Arles-Crau-Camargue-Montagnette;CA;86 741
+14;200065563;CC Normandie-Cabourg-Pays d'Auge;CC;32 517
+14;200065589;CC Val ès Dunes;CC;21 027
+14;200065597;CU Caen la Mer;CU;285 877
+14;200066710;CC Cingal-Suisse Normande;CC;23 970
+14;200066728;CC Vallées de l'Orne et de l'Odon;CC;27 046
+14;200066801;CC Isigny-Omaha Intercom;CC;26 888
+14;200066827;CC du Pays de Honfleur-Beuzeville;CC;27 523
+14;200068799;CC Intercom de la Vire au Noireau;CC;47 680
+14;200069516;CC Seulles Terre et Mer;CC;17 364
+14;200069524;CC Pré-Bocage Intercom;CC;25 520
+14;200069532;CA Lisieux Normandie;CA;74 413
+14;241400415;CC Coeur Côte Fleurie;CC;21 045
+14;241400514;CC du Pays de Falaise;CC;27 929
+14;241400555;CC de Bayeux Intercom;CC;30 529
+14;241400860;CC Coeur de Nacre;CC;25 163
+14;241400878;CC Terre d'Auge;CC;20 311
+15;200066637;CC Hautes Terres;CC;11 389
+15;200066660;CC de Saint-Flour;CC;24 094
+15;200066678;CC de la Châtaigneraie Cantalienne;CC;21 638
+15;241500230;CA Aurillac Agglomération;CA;56 328
+15;241500255;CC du Pays Gentiane;CC;6 612
+15;241500271;CC du Pays de Mauriac;CC;6 721
+15;241501055;CC Sumène - Artense;CC;8 342
+15;241501089;CC Cère et Goul en Carladès;CC;5 098
+15;241501139;CC du Pays de Salers;CC;8 559
+16;200029734;CC des 4B Sud Charente;CC;20 551
+16;200043016;CC Val de Charente;CC;14 218
+16;200068914;CC La Rochefoucauld Porte du Périgord;CC;22 389
+16;200070282;CC Lavalette Tude Dronne;CC;17 784
+16;200070514;CA du Grand Cognac;CA;70 821
+16;200071827;CA du Grand Angoulême;CA;146 911
+16;200072023;CC Coeur de Charente;CC;22 441
+16;200072049;CC de Charente Limousine;CC;36 180
+16;241600303;CC du Rouillacais;CC;9 991
+17;200036473;"CA ""Saintes - Grandes Rives - L'Agglo""";CA;63 251
+17;200041499;CC Aunis Atlantique;CC;33 292
+17;200041523;CC de la Haute Saintonge;CC;71 010
+17;200041614;CC Aunis Sud;CC;34 164
+17;200041689;CC Vals de Saintonge Communauté;CC;54 138
+17;200041762;CA Rochefort Océan;CA;66 230
+17;241700434;CA de La Rochelle;CA;186 387
+17;241700459;CC de l'Ile de Ré;CC;18 271
+17;241700517;CC Coeur de Saintonge;CC;18 533
+17;241700624;CC de l'Ile d'Oléron;CC;22 924
+17;241700632;CC de Gémozac et de la Saintonge Viticole;CC;15 222
+17;241700640;CA Royan Atlantique;CA;88 777
+17;241700699;CC du Bassin de Marennes;CC;15 868
+18;200000933;CC Sauldre et Sologne;CC;14 466
+18;200007177;CC Pays de Nérondes;CC;4 735
+18;200011781;CC Portes du Berry entre Loire et Val d'Aubois;CC;9 577
+18;200027076;CC Arnon Boischaut Cher;CC;7 965
+18;200032514;CC Berry-Loire-Vauvise;CC;5 524
+18;200036135;CC Coeur de France;CC;18 792
+18;200049484;CC Berry Grand Sud;CC;11 552
+18;200066330;CC Terres du Haut Berry;CC;26 411
+18;200069227;CC Pays Fort Sancerrois Val de Loire;CC;18 370
+18;200070571;CC Coeur de Berry;CC;6 978
+18;200090561;CC Vierzon-Sologne-Berry;CC;38 543
+18;241800374;CC la Septaine;CC;11 008
+18;241800424;CC le Dunois;CC;7 121
+18;241800432;CC les Trois Provinces;CC;5 107
+18;241800457;CC FerCher;CC;11 483
+18;241800507;CA Bourges Plus;CA;105 031
+19;200043172;CA du Bassin de Brive;CA;112 229
+19;200066603;CC du Pays de Lubersac-Pompadour;CC;6 904
+19;200066645;CC Vézère-Monédières-Millesources;CC;5 867
+19;200066744;CC Haute-Corrèze Communauté;CC;33 190
+19;200066751;CC Xaintrie Val'Dordogne;CC;11 404
+19;200066769;CC Midi Corrézien;CC;13 615
+19;241900133;CC de Ventadour - Egletons - Monédières;CC;11 137
+19;241927201;CA Tulle Agglo;CA;44 717
+19;241927243;CC du Pays d'Uzerche;CC;10 880
+21;200000925;CC de la Plaine Dijonnaise;CC;22 682
+21;200006682;CA Beaune, Côte et Sud - Communauté Beaune-Chagny-Nolay;CA;51 943
+21;200039055;CC Ouche et Montagne;CC;11 590
+21;200039063;CC Forêts, Seine et Suzon;CC;7 237
+21;200069540;CC Norge et Tille;CC;17 134
+21;200070894;CC de Gevrey-Chambertin et de Nuits-Saint-Georges;CC;30 186
+21;200070902;CC Auxonne Pontailler Val de Saône;CC;23 792
+21;200070910;CC Tille et Venelle;CC;4 977
+21;200071017;CC des Terres d'Auxois;CC;16 024
+21;200071173;CC du Pays Arnay Liernais;CC;7 097
+21;200071207;CC de Pouilly-en-Auxois / Bligny-sur-Ouche;CC;9 134
+21;200072825;CC Mirebellois et Fontenois;CC;12 791
+21;242100154;CC des Vallées de la Tille et de l'Ignon;CC;13 861
+21;242100410;Dijon Métropole;METRO;266 083
+21;242101434;CC du Pays Châtillonnais;CC;20 160
+21;242101442;CC de Saulieu-Morvan;CC;5 290
+21;242101459;CC du Pays d'Alésia et de la Seine;CC;7 455
+21;242101491;CC du Montbardois;CC;10 225
+21;242101509;CC Rives de Saône;CC;20 935
+22;200065928;CA Lannion-Trégor Communauté;CA;104 526
+22;200067460;CC Loudéac Communauté - Bretagne Centre;CC;53 602
+22;200067981;CA Guingamp-Paimpol Agglomération de l'Armor à l'Argoat;CA;76 462
+22;200068989;CA Dinan Agglomération;CA;107 785
+22;200069086;CC Leff Armor Communauté;CC;32 814
+22;200069391;CA Lamballe Terre et Mer;CA;71 395
+22;200069409;CA Saint-Brieuc Armor Agglomération;CA;158 546
+22;242200715;CC du Kreiz-Breizh (CCKB);CC;19 172
+23;200034825;CA du Grand Guéret;CA;29 641
+23;200041556;CC Portes de la Creuse en Marche;CC;6 737
+23;200044014;CC Creuse Grand Sud;CC;11 925
+23;200067189;CC Creuse Sud Ouest;CC;14 010
+23;200067544;CC Creuse Confluence;CC;16 738
+23;200067593;CC Marche et Combraille en Aquitaine;CC;13 175
+23;242300135;CC du Pays Sostranien;CC;10 520
+23;242320000;CC de Bénévent Grand Bourg;CC;6 923
+23;242320109;CC du Pays Dunois;CC;7 119
+24;200027217;CC Sarlat-Périgord Noir;CC;16 662
+24;200034197;CC de Montaigne Montravel et Gurson;CC;12 186
+24;200034833;CC des Bastides Dordogne-Périgord;CC;18 914
+24;200040095;CC Isle Vern Salembre en Périgord;CC;19 310
+24;200040384;CC Isle Double Landais;CC;12 771
+24;200040392;CA Le Grand Périgueux;CA;108 052
+24;200040400;CC du Périgord Ribéracois;CC;19 975
+24;200040830;CC du Pays de Fénelon;CC;10 107
+24;200040889;CC de Portes Sud Périgord;CC;8 610
+24;200041051;CC Vallée de la Dordogne et Forêt Bessède;CC;9 173
+24;200041150;CC Terrassonnais Haut Périgord Noir;CC;22 578
+24;200041168;CC de la Vallée de l'Homme;CC;16 419
+24;200041440;CC de Domme- Villefranche du Périgord;CC;8 786
+24;200041572;CC Dronne et Belle;CC;11 625
+24;200069094;CC Isle et Crempse en Périgord;CC;14 723
+24;200070647;CA Bergeracoise;CA;63 566
+24;200071819;CC du Périgord Nontronnais;CC;15 619
+24;242400752;CC Périgord-Limousin;CC;14 527
+24;242400935;CC du Pays de Saint Aulaye;CC;6 828
+24;242401024;CC Isle-Loue-Auvézère en Périgord;CC;14 221
+25;200023075;CC du Pays de Maîche;CC;19 032
+25;200065647;CA Pays de Montbéliard Agglomération;CA;140 678
+25;200068070;CC Loue-Lison;CC;25 800
+25;200068294;CC des Deux Vallées Vertes;CC;15 842
+25;200069565;CC des Lacs et Montagnes du Haut-Doubs;CC;17 386
+25;242500320;CC Entre Doubs et Loue;CC;8 510
+25;242500338;CC du Grand Pontarlier;CC;29 965
+25;242500361;CU Grand Besançon Métropole;CU;201 908
+25;242504116;CC du Val de Morteau;CC;21 856
+25;242504181;CC des Portes du Haut-Doubs;CC;27 670
+25;242504355;CC du Plateau de Russey;CC;7 374
+25;242504371;CC du Pays de Sancey-Belleherbe;CC;5 675
+25;242504447;CC du Doubs Baumois;CC;16 549
+25;242504488;CC Altitude 800;CC;7 094
+25;242504496;CC du Plateau de Frasne et du Val de Drugeon;CC;6 531
+26;200040459;CA Montélimar Agglomération;CA;71 088
+26;200040491;CC Porte de Dromardèche;CC;49 712
+26;200040509;CC du Crestois et de Pays de Saillans Coeur de Drôme;CC;16 490
+26;200042901;CC Drôme Sud Provence;CC;44 451
+26;200067767;CC du Royans-Vercors;CC;10 070
+26;200068229;CC des Baronnies en Drôme Provençale;CC;21 188
+26;200068781;CA Valence Romans Agglo;CA;230 947
+26;242600252;CC du Val de Drôme en Biovallée;CC;31 969
+26;242600492;CC Dieulefit-Bourdeaux;CC;10 001
+26;242600534;CC du Diois;CC;12 628
+27;200065787;CC de Pont-Audemer / Val de Risle;CC;33 534
+27;200066017;CC Lieuvin Pays d'Auge;CC;20 685
+27;200066405;CC Roumois Seine;CC;42 669
+27;200066413;CC Intercom Bernay Terres de Normandie;CC;55 395
+27;200066462;CC Interco Normandie Sud Eure;CC;38 496
+27;200070142;CC Lyons Andelle;CC;20 920
+27;200071454;CA Evreux Portes de Normandie;CA;115 980
+27;200071843;CC du Vexin Normand;CC;33 679
+27;200072312;CA Seine Normandie Agglomération;CA;85 218
+27;200089456;CA Seine-Eure;CA;105 603
+27;242700276;CC du Pays de Conches;CC;18 481
+27;242700607;CC du Pays du Neubourg;CC;23 099
+28;200006971;CC du Perche;CC;18 593
+28;200033181;CA Chartres Métropole;CA;140 885
+28;200040277;CA Agglo du Pays de Dreux;CA;118 398
+28;200058360;CC Entre Beauce et Perche;CC;21 897
+28;200069912;CC des Forêts du Perche;CC;7 833
+28;200069953;CC des Portes Euréliennes d'Ile de France;CC;49 856
+28;200069961;CC du Grand Châteaudun;CC;40 482
+28;200070159;CC Coeur de Beauce;CC;24 842
+28;200070167;CC Terres de Perche;CC;14 522
+28;242852465;CC du Bonnevalais;CC;12 424
+29;200066868;CC Presqu'île de Crozon-Aulne maritime;CC;23 614
+29;200067072;CC Haut-Léon Communauté;CC;32 703
+29;200067197;CC Monts d'Arrée Communauté;CC;8 190
+29;200067247;CC Pleyben-Châteaulin-Porzay;CC;23 911
+29;200068120;CA Quimper Bretagne Occidentale;CA;105 723
+29;242900074;CC du Pays d'Iroise;CC;51 559
+29;242900314;Brest Métropole;METRO;219 395
+29;242900553;CC du Pays des Abers;CC;43 146
+29;242900561;CC de Haute Cornouaille;CC;15 228
+29;242900629;CC Cap Sizun - Pointe du Raz;CC;15 616
+29;242900645;CC Douarnenez Communauté;CC;18 792
+29;242900660;CC du Pays Fouesnantais;CC;30 797
+29;242900694;CA Quimperlé Communauté;CA;58 681
+29;242900702;CC du Pays Bigouden Sud;CC;39 742
+29;242900710;CC du Haut Pays Bigouden;CC;19 113
+29;242900744;CC Poher Communauté;CC;16 143
+29;242900751;CC du Pays de Landivisiau;CC;34 909
+29;242900769;CA Concarneau Cornouaille Agglomération;CA;53 942
+29;242900793;CC Communauté Lesneven Côte des Légendes;CC;28 435
+29;242900801;CA du Pays de Landerneau-Daoulas;CA;51 416
+29;242900835;CA Morlaix Communauté;CA;67 562
+30;200034379;CC Pays d'Uzès;CC;32 127
+30;200034411;CC du Piémont Cévenol;CC;23 128
+30;200034601;CC Causses Aigoual Cévennes;CC;5 582
+30;200034692;CA du Gard Rhodanien;CA;78 119
+30;200035129;CC de Cèze Cévennes;CC;19 500
+30;200066918;CA Alès Agglomération;CA;139 917
+30;243000270;CC du Pays Viganais;CC;10 408
+30;243000296;CC du Pays de Sommières;CC;25 699
+30;243000569;CC Rhony, Vistre, Vidourle;CC;29 407
+30;243000585;CC Beaucaire Terre d'Argence;CC;32 039
+30;243000593;CC de Petite Camargue;CC;28 567
+30;243000643;CA de Nîmes Métropole;CA;268 103
+30;243000650;CC Terre de Camargue;CC;21 170
+30;243000684;CC du Pont du Gard;CC;24 182
+31;200034957;CC du Frontonnais;CC;29 463
+31;200066819;CC du Volvestre;CC;31 550
+31;200068641;CA Le Muretain Agglo;CA;131 889
+31;200068807;CC du Bassin Auterivain Haut-Garonnais;CC;35 271
+31;200068815;CC Coeur de Garonne;CC;35 832
+31;200071298;CC des Terres du Lauragais;CC;43 551
+31;200071314;CC des Hauts-Tolosans;CC;37 240
+31;200072635;CC Pyrénées Haut Garonnaises;CC;15 941
+31;200072643;CC Coeur et Coteaux du Comminges;CC;45 577
+31;200073146;CC Cagire Garonne Salat;CC;18 319
+31;243100518;Toulouse Métropole;METRO;851 402
+31;243100567;CC Aux sources du Canal du Midi;CC;22 445
+31;243100633;CA du Sicoval;CA;86 154
+31;243100732;CC des Coteaux du Girou;CC;24 201
+31;243100773;CC Val'Aïgo;CC;19 243
+31;243100781;CA Le Grand Ouest Toulousain agglomération;CA;52 255
+31;243100815;CC des Coteaux Bellevue;CC;22 158
+32;200023620;CC de la Gascogne Toulousaine;CC;17 673
+32;200034726;CC Bastides de Lomagne;CC;11 714
+32;200035632;CC Armagnac Adour;CC;6 818
+32;200035756;CC Astarac Arros en Gascogne;CC;7 346
+32;200042372;CC des Coteaux Arrats Gimone;CC;11 045
+32;200066926;CA Grand Auch Coeur de Gascogne;CA;40 710
+32;200072320;CC Val de Gers;CC;10 358
+32;243200391;CC de la Lomagne Gersoise;CC;20 008
+32;243200409;CC du Bas Armagnac;CC;9 031
+32;243200417;CC de la Tenarèze;CC;14 680
+32;243200425;CC Coeur d'Astarac en Gascogne;CC;8 077
+32;243200458;CC du Grand Armagnac;CC;13 750
+32;243200508;CC Bastides et Vallons du Gers;CC;7 219
+32;243200599;CC du Saves;CC;10 180
+32;243200607;CC Artagnan de Fezensac;CC;7 064
+33;200023794;CC de Blaye;CC;20 974
+33;200035533;CC du Grand Saint Emilionnais;CC;14 276
+33;200043974;CC du Sud Gironde;CC;40 998
+33;200043982;CC du Bazadais;CC;16 639
+33;200044394;CC du Réolais en Sud Gironde;CC;24 452
+33;200069581;CC Convergence Garonne;CC;33 260
+33;200069599;CC Rurales de l'Entre-Deux-Mers;CC;17 024
+33;200069995;CC Médoc Coeur de Presqu'île;CC;31 509
+33;200070092;CA du Libournais;CA;95 823
+33;200070720;CC Médoc Atlantique;CC;29 368
+33;243300316;Bordeaux Métropole;METRO;865 747
+33;243300563;CA Bassin d'Arcachon Sud (COBAS);CA;71 301
+33;243300811;CC de l'Estuaire;CC;16 468
+33;243301165;CC Jalle-Eau-Bourde;CC;32 583
+33;243301181;CC Latitude Nord Gironde;CC;22 089
+33;243301215;CC du Créonnais;CC;18 775
+33;243301223;CC du Grand Cubzaguais;CC;38 196
+33;243301249;CC Les Rives de la Laurence;CC;29 338
+33;243301264;CC de Montesquieu;CC;48 823
+33;243301355;CC les Coteaux Bordelais;CC;22 699
+33;243301371;CC du Pays Foyen;CC;16 921
+33;243301389;CC Médullienne;CC;23 069
+33;243301397;CC du Fronsadais;CC;18 105
+33;243301405;CC du Val de l'Eyre;CC;23 131
+33;243301439;CC des Portes de l'Entre-Deux-Mers;CC;23 060
+33;243301447;CC Médoc Estuaire;CC;31 356
+33;243301454;CC Castillon/Pujols;CC;19 394
+33;243301504;CA du Bassin d'Arcachon Nord (COBAN);CA;74 514
+34;200017341;CC Lodévois et Larzac;CC;15 339
+34;200022986;CC du Grand Pic Saint-Loup;CC;52 867
+34;200042646;CC Grand Orb Communauté de Communes en Languedoc;CC;20 371
+34;200042653;CC Sud-Hérault;CC;19 069
+34;200066348;CC du Minervois au Caroux;CC;14 807
+34;200066355;CA Sète Agglopôle Méditerranée;CA;132 851
+34;200071058;CC Les Avant-Monts;CC;28 739
+34;243400017;Montpellier Méditerranée Métropole;METRO;528 988
+34;243400355;CC du Clermontais;CC;29 714
+34;243400470;CA du Pays de l'Or;CA;46 659
+34;243400488;CC la Domitienne;CC;30 052
+34;243400520;CA Lunel Agglo;CA;53 129
+34;243400694;CC Vallée de l'Hérault;CC;42 995
+34;243400736;CC des Cévennes Gangeoises et Suménoises;CC;12 860
+34;243400769;CA de Béziers-Méditerranée;CA;135 091
+34;243400819;CA Hérault-Méditerranée;CA;84 568
+35;200038990;CC de Saint-Méen Montauban;CC;28 103
+35;200039022;CA Vitré Communauté;CA;85 738
+35;200043990;CC Vallons de Haute-Bretagne Communauté;CC;46 544
+35;200070662;CC Bretagne Porte de Loire Communauté;CC;33 681
+35;200070670;CC du Pays de Dol et de la Baie du Mont Saint-Michel;CC;24 682
+35;200070688;CC Couesnon Marches de Bretagne;CC;22 409
+35;200072452;CA Fougères Agglomération;CA;57 610
+35;243500139;Rennes Métropole;METRO;489 359
+35;243500550;CC Montfort Communauté;CC;27 215
+35;243500618;CC Brocéliande Communauté;CC;19 368
+35;243500634;CC Roche aux Fées Communauté;CC;27 683
+35;243500659;CC Pays de Châteaugiron Communauté;CC;28 948
+35;243500667;CC Val d'Ille-Aubigné;CC;40 144
+35;243500725;CC Côte d'Emeraude;CC;30 449
+35;243500733;CC Bretagne Romantique;CC;37 596
+35;243500741;CA Redon Agglomération;CA;69 816
+35;243500774;CC Liffré-Cormier Communauté;CC;29 502
+35;243500782;CA du Pays de Saint Malo Agglomération;CA;89 238
+36;200007052;CC de la Marche Berrichonne;CC;5 543
+36;200018521;CC du Val de Bouzanne;CC;6 020
+36;200035137;CC Marche Occitane - Val d'Anglin;CC;6 599
+36;200035848;CC du Châtillonnais en Berry;CC;5 885
+36;200040558;CC Écueillé-Valençay;CC;11 140
+36;200068872;CC Éguzon - Argenton - Vallée de la Creuse;CC;19 675
+36;200068880;CC Champagne Boischauts;CC;9 877
+36;243600202;CC Chabris - Pays de Bazelle;CC;6 288
+36;243600236;CC du Pays d'Issoudun;CC;19 295
+36;243600293;CC Levroux Boischaut Champagne;CC;6 223
+36;243600301;CC Val de l'Indre - Brenne;CC;13 304
+36;243600319;CC Brenne - Val de Creuse;CC;17 958
+36;243600327;CA Châteauroux Métropole;CA;74 700
+36;243600343;CC Coeur de Brenne;CC;4 690
+36;243600350;CC de la Châtre et Sainte-Sévère;CC;16 447
+37;200043065;CC du Val d'Amboise;CC;29 078
+37;200043081;CC Chinon, Vienne et Loire;CC;24 472
+37;200071587;CC Loches Sud Touraine;CC;52 244
+37;200072650;CC Touraine Vallée de l'Indre;CC;56 121
+37;200072668;CC Touraine Val de Vienne;CC;24 955
+37;200072981;CC Touraine Ouest Val de Loire;CC;33 938
+37;200073161;CC Touraine-Est Vallées;CC;42 217
+37;200073237;CC de Gâtine-Racan;CC;23 026
+37;243700499;CC du Castelrenaudais;CC;16 109
+37;243700754;Tours Métropole Val de Loire;METRO;306 707
+37;243700820;CC Autour de Chenonceaux Bléré-Val de Cher;CC;22 467
+38;200018166;CC Le Grésivaudan;CC;107 361
+38;200030658;CC du Trièves;CC;10 648
+38;200040111;CC Coeur de Chartreuse;CC;17 687
+38;200040657;CC de la Matheysine;CC;19 536
+38;200040715;Grenoble-Alpes-Métropole;METRO;456 596
+38;200059392;CC Bièvre Isère;CC;57 915
+38;200068542;CC Les Balcons du Dauphiné;CC;80 904
+38;200068567;CC Les Vals du Dauphiné;CC;66 598
+38;200070431;CC Saint-Marcellin Vercors Isère Communauté;CC;46 410
+38;200077014;CA Vienne Condrieu;CA;97 530
+38;200085751;CC Entre Bièvre et Rhône;CC;71 718
+38;243800604;CA Porte de l'Isère (CAPI);CA;114 874
+38;243800745;CC de l'Oisans;CC;10 130
+38;243800935;CC Lyon-Saint-Exupéry en Dauphiné;CC;30 579
+38;243800984;CA du Pays Voironnais;CA;100 035
+38;243801024;CC du Massif du Vercors;CC;12 458
+38;243801073;CC de Bièvre Est;CC;23 500
+38;243801255;CC Collines Isère Nord Communauté;CC;26 171
+39;200010650;CA du Grand Dole;CA;56 320
+39;200026573;CC Haut-Jura Saint-Claude;CC;19 829
+39;200069615;CC Bresse Haute Seille;CC;19 672
+39;200069623;CC Champagnole Nozeroy Jura;CC;23 868
+39;200071116;CA ECLA  (Espace Communautaire Lons Agglomération);CA;35 724
+39;200071595;CC Arbois, Poligny, Salins, Coeur du Jura;CC;22 239
+39;200072056;CC Porte du Jura;CC;10 814
+39;200090579;CC Terre d'Émeraude Communauté;CC;25 007
+39;243900354;CC de la Station des Rousses-Haut Jura;CC;7 598
+39;243900420;CC du Val d'Amour;CC;9 472
+39;243900479;CC Haut-Jura Arcade Communauté;CC;9 490
+39;243900560;CC Jura Nord;CC;12 036
+39;243900610;CC la Grandvallière;CC;5 618
+39;243901089;CC de la Plaine Jurassienne;CC;9 253
+40;200030435;CC d'Aire-sur-l'Adour;CC;13 558
+40;200035541;CC des Landes d'Armagnac;CC;11 087
+40;200069417;CC Pays d'Orthe et Arrigans;CC;25 207
+40;200069631;CC Terres de Chalosse;CC;18 829
+40;200069649;CC Chalosse Tursan;CC;26 878
+40;200069656;CC Coeur Haute Lande;CC;16 984
+40;244000543;CC de Mimizan;CC;13 495
+40;244000659;CC du Seignanx;CC;30 913
+40;244000675;CA du Grand Dax;CA;61 209
+40;244000691;CC du Pays Morcenais;CC;9 702
+40;244000766;CC du Pays Tarusate;CC;18 672
+40;244000774;CC du Pays de Villeneuve en Armagnac Landais;CC;6 407
+40;244000808;CA Mont de Marsan Agglomération;CA;58 451
+40;244000824;CC du Pays Grenadois;CC;7 895
+40;244000857;CC Côte Landes Nature;CC;13 243
+40;244000865;CC Maremne Adour Côte Sud;CC;74 286
+40;244000873;CC des Grands Lacs;CC;34 242
+40;244000881;CC Coteaux et Vallées des Luys;CC;7 854
+41;200000800;CC Coeur de Sologne;CC;10 337
+41;200018406;CC du Romorantinais et du Monestois;CC;34 602
+41;200030385;CA de Blois ''Agglopolys'';CA;109 704
+41;200040772;CC du Perche et Haut Vendômois;CC;9 278
+41;200055481;CC Beauce Val de Loire;CC;19 970
+41;200072064;CC Val-de-Cher-Controis;CC;48 019
+41;200072072;CA Territoires Vendômois;CA;54 089
+41;244100293;CC des Collines du Perche;CC;5 971
+41;244100780;CC de la Sologne des Etangs;CC;8 773
+41;244100798;CC du Grand Chambord;CC;21 042
+41;244100806;CC de la Sologne des Rivières;CC;10 477
+42;200035202;CC Charlieu-Belmont;CC;24 405
+42;200035731;CA Roannais Agglomération;CA;104 276
+42;200065886;CA Loire Forez Agglomération (LFA);CA;115 780
+42;200065894;CC de Forez-Est;CC;66 443
+42;244200614;CC des Vals d'Aix et Isable;CC;6 179
+42;244200622;CC des Monts du Pilat;CC;15 848
+42;244200630;CC du Pays Entre Loire et Rhône;CC;14 406
+42;244200770;Saint-Étienne Métropole;METRO;413 083
+42;244200820;CC du Pays d'Urfé;CC;5 256
+42;244200895;CC du Pilat Rhodanien;CC;17 597
+43;200073393;CC des Rives du Haut Allier;CC;16 970
+43;200073401;CC Mézenc-Loire-Meygal;CC;11 781
+43;200073419;CA du Puy-en-Velay;CA;85 380
+43;200073427;CC Marches du Velay-Rochebaron;CC;32 250
+43;200085728;CC Brioude Sud Auvergne;CC;17 536
+43;244300307;CC Haut Pays du Velay;CC;8 328
+43;244301016;CC des Sucs;CC;19 181
+43;244301099;CC Auzon Communauté;CC;9 594
+43;244301107;CC du Haut Lignon;CC;8 387
+43;244301123;CC des Pays de Cayres et de Pradelles;CC;5 309
+43;244301131;CC Loire et Semène;CC;20 859
+44;200000438;CC du Pays de Pontchâteau St-Gildas-des-Bois;CC;37 999
+44;200067346;CA Pornic Agglo Pays de Retz;CA;72 000
+44;200067635;CA Clisson Sèvre et Maine Agglo;CA;59 477
+44;200067866;CC Sèvre et Loire;CC;51 480
+44;200071546;CC Sud Retz Atlantique;CC;26 405
+44;200072726;CC Châteaubriant-Derval;CC;46 127
+44;200072734;CC Estuaire et Sillon;CC;42 330
+44;244400404;Nantes Métropole;METRO;700 869
+44;244400438;CC Grand Lieu Communauté;CC;43 245
+44;244400453;CC du Pays de Blain;CC;17 352
+44;244400503;CC d'Erdre et Gesvres;CC;70 330
+44;244400537;CC de Nozay;CC;16 860
+44;244400552;CC du Pays d'Ancenis;CC;71 962
+44;244400586;CC du Sud Estuaire;CC;32 110
+44;244400610;CA de la Presqu'île de Guérande Atlantique (Cap Atlantique);CA;80 589
+44;244400644;CA de la Région Nazairienne et de l'Estuaire (CARENE);CA;136 140
+45;200005932;CC des Portes de Sologne;CC;15 945
+45;200035764;CC de la Beauce Loirétaine;CC;17 406
+45;200066280;CC du Pithiverais;CC;29 365
+45;200067668;CC de la Cléry, du Betz et de l'Ouanne;CC;20 406
+45;200067676;CC Canaux et Forêts en Gâtinais;CC;28 062
+45;200068278;CC Berry Loire Puisaye;CC;17 602
+45;200070100;CC du Val de Sully;CC;24 474
+45;200070183;CC des Terres du Val de Loire;CC;51 617
+45;200071850;CC du Pithiverais-Gâtinais;CC;26 126
+45;244500203;CA Montargoise et Rives du Loing (AME);CA;65 009
+45;244500211;CC Giennoises;CC;24 749
+45;244500419;CC des Quatre Vallées;CC;17 559
+45;244500427;CC des Loges;CC;44 454
+45;244500468;Orléans Métropole;METRO;303 177
+45;244500484;CC de la Forêt;CC;18 046
+45;244500542;CC de la Plaine du Nord Loiret;CC;6 791
+46;200023737;CA du Grand Cahors;CA;43 786
+46;200035327;CC Cazals-Salviac;CC;5 579
+46;200039519;CC du Quercy Blanc;CC;7 914
+46;200066371;CC Causses et Vallée de la Dordogne;CC;46 805
+46;200067361;CC Grand-Figeac;CC;45 567
+46;244600433;CC de la Vallée du Lot et du Vignoble;CC;14 849
+46;244600482;CC Quercy - Bouriane;CC;10 686
+46;244600532;CC du Pays de Lalbenque-Limogne;CC;9 220
+46;244600573;CC du Causse de Labastide Murat;CC;3 954
+47;200023307;CA du Grand Villeneuvois;CA;49 595
+47;200030674;CA Val de Garonne Agglomération;CA;62 235
+47;200036523;CC des Bastides en Haut Agenais Périgord;CC;17 299
+47;200068922;CC du Confluent et des Coteaux de Prayssas;CC;18 111
+47;200068930;CC Fumel Vallée du Lot;CC;24 970
+47;200068948;CC Albret Communauté;CC;26 732
+47;200096956;CA Agglomération d'Agen;CA;105 018
+47;244700449;CC du Pays de Duras;CC;5 794
+47;244700464;CC du Pays de Lauzun;CC;10 689
+47;244701355;CC des Coteaux et Landes de Gascogne;CC;12 928
+47;244701405;CC Lot et Tolzac;CC;7 563
+48;200006930;CC du Haut Allier Margeride;CC;5 397
+48;200069102;CC Randon - Margeride;CC;5 348
+48;200069128;CC Mont Lozère;CC;5 993
+48;200069136;CC des Cévennes au Mont Lozère;CC;5 274
+48;200069144;CC des Hautes Terres de l'Aubrac;CC;5 118
+48;200069151;CC Gorges Causses Cévennes;CC;7 194
+48;200069185;CC des Terres d'Apcher-Margeride-Aubrac;CC;11 132
+48;200069268;CC Aubrac Lot Causses Tarn;CC;8 096
+48;244800405;CC Coeur de Lozère;CC;16 706
+48;244800470;CC du Gévaudan;CC;10 065
+49;200060010;CA Mauges Communauté;CA;126 539
+49;200068955;CC Anjou Loir et Sarthe;CC;28 861
+49;200071553;CC Loire Layon Aubance;CC;58 549
+49;200071678;CA Cholet Agglomération;CA;108 379
+49;200071868;CC des Vallées du Haut-Anjou;CC;37 296
+49;200071876;CA Saumur Val de Loire;CA;100 451
+49;244900015;CU Angers Loire Métropole;CU;319 672
+49;244900809;CC Anjou Bleu Communauté;CC;35 667
+49;244900882;CC Baugeois Vallée;CC;35 221
+50;200042604;CC de Granville, Terre et Mer;CC;47 106
+50;200042729;CC de la Baie du Cotentin;CC;23 311
+50;200043354;CC de Villedieu Intercom;CC;16 121
+50;200066389;CA Saint-Lô Agglo;CA;79 376
+50;200067023;CC Coutances Mer et Bocage;CC;49 749
+50;200067031;CC Côte Ouest Centre Manche;CC;22 768
+50;200067205;CA du Cotentin;CA;183 659
+50;200069425;CA Mont-Saint-Michel-Normandie;CA;90 077
+51;200034718;CC de Vitry, Champagne et Der;CC;23 417
+51;200042620;CC de la Région de Suippes;CC;8 045
+51;200042703;CC de l'Argonne Champenoise;CC;11 898
+51;200042992;CC Perthois-Bocage et Der;CC;5 640
+51;200043438;CC de la Moivre à la Coole;CC;9 833
+51;200066835;CC de Sézanne-Sud Ouest Marnais;CC;21 166
+51;200066850;CC des Paysages de la Champagne;CC;20 969
+51;200066876;CA de Châlons-en-Champagne;CA;79 509
+51;200067213;CU du Grand Reims;CU;303 136
+51;200067379;CC Côtes de Champagne et Val de Saulx;CC;11 516
+51;200067684;CA Epernay, Coteaux et Plaine de Champagne;CA;47 927
+51;245100615;CC de la Grande Vallée de la Marne;CC;14 349
+51;245100888;CC de la Brie Champenoise;CC;7 622
+51;245100979;CC du Sud Marnais;CC;5 939
+52;200027308;CC d'Auberive Vingeanne et Montsaugeonnais;CC;8 202
+52;200044253;CC du Bassin de Joinville en Champagne;CC;12 373
+52;200068658;CA de Chaumont;CA;44 654
+52;200068666;CA du Grand Saint-Dizier Der et Vallées;CA;56 492
+52;200069664;CC Meuse Rognon;CC;10 448
+52;200070332;CC des Savoir-Faire;CC;15 335
+52;200072999;CC du Grand Langres;CC;21 164
+52;245200597;CC des Trois Forêts;CC;7 374
+53;200033298;CC des Coëvrons;CC;27 104
+53;200042182;CC du Mont des Avaloirs;CC;15 773
+53;200048551;CC du Pays de Craon;CC;29 292
+53;200055887;CC Mayenne Communauté;CC;37 954
+53;200083392;CA Laval Agglomération;CA;119 115
+53;245300223;CC du Pays de Meslay-Grez;CC;14 136
+53;245300355;CC de l'Ernée;CC;20 751
+53;245300389;CC du Bocage Mayennais;CC;18 607
+53;245300447;CC du Pays de Château-Gontier;CC;30 975
+54;200035772;CC du Pays du Saintois;CC;14 499
+54;200041515;CC du Bassin de Pont-à-Mousson;CC;40 590
+54;200043693;CC Terre Lorraine du Longuyonnais;CC;15 700
+54;200067643;CC Meurthe Mortagne Moselle;CC;16 702
+54;200069433;CC de Vezouze en Piémont;CC;11 578
+54;200070290;CC Coeur du Pays Haut;CC;23 971
+54;200070324;CC du Territoire de Lunéville à Baccarat;CC;41 502
+54;200070563;CC Terres Touloises;CC;45 116
+54;200070589;CC de Seille et Grand Couronné;CC;19 264
+54;200070738;CC Mad et Moselle;CC;19 450
+54;200070845;CC Orne Lorraine Confluences;CC;53 877
+54;245400171;CC Moselle et Madon;CC;28 523
+54;245400189;CC des Pays du Sel et du Vermois;CC;28 956
+54;245400262;CA Agglomération du Grand Longwy;CA;65 042
+54;245400510;CC du Pays de Colombey et du Sud Toulois;CC;11 392
+54;245400601;CC du Bassin de Pompey;CC;39 828
+54;245400676;Métropole du Grand Nancy;METRO;260 941
+54;245400759;CC du Pays du Sanon;CC;5 889
+55;200033025;CA de Bar-le-Duc - Sud Meuse;CA;34 367
+55;200034874;CC Côtes de Meuse Woëvre;CC;6 184
+55;200049187;CA du Grand Verdun;CA;28 519
+55;200066108;CC des Portes de Meuse;CC;16 281
+55;200066116;CC Argonne-Meuse;CC;6 975
+55;200066132;CC du Pays de Stenay et du Val Dunois;CC;9 594
+55;200066140;CC de l'Aire à l'Argonne;CC;6 498
+55;200066157;CC de Commercy - Void - Vaucouleurs;CC;22 453
+55;200066165;CC Val de Meuse - Voie Sacrée;CC;8 995
+55;200066173;CC de Damvillers Spincourt;CC;8 251
+55;245500327;CC du Sammiellois;CC;8 248
+55;245501176;CC du Territoire de Fresnes-en-Woëvre;CC;4 896
+55;245501184;CC du Pays de Revigny-sur-Ornain;CC;6 837
+55;245501242;CC du Pays d'Étain;CC;7 501
+55;245501259;CC du Pays de Montmédy;CC;7 035
+56;200027027;CC Arc Sud Bretagne;CC;30 124
+56;200042174;CA Lorient Agglomération;CA;214 259
+56;200043123;CC Auray Quiberon Terre Atlantique;CC;93 712
+56;200066777;CC Ploërmel Communauté;CC;44 632
+56;200066785;CC de l'Oust à Brocéliande;CC;41 428
+56;200067932;CA Golfe du Morbihan - Vannes Agglomération;CA;185 726
+56;200096675;CC Baud Communauté;CC;17 051
+56;200096683;CC Centre Morbihan Communauté;CC;28 099
+56;245600440;CC Blavet Bellevue Océan;CC;19 228
+56;245600465;CC de Belle Ile en Mer;CC;5 740
+56;245614383;CC Questembert Communauté;CC;25 403
+56;245614417;CC Roi Morvan Communauté;CC;26 105
+56;245614433;CC Pontivy Communauté;CC;47 878
+57;200039865;Metz Métropole;METRO;236 399
+57;200039907;CC du Sud Messin;CC;17 555
+57;200039949;CC Rives de Moselle;CC;53 822
+57;200067486;CC Bouzonvillois-Trois Frontières;CC;24 461
+57;200067502;CA Saint-Avold Synergie;CA;52 349
+57;200067650;CC Houve - Pays Boulageois;CC;22 966
+57;200067957;CC Haut Chemin - Pays de Pange;CC;19 902
+57;200068146;CC Sarrebourg Moselle Sud;CC;45 969
+57;200069441;CC du Pays de Bitche;CC;33 917
+57;200070746;CA Sarreguemines Confluences;CA;64 068
+57;245700133;CC du District Urbain de Faulquemont (DUF);CC;24 164
+57;245700372;CA de Forbach Porte de France;CA;75 315
+57;245700398;CC de Freyming-Merlebach;CC;31 723
+57;245700695;CC de Cattenom et Environs;CC;28 474
+57;245700950;CC du Pays de Phalsbourg;CC;17 512
+57;245701164;CC du Warndt;CC;17 471
+57;245701206;CC du Saulnois;CC;28 817
+57;245701271;CC du Pays Orne Moselle;CC;53 269
+57;245701354;CC de l'Arc Mosellan;CC;36 834
+57;245701404;CC du Pays Haut Val d'Alzette;CC;29 940
+57;992367730;CA Thionville Fensch Agglomération;CA;157 585
+58;200067429;CC Haut Nivernais - Val d'Yonne;CC;12 311
+58;200067692;CC Tannay-Brinon-Corbigny;CC;9 622
+58;200067700;CC Sud Nivernais;CC;19 985
+58;200067882;CC Bazois Loire Morvan;CC;15 171
+58;200067890;CC Morvan Sommets et Grands Lacs;CC;12 436
+58;200067908;CC Amognes Coeur du Nivernais;CC;8 655
+58;200067916;CC Coeur de Loire;CC;25 741
+58;200068088;CC Les Bertranges;CC;19 812
+58;245801063;CC Loire et Allier;CC;5 104
+58;245804406;CA de Nevers;CA;69 017
+58;245804497;CC du Nivernais Bourbonnais;CC;5 223
+59;200030633;CA du Caudrésis et du Catésis;CA;63 640
+59;200040947;CA Coeur de Flandre;CA;104 550
+59;200040954;CC des Hauts de Flandre;CC;54 512
+59;200041960;CC Pévèle-Carembault;CC;101 976
+59;200042190;CA de la Porte du Hainaut;CA;159 821
+59;200043263;CC Coeur de l'Avesnois;CC;29 049
+59;200043321;CC du Pays de Mormal;CC;48 922
+59;200043396;CA Maubeuge Val de Sambre;CA;123 534
+59;200043404;CC du Sud Avesnois;CC;24 603
+59;200044618;CA Douaisis Agglo;CA;151 132
+59;200068500;CA de Cambrai;CA;81 481
+59;200093201;Métropole Européenne de Lille;METRO;1 206 167
+59;245900428;CU de Dunkerque;CU;194 080
+59;245900758;CC Flandre Lys;CC;40 902
+59;245901038;CC du Pays Solesmois;CC;14 766
+59;245901152;CA Coeur d'Ostrevent;CA;70 568
+59;245901160;CA Valenciennes Métropole;CA;193 523
+60;200066975;CC Senlis Sud Oise;CC;25 858
+60;200067965;CA de la Région de Compiègne et de la Basse Automne;CA;86 004
+60;200067973;CC Thelloise;CC;62 905
+60;200067999;CA du Beauvaisis;CA;105 423
+60;200068005;CC de l'Oise Picarde;CC;21 280
+60;200068047;CA Creil Sud Oise;CA;91 190
+60;246000129;CC du Liancourtois;CC;24 156
+60;246000376;CC du Clermontois;CC;38 313
+60;246000566;CC du Plateau Picard;CC;30 020
+60;246000582;CC des Sablons;CC;38 888
+60;246000707;CC du Vexin-Thelle;CC;20 839
+60;246000749;CC des Lisières de l'Oise;CC;16 405
+60;246000756;CC du Pays Noyonnais;CC;32 545
+60;246000764;CC de l'Aire Cantilienne;CC;45 952
+60;246000772;CC des Deux Vallées;CC;23 063
+60;246000848;CC de la Picardie Verte;CC;32 621
+60;246000855;CC du Pays des Sources;CC;22 568
+60;246000871;CC du Pays de Valois;CC;56 638
+60;246000897;CC de la Plaine d'Estrées;CC;18 576
+60;246000913;CC du Pays de Bray;CC;18 421
+60;246000921;CC des Pays d'Oise et d'Halatte;CC;35 092
+61;200035103;CC de la Vallée de la Haute Sarthe;CC;7 690
+61;200035111;CC des Sources de l'Orne;CC;12 547
+61;200035814;CA Flers Agglo;CA;53 782
+61;200036069;CC du Pays de Mortagne-au-Perche;CC;13 984
+61;200068435;CC Coeur du Perche;CC;11 183
+61;200068443;CC Andaine - Passais;CC;13 035
+61;200068450;CC Terres d'Argentan Interco;CC;34 242
+61;200068468;CC des Pays de L'Aigle;CC;25 408
+61;200068856;CC des Hauts du Perche;CC;7 979
+61;200069458;CC des Vallées d'Auge et du Merlerault;CC;14 446
+61;200071504;CC des Collines du Perche Normand;CC;12 115
+61;200071520;CC Domfront Tinchebray Interco;CC;16 067
+61;200071652;CC du Pays Fertois et du Bocage Carrougien;CC;4 897
+61;246100390;CC du Val d'Orne;CC;5 896
+61;246100663;CU d'Alençon;CU;56 863
+62;200018083;CC de Desvres-Samer;CC;23 790
+62;200033579;CU d'Arras;CU;111 970
+62;200035442;CC du Sud Artois;CC;27 650
+62;200044030;CC des 7 Vallées;CC;30 069
+62;200044048;CC Osartis Marquion;CC;43 548
+62;200069029;CA des Deux Baies en Montreuillois;CA;66 564
+62;200069037;CA du Pays de Saint-Omer;CA;106 830
+62;200069235;CC du Haut Pays du Montreuillois;CC;16 554
+62;200069482;CC des Campagnes de l'Artois;CC;34 284
+62;200069672;CC du Ternois;CC;37 520
+62;200072460;CA de Béthune-Bruay, Artois-Lys Romane;CA;278 237
+62;200072478;CC Pays d'Opale;CC;25 513
+62;200090751;CA Grand Calais Terres et Mers;CA;100 233
+62;246200299;CA d'Hénin-Carvin;CA;126 667
+62;246200364;CA de Lens - Liévin;CA;243 876
+62;246200380;CC de la Terre des Deux Caps;CC;22 713
+62;246200729;CA du Boulonnais;CA;113 079
+62;246200844;CC de la Région d'Audruicq;CC;28 568
+62;246201016;CC du Pays de Lumbres;CC;24 556
+63;200067627;CC Billom Communauté;CC;26 745
+63;200069169;CC Dômes Sancy Artense;CC;13 088
+63;200069177;CC Mond'Arverne Communauté;CC;42 111
+63;200070407;CA Agglo Pays d'Issoire;CA;58 127
+63;200070712;CC Thiers Dore et Montagne;CC;37 659
+63;200070753;CA Riom Limagne et Volcans;CA;70 621
+63;200070761;CC Ambert Livradois Forez;CC;28 382
+63;200071199;CC Plaine Limagne;CC;21 804
+63;200071215;CC Chavanon Combrailles et Volcans;CC;12 994
+63;200072080;CC du Pays de Saint-Eloy;CC;15 917
+63;200072098;CC Combrailles Sioule et Morge;CC;20 340
+63;246300701;Clermont Auvergne Métropole;METRO;300 969
+63;246300966;CC du Massif du Sancy;CC;9 758
+63;246301097;CC Entre Dore et Allier;CC;20 141
+64;200039204;CC de Lacq-Orthez;CC;54 709
+64;200067106;CA du Pays Basque;CA;338 563
+64;200067239;CC des Luys en Béarn;CC;30 429
+64;200067254;CA Pau Béarn Pyrénées;CA;173 034
+64;200067262;CC du Haut Béarn;CC;33 228
+64;200067288;CC du Béarn des Gaves;CC;18 138
+64;200067296;CC du Nord Est Béarn;CC;35 928
+64;246400337;CC de la Vallée d'Ossau;CC;9 937
+64;246401756;CC Pays de Nay;CC;29 994
+65;200069300;CA Tarbes-Lourdes-Pyrénées;CA;130 311
+65;200070787;CC du Plateau de Lannemezan;CC;18 145
+65;200070795;CC du Pays de Trie et du Magnoac;CC;7 085
+65;200070803;CC des Coteaux du Val d'Arros;CC;11 345
+65;200070811;CC Pyrénées Vallées des Gaves;CC;15 521
+65;200070829;CC Neste Barousse;CC;7 554
+65;200072106;CC Adour Madiran;CC;24 631
+65;246500482;CC de la Haute-Bigorre;CC;16 981
+65;246500573;CC Aure Louron;CC;7 154
+66;200027183;CU Perpignan Méditerranée Métropole;CU;283 665
+66;200043602;CC des Albères, de la Côte Vermeille et de l'Illibéris;CC;58 982
+66;200049211;CC Conflent-Canigó;CC;21 624
+66;200070365;CC Corbières Salanque Méditerranée;CC;26 165
+66;246600282;CC Sud-Roussillon;CC;25 910
+66;246600373;CC du Vallespir;CC;21 141
+66;246600399;CC Pyrénées Cerdagne;CC;9 086
+66;246600415;CC Roussillon-Conflent;CC;17 593
+66;246600423;CC Agly Fenouillèdes;CC;6 362
+66;246600449;CC des Aspres;CC;23 589
+66;246600464;CC Pyrénées Catalanes;CC;6 318
+66;246600548;CC du Haut Vallespir;CC;9 969
+67;200013050;CC Sauer-Pechelbronn;CC;17 685
+67;200030526;CC du Ried de Marckolsheim;CC;20 938
+67;200034270;CC du Pays de Barr;CC;24 391
+67;200034635;CC du Kochersberg;CC;27 309
+67;200040178;CC de l'Outre-Forêt;CC;16 476
+67;200041283;CC de la Plaine du Rhin;CC;18 576
+67;200041325;CC du Pays Rhénan;CC;37 828
+67;200067783;CC de Hanau-La Petite Pierre;CC;26 466
+67;200067841;CC de l'Alsace Bossue;CC;24 234
+67;200067874;CA de Haguenau;CA;101 279
+67;200067924;CC du Canton d'Erstein;CC;49 795
+67;200068112;CC du Pays de Saverne;CC;36 394
+67;200068864;CC de la Mossig et du Vignoble;CC;25 208
+67;246700306;CC de la Vallée de la Bruche;CC;20 982
+67;246700488;Eurométropole de Strasbourg;METRO;527 727
+67;246700744;CC des Portes de Rosheim;CC;18 788
+67;246700777;CC de la Vallée de Villé;CC;11 058
+67;246700843;CC de la Basse-Zorn;CC;17 979
+67;246700926;CC du Pays de Wissembourg;CC;16 091
+67;246700959;CC du Pays de la Zorn;CC;16 403
+67;246700967;CC de Sélestat;CC;38 024
+67;246701064;CC de la Région de Molsheim-Mutzig;CC;41 470
+67;246701080;CC du Pays de Sainte-Odile;CC;20 470
+67;246701098;CC du Pays de Niederbronn-les-Bains;CC;23 567
+68;200036465;CC de Thann-Cernay;CC;38 559
+68;200066009;CA Mulhouse Alsace Agglomération;CA;278 063
+68;200066025;CC Alsace Rhin Brisach;CC;34 687
+68;200066033;CC Sud Alsace Largue;CC;22 852
+68;200066041;CC Sundgau;CC;48 919
+68;200066058;CA Saint-Louis Agglomération;CA;86 840
+68;246800205;CC de la Vallée de Saint-Amarin;CC;12 014
+68;246800395;CC du Val d'Argent;CC;9 215
+68;246800445;CC du Centre du Haut-Rhin;CC;16 579
+68;246800494;CC du Pays de Rouffach, Vignobles et Châteaux;CC;13 440
+68;246800551;CC de la Vallée de Kaysersberg;CC;16 366
+68;246800569;CC de la Région de Guebwiller;CC;39 078
+68;246800577;CC du Pays de Ribeauvillé;CC;18 501
+68;246800585;CC de la Vallée de Munster;CC;16 566
+68;246800676;CC de la Vallée de la Doller et du Soultzbach;CC;16 261
+68;246800726;CA Colmar Agglomération;CA;115 593
+69;200040566;CA de l'Ouest Rhodanien;CA;52 183
+69;200040574;CC Beaujolais Pierres Dorées;CC;58 079
+69;200040590;CA Villefranche Beaujolais Saône;CA;75 504
+69;200046977;Métropole de Lyon;METRO;1 451 961
+69;200066587;CC des Monts du Lyonnais;CC;36 451
+69;200067817;CC Saône-Beaujolais;CC;47 216
+69;246900575;CC de l'Est Lyonnais (CCEL);CC;43 307
+69;246900625;CC du Pays de l'Arbresle (CCPA);CC;40 245
+69;246900724;CC des Vallons du Lyonnais (CCVL);CC;33 182
+69;246900740;CC du Pays Mornantais (COPAMO);CC;30 596
+69;246900757;CC de la Vallée du Garon (CCVG);CC;33 249
+69;246900765;CC du Pays de l'Ozon;CC;28 286
+70;200036150;CC des Hauts du Val de Saône;CC;8 562
+70;200036549;CC Val de Gray;CC;20 705
+70;200041721;CC de la Haute Comté;CC;17 126
+70;200041853;CC du Pays de Montbozon et du Chanois;CC;6 899
+70;200041861;CC du Triangle Vert;CC;11 177
+70;200041879;CC Terres de Saône;CC;13 280
+70;200041887;CC du Val Marnaysien;CC;14 967
+70;247000011;CA de Vesoul;CA;33 166
+70;247000367;CC des Combes;CC;7 679
+70;247000623;CC des Quatre Rivières;CC;9 640
+70;247000664;CC du Pays de Lure;CC;19 522
+70;247000698;CC des Monts de Gy;CC;6 322
+70;247000706;CC du Pays Riolais;CC;13 536
+70;247000714;CC du Pays de Villersexel;CC;7 907
+70;247000722;CC du Pays d'Héricourt;CC;21 448
+70;247000755;CC du Pays de Luxeuil;CC;15 235
+70;247000821;CC Rahin et Chérimont;CC;11 775
+70;247000854;CC des 1000 étangs;CC;8 550
+71;200040038;CC Saône Doubs Bresse;CC;12 302
+71;200040293;CC du Clunisois;CC;14 471
+71;200042414;CC Bresse Revermont 71;CC;10 253
+71;200069698;CC Mâconnais - Tournugeois;CC;16 445
+71;200070308;CA Mâconnais Beaujolais Agglomération;CA;82 343
+71;200070316;CC Entre Arroux, Loire et Somme;CC;22 016
+71;200070530;CC du Grand Autunois Morvan;CC;36 668
+71;200070548;CC Brionnais Sud Bourgogne;CC;15 304
+71;200071538;CC Terres de Bresse;CC;23 371
+71;200071579;CC Bresse Louhannaise Intercom';CC;28 920
+71;200071645;CC Saint Cyr Mère Boitier entre Charolais et Mâconnais;CC;8 261
+71;200071884;CC Le Grand Charolais;CC;40 784
+71;247100290;CU Le Creusot Montceau-les-Mines;CU;91 868
+71;247100589;CA Le Grand Chalon;CA;117 552
+71;247100639;CC de Marcigny;CC;6 178
+71;247100647;CC Bresse Nord Intercom';CC;6 688
+71;247103765;CC Entre Saône et Grosne;CC;11 408
+71;247103864;CC de Semur en Brionnais;CC;5 303
+71;247104094;CC Sud Côte Chalonnaise;CC;11 837
+72;200040475;CC LBN Communauté;CC;18 148
+72;200068963;CC Maine Coeur de Sarthe;CC;22 273
+72;200070373;CC Loir-Lucé-Bercé;CC;23 658
+72;200072676;CC Maine Saosnois;CC;27 885
+72;200072684;CC Le Gesnois Bilurien;CC;30 676
+72;200072692;CC des Vallées de la Braye et de l'Anille;CC;15 101
+72;200072700;CC Haute Sarthe Alpes Mancelles;CC;22 901
+72;200072718;CC de la Champagne Conlinoise et du Pays de Sillé;CC;18 336
+72;200073112;CC Sud Sarthe;CC;22 898
+72;247200090;CC du Pays Sabolien;CC;29 319
+72;247200132;CU Le Mans Métropole;CU;214 788
+72;247200348;CC du Pays Fléchois;CC;28 100
+72;247200421;CC du Sud Est Manceau;CC;18 488
+72;247200447;CC Orée de Bercé - Belinois;CC;19 917
+72;247200629;CC du Val de Sarthe;CC;30 870
+72;247200686;CC du Perche Emeraude;CC;28 891
+73;200023299;CC Coeur de Tarentaise;CC;9 613
+73;200040798;CC Val Vanoise;CC;9 328
+73;200041010;CC Coeur de Savoie;CC;38 856
+73;200068674;CA Grand Lac;CA;82 151
+73;200068997;CA Arlysère;CA;63 920
+73;200069110;CA du Grand Chambéry;CA;146 612
+73;200070340;CC Haute Maurienne Vanoise;CC;8 671
+73;200070464;CC Coeur de Maurienne Arvan;CC;14 767
+73;247300015;CC des Vallées d'Aigueblanche;CC;7 205
+73;247300254;CC de Haute-Tarentaise;CC;16 091
+73;247300262;CC de Yenne;CC;7 560
+73;247300361;CC du Canton de La Chambre;CC;7 584
+73;247300452;CC Maurienne Galibier;CC;5 652
+73;247300528;CC Val Guiers;CC;12 823
+73;247300668;CC du Lac d'Aiguebelette (CCLA);CC;6 541
+73;247300676;CC Porte de Maurienne;CC;7 340
+73;247300817;CC Les Versants d'Aime;CC;9 927
+74;200000172;CC Faucigny - Glières;CC;29 376
+74;200011773;CA Annemasse-Les Voirons-Agglomération;CA;98 343
+74;200023372;CC de la Vallée de Chamonix-Mont-Blanc;CC;14 288
+74;200033116;CC Cluses-Arve et Montagnes;CC;48 457
+74;200034098;CC des Montagnes du Giffre;CC;12 577
+74;200034882;CC Pays du Mont-Blanc;CC;46 656
+74;200066793;CA du Grand Annecy;CA;218 833
+74;200067551;CA Thonon Agglomération;CA;98 527
+74;200070852;CC Usses et Rhône;CC;22 425
+74;200071967;CC Pays d'Evian Vallée d'Abondance;CC;44 640
+74;247400047;CC de la Vallée Verte;CC;8 770
+74;247400112;CC du Pays de Cruseilles;CC;18 315
+74;247400567;CC Fier et Usses;CC;17 076
+74;247400583;CC Arve et Salève;CC;21 541
+74;247400617;CC des Vallées de Thônes;CC;19 436
+74;247400666;CC des Quatre Rivières;CC;20 805
+74;247400682;CC du Haut Chablais;CC;13 151
+74;247400690;CC du Genevois;CC;50 728
+74;247400724;CC du Pays Rochois;CC;30 703
+74;247400740;CC Rumilly Terre de Savoie;CC;34 846
+74;247400773;CC des Sources du Lac d'Annecy;CC;15 814
+75;200054781;Métropole du Grand Paris;METRO;7 190 408
+76;200010700;CA Caux Seine Agglo;CA;79 337
+76;200023414;Métropole Rouen Normandie;METRO;509 949
+76;200068534;CC Terroir de Caux;CC;38 483
+76;200069722;CC Interrégionale Aumale - Blangy-sur-Bresle;CC;21 518
+76;200069730;CC des Quatre Rivières en Bray;CC;29 195
+76;200069821;CA Fécamp Caux Littoral Agglomération;CA;38 155
+76;200069839;CC de la Côte d'Albâtre;CC;28 005
+76;200069847;CC Plateau de Caux;CC;21 661
+76;200070068;CC Bray-Eawy;CC;25 549
+76;200070449;CC Inter-Caux-Vexin;CC;57 038
+76;200084952;CU Le Havre Seine Métropole;CU;270 812
+76;247600505;CC Campagne-de-Caux;CC;15 294
+76;247600588;CC des Villes Soeurs;CC;36 224
+76;247600604;CC de Londinières;CC;5 246
+76;247600620;CC Yvetot Normandie;CC;27 066
+76;247600646;CC Caux - Austreberthe;CC;25 224
+76;247600729;CC Falaises du Talou;CC;23 951
+76;247600786;CA de la Région Dieppoise;CA;47 215
+77;200023125;CC Les Portes Briardes Entre Villes et Forêts;CC;46 980
+77;200023240;CC Pays de Nemours;CC;30 031
+77;200023919;CC Gâtinais Val de Loing;CC;18 785
+77;200033090;CC Plaines et Monts de France;CC;26 061
+77;200037133;CC du Provinois;CC;35 167
+77;200040251;CC Bassée-Montois;CC;23 458
+77;200057958;CA Paris - Vallée de la Marne;CA;235 837
+77;200070779;CC Brie des Rivières et Châteaux;CC;41 530
+77;200072130;CA du Pays de Meaux;CA;112 384
+77;200072346;CA du Pays de Fontainebleau;CA;70 772
+77;200072544;CC des Deux Morin;CC;26 858
+77;200072874;CC Val Briard;CC;30 001
+77;200090504;CA Coulommiers Pays de Brie;CA;98 215
+77;247700032;CC Moret Seine et Loing;CC;40 290
+77;247700057;CA Melun Val de Seine;CA;143 807
+77;247700065;CC du Pays de l'Ourcq;CC;17 779
+77;247700107;CC Pays de Montereau;CC;46 174
+77;247700339;CA Val d'Europe Agglomération;CA;55 006
+77;247700594;CA Marne et Gondoire;CA;113 411
+77;247700644;CC l'Orée de la Brie;CC;29 519
+77;247700701;CC Brie Nangissienne;CC;28 710
+78;200033173;CC de la Haute Vallée de Chevreuse;CC;26 014
+78;200034130;CC Gally Mauldre;CC;23 482
+78;200058519;CA Saint Germain Boucles de Seine;CA;353 616
+78;200058782;CA de Saint Quentin en Yvelines;CA;237 581
+78;200059889;CU Grand Paris Seine et Oise;CU;442 427
+78;200071074;CC Les Portes de l'Ile de France;CC;23 750
+78;200073344;CA Rambouillet Territoires;CA;82 538
+78;247800550;CC du Pays Houdanais (CCPH);CC;31 070
+78;247800584;CA Versailles Grand Parc (CAVGP);CA;275 722
+78;247800618;CC Coeur d'Yvelines;CC;53 310
+79;200040244;CA du Bocage Bressuirais;CA;76 585
+79;200041317;CA du Niortais;CA;126 926
+79;200041333;CC de Parthenay-Gâtine;CC;37 995
+79;200041416;CC Airvaudais-Val du Thouet;CC;7 120
+79;200041994;CC Haut Val de Sèvre;CC;31 456
+79;200069748;CC Val de Gâtine;CC;21 999
+79;200069755;CC Mellois en Poitou;CC;47 632
+79;247900798;CC du Thouarsais;CC;36 058
+80;200037059;CC de la Haute Somme (Combles - Péronne - Roisel);CC;26 885
+80;200070928;CC Terre de Picardie;CC;18 179
+80;200070936;CC Ponthieu-Marquenterre;CC;33 127
+80;200070944;CC du Vimeu;CC;22 544
+80;200070951;CC du Territoire Nord Picardie;CC;31 258
+80;200070969;CC Avre Luce Noye;CC;21 875
+80;200070977;CC du Grand Roye;CC;25 673
+80;200070985;CC de l'Est de la Somme;CC;19 918
+80;200070993;CA de la Baie de Somme;CA;48 436
+80;200071181;CC Somme Sud-Ouest;CC;38 507
+80;200071223;CC Nièvre et Somme;CC;28 007
+80;248000499;CC du Val de Somme;CC;26 643
+80;248000531;CA Amiens Métropole;CA;187 802
+80;248000747;CC du Pays du Coquelicot;CC;28 128
+81;200034023;CC Tarn-Agout;CC;31 096
+81;200034031;CC des Monts d'Alban et du Villefranchois;CC;6 459
+81;200034049;CC Centre Tarn;CC;11 520
+81;200034056;CC du Lautrécois et du Pays d'Agout;CC;14 663
+81;200034064;CC du Cordais et du Causse;CC;5 559
+81;200040905;CC Carmausin-Ségala;CC;30 752
+81;200066124;CA Gaillac-Graulhet;CA;78 078
+81;200066553;CC du Haut-Languedoc;CC;8 074
+81;200066561;CC Sidobre Vals et Plateaux;CC;12 709
+81;248100158;CC du Sor et de l'Agout;CC;23 938
+81;248100430;CA de Castres Mazamet;CA;81 088
+81;248100497;CC Val 81;CC;5 671
+81;248100737;CA de l'Albigeois (C2A);CA;87 148
+81;248100745;CC Thoré Montagne Noire;CC;5 109
+82;200040418;CC du Pays de Serres en Quercy;CC;8 530
+82;200066322;CC Terres des Confluences;CC;42 953
+82;200066652;CC Grand Sud Tarn-et-Garonne;CC;44 237
+82;200066884;CC Quercy Vert-Aveyron;CC;22 257
+82;200067122;CC du Pays de Lafrançaise;CC;11 591
+82;248200016;CC des Deux Rives;CC;19 473
+82;248200057;CC du Quercy Caussadais;CC;20 988
+82;248200065;CC de la Lomagne Tarn-et-Garonnaise;CC;10 268
+82;248200099;CA Grand Montauban;CA;84 150
+82;248200107;CC Quercy Rouergue et des Gorges de l'Aveyron;CC;7 987
+83;200004802;CC du Pays de Fayence;CC;31 185
+83;200027100;CC Méditerranée Porte des Maures;CC;47 591
+83;200035319;CA Estérel Côte d'Azur Agglomération;CA;125 439
+83;200036077;CC du Golfe de Saint-Tropez;CC;59 140
+83;200040202;CC Provence Verdon;CC;23 541
+83;200040210;CC Lacs et Gorges du Verdon;CC;9 086
+83;200068104;CA de la Provence Verte;CA;107 198
+83;248300394;CA Sud Sainte Baume;CA;67 022
+83;248300410;CC de la Vallée du Gapeau;CC;34 134
+83;248300493;CA Dracénie Provence Verdon Agglomération;CA;117 200
+83;248300543;Métropole Toulon-Provence-Méditerranée;METRO;456 020
+83;248300550;CC Coeur du Var;CC;47 509
+84;200000628;CC Rhône Lez Provence;CC;25 072
+84;200035723;CC Ventoux Sud;CC;9 827
+84;200040442;CA Luberon Monts de Vaucluse;CA;55 925
+84;200040624;CC Pays d'Apt-Luberon;CC;28 858
+84;200040681;CC Enclave des Papes - Pays de Grignan;CC;23 171
+84;248400053;CA Ventoux-Comtat-Venaissin (COVE);CA;74 633
+84;248400160;CC Aygues-Ouvèze en Provence (CCAOP);CC;20 763
+84;248400236;CC Pays d'Orange en Provence;CC;46 711
+84;248400251;CA du Grand Avignon (COGA);CA;203 401
+84;248400285;CC Sud Luberon;CC;26 607
+84;248400293;CA des Sorgues du Comtat;CA;52 286
+84;248400319;CC du Pays des Sorgues et des Monts de Vaucluse;CC;34 952
+84;248400335;CC Vaison Ventoux;CC;17 386
+85;200023778;CA du Pays de Saint-Gilles-Croix-de-Vie;CA;55 258
+85;200070233;CA Terres de Montaigu;CA;52 447
+85;200071165;CA Les Sables d'Olonne Agglomération;CA;61 061
+85;200071629;CC Challans-Gois Communauté;CC;52 481
+85;200071900;CC Vendée Grand Littoral;CC;38 043
+85;200071918;CC du Pays de Saint-Fulgent - Les Essarts;CC;30 072
+85;200071934;CC du Pays de Fontenay-Vendée;CC;37 217
+85;200072882;CC de Vie et Boulogne;CC;47 919
+85;200073260;CC Sud Vendée Littoral;CC;57 229
+85;248500191;CC de l'Ile de Noirmoutier;CC;9 540
+85;248500258;CC Océan Marais de Monts;CC;20 979
+85;248500340;CC Pays de Chantonnay;CC;24 169
+85;248500415;CC du Pays de la Châtaigneraie;CC;15 981
+85;248500464;CC du Pays de Pouzauges;CC;24 039
+85;248500530;CC du Pays des Achards;CC;20 904
+85;248500563;CC Vendée, Sèvre, Autise;CC;16 557
+85;248500589;CA La Roche-sur-Yon - Agglomération;CA;103 252
+85;248500621;CC du Pays des Herbiers;CC;31 542
+85;248500662;CC du Pays de Mortagne;CC;29 192
+86;200043628;CC des Vallées du Clain;CC;27 676
+86;200069763;CC du Haut Poitou;CC;42 816
+86;200069854;CU du Grand Poitiers;CU;202 101
+86;200070035;CC du Civraisien en Poitou;CC;27 393
+86;200070043;CC Vienne et Gartempe;CC;39 616
+86;248600413;CA Grand Châtellerault;CA;84 510
+86;248600447;CC du Pays Loudunais;CC;24 970
+87;200040814;CC Briance Sud Haute Vienne;CC;9 336
+87;200059400;CC Porte Océane du Limousin;CC;26 239
+87;200066512;CC Élan Limousin Avenir Nature;CC;27 746
+87;200066520;CC Ouest Limousin;CC;11 572
+87;200070506;CC Pays de Nexon Monts de Chalus;CC;13 383
+87;200071942;CC Haut Limousin en Marche;CC;22 966
+87;248700189;CC du Pays de Saint Yrieix;CC;12 546
+87;248719262;CC Gartempe - Saint Pardoux;CC;5 214
+87;248719288;CC du Val de Vienne;CC;16 594
+87;248719312;CU Limoges Métropole;CU;210 901
+87;248719338;CC Briance-Combade;CC;5 504
+87;248719353;CC des Portes de Vassivière;CC;5 728
+87;248719361;CC de Noblat;CC;12 053
+88;200005957;CC de la Région de Rambervillers;CC;13 141
+88;200033868;CC des Ballons des Hautes-Vosges;CC;14 682
+88;200042000;CC Bruyères-Vallons des Vosges;CC;15 027
+88;200068369;CC de Mirecourt Dompaire;CC;19 170
+88;200068377;CC de la Porte des Vosges Méridionales;CC;29 772
+88;200068559;CC de l'Ouest Vosgien;CC;23 385
+88;200068682;CC Terre d'Eau;CC;17 626
+88;200068757;CA d'Epinal;CA;113 143
+88;200068773;CC des Vosges côté Sud Ouest;CC;11 810
+88;200071066;CA de Saint-Dié-des-Vosges;CA;74 157
+88;200096634;CC des Hautes Vosges;CC;21 226
+88;200096642;CC Gérardmer Hautes Vosges;CC;14 573
+89;200039642;CC Le Tonnerrois en Bourgogne;CC;15 430
+89;200039709;CC du Serein;CC;7 195
+89;200039758;CC Avallon, Vézelay, Morvan;CC;18 875
+89;200067080;CC Chablis Villages et Terroirs;CC;14 873
+89;200067114;CA de l'Auxerrois;CA;69 894
+89;200067130;CC de Puisaye-Forterre;CC;34 198
+89;200067304;CC Serein et Armance;CC;23 682
+89;248900334;CA du Grand Sénonais;CA;61 007
+89;248900383;CC de l'Agglomération Migennoise;CC;14 322
+89;248900524;CC de l'Aillantais en Bourgogne;CC;10 346
+89;248900664;CC de la Vanne et du Pays d'Othe;CC;8 816
+89;248900748;CC du Gâtinais en Bourgogne;CC;17 816
+89;248900896;CC Yonne Nord;CC;24 809
+89;248900938;CC du Jovinien;CC;21 023
+90;200069052;CA Grand Belfort;CA;103 888
+90;200069060;CC des Vosges du Sud;CC;15 413
+90;249000241;CC du Sud Territoire;CC;23 843
+91;200017846;CA Étampois Sud Essonne;CA;56 837
+91;200056232;CA Communauté Paris-Saclay;CA;330 599
+91;200057859;CA Coeur d'Essonne Agglomération;CA;210 967
+91;200058477;CA Val d'Yerres Val de Seine;CA;179 550
+91;200059228;CA Grand Paris Sud Seine Essonne Sénart;CA;367 505
+91;249100074;CC du Pays de Limours (CCPL);CC;28 128
+91;249100157;CC des 2 Vallées;CC;19 101
+91;249100546;CC du Val d'Essonne (CCVE);CC;65 322
+91;249100553;CC Entre Juine et Renarde (CCEJR);CC;28 456
+91;249100595;CC le Dourdannais en Hurepoix (CCDH);CC;27 477
+95;200035970;CC Vexin Centre;CC;25 701
+95;200055655;CA Roissy Pays de France;CA;369 572
+95;200056380;CA Plaine Vallée;CA;188 593
+95;200058485;CA Val Parisis;CA;293 108
+95;200073013;CC Carnelle Pays-de-France;CC;34 247
+95;249500109;CA de Cergy-Pontoise;CA;222 099
+95;249500430;CC Sausseron Impressionnistes;CC;19 354
+95;249500455;CC de la Vallée de l'Oise et des Trois Forêts;CC;40 330
+95;249500489;CC du Haut Val d'Oise;CC;41 587
+95;249500513;CC du Vexin-Val de Seine;CC;16 761
+971;200018653;CA CAP Excellence;CA;97 888
+971;200041507;CA La Riviéra du Levant;CA;67 606
+971;200044691;CA du Nord Grande Terre;CA;58 109
+971;249710047;CC de Marie-Galante;CC;10 483
+971;249710062;CA du Nord Basse-Terre;CA;78 928
+971;249710070;CA Grand Sud Caraïbe;CA;75 479
+972;200041788;CA du Pays Nord Martinique;CA;96 119
+972;249720053;CA de l'Espace Sud de la Martinique;CA;116 235
+972;249720061;CA du Centre de la Martinique;CA;151 994
+973;200027548;CC des Savanes;CC;29 651
+973;249730037;CC de l'Ouest Guyanais;CC;102 407
+973;249730045;CA du Centre Littoral;CA;154 894
+973;249730052;CC de l'Est Guyanais;CC;9 101
+974;249740077;CA CIVIS (Communauté Intercommunale des Villes Solidaires);CA;186 314
+974;249740085;CA du Sud;CA;135 696
+974;249740093;CA Intercommunale de la Réunion Est (CIREST);CA;132 551
+974;249740101;CA Territoire de la Côte Ouest (TCO);CA;224 621
+974;249740119;CA Intercommunale du Nord de la Réunion (CINOR);CA;220 478
+976;200050532;CC de Petite-Terre;CC;30 039
+976;200059871;CC du Centre-Ouest;CC;51 449
+976;200060457;CA de Dembeni / Mamoudzou;CA;89 090
+976;200060465;CA du Grand Nord de Mayotte;CA;60 372
+976;200060473;CC du Sud;CC;31 945
+2A;200038958;CC de la Pieve de l'Ornano et du Taravo;CC;14 136
+2A;200040764;CC du Sud Corse;CC;22 000
+2A;200067049;CC Spelunca-Liamone;CC;7 934
+2A;242000495;CC de l'Alta Rocca;CC;9 113
+2A;242000503;CC Celavu-Prunelli;CC;9 659
+2A;242010056;CA du Pays Ajaccien;CA;94 947
+2A;242010130;CC du Sartenais Valinco Taravo;CC;12 759
+2B;200015162;CC de l'Oriente;CC;6 346
+2B;200033827;CC de Fium'Orbu Castellu;CC;13 801
+2B;200034205;CC de la Costa Verde;CC;11 165
+2B;200036499;CC de Marana-Golo;CC;26 740
+2B;200042943;CC du Cap Corse;CC;6 738
+2B;200073104;CC de l'Ile-Rousse - Balagne;CC;11 362
+2B;200073120;CC Nebbiu - Conca d'Oro;CC;7 939
+2B;200073138;CC Pasquale Paoli;CC;6 246
+2B;200073252;CC de la Castagniccia-Casinca;CC;13 644
+2B;242000354;CA de Bastia;CA;62 490
+2B;242020071;CC du Centre Corse;CC;10 224
+2B;242020105;CC de Calvi Balagne;CC;13 027

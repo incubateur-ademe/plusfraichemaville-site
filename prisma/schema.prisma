@@ -427,3 +427,41 @@ model cron_jobs {
   execution_end_time   DateTime
   job_type             JobType
 }
+
+enum TypeEpci {
+  CC  // Communauté de communes
+  CA  // Communauté d'agglomération
+  CU  // Communauté urbaine
+  MET // Métropole
+}
+
+model epci {
+  id               String    @id @default(cuid())
+  siren            String    @unique
+  nom              String
+  code_departement String
+  type             TypeEpci
+  population       Int
+  created_at       DateTime  @default(now())
+  communes         commune[]
+
+  @@index([code_departement])
+  @@index([nom])
+  @@index([siren])
+}
+
+model commune {
+  id         String   @id @default(cuid())
+  insee      String   @unique
+  siren      String   @unique
+  epci_id    String
+  nom        String
+  population Int
+  created_at DateTime @default(now())
+  epci       epci     @relation(fields: [epci_id], references: [id])
+
+  @@index([epci_id])
+  @@index([nom])
+  @@index([insee])
+  @@index([siren])
+}
