@@ -1,9 +1,9 @@
 import { isEmpty } from "@/src/helpers/listUtils";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
+import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
-import AnyNull = Prisma.AnyNull;
 import { Prisma } from "@/src/generated/prisma/client";
+import AnyNull = Prisma.AnyNull;
 
 type LCZCommuneCoverage = {
   insee_commune: string;
@@ -21,31 +21,36 @@ async function fillLczCoverage(page = 0) {
   const response = await fetch(
     `https://tabular-api.data.gouv.fr/api/resources/fb8028d6-8018-40fa-b655-4672e8f6feaf/data/?couverture_lcz__strictly_greater=${LCZ_COVERAGE_THRESHOLD}&page_size=${PAGE_SIZE}&page=${page}`,
   );
-  const data: any = await response.json();
-  console.log("Received data");
-  if (!isEmpty(data.data)) {
-    for (const row of data.data as LCZCommuneCoverage[]) {
-      try {
-        await prismaClient.climadiag.update({
-          where: {
-            code_insee: row.insee_commune,
-          },
-          data: {
-            population: row.population,
-            superficie: row.superficie_ha,
-            couverture_lcz: row.couverture_lcz,
-          },
-        });
-      } catch (e) {
-        if (e instanceof Prisma.PrismaClientKnownRequestError) {
-          if (e.code === "P2025") {
-            captureError("Code insee non trouvé dans table Climadiag", row.insee_commune);
+  try {
+    const data: any = await response.json();
+    console.log("Received data");
+    if (!isEmpty(data.data)) {
+      for (const row of data.data as LCZCommuneCoverage[]) {
+        try {
+          await prismaClient.climadiag.update({
+            where: {
+              code_insee: row.insee_commune,
+            },
+            data: {
+              population: row.population,
+              superficie: row.superficie_ha,
+              couverture_lcz: row.couverture_lcz,
+            },
+          });
+        } catch (e) {
+          if (e instanceof Prisma.PrismaClientKnownRequestError) {
+            if (e.code === "P2025") {
+              captureError("Code insee non trouvé dans table Climadiag", row.insee_commune);
+            }
           }
         }
       }
+      page++;
+      return fillLczCoverage(page);
     }
-    page++;
-    return fillLczCoverage(page);
+  } catch (e) {
+    customCaptureException("Error while fetching data", e);
+    return;
   }
 }
 
@@ -57,6 +62,7 @@ async function fillCoordinatesForLCZ() {
     },
   });
   for (const collectivite of rowsToProcess) {
+    console.log("Processing collectivite", collectivite.nom);
     let fetchedCollectivites = await fetchCommuneFromBanApi(`${collectivite.nom} ${collectivite.code_postal}`, 40);
     let matchedCollectivite = fetchedCollectivites.find(
       (fc) => fc.codeInsee === collectivite.code_insee || fc.oldCodeInsee === collectivite.code_insee,
