@@ -1,8 +1,8 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import clsx from "clsx";
 import Image from "next/image";
-import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
 
 export const ListProjetsHeaderEmpty = () => {
   return (
@@ -45,7 +45,7 @@ export const ListProjetsHeaderEmpty = () => {
         </LinkWithoutPrefetch>
       </div>
       <div className="ml-auto w-fit">
-        <AvailableProjetsForCollectiviteButton className="rounded-[10px]" />
+        <AvailableProjetsForCollectiviteButton className="rounded-lg" />
       </div>
     </>
   );

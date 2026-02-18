@@ -26,7 +26,8 @@ async function migrateEstimationMateriaux() {
 
   for (const estimation of estimations) {
     const estimationFichesSolution = (estimation.materiaux || []) as unknown as EstimationMateriauxFicheSolutionJson[];
-    const fichesSolutionIds = estimation.fiches_solutions_id;
+    // @ts-expect-error the fiches_solutions_id column has been removed since this script was executed.
+    const fichesSolutionIds = estimation.fiches_solutions_id as number[];
 
     if (!estimationFichesSolution || !Array.isArray(estimationFichesSolution)) {
       console.warn(`Skipping estimation ${estimation.id}: Invalid materiaux format.`);

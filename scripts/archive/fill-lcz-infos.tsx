@@ -1,7 +1,7 @@
 import { isEmpty } from "@/src/helpers/listUtils";
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
-import { fetchCollectiviteFromBanApi } from "@/src/lib/adresseApi/fetch";
+import { fetchCommuneFromBanApi } from "@/src/lib/adresseApi/fetch";
 import AnyNull = Prisma.AnyNull;
 import { Prisma } from "@/src/generated/prisma/client";
 
@@ -57,12 +57,12 @@ async function fillCoordinatesForLCZ() {
     },
   });
   for (const collectivite of rowsToProcess) {
-    let fetchedCollectivites = await fetchCollectiviteFromBanApi(`${collectivite.nom} ${collectivite.code_postal}`, 40);
+    let fetchedCollectivites = await fetchCommuneFromBanApi(`${collectivite.nom} ${collectivite.code_postal}`, 40);
     let matchedCollectivite = fetchedCollectivites.find(
       (fc) => fc.codeInsee === collectivite.code_insee || fc.oldCodeInsee === collectivite.code_insee,
     );
     if (!matchedCollectivite) {
-      fetchedCollectivites = await fetchCollectiviteFromBanApi(`${collectivite.code_postal}`, 40);
+      fetchedCollectivites = await fetchCommuneFromBanApi(`${collectivite.code_postal}`, 40);
       matchedCollectivite = fetchedCollectivites.find(
         (fc) =>
           fc.codeInsee === collectivite.code_insee ||

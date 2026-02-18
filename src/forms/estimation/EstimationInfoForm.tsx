@@ -23,7 +23,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
   const router = useRouter();
 
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
-  const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
+  const setCurrentEstimation = useModalStore((state) => state.setCurrentEstimation);
   const handleFicheSolutionChange = (ficheSolutionId: string) => {
     const currentFicheSolutionIds = form.getValues("ficheSolutionIds");
     if (currentFicheSolutionIds.indexOf(ficheSolutionId) === -1)
@@ -51,7 +51,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
       notifications(result.type, result.message);
       if (result.estimation) {
         updateProjetInStore({ ...projet, estimations: (projet.estimations || []).concat(result.estimation) });
-        setCurrentEstimationId(result.estimation.id);
+        setCurrentEstimation({ id: result.estimation.id, startingStep: 1 });
         setTimeout(function () {
           router.replace(PFMV_ROUTES.ESPACE_PROJET_LISTE_ESTIMATION(projet.id));
         }, 1000);
@@ -67,9 +67,8 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
   return (
     <form id="create-estimation-form" onSubmit={form.handleSubmit(onSubmit)}>
       <FicheSolutionSmallCardContainer
-        title=""
-        subtitle="Choisissez les solutions à estimer pour votre simulation"
-        className="pfmv-strong-card "
+        title="Choisissez les solutions à estimer pour votre simulation"
+        className="pfmv-strong-card"
       >
         <div className={clsx("mb-12 flex flex-wrap gap-6")}>
           {projetFichesSolutionsIds.map((ficheSolutionId) => (
@@ -99,7 +98,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
         <Button className={`rounded-3xl bg-pfmv-navy`} type="submit" disabled={disabled}>
           {"Faire une estimation"}
         </Button>
-        {error && <p className={clsx("fr-error-text !text-base", "mb-4")}>{error.message}</p>}
+        {error && <p className="fr-error-text mb-4 !text-base">{error.message}</p>}
       </FicheSolutionSmallCardContainer>
     </form>
   );

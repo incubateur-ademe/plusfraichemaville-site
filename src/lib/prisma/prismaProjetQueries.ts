@@ -15,6 +15,7 @@ import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/annuaire/types";
 import { NiveauMaturiteCode } from "@/src/helpers/maturite-projet";
+import { getCommuneSirensForEpci } from "@/src/lib/prisma/prisma-commune-queries";
 
 export const projetWithoutFicheSolution = {
   fiches: { none: { type: FicheType.SOLUTION } },
@@ -345,6 +346,60 @@ export const getAvailableProjectsForCollectivite = async (
     where: {
       collectiviteId,
       deleted_at: null,
+      NOT: {
+        users: {
+          some: {
+            user_id: userId,
+            invitation_status: InvitationStatus.ACCEPTED,
+            deleted_at: null,
+          },
+        },
+      },
+    },
+    select: projetPublicSelect,
+  });
+};
+
+export const getAvailableProjetsForSiren = async (
+  siren: string,
+  userId: string,
+): Promise<ProjetWithPublicRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      creator: {
+        siren: siren,
+      },
+      NOT: {
+        users: {
+          some: {
+            user_id: userId,
+            invitation_status: InvitationStatus.ACCEPTED,
+            deleted_at: null,
+          },
+        },
+      },
+    },
+    select: projetPublicSelect,
+  });
+};
+
+export const getAvailableProjetsForEpci = async (
+  sirenEpci: string,
+  userId: string,
+): Promise<ProjetWithPublicRelations[]> => {
+  const communeSirens = await getCommuneSirensForEpci(sirenEpci);
+
+  const allSirens = [sirenEpci, ...communeSirens];
+
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      creator: {
+        siren: {
+          in: allSirens,
+        },
+      },
       NOT: {
         users: {
           some: {

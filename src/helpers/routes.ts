@@ -66,6 +66,8 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
   ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
     `/espace-projet/${projetId}/estimation/liste${(opener && `?open=${opener}`) || ""}`,
+  ESPACE_PROJET_ESTIMATION_AJOUTER_SOLUTIONS: (projetId: number, estimationId: number) =>
+    `/espace-projet/${projetId}/estimation/${estimationId}/ajouter-solutions`,
   ESPACE_PROJET_FICHES_SOLUTIONS_REX: (projetId: number, projetRexSlug: string) =>
     `/espace-projet/${projetId}/projet/${projetRexSlug}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_FICHE_SOLUTION: (projetId: number, ficheSolutionSlug: string) =>
@@ -88,8 +90,8 @@ export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
 export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
   `/api/search-aides-for-estimation?estimationId=${estimationId}`;
 
-export const GET_AVAILABLE_PROJETS_FOR_COLLECTITIVE_URL = (collectiviteId: number, userId: string) =>
-  `/api/get-available-projects-for-collectivite?collectiviteId=${collectiviteId}&userId=${userId}`;
+export const GET_AVAILABLE_PROJETS_FOR_USER_URL = (userId: string) =>
+  `/api/get-available-projets-for-user?userId=${userId}`;
 
 export const GET_PUBLIC_PROJET_BY_ID = (projetId: number) => `/api/get-public-projet-by-id?projetId=${projetId}`;
 

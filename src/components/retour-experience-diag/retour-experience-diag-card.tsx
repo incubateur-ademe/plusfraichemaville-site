@@ -8,7 +8,7 @@ type RetourExperienceDiagCardProps = {
   flatStyle?: boolean;
   rex?: RetourExperienceDiagnostic;
   className?: string;
-  onClickButton?: () => void;
+  onClickButton?(): void;
 };
 
 export const RetourExperienceDiagCard = ({ rex, className, onClickButton }: RetourExperienceDiagCardProps) => {

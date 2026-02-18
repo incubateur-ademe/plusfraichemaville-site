@@ -13,28 +13,26 @@ export const estimationModal = createModal({
 });
 
 export function EstimationMateriauModalContainer() {
-  const currentEstimationId = useModalStore((state) => state.currentEstimationId);
-  const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
+  const currentEstimationData = useModalStore((state) => state.currentEstimation);
+  const setCurrentEstimation = useModalStore((state) => state.setCurrentEstimation);
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   useIsModalOpen(estimationModal, {
     onConceal: () => {
-      setCurrentEstimationId(null);
+      setCurrentEstimation(null);
     },
   });
   const currentEstimation = useMemo(() => {
-    if (currentEstimationId && currentProjet) {
-      const estimationToOpen = currentProjet.estimations.find((e) => e.id === currentEstimationId);
+    if (currentEstimationData && currentProjet) {
+      const estimationToOpen = currentProjet.estimations.find((e) => e.id === currentEstimationData.id);
       if (estimationToOpen) {
         return estimationToOpen;
       }
     }
-  }, [currentEstimationId, currentProjet]);
+  }, [currentEstimationData, currentProjet]);
 
   useEffect(() => {
     if (currentEstimation?.id) {
-      setTimeout(() => {
-        estimationModal.open();
-      }, 150);
+      estimationModal.open();
     }
   }, [currentEstimation?.id]);
 

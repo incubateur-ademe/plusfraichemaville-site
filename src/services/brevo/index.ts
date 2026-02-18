@@ -3,13 +3,12 @@ import {
   getUserWithNoActivityAfterSignup,
   updateEmailStatus as updateEmailStatusQuery,
 } from "@/src/lib/prisma/prisma-email-queries";
-import { email, emailStatus, emailType, FicheType, RoleProjet } from "@/src/generated/prisma/client";
+import { email, emailStatus, emailType, FicheType, RoleProjet, User } from "@/src/generated/prisma/client";
 import { brevoSendEmail } from "./brevo-api";
 import { ResponseAction } from "@/src/actions/actions-types";
 import { getOldestProjectAdmin } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
-import { ProjetWithRelations, UserProjetWithRelations, UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
-import { getPrimaryCollectiviteForUser } from "@/src/helpers/user";
+import { ProjetWithRelations, UserProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import {
   getProjetsFinishedToGetQuestionnaire,
@@ -227,12 +226,12 @@ export class EmailService {
   async sendInvitationEmail(
     email: string,
     userProjet: UserProjetWithRelations,
-    actionInitiatorUser: UserWithCollectivite,
+    actionInitiatorUser: User,
   ): Promise<EmailSendResult> {
     const params: EmailProjetPartageConfig = {
       username: `${actionInitiatorUser.prenom} ${actionInitiatorUser.nom}`,
       projetCollectiviteName: userProjet.projet.collectivite.nom,
-      userCollectiviteName: getPrimaryCollectiviteForUser(actionInitiatorUser).nom,
+      userCollectiviteName: actionInitiatorUser.nom_etablissement || "",
       destinationMail: email,
       projetName: userProjet.projet.nom,
       link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB(
@@ -251,13 +250,13 @@ export class EmailService {
   async sendResponseRequestAccessEmail(
     email: string,
     userProjet: UserProjetWithRelations,
-    actionInitiatorUser: UserWithCollectivite,
+    actionInitiatorUser: User,
     accessGranted: boolean,
   ): Promise<EmailSendResult> {
     const params: EmailProjetPartageConfig = {
       username: `${actionInitiatorUser.prenom} ${actionInitiatorUser.nom}`,
       projetCollectiviteName: userProjet.projet.collectivite.nom,
-      userCollectiviteName: getPrimaryCollectiviteForUser(actionInitiatorUser).nom,
+      userCollectiviteName: actionInitiatorUser.nom_etablissement || "",
       destinationMail: email,
       projetName: userProjet.projet.nom,
       link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET}`,
@@ -276,7 +275,7 @@ export class EmailService {
       const params: EmailProjetPartageConfig = {
         username: `${userProjet.user.prenom} ${userProjet.user.nom}`,
         projetCollectiviteName: userProjet.projet.collectivite.nom,
-        userCollectiviteName: getPrimaryCollectiviteForUser(userProjet.user).nom,
+        userCollectiviteName: userProjet.user.nom_etablissement || "",
         destinationMail: oldestAdmin.user.email,
         projetName: userProjet.projet.nom,
         link: `${process.env.NEXT_PUBLIC_URL_SITE}${PFMV_ROUTES.ESPACE_PROJET_UTILISATEURS_PROJET(
@@ -295,12 +294,9 @@ export class EmailService {
   }
 
   async sendWelcomeMessageEmail(data: Pick<UserInfoFormData, "email" | "nom"> & { nomCollectivite?: string }) {
-    const mailParams = { ...(data.nomCollectivite && { userCollectiviteName: `pour ${data.nomCollectivite}` }) };
     return this.sendEmail({
       to: data.email,
       emailType: emailType.welcomeMessageV2,
-      params: mailParams,
-      extra: mailParams,
     });
   }
 
@@ -407,10 +403,8 @@ export class EmailService {
 
     return await Promise.all(
       users.map(async (user) => {
-        const nomCollectivite = user.collectivites[0]?.collectivite.nom;
         const emailParams = {
           userPrenom: user.prenom || "",
-          ...(nomCollectivite && { userCollectiviteName: `pour ${nomCollectivite}` }),
           nbUtilisateurs: countAllUsers.toString(),
         };
         return await this.sendEmail({

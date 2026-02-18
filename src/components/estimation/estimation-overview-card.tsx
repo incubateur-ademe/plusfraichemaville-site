@@ -1,18 +1,20 @@
 "use client";
 import clsx from "clsx";
 
-import { EstimationCardPriceInfo } from "@/src/components/estimation/estimation-card-price-info";
 import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { EstimationDeleteModal } from "@/src/components/estimation/estimation-delete-modal";
-import { FicheSolutionSmallCard } from "../ficheSolution/fiche-solution-small-card";
-import { isComplete } from "@/src/helpers/estimation";
+import { isComplete, sortEstimationFichesSolutions } from "@/src/helpers/estimation";
 import { dateToStringWithTime } from "@/src/helpers/dateUtils";
 import { Button } from "@codegouvfr/react-dsfr/Button";
-import { estimationModal } from "@/src/components/estimation/materiaux-modal/estimation-materiaux-modal-container";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
-import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { useRouter } from "next/navigation";
+import { FicheSolutionSmallCardWithActions } from "@/src/components/estimation/fiche-solution-small-card-with-actions";
 
 export const EstimationOverviewCard = ({
   estimation,
@@ -21,15 +23,44 @@ export const EstimationOverviewCard = ({
   estimation: EstimationWithAides;
   canEditEstimation?: boolean;
 }) => {
+  const router = useRouter();
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice(
     estimation.estimations_fiches_solutions,
   );
 
-  const setCurrentEstimationId = useModalStore((state) => state.setCurrentEstimationId);
+  const setCurrentEstimation = useModalStore((state) => state.setCurrentEstimation);
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+
+  const [isEditMode, setIsEditMode] = useState(false);
 
   const isEstimationCompleted = useMemo(() => isComplete(estimation), [estimation]);
 
-  if (estimation.fiches_solutions_id.length < 1) {
+  const projetFichesSolutionsIds = useMemo(
+    () => getProjetFichesIdsByType({ projet: currentProjet, typeFiche: TypeFiche.solution }) ?? [],
+    [currentProjet],
+  );
+
+  const fichesSolutionsIdsNotInEstimation = useMemo(() => {
+    const estimationFicheSolutionIds = estimation.estimations_fiches_solutions.map((efs) => efs.fiche_solution_id);
+    return projetFichesSolutionsIds.filter((id) => !estimationFicheSolutionIds.includes(id));
+  }, [estimation.estimations_fiches_solutions, projetFichesSolutionsIds]);
+
+  useEffect(() => {
+    if (isEditMode && estimation.estimations_fiches_solutions.length === 0) {
+      setIsEditMode(false);
+    }
+  }, [estimation.estimations_fiches_solutions.length, isEditMode]);
+
+  const handleEditFicheSolution = (ficheSolutionId: number) => {
+    const index = sortEstimationFichesSolutions(estimation).findIndex(
+      (efs) => efs.fiche_solution_id === +ficheSolutionId,
+    );
+    if (index !== -1) {
+      setCurrentEstimation({ id: estimation.id, startingStep: index + 1 });
+    }
+  };
+
+  if (estimation.estimations_fiches_solutions.length < 1) {
     return null;
   }
 
@@ -51,22 +82,30 @@ export const EstimationOverviewCard = ({
         )}
       </div>
       <div className={clsx("mb-12 flex flex-wrap gap-6")}>
-        {estimation.fiches_solutions_id.map((ficheSolutionId) => (
-          <FicheSolutionSmallCard
-            key={ficheSolutionId}
-            ficheSolutionId={ficheSolutionId}
-            className="rounded-2xl border-[1px] border-dsfr-border-default-grey"
-          >
-            <div className="w-full">
-              <hr className="mt-6 pb-4" />
-              <EstimationCardPriceInfo
-                estimationInfo={estimation.estimations_fiches_solutions?.find(
-                  (em) => em.fiche_solution_id === ficheSolutionId,
-                )}
-              />
-            </div>
-          </FicheSolutionSmallCard>
+        {sortEstimationFichesSolutions(estimation).map((estimationFicheSolution) => (
+          <FicheSolutionSmallCardWithActions
+            key={estimationFicheSolution.fiche_solution_id}
+            ficheSolutionId={estimationFicheSolution.fiche_solution_id}
+            estimation={estimation}
+            isEditMode={isEditMode && canEditEstimation}
+            onEdit={handleEditFicheSolution}
+          />
         ))}
+        {isEditMode && canEditEstimation && fichesSolutionsIdsNotInEstimation.length > 0 && (
+          <button
+            onClick={() =>
+              router.push(PFMV_ROUTES.ESPACE_PROJET_ESTIMATION_AJOUTER_SOLUTIONS(currentProjet!.id, estimation.id))
+            }
+            className={clsx(
+              "fr-btn !h-32 !w-32 rounded-[10px] bg-dsfr-text-label-blue-france",
+              "flex !flex-col items-center justify-center",
+              "self-center",
+            )}
+          >
+            <i className="ri-add-circle-fill mb-2 text-sm text-white"></i>
+            <span className="text-center text-white">Ajouter une solution</span>
+          </button>
+        )}
       </div>
       <div className={clsx("text-lg", !isEstimationCompleted && "text-pfmv-grey")}>
         <div className="font-bold">Estimation totale des solutions envisagées</div>
@@ -82,18 +121,32 @@ export const EstimationOverviewCard = ({
           <div className="font-bold">Entretien</div>
           <div>{`${formatNumberWithSpaces(entretienMin)} - ${formatNumberWithSpaces(entretienMax)} € HT / an`}</div>
         </div>
+        <div className="mt-4 justify-self-end">
+          <Button
+            priority="tertiary no outline"
+            onClick={() =>
+              setCurrentEstimation({
+                id: estimation.id,
+                startingStep: estimation.estimations_fiches_solutions.length + 1,
+              })
+            }
+            className="fr-link underline"
+          >
+            Voir le détail
+          </Button>
+        </div>
       </div>
       {canEditEstimation && (
         <div className="float-right mt-12 flex flex-row gap-6">
-          <Button
-            nativeButtonProps={estimationModal.buttonProps}
-            onClick={() => {
-              setCurrentEstimationId(estimation.id);
-            }}
-            className="rounded-3xl"
-          >
-            Modifier
-          </Button>
+          {!isEditMode ? (
+            <Button priority="primary" onClick={() => setIsEditMode(true)} className="rounded-3xl">
+              Modifier
+            </Button>
+          ) : (
+            <Button priority="primary" onClick={() => setIsEditMode(false)} className="rounded-3xl">
+              Valider
+            </Button>
+          )}
           <EstimationDeleteModal estimation={estimation} />
         </div>
       )}

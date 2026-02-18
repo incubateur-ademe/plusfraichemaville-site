@@ -145,6 +145,7 @@ exports.Prisma.UserScalarFieldEnum = {
   prenom: 'prenom',
   poste: 'poste',
   nom_etablissement: 'nom_etablissement',
+  siren: 'siren',
   siren_info: 'siren_info',
   created_at: 'created_at',
   updated_at: 'updated_at',
@@ -260,7 +261,6 @@ exports.Prisma.EstimationScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   projet_id: 'projet_id',
-  fiches_solutions_id: 'fiches_solutions_id',
   materiaux: 'materiaux',
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by'
@@ -363,6 +363,26 @@ exports.Prisma.Cron_jobsScalarFieldEnum = {
   job_type: 'job_type'
 };
 
+exports.Prisma.EpciScalarFieldEnum = {
+  id: 'id',
+  siren: 'siren',
+  nom: 'nom',
+  code_departement: 'code_departement',
+  type: 'type',
+  population: 'population',
+  created_at: 'created_at'
+};
+
+exports.Prisma.CommuneScalarFieldEnum = {
+  id: 'id',
+  insee: 'insee',
+  siren: 'siren',
+  epci_id: 'epci_id',
+  nom: 'nom',
+  population: 'population',
+  created_at: 'created_at'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -415,6 +435,7 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   prenom: 'prenom',
   poste: 'poste',
   nom_etablissement: 'nom_etablissement',
+  siren: 'siren',
   canal_acquisition: 'canal_acquisition',
   discardedInformation: 'discardedInformation'
 };
@@ -520,6 +541,21 @@ exports.Prisma.AnalyticsOrderByRelevanceFieldEnum = {
 exports.Prisma.cron_jobsOrderByRelevanceFieldEnum = {
   id: 'id'
 };
+
+exports.Prisma.epciOrderByRelevanceFieldEnum = {
+  id: 'id',
+  siren: 'siren',
+  nom: 'nom',
+  code_departement: 'code_departement'
+};
+
+exports.Prisma.communeOrderByRelevanceFieldEnum = {
+  id: 'id',
+  insee: 'insee',
+  siren: 'siren',
+  epci_id: 'epci_id',
+  nom: 'nom'
+};
 exports.StatutUser = exports.$Enums.StatutUser = {
   pas_trouve: 'pas_trouve',
   pas_maintenant: 'pas_maintenant',
@@ -607,6 +643,13 @@ exports.JobType = exports.$Enums.JobType = {
   SYNC_CONNECT: 'SYNC_CONNECT'
 };
 
+exports.TypeEpci = exports.$Enums.TypeEpci = {
+  CC: 'CC',
+  CA: 'CA',
+  CU: 'CU',
+  MET: 'MET'
+};
+
 exports.Prisma.ModelName = {
   Account: 'Account',
   User: 'User',
@@ -627,7 +670,9 @@ exports.Prisma.ModelName = {
   conversation: 'conversation',
   diagnostic_simulation: 'diagnostic_simulation',
   Analytics: 'Analytics',
-  cron_jobs: 'cron_jobs'
+  cron_jobs: 'cron_jobs',
+  epci: 'epci',
+  commune: 'commune'
 };
 
 /**

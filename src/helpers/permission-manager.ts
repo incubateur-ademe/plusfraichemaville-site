@@ -1,4 +1,3 @@
-import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
 import { RoleProjet } from "@/src/generated/prisma/client";
 import { getOtherAdmins, getUserProjet } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { Session } from "next-auth";
@@ -67,17 +66,5 @@ export class PermissionManager {
     } else {
       return await this.checkOtherAdminsExist(projectId, targetUserId);
     }
-  }
-
-  async canUserViewCollectiviteProjets(collectiviteId: number): Promise<boolean> {
-    if (!this.authenticatedUserId) {
-      return false;
-    }
-
-    const user = await getUserWithCollectivites(this.authenticatedUserId);
-    if (user) {
-      return user.collectivites.some((collectivite) => collectivite.collectivite_id === collectiviteId);
-    }
-    return false;
   }
 }

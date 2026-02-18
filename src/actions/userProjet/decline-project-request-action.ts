@@ -8,7 +8,7 @@ import { declineProjectRequest } from "@/src/lib/prisma/prisma-user-projet-queri
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { EmailService } from "@/src/services/brevo";
-import { getUserWithCollectivites } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 
 export const declineProjectRequestAction = async (
   projectId: number,
@@ -31,7 +31,7 @@ export const declineProjectRequestAction = async (
 
   try {
     const projetLink = await declineProjectRequest(userIdToUpdate, projectId, session.user.id);
-    const currentUser = await getUserWithCollectivites(session.user.id);
+    const currentUser = await getUserById(session.user.id);
     if (projetLink && projetLink.user && currentUser) {
       const emailService = new EmailService();
       await emailService.sendResponseRequestAccessEmail(projetLink.user?.email, projetLink, currentUser, false);

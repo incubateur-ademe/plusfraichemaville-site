@@ -1,5 +1,5 @@
 import z from "zod";
-import { CollectiviteFormSchema } from "@/src/forms/collectivite/collectivite-form-schema";
+import { CollectiviteFormSchema } from "@/src/forms/commune/collectivite-form-schema";
 import { StatutProjet } from "@/src/generated/prisma/client";
 
 export const ProjetInfoFormSchema = z.object({

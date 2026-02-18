@@ -5,13 +5,13 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 
-import { getUserWithCollectivites, updateUserDiscardedInformation } from "@/src/lib/prisma/prismaUserQueries";
-import { UserWithCollectivite } from "@/src/lib/prisma/prismaCustomTypes";
+import { getUserById, updateUserDiscardedInformation } from "@/src/lib/prisma/prismaUserQueries";
+import { User } from "@/src/generated/prisma/client";
 
 export const discardInformationAction = async (
   userId: string,
   modalId: string,
-): Promise<ResponseAction<{ updatedUser?: UserWithCollectivite | null }>> => {
+): Promise<ResponseAction<{ updatedUser?: User | null }>> => {
   const session = await auth();
 
   if (!session) {
@@ -24,7 +24,7 @@ export const discardInformationAction = async (
   }
 
   try {
-    const user = await getUserWithCollectivites(userId);
+    const user = await getUserById(userId);
     if (!user) {
       return { type: "error", message: "UNAUTHORIZED" };
     }

@@ -48,6 +48,7 @@ model User {
   prenom                            String?
   poste                             String?
   nom_etablissement                 String?
+  siren                             String?
   siren_info                        Json?
   created_at                        DateTime                  @default(now())
   updated_at                        DateTime?                 @updatedAt
@@ -273,7 +274,6 @@ model estimation {
   updated_at                   DateTime                    @default(now())
   projet_id                    Int
   projet                       projet                      @relation(fields: [projet_id], references: [id], onDelete: Cascade)
-  fiches_solutions_id          Int[]
   materiaux                    Json?
   deleted_at                   DateTime?
   deleted_by                   String?
@@ -426,4 +426,42 @@ model cron_jobs {
   execution_start_time DateTime @default(now())
   execution_end_time   DateTime
   job_type             JobType
+}
+
+enum TypeEpci {
+  CC  // Communauté de communes
+  CA  // Communauté d'agglomération
+  CU  // Communauté urbaine
+  MET // Métropole
+}
+
+model epci {
+  id               String    @id @default(cuid())
+  siren            String    @unique
+  nom              String
+  code_departement String
+  type             TypeEpci
+  population       Int
+  created_at       DateTime  @default(now())
+  communes         commune[]
+
+  @@index([code_departement])
+  @@index([nom])
+  @@index([siren])
+}
+
+model commune {
+  id         String   @id @default(cuid())
+  insee      String   @unique
+  siren      String   @unique
+  epci_id    String
+  nom        String
+  population Int
+  created_at DateTime @default(now())
+  epci       epci     @relation(fields: [epci_id], references: [id])
+
+  @@index([epci_id])
+  @@index([nom])
+  @@index([insee])
+  @@index([siren])
 }

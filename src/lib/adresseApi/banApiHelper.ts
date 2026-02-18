@@ -1,10 +1,10 @@
 import { Feature, GeoJsonProperties, Point } from "geojson";
 import { collectivite, projet } from "@/src/generated/prisma/client";
-import { AddressCollectivite, AddressProjet } from "@/src/lib/adresseApi/types";
+import { AddressCommune, AddressProjet } from "@/src/lib/adresseApi/types";
 
-export const mapAddressApiToCollectiviteAddress = (nationalBaseAddress: Feature<Point>): AddressCollectivite => ({
+export const mapAddressApiToCollectiviteAddress = (nationalBaseAddress: Feature<Point>): AddressCommune => ({
   banId: nationalBaseAddress.properties?.id,
-  nomCollectivite: nationalBaseAddress.properties?.city,
+  nomCommune: nationalBaseAddress.properties?.city,
   codeInsee: nationalBaseAddress.properties?.citycode,
   oldCodeInsee: nationalBaseAddress.properties?.oldcitycode,
   codePostal: nationalBaseAddress.properties?.postcode,
@@ -18,12 +18,12 @@ export const mapAddressApiToAddressProjet = (nationalBaseAddress: Feature<Point>
   banInfo: nationalBaseAddress,
 });
 
-export const mapDBCollectiviteToCollectiviteAddress = (dbCollectivite?: collectivite): AddressCollectivite | null => {
+export const mapDBCollectiviteToCollectiviteAddress = (dbCollectivite?: collectivite): AddressCommune | null => {
   return dbCollectivite
     ? {
         id: dbCollectivite.id,
         banId: dbCollectivite.ban_id ?? "",
-        nomCollectivite: dbCollectivite.nom ?? "",
+        nomCommune: dbCollectivite.nom ?? "",
         codeInsee: dbCollectivite.code_insee ?? "",
         codePostal: dbCollectivite.code_postal ?? "",
         long: dbCollectivite.longitude,

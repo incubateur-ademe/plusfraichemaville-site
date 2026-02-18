@@ -25,9 +25,9 @@ export const AideEstimationsCardWithoutSelection = ({
   return (
     <>
       <div className="mb-8 flex flex-wrap gap-6">
-        {estimation.fiches_solutions_id.map((fiche, index) => (
+        {estimation.estimations_fiches_solutions.map((efs, index) => (
           <FicheSolutionSmallCard
-            ficheSolutionId={fiche}
+            ficheSolutionId={efs.fiche_solution_id}
             className="pointer-events-none w-52 shrink-0 rounded-2xl border-[1px] border-dsfr-border-default-grey"
             key={index}
           />

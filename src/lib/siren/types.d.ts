@@ -16,9 +16,13 @@ interface IApiSirenQuery {
   };
 }
 
+export type SirenInfo = {
+  siren: string;
+  siret: string;
+  uniteLegale?: { denominationUniteLegale?: string; categorieJuridiqueUniteLegale?: string };
+  adresseEtablissement: { codePostalEtablissement: string | null; codeCommuneEtablissement: string | null };
+};
+
 export interface IApiSirenQueryTypes extends IApiSirenQuery {
-  etablissement?: {
-    adresseEtablissement: { codePostalEtablissement: string | null; codeCommuneEtablissement: string | null };
-    uniteLegale?: { denominationUniteLegale?: string };
-  };
+  etablissement?: SirenInfo;
 }

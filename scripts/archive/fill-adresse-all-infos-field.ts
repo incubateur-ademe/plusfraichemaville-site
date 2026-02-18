@@ -1,5 +1,5 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
-import { fetchCollectiviteFromBanApi, fetchProjetAddressFromBanApi } from "@/src/lib/adresseApi/fetch";
+import { fetchCommuneFromBanApi, fetchProjetAddressFromBanApi } from "@/src/lib/adresseApi/fetch";
 import AnyNull = Prisma.AnyNull;
 import { Prisma } from "@/src/generated/prisma/client";
 
@@ -13,7 +13,7 @@ async function main() {
   });
   for (const collectivite of collectivitesToProcess) {
     if (collectivite.code_insee) {
-      const fetchedCollectivites = await fetchCollectiviteFromBanApi(`${collectivite.nom} ${collectivite.code_insee}`);
+      const fetchedCollectivites = await fetchCommuneFromBanApi(`${collectivite.nom} ${collectivite.code_insee}`);
       const matchedCollectivite = fetchedCollectivites.find((fc) => fc.codeInsee === collectivite.code_insee);
       if (matchedCollectivite) {
         await prismaClient.collectivite.update({
