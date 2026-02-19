@@ -11,6 +11,7 @@ import { useModalStore } from "@/src/stores/modal/provider";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
 import { formatNumberWithSpaces, TypeFiche } from "@/src/helpers/common";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { UltramarinePricesNotice } from "@/src/components/estimation/ultramarine-prices-notice";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { useRouter } from "next/navigation";
@@ -110,6 +111,7 @@ export const EstimationOverviewCard = ({
       <div className={clsx("text-lg", !isEstimationCompleted && "text-pfmv-grey")}>
         <div className="font-bold">Estimation totale des solutions envisagées</div>
         <div>(hors travaux complémentaires de voirie, consolidation etc)</div>
+        <UltramarinePricesNotice codePostal={currentProjet?.collectivite?.code_postal} className="mt-2" />
         <div className="mt-6 flex flex-row justify-between">
           <div className="font-bold">Investissement</div>
           <div>

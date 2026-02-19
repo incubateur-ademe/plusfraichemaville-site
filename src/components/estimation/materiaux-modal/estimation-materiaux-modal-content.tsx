@@ -14,6 +14,7 @@ import { estimationModal } from "@/src/components/estimation/materiaux-modal/est
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { sortEstimationFichesSolutions } from "@/src/helpers/estimation";
+import { UltramarinePricesNotice } from "@/src/components/estimation/ultramarine-prices-notice";
 
 type EstimationCardDeleteModalProps = {
   estimation: EstimationWithAides;
@@ -32,7 +33,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     }
   }, [estimation.id, currentEstimationData?.startingStep]);
 
-  const getCurrentProjet = useProjetsStore((state) => state.getCurrentProjet);
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
 
   const { data: currentFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
@@ -68,11 +69,10 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
   }, [estimation, currentFicheSolution]);
 
   const updateEstimationInStore = (estimation: EstimationWithAides) => {
-    const currentProject = getCurrentProjet();
-    if (currentProject) {
+    if (currentProjet) {
       updateProjetInStore({
-        ...currentProject,
-        estimations: upsert(currentProject.estimations, estimation),
+        ...currentProjet,
+        estimations: upsert(currentProjet.estimations, estimation),
       });
     }
   };
@@ -109,6 +109,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
       />
       {currentFicheSolution && (
         <>
+          <UltramarinePricesNotice codePostal={currentProjet?.collectivite?.code_postal} className="mb-2" />
           {isSimpleMateriauFicheSolution(currentFicheSolution) ? (
             <>
               <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.attributes.titre}`}</div>
