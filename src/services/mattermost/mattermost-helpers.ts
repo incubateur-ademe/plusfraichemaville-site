@@ -46,15 +46,6 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
   };
 };
 
-export const makeHubspotSyncBatchWebhookData = (message: string) => {
-  return {
-    text: `**[Fin de traitement de synchronisation Hubspot]**
-    
-**Détail du traitement :**
-${message}
-`,
-  };
-};
 export const makeConnectSyncBatchWebhookData = (message: string) => {
   return {
     text: `**[Fin de traitement de synchronisation Connect]**

@@ -16,7 +16,7 @@ Plus fraîche ma ville is a French government startup (startup d'état) that hel
 - **Styling**: Tailwind CSS + DSFR (Système de Design de l'État français via `@codegouvfr/react-dsfr`)
 - **State Management**: Zustand (stores in `src/stores/`)
 - **Forms**: React Hook Form + Zod validation
-- **Analytics**: Matomo + HubSpot tracking
+- **Analytics**: Matomo
 - **Error Tracking**: Sentry
 - **Package Manager**: pnpm (enforced via preinstall script)
 
@@ -45,7 +45,6 @@ pnpm run build               # Production build
 pnpm run start               # Start production server
 
 # Utility scripts
-pnpm run hubspot-sync        # Sync data with HubSpot
 pnpm run csm-mail-batch      # Send batch emails
 pnpm run connect-sync        # Sync with Connect CRM
 ```
@@ -104,7 +103,6 @@ The project maximizes use of React Server Components for content pages. Client c
 **Services** (`src/services/`):
 
 - `brevo/`: Email service (transactional emails)
-- `hubspot/`: CRM and analytics
 - `connect/`: CRM Connect synchronization
 - `mattermost/`: Team notifications
 
@@ -129,7 +127,7 @@ The project maximizes use of React Server Components for content pages. Client c
 ### Security
 
 - Content Security Policy configured in middleware with nonce
-- CSP headers include trusted domains for Matomo, HubSpot, maps
+- CSP headers include trusted domains for Matomo, maps
 - Protected routes require authentication
 - CSRF protection via NextAuth
 - Sentry error tracking for production
@@ -204,7 +202,7 @@ Create one component per file.
    - `DATABASE_URL` (PostgreSQL with PFMV schema)
    - `NEXTAUTH_SECRET` and `NEXTAUTH_URL`
    - `AGENT_CONNECT_*` (OAuth credentials)
-   - External API keys: BREVO, HUBSPOT, AIDES_TERRITOIRES, INSEE
+   - External API keys: BREVO, AIDES_TERRITOIRES, INSEE
 3. Run `pnpm install`
 4. Run `pnpm run dev:db:generateClient` to generate Prisma client
 5. Run `pnpm run develop` to start dev server
