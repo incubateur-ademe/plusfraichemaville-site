@@ -7,11 +7,6 @@
 Synchronisation de notre base projets et utilisateurs avec le CRM Connect.  
 Lancé par Cron toutes les nuits.
 
-### [hubspot-sync.ts](hubspot-sync.ts)
-
-Synchronisation de notre base projets et utilisateurs avec le CRM Hubspot.  
-Lancé par Cron toutes les nuits.
-
 ### [csm-mail-batch](csm-mail-batch.ts)
 
 Envoie des mails CSM via Brevo (création de projets, inactivité au bout de 10 jours, etc...).  
