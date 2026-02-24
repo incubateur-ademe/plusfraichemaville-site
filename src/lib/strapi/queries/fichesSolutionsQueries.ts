@@ -104,19 +104,6 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
         }
         point_vigilance
         lien_aide_territoire
-        lien_fond_vert
-        aides_regionales {
-          id
-          region {
-            data {
-              attributes {
-                code
-                nom
-              }
-            }
-          }
-          description
-        }
         oups {
           id
           description
