@@ -1,5 +1,3 @@
-import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
-import sumBy from "lodash/sumBy";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { formatNumberWithSpaces } from "../common";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
@@ -49,16 +47,3 @@ export const getLabelCoutEntretienByQuantite = (
         materiauAttributes.cout_maximum_entretien * quantite,
       )} € / an`
     : "0 € / an";
-
-export const computeGlobalFicheSolutionPrice = (estimationMateriaux: EstimationFicheSolution[] | null) => {
-  return {
-    fourniture: {
-      min: sumBy(estimationMateriaux, "coutMinInvestissement"),
-      max: sumBy(estimationMateriaux, "coutMaxInvestissement"),
-    },
-    entretien: {
-      min: sumBy(estimationMateriaux, "coutMinEntretien"),
-      max: sumBy(estimationMateriaux, "coutMaxEntretien"),
-    },
-  };
-};

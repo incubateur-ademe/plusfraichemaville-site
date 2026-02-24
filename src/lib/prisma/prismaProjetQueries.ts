@@ -338,28 +338,6 @@ export const leaveProject = async (userId: string, projectId: number): Promise<u
   });
 };
 
-export const getAvailableProjectsForCollectivite = async (
-  collectiviteId: number,
-  userId: string,
-): Promise<ProjetWithPublicRelations[]> => {
-  return prismaClient.projet.findMany({
-    where: {
-      collectiviteId,
-      deleted_at: null,
-      NOT: {
-        users: {
-          some: {
-            user_id: userId,
-            invitation_status: InvitationStatus.ACCEPTED,
-            deleted_at: null,
-          },
-        },
-      },
-    },
-    select: projetPublicSelect,
-  });
-};
-
 export const getAvailableProjetsForSiren = async (
   siren: string,
   userId: string,

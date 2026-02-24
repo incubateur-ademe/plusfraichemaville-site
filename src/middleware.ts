@@ -13,7 +13,7 @@ const cspHeader = `
     img-src 'self' blob: data: https://cdn.plusfraichemaville.fr/ https://pfmv-cms-prod.s3.fr-par.scw.cloud/
     https://cartagene.cerema.fr
     https://tile.openstreetmap.org
-    https://data.geopf.fr
+    https://data.geopf.fr;
     font-src 'self';
     object-src 'none';
     base-uri 'self';
