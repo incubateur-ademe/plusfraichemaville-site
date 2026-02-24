@@ -31,17 +31,6 @@ export default function FicheSolutionTabFinancements({
           </div>
         </div>
       )}
-      {ficheAttributes.lien_fond_vert && (
-        <>
-          <h3 className="mb-2 mt-10 text-[1.375rem] font-bold">Fonds Vert</h3>
-          <div>
-            <LinkWithoutPrefetch href={ficheAttributes.lien_fond_vert} target="_blank">
-              Consulter les aides liées à cette solution
-            </LinkWithoutPrefetch>{" "}
-            dans le cadre du programme Fonds Vert
-          </div>
-        </>
-      )}
       {ficheAttributes.aides_regionales && ficheAttributes.aides_regionales.length > 0 && (
         <>
           <h3 className="mb-4 mt-10 text-[1.375rem] font-bold">Aides spécifiques par régions</h3>
