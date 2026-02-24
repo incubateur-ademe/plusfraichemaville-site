@@ -12,7 +12,8 @@
       "Bash(pnpm exec tsc:*)",
       "Bash(git mv:*)",
       "Bash(pnpm run build:*)",
-      "Bash(wc:*)"
+      "Bash(wc:*)",
+      "Bash(find:*)"
     ]
   }
 }

@@ -21,7 +21,7 @@ export const AideEstimationsCard = ({ estimation, children }: AideEstimationsCar
       <span className="mb-6 block text-black">Solutions pour lesquelles vous recherchez des financements</span>
       <Separator className="mb-4 h-px !opacity-100" />
       {children}
-      {hasSubmissionDeadline && <AideEstimationsCardDeadline estimationsAides={ea} />}
+      {hasSubmissionDeadline && <AideEstimationsCardDeadline estimationsAides={ea} ariaId={`estimation-${estimation.id}`} />}
     </div>
   );
 };

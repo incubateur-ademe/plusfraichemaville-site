@@ -3,6 +3,7 @@ import Image from "next/image";
 import { resolveAidType } from "../helpers";
 import clsx from "clsx";
 import { AideCardSaveButton } from "./aide-card-save-button";
+import { AideCardSaveButtonProjet } from "./aide-card-save-button-projet";
 import { useParams } from "next/navigation";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { useModalStore } from "@/src/stores/modal/provider";
@@ -12,16 +13,20 @@ import { AideFichePanelLine } from "@/src/components/financement/aide/aide-fiche
 type AideCardProps = {
   aide: AidesTerritoiresAide;
   withSaveButton?: boolean;
+  projetId?: number;
 };
 
-export const AideCard = ({ aide, withSaveButton }: AideCardProps) => {
+export const AideCard = ({ aide, withSaveButton, projetId }: AideCardProps) => {
   const setCurrentDetailedAide = useModalStore((state) => state.setCurrentDetailedAide);
   const type = resolveAidType(aide.aid_types_full);
   const isAideFinanciere = type === TypeAidesTerritoiresAide.financement;
   const estimationId = useParams().estimationId;
   return (
     <div className="relative w-[362px]" id={`aide-card-${aide.id}`}>
-      {withSaveButton && !!estimationId && (
+      {withSaveButton && projetId && (
+        <AideCardSaveButtonProjet projetId={projetId} aideTerritoireId={aide.id} className="right-2 top-3" />
+      )}
+      {withSaveButton && !projetId && !!estimationId && (
         <AideCardSaveButton estimationId={+estimationId} aideTerritoireId={aide.id} className="right-2 top-3" />
       )}
       <div className="fr-enlarge-button pfmv-card no-shadow flex h-full flex-col">

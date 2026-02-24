@@ -1,7 +1,7 @@
 "use client";
-import { AideEstimationsListe } from "./aide/aide-estimations-liste";
 import { AideEstimationListeEmpty } from "./aide/aide-estimations-liste-empty";
 import { AideProjetFichesSolutions } from "./aide/aide-projet-fiches-solutions";
+import { AideProjetAidesListe } from "./aide/aide-projet-aides-liste";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
@@ -25,7 +25,7 @@ export const Financement = () => {
         <Case condition={canEditProjet || hasSelectedAides}>
           <Conditional>
             <Case condition={hasSelectedAides}>
-              <AideEstimationsListe estimations={projet?.estimations || []} />
+              <AideProjetAidesListe />
             </Case>
             <Case condition={!hasSelectedAides && hasFichesSolutions}>
               <AideProjetFichesSolutions projetId={projet?.id ?? 0} ficheSolutionIds={ficheSolutionIds} />

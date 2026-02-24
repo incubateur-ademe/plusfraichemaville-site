@@ -1,4 +1,3 @@
-import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { getAideSubmissionDeadlineAndName } from "../helpers";
 import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
@@ -8,16 +7,17 @@ import { Separator } from "@/src/components/common/separator";
 import CustomAccordion from "@/src/components/common/CustomAccordion";
 
 type AideEstimationsCardDeadlineProps = {
-  estimationsAides: EstimationWithAides["estimations_aides"];
+  estimationsAides: { aide: { submission_deadline: Date | null; name: string | null } }[];
+  ariaId: string;
 };
 
-export const AideEstimationsCardDeadline = ({ estimationsAides }: AideEstimationsCardDeadlineProps) => {
+export const AideEstimationsCardDeadline = ({ estimationsAides, ariaId }: AideEstimationsCardDeadlineProps) => {
   const aideDeadlineAndName = getAideSubmissionDeadlineAndName(estimationsAides);
 
   return (
     <CustomAccordion
       title={`Mes échéances de candidature (${aideDeadlineAndName.length})`}
-      ariaId={`accordion-echeances-${estimationsAides[0].estimationId}`}
+      ariaId={`accordion-echeances-${ariaId}`}
       expanded={false}
       className="mb-[14px] mt-4 rounded-2xl [&>h3>button]:!text-pfmv-navy"
       bgColor="!bg-dsfr-background-alt-blue-france"
