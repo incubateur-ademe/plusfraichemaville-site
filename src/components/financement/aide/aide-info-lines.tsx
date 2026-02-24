@@ -1,8 +1,8 @@
 import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "@/src/components/financement/types";
-import { AideEstimationsCardWarningRemainingDays } from "@/src/components/financement/aide/aide-estimations-card-warning-remaining-day";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { resolveAidType } from "@/src/components/financement/helpers";
 import { ReactNode } from "react";
+import { AideProjetCardWarningRemainingDays } from "./aide-projet-card-warning-remaining-day";
 
 export type AidesTerritoiresAideLine = {
   title: string;
@@ -61,7 +61,7 @@ const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLin
   description: (
     <div className="flex items-center gap-3">
       {aide.submission_deadline && (
-        <AideEstimationsCardWarningRemainingDays submissionDeadline={new Date(aide.submission_deadline)} size="small" />
+        <AideProjetCardWarningRemainingDays submissionDeadline={new Date(aide.submission_deadline)} size="small" />
       )}
       <span>
         {aide.submission_deadline

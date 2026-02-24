@@ -1,4 +1,4 @@
-import { AideEstimationsCardLabelFicheSolution } from "./aide-estimations-card-label-fiche-solution";
+import { AideProjetCardLabelFicheSolution } from "./aide-projet-card-label-fiche-solution";
 import { getRegionByDepartment } from "@/src/lib/departements";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Separator, SeparatorY } from "@/src/components/common/separator";
@@ -26,7 +26,7 @@ export const AideProjetPanelHeader = () => {
       </div>
       <div className="mb-6 flex min-h-7 flex-wrap gap-4">
         {ficheSolutionIds.map((ficheId) => (
-          <AideEstimationsCardLabelFicheSolution ficheId={ficheId} key={ficheId} />
+          <AideProjetCardLabelFicheSolution ficheId={ficheId} key={ficheId} />
         ))}
       </div>
       <Separator className="mb-6 h-px !opacity-100" />

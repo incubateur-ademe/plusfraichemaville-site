@@ -1,6 +1,6 @@
 "use client";
 
-import { AideEstimationsListeHeader } from "./aide-estimations-liste-header";
+import { AideProjetListeHeader } from "./aide-projet-liste-header";
 import { AideProjetPanelHeader } from "./aide-projet-panel-header";
 import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
@@ -20,7 +20,7 @@ import { useAideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { notifications } from "@/src/components/common/notifications";
 import { useAidesByProjetFetcher } from "@/src/hooks/use-aides-by-projet-fetcher";
-import { BREADCRUMB_MES_FINANCEMENTS } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-financement";
+import { BREADCRUMB_FINANCEMENTS_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-financement";
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 
 export const AideProjetEdit = memo(() => {
@@ -73,10 +73,10 @@ export const AideProjetEdit = memo(() => {
 
   return (
     <>
-      <BannerProjetBreadcrumb step={BREADCRUMB_MES_FINANCEMENTS} />
+      <BannerProjetBreadcrumb step={BREADCRUMB_FINANCEMENTS_LISTE} />
       <div className="fr-container pt-8" id="financement-pagination">
         {/* eslint-disable-next-line max-len */}
-        <AideEstimationsListeHeader title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature" />
+        <AideProjetListeHeader title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature" />
         <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
           <AideProjetPanelHeader />
 

@@ -18,10 +18,10 @@ export const BREADCRUMB_MES_FINANCEMENTS: EspaceProjetBreadcrumbStep = {
   breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
 };
 
-export const BREADCRUMB_FINANCEMENTS_LISTE = (dateEstimation: string): EspaceProjetBreadcrumbStep => ({
-  currentPageLabel: `Financements pour l'estimation du ${dateEstimation}`,
+export const BREADCRUMB_FINANCEMENTS_LISTE: EspaceProjetBreadcrumbStep = {
+  currentPageLabel: `Choisir mes financements à sauvegarder `,
   breadcrumbSegments: (projetId: number, projetName: string) =>
     [BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName), BREADCRUMB_SEGMENT_SOLUTION_MES_FINANCEMENTS(projetId)].flat(
       1,
     ),
-});
+};

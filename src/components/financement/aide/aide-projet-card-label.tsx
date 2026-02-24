@@ -1,11 +1,11 @@
 import clsx from "clsx";
 import { PropsWithChildren } from "react";
 
-type AideEstimationsCardLabelProps = {
+type AideProjetCardLabelProps = {
   isLoading?: boolean;
 } & PropsWithChildren;
 
-export const AideEstimationsCardLabel = ({ children, isLoading }: AideEstimationsCardLabelProps) => {
+export const AideProjetCardLabel = ({ children, isLoading }: AideProjetCardLabelProps) => {
   return (
     <div
       className={clsx(

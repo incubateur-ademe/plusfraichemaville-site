@@ -17,7 +17,7 @@ type AideEstimationsCardRecapProps = {
   };
 } & PropsWithChildren;
 
-export const AideEstimationsCardRecap = ({ isLoading, countAides, children }: AideEstimationsCardRecapProps) => {
+export const AideProjetRecap = ({ isLoading, countAides, children }: AideEstimationsCardRecapProps) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(projet?.id);
 

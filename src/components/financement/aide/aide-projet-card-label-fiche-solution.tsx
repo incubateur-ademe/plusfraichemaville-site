@@ -2,10 +2,10 @@
 import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers";
 import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import { AideEstimationsCardLabel } from "./aide-estimations-card-label";
+import { AideProjetCardLabel } from "./aide-projet-card-label";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
-export const AideEstimationsCardLabelFicheSolution = ({ ficheId }: { ficheId: number }) => {
+export const AideProjetCardLabelFicheSolution = ({ ficheId }: { ficheId: number }) => {
   const { data, isLoading } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionUrlApi(ficheId));
 
   const ficheSolution = data && data[0];
@@ -14,12 +14,12 @@ export const AideEstimationsCardLabelFicheSolution = ({ ficheId }: { ficheId: nu
 
   return (
     <div className="shrink-0 text-black">
-      <AideEstimationsCardLabel isLoading={isLoading}>
+      <AideProjetCardLabel isLoading={isLoading}>
         <div className="flex items-center justify-center gap-1">
           {<>{iconTypeSolution}</>}
           {ficheSolution?.attributes.titre}
         </div>
-      </AideEstimationsCardLabel>
+      </AideProjetCardLabel>
     </div>
   );
 };

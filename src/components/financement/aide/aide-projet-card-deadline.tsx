@@ -1,5 +1,5 @@
 import { getAideSubmissionDeadlineAndName } from "../helpers";
-import { AideEstimationsCardWarningRemainingDays } from "./aide-estimations-card-warning-remaining-day";
+import { AideProjetCardWarningRemainingDays } from "./aide-projet-card-warning-remaining-day";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import clsx from "clsx";
 import { Separator } from "@/src/components/common/separator";
@@ -7,12 +7,12 @@ import { Separator } from "@/src/components/common/separator";
 import CustomAccordion from "@/src/components/common/CustomAccordion";
 
 type AideEstimationsCardDeadlineProps = {
-  estimationsAides: { aide: { submission_deadline: Date | null; name: string | null } }[];
+  aides: { aide: { submission_deadline: Date | null; name: string | null } }[];
   ariaId: string;
 };
 
-export const AideEstimationsCardDeadline = ({ estimationsAides, ariaId }: AideEstimationsCardDeadlineProps) => {
-  const aideDeadlineAndName = getAideSubmissionDeadlineAndName(estimationsAides);
+export const AideProjetCardDeadline = ({ aides, ariaId }: AideEstimationsCardDeadlineProps) => {
+  const aideDeadlineAndName = getAideSubmissionDeadlineAndName(aides);
 
   return (
     <CustomAccordion
@@ -31,7 +31,7 @@ export const AideEstimationsCardDeadline = ({ estimationsAides, ariaId }: AideEs
                 <li className={clsx("list-none text-lg")} key={index}>
                   <span className="mr-2 inline-block font-bold">{aideDeadline.name} : </span>
                   <span className="block text-pretty">
-                    <AideEstimationsCardWarningRemainingDays
+                    <AideProjetCardWarningRemainingDays
                       submissionDeadline={new Date(aideDeadline.submission_deadline)}
                       className="mr-4 inline-block"
                       size="large"

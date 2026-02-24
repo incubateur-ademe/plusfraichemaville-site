@@ -1,17 +1,17 @@
 "use client";
 
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { AideEstimationsListeHeader } from "./aide-estimations-liste-header";
+import { AideProjetListeHeader } from "./aide-projet-liste-header";
 import { AideProjetPanelHeader } from "./aide-projet-panel-header";
 import { AideCardWithFetcher } from "./aide-card-with-fetcher";
-import { AideEstimationsCardRecap } from "./aide-estimations-recap";
-import { AideEstimationsCardDeadline } from "./aide-estimations-card-deadline";
+import { AideProjetCardDeadline } from "./aide-projet-card-deadline";
 import { countAidesByTypeFromDB, sumbissionDateSortBase } from "../helpers";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
 import { Separator } from "@/src/components/common/separator";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { AideProjetRecap } from "./aide-projet-recap";
 
 export const AideProjetAidesListe = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -25,7 +25,7 @@ export const AideProjetAidesListe = () => {
 
   return (
     <div>
-      <AideEstimationsListeHeader
+      <AideProjetListeHeader
         title="Sélectionnez les financements et soutiens à l'ingénierie pour lesquels
       vous souhaitez envoyer une candidature"
       />
@@ -39,7 +39,7 @@ export const AideProjetAidesListe = () => {
             <AideCardWithFetcher aideId={aideId} key={aideId} />
           ))}
         </div>
-        <AideEstimationsCardRecap
+        <AideProjetRecap
           isLoading={false}
           countAides={{ aideFinanciereCount, aideTechniqueCount, verb: "sélectionné" }}
         >
@@ -51,9 +51,9 @@ export const AideProjetAidesListe = () => {
               Modifier
             </LinkWithoutPrefetch>
           )}
-        </AideEstimationsCardRecap>
+        </AideProjetRecap>
         {hasSubmissionDeadline && (
-          <AideEstimationsCardDeadline estimationsAides={projetAides} ariaId={`projet-${projet?.id}`} />
+          <AideProjetCardDeadline aides={projetAides} ariaId={`projet-${projet?.id}`} />
         )}
       </div>
       <GenericFicheLink

@@ -1,7 +1,7 @@
 import { daysUntilDate } from "@/src/helpers/dateUtils";
 import clsx from "clsx";
 
-export const AideEstimationsCardWarningRemainingDays = ({
+export const AideProjetCardWarningRemainingDays = ({
   submissionDeadline,
   size,
   className,

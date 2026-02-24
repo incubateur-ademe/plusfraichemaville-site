@@ -2,12 +2,12 @@
 
 import { FicheSolutionSmallCard } from "@/src/components/ficheSolution/fiche-solution-small-card";
 import { Separator } from "@/src/components/common/separator";
-import { AideEstimationsCardRecap } from "./aide-estimations-recap";
-import { AideEstimationsListeHeader } from "./aide-estimations-liste-header";
+import { AideProjetListeHeader } from "./aide-projet-liste-header";
 import { useAidesByProjetFetcher } from "@/src/hooks/use-aides-by-projet-fetcher";
 import { countAidesByType } from "../helpers";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
+import { AideProjetRecap } from "./aide-projet-recap";
 
 type AideProjetFichesSolutionsProps = {
   projetId: number;
@@ -20,7 +20,7 @@ export const AideProjetFichesSolutions = ({ projetId, ficheSolutionIds }: AidePr
 
   return (
     <div>
-      <AideEstimationsListeHeader title="Retrouvez les aides financières et en ingénierie disponibles pour les solutions de votre projet" />
+      <AideProjetListeHeader title="Retrouvez les aides financières et en ingénierie disponibles pour les solutions de votre projet" />
       <div className="mb-8 rounded-2xl border border-dsfr-border-default-grey p-6">
         <div className="mb-6 text-lg font-bold">Solutions du projet</div>
         <div className="mb-8 flex flex-wrap gap-6">
@@ -33,14 +33,14 @@ export const AideProjetFichesSolutions = ({ projetId, ficheSolutionIds }: AidePr
           ))}
         </div>
         <Separator className="mb-6 h-px !opacity-100" />
-        <AideEstimationsCardRecap isLoading={isLoading} countAides={{ ...countAides, verb: "trouvé" }}>
+        <AideProjetRecap isLoading={isLoading} countAides={{ ...countAides, verb: "trouvé" }}>
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES(projetId)}
             className="fr-btn rounded-3xl"
           >
             Sélectionner des aides
           </GenericFicheLink>
-        </AideEstimationsCardRecap>
+        </AideProjetRecap>
       </div>
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
