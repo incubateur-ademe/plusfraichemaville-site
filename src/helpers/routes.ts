@@ -63,6 +63,8 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/selection`,
   ESPACE_PROJET_FINANCEMENT: (projetId: number) => `/espace-projet/${projetId}/financement`,
+  ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES: (projetId: number) =>
+    `/espace-projet/${projetId}/financement/selectionner-aides`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
   ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
     `/espace-projet/${projetId}/estimation/liste${(opener && `?open=${opener}`) || ""}`,
@@ -89,6 +91,9 @@ export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
 
 export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
   `/api/search-aides-for-estimation?estimationId=${estimationId}`;
+
+export const SEARCH_AIDE_FOR_PROJET_URL = (projetId: number) =>
+  `/api/search-aides-for-projet?projetId=${projetId}`;
 
 export const GET_AVAILABLE_PROJETS_FOR_USER_URL = (userId: string) =>
   `/api/get-available-projets-for-user?userId=${userId}`;

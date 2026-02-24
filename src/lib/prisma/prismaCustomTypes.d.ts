@@ -1,8 +1,10 @@
 import {
+  aide,
   collectivite,
   diagnostic_simulation,
   Prisma,
   projet,
+  projet_aides,
   projet_fiche,
   RoleProjet,
   User,
@@ -153,6 +155,8 @@ export interface ProjetWithCollectivite extends projet {
   collectivite: collectivite;
 }
 
+export type ProjetAideWithAide = projet_aides & { aide: aide };
+
 export interface ProjetWithRelations extends projet {
   collectivite: collectivite;
   estimations: EstimationWithAides[];
@@ -161,6 +165,7 @@ export interface ProjetWithRelations extends projet {
   sourcing_user_projets: ProjetSourcingContact[];
   fiches: projet_fiche[];
   diagnostic_simulations: diagnostic_simulation[];
+  projetAides: ProjetAideWithAide[];
 }
 
 export interface ProjetWithPublicRelations

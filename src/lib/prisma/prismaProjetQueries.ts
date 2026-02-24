@@ -69,6 +69,7 @@ export const projetIncludes = {
     include: { user: true },
   },
   fiches: true,
+  projetAides: { include: { aide: true } },
   sourcing_user_projets: {
     include: {
       sourced_user_projet: {

@@ -22,8 +22,8 @@ export const AideEstimationsListe = ({ estimations }: { estimations: EstimationW
   return (
     <div>
       <AideEstimationsListeHeader
-        title="Pour quelle estimation souhaitez-vous
-        trouver des financements ou des soutiens à l'ingénierie ?"
+        title="Sélectionnez les financements et soutiens à l’ingénierie pour lesquels
+      vous souhaitez envoyer une candidature"
       />
       <div>
         {estimations.map((estimation) => (

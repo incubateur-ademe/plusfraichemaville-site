@@ -89,9 +89,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     title: "Je trouve des aides financières et en ingénierie",
     progress: (projet: ProjetWithRelations | undefined) =>
       projet?.estimations?.find((estimation) => estimation.estimations_aides.length > 0) ? "100" : "0",
-    disabled: (projet: ProjetWithRelations | undefined) => {
-      return isEmpty(projet?.estimations);
-    },
+    disabled: () => false,
     type: "financement",
     picto: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
     children: (

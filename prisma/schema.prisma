@@ -74,6 +74,7 @@ model User {
   statut                            StatutUser?
   statut_updated_at                 DateTime?
   last_browsing_date                DateTime?
+  projetAides                       projet_aides[]
 }
 
 model VerificationToken {
@@ -233,6 +234,7 @@ model projet {
   diagnostic_simulations    diagnostic_simulation[]
   statut                    StatutProjet?
   statut_updated_at         DateTime?
+  projetAides               projet_aides[]
 }
 
 enum FicheType {
@@ -320,6 +322,7 @@ model aide {
   name                String?
   financers           String[]
   estimations_aides   estimations_aides[]
+  projetAides         projet_aides[]
 }
 
 model estimations_aides {
@@ -333,6 +336,19 @@ model estimations_aides {
   created_by   User?      @relation(fields: [user_id], references: [id])
 
   @@id([estimationId, aideId])
+}
+
+model projet_aides {
+  id         Int       @default(autoincrement())
+  projet     projet    @relation(fields: [projet_id], references: [id])
+  projet_id  Int
+  aide       aide      @relation(fields: [aideId], references: [id])
+  aideId     Int
+  created_at DateTime? @default(now())
+  user_id    String?
+  created_by User?     @relation(fields: [user_id], references: [id])
+
+  @@id([projet_id, aideId])
 }
 
 model estimation_materiaux {
@@ -429,9 +445,9 @@ model cron_jobs {
 }
 
 enum TypeEpci {
-  CC  // Communauté de communes
-  CA  // Communauté d'agglomération
-  CU  // Communauté urbaine
+  CC // Communauté de communes
+  CA // Communauté d'agglomération
+  CU // Communauté urbaine
   MET // Métropole
 }
 
