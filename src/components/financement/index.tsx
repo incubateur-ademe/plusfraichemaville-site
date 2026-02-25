@@ -4,8 +4,6 @@ import { AideProjetAidesListe } from "./aide/aide-projet-aides-liste";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
-import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
-import { TypeFiche } from "@/src/helpers/common";
 
 export const Financement = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -26,7 +24,7 @@ export const Financement = () => {
               <AideProjetAidesListe />
             </Case>
             <Case condition={!hasSelectedAides}>
-              <ProjetNoAideOverviewCard/>
+              <ProjetNoAideOverviewCard />
             </Case>
           </Conditional>
         </Case>

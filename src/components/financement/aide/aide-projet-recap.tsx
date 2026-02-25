@@ -51,7 +51,7 @@ export const AideProjetRecap = ({ isLoading, countAides, children }: AideEstimat
             </span>
           </div>
         </div>
-        <SeparatorY className="h-16 mt-6" />
+        <SeparatorY className="mt-6 h-16" />
         <div
           className={clsx(
             "flex items-center gap-4",

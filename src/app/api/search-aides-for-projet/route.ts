@@ -8,6 +8,7 @@ import { authOptions } from "@/src/lib/next-auth/auth";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 import { FicheType } from "@/src/generated/prisma/client";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 export async function GET(request: NextRequest) {
   const projetId = request.nextUrl.searchParams.get("projetId");
@@ -30,9 +31,17 @@ export async function GET(request: NextRequest) {
     return NextResponse.json(null, { status: 403 });
   }
 
-  const ficheSolutionIds = projet.fiches
-    .filter((fiche) => fiche.type === FicheType.SOLUTION)
-    .map((fiche) => fiche.fiche_id);
+  const ficheSolutionIdsParam = request.nextUrl.searchParams.get("ficheSolutionIds");
+  const requestedIds: number[] | null = ficheSolutionIdsParam ? JSON.parse(ficheSolutionIdsParam) : null;
+
+  console.log("requestedIds", requestedIds);
+
+  const ficheSolutionIds = isEmpty(requestedIds)
+    ? []
+    : projet.fiches
+        .filter((fiche) => fiche.type === FicheType.SOLUTION)
+        .filter((fiche) => requestedIds!.includes(fiche.fiche_id))
+        .map((fiche) => fiche.fiche_id);
 
   const ficheSolutions = await getFicheSolutionByIds(ficheSolutionIds);
   const collectivite = await getCollectiviteById(projet.collectiviteId);

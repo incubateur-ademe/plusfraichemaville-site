@@ -7,7 +7,7 @@ import { getLastCompletedEstimation } from "@/src/helpers/estimation";
 import { TableauDeBordSuiviWithEstimation } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-with-estimation";
 import { FicheType } from "@/src/generated/prisma/client";
 import { isEmpty } from "@/src/helpers/listUtils";
-import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
+import { getProjetFichesIdsByType, hasFichesSolutions } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
 import { ServicesSidebar } from "@/src/components/tableau-de-bord/services-sidebar/services-sidebar";
 import { TableauDeBordSuiviEstimationDisabled } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-estimation-disabled";
@@ -76,9 +76,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
       }
     },
     disabled: (projet: ProjetWithRelations | undefined) => {
-      return (
-        isEmpty(getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution })) && isEmpty(projet?.estimations)
-      );
+      return !hasFichesSolutions(projet) && isEmpty(projet?.estimations);
     },
     type: "estimation",
     picto: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,

@@ -53,10 +53,11 @@ export const AideCardSaveButtonProjet = ({ aideTerritoireId, projetId, className
       ) : (
         <GenericSaveButtonElement
           isSaved={!!savedId}
-          className=""
+          className="mt-1"
           update={update}
           id={aideTerritoireId}
           labels={{ saved: "Sauvegardée", notSaved: "Sauvegarder" }}
+          size="small"
         />
       )}
     </div>

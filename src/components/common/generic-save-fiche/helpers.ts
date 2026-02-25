@@ -32,4 +32,3 @@ export const getProjetFichesIdsByType = ({
 export const hasFichesSolutions = (projet: ProjetWithRelations | undefined) => {
   return !isEmpty(getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }));
 };
-  
