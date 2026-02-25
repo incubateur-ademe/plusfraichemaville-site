@@ -5,6 +5,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 const datas = {
   solution: {
@@ -22,11 +23,11 @@ const datas = {
   },
 };
 
-export const AideEstimationListeEmpty = () => {
+export const AideProjetListeEmpty = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const fichesSolutions = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution });
 
-  const hasFichesSolutions = fichesSolutions && fichesSolutions?.length > 0;
+  const hasFichesSolutions = !isEmpty(fichesSolutions);
 
   const data = datas[hasFichesSolutions ? "estimation" : "solution"];
 

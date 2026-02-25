@@ -75,8 +75,10 @@ export const AideProjetEdit = memo(() => {
     <>
       <BannerProjetBreadcrumb step={BREADCRUMB_FINANCEMENTS_LISTE} />
       <div className="fr-container pt-8" id="financement-pagination">
-        {/* eslint-disable-next-line max-len */}
-        <AideProjetListeHeader title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous souhaitez envoyer une candidature" />
+        <AideProjetListeHeader
+          title="Sélectionnez les financements et soutien à l'ingénierie pour lesquels vous
+         souhaitez envoyer une candidature"
+        />
         <div className="pfmv-card no-shadow pfmv-card-outline mb-8 w-full p-8">
           <AideProjetPanelHeader />
 

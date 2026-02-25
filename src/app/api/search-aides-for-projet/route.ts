@@ -26,17 +26,13 @@ export async function GET(request: NextRequest) {
   }
 
   const permission = new PermissionManager(session);
-  if (!(await permission.canEditProject(projet.id))) {
+  if (!(await permission.canViewProject(projet.id))) {
     return NextResponse.json(null, { status: 403 });
   }
 
   const ficheSolutionIds = projet.fiches
     .filter((fiche) => fiche.type === FicheType.SOLUTION)
     .map((fiche) => fiche.fiche_id);
-
-  if (ficheSolutionIds.length === 0) {
-    return NextResponse.json({ count: 0, results: [] });
-  }
 
   const ficheSolutions = await getFicheSolutionByIds(ficheSolutionIds);
   const collectivite = await getCollectiviteById(projet.collectiviteId);

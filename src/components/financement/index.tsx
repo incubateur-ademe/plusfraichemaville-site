@@ -1,6 +1,5 @@
 "use client";
-import { AideEstimationListeEmpty } from "./aide/aide-projet-liste-empty";
-import { AideProjetFichesSolutions } from "./aide/aide-projet-fiches-solutions";
+import { ProjetNoAideOverviewCard } from "./aide/projet-no-aide-overview-card";
 import { AideProjetAidesListe } from "./aide/aide-projet-aides-liste";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
@@ -9,12 +8,11 @@ import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-f
 import { TypeFiche } from "@/src/helpers/common";
 
 export const Financement = () => {
-  const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const canEditProjet = useCanEditProjet(projet?.id);
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
 
-  const hasSelectedAides = (projet?.projetAides?.length ?? 0) > 0;
-  const ficheSolutionIds = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) ?? [];
-  const hasFichesSolutions = ficheSolutionIds.length > 0;
+  const canEditProjet = useCanEditProjet(currentProjet?.id);
+  const hasSelectedAides = (currentProjet?.projetAides?.length ?? 0) > 0;
+  if (!currentProjet) return null;
 
   return (
     <div className="fr-container pt-8">
@@ -27,11 +25,8 @@ export const Financement = () => {
             <Case condition={hasSelectedAides}>
               <AideProjetAidesListe />
             </Case>
-            <Case condition={!hasSelectedAides && hasFichesSolutions}>
-              <AideProjetFichesSolutions projetId={projet?.id ?? 0} ficheSolutionIds={ficheSolutionIds} />
-            </Case>
-            <Case condition={!hasSelectedAides && !hasFichesSolutions}>
-              <AideEstimationListeEmpty />
+            <Case condition={!hasSelectedAides}>
+              <ProjetNoAideOverviewCard/>
             </Case>
           </Conditional>
         </Case>
