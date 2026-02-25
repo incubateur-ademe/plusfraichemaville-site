@@ -2,12 +2,6 @@ import { cron_jobs } from "@/src/generated/prisma/client";
 import { prismaClient } from "./prismaClient";
 import { UserWithAdminProjets } from "./prismaCustomTypes";
 
-export const getLastHubspotSync = async () =>
-  await prismaClient.cron_jobs.findFirst({
-    where: { job_type: "SYNC_HUBSPOT" },
-    orderBy: { execution_end_time: "desc" },
-  });
-
 export const getLastCsmMailBatch = async () =>
   await prismaClient.cron_jobs.findFirst({
     where: { job_type: "CSM_MAIL_BATCH" },
@@ -30,7 +24,6 @@ export const saveCronJob = async (startTime: Date, endTime: Date, jobType: cron_
   });
 
 export const cronsServices = {
-  hubspot: getLastHubspotSync,
   csmMailBatch: getLastCsmMailBatch,
   connect: getLastConnectSync,
 };

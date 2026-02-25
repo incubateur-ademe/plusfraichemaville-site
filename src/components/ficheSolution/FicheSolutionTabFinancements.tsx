@@ -1,7 +1,5 @@
 import aidesTerittoiresLogo from "../../../public/images/fiches-solutions/aides-territoires.svg";
 import Image from "next/image";
-import { getRegionLabelFromCode } from "@/src/helpers/regions";
-import CmsRichText from "@/src/components/common/CmsRichText";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
@@ -30,33 +28,6 @@ export default function FicheSolutionTabFinancements({
             </div>
           </div>
         </div>
-      )}
-      {ficheAttributes.lien_fond_vert && (
-        <>
-          <h3 className="mb-2 mt-10 text-[1.375rem] font-bold">Fonds Vert</h3>
-          <div>
-            <LinkWithoutPrefetch href={ficheAttributes.lien_fond_vert} target="_blank">
-              Consulter les aides liées à cette solution
-            </LinkWithoutPrefetch>{" "}
-            dans le cadre du programme Fonds Vert
-          </div>
-        </>
-      )}
-      {ficheAttributes.aides_regionales && ficheAttributes.aides_regionales.length > 0 && (
-        <>
-          <h3 className="mb-4 mt-10 text-[1.375rem] font-bold">Aides spécifiques par régions</h3>
-          {ficheAttributes.aides_regionales.map((aideRegionale) => (
-            <div key={aideRegionale.region?.data?.attributes.code} className="mb-10 mt-2">
-              <div className="flex">
-                <span className="fr-icon-map-pin-2-fill fr-icon--sm mr-2" />
-                <div className="mb-1 text-lg font-bold">
-                  {getRegionLabelFromCode(aideRegionale.region?.data?.attributes.code)}
-                </div>
-              </div>
-              <CmsRichText label={aideRegionale.description} />
-            </div>
-          ))}
-        </>
       )}
     </div>
   );

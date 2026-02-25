@@ -81,15 +81,17 @@ export async function FicheSolution({
                   matomoTrackEvent={FICHE_SOLUTION_CLIC_ONGLET("Mis en oeuvre")}
                 />
               </li>
-              <li role="presentation">
-                <CustomTabButton
-                  label="Financements"
-                  isSelected={false}
-                  contentId="financements-panel"
-                  className="customTab"
-                  matomoTrackEvent={FICHE_SOLUTION_CLIC_ONGLET("Financements")}
-                />
-              </li>
+              {ficheSolution.attributes.lien_aide_territoire && (
+                <li role="presentation">
+                  <CustomTabButton
+                    label="Financements"
+                    isSelected={false}
+                    contentId="financements-panel"
+                    className="customTab"
+                    matomoTrackEvent={FICHE_SOLUTION_CLIC_ONGLET("Financements")}
+                  />
+                </li>
+              )}
               <li role="presentation">
                 <CustomTabButton
                   label="Oups !"
@@ -122,9 +124,11 @@ export async function FicheSolution({
             <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
               <FicheSolutionTabMiseEnOeuvre ficheAttributes={ficheSolution.attributes} />
             </div>
-            <div id="financements-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
-              <FicheSolutionTabFinancements ficheAttributes={ficheSolution.attributes} />
-            </div>
+            {ficheSolution.attributes.lien_aide_territoire && (
+              <div id="financements-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
+                <FicheSolutionTabFinancements ficheAttributes={ficheSolution.attributes} />
+              </div>
+            )}
             <div id="oups-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
               <FicheSolutionTabOups ficheAttributes={ficheSolution.attributes} />
             </div>

@@ -1,5 +1,4 @@
 import { ModalProps } from "@codegouvfr/react-dsfr/Modal";
-import { HubspotQuery } from "../components/hubspot/types";
 
 declare module "@splidejs/react-splide" {
   export { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
@@ -26,12 +25,5 @@ export type Page = {
     [key: string]: string;
   }>;
 };
-
-declare global {
-  export interface Window {
-    _hsq: HubspotQuery[];
-    _hsp: HubspotQuery[];
-  }
-}
 
 export type LatLngTuple = [number, number, number?];
