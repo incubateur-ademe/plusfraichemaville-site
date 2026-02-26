@@ -34,8 +34,6 @@ export async function GET(request: NextRequest) {
   const ficheSolutionIdsParam = request.nextUrl.searchParams.get("ficheSolutionIds");
   const requestedIds: number[] | null = ficheSolutionIdsParam ? JSON.parse(ficheSolutionIdsParam) : null;
 
-  console.log("requestedIds", requestedIds);
-
   const ficheSolutionIds = isEmpty(requestedIds)
     ? []
     : projet.fiches

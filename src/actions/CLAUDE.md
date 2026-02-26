@@ -66,11 +66,35 @@ type ResponseAction<T> = {
    ```
 
 2. **Use PermissionManager for authorization**:
+
    ```typescript
    const permission = new PermissionManager(session);
    if (!(await permission.canEditProject(projetId))) {
      return { type: "error", message: "UNAUTHORIZED" };
    }
+   ```
+
+3. **Pass userId as a parameter for user-scoped actions**:
+   When an action reads or modifies data for a specific user, always receive the `userId` as an explicit parameter (passed from the client store) rather than extracting it from the session. Then use `PermissionManager.canUpdateUser(userId)` to verify the caller is acting on their own data.
+
+   ```typescript
+   // ✅ Correct
+   export const myUserAction = async (userId: string, ...) => {
+     const session = await auth();
+     if (!session) return { type: "error", message: "UNAUTHENTICATED" };
+     if (!new PermissionManager(session).canUpdateUser(userId)) {
+       return { type: "error", message: "UNAUTHORIZED" };
+     }
+     // use userId for the query
+   };
+   ```
+
+   ```typescript
+   // ❌ Wrong — never derive userId silently from the session
+   export const myUserAction = async (...) => {
+     const session = await auth();
+     const userId = session?.user.id; // ❌ implicit, not validated against caller intent
+   };
    ```
 
 ## Error Handling

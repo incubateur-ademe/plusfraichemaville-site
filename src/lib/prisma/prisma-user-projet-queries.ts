@@ -323,3 +323,20 @@ export const updateLastAccessToProjetByUser = async (userProjetLink: user_projet
     },
   });
 };
+
+export const addAideAlreadySeenToUserProjet = async (
+  userId: string,
+  projetId: number,
+  aideTerritoireId: number,
+): Promise<UserProjetWithUser> => {
+  return prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: { user_id: userId, projet_id: projetId },
+      deleted_at: null,
+    },
+    data: {
+      aides_already_seen: { push: aideTerritoireId },
+    },
+    include: { user: true },
+  });
+};

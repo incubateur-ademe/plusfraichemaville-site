@@ -3,6 +3,7 @@ import {
   ProjetAideWithAide,
   ProjetWithPublicRelations,
   ProjetWithRelations,
+  UserProjetWithUser,
 } from "@/src/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
 import { updateAideInEstimation, updateAideInProjet } from "./helper";
@@ -27,6 +28,7 @@ export type ProjetsActions = {
   deleteAideInProjet: (_aideTerritoireId: number) => void;
   deleteProjet: (_projetId: number) => void;
   deletePendingProjet: (_projetId: number) => void;
+  updateUserProjetInProjet: (_userProjet: UserProjetWithUser) => void;
 };
 
 export type ProjetsStore = ProjetsState & ProjetsActions;
@@ -81,6 +83,15 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
     },
     deleteAideInProjet: (aideTerritoireId) => {
       set((state) => updateAideInProjet(state, null, aideTerritoireId));
+    },
+    updateUserProjetInProjet: (userProjet) => {
+      set((state) => ({
+        projets: state.projets.map((projet) =>
+          projet.id === userProjet.projet_id
+            ? { ...projet, users: projet.users.map((u) => (u.id === userProjet.id ? userProjet : u)) }
+            : projet,
+        ),
+      }));
     },
   }));
 };

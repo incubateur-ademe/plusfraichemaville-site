@@ -191,7 +191,8 @@ exports.Prisma.User_projetScalarFieldEnum = {
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   nb_views: 'nb_views',
-  last_viewed_at: 'last_viewed_at'
+  last_viewed_at: 'last_viewed_at',
+  aides_already_seen: 'aides_already_seen'
 };
 
 exports.Prisma.EmailScalarFieldEnum = {
