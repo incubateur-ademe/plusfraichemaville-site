@@ -356,4 +356,3 @@ export const updateUserProjetAidesFsUnselected = async (
     data: { aides_fs_unselected: unselectedIds },
   });
 };
-

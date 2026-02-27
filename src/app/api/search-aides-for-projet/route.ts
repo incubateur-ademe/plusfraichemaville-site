@@ -10,6 +10,7 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 import { FicheType } from "@/src/generated/prisma/client";
 import { isEmpty } from "@/src/helpers/listUtils";
+import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 
 export async function GET(request: NextRequest) {
   const projetId = request.nextUrl.searchParams.get("projetId");

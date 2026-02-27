@@ -10,6 +10,20 @@
       "request": "launch",
       "command": "pnpm run dev:start",
       "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Run Script: lint",
+      "request": "launch",
+      "command": "pnpm run lint",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Run Script: fixPrettier",
+      "request": "launch",
+      "command": "pnpm run fixPrettier",
+      "cwd": "${workspaceFolder}"
     }
   ]
 }

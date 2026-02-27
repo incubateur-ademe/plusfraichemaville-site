@@ -87,8 +87,8 @@ export const getFullUrl = (route: string): string => `${process.env.NEXT_PUBLIC_
 export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
   `/api/get-aides-territoires-aide-by-aide-id?aideId=${aideId}`;
 
-export const SEARCH_AIDE_FOR_PROJET_URL = (projetId: number, ficheSolutionIds?: number[]) => {
-  const base = `/api/search-aides-for-projet?projetId=${projetId}`;
+export const SEARCH_AIDE_FOR_PROJET_URL = (projetId: number, ficheSolutionIds?: number[], userId?: string) => {
+  const base = `/api/search-aides-for-projet?projetId=${projetId}${userId ? `&userId=${userId}` : ""}`;
   return ficheSolutionIds !== undefined ? `${base}&ficheSolutionIds=${JSON.stringify(ficheSolutionIds)}` : base;
 };
 
