@@ -16,7 +16,7 @@ export const Financement = () => {
     <div className="fr-container pt-8">
       <Conditional>
         <Case condition={!canEditProjet && !hasSelectedAides}>
-          <div className="mb-2 text-2xl font-bold">{"Aucun plan de financement n'a été fait pour ce projet"}</div>
+          <div className="mb-2 text-2xl font-bold">{"Aucune aide n'a été sauvegardée pour ce projet"}</div>
         </Case>
         <Case condition={canEditProjet || hasSelectedAides}>
           <Conditional>
