@@ -6,9 +6,9 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
 import { isEmpty } from "@/src/helpers/listUtils";
-import { AideEstimationsCardLabelFicheSolution } from "@/src/components/financement/aide/aide-estimations-card-label-fiche-solution";
+import { AideProjetCardLabelFicheSolution } from "@/src/components/financement/aide/aide-projet-card-label-fiche-solution";
 import { useRecommandationsForCurrentProjet } from "@/src/hooks/use-recommandations-for-current-projet";
-import { AideEstimationsCardLabel } from "@/src/components/financement/aide/aide-estimations-card-label";
+import { AideProjetCardLabel } from "@/src/components/financement/aide/aide-projet-card-label";
 
 export const ServiceRecommandations = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
@@ -59,10 +59,10 @@ export const ServiceRecommandations = () => {
                   <ul className="mb-3 flex flex-wrap gap-2 !pl-0">
                     {recommandations.slice(0, 2).map((recommandations) => (
                       <li key={recommandations.id} className="!mr-0">
-                        <AideEstimationsCardLabelFicheSolution ficheId={recommandations.id} />
+                        <AideProjetCardLabelFicheSolution ficheId={recommandations.id} />
                       </li>
                     ))}
-                    {recommandations.length > 2 && <AideEstimationsCardLabel>...</AideEstimationsCardLabel>}
+                    {recommandations.length > 2 && <AideProjetCardLabel>...</AideProjetCardLabel>}
                   </ul>
                   <div className="flex justify-between text-sm text-dsfr-text-default-grey group-hover:underline">
                     <span>Voir le détail</span>

@@ -3,13 +3,12 @@ import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "../types";
 import CmsRichText from "@/src/components/common/CmsRichText";
 import { AideFichePanelLine } from "./aide-fiche-panel-line";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { AideCardSaveButton } from "./aide-card-save-button";
 import { resolveAidType } from "@/src/components/financement/helpers";
 import clsx from "clsx";
 import { AidesTerritoiresFullDetailedLines } from "@/src/components/financement/aide/aide-info-lines";
-import { useParams } from "next/navigation";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { AideCardSaveButtonProjet } from "@/src/components/financement/aide/aide-card-save-button-projet";
 
 type AideFicheProps = {
   aide: AidesTerritoiresAide;
@@ -17,7 +16,6 @@ type AideFicheProps = {
 
 export const AideFiche = ({ aide }: AideFicheProps) => {
   const isAideFinanciere = resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement;
-  const estimationId = useParams().estimationId;
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(projet?.id);
 
@@ -30,8 +28,8 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
         )}
         id="financement-panel"
       >
-        {!!estimationId && canEditProjet && (
-          <AideCardSaveButton estimationId={+estimationId} aideTerritoireId={aide.id} className="right-4 top-4" />
+        {!!projet && canEditProjet && (
+          <AideCardSaveButtonProjet projetId={projet.id} aideTerritoireId={aide.id} className="right-4 top-4" />
         )}
         <div className="mb-6 flex items-center gap-4">
           <Image

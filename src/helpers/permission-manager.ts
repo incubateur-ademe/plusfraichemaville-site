@@ -30,6 +30,11 @@ export class PermissionManager {
     return role === RoleProjet.ADMIN || role === RoleProjet.EDITEUR;
   }
 
+  async canViewProject(projectId: number) {
+    const role = await this.getUserProjectRole(projectId);
+    return role !== null;
+  }
+
   async canDeleteProject(projectId: number) {
     return this.isAdmin(projectId);
   }

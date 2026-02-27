@@ -1,29 +1,32 @@
 "use client";
-import { AideEstimationsListe } from "./aide/aide-estimations-liste";
-import { AideEstimationListeEmpty } from "./aide/aide-estimations-liste-empty";
+import { ProjetNoAideOverviewCard } from "./aide/projet-no-aide-overview-card";
+import { AideProjetAidesListe } from "./aide/aide-projet-aides-liste";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Case, Conditional } from "@/src/components/common/conditional-renderer";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export const Financement = () => {
-  const projet = useProjetsStore((state) => state.getCurrentProjet());
-  const canEditProjet = useCanEditProjet(projet?.id);
-  const { estimations } = projet || {};
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
 
-  const hasEstimations = estimations && estimations?.length > 0;
-  const hasAlreadySelectedAides = !!estimations?.find((estimation) => estimation.estimations_aides.length > 0);
+  const canEditProjet = useCanEditProjet(currentProjet?.id);
+  const hasSelectedAides = (currentProjet?.projetAides?.length ?? 0) > 0;
+  if (!currentProjet) return null;
+
   return (
     <div className="fr-container pt-8">
       <Conditional>
-        <Case condition={!canEditProjet && !hasAlreadySelectedAides}>
-          <div className="mb-2 text-2xl font-bold">{"Aucun plan de financement n'a été fait pour ce projet"}</div>
+        <Case condition={!canEditProjet && !hasSelectedAides}>
+          <div className="mb-2 text-2xl font-bold">{"Aucune aide n'a été sauvegardée pour ce projet"}</div>
         </Case>
-        <Case condition={canEditProjet || hasAlreadySelectedAides}>
-          {hasEstimations || hasAlreadySelectedAides ? (
-            <AideEstimationsListe estimations={estimations || []} />
-          ) : (
-            <AideEstimationListeEmpty />
-          )}
+        <Case condition={canEditProjet || hasSelectedAides}>
+          <Conditional>
+            <Case condition={hasSelectedAides}>
+              <AideProjetAidesListe />
+            </Case>
+            <Case condition={!hasSelectedAides}>
+              <ProjetNoAideOverviewCard />
+            </Case>
+          </Conditional>
         </Case>
       </Conditional>
     </div>

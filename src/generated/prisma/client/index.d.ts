@@ -84,6 +84,11 @@ export type aide = $Result.DefaultSelection<Prisma.$aidePayload>
  */
 export type estimations_aides = $Result.DefaultSelection<Prisma.$estimations_aidesPayload>
 /**
+ * Model projet_aides
+ * 
+ */
+export type projet_aides = $Result.DefaultSelection<Prisma.$projet_aidesPayload>
+/**
  * Model estimation_materiaux
  * 
  */
@@ -582,6 +587,16 @@ export class PrismaClient<
     * ```
     */
   get estimations_aides(): Prisma.estimations_aidesDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.projet_aides`: Exposes CRUD operations for the **projet_aides** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Projet_aides
+    * const projet_aides = await prisma.projet_aides.findMany()
+    * ```
+    */
+  get projet_aides(): Prisma.projet_aidesDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.estimation_materiaux`: Exposes CRUD operations for the **estimation_materiaux** model.
@@ -1116,6 +1131,7 @@ export namespace Prisma {
     climadiag: 'climadiag',
     aide: 'aide',
     estimations_aides: 'estimations_aides',
+    projet_aides: 'projet_aides',
     estimation_materiaux: 'estimation_materiaux',
     estimation_fiche_solution: 'estimation_fiche_solution',
     conversation: 'conversation',
@@ -1142,7 +1158,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "account" | "user" | "verificationToken" | "collectivite" | "user_projet" | "email" | "user_collectivite" | "projet" | "projet_fiche" | "projet_sourcing_contact" | "estimation" | "climadiag" | "aide" | "estimations_aides" | "estimation_materiaux" | "estimation_fiche_solution" | "conversation" | "diagnostic_simulation" | "analytics" | "cron_jobs" | "epci" | "commune"
+      modelProps: "account" | "user" | "verificationToken" | "collectivite" | "user_projet" | "email" | "user_collectivite" | "projet" | "projet_fiche" | "projet_sourcing_contact" | "estimation" | "climadiag" | "aide" | "estimations_aides" | "projet_aides" | "estimation_materiaux" | "estimation_fiche_solution" | "conversation" | "diagnostic_simulation" | "analytics" | "cron_jobs" | "epci" | "commune"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -2182,6 +2198,80 @@ export namespace Prisma {
           }
         }
       }
+      projet_aides: {
+        payload: Prisma.$projet_aidesPayload<ExtArgs>
+        fields: Prisma.projet_aidesFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.projet_aidesFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.projet_aidesFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>
+          }
+          findFirst: {
+            args: Prisma.projet_aidesFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.projet_aidesFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>
+          }
+          findMany: {
+            args: Prisma.projet_aidesFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>[]
+          }
+          create: {
+            args: Prisma.projet_aidesCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>
+          }
+          createMany: {
+            args: Prisma.projet_aidesCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.projet_aidesCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>[]
+          }
+          delete: {
+            args: Prisma.projet_aidesDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>
+          }
+          update: {
+            args: Prisma.projet_aidesUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>
+          }
+          deleteMany: {
+            args: Prisma.projet_aidesDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.projet_aidesUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.projet_aidesUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>[]
+          }
+          upsert: {
+            args: Prisma.projet_aidesUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$projet_aidesPayload>
+          }
+          aggregate: {
+            args: Prisma.Projet_aidesAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateProjet_aides>
+          }
+          groupBy: {
+            args: Prisma.projet_aidesGroupByArgs<ExtArgs>
+            result: $Utils.Optional<Projet_aidesGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.projet_aidesCountArgs<ExtArgs>
+            result: $Utils.Optional<Projet_aidesCountAggregateOutputType> | number
+          }
+        }
+      }
       estimation_materiaux: {
         payload: Prisma.$estimation_materiauxPayload<ExtArgs>
         fields: Prisma.estimation_materiauxFieldRefs
@@ -2872,6 +2962,7 @@ export namespace Prisma {
     climadiag?: climadiagOmit
     aide?: aideOmit
     estimations_aides?: estimations_aidesOmit
+    projet_aides?: projet_aidesOmit
     estimation_materiaux?: estimation_materiauxOmit
     estimation_fiche_solution?: estimation_fiche_solutionOmit
     conversation?: conversationOmit
@@ -2990,6 +3081,7 @@ export namespace Prisma {
     estimations_aides: number
     fiches: number
     diagnostic_simulation: number
+    projetAides: number
   }
 
   export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3009,6 +3101,7 @@ export namespace Prisma {
     estimations_aides?: boolean | UserCountOutputTypeCountEstimations_aidesArgs
     fiches?: boolean | UserCountOutputTypeCountFichesArgs
     diagnostic_simulation?: boolean | UserCountOutputTypeCountDiagnostic_simulationArgs
+    projetAides?: boolean | UserCountOutputTypeCountProjetAidesArgs
   }
 
   // Custom InputTypes
@@ -3134,6 +3227,13 @@ export namespace Prisma {
     where?: diagnostic_simulationWhereInput
   }
 
+  /**
+   * UserCountOutputType without action
+   */
+  export type UserCountOutputTypeCountProjetAidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: projet_aidesWhereInput
+  }
+
 
   /**
    * Count Type CollectiviteCountOutputType
@@ -3225,6 +3325,7 @@ export namespace Prisma {
     sourcing_user_projets: number
     fiches: number
     diagnostic_simulations: number
+    projetAides: number
   }
 
   export type ProjetCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3233,6 +3334,7 @@ export namespace Prisma {
     sourcing_user_projets?: boolean | ProjetCountOutputTypeCountSourcing_user_projetsArgs
     fiches?: boolean | ProjetCountOutputTypeCountFichesArgs
     diagnostic_simulations?: boolean | ProjetCountOutputTypeCountDiagnostic_simulationsArgs
+    projetAides?: boolean | ProjetCountOutputTypeCountProjetAidesArgs
   }
 
   // Custom InputTypes
@@ -3279,6 +3381,13 @@ export namespace Prisma {
    */
   export type ProjetCountOutputTypeCountDiagnostic_simulationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: diagnostic_simulationWhereInput
+  }
+
+  /**
+   * ProjetCountOutputType without action
+   */
+  export type ProjetCountOutputTypeCountProjetAidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: projet_aidesWhereInput
   }
 
 
@@ -3328,10 +3437,12 @@ export namespace Prisma {
 
   export type AideCountOutputType = {
     estimations_aides: number
+    projetAides: number
   }
 
   export type AideCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     estimations_aides?: boolean | AideCountOutputTypeCountEstimations_aidesArgs
+    projetAides?: boolean | AideCountOutputTypeCountProjetAidesArgs
   }
 
   // Custom InputTypes
@@ -3350,6 +3461,13 @@ export namespace Prisma {
    */
   export type AideCountOutputTypeCountEstimations_aidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: estimations_aidesWhereInput
+  }
+
+  /**
+   * AideCountOutputType without action
+   */
+  export type AideCountOutputTypeCountProjetAidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: projet_aidesWhereInput
   }
 
 
@@ -4890,6 +5008,7 @@ export namespace Prisma {
     estimations_aides?: boolean | User$estimations_aidesArgs<ExtArgs>
     fiches?: boolean | User$fichesArgs<ExtArgs>
     diagnostic_simulation?: boolean | User$diagnostic_simulationArgs<ExtArgs>
+    projetAides?: boolean | User$projetAidesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
@@ -4980,6 +5099,7 @@ export namespace Prisma {
     estimations_aides?: boolean | User$estimations_aidesArgs<ExtArgs>
     fiches?: boolean | User$fichesArgs<ExtArgs>
     diagnostic_simulation?: boolean | User$diagnostic_simulationArgs<ExtArgs>
+    projetAides?: boolean | User$projetAidesArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -5004,6 +5124,7 @@ export namespace Prisma {
       estimations_aides: Prisma.$estimations_aidesPayload<ExtArgs>[]
       fiches: Prisma.$projet_fichePayload<ExtArgs>[]
       diagnostic_simulation: Prisma.$diagnostic_simulationPayload<ExtArgs>[]
+      projetAides: Prisma.$projet_aidesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
@@ -5436,6 +5557,7 @@ export namespace Prisma {
     estimations_aides<T extends User$estimations_aidesArgs<ExtArgs> = {}>(args?: Subset<T, User$estimations_aidesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimations_aidesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     fiches<T extends User$fichesArgs<ExtArgs> = {}>(args?: Subset<T, User$fichesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_fichePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     diagnostic_simulation<T extends User$diagnostic_simulationArgs<ExtArgs> = {}>(args?: Subset<T, User$diagnostic_simulationArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$diagnostic_simulationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    projetAides<T extends User$projetAidesArgs<ExtArgs> = {}>(args?: Subset<T, User$projetAidesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -6254,6 +6376,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Diagnostic_simulationScalarFieldEnum | Diagnostic_simulationScalarFieldEnum[]
+  }
+
+  /**
+   * User.projetAides
+   */
+  export type User$projetAidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    where?: projet_aidesWhereInput
+    orderBy?: projet_aidesOrderByWithRelationInput | projet_aidesOrderByWithRelationInput[]
+    cursor?: projet_aidesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Projet_aidesScalarFieldEnum | Projet_aidesScalarFieldEnum[]
   }
 
   /**
@@ -8501,12 +8647,16 @@ export namespace Prisma {
     id: number | null
     projet_id: number | null
     nb_views: number | null
+    aides_already_seen: number | null
+    aides_fs_unselected: number | null
   }
 
   export type User_projetSumAggregateOutputType = {
     id: number | null
     projet_id: number | null
     nb_views: number | null
+    aides_already_seen: number[]
+    aides_fs_unselected: number[]
   }
 
   export type User_projetMinAggregateOutputType = {
@@ -8552,6 +8702,8 @@ export namespace Prisma {
     deleted_by: number
     nb_views: number
     last_viewed_at: number
+    aides_already_seen: number
+    aides_fs_unselected: number
     _all: number
   }
 
@@ -8560,12 +8712,16 @@ export namespace Prisma {
     id?: true
     projet_id?: true
     nb_views?: true
+    aides_already_seen?: true
+    aides_fs_unselected?: true
   }
 
   export type User_projetSumAggregateInputType = {
     id?: true
     projet_id?: true
     nb_views?: true
+    aides_already_seen?: true
+    aides_fs_unselected?: true
   }
 
   export type User_projetMinAggregateInputType = {
@@ -8611,6 +8767,8 @@ export namespace Prisma {
     deleted_by?: true
     nb_views?: true
     last_viewed_at?: true
+    aides_already_seen?: true
+    aides_fs_unselected?: true
     _all?: true
   }
 
@@ -8713,6 +8871,8 @@ export namespace Prisma {
     deleted_by: string | null
     nb_views: number | null
     last_viewed_at: Date | null
+    aides_already_seen: number[]
+    aides_fs_unselected: number[]
     _count: User_projetCountAggregateOutputType | null
     _avg: User_projetAvgAggregateOutputType | null
     _sum: User_projetSumAggregateOutputType | null
@@ -8747,6 +8907,8 @@ export namespace Prisma {
     deleted_by?: boolean
     nb_views?: boolean
     last_viewed_at?: boolean
+    aides_already_seen?: boolean
+    aides_fs_unselected?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8768,6 +8930,8 @@ export namespace Prisma {
     deleted_by?: boolean
     nb_views?: boolean
     last_viewed_at?: boolean
+    aides_already_seen?: boolean
+    aides_fs_unselected?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8786,6 +8950,8 @@ export namespace Prisma {
     deleted_by?: boolean
     nb_views?: boolean
     last_viewed_at?: boolean
+    aides_already_seen?: boolean
+    aides_fs_unselected?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8804,9 +8970,11 @@ export namespace Prisma {
     deleted_by?: boolean
     nb_views?: boolean
     last_viewed_at?: boolean
+    aides_already_seen?: boolean
+    aides_fs_unselected?: boolean
   }
 
-  export type user_projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_address" | "role" | "projet_id" | "user_id" | "created_at" | "invitation_token" | "invitation_status" | "deleted_at" | "deleted_by" | "nb_views" | "last_viewed_at", ExtArgs["result"]["user_projet"]>
+  export type user_projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_address" | "role" | "projet_id" | "user_id" | "created_at" | "invitation_token" | "invitation_status" | "deleted_at" | "deleted_by" | "nb_views" | "last_viewed_at" | "aides_already_seen" | "aides_fs_unselected", ExtArgs["result"]["user_projet"]>
   export type user_projetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
@@ -8848,6 +9016,8 @@ export namespace Prisma {
       deleted_by: string | null
       nb_views: number | null
       last_viewed_at: Date | null
+      aides_already_seen: number[]
+      aides_fs_unselected: number[]
     }, ExtArgs["result"]["user_projet"]>
     composites: {}
   }
@@ -9288,6 +9458,8 @@ export namespace Prisma {
     readonly deleted_by: FieldRef<"user_projet", 'String'>
     readonly nb_views: FieldRef<"user_projet", 'Int'>
     readonly last_viewed_at: FieldRef<"user_projet", 'DateTime'>
+    readonly aides_already_seen: FieldRef<"user_projet", 'Int[]'>
+    readonly aides_fs_unselected: FieldRef<"user_projet", 'Int[]'>
   }
     
 
@@ -12395,6 +12567,7 @@ export namespace Prisma {
     sourcing_user_projets?: boolean | projet$sourcing_user_projetsArgs<ExtArgs>
     fiches?: boolean | projet$fichesArgs<ExtArgs>
     diagnostic_simulations?: boolean | projet$diagnostic_simulationsArgs<ExtArgs>
+    projetAides?: boolean | projet$projetAidesArgs<ExtArgs>
     _count?: boolean | ProjetCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["projet"]>
 
@@ -12489,6 +12662,7 @@ export namespace Prisma {
     sourcing_user_projets?: boolean | projet$sourcing_user_projetsArgs<ExtArgs>
     fiches?: boolean | projet$fichesArgs<ExtArgs>
     diagnostic_simulations?: boolean | projet$diagnostic_simulationsArgs<ExtArgs>
+    projetAides?: boolean | projet$projetAidesArgs<ExtArgs>
     _count?: boolean | ProjetCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type projetIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -12513,6 +12687,7 @@ export namespace Prisma {
       sourcing_user_projets: Prisma.$projet_sourcing_contactPayload<ExtArgs>[]
       fiches: Prisma.$projet_fichePayload<ExtArgs>[]
       diagnostic_simulations: Prisma.$diagnostic_simulationPayload<ExtArgs>[]
+      projetAides: Prisma.$projet_aidesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -12939,6 +13114,7 @@ export namespace Prisma {
     sourcing_user_projets<T extends projet$sourcing_user_projetsArgs<ExtArgs> = {}>(args?: Subset<T, projet$sourcing_user_projetsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_sourcing_contactPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     fiches<T extends projet$fichesArgs<ExtArgs> = {}>(args?: Subset<T, projet$fichesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_fichePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     diagnostic_simulations<T extends projet$diagnostic_simulationsArgs<ExtArgs> = {}>(args?: Subset<T, projet$diagnostic_simulationsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$diagnostic_simulationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    projetAides<T extends projet$projetAidesArgs<ExtArgs> = {}>(args?: Subset<T, projet$projetAidesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -13522,6 +13698,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Diagnostic_simulationScalarFieldEnum | Diagnostic_simulationScalarFieldEnum[]
+  }
+
+  /**
+   * projet.projetAides
+   */
+  export type projet$projetAidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    where?: projet_aidesWhereInput
+    orderBy?: projet_aidesOrderByWithRelationInput | projet_aidesOrderByWithRelationInput[]
+    cursor?: projet_aidesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Projet_aidesScalarFieldEnum | Projet_aidesScalarFieldEnum[]
   }
 
   /**
@@ -18408,6 +18608,7 @@ export namespace Prisma {
     name?: boolean
     financers?: boolean
     estimations_aides?: boolean | aide$estimations_aidesArgs<ExtArgs>
+    projetAides?: boolean | aide$projetAidesArgs<ExtArgs>
     _count?: boolean | AideCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["aide"]>
 
@@ -18441,6 +18642,7 @@ export namespace Prisma {
   export type aideOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "aideTerritoireId" | "submission_deadline" | "type" | "name" | "financers", ExtArgs["result"]["aide"]>
   export type aideInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     estimations_aides?: boolean | aide$estimations_aidesArgs<ExtArgs>
+    projetAides?: boolean | aide$projetAidesArgs<ExtArgs>
     _count?: boolean | AideCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type aideIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
@@ -18450,6 +18652,7 @@ export namespace Prisma {
     name: "aide"
     objects: {
       estimations_aides: Prisma.$estimations_aidesPayload<ExtArgs>[]
+      projetAides: Prisma.$projet_aidesPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -18853,6 +19056,7 @@ export namespace Prisma {
   export interface Prisma__aideClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     estimations_aides<T extends aide$estimations_aidesArgs<ExtArgs> = {}>(args?: Subset<T, aide$estimations_aidesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$estimations_aidesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    projetAides<T extends aide$projetAidesArgs<ExtArgs> = {}>(args?: Subset<T, aide$projetAidesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -19297,6 +19501,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: Estimations_aidesScalarFieldEnum | Estimations_aidesScalarFieldEnum[]
+  }
+
+  /**
+   * aide.projetAides
+   */
+  export type aide$projetAidesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    where?: projet_aidesWhereInput
+    orderBy?: projet_aidesOrderByWithRelationInput | projet_aidesOrderByWithRelationInput[]
+    cursor?: projet_aidesWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: Projet_aidesScalarFieldEnum | Projet_aidesScalarFieldEnum[]
   }
 
   /**
@@ -20450,6 +20678,1141 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: estimations_aidesInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model projet_aides
+   */
+
+  export type AggregateProjet_aides = {
+    _count: Projet_aidesCountAggregateOutputType | null
+    _avg: Projet_aidesAvgAggregateOutputType | null
+    _sum: Projet_aidesSumAggregateOutputType | null
+    _min: Projet_aidesMinAggregateOutputType | null
+    _max: Projet_aidesMaxAggregateOutputType | null
+  }
+
+  export type Projet_aidesAvgAggregateOutputType = {
+    id: number | null
+    projet_id: number | null
+    aideId: number | null
+  }
+
+  export type Projet_aidesSumAggregateOutputType = {
+    id: number | null
+    projet_id: number | null
+    aideId: number | null
+  }
+
+  export type Projet_aidesMinAggregateOutputType = {
+    id: number | null
+    projet_id: number | null
+    aideId: number | null
+    created_at: Date | null
+    user_id: string | null
+  }
+
+  export type Projet_aidesMaxAggregateOutputType = {
+    id: number | null
+    projet_id: number | null
+    aideId: number | null
+    created_at: Date | null
+    user_id: string | null
+  }
+
+  export type Projet_aidesCountAggregateOutputType = {
+    id: number
+    projet_id: number
+    aideId: number
+    created_at: number
+    user_id: number
+    _all: number
+  }
+
+
+  export type Projet_aidesAvgAggregateInputType = {
+    id?: true
+    projet_id?: true
+    aideId?: true
+  }
+
+  export type Projet_aidesSumAggregateInputType = {
+    id?: true
+    projet_id?: true
+    aideId?: true
+  }
+
+  export type Projet_aidesMinAggregateInputType = {
+    id?: true
+    projet_id?: true
+    aideId?: true
+    created_at?: true
+    user_id?: true
+  }
+
+  export type Projet_aidesMaxAggregateInputType = {
+    id?: true
+    projet_id?: true
+    aideId?: true
+    created_at?: true
+    user_id?: true
+  }
+
+  export type Projet_aidesCountAggregateInputType = {
+    id?: true
+    projet_id?: true
+    aideId?: true
+    created_at?: true
+    user_id?: true
+    _all?: true
+  }
+
+  export type Projet_aidesAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which projet_aides to aggregate.
+     */
+    where?: projet_aidesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of projet_aides to fetch.
+     */
+    orderBy?: projet_aidesOrderByWithRelationInput | projet_aidesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: projet_aidesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` projet_aides from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` projet_aides.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned projet_aides
+    **/
+    _count?: true | Projet_aidesCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: Projet_aidesAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: Projet_aidesSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: Projet_aidesMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: Projet_aidesMaxAggregateInputType
+  }
+
+  export type GetProjet_aidesAggregateType<T extends Projet_aidesAggregateArgs> = {
+        [P in keyof T & keyof AggregateProjet_aides]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateProjet_aides[P]>
+      : GetScalarType<T[P], AggregateProjet_aides[P]>
+  }
+
+
+
+
+  export type projet_aidesGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: projet_aidesWhereInput
+    orderBy?: projet_aidesOrderByWithAggregationInput | projet_aidesOrderByWithAggregationInput[]
+    by: Projet_aidesScalarFieldEnum[] | Projet_aidesScalarFieldEnum
+    having?: projet_aidesScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: Projet_aidesCountAggregateInputType | true
+    _avg?: Projet_aidesAvgAggregateInputType
+    _sum?: Projet_aidesSumAggregateInputType
+    _min?: Projet_aidesMinAggregateInputType
+    _max?: Projet_aidesMaxAggregateInputType
+  }
+
+  export type Projet_aidesGroupByOutputType = {
+    id: number
+    projet_id: number
+    aideId: number
+    created_at: Date | null
+    user_id: string | null
+    _count: Projet_aidesCountAggregateOutputType | null
+    _avg: Projet_aidesAvgAggregateOutputType | null
+    _sum: Projet_aidesSumAggregateOutputType | null
+    _min: Projet_aidesMinAggregateOutputType | null
+    _max: Projet_aidesMaxAggregateOutputType | null
+  }
+
+  type GetProjet_aidesGroupByPayload<T extends projet_aidesGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<Projet_aidesGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof Projet_aidesGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], Projet_aidesGroupByOutputType[P]>
+            : GetScalarType<T[P], Projet_aidesGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type projet_aidesSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projet_id?: boolean
+    aideId?: boolean
+    created_at?: boolean
+    user_id?: boolean
+    projet?: boolean | projetDefaultArgs<ExtArgs>
+    aide?: boolean | aideDefaultArgs<ExtArgs>
+    created_by?: boolean | projet_aides$created_byArgs<ExtArgs>
+  }, ExtArgs["result"]["projet_aides"]>
+
+  export type projet_aidesSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projet_id?: boolean
+    aideId?: boolean
+    created_at?: boolean
+    user_id?: boolean
+    projet?: boolean | projetDefaultArgs<ExtArgs>
+    aide?: boolean | aideDefaultArgs<ExtArgs>
+    created_by?: boolean | projet_aides$created_byArgs<ExtArgs>
+  }, ExtArgs["result"]["projet_aides"]>
+
+  export type projet_aidesSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    projet_id?: boolean
+    aideId?: boolean
+    created_at?: boolean
+    user_id?: boolean
+    projet?: boolean | projetDefaultArgs<ExtArgs>
+    aide?: boolean | aideDefaultArgs<ExtArgs>
+    created_by?: boolean | projet_aides$created_byArgs<ExtArgs>
+  }, ExtArgs["result"]["projet_aides"]>
+
+  export type projet_aidesSelectScalar = {
+    id?: boolean
+    projet_id?: boolean
+    aideId?: boolean
+    created_at?: boolean
+    user_id?: boolean
+  }
+
+  export type projet_aidesOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "projet_id" | "aideId" | "created_at" | "user_id", ExtArgs["result"]["projet_aides"]>
+  export type projet_aidesInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projet?: boolean | projetDefaultArgs<ExtArgs>
+    aide?: boolean | aideDefaultArgs<ExtArgs>
+    created_by?: boolean | projet_aides$created_byArgs<ExtArgs>
+  }
+  export type projet_aidesIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projet?: boolean | projetDefaultArgs<ExtArgs>
+    aide?: boolean | aideDefaultArgs<ExtArgs>
+    created_by?: boolean | projet_aides$created_byArgs<ExtArgs>
+  }
+  export type projet_aidesIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    projet?: boolean | projetDefaultArgs<ExtArgs>
+    aide?: boolean | aideDefaultArgs<ExtArgs>
+    created_by?: boolean | projet_aides$created_byArgs<ExtArgs>
+  }
+
+  export type $projet_aidesPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "projet_aides"
+    objects: {
+      projet: Prisma.$projetPayload<ExtArgs>
+      aide: Prisma.$aidePayload<ExtArgs>
+      created_by: Prisma.$UserPayload<ExtArgs> | null
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      projet_id: number
+      aideId: number
+      created_at: Date | null
+      user_id: string | null
+    }, ExtArgs["result"]["projet_aides"]>
+    composites: {}
+  }
+
+  type projet_aidesGetPayload<S extends boolean | null | undefined | projet_aidesDefaultArgs> = $Result.GetResult<Prisma.$projet_aidesPayload, S>
+
+  type projet_aidesCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<projet_aidesFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: Projet_aidesCountAggregateInputType | true
+    }
+
+  export interface projet_aidesDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['projet_aides'], meta: { name: 'projet_aides' } }
+    /**
+     * Find zero or one Projet_aides that matches the filter.
+     * @param {projet_aidesFindUniqueArgs} args - Arguments to find a Projet_aides
+     * @example
+     * // Get one Projet_aides
+     * const projet_aides = await prisma.projet_aides.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends projet_aidesFindUniqueArgs>(args: SelectSubset<T, projet_aidesFindUniqueArgs<ExtArgs>>): Prisma__projet_aidesClient<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Projet_aides that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {projet_aidesFindUniqueOrThrowArgs} args - Arguments to find a Projet_aides
+     * @example
+     * // Get one Projet_aides
+     * const projet_aides = await prisma.projet_aides.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends projet_aidesFindUniqueOrThrowArgs>(args: SelectSubset<T, projet_aidesFindUniqueOrThrowArgs<ExtArgs>>): Prisma__projet_aidesClient<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Projet_aides that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {projet_aidesFindFirstArgs} args - Arguments to find a Projet_aides
+     * @example
+     * // Get one Projet_aides
+     * const projet_aides = await prisma.projet_aides.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends projet_aidesFindFirstArgs>(args?: SelectSubset<T, projet_aidesFindFirstArgs<ExtArgs>>): Prisma__projet_aidesClient<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Projet_aides that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {projet_aidesFindFirstOrThrowArgs} args - Arguments to find a Projet_aides
+     * @example
+     * // Get one Projet_aides
+     * const projet_aides = await prisma.projet_aides.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends projet_aidesFindFirstOrThrowArgs>(args?: SelectSubset<T, projet_aidesFindFirstOrThrowArgs<ExtArgs>>): Prisma__projet_aidesClient<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Projet_aides that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {projet_aidesFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Projet_aides
+     * const projet_aides = await prisma.projet_aides.findMany()
+     * 
+     * // Get first 10 Projet_aides
+     * const projet_aides = await prisma.projet_aides.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const projet_aidesWithIdOnly = await prisma.projet_aides.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends projet_aidesFindManyArgs>(args?: SelectSubset<T, projet_aidesFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Projet_aides.
+     * @param {projet_aidesCreateArgs} args - Arguments to create a Projet_aides.
+     * @example
+     * // Create one Projet_aides
+     * const Projet_aides = await prisma.projet_aides.create({
+     *   data: {
+     *     // ... data to create a Projet_aides
+     *   }
+     * })
+     * 
+     */
+    create<T extends projet_aidesCreateArgs>(args: SelectSubset<T, projet_aidesCreateArgs<ExtArgs>>): Prisma__projet_aidesClient<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Projet_aides.
+     * @param {projet_aidesCreateManyArgs} args - Arguments to create many Projet_aides.
+     * @example
+     * // Create many Projet_aides
+     * const projet_aides = await prisma.projet_aides.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends projet_aidesCreateManyArgs>(args?: SelectSubset<T, projet_aidesCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Projet_aides and returns the data saved in the database.
+     * @param {projet_aidesCreateManyAndReturnArgs} args - Arguments to create many Projet_aides.
+     * @example
+     * // Create many Projet_aides
+     * const projet_aides = await prisma.projet_aides.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Projet_aides and only return the `id`
+     * const projet_aidesWithIdOnly = await prisma.projet_aides.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends projet_aidesCreateManyAndReturnArgs>(args?: SelectSubset<T, projet_aidesCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Projet_aides.
+     * @param {projet_aidesDeleteArgs} args - Arguments to delete one Projet_aides.
+     * @example
+     * // Delete one Projet_aides
+     * const Projet_aides = await prisma.projet_aides.delete({
+     *   where: {
+     *     // ... filter to delete one Projet_aides
+     *   }
+     * })
+     * 
+     */
+    delete<T extends projet_aidesDeleteArgs>(args: SelectSubset<T, projet_aidesDeleteArgs<ExtArgs>>): Prisma__projet_aidesClient<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Projet_aides.
+     * @param {projet_aidesUpdateArgs} args - Arguments to update one Projet_aides.
+     * @example
+     * // Update one Projet_aides
+     * const projet_aides = await prisma.projet_aides.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends projet_aidesUpdateArgs>(args: SelectSubset<T, projet_aidesUpdateArgs<ExtArgs>>): Prisma__projet_aidesClient<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Projet_aides.
+     * @param {projet_aidesDeleteManyArgs} args - Arguments to filter Projet_aides to delete.
+     * @example
+     * // Delete a few Projet_aides
+     * const { count } = await prisma.projet_aides.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends projet_aidesDeleteManyArgs>(args?: SelectSubset<T, projet_aidesDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Projet_aides.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {projet_aidesUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Projet_aides
+     * const projet_aides = await prisma.projet_aides.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends projet_aidesUpdateManyArgs>(args: SelectSubset<T, projet_aidesUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Projet_aides and returns the data updated in the database.
+     * @param {projet_aidesUpdateManyAndReturnArgs} args - Arguments to update many Projet_aides.
+     * @example
+     * // Update many Projet_aides
+     * const projet_aides = await prisma.projet_aides.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Projet_aides and only return the `id`
+     * const projet_aidesWithIdOnly = await prisma.projet_aides.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends projet_aidesUpdateManyAndReturnArgs>(args: SelectSubset<T, projet_aidesUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Projet_aides.
+     * @param {projet_aidesUpsertArgs} args - Arguments to update or create a Projet_aides.
+     * @example
+     * // Update or create a Projet_aides
+     * const projet_aides = await prisma.projet_aides.upsert({
+     *   create: {
+     *     // ... data to create a Projet_aides
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Projet_aides we want to update
+     *   }
+     * })
+     */
+    upsert<T extends projet_aidesUpsertArgs>(args: SelectSubset<T, projet_aidesUpsertArgs<ExtArgs>>): Prisma__projet_aidesClient<$Result.GetResult<Prisma.$projet_aidesPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Projet_aides.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {projet_aidesCountArgs} args - Arguments to filter Projet_aides to count.
+     * @example
+     * // Count the number of Projet_aides
+     * const count = await prisma.projet_aides.count({
+     *   where: {
+     *     // ... the filter for the Projet_aides we want to count
+     *   }
+     * })
+    **/
+    count<T extends projet_aidesCountArgs>(
+      args?: Subset<T, projet_aidesCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], Projet_aidesCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Projet_aides.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {Projet_aidesAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends Projet_aidesAggregateArgs>(args: Subset<T, Projet_aidesAggregateArgs>): Prisma.PrismaPromise<GetProjet_aidesAggregateType<T>>
+
+    /**
+     * Group by Projet_aides.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {projet_aidesGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends projet_aidesGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: projet_aidesGroupByArgs['orderBy'] }
+        : { orderBy?: projet_aidesGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, projet_aidesGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetProjet_aidesGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the projet_aides model
+   */
+  readonly fields: projet_aidesFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for projet_aides.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__projet_aidesClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    projet<T extends projetDefaultArgs<ExtArgs> = {}>(args?: Subset<T, projetDefaultArgs<ExtArgs>>): Prisma__projetClient<$Result.GetResult<Prisma.$projetPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    aide<T extends aideDefaultArgs<ExtArgs> = {}>(args?: Subset<T, aideDefaultArgs<ExtArgs>>): Prisma__aideClient<$Result.GetResult<Prisma.$aidePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    created_by<T extends projet_aides$created_byArgs<ExtArgs> = {}>(args?: Subset<T, projet_aides$created_byArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the projet_aides model
+   */
+  interface projet_aidesFieldRefs {
+    readonly id: FieldRef<"projet_aides", 'Int'>
+    readonly projet_id: FieldRef<"projet_aides", 'Int'>
+    readonly aideId: FieldRef<"projet_aides", 'Int'>
+    readonly created_at: FieldRef<"projet_aides", 'DateTime'>
+    readonly user_id: FieldRef<"projet_aides", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * projet_aides findUnique
+   */
+  export type projet_aidesFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * Filter, which projet_aides to fetch.
+     */
+    where: projet_aidesWhereUniqueInput
+  }
+
+  /**
+   * projet_aides findUniqueOrThrow
+   */
+  export type projet_aidesFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * Filter, which projet_aides to fetch.
+     */
+    where: projet_aidesWhereUniqueInput
+  }
+
+  /**
+   * projet_aides findFirst
+   */
+  export type projet_aidesFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * Filter, which projet_aides to fetch.
+     */
+    where?: projet_aidesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of projet_aides to fetch.
+     */
+    orderBy?: projet_aidesOrderByWithRelationInput | projet_aidesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for projet_aides.
+     */
+    cursor?: projet_aidesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` projet_aides from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` projet_aides.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of projet_aides.
+     */
+    distinct?: Projet_aidesScalarFieldEnum | Projet_aidesScalarFieldEnum[]
+  }
+
+  /**
+   * projet_aides findFirstOrThrow
+   */
+  export type projet_aidesFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * Filter, which projet_aides to fetch.
+     */
+    where?: projet_aidesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of projet_aides to fetch.
+     */
+    orderBy?: projet_aidesOrderByWithRelationInput | projet_aidesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for projet_aides.
+     */
+    cursor?: projet_aidesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` projet_aides from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` projet_aides.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of projet_aides.
+     */
+    distinct?: Projet_aidesScalarFieldEnum | Projet_aidesScalarFieldEnum[]
+  }
+
+  /**
+   * projet_aides findMany
+   */
+  export type projet_aidesFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * Filter, which projet_aides to fetch.
+     */
+    where?: projet_aidesWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of projet_aides to fetch.
+     */
+    orderBy?: projet_aidesOrderByWithRelationInput | projet_aidesOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing projet_aides.
+     */
+    cursor?: projet_aidesWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` projet_aides from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` projet_aides.
+     */
+    skip?: number
+    distinct?: Projet_aidesScalarFieldEnum | Projet_aidesScalarFieldEnum[]
+  }
+
+  /**
+   * projet_aides create
+   */
+  export type projet_aidesCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * The data needed to create a projet_aides.
+     */
+    data: XOR<projet_aidesCreateInput, projet_aidesUncheckedCreateInput>
+  }
+
+  /**
+   * projet_aides createMany
+   */
+  export type projet_aidesCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many projet_aides.
+     */
+    data: projet_aidesCreateManyInput | projet_aidesCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * projet_aides createManyAndReturn
+   */
+  export type projet_aidesCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * The data used to create many projet_aides.
+     */
+    data: projet_aidesCreateManyInput | projet_aidesCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * projet_aides update
+   */
+  export type projet_aidesUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * The data needed to update a projet_aides.
+     */
+    data: XOR<projet_aidesUpdateInput, projet_aidesUncheckedUpdateInput>
+    /**
+     * Choose, which projet_aides to update.
+     */
+    where: projet_aidesWhereUniqueInput
+  }
+
+  /**
+   * projet_aides updateMany
+   */
+  export type projet_aidesUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update projet_aides.
+     */
+    data: XOR<projet_aidesUpdateManyMutationInput, projet_aidesUncheckedUpdateManyInput>
+    /**
+     * Filter which projet_aides to update
+     */
+    where?: projet_aidesWhereInput
+    /**
+     * Limit how many projet_aides to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * projet_aides updateManyAndReturn
+   */
+  export type projet_aidesUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * The data used to update projet_aides.
+     */
+    data: XOR<projet_aidesUpdateManyMutationInput, projet_aidesUncheckedUpdateManyInput>
+    /**
+     * Filter which projet_aides to update
+     */
+    where?: projet_aidesWhereInput
+    /**
+     * Limit how many projet_aides to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * projet_aides upsert
+   */
+  export type projet_aidesUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * The filter to search for the projet_aides to update in case it exists.
+     */
+    where: projet_aidesWhereUniqueInput
+    /**
+     * In case the projet_aides found by the `where` argument doesn't exist, create a new projet_aides with this data.
+     */
+    create: XOR<projet_aidesCreateInput, projet_aidesUncheckedCreateInput>
+    /**
+     * In case the projet_aides was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<projet_aidesUpdateInput, projet_aidesUncheckedUpdateInput>
+  }
+
+  /**
+   * projet_aides delete
+   */
+  export type projet_aidesDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
+    /**
+     * Filter which projet_aides to delete.
+     */
+    where: projet_aidesWhereUniqueInput
+  }
+
+  /**
+   * projet_aides deleteMany
+   */
+  export type projet_aidesDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which projet_aides to delete
+     */
+    where?: projet_aidesWhereInput
+    /**
+     * Limit how many projet_aides to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * projet_aides.created_by
+   */
+  export type projet_aides$created_byArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the User
+     */
+    select?: UserSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the User
+     */
+    omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    where?: UserWhereInput
+  }
+
+  /**
+   * projet_aides without action
+   */
+  export type projet_aidesDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the projet_aides
+     */
+    select?: projet_aidesSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the projet_aides
+     */
+    omit?: projet_aidesOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: projet_aidesInclude<ExtArgs> | null
   }
 
 
@@ -29453,7 +30816,9 @@ export namespace Prisma {
     deleted_at: 'deleted_at',
     deleted_by: 'deleted_by',
     nb_views: 'nb_views',
-    last_viewed_at: 'last_viewed_at'
+    last_viewed_at: 'last_viewed_at',
+    aides_already_seen: 'aides_already_seen',
+    aides_fs_unselected: 'aides_fs_unselected'
   };
 
   export type User_projetScalarFieldEnum = (typeof User_projetScalarFieldEnum)[keyof typeof User_projetScalarFieldEnum]
@@ -29593,6 +30958,17 @@ export namespace Prisma {
   };
 
   export type Estimations_aidesScalarFieldEnum = (typeof Estimations_aidesScalarFieldEnum)[keyof typeof Estimations_aidesScalarFieldEnum]
+
+
+  export const Projet_aidesScalarFieldEnum: {
+    id: 'id',
+    projet_id: 'projet_id',
+    aideId: 'aideId',
+    created_at: 'created_at',
+    user_id: 'user_id'
+  };
+
+  export type Projet_aidesScalarFieldEnum = (typeof Projet_aidesScalarFieldEnum)[keyof typeof Projet_aidesScalarFieldEnum]
 
 
   export const Estimation_materiauxScalarFieldEnum: {
@@ -29886,6 +31262,13 @@ export namespace Prisma {
   };
 
   export type estimations_aidesOrderByRelevanceFieldEnum = (typeof estimations_aidesOrderByRelevanceFieldEnum)[keyof typeof estimations_aidesOrderByRelevanceFieldEnum]
+
+
+  export const projet_aidesOrderByRelevanceFieldEnum: {
+    user_id: 'user_id'
+  };
+
+  export type projet_aidesOrderByRelevanceFieldEnum = (typeof projet_aidesOrderByRelevanceFieldEnum)[keyof typeof projet_aidesOrderByRelevanceFieldEnum]
 
 
   export const estimation_materiauxOrderByRelevanceFieldEnum: {
@@ -30344,6 +31727,7 @@ export namespace Prisma {
     estimations_aides?: Estimations_aidesListRelationFilter
     fiches?: Projet_ficheListRelationFilter
     diagnostic_simulation?: Diagnostic_simulationListRelationFilter
+    projetAides?: Projet_aidesListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -30383,6 +31767,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesOrderByRelationAggregateInput
     fiches?: projet_ficheOrderByRelationAggregateInput
     diagnostic_simulation?: diagnostic_simulationOrderByRelationAggregateInput
+    projetAides?: projet_aidesOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
   }
 
@@ -30426,6 +31811,7 @@ export namespace Prisma {
     estimations_aides?: Estimations_aidesListRelationFilter
     fiches?: Projet_ficheListRelationFilter
     diagnostic_simulation?: Diagnostic_simulationListRelationFilter
+    projetAides?: Projet_aidesListRelationFilter
   }, "id" | "email">
 
   export type UserOrderByWithAggregationInput = {
@@ -30639,6 +32025,8 @@ export namespace Prisma {
     deleted_by?: StringNullableFilter<"user_projet"> | string | null
     nb_views?: IntNullableFilter<"user_projet"> | number | null
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
+    aides_already_seen?: IntNullableListFilter<"user_projet">
+    aides_fs_unselected?: IntNullableListFilter<"user_projet">
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     deleter?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -30659,6 +32047,8 @@ export namespace Prisma {
     deleted_by?: SortOrderInput | SortOrder
     nb_views?: SortOrderInput | SortOrder
     last_viewed_at?: SortOrderInput | SortOrder
+    aides_already_seen?: SortOrder
+    aides_fs_unselected?: SortOrder
     projet?: projetOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     deleter?: UserOrderByWithRelationInput
@@ -30684,6 +32074,8 @@ export namespace Prisma {
     deleted_by?: StringNullableFilter<"user_projet"> | string | null
     nb_views?: IntNullableFilter<"user_projet"> | number | null
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
+    aides_already_seen?: IntNullableListFilter<"user_projet">
+    aides_fs_unselected?: IntNullableListFilter<"user_projet">
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     deleter?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -30704,6 +32096,8 @@ export namespace Prisma {
     deleted_by?: SortOrderInput | SortOrder
     nb_views?: SortOrderInput | SortOrder
     last_viewed_at?: SortOrderInput | SortOrder
+    aides_already_seen?: SortOrder
+    aides_fs_unselected?: SortOrder
     _count?: user_projetCountOrderByAggregateInput
     _avg?: user_projetAvgOrderByAggregateInput
     _max?: user_projetMaxOrderByAggregateInput
@@ -30727,6 +32121,8 @@ export namespace Prisma {
     deleted_by?: StringNullableWithAggregatesFilter<"user_projet"> | string | null
     nb_views?: IntNullableWithAggregatesFilter<"user_projet"> | number | null
     last_viewed_at?: DateTimeNullableWithAggregatesFilter<"user_projet"> | Date | string | null
+    aides_already_seen?: IntNullableListFilter<"user_projet">
+    aides_fs_unselected?: IntNullableListFilter<"user_projet">
   }
 
   export type emailWhereInput = {
@@ -30901,6 +32297,7 @@ export namespace Prisma {
     sourcing_user_projets?: Projet_sourcing_contactListRelationFilter
     fiches?: Projet_ficheListRelationFilter
     diagnostic_simulations?: Diagnostic_simulationListRelationFilter
+    projetAides?: Projet_aidesListRelationFilter
   }
 
   export type projetOrderByWithRelationInput = {
@@ -30934,6 +32331,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactOrderByRelationAggregateInput
     fiches?: projet_ficheOrderByRelationAggregateInput
     diagnostic_simulations?: diagnostic_simulationOrderByRelationAggregateInput
+    projetAides?: projet_aidesOrderByRelationAggregateInput
     _relevance?: projetOrderByRelevanceInput
   }
 
@@ -30971,6 +32369,7 @@ export namespace Prisma {
     sourcing_user_projets?: Projet_sourcing_contactListRelationFilter
     fiches?: Projet_ficheListRelationFilter
     diagnostic_simulations?: Diagnostic_simulationListRelationFilter
+    projetAides?: Projet_aidesListRelationFilter
   }, "id">
 
   export type projetOrderByWithAggregationInput = {
@@ -31374,6 +32773,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"aide"> | string | null
     financers?: StringNullableListFilter<"aide">
     estimations_aides?: Estimations_aidesListRelationFilter
+    projetAides?: Projet_aidesListRelationFilter
   }
 
   export type aideOrderByWithRelationInput = {
@@ -31384,6 +32784,7 @@ export namespace Prisma {
     name?: SortOrderInput | SortOrder
     financers?: SortOrder
     estimations_aides?: estimations_aidesOrderByRelationAggregateInput
+    projetAides?: projet_aidesOrderByRelationAggregateInput
     _relevance?: aideOrderByRelevanceInput
   }
 
@@ -31398,6 +32799,7 @@ export namespace Prisma {
     name?: StringNullableFilter<"aide"> | string | null
     financers?: StringNullableListFilter<"aide">
     estimations_aides?: Estimations_aidesListRelationFilter
+    projetAides?: Projet_aidesListRelationFilter
   }, "id" | "aideTerritoireId">
 
   export type aideOrderByWithAggregationInput = {
@@ -31489,6 +32891,71 @@ export namespace Prisma {
     aideId?: IntWithAggregatesFilter<"estimations_aides"> | number
     created_at?: DateTimeNullableWithAggregatesFilter<"estimations_aides"> | Date | string | null
     user_id?: StringNullableWithAggregatesFilter<"estimations_aides"> | string | null
+  }
+
+  export type projet_aidesWhereInput = {
+    AND?: projet_aidesWhereInput | projet_aidesWhereInput[]
+    OR?: projet_aidesWhereInput[]
+    NOT?: projet_aidesWhereInput | projet_aidesWhereInput[]
+    id?: IntFilter<"projet_aides"> | number
+    projet_id?: IntFilter<"projet_aides"> | number
+    aideId?: IntFilter<"projet_aides"> | number
+    created_at?: DateTimeNullableFilter<"projet_aides"> | Date | string | null
+    user_id?: StringNullableFilter<"projet_aides"> | string | null
+    projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
+    aide?: XOR<AideScalarRelationFilter, aideWhereInput>
+    created_by?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }
+
+  export type projet_aidesOrderByWithRelationInput = {
+    id?: SortOrder
+    projet_id?: SortOrder
+    aideId?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    user_id?: SortOrderInput | SortOrder
+    projet?: projetOrderByWithRelationInput
+    aide?: aideOrderByWithRelationInput
+    created_by?: UserOrderByWithRelationInput
+    _relevance?: projet_aidesOrderByRelevanceInput
+  }
+
+  export type projet_aidesWhereUniqueInput = Prisma.AtLeast<{
+    projet_id_aideId?: projet_aidesProjet_idAideIdCompoundUniqueInput
+    AND?: projet_aidesWhereInput | projet_aidesWhereInput[]
+    OR?: projet_aidesWhereInput[]
+    NOT?: projet_aidesWhereInput | projet_aidesWhereInput[]
+    id?: IntFilter<"projet_aides"> | number
+    projet_id?: IntFilter<"projet_aides"> | number
+    aideId?: IntFilter<"projet_aides"> | number
+    created_at?: DateTimeNullableFilter<"projet_aides"> | Date | string | null
+    user_id?: StringNullableFilter<"projet_aides"> | string | null
+    projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
+    aide?: XOR<AideScalarRelationFilter, aideWhereInput>
+    created_by?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
+  }, "projet_id_aideId">
+
+  export type projet_aidesOrderByWithAggregationInput = {
+    id?: SortOrder
+    projet_id?: SortOrder
+    aideId?: SortOrder
+    created_at?: SortOrderInput | SortOrder
+    user_id?: SortOrderInput | SortOrder
+    _count?: projet_aidesCountOrderByAggregateInput
+    _avg?: projet_aidesAvgOrderByAggregateInput
+    _max?: projet_aidesMaxOrderByAggregateInput
+    _min?: projet_aidesMinOrderByAggregateInput
+    _sum?: projet_aidesSumOrderByAggregateInput
+  }
+
+  export type projet_aidesScalarWhereWithAggregatesInput = {
+    AND?: projet_aidesScalarWhereWithAggregatesInput | projet_aidesScalarWhereWithAggregatesInput[]
+    OR?: projet_aidesScalarWhereWithAggregatesInput[]
+    NOT?: projet_aidesScalarWhereWithAggregatesInput | projet_aidesScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"projet_aides"> | number
+    projet_id?: IntWithAggregatesFilter<"projet_aides"> | number
+    aideId?: IntWithAggregatesFilter<"projet_aides"> | number
+    created_at?: DateTimeNullableWithAggregatesFilter<"projet_aides"> | Date | string | null
+    user_id?: StringNullableWithAggregatesFilter<"projet_aides"> | string | null
   }
 
   export type estimation_materiauxWhereInput = {
@@ -32175,6 +33642,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateInput = {
@@ -32214,6 +33682,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUpdateInput = {
@@ -32253,6 +33722,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
@@ -32292,6 +33762,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserCreateManyInput = {
@@ -32526,6 +33997,8 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -32546,6 +34019,8 @@ export namespace Prisma {
     deleted_by?: string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -32559,6 +34034,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -32579,6 +34056,8 @@ export namespace Prisma {
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -32596,6 +34075,8 @@ export namespace Prisma {
     deleted_by?: string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
   }
 
   export type user_projetUpdateManyMutationInput = {
@@ -32607,6 +34088,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
   }
 
   export type user_projetUncheckedUpdateManyInput = {
@@ -32622,6 +34105,8 @@ export namespace Prisma {
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
   }
 
   export type emailCreateInput = {
@@ -32781,6 +34266,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateInput = {
@@ -32811,6 +34297,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetUpdateInput = {
@@ -32841,6 +34328,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateInput = {
@@ -32871,6 +34359,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type projetCreateManyInput = {
@@ -33279,6 +34768,7 @@ export namespace Prisma {
     name?: string | null
     financers?: aideCreatefinancersInput | string[]
     estimations_aides?: estimations_aidesCreateNestedManyWithoutAideInput
+    projetAides?: projet_aidesCreateNestedManyWithoutAideInput
   }
 
   export type aideUncheckedCreateInput = {
@@ -33289,6 +34779,7 @@ export namespace Prisma {
     name?: string | null
     financers?: aideCreatefinancersInput | string[]
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutAideInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutAideInput
   }
 
   export type aideUpdateInput = {
@@ -33298,6 +34789,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     financers?: aideUpdatefinancersInput | string[]
     estimations_aides?: estimations_aidesUpdateManyWithoutAideNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutAideNestedInput
   }
 
   export type aideUncheckedUpdateInput = {
@@ -33308,6 +34800,7 @@ export namespace Prisma {
     name?: NullableStringFieldUpdateOperationsInput | string | null
     financers?: aideUpdatefinancersInput | string[]
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutAideNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutAideNestedInput
   }
 
   export type aideCreateManyInput = {
@@ -33384,6 +34877,59 @@ export namespace Prisma {
   export type estimations_aidesUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     estimationId?: IntFieldUpdateOperationsInput | number
+    aideId?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type projet_aidesCreateInput = {
+    id?: number
+    created_at?: Date | string | null
+    projet: projetCreateNestedOneWithoutProjetAidesInput
+    aide: aideCreateNestedOneWithoutProjetAidesInput
+    created_by?: UserCreateNestedOneWithoutProjetAidesInput
+  }
+
+  export type projet_aidesUncheckedCreateInput = {
+    id?: number
+    projet_id: number
+    aideId: number
+    created_at?: Date | string | null
+    user_id?: string | null
+  }
+
+  export type projet_aidesUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projet?: projetUpdateOneRequiredWithoutProjetAidesNestedInput
+    aide?: aideUpdateOneRequiredWithoutProjetAidesNestedInput
+    created_by?: UserUpdateOneWithoutProjetAidesNestedInput
+  }
+
+  export type projet_aidesUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    projet_id?: IntFieldUpdateOperationsInput | number
+    aideId?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type projet_aidesCreateManyInput = {
+    id?: number
+    projet_id: number
+    aideId: number
+    created_at?: Date | string | null
+    user_id?: string | null
+  }
+
+  export type projet_aidesUpdateManyMutationInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type projet_aidesUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    projet_id?: IntFieldUpdateOperationsInput | number
     aideId?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
@@ -34264,6 +35810,12 @@ export namespace Prisma {
     none?: diagnostic_simulationWhereInput
   }
 
+  export type Projet_aidesListRelationFilter = {
+    every?: projet_aidesWhereInput
+    some?: projet_aidesWhereInput
+    none?: projet_aidesWhereInput
+  }
+
   export type AccountOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -34313,6 +35865,10 @@ export namespace Prisma {
   }
 
   export type diagnostic_simulationOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type projet_aidesOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -34613,6 +36169,14 @@ export namespace Prisma {
     not?: NestedEnumInvitationStatusFilter<$PrismaModel> | $Enums.InvitationStatus
   }
 
+  export type IntNullableListFilter<$PrismaModel = never> = {
+    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    has?: number | IntFieldRefInput<$PrismaModel> | null
+    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
+    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
+    isEmpty?: boolean
+  }
+
   export type ProjetScalarRelationFilter = {
     is?: projetWhereInput
     isNot?: projetWhereInput
@@ -34647,12 +36211,16 @@ export namespace Prisma {
     deleted_by?: SortOrder
     nb_views?: SortOrder
     last_viewed_at?: SortOrder
+    aides_already_seen?: SortOrder
+    aides_fs_unselected?: SortOrder
   }
 
   export type user_projetAvgOrderByAggregateInput = {
     id?: SortOrder
     projet_id?: SortOrder
     nb_views?: SortOrder
+    aides_already_seen?: SortOrder
+    aides_fs_unselected?: SortOrder
   }
 
   export type user_projetMaxOrderByAggregateInput = {
@@ -34689,6 +36257,8 @@ export namespace Prisma {
     id?: SortOrder
     projet_id?: SortOrder
     nb_views?: SortOrder
+    aides_already_seen?: SortOrder
+    aides_fs_unselected?: SortOrder
   }
 
   export type EnumRoleProjetWithAggregatesFilter<$PrismaModel = never> = {
@@ -34841,14 +36411,6 @@ export namespace Prisma {
 
   export type user_collectiviteSumOrderByAggregateInput = {
     collectivite_id?: SortOrder
-  }
-
-  export type IntNullableListFilter<$PrismaModel = never> = {
-    equals?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    has?: number | IntFieldRefInput<$PrismaModel> | null
-    hasEvery?: number[] | ListIntFieldRefInput<$PrismaModel>
-    hasSome?: number[] | ListIntFieldRefInput<$PrismaModel>
-    isEmpty?: boolean
   }
 
   export type BoolNullableFilter<$PrismaModel = never> = {
@@ -35411,6 +36973,53 @@ export namespace Prisma {
   export type estimations_aidesSumOrderByAggregateInput = {
     id?: SortOrder
     estimationId?: SortOrder
+    aideId?: SortOrder
+  }
+
+  export type projet_aidesOrderByRelevanceInput = {
+    fields: projet_aidesOrderByRelevanceFieldEnum | projet_aidesOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type projet_aidesProjet_idAideIdCompoundUniqueInput = {
+    projet_id: number
+    aideId: number
+  }
+
+  export type projet_aidesCountOrderByAggregateInput = {
+    id?: SortOrder
+    projet_id?: SortOrder
+    aideId?: SortOrder
+    created_at?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type projet_aidesAvgOrderByAggregateInput = {
+    id?: SortOrder
+    projet_id?: SortOrder
+    aideId?: SortOrder
+  }
+
+  export type projet_aidesMaxOrderByAggregateInput = {
+    id?: SortOrder
+    projet_id?: SortOrder
+    aideId?: SortOrder
+    created_at?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type projet_aidesMinOrderByAggregateInput = {
+    id?: SortOrder
+    projet_id?: SortOrder
+    aideId?: SortOrder
+    created_at?: SortOrder
+    user_id?: SortOrder
+  }
+
+  export type projet_aidesSumOrderByAggregateInput = {
+    id?: SortOrder
+    projet_id?: SortOrder
     aideId?: SortOrder
   }
 
@@ -36014,6 +37623,13 @@ export namespace Prisma {
     connect?: diagnostic_simulationWhereUniqueInput | diagnostic_simulationWhereUniqueInput[]
   }
 
+  export type projet_aidesCreateNestedManyWithoutCreated_byInput = {
+    create?: XOR<projet_aidesCreateWithoutCreated_byInput, projet_aidesUncheckedCreateWithoutCreated_byInput> | projet_aidesCreateWithoutCreated_byInput[] | projet_aidesUncheckedCreateWithoutCreated_byInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutCreated_byInput | projet_aidesCreateOrConnectWithoutCreated_byInput[]
+    createMany?: projet_aidesCreateManyCreated_byInputEnvelope
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+  }
+
   export type AccountUncheckedCreateNestedManyWithoutUserInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -36124,6 +37740,13 @@ export namespace Prisma {
     connectOrCreate?: diagnostic_simulationCreateOrConnectWithoutUserInput | diagnostic_simulationCreateOrConnectWithoutUserInput[]
     createMany?: diagnostic_simulationCreateManyUserInputEnvelope
     connect?: diagnostic_simulationWhereUniqueInput | diagnostic_simulationWhereUniqueInput[]
+  }
+
+  export type projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput = {
+    create?: XOR<projet_aidesCreateWithoutCreated_byInput, projet_aidesUncheckedCreateWithoutCreated_byInput> | projet_aidesCreateWithoutCreated_byInput[] | projet_aidesUncheckedCreateWithoutCreated_byInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutCreated_byInput | projet_aidesCreateOrConnectWithoutCreated_byInput[]
+    createMany?: projet_aidesCreateManyCreated_byInputEnvelope
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -36371,6 +37994,20 @@ export namespace Prisma {
     deleteMany?: diagnostic_simulationScalarWhereInput | diagnostic_simulationScalarWhereInput[]
   }
 
+  export type projet_aidesUpdateManyWithoutCreated_byNestedInput = {
+    create?: XOR<projet_aidesCreateWithoutCreated_byInput, projet_aidesUncheckedCreateWithoutCreated_byInput> | projet_aidesCreateWithoutCreated_byInput[] | projet_aidesUncheckedCreateWithoutCreated_byInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutCreated_byInput | projet_aidesCreateOrConnectWithoutCreated_byInput[]
+    upsert?: projet_aidesUpsertWithWhereUniqueWithoutCreated_byInput | projet_aidesUpsertWithWhereUniqueWithoutCreated_byInput[]
+    createMany?: projet_aidesCreateManyCreated_byInputEnvelope
+    set?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    disconnect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    delete?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    update?: projet_aidesUpdateWithWhereUniqueWithoutCreated_byInput | projet_aidesUpdateWithWhereUniqueWithoutCreated_byInput[]
+    updateMany?: projet_aidesUpdateManyWithWhereWithoutCreated_byInput | projet_aidesUpdateManyWithWhereWithoutCreated_byInput[]
+    deleteMany?: projet_aidesScalarWhereInput | projet_aidesScalarWhereInput[]
+  }
+
   export type AccountUncheckedUpdateManyWithoutUserNestedInput = {
     create?: XOR<AccountCreateWithoutUserInput, AccountUncheckedCreateWithoutUserInput> | AccountCreateWithoutUserInput[] | AccountUncheckedCreateWithoutUserInput[]
     connectOrCreate?: AccountCreateOrConnectWithoutUserInput | AccountCreateOrConnectWithoutUserInput[]
@@ -36595,6 +38232,20 @@ export namespace Prisma {
     deleteMany?: diagnostic_simulationScalarWhereInput | diagnostic_simulationScalarWhereInput[]
   }
 
+  export type projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput = {
+    create?: XOR<projet_aidesCreateWithoutCreated_byInput, projet_aidesUncheckedCreateWithoutCreated_byInput> | projet_aidesCreateWithoutCreated_byInput[] | projet_aidesUncheckedCreateWithoutCreated_byInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutCreated_byInput | projet_aidesCreateOrConnectWithoutCreated_byInput[]
+    upsert?: projet_aidesUpsertWithWhereUniqueWithoutCreated_byInput | projet_aidesUpsertWithWhereUniqueWithoutCreated_byInput[]
+    createMany?: projet_aidesCreateManyCreated_byInputEnvelope
+    set?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    disconnect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    delete?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    update?: projet_aidesUpdateWithWhereUniqueWithoutCreated_byInput | projet_aidesUpdateWithWhereUniqueWithoutCreated_byInput[]
+    updateMany?: projet_aidesUpdateManyWithWhereWithoutCreated_byInput | projet_aidesUpdateManyWithWhereWithoutCreated_byInput[]
+    deleteMany?: projet_aidesScalarWhereInput | projet_aidesScalarWhereInput[]
+  }
+
   export type user_collectiviteCreateNestedManyWithoutCollectiviteInput = {
     create?: XOR<user_collectiviteCreateWithoutCollectiviteInput, user_collectiviteUncheckedCreateWithoutCollectiviteInput> | user_collectiviteCreateWithoutCollectiviteInput[] | user_collectiviteUncheckedCreateWithoutCollectiviteInput[]
     connectOrCreate?: user_collectiviteCreateOrConnectWithoutCollectiviteInput | user_collectiviteCreateOrConnectWithoutCollectiviteInput[]
@@ -36709,6 +38360,14 @@ export namespace Prisma {
     deleteMany?: projetScalarWhereInput | projetScalarWhereInput[]
   }
 
+  export type user_projetCreateaides_already_seenInput = {
+    set: number[]
+  }
+
+  export type user_projetCreateaides_fs_unselectedInput = {
+    set: number[]
+  }
+
   export type projetCreateNestedOneWithoutUsersInput = {
     create?: XOR<projetCreateWithoutUsersInput, projetUncheckedCreateWithoutUsersInput>
     connectOrCreate?: projetCreateOrConnectWithoutUsersInput
@@ -36761,6 +38420,16 @@ export namespace Prisma {
 
   export type EnumInvitationStatusFieldUpdateOperationsInput = {
     set?: $Enums.InvitationStatus
+  }
+
+  export type user_projetUpdateaides_already_seenInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type user_projetUpdateaides_fs_unselectedInput = {
+    set?: number[]
+    push?: number | number[]
   }
 
   export type projetUpdateOneRequiredWithoutUsersNestedInput = {
@@ -36980,6 +38649,13 @@ export namespace Prisma {
     connect?: diagnostic_simulationWhereUniqueInput | diagnostic_simulationWhereUniqueInput[]
   }
 
+  export type projet_aidesCreateNestedManyWithoutProjetInput = {
+    create?: XOR<projet_aidesCreateWithoutProjetInput, projet_aidesUncheckedCreateWithoutProjetInput> | projet_aidesCreateWithoutProjetInput[] | projet_aidesUncheckedCreateWithoutProjetInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutProjetInput | projet_aidesCreateOrConnectWithoutProjetInput[]
+    createMany?: projet_aidesCreateManyProjetInputEnvelope
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+  }
+
   export type estimationUncheckedCreateNestedManyWithoutProjetInput = {
     create?: XOR<estimationCreateWithoutProjetInput, estimationUncheckedCreateWithoutProjetInput> | estimationCreateWithoutProjetInput[] | estimationUncheckedCreateWithoutProjetInput[]
     connectOrCreate?: estimationCreateOrConnectWithoutProjetInput | estimationCreateOrConnectWithoutProjetInput[]
@@ -37013,6 +38689,13 @@ export namespace Prisma {
     connectOrCreate?: diagnostic_simulationCreateOrConnectWithoutProjetInput | diagnostic_simulationCreateOrConnectWithoutProjetInput[]
     createMany?: diagnostic_simulationCreateManyProjetInputEnvelope
     connect?: diagnostic_simulationWhereUniqueInput | diagnostic_simulationWhereUniqueInput[]
+  }
+
+  export type projet_aidesUncheckedCreateNestedManyWithoutProjetInput = {
+    create?: XOR<projet_aidesCreateWithoutProjetInput, projet_aidesUncheckedCreateWithoutProjetInput> | projet_aidesCreateWithoutProjetInput[] | projet_aidesUncheckedCreateWithoutProjetInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutProjetInput | projet_aidesCreateOrConnectWithoutProjetInput[]
+    createMany?: projet_aidesCreateManyProjetInputEnvelope
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
   }
 
   export type projetUpdatefiches_solutions_idInput = {
@@ -37134,6 +38817,20 @@ export namespace Prisma {
     deleteMany?: diagnostic_simulationScalarWhereInput | diagnostic_simulationScalarWhereInput[]
   }
 
+  export type projet_aidesUpdateManyWithoutProjetNestedInput = {
+    create?: XOR<projet_aidesCreateWithoutProjetInput, projet_aidesUncheckedCreateWithoutProjetInput> | projet_aidesCreateWithoutProjetInput[] | projet_aidesUncheckedCreateWithoutProjetInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutProjetInput | projet_aidesCreateOrConnectWithoutProjetInput[]
+    upsert?: projet_aidesUpsertWithWhereUniqueWithoutProjetInput | projet_aidesUpsertWithWhereUniqueWithoutProjetInput[]
+    createMany?: projet_aidesCreateManyProjetInputEnvelope
+    set?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    disconnect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    delete?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    update?: projet_aidesUpdateWithWhereUniqueWithoutProjetInput | projet_aidesUpdateWithWhereUniqueWithoutProjetInput[]
+    updateMany?: projet_aidesUpdateManyWithWhereWithoutProjetInput | projet_aidesUpdateManyWithWhereWithoutProjetInput[]
+    deleteMany?: projet_aidesScalarWhereInput | projet_aidesScalarWhereInput[]
+  }
+
   export type estimationUncheckedUpdateManyWithoutProjetNestedInput = {
     create?: XOR<estimationCreateWithoutProjetInput, estimationUncheckedCreateWithoutProjetInput> | estimationCreateWithoutProjetInput[] | estimationUncheckedCreateWithoutProjetInput[]
     connectOrCreate?: estimationCreateOrConnectWithoutProjetInput | estimationCreateOrConnectWithoutProjetInput[]
@@ -37202,6 +38899,20 @@ export namespace Prisma {
     update?: diagnostic_simulationUpdateWithWhereUniqueWithoutProjetInput | diagnostic_simulationUpdateWithWhereUniqueWithoutProjetInput[]
     updateMany?: diagnostic_simulationUpdateManyWithWhereWithoutProjetInput | diagnostic_simulationUpdateManyWithWhereWithoutProjetInput[]
     deleteMany?: diagnostic_simulationScalarWhereInput | diagnostic_simulationScalarWhereInput[]
+  }
+
+  export type projet_aidesUncheckedUpdateManyWithoutProjetNestedInput = {
+    create?: XOR<projet_aidesCreateWithoutProjetInput, projet_aidesUncheckedCreateWithoutProjetInput> | projet_aidesCreateWithoutProjetInput[] | projet_aidesUncheckedCreateWithoutProjetInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutProjetInput | projet_aidesCreateOrConnectWithoutProjetInput[]
+    upsert?: projet_aidesUpsertWithWhereUniqueWithoutProjetInput | projet_aidesUpsertWithWhereUniqueWithoutProjetInput[]
+    createMany?: projet_aidesCreateManyProjetInputEnvelope
+    set?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    disconnect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    delete?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    update?: projet_aidesUpdateWithWhereUniqueWithoutProjetInput | projet_aidesUpdateWithWhereUniqueWithoutProjetInput[]
+    updateMany?: projet_aidesUpdateManyWithWhereWithoutProjetInput | projet_aidesUpdateManyWithWhereWithoutProjetInput[]
+    deleteMany?: projet_aidesScalarWhereInput | projet_aidesScalarWhereInput[]
   }
 
   export type projetCreateNestedOneWithoutFichesInput = {
@@ -37429,11 +39140,25 @@ export namespace Prisma {
     connect?: estimations_aidesWhereUniqueInput | estimations_aidesWhereUniqueInput[]
   }
 
+  export type projet_aidesCreateNestedManyWithoutAideInput = {
+    create?: XOR<projet_aidesCreateWithoutAideInput, projet_aidesUncheckedCreateWithoutAideInput> | projet_aidesCreateWithoutAideInput[] | projet_aidesUncheckedCreateWithoutAideInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutAideInput | projet_aidesCreateOrConnectWithoutAideInput[]
+    createMany?: projet_aidesCreateManyAideInputEnvelope
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+  }
+
   export type estimations_aidesUncheckedCreateNestedManyWithoutAideInput = {
     create?: XOR<estimations_aidesCreateWithoutAideInput, estimations_aidesUncheckedCreateWithoutAideInput> | estimations_aidesCreateWithoutAideInput[] | estimations_aidesUncheckedCreateWithoutAideInput[]
     connectOrCreate?: estimations_aidesCreateOrConnectWithoutAideInput | estimations_aidesCreateOrConnectWithoutAideInput[]
     createMany?: estimations_aidesCreateManyAideInputEnvelope
     connect?: estimations_aidesWhereUniqueInput | estimations_aidesWhereUniqueInput[]
+  }
+
+  export type projet_aidesUncheckedCreateNestedManyWithoutAideInput = {
+    create?: XOR<projet_aidesCreateWithoutAideInput, projet_aidesUncheckedCreateWithoutAideInput> | projet_aidesCreateWithoutAideInput[] | projet_aidesUncheckedCreateWithoutAideInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutAideInput | projet_aidesCreateOrConnectWithoutAideInput[]
+    createMany?: projet_aidesCreateManyAideInputEnvelope
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
   }
 
   export type aideUpdatefinancersInput = {
@@ -37455,6 +39180,20 @@ export namespace Prisma {
     deleteMany?: estimations_aidesScalarWhereInput | estimations_aidesScalarWhereInput[]
   }
 
+  export type projet_aidesUpdateManyWithoutAideNestedInput = {
+    create?: XOR<projet_aidesCreateWithoutAideInput, projet_aidesUncheckedCreateWithoutAideInput> | projet_aidesCreateWithoutAideInput[] | projet_aidesUncheckedCreateWithoutAideInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutAideInput | projet_aidesCreateOrConnectWithoutAideInput[]
+    upsert?: projet_aidesUpsertWithWhereUniqueWithoutAideInput | projet_aidesUpsertWithWhereUniqueWithoutAideInput[]
+    createMany?: projet_aidesCreateManyAideInputEnvelope
+    set?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    disconnect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    delete?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    update?: projet_aidesUpdateWithWhereUniqueWithoutAideInput | projet_aidesUpdateWithWhereUniqueWithoutAideInput[]
+    updateMany?: projet_aidesUpdateManyWithWhereWithoutAideInput | projet_aidesUpdateManyWithWhereWithoutAideInput[]
+    deleteMany?: projet_aidesScalarWhereInput | projet_aidesScalarWhereInput[]
+  }
+
   export type estimations_aidesUncheckedUpdateManyWithoutAideNestedInput = {
     create?: XOR<estimations_aidesCreateWithoutAideInput, estimations_aidesUncheckedCreateWithoutAideInput> | estimations_aidesCreateWithoutAideInput[] | estimations_aidesUncheckedCreateWithoutAideInput[]
     connectOrCreate?: estimations_aidesCreateOrConnectWithoutAideInput | estimations_aidesCreateOrConnectWithoutAideInput[]
@@ -37467,6 +39206,20 @@ export namespace Prisma {
     update?: estimations_aidesUpdateWithWhereUniqueWithoutAideInput | estimations_aidesUpdateWithWhereUniqueWithoutAideInput[]
     updateMany?: estimations_aidesUpdateManyWithWhereWithoutAideInput | estimations_aidesUpdateManyWithWhereWithoutAideInput[]
     deleteMany?: estimations_aidesScalarWhereInput | estimations_aidesScalarWhereInput[]
+  }
+
+  export type projet_aidesUncheckedUpdateManyWithoutAideNestedInput = {
+    create?: XOR<projet_aidesCreateWithoutAideInput, projet_aidesUncheckedCreateWithoutAideInput> | projet_aidesCreateWithoutAideInput[] | projet_aidesUncheckedCreateWithoutAideInput[]
+    connectOrCreate?: projet_aidesCreateOrConnectWithoutAideInput | projet_aidesCreateOrConnectWithoutAideInput[]
+    upsert?: projet_aidesUpsertWithWhereUniqueWithoutAideInput | projet_aidesUpsertWithWhereUniqueWithoutAideInput[]
+    createMany?: projet_aidesCreateManyAideInputEnvelope
+    set?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    disconnect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    delete?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
+    update?: projet_aidesUpdateWithWhereUniqueWithoutAideInput | projet_aidesUpdateWithWhereUniqueWithoutAideInput[]
+    updateMany?: projet_aidesUpdateManyWithWhereWithoutAideInput | projet_aidesUpdateManyWithWhereWithoutAideInput[]
+    deleteMany?: projet_aidesScalarWhereInput | projet_aidesScalarWhereInput[]
   }
 
   export type estimationCreateNestedOneWithoutEstimations_aidesInput = {
@@ -37511,6 +39264,50 @@ export namespace Prisma {
     delete?: UserWhereInput | boolean
     connect?: UserWhereUniqueInput
     update?: XOR<XOR<UserUpdateToOneWithWhereWithoutEstimations_aidesInput, UserUpdateWithoutEstimations_aidesInput>, UserUncheckedUpdateWithoutEstimations_aidesInput>
+  }
+
+  export type projetCreateNestedOneWithoutProjetAidesInput = {
+    create?: XOR<projetCreateWithoutProjetAidesInput, projetUncheckedCreateWithoutProjetAidesInput>
+    connectOrCreate?: projetCreateOrConnectWithoutProjetAidesInput
+    connect?: projetWhereUniqueInput
+  }
+
+  export type aideCreateNestedOneWithoutProjetAidesInput = {
+    create?: XOR<aideCreateWithoutProjetAidesInput, aideUncheckedCreateWithoutProjetAidesInput>
+    connectOrCreate?: aideCreateOrConnectWithoutProjetAidesInput
+    connect?: aideWhereUniqueInput
+  }
+
+  export type UserCreateNestedOneWithoutProjetAidesInput = {
+    create?: XOR<UserCreateWithoutProjetAidesInput, UserUncheckedCreateWithoutProjetAidesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProjetAidesInput
+    connect?: UserWhereUniqueInput
+  }
+
+  export type projetUpdateOneRequiredWithoutProjetAidesNestedInput = {
+    create?: XOR<projetCreateWithoutProjetAidesInput, projetUncheckedCreateWithoutProjetAidesInput>
+    connectOrCreate?: projetCreateOrConnectWithoutProjetAidesInput
+    upsert?: projetUpsertWithoutProjetAidesInput
+    connect?: projetWhereUniqueInput
+    update?: XOR<XOR<projetUpdateToOneWithWhereWithoutProjetAidesInput, projetUpdateWithoutProjetAidesInput>, projetUncheckedUpdateWithoutProjetAidesInput>
+  }
+
+  export type aideUpdateOneRequiredWithoutProjetAidesNestedInput = {
+    create?: XOR<aideCreateWithoutProjetAidesInput, aideUncheckedCreateWithoutProjetAidesInput>
+    connectOrCreate?: aideCreateOrConnectWithoutProjetAidesInput
+    upsert?: aideUpsertWithoutProjetAidesInput
+    connect?: aideWhereUniqueInput
+    update?: XOR<XOR<aideUpdateToOneWithWhereWithoutProjetAidesInput, aideUpdateWithoutProjetAidesInput>, aideUncheckedUpdateWithoutProjetAidesInput>
+  }
+
+  export type UserUpdateOneWithoutProjetAidesNestedInput = {
+    create?: XOR<UserCreateWithoutProjetAidesInput, UserUncheckedCreateWithoutProjetAidesInput>
+    connectOrCreate?: UserCreateOrConnectWithoutProjetAidesInput
+    upsert?: UserUpsertWithoutProjetAidesInput
+    disconnect?: UserWhereInput | boolean
+    delete?: UserWhereInput | boolean
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutProjetAidesInput, UserUpdateWithoutProjetAidesInput>, UserUncheckedUpdateWithoutProjetAidesInput>
   }
 
   export type estimation_fiche_solutionCreateNestedOneWithoutEstimation_materiauxInput = {
@@ -38251,6 +40048,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutAccountsInput = {
@@ -38289,6 +40087,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutAccountsInput = {
@@ -38343,6 +40142,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -38381,6 +40181,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type AccountCreateWithoutUserInput = {
@@ -38490,6 +40291,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateWithoutCreatorInput = {
@@ -38519,6 +40321,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetCreateOrConnectWithoutCreatorInput = {
@@ -38626,6 +40429,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateWithoutDeleterInput = {
@@ -38655,6 +40459,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetCreateOrConnectWithoutDeleterInput = {
@@ -38698,6 +40503,8 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -38716,6 +40523,8 @@ export namespace Prisma {
     deleted_by?: string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -38739,6 +40548,8 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -38757,6 +40568,8 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -38950,6 +40763,30 @@ export namespace Prisma {
 
   export type diagnostic_simulationCreateManyUserInputEnvelope = {
     data: diagnostic_simulationCreateManyUserInput | diagnostic_simulationCreateManyUserInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type projet_aidesCreateWithoutCreated_byInput = {
+    id?: number
+    created_at?: Date | string | null
+    projet: projetCreateNestedOneWithoutProjetAidesInput
+    aide: aideCreateNestedOneWithoutProjetAidesInput
+  }
+
+  export type projet_aidesUncheckedCreateWithoutCreated_byInput = {
+    id?: number
+    projet_id: number
+    aideId: number
+    created_at?: Date | string | null
+  }
+
+  export type projet_aidesCreateOrConnectWithoutCreated_byInput = {
+    where: projet_aidesWhereUniqueInput
+    create: XOR<projet_aidesCreateWithoutCreated_byInput, projet_aidesUncheckedCreateWithoutCreated_byInput>
+  }
+
+  export type projet_aidesCreateManyCreated_byInputEnvelope = {
+    data: projet_aidesCreateManyCreated_byInput | projet_aidesCreateManyCreated_byInput[]
     skipDuplicates?: boolean
   }
 
@@ -39185,6 +41022,8 @@ export namespace Prisma {
     deleted_by?: StringNullableFilter<"user_projet"> | string | null
     nb_views?: IntNullableFilter<"user_projet"> | number | null
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
+    aides_already_seen?: IntNullableListFilter<"user_projet">
+    aides_fs_unselected?: IntNullableListFilter<"user_projet">
   }
 
   export type user_projetUpsertWithWhereUniqueWithoutDeleterInput = {
@@ -39400,6 +41239,33 @@ export namespace Prisma {
     updated_at?: DateTimeFilter<"diagnostic_simulation"> | Date | string
   }
 
+  export type projet_aidesUpsertWithWhereUniqueWithoutCreated_byInput = {
+    where: projet_aidesWhereUniqueInput
+    update: XOR<projet_aidesUpdateWithoutCreated_byInput, projet_aidesUncheckedUpdateWithoutCreated_byInput>
+    create: XOR<projet_aidesCreateWithoutCreated_byInput, projet_aidesUncheckedCreateWithoutCreated_byInput>
+  }
+
+  export type projet_aidesUpdateWithWhereUniqueWithoutCreated_byInput = {
+    where: projet_aidesWhereUniqueInput
+    data: XOR<projet_aidesUpdateWithoutCreated_byInput, projet_aidesUncheckedUpdateWithoutCreated_byInput>
+  }
+
+  export type projet_aidesUpdateManyWithWhereWithoutCreated_byInput = {
+    where: projet_aidesScalarWhereInput
+    data: XOR<projet_aidesUpdateManyMutationInput, projet_aidesUncheckedUpdateManyWithoutCreated_byInput>
+  }
+
+  export type projet_aidesScalarWhereInput = {
+    AND?: projet_aidesScalarWhereInput | projet_aidesScalarWhereInput[]
+    OR?: projet_aidesScalarWhereInput[]
+    NOT?: projet_aidesScalarWhereInput | projet_aidesScalarWhereInput[]
+    id?: IntFilter<"projet_aides"> | number
+    projet_id?: IntFilter<"projet_aides"> | number
+    aideId?: IntFilter<"projet_aides"> | number
+    created_at?: DateTimeNullableFilter<"projet_aides"> | Date | string | null
+    user_id?: StringNullableFilter<"projet_aides"> | string | null
+  }
+
   export type user_collectiviteCreateWithoutCollectiviteInput = {
     verified?: boolean
     created_at?: Date | string
@@ -39458,6 +41324,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutCollectivites_createdInput = {
@@ -39496,6 +41363,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutCollectivites_createdInput = {
@@ -39530,6 +41398,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateWithoutCollectiviteInput = {
@@ -39559,6 +41428,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetCreateOrConnectWithoutCollectiviteInput = {
@@ -39634,6 +41504,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCollectivites_createdInput = {
@@ -39672,6 +41543,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type projetUpsertWithWhereUniqueWithoutCollectiviteInput = {
@@ -39717,6 +41589,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateWithoutUsersInput = {
@@ -39746,6 +41619,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetCreateOrConnectWithoutUsersInput = {
@@ -39789,6 +41663,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutProjetsInput = {
@@ -39827,6 +41702,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutProjetsInput = {
@@ -39870,6 +41746,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutUser_projet_deletedInput = {
@@ -39908,6 +41785,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutUser_projet_deletedInput = {
@@ -40008,6 +41886,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateWithoutUsersInput = {
@@ -40037,6 +41916,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type UserUpsertWithoutProjetsInput = {
@@ -40086,6 +41966,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjetsInput = {
@@ -40124,6 +42005,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUpsertWithoutUser_projet_deletedInput = {
@@ -40173,6 +42055,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutUser_projet_deletedInput = {
@@ -40211,6 +42094,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type emailUpsertWithWhereUniqueWithoutUser_projetInput = {
@@ -40254,6 +42138,8 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -40273,6 +42159,8 @@ export namespace Prisma {
     deleted_by?: string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
 
@@ -40317,6 +42205,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutEmailsInput = {
@@ -40355,6 +42244,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutEmailsInput = {
@@ -40382,6 +42272,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -40401,6 +42293,8 @@ export namespace Prisma {
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
 
@@ -40451,6 +42345,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEmailsInput = {
@@ -40489,6 +42384,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserCreateWithoutCollectivitesInput = {
@@ -40527,6 +42423,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutCollectivitesInput = {
@@ -40565,6 +42462,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutCollectivitesInput = {
@@ -40656,6 +42554,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutCollectivitesInput = {
@@ -40694,6 +42593,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type collectiviteUpsertWithoutUsersInput = {
@@ -40775,6 +42675,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutProjets_createdInput = {
@@ -40813,6 +42714,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutProjets_createdInput = {
@@ -40927,6 +42829,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutProjets_deletedInput = {
@@ -40965,6 +42868,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutProjets_deletedInput = {
@@ -40981,6 +42885,8 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -40999,6 +42905,8 @@ export namespace Prisma {
     deleted_by?: string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -41089,6 +42997,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type projet_aidesCreateWithoutProjetInput = {
+    id?: number
+    created_at?: Date | string | null
+    aide: aideCreateNestedOneWithoutProjetAidesInput
+    created_by?: UserCreateNestedOneWithoutProjetAidesInput
+  }
+
+  export type projet_aidesUncheckedCreateWithoutProjetInput = {
+    id?: number
+    aideId: number
+    created_at?: Date | string | null
+    user_id?: string | null
+  }
+
+  export type projet_aidesCreateOrConnectWithoutProjetInput = {
+    where: projet_aidesWhereUniqueInput
+    create: XOR<projet_aidesCreateWithoutProjetInput, projet_aidesUncheckedCreateWithoutProjetInput>
+  }
+
+  export type projet_aidesCreateManyProjetInputEnvelope = {
+    data: projet_aidesCreateManyProjetInput | projet_aidesCreateManyProjetInput[]
+    skipDuplicates?: boolean
+  }
+
   export type UserUpsertWithoutProjets_createdInput = {
     update: XOR<UserUpdateWithoutProjets_createdInput, UserUncheckedUpdateWithoutProjets_createdInput>
     create: XOR<UserCreateWithoutProjets_createdInput, UserUncheckedCreateWithoutProjets_createdInput>
@@ -41136,6 +43068,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjets_createdInput = {
@@ -41174,6 +43107,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type estimationUpsertWithWhereUniqueWithoutProjetInput = {
@@ -41282,6 +43216,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutProjets_deletedInput = {
@@ -41320,6 +43255,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type user_projetUpsertWithWhereUniqueWithoutProjetInput = {
@@ -41386,6 +43322,22 @@ export namespace Prisma {
     data: XOR<diagnostic_simulationUpdateManyMutationInput, diagnostic_simulationUncheckedUpdateManyWithoutProjetInput>
   }
 
+  export type projet_aidesUpsertWithWhereUniqueWithoutProjetInput = {
+    where: projet_aidesWhereUniqueInput
+    update: XOR<projet_aidesUpdateWithoutProjetInput, projet_aidesUncheckedUpdateWithoutProjetInput>
+    create: XOR<projet_aidesCreateWithoutProjetInput, projet_aidesUncheckedCreateWithoutProjetInput>
+  }
+
+  export type projet_aidesUpdateWithWhereUniqueWithoutProjetInput = {
+    where: projet_aidesWhereUniqueInput
+    data: XOR<projet_aidesUpdateWithoutProjetInput, projet_aidesUncheckedUpdateWithoutProjetInput>
+  }
+
+  export type projet_aidesUpdateManyWithWhereWithoutProjetInput = {
+    where: projet_aidesScalarWhereInput
+    data: XOR<projet_aidesUpdateManyMutationInput, projet_aidesUncheckedUpdateManyWithoutProjetInput>
+  }
+
   export type projetCreateWithoutFichesInput = {
     id: number
     created_at?: Date | string
@@ -41413,6 +43365,7 @@ export namespace Prisma {
     users?: user_projetCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateWithoutFichesInput = {
@@ -41442,6 +43395,7 @@ export namespace Prisma {
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetCreateOrConnectWithoutFichesInput = {
@@ -41485,6 +43439,7 @@ export namespace Prisma {
     emails?: emailCreateNestedManyWithoutUserInput
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutFichesInput = {
@@ -41523,6 +43478,7 @@ export namespace Prisma {
     emails?: emailUncheckedCreateNestedManyWithoutUserInput
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutFichesInput = {
@@ -41568,6 +43524,7 @@ export namespace Prisma {
     users?: user_projetUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateWithoutFichesInput = {
@@ -41597,6 +43554,7 @@ export namespace Prisma {
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type UserUpsertWithoutFichesInput = {
@@ -41646,6 +43604,7 @@ export namespace Prisma {
     emails?: emailUpdateManyWithoutUserNestedInput
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutFichesInput = {
@@ -41684,6 +43643,7 @@ export namespace Prisma {
     emails?: emailUncheckedUpdateManyWithoutUserNestedInput
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type projetCreateWithoutSourcing_user_projetsInput = {
@@ -41713,6 +43673,7 @@ export namespace Prisma {
     users?: user_projetCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateWithoutSourcing_user_projetsInput = {
@@ -41742,6 +43703,7 @@ export namespace Prisma {
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetCreateOrConnectWithoutSourcing_user_projetsInput = {
@@ -41758,6 +43720,8 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -41777,6 +43741,8 @@ export namespace Prisma {
     deleted_by?: string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
   }
 
@@ -41821,6 +43787,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutSourcing_contacts_createdInput = {
@@ -41859,6 +43826,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutSourcing_contacts_createdInput = {
@@ -41904,6 +43872,7 @@ export namespace Prisma {
     users?: user_projetUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateWithoutSourcing_user_projetsInput = {
@@ -41933,6 +43902,7 @@ export namespace Prisma {
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type user_projetUpsertWithoutSourced_by_projetsInput = {
@@ -41955,6 +43925,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -41974,6 +43946,8 @@ export namespace Prisma {
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
   }
 
@@ -42024,6 +43998,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutSourcing_contacts_createdInput = {
@@ -42062,6 +44037,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserCreateWithoutEstimations_createdInput = {
@@ -42100,6 +44076,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutEstimations_createdInput = {
@@ -42138,6 +44115,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutEstimations_createdInput = {
@@ -42172,6 +44150,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateWithoutEstimationsInput = {
@@ -42201,6 +44180,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
     diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetCreateOrConnectWithoutEstimationsInput = {
@@ -42244,6 +44224,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutEstimations_deletedInput = {
@@ -42282,6 +44263,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutEstimations_deletedInput = {
@@ -42400,6 +44382,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEstimations_createdInput = {
@@ -42438,6 +44421,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type projetUpsertWithoutEstimationsInput = {
@@ -42478,6 +44462,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateWithoutEstimationsInput = {
@@ -42507,6 +44492,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type UserUpsertWithoutEstimations_deletedInput = {
@@ -42556,6 +44542,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEstimations_deletedInput = {
@@ -42594,6 +44581,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type estimations_aidesUpsertWithWhereUniqueWithoutEstimationInput = {
@@ -42670,6 +44658,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type projet_aidesCreateWithoutAideInput = {
+    id?: number
+    created_at?: Date | string | null
+    projet: projetCreateNestedOneWithoutProjetAidesInput
+    created_by?: UserCreateNestedOneWithoutProjetAidesInput
+  }
+
+  export type projet_aidesUncheckedCreateWithoutAideInput = {
+    id?: number
+    projet_id: number
+    created_at?: Date | string | null
+    user_id?: string | null
+  }
+
+  export type projet_aidesCreateOrConnectWithoutAideInput = {
+    where: projet_aidesWhereUniqueInput
+    create: XOR<projet_aidesCreateWithoutAideInput, projet_aidesUncheckedCreateWithoutAideInput>
+  }
+
+  export type projet_aidesCreateManyAideInputEnvelope = {
+    data: projet_aidesCreateManyAideInput | projet_aidesCreateManyAideInput[]
+    skipDuplicates?: boolean
+  }
+
   export type estimations_aidesUpsertWithWhereUniqueWithoutAideInput = {
     where: estimations_aidesWhereUniqueInput
     update: XOR<estimations_aidesUpdateWithoutAideInput, estimations_aidesUncheckedUpdateWithoutAideInput>
@@ -42684,6 +44696,22 @@ export namespace Prisma {
   export type estimations_aidesUpdateManyWithWhereWithoutAideInput = {
     where: estimations_aidesScalarWhereInput
     data: XOR<estimations_aidesUpdateManyMutationInput, estimations_aidesUncheckedUpdateManyWithoutAideInput>
+  }
+
+  export type projet_aidesUpsertWithWhereUniqueWithoutAideInput = {
+    where: projet_aidesWhereUniqueInput
+    update: XOR<projet_aidesUpdateWithoutAideInput, projet_aidesUncheckedUpdateWithoutAideInput>
+    create: XOR<projet_aidesCreateWithoutAideInput, projet_aidesUncheckedCreateWithoutAideInput>
+  }
+
+  export type projet_aidesUpdateWithWhereUniqueWithoutAideInput = {
+    where: projet_aidesWhereUniqueInput
+    data: XOR<projet_aidesUpdateWithoutAideInput, projet_aidesUncheckedUpdateWithoutAideInput>
+  }
+
+  export type projet_aidesUpdateManyWithWhereWithoutAideInput = {
+    where: projet_aidesScalarWhereInput
+    data: XOR<projet_aidesUpdateManyMutationInput, projet_aidesUncheckedUpdateManyWithoutAideInput>
   }
 
   export type estimationCreateWithoutEstimations_aidesInput = {
@@ -42721,6 +44749,7 @@ export namespace Prisma {
     type: string
     name?: string | null
     financers?: aideCreatefinancersInput | string[]
+    projetAides?: projet_aidesCreateNestedManyWithoutAideInput
   }
 
   export type aideUncheckedCreateWithoutEstimations_aidesInput = {
@@ -42730,6 +44759,7 @@ export namespace Prisma {
     type: string
     name?: string | null
     financers?: aideCreatefinancersInput | string[]
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutAideInput
   }
 
   export type aideCreateOrConnectWithoutEstimations_aidesInput = {
@@ -42773,6 +44803,7 @@ export namespace Prisma {
     emails?: emailCreateNestedManyWithoutUserInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutEstimations_aidesInput = {
@@ -42811,6 +44842,7 @@ export namespace Prisma {
     emails?: emailUncheckedCreateNestedManyWithoutUserInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutEstimations_aidesInput = {
@@ -42870,6 +44902,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     financers?: aideUpdatefinancersInput | string[]
+    projetAides?: projet_aidesUpdateManyWithoutAideNestedInput
   }
 
   export type aideUncheckedUpdateWithoutEstimations_aidesInput = {
@@ -42879,6 +44912,7 @@ export namespace Prisma {
     type?: StringFieldUpdateOperationsInput | string
     name?: NullableStringFieldUpdateOperationsInput | string | null
     financers?: aideUpdatefinancersInput | string[]
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutAideNestedInput
   }
 
   export type UserUpsertWithoutEstimations_aidesInput = {
@@ -42928,6 +44962,7 @@ export namespace Prisma {
     emails?: emailUpdateManyWithoutUserNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutEstimations_aidesInput = {
@@ -42964,6 +44999,369 @@ export namespace Prisma {
     Analytics?: AnalyticsUncheckedUpdateManyWithoutCreated_byNestedInput
     sourcing_contacts_created?: projet_sourcing_contactUncheckedUpdateManyWithoutCreatorNestedInput
     emails?: emailUncheckedUpdateManyWithoutUserNestedInput
+    fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
+    diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
+  }
+
+  export type projetCreateWithoutProjetAidesInput = {
+    id: number
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    nom: string
+    type_espace?: string | null
+    adresse?: string | null
+    niveau_maturite?: string | null
+    adresse_info?: NullableJsonNullValueInput | InputJsonValue
+    adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    date_echeance?: Date | string | null
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
+    deleted_at?: Date | string | null
+    is_public?: boolean | null
+    budget?: number | null
+    sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
+    creator: UserCreateNestedOneWithoutProjets_createdInput
+    estimations?: estimationCreateNestedManyWithoutProjetInput
+    collectivite: collectiviteCreateNestedOneWithoutProjetInput
+    deleter?: UserCreateNestedOneWithoutProjets_deletedInput
+    users?: user_projetCreateNestedManyWithoutProjetInput
+    sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
+    fiches?: projet_ficheCreateNestedManyWithoutProjetInput
+    diagnostic_simulations?: diagnostic_simulationCreateNestedManyWithoutProjetInput
+  }
+
+  export type projetUncheckedCreateWithoutProjetAidesInput = {
+    id: number
+    created_by: string
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    nom: string
+    type_espace?: string | null
+    adresse?: string | null
+    niveau_maturite?: string | null
+    adresse_info?: NullableJsonNullValueInput | InputJsonValue
+    adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    date_echeance?: Date | string | null
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    collectiviteId: number
+    recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
+    deleted_at?: Date | string | null
+    deleted_by?: string | null
+    is_public?: boolean | null
+    budget?: number | null
+    sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: $Enums.StatutProjet | null
+    statut_updated_at?: Date | string | null
+    estimations?: estimationUncheckedCreateNestedManyWithoutProjetInput
+    users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
+    sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
+    fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
+    diagnostic_simulations?: diagnostic_simulationUncheckedCreateNestedManyWithoutProjetInput
+  }
+
+  export type projetCreateOrConnectWithoutProjetAidesInput = {
+    where: projetWhereUniqueInput
+    create: XOR<projetCreateWithoutProjetAidesInput, projetUncheckedCreateWithoutProjetAidesInput>
+  }
+
+  export type aideCreateWithoutProjetAidesInput = {
+    aideTerritoireId: number
+    submission_deadline?: Date | string | null
+    type: string
+    name?: string | null
+    financers?: aideCreatefinancersInput | string[]
+    estimations_aides?: estimations_aidesCreateNestedManyWithoutAideInput
+  }
+
+  export type aideUncheckedCreateWithoutProjetAidesInput = {
+    id?: number
+    aideTerritoireId: number
+    submission_deadline?: Date | string | null
+    type: string
+    name?: string | null
+    financers?: aideCreatefinancersInput | string[]
+    estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutAideInput
+  }
+
+  export type aideCreateOrConnectWithoutProjetAidesInput = {
+    where: aideWhereUniqueInput
+    create: XOR<aideCreateWithoutProjetAidesInput, aideUncheckedCreateWithoutProjetAidesInput>
+  }
+
+  export type UserCreateWithoutProjetAidesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    agentconnect_info?: NullableJsonNullValueInput | InputJsonValue
+    nom?: string | null
+    prenom?: string | null
+    poste?: string | null
+    nom_etablissement?: string | null
+    siren?: string | null
+    siren_info?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    canal_acquisition?: string | null
+    discardedInformation?: UserCreatediscardedInformationInput | string[]
+    accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
+    accounts?: AccountCreateNestedManyWithoutUserInput
+    collectivites_created?: collectiviteCreateNestedManyWithoutCreatorInput
+    projets_created?: projetCreateNestedManyWithoutCreatorInput
+    estimations_created?: estimationCreateNestedManyWithoutCreatorInput
+    estimations_deleted?: estimationCreateNestedManyWithoutDeleterInput
+    projets_deleted?: projetCreateNestedManyWithoutDeleterInput
+    collectivites?: user_collectiviteCreateNestedManyWithoutUserInput
+    projets?: user_projetCreateNestedManyWithoutUserInput
+    user_projet_deleted?: user_projetCreateNestedManyWithoutDeleterInput
+    conversations?: conversationCreateNestedManyWithoutUserInput
+    Analytics?: AnalyticsCreateNestedManyWithoutCreated_byInput
+    sourcing_contacts_created?: projet_sourcing_contactCreateNestedManyWithoutCreatorInput
+    emails?: emailCreateNestedManyWithoutUserInput
+    estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
+    fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
+    diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutProjetAidesInput = {
+    id?: string
+    email: string
+    emailVerified?: Date | string | null
+    image?: string | null
+    agentconnect_info?: NullableJsonNullValueInput | InputJsonValue
+    nom?: string | null
+    prenom?: string | null
+    poste?: string | null
+    nom_etablissement?: string | null
+    siren?: string | null
+    siren_info?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: Date | string
+    updated_at?: Date | string | null
+    canal_acquisition?: string | null
+    discardedInformation?: UserCreatediscardedInformationInput | string[]
+    accept_communication_produit?: boolean
+    accept_communication_suivi_projet?: boolean
+    statut?: $Enums.StatutUser | null
+    statut_updated_at?: Date | string | null
+    last_browsing_date?: Date | string | null
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+    collectivites_created?: collectiviteUncheckedCreateNestedManyWithoutCreatorInput
+    projets_created?: projetUncheckedCreateNestedManyWithoutCreatorInput
+    estimations_created?: estimationUncheckedCreateNestedManyWithoutCreatorInput
+    estimations_deleted?: estimationUncheckedCreateNestedManyWithoutDeleterInput
+    projets_deleted?: projetUncheckedCreateNestedManyWithoutDeleterInput
+    collectivites?: user_collectiviteUncheckedCreateNestedManyWithoutUserInput
+    projets?: user_projetUncheckedCreateNestedManyWithoutUserInput
+    user_projet_deleted?: user_projetUncheckedCreateNestedManyWithoutDeleterInput
+    conversations?: conversationUncheckedCreateNestedManyWithoutUserInput
+    Analytics?: AnalyticsUncheckedCreateNestedManyWithoutCreated_byInput
+    sourcing_contacts_created?: projet_sourcing_contactUncheckedCreateNestedManyWithoutCreatorInput
+    emails?: emailUncheckedCreateNestedManyWithoutUserInput
+    estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
+    fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
+    diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutProjetAidesInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutProjetAidesInput, UserUncheckedCreateWithoutProjetAidesInput>
+  }
+
+  export type projetUpsertWithoutProjetAidesInput = {
+    update: XOR<projetUpdateWithoutProjetAidesInput, projetUncheckedUpdateWithoutProjetAidesInput>
+    create: XOR<projetCreateWithoutProjetAidesInput, projetUncheckedCreateWithoutProjetAidesInput>
+    where?: projetWhereInput
+  }
+
+  export type projetUpdateToOneWithWhereWithoutProjetAidesInput = {
+    where?: projetWhereInput
+    data: XOR<projetUpdateWithoutProjetAidesInput, projetUncheckedUpdateWithoutProjetAidesInput>
+  }
+
+  export type projetUpdateWithoutProjetAidesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    type_espace?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse_info?: NullableJsonNullValueInput | InputJsonValue
+    adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    budget?: NullableIntFieldUpdateOperationsInput | number | null
+    sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    creator?: UserUpdateOneRequiredWithoutProjets_createdNestedInput
+    estimations?: estimationUpdateManyWithoutProjetNestedInput
+    collectivite?: collectiviteUpdateOneRequiredWithoutProjetNestedInput
+    deleter?: UserUpdateOneWithoutProjets_deletedNestedInput
+    users?: user_projetUpdateManyWithoutProjetNestedInput
+    sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
+    fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
+    diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+  }
+
+  export type projetUncheckedUpdateWithoutProjetAidesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_by?: StringFieldUpdateOperationsInput | string
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    nom?: StringFieldUpdateOperationsInput | string
+    type_espace?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse?: NullableStringFieldUpdateOperationsInput | string | null
+    niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
+    adresse_info?: NullableJsonNullValueInput | InputJsonValue
+    adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
+    date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    collectiviteId?: IntFieldUpdateOperationsInput | number
+    recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
+    deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
+    is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
+    budget?: NullableIntFieldUpdateOperationsInput | number | null
+    sourcing_rex?: NullableJsonNullValueInput | InputJsonValue
+    statut?: NullableEnumStatutProjetFieldUpdateOperationsInput | $Enums.StatutProjet | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    estimations?: estimationUncheckedUpdateManyWithoutProjetNestedInput
+    users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
+    sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
+    fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
+    diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+  }
+
+  export type aideUpsertWithoutProjetAidesInput = {
+    update: XOR<aideUpdateWithoutProjetAidesInput, aideUncheckedUpdateWithoutProjetAidesInput>
+    create: XOR<aideCreateWithoutProjetAidesInput, aideUncheckedCreateWithoutProjetAidesInput>
+    where?: aideWhereInput
+  }
+
+  export type aideUpdateToOneWithWhereWithoutProjetAidesInput = {
+    where?: aideWhereInput
+    data: XOR<aideUpdateWithoutProjetAidesInput, aideUncheckedUpdateWithoutProjetAidesInput>
+  }
+
+  export type aideUpdateWithoutProjetAidesInput = {
+    aideTerritoireId?: IntFieldUpdateOperationsInput | number
+    submission_deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    financers?: aideUpdatefinancersInput | string[]
+    estimations_aides?: estimations_aidesUpdateManyWithoutAideNestedInput
+  }
+
+  export type aideUncheckedUpdateWithoutProjetAidesInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    aideTerritoireId?: IntFieldUpdateOperationsInput | number
+    submission_deadline?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    type?: StringFieldUpdateOperationsInput | string
+    name?: NullableStringFieldUpdateOperationsInput | string | null
+    financers?: aideUpdatefinancersInput | string[]
+    estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutAideNestedInput
+  }
+
+  export type UserUpsertWithoutProjetAidesInput = {
+    update: XOR<UserUpdateWithoutProjetAidesInput, UserUncheckedUpdateWithoutProjetAidesInput>
+    create: XOR<UserCreateWithoutProjetAidesInput, UserUncheckedCreateWithoutProjetAidesInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutProjetAidesInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutProjetAidesInput, UserUncheckedUpdateWithoutProjetAidesInput>
+  }
+
+  export type UserUpdateWithoutProjetAidesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    agentconnect_info?: NullableJsonNullValueInput | InputJsonValue
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    prenom?: NullableStringFieldUpdateOperationsInput | string | null
+    poste?: NullableStringFieldUpdateOperationsInput | string | null
+    nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
+    siren_info?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
+    discardedInformation?: UserUpdatediscardedInformationInput | string[]
+    accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+    collectivites_created?: collectiviteUpdateManyWithoutCreatorNestedInput
+    projets_created?: projetUpdateManyWithoutCreatorNestedInput
+    estimations_created?: estimationUpdateManyWithoutCreatorNestedInput
+    estimations_deleted?: estimationUpdateManyWithoutDeleterNestedInput
+    projets_deleted?: projetUpdateManyWithoutDeleterNestedInput
+    collectivites?: user_collectiviteUpdateManyWithoutUserNestedInput
+    projets?: user_projetUpdateManyWithoutUserNestedInput
+    user_projet_deleted?: user_projetUpdateManyWithoutDeleterNestedInput
+    conversations?: conversationUpdateManyWithoutUserNestedInput
+    Analytics?: AnalyticsUpdateManyWithoutCreated_byNestedInput
+    sourcing_contacts_created?: projet_sourcing_contactUpdateManyWithoutCreatorNestedInput
+    emails?: emailUpdateManyWithoutUserNestedInput
+    estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
+    fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
+    diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutProjetAidesInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    emailVerified?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    agentconnect_info?: NullableJsonNullValueInput | InputJsonValue
+    nom?: NullableStringFieldUpdateOperationsInput | string | null
+    prenom?: NullableStringFieldUpdateOperationsInput | string | null
+    poste?: NullableStringFieldUpdateOperationsInput | string | null
+    nom_etablissement?: NullableStringFieldUpdateOperationsInput | string | null
+    siren?: NullableStringFieldUpdateOperationsInput | string | null
+    siren_info?: NullableJsonNullValueInput | InputJsonValue
+    created_at?: DateTimeFieldUpdateOperationsInput | Date | string
+    updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    canal_acquisition?: NullableStringFieldUpdateOperationsInput | string | null
+    discardedInformation?: UserUpdatediscardedInformationInput | string[]
+    accept_communication_produit?: BoolFieldUpdateOperationsInput | boolean
+    accept_communication_suivi_projet?: BoolFieldUpdateOperationsInput | boolean
+    statut?: NullableEnumStatutUserFieldUpdateOperationsInput | $Enums.StatutUser | null
+    statut_updated_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    last_browsing_date?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+    collectivites_created?: collectiviteUncheckedUpdateManyWithoutCreatorNestedInput
+    projets_created?: projetUncheckedUpdateManyWithoutCreatorNestedInput
+    estimations_created?: estimationUncheckedUpdateManyWithoutCreatorNestedInput
+    estimations_deleted?: estimationUncheckedUpdateManyWithoutDeleterNestedInput
+    projets_deleted?: projetUncheckedUpdateManyWithoutDeleterNestedInput
+    collectivites?: user_collectiviteUncheckedUpdateManyWithoutUserNestedInput
+    projets?: user_projetUncheckedUpdateManyWithoutUserNestedInput
+    user_projet_deleted?: user_projetUncheckedUpdateManyWithoutDeleterNestedInput
+    conversations?: conversationUncheckedUpdateManyWithoutUserNestedInput
+    Analytics?: AnalyticsUncheckedUpdateManyWithoutCreated_byNestedInput
+    sourcing_contacts_created?: projet_sourcing_contactUncheckedUpdateManyWithoutCreatorNestedInput
+    emails?: emailUncheckedUpdateManyWithoutUserNestedInput
+    estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -43204,6 +45602,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutConversationsInput = {
@@ -43242,6 +45641,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutConversationsInput = {
@@ -43296,6 +45696,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutConversationsInput = {
@@ -43334,6 +45735,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type projetCreateWithoutDiagnostic_simulationsInput = {
@@ -43363,6 +45765,7 @@ export namespace Prisma {
     users?: user_projetCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesCreateNestedManyWithoutProjetInput
   }
 
   export type projetUncheckedCreateWithoutDiagnostic_simulationsInput = {
@@ -43392,6 +45795,7 @@ export namespace Prisma {
     users?: user_projetUncheckedCreateNestedManyWithoutProjetInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutProjetInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutProjetInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutProjetInput
   }
 
   export type projetCreateOrConnectWithoutDiagnostic_simulationsInput = {
@@ -43435,6 +45839,7 @@ export namespace Prisma {
     emails?: emailCreateNestedManyWithoutUserInput
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutDiagnostic_simulationInput = {
@@ -43473,6 +45878,7 @@ export namespace Prisma {
     emails?: emailUncheckedCreateNestedManyWithoutUserInput
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutDiagnostic_simulationInput = {
@@ -43518,6 +45924,7 @@ export namespace Prisma {
     users?: user_projetUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateWithoutDiagnostic_simulationsInput = {
@@ -43547,6 +45954,7 @@ export namespace Prisma {
     users?: user_projetUncheckedUpdateManyWithoutProjetNestedInput
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type UserUpsertWithoutDiagnostic_simulationInput = {
@@ -43596,6 +46004,7 @@ export namespace Prisma {
     emails?: emailUpdateManyWithoutUserNestedInput
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutDiagnostic_simulationInput = {
@@ -43634,6 +46043,7 @@ export namespace Prisma {
     emails?: emailUncheckedUpdateManyWithoutUserNestedInput
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserCreateWithoutAnalyticsInput = {
@@ -43672,6 +46082,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserUncheckedCreateWithoutAnalyticsInput = {
@@ -43710,6 +46121,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutCreated_byInput
     fiches?: projet_ficheUncheckedCreateNestedManyWithoutCreated_byInput
     diagnostic_simulation?: diagnostic_simulationUncheckedCreateNestedManyWithoutUserInput
+    projetAides?: projet_aidesUncheckedCreateNestedManyWithoutCreated_byInput
   }
 
   export type UserCreateOrConnectWithoutAnalyticsInput = {
@@ -43764,6 +46176,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutCreated_byNestedInput
   }
 
   export type UserUncheckedUpdateWithoutAnalyticsInput = {
@@ -43802,6 +46215,7 @@ export namespace Prisma {
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutCreated_byNestedInput
     diagnostic_simulation?: diagnostic_simulationUncheckedUpdateManyWithoutUserNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutCreated_byNestedInput
   }
 
   export type communeCreateWithoutEpciInput = {
@@ -44031,6 +46445,8 @@ export namespace Prisma {
     deleted_by?: string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
   }
 
   export type user_projetCreateManyDeleterInput = {
@@ -44045,6 +46461,8 @@ export namespace Prisma {
     deleted_at?: Date | string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
   }
 
   export type conversationCreateManyUserInput = {
@@ -44102,6 +46520,13 @@ export namespace Prisma {
     validated?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+  }
+
+  export type projet_aidesCreateManyCreated_byInput = {
+    id?: number
+    projet_id: number
+    aideId: number
+    created_at?: Date | string | null
   }
 
   export type AccountUpdateWithoutUserInput = {
@@ -44219,6 +46644,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateWithoutCreatorInput = {
@@ -44248,6 +46674,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateManyWithoutCreatorInput = {
@@ -44369,6 +46796,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateWithoutDeleterInput = {
@@ -44398,6 +46826,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateManyWithoutDeleterInput = {
@@ -44451,6 +46880,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -44469,6 +46900,8 @@ export namespace Prisma {
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -44485,6 +46918,8 @@ export namespace Prisma {
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
   }
 
   export type user_projetUpdateWithoutDeleterInput = {
@@ -44496,6 +46931,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -44514,6 +46951,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -44530,6 +46969,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
   }
 
   export type conversationUpdateWithoutUserInput = {
@@ -44701,6 +47142,27 @@ export namespace Prisma {
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type projet_aidesUpdateWithoutCreated_byInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projet?: projetUpdateOneRequiredWithoutProjetAidesNestedInput
+    aide?: aideUpdateOneRequiredWithoutProjetAidesNestedInput
+  }
+
+  export type projet_aidesUncheckedUpdateWithoutCreated_byInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    projet_id?: IntFieldUpdateOperationsInput | number
+    aideId?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
+  export type projet_aidesUncheckedUpdateManyWithoutCreated_byInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    projet_id?: IntFieldUpdateOperationsInput | number
+    aideId?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  }
+
   export type user_collectiviteCreateManyCollectiviteInput = {
     user_id: string
     verified?: boolean
@@ -44776,6 +47238,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateWithoutCollectiviteInput = {
@@ -44805,6 +47268,7 @@ export namespace Prisma {
     sourcing_user_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutProjetNestedInput
     fiches?: projet_ficheUncheckedUpdateManyWithoutProjetNestedInput
     diagnostic_simulations?: diagnostic_simulationUncheckedUpdateManyWithoutProjetNestedInput
+    projetAides?: projet_aidesUncheckedUpdateManyWithoutProjetNestedInput
   }
 
   export type projetUncheckedUpdateManyWithoutCollectiviteInput = {
@@ -44924,6 +47388,8 @@ export namespace Prisma {
     deleted_by?: string | null
     nb_views?: number | null
     last_viewed_at?: Date | string | null
+    aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
   }
 
   export type projet_sourcing_contactCreateManyProjetInput = {
@@ -44948,6 +47414,13 @@ export namespace Prisma {
     validated?: boolean
     created_at?: Date | string
     updated_at?: Date | string
+  }
+
+  export type projet_aidesCreateManyProjetInput = {
+    id?: number
+    aideId: number
+    created_at?: Date | string | null
+    user_id?: string | null
   }
 
   export type estimationUpdateWithoutProjetInput = {
@@ -44993,6 +47466,8 @@ export namespace Prisma {
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -45011,6 +47486,8 @@ export namespace Prisma {
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -45027,6 +47504,8 @@ export namespace Prisma {
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
   }
 
   export type projet_sourcing_contactUpdateWithoutProjetInput = {
@@ -45097,6 +47576,27 @@ export namespace Prisma {
     validated?: BoolFieldUpdateOperationsInput | boolean
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type projet_aidesUpdateWithoutProjetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    aide?: aideUpdateOneRequiredWithoutProjetAidesNestedInput
+    created_by?: UserUpdateOneWithoutProjetAidesNestedInput
+  }
+
+  export type projet_aidesUncheckedUpdateWithoutProjetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    aideId?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type projet_aidesUncheckedUpdateManyWithoutProjetInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    aideId?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type estimations_aidesCreateManyEstimationInput = {
@@ -45192,6 +47692,13 @@ export namespace Prisma {
     user_id?: string | null
   }
 
+  export type projet_aidesCreateManyAideInput = {
+    id?: number
+    projet_id: number
+    created_at?: Date | string | null
+    user_id?: string | null
+  }
+
   export type estimations_aidesUpdateWithoutAideInput = {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45209,6 +47716,27 @@ export namespace Prisma {
   export type estimations_aidesUncheckedUpdateManyWithoutAideInput = {
     id?: IntFieldUpdateOperationsInput | number
     estimationId?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type projet_aidesUpdateWithoutAideInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    projet?: projetUpdateOneRequiredWithoutProjetAidesNestedInput
+    created_by?: UserUpdateOneWithoutProjetAidesNestedInput
+  }
+
+  export type projet_aidesUncheckedUpdateWithoutAideInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    projet_id?: IntFieldUpdateOperationsInput | number
+    created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user_id?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type projet_aidesUncheckedUpdateManyWithoutAideInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    projet_id?: IntFieldUpdateOperationsInput | number
     created_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     user_id?: NullableStringFieldUpdateOperationsInput | string | null
   }

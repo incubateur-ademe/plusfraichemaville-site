@@ -77,6 +77,11 @@
   box-shadow: inset 0 0 0 1px var(--border-default-grey);
 }
 
+.pfmv-flat-card-selected {
+  outline: 1px solid var(--light-background-action-high-blue-france, #000091);
+  outline-offset: 0px;
+}
+
 .pfmv-card-outline {
   background: #fff !important;
   outline: 1px solid #000091;
