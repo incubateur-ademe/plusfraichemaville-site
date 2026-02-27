@@ -1,37 +1,35 @@
 "use client";
-
-import { AideProjetListeHeader } from "./aide-projet-liste-header";
-import { AideProjetPanelHeader } from "./aide-projet-panel-header";
+import { TypeFiche } from "@/src/helpers/common";
+import { isEmpty } from "@/src/helpers/listUtils";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
+import { useAideEstimationEditFilter, FichesDiagnosticFiltersKey } from "@/src/hooks/use-aide-estimation-edit-filter";
+import { useAideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation-edit-sort-method";
+import { useAidesByProjetFetcher } from "@/src/hooks/use-aides-by-projet-fetcher";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { usePagination } from "@/src/hooks/use-pagination";
+import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useUserStore } from "@/src/stores/user/provider";
+import Tag from "@codegouvfr/react-dsfr/Tag";
+import { memo, useState, useMemo } from "react";
+import { GenericFicheLink } from "../../common/generic-save-fiche/generic-fiche-link";
+import { getProjetFichesIdsByType } from "../../common/generic-save-fiche/helpers";
+import LinkWithoutPrefetch from "../../common/link-without-prefetch";
+import { notifications } from "../../common/notifications";
+import { Pagination } from "../../common/pagination";
+import BannerProjetBreadcrumb from "../../espace-projet/banner/banner-projet-breadcrumb";
+import { BREADCRUMB_FINANCEMENTS_LISTE } from "../../espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-financement";
+import { makeFicheSolutionUrlApi } from "../../ficheSolution/helpers";
+import { countAidesByType, countSelectedAides, resolveAidType } from "../helpers";
+import { TypeAidesTerritoiresAide } from "../types";
 import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
 import { AideEditFilter } from "./aide-edit-filter";
-import { memo, useMemo, useState } from "react";
-import { countAidesByType, countSelectedAides, resolveAidType } from "../helpers";
-import { TypeAidesTerritoiresAide } from "@/src/components/financement/types";
-import { FichesDiagnosticFiltersKey, useAideEstimationEditFilter } from "@/src/hooks/use-aide-estimation-edit-filter";
-import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
-import { TypeFiche } from "@/src/helpers/common";
-import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
-import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-import Tag from "@codegouvfr/react-dsfr/Tag";
-import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers";
-
-import { Pagination } from "@/src/components/common/pagination";
-import { usePagination } from "@/src/hooks/use-pagination";
-import { useProjetsStore } from "@/src/stores/projets/provider";
-import { useUserStore } from "@/src/stores/user/provider";
-import { AideEditSortField } from "@/src/components/financement/aide/aide-edit-sort-field";
-import { useAideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation-edit-sort-method";
-import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
-import { notifications } from "@/src/components/common/notifications";
-import { useAidesByProjetFetcher } from "@/src/hooks/use-aides-by-projet-fetcher";
-import { BREADCRUMB_FINANCEMENTS_LISTE } from "@/src/components/espace-projet/banner/breadcrumb-list/espace-projet-breadcurmb-financement";
-import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
-import { getTypeSolutionFromCode } from "@/src/helpers/type-fiche-solution";
-import { isEmpty } from "@/src/helpers/listUtils";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { AideEditSortField } from "./aide-edit-sort-field";
+import { AideProjetListeHeader } from "./aide-projet-liste-header";
+import { AideProjetPanelHeader } from "./aide-projet-panel-header";
 
 export const AideProjetEdit = memo(() => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -47,7 +45,7 @@ export const AideProjetEdit = memo(() => {
   const unselectedFsIds = userProjet?.aides_fs_unselected || [];
 
   const allFicheSolutionIds = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) ?? [];
-  const [selectedFsIds, setSelectedFisIds] = useState<number[]>(
+  const [selectedFsIds, setSelectedFsIds] = useState<number[]>(
     allFicheSolutionIds.filter((id) => !unselectedFsIds.includes(id)),
   );
 
@@ -57,23 +55,23 @@ export const AideProjetEdit = memo(() => {
 
   const updateUserProjetInProjet = useProjetsStore((state) => state.updateUserProjetInProjet);
 
-  const toggleTag = (id: number) => {
-    const newSelectedFisIds = selectedFsIds.includes(id)
-      ? selectedFsIds.filter((x) => x !== id)
-      : [...selectedFsIds, id];
+  const toggleFicheSolution = (ficheSolutionId: number) => {
+    const newSelectedFsIds = selectedFsIds.includes(ficheSolutionId)
+      ? selectedFsIds.filter((x) => x !== ficheSolutionId)
+      : [...selectedFsIds, ficheSolutionId];
 
-    setSelectedFisIds(newSelectedFisIds);
+    setSelectedFsIds(newSelectedFsIds);
     handlePageChange(1, { needScrollToTop: false });
 
     if (userProjet) {
       updateUserProjetInProjet({
         ...userProjet,
-        aides_fs_unselected: allFicheSolutionIds.filter((fsId) => !newSelectedFisIds.includes(fsId)),
+        aides_fs_unselected: allFicheSolutionIds.filter((fsId) => !newSelectedFsIds.includes(fsId)),
       });
     }
   };
 
-  const { data, isLoading } = useAidesByProjetFetcher(projetId, selectedFsIds, true);
+  const { data, isLoading } = useAidesByProjetFetcher(projetId, selectedFsIds);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
   const selectedAidesCount = useMemo(
     () => countSelectedAides(data?.results ?? [], projet?.projetAides ?? []),
@@ -141,7 +139,7 @@ export const AideProjetEdit = memo(() => {
                     key={fiche.id}
                     pressed={selectedFsIds.includes(+fiche.id)}
                     nativeButtonProps={{
-                      onClick: () => toggleTag(+fiche.id),
+                      onClick: () => toggleFicheSolution(+fiche.id),
                     }}
                   >
                     {getTypeSolutionFromCode(fiche.attributes.type_solution)?.icon("fr-icon--sm mr-1")}{" "}
@@ -210,5 +208,3 @@ export const AideProjetEdit = memo(() => {
     </>
   );
 });
-
-AideProjetEdit.displayName = "AideProjetEdit";
