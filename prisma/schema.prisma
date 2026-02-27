@@ -121,24 +121,25 @@ enum InvitationStatus {
 }
 
 model user_projet {
-  id                 Int                       @id @default(autoincrement())
-  email_address      String?
-  role               RoleProjet
-  projet_id          Int
-  projet             projet                    @relation(fields: [projet_id], references: [id])
-  user_id            String?
-  user               User?                     @relation(name: "projet_access", fields: [user_id], references: [id])
-  created_at         DateTime                  @default(now())
-  invitation_token   String?                   @default(uuid())
-  invitation_status  InvitationStatus
-  deleted_at         DateTime?
-  deleted_by         String?
-  deleter            User?                     @relation(name: "user_projet_deleter", fields: [deleted_by], references: [id])
-  email              email[]
-  nb_views           Int?                      @default(0)
-  last_viewed_at     DateTime?
-  aides_already_seen Int[]
-  sourced_by_projets projet_sourcing_contact[] @relation("sourced_by_projets")
+  id                  Int                       @id @default(autoincrement())
+  email_address       String?
+  role                RoleProjet
+  projet_id           Int
+  projet              projet                    @relation(fields: [projet_id], references: [id])
+  user_id             String?
+  user                User?                     @relation(name: "projet_access", fields: [user_id], references: [id])
+  created_at          DateTime                  @default(now())
+  invitation_token    String?                   @default(uuid())
+  invitation_status   InvitationStatus
+  deleted_at          DateTime?
+  deleted_by          String?
+  deleter             User?                     @relation(name: "user_projet_deleter", fields: [deleted_by], references: [id])
+  email               email[]
+  nb_views            Int?                      @default(0)
+  last_viewed_at      DateTime?
+  aides_already_seen  Int[]
+  aides_fs_unselected Int[]
+  sourced_by_projets  projet_sourcing_contact[] @relation("sourced_by_projets")
 
   @@unique([user_id, projet_id])
 }

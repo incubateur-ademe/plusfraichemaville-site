@@ -340,3 +340,20 @@ export const addAideAlreadySeenToUserProjet = async (
     include: { user: true },
   });
 };
+
+export const updateUserProjetAidesFsUnselected = async (
+  userId: string,
+  projectId: number,
+  unselectedIds: number[],
+): Promise<user_projet | null> => {
+  return prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: {
+        user_id: userId,
+        projet_id: projectId,
+      },
+    },
+    data: { aides_fs_unselected: unselectedIds },
+  });
+};
+

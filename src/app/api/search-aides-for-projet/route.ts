@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { searchAidesFromAidesTerritoires } from "@/src/lib/aidesTerritoires/fetch";
+import { updateUserProjetAidesFsUnselected } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { getFicheSolutionByIds } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { getCollectiviteById } from "@/src/lib/prisma/prismaCollectiviteQueries";
@@ -34,12 +35,22 @@ export async function GET(request: NextRequest) {
   const ficheSolutionIdsParam = request.nextUrl.searchParams.get("ficheSolutionIds");
   const requestedIds: number[] | null = ficheSolutionIdsParam ? JSON.parse(ficheSolutionIdsParam) : null;
 
-  const ficheSolutionIds = isEmpty(requestedIds)
-    ? []
-    : projet.fiches
-        .filter((fiche) => fiche.type === FicheType.SOLUTION)
-        .filter((fiche) => requestedIds!.includes(fiche.fiche_id))
-        .map((fiche) => fiche.fiche_id);
+  const allSolutionIds = projet.fiches
+    .filter((fiche) => fiche.type === FicheType.SOLUTION)
+    .map((fiche) => fiche.fiche_id);
+
+  const ficheSolutionIds = isEmpty(requestedIds) ? [] : allSolutionIds.filter((id) => requestedIds!.includes(id));
+
+  const unselectedIds = requestedIds ? allSolutionIds.filter((id) => !requestedIds.includes(id)) : allSolutionIds;
+  const userIdParam = request.nextUrl.searchParams.get("userId");
+
+  if (userIdParam) {
+    try {
+      await updateUserProjetAidesFsUnselected(userId, projet.id, unselectedIds);
+    } catch (error) {
+      console.error("Error updating aides_fs_unselected:", error);
+    }
+  }
 
   const ficheSolutions = await getFicheSolutionByIds(ficheSolutionIds);
   const collectivite = await getCollectiviteById(projet.collectiviteId);

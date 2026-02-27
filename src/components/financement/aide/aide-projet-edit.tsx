@@ -21,6 +21,7 @@ import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers"
 import { Pagination } from "@/src/components/common/pagination";
 import { usePagination } from "@/src/hooks/use-pagination";
 import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import { AideEditSortField } from "@/src/components/financement/aide/aide-edit-sort-field";
 import { useAideEstimationEditSortMethod } from "@/src/hooks/use-aide-estimation-edit-sort-method";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
@@ -41,19 +42,38 @@ export const AideProjetEdit = memo(() => {
   const skeletons = [...new Array(3)].map((_, i) => <AideCardSkeleton key={i} />);
   const { sortMethodCode, setSortMethodCode, sortMethod } = useAideEstimationEditSortMethod();
 
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
+  const userProjet = projet?.users.find((u) => u.user_id === currentUserId);
+  const unselectedFsIds = userProjet?.aides_fs_unselected || [];
+
   const allFicheSolutionIds = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) ?? [];
-  const [pressedIds, setPressedIds] = useState<number[]>(allFicheSolutionIds);
+  const [selectedFisIds, setSelectedFisIds] = useState<number[]>(
+    allFicheSolutionIds.filter((id) => !unselectedFsIds.includes(id)),
+  );
 
   const { data: ficheSolutions } = useImmutableSwrWithFetcher<FicheSolution[]>(
     allFicheSolutionIds.length > 0 ? makeFicheSolutionUrlApi(allFicheSolutionIds) : "",
   );
 
+  const updateUserProjetInProjet = useProjetsStore((state) => state.updateUserProjetInProjet);
+
   const toggleTag = (id: number) => {
-    setPressedIds((prev) => (prev.includes(id) ? prev.filter((x) => x !== id) : [...prev, id]));
+    const newSelectedFisIds = selectedFisIds.includes(id)
+      ? selectedFisIds.filter((x) => x !== id)
+      : [...selectedFisIds, id];
+
+    setSelectedFisIds(newSelectedFisIds);
     handlePageChange(1, { needScrollToTop: false });
+
+    if (userProjet) {
+      updateUserProjetInProjet({
+        ...userProjet,
+        aides_fs_unselected: allFicheSolutionIds.filter((fsId) => !newSelectedFisIds.includes(fsId)),
+      });
+    }
   };
 
-  const { data, isLoading } = useAidesByProjetFetcher(projetId, pressedIds);
+  const { data, isLoading } = useAidesByProjetFetcher(projetId, selectedFisIds);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
   const filteredResults = useMemo(
     () =>
@@ -115,7 +135,7 @@ export const AideProjetEdit = memo(() => {
                 {ficheSolutions?.map((fiche) => (
                   <Tag
                     key={fiche.id}
-                    pressed={pressedIds.includes(+fiche.id)}
+                    pressed={selectedFisIds.includes(+fiche.id)}
                     nativeButtonProps={{
                       onClick: () => toggleTag(+fiche.id),
                     }}

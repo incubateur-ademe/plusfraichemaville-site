@@ -80,7 +80,7 @@ The project maximizes use of React Server Components for content pages. Client c
 - PostgreSQL database using custom Prisma schema (`prisma/schema.prisma`)
 - Prisma client generated to custom path: `src/generated/prisma/client`
 - **All database queries isolated in** `src/lib/prisma/prisma[Domain]Queries.ts` files
-- Never call Prisma directly from components or actions
+- Never call Prisma directly from components, actions, or API routes (like route.ts)
 
 **Server Actions Pattern:**
 
