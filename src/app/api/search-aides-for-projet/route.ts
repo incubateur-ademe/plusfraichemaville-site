@@ -2,10 +2,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { searchAidesFromAidesTerritoires } from "@/src/lib/aidesTerritoires/fetch";
 import { updateUserProjetAidesFsUnselected } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { getFicheSolutionByIds } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
-import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { getCollectiviteById } from "@/src/lib/prisma/prismaCollectiviteQueries";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/lib/next-auth/auth";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 import { FicheType } from "@/src/generated/prisma/client";
@@ -46,9 +46,9 @@ export async function GET(request: NextRequest) {
 
   if (userIdParam) {
     try {
-      await updateUserProjetAidesFsUnselected(userId, projet.id, unselectedIds);
+      await updateUserProjetAidesFsUnselected(userIdParam, projet.id, unselectedIds);
     } catch (error) {
-      console.error("Error updating aides_fs_unselected:", error);
+      customCaptureException("Error updating aides_fs_unselected in API", error);
     }
   }
 
