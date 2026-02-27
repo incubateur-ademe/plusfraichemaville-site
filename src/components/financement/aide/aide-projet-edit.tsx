@@ -6,7 +6,7 @@ import { AideCard } from "./aide-card";
 import { AideCardSkeleton } from "./aide-card-skeleton";
 import { AideEditFilter } from "./aide-edit-filter";
 import { memo, useMemo, useState } from "react";
-import { countAidesByType, resolveAidType } from "../helpers";
+import { countAidesByType, countSelectedAides, resolveAidType } from "../helpers";
 import { TypeAidesTerritoiresAide } from "@/src/components/financement/types";
 import { FichesDiagnosticFiltersKey, useAideEstimationEditFilter } from "@/src/hooks/use-aide-estimation-edit-filter";
 import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/generic-fiche-link";
@@ -75,6 +75,10 @@ export const AideProjetEdit = memo(() => {
 
   const { data, isLoading } = useAidesByProjetFetcher(projetId, selectedFisIds);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
+  const selectedAidesCount = useMemo(
+    () => countSelectedAides(data?.results ?? [], projet?.projetAides ?? []),
+    [data?.results, projet?.projetAides],
+  );
   const filteredResults = useMemo(
     () =>
       data?.results
@@ -166,7 +170,7 @@ export const AideProjetEdit = memo(() => {
               toggleFilter={handleFiltersChange}
               aideFinanciereCount={aideFinanciereCount}
               aideTechniqueCount={aideTechniqueCount}
-              selectedAidesCount={projet?.projetAides?.length || 0}
+              selectedAidesCount={selectedAidesCount}
               isLoading={isLoading}
             />
             <AideEditSortField sortMethodCode={sortMethodCode} setSortMethodCode={setSortMethodCode} />
