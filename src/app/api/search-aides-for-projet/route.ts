@@ -44,8 +44,9 @@ export async function GET(request: NextRequest) {
 
   const unselectedIds = requestedIds ? allSolutionIds.filter((id) => !requestedIds.includes(id)) : allSolutionIds;
   const userIdParam = request.nextUrl.searchParams.get("userId");
+  const updateUnselectedFsParam = request.nextUrl.searchParams.get("updateUnselectedFs");
 
-  if (userIdParam) {
+  if (userIdParam && updateUnselectedFsParam === "true") {
     try {
       await updateUserProjetAidesFsUnselected(userIdParam, projet.id, unselectedIds);
     } catch (error) {

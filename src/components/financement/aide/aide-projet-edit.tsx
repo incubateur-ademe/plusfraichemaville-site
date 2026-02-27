@@ -47,7 +47,7 @@ export const AideProjetEdit = memo(() => {
   const unselectedFsIds = userProjet?.aides_fs_unselected || [];
 
   const allFicheSolutionIds = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) ?? [];
-  const [selectedFisIds, setSelectedFisIds] = useState<number[]>(
+  const [selectedFsIds, setSelectedFisIds] = useState<number[]>(
     allFicheSolutionIds.filter((id) => !unselectedFsIds.includes(id)),
   );
 
@@ -58,9 +58,9 @@ export const AideProjetEdit = memo(() => {
   const updateUserProjetInProjet = useProjetsStore((state) => state.updateUserProjetInProjet);
 
   const toggleTag = (id: number) => {
-    const newSelectedFisIds = selectedFisIds.includes(id)
-      ? selectedFisIds.filter((x) => x !== id)
-      : [...selectedFisIds, id];
+    const newSelectedFisIds = selectedFsIds.includes(id)
+      ? selectedFsIds.filter((x) => x !== id)
+      : [...selectedFsIds, id];
 
     setSelectedFisIds(newSelectedFisIds);
     handlePageChange(1, { needScrollToTop: false });
@@ -73,7 +73,7 @@ export const AideProjetEdit = memo(() => {
     }
   };
 
-  const { data, isLoading } = useAidesByProjetFetcher(projetId, selectedFisIds);
+  const { data, isLoading } = useAidesByProjetFetcher(projetId, selectedFsIds, true);
   const { aideFinanciereCount, aideTechniqueCount } = countAidesByType(data?.results ?? []);
   const selectedAidesCount = useMemo(
     () => countSelectedAides(data?.results ?? [], projet?.projetAides ?? []),
@@ -139,7 +139,7 @@ export const AideProjetEdit = memo(() => {
                 {ficheSolutions?.map((fiche) => (
                   <Tag
                     key={fiche.id}
-                    pressed={selectedFisIds.includes(+fiche.id)}
+                    pressed={selectedFsIds.includes(+fiche.id)}
                     nativeButtonProps={{
                       onClick: () => toggleTag(+fiche.id),
                     }}

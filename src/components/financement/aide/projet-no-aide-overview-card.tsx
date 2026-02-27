@@ -17,7 +17,7 @@ import { TypeFiche } from "@/src/helpers/common";
 export const ProjetNoAideOverviewCard = () => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const ficheSolutionIds = getProjetFichesIdsByType({ projet: currentProjet, typeFiche: TypeFiche.solution }) ?? [];
-  const { data: aides, isLoading } = useAidesByProjetFetcher(currentProjet?.id, ficheSolutionIds);
+  const { data: aides, isLoading } = useAidesByProjetFetcher(currentProjet?.id, ficheSolutionIds, false);
   const countAides = countAidesByType(aides?.results ?? []);
 
   if (!currentProjet) return null;
