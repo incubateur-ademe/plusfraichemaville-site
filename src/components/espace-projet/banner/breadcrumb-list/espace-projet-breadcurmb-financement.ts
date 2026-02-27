@@ -10,7 +10,7 @@ const BREADCRUMB_SEGMENT_SOLUTION_MES_FINANCEMENTS = (projetId: number): Breadcr
   linkProps: {
     href: PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT(projetId),
   },
-  label: "Mes financements",
+  label: "Mes aides",
 });
 
 export const BREADCRUMB_MES_FINANCEMENTS: EspaceProjetBreadcrumbStep = {
@@ -19,7 +19,7 @@ export const BREADCRUMB_MES_FINANCEMENTS: EspaceProjetBreadcrumbStep = {
 };
 
 export const BREADCRUMB_FINANCEMENTS_LISTE: EspaceProjetBreadcrumbStep = {
-  currentPageLabel: `Choisir mes financements à sauvegarder `,
+  currentPageLabel: `Choisir mes aides à sauvegarder `,
   breadcrumbSegments: (projetId: number, projetName: string) =>
     [BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName), BREADCRUMB_SEGMENT_SOLUTION_MES_FINANCEMENTS(projetId)].flat(
       1,
