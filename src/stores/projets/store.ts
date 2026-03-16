@@ -1,6 +1,12 @@
-import { EstimationAide, ProjetWithPublicRelations, ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
+import {
+  EstimationAide,
+  ProjetAideWithAide,
+  ProjetWithPublicRelations,
+  ProjetWithRelations,
+  UserProjetWithUser,
+} from "@/src/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
-import { updateAideInEstimation } from "./helper";
+import { updateAideInEstimation, updateAideInProjet } from "./helper";
 
 export interface ProjetsState {
   projets: ProjetWithRelations[];
@@ -18,8 +24,11 @@ export type ProjetsActions = {
   addOrUpdatePendingProjet: (_pendingProjet: ProjetWithPublicRelations) => void;
   addAideInEstimation: (_estimationId: number, _estimationAide: EstimationAide) => void;
   deleteAideInEstimation: (_estimationId: number, _aideTerritoireId: number) => void;
+  addAideInProjet: (_projetAide: ProjetAideWithAide) => void;
+  deleteAideInProjet: (_aideTerritoireId: number) => void;
   deleteProjet: (_projetId: number) => void;
   deletePendingProjet: (_projetId: number) => void;
+  updateUserProjetInProjet: (_userProjet: UserProjetWithUser) => void;
 };
 
 export type ProjetsStore = ProjetsState & ProjetsActions;
@@ -68,6 +77,21 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
     },
     deleteAideInEstimation: (estimationId, aideTerritoireId) => {
       set((state) => updateAideInEstimation(state, estimationId, null, aideTerritoireId));
+    },
+    addAideInProjet: (projetAide) => {
+      set((state) => updateAideInProjet(state, projetAide, null));
+    },
+    deleteAideInProjet: (aideTerritoireId) => {
+      set((state) => updateAideInProjet(state, null, aideTerritoireId));
+    },
+    updateUserProjetInProjet: (userProjet) => {
+      set((state) => ({
+        projets: state.projets.map((projet) =>
+          projet.id === userProjet.projet_id
+            ? { ...projet, users: projet.users.map((u) => (u.id === userProjet.id ? userProjet : u)) }
+            : projet,
+        ),
+      }));
     },
   }));
 };

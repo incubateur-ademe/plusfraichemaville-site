@@ -1,9 +1,9 @@
-import { EstimationAide, EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
-import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
-import { ReactNode } from "react";
-import { dateSort } from "@/src/helpers/dateUtils";
 import { aide } from "@/src/generated/prisma/client";
+import { dateSort } from "@/src/helpers/dateUtils";
 import { AideEditSortFilterType, AidesSortFilters } from "@/src/hooks/use-aide-estimation-edit-sort-method";
+import { ProjetAideWithAide } from "@/src/lib/prisma/prismaCustomTypes";
+import { ReactNode } from "react";
+import { AidesTerritoiresAide, TypeAidesTerritoiresAide } from "./types";
 
 export const resolveAidType = (aid_types_full: AidesTerritoiresAide["aid_types_full"]): TypeAidesTerritoiresAide => {
   for (const aid of aid_types_full) {
@@ -28,6 +28,12 @@ export const countAidesByType = (aides: AidesTerritoiresAide[]) => {
   );
 };
 
+export const countSelectedAides = (allAides: AidesTerritoiresAide[], projetAides: ProjetAideWithAide[]) => {
+  const allAidesIds = allAides.map((aide) => aide.id);
+  const selectedAidesIds = projetAides.map((projetAide) => projetAide.aide.aideTerritoireId);
+  return selectedAidesIds.filter((aideId) => allAidesIds.includes(aideId)).length;
+};
+
 export const countAidesByTypeFromDB = (aides: aide[]) => {
   return aides.reduce(
     (acc, current) => {
@@ -42,7 +48,9 @@ export const countAidesByTypeFromDB = (aides: aide[]) => {
   );
 };
 
-export const getAideSubmissionDeadlineAndName = (estimationAides: EstimationWithAides["estimations_aides"]) =>
+export const getAideSubmissionDeadlineAndName = (
+  estimationAides: { aide: { submission_deadline: Date | null; name: string | null } }[],
+) =>
   estimationAides
     .filter(({ aide: { submission_deadline } }) => submission_deadline !== null)
     .map(({ aide: { submission_deadline, name } }) => ({ submission_deadline, name }));
@@ -60,5 +68,7 @@ export const processDescription = (description: ReactNode | string | string[] | 
 export const findSortFilterByCode = (code: AideEditSortFilterType["code"]): AideEditSortFilterType =>
   AidesSortFilters.find((sortFilter) => sortFilter.code === code) || AidesSortFilters[0];
 
-export const sumbissionDateSortBase = (a: EstimationAide, b: EstimationAide) =>
-  dateSort(a.aide.submission_deadline, b.aide.submission_deadline);
+export const sumbissionDateSortBase = (
+  a: { aide: { submission_deadline: Date | null } },
+  b: { aide: { submission_deadline: Date | null } },
+) => dateSort(a.aide.submission_deadline, b.aide.submission_deadline);

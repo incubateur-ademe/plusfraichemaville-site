@@ -80,7 +80,7 @@ The project maximizes use of React Server Components for content pages. Client c
 - PostgreSQL database using custom Prisma schema (`prisma/schema.prisma`)
 - Prisma client generated to custom path: `src/generated/prisma/client`
 - **All database queries isolated in** `src/lib/prisma/prisma[Domain]Queries.ts` files
-- Never call Prisma directly from components or actions
+- Never call Prisma directly from components, actions, or API routes (like route.ts)
 
 **Server Actions Pattern:**
 
@@ -124,13 +124,14 @@ The project maximizes use of React Server Components for content pages. Client c
   3. Attach pending project invitations by email
   4. Send welcome email via Brevo
 
-### Security
+### Security & Error Handling
 
 - Content Security Policy configured in middleware with nonce
 - CSP headers include trusted domains for Matomo, maps
 - Protected routes require authentication
 - CSRF protection via NextAuth
 - Sentry error tracking for production
+- **CRITICAL**: Never use `console.error` in API routes or Server Actions. Always use `customCaptureException` from `src/lib/sentry/sentryCustomMessage` to ensure errors are properly logged in Sentry.
 
 ## Key Patterns & Conventions
 

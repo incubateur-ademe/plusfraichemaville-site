@@ -32,6 +32,8 @@ export const success = {
   CSV_GENERATED: "Le fichier CSV a été généré.",
   FICHE_URL_COPY_CLIPBOARD: "Le lien vers cette page a été copié dans votre presse papier.",
   AIDE_SELECTION_VALIDATED: "Votre sélection a bien été validée.",
+  PROJET_AIDE_ADDED: "L'aide a bien été ajoutée à votre projet.",
+  PROJET_AIDE_DELETED: "L'aide a bien été supprimée de votre projet.",
 };
 
 export const error = {

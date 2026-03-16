@@ -63,6 +63,8 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/selection`,
   ESPACE_PROJET_FINANCEMENT: (projetId: number) => `/espace-projet/${projetId}/financement`,
+  ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES: (projetId: number) =>
+    `/espace-projet/${projetId}/financement/selectionner-aides`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
   ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
     `/espace-projet/${projetId}/estimation/liste${(opener && `?open=${opener}`) || ""}`,
@@ -75,8 +77,6 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FICHE_DIAGNOSTIC: (projetId: number, ficheDiagnosticSlug: string) =>
     `/espace-projet/${projetId}/diagnostic/prestation/fiche-diagnostic/${ficheDiagnosticSlug}`,
   ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
-  ESPACE_PROJET_FINANCEMENT_ESTIMATION_EDIT: (projetId?: number, estimationId?: number) =>
-    `/espace-projet/${projetId}/financement/edit/${estimationId}`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_TYPE_FILTER: (projetId: number, typeFiche: TypeSolution) =>
     `/espace-projet/${projetId}/fiche-solution/liste?${TYPE_SOLUTION_FILTER_NAME}=${typeFiche}`,
   ESPACE_PROJET_RETOURS_EXPERIENCE_PROJET: (projetId: number) => `/espace-projet/${projetId}/projet`,
@@ -87,8 +87,17 @@ export const getFullUrl = (route: string): string => `${process.env.NEXT_PUBLIC_
 export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
   `/api/get-aides-territoires-aide-by-aide-id?aideId=${aideId}`;
 
-export const SEARCH_AIDE_FOR_ESTIMATION_URL = (estimationId: number) =>
-  `/api/search-aides-for-estimation?estimationId=${estimationId}`;
+export const SEARCH_AIDE_FOR_PROJET_URL = (
+  projetId: number,
+  ficheSolutionIds?: number[],
+  userId?: string,
+  updateUnselectedFs: boolean = false,
+) => {
+  const base = `/api/search-aides-for-projet?projetId=${projetId}${
+    userId ? `&userId=${userId}` : ""
+  }&updateUnselectedFs=${updateUnselectedFs}`;
+  return ficheSolutionIds !== undefined ? `${base}&ficheSolutionIds=${JSON.stringify(ficheSolutionIds)}` : base;
+};
 
 export const GET_AVAILABLE_PROJETS_FOR_USER_URL = (userId: string) =>
   `/api/get-available-projets-for-user?userId=${userId}`;

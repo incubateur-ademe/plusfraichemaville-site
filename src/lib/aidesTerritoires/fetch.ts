@@ -35,8 +35,8 @@ export const searchAidesFromAidesTerritoires = async (
   const perimeterId = await getPerimterIdIdOrFetchItFromAidesTerritoires(collectivite);
 
   return await callAidesTerritoiresApi<IApiAidesTerritoiresPaginatedAides>(
-    `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?perimeter=${perimeterId}&text=${motsCles},${typeEspace}
-    &itemsPerPage=1000&targeted_audiences=commune&targeted_audiences=epci`,
+    `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?perimeter=${perimeterId}&text=${motsCles ? motsCles : ""}
+    ,${typeEspace}&itemsPerPage=1000&targeted_audiences=commune&targeted_audiences=epci`,
   );
 };
 

@@ -191,7 +191,9 @@ exports.Prisma.User_projetScalarFieldEnum = {
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by',
   nb_views: 'nb_views',
-  last_viewed_at: 'last_viewed_at'
+  last_viewed_at: 'last_viewed_at',
+  aides_already_seen: 'aides_already_seen',
+  aides_fs_unselected: 'aides_fs_unselected'
 };
 
 exports.Prisma.EmailScalarFieldEnum = {
@@ -298,6 +300,14 @@ exports.Prisma.AideScalarFieldEnum = {
 exports.Prisma.Estimations_aidesScalarFieldEnum = {
   id: 'id',
   estimationId: 'estimationId',
+  aideId: 'aideId',
+  created_at: 'created_at',
+  user_id: 'user_id'
+};
+
+exports.Prisma.Projet_aidesScalarFieldEnum = {
+  id: 'id',
+  projet_id: 'projet_id',
   aideId: 'aideId',
   created_at: 'created_at',
   user_id: 'user_id'
@@ -512,6 +522,10 @@ exports.Prisma.estimations_aidesOrderByRelevanceFieldEnum = {
   user_id: 'user_id'
 };
 
+exports.Prisma.projet_aidesOrderByRelevanceFieldEnum = {
+  user_id: 'user_id'
+};
+
 exports.Prisma.estimation_materiauxOrderByRelevanceFieldEnum = {
   id: 'id',
   estimation_fiche_solution_id: 'estimation_fiche_solution_id'
@@ -665,6 +679,7 @@ exports.Prisma.ModelName = {
   climadiag: 'climadiag',
   aide: 'aide',
   estimations_aides: 'estimations_aides',
+  projet_aides: 'projet_aides',
   estimation_materiaux: 'estimation_materiaux',
   estimation_fiche_solution: 'estimation_fiche_solution',
   conversation: 'conversation',

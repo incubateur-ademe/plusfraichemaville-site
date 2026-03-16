@@ -1,0 +1,29 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node-terminal",
+      "name": "Run Script: dev:start",
+      "request": "launch",
+      "command": "pnpm run dev:start",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Run Script: lint",
+      "request": "launch",
+      "command": "pnpm run lint",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "type": "node-terminal",
+      "name": "Run Script: fixPrettier",
+      "request": "launch",
+      "command": "pnpm run fixPrettier",
+      "cwd": "${workspaceFolder}"
+    }
+  ]
+}
