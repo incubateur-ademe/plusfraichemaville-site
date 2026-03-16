@@ -31,7 +31,7 @@ export default function BannerProjet({ className }: { className?: string }) {
         <div className="fr-container text-dsfr-text-label-blue-france">
           <div className={clsx("flex flex-col justify-between gap-10 font-bold md:flex-row md:items-center md:gap-0")}>
             <div className="flex w-full">
-              <div className="mr-5">
+              <div className="mr-5 hidden md:flex">
                 <PictoEspaceSelector
                   pictoId={currentProjet.type_espace as PictoId}
                   withBackground
@@ -43,7 +43,7 @@ export default function BannerProjet({ className }: { className?: string }) {
               <div className="flex w-full flex-wrap items-center justify-between gap-3">
                 <div className="flex flex-col justify-between py-1 md:h-full">
                   <div className="flex items-center gap-6">
-                    <h1 className="mb-1 w-fit text-[1.375rem] !leading-6 hover:underline">
+                    <h1 className="mb-1 w-fit max-w-2xl text-[1.375rem] !leading-6 hover:underline">
                       <LinkWithoutPrefetch
                         href={PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet.id)}
                         className="!bg-none text-pfmv-navy"
