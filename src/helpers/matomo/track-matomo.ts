@@ -17,10 +17,15 @@ export const trackEvent = (event: MATOMO_EVENT) => {
   window?._paq?.push(["trackEvent", event.category, event.action, event.name]);
 };
 
-export const trackPageView = (url: string) => {
+export const trackPageView = (url: string, isLoggedIn?: boolean) => {
   if (shouldUseDevTracker) {
+    console.debug(isLoggedIn ? "connecté" : "non connecté");
     console.debug("trackPageView => ", sanitizeUrlForAnalyticTool(url));
     return;
+  }
+  const authDimensionId = process.env.NEXT_PUBLIC_MATOMO_AUTH_DIMENSION_ID;
+  if (authDimensionId && isLoggedIn !== undefined) {
+    window?._paq?.push(["setCustomDimension", Number(authDimensionId), isLoggedIn ? "connecté" : "non connecté"]);
   }
   window?._paq?.push(["setCustomUrl", sanitizeUrlForAnalyticTool(url)]);
   window?._paq?.push(["trackPageView"]);
