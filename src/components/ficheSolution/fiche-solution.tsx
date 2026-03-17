@@ -119,7 +119,7 @@ export async function FicheSolution({
               />
             </div>
             <div id="materiaux-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
-              <FicheSolutionTabMateriaux ficheAttributes={ficheSolution.attributes} />
+              <FicheSolutionTabMateriaux ficheSolution={ficheSolution} />
             </div>
             <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
               <FicheSolutionTabMiseEnOeuvre ficheAttributes={ficheSolution.attributes} />
