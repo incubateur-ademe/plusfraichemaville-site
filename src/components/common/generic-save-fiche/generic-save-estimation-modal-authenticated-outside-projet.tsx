@@ -56,7 +56,13 @@ export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
             className="mb-4 mr-4 rounded-3xl md:mb-0"
             onClick={() => {
               modal.close();
-              router.push(PFMV_ROUTES.CREATE_PROJET);
+              router.push(
+                PFMV_ROUTES.CREATE_PROJET_WITH_PARAMS(
+                  "addFicheSolution",
+                  ficheId.toString(),
+                  PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION_SUFFIX,
+                ),
+              );
             }}
           >
             Créer un projet
