@@ -13,7 +13,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
           <div key={timing.code} className="flex flex-col items-stretch md:flex-row md:gap-8">
             <div className="hidden w-36 flex-col items-center md:flex">
               <div className="flex size-[6.5rem] justify-center rounded-2xl border border-pfmv-navy bg-white">
-                <Image width={70} height={70} src={timing.image} alt={timing.title} className="rounded-xl" />
+                <Image width={70} height={70} src={timing.image} alt="" className="rounded-xl" />
               </div>
               <h2 className="mt-3 !text-lg font-bold !leading-normal text-pfmv-navy">{timing.title}</h2>
 
@@ -22,7 +22,7 @@ export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: st
               )}
             </div>
             <div className={clsx("flex-1", index < SURCHAUFFE_URBAINE_TIMINGS.length - 1 ? "pb-4 md:pb-12" : "")}>
-              <div className="h-full rounded-2xl bg-white text-left md:h-auto md:p-6">
+              <div className="h-full rounded-2xl bg-white p-6 text-left md:h-auto">
                 <h2 className="mb-4 text-xl font-bold text-pfmv-navy md:hidden">{timing.title}</h2>
                 {timing.description}
               </div>
