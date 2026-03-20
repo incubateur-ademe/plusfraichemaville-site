@@ -4,7 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useEffect } from "react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import InputFormField from "@/src/components/common/InputFormField";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
 import SelectFormField from "@/src/components/common/SelectFormField";
@@ -12,6 +12,8 @@ import { monthDateToString } from "@/src/helpers/dateUtils";
 import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
 import CommuneInputFormField from "@/src/components/common/CommuneInputFormField";
 import { upsertProjetAction } from "@/src/actions/projets/upsert-projet-action";
+import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
+import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
 import { notifications } from "@/src/components/common/notifications";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
@@ -33,6 +35,10 @@ type ProjetInfoFormProps = {
 export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
   const router = useRouter();
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
+  const searchParams = useSearchParams();
+  const action = searchParams.get("action");
+  const actionParam = searchParams.get("actionParam");
+  const callbackUrl = searchParams.get("callbackUrl");
 
   const form = useForm<ProjetInfoFormData>({
     resolver: zodResolver(ProjetInfoFormSchema),
@@ -69,8 +75,27 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
       form.reset(data);
 
       if (result.updatedProjet) {
-        addOrUpdateProjet(result.updatedProjet);
-        router.push(PFMV_ROUTES.TABLEAU_DE_BORD(result.updatedProjet.id));
+        let finalProjet = result.updatedProjet;
+
+        if (action === "addFicheSolution" && actionParam) {
+          const update = await updateFichesProjetAction({
+            projetId: finalProjet.id,
+            ficheId: +actionParam,
+            typeFiche: TypeFiche.solution,
+            typeUpdate: TypeUpdate.add,
+          });
+          if (update.type === "success" && update.projet) {
+            finalProjet = update.projet;
+          }
+        }
+
+        addOrUpdateProjet(finalProjet);
+
+        if (callbackUrl) {
+          router.push(`/espace-projet/${finalProjet.id}${callbackUrl}`);
+        } else {
+          router.push(PFMV_ROUTES.TABLEAU_DE_BORD(finalProjet.id));
+        }
       } else {
         router.push(PFMV_ROUTES.ESPACE_PROJET);
       }

@@ -5,18 +5,17 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import FicheSolutionMateriauxEstimationIncentive from "@/src/components/ficheSolution/fiche-solution-materiaux-estimation-incentive";
 
-export default function FicheSolutionTabMateriaux({
-  ficheAttributes,
-}: {
-  ficheAttributes: FicheSolution["attributes"];
-}) {
+export default function FicheSolutionTabMateriaux({ ficheSolution: ficheSolution }: { ficheSolution: FicheSolution }) {
+  const ficheAttributes = ficheSolution.attributes;
   const displayEntretienPanel =
     ficheAttributes.cout_minimum_entretien != null && ficheAttributes.cout_maximum_entretien != null;
 
   return (
     <>
       <h2 className="mb-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Matériaux et coûts</h2>
+      <FicheSolutionMateriauxEstimationIncentive ficheId={ficheSolution.id} />
       {ficheAttributes.materiaux?.data && ficheAttributes.materiaux.data.length > 0 ? (
         <>
           <hr className="h-[1px] p-0" />
