@@ -55,6 +55,9 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_FICHES_SOLUTIONS_RECOMMANDATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/fiche-solution/recommandations`,
   ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS: (projetId: number) => `/espace-projet/${projetId}/diagnostic/choix-parcours`,
+  ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS_SUFFIX: "/diagnostic/choix-parcours",
+  ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_SUFFIX: "/diagnostic/indicateurs-environnementaux/presentation",
+  ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SUFFIX: "/diagnostic/prestation/liste",
   ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_PRESENTATION: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/indicateurs-environnementaux/presentation`,
   ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS: (projetId: number) =>

@@ -5,6 +5,9 @@ import { SurchauffeUrbaineTimingComponent } from "@/src/components/surchauffe-ur
 import {
   SurchauffeUrbaineStoriesComponent
 } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-stories-component";
+import {
+  SurchauffeUrbaineDiagModuleIncentive
+} from "@/src/components/surchauffe-urbaine/diagnostic-module-incentive/surchauffe-urbaine-diag-module-incentive";
 
 export const metadata: Metadata = computeMetadata("Pourquoi et quand faire un diagnostic ?");
 
@@ -20,6 +23,7 @@ export default async function SurchauffeUrbaineTimingPage() {
         </div>
       </div>
       <SurchauffeUrbaineTimingComponent className="mt-12" />
+      <SurchauffeUrbaineDiagModuleIncentive className="mt-12" />
       <SurchauffeUrbaineStoriesComponent className="mt-12" />
     </>
   );
