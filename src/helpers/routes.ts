@@ -36,6 +36,9 @@ export const PFMV_ROUTES = {
   PREFERENCES_COMMUNICATION: "/info-perso#communication",
   MON_STATUT: "/statut-perso",
   CREATE_PROJET: "/espace-projet/creation-projet",
+  CREATE_PROJET_WITH_PARAMS: (action: string, actionParam: string, callbackUrl: string) =>
+    `/espace-projet/creation-projet?action=${action}&actionParam=${actionParam}&callbackUrl=${callbackUrl}`,
+  ESPACE_PROJET_CREATION_ESTIMATION_SUFFIX: "/estimation/creation",
   RECHERCHE_GLOBALE: (query?: string) => `/recherche${query ? `?q=${query}` : ""}`,
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
   ESPACE_PROJET_ANNUAIRE_MAP_CONTACT: "/annuaire",
