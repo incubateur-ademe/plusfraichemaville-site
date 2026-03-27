@@ -144,6 +144,6 @@ module.exports = withSentryConfig(module.exports, {
   // Automatically tree-shake Sentry logger statements to reduce bundle size
   disableLogger: true,
 
-  // Enables automatic instrumentation of Vercel Cron Monitors.
+  // Disables automatic instrumentation of Vercel Cron Monitors.
   automaticVercelMonitors: false,
 });
