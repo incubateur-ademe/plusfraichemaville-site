@@ -1,9 +1,10 @@
+"use client";
 import { Select } from "@codegouvfr/react-dsfr/Select";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { ChangeEvent, useState } from "react";
 
-import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { computeFullEspaceProjetUrlFromSuffix, PFMV_ROUTES } from "@/src/helpers/routes";
 import { useRouter } from "next/navigation";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { Hidden } from "../../common/hidden";
@@ -23,7 +24,7 @@ export const ModaleDiagnosticModuleOutsideProjet = ({
   const validate = async () => {
     if (selectedProjetId > 0) {
       modal.close();
-      router.push(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(selectedProjetId));
+      router.push(computeFullEspaceProjetUrlFromSuffix(linkSuffix, selectedProjetId));
     }
   };
 

@@ -88,6 +88,9 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_RETOURS_EXPERIENCE_PROJET: (projetId: number) => `/espace-projet/${projetId}/projet`,
 };
 
+export const computeFullEspaceProjetUrlFromSuffix = (routeSuffx: string, idProjet: number) =>
+  `${PFMV_ROUTES.ESPACE_PROJET}/${idProjet}${routeSuffx}`;
+
 export const getFullUrl = (route: string): string => `${process.env.NEXT_PUBLIC_URL_SITE}${route}`;
 
 export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>

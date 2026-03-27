@@ -1,14 +1,29 @@
+"use client";
 import clsx from "clsx";
 import Image from "next/image";
 import React from "react";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { Separator } from "@/src/components/common/separator";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { GenericDiagnosticModuleButton } from "./generic-diagnostic-module-button";
+import { DiagnosticParcoursLink } from "@/src/components/surchauffe-urbaine/diagnostic-module-incentive/diagnostic-parcours-link";
+import { createModal } from "@codegouvfr/react-dsfr/Modal";
+import { ModaleDiagnosticModuleOutsideProjet } from "@/src/components/surchauffe-urbaine/diagnostic-module-incentive/modale-diagnostic-module-outside-projet";
 
 export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?: string }) => {
-  let parcoursPrestationUrl = PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD;
-  let parcoursIndicateursUrl = PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD;
+  const modalIndicateur = createModal({
+    id: `diagnostic-indicateurs-modal`,
+    isOpenedByDefault: false,
+  });
+
+  const modalPrestation = createModal({
+    id: `diagnostic-prestation-modal`,
+    isOpenedByDefault: false,
+  });
+
+  const modalChoixParcours = createModal({
+    id: `diagnostic-choix-parcours-modal`,
+    isOpenedByDefault: false,
+  });
 
   return (
     <div className={clsx("bg-dsfr-background-alt-blue-france pb-16 pt-10", className)}>
@@ -16,7 +31,7 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
         <h1 className="text-center text-[1.375rem] font-bold text-pfmv-navy">
           Lancez votre diagnostic directement depuis l’espace projet.
         </h1>
-        <GenericDiagnosticModuleButton className="mx-auto mb-6" />
+        <GenericDiagnosticModuleButton modal={modalChoixParcours} className="mx-auto mb-6" />
         <p className="md:ml-12">
           Avant de rafraîchir un espace, il est essentiel de comprendre son climat actuel. <br />
           Cela permet de choisir les meilleures solutions et d’en mesurer l’efficacité dans le temps. <br />
@@ -24,7 +39,7 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
         </p>
         <div className="mt-6 flex flex-col gap-24 md:flex-row md:justify-between md:gap-12">
           <div className="flex flex-col items-center gap-6">
-            <div className="pfmv-strong-card fr-enlarge-link group max-w-[23rem]">
+            <div className="pfmv-strong-card fr-enlarge-button group max-w-[23rem]">
               <Image
                 src="/images/fiches-diagnostic/parcours-indicateurs-environnementaux.svg"
                 alt="Parcours indicateurs thermiques"
@@ -33,9 +48,10 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
                 className="mx-auto mt-6 h-40"
               />
               <div className="p-5 text-center">
-                <LinkWithoutPrefetch className="font-bold" href={parcoursIndicateursUrl}>
-                  Je fais une analyse simplifiée et immédiate de la surchauffe
-                </LinkWithoutPrefetch>
+                <DiagnosticParcoursLink
+                  modal={modalIndicateur}
+                  textLink="Je fais une analyse simplifiée et immédiate de la surchauffe"
+                />
                 <Separator className="my-4" />
                 <div className="mb-8 text-left text-sm text-dsfr-text-mention-grey">
                   Observez la surchauffe au sein de votre espace à un instant “T” à l’aide de quatre indicateurs open
@@ -64,7 +80,7 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
             </div>
           </div>
           <div className="flex flex-col items-center gap-6">
-            <div className="pfmv-strong-card fr-enlarge-link group max-w-[23rem]">
+            <div className="pfmv-strong-card fr-enlarge-button group max-w-[23rem]">
               <Image
                 src="/images/fiches-diagnostic/parcours-prestation.svg"
                 alt="Parcours prestation"
@@ -73,9 +89,10 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
                 className="mx-auto mt-6 h-40"
               />
               <div className="p-5 text-center">
-                <LinkWithoutPrefetch className="font-bold" href={parcoursPrestationUrl}>
-                  Je fais réaliser par un prestataire un diagnostic approfondi
-                </LinkWithoutPrefetch>
+                <DiagnosticParcoursLink
+                  modal={modalPrestation}
+                  textLink="Je fais réaliser par un prestataire un diagnostic approfondi"
+                />
                 <Separator className="my-4" />
                 <div className="mb-8 text-left text-sm text-dsfr-text-mention-grey">
                   Sollicitez une expertise pour une analyse détaillée de l’effet d’îlot de chaleur urbain et/ou du
@@ -105,6 +122,18 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
           </div>
         </div>
       </div>
+      <ModaleDiagnosticModuleOutsideProjet
+        modal={modalChoixParcours}
+        linkSuffix={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS_SUFFIX}
+      />
+      <ModaleDiagnosticModuleOutsideProjet
+        modal={modalIndicateur}
+        linkSuffix={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_SUFFIX}
+      />
+      <ModaleDiagnosticModuleOutsideProjet
+        modal={modalPrestation}
+        linkSuffix={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_SUFFIX}
+      />
     </div>
   );
 };
