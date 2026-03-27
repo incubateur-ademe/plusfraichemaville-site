@@ -19,15 +19,16 @@ Plus fraîche ma ville is a French government startup (startup d'état) that hel
 - **Analytics**: Matomo
 - **Error Tracking**: Sentry
 - **Package Manager**: pnpm (enforced via preinstall script)
+- **CRITICAL**: ABSOLUTELY NEVER use `npm` commands (like `npm install`). ALWAYS use `pnpm` exclusively.
 
 ## Development Commands
 
 ```bash
 # Start development server (uses Turbopack)
-npm run develop  # or pnpm run dev:start
+pnpm run develop  # or pnpm run dev:start
 
 # Start local server simulating production
-npm run localAsProd  # or pnpm run dev:localAsProd
+pnpm run localAsProd  # or pnpm run dev:localAsProd
 
 # Database operations
 pnpm run dev:db:migrate      # Create and apply migration
