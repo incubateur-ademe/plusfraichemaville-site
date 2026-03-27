@@ -1,105 +1,36 @@
 "use client";
 import clsx from "clsx";
-import "@splidejs/splide/css/core";
-// @ts-expect-error Check changelog from Splide and remove ts-ignore
-import { Splide, SplideSlide, SplideTrack } from "@splidejs/react-splide";
 import { SURCHAUFFE_URBAINE_TIMINGS } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timings";
 import Image from "next/image";
-import React, { useRef, useState } from "react";
-import { SurchauffeUrbaineTimingSlideControllers } from "@/src/components/surchauffe-urbaine/surchauffe-urbaine-timing-slide-controllers";
-import { SURCHAUFFE_URBAINE_CHANGE_TIMING } from "@/src/helpers/matomo/matomo-tags";
-import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import React from "react";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
-import { SplideFrTranslation } from "@/src/components/common/splide-controllers";
 
 export const SurchauffeUrbaineTimingComponent = ({ className }: { className?: string }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const sliderRef = useRef<Splide>(null);
-  const changeSlide = (id: number) => {
-    setCurrentSlide(id);
-    sliderRef.current.go(id);
-  };
   return (
     <div className={clsx("bg-dsfr-background-alt-blue-france py-10 text-center", className)}>
-      <div className="relative mx-auto mb-6 max-w-[48rem]">
-        <Image
-          src="/images/surchauffe-urbaine/timing-arrow.svg"
-          alt=""
-          width={700}
-          height={20}
-          className="absolute top-5 z-10 md:left-16 md:max-w-[47rem]"
-        />
+      <div className="mx-auto mb-12 mt-6 flex max-w-[65rem] flex-col gap-6 px-4 md:px-6">
+        {SURCHAUFFE_URBAINE_TIMINGS.map((timing, index) => (
+          <div key={timing.code} className="flex flex-col items-stretch md:flex-row md:gap-8">
+            <div className="hidden w-36 flex-col items-center md:flex">
+              <div className="flex size-[6.5rem] justify-center rounded-2xl border border-pfmv-navy bg-white">
+                <Image width={70} height={70} src={timing.image} alt="" className="rounded-xl" />
+              </div>
+              <h2 className="mt-3 !text-lg font-bold !leading-normal text-pfmv-navy">{timing.title}</h2>
 
-        <nav>
-          <ul
-            role="tablist"
-            className={clsx("flex flex-row items-start justify-between gap-4 md:mr-14")}
-            aria-label="Sélectionner une phase"
-          >
-            {SURCHAUFFE_URBAINE_TIMINGS.map((timing, index) => (
-              <li role="presentation" key={timing.code} className="flex h-[11rem] flex-col items-center">
-                <button
-                  id={`tab0${index + 1}`}
-                  type="button"
-                  role="tab"
-                  aria-controls={`surchauffe-urbaine-timing-slider-slide0${index + 1}`}
-                  aria-label={`Afficher la slide sur la phase ${timing.title}`}
-                  className={clsx(
-                    "pfmv-card z-20 flex cursor-pointer flex-col items-center justify-center !bg-none",
-                    index === currentSlide ? "size-[6.25rem] !outline !outline-1 !outline-pfmv-navy" : "size-16",
-                    "focus:!outline focus:!outline-1 focus:!outline-pfmv-navy",
-                    "transition-all duration-300",
-                  )}
-                  onClick={() => changeSlide(index)}
-                  aria-labelledby={`slide0${index + 1}`}
-                >
-                  <Image
-                    width={index === currentSlide ? 70 : 40}
-                    height={70}
-                    src={timing.image}
-                    alt={timing.title}
-                    className="transition-all duration-300"
-                  />
-                </button>
-                <label htmlFor={`tab0${index + 1}`}>
-                  <h2 className="mt-4 max-w-32 !text-base font-bold text-pfmv-navy">{timing.title}</h2>
-                </label>
-              </li>
-            ))}
-          </ul>
-        </nav>
-        <Splide
-          onMove={(_splide: any, newIndex: number, _prevIndex: number, _destIndex: number) => {
-            setCurrentSlide(newIndex);
-            trackEvent(SURCHAUFFE_URBAINE_CHANGE_TIMING(newIndex));
-          }}
-          id="surchauffe-urbaine-timing-slider"
-          hasTrack={false}
-          options={{ pagination: false, i18n: SplideFrTranslation }}
-          ref={sliderRef}
-        >
-          <SplideTrack className="overflow-auto ">
-            {SURCHAUFFE_URBAINE_TIMINGS.map((timing) => (
-              <SplideSlide className="pt-8" key={timing.code}>
-                <div
-                  className="relative mx-auto max-w-[45rem] rounded-xl bg-white px-4 py-4 text-left"
-                  key={timing.code}
-                >
-                  <div
-                    className={clsx(
-                      "absolute top-0 h-6 w-6 -translate-x-1/2 -translate-y-1/2 rotate-45 transform bg-white",
-                      timing.arrowClassname,
-                    )}
-                  />
-                  {timing.description}
-                </div>
-              </SplideSlide>
-            ))}
-          </SplideTrack>
-          <SurchauffeUrbaineTimingSlideControllers />
-        </Splide>
+              {index < SURCHAUFFE_URBAINE_TIMINGS.length - 1 && (
+                <div className="w-1 grow rounded-full bg-dsfr-background-action-low-blue-france"></div>
+              )}
+            </div>
+            <div className={clsx("flex-1", index < SURCHAUFFE_URBAINE_TIMINGS.length - 1 ? "pb-4 md:pb-12" : "")}>
+              <div className="h-full rounded-2xl bg-white p-6 text-left md:h-auto">
+                <h2 className="mb-4 text-xl font-bold text-pfmv-navy md:hidden">{timing.title}</h2>
+                {timing.description}
+              </div>
+            </div>
+          </div>
+        ))}
       </div>
+
       <div className="fr-container text-center">
         Pour aller plus loin sur la surchauffe urbaine
         <LinkWithoutPrefetch
