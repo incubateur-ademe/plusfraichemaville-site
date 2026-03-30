@@ -149,9 +149,6 @@ importers:
       '@types/react-dom':
         specifier: 19.0.2
         version: 19.0.2(@types/react@19.0.4)
-      '@types/react-image-gallery':
-        specifier: ^1.2.4
-        version: 1.2.4
       '@types/uuid':
         specifier: ^9.0.8
         version: 9.0.8
@@ -1791,9 +1788,6 @@ packages:
     resolution: {integrity: sha512-c1s+7TKFaDRRxr1TxccIX2u7sfCnc3RxkVyBIUA2lCpyqCF+QoAwQ/CBg7bsMdVwP120HEH143VQezKtef5nCg==}
     peerDependencies:
       '@types/react': 19.0.4
-
-  '@types/react-image-gallery@1.2.4':
-    resolution: {integrity: sha512-H0xpmT5rlSH0qiTvcUDCPDLRBi3J3Xa4COqaDqGb7ffLFpQoPAxpZdNuKCuThhFI0xJmNnMubZiD6B3kCBHtcw==}
 
   '@types/react-transition-group@4.4.12':
     resolution: {integrity: sha512-8TV6R3h2j7a91c+1DXdJi3Syo69zzIZbz7Lg5tORM5LEJG7X/E6a1V3drRyBRZq7/utz7A+c4OgYLiLcYGHG6w==}
@@ -6207,10 +6201,6 @@ snapshots:
     optional: true
 
   '@types/react-dom@19.0.2(@types/react@19.0.4)':
-    dependencies:
-      '@types/react': 19.0.4
-
-  '@types/react-image-gallery@1.2.4':
     dependencies:
       '@types/react': 19.0.4
 
