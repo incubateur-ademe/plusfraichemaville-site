@@ -6,6 +6,7 @@ import { BREADCRUMB_DIAG_FICHE } from "@/src/components/espace-projet/banner/bre
 
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 type PageProps = {
   params: Promise<{ ficheDiagnosticSlug: string; projetId: string }>;
@@ -23,6 +24,10 @@ export default async function FicheDiagnosticPage({ params }: PageProps) {
   const ficheDiagnostic = await getFicheDiagnosticBySlug(resolvedParams.ficheDiagnosticSlug);
 
   if (!ficheDiagnostic) {
+    customCaptureException(
+      `Fiche diagnostic non trouvée ${resolvedParams.ficheDiagnosticSlug}`,
+      new Error("Fiche diagnostic non trouvée"),
+    );
     return notFound();
   }
 

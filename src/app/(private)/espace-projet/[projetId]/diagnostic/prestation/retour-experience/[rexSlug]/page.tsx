@@ -6,6 +6,7 @@ import { BREADCRUMB_DIAG_REX } from "@/src/components/espace-projet/banner/bread
 
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 type RetourExperienceDiagPageProps = {
   params: Promise<{ rexSlug: string }>;
@@ -22,6 +23,7 @@ export default async function RetourExperienceDiagPage(props: RetourExperienceDi
   const rex = await getRetourExperienceDiagBySlug(params.rexSlug);
 
   if (!rex) {
+    customCaptureException(`Rex projet non trouvé ${params.rexSlug}`, new Error("Rex projet non trouvé"));
     notFound();
   }
 

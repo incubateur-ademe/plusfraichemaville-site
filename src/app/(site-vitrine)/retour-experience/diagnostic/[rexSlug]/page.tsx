@@ -9,6 +9,7 @@ import { BREADCRUMB_SURCHAUFFE_URBAINE_REX } from "@/src/components/common/site-
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 type RetourExperienceDiagPageProps = {
   params: Promise<{ rexSlug: string }>;
@@ -36,6 +37,10 @@ export default async function RetourExperienceDiagPage(props: RetourExperienceDi
   const rex = await getRetourExperienceDiagBySlug(params.rexSlug);
 
   if (!rex) {
+    customCaptureException(
+      `Retour expérience diagnostic non trouvé ${params.rexSlug}`,
+      new Error("Rex diagnostic non trouvé"),
+    );
     notFound();
   }
 
