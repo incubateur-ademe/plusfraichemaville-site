@@ -352,12 +352,11 @@ export const addFicheDiagnosticSeenToUserProjet = async (
       deleted_at: null,
     },
     data: {
-      fiche_diagnostic_seen: { push: ficheDiagnosticId },
+      fiches_diagnostic_seen: { push: ficheDiagnosticId },
     },
     include: { user: true },
   });
 };
-
 
 export const updateUserProjetAidesFsUnselected = async (
   userId: string,

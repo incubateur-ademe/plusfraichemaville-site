@@ -41,7 +41,7 @@ export const FicheDiagnosticDescriptionModal = () => {
 
   const handleReadMethodClick = async () => {
     if (userInfos?.id && currentProjetId && ficheDiagnostic?.id) {
-      await addFicheDiagnosticSeenAction(userInfos.id, currentProjetId, ficheDiagnostic.id);
+      await addFicheDiagnosticSeenAction(userInfos.id, currentProjetId, +ficheDiagnostic.id);
     }
     modal.close();
   };

@@ -8649,7 +8649,7 @@ export namespace Prisma {
     nb_views: number | null
     aides_already_seen: number | null
     aides_fs_unselected: number | null
-    fiche_diagnostic_seen: number | null
+    fiches_diagnostic_seen: number | null
   }
 
   export type User_projetSumAggregateOutputType = {
@@ -8658,7 +8658,7 @@ export namespace Prisma {
     nb_views: number | null
     aides_already_seen: number[]
     aides_fs_unselected: number[]
-    fiche_diagnostic_seen: number[]
+    fiches_diagnostic_seen: number[]
   }
 
   export type User_projetMinAggregateOutputType = {
@@ -8706,7 +8706,7 @@ export namespace Prisma {
     last_viewed_at: number
     aides_already_seen: number
     aides_fs_unselected: number
-    fiche_diagnostic_seen: number
+    fiches_diagnostic_seen: number
     _all: number
   }
 
@@ -8717,7 +8717,7 @@ export namespace Prisma {
     nb_views?: true
     aides_already_seen?: true
     aides_fs_unselected?: true
-    fiche_diagnostic_seen?: true
+    fiches_diagnostic_seen?: true
   }
 
   export type User_projetSumAggregateInputType = {
@@ -8726,7 +8726,7 @@ export namespace Prisma {
     nb_views?: true
     aides_already_seen?: true
     aides_fs_unselected?: true
-    fiche_diagnostic_seen?: true
+    fiches_diagnostic_seen?: true
   }
 
   export type User_projetMinAggregateInputType = {
@@ -8774,7 +8774,7 @@ export namespace Prisma {
     last_viewed_at?: true
     aides_already_seen?: true
     aides_fs_unselected?: true
-    fiche_diagnostic_seen?: true
+    fiches_diagnostic_seen?: true
     _all?: true
   }
 
@@ -8879,7 +8879,7 @@ export namespace Prisma {
     last_viewed_at: Date | null
     aides_already_seen: number[]
     aides_fs_unselected: number[]
-    fiche_diagnostic_seen: number[]
+    fiches_diagnostic_seen: number[]
     _count: User_projetCountAggregateOutputType | null
     _avg: User_projetAvgAggregateOutputType | null
     _sum: User_projetSumAggregateOutputType | null
@@ -8916,7 +8916,7 @@ export namespace Prisma {
     last_viewed_at?: boolean
     aides_already_seen?: boolean
     aides_fs_unselected?: boolean
-    fiche_diagnostic_seen?: boolean
+    fiches_diagnostic_seen?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8940,7 +8940,7 @@ export namespace Prisma {
     last_viewed_at?: boolean
     aides_already_seen?: boolean
     aides_fs_unselected?: boolean
-    fiche_diagnostic_seen?: boolean
+    fiches_diagnostic_seen?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8961,7 +8961,7 @@ export namespace Prisma {
     last_viewed_at?: boolean
     aides_already_seen?: boolean
     aides_fs_unselected?: boolean
-    fiche_diagnostic_seen?: boolean
+    fiches_diagnostic_seen?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8982,10 +8982,10 @@ export namespace Prisma {
     last_viewed_at?: boolean
     aides_already_seen?: boolean
     aides_fs_unselected?: boolean
-    fiche_diagnostic_seen?: boolean
+    fiches_diagnostic_seen?: boolean
   }
 
-  export type user_projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_address" | "role" | "projet_id" | "user_id" | "created_at" | "invitation_token" | "invitation_status" | "deleted_at" | "deleted_by" | "nb_views" | "last_viewed_at" | "aides_already_seen" | "aides_fs_unselected" | "fiche_diagnostic_seen", ExtArgs["result"]["user_projet"]>
+  export type user_projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_address" | "role" | "projet_id" | "user_id" | "created_at" | "invitation_token" | "invitation_status" | "deleted_at" | "deleted_by" | "nb_views" | "last_viewed_at" | "aides_already_seen" | "aides_fs_unselected" | "fiches_diagnostic_seen", ExtArgs["result"]["user_projet"]>
   export type user_projetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
@@ -9029,7 +9029,7 @@ export namespace Prisma {
       last_viewed_at: Date | null
       aides_already_seen: number[]
       aides_fs_unselected: number[]
-      fiche_diagnostic_seen: number[]
+      fiches_diagnostic_seen: number[]
     }, ExtArgs["result"]["user_projet"]>
     composites: {}
   }
@@ -9472,7 +9472,7 @@ export namespace Prisma {
     readonly last_viewed_at: FieldRef<"user_projet", 'DateTime'>
     readonly aides_already_seen: FieldRef<"user_projet", 'Int[]'>
     readonly aides_fs_unselected: FieldRef<"user_projet", 'Int[]'>
-    readonly fiche_diagnostic_seen: FieldRef<"user_projet", 'Int[]'>
+    readonly fiches_diagnostic_seen: FieldRef<"user_projet", 'Int[]'>
   }
     
 
@@ -30832,7 +30832,7 @@ export namespace Prisma {
     last_viewed_at: 'last_viewed_at',
     aides_already_seen: 'aides_already_seen',
     aides_fs_unselected: 'aides_fs_unselected',
-    fiche_diagnostic_seen: 'fiche_diagnostic_seen'
+    fiches_diagnostic_seen: 'fiches_diagnostic_seen'
   };
 
   export type User_projetScalarFieldEnum = (typeof User_projetScalarFieldEnum)[keyof typeof User_projetScalarFieldEnum]
@@ -32041,7 +32041,7 @@ export namespace Prisma {
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
     aides_already_seen?: IntNullableListFilter<"user_projet">
     aides_fs_unselected?: IntNullableListFilter<"user_projet">
-    fiche_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     deleter?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -32064,7 +32064,7 @@ export namespace Prisma {
     last_viewed_at?: SortOrderInput | SortOrder
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
-    fiche_diagnostic_seen?: SortOrder
+    fiches_diagnostic_seen?: SortOrder
     projet?: projetOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     deleter?: UserOrderByWithRelationInput
@@ -32092,7 +32092,7 @@ export namespace Prisma {
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
     aides_already_seen?: IntNullableListFilter<"user_projet">
     aides_fs_unselected?: IntNullableListFilter<"user_projet">
-    fiche_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     deleter?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -32115,7 +32115,7 @@ export namespace Prisma {
     last_viewed_at?: SortOrderInput | SortOrder
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
-    fiche_diagnostic_seen?: SortOrder
+    fiches_diagnostic_seen?: SortOrder
     _count?: user_projetCountOrderByAggregateInput
     _avg?: user_projetAvgOrderByAggregateInput
     _max?: user_projetMaxOrderByAggregateInput
@@ -32141,7 +32141,7 @@ export namespace Prisma {
     last_viewed_at?: DateTimeNullableWithAggregatesFilter<"user_projet"> | Date | string | null
     aides_already_seen?: IntNullableListFilter<"user_projet">
     aides_fs_unselected?: IntNullableListFilter<"user_projet">
-    fiche_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
   }
 
   export type emailWhereInput = {
@@ -34018,7 +34018,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -34041,7 +34041,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -34057,7 +34057,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -34080,7 +34080,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -34100,7 +34100,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
   }
 
   export type user_projetUpdateManyMutationInput = {
@@ -34114,7 +34114,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
   }
 
   export type user_projetUncheckedUpdateManyInput = {
@@ -34132,7 +34132,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
   }
 
   export type emailCreateInput = {
@@ -36239,7 +36239,7 @@ export namespace Prisma {
     last_viewed_at?: SortOrder
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
-    fiche_diagnostic_seen?: SortOrder
+    fiches_diagnostic_seen?: SortOrder
   }
 
   export type user_projetAvgOrderByAggregateInput = {
@@ -36248,7 +36248,7 @@ export namespace Prisma {
     nb_views?: SortOrder
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
-    fiche_diagnostic_seen?: SortOrder
+    fiches_diagnostic_seen?: SortOrder
   }
 
   export type user_projetMaxOrderByAggregateInput = {
@@ -36287,7 +36287,7 @@ export namespace Prisma {
     nb_views?: SortOrder
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
-    fiche_diagnostic_seen?: SortOrder
+    fiches_diagnostic_seen?: SortOrder
   }
 
   export type EnumRoleProjetWithAggregatesFilter<$PrismaModel = never> = {
@@ -38397,7 +38397,7 @@ export namespace Prisma {
     set: number[]
   }
 
-  export type user_projetCreatefiche_diagnostic_seenInput = {
+  export type user_projetCreatefiches_diagnostic_seenInput = {
     set: number[]
   }
 
@@ -38465,7 +38465,7 @@ export namespace Prisma {
     push?: number | number[]
   }
 
-  export type user_projetUpdatefiche_diagnostic_seenInput = {
+  export type user_projetUpdatefiches_diagnostic_seenInput = {
     set?: number[]
     push?: number | number[]
   }
@@ -40543,7 +40543,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -40564,7 +40564,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -40590,7 +40590,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -40611,7 +40611,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -41066,7 +41066,7 @@ export namespace Prisma {
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
     aides_already_seen?: IntNullableListFilter<"user_projet">
     aides_fs_unselected?: IntNullableListFilter<"user_projet">
-    fiche_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
   }
 
   export type user_projetUpsertWithWhereUniqueWithoutDeleterInput = {
@@ -42183,7 +42183,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -42205,7 +42205,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
 
@@ -42319,7 +42319,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -42341,7 +42341,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
 
@@ -42934,7 +42934,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -42955,7 +42955,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -43771,7 +43771,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -43793,7 +43793,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
   }
 
@@ -43978,7 +43978,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -44000,7 +44000,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
   }
 
@@ -46500,7 +46500,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
   }
 
   export type user_projetCreateManyDeleterInput = {
@@ -46517,7 +46517,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
   }
 
   export type conversationCreateManyUserInput = {
@@ -46937,7 +46937,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -46958,7 +46958,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -46977,7 +46977,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
   }
 
   export type user_projetUpdateWithoutDeleterInput = {
@@ -46991,7 +46991,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -47012,7 +47012,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -47031,7 +47031,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
   }
 
   export type conversationUpdateWithoutUserInput = {
@@ -47451,7 +47451,7 @@ export namespace Prisma {
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetCreatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
   }
 
   export type projet_sourcing_contactCreateManyProjetInput = {
@@ -47530,7 +47530,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -47551,7 +47551,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -47570,7 +47570,7 @@ export namespace Prisma {
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiche_diagnostic_seen?: user_projetUpdatefiche_diagnostic_seenInput | number[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
   }
 
   export type projet_sourcing_contactUpdateWithoutProjetInput = {
