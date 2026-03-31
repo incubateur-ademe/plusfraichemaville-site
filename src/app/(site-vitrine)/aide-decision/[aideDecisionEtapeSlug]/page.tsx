@@ -13,6 +13,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 type AideDecisionPageProps = {
   params: Promise<{ aideDecisionEtapeSlug: string }>;
@@ -93,6 +94,10 @@ export default async function AideDecisionPage(props: AideDecisionPageProps) {
         <AideDecisionResult searchParams={searchParams} aideDecisionEtapeAttributes={aideDecisionEtape.attributes} />
       );
     } else {
+      customCaptureException(
+        `Aide décision étape non trouvée ${params.aideDecisionEtapeSlug}`,
+        new Error("Aide décision étape non trouvée"),
+      );
       notFound();
     }
   }

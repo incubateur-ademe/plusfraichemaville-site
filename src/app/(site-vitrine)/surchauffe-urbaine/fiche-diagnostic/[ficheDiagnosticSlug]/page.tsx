@@ -6,6 +6,7 @@ import { BREADCRUMB_SURCHAUFFE_URBAINE_FICHE_DIAG } from "@/src/components/commo
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 type PageProps = {
   params: Promise<{ ficheDiagnosticSlug: string }>;
@@ -34,6 +35,10 @@ export default async function FicheDiagnosticSiteVitrinePage({ params }: PagePro
   const ficheDiagnostic = await getFicheDiagnosticBySlug(resolvedParams.ficheDiagnosticSlug);
 
   if (!ficheDiagnostic) {
+    customCaptureException(
+      `Fiche diagnostic non trouvée ${resolvedParams.ficheDiagnosticSlug}`,
+      new Error("Fiche diagnostic non trouvée"),
+    );
     return notFound();
   }
 

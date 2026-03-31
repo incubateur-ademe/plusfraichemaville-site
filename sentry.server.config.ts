@@ -11,6 +11,6 @@ Sentry.init({
   tracesSampleRate: 0.2,
   environment: process.env.NEXT_PUBLIC_SENTRY_ENV,
 
-  // Setting this option to true will print useful information to the console while you're setting up Sentry.
-  debug: false,
+  // Enable logs to be sent to Sentry
+  enableLogs: true,
 });

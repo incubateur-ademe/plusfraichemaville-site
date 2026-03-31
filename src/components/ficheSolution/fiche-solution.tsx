@@ -13,6 +13,7 @@ import clsx from "clsx";
 import { FICHE_SOLUTION_CLIC_ONGLET } from "@/src/helpers/matomo/matomo-tags";
 import { FicheSolutionSideMenu } from "@/src/components/ficheSolution/fiche-solution-side-menu";
 import { PublishInformation } from "@/src/components/common/publish-information";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 export async function FicheSolution({
   params,
@@ -137,6 +138,10 @@ export async function FicheSolution({
       </>
     );
   } else {
+    customCaptureException(
+      `Fiche solution non trouvée ${params.ficheSolutionSlug}`,
+      new Error("Fiche solution non trouvée"),
+    );
     notFound();
   }
 }

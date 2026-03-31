@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { RetourExperienceContent } from "@/src/components/projet/projet-retour-experience-content";
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
 import { BREADCRUMB_REX_PROJET } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
+import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 type RetourExperiencePageProps = {
   params: Promise<{ retourExperienceSlug: string; projetId: string }>;
@@ -33,6 +34,7 @@ export default async function RetourExperiencePage(props: RetourExperiencePagePr
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
 
   if (!retourExperience) {
+    customCaptureException(`Rex projet non trouvé ${params.retourExperienceSlug}`, new Error("Rex projet non trouvé"));
     notFound();
   }
 
