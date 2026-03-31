@@ -12,6 +12,7 @@ import {
   handleMapClick,
 } from "@/src/components/surchauffe-urbaine/territoire/surchauffe-urbaine-lcz-map-helpers";
 import { LczMapLoadingErrorAlert } from "@/src/components/surchauffe-urbaine/territoire/lcz-map-loading-error-alert";
+import { ErrorEvent } from "maplibre-gl";
 
 type SurchauffeUrbaineLCZMapProps = {
   climadiagInfo: Climadiag;
@@ -41,7 +42,9 @@ export const SurchauffeUrbaineLCZMap = ({ climadiagInfo }: SurchauffeUrbaineLCZM
       onLoad={onMapLoad}
       style={{ width: "100%", height: "100%" }}
       mapStyle={mapStyles.desaturated}
-      onError={() => setErrorLoadingLCZ(true)}
+      onError={(e: ErrorEvent) =>
+        !e?.error?.message?.startsWith("AJAXError: Failed to fetch") && setErrorLoadingLCZ(true)
+      }
     >
       <LCZMapFocus climadiagInfo={climadiagInfo} />
       <NavigationControl position="top-left" showCompass={false} />
