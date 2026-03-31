@@ -24,6 +24,9 @@ import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagn
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-spatiale-diagnostic";
 import { FicheDiagLink } from "@/src/components/common/generic-save-fiche/fiche-diag-link";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useUserStore } from "@/src/stores/user/provider";
+import { addFicheDiagnosticSeenAction } from "@/src/actions/userProjet/add-fiche-diagnostic-seen-action";
 
 const modal = createModal({
   id: "fiche-diagnostic-description-modal",
@@ -33,6 +36,16 @@ const modal = createModal({
 export const FicheDiagnosticDescriptionModal = () => {
   const ficheDiagnostic = useModalStore((state) => state.currentFicheDiagnostic);
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
+  const currentProjetId = useProjetsStore((state) => state.currentProjetId);
+  const userInfos = useUserStore((state) => state.userInfos);
+
+  const handleReadMethodClick = async () => {
+    if (userInfos?.id && currentProjetId && ficheDiagnostic?.id) {
+      await addFicheDiagnosticSeenAction(userInfos.id, currentProjetId, ficheDiagnostic.id);
+    }
+    modal.close();
+  };
+
   const coutMin = ficheDiagnostic?.attributes.cout_min;
   const coutMax = ficheDiagnostic?.attributes.cout_max;
   const delaiMin = ficheDiagnostic?.attributes.delai_min;
@@ -146,7 +159,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                     <FicheDiagLink
                       className={clsx("fr-btn fr-btn--tertiary mt-4 rounded-3xl !text-dsfr-text-title-grey ")}
                       slug={ficheDiagData.slug}
-                      onClick={modal.close}
+                      onClick={handleReadMethodClick}
                     >
                       Lire la méthode
                     </FicheDiagLink>
