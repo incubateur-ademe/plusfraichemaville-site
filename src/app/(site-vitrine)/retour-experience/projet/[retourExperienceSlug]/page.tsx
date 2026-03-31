@@ -41,7 +41,6 @@ export default async function RetourExperiencePage(props: RetourExperiencePagePr
   return (
     <>
       <div className="fr-container">
-        /
         <SiteVitrineBreadcrumb step={BREADCRUMB_REX_PROJET(retourExperience.attributes.titre)} />
       </div>
       <RetourExperienceContent retourExperience={retourExperience} />
