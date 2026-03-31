@@ -39,7 +39,12 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
         </p>
         <div className="mt-6 flex flex-col gap-24 md:flex-row md:justify-between md:gap-12">
           <div className="flex flex-col items-center gap-6">
-            <div className="pfmv-strong-card fr-enlarge-button group max-w-[23rem]">
+            <div
+              className={clsx(
+                "fr-enlarge-button group max-w-[23rem] rounded-xl shadow-pfmv-card-strong-shadow",
+                "!hover:bg-pfmv-grey bg-white",
+              )}
+            >
               <Image
                 src="/images/fiches-diagnostic/parcours-indicateurs-environnementaux.svg"
                 alt="Parcours indicateurs thermiques"
@@ -80,7 +85,12 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
             </div>
           </div>
           <div className="flex flex-col items-center gap-6">
-            <div className="pfmv-strong-card fr-enlarge-button group max-w-[23rem]">
+            <div
+              className={clsx(
+                "fr-enlarge-button group max-w-[23rem] rounded-xl shadow-pfmv-card-strong-shadow",
+                "!hover:bg-pfmv-grey bg-white",
+              )}
+            >
               <Image
                 src="/images/fiches-diagnostic/parcours-prestation.svg"
                 alt="Parcours prestation"
