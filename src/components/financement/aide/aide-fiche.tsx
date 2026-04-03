@@ -9,6 +9,8 @@ import { AidesTerritoiresFullDetailedLines } from "@/src/components/financement/
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { AideCardSaveButtonProjet } from "@/src/components/financement/aide/aide-card-save-button-projet";
+import { addAideMoreInfoClickedAction } from "@/src/actions/userProjet/add-aide-more-info-clicked-action";
+import { useUserStore } from "@/src/stores/user/provider";
 
 type AideFicheProps = {
   aide: AidesTerritoiresAide;
@@ -18,6 +20,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
   const isAideFinanciere = resolveAidType(aide.aid_types_full) === TypeAidesTerritoiresAide.financement;
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const canEditProjet = useCanEditProjet(projet?.id);
+  const currentUserId = useUserStore((state) => state.userInfos?.id);
 
   return (
     <div className="flex gap-6 rounded-[20px]">
@@ -90,7 +93,15 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
             <Button
               className="rounded-3xl"
               size="small"
-              linkProps={{ target: "_blank", href: aide.origin_url }}
+              linkProps={{
+                target: "_blank",
+                href: aide.origin_url,
+                onClick: () => {
+                  if (currentUserId && projet) {
+                    addAideMoreInfoClickedAction(currentUserId, projet.id, aide.id);
+                  }
+                },
+              }}
               priority="secondary"
             >
               Plus d'informations
