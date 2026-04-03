@@ -7,7 +7,7 @@ export const ProjetInfoFormSchema = z.object({
   isPublic: z.boolean(),
   nom: z.string().min(1, { message: "Veuillez renseigner le nom du projet" }),
   typeEspace: z.string().min(1, { message: "Veuillez renseigner l'espace sur lequel vous souhaitez agir" }),
-  budget: z.number().min(0, { message: "Le budget ne peut pas être négatif" }).nullish(),
+  budget: z.number().min(0, { message: "Le budget ne peut pas être négatif" }).nullish().optional(),
   adresse: z
     .object(
       {
@@ -18,10 +18,7 @@ export const ProjetInfoFormSchema = z.object({
     )
     .optional(),
   niveauMaturite: z.string().min(1, { message: "Veuillez sélectionner le niveau de maturité de votre projet" }),
-  dateEcheance: z
-    .string()
-    .min(1, { message: "Veuillez renseigner la date d'échéance souhaitée" })
-    .regex(new RegExp("[0-9]{4}-(0?[1-9]|1[012])$"), { message: "Veuillez rentrer une date au format YYYY-MM" }),
+  dateEcheance: z.string().optional(),
   collectivite: CollectiviteFormSchema,
   statut: z.nativeEnum(StatutProjet).optional(),
 });

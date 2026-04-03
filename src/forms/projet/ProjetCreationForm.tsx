@@ -23,6 +23,7 @@ import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibi
 import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
 import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
+import clsx from "clsx";
 
 const steps = [
   {
@@ -260,16 +261,12 @@ export const ProjetCreationForm = () => {
           ) : (
             <div />
           )}
-
-          {currentStep < steps.length ? (
-            <Button type="button" onClick={handleNextStep}>
-              Suivant
-            </Button>
-          ) : (
-            <Button type="submit" disabled={isSubmitting}>
-              Créer et voir mon projet
-            </Button>
-          )}
+          <Button type="button" onClick={handleNextStep} className={clsx(currentStep >= steps.length && "hidden")}>
+            Suivant
+          </Button>
+          <Button type="submit" disabled={isSubmitting} className={clsx(currentStep < steps.length && "hidden")}>
+            Créer et voir mon projet
+          </Button>
         </div>
       </form>
     </div>

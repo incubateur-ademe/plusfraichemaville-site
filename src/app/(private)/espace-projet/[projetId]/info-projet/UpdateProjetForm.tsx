@@ -1,8 +1,8 @@
 "use client";
-import { ProjetInfoForm } from "@/src/forms/projet/ProjetInfoForm";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useShallow } from "zustand/react/shallow";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
+import { ProjetInfoForm } from "@/src/forms/projet/ProjetEditionForm";
 
 export default function UpdateProjetForm() {
   const { getCurrentProjet } = useProjetsStore(useShallow((state) => state));
