@@ -194,7 +194,8 @@ exports.Prisma.User_projetScalarFieldEnum = {
   last_viewed_at: 'last_viewed_at',
   aides_already_seen: 'aides_already_seen',
   aides_fs_unselected: 'aides_fs_unselected',
-  fiches_diagnostic_seen: 'fiches_diagnostic_seen'
+  fiches_diagnostic_seen: 'fiches_diagnostic_seen',
+  aides_more_info_clicked: 'aides_more_info_clicked'
 };
 
 exports.Prisma.EmailScalarFieldEnum = {

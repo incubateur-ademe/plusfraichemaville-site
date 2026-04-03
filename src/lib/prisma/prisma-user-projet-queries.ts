@@ -358,6 +358,23 @@ export const addFicheDiagnosticSeenToUserProjet = async (
   });
 };
 
+export const addAideMoreInfoClickedToUserProjet = async (
+  userId: string,
+  projetId: number,
+  aideTerritoireId: number,
+): Promise<UserProjetWithUser> => {
+  return prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: { user_id: userId, projet_id: projetId },
+      deleted_at: null,
+    },
+    data: {
+      aides_more_info_clicked: { push: aideTerritoireId },
+    },
+    include: { user: true },
+  });
+};
+
 export const updateUserProjetAidesFsUnselected = async (
   userId: string,
   projectId: number,

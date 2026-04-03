@@ -8650,6 +8650,7 @@ export namespace Prisma {
     aides_already_seen: number | null
     aides_fs_unselected: number | null
     fiches_diagnostic_seen: number | null
+    aides_more_info_clicked: number | null
   }
 
   export type User_projetSumAggregateOutputType = {
@@ -8659,6 +8660,7 @@ export namespace Prisma {
     aides_already_seen: number[]
     aides_fs_unselected: number[]
     fiches_diagnostic_seen: number[]
+    aides_more_info_clicked: number[]
   }
 
   export type User_projetMinAggregateOutputType = {
@@ -8707,6 +8709,7 @@ export namespace Prisma {
     aides_already_seen: number
     aides_fs_unselected: number
     fiches_diagnostic_seen: number
+    aides_more_info_clicked: number
     _all: number
   }
 
@@ -8718,6 +8721,7 @@ export namespace Prisma {
     aides_already_seen?: true
     aides_fs_unselected?: true
     fiches_diagnostic_seen?: true
+    aides_more_info_clicked?: true
   }
 
   export type User_projetSumAggregateInputType = {
@@ -8727,6 +8731,7 @@ export namespace Prisma {
     aides_already_seen?: true
     aides_fs_unselected?: true
     fiches_diagnostic_seen?: true
+    aides_more_info_clicked?: true
   }
 
   export type User_projetMinAggregateInputType = {
@@ -8775,6 +8780,7 @@ export namespace Prisma {
     aides_already_seen?: true
     aides_fs_unselected?: true
     fiches_diagnostic_seen?: true
+    aides_more_info_clicked?: true
     _all?: true
   }
 
@@ -8880,6 +8886,7 @@ export namespace Prisma {
     aides_already_seen: number[]
     aides_fs_unselected: number[]
     fiches_diagnostic_seen: number[]
+    aides_more_info_clicked: number[]
     _count: User_projetCountAggregateOutputType | null
     _avg: User_projetAvgAggregateOutputType | null
     _sum: User_projetSumAggregateOutputType | null
@@ -8917,6 +8924,7 @@ export namespace Prisma {
     aides_already_seen?: boolean
     aides_fs_unselected?: boolean
     fiches_diagnostic_seen?: boolean
+    aides_more_info_clicked?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8941,6 +8949,7 @@ export namespace Prisma {
     aides_already_seen?: boolean
     aides_fs_unselected?: boolean
     fiches_diagnostic_seen?: boolean
+    aides_more_info_clicked?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8962,6 +8971,7 @@ export namespace Prisma {
     aides_already_seen?: boolean
     aides_fs_unselected?: boolean
     fiches_diagnostic_seen?: boolean
+    aides_more_info_clicked?: boolean
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
     deleter?: boolean | user_projet$deleterArgs<ExtArgs>
@@ -8983,9 +8993,10 @@ export namespace Prisma {
     aides_already_seen?: boolean
     aides_fs_unselected?: boolean
     fiches_diagnostic_seen?: boolean
+    aides_more_info_clicked?: boolean
   }
 
-  export type user_projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_address" | "role" | "projet_id" | "user_id" | "created_at" | "invitation_token" | "invitation_status" | "deleted_at" | "deleted_by" | "nb_views" | "last_viewed_at" | "aides_already_seen" | "aides_fs_unselected" | "fiches_diagnostic_seen", ExtArgs["result"]["user_projet"]>
+  export type user_projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email_address" | "role" | "projet_id" | "user_id" | "created_at" | "invitation_token" | "invitation_status" | "deleted_at" | "deleted_by" | "nb_views" | "last_viewed_at" | "aides_already_seen" | "aides_fs_unselected" | "fiches_diagnostic_seen" | "aides_more_info_clicked", ExtArgs["result"]["user_projet"]>
   export type user_projetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     projet?: boolean | projetDefaultArgs<ExtArgs>
     user?: boolean | user_projet$userArgs<ExtArgs>
@@ -9030,6 +9041,7 @@ export namespace Prisma {
       aides_already_seen: number[]
       aides_fs_unselected: number[]
       fiches_diagnostic_seen: number[]
+      aides_more_info_clicked: number[]
     }, ExtArgs["result"]["user_projet"]>
     composites: {}
   }
@@ -9473,6 +9485,7 @@ export namespace Prisma {
     readonly aides_already_seen: FieldRef<"user_projet", 'Int[]'>
     readonly aides_fs_unselected: FieldRef<"user_projet", 'Int[]'>
     readonly fiches_diagnostic_seen: FieldRef<"user_projet", 'Int[]'>
+    readonly aides_more_info_clicked: FieldRef<"user_projet", 'Int[]'>
   }
     
 
@@ -30832,7 +30845,8 @@ export namespace Prisma {
     last_viewed_at: 'last_viewed_at',
     aides_already_seen: 'aides_already_seen',
     aides_fs_unselected: 'aides_fs_unselected',
-    fiches_diagnostic_seen: 'fiches_diagnostic_seen'
+    fiches_diagnostic_seen: 'fiches_diagnostic_seen',
+    aides_more_info_clicked: 'aides_more_info_clicked'
   };
 
   export type User_projetScalarFieldEnum = (typeof User_projetScalarFieldEnum)[keyof typeof User_projetScalarFieldEnum]
@@ -32042,6 +32056,7 @@ export namespace Prisma {
     aides_already_seen?: IntNullableListFilter<"user_projet">
     aides_fs_unselected?: IntNullableListFilter<"user_projet">
     fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    aides_more_info_clicked?: IntNullableListFilter<"user_projet">
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     deleter?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -32065,6 +32080,7 @@ export namespace Prisma {
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
     fiches_diagnostic_seen?: SortOrder
+    aides_more_info_clicked?: SortOrder
     projet?: projetOrderByWithRelationInput
     user?: UserOrderByWithRelationInput
     deleter?: UserOrderByWithRelationInput
@@ -32093,6 +32109,7 @@ export namespace Prisma {
     aides_already_seen?: IntNullableListFilter<"user_projet">
     aides_fs_unselected?: IntNullableListFilter<"user_projet">
     fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    aides_more_info_clicked?: IntNullableListFilter<"user_projet">
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
     deleter?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -32116,6 +32133,7 @@ export namespace Prisma {
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
     fiches_diagnostic_seen?: SortOrder
+    aides_more_info_clicked?: SortOrder
     _count?: user_projetCountOrderByAggregateInput
     _avg?: user_projetAvgOrderByAggregateInput
     _max?: user_projetMaxOrderByAggregateInput
@@ -32142,6 +32160,7 @@ export namespace Prisma {
     aides_already_seen?: IntNullableListFilter<"user_projet">
     aides_fs_unselected?: IntNullableListFilter<"user_projet">
     fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    aides_more_info_clicked?: IntNullableListFilter<"user_projet">
   }
 
   export type emailWhereInput = {
@@ -34019,6 +34038,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -34042,6 +34062,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -34058,6 +34079,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -34081,6 +34103,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -34101,6 +34124,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
   }
 
   export type user_projetUpdateManyMutationInput = {
@@ -34115,6 +34139,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
   }
 
   export type user_projetUncheckedUpdateManyInput = {
@@ -34133,6 +34158,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
   }
 
   export type emailCreateInput = {
@@ -36240,6 +36266,7 @@ export namespace Prisma {
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
     fiches_diagnostic_seen?: SortOrder
+    aides_more_info_clicked?: SortOrder
   }
 
   export type user_projetAvgOrderByAggregateInput = {
@@ -36249,6 +36276,7 @@ export namespace Prisma {
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
     fiches_diagnostic_seen?: SortOrder
+    aides_more_info_clicked?: SortOrder
   }
 
   export type user_projetMaxOrderByAggregateInput = {
@@ -36288,6 +36316,7 @@ export namespace Prisma {
     aides_already_seen?: SortOrder
     aides_fs_unselected?: SortOrder
     fiches_diagnostic_seen?: SortOrder
+    aides_more_info_clicked?: SortOrder
   }
 
   export type EnumRoleProjetWithAggregatesFilter<$PrismaModel = never> = {
@@ -38401,6 +38430,10 @@ export namespace Prisma {
     set: number[]
   }
 
+  export type user_projetCreateaides_more_info_clickedInput = {
+    set: number[]
+  }
+
   export type projetCreateNestedOneWithoutUsersInput = {
     create?: XOR<projetCreateWithoutUsersInput, projetUncheckedCreateWithoutUsersInput>
     connectOrCreate?: projetCreateOrConnectWithoutUsersInput
@@ -38466,6 +38499,11 @@ export namespace Prisma {
   }
 
   export type user_projetUpdatefiches_diagnostic_seenInput = {
+    set?: number[]
+    push?: number | number[]
+  }
+
+  export type user_projetUpdateaides_more_info_clickedInput = {
     set?: number[]
     push?: number | number[]
   }
@@ -40544,6 +40582,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -40565,6 +40604,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -40591,6 +40631,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -40612,6 +40653,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -41067,6 +41109,7 @@ export namespace Prisma {
     aides_already_seen?: IntNullableListFilter<"user_projet">
     aides_fs_unselected?: IntNullableListFilter<"user_projet">
     fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    aides_more_info_clicked?: IntNullableListFilter<"user_projet">
   }
 
   export type user_projetUpsertWithWhereUniqueWithoutDeleterInput = {
@@ -42184,6 +42227,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -42206,6 +42250,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
 
@@ -42320,6 +42365,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -42342,6 +42388,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
 
@@ -42935,6 +42982,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
     email?: emailCreateNestedManyWithoutUser_projetInput
@@ -42956,6 +43004,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -43772,6 +43821,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -43794,6 +43844,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
   }
 
@@ -43979,6 +44030,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -44001,6 +44053,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
   }
 
@@ -46501,6 +46554,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
   }
 
   export type user_projetCreateManyDeleterInput = {
@@ -46518,6 +46572,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
   }
 
   export type conversationCreateManyUserInput = {
@@ -46938,6 +46993,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -46959,6 +47015,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -46978,6 +47035,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
   }
 
   export type user_projetUpdateWithoutDeleterInput = {
@@ -46992,6 +47050,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -47013,6 +47072,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -47032,6 +47092,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
   }
 
   export type conversationUpdateWithoutUserInput = {
@@ -47452,6 +47513,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
   }
 
   export type projet_sourcing_contactCreateManyProjetInput = {
@@ -47531,6 +47593,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
     email?: emailUpdateManyWithoutUser_projetNestedInput
@@ -47552,6 +47615,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -47571,6 +47635,7 @@ export namespace Prisma {
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
     aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
     fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
   }
 
   export type projet_sourcing_contactUpdateWithoutProjetInput = {
