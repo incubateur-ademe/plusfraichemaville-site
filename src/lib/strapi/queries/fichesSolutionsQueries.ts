@@ -9,6 +9,7 @@ import { strapiGraphQLCall } from "@/src/lib/strapi/strapiClient";
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/src/lib/strapi/helpers/strapiArrayUtils";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { APIResponseCollection } from "../types/strapi-custom-types";
+import { isEmpty } from "@/src/helpers/listUtils";
 
 const GET_FICHE_SOLUTION_COMPLETE_DATA = (
   strapiFilter: StrapiFilter,
@@ -148,6 +149,7 @@ export async function getAllFichesSolutions(): Promise<FicheSolution[]> {
 }
 
 export async function getFicheSolutionByIds(ficheSolutionIds: number[]): Promise<FicheSolution[]> {
+  if (isEmpty(ficheSolutionIds)) return Promise.resolve([]);
   const filter = new StrapiFilter(true, [
     {
       attribute: "id",
