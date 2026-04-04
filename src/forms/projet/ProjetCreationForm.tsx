@@ -23,6 +23,9 @@ import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibi
 import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
 import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
+import Tree from "@codegouvfr/react-dsfr/picto/Tree";
+import MapPin from "@codegouvfr/react-dsfr/picto/MapPin";
+import SelfTraining from "@codegouvfr/react-dsfr/picto/SelfTraining";
 import clsx from "clsx";
 
 const steps = [
@@ -141,108 +144,100 @@ export const ProjetCreationForm = () => {
         stepCount={steps.length}
         title={currentStepData.title}
         nextTitle={currentStepData.nextTitle}
-        className="mb-8"
+        className="mb-8 max-w-3xl"
       />
 
-      <form id="projet-creation-form" onSubmit={() => form.handleSubmit(onSubmit)} autoComplete="off">
+      <form id="projet-creation-form" onSubmit={form.handleSubmit(onSubmit)} autoComplete="off">
         {currentStep === 1 && (
-          <div className="flex flex-col gap-8 md:flex-row">
-            <div className="flex-1">
-              <p className="mb-8">
-                Créez votre simulation de projet pour trouver les solutions de rafraîchissement urbain les plus adaptées
-                à votre espace grâce à Plus Fraîche Ma Ville.
-                <br />
-                Ou rejoignez un projet déjà existant.
-              </p>
-              <MandatoryFieldsMention />
-              <SelectFormField
-                control={form.control}
-                path="typeEspace"
-                label="Quel espace souhaitez-vous rafraîchir ?"
-                asterisk={true}
-                options={typeEspaceOptions}
-                placeholder="Sélectionnez un type d'espace"
-                disabled={isSubmitting}
-              />
-            </div>
-            <div
-              className={`bg-gray-50 border-gray-200 hidden min-h-[200px] flex-1
-                items-center justify-center rounded border md:flex`}
-            >
-              {/* Image Placeholder */}
-              <span className="text-gray-400 text-sm">Image d'illustration</span>
+          <div className="mb-20 flex flex-col gap-8 md:flex-col">
+            <p>
+              Créez votre simulation de projet pour trouver les solutions de rafraîchissement urbain les plus adaptées à
+              votre espace grâce à Plus Fraîche Ma Ville.
+              <br />
+              Ou rejoignez un projet déjà existant.
+            </p>
+            <div className="flex flex-row gap-4">
+              <div className="md:w-3/5">
+                <MandatoryFieldsMention />
+                <SelectFormField
+                  control={form.control}
+                  path="typeEspace"
+                  label="Quel espace souhaitez-vous rafraîchir ?"
+                  asterisk={true}
+                  options={typeEspaceOptions}
+                  placeholder="Sélectionnez un type d'espace"
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div className={`hidden flex-1 items-center justify-center md:flex`}>
+                <Tree className="size-24" />
+              </div>
             </div>
           </div>
         )}
 
         {currentStep === 2 && (
-          <div className="flex flex-col gap-8 md:flex-row">
-            <div className="flex-1">
-              <p className="mb-8">
-                Découvrez les aides financières et en ingénierie mobilisables pour votre projet de rafraîchissement et
-                contactez les collectivités de votre région pour échanger.
-              </p>
-              <MandatoryFieldsMention />
-              <CommuneInputFormField
-                control={form.control}
-                path="collectivite"
-                label="Dans quelle commune votre projet se situe-t-il ?"
-                asterisk={true}
-                disabled={isSubmitting}
-                className="mb-6"
-              />
-              <AddressInputFormField
-                control={form.control}
-                path="adresse"
-                label="Quelle est l'adresse exacte du lieu ? (Optionnelle)"
-                disabled={isSubmitting}
-              />
-            </div>
-            <div
-              className={`bg-gray-50 border-gray-200 hidden min-h-[200px] flex-1
-                items-center justify-center rounded border md:flex`}
-            >
-              {/* Image Placeholder */}
-              <span className="text-gray-400 text-sm">Image d'illustration</span>
+          <div className="mb-20 flex flex-col gap-8">
+            <p>
+              Découvrez les aides financières et en ingénierie mobilisables pour votre projet de rafraîchissement et
+              contactez les collectivités de votre région pour échanger.
+            </p>
+            <div className="flex flex-col gap-4 md:flex-row">
+              <div className="md:w-3/5">
+                <MandatoryFieldsMention />
+                <CommuneInputFormField
+                  control={form.control}
+                  path="collectivite"
+                  label="Dans quelle commune votre projet se situe-t-il ?"
+                  asterisk={true}
+                  disabled={isSubmitting}
+                  className="mb-6"
+                />
+                <AddressInputFormField
+                  control={form.control}
+                  path="adresse"
+                  label="Quelle est l'adresse exacte du lieu ? (Optionnelle)"
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div className={`hidden flex-1 items-center justify-center md:flex`}>
+                <MapPin className="size-24" />
+              </div>
             </div>
           </div>
         )}
 
         {currentStep === 3 && (
-          <div className="flex flex-col gap-8 md:flex-row">
-            <div className="flex-1">
-              <p className="mb-4">
-                Plus fraîche ma ville vous permet de travailler sur plusieurs projets de rafraîchissement différents.
-                Choisissez un nom simple et évocateur pour identifier votre projet.
-              </p>
-              <p className="text-gray-600 mb-8 text-sm italic">
-                Exemple : Végétalisation de la cour d'école Marie Curie.
-              </p>
-              <MandatoryFieldsMention />
-              <InputFormField
-                control={form.control}
-                path="nom"
-                label="Quel nom voulez-vous donner à votre projet ?"
-                asterisk={true}
-                disabled={isSubmitting}
-                className="mb-6"
-              />
-              <SelectFormField
-                control={form.control}
-                path="niveauMaturite"
-                label="Où en êtes-vous dans votre projet ?"
-                asterisk={true}
-                options={niveauxMaturiteProjetOptions}
-                placeholder="Sélectionnez un niveau d'avancement"
-                disabled={isSubmitting}
-              />
-            </div>
-            <div
-              className={`bg-gray-50 border-gray-200 hidden min-h-[200px] flex-1
-                items-center justify-center rounded border md:flex`}
-            >
-              {/* Image Placeholder */}
-              <span className="text-gray-400 text-sm">Image d'illustration</span>
+          <div className="mb-20 flex flex-col">
+            <p>
+              Plus fraîche ma ville vous permet de travailler sur plusieurs projets de rafraîchissement différents.
+              Choisissez un nom simple et évocateur pour identifier votre projet.
+            </p>
+            <p className="mb-8 text-sm italic">Exemple : Végétalisation de la cour d'école Marie Curie.</p>
+            <div className="flex flex-col gap-4 md:flex-row">
+              <div className="md:w-3/5">
+                <MandatoryFieldsMention />
+                <InputFormField
+                  control={form.control}
+                  path="nom"
+                  label="Quel nom voulez-vous donner à votre projet ?"
+                  asterisk={true}
+                  disabled={isSubmitting}
+                  className="mb-6"
+                />
+                <SelectFormField
+                  control={form.control}
+                  path="niveauMaturite"
+                  label="Où en êtes-vous dans votre projet ?"
+                  asterisk={true}
+                  options={niveauxMaturiteProjetOptions}
+                  placeholder="Sélectionnez un niveau d'avancement"
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div className={`hidden flex-1 items-center justify-center md:flex`}>
+                <SelfTraining className="size-24" />
+              </div>
             </div>
           </div>
         )}
@@ -255,16 +250,30 @@ export const ProjetCreationForm = () => {
 
         <div className="mt-12 flex items-center justify-between">
           {currentStep > 1 ? (
-            <Button priority="secondary" type="button" onClick={handlePreviousStep} disabled={isSubmitting}>
+            <Button
+              priority="secondary"
+              type="button"
+              onClick={handlePreviousStep}
+              disabled={isSubmitting}
+              className="rounded-3xl"
+            >
               Précédent
             </Button>
           ) : (
             <div />
           )}
-          <Button type="button" onClick={handleNextStep} className={clsx(currentStep >= steps.length && "hidden")}>
+          <Button
+            type="button"
+            onClick={handleNextStep}
+            className={clsx(currentStep >= steps.length && "hidden", "rounded-3xl")}
+          >
             Suivant
           </Button>
-          <Button type="submit" disabled={isSubmitting} className={clsx(currentStep < steps.length && "hidden")}>
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className={clsx(currentStep < steps.length && "hidden", "rounded-3xl")}
+          >
             Créer et voir mon projet
           </Button>
         </div>
