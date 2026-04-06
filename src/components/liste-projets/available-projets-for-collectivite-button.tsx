@@ -3,10 +3,10 @@ import { useModalStore } from "@/src/stores/modal/provider";
 import { useUserStore } from "@/src/stores/user/provider";
 import { SirenInfo } from "@/src/lib/siren/types";
 
-export const AvailableProjetsForCollectiviteButton = ({ 
+export const AvailableProjetsForCollectiviteButton = ({
   className,
   children,
-}: { 
+}: {
   className?: string;
   children?: React.ReactNode;
 }) => {
