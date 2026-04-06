@@ -1,17 +1,15 @@
 "use client";
 
-import { PropsWithChildren, ReactNode } from "react";
 import { ListeProjetsHeader } from "./header";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { groupAndOrderProjetsByCollectivite, sortProjectsByInvitationStatus } from "./helpers";
 import Image from "next/image";
 import { useUserStore } from "@/src/stores/user/provider";
 import { ListeProjetTab } from "./liste";
-import clsx from "clsx";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { InvitationStatus } from "@/src/generated/prisma/client";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import Tabs from "@codegouvfr/react-dsfr/Tabs";
 
 export type EspaceProjetTabsId = "projet" | "invitation" | "demande";
 
@@ -26,6 +24,7 @@ export const ListProjets = () => {
   const requestedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsRequested);
 
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const tabs = [
     {
@@ -60,49 +59,28 @@ export const ListProjets = () => {
       />
       <div className="fr-container relative z-10 min-h-[25rem] py-10">
         <ListeProjetsHeader isListEmpty={projets.length === 0} />
-        <div>
-          <div>
-            <div className="mb-10 flex w-fit border-b-[1px] border-b-pfmv-grey/20">
-              {tabs.map((tab, index) => (
-                <div
-                  className={clsx(
-                    "relative mb-[-1px] text-center text-sm",
-                    "hover:!bg-dsfr-background-action-low-blue-france",
-                    currentTab === tab.id && "border-b-2 border-b-pfmv-navy",
+        <div className="mt-10">
+          <Tabs
+            selectedTabId={currentTab}
+            onTabChange={(tabId) =>
+              router.push(PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB(tabId as EspaceProjetTabsId), { scroll: false })
+            }
+            tabs={tabs.map((tab) => ({
+              tabId: tab.id,
+              label: (
+                <div className="flex">
+                  {tab.label} ({tab.count})
+                  {tab.id === "invitation" && tab.count > 0 && (
+                    <div className="relative -top-2 left-1 size-2 rounded-full bg-pfmv-climadiag-red"></div>
                   )}
-                  key={index}
-                >
-                  <TabButton isActive={currentTab === tab.id} tab={tab.id}>
-                    {tab.label} ({tab.count})
-                    {tab.id === "invitation" && tab.count > 0 && (
-                      <div className="relative -top-4 left-2 size-2 rounded-full bg-pfmv-climadiag-red"></div>
-                    )}
-                  </TabButton>
                 </div>
-              ))}
-            </div>
-            {tabs.map((tab, index) => (
-              <TabContent key={index} content={tab.content} isActive={currentTab === tab.id} />
-            ))}
-          </div>
+              ),
+            }))}
+          >
+            {tabs.find((tab) => tab.id === currentTab)?.content}
+          </Tabs>
         </div>
       </div>
     </div>
   );
 };
-
-const TabButton = ({ isActive, tab, children }: { isActive: boolean; tab: EspaceProjetTabsId } & PropsWithChildren) => (
-  <LinkWithoutPrefetch
-    href={PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB(tab)}
-    className={clsx(
-      `${isActive ? "z-20 font-bold" : "font-normal"}`,
-      "flex h-16 w-60 items-center justify-center !bg-none px-4",
-    )}
-  >
-    {children}
-  </LinkWithoutPrefetch>
-);
-
-const TabContent = ({ content, isActive }: { content: ReactNode; isActive: boolean }) => (
-  <div className={clsx(isActive ? "block" : "hidden", "!p-0")}>{content}</div>
-);

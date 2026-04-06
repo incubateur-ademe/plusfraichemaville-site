@@ -13,11 +13,11 @@ export const ClimadiagIndicateursTabButton = ({ active, year, changeTab }: Clima
   return (
     <button
       className={clsx(
-        "relative mr-3 rounded-3xl px-4 py-1 text-xl",
+        "relative mb-3 mr-3 rounded-3xl px-4 py-1 text-xl",
         active
           ? "pointer-events-none bg-dsfr-text-label-blue-france pr-16 font-bold text-white"
           : "bg-dsfr-background-action-low-blue-france-hover",
-        "hover:!bg-dsfr-background-action-low-blue-france-active",
+        "md:hover:!bg-dsfr-background-action-low-blue-france-active",
       )}
       role="radio"
       aria-checked={active}
