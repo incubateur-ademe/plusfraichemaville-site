@@ -200,25 +200,21 @@ export const createOrUpdateProjet = async ({
   nomProjet,
   adresse,
   adresse_all_infos,
-  dateEcheance,
   typeEspace,
   niveauMaturite,
   userId,
   collectiviteId,
   isPublic,
-  budget,
 }: {
   projetId?: number;
   nomProjet: string;
   typeEspace: string;
   adresse?: string;
   adresse_all_infos?: GeoJsonProperties;
-  dateEcheance: string;
   niveauMaturite: string;
   userId: string;
   collectiviteId: number;
   isPublic: boolean;
-  budget?: number;
 }) => {
   return prismaClient.projet.upsert({
     where: {
@@ -230,11 +226,9 @@ export const createOrUpdateProjet = async ({
       created_by: userId,
       nom: nomProjet,
       type_espace: typeEspace,
-      budget: budget,
       adresse,
       adresse_all_infos: adresse_all_infos as unknown as Prisma.JsonObject,
       niveau_maturite: niveauMaturite,
-      date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
       is_public: isPublic,
       users: {
@@ -251,11 +245,9 @@ export const createOrUpdateProjet = async ({
     update: {
       nom: nomProjet,
       type_espace: typeEspace,
-      budget: budget,
       adresse: adresse ?? null,
       adresse_all_infos: (adresse_all_infos as unknown as Prisma.JsonObject) ?? null,
       niveau_maturite: niveauMaturite,
-      date_echeance: new Date(dateEcheance),
       collectiviteId: collectiviteId,
       is_public: isPublic,
     },

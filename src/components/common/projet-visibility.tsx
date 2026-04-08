@@ -42,9 +42,8 @@ export const ProjetVisibility = ({
   const Toggle = !isLoading ? (
     <ToggleSwitch
       labelPosition="left"
-      classes={{ label: `${reduced ? "!text-lg" : "!text-xl"} font-bold` }}
-      label="Souhaitez-vous rendre votre projet visible par les autres membres
-         de la communauté Plus fraîche ma ville ?"
+      classes={{ label: `font-bold` }}
+      label="Souhaitez-vous rendre votre projet visible aux autres membres de la communauté Plus fraîche ma ville ?"
       inputTitle=""
       showCheckedHint={false}
       checked={isPublic ?? undefined}
@@ -59,7 +58,7 @@ export const ProjetVisibility = ({
 
   if (reduced) {
     return (
-      <div className="rounded-[20px] bg-dsfr-background-default-grey-hover p-4">
+      <div className="rounded-lg bg-dsfr-background-default-grey-hover p-4">
         {Badge}
         {Toggle}
       </div>
@@ -70,17 +69,17 @@ export const ProjetVisibility = ({
     <div className="mb-14 mt-16 rounded-[20px] bg-dsfr-background-default-grey-hover p-8">
       {Badge}
       <div className="flex justify-between">
-        <div className="flex  flex-col gap-4 [&>p]:mb-0">
+        <div className="flex flex-col gap-4 text-sm [&>p]:mb-0">
           {Toggle}
           <p>
-            Rendez votre projet visible dans {`l'annuaire`} des projets pour partager son objet, sa localisation et son
-            état {`d'avancement`} aux autres membres de la communauté. Grâce à cette fonctionnalité, découvrez les
-            initiatives voisines, échangez avec {`d'autres`} porteurs de projet, et obtenez des contacts de
-            prestataires.
+            Grâce à la Carte des projets disponible sur votre espace projet, découvez les initiatives voisines en
+            matière de rafraîchissement urbain, échangez avec d'autres proteurs de projets et obtenez des contacts de
+            prestataires. Pour faciliter les échanges entre pairs, nous vous invitons à rendre votre projet visible par
+            les autres membres de la communauté Plus fraîche ma ville.
           </p>
           <p>
-            En tant {`qu'administrateur d'un`} projet, vos prénom, nom et adresse mail seront partagés avec les
-            utilisateurs connectés.
+            En tant {`qu'administrateur d'un`} projet, vos prénom, nom et adresse mail seront partagés uniquement avec
+            les collectivités utilsatrices du service.
           </p>
         </div>
       </div>

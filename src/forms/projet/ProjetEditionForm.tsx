@@ -1,32 +1,27 @@
 "use client";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useEffect } from "react";
-import Button from "@codegouvfr/react-dsfr/Button";
-import InputFormField from "@/src/components/common/InputFormField";
-import { useRouter, useSearchParams } from "next/navigation";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
-import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
-import SelectFormField from "@/src/components/common/SelectFormField";
-import { monthDateToString } from "@/src/helpers/dateUtils";
-import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
-import CommuneInputFormField from "@/src/components/common/CommuneInputFormField";
 import { upsertProjetAction } from "@/src/actions/projets/upsert-projet-action";
-import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
-import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
+import AddressInputFormField from "@/src/components/common/address-input-form-field";
+import CommuneInputFormField from "@/src/components/common/CommuneInputFormField";
+import InputFormField from "@/src/components/common/InputFormField";
+import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 import { notifications } from "@/src/components/common/notifications";
-import { useProjetsStore } from "@/src/stores/projets/provider";
-import { useShallow } from "zustand/react/shallow";
+import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
+import SelectFormField from "@/src/components/common/SelectFormField";
+import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
+import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
+import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 import { mapDBCollectiviteToCollectiviteAddress, mapDBProjetToProjetAddress } from "@/src/lib/adresseApi/banApiHelper";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
-import AddressInputFormField from "@/src/components/common/address-input-form-field";
-import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
-import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
-import CurrencyInputFormField from "@/src/components/common/currency-input-form-field";
-import MonthPickerFormField from "@/src/components/common/MonthPickerFormField";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import "react-datepicker/dist/react-datepicker.css";
-import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
-import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useShallow } from "zustand/react/shallow";
 
 type ProjetInfoFormProps = {
   projet?: ProjetWithRelations;
@@ -35,10 +30,6 @@ type ProjetInfoFormProps = {
 export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
   const router = useRouter();
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
-  const searchParams = useSearchParams();
-  const action = searchParams.get("action");
-  const actionParam = searchParams.get("actionParam");
-  const callbackUrl = searchParams.get("callbackUrl");
 
   const form = useForm<ProjetInfoFormData>({
     resolver: zodResolver(ProjetInfoFormSchema),
@@ -58,10 +49,8 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
       projetId: projet?.id,
       nom: projet?.nom ?? "",
       typeEspace: projet?.type_espace ?? "",
-      budget: projet?.budget ?? undefined,
       niveauMaturite: projet?.niveau_maturite ?? "",
       adresse: mapDBProjetToProjetAddress(projet),
-      dateEcheance: monthDateToString(projet?.date_echeance),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
       isPublic: projet?.is_public ?? true,
     });
@@ -75,27 +64,8 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
       form.reset(data);
 
       if (result.updatedProjet) {
-        let finalProjet = result.updatedProjet;
-
-        if (action === "addFicheSolution" && actionParam) {
-          const update = await updateFichesProjetAction({
-            projetId: finalProjet.id,
-            ficheId: +actionParam,
-            typeFiche: TypeFiche.solution,
-            typeUpdate: TypeUpdate.add,
-          });
-          if (update.type === "success" && update.projet) {
-            finalProjet = update.projet;
-          }
-        }
-
-        addOrUpdateProjet(finalProjet);
-
-        if (callbackUrl) {
-          router.push(`/espace-projet/${finalProjet.id}${callbackUrl}`);
-        } else {
-          router.push(PFMV_ROUTES.TABLEAU_DE_BORD(finalProjet.id));
-        }
+        addOrUpdateProjet(result.updatedProjet);
+        router.push(PFMV_ROUTES.TABLEAU_DE_BORD(result.updatedProjet.id));
       } else {
         router.push(PFMV_ROUTES.ESPACE_PROJET);
       }
@@ -130,23 +100,10 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
           placeholder="Selectionnez un type d'espace"
           disabled={disabled}
         />
-        <CurrencyInputFormField
-          control={form.control}
-          path="budget"
-          label="Budget prévisionnel (en euros)"
-          disabled={disabled}
-        />
         <AddressInputFormField
           control={form.control}
           path="adresse"
           label="Si je la connais, adresse du lieu de l'intervention"
-          disabled={disabled}
-        />
-        <MonthPickerFormField
-          control={form.control}
-          path="dateEcheance"
-          label="Date de livraison souhaitée"
-          asterisk={true}
           disabled={disabled}
         />
         <SelectFormField
