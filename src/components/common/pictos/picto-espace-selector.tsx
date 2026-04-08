@@ -35,7 +35,7 @@ export const PictoEspaceSelector = ({
     <div
       className={clsx(
         `relative flex items-center justify-center`,
-        size === "small" ? "size-[3.125rem]" : size === "large" ? "size-[136px]" : "size-20",
+        size === "small" ? "size-20" : size === "large" ? "size-32" : "size-20",
         className,
       )}
     >
@@ -47,7 +47,7 @@ export const PictoEspaceSelector = ({
           fill
           alt={`pictogramme ${pictoId}`}
           src={`/images/espaces/${selectedPicto}`}
-          className={clsx("p-[5px]", pictoClassName)}
+          className={clsx("p-1", pictoClassName)}
         />
       </div>
     </div>

@@ -5,22 +5,22 @@ import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-pr
 export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) => {
   return (
     <>
-      <div className="flex justify-between pb-4">
-        <div className="">
+      <div className="flex flex-col justify-between pb-4 md:flex-row">
+        <hgroup>
           <h1 className="mb-1 text-2xl text-dsfr-text-label-blue-france">Mon espace projet</h1>
-          <span className="mb-8 block text-lg">Les projets de rafraîchissement de ma collectivité</span>
-        </div>
-        {!isListEmpty && (
-          <div className="align-items-center flex flex-wrap-reverse items-center gap-4">
-            <AvailableProjetsForCollectiviteButton className="rounded-3xl" />
+          <p className="mb-8 block text-lg">Les projets de rafraîchissement de ma collectivité</p>
+        </hgroup>
+        <div className="align-items-center flex flex-wrap-reverse items-center gap-4">
+          <AvailableProjetsForCollectiviteButton className="rounded-3xl" />
+          {!isListEmpty && (
             <LinkWithoutPrefetch
               href={PFMV_ROUTES.CREATE_PROJET}
               className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl"
             >
               Créer un projet
             </LinkWithoutPrefetch>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </>
   );

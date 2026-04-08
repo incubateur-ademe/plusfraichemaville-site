@@ -36,7 +36,6 @@ export default function BannerProjet({ className }: { className?: string }) {
                   pictoId={currentProjet.type_espace as PictoId}
                   withBackground
                   size="small"
-                  className="!size-20"
                   pictoClassName="svg-blue"
                 />
               </div>

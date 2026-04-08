@@ -23,11 +23,11 @@ import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibi
 import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
 import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
-import { AvailableProjetsForCollectiviteButton } from "@/src/components/liste-projets/available-projets-for-collectivite-button";
 import Tree from "@codegouvfr/react-dsfr/picto/Tree";
 import MapPin from "@codegouvfr/react-dsfr/picto/MapPin";
 import SelfTraining from "@codegouvfr/react-dsfr/picto/SelfTraining";
 import clsx from "clsx";
+import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 
 const steps = [
   {
@@ -55,13 +55,7 @@ export const ProjetCreationForm = () => {
   const action = searchParams.get("action");
   const actionParam = searchParams.get("actionParam");
   const callbackUrl = searchParams.get("callbackUrl");
-
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
-  const projets = useProjetsStore(useShallow((state) => state.projets));
-  const pendingProjets = useProjetsStore(useShallow((state) => state.pendingProjets));
-
-  const showJoinProjectButton = currentStep === 1 && projets.length === 0 && pendingProjets.length === 0;
-
   const form = useForm<ProjetInfoFormData>({
     resolver: zodResolver(ProjetInfoFormSchema),
     defaultValues: {
@@ -73,7 +67,9 @@ export const ProjetCreationForm = () => {
     mode: "onTouched",
   });
 
-  const { isSubmitting } = form.formState;
+  const { isDirty, isSubmitting } = form.formState;
+
+  useUnsavedChanges(isDirty && !isSubmitting);
 
   const handleNextStep = async () => {
     let fieldsToValidate: (keyof ProjetInfoFormData)[] = [];
@@ -254,21 +250,15 @@ export const ProjetCreationForm = () => {
         )}
 
         <div className="mt-12 flex items-center justify-between">
-          {showJoinProjectButton ? (
-            <AvailableProjetsForCollectiviteButton className="rounded-3xl">
-              Rejoindre un projet de ma collectivité
-            </AvailableProjetsForCollectiviteButton>
-          ) : (
-            <Button
-              priority="secondary"
-              type="button"
-              onClick={handlePreviousStep}
-              disabled={isSubmitting}
-              className="rounded-3xl"
-            >
-              Précédent
-            </Button>
-          )}
+          <Button
+            priority="secondary"
+            type="button"
+            onClick={handlePreviousStep}
+            disabled={isSubmitting}
+            className={clsx(currentStep === 1 && "invisible", "rounded-3xl")}
+          >
+            Précédent
+          </Button>
           <Button
             type="button"
             onClick={handleNextStep}
