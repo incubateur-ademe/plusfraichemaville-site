@@ -1,15 +1,15 @@
 "use client";
 
-import { ListeProjetsHeader } from "./header";
-import { useProjetsStore } from "@/src/stores/projets/provider";
-import { groupAndOrderProjetsByCollectivite, sortProjectsByInvitationStatus } from "./helpers";
-import Image from "next/image";
-import { useUserStore } from "@/src/stores/user/provider";
-import { ListeProjetTab } from "./liste";
-import { useSearchParams, useRouter } from "next/navigation";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { InvitationStatus } from "@/src/generated/prisma/client";
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { useUserStore } from "@/src/stores/user/provider";
 import Tabs from "@codegouvfr/react-dsfr/Tabs";
+import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { ListeProjetsHeader } from "./header";
+import { groupAndOrderProjetsByCollectivite, sortProjectsByInvitationStatus } from "./helpers";
+import { ListeProjetTab } from "./liste";
 
 export type EspaceProjetTabsId = "projet" | "invitation" | "demande";
 
@@ -22,10 +22,9 @@ export const ListProjets = () => {
   const activeProjets = groupAndOrderProjetsByCollectivite(projets);
   const invitedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsInvited);
   const requestedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsRequested);
-
+ 
   const searchParams = useSearchParams();
-  const router = useRouter();
-
+ 
   const tabs = [
     {
       count: projets.length,
@@ -46,7 +45,7 @@ export const ListProjets = () => {
       id: "demande" as const,
     },
   ];
-  const currentTab = searchParams.get("tab") || tabs[0].id;
+  const [currentTab, setCurrentTab] = useState(searchParams.get("tab") || tabs[0].id);
 
   return (
     <div className="relative bg-dsfr-background-alt-blue-france">
@@ -62,9 +61,7 @@ export const ListProjets = () => {
         <div className="mt-10">
           <Tabs
             selectedTabId={currentTab}
-            onTabChange={(tabId) =>
-              router.push(PFMV_ROUTES.ESPACE_PROJET_WITH_CURRENT_TAB(tabId as EspaceProjetTabsId), { scroll: false })
-            }
+            onTabChange={setCurrentTab}
             tabs={tabs.map((tab) => ({
               tabId: tab.id,
               label: (

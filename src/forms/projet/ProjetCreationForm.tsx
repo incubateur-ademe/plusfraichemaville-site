@@ -27,6 +27,7 @@ import Tree from "@codegouvfr/react-dsfr/picto/Tree";
 import MapPin from "@codegouvfr/react-dsfr/picto/MapPin";
 import SelfTraining from "@codegouvfr/react-dsfr/picto/SelfTraining";
 import clsx from "clsx";
+import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 
 const steps = [
   {
@@ -54,7 +55,6 @@ export const ProjetCreationForm = () => {
   const action = searchParams.get("action");
   const actionParam = searchParams.get("actionParam");
   const callbackUrl = searchParams.get("callbackUrl");
-
   const addOrUpdateProjet = useProjetsStore(useShallow((state) => state.addOrUpdateProjet));
   const form = useForm<ProjetInfoFormData>({
     resolver: zodResolver(ProjetInfoFormSchema),
@@ -67,7 +67,9 @@ export const ProjetCreationForm = () => {
     mode: "onTouched",
   });
 
-  const { isSubmitting } = form.formState;
+  const { isDirty, isSubmitting } = form.formState;
+
+  useUnsavedChanges(isDirty && !isSubmitting);
 
   const handleNextStep = async () => {
     let fieldsToValidate: (keyof ProjetInfoFormData)[] = [];
