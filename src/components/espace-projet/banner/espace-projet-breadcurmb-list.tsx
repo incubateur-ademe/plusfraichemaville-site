@@ -30,6 +30,11 @@ export const BREADCRUMB_TABLEAU_DE_BORD = (projetName: string): EspaceProjetBrea
   breadcrumbSegments: (_projetId: number, _projetName: string) => [BREADCRUMB_SEGMENT_MES_PROJETS],
 });
 
+export const BREADCRUMB_CREATE_PROJET: EspaceProjetBreadcrumbStep = {
+  currentPageLabel: "Créer un nouveau projet",
+  breadcrumbSegments: (_projetId: number, _projetName: string) => [BREADCRUMB_SEGMENT_MES_PROJETS],
+};
+
 export const BREADCRUMB_EDIT_PROJET: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Renseignements sur mon projet",
   breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
