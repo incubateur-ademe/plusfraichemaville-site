@@ -5,7 +5,7 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useUserStore } from "@/src/stores/user/provider";
 import Tabs from "@codegouvfr/react-dsfr/Tabs";
 import Image from "next/image";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { ListeProjetsHeader } from "./header";
 import { groupAndOrderProjetsByCollectivite, sortProjectsByInvitationStatus } from "./helpers";
@@ -22,9 +22,9 @@ export const ListProjets = () => {
   const activeProjets = groupAndOrderProjetsByCollectivite(projets);
   const invitedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsInvited);
   const requestedProjets = groupAndOrderProjetsByCollectivite(projetsByStatus.projectsRequested);
- 
+
   const searchParams = useSearchParams();
- 
+
   const tabs = [
     {
       count: projets.length,

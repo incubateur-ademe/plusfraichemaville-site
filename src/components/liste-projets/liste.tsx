@@ -18,7 +18,7 @@ export const ListeProjetTab = ({
         <Conditional>
           <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
             <div className="max-w-4xl">
-            <ProjetCreationForm />
+              <ProjetCreationForm />
             </div>
           </Case>
           <Case condition={invitationStatus === InvitationStatus.INVITED}>
