@@ -3,13 +3,7 @@ import { useModalStore } from "@/src/stores/modal/provider";
 import { useUserStore } from "@/src/stores/user/provider";
 import { SirenInfo } from "@/src/lib/siren/types";
 
-export const AvailableProjetsForCollectiviteButton = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children?: React.ReactNode;
-}) => {
+export const AvailableProjetsForCollectiviteButton = ({ className }: { className?: string }) => {
   const setShowAvailableProjetForUser = useModalStore((state) => state.setShowAvailableProjetForUser);
   const userSirenInfo = useUserStore((state) => state.userInfos?.siren_info as SirenInfo | null);
 
@@ -23,7 +17,7 @@ export const AvailableProjetsForCollectiviteButton = ({
           onClick={() => setShowAvailableProjetForUser(true)}
           className={className}
         >
-          {children || "Rejoindre d'autres projets de ma collectivité"}
+          Rejoindre d'autres projets de ma collectivité
         </Button>
       )}
     </>
