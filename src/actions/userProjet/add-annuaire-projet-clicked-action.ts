@@ -23,7 +23,7 @@ export const addAnnuaireProjetClickedAction = async (
       return { type: "error", message: "UNAUTHENTICATED" };
     }
 
-    if (!new PermissionManager(session).canUpdateUser(userId)) {
+    if (isNaN(+clickedProjetId) || !new PermissionManager(session).canUpdateUser(userId)) {
       return { type: "error", message: "UNAUTHORIZED" };
     }
 
