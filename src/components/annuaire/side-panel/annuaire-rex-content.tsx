@@ -29,7 +29,7 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
           "min-h-52 px-5 pb-4 pt-2",
         )}
       >
-        <AnnuaireSidePanelTracking type="rex" name={retourExperienceAttributes.titre} />
+        <AnnuaireSidePanelTracking type="rex" name={retourExperienceAttributes.titre} clickedProjetId={data.id} />
         <div className="flex items-center justify-between">
           <Badge small noIcon className="!mb-0 !bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
             Projet réalisé
