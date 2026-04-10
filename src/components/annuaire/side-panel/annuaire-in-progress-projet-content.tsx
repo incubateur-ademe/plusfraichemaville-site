@@ -27,7 +27,7 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
             "min-h-[11.5rem] px-5 pb-4 pt-2",
         )}
       >
-        <AnnuaireSidePanelTracking type="in-progress" name={data.nom} />
+        <AnnuaireSidePanelTracking type="in-progress" name={data.nom} clickedProjetId={data.id} />
         <div className="flex items-center justify-between">
           <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
             Projet en cours

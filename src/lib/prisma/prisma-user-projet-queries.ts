@@ -375,6 +375,40 @@ export const addAideMoreInfoClickedToUserProjet = async (
   });
 };
 
+export const addAnnuaireRexProjetClickedToUserProjet = async (
+  userId: string,
+  projetId: number,
+  rexId: number,
+): Promise<UserProjetWithUser> => {
+  return prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: { user_id: userId, projet_id: projetId },
+      deleted_at: null,
+    },
+    data: {
+      annuaire_rex_projet_clicked: { push: rexId },
+    },
+    include: { user: true },
+  });
+};
+
+export const addAnnuaireInProgressProjetClickedToUserProjet = async (
+  userId: string,
+  projetId: number,
+  clickedProjetId: number,
+): Promise<UserProjetWithUser> => {
+  return prismaClient.user_projet.update({
+    where: {
+      user_id_projet_id: { user_id: userId, projet_id: projetId },
+      deleted_at: null,
+    },
+    data: {
+      annuaire_in_progess_clicked: { push: clickedProjetId },
+    },
+    include: { user: true },
+  });
+};
+
 export const updateUserProjetAidesFsUnselected = async (
   userId: string,
   projectId: number,
