@@ -17,7 +17,7 @@ export const AvailableProjetsForCollectiviteButton = ({ className }: { className
           onClick={() => setShowAvailableProjetForUser(true)}
           className={className}
         >
-          Rejoindre d'autres projets de ma collectivité
+          Rejoindre des projets de ma collectivité
         </Button>
       )}
     </>

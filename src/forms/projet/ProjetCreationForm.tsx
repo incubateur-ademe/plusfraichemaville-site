@@ -153,9 +153,7 @@ export const ProjetCreationForm = () => {
           <div className="mb-20 flex flex-col gap-8 md:flex-col">
             <p>
               Créez votre simulation de projet pour trouver les solutions de rafraîchissement urbain les plus adaptées à
-              votre espace grâce à Plus Fraîche Ma Ville.
-              <br />
-              Ou rejoignez un projet déjà existant.
+              votre espace grâce à Plus fraîche ma ville.
             </p>
             <div className="flex flex-row gap-4">
               <div className="">
@@ -197,7 +195,7 @@ export const ProjetCreationForm = () => {
                 <AddressInputFormField
                   control={form.control}
                   path="adresse"
-                  label="Quelle est l'adresse exacte du lieu ? (Optionnelle)"
+                  label="Quelle est l'adresse exacte du lieu ?"
                   disabled={isSubmitting}
                 />
               </div>
