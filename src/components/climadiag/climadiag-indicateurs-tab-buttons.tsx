@@ -4,8 +4,8 @@ import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
 export const ClimadiagIndicateursTabButtons = ({ children }: PropsWithChildren) => {
   return (
-    <div className="mb-5 flex items-center justify-between">
-      <div>
+    <div className="mb-5 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+      <div className="">
         {children}
         <span className="text-base text-pfmv-grey">
           horizons (TRACC, 2024)<sup>*</sup>

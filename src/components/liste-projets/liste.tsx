@@ -1,9 +1,9 @@
 import { InvitationStatus } from "@/src/generated/prisma/client";
 import { ProjetsByCollectivite } from "./helpers";
 
-import { ListProjetsHeaderEmpty } from "./empty";
 import { Case, Conditional } from "../common/conditional-renderer";
 import { ProjetCard } from "@/src/components/liste-projets/projet-card";
+import { ProjetCreationForm } from "@/src/forms/projet/ProjetCreationForm";
 
 export const ListeProjetTab = ({
   projets,
@@ -17,7 +17,9 @@ export const ListeProjetTab = ({
       <div className="w-full">
         <Conditional>
           <Case condition={invitationStatus === InvitationStatus.ACCEPTED}>
-            <ListProjetsHeaderEmpty />
+            <div className="max-w-4xl">
+              <ProjetCreationForm />
+            </div>
           </Case>
           <Case condition={invitationStatus === InvitationStatus.INVITED}>
             {"Vous n'avez aucune invitation en attente."}

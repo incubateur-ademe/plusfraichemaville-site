@@ -1,9 +1,9 @@
-import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { Metadata } from "next";
 import ListProjetsPageClient from "./ListProjetsPageClient";
 
 export const metadata: Metadata = computeMetadata("Mes projets");
 
-export default function ListProjetsPage() {
+export default async function ListProjetsPage() {
   return <ListProjetsPageClient />;
 }

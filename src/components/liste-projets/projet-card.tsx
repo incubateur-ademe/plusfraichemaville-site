@@ -71,16 +71,16 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
         invitationStatus === InvitationStatus.ACCEPTED ? "pfmv-card fr-enlarge-link" : "pfmv-card-no-hover",
       )}
     >
-      <div className="flex w-full gap-6">
+      <div className="flex flex-col gap-6 md:flex-row">
         <PictoEspaceSelector
-          className={clsx("shrink-0", !isMemberOfProjet && "opacity-25")}
+          className={clsx("hidden shrink-0 md:block", !isMemberOfProjet && "opacity-25")}
           pictoId={updatedProjet.type_espace as PictoId}
           withBackground
           size="large"
           pictoClassName="svg-blue"
         />
         <div className="flex w-full flex-col">
-          <div className="flex justify-between gap-6">
+          <div className="flex flex-col justify-between gap-6 md:flex-row">
             <div className={clsx(!isMemberOfProjet && "opacity-25")}>
               <h3 className="mb-0 text-[22px] text-dsfr-text-label-blue-france">{updatedProjet.nom}</h3>
               <div className="mb-4 text-lg font-bold text-dsfr-text-label-blue-france">
@@ -131,7 +131,7 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
                     invitationStatus === InvitationStatus.REQUESTED) && (
                     <span
                       className={clsx(
-                        "ml-auto block w-fit",
+                        "ml-0 block w-fit md:ml-auto",
                         (invitationStatus === InvitationStatus.REQUESTED ||
                           invitationStatus === InvitationStatus.INVITED) &&
                           "opacity-25",
@@ -163,7 +163,7 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
           <div className="mt-auto">
             {invitationStatus === InvitationStatus.ACCEPTED && (
               <div className="flex w-full flex-row justify-between gap-4">
-                <div className="flex items-center justify-end gap-2">
+                <div className="hidden items-center justify-end gap-2 md:flex">
                   <label htmlFor="maturite-select" className="mt-1 text-sm font-bold text-pfmv-navy">
                     Maturité du projet :{" "}
                   </label>

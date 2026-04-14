@@ -15,12 +15,26 @@ export const useUnsavedChanges = (isDirty: boolean) => {
       if (isDirty) {
         const target = e.target as HTMLElement;
         const anchor = target.closest("a");
+        const button = target.closest("button");
         if (anchor) {
           // Check if link opens in new tab
-          if (anchor.target === "_blank") {
+          if (anchor?.target === "_blank") {
             return;
           }
 
+          if (
+            !window.confirm(
+              "Attention, certains champs n'ont pas été enregistrés, êtes-vous sûr de vouloir quitter la page ?",
+            )
+          ) {
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        } else if (
+          button &&
+          button.getAttribute("role") === "tab" &&
+          button.getAttribute("aria-selected") === "false"
+        ) {
           if (
             !window.confirm(
               "Attention, certains champs n'ont pas été enregistrés, êtes-vous sûr de vouloir quitter la page ?",

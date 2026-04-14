@@ -195,7 +195,9 @@ exports.Prisma.User_projetScalarFieldEnum = {
   aides_already_seen: 'aides_already_seen',
   aides_fs_unselected: 'aides_fs_unselected',
   fiches_diagnostic_seen: 'fiches_diagnostic_seen',
-  aides_more_info_clicked: 'aides_more_info_clicked'
+  aides_more_info_clicked: 'aides_more_info_clicked',
+  annuaire_rex_projet_clicked: 'annuaire_rex_projet_clicked',
+  annuaire_in_progess_clicked: 'annuaire_in_progess_clicked'
 };
 
 exports.Prisma.EmailScalarFieldEnum = {

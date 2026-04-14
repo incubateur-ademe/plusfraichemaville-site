@@ -41,7 +41,7 @@ export const AvailableProjetsForUserModal = () => {
 
   return (
     <>
-      <modal.Component title="Rejoindre d'autres projets" size="large" className="join-project-modal">
+      <modal.Component title="Rejoindre des projets de ma collectivité" size="large" className="join-project-modal">
         <span className="mb-8 block text-base">
           {`Vous pouvez consulter tous les projets de rafraîchissement créés par la collectivité ${userCollectiviteName}
           et soumettre une demande d'accès. L'administrateur sera alors notifié de votre demande.`}

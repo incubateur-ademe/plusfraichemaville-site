@@ -11,12 +11,13 @@ export const AvailableProjetsForCollectiviteButton = ({ className }: { className
     <>
       {!userSirenInfo?.siren ? null : (
         <Button
+          type="button"
           iconId="ri-add-circle-fill"
           priority="secondary"
           onClick={() => setShowAvailableProjetForUser(true)}
           className={className}
         >
-          {"Rejoindre d'autres projets de ma collectivité"}
+          Rejoindre des projets de ma collectivité
         </Button>
       )}
     </>
