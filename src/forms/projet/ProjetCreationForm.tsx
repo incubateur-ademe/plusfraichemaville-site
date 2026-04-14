@@ -48,7 +48,7 @@ const steps = [
   },
 ];
 
-export const ProjetCreationForm = () => {
+export const ProjetCreationForm = ({ showCancelButton = false }: { showCancelButton?: boolean }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -253,9 +253,9 @@ export const ProjetCreationForm = () => {
             type="button"
             onClick={handlePreviousStep}
             disabled={isSubmitting}
-            className={clsx(currentStep === 1 && "invisible", "rounded-3xl")}
+            className={clsx(currentStep === 1 && !showCancelButton && "invisible", "rounded-3xl")}
           >
-            Précédent
+            {showCancelButton ? "Annuler" : "Précédent"}
           </Button>
           <Button
             type="button"

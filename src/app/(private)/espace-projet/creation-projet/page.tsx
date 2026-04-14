@@ -10,7 +10,7 @@ export default async function CreateProjetPage() {
     <div className="fr-container">
       <CreateProjetBreadcrumb />
       <div className="mx-auto w-full max-w-4xl pb-12 pt-8">
-        <ProjetCreationForm />
+        <ProjetCreationForm showCancelButton />
       </div>
     </div>
   );
