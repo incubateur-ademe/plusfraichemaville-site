@@ -1,91 +1,8 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import clsx from "clsx";
 
 export const homepageData = {
-  hero: {
-    title: () => (
-      <>
-        Plus <strong>fraîche</strong> ma ville
-      </>
-    ),
-    baseline: "Le service numérique dédié aux élus et aux agents qui rafraîchissent durablement leur collectivité.",
-    cta1: {
-      label: "Trouver une  solution",
-      url: PFMV_ROUTES.FICHES_SOLUTIONS,
-    },
-    cta2: {
-      label: "Créer un projet",
-      url: PFMV_ROUTES.CREATE_PROJET,
-    },
-  },
-  projet: {
-    title: ["Vous avez un projet de rafraîchissement ?", "N'attendez pas la prochaine vague."],
-    subtitle: [
-      "Grâce à l'espace projet, réalisez des simulations budgétaires",
-      "et accédez à des recommandations techniques détaillées.",
-    ],
-    cta: {
-      label: "Je crée un projet",
-      url: PFMV_ROUTES.CREATE_PROJET,
-    },
-    image: "/images/homepage/home-hero.jpg",
-  },
-  stories: {
-    title: "Vous aider à trouver les bonnes solutions pour rafraîchir durablement votre collectivité",
-    cards: [
-      {
-        title: "Stockage eau de pluie",
-        alt: "",
-        code: "bleue",
-        slug: "stockage-eau-de-pluie",
-        image: "/images/homepage/solutions/stockage-eau-de-pluie.jpeg",
-      },
-      {
-        title: "Arbres et végétaux dans la cour d'école",
-        alt: "",
-        code: "verte",
-        slug: "arbres-vegetaux-cour-ecole",
-        image: "/images/homepage/solutions/arbres-vegetaux-cour-ecole.jpg",
-      },
-      {
-        title: "Adaptation des batiments - école",
-        alt: "",
-        code: "grise",
-        slug: "batiment-ecole-adaptation-renovation-batiments",
-        image: "/images/homepage/solutions/batiment-ecole-adaptation-renovation-batiments.jpg",
-      },
-      {
-        title: "Comportements collectifs face à la chaleur",
-        alt: "",
-        code: "douce",
-        slug: "comportements-collectifs",
-        image: "/images/homepage/solutions/comportements-collectifs.jpg",
-      },
-      {
-        title: "Façade végétalisée",
-        alt: "",
-        code: "verte",
-        slug: "facade-vegetalisee",
-        image: "/images/homepage/solutions/facade-vegetalisee.jpg",
-      },
-      {
-        title: "Revêtement à albédo élevé",
-        alt: "",
-        code: "grise",
-        slug: "revetement-albedo-eleve",
-        image: "/images/homepage/solutions/revetement-albedo-eleve.jpeg",
-      },
-      {
-        title: "Stockage eau de pluie dans la cour d'école",
-        alt: "",
-        code: "bleue",
-        slug: "stockage-eau-pluie-ecole",
-        image: "/images/homepage/solutions/stockage-eau-pluie-ecole.jpeg",
-      },
-    ],
-  },
   start: {
-    title: "Par où commencer ?",
+    title: "Un peu tôt pour créer votre projet ?",
     lines: [
       {
         title: "Évaluez la surchauffe urbaine dans votre commune",
@@ -202,13 +119,3 @@ export const homepageData = {
     },
   },
 };
-
-export const multilines = (lines: string[], className?: string) => (
-  <span className={clsx(className, "block")}>
-    {lines.map((line, i) => (
-      <span className="block" key={i}>
-        {line}
-      </span>
-    ))}
-  </span>
-);

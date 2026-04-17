@@ -27,7 +27,7 @@ jobs:
         run: corepack enable
 
       - name: Prepare pnpm
-        run: corepack prepare pnpm@10.8.1 --activate
+        run: corepack prepare pnpm@10.32.1 --activate
 
       - uses: actions/setup-node@v6
         with:

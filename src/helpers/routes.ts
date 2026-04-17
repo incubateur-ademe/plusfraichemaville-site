@@ -42,15 +42,16 @@ export const PFMV_ROUTES = {
   RECHERCHE_GLOBALE: (query?: string) => `/recherche${query ? `?q=${query}` : ""}`,
   ESPACE_PROJET_FICHES_SOLUTION_LISTE_ALL: "/fiche-solution/liste",
   ESPACE_PROJET_ANNUAIRE_MAP_CONTACT: "/annuaire",
-  ESPACE_PROJET_ANNUAIRE_MAP: "/annuaire#annuaire-map",
   ESPACE_PROJET_REX_DIAGNOSTIC: (slug: string) => `/diagnostic/prestation/retour-experience/${slug}`,
   ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION: "/financement",
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord",
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord`,
   ESPACE_PROJET_STATUT_PROJET: (projetId: number) => `/espace-projet/${projetId}/statut-projet`,
   ESPACE_PROJET_UTILISATEURS_PROJET: (projetId: number) => `/espace-projet/${projetId}/utilisateurs-projet`,
+  ESPACE_PROJET_UTILISATEURS_PROJET_SUFFIX: "/utilisateurs-projet",
   ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiche-solution`,
+  ESPACE_PROJET_FICHES_SOLUTIONS_SUFFIX: "/fiche-solution",
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiche-solution/liste`,
   ESPACE_PROJET_FICHES_SOLUTIONS_RECOMMANDATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/fiche-solution/recommandations`,
@@ -69,11 +70,12 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/selection`,
   ESPACE_PROJET_FINANCEMENT: (projetId: number) => `/espace-projet/${projetId}/financement`,
+  ESPACE_PROJET_FINANCEMENT_SUFFIX: "/financement",
   ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES: (projetId: number) =>
     `/espace-projet/${projetId}/financement/selectionner-aides`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,
-  ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number, opener?: string) =>
-    `/espace-projet/${projetId}/estimation/liste${(opener && `?open=${opener}`) || ""}`,
+  ESPACE_PROJET_LISTE_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/liste`,
+  ESPACE_PROJET_LISTE_ESTIMATION_SUFFIX: "/estimation/liste",
   ESPACE_PROJET_ESTIMATION_AJOUTER_SOLUTIONS: (projetId: number, estimationId: number) =>
     `/espace-projet/${projetId}/estimation/${estimationId}/ajouter-solutions`,
   ESPACE_PROJET_FICHES_SOLUTIONS_REX: (projetId: number, projetRexSlug: string) =>
