@@ -10,7 +10,10 @@ export const PresentationServicesLink = ({ linkLabel, linkUrl }: { linkLabel: st
   return (
     <>
       {onlyOneProjet ? (
-        <LinkWithoutPrefetch href={computeFullEspaceProjetUrlFromSuffix(linkUrl, projets[0]?.id)} className="text-pfmv-navy">
+        <LinkWithoutPrefetch
+          href={computeFullEspaceProjetUrlFromSuffix(linkUrl, projets[0]?.id)}
+          className="text-pfmv-navy"
+        >
           {linkLabel}
         </LinkWithoutPrefetch>
       ) : (

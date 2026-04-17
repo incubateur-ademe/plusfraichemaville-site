@@ -9,7 +9,7 @@ export const Homepage = () => {
   return (
     <div>
       <HomepageHero />
-      <PresentationServices className="bg-dsfr-background-alt-blue-france pt-8 pb-11"/>
+      <PresentationServices className="bg-dsfr-background-alt-blue-france pb-11 pt-8" />
       <HomepageInspirer />
       <HomepageStart />
       <NewsletterLinkedin />

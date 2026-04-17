@@ -7,9 +7,7 @@ export const HomepageInspirer = () => {
   const { inspirer } = homepageData;
   return (
     <div className="mx-auto w-full max-w-[78rem] px-5 pb-20 pt-8">
-      <h2 className="mb-16 px-6 text-center text-lg font-bold text-pfmv-navy lg:text-3xl">
-        {inspirer.title}
-      </h2>
+      <h2 className="mb-16 px-6 text-center text-lg font-bold text-pfmv-navy lg:text-3xl">{inspirer.title}</h2>
 
       {inspirer.featuredRex && <HomepageInspirerCard rex={inspirer.featuredRex} featured />}
       <div className="flex flex-wrap items-center justify-center gap-8 lg:flex-row lg:flex-nowrap">

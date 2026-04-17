@@ -1,5 +1,4 @@
 import { PFMV_ROUTES } from "@/src/helpers/routes";
-import clsx from "clsx";
 
 export const homepageData = {
   start: {
@@ -120,4 +119,3 @@ export const homepageData = {
     },
   },
 };
-

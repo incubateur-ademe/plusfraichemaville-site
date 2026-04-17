@@ -54,15 +54,20 @@ export const PresentationServices = ({ className }: { className?: string }) => {
   ];
 
   return (
-    <div className={clsx("flex flex-col items-center w-full px-4", className)}>
+    <div className={clsx("flex w-full flex-col items-center px-4", className)}>
       <h2 className="mb-16 px-6 text-center text-lg font-bold text-pfmv-navy lg:text-3xl">
         Retrouvez des services adaptés à vos enjeux
       </h2>
-      <div className="flex flex-wrap items-start justify-center gap-x-12 gap-y-10 md:gap-y-16 max-w-[80rem] mx-auto mb-12">
+      <div
+        className={clsx(
+          "mx-auto mb-12 flex max-w-[80rem] flex-wrap",
+          "items-start justify-center gap-x-12 gap-y-10 md:gap-y-16",
+        )}
+      >
         {servicesBlocs.map((bloc, index) => (
           <div className="flex w-full max-w-lg justify-start gap-8" key={index}>
             <Image
-              className="h-full shrink-0 hidden md:flex"
+              className="hidden h-full shrink-0 md:flex"
               src={`/images/espace-projet/${bloc.picto}`}
               width={125}
               height={125}
@@ -70,8 +75,8 @@ export const PresentationServices = ({ className }: { className?: string }) => {
             />
             <hgroup className="">
               <h3 className="mb-3 text-xl font-bold leading-7">{bloc.title}</h3>
-              <p className="text-lg mb-1">{bloc.description}</p>
-              <PresentationServicesLink linkUrl={bloc.linkUrl} linkLabel={bloc.linkLabel}/>
+              <p className="mb-1 text-lg">{bloc.description}</p>
+              <PresentationServicesLink linkUrl={bloc.linkUrl} linkLabel={bloc.linkLabel} />
             </hgroup>
           </div>
         ))}

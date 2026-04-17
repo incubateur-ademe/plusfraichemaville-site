@@ -1,8 +1,6 @@
-import { homepageData } from "./homepage-data";
 import { HomepageHeroPictos } from "./homepage-hero-pictos";
 import clsx from "clsx";
 import { PictoPFMV } from "@/src/components/common/pictos/picto-pfmv";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { HomepageHeroCta } from "@/src/components/homepage/homepage-hero-cta";
 
 export const HomepageHero = () => {
@@ -38,7 +36,7 @@ export const HomepageHero = () => {
           </p>
         </hgroup>
         <div className="text-center">
-          <HomepageHeroCta/>
+          <HomepageHeroCta />
         </div>
       </div>
       <HomepageHeroPictos />

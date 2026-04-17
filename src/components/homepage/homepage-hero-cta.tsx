@@ -17,7 +17,7 @@ export const HomepageHeroCta = () => {
     <>
       <Conditional>
         <Case condition={status === "loading"}>
-          <div className="h-10 w-40 animate-pulse rounded-3xl bg-dsfr-background-alt-grey mx-auto" />
+          <div className="mx-auto h-10 w-40 animate-pulse rounded-3xl bg-dsfr-background-alt-grey" />
         </Case>
         <Case condition={status === "unauthenticated"}>
           <LinkWithoutPrefetch href={PFMV_ROUTES.CONNEXION} className="fr-btn rounded-3xl">
