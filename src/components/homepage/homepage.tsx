@@ -2,18 +2,16 @@ import { HomepageHero } from "./homepage-hero";
 import { HomepageStart } from "./homepage-start";
 import { HomepageOdd } from "@/src/components/homepage/homepage-odd";
 import { HomepageInspirer } from "@/src/components/homepage/homepage-inspirer";
-import { HomepageProjet } from "@/src/components/homepage/homepage-projet";
-import { HomepageStories } from "@/src/components/homepage/homepage-stories";
 import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
+import { PresentationServices } from "@/src/components/homepage/presentation-services";
 
 export const Homepage = () => {
   return (
     <div>
       <HomepageHero />
-      <HomepageProjet />
-      <HomepageStories />
-      <HomepageStart />
+      <PresentationServices className="bg-dsfr-background-alt-blue-france pt-8 pb-11"/>
       <HomepageInspirer />
+      <HomepageStart />
       <NewsletterLinkedin />
       <HomepageOdd />
     </div>

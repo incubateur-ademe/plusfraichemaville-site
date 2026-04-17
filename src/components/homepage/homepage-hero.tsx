@@ -3,9 +3,9 @@ import { HomepageHeroPictos } from "./homepage-hero-pictos";
 import clsx from "clsx";
 import { PictoPFMV } from "@/src/components/common/pictos/picto-pfmv";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { HomepageHeroCta } from "@/src/components/homepage/homepage-hero-cta";
 
 export const HomepageHero = () => {
-  const { hero } = homepageData;
   return (
     <div className="relative pb-16 pt-16">
       <div className="z-10 mx-auto w-fit">
@@ -22,20 +22,23 @@ export const HomepageHero = () => {
           </h1>
           <p
             className={clsx(
-              "mb-10 max-w-2xl px-10 text-center text-base font-bold text-pfmv-navy lg:px-0 lg:text-[26px]",
+              "max-w-[44rem] px-10 text-center text-base font-bold text-pfmv-navy lg:px-0 lg:text-2xl",
               "lg:leading-9",
             )}
           >
-            {hero.baseline}
+            Transformez votre envie d'agir contre la surchauffe urbaine en projets durables et défendables.
+          </p>
+          <p
+            className={clsx(
+              "mb-10 max-w-2xl px-10 text-center text-base font-bold text-pfmv-navy lg:px-0 lg:text-2xl",
+              "lg:leading-9",
+            )}
+          >
+            Plus de 500 projets déjà créés par des agents de collectivités territoriales.
           </p>
         </hgroup>
-        <div className="flex flex-col items-center justify-center gap-4 lg:flex-row">
-          <LinkWithoutPrefetch href={hero.cta1.url} className="fr-btn rounded-3xl">
-            {hero.cta1.label}
-          </LinkWithoutPrefetch>
-          <LinkWithoutPrefetch href={hero.cta2.url} className="fr-btn fr-btn--secondary rounded-3xl">
-            {hero.cta2.label}
-          </LinkWithoutPrefetch>
+        <div className="text-center">
+          <HomepageHeroCta/>
         </div>
       </div>
       <HomepageHeroPictos />

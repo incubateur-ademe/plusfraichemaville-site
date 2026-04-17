@@ -7,8 +7,8 @@ import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 export const HomepageStart = () => {
   const { start } = homepageData;
   return (
-    <div className="bg-dsfr-background-alt-blue-france pb-11">
-      <h2 className="mb-0 py-10 text-center text-lg font-bold text-pfmv-navy lg:pb-20 lg:pt-14 lg:text-[26px]">
+    <div className="bg-dsfr-background-alt-blue-france pt-8 pb-11 mb-12">
+      <h2 className="mb-16 px-6 text-center text-lg font-bold text-pfmv-navy lg:text-3xl">
         {start.title}
       </h2>
       <div className="mx-auto max-w-5xl">

@@ -6,8 +6,8 @@ import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 export const HomepageInspirer = () => {
   const { inspirer } = homepageData;
   return (
-    <div className="mx-auto w-full max-w-[78rem] px-5 pb-20">
-      <h2 className="my-10 px-10 text-center text-lg font-bold text-pfmv-navy lg:my-14 lg:px-0 lg:text-[26px]">
+    <div className="mx-auto w-full max-w-[78rem] px-5 pb-20 pt-8">
+      <h2 className="mb-16 px-6 text-center text-lg font-bold text-pfmv-navy lg:text-3xl">
         {inspirer.title}
       </h2>
 
