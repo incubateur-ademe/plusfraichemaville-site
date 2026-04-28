@@ -115,6 +115,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
             }
           }
         }
+        aides_territoires_mots_cles
         updatedAt
         publishedAt
       }

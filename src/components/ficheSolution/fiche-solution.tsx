@@ -127,7 +127,7 @@ export async function FicheSolution({
             </div>
             {ficheSolution.attributes.lien_aide_territoire && (
               <div id="financements-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
-                <FicheSolutionTabFinancements ficheAttributes={ficheSolution.attributes} />
+                <FicheSolutionTabFinancements ficheId={ficheSolution.id} ficheAttributes={ficheSolution.attributes} />
               </div>
             )}
             <div id="oups-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
