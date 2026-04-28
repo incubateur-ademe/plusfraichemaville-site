@@ -69,6 +69,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/diagnostic/prestation/selection`,
   ESPACE_PROJET_FINANCEMENT: (projetId: number) => `/espace-projet/${projetId}/financement`,
+  ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES_SUFFIX: "/financement/selectionner-aides",
   ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES: (projetId: number) =>
     `/espace-projet/${projetId}/financement/selectionner-aides`,
   ESPACE_PROJET_CREATION_ESTIMATION: (projetId: number) => `/espace-projet/${projetId}/estimation/creation`,

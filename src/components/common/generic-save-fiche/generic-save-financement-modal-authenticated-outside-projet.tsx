@@ -60,7 +60,7 @@ export const ModalSaveFinancementAuthenticatedOutsideProjet = ({
                 PFMV_ROUTES.CREATE_PROJET_WITH_PARAMS(
                   "addFicheSolution",
                   ficheId.toString(),
-                  PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_SUFFIX,
+                  PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES_SUFFIX,
                 ),
               );
             }}
