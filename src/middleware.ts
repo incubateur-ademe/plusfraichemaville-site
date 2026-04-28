@@ -1,7 +1,7 @@
 import { withAuth } from "next-auth/middleware";
 import { NextRequest, NextResponse } from "next/server";
 
-const privatePages = ["/espace-projet.*", "/info-perso.*"];
+const privatePages = ["/espace-projet.*", "/info-perso.*", "/statut-perso.*"];
 
 const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
 const cspHeader = `
