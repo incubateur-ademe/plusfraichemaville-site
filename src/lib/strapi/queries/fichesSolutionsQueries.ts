@@ -104,7 +104,6 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
           description
         }
         point_vigilance
-        lien_aide_territoire
         oups {
           id
           description
