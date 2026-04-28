@@ -104,7 +104,6 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
           description
         }
         point_vigilance
-        lien_aide_territoire
         oups {
           id
           description
@@ -115,6 +114,7 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
             }
           }
         }
+        aides_territoires_mots_cles
         updatedAt
         publishedAt
       }

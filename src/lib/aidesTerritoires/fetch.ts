@@ -40,6 +40,19 @@ export const searchAidesFromAidesTerritoires = async (
   );
 };
 
+export const getNbAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution["attributes"][]) => {
+  const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
+  console.log({ motsCles });
+  const result = await callAidesTerritoiresApi<IApiAidesTerritoiresPaginatedAides>(
+    `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?text=${
+      motsCles ? motsCles : ""
+    }&targeted_audiences=commune&targeted_audiences=epci&aid_type_ids=1`,
+    false,
+    +(process.env.CMS_CACHE_TTL || 0) || 1,
+  );
+  return result?.count || 0;
+};
+
 const getPerimterIdIdOrFetchItFromAidesTerritoires = async (collectivite: collectivite): Promise<string> => {
   if (collectivite.aides_territoires_perimeter_id) {
     return collectivite.aides_territoires_perimeter_id;
