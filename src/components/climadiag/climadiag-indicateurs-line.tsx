@@ -11,6 +11,7 @@ type ClimadiagIndicateursLineProps = {
   type: ClimadiagTypeJour;
   temperature: ClimadiagTemperatureJour;
   year: ClimadiagYear;
+  seuil?: number | null;
   titleHeadingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   isPDF?: boolean;
   classname?: string;
@@ -21,10 +22,11 @@ export const ClimadiagIndicateursLine = ({
   temperature,
   isPDF,
   year,
+  seuil,
   titleHeadingLevel = "h4",
   classname,
 }: ClimadiagIndicateursLineProps) => {
-  const { title, picto, indice, legend: climatLegend } = climadiagIndicateursData.line[type];
+  const { title, picto, legend: climatLegend } = climadiagIndicateursData.line[type];
   const [legend, setLegend] = useState(false);
   const toggler = () => setLegend(!legend);
   const TitleHeadingTag = titleHeadingLevel;
@@ -52,10 +54,10 @@ export const ClimadiagIndicateursLine = ({
             >
               {title}
             </TitleHeadingTag>
-            {indice && (
+            {seuil != null && (
               <span className="block text-[22px] leading-[1.2]">
                 ({">"}
-                {indice}°C)
+                {seuil}°C)
               </span>
             )}
             {!isPDF && (

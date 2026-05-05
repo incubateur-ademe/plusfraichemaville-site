@@ -3,7 +3,7 @@ export const climadiagIndicateursData = {
   line: {
     jours_chauds: {
       title: "Nombre annuel de jours très chauds",
-      indice: "35",
+
       picto: "climadiag-jour-tres-chaud",
       legend: {
         2030: [
@@ -22,7 +22,7 @@ export const climadiagIndicateursData = {
     },
     nuits_chaudes: {
       title: "Nombre annuel de nuits chaudes",
-      indice: "20",
+
       picto: "climadiag-nuits-chaudes",
       legend: {
         2030: [
@@ -42,7 +42,7 @@ export const climadiagIndicateursData = {
     jours_vdc: {
       title: "Nombre annuel de jours en vague de chaleur",
       picto: "climadiag-jour-vdc",
-      indice: null,
+
       legend: {
         2030: [
           "Un jour est considéré en vague de chaleur s’il s’inscrit dans un épisode, se produisant l’été, d’au moins cinq jours consécutifs pour lesquels la température maximale quotidienne excède la normale de plus de cinq degrés.",
