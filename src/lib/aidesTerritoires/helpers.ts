@@ -43,6 +43,7 @@ export const fetchAidesTerritoiresToken = async (): Promise<string | null> => {
 export const callAidesTerritoiresApi = async <T extends IApiAidesTerritoiresResponse>(
   url: string,
   isSecondCall = false,
+  revalidate: number = TOKEN_VALIDITY_IN_SECONDS,
 ): Promise<T | null> => {
   const token = await fetchAidesTerritoiresToken();
   try {
@@ -52,13 +53,13 @@ export const callAidesTerritoiresApi = async <T extends IApiAidesTerritoiresResp
         Accept: "application/json",
         Authorization: `Bearer ${token}`,
       },
-      next: { revalidate: TOKEN_VALIDITY_IN_SECONDS, tags: ["aides-territoires"] },
+      next: { revalidate, tags: ["aides-territoires"] },
     });
 
     const result = (await response.json()) as T;
     if (!isSecondCall && response.status === 401) {
       await customRevalidateTag(FETCH_TOCKEN_CACHE_TAG);
-      return callAidesTerritoiresApi(url, true);
+      return callAidesTerritoiresApi(url, true, revalidate);
     }
     if (response.status >= 400) {
       captureError(`Error when calling Aides territoires API status ${response.status}`, result.message);
