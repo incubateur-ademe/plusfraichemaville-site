@@ -70,8 +70,6 @@ export const SurchauffeUrbaineClimadiag = ({
       <div className="mt-6 text-dsfr-text-mention-grey">
         * Ces projections tiennent compte de la Trajectoire de Réchauffement et d’Adaptation au Changement Climatique
         (TRACC) correspondant à une hausse des températures en France métropolitaine de +2°C en 2030.
-        <br />
-        Climadiag commune n’est pas encore disponible pour les territoires d’Outre mer.
       </div>
       <div
         className="mt-8 flex w-full flex-wrap items-center justify-between gap-4
