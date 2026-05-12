@@ -48,6 +48,7 @@ export const SurchauffeUrbaineClimadiag = ({
         type="jours_chauds"
         classname="border border-dsfr-border-default-grey"
         titleHeadingLevel="h3"
+        seuil={climadiagInfo.seuil_jours_tres_chauds}
       />
       <ClimadiagIndicateursLine
         year={2030}
@@ -55,14 +56,17 @@ export const SurchauffeUrbaineClimadiag = ({
         type="nuits_chaudes"
         classname="border border-dsfr-border-default-grey"
         titleHeadingLevel="h3"
+        seuil={climadiagInfo.seuil_nuits_chaudes}
       />
-      <ClimadiagIndicateursLine
-        year={2030}
-        temperature={yearlyData.jours_vdc}
-        type="jours_vdc"
-        classname="border border-dsfr-border-default-grey"
-        titleHeadingLevel="h3"
-      />
+      {yearlyData.jours_vdc && (
+        <ClimadiagIndicateursLine
+          year={2030}
+          temperature={yearlyData.jours_vdc}
+          type="jours_vdc"
+          classname="border border-dsfr-border-default-grey"
+          titleHeadingLevel="h3"
+        />
+      )}
       <div className="mt-6 text-dsfr-text-mention-grey">
         * Ces projections tiennent compte de la Trajectoire de Réchauffement et d’Adaptation au Changement Climatique
         (TRACC) correspondant à une hausse des températures en France métropolitaine de +2°C en 2030.
