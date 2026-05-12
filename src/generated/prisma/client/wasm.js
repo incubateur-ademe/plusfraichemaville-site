@@ -289,7 +289,9 @@ exports.Prisma.ClimadiagScalarFieldEnum = {
   superficie: 'superficie',
   couverture_lcz: 'couverture_lcz',
   adresse_all_infos: 'adresse_all_infos',
-  searchable_field: 'searchable_field'
+  searchable_field: 'searchable_field',
+  seuil_jours_tres_chauds: 'seuil_jours_tres_chauds',
+  seuil_nuits_chaudes: 'seuil_nuits_chaudes'
 };
 
 exports.Prisma.AideScalarFieldEnum = {

@@ -67,7 +67,7 @@ export const climadiagToPublicClimadiag = (climadiagInfo: Climadiag | null) => {
   return {
     ...climadiagInfo,
     jours_tres_chauds_prevision: { 2030: climadiagInfo.jours_tres_chauds_prevision["2030"] },
-    jours_vdc_prevision: { 2030: climadiagInfo.jours_vdc_prevision["2030"] },
+    jours_vdc_prevision: climadiagInfo.jours_vdc_prevision ? { 2030: climadiagInfo.jours_vdc_prevision["2030"] } : null,
     nuits_chaudes_prevision: { 2030: climadiagInfo.nuits_chaudes_prevision["2030"] },
   };
 };

@@ -14,19 +14,23 @@ export const ClimadiagViewerItem = ({ data, year }: { data: Climadiag; year: Cli
         type="jours_chauds"
         year={year}
         isPDF
+        seuil={data.seuil_jours_tres_chauds}
       />
       <ClimadiagIndicateursLine
         temperature={{ prevision: data.nuits_chaudes_prevision[year], ref: data.nuits_chaudes_ref }}
         type="nuits_chaudes"
         year={year}
         isPDF
+        seuil={data.seuil_nuits_chaudes}
       />
-      <ClimadiagIndicateursLine
-        temperature={{ prevision: data.jours_vdc_prevision[year], ref: data.jours_vdc_ref }}
-        type="jours_vdc"
-        year={year}
-        isPDF
-      />
+      {data.jours_vdc_prevision && (
+        <ClimadiagIndicateursLine
+          temperature={{ prevision: data.jours_vdc_prevision[year], ref: data.jours_vdc_ref }}
+          type="jours_vdc"
+          year={year}
+          isPDF
+        />
+      )}
     </div>
   );
 };

@@ -17277,6 +17277,8 @@ export namespace Prisma {
     population: number | null
     superficie: number | null
     couverture_lcz: number | null
+    seuil_jours_tres_chauds: number | null
+    seuil_nuits_chaudes: number | null
   }
 
   export type ClimadiagSumAggregateOutputType = {
@@ -17288,6 +17290,8 @@ export namespace Prisma {
     population: number | null
     superficie: number | null
     couverture_lcz: number | null
+    seuil_jours_tres_chauds: number | null
+    seuil_nuits_chaudes: number | null
   }
 
   export type ClimadiagMinAggregateOutputType = {
@@ -17304,6 +17308,8 @@ export namespace Prisma {
     superficie: number | null
     couverture_lcz: number | null
     searchable_field: string | null
+    seuil_jours_tres_chauds: number | null
+    seuil_nuits_chaudes: number | null
   }
 
   export type ClimadiagMaxAggregateOutputType = {
@@ -17320,6 +17326,8 @@ export namespace Prisma {
     superficie: number | null
     couverture_lcz: number | null
     searchable_field: string | null
+    seuil_jours_tres_chauds: number | null
+    seuil_nuits_chaudes: number | null
   }
 
   export type ClimadiagCountAggregateOutputType = {
@@ -17340,6 +17348,8 @@ export namespace Prisma {
     couverture_lcz: number
     adresse_all_infos: number
     searchable_field: number
+    seuil_jours_tres_chauds: number
+    seuil_nuits_chaudes: number
     _all: number
   }
 
@@ -17353,6 +17363,8 @@ export namespace Prisma {
     population?: true
     superficie?: true
     couverture_lcz?: true
+    seuil_jours_tres_chauds?: true
+    seuil_nuits_chaudes?: true
   }
 
   export type ClimadiagSumAggregateInputType = {
@@ -17364,6 +17376,8 @@ export namespace Prisma {
     population?: true
     superficie?: true
     couverture_lcz?: true
+    seuil_jours_tres_chauds?: true
+    seuil_nuits_chaudes?: true
   }
 
   export type ClimadiagMinAggregateInputType = {
@@ -17380,6 +17394,8 @@ export namespace Prisma {
     superficie?: true
     couverture_lcz?: true
     searchable_field?: true
+    seuil_jours_tres_chauds?: true
+    seuil_nuits_chaudes?: true
   }
 
   export type ClimadiagMaxAggregateInputType = {
@@ -17396,6 +17412,8 @@ export namespace Prisma {
     superficie?: true
     couverture_lcz?: true
     searchable_field?: true
+    seuil_jours_tres_chauds?: true
+    seuil_nuits_chaudes?: true
   }
 
   export type ClimadiagCountAggregateInputType = {
@@ -17416,6 +17434,8 @@ export namespace Prisma {
     couverture_lcz?: true
     adresse_all_infos?: true
     searchable_field?: true
+    seuil_jours_tres_chauds?: true
+    seuil_nuits_chaudes?: true
     _all?: true
   }
 
@@ -17517,12 +17537,14 @@ export namespace Prisma {
     nuits_chaudes_ref: number | null
     nuits_chaudes_prevision: JsonValue
     jours_vdc_ref: number | null
-    jours_vdc_prevision: JsonValue
+    jours_vdc_prevision: JsonValue | null
     population: number
     superficie: number
     couverture_lcz: number
     adresse_all_infos: JsonValue | null
     searchable_field: string
+    seuil_jours_tres_chauds: number | null
+    seuil_nuits_chaudes: number | null
     _count: ClimadiagCountAggregateOutputType | null
     _avg: ClimadiagAvgAggregateOutputType | null
     _sum: ClimadiagSumAggregateOutputType | null
@@ -17562,6 +17584,8 @@ export namespace Prisma {
     couverture_lcz?: boolean
     adresse_all_infos?: boolean
     searchable_field?: boolean
+    seuil_jours_tres_chauds?: boolean
+    seuil_nuits_chaudes?: boolean
   }, ExtArgs["result"]["climadiag"]>
 
   export type climadiagSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -17582,6 +17606,8 @@ export namespace Prisma {
     couverture_lcz?: boolean
     adresse_all_infos?: boolean
     searchable_field?: boolean
+    seuil_jours_tres_chauds?: boolean
+    seuil_nuits_chaudes?: boolean
   }, ExtArgs["result"]["climadiag"]>
 
   export type climadiagSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -17602,6 +17628,8 @@ export namespace Prisma {
     couverture_lcz?: boolean
     adresse_all_infos?: boolean
     searchable_field?: boolean
+    seuil_jours_tres_chauds?: boolean
+    seuil_nuits_chaudes?: boolean
   }, ExtArgs["result"]["climadiag"]>
 
   export type climadiagSelectScalar = {
@@ -17622,9 +17650,11 @@ export namespace Prisma {
     couverture_lcz?: boolean
     adresse_all_infos?: boolean
     searchable_field?: boolean
+    seuil_jours_tres_chauds?: boolean
+    seuil_nuits_chaudes?: boolean
   }
 
-  export type climadiagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "type_lieu" | "code_insee" | "code_postal" | "epci_parent_id" | "jours_tres_chauds_ref" | "jours_tres_chauds_prevision" | "nuits_chaudes_ref" | "nuits_chaudes_prevision" | "jours_vdc_ref" | "jours_vdc_prevision" | "population" | "superficie" | "couverture_lcz" | "adresse_all_infos" | "searchable_field", ExtArgs["result"]["climadiag"]>
+  export type climadiagOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "type_lieu" | "code_insee" | "code_postal" | "epci_parent_id" | "jours_tres_chauds_ref" | "jours_tres_chauds_prevision" | "nuits_chaudes_ref" | "nuits_chaudes_prevision" | "jours_vdc_ref" | "jours_vdc_prevision" | "population" | "superficie" | "couverture_lcz" | "adresse_all_infos" | "searchable_field" | "seuil_jours_tres_chauds" | "seuil_nuits_chaudes", ExtArgs["result"]["climadiag"]>
 
   export type $climadiagPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "climadiag"
@@ -17641,12 +17671,14 @@ export namespace Prisma {
       nuits_chaudes_ref: number | null
       nuits_chaudes_prevision: Prisma.JsonValue
       jours_vdc_ref: number | null
-      jours_vdc_prevision: Prisma.JsonValue
+      jours_vdc_prevision: Prisma.JsonValue | null
       population: number
       superficie: number
       couverture_lcz: number
       adresse_all_infos: Prisma.JsonValue | null
       searchable_field: string
+      seuil_jours_tres_chauds: number | null
+      seuil_nuits_chaudes: number | null
     }, ExtArgs["result"]["climadiag"]>
     composites: {}
   }
@@ -18087,6 +18119,8 @@ export namespace Prisma {
     readonly couverture_lcz: FieldRef<"climadiag", 'Float'>
     readonly adresse_all_infos: FieldRef<"climadiag", 'Json'>
     readonly searchable_field: FieldRef<"climadiag", 'String'>
+    readonly seuil_jours_tres_chauds: FieldRef<"climadiag", 'Int'>
+    readonly seuil_nuits_chaudes: FieldRef<"climadiag", 'Int'>
   }
     
 
@@ -30987,7 +31021,9 @@ export namespace Prisma {
     superficie: 'superficie',
     couverture_lcz: 'couverture_lcz',
     adresse_all_infos: 'adresse_all_infos',
-    searchable_field: 'searchable_field'
+    searchable_field: 'searchable_field',
+    seuil_jours_tres_chauds: 'seuil_jours_tres_chauds',
+    seuil_nuits_chaudes: 'seuil_nuits_chaudes'
   };
 
   export type ClimadiagScalarFieldEnum = (typeof ClimadiagScalarFieldEnum)[keyof typeof ClimadiagScalarFieldEnum]
@@ -32738,12 +32774,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: FloatNullableFilter<"climadiag"> | number | null
     nuits_chaudes_prevision?: JsonFilter<"climadiag">
     jours_vdc_ref?: FloatNullableFilter<"climadiag"> | number | null
-    jours_vdc_prevision?: JsonFilter<"climadiag">
+    jours_vdc_prevision?: JsonNullableFilter<"climadiag">
     population?: IntFilter<"climadiag"> | number
     superficie?: IntFilter<"climadiag"> | number
     couverture_lcz?: FloatFilter<"climadiag"> | number
     adresse_all_infos?: JsonNullableFilter<"climadiag">
     searchable_field?: StringFilter<"climadiag"> | string
+    seuil_jours_tres_chauds?: IntNullableFilter<"climadiag"> | number | null
+    seuil_nuits_chaudes?: IntNullableFilter<"climadiag"> | number | null
   }
 
   export type climadiagOrderByWithRelationInput = {
@@ -32758,12 +32796,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: SortOrderInput | SortOrder
     nuits_chaudes_prevision?: SortOrder
     jours_vdc_ref?: SortOrderInput | SortOrder
-    jours_vdc_prevision?: SortOrder
+    jours_vdc_prevision?: SortOrderInput | SortOrder
     population?: SortOrder
     superficie?: SortOrder
     couverture_lcz?: SortOrder
     adresse_all_infos?: SortOrderInput | SortOrder
     searchable_field?: SortOrder
+    seuil_jours_tres_chauds?: SortOrderInput | SortOrder
+    seuil_nuits_chaudes?: SortOrderInput | SortOrder
     _relevance?: climadiagOrderByRelevanceInput
   }
 
@@ -32782,12 +32822,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: FloatNullableFilter<"climadiag"> | number | null
     nuits_chaudes_prevision?: JsonFilter<"climadiag">
     jours_vdc_ref?: FloatNullableFilter<"climadiag"> | number | null
-    jours_vdc_prevision?: JsonFilter<"climadiag">
+    jours_vdc_prevision?: JsonNullableFilter<"climadiag">
     population?: IntFilter<"climadiag"> | number
     superficie?: IntFilter<"climadiag"> | number
     couverture_lcz?: FloatFilter<"climadiag"> | number
     adresse_all_infos?: JsonNullableFilter<"climadiag">
     searchable_field?: StringFilter<"climadiag"> | string
+    seuil_jours_tres_chauds?: IntNullableFilter<"climadiag"> | number | null
+    seuil_nuits_chaudes?: IntNullableFilter<"climadiag"> | number | null
   }, "id" | "code_insee">
 
   export type climadiagOrderByWithAggregationInput = {
@@ -32802,12 +32844,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: SortOrderInput | SortOrder
     nuits_chaudes_prevision?: SortOrder
     jours_vdc_ref?: SortOrderInput | SortOrder
-    jours_vdc_prevision?: SortOrder
+    jours_vdc_prevision?: SortOrderInput | SortOrder
     population?: SortOrder
     superficie?: SortOrder
     couverture_lcz?: SortOrder
     adresse_all_infos?: SortOrderInput | SortOrder
     searchable_field?: SortOrder
+    seuil_jours_tres_chauds?: SortOrderInput | SortOrder
+    seuil_nuits_chaudes?: SortOrderInput | SortOrder
     _count?: climadiagCountOrderByAggregateInput
     _avg?: climadiagAvgOrderByAggregateInput
     _max?: climadiagMaxOrderByAggregateInput
@@ -32830,12 +32874,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: FloatNullableWithAggregatesFilter<"climadiag"> | number | null
     nuits_chaudes_prevision?: JsonWithAggregatesFilter<"climadiag">
     jours_vdc_ref?: FloatNullableWithAggregatesFilter<"climadiag"> | number | null
-    jours_vdc_prevision?: JsonWithAggregatesFilter<"climadiag">
+    jours_vdc_prevision?: JsonNullableWithAggregatesFilter<"climadiag">
     population?: IntWithAggregatesFilter<"climadiag"> | number
     superficie?: IntWithAggregatesFilter<"climadiag"> | number
     couverture_lcz?: FloatWithAggregatesFilter<"climadiag"> | number
     adresse_all_infos?: JsonNullableWithAggregatesFilter<"climadiag">
     searchable_field?: StringWithAggregatesFilter<"climadiag"> | string
+    seuil_jours_tres_chauds?: IntNullableWithAggregatesFilter<"climadiag"> | number | null
+    seuil_nuits_chaudes?: IntNullableWithAggregatesFilter<"climadiag"> | number | null
   }
 
   export type aideWhereInput = {
@@ -34739,12 +34785,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: number | null
     nuits_chaudes_prevision: JsonNullValueInput | InputJsonValue
     jours_vdc_ref?: number | null
-    jours_vdc_prevision: JsonNullValueInput | InputJsonValue
+    jours_vdc_prevision?: NullableJsonNullValueInput | InputJsonValue
     population?: number
     superficie?: number
     couverture_lcz?: number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     searchable_field: string
+    seuil_jours_tres_chauds?: number | null
+    seuil_nuits_chaudes?: number | null
   }
 
   export type climadiagUncheckedCreateInput = {
@@ -34759,12 +34807,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: number | null
     nuits_chaudes_prevision: JsonNullValueInput | InputJsonValue
     jours_vdc_ref?: number | null
-    jours_vdc_prevision: JsonNullValueInput | InputJsonValue
+    jours_vdc_prevision?: NullableJsonNullValueInput | InputJsonValue
     population?: number
     superficie?: number
     couverture_lcz?: number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     searchable_field: string
+    seuil_jours_tres_chauds?: number | null
+    seuil_nuits_chaudes?: number | null
   }
 
   export type climadiagUpdateInput = {
@@ -34778,12 +34828,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: NullableFloatFieldUpdateOperationsInput | number | null
     nuits_chaudes_prevision?: JsonNullValueInput | InputJsonValue
     jours_vdc_ref?: NullableFloatFieldUpdateOperationsInput | number | null
-    jours_vdc_prevision?: JsonNullValueInput | InputJsonValue
+    jours_vdc_prevision?: NullableJsonNullValueInput | InputJsonValue
     population?: IntFieldUpdateOperationsInput | number
     superficie?: IntFieldUpdateOperationsInput | number
     couverture_lcz?: FloatFieldUpdateOperationsInput | number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     searchable_field?: StringFieldUpdateOperationsInput | string
+    seuil_jours_tres_chauds?: NullableIntFieldUpdateOperationsInput | number | null
+    seuil_nuits_chaudes?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type climadiagUncheckedUpdateInput = {
@@ -34798,12 +34850,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: NullableFloatFieldUpdateOperationsInput | number | null
     nuits_chaudes_prevision?: JsonNullValueInput | InputJsonValue
     jours_vdc_ref?: NullableFloatFieldUpdateOperationsInput | number | null
-    jours_vdc_prevision?: JsonNullValueInput | InputJsonValue
+    jours_vdc_prevision?: NullableJsonNullValueInput | InputJsonValue
     population?: IntFieldUpdateOperationsInput | number
     superficie?: IntFieldUpdateOperationsInput | number
     couverture_lcz?: FloatFieldUpdateOperationsInput | number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     searchable_field?: StringFieldUpdateOperationsInput | string
+    seuil_jours_tres_chauds?: NullableIntFieldUpdateOperationsInput | number | null
+    seuil_nuits_chaudes?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type climadiagCreateManyInput = {
@@ -34818,12 +34872,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: number | null
     nuits_chaudes_prevision: JsonNullValueInput | InputJsonValue
     jours_vdc_ref?: number | null
-    jours_vdc_prevision: JsonNullValueInput | InputJsonValue
+    jours_vdc_prevision?: NullableJsonNullValueInput | InputJsonValue
     population?: number
     superficie?: number
     couverture_lcz?: number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     searchable_field: string
+    seuil_jours_tres_chauds?: number | null
+    seuil_nuits_chaudes?: number | null
   }
 
   export type climadiagUpdateManyMutationInput = {
@@ -34837,12 +34893,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: NullableFloatFieldUpdateOperationsInput | number | null
     nuits_chaudes_prevision?: JsonNullValueInput | InputJsonValue
     jours_vdc_ref?: NullableFloatFieldUpdateOperationsInput | number | null
-    jours_vdc_prevision?: JsonNullValueInput | InputJsonValue
+    jours_vdc_prevision?: NullableJsonNullValueInput | InputJsonValue
     population?: IntFieldUpdateOperationsInput | number
     superficie?: IntFieldUpdateOperationsInput | number
     couverture_lcz?: FloatFieldUpdateOperationsInput | number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     searchable_field?: StringFieldUpdateOperationsInput | string
+    seuil_jours_tres_chauds?: NullableIntFieldUpdateOperationsInput | number | null
+    seuil_nuits_chaudes?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type climadiagUncheckedUpdateManyInput = {
@@ -34857,12 +34915,14 @@ export namespace Prisma {
     nuits_chaudes_ref?: NullableFloatFieldUpdateOperationsInput | number | null
     nuits_chaudes_prevision?: JsonNullValueInput | InputJsonValue
     jours_vdc_ref?: NullableFloatFieldUpdateOperationsInput | number | null
-    jours_vdc_prevision?: JsonNullValueInput | InputJsonValue
+    jours_vdc_prevision?: NullableJsonNullValueInput | InputJsonValue
     population?: IntFieldUpdateOperationsInput | number
     superficie?: IntFieldUpdateOperationsInput | number
     couverture_lcz?: FloatFieldUpdateOperationsInput | number
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     searchable_field?: StringFieldUpdateOperationsInput | string
+    seuil_jours_tres_chauds?: NullableIntFieldUpdateOperationsInput | number | null
+    seuil_nuits_chaudes?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type aideCreateInput = {
@@ -36886,6 +36946,8 @@ export namespace Prisma {
     couverture_lcz?: SortOrder
     adresse_all_infos?: SortOrder
     searchable_field?: SortOrder
+    seuil_jours_tres_chauds?: SortOrder
+    seuil_nuits_chaudes?: SortOrder
   }
 
   export type climadiagAvgOrderByAggregateInput = {
@@ -36897,6 +36959,8 @@ export namespace Prisma {
     population?: SortOrder
     superficie?: SortOrder
     couverture_lcz?: SortOrder
+    seuil_jours_tres_chauds?: SortOrder
+    seuil_nuits_chaudes?: SortOrder
   }
 
   export type climadiagMaxOrderByAggregateInput = {
@@ -36913,6 +36977,8 @@ export namespace Prisma {
     superficie?: SortOrder
     couverture_lcz?: SortOrder
     searchable_field?: SortOrder
+    seuil_jours_tres_chauds?: SortOrder
+    seuil_nuits_chaudes?: SortOrder
   }
 
   export type climadiagMinOrderByAggregateInput = {
@@ -36929,6 +36995,8 @@ export namespace Prisma {
     superficie?: SortOrder
     couverture_lcz?: SortOrder
     searchable_field?: SortOrder
+    seuil_jours_tres_chauds?: SortOrder
+    seuil_nuits_chaudes?: SortOrder
   }
 
   export type climadiagSumOrderByAggregateInput = {
@@ -36940,6 +37008,8 @@ export namespace Prisma {
     population?: SortOrder
     superficie?: SortOrder
     couverture_lcz?: SortOrder
+    seuil_jours_tres_chauds?: SortOrder
+    seuil_nuits_chaudes?: SortOrder
   }
 
   export type EnumTypeLieuClimadiagWithAggregatesFilter<$PrismaModel = never> = {

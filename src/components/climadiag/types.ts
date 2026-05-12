@@ -3,7 +3,7 @@ import { climadiag } from "@/src/generated/prisma/client";
 
 export interface Climadiag extends climadiag {
   nuits_chaudes_prevision: ProjectionsIndicateurClimadiag;
-  jours_vdc_prevision: ProjectionsIndicateurClimadiag;
+  jours_vdc_prevision: ProjectionsIndicateurClimadiag | null;
   jours_tres_chauds_prevision: ProjectionsIndicateurClimadiag;
 }
 
@@ -19,7 +19,7 @@ export type ClimadiagTypeJour = "jours_chauds" | "nuits_chaudes" | "jours_vdc";
 export type ClimadiagTemperatureJourMap = {
   jours_tres_chauds: ClimadiagTemperatureJour;
   nuits_chaudes: ClimadiagTemperatureJour;
-  jours_vdc: ClimadiagTemperatureJour;
+  jours_vdc: ClimadiagTemperatureJour | null;
 };
 
 export type Option = {

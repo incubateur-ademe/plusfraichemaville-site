@@ -33,9 +33,6 @@ export const getYearlyClimadiagData = (data: Climadiag, year: ClimadiagYear): Cl
       prevision: data.nuits_chaudes_prevision[year],
       ref: data.nuits_chaudes_ref,
     },
-    jours_vdc: {
-      prevision: data.jours_vdc_prevision[year],
-      ref: data.jours_vdc_ref,
-    },
+    jours_vdc: data.jours_vdc_prevision ? { prevision: data.jours_vdc_prevision[year], ref: data.jours_vdc_ref } : null,
   };
 };
