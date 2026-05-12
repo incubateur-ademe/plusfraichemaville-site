@@ -1,4 +1,8 @@
-import { IApiAidesTerritoiresQueryToken, IApiAidesTerritoiresResponse } from "@/src/lib/aidesTerritoires/types";
+import {
+  IApiAidesTerritoiresPaginatedAides,
+  IApiAidesTerritoiresQueryToken,
+  IApiAidesTerritoiresResponse,
+} from "@/src/lib/aidesTerritoires/types";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 import * as Sentry from "@sentry/nextjs";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
@@ -6,6 +10,13 @@ import { customRevalidateTag } from "@/src/helpers/revalidate-tag-call";
 
 const TOKEN_VALIDITY_IN_SECONDS = 86400;
 const FETCH_TOCKEN_CACHE_TAG = "aides-territoires-token";
+
+export const filterNonLiveAides = (
+  aidesResponse: IApiAidesTerritoiresPaginatedAides,
+): IApiAidesTerritoiresPaginatedAides => {
+  const filteredAides = aidesResponse.results.filter((aide) => aide.is_live === true);
+  return { ...aidesResponse, results: filteredAides, count: filteredAides.length ?? 0 };
+};
 
 export const extractMotsClesFromFichesSolutions = (fichesAttributes: FicheSolution["attributes"][]) => {
   return fichesAttributes
