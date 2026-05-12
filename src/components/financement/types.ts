@@ -65,6 +65,7 @@ export interface AidesTerritoiresAide extends IApiAidesTerritoiresResponse {
   date_created: string | null;
   date_updated: string | null;
   project_references: string[];
+  is_live: boolean | null;
 }
 
 export enum TypeAidesTerritoiresAide {
