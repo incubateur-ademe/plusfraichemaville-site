@@ -46,37 +46,37 @@ function insertClimadiagRow(fileJson, typeLieu, epciParentId: number | undefined
       nuits_chaudes_prevision: fileStructureToPrismaIndicateur(nuitsChaudes) as Prisma.JsonObject,
       seuil_nuits_chaudes: SEUIL_NUITS_CHAUDES[nuitsChaudesEntry.id],
       jours_vdc_ref: vagueDeChaleur ? vagueDeChaleur[0][0].ref : null,
-      jours_vdc_prevision: vagueDeChaleur
-        ? (fileStructureToPrismaIndicateur(vagueDeChaleur) as Prisma.JsonObject)
-        : null,
+      ...(vagueDeChaleur && {
+        jours_vdc_prevision: fileStructureToPrismaIndicateur(vagueDeChaleur) as Prisma.JsonObject,
+      }),
       population: fileJson.population,
       searchable_field: `${fileJson.nom
         .toLowerCase()
         .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g, "")} ${fileJson.code_postal} ${fileJson.identifiant_insee}`,
+        .replace(/[\u0300-\u036f]/g, "")} ${fileJson.code_recherche} ${fileJson.identifiant_insee}`,
     },
   });
 }
 
-function processEpciFiles(path: string) {
+async function processEpciFiles(path: string) {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require("fs");
   const epciPath = path + "\\epci";
   const pathToEpciFiles = fs.readdirSync(epciPath);
-  pathToEpciFiles.map(async (file: string) => {
+  for (const file of pathToEpciFiles) {
     const fileContent = fs.readFileSync(`${epciPath}/${file}`, "utf8");
     const fileJson = JSON.parse(fileContent);
     await insertClimadiagRow(fileJson, "epci", null);
     console.log("ligne epci insérée");
-  });
+  }
 }
 
-function processCommuneFiles(path: string) {
+async function processCommuneFiles(path: string) {
   // eslint-disable-next-line @typescript-eslint/no-require-imports
   const fs = require("fs");
   const communePath = path + "\\commune";
   const pathToCommuneFiles = fs.readdirSync(communePath);
-  pathToCommuneFiles.map(async (file: string) => {
+  for (const file of pathToCommuneFiles) {
     const fileContent = fs.readFileSync(`${communePath}/${file}`, "utf8");
     const fileJson = JSON.parse(fileContent);
     const parentEpci = fileJson.identifiant_epci_parent
@@ -86,14 +86,14 @@ function processCommuneFiles(path: string) {
       : null;
     await insertClimadiagRow(fileJson, "commune", parentEpci?.id);
     console.log("ligne commune insérée");
-  });
+  }
 }
 
-function main() {
+async function main() {
   const path = "C:\\Users\\rapha\\Documents\\PFMV\\climadiag\\20260421";
 
-  processEpciFiles(path);
-  processCommuneFiles(path);
+  await processEpciFiles(path);
+  await processCommuneFiles(path);
 }
 
 main();
