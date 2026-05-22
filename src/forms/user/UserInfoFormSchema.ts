@@ -6,7 +6,7 @@ export const UserInfoFormSchema = z.object({
   prenom: z.string().min(1, { message: "Veuillez renseigner votre prénom" }),
   poste: z.string().min(1, { message: "Veuillez renseigner votre poste" }),
   nomEtablissement: z.string().min(1, { message: "Veuillez renseigner votre établissement de rattachement" }),
-  canalAcquisition: z.string(),
+  canalAcquisition: z.string().min(1, { message: "Veuillez renseigner le canal par lequel vous nous avez connus" }),
   customCanalAcquisition: z.string(),
   acceptCommunicationProduit: z.boolean(),
   acceptCommunicationSuiviProjet: z.boolean(),
