@@ -13,7 +13,7 @@ export const ClimadiagIndicateurs = ({ climadiagInfo }: { climadiagInfo: Climadi
       </div>
       <div className="mt-10 text-dsfr-text-mention-grey">
         * Ces projections tiennent compte de la Trajectoire de Réchauffement et d’Adaptation au Changement Climatique
-        (TRACC) correspondant à une hausse des températures en France métropolitaine de +2°C en 2030.
+        (TRACC) correspondant à une hausse des températures moyennes en France hexgonale et en Corse de +4°C en 2100.
       </div>
       <ClimadiagDownloader data={climadiagInfo} />
     </div>
