@@ -56,7 +56,7 @@ export const WebinaireCard = ({ webinaire, className }: { webinaire: Webinaire; 
             </div>
           </Case>
           <Default>
-            <div className="mt-4 flex flex-col gap-4 text-center items-center">
+            <div className="mt-4 flex flex-col items-center gap-4 text-center">
               {webinaire.attributes.lien_replay && (
                 <Button
                   className=" !w-36 !justify-center rounded-3xl"
