@@ -18,6 +18,8 @@ export const GET_WEBINAIRES = async (strapiFilter: StrapiFilter) => `query {
         heure_debut
         heure_fin
         lien_replay
+        lien_btn_secondaire
+        label_btn_secondaire
       }
     }
   }

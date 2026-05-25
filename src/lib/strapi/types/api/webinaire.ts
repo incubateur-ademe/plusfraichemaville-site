@@ -13,6 +13,8 @@ export interface Webinaire {
     jour_evenement?: Date;
     heure_debut?: Date;
     heure_fin?: Date;
+    lien_btn_secondaire?: string;
+    label_btn_secondaire?: string;
   };
 }
 export interface Webinaire_Plain {
@@ -27,6 +29,8 @@ export interface Webinaire_Plain {
   jour_evenement?: Date;
   heure_debut?: Date;
   heure_fin?: Date;
+  lien_btn_secondaire?: string;
+  label_btn_secondaire?: string;
 }
 
 export interface Webinaire_NoRelations {
@@ -41,6 +45,8 @@ export interface Webinaire_NoRelations {
   jour_evenement?: Date;
   heure_debut?: Date;
   heure_fin?: Date;
+  lien_btn_secondaire?: string;
+  label_btn_secondaire?: string;
 }
 
 export interface Webinaire_AdminPanelLifeCycle {
@@ -55,4 +61,6 @@ export interface Webinaire_AdminPanelLifeCycle {
   jour_evenement?: Date;
   heure_debut?: Date;
   heure_fin?: Date;
+  lien_btn_secondaire?: string;
+  label_btn_secondaire?: string;
 }

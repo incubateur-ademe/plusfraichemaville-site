@@ -56,16 +56,23 @@ export const WebinaireCard = ({ webinaire, className }: { webinaire: Webinaire; 
             </div>
           </Case>
           <Default>
-            <div className="mt-4 text-center">
-              {webinaire.attributes.lien_replay ? (
+            <div className="mt-4 flex flex-col items-center gap-4 text-center">
+              {webinaire.attributes.lien_replay && (
                 <Button
                   className=" !w-36 !justify-center rounded-3xl"
                   linkProps={{ href: webinaire.attributes.lien_replay, target: "_blank" }}
                 >
                   {"Replay"}
                 </Button>
-              ) : (
-                "Replay non disponible"
+              )}
+              {webinaire.attributes.lien_btn_secondaire && (
+                <Button
+                  className=" !w-36 !justify-center rounded-3xl"
+                  linkProps={{ href: webinaire.attributes.lien_btn_secondaire, target: "_blank" }}
+                  priority={webinaire.attributes.lien_replay ? "secondary" : "primary"}
+                >
+                  {webinaire.attributes.label_btn_secondaire || "Support de présentation"}
+                </Button>
               )}
             </div>
           </Default>

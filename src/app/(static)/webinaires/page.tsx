@@ -16,7 +16,7 @@ export default async function PageWebinaires() {
     allWebinaires.filter(
       (webinaire) =>
         webinaire.attributes.jour_evenement &&
-        webinaire.attributes.lien_replay &&
+        (webinaire.attributes.lien_replay || webinaire.attributes.lien_btn_secondaire) &&
         new Date(webinaire.attributes.jour_evenement) <= new Date(),
     ),
     (webinaire) => webinaire.attributes.jour_evenement,
