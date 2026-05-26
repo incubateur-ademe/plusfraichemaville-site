@@ -81,9 +81,10 @@ export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; butto
           <SelectFormField
             control={form.control}
             path="canalAcquisition"
-            label="Comment nous avez-vous connu ?"
-            placeholder="Sélectionnez le canal par lequel vous nous avez connu"
+            label="Comment nous avez-vous connus ?"
+            placeholder="Sélectionnez le canal par lequel vous nous avez connus"
             options={canalAcquisitionUserOptions()}
+            asterisk={true}
           />
           <InputFormField
             control={form.control}

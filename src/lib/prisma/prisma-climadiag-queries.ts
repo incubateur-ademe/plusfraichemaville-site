@@ -22,8 +22,16 @@ export const getPublicClimadiagInfoFromCodeInsee = async (codeInsee: string) => 
   return climadiagToPublicClimadiag(climadiagInfo);
 };
 
+const sanitizeSearchTerm = (term: string): string => term.replace(/[^a-z0-9-]/gi, "").trim();
+
 export const searchClimadiagInfo = async (searchTerms: string[], limit: number) => {
-  const fullTextQuery = searchTerms.map((searchTerm) => `${searchTerm}`).join(" & ");
+  const sanitizedTerms = searchTerms.map(sanitizeSearchTerm).filter(Boolean);
+
+  if (sanitizedTerms.length === 0) {
+    return [] as Climadiag[];
+  }
+
+  const fullTextQuery = sanitizedTerms.join(" & ");
   return prismaClient.climadiag.findMany({
     where: {
       OR: [
@@ -42,7 +50,7 @@ export const searchClimadiagInfo = async (searchTerms: string[], limit: number) 
             startsWith: fullTextQuery,
           },
         },
-        computeClimadiagNameQuery(searchTerms),
+        computeClimadiagNameQuery(sanitizedTerms),
       ],
     },
     orderBy: [{ type_lieu: "desc" }, { population: "desc" }],

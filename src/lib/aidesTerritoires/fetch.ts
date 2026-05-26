@@ -5,7 +5,11 @@ import {
 } from "@/src/lib/aidesTerritoires/types";
 import { collectivite } from "@/src/generated/prisma/client";
 import { updateCollectiviteAidesTerritoireId } from "@/src/lib/prisma/prismaCollectiviteQueries";
-import { callAidesTerritoiresApi, extractMotsClesFromFichesSolutions } from "@/src/lib/aidesTerritoires/helpers";
+import {
+  callAidesTerritoiresApi,
+  extractMotsClesFromFichesSolutions,
+  filterNonLiveAides,
+} from "@/src/lib/aidesTerritoires/helpers";
 import { AidesTerritoiresAide } from "@/src/components/financement/types";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
@@ -34,15 +38,15 @@ export const searchAidesFromAidesTerritoires = async (
   const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
   const perimeterId = await getPerimterIdIdOrFetchItFromAidesTerritoires(collectivite);
 
-  return await callAidesTerritoiresApi<IApiAidesTerritoiresPaginatedAides>(
+  const returnedAides = await callAidesTerritoiresApi<IApiAidesTerritoiresPaginatedAides>(
     `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?perimeter=${perimeterId}&text=${motsCles ? motsCles : ""}
     ,${typeEspace}&itemsPerPage=1000&targeted_audiences=commune&targeted_audiences=epci`,
   );
+  return returnedAides ? filterNonLiveAides(returnedAides) : returnedAides;
 };
 
 export const getNbAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution["attributes"][]) => {
   const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
-  console.log({ motsCles });
   const result = await callAidesTerritoiresApi<IApiAidesTerritoiresPaginatedAides>(
     `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?text=${
       motsCles ? motsCles : ""
@@ -50,7 +54,7 @@ export const getNbAidesFromAidesTerritoires = async (fichesSolutions: FicheSolut
     false,
     +(process.env.CMS_CACHE_TTL || 0) || 1,
   );
-  return result?.count || 0;
+  return result ? filterNonLiveAides(result).count : 0;
 };
 
 const getPerimterIdIdOrFetchItFromAidesTerritoires = async (collectivite: collectivite): Promise<string> => {

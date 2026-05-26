@@ -10,31 +10,19 @@ export const CUSTOM_CANAL_ACQUISITION: CanalAcquisition = {
 
 export const ALL_CANAL_ACQUISITION: CanalAcquisition[] = [
   {
-    label: "Accompagnement ou appel à manifestation d’intérêt (AMI)",
+    label: "Présentation par l'équipe Plus fraîche ma ville",
   },
   {
-    label: "Message de ma hiérarchie ou de collègues",
+    label: "Présentation par un autre intervenant (ADEME, DDT, CEREMA, AMF, Météo France...)",
   },
   {
-    label: "Réseau ADEME",
-  },
-  {
-    label: "Salon ou événement local",
-  },
-  {
-    label: "Médias (presse, radio, TV)",
-  },
-  {
-    label: "Réseaux sociaux (ex. LinkedIn)",
-  },
-  {
-    label: "Appel d'un chargé de déploiement",
+    label: "Réseaux sociaux (LinkedIn...)",
   },
   {
     label: "Recherche internet",
   },
   {
-    label: "Recommandation / bouche-à-oreille",
+    label: "Recommandation d'un collègue ou au sein de mon réseau professionnel",
   },
 ];
 
