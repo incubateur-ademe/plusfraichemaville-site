@@ -41,6 +41,7 @@
     "maplibre-gl": "^5.6.1",
     "next": "15.5.15",
     "next-auth": "^4.24.14",
+    "posthog-js": "^1.376.0",
     "react": "19.0.3",
     "react-datepicker": "^8.3.0",
     "react-dom": "19.0.3",
@@ -88,7 +89,7 @@
     "typescript-eslint": "^8.43.0"
   },
   "engines": {
-    "node": "22.14.0",
+    "node": "22.22.0",
     "pnpm": "10.32.1"
   },
   "pnpm": {
