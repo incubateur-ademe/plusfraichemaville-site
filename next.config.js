@@ -68,6 +68,11 @@ const nextConfig = {
         destination: "/",
         permanent: true,
       },
+      {
+        source: "/fiche-solution/materiaux-changement-phase",
+        destination: "/fiche-solution",
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {
