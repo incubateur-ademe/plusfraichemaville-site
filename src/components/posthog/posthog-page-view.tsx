@@ -24,7 +24,5 @@ function PostHogPageView() {
 }
 
 export function SuspendedPostHogPageView() {
-  return (
-    <PostHogPageView />
-  );
+  return <PostHogPageView />;
 }
