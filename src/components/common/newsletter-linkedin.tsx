@@ -1,6 +1,6 @@
 import Image from "next/image";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
-import { NewsletterIframe } from "@/src/forms/newsletter/newsletter-iframe";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export const NewsletterLinkedin = () => (
   <div>
@@ -8,13 +8,23 @@ export const NewsletterLinkedin = () => (
       <div className="fr-container">
         <div className="fr-grid-row">
           <div className="fr-col-12 fr-col-md-6 !pr-[4%]">
-            <NewsletterIframe />
+            <div className="!justify-start">
+              <h2 className="!text-[1.375rem]">Lettre d’information “Plus fraîche !”</h2>
+              <p className="mb-10">
+                {"Les infos pratiques pour suivre et utiliser le service Plus fraîche ma ville au quotidien"}
+              </p>
+              <div className="flex w-full flex-row flex-wrap items-center justify-end gap-4">
+                <LinkWithoutPrefetch className="fr-btn rounded-3xl" href={PFMV_ROUTES.NEWSLETTER}>
+                  S'abonner
+                </LinkWithoutPrefetch>
+              </div>
+            </div>
           </div>
           <div className="fr-col-12 fr-col-md-6 !pl-[4%]">
             <div className="!justify-start">
               <h2 className="!text-[1.375rem]">
                 Suivez-nous sur LinkedIn{" "}
-                <Image src="/images/linkedin.svg" alt="" width={24} height={24} className="float-right ml-2" />
+                <Image src="/images/linkedin.svg" alt="" width={20} height={20} className="float-right ml-2 mt-1" />
               </h2>
               <p className="mb-10">
                 {"Rejoignez la communauté, suivez-nous et commenter nos posts sur notre groupe LinkedIn :"}
