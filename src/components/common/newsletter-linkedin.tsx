@@ -13,14 +13,14 @@ export const NewsletterLinkedin = () => (
               <p className="mb-10">
                 {"Les infos pratiques pour suivre et utiliser le service Plus fraîche ma ville au quotidien"}
               </p>
-              <div className="flex w-full flex-row flex-wrap items-center justify-end gap-4">
+              <div className="flex w-full flex-row flex-wrap items-center gap-4 md:justify-end">
                 <LinkWithoutPrefetch className="fr-btn rounded-3xl" href={PFMV_ROUTES.NEWSLETTER}>
                   S'abonner
                 </LinkWithoutPrefetch>
               </div>
             </div>
           </div>
-          <div className="fr-col-12 fr-col-md-6 !pl-[4%]">
+          <div className="fr-col-12 fr-col-md-6 !md:pl-[4%]">
             <div className="!justify-start">
               <h2 className="!text-[1.375rem]">
                 Suivez-nous sur LinkedIn{" "}
