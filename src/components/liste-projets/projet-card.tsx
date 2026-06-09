@@ -167,7 +167,7 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
                   <label htmlFor="maturite-select" className="mt-1 text-sm font-bold text-pfmv-navy">
                     Maturité du projet :{" "}
                   </label>
-                  <Maturite id="maturite-select" niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} />
+                  <Maturite id={"maturite-select-" + updatedProjet.id} niveau={updatedProjet.niveau_maturite} projetId={updatedProjet.id} />
                 </div>
                 <div className={clsx("flex gap-4 text-sm")}>
                   <LinkWithoutPrefetch
