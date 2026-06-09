@@ -670,18 +670,6 @@ export const getProjetsUnfinishedAndLastUpdatedBetween2 = async (
   });
 };
 
-export const getProjetsFinishedToGetRex = async (afterDate: Date, beforeDate: Date): Promise<ProjetWithRelations[]> => {
-  return prismaClient.projet.findMany({
-    where: {
-      deleted_at: null,
-      statut_updated_at: { gte: afterDate, lte: beforeDate },
-      statut: StatutProjet.termine,
-      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetFinishedToGetRex),
-    },
-    include: projetIncludes,
-  });
-};
-
 export const getProjetsFinishedToGetQuestionnaire = async (
   afterDate: Date,
   beforeDate: Date,

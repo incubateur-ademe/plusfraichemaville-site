@@ -45,13 +45,6 @@ const main = async () => {
       FINISHED_PROJET_GET_QUESTIONNAIRE_SATISFACTION,
     );
 
-    const FINISHED_PROJET_GET_REX = 183;
-    console.log(`Recherche des projets terminés depuis 6 mois...`);
-    const finishedProjetGetRexMail = await emailService.sendGetRexFromFinishedProjetEmails(
-      lastSyncDate ?? removeDaysToDate(new Date(), FINISHED_PROJET_GET_REX),
-      FINISHED_PROJET_GET_REX,
-    );
-
     const REMIND_UNFINISHED_DIAG_DAYS = 7;
     console.log(`Recherche des projets avec diagnostics non validés  depuis ${REMIND_UNFINISHED_DIAG_DAYS} jours...`);
     const unfinishedDiagPromises = await emailService.sendRemindNotCompletedDiagnosticEmail(
@@ -103,7 +96,6 @@ const main = async () => {
       nbMailsInactiveUser1: inactiveUserMail1.length,
       nbMailsInactiveUser2: inactiveUserMail2.length,
       nbMailsInactiveUser3: inactiveUserMail3.length,
-      nbMailsGetRexFromFinishedProjet: finishedProjetGetRexMail.length,
       nbMailsSendQuestionnaireForFinishedProjet: finishedProjetGetQuestionnaire.length,
       nbMailsUnfinishedDiag: unfinishedDiagPromises.length,
       nbMailsRemindSolution: sendRemindFicheSolutionMail.length,

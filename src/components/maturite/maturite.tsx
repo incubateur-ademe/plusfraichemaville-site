@@ -57,6 +57,7 @@ export const Maturite = ({
         isSearchable={false}
         styles={{
           menu: (baseStyles) => ({ ...baseStyles, width: "max-content" }),
+          menuPortal: (baseStyles) => ({ ...baseStyles, zIndex: 9999 }),
         }}
         classNames={{
           indicatorSeparator: (_) => "hidden",
@@ -66,6 +67,8 @@ export const Maturite = ({
           option: (state) => (state.isSelected ? "!text-white" : "!text-black"),
           menu: (_) => `${readOnly ? "!hidden" : "!z-[100]"}`,
         }}
+        menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
+        menuPosition="fixed"
         options={readOnly ? [] : ALL_NIVEAU_MATURITE}
         getOptionValue={(niveau) => niveau.code}
         value={currentNiveau}
