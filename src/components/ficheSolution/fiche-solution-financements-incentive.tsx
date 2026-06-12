@@ -62,11 +62,19 @@ export default function FicheSolutionFinancementsIncentive({ ficheId, nbAides }:
         <p>Découvrez les aides financières mobilisables pour votre projet !</p>
       ) : (
         <>
-          <p>
-            {nbAides} {nbAides > 1 ? "aides financières correspondent" : "aide financière correspond"} à cette solution
-            !
-          </p>
-          <p className="font-bold">Créez votre projet pour découvrir celles qui sont mobilisables dans votre cas.</p>
+          {nbAides ? (
+            <>
+              <p>
+                {nbAides} {nbAides > 1 ? "aides financières correspondent" : "aide financière correspond"} à cette
+                solution !
+              </p>
+              <p className="font-bold">
+                Créez votre projet pour découvrir celles qui sont mobilisables dans votre cas.
+              </p>
+            </>
+          ) : (
+            <p className="font-bold">Créez votre projet pour découvrir les aides que vous pourrez mobiliser.</p>
+          )}
         </>
       )}
       <div className="flex justify-center">
