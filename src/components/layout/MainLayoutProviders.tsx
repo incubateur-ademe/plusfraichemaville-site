@@ -11,6 +11,7 @@ import { GenericSaveModalUnauthenticated } from "@/src/components/common/generic
 import { UserBrowsingTracker } from "@/src/components/user/UserBrowsingTracker";
 import { PostHogProvider } from "@/src/components/posthog/posthog-provider";
 import { SuspendedPostHogPageView } from "@/src/components/posthog/posthog-page-view";
+import { SuspendedPostHogTagManager } from "@/src/components/posthog/posthog-tag-manager";
 
 export default function MainLayoutProviders({ children, lang }: PropsWithChildren<{ lang: string }>) {
   return (
@@ -23,6 +24,7 @@ export default function MainLayoutProviders({ children, lang }: PropsWithChildre
                 <MatomoPageView />
                 <UserBrowsingTracker />
                 <SuspendedPostHogPageView />
+                <SuspendedPostHogTagManager />
               </Suspense>
               <DsfrProvider lang={lang}>
                 <>
