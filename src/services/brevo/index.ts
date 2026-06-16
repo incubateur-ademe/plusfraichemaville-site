@@ -12,7 +12,6 @@ import { ProjetWithRelations, UserProjetWithRelations } from "@/src/lib/prisma/p
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import {
   getProjetsFinishedToGetQuestionnaire,
-  getProjetsFinishedToGetRex,
   getProjetsForRemindDiagnostic,
   getProjetsForRemindDiagnosticEmail,
   getProjetsForRemindToChooseSolution,
@@ -535,28 +534,6 @@ export class EmailService {
         return await this.sendEmail({
           to: projet.creator.email,
           emailType: emailType.projetUnfinishedInactive2,
-          params: emailParams,
-          extra: emailParams,
-          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
-        });
-      }),
-    );
-  }
-
-  async sendGetRexFromFinishedProjetEmails(lastSyncDate: Date, inactivityDays: number) {
-    const projets = await getProjetsFinishedToGetRex(
-      removeDaysToDate(lastSyncDate, inactivityDays),
-      removeDaysToDate(new Date(), inactivityDays),
-    );
-    console.log(`Nb de mails de projets terminés à envoyer pour avoir un REX : ${projets.length}`);
-    return await Promise.all(
-      projets.map(async (projet) => {
-        const emailParams = {
-          userPrenom: projet.creator.prenom || "",
-        };
-        return await this.sendEmail({
-          to: projet.creator.email,
-          emailType: emailType.projetFinishedToGetRex,
           params: emailParams,
           extra: emailParams,
           userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,

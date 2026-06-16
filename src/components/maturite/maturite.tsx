@@ -7,7 +7,7 @@ import {
   getNiveauMaturiteByCode,
   NiveauMaturite,
 } from "@/src/helpers/maturite-projet";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { updateMaturiteProjetAction } from "@/src/actions/projets/update-maturite-projet-action";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { notifications } from "../common/notifications";
@@ -35,6 +35,7 @@ export const Maturite = ({
   editable = true,
   id,
 }: MaturiteProps) => {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const readOnly = useIsLecteur(projetId) || !editable;
 
@@ -51,12 +52,16 @@ export const Maturite = ({
 
   const currentNiveau = useMemo(() => getNiveauMaturiteByCode(niveau || null), [niveau]);
   return (
-    <Tooltip className={clsx(withLabel && "invisible")} kind="hover" title={currentNiveau?.label}>
+    <Tooltip className={clsx((withLabel || isDropdownOpen) && "invisible")} kind="hover" title={currentNiveau?.label}>
       <Select
         inputId={id}
         isSearchable={false}
+        menuIsOpen={isDropdownOpen}
+        onMenuOpen={() => setIsDropdownOpen(true)}
+        onMenuClose={() => setIsDropdownOpen(false)}
         styles={{
           menu: (baseStyles) => ({ ...baseStyles, width: "max-content" }),
+          menuPortal: (baseStyles) => ({ ...baseStyles, zIndex: 9999 }),
         }}
         classNames={{
           indicatorSeparator: (_) => "hidden",
@@ -66,6 +71,8 @@ export const Maturite = ({
           option: (state) => (state.isSelected ? "!text-white" : "!text-black"),
           menu: (_) => `${readOnly ? "!hidden" : "!z-[100]"}`,
         }}
+        menuPortalTarget={typeof document !== "undefined" ? document.body : undefined}
+        menuPosition="fixed"
         options={readOnly ? [] : ALL_NIVEAU_MATURITE}
         getOptionValue={(niveau) => niveau.code}
         value={currentNiveau}

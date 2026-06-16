@@ -189,18 +189,6 @@ export const homepageData = {
       url: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
     },
   },
-  newsletter: {
-    title: "Abonnez-vous à notre lettre d’information",
-    subtitle:
-      // eslint-disable-next-line max-len
-      "Rejoignez la communauté Plus Fraîche ma ville, recevez des conseils d'experts lors de nos webinaires et parlez-nous de vos projets.",
-    input: {
-      label: "Votre adresse électronique (ex. : nom@domaine.fr)",
-      button: "S'abonner",
-      // eslint-disable-next-line max-len
-      info: "En renseignant votre adresse électronique, vous acceptez de recevoir nos actualités par courriel. Vous pouvez vous désinscrire à tout moment à l’aide des liens de désinscription ou en nous contactant.",
-    },
-  },
 };
 
 export const multilines = (lines: string[], className?: string) => (
