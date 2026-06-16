@@ -1,10 +1,10 @@
 export type PosthogEvent = (typeof POSTHOG_EVENTS)[keyof typeof POSTHOG_EVENTS];
 
 export const POSTHOG_EVENTS = {
-  SEE_RESULTS_DIAG_SIMPLIFIE: "see-results-diag-simplifie",
-  CLOSE_FICHE_DIAG_MODAL: "close-fiche-diag-modal",
-  ADD_FICHE_SOLUTION: "add-fiche-solution",
-  SAVE_ESTIMATION: "save-estimation",
-  CLOSE_AIDE_MODAL: "close-aide-modal",
-  ANNUAIRE_CLIC_PROJET: "click-projet-annuaire",
+  SEE_RESULTS_DIAG_SIMPLIFIE: "voir_resultat_diag_simplifie",
+  CLOSE_FICHE_DIAG_MODAL: "fermeture_fiche_diagnostic_modal",
+  ADD_FICHE_SOLUTION: "ajout_fiche_solution",
+  SAVE_ESTIMATION: "terminer_estimation",
+  CLOSE_AIDE_MODAL: "fermeture_aide_modal",
+  ANNUAIRE_CLIC_PROJET: "clic_projet_annuaire",
 } as const;
