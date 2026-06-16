@@ -185,6 +185,7 @@ export const emailType: {
   projetRemindToDoDiagnostic: 'projetRemindToDoDiagnostic',
   projetRemindToDoEstimation: 'projetRemindToDoEstimation',
   projetRemindToDoFinancement: 'projetRemindToDoFinancement',
+  projetRemindToDoFinancementWithoutEstimation: 'projetRemindToDoFinancementWithoutEstimation',
   projetUnfinishedInactive: 'projetUnfinishedInactive',
   projetUnfinishedInactive2: 'projetUnfinishedInactive2',
   projetFinishedQuestionnaireSatisfaction: 'projetFinishedQuestionnaireSatisfaction',

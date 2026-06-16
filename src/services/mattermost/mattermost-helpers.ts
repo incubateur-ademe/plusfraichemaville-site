@@ -2,7 +2,6 @@ import { User } from "@/src/generated/prisma/client";
 
 type CsmBatchWebhookData = {
   nbMailRemindModuleDiagnostic: number;
-  nbMailsInactiveUser1: number;
   nbMailsInactiveUser2: number;
   nbMailsInactiveUser3: number;
   nbMailsSendQuestionnaireForFinishedProjet: number;
@@ -12,6 +11,7 @@ type CsmBatchWebhookData = {
   nbMailsRemindFinancement: number;
   nbMailsInactiveProjet1: number;
   nbMailsInactiveProjet2: number;
+  nbMailsRemindFinancementWithoutEstimation: number;
 };
 
 export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
@@ -26,11 +26,11 @@ export const makeCsmBatchWebhookData = (data: CsmBatchWebhookData) => {
 
 **Nb de mails de rappel pour trouver une aide : ** ${data.nbMailsRemindFinancement}
 
+**Nb de mails de rappel pour trouver une aide sans estimation: ** ${data.nbMailsRemindFinancementWithoutEstimation}
+
 **Nb de mails de projets inactifs depuis 14 jours : ** ${data.nbMailsInactiveProjet1}
 
 **Nb de mails de projets inactifs depuis 2 mois: ** ${data.nbMailsInactiveProjet2}
-
-**Nb de mails d'utilisateurs sans projet à J+2 : ** ${data.nbMailsInactiveUser1} 
 
 **Nb de mails d'utilisateurs sans projet à J+14 : ** ${data.nbMailsInactiveUser2} 
 

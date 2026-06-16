@@ -609,26 +609,32 @@ export const getProjetsForRemindToDoFinancement = async (
   return prismaClient.projet.findMany({
     where: {
       deleted_at: null,
+      projetAides: { none: {} },
       estimations: {
         some: {
           deleted_at: null,
           created_at: { gte: afterDate, lte: beforeDate },
-          estimations_aides: {
-            none: {},
-          },
-        },
-        none: {
-          deleted_at: null,
-          OR: [
-            { created_at: { gte: beforeDate } },
-            {
-              estimations_aides: {
-                some: {},
-              },
-            },
-          ],
         },
       },
+      AND: [
+        { ...projetNotTermmine },
+        { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoFinancement) },
+      ],
+    },
+    include: projetIncludes,
+  });
+};
+
+export const getProjetsForRemindToDoFinancementWithoutEstimation = async (
+  afterDate: Date,
+  beforeDate: Date,
+): Promise<ProjetWithRelations[]> => {
+  return prismaClient.projet.findMany({
+    where: {
+      deleted_at: null,
+      created_at: { gte: afterDate, lte: beforeDate },
+      projetAides: { none: {} },
+      estimations: { none: {} },
       AND: [
         { ...projetNotTermmine },
         { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoFinancement) },
