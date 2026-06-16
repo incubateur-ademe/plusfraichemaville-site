@@ -11,6 +11,8 @@ import { TypeUpdate } from "@/src/helpers/common";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useRouter } from "next/navigation";
 import { isEmpty } from "@/src/helpers/listUtils";
+import { useCapturePostHogEvent } from "@/src/hooks/useCapturePostHogEvent";
+import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
 
 export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
   modal,
@@ -22,6 +24,7 @@ export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { capturePostHogEvent } = useCapturePostHogEvent();
 
   const validate = async () => {
     if (selectedProjetId > 0) {
@@ -34,6 +37,7 @@ export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
       });
       if (update.projet) {
         addOrUpdateProjet(update.projet);
+        capturePostHogEvent(POSTHOG_EVENTS.ADD_FICHE_SOLUTION);
       }
       notifications(update.type, update.message);
       setIsSubmitting(false);

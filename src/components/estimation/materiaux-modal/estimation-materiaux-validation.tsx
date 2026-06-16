@@ -4,6 +4,8 @@ import EstimationMateriauGlobalPriceFooter from "@/src/forms/estimation/estimati
 import Button from "@codegouvfr/react-dsfr/Button";
 import { notifications } from "@/src/components/common/notifications";
 import { useEstimationFSGlobalPrice } from "@/src/hooks/use-estimation-fs-global-price";
+import { useCapturePostHogEvent } from "@/src/hooks/useCapturePostHogEvent";
+import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
 
 type EstimationMateriauxValidationProps = {
   estimationsFicheSolution: EstimationFicheSolution[];
@@ -21,8 +23,10 @@ export function EstimationMateriauxValidation({
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } =
     useEstimationFSGlobalPrice(estimationsFicheSolution);
 
+  const { capturePostHogEvent } = useCapturePostHogEvent();
   const validateEstimation = () => {
     notifications("success", "ESTIMATION_VALIDATED");
+    capturePostHogEvent(POSTHOG_EVENTS.SAVE_ESTIMATION);
     onClose();
   };
 

@@ -27,6 +27,8 @@ import { FicheDiagLink } from "@/src/components/common/generic-save-fiche/fiche-
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useUserStore } from "@/src/stores/user/provider";
 import { addFicheDiagnosticSeenAction } from "@/src/actions/userProjet/add-fiche-diagnostic-seen-action";
+import { useCapturePostHogEvent } from "@/src/hooks/useCapturePostHogEvent";
+import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
 
 const modal = createModal({
   id: "fiche-diagnostic-description-modal",
@@ -52,6 +54,7 @@ export const FicheDiagnosticDescriptionModal = () => {
   const delaiMax = ficheDiagnostic?.attributes.delai_max;
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
+  const { capturePostHogEvent } = useCapturePostHogEvent();
   useEffect(() => {
     if (ficheDiagnostic) {
       modal.open();
@@ -59,7 +62,10 @@ export const FicheDiagnosticDescriptionModal = () => {
   }, [ficheDiagnostic]);
 
   useIsModalOpen(modal, {
-    onConceal: () => setCurrentFicheDiagnostic(null),
+    onConceal: () => {
+      setCurrentFicheDiagnostic(null);
+      capturePostHogEvent(POSTHOG_EVENTS.CLOSE_FICHE_DIAG_MODAL);
+    },
   });
 
   const ficheDiagData = ficheDiagnostic?.attributes;

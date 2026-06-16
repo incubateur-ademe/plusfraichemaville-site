@@ -25,11 +25,15 @@ import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { DIAGNOSTIC_COMPUTE_RESULT } from "@/src/helpers/matomo/matomo-tags";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
+import { useCapturePostHogEvent } from "@/src/hooks/useCapturePostHogEvent";
+import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
 
 export default function IndicateursEnvironnementauxForm({ projet }: { projet: ProjetWithRelations }) {
   const currentDiagnosticSimulation: diagnostic_simulation | undefined = projet.diagnostic_simulations[0];
   const updateProjetInStore = useProjetsStore((state) => state.addOrUpdateProjet);
   const router = useRouter();
+  const { capturePostHogEvent } = useCapturePostHogEvent();
+
   const initialValues = useMemo(
     () => ({
       questions: mapAllIndiEnQuestionsToFormValues(
@@ -65,6 +69,7 @@ export default function IndicateursEnvironnementauxForm({ projet }: { projet: Pr
 
   const onSubmitAndSeeResults = async (data: IndicateursEnvironnementauxFormData) => {
     trackEvent(DIAGNOSTIC_COMPUTE_RESULT);
+    capturePostHogEvent(POSTHOG_EVENTS.SEE_RESULTS_DIAG_SIMPLIFIE);
     await onSubmit(data, true, () => {
       router.push(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_RESULTATS(projet.id));
     });
