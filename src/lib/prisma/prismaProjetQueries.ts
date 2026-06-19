@@ -485,6 +485,8 @@ export const updateProjetStatut = async (
 };
 
 export const getProjetsForRemindToChooseSolution = async (
+  afterDateWithDiag: Date,
+  beforeDateWithDiag: Date,
   afterDate: Date,
   beforeDate: Date,
 ): Promise<ProjetWithRelations[]> => {
@@ -493,31 +495,14 @@ export const getProjetsForRemindToChooseSolution = async (
       deleted_at: null,
       OR: [
         {
-          OR: [
-            {
-              fiches: {
-                some: { type: FicheType.DIAGNOSTIC, created_at: { gte: afterDate, lte: beforeDate } },
-              },
-            },
-            {
-              diagnostic_simulations: { some: { created_at: { gte: afterDate, lte: beforeDate } } },
-            },
-          ],
-          niveau_maturite: {
-            in: [
-              NiveauMaturiteCode.questionnement,
-              NiveauMaturiteCode.priorisationSolutions,
-              NiveauMaturiteCode.redactionCDC,
-            ],
+          fiches: {
+            some: { type: FicheType.DIAGNOSTIC, created_at: { gte: afterDateWithDiag, lte: beforeDateWithDiag } },
           },
         },
         {
-          created_at: {
-            gte: afterDate,
-            lte: beforeDate,
-          },
-          niveau_maturite: NiveauMaturiteCode.lancementTravaux,
+          diagnostic_simulations: { some: { created_at: { gte: afterDateWithDiag, lte: beforeDateWithDiag } } },
         },
+        { created_at: { gte: afterDate, lte: beforeDate } },
       ],
       AND: [
         { ...projetNotTermmine },

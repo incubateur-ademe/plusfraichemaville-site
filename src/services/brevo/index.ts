@@ -336,9 +336,18 @@ export class EmailService {
     );
   }
 
-  async sendRemindChooseSolutionMail(lastSyncDate: Date) {
-    const projetsToRemindSolution = await getProjetsForRemindToChooseSolution(lastSyncDate, new Date());
-    console.log(`Nb de mails de projet avec le module Fiche Solution à faire : ${projetsToRemindSolution.length}`);
+  async sendRemindChooseSolutionMailAfterDiagnostic(
+    lastSyncDate: Date,
+    nbDaysToWaitAfterAddingFicheDiag: number,
+    nbDaysToWaitAfterCreatingProjet: number,
+  ) {
+    const projetsToRemindSolution = await getProjetsForRemindToChooseSolution(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterAddingFicheDiag),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterAddingFicheDiag),
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterCreatingProjet),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterCreatingProjet),
+    );
+    console.log(`Nb de mails de projet avec le module Solution après diag à faire : ${projetsToRemindSolution.length}`);
     return await Promise.all(
       projetsToRemindSolution.map(async (projet) => {
         const emailParams: EmailRemindChooseSolutionConfig = {

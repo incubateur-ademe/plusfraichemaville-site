@@ -50,9 +50,13 @@ const main = async () => {
       lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
 
+    const REMIND_TO_CHOOSE_SOLUTION_AFTER_DIAG_DAYS = 7;
+    const REMIND_TO_CHOOSE_SOLUTION_AFTER_PROJET_CREATION_DAYS = 14;
     console.log("Recherche à relancer pour choisir fiche solution après diagnostic");
-    const sendRemindFicheSolutionMail = await emailService.sendRemindChooseSolutionMail(
-      lastSyncDate ?? removeDaysToDate(new Date(), 3),
+    const sendRemindFicheSolutionMail = await emailService.sendRemindChooseSolutionMailAfterDiagnostic(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_CHOOSE_SOLUTION_AFTER_DIAG_DAYS),
+      REMIND_TO_CHOOSE_SOLUTION_AFTER_DIAG_DAYS,
+      REMIND_TO_CHOOSE_SOLUTION_AFTER_PROJET_CREATION_DAYS,
     );
 
     const REMIND_TO_FILL_ESTIMATION_DAYS = 7;
