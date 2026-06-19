@@ -171,6 +171,7 @@ enum emailType {
   noProjetAfterSignupMail1
   noProjetAfterSignupMail2
   noProjetAfterSignupMail3
+  projetRemindToFindContact
 }
 
 enum emailStatus {

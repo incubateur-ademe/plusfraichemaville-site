@@ -18,6 +18,7 @@ import {
   getProjetsForRemindToDoEstimation,
   getProjetsForRemindToDoFinancement,
   getProjetsForRemindToDoFinancementWithoutEstimation,
+  getProjetsForRemindToFindContact,
   getProjetsUnfinishedAndLastUpdatedBetween,
   getProjetsUnfinishedAndLastUpdatedBetween2,
 } from "@/src/lib/prisma/prismaProjetQueries";
@@ -63,6 +64,13 @@ export type EmailRemindFindFinancementConfig = {
   userPrenom: string;
   typeEspaceProjet: string;
   urlModule5: string;
+};
+
+export type EmailRemindSaveContactConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule6: string;
 };
 
 export type EmailRemindUnfinishedAndInactiveProjetConfig = {
@@ -177,6 +185,9 @@ export class EmailService {
       },
       projetRemindToDoFinancementWithoutEstimation: {
         templateId: 78,
+      },
+      projetRemindToFindContact: {
+        templateId: 79,
       },
     };
   }
@@ -396,6 +407,31 @@ export class EmailService {
     );
   }
 
+  async sendRemindSaveContactMail(lastSyncDate: Date, nbDaysToWaitAfterSavingAide: number) {
+    const projetsToRemindContact = await getProjetsForRemindToFindContact(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterSavingAide),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterSavingAide),
+    );
+    console.log(`Nb de mails de projet où on relance pour l'annuaire : ${projetsToRemindContact.length}`);
+    return await Promise.all(
+      projetsToRemindContact.map(async (projet) => {
+        const emailParams: EmailRemindSaveContactConfig = {
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          urlModule6: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE(projet.id)),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToFindContact,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
   async sendRemindChooseFinancementMailWithoutEstimation(
     lastSyncDate: Date,
     nbDaysToWaitAfterMakingEstimation: number,
@@ -404,9 +440,7 @@ export class EmailService {
       removeDaysToDate(lastSyncDate, nbDaysToWaitAfterMakingEstimation),
       removeDaysToDate(new Date(), nbDaysToWaitAfterMakingEstimation),
     );
-    console.log(
-      `Nb de mails de projet sans estimation où le module financement est à faire : ${projetsToRemindFinancement.length}`,
-    );
+    console.log(`Nb de mails de projet sans estimation sans aides : ${projetsToRemindFinancement.length}`);
     return await Promise.all(
       projetsToRemindFinancement.map(async (projet) => {
         const emailParams: EmailRemindFindFinancementConfig = {

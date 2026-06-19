@@ -71,9 +71,17 @@ const main = async () => {
 
     const REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS = 21;
     console.log("Recherche des projets sans financement sans estimation");
-    const sendRemindFinancementMailWithoutEstimation = await emailService.sendRemindChooseFinancementMailWithoutEstimation(
-      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS),
-      REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS,
+    const sendRemindFinancementMailWithoutEstimation =
+      await emailService.sendRemindChooseFinancementMailWithoutEstimation(
+        lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS),
+        REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS,
+      );
+
+    const REMIND_TO_SAVE_CONTACT_DAYS = 7;
+    console.log("Recherche des projets avec aide sans contact");
+    const sendRemindSaveContact = await emailService.sendRemindSaveContactMail(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_SAVE_CONTACT_DAYS),
+      REMIND_TO_SAVE_CONTACT_DAYS,
     );
 
     const REMIND_UNFINISHED_INACTIVE_PROJET_1_DAYS = 14;
@@ -103,6 +111,7 @@ const main = async () => {
       nbMailsInactiveProjet1: sendRemindInactiveProjetMail1.length,
       nbMailsInactiveProjet2: sendRemindInactiveProjetMail2.length,
       nbMailsRemindFinancementWithoutEstimation: sendRemindFinancementMailWithoutEstimation.length,
+      nbMailsRemindSaveContact: sendRemindSaveContact.length,
     });
     await sendMattermostWebhook(webhookData, "batch", 5000);
     console.log("Batch des mails CSM réussi !");
