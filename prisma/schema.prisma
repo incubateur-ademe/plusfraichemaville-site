@@ -163,6 +163,7 @@ enum emailType {
   projetRemindToDoDiagnostic
   projetRemindToDoEstimation
   projetRemindToDoFinancement
+  projetRemindToDoFinancementWithoutEstimation
   projetUnfinishedInactive
   projetUnfinishedInactive2
   projetFinishedQuestionnaireSatisfaction
@@ -170,6 +171,7 @@ enum emailType {
   noProjetAfterSignupMail1
   noProjetAfterSignupMail2
   noProjetAfterSignupMail3
+  projetRemindToFindContact
 }
 
 enum emailStatus {

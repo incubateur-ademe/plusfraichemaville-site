@@ -17,11 +17,13 @@ import {
   getProjetsForRemindToChooseSolution,
   getProjetsForRemindToDoEstimation,
   getProjetsForRemindToDoFinancement,
+  getProjetsForRemindToDoFinancementWithoutEstimation,
+  getProjetsForRemindToFindContact,
   getProjetsUnfinishedAndLastUpdatedBetween,
   getProjetsUnfinishedAndLastUpdatedBetween2,
 } from "@/src/lib/prisma/prismaProjetQueries";
 import { removeDaysToDate } from "@/src/helpers/dateUtils";
-import { getCountAllUsers, getUserById } from "@/src/lib/prisma/prismaUserQueries";
+import { getUserById } from "@/src/lib/prisma/prismaUserQueries";
 import { selectEspaceByCode } from "@/src/helpers/type-espace-filter";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
@@ -62,6 +64,13 @@ export type EmailRemindFindFinancementConfig = {
   userPrenom: string;
   typeEspaceProjet: string;
   urlModule5: string;
+};
+
+export type EmailRemindSaveContactConfig = {
+  projetName: string;
+  userPrenom: string;
+  typeEspaceProjet: string;
+  urlModule6: string;
 };
 
 export type EmailRemindUnfinishedAndInactiveProjetConfig = {
@@ -173,6 +182,12 @@ export class EmailService {
       },
       projetUnfinishedInactive2: {
         templateId: 74,
+      },
+      projetRemindToDoFinancementWithoutEstimation: {
+        templateId: 78,
+      },
+      projetRemindToFindContact: {
+        templateId: 79,
       },
     };
   }
@@ -321,9 +336,18 @@ export class EmailService {
     );
   }
 
-  async sendRemindChooseSolutionMail(lastSyncDate: Date) {
-    const projetsToRemindSolution = await getProjetsForRemindToChooseSolution(lastSyncDate, new Date());
-    console.log(`Nb de mails de projet avec le module Fiche Solution à faire : ${projetsToRemindSolution.length}`);
+  async sendRemindChooseSolutionMailAfterDiagnostic(
+    lastSyncDate: Date,
+    nbDaysToWaitAfterAddingFicheDiag: number,
+    nbDaysToWaitAfterCreatingProjet: number,
+  ) {
+    const projetsToRemindSolution = await getProjetsForRemindToChooseSolution(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterAddingFicheDiag),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterAddingFicheDiag),
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterCreatingProjet),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterCreatingProjet),
+    );
+    console.log(`Nb de mails de projet avec le module Solution après diag à faire : ${projetsToRemindSolution.length}`);
     return await Promise.all(
       projetsToRemindSolution.map(async (projet) => {
         const emailParams: EmailRemindChooseSolutionConfig = {
@@ -392,26 +416,54 @@ export class EmailService {
     );
   }
 
-  async sendNoActivityAfterSignupEmail1(lastSyncDate: Date, inactivityDays: number) {
-    const users = await getUserWithNoActivityAfterSignup(
-      lastSyncDate,
-      inactivityDays,
-      emailType.noProjetAfterSignupMail1,
+  async sendRemindSaveContactMail(lastSyncDate: Date, nbDaysToWaitAfterSavingAide: number) {
+    const projetsToRemindContact = await getProjetsForRemindToFindContact(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterSavingAide),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterSavingAide),
     );
-    const countAllUsers = await getCountAllUsers();
-
+    console.log(`Nb de mails de projet où on relance pour l'annuaire : ${projetsToRemindContact.length}`);
     return await Promise.all(
-      users.map(async (user) => {
-        const emailParams = {
-          userPrenom: user.prenom || "",
-          nbUtilisateurs: countAllUsers.toString(),
+      projetsToRemindContact.map(async (projet) => {
+        const emailParams: EmailRemindSaveContactConfig = {
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          urlModule6: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE(projet.id)),
         };
         return await this.sendEmail({
-          to: user.email,
-          userId: user.id,
-          emailType: emailType.noProjetAfterSignupMail1,
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToFindContact,
           params: emailParams,
           extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
+        });
+      }),
+    );
+  }
+
+  async sendRemindChooseFinancementMailWithoutEstimation(
+    lastSyncDate: Date,
+    nbDaysToWaitAfterMakingEstimation: number,
+  ) {
+    const projetsToRemindFinancement = await getProjetsForRemindToDoFinancementWithoutEstimation(
+      removeDaysToDate(lastSyncDate, nbDaysToWaitAfterMakingEstimation),
+      removeDaysToDate(new Date(), nbDaysToWaitAfterMakingEstimation),
+    );
+    console.log(`Nb de mails de projet sans estimation sans aides : ${projetsToRemindFinancement.length}`);
+    return await Promise.all(
+      projetsToRemindFinancement.map(async (projet) => {
+        const emailParams: EmailRemindFindFinancementConfig = {
+          userPrenom: projet.creator.prenom || "",
+          projetName: projet.nom,
+          typeEspaceProjet: selectEspaceByCode(projet.type_espace)?.label || "",
+          urlModule5: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT(projet.id)),
+        };
+        return await this.sendEmail({
+          to: projet.creator.email,
+          emailType: emailType.projetRemindToDoFinancement,
+          params: emailParams,
+          extra: emailParams,
+          userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,
         });
       }),
     );
