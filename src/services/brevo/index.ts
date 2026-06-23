@@ -460,7 +460,7 @@ export class EmailService {
         };
         return await this.sendEmail({
           to: projet.creator.email,
-          emailType: emailType.projetRemindToDoFinancement,
+          emailType: emailType.projetRemindToDoFinancementWithoutEstimation,
           params: emailParams,
           extra: emailParams,
           userProjetId: projet.users.find((up) => up.role === RoleProjet.ADMIN)?.id,

@@ -624,7 +624,7 @@ export const getProjetsForRemindToDoFinancementWithoutEstimation = async (
       projetAides: { none: {} },
       estimations: { none: {} },
       ...projetNotTermmine,
-      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoFinancement),
+      ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToDoFinancementWithoutEstimation),
     },
     include: projetIncludes,
   });
