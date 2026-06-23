@@ -2,6 +2,7 @@ import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { StaticZoomedImage } from "@/src/components/common/static-zoomed-image";
 
 export const metadata: Metadata = computeMetadata("Comprendre les risques de la surchauffe urbaine sur la santé");
 
@@ -34,7 +35,10 @@ export default async function SurchauffeUrbaineComprendreLesRisquesPage() {
                   sociaux.
                 </li>
               </ul>
-              <div>Infographie</div>
+              <StaticZoomedImage
+                src="/images/surchauffe-urbaine/sante-mieux-vivre-avec-la-chaleur-en-ville.jpg"
+                alt="Infographie : mieux vivre avec la chaleur en ville"
+              />
             </div>
           </section>
           <section>
@@ -83,7 +87,10 @@ export default async function SurchauffeUrbaineComprendreLesRisquesPage() {
                   par 4.
                 </li>
               </ul>
-              <div>Infographie</div>
+              <StaticZoomedImage
+                src="/images/surchauffe-urbaine/sante-population-a-risque.jpg"
+                alt="Infographie : augmentation de la population à risque en fonction de l'intensité de la chaleur"
+              />
             </div>
             <p>
               Les femmes sont également plus vulnérables. Le risque de décès lié à la chaleur est légèrement plus élevé
