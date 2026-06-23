@@ -617,7 +617,10 @@ export const getProjetsForRemindToDoFinancementWithoutEstimation = async (
   return prismaClient.projet.findMany({
     where: {
       deleted_at: null,
-      created_at: { gte: afterDate, lte: beforeDate },
+      fiches: {
+        some: { type: FicheType.SOLUTION, created_at: { gte: afterDate, lte: beforeDate } },
+        none: { type: FicheType.SOLUTION, created_at: { gte: beforeDate } },
+      },
       projetAides: { none: {} },
       estimations: { none: {} },
       ...projetNotTermmine,
