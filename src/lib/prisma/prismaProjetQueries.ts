@@ -634,7 +634,10 @@ export const getProjetsForRemindToFindContact = async (
   return prismaClient.projet.findMany({
     where: {
       deleted_at: null,
-      projetAides: { some: { created_at: { gte: afterDate, lte: beforeDate } } },
+      fiches: {
+        some: { type: FicheType.SOLUTION, created_at: { gte: afterDate, lte: beforeDate } },
+        none: { type: FicheType.SOLUTION, created_at: { gte: beforeDate } },
+      },
       AND: [
         { OR: [{ sourcing_rex: { equals: Prisma.AnyNull } }, { sourcing_rex: { equals: [] } }] },
         { sourcing_user_projets: { none: {} } },

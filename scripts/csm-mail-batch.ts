@@ -81,8 +81,8 @@ const main = async () => {
         REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS,
       );
 
-    const REMIND_TO_SAVE_CONTACT_DAYS = 7;
-    console.log("Recherche des projets avec aide sans contact");
+    const REMIND_TO_SAVE_CONTACT_DAYS = 28;
+    console.log("Recherche des projets avec fiche solution sans contact");
     const sendRemindSaveContact = await emailService.sendRemindSaveContactMail(
       lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_SAVE_CONTACT_DAYS),
       REMIND_TO_SAVE_CONTACT_DAYS,
