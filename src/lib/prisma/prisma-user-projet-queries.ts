@@ -424,3 +424,9 @@ export const updateUserProjetAidesFsUnselected = async (
     data: { aides_fs_unselected: unselectedIds },
   });
 };
+
+export const getUserUserProjetByUserId = async (userId: string): Promise<user_projet[]> => {
+  return prismaClient.user_projet.findMany({
+    where: { user_id: userId, deleted_at: null, projet: { deleted_at: null } },
+  });
+};

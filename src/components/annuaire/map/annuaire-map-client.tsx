@@ -44,7 +44,6 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
   const focusMarkerByProjetId = useCallback((markerType: CustomMarker["type"], idProjet?: number) => {
     const marker = markers.find((marker) => marker.type === markerType && marker.idProjet === idProjet);
     if (marker) {
-      console.log("focusMarkerByProjetId", marker);
       setFocusedMarker(marker);
     }
   }, []);

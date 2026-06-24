@@ -7,15 +7,18 @@ import {
 } from "@/src/lib/prisma/prismaCustomTypes";
 import { createStore } from "zustand/vanilla";
 import { updateAideInEstimation, updateAideInProjet } from "./helper";
+import { user_projet } from "@/src/generated/prisma/client";
 
 export interface ProjetsState {
   projets: ProjetWithRelations[];
   pendingProjets: ProjetWithPublicRelations[];
   currentProjetId: number | null;
+  userProjets: user_projet[];
 }
 
 export type ProjetsActions = {
   setProjets: (_projets: ProjetWithRelations[]) => void;
+  setUserProjets: (_userProjets: user_projet[]) => void;
   setPendingProjets: (_projets: ProjetWithPublicRelations[]) => void;
   setCurrentProjetId: (_currentProjetId: number | null) => void;
   getCurrentProjet: () => ProjetWithRelations | undefined;
@@ -37,6 +40,7 @@ export const defaultInitState: ProjetsState = {
   projets: [],
   pendingProjets: [],
   currentProjetId: null,
+  userProjets: [],
 };
 
 export const initProjetsStore = (): ProjetsState => {
@@ -47,6 +51,7 @@ export const createProjetStore = (initState: ProjetsState = defaultInitState) =>
   return createStore<ProjetsStore>()((set, get) => ({
     ...initState,
     setProjets: (projets) => set(() => ({ projets })),
+    setUserProjets: (userProjets) => set(() => ({ userProjets })),
     setPendingProjets: (pendingProjets) => set(() => ({ pendingProjets })),
     setCurrentProjetId: (currentProjetId) => set(() => ({ currentProjetId })),
     getCurrentProjet: () => {

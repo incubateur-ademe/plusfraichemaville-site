@@ -6,11 +6,13 @@ import { notifications } from "@/src/components/common/notifications";
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 import { TypeUpdate } from "@/src/helpers/common";
 import { checkIfFicheIsSaved } from "./helpers";
+import { useCapturePostHogEvent } from "@/src/hooks/useCapturePostHogEvent";
+import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
 
 export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: GenericSaveFicheButtonWithOpener) => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
-
+  const { capturePostHogEvent } = useCapturePostHogEvent();
   const isSaved = projet && checkIfFicheIsSaved({ projet, ficheId: +props.id, typeFiche: props.type });
 
   const update = async () => {
@@ -26,6 +28,7 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
       if (!isSaved && !props.withoutModal && opener) {
         opener();
       }
+      capturePostHogEvent(POSTHOG_EVENTS.ADD_FICHE_SOLUTION);
     } else if (update.type === "error") {
       notifications(update.type, update.message);
     }

@@ -17,13 +17,6 @@ const main = async () => {
     const lastSync = await getLastCsmMailBatch();
     const lastSyncDate = lastSync?.execution_end_time;
 
-    const USER_NO_PROJET_1_DAYS = 2;
-    console.log(`Recherche des utilisateurs sans projet depuis ${USER_NO_PROJET_1_DAYS} jours...`);
-    const inactiveUserMail1 = await emailService.sendNoActivityAfterSignupEmail1(
-      lastSyncDate ?? removeDaysToDate(new Date(), USER_NO_PROJET_1_DAYS),
-      USER_NO_PROJET_1_DAYS,
-    );
-
     const USER_NO_PROJET_2_DAYS = 14;
     console.log(`Recherche des utilisateurs sans projet depuis ${USER_NO_PROJET_2_DAYS} jours...`);
     const inactiveUserMail2 = await emailService.sendNoActivityAfterSignupEmail2(
@@ -57,9 +50,13 @@ const main = async () => {
       lastSyncDate ?? removeDaysToDate(new Date(), 3),
     );
 
-    console.log("Recherche à relancer pour choisir fiche solution");
-    const sendRemindFicheSolutionMail = await emailService.sendRemindChooseSolutionMail(
-      lastSyncDate ?? removeDaysToDate(new Date(), 3),
+    const REMIND_TO_CHOOSE_SOLUTION_AFTER_DIAG_DAYS = 7;
+    const REMIND_TO_CHOOSE_SOLUTION_AFTER_PROJET_CREATION_DAYS = 14;
+    console.log("Recherche à relancer pour choisir fiche solution après diagnostic");
+    const sendRemindFicheSolutionMail = await emailService.sendRemindChooseSolutionMailAfterDiagnostic(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_CHOOSE_SOLUTION_AFTER_DIAG_DAYS),
+      REMIND_TO_CHOOSE_SOLUTION_AFTER_DIAG_DAYS,
+      REMIND_TO_CHOOSE_SOLUTION_AFTER_PROJET_CREATION_DAYS,
     );
 
     const REMIND_TO_FILL_ESTIMATION_DAYS = 7;
@@ -74,6 +71,21 @@ const main = async () => {
     const sendRemindFinancementMail = await emailService.sendRemindChooseFinancementMail(
       lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_FILL_FINANCEMENT_DAYS),
       REMIND_TO_FILL_FINANCEMENT_DAYS,
+    );
+
+    const REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS = 21;
+    console.log("Recherche des projets sans financement sans estimation");
+    const sendRemindFinancementMailWithoutEstimation =
+      await emailService.sendRemindChooseFinancementMailWithoutEstimation(
+        lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS),
+        REMIND_TO_FILL_FINANCEMENT_WITHOUT_ESTIMATION_DAYS,
+      );
+
+    const REMIND_TO_SAVE_CONTACT_DAYS = 28;
+    console.log("Recherche des projets avec fiche solution sans contact");
+    const sendRemindSaveContact = await emailService.sendRemindSaveContactMail(
+      lastSyncDate ?? removeDaysToDate(new Date(), REMIND_TO_SAVE_CONTACT_DAYS),
+      REMIND_TO_SAVE_CONTACT_DAYS,
     );
 
     const REMIND_UNFINISHED_INACTIVE_PROJET_1_DAYS = 14;
@@ -93,7 +105,6 @@ const main = async () => {
     await saveCronJob(startedDate, new Date(), "CSM_MAIL_BATCH");
     const webhookData = makeCsmBatchWebhookData({
       nbMailRemindModuleDiagnostic: sendRemindModuleDiagnosticMail.length,
-      nbMailsInactiveUser1: inactiveUserMail1.length,
       nbMailsInactiveUser2: inactiveUserMail2.length,
       nbMailsInactiveUser3: inactiveUserMail3.length,
       nbMailsSendQuestionnaireForFinishedProjet: finishedProjetGetQuestionnaire.length,
@@ -103,6 +114,8 @@ const main = async () => {
       nbMailsRemindFinancement: sendRemindFinancementMail.length,
       nbMailsInactiveProjet1: sendRemindInactiveProjetMail1.length,
       nbMailsInactiveProjet2: sendRemindInactiveProjetMail2.length,
+      nbMailsRemindFinancementWithoutEstimation: sendRemindFinancementMailWithoutEstimation.length,
+      nbMailsRemindSaveContact: sendRemindSaveContact.length,
     });
     await sendMattermostWebhook(webhookData, "batch", 5000);
     console.log("Batch des mails CSM réussi !");

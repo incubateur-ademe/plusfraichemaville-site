@@ -211,7 +211,7 @@ Create one component per file.
 
 ## Important Notes
 
-- **Node version**: 22.14.0 (enforced in package.json engines)
+- **Node version**: 22.22.0 (enforced in package.json engines)
 - **pnpm version**: 10.32.1 (enforced, no other package managers allowed)
 - **Route groups** use parentheses syntax: `(private)`, `(auth)`
 - **Strapi cache** TTL configured via `CMS_CACHE_TTL` env var
