@@ -7,9 +7,10 @@ type StaticZoomedImageProps = {
   src: string;
   alt: string;
   caption?: string;
+  imageSize: { thumbWidth: number; thumbHeight: number; largeWidth: number; largeHeight: number };
 };
 
-export const StaticZoomedImage = ({ src, alt, caption }: StaticZoomedImageProps) => {
+export const StaticZoomedImage = ({ src, alt, caption, imageSize }: StaticZoomedImageProps) => {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -22,7 +23,14 @@ export const StaticZoomedImage = ({ src, alt, caption }: StaticZoomedImageProps)
   return (
     <>
       <button className="cursor-zoom-in text-left" onClick={() => setIsOpen(true)}>
-        <Image src={src} alt={alt} width={400} height={260} className="rounded-lg object-contain" unoptimized />
+        <Image
+          src={src}
+          alt={alt}
+          width={imageSize.thumbWidth}
+          height={imageSize.thumbHeight}
+          className="rounded-lg object-contain"
+          unoptimized
+        />
         {caption && <p className="mt-1 text-center text-sm">{caption}</p>}
       </button>
       {isOpen && (
@@ -33,13 +41,13 @@ export const StaticZoomedImage = ({ src, alt, caption }: StaticZoomedImageProps)
             e.stopPropagation();
           }}
         >
-          <button className="mb-2 self-end text-white" onClick={() => setIsOpen(false)}>
+          <button className="hover-transparent mb-2 self-end text-white" onClick={() => setIsOpen(false)}>
             Fermer
           </button>
           <div className="flex min-h-0 flex-1 items-center justify-center">
             <Image
-              width={1200}
-              height={800}
+              width={imageSize.largeWidth}
+              height={imageSize.largeHeight}
               className="max-h-full max-w-full !object-contain"
               src={src}
               alt={alt}
