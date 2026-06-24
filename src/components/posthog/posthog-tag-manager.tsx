@@ -16,7 +16,7 @@ function PostHogTagManager() {
 
   useEffect(() => {
     if (userInfos && userSubscriptionDate) {
-      posthog.setPersonProperties({
+      posthog.identify(userInfos.id, {
         date_inscription_utilisateur: userSubscriptionDate,
       });
     }
@@ -24,7 +24,7 @@ function PostHogTagManager() {
 
   useEffect(() => {
     if (userInfos && firstCreatedProjetCreationDate) {
-      posthog.setPersonProperties({
+      posthog.identify(userInfos.id, {
         date_creation_premier_projet: firstCreatedProjetCreationDate,
       });
     }
@@ -32,7 +32,7 @@ function PostHogTagManager() {
 
   useEffect(() => {
     if (userInfos && firstJoinedProjetJoiningDate) {
-      posthog.setPersonProperties({
+      posthog.identify(userInfos.id, {
         date_rattachement_premier_projet: firstJoinedProjetJoiningDate,
       });
     }
@@ -40,7 +40,7 @@ function PostHogTagManager() {
 
   useEffect(() => {
     if (userInfos) {
-      posthog.setPersonProperties({
+      posthog.identify(userInfos.id, {
         nb_projet_total: userUserProjets.length,
       });
     }
