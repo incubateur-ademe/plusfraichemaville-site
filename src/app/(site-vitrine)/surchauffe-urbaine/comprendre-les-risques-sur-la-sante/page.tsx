@@ -6,6 +6,7 @@ import { StaticZoomedImage } from "@/src/components/common/static-zoomed-image";
 import { getAllFichesSolutionsWithCobenefices } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import FicheSolutionCard from "@/src/components/ficheSolution/fiche-solution-card";
 import { Icone } from "@/src/lib/strapi/types/api/cobenefice";
+import { AltSRSantePopulationARisque, AltSRSanteVivreChaleurEnVille } from "./screen-reader-alt-infographies-sante";
 
 export const metadata: Metadata = computeMetadata("Comprendre les risques de la surchauffe urbaine sur la santé");
 
@@ -50,7 +51,9 @@ export default async function SurchauffeUrbaineComprendreLesRisquesPage() {
                   src="/images/surchauffe-urbaine/sante-mieux-vivre-avec-la-chaleur-en-ville.jpg"
                   alt="Infographie : mieux vivre avec la chaleur en ville"
                   imageSize={{ thumbWidth: 300, thumbHeight: 260, largeWidth: 700, largeHeight: 2000 }}
+                  ariaDescribedBy="desc-infographie-chaleur"
                 />
+                <AltSRSanteVivreChaleurEnVille id="desc-infographie-chaleur" />
                 <legend className="fr-text--lg">
                   Source :{" "}
                   <LinkWithoutPrefetch
@@ -114,7 +117,9 @@ export default async function SurchauffeUrbaineComprendreLesRisquesPage() {
                 src="/images/surchauffe-urbaine/sante-population-a-risque.jpg"
                 alt="Infographie : augmentation de la population à risque en fonction de l'intensité de la chaleur"
                 imageSize={{ thumbWidth: 550, thumbHeight: 260, largeWidth: 1200, largeHeight: 844 }}
+                ariaDescribedBy="sante-population-a-risque"
               />
+              <AltSRSantePopulationARisque id="sante-population-a-risque" />
             </div>
             <p>
               Les femmes sont également plus vulnérables. Le risque de décès lié à la chaleur est légèrement plus élevé

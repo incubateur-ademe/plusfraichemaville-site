@@ -8,9 +8,10 @@ type StaticZoomedImageProps = {
   alt: string;
   caption?: string;
   imageSize: { thumbWidth: number; thumbHeight: number; largeWidth: number; largeHeight: number };
+  ariaDescribedBy?: string;
 };
 
-export const StaticZoomedImage = ({ src, alt, caption, imageSize }: StaticZoomedImageProps) => {
+export const StaticZoomedImage = ({ src, alt, caption, imageSize, ariaDescribedBy }: StaticZoomedImageProps) => {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -22,7 +23,11 @@ export const StaticZoomedImage = ({ src, alt, caption, imageSize }: StaticZoomed
 
   return (
     <>
-      <button className="cursor-zoom-in text-left" onClick={() => setIsOpen(true)}>
+      <button
+        className="cursor-zoom-in text-left"
+        onClick={() => setIsOpen(true)}
+        aria-label="Agrandir"
+      >
         <Image
           src={src}
           alt={alt}
@@ -30,6 +35,7 @@ export const StaticZoomedImage = ({ src, alt, caption, imageSize }: StaticZoomed
           height={imageSize.thumbHeight}
           className="rounded-lg object-contain"
           unoptimized
+          aria-describedby={ariaDescribedBy}
         />
         {caption && <p className="mt-1 text-center text-sm">{caption}</p>}
       </button>
