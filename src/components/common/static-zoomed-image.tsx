@@ -23,11 +23,7 @@ export const StaticZoomedImage = ({ src, alt, caption, imageSize, ariaDescribedB
 
   return (
     <>
-      <button
-        className="cursor-zoom-in text-left"
-        onClick={() => setIsOpen(true)}
-        aria-label="Agrandir"
-      >
+      <button className="cursor-zoom-in text-left" onClick={() => setIsOpen(true)} aria-label="Agrandir">
         <Image
           src={src}
           alt={alt}

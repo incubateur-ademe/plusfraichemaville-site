@@ -18,7 +18,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
           Surchauffe urbaine et santé : <br /> comprendre les risques pour mieux protéger les habitants
         </h1>
         <div className="mt-12 flex flex-col gap-6">
-          <section className="fr-text--xl rounded-xl bg-dsfr-background-alt-blue-france p-6">
+          <section className="fr-text--lg rounded-xl bg-dsfr-background-alt-blue-france p-6">
             <div className="flex flex-col gap-12 md:flex-row ">
               <div className="flex flex-col md:basis-[65%]">
                 <h2>Ce qu’il faut retenir</h2>
@@ -45,11 +45,11 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 <StaticZoomedImage
                   src="/images/surchauffe-urbaine/sante-mieux-vivre-avec-la-chaleur-en-ville.jpg"
                   alt="Infographie : mieux vivre avec la chaleur en ville"
-                  imageSize={{ thumbWidth: 300, thumbHeight: 260, largeWidth: 700, largeHeight: 2000 }}
+                  imageSize={{ thumbWidth: 250, thumbHeight: 260, largeWidth: 700, largeHeight: 2000 }}
                   ariaDescribedBy="desc-infographie-chaleur"
                 />
                 <AltSRSanteVivreChaleurEnVille id="desc-infographie-chaleur" />
-                <legend className="fr-text--lg">
+                <legend className="fr-text--md">
                   Source :{" "}
                   <LinkWithoutPrefetch
                     href="https://www.santepubliquefrance.fr/climat/fortes-chaleurs-canicule/infographie/infographie-mieux-vivre-avec-la-chaleur-en-ville"
@@ -65,9 +65,9 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
           <section className="fr-text--lg">
             <h2>Comment la chaleur affecte-t-elle le corps humain ?</h2>
             <p>
-              Pour l’OMS l’impact du <strong>changement climatique</strong> est « l’un des plus grands défis sanitaires
-              du XXIe siècle ». Cinq fois plus d'humains mourront à cause de la chaleur extrême d'ici 2050, d'après le
-              "compte à rebours" du Lancet.
+              Pour l’Organisation mondiale de la santé (OMS) l’impact du <strong>changement climatique</strong> est «
+              l’un des plus grands défis sanitaires du XXIe siècle ». Cinq fois plus d'humains mourront à cause de la
+              chaleur extrême d'ici 2050, d'après le "compte à rebours" du Lancet.
             </p>
             <p>
               Les travaux de Santé publique France montrent que tout le monde est vulnérable à la chaleur, à différents
@@ -147,24 +147,23 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             </p>
             <p>Les résultats sont clairs :</p>
             <ul className="list-disc md:ml-4">
-              <li>Les résultats sont clairs :</li>
-              <li>Risque de décès multiplié par 4 pour les ouvriers ;</li>
-              <li>Multiplié par 4 à 10 pour les personnes en perte d’autonomie ;</li>
-              <li>Multiplié par 3,5 à 5 pour les personnes présentant certaines pathologies chroniques.</li>
+              <li>Risque de décès multiplié par 4 à 10 pour les personnes en perte d’autonomie ;</li>
+              <li>Multiplié par 4 pour les ouvriers ;</li>
+              <li>Multiplié par 4 pour les habitants d’une chambre sous les toits ;</li>
+              <li>Multiplié par 3,5 à 5 pour les personnes présentant certaines pathologies chroniques ;</li>
               <li>
                 Multiplié par 2 à 3 pour les habitants de quartiers exposés à la surchauffe la nuit pendant plusieurs
-                jours ;
+                jours.
               </li>
-              <li>Multiplié par 4 pour les habitants d’une chambre sous les toits.</li>
             </ul>
           </section>
           <section className="fr-text--lg rounded-xl bg-dsfr-background-alt-blue-france p-6">
             <h2>Mise au point : « santé », de quoi parle-t-on ?</h2>
             <p>
-              L'Organisation mondiale de la santé (OMS), dans sa Constitution de 1948, a défini la santé humaine comme «
-              un état de complet bien-être physique, mental et social, qui ne consiste pas seulement en une absence de
-              maladie ou d'infirmité ». Être en bonne santé ne signifie donc pas uniquement « ne pas être malade ». Il
-              s’agit de réunir les conditions physiques, mentales et sociales qui permettent le plein épanouissement.
+              L'OMS, dans sa Constitution de 1948, a défini la santé humaine comme « un état de complet bien-être
+              physique, mental et social, qui ne consiste pas seulement en une absence de maladie ou d'infirmité ». Être
+              en bonne santé ne signifie donc pas uniquement « ne pas être malade ». Il s’agit de réunir les conditions
+              physiques, mentales et sociales qui permettent le plein épanouissement.
             </p>
             <p>
               Pour un projet de rafraîchissement urbain cela donne un cap. Une solution qui baisse les températures,
@@ -182,12 +181,12 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             <h2>Solutions de rafraichissement et santé : une compatibilité systématique ?</h2>
             <p>
               Les solutions qui visent à <strong>rafraîchir nos villes et villages</strong> vont naturellement dans le
-              sens de la <strong>santé</strong> : rendre les villes encore “vivables” et “habitables” dans une France à
-              +4 °C, c’est protéger leurs habitants Certaines solutions présentent plus de co-bénéfices que d’autres.
+              sens de la <strong>santé</strong> : rendre les villes encore vivables et habitables dans une France à +4
+              °C, c’est protéger leurs habitants Certaines solutions présentent plus de co-bénéfices que d’autres.
             </p>
             <p>
-              Prenons deux exemples. Des brises soleil, s’ils réduisent la température ressentie, auront un impact
-              global moins important sur la santé que le renfort de la <strong>végétalisation</strong>. En effet, si une
+              Prenons deux exemples. Des brise-soleil, s’ils réduisent la température ressentie, auront un impact global
+              moins important sur la santé que le renfort de la <strong>végétalisation</strong>. En effet, si une
               diminution des températures est mesurable dans les deux cas, la végétalisation présentera de nombreux
               co-bénéfices supplémentaires : motivation pour l’activité physique, restauration de la capacité
               d’attention, détente, sociabilisation, etc.
@@ -204,7 +203,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 </LinkWithoutPrefetch>{" "}
                 : s’ils procurent une sensation immédiate de fraicheur, ils peuvent faire oublier les effets du
                 rayonnement solaire et les risques pour la peau. On observe souvent des enfants jouer en maillot de bain
-                ou en tenue légère sur des plages horaires où il faudrait normalement ne pas s’exposer.
+                ou en tenue légère sur des plages horaires où il ne faudrait normalement pas s’exposer.
               </li>
               <li>
                 Les{" "}
@@ -214,7 +213,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 >
                   revêtements à albédo élevé
                 </LinkWithoutPrefetch>{" "}
-                comme des sols blanc : s’ils permettent une baisse effective de la température de l’air, ils renvoient
+                comme des sols blancs : s’ils permettent une baisse effective de la température de l’air, ils renvoient
                 les UV vers les usagers et peuvent éblouir augmentent le risque de cancer de la peau.
               </li>
             </ul>
@@ -245,7 +244,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
           </section>
           <section className="fr-text--lg">
             <h2>En savoir plus</h2>
-            <ul className="list-disc">
+            <ul className="list-disc md:ml-4">
               <li>
                 <LinkWithoutPrefetch
                   href="https://www.santepubliquefrance.fr/climat/fortes-chaleurs-canicule/bulletin-national/chaleur-et-sante-bilan-de-lete-2025"
