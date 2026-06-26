@@ -1,21 +1,16 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { StaticZoomedImage } from "@/src/components/common/static-zoomed-image";
-import { getAllFichesSolutionsWithCobenefices } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
-import FicheSolutionCard from "@/src/components/ficheSolution/fiche-solution-card";
-import { Icone } from "@/src/lib/strapi/types/api/cobenefice";
+import { FicheCardSkeleton } from "@/src/components/common/fiche-card-skeleton";
 import { AltSRSantePopulationARisque, AltSRSanteVivreChaleurEnVille } from "./screen-reader-alt-infographies-sante";
+import { FichesSolutionsSante } from "./fiches-solutions-sante";
 
 export const metadata: Metadata = computeMetadata("Comprendre les risques de la surchauffe urbaine sur la santé");
 
-export default async function SurchauffeUrbaineComprendreLesRisquesPage() {
-  const fichesSolutions = await getAllFichesSolutionsWithCobenefices();
-  const filteredFichesSolution = fichesSolutions.filter(
-    (fs) => fs.attributes.cobenefices?.data.find((cb) => cb.attributes.icone === Icone.AmeliorerBienEtreSante),
-  );
-
+export default function SurchauffeUrbaineComprendreLesRisquesPage() {
   return (
     <>
       <div className="fr-container">
@@ -234,13 +229,19 @@ export default async function SurchauffeUrbaineComprendreLesRisquesPage() {
               Allez sur l’espace projet pour faire votre combinaison de solutions les plus favorables à la santé pour
               votre espace.
             </p>
-            <ul className="m-0 mt-6 flex gap-6 overflow-x-auto pb-4 pl-0">
-              {filteredFichesSolution.map((ficheSolution) => (
-                <li key={ficheSolution.id} className="flex shrink-0 list-none">
-                  <FicheSolutionCard ficheSolution={ficheSolution} titleHeadingLevel="h3" />
-                </li>
-              ))}
-            </ul>
+            <Suspense
+              fallback={
+                <ul className="m-0 mt-6 flex gap-6 overflow-x-auto pb-4 pl-0">
+                  {[0, 1, 2].map((i) => (
+                    <li key={i} className="flex shrink-0 list-none">
+                      <FicheCardSkeleton />
+                    </li>
+                  ))}
+                </ul>
+              }
+            >
+              <FichesSolutionsSante />
+            </Suspense>
           </section>
           <section className="fr-text--lg">
             <h2>En savoir plus</h2>
