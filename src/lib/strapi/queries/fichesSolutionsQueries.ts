@@ -132,6 +132,27 @@ const GET_FICHE_SOLUTION_CARD_DATA = (
     }
 }`;
 
+const GET_FICHE_SOLUTION_CARD_AND_COBENEFICES_DATA = (
+  strapiFilter: StrapiFilter,
+) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} query {
+    ficheSolutions ${strapiFilter.wholeFilterString()} {
+      data {
+        ...FicheSolutionCardInfo
+        attributes {
+          cobenefices {
+            data {
+              id
+              attributes {
+                icone
+                description
+              }
+            }
+          }
+        }
+      }
+    }
+}`;
+
 export async function getFicheSolutionBySlug(slug: string): Promise<FicheSolution | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (
@@ -144,6 +165,16 @@ export async function getAllFichesSolutions(): Promise<FicheSolution[]> {
   const filter = new StrapiFilter(true, [], { attribute: "updatedAt", order: "desc" });
   const apiResponse = (
     await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter), { tag: "get-all-fiches-solution" })
+  )?.ficheSolutions as APIResponseCollection<FicheSolution>;
+  return safeReturnStrapiEntities(apiResponse);
+}
+
+export async function getAllFichesSolutionsWithCobenefices(): Promise<FicheSolution[]> {
+  const filter = new StrapiFilter(true, [], { attribute: "updatedAt", order: "desc" });
+  const apiResponse = (
+    await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_AND_COBENEFICES_DATA(filter), {
+      tag: "get-all-fiches-solution-cobenefices",
+    })
   )?.ficheSolutions as APIResponseCollection<FicheSolution>;
   return safeReturnStrapiEntities(apiResponse);
 }

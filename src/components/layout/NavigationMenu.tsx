@@ -69,6 +69,15 @@ export default function NavigationMenu() {
                     },
                     text: "Explorer toutes les solutions",
                   },
+                  {
+                    linkProps: {
+                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE,
+                      target: "_self",
+                      onClick: cancelCurrentProjet,
+                      prefetch: false,
+                    },
+                    text: "Surchauffe urbaine : quels risques pour la santé ?",
+                  },
                 ],
               },
             ],
