@@ -182,7 +182,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             <p>
               Les solutions qui visent à <strong>rafraîchir nos villes et villages</strong> vont naturellement dans le
               sens de la <strong>santé</strong> : rendre les villes encore vivables et habitables dans une France à +4
-              °C, c’est protéger leurs habitants Certaines solutions présentent plus de co-bénéfices que d’autres.
+              °C, c’est protéger leurs habitants. Certaines solutions présentent plus de co-bénéfices que d’autres.
             </p>
             <p>
               Prenons deux exemples. Des brise-soleil, s’ils réduisent la température ressentie, auront un impact global
