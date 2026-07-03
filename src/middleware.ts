@@ -6,7 +6,7 @@ const privatePages = ["/espace-projet.*", "/info-perso.*", "/statut-perso.*"];
 const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
 const cspHeader = `
     default-src 'self';
-    script-src 'self' https://stats.beta.gouv.fr 'nonce-${nonce}' 'strict-dynamic' ${
+    script-src 'self' https://stats.beta.gouv.fr https://tally.so 'nonce-${nonce}' 'strict-dynamic' ${
       process.env.NODE_ENV === "production" ? "" : `'unsafe-eval' 'unsafe-inline'`
     };
     style-src 'self' 'unsafe-inline';
@@ -18,7 +18,7 @@ const cspHeader = `
     object-src 'none';
     base-uri 'self';
     form-action 'self';
-    frame-src https://stats.plusfraichemaville.fr https://cloud.contact.ademe.fr/;
+    frame-src https://stats.plusfraichemaville.fr https://cloud.contact.ademe.fr/ https://tally.so/;
     frame-ancestors 'none';
     upgrade-insecure-requests;
     connect-src 'self' https://sentry.incubateur.net/ https://stats.beta.gouv.fr/matomo.php
