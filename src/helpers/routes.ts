@@ -50,6 +50,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_TABLEAU_DE_BORD: "/tableau-de-bord",
   TABLEAU_DE_BORD: (projetId: number) => `/espace-projet/${projetId}/tableau-de-bord`,
   ESPACE_PROJET_STATUT_PROJET: (projetId: number) => `/espace-projet/${projetId}/statut-projet`,
+  ESPACE_PROJET_BESOIN_AIDE: (projetId: number) => `/espace-projet/${projetId}/besoin-aide`,
   ESPACE_PROJET_UTILISATEURS_PROJET: (projetId: number) => `/espace-projet/${projetId}/utilisateurs-projet`,
   ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiche-solution`,

@@ -6,7 +6,7 @@ export const ServiceAnnuaire = () => {
   return (
     <div className="pfmv-card fr-enlarge-link group max-w-[21rem] p-6">
       <div className="flex items-start gap-4">
-        <Image src="/images/espace-projet/services/carte.svg" width={32} height={32} alt="" className="size-8" />
+        <Image src="/images/espace-projet/services/annuaire.svg" width={32} height={32} alt="" className="size-8" />
         <div>
           <h3>
             <GenericFicheLink className="text-pfmv-navy" href={PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE_MAP_CONTACT}>
