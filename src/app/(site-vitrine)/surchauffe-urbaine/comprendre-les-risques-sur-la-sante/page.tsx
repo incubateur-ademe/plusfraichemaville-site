@@ -22,7 +22,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             <div className="flex flex-col gap-12 md:flex-row ">
               <div className="flex flex-col md:basis-[65%]">
                 <h2>Ce qu’il faut retenir</h2>
-                <ul className="mt-2 list-disc md:ml-4">
+                <ul className="ml-4 mt-2 list-disc">
                   <li>
                     En 2025, plus de 5 700 décès sont attribuables à une exposition de la population à la chaleur sur
                     l’ensemble de la période de surveillance de l’été.
@@ -91,7 +91,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             </p>
             <p>Les groupes de populations à risque élevé :</p>
             <div className="flex flex-col items-start gap-4 md:flex-row">
-              <ul className="list-disc md:ml-4 md:basis-6/12">
+              <ul className="ml-4 list-disc md:basis-6/12">
                 <li>Les enfants et personnes âgées dont la thermorégulation est moins efficace ;</li>
                 <li>
                   Les populations ayant certaines conditions physiques, pathologies ou traitements médicamenteux qui
@@ -146,7 +146,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               survécu.
             </p>
             <p>Les résultats sont clairs :</p>
-            <ul className="list-disc md:ml-4">
+            <ul className="ml-4 list-disc">
               <li>Risque de décès multiplié par 4 à 10 pour les personnes en perte d’autonomie ;</li>
               <li>Multiplié par 4 pour les ouvriers ;</li>
               <li>Multiplié par 4 pour les habitants d’une chambre sous les toits ;</li>
@@ -195,7 +195,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               Certaines solutions de rafraichissement urbain peuvent présenter des effets contreproductifs, et méritent
               une attention particulière ;
             </p>
-            <ul className="mb-4 list-disc md:ml-4">
+            <ul className="mb-4 ml-4 list-disc">
               <li>
                 Les{" "}
                 <LinkWithoutPrefetch href={PFMV_ROUTES.FICHE_SOLUTION("jeux-eau")} className="text-pfmv-navy">
@@ -244,7 +244,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
           </section>
           <section className="fr-text--lg">
             <h2>En savoir plus</h2>
-            <ul className="list-disc md:ml-4">
+            <ul className="ml-4 list-disc">
               <li>
                 <LinkWithoutPrefetch
                   href="https://www.santepubliquefrance.fr/climat/fortes-chaleurs-canicule/bulletin-national/chaleur-et-sante-bilan-de-lete-2025"

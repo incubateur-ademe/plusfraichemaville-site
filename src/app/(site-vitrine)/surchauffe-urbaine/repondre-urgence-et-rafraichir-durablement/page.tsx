@@ -3,7 +3,7 @@ import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import CallOut from "@codegouvfr/react-dsfr/CallOut";
-import Button from "@codegouvfr/react-dsfr/Button";
+import EspaceProjetIncentiveBanner from "@/src/components/common/espace-projet-incentive/espace-projet-incentive-banner";
 
 export const metadata: Metadata = computeMetadata(
   "Vague de chaleur : répondre à l'urgence",
@@ -30,7 +30,13 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             </p>
           </section>
           <section>
-            <CallOut title="Qu’est-ce qu’une vague de chaleur ?" iconId="ri-information-line" bodyAs="div" titleAs="p">
+            <CallOut
+              title="Qu’est-ce qu’une vague de chaleur ?"
+              iconId="ri-information-line"
+              bodyAs="div"
+              titleAs="p"
+              classes={{ title: "fr-text--lg" }}
+            >
               Une vague de chaleur se caractérise par des températures nettement supérieures aux normales pendant
               plusieurs jours. En France, on parle de vague de chaleur lorsque la température moyenne quotidienne
               dépasse 25,3 °C. Quand ces températures élevées persistent de jour comme de nuit pendant au moins 3 jours
@@ -39,7 +45,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             </CallOut>
             <p>
               Lorsqu'une vague de chaleur frappe, des premières actions sont possibles pour faire face à la situation de
-              crise. Elles ne se substituent pas à une stratégie de rafraichissement de long terme, elles contribuent à
+              crise. Elles ne se substituent pas à une stratégie de rafraîchissement de long terme, elles contribuent à
               limiter les risques pour les personnes les plus vulnérables.
             </p>
             <p>
@@ -47,15 +53,11 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               met à disposition des collectivités les outils qui permettent de bâtir les projets adaptés aux besoins de
               leurs territoires.
             </p>
-            <div className="text-center">
-              <Button
-                linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}
-                className="mt-4 rounded-3xl text-center"
-                priority="primary"
-              >
-                Démarrer mon projet sur Plus fraîche ma ville
-              </Button>
-            </div>
+            <EspaceProjetIncentiveBanner
+              message="Démarrer mon projet sur Plus fraîche ma ville"
+              className="mt-10 md:mb-6"
+              imagePath="/images/espace-projet-incentive/trouver-solutions.svg"
+            />
           </section>
           <section>
             <h2>Identifier en priorité les personnes les plus à risque</h2>
@@ -77,10 +79,8 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               l’inconfort thermique. Elles gagnent néanmoins en efficacité quand elles s'inscrivent dans une stratégie
               plus globale.
             </p>
-          </section>
-          <section>
-            <h2>Adapter les comportements : un premier rempart contre la chaleur</h2>
-            <ul className="list-disc md:ml-4">
+            <h3>Adapter les comportements : un premier rempart contre la chaleur</h3>
+            <ul className="ml-4 list-disc">
               <li>
                 <LinkWithoutPrefetch
                   href={PFMV_ROUTES.FICHE_SOLUTION("comportements-individuels")}
@@ -113,10 +113,8 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 vagues de chaleur.
               </li>
             </ul>
-          </section>
-          <section>
-            <h2>S’équiper pour protéger bâtiments et espaces publics</h2>
-            <ul className="mb-6 list-disc md:ml-4">
+            <h3 className="mt-6">S’équiper pour protéger bâtiments et espaces publics</h3>
+            <ul className="mb-6 ml-4 list-disc">
               <li>
                 <LinkWithoutPrefetch
                   href={PFMV_ROUTES.FICHE_SOLUTION("facade-structure-ombrage")}
@@ -135,7 +133,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 <strong>
                   dans les espaces extérieurs fréquentés (voiles, pergolas, toiles tendues, auvents, etc.)
                 </strong>{" "}
-                : L’objectif est de limiter les rayonnements solaires directs et pour protéger la santé et préserver les
+                : L’objectif est de limiter les rayonnements solaires directs pour protéger la santé et préserver les
                 activités essentielles pendant les fortes chaleurs. Elles sont particulièrement pertinentes dans les
                 cours d'école, les parcs de jeux, les places accueillant des manifestations ou les infrastructures
                 sportives.
@@ -146,6 +144,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               iconId="ri-information-line"
               bodyAs="div"
               titleAs="p"
+              classes={{ title: "fr-text--lg" }}
             >
               <p>
                 Lors des vagues de chaleur, la priorité est de protéger les personnes les plus vulnérables (enfants,
@@ -179,6 +178,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               </p>
             </CallOut>
           </section>
+
           <section>
             <h2>
               Au-delà de l’urgence estivale : intégrer le rafraîchissement urbain dans tous les projets d’aménagement
@@ -194,25 +194,18 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               végétation, l'eau, les matériaux et les usages qui nécessite la mobilisation et la coordination
               transversale des services de la collectivité.
             </p>
-            <div className="text-center">
-              <Button
-                linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}
-                className="mt-4 rounded-3xl text-center"
-                priority="primary"
-              >
-                Agir durablement sur mon territoire avec Plus fraîche ma ville
-              </Button>
-            </div>
-          </section>
-          <section>
-            <h2>Un service pour agir sur tous les projets de la commune</h2>
-            <p>
+            <EspaceProjetIncentiveBanner
+              message="Agir durablement sur mon territoire avec Plus fraîche ma ville"
+              className="mt-10 md:mb-6"
+              imagePath="/images/espace-projet-incentive/trouver-solutions.svg"
+            />
+            <p className="mt-10">
               Rues, écoles, places, équipements sportifs : le rafraîchissement urbain peut s'intégrer dans tous les
               projets de la commune. Chaque choix d'aménagement est susceptible d'amplifier ou de réduire la chaleur
               ressentie par les habitants.
             </p>
             Plus fraîche ma ville permet de ne pas partir d'une page blanche :
-            <ul className="list-disc md:ml-4">
+            <ul className="ml-4 list-disc">
               <li>
                 <strong>45 solutions éprouvées</strong>, filtrées par type d'espace, délai de mise en œuvre et coût ;
               </li>
@@ -233,7 +226,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 de collectivités ayant mené des projets de rafraîchissement urbain
               </li>
             </ul>
-            <p>
+            <p className="mt-4">
               Chaque ville possède sa propre “signature thermique”. Plus fraîche ma ville est un service qui propose une
               boîte à outils accessible (données territoriales, retours d'expérience, expertise de l'ADEME et de ses
               partenaires) pour se poser les bonnes questions avant d'agir.
@@ -242,7 +235,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
           <section>
             <h2>Ressources</h2>
             <strong>Données et expertises</strong>
-            <ul className="mb-8 list-disc md:ml-4">
+            <ul className="mb-8 ml-4 list-disc">
               <li>
                 <LinkWithoutPrefetch href="https://tacct.ademe.fr/?utm_source=PFMV" target="_blank">
                   Facteurs d'inconfort thermique sur votre commune
@@ -293,7 +286,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               </li>
             </ul>
             <strong>Écoles et chaleur</strong>
-            <ul className="list-disc md:ml-4">
+            <ul className="ml-4 list-disc">
               <li>
                 <LinkWithoutPrefetch href={PFMV_ROUTES.FICHES_SOLUTIONS + `?espaceFilter=ecole`}>
                   Solutions pour bâtiments et cours d'école

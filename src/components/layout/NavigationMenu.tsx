@@ -78,6 +78,15 @@ export default function NavigationMenu() {
                     },
                     text: "Surchauffe urbaine : quels risques pour la santé ?",
                   },
+                  {
+                    linkProps: {
+                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
+                      target: "_self",
+                      onClick: cancelCurrentProjet,
+                      prefetch: false,
+                    },
+                    text: "Vague de chaleur : répondre à l'urgence, rafraîchir durablement son territoire",
+                  },
                 ],
               },
             ],
