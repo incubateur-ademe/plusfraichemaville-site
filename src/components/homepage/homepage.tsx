@@ -5,10 +5,12 @@ import { HomepageInspirer } from "@/src/components/homepage/homepage-inspirer";
 import { HomepageProjet } from "@/src/components/homepage/homepage-projet";
 import { HomepageStories } from "@/src/components/homepage/homepage-stories";
 import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
+import { HomepageNoticeUrgenceCanicule } from "@/src/components/homepage/homepage-notice-urgence-canicule";
 
 export const Homepage = () => {
   return (
     <div>
+      <HomepageNoticeUrgenceCanicule />
       <HomepageHero />
       <HomepageProjet />
       <HomepageStories />
