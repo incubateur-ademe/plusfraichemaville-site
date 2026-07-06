@@ -10,7 +10,7 @@ export const HomepageNoticeUrgenceCanicule = () => {
         <>
           <span className="!mb-0 flex  flex-row align-text-top">
             <i className="ri-temp-hot-line mr-1"></i>
-            Vague de chaleur, surchauffe urbaine, îlot de chaleur urbain :
+            Vague de chaleur :
           </span>
         </>
       }
@@ -21,7 +21,7 @@ export const HomepageNoticeUrgenceCanicule = () => {
               className="fr-icon-arrow-right-line fr-link--icon-right"
               href={PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE}
             >
-              découvrez les premières actions à mener et comment intégrer le rafraîchissement urbain dans vos projets
+              Découvrez les premières actions à mener et comment intégrer le rafraîchissement urbain dans vos projets
               d'aménagement
             </LinkWithoutPrefetch>
           </span>

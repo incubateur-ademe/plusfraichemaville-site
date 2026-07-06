@@ -6,7 +6,7 @@ export const BesoinAidePage = () => {
       <section className="mt-12">
         <div className="w-full rounded-2xl bg-dsfr-background-default-grey-hover p-8">
           <h1 className="fr-h2">
-            Vous avez des remarques, des suggestions ? <br />
+            Vous avez des remarques, des suggestions ou besoin d'aide ? <br />
             Écrivez-nous !
           </h1>
           <p>Notre équipe vous répondra dans les plus brefs délais. À vous de jouer.</p>

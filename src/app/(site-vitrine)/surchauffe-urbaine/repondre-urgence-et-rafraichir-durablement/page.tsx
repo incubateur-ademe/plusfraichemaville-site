@@ -30,7 +30,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             </p>
           </section>
           <section>
-            <CallOut title="Qu’est-ce qu’une vague de chaleur ?" iconId="ri-information-line" bodyAs="div">
+            <CallOut title="Qu’est-ce qu’une vague de chaleur ?" iconId="ri-information-line" bodyAs="div" titleAs="p">
               Une vague de chaleur se caractérise par des températures nettement supérieures aux normales pendant
               plusieurs jours. En France, on parle de vague de chaleur lorsque la température moyenne quotidienne
               dépasse 25,3 °C. Quand ces températures élevées persistent de jour comme de nuit pendant au moins 3 jours
@@ -141,7 +141,12 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 sportives.
               </li>
             </ul>
-            <CallOut title="La climatisation : quand y recourir et comment ?" iconId="ri-information-line" bodyAs="div">
+            <CallOut
+              title="La climatisation : quand y recourir et comment ?"
+              iconId="ri-information-line"
+              bodyAs="div"
+              titleAs="p"
+            >
               <p>
                 Lors des vagues de chaleur, la priorité est de protéger les personnes les plus vulnérables (enfants,
                 personnes âgées, malades, travailleurs exposés). La première réponse est de limiter la surchauffe des
@@ -178,15 +183,6 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             <h2>
               Au-delà de l’urgence estivale : intégrer le rafraîchissement urbain dans tous les projets d’aménagement
             </h2>
-            <div className="text-center">
-              <Button
-                linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}
-                className="my-4 rounded-3xl text-center"
-                priority="primary"
-              >
-                Agir durablement sur mon territoire avec Plus fraîche ma ville
-              </Button>
-            </div>
             <p>
               Si les réponses d'urgence sont parfois indispensables, elles ne permettront pas de transformer durablement
               les espaces urbains pour préserver la santé publique et la qualité de vie des habitants.
@@ -198,6 +194,15 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               végétation, l'eau, les matériaux et les usages qui nécessite la mobilisation et la coordination
               transversale des services de la collectivité.
             </p>
+            <div className="text-center">
+              <Button
+                linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}
+                className="mt-4 rounded-3xl text-center"
+                priority="primary"
+              >
+                Agir durablement sur mon territoire avec Plus fraîche ma ville
+              </Button>
+            </div>
           </section>
           <section>
             <h2>Un service pour agir sur tous les projets de la commune</h2>
