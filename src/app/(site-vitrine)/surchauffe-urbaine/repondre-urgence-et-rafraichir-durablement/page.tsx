@@ -55,7 +55,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
             </p>
             <EspaceProjetIncentiveBanner
               message="Démarrer mon projet sur Plus fraîche ma ville"
-              className="mt-10 md:mb-6"
+              className="mt-10"
               imagePath="/images/espace-projet-incentive/trouver-solutions.svg"
             />
           </section>
@@ -194,12 +194,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               végétation, l'eau, les matériaux et les usages qui nécessite la mobilisation et la coordination
               transversale des services de la collectivité.
             </p>
-            <EspaceProjetIncentiveBanner
-              message="Agir durablement sur mon territoire avec Plus fraîche ma ville"
-              className="mt-10 md:mb-6"
-              imagePath="/images/espace-projet-incentive/trouver-solutions.svg"
-            />
-            <p className="mt-10">
+            <p>
               Rues, écoles, places, équipements sportifs : le rafraîchissement urbain peut s'intégrer dans tous les
               projets de la commune. Chaque choix d'aménagement est susceptible d'amplifier ou de réduire la chaleur
               ressentie par les habitants.
@@ -231,6 +226,11 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               boîte à outils accessible (données territoriales, retours d'expérience, expertise de l'ADEME et de ses
               partenaires) pour se poser les bonnes questions avant d'agir.
             </p>
+            <EspaceProjetIncentiveBanner
+              message="Agir durablement sur mon territoire avec Plus fraîche ma ville"
+              className="mt-10"
+              imagePath="/images/espace-projet-incentive/trouver-solutions.svg"
+            />
           </section>
           <section>
             <h2>Ressources</h2>
