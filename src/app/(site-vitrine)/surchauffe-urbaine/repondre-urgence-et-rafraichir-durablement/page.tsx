@@ -253,15 +253,6 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               </li>
               <li>
                 <LinkWithoutPrefetch
-                  href="https://www.ademe.fr/presse/communique-national/avis-de-lademe-vagues-de-chaleur-la-climatisation-va-t-elle-devenir-indispensable/"
-                  target="_blank"
-                >
-                  La climatisation va-t-elle devenir indispensable ?
-                </LinkWithoutPrefetch>
-                , Avis de l'ADEME, juin 2024
-              </li>
-              <li>
-                <LinkWithoutPrefetch
                   href="https://www.ademe.fr/presse/communique-national/vagues-de-chaleur-de-nouveaux-outils-pour-rafraichir-dans-lespace-public-et-au-travail/"
                   target="_blank"
                 >
@@ -271,7 +262,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               </li>
               <li>
                 <LinkWithoutPrefetch
-                  href="https://www.santepubliquefrance.fr/climat/fortes-chaleurs-canicule/bulletin-national/chaleur-et-sante-bilan-de-lete-"
+                  href="https://www.ademe.fr/presse/communique-national/vagues-de-chaleur-de-nouveaux-outils-pour-rafraichir-dans-lespace-public-et-au-travail"
                   target="_blank"
                 >
                   Nouveaux outils pour rafraîchir dans l'espace public et au travail
@@ -283,6 +274,15 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                   Chaleur et santé : Bilan de l'été 2025
                 </LinkWithoutPrefetch>
                 , Santé publique France
+              </li>
+              <li>
+                <LinkWithoutPrefetch
+                  href="https://www.ademe.fr/presse/communique-national/avis-de-lademe-vagues-de-chaleur-la-climatisation-va-t-elle-devenir-indispensable/"
+                  target="_blank"
+                >
+                  La climatisation va-t-elle devenir indispensable ?
+                </LinkWithoutPrefetch>
+                , Avis de l'ADEME, juin 2024
               </li>
             </ul>
             <strong>Écoles et chaleur</strong>
