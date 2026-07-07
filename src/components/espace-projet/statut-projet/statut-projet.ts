@@ -25,19 +25,7 @@ const STATUT_PROJET_EN_COURS: STATUT_PROJET_TYPE = {
   progressIconId: "fr-icon-play-circle-fill",
 };
 
-const STATUT_PROJET_BESOIN_AIDE: STATUT_PROJET_TYPE = {
-  statut: StatutProjet.besoin_aide,
-  buttonLabel: "J’ai besoin d’aide",
-  buttonIcon: "/images/espace-projet/statut/statut-projet-besoin-aide.svg",
-  progressLabel: "Projet en cours",
-  progressIconId: "fr-icon-play-circle-fill",
-};
-
-export const ALL_STATUT_PROJET: STATUT_PROJET_TYPE[] = [
-  STATUT_PROJET_TERMINE,
-  STATUT_PROJET_EN_COURS,
-  STATUT_PROJET_BESOIN_AIDE,
-];
+export const ALL_STATUT_PROJET: STATUT_PROJET_TYPE[] = [STATUT_PROJET_TERMINE, STATUT_PROJET_EN_COURS];
 
 export const getStatutProjetByStatut = (projetStatut: StatutProjet | null) =>
   ALL_STATUT_PROJET.find((statut) => statut.statut === projetStatut) || STATUT_PROJET_EN_COURS;

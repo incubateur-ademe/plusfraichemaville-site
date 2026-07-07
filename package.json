@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.7.4",
-    "@codegouvfr/react-dsfr": "^1.29.0",
+    "@codegouvfr/react-dsfr": "^1.32.4",
     "@headlessui/react": "^2.2.0",
     "@hookform/resolvers": "^3.10.0",
     "@incubateur-ademe/legal-pages-react": "^0.3.0",

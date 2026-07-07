@@ -37,6 +37,7 @@ export const acceptCookie = () => {
     console.debug("HeatmapSessionRecording::enable");
   }
   window?._paq?.push(["rememberCookieConsentGiven"]);
+  window?._paq?.push(["setCookieConsentGiven"]);
   window?._paq?.push(["HeatmapSessionRecording::enable"]);
 };
 

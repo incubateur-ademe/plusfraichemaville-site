@@ -45,6 +45,11 @@ export const BREADCRUMB_STATUT_PROJET: EspaceProjetBreadcrumbStep = {
   breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
 };
 
+export const BREADCRUMB_BESOIN_AIDE: EspaceProjetBreadcrumbStep = {
+  currentPageLabel: "Demande d'aide",
+  breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
+};
+
 export const BREADCRUMB_UTILISATEURS_PROJET: EspaceProjetBreadcrumbStep = {
   currentPageLabel: "Utilisateurs de mon projet",
   breadcrumbSegments: (projetId: number, projetName: string) => BREADCRUMB_SEGMENT_DASHBOARD(projetId, projetName),
