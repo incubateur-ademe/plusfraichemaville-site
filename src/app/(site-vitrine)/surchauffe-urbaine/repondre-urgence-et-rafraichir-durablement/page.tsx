@@ -130,13 +130,10 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 <LinkWithoutPrefetch href={PFMV_ROUTES.FICHE_SOLUTION("structure-ombrage")} className="text-pfmv-navy">
                   Installer des structures d'ombrage
                 </LinkWithoutPrefetch>{" "}
-                <strong>
-                  dans les espaces extérieurs fréquentés (voiles, pergolas, toiles tendues, auvents, etc.)
-                </strong>{" "}
-                : L’objectif est de limiter les rayonnements solaires directs pour protéger la santé et préserver les
-                activités essentielles pendant les fortes chaleurs. Elles sont particulièrement pertinentes dans les
-                cours d'école, les parcs de jeux, les places accueillant des manifestations ou les infrastructures
-                sportives.
+                dans les espaces extérieurs fréquentés (voiles, pergolas, toiles tendues, auvents, etc.) : L’objectif
+                est de limiter les rayonnements solaires directs pour protéger la santé et préserver les activités
+                essentielles pendant les fortes chaleurs. Elles sont particulièrement pertinentes dans les cours
+                d'école, les parcs de jeux, les places accueillant des manifestations ou les infrastructures sportives.
               </li>
             </ul>
             <CallOut
