@@ -2,6 +2,7 @@ import RegionFilter from "@/src/components/filters/RegionFilter";
 import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
 import { getRetoursExperiences } from "@/src/lib/strapi/queries/retoursExperienceQueries";
 import TypeEspaceFilter from "../filters/type-espace-filter-component";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 export default async function RetoursExperiences({
   searchParams,
@@ -20,6 +21,7 @@ export default async function RetoursExperiences({
 
   return (
     <div className="fr-container">
+      <link rel="canonical" href={getFullUrl(PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET)} />
       <TypeEspaceFilter className="mb-8 mt-8 flex justify-center md:ml-52 md:justify-normal" />
       <div className="flex flex-col md:flex-row">
         <RegionFilter className="mb-6 md:min-w-[13rem]" />
