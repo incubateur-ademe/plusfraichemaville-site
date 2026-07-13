@@ -7,6 +7,7 @@ import { RetourExperienceContent } from "@/src/components/projet/projet-retour-e
 import SiteVitrineBreadcrumb from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcrumb";
 import { BREADCRUMB_REX_PROJET } from "@/src/components/common/site-vitrine-breadcumb/site-vitrine-breadcumb-list";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { stripHtmlTags } from "@/src/helpers/common";
 
 type RetourExperiencePageProps = {
   params: Promise<{ retourExperienceSlug: string; projetId: string }>;
@@ -24,7 +25,7 @@ export async function generateMetadata(props: RetourExperiencePageProps): Promis
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
   return computeMetadata(
     retourExperience?.attributes.titre || "Retour d'expérience",
-    retourExperience?.attributes.description,
+    stripHtmlTags(retourExperience?.attributes.description),
     getStrapiImageUrl(retourExperience?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
   );
 }

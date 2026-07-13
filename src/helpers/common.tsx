@@ -47,3 +47,5 @@ export const isBoolean = (param: any): boolean => {
 
 export const constructPluralString = (nb: number, singular: string, plural: string, showNumber: boolean = true) =>
   `${showNumber ? nb : ""} ${nb < 2 ? singular : plural}`;
+
+export const stripHtmlTags = (html: string) => html.replace(/<\/?[^>]+(>|$)/g, "");
