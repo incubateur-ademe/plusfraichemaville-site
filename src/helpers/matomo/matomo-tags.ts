@@ -34,6 +34,50 @@ export const MATOMO_ACTIONS = {
   SURCHAUFFE_TERRITOIRE_SEARCH: "surchauffe-urbaine-search-territoire",
   FICHE_SOLUTION_CLICK_ONGLET: "fiche-solution-change-onglet",
   RECHERCHE_GLOBALE: "recherche-globale",
+  SITE_VITRINE_CLICK_ESPACE_PROJET: "site-vitrine-vers-espace-projet",
+  ESTIMATION_MODIFICATION_SOLUTION: "estimation-modification-solution",
+};
+
+export const ESTIMATION_AJOUT_SOLUTION: MATOMO_EVENT = {
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.ESTIMATION_MODIFICATION_SOLUTION,
+  name: "Ajout de fiche solution à une estimation",
+};
+
+export const ESTIMATION_SUPPRESSION_SOLUTION: MATOMO_EVENT = {
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.ESTIMATION_MODIFICATION_SOLUTION,
+  name: "Suppression de fiche solution à une estimation",
+};
+
+export const MATERIAUX_TO_ESPACE_PROJET: MATOMO_EVENT = {
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SITE_VITRINE_CLICK_ESPACE_PROJET,
+  name: "Clic dans l'onglet Matériaux vers l'espace projet",
+};
+
+export const FINANCEMENT_TO_ESPACE_PROJET: MATOMO_EVENT = {
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SITE_VITRINE_CLICK_ESPACE_PROJET,
+  name: "Clic dans l'onglet Financement vers l'espace projet",
+};
+
+export const DIAG_COMMON_TO_ESPACE_PROJET: MATOMO_EVENT = {
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SITE_VITRINE_CLICK_ESPACE_PROJET,
+  name: "Clic dans 'Lancez votre diagnostic' vers le module diagnostic",
+};
+
+export const DIAG_INDICATEURS_TO_ESPACE_PROJET: MATOMO_EVENT = {
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SITE_VITRINE_CLICK_ESPACE_PROJET,
+  name: "Clic dans 'Lancez votre diagnostic' vers les indicateurs diag",
+};
+
+export const DIAG_PRESTATION_TO_ESPACE_PROJET: MATOMO_EVENT = {
+  category: MATOMO_CATEGORIES.SITE_PUBLIC,
+  action: MATOMO_ACTIONS.SITE_VITRINE_CLICK_ESPACE_PROJET,
+  name: "Clic dans 'Lancez votre diagnostic' vers les prestations diag",
 };
 
 export const WEBINAIRE_SUBSCRIPTION: MATOMO_EVENT = {
@@ -118,12 +162,6 @@ export const SURCHAUFFE_URBAINE_CHANGE_NOTION = (notion: string): MATOMO_EVENT =
   category: MATOMO_CATEGORIES.SITE_PUBLIC,
   action: MATOMO_ACTIONS.SURCHAUFFE_URBAINE_COMPRENDRE,
   name: `Clic pour changer de notion : « ${notion} »`,
-});
-
-export const SURCHAUFFE_URBAINE_CHANGE_TIMING = (index: number): MATOMO_EVENT => ({
-  category: MATOMO_CATEGORIES.SITE_PUBLIC,
-  action: MATOMO_ACTIONS.SURCHAUFFE_URBAINE_TIMING,
-  name: `Clic pour changer de niveau d'action : « ${index} »`,
 });
 
 export const SURCHAUFFE_URBAINE_TERRITOIRE_SEARCH = (codeInsee: string): MATOMO_EVENT => ({

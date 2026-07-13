@@ -8,6 +8,8 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { deleteFicheSolutionInEstimationAction } from "@/src/actions/estimation/delete-fiche-solution-in-estimation-action";
 import { estimationModal } from "./materiaux-modal/estimation-materiaux-modal-container";
 import { useModalStore } from "@/src/stores/modal/provider";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { ESTIMATION_SUPPRESSION_SOLUTION } from "@/src/helpers/matomo/matomo-tags";
 
 type FicheSolutionDeleteModalProps = {
   estimation: EstimationWithAides;
@@ -45,6 +47,7 @@ export function FicheSolutionDeleteModal({
             className: "rounded-3xl !min-h-fit !text-sm mr-4",
 
             onClick: async () => {
+              trackEvent(ESTIMATION_SUPPRESSION_SOLUTION);
               const actionResult = await deleteFicheSolutionInEstimationAction(estimation.id, ficheSolutionId);
               notifications(actionResult.type, actionResult.message);
               const impactedProjet = getProjetById(estimation.projet_id);
