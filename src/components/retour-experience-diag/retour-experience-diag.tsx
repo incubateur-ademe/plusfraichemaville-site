@@ -12,7 +12,7 @@ import { PropsWithChildren } from "react";
 import clsx from "clsx";
 import { Separator } from "@/src/components/common/separator";
 import Button from "@codegouvfr/react-dsfr/Button";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { PublishInformation } from "@/src/components/common/publish-information";
 
@@ -36,10 +36,12 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
     resultats,
     resultats_images,
     updatedAt,
+    slug,
   } = rex.attributes;
 
   return (
     <div>
+      <link rel="canonical" href={getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(slug))} />
       <div className="relative">
         <ImageLoader
           width={1920}
