@@ -7,11 +7,14 @@ import React from "react";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { DSFRModal } from "@/src/types/global";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { DIAG_COMMON_TO_ESPACE_PROJET } from "@/src/helpers/matomo/matomo-tags";
 
 export const GenericDiagnosticModuleButton = ({ modal, className }: { className?: string; modal: DSFRModal }) => {
   const status = useSession().status;
   const router = useRouter();
   const handleButtonClick = async () => {
+    trackEvent(DIAG_COMMON_TO_ESPACE_PROJET);
     if (status != "authenticated") {
       router.push(PFMV_ROUTES.CONNEXION);
     } else {

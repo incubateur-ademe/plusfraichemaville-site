@@ -8,6 +8,7 @@ import { GenericDiagnosticModuleButton } from "./generic-diagnostic-module-butto
 import { DiagnosticParcoursLink } from "@/src/components/surchauffe-urbaine/diagnostic-module-incentive/diagnostic-parcours-link";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { ModaleDiagnosticModuleOutsideProjet } from "@/src/components/surchauffe-urbaine/diagnostic-module-incentive/modale-diagnostic-module-outside-projet";
+import { DIAG_INDICATEURS_TO_ESPACE_PROJET, DIAG_PRESTATION_TO_ESPACE_PROJET } from "@/src/helpers/matomo/matomo-tags";
 
 export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?: string }) => {
   const modalIndicateur = createModal({
@@ -56,6 +57,7 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
                 <DiagnosticParcoursLink
                   modal={modalIndicateur}
                   textLink="Je fais une analyse simplifiée et immédiate de la surchauffe"
+                  matomoEvent={DIAG_INDICATEURS_TO_ESPACE_PROJET}
                 />
                 <Separator className="my-4" />
                 <div className="mb-8 text-left text-sm text-dsfr-text-mention-grey">
@@ -102,6 +104,7 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
                 <DiagnosticParcoursLink
                   modal={modalPrestation}
                   textLink="Je fais réaliser par un prestataire un diagnostic approfondi"
+                  matomoEvent={DIAG_PRESTATION_TO_ESPACE_PROJET}
                 />
                 <Separator className="my-4" />
                 <div className="mb-8 text-left text-sm text-dsfr-text-mention-grey">
