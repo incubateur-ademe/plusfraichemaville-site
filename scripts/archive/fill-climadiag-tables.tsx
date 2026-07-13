@@ -32,8 +32,9 @@ function insertClimadiagRow(fileJson, typeLieu, epciParentId: number | undefined
   const nuitsChaudes = nuitsChaudesEntry.data;
   const vagueDeChaleur = vagueDeChaleurEntry?.data;
 
-  return prismaClient.climadiag.create({
-    data: {
+  return prismaClient.climadiag.upsert({
+    where: { code_insee: fileJson.identifiant_insee },
+    create: {
       nom: fileJson.nom,
       type_lieu: typeLieu,
       code_insee: fileJson.identifiant_insee,
@@ -54,6 +55,19 @@ function insertClimadiagRow(fileJson, typeLieu, epciParentId: number | undefined
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "")} ${fileJson.code_recherche} ${fileJson.identifiant_insee}`,
+    },
+    update: {
+      jours_tres_chauds_ref: joursTresChauds[0][0].ref,
+      jours_tres_chauds_prevision: fileStructureToPrismaIndicateur(joursTresChauds) as Prisma.JsonObject,
+      seuil_jours_tres_chauds: SEUIL_JOURS_TRES_CHAUDS[joursTresChaudsEntry.id],
+      nuits_chaudes_ref: nuitsChaudes[0][0].ref,
+      nuits_chaudes_prevision: fileStructureToPrismaIndicateur(nuitsChaudes) as Prisma.JsonObject,
+      seuil_nuits_chaudes: SEUIL_NUITS_CHAUDES[nuitsChaudesEntry.id],
+      jours_vdc_ref: vagueDeChaleur ? vagueDeChaleur[0][0].ref : null,
+      ...(vagueDeChaleur && {
+        jours_vdc_prevision: fileStructureToPrismaIndicateur(vagueDeChaleur) as Prisma.JsonObject,
+      }),
+      population: fileJson.population,
     },
   });
 }
@@ -90,7 +104,7 @@ async function processCommuneFiles(path: string) {
 }
 
 async function main() {
-  const path = "C:\\Users\\rapha\\Documents\\PFMV\\climadiag\\20260421";
+  const path = "C:\\Users\\rapha\\Documents\\PFMV\\climadiag\\20260713";
 
   await processEpciFiles(path);
   await processCommuneFiles(path);
