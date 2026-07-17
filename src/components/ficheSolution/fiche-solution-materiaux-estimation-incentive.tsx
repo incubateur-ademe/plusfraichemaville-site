@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { ModalSaveEstimationAuthenticatedOutsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-estimation-modal-authenticated-outside-projet";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { MATERIAUX_TO_ESPACE_PROJET } from "@/src/helpers/matomo/matomo-tags";
 
 export default function FicheSolutionMateriauxEstimationIncentive({ ficheId }: { ficheId: number }) {
   const { status } = useSession();
@@ -24,6 +26,7 @@ export default function FicheSolutionMateriauxEstimationIncentive({ ficheId }: {
   });
 
   const handleEstimerClick = async () => {
+    trackEvent(MATERIAUX_TO_ESPACE_PROJET);
     if (status === "unauthenticated") {
       router.push(PFMV_ROUTES.CONNEXION);
       return;

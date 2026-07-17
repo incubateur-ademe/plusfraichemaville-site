@@ -14,6 +14,8 @@ import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useModalStore } from "@/src/stores/modal/provider";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { sortEstimationFichesSolutions } from "@/src/helpers/estimation";
+import { ESTIMATION_AJOUT_SOLUTION } from "@/src/helpers/matomo/matomo-tags";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 
 type AddSolutionsToEstimationFormProps = {
   estimation: EstimationWithAides;
@@ -53,6 +55,7 @@ export const AddSolutionsToEstimationForm = ({
   const onSubmit: SubmitHandler<EstimationFormData> = async (data) => {
     const result = await addFichesSolutionsToEstimationAction(estimation.id, data);
     if (result.type === "success") {
+      trackEvent(ESTIMATION_AJOUT_SOLUTION);
       notifications(result.type, result.message);
       if (result.estimation) {
         const firstAddedFicheSolutionIndex = sortEstimationFichesSolutions(result.estimation).findIndex(

@@ -10,6 +10,7 @@ import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
+import { stripHtmlTags } from "@/src/helpers/common";
 
 type RetourExperienceDiagPageProps = {
   params: Promise<{ rexSlug: string }>;
@@ -27,7 +28,7 @@ export async function generateMetadata(props: RetourExperienceDiagPageProps): Pr
   const rexDiag = await getRetourExperienceDiagBySlug(params.rexSlug);
   return computeMetadata(
     rexDiag?.attributes.titre || "Diagnostic réalisé",
-    rexDiag?.attributes.description,
+    stripHtmlTags(rexDiag?.attributes.description),
     getStrapiImageUrl(rexDiag?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
   );
 }

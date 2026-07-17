@@ -15,6 +15,7 @@ import { isEmpty } from "@/src/helpers/listUtils";
 import { GenericLink } from "@/src/components/common/generic-links/generic-link";
 import EspaceProjetIncentiveBanner from "@/src/components/common/espace-projet-incentive/espace-projet-incentive-banner";
 import { PublishInformation } from "@/src/components/common/publish-information";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 type RetourExperienceContentProps = {
   retourExperience: RetourExperience;
@@ -27,6 +28,10 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
   const linkedRetourExperiences = retourExperience.attributes.retour_experiences?.data;
   return (
     <>
+      <link
+        rel="canonical"
+        href={getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(retourExperience.attributes.slug))}
+      />
       <div className={clsx("h-max", isModal && "-mx-8")}>
         <ImageLoader
           width={1920}

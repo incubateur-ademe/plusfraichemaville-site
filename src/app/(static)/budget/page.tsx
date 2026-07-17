@@ -8,19 +8,73 @@ export const metadata: Metadata = computeMetadata("Budget");
 
 export default function BudgetPage() {
   const data = [
-    { category: "Produit / Design", S2_2022: 17241, S1_2023: 67323, S2_2023: 55818, S1_2024: 67423, S2_2024: 88179 },
-    { category: "Déploiement", S2_2022: 0, S1_2023: 0, S2_2023: 0, S1_2024: 87969, S2_2024: 169507 },
-    { category: "Développement", S2_2022: 0, S1_2023: 0, S2_2023: 60279, S1_2024: 155153, S2_2024: 155209 },
-    { category: "Contenus", S2_2022: 17683, S1_2023: 65872, S2_2023: 37745, S1_2024: 43786, S2_2024: 33189 },
-    { category: "Coaching", S2_2022: 16128, S1_2023: 46080, S2_2023: 40320, S1_2024: 34560, S2_2024: 33189 },
-    { category: "Total", S2_2022: 51052, S1_2023: 179275, S2_2023: 194162, S1_2024: 388891, S2_2024: 478647 },
+    {
+      category: "Produit / Design",
+      S2_2022: 17241,
+      S1_2023: 67323,
+      S2_2023: 55818,
+      S1_2024: 67423,
+      S2_2024: 88179,
+      S1_2025: 67065,
+      S2_2025: 48571,
+    },
+    {
+      category: "Déploiement",
+      S2_2022: 0,
+      S1_2023: 0,
+      S2_2023: 0,
+      S1_2024: 87969,
+      S2_2024: 169507,
+      S1_2025: 166316,
+      S2_2025: 85379,
+    },
+    {
+      category: "Développement",
+      S2_2022: 0,
+      S1_2023: 0,
+      S2_2023: 60279,
+      S1_2024: 155153,
+      S2_2024: 155209,
+      S1_2025: 119445,
+      S2_2025: 78799,
+    },
+    {
+      category: "Contenus",
+      S2_2022: 17683,
+      S1_2023: 65872,
+      S2_2023: 37745,
+      S1_2024: 43786,
+      S2_2024: 33189,
+      S1_2025: 61414,
+      S2_2025: 58306,
+    },
+    {
+      category: "Coaching",
+      S2_2022: 16128,
+      S1_2023: 46080,
+      S2_2023: 40320,
+      S1_2024: 34560,
+      S2_2024: 33189,
+      S1_2025: 38683,
+      S2_2025: 38683,
+    },
+    {
+      category: "Total",
+      S2_2022: 51052,
+      S1_2023: 179275,
+      S2_2023: 194162,
+      S1_2024: 388891,
+      S2_2024: 478647,
+      S1_2025: 452925,
+      S2_2025: 309740,
+    },
   ];
 
   const formatBudget = (value: number) => {
     return value ? `${formatNumberWithSpaces(value)} €` : "-";
   };
 
-  const columns = ["", "S2 2022", "S1 2023", "S2 2023", "S1 2024", "S2 2024"];
+  const columns = ["", "S2 2022", "S1 2023", "S2 2023", "S1 2024", "S2 2024", "S1 2025", "S2 2025"];
 
   return (
     <>
@@ -65,31 +119,35 @@ export default function BudgetPage() {
         </section>
         <section className="mb-20 mt-10">
           <h2>Budget consommé</h2>
-          <table className="border-collaps table-auto">
-            <thead>
-              <tr className="bg-dsfr-background-contrast-blue-france">
-                {columns.map((col, index) => (
-                  <th key={index} className="px-6 py-3 font-medium">
-                    {col}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((row) => (
-                <tr key={row.category} className={clsx(row.category === "Total" ? "font-bold" : "")}>
-                  <td className={`px-6 py-3 ${row.category === "Total" ? "font-bold" : "font-medium"}`}>
-                    {row.category}
-                  </td>
-                  <td className="px-6 py-3 text-right">{formatBudget(row.S2_2022)}</td>
-                  <td className="px-6 py-3 text-right">{formatBudget(row.S1_2023)}</td>
-                  <td className="px-6 py-3 text-right">{formatBudget(row.S2_2023)}</td>
-                  <td className="px-6 py-3 text-right">{formatBudget(row.S1_2024)}</td>
-                  <td className="px-6 py-3 text-right">{formatBudget(row.S2_2024)}</td>
+          <div className=" overflow-x-auto text-nowrap">
+            <table className="border-collaps table-auto">
+              <thead>
+                <tr className="bg-dsfr-background-contrast-blue-france">
+                  {columns.map((col, index) => (
+                    <th key={index} className="px-6 py-3 font-medium">
+                      {col}
+                    </th>
+                  ))}
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {data.map((row) => (
+                  <tr key={row.category} className={clsx(row.category === "Total" ? "font-bold" : "")}>
+                    <td className={`px-6 py-3 ${row.category === "Total" ? "font-bold" : "font-medium"}`}>
+                      {row.category}
+                    </td>
+                    <td className="px-6 py-3 text-right">{formatBudget(row.S2_2022)}</td>
+                    <td className="px-6 py-3 text-right">{formatBudget(row.S1_2023)}</td>
+                    <td className="px-6 py-3 text-right">{formatBudget(row.S2_2023)}</td>
+                    <td className="px-6 py-3 text-right">{formatBudget(row.S1_2024)}</td>
+                    <td className="px-6 py-3 text-right">{formatBudget(row.S2_2024)}</td>
+                    <td className="px-6 py-3 text-right">{formatBudget(row.S1_2025)}</td>
+                    <td className="px-6 py-3 text-right">{formatBudget(row.S2_2025)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       </div>
     </>

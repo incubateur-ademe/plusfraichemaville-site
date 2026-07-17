@@ -5,6 +5,7 @@ import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQ
 
 import FicheSolutionCard from "./fiche-solution-card";
 import TypeEspaceFilter from "../filters/type-espace-filter-component";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 type FichesSolutionsProps = {
   searchParams: {
@@ -34,6 +35,7 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
     );
   return (
     <div className="fr-container">
+      <link rel="canonical" href={getFullUrl(PFMV_ROUTES.FICHES_SOLUTIONS)} />
       <TypeEspaceFilter className="mb-8 mt-8 flex justify-center md:ml-52 md:justify-normal" />
       <div className="flex flex-col md:flex-row">
         <div className="md:min-w-[13rem]">
