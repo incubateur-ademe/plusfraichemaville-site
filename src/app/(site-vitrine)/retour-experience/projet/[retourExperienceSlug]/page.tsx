@@ -25,7 +25,7 @@ export async function generateMetadata(props: RetourExperiencePageProps): Promis
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
   return computeMetadata(
     retourExperience?.attributes.titre || "Retour d'expérience",
-    stripHtmlTags(retourExperience?.attributes.description),
+    stripHtmlTags(retourExperience?.attributes.description || ""),
     getStrapiImageUrl(retourExperience?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
   );
 }

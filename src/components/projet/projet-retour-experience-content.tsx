@@ -28,10 +28,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
   const linkedRetourExperiences = retourExperience.attributes.retour_experiences?.data;
   return (
     <>
-      <link
-        rel="canonical"
-        href={getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(retourExperience.attributes.slug))}
-      />
+      <link rel="canonical" href={getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(retourExperience.attributes.slug))} />
       <div className={clsx("h-max", isModal && "-mx-8")}>
         <ImageLoader
           width={1920}
