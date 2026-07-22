@@ -28,7 +28,7 @@ export async function generateMetadata(props: RetourExperienceDiagPageProps): Pr
   const rexDiag = await getRetourExperienceDiagBySlug(params.rexSlug);
   return computeMetadata(
     rexDiag?.attributes.titre || "Diagnostic réalisé",
-    stripHtmlTags(rexDiag?.attributes.description),
+    stripHtmlTags(rexDiag?.attributes.description || ""),
     getStrapiImageUrl(rexDiag?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
   );
 }
