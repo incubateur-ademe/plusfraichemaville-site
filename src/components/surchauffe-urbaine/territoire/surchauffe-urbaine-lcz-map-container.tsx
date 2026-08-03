@@ -71,15 +71,15 @@ const LCZMapContainer = ({ climadiagInfo, className }: LCZMapContainerProps) => 
       </p>
       <p className="!mb-8">
         <span className="text-dsfr-text-default-grey">
-          Pour en savoir plus sur l’utilisation de cette donnée, rendez-vous sur le{" "}
+          {"Vous souhaitez exploiter au mieux la cartographie des LCZ ? Le Cerema propose "}
           <LinkWithoutPrefetch
-            href="https://www.cerema.fr/fr/actualites/cerema-publie-nouvelles-donnees-surchauffe-urbaine"
+            href="https://doc.cerema.fr/Default/doc/SYRACUSE/616032/cartographie-des-lcz-un-outil-pour-des-villes-plus-fraiches"
             target="_blank"
             className="font-bold"
           >
-            site du Cerema
+            un cahier technique dédié
           </LinkWithoutPrefetch>
-          .
+          {" pour vous accompagner."}
         </span>
       </p>
       <div className="flex flex-col-reverse gap-6 md:flex-row">
