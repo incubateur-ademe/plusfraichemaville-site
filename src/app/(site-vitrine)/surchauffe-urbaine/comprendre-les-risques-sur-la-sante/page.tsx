@@ -214,7 +214,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                   revêtements à albédo élevé
                 </LinkWithoutPrefetch>{" "}
                 comme des sols blancs : s’ils permettent une baisse effective de la température de l’air, ils renvoient
-                les UV vers les usagers et peuvent éblouir augmentent le risque de cancer de la peau.
+                les UV vers les usagers et peuvent éblouir.
               </li>
             </ul>
             <p>
