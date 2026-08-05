@@ -8,7 +8,7 @@ type AideDecisionSortFilter = {
   maxItem: number;
 };
 
-const SORT_TEMPERATURE: AideDecisionSortFilter = {
+export const SORT_TEMPERATURE: AideDecisionSortFilter = {
   code: "",
   label: "Les plus fraîches",
   sortFn: (fs1, fs2) => ((fs1.attributes.baisse_temperature || 0) < (fs2.attributes.baisse_temperature || 0) ? 1 : -1),

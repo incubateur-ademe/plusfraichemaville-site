@@ -88,7 +88,6 @@ export default async function AideDecisionPage(props: AideDecisionPageProps) {
       </div>
     );
   } else {
-    const aideDecisionEtape = await getAideDecisionBySlug(params.aideDecisionEtapeSlug);
     if (aideDecisionEtape) {
       return (
         <AideDecisionResult searchParams={searchParams} aideDecisionEtapeAttributes={aideDecisionEtape.attributes} />

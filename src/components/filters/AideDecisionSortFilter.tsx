@@ -1,10 +1,11 @@
 "use client";
-import { useAideDecisionSortFilter } from "@/src/hooks/useAideDecisionSortFilter";
 import { ALL_AIDE_DECISION_SORT_FIELD } from "@/src/helpers/aideDecisionSortFilter";
 import FilterButton from "@/src/components/common/FilterButton";
+import { useUserStore } from "@/src/stores/user/provider";
 
 export default function AideDecisionSortFilter({ className }: { className?: string }) {
-  const { setAideDecisionSortField, isAideDecisionSortFieldSelected } = useAideDecisionSortFilter();
+  const setChoixSolutionAideDecisionTri = useUserStore((state) => state.setChoixSolutionAideDecisionTri);
+  const navigationPreferences = useUserStore((state) => state.navigationPreferences);
 
   return (
     <div className={`flex shrink flex-row flex-wrap justify-center gap-6 md:justify-start ${className}`}>
@@ -13,8 +14,8 @@ export default function AideDecisionSortFilter({ className }: { className?: stri
           key={sortField.code}
           label={sortField.label}
           code={sortField.code}
-          onClick={() => setAideDecisionSortField(sortField.code)}
-          isSelected={(code) => isAideDecisionSortFieldSelected(code)}
+          onClick={() => setChoixSolutionAideDecisionTri(sortField.code)}
+          isSelected={(code) => code === navigationPreferences.choixSolutionAideDecisionTri}
         />
       ))}
     </div>

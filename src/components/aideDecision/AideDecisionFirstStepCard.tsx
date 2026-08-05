@@ -9,7 +9,7 @@ export default function AideDecisionFirstStepEtapeCard({
 }: {
   etapeAttributes: AideDecisionEtape["attributes"];
 }) {
-  const setAideDecisionStep = useUserStore((state) => state.setAideDecisionStep);
+  const setAideDecisionStep = useUserStore((state) => state.setChoixSolutionAideDecisionCurrentStep);
   return (
     <Button
       className="pfmv-card flex h-[7.75rem] w-32 flex-col items-center !bg-none pt-4"

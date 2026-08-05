@@ -3,26 +3,28 @@ import AideDecisionBreadcrumbs from "@/src/components/aideDecision/AideDecisionB
 import AideDecisionSortFilter from "@/src/components/filters/AideDecisionSortFilter";
 import { getAideDecisionSortFieldFromCode } from "@/src/helpers/aideDecisionSortFilter";
 import RetourExperienceCard from "@/src/components/retourExperience/RetourExperienceCard";
-import { getAideDecisionHistoryBySlug } from "@/src/lib/strapi/queries/aideDecisionQueries";
 import { notEmpty } from "@/src/helpers/listUtils";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { AideDecisionEtapeHistory } from "@/src/lib/strapi/queries/commonStrapiFilters";
+import { useUserStore } from "@/src/stores/user/provider";
 
 type Props = {
   aideDecisionEtapeAttributes: AideDecisionEtape["attributes"];
-  searchParams: { tri: string | undefined };
+  aideDecisionEtapeHistory?: AideDecisionEtapeHistory[] | null;
 };
 
-export default async function AideDecisionResult({ aideDecisionEtapeAttributes, searchParams }: Props) {
-  const historique = await getAideDecisionHistoryBySlug(aideDecisionEtapeAttributes.slug);
-  const previousStep = historique && historique[historique.length - 1] ? historique[historique.length - 1] : null;
-
+export default function AideDecisionResult({
+  aideDecisionEtapeAttributes,
+  aideDecisionEtapeHistory,
+}: Props) {
+  const navigationPreferences = useUserStore((state) => state.navigationPreferences);
   if (
     !!aideDecisionEtapeAttributes.fiches_solutions?.data &&
     aideDecisionEtapeAttributes.fiches_solutions.data.length > 0
   ) {
-    const sortBy = getAideDecisionSortFieldFromCode(searchParams?.tri);
+    const sortBy = getAideDecisionSortFieldFromCode(navigationPreferences.choixSolutionAideDecisionTri);
     const sortedFichesSolutions = aideDecisionEtapeAttributes.fiches_solutions.data
       .sort(sortBy.sortFn)
       .slice(0, sortBy.maxItem);
@@ -37,24 +39,14 @@ export default async function AideDecisionResult({ aideDecisionEtapeAttributes, 
     return (
       <div className={"fr-container"}>
         <div className="flex flex-row justify-items-center">
-          {historique && (
+          {aideDecisionEtapeHistory && (
             <AideDecisionBreadcrumbs
               currentPageLabel={aideDecisionEtapeAttributes.nom}
-              historique={historique}
+              historique={aideDecisionEtapeHistory}
               className="hidden md:mt-60 md:block"
             />
           )}
           <div className="grow overflow-x-auto">
-            {previousStep && (
-              <div className="mt-8 hidden text-center md:block md:text-left">
-                <LinkWithoutPrefetch
-                  className="fr-link fr-icon-arrow-left-line fr-link--icon-left"
-                  href={`${PFMV_ROUTES.AIDE_DECISION}/${previousStep.slug}`}
-                >
-                  Retour
-                </LinkWithoutPrefetch>
-              </div>
-            )}
             <h1 className={"fr-h4 mb-4 pt-10 text-center md:text-left"}>
               Découvrez les solutions proposées pour votre recherche
             </h1>

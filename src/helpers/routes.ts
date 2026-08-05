@@ -131,3 +131,5 @@ export const GET_FICHE_DIAGNOSTIC_BY_IDS = (ficheDiagnosticIds: number[]) =>
   `/api/get-fiches-diagnostic?ficheDiagnosticIds=${JSON.stringify(ficheDiagnosticIds)}`;
 
 export const GET_AIDE_DECISION_FIRST_STEPS_URL = "/api/get-aide-decision-first-step";
+
+export const GET_AIDE_DECISION_STEP_URL = (slug: string) => `/api/get-aide-decision-step?slug=${slug}`;

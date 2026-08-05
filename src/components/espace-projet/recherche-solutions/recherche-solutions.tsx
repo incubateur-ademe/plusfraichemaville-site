@@ -17,8 +17,8 @@ type RechercheSolutionsProps = {
 
 export const RechercheSolutions = ({ allFichesSolutions, searchParams }: RechercheSolutionsProps) => {
   const navigationPreferences = useUserStore((state) => state.navigationPreferences);
-  const setSolutionTab = useUserStore((state) => state.setSolutionTab);
-  const currentTab = navigationPreferences?.espaceProjet.solution.currentTabId || SolutionTabIds.ARBRE;
+  const setSolutionTab = useUserStore((state) => state.setChoixSolutionSelectedTabId);
+  const currentTab = navigationPreferences?.choixSolutionSelectedTabId || SolutionTabIds.ARBRE;
 
   return (
     <div className="fr-container mt-6">
