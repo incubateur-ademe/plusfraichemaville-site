@@ -1,6 +1,7 @@
 import { FichesSolutions } from "@/src/components/ficheSolution/fiches-solutions";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
 export const metadata: Metadata = computeMetadata("Explorez nos solutions");
 
@@ -12,10 +13,11 @@ export default async function FichesSolutionsPage(props: {
   }>;
 }) {
   const searchParams = await props.searchParams;
+  const allFichesSolutions = await getAllFichesSolutions();
   return (
     <div className="fr-container">
       <h1 className="fr-h3 mt-6">Explorez toutes les solutions de rafraîchissement urbain</h1>
-      <FichesSolutions searchParams={searchParams} />
+      <FichesSolutions allFichesSolutions={allFichesSolutions} searchParams={searchParams} />
     </div>
   );
 }

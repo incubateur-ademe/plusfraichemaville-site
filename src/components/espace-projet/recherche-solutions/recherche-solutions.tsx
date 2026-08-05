@@ -1,0 +1,48 @@
+"use client";
+import { useUserStore } from "@/src/stores/user/provider";
+import Tabs from "@codegouvfr/react-dsfr/Tabs";
+import { FichesSolutions } from "../../ficheSolution/fiches-solutions";
+import { SolutionTabIds, SolutionTabIdType } from "@/src/stores/user/helper";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+
+type RechercheSolutionsProps = {
+  searchParams: {
+    espaceFilter: string | undefined;
+    typeSolutionFilter: string | undefined;
+    baisseTemperatureFilter: string | undefined;
+  };
+  allFichesSolutions: FicheSolution[];
+};
+
+export const RechercheSolutions = ({ allFichesSolutions, searchParams }: RechercheSolutionsProps) => {
+  const navigationPreferences = useUserStore((state) => state.navigationPreferences);
+  const setSolutionTab = useUserStore((state) => state.setSolutionTab);
+  const currentTab = navigationPreferences?.espaceProjet.solution.currentTabId || SolutionTabIds.ARBRE;
+
+  return (
+    <div className="fr-container mt-6">
+      <Tabs
+        selectedTabId={currentTab}
+        onTabChange={(tabId: string) => setSolutionTab(tabId as SolutionTabIdType)}
+        tabs={[
+          {
+            label: "Recherche guidée",
+            tabId: SolutionTabIds.ARBRE,
+          },
+          {
+            label: "Liste complète des solutions",
+            tabId: SolutionTabIds.TOUTES_SOLUTIONS,
+          },
+        ]}
+      >
+        <>
+          {currentTab === SolutionTabIds.ARBRE ? (
+            <FichesSolutions allFichesSolutions={allFichesSolutions} searchParams={searchParams} />
+          ) : (
+            <FichesSolutions allFichesSolutions={allFichesSolutions} searchParams={searchParams} />
+          )}
+        </>
+      </Tabs>
+    </div>
+  );
+};

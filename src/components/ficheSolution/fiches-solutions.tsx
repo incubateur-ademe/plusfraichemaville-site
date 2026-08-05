@@ -1,11 +1,11 @@
 import TypeSolutionFilter from "@/src/components/filters/TypeSolutionFilter";
 import BaisseTemperatureFilter from "@/src/components/filters/BaisseTemperatureFilter";
 import { getBaisseTemperatureFicheSolutionFromTemperature } from "@/src/helpers/baisseTemperatureFicheSolution";
-import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
 import FicheSolutionCard from "./fiche-solution-card";
 import TypeEspaceFilter from "../filters/type-espace-filter-component";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
+import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 type FichesSolutionsProps = {
   searchParams: {
@@ -13,11 +13,10 @@ type FichesSolutionsProps = {
     typeSolutionFilter: string | undefined;
     baisseTemperatureFilter: string | undefined;
   };
+  allFichesSolutions: FicheSolution[];
 };
 
-export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
-  const allFichesSolutions = await getAllFichesSolutions();
-
+export function FichesSolutions({ searchParams, allFichesSolutions }: FichesSolutionsProps) {
   const filteredFichesSolutions = allFichesSolutions
     .filter((fs) => !searchParams.espaceFilter || fs.attributes.types_espace?.includes(searchParams.espaceFilter))
     .filter(
@@ -34,7 +33,7 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
           .includes(getBaisseTemperatureFicheSolutionFromTemperature(fs.attributes.baisse_temperature || 0).code),
     );
   return (
-    <div className="fr-container">
+    <>
       <link rel="canonical" href={getFullUrl(PFMV_ROUTES.FICHES_SOLUTIONS)} />
       <TypeEspaceFilter className="mb-8 mt-8 flex justify-center md:ml-52 md:justify-normal" />
       <div className="flex flex-col md:flex-row">
@@ -56,6 +55,6 @@ export async function FichesSolutions({ searchParams }: FichesSolutionsProps) {
           </div>
         )}
       </div>
-    </div>
+    </>
   );
 }
