@@ -1,20 +1,20 @@
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { useUserStore } from "@/src/stores/user/provider";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 export default function AideDecisionFirstStepEtapeCard({
   etapeAttributes,
 }: {
   etapeAttributes: AideDecisionEtape["attributes"];
 }) {
+  const setAideDecisionStep = useUserStore((state) => state.setAideDecisionStep);
   return (
-    <LinkWithoutPrefetch
-      className="pfmv-card flex h-32 w-32 flex-col items-center !bg-none"
-      href={`${PFMV_ROUTES.AIDE_DECISION}/${etapeAttributes.slug}`}
+    <Button
+      className="pfmv-card flex h-[7.75rem] w-32 flex-col items-center !bg-none pt-4"
+      onClick={() => setAideDecisionStep(etapeAttributes.slug)}
     >
-      <div className={"text-center text-sm text-pfmv-light-grey"}>&nbsp;</div>
       <div>
         <Image
           width={80}
@@ -25,7 +25,7 @@ export default function AideDecisionFirstStepEtapeCard({
           unoptimized
         />
       </div>
-      <div className={"text-center text-sm"}>{etapeAttributes.nom}</div>
-    </LinkWithoutPrefetch>
+      <div className={"text-center text-dsfr-text-default-grey text-sm"}>{etapeAttributes.nom}</div>
+    </Button>
   );
 }

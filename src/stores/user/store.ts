@@ -3,16 +3,19 @@ import { User } from "@/src/generated/prisma/client";
 import { SolutionTabIds, SolutionTabIdType } from "@/src/stores/user/helper";
 
 export type UserInfos = User | null | undefined;
-export type NavigationPreferences = { espaceProjet: { solution: { currentTabId: SolutionTabIdType } } };
+export type NavigationPreferences = {
+  espaceProjet: { solution: { currentTabId: SolutionTabIdType; currentAideDecisionStep?: string } };
+};
 
 interface UserState {
   userInfos?: UserInfos;
-  navigationPreferences?: NavigationPreferences;
+  navigationPreferences: NavigationPreferences;
 }
 
 export type UserActions = {
   setUserInfos: (_userInfos: UserInfos) => void;
   setSolutionTab: (tabId: SolutionTabIdType) => void;
+  setAideDecisionStep: (aideDecisionStep: string) => void;
 };
 
 export type UserStore = UserState & UserActions;
@@ -34,7 +37,21 @@ export const createUserStore = (initState: UserState = defaultInitState) => {
     setSolutionTab: (tabId: SolutionTabIdType) =>
       set((state) => ({
         ...state.navigationPreferences,
-        navigationPreferences: { espaceProjet: { solution: { currentTabId: tabId } } },
+        navigationPreferences: {
+          espaceProjet: { solution: { ...state.navigationPreferences.espaceProjet.solution, currentTabId: tabId } },
+        },
+      })),
+    setAideDecisionStep: (aideDecisionStep: string) =>
+      set((state) => ({
+        ...state.navigationPreferences,
+        navigationPreferences: {
+          espaceProjet: {
+            solution: {
+              ...state.navigationPreferences.espaceProjet.solution,
+              currentAideDecisionStep: aideDecisionStep,
+            },
+          },
+        },
       })),
   }));
 };

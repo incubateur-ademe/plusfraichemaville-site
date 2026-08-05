@@ -4,6 +4,7 @@ import Tabs from "@codegouvfr/react-dsfr/Tabs";
 import { FichesSolutions } from "../../ficheSolution/fiches-solutions";
 import { SolutionTabIds, SolutionTabIdType } from "@/src/stores/user/helper";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
+import { AideDecisionContainer } from "@/src/components/espace-projet/recherche-solutions/aide-decision-container";
 
 type RechercheSolutionsProps = {
   searchParams: {
@@ -37,7 +38,7 @@ export const RechercheSolutions = ({ allFichesSolutions, searchParams }: Recherc
       >
         <>
           {currentTab === SolutionTabIds.ARBRE ? (
-            <FichesSolutions allFichesSolutions={allFichesSolutions} searchParams={searchParams} />
+            <AideDecisionContainer />
           ) : (
             <FichesSolutions allFichesSolutions={allFichesSolutions} searchParams={searchParams} />
           )}
