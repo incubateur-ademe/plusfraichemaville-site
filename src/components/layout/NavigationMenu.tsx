@@ -63,15 +63,6 @@ export default function NavigationMenu() {
                 links: [
                   {
                     linkProps: {
-                      href: PFMV_ROUTES.FICHES_SOLUTIONS,
-                      target: "_self",
-                      onClick: cancelCurrentProjet,
-                      prefetch: false,
-                    },
-                    text: "Explorer toutes les solutions",
-                  },
-                  {
-                    linkProps: {
                       href: PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE,
                       target: "_self",
                       onClick: cancelCurrentProjet,
@@ -123,7 +114,7 @@ export default function NavigationMenu() {
                   text: (
                     <NavigationCard
                       imageUrl="/images/navigation/trouver-solution.webp"
-                      title="Explorer toutes les solutions"
+                      title="Trouver une solution adaptée à votre espace à rafraîchir"
                     />
                   ),
                   linkProps: {

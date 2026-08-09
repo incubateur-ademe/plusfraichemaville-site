@@ -6,6 +6,7 @@ import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { useParams } from "next/navigation";
 import { TableauDeBordSuiviCardProgress } from "@/src/components/tableau-de-bord/tableau-de-bord-suivi-card-progress";
+import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 export type TableauDeBordCardType = "diagnostic" | "estimation" | "financement" | "solution";
 
@@ -29,6 +30,7 @@ export const TableauDeBordSuiviCard = ({
   type,
 }: TableauDeBordSuiviCardProps) => {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+  const canEditProjet = useCanEditProjet(currentProjet?.id);
   const disabledValue = disabled(currentProjet);
   const textClass = disabledValue ? "text-pfmv-grey" : "text-dsfr-background-flat-blue-france";
   const linkResolver = makeUrl[type];
@@ -58,7 +60,10 @@ export const TableauDeBordSuiviCard = ({
             {disabledValue ? (
               <>{title} </>
             ) : (
-              <LinkWithoutPrefetch href={currentProjet?.id ? linkResolver(+currentProjet.id) : ""} className="bg-none">
+              <LinkWithoutPrefetch
+                href={currentProjet ? linkResolver(currentProjet, canEditProjet) : ""}
+                className="bg-none"
+              >
                 {title}
               </LinkWithoutPrefetch>
             )}
