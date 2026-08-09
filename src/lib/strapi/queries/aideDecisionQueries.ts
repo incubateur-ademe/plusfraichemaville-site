@@ -151,14 +151,6 @@ export async function getAideDecisionFirstSteps(): Promise<AideDecisionEtape[]> 
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getAllAideDecisionSlugs(): Promise<AideDecisionEtape[]> {
-  const filter = new StrapiFilter(true, []);
-  const apiResponse = (
-    await strapiGraphQLCall(GET_ALL_AIDE_DECISION_ETAPE_SLUG(filter), { tag: "get-all-aide-decision" })
-  )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
-  return safeReturnStrapiEntities(apiResponse);
-}
-
 export async function getAideDecisionBySlug(slug: string): Promise<AideDecisionEtape | null> {
   const filter = new StrapiFilter(true, [{ attribute: "slug", operator: "eq", value: slug, relation: false }]);
   const apiResponse = (

@@ -21,14 +21,12 @@ export async function generateMetadata(props: {
 
 export default async function FicheSolutionPage(props: {
   params: Promise<{ ficheSolutionSlug: string; projetId: string }>;
-  searchParams: Promise<{ etapeAideDecision: string | undefined }>;
 }) {
-  const searchParams = await props.searchParams;
   const params = await props.params;
   return (
     <>
       <BannerProjetBreadcrumb step={BREADCRUMB_SOLUTION_FICHE_SOLUTION} />
-      <FicheSolution params={params} searchParams={searchParams} />
+      <FicheSolution params={params} />
     </>
   );
 }

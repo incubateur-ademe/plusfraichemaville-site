@@ -20,7 +20,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   ];
   const importantPages = [
     "",
-    PFMV_ROUTES.AIDE_DECISION,
     PFMV_ROUTES.FICHES_SOLUTIONS,
     PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
     PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC,

@@ -14,7 +14,7 @@ type Props = {
   aideDecisionEtapeHistory?: AideDecisionEtapeHistory[] | null;
 };
 
-export default function AideDecisionResult({ aideDecisionEtapeAttributes, aideDecisionEtapeHistory }: Props) {
+export default function AideDecisionResultContainer({ aideDecisionEtapeAttributes, aideDecisionEtapeHistory }: Props) {
   const navigationPreferences = useUserStore((state) => state.navigationPreferences);
   const setAideDecisionStep = useUserStore((state) => state.setChoixSolutionAideDecisionCurrentStep);
   if (

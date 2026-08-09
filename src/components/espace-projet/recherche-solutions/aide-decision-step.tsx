@@ -2,11 +2,11 @@
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { GET_AIDE_DECISION_STEP_URL } from "@/src/helpers/routes";
 import { AideDecisionStepData } from "@/src/lib/strapi/queries/commonStrapiFilters";
-import AideDecisionEtapeCard from "@/src/components/aideDecision/AideDecisionEtapeCard";
-import AideDecisionResult from "@/src/components/aideDecision/AideDecisionResult";
+import AideDecisionResultContainer from "@/src/components/espace-projet/recherche-solutions/aide-decision-result-container";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { FilDArianeAvecBouton } from "@/src/components/common/fil-d-arianne-avec-bouton";
 import { useUserStore } from "@/src/stores/user/provider";
+import AideDecisionEtapeCard from "./aide-decision-etape-card";
 
 export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
   const { data, isLoading } = useImmutableSwrWithFetcher<AideDecisionStepData>(GET_AIDE_DECISION_STEP_URL(currentStep));
@@ -53,7 +53,7 @@ export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
   } else {
     if (etape) {
       return (
-        <AideDecisionResult aideDecisionEtapeHistory={historique} aideDecisionEtapeAttributes={etape.attributes} />
+        <AideDecisionResultContainer aideDecisionEtapeHistory={historique} aideDecisionEtapeAttributes={etape.attributes} />
       );
     } else {
       customCaptureException(

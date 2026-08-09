@@ -2,8 +2,8 @@
 import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { GET_AIDE_DECISION_FIRST_STEPS_URL } from "@/src/helpers/routes";
 import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
-import AideDecisionFirstStepEtapeCard from "@/src/components/aideDecision/AideDecisionFirstStepCard";
 import { AideDecisionFirstStepSkeleton } from "@/src/components/espace-projet/recherche-solutions/aide-decision-first-step-skeleton";
+import AideDecisionFirstStepEtapeCard from "./aide-decision-first-step-card";
 
 export const AideDecisionFirstStep = () => {
   const { data: aideDecisionFirstSteps, isLoading } = useImmutableSwrWithFetcher<AideDecisionEtape[]>(

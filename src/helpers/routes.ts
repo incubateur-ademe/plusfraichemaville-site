@@ -10,7 +10,6 @@ export const PFMV_ROUTES = {
   MENTIONS_LEGALES: "/mentions-legales",
   POLITIQUE_CONFIDENTIALITE: "/politique-de-confidentialite",
   PLAN_DU_SITE: "/plan-du-site",
-  AIDE_DECISION: "/aide-decision",
   FICHES_SOLUTIONS: "/fiche-solution",
   FICHE_SOLUTION: (slug: string) => `/fiche-solution/${slug}`,
   MES_FICHES_SOLUTIONS: "/mon-projet/favoris",
