@@ -25,7 +25,7 @@ export default function AideDecisionFirstStepEtapeCard({
           unoptimized
         />
       </div>
-      <div className={"text-center text-dsfr-text-default-grey text-sm"}>{etapeAttributes.nom}</div>
+      <div className={"text-center text-sm text-dsfr-text-default-grey"}>{etapeAttributes.nom}</div>
     </Button>
   );
 }

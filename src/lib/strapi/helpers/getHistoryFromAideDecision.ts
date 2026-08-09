@@ -16,6 +16,6 @@ export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionE
     );
     etapeParente = etapeParente.attributes.etape_precedente?.data;
   }
-  history.unshift(new AideDecisionEtapeHistory("Espace", ""));
+  history.unshift(new AideDecisionEtapeHistory("Choix du type d'espace", ""));
   return history;
 }

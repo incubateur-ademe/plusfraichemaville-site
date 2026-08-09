@@ -2,13 +2,14 @@
 import { ALL_AIDE_DECISION_SORT_FIELD } from "@/src/helpers/aideDecisionSortFilter";
 import FilterButton from "@/src/components/common/FilterButton";
 import { useUserStore } from "@/src/stores/user/provider";
+import clsx from "clsx";
 
 export default function AideDecisionSortFilter({ className }: { className?: string }) {
   const setChoixSolutionAideDecisionTri = useUserStore((state) => state.setChoixSolutionAideDecisionTri);
   const navigationPreferences = useUserStore((state) => state.navigationPreferences);
 
   return (
-    <div className={`flex shrink flex-row flex-wrap justify-center gap-6 md:justify-start ${className}`}>
+    <div className={clsx("flex shrink flex-row flex-wrap justify-start gap-6", className)}>
       {ALL_AIDE_DECISION_SORT_FIELD.map((sortField) => (
         <FilterButton
           key={sortField.code}

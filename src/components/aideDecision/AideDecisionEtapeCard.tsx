@@ -1,8 +1,6 @@
 import Image from "next/image";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
-import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { useUserStore } from "@/src/stores/user/provider";
 
 export default function AideDecisionEtapeCard({

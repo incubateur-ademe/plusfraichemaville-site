@@ -8,7 +8,7 @@ export const AideDecisionContainer = () => {
   const currentStep = navigationPreferences.choixSolutionAideDecisionCurrentStep;
 
   return (
-    <div className="bg-dsfr-background-alt-blue-france pb-16 pt-6">
+    <div className="bg-dsfr-background-alt-blue-france px-4 pb-16 pt-2">
       {!currentStep ? <AideDecisionFirstStep /> : <AideDecisionStep currentStep={currentStep} />}
     </div>
   );
