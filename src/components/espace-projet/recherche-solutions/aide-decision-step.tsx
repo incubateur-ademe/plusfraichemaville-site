@@ -53,7 +53,10 @@ export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
   } else {
     if (etape) {
       return (
-        <AideDecisionResultContainer aideDecisionEtapeHistory={historique} aideDecisionEtapeAttributes={etape.attributes} />
+        <AideDecisionResultContainer
+          aideDecisionEtapeHistory={historique}
+          aideDecisionEtapeAttributes={etape.attributes}
+        />
       );
     } else {
       customCaptureException(

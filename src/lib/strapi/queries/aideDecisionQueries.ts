@@ -74,16 +74,6 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
     }
   }
 }`;
-const GET_ALL_AIDE_DECISION_ETAPE_SLUG = (strapiFilter: StrapiFilter) => `query {
-  aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
-    data {
-      id
-      attributes {
-        slug
-      }
-    }
-  }
-}`;
 
 const GET_AIDE_DECISION_ETAPE_HISTORY = (strapiFilter: StrapiFilter) => `  ${STRAPI_IMAGE_FRAGMENT} query {
   aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
