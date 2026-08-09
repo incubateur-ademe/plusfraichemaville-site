@@ -16,7 +16,7 @@ export default async function FichesSolutionsPage(props: {
   const allFichesSolutions = await getAllFichesSolutions();
   return (
     <div className="fr-container">
-      <h1 className="fr-h3 mt-6">Explorez toutes les solutions de rafraîchissement urbain</h1>
+      <h1 className="fr-h3 mt-6">Trouvez les solutions les plus adaptées à votre espace à rafraîchir</h1>
       <FichesSolutions allFichesSolutions={allFichesSolutions} searchParams={searchParams} />
     </div>
   );

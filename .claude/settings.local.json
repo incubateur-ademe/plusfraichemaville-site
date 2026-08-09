@@ -15,7 +15,8 @@
       "Bash(wc:*)",
       "Bash(find:*)",
       "mcp__ide__getDiagnostics",
-      "Bash(npx prettier *)"
+      "Bash(npx prettier *)",
+      "Bash(npx eslint *)"
     ]
   }
 }
