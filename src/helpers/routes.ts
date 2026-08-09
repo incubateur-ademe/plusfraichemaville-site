@@ -55,6 +55,7 @@ export const PFMV_ROUTES = {
   ESPACE_PROJET_WITH_CURRENT_TAB: (tab: EspaceProjetTabsId) => `/espace-projet?tab=${tab}`,
   ESPACE_PROJET_FICHES_SOLUTIONS: (projetId: number) => `/espace-projet/${projetId}/fiche-solution`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE: (projetId: number) => `/espace-projet/${projetId}/fiche-solution/liste`,
+  ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_SUFFIX: "/fiche-solution/liste",
   ESPACE_PROJET_FICHES_SOLUTIONS_RECOMMANDATIONS: (projetId: number) =>
     `/espace-projet/${projetId}/fiche-solution/recommandations`,
   ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS: (projetId: number) => `/espace-projet/${projetId}/diagnostic/choix-parcours`,
