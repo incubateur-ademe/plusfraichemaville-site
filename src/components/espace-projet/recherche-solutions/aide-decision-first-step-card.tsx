@@ -19,7 +19,6 @@ export default function AideDecisionFirstStepEtapeCard({
   const setAideDecisionStep = useUserStore((state) => state.setChoixSolutionAideDecisionCurrentStep);
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
 
-  currentProjet?.type_espace;
   const handleClick = () => {
     if (etapeAttributes.nom === selectEspaceLabelByCode(currentProjet?.type_espace)) {
       trackEvent(ESPACE_PROJET_AIDE_DECISION_BON_ESPACE);

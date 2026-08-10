@@ -23,7 +23,11 @@ export const FilDArianeAvecBouton = ({ segments, currentPageLabel, className }: 
   const collapseId = `fil-d-arianne-avec-bouton-${useId()}`;
 
   return (
-    <nav role="navigation" aria-label="vous êtes ici dans la recherche de solutions :" className={clsx("fr-breadcrumb", className)}>
+    <nav
+      role="navigation"
+      aria-label="vous êtes ici dans la recherche de solutions :"
+      className={clsx("fr-breadcrumb", className)}
+    >
       <button className="fr-breadcrumb__button" aria-expanded="false" aria-controls={collapseId}>
         Voir le fil d’Ariane
       </button>

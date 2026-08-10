@@ -11,9 +11,10 @@ export type FichesSolutionsListeSearchParams = {
 };
 
 /**
- * Contenu partagé entre les routes /fiche-solution/liste et /fiche-solution/liste/arbre :
- * cette dernière ne sert qu'à donner une URL dédiée à l'étape en cours de l'aide à la décision
- * (voir AideDecisionContainer), le contenu affiché est identique.
+ * Contenu partagé entre les routes /fiche-solution/liste, /fiche-solution/liste/arbre et
+ * /fiche-solution/liste/toutes-solutions : ces routes ne servent qu'à donner une URL dédiée à
+ * l'onglet et à l'étape en cours de l'aide à la décision (voir RechercheSolutions et
+ * AideDecisionContainer), le contenu affiché est identique.
  */
 export const FichesSolutionsListePageContent = async ({
   searchParams,
