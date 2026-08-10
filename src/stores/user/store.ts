@@ -31,7 +31,7 @@ export const defaultInitState: UserState = {
   userInfos: undefined,
   navigationPreferences: {
     choixSolutionSelectedTabId: SolutionTabIds.ARBRE,
-    choixSolutionAideDecisionTri: SORT_TEMPERATURE.label,
+    choixSolutionAideDecisionTri: SORT_TEMPERATURE.code,
   },
 };
 
