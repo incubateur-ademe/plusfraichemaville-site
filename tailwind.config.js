@@ -74,6 +74,7 @@ module.exports = {
       "dsfr-orange-warning": "var(--border-default-orange-terre-battue)",
       "dsfr-background-flat-red-marianne": "var(--background-flat-red-marianne)",
       "dsfr-background-flat-grey": "var(--background-flat-grey)",
+      "dsfr-background-default-grey-active": "var(--background-default-grey-active)",
       "tab-hover": "rgba(66, 17, 170, 0.10)!important",
       "picto-highlight-diagnostic": "#EB754B",
       "coeff-permeabilite": "var(--background-action-high-info-hover)",

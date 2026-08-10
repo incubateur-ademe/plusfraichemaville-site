@@ -73,6 +73,11 @@ const nextConfig = {
         destination: "/fiche-solution",
         permanent: true,
       },
+      {
+        source: "/aide-decision/:path*",
+        destination: "/fiche-solution",
+        permanent: true,
+      },
     ];
   },
   webpack: (config) => {

@@ -4,6 +4,7 @@ import { EspaceProjetBreadcrumbStep } from "@/src/components/espace-projet/banne
 import clsx from "clsx";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import BannerProjet from "@/src/components/espace-projet/banner/banner-projet";
+import { hasFichesSolutions } from "@/src/components/common/generic-save-fiche/helpers";
 
 export default function BannerProjetBreadcrumb({
   step,
@@ -21,7 +22,9 @@ export default function BannerProjetBreadcrumb({
             className={clsx(className, "!mb-0 !mt-0 !pb-1 !pt-3")}
             currentPageLabel={step?.currentPageLabel}
             classes={{ link: "text-pfmv-navy font-normal" }}
-            segments={step?.breadcrumbSegments(currentProjet.id, currentProjet.nom) || []}
+            segments={
+              step?.breadcrumbSegments(currentProjet.id, currentProjet.nom, hasFichesSolutions(currentProjet)) || []
+            }
           />
         )}
       </div>

@@ -27,9 +27,6 @@ export default async function SitemapPage() {
               <LinkWithoutPrefetch href="/">Accueil</LinkWithoutPrefetch>
               <ul>
                 <li>
-                  <LinkWithoutPrefetch href={PFMV_ROUTES.AIDE_DECISION}>Aide à la décision</LinkWithoutPrefetch>
-                </li>
-                <li>
                   Surchauffe urbaine
                   <ul>
                     <li>
