@@ -6,7 +6,9 @@ import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { RechercheSolutions } from "@/src/components/espace-projet/recherche-solutions/recherche-solutions";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
-export const metadata: Metadata = computeMetadata("Explorez nos solutions");
+export const metadata: Metadata = computeMetadata(
+  "Trouvez les solutions les plus adaptées à votre espace à rafraîchir",
+);
 
 export default async function FichesSolutionsListePage(props: {
   searchParams: Promise<{

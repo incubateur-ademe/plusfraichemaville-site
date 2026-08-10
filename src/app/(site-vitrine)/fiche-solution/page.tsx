@@ -4,7 +4,9 @@ import { computeMetadata } from "@/src/helpers/metadata/helpers";
 import { getAllFichesSolutions } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import AideDecisionIncentiveBanner from "@/src/components/common/espace-projet-incentive/aide-decision-incentive-banner";
 
-export const metadata: Metadata = computeMetadata("Explorez nos solutions");
+export const metadata: Metadata = computeMetadata(
+  "Trouvez les solutions les plus adaptées à votre espace à rafraîchir",
+);
 
 export default async function FichesSolutionsPage(props: {
   searchParams: Promise<{
