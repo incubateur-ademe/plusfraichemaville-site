@@ -8,6 +8,7 @@ export type NavigationPreferences = {
   choixSolutionSelectedTabId: SolutionTabIdType;
   choixSolutionAideDecisionCurrentStep?: string;
   choixSolutionAideDecisionTri: string;
+  projetId?: number;
 };
 
 interface UserState {
@@ -20,6 +21,8 @@ export type UserActions = {
   setChoixSolutionSelectedTabId: (tabId: SolutionTabIdType) => void;
   setChoixSolutionAideDecisionCurrentStep: (aideDecisionStep: string) => void;
   setChoixSolutionAideDecisionTri: (aideDecisionResultsTri: string) => void;
+  reInitNavigationPreferences: () => void;
+  setNavigationPreferencesProjetId: (projetId?: number) => void;
 };
 
 export type UserStore = UserState & UserActions;
@@ -28,7 +31,7 @@ export const defaultInitState: UserState = {
   userInfos: undefined,
   navigationPreferences: {
     choixSolutionSelectedTabId: SolutionTabIds.ARBRE,
-    choixSolutionAideDecisionTri: SORT_TEMPERATURE.label,
+    choixSolutionAideDecisionTri: SORT_TEMPERATURE.code,
   },
 };
 
@@ -63,6 +66,15 @@ export const createUserStore = (initState: UserState = defaultInitState) => {
         navigationPreferences: {
           ...state.navigationPreferences,
           choixSolutionAideDecisionTri: aideDecisionResultsTri,
+        },
+      })),
+    reInitNavigationPreferences: () => set(() => ({ navigationPreferences: defaultInitState.navigationPreferences })),
+    setNavigationPreferencesProjetId: (projetId) =>
+      set((state) => ({
+        ...state,
+        navigationPreferences: {
+          ...state.navigationPreferences,
+          projetId: projetId,
         },
       })),
   }));

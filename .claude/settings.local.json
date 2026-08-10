@@ -16,7 +16,11 @@
       "Bash(find:*)",
       "mcp__ide__getDiagnostics",
       "Bash(npx prettier *)",
-      "Bash(npx eslint *)"
+      "Bash(npx eslint *)",
+      "Bash(pnpm eslint *)",
+      "Bash(pnpm tsc *)",
+      "Bash(pnpm prettier *)",
+      "Bash(git checkout *)"
     ]
   }
 }

@@ -7,21 +7,19 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { FilDArianeAvecBouton } from "@/src/components/common/fil-d-arianne-avec-bouton";
 import { useUserStore } from "@/src/stores/user/provider";
 import AideDecisionEtapeCard from "./aide-decision-etape-card";
+import { AideDecisionStepSkeleton } from "@/src/components/espace-projet/recherche-solutions/aide-decision-step-skeleton";
 
 export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
-  const { data, isLoading } = useImmutableSwrWithFetcher<AideDecisionStepData>(GET_AIDE_DECISION_STEP_URL(currentStep));
+  const { data, error, isLoading } = useImmutableSwrWithFetcher<AideDecisionStepData>(
+    GET_AIDE_DECISION_STEP_URL(currentStep),
+  );
   const setAideDecisionStep = useUserStore((state) => state.setChoixSolutionAideDecisionCurrentStep);
 
   const etape = data?.etape;
   const historique = data?.historique;
-  if (isLoading) {
-    return (
-      <div>
-        <div className="mb-12 mt-6 h-4 w-64 animate-pulse rounded-lg bg-dsfr-background-default-grey-active" />
-        <div className="mx-auto h-6 w-96 animate-pulse rounded-lg bg-dsfr-background-default-grey-active" />
-        <div className="mx-auto mt-12 h-72 w-4/5 animate-pulse rounded-2xl bg-dsfr-background-default-grey-active" />
-      </div>
-    );
+
+  if (isLoading || (!data && !error)) {
+    return <AideDecisionStepSkeleton />;
   }
 
   if (!!etape?.attributes.etapes_suivantes?.data && etape?.attributes.etapes_suivantes?.data?.length > 0) {
@@ -58,6 +56,9 @@ export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
           aideDecisionEtapeAttributes={etape.attributes}
         />
       );
+    } else if (error) {
+      customCaptureException(`Erreur lors de la récupération de l'étape d'aide à la décision ${currentStep}`, error);
+      return <p>Une erreur est survenue lors du chargement de cette étape.</p>;
     } else {
       customCaptureException(
         `Aide décision étape non trouvée ${currentStep}`,

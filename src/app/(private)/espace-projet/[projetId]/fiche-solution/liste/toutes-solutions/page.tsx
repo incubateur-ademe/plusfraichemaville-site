@@ -9,7 +9,7 @@ export const metadata: Metadata = computeMetadata(
   "Trouvez les solutions les plus adaptées à votre espace à rafraîchir",
 );
 
-export default async function FichesSolutionsListePage(props: {
+export default async function FichesSolutionsListeToutesSolutionsPage(props: {
   searchParams: Promise<FichesSolutionsListeSearchParams>;
 }) {
   const searchParams = await props.searchParams;
