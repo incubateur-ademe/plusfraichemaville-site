@@ -4,22 +4,18 @@ import clsx from "clsx";
 import ProConnectButton from "@codegouvfr/react-dsfr/ProConnectButton";
 import { signIn, useSession } from "next-auth/react";
 import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
-import { useProjetsStore } from "@/src/stores/projets/provider";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { createModal } from "@codegouvfr/react-dsfr/Modal";
 import { ModaleAideDecisionChoixProjet } from "@/src/components/common/espace-projet-incentive/modale-aide-decision-choix-projet";
 
 export default function AideDecisionIncentiveBanner({ className }: { className?: string }) {
   const handleSignIn = () => signIn("agentconnect", { callbackUrl: getFullUrl(PFMV_ROUTES.ESPACE_PROJET) });
-  const projetId = useProjetsStore((state) => state.currentProjetId);
   const status = useSession().status;
   const modalChoixProjet = createModal({
     id: "aide-decision-choix-projet-modal",
     isOpenedByDefault: false,
   });
-  if (projetId) {
-    return null;
-  }
+
   return (
     <div
       className={clsx(

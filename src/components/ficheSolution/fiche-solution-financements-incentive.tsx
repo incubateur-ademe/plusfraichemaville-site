@@ -26,7 +26,8 @@ export default function FicheSolutionFinancementsIncentive({ ficheId, nbAides }:
     isOpenedByDefault: false,
   });
 
-  const handleClick = async () => {
+  const handleClick = async () =>
+  {
     if (status === "unauthenticated") {
       router.push(PFMV_ROUTES.CONNEXION);
       return;

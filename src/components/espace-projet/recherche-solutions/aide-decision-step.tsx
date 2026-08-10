@@ -18,8 +18,6 @@ export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
   const etape = data?.etape;
   const historique = data?.historique;
 
-  // Tant que la requête n'est pas terminée (ni données, ni erreur), on affiche le skeleton.
-  // Cela évite de lever une exception "étape non trouvée" à tort le temps que le fetch se lance.
   if (isLoading || (!data && !error)) {
     return <AideDecisionStepSkeleton />;
   }
