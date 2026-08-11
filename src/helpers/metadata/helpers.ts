@@ -1,6 +1,11 @@
 import { Metadata } from "next";
 
-export const computeMetadata = (title: string, description?: string, imageUrl?: string): Metadata => {
+export const computeMetadata = (
+  title: string,
+  description?: string,
+  imageUrl?: string,
+  canonicalUrl?: string,
+): Metadata => {
   return {
     title: `${title} | Plus fraîche ma ville`,
     description: description || defaultMetadataDescription,
@@ -10,6 +15,7 @@ export const computeMetadata = (title: string, description?: string, imageUrl?: 
       images: imageUrl || defaultMetadataImage,
       description: description || defaultMetadataDescription,
     },
+    ...(canonicalUrl && { alternates: { canonical: canonicalUrl } }),
   };
 };
 

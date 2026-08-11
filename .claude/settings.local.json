@@ -20,7 +20,9 @@
       "Bash(pnpm eslint *)",
       "Bash(pnpm tsc *)",
       "Bash(pnpm prettier *)",
-      "Bash(git checkout *)"
+      "Bash(git checkout *)",
+      "Bash(node *)",
+      "Bash(pnpm exec *)"
     ]
   }
 }
