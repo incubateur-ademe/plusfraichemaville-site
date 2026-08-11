@@ -6,6 +6,7 @@ import { getFicheSolutionBySlug } from "@/src/lib/strapi/queries/fichesSolutions
 import { Metadata } from "next";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 export async function generateMetadata(props: {
   params: Promise<{ ficheSolutionSlug: string; projetId: string }>;
@@ -16,6 +17,7 @@ export async function generateMetadata(props: {
     ficheSolution?.attributes.titre || "Fiche solution",
     ficheSolution?.attributes.description_courte,
     getStrapiImageUrl(ficheSolution?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
+    getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(params.ficheSolutionSlug)),
   );
 }
 

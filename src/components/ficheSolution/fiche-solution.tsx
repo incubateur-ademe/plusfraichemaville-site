@@ -14,7 +14,6 @@ import { FICHE_SOLUTION_CLIC_ONGLET } from "@/src/helpers/matomo/matomo-tags";
 import { FicheSolutionSideMenu } from "@/src/components/ficheSolution/fiche-solution-side-menu";
 import { PublishInformation } from "@/src/components/common/publish-information";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
 export async function FicheSolution({ params }: { params: { ficheSolutionSlug: string; projetId: string } }) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
@@ -23,7 +22,6 @@ export async function FicheSolution({ params }: { params: { ficheSolutionSlug: s
     const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
     return (
       <>
-        <link rel="canonical" href={getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(params.ficheSolutionSlug))} />
         <div className={`relative h-48 md:h-96 ${typeSolution?.bannerClass}`}>
           <Image
             width={1200}
