@@ -13,6 +13,8 @@ import { ModalSaveFinancementAuthenticatedOutsideProjet } from "@/src/components
 import Image from "next/image";
 import apercuModuleAides from "../../../public/images/espace-projet-incentive/apercu-module-financement.png";
 import clsx from "clsx";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { FINANCEMENT_TO_ESPACE_PROJET } from "@/src/helpers/matomo/matomo-tags";
 
 export default function FicheSolutionFinancementsIncentive({ ficheId, nbAides }: { ficheId: number; nbAides: number }) {
   const { status } = useSession();
@@ -27,6 +29,7 @@ export default function FicheSolutionFinancementsIncentive({ ficheId, nbAides }:
   });
 
   const handleClick = async () => {
+    trackEvent(FINANCEMENT_TO_ESPACE_PROJET);
     if (status === "unauthenticated") {
       router.push(PFMV_ROUTES.CONNEXION);
       return;
