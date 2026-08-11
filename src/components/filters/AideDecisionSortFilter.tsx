@@ -10,6 +10,7 @@ export default function AideDecisionSortFilter({ className }: { className?: stri
 
   return (
     <div className={clsx("flex shrink flex-row flex-wrap justify-start gap-6", className)}>
+      <span>Trier par : </span>
       {ALL_AIDE_DECISION_SORT_FIELD.map((sortField) => (
         <FilterButton
           key={sortField.code}
