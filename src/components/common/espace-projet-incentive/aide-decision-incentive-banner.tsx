@@ -41,7 +41,7 @@ export default function AideDecisionIncentiveBanner({ className }: { className?:
         </div>
         {status === "authenticated" ? (
           <Button className="rounded-3xl" onClick={modalChoixProjet.open}>
-            Commencer
+            Continuer sur l'espace projet
           </Button>
         ) : (
           <ProConnectButton onClick={handleSignIn} />
