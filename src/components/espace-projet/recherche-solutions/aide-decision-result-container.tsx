@@ -22,8 +22,7 @@ export default function AideDecisionResultContainer({ aideDecisionEtapeAttribute
     aideDecisionEtapeAttributes.fiches_solutions.data.length > 0
   ) {
     const sortBy = getAideDecisionSortFieldFromCode(navigationPreferences.choixSolutionAideDecisionTri);
-    const sortedFichesSolutions = aideDecisionEtapeAttributes.fiches_solutions.data
-      .sort(sortBy.sortFn);
+    const sortedFichesSolutions = aideDecisionEtapeAttributes.fiches_solutions.data.sort(sortBy.sortFn);
 
     const relatedRetourExperiences = sortedFichesSolutions
       .flatMap((fs) => fs.attributes.solution_retour_experiences?.data.map((sol) => sol.attributes.retour_experience))
