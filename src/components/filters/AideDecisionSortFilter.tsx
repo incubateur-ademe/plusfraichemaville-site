@@ -9,7 +9,7 @@ export default function AideDecisionSortFilter({ className }: { className?: stri
   const navigationPreferences = useUserStore((state) => state.navigationPreferences);
 
   return (
-    <div className={clsx("flex shrink flex-row flex-wrap justify-start gap-6", className)}>
+    <div className={clsx("flex shrink flex-row flex-wrap items-center justify-start gap-6", className)}>
       <span>Trier par : </span>
       {ALL_AIDE_DECISION_SORT_FIELD.map((sortField) => (
         <FilterButton
