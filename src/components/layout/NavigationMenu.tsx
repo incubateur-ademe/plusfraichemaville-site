@@ -21,7 +21,8 @@ export default function NavigationMenu() {
             pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION ||
             pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE ||
             pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE ||
-            pathname.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS),
+            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE ||
+            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
           text: "Comprendre",
           megaMenu: {
             categories: [
@@ -62,15 +63,6 @@ export default function NavigationMenu() {
                 links: [
                   {
                     linkProps: {
-                      href: PFMV_ROUTES.FICHES_SOLUTIONS,
-                      target: "_self",
-                      onClick: cancelCurrentProjet,
-                      prefetch: false,
-                    },
-                    text: "Explorer toutes les solutions",
-                  },
-                  {
-                    linkProps: {
                       href: PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE,
                       target: "_self",
                       onClick: cancelCurrentProjet,
@@ -94,7 +86,7 @@ export default function NavigationMenu() {
         },
         {
           isActive:
-            pathname?.startsWith(PFMV_ROUTES.AIDE_DECISION) ||
+            pathname?.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS) ||
             pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING),
           text: "Passer à l'action",
           className: "menuCategoryShadowNone",
@@ -126,7 +118,7 @@ export default function NavigationMenu() {
                     />
                   ),
                   linkProps: {
-                    href: PFMV_ROUTES.AIDE_DECISION,
+                    href: PFMV_ROUTES.FICHES_SOLUTIONS,
                     target: "_self",
                     onClick: cancelCurrentProjet,
                     prefetch: false,

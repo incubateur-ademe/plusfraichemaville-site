@@ -1,5 +1,6 @@
 import { Media } from "@/src/lib/strapi/types/common/Media";
 import { isBoolean } from "@/src/helpers/common";
+import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
 
 type StrapiEqFilter = { attribute: string; value: string | boolean; operator: "eq"; relation: false };
 type StrapiInFilter = { attribute: string; value: string[] | number[]; operator: "in"; relation: false };
@@ -76,3 +77,8 @@ export class AideDecisionEtapeHistory {
     this.slug = slug;
   }
 }
+
+export type AideDecisionStepData = {
+  etape: AideDecisionEtape | null;
+  historique: AideDecisionEtapeHistory[] | null;
+};

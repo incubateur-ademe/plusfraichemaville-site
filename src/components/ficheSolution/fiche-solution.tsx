@@ -14,22 +14,14 @@ import { FICHE_SOLUTION_CLIC_ONGLET } from "@/src/helpers/matomo/matomo-tags";
 import { FicheSolutionSideMenu } from "@/src/components/ficheSolution/fiche-solution-side-menu";
 import { PublishInformation } from "@/src/components/common/publish-information";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
-import { getFullUrl, PFMV_ROUTES } from "@/src/helpers/routes";
 
-export async function FicheSolution({
-  params,
-  searchParams,
-}: {
-  params: { ficheSolutionSlug: string; projetId: string };
-  searchParams: { etapeAideDecision: string | undefined };
-}) {
+export async function FicheSolution({ params }: { params: { ficheSolutionSlug: string; projetId: string } }) {
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
 
   if (ficheSolution) {
     const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
     return (
       <>
-        <link rel="canonical" href={getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(params.ficheSolutionSlug))} />
         <div className={`relative h-48 md:h-96 ${typeSolution?.bannerClass}`}>
           <Image
             width={1200}
@@ -52,7 +44,6 @@ export async function FicheSolution({
         <div className="fr-container relative flex flex-row">
           <FicheSolutionSideMenu
             ficheSolution={ficheSolution}
-            etapeAideDecision={searchParams.etapeAideDecision}
             className="hidden flex-none md:mt-[6.5rem] md:block md:w-56"
           />
           <div className="fr-tabs before:!shadow-none">
@@ -108,11 +99,7 @@ export async function FicheSolution({
               className="fr-tabs__panel fr-tabs__panel--selected !px-0 md:!py-12"
               role="tabpanel"
             >
-              <FicheSolutionSideMenu
-                ficheSolution={ficheSolution}
-                etapeAideDecision={searchParams.etapeAideDecision}
-                className="mb-4 flex-none md:hidden"
-              />
+              <FicheSolutionSideMenu ficheSolution={ficheSolution} className="mb-4 flex-none md:hidden" />
               <FicheSolutionTabSynthese
                 ficheSolutionId={ficheSolution.id}
                 ficheSolution={ficheSolution}

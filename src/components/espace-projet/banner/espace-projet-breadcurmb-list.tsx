@@ -22,7 +22,7 @@ export const BREADCRUMB_SEGMENT_DASHBOARD = (projetId: number, projetName: strin
 
 export type EspaceProjetBreadcrumbStep = {
   currentPageLabel: ReactNode;
-  breadcrumbSegments: (_projetId: number, _projetName: string) => BreadcrumbSegment[];
+  breadcrumbSegments: (_projetId: number, _projetName: string, _hasFicheSolution: boolean) => BreadcrumbSegment[];
 };
 
 export const BREADCRUMB_TABLEAU_DE_BORD = (projetName: string): EspaceProjetBreadcrumbStep => ({

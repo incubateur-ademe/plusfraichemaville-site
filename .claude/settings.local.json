@@ -14,7 +14,15 @@
       "Bash(pnpm run build:*)",
       "Bash(wc:*)",
       "Bash(find:*)",
-      "mcp__ide__getDiagnostics"
+      "mcp__ide__getDiagnostics",
+      "Bash(npx prettier *)",
+      "Bash(npx eslint *)",
+      "Bash(pnpm eslint *)",
+      "Bash(pnpm tsc *)",
+      "Bash(pnpm prettier *)",
+      "Bash(git checkout *)",
+      "Bash(node *)",
+      "Bash(pnpm exec *)"
     ]
   }
 }

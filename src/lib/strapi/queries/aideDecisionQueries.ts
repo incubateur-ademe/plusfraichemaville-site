@@ -74,16 +74,6 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
     }
   }
 }`;
-const GET_ALL_AIDE_DECISION_ETAPE_SLUG = (strapiFilter: StrapiFilter) => `query {
-  aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
-    data {
-      id
-      attributes {
-        slug
-      }
-    }
-  }
-}`;
 
 const GET_AIDE_DECISION_ETAPE_HISTORY = (strapiFilter: StrapiFilter) => `  ${STRAPI_IMAGE_FRAGMENT} query {
   aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
@@ -147,14 +137,6 @@ export async function getAideDecisionFirstSteps(): Promise<AideDecisionEtape[]> 
   );
   const apiResponse = (
     await strapiGraphQLCall(GET_FILTERED_AIDE_DECISION_ETAPE(filter), { tag: "aide-decision-first-step" })
-  )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
-  return safeReturnStrapiEntities(apiResponse);
-}
-
-export async function getAllAideDecisionSlugs(): Promise<AideDecisionEtape[]> {
-  const filter = new StrapiFilter(true, []);
-  const apiResponse = (
-    await strapiGraphQLCall(GET_ALL_AIDE_DECISION_ETAPE_SLUG(filter), { tag: "get-all-aide-decision" })
   )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
   return safeReturnStrapiEntities(apiResponse);
 }

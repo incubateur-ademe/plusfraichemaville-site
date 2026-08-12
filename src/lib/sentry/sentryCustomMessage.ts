@@ -1,7 +1,7 @@
 import * as Sentry from "@sentry/nextjs";
 
 export const captureError = (message: string, data?: any) => {
-  console.log(message, data);
+  console.log("%s", message, data);
   Sentry.captureMessage(message, (scope) =>
     scope.addBreadcrumb({
       type: "error",
@@ -13,7 +13,7 @@ export const captureError = (message: string, data?: any) => {
 };
 
 export const customCaptureException = (message: string, exception?: any) => {
-  console.log(message, exception);
+  console.log("%s", message, exception);
   Sentry.captureException(exception, (scope) =>
     scope.addBreadcrumb({
       type: "error",

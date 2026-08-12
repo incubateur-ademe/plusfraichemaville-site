@@ -73,7 +73,7 @@ export const ProjetVisibility = ({
           {Toggle}
           <p>
             Grâce à la Carte des projets disponible sur votre espace projet, découvez les initiatives voisines en
-            matière de rafraîchissement urbain, échangez avec d'autres proteurs de projets et obtenez des contacts de
+            matière de rafraîchissement urbain, échangez avec d'autres porteurs de projets et obtenez des contacts de
             prestataires. Pour faciliter les échanges entre pairs, nous vous invitons à rendre votre projet visible par
             les autres membres de la communauté Plus fraîche ma ville.
           </p>

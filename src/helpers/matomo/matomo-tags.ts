@@ -12,7 +12,6 @@ export const MATOMO_CATEGORIES = {
 };
 
 export const MATOMO_ACTIONS = {
-  AIDE_DECISION_BREADCRUMB: "aide-decision-fil-ariane",
   SITE_VITRINE_BREADCRUMB: "site-vitrine-fil-ariane",
   SITE_VITRINE_REX_DIAG_STORY: "rex-diag-story",
   SITE_VITRINE_BOOKMARK: "site-vitrine-bookmark-fiche",
@@ -36,6 +35,7 @@ export const MATOMO_ACTIONS = {
   RECHERCHE_GLOBALE: "recherche-globale",
   SITE_VITRINE_CLICK_ESPACE_PROJET: "site-vitrine-vers-espace-projet",
   ESTIMATION_MODIFICATION_SOLUTION: "estimation-modification-solution",
+  AIDE_DECISION_CLIC_ESPACE: "aide-decision-clic-espace",
 };
 
 export const ESTIMATION_AJOUT_SOLUTION: MATOMO_EVENT = {
@@ -140,12 +140,6 @@ export const ANNUAIRE_SIDE_PANEL_VIEW_PROJET_MODAL_OPEN = (name: string): MATOMO
   name: `[Annuaire] Ouverture de la modal de visualisation du rex : « ${name} »`,
 });
 
-export const AIDE_DECISION_BREADCRUMB_FIL_ARIANE = (currentPage: string): MATOMO_EVENT => ({
-  category: MATOMO_CATEGORIES.SITE_PUBLIC,
-  action: MATOMO_ACTIONS.AIDE_DECISION_BREADCRUMB,
-  name: `[Fil Ariane aide décision] Clic à partir de la page : « ${currentPage} »`,
-});
-
 export const SITE_VITRINE_BREADCRUMB_FIL_ARIANE = (currentPage: string): MATOMO_EVENT => ({
   category: MATOMO_CATEGORIES.SITE_PUBLIC,
   action: MATOMO_ACTIONS.SITE_VITRINE_BREADCRUMB,
@@ -192,6 +186,18 @@ export const ESPACE_PROJET_BOOKMARK_FICHE = {
   category: MATOMO_CATEGORIES.ESPACE_PROJET,
   action: MATOMO_ACTIONS.SITE_VITRINE_BOOKMARK,
   name: "Sauvegarde d'une fiche à partir de l'espace projet",
+};
+
+export const ESPACE_PROJET_AIDE_DECISION_BON_ESPACE = {
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.AIDE_DECISION_CLIC_ESPACE,
+  name: "Choix du type d'espace identique à celui du projet",
+};
+
+export const ESPACE_PROJET_AIDE_DECISION_AUTRE_ESPACE = {
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.AIDE_DECISION_CLIC_ESPACE,
+  name: "Choix d'un type d'espace différent de celui du projet",
 };
 
 export const FICHE_SOLUTION_CLIC_ONGLET = (onglet: string): MATOMO_EVENT => ({
