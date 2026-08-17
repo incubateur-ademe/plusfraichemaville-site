@@ -15,6 +15,8 @@ import { attachInvitationsByEmail } from "@/src/lib/prisma/prisma-user-projet-qu
 import { EmailService } from "@/src/services/brevo";
 import { isSirenCommune } from "@/src/helpers/categories-juridiques";
 
+const AGENT_PUBLIC_ROLES = ["agent_public", "agent_public_etat", "agent_public_territorial"];
+
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prismaClient),
   events: {
@@ -33,6 +35,7 @@ export const authOptions: NextAuthOptions = {
               user.id,
               entityFromSiren.etablissement?.uniteLegale?.denominationUniteLegale,
               entityFromSiren.etablissement,
+              prismaUser.is_agent_public,
             );
           }
           if (codePostal && codeInsee && isSirenCommune(entityFromSiren?.etablissement)) {
@@ -89,7 +92,7 @@ export const authOptions: NextAuthOptions = {
       checks: ["nonce", "state"],
       authorization: {
         params: {
-          scope: "openid uid given_name usual_name email siret",
+          scope: "openid uid given_name usual_name email siret roles",
           acr_values: "eidas1",
           redirect_uri: process.env.NEXT_PUBLIC_URL_SITE + "/api/auth/callback/agentconnect",
           nonce: uuidv4(),
@@ -122,6 +125,7 @@ export const authOptions: NextAuthOptions = {
         },
       },
       profile: async (profile) => {
+        const isAgentPublic = profile.roles.some((role: string) => AGENT_PUBLIC_ROLES.includes(role));
         return {
           id: profile.email,
           prenom: profile.given_name,
@@ -129,6 +133,7 @@ export const authOptions: NextAuthOptions = {
           email: profile.email,
           poste: profile.belonging_population,
           agentconnect_info: profile,
+          is_agent_public: isAgentPublic,
         };
       },
     },
