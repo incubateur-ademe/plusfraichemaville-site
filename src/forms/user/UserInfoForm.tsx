@@ -71,11 +71,20 @@ export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; butto
       <InputFormField
         control={form.control}
         path={"nomEtablissement"}
-        label="Collectivité à laquelle je suis rattaché(e)"
+        label={
+          user.is_agent_public
+            ? "Collectivité à laquelle je suis rattaché(e)"
+            : "Entreprise à laquelle je suis rattaché(e)"
+        }
         asterisk={true}
         disabled={!!user.nom_etablissement}
       />
-      <InputFormField control={form.control} path="poste" label="Mon poste dans l'établissement" asterisk={true} />
+      <InputFormField
+        control={form.control}
+        path="poste"
+        label={user.is_agent_public ? "Mon poste dans l'établissement" : "Mon poste dans l'entreprise"}
+        asterisk={true}
+      />
       {!user.canal_acquisition && (
         <>
           <SelectFormField

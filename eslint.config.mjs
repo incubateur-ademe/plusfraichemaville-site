@@ -50,6 +50,7 @@ export default defineConfig([
       ".env",
       "node_modules",
       "public/**",
+      "out/**",
       "next.config.js",
       "postcss.config.js",
       "src/lib/strapi/types/*",
