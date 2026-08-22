@@ -20,6 +20,7 @@
     "fixPrettier": "prettier . --write",
     "csm-mail-batch": "npx tsx ./scripts/csm-mail-batch.ts",
     "connect-sync": "npx tsx ./scripts/connect-sync.ts",
+    "migrate-strapi5-document-ids": "npx tsx ./scripts/migrate-strapi5-document-ids.ts",
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {

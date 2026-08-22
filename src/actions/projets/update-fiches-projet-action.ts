@@ -17,7 +17,7 @@ export const updateFichesProjetAction = async ({
   typeUpdate,
 }: {
   projetId: number;
-  ficheId: number;
+  ficheId: string;
   typeFiche: TypeFiche;
   typeUpdate: TypeUpdate;
 }): Promise<ResponseAction<{ projet: ProjetWithRelations | null }>> => {

@@ -16,7 +16,7 @@ import clsx from "clsx";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { FINANCEMENT_TO_ESPACE_PROJET } from "@/src/helpers/matomo/matomo-tags";
 
-export default function FicheSolutionFinancementsIncentive({ ficheId, nbAides }: { ficheId: number; nbAides: number }) {
+export default function FicheSolutionFinancementsIncentive({ ficheId, nbAides }: { ficheId: string; nbAides: number }) {
   const { status } = useSession();
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -39,7 +39,7 @@ export default function FicheSolutionFinancementsIncentive({ ficheId, nbAides }:
       setIsSubmitting(true);
       const update = await updateFichesProjetAction({
         projetId: currentProjetId,
-        ficheId: +ficheId,
+        ficheId: ficheId,
         typeFiche: TypeFiche.solution,
         typeUpdate: TypeUpdate.add,
       });

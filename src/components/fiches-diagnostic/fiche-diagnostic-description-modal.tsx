@@ -42,16 +42,16 @@ export const FicheDiagnosticDescriptionModal = () => {
   const userInfos = useUserStore((state) => state.userInfos);
 
   const handleReadMethodClick = async () => {
-    if (userInfos?.id && currentProjetId && ficheDiagnostic?.id) {
-      await addFicheDiagnosticSeenAction(userInfos.id, currentProjetId, +ficheDiagnostic.id);
+    if (userInfos?.id && currentProjetId && ficheDiagnostic?.documentId) {
+      await addFicheDiagnosticSeenAction(userInfos.id, currentProjetId, ficheDiagnostic.documentId);
     }
     modal.close();
   };
 
-  const coutMin = ficheDiagnostic?.attributes.cout_min;
-  const coutMax = ficheDiagnostic?.attributes.cout_max;
-  const delaiMin = ficheDiagnostic?.attributes.delai_min;
-  const delaiMax = ficheDiagnostic?.attributes.delai_max;
+  const coutMin = ficheDiagnostic?.cout_min;
+  const coutMax = ficheDiagnostic?.cout_max;
+  const delaiMin = ficheDiagnostic?.delai_min;
+  const delaiMax = ficheDiagnostic?.delai_max;
   const cout = getCoutFiche(TypeFiche.diagnostic, coutMin, coutMax);
   const delai = getDelaiTravauxFiche(TypeFiche.diagnostic, delaiMin, delaiMax);
   const { capturePostHogEvent } = useCapturePostHogEvent();
@@ -68,8 +68,8 @@ export const FicheDiagnosticDescriptionModal = () => {
     },
   });
 
-  const ficheDiagData = ficheDiagnostic?.attributes;
-  const rex = ficheDiagnostic?.attributes.lien_rex_diagnostics.data ?? [];
+  const ficheDiagData = ficheDiagnostic;
+  const rex = ficheDiagnostic?.lien_rex_diagnostics ?? [];
 
   return (
     <>
@@ -91,7 +91,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                 {ficheDiagnostic && (
                   <GenericSaveAuthenticatedInsideProjet
                     type={TypeFiche.diagnostic}
-                    id={ficheDiagnostic?.id}
+                    id={ficheDiagnostic?.documentId}
                     opener={() => notifications("success", "FICHE_DIAGNOSTIC_ADDED_TO_PROJET")}
                     className="!absolute right-8 top-8"
                   />
@@ -176,7 +176,7 @@ export const FicheDiagnosticDescriptionModal = () => {
               {!rex.length ? null : rex.length <= 1 ? (
                 <RetourExperienceDiagCard
                   onClickButton={() => modal.close()}
-                  rex={rex[0].attributes.retour_experience_diagnostic?.data}
+                  rex={rex[0].retour_experience_diagnostic}
                 />
               ) : (
                 <Splide
@@ -192,7 +192,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                           <RetourExperienceDiagCard
                             key={index}
                             onClickButton={() => modal.close()}
-                            rex={r.attributes.retour_experience_diagnostic?.data}
+                            rex={r.retour_experience_diagnostic}
                           />
                         </SplideSlide>
                       ))}

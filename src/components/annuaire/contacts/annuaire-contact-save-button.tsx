@@ -88,7 +88,7 @@ export const AnnuaireContactSaveButton = ({ projetId, contact, className }: Annu
         <GenericSaveButtonElement
           isSaved={isSaved}
           update={update}
-          id={1}
+          id="annuaire-contact"
           labels={{ saved: "Sauvegardé", notSaved: "Sauvegarder" }}
         />
       )}

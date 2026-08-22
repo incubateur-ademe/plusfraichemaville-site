@@ -43,19 +43,19 @@ export const makeInProgressProjetsPositions = (inProgressProjets: ProjetWithPubl
 
 export const makeRexMarkers = (rexProjets: RetourExperience[]): AnnuaireMapClientProps["markers"] =>
   rexProjets
-    .filter((projet) => Boolean(projet.attributes.location as unknown as GeoJsonAdresse))
+    .filter((projet) => Boolean(projet.location as unknown as GeoJsonAdresse))
     .map((projet) => {
-      const { coordinates } = (projet.attributes.location as unknown as GeoJsonAdresse).geometry;
+      const { coordinates } = (projet.location as unknown as GeoJsonAdresse).geometry;
       const geocode = [coordinates[1], coordinates[0]] as LatLngTuple;
-      const typeEspace = projet.attributes.types_espaces as TypeEspaceCode[];
+      const typeEspace = projet.types_espaces as TypeEspaceCode[];
 
       return {
         geocode,
         type: "rex",
-        idProjet: projet.id,
+        idProjet: projet.documentId,
         projet: {
           typeEspace,
-          budget: projet.attributes.cout_euro,
+          budget: projet.cout_euro,
         },
       };
     });
@@ -118,8 +118,8 @@ export const strapiContactToAnnuaireContact = (
 ): AnnuaireContact => {
   return {
     type: "rex",
-    uniqueId: `rex-${retourExperience.id}-${strapiContact.id}`,
-    id: { rexId: retourExperience.id, contactId: strapiContact.id },
+    uniqueId: `rex-${retourExperience.documentId}-${strapiContact.id}`,
+    id: { rexId: retourExperience.documentId, contactId: strapiContact.id },
     label: strapiContact.label,
     email: strapiContact.email,
     telephone: strapiContact.telephone,
@@ -127,13 +127,13 @@ export const strapiContactToAnnuaireContact = (
     sousTypeContact: strapiContact.sous_type_de_contact,
     typeContact: strapiContact.type_de_contact,
     rex: {
-      nom: retourExperience.attributes.titre,
+      nom: retourExperience.titre,
       cout:
-        retourExperience.attributes.cout_euro != null && retourExperience.attributes.cout_euro >= 0
-          ? `${formatNumberWithSpaces(retourExperience.attributes.cout_euro)} €`
+        retourExperience.cout_euro != null && retourExperience.cout_euro >= 0
+          ? `${formatNumberWithSpaces(retourExperience.cout_euro)} €`
           : "Non communiqué",
-      slug: retourExperience.attributes.slug,
-      region: getRegionLabelFromCode(retourExperience.attributes.region?.data.attributes.code),
+      slug: retourExperience.slug,
+      region: getRegionLabelFromCode(retourExperience.region?.code),
     },
   };
 };

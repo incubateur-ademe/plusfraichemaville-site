@@ -114,7 +114,7 @@ export const ProjetCreationForm = ({ showCancelButton = false }: { showCancelBut
         if (action === "addFicheSolution" && actionParam) {
           const update = await updateFichesProjetAction({
             projetId: finalProjet.id,
-            ficheId: +actionParam,
+            ficheId: actionParam,
             typeFiche: TypeFiche.solution,
             typeUpdate: TypeUpdate.add,
           });

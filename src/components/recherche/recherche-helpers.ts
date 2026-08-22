@@ -19,31 +19,25 @@ import { Webinaire } from "@/src/lib/strapi/types/api/webinaire";
 
 export const mapRexDiagToSearchableRexDiag = (rexDiag: RetourExperienceDiagnostic): SearchableRexDiagnostic => ({
   ...rexDiag,
-  searchableKey: ["diagnostic réalisé retour d'experience", rexDiag.attributes.titre, rexDiag.attributes.lieu]
-    .map(normalizeText)
-    .join(" "),
+  searchableKey: ["diagnostic réalisé retour d'experience", rexDiag.titre, rexDiag.lieu].map(normalizeText).join(" "),
 });
 export const mapWebinaireToSearchableWebinaire = (webinaire: Webinaire): SearchableWebinaire => ({
   ...webinaire,
-  searchableKey: ["webinaire", webinaire.attributes.titre, webinaire.attributes.description]
-    .map(normalizeText)
-    .join(" "),
+  searchableKey: ["webinaire", webinaire.titre, webinaire.description].map(normalizeText).join(" "),
 });
 
 export const mapRexToSearchableRex = (rex: RetourExperience): SearchableRetourExperience => {
-  const relatedFicheSolution = rex.attributes.solution_retour_experiences.data.map((sol) =>
-    sol?.attributes?.fiche_solution?.data
-      ? mapFicheSolutionToSearchableFS(sol.attributes.fiche_solution.data, false)?.searchableKey
-      : "",
+  const relatedFicheSolution = rex.solution_retour_experiences.map((sol) =>
+    sol?.fiche_solution ? mapFicheSolutionToSearchableFS(sol.fiche_solution, false)?.searchableKey : "",
   );
   return {
     ...rex,
     searchableKey: [
       "projet réalisé retour d'expérience",
-      rex.attributes.titre,
-      `climat ${getClimatLabelFromCode(rex.attributes.climat_actuel)}`,
-      getRegionLabelFromCode(rex.attributes.region?.data.attributes.code) || "",
-      espaceCodesToEspacesSearchKeywords(rex.attributes.types_espaces),
+      rex.titre,
+      `climat ${getClimatLabelFromCode(rex.climat_actuel)}`,
+      getRegionLabelFromCode(rex.region?.code) || "",
+      espaceCodesToEspacesSearchKeywords(rex.types_espaces),
       relatedFicheSolution,
     ]
       .flat()
@@ -57,8 +51,8 @@ export const mapFicheDiagnosticToSearchableFD = (ficheDiagnostic: FicheDiagnosti
     ...ficheDiagnostic,
     searchableKey: [
       "fiche méthode de diagnostic",
-      ficheDiagnostic.attributes.titre,
-      ficheDiagnostic.attributes.nom_scientifique,
+      ficheDiagnostic.titre,
+      ficheDiagnostic.nom_scientifique,
       getEchellesSpatialesByFicheDiagnostic(ficheDiagnostic)
         .map((es) => es.label)
         .flat(),
@@ -76,17 +70,17 @@ export const mapFicheSolutionToSearchableFS = (
   ficheSolution: FicheSolution,
   avecTypeEspace: boolean = true,
 ): SearchableFicheSolution => {
-  const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
+  const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
   return {
     ...ficheSolution,
     searchableKey: [
       "fiche solution",
-      avecTypeEspace ? espaceCodesToEspacesSearchKeywords(ficheSolution.attributes.types_espace) : "",
+      avecTypeEspace ? espaceCodesToEspacesSearchKeywords(ficheSolution.types_espace) : "",
       typeSolution?.searchKeywords,
       typeSolution?.label,
-      ficheSolution.attributes.titre,
-      ficheSolution.attributes.description_courte,
-      ficheSolution.attributes.aides_territoires_mots_cles,
+      ficheSolution.titre,
+      ficheSolution.description_courte,
+      ficheSolution.aides_territoires_mots_cles,
     ]
       .map(normalizeText)
       .join(" "),

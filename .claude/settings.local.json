@@ -22,7 +22,16 @@
       "Bash(pnpm prettier *)",
       "Bash(git checkout *)",
       "Bash(node *)",
-      "Bash(pnpm exec *)"
+      "Bash(pnpm exec *)",
+      "WebFetch(domain:docs.strapi.io)",
+      "WebSearch",
+      "Bash(cd *)",
+      "Bash(node_modules/.bin/tsc --noEmit -p tsconfig.json)",
+      "Bash(echo \"EXIT:$?\")",
+      "Read(//tmp/**)",
+      "Bash(git status *)",
+      "Bash(node_modules/.bin/prettier --check \"src/**/*.{ts,tsx}\")",
+      "Bash(node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\")"
     ]
   }
 }

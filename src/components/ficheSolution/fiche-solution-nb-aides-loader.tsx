@@ -9,8 +9,8 @@ export default async function FicheSolutionNbAidesLoader({
   ficheId,
   ficheAttributes,
 }: {
-  ficheId: number;
-  ficheAttributes: FicheSolution["attributes"];
+  ficheId: string;
+  ficheAttributes: FicheSolution;
 }) {
   const timeoutPromise = new Promise<never>((_, reject) =>
     setTimeout(() => reject(new Error(`getNbAidesFromAidesTerritoires timed out after ${TIMEOUT_MS}ms`)), TIMEOUT_MS),

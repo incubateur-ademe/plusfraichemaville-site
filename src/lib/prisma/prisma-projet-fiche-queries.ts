@@ -6,7 +6,7 @@ import { FicheType } from "@/src/generated/prisma/client";
 
 export type ProjetFicheUpdater = {
   projetId: number;
-  ficheId: number;
+  ficheId: string;
   typeFiche: TypeFiche;
   userId: string;
 };

@@ -17,77 +17,63 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
 ) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} ${CONTACT_FRAGMENT}
  ${REX_DIAGNOSTIC_CARD_INFO_FRAGMENT} query {
   ficheDiagnostics ${strapiFilter.wholeFilterString()} {
-    data {
-      id
-      attributes {
-        titre
-        description_courte
-        description
-        etapes_mise_en_oeuvre {
-          titre
-          description
-        }
-        fiches_diagnostics_associees  ${strapiFilter.publicationStateString()} {
-          data {
-            ...FicheDiagnosticCardInfo
-          }
-        }
-        materiel
-        rank
-        image_principale {
-          ...ImageInfo
-        }
-        echelle
-        methode
-        slug
-        besoin
-        indicateurs
-        delai_min
-        delai_max
-        cout_min
-        cout_max
-        explication_source
-        avantage_description
-        vigilance_description
-        en_savoir_plus_description
-        partenaire
-        nom_scientifique
-        type_livrables
-        echelle_thermique
-        echelle_spatiale
-        objectifs {
-          description
-        }
-        image_icone {
-          ...ImageInfo
-        }
-        lien_rex_diagnostics {
-          data {
-            id
-            attributes {
-              retour_experience_diagnostic {
-                data {
-                  ...REXFicheDiagnosticCardInfo
-                }
-              }
-            }
-          }
-        }  
-        updatedAt
-        publishedAt
+    documentId
+    titre
+    description_courte
+    description
+    etapes_mise_en_oeuvre {
+      titre
+      description
+    }
+    fiches_diagnostics_associees  ${strapiFilter.publicationStateString()} {
+      ...FicheDiagnosticCardInfo
+    }
+    materiel
+    rank
+    image_principale {
+      ...ImageInfo
+    }
+    echelle
+    methode
+    slug
+    besoin
+    indicateurs
+    delai_min
+    delai_max
+    cout_min
+    cout_max
+    explication_source
+    avantage_description
+    vigilance_description
+    en_savoir_plus_description
+    partenaire
+    nom_scientifique
+    type_livrables
+    echelle_thermique
+    echelle_spatiale
+    objectifs {
+      description
+    }
+    image_icone {
+      ...ImageInfo
+    }
+    lien_rex_diagnostics {
+      documentId
+      retour_experience_diagnostic {
+        ...REXFicheDiagnosticCardInfo
       }
     }
+    updatedAt
+    publishedAt
   }
 }`;
 
 export const GET_FICHE_DIAGNOSTIC_CARD_DATA = async (
   strapiFilter: StrapiFilter,
-) => ` ${STRAPI_IMAGE_FRAGMENT} ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} ${CONTACT_FRAGMENT} 
+) => ` ${STRAPI_IMAGE_FRAGMENT} ${FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT} ${CONTACT_FRAGMENT}
  ${REX_DIAGNOSTIC_CARD_INFO_FRAGMENT} query {
       ficheDiagnostics ${strapiFilter.wholeFilterString()} {
-        data {
-          ...FicheDiagnosticCardInfo
-        }
+        ...FicheDiagnosticCardInfo
       }
   }`;
 
@@ -110,7 +96,7 @@ export async function getFicheDiagnosticBySlug(slug: string): Promise<FicheDiagn
 }
 
 export async function getFicheDiagnosticById(id: string): Promise<FicheDiagnostic | null> {
-  const filter = new StrapiFilter(true, [{ attribute: "id", operator: "eq", value: id, relation: false }]);
+  const filter = new StrapiFilter(true, [{ attribute: "documentId", operator: "eq", value: id, relation: false }]);
   const apiResponse = (
     await strapiGraphQLCall(await GET_FICHE_DIAGNOSTIC_COMPLETE_DATA(filter), {
       tag: `get-fiche-diagnostic-by-id-${id}`,

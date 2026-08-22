@@ -9,7 +9,7 @@ import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 
 export const deleteFicheSolutionInEstimationAction = async (
   estimationId: number,
-  ficheSolutionId: number,
+  ficheSolutionId: string,
 ): Promise<ResponseAction<{ estimation?: EstimationWithAides; estimationDeleted?: boolean }>> => {
   const session = await auth();
   if (!session) {

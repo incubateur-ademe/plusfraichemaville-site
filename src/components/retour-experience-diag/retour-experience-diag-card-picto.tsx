@@ -8,13 +8,13 @@ type RetourExperienceDiagCardPictoProps = {
 };
 
 export const RetourExperienceDiagCardPicto = ({ ficheDiagnostic }: RetourExperienceDiagCardPictoProps) => {
-  const nomScientifique = ficheDiagnostic.attributes.nom_scientifique;
+  const nomScientifique = ficheDiagnostic.nom_scientifique;
 
   return (
     <BigTooltip tooltipLabel={nomScientifique}>
       <div className="fiche-diagnostic-icone-thick flex size-12 shrink-0 items-center justify-center rounded-full">
         <Image
-          src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
+          src={getStrapiImageUrl(ficheDiagnostic.image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
           alt={nomScientifique ?? "pictogramme de la fiche diagnostic"}
           className="object-contain"
           width={35}

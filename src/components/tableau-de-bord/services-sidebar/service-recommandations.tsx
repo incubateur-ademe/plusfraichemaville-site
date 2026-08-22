@@ -58,8 +58,8 @@ export const ServiceRecommandations = () => {
                   <p className="text-dsfr-text-default-grey">Solutions complémentaires à votre projet.</p>
                   <ul className="mb-3 flex flex-wrap gap-2 !pl-0">
                     {recommandations.slice(0, 2).map((recommandations) => (
-                      <li key={recommandations.id} className="!mr-0">
-                        <AideProjetCardLabelFicheSolution ficheId={recommandations.id} />
+                      <li key={recommandations.documentId} className="!mr-0">
+                        <AideProjetCardLabelFicheSolution ficheId={recommandations.documentId} />
                       </li>
                     ))}
                     {recommandations.length > 2 && <AideProjetCardLabel>...</AideProjetCardLabel>}

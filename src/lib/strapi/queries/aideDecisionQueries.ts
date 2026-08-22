@@ -21,55 +21,32 @@ const GET_FILTERED_AIDE_DECISION_ETAPE = (
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
 ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
   aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
-    data {
-      id
-      attributes {
-        nom
-        description
-        slug
-        image {
-          ...ImageInfo
+    documentId
+    nom
+    description
+    slug
+    image {
+      ...ImageInfo
+    }
+    question_suivante
+    etape_precedente {
+      slug
+    }
+    fiches_solutions ${strapiFilter.publicationStateString()} {
+      ...FicheSolutionCardInfo
+      solution_retour_experiences ${solutionRetourExperienceFilter()} {
+        retour_experience {
+          ...RetourExperienceCardInfo
         }
-        question_suivante
-        etape_precedente {
-          data {
-            attributes {
-              slug
-            }
-          }
-        }
-        fiches_solutions ${strapiFilter.publicationStateString()} {
-          data {
-            id
-            ...FicheSolutionCardInfo
-            attributes{
-              solution_retour_experiences ${solutionRetourExperienceFilter()} {
-                data {
-                  attributes {
-                    retour_experience {
-                      data {
-                        ...RetourExperienceCardInfo
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        etapes_suivantes ${strapiFilter.publicationStateString()} {
-          data {
-            id
-            attributes {
-              nom
-              description
-              slug
-              image {
-                ...ImageInfo
-              }
-            }
-          }
-        }
+      }
+    }
+    etapes_suivantes ${strapiFilter.publicationStateString()} {
+      documentId
+      nom
+      description
+      slug
+      image {
+        ...ImageInfo
       }
     }
   }
@@ -77,45 +54,29 @@ ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
 
 const GET_AIDE_DECISION_ETAPE_HISTORY = (strapiFilter: StrapiFilter) => `  ${STRAPI_IMAGE_FRAGMENT} query {
   aideDecisionEtapes ${strapiFilter.wholeFilterString()} {
-    data {
-      id
-      attributes {
+    documentId
+    nom
+    slug
+    image {
+      ...ImageInfo
+    }
+    etape_precedente {
+      nom
+      slug
+      image {
+        ...ImageInfo
+      }
+      etape_precedente {
         nom
         slug
         image {
           ...ImageInfo
         }
         etape_precedente {
-          data {
-            attributes {
-              nom
-              slug
-              image {
-                ...ImageInfo
-              }
-              etape_precedente {
-                data {
-                  attributes {
-                    nom
-                    slug
-                    image {
-                      ...ImageInfo
-                    }
-                    etape_precedente {
-                      data {
-                        attributes {
-                          nom
-                          slug
-                          image {
-                            ...ImageInfo
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              }
-            }
+          nom
+          slug
+          image {
+            ...ImageInfo
           }
         }
       }
@@ -167,8 +128,8 @@ export async function getAideDecisionHistoryBySlug(
         tag: `get-aide-decision-history-by-slug-${slug}`,
       })
     )?.aideDecisionEtapes as APIResponseCollection<AideDecisionEtape>;
-    if (apiResponse?.data?.length > 0) {
-      return getHistoryFromAideDecisionEtape(apiResponse.data[0], includeCurrentStep);
+    if (apiResponse?.length > 0) {
+      return getHistoryFromAideDecisionEtape(apiResponse[0], includeCurrentStep);
     }
   }
   return null;

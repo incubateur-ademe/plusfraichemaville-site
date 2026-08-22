@@ -1,7 +1,7 @@
 import z from "zod";
 
 export const EstimationMateriauxFormSimpleFieldSchema = z.object({
-  ficheSolutionId: z.number(),
+  ficheSolutionId: z.string(),
   globalPrice: z
     .object({
       fourniture: z

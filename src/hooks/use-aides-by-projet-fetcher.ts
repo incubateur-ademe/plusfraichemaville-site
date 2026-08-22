@@ -5,7 +5,7 @@ import { useSwrWithFetcher } from "./use-swr-with-fetcher";
 
 export const useAidesByProjetFetcher = (
   projetId: number | undefined,
-  ficheSolutionIds?: number[],
+  ficheSolutionIds?: string[],
   updateProjetFsUnselected?: boolean,
 ) => {
   const userId = useUserStore((state) => state.userInfos?.id);

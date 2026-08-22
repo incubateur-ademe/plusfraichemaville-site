@@ -9,9 +9,9 @@ import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers"
 import { useProjetsStore } from "@/src/stores/projets/provider";
 
 interface AideSolutionsFilterProps {
-  selectedFsIds: number[];
-  toggleFicheSolution: (ficheSolutionId: number) => void;
-  allFicheSolutionIds: number[];
+  selectedFsIds: string[];
+  toggleFicheSolution: (ficheSolutionId: string) => void;
+  allFicheSolutionIds: string[];
 }
 
 export const AideSolutionsFilter = ({
@@ -31,13 +31,13 @@ export const AideSolutionsFilter = ({
       <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2">
         {ficheSolutions?.map((fiche) => (
           <Tag
-            key={fiche.id}
-            pressed={selectedFsIds.includes(+fiche.id)}
+            key={fiche.documentId}
+            pressed={selectedFsIds.includes(fiche.documentId)}
             nativeButtonProps={{
-              onClick: () => toggleFicheSolution(+fiche.id),
+              onClick: () => toggleFicheSolution(fiche.documentId),
             }}
           >
-            {getTypeSolutionFromCode(fiche.attributes.type_solution)?.icon("fr-icon--sm mr-1")} {fiche.attributes.titre}
+            {getTypeSolutionFromCode(fiche.type_solution)?.icon("fr-icon--sm mr-1")} {fiche.titre}
           </Tag>
         ))}
       </div>

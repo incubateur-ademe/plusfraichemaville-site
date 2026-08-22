@@ -34,13 +34,13 @@ export const FichesDiagnosticsProjetSelected = () => {
   );
 
   const liensRex = fichesDiagnostic
-    ?.map((fd) => fd.attributes.lien_rex_diagnostics.data.map((lien) => lien.attributes.retour_experience_diagnostic))
+    ?.map((fd) => fd.lien_rex_diagnostics.map((lien) => lien.retour_experience_diagnostic))
     .flat();
 
-  const frequencies = countBy(liensRex, (rex) => rex?.data?.id || "");
-  const uniqueRex = uniqBy(liensRex, (rex) => rex?.data?.id);
+  const frequencies = countBy(liensRex, (rex) => rex?.documentId || "");
+  const uniqueRex = uniqBy(liensRex, (rex) => rex?.documentId);
   const sortedRex = liensRex
-    ? orderBy(uniqueRex, (item) => (item?.data?.id ? frequencies[item.data.id] : 0), "desc")
+    ? orderBy(uniqueRex, (item) => (item?.documentId ? frequencies[item.documentId] : 0), "desc")
     : [];
 
   return (
@@ -83,9 +83,9 @@ export const FichesDiagnosticsProjetSelected = () => {
               <SplideTrack>
                 {sortedRex.map(
                   (rex) =>
-                    rex?.data && (
-                      <SplideSlide key={rex.data.id}>
-                        <RetourExperienceDiagCard rex={rex.data} className="h-full" />
+                    rex && (
+                      <SplideSlide key={rex.documentId}>
+                        <RetourExperienceDiagCard rex={rex} className="h-full" />
                       </SplideSlide>
                     ),
                 )}

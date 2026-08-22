@@ -55,7 +55,7 @@ export const AideCardSaveButtonProjet = ({ aideTerritoireId, projetId, className
           isSaved={!!savedId}
           className="mt-1"
           update={update}
-          id={aideTerritoireId}
+          id={aideTerritoireId.toString()}
           labels={{ saved: "Sauvegardée", notSaved: "Sauvegarder" }}
           size="small"
         />

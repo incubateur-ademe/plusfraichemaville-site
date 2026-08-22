@@ -17,8 +17,8 @@ export const AnnuaireSidePanelListContainer = ({
   visibleMarkers: CustomMarker[];
   focusedMarker?: CustomMarker | null;
   visibleClusters: MapGeoJSONFeature[];
-  selectMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: number) => void;
-  focusMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: number) => void;
+  selectMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: string | number) => void;
+  focusMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: string | number) => void;
   unfocusMarker: () => void;
 }) => {
   return (

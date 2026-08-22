@@ -11,8 +11,8 @@ export const SurchauffeUrbaineStoryCard = ({ rexDiagStory }: { rexDiagStory: Ret
   return (
     <div className="group text-left">
       <LinkWithoutPrefetch
-        href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(rexDiagStory.attributes.slug)}
-        onClick={() => trackEvent(SITE_VITRINE_REX_DIAG_STORY(rexDiagStory.attributes.slug))}
+        href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(rexDiagStory.slug)}
+        onClick={() => trackEvent(SITE_VITRINE_REX_DIAG_STORY(rexDiagStory.slug))}
       >
         <div
           className={clsx(
@@ -22,10 +22,10 @@ export const SurchauffeUrbaineStoryCard = ({ rexDiagStory }: { rexDiagStory: Ret
             `gradient-solution-grise`,
           )}
         >
-          <div className="mb-2 flex text-sm text-white md:text-lg">{rexDiagStory.attributes.lieu}</div>
-          <h2 className="m-0 text-base text-white md:text-[1.375rem] md:leading-7">{rexDiagStory.attributes.titre}</h2>
+          <div className="mb-2 flex text-sm text-white md:text-lg">{rexDiagStory.lieu}</div>
+          <h2 className="m-0 text-base text-white md:text-[1.375rem] md:leading-7">{rexDiagStory.titre}</h2>
           <Image
-            src={getStrapiImageUrl(rexDiagStory.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+            src={getStrapiImageUrl(rexDiagStory.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
             alt=""
             fill
             sizes="60vw"

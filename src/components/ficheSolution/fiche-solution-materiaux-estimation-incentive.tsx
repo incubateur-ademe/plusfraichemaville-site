@@ -13,7 +13,7 @@ import { ModalSaveEstimationAuthenticatedOutsideProjet } from "@/src/components/
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 import { MATERIAUX_TO_ESPACE_PROJET } from "@/src/helpers/matomo/matomo-tags";
 
-export default function FicheSolutionMateriauxEstimationIncentive({ ficheId }: { ficheId: number }) {
+export default function FicheSolutionMateriauxEstimationIncentive({ ficheId }: { ficheId: string }) {
   const { status } = useSession();
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -36,7 +36,7 @@ export default function FicheSolutionMateriauxEstimationIncentive({ ficheId }: {
       setIsSubmitting(true);
       const update = await updateFichesProjetAction({
         projetId: currentProjetId,
-        ficheId: +ficheId,
+        ficheId: ficheId,
         typeFiche: TypeFiche.solution,
         typeUpdate: TypeUpdate.add,
       });

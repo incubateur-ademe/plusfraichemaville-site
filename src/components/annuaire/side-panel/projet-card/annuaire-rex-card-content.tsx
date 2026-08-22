@@ -9,7 +9,7 @@ import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 import { GeoJsonAdresse } from "@/src/components/annuaire/types";
 
 export const AnnuaireRexCardContent = ({ data, onClick }: { data: RetourExperience; onClick?: () => void }) => {
-  const retourExperienceAttributes = data.attributes;
+  const retourExperienceAttributes = data;
   const nomCollectivite = (retourExperienceAttributes.location as GeoJsonAdresse | null)?.properties?.city;
   return (
     <>
@@ -51,7 +51,7 @@ export const AnnuaireRexCardContent = ({ data, onClick }: { data: RetourExperien
         </section>
         <div className="flex items-center justify-between">
           <Tag small className="!mb-0 h-fit">
-            {getRegionLabelFromCode(retourExperienceAttributes.region?.data.attributes.code)}
+            {getRegionLabelFromCode(retourExperienceAttributes.region?.code)}
           </Tag>
           <div className="text-nowrap font-bold text-pfmv-navy group-hover:underline">
             Voir les contacts <i className="ri-arrow-right-line ml-1" />

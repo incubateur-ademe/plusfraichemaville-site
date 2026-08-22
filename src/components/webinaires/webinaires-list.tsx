@@ -26,7 +26,7 @@ export const WebinairesList = ({
         <Conditional>
           <Case condition={webinaires.length > 0}>
             <div className="flex flex-col gap-6">
-              {webinaires?.map((webinaire) => <WebinaireCard key={webinaire.id} webinaire={webinaire} />)}
+              {webinaires?.map((webinaire) => <WebinaireCard key={webinaire.documentId} webinaire={webinaire} />)}
             </div>
           </Case>
           <Default>

@@ -37,7 +37,7 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
     resultats_images,
     updatedAt,
     slug,
-  } = rex.attributes;
+  } = rex;
 
   return (
     <div>
@@ -47,7 +47,7 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
           width={1920}
           height={415}
           className="block max-h-40 min-h-96 w-full object-cover md:max-h-96"
-          src={getStrapiImageUrl(rex.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
+          src={getStrapiImageUrl(rex.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
           alt={titre || "image titre"}
           unoptimized
         />
@@ -63,7 +63,7 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
         <section className="w-full lg:w-72">
           <RetourExperienceDiagInformations rex={rex} />
           {showContacts && <RetourExperienceDiagContacts contacts={contacts} />}
-          <RetourExperienceDiagPdf pdf={rex.attributes.guide_pdf?.data?.attributes?.url} />
+          <RetourExperienceDiagPdf pdf={rex.guide_pdf?.url} />
           {!showContacts && (
             <>
               <Separator className="my-6" />
@@ -94,10 +94,10 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
             ))}
           <h2 className="mb-4 mt-20">Besoin</h2>
           <CmsRichText label={besoin} className="mb-20" />
-          {!isEmpty(lien_rex_diagnostics.data) && (
+          {!isEmpty(lien_rex_diagnostics) && (
             <>
               <h2 className="mb-8">Combinaison de méthodes de diagnostic utilisées</h2>
-              <RetourExperienceDiagCombinaison lienRexDiagnostics={lien_rex_diagnostics.data} />
+              <RetourExperienceDiagCombinaison lienRexDiagnostics={lien_rex_diagnostics} />
             </>
           )}
           <RetourExperienceDiagPrincipauxResultats content={resultats} images={resultats_images} />

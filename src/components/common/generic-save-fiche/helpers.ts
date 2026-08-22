@@ -9,7 +9,7 @@ export const checkIfFicheIsSaved = ({
   typeFiche,
 }: {
   projet: ProjetWithRelations | undefined;
-  ficheId: number;
+  ficheId: string;
   typeFiche: TypeFiche;
 }) => {
   return !!getProjetFichesIdsByType({

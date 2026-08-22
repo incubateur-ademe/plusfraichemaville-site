@@ -38,13 +38,13 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
 
   const { data: currentFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
     estimationStep <= estimation.estimations_fiches_solutions.length
-      ? makeFicheSolutionCompleteUrlApi(sortedEstimationFichesSolutions[estimationStep - 1].fiche_solution_id)
+      ? makeFicheSolutionCompleteUrlApi([sortedEstimationFichesSolutions[estimationStep - 1].fiche_solution_id])
       : null,
   );
 
   const { data: nextFicheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
     estimationStep <= estimation.estimations_fiches_solutions.length - 1
-      ? makeFicheSolutionCompleteUrlApi(sortedEstimationFichesSolutions[estimationStep].fiche_solution_id)
+      ? makeFicheSolutionCompleteUrlApi([sortedEstimationFichesSolutions[estimationStep].fiche_solution_id])
       : null,
   );
   const currentFicheSolution = currentFicheSolutionData && currentFicheSolutionData[0];
@@ -54,18 +54,17 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     () =>
       estimationStep === estimation.estimations_fiches_solutions.length + 1
         ? "Résumé de l'estimation"
-        : `Estimation pour la solution ${currentFicheSolution?.attributes.titre}`,
-    [currentFicheSolution?.attributes.titre, estimation.estimations_fiches_solutions.length, estimationStep],
+        : `Estimation pour la solution ${currentFicheSolution?.titre}`,
+    [currentFicheSolution?.titre, estimation.estimations_fiches_solutions.length, estimationStep],
   );
   const stepperNextTitle = useMemo(
-    () =>
-      nextFicheSolution
-        ? `Estimation pour la solution ${nextFicheSolution?.attributes.titre}`
-        : "Résumé de l'estimation",
+    () => (nextFicheSolution ? `Estimation pour la solution ${nextFicheSolution?.titre}` : "Résumé de l'estimation"),
     [nextFicheSolution],
   );
   const currentEstimationMateriaux = useMemo(() => {
-    return estimation.estimations_fiches_solutions?.find((efm) => efm.fiche_solution_id == currentFicheSolution?.id);
+    return estimation.estimations_fiches_solutions?.find(
+      (efm) => efm.fiche_solution_id == currentFicheSolution?.documentId,
+    );
   }, [estimation, currentFicheSolution]);
 
   const updateEstimationInStore = (estimation: EstimationWithAides) => {
@@ -89,10 +88,8 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
     }
   };
 
-  const goToSpecificFicheSolutionStep = (ficheSolutionId: number) => {
-    const index = estimation.estimations_fiches_solutions.findIndex(
-      (efs) => efs.fiche_solution_id === +ficheSolutionId,
-    );
+  const goToSpecificFicheSolutionStep = (ficheSolutionId: string) => {
+    const index = estimation.estimations_fiches_solutions.findIndex((efs) => efs.fiche_solution_id === ficheSolutionId);
     if (index != -1) {
       setEstimationStep(index + 1);
     }
@@ -112,7 +109,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
           <UltramarinePricesNotice codePostal={currentProjet?.collectivite?.code_postal} className="mb-2" />
           {isSimpleMateriauFicheSolution(currentFicheSolution) ? (
             <>
-              <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.attributes.titre}`}</div>
+              <div className="mb-4">{`Estimation pour votre solution ${currentFicheSolution.titre}`}</div>
               <EstimationMateriauSimpleFieldForm
                 estimationId={estimation.id}
                 ficheSolution={currentFicheSolution}
@@ -125,7 +122,7 @@ export function EstimationMateriauModalContent({ estimation }: EstimationCardDel
             </>
           ) : (
             <>
-              <div className="mb-4">{`Pour votre solution ${currentFicheSolution.attributes.titre}, vous aurez
+              <div className="mb-4">{`Pour votre solution ${currentFicheSolution.titre}, vous aurez
                 besoin de choisir parmi les matériaux et systèmes suivants :`}</div>
               <EstimationMateriauForm
                 estimationId={estimation.id}

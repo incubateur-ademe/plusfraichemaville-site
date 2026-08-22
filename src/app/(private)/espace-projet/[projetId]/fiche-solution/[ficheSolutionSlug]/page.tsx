@@ -14,9 +14,9 @@ export async function generateMetadata(props: {
   const params = await props.params;
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
   return computeMetadata(
-    ficheSolution?.attributes.titre || "Fiche solution",
-    ficheSolution?.attributes.description_courte,
-    getStrapiImageUrl(ficheSolution?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
+    ficheSolution?.titre || "Fiche solution",
+    ficheSolution?.description_courte,
+    getStrapiImageUrl(ficheSolution?.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
     getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(params.ficheSolutionSlug)),
   );
 }

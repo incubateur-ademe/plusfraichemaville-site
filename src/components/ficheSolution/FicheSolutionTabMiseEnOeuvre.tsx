@@ -4,11 +4,7 @@ import CustomTodoStep from "@/src/components/common/CustomTodoStep";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
-export default function FicheSolutionTabMiseEnOeuvre({
-  ficheAttributes,
-}: {
-  ficheAttributes: FicheSolution["attributes"];
-}) {
+export default function FicheSolutionTabMiseEnOeuvre({ ficheAttributes }: { ficheAttributes: FicheSolution }) {
   const diagStepToShow = !isEmpty(ficheAttributes.etapes_diagnostic);
   const meoStepToShow = !isEmpty(ficheAttributes.etapes_mise_en_oeuvre);
 

@@ -15,7 +15,7 @@ type PageProps = {
 export async function generateStaticParams() {
   const allFichesDiagnostic = await getAllFichesDiagnostic();
   return allFichesDiagnostic.map((ficheDiagnostic) => ({
-    ficheDiagnosticSlug: ficheDiagnostic.attributes.slug || "",
+    ficheDiagnosticSlug: ficheDiagnostic.slug || "",
   }));
 }
 
@@ -23,9 +23,9 @@ export async function generateMetadata(props: PageProps): Promise<Metadata> {
   const params = await props.params;
   const ficheDiagnostic = await getFicheDiagnosticBySlug(params.ficheDiagnosticSlug);
   return computeMetadata(
-    ficheDiagnostic?.attributes.titre || "Méthode de diagnostic",
-    ficheDiagnostic?.attributes.description_courte,
-    getStrapiImageUrl(ficheDiagnostic?.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium),
+    ficheDiagnostic?.titre || "Méthode de diagnostic",
+    ficheDiagnostic?.description_courte,
+    getStrapiImageUrl(ficheDiagnostic?.image_icone, STRAPI_IMAGE_KEY_SIZE.medium),
   );
 }
 

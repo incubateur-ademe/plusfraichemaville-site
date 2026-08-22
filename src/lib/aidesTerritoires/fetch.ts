@@ -31,7 +31,7 @@ export const fetchAideFromAidesTerritoiresById = async (aideTerritoireAideId: nu
 };
 
 export const searchAidesFromAidesTerritoires = async (
-  fichesSolutions: FicheSolution["attributes"][],
+  fichesSolutions: FicheSolution[],
   collectivite: collectivite,
   typeEspace?: string | null,
 ) => {
@@ -45,7 +45,7 @@ export const searchAidesFromAidesTerritoires = async (
   return returnedAides ? filterNonLiveAides(returnedAides) : returnedAides;
 };
 
-export const getNbAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution["attributes"][]) => {
+export const getNbAidesFromAidesTerritoires = async (fichesSolutions: FicheSolution[]) => {
   const motsCles = extractMotsClesFromFichesSolutions(fichesSolutions);
   const result = await callAidesTerritoiresApi<IApiAidesTerritoiresPaginatedAides>(
     `${process.env.AIDES_TERRITOIRES_API_URL}/aids/?text=${

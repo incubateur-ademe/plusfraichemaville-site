@@ -24,10 +24,10 @@ export const mapStrapiEstimationMateriauxToFormValues = (
 ) => {
   return ficheSolutionMateriaux?.map((materiau) => {
     const existingEstimation = defaultEstimationMateriaux?.estimation_materiaux?.find(
-      (e) => e.materiau_id == materiau.id,
+      (e) => e.materiau_id == materiau.documentId,
     );
     return {
-      materiauId: +materiau.id,
+      materiauId: materiau.documentId,
       quantite: existingEstimation?.quantite || 0,
       coutInvestissementOverride: existingEstimation?.cout_investissement_override ?? undefined,
       coutEntretienOverride: existingEstimation?.cout_entretien_override ?? undefined,

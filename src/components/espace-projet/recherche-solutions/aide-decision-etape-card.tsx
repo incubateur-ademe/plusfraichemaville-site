@@ -3,11 +3,7 @@ import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strap
 import { AideDecisionEtape } from "@/src/lib/strapi/types/api/aide-decision-etape";
 import { useUserStore } from "@/src/stores/user/provider";
 
-export default function AideDecisionEtapeCard({
-  etapeAttributes,
-}: {
-  etapeAttributes: AideDecisionEtape["attributes"];
-}) {
+export default function AideDecisionEtapeCard({ etapeAttributes }: { etapeAttributes: AideDecisionEtape }) {
   const setAideDecisionStep = useUserStore((state) => state.setChoixSolutionAideDecisionCurrentStep);
   return (
     <article className="pfmv-card fr-enlarge-button mx-4 flex w-96 flex-row items-center md:mx-0 md:w-56 md:flex-col">

@@ -19,8 +19,8 @@ export const AideDecisionFirstStep = () => {
         ) : (
           <ul className="flex list-none flex-wrap justify-center gap-6">
             {aideDecisionFirstSteps?.map((aideDecision) => (
-              <li key={aideDecision.id} className="flex justify-center p-0">
-                <AideDecisionFirstStepEtapeCard etapeAttributes={aideDecision.attributes} />
+              <li key={aideDecision.documentId} className="flex justify-center p-0">
+                <AideDecisionFirstStepEtapeCard etapeAttributes={aideDecision} />
               </li>
             ))}
           </ul>

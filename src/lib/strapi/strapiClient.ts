@@ -15,14 +15,14 @@ export const STRAPI_IMAGE_KEY_SIZE = {
 } as const;
 export type STRAPI_IMAGE_KEY_SIZE_TYPE = (typeof STRAPI_IMAGE_KEY_SIZE)[keyof typeof STRAPI_IMAGE_KEY_SIZE];
 
-export const getStrapiImageUrl = (image?: { data: Media } | null, sizeKey?: STRAPI_IMAGE_KEY_SIZE_TYPE) => {
-  if (!image?.data?.attributes) {
+export const getStrapiImageUrl = (image?: Media | null, sizeKey?: STRAPI_IMAGE_KEY_SIZE_TYPE) => {
+  if (!image?.url) {
     return "/images/placeholder.svg";
   }
-  if (sizeKey && image.data.attributes.formats && !!image.data.attributes.formats[sizeKey]) {
-    return image.data.attributes.formats[sizeKey].url?.replace(SCALEWAY_S3_URL, SCALEWAY_CDN_URL);
+  if (sizeKey && image.formats && !!image.formats[sizeKey]) {
+    return image.formats[sizeKey].url?.replace(SCALEWAY_S3_URL, SCALEWAY_CDN_URL);
   }
-  return image.data.attributes.url?.replace(SCALEWAY_S3_URL, SCALEWAY_CDN_URL);
+  return image.url?.replace(SCALEWAY_S3_URL, SCALEWAY_CDN_URL);
 };
 
 type StrapiGraphQLCallConfig = {

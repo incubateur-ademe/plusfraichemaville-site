@@ -7,8 +7,8 @@ export default function FicheSolutionTabFinancements({
   ficheId,
   ficheAttributes,
 }: {
-  ficheId: number;
-  ficheAttributes: FicheSolution["attributes"];
+  ficheId: string;
+  ficheAttributes: FicheSolution;
 }) {
   return (
     <div className="text-dsfr-text-title-grey">

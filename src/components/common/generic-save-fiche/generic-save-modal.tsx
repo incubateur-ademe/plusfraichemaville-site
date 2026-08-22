@@ -9,7 +9,7 @@ import { TypeFiche } from "@/src/helpers/common";
 export type GenericSaveModalCommonProps = {
   modal: DSFRModal;
   type: TypeFiche;
-  id: number;
+  id: string;
 };
 
 export const GenericSaveModal = ({ ...props }: GenericSaveModalCommonProps) => {

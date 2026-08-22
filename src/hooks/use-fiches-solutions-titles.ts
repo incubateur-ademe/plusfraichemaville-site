@@ -6,7 +6,7 @@ import { makeFicheSolutionCompleteUrlApi } from "@/src/components/ficheSolution/
 
 export function useFichesSolutionsTitles(estimationsFichesSolutions?: EstimationFicheSolution[]) {
   const allFicheSolutionIds = useMemo(
-    () => estimationsFichesSolutions?.map((efs) => +efs.fiche_solution_id) || [],
+    () => estimationsFichesSolutions?.map((efs) => efs.fiche_solution_id) || [],
     [estimationsFichesSolutions],
   );
 
@@ -16,7 +16,7 @@ export function useFichesSolutionsTitles(estimationsFichesSolutions?: Estimation
 
   const solutionTitles = useMemo(
     () =>
-      allFichesSolutions?.reduce((acc, fs) => ({ ...acc, [fs.id]: fs.attributes.titre }), {} as Record<number, string>),
+      allFichesSolutions?.reduce((acc, fs) => ({ ...acc, [fs.documentId]: fs.titre }), {} as Record<string, string>),
     [allFichesSolutions],
   );
 

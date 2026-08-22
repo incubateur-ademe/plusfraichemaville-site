@@ -19,7 +19,7 @@ type RetourExperienceDiagPageProps = {
 export async function generateStaticParams() {
   const allRexDiag = await getRetoursExperiencesDiag();
   return allRexDiag.map((rexDiag) => ({
-    rexSlug: rexDiag.attributes.slug || "",
+    rexSlug: rexDiag.slug || "",
   }));
 }
 
@@ -27,9 +27,9 @@ export async function generateMetadata(props: RetourExperienceDiagPageProps): Pr
   const params = await props.params;
   const rexDiag = await getRetourExperienceDiagBySlug(params.rexSlug);
   return computeMetadata(
-    rexDiag?.attributes.titre || "Diagnostic réalisé",
-    stripHtmlTags(rexDiag?.attributes.description || ""),
-    getStrapiImageUrl(rexDiag?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
+    rexDiag?.titre || "Diagnostic réalisé",
+    stripHtmlTags(rexDiag?.description || ""),
+    getStrapiImageUrl(rexDiag?.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
   );
 }
 
@@ -48,7 +48,7 @@ export default async function RetourExperienceDiagPage(props: RetourExperienceDi
   return (
     <>
       <div className="fr-container">
-        <SiteVitrineBreadcrumb step={BREADCRUMB_SURCHAUFFE_URBAINE_REX(rex.attributes.lieu)} />
+        <SiteVitrineBreadcrumb step={BREADCRUMB_SURCHAUFFE_URBAINE_REX(rex.lieu)} />
       </div>
       <RetourExperienceDiag rex={rex} showContacts={false} />
     </>

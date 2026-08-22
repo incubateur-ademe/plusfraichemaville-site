@@ -18,7 +18,7 @@ export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
   modal,
   type,
   id: ficheId,
-}: GenericSaveModalCommonProps & { id: number }) => {
+}: GenericSaveModalCommonProps & { id: string }) => {
   const [selectedProjetId, setSelectedProjetId] = useState(-1);
   const projets = useProjetsStore((state) => state.projets);
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
@@ -31,7 +31,7 @@ export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
       setIsSubmitting(true);
       const update = await updateFichesProjetAction({
         projetId: selectedProjetId,
-        ficheId: +ficheId,
+        ficheId: ficheId,
         typeFiche: type,
         typeUpdate: TypeUpdate.add,
       });

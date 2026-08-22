@@ -18,19 +18,18 @@ type FichesSolutionsProps = {
 
 export function FichesSolutions({ searchParams, allFichesSolutions }: FichesSolutionsProps) {
   const filteredFichesSolutions = allFichesSolutions
-    .filter((fs) => !searchParams.espaceFilter || fs.attributes.types_espace?.includes(searchParams.espaceFilter))
+    .filter((fs) => !searchParams.espaceFilter || fs.types_espace?.includes(searchParams.espaceFilter))
     .filter(
       (fs) =>
         !searchParams.typeSolutionFilter ||
-        (fs.attributes.type_solution &&
-          searchParams.typeSolutionFilter?.split(",").includes(fs.attributes.type_solution)),
+        (fs.type_solution && searchParams.typeSolutionFilter?.split(",").includes(fs.type_solution)),
     )
     .filter(
       (fs) =>
         !searchParams.baisseTemperatureFilter ||
         searchParams.baisseTemperatureFilter
           .split(",")
-          .includes(getBaisseTemperatureFicheSolutionFromTemperature(fs.attributes.baisse_temperature || 0).code),
+          .includes(getBaisseTemperatureFicheSolutionFromTemperature(fs.baisse_temperature || 0).code),
     );
   return (
     <>
@@ -47,7 +46,7 @@ export function FichesSolutions({ searchParams, allFichesSolutions }: FichesSolu
           <div className="grow list-none p-0">
             <ul className="m-0 flex flex-wrap justify-center gap-6 p-0 md:justify-normal">
               {filteredFichesSolutions.map((ficheSolution) => (
-                <li key={ficheSolution.id} className="flex">
+                <li key={ficheSolution.documentId} className="flex">
                   <FicheSolutionCard ficheSolution={ficheSolution} titleHeadingLevel="h2" />
                 </li>
               ))}

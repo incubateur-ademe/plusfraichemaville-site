@@ -13,11 +13,11 @@ export const useRecommandationsForCurrentProjet = () => {
     makeFicheSolutionCompleteUrlApi(ficheSolutionIds),
   );
 
-  const fichesSolutions = data?.map((fs) => fs?.attributes.fiches_solutions_complementaires);
+  const fichesSolutions = data?.map((fs) => fs?.fiches_solutions_complementaires);
 
   const fichesSolutionsComplementaires = fichesSolutions?.reduce((acc, curr) => {
-    if (curr && curr.data) {
-      return acc.concat(curr.data);
+    if (curr) {
+      return acc.concat(curr);
     } else {
       return acc;
     }
@@ -25,12 +25,12 @@ export const useRecommandationsForCurrentProjet = () => {
 
   const deduplicatedFichesSolutionsComplementaires = fichesSolutionsComplementaires?.filter(
     (currentElement, currentIndex, array) =>
-      array.findIndex((element) => element.id === currentElement.id) === currentIndex,
+      array.findIndex((element) => element.documentId === currentElement.documentId) === currentIndex,
   );
 
   const recommandations =
     deduplicatedFichesSolutionsComplementaires?.filter(
-      (currentElement) => ficheSolutionIds.findIndex((fsId) => fsId == currentElement.id) === -1,
+      (currentElement) => ficheSolutionIds.findIndex((fsId) => fsId == currentElement.documentId) === -1,
     ) || [];
 
   return { recommandations, isLoading };
