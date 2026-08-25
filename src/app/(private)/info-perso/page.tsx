@@ -15,23 +15,27 @@ export default async function InfoPerso() {
     return <UserNotFoundError />;
   }
   const isUserComplete = hasAllRequiredFieldsSet(user);
+  let buttonLabel = "Valider mes informations";
+  if (!isUserComplete) {
+    buttonLabel = user.is_agent_public
+      ? "Je rejoins l'espace projet de ma collectivité"
+      : "Je rejoins l'espace projet de mon entreprise";
+  }
   return (
     <div className="fr-container pt-8">
       {!isUserComplete ? (
         <>
           <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">
-            {"J'inscris ou je rejoins une collectivité"}
+            {user.is_agent_public
+              ? "J'inscris ou je rejoins une collectivité"
+              : "J'inscris ou je rejoins une entreprise"}
           </h1>
           <div className="mb-4">Je vérifie les informations liées à mon compte ProConnect</div>
         </>
       ) : (
         <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">{"Mon profil"}</h1>
       )}
-      <UserInfoForm
-        user={user}
-        buttonLabel={isUserComplete ? "Valider mes informations" : "Je rejoins l'espace projet de ma collectivité"}
-        newUser={!isUserComplete}
-      />
+      <UserInfoForm user={user} buttonLabel={buttonLabel} newUser={!isUserComplete} />
     </div>
   );
 }

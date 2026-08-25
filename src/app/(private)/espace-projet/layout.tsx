@@ -7,6 +7,7 @@ import { PartageOverviewDeleteOrQuitModale } from "@/src/components/espace-proje
 import { ViewerModeModal } from "@/src/components/tableau-de-bord/viewer-mode-modal";
 import { PropsWithChildren } from "react";
 import { AvailableProjetsForUserModal } from "@/src/components/liste-projets/available-projets-for-user-modal";
+import { NoticeEntreprisePrivee } from "@/src/components/espace-projet/notice-entreprise-privee";
 
 export default function Layout(props: PropsWithChildren) {
   const { children } = props;
@@ -17,6 +18,7 @@ export default function Layout(props: PropsWithChildren) {
   }
   return (
     <>
+      {!user?.is_agent_public && <NoticeEntreprisePrivee />}
       {children}
       <PartageOverviewDeleteOrQuitModale />
       <ViewerModeModal />

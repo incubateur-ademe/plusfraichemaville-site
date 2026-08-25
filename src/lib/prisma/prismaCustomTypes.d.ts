@@ -208,7 +208,7 @@ export type EstimationMateriauForm = {
   coutEntretienOverride?: number;
 };
 
-export type AgentConnectInfo = { siret: string };
+export type AgentConnectInfo = { siret: string; roles?: string[] };
 
 type ClimadiagTemperatureProjection = {
   min: number;

@@ -75,6 +75,7 @@ model User {
   statut_updated_at                 DateTime?
   last_browsing_date                DateTime?
   projetAides                       projet_aides[]
+  is_agent_public                   Boolean                   @default(true)
 }
 
 model VerificationToken {
