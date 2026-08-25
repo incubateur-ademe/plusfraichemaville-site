@@ -103,16 +103,15 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
               <div className="p-5 text-center">
                 <DiagnosticParcoursLink
                   modal={modalPrestation}
-                  textLink="Je fais réaliser par un prestataire un diagnostic approfondi"
+                  textLink="J’explore les méthodes de diagnostic approfondi"
                   matomoEvent={DIAG_PRESTATION_TO_ESPACE_PROJET}
                 />
                 <Separator className="my-4" />
                 <div className="mb-8 text-left text-sm text-dsfr-text-mention-grey">
-                  Sollicitez une expertise pour une analyse détaillée de l’effet d’îlot de chaleur urbain et/ou du
-                  confort thermique, à différentes échelles.
+                  Analysez la surchauffe urbaine sur votre territoire, en autonomie ou avec un prestataire.
                 </div>
                 <div className="fr-btn fr-btn--sm rounded-3xl group-hover:bg-dsfr-hover-blue-sun">
-                  Choisir des prestations
+                  Explorer les méthodes
                 </div>
               </div>
             </div>

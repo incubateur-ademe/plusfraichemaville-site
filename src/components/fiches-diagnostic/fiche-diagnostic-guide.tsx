@@ -6,13 +6,14 @@ export const FicheDiagnosticGuide = async () => {
   return (
     <>
       <h2 className="mb-5 text-2xl font-bold">
-        Choisir la bonne prestation de diagnostic de la surchauffe pour mon projet
+        Trouver une méthode de diagnostic de la surchauffe adaptée à mon besoin
       </h2>
       <p className="mb-12 leading-6">
-        Cette rubrique vous aide à <strong>choisir la méthode de diagnostic adaptée</strong> pour commander une
-        prestation auprès {"d'un"} bureau d’études. Elle vous oriente vers les études qui correspondent à votre projet,
-        que ce soit pour évaluer l’impact du phénomène d’îlot de chaleur urbain sur votre commune ou le ressenti
-        thermique des habitants dans un espace précis. À noter : ces deux approches se complètent souvent !
+        Cette rubrique vous propose un parcours simplifié pour comprendre la surchauffe urbaine sur votre territoire,
+        poser un diagnostic fiable, pour agir ensuite en autonomie ou avec un bureau d'études. Elle vous oriente vers
+        les méthodes qui correspondent à votre besoin, que ce soit pour évaluer l'impact du phénomène d'îlot de chaleur
+        urbain sur votre commune ou le ressenti thermique des habitants dans un espace précis. À noter : ces deux
+        approches se complètent souvent !
       </p>
 
       <CustomAccordion

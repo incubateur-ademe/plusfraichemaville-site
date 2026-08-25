@@ -49,6 +49,7 @@ export default defineConfig([
       ".next/**",
       ".env",
       "node_modules",
+      "out",
       "public/**",
       "out/**",
       "next.config.js",
