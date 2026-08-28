@@ -324,7 +324,7 @@ function getSchemaFromConnectionString(connectionString: string): string {
  * apostrophes inconsistently).
  */
 function normalizeKey(value: string): string {
-  return value.trim().replace(/[''`´‘]/g, "'");
+  return value.trim().replace(/[''’`´‘]/g, "'");
 }
 
 /** Reads {titre|slug -> document_id} for every published/draft row of a table. */
@@ -636,12 +636,12 @@ async function migrate() {
 
   await loadCorrespondenceTables();
 
-  await migrateProjetFicheArrays();
-  await migrateProjetFiche();
-  await migrateEstimationFicheSolution();
-  await migrateEstimationMateriaux();
-  await migrateUserProjet();
-  await migrateProjetSourcingRex();
+  // await migrateProjetFicheArrays();
+  // await migrateProjetFiche();
+  // await migrateEstimationFicheSolution();
+  // await migrateEstimationMateriaux();
+  // await migrateUserProjet();
+  // await migrateProjetSourcingRex();
 
   console.log("\nDone.");
 }
