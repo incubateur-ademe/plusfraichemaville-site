@@ -335,7 +335,10 @@ async function buildLookupByColumn(
   column: "titre" | "slug",
 ): Promise<Map<string, string>> {
   const { rows } = await client.query<{ key: string; document_id: string }>(
-    `SELECT "${column}" AS key, document_id FROM "${schema}"."${table}" WHERE document_id IS NOT NULL AND "${column}" IS NOT NULL`,
+    `SELECT "${column}" AS key, document_id
+     FROM "${schema}"."${table}"
+     WHERE document_id IS NOT NULL
+       AND "${column}" IS NOT NULL`,
   );
   const lookup = new Map<string, string>();
   for (const row of rows) {
@@ -636,12 +639,12 @@ async function migrate() {
 
   await loadCorrespondenceTables();
 
-  // await migrateProjetFicheArrays();
-  // await migrateProjetFiche();
-  // await migrateEstimationFicheSolution();
-  // await migrateEstimationMateriaux();
-  // await migrateUserProjet();
-  // await migrateProjetSourcingRex();
+  await migrateProjetFicheArrays();
+  await migrateProjetFiche();
+  await migrateEstimationFicheSolution();
+  await migrateEstimationMateriaux();
+  await migrateUserProjet();
+  await migrateProjetSourcingRex();
 
   console.log("\nDone.");
 }
