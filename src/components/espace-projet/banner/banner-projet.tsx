@@ -112,16 +112,27 @@ export default function BannerProjet({ className }: { className?: string }) {
                     <>
                       {isBannerExpanded && (
                         <Suspense>
-                          <Button
-                            iconId="fr-icon-user-add-line"
-                            className={clsx("rounded-3xl")}
-                            linkProps={{
-                              href: PFMV_ROUTES.ESPACE_PROJET_UTILISATEURS_PROJET(currentProjet.id),
-                            }}
-                            priority="secondary"
-                          >
-                            Inviter des membres
-                          </Button>
+                          <div className="flex flex-wrap items-center gap-3">
+                            <Button
+                              className={clsx("rounded-3xl")}
+                              linkProps={{
+                                href: PFMV_ROUTES.ESPACE_PROJET_SYNTHESE(currentProjet.id),
+                              }}
+                              priority="secondary"
+                            >
+                              Télécharger la synthèse
+                            </Button>
+                            <Button
+                              iconId="fr-icon-user-add-line"
+                              className={clsx("rounded-3xl")}
+                              linkProps={{
+                                href: PFMV_ROUTES.ESPACE_PROJET_UTILISATEURS_PROJET(currentProjet.id),
+                              }}
+                              priority="secondary"
+                            >
+                              Inviter des membres
+                            </Button>
+                          </div>
                         </Suspense>
                       )}
                     </>
