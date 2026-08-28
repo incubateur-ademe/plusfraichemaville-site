@@ -1,4 +1,11 @@
+"use client";
+
+import { useProjetsStore } from "@/src/stores/projets/provider";
+import { ProjetSyntheseForm } from "@/src/forms/projet-synthese/projet-synthese-form";
+
 export const ProjetSynthesePage = () => {
+  const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
+
   return (
     <section className="mb-12">
       <h1 className="text-2xl font-bold">Télécharger la synthèse - version beta</h1>
@@ -8,6 +15,8 @@ export const ProjetSynthesePage = () => {
         <br />
         Présentez-la telle quelle ou adaptez-la à votre guise (charte graphique, public cible, etc.).
       </p>
+
+      <ProjetSyntheseForm currentProjet={currentProjet} />
     </section>
   );
 };
