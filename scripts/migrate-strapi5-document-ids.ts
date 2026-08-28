@@ -317,6 +317,16 @@ function getSchemaFromConnectionString(connectionString: string): string {
   }
 }
 
+/**
+ * Normalizes a titre/slug for comparison: trims stray whitespace (some materiaux rows in the
+ * Strapi database have a trailing space after the titre) and collapses every apostrophe-like
+ * character (', ', `, ´, ‘) to a plain "'" (the CMS content mixes typographic and straight
+ * apostrophes inconsistently).
+ */
+function normalizeKey(value: string): string {
+  return value.trim().replace(/[''`´‘]/g, "'");
+}
+
 /** Reads {titre|slug -> document_id} for every published/draft row of a table. */
 async function buildLookupByColumn(
   client: Client,
@@ -329,7 +339,7 @@ async function buildLookupByColumn(
   );
   const lookup = new Map<string, string>();
   for (const row of rows) {
-    lookup.set(row.key, row.document_id);
+    lookup.set(normalizeKey(row.key), row.document_id);
   }
   return lookup;
 }
@@ -338,7 +348,7 @@ async function buildLookupByColumn(
 function buildIdMapFromEntries(entries: Entry[], lookup: Map<string, string>, label: string): Record<number, string> {
   const map: Record<number, string> = {};
   for (const { id, key } of entries) {
-    const documentId = lookup.get(key);
+    const documentId = lookup.get(normalizeKey(key));
     if (documentId) {
       map[id] = documentId;
     } else {
