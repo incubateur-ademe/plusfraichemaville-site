@@ -6,7 +6,7 @@ import FicheSolutionCard from "@/src/components/ficheSolution/fiche-solution-car
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 
-export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttributes: FicheSolution["attributes"] }) {
+export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttributes: FicheSolution }) {
   return (
     <div className="text-dsfr-text-title-grey">
       <h2 className="mb-8 text-[1.75rem] font-bold">Oups !</h2>
@@ -38,13 +38,13 @@ export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttribu
         <div key={oups.titre} className="mt-12">
           <Highlight className="ml-0 text-[1.375rem] font-bold leading-normal">{oups.titre}</Highlight>
           <CmsRichText label={oups.description} className="mt-8" />
-          {!!oups.solutions_reparatrices?.data.length && oups.solutions_reparatrices.data.length > 0 && (
+          {!!oups.solutions_reparatrices?.length && oups.solutions_reparatrices.length > 0 && (
             <>
               <h2 className="mb-4 mt-8 text-[1.375rem] font-bold">Fiches associées</h2>
               <ul className="flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
-                {oups.solutions_reparatrices.data.slice(0, 2).map((fs) => (
-                  <li key={fs.id} className="flex">
-                    <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-12 flex-none"} />
+                {oups.solutions_reparatrices.slice(0, 2).map((fs) => (
+                  <li key={fs.documentId} className="flex">
+                    <FicheSolutionCard ficheSolution={fs} key={fs.documentId} className={"mb-12 flex-none"} />
                   </li>
                 ))}
               </ul>

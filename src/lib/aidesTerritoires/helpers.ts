@@ -18,7 +18,7 @@ export const filterNonLiveAides = (
   return { ...aidesResponse, results: filteredAides, count: filteredAides.length ?? 0 };
 };
 
-export const extractMotsClesFromFichesSolutions = (fichesAttributes: FicheSolution["attributes"][]) => {
+export const extractMotsClesFromFichesSolutions = (fichesAttributes: FicheSolution[]) => {
   return fichesAttributes
     .map((ficheSolution) => ficheSolution.aides_territoires_mots_cles || ficheSolution.titre)
     .join(";")

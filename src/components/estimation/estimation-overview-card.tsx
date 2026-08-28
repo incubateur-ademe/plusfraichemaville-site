@@ -52,9 +52,9 @@ export const EstimationOverviewCard = ({
     }
   }, [estimation.estimations_fiches_solutions.length, isEditMode]);
 
-  const handleEditFicheSolution = (ficheSolutionId: number) => {
+  const handleEditFicheSolution = (ficheSolutionId: string) => {
     const index = sortEstimationFichesSolutions(estimation).findIndex(
-      (efs) => efs.fiche_solution_id === +ficheSolutionId,
+      (efs) => efs.fiche_solution_id === ficheSolutionId,
     );
     if (index !== -1) {
       setCurrentEstimation({ id: estimation.id, startingStep: index + 1 });

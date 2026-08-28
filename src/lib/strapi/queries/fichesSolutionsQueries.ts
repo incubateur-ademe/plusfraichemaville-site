@@ -16,109 +16,87 @@ const GET_FICHE_SOLUTION_COMPLETE_DATA = (
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${FICHE_SOLUTION_CARD_INFO_FRAGMENT}
 ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
   ficheSolutions ${strapiFilter.wholeFilterString()} {
-    data {
-      id
-      attributes {
-        titre
-        type_solution
-        description_courte
-        image_principale {
-          ...ImageInfo
-        }
-        cout_minimum
-        cout_maximum
-        cout_unite
-        baisse_temperature
-        portee_baisse_temperature
-        libelle_avantage_solution
-        delai_travaux_minimum
-        delai_travaux_maximum
-        types_espace
-        slug
-        description
-        description_estimation
-        en_savoir_plus
-        cobenefices {
-          data {
-            id
-            attributes {
-              icone
-              description
-            }
-          }
-        }
-        contexte_titre
-        contexte_description
-        rafraichissement_attendu_description
-        solution_retour_experiences ${solutionRetourExperienceFilter()} {
-          data {
-            attributes {
-              retour_experience {
-                data {
-                  ...RetourExperienceCardInfo
-                }
-              }
-            }
-          }
-        }
-        fiches_solutions_complementaires ${strapiFilter.publicationStateString()} {
-          data {
-            ...FicheSolutionCardInfo
-          }
-        }
-        credits
-        materiaux {
-          data {
-            id
-            attributes {
-              titre
-              image {
-                ...ImageInfo
-              }
-              description
-              cout_maximum_fourniture
-              cout_minimum_fourniture
-              cout_minimum_entretien
-              cout_maximum_entretien
-              cout_unite
-            }
-          }
-        }
-        cout_minimum_entretien
-        cout_maximum_entretien
-        cout_entretien_unite
-        cout_entretien_description
-        etapes_diagnostic {
-          id
-          titre
-          description
-        }
-        etapes_mise_en_oeuvre {
-          id
-          titre
-          description
-        }
-        etapes_entretien {
-          id
-          titre
-          description
-        }
-        point_vigilance
-        oups {
-          id
-          description
-          titre
-          solutions_reparatrices ${strapiFilter.publicationStateString()} {
-            data {
-              ...FicheSolutionCardInfo
-            }
-          }
-        }
-        aides_territoires_mots_cles
-        updatedAt
-        publishedAt
+    documentId
+    titre
+    type_solution
+    description_courte
+    image_principale {
+      ...ImageInfo
+    }
+    cout_minimum
+    cout_maximum
+    cout_unite
+    baisse_temperature
+    portee_baisse_temperature
+    libelle_avantage_solution
+    delai_travaux_minimum
+    delai_travaux_maximum
+    types_espace
+    slug
+    description
+    description_estimation
+    en_savoir_plus
+    cobenefices {
+      documentId
+      icone
+      description
+    }
+    contexte_titre
+    contexte_description
+    rafraichissement_attendu_description
+    solution_retour_experiences ${solutionRetourExperienceFilter()} {
+      retour_experience {
+        ...RetourExperienceCardInfo
       }
     }
+    fiches_solutions_complementaires ${strapiFilter.publicationStateString()} {
+      ...FicheSolutionCardInfo
+    }
+    credits
+    materiaux {
+      documentId
+      titre
+      image {
+        ...ImageInfo
+      }
+      description
+      cout_maximum_fourniture
+      cout_minimum_fourniture
+      cout_minimum_entretien
+      cout_maximum_entretien
+      cout_unite
+    }
+    cout_minimum_entretien
+    cout_maximum_entretien
+    cout_entretien_unite
+    cout_entretien_description
+    etapes_diagnostic {
+      id
+      titre
+      description
+    }
+    etapes_mise_en_oeuvre {
+      id
+      titre
+      description
+    }
+    etapes_entretien {
+      id
+      titre
+      description
+    }
+    point_vigilance
+    oups {
+      id
+      description
+      titre
+      solutions_reparatrices ${strapiFilter.publicationStateString()} {
+        ...FicheSolutionCardInfo
+      }
+    }
+    aides_territoires_mots_cles
+    updatedAt
+    publishedAt
   }
 }`;
 
@@ -126,9 +104,7 @@ const GET_FICHE_SOLUTION_CARD_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} query {
     ficheSolutions ${strapiFilter.wholeFilterString()} {
-      data {
-        ...FicheSolutionCardInfo
-      }
+      ...FicheSolutionCardInfo
     }
 }`;
 
@@ -136,19 +112,11 @@ const GET_FICHE_SOLUTION_CARD_AND_COBENEFICES_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT}  ${FICHE_SOLUTION_CARD_INFO_FRAGMENT} query {
     ficheSolutions ${strapiFilter.wholeFilterString()} {
-      data {
-        ...FicheSolutionCardInfo
-        attributes {
-          cobenefices {
-            data {
-              id
-              attributes {
-                icone
-                description
-              }
-            }
-          }
-        }
+      ...FicheSolutionCardInfo
+      cobenefices {
+        documentId
+        icone
+        description
       }
     }
 }`;
@@ -179,11 +147,11 @@ export async function getAllFichesSolutionsWithCobenefices(): Promise<FicheSolut
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getFicheSolutionByIds(ficheSolutionIds: number[]): Promise<FicheSolution[]> {
+export async function getFicheSolutionByIds(ficheSolutionIds: string[]): Promise<FicheSolution[]> {
   if (isEmpty(ficheSolutionIds)) return Promise.resolve([]);
   const filter = new StrapiFilter(true, [
     {
-      attribute: "id",
+      attribute: "documentId",
       operator: "in",
       value: ficheSolutionIds,
       relation: false,
@@ -197,10 +165,10 @@ export async function getFicheSolutionByIds(ficheSolutionIds: number[]): Promise
   return safeReturnStrapiEntities(apiResponse);
 }
 
-export async function getFicheSolutionByIdsComplete(ficheSolutionIds: number[]): Promise<FicheSolution[]> {
+export async function getFicheSolutionByIdsComplete(ficheSolutionIds: string[]): Promise<FicheSolution[]> {
   const filter = new StrapiFilter(true, [
     {
-      attribute: "id",
+      attribute: "documentId",
       operator: "in",
       value: ficheSolutionIds,
       relation: false,

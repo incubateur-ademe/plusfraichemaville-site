@@ -11,11 +11,7 @@ import {
 } from "@/src/helpers/matomo/matomo-tags";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 
-export default function AideDecisionFirstStepEtapeCard({
-  etapeAttributes,
-}: {
-  etapeAttributes: AideDecisionEtape["attributes"];
-}) {
+export default function AideDecisionFirstStepEtapeCard({ etapeAttributes }: { etapeAttributes: AideDecisionEtape }) {
   const setAideDecisionStep = useUserStore((state) => state.setChoixSolutionAideDecisionCurrentStep);
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
 

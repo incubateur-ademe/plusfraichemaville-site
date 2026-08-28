@@ -56,7 +56,7 @@ export const createEstimation = async (
       const newEstimationFicheSolution = await tx.estimation_fiche_solution.create({
         data: {
           estimation_id: createdEstimation.id,
-          fiche_solution_id: +ficheSolution.id,
+          fiche_solution_id: ficheSolution.documentId,
           cout_max_entretien: 0,
           cout_min_entretien: 0,
           cout_max_investissement: 0,
@@ -64,8 +64,8 @@ export const createEstimation = async (
           estimation_materiaux: {
             createMany: {
               data:
-                ficheSolution.attributes.materiaux?.data.map((materiau) => ({
-                  materiau_id: +materiau.id,
+                ficheSolution.materiaux?.map((materiau) => ({
+                  materiau_id: materiau.documentId,
                   quantite: 0,
                 })) || [],
             },
@@ -155,7 +155,7 @@ export const updateEstimationMateriaux = async (
 
 export const deleteFicheSolutionInEstimation = async (
   estimationId: number,
-  ficheSolutionId: number,
+  ficheSolutionId: string,
   userId: string,
 ): Promise<EstimationWithAides | null> => {
   return prismaClient.$transaction(async (tx) => {
@@ -219,7 +219,7 @@ export const addFichesSolutionsToEstimation = async (
       await tx.estimation_fiche_solution.create({
         data: {
           estimation_id: estimationId,
-          fiche_solution_id: +ficheSolution.id,
+          fiche_solution_id: ficheSolution.documentId,
           cout_max_entretien: 0,
           cout_min_entretien: 0,
           cout_max_investissement: 0,
@@ -227,8 +227,8 @@ export const addFichesSolutionsToEstimation = async (
           estimation_materiaux: {
             createMany: {
               data:
-                ficheSolution.attributes.materiaux?.data.map((materiau) => ({
-                  materiau_id: +materiau.id,
+                ficheSolution.materiaux?.map((materiau) => ({
+                  materiau_id: materiau.documentId,
                   quantite: 0,
                 })) || [],
             },

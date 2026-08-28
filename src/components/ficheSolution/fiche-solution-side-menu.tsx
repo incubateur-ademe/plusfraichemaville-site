@@ -13,9 +13,9 @@ export async function FicheSolutionSideMenu({
 }) {
   return (
     <div className={className}>
-      <ButtonShareUrl url={getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(ficheSolution.attributes.slug))} className={"mb-2"} />
+      <ButtonShareUrl url={getFullUrl(PFMV_ROUTES.FICHE_SOLUTION(ficheSolution.slug))} className={"mb-2"} />
       <GenericSaveFiche
-        id={ficheSolution.id}
+        id={ficheSolution.documentId}
         type={TypeFiche.solution}
         classNameButton="right-4 top-[68px] md:mt-4 md:top-0 md:right-0"
       />

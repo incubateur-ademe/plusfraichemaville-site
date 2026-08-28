@@ -4,7 +4,7 @@ import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
 export const FicheDiagnosticBlocBesoinEtIndicateurs = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
-  const { attributes } = ficheDiagnostic;
+  const attributes = ficheDiagnostic;
 
   return (
     <>

@@ -28,9 +28,7 @@ export const AnnuaireRexContactCardFetcher = ({
 
   useEffect(() => {
     const loadedStrapiContact = data
-      ? (data?.attributes.contacts as unknown as StrapiAnnuaireContact[])?.find(
-          (contact) => contact.id === rexContactId.contactId,
-        )
+      ? (data?.contacts as unknown as StrapiAnnuaireContact[])?.find((contact) => contact.id === rexContactId.contactId)
       : null;
     const loadedContact =
       data && loadedStrapiContact ? strapiContactToAnnuaireContact(loadedStrapiContact, data) : null;

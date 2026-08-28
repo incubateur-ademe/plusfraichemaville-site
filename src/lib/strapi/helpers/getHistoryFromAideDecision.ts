@@ -5,16 +5,12 @@ export function getHistoryFromAideDecisionEtape(aideDecisionEtape: AideDecisionE
   const history: AideDecisionEtapeHistory[] = [];
   let etapeParente: AideDecisionEtape | null | undefined = includeCurrentStep
     ? aideDecisionEtape
-    : aideDecisionEtape.attributes.etape_precedente?.data;
+    : aideDecisionEtape.etape_precedente;
   while (etapeParente) {
     history.unshift(
-      new AideDecisionEtapeHistory(
-        <string>etapeParente.attributes.nom,
-        <string>etapeParente.attributes.slug,
-        etapeParente.attributes.image,
-      ),
+      new AideDecisionEtapeHistory(<string>etapeParente.nom, <string>etapeParente.slug, etapeParente.image),
     );
-    etapeParente = etapeParente.attributes.etape_precedente?.data;
+    etapeParente = etapeParente.etape_precedente;
   }
   history.unshift(new AideDecisionEtapeHistory("Choix du type d'espace", ""));
   return history;

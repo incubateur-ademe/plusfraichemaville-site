@@ -2,23 +2,20 @@ import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { formatNumberWithSpaces } from "../common";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 
-export const materiauHasNoCost = (materiauAttributes: Materiau["attributes"]) =>
+export const materiauHasNoCost = (materiauAttributes: Materiau) =>
   !materiauAttributes.cout_minimum_fourniture &&
   !materiauAttributes.cout_maximum_fourniture &&
   !materiauAttributes.cout_minimum_entretien &&
   !materiauAttributes.cout_maximum_entretien;
 
-export const getLabelCoutFourniture = (materiauAttributes: Materiau["attributes"]) =>
+export const getLabelCoutFourniture = (materiauAttributes: Materiau) =>
   materiauAttributes.cout_minimum_fourniture != null && materiauAttributes.cout_maximum_fourniture != null
     ? `${materiauAttributes.cout_minimum_fourniture} - ${materiauAttributes.cout_maximum_fourniture} € HT / ${
         getUniteCoutFromCode(materiauAttributes.cout_unite).unitLabel
       }`
     : "NA";
 
-export const getLabelCoutFournitureByQuantite = (
-  materiauAttributes: Materiau["attributes"] | undefined,
-  quantite: number,
-) =>
+export const getLabelCoutFournitureByQuantite = (materiauAttributes: Materiau | undefined, quantite: number) =>
   materiauAttributes &&
   materiauAttributes.cout_minimum_fourniture != null &&
   materiauAttributes.cout_maximum_fourniture != null &&
@@ -28,17 +25,14 @@ export const getLabelCoutFournitureByQuantite = (
       )} €`
     : "0 €";
 
-export const getLabelCoutEntretien = (materiauAttributes: Materiau["attributes"]) =>
+export const getLabelCoutEntretien = (materiauAttributes: Materiau) =>
   materiauAttributes.cout_minimum_entretien != null && materiauAttributes.cout_maximum_entretien != null
     ? `${materiauAttributes.cout_minimum_entretien} - ${materiauAttributes.cout_maximum_entretien} € HT / ${
         getUniteCoutFromCode(materiauAttributes.cout_unite).unitLabel
       } / an`
     : "NA";
 
-export const getLabelCoutEntretienByQuantite = (
-  materiauAttributes: Materiau["attributes"] | undefined,
-  quantite: number,
-) =>
+export const getLabelCoutEntretienByQuantite = (materiauAttributes: Materiau | undefined, quantite: number) =>
   materiauAttributes &&
   materiauAttributes.cout_minimum_entretien != null &&
   materiauAttributes.cout_maximum_entretien != null &&

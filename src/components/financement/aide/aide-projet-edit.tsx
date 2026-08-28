@@ -39,13 +39,13 @@ export const AideProjetEdit = memo(() => {
   const unselectedFsIds = userProjet?.aides_fs_unselected || [];
 
   const allFicheSolutionIds = getProjetFichesIdsByType({ projet, typeFiche: TypeFiche.solution }) ?? [];
-  const [selectedFsIds, setSelectedFsIds] = useState<number[]>(
+  const [selectedFsIds, setSelectedFsIds] = useState<string[]>(
     allFicheSolutionIds.filter((id) => !unselectedFsIds.includes(id)),
   );
 
   const updateUserProjetInProjet = useProjetsStore((state) => state.updateUserProjetInProjet);
 
-  const toggleFicheSolution = (ficheSolutionId: number) => {
+  const toggleFicheSolution = (ficheSolutionId: string) => {
     const newSelectedFsIds = selectedFsIds.includes(ficheSolutionId)
       ? selectedFsIds.filter((x) => x !== ficheSolutionId)
       : [...selectedFsIds, ficheSolutionId];

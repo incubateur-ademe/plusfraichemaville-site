@@ -13,13 +13,13 @@ export const GenericSaveAuthenticatedInsideProjet = ({ opener, ...props }: Gener
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const addOrUpdateProjet = useProjetsStore((state) => state.addOrUpdateProjet);
   const { capturePostHogEvent } = useCapturePostHogEvent();
-  const isSaved = projet && checkIfFicheIsSaved({ projet, ficheId: +props.id, typeFiche: props.type });
+  const isSaved = projet && checkIfFicheIsSaved({ projet, ficheId: props.id, typeFiche: props.type });
 
   const update = async () => {
     const update = await updateFichesProjetAction({
       // eslint-disable-next-line @typescript-eslint/no-non-null-asserted-optional-chain
       projetId: projet?.id!,
-      ficheId: +props.id,
+      ficheId: props.id,
       typeFiche: props.type,
       typeUpdate: isSaved ? TypeUpdate.delete : TypeUpdate.add,
     });

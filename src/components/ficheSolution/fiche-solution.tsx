@@ -19,7 +19,7 @@ export async function FicheSolution({ params }: { params: { ficheSolutionSlug: s
   const ficheSolution = await getFicheSolutionBySlug(params.ficheSolutionSlug);
 
   if (ficheSolution) {
-    const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
+    const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
     return (
       <>
         <div className={`relative h-48 md:h-96 ${typeSolution?.bannerClass}`}>
@@ -27,16 +27,14 @@ export async function FicheSolution({ params }: { params: { ficheSolutionSlug: s
             width={1200}
             height={500}
             className={"relative -z-10 h-48 w-full object-cover md:h-96 "}
-            src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
+            src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
             alt=""
             unoptimized
           />
           <div className="fr-container">
             <section className="absolute bottom-0 text-white md:bottom-4 md:ml-56">
-              <h1 className={clsx("fr-h1  mb-0  font-bold text-white md:text-[2.625rem]")}>
-                {ficheSolution.attributes.titre}
-              </h1>
-              <PublishInformation updatedAt={ficheSolution.attributes?.updatedAt} className="!text-sm font-normal" />
+              <h1 className={clsx("fr-h1  mb-0  font-bold text-white md:text-[2.625rem]")}>{ficheSolution.titre}</h1>
+              <PublishInformation updatedAt={ficheSolution?.updatedAt} className="!text-sm font-normal" />
             </section>
           </div>
         </div>
@@ -101,7 +99,7 @@ export async function FicheSolution({ params }: { params: { ficheSolutionSlug: s
             >
               <FicheSolutionSideMenu ficheSolution={ficheSolution} className="mb-4 flex-none md:hidden" />
               <FicheSolutionTabSynthese
-                ficheSolutionId={ficheSolution.id}
+                ficheSolutionId={ficheSolution.documentId}
                 ficheSolution={ficheSolution}
                 projetId={params.projetId}
               />
@@ -110,13 +108,13 @@ export async function FicheSolution({ params }: { params: { ficheSolutionSlug: s
               <FicheSolutionTabMateriaux ficheSolution={ficheSolution} />
             </div>
             <div id="mise-en-oeuvre-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
-              <FicheSolutionTabMiseEnOeuvre ficheAttributes={ficheSolution.attributes} />
+              <FicheSolutionTabMiseEnOeuvre ficheAttributes={ficheSolution} />
             </div>
             <div id="financements-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
-              <FicheSolutionTabFinancements ficheId={ficheSolution.id} ficheAttributes={ficheSolution.attributes} />
+              <FicheSolutionTabFinancements ficheId={ficheSolution.documentId} ficheAttributes={ficheSolution} />
             </div>
             <div id="oups-panel" className="fr-tabs__panel !px-0 md:!py-12" role="tabpanel">
-              <FicheSolutionTabOups ficheAttributes={ficheSolution.attributes} />
+              <FicheSolutionTabOups ficheAttributes={ficheSolution} />
             </div>
           </div>
         </div>

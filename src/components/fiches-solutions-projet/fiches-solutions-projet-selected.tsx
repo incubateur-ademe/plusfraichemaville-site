@@ -8,7 +8,7 @@ import { GenericFicheLink } from "@/src/components/common/generic-save-fiche/gen
 import { useCanEditProjet } from "@/src/hooks/use-can-edit-projet";
 
 type FichesSolutionsProjetsSelectedProps = {
-  selectedFichesSolutionsIds?: number[];
+  selectedFichesSolutionsIds?: string[];
   updateStore: (_projet: ProjetWithRelations) => void;
   projetId?: number;
 };

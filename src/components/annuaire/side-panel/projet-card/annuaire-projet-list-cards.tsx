@@ -12,8 +12,8 @@ export const AnnuaireProjetListCards = ({
   unfocusMarker,
 }: {
   markers: CustomMarker[];
-  selectMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: number) => void;
-  focusMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: number) => void;
+  selectMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: string | number) => void;
+  focusMarkerByProjetId: (markerType: CustomMarker["type"], idProjet?: string | number) => void;
   focusedMarker?: CustomMarker | null;
   unfocusMarker: () => void;
 }) => {
@@ -33,13 +33,13 @@ export const AnnuaireProjetListCards = ({
           <Conditional>
             <Case condition={marker.type === "rex" && !!marker.idProjet}>
               <AnnuaireRexCardContainer
-                rexId={marker.idProjet!}
+                rexId={marker.idProjet as string}
                 onClick={() => selectMarkerByProjetId(marker.type, marker.idProjet)}
               />
             </Case>
             <Case condition={marker.type === "in-progress" && !!marker.idProjet}>
               <AnnuaireInProgressCardPanelContainer
-                projetId={marker.idProjet!}
+                projetId={marker.idProjet as number}
                 onClick={() => selectMarkerByProjetId(marker.type, marker.idProjet)}
               />
             </Case>

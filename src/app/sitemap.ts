@@ -47,28 +47,28 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const ficheSolutionPages = allFichesSolutions.map((page) => ({
-    url: `${baseUrl}/fiche-solution/${page.attributes.slug}`,
+    url: `${baseUrl}/fiche-solution/${page.slug}`,
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: 0.8,
   }));
 
   const retourExperiencePages = allRetourExperiences.map((page) => ({
-    url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(page.attributes.slug)),
+    url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(page.slug)),
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: 0.8,
   }));
 
   const ficheDiagnosticPages = allFichesDiagnostic.map((page) => ({
-    url: getFullUrl(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(page.attributes.slug)),
+    url: getFullUrl(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(page.slug)),
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: 0.8,
   }));
 
   const rexDiagPages = allRetourExperiencesDiag.map((page) => ({
-    url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(page.attributes.slug)),
+    url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(page.slug)),
     changeFrequency: "weekly" as const,
     lastModified: new Date(),
     priority: 0.8,

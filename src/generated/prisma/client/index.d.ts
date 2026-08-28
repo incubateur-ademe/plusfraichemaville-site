@@ -8663,10 +8663,7 @@ export namespace Prisma {
     projet_id: number | null
     nb_views: number | null
     aides_already_seen: number | null
-    aides_fs_unselected: number | null
-    fiches_diagnostic_seen: number | null
     aides_more_info_clicked: number | null
-    annuaire_rex_projet_clicked: number | null
     annuaire_in_progess_clicked: number | null
   }
 
@@ -8675,10 +8672,7 @@ export namespace Prisma {
     projet_id: number | null
     nb_views: number | null
     aides_already_seen: number[]
-    aides_fs_unselected: number[]
-    fiches_diagnostic_seen: number[]
     aides_more_info_clicked: number[]
-    annuaire_rex_projet_clicked: number[]
     annuaire_in_progess_clicked: number[]
   }
 
@@ -8740,10 +8734,7 @@ export namespace Prisma {
     projet_id?: true
     nb_views?: true
     aides_already_seen?: true
-    aides_fs_unselected?: true
-    fiches_diagnostic_seen?: true
     aides_more_info_clicked?: true
-    annuaire_rex_projet_clicked?: true
     annuaire_in_progess_clicked?: true
   }
 
@@ -8752,10 +8743,7 @@ export namespace Prisma {
     projet_id?: true
     nb_views?: true
     aides_already_seen?: true
-    aides_fs_unselected?: true
-    fiches_diagnostic_seen?: true
     aides_more_info_clicked?: true
-    annuaire_rex_projet_clicked?: true
     annuaire_in_progess_clicked?: true
   }
 
@@ -8911,10 +8899,10 @@ export namespace Prisma {
     nb_views: number | null
     last_viewed_at: Date | null
     aides_already_seen: number[]
-    aides_fs_unselected: number[]
-    fiches_diagnostic_seen: number[]
+    aides_fs_unselected: string[]
+    fiches_diagnostic_seen: string[]
     aides_more_info_clicked: number[]
-    annuaire_rex_projet_clicked: number[]
+    annuaire_rex_projet_clicked: string[]
     annuaire_in_progess_clicked: number[]
     _count: User_projetCountAggregateOutputType | null
     _avg: User_projetAvgAggregateOutputType | null
@@ -9076,10 +9064,10 @@ export namespace Prisma {
       nb_views: number | null
       last_viewed_at: Date | null
       aides_already_seen: number[]
-      aides_fs_unselected: number[]
-      fiches_diagnostic_seen: number[]
+      aides_fs_unselected: string[]
+      fiches_diagnostic_seen: string[]
       aides_more_info_clicked: number[]
-      annuaire_rex_projet_clicked: number[]
+      annuaire_rex_projet_clicked: string[]
       annuaire_in_progess_clicked: number[]
     }, ExtArgs["result"]["user_projet"]>
     composites: {}
@@ -9522,10 +9510,10 @@ export namespace Prisma {
     readonly nb_views: FieldRef<"user_projet", 'Int'>
     readonly last_viewed_at: FieldRef<"user_projet", 'DateTime'>
     readonly aides_already_seen: FieldRef<"user_projet", 'Int[]'>
-    readonly aides_fs_unselected: FieldRef<"user_projet", 'Int[]'>
-    readonly fiches_diagnostic_seen: FieldRef<"user_projet", 'Int[]'>
+    readonly aides_fs_unselected: FieldRef<"user_projet", 'String[]'>
+    readonly fiches_diagnostic_seen: FieldRef<"user_projet", 'String[]'>
     readonly aides_more_info_clicked: FieldRef<"user_projet", 'Int[]'>
-    readonly annuaire_rex_projet_clicked: FieldRef<"user_projet", 'Int[]'>
+    readonly annuaire_rex_projet_clicked: FieldRef<"user_projet", 'String[]'>
     readonly annuaire_in_progess_clicked: FieldRef<"user_projet", 'Int[]'>
   }
     
@@ -12314,16 +12302,12 @@ export namespace Prisma {
 
   export type ProjetAvgAggregateOutputType = {
     id: number | null
-    fiches_solutions_id: number | null
-    fiches_diagnostic_id: number | null
     collectiviteId: number | null
     budget: number | null
   }
 
   export type ProjetSumAggregateOutputType = {
     id: number | null
-    fiches_solutions_id: number[]
-    fiches_diagnostic_id: number[]
     collectiviteId: number | null
     budget: number | null
   }
@@ -12395,16 +12379,12 @@ export namespace Prisma {
 
   export type ProjetAvgAggregateInputType = {
     id?: true
-    fiches_solutions_id?: true
-    fiches_diagnostic_id?: true
     collectiviteId?: true
     budget?: true
   }
 
   export type ProjetSumAggregateInputType = {
     id?: true
-    fiches_solutions_id?: true
-    fiches_diagnostic_id?: true
     collectiviteId?: true
     budget?: true
   }
@@ -12571,8 +12551,8 @@ export namespace Prisma {
     adresse_info: JsonValue | null
     adresse_all_infos: JsonValue | null
     date_echeance: Date | null
-    fiches_solutions_id: number[]
-    fiches_diagnostic_id: number[]
+    fiches_solutions_id: string[]
+    fiches_diagnostic_id: string[]
     collectiviteId: number
     recommandations_viewed_by: string[]
     deleted_at: Date | null
@@ -12768,8 +12748,8 @@ export namespace Prisma {
       adresse_info: Prisma.JsonValue | null
       adresse_all_infos: Prisma.JsonValue | null
       date_echeance: Date | null
-      fiches_solutions_id: number[]
-      fiches_diagnostic_id: number[]
+      fiches_solutions_id: string[]
+      fiches_diagnostic_id: string[]
       collectiviteId: number
       recommandations_viewed_by: string[]
       deleted_at: Date | null
@@ -13222,8 +13202,8 @@ export namespace Prisma {
     readonly adresse_info: FieldRef<"projet", 'Json'>
     readonly adresse_all_infos: FieldRef<"projet", 'Json'>
     readonly date_echeance: FieldRef<"projet", 'DateTime'>
-    readonly fiches_solutions_id: FieldRef<"projet", 'Int[]'>
-    readonly fiches_diagnostic_id: FieldRef<"projet", 'Int[]'>
+    readonly fiches_solutions_id: FieldRef<"projet", 'String[]'>
+    readonly fiches_diagnostic_id: FieldRef<"projet", 'String[]'>
     readonly collectiviteId: FieldRef<"projet", 'Int'>
     readonly recommandations_viewed_by: FieldRef<"projet", 'String[]'>
     readonly deleted_at: FieldRef<"projet", 'DateTime'>
@@ -13825,19 +13805,17 @@ export namespace Prisma {
   export type Projet_ficheAvgAggregateOutputType = {
     id: number | null
     projet_id: number | null
-    fiche_id: number | null
   }
 
   export type Projet_ficheSumAggregateOutputType = {
     id: number | null
     projet_id: number | null
-    fiche_id: number | null
   }
 
   export type Projet_ficheMinAggregateOutputType = {
     id: number | null
     projet_id: number | null
-    fiche_id: number | null
+    fiche_id: string | null
     type: $Enums.FicheType | null
     created_at: Date | null
     user_id: string | null
@@ -13846,7 +13824,7 @@ export namespace Prisma {
   export type Projet_ficheMaxAggregateOutputType = {
     id: number | null
     projet_id: number | null
-    fiche_id: number | null
+    fiche_id: string | null
     type: $Enums.FicheType | null
     created_at: Date | null
     user_id: string | null
@@ -13866,13 +13844,11 @@ export namespace Prisma {
   export type Projet_ficheAvgAggregateInputType = {
     id?: true
     projet_id?: true
-    fiche_id?: true
   }
 
   export type Projet_ficheSumAggregateInputType = {
     id?: true
     projet_id?: true
-    fiche_id?: true
   }
 
   export type Projet_ficheMinAggregateInputType = {
@@ -13992,7 +13968,7 @@ export namespace Prisma {
   export type Projet_ficheGroupByOutputType = {
     id: number
     projet_id: number
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at: Date
     user_id: string
@@ -14082,7 +14058,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       projet_id: number
-      fiche_id: number
+      fiche_id: string
       type: $Enums.FicheType
       created_at: Date
       user_id: string
@@ -14513,7 +14489,7 @@ export namespace Prisma {
   interface projet_ficheFieldRefs {
     readonly id: FieldRef<"projet_fiche", 'Int'>
     readonly projet_id: FieldRef<"projet_fiche", 'Int'>
-    readonly fiche_id: FieldRef<"projet_fiche", 'Int'>
+    readonly fiche_id: FieldRef<"projet_fiche", 'String'>
     readonly type: FieldRef<"projet_fiche", 'FicheType'>
     readonly created_at: FieldRef<"projet_fiche", 'DateTime'>
     readonly user_id: FieldRef<"projet_fiche", 'String'>
@@ -21930,14 +21906,12 @@ export namespace Prisma {
   }
 
   export type Estimation_materiauxAvgAggregateOutputType = {
-    materiau_id: number | null
     quantite: number | null
     cout_investissement_override: number | null
     cout_entretien_override: number | null
   }
 
   export type Estimation_materiauxSumAggregateOutputType = {
-    materiau_id: number | null
     quantite: number | null
     cout_investissement_override: number | null
     cout_entretien_override: number | null
@@ -21946,7 +21920,7 @@ export namespace Prisma {
   export type Estimation_materiauxMinAggregateOutputType = {
     id: string | null
     estimation_fiche_solution_id: string | null
-    materiau_id: number | null
+    materiau_id: string | null
     quantite: number | null
     cout_investissement_override: number | null
     cout_entretien_override: number | null
@@ -21957,7 +21931,7 @@ export namespace Prisma {
   export type Estimation_materiauxMaxAggregateOutputType = {
     id: string | null
     estimation_fiche_solution_id: string | null
-    materiau_id: number | null
+    materiau_id: string | null
     quantite: number | null
     cout_investissement_override: number | null
     cout_entretien_override: number | null
@@ -21979,14 +21953,12 @@ export namespace Prisma {
 
 
   export type Estimation_materiauxAvgAggregateInputType = {
-    materiau_id?: true
     quantite?: true
     cout_investissement_override?: true
     cout_entretien_override?: true
   }
 
   export type Estimation_materiauxSumAggregateInputType = {
-    materiau_id?: true
     quantite?: true
     cout_investissement_override?: true
     cout_entretien_override?: true
@@ -22115,7 +22087,7 @@ export namespace Prisma {
   export type Estimation_materiauxGroupByOutputType = {
     id: string
     estimation_fiche_solution_id: string
-    materiau_id: number
+    materiau_id: string
     quantite: number
     cout_investissement_override: number | null
     cout_entretien_override: number | null
@@ -22208,7 +22180,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       estimation_fiche_solution_id: string
-      materiau_id: number
+      materiau_id: string
       quantite: number
       cout_investissement_override: number | null
       cout_entretien_override: number | null
@@ -22640,7 +22612,7 @@ export namespace Prisma {
   interface estimation_materiauxFieldRefs {
     readonly id: FieldRef<"estimation_materiaux", 'String'>
     readonly estimation_fiche_solution_id: FieldRef<"estimation_materiaux", 'String'>
-    readonly materiau_id: FieldRef<"estimation_materiaux", 'Int'>
+    readonly materiau_id: FieldRef<"estimation_materiaux", 'String'>
     readonly quantite: FieldRef<"estimation_materiaux", 'Int'>
     readonly cout_investissement_override: FieldRef<"estimation_materiaux", 'Int'>
     readonly cout_entretien_override: FieldRef<"estimation_materiaux", 'Int'>
@@ -23074,7 +23046,6 @@ export namespace Prisma {
 
   export type Estimation_fiche_solutionAvgAggregateOutputType = {
     estimation_id: number | null
-    fiche_solution_id: number | null
     quantite: number | null
     cout_min_investissement: number | null
     cout_max_investissement: number | null
@@ -23086,7 +23057,6 @@ export namespace Prisma {
 
   export type Estimation_fiche_solutionSumAggregateOutputType = {
     estimation_id: number | null
-    fiche_solution_id: number | null
     quantite: number | null
     cout_min_investissement: number | null
     cout_max_investissement: number | null
@@ -23099,7 +23069,7 @@ export namespace Prisma {
   export type Estimation_fiche_solutionMinAggregateOutputType = {
     id: string | null
     estimation_id: number | null
-    fiche_solution_id: number | null
+    fiche_solution_id: string | null
     quantite: number | null
     cout_min_investissement: number | null
     cout_max_investissement: number | null
@@ -23114,7 +23084,7 @@ export namespace Prisma {
   export type Estimation_fiche_solutionMaxAggregateOutputType = {
     id: string | null
     estimation_id: number | null
-    fiche_solution_id: number | null
+    fiche_solution_id: string | null
     quantite: number | null
     cout_min_investissement: number | null
     cout_max_investissement: number | null
@@ -23145,7 +23115,6 @@ export namespace Prisma {
 
   export type Estimation_fiche_solutionAvgAggregateInputType = {
     estimation_id?: true
-    fiche_solution_id?: true
     quantite?: true
     cout_min_investissement?: true
     cout_max_investissement?: true
@@ -23157,7 +23126,6 @@ export namespace Prisma {
 
   export type Estimation_fiche_solutionSumAggregateInputType = {
     estimation_id?: true
-    fiche_solution_id?: true
     quantite?: true
     cout_min_investissement?: true
     cout_max_investissement?: true
@@ -23302,7 +23270,7 @@ export namespace Prisma {
   export type Estimation_fiche_solutionGroupByOutputType = {
     id: string
     estimation_id: number
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -23420,7 +23388,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       estimation_id: number
-      fiche_solution_id: number
+      fiche_solution_id: string
       quantite: number | null
       cout_min_investissement: number
       cout_max_investissement: number
@@ -23857,7 +23825,7 @@ export namespace Prisma {
   interface estimation_fiche_solutionFieldRefs {
     readonly id: FieldRef<"estimation_fiche_solution", 'String'>
     readonly estimation_id: FieldRef<"estimation_fiche_solution", 'Int'>
-    readonly fiche_solution_id: FieldRef<"estimation_fiche_solution", 'Int'>
+    readonly fiche_solution_id: FieldRef<"estimation_fiche_solution", 'String'>
     readonly quantite: FieldRef<"estimation_fiche_solution", 'Int'>
     readonly cout_min_investissement: FieldRef<"estimation_fiche_solution", 'Int'>
     readonly cout_max_investissement: FieldRef<"estimation_fiche_solution", 'Int'>
@@ -31288,7 +31256,10 @@ export namespace Prisma {
     email_address: 'email_address',
     user_id: 'user_id',
     invitation_token: 'invitation_token',
-    deleted_by: 'deleted_by'
+    deleted_by: 'deleted_by',
+    aides_fs_unselected: 'aides_fs_unselected',
+    fiches_diagnostic_seen: 'fiches_diagnostic_seen',
+    annuaire_rex_projet_clicked: 'annuaire_rex_projet_clicked'
   };
 
   export type user_projetOrderByRelevanceFieldEnum = (typeof user_projetOrderByRelevanceFieldEnum)[keyof typeof user_projetOrderByRelevanceFieldEnum]
@@ -31317,6 +31288,8 @@ export namespace Prisma {
     type_espace: 'type_espace',
     adresse: 'adresse',
     niveau_maturite: 'niveau_maturite',
+    fiches_solutions_id: 'fiches_solutions_id',
+    fiches_diagnostic_id: 'fiches_diagnostic_id',
     recommandations_viewed_by: 'recommandations_viewed_by',
     deleted_by: 'deleted_by'
   };
@@ -31325,6 +31298,7 @@ export namespace Prisma {
 
 
   export const projet_ficheOrderByRelevanceFieldEnum: {
+    fiche_id: 'fiche_id',
     user_id: 'user_id'
   };
 
@@ -31381,14 +31355,16 @@ export namespace Prisma {
 
   export const estimation_materiauxOrderByRelevanceFieldEnum: {
     id: 'id',
-    estimation_fiche_solution_id: 'estimation_fiche_solution_id'
+    estimation_fiche_solution_id: 'estimation_fiche_solution_id',
+    materiau_id: 'materiau_id'
   };
 
   export type estimation_materiauxOrderByRelevanceFieldEnum = (typeof estimation_materiauxOrderByRelevanceFieldEnum)[keyof typeof estimation_materiauxOrderByRelevanceFieldEnum]
 
 
   export const estimation_fiche_solutionOrderByRelevanceFieldEnum: {
-    id: 'id'
+    id: 'id',
+    fiche_solution_id: 'fiche_solution_id'
   };
 
   export type estimation_fiche_solutionOrderByRelevanceFieldEnum = (typeof estimation_fiche_solutionOrderByRelevanceFieldEnum)[keyof typeof estimation_fiche_solutionOrderByRelevanceFieldEnum]
@@ -32139,10 +32115,10 @@ export namespace Prisma {
     nb_views?: IntNullableFilter<"user_projet"> | number | null
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
     aides_already_seen?: IntNullableListFilter<"user_projet">
-    aides_fs_unselected?: IntNullableListFilter<"user_projet">
-    fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    aides_fs_unselected?: StringNullableListFilter<"user_projet">
+    fiches_diagnostic_seen?: StringNullableListFilter<"user_projet">
     aides_more_info_clicked?: IntNullableListFilter<"user_projet">
-    annuaire_rex_projet_clicked?: IntNullableListFilter<"user_projet">
+    annuaire_rex_projet_clicked?: StringNullableListFilter<"user_projet">
     annuaire_in_progess_clicked?: IntNullableListFilter<"user_projet">
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -32196,10 +32172,10 @@ export namespace Prisma {
     nb_views?: IntNullableFilter<"user_projet"> | number | null
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
     aides_already_seen?: IntNullableListFilter<"user_projet">
-    aides_fs_unselected?: IntNullableListFilter<"user_projet">
-    fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    aides_fs_unselected?: StringNullableListFilter<"user_projet">
+    fiches_diagnostic_seen?: StringNullableListFilter<"user_projet">
     aides_more_info_clicked?: IntNullableListFilter<"user_projet">
-    annuaire_rex_projet_clicked?: IntNullableListFilter<"user_projet">
+    annuaire_rex_projet_clicked?: StringNullableListFilter<"user_projet">
     annuaire_in_progess_clicked?: IntNullableListFilter<"user_projet">
     projet?: XOR<ProjetScalarRelationFilter, projetWhereInput>
     user?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
@@ -32251,10 +32227,10 @@ export namespace Prisma {
     nb_views?: IntNullableWithAggregatesFilter<"user_projet"> | number | null
     last_viewed_at?: DateTimeNullableWithAggregatesFilter<"user_projet"> | Date | string | null
     aides_already_seen?: IntNullableListFilter<"user_projet">
-    aides_fs_unselected?: IntNullableListFilter<"user_projet">
-    fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    aides_fs_unselected?: StringNullableListFilter<"user_projet">
+    fiches_diagnostic_seen?: StringNullableListFilter<"user_projet">
     aides_more_info_clicked?: IntNullableListFilter<"user_projet">
-    annuaire_rex_projet_clicked?: IntNullableListFilter<"user_projet">
+    annuaire_rex_projet_clicked?: StringNullableListFilter<"user_projet">
     annuaire_in_progess_clicked?: IntNullableListFilter<"user_projet">
   }
 
@@ -32411,8 +32387,8 @@ export namespace Prisma {
     adresse_info?: JsonNullableFilter<"projet">
     adresse_all_infos?: JsonNullableFilter<"projet">
     date_echeance?: DateTimeNullableFilter<"projet"> | Date | string | null
-    fiches_solutions_id?: IntNullableListFilter<"projet">
-    fiches_diagnostic_id?: IntNullableListFilter<"projet">
+    fiches_solutions_id?: StringNullableListFilter<"projet">
+    fiches_diagnostic_id?: StringNullableListFilter<"projet">
     collectiviteId?: IntFilter<"projet"> | number
     recommandations_viewed_by?: StringNullableListFilter<"projet">
     deleted_at?: DateTimeNullableFilter<"projet"> | Date | string | null
@@ -32483,8 +32459,8 @@ export namespace Prisma {
     adresse_info?: JsonNullableFilter<"projet">
     adresse_all_infos?: JsonNullableFilter<"projet">
     date_echeance?: DateTimeNullableFilter<"projet"> | Date | string | null
-    fiches_solutions_id?: IntNullableListFilter<"projet">
-    fiches_diagnostic_id?: IntNullableListFilter<"projet">
+    fiches_solutions_id?: StringNullableListFilter<"projet">
+    fiches_diagnostic_id?: StringNullableListFilter<"projet">
     collectiviteId?: IntFilter<"projet"> | number
     recommandations_viewed_by?: StringNullableListFilter<"projet">
     deleted_at?: DateTimeNullableFilter<"projet"> | Date | string | null
@@ -32550,8 +32526,8 @@ export namespace Prisma {
     adresse_info?: JsonNullableWithAggregatesFilter<"projet">
     adresse_all_infos?: JsonNullableWithAggregatesFilter<"projet">
     date_echeance?: DateTimeNullableWithAggregatesFilter<"projet"> | Date | string | null
-    fiches_solutions_id?: IntNullableListFilter<"projet">
-    fiches_diagnostic_id?: IntNullableListFilter<"projet">
+    fiches_solutions_id?: StringNullableListFilter<"projet">
+    fiches_diagnostic_id?: StringNullableListFilter<"projet">
     collectiviteId?: IntWithAggregatesFilter<"projet"> | number
     recommandations_viewed_by?: StringNullableListFilter<"projet">
     deleted_at?: DateTimeNullableWithAggregatesFilter<"projet"> | Date | string | null
@@ -32569,7 +32545,7 @@ export namespace Prisma {
     NOT?: projet_ficheWhereInput | projet_ficheWhereInput[]
     id?: IntFilter<"projet_fiche"> | number
     projet_id?: IntFilter<"projet_fiche"> | number
-    fiche_id?: IntFilter<"projet_fiche"> | number
+    fiche_id?: StringFilter<"projet_fiche"> | string
     type?: EnumFicheTypeFilter<"projet_fiche"> | $Enums.FicheType
     created_at?: DateTimeFilter<"projet_fiche"> | Date | string
     user_id?: StringFilter<"projet_fiche"> | string
@@ -32596,7 +32572,7 @@ export namespace Prisma {
     OR?: projet_ficheWhereInput[]
     NOT?: projet_ficheWhereInput | projet_ficheWhereInput[]
     projet_id?: IntFilter<"projet_fiche"> | number
-    fiche_id?: IntFilter<"projet_fiche"> | number
+    fiche_id?: StringFilter<"projet_fiche"> | string
     type?: EnumFicheTypeFilter<"projet_fiche"> | $Enums.FicheType
     created_at?: DateTimeFilter<"projet_fiche"> | Date | string
     user_id?: StringFilter<"projet_fiche"> | string
@@ -32624,7 +32600,7 @@ export namespace Prisma {
     NOT?: projet_ficheScalarWhereWithAggregatesInput | projet_ficheScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"projet_fiche"> | number
     projet_id?: IntWithAggregatesFilter<"projet_fiche"> | number
-    fiche_id?: IntWithAggregatesFilter<"projet_fiche"> | number
+    fiche_id?: StringWithAggregatesFilter<"projet_fiche"> | string
     type?: EnumFicheTypeWithAggregatesFilter<"projet_fiche"> | $Enums.FicheType
     created_at?: DateTimeWithAggregatesFilter<"projet_fiche"> | Date | string
     user_id?: StringWithAggregatesFilter<"projet_fiche"> | string
@@ -33107,7 +33083,7 @@ export namespace Prisma {
     NOT?: estimation_materiauxWhereInput | estimation_materiauxWhereInput[]
     id?: StringFilter<"estimation_materiaux"> | string
     estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
-    materiau_id?: IntFilter<"estimation_materiaux"> | number
+    materiau_id?: StringFilter<"estimation_materiaux"> | string
     quantite?: IntFilter<"estimation_materiaux"> | number
     cout_investissement_override?: IntNullableFilter<"estimation_materiaux"> | number | null
     cout_entretien_override?: IntNullableFilter<"estimation_materiaux"> | number | null
@@ -33136,7 +33112,7 @@ export namespace Prisma {
     OR?: estimation_materiauxWhereInput[]
     NOT?: estimation_materiauxWhereInput | estimation_materiauxWhereInput[]
     estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
-    materiau_id?: IntFilter<"estimation_materiaux"> | number
+    materiau_id?: StringFilter<"estimation_materiaux"> | string
     quantite?: IntFilter<"estimation_materiaux"> | number
     cout_investissement_override?: IntNullableFilter<"estimation_materiaux"> | number | null
     cout_entretien_override?: IntNullableFilter<"estimation_materiaux"> | number | null
@@ -33167,7 +33143,7 @@ export namespace Prisma {
     NOT?: estimation_materiauxScalarWhereWithAggregatesInput | estimation_materiauxScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"estimation_materiaux"> | string
     estimation_fiche_solution_id?: StringWithAggregatesFilter<"estimation_materiaux"> | string
-    materiau_id?: IntWithAggregatesFilter<"estimation_materiaux"> | number
+    materiau_id?: StringWithAggregatesFilter<"estimation_materiaux"> | string
     quantite?: IntWithAggregatesFilter<"estimation_materiaux"> | number
     cout_investissement_override?: IntNullableWithAggregatesFilter<"estimation_materiaux"> | number | null
     cout_entretien_override?: IntNullableWithAggregatesFilter<"estimation_materiaux"> | number | null
@@ -33181,7 +33157,7 @@ export namespace Prisma {
     NOT?: estimation_fiche_solutionWhereInput | estimation_fiche_solutionWhereInput[]
     id?: StringFilter<"estimation_fiche_solution"> | string
     estimation_id?: IntFilter<"estimation_fiche_solution"> | number
-    fiche_solution_id?: IntFilter<"estimation_fiche_solution"> | number
+    fiche_solution_id?: StringFilter<"estimation_fiche_solution"> | string
     quantite?: IntNullableFilter<"estimation_fiche_solution"> | number | null
     cout_min_investissement?: IntFilter<"estimation_fiche_solution"> | number
     cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
@@ -33220,7 +33196,7 @@ export namespace Prisma {
     OR?: estimation_fiche_solutionWhereInput[]
     NOT?: estimation_fiche_solutionWhereInput | estimation_fiche_solutionWhereInput[]
     estimation_id?: IntFilter<"estimation_fiche_solution"> | number
-    fiche_solution_id?: IntFilter<"estimation_fiche_solution"> | number
+    fiche_solution_id?: StringFilter<"estimation_fiche_solution"> | string
     quantite?: IntNullableFilter<"estimation_fiche_solution"> | number | null
     cout_min_investissement?: IntFilter<"estimation_fiche_solution"> | number
     cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
@@ -33260,7 +33236,7 @@ export namespace Prisma {
     NOT?: estimation_fiche_solutionScalarWhereWithAggregatesInput | estimation_fiche_solutionScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"estimation_fiche_solution"> | string
     estimation_id?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
-    fiche_solution_id?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
+    fiche_solution_id?: StringWithAggregatesFilter<"estimation_fiche_solution"> | string
     quantite?: IntNullableWithAggregatesFilter<"estimation_fiche_solution"> | number | null
     cout_min_investissement?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
     cout_max_investissement?: IntWithAggregatesFilter<"estimation_fiche_solution"> | number
@@ -34148,10 +34124,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
@@ -34174,10 +34150,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
@@ -34193,10 +34169,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
@@ -34219,10 +34195,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
@@ -34242,10 +34218,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -34259,10 +34235,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -34280,10 +34256,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -34427,8 +34403,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -34459,8 +34435,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -34489,8 +34465,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34521,8 +34497,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34552,8 +34528,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -34576,8 +34552,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34599,8 +34575,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34613,7 +34589,7 @@ export namespace Prisma {
   }
 
   export type projet_ficheCreateInput = {
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
     projet: projetCreateNestedOneWithoutFichesInput
@@ -34623,14 +34599,14 @@ export namespace Prisma {
   export type projet_ficheUncheckedCreateInput = {
     id?: number
     projet_id: number
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
     user_id: string
   }
 
   export type projet_ficheUpdateInput = {
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet?: projetUpdateOneRequiredWithoutFichesNestedInput
@@ -34640,7 +34616,7 @@ export namespace Prisma {
   export type projet_ficheUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user_id?: StringFieldUpdateOperationsInput | string
@@ -34649,14 +34625,14 @@ export namespace Prisma {
   export type projet_ficheCreateManyInput = {
     id?: number
     projet_id: number
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
     user_id: string
   }
 
   export type projet_ficheUpdateManyMutationInput = {
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -34664,7 +34640,7 @@ export namespace Prisma {
   export type projet_ficheUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user_id?: StringFieldUpdateOperationsInput | string
@@ -35129,7 +35105,7 @@ export namespace Prisma {
 
   export type estimation_materiauxCreateInput = {
     id?: string
-    materiau_id: number
+    materiau_id: string
     quantite: number
     cout_investissement_override?: number | null
     cout_entretien_override?: number | null
@@ -35141,7 +35117,7 @@ export namespace Prisma {
   export type estimation_materiauxUncheckedCreateInput = {
     id?: string
     estimation_fiche_solution_id: string
-    materiau_id: number
+    materiau_id: string
     quantite: number
     cout_investissement_override?: number | null
     cout_entretien_override?: number | null
@@ -35151,7 +35127,7 @@ export namespace Prisma {
 
   export type estimation_materiauxUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    materiau_id?: IntFieldUpdateOperationsInput | number
+    materiau_id?: StringFieldUpdateOperationsInput | string
     quantite?: IntFieldUpdateOperationsInput | number
     cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
     cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
@@ -35163,7 +35139,7 @@ export namespace Prisma {
   export type estimation_materiauxUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     estimation_fiche_solution_id?: StringFieldUpdateOperationsInput | string
-    materiau_id?: IntFieldUpdateOperationsInput | number
+    materiau_id?: StringFieldUpdateOperationsInput | string
     quantite?: IntFieldUpdateOperationsInput | number
     cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
     cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
@@ -35174,7 +35150,7 @@ export namespace Prisma {
   export type estimation_materiauxCreateManyInput = {
     id?: string
     estimation_fiche_solution_id: string
-    materiau_id: number
+    materiau_id: string
     quantite: number
     cout_investissement_override?: number | null
     cout_entretien_override?: number | null
@@ -35184,7 +35160,7 @@ export namespace Prisma {
 
   export type estimation_materiauxUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    materiau_id?: IntFieldUpdateOperationsInput | number
+    materiau_id?: StringFieldUpdateOperationsInput | string
     quantite?: IntFieldUpdateOperationsInput | number
     cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
     cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
@@ -35195,7 +35171,7 @@ export namespace Prisma {
   export type estimation_materiauxUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     estimation_fiche_solution_id?: StringFieldUpdateOperationsInput | string
-    materiau_id?: IntFieldUpdateOperationsInput | number
+    materiau_id?: StringFieldUpdateOperationsInput | string
     quantite?: IntFieldUpdateOperationsInput | number
     cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
     cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
@@ -35205,7 +35181,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionCreateInput = {
     id?: string
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite?: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -35222,7 +35198,7 @@ export namespace Prisma {
   export type estimation_fiche_solutionUncheckedCreateInput = {
     id?: string
     estimation_id: number
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite?: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -35237,7 +35213,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -35254,7 +35230,7 @@ export namespace Prisma {
   export type estimation_fiche_solutionUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     estimation_id?: IntFieldUpdateOperationsInput | number
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -35270,7 +35246,7 @@ export namespace Prisma {
   export type estimation_fiche_solutionCreateManyInput = {
     id?: string
     estimation_id: number
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite?: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -35284,7 +35260,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -35299,7 +35275,7 @@ export namespace Prisma {
   export type estimation_fiche_solutionUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     estimation_id?: IntFieldUpdateOperationsInput | number
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -36419,10 +36395,7 @@ export namespace Prisma {
     projet_id?: SortOrder
     nb_views?: SortOrder
     aides_already_seen?: SortOrder
-    aides_fs_unselected?: SortOrder
-    fiches_diagnostic_seen?: SortOrder
     aides_more_info_clicked?: SortOrder
-    annuaire_rex_projet_clicked?: SortOrder
     annuaire_in_progess_clicked?: SortOrder
   }
 
@@ -36461,10 +36434,7 @@ export namespace Prisma {
     projet_id?: SortOrder
     nb_views?: SortOrder
     aides_already_seen?: SortOrder
-    aides_fs_unselected?: SortOrder
-    fiches_diagnostic_seen?: SortOrder
     aides_more_info_clicked?: SortOrder
-    annuaire_rex_projet_clicked?: SortOrder
     annuaire_in_progess_clicked?: SortOrder
   }
 
@@ -36665,8 +36635,6 @@ export namespace Prisma {
 
   export type projetAvgOrderByAggregateInput = {
     id?: SortOrder
-    fiches_solutions_id?: SortOrder
-    fiches_diagnostic_id?: SortOrder
     collectiviteId?: SortOrder
     budget?: SortOrder
   }
@@ -36711,8 +36679,6 @@ export namespace Prisma {
 
   export type projetSumOrderByAggregateInput = {
     id?: SortOrder
-    fiches_solutions_id?: SortOrder
-    fiches_diagnostic_id?: SortOrder
     collectiviteId?: SortOrder
     budget?: SortOrder
   }
@@ -36750,7 +36716,7 @@ export namespace Prisma {
 
   export type projet_ficheProjet_idFiche_idTypeCompoundUniqueInput = {
     projet_id: number
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
   }
 
@@ -36766,7 +36732,6 @@ export namespace Prisma {
   export type projet_ficheAvgOrderByAggregateInput = {
     id?: SortOrder
     projet_id?: SortOrder
-    fiche_id?: SortOrder
   }
 
   export type projet_ficheMaxOrderByAggregateInput = {
@@ -36790,7 +36755,6 @@ export namespace Prisma {
   export type projet_ficheSumOrderByAggregateInput = {
     id?: SortOrder
     projet_id?: SortOrder
-    fiche_id?: SortOrder
   }
 
   export type EnumFicheTypeWithAggregatesFilter<$PrismaModel = never> = {
@@ -37253,7 +37217,7 @@ export namespace Prisma {
 
   export type estimation_materiauxEstimation_fiche_solution_idMateriau_idCompoundUniqueInput = {
     estimation_fiche_solution_id: string
-    materiau_id: number
+    materiau_id: string
   }
 
   export type estimation_materiauxCountOrderByAggregateInput = {
@@ -37268,7 +37232,6 @@ export namespace Prisma {
   }
 
   export type estimation_materiauxAvgOrderByAggregateInput = {
-    materiau_id?: SortOrder
     quantite?: SortOrder
     cout_investissement_override?: SortOrder
     cout_entretien_override?: SortOrder
@@ -37297,7 +37260,6 @@ export namespace Prisma {
   }
 
   export type estimation_materiauxSumOrderByAggregateInput = {
-    materiau_id?: SortOrder
     quantite?: SortOrder
     cout_investissement_override?: SortOrder
     cout_entretien_override?: SortOrder
@@ -37321,7 +37283,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionEstimation_idFiche_solution_idCompoundUniqueInput = {
     estimation_id: number
-    fiche_solution_id: number
+    fiche_solution_id: string
   }
 
   export type estimation_fiche_solutionCountOrderByAggregateInput = {
@@ -37341,7 +37303,6 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionAvgOrderByAggregateInput = {
     estimation_id?: SortOrder
-    fiche_solution_id?: SortOrder
     quantite?: SortOrder
     cout_min_investissement?: SortOrder
     cout_max_investissement?: SortOrder
@@ -37383,7 +37344,6 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionSumOrderByAggregateInput = {
     estimation_id?: SortOrder
-    fiche_solution_id?: SortOrder
     quantite?: SortOrder
     cout_min_investissement?: SortOrder
     cout_max_investissement?: SortOrder
@@ -38582,11 +38542,11 @@ export namespace Prisma {
   }
 
   export type user_projetCreateaides_fs_unselectedInput = {
-    set: number[]
+    set: string[]
   }
 
   export type user_projetCreatefiches_diagnostic_seenInput = {
-    set: number[]
+    set: string[]
   }
 
   export type user_projetCreateaides_more_info_clickedInput = {
@@ -38594,7 +38554,7 @@ export namespace Prisma {
   }
 
   export type user_projetCreateannuaire_rex_projet_clickedInput = {
-    set: number[]
+    set: string[]
   }
 
   export type user_projetCreateannuaire_in_progess_clickedInput = {
@@ -38661,13 +38621,13 @@ export namespace Prisma {
   }
 
   export type user_projetUpdateaides_fs_unselectedInput = {
-    set?: number[]
-    push?: number | number[]
+    set?: string[]
+    push?: string | string[]
   }
 
   export type user_projetUpdatefiches_diagnostic_seenInput = {
-    set?: number[]
-    push?: number | number[]
+    set?: string[]
+    push?: string | string[]
   }
 
   export type user_projetUpdateaides_more_info_clickedInput = {
@@ -38676,8 +38636,8 @@ export namespace Prisma {
   }
 
   export type user_projetUpdateannuaire_rex_projet_clickedInput = {
-    set?: number[]
-    push?: number | number[]
+    set?: string[]
+    push?: string | string[]
   }
 
   export type user_projetUpdateannuaire_in_progess_clickedInput = {
@@ -38838,11 +38798,11 @@ export namespace Prisma {
   }
 
   export type projetCreatefiches_solutions_idInput = {
-    set: number[]
+    set: string[]
   }
 
   export type projetCreatefiches_diagnostic_idInput = {
-    set: number[]
+    set: string[]
   }
 
   export type projetCreaterecommandations_viewed_byInput = {
@@ -38952,13 +38912,13 @@ export namespace Prisma {
   }
 
   export type projetUpdatefiches_solutions_idInput = {
-    set?: number[]
-    push?: number | number[]
+    set?: string[]
+    push?: string | string[]
   }
 
   export type projetUpdatefiches_diagnostic_idInput = {
-    set?: number[]
-    push?: number | number[]
+    set?: string[]
+    push?: string | string[]
   }
 
   export type projetUpdaterecommandations_viewed_byInput = {
@@ -40532,8 +40492,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -40562,8 +40522,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -40670,8 +40630,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -40701,8 +40661,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -40761,10 +40721,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -40785,10 +40745,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
@@ -40814,10 +40774,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
@@ -40838,10 +40798,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
@@ -40987,7 +40947,7 @@ export namespace Prisma {
   }
 
   export type projet_ficheCreateWithoutCreated_byInput = {
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
     projet: projetCreateNestedOneWithoutFichesInput
@@ -40996,7 +40956,7 @@ export namespace Prisma {
   export type projet_ficheUncheckedCreateWithoutCreated_byInput = {
     id?: number
     projet_id: number
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
   }
@@ -41162,8 +41122,8 @@ export namespace Prisma {
     adresse_info?: JsonNullableFilter<"projet">
     adresse_all_infos?: JsonNullableFilter<"projet">
     date_echeance?: DateTimeNullableFilter<"projet"> | Date | string | null
-    fiches_solutions_id?: IntNullableListFilter<"projet">
-    fiches_diagnostic_id?: IntNullableListFilter<"projet">
+    fiches_solutions_id?: StringNullableListFilter<"projet">
+    fiches_diagnostic_id?: StringNullableListFilter<"projet">
     collectiviteId?: IntFilter<"projet"> | number
     recommandations_viewed_by?: StringNullableListFilter<"projet">
     deleted_at?: DateTimeNullableFilter<"projet"> | Date | string | null
@@ -41296,10 +41256,10 @@ export namespace Prisma {
     nb_views?: IntNullableFilter<"user_projet"> | number | null
     last_viewed_at?: DateTimeNullableFilter<"user_projet"> | Date | string | null
     aides_already_seen?: IntNullableListFilter<"user_projet">
-    aides_fs_unselected?: IntNullableListFilter<"user_projet">
-    fiches_diagnostic_seen?: IntNullableListFilter<"user_projet">
+    aides_fs_unselected?: StringNullableListFilter<"user_projet">
+    fiches_diagnostic_seen?: StringNullableListFilter<"user_projet">
     aides_more_info_clicked?: IntNullableListFilter<"user_projet">
-    annuaire_rex_projet_clicked?: IntNullableListFilter<"user_projet">
+    annuaire_rex_projet_clicked?: StringNullableListFilter<"user_projet">
     annuaire_in_progess_clicked?: IntNullableListFilter<"user_projet">
   }
 
@@ -41481,7 +41441,7 @@ export namespace Prisma {
     NOT?: projet_ficheScalarWhereInput | projet_ficheScalarWhereInput[]
     id?: IntFilter<"projet_fiche"> | number
     projet_id?: IntFilter<"projet_fiche"> | number
-    fiche_id?: IntFilter<"projet_fiche"> | number
+    fiche_id?: StringFilter<"projet_fiche"> | string
     type?: EnumFicheTypeFilter<"projet_fiche"> | $Enums.FicheType
     created_at?: DateTimeFilter<"projet_fiche"> | Date | string
     user_id?: StringFilter<"projet_fiche"> | string
@@ -41661,8 +41621,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -41692,8 +41652,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -41854,8 +41814,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -41885,8 +41845,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -42155,8 +42115,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -42186,8 +42146,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42428,10 +42388,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
@@ -42453,10 +42413,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
   }
@@ -42572,10 +42532,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
@@ -42597,10 +42557,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
   }
@@ -43203,10 +43163,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     user?: UserCreateNestedOneWithoutProjetsInput
     deleter?: UserCreateNestedOneWithoutUser_projet_deletedInput
@@ -43227,10 +43187,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
     sourced_by_projets?: projet_sourcing_contactUncheckedCreateNestedManyWithoutSourced_user_projetInput
@@ -43270,7 +43230,7 @@ export namespace Prisma {
   }
 
   export type projet_ficheCreateWithoutProjetInput = {
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
     created_by: UserCreateNestedOneWithoutFichesInput
@@ -43278,7 +43238,7 @@ export namespace Prisma {
 
   export type projet_ficheUncheckedCreateWithoutProjetInput = {
     id?: number
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
     user_id: string
@@ -43678,8 +43638,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -43709,8 +43669,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -43839,8 +43799,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -43870,8 +43830,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43990,8 +43950,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -44021,8 +43981,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -44054,10 +44014,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     projet: projetCreateNestedOneWithoutUsersInput
     user?: UserCreateNestedOneWithoutProjetsInput
@@ -44079,10 +44039,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedCreateNestedManyWithoutUser_projetInput
   }
@@ -44199,8 +44159,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44230,8 +44190,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44269,10 +44229,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
@@ -44294,10 +44254,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
   }
@@ -44489,8 +44449,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -44520,8 +44480,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -44654,7 +44614,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionCreateWithoutEstimationInput = {
     id?: string
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite?: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -44669,7 +44629,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionUncheckedCreateWithoutEstimationInput = {
     id?: string
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite?: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -44805,8 +44765,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44836,8 +44796,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44983,7 +44943,7 @@ export namespace Prisma {
     NOT?: estimation_fiche_solutionScalarWhereInput | estimation_fiche_solutionScalarWhereInput[]
     id?: StringFilter<"estimation_fiche_solution"> | string
     estimation_id?: IntFilter<"estimation_fiche_solution"> | number
-    fiche_solution_id?: IntFilter<"estimation_fiche_solution"> | number
+    fiche_solution_id?: StringFilter<"estimation_fiche_solution"> | string
     quantite?: IntNullableFilter<"estimation_fiche_solution"> | number | null
     cout_min_investissement?: IntFilter<"estimation_fiche_solution"> | number
     cout_max_investissement?: IntFilter<"estimation_fiche_solution"> | number
@@ -45380,8 +45340,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -45411,8 +45371,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -45565,8 +45525,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45596,8 +45556,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45737,7 +45697,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionCreateWithoutEstimation_materiauxInput = {
     id?: string
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite?: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -45753,7 +45713,7 @@ export namespace Prisma {
   export type estimation_fiche_solutionUncheckedCreateWithoutEstimation_materiauxInput = {
     id?: string
     estimation_id: number
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite?: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -45783,7 +45743,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionUpdateWithoutEstimation_materiauxInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -45799,7 +45759,7 @@ export namespace Prisma {
   export type estimation_fiche_solutionUncheckedUpdateWithoutEstimation_materiauxInput = {
     id?: StringFieldUpdateOperationsInput | string
     estimation_id?: IntFieldUpdateOperationsInput | number
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -45842,7 +45802,7 @@ export namespace Prisma {
 
   export type estimation_materiauxCreateWithoutEstimation_fiche_solutionInput = {
     id?: string
-    materiau_id: number
+    materiau_id: string
     quantite: number
     cout_investissement_override?: number | null
     cout_entretien_override?: number | null
@@ -45852,7 +45812,7 @@ export namespace Prisma {
 
   export type estimation_materiauxUncheckedCreateWithoutEstimation_fiche_solutionInput = {
     id?: string
-    materiau_id: number
+    materiau_id: string
     quantite: number
     cout_investissement_override?: number | null
     cout_entretien_override?: number | null
@@ -45927,7 +45887,7 @@ export namespace Prisma {
     NOT?: estimation_materiauxScalarWhereInput | estimation_materiauxScalarWhereInput[]
     id?: StringFilter<"estimation_materiaux"> | string
     estimation_fiche_solution_id?: StringFilter<"estimation_materiaux"> | string
-    materiau_id?: IntFilter<"estimation_materiaux"> | number
+    materiau_id?: StringFilter<"estimation_materiaux"> | string
     quantite?: IntFilter<"estimation_materiaux"> | number
     cout_investissement_override?: IntNullableFilter<"estimation_materiaux"> | number | null
     cout_entretien_override?: IntNullableFilter<"estimation_materiaux"> | number | null
@@ -46122,8 +46082,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -46153,8 +46113,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -46283,8 +46243,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46314,8 +46274,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -46751,8 +46711,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -46796,8 +46756,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -46827,10 +46787,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -46847,10 +46807,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -46897,7 +46857,7 @@ export namespace Prisma {
   export type projet_ficheCreateManyCreated_byInput = {
     id?: number
     projet_id: number
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
   }
@@ -47017,8 +46977,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47047,8 +47007,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47077,8 +47037,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47169,8 +47129,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47200,8 +47160,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47230,8 +47190,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47270,10 +47230,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -47294,10 +47254,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
@@ -47316,10 +47276,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -47333,10 +47293,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     projet?: projetUpdateOneRequiredWithoutUsersNestedInput
     user?: UserUpdateOneWithoutProjetsNestedInput
@@ -47357,10 +47317,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
@@ -47379,10 +47339,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -47506,7 +47466,7 @@ export namespace Prisma {
   }
 
   export type projet_ficheUpdateWithoutCreated_byInput = {
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet?: projetUpdateOneRequiredWithoutFichesNestedInput
@@ -47515,7 +47475,7 @@ export namespace Prisma {
   export type projet_ficheUncheckedUpdateWithoutCreated_byInput = {
     id?: IntFieldUpdateOperationsInput | number
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -47523,7 +47483,7 @@ export namespace Prisma {
   export type projet_ficheUncheckedUpdateManyWithoutCreated_byInput = {
     id?: IntFieldUpdateOperationsInput | number
     projet_id?: IntFieldUpdateOperationsInput | number
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -47594,8 +47554,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -47635,8 +47595,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47666,8 +47626,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47696,8 +47656,8 @@ export namespace Prisma {
     adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | number[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | number[]
+    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
+    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47802,10 +47762,10 @@ export namespace Prisma {
     nb_views?: number | null
     last_viewed_at?: Date | string | null
     aides_already_seen?: user_projetCreateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetCreateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetCreatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetCreateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetCreateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetCreateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -47818,7 +47778,7 @@ export namespace Prisma {
 
   export type projet_ficheCreateManyProjetInput = {
     id?: number
-    fiche_id: number
+    fiche_id: string
     type: $Enums.FicheType
     created_at?: Date | string
     user_id: string
@@ -47884,10 +47844,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     user?: UserUpdateOneWithoutProjetsNestedInput
     deleter?: UserUpdateOneWithoutUser_projet_deletedNestedInput
@@ -47908,10 +47868,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
     email?: emailUncheckedUpdateManyWithoutUser_projetNestedInput
     sourced_by_projets?: projet_sourcing_contactUncheckedUpdateManyWithoutSourced_user_projetNestedInput
@@ -47930,10 +47890,10 @@ export namespace Prisma {
     nb_views?: NullableIntFieldUpdateOperationsInput | number | null
     last_viewed_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     aides_already_seen?: user_projetUpdateaides_already_seenInput | number[]
-    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | number[]
-    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | number[]
+    aides_fs_unselected?: user_projetUpdateaides_fs_unselectedInput | string[]
+    fiches_diagnostic_seen?: user_projetUpdatefiches_diagnostic_seenInput | string[]
     aides_more_info_clicked?: user_projetUpdateaides_more_info_clickedInput | number[]
-    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | number[]
+    annuaire_rex_projet_clicked?: user_projetUpdateannuaire_rex_projet_clickedInput | string[]
     annuaire_in_progess_clicked?: user_projetUpdateannuaire_in_progess_clickedInput | number[]
   }
 
@@ -47958,7 +47918,7 @@ export namespace Prisma {
   }
 
   export type projet_ficheUpdateWithoutProjetInput = {
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     created_by?: UserUpdateOneRequiredWithoutFichesNestedInput
@@ -47966,7 +47926,7 @@ export namespace Prisma {
 
   export type projet_ficheUncheckedUpdateWithoutProjetInput = {
     id?: IntFieldUpdateOperationsInput | number
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user_id?: StringFieldUpdateOperationsInput | string
@@ -47974,7 +47934,7 @@ export namespace Prisma {
 
   export type projet_ficheUncheckedUpdateManyWithoutProjetInput = {
     id?: IntFieldUpdateOperationsInput | number
-    fiche_id?: IntFieldUpdateOperationsInput | number
+    fiche_id?: StringFieldUpdateOperationsInput | string
     type?: EnumFicheTypeFieldUpdateOperationsInput | $Enums.FicheType
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     user_id?: StringFieldUpdateOperationsInput | string
@@ -48037,7 +47997,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionCreateManyEstimationInput = {
     id?: string
-    fiche_solution_id: number
+    fiche_solution_id: string
     quantite?: number | null
     cout_min_investissement: number
     cout_max_investissement: number
@@ -48072,7 +48032,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionUpdateWithoutEstimationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -48087,7 +48047,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionUncheckedUpdateWithoutEstimationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -48102,7 +48062,7 @@ export namespace Prisma {
 
   export type estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    fiche_solution_id?: IntFieldUpdateOperationsInput | number
+    fiche_solution_id?: StringFieldUpdateOperationsInput | string
     quantite?: NullableIntFieldUpdateOperationsInput | number | null
     cout_min_investissement?: IntFieldUpdateOperationsInput | number
     cout_max_investissement?: IntFieldUpdateOperationsInput | number
@@ -48172,7 +48132,7 @@ export namespace Prisma {
 
   export type estimation_materiauxCreateManyEstimation_fiche_solutionInput = {
     id?: string
-    materiau_id: number
+    materiau_id: string
     quantite: number
     cout_investissement_override?: number | null
     cout_entretien_override?: number | null
@@ -48182,7 +48142,7 @@ export namespace Prisma {
 
   export type estimation_materiauxUpdateWithoutEstimation_fiche_solutionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    materiau_id?: IntFieldUpdateOperationsInput | number
+    materiau_id?: StringFieldUpdateOperationsInput | string
     quantite?: IntFieldUpdateOperationsInput | number
     cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
     cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
@@ -48192,7 +48152,7 @@ export namespace Prisma {
 
   export type estimation_materiauxUncheckedUpdateWithoutEstimation_fiche_solutionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    materiau_id?: IntFieldUpdateOperationsInput | number
+    materiau_id?: StringFieldUpdateOperationsInput | string
     quantite?: IntFieldUpdateOperationsInput | number
     cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
     cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null
@@ -48202,7 +48162,7 @@ export namespace Prisma {
 
   export type estimation_materiauxUncheckedUpdateManyWithoutEstimation_fiche_solutionInput = {
     id?: StringFieldUpdateOperationsInput | string
-    materiau_id?: IntFieldUpdateOperationsInput | number
+    materiau_id?: StringFieldUpdateOperationsInput | string
     quantite?: IntFieldUpdateOperationsInput | number
     cout_investissement_override?: NullableIntFieldUpdateOperationsInput | number | null
     cout_entretien_override?: NullableIntFieldUpdateOperationsInput | number | null

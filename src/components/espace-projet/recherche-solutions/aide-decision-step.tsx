@@ -22,12 +22,12 @@ export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
     return <AideDecisionStepSkeleton />;
   }
 
-  if (!!etape?.attributes.etapes_suivantes?.data && etape?.attributes.etapes_suivantes?.data?.length > 0) {
+  if (!!etape?.etapes_suivantes?.length && etape?.etapes_suivantes?.length > 0) {
     return (
       <div>
         {historique && (
           <FilDArianeAvecBouton
-            currentPageLabel={etape.attributes.nom}
+            currentPageLabel={etape.nom}
             segments={historique.map((step) => ({
               label: step.label,
               onClick: () => setAideDecisionStep(step.slug),
@@ -36,11 +36,11 @@ export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
         )}
         <div className="block flex-row justify-items-center md:flex">
           <div className="grow">
-            <h2 className={"mb-10 text-center text-xl"}>{etape.attributes.question_suivante}</h2>
+            <h2 className={"mb-10 text-center text-xl"}>{etape.question_suivante}</h2>
             <ul className="flex list-none flex-wrap justify-center p-0">
-              {etape.attributes.etapes_suivantes.data.map((aideDecision) => (
-                <li key={aideDecision.id} className="m-3 flex w-96 md:w-[220px]">
-                  <AideDecisionEtapeCard etapeAttributes={aideDecision.attributes} />
+              {etape.etapes_suivantes.map((aideDecision) => (
+                <li key={aideDecision.documentId} className="m-3 flex w-96 md:w-[220px]">
+                  <AideDecisionEtapeCard etapeAttributes={aideDecision} />
                 </li>
               ))}
             </ul>
@@ -50,12 +50,7 @@ export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
     );
   } else {
     if (etape) {
-      return (
-        <AideDecisionResultContainer
-          aideDecisionEtapeHistory={historique}
-          aideDecisionEtapeAttributes={etape.attributes}
-        />
-      );
+      return <AideDecisionResultContainer aideDecisionEtapeHistory={historique} aideDecisionEtapeAttributes={etape} />;
     } else if (error) {
       customCaptureException(`Erreur lors de la récupération de l'étape d'aide à la décision ${currentStep}`, error);
       return <p>Une erreur est survenue lors du chargement de cette étape.</p>;

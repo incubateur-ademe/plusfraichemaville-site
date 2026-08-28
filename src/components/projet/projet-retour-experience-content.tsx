@@ -24,34 +24,32 @@ type RetourExperienceContentProps = {
 
 export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExperienceContentProps) => {
   const creditsImage = getCreditsImageForRetourExperience(retourExperience);
-  const solutions = retourExperience.attributes.solution_retour_experiences?.data;
-  const linkedRetourExperiences = retourExperience.attributes.retour_experiences?.data;
+  const solutions = retourExperience.solution_retour_experiences;
+  const linkedRetourExperiences = retourExperience.retour_experiences;
   return (
     <>
-      <link rel="canonical" href={getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(retourExperience.attributes.slug))} />
+      <link rel="canonical" href={getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(retourExperience.slug))} />
       <div className={clsx("h-max", isModal && "-mx-8")}>
         <ImageLoader
           width={1920}
           height={384}
           className="block max-h-40 min-h-96 w-full object-cover md:max-h-96"
-          src={getStrapiImageUrl(retourExperience.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
-          alt={retourExperience.attributes.titre || "image titre"}
+          src={getStrapiImageUrl(retourExperience.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
+          alt={retourExperience.titre || "image titre"}
           unoptimized
         />
       </div>
       <div className="fr-container flex flex-col md:flex-row">
         <RetourExperienceExtraInfoPanel retourExperience={retourExperience} />
         <div className="min-w-0 flex-1  md:pl-12">
-          <h1 className={"!mb-3 mt-4 text-3xl md:text-[2.5rem] md:leading-[3rem]"}>
-            {retourExperience.attributes.titre}
-          </h1>
-          <PublishInformation updatedAt={retourExperience.attributes.updatedAt} />
+          <h1 className={"!mb-3 mt-4 text-3xl md:text-[2.5rem] md:leading-[3rem]"}>{retourExperience.titre}</h1>
+          <PublishInformation updatedAt={retourExperience.updatedAt} />
           <CmsRichText
-            label={retourExperience.attributes.description}
+            label={retourExperience.description}
             className={"mt-8 text-xl leading-8 [&_p]:text-xl [&_p]:leading-8"}
           />
-          {!isEmpty(retourExperience.attributes.citations) &&
-            retourExperience.attributes.citations.map((citation) => (
+          {!isEmpty(retourExperience.citations) &&
+            retourExperience.citations.map((citation) => (
               <CustomDSFRQuote key={citation.auteur} citation={citation} className="mt-12" />
             ))}
           <EspaceProjetIncentiveBanner
@@ -63,7 +61,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             <div className="flex-1">
               <SituationRetourExperienceCard
                 titre="Avant le projet"
-                situation={retourExperience.attributes.situation_avant}
+                situation={retourExperience.situation_avant}
                 className={clsx("h-full", isModal && "w-96")}
               />
             </div>
@@ -76,7 +74,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             <div className="flex-1">
               <SituationRetourExperienceCard
                 titre="Après le projet"
-                situation={retourExperience.attributes.situation_apres}
+                situation={retourExperience.situation_apres}
                 className={clsx("h-full", isModal && "w-96")}
               />
             </div>
@@ -87,7 +85,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
               {solutions.map((solution) => (
                 <SolutionRetourExperienceCard
                   solution={solution}
-                  key={solution.id}
+                  key={solution.documentId}
                   displayFicheSolutionCard={isModal}
                   className={clsx("mb-4", isModal && "!mb-12 flex-col lg:flex-row")}
                 />
@@ -97,18 +95,14 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
               </GenericLink>
             </>
           )}
-          {!isEmpty(retourExperience.attributes.calendrier) && !isModal && (
+          {!isEmpty(retourExperience.calendrier) && !isModal && (
             <div className="fr-accordions-group">
               <h2 className="mb-6 mt-10 text-3xl">Calendrier</h2>
-              <CalendrierRetourExperienceAccordion etapes={retourExperience.attributes.calendrier} />
+              <CalendrierRetourExperienceAccordion etapes={retourExperience.calendrier} />
             </div>
           )}
-          <ItemRetourExperience
-            title="Budget et financements"
-            content={retourExperience.attributes.financement}
-            level="title"
-          />
-          {retourExperience.attributes.financement && (
+          <ItemRetourExperience title="Budget et financements" content={retourExperience.financement} level="title" />
+          {retourExperience.financement && (
             <EspaceProjetIncentiveBanner
               message="Découvrez tous les financements pour votre projet en vous inscrivant."
               className="md:my-6"
@@ -116,35 +110,21 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
             />
           )}
 
-          <ItemRetourExperience
-            title="Difficultés rencontrées"
-            content={retourExperience.attributes.difficultes}
-            level="title"
-          />
-          {(retourExperience.attributes.partenaires ||
-            retourExperience.attributes.ressources ||
-            retourExperience.attributes.credits) && (
+          <ItemRetourExperience title="Difficultés rencontrées" content={retourExperience.difficultes} level="title" />
+          {(retourExperience.partenaires || retourExperience.ressources || retourExperience.credits) && (
             <>
               <h2 className="mb-4 mt-10 text-3xl">Pour en savoir plus</h2>
-              <ItemRetourExperience
-                title="Partenaires"
-                content={retourExperience.attributes.partenaires}
-                level="subtitle"
-              />
-              <ItemRetourExperience
-                title="Ressources"
-                content={retourExperience.attributes.ressources}
-                level="subtitle"
-              />
-              <ItemRetourExperience title="Crédits" content={retourExperience.attributes.credits} level="subtitle" />
+              <ItemRetourExperience title="Partenaires" content={retourExperience.partenaires} level="subtitle" />
+              <ItemRetourExperience title="Ressources" content={retourExperience.ressources} level="subtitle" />
+              <ItemRetourExperience title="Crédits" content={retourExperience.credits} level="subtitle" />
             </>
           )}
           {!!(linkedRetourExperiences && linkedRetourExperiences.length > 0 && !isModal) && (
             <div className="mt-12 rounded-2xl bg-dsfr-background-alt-grey p-8">
               <h2 className="mb-3 text-3xl">Découvrir d{"'"}autres projets réalisés</h2>
               <ul className="mb-6 flex grow list-none gap-6 overflow-x-auto !p-0">
-                {retourExperience.attributes.retour_experiences?.data.map((rex) => (
-                  <li key={rex.id}>
+                {retourExperience.retour_experiences?.map((rex) => (
+                  <li key={rex.documentId}>
                     <RetourExperienceCard retourExperience={rex} />
                   </li>
                 ))}

@@ -102,13 +102,13 @@ const computeRemindToDoEstimationEmailParam = (
     projetName: projet.nom,
     userPrenom: projet.creator.prenom || "",
     ...(chosenFichesSolutions[0] && {
-      nomSolution1: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[0].fiche_id)?.attributes.titre,
+      nomSolution1: allFichesSolutions.find((fs) => fs.documentId == chosenFichesSolutions[0].fiche_id)?.titre,
     }),
     ...(chosenFichesSolutions[1] && {
-      nomSolution2: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[1].fiche_id)?.attributes.titre,
+      nomSolution2: allFichesSolutions.find((fs) => fs.documentId == chosenFichesSolutions[1].fiche_id)?.titre,
     }),
     ...(chosenFichesSolutions[2] && {
-      nomSolution3: allFichesSolutions.find((fs) => fs.id == chosenFichesSolutions[2].fiche_id)?.attributes.titre,
+      nomSolution3: allFichesSolutions.find((fs) => fs.documentId == chosenFichesSolutions[2].fiche_id)?.titre,
     }),
     plusDeTroisSolutions: chosenFichesSolutions.length > 3,
     urlModule4: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(projet.id)),

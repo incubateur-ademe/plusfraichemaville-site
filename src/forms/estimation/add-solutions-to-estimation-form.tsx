@@ -20,7 +20,7 @@ import { trackEvent } from "@/src/helpers/matomo/track-matomo";
 type AddSolutionsToEstimationFormProps = {
   estimation: EstimationWithAides;
   currentProjet: ProjetWithRelations;
-  fichesSolutionsIdsNotInEstimation: number[];
+  fichesSolutionsIdsNotInEstimation: string[];
 };
 
 export const AddSolutionsToEstimationForm = ({

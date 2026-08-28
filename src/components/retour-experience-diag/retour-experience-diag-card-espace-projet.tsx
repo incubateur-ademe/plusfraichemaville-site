@@ -22,7 +22,7 @@ export const RetourExperienceDiagCardEspaceProjet = ({
 }: RetourExperienceDiagCardEspaceProjetProps) => {
   if (!rex) return null;
 
-  const { titre, image_principale, contacts, slug, lieu } = rex.attributes;
+  const { titre, image_principale, contacts, slug, lieu } = rex;
 
   const collectivite = contacts?.filter((contact) => contact.type_de_contact === TypeDeContact.Collectivite)[0];
   const prestataire = contacts?.filter((contact) => contact.type_de_contact !== TypeDeContact.Collectivite)[0];
@@ -48,14 +48,14 @@ export const RetourExperienceDiagCardEspaceProjet = ({
 
       <div className="px-8">
         <h2 className="mb-5 text-[1.375rem] leading-7">{titre}</h2>
-        {rex.attributes.lien_rex_diagnostics && (
+        {rex.lien_rex_diagnostics && (
           <div className="mb-7 flex flex-wrap items-center gap-2">
-            {rex.attributes.lien_rex_diagnostics.data.map(
+            {rex.lien_rex_diagnostics.map(
               (lienRex) =>
-                lienRex.attributes.fiche_diagnostic && (
+                lienRex.fiche_diagnostic && (
                   <RetourExperienceDiagCardPicto
-                    ficheDiagnostic={lienRex.attributes.fiche_diagnostic.data}
-                    key={lienRex.attributes.fiche_diagnostic.data.id}
+                    ficheDiagnostic={lienRex.fiche_diagnostic}
+                    key={lienRex.fiche_diagnostic.documentId}
                   />
                 ),
             )}

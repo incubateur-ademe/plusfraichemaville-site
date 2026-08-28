@@ -55,9 +55,9 @@ export default async function SitemapPage() {
                   <LinkWithoutPrefetch href={PFMV_ROUTES.FICHES_SOLUTIONS}>Fiches solutions</LinkWithoutPrefetch>
                   <ul>
                     {allFichesSolutions.map((ficheSolution) => (
-                      <li key={ficheSolution.id}>
-                        <LinkWithoutPrefetch href={PFMV_ROUTES.FICHE_SOLUTION(ficheSolution.attributes.slug)}>
-                          {ficheSolution.attributes.titre}
+                      <li key={ficheSolution.documentId}>
+                        <LinkWithoutPrefetch href={PFMV_ROUTES.FICHE_SOLUTION(ficheSolution.slug)}>
+                          {ficheSolution.titre}
                         </LinkWithoutPrefetch>
                       </li>
                     ))}
@@ -69,11 +69,9 @@ export default async function SitemapPage() {
                   </LinkWithoutPrefetch>
                   <ul>
                     {allRetourExperiences.map((retourExperience) => (
-                      <li key={retourExperience.id}>
-                        <LinkWithoutPrefetch
-                          href={PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(retourExperience.attributes.slug)}
-                        >
-                          {retourExperience.attributes.titre}
+                      <li key={retourExperience.documentId}>
+                        <LinkWithoutPrefetch href={PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(retourExperience.slug)}>
+                          {retourExperience.titre}
                         </LinkWithoutPrefetch>
                       </li>
                     ))}
@@ -83,11 +81,11 @@ export default async function SitemapPage() {
                   Méthodes de diagnostic
                   <ul>
                     {allFichesDiagnostic.map((ficheDiagnostic) => (
-                      <li key={ficheDiagnostic.id}>
+                      <li key={ficheDiagnostic.documentId}>
                         <LinkWithoutPrefetch
-                          href={PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug)}
+                          href={PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(ficheDiagnostic.slug)}
                         >
-                          {ficheDiagnostic.attributes.titre}
+                          {ficheDiagnostic.titre}
                         </LinkWithoutPrefetch>
                       </li>
                     ))}
@@ -99,11 +97,9 @@ export default async function SitemapPage() {
                   </LinkWithoutPrefetch>
                   <ul>
                     {allRetourExperiencesDiag.map((retourExperienceDiag) => (
-                      <li key={retourExperienceDiag.id}>
-                        <LinkWithoutPrefetch
-                          href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(retourExperienceDiag.attributes.slug)}
-                        >
-                          {retourExperienceDiag.attributes.titre}
+                      <li key={retourExperienceDiag.documentId}>
+                        <LinkWithoutPrefetch href={PFMV_ROUTES.RETOUR_EXPERIENCE_DIAGNOSTIC(retourExperienceDiag.slug)}>
+                          {retourExperienceDiag.titre}
                         </LinkWithoutPrefetch>
                       </li>
                     ))}

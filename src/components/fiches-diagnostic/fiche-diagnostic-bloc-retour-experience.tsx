@@ -9,10 +9,10 @@ import { RetourExperienceDiagCard } from "../retour-experience-diag/retour-exper
 import { isEmpty } from "@/src/helpers/listUtils";
 
 export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
-  const { attributes } = ficheDiagnostic;
+  const attributes = ficheDiagnostic;
 
   const rex = attributes.lien_rex_diagnostics ?? [];
-  if (isEmpty(rex.data)) {
+  if (isEmpty(rex)) {
     return null;
   }
 
@@ -38,10 +38,10 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
       >
         <div className="px-6">
           <SplideTrack className="py-5 !pl-1">
-            {rex?.data.map((r, index) => (
+            {rex?.map((r, index) => (
               <SplideSlide key={index}>
                 <RetourExperienceDiagCard
-                  rex={r.attributes.retour_experience_diagnostic?.data}
+                  rex={r.retour_experience_diagnostic}
                   className="h-full max-w-[27rem]"
                   key={index}
                 />

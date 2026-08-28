@@ -13,17 +13,39 @@ import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "@/src/lib/stra
 import { APIResponseCollection } from "@/src/lib/strapi/types/strapi-custom-types";
 import { RetourExperienceDiagnostic } from "../types/api/retour-experience-diagnostic";
 
-const GET_RETOUR_EXPERIENCE_DIAG_STORY_DATA = (strapiFilter: StrapiFilter) => ` 
+const GET_RETOUR_EXPERIENCE_DIAG_STORY_DATA = (strapiFilter: StrapiFilter) => `
   ${STRAPI_IMAGE_FRAGMENT}
   query {
     retourExperienceDiagnostics ${strapiFilter.wholeFilterString()} {
-      data {
-        id
-        attributes {
+      documentId
+      titre
+      lieu
+      slug
+      image_principale {
+        ...ImageInfo
+      }
+    }
+  }`;
+
+const GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA = (strapiFilter: StrapiFilter) => `
+  ${STRAPI_IMAGE_FRAGMENT}
+  query {
+    retourExperienceDiagnostics ${strapiFilter.wholeFilterString()} {
+      documentId
+      titre
+      lieu
+      slug
+      image_principale {
+        ...ImageInfo
+      }
+      lien_rex_diagnostics {
+        documentId
+        description
+        fiche_diagnostic {
+          documentId
           titre
-          lieu
-          slug
-          image_principale {
+          nom_scientifique
+          image_icone {
             ...ImageInfo
           }
         }
@@ -31,112 +53,62 @@ const GET_RETOUR_EXPERIENCE_DIAG_STORY_DATA = (strapiFilter: StrapiFilter) => `
     }
   }`;
 
-const GET_RETOUR_EXPERIENCE_DIAG_CARD_DATA = (strapiFilter: StrapiFilter) => ` 
-  ${STRAPI_IMAGE_FRAGMENT}
-  query {
-    retourExperienceDiagnostics ${strapiFilter.wholeFilterString()} {
-      data {
-        id
-        attributes {
-          titre
-          lieu
-          slug
-          image_principale {
-            ...ImageInfo
-          }
-          lien_rex_diagnostics {
-            data {
-              id
-              attributes {
-                description
-                fiche_diagnostic {
-                  data {
-                    id
-                    attributes {
-                      titre
-                      nom_scientifique
-                      image_icone {
-                        ...ImageInfo
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }`;
-
-const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) => ` 
+const GET_RETOUR_EXPERIENCE_DIAG_COMPLETE_DATA = (strapiFilter: StrapiFilter) => `
   ${STRAPI_IMAGE_FRAGMENT}
   ${CITATION_FRAGMENT}
   ${CONTACT_FRAGMENT}
   ${IMAGE_WITH_CAPTION_FRAGMENT}
   query {
     retourExperienceDiagnostics ${strapiFilter.wholeFilterString()} {
-      data {
-        id
-        attributes {
-          publishedAt
-          updatedAt
+      documentId
+      publishedAt
+      updatedAt
+      titre
+      lieu
+      description
+      slug
+      image_principale {
+        ...ImageInfo
+      }
+      citations {
+        ...CitationInfo
+      }
+      collectivite_info
+      climat_actuel
+      climat_futur
+      annee_realisation
+      cout_description
+      financements
+      besoin
+      resultats
+      resultats_images {
+        ...ImageWithCaptionInfo
+      }
+      points_vigilance
+      apres
+      lien_rex_diagnostics {
+        documentId
+        description
+        fiche_diagnostic {
+          documentId
           titre
-          lieu
-          description
+          nom_scientifique
+          echelle_thermique
           slug
-          image_principale {
+          image_icone {
             ...ImageInfo
-          }
-          citations {
-            ...CitationInfo
-          }
-          collectivite_info
-          climat_actuel
-          climat_futur
-          annee_realisation
-          cout_description
-          financements
-          besoin
-          resultats
-          resultats_images {
-            ...ImageWithCaptionInfo
-          }
-          points_vigilance
-          apres
-          lien_rex_diagnostics {
-            data {
-              id
-              attributes {
-                description
-                fiche_diagnostic {
-                  data {
-                    id
-                    attributes {
-                      titre
-                      nom_scientifique
-                      echelle_thermique
-                      slug
-                      image_icone {
-                        ...ImageInfo
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-          contacts {
-            ...ContactInfo
-          }
-          credits
-          guide_pdf {
-            ...ImageInfo
-          }
-          resultats_images {
-            ...ImageWithCaptionInfo
           }
         }
+      }
+      contacts {
+        ...ContactInfo
+      }
+      credits
+      guide_pdf {
+        ...ImageInfo
+      }
+      resultats_images {
+        ...ImageWithCaptionInfo
       }
     }
   }`;

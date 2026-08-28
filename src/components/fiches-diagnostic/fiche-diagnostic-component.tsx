@@ -10,10 +10,7 @@ type FicheDiagnosticProps = {
 export const FicheDiagnosticComponent = ({ ficheDiagnostic }: FicheDiagnosticProps) => {
   return (
     <>
-      <link
-        rel="canonical"
-        href={getFullUrl(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug))}
-      />
+      <link rel="canonical" href={getFullUrl(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(ficheDiagnostic.slug))} />
       <FicheDiagnosticHeader ficheDiagnostic={ficheDiagnostic} />
       <FicheDiagnosticBlocs ficheDiagnostic={ficheDiagnostic} />
     </>

@@ -11,12 +11,11 @@ export default async function RetoursExperiences({
 }) {
   const allRetoursExperiences = await getRetoursExperiences();
   const filteredRetoursExperiences = allRetoursExperiences
-    .filter((re) => !searchParams.espaceFilter || re.attributes.types_espaces?.includes(searchParams.espaceFilter))
+    .filter((re) => !searchParams.espaceFilter || re.types_espaces?.includes(searchParams.espaceFilter))
     .filter(
       (re) =>
         !searchParams.regionFilter ||
-        (re.attributes.region?.data.attributes.code &&
-          searchParams.regionFilter?.split(",").includes(re.attributes.region.data.attributes.code)),
+        (re.region?.code && searchParams.regionFilter?.split(",").includes(re.region.code)),
     );
 
   return (
@@ -31,7 +30,7 @@ export default async function RetoursExperiences({
           <div className="grow list-none flex-wrap justify-center p-0">
             <ul className="flex grow list-none flex-wrap justify-center gap-6 p-0 md:justify-normal">
               {filteredRetoursExperiences.map((retourExperience) => (
-                <li key={retourExperience.id}>
+                <li key={retourExperience.documentId}>
                   <RetourExperienceCard retourExperience={retourExperience} titleHeadingLevel="h2" />
                 </li>
               ))}

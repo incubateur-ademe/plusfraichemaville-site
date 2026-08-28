@@ -8,7 +8,7 @@ import { getStrapiImageUrl } from "@/src/lib/strapi/strapiClient";
 import { captureError } from "@/src/lib/sentry/sentryCustomMessage";
 
 type AquagirRetourExperience = {
-  id: number;
+  id: string;
   titre: string;
   description: string;
   contenu: string;
@@ -19,28 +19,26 @@ type AquagirRetourExperience = {
 };
 
 const rexToAquagirRex = (rex: RetourExperience): AquagirRetourExperience => ({
-  id: rex.id,
-  titre: rex.attributes.titre,
-  description: rex.attributes.description,
+  id: rex.documentId,
+  titre: rex.titre,
+  description: rex.description,
   contenu: join(
     [
-      rex.attributes.titre,
-      rex.attributes.citations.map((citation) => `${citation.auteur}  ${citation.texte}`).join(" "),
-      rex.attributes.description,
-      rex.attributes.solution_retour_experiences?.data
-        .map((sol) => ` ${sol.attributes.titre} ${sol.attributes.description} `)
-        .join(" "),
-      rex.attributes.situation_avant?.description,
-      rex.attributes.situation_apres?.description,
-      rex.attributes.partenaires,
-      rex.attributes.credits,
+      rex.titre,
+      rex.citations.map((citation) => `${citation.auteur}  ${citation.texte}`).join(" "),
+      rex.description,
+      rex.solution_retour_experiences?.map((sol) => ` ${sol.titre} ${sol.description} `).join(" "),
+      rex.situation_avant?.description,
+      rex.situation_apres?.description,
+      rex.partenaires,
+      rex.credits,
     ],
     " ",
   ),
-  url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rex.attributes.slug)),
-  codeInsee: (rex.attributes.location as GeoJsonAdresse).properties.citycode,
-  datePublication: rex.attributes.publishedAt,
-  image: getStrapiImageUrl(rex.attributes.image_principale, "medium"),
+  url: getFullUrl(PFMV_ROUTES.RETOUR_EXPERIENCE_PROJET(rex.slug)),
+  codeInsee: (rex.location as GeoJsonAdresse).properties.citycode,
+  datePublication: rex.publishedAt,
+  image: getStrapiImageUrl(rex.image_principale, "medium"),
 });
 
 export async function GET() {

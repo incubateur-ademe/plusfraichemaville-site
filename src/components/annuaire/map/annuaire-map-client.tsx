@@ -33,7 +33,7 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
 
   const mapRef = useRef<MapRef>(null);
   const currentProjetCoordinates = useCurrentProjetCoordinates();
-  const selectMarkerByProjetId = useCallback((markerType: CustomMarker["type"], idProjet?: number) => {
+  const selectMarkerByProjetId = useCallback((markerType: CustomMarker["type"], idProjet?: string | number) => {
     const marker = markers.find((marker) => marker.type === markerType && marker.idProjet === idProjet);
     if (marker) {
       setSelectedMarker(marker);
@@ -41,7 +41,7 @@ const AnnuaireMapClient = ({ markers, mapFocus, className }: AnnuaireMapClientPr
     }
   }, []);
 
-  const focusMarkerByProjetId = useCallback((markerType: CustomMarker["type"], idProjet?: number) => {
+  const focusMarkerByProjetId = useCallback((markerType: CustomMarker["type"], idProjet?: string | number) => {
     const marker = markers.find((marker) => marker.type === markerType && marker.idProjet === idProjet);
     if (marker) {
       setFocusedMarker(marker);

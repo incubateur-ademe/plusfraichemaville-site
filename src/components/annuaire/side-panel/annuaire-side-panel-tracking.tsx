@@ -14,7 +14,7 @@ export const AnnuaireSidePanelTracking = ({
 }: {
   type: "rex" | "in-progress";
   name: string;
-  clickedProjetId: number;
+  clickedProjetId: string | number;
 }) => {
   const hasTracked = useRef(false);
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
@@ -31,7 +31,7 @@ export const AnnuaireSidePanelTracking = ({
 
   useEffect(() => {
     if (userId && currentProjetId) {
-      addAnnuaireProjetClickedAction(userId, currentProjetId, +clickedProjetId, type);
+      addAnnuaireProjetClickedAction(userId, currentProjetId, clickedProjetId, type);
     }
   }, [userId, currentProjetId, type, clickedProjetId]);
 

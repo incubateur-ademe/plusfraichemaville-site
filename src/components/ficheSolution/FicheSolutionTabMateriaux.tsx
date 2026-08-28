@@ -8,18 +8,18 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import FicheSolutionMateriauxEstimationIncentive from "@/src/components/ficheSolution/fiche-solution-materiaux-estimation-incentive";
 
 export default function FicheSolutionTabMateriaux({ ficheSolution: ficheSolution }: { ficheSolution: FicheSolution }) {
-  const ficheAttributes = ficheSolution.attributes;
+  const ficheAttributes = ficheSolution;
   const displayEntretienPanel =
     ficheAttributes.cout_minimum_entretien != null && ficheAttributes.cout_maximum_entretien != null;
 
   return (
     <>
       <h2 className="mb-8 text-[1.75rem] font-bold text-dsfr-text-title-grey">Matériaux et coûts</h2>
-      <FicheSolutionMateriauxEstimationIncentive ficheId={ficheSolution.id} />
-      {ficheAttributes.materiaux?.data && ficheAttributes.materiaux.data.length > 0 ? (
+      <FicheSolutionMateriauxEstimationIncentive ficheId={ficheSolution.documentId} />
+      {ficheAttributes.materiaux && ficheAttributes.materiaux.length > 0 ? (
         <>
           <hr className="h-[1px] p-0" />
-          {ficheAttributes.materiaux.data.map(({ attributes: mat }) => (
+          {ficheAttributes.materiaux.map((mat) => (
             <div key={mat.titre}>
               <div className={"flex flex-col justify-between gap-1 md:flex-row md:gap-6"}>
                 <div className="relative mt-8 hidden h-28 w-28 flex-none md:flex">

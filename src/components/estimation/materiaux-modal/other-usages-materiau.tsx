@@ -7,8 +7,8 @@ import { useFichesSolutionsTitles } from "@/src/hooks/use-fiches-solutions-title
 import clsx from "clsx";
 
 interface OtherUsagesMateriauProps {
-  materiauId: number;
-  ficheSolutionId: number;
+  materiauId: string;
+  ficheSolutionId: string;
   currentMateriauQuantity?: number;
   allEstimationsFichesSolutions: EstimationFicheSolution[];
   materiau: Materiau | undefined;
@@ -30,15 +30,15 @@ export default function OtherUsagesMateriau({
   const otherUsages =
     allEstimationsFichesSolutions?.filter(
       (efs) =>
-        +efs.fiche_solution_id !== +ficheSolutionId &&
-        efs.estimation_materiaux.some((em) => +em.materiau_id === +materiauId),
+        efs.fiche_solution_id !== ficheSolutionId &&
+        efs.estimation_materiaux.some((em) => em.materiau_id === materiauId),
     ) || [];
 
-  const uniteCoutMateriau = getUniteCoutFromCode(materiau?.attributes.cout_unite);
+  const uniteCoutMateriau = getUniteCoutFromCode(materiau?.cout_unite);
 
   const otherQuantity = otherUsages.reduce((acc, efs) => {
     const em = efs.estimation_materiaux.find(
-      (m) => +m.materiau_id === +materiauId && +efs.fiche_solution_id !== +ficheSolutionId,
+      (m) => m.materiau_id === materiauId && efs.fiche_solution_id !== ficheSolutionId,
     );
     return acc + (em?.quantite || 0);
   }, 0);

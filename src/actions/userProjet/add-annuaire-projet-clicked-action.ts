@@ -13,7 +13,7 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 export const addAnnuaireProjetClickedAction = async (
   userId: string,
   projetId: number,
-  clickedProjetId: number,
+  clickedProjetId: string | number,
   type: "rex" | "in-progress",
 ): Promise<ResponseAction> => {
   try {
@@ -23,7 +23,10 @@ export const addAnnuaireProjetClickedAction = async (
       return { type: "error", message: "UNAUTHENTICATED" };
     }
 
-    if (isNaN(+clickedProjetId) || !new PermissionManager(session).canUpdateUser(userId)) {
+    const isValidClickedProjetId =
+      type === "rex" ? typeof clickedProjetId === "string" && !!clickedProjetId : !isNaN(+clickedProjetId);
+
+    if (!isValidClickedProjetId || !new PermissionManager(session).canUpdateUser(userId)) {
       return { type: "error", message: "UNAUTHORIZED" };
     }
 
@@ -34,15 +37,17 @@ export const addAnnuaireProjetClickedAction = async (
     }
 
     if (type === "rex") {
-      if (userProjet.annuaire_rex_projet_clicked.includes(clickedProjetId)) {
+      const rexId = clickedProjetId as string;
+      if (userProjet.annuaire_rex_projet_clicked.includes(rexId)) {
         return { type: "success" };
       }
-      await addAnnuaireRexProjetClickedToUserProjet(userId, projetId, clickedProjetId);
+      await addAnnuaireRexProjetClickedToUserProjet(userId, projetId, rexId);
     } else {
-      if (userProjet.annuaire_in_progess_clicked.includes(clickedProjetId)) {
+      const inProgressProjetId = clickedProjetId as number;
+      if (userProjet.annuaire_in_progess_clicked.includes(inProgressProjetId)) {
         return { type: "success" };
       }
-      await addAnnuaireInProgressProjetClickedToUserProjet(userId, projetId, clickedProjetId);
+      await addAnnuaireInProgressProjetClickedToUserProjet(userId, projetId, inProgressProjetId);
     }
 
     return { type: "success" };

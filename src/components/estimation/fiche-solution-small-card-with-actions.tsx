@@ -16,13 +16,13 @@ export const FicheSolutionSmallCardWithActions = ({
   isEditMode,
   onEdit,
 }: {
-  ficheSolutionId: number;
+  ficheSolutionId: string;
   estimation: EstimationWithAides;
   isEditMode?: boolean;
-  onEdit(ficheSolutionId: number): void;
+  onEdit(ficheSolutionId: string): void;
 }) => {
   const { data: ficheSolutionData } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(ficheSolutionId),
+    makeFicheSolutionCompleteUrlApi([ficheSolutionId]),
   );
   const ficheSolution = ficheSolutionData?.[0];
 
@@ -48,7 +48,7 @@ export const FicheSolutionSmallCardWithActions = ({
             <FicheSolutionDeleteModal
               estimation={estimation}
               ficheSolutionId={ficheSolutionId}
-              ficheSolutionTitle={ficheSolution?.attributes.titre || ""}
+              ficheSolutionTitle={ficheSolution?.titre || ""}
             />
           </div>
         )}

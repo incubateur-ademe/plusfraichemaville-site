@@ -15,10 +15,10 @@ export default function ObjectifsDeveloppementDurable({
         <div className={"flex flex-wrap gap-2"}>
           {objectifs.map((odd) => (
             <Image
-              key={odd.attributes.numero}
-              src={`/images/odd/odd${odd.attributes.numero}.svg`}
-              alt={odd.attributes.description || ""}
-              title={odd.attributes.description || ""}
+              key={odd.numero}
+              src={`/images/odd/odd${odd.numero}.svg`}
+              alt={odd.description || ""}
+              title={odd.description || ""}
               width={imageSize}
               height={imageSize}
               className={"rounded-xl"}

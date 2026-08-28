@@ -17,90 +17,70 @@ const GET_RETOUR_EXPERIENCE_COMPLETE_DATA = (
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT}
 ${FICHE_SOLUTION_SMALL_CARD_INFO_FRAGMENT} query {
   retourExperiences ${strapiFilter.wholeFilterString()} {
-    data {
-      id
-      attributes {
-        publishedAt
-        updatedAt
-        titre
-        description
-        slug
-        types_espaces
-        region {
-          data {
-            attributes {
-              code
-            }
-          }
-        }
-        image_principale {
-          ...ImageInfo
-        }
-        citations {
-          auteur
-          texte
-        }
-        situation_avant {
-          description
-          image {
-            ...ImageInfo
-          }
-        }
-        situation_apres {
-          description
-          image {
-            ...ImageInfo
-          }
-        }
-        solution_retour_experiences ${solutionRetourExperienceFilter()} {
-          data {
-            id
-            attributes {
-              titre
-              description
-              image {
-                ...ImageInfo
-              }
-              fiche_solution {
-                data {
-                  ...FicheSolutionSmallCardInfo
-                }
-              }
-            }
-          }
-        }
-        calendrier {
-          id
-          titre
-          date
-          description
-        }
-        financement
-        difficultes
-        partenaires
-        ressources
-        credits
-        types_solutions
-        echelle
-        temporalite
-        climat_actuel
-        climat_futur
-        cout
-        porteur
-        contact
-        odds {
-          data {
-            attributes {
-              numero
-            }
-          }
-        }
-        retour_experiences ${strapiFilter.publicationStateString()} {
-          data {
-            ...RetourExperienceCardInfo
-          }
-        }
+    documentId
+    publishedAt
+    updatedAt
+    titre
+    description
+    slug
+    types_espaces
+    region {
+      code
+    }
+    image_principale {
+      ...ImageInfo
+    }
+    citations {
+      auteur
+      texte
+    }
+    situation_avant {
+      description
+      image {
+        ...ImageInfo
       }
+    }
+    situation_apres {
+      description
+      image {
+        ...ImageInfo
+      }
+    }
+    solution_retour_experiences ${solutionRetourExperienceFilter()} {
+      documentId
+      titre
+      description
+      image {
+        ...ImageInfo
+      }
+      fiche_solution {
+        ...FicheSolutionSmallCardInfo
+      }
+    }
+    calendrier {
+      id
+      titre
+      date
+      description
+    }
+    financement
+    difficultes
+    partenaires
+    ressources
+    credits
+    types_solutions
+    echelle
+    temporalite
+    climat_actuel
+    climat_futur
+    cout
+    porteur
+    contact
+    odds {
+      numero
+    }
+    retour_experiences ${strapiFilter.publicationStateString()} {
+      ...RetourExperienceCardInfo
     }
   }
 }`;
@@ -109,9 +89,7 @@ const GET_RETOUR_EXPERIENCE_CARD_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} query {
     retourExperiences ${strapiFilter.wholeFilterString()} {
-      data {
-        ...RetourExperienceCardInfo
-      }
+      ...RetourExperienceCardInfo
     }
 }`;
 
@@ -119,47 +97,37 @@ const GET_SEARCHABLE_RETOUR_EXPERIENCE_DATA = (
   strapiFilter: StrapiFilter,
 ) => ` ${STRAPI_IMAGE_FRAGMENT} ${RETOUR_EXPERIENCE_CARD_INFO_FRAGMENT} ${SEARCHABLE_REX_PROJET_FRAGMENT} query {
     retourExperiences ${strapiFilter.wholeFilterString()} {
-      data {
-        ...SearchableRexInfo
-      }
+      ...SearchableRexInfo
     }
 }`;
 
 const GET_RETOUR_EXPERIENCE_FOR_AQUAGIR_DATA = (strapiFilter: StrapiFilter) => ` ${STRAPI_IMAGE_FRAGMENT} query {
     retourExperiences ${strapiFilter.wholeFilterString()} {
-      data {
-        id
-        attributes {
-          titre
-          description
-          slug
-          location
-          citations {
-            auteur
-            texte
-          }
-          situation_avant {
-            description
-          }
-          situation_apres {
-            description
-          }
-          solution_retour_experiences {
-            data {
-              id
-              attributes {
-                titre
-                description
-              }
-            }
-          }
-          partenaires
-          credits
-          publishedAt
-          image_principale {
-            ...ImageInfo
-          }
-        }
+      documentId
+      titre
+      description
+      slug
+      location
+      citations {
+        auteur
+        texte
+      }
+      situation_avant {
+        description
+      }
+      situation_apres {
+        description
+      }
+      solution_retour_experiences {
+        documentId
+        titre
+        description
+      }
+      partenaires
+      credits
+      publishedAt
+      image_principale {
+        ...ImageInfo
       }
     }
 }`;
@@ -168,9 +136,7 @@ const GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS = (
   strapiFilter: StrapiFilter,
 ) => ` ${RETOUR_EXPERIENCE_WITH_CONTACTS} query {
     retourExperiences ${strapiFilter.wholeFilterString()} {
-      data {
-        ...RetourExperienceWithContactInfo
-      }
+      ...RetourExperienceWithContactInfo
     }
 }`;
 
@@ -206,7 +172,7 @@ export async function getRetoursExperiencesWithContacts(): Promise<RetourExperie
 }
 
 export async function getRetoursExperiencesWithContactsById(id: string): Promise<RetourExperience | null> {
-  const filter = new StrapiFilter(true, [{ attribute: "id", operator: "eq", value: id, relation: false }]);
+  const filter = new StrapiFilter(true, [{ attribute: "documentId", operator: "eq", value: id, relation: false }]);
   const apiResponse = (
     await strapiGraphQLCall(GET_RETOUR_EXPERIENCE_CARD_DATA_WITH_CONTACTS(filter), {
       tag: `get-rex-with-contacts-${id}`,

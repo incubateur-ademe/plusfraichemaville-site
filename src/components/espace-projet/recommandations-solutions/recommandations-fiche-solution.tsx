@@ -41,7 +41,7 @@ export const RecommandationsFicheSolution = () => {
           ) : (
             <>
               {recommandations.map((fs) => (
-                <FicheSolutionCardWithFetcher complete id={fs.id} key={fs?.id} withoutModal />
+                <FicheSolutionCardWithFetcher complete id={fs.documentId} key={fs?.documentId} withoutModal />
               ))}
             </>
           )}

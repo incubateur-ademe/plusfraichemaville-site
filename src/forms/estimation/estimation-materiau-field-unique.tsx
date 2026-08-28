@@ -7,7 +7,7 @@ import { formatNumberWithSpaces } from "@/src/helpers/common";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 type EstimationMateriauFieldUniqueProps = {
-  ficheSolutionAttributes: FicheSolution["attributes"];
+  ficheSolutionAttributes: FicheSolution;
 } & PropsWithChildren;
 
 export const EstimationMateriauFieldUnique = ({

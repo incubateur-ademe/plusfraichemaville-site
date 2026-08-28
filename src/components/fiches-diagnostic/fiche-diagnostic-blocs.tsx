@@ -28,7 +28,8 @@ export type FicheDiagnosticBloc = {
 };
 
 export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsProps) => {
-  const { attributes, id } = ficheDiagnostic;
+  const attributes = ficheDiagnostic;
+  const { documentId } = attributes;
   const creditsImage = getCreditsImageForFicheDiagnostic(attributes);
   const blocs: FicheDiagnosticBloc[] = [
     {
@@ -67,7 +68,7 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
           )}
         >
           <FicheDiagnosticSideMenu blocs={blocs} />
-          <GenericSaveFiche id={id} type={TypeFiche.diagnostic} className={"mb-2 ml-2 block md:mb-0"} />
+          <GenericSaveFiche id={documentId} type={TypeFiche.diagnostic} className={"mb-2 ml-2 block md:mb-0"} />
           <ButtonShareUrl
             url={getFullUrl(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(attributes.slug))}
             className="my-4 pl-4 md:mb-0 md:mt-4"
@@ -87,14 +88,14 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
               <Separator className="my-10 !h-[1px] !opacity-100" />
             </>
           )}
-          {!isEmpty(attributes.fiches_diagnostics_associees?.data) && (
+          {!isEmpty(attributes.fiches_diagnostics_associees) && (
             <>
               <div>
                 <h3 className="mb-1 text-2xl">Méthodologies associées</h3>
                 <span className="mb-6 block">Consultez les méthodologies de diagnostic associées</span>
                 <div className="flex flex-wrap gap-6">
-                  {attributes.fiches_diagnostics_associees?.data.map((ficheDiagnostic) => (
-                    <FicheDiagnosticCard ficheDiagnostic={ficheDiagnostic} key={ficheDiagnostic.id} />
+                  {attributes.fiches_diagnostics_associees?.map((ficheDiagnostic) => (
+                    <FicheDiagnosticCard ficheDiagnostic={ficheDiagnostic} key={ficheDiagnostic.documentId} />
                   ))}
                 </div>
               </div>

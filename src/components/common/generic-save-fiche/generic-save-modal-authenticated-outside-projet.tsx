@@ -16,7 +16,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
   modal,
   type,
   id: ficheId,
-}: GenericSaveModalCommonProps & { id: number }) => {
+}: GenericSaveModalCommonProps & { id: string }) => {
   const [selectedProjetId, setSelectedProjetId] = useState(-1);
   const [enableTdbButton, setEnableTdbButton] = useState(false);
   const projets = useProjetsStore((state) => state.projets);
@@ -27,7 +27,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
     if (selectedProjetId > 0) {
       const update = await updateFichesProjetAction({
         projetId: selectedProjetId,
-        ficheId: +ficheId,
+        ficheId: ficheId,
         typeFiche: type,
         typeUpdate: TypeUpdate.add,
       });

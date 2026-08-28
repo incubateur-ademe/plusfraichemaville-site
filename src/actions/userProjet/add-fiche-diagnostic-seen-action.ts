@@ -9,7 +9,7 @@ import { PermissionManager } from "@/src/helpers/permission-manager";
 export const addFicheDiagnosticSeenAction = async (
   userId: string,
   projetId: number,
-  ficheDiagnosticId: number,
+  ficheDiagnosticId: string,
 ): Promise<ResponseAction> => {
   try {
     const session = await auth();

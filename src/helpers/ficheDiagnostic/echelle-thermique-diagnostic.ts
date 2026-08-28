@@ -23,7 +23,7 @@ export const getEchellesThermiquesByFicheDiagnostic = (
   ficheDiagnostic?: FicheDiagnostic,
 ): EchelleThermiqueDiagnostic[] => {
   return (
-    ficheDiagnostic?.attributes.echelle_thermique?.map(
+    ficheDiagnostic?.echelle_thermique?.map(
       (codeEchelle: string) =>
         ALL_ECHELLES_THERMIQUES.find((e) => e.code === codeEchelle) || ECHELLE_THERMIQUE_DIAG_ICU,
     ) || []

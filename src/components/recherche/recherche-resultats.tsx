@@ -32,7 +32,7 @@ export const RechercheResultats = ({ className, searchResult }: RechercheResulta
               {fichesSolutions.length > 0 ? (
                 <div className="flex flex-wrap gap-8">
                   {fichesSolutions.map((fiche) => (
-                    <FicheSolutionCard key={fiche.id} ficheSolution={fiche} />
+                    <FicheSolutionCard key={fiche.documentId} ficheSolution={fiche} />
                   ))}
                 </div>
               ) : (
@@ -48,7 +48,7 @@ export const RechercheResultats = ({ className, searchResult }: RechercheResulta
               {ficheDiagnostics.length > 0 ? (
                 <div className="flex flex-wrap gap-8">
                   {ficheDiagnostics.map((fiche) => (
-                    <FicheDiagnosticCard key={fiche.id} ficheDiagnostic={fiche} />
+                    <FicheDiagnosticCard key={fiche.documentId} ficheDiagnostic={fiche} />
                   ))}
                 </div>
               ) : (
@@ -64,7 +64,7 @@ export const RechercheResultats = ({ className, searchResult }: RechercheResulta
               {retoursExperience.length > 0 ? (
                 <div className="flex flex-wrap gap-8">
                   {retoursExperience.map((rex) => (
-                    <RetourExperienceCard key={rex.id} retourExperience={rex} />
+                    <RetourExperienceCard key={rex.documentId} retourExperience={rex} />
                   ))}
                 </div>
               ) : (
@@ -80,7 +80,7 @@ export const RechercheResultats = ({ className, searchResult }: RechercheResulta
               {retoursExperienceDiagnostic.length > 0 ? (
                 <div className="flex flex-wrap gap-8">
                   {retoursExperienceDiagnostic.map((rex) => (
-                    <RetourExperienceDiagCard key={rex.id} rex={rex} />
+                    <RetourExperienceDiagCard key={rex.documentId} rex={rex} />
                   ))}
                 </div>
               ) : (
@@ -96,7 +96,7 @@ export const RechercheResultats = ({ className, searchResult }: RechercheResulta
               {webinaires.length > 0 ? (
                 <div className="flex flex-wrap gap-8">
                   {webinaires.map((webinaire) => (
-                    <WebinaireCard key={webinaire.id} webinaire={webinaire} className="pfmv-flat-card" />
+                    <WebinaireCard key={webinaire.documentId} webinaire={webinaire} className="pfmv-flat-card" />
                   ))}
                 </div>
               ) : (

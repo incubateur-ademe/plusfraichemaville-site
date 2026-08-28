@@ -15,35 +15,32 @@ export default function EstimationMateriauField({
   materiau,
   children,
 }: EstimationMateriauFieldProps & PropsWithChildren) {
-  if (!materiau || materiauHasNoCost(materiau.attributes)) {
+  if (!materiau || materiauHasNoCost(materiau)) {
     return null;
   }
 
   return (
-    <div key={materiau.id}>
+    <div key={materiau.documentId}>
       <hr className="h-[1px] p-0" />
       <div className={"flex flex-col justify-between gap-1 md:flex-row md:gap-6"}>
         <div className="relative mt-8 flex h-28 w-28 flex-none">
           <Image
             fill
             sizes="30vw md:5vw"
-            src={getStrapiImageUrl(materiau.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
-            alt={materiau.attributes.titre}
+            src={getStrapiImageUrl(materiau.image, STRAPI_IMAGE_KEY_SIZE.small)}
+            alt={materiau.titre}
             className={"rounded-2xl object-cover"}
             unoptimized
           />
         </div>
         <div className="mb-0 mt-8 grow text-dsfr-text-title-grey md:mb-8">
           <div className="mb-4 flex items-center gap-6">
-            <h3 className="text-[1.375rem] font-bold">{materiau.attributes.titre}</h3>
+            <h3 className="text-[1.375rem] font-bold">{materiau.titre}</h3>
           </div>
-          <ShowMoreRichText
-            richText={materiau.attributes.description}
-            className={clsx("text-sm", "[&>*:last-child]:m-0")}
-          />
+          <ShowMoreRichText richText={materiau.description} className={clsx("text-sm", "[&>*:last-child]:m-0")} />
           <div className="text-sm text-dsfr-text-mention-grey">
-            <div>{`Coût d'investissement : ${getLabelCoutFourniture(materiau.attributes)}`}</div>
-            <div>{`Coût d'entretien : ${getLabelCoutEntretien(materiau.attributes)}`}</div>
+            <div>{`Coût d'investissement : ${getLabelCoutFourniture(materiau)}`}</div>
+            <div>{`Coût d'entretien : ${getLabelCoutEntretien(materiau)}`}</div>
           </div>
         </div>
         <div className={"flex flex-none flex-col bg-dsfr-contrast-grey p-6 md:w-[18rem]"}>{children}</div>

@@ -13,7 +13,7 @@ import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagn
 import { PublishInformation } from "@/src/components/common/publish-information";
 
 export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
-  const { attributes } = ficheDiagnostic;
+  const attributes = ficheDiagnostic;
   const coutMin = attributes.cout_min;
   const coutMax = attributes.cout_max;
   const delaiMin = attributes.delai_min;
@@ -32,7 +32,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
             )}
           >
             <Image
-              src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
+              src={getStrapiImageUrl(ficheDiagnostic.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
               alt={attributes.titre}
               className="object-contain"
               width={120}
@@ -42,7 +42,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
           </div>
           <div>
             <h1 className="mb-2 max-w-2xl text-2xl md:text-4xl md:leading-[50px]">{attributes.titre}</h1>
-            <PublishInformation updatedAt={ficheDiagnostic.attributes?.updatedAt} className="mb-4" />
+            <PublishInformation updatedAt={ficheDiagnostic?.updatedAt} className="mb-4" />
             <span className="md:text-xl">{attributes.nom_scientifique}</span>
             <div className="mt-4 flex gap-4 uppercase">
               {getEchellesThermiquesByFicheDiagnostic(ficheDiagnostic).map((effet) => (
@@ -56,12 +56,12 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
                 </Tag>
               ))}
             </div>
-            {!isEmpty(ficheDiagnostic.attributes.objectifs) && (
+            {!isEmpty(ficheDiagnostic.objectifs) && (
               <>
                 <Separator className="mb-5 mt-3 !h-[1px] !opacity-100" />
                 <div className="mb-2 font-bold">Objectifs :</div>
                 <ul className="arrow-list">
-                  {ficheDiagnostic.attributes.objectifs.map((objectif) => (
+                  {ficheDiagnostic.objectifs.map((objectif) => (
                     <li key={objectif.description} className="relative !mb-1">
                       {objectif?.description}
                     </li>
