@@ -94,18 +94,18 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="mt-8">
         <h2 className="text-lg font-bold">Sélectionnez les informations que vous souhaitez dans la synthèse.</h2>
-        <ol className="mt-4 list-decimal list-outside pl-6 space-y-4 font-bold">
+        <ol className="mt-4 list-inside !pl-0">
           <li className="fr-h4">
             <span>Contexte et enjeux climatiques</span>
-            <p className="text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
           <li className="fr-h4">
             <span>Diagnostic de l’espace</span>
-            <p className="text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
           <li className="fr-h4">
             <span>Solutions de rafraîchissement retenues</span>
-            <div className="mt-2 font-normal text-base">
+            <div className="mt-4 pl-12 font-normal text-base">
               {!hasSolutions || (!isLoading && (!fichesSolutions || fichesSolutions.length === 0)) ? (
                 <p className="text-base text-dsfr-text-mention-grey">
                   Aucune solution de rafraîchissement ajoutée au projet
@@ -126,15 +126,15 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
           </li>
           <li className="fr-h4">
             <span>Estimation budgétaire</span>
-            <p className="text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
           <li className="fr-h4">
             <span>Aides retenues</span>
-            <p className="text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
           <li className="fr-h4">
             <span>Ressources utiles liées aux solutions de rafraîchissement retenues</span>
-            <p className="text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
         </ol>
       </div>
