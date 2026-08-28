@@ -27,7 +27,7 @@ async function migrateEstimationMateriaux() {
   for (const estimation of estimations) {
     const estimationFichesSolution = (estimation.materiaux || []) as unknown as EstimationMateriauxFicheSolutionJson[];
     // @ts-expect-error the fiches_solutions_id column has been removed since this script was executed.
-    const fichesSolutionIds = estimation.fiches_solutions_id as number[];
+    const fichesSolutionIds = estimation.fiches_solutions_id as string[];
 
     if (!estimationFichesSolution || !Array.isArray(estimationFichesSolution)) {
       console.warn(`Skipping estimation ${estimation.id}: Invalid materiaux format.`);
@@ -54,12 +54,12 @@ async function migrateEstimationMateriaux() {
         });
         const ficheSolutionCms = await getFicheSolutionByIdsComplete([ficheSolutionId]);
 
-        if (ficheSolutionCms[0] && !isEmpty(ficheSolutionCms[0].attributes.materiaux?.data)) {
+        if (ficheSolutionCms[0] && !isEmpty(ficheSolutionCms[0].materiaux)) {
           await tx.estimation_materiaux.createMany({
             data:
-              ficheSolutionCms[0].attributes.materiaux?.data.map((m) => ({
+              ficheSolutionCms[0].materiaux?.map((m) => ({
                 estimation_fiche_solution_id: createdEfs.id,
-                materiau_id: +m.id,
+                materiau_id: m.documentId,
                 quantite: 0,
                 created_at: estimation.created_at,
                 updated_at: estimation.updated_at,
@@ -71,11 +71,14 @@ async function migrateEstimationMateriaux() {
       for (const efs of estimationFichesSolution) {
         const createdEfs = await tx.estimation_fiche_solution.upsert({
           where: {
-            estimation_id_fiche_solution_id: { estimation_id: estimation.id, fiche_solution_id: efs.ficheSolutionId },
+            estimation_id_fiche_solution_id: {
+              estimation_id: estimation.id,
+              fiche_solution_id: String(efs.ficheSolutionId),
+            },
           },
           create: {
             estimation_id: estimation.id,
-            fiche_solution_id: efs.ficheSolutionId,
+            fiche_solution_id: String(efs.ficheSolutionId),
             cout_min_investissement: efs.coutMinInvestissement,
             cout_max_investissement: efs.coutMaxInvestissement,
             cout_min_entretien: efs.coutMinEntretien,
@@ -91,7 +94,7 @@ async function migrateEstimationMateriaux() {
               where: {
                 estimation_fiche_solution_id_materiau_id: {
                   estimation_fiche_solution_id: createdEfs.id,
-                  materiau_id: +em.materiauId,
+                  materiau_id: em.materiauId,
                 },
               },
               data: {
