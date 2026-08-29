@@ -33,7 +33,10 @@ export const exportSyntheseProjetAction = async (
   }
 
   try {
-    const fileBuffer = await generateSyntheseProjetPptx({ projet });
+    const fileBuffer = await generateSyntheseProjetPptx({
+      projet,
+      solutionIds: parse.data.solutionIds,
+    });
 
     return {
       type: "success",

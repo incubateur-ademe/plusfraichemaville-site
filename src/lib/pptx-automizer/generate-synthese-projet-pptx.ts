@@ -1,10 +1,12 @@
-import Automizer, { modify } from "pptx-automizer";
+import Automizer, { modify, XmlElement } from "pptx-automizer";
 import path from "path";
-import { GenerateSyntheseProjetPptxParams, PptxTemplateTag } from "./types";
-import { mergeTextRunsInElement } from "./helpers";
+import { GenerateSyntheseProjetPptxParams, PptxSlide, PptxTemplateTag } from "./types";
+import { mergeTextRunsInElement, replaceTagWithBulletList } from "./helpers";
+import { getFicheSolutionByIds } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 
 export const generateSyntheseProjetPptx = async ({
   projet,
+  solutionIds = [],
   templateFileName = "template_synthese_projet.pptx",
 }: GenerateSyntheseProjetPptxParams): Promise<Buffer> => {
   const templateDir = path.join(process.cwd(), "public", "templates");
@@ -21,6 +23,12 @@ export const generateSyntheseProjetPptx = async ({
 
   const info = await pres.getInfo();
   const slides = info.slidesByTemplate("template");
+
+  const fichesSolutions = solutionIds.length > 0 ? await getFicheSolutionByIds(solutionIds) : [];
+  const fichesSolutionsMap = new Map(fichesSolutions.map((fs) => [fs.documentId, fs.titre]));
+  const titresFichesSolutions = solutionIds
+    .map((id) => fichesSolutionsMap.get(id))
+    .filter((titre): titre is string => Boolean(titre));
 
   const dateGenerationSynthese = new Intl.DateTimeFormat("fr-FR", {
     day: "numeric",
@@ -52,11 +60,17 @@ export const generateSyntheseProjetPptx = async ({
   ];
 
   for (const slideInfo of slides) {
+    if (slideInfo.number === PptxSlide.INTRO_FICHES_SOLUTION && titresFichesSolutions.length === 0) {
+      continue;
+    }
+
     pres.addSlide("template", slideInfo.number, (slide) => {
       slideInfo.elements?.forEach((element) => {
         if (element.hasTextBody) {
           slide.modifyElement({ name: element.name, nameIdx: element.nameIdx }, [
             mergeTextRunsInElement,
+            (el: XmlElement) =>
+              replaceTagWithBulletList(el, PptxTemplateTag.TITRE_FICHES_SOLUTION, titresFichesSolutions),
             modify.replaceText(replacements),
           ]);
         }
