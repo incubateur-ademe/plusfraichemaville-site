@@ -140,8 +140,3 @@ export const GET_FICHE_DIAGNOSTIC_BY_IDS = (ficheDiagnosticIds: string[]) =>
 export const GET_AIDE_DECISION_FIRST_STEPS_URL = "/api/get-aide-decision-first-step";
 
 export const GET_AIDE_DECISION_STEP_URL = (slug: string) => `/api/get-aide-decision-step?slug=${slug}`;
-
-export const EXPORT_SYNTHESE_PROJET_URL = (projetId: number, documentIds?: string[]) => {
-  const base = `/api/export-synthese-projet?projetId=${projetId}`;
-  return documentIds && documentIds.length > 0 ? `${base}&documentIds=${JSON.stringify(documentIds)}` : base;
-};

@@ -44,6 +44,7 @@
     "next-auth": "^4.24.14",
     "pg": "^8.23.0",
     "posthog-js": "^1.376.0",
+    "pptx-automizer": "^0.9.1",
     "react": "19.0.3",
     "react-datepicker": "^8.3.0",
     "react-dom": "19.0.3",

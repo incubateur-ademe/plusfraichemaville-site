@@ -6,8 +6,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { ProjetSyntheseFormData, ProjetSyntheseFormSchema } from "@/src/forms/projet-synthese/projet-synthese-form-schema";
-import path from "path";
-import fs from "fs/promises";
+import { generateSyntheseProjetPptx } from "@/src/lib/pptx-automizer/generate-synthese-projet-pptx";
 
 export const exportSyntheseProjetAction = async (
   projetId: number,
@@ -34,8 +33,7 @@ export const exportSyntheseProjetAction = async (
   }
 
   try {
-    const filePath = path.join(process.cwd(), "public", "templates", "template_synthese_projet.pptx");
-    const fileBuffer = await fs.readFile(filePath);
+    const fileBuffer = await generateSyntheseProjetPptx({ projet });
 
     return {
       type: "success",
