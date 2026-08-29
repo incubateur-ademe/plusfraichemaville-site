@@ -1,41 +1,13 @@
-import Automizer, {
-  ISlide,
-  ModifyImageHelper,
-  modify,
-  ReplaceText,
-  ShapeModificationCallback,
-  XmlElement,
-} from "pptx-automizer";
+import Automizer, { modify, ReplaceText, XmlElement } from "pptx-automizer";
 import path from "path";
-import fs from "fs/promises";
-import sharp from "sharp";
-import {
-  GenerateSyntheseProjetPptxParams,
-  getCobeneficeTextTag,
-  getPictoCobeneficeElementName,
-  MAX_COBENEFICE_SLOTS,
-  PptxSlide,
-  PptxSlideElement,
-  PptxTemplateTag,
-} from "./types";
-import { mergeTextRunsInElement, replaceTagWithBulletList, stripSvgBlipExtension } from "./helpers";
+import { GenerateSyntheseProjetPptxParams, PptxSlide, PptxTemplateTag } from "./types";
+import { mergeTextRunsInElement, replaceTagWithBulletList } from "./helpers";
+import { AddTemplateSlide } from "./slides/types";
+import { addPageDeGardeSlide } from "./slides/page-de-garde";
+import { addFichesSolutionIntroSlide } from "./slides/fiches-solution-intro";
+import { addFicheSolutionDetailSlides } from "./slides/fiche-solution-detail";
 import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
-import { Icone } from "@/src/lib/strapi/types/api/cobenefice";
-import { getPorteeBaisseTemperatureLabelFromCode } from "@/src/helpers/porteeBaisseTemperatureFicheSolution";
-
-const COBENEFICE_BLANK_ICON = "cobenefice-blank";
-
-// The cobenefice icons on the site are SVGs, but the pptx placeholder pictos must stay
-// plain PNG-based images (not SVG) to avoid OOXML's dual PNG/SVG image relation, which
-// pptx-automizer's relation-swap helper cannot reliably update both sides of.
-const getCobeneficeIconPngFilename = (icone?: Icone) => `${icone ?? COBENEFICE_BLANK_ICON}.png`;
-
-const getCobeneficeIconPngBuffer = async (icone?: Icone) => {
-  const svgPath = path.join(process.cwd(), "public", "images", "cobenefices", `${icone ?? COBENEFICE_BLANK_ICON}.svg`);
-  const svgBuffer = await fs.readFile(svgPath);
-  return sharp(svgBuffer, { density: 300 }).png().toBuffer();
-};
 
 export const generateSyntheseProjetPptx = async ({
   projet,
@@ -63,26 +35,13 @@ export const generateSyntheseProjetPptx = async ({
     .filter((ficheSolution): ficheSolution is FicheSolution => Boolean(ficheSolution));
   const titresFichesSolutions = orderedFichesSolutions.map((ficheSolution) => ficheSolution.titre);
 
-  // Convert every distinct cobenefice icon actually displayed (capped at MAX_COBENEFICE_SLOTS
-  // per fiche) to PNG once, then register the buffers as media the pictos can point to.
-  const iconesToLoad = new Set<Icone | undefined>();
-  orderedFichesSolutions.forEach((ficheSolution) => {
-    (ficheSolution.cobenefices ?? []).slice(0, MAX_COBENEFICE_SLOTS).forEach((cobenefice) => {
-      iconesToLoad.add(cobenefice.icone);
-    });
-  });
-  for (const icone of Array.from(iconesToLoad)) {
-    const pngBuffer = await getCobeneficeIconPngBuffer(icone);
-    pres.loadMediaBuffer(getCobeneficeIconPngFilename(icone), pngBuffer);
-  }
-
   const dateGenerationSynthese = new Intl.DateTimeFormat("fr-FR", {
     day: "numeric",
     month: "long",
     year: "numeric",
   }).format(new Date());
 
-  const replacements = [
+  const replacements: ReplaceText[] = [
     {
       replace: PptxTemplateTag.NOM_PROJET,
       by: { text: projet.nom ?? "" },
@@ -105,11 +64,9 @@ export const generateSyntheseProjetPptx = async ({
     },
   ];
 
-  const addTemplateSlide = (
-    slideInfo: (typeof slides)[number],
-    slideReplacements: ReplaceText[] = [],
-    onSlideCreated?: (slide: ISlide) => void,
-  ) => {
+  // Shared by every slide module: applies the tags common to all slides (above) plus any
+  // slide-specific ones, and duplicates the template slide into the output presentation.
+  const addTemplateSlide: AddTemplateSlide = (slideInfo, slideReplacements = [], onSlideCreated) => {
     pres.addSlide("template", slideInfo.number, (slide) => {
       slideInfo.elements?.forEach((element) => {
         if (element.hasTextBody) {
@@ -132,64 +89,26 @@ export const generateSyntheseProjetPptx = async ({
       continue;
     }
 
-    if (slideInfo.number === PptxSlide.FICHE_SOLUTION_DETAIL) {
-      // The detail slide is a blueprint: it is duplicated once per selected fiche solution.
-      orderedFichesSolutions.forEach((ficheSolution, index) => {
-        const hasBaisseTemperature = Boolean(ficheSolution.baisse_temperature);
-        const cobeneficeTextReplacements = Array.from({ length: MAX_COBENEFICE_SLOTS }, (_, slotIndex) => ({
-          replace: getCobeneficeTextTag(slotIndex),
-          by: { text: ficheSolution.cobenefices?.[slotIndex]?.description ?? "" },
-        }));
-
-        addTemplateSlide(
+    switch (slideInfo.number) {
+      case PptxSlide.FICHE_SOLUTION_DETAIL:
+        // The detail slide is a blueprint: it is duplicated once per selected fiche solution.
+        await addFicheSolutionDetailSlides({
+          pres,
+          addTemplateSlide,
           slideInfo,
-          [
-            { replace: PptxTemplateTag.NUMERO_FICHE_SOLUTION, by: { text: `${index + 1}` } },
-            { replace: PptxTemplateTag.TITRE_FICHE_SOLUTION, by: { text: ficheSolution.titre ?? "" } },
-            {
-              replace: PptxTemplateTag.DESCRIPTION_COURTE_FICHE_SOLUTION,
-              by: { text: ficheSolution.description_courte ?? "" },
-            },
-            {
-              replace: PptxTemplateTag.PORTEE_BAISSE_TEMPERATURE_FICHE_SOLUTION,
-              by: {
-                text: hasBaisseTemperature
-                  ? getPorteeBaisseTemperatureLabelFromCode(ficheSolution.portee_baisse_temperature)
-                  : ficheSolution.libelle_avantage_solution ?? "",
-              },
-            },
-            {
-              replace: PptxTemplateTag.BAISSE_TEMPERATURE_FICHE_SOLUTION,
-              by: { text: hasBaisseTemperature ? `-${ficheSolution.baisse_temperature?.toLocaleString("fr")}°C` : "" },
-            },
-            ...cobeneficeTextReplacements,
-          ],
-          (slide) => {
-            if (hasBaisseTemperature) {
-              slide.removeElement({ name: PptxSlideElement.PICTO_THERMOMETRE_BAISSE_TEMPERATURE });
-            }
-
-            for (let slotIndex = 0; slotIndex < MAX_COBENEFICE_SLOTS; slotIndex++) {
-              const slotName = getPictoCobeneficeElementName(slotIndex);
-              const cobenefice = ficheSolution.cobenefices?.[slotIndex];
-              if (cobenefice) {
-                slide.modifyElement({ name: slotName }, [
-                  ModifyImageHelper.setRelationTarget(
-                    getCobeneficeIconPngFilename(cobenefice.icone),
-                  ) as ShapeModificationCallback,
-                  stripSvgBlipExtension,
-                ]);
-              } else {
-                slide.removeElement({ name: slotName });
-              }
-            }
-          },
-        );
-      });
-      continue;
+          fichesSolutions: orderedFichesSolutions,
+        });
+        break;
+      case PptxSlide.FICHES_SOLUTION_INTRO:
+        addFichesSolutionIntroSlide(addTemplateSlide, slideInfo);
+        break;
+      case PptxSlide.PAGE_DE_GARDE:
+        addPageDeGardeSlide(addTemplateSlide, slideInfo);
+        break;
+      default:
+        // Any other slide (credits, sources, ...) has no slide-specific logic yet.
+        addTemplateSlide(slideInfo);
     }
-
-    addTemplateSlide(slideInfo);
   }
 
   const zip = await pres.getJSZip();

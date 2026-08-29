@@ -15,6 +15,7 @@ export enum PptxTemplateTag {
 }
 
 export enum PptxSlide {
+  PAGE_DE_GARDE = 1,
   FICHES_SOLUTION_INTRO = 2,
   FICHE_SOLUTION_DETAIL = 3,
 }
