@@ -7,10 +7,22 @@ export enum PptxTemplateTag {
   ADRESSE_PROJET = "adresse_projet",
   DATE_GENERATION_SYNTHESE = "date_generation_synthese",
   TITRE_FICHES_SOLUTION = "titre_fiches_solution",
+  NUMERO_FICHE_SOLUTION = "n°_solution",
+  TITRE_FICHE_SOLUTION = "titre_fiche_solution",
+  DESCRIPTION_COURTE_FICHE_SOLUTION = "description_courte_fiche_solution",
+  PORTEE_BAISSE_TEMPERATURE_FICHE_SOLUTION = "portee_baisse_temperature",
+  BAISSE_TEMPERATURE_FICHE_SOLUTION = "baisse_temperature",
 }
 
 export enum PptxSlide {
-  INTRO_FICHES_SOLUTION = 2,
+  FICHES_SOLUTION_INTRO = 2,
+  FICHE_SOLUTION_DETAIL = 3,
+}
+
+// Names of non-text shapes on the template slides, targeted via slide.removeElement().
+// These must match the shape name set in PowerPoint's Selection pane.
+export enum PptxSlideElement {
+  PICTO_THERMOMETRE_BAISSE_TEMPERATURE = "picto_thermometre_baisse_temperature",
 }
 
 export type GenerateSyntheseProjetPptxParams = {
