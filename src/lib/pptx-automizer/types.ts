@@ -12,6 +12,8 @@ export enum PptxTemplateTag {
   DESCRIPTION_COURTE_FICHE_SOLUTION = "description_courte_fiche_solution",
   PORTEE_BAISSE_TEMPERATURE_FICHE_SOLUTION = "portee_baisse_temperature",
   BAISSE_TEMPERATURE_FICHE_SOLUTION = "baisse_temperature",
+  COUT_FICHE_SOLUTION = "cout_fiche_solution",
+  DELAI_FICHE_SOLUTION = "delai_fiche_solution",
 }
 
 export enum PptxSlide {

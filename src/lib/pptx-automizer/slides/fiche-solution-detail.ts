@@ -14,6 +14,14 @@ import { stripSvgBlipExtension } from "../helpers";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { Icone } from "@/src/lib/strapi/types/api/cobenefice";
 import { getPorteeBaisseTemperatureLabelFromCode } from "@/src/helpers/porteeBaisseTemperatureFicheSolution";
+import { getLabelCoutFourniture } from "@/src/helpers/cout/cout-fiche-solution";
+
+// Same wording as FicheSolutionInfoComparatif; unlike getLabelCoutFourniture there is no
+// shared helper for this one, so it's replicated here.
+const getLabelDelaiTravaux = (ficheSolution: FicheSolution) =>
+  ficheSolution.delai_travaux_minimum != null && ficheSolution.delai_travaux_maximum != null
+    ? `de ${ficheSolution.delai_travaux_minimum} à ${ficheSolution.delai_travaux_maximum} mois`
+    : "";
 
 const COBENEFICE_BLANK_ICON = "cobenefice-blank";
 
@@ -88,6 +96,8 @@ export const addFicheSolutionDetailSlides = async ({
           replace: PptxTemplateTag.BAISSE_TEMPERATURE_FICHE_SOLUTION,
           by: { text: hasBaisseTemperature ? `-${ficheSolution.baisse_temperature?.toLocaleString("fr")}°C` : "" },
         },
+        { replace: PptxTemplateTag.COUT_FICHE_SOLUTION, by: { text: getLabelCoutFourniture(ficheSolution) } },
+        { replace: PptxTemplateTag.DELAI_FICHE_SOLUTION, by: { text: getLabelDelaiTravaux(ficheSolution) } },
         ...cobeneficeTextReplacements,
       ],
       (slide) => {
