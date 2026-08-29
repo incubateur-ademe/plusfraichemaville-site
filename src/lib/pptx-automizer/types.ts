@@ -25,6 +25,12 @@ export enum PptxSlideElement {
   PICTO_THERMOMETRE_BAISSE_TEMPERATURE = "picto_thermometre_baisse_temperature",
 }
 
+export const MAX_COBENEFICE_SLOTS = 5;
+
+export const getCobeneficeTextTag = (slotIndex: number) => `cobenefice_${slotIndex + 1}`;
+
+export const getPictoCobeneficeElementName = (slotIndex: number) => `picto_cobenefice_${slotIndex + 1}`;
+
 export type GenerateSyntheseProjetPptxParams = {
   projet: ProjetWithRelations;
   solutionIds?: string[];

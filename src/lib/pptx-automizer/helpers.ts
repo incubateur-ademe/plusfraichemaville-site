@@ -67,3 +67,19 @@ export const replaceTagWithBulletList = (element: XmlElement, tag: string, items
     parent.removeChild(paragraph);
   }
 };
+
+/**
+ * Removes the SVG extension (`<asvg:svgBlip>`) from an image element's `<a:blip>`.
+ *
+ * A picture inserted in PowerPoint from an SVG file keeps two linked images: a PNG
+ * fallback on `<a:blip r:embed>` (the one `ModifyImageHelper.setRelationTarget` swaps)
+ * and the original SVG referenced through this extension, which PowerPoint still
+ * prefers to render when present. Without stripping it, swapping the relation target
+ * only changes the fallback and the shape keeps showing its original template SVG.
+ */
+export const stripSvgBlipExtension = (element: XmlElement) => {
+  const blips = Array.from(element.getElementsByTagName("a:blip"));
+  blips.forEach((blip) => {
+    Array.from(blip.getElementsByTagName("a:extLst")).forEach((extLst) => blip.removeChild(extLst));
+  });
+};
