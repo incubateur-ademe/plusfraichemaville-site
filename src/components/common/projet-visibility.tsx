@@ -43,7 +43,7 @@ export const ProjetVisibility = ({
     <ToggleSwitch
       labelPosition="left"
       classes={{ label: `font-bold` }}
-      label="Souhaitez-vous rendre votre projet visible aux autres membres de la communauté Plus fraîche ma ville ?"
+      label="Souhaitez-vous rendre votre projet visible aux collectivités de la communauté Plus fraîche ma ville ?"
       inputTitle=""
       showCheckedHint={false}
       checked={isPublic ?? undefined}

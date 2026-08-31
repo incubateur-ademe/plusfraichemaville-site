@@ -16,7 +16,7 @@ type RetourExperiencePageProps = {
 export async function generateStaticParams() {
   const allRex = await getRetoursExperiences();
   return allRex.map((rex) => ({
-    retourExperienceSlug: rex.attributes.slug || "",
+    retourExperienceSlug: rex.slug || "",
   }));
 }
 
@@ -24,9 +24,9 @@ export async function generateMetadata(props: RetourExperiencePageProps): Promis
   const params = await props.params;
   const retourExperience = await getRetourExperienceBySlug(params.retourExperienceSlug);
   return computeMetadata(
-    retourExperience?.attributes.titre || "Retour d'expérience",
-    stripHtmlTags(retourExperience?.attributes.description || ""),
-    getStrapiImageUrl(retourExperience?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
+    retourExperience?.titre || "Retour d'expérience",
+    stripHtmlTags(retourExperience?.description || ""),
+    getStrapiImageUrl(retourExperience?.image_principale, STRAPI_IMAGE_KEY_SIZE.medium),
   );
 }
 
@@ -42,7 +42,7 @@ export default async function RetourExperiencePage(props: RetourExperiencePagePr
   return (
     <>
       <div className="fr-container">
-        <SiteVitrineBreadcrumb step={BREADCRUMB_REX_PROJET(retourExperience.attributes.titre)} />
+        <SiteVitrineBreadcrumb step={BREADCRUMB_REX_PROJET(retourExperience.titre)} />
       </div>
       <RetourExperienceContent retourExperience={retourExperience} />
     </>

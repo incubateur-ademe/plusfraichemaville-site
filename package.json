@@ -20,6 +20,7 @@
     "fixPrettier": "prettier . --write",
     "csm-mail-batch": "npx tsx ./scripts/csm-mail-batch.ts",
     "connect-sync": "npx tsx ./scripts/connect-sync.ts",
+    "migrate-strapi5-document-ids": "npx tsx ./scripts/migrate-strapi5-document-ids.ts",
     "preinstall": "npx only-allow pnpm"
   },
   "dependencies": {
@@ -41,6 +42,7 @@
     "maplibre-gl": "^5.6.1",
     "next": "15.5.15",
     "next-auth": "^4.24.14",
+    "pg": "^8.23.0",
     "posthog-js": "^1.376.0",
     "react": "19.0.3",
     "react-datepicker": "^8.3.0",
@@ -69,6 +71,7 @@
     "@types/geojson": "^7946.0.15",
     "@types/lodash": "^4.17.14",
     "@types/node": "^20.17.12",
+    "@types/pg": "^8.23.1",
     "@types/react": "19.0.4",
     "@types/react-dom": "19.0.2",
     "@types/uuid": "^9.0.8",

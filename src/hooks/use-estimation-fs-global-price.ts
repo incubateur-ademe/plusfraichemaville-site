@@ -15,7 +15,7 @@ export const useEstimationFSGlobalPrice = (estimationFichesSolution: EstimationF
   const fichesSolutionGlobalPrice = data?.reduce(
     (acc, ficheSolution) => {
       const currentEstimationFicheSolution = estimationFichesSolution.find(
-        (efs) => +efs.fiche_solution_id === +ficheSolution.id,
+        (efs) => efs.fiche_solution_id === ficheSolution.documentId,
       );
       if (currentEstimationFicheSolution) {
         const ficheSolutionPrice = isSimpleMateriauFicheSolution(ficheSolution)

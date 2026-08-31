@@ -25,7 +25,7 @@ export const FicheDiagnosticChoixParcours = () => {
   let parcoursPrestationUrl = PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD;
   let parcoursIndicateursUrl = PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD;
   let parcoursIndicateursButtonLabel = "Calculer les indicateurs";
-  let parcoursPrestationButtonLabel = "Choisir des prestations";
+  let parcoursPrestationButtonLabel = "Explorer les méthodes";
   const hasMadeDiagnosticSimulation = !isEmpty(currentProjet?.diagnostic_simulations);
   const hasSelectedFicheDiagnostic = !isEmpty(
     getProjetFichesIdsByType({
@@ -34,12 +34,16 @@ export const FicheDiagnosticChoixParcours = () => {
     }),
   );
   let parcoursIndicateursLabel = "Je fais une analyse simplifiée et immédiate de la surchauffe";
-  let parcoursPrestationLabel = "Je fais réaliser par un prestataire un diagnostic approfondi";
+  let parcoursPrestationLabel = "J’explore les méthodes de diagnostic approfondi";
+  let parcoursPrestationDescription =
+    "Analysez la surchauffe urbaine sur votre territoire, en autonomie ou avec un prestataire.";
   if (projetId) {
     if (hasSelectedFicheDiagnostic) {
       parcoursPrestationUrl = PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS(projetId);
-      parcoursPrestationButtonLabel = "Consulter mes prestations";
-      parcoursPrestationLabel = "Je consulte les prestations de diagnostic choisies";
+      parcoursPrestationButtonLabel = "Consulter mes méthodes";
+      parcoursPrestationLabel = "Je consulte les méthodes de diagnostic choisies";
+      parcoursPrestationDescription =
+        "Retrouvez les méthodes que vous avez sélectionnées pour analyser la surchauffe urbaine sur votre territoire.";
     } else {
       parcoursPrestationUrl = PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_PRESTATION_LISTE(projetId);
     }
@@ -94,7 +98,7 @@ export const FicheDiagnosticChoixParcours = () => {
           )}
           <Image
             src={"/images/fiches-diagnostic/parcours-prestation.svg"}
-            alt="Parcours prestation"
+            alt=""
             width={250}
             height={250}
             className="mt-12 h-40 self-center"
@@ -105,8 +109,7 @@ export const FicheDiagnosticChoixParcours = () => {
             </LinkWithoutPrefetch>
             <Separator className="my-4" />
             <div className="mb-8 text-left font-normal text-dsfr-text-mention-grey">
-              Sollicitez une expertise pour une analyse détaillée de l’effet d’îlot de chaleur urbain et/ou du confort
-              thermique, à différentes échelles.
+              {parcoursPrestationDescription}
             </div>
             <div className="fr-btn rounded-3xl group-hover:bg-dsfr-hover-blue-sun">{parcoursPrestationButtonLabel}</div>
           </div>

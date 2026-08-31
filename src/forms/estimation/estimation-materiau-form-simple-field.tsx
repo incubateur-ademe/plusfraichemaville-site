@@ -44,12 +44,12 @@ export default function EstimationMateriauSimpleFieldForm({
 }) {
   const initialValues = useMemo(
     () => ({
-      ficheSolutionId: +ficheSolution.id,
+      ficheSolutionId: ficheSolution.documentId,
       coutInvestissementOverride: estimationMateriaux?.cout_investissement_override ?? undefined,
       coutEntretienOverride: estimationMateriaux?.cout_entretien_override ?? undefined,
       quantite: estimationMateriaux?.quantite || 0,
     }),
-    [estimationMateriaux, ficheSolution.id],
+    [estimationMateriaux, ficheSolution.documentId],
   );
   const form = useForm<EstimationMateriauxSimpleFieldFormData>({
     resolver: zodResolver(EstimationMateriauxFormSimpleFieldSchema),
@@ -95,12 +95,12 @@ export default function EstimationMateriauSimpleFieldForm({
   return (
     <>
       <form
-        id={`estimation-fiche-solution-${ficheSolution.id}-form`}
+        id={`estimation-fiche-solution-${ficheSolution.documentId}-form`}
         onSubmit={form.handleSubmit((data) => onSubmit(data))}
       >
-        <EstimationMateriauFieldUnique ficheSolutionAttributes={ficheSolution.attributes} key={ficheSolution.id}>
+        <EstimationMateriauFieldUnique ficheSolutionAttributes={ficheSolution} key={ficheSolution.documentId}>
           <InputFormField
-            label={getUniteCoutFromCode(ficheSolution.attributes.cout_unite).estimationLabel}
+            label={getUniteCoutFromCode(ficheSolution.cout_unite).estimationLabel}
             type="number"
             control={form.control}
             path="quantite"
@@ -113,7 +113,7 @@ export default function EstimationMateriauSimpleFieldForm({
             name="coutInvestissementOverride"
             label="Investissement"
             calculatedValue={formatNumberWithSpaces(
-              getLabelCoutFournitureByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0),
+              getLabelCoutFournitureByQuantite(ficheSolution, watchAllFields.quantite || 0),
             )}
           />
           <EditablePriceField
@@ -123,13 +123,13 @@ export default function EstimationMateriauSimpleFieldForm({
             label="Entretien"
             suffix={" € / an"}
             calculatedValue={formatNumberWithSpaces(
-              getLabelCoutEntretienByQuantite(ficheSolution.attributes, watchAllFields.quantite || 0),
+              getLabelCoutEntretienByQuantite(ficheSolution, watchAllFields.quantite || 0),
             )}
           />
         </EstimationMateriauFieldUnique>
 
         <EstimationMateriauGlobalPriceFooter
-          title={ficheSolution.attributes.titre}
+          title={ficheSolution.titre}
           investissementMin={globalPrice?.fourniture.min}
           investissementMax={globalPrice?.fourniture.max}
           entretienMin={globalPrice?.entretien.min}

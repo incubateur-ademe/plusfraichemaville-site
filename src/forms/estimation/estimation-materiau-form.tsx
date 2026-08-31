@@ -46,13 +46,10 @@ export default function EstimationMateriauForm({
 }) {
   const initialValues = useMemo(
     () => ({
-      ficheSolutionId: +ficheSolution.id,
-      estimationMateriaux: mapStrapiEstimationMateriauxToFormValues(
-        ficheSolution.attributes.materiaux?.data,
-        estimationMateriaux,
-      ),
+      ficheSolutionId: ficheSolution.documentId,
+      estimationMateriaux: mapStrapiEstimationMateriauxToFormValues(ficheSolution.materiaux, estimationMateriaux),
     }),
-    [estimationMateriaux, ficheSolution.attributes.materiaux?.data, ficheSolution.id],
+    [estimationMateriaux, ficheSolution.materiaux, ficheSolution.documentId],
   );
   const form = useForm<EstimationMateriauxFormData>({
     resolver: zodResolver(EstimationMateriauxFormSchema),
@@ -106,27 +103,25 @@ export default function EstimationMateriauForm({
   const disabled = form.formState.isSubmitting;
 
   const getMateriauFromId = useCallback(
-    (materiauId: number) => ficheSolution.attributes.materiaux?.data.find((cmsMat) => +cmsMat.id === +materiauId),
-    [ficheSolution.attributes.materiaux?.data],
+    (materiauId: string) => ficheSolution.materiaux?.find((cmsMat) => cmsMat.documentId === materiauId),
+    [ficheSolution.materiaux],
   );
 
   return (
     <>
-      {ficheSolution.attributes.materiaux?.data && ficheSolution.attributes.materiaux.data.length > 0 ? (
+      {ficheSolution.materiaux && ficheSolution.materiaux.length > 0 ? (
         <>
           <form
-            id={`estimation-fiche-solution-${ficheSolution.id}`}
+            id={`estimation-fiche-solution-${ficheSolution.documentId}`}
             onSubmit={form.handleSubmit((data) => onSubmit(data))}
           >
             {fields.map((field, index) => (
               <EstimationMateriauField
-                materiau={getMateriauFromId(+field.materiauId)}
-                key={`${ficheSolution.id}${field.materiauId}${field.id}`}
+                materiau={getMateriauFromId(field.materiauId)}
+                key={`${ficheSolution.documentId}${field.materiauId}${field.id}`}
               >
                 <InputFormField
-                  label={
-                    getUniteCoutFromCode(getMateriauFromId(+field.materiauId)?.attributes.cout_unite).estimationLabel
-                  }
+                  label={getUniteCoutFromCode(getMateriauFromId(field.materiauId)?.cout_unite).estimationLabel}
                   type="number"
                   control={form.control}
                   path={`estimationMateriaux.${index}.quantite`}
@@ -139,8 +134,8 @@ export default function EstimationMateriauForm({
                   name={`estimationMateriaux.${index}.coutInvestissementOverride`}
                   label="Investissement"
                   calculatedValue={getLabelCoutFournitureByQuantite(
-                    getMateriauFromId(+field.materiauId)?.attributes,
-                    watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
+                    getMateriauFromId(field.materiauId),
+                    watchAllFields.estimationMateriaux.find((f) => f.materiauId === field.materiauId)?.quantite || 0,
                   )}
                 />
                 <EditablePriceField
@@ -150,24 +145,24 @@ export default function EstimationMateriauForm({
                   label="Entretien"
                   suffix={" € / an"}
                   calculatedValue={getLabelCoutEntretienByQuantite(
-                    getMateriauFromId(+field.materiauId)?.attributes,
-                    watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0,
+                    getMateriauFromId(field.materiauId),
+                    watchAllFields.estimationMateriaux.find((f) => f.materiauId === field.materiauId)?.quantite || 0,
                   )}
                 />
                 <OtherUsagesMateriau
                   materiauId={field.materiauId}
-                  ficheSolutionId={+ficheSolution.id}
+                  ficheSolutionId={ficheSolution.documentId}
                   allEstimationsFichesSolutions={estimationsFichesSolutions}
-                  materiau={getMateriauFromId(+field.materiauId)}
+                  materiau={getMateriauFromId(field.materiauId)}
                   currentMateriauQuantity={
-                    watchAllFields.estimationMateriaux.find((f) => +f.materiauId === +field.materiauId)?.quantite || 0
+                    watchAllFields.estimationMateriaux.find((f) => f.materiauId === field.materiauId)?.quantite || 0
                   }
                   className="mt-2 rounded-md border p-2"
                 />
               </EstimationMateriauField>
             ))}
             <EstimationMateriauGlobalPriceFooter
-              title={ficheSolution.attributes.titre}
+              title={ficheSolution.titre}
               investissementMin={globalPrice?.fourniture.min}
               investissementMax={globalPrice?.fourniture.max}
               entretienMin={globalPrice?.entretien.min}

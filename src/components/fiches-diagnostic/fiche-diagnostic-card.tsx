@@ -21,10 +21,10 @@ type FicheDiagnosticCardProps = {
 
 export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProps) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
-  const coutMin = ficheDiagnostic.attributes.cout_min;
-  const coutMax = ficheDiagnostic.attributes.cout_max;
-  const delaiMin = ficheDiagnostic.attributes.delai_min;
-  const delaiMax = ficheDiagnostic.attributes.delai_max;
+  const coutMin = ficheDiagnostic.cout_min;
+  const coutMax = ficheDiagnostic.cout_max;
+  const delaiMin = ficheDiagnostic.delai_min;
+  const delaiMax = ficheDiagnostic.delai_max;
 
   const setCurrentFicheDiagnostic = useModalStore((state) => state.setCurrentFicheDiagnostic);
 
@@ -36,7 +36,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
     if (currentProjetId) {
       setCurrentFicheDiagnostic(ficheDiagnostic);
     } else {
-      router.push(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(ficheDiagnostic.attributes.slug));
+      router.push(PFMV_ROUTES.SURCHAUFFE_URBAINE_FICHE_DIAGNOSTIC(ficheDiagnostic.slug));
     }
   };
 
@@ -45,8 +45,8 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
       <div className="pfmv-card fr-enlarge-button group flex h-full flex-col pb-12 !text-start">
         <div className={clsx("fiche-diagnostic-icone", "mx-auto mt-6 flex size-[8.5rem] items-center justify-center ")}>
           <Image
-            src={getStrapiImageUrl(ficheDiagnostic.attributes.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
-            alt={ficheDiagnostic.attributes.titre}
+            src={getStrapiImageUrl(ficheDiagnostic.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
+            alt={ficheDiagnostic.titre}
             width={110}
             height={110}
             unoptimized
@@ -55,9 +55,9 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
 
         <div className="flex h-fit grow flex-col justify-between px-6 pb-2 pt-5">
           <button className="text-start text-lg font-bold leading-tight group-hover:!bg-white" onClick={onClickCard}>
-            {ficheDiagnostic.attributes.titre}
+            {ficheDiagnostic.titre}
           </button>
-          <div className={"mb-7 text-sm"}>{ficheDiagnostic.attributes.nom_scientifique}</div>
+          <div className={"mb-7 text-sm"}>{ficheDiagnostic.nom_scientifique}</div>
           <div className="mb-4 mt-4 flex flex-wrap gap-2 uppercase">
             {getEchellesThermiquesByFicheDiagnostic(ficheDiagnostic).map((effet) => (
               <Tag key={effet.label} small className="!mb-0 !rounded-sm font-bold !text-dsfr-text-mention-grey">
@@ -89,7 +89,7 @@ export const FicheDiagnosticCard = ({ ficheDiagnostic }: FicheDiagnosticCardProp
         </div>
       </div>
       <GenericSaveFiche
-        id={ficheDiagnostic.id}
+        id={ficheDiagnostic.documentId}
         type={TypeFiche.diagnostic}
         className=""
         classNameButton="absolute bottom-3 left-1/2 transform -translate-x-1/2 w-48 z-10"

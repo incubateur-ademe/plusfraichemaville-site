@@ -10,7 +10,7 @@ import { useUserStore } from "@/src/stores/user/provider";
 import { FilDArianeAvecBouton } from "@/src/components/common/fil-d-arianne-avec-bouton";
 
 type Props = {
-  aideDecisionEtapeAttributes: AideDecisionEtape["attributes"];
+  aideDecisionEtapeAttributes: AideDecisionEtape;
   aideDecisionEtapeHistory?: AideDecisionEtapeHistory[] | null;
 };
 
@@ -18,17 +18,16 @@ export default function AideDecisionResultContainer({ aideDecisionEtapeAttribute
   const navigationPreferences = useUserStore((state) => state.navigationPreferences);
   const setAideDecisionStep = useUserStore((state) => state.setChoixSolutionAideDecisionCurrentStep);
   if (
-    !!aideDecisionEtapeAttributes.fiches_solutions?.data &&
-    aideDecisionEtapeAttributes.fiches_solutions.data.length > 0
+    !!aideDecisionEtapeAttributes.fiches_solutions?.length &&
+    aideDecisionEtapeAttributes.fiches_solutions.length > 0
   ) {
     const sortBy = getAideDecisionSortFieldFromCode(navigationPreferences.choixSolutionAideDecisionTri);
-    const sortedFichesSolutions = aideDecisionEtapeAttributes.fiches_solutions.data.sort(sortBy.sortFn);
+    const sortedFichesSolutions = aideDecisionEtapeAttributes.fiches_solutions.sort(sortBy.sortFn);
 
     const relatedRetourExperiences = sortedFichesSolutions
-      .flatMap((fs) => fs.attributes.solution_retour_experiences?.data.map((sol) => sol.attributes.retour_experience))
-      .filter((v) => v?.data)
+      .flatMap((fs) => fs.solution_retour_experiences?.map((sol) => sol.retour_experience))
       .filter(notEmpty)
-      .filter((v, i, a) => a.findIndex((v2) => v2.data?.id === v?.data?.id) === i)
+      .filter((v, i, a) => a.findIndex((v2) => v2?.documentId === v?.documentId) === i)
       .slice(0, 3);
 
     return (
@@ -48,7 +47,7 @@ export default function AideDecisionResultContainer({ aideDecisionEtapeAttribute
             <AideDecisionSortFilter className="mb-9" />
             <ul className="mb-14 flex list-none flex-wrap justify-center gap-6 pl-2 md:justify-start">
               {sortedFichesSolutions.map((ficheSolution) => (
-                <li key={ficheSolution.id} className="flex">
+                <li key={ficheSolution.documentId} className="flex">
                   <FicheSolutionCard
                     ficheSolution={ficheSolution}
                     extraUrlParams={[{ param: "etapeAideDecision", value: aideDecisionEtapeAttributes.slug }]}
@@ -62,8 +61,8 @@ export default function AideDecisionResultContainer({ aideDecisionEtapeAttribute
                 <h2 className="mb-6 text-xl">Découvrez les projets réalisés pour les solutions proposées</h2>
                 <ul className="flex list-none gap-6 overflow-x-auto pl-2 pt-2 md:justify-start">
                   {relatedRetourExperiences.map((rex) => (
-                    <li key={rex?.data.id} className="flex">
-                      <RetourExperienceCard retourExperience={rex?.data} titleHeadingLevel="h2" />
+                    <li key={rex?.documentId} className="flex">
+                      <RetourExperienceCard retourExperience={rex} titleHeadingLevel="h2" />
                     </li>
                   ))}
                 </ul>

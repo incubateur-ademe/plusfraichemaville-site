@@ -9,7 +9,7 @@ import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
 
 type EstimationMateriauxValidationProps = {
   estimationsFicheSolution: EstimationFicheSolution[];
-  goToFicheSolutionStep: (_: number) => void;
+  goToFicheSolutionStep: (_: string) => void;
   onClose: () => void;
   onPrevious: () => void;
 };

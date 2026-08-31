@@ -13,26 +13,26 @@ export function FicheSolutionSmallCard({
   onClick,
   className = " pfmv-card cursor-pointer ",
 }: {
-  ficheSolutionId: number;
+  ficheSolutionId: string;
   onClick?: () => void;
   className?: string;
 } & PropsWithChildren) {
-  const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionUrlApi(ficheSolutionId));
+  const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionUrlApi([ficheSolutionId]));
 
   const ficheSolution = data && data[0];
 
   if (!ficheSolution) {
     return null;
   }
-  const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
+  const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
   return (
     <div className={`relative flex w-60 flex-col md:ml-0 ${className}`} onClick={onClick}>
       <div className="flex h-32 w-full">
         <Image
           width={450}
           height={300}
-          src={getStrapiImageUrl(ficheSolution.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={ficheSolution.attributes.titre}
+          src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
+          alt={ficheSolution.titre}
           className={"h-full w-full rounded-t-2xl object-cover"}
           unoptimized
         />
@@ -46,10 +46,8 @@ export function FicheSolutionSmallCard({
             </div>
           </>
         )}
-        <div className={"text-blue-hover text-lg font-bold text-dsfr-text-title-grey"}>
-          {ficheSolution.attributes.titre}
-        </div>
-        <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheSolution.attributes.description_courte}</div>
+        <div className={"text-blue-hover text-lg font-bold text-dsfr-text-title-grey"}>{ficheSolution.titre}</div>
+        <div className={"mt-4 text-sm text-dsfr-text-title-grey"}>{ficheSolution.description_courte}</div>
         <div className={"mt-auto"}>
           <div className="mt-4 flex place-content-center">{children}</div>
         </div>

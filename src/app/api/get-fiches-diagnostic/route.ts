@@ -5,9 +5,9 @@ export async function GET(request: NextRequest) {
   const ficheDiagnosticIds = request.nextUrl.searchParams.get("ficheDiagnosticIds");
 
   if (ficheDiagnosticIds) {
-    const ids = JSON.parse(ficheDiagnosticIds) as number[];
+    const ids = JSON.parse(ficheDiagnosticIds) as string[];
 
-    const fiches = await Promise.all(ids.map((id) => getFicheDiagnosticById(id.toString())));
+    const fiches = await Promise.all(ids.map((id) => getFicheDiagnosticById(id)));
 
     return NextResponse.json(fiches.filter(Boolean));
   }

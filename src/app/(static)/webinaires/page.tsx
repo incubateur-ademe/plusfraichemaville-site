@@ -15,11 +15,11 @@ export default async function PageWebinaires() {
   const pastWebinaires = orderBy(
     allWebinaires.filter(
       (webinaire) =>
-        webinaire.attributes.jour_evenement &&
-        (webinaire.attributes.lien_replay || webinaire.attributes.lien_btn_secondaire) &&
-        new Date(webinaire.attributes.jour_evenement) <= new Date(),
+        webinaire.jour_evenement &&
+        (webinaire.lien_replay || webinaire.lien_btn_secondaire) &&
+        new Date(webinaire.jour_evenement) <= new Date(),
     ),
-    (webinaire) => webinaire.attributes.jour_evenement,
+    (webinaire) => webinaire.jour_evenement,
     "desc",
   );
   return (

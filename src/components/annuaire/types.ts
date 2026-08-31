@@ -44,7 +44,7 @@ export interface GeoJsonAdresse {
 export type CustomMarker = {
   geocode: LatLngTuple;
   type: "in-progress" | "rex" | "ma-collectivite";
-  idProjet?: number;
+  idProjet?: string | number;
   projet?: {
     typeEspace?: TypeEspaceCode | TypeEspaceCode[];
     budget?: number;
@@ -55,7 +55,7 @@ export type CustomMarkerType = CustomMarker["type"];
 
 export type StrapiAnnuaireContact = Contact & { id: number };
 
-export type RexContactId = { rexId: number; contactId: number };
+export type RexContactId = { rexId: string; contactId: number };
 
 export type AnnuaireContact = {
   uniqueId: string;

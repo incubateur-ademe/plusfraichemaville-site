@@ -23,7 +23,7 @@ export const addFichesSolutionsToEstimationAction = async (
     return { type: "error", message: "PARSING_ERROR" };
   }
 
-  const fichesSolutions = await getFicheSolutionByIdsComplete(data.ficheSolutionIds.map(Number));
+  const fichesSolutions = await getFicheSolutionByIdsComplete(data.ficheSolutionIds);
 
   try {
     const estimation = await addFichesSolutionsToEstimation(estimationId, fichesSolutions);

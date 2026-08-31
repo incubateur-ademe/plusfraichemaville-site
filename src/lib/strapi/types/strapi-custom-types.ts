@@ -1,13 +1,3 @@
-export interface APIResponseCollectionMetadata {
-  pagination: {
-    page: number;
-    pageSize: number;
-    pageCount: number;
-    total: number;
-  };
-}
-
-export interface APIResponseCollection<T> {
-  data: T[];
-  meta: APIResponseCollectionMetadata;
-}
+// Strapi v5 GraphQL flat responses: a collection query returns the array of entities directly,
+// with no `data`/`meta` wrapper (see https://docs.strapi.io/cms/api/graphql).
+export type APIResponseCollection<T> = T[];

@@ -38,12 +38,12 @@ export const computePriceEstimationSimpleFicheSolution = (
   const quantite = estimation.quantite || 0;
   return {
     entretien: {
-      min: estimation.cout_entretien_override ?? quantite * (ficheSolution.attributes.cout_minimum_entretien || 0),
-      max: estimation.cout_entretien_override ?? quantite * (ficheSolution.attributes.cout_maximum_entretien || 0),
+      min: estimation.cout_entretien_override ?? quantite * (ficheSolution.cout_minimum_entretien || 0),
+      max: estimation.cout_entretien_override ?? quantite * (ficheSolution.cout_maximum_entretien || 0),
     },
     fourniture: {
-      min: estimation.cout_investissement_override ?? quantite * (ficheSolution.attributes.cout_minimum || 0),
-      max: estimation.cout_investissement_override ?? quantite * (ficheSolution.attributes.cout_maximum || 0),
+      min: estimation.cout_investissement_override ?? quantite * (ficheSolution.cout_minimum || 0),
+      max: estimation.cout_investissement_override ?? quantite * (ficheSolution.cout_maximum || 0),
     },
   };
 };
@@ -52,22 +52,20 @@ export const computePriceEstimationFicheSolution = (
   ficheSolution: FicheSolution,
   estimationMateriaux: EstimationMateriau[],
 ) => {
-  return ficheSolution.attributes.materiaux?.data.reduce(
+  return ficheSolution.materiaux?.reduce(
     (acc, materiauCMS) => {
-      const estimationMateriau = estimationMateriaux.find((f) => +f.materiau_id === +materiauCMS.id);
+      const estimationMateriau = estimationMateriaux.find((f) => f.materiau_id === materiauCMS.documentId);
       const quantiteMateriau = estimationMateriau?.quantite || 0;
       const coutInvestissementOverride = estimationMateriau?.cout_investissement_override;
       const coutEntretienOverride = estimationMateriau?.cout_entretien_override;
 
       const investissementMin =
-        coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_minimum_fourniture || 0);
+        coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.cout_minimum_fourniture || 0);
       const investissementMax =
-        coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_maximum_fourniture || 0);
+        coutInvestissementOverride ?? quantiteMateriau * (materiauCMS.cout_maximum_fourniture || 0);
 
-      const entretienMin =
-        coutEntretienOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_minimum_entretien || 0);
-      const entretienMax =
-        coutEntretienOverride ?? quantiteMateriau * (materiauCMS.attributes.cout_maximum_entretien || 0);
+      const entretienMin = coutEntretienOverride ?? quantiteMateriau * (materiauCMS.cout_minimum_entretien || 0);
+      const entretienMax = coutEntretienOverride ?? quantiteMateriau * (materiauCMS.cout_maximum_entretien || 0);
 
       return {
         entretien: {

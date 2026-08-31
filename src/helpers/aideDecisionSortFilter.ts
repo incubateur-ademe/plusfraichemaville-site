@@ -10,32 +10,26 @@ type AideDecisionSortFilter = {
 export const SORT_TEMPERATURE: AideDecisionSortFilter = {
   code: "",
   label: "Les plus fraîches",
-  sortFn: (fs1, fs2) => ((fs1.attributes.baisse_temperature || 0) < (fs2.attributes.baisse_temperature || 0) ? 1 : -1),
+  sortFn: (fs1, fs2) => ((fs1.baisse_temperature || 0) < (fs2.baisse_temperature || 0) ? 1 : -1),
 };
 
 const SORT_PRICE: AideDecisionSortFilter = {
   code: "abordable",
   label: "Les plus abordables",
   sortFn: (fs1, fs2) => {
-    const fs1HasNoMinMaxCost = !fs1.attributes.cout_maximum && !fs1.attributes.cout_minimum;
-    const fs2HasNoMinMaxCost = !fs2.attributes.cout_maximum && !fs2.attributes.cout_minimum;
+    const fs1HasNoMinMaxCost = !fs1.cout_maximum && !fs1.cout_minimum;
+    const fs2HasNoMinMaxCost = !fs2.cout_maximum && !fs2.cout_minimum;
     if (fs1HasNoMinMaxCost && !fs2HasNoMinMaxCost) {
       return -1;
     } else if (!fs1HasNoMinMaxCost && fs2HasNoMinMaxCost) {
       return 1;
-    } else if (
-      fs1.attributes.cout_unite === UNITE_COUT_MEGAWATTHEURE.code &&
-      fs2.attributes.cout_unite !== UNITE_COUT_MEGAWATTHEURE.code
-    ) {
+    } else if (fs1.cout_unite === UNITE_COUT_MEGAWATTHEURE.code && fs2.cout_unite !== UNITE_COUT_MEGAWATTHEURE.code) {
       return 1;
-    } else if (
-      fs2.attributes.cout_unite === UNITE_COUT_MEGAWATTHEURE.code &&
-      fs1.attributes.cout_unite !== UNITE_COUT_MEGAWATTHEURE.code
-    ) {
+    } else if (fs2.cout_unite === UNITE_COUT_MEGAWATTHEURE.code && fs1.cout_unite !== UNITE_COUT_MEGAWATTHEURE.code) {
       return -1;
     }
-    const cout1 = (fs1.attributes.cout_maximum || 0) - (fs1.attributes.cout_minimum || 0);
-    const cout2 = (fs2.attributes.cout_maximum || 0) - (fs2.attributes.cout_minimum || 0);
+    const cout1 = (fs1.cout_maximum || 0) - (fs1.cout_minimum || 0);
+    const cout2 = (fs2.cout_maximum || 0) - (fs2.cout_minimum || 0);
     return cout1 < cout2 ? -1 : 1;
   },
 };
@@ -44,8 +38,8 @@ const SORT_SPEED: AideDecisionSortFilter = {
   code: "rapide",
   label: "Les plus rapides",
   sortFn: (fs1, fs2) =>
-    ((fs1.attributes.delai_travaux_maximum || 0) - (fs1.attributes.delai_travaux_minimum || 0)) / 2 >
-    ((fs2.attributes.delai_travaux_maximum || 0) - (fs2.attributes.delai_travaux_minimum || 0)) / 2
+    ((fs1.delai_travaux_maximum || 0) - (fs1.delai_travaux_minimum || 0)) / 2 >
+    ((fs2.delai_travaux_maximum || 0) - (fs2.delai_travaux_minimum || 0)) / 2
       ? 1
       : -1,
 };

@@ -19,7 +19,7 @@ export const TableauDeBordFichesSolutionImages = () => {
   return <TableauDeBordSFicheImages selectedFichesIds={selectedFichesSolutionsIds} />;
 };
 
-const TableauDeBordSFicheImages = ({ selectedFichesIds }: { selectedFichesIds?: number[] }) => {
+const TableauDeBordSFicheImages = ({ selectedFichesIds }: { selectedFichesIds?: string[] }) => {
   if (!selectedFichesIds) {
     return null;
   }
@@ -27,7 +27,7 @@ const TableauDeBordSFicheImages = ({ selectedFichesIds }: { selectedFichesIds?: 
   return (
     <div className="flex">
       {selectedFichesIds.slice(0, IMAGE_SLICE_INDEX).map((ficheId, index) => (
-        <TableauDeBordFicheSolutionImage ficheSolutionId={ficheId.toString()} key={index} />
+        <TableauDeBordFicheSolutionImage ficheSolutionId={ficheId} key={index} />
       ))}
       {selectedFichesIds.length > IMAGE_SLICE_INDEX && (
         <div
@@ -44,7 +44,7 @@ const TableauDeBordSFicheImages = ({ selectedFichesIds }: { selectedFichesIds?: 
 };
 
 const TableauDeBordFicheSolutionImage = ({ ficheSolutionId }: { ficheSolutionId: string }) => {
-  const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionCompleteUrlApi(ficheSolutionId));
+  const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(makeFicheSolutionCompleteUrlApi([ficheSolutionId]));
   const ficheSolution = data && data[0];
   return (
     <div className="mr-2 h-10 w-10 shrink-0 overflow-hidden rounded-[50%]">
@@ -54,7 +54,7 @@ const TableauDeBordFicheSolutionImage = ({ ficheSolutionId }: { ficheSolutionId:
         width={48}
         height={48}
         sizes="30vw md:5vw"
-        src={getStrapiImageUrl(ficheSolution?.attributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
+        src={getStrapiImageUrl(ficheSolution?.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
         unoptimized
       />
     </div>

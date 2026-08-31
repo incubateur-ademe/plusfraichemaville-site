@@ -5,7 +5,7 @@ import { AnnuaireRexContent } from "./annuaire-rex-content";
 import { AnnuaireRexSkeleton } from "./annuaire-rex-skeleton";
 import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 
-export const AnnuaireRexSidePanelContainer = ({ rexId }: { rexId: number }) => {
+export const AnnuaireRexSidePanelContainer = ({ rexId }: { rexId: string }) => {
   const sidePanel = useSidePanelFetcher<RetourExperience>({
     url: GET_REX_WITH_CONTACTS_BY_ID(rexId),
     Skeleton: AnnuaireRexSkeleton,

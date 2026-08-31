@@ -344,7 +344,7 @@ export const addAideAlreadySeenToUserProjet = async (
 export const addFicheDiagnosticSeenToUserProjet = async (
   userId: string,
   projetId: number,
-  ficheDiagnosticId: number,
+  ficheDiagnosticId: string,
 ): Promise<UserProjetWithUser> => {
   return prismaClient.user_projet.update({
     where: {
@@ -378,7 +378,7 @@ export const addAideMoreInfoClickedToUserProjet = async (
 export const addAnnuaireRexProjetClickedToUserProjet = async (
   userId: string,
   projetId: number,
-  rexId: number,
+  rexId: string,
 ): Promise<UserProjetWithUser> => {
   return prismaClient.user_projet.update({
     where: {
@@ -412,7 +412,7 @@ export const addAnnuaireInProgressProjetClickedToUserProjet = async (
 export const updateUserProjetAidesFsUnselected = async (
   userId: string,
   projectId: number,
-  unselectedIds: number[],
+  unselectedIds: string[],
 ): Promise<user_projet | null> => {
   return prismaClient.user_projet.update({
     where: {

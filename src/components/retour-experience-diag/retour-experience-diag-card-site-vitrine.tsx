@@ -15,7 +15,7 @@ type RetourExperienceDiagCardSiteVitrineProps = {
 export const RetourExperienceDiagCardSiteVitrine = ({ rex, className }: RetourExperienceDiagCardSiteVitrineProps) => {
   if (!rex) return null;
 
-  const { titre, image_principale, lieu, slug } = rex.attributes;
+  const { titre, image_principale, lieu, slug } = rex;
 
   return (
     <div className={clsx(className, "pfmv-card fr-enlarge-link flex w-80 flex-col bg-white")}>
@@ -42,14 +42,14 @@ export const RetourExperienceDiagCardSiteVitrine = ({ rex, className }: RetourEx
             {titre}
           </LinkWithoutPrefetch>
         </h2>
-        {rex.attributes.lien_rex_diagnostics && (
+        {rex.lien_rex_diagnostics && (
           <div className="mb-7 flex flex-wrap items-center gap-2">
-            {rex.attributes.lien_rex_diagnostics.data.map(
+            {rex.lien_rex_diagnostics.map(
               (lienRex) =>
-                lienRex.attributes.fiche_diagnostic && (
+                lienRex.fiche_diagnostic && (
                   <RetourExperienceDiagCardPicto
-                    ficheDiagnostic={lienRex.attributes.fiche_diagnostic.data}
-                    key={lienRex.attributes.fiche_diagnostic.data.id}
+                    ficheDiagnostic={lienRex.fiche_diagnostic}
+                    key={lienRex.fiche_diagnostic.documentId}
                   />
                 ),
             )}

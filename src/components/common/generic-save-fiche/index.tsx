@@ -10,7 +10,7 @@ import { useUserStore } from "@/src/stores/user/provider";
 
 export type GenericSaveBaseProps = {
   type: TypeFiche;
-  id: number;
+  id: string;
   withoutModal?: boolean;
   classNameButton?: string;
   className?: string;

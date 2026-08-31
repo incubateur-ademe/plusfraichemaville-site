@@ -8,28 +8,28 @@ export const RetourExperienceDiagInformations = ({ rex }: RetourExperienceDiagIn
   const informations = [
     {
       title: "Collectivité concernée",
-      description: rex.attributes.collectivite_info,
+      description: rex.collectivite_info,
     },
     {
       title: "Climat",
       description: (
         <>
-          <span className="block text-sm">Actuel : {rex.attributes.climat_actuel}</span>
-          <span className="block text-sm">Futur : {rex.attributes.climat_futur}</span>
+          <span className="block text-sm">Actuel : {rex.climat_actuel}</span>
+          <span className="block text-sm">Futur : {rex.climat_futur}</span>
         </>
       ),
     },
     {
       title: "Année de réalisation",
-      description: rex.attributes.annee_realisation,
+      description: rex.annee_realisation,
     },
     {
       title: "Coûts",
-      description: rex.attributes.cout_description,
+      description: rex.cout_description,
     },
     {
       title: "Financement",
-      description: rex.attributes.financements,
+      description: rex.financements,
     },
   ];
 

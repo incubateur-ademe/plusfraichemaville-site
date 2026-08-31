@@ -58,24 +58,21 @@ export const getCoutFiche = (typeFiche: TypeFiche, coutMin?: number, coutMax?: n
   return ALL_COUTS_FICHE.find((cout) => cout.coutMax(typeFiche) >= (coutMax + coutMin) / 2) || COUT_EXPENSIVE;
 };
 
-export const getLabelCoutFourniture = (ficheSolutionAttributes: FicheSolution["attributes"]) =>
+export const getLabelCoutFourniture = (ficheSolutionAttributes: FicheSolution) =>
   ficheSolutionAttributes.cout_minimum != null && ficheSolutionAttributes.cout_maximum != null
     ? `de ${formatNumberWithSpaces(ficheSolutionAttributes.cout_minimum)} à ${formatNumberWithSpaces(
         ficheSolutionAttributes.cout_maximum,
       )} € HT / ${getUniteCoutFromCode(ficheSolutionAttributes.cout_unite).unitLabel}`
     : "Coût non disponible";
 
-export const getLabelCoutEntretien = (ficheSolutionAttributes: FicheSolution["attributes"]) =>
+export const getLabelCoutEntretien = (ficheSolutionAttributes: FicheSolution) =>
   ficheSolutionAttributes.cout_minimum_entretien != null && ficheSolutionAttributes.cout_maximum_entretien != null
     ? `de ${ficheSolutionAttributes.cout_minimum_entretien} à ${
         ficheSolutionAttributes.cout_maximum_entretien
       } € HT / ${getUniteCoutFromCode(ficheSolutionAttributes.cout_entretien_unite).unitLabel}`
     : "Coût non disponible";
 
-export const getLabelCoutFournitureByQuantite = (
-  ficheSolutionAttributes: FicheSolution["attributes"],
-  quantite: number,
-) => {
+export const getLabelCoutFournitureByQuantite = (ficheSolutionAttributes: FicheSolution, quantite: number) => {
   if (ficheSolutionAttributes.cout_minimum == null || ficheSolutionAttributes.cout_maximum == null) {
     return "Coût non disponible";
   } else {
@@ -87,10 +84,7 @@ export const getLabelCoutFournitureByQuantite = (
   }
 };
 
-export const getLabelCoutEntretienByQuantite = (
-  ficheSolutionAttributes: FicheSolution["attributes"],
-  quantite: number,
-) => {
+export const getLabelCoutEntretienByQuantite = (ficheSolutionAttributes: FicheSolution, quantite: number) => {
   if (
     ficheSolutionAttributes.cout_minimum_entretien == null ||
     ficheSolutionAttributes.cout_maximum_entretien == null

@@ -109,7 +109,7 @@ export const GET_AIDES_TERRITOIRES_BY_AIDE_ID_URL = (aideId: number) =>
 
 export const SEARCH_AIDE_FOR_PROJET_URL = (
   projetId: number,
-  ficheSolutionIds?: number[],
+  ficheSolutionIds?: string[],
   userId?: string,
   updateUnselectedFs: boolean = false,
 ) => {
@@ -124,7 +124,7 @@ export const GET_AVAILABLE_PROJETS_FOR_USER_URL = (userId: string) =>
 
 export const GET_PUBLIC_PROJET_BY_ID = (projetId: number) => `/api/get-public-projet-by-id?projetId=${projetId}`;
 
-export const GET_REX_WITH_CONTACTS_BY_ID = (rexId: number) => `/api/get-rex-with-contacts-by-id?rexId=${rexId}`;
+export const GET_REX_WITH_CONTACTS_BY_ID = (rexId: string) => `/api/get-rex-with-contacts-by-id?rexId=${rexId}`;
 
 export const GET_REX_BY_SLUG = (rexSlug: string) => `/api/get-rex-by-slug?rexSlug=${rexSlug}`;
 
@@ -133,7 +133,7 @@ export const POST_REVALIDATE_TAG = (tag?: string) => `/api/revalidate-cache?tag=
 export const SEARCH_CLIMADIAG_PUBLIC_INFO = (search?: string) => `/api/search-climadiag-public-info?search=${search}`;
 export const FUZZY_SEARCH = (search?: string) => `/api/fuzzy-search?q=${search}`;
 
-export const GET_FICHE_DIAGNOSTIC_BY_IDS = (ficheDiagnosticIds: number[]) =>
+export const GET_FICHE_DIAGNOSTIC_BY_IDS = (ficheDiagnosticIds: string[]) =>
   `/api/get-fiches-diagnostic?ficheDiagnosticIds=${JSON.stringify(ficheDiagnosticIds)}`;
 
 export const GET_AIDE_DECISION_FIRST_STEPS_URL = "/api/get-aide-decision-first-step";

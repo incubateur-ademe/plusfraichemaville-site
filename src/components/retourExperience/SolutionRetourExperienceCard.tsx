@@ -23,27 +23,24 @@ export default function SolutionRetourExperienceCard({
             fill
             sizes="(max-width: 768px) 80vw, 20vw"
             className="rounded-full object-cover"
-            src={getStrapiImageUrl(solution.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
+            src={getStrapiImageUrl(solution.image, STRAPI_IMAGE_KEY_SIZE.small)}
             alt=""
             unoptimized
           />
         </div>
         <div className="ml-4 grow">
-          <div className="text-xl font-bold">{solution.attributes.titre}</div>
-          <CmsRichText label={solution.attributes.description || ""} />
-          {!displayFicheSolutionCard && solution.attributes.fiche_solution?.data && (
+          <div className="text-xl font-bold">{solution.titre}</div>
+          <CmsRichText label={solution.description || ""} />
+          {!displayFicheSolutionCard && solution.fiche_solution && (
             <FicheSolutionSmallHorizontalCard
-              ficheSolution={solution.attributes.fiche_solution.data}
+              ficheSolution={solution.fiche_solution}
               className={"mb-4 hidden md:flex"}
             />
           )}
         </div>
       </div>
-      {!displayFicheSolutionCard && solution.attributes.fiche_solution?.data && (
-        <FicheSolutionSmallHorizontalCard
-          ficheSolution={solution.attributes.fiche_solution.data}
-          className={"mb-9 block md:hidden"}
-        />
+      {!displayFicheSolutionCard && solution.fiche_solution && (
+        <FicheSolutionSmallHorizontalCard ficheSolution={solution.fiche_solution} className={"mb-9 block md:hidden"} />
       )}
     </div>
   );

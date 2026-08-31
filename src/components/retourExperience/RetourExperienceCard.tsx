@@ -12,10 +12,9 @@ import { RetourExperience } from "@/src/lib/strapi/types/api/retour-experience";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import clsx from "clsx";
 
-export type RexInHome = Pick<
-  RetourExperience["attributes"],
-  "slug" | "climat_actuel" | "climat_futur" | "titre" | "region"
-> & { image_principale: string };
+export type RexInHome = Pick<RetourExperience, "slug" | "climat_actuel" | "climat_futur" | "titre" | "region"> & {
+  image_principale: string;
+};
 
 export default function RetourExperienceCard({
   retourExperience,
@@ -26,7 +25,7 @@ export default function RetourExperienceCard({
   titleHeadingLevel?: "h1" | "h2" | "h3" | "h4" | "h5" | "h6";
   className?: string;
 }) {
-  const selectRex = "attributes" in retourExperience ? retourExperience.attributes : retourExperience;
+  const selectRex = retourExperience;
   const { projetId } = useParams();
   const url = projetId
     ? PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_REX(+projetId, selectRex.slug)
@@ -57,7 +56,7 @@ export default function RetourExperienceCard({
           </LinkWithoutPrefetch>
         </TitleHeadingTag>
         <Tag small={true} className={"mb-8"}>
-          {getRegionLabelFromCode(selectRex.region?.data?.attributes.code)}
+          {getRegionLabelFromCode(selectRex.region?.code)}
         </Tag>
         <div className={"mt-auto text-xs text-dsfr-text-mention-grey"}>
           <div>

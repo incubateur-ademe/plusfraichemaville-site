@@ -13,7 +13,7 @@ import { ESTIMATION_SUPPRESSION_SOLUTION } from "@/src/helpers/matomo/matomo-tag
 
 type FicheSolutionDeleteModalProps = {
   estimation: EstimationWithAides;
-  ficheSolutionId: number;
+  ficheSolutionId: string;
   ficheSolutionTitle: string;
 };
 

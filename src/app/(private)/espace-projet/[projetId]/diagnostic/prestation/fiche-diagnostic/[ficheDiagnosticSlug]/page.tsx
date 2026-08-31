@@ -15,7 +15,7 @@ type PageProps = {
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const resolvedParams = await params;
   const ficheDiagnostic = await getFicheDiagnosticBySlug(resolvedParams.ficheDiagnosticSlug);
-  return computeMetadata(ficheDiagnostic?.attributes.titre || "Fiche diagnostic");
+  return computeMetadata(ficheDiagnostic?.titre || "Fiche diagnostic");
 }
 
 export default async function FicheDiagnosticPage({ params }: PageProps) {

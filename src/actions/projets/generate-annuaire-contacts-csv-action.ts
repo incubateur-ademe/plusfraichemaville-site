@@ -33,12 +33,12 @@ export const generateAnnuaireContactsCsvAction = async (
     );
 
     const rexContacts = allRex?.flatMap((currentRex) => {
-      const currentRexContacts = currentRex?.attributes.contacts as unknown as StrapiAnnuaireContact[];
+      const currentRexContacts = currentRex?.contacts as unknown as StrapiAnnuaireContact[];
       if (!currentRexContacts) return [];
 
       return (
         rexContactIds
-          ?.filter((rexContactId) => rexContactId.rexId === currentRex?.id)
+          ?.filter((rexContactId) => rexContactId.rexId === currentRex?.documentId)
           .map((rexContactId) => currentRexContacts.find((contact) => contact.id === rexContactId.contactId))
           .filter((contact): contact is StrapiAnnuaireContact => contact !== undefined)
           .map((contact) => currentRex && strapiContactToAnnuaireContact(contact, currentRex))

@@ -29,7 +29,7 @@ export default function FicheSolutionCard({
 }: FicheSolutionCardProps) {
   const { projetId } = useParams();
   const isEspaceProjet = projetId;
-  const ficheAttributes = ficheSolution.attributes;
+  const ficheAttributes = ficheSolution;
 
   const typeSolution = getTypeSolutionFromCode(ficheAttributes.type_solution);
   let url = isEspaceProjet
@@ -77,7 +77,7 @@ export default function FicheSolutionCard({
               className={"text-xs"}
             />
             <GenericSaveFiche
-              id={ficheSolution.id}
+              id={ficheSolution.documentId}
               type={TypeFiche.solution}
               withoutModal={withoutModal}
               classNameButton="mt-4 mx-auto text-center"

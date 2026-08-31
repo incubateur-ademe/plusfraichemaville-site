@@ -27,11 +27,11 @@ export const FicheDiagnosticChoixWithFilters = ({
   };
   useEffect(() => {
     const filteredFd = allFichesDiagnostics
-      .filter((fd) => !onlyCheapDiagnostic || (fd.attributes.cout_max || 0) <= 10000)
+      .filter((fd) => !onlyCheapDiagnostic || (fd.cout_max || 0) <= 10000)
       .filter(
         (fd) =>
           selectedFilters.length === 0 ||
-          fd.attributes.echelle_thermique?.some((echelle: EchelleThermiqueDiagnostic["code"]) =>
+          fd.echelle_thermique?.some((echelle: EchelleThermiqueDiagnostic["code"]) =>
             selectedFilters.includes(echelle),
           ),
       );
@@ -58,7 +58,7 @@ export const FicheDiagnosticChoixWithFilters = ({
       </div>
       <div className="flex flex-wrap gap-6 pb-10">
         {filteredFichesDiagnostics.map((fd) => (
-          <FicheDiagnosticCard key={fd.id} ficheDiagnostic={fd} />
+          <FicheDiagnosticCard key={fd.documentId} ficheDiagnostic={fd} />
         ))}
       </div>
     </>

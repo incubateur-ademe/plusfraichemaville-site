@@ -84,6 +84,7 @@ export const updateUserEtablissementInfo = async (
   userId: string,
   nomEtablissement?: string,
   etablissementInfo?: IApiSirenQueryTypes["etablissement"],
+  isAgentPublic?: boolean,
 ): Promise<UserWithCollectivite | null> => {
   return prismaClient.user.update({
     where: {
@@ -93,6 +94,7 @@ export const updateUserEtablissementInfo = async (
       nom_etablissement: nomEtablissement,
       siren_info: etablissementInfo as Prisma.JsonObject,
       siren: etablissementInfo?.siren,
+      is_agent_public: isAgentPublic,
     },
     include: { collectivites: { include: { collectivite: true } } },
   });

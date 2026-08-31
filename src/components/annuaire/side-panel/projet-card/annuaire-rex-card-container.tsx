@@ -5,7 +5,7 @@ import { AnnuaireRexCardSkeleton } from "@/src/components/annuaire/side-panel/pr
 import { AnnuaireRexCardContent } from "@/src/components/annuaire/side-panel/projet-card/annuaire-rex-card-content";
 import { useSidePanelFetcher } from "@/src/components/annuaire/hooks";
 
-export const AnnuaireRexCardContainer = ({ rexId, onClick }: { rexId: number; onClick?: () => void }) => {
+export const AnnuaireRexCardContainer = ({ rexId, onClick }: { rexId: string; onClick?: () => void }) => {
   const sidePanel = useSidePanelFetcher<RetourExperience>({
     url: GET_REX_WITH_CONTACTS_BY_ID(rexId),
     Skeleton: AnnuaireRexCardSkeleton,

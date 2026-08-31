@@ -15,7 +15,7 @@ type RetourExperienceDiagPageProps = {
 export async function generateMetadata(props: RetourExperienceDiagPageProps): Promise<Metadata> {
   const params = await props.params;
   const rex = await getRetourExperienceDiagBySlug(params.rexSlug);
-  return computeMetadata(rex?.attributes.titre || "Retour d'expérience");
+  return computeMetadata(rex?.titre || "Retour d'expérience");
 }
 
 export default async function RetourExperienceDiagPage(props: RetourExperienceDiagPageProps) {

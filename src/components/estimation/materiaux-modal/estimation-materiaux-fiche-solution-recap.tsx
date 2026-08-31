@@ -13,7 +13,7 @@ import OtherUsagesMateriau from "@/src/components/estimation/materiaux-modal/oth
 type EstimationMateriauxFicheSolutionRecapProps = {
   currentFicheSolutionEstimation: EstimationFicheSolution;
   allEstimationsFicheSolution: EstimationFicheSolution[];
-  goToFicheSolutionStep: (_: number) => void;
+  goToFicheSolutionStep: (_: string) => void;
 };
 
 export function EstimationMateriauxFicheSolutionRecap({
@@ -22,15 +22,15 @@ export function EstimationMateriauxFicheSolutionRecap({
   allEstimationsFicheSolution,
 }: EstimationMateriauxFicheSolutionRecapProps) {
   const { data } = useImmutableSwrWithFetcher<FicheSolution[]>(
-    makeFicheSolutionCompleteUrlApi(currentFicheSolutionEstimation.fiche_solution_id),
+    makeFicheSolutionCompleteUrlApi([currentFicheSolutionEstimation.fiche_solution_id]),
   );
   const { fournitureMin, fournitureMax, entretienMin, entretienMax } = useEstimationFSGlobalPrice([
     currentFicheSolutionEstimation,
   ]);
 
   const getEstimationMateriauByMateriauId = useCallback(
-    (materiauId: number): EstimationMateriau | undefined =>
-      currentFicheSolutionEstimation.estimation_materiaux?.find((estMat) => +estMat.materiau_id === +materiauId),
+    (materiauId: string): EstimationMateriau | undefined =>
+      currentFicheSolutionEstimation.estimation_materiaux?.find((estMat) => estMat.materiau_id === materiauId),
     [currentFicheSolutionEstimation.estimation_materiaux],
   );
 
@@ -44,7 +44,7 @@ export function EstimationMateriauxFicheSolutionRecap({
 
   const ficheSolution = data[0];
 
-  if (!ficheSolution || !ficheSolution.attributes.materiaux || ficheSolution.attributes.materiaux.data.length === 0) {
+  if (!ficheSolution || !ficheSolution.materiaux || ficheSolution.materiaux.length === 0) {
     return null;
   }
 
@@ -52,34 +52,34 @@ export function EstimationMateriauxFicheSolutionRecap({
     <div className="text-dsfr-text-title-grey">
       <hr className="mb-4 h-[1px] p-0" />
       <div className={"mb-6 flex flex-row items-center justify-between gap-6"}>
-        <h2 className="!mb-0 text-[1.375rem]">{ficheSolution.attributes.titre}</h2>
+        <h2 className="!mb-0 text-[1.375rem]">{ficheSolution.titre}</h2>
         <span
-          onClick={() => goToFicheSolutionStep(ficheSolution.id)}
+          onClick={() => goToFicheSolutionStep(ficheSolution.documentId)}
           className="fr-icon-edit-box-line cursor-pointer text-dsfr-text-label-blue-france"
           aria-hidden="true"
         ></span>
       </div>
-      {ficheSolution.attributes.materiaux.data.map(
+      {ficheSolution.materiaux.map(
         (materiau) =>
-          shouldDisplayEstimationMateriau(getEstimationMateriauByMateriauId(materiau.id)) && (
-            <div key={materiau.id}>
+          shouldDisplayEstimationMateriau(getEstimationMateriauByMateriauId(materiau.documentId)) && (
+            <div key={materiau.documentId}>
               <div className={"my-2 flex basis-full flex-row items-center justify-between gap-6"}>
                 <div className="flex flex-row items-center">
                   <div className="relative mr-6 flex h-16 w-16 flex-none">
                     <Image
                       fill
                       sizes="(max-width: 768px) 80vw, 20vw"
-                      src={getStrapiImageUrl(materiau.attributes.image, STRAPI_IMAGE_KEY_SIZE.small)}
-                      alt={materiau.attributes.titre}
+                      src={getStrapiImageUrl(materiau.image, STRAPI_IMAGE_KEY_SIZE.small)}
+                      alt={materiau.titre}
                       className={"rounded-xl object-cover"}
                       unoptimized
                     />
                   </div>
                   <section>
-                    <h3 className="mb-0">{materiau.attributes.titre}</h3>
+                    <h3 className="mb-0">{materiau.titre}</h3>
                     <OtherUsagesMateriau
-                      materiauId={+materiau.id}
-                      ficheSolutionId={+ficheSolution.id}
+                      materiauId={materiau.documentId}
+                      ficheSolutionId={ficheSolution.documentId}
                       materiau={materiau}
                       allEstimationsFichesSolutions={allEstimationsFicheSolution}
                       showQuantity={false}
@@ -90,23 +90,23 @@ export function EstimationMateriauxFicheSolutionRecap({
                   <div>
                     Inv.
                     <strong>
-                      {getEstimationMateriauByMateriauId(materiau.id)?.cout_investissement_override == null
+                      {getEstimationMateriauByMateriauId(materiau.documentId)?.cout_investissement_override == null
                         ? ` ${getLabelCoutFournitureByQuantite(
-                            materiau.attributes,
-                            getEstimationMateriauByMateriauId(materiau.id)?.quantite || 0,
+                            materiau,
+                            getEstimationMateriauByMateriauId(materiau.documentId)?.quantite || 0,
                           )}`
-                        : ` ${getEstimationMateriauByMateriauId(materiau.id)?.cout_investissement_override} €`}
+                        : ` ${getEstimationMateriauByMateriauId(materiau.documentId)?.cout_investissement_override} €`}
                     </strong>
                   </div>
                   <div className="text-sm text-dsfr-text-mention-grey">
                     Ent.
                     <strong>
-                      {getEstimationMateriauByMateriauId(materiau.id)?.cout_entretien_override == null
+                      {getEstimationMateriauByMateriauId(materiau.documentId)?.cout_entretien_override == null
                         ? ` ${getLabelCoutEntretienByQuantite(
-                            materiau.attributes,
-                            getEstimationMateriauByMateriauId(materiau.id)?.quantite || 0,
+                            materiau,
+                            getEstimationMateriauByMateriauId(materiau.documentId)?.quantite || 0,
                           )}`
-                        : ` ${getEstimationMateriauByMateriauId(materiau.id)?.cout_entretien_override} € / an`}
+                        : ` ${getEstimationMateriauByMateriauId(materiau.documentId)?.cout_entretien_override} € / an`}
                     </strong>
                   </div>
                 </div>

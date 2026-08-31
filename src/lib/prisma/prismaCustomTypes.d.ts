@@ -191,7 +191,7 @@ export type SimpleEstimationFicheSolution = Prisma.estimation_fiche_solutionGetP
 }>;
 
 export type EstimationSimpleFicheSolutionForm = {
-  ficheSolutionId: number;
+  ficheSolutionId: string;
   quantite: number;
   coutInvestissementOverride?: number;
   coutEntretienOverride?: number;
@@ -202,13 +202,13 @@ export type EstimationMateriau = Prisma.estimation_materiauxGetPayload<{
 }>;
 
 export type EstimationMateriauForm = {
-  materiauId: number;
+  materiauId: string;
   quantite: number;
   coutInvestissementOverride?: number;
   coutEntretienOverride?: number;
 };
 
-export type AgentConnectInfo = { siret: string };
+export type AgentConnectInfo = { siret: string; roles?: string[] };
 
 type ClimadiagTemperatureProjection = {
   min: number;

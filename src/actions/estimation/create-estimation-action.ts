@@ -25,7 +25,7 @@ export const createEstimationAction = async (
   }
 
   const parseParamResult = EstimationFormSchema.safeParse(data);
-  const fichesSolutions = await getFicheSolutionByIdsComplete(data.ficheSolutionIds.map(Number));
+  const fichesSolutions = await getFicheSolutionByIdsComplete(data.ficheSolutionIds);
   if (!parseParamResult.success) {
     captureError("createEstimationAction format errors", parseParamResult.error.flatten());
     return { type: "error", message: "PARSING_ERROR" };

@@ -8,20 +8,16 @@ import { Webinaire } from "@/src/lib/strapi/types/api/webinaire";
 
 export const GET_WEBINAIRES = async (strapiFilter: StrapiFilter) => `query {
   webinaires ${strapiFilter.wholeFilterString()} {
-    data {
-      id
-      attributes {
-        titre
-        description
-        lien_inscription
-        jour_evenement
-        heure_debut
-        heure_fin
-        lien_replay
-        lien_btn_secondaire
-        label_btn_secondaire
-      }
-    }
+    documentId
+    titre
+    description
+    lien_inscription
+    jour_evenement
+    heure_debut
+    heure_fin
+    lien_replay
+    lien_btn_secondaire
+    label_btn_secondaire
   }
 }`;
 

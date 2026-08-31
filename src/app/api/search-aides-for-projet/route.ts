@@ -34,7 +34,7 @@ export async function GET(request: NextRequest) {
   }
 
   const ficheSolutionIdsParam = request.nextUrl.searchParams.get("ficheSolutionIds");
-  const requestedIds: number[] | null = ficheSolutionIdsParam ? JSON.parse(ficheSolutionIdsParam) : null;
+  const requestedIds: string[] | null = ficheSolutionIdsParam ? JSON.parse(ficheSolutionIdsParam) : null;
 
   const allSolutionIds = projet.fiches
     .filter((fiche) => fiche.type === FicheType.SOLUTION)
@@ -58,7 +58,7 @@ export async function GET(request: NextRequest) {
   const collectivite = await getCollectiviteById(projet.collectiviteId);
   if (collectivite) {
     const result = await searchAidesFromAidesTerritoires(
-      ficheSolutions.map((fs) => fs.attributes),
+      ficheSolutions,
       collectivite,
       selectEspaceLabelByCode(projet.type_espace),
     );

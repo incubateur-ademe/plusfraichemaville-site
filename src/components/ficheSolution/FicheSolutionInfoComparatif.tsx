@@ -11,7 +11,7 @@ export default function FicheSolutionInfoComparatif({
   className,
   temperatureFormat,
 }: {
-  ficheAttributes: FicheSolution["attributes"];
+  ficheAttributes: FicheSolution;
   className?: string;
   temperatureFormat: "large" | "small";
 }) {

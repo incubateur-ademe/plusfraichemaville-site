@@ -2,7 +2,7 @@ import CmsRichText from "../common/CmsRichText";
 import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 
-export const FicheDiagnosticMiseEnOeuvreBloc = ({ attributes }: { attributes: FicheDiagnostic["attributes"] }) => {
+export const FicheDiagnosticMiseEnOeuvreBloc = ({ attributes }: { attributes: FicheDiagnostic }) => {
   const meo = attributes.etapes_mise_en_oeuvre;
 
   return (

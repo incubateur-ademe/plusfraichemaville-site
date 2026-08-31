@@ -18,12 +18,12 @@ export const AnnuaireSidePanelSelectedProjetContainer = ({
       <Conditional>
         {selectedMarker?.idProjet && (
           <Case condition={selectedMarker?.type === "in-progress"}>
-            <AnnuaireInProgressSidePanelContainer projetId={selectedMarker?.idProjet} />
+            <AnnuaireInProgressSidePanelContainer projetId={selectedMarker?.idProjet as number} />
           </Case>
         )}
         {selectedMarker?.idProjet && (
           <Case condition={selectedMarker?.type === "rex"}>
-            <AnnuaireRexSidePanelContainer rexId={selectedMarker?.idProjet} />
+            <AnnuaireRexSidePanelContainer rexId={selectedMarker?.idProjet as string} />
           </Case>
         )}
         <Case condition={selectedMarker?.type === "ma-collectivite"}>

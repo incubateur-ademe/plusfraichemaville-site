@@ -645,6 +645,14 @@ export const getProjetsForRemindToFindContact = async (
         { OR: [{ sourcing_rex: { equals: Prisma.AnyNull } }, { sourcing_rex: { equals: [] } }] },
         { sourcing_user_projets: { none: {} } },
         { ...projetAdminDidNotAlreadyReceivedEmailAndWantEmail(emailType.projetRemindToFindContact) },
+        {
+          users: {
+            some: {
+              role: RoleProjet.ADMIN,
+              user: { is_agent_public: true },
+            },
+          },
+        },
       ],
     },
     include: projetIncludes,

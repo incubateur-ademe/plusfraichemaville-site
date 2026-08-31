@@ -15,8 +15,8 @@ import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
 
 export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
   const currentProjetId = useProjetsStore((state) => state.currentProjetId);
-  const retourExperienceAttributes = data.attributes;
-  const contacts = (data.attributes.contacts as unknown as StrapiAnnuaireContact[]).map((contact) =>
+  const retourExperienceAttributes = data;
+  const contacts = (data.contacts as unknown as StrapiAnnuaireContact[]).map((contact) =>
     strapiContactToAnnuaireContact(contact, data),
   );
   const nomCollectivite = (retourExperienceAttributes.location as GeoJsonAdresse | null)?.properties?.city;
@@ -29,7 +29,11 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
           "min-h-52 px-5 pb-4 pt-2",
         )}
       >
-        <AnnuaireSidePanelTracking type="rex" name={retourExperienceAttributes.titre} clickedProjetId={data.id} />
+        <AnnuaireSidePanelTracking
+          type="rex"
+          name={retourExperienceAttributes.titre}
+          clickedProjetId={data.documentId}
+        />
         <div className="flex items-center justify-between">
           <Badge small noIcon className="!mb-0 !bg-dsfr-text-default-success !text-dsfr-text-inverted-success">
             Projet réalisé
@@ -59,7 +63,7 @@ export const AnnuaireRexContent = ({ data }: { data: RetourExperience }) => {
         </section>
         <div className="flex items-center justify-between">
           <Tag small className="!mb-0 h-fit">
-            {getRegionLabelFromCode(retourExperienceAttributes.region?.data.attributes.code)}
+            {getRegionLabelFromCode(retourExperienceAttributes.region?.code)}
           </Tag>
           <AnnuaireRexContentSeeProject slug={retourExperienceAttributes.slug} />
         </div>

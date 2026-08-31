@@ -41,10 +41,28 @@ export const AvailableProjetsForUserModal = () => {
 
   return (
     <>
-      <modal.Component title="Rejoindre des projets de ma collectivité" size="large" className="join-project-modal">
+      <modal.Component
+        title={
+          userInfos?.is_agent_public
+            ? "Rejoindre des projets de ma collectivité"
+            : "Rejoindre des projets de mon entreprise"
+        }
+        size="large"
+        className="join-project-modal"
+      >
         <span className="mb-8 block text-base">
-          {`Vous pouvez consulter tous les projets de rafraîchissement créés par la collectivité ${userCollectiviteName}
-          et soumettre une demande d'accès. L'administrateur sera alors notifié de votre demande.`}
+          {userInfos?.is_agent_public ? (
+            `Vous pouvez consulter tous les projets de rafraîchissement créés par la 
+            collectivité ${userCollectiviteName} et soumettre une demande d'accès. L'administrateur sera alors 
+            notifié de votre demande.`
+          ) : (
+            <>
+              Vous pouvez consulter tous les projets de rafraîchissement créés par votre entreprise et soumettre une
+              demande d’accès. L’administrateur sera alors notifié de votre demande.
+              <br />
+              Si vous souhaitez rejoindre le projet d’une collectivité, demandez-lui de vous y inviter.
+            </>
+          )}
         </span>
         <Conditional>
           <Case condition={!isLoading && (availableProjects?.length || 0) === 0}>

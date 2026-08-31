@@ -15,21 +15,17 @@ import { GenericLink } from "@/src/components/common/generic-links/generic-link"
 export default function FicheSolutionTabSynthese({
   ficheSolution,
 }: {
-  ficheSolutionId: number;
+  ficheSolutionId: string;
   ficheSolution: FicheSolution;
   projetId?: string;
 }) {
-  const typeSolution = getTypeSolutionFromCode(ficheSolution.attributes.type_solution);
+  const typeSolution = getTypeSolutionFromCode(ficheSolution.type_solution);
   const creditsImage = useMemo(() => getCreditsImageForFicheSolution(ficheSolution), [ficheSolution]);
-  const ficheAttributes = ficheSolution?.attributes;
+  const ficheAttributes = ficheSolution;
 
   const uniqueRetourExperienceList =
-    ficheSolution?.attributes.solution_retour_experiences?.data.reduce((accumulator, rex) => {
-      if (
-        !accumulator.find(
-          (item) => item.attributes.retour_experience?.data.id === rex.attributes.retour_experience?.data.id,
-        )
-      ) {
+    ficheSolution?.solution_retour_experiences?.reduce((accumulator, rex) => {
+      if (!accumulator.find((item) => item.retour_experience?.documentId === rex.retour_experience?.documentId)) {
         accumulator.push(rex);
       }
       return accumulator;
@@ -59,16 +55,16 @@ export default function FicheSolutionTabSynthese({
             className={"text-sm"}
           />
           <hr className="mt-1 pb-2" />
-          {ficheAttributes.cobenefices?.data.map((cobenefice) => (
-            <div key={cobenefice.id} className="mt-3 flex flex-row">
+          {ficheAttributes.cobenefices?.map((cobenefice) => (
+            <div key={cobenefice.documentId} className="mt-3 flex flex-row">
               <Image
                 width={50}
                 height={50}
-                src={`/images/cobenefices/${cobenefice.attributes.icone || "cobenefice-blank"}.svg`}
+                src={`/images/cobenefices/${cobenefice.icone || "cobenefice-blank"}.svg`}
                 className="mr-4 flex-none"
-                alt={cobenefice.attributes.description}
+                alt={cobenefice.description}
               />
-              <div className="flex items-center text-dsfr-text-mention-grey">{cobenefice.attributes.description}</div>
+              <div className="flex items-center text-dsfr-text-mention-grey">{cobenefice.description}</div>
             </div>
           ))}
         </div>
@@ -117,8 +113,8 @@ export default function FicheSolutionTabSynthese({
           <div className="flex flex-row gap-6 overflow-x-auto pl-2">
             {uniqueRetourExperienceList.map((rex) => (
               <RetourExperienceCard
-                key={rex.attributes.retour_experience?.data.id}
-                retourExperience={rex.attributes.retour_experience?.data as RetourExperience}
+                key={rex.retour_experience?.documentId}
+                retourExperience={rex.retour_experience as RetourExperience}
                 className={"mb-10 mt-8 w-72 flex-none"}
               />
             ))}
@@ -133,16 +129,16 @@ export default function FicheSolutionTabSynthese({
         className="md:my-10"
         imagePath="/images/espace-projet-incentive/guide.svg"
       />
-      {!!ficheAttributes.fiches_solutions_complementaires?.data.length &&
-        ficheAttributes.fiches_solutions_complementaires.data.length > 0 && (
+      {!!ficheAttributes.fiches_solutions_complementaires?.length &&
+        ficheAttributes.fiches_solutions_complementaires.length > 0 && (
           <div className="mt-12 rounded-2xl bg-dsfr-background-alt-blue-france pb-10 pl-4 pt-6">
             <h2 className="mb-4 ml-2 text-[1.375rem] font-bold text-dsfr-text-title-grey">Solutions complémentaires</h2>
             <div className="ml-2 text-dsfr-text-title-grey">
               Les solutions complémentaires sont des solutions pour améliorer l’efficacité globale de rafraîchissement
             </div>
             <div className="flex flex-row gap-6 overflow-x-auto pl-2">
-              {ficheAttributes.fiches_solutions_complementaires.data.map((fs) => (
-                <FicheSolutionCard ficheSolution={fs} key={fs.id} className={"mb-10 mt-8 flex-none"} />
+              {ficheAttributes.fiches_solutions_complementaires.map((fs) => (
+                <FicheSolutionCard ficheSolution={fs} key={fs.documentId} className={"mb-10 mt-8 flex-none"} />
               ))}
             </div>
             <GenericLink page="fichesSolution" className="ml-2 text-pfmv-dark-blue">

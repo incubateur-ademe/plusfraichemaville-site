@@ -18,13 +18,13 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
   return (
     <>
       {lienRexDiagnostics.map((lienRexDiagnostic) => {
-        if (!lienRexDiagnostic.attributes.fiche_diagnostic) return null;
-        const ficheDiagData = lienRexDiagnostic.attributes.fiche_diagnostic.data;
+        if (!lienRexDiagnostic.fiche_diagnostic) return null;
+        const ficheDiagData = lienRexDiagnostic.fiche_diagnostic;
 
-        const { titre, nom_scientifique, slug, image_icone } = ficheDiagData.attributes;
+        const { titre, nom_scientifique, slug, image_icone } = ficheDiagData;
 
         return (
-          <div className="mb-20 flex w-full flex-col gap-10 md:flex-row" key={lienRexDiagnostic.id}>
+          <div className="mb-20 flex w-full flex-col gap-10 md:flex-row" key={lienRexDiagnostic.documentId}>
             <div
               className={clsx(
                 "fiche-diagnostic-icone",
@@ -63,13 +63,13 @@ export const RetourExperienceDiagCombinaison = ({ lienRexDiagnostics }: RetourEx
                   <i>{nom_scientifique}</i>
                 </div>
                 <GenericSaveFiche
-                  id={ficheDiagData.id}
+                  id={ficheDiagData.documentId}
                   type={TypeFiche.diagnostic}
                   classNameButton="absolute top-3 right-4"
                 />
               </div>
               <div className="mb-2 mt-6 font-bold italic">En contexte</div>
-              <CmsRichText className="mb-5 leading-6" label={lienRexDiagnostic.attributes.description} />
+              <CmsRichText className="mb-5 leading-6" label={lienRexDiagnostic.description} />
             </div>
           </div>
         );

@@ -155,7 +155,8 @@ exports.Prisma.UserScalarFieldEnum = {
   accept_communication_suivi_projet: 'accept_communication_suivi_projet',
   statut: 'statut',
   statut_updated_at: 'statut_updated_at',
-  last_browsing_date: 'last_browsing_date'
+  last_browsing_date: 'last_browsing_date',
+  is_agent_public: 'is_agent_public'
 };
 
 exports.Prisma.VerificationTokenScalarFieldEnum = {
@@ -474,7 +475,10 @@ exports.Prisma.user_projetOrderByRelevanceFieldEnum = {
   email_address: 'email_address',
   user_id: 'user_id',
   invitation_token: 'invitation_token',
-  deleted_by: 'deleted_by'
+  deleted_by: 'deleted_by',
+  aides_fs_unselected: 'aides_fs_unselected',
+  fiches_diagnostic_seen: 'fiches_diagnostic_seen',
+  annuaire_rex_projet_clicked: 'annuaire_rex_projet_clicked'
 };
 
 exports.Prisma.emailOrderByRelevanceFieldEnum = {
@@ -494,11 +498,14 @@ exports.Prisma.projetOrderByRelevanceFieldEnum = {
   type_espace: 'type_espace',
   adresse: 'adresse',
   niveau_maturite: 'niveau_maturite',
+  fiches_solutions_id: 'fiches_solutions_id',
+  fiches_diagnostic_id: 'fiches_diagnostic_id',
   recommandations_viewed_by: 'recommandations_viewed_by',
   deleted_by: 'deleted_by'
 };
 
 exports.Prisma.projet_ficheOrderByRelevanceFieldEnum = {
+  fiche_id: 'fiche_id',
   user_id: 'user_id'
 };
 
@@ -534,11 +541,13 @@ exports.Prisma.projet_aidesOrderByRelevanceFieldEnum = {
 
 exports.Prisma.estimation_materiauxOrderByRelevanceFieldEnum = {
   id: 'id',
-  estimation_fiche_solution_id: 'estimation_fiche_solution_id'
+  estimation_fiche_solution_id: 'estimation_fiche_solution_id',
+  materiau_id: 'materiau_id'
 };
 
 exports.Prisma.estimation_fiche_solutionOrderByRelevanceFieldEnum = {
-  id: 'id'
+  id: 'id',
+  fiche_solution_id: 'fiche_solution_id'
 };
 
 exports.Prisma.conversationOrderByRelevanceFieldEnum = {

@@ -18,7 +18,7 @@ export default async function SurchauffeUrbaineListeRetourExperiencePage() {
       <div className="mt-12 px-4">
         <ul className="flex grow list-none flex-wrap justify-center gap-6 p-0 md:justify-normal">
           {allRetoursExperiences.map((retourExperience) => (
-            <li key={retourExperience.id} className="flex">
+            <li key={retourExperience.documentId} className="flex">
               <RetourExperienceDiagCard rex={retourExperience} className="w-80" flatStyle={false} />
             </li>
           ))}
