@@ -7460,7 +7460,6 @@ export namespace Prisma {
     nom: number
     code_insee: number
     code_postal: number
-    adresse_info: number
     adresse_all_infos: number
     ban_id: number
     latitude: number
@@ -7515,7 +7514,6 @@ export namespace Prisma {
     nom?: true
     code_insee?: true
     code_postal?: true
-    adresse_info?: true
     adresse_all_infos?: true
     ban_id?: true
     latitude?: true
@@ -7617,7 +7615,6 @@ export namespace Prisma {
     nom: string
     code_insee: string | null
     code_postal: string | null
-    adresse_info: JsonValue | null
     adresse_all_infos: JsonValue | null
     ban_id: string | null
     latitude: number | null
@@ -7651,7 +7648,6 @@ export namespace Prisma {
     nom?: boolean
     code_insee?: boolean
     code_postal?: boolean
-    adresse_info?: boolean
     adresse_all_infos?: boolean
     ban_id?: boolean
     latitude?: boolean
@@ -7670,7 +7666,6 @@ export namespace Prisma {
     nom?: boolean
     code_insee?: boolean
     code_postal?: boolean
-    adresse_info?: boolean
     adresse_all_infos?: boolean
     ban_id?: boolean
     latitude?: boolean
@@ -7686,7 +7681,6 @@ export namespace Prisma {
     nom?: boolean
     code_insee?: boolean
     code_postal?: boolean
-    adresse_info?: boolean
     adresse_all_infos?: boolean
     ban_id?: boolean
     latitude?: boolean
@@ -7702,7 +7696,6 @@ export namespace Prisma {
     nom?: boolean
     code_insee?: boolean
     code_postal?: boolean
-    adresse_info?: boolean
     adresse_all_infos?: boolean
     ban_id?: boolean
     latitude?: boolean
@@ -7712,7 +7705,7 @@ export namespace Prisma {
     aides_territoires_perimeter_id?: boolean
   }
 
-  export type collectiviteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "code_insee" | "code_postal" | "adresse_info" | "adresse_all_infos" | "ban_id" | "latitude" | "longitude" | "created_by" | "created_at" | "aides_territoires_perimeter_id", ExtArgs["result"]["collectivite"]>
+  export type collectiviteOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nom" | "code_insee" | "code_postal" | "adresse_all_infos" | "ban_id" | "latitude" | "longitude" | "created_by" | "created_at" | "aides_territoires_perimeter_id", ExtArgs["result"]["collectivite"]>
   export type collectiviteInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     users?: boolean | collectivite$usersArgs<ExtArgs>
     creator?: boolean | UserDefaultArgs<ExtArgs>
@@ -7738,7 +7731,6 @@ export namespace Prisma {
       nom: string
       code_insee: string | null
       code_postal: string | null
-      adresse_info: Prisma.JsonValue | null
       adresse_all_infos: Prisma.JsonValue | null
       ban_id: string | null
       latitude: number | null
@@ -8176,7 +8168,6 @@ export namespace Prisma {
     readonly nom: FieldRef<"collectivite", 'String'>
     readonly code_insee: FieldRef<"collectivite", 'String'>
     readonly code_postal: FieldRef<"collectivite", 'String'>
-    readonly adresse_info: FieldRef<"collectivite", 'Json'>
     readonly adresse_all_infos: FieldRef<"collectivite", 'Json'>
     readonly ban_id: FieldRef<"collectivite", 'String'>
     readonly latitude: FieldRef<"collectivite", 'Float'>
@@ -12359,11 +12350,8 @@ export namespace Prisma {
     type_espace: number
     adresse: number
     niveau_maturite: number
-    adresse_info: number
     adresse_all_infos: number
     date_echeance: number
-    fiches_solutions_id: number
-    fiches_diagnostic_id: number
     collectiviteId: number
     recommandations_viewed_by: number
     deleted_at: number
@@ -12436,11 +12424,8 @@ export namespace Prisma {
     type_espace?: true
     adresse?: true
     niveau_maturite?: true
-    adresse_info?: true
     adresse_all_infos?: true
     date_echeance?: true
-    fiches_solutions_id?: true
-    fiches_diagnostic_id?: true
     collectiviteId?: true
     recommandations_viewed_by?: true
     deleted_at?: true
@@ -12548,11 +12533,8 @@ export namespace Prisma {
     type_espace: string | null
     adresse: string | null
     niveau_maturite: string | null
-    adresse_info: JsonValue | null
     adresse_all_infos: JsonValue | null
     date_echeance: Date | null
-    fiches_solutions_id: string[]
-    fiches_diagnostic_id: string[]
     collectiviteId: number
     recommandations_viewed_by: string[]
     deleted_at: Date | null
@@ -12592,11 +12574,8 @@ export namespace Prisma {
     type_espace?: boolean
     adresse?: boolean
     niveau_maturite?: boolean
-    adresse_info?: boolean
     adresse_all_infos?: boolean
     date_echeance?: boolean
-    fiches_solutions_id?: boolean
-    fiches_diagnostic_id?: boolean
     collectiviteId?: boolean
     recommandations_viewed_by?: boolean
     deleted_at?: boolean
@@ -12627,11 +12606,8 @@ export namespace Prisma {
     type_espace?: boolean
     adresse?: boolean
     niveau_maturite?: boolean
-    adresse_info?: boolean
     adresse_all_infos?: boolean
     date_echeance?: boolean
-    fiches_solutions_id?: boolean
-    fiches_diagnostic_id?: boolean
     collectiviteId?: boolean
     recommandations_viewed_by?: boolean
     deleted_at?: boolean
@@ -12655,11 +12631,8 @@ export namespace Prisma {
     type_espace?: boolean
     adresse?: boolean
     niveau_maturite?: boolean
-    adresse_info?: boolean
     adresse_all_infos?: boolean
     date_echeance?: boolean
-    fiches_solutions_id?: boolean
-    fiches_diagnostic_id?: boolean
     collectiviteId?: boolean
     recommandations_viewed_by?: boolean
     deleted_at?: boolean
@@ -12683,11 +12656,8 @@ export namespace Prisma {
     type_espace?: boolean
     adresse?: boolean
     niveau_maturite?: boolean
-    adresse_info?: boolean
     adresse_all_infos?: boolean
     date_echeance?: boolean
-    fiches_solutions_id?: boolean
-    fiches_diagnostic_id?: boolean
     collectiviteId?: boolean
     recommandations_viewed_by?: boolean
     deleted_at?: boolean
@@ -12699,7 +12669,7 @@ export namespace Prisma {
     statut_updated_at?: boolean
   }
 
-  export type projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "nom" | "type_espace" | "adresse" | "niveau_maturite" | "adresse_info" | "adresse_all_infos" | "date_echeance" | "fiches_solutions_id" | "fiches_diagnostic_id" | "collectiviteId" | "recommandations_viewed_by" | "deleted_at" | "deleted_by" | "is_public" | "budget" | "sourcing_rex" | "statut" | "statut_updated_at", ExtArgs["result"]["projet"]>
+  export type projetOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "nom" | "type_espace" | "adresse" | "niveau_maturite" | "adresse_all_infos" | "date_echeance" | "collectiviteId" | "recommandations_viewed_by" | "deleted_at" | "deleted_by" | "is_public" | "budget" | "sourcing_rex" | "statut" | "statut_updated_at", ExtArgs["result"]["projet"]>
   export type projetInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | UserDefaultArgs<ExtArgs>
     estimations?: boolean | projet$estimationsArgs<ExtArgs>
@@ -12745,11 +12715,8 @@ export namespace Prisma {
       type_espace: string | null
       adresse: string | null
       niveau_maturite: string | null
-      adresse_info: Prisma.JsonValue | null
       adresse_all_infos: Prisma.JsonValue | null
       date_echeance: Date | null
-      fiches_solutions_id: string[]
-      fiches_diagnostic_id: string[]
       collectiviteId: number
       recommandations_viewed_by: string[]
       deleted_at: Date | null
@@ -13199,11 +13166,8 @@ export namespace Prisma {
     readonly type_espace: FieldRef<"projet", 'String'>
     readonly adresse: FieldRef<"projet", 'String'>
     readonly niveau_maturite: FieldRef<"projet", 'String'>
-    readonly adresse_info: FieldRef<"projet", 'Json'>
     readonly adresse_all_infos: FieldRef<"projet", 'Json'>
     readonly date_echeance: FieldRef<"projet", 'DateTime'>
-    readonly fiches_solutions_id: FieldRef<"projet", 'String[]'>
-    readonly fiches_diagnostic_id: FieldRef<"projet", 'String[]'>
     readonly collectiviteId: FieldRef<"projet", 'Int'>
     readonly recommandations_viewed_by: FieldRef<"projet", 'String[]'>
     readonly deleted_at: FieldRef<"projet", 'DateTime'>
@@ -16071,7 +16035,6 @@ export namespace Prisma {
     created_at: number
     updated_at: number
     projet_id: number
-    materiaux: number
     deleted_at: number
     deleted_by: number
     _all: number
@@ -16114,7 +16077,6 @@ export namespace Prisma {
     created_at?: true
     updated_at?: true
     projet_id?: true
-    materiaux?: true
     deleted_at?: true
     deleted_by?: true
     _all?: true
@@ -16212,7 +16174,6 @@ export namespace Prisma {
     created_at: Date
     updated_at: Date
     projet_id: number
-    materiaux: JsonValue | null
     deleted_at: Date | null
     deleted_by: string | null
     _count: EstimationCountAggregateOutputType | null
@@ -16242,7 +16203,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     projet_id?: boolean
-    materiaux?: boolean
     deleted_at?: boolean
     deleted_by?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
@@ -16259,7 +16219,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     projet_id?: boolean
-    materiaux?: boolean
     deleted_at?: boolean
     deleted_by?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
@@ -16273,7 +16232,6 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     projet_id?: boolean
-    materiaux?: boolean
     deleted_at?: boolean
     deleted_by?: boolean
     creator?: boolean | UserDefaultArgs<ExtArgs>
@@ -16287,12 +16245,11 @@ export namespace Prisma {
     created_at?: boolean
     updated_at?: boolean
     projet_id?: boolean
-    materiaux?: boolean
     deleted_at?: boolean
     deleted_by?: boolean
   }
 
-  export type estimationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "projet_id" | "materiaux" | "deleted_at" | "deleted_by", ExtArgs["result"]["estimation"]>
+  export type estimationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "created_by" | "created_at" | "updated_at" | "projet_id" | "deleted_at" | "deleted_by", ExtArgs["result"]["estimation"]>
   export type estimationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     creator?: boolean | UserDefaultArgs<ExtArgs>
     projet?: boolean | projetDefaultArgs<ExtArgs>
@@ -16327,7 +16284,6 @@ export namespace Prisma {
       created_at: Date
       updated_at: Date
       projet_id: number
-      materiaux: Prisma.JsonValue | null
       deleted_at: Date | null
       deleted_by: string | null
     }, ExtArgs["result"]["estimation"]>
@@ -16763,7 +16719,6 @@ export namespace Prisma {
     readonly created_at: FieldRef<"estimation", 'DateTime'>
     readonly updated_at: FieldRef<"estimation", 'DateTime'>
     readonly projet_id: FieldRef<"estimation", 'Int'>
-    readonly materiaux: FieldRef<"estimation", 'Json'>
     readonly deleted_at: FieldRef<"estimation", 'DateTime'>
     readonly deleted_by: FieldRef<"estimation", 'String'>
   }
@@ -30861,7 +30816,6 @@ export namespace Prisma {
     nom: 'nom',
     code_insee: 'code_insee',
     code_postal: 'code_postal',
-    adresse_info: 'adresse_info',
     adresse_all_infos: 'adresse_all_infos',
     ban_id: 'ban_id',
     latitude: 'latitude',
@@ -30932,11 +30886,8 @@ export namespace Prisma {
     type_espace: 'type_espace',
     adresse: 'adresse',
     niveau_maturite: 'niveau_maturite',
-    adresse_info: 'adresse_info',
     adresse_all_infos: 'adresse_all_infos',
     date_echeance: 'date_echeance',
-    fiches_solutions_id: 'fiches_solutions_id',
-    fiches_diagnostic_id: 'fiches_diagnostic_id',
     collectiviteId: 'collectiviteId',
     recommandations_viewed_by: 'recommandations_viewed_by',
     deleted_at: 'deleted_at',
@@ -30980,7 +30931,6 @@ export namespace Prisma {
     created_at: 'created_at',
     updated_at: 'updated_at',
     projet_id: 'projet_id',
-    materiaux: 'materiaux',
     deleted_at: 'deleted_at',
     deleted_by: 'deleted_by'
   };
@@ -31288,8 +31238,6 @@ export namespace Prisma {
     type_espace: 'type_espace',
     adresse: 'adresse',
     niveau_maturite: 'niveau_maturite',
-    fiches_solutions_id: 'fiches_solutions_id',
-    fiches_diagnostic_id: 'fiches_diagnostic_id',
     recommandations_viewed_by: 'recommandations_viewed_by',
     deleted_by: 'deleted_by'
   };
@@ -32007,7 +31955,6 @@ export namespace Prisma {
     nom?: StringFilter<"collectivite"> | string
     code_insee?: StringNullableFilter<"collectivite"> | string | null
     code_postal?: StringNullableFilter<"collectivite"> | string | null
-    adresse_info?: JsonNullableFilter<"collectivite">
     adresse_all_infos?: JsonNullableFilter<"collectivite">
     ban_id?: StringNullableFilter<"collectivite"> | string | null
     latitude?: FloatNullableFilter<"collectivite"> | number | null
@@ -32025,7 +31972,6 @@ export namespace Prisma {
     nom?: SortOrder
     code_insee?: SortOrderInput | SortOrder
     code_postal?: SortOrderInput | SortOrder
-    adresse_info?: SortOrderInput | SortOrder
     adresse_all_infos?: SortOrderInput | SortOrder
     ban_id?: SortOrderInput | SortOrder
     latitude?: SortOrderInput | SortOrder
@@ -32048,7 +31994,6 @@ export namespace Prisma {
     NOT?: collectiviteWhereInput | collectiviteWhereInput[]
     nom?: StringFilter<"collectivite"> | string
     code_postal?: StringNullableFilter<"collectivite"> | string | null
-    adresse_info?: JsonNullableFilter<"collectivite">
     adresse_all_infos?: JsonNullableFilter<"collectivite">
     latitude?: FloatNullableFilter<"collectivite"> | number | null
     longitude?: FloatNullableFilter<"collectivite"> | number | null
@@ -32065,7 +32010,6 @@ export namespace Prisma {
     nom?: SortOrder
     code_insee?: SortOrderInput | SortOrder
     code_postal?: SortOrderInput | SortOrder
-    adresse_info?: SortOrderInput | SortOrder
     adresse_all_infos?: SortOrderInput | SortOrder
     ban_id?: SortOrderInput | SortOrder
     latitude?: SortOrderInput | SortOrder
@@ -32088,7 +32032,6 @@ export namespace Prisma {
     nom?: StringWithAggregatesFilter<"collectivite"> | string
     code_insee?: StringNullableWithAggregatesFilter<"collectivite"> | string | null
     code_postal?: StringNullableWithAggregatesFilter<"collectivite"> | string | null
-    adresse_info?: JsonNullableWithAggregatesFilter<"collectivite">
     adresse_all_infos?: JsonNullableWithAggregatesFilter<"collectivite">
     ban_id?: StringNullableWithAggregatesFilter<"collectivite"> | string | null
     latitude?: FloatNullableWithAggregatesFilter<"collectivite"> | number | null
@@ -32384,11 +32327,8 @@ export namespace Prisma {
     type_espace?: StringNullableFilter<"projet"> | string | null
     adresse?: StringNullableFilter<"projet"> | string | null
     niveau_maturite?: StringNullableFilter<"projet"> | string | null
-    adresse_info?: JsonNullableFilter<"projet">
     adresse_all_infos?: JsonNullableFilter<"projet">
     date_echeance?: DateTimeNullableFilter<"projet"> | Date | string | null
-    fiches_solutions_id?: StringNullableListFilter<"projet">
-    fiches_diagnostic_id?: StringNullableListFilter<"projet">
     collectiviteId?: IntFilter<"projet"> | number
     recommandations_viewed_by?: StringNullableListFilter<"projet">
     deleted_at?: DateTimeNullableFilter<"projet"> | Date | string | null
@@ -32418,11 +32358,8 @@ export namespace Prisma {
     type_espace?: SortOrderInput | SortOrder
     adresse?: SortOrderInput | SortOrder
     niveau_maturite?: SortOrderInput | SortOrder
-    adresse_info?: SortOrderInput | SortOrder
     adresse_all_infos?: SortOrderInput | SortOrder
     date_echeance?: SortOrderInput | SortOrder
-    fiches_solutions_id?: SortOrder
-    fiches_diagnostic_id?: SortOrder
     collectiviteId?: SortOrder
     recommandations_viewed_by?: SortOrder
     deleted_at?: SortOrderInput | SortOrder
@@ -32456,11 +32393,8 @@ export namespace Prisma {
     type_espace?: StringNullableFilter<"projet"> | string | null
     adresse?: StringNullableFilter<"projet"> | string | null
     niveau_maturite?: StringNullableFilter<"projet"> | string | null
-    adresse_info?: JsonNullableFilter<"projet">
     adresse_all_infos?: JsonNullableFilter<"projet">
     date_echeance?: DateTimeNullableFilter<"projet"> | Date | string | null
-    fiches_solutions_id?: StringNullableListFilter<"projet">
-    fiches_diagnostic_id?: StringNullableListFilter<"projet">
     collectiviteId?: IntFilter<"projet"> | number
     recommandations_viewed_by?: StringNullableListFilter<"projet">
     deleted_at?: DateTimeNullableFilter<"projet"> | Date | string | null
@@ -32490,11 +32424,8 @@ export namespace Prisma {
     type_espace?: SortOrderInput | SortOrder
     adresse?: SortOrderInput | SortOrder
     niveau_maturite?: SortOrderInput | SortOrder
-    adresse_info?: SortOrderInput | SortOrder
     adresse_all_infos?: SortOrderInput | SortOrder
     date_echeance?: SortOrderInput | SortOrder
-    fiches_solutions_id?: SortOrder
-    fiches_diagnostic_id?: SortOrder
     collectiviteId?: SortOrder
     recommandations_viewed_by?: SortOrder
     deleted_at?: SortOrderInput | SortOrder
@@ -32523,11 +32454,8 @@ export namespace Prisma {
     type_espace?: StringNullableWithAggregatesFilter<"projet"> | string | null
     adresse?: StringNullableWithAggregatesFilter<"projet"> | string | null
     niveau_maturite?: StringNullableWithAggregatesFilter<"projet"> | string | null
-    adresse_info?: JsonNullableWithAggregatesFilter<"projet">
     adresse_all_infos?: JsonNullableWithAggregatesFilter<"projet">
     date_echeance?: DateTimeNullableWithAggregatesFilter<"projet"> | Date | string | null
-    fiches_solutions_id?: StringNullableListFilter<"projet">
-    fiches_diagnostic_id?: StringNullableListFilter<"projet">
     collectiviteId?: IntWithAggregatesFilter<"projet"> | number
     recommandations_viewed_by?: StringNullableListFilter<"projet">
     deleted_at?: DateTimeNullableWithAggregatesFilter<"projet"> | Date | string | null
@@ -32680,7 +32608,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"estimation"> | Date | string
     updated_at?: DateTimeFilter<"estimation"> | Date | string
     projet_id?: IntFilter<"estimation"> | number
-    materiaux?: JsonNullableFilter<"estimation">
     deleted_at?: DateTimeNullableFilter<"estimation"> | Date | string | null
     deleted_by?: StringNullableFilter<"estimation"> | string | null
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -32696,7 +32623,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     projet_id?: SortOrder
-    materiaux?: SortOrderInput | SortOrder
     deleted_at?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
     creator?: UserOrderByWithRelationInput
@@ -32716,7 +32642,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"estimation"> | Date | string
     updated_at?: DateTimeFilter<"estimation"> | Date | string
     projet_id?: IntFilter<"estimation"> | number
-    materiaux?: JsonNullableFilter<"estimation">
     deleted_at?: DateTimeNullableFilter<"estimation"> | Date | string | null
     deleted_by?: StringNullableFilter<"estimation"> | string | null
     creator?: XOR<UserScalarRelationFilter, UserWhereInput>
@@ -32732,7 +32657,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     projet_id?: SortOrder
-    materiaux?: SortOrderInput | SortOrder
     deleted_at?: SortOrderInput | SortOrder
     deleted_by?: SortOrderInput | SortOrder
     _count?: estimationCountOrderByAggregateInput
@@ -32751,7 +32675,6 @@ export namespace Prisma {
     created_at?: DateTimeWithAggregatesFilter<"estimation"> | Date | string
     updated_at?: DateTimeWithAggregatesFilter<"estimation"> | Date | string
     projet_id?: IntWithAggregatesFilter<"estimation"> | number
-    materiaux?: JsonNullableWithAggregatesFilter<"estimation">
     deleted_at?: DateTimeNullableWithAggregatesFilter<"estimation"> | Date | string | null
     deleted_by?: StringNullableWithAggregatesFilter<"estimation"> | string | null
   }
@@ -34007,7 +33930,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -34024,7 +33946,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -34041,7 +33962,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -34058,7 +33978,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -34075,7 +33994,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -34090,7 +34008,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -34104,7 +34021,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -34400,11 +34316,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -34432,11 +34345,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -34462,11 +34372,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34494,11 +34401,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34525,11 +34429,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -34549,11 +34450,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -34572,11 +34470,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -34700,7 +34595,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
     projet: projetCreateNestedOneWithoutEstimationsInput
@@ -34715,7 +34609,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
@@ -34726,7 +34619,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
@@ -34741,7 +34633,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
@@ -34754,7 +34645,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
   }
@@ -34763,7 +34653,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -34773,7 +34662,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -36246,7 +36134,6 @@ export namespace Prisma {
     nom?: SortOrder
     code_insee?: SortOrder
     code_postal?: SortOrder
-    adresse_info?: SortOrder
     adresse_all_infos?: SortOrder
     ban_id?: SortOrder
     latitude?: SortOrder
@@ -36617,11 +36504,8 @@ export namespace Prisma {
     type_espace?: SortOrder
     adresse?: SortOrder
     niveau_maturite?: SortOrder
-    adresse_info?: SortOrder
     adresse_all_infos?: SortOrder
     date_echeance?: SortOrder
-    fiches_solutions_id?: SortOrder
-    fiches_diagnostic_id?: SortOrder
     collectiviteId?: SortOrder
     recommandations_viewed_by?: SortOrder
     deleted_at?: SortOrder
@@ -36841,7 +36725,6 @@ export namespace Prisma {
     created_at?: SortOrder
     updated_at?: SortOrder
     projet_id?: SortOrder
-    materiaux?: SortOrder
     deleted_at?: SortOrder
     deleted_by?: SortOrder
   }
@@ -38797,14 +38680,6 @@ export namespace Prisma {
     update?: XOR<XOR<collectiviteUpdateToOneWithWhereWithoutUsersInput, collectiviteUpdateWithoutUsersInput>, collectiviteUncheckedUpdateWithoutUsersInput>
   }
 
-  export type projetCreatefiches_solutions_idInput = {
-    set: string[]
-  }
-
-  export type projetCreatefiches_diagnostic_idInput = {
-    set: string[]
-  }
-
   export type projetCreaterecommandations_viewed_byInput = {
     set: string[]
   }
@@ -38909,16 +38784,6 @@ export namespace Prisma {
     connectOrCreate?: projet_aidesCreateOrConnectWithoutProjetInput | projet_aidesCreateOrConnectWithoutProjetInput[]
     createMany?: projet_aidesCreateManyProjetInputEnvelope
     connect?: projet_aidesWhereUniqueInput | projet_aidesWhereUniqueInput[]
-  }
-
-  export type projetUpdatefiches_solutions_idInput = {
-    set?: string[]
-    push?: string | string[]
-  }
-
-  export type projetUpdatefiches_diagnostic_idInput = {
-    set?: string[]
-    push?: string | string[]
   }
 
   export type projetUpdaterecommandations_viewed_byInput = {
@@ -40444,7 +40309,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -40460,7 +40324,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -40489,11 +40352,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -40519,11 +40379,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -40555,7 +40412,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     projet: projetCreateNestedOneWithoutEstimationsInput
     deleter?: UserCreateNestedOneWithoutEstimations_deletedInput
@@ -40568,7 +40424,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
@@ -40589,7 +40444,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
     projet: projetCreateNestedOneWithoutEstimationsInput
@@ -40603,7 +40457,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
     estimations_fiches_solutions?: estimation_fiche_solutionUncheckedCreateNestedManyWithoutEstimationInput
@@ -40627,11 +40480,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -40658,11 +40508,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -41081,7 +40928,6 @@ export namespace Prisma {
     nom?: StringFilter<"collectivite"> | string
     code_insee?: StringNullableFilter<"collectivite"> | string | null
     code_postal?: StringNullableFilter<"collectivite"> | string | null
-    adresse_info?: JsonNullableFilter<"collectivite">
     adresse_all_infos?: JsonNullableFilter<"collectivite">
     ban_id?: StringNullableFilter<"collectivite"> | string | null
     latitude?: FloatNullableFilter<"collectivite"> | number | null
@@ -41119,11 +40965,8 @@ export namespace Prisma {
     type_espace?: StringNullableFilter<"projet"> | string | null
     adresse?: StringNullableFilter<"projet"> | string | null
     niveau_maturite?: StringNullableFilter<"projet"> | string | null
-    adresse_info?: JsonNullableFilter<"projet">
     adresse_all_infos?: JsonNullableFilter<"projet">
     date_echeance?: DateTimeNullableFilter<"projet"> | Date | string | null
-    fiches_solutions_id?: StringNullableListFilter<"projet">
-    fiches_diagnostic_id?: StringNullableListFilter<"projet">
     collectiviteId?: IntFilter<"projet"> | number
     recommandations_viewed_by?: StringNullableListFilter<"projet">
     deleted_at?: DateTimeNullableFilter<"projet"> | Date | string | null
@@ -41160,7 +41003,6 @@ export namespace Prisma {
     created_at?: DateTimeFilter<"estimation"> | Date | string
     updated_at?: DateTimeFilter<"estimation"> | Date | string
     projet_id?: IntFilter<"estimation"> | number
-    materiaux?: JsonNullableFilter<"estimation">
     deleted_at?: DateTimeNullableFilter<"estimation"> | Date | string | null
     deleted_by?: StringNullableFilter<"estimation"> | string | null
   }
@@ -41618,11 +41460,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -41649,11 +41488,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -41811,11 +41647,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -41842,11 +41675,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -42112,11 +41942,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -42143,11 +41970,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -42746,7 +42570,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -42762,7 +42585,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -42885,7 +42707,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -42901,7 +42722,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -43001,7 +42821,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
     deleter?: UserCreateNestedOneWithoutEstimations_deletedInput
@@ -43014,7 +42833,6 @@ export namespace Prisma {
     created_by: string
     created_at?: Date | string
     updated_at?: Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
@@ -43036,7 +42854,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -43052,7 +42869,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -43429,7 +43245,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -43445,7 +43260,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -43635,11 +43449,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -43666,11 +43477,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -43796,11 +43604,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -43827,11 +43632,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -43947,11 +43749,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -43978,11 +43777,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -44156,11 +43952,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44187,11 +43980,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -44446,11 +44236,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -44477,11 +44264,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -44762,11 +44546,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -44793,11 +44574,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45039,7 +44817,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
     projet: projetCreateNestedOneWithoutEstimationsInput
@@ -45053,7 +44830,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
     estimations_fiches_solutions?: estimation_fiche_solutionUncheckedCreateNestedManyWithoutEstimationInput
@@ -45188,7 +44964,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
@@ -45202,7 +44977,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     estimations_fiches_solutions?: estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationNestedInput
@@ -45337,11 +45111,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -45368,11 +45139,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -45522,11 +45290,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -45553,11 +45318,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -45775,7 +45537,6 @@ export namespace Prisma {
     id: number
     created_at?: Date | string
     updated_at?: Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     creator: UserCreateNestedOneWithoutEstimations_createdInput
     projet: projetCreateNestedOneWithoutEstimationsInput
@@ -45789,7 +45550,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
     estimations_aides?: estimations_aidesUncheckedCreateNestedManyWithoutEstimationInput
@@ -45845,7 +45605,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
@@ -45859,7 +45618,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
@@ -46079,11 +45837,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     is_public?: boolean | null
@@ -46110,11 +45865,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -46240,11 +45992,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -46271,11 +46020,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -46691,7 +46437,6 @@ export namespace Prisma {
     nom: string
     code_insee?: string | null
     code_postal?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: string | null
     latitude?: number | null
@@ -46708,11 +46453,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -46729,7 +46471,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
   }
@@ -46740,7 +46481,6 @@ export namespace Prisma {
     created_at?: Date | string
     updated_at?: Date | string
     projet_id: number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
   }
 
@@ -46753,11 +46493,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     collectiviteId: number
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
@@ -46925,7 +46662,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -46941,7 +46677,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -46957,7 +46692,6 @@ export namespace Prisma {
     nom?: StringFieldUpdateOperationsInput | string
     code_insee?: NullableStringFieldUpdateOperationsInput | string | null
     code_postal?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     ban_id?: NullableStringFieldUpdateOperationsInput | string | null
     latitude?: NullableFloatFieldUpdateOperationsInput | number | null
@@ -46974,11 +46708,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47004,11 +46735,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47034,11 +46762,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47054,7 +46779,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
     deleter?: UserUpdateOneWithoutEstimations_deletedNestedInput
@@ -47067,7 +46791,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
@@ -47079,7 +46802,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -47088,7 +46810,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
     projet?: projetUpdateOneRequiredWithoutEstimationsNestedInput
@@ -47102,7 +46823,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
     estimations_fiches_solutions?: estimation_fiche_solutionUncheckedUpdateManyWithoutEstimationNestedInput
@@ -47114,7 +46834,6 @@ export namespace Prisma {
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
     projet_id?: IntFieldUpdateOperationsInput | number
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
@@ -47126,11 +46845,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47157,11 +46873,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47187,11 +46900,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     collectiviteId?: IntFieldUpdateOperationsInput | number
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
@@ -47551,11 +47261,8 @@ export namespace Prisma {
     type_espace?: string | null
     adresse?: string | null
     niveau_maturite?: string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: Date | string | null
-    fiches_solutions_id?: projetCreatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetCreatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetCreaterecommandations_viewed_byInput | string[]
     deleted_at?: Date | string | null
     deleted_by?: string | null
@@ -47592,11 +47299,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     is_public?: NullableBoolFieldUpdateOperationsInput | boolean | null
@@ -47623,11 +47327,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47653,11 +47354,8 @@ export namespace Prisma {
     type_espace?: NullableStringFieldUpdateOperationsInput | string | null
     adresse?: NullableStringFieldUpdateOperationsInput | string | null
     niveau_maturite?: NullableStringFieldUpdateOperationsInput | string | null
-    adresse_info?: NullableJsonNullValueInput | InputJsonValue
     adresse_all_infos?: NullableJsonNullValueInput | InputJsonValue
     date_echeance?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    fiches_solutions_id?: projetUpdatefiches_solutions_idInput | string[]
-    fiches_diagnostic_id?: projetUpdatefiches_diagnostic_idInput | string[]
     recommandations_viewed_by?: projetUpdaterecommandations_viewed_byInput | string[]
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
@@ -47744,7 +47442,6 @@ export namespace Prisma {
     created_by: string
     created_at?: Date | string
     updated_at?: Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: Date | string | null
     deleted_by?: string | null
   }
@@ -47804,7 +47501,6 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     creator?: UserUpdateOneRequiredWithoutEstimations_createdNestedInput
     deleter?: UserUpdateOneWithoutEstimations_deletedNestedInput
@@ -47817,7 +47513,6 @@ export namespace Prisma {
     created_by?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
     estimations_aides?: estimations_aidesUncheckedUpdateManyWithoutEstimationNestedInput
@@ -47829,7 +47524,6 @@ export namespace Prisma {
     created_by?: StringFieldUpdateOperationsInput | string
     created_at?: DateTimeFieldUpdateOperationsInput | Date | string
     updated_at?: DateTimeFieldUpdateOperationsInput | Date | string
-    materiaux?: NullableJsonNullValueInput | InputJsonValue
     deleted_at?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     deleted_by?: NullableStringFieldUpdateOperationsInput | string | null
   }

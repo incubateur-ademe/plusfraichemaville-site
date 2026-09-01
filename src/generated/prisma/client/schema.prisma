@@ -91,7 +91,6 @@ model collectivite {
   nom                            String
   code_insee                     String?             @unique
   code_postal                    String?
-  adresse_info                   Json?
   adresse_all_infos              Json?
   ban_id                         String?             @unique
   latitude                       Float?
@@ -222,11 +221,8 @@ model projet {
   type_espace               String?
   adresse                   String?
   niveau_maturite           String?
-  adresse_info              Json?
   adresse_all_infos         Json?
   date_echeance             DateTime?
-  fiches_solutions_id       String[]
-  fiches_diagnostic_id      String[]
   estimations               estimation[]
   collectiviteId            Int
   collectivite              collectivite              @relation(fields: [collectiviteId], references: [id])
@@ -285,7 +281,6 @@ model estimation {
   updated_at                   DateTime                    @default(now())
   projet_id                    Int
   projet                       projet                      @relation(fields: [projet_id], references: [id], onDelete: Cascade)
-  materiaux                    Json?
   deleted_at                   DateTime?
   deleted_by                   String?
   deleter                      User?                       @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
