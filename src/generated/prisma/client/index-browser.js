@@ -299,14 +299,6 @@ exports.Prisma.AideScalarFieldEnum = {
   financers: 'financers'
 };
 
-exports.Prisma.Estimations_aidesScalarFieldEnum = {
-  id: 'id',
-  estimationId: 'estimationId',
-  aideId: 'aideId',
-  created_at: 'created_at',
-  user_id: 'user_id'
-};
-
 exports.Prisma.Projet_aidesScalarFieldEnum = {
   id: 'id',
   projet_id: 'projet_id',
@@ -524,10 +516,6 @@ exports.Prisma.aideOrderByRelevanceFieldEnum = {
   financers: 'financers'
 };
 
-exports.Prisma.estimations_aidesOrderByRelevanceFieldEnum = {
-  user_id: 'user_id'
-};
-
 exports.Prisma.projet_aidesOrderByRelevanceFieldEnum = {
   user_id: 'user_id'
 };
@@ -688,7 +676,6 @@ exports.Prisma.ModelName = {
   estimation: 'estimation',
   climadiag: 'climadiag',
   aide: 'aide',
-  estimations_aides: 'estimations_aides',
   projet_aides: 'projet_aides',
   estimation_materiaux: 'estimation_materiaux',
   estimation_fiche_solution: 'estimation_fiche_solution',

@@ -68,7 +68,6 @@ model User {
   accept_communication_produit      Boolean                   @default(true)
   accept_communication_suivi_projet Boolean                   @default(true)
   emails                            email[]
-  estimations_aides                 estimations_aides[]
   fiches                            projet_fiche[]
   diagnostic_simulation             diagnostic_simulation[]
   statut                            StatutUser?
@@ -284,7 +283,6 @@ model estimation {
   deleted_at                   DateTime?
   deleted_by                   String?
   deleter                      User?                       @relation(name: "estimation_deleter", fields: [deleted_by], references: [id])
-  estimations_aides            estimations_aides[]
   estimations_fiches_solutions estimation_fiche_solution[]
 }
 
@@ -327,21 +325,7 @@ model aide {
   type                String
   name                String?
   financers           String[]
-  estimations_aides   estimations_aides[]
   projetAides         projet_aides[]
-}
-
-model estimations_aides {
-  id           Int        @default(autoincrement())
-  estimation   estimation @relation(fields: [estimationId], references: [id])
-  estimationId Int
-  aide         aide       @relation(fields: [aideId], references: [id])
-  aideId       Int
-  created_at   DateTime?  @default(now())
-  user_id      String?
-  created_by   User?      @relation(fields: [user_id], references: [id])
-
-  @@id([estimationId, aideId])
 }
 
 model projet_aides {

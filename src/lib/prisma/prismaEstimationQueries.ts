@@ -5,9 +5,6 @@ import { projetUpdated } from "./prismaProjetQueries";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
 const estimationIncludes = {
-  estimations_aides: {
-    include: { aide: true },
-  },
   estimations_fiches_solutions: {
     include: {
       estimation_materiaux: true,
