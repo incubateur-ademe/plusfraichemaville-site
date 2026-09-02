@@ -159,8 +159,9 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 protéger la santé des habitants.
               </p>
               <p>
-                Quel que soit l’équipement, l'usage fait toute la différence : régler la consigne à 26°C plutôt que 23°C
-                permet de diviser par trois la consommation. Par ailleurs, un recours massif et non maîtrisé à la
+                Quel que soit l’équipement, l’usage fait toute la différence : régler la consigne à 26°C au lieu de 23°C
+                peut diviser par deux ou trois les besoins en refroidissement réduisant ainsi fortement la consommation
+                électrique, sans altération notable du confort. Par ailleurs, un recours massif et non maîtrisé à la
                 climatisation peut intensifier localement le phénomène d’îlot de chaleur urbain et faire augmenter les
                 températures extérieures.
               </p>
