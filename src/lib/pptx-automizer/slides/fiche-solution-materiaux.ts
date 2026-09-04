@@ -5,17 +5,37 @@ import { getFirstSentenceFromHtml, mergeTextRunsInElement, stripSvgBlipExtension
 import { MATERIAU_ROW_DELTA_EMU, MAX_MATERIAUX_PAR_SLIDE, PptxSlideElement, PptxTemplateTag } from "../types";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
+import { Media } from "@/src/lib/strapi/types/common/Media";
 import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
 import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
-import { getLabelCoutEntretien, getLabelCoutFourniture } from "@/src/helpers/cout/cout-materiau";
+import {
+  getLabelCoutEntretien as getLabelCoutEntretienMateriau,
+  getLabelCoutFourniture as getLabelCoutFournitureMateriau,
+} from "@/src/helpers/cout/cout-materiau";
+import {
+  getLabelCoutEntretien as getLabelCoutEntretienFicheSolution,
+  getLabelCoutFourniture as getLabelCoutFournitureFicheSolution,
+} from "@/src/helpers/cout/cout-fiche-solution";
+import { isSimpleMateriauFicheSolution } from "@/src/components/ficheSolution/helpers";
 import { constructPluralString } from "@/src/helpers/common";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
 // The source template's "template" alias, as loaded in generate-synthese-projet-pptx.ts.
 const TEMPLATE_PRES_NAME = "template";
 
-type MateriauADisplay = { materiau: Materiau; quantite: number };
+// A materiau row's content, normalized so the same rendering code can show either an actual
+// CMS materiau or, for a fiche solution with no materiaux breakdown (see
+// isSimpleMateriauFicheSolution), the fiche solution itself as its own single row.
+type MateriauRowData = {
+  imageKey: string;
+  image: Media | undefined;
+  titre: string;
+  descriptionHtml: string | undefined;
+  quantiteLabel: string;
+  coutInvestissementLabel: string;
+  coutEntretienLabel: string;
+};
 
 const chunk = <T>(items: T[], size: number): T[][] => {
   const chunks: T[][] = [];
@@ -25,34 +45,73 @@ const chunk = <T>(items: T[], size: number): T[][] => {
   return chunks;
 };
 
+const getMateriauRowData = (materiau: Materiau, quantite: number): MateriauRowData => {
+  const uniteCout = getUniteCoutFromCode(materiau.cout_unite);
+  return {
+    imageKey: `materiau-${materiau.documentId}`,
+    image: materiau.image,
+    titre: materiau.titre ?? "",
+    descriptionHtml: materiau.description,
+    quantiteLabel: constructPluralString(quantite, uniteCout.unitLabel, uniteCout.unitLabelPlural),
+    coutInvestissementLabel: getLabelCoutFournitureMateriau(materiau),
+    coutEntretienLabel: getLabelCoutEntretienMateriau(materiau),
+  };
+};
+
+// A fiche solution with no materiaux breakdown is estimated as a single quantity on the
+// fiche itself (see EstimationMateriauSimpleFieldForm / EstimationMateriauFieldUnique) — it
+// is shown as its own single row, using the fiche's own image, description and cost range.
+const getSimpleFicheSolutionRowData = (ficheSolution: FicheSolution, quantite: number): MateriauRowData => {
+  const uniteCout = getUniteCoutFromCode(ficheSolution.cout_unite);
+  return {
+    imageKey: `fiche-solution-${ficheSolution.documentId}`,
+    image: ficheSolution.image_principale,
+    titre: ficheSolution.titre ?? "",
+    descriptionHtml: ficheSolution.description_estimation,
+    quantiteLabel: constructPluralString(quantite, uniteCout.unitLabel, uniteCout.unitLabelPlural),
+    coutInvestissementLabel: getLabelCoutFournitureFicheSolution(ficheSolution),
+    coutEntretienLabel: getLabelCoutEntretienFicheSolution(ficheSolution),
+  };
+};
+
 /**
- * A fiche solution's materiaux worth displaying: those with a non-empty, non-zero quantite
- * in the estimation, in the fiche's own materiaux order (same rule as the site's own
- * estimation recap, see EstimationMateriauxFicheSolutionRecap).
+ * A fiche solution's materiau rows worth displaying: for a fiche with a materiaux
+ * breakdown, those with a non-empty, non-zero quantite in the estimation, in the fiche's own
+ * materiaux order (same rule as the site's own estimation recap, see
+ * EstimationMateriauxFicheSolutionRecap); for a fiche with no breakdown
+ * (isSimpleMateriauFicheSolution), a single row for the fiche itself, if its own quantite in
+ * the estimation is non-empty and non-zero.
  */
-const getMateriauxADisplay = (
+const getMateriauRowsADisplay = (
   ficheSolution: FicheSolution,
   estimationFicheSolution: EstimationFicheSolution | undefined,
-): MateriauADisplay[] => {
+): MateriauRowData[] => {
   if (!estimationFicheSolution) return [];
-  return (ficheSolution.materiaux ?? []).reduce<MateriauADisplay[]>((acc, materiau) => {
+
+  if (isSimpleMateriauFicheSolution(ficheSolution)) {
+    return estimationFicheSolution.quantite
+      ? [getSimpleFicheSolutionRowData(ficheSolution, estimationFicheSolution.quantite)]
+      : [];
+  }
+
+  return (ficheSolution.materiaux ?? []).reduce<MateriauRowData[]>((acc, materiau) => {
     const estimationMateriau = estimationFicheSolution.estimation_materiaux.find(
       (em) => em.materiau_id === materiau.documentId,
     );
     if (estimationMateriau?.quantite) {
-      acc.push({ materiau, quantite: estimationMateriau.quantite });
+      acc.push(getMateriauRowData(materiau, estimationMateriau.quantite));
     }
     return acc;
   }, []);
 };
 
-const getMateriauImagePngFilename = (materiauId: string) => `materiau-${materiauId}.png`;
+const getRowImagePngFilename = (imageKey: string) => `${imageKey}.png`;
 
-const loadMateriauImagePngBuffer = async (materiau: Materiau) => {
-  const imageUrl = getStrapiImageUrl(materiau.image, STRAPI_IMAGE_KEY_SIZE.small);
+const loadRowImagePngBuffer = async (image: Media) => {
+  const imageUrl = getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.small);
   const response = await fetch(imageUrl);
   if (!response.ok) {
-    throw new Error(`Failed to fetch materiau image ${imageUrl} (${response.status})`);
+    throw new Error(`Failed to fetch image ${imageUrl} (${response.status})`);
   }
   const arrayBuffer = await response.arrayBuffer();
   // Strapi may serve jpg/png/webp: normalize to PNG, the only bitmap format the pptx media
@@ -61,56 +120,51 @@ const loadMateriauImagePngBuffer = async (materiau: Materiau) => {
 };
 
 /**
- * Preloads (once, deduplicated by materiau documentId) the PNG buffer of every distinct
- * materiau image actually displayed across the selected fiches solutions, so each materiau
- * row can later just point to its filename via ModifyImageHelper.setRelationTarget. A
- * materiau with no image keeps the template's placeholder picture.
+ * Preloads (once, deduplicated by row image key) the PNG buffer of every distinct image
+ * actually displayed across the selected fiches solutions' materiau rows — either a
+ * materiau's own image or, for a fiche with no materiaux breakdown, the fiche's own image —
+ * so each row can later just point to its filename via ModifyImageHelper.setRelationTarget.
+ * A row with no image keeps the template's placeholder picture.
  */
 export const loadMateriauxImages = async (
   pres: Automizer,
   fichesSolutions: FicheSolution[],
   estimationFichesSolutions: EstimationFicheSolution[],
 ) => {
-  const materiauxById = new Map<string, Materiau>();
+  const imagesByKey = new Map<string, Media>();
   fichesSolutions.forEach((ficheSolution) => {
     const estimationFicheSolution = estimationFichesSolutions.find(
       (efs) => efs.fiche_solution_id === ficheSolution.documentId,
     );
-    getMateriauxADisplay(ficheSolution, estimationFicheSolution).forEach(({ materiau }) => {
-      if (materiau.image) {
-        materiauxById.set(materiau.documentId, materiau);
+    getMateriauRowsADisplay(ficheSolution, estimationFicheSolution).forEach((row) => {
+      if (row.image) {
+        imagesByKey.set(row.imageKey, row.image);
       }
     });
   });
 
-  for (const materiau of Array.from(materiauxById.values())) {
+  for (const [imageKey, image] of Array.from(imagesByKey.entries())) {
     try {
-      const pngBuffer = await loadMateriauImagePngBuffer(materiau);
-      pres.loadMediaBuffer(getMateriauImagePngFilename(materiau.documentId), pngBuffer);
+      const pngBuffer = await loadRowImagePngBuffer(image);
+      pres.loadMediaBuffer(getRowImagePngFilename(imageKey), pngBuffer);
     } catch (e) {
-      customCaptureException("Error loading materiau image for synthese projet pptx", e);
+      customCaptureException("Error loading materiau row image for synthese projet pptx", e);
     }
   }
 };
 
-const getMateriauReplacements = (materiau: Materiau, quantite: number): ReplaceText[] => {
-  const uniteCout = getUniteCoutFromCode(materiau.cout_unite);
-  return [
-    { replace: PptxTemplateTag.TITRE_MATERIAU, by: { text: materiau.titre ?? "" } },
-    { replace: PptxTemplateTag.DESCRIPTION_MATERIAU, by: { text: getFirstSentenceFromHtml(materiau.description) } },
-    {
-      replace: PptxTemplateTag.QUANTITE_MATERIAU,
-      by: { text: constructPluralString(quantite, uniteCout.unitLabel, uniteCout.unitLabelPlural) },
-    },
-    { replace: PptxTemplateTag.COUT_INVESTISSEMENT_MATERIAU, by: { text: getLabelCoutFourniture(materiau) } },
-    { replace: PptxTemplateTag.COUT_ENTRETIEN_MATERIAU, by: { text: getLabelCoutEntretien(materiau) } },
-  ];
-};
+const getRowReplacements = (row: MateriauRowData): ReplaceText[] => [
+  { replace: PptxTemplateTag.TITRE_MATERIAU, by: { text: row.titre } },
+  { replace: PptxTemplateTag.DESCRIPTION_MATERIAU, by: { text: getFirstSentenceFromHtml(row.descriptionHtml) } },
+  { replace: PptxTemplateTag.QUANTITE_MATERIAU, by: { text: row.quantiteLabel } },
+  { replace: PptxTemplateTag.COUT_INVESTISSEMENT_MATERIAU, by: { text: row.coutInvestissementLabel } },
+  { replace: PptxTemplateTag.COUT_ENTRETIEN_MATERIAU, by: { text: row.coutEntretienLabel } },
+];
 
-const getMateriauImageCallbacks = (materiau: Materiau): ShapeModificationCallback[] => {
-  if (!materiau.image) return [];
+const getRowImageCallbacks = (row: MateriauRowData): ShapeModificationCallback[] => {
+  if (!row.image) return [];
   const setImageRelationTarget = ModifyImageHelper.setRelationTarget(
-    getMateriauImagePngFilename(materiau.documentId),
+    getRowImagePngFilename(row.imageKey),
   ) as ShapeModificationCallback;
   return [setImageRelationTarget, stripSvgBlipExtension];
 };
@@ -131,14 +185,14 @@ const MATERIAU_ROW_ELEMENT_NAMES = [
  * at the same size and horizontal alignment as the first row. Used for the 2nd and 3rd
  * materiau of a slide — the 1st reuses the row already present on the template slide.
  */
-const addMateriauRow = (slide: ISlide, slideNumber: number, materiau: Materiau, quantite: number, rowIndex: number) => {
+const addMateriauRow = (slide: ISlide, slideNumber: number, row: MateriauRowData, rowIndex: number) => {
   const rowPositionCallback = modify.updatePosition({ y: rowIndex * MATERIAU_ROW_DELTA_EMU });
-  const replacements = getMateriauReplacements(materiau, quantite);
+  const replacements = getRowReplacements(row);
 
   MATERIAU_ROW_ELEMENT_NAMES.forEach((name) => {
     const callbacks: ShapeModificationCallback[] =
       name === PptxSlideElement.IMAGE_MATERIAU
-        ? [...getMateriauImageCallbacks(materiau), rowPositionCallback]
+        ? [...getRowImageCallbacks(row), rowPositionCallback]
         : [mergeTextRunsInElement, modify.replaceText(replacements), rowPositionCallback];
 
     slide.addElement(TEMPLATE_PRES_NAME, slideNumber, { name }, callbacks);
@@ -146,10 +200,10 @@ const addMateriauRow = (slide: ISlide, slideNumber: number, materiau: Materiau, 
 };
 
 /**
- * Slide 4: up to MAX_MATERIAUX_PAR_SLIDE materiaux for one fiche solution, using the
+ * Slide 4: up to MAX_MATERIAUX_PAR_SLIDE materiau rows for one fiche solution, using the
  * template slide's single materiau row as a blueprint. Creates as many slides as needed to
- * show every materiau with a non-empty, non-zero quantite in the estimation — none if the
- * fiche solution has no such materiau.
+ * show every row worth displaying (see getMateriauRowsADisplay) — none if the fiche solution
+ * has none.
  */
 export const addFicheSolutionMateriauxSlides = ({
   addTemplateSlide,
@@ -164,13 +218,13 @@ export const addFicheSolutionMateriauxSlides = ({
   ficheSolutionIndex: number;
   estimationFicheSolution: EstimationFicheSolution | undefined;
 }) => {
-  const materiauxADisplay = getMateriauxADisplay(ficheSolution, estimationFicheSolution);
-  if (materiauxADisplay.length === 0) return;
+  const rowsADisplay = getMateriauRowsADisplay(ficheSolution, estimationFicheSolution);
+  if (rowsADisplay.length === 0) return;
 
-  const materiauxChunks = chunk(materiauxADisplay, MAX_MATERIAUX_PAR_SLIDE);
+  const rowsChunks = chunk(rowsADisplay, MAX_MATERIAUX_PAR_SLIDE);
 
-  materiauxChunks.forEach((materiauxChunk, chunkIndex) => {
-    const [firstMateriau, ...otherMateriaux] = materiauxChunk;
+  rowsChunks.forEach((rowsChunk, chunkIndex) => {
+    const [firstRow, ...otherRows] = rowsChunk;
 
     addTemplateSlide(
       slideInfo,
@@ -179,18 +233,18 @@ export const addFicheSolutionMateriauxSlides = ({
         { replace: PptxTemplateTag.TITRE_FICHE_SOLUTION, by: { text: ficheSolution.titre ?? "" } },
         {
           replace: PptxTemplateTag.PAGINATION_SOLUTION_MATERIAUX,
-          by: { text: materiauxChunks.length > 1 ? `${chunkIndex + 1}/${materiauxChunks.length}` : "" },
+          by: { text: rowsChunks.length > 1 ? `${chunkIndex + 1}/${rowsChunks.length}` : "" },
         },
-        ...getMateriauReplacements(firstMateriau.materiau, firstMateriau.quantite),
+        ...getRowReplacements(firstRow),
       ],
       (slide) => {
-        const imageCallbacks = getMateriauImageCallbacks(firstMateriau.materiau);
+        const imageCallbacks = getRowImageCallbacks(firstRow);
         if (imageCallbacks.length > 0) {
           slide.modifyElement({ name: PptxSlideElement.IMAGE_MATERIAU }, imageCallbacks);
         }
 
-        otherMateriaux.forEach(({ materiau, quantite }, otherIndex) => {
-          addMateriauRow(slide, slideInfo.number, materiau, quantite, otherIndex + 1);
+        otherRows.forEach((row, otherIndex) => {
+          addMateriauRow(slide, slideInfo.number, row, otherIndex + 1);
         });
       },
     );
