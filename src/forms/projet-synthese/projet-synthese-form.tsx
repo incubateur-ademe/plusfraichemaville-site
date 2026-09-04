@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@codegouvfr/react-dsfr/Button";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
+import RadioButtons from "@codegouvfr/react-dsfr/RadioButtons";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
@@ -14,6 +15,7 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { notifications } from "@/src/components/common/notifications";
 import { exportSyntheseProjetAction } from "@/src/actions/projets/export-synthese-projet-action";
 import { ProjetSyntheseFormData, ProjetSyntheseFormSchema } from "./projet-synthese-form-schema";
+import { EstimationRadioOptionLabel } from "./estimation-radio-option-label";
 
 type ProjetSyntheseFormProps = {
   currentProjet?: ProjetWithRelations;
@@ -27,14 +29,19 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
     selectedFichesSolutionsIds.length > 0 ? makeFicheSolutionUrlApi(selectedFichesSolutionsIds) : null,
   );
 
+  const estimations = currentProjet?.estimations?.filter((e) => !e.deleted_at) ?? [];
+  const defaultEstimationId = estimations[0]?.id;
+
   const form = useForm<ProjetSyntheseFormData>({
     resolver: zodResolver(ProjetSyntheseFormSchema),
     defaultValues: {
       solutionIds: [],
+      estimationId: defaultEstimationId,
     },
   });
 
   const selectedSolutionIds = form.watch("solutionIds") || [];
+  const selectedEstimationId = form.watch("estimationId");
 
   useEffect(() => {
     if (fichesSolutions && fichesSolutions.length > 0) {
@@ -44,6 +51,12 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       );
     }
   }, [fichesSolutions, form]);
+
+  useEffect(() => {
+    if (defaultEstimationId && form.getValues("estimationId") === undefined) {
+      form.setValue("estimationId", defaultEstimationId);
+    }
+  }, [defaultEstimationId, form]);
 
   const handleToggleSolution = (documentId: string) => {
     const current = form.getValues("solutionIds") || [];
@@ -126,7 +139,26 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
           </li>
           <li className="fr-h4">
             <span>Estimation budgétaire</span>
-            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <div className="mt-4 pl-12 font-normal text-base">
+              {estimations.length === 0 ? (
+                <p className="text-base text-dsfr-text-mention-grey">
+                  Aucune estimation ajoutée au projet
+                </p>
+              ) : (
+                <RadioButtons
+                  className="mb-0"
+                  options={estimations.map((estimation) => ({
+                    label: <EstimationRadioOptionLabel estimation={estimation} />,
+                    nativeInputProps: {
+                      name: "estimationId",
+                      value: estimation.id,
+                      checked: selectedEstimationId === estimation.id,
+                      onChange: () => form.setValue("estimationId", estimation.id),
+                    },
+                  }))}
+                />
+              )}
+            </div>
           </li>
           <li className="fr-h4">
             <span>Aides retenues</span>

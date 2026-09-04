@@ -37,5 +37,6 @@ export const getPictoCobeneficeElementName = (slotIndex: number) => `picto_coben
 export type GenerateSyntheseProjetPptxParams = {
   projet: ProjetWithRelations;
   solutionIds?: string[];
+  estimationId?: number | null;
   templateFileName?: string;
 };

@@ -32,10 +32,15 @@ export const exportSyntheseProjetAction = async (
     return { type: "error", message: "UNAUTHORIZED", fileBase64: null };
   }
 
+  if (parse.data.estimationId && !projet.estimations.some((estimation) => estimation.id === parse.data.estimationId)) {
+    return { type: "error", message: "UNAUTHORIZED", fileBase64: null };
+  }
+
   try {
     const fileBuffer = await generateSyntheseProjetPptx({
       projet,
       solutionIds: parse.data.solutionIds,
+      estimationId: parse.data.estimationId,
     });
 
     return {
