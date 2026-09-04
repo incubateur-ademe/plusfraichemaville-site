@@ -7,6 +7,8 @@ import { addPageDeGardeSlide } from "./slides/page-de-garde";
 import { addFichesSolutionIntroSlide } from "./slides/fiches-solution-intro";
 import { addFicheSolutionDetailSlide, loadCobeneficeIcons } from "./slides/fiche-solution-detail";
 import { addFicheSolutionMateriauxSlides, loadMateriauxImages } from "./slides/fiche-solution-materiaux";
+import { addEstimationIntroSlide } from "./slides/estimation-intro";
+import { addEstimationRecapSlides } from "./slides/estimation-recap";
 import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
@@ -100,6 +102,11 @@ export const generateSyntheseProjetPptx = async ({
     if (slidesNeedingFichesSolutions.includes(slideInfo.number) && orderedFichesSolutions.length === 0) {
       continue;
     }
+    // The estimation intro and recap slides are only relevant when an estimation was
+    // actually passed to the export.
+    if ([PptxSlide.ESTIMATION_INTRO, PptxSlide.ESTIMATION_RECAP].includes(slideInfo.number) && !estimation) {
+      continue;
+    }
 
     switch (slideInfo.number) {
       case PptxSlide.FICHE_SOLUTION_DETAIL: {
@@ -132,6 +139,18 @@ export const generateSyntheseProjetPptx = async ({
         break;
       case PptxSlide.PAGE_DE_GARDE:
         addPageDeGardeSlide(addTemplateSlide, slideInfo);
+        break;
+      case PptxSlide.ESTIMATION_INTRO:
+        addEstimationIntroSlide(addTemplateSlide, slideInfo);
+        break;
+      case PptxSlide.ESTIMATION_RECAP:
+        await addEstimationRecapSlides({
+          pres,
+          addTemplateSlide,
+          slideInfo,
+          fichesSolutions: orderedFichesSolutions,
+          estimationFichesSolutions,
+        });
         break;
       default:
         // Any other slide (credits, sources, ...) has no slide-specific logic yet.

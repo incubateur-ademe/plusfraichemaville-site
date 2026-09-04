@@ -20,6 +20,13 @@ export enum PptxTemplateTag {
   QUANTITE_MATERIAU = "quantite_materiau",
   COUT_INVESTISSEMENT_MATERIAU = "cout_investissement_materiau",
   COUT_ENTRETIEN_MATERIAU = "cout_entretien_materiau",
+  // Estimation recap slide (6): a fiche solution's own subtotal, and the grand total across
+  // every selected fiche solution.
+  COUT_INVESTISSEMENT_FICHE_SOLUTION = "cout_investissement_fiche_solution",
+  COUT_ENTRETIEN_FICHE_SOLUTION = "cout_entretien_fiche_solution",
+  COUT_INVESTISSEMENT_ESTIMATION = "cout_investissement_estimation",
+  // Typo ("enretien") is in the template itself — must match it exactly.
+  COUT_ENTRETIEN_ESTIMATION = "cout_enretien_estimation",
 }
 
 export enum PptxSlide {
@@ -27,6 +34,8 @@ export enum PptxSlide {
   FICHES_SOLUTION_INTRO = 2,
   FICHE_SOLUTION_DETAIL = 3,
   FICHE_SOLUTION_MATERIAUX = 4,
+  ESTIMATION_INTRO = 5,
+  ESTIMATION_RECAP = 6,
 }
 
 // Names of non-text shapes on the template slides, targeted via slide.removeElement().
@@ -39,6 +48,13 @@ export enum PptxSlideElement {
   ZONE_QUANTITE_MATERIAU = "Text 8",
   ZONE_DESCRIPTION_MATERIAU = "ZoneTexte 16",
   ZONE_COUTS_MATERIAU = "ZoneTexte 18",
+  ZONE_TITRE_FICHE_SOLUTION_RECAP = "ZoneTexte 1",
+  RECAP_FICHE_SOLUTION_TOTAL_BACKGROUND = "Rectangle 11",
+  RECAP_FICHE_SOLUTION_TOTAL_LABELS = "zone_recap_fiche_solution",
+  RECAP_FICHE_SOLUTION_TOTAL_VALUES = "ZoneTexte 10",
+  RECAP_GRAND_TOTAL_TITLE = "recap_titre",
+  RECAP_GRAND_TOTAL_LABELS = "ZoneTexte 5",
+  RECAP_GRAND_TOTAL_VALUES = "ZoneTexte 17",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and

@@ -1,13 +1,12 @@
 import Automizer, { ISlide, modify, ModifyImageHelper, ReplaceText, ShapeModificationCallback } from "pptx-automizer";
-import sharp from "sharp";
 import { AddTemplateSlide, PptxSlideInfo } from "./types";
+import { getImagePngFilename, loadImagePngBuffer } from "./shared-image";
 import { getFirstSentenceFromHtml, mergeTextRunsInElement, stripSvgBlipExtension } from "../helpers";
 import { MATERIAU_ROW_DELTA_EMU, MAX_MATERIAUX_PAR_SLIDE, PptxSlideElement, PptxTemplateTag } from "../types";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 import { Media } from "@/src/lib/strapi/types/common/Media";
 import { EstimationFicheSolution } from "@/src/lib/prisma/prismaCustomTypes";
-import { getStrapiImageUrl, STRAPI_IMAGE_KEY_SIZE } from "@/src/lib/strapi/strapiClient";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import {
   getLabelCoutEntretien as getLabelCoutEntretienMateriau,
@@ -37,7 +36,7 @@ type MateriauRowData = {
   coutEntretienLabel: string;
 };
 
-const chunk = <T>(items: T[], size: number): T[][] => {
+export const chunk = <T>(items: T[], size: number): T[][] => {
   const chunks: T[][] = [];
   for (let i = 0; i < items.length; i += size) {
     chunks.push(items.slice(i, i + size));
@@ -105,20 +104,6 @@ const getMateriauRowsADisplay = (
   }, []);
 };
 
-const getRowImagePngFilename = (imageKey: string) => `${imageKey}.png`;
-
-const loadRowImagePngBuffer = async (image: Media) => {
-  const imageUrl = getStrapiImageUrl(image, STRAPI_IMAGE_KEY_SIZE.small);
-  const response = await fetch(imageUrl);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch image ${imageUrl} (${response.status})`);
-  }
-  const arrayBuffer = await response.arrayBuffer();
-  // Strapi may serve jpg/png/webp: normalize to PNG, the only bitmap format the pptx media
-  // registry is guaranteed to map to a valid OOXML content type (see cobenefice icons above).
-  return sharp(Buffer.from(arrayBuffer)).png().toBuffer();
-};
-
 /**
  * Preloads (once, deduplicated by row image key) the PNG buffer of every distinct image
  * actually displayed across the selected fiches solutions' materiau rows — either a
@@ -145,8 +130,8 @@ export const loadMateriauxImages = async (
 
   for (const [imageKey, image] of Array.from(imagesByKey.entries())) {
     try {
-      const pngBuffer = await loadRowImagePngBuffer(image);
-      pres.loadMediaBuffer(getRowImagePngFilename(imageKey), pngBuffer);
+      const pngBuffer = await loadImagePngBuffer(image);
+      pres.loadMediaBuffer(getImagePngFilename(imageKey), pngBuffer);
     } catch (e) {
       customCaptureException("Error loading materiau row image for synthese projet pptx", e);
     }
@@ -164,7 +149,7 @@ const getRowReplacements = (row: MateriauRowData): ReplaceText[] => [
 const getRowImageCallbacks = (row: MateriauRowData): ShapeModificationCallback[] => {
   if (!row.image) return [];
   const setImageRelationTarget = ModifyImageHelper.setRelationTarget(
-    getRowImagePngFilename(row.imageKey),
+    getImagePngFilename(row.imageKey),
   ) as ShapeModificationCallback;
   return [setImageRelationTarget, stripSvgBlipExtension];
 };
