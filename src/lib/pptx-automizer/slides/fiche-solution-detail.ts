@@ -16,8 +16,6 @@ import { Icone } from "@/src/lib/strapi/types/api/cobenefice";
 import { getPorteeBaisseTemperatureLabelFromCode } from "@/src/helpers/porteeBaisseTemperatureFicheSolution";
 import { getLabelCoutFourniture } from "@/src/helpers/cout/cout-fiche-solution";
 
-// Same wording as FicheSolutionInfoComparatif; unlike getLabelCoutFourniture there is no
-// shared helper for this one, so it's replicated here.
 const getLabelDelaiTravaux = (ficheSolution: FicheSolution) =>
   ficheSolution.delai_travaux_minimum != null && ficheSolution.delai_travaux_maximum != null
     ? `de ${ficheSolution.delai_travaux_minimum} à ${ficheSolution.delai_travaux_maximum} mois`
@@ -25,9 +23,6 @@ const getLabelDelaiTravaux = (ficheSolution: FicheSolution) =>
 
 const COBENEFICE_BLANK_ICON = "cobenefice-blank";
 
-// The cobenefice icons on the site are SVGs, but the pptx placeholder pictos must stay
-// plain PNG-based images (not SVG) to avoid OOXML's dual PNG/SVG image relation, which
-// pptx-automizer's relation-swap helper cannot reliably update both sides of.
 const getCobeneficeIconPngFilename = (icone?: Icone) => `${icone ?? COBENEFICE_BLANK_ICON}.png`;
 
 const getCobeneficeIconPngBuffer = async (icone?: Icone) => {
@@ -36,9 +31,7 @@ const getCobeneficeIconPngBuffer = async (icone?: Icone) => {
   return sharp(svgBuffer, { density: 300 }).png().toBuffer();
 };
 
-// Converts every distinct cobenefice icon actually displayed (capped at MAX_COBENEFICE_SLOTS
-// per fiche) to PNG once, then registers the buffers as media the pictos can point to.
-const loadCobeneficeIcons = async (pres: Automizer, fichesSolutions: FicheSolution[]) => {
+export const loadCobeneficeIcons = async (pres: Automizer, fichesSolutions: FicheSolution[]) => {
   const iconesToLoad = new Set<Icone | undefined>();
   fichesSolutions.forEach((ficheSolution) => {
     (ficheSolution.cobenefices ?? []).slice(0, MAX_COBENEFICE_SLOTS).forEach((cobenefice) => {
@@ -54,75 +47,74 @@ const loadCobeneficeIcons = async (pres: Automizer, fichesSolutions: FicheSoluti
 /**
  * Slide 3: one fiche solution's detail. This is a blueprint slide, duplicated once per
  * selected fiche solution (unlike the other slides, added only once).
+ *
+ * Call `loadCobeneficeIcons` once for every selected fiche solution before calling this
+ * per fiche solution (see generate-synthese-projet-pptx.ts).
  */
-export const addFicheSolutionDetailSlides = async ({
-  pres,
+export const addFicheSolutionDetailSlide = ({
   addTemplateSlide,
   slideInfo,
-  fichesSolutions,
+  ficheSolution,
+  index,
 }: {
-  pres: Automizer;
   addTemplateSlide: AddTemplateSlide;
   slideInfo: PptxSlideInfo;
-  fichesSolutions: FicheSolution[];
+  ficheSolution: FicheSolution;
+  index: number;
 }) => {
-  await loadCobeneficeIcons(pres, fichesSolutions);
+  const hasBaisseTemperature = Boolean(ficheSolution.baisse_temperature);
+  const cobeneficeTextReplacements = Array.from({ length: MAX_COBENEFICE_SLOTS }, (_, slotIndex) => ({
+    replace: getCobeneficeTextTag(slotIndex),
+    by: { text: ficheSolution.cobenefices?.[slotIndex]?.description ?? "" },
+  }));
 
-  fichesSolutions.forEach((ficheSolution, index) => {
-    const hasBaisseTemperature = Boolean(ficheSolution.baisse_temperature);
-    const cobeneficeTextReplacements = Array.from({ length: MAX_COBENEFICE_SLOTS }, (_, slotIndex) => ({
-      replace: getCobeneficeTextTag(slotIndex),
-      by: { text: ficheSolution.cobenefices?.[slotIndex]?.description ?? "" },
-    }));
-
-    addTemplateSlide(
-      slideInfo,
-      [
-        { replace: PptxTemplateTag.NUMERO_FICHE_SOLUTION, by: { text: `${index + 1}` } },
-        { replace: PptxTemplateTag.TITRE_FICHE_SOLUTION, by: { text: ficheSolution.titre ?? "" } },
-        {
-          replace: PptxTemplateTag.DESCRIPTION_COURTE_FICHE_SOLUTION,
-          by: { text: ficheSolution.description_courte ?? "" },
-        },
-        {
-          replace: PptxTemplateTag.PORTEE_BAISSE_TEMPERATURE_FICHE_SOLUTION,
-          by: {
-            text: hasBaisseTemperature
-              ? getPorteeBaisseTemperatureLabelFromCode(ficheSolution.portee_baisse_temperature)
-              : ficheSolution.libelle_avantage_solution ?? "",
-          },
-        },
-        {
-          replace: PptxTemplateTag.BAISSE_TEMPERATURE_FICHE_SOLUTION,
-          by: { text: hasBaisseTemperature ? `-${ficheSolution.baisse_temperature?.toLocaleString("fr")}°C` : "" },
-        },
-        { replace: PptxTemplateTag.COUT_FICHE_SOLUTION, by: { text: getLabelCoutFourniture(ficheSolution) } },
-        { replace: PptxTemplateTag.DELAI_FICHE_SOLUTION, by: { text: getLabelDelaiTravaux(ficheSolution) } },
-        ...cobeneficeTextReplacements,
-      ],
-      (slide) => {
-        // The picto is only shown as a fallback when there is no baisse_temperature value to display.
-        if (hasBaisseTemperature) {
-          slide.removeElement({ name: PptxSlideElement.PICTO_THERMOMETRE_BAISSE_TEMPERATURE });
-        }
-
-        // The cobenefice pictos are a fixed number of named slots on the template slide:
-        // point each one to the matching cobenefice's icon, and drop the unused slots.
-        for (let slotIndex = 0; slotIndex < MAX_COBENEFICE_SLOTS; slotIndex++) {
-          const slotName = getPictoCobeneficeElementName(slotIndex);
-          const cobenefice = ficheSolution.cobenefices?.[slotIndex];
-          if (cobenefice) {
-            slide.modifyElement({ name: slotName }, [
-              ModifyImageHelper.setRelationTarget(
-                getCobeneficeIconPngFilename(cobenefice.icone),
-              ) as ShapeModificationCallback,
-              stripSvgBlipExtension,
-            ]);
-          } else {
-            slide.removeElement({ name: slotName });
-          }
-        }
+  addTemplateSlide(
+    slideInfo,
+    [
+      { replace: PptxTemplateTag.NUMERO_FICHE_SOLUTION, by: { text: `${index + 1}` } },
+      { replace: PptxTemplateTag.TITRE_FICHE_SOLUTION, by: { text: ficheSolution.titre ?? "" } },
+      {
+        replace: PptxTemplateTag.DESCRIPTION_COURTE_FICHE_SOLUTION,
+        by: { text: ficheSolution.description_courte ?? "" },
       },
-    );
-  });
+      {
+        replace: PptxTemplateTag.PORTEE_BAISSE_TEMPERATURE_FICHE_SOLUTION,
+        by: {
+          text: hasBaisseTemperature
+            ? getPorteeBaisseTemperatureLabelFromCode(ficheSolution.portee_baisse_temperature)
+            : ficheSolution.libelle_avantage_solution ?? "",
+        },
+      },
+      {
+        replace: PptxTemplateTag.BAISSE_TEMPERATURE_FICHE_SOLUTION,
+        by: { text: hasBaisseTemperature ? `-${ficheSolution.baisse_temperature?.toLocaleString("fr")}°C` : "" },
+      },
+      { replace: PptxTemplateTag.COUT_FICHE_SOLUTION, by: { text: getLabelCoutFourniture(ficheSolution) } },
+      { replace: PptxTemplateTag.DELAI_FICHE_SOLUTION, by: { text: getLabelDelaiTravaux(ficheSolution) } },
+      ...cobeneficeTextReplacements,
+    ],
+    (slide) => {
+      // The picto is only shown as a fallback when there is no baisse_temperature value to display.
+      if (hasBaisseTemperature) {
+        slide.removeElement({ name: PptxSlideElement.PICTO_THERMOMETRE_BAISSE_TEMPERATURE });
+      }
+
+      // The cobenefice pictos are a fixed number of named slots on the template slide:
+      // point each one to the matching cobenefice's icon, and drop the unused slots.
+      for (let slotIndex = 0; slotIndex < MAX_COBENEFICE_SLOTS; slotIndex++) {
+        const slotName = getPictoCobeneficeElementName(slotIndex);
+        const cobenefice = ficheSolution.cobenefices?.[slotIndex];
+        if (cobenefice) {
+          slide.modifyElement({ name: slotName }, [
+            ModifyImageHelper.setRelationTarget(
+              getCobeneficeIconPngFilename(cobenefice.icone),
+            ) as ShapeModificationCallback,
+            stripSvgBlipExtension,
+          ]);
+        } else {
+          slide.removeElement({ name: slotName });
+        }
+      }
+    },
+  );
 };

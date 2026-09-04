@@ -1,4 +1,5 @@
 import { XmlElement } from "pptx-automizer";
+import { stripHtmlTags } from "@/src/helpers/common";
 
 /**
  * Normalizes text runs inside paragraph (<a:p>) elements so that split template tags
@@ -82,4 +83,18 @@ export const stripSvgBlipExtension = (element: XmlElement) => {
   blips.forEach((blip) => {
     Array.from(blip.getElementsByTagName("a:extLst")).forEach((extLst) => blip.removeChild(extLst));
   });
+};
+
+/**
+ * Extracts the first sentence of an HTML rich-text field as plain text (tags stripped,
+ * whitespace collapsed). Used for the materiau description on the pptx export, which only
+ * has room for a short excerpt. Falls back to the full plain text if no sentence-ending
+ * punctuation is found.
+ */
+export const getFirstSentenceFromHtml = (html?: string | null): string => {
+  if (!html) return "";
+  const plainText = stripHtmlTags(html).replace(/\s+/g, " ").trim();
+  if (!plainText) return "";
+  const firstSentenceMatch = plainText.match(/^.+?[.!?](?:\s|$)/);
+  return (firstSentenceMatch ? firstSentenceMatch[0] : plainText).trim();
 };
