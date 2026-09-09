@@ -22,6 +22,7 @@ export enum PptxTemplateTag {
   COUT_ENTRETIEN_MATERIAU = "cout_entretien_materiau",
   // Estimation recap slide (6): a fiche solution's own subtotal, and the grand total across
   // every selected fiche solution.
+  PAGINATION_RECAP_ESTIMATION = "pagination_recap_estimation",
   COUT_INVESTISSEMENT_FICHE_SOLUTION = "cout_investissement_fiche_solution",
   COUT_ENTRETIEN_FICHE_SOLUTION = "cout_entretien_fiche_solution",
   COUT_INVESTISSEMENT_ESTIMATION = "cout_investissement_estimation",

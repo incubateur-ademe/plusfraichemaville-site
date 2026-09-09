@@ -517,31 +517,40 @@ export const addEstimationRecapSlides = async ({
 
   const slidePlans = buildSlidePlans(recapDataList);
 
-  slidePlans.forEach((slidePlan) => {
-    addTemplateSlide(slideInfo, [], (slide) => {
-      if (slidePlan.titles.length > 0) {
-        slidePlan.titles.forEach((placement, i) => placeTitle(slide, slideInfo.number, placement, i === 0));
-      } else {
-        hideElements(slide, [PptxSlideElement.ZONE_TITRE_FICHE_SOLUTION_RECAP]);
-      }
+  slidePlans.forEach((slidePlan, planIndex) => {
+    addTemplateSlide(
+      slideInfo,
+      [
+        {
+          replace: PptxTemplateTag.PAGINATION_RECAP_ESTIMATION,
+          by: { text: slidePlans.length > 1 ? `${planIndex + 1}/${slidePlans.length}` : "" },
+        },
+      ],
+      (slide) => {
+        if (slidePlan.titles.length > 0) {
+          slidePlan.titles.forEach((placement, i) => placeTitle(slide, slideInfo.number, placement, i === 0));
+        } else {
+          hideElements(slide, [PptxSlideElement.ZONE_TITRE_FICHE_SOLUTION_RECAP]);
+        }
 
-      if (slidePlan.rows.length > 0) {
-        slidePlan.rows.forEach((placement, i) => placeRow(slide, slideInfo.number, placement, i === 0));
-      } else {
-        hideElements(slide, ROW_ELEMENT_NAMES);
-      }
+        if (slidePlan.rows.length > 0) {
+          slidePlan.rows.forEach((placement, i) => placeRow(slide, slideInfo.number, placement, i === 0));
+        } else {
+          hideElements(slide, ROW_ELEMENT_NAMES);
+        }
 
-      if (slidePlan.bands.length > 0) {
-        slidePlan.bands.forEach((placement, i) => placeBand(slide, slideInfo.number, placement, i === 0));
-      } else {
-        hideElements(slide, BAND_ELEMENT_NAMES);
-      }
+        if (slidePlan.bands.length > 0) {
+          slidePlan.bands.forEach((placement, i) => placeBand(slide, slideInfo.number, placement, i === 0));
+        } else {
+          hideElements(slide, BAND_ELEMENT_NAMES);
+        }
 
-      if (slidePlan.grandTotal) {
-        placeGrandTotal(slide, slidePlan.grandTotal.y, grandTotal);
-      } else {
-        hideElements(slide, GRAND_TOTAL_ELEMENT_NAMES);
-      }
-    });
+        if (slidePlan.grandTotal) {
+          placeGrandTotal(slide, slidePlan.grandTotal.y, grandTotal);
+        } else {
+          hideElements(slide, GRAND_TOTAL_ELEMENT_NAMES);
+        }
+      },
+    );
   });
 };
