@@ -5,8 +5,16 @@ import { mergeTextRunsInElement, stripSvgBlipExtension } from "../helpers";
 import { PptxSlideElement, PptxTemplateTag } from "../types";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
+import { Media } from "@/src/lib/strapi/types/common/Media";
 import { EstimationFicheSolution, EstimationMateriau } from "@/src/lib/prisma/prismaCustomTypes";
-import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
+import {
+  getLabelCoutEntretienByQuantite as getLabelCoutEntretienByQuantiteMateriau,
+  getLabelCoutFournitureByQuantite as getLabelCoutFournitureByQuantiteMateriau,
+} from "@/src/helpers/cout/cout-materiau";
+import {
+  getLabelCoutEntretienByQuantite as getLabelCoutEntretienByQuantiteFicheSolution,
+  getLabelCoutFournitureByQuantite as getLabelCoutFournitureByQuantiteFicheSolution,
+} from "@/src/helpers/cout/cout-fiche-solution";
 import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
 import { constructPluralString, formatNumberWithSpaces } from "@/src/helpers/common";
 import { isSimpleMateriauFicheSolution } from "@/src/components/ficheSolution/helpers";
@@ -66,15 +74,24 @@ const HIDE_Y_EMU = 30000000;
 const hideElements = (slide: ISlide, names: PptxSlideElement[]) =>
   names.forEach((name) => slide.modifyElement({ name }, [modify.setPosition({ y: HIDE_Y_EMU })]));
 
-// A materiau line worth showing in a fiche solution's recap block — same display rule as
-// the site's own EstimationMateriauxFicheSolutionRecap (shouldDisplayEstimationMateriau).
-type RecapMateriauRow = { materiau: Materiau; estimationMateriau: EstimationMateriau };
+// A materiau line worth showing in a fiche solution's recap block, normalized so the same
+// rendering code can show either an actual CMS materiau or, for a fiche solution with no
+// materiaux breakdown (see isSimpleMateriauFicheSolution), the fiche solution itself as its
+// own single row — same idea as the materiaux slide (4)'s MateriauRowData.
+type RecapMateriauRow = {
+  imageKey: string;
+  image: Media | undefined;
+  titre: string;
+  quantiteLabel: string;
+  coutInvestissementLabel: string;
+  coutEntretienLabel: string;
+};
 
 type RecapFicheSolutionData = {
   ficheSolution: FicheSolution;
-  // Empty for a fiche with no materiaux breakdown (isSimpleMateriauFicheSolution), or one
-  // where no materiau passes the display rule — the fiche still gets its own block (title +
-  // subtotal), just with no materiau row.
+  // Empty for a fiche with no materiaux breakdown and a zero/empty quantite, or a fiche with
+  // a breakdown where no materiau passes the display rule — the fiche still gets its own
+  // block (title + subtotal), just with no materiau row.
   rows: RecapMateriauRow[];
   fournitureMin: number;
   fournitureMax: number;
@@ -90,10 +107,54 @@ const shouldDisplayEstimationMateriau = (estimationMateriau?: EstimationMateriau
         estimationMateriau.cout_investissement_override != null),
   );
 
+const getMateriauRow = (materiau: Materiau, estimationMateriau: EstimationMateriau): RecapMateriauRow => {
+  const uniteCout = getUniteCoutFromCode(materiau.cout_unite);
+  return {
+    imageKey: `materiau-${materiau.documentId}`,
+    image: materiau.image,
+    titre: materiau.titre ?? "",
+    quantiteLabel: constructPluralString(estimationMateriau.quantite, uniteCout.unitLabel, uniteCout.unitLabelPlural),
+    coutInvestissementLabel:
+      estimationMateriau.cout_investissement_override == null
+        ? getLabelCoutFournitureByQuantiteMateriau(materiau, estimationMateriau.quantite || 0)
+        : `${estimationMateriau.cout_investissement_override} €`,
+    coutEntretienLabel:
+      estimationMateriau.cout_entretien_override == null
+        ? getLabelCoutEntretienByQuantiteMateriau(materiau, estimationMateriau.quantite || 0)
+        : `${estimationMateriau.cout_entretien_override} € / an`,
+  };
+};
+
+// A fiche solution with no materiaux breakdown is estimated as a single quantity on the
+// fiche itself (see EstimationMateriauSimpleFieldForm) — shown as its own single row here
+// too, using the fiche's own image, same as on the materiaux slide (4).
+const getSimpleFicheSolutionRow = (
+  ficheSolution: FicheSolution,
+  estimationFicheSolution: EstimationFicheSolution,
+): RecapMateriauRow => {
+  const uniteCout = getUniteCoutFromCode(ficheSolution.cout_unite);
+  const quantite = estimationFicheSolution.quantite || 0;
+  return {
+    imageKey: `fiche-solution-${ficheSolution.documentId}`,
+    image: ficheSolution.image_principale,
+    titre: ficheSolution.titre ?? "",
+    quantiteLabel: constructPluralString(quantite, uniteCout.unitLabel, uniteCout.unitLabelPlural),
+    coutInvestissementLabel:
+      estimationFicheSolution.cout_investissement_override == null
+        ? getLabelCoutFournitureByQuantiteFicheSolution(ficheSolution, quantite)
+        : `${estimationFicheSolution.cout_investissement_override} €`,
+    coutEntretienLabel:
+      estimationFicheSolution.cout_entretien_override == null
+        ? getLabelCoutEntretienByQuantiteFicheSolution(ficheSolution, quantite)
+        : `${estimationFicheSolution.cout_entretien_override} € / an`,
+  };
+};
+
 /**
  * One fiche solution's recap data: same computation as useEstimationFSGlobalPrice for a
- * single fiche, plus its materiau rows (none for a fiche with no materiaux breakdown — see
- * isSimpleMateriauFicheSolution).
+ * single fiche, plus its materiau rows — its own single row for a fiche with no materiaux
+ * breakdown (see isSimpleMateriauFicheSolution) and a non-empty, non-zero quantite, or one
+ * row per materiau passing the display rule otherwise.
  */
 const getRecapFicheSolutionData = (
   ficheSolution: FicheSolution,
@@ -105,13 +166,15 @@ const getRecapFicheSolutionData = (
     : computePriceEstimationFicheSolution(ficheSolution, estimationFicheSolution.estimation_materiaux);
 
   const rows: RecapMateriauRow[] = isSimple
-    ? []
+    ? estimationFicheSolution.quantite
+      ? [getSimpleFicheSolutionRow(ficheSolution, estimationFicheSolution)]
+      : []
     : (ficheSolution.materiaux ?? []).reduce<RecapMateriauRow[]>((acc, materiau) => {
         const estimationMateriau = estimationFicheSolution.estimation_materiaux.find(
           (em) => em.materiau_id === materiau.documentId,
         );
         if (shouldDisplayEstimationMateriau(estimationMateriau)) {
-          acc.push({ materiau, estimationMateriau: estimationMateriau as EstimationMateriau });
+          acc.push(getMateriauRow(materiau, estimationMateriau as EstimationMateriau));
         }
         return acc;
       }, []);
@@ -129,45 +192,28 @@ const getRecapFicheSolutionData = (
 const formatTotalLabel = (min: number, max: number, suffix: string) =>
   `${formatNumberWithSpaces(min)} - ${formatNumberWithSpaces(max)} € HT${suffix}`;
 
-const getMateriauRowInvestissementLabel = ({ materiau, estimationMateriau }: RecapMateriauRow) =>
-  estimationMateriau.cout_investissement_override == null
-    ? getLabelCoutFournitureByQuantite(materiau, estimationMateriau.quantite || 0)
-    : `${estimationMateriau.cout_investissement_override} €`;
-
-const getMateriauRowEntretienLabel = ({ materiau, estimationMateriau }: RecapMateriauRow) =>
-  estimationMateriau.cout_entretien_override == null
-    ? getLabelCoutEntretienByQuantite(materiau, estimationMateriau.quantite || 0)
-    : `${estimationMateriau.cout_entretien_override} € / an`;
-
-// Same computation as the materiaux slide (4): quantity followed by its unit.
-const getMateriauRowQuantiteLabel = ({ materiau, estimationMateriau }: RecapMateriauRow) => {
-  const uniteCout = getUniteCoutFromCode(materiau.cout_unite);
-  return constructPluralString(estimationMateriau.quantite, uniteCout.unitLabel, uniteCout.unitLabelPlural);
-};
-
-const getMateriauImageKey = (materiau: Materiau) => `materiau-${materiau.documentId}`;
-
 /**
- * Preloads (once, deduplicated) the PNG buffer of every materiau image actually shown as a
- * row on the recap slides. A materiau with no image keeps the template's placeholder.
+ * Preloads (once, deduplicated by row image key) the PNG buffer of every image actually
+ * shown as a row on the recap slides — either a materiau's own image or, for a fiche with no
+ * materiaux breakdown, the fiche's own image. A row with no image keeps the template's
+ * placeholder picture.
  */
 export const loadEstimationRecapImages = async (pres: Automizer, recapDataList: RecapFicheSolutionData[]) => {
-  const imagesByKey = new Map<string, Materiau["image"]>();
+  const imagesByKey = new Map<string, Media>();
   recapDataList.forEach((data) => {
-    data.rows.forEach(({ materiau }) => {
-      if (materiau.image) {
-        imagesByKey.set(getMateriauImageKey(materiau), materiau.image);
+    data.rows.forEach((row) => {
+      if (row.image) {
+        imagesByKey.set(row.imageKey, row.image);
       }
     });
   });
 
   for (const [imageKey, image] of Array.from(imagesByKey.entries())) {
-    if (!image) continue;
     try {
       const pngBuffer = await loadImagePngBuffer(image);
       pres.loadMediaBuffer(getImagePngFilename(imageKey), pngBuffer);
     } catch (e) {
-      customCaptureException("Error loading materiau image for estimation recap pptx slide", e);
+      customCaptureException("Error loading materiau row image for estimation recap pptx slide", e);
     }
   }
 };
@@ -258,16 +304,16 @@ const buildSlidePlans = (recapDataList: RecapFicheSolutionData[]): SlidePlan[] =
 // ---------------------------------------------------------------------------------------
 
 const getRecapRowReplacements = (row: RecapMateriauRow): ReplaceText[] => [
-  { replace: PptxTemplateTag.TITRE_MATERIAU, by: { text: row.materiau.titre ?? "" } },
-  { replace: PptxTemplateTag.QUANTITE_MATERIAU, by: { text: getMateriauRowQuantiteLabel(row) } },
-  { replace: PptxTemplateTag.COUT_INVESTISSEMENT_MATERIAU, by: { text: getMateriauRowInvestissementLabel(row) } },
-  { replace: PptxTemplateTag.COUT_ENTRETIEN_MATERIAU, by: { text: getMateriauRowEntretienLabel(row) } },
+  { replace: PptxTemplateTag.TITRE_MATERIAU, by: { text: row.titre } },
+  { replace: PptxTemplateTag.QUANTITE_MATERIAU, by: { text: row.quantiteLabel } },
+  { replace: PptxTemplateTag.COUT_INVESTISSEMENT_MATERIAU, by: { text: row.coutInvestissementLabel } },
+  { replace: PptxTemplateTag.COUT_ENTRETIEN_MATERIAU, by: { text: row.coutEntretienLabel } },
 ];
 
 const getRecapRowImageCallbacks = (row: RecapMateriauRow): ShapeModificationCallback[] => {
-  if (!row.materiau.image) return [];
+  if (!row.image) return [];
   const setImageRelationTarget = ModifyImageHelper.setRelationTarget(
-    getImagePngFilename(getMateriauImageKey(row.materiau)),
+    getImagePngFilename(row.imageKey),
   ) as ShapeModificationCallback;
   return [setImageRelationTarget, stripSvgBlipExtension];
 };
