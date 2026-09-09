@@ -42,7 +42,7 @@ const ROW_HEIGHT_EMU = 563896; // titre/image/quantite/couts row's own vertical 
 const ROW_IMAGE_OFFSET_EMU = 46112; // image_materiau vs. zone_titre_materiau
 const ROW_QUANTITE_OFFSET_EMU = 295115; // zone_quantite_materiau vs. zone_titre_materiau
 const ROW_COUTS_OFFSET_EMU = 102231; // zone_cout_materiau vs. zone_titre_materiau
-const BAND_TOP_EMU = 2765181; // bg_recap_estimation_fs, the fiche subtotal band's anchor
+const BAND_TOP_EMU = 2602517; // bg_recap_estimation_fs, the fiche subtotal band's anchor
 const BAND_HEIGHT_EMU = 663816;
 const BAND_LABELS_OFFSET_EMU = 116464; // zone_recap_fiche_solution vs. bg_recap_estimation_fs
 const BAND_VALUES_OFFSET_EMU = 78080; // ZoneTexte 10 vs. bg_recap_estimation_fs
@@ -51,14 +51,18 @@ const GRAND_TOTAL_LABELS_VALUES_OFFSET_EMU = 592055; // recap_total_libelles(_va
 
 // Top-to-top distance from a title to the first row (or the band, for a fiche with none).
 const TITLE_TO_ROW_DELTA_EMU = ROW_TOP_EMU - TITLE_TOP_EMU;
-// Gap between one row's bottom and the next row's top — the template's own gap (671414, the
-// distance from its single row to its band) divided by 3, tightened at the user's request.
-const ROW_GAP_EMU = Math.round((BAND_TOP_EMU - (ROW_TOP_EMU + ROW_HEIGHT_EMU)) / 3);
+// The template's original gap between its single row and its band, before either the band
+// was moved up (see BAND_TOP_EMU) or the row-to-row gap was tightened below — kept as a
+// fixed reference so adjusting one doesn't retroactively change the other.
+const ORIGINAL_ROW_TO_BAND_GAP_EMU = 671414;
+// Gap between one row's bottom and the next row's top — ORIGINAL_ROW_TO_BAND_GAP_EMU divided
+// by 3, tightened at the user's request.
+const ROW_GAP_EMU = Math.round(ORIGINAL_ROW_TO_BAND_GAP_EMU / 3);
 // Top-to-top distance between two consecutive materiau rows.
 const ROW_DELTA_EMU = ROW_HEIGHT_EMU + ROW_GAP_EMU;
-// Gap between a row's bottom and the fiche's own total band's top — kept at the template's
-// original (untightened) value: this separates a fiche's materiaux from its total, not two
-// materiaux from each other.
+// Gap between a row's bottom and the fiche's own total band's top — reacts to wherever the
+// band currently sits (see BAND_TOP_EMU): this separates a fiche's materiaux from its total,
+// not two materiaux from each other, so it isn't tightened like ROW_GAP_EMU above.
 const ROW_TO_BAND_GAP_EMU = BAND_TOP_EMU - (ROW_TOP_EMU + ROW_HEIGHT_EMU);
 // Gap between one fiche's total band and the next fiche's title (or the grand total).
 const BAND_TO_NEXT_BLOCK_GAP_EMU = ROW_TO_BAND_GAP_EMU;
