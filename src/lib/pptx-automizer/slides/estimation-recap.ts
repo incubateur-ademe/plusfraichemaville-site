@@ -7,7 +7,8 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { Materiau } from "@/src/lib/strapi/types/api/materiau";
 import { EstimationFicheSolution, EstimationMateriau } from "@/src/lib/prisma/prismaCustomTypes";
 import { getLabelCoutEntretienByQuantite, getLabelCoutFournitureByQuantite } from "@/src/helpers/cout/cout-materiau";
-import { formatNumberWithSpaces } from "@/src/helpers/common";
+import { getUniteCoutFromCode } from "@/src/helpers/cout/cout-common";
+import { constructPluralString, formatNumberWithSpaces } from "@/src/helpers/common";
 import { isSimpleMateriauFicheSolution } from "@/src/components/ficheSolution/helpers";
 import {
   computePriceEstimationFicheSolution,
@@ -27,17 +28,18 @@ const TEMPLATE_PRES_NAME = "template";
 // another and wrap onto a new slide only when they no longer fit (see buildSlidePlans).
 // ---------------------------------------------------------------------------------------
 
-const TITLE_TOP_EMU = 1153414; // ZoneTexte 1
-const ROW_TOP_EMU = 1575983; // image_materiau, the row group's anchor
-const ROW_HEIGHT_EMU = 517784; // image/titre/couts row's own vertical extent
-const ROW_TITRE_OFFSET_EMU = 90164; // ZoneTexte 8 vs. image_materiau
-const ROW_COUTS_OFFSET_EMU = 56119; // ZoneTexte 18 vs. image_materiau
-const BAND_TOP_EMU = 2765181; // Rectangle 11, the fiche subtotal band's anchor
+const TITLE_TOP_EMU = 1153414; // zone_titre_fs_recap_estimation
+const ROW_TOP_EMU = 1529871; // zone_titre_materiau, the row group's anchor (its topmost shape)
+const ROW_HEIGHT_EMU = 563896; // titre/image/quantite/couts row's own vertical extent
+const ROW_IMAGE_OFFSET_EMU = 46112; // image_materiau vs. zone_titre_materiau
+const ROW_QUANTITE_OFFSET_EMU = 295115; // zone_quantite_materiau vs. zone_titre_materiau
+const ROW_COUTS_OFFSET_EMU = 102231; // zone_cout_materiau vs. zone_titre_materiau
+const BAND_TOP_EMU = 2765181; // bg_recap_estimation_fs, the fiche subtotal band's anchor
 const BAND_HEIGHT_EMU = 663816;
-const BAND_LABELS_OFFSET_EMU = 116464; // zone_recap_fiche_solution vs. Rectangle 11
-const BAND_VALUES_OFFSET_EMU = 78080; // ZoneTexte 10 vs. Rectangle 11
-const GRAND_TOTAL_HEIGHT_EMU = 1022942; // recap_titre top to ZoneTexte 5 / 17 bottom
-const GRAND_TOTAL_LABELS_VALUES_OFFSET_EMU = 592055; // ZoneTexte 5 / ZoneTexte 17 vs. recap_titre
+const BAND_LABELS_OFFSET_EMU = 116464; // zone_recap_fiche_solution vs. bg_recap_estimation_fs
+const BAND_VALUES_OFFSET_EMU = 78080; // ZoneTexte 10 vs. bg_recap_estimation_fs
+const GRAND_TOTAL_HEIGHT_EMU = 1022942; // recap_titre top to recap_total_libelles(_valeurs) bottom
+const GRAND_TOTAL_LABELS_VALUES_OFFSET_EMU = 592055; // recap_total_libelles(_valeurs) vs. recap_titre
 
 // Top-to-top distance from a title to the first row (or the band, for a fiche with none).
 const TITLE_TO_ROW_DELTA_EMU = ROW_TOP_EMU - TITLE_TOP_EMU;
@@ -136,6 +138,12 @@ const getMateriauRowEntretienLabel = ({ materiau, estimationMateriau }: RecapMat
   estimationMateriau.cout_entretien_override == null
     ? getLabelCoutEntretienByQuantite(materiau, estimationMateriau.quantite || 0)
     : `${estimationMateriau.cout_entretien_override} € / an`;
+
+// Same computation as the materiaux slide (4): quantity followed by its unit.
+const getMateriauRowQuantiteLabel = ({ materiau, estimationMateriau }: RecapMateriauRow) => {
+  const uniteCout = getUniteCoutFromCode(materiau.cout_unite);
+  return constructPluralString(estimationMateriau.quantite, uniteCout.unitLabel, uniteCout.unitLabelPlural);
+};
 
 const getMateriauImageKey = (materiau: Materiau) => `materiau-${materiau.documentId}`;
 
@@ -251,6 +259,7 @@ const buildSlidePlans = (recapDataList: RecapFicheSolutionData[]): SlidePlan[] =
 
 const getRecapRowReplacements = (row: RecapMateriauRow): ReplaceText[] => [
   { replace: PptxTemplateTag.TITRE_MATERIAU, by: { text: row.materiau.titre ?? "" } },
+  { replace: PptxTemplateTag.QUANTITE_MATERIAU, by: { text: getMateriauRowQuantiteLabel(row) } },
   { replace: PptxTemplateTag.COUT_INVESTISSEMENT_MATERIAU, by: { text: getMateriauRowInvestissementLabel(row) } },
   { replace: PptxTemplateTag.COUT_ENTRETIEN_MATERIAU, by: { text: getMateriauRowEntretienLabel(row) } },
 ];
@@ -299,10 +308,17 @@ const placeRow = (slide: ISlide, slideNumber: number, placement: RowPlacement, u
     slide,
     slideNumber,
     PptxSlideElement.ZONE_TITRE_MATERIAU,
+    [mergeTextRunsInElement, modify.replaceText(replacements), modify.setPosition({ y: placement.y })],
+    useTemplateShape,
+  );
+  placeOrClone(
+    slide,
+    slideNumber,
+    PptxSlideElement.ZONE_QUANTITE_MATERIAU,
     [
       mergeTextRunsInElement,
       modify.replaceText(replacements),
-      modify.setPosition({ y: placement.y + ROW_TITRE_OFFSET_EMU }),
+      modify.setPosition({ y: placement.y + ROW_QUANTITE_OFFSET_EMU }),
     ],
     useTemplateShape,
   );
@@ -321,7 +337,7 @@ const placeRow = (slide: ISlide, slideNumber: number, placement: RowPlacement, u
     slide,
     slideNumber,
     PptxSlideElement.IMAGE_MATERIAU,
-    [...getRecapRowImageCallbacks(placement.row), modify.setPosition({ y: placement.y })],
+    [...getRecapRowImageCallbacks(placement.row), modify.setPosition({ y: placement.y + ROW_IMAGE_OFFSET_EMU })],
     useTemplateShape,
   );
 };
@@ -390,6 +406,7 @@ const placeGrandTotal = (slide: ISlide, y: number, grandTotal: GrandTotalTotals)
 const ROW_ELEMENT_NAMES = [
   PptxSlideElement.ZONE_TITRE_MATERIAU,
   PptxSlideElement.IMAGE_MATERIAU,
+  PptxSlideElement.ZONE_QUANTITE_MATERIAU,
   PptxSlideElement.ZONE_COUTS_MATERIAU,
 ];
 const BAND_ELEMENT_NAMES = [
