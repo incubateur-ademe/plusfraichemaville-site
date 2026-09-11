@@ -79,7 +79,7 @@ export const ProjetVisibility = ({
           </p>
           <p>
             En tant {`qu'administrateur d'un`} projet, vos prénom, nom et adresse mail seront partagés uniquement avec
-            les collectivités utilsatrices du service.
+            les collectivités utilisatrices du service.
           </p>
         </div>
       </div>
