@@ -3,6 +3,7 @@ import { BREADCRUMB_ANNUAIRE_CARTE } from "@/src/components/espace-projet/banner
 import BannerProjetBreadcrumb from "@/src/components/espace-projet/banner/banner-projet-breadcrumb";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { ProtectedAgentPublicUrl } from "@/src/components/common/protected-agent-public-url";
 
 export const metadata: Metadata = computeMetadata("Carte des projets et des contacts");
 
@@ -11,7 +12,9 @@ const AnnuairePage = async (props: { params: Promise<{ projetId: string }> }) =>
   return (
     <>
       <BannerProjetBreadcrumb step={BREADCRUMB_ANNUAIRE_CARTE} />
-      <Annuaire projetId={params.projetId} />
+      <ProtectedAgentPublicUrl>
+        <Annuaire projetId={params.projetId} />
+      </ProtectedAgentPublicUrl>
     </>
   );
 };
