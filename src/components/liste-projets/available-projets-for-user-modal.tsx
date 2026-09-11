@@ -67,7 +67,9 @@ export const AvailableProjetsForUserModal = () => {
         <Conditional>
           <Case condition={!isLoading && (availableProjects?.length || 0) === 0}>
             <div className="text-lg font-bold italic">
-              {"Il n'y a aucun autre projet disponible pour cette collectivité."}
+              {userInfos?.is_agent_public
+                ? "Il n'y a aucun autre projet disponible pour cette collectivité."
+                : "Il n'y a aucun autre projet disponible pour cette organisation."}
             </div>
           </Case>
         </Conditional>
