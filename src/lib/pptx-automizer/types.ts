@@ -28,6 +28,9 @@ export enum PptxTemplateTag {
   COUT_INVESTISSEMENT_ESTIMATION = "cout_investissement_estimation",
   // Typo ("enretien") is in the template itself — must match it exactly.
   COUT_ENTRETIEN_ESTIMATION = "cout_enretien_estimation",
+  // Ressources utiles slide (8): one fiche solution per slide.
+  RESSOURCES_UTILES_FICHE_SOLUTION = "ressources_utiles_fiche_solution",
+  PAGINATION_RESSOURCES_UTILES = "pagination_ressources_utiles",
 }
 
 export enum PptxSlide {
@@ -37,6 +40,8 @@ export enum PptxSlide {
   FICHE_SOLUTION_MATERIAUX = 4,
   ESTIMATION_INTRO = 5,
   ESTIMATION_RECAP = 6,
+  RESSOURCES_UTILES_INTRO = 7,
+  RESSOURCES_UTILES = 8,
 }
 
 // Names of non-text shapes on the template slides, targeted via slide.removeElement().
@@ -56,6 +61,8 @@ export enum PptxSlideElement {
   RECAP_GRAND_TOTAL_TITLE = "recap_titre",
   RECAP_GRAND_TOTAL_LABELS = "recap_total_libelles",
   RECAP_GRAND_TOTAL_VALUES = "recap_total_libelles_valeurs",
+  ZONE_TITRE_FICHE_SOLUTION_RESSOURCES_UTILES = "zone_titre_fiche_solution",
+  ZONE_RESSOURCES_UTILES_FICHE_SOLUTION = "zone_ressources_fiche_solution",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and

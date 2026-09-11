@@ -9,6 +9,8 @@ import { addFicheSolutionDetailSlide, loadCobeneficeIcons } from "./slides/fiche
 import { addFicheSolutionMateriauxSlides, loadMateriauxImages } from "./slides/fiche-solution-materiaux";
 import { addEstimationIntroSlide } from "./slides/estimation-intro";
 import { addEstimationRecapSlides } from "./slides/estimation-recap";
+import { addRessourcesUtilesIntroSlide } from "./slides/ressources-utiles-intro";
+import { addRessourcesUtilesSlides, getFichesSolutionsAvecRessourcesUtiles } from "./slides/ressources-utiles";
 import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
@@ -37,6 +39,7 @@ export const generateSyntheseProjetPptx = async ({
     .map((id) => fichesSolutionsMap.get(id))
     .filter((ficheSolution): ficheSolution is FicheSolution => Boolean(ficheSolution));
   const titresFichesSolutions = orderedFichesSolutions.map((ficheSolution) => ficheSolution.titre);
+  const fichesSolutionsAvecRessourcesUtiles = getFichesSolutionsAvecRessourcesUtiles(orderedFichesSolutions);
 
   const estimation = estimationId ? projet.estimations.find((e) => e.id === estimationId) : undefined;
   const estimationFichesSolutions = estimation?.estimations_fiches_solutions ?? [];
@@ -107,6 +110,14 @@ export const generateSyntheseProjetPptx = async ({
     if ([PptxSlide.ESTIMATION_INTRO, PptxSlide.ESTIMATION_RECAP].includes(slideInfo.number) && !estimation) {
       continue;
     }
+    // The ressources utiles intro and content slides are only relevant when at least one
+    // selected fiche solution actually has ressources utiles content.
+    if (
+      [PptxSlide.RESSOURCES_UTILES_INTRO, PptxSlide.RESSOURCES_UTILES].includes(slideInfo.number) &&
+      fichesSolutionsAvecRessourcesUtiles.length === 0
+    ) {
+      continue;
+    }
 
     switch (slideInfo.number) {
       case PptxSlide.FICHE_SOLUTION_DETAIL: {
@@ -151,6 +162,12 @@ export const generateSyntheseProjetPptx = async ({
           fichesSolutions: orderedFichesSolutions,
           estimationFichesSolutions,
         });
+        break;
+      case PptxSlide.RESSOURCES_UTILES_INTRO:
+        addRessourcesUtilesIntroSlide(addTemplateSlide, slideInfo);
+        break;
+      case PptxSlide.RESSOURCES_UTILES:
+        addRessourcesUtilesSlides(addTemplateSlide, slideInfo, fichesSolutionsAvecRessourcesUtiles);
         break;
       default:
         // Any other slide (credits, sources, ...) has no slide-specific logic yet.
