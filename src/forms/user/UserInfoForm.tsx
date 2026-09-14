@@ -82,7 +82,7 @@ export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; butto
       <InputFormField
         control={form.control}
         path="poste"
-        label={user.is_agent_public ? "Mon poste dans l'établissement" : "Mon poste dans l'organisation"}
+        label={user.is_agent_public ? "Mon poste dans l'établissement" : "Mon poste au sein de l'organisation"}
         asterisk={true}
       />
       {!user.canal_acquisition && (
