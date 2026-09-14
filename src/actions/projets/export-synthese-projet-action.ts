@@ -12,6 +12,9 @@ export const exportSyntheseProjetAction = async (
   projetId: number,
   formData: ProjetSyntheseFormData,
 ): Promise<ResponseAction<{ fileBase64?: string | null; filename?: string }>> => {
+  if (process.env.NEXT_PUBLIC_FEATURE_EXPORT_PPT !== "true") {
+    return { type: "error", message: "UNAUTHORIZED", fileBase64: null };
+  }
   const session = await auth();
   if (!session) {
     return { type: "error", message: "UNAUTHENTICATED", fileBase64: null };

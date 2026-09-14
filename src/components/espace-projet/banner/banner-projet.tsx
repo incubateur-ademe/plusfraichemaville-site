@@ -22,6 +22,7 @@ export default function BannerProjet({ className }: { className?: string }) {
   const searchParams = useSearchParams();
   const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
   const isBannerExpanded = url === PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet?.id || -1);
+  const shouldDispplayExportButton = isBannerExpanded && process.env.NEXT_PUBLIC_FEATURE_EXPORT_PPT === "true"
 
   return (
     <div className={`bg-dsfr-background-alt-blue-france py-3  ${className} min-h-[6rem]`}>
@@ -113,15 +114,17 @@ export default function BannerProjet({ className }: { className?: string }) {
                       {isBannerExpanded && (
                         <Suspense>
                           <div className="flex flex-wrap items-center gap-3">
-                            <Button
-                              className={clsx("rounded-3xl")}
-                              linkProps={{
-                                href: PFMV_ROUTES.ESPACE_PROJET_SYNTHESE(currentProjet.id),
-                              }}
-                              priority="secondary"
-                            >
-                              Télécharger la synthèse
-                            </Button>
+                            {shouldDispplayExportButton && (
+                              <Button
+                                className={clsx("rounded-3xl")}
+                                linkProps={{
+                                  href: PFMV_ROUTES.ESPACE_PROJET_SYNTHESE(currentProjet.id),
+                                }}
+                                priority="secondary"
+                              >
+                                Télécharger la synthèse
+                              </Button>
+                            )}
                             <Button
                               iconId="fr-icon-user-add-line"
                               className={clsx("rounded-3xl")}
