@@ -40,39 +40,8 @@ export default async function PageAccessibilite() {
       <p>
         En l’absence d’audit et dans l’attente de celui-ci, le site{" "}
         <LinkWithoutPrefetch href="https://plusfraichemaville.fr">https://plusfraichemaville.fr/</LinkWithoutPrefetch>{" "}
-        n’est pas en conformité avec le référentiel général d’amélioration de l’accessibilité. Les non-conformités et/ou
-        les dérogations sont énumérées ci-dessous.
+        n’est pas en conformité avec le référentiel général d’amélioration de l’accessibilité.
       </p>
-      <h2 className="!mb-2">Contenus non accessibles</h2>
-      Les contenus listés ci-dessous ne sont pas accessibles pour les raisons suivantes.
-      <h3 className="!mb-0 mt-4">Non-conformité</h3>
-      <p>Néant</p>
-      <h3 className="!mb-0 mt-4">Dérogations pour charge disproportionnée</h3>
-      <p>Néant</p>
-      <h3 className="!mb-0 mt-4">Contenus non soumis à l’obligation d’accessibilité</h3>
-      <p>Néant</p>
-      <h2 className="!mb-2">Établissement de cette déclaration d’accessibilité</h2>
-      <p>Cette déclaration a été établie le 15/07/2025.</p>
-      <ul className="normalList">
-        <li>
-          Technologies utilisées pour la réalisation du site web :
-          <ul className="normalList">
-            <li>Infrastructure langage : React / NextJS</li>
-            <li>Infrastructure CMS : Strapi</li>
-          </ul>
-        </li>
-        <li>
-          Agents utilisateurs, technologies d’assistance et outils utilisés pour vérifier l’accessibilité
-          <ul className="normalList">
-            <li>
-              Les tests des pages web ont été effectués avec les combinaisons de navigateurs web et lecteurs d’écran
-              suivants : Néant
-            </li>
-            <li>Les outils suivants ont été utilisés lors de l’évaluation : Néant</li>
-            <li>Pages du site ayant fait l’objet de la vérification de conformité : Néant</li>
-          </ul>
-        </li>
-      </ul>
       <h2>Retour d’information et contact</h2>
       <p>
         Si vous n’arrivez pas à accéder à un contenu ou à un service, vous pouvez contacter le responsable du site
