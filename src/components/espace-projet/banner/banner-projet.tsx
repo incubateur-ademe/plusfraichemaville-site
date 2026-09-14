@@ -22,7 +22,7 @@ export default function BannerProjet({ className }: { className?: string }) {
   const searchParams = useSearchParams();
   const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
   const isBannerExpanded = url === PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet?.id || -1);
-  const shouldDispplayExportButton = isBannerExpanded && process.env.NEXT_PUBLIC_FEATURE_EXPORT_PPT === "true"
+  const shouldDispplayExportButton = isBannerExpanded && process.env.NEXT_PUBLIC_FEATURE_EXPORT_PPT === "true";
 
   return (
     <div className={`bg-dsfr-background-alt-blue-france py-3  ${className} min-h-[6rem]`}>

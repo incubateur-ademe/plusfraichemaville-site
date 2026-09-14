@@ -5,7 +5,10 @@ import { ResponseAction } from "../actions-types";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { ProjetSyntheseFormData, ProjetSyntheseFormSchema } from "@/src/forms/projet-synthese/projet-synthese-form-schema";
+import {
+  ProjetSyntheseFormData,
+  ProjetSyntheseFormSchema,
+} from "@/src/forms/projet-synthese/projet-synthese-form-schema";
 import { generateSyntheseProjetPptx } from "@/src/lib/pptx-automizer/generate-synthese-projet-pptx";
 
 export const exportSyntheseProjetAction = async (

@@ -14,8 +14,7 @@ export const EstimationRadioOptionLabel = ({ estimation }: EstimationRadioOption
     estimation.estimations_fiches_solutions,
   );
 
-  const date =
-    typeof estimation.created_at === "string" ? new Date(estimation.created_at) : estimation.created_at;
+  const date = typeof estimation.created_at === "string" ? new Date(estimation.created_at) : estimation.created_at;
 
   const dateStr = `Estimation du ${dateToStringWithTime(date)}`;
 

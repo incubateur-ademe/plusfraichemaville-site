@@ -30,13 +30,12 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
   );
 
   const estimations = currentProjet?.estimations?.filter((e) => !e.deleted_at) ?? [];
-  const defaultEstimationId = estimations[0]?.id;
 
   const form = useForm<ProjetSyntheseFormData>({
     resolver: zodResolver(ProjetSyntheseFormSchema),
     defaultValues: {
       solutionIds: [],
-      estimationId: defaultEstimationId,
+      estimationId: null,
     },
   });
 
@@ -51,12 +50,6 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       );
     }
   }, [fichesSolutions, form]);
-
-  useEffect(() => {
-    if (defaultEstimationId && form.getValues("estimationId") === undefined) {
-      form.setValue("estimationId", defaultEstimationId);
-    }
-  }, [defaultEstimationId, form]);
 
   const handleToggleSolution = (documentId: string) => {
     const current = form.getValues("solutionIds") || [];
@@ -110,15 +103,15 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
         <ol className="mt-4 list-inside !pl-0">
           <li className="fr-h4">
             <span>Contexte et enjeux climatiques</span>
-            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="mt-4 pl-12 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
           <li className="fr-h4">
             <span>Diagnostic de l’espace</span>
-            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="mt-4 pl-12 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
           <li className="fr-h4">
             <span>Solutions de rafraîchissement retenues</span>
-            <div className="mt-4 pl-12 font-normal text-base">
+            <div className="mt-4 pl-12 text-base font-normal">
               {!hasSolutions || (!isLoading && (!fichesSolutions || fichesSolutions.length === 0)) ? (
                 <p className="text-base text-dsfr-text-mention-grey">
                   Aucune solution de rafraîchissement ajoutée au projet
@@ -139,34 +132,43 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
           </li>
           <li className="fr-h4">
             <span>Estimation budgétaire</span>
-            <div className="mt-4 pl-12 font-normal text-base">
+            <div className="mt-4 pl-12 text-base font-normal">
               {estimations.length === 0 ? (
-                <p className="text-base text-dsfr-text-mention-grey">
-                  Aucune estimation ajoutée au projet
-                </p>
+                <p className="text-base text-dsfr-text-mention-grey">Aucune estimation ajoutée au projet</p>
               ) : (
                 <RadioButtons
                   className="mb-0"
-                  options={estimations.map((estimation) => ({
-                    label: <EstimationRadioOptionLabel estimation={estimation} />,
-                    nativeInputProps: {
-                      name: "estimationId",
-                      value: estimation.id,
-                      checked: selectedEstimationId === estimation.id,
-                      onChange: () => form.setValue("estimationId", estimation.id),
+                  options={[
+                    {
+                      label: "Aucune estimation",
+                      nativeInputProps: {
+                        name: "estimationId",
+                        value: "",
+                        checked: !selectedEstimationId,
+                        onChange: () => form.setValue("estimationId", null),
+                      },
                     },
-                  }))}
+                    ...estimations.map((estimation) => ({
+                      label: <EstimationRadioOptionLabel estimation={estimation} />,
+                      nativeInputProps: {
+                        name: "estimationId",
+                        value: estimation.id,
+                        checked: selectedEstimationId === estimation.id,
+                        onChange: () => form.setValue("estimationId", estimation.id),
+                      },
+                    })),
+                  ]}
                 />
               )}
             </div>
           </li>
           <li className="fr-h4">
             <span>Aides retenues</span>
-            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="mt-4 pl-12 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
           <li className="fr-h4">
             <span>Ressources utiles liées aux solutions de rafraîchissement retenues</span>
-            <p className="pl-12 mt-4 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <p className="mt-4 pl-12 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
           </li>
         </ol>
       </div>
