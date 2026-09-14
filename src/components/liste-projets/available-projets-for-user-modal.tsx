@@ -45,7 +45,7 @@ export const AvailableProjetsForUserModal = () => {
         title={
           userInfos?.is_agent_public
             ? "Rejoindre des projets de ma collectivité"
-            : "Rejoindre des projets de mon entreprise"
+            : "Rejoindre des projets de mon organisation"
         }
         size="large"
         className="join-project-modal"
@@ -57,7 +57,7 @@ export const AvailableProjetsForUserModal = () => {
             notifié de votre demande.`
           ) : (
             <>
-              Vous pouvez consulter tous les projets de rafraîchissement créés par votre entreprise et soumettre une
+              Vous pouvez consulter tous les projets de rafraîchissement créés par votre organisation et soumettre une
               demande d’accès. L’administrateur sera alors notifié de votre demande.
               <br />
               Si vous souhaitez rejoindre le projet d’une collectivité, demandez-lui de vous y inviter.
@@ -67,7 +67,9 @@ export const AvailableProjetsForUserModal = () => {
         <Conditional>
           <Case condition={!isLoading && (availableProjects?.length || 0) === 0}>
             <div className="text-lg font-bold italic">
-              {"Il n'y a aucun autre projet disponible pour cette collectivité."}
+              {userInfos?.is_agent_public
+                ? "Il n'y a aucun autre projet disponible pour cette collectivité."
+                : "Il n'y a aucun autre projet disponible pour cette organisation."}
             </div>
           </Case>
         </Conditional>
