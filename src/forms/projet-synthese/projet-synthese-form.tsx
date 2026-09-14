@@ -35,7 +35,7 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
     resolver: zodResolver(ProjetSyntheseFormSchema),
     defaultValues: {
       solutionIds: [],
-      estimationId: null,
+      estimationId: estimations[0]?.id || null,
     },
   });
 
