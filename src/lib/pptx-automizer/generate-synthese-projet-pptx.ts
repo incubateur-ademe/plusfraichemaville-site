@@ -43,6 +43,8 @@ export const generateSyntheseProjetPptx = async ({
 
   const estimation = estimationId ? projet.estimations.find((e) => e.id === estimationId) : undefined;
   const estimationFichesSolutions = estimation?.estimations_fiches_solutions ?? [];
+  const fichesSolutionsIdsForEstimation = estimationFichesSolutions.map((efs) => efs.fiche_solution_id);
+  const fichesSolutionsForEstimation = await getFicheSolutionByIdsComplete(fichesSolutionsIdsForEstimation);
 
   const dateGenerationSynthese = new Intl.DateTimeFormat("fr-FR", {
     day: "numeric",
@@ -159,7 +161,7 @@ export const generateSyntheseProjetPptx = async ({
           pres,
           addTemplateSlide,
           slideInfo,
-          fichesSolutions: orderedFichesSolutions,
+          fichesSolutions: fichesSolutionsForEstimation,
           estimationFichesSolutions,
         });
         break;
