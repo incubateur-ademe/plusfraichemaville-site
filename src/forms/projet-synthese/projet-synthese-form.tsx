@@ -16,6 +16,8 @@ import { notifications } from "@/src/components/common/notifications";
 import { exportSyntheseProjetAction } from "@/src/actions/projets/export-synthese-projet-action";
 import { ProjetSyntheseFormData, ProjetSyntheseFormSchema } from "./projet-synthese-form-schema";
 import { EstimationRadioOptionLabel } from "./estimation-radio-option-label";
+import { isEmpty } from "@/src/helpers/listUtils";
+import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 
 type ProjetSyntheseFormProps = {
   currentProjet?: ProjetWithRelations;
@@ -51,6 +53,12 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
     }
   }, [fichesSolutions, form]);
 
+  useEffect(() => {
+    if (!isEmpty(estimations)) {
+      form.setValue("estimationId", estimations[0].id);
+    }
+  }, [estimations, form]);
+
   const handleToggleSolution = (documentId: string) => {
     const current = form.getValues("solutionIds") || [];
     if (current.includes(documentId)) {
@@ -83,7 +91,12 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       const blobUrl = window.URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = blobUrl;
-      link.download = result.filename || `synthese-projet-${currentProjet.id}.pptx`;
+      link.download =
+        result.filename ||
+        `Synthèse-PFMV-${currentProjet.nom.replaceAll(" ", "_")}-${dateToStringWithoutTime(new Date())?.replaceAll(
+          "/",
+          "",
+        )}.pptx`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);

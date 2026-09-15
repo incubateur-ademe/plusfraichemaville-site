@@ -10,6 +10,7 @@ import {
   ProjetSyntheseFormSchema,
 } from "@/src/forms/projet-synthese/projet-synthese-form-schema";
 import { generateSyntheseProjetPptx } from "@/src/lib/pptx-automizer/generate-synthese-projet-pptx";
+import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 
 export const exportSyntheseProjetAction = async (
   projetId: number,
@@ -52,7 +53,10 @@ export const exportSyntheseProjetAction = async (
     return {
       type: "success",
       fileBase64: fileBuffer.toString("base64"),
-      filename: `synthese-projet-${projet.id}.pptx`,
+      filename: `Synthèse-PFMV-${projet.nom.replaceAll(" ", "_")}-${dateToStringWithoutTime(new Date())?.replaceAll(
+        "/",
+        "",
+      )}.pptx`,
     };
   } catch (e) {
     customCaptureException("Error in exportSyntheseProjetAction", e);
