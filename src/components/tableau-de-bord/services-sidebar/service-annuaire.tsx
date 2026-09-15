@@ -38,21 +38,27 @@ export const ServiceAnnuaire = () => {
               </GenericFicheLink>
             )}
           </h3>
-          <p className={clsx(cardDisabled ? "text-dsfr-text-disabled-grey" : "text-dsfr-text-default-grey")}>
-            Uniquement disponible pour les collectivités.
-          </p>
-          {!cardDisabled && (
-            <div
-              className={clsx(
-                "flex justify-between",
-                cardDisabled
-                  ? "text-dsfr-text-disabled-grey"
-                  : " text-sm text-dsfr-text-default-grey group-hover:underline",
-              )}
-            >
-              <span>Voir la carte</span>
-              <i className="ri-arrow-right-line fr-icon--sm"></i>
-            </div>
+          {cardDisabled ? (
+            <p className={clsx(cardDisabled ? "text-dsfr-text-disabled-grey" : "text-dsfr-text-default-grey")}>
+              Uniquement disponible pour les collectivités.
+            </p>
+          ) : (
+            <>
+              <p className="text-dsfr-text-default-grey">
+                Trouvez des contacts liés aux projets réalisés : bureaux d’études, AMO, agents de collectivités.
+              </p>
+              <div
+                className={clsx(
+                  "flex justify-between",
+                  cardDisabled
+                    ? "text-dsfr-text-disabled-grey"
+                    : " text-sm text-dsfr-text-default-grey group-hover:underline",
+                )}
+              >
+                <span>Voir la carte</span>
+                <i className="ri-arrow-right-line fr-icon--sm"></i>
+              </div>
+            </>
           )}
         </div>
       </div>

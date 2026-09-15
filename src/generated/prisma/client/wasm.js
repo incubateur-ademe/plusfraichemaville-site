@@ -170,7 +170,6 @@ exports.Prisma.CollectiviteScalarFieldEnum = {
   nom: 'nom',
   code_insee: 'code_insee',
   code_postal: 'code_postal',
-  adresse_info: 'adresse_info',
   adresse_all_infos: 'adresse_all_infos',
   ban_id: 'ban_id',
   latitude: 'latitude',
@@ -229,11 +228,8 @@ exports.Prisma.ProjetScalarFieldEnum = {
   type_espace: 'type_espace',
   adresse: 'adresse',
   niveau_maturite: 'niveau_maturite',
-  adresse_info: 'adresse_info',
   adresse_all_infos: 'adresse_all_infos',
   date_echeance: 'date_echeance',
-  fiches_solutions_id: 'fiches_solutions_id',
-  fiches_diagnostic_id: 'fiches_diagnostic_id',
   collectiviteId: 'collectiviteId',
   recommandations_viewed_by: 'recommandations_viewed_by',
   deleted_at: 'deleted_at',
@@ -268,7 +264,6 @@ exports.Prisma.EstimationScalarFieldEnum = {
   created_at: 'created_at',
   updated_at: 'updated_at',
   projet_id: 'projet_id',
-  materiaux: 'materiaux',
   deleted_at: 'deleted_at',
   deleted_by: 'deleted_by'
 };
@@ -302,14 +297,6 @@ exports.Prisma.AideScalarFieldEnum = {
   type: 'type',
   name: 'name',
   financers: 'financers'
-};
-
-exports.Prisma.Estimations_aidesScalarFieldEnum = {
-  id: 'id',
-  estimationId: 'estimationId',
-  aideId: 'aideId',
-  created_at: 'created_at',
-  user_id: 'user_id'
 };
 
 exports.Prisma.Projet_aidesScalarFieldEnum = {
@@ -498,8 +485,6 @@ exports.Prisma.projetOrderByRelevanceFieldEnum = {
   type_espace: 'type_espace',
   adresse: 'adresse',
   niveau_maturite: 'niveau_maturite',
-  fiches_solutions_id: 'fiches_solutions_id',
-  fiches_diagnostic_id: 'fiches_diagnostic_id',
   recommandations_viewed_by: 'recommandations_viewed_by',
   deleted_by: 'deleted_by'
 };
@@ -529,10 +514,6 @@ exports.Prisma.aideOrderByRelevanceFieldEnum = {
   type: 'type',
   name: 'name',
   financers: 'financers'
-};
-
-exports.Prisma.estimations_aidesOrderByRelevanceFieldEnum = {
-  user_id: 'user_id'
 };
 
 exports.Prisma.projet_aidesOrderByRelevanceFieldEnum = {
@@ -695,7 +676,6 @@ exports.Prisma.ModelName = {
   estimation: 'estimation',
   climadiag: 'climadiag',
   aide: 'aide',
-  estimations_aides: 'estimations_aides',
   projet_aides: 'projet_aides',
   estimation_materiaux: 'estimation_materiaux',
   estimation_fiche_solution: 'estimation_fiche_solution',

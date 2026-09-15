@@ -14,7 +14,7 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
           <p className="mb-8 block text-lg">
             {userInfos?.is_agent_public
               ? "Les projets de rafraîchissement de ma collectivité"
-              : "Les projets de rafraîchissement de mon entreprise"}
+              : "Les projets de rafraîchissement de mon organisation"}
           </p>
         </hgroup>
         <div className="align-items-center flex flex-wrap-reverse items-center gap-4">

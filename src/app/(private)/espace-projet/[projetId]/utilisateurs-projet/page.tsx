@@ -13,7 +13,7 @@ export default function Page() {
     <>
       <BannerProjetBreadcrumb step={BREADCRUMB_UTILISATEURS_PROJET} />
       <div className="fr-container pt-8">
-        <h1 className="text-2xl ">Gérer les membres de votre collectivité sur ce projet</h1>
+        <h1 className="text-2xl ">Gérer les membres pouvant accéder à votre projet</h1>
         <PartageOverviewAdmin />
         <PartageOverviewQuit />
       </div>

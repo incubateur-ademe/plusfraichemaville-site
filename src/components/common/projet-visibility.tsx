@@ -72,14 +72,14 @@ export const ProjetVisibility = ({
         <div className="flex flex-col gap-4 text-sm [&>p]:mb-0">
           {Toggle}
           <p>
-            Grâce à la Carte des projets disponible sur votre espace projet, découvez les initiatives voisines en
+            Grâce à la Carte des projets disponible sur votre espace projet, découvrez les initiatives voisines en
             matière de rafraîchissement urbain, échangez avec d'autres porteurs de projets et obtenez des contacts de
             prestataires. Pour faciliter les échanges entre pairs, nous vous invitons à rendre votre projet visible par
             les autres membres de la communauté Plus fraîche ma ville.
           </p>
           <p>
             En tant {`qu'administrateur d'un`} projet, vos prénom, nom et adresse mail seront partagés uniquement avec
-            les collectivités utilsatrices du service.
+            les collectivités utilisatrices du service.
           </p>
         </div>
       </div>

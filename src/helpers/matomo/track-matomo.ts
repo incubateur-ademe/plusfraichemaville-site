@@ -18,8 +18,7 @@ export const trackEvent = (event: MATOMO_EVENT) => {
 };
 
 export const trackPageView = (url: string, isLoggedIn?: boolean) => {
-  if (shouldUseDevTracker) {
-    console.debug(isLoggedIn ? "connecté" : "non connecté");
+  if (shouldUseDevTracker || !window?._paq) {
     console.debug("trackPageView => ", sanitizeUrlForAnalyticTool(url));
     return;
   }

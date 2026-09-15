@@ -19,7 +19,7 @@ export default async function InfoPerso() {
   if (!isUserComplete) {
     buttonLabel = user.is_agent_public
       ? "Je rejoins l'espace projet de ma collectivité"
-      : "Je rejoins l'espace projet de mon entreprise";
+      : "Je rejoins l'espace projet de mon organisation";
   }
   return (
     <div className="fr-container pt-8">
@@ -28,7 +28,7 @@ export default async function InfoPerso() {
           <h1 className="fr-h5 !mb-2 !text-dsfr-text-label-blue-france">
             {user.is_agent_public
               ? "J'inscris ou je rejoins une collectivité"
-              : "J'inscris ou je rejoins une entreprise"}
+              : "J'inscris ou je rejoins une organisation"}
           </h1>
           <div className="mb-4">Je vérifie les informations liées à mon compte ProConnect</div>
         </>

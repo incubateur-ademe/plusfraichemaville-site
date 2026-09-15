@@ -54,9 +54,6 @@ export const projetIncludes = {
   estimations: {
     where: { deleted_at: null },
     include: {
-      estimations_aides: {
-        include: { aide: true },
-      },
       estimations_fiches_solutions: {
         include: {
           estimation_materiaux: true,

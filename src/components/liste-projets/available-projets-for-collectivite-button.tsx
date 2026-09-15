@@ -20,7 +20,7 @@ export const AvailableProjetsForCollectiviteButton = ({ className }: { className
         >
           {userInfos?.is_agent_public
             ? "Rejoindre des projets de ma collectivité"
-            : "Rejoindre des projets de mon entreprise"}
+            : "Rejoindre des projets de mon organisation"}
         </Button>
       )}
     </>

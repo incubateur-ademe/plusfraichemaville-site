@@ -12,13 +12,6 @@ Lancé par Cron toutes les nuits.
 Envoie des mails CSM via Brevo (création de projets, inactivité au bout de 10 jours, etc...).  
 Lancé par Cron toutes les nuits.
 
-### [migrate-strapi5-document-ids.ts](migrate-strapi5-document-ids.ts)
-
-**À lancer une seule fois, juste après la migration Prisma qui convertit en `String` les colonnes stockant des ids CMS Strapi (voir chore/migrate-strapi5).**
-Remplace, dans toutes les colonnes concernées (`projet.fiches_solutions_id`, `projet.fiches_diagnostic_id`, `projet_fiche.fiche_id`, `estimation_fiche_solution.fiche_solution_id`, `estimation_materiaux.materiau_id`, `user_projet.fiches_diagnostic_seen`, `user_projet.aides_fs_unselected`, `user_projet.annuaire_rex_projet_clicked`, `projet.sourcing_rex`), les anciens ids numériques Strapi v4 par les nouveaux `documentId` Strapi v5, via des tables de correspondance codées en dur dans le script.
-Tourne en dry-run par défaut (logue ce qu'il changerait) ; ajouter `--apply` pour écrire réellement.
-`pnpm run migrate-strapi5-document-ids -- --apply`
-
 ## Scripts one shot
 
 Ces scripts ont été lancés pour effectuer des traitements ou récupérer des données à un instant t.  
@@ -61,3 +54,10 @@ Remplit le champ nom_etablissement et siren_info de tous les utilisateurs pour l
 
 Va se connecter à l'API MATOMO pour ressortir toutes les collectivités et les EPCI qui ont été recherchées sur le site dans la page "surchauffe de votre territoire".
 Il faut ajuster la date variable "dateFin" à la date du jour.
+
+### [migrate-strapi5-document-ids.ts](archive/migrate-strapi5-document-ids.ts)
+
+**À lancer une seule fois, juste après la migration Prisma qui convertit en `String` les colonnes stockant des ids CMS Strapi (voir chore/migrate-strapi5).**
+Remplace, dans toutes les colonnes concernées (`projet.fiches_solutions_id`, `projet.fiches_diagnostic_id`, `projet_fiche.fiche_id`, `estimation_fiche_solution.fiche_solution_id`, `estimation_materiaux.materiau_id`, `user_projet.fiches_diagnostic_seen`, `user_projet.aides_fs_unselected`, `user_projet.annuaire_rex_projet_clicked`, `projet.sourcing_rex`), les anciens ids numériques Strapi v4 par les nouveaux `documentId` Strapi v5, via des tables de correspondance codées en dur dans le script.
+Tourne en dry-run par défaut (logue ce qu'il changerait) ; ajouter `--apply` pour écrire réellement.
+`pnpm run migrate-strapi5-document-ids -- --apply`
