@@ -31,7 +31,7 @@ export const ClimadiagDownloader = ({ data }: ClimadiagDownloaderProps) => {
           "text-dsfr-text-label-blue-france disabled:pointer-events-none disabled:text-pfmv-navy",
         )}
       >
-        Télécharger la synthèse
+        Télécharger les indicateurs
         {loading ? (
           <Spinner className="ml-3 !size-6" />
         ) : (

@@ -93,7 +93,7 @@ export const getLabelCoutEntretienByQuantite = (ficheSolutionAttributes: FicheSo
   } else {
     return quantite
       ? `${formatNumberWithSpaces(
-          ficheSolutionAttributes.cout_maximum_entretien * quantite,
+          ficheSolutionAttributes.cout_minimum_entretien * quantite,
         )} - ${formatNumberWithSpaces(ficheSolutionAttributes.cout_maximum_entretien * quantite)} €`
       : "0 € / an";
   }
