@@ -11,6 +11,8 @@ import { addEstimationIntroSlide } from "./slides/estimation-intro";
 import { addEstimationRecapSlides } from "./slides/estimation-recap";
 import { addRessourcesUtilesIntroSlide } from "./slides/ressources-utiles-intro";
 import { addRessourcesUtilesSlides, getFichesSolutionsAvecRessourcesUtiles } from "./slides/ressources-utiles";
+import { addAidesIntroSlide } from "./slides/aides-intro";
+import { addAidesSlides, buildAidesCardData } from "./slides/aides";
 import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 
@@ -18,6 +20,7 @@ export const generateSyntheseProjetPptx = async ({
   projet,
   solutionIds = [],
   estimationId,
+  aideIds = [],
   templateFileName = "template_synthese_projet.pptx",
 }: GenerateSyntheseProjetPptxParams): Promise<Buffer> => {
   const templateDir = path.join(process.cwd(), "public", "templates");
@@ -45,6 +48,11 @@ export const generateSyntheseProjetPptx = async ({
   const estimationFichesSolutions = estimation?.estimations_fiches_solutions ?? [];
   const fichesSolutionsIdsForEstimation = estimationFichesSolutions.map((efs) => efs.fiche_solution_id);
   const fichesSolutionsForEstimation = await getFicheSolutionByIdsComplete(fichesSolutionsIdsForEstimation);
+
+  const orderedProjetAides = aideIds
+    .map((aideId) => projet.projetAides.find((projetAide) => projetAide.aideId === aideId))
+    .filter((projetAide): projetAide is (typeof projet.projetAides)[number] => Boolean(projetAide));
+  const aidesCardData = await buildAidesCardData(orderedProjetAides);
 
   const dateGenerationSynthese = new Intl.DateTimeFormat("fr-FR", {
     day: "numeric",
@@ -120,6 +128,11 @@ export const generateSyntheseProjetPptx = async ({
     ) {
       continue;
     }
+    // The aides intro and content slides are only relevant when at least one aide was passed
+    // to the export.
+    if ([PptxSlide.AIDES_INTRO, PptxSlide.AIDES].includes(slideInfo.number) && aidesCardData.length === 0) {
+      continue;
+    }
 
     switch (slideInfo.number) {
       case PptxSlide.FICHE_SOLUTION_DETAIL: {
@@ -170,6 +183,12 @@ export const generateSyntheseProjetPptx = async ({
         break;
       case PptxSlide.RESSOURCES_UTILES:
         addRessourcesUtilesSlides(addTemplateSlide, slideInfo, fichesSolutionsAvecRessourcesUtiles);
+        break;
+      case PptxSlide.AIDES_INTRO:
+        addAidesIntroSlide(addTemplateSlide, slideInfo);
+        break;
+      case PptxSlide.AIDES:
+        addAidesSlides(addTemplateSlide, slideInfo, aidesCardData);
         break;
       default:
         // Any other slide (credits, sources, ...) has no slide-specific logic yet.

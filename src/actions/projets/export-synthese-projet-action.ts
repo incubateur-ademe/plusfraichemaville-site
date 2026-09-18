@@ -43,11 +43,16 @@ export const exportSyntheseProjetAction = async (
     return { type: "error", message: "UNAUTHORIZED", fileBase64: null };
   }
 
+  if (!parse.data.aideIds.every((aideId) => projet.projetAides.some((projetAide) => projetAide.aideId === aideId))) {
+    return { type: "error", message: "UNAUTHORIZED", fileBase64: null };
+  }
+
   try {
     const fileBuffer = await generateSyntheseProjetPptx({
       projet,
       solutionIds: parse.data.solutionIds,
       estimationId: parse.data.estimationId,
+      aideIds: parse.data.aideIds,
     });
 
     return {
