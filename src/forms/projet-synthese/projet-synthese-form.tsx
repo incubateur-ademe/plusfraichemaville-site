@@ -18,6 +18,7 @@ import { ProjetSyntheseFormData, ProjetSyntheseFormSchema } from "./projet-synth
 import { EstimationRadioOptionLabel } from "./estimation-radio-option-label";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
+import { Spinner } from "@/src/components/common/spinner";
 
 type ProjetSyntheseFormProps = {
   currentProjet?: ProjetWithRelations;
@@ -229,14 +230,24 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       </div>
 
       <div className="mt-10">
-        <Button
-          iconId="ri-download-2-line"
-          className="rounded-3xl"
-          type="submit"
-          disabled={isSubmitting || !currentProjet}
-        >
-          Télécharger la synthèse
-        </Button>
+        {isSubmitting ? (
+          <Button className="rounded-3xl" type="submit" disabled>
+            <span className="flex items-center gap-2">
+              Télécharger la synthèse
+              <Spinner className="!size-6" pathColor="fill-dsfr-text-mention-grey" />
+            </span>
+          </Button>
+        ) : (
+          <Button
+            iconId="ri-download-2-line"
+            iconPosition="right"
+            className="rounded-3xl"
+            type="submit"
+            disabled={!currentProjet}
+          >
+            Télécharger la synthèse
+          </Button>
+        )}
       </div>
     </form>
   );
