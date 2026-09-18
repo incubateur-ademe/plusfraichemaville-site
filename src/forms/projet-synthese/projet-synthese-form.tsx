@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Button from "@codegouvfr/react-dsfr/Button";
@@ -18,6 +18,7 @@ import { ProjetSyntheseFormData, ProjetSyntheseFormSchema } from "./projet-synth
 import { EstimationRadioOptionLabel } from "./estimation-radio-option-label";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
+import { Spinner } from "@/src/components/common/spinner";
 
 type ProjetSyntheseFormProps = {
   currentProjet?: ProjetWithRelations;
@@ -31,18 +32,28 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
     selectedFichesSolutionsIds.length > 0 ? makeFicheSolutionUrlApi(selectedFichesSolutionsIds) : null,
   );
 
-  const estimations = currentProjet?.estimations?.filter((e) => !e.deleted_at) ?? [];
+  // Memoized so these keep a stable reference across re-renders (e.g. when the user toggles a
+  // checkbox or picks an estimation) — the effects below reseed the form's default selection
+  // from them, and would otherwise re-fire and overwrite the user's own choice on every render.
+  const estimations = useMemo(
+    () => currentProjet?.estimations?.filter((e) => !e.deleted_at) ?? [],
+    [currentProjet?.estimations],
+  );
+
+  const projetAides = useMemo(() => currentProjet?.projetAides ?? [], [currentProjet?.projetAides]);
 
   const form = useForm<ProjetSyntheseFormData>({
     resolver: zodResolver(ProjetSyntheseFormSchema),
     defaultValues: {
       solutionIds: [],
       estimationId: estimations[0]?.id || null,
+      aideIds: [],
     },
   });
 
   const selectedSolutionIds = form.watch("solutionIds") || [];
   const selectedEstimationId = form.watch("estimationId");
+  const selectedAideIds = form.watch("aideIds") || [];
 
   useEffect(() => {
     if (fichesSolutions && fichesSolutions.length > 0) {
@@ -57,7 +68,16 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
     if (!isEmpty(estimations)) {
       form.setValue("estimationId", estimations[0].id);
     }
-  }, [estimations, form]);
+  }, [estimations]);
+
+  useEffect(() => {
+    if (!isEmpty(projetAides)) {
+      form.setValue(
+        "aideIds",
+        projetAides.map((projetAide) => projetAide.aideId),
+      );
+    }
+  }, [projetAides, form]);
 
   const handleToggleSolution = (documentId: string) => {
     const current = form.getValues("solutionIds") || [];
@@ -68,6 +88,18 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       );
     } else {
       form.setValue("solutionIds", [...current, documentId]);
+    }
+  };
+
+  const handleToggleAide = (aideId: number) => {
+    const current = form.getValues("aideIds") || [];
+    if (current.includes(aideId)) {
+      form.setValue(
+        "aideIds",
+        current.filter((id) => id !== aideId),
+      );
+    } else {
+      form.setValue("aideIds", [...current, aideId]);
     }
   };
 
@@ -177,24 +209,45 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
           </li>
           <li className="fr-h4">
             <span>Aides retenues</span>
-            <p className="mt-4 pl-12 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
-          </li>
-          <li className="fr-h4">
-            <span>Ressources utiles liées aux solutions de rafraîchissement retenues</span>
-            <p className="mt-4 pl-12 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
+            <div className="mt-4 pl-12 text-base font-normal">
+              {projetAides.length === 0 ? (
+                <p className="text-base text-dsfr-text-mention-grey">Aucune aide ajoutée au projet</p>
+              ) : (
+                <Checkbox
+                  className="mb-0"
+                  options={projetAides.map((projetAide) => ({
+                    label: projetAide.aide.name ?? "",
+                    nativeInputProps: {
+                      checked: selectedAideIds.includes(projetAide.aideId),
+                      onChange: () => handleToggleAide(projetAide.aideId),
+                    },
+                  }))}
+                />
+              )}
+            </div>
           </li>
         </ol>
       </div>
 
       <div className="mt-10">
-        <Button
-          iconId="ri-download-2-line"
-          className="rounded-3xl"
-          type="submit"
-          disabled={isSubmitting || !currentProjet}
-        >
-          Télécharger la synthèse
-        </Button>
+        {isSubmitting ? (
+          <Button className="rounded-3xl" type="submit" disabled>
+            <span className="flex items-center gap-2">
+              Télécharger la synthèse
+              <Spinner className="!size-6" pathColor="fill-dsfr-text-mention-grey" />
+            </span>
+          </Button>
+        ) : (
+          <Button
+            iconId="ri-download-2-line"
+            iconPosition="right"
+            className="rounded-3xl"
+            type="submit"
+            disabled={!currentProjet}
+          >
+            Télécharger la synthèse
+          </Button>
+        )}
       </div>
     </form>
   );

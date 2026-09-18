@@ -28,9 +28,16 @@ export enum PptxTemplateTag {
   COUT_INVESTISSEMENT_ESTIMATION = "cout_investissement_estimation",
   // Typo ("enretien") is in the template itself — must match it exactly.
   COUT_ENTRETIEN_ESTIMATION = "cout_enretien_estimation",
-  // Ressources utiles slide (8): one fiche solution per slide.
+  // Ressources utiles slide (10): one fiche solution per slide.
   RESSOURCES_UTILES_FICHE_SOLUTION = "ressources_utiles_fiche_solution",
   PAGINATION_RESSOURCES_UTILES = "pagination_ressources_utiles",
+  // Aides slide (8): up to MAX_AIDES_PAR_SLIDE aide cards per slide.
+  AIDE_TYPE = "aide_type",
+  AIDE_NOM = "aide_nom",
+  AIDE_FINANCIERS = "aide_financiers",
+  AIDE_ECHEANCE = "aide_echeance",
+  AIDE_LIEN = "aide_lien",
+  PAGINATION_AIDES = "pagination_aides",
 }
 
 export enum PptxSlide {
@@ -40,8 +47,10 @@ export enum PptxSlide {
   FICHE_SOLUTION_MATERIAUX = 4,
   ESTIMATION_INTRO = 5,
   ESTIMATION_RECAP = 6,
-  RESSOURCES_UTILES_INTRO = 7,
-  RESSOURCES_UTILES = 8,
+  AIDES_INTRO = 7,
+  AIDES = 8,
+  RESSOURCES_UTILES_INTRO = 9,
+  RESSOURCES_UTILES = 10,
 }
 
 // Names of non-text shapes on the template slides, targeted via slide.removeElement().
@@ -63,6 +72,11 @@ export enum PptxSlideElement {
   RECAP_GRAND_TOTAL_VALUES = "recap_total_libelles_valeurs",
   ZONE_TITRE_FICHE_SOLUTION_RESSOURCES_UTILES = "zone_titre_fiche_solution",
   ZONE_RESSOURCES_UTILES_FICHE_SOLUTION = "zone_ressources_fiche_solution",
+  CONTOUR_AIDE = "contour_aide",
+  ZONE_TYPE_AIDE = "zone_aide_type",
+  ZONE_TITRE_AIDE = "zone_aide_titre",
+  ZONE_DETAILS_AIDE = "zone_aide_details",
+  ZONE_LIEN_AIDE = "zone_aide_lien",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and
@@ -84,5 +98,6 @@ export type GenerateSyntheseProjetPptxParams = {
   projet: ProjetWithRelations;
   solutionIds?: string[];
   estimationId?: number | null;
+  aideIds?: number[];
   templateFileName?: string;
 };

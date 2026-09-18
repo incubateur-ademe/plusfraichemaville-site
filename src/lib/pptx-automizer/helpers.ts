@@ -2,34 +2,79 @@ import { XmlElement } from "pptx-automizer";
 import { stripHtmlTags } from "@/src/helpers/common";
 
 /**
- * Normalizes text runs inside paragraph (<a:p>) elements so that split template tags
- * (such as `{{` in one run, `nom-projet` in another, `}}` in another) are merged
- * into a single text run before `modify.replaceText` runs.
+ * A run's own visual style, as a comparable string: its size, bold/italic/underline, font and
+ * color. Ignores attributes that don't affect rendering (`err`, the spellcheck flag PowerPoint
+ * toggles independently per run, and `dirty`), so runs PowerPoint split only for spellchecking
+ * still compare equal.
+ */
+const getRunStyleKey = (run: XmlElement): string => {
+  const rPr = run.getElementsByTagName("a:rPr")[0];
+  if (!rPr) return "";
+
+  const latin = rPr.getElementsByTagName("a:latin")[0]?.getAttribute("typeface") || "";
+  const srgbClr = rPr.getElementsByTagName("a:srgbClr")[0]?.getAttribute("val") || "";
+  const schemeClr = rPr.getElementsByTagName("a:schemeClr")[0]?.getAttribute("val") || "";
+
+  return [
+    rPr.getAttribute("sz") || "",
+    rPr.getAttribute("b") || "",
+    rPr.getAttribute("i") || "",
+    rPr.getAttribute("u") || "",
+    latin,
+    srgbClr,
+    schemeClr,
+  ].join("|");
+};
+
+/**
+ * Merges one run of consecutive, identically-styled <a:r> siblings into the first, dropping
+ * the rest — only when their combined text still needs it (contains "{{").
+ */
+const mergeRunGroup = (paragraph: XmlElement, group: XmlElement[]) => {
+  if (group.length <= 1) return;
+
+  let fullText = "";
+  group.forEach((run) => {
+    const tNode = run.getElementsByTagName("a:t")[0];
+    if (tNode) fullText += tNode.textContent || "";
+  });
+  if (!fullText.includes("{{")) return;
+
+  const firstT = group[0].getElementsByTagName("a:t")[0];
+  if (!firstT) return;
+  firstT.textContent = fullText;
+
+  for (let i = 1; i < group.length; i++) {
+    paragraph.removeChild(group[i]);
+  }
+};
+
+/**
+ * Normalizes text runs inside paragraph (<a:p>) elements so that split template tags (such as
+ * `{{` in one run, `nom-projet` in another, `}}` in another) are merged into a single text run
+ * before `modify.replaceText` runs. Runs are grouped by their own visual style first (see
+ * getRunStyleKey) before merging within each group, so a paragraph mixing several
+ * differently-styled lines — joined by <a:br> rather than split into their own <a:p>, as on the
+ * aides card's zone_aide_details (a bold name line, then a smaller grey porteur/échéance line)
+ * — doesn't have the second line's formatting overwritten by the first's.
  */
 export const mergeTextRunsInElement = (element: XmlElement) => {
   const paragraphs = element.getElementsByTagName("a:p");
   for (let p = 0; p < paragraphs.length; p++) {
     const paragraph = paragraphs[p];
-    const runs = paragraph.getElementsByTagName("a:r");
-    if (runs.length <= 1) continue;
+    const runList = paragraph.getElementsByTagName("a:r");
+    if (runList.length <= 1) continue;
 
-    let fullText = "";
-    for (let r = 0; r < runs.length; r++) {
-      const tNode = runs[r].getElementsByTagName("a:t")[0];
-      if (tNode) {
-        fullText += tNode.textContent || "";
-      }
-    }
+    const runs: XmlElement[] = [];
+    for (let r = 0; r < runList.length; r++) runs.push(runList[r]);
 
-    if (fullText.includes("{{")) {
-      const firstRun = runs[0];
-      const firstT = firstRun.getElementsByTagName("a:t")[0];
-      if (firstT) {
-        firstT.textContent = fullText;
-        while (runs.length > 1) {
-          paragraph.removeChild(runs[1]);
-        }
-      }
+    let groupStart = 0;
+    for (let r = 1; r <= runs.length; r++) {
+      const isGroupBoundary = r === runs.length || getRunStyleKey(runs[r]) !== getRunStyleKey(runs[groupStart]);
+      if (!isGroupBoundary) continue;
+
+      mergeRunGroup(paragraph, runs.slice(groupStart, r));
+      groupStart = r;
     }
   }
 };
