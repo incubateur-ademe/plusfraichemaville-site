@@ -20,6 +20,8 @@ import { isEmpty } from "@/src/helpers/listUtils";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { Spinner } from "@/src/components/common/spinner";
 import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
+import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
+import { useCapturePostHogEvent } from "@/src/hooks/useCapturePostHogEvent";
 
 const GENERATION_IN_PROGRESS_MESSAGE =
   "La génération de votre synthèse est en cours, si vous quittez la page maintenant vous annulerez son téléchargement.";
@@ -85,6 +87,8 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
     }
   }, [projetAides, form]);
 
+  const { capturePostHogEvent } = useCapturePostHogEvent();
+
   const handleToggleSolution = (documentId: string) => {
     const current = form.getValues("solutionIds") || [];
     if (current.includes(documentId)) {
@@ -139,6 +143,7 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       link.click();
       document.body.removeChild(link);
       window.URL.revokeObjectURL(blobUrl);
+      capturePostHogEvent(POSTHOG_EVENTS.DOWNLOAD_PROJET_SYNTHESE);
     } else {
       notifications(result.type, result.message);
     }

@@ -7,4 +7,5 @@ export const POSTHOG_EVENTS = {
   SAVE_ESTIMATION: "terminer_estimation",
   CLOSE_AIDE_MODAL: "fermeture_aide_modal",
   ANNUAIRE_CLIC_PROJET: "clic_projet_annuaire",
+  DOWNLOAD_PROJET_SYNTHESE: "telechargement_projet_synthese",
 } as const;
