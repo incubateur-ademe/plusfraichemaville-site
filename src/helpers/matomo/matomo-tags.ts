@@ -36,6 +36,13 @@ export const MATOMO_ACTIONS = {
   SITE_VITRINE_CLICK_ESPACE_PROJET: "site-vitrine-vers-espace-projet",
   ESTIMATION_MODIFICATION_SOLUTION: "estimation-modification-solution",
   AIDE_DECISION_CLIC_ESPACE: "aide-decision-clic-espace",
+  BANNER_CLICK_SYNTHESE: "banner-clic-synthese",
+};
+
+export const BANNER_CLICK_SYNTHESE: MATOMO_EVENT = {
+  category: MATOMO_CATEGORIES.ESPACE_PROJET,
+  action: MATOMO_ACTIONS.BANNER_CLICK_SYNTHESE,
+  name: "Clic vers la synthèse à partir de la bannière projet",
 };
 
 export const ESTIMATION_AJOUT_SOLUTION: MATOMO_EVENT = {
