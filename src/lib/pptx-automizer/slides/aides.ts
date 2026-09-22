@@ -1,7 +1,6 @@
-import { ISlide, modify, ReplaceText, ShapeModificationCallback } from "pptx-automizer";
+import { modify, ReplaceText, ShapeModificationCallback, XmlElement } from "pptx-automizer";
 import { AddTemplateSlide, PptxSlideInfo } from "./types";
-import { chunk } from "./fiche-solution-materiaux";
-import { mergeTextRunsInElement } from "../helpers";
+import { mergeTextRunsInElement, replaceTagWithBulletList } from "../helpers";
 import { PptxSlideElement, PptxTemplateTag } from "../types";
 import { ProjetAideWithAide } from "@/src/lib/prisma/prismaCustomTypes";
 import { TypeAidesTerritoiresAide } from "@/src/components/financement/types";
@@ -9,44 +8,59 @@ import { fetchAideFromAidesTerritoiresById } from "@/src/lib/aidesTerritoires/fe
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
-// The source template's "template" alias, as loaded in generate-synthese-projet-pptx.ts.
-const TEMPLATE_PRES_NAME = "template";
-
-export const MAX_AIDES_PAR_SLIDE = 3;
-
 // ---------------------------------------------------------------------------------------
-// Layout geometry (EMU), read off the template slide's own single, pristine contour_aide
-// card. Every card is placed as a whole at a computed absolute Y offset from that pristine
-// card, same technique as the materiau row (fiche-solution-materiaux.ts): each shape within a
-// card keeps its own offset from the card's anchor shape (contour_aide), so only the card's
-// vertical position ever changes.
+// Layout geometry (EMU/points), read off the template slide's own single, pristine zone_aide
+// text box — every field of one aide (type, nom, financiers, echeance, lien) lives in this one
+// bulleted box, as a fixed 6-paragraph block: "{{aide_nom}}" (bold 14pt) + a line break +
+// "{{aide_type}}" (11pt) in one bulleted paragraph, then "Porteur : {{aide_financiers}}",
+// "Échéance : {{aide_echeance}}" and "{{aide_lien}}" as bulleted sub-items, then two blank
+// bulleted lines that double as the gap before the next aide's block. Every aide's block is
+// cloned from that pristine paragraph set and appended after the previous one, so they all flow
+// in the same shared text box — as many as estimated to fit (see buildAideSlidePlans), spilling
+// onto a fresh slide otherwise.
 // ---------------------------------------------------------------------------------------
 
-const CARD_TOP_EMU = 1436010; // contour_aide's own y
-const CARD_HEIGHT_EMU = 1319489; // contour_aide's own cy
+const CARD_TOP_EMU = 1359256; // zone_aide's own y
 // The footer divider's own y, minus a small safety margin — same convention as
 // estimation-recap.ts / ressources-utiles.ts.
 const MAX_CONTENT_BOTTOM_EMU = 6512991 - 200000;
-
-// Moves the "Lien vers l'aide" zone far below the visible slide when an aide has no
-// origin_url, instead of removing it: addTemplateSlide's own pass already queues a
-// modifyElement for every text-bearing shape (to apply the tags shared by every slide), and a
-// later slide.removeElement for that same shape would silently no-op — same reasoning as
-// estimation-recap.ts's own hideElements.
-const HIDE_Y_EMU = 30000000;
-
-// MAX_AIDES_PAR_SLIDE cards, evenly spread between the template's own card position and the
-// footer, so the last card's bottom lands exactly on MAX_CONTENT_BOTTOM_EMU.
+// zone_aide is resized to this height on every generated slide — regardless of how many aides
+// it ends up holding — so its own normAutofit only ever has to correct for a misestimate,
+// instead of routinely shrinking the text to fit the template's single-card height.
 const AVAILABLE_HEIGHT_EMU = MAX_CONTENT_BOTTOM_EMU - CARD_TOP_EMU;
-const CARD_GAP_EMU = (AVAILABLE_HEIGHT_EMU - MAX_AIDES_PAR_SLIDE * CARD_HEIGHT_EMU) / (MAX_AIDES_PAR_SLIDE - 1);
-const CARD_DELTA_EMU = CARD_HEIGHT_EMU + CARD_GAP_EMU;
+
+const EMU_PER_POINT = 12700;
+// "{{aide_nom}}" + <br> + "{{aide_type}}": one paragraph, bullet level 0 (marL 285750), both
+// lines set at the template's own exact 14pt line spacing regardless of the 14pt/11pt run sizes.
+const LEVEL_0_MARGIN_EMU = 285750;
+const LEVEL_0_LINE_HEIGHT_EMU = 14 * EMU_PER_POINT;
+// "Porteur : ...", "Échéance : ...", "{{aide_lien}}": bullet level 1 (marL 628650), sz 1100 at
+// 150% line spacing.
+const LEVEL_1_MARGIN_EMU = 628650;
+const LEVEL_1_LINE_HEIGHT_EMU = 11 * 1.5 * EMU_PER_POINT;
+// The two blank bulleted lines the template ends the card on, at its own exact 14pt spacing.
+const SPACER_LINE_COUNT = 2;
+const SPACER_LINE_HEIGHT_EMU = 14 * EMU_PER_POINT;
+
+// Average glyph width, used to estimate line-wrapping since no actual text-layout engine runs
+// at generation time — PowerPoint only lays out the real text once the file is opened.
+// Deliberately narrow (an underestimate of a typical ~0.5em average) so a block's height is
+// never underestimated, same convention as ressources-utiles.ts's own CONTENT_AVG_CHAR_WIDTH_EMU.
+const CHAR_WIDTH_FACTOR = 0.55;
+const CONTENT_WIDTH_EMU = 10187280; // zone_aide's own cx
+const CHARS_PER_LINE_NOM = Math.floor(
+  (CONTENT_WIDTH_EMU - LEVEL_0_MARGIN_EMU) / (CHAR_WIDTH_FACTOR * 14 * EMU_PER_POINT),
+);
+const CHARS_PER_LINE_LEVEL_1 = Math.floor(
+  (CONTENT_WIDTH_EMU - LEVEL_1_MARGIN_EMU) / (CHAR_WIDTH_FACTOR * 11 * EMU_PER_POINT),
+);
 
 /**
  * One aide's display data, resolved once for the whole export: the fields cached on the
  * projet's own aide row (name, type, financers, submission_deadline) plus the aide's live
  * origin_url, fetched from Aides Territoires since it isn't cached in our own database (see
  * buildAidesCardData). undefined when the aide has no origin_url — the "Lien vers l'aide" line
- * is then hidden instead of shown with a dead link.
+ * is then dropped instead of shown with a dead link.
  */
 export type AideCardData = {
   type: string;
@@ -87,75 +101,144 @@ export const buildAidesCardData = async (projetAides: ProjetAideWithAide[]): Pro
   );
 };
 
+// AIDE_LIEN is deliberately left out: it isn't a plain 1:1 substitution like the others (see
+// buildAideBlockParagraphs below), so it must never be applied by a generic replaceText pass.
 const getAideReplacements = (aide: AideCardData): ReplaceText[] => [
   { replace: PptxTemplateTag.AIDE_TYPE, by: { text: aide.type } },
   { replace: PptxTemplateTag.AIDE_NOM, by: { text: aide.nom } },
   { replace: PptxTemplateTag.AIDE_FINANCIERS, by: { text: aide.financiers } },
   { replace: PptxTemplateTag.AIDE_ECHEANCE, by: { text: aide.echeance } },
-  { replace: PptxTemplateTag.AIDE_LIEN, by: { text: "Lien vers l'aide" } },
 ];
 
-const getAideLienCallbacks = (aide: AideCardData): ShapeModificationCallback[] =>
-  aide.originUrl
-    ? [modify.setHyperlinkTarget(aide.originUrl)]
-    : [modify.removeHyperlink(), modify.setPosition({ y: HIDE_Y_EMU })];
-
-// Every shape making up one aide card: the contour, its texts, and the "Lien vers l'aide"
-// hyperlink zone.
-const AIDE_CARD_ELEMENT_NAMES = [
-  PptxSlideElement.CONTOUR_AIDE,
-  PptxSlideElement.ZONE_TYPE_AIDE,
-  PptxSlideElement.ZONE_TITRE_AIDE,
-  PptxSlideElement.ZONE_DETAILS_AIDE,
-  PptxSlideElement.ZONE_LIEN_AIDE,
-];
+const estimateWrappedLineCount = (text: string, charsPerLine: number): number =>
+  Math.max(1, Math.ceil(text.length / charsPerLine));
 
 /**
- * Duplicates the whole aide card (contour_aide + its texts and hyperlink) from the pristine
- * template slide onto the slide being built, shifted down by `cardIndex` cards. Used for the
- * 2nd and 3rd aide of a slide — the 1st reuses the card already present on the template slide.
+ * Best-effort height estimate (EMU) for one aide's whole 6-paragraph block — see the module
+ * comment for its fixed shape. Only "nom" and "financiers" are free text long enough to
+ * plausibly wrap (type is one of two short fixed labels, echeance is a short formatted date,
+ * lien is a fixed short label); the rest is a straight line count from the template's own
+ * paragraph spacing.
  */
-const addAideCard = (slide: ISlide, slideNumber: number, aide: AideCardData, cardIndex: number) => {
-  const cardPositionCallback = modify.updatePosition({ y: cardIndex * CARD_DELTA_EMU });
-  const replacements = getAideReplacements(aide);
+const estimateAideBlockHeightEmu = (aide: AideCardData): number => {
+  const nomLines = estimateWrappedLineCount(aide.nom, CHARS_PER_LINE_NOM);
+  const typeLines = 1;
+  const financiersLines = estimateWrappedLineCount(`Porteur : ${aide.financiers}`, CHARS_PER_LINE_LEVEL_1);
+  const echeanceLines = 1;
+  const lienLines = aide.originUrl ? 1 : 0;
 
-  AIDE_CARD_ELEMENT_NAMES.forEach((name) => {
-    const isLienZone = name === PptxSlideElement.ZONE_LIEN_AIDE;
-    const callbacks: ShapeModificationCallback[] = [
-      mergeTextRunsInElement,
-      modify.replaceText(replacements),
-      cardPositionCallback,
-      ...(isLienZone ? getAideLienCallbacks(aide) : []),
-    ];
-    slide.addElement(TEMPLATE_PRES_NAME, slideNumber, { name }, callbacks);
-  });
+  return (
+    (nomLines + typeLines) * LEVEL_0_LINE_HEIGHT_EMU +
+    (financiersLines + echeanceLines + lienLines) * LEVEL_1_LINE_HEIGHT_EMU +
+    SPACER_LINE_COUNT * SPACER_LINE_HEIGHT_EMU
+  );
 };
 
 /**
- * Slide 8: up to MAX_AIDES_PAR_SLIDE aide cards per slide, using the template slide's single
- * card as a blueprint. Creates as many slides as needed to show every selected aide, and only
- * runs at all when at least one aide was passed to the export (see
- * generate-synthese-projet-pptx.ts).
+ * Groups aides into slide pages: an aide's block is never split across two slides — if it
+ * doesn't fit in what's left of the current slide's zone_aide box, the whole block moves to a
+ * fresh slide, which always fits at least one block even if that block's own estimated height
+ * alone exceeds the box.
+ */
+const buildAideSlidePlans = (aides: AideCardData[]): AideCardData[][] => {
+  const slidePlans: AideCardData[][] = [];
+  let currentPlan: AideCardData[] = [];
+  let cursorHeightEmu = 0;
+
+  aides.forEach((aide) => {
+    const blockHeightEmu = estimateAideBlockHeightEmu(aide);
+    const wouldOverflow = currentPlan.length > 0 && cursorHeightEmu + blockHeightEmu > AVAILABLE_HEIGHT_EMU;
+    if (wouldOverflow) {
+      slidePlans.push(currentPlan);
+      currentPlan = [];
+      cursorHeightEmu = 0;
+    }
+
+    currentPlan.push(aide);
+    cursorHeightEmu += blockHeightEmu;
+  });
+
+  if (currentPlan.length > 0) slidePlans.push(currentPlan);
+  return slidePlans;
+};
+
+/**
+ * Clones the template's 6 pristine paragraphs (already merged into single-run tags by the
+ * caller) into a detached scratch element, substitutes this aide's own tags into the clone —
+ * isolated from every other aide's block, so runs of the shared "{{aide_nom}}" etc. tags never
+ * collide across aides — and returns the resulting paragraphs, still detached, ready to be
+ * appended to the real zone_aide text body.
+ */
+const buildAideBlockParagraphs = async (
+  templateParagraphs: XmlElement[],
+  aide: AideCardData,
+  zoneAideElement: XmlElement,
+  relation: XmlElement | undefined,
+): Promise<XmlElement[]> => {
+  const ownerDocument = zoneAideElement.ownerDocument;
+  if (!ownerDocument) return [];
+  const scratch = ownerDocument.createElement("scratch");
+  templateParagraphs.forEach((paragraph) => scratch.appendChild(paragraph.cloneNode(true) as XmlElement));
+
+  modify.replaceText(getAideReplacements(aide))(scratch);
+  // The "Lien vers l'aide" bullet carries the template's own hyperlink (already pointing at a
+  // placeholder target). With no live origin_url, the whole bullet paragraph is dropped instead
+  // of left as a dead link; otherwise its tag is swapped for the visible label and the
+  // template's hyperlink is repointed at the real URL.
+  replaceTagWithBulletList(scratch, PptxTemplateTag.AIDE_LIEN, aide.originUrl ? ["Lien vers l'aide"] : []);
+  if (aide.originUrl && relation) {
+    await modify.setHyperlinkTarget(aide.originUrl)(scratch, relation);
+  }
+
+  return Array.from(scratch.getElementsByTagName("a:p"));
+};
+
+/**
+ * Builds every aide's block in order and appends them one after another into zone_aide's own
+ * text body, then drops the original pristine paragraphs. Also grows the box to the full
+ * available height (see AVAILABLE_HEIGHT_EMU) so its normAutofit has real room to work with,
+ * instead of shrinking text to fit the template's single-card height as soon as a second aide
+ * is appended.
+ */
+const applyAidesToZoneAide = (aidesForSlide: AideCardData[]): ShapeModificationCallback => {
+  return async (element, relation) => {
+    modify.setPosition({ h: AVAILABLE_HEIGHT_EMU })(element);
+    mergeTextRunsInElement(element);
+
+    const txBody = element.getElementsByTagName("p:txBody")[0];
+    if (!txBody) return;
+
+    const templateParagraphs = Array.from(txBody.getElementsByTagName("a:p"));
+
+    for (const aide of aidesForSlide) {
+      const blockParagraphs = await buildAideBlockParagraphs(templateParagraphs, aide, element, relation);
+      blockParagraphs.forEach((paragraph) => txBody.appendChild(paragraph));
+    }
+
+    templateParagraphs.forEach((paragraph) => paragraph.parentNode?.removeChild(paragraph));
+  };
+};
+
+/**
+ * Slide 8: every selected aide's block, flowing one below another in the slide's single
+ * zone_aide text box — as many as estimated to fit (see buildAideSlidePlans). Creates as many
+ * slides as needed to show every selected aide, and only runs at all when at least one aide was
+ * passed to the export (see generate-synthese-projet-pptx.ts).
  */
 export const addAidesSlides = (addTemplateSlide: AddTemplateSlide, slideInfo: PptxSlideInfo, aides: AideCardData[]) => {
-  const aidesChunks = chunk(aides, MAX_AIDES_PAR_SLIDE);
+  const slidePlans = buildAideSlidePlans(aides);
 
-  aidesChunks.forEach((aidesChunk, chunkIndex) => {
-    const [firstAide, ...otherAides] = aidesChunk;
-
+  slidePlans.forEach((slidePlan, planIndex) => {
     addTemplateSlide(
       slideInfo,
       [
         {
           replace: PptxTemplateTag.PAGINATION_AIDES,
-          by: { text: aidesChunks.length > 1 ? `${chunkIndex + 1}/${aidesChunks.length}` : "" },
+          by: { text: slidePlans.length > 1 ? `${planIndex + 1}/${slidePlans.length}` : "" },
         },
-        ...getAideReplacements(firstAide),
       ],
       (slide) => {
-        slide.modifyElement({ name: PptxSlideElement.ZONE_LIEN_AIDE }, getAideLienCallbacks(firstAide));
-
-        otherAides.forEach((aide, otherIndex) => addAideCard(slide, slideInfo.number, aide, otherIndex + 1));
+        slide.modifyElement({ name: PptxSlideElement.ZONE_AIDE }, applyAidesToZoneAide(slidePlan));
       },
     );
   });

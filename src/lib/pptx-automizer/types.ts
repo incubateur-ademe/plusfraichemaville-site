@@ -31,7 +31,8 @@ export enum PptxTemplateTag {
   // Ressources utiles slide (10): one fiche solution per slide.
   RESSOURCES_UTILES_FICHE_SOLUTION = "ressources_utiles_fiche_solution",
   PAGINATION_RESSOURCES_UTILES = "pagination_ressources_utiles",
-  // Aides slide (8): up to MAX_AIDES_PAR_SLIDE aide cards per slide.
+  // Aides slide (8): every aide's block flows in the same shared zone_aide text box, as many
+  // as estimated to fit per slide.
   AIDE_TYPE = "aide_type",
   AIDE_NOM = "aide_nom",
   AIDE_FINANCIERS = "aide_financiers",
@@ -72,11 +73,9 @@ export enum PptxSlideElement {
   RECAP_GRAND_TOTAL_VALUES = "recap_total_libelles_valeurs",
   ZONE_TITRE_FICHE_SOLUTION_RESSOURCES_UTILES = "zone_titre_fiche_solution",
   ZONE_RESSOURCES_UTILES_FICHE_SOLUTION = "zone_ressources_fiche_solution",
-  CONTOUR_AIDE = "contour_aide",
-  ZONE_TYPE_AIDE = "zone_aide_type",
-  ZONE_TITRE_AIDE = "zone_aide_titre",
-  ZONE_DETAILS_AIDE = "zone_aide_details",
-  ZONE_LIEN_AIDE = "zone_aide_lien",
+  // Aides slide (8): every field of one aide (type, nom, financiers, echeance, lien) now lives
+  // in this single bulleted text box, instead of one shape per field.
+  ZONE_AIDE = "zone_aide",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and

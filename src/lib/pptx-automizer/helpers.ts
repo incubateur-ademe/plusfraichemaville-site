@@ -55,7 +55,7 @@ const mergeRunGroup = (paragraph: XmlElement, group: XmlElement[]) => {
  * before `modify.replaceText` runs. Runs are grouped by their own visual style first (see
  * getRunStyleKey) before merging within each group, so a paragraph mixing several
  * differently-styled lines — joined by <a:br> rather than split into their own <a:p>, as on the
- * aides card's zone_aide_details (a bold name line, then a smaller grey porteur/échéance line)
+ * aides card's zone_aide (a bold name line, then a smaller regular type line)
  * — doesn't have the second line's formatting overwritten by the first's.
  */
 export const mergeTextRunsInElement = (element: XmlElement) => {
