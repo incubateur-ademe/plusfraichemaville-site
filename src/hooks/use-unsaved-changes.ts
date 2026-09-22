@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
-const DEFAULT_MESSAGE = "Attention, certains champs n'ont pas été enregistrés, êtes-vous sûr de vouloir quitter la page ?";
+const DEFAULT_MESSAGE =
+  "Attention, certains champs n'ont pas été enregistrés," + " êtes-vous sûr de vouloir quitter la page ?";
 
 export const useUnsavedChanges = (isDirty: boolean, message: string = DEFAULT_MESSAGE) => {
   useEffect(() => {

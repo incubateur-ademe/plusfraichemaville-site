@@ -83,7 +83,9 @@ const applyRessourcesUtilesContent = (html: string): ShapeModificationCallback =
   return (element, relation) => {
     try {
       modify.htmlToMultiText(
-        `<body><div style="font-family: ${RESSOURCES_UTILES_FONT_FAMILY}">${sanitizeHtmlForMultiText(html)}</div></body>`,
+        `<body><div style="font-family: ${RESSOURCES_UTILES_FONT_FAMILY}">${sanitizeHtmlForMultiText(
+          html,
+        )}</div></body>`,
       )(element, relation);
     } catch (e) {
       customCaptureException("Error converting en_savoir_plus HTML to pptx multi-text, falling back to plain text", e);

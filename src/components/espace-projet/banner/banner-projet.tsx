@@ -15,10 +15,7 @@ import { getStatutProjetByStatut } from "@/src/components/espace-projet/statut-p
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DisplayUserName } from "@/src/components/common/display-user-name";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
-import { BANNER_CLICK_SYNTHESE, MATERIAUX_TO_ESPACE_PROJET } from "@/src/helpers/matomo/matomo-tags";
-import { updateFichesProjetAction } from "@/src/actions/projets/update-fiches-projet-action";
-import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
-import { notifications } from "@/src/components/common/notifications";
+import { BANNER_CLICK_SYNTHESE } from "@/src/helpers/matomo/matomo-tags";
 
 export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
