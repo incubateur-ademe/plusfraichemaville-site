@@ -41,6 +41,14 @@ const BLOCK_BOUNDARY_REGEX = /<\/(?:p|li|h[1-6]|div|blockquote)>|<br\s*\/?>/gi;
 // `<br/>`), which the strict-ish XML parser behind modify.htmlToMultiText cannot read.
 const VOID_ELEMENTS = ["br", "hr", "img"];
 
+// modify.htmlToMultiText rebuilds every paragraph/run from scratch, only carrying over the
+// template shape's font size and color (see pptx-automizer's MultiTextHelper.extractDefaultStyle)
+// — never its font. Left unset, the generated runs fall back to the theme's font (Aptos in this
+// template) instead of the template's own "Marianne" (DSFR) typeface used on every other slide.
+// Wrapping the content in a styled block lets the HTML→multitext walk pick it up as the base
+// style for every paragraph it emits, same as an inline `style="font-family"` from the CMS would.
+const RESSOURCES_UTILES_FONT_FAMILY = "Marianne";
+
 /**
  * The selected fiches solutions that actually have ressources utiles content, in their
  * selection order. Exported so the orchestrator can reuse the same filtering to decide
@@ -74,7 +82,9 @@ const sanitizeHtmlForMultiText = (html: string): string => {
 const applyRessourcesUtilesContent = (html: string): ShapeModificationCallback => {
   return (element, relation) => {
     try {
-      modify.htmlToMultiText(`<body>${sanitizeHtmlForMultiText(html)}</body>`)(element, relation);
+      modify.htmlToMultiText(
+        `<body><div style="font-family: ${RESSOURCES_UTILES_FONT_FAMILY}">${sanitizeHtmlForMultiText(html)}</div></body>`,
+      )(element, relation);
     } catch (e) {
       customCaptureException("Error converting en_savoir_plus HTML to pptx multi-text, falling back to plain text", e);
       modify.setText(getPlainTextFromHtml(html))(element);
