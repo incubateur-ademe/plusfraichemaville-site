@@ -19,6 +19,10 @@ import { EstimationRadioOptionLabel } from "./estimation-radio-option-label";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { Spinner } from "@/src/components/common/spinner";
+import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
+
+const GENERATION_IN_PROGRESS_MESSAGE =
+  "La génération de votre synthèse est en cours, si vous quittez la page maintenant vous annulerez son téléchargement.";
 
 type ProjetSyntheseFormProps = {
   currentProjet?: ProjetWithRelations;
@@ -50,6 +54,8 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       aideIds: [],
     },
   });
+
+  useUnsavedChanges(form.formState.isSubmitting, GENERATION_IN_PROGRESS_MESSAGE);
 
   const selectedSolutionIds = form.watch("solutionIds") || [];
   const selectedEstimationId = form.watch("estimationId");
