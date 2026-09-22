@@ -11,6 +11,8 @@ import {
 } from "@/src/forms/projet-synthese/projet-synthese-form-schema";
 import { generateSyntheseProjetPptx } from "@/src/lib/pptx-automizer/generate-synthese-projet-pptx";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { EventType, FicheType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const exportSyntheseProjetAction = async (
   projetId: number,
@@ -53,6 +55,27 @@ export const exportSyntheseProjetAction = async (
       solutionIds: parse.data.solutionIds,
       estimationId: parse.data.estimationId,
       aideIds: parse.data.aideIds,
+    });
+
+    const allSolutionFicheIds = projet.fiches
+      .filter((fiche) => fiche.type === FicheType.SOLUTION)
+      .map((fiche) => fiche.fiche_id);
+    const allEstimationIds = projet.estimations.map((estimation) => estimation.id);
+    const allAideIds = projet.projetAides.map((projetAide) => projetAide.aideId);
+
+    await createAnalytic({
+      context: {
+        fichesSolutionsIncluded: parse.data.solutionIds,
+        fichesSolutionsExcluded: allSolutionFicheIds.filter((ficheId) => !parse.data.solutionIds.includes(ficheId)),
+        estimationChosen: parse.data.estimationId ? [parse.data.estimationId] : [],
+        estimationsExcluded: allEstimationIds.filter((estimationId) => estimationId !== parse.data.estimationId),
+        aidesIncluded: parse.data.aideIds,
+        aidesExcluded: allAideIds.filter((aideId) => !parse.data.aideIds.includes(aideId)),
+      },
+      event_type: EventType.DOWNLOAD_PROJET_SYNTHESE,
+      reference_id: projet.id.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
     });
 
     return {

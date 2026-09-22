@@ -12,17 +12,27 @@ import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import Button from "@codegouvfr/react-dsfr/Button";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { getStatutProjetByStatut } from "@/src/components/espace-projet/statut-projet/statut-projet";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { DisplayUserName } from "@/src/components/common/display-user-name";
+import { trackEvent } from "@/src/helpers/matomo/track-matomo";
+import { BANNER_CLICK_SYNTHESE } from "@/src/helpers/matomo/matomo-tags";
 
 export default function BannerProjet({ className }: { className?: string }) {
   const currentProjet = useProjetsStore((state) => state.getCurrentProjet());
   const isLecteur = useIsLecteur(currentProjet?.id);
   const pathname = usePathname();
+  const router = useRouter();
   const searchParams = useSearchParams();
   const url = `${pathname}${Array.from(searchParams.keys()).length ? "?" + searchParams : ""}`;
   const isBannerExpanded = url === PFMV_ROUTES.TABLEAU_DE_BORD(currentProjet?.id || -1);
   const shouldDispplayExportButton = isBannerExpanded && process.env.NEXT_PUBLIC_FEATURE_EXPORT_PPT === "true";
+
+  const handleSyntheseClick = () => {
+    trackEvent(BANNER_CLICK_SYNTHESE);
+    if (currentProjet?.id) {
+      router.push(PFMV_ROUTES.ESPACE_PROJET_SYNTHESE(currentProjet.id));
+    }
+  };
 
   return (
     <div className={`bg-dsfr-background-alt-blue-france py-3  ${className} min-h-[6rem]`}>
@@ -117,9 +127,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                             {shouldDispplayExportButton && (
                               <Button
                                 className={clsx("rounded-3xl")}
-                                linkProps={{
-                                  href: PFMV_ROUTES.ESPACE_PROJET_SYNTHESE(currentProjet.id),
-                                }}
+                                onClick={handleSyntheseClick}
                                 priority="secondary"
                               >
                                 Télécharger la synthèse
