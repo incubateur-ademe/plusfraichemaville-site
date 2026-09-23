@@ -5,7 +5,9 @@ import clsx from "clsx";
 export const BannerPFAT = ({ className }: { className?: string }) => {
   return (
     <div className={clsx("fr-text--lg rounded-xl bg-dsfr-background-alt-blue-france p-6", className)}>
-      <h2>Anticiper les fortes chaleurs pour les agents de collectivité</h2>
+      <div className="mb-4 text-lg font-bold md:text-xl">
+        Anticiper les fortes chaleurs pour les agents de collectivité
+      </div>
       <div className="flex flex-col items-start gap-4 md:flex-row md:gap-8">
         <Image
           src="/images/surchauffe-urbaine/logo-pfat.webp"
