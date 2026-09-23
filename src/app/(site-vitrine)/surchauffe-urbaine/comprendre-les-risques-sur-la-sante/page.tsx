@@ -7,6 +7,7 @@ import { StaticZoomedImage } from "@/src/components/common/static-zoomed-image";
 import { FicheCardSkeleton } from "@/src/components/common/fiche-card-skeleton";
 import { AltSRSantePopulationARisque, AltSRSanteVivreChaleurEnVille } from "./screen-reader-alt-infographies-sante";
 import { FichesSolutionsSante } from "./fiches-solutions-sante";
+import { BannerPFAT } from "@/src/components/surchauffe-urbaine/banner-pfat";
 
 export const metadata: Metadata = computeMetadata("Comprendre les risques de la surchauffe urbaine sur la santé");
 
@@ -82,7 +83,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               coagulation, avec pour conséquence <strong>une nécrose et une dégradation d’organes majeurs</strong>.
             </p>
           </section>
-          <section className="fr-text--lg rounded-xl bg-dsfr-background-alt-blue-france p-6">
+          <section className="fr-text--lg rounded-xl">
             <h2>Qui sont les personnes les plus vulnérables face à la chaleur en ville ?</h2>
             <p>
               Tous les habitants ne sont pas égaux face à la chaleur. Identifier et protéger les{" "}
@@ -113,6 +114,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 alt="Infographie : augmentation de la population à risque en fonction de l'intensité de la chaleur"
                 imageSize={{ thumbWidth: 550, thumbHeight: 260, largeWidth: 1200, largeHeight: 844 }}
                 ariaDescribedBy="sante-population-a-risque"
+                imageClassName="border-[1px] border-dsfr-border-default-grey"
               />
               <AltSRSantePopulationARisque id="sante-population-a-risque" />
             </div>
@@ -137,6 +139,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
                 Comprendre comment les habitants ressentent la chaleur.
               </LinkWithoutPrefetch>
             </p>
+            <BannerPFAT className="mt-10" />
           </section>
           <section className="fr-text--lg">
             <h2>Quelles sont les conséquences de la chaleur sur la mortalité ? </h2>

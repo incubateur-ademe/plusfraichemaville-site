@@ -4,6 +4,7 @@ import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import CallOut from "@codegouvfr/react-dsfr/CallOut";
 import EspaceProjetIncentiveBanner from "@/src/components/common/espace-projet-incentive/espace-projet-incentive-banner";
+import { BannerPFAT } from "@/src/components/surchauffe-urbaine/banner-pfat";
 
 export const metadata: Metadata = computeMetadata(
   "Vague de chaleur : répondre à l'urgence",
@@ -71,6 +72,7 @@ export default function SurchauffeUrbaineComprendreLesRisquesPage() {
               Identifier ces populations sur le territoire et mettre en place des dispositifs de protection est le
               premier réflexe à avoir.
             </p>
+            <BannerPFAT className="mt-8" />
           </section>
           <section>
             <h2>Des solutions mobilisables rapidement face aux vagues de chaleur</h2>
