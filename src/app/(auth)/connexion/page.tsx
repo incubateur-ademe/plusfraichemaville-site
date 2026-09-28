@@ -15,7 +15,7 @@ const data = {
   blocs: [
     {
       title: "Faites un diagnostic de surchauffe urbaine",
-      description: "Faites un diagnostic simplifié, et trouvez des prestations pour un diagnostic approfondi",
+      description: "Faites une analyse simplifiée, et trouvez des prestations pour un diagnostic approfondi",
       picto: "diagnostic",
     },
     {
