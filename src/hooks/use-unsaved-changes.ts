@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 
-export const useUnsavedChanges = (isDirty: boolean) => {
+const DEFAULT_MESSAGE =
+  "Attention, certains champs n'ont pas été enregistrés," + " êtes-vous sûr de vouloir quitter la page ?";
+
+export const useUnsavedChanges = (isDirty: boolean, message: string = DEFAULT_MESSAGE) => {
   useEffect(() => {
     // Handle browser navigation (reload, close tab)
     const handleBeforeUnload = (e: BeforeUnloadEvent) => {
@@ -17,16 +20,13 @@ export const useUnsavedChanges = (isDirty: boolean) => {
         const anchor = target.closest("a");
         const button = target.closest("button");
         if (anchor) {
-          // Check if link opens in new tab
-          if (anchor?.target === "_blank") {
+          // Opening in a new tab, or downloading a file (e.g. a programmatic `link.click()` on
+          // an <a download> built from a blob URL), never navigates away from the current page
+          if (anchor.target === "_blank" || anchor.hasAttribute("download")) {
             return;
           }
 
-          if (
-            !window.confirm(
-              "Attention, certains champs n'ont pas été enregistrés, êtes-vous sûr de vouloir quitter la page ?",
-            )
-          ) {
+          if (!window.confirm(message)) {
             e.preventDefault();
             e.stopPropagation();
           }
@@ -35,11 +35,7 @@ export const useUnsavedChanges = (isDirty: boolean) => {
           button.getAttribute("role") === "tab" &&
           button.getAttribute("aria-selected") === "false"
         ) {
-          if (
-            !window.confirm(
-              "Attention, certains champs n'ont pas été enregistrés, êtes-vous sûr de vouloir quitter la page ?",
-            )
-          ) {
+          if (!window.confirm(message)) {
             e.preventDefault();
             e.stopPropagation();
           }
@@ -55,5 +51,5 @@ export const useUnsavedChanges = (isDirty: boolean) => {
       window.removeEventListener("beforeunload", handleBeforeUnload);
       document.removeEventListener("click", handleAnchorClick, true);
     };
-  }, [isDirty]);
+  }, [isDirty, message]);
 };

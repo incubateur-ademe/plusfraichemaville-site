@@ -319,9 +319,9 @@ model climadiag {
 }
 
 model aide {
-  id                  Int                 @id @default(autoincrement())
-  aideTerritoireId    Int                 @unique
-  submission_deadline DateTime?           @db.Date
+  id                  Int            @id @default(autoincrement())
+  aideTerritoireId    Int            @unique
+  submission_deadline DateTime?      @db.Date
   type                String
   name                String?
   financers           String[]
@@ -408,6 +408,7 @@ enum EventType {
   UPDATE_STATUT_USER
   UPDATE_PROJET_SET_VISIBLE
   UPDATE_PROJET_SET_INVISIBLE
+  DOWNLOAD_PROJET_SYNTHESE
 }
 
 model Analytics {

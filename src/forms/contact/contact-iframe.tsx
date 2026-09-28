@@ -3,7 +3,7 @@ import { useUserStore } from "@/src/stores/user/provider";
 import { AgentConnectInfo } from "@/src/lib/prisma/prismaCustomTypes";
 import clsx from "clsx";
 
-export const ContactIframe = ({ className }: { className?: string }) => {
+export const ContactIframe = ({ objetContact, className }: { objetContact?: string; className?: string }) => {
   const user = useUserStore((state) => state.userInfos);
   const userEmail = user?.email;
   const userSiret = (user?.agentconnect_info as AgentConnectInfo | null)?.siret;
@@ -12,6 +12,7 @@ export const ContactIframe = ({ className }: { className?: string }) => {
     ...(user?.nom && { nom: user.nom }),
     ...(user?.prenom && { prenom: user.prenom }),
     ...(userSiret && { siret: userSiret }),
+    ...(objetContact && { "objet-besoins": objetContact }),
   };
   const searchParams = new URLSearchParams(queryParams);
 

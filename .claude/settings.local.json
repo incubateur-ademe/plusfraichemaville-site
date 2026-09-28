@@ -31,7 +31,10 @@
       "Read(//tmp/**)",
       "Bash(git status *)",
       "Bash(node_modules/.bin/prettier --check \"src/**/*.{ts,tsx}\")",
-      "Bash(node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\")"
+      "Bash(node_modules/.bin/prettier --write \"src/**/*.{ts,tsx}\")",
+      "Bash(mkdir -p /tmp/pptx-inspect)",
+      "Bash(rm -rf /tmp/pptx-inspect/*)",
+      "Bash(unzip -o -q \"/c/Users/rapha/Documents/git/plusfraichemaville-site/public/templates/template_synthese_projet.pptx\")"
     ]
   }
 }

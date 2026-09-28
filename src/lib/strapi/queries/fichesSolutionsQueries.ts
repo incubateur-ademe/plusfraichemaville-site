@@ -159,7 +159,7 @@ export async function getFicheSolutionByIds(ficheSolutionIds: string[]): Promise
   ]);
   const apiResponse = (
     await strapiGraphQLCall(GET_FICHE_SOLUTION_CARD_DATA(filter), {
-      tag: `get-fiche-solution-by-ids-${ficheSolutionIds.join("-")}`,
+      tag: `get-fiche-solution-by-ids-${ficheSolutionIds.map((id) => id.substring(0, 5)).join("-")}`,
     })
   )?.ficheSolutions as APIResponseCollection<FicheSolution>;
   return safeReturnStrapiEntities(apiResponse);
@@ -176,7 +176,7 @@ export async function getFicheSolutionByIdsComplete(ficheSolutionIds: string[]):
   ]);
   const apiResponse = (
     await strapiGraphQLCall(GET_FICHE_SOLUTION_COMPLETE_DATA(filter), {
-      tag: `get-fiche-solution-by-ids-complete-${ficheSolutionIds.join("-")}`,
+      tag: `get-fiche-solution-by-ids-complete-${ficheSolutionIds.map((id) => id.substring(0, 5)).join("-")}`,
     })
   )?.ficheSolutions as APIResponseCollection<FicheSolution>;
   return safeReturnStrapiEntities(apiResponse);

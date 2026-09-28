@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import clsx from "clsx";
 import { useEffect, useState } from "react";
 
 type StaticZoomedImageProps = {
@@ -9,9 +10,17 @@ type StaticZoomedImageProps = {
   caption?: string;
   imageSize: { thumbWidth: number; thumbHeight: number; largeWidth: number; largeHeight: number };
   ariaDescribedBy?: string;
+  imageClassName?: string;
 };
 
-export const StaticZoomedImage = ({ src, alt, caption, imageSize, ariaDescribedBy }: StaticZoomedImageProps) => {
+export const StaticZoomedImage = ({
+  src,
+  alt,
+  caption,
+  imageSize,
+  ariaDescribedBy,
+  imageClassName,
+}: StaticZoomedImageProps) => {
   const [isOpen, setIsOpen] = useState(false);
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -29,7 +38,7 @@ export const StaticZoomedImage = ({ src, alt, caption, imageSize, ariaDescribedB
           alt={alt}
           width={imageSize.thumbWidth}
           height={imageSize.thumbHeight}
-          className="rounded-lg object-contain"
+          className={clsx("rounded-lg object-contain", imageClassName)}
           unoptimized
           aria-describedby={ariaDescribedBy}
         />

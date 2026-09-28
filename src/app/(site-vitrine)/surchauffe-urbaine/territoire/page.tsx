@@ -13,7 +13,6 @@ import LCZMapContainer from "@/src/components/surchauffe-urbaine/territoire/surc
 export const metadata: Metadata = computeMetadata("Impact de la surchauffe urbaine sur votre territoire");
 
 const LCZ_PERCENTAGE_COVERAGE_THRESHOLD = 5;
-const displayLCZ = process.env.NEXT_PUBLIC_FEATURE_LCZ === "true" || false;
 
 export default async function SurchauffeUrbaineTerritoirePage(props: {
   searchParams: Promise<{ codeInsee: string | undefined }>;
@@ -31,7 +30,7 @@ export default async function SurchauffeUrbaineTerritoirePage(props: {
           initialOption={mapClimadiagToCollectiteOption(climadiagResult)}
           className="mt-6"
         />
-        {displayLCZ && climadiagResult && climadiagResult.couverture_lcz > LCZ_PERCENTAGE_COVERAGE_THRESHOLD && (
+        {climadiagResult && climadiagResult.couverture_lcz > LCZ_PERCENTAGE_COVERAGE_THRESHOLD && (
           <LCZMapContainer climadiagInfo={climadiagResult as unknown as Climadiag} />
         )}
         {climadiagResult && (
