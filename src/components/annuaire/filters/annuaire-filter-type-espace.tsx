@@ -1,4 +1,4 @@
-import { ALL_ESPACES } from "@/src/helpers/type-espace-filter";
+import { DEFINED_ESPACES } from "@/src/helpers/type-espace-filter";
 import { TypeEspaceCode } from "@/src/helpers/type-espace-filter";
 import { AnnuaireFiltersAccordion } from "./annuaire-filters-accordion";
 import Checkbox from "@codegouvfr/react-dsfr/Checkbox";
@@ -22,7 +22,7 @@ export const AnnuaireFilterTypeEspace = ({
     <AnnuaireFiltersAccordion code="type-espace">
       <Checkbox
         className="h-72"
-        options={ALL_ESPACES.map((espace) => ({
+        options={DEFINED_ESPACES.map((espace) => ({
           label: espace.label,
           value: espace.code,
           nativeInputProps: {

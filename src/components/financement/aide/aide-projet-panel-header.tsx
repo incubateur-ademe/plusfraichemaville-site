@@ -1,7 +1,7 @@
 import { getRegionByDepartment } from "@/src/lib/departements";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 import { Separator, SeparatorY } from "@/src/components/common/separator";
-import { selectEspaceLabelByCode, TypeEspace } from "@/src/helpers/type-espace-filter";
+import { selectDefinedEspaceByCode, TypeEspace } from "@/src/helpers/type-espace-filter";
 
 export const AideProjetPanelHeader = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
@@ -19,7 +19,7 @@ export const AideProjetPanelHeader = () => {
         <SeparatorY />
         <div>{commune}</div>
         <SeparatorY />
-        <div>{selectEspaceLabelByCode(espace)}</div>
+        <div>{selectDefinedEspaceByCode(espace)?.label}</div>
       </div>
       <Separator className="mb-6 h-px !opacity-100" />
     </>

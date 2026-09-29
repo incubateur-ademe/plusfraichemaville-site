@@ -7,7 +7,7 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "@/src/lib/next-auth/auth";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
-import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
+import { selectDefinedEspaceByCode } from "@/src/helpers/type-espace-filter";
 import { FicheType } from "@/src/generated/prisma/client";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
@@ -60,7 +60,7 @@ export async function GET(request: NextRequest) {
     const result = await searchAidesFromAidesTerritoires(
       ficheSolutions,
       collectivite,
-      selectEspaceLabelByCode(projet.type_espace),
+      selectDefinedEspaceByCode(projet.type_espace)?.label,
     );
     return NextResponse.json(result);
   }

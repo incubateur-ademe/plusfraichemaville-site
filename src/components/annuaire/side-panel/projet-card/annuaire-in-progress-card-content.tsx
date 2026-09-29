@@ -3,7 +3,7 @@ import { ProjetWithPublicRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import Badge from "@codegouvfr/react-dsfr/Badge";
 import { getRegionLabelForProjet } from "@/src/helpers/regions";
 import Tag from "@codegouvfr/react-dsfr/Tag";
-import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
+import { selectDefinedEspaceByCode } from "@/src/helpers/type-espace-filter";
 import Button from "@codegouvfr/react-dsfr/Button";
 
 export const AnnuaireInProgressCardContent = ({
@@ -28,9 +28,11 @@ export const AnnuaireInProgressCardContent = ({
           <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
             Projet en cours
           </Badge>
-          <Tag small className="!m-0 h-fit">
-            {selectEspaceLabelByCode(data.type_espace)}
-          </Tag>
+          {selectDefinedEspaceByCode(data.type_espace) && (
+            <Tag small className="!m-0 h-fit">
+              {selectDefinedEspaceByCode(data.type_espace)?.label}
+            </Tag>
+          )}
         </div>
         <Button priority="tertiary no outline" className="mt-2 !px-0 text-left text-lg font-bold" onClick={onClick}>
           {data.nom}

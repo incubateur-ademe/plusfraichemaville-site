@@ -10,7 +10,7 @@ import { AnnuaireContactCard } from "../contacts/annuaire-contact-card";
 import { useProjetsStore } from "@/src/stores/projets/provider";
 
 import { userProjetToAnnuaireContact } from "@/src/components/annuaire/helpers";
-import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
+import { selectDefinedEspaceByCode } from "@/src/helpers/type-espace-filter";
 import { AnnuaireSidePanelTracking } from "./annuaire-side-panel-tracking";
 
 export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPublicRelations }) => {
@@ -32,9 +32,11 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
           <Badge small noIcon className="!mb-0 !bg-pfmv-navy !text-dsfr-background-alt-blue-france">
             Projet en cours
           </Badge>
-          <Tag small className="!m-0 h-fit">
-            {selectEspaceLabelByCode(data.type_espace)}
-          </Tag>
+          {selectDefinedEspaceByCode(data.type_espace) && (
+            <Tag small className="!m-0 h-fit">
+              {selectDefinedEspaceByCode(data.type_espace)?.label}
+            </Tag>
+          )}
         </div>
         <div className="mb-2 mt-2 text-lg font-bold">{data.nom}</div>
         <section className="mb-10 flex flex-row gap-1 text-sm">
