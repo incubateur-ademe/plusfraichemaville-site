@@ -15,7 +15,7 @@ export const DEFINED_ESPACES: TypeEspace[] = [
   { label: "Parking", code: "parking", icon: "espace-icone-parking.svg" },
   { label: "Rue", code: "rue", icon: "espace-icone-rue.svg" },
   { label: "Place", code: "place", icon: "espace-icone-place.svg" },
-  { label: "Cour d'école", code: "ecole", icon: "espace-icone-cour-ecole.svg" },
+  { label: "École", code: "ecole", icon: "espace-icone-cour-ecole.svg" },
   { label: "Espace vert", code: "parc", icon: "espace-icone-cour-parc-jardin.svg" },
 ];
 
