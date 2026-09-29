@@ -93,7 +93,7 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
         <SelectFormField
           control={form.control}
           path="typeEspace"
-          label="Sur quel espace souhaitez vous agir ?"
+          label="Quel espace souhaitez-vous rafraîchir ?"
           asterisk={true}
           options={typeEspaceOptions}
           placeholder="Selectionnez un type d'espace"

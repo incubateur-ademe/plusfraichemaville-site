@@ -41,12 +41,12 @@ export const createConnectProjet = async (projet: ConnectProjet): Promise<Connec
     });
 
     if (!response.ok) {
-      captureError(`Erreur lors de la création du projet dans Connect: ${response.statusText}`);
+      captureError(`Erreur lors de la création du projet ${projet.idProjet} dans Connect: ${response.statusText}`);
     }
 
     return await response.json();
   } catch (error) {
-    captureError("Exception lors de la création du projet dans Connect:", error);
+    captureError(`Exception lors de la création du projet ${projet.idProjet} dans Connect:`, error);
   }
 };
 

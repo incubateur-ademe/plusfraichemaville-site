@@ -1,6 +1,6 @@
 "use client";
 
-import { ALL_ESPACES } from "@/src/helpers/type-espace-filter";
+import { DEFINED_ESPACES } from "@/src/helpers/type-espace-filter";
 import { useTypeEspaceFilter } from "@/src/hooks/useTypeEspaceFilter";
 
 import Image from "next/image";
@@ -20,7 +20,7 @@ export default function TypeEspaceFilter({ className }: { className?: string }) 
           <div className={"text-center text-sm"}>Tous espaces</div>
         </div>
       </button>
-      {ALL_ESPACES.map((espace) => (
+      {DEFINED_ESPACES.map((espace) => (
         <button
           key={espace.code}
           onClick={() => setTypeEspaceFilter(espace.code)}
