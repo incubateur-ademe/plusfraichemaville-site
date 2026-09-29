@@ -61,7 +61,7 @@ export const upsertProjetAction = async (
 
       await createAnalytic({
         context: {
-          action: data.projetId
+          action: !data.projetId
             ? UPDATE_PROJET_CONTEXT_ACTIONS.CREATION_PROJET
             : UPDATE_PROJET_CONTEXT_ACTIONS.UPDATE_PROJET_ATTRIBUTE,
         },
