@@ -5,6 +5,9 @@ import { ResponseAction } from "../actions-types";
 import { deleteEstimation, getEstimationById } from "@/src/lib/prisma/prismaEstimationQueries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const deleteEstimationAction = async (estimationId: number): Promise<ResponseAction<object>> => {
   const session = await auth();
@@ -25,6 +28,13 @@ export const deleteEstimationAction = async (estimationId: number): Promise<Resp
 
   try {
     await deleteEstimation(estimationId, session.user.id);
+    await createAnalytic({
+      context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.DELETE_ESTIMATION },
+      event_type: EventType.UPDATE_PROJET,
+      reference_id: estimationToDelete.projet_id.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
+    });
   } catch (e) {
     customCaptureException("Error in DeleteEstimationAction DB call", e);
     return { type: "error", message: "TECHNICAL_ERROR" };

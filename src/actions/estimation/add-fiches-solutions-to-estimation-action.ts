@@ -7,6 +7,9 @@ import { EstimationFormData, EstimationFormSchema } from "@/src/forms/estimation
 import { addFichesSolutionsToEstimation } from "@/src/lib/prisma/prismaEstimationQueries";
 import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
 import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSolutionsQueries";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const addFichesSolutionsToEstimationAction = async (
   estimationId: number,
@@ -27,6 +30,13 @@ export const addFichesSolutionsToEstimationAction = async (
 
   try {
     const estimation = await addFichesSolutionsToEstimation(estimationId, fichesSolutions);
+    await createAnalytic({
+      context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.UPDATE_ESTIMATION },
+      event_type: EventType.UPDATE_PROJET,
+      reference_id: estimation.projet_id.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
+    });
     return { type: "success", message: "ESTIMATION_FICHES_SOLUTIONS_ADDED", estimation };
   } catch (e) {
     customCaptureException("Error in addFichesSolutionsToEstimationAction DB call", e);
