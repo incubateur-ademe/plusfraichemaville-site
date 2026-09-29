@@ -322,7 +322,7 @@ export class EmailService {
         const emailParams: EmailRemindToDoDiagnosticConfig = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "projet",
+          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "ville",
           urlModule2: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_CHOIX_PARCOURS(projet.id)),
         };
         return await this.sendEmail({
@@ -353,7 +353,7 @@ export class EmailService {
         const emailParams: EmailRemindChooseSolutionConfig = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "projet",
+          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "ville",
           urlModule3: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE(projet.id)),
         };
         return await this.sendEmail({
@@ -402,7 +402,7 @@ export class EmailService {
         const emailParams: EmailRemindFindFinancementConfig = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "projet",
+          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "ville",
           urlModule5: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT(projet.id)),
         };
         return await this.sendEmail({
@@ -425,7 +425,7 @@ export class EmailService {
     return await Promise.all(
       projetsToRemindContact.map(async (projet) => {
         const emailParams: EmailRemindSaveContactConfig = {
-          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "projet",
+          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "ville",
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
           urlModule6: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE(projet.id)),
@@ -455,7 +455,7 @@ export class EmailService {
         const emailParams: EmailRemindFindFinancementConfig = {
           userPrenom: projet.creator.prenom || "",
           projetName: projet.nom,
-          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "projet",
+          typeEspaceProjet: selectDefinedEspaceByCode(projet.type_espace)?.label || "ville",
           urlModule5: getFullUrl(PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT(projet.id)),
         };
         return await this.sendEmail({
