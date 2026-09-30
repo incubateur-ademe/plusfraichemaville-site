@@ -13,9 +13,15 @@ export type PptxSlideInfo = {
  * every slide (nom_projet, commune_projet, date_generation_synthese, ...) plus any
  * slide-specific `slideReplacements`. `onSlideCreated` runs after text replacement, for
  * non-text modifications (removing or swapping shapes) — see slide modules for examples.
+ *
+ * `elementsToRemove` removes shapes by name. A text-bearing shape must be removed through it
+ * rather than through slide.removeElement in `onSlideCreated`: pptx-automizer merges every
+ * action queued on one shape into the first one, so a removeElement queued after this
+ * function's own text modification of the same shape is silently ignored.
  */
 export type AddTemplateSlide = (
   slideInfo: PptxSlideInfo,
   slideReplacements?: ReplaceText[],
   onSlideCreated?: (slide: ISlide) => void,
+  elementsToRemove?: string[],
 ) => void;
