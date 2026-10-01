@@ -26,4 +26,6 @@ export const UPDATE_PROJET_CONTEXT_ACTIONS = {
   DELETE_PROJET: "Suppression du projet",
   ADD_CONTACT: "Ajout d'un contact",
   REMOVE_CONTACT: "Suppression d'un contact",
+  ADD_UTILISATEUR: "Ajout d'un utilisateur",
+  REMOVE_UTILISATEUR: "Suppression d'un utilisateur",
 };
