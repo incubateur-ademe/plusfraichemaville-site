@@ -8,6 +8,7 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 import { EventType, ReferenceType } from "@/src/generated/prisma/client";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
 
 export const updateProjetVisibilityAction = async (
   projetId: number,
@@ -35,6 +36,13 @@ export const updateProjetVisibilityAction = async (
         user_id: session.user.id,
       });
     }
+    await createAnalytic({
+      context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.UPDATE_PROJET_ATTRIBUTE },
+      event_type: EventType.UPDATE_PROJET,
+      reference_id: projetId.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
+    });
     return {
       type: "success",
       message: "VISIBILITY_UPDATED",

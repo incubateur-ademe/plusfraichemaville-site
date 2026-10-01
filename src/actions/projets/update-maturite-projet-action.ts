@@ -9,6 +9,8 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const updateMaturiteProjetAction = async (
   projetId: number,
@@ -29,6 +31,13 @@ export const updateMaturiteProjetAction = async (
     const projet = await updateMaturiteProjet(projetId, niveauMaturite);
 
     if (projet) {
+      await createAnalytic({
+        context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.UPDATE_PROJET_ATTRIBUTE },
+        event_type: EventType.UPDATE_PROJET,
+        reference_id: projetId.toString(),
+        reference_type: ReferenceType.PROJET,
+        user_id: session.user.id,
+      });
       await createAnalytic({
         context: {
           maturite: projet.niveau_maturite,

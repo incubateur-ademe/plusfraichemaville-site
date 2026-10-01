@@ -16,6 +16,9 @@ import {
 } from "@/src/forms/estimation/estimation-materiau-form-simple-field-schema";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { mapEstimationMateriauFormToDb } from "@/src/lib/prisma/prismaCustomTypesHelper";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const updateEstimationMateriauxAction = async (
   estimationId: number,
@@ -56,6 +59,13 @@ export const updateEstimationMateriauxAction = async (
         estimation_materiaux: isMultipleFieldsFormData
           ? data.estimationMateriaux.map(mapEstimationMateriauFormToDb)
           : [],
+      });
+      await createAnalytic({
+        context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.UPDATE_ESTIMATION },
+        event_type: EventType.UPDATE_PROJET,
+        reference_id: estimation.projet_id.toString(),
+        reference_type: ReferenceType.PROJET,
+        user_id: session.user.id,
       });
       return { type: "success", updatedEstimation };
     } catch (e) {

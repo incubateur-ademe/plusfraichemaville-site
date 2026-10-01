@@ -10,6 +10,9 @@ import { resolveAidType } from "@/src/components/financement/helpers";
 import { ProjetAideWithAide } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { addAideInProjet } from "@/src/lib/prisma/prisma-projet-aides-queries";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const addAideInProjetAction = async (
   projetId: number,
@@ -42,6 +45,14 @@ export const addAideInProjetAction = async (
     };
 
     const upsertedAide = await upsertAide(aideBaseData);
+
+    await createAnalytic({
+      context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.ADD_AIDE },
+      event_type: EventType.UPDATE_PROJET,
+      reference_id: projetId.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
+    });
 
     const projetAide = await addAideInProjet(projetId, upsertedAide.id, session.user.id);
     return { type: "success", message: "PROJET_AIDE_ADDED", projetAide };
