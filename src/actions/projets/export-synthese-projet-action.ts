@@ -50,6 +50,7 @@ export const exportSyntheseProjetAction = async (
     const fileBuffer = await generateSyntheseProjetPptx({
       projet,
       diagnosticIds: parse.data.diagnosticIds,
+      includeAnalyseSimplifiee: parse.data.includeAnalyseSimplifiee,
       solutionIds: parse.data.solutionIds,
       estimationId: parse.data.estimationId,
       aideIds: parse.data.aideIds,
@@ -70,6 +71,7 @@ export const exportSyntheseProjetAction = async (
         fichesDiagnosticExcluded: allDiagnosticFicheIds.filter(
           (ficheId) => !parse.data.diagnosticIds.includes(ficheId),
         ),
+        analyseSimplifieeIncluded: parse.data.includeAnalyseSimplifiee,
         fichesSolutionsIncluded: parse.data.solutionIds,
         fichesSolutionsExcluded: allSolutionFicheIds.filter((ficheId) => !parse.data.solutionIds.includes(ficheId)),
         estimationChosen: parse.data.estimationId ? [parse.data.estimationId] : [],

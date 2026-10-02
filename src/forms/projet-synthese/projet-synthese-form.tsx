@@ -24,6 +24,7 @@ import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
 import { useCapturePostHogEvent } from "@/src/hooks/useCapturePostHogEvent";
 import { GET_FICHE_DIAGNOSTIC_BY_IDS } from "@/src/helpers/routes";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
+import { getValidatedIndiEnSimulationResults } from "@/src/helpers/indicateurs-environnementaux/indi-en-helpers";
 
 const GENERATION_IN_PROGRESS_MESSAGE =
   "La génération de votre synthèse est en cours, si vous quittez la page maintenant vous annulerez son téléchargement.";
@@ -57,10 +58,13 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
 
   const projetAides = useMemo(() => currentProjet?.projetAides ?? [], [currentProjet?.projetAides]);
 
+  const hasValidatedAnalyseSimplifiee = Boolean(getValidatedIndiEnSimulationResults(currentProjet));
+
   const form = useForm<ProjetSyntheseFormData>({
     resolver: zodResolver(ProjetSyntheseFormSchema),
     defaultValues: {
       diagnosticIds: [],
+      includeAnalyseSimplifiee: hasValidatedAnalyseSimplifiee,
       solutionIds: [],
       estimationId: estimations[0]?.id || null,
       aideIds: [],
@@ -70,6 +74,7 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
   useUnsavedChanges(form.formState.isSubmitting, GENERATION_IN_PROGRESS_MESSAGE);
 
   const selectedDiagnosticIds = form.watch("diagnosticIds") || [];
+  const includeAnalyseSimplifiee = form.watch("includeAnalyseSimplifiee");
   const selectedSolutionIds = form.watch("solutionIds") || [];
   const selectedEstimationId = form.watch("estimationId");
   const selectedAideIds = form.watch("aideIds") || [];
@@ -82,6 +87,10 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       );
     }
   }, [fichesDiagnostic, form]);
+
+  useEffect(() => {
+    form.setValue("includeAnalyseSimplifiee", hasValidatedAnalyseSimplifiee);
+  }, [hasValidatedAnalyseSimplifiee, form]);
 
   useEffect(() => {
     if (fichesSolutions && fichesSolutions.length > 0) {
@@ -197,11 +206,30 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
           <li className="fr-h4">
             <span>Diagnostic de l’espace</span>
             <div className="mt-4 pl-12 text-base font-normal">
+              {hasValidatedAnalyseSimplifiee ? (
+                <Checkbox
+                  className="mb-4"
+                  options={[
+                    {
+                      label: "Analyse simplifiée de la surchauffe de mon espace",
+                      nativeInputProps: {
+                        checked: includeAnalyseSimplifiee,
+                        onChange: () => form.setValue("includeAnalyseSimplifiee", !includeAnalyseSimplifiee),
+                      },
+                    },
+                  ]}
+                />
+              ) : (
+                <p className="mb-4 text-base text-dsfr-text-mention-grey">
+                  Analyse simplifiée de la surchauffe de mon espace pas encore réalisée.
+                </p>
+              )}
               {!hasDiagnostics || (!isLoadingDiagnostic && (!fichesDiagnostic || fichesDiagnostic.length === 0)) ? (
                 <p className="text-base text-dsfr-text-mention-grey">Aucune méthode de diagnostic ajoutée au projet</p>
               ) : (
                 <Checkbox
-                  className="mb-0"
+                  classes={{content : "ml-10"}}
+                  legend="Méthodes de diagnostic approfondi retenues"
                   options={(fichesDiagnostic || []).map((fd) => ({
                     label: fd.titre,
                     nativeInputProps: {

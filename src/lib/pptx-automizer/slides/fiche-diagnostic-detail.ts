@@ -18,7 +18,7 @@ const getLabelCoutFicheDiagnostic = (ficheDiagnostic: FicheDiagnostic) =>
     : "";
 
 /**
- * Slide 3: one fiche diagnostic's detail. This is a blueprint slide, duplicated once per
+ * Slide 4: one fiche diagnostic's detail. This is a blueprint slide, duplicated once per
  * selected fiche diagnostic.
  */
 export const addFicheDiagnosticDetailSlide = ({

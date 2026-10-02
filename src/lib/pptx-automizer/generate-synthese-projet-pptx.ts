@@ -5,6 +5,7 @@ import { mergeTextRunsInElement, replaceTagWithBulletList } from "./helpers";
 import { AddTemplateSlide } from "./slides/types";
 import { addPageDeGardeSlide } from "./slides/page-de-garde";
 import { addFichesDiagnosticIntroSlide } from "./slides/fiches-diagnostic-intro";
+import { addAnalyseSimplifieeSlide } from "./slides/analyse-simplifiee";
 import { addFicheDiagnosticDetailSlide } from "./slides/fiche-diagnostic-detail";
 import { addFichesSolutionIntroSlide } from "./slides/fiches-solution-intro";
 import { addFicheSolutionDetailSlide, loadCobeneficeIcons } from "./slides/fiche-solution-detail";
@@ -19,10 +20,12 @@ import { getFicheSolutionByIdsComplete } from "@/src/lib/strapi/queries/fichesSo
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { getFicheDiagnosticById } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
+import { getValidatedIndiEnSimulationResults } from "@/src/helpers/indicateurs-environnementaux/indi-en-helpers";
 
 export const generateSyntheseProjetPptx = async ({
   projet,
   diagnosticIds = [],
+  includeAnalyseSimplifiee = false,
   solutionIds = [],
   estimationId,
   aideIds = [],
@@ -45,6 +48,9 @@ export const generateSyntheseProjetPptx = async ({
     (ficheDiagnostic): ficheDiagnostic is FicheDiagnostic => Boolean(ficheDiagnostic),
   );
   const titresFichesDiagnostic = orderedFichesDiagnostic.map((ficheDiagnostic) => ficheDiagnostic.titre);
+
+  // Only a validated analyse simplifiée can be exported.
+  const indiEnResults = includeAnalyseSimplifiee ? getValidatedIndiEnSimulationResults(projet) : undefined;
 
   const fichesSolutions = solutionIds.length > 0 ? await getFicheSolutionByIdsComplete(solutionIds) : [];
   const fichesSolutionsMap = new Map(fichesSolutions.map((fs) => [fs.documentId, fs]));
@@ -119,8 +125,8 @@ export const generateSyntheseProjetPptx = async ({
     });
   };
 
-  // The materiaux slide (6) is a blueprint too, but it is handled together with the detail
-  // slide (5) below so that a fiche solution's materiaux slide(s) directly follow its detail
+  // The materiaux slide (7) is a blueprint too, but it is handled together with the detail
+  // slide (6) below so that a fiche solution's materiaux slide(s) directly follow its detail
   // slide, instead of every detail slide followed by every materiaux slide.
   const materiauxSlideInfo = slides.find((slideInfo) => slideInfo.number === PptxSlide.FICHE_SOLUTION_MATERIAUX);
 
@@ -161,6 +167,12 @@ export const generateSyntheseProjetPptx = async ({
     switch (slideInfo.number) {
       case PptxSlide.FICHES_DIAGNOSTIC_INTRO:
         addFichesDiagnosticIntroSlide(addTemplateSlide, slideInfo);
+        break;
+      case PptxSlide.ANALYSE_SIMPLIFIEE:
+        // Only present when a validated analyse simplifiée was requested in the export.
+        if (indiEnResults) {
+          addAnalyseSimplifieeSlide(addTemplateSlide, slideInfo, indiEnResults);
+        }
         break;
       case PptxSlide.FICHE_DIAGNOSTIC_DETAIL:
         // Blueprint slide, duplicated once per selected fiche diagnostic.
