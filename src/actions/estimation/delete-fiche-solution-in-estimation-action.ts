@@ -6,6 +6,9 @@ import { deleteFicheSolutionInEstimation, getEstimationById } from "@/src/lib/pr
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { EstimationWithAides } from "@/src/lib/prisma/prismaCustomTypes";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const deleteFicheSolutionInEstimationAction = async (
   estimationId: number,
@@ -25,6 +28,13 @@ export const deleteFicheSolutionInEstimationAction = async (
 
   try {
     const updatedEstimation = await deleteFicheSolutionInEstimation(estimationId, ficheSolutionId, session.user.id);
+    await createAnalytic({
+      context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.UPDATE_ESTIMATION },
+      event_type: EventType.UPDATE_PROJET,
+      reference_id: estimation.projet_id.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
+    });
 
     if (updatedEstimation === null) {
       return {

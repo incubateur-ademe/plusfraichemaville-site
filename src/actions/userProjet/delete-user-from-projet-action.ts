@@ -7,6 +7,9 @@ import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { deleteUserFromProject } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const deleteUserFromProjetAction = async (
   userId: string,
@@ -29,6 +32,13 @@ export const deleteUserFromProjetAction = async (
 
   try {
     await deleteUserFromProject(userId, projectId, session.user.id);
+    await createAnalytic({
+      context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.REMOVE_UTILISATEUR },
+      event_type: EventType.UPDATE_PROJET,
+      reference_id: projectId.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
+    });
     const updatedProjet = await getProjetWithRelationsById(projectId);
 
     return { type: "success", message: "USER_DELETED_FROM_PROJECT", updatedProjet };

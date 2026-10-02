@@ -11,6 +11,7 @@ import { getOrCreateCollectiviteFromForm } from "@/src/actions/collectivites/get
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 import { $Enums, EventType } from "@/src/generated/prisma/client";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
 import ReferenceType = $Enums.ReferenceType;
 
 export const upsertProjetAction = async (
@@ -56,6 +57,18 @@ export const upsertProjetAction = async (
         collectiviteId: collectiviteId,
         userId: user.id,
         isPublic: data.isPublic,
+      });
+
+      await createAnalytic({
+        context: {
+          action: !data.projetId
+            ? UPDATE_PROJET_CONTEXT_ACTIONS.CREATION_PROJET
+            : UPDATE_PROJET_CONTEXT_ACTIONS.UPDATE_PROJET_ATTRIBUTE,
+        },
+        event_type: EventType.UPDATE_PROJET,
+        reference_id: updatedProjet.id.toString(),
+        reference_type: ReferenceType.PROJET,
+        user_id: session.user.id,
       });
 
       if (updatedProjet && projetToEdit?.niveau_maturite !== updatedProjet.niveau_maturite) {

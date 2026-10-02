@@ -7,6 +7,7 @@ import { deleteProjet } from "@/src/lib/prisma/prismaProjetQueries";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
 import { EventType, ReferenceType } from "@/src/generated/prisma/client";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
 
 export const deleteProjetAction = async (projetId: number): Promise<ResponseAction<object>> => {
   const session = await auth();
@@ -22,6 +23,13 @@ export const deleteProjetAction = async (projetId: number): Promise<ResponseActi
 
   try {
     const updatedProjet = await deleteProjet(projetId, session.user.id);
+    await createAnalytic({
+      context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.DELETE_PROJET },
+      event_type: EventType.UPDATE_PROJET,
+      reference_id: projetId.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
+    });
     if (updatedProjet?.is_public) {
       await createAnalytic({
         context: null,
