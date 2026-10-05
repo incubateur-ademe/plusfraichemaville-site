@@ -5,7 +5,12 @@ import { ISlide, ReplaceText } from "pptx-automizer";
 // type, which isn't part of the package's public type exports.
 export type PptxSlideInfo = {
   number: number;
-  elements?: { name: string; nameIdx: number; hasTextBody: boolean }[];
+  elements?: {
+    name: string;
+    nameIdx: number;
+    hasTextBody: boolean;
+    position?: { x: number; y: number; cx: number; cy: number };
+  }[];
 };
 
 /**

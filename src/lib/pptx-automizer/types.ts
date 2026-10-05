@@ -7,9 +7,13 @@ export enum PptxTemplateTag {
   ADRESSE_PROJET = "adresse_projet",
   DATE_GENERATION_SYNTHESE = "date_generation_synthese",
   TITRE_FICHES_DIAGNOSTIC = "titre_fiches_diagnostic",
-  // Analyse simplifiée slide (3): coefficient de rafraîchissement urbain and its range analysis.
+  // Analyse simplifiée slide (3): each coefficient's value and its range analysis.
   COEFF_RU = "coeff_ru",
   ANALYSE_COEFF_RU = "analyse_coeff_ru",
+  COEFF_PERMEABILITE = "coeff_perm",
+  ANALYSE_COEFF_PERMEABILITE = "analyse_coeff_perm",
+  COEFF_BIODIVERSITE = "coeff_bio",
+  ANALYSE_COEFF_BIODIVERSITE = "analyse_coeff_bio",
   NUMERO_FICHE_DIAGNOSTIC = "n°_diagnostic",
   TITRE_FICHE_DIAGNOSTIC = "titre_fiche_diagnostic",
   NOM_SCIENTIFIQUE_FICHE_DIAGNOSTIC = "nom_scientifique_fiche_diagnostic",
@@ -92,8 +96,14 @@ export enum PptxSlideElement {
   ZONE_AIDE = "zone_aide",
   ZONE_OBJECTIFS_FICHE_DIAGNOSTIC = "zone_objectifs_fiche_diagnostic",
   ZONE_OBJECTIFS_FICHE_DIAGNOSTIC_TITRE = "zone_objectifs_fiche_diagnostic_titre",
-  // Analyse simplifiée slide (3): the cursor slid along the coefficient scale to the value.
+  // Analyse simplifiée slide (3): each coefficient's 0 → 1 scale, and the cursor slid along it
+  // to the value.
+  ZONE_COEFF_RU_ECHELLE = "zone_coeff_ru_echelle",
   ZONE_COEFF_RU_CURSEUR = "zone_coeff_ru_curseur",
+  ZONE_COEFF_PERMEABILITE_ECHELLE = "zone_coeff_perm_echelle",
+  ZONE_COEFF_PERMEABILITE_CURSEUR = "zone_coeff_perm_curseur",
+  ZONE_COEFF_BIODIVERSITE_ECHELLE = "zone_coeff_bio_echelle",
+  ZONE_COEFF_BIODIVERSITE_CURSEUR = "zone_coeff_bio_curseur",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and
