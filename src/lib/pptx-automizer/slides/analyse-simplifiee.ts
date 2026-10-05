@@ -48,26 +48,36 @@ const moveCurseurToValue = (slide: ISlide, slideInfo: PptxSlideInfo, { value, ec
 };
 
 /**
- * Fills the répartition des sols pie chart with the same parts as IndienResultPieChartSurface.
- * The slice colors are set per point index in the template, so categories must keep the
- * template's order (revêtement, fontainerie, végétalisée, toiture). Each category label
- * carries its percentage ("Toitures : 12 %"), so the chart's legend reads like the web one.
+ * Fills the répartition des sols pie chart with the same parts as IndienResultPieChartSurface:
+ * parts at 0 are left out, and each category label carries its percentage ("Toitures : 12 %")
+ * so the chart's legend reads like the web one. Leaving parts out shifts the points' indexes,
+ * so each slice's color is set explicitly instead of relying on the template's per-index colors.
  */
 const getRepartitionSolsChartData = (indiEnResults: ProjetIndiEnSimuation): ChartData => ({
   series: [{ label: "Part de la surface" }],
   categories: [
-    { label: INDIEN_QUESTION_GROUPE_REVETEMENT_SOL.label, value: indiEnResults.partRevetementSol },
-    { label: INDIEN_QUESTION_GROUPE_BASSIN.label, value: indiEnResults.partFontainerie },
-    { label: INDIEN_QUESTION_GROUPE_SURFACE_VEGETALISEE.label, value: indiEnResults.partSurfaceVegetalisee },
-    { label: INDIEN_QUESTION_GROUPE_TOITURE.label, value: indiEnResults.partToiture },
-  ].map(({ label, value }) => ({ label: `${label} : ${value} %`, values: [value] })),
+    { label: INDIEN_QUESTION_GROUPE_REVETEMENT_SOL.label, value: indiEnResults.partRevetementSol, color: "68687B" },
+    { label: INDIEN_QUESTION_GROUPE_BASSIN.label, value: indiEnResults.partFontainerie, color: "3B87FF" },
+    {
+      label: INDIEN_QUESTION_GROUPE_SURFACE_VEGETALISEE.label,
+      value: indiEnResults.partSurfaceVegetalisee,
+      color: "00A95F",
+    },
+    { label: INDIEN_QUESTION_GROUPE_TOITURE.label, value: indiEnResults.partToiture, color: "B7B7D5" },
+  ]
+    .filter(({ value }) => value != 0)
+    .map(({ label, value, color }) => ({
+      label: `${label} : ${value} %`,
+      values: [value],
+      styles: [{ color: { type: "srgbClr", value: color } }],
+    })),
 });
 
 /**
  * Slide 3: analyse simplifiée de la surchauffe de l'espace, mirroring IndienResultRanges.
  * For each coefficient (rafraîchissement urbain, perméabilité, biodiversité): its value, its
- * range analysis, and the cursor moved along its scale to that value. Plus the répartition des
- * sols pie chart.
+ * range analysis, and the cursor moved along its scale to that value. Plus the part de canopée
+ * and the répartition des sols pie chart.
  */
 export const addAnalyseSimplifieeSlide = (
   addTemplateSlide: AddTemplateSlide,
@@ -101,7 +111,12 @@ export const addAnalyseSimplifieeSlide = (
     },
   ];
 
-  addTemplateSlide(slideInfo, coefficientBlocks.flatMap(getCoefficientReplacements), (slide) => {
+  const replacements: ReplaceText[] = [
+    ...coefficientBlocks.flatMap(getCoefficientReplacements),
+    { replace: PptxTemplateTag.PART_CANOPEE, by: { text: `${indiEnResults.partCanopee}` } },
+  ];
+
+  addTemplateSlide(slideInfo, replacements, (slide) => {
     coefficientBlocks.forEach((coefficientBlock) => moveCurseurToValue(slide, slideInfo, coefficientBlock));
     slide.modifyElement({ name: PptxSlideElement.GRAPH_REPARTITION_SOLS }, [
       modify.setChartData(getRepartitionSolsChartData(indiEnResults)),

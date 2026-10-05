@@ -14,6 +14,7 @@ export enum PptxTemplateTag {
   ANALYSE_COEFF_PERMEABILITE = "analyse_coeff_perm",
   COEFF_BIODIVERSITE = "coeff_bio",
   ANALYSE_COEFF_BIODIVERSITE = "analyse_coeff_bio",
+  PART_CANOPEE = "part_canopee",
   NUMERO_FICHE_DIAGNOSTIC = "n°_diagnostic",
   TITRE_FICHE_DIAGNOSTIC = "titre_fiche_diagnostic",
   NOM_SCIENTIFIQUE_FICHE_DIAGNOSTIC = "nom_scientifique_fiche_diagnostic",
