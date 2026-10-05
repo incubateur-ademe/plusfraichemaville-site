@@ -228,7 +228,7 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
                 <p className="text-base text-dsfr-text-mention-grey">Aucune méthode de diagnostic ajoutée au projet</p>
               ) : (
                 <Checkbox
-                  classes={{content : "ml-10"}}
+                  classes={{ content: "ml-10" }}
                   legend="Méthodes de diagnostic approfondi retenues"
                   options={(fichesDiagnostic || []).map((fd) => ({
                     label: fd.titre,
