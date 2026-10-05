@@ -104,6 +104,9 @@ export enum PptxSlideElement {
   ZONE_COEFF_PERMEABILITE_CURSEUR = "zone_coeff_perm_curseur",
   ZONE_COEFF_BIODIVERSITE_ECHELLE = "zone_coeff_bio_echelle",
   ZONE_COEFF_BIODIVERSITE_CURSEUR = "zone_coeff_bio_curseur",
+  // Analyse simplifiée slide (3): pie chart of the surface's répartition, like
+  // IndienResultPieChartSurface.
+  GRAPH_REPARTITION_SOLS = "graph_repartition_sols",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and
