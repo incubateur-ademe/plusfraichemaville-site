@@ -8,7 +8,9 @@ import { getProjetWithRelationsById } from "@/src/lib/prisma/prismaProjetQueries
 import { addContactToProjet, deleteContactFromProjet } from "@/src/lib/prisma/prisma-projet-sourcing-contact-queries";
 import { getUserProjetById } from "@/src/lib/prisma/prisma-user-projet-queries";
 import { TypeUpdate } from "@/src/helpers/common";
-import { Prisma } from "@/src/generated/prisma/client";
+import { EventType, Prisma, ReferenceType } from "@/src/generated/prisma/client";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
 
 export const updateUserContactInProjetAction = async (
   projetId: number,
@@ -31,9 +33,23 @@ export const updateUserContactInProjetAction = async (
     }
     if (typeUpdate === TypeUpdate.add) {
       await addContactToProjet(projetId, userProjetId, session.user.id);
+      await createAnalytic({
+        context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.ADD_CONTACT },
+        event_type: EventType.UPDATE_PROJET,
+        reference_id: projetId.toString(),
+        reference_type: ReferenceType.PROJET,
+        user_id: session.user.id,
+      });
     } else {
       try {
         await deleteContactFromProjet(projetId, userProjetId);
+        await createAnalytic({
+          context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.REMOVE_CONTACT },
+          event_type: EventType.UPDATE_PROJET,
+          reference_id: projetId.toString(),
+          reference_type: ReferenceType.PROJET,
+          user_id: session.user.id,
+        });
       } catch (e) {
         if (!(e instanceof Prisma.PrismaClientKnownRequestError) || e.code !== "P2025") {
           throw e;

@@ -289,7 +289,7 @@ export const INDIEN_QUESTION_TOITURE_FONCEE: IndiEnQuestion = {
 
 export const INDIEN_QUESTION_TOITURE_VEGETALISEE_MINCE: IndiEnQuestion = {
   code: "toitureVegetaliseeMince",
-  label: "Quelle est la superficie des toitures végétalisées intensives (épaisseur inférieur à 10 cm) ?",
+  label: "Quelle est la superficie des toitures végétalisées extensives (épaisseur inférieur à 10 cm) ?",
   unite: INDIEN_UNITE_METRE_CARRE,
   coeffRafraichissementUrbain: 0.2,
   coeffBiodiversite: 0.3,

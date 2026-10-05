@@ -8,6 +8,9 @@ import { getProjetWithRelationsById, updateSourcingRexProjet } from "@/src/lib/p
 import isEqual from "lodash/isEqual";
 import { RexContactId } from "@/src/components/annuaire/types";
 import { TypeUpdate } from "@/src/helpers/common";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
+import { EventType, ReferenceType } from "@/src/generated/prisma/client";
 
 export const updateRexContactInProjetAction = async (
   projetId: number,
@@ -38,7 +41,18 @@ export const updateRexContactInProjetAction = async (
       newSourcingRex = [...newSourcingRex, rexContactId];
     }
     projetToUpdate = await updateSourcingRexProjet(projetId, newSourcingRex);
-
+    await createAnalytic({
+      context: {
+        action:
+          typeUpdate === TypeUpdate.add
+            ? UPDATE_PROJET_CONTEXT_ACTIONS.ADD_CONTACT
+            : UPDATE_PROJET_CONTEXT_ACTIONS.REMOVE_CONTACT,
+      },
+      event_type: EventType.UPDATE_PROJET,
+      reference_id: projetId.toString(),
+      reference_type: ReferenceType.PROJET,
+      user_id: session.user.id,
+    });
     return { type: "success", projet: projetToUpdate };
   } catch (e) {
     customCaptureException("Error in updateRexContactInProjetAction DB call", e);

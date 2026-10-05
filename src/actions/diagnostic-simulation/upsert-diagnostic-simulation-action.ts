@@ -11,7 +11,9 @@ import {
 } from "@/src/forms/indicateursEnvironnementaux/indicateurs-environnementaux-form-schema";
 import { calculateCoeffsDiagnosticSimulation } from "@/src/lib/prisma/prismaCustomTypesHelper";
 import { upsertDiagnosticSimulation } from "@/src/lib/prisma/prisma-diagnostic-simulation-queries";
-import { diagnostic_simulation } from "@/src/generated/prisma/client";
+import { diagnostic_simulation, EventType, ReferenceType } from "@/src/generated/prisma/client";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
 
 export const upsertDiagnosticSimulationAction = async (
   projetId: number,
@@ -45,6 +47,13 @@ export const upsertDiagnosticSimulationAction = async (
         diagnosticSimulationId,
         initialValues: newDiagnosticSimulation,
         validated,
+      });
+      await createAnalytic({
+        context: { action: UPDATE_PROJET_CONTEXT_ACTIONS.DIAG_SIMPLIFIE },
+        event_type: EventType.UPDATE_PROJET,
+        reference_id: projetId.toString(),
+        reference_type: ReferenceType.PROJET,
+        user_id: session.user.id,
       });
       return { type: "success", message: "DIAGNOSTIC_SIMULATION_UPDATED", diagnosticSimulation };
     } catch (e) {

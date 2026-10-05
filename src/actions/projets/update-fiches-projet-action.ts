@@ -8,7 +8,9 @@ import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { TypeFiche, TypeUpdate } from "@/src/helpers/common";
 import { deleteRecommandationsViewedBy } from "@/src/lib/prisma/prismaProjetQueries";
-import { Prisma } from "@/src/generated/prisma/client";
+import { EventType, Prisma, ReferenceType } from "@/src/generated/prisma/client";
+import { createAnalytic } from "@/src/lib/prisma/prisma-analytics-queries";
+import { UPDATE_PROJET_CONTEXT_ACTIONS } from "@/src/components/analytics/helpers";
 
 export const updateFichesProjetAction = async ({
   projetId,
@@ -45,8 +47,32 @@ export const updateFichesProjetAction = async ({
 
     if (typeUpdate === TypeUpdate.add) {
       await addProjetFiche(dataUpdate);
+      await createAnalytic({
+        context: {
+          action:
+            typeFiche === TypeFiche.solution
+              ? UPDATE_PROJET_CONTEXT_ACTIONS.ADD_FICHE_SOLUTION
+              : UPDATE_PROJET_CONTEXT_ACTIONS.ADD_FICHE_DIAGNOSTIC,
+        },
+        event_type: EventType.UPDATE_PROJET,
+        reference_id: projetId.toString(),
+        reference_type: ReferenceType.PROJET,
+        user_id: session.user.id,
+      });
     } else {
       await deleteProjetFiche(dataUpdate);
+      await createAnalytic({
+        context: {
+          action:
+            typeFiche === TypeFiche.solution
+              ? UPDATE_PROJET_CONTEXT_ACTIONS.REMOVE_FICHE_SOLUTION
+              : UPDATE_PROJET_CONTEXT_ACTIONS.REMOVE_FICHE_DIAGNOSTIC,
+        },
+        event_type: EventType.UPDATE_PROJET,
+        reference_id: projetId.toString(),
+        reference_type: ReferenceType.PROJET,
+        user_id: session.user.id,
+      });
     }
 
     const projet = await deleteRecommandationsViewedBy(projetId, session.user.id);

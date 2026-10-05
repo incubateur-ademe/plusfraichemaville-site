@@ -11,6 +11,8 @@ const pictos: Record<TypeEspace["code"], string> = {
   place: "espace-icone-place.svg",
   ecole: "espace-icone-cour-ecole.svg",
   parc: "espace-icone-cour-parc-jardin.svg",
+  nondefini: "espace-icone-tous-espaces.svg",
+  plusieurs: "espace-icone-tous-espaces.svg",
 };
 
 export type PictoId = keyof typeof pictos;
