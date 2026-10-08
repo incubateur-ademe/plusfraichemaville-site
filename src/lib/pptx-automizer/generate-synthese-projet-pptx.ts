@@ -21,6 +21,7 @@ import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { getFicheDiagnosticById } from "@/src/lib/strapi/queries/fiches-diagnostic-queries";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { getValidatedIndiEnSimulationResults } from "@/src/helpers/indicateurs-environnementaux/indi-en-helpers";
+import { addAnalyseSimplifieeIntroSlide } from "@/src/lib/pptx-automizer/slides/analyse-simplifiee-intro";
 
 export const generateSyntheseProjetPptx = async ({
   projet,
@@ -145,6 +146,14 @@ export const generateSyntheseProjetPptx = async ({
     if (slidesNeedingFichesSolutions.includes(slideInfo.number) && orderedFichesSolutions.length === 0) {
       continue;
     }
+    // The analyse simplifiée intro and content slides are only relevant when a validated
+    // analyse simplifiée was requested in the export.
+    if (
+      [PptxSlide.ANALYSE_SIMPLIFIEE_INTRO, PptxSlide.ANALYSE_SIMPLIFIEE].includes(slideInfo.number) &&
+      !indiEnResults
+    ) {
+      continue;
+    }
     // The estimation intro and recap slides are only relevant when an estimation was
     // actually passed to the export.
     if ([PptxSlide.ESTIMATION_INTRO, PptxSlide.ESTIMATION_RECAP].includes(slideInfo.number) && !estimation) {
@@ -168,11 +177,11 @@ export const generateSyntheseProjetPptx = async ({
       case PptxSlide.FICHES_DIAGNOSTIC_INTRO:
         addFichesDiagnosticIntroSlide(addTemplateSlide, slideInfo);
         break;
+      case PptxSlide.ANALYSE_SIMPLIFIEE_INTRO:
+        addAnalyseSimplifieeIntroSlide(addTemplateSlide, slideInfo);
+        break;
       case PptxSlide.ANALYSE_SIMPLIFIEE:
-        // Only present when a validated analyse simplifiée was requested in the export.
-        if (indiEnResults) {
-          addAnalyseSimplifieeSlide(addTemplateSlide, slideInfo, indiEnResults);
-        }
+        addAnalyseSimplifieeSlide(addTemplateSlide, slideInfo, indiEnResults!);
         break;
       case PptxSlide.FICHE_DIAGNOSTIC_DETAIL:
         // Blueprint slide, duplicated once per selected fiche diagnostic.
