@@ -119,11 +119,7 @@ export const homepageData = {
       titre: "À Lyon, les arbres de pluie comme armes de résilience",
       image_principale: "/images/homepage/rex/lyon-arbres-de-pluie.jpg",
       region: {
-        data: {
-          attributes: {
-            code: "FR-ARA",
-          },
-        },
+        code: "FR-ARA",
       },
     },
     otherRex: [
@@ -134,11 +130,7 @@ export const homepageData = {
         titre: "Toulouse Plus Fraîche : un plan d’adaptation en 30 actions ",
         image_principale: "/images/homepage/rex/toulouse-plus-fraiche.jpeg",
         region: {
-          data: {
-            attributes: {
-              code: "FR-OCC",
-            },
-          },
+          code: "FR-OCC",
         },
       },
       {
@@ -148,11 +140,7 @@ export const homepageData = {
         titre: "“Verdissons nos murs”, le programme de Lille pour végétaliser ses façades",
         image_principale: "/images/homepage/rex/verdissons-nos-murs-lille.jpeg",
         region: {
-          data: {
-            attributes: {
-              code: "FR-HDF",
-            },
-          },
+          code: "FR-HDF",
         },
       },
       {
@@ -162,11 +150,7 @@ export const homepageData = {
         titre: "La cour Oasis Berthelot, un îlot de fraîcheur au coeur de Montrouge",
         image_principale: "/images/homepage/rex/cour-oasis-berthelot-montrouge.jpg",
         region: {
-          data: {
-            attributes: {
-              code: "FR-IDF",
-            },
-          },
+          code: "FR-IDF",
         },
       },
       {
@@ -176,11 +160,7 @@ export const homepageData = {
         titre: "Wangari Muta Maathai, la première micro-forêt de Bordeaux ",
         image_principale: "/images/homepage/rex/micro-foret-bordeaux.jpeg",
         region: {
-          data: {
-            attributes: {
-              code: "FR-NAQ",
-            },
-          },
+          code: "FR-NAQ",
         },
       },
     ],
