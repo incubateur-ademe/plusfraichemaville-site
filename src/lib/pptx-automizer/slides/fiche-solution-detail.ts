@@ -67,6 +67,9 @@ export const addFicheSolutionDetailSlide = ({
     replace: getCobeneficeTextTag(slotIndex),
     by: { text: ficheSolution.cobenefices?.[slotIndex]?.description ?? "" },
   }));
+  const unusedCobeneficeSlotNames = Array.from({ length: MAX_COBENEFICE_SLOTS }, (_, slotIndex) => slotIndex)
+    .filter((slotIndex) => !ficheSolution.cobenefices?.[slotIndex])
+    .map(getPictoCobeneficeElementName);
 
   addTemplateSlide(
     slideInfo,
@@ -94,27 +97,24 @@ export const addFicheSolutionDetailSlide = ({
       ...cobeneficeTextReplacements,
     ],
     (slide) => {
-      // The picto is only shown as a fallback when there is no baisse_temperature value to display.
-      if (hasBaisseTemperature) {
-        slide.removeElement({ name: PptxSlideElement.PICTO_THERMOMETRE_BAISSE_TEMPERATURE });
-      }
-
       // The cobenefice pictos are a fixed number of named slots on the template slide:
-      // point each one to the matching cobenefice's icon, and drop the unused slots.
+      // point each used one to the matching cobenefice's icon (unused ones are removed below).
       for (let slotIndex = 0; slotIndex < MAX_COBENEFICE_SLOTS; slotIndex++) {
-        const slotName = getPictoCobeneficeElementName(slotIndex);
         const cobenefice = ficheSolution.cobenefices?.[slotIndex];
         if (cobenefice) {
-          slide.modifyElement({ name: slotName }, [
+          slide.modifyElement({ name: getPictoCobeneficeElementName(slotIndex) }, [
             ModifyImageHelper.setRelationTarget(
               getCobeneficeIconPngFilename(cobenefice.icone),
             ) as ShapeModificationCallback,
             stripSvgBlipExtension,
           ]);
-        } else {
-          slide.removeElement({ name: slotName });
         }
       }
     },
+    [
+      // The picto is only shown as a fallback when there is no baisse_temperature value to display.
+      ...(hasBaisseTemperature ? [PptxSlideElement.PICTO_THERMOMETRE_BAISSE_TEMPERATURE] : []),
+      ...unusedCobeneficeSlotNames,
+    ],
   );
 };

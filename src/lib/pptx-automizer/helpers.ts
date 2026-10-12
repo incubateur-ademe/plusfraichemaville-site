@@ -101,7 +101,11 @@ export const replaceTagWithBulletList = (element: XmlElement, tag: string, items
       const runs = clonedParagraph.getElementsByTagName("a:r");
       const firstT = runs[0]?.getElementsByTagName("a:t")[0];
       if (firstT) {
-        firstT.textContent = (firstT.textContent || "").replace(fullTag, itemText);
+        // Rebuilt from every run's text, so a tag still split across runs is replaced too.
+        const paragraphText = Array.from(clonedParagraph.getElementsByTagName("a:t"))
+          .map((t) => t.textContent || "")
+          .join("");
+        firstT.textContent = paragraphText.replace(fullTag, itemText);
       }
       // Drop any extra runs so only the (now renamed) first run's text remains.
       while (runs.length > 1) {

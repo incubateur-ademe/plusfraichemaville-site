@@ -49,11 +49,16 @@ export const exportSyntheseProjetAction = async (
   try {
     const fileBuffer = await generateSyntheseProjetPptx({
       projet,
+      diagnosticIds: parse.data.diagnosticIds,
+      includeAnalyseSimplifiee: parse.data.includeAnalyseSimplifiee,
       solutionIds: parse.data.solutionIds,
       estimationId: parse.data.estimationId,
       aideIds: parse.data.aideIds,
     });
 
+    const allDiagnosticFicheIds = projet.fiches
+      .filter((fiche) => fiche.type === FicheType.DIAGNOSTIC)
+      .map((fiche) => fiche.fiche_id);
     const allSolutionFicheIds = projet.fiches
       .filter((fiche) => fiche.type === FicheType.SOLUTION)
       .map((fiche) => fiche.fiche_id);
@@ -62,6 +67,11 @@ export const exportSyntheseProjetAction = async (
 
     await createAnalytic({
       context: {
+        fichesDiagnosticIncluded: parse.data.diagnosticIds,
+        fichesDiagnosticExcluded: allDiagnosticFicheIds.filter(
+          (ficheId) => !parse.data.diagnosticIds.includes(ficheId),
+        ),
+        analyseSimplifieeIncluded: parse.data.includeAnalyseSimplifiee,
         fichesSolutionsIncluded: parse.data.solutionIds,
         fichesSolutionsExcluded: allSolutionFicheIds.filter((ficheId) => !parse.data.solutionIds.includes(ficheId)),
         estimationChosen: parse.data.estimationId ? [parse.data.estimationId] : [],
