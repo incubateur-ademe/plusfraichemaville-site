@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { useSession } from "next-auth/react";
 import { useProjetsStore } from "@/src/stores/projets/provider";
-import { NavigationCard } from "@/src/components/navigation/navigation-card";
 
 export default function NavigationMenu() {
   const pathname = usePathname();
@@ -24,172 +23,119 @@ export default function NavigationMenu() {
             pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE ||
             pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
           text: "Comprendre",
-          megaMenu: {
-            categories: [
-              {
-                categoryMainText: "Comprendre la surchauffe urbaine",
-                links: [
-                  {
-                    linkProps: {
-                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
-                      target: "_self",
-                      onClick: cancelCurrentProjet,
-                      prefetch: false,
-                    },
-                    text: "La ville dans une France à +4°C",
-                  },
-                  {
-                    linkProps: {
-                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE,
-                      target: "_self",
-                      onClick: cancelCurrentProjet,
-                      prefetch: false,
-                    },
-                    text: "Comprendre les notions clés",
-                  },
-                  {
-                    linkProps: {
-                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE,
-                      target: "_self",
-                      onClick: cancelCurrentProjet,
-                      prefetch: false,
-                    },
-                    text: "Connaître la sensibilité actuelle et future de ma ville à la surchauffe urbaine",
-                  },
-                ],
+          menuLinks: [
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
               },
-              {
-                categoryMainText: "Comprendre comment rafraîchir la ville",
-                links: [
-                  {
-                    linkProps: {
-                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE,
-                      target: "_self",
-                      onClick: cancelCurrentProjet,
-                      prefetch: false,
-                    },
-                    text: "Surchauffe urbaine : quels risques pour la santé ?",
-                  },
-                  {
-                    linkProps: {
-                      href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
-                      target: "_self",
-                      onClick: cancelCurrentProjet,
-                      prefetch: false,
-                    },
-                    text: "Vague de chaleur : répondre à l'urgence, rafraîchir durablement son territoire",
-                  },
-                ],
+              text: "La ville dans une France à +4°C",
+            },
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
               },
-            ],
-          },
+              text: "Les notions clés de la surchauffe urbaine",
+            },
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
+              },
+              text: "Connaître la sensibilité actuelle et future de ma ville à la surchauffe urbaine",
+            },
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
+              },
+              text: "Surchauffe urbaine : quels risques pour la santé ?",
+            },
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
+              },
+              text: "Vague de chaleur : répondre à l'urgence, rafraîchir durablement son territoire",
+            },
+          ],
         },
         {
           isActive:
-            pathname?.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS) ||
-            pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING),
-          text: "Passer à l'action",
-          className: "menuCategoryShadowNone",
-          megaMenu: {
-            categories: [
-              {
-                categoryMainLink: {
-                  text: (
-                    <NavigationCard
-                      imageUrl="/images/navigation/faire-diagnostic.webp"
-                      title="Faire un diagnostic de la surchauffe urbaine"
-                    />
-                  ),
-                  linkProps: {
-                    href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
-                    target: "_self",
-                    onClick: cancelCurrentProjet,
-                    prefetch: false,
-                  },
-                },
-                links: [],
-              },
-              {
-                categoryMainLink: {
-                  text: (
-                    <NavigationCard
-                      imageUrl="/images/navigation/trouver-solution.webp"
-                      title="Trouver une solution adaptée à votre espace à rafraîchir"
-                    />
-                  ),
-                  linkProps: {
-                    href: PFMV_ROUTES.FICHES_SOLUTIONS,
-                    target: "_self",
-                    onClick: cancelCurrentProjet,
-                    prefetch: false,
-                  },
-                },
-                links: [],
-              },
-              {
-                categoryMainLink: {
-                  text: (
-                    <NavigationCard
-                      imageUrl="/images/navigation/creer-projet.webp"
-                      title="Créer un projet de rafraîchissement de A à Z"
-                    />
-                  ),
-                  linkProps: {
-                    href: PFMV_ROUTES.ESPACE_PROJET,
-                    target: "_self",
-                    onClick: cancelCurrentProjet,
-                    prefetch: false,
-                  },
-                },
-                links: [],
-              },
-            ],
-          },
-        },
-        {
-          isActive:
-            pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC) ||
-            pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET),
+            pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET) ||
+            pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC),
           text: "S'inspirer",
-          className: "menuCategoryShadowNone",
-          megaMenu: {
-            categories: [
-              {
-                categoryMainLink: {
-                  text: (
-                    <NavigationCard
-                      imageUrl="/images/navigation/rex-diagnostic.webp"
-                      title="S'inspirer des diagnostics réalisés par les collectivités"
-                    />
-                  ),
-                  linkProps: {
-                    href: PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC,
-                    target: "_self",
-                    onClick: cancelCurrentProjet,
-                    prefetch: false,
-                  },
-                },
-                links: [],
+          menuLinks: [
+            {
+              linkProps: {
+                href: PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
               },
-              {
-                categoryMainLink: {
-                  text: (
-                    <NavigationCard
-                      imageUrl="/images/navigation/rex-projet.webp"
-                      title="S'inspirer des projets réalisés par les collectivités"
-                    />
-                  ),
-                  linkProps: {
-                    href: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
-                    target: "_self",
-                    onClick: cancelCurrentProjet,
-                    prefetch: false,
-                  },
-                },
-                links: [],
+              text: "Diagnostics réalisés par les collectivités",
+              isActive: pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_DIAGNOSTIC),
+            },
+            {
+              linkProps: {
+                href: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
               },
-            ],
-          },
+              text: "Solutions mises en place par les collectivités",
+              isActive: pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET),
+            },
+          ],
+        },
+        {
+          isActive:
+            pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING) ||
+            pathname?.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS),
+          text: "Passer à l'action",
+          menuLinks: [
+            {
+              text: (<span className="font-bold">Créer un projet de rafraîchissement</span>),
+              linkProps: {
+                className: "bg-dsfr-beige-galet",
+                href: PFMV_ROUTES.ESPACE_PROJET,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
+              },
+            },
+            {
+              text: "Faire un diagnostic de la surchauffe urbaine",
+              isActive: pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING),
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
+              },
+            },
+            {
+              text: "Trouver une solution adaptée à votre projet",
+              isActive: pathname?.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS),
+              linkProps: {
+                href: PFMV_ROUTES.FICHES_SOLUTIONS,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
+              },
+            },
+          ],
         },
         {
           linkProps: {

@@ -79,8 +79,10 @@ module.exports = {
       "picto-highlight-diagnostic": "#EB754B",
       "coeff-permeabilite": "var(--background-action-high-info-hover)",
       "coeff-rafraichissement-urbain": "var(--background-active-blue-france)",
+      "dsfr-beige-galet": "var(--background-alt-beige-gris-galet)",
       "coeff-biodiversite": "#29A31E",
       "coeff-canopee": "#78719E",
+
     },
   },
   plugins: [],
