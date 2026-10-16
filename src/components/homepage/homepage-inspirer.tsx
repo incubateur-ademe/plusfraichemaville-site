@@ -1,9 +1,10 @@
-import { HomepageInspirerCard } from "./homepage-inspirer-card";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { RexInHome } from "@/src/components/retourExperience/RetourExperienceCard";
+import { HomepageInspirerDSFRCard } from "@/src/components/homepage/homepage-inspirer-dsfr-card";
 
 export const HomepageInspirer = () => {
-  const data = [
+  const rexInHome = [
     {
       slug: "toulouse-plus-fraiche",
       climat_actuel: "oceanique",
@@ -45,17 +46,20 @@ export const HomepageInspirer = () => {
       },
     },
   ];
+
   return (
     <section className="fr-mb-8w fr-container mx-auto w-full justify-items-center">
       <h2 className="fr-h2 fr-mb-6w max-w-[50rem] text-center">
         Découvrez les projets de rafraichissement urbains déjà réalisés partout en France
       </h2>
 
-      <div className="flex flex-wrap items-center justify-center gap-8 lg:flex-row lg:flex-nowrap">
-        {data.map((rex, index) => (
-          <HomepageInspirerCard rex={rex} key={index} />
+      <ul className="flex flex-wrap gap-8 lg:flex-row lg:flex-nowrap">
+        {rexInHome.map((rex, index) => (
+          <li key={index} className="flex">
+            <HomepageInspirerDSFRCard rex={rex as unknown as RexInHome} />
+          </li>
         ))}
-      </div>
+      </ul>
       <div className="fr-mt-4w flex justify-center">
         <Button
           linkProps={{
