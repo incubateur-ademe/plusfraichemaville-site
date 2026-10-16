@@ -259,13 +259,9 @@
   border-radius: 24px;
 }
 
-.gradient-l-to-r-navy {
-  background: linear-gradient(0deg, rgba(39, 39, 135, 1) 37%, rgba(17, 17, 106, 0) 84%);
-}
-
 @media (min-width: 1024px) {
-  .gradient-l-to-r-navy {
-    background: linear-gradient(73deg, rgba(39, 39, 135, 1) 37%, rgba(17, 17, 106, 0) 84%);
+  .gradient-l-to-r-white {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 1) 55%, rgba(17, 17, 106, 0) 62%);
   }
 }
 

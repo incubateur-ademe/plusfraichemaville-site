@@ -1,0 +1,31 @@
+import Image from "next/image";
+import Button from "@codegouvfr/react-dsfr/Button";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+
+export const HomepageIntro = () => {
+  return (
+    <div className="gradient-l-to-r-white relative">
+      <div className="fr-container">
+        <hgroup className="fr-py-12w max-w-xl">
+          <h1 className="fr-h1 text-pfmv-navy">
+            Agissez durablement <br />
+            contre la surchauffe urbaine
+          </h1>
+          <p className="font-bold text-pfmv-navy">
+            Le service de l'ADEME qui vous aide à concevoir vos projets de rafraîchissement urbain.
+          </p>
+          <Button className="fr-mt-4w" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
+            Commencer
+          </Button>
+        </hgroup>
+      </div>
+      <Image
+        loading="eager"
+        src="/images/homepage/home-hero.jpg"
+        alt="balade dans un jardin urbain"
+        fill
+        className="-z-10 object-contain ml-[25rem]"
+      />
+    </div>
+  );
+};
