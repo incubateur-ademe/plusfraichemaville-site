@@ -4,28 +4,29 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export const HomepageIntro = () => {
   return (
-    <div className="gradient-l-to-r-white relative">
+    <div className="gradient-l-to-r-white relative  flex flex-col md:flex-row">
       <div className="fr-container">
         <hgroup className="fr-py-12w max-w-xl">
           <h1 className="fr-h1 text-pfmv-navy">
-            Agissez durablement <br />
-            contre la surchauffe urbaine
+            Agissez durablement <br /> contre la surchauffe urbaine
           </h1>
           <p className="font-bold text-pfmv-navy">
             Le service de l'ADEME qui vous aide à concevoir vos projets de rafraîchissement urbain.
           </p>
-          <Button className="fr-mt-4w" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
-            Commencer
-          </Button>
+          <div className="fr-mt-4w flex justify-center md:justify-start">
+            <Button linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>Commencer</Button>
+          </div>
         </hgroup>
       </div>
-      <Image
-        loading="eager"
-        src="/images/homepage/home-hero.jpg"
-        alt="balade dans un jardin urbain"
-        fill
-        className="-z-10 object-contain ml-[25rem]"
-      />
+      <div className="relative h-64 w-full md:absolute md:inset-0 md:-z-10 md:h-auto">
+        <Image
+          loading="eager"
+          src="/images/homepage/home-hero.jpg"
+          alt="balade dans un jardin urbain"
+          fill
+          className="object-cover md:ml-[25rem] md:object-contain"
+        />
+      </div>
     </div>
   );
 };

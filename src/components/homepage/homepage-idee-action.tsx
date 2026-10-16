@@ -9,19 +9,19 @@ export const HomepageIdeeAction = () => {
         picto: "diagnostic",
       },
       {
-        title: "Evitez les faux pas",
-        description: "45 solutions éprouvées avec les bonnes pratiques et les erreurs à éviter",
-        picto: "solutions",
-      },
-      {
         title: "Un budget maîtrisé",
         description: "Simulation des coûts d’investissement et de fonctionnement pour cadrer votre enveloppe",
         picto: "estimation",
       },
       {
+        title: "Evitez les faux pas",
+        description: "45 solutions éprouvées avec les bonnes pratiques et les erreurs à éviter",
+        picto: "solutions",
+      },
+      {
         title: "Les aides à portée de main",
         description: "Opportunités de financements et contacts pour concrétiser votre projet",
-        picto: "collaborer",
+        picto: "financement",
       },
     ],
   };
@@ -32,20 +32,20 @@ export const HomepageIdeeAction = () => {
       <div className="fr-p-6w bg-dsfr-beige-galet text-left">
         <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
           {data.blocs.map((bloc, index) => (
-            <div className="flex gap-6" key={index}>
+            <div className="flex gap-6 self-center" key={index}>
               <Image
                 className="h-full shrink-0"
-                src={`/images/espace-projet/${bloc.picto}.svg`}
-                width={134}
-                height={134}
+                src={`/images/espace-projet-incentive/icons/${bloc.picto}.svg`}
+                width={118}
+                height={118}
                 alt=""
               />
-              <div>
-                <div className="fr-h5">{bloc.title}</div>
-                <p className="fr-text--xl">{bloc.description}</p>
+              <div className="items-center">
+                <div className="fr-h5 !mb-2">{bloc.title}</div>
+                <div className="fr-text--xl">{bloc.description}</div>
               </div>
             </div>
-          ))};
+          ))}
         </div>
       </div>
     </section>
