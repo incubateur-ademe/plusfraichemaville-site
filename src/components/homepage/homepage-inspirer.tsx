@@ -1,31 +1,70 @@
-import { homepageData } from "./homepage-data";
-import clsx from "clsx";
 import { HomepageInspirerCard } from "./homepage-inspirer-card";
-import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 export const HomepageInspirer = () => {
-  const { inspirer } = homepageData;
+  const data = [
+    {
+      slug: "toulouse-plus-fraiche",
+      climat_actuel: "oceanique",
+      climat_futur: "mediterraneen",
+      titre: "Toulouse Plus Fraîche : un plan d’adaptation en 30 actions ",
+      image_principale: "/images/homepage/rex/toulouse-plus-fraiche.jpg",
+      region: {
+        code: "FR-OCC",
+      },
+    },
+    {
+      slug: "verdissons-nos-murs-lille",
+      climat_actuel: "oceanique",
+      climat_futur: "mediterraneen",
+      titre: "“Verdissons nos murs”, le programme de Lille pour végétaliser ses façades",
+      image_principale: "/images/homepage/rex/verdissons-nos-murs-lille.jpeg",
+      region: {
+        code: "FR-HDF",
+      },
+    },
+    {
+      slug: "cour-oasis-berthelot-montrouge",
+      climat_actuel: "oceanique",
+      climat_futur: "mediterraneen",
+      titre: "La cour Oasis Berthelot, un îlot de fraîcheur au coeur de Montrouge",
+      image_principale: "/images/homepage/rex/cour-oasis-berthelot-montrouge.jpg",
+      region: {
+        code: "FR-IDF",
+      },
+    },
+    {
+      slug: "micro-foret-bordeaux",
+      climat_actuel: "oceanique",
+      climat_futur: "mediterraneen",
+      titre: "Wangari Muta Maathai, la première micro-forêt de Bordeaux ",
+      image_principale: "/images/homepage/rex/micro-foret-bordeaux.jpeg",
+      region: {
+        code: "FR-NAQ",
+      },
+    },
+  ];
   return (
-    <div className="mx-auto w-full max-w-[78rem] px-5 pb-20">
-      <h2 className="my-10 px-10 text-center text-lg font-bold text-pfmv-navy lg:my-14 lg:px-0 lg:text-[26px]">
-        {inspirer.title}
+    <section className="fr-mb-8w fr-container mx-auto w-full justify-items-center">
+      <h2 className="fr-h2 fr-mb-6w max-w-[50rem] text-center">
+        Découvrez les projets de rafraichissement urbains déjà réalisés partout en France
       </h2>
 
-      {inspirer.featuredRex && <HomepageInspirerCard rex={inspirer.featuredRex} featured />}
       <div className="flex flex-wrap items-center justify-center gap-8 lg:flex-row lg:flex-nowrap">
-        {inspirer.otherRex.map((rex, index) => (
+        {data.map((rex, index) => (
           <HomepageInspirerCard rex={rex} key={index} />
         ))}
       </div>
-      <LinkWithoutPrefetch
-        className={clsx(
-          "fr-btn fr-btn--secondary mx-auto mt-10 !block rounded-3xl",
-          "border-[1px] border-pfmv-navy text-pfmv-navy !shadow-none",
-        )}
-        href={inspirer.cta.url}
-      >
-        {inspirer.cta.label}
-      </LinkWithoutPrefetch>
-    </div>
+      <div className="fr-mt-4w flex justify-center">
+        <Button
+          linkProps={{
+            href: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
+          }}
+        >
+          Voir tous les retours d'expérience
+        </Button>
+      </div>
+    </section>
   );
 };

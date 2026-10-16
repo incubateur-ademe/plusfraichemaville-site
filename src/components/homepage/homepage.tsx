@@ -1,4 +1,3 @@
-import { HomepageStart } from "./homepage-start";
 import { HomepageOdd } from "@/src/components/homepage/homepage-odd";
 import { HomepageInspirer } from "@/src/components/homepage/homepage-inspirer";
 import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
@@ -10,7 +9,6 @@ export const Homepage = () => {
     <div>
       <HomepageIntro />
       <HomepageIdeeAction />
-      <HomepageStart />
       <HomepageInspirer />
       <NewsletterLinkedin />
       <HomepageOdd />
