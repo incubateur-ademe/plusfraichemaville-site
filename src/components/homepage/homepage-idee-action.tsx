@@ -29,7 +29,7 @@ export const HomepageIdeeAction = () => {
   };
 
   return (
-    <section className="fr-py-8w fr-container mx-auto w-full text-center">
+    <section className="fr-my-8w fr-container mx-auto w-full text-center">
       <h2 className="fr-h2 fr-mb-6w">De l'idée à l'action sans partir de zéro</h2>
       <div className="fr-py-6w fr-px-3w md:fr-p-6w bg-dsfr-beige-galet text-left">
         <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">

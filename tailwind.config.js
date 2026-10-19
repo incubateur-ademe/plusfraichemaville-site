@@ -81,6 +81,8 @@ module.exports = {
       "coeff-rafraichissement-urbain": "var(--background-active-blue-france)",
       "dsfr-beige-galet": "var(--background-alt-beige-gris-galet)",
       "dsfr-background-contrast-cumuls": "var(--background-contrast-blue-cumulus)",
+      "dsfr-artwork-minor-blue-cumulus": "var(--artwork-minor-blue-cumulus)",
+      "dsfr-text-inverted-grey": "var(--text-inverted-grey)",
       "coeff-biodiversite": "#29A31E",
       "coeff-canopee": "#78719E",
 

@@ -6,12 +6,14 @@ import { HomepageSurchauffeUrbaine } from "@/src/components/homepage/homepage-su
 import { HomepageNewsletter } from "@/src/components/homepage/homepage-newsletter";
 import { HomepageLinkedin } from "@/src/components/homepage/homepage-linkedin";
 import { Separator } from "@/src/components/common/separator";
+import { HomepageCitations } from "@/src/components/homepage/homepage-citations";
 
 export const Homepage = () => {
   return (
     <div>
       <HomepageIntro />
       <HomepageIdeeAction />
+      <HomepageCitations />
       <HomepageInspirer />
       <HomepageSurchauffeUrbaine />
       <HomepageNewsletter />
