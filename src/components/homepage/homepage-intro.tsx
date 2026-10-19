@@ -6,7 +6,7 @@ export const HomepageIntro = () => {
   return (
     <div className="gradient-l-to-r-white relative  flex flex-col lg:flex-row">
       <div className="fr-container">
-        <hgroup className="fr-py-12w max-w-xl">
+        <hgroup className="fr-py-4w fr-py-md-12w max-w-xl">
           <h1 className="fr-h1 text-pfmv-navy">
             Agissez durablement <br /> contre la surchauffe urbaine
           </h1>

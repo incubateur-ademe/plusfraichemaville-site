@@ -60,8 +60,9 @@ export const HomepageInspirer = () => {
           </li>
         ))}
       </ul>
-      <div className="fr-mt-4w flex justify-center">
+      <div className="w-full md:w-fit fr-mt-4w flex justify-center">
         <Button
+          className="w-full md:w-fit justify-center"
           linkProps={{
             href: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
           }}

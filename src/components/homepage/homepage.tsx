@@ -1,9 +1,11 @@
 import { HomepageOdd } from "@/src/components/homepage/homepage-odd";
 import { HomepageInspirer } from "@/src/components/homepage/homepage-inspirer";
-import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
 import { HomepageIntro } from "@/src/components/homepage/homepage-intro";
 import { HomepageIdeeAction } from "@/src/components/homepage/homepage-idee-action";
 import { HomepageSurchauffeUrbaine } from "@/src/components/homepage/homepage-surchauffe-urbaine";
+import { HomepageNewsletter } from "@/src/components/homepage/homepage-newsletter";
+import { HomepageLinkedin } from "@/src/components/homepage/homepage-linkedin";
+import { Separator } from "@/src/components/common/separator";
 
 export const Homepage = () => {
   return (
@@ -11,8 +13,10 @@ export const Homepage = () => {
       <HomepageIntro />
       <HomepageIdeeAction />
       <HomepageInspirer />
-      <HomepageSurchauffeUrbaine/>
-      <NewsletterLinkedin />
+      <HomepageSurchauffeUrbaine />
+      <HomepageNewsletter />
+      <HomepageLinkedin/>
+      <Separator/>
       <HomepageOdd />
     </div>
   );
