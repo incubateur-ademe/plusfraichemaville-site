@@ -80,6 +80,7 @@ module.exports = {
       "coeff-permeabilite": "var(--background-action-high-info-hover)",
       "coeff-rafraichissement-urbain": "var(--background-active-blue-france)",
       "dsfr-beige-galet": "var(--background-alt-beige-gris-galet)",
+      "dsfr-background-contrast-cumuls": "var(--background-contrast-blue-cumulus)",
       "coeff-biodiversite": "#29A31E",
       "coeff-canopee": "#78719E",
 
