@@ -49,7 +49,7 @@ export const HomepageIdeeAction = () => {
             </div>
           ))}
         </div>
-        <div className="fr-mt-4w flex w-full md:w-fit justify-center">
+        <div className="w-full fr-mt-4w flex justify-center">
           <Button className="w-full md:w-fit justify-center" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>Commencer</Button>
         </div>
       </div>

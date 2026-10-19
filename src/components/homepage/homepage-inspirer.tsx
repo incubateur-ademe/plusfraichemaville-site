@@ -53,14 +53,14 @@ export const HomepageInspirer = () => {
         Découvrez les projets de rafraichissement urbains déjà réalisés partout en France
       </h2>
 
-      <ul className="flex flex-wrap gap-8 lg:flex-row lg:flex-nowrap">
+      <ul className="flex gap-8 overflow-x-auto w-full md:w-fit">
         {rexInHome.map((rex, index) => (
           <li key={index} className="flex">
             <HomepageInspirerDSFRCard rex={rex as unknown as RexInHome} />
           </li>
         ))}
       </ul>
-      <div className="w-full md:w-fit fr-mt-4w flex justify-center">
+      <div className="w-full fr-mt-4w flex justify-center">
         <Button
           className="w-full md:w-fit justify-center"
           linkProps={{
