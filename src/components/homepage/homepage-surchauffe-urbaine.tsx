@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export const HomepageSurchauffeUrbaine = () => {
   return (
-    <section className="fr-py-8w mx-auto w-full bg-dsfr-background-contrast-cumuls">
+    <section className="fr-py-7w mx-auto w-full bg-dsfr-background-contrast-cumuls">
       <div className="fr-container">
         <h2 className="fr-h2 fr-mb-6w text-center">Surchauffe urbaine : comprendre pour mieux agir</h2>
         <div className="flex flex-col md:grid md:grid-cols-4 md:grid-rows-2 gap-4">

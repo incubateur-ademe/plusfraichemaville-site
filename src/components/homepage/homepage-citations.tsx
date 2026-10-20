@@ -1,19 +1,21 @@
+import { HomepageCitation, HomepageCitationsSlider } from "@/src/components/homepage/homepage-citations-slider";
+
 export const HomepageCitations = () => {
-  const citationsInHome = [
+  const citationsInHome: HomepageCitation[] = [
     {
-      image_principale: "/images/homepage/citations/cuers.jpg",
+      image: "/images/homepage/citations/cuers.jpg",
       citation:
-        "« Nous avons modifié le Plan Local d’Urbanisme pour préconiser, voire pour imposer de nouvelles manières " +
+        "Nous avons modifié le Plan Local d’Urbanisme pour préconiser, voire pour imposer de nouvelles manières " +
         "de construire avec des obligations plus draconiennes en matière d’arborisation, de non-artificialisation " +
-        "des sols dédiés au stationnement ou de choix de traitement des façades. »",
+        "des sols dédiés au stationnement ou de choix de traitement des façades.",
       auteur: "Bernard Mouttet, Maire de la ville de Cuers",
     },
     {
-      image_principale: "/images/homepage/citations/cuers.jpg",
+      image: "/images/homepage/citations/cuers.jpg",
       citation:
-        "« Nous avons modifié le Plan Local d’Urbanisme pour préconiser, voire pour imposer de nouvelles manières " +
+        "Nous avons modifié le Plan Local d’Urbanisme pour préconiser, voire pour imposer de nouvelles manières " +
         "de construire avec des obligations plus draconiennes en matière d’arborisation, de non-artificialisation " +
-        "des sols dédiés au stationnement ou de choix de traitement des façades. »",
+        "des sols dédiés au stationnement ou de choix de traitement des façades.",
       auteur: "Bernard Mouttet, Maire de la ville de Cuers",
     },
   ];
@@ -25,6 +27,7 @@ export const HomepageCitations = () => {
         <p className="text-center text-dsfr-text-inverted-grey">
           Découvrez comment Plus fraîche ma ville aide déjà +600 collectivités
         </p>
+        <HomepageCitationsSlider citations={citationsInHome} />
       </div>
     </section>
   );
