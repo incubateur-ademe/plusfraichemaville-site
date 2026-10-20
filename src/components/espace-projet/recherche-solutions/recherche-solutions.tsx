@@ -7,12 +7,14 @@ import { SolutionTabIds, SolutionTabIdType } from "@/src/stores/user/helper";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { AideDecisionContainer } from "@/src/components/espace-projet/recherche-solutions/aide-decision-container";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
+import { useEffect } from "react";
 
 type RechercheSolutionsProps = {
   searchParams: {
     espaceFilter: string | undefined;
     typeSolutionFilter: string | undefined;
     baisseTemperatureFilter: string | undefined;
+    defaultTab: SolutionTabIdType;
   };
   allFichesSolutions: FicheSolution[];
 };
@@ -20,8 +22,13 @@ type RechercheSolutionsProps = {
 export const RechercheSolutions = ({ allFichesSolutions, searchParams }: RechercheSolutionsProps) => {
   const navigationPreferences = useUserStore((state) => state.navigationPreferences);
   const setSolutionTab = useUserStore((state) => state.setChoixSolutionSelectedTabId);
-  const currentTab = navigationPreferences?.choixSolutionSelectedTabId || SolutionTabIds.ARBRE;
+  const currentTab =
+    searchParams.defaultTab || navigationPreferences?.choixSolutionSelectedTabId || SolutionTabIds.ARBRE;
   const currentStep = navigationPreferences.choixSolutionAideDecisionCurrentStep;
+
+  useEffect(() => {
+    setSolutionTab(currentTab);
+  }, []);
 
   const router = useRouter();
   const pathname = usePathname();
