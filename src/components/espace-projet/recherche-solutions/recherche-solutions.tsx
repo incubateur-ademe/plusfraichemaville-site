@@ -14,7 +14,7 @@ type RechercheSolutionsProps = {
     espaceFilter: string | undefined;
     typeSolutionFilter: string | undefined;
     baisseTemperatureFilter: string | undefined;
-    defaultTab: SolutionTabIdType;
+    defaultTab?: SolutionTabIdType;
   };
   allFichesSolutions: FicheSolution[];
 };
