@@ -2,8 +2,8 @@ import { removeDaysToDate } from "@/src/helpers/dateUtils";
 import { getLastCsmMailBatch, saveCronJob } from "@/src/lib/prisma/prisma-cron-jobs-queries";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { EmailService } from "@/src/services/brevo";
-import { makeBatchErrorWebhookData, makeCsmBatchWebhookData } from "@/src/services/mattermost/mattermost-helpers";
-import { sendMattermostWebhook } from "@/src/services/mattermost";
+import { makeBatchErrorWebhookData, makeCsmBatchWebhookData } from "@/src/services/teams/ms-teams-helpers";
+import { sendMSTeamsWebhook } from "@/src/services/teams/ms-teams-webhook";
 
 const main = async () => {
   if (process.env.CSM_MAIL_BATCH_ACTIVE !== "true") {
@@ -117,12 +117,12 @@ const main = async () => {
       nbMailsRemindFinancementWithoutEstimation: sendRemindFinancementMailWithoutEstimation.length,
       nbMailsRemindSaveContact: sendRemindSaveContact.length,
     });
-    await sendMattermostWebhook(webhookData, "batch", 5000);
+    await sendMSTeamsWebhook(webhookData.text);
     console.log("Batch des mails CSM réussi !");
     process.exit(0);
   } catch (error) {
     customCaptureException("Erreur lors du batch des mails CSM.", error);
-    await sendMattermostWebhook(makeBatchErrorWebhookData("Erreur lors du batch des mails CSM."), "batch", 5000);
+    await sendMSTeamsWebhook(makeBatchErrorWebhookData("Erreur lors du batch des mails CSM.").text);
     process.exit(1);
   }
 };
