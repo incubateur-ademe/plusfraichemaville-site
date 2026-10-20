@@ -335,6 +335,7 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
             Télécharger la synthèse
           </Button>
         )}
+        <div className="mt-2 text-sm text-dsfr-text-mention-grey">Format : PPTX</div>
       </div>
     </form>
   );
