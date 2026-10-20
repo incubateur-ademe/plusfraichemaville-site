@@ -53,16 +53,16 @@ export const HomepageInspirer = () => {
         Découvrez les projets de rafraichissement urbains déjà réalisés partout en France
       </h2>
 
-      <ul className="flex gap-8 overflow-x-auto w-full md:w-fit">
+      <ul className="flex w-full gap-8 overflow-x-auto md:w-fit">
         {rexInHome.map((rex, index) => (
           <li key={index} className="flex">
             <HomepageInspirerDSFRCard rex={rex as unknown as RexInHome} />
           </li>
         ))}
       </ul>
-      <div className="w-full fr-mt-4w flex justify-center">
+      <div className="fr-mt-4w flex w-full justify-center">
         <Button
-          className="w-full md:w-fit justify-center"
+          className="w-full justify-center md:w-fit"
           linkProps={{
             href: PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET,
           }}

@@ -559,7 +559,6 @@ ul.arrow-list li::before {
   @apply !font-normal;
 }
 
-
 .custom-maplibre-popup .maplibregl-popup-content {
   font-family: "Marianne" !important;
   background-color: #ffffff !important;

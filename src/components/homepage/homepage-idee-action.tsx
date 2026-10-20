@@ -34,9 +34,9 @@ export const HomepageIdeeAction = () => {
       <div className="fr-py-6w fr-px-3w md:fr-p-6w bg-dsfr-beige-galet text-left">
         <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
           {data.blocs.map((bloc, index) => (
-            <div className="flex flex-col md:flex-row gap-3 md:gap-6 self-center" key={index}>
+            <div className="flex flex-col gap-3 self-center md:flex-row md:gap-6" key={index}>
               <Image
-                className="h-full shrink-0 size-16 md:size-28"
+                className="size-16 h-full shrink-0 md:size-28"
                 src={`/images/espace-projet-incentive/icons/${bloc.picto}.svg`}
                 width={118}
                 height={118}
@@ -49,8 +49,10 @@ export const HomepageIdeeAction = () => {
             </div>
           ))}
         </div>
-        <div className="w-full fr-mt-4w flex justify-center">
-          <Button className="w-full md:w-fit justify-center" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>Commencer</Button>
+        <div className="fr-mt-4w flex w-full justify-center">
+          <Button className="w-full justify-center md:w-fit" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
+            Commencer
+          </Button>
         </div>
       </div>
     </section>

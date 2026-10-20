@@ -10,10 +10,14 @@ export const HomepageInspirerDSFRCard = ({ rex }: { rex: RexInHome }) => {
   return (
     <Card
       className="flex h-full w-[18rem]"
-      classes={{title: "text-lg"}}
+      classes={{ title: "text-lg" }}
       title={rex.titre}
       endDetail="En savoir plus sur le projet"
-      start={<Tag iconId="ri-map-pin-2-fill" className="before:mb-1">{getRegionLabelFromCode(rex.region?.code)}</Tag>}
+      start={
+        <Tag iconId="ri-map-pin-2-fill" className="before:mb-1">
+          {getRegionLabelFromCode(rex.region?.code)}
+        </Tag>
+      }
       desc={
         <>
           Climat actuel : {getClimatLabelFromCode(rex.climat_actuel)}

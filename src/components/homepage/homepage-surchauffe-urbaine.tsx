@@ -7,11 +7,12 @@ export const HomepageSurchauffeUrbaine = () => {
     <section className="fr-py-7w mx-auto w-full bg-dsfr-background-contrast-cumuls">
       <div className="fr-container">
         <h2 className="fr-h2 fr-mb-6w text-center">Surchauffe urbaine : comprendre pour mieux agir</h2>
-        <div className="flex flex-col md:grid md:grid-cols-4 md:grid-rows-2 gap-4">
+        <div className="flex flex-col gap-4 md:grid md:grid-cols-4 md:grid-rows-2">
           <Card
-            className="row-span-2 col-span-2"
+            className="col-span-2 row-span-2"
             title="Surchauffe urbaine et santé : comprendre les risques pour mieux protéger les habitants"
-            desc="En 2025, plus de 5 700 décès sont attribuables à une exposition de la population à la chaleur sur l’ensemble de la période de surveillance de l’été."
+            desc="En 2025, plus de 5 700 décès sont attribuables à une exposition de la population à la chaleur
+            sur l’ensemble de la période de surveillance de l’été."
             size="large"
             imageComponent={
               <Image

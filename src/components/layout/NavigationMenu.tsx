@@ -106,7 +106,7 @@ export default function NavigationMenu() {
           text: "Passer à l'action",
           menuLinks: [
             {
-              text: (<span className="font-bold">Créer un projet de rafraîchissement</span>),
+              text: <span className="font-bold">Créer un projet de rafraîchissement</span>,
               linkProps: {
                 className: "bg-dsfr-beige-galet",
                 href: PFMV_ROUTES.ESPACE_PROJET,

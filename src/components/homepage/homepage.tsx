@@ -17,8 +17,8 @@ export const Homepage = () => {
       <HomepageInspirer />
       <HomepageSurchauffeUrbaine />
       <HomepageNewsletter />
-      <HomepageLinkedin/>
-      <Separator/>
+      <HomepageLinkedin />
+      <Separator />
       <HomepageOdd />
     </div>
   );

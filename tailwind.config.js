@@ -85,7 +85,6 @@ module.exports = {
       "dsfr-text-inverted-grey": "var(--text-inverted-grey)",
       "coeff-biodiversite": "#29A31E",
       "coeff-canopee": "#78719E",
-
     },
   },
   plugins: [],

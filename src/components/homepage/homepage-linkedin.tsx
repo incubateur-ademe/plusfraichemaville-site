@@ -12,7 +12,11 @@ export const HomepageLinkedin = () => (
         <div>Rejoignez la communauté et suivez nos actualités</div>
       </div>
       <div className="w-full md:w-fit">
-        <LinkWithoutPrefetch className="fr-btn w-full justify-center md:w-fit" target="_blank" href="https://www.linkedin.com/groups/13150515/">
+        <LinkWithoutPrefetch
+          className="fr-btn w-full justify-center md:w-fit"
+          target="_blank"
+          href="https://www.linkedin.com/groups/13150515/"
+        >
           Nous suivre
         </LinkWithoutPrefetch>
       </div>
