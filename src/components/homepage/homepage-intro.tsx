@@ -4,7 +4,7 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export const HomepageIntro = () => {
   return (
-    <div className="gradient-l-to-r-white relative  flex flex-col lg:flex-row">
+    <div className="relative flex flex-col lg:flex-row">
       <div className="fr-container">
         <hgroup className="fr-py-4w fr-py-md-12w">
           <h1 className="fr-h1 text-pfmv-navy max-w-xl">
@@ -18,7 +18,7 @@ export const HomepageIntro = () => {
           </div>
         </hgroup>
       </div>
-      <div className="relative h-64 w-full lg:absolute lg:inset-0 lg:-z-10 lg:h-auto lg:overflow-hidden">
+      <div className="relative h-64 w-full lg:absolute lg:inset-0 lg:-z-10 lg:h-auto lg:overflow-hidden mask-fade-l-to-r">
         <Image
           loading="eager"
           src="/images/homepage/home-hero.jpg"

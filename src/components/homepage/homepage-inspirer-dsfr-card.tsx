@@ -5,11 +5,13 @@ import { getRegionLabelFromCode } from "@/src/helpers/regions";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 import { RexInHome } from "@/src/components/retourExperience/RetourExperienceCard";
 import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRetourExperience";
+import Badge from "@codegouvfr/react-dsfr/Badge";
 
 export const HomepageInspirerDSFRCard = ({ rex }: { rex: RexInHome }) => {
   return (
     <Card
       className="flex h-full w-[17.625rem]"
+      badge={<Badge className="before:mb-1 bg-dsfr-artwork-minor-blue-cumulus text-dsfr-text-inverted-grey" small>Solution</Badge>}
       size="small"
       title={rex.titre}
       endDetail="En savoir plus sur le projet"
