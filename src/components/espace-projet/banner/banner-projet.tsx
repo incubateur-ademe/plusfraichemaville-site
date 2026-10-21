@@ -126,11 +126,13 @@ export default function BannerProjet({ className }: { className?: string }) {
                           <div className="flex flex-wrap items-center gap-3">
                             {shouldDispplayExportButton && (
                               <Button
+                                iconId="ri-download-2-line"
+                                iconPosition="left"
                                 className={clsx("rounded-3xl")}
                                 onClick={handleSyntheseClick}
                                 priority="secondary"
                               >
-                                Télécharger la synthèse
+                                Télécharger une synthèse du projet
                               </Button>
                             )}
                             <Button

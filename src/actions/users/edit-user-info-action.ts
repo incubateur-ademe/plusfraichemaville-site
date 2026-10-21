@@ -12,8 +12,8 @@ import { CUSTOM_CANAL_ACQUISITION } from "@/src/helpers/canalAcquisition";
 import { PermissionManager } from "@/src/helpers/permission-manager";
 import { createConnectContact } from "@/src/services/connect";
 import { mapUserToConnectContact } from "@/src/services/connect/connect-helpers";
-import { sendMattermostWebhook } from "@/src/services/mattermost";
-import { makeNoSirenUserWebhookData } from "@/src/services/mattermost/mattermost-helpers";
+import { makeNoSirenUserWebhookData } from "@/src/services/teams/ms-teams-helpers";
+import { sendMSTeamsWebhook } from "@/src/services/teams/ms-teams-webhook";
 
 export const editUserInfoAction = async (
   data: UserInfoFormData & { userId: string },
@@ -59,7 +59,7 @@ export const editUserInfoAction = async (
         customCaptureException("Error in Connect call in EditUserInfoAction", e);
       }
       if (updatedUser?.nom_etablissement != null && updatedUser.siren_info == null) {
-        await sendMattermostWebhook(makeNoSirenUserWebhookData(updatedUser), "noSiren", 3000);
+        await sendMSTeamsWebhook(makeNoSirenUserWebhookData(updatedUser).text);
       }
 
       revalidatePath(PFMV_ROUTES.MON_PROFIL);

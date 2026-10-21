@@ -6,24 +6,24 @@ import { useUserStore } from "@/src/stores/user/provider";
 export default function AideDecisionEtapeCard({ etapeAttributes }: { etapeAttributes: AideDecisionEtape }) {
   const setAideDecisionStep = useUserStore((state) => state.setChoixSolutionAideDecisionCurrentStep);
   return (
-    <article className="pfmv-card fr-enlarge-button mx-4 flex w-96 flex-row items-center md:mx-0 md:w-56 md:flex-col">
-      <div className="flex h-full w-32 md:h-36 md:w-full">
+    <article className="pfmv-card fr-enlarge-button flex w-full flex-col">
+      <div className="flex h-24 w-full sm:h-36">
         <Image
           width={450}
           height={300}
           src={getStrapiImageUrl(etapeAttributes.image, STRAPI_IMAGE_KEY_SIZE.medium)}
           alt=""
-          className={"h-full w-full rounded-l-2xl object-cover md:rounded-t-2xl md:rounded-bl-none"}
+          className={"h-full w-full rounded-t-2xl rounded-bl-none object-cover"}
           unoptimized
         />
       </div>
-      <div className="m-4 max-w-[11rem] md:max-w-none">
-        <h2 className={"text-blue-hover mb-0 text-[16px] font-bold leading-tight"}>
+      <div className="m-4">
+        <h3 className={"text-blue-hover mb-0 text-base font-bold leading-tight"}>
           <button className="bg-none" onClick={() => setAideDecisionStep(etapeAttributes.slug)}>
             {etapeAttributes.nom}
           </button>
-        </h2>
-        <div className={"fr-text mt-4 hidden text-dsfr-text-mention-grey md:block"}>{etapeAttributes.description}</div>
+        </h3>
+        <div className={"fr-text mt-4 text-dsfr-text-mention-grey"}>{etapeAttributes.description}</div>
       </div>
     </article>
   );
