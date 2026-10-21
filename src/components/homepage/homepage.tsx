@@ -8,6 +8,7 @@ import { HomepageLinkedin } from "@/src/components/homepage/homepage-linkedin";
 import { Separator } from "@/src/components/common/separator";
 import { HomepageCitations } from "@/src/components/homepage/homepage-citations";
 import Image from "next/image";
+import { HomepagePartenaires } from "@/src/components/homepage/homepage-partenaires";
 
 export const Homepage = () => {
   return (
@@ -31,6 +32,7 @@ export const Homepage = () => {
       <HomepageCitations />
       <HomepageInspirer />
       <HomepageSurchauffeUrbaine />
+      <HomepagePartenaires />
       <HomepageNewsletter />
       <HomepageLinkedin />
       <Separator />

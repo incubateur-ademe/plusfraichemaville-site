@@ -11,7 +11,11 @@ export const HomepageInspirerDSFRCard = ({ rex }: { rex: RexInHome }) => {
   return (
     <Card
       className="flex h-full w-[17.625rem]"
-      badge={<Badge className="before:mb-1 bg-dsfr-artwork-minor-blue-cumulus text-dsfr-text-inverted-grey" small>Solution</Badge>}
+      badge={
+        <Badge className="bg-dsfr-artwork-minor-blue-cumulus text-dsfr-text-inverted-grey before:mb-1" small>
+          Solution
+        </Badge>
+      }
       size="small"
       title={rex.titre}
       endDetail="En savoir plus sur le projet"
