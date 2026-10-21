@@ -23,10 +23,12 @@ export const HomepageCitations = () => {
   return (
     <section className="fr-py-7w mx-auto w-full justify-items-center bg-dsfr-artwork-minor-blue-cumulus">
       <div className="fr-container">
-        <h2 className="fr-h2 !mb-2 text-center text-dsfr-text-inverted-grey">Ce qu’en pense notre communauté</h2>
-        <p className="text-center text-dsfr-text-inverted-grey">
-          Découvrez comment Plus fraîche ma ville aide déjà +600 collectivités
-        </p>
+        <hgroup>
+          <h2 className="fr-h2 !mb-2 text-center text-dsfr-text-inverted-grey">Ce qu’en pense notre communauté</h2>
+          <p className="fr-text--lead text-center text-dsfr-text-inverted-grey">
+            Découvrez comment Plus fraîche ma ville aide déjà +600 collectivités
+          </p>
+        </hgroup>
         <HomepageCitationsSlider citations={citationsInHome} />
       </div>
     </section>
