@@ -9,8 +9,8 @@ import { getClimatLabelFromCode } from "@/src/helpers/retourExperience/climatRet
 export const HomepageInspirerDSFRCard = ({ rex }: { rex: RexInHome }) => {
   return (
     <Card
-      className="flex h-full w-[18rem]"
-      classes={{ title: "text-lg" }}
+      className="flex h-full w-[17.625rem]"
+      size="small"
       title={rex.titre}
       endDetail="En savoir plus sur le projet"
       start={

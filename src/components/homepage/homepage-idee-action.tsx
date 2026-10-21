@@ -50,7 +50,7 @@ export const HomepageIdeeAction = () => {
           ))}
         </div>
         <div className="fr-mt-4w flex w-full justify-center">
-          <Button className="w-full justify-center md:w-fit" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
+          <Button className="w-full justify-center md:w-fit" size="large" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
             Commencer
           </Button>
         </div>
