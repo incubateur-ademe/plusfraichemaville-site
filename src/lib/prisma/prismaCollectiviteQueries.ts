@@ -44,6 +44,21 @@ export const createCollectiviteFromCommune = async (commune: commune, creatorUse
   });
 };
 
+export const updateCollectiviteWithBanInfo = async (collectiviteId: number, data: AddressCommune) => {
+  return prismaClient.collectivite.update({
+    where: {
+      id: collectiviteId,
+    },
+    data: {
+      code_postal: data.codePostal,
+      ban_id: data.banId,
+      adresse_all_infos: data.banInfo as Prisma.JsonObject,
+      latitude: data.lat,
+      longitude: data.long,
+    },
+  });
+};
+
 export const getCollectiviteByCodeInsee = async (codeInsee: string) => {
   return prismaClient.collectivite.findUnique({
     where: {
