@@ -1,6 +1,6 @@
 import { prismaClient } from "@/src/lib/prisma/prismaClient";
 import { AddressCommune } from "@/src/lib/adresseApi/types";
-import { Prisma } from "@/src/generated/prisma/client";
+import { commune, Prisma } from "@/src/generated/prisma/client";
 import { generateRandomId } from "@/src/helpers/common";
 
 export const getOrCreateCollectivite = async (data: AddressCommune, creatorUserId: string) => {
@@ -29,6 +29,40 @@ export const createCollectiviteByName = async (collectiviteName: string, creator
       id: generateRandomId(),
       nom: collectiviteName,
       created_by: creatorUserId,
+    },
+  });
+};
+
+export const createCollectiviteFromCommune = async (commune: commune, creatorUserId: string) => {
+  return prismaClient.collectivite.create({
+    data: {
+      id: generateRandomId(),
+      nom: commune.nom,
+      code_insee: commune.insee,
+      created_by: creatorUserId,
+    },
+  });
+};
+
+export const updateCollectiviteWithBanInfo = async (collectiviteId: number, data: AddressCommune) => {
+  return prismaClient.collectivite.update({
+    where: {
+      id: collectiviteId,
+    },
+    data: {
+      code_postal: data.codePostal,
+      ban_id: data.banId,
+      adresse_all_infos: data.banInfo as Prisma.JsonObject,
+      latitude: data.lat,
+      longitude: data.long,
+    },
+  });
+};
+
+export const getCollectiviteByCodeInsee = async (codeInsee: string) => {
+  return prismaClient.collectivite.findUnique({
+    where: {
+      code_insee: codeInsee,
     },
   });
 };
