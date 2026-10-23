@@ -1,20 +1,44 @@
-import { HomepageHero } from "./homepage-hero";
-import { HomepageStart } from "./homepage-start";
 import { HomepageOdd } from "@/src/components/homepage/homepage-odd";
 import { HomepageInspirer } from "@/src/components/homepage/homepage-inspirer";
-import { HomepageProjet } from "@/src/components/homepage/homepage-projet";
-import { HomepageStories } from "@/src/components/homepage/homepage-stories";
-import { NewsletterLinkedin } from "@/src/components/common/newsletter-linkedin";
+import { HomepageIntro } from "@/src/components/homepage/homepage-intro";
+import { HomepageIdeeAction } from "@/src/components/homepage/homepage-idee-action";
+import { HomepageSurchauffeUrbaine } from "@/src/components/homepage/homepage-surchauffe-urbaine";
+import { HomepageNewsletter } from "@/src/components/homepage/homepage-newsletter";
+import { HomepageLinkedin } from "@/src/components/homepage/homepage-linkedin";
+import { Separator } from "@/src/components/common/separator";
+import { HomepageCitations } from "@/src/components/homepage/homepage-citations";
+import Image from "next/image";
+import { HomepagePartenaires } from "@/src/components/homepage/homepage-partenaires";
+import { HomepageFAQ } from "@/src/components/homepage/homepage-faq";
 
 export const Homepage = () => {
   return (
     <div>
-      <HomepageHero />
-      <HomepageProjet />
-      <HomepageStories />
-      <HomepageStart />
+      <Image
+        src="/images/homepage/wave-bg-left.svg"
+        alt=""
+        width={300}
+        height={500}
+        className="absolute left-0 top-[17rem] -z-50 hidden max-w-[50%] md:block lg:top-[30rem]"
+      />
+      <Image
+        src="/images/homepage/wave-bg-right.svg"
+        alt=""
+        width={500}
+        height={500}
+        className="absolute right-0 top-[52rem] -z-50 hidden md:block"
+      />
+      <HomepageIntro />
+      <HomepageIdeeAction />
+      <HomepageCitations />
       <HomepageInspirer />
-      <NewsletterLinkedin />
+      <HomepageSurchauffeUrbaine />
+      <HomepagePartenaires />
+      <Separator />
+      <HomepageFAQ />
+      <HomepageNewsletter />
+      <HomepageLinkedin />
+      <Separator />
       <HomepageOdd />
     </div>
   );
