@@ -28,7 +28,7 @@ export const AideDecisionContainer = () => {
   }, [currentStep, pathname, projetId, router]);
 
   return (
-    <div className="bg-dsfr-background-alt-blue-france px-4 pb-16 pt-2">
+    <div className="bg-dsfr-background-alt-blue-france px-2 pb-16 pt-2">
       {!currentStep ? <AideDecisionFirstStep /> : <AideDecisionStep currentStep={currentStep} />}
     </div>
   );

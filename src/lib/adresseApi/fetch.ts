@@ -20,6 +20,9 @@ export const fetchAddressFromBanApi = async (
       },
     },
   );
+  if (!response.ok) {
+    throw new Error(`API Adresse responded with status ${response.status}`);
+  }
   const result = (await response.json()) as BanAPIResponse;
   if ("code" in result) {
     throw new Error(`${result.message} ${result.detail}`);
@@ -34,6 +37,22 @@ export const fetchCommuneFromBanApi = async (keyword: string, limit: number = 10
   } catch (e: any) {
     customCaptureException("Error when calling API Adresse for collectvite", e);
     return [];
+  }
+};
+
+const BAN_RETRY_DELAY_MS = 2000;
+
+export const fetchCommuneFromBanApiWithRetry = async (
+  keyword: string,
+  limit: number = 10,
+): Promise<AddressCommune[]> => {
+  try {
+    const results = await fetchAddressFromBanApi(keyword, limit, "municipality");
+    return results.map(mapAddressApiToCollectiviteAddress);
+  } catch (e: any) {
+    customCaptureException("Error when calling API Adresse for collectivite, retrying", e);
+    await new Promise((resolve) => setTimeout(resolve, BAN_RETRY_DELAY_MS));
+    return fetchCommuneFromBanApi(keyword, limit);
   }
 };
 

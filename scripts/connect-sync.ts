@@ -4,8 +4,8 @@ import { connectBatchSync } from "@/src/services/connect";
 import {
   makeConnectSyncBatchErrorWebhookData,
   makeConnectSyncBatchWebhookData,
-} from "@/src/services/mattermost/mattermost-helpers";
-import { sendMattermostWebhook } from "@/src/services/mattermost";
+} from "@/src/services/teams/ms-teams-helpers";
+import { sendMSTeamsWebhook } from "@/src/services/teams/ms-teams-webhook";
 
 const syncWithConnect = async () => {
   if (process.env.CONNECT_SYNC_ACTIVE !== "true") {
@@ -29,7 +29,7 @@ const syncWithConnect = async () => {
     if (!filteredUsersAndProject.length) {
       console.log("Aucune nouvelle donnée à synchroniser.");
       const webhookData = makeConnectSyncBatchWebhookData("Aucune nouvelle donnée à synchroniser.");
-      await sendMattermostWebhook(webhookData, "batch", 5000);
+      await sendMSTeamsWebhook(webhookData.text);
       await saveCronJob(startedDate, new Date(), "SYNC_CONNECT");
       process.exit(0);
     }
@@ -43,17 +43,17 @@ const syncWithConnect = async () => {
       const webhookData = makeConnectSyncBatchErrorWebhookData(`Erreur lors du batch de synchronisation Connect.
 ${JSON.stringify(connectResult.errors)}
 ${connectResult.message}`);
-      await sendMattermostWebhook(webhookData, "batch", 5000);
+      await sendMSTeamsWebhook(webhookData.text);
       process.exit(1);
     }
     const webhookData = makeConnectSyncBatchWebhookData(connectResult.message);
-    await sendMattermostWebhook(webhookData, "batch", 5000);
+    await sendMSTeamsWebhook(webhookData.text);
     await saveCronJob(startedDate, new Date(), "SYNC_CONNECT");
     process.exit(0);
   } catch (error) {
     captureError("Erreur lors de la synchronisation avec Connect:", error);
     const webhookData = makeConnectSyncBatchErrorWebhookData("Erreur lors du batch de synchronisation Connect.");
-    await sendMattermostWebhook(webhookData, "batch", 5000);
+    await sendMSTeamsWebhook(webhookData.text);
     process.exit(1);
   }
 };

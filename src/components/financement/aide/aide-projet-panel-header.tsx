@@ -7,7 +7,7 @@ export const AideProjetPanelHeader = () => {
   const projet = useProjetsStore((state) => state.getCurrentProjet());
   const espace = projet?.type_espace as TypeEspace["code"];
   const collectivite = projet?.collectivite;
-  const commune = `${collectivite?.code_postal} ${collectivite?.nom}`;
+  const commune = `${collectivite?.code_postal || ""} ${collectivite?.nom}`;
   const region = getRegionByDepartment(collectivite?.code_postal);
 
   if (!projet) return null;
@@ -15,8 +15,12 @@ export const AideProjetPanelHeader = () => {
   return (
     <>
       <div className="mb-4 flex flex-wrap gap-4 text-xl font-bold text-pfmv-navy">
-        <div>Région {region}</div>
-        <SeparatorY />
+        {region && (
+          <>
+            <div>Région {region}</div>
+            <SeparatorY />
+          </>
+        )}
         <div>{commune}</div>
         <SeparatorY />
         <div>{selectDefinedEspaceByCode(espace)?.label}</div>

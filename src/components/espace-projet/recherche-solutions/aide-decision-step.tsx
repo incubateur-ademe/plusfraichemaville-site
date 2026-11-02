@@ -34,12 +34,12 @@ export const AideDecisionStep = ({ currentStep }: { currentStep: string }) => {
             }))}
           />
         )}
-        <div className="block flex-row justify-items-center md:flex">
+        <div className="flex flex-row justify-items-center ">
           <div className="grow">
             <h2 className={"mb-10 text-center text-xl"}>{etape.question_suivante}</h2>
-            <ul className="flex list-none flex-wrap justify-center p-0">
+            <ul className="flex list-none flex-wrap justify-center !p-0">
               {etape.etapes_suivantes.map((aideDecision) => (
-                <li key={aideDecision.documentId} className="m-3 flex w-96 md:w-[220px]">
+                <li key={aideDecision.documentId} className="m-3 flex max-w-56">
                   <AideDecisionEtapeCard etapeAttributes={aideDecision} />
                 </li>
               ))}

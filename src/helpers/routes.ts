@@ -96,7 +96,8 @@ export const PFMV_ROUTES = {
     `/espace-projet/${projetId}/diagnostic/prestation/fiche-diagnostic/${ficheDiagnosticSlug}`,
   ESPACE_PROJET_INFO_PROJET: (projetId: number) => `/espace-projet/${projetId}/info-projet`,
   ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_TYPE_FILTER: (projetId: number, typeFiche: TypeSolution) =>
-    `/espace-projet/${projetId}/fiche-solution/liste?${TYPE_SOLUTION_FILTER_NAME}=${typeFiche}`,
+    `/espace-projet/${projetId}/fiche-solution/liste/toutes-solutions?` +
+    `${TYPE_SOLUTION_FILTER_NAME}=${typeFiche}&defaultTab=toutesSolutions`,
   ESPACE_PROJET_RETOURS_EXPERIENCE_PROJET: (projetId: number) => `/espace-projet/${projetId}/projet`,
 };
 

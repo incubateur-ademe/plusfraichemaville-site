@@ -14,3 +14,11 @@ export const getCommuneSirensForEpci = async (sirenEpci: string): Promise<string
 
   return communes.map((commune) => commune.siren);
 };
+
+export const getCommuneByInsee = async (insee: string) => {
+  return prismaClient.commune.findUnique({
+    where: {
+      insee,
+    },
+  });
+};
