@@ -83,11 +83,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
                 );
               })}
             </Select>
-            <Button
-              className="!mb-3 !h-fit !min-h-fit !text-sm"
-              disabled={selectedProjetId < 1}
-              onClick={validate}
-            >
+            <Button className="!mb-3 !h-fit !min-h-fit !text-sm" disabled={selectedProjetId < 1} onClick={validate}>
               Ajouter au projet
             </Button>
           </div>

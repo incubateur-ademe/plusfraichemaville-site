@@ -149,11 +149,7 @@ export default function EstimationMateriauSimpleFieldForm({
               {"Précédent"}
             </div>
           </Button>
-          <Button
-            onClick={form.handleSubmit(onSubmitAndClose)}
-            disabled={disabled}
-            priority="secondary"
-          >
+          <Button onClick={form.handleSubmit(onSubmitAndClose)} disabled={disabled} priority="secondary">
             {"Enregistrer et finir plus tard"}
           </Button>
           <Button className="!p-0" onClick={form.handleSubmit(onSubmitAndNext)} disabled={disabled}>

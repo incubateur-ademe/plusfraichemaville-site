@@ -58,9 +58,7 @@ export function EstimationMateriauxValidation({
         <Button onClick={onPrevious} priority="tertiary">
           Précédent
         </Button>
-        <Button onClick={validateEstimation}>
-          {"Enregistrer et fermer"}
-        </Button>
+        <Button onClick={validateEstimation}>{"Enregistrer et fermer"}</Button>
       </div>
     </>
   );

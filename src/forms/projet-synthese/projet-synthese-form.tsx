@@ -325,12 +325,7 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
             </span>
           </Button>
         ) : (
-          <Button
-            iconId="ri-download-2-line"
-            iconPosition="right"
-            type="submit"
-            disabled={!currentProjet}
-          >
+          <Button iconId="ri-download-2-line" iconPosition="right" type="submit" disabled={!currentProjet}>
             Télécharger la synthèse
           </Button>
         )}

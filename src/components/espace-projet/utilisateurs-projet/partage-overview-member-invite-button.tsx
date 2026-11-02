@@ -65,12 +65,7 @@ export const PartageOverviewMemberInviteButton = () => {
             ]}
           />
           <div className="flex justify-between">
-            <Button
-              priority="tertiary"
-              onClick={modal.close}
-              nativeButtonProps={modal.buttonProps}
-              type="button"
-            >
+            <Button priority="tertiary" onClick={modal.close} nativeButtonProps={modal.buttonProps} type="button">
               Annuler
             </Button>
             <Button priority="primary" type="submit">

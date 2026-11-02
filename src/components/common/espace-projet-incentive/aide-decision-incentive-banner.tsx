@@ -40,9 +40,7 @@ export default function AideDecisionIncentiveBanner({ className }: { className?:
           Composez votre combinaison de solutions en répondant à quelques questions sur votre espace.
         </div>
         {status === "authenticated" ? (
-          <Button onClick={modalChoixProjet.open}>
-            Continuer sur l'espace projet
-          </Button>
+          <Button onClick={modalChoixProjet.open}>Continuer sur l'espace projet</Button>
         ) : (
           <ProConnectButton onClick={handleSignIn} />
         )}

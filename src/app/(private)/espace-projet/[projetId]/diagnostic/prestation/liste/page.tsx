@@ -22,10 +22,7 @@ export default async function FicheDiagnosticListePage(props: { params: Promise<
         <FicheDiagnosticGuide />
         <FicheDiagnosticChoixWithFilters allFichesDiagnostics={allFichesDiagnostics} />
         <div className="mt-14 flex items-center justify-between">
-          <GenericFicheLink
-            href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
-            className="fr-btn fr-btn--secondary"
-          >
+          <GenericFicheLink href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD} className="fr-btn fr-btn--secondary">
             Revenir au tableau de bord
           </GenericFicheLink>
           <LinkWithoutPrefetch

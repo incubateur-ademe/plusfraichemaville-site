@@ -257,18 +257,10 @@ export const ProjetCreationForm = ({ showCancelButton = false }: { showCancelBut
           >
             {showCancelButton ? "Annuler" : "Précédent"}
           </Button>
-          <Button
-            type="button"
-            onClick={handleNextStep}
-            className={clsx(currentStep >= steps.length && "hidden", "")}
-          >
+          <Button type="button" onClick={handleNextStep} className={clsx(currentStep >= steps.length && "hidden", "")}>
             Suivant
           </Button>
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className={clsx(currentStep < steps.length && "hidden", "")}
-          >
+          <Button type="submit" disabled={isSubmitting} className={clsx(currentStep < steps.length && "hidden", "")}>
             Créer et voir mon projet
           </Button>
         </div>

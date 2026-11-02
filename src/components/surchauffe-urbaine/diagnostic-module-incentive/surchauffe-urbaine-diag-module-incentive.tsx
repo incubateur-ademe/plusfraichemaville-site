@@ -64,9 +64,7 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
                   Observez la surchauffe au sein de votre espace à un instant “T” à l’aide de quatre indicateurs open
                   source et de vos propres relevés terrain.
                 </div>
-                <div className="fr-btn fr-btn--sm group-hover:bg-dsfr-hover-blue-sun">
-                  Calculer les indicateurs
-                </div>
+                <div className="fr-btn fr-btn--sm group-hover:bg-dsfr-hover-blue-sun">Calculer les indicateurs</div>
               </div>
             </div>
             <Image
@@ -110,9 +108,7 @@ export const SurchauffeUrbaineDiagModuleIncentive = ({ className }: { className?
                 <div className="mb-8 text-left text-sm text-dsfr-text-mention-grey">
                   Analysez la surchauffe urbaine sur votre territoire, en autonomie ou avec un prestataire.
                 </div>
-                <div className="fr-btn fr-btn--sm group-hover:bg-dsfr-hover-blue-sun">
-                  Explorer les méthodes
-                </div>
+                <div className="fr-btn fr-btn--sm group-hover:bg-dsfr-hover-blue-sun">Explorer les méthodes</div>
               </div>
             </div>
             <Image

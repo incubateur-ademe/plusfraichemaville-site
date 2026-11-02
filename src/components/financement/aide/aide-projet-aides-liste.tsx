@@ -49,10 +49,7 @@ export const AideProjetAidesListe = () => {
         </AideProjetRecap>
         {hasSubmissionDeadline && <AideProjetCardDeadline aides={projetAides} ariaId={`projet-${projet?.id}`} />}
       </div>
-      <GenericFicheLink
-        href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
-        className="fr-btn fr-btn--secondary"
-      >
+      <GenericFicheLink href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD} className="fr-btn fr-btn--secondary">
         Revenir au tableau de bord
       </GenericFicheLink>
     </div>

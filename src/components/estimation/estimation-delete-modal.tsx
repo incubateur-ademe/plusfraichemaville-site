@@ -22,11 +22,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
 
   return (
     <>
-      <Button
-        priority="secondary"
-        nativeButtonProps={modal.buttonProps}
-        className="fr-btn fr-btn--icon-left"
-      >
+      <Button priority="secondary" nativeButtonProps={modal.buttonProps} className="fr-btn fr-btn--icon-left">
         Supprimer
       </Button>
       <modal.Component

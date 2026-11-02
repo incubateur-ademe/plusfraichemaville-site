@@ -85,9 +85,7 @@ export const FicheDiagnosticChoixParcours = () => {
               Observez la surchauffe au sein de votre espace à un instant “T” à l’aide de quatre indicateurs open source
               et de vos propres relevés terrain.
             </div>
-            <div className="fr-btn group-hover:bg-dsfr-hover-blue-sun">
-              {parcoursIndicateursButtonLabel}
-            </div>
+            <div className="fr-btn group-hover:bg-dsfr-hover-blue-sun">{parcoursIndicateursButtonLabel}</div>
           </div>
         </div>
         <div className="pfmv-strong-card fr-enlarge-link group flex max-w-[30rem] flex-col">
@@ -115,10 +113,7 @@ export const FicheDiagnosticChoixParcours = () => {
           </div>
         </div>
       </div>
-      <GenericFicheLink
-        href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
-        className="fr-btn fr-btn--secondary"
-      >
+      <GenericFicheLink href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD} className="fr-btn fr-btn--secondary">
         Revenir au tableau de bord
       </GenericFicheLink>
     </>
