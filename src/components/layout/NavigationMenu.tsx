@@ -20,8 +20,7 @@ export default function NavigationMenu() {
             pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION ||
             pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE ||
             pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE ||
-            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE ||
-            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
+            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE,
           text: "Comprendre",
           menuLinks: [
             {
@@ -60,15 +59,6 @@ export default function NavigationMenu() {
               },
               text: "Surchauffe urbaine : quels risques pour la santé ?",
             },
-            {
-              linkProps: {
-                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
-                target: "_self",
-                onClick: cancelCurrentProjet,
-                prefetch: false,
-              },
-              text: "Vague de chaleur : répondre à l'urgence, rafraîchir durablement son territoire",
-            },
           ],
         },
         {
@@ -102,13 +92,19 @@ export default function NavigationMenu() {
         {
           isActive:
             pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_TIMING) ||
-            pathname?.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS),
+            pathname?.startsWith(PFMV_ROUTES.FICHES_SOLUTIONS) ||
+            pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
           text: "Passer à l'action",
           menuLinks: [
             {
-              text: <span className="font-bold">Créer un projet de rafraîchissement</span>,
+              text: (
+                <span>
+                  Créer un projet de rafraîchissement{" "}
+                  <span className="fr-icon-arrow-right-line fr-icon--sm ml-2" aria-hidden="true" />
+                </span>
+              ),
               linkProps: {
-                className: "bg-dsfr-beige-galet",
+                className: "text-pfmv-navy",
                 href: PFMV_ROUTES.ESPACE_PROJET,
                 target: "_self",
                 onClick: cancelCurrentProjet,
@@ -134,6 +130,15 @@ export default function NavigationMenu() {
                 onClick: cancelCurrentProjet,
                 prefetch: false,
               },
+            },
+            {
+              linkProps: {
+                href: PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE,
+                target: "_self",
+                onClick: cancelCurrentProjet,
+                prefetch: false,
+              },
+              text: "Vague de chaleur : répondre à l'urgence, rafraîchir durablement son territoire",
             },
           ],
         },
