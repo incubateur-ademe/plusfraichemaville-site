@@ -108,7 +108,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
             </Button>
           )}
           {aide.application_url && (
-            <Button className="rounded-3xl" size="small" linkProps={{ target: "_blank", href: aide.application_url }}>
+            <Button size="small" linkProps={{ target: "_blank", href: aide.application_url }}>
               Candidater
             </Button>
           )}

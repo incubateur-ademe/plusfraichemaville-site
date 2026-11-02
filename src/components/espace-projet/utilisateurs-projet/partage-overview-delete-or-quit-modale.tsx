@@ -46,13 +46,13 @@ export const PartageOverviewDeleteOrQuitModale = () => {
         <div>
           <p className="mb-4">{currentDeleteOrQuitModal?.options.description}</p>
           <div className="ml-auto w-fit">
-            <Button priority="tertiary" className="mr-4 rounded-3xl" onClick={modal.close}>
+            <Button priority="tertiary" className="mr-4" onClick={modal.close}>
               Annuler
             </Button>
             {currentDeleteOrQuitModal?.options.confirmLabel && (
               <Button
                 priority="tertiary"
-                className="rounded-3xl !text-pfmv-climadiag-red"
+                className="!text-pfmv-climadiag-red"
                 onClick={() => {
                   currentDeleteOrQuitModal?.options.action();
                   modal.close();

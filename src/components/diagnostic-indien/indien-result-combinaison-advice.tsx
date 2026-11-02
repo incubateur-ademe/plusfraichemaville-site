@@ -40,7 +40,7 @@ export const IndienResultCombinaisonAdvice = ({
           ])}
         </div>
         <LinkWithoutPrefetch
-          className="fr-btn fr-btn--tertiary fr-btn--sm mt-6 rounded-3xl"
+          className="fr-btn fr-btn--tertiary fr-btn--sm mt-6"
           href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS_LISTE_TYPE_FILTER(projetId, typeSolution.code)}
         >
           {typeSolution.textButton}

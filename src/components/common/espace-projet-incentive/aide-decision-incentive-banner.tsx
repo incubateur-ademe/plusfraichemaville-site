@@ -40,7 +40,7 @@ export default function AideDecisionIncentiveBanner({ className }: { className?:
           Composez votre combinaison de solutions en répondant à quelques questions sur votre espace.
         </div>
         {status === "authenticated" ? (
-          <Button className="rounded-3xl" onClick={modalChoixProjet.open}>
+          <Button onClick={modalChoixProjet.open}>
             Continuer sur l'espace projet
           </Button>
         ) : (

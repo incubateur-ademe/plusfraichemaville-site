@@ -36,7 +36,7 @@ export const ModaleAideDecisionChoixProjet = ({ modal }: { modal: DSFRModal }) =
           <div className="mb-12">Vous devez créer un projet pour pouvoir accéder à l’aide à la décision.</div>
           <Button
             priority="primary"
-            className="mb-4 mr-4 rounded-3xl md:mb-0"
+            className="mb-4 mr-4 md:mb-0"
             onClick={() => {
               modal.close();
               router.push(
@@ -46,7 +46,7 @@ export const ModaleAideDecisionChoixProjet = ({ modal }: { modal: DSFRModal }) =
           >
             Créer un projet
           </Button>
-          <Button onClick={modal.close} priority="secondary" className="rounded-3xl">
+          <Button onClick={modal.close} priority="secondary">
             Continuer ma lecture
           </Button>
         </>
@@ -72,10 +72,10 @@ export const ModaleAideDecisionChoixProjet = ({ modal }: { modal: DSFRModal }) =
               })}
             </Select>
           </div>
-          <Button className="mb-4 mr-4 rounded-3xl !text-sm md:mb-0" disabled={selectedProjetId < 1} onClick={validate}>
+          <Button className="mb-4 mr-4 !text-sm md:mb-0" disabled={selectedProjetId < 1} onClick={validate}>
             Accéder à l’aide à la décision
           </Button>
-          <Button onClick={modal.close} priority="secondary" className="rounded-3xl !text-sm">
+          <Button onClick={modal.close} priority="secondary" className="!text-sm">
             Annuler
           </Button>
         </>

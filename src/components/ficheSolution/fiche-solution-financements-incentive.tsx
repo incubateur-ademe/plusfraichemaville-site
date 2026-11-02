@@ -81,7 +81,7 @@ export default function FicheSolutionFinancementsIncentive({ ficheId, nbAides }:
         </>
       )}
       <div className="flex justify-center">
-        <Button className="mb-8 rounded-3xl" onClick={handleClick} disabled={isSubmitting}>
+        <Button className="mb-8" onClick={handleClick} disabled={isSubmitting}>
           {buttonLabel}
         </Button>
       </div>

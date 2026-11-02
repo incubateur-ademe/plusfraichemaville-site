@@ -24,13 +24,13 @@ export default async function FicheDiagnosticListePage(props: { params: Promise<
         <div className="mt-14 flex items-center justify-between">
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
-            className="fr-btn fr-btn--secondary rounded-3xl"
+            className="fr-btn fr-btn--secondary"
           >
             Revenir au tableau de bord
           </GenericFicheLink>
           <LinkWithoutPrefetch
             href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_MES_PRESTATIONS(+params.projetId)}
-            className="fr-btn fr-btn rounded-3xl"
+            className="fr-btn fr-btn"
           >
             Valider mes méthodes
           </LinkWithoutPrefetch>

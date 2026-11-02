@@ -152,7 +152,7 @@ export const UserInfoForm = ({ user, buttonLabel, newUser }: { user: User; butto
           <a id={COMMUNICATION_SETTINGS_ANCHOR} />
         </Default>
       </Conditional>
-      <Button className={`mt-6 rounded-3xl bg-pfmv-navy text-sm`} type="submit" disabled={disabled}>
+      <Button className="mt-6 bg-pfmv-navy text-sm" type="submit" disabled={disabled}>
         {buttonLabel}
       </Button>
     </form>

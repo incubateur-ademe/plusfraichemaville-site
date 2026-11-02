@@ -61,7 +61,6 @@ export default function ListeEstimationPageClient() {
         <div className="mt-12 flex flex-row gap-6">
           {canEditProjet && (
             <Button
-              className="rounded-3xl"
               iconId="ri-add-circle-fill"
               iconPosition="left"
               linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_CREATION_ESTIMATION(currentProjet.id), target: "_self" }}
@@ -71,7 +70,7 @@ export default function ListeEstimationPageClient() {
           )}
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
-            className="fr-btn fr-btn--secondary rounded-3xl"
+            className="fr-btn fr-btn--secondary"
           >
             Revenir au tableau de bord
           </GenericFicheLink>

@@ -89,7 +89,7 @@ export const AddSolutionsToEstimationForm = ({
     return (
       <>
         <p className="text-lg">Toutes les solutions du projet sont déjà présentes dans cette estimation.</p>
-        <Button className="mt-4 rounded-3xl" onClick={handleCancel}>
+        <Button className="mt-4" onClick={handleCancel}>
           Retour
         </Button>
       </>
@@ -127,10 +127,10 @@ export const AddSolutionsToEstimationForm = ({
           </div>
 
           <div className="flex justify-end gap-4">
-            <Button className="rounded-3xl bg-pfmv-navy" type="submit" disabled={disabled}>
+            <Button className="bg-pfmv-navy" type="submit" disabled={disabled}>
               {"Valider"}
             </Button>
-            <Button className="rounded-3xl" priority="secondary" onClick={handleCancel} type="button">
+            <Button priority="secondary" onClick={handleCancel} type="button">
               {"Annuler"}
             </Button>
           </div>

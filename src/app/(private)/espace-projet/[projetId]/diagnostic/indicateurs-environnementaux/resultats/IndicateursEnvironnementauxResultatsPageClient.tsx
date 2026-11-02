@@ -32,7 +32,7 @@ export default function IndicateursEnvironnementauxResultatsPageClient() {
         </h1>
         <LinkWithoutPrefetch
           href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(currentProjet.id)}
-          className="fr-btn rounded-3xl"
+          className="fr-btn"
         >
           Renseigner les données de diagnostic
         </LinkWithoutPrefetch>
@@ -52,7 +52,7 @@ export default function IndicateursEnvironnementauxResultatsPageClient() {
           <div>
             <LinkWithoutPrefetch
               href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(currentProjet.id)}
-              className="fr-btn fr-btn--secondary rounded-3xl"
+              className="fr-btn fr-btn--secondary"
             >
               Modifier la saisie
             </LinkWithoutPrefetch>

@@ -51,7 +51,7 @@ export const SurchauffeUrbaineTimingSante = ({ className }: { className?: string
       <div className="text-center">
         <LinkWithoutPrefetch
           href={PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE}
-          className="fr-btn fr-btn--secondary mt-8 rounded-3xl"
+          className="fr-btn fr-btn--secondary mt-8"
         >
           Surchauffe urbaine et santé : comprendre les risques pour mieux protéger les habitants
         </LinkWithoutPrefetch>

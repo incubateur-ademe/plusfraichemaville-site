@@ -37,7 +37,7 @@ export default function EspaceProjetIncentiveBanner({
       <div className={"mx-auto md:mt-6"}>
         <p className="fr-h5 max-w-[31rem] text-wrap">{message}</p>
         {status === "authenticated" ? (
-          <Button className="mb-4  rounded-3xl" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
+          <Button className="mb-4" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
             {"Continuer sur l'espace projet !"}
           </Button>
         ) : (

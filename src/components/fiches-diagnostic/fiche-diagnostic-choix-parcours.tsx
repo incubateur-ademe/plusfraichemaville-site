@@ -85,7 +85,7 @@ export const FicheDiagnosticChoixParcours = () => {
               Observez la surchauffe au sein de votre espace à un instant “T” à l’aide de quatre indicateurs open source
               et de vos propres relevés terrain.
             </div>
-            <div className="fr-btn rounded-3xl group-hover:bg-dsfr-hover-blue-sun">
+            <div className="fr-btn group-hover:bg-dsfr-hover-blue-sun">
               {parcoursIndicateursButtonLabel}
             </div>
           </div>
@@ -111,13 +111,13 @@ export const FicheDiagnosticChoixParcours = () => {
             <div className="mb-8 text-left font-normal text-dsfr-text-mention-grey">
               {parcoursPrestationDescription}
             </div>
-            <div className="fr-btn rounded-3xl group-hover:bg-dsfr-hover-blue-sun">{parcoursPrestationButtonLabel}</div>
+            <div className="fr-btn group-hover:bg-dsfr-hover-blue-sun">{parcoursPrestationButtonLabel}</div>
           </div>
         </div>
       </div>
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
-        className="fr-btn fr-btn--secondary rounded-3xl"
+        className="fr-btn fr-btn--secondary"
       >
         Revenir au tableau de bord
       </GenericFicheLink>

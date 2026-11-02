@@ -25,7 +25,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
       <Button
         priority="secondary"
         nativeButtonProps={modal.buttonProps}
-        className="fr-btn fr-btn--icon-left rounded-3xl"
+        className="fr-btn fr-btn--icon-left"
       >
         Supprimer
       </Button>
@@ -37,7 +37,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
             doClosesModal: false,
             children: "Supprimer",
             priority: "primary",
-            className: "rounded-3xl !min-h-fit !text-sm mr-4",
+            className: "!min-h-fit !text-sm mr-4",
 
             onClick: async () => {
               const res = await deleteEstimationAction(estimation.id);
@@ -56,7 +56,7 @@ export function EstimationDeleteModal({ estimation }: ListeProjetsCardDeleteModa
             doClosesModal: true,
             children: "Annuler",
             priority: "secondary",
-            className: "rounded-3xl !min-h-fit !text-sm mr-4",
+            className: "!min-h-fit !text-sm mr-4",
           },
         ]}
       >

@@ -137,7 +137,7 @@ export default function EstimationMateriauSimpleFieldForm({
         />
         <div className="ml-auto mr-0 mt-10 flex w-fit items-center gap-4">
           <Button
-            className="rounded-3xl !p-0"
+            className="!p-0"
             onClick={form.handleSubmit(onSubmitAndPrevious)}
             disabled={disabled}
             priority="tertiary"
@@ -150,14 +150,13 @@ export default function EstimationMateriauSimpleFieldForm({
             </div>
           </Button>
           <Button
-            className="rounded-3xl"
             onClick={form.handleSubmit(onSubmitAndClose)}
             disabled={disabled}
             priority="secondary"
           >
             {"Enregistrer et finir plus tard"}
           </Button>
-          <Button className="rounded-3xl !p-0" onClick={form.handleSubmit(onSubmitAndNext)} disabled={disabled}>
+          <Button className="!p-0" onClick={form.handleSubmit(onSubmitAndNext)} disabled={disabled}>
             <div
               className="h-10 px-4 py-2"
               onClick={() => scrollToTop(`#custom-estimation-materiaux-modal-${estimationId}`)}

@@ -47,7 +47,7 @@ export const PartageOverviewMemberInviteButton = () => {
 
   return (
     <>
-      <Button priority="primary" onClick={modal.open} className="rounded-3xl" iconId="ri-add-circle-fill">
+      <Button priority="primary" onClick={modal.open} iconId="ri-add-circle-fill">
         Inviter un nouveau membre
       </Button>
       <modal.Component title="Inviter un membre" size="small" className="rounded-modal min-h-[296px]">
@@ -70,11 +70,10 @@ export const PartageOverviewMemberInviteButton = () => {
               onClick={modal.close}
               nativeButtonProps={modal.buttonProps}
               type="button"
-              className="rounded-3xl"
             >
               Annuler
             </Button>
-            <Button priority="primary" type="submit" className="rounded-3xl">
+            <Button priority="primary" type="submit">
               Inviter
             </Button>
           </div>

@@ -14,7 +14,7 @@ export const NewsletterLinkedin = () => (
                 {"Les infos pratiques pour suivre et utiliser le service Plus fraîche ma ville au quotidien"}
               </p>
               <div className="flex w-full flex-row flex-wrap items-center gap-4 md:justify-end">
-                <LinkWithoutPrefetch className="fr-btn rounded-3xl" href={PFMV_ROUTES.NEWSLETTER}>
+                <LinkWithoutPrefetch className="fr-btn" href={PFMV_ROUTES.NEWSLETTER}>
                   S'abonner
                 </LinkWithoutPrefetch>
               </div>
@@ -35,7 +35,7 @@ export const NewsletterLinkedin = () => (
                   Plus fraîche ma ville ADEME
                 </div>
                 <LinkWithoutPrefetch
-                  className="fr-btn rounded-3xl"
+                  className="fr-btn"
                   target="_blank"
                   href="https://www.linkedin.com/groups/13150515/"
                 >

@@ -318,7 +318,7 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
 
       <div className="mt-10">
         {isSubmitting ? (
-          <Button className="rounded-3xl" type="submit" disabled>
+          <Button type="submit" disabled>
             <span className="flex items-center gap-2">
               Télécharger la synthèse
               <Spinner className="!size-6" pathColor="fill-dsfr-text-mention-grey" />
@@ -328,7 +328,6 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
           <Button
             iconId="ri-download-2-line"
             iconPosition="right"
-            className="rounded-3xl"
             type="submit"
             disabled={!currentProjet}
           >
