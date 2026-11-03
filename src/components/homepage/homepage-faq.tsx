@@ -136,7 +136,7 @@ export const HomepageFAQ = () => {
             <span className="underline">professionnels</span> du public comme du privé, vous permet de ne pas avoir
             besoin de vous créer un nouveau compte.
           </p>
-          <ol className="mb-4 ml-4">
+          <ol className="mb-4 ml-4 pl-6">
             <li>Cliquez sur “Se connecter” en haut à droite de votre écran</li>
             <li>
               Saisissez votre adresse email <span className="fr-text--bold underline">professionnelle</span> : vous
@@ -149,7 +149,7 @@ export const HomepageFAQ = () => {
             Vous êtes agent ou élu dans une commune et vous n’avez pas d’adresse professionnelle (votre adresse est en
             @gmail.com , @sfr.fr, etc.)
           </p>
-          <ol className="font-normal">
+          <ol className="pl-6 font-normal">
             <li>Cliquez sur “Se connecter” en haut à droite de votre écran</li>
             <li>Saisissez votre adresse email</li>
             <li>Choisissez un mot de passe</li>
