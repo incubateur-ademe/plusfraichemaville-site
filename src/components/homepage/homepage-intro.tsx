@@ -12,7 +12,7 @@ export const HomepageIntro = () => {
             Agissez durablement <br /> contre la surchauffe urbaine
           </h1>
           <p className="fr-h5 max-w-xl font-bold text-pfmv-navy">
-            Le service de l'ADEME qui vous aide à concevoir vos projets de rafraîchissement urbain.
+            Bienvenue sur le service de l'ADEME qui vous aide à concevoir vos projets de rafraîchissement urbain.
           </p>
           <div className="fr-mt-4w flex justify-center lg:justify-start">
             <Button linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }} size="large">

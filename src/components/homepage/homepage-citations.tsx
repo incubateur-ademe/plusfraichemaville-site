@@ -26,7 +26,7 @@ export const HomepageCitations = () => {
         <hgroup>
           <h2 className="fr-h2 !mb-2 text-center text-dsfr-text-inverted-grey">Ce qu’en pense notre communauté</h2>
           <p className="fr-text--lead text-center text-dsfr-text-inverted-grey">
-            Découvrez comment Plus fraîche ma ville aide déjà +600 collectivités
+            Découvrez comment Plus fraîche ma ville aide déjà plus de 900 collectivités
           </p>
         </hgroup>
         <HomepageCitationsSlider citations={citationsInHome} />

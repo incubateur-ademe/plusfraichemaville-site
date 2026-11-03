@@ -1,5 +1,7 @@
 import Link from "next/link";
 import Accordion from "@codegouvfr/react-dsfr/Accordion";
+import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
+import { PFMV_ROUTES } from "@/src/helpers/routes";
 
 export const HomepageFAQ = () => {
   const faqHome = [
@@ -188,13 +190,14 @@ export const HomepageFAQ = () => {
       <hgroup className="fr-mb-3w">
         <h2 className="!fr-h3 !mb-2">Questions fréquentes sur Plus fraîche ma ville</h2>
       </hgroup>
-      <div className="fr-accordions-group">
+      <div className="fr-accordions-group fr-mb-3w">
         {faqHome.map((faqItem) => (
           <Accordion label={faqItem.question} key={faqItem.slug}>
             {faqItem.reponse}
           </Accordion>
         ))}
       </div>
+      <LinkWithoutPrefetch className="fr-link fr-link--icon-right fr-icon-arrow-right-line" href={PFMV_ROUTES.ESPACE_PROJET}>Créer mon projet</LinkWithoutPrefetch>
     </section>
   );
 };

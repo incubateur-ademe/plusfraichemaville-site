@@ -48,9 +48,9 @@ export const HomepageInspirer = () => {
   ];
 
   return (
-    <section className="fr-my-7w fr-container mx-auto w-full justify-items-center">
-      <h2 className="fr-h2 fr-mb-6w max-w-[50rem] text-center">
-        Découvrez les projets de rafraichissement urbains déjà réalisés partout en France
+    <section className="fr-my-7w fr-container mx-auto w-full">
+      <h2 className="fr-h2 fr-mb-6w !mx-auto max-w-[50rem] text-center">
+        Découvrez les projets de rafraichissement urbain déjà réalisés partout en France
       </h2>
 
       <ul className="flex w-full gap-6 overflow-x-auto !p-0">

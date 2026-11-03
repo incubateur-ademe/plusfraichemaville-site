@@ -18,7 +18,7 @@ export const HomepageIdeeAction = ({ displayTitle = true, displayAllServices = t
       },
       {
         title: "Un budget maîtrisé",
-        description: "Simulation des coûts d’investissement et de fonctionnement pour cadrer votre enveloppe",
+        description: "Simulation des coûts d’investissement et d'entretien pour cadrer votre enveloppe",
         picto: "estimation",
         mainService: true,
       },
