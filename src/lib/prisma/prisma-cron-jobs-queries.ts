@@ -30,22 +30,21 @@ export const cronsServices = {
 
 export const getUsersAndProjectsFromLastSync = async ({
   service,
+  endDate,
 }: {
   service: keyof typeof cronsServices;
+  endDate?: Date;
 }): Promise<UserWithAdminProjets[]> => {
   const lastSync = await cronsServices[service]();
   const lastSyncDate = lastSync?.execution_end_time ?? new Date(0);
-  const lastSyncTimeParams = [
-    { created_at: { gte: lastSyncDate } },
-    { updated_at: { gte: lastSyncDate } },
-    { deleted_at: { gte: lastSyncDate } },
-  ];
+  const syncWindow = { gte: lastSyncDate, ...(endDate ? { lt: endDate } : {}) };
+  const lastSyncTimeParams = [{ created_at: syncWindow }, { updated_at: syncWindow }, { deleted_at: syncWindow }];
 
   return prismaClient.user.findMany({
     where: {
       OR: [
-        { created_at: { gte: lastSyncDate } },
-        { updated_at: { gte: lastSyncDate } },
+        { created_at: syncWindow },
+        { updated_at: syncWindow },
         {
           projets: {
             some: {

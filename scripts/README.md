@@ -7,6 +7,13 @@
 Synchronisation de notre base projets et utilisateurs avec le CRM Connect.  
 Lancé par Cron toutes les nuits.
 
+Options :
+
+- `--delay=<ms>` : pause entre deux appels à Connect (300 ms par défaut).
+- `--end-date=<yyyy-mm-dd>` : ne traite que les éléments modifiés avant cette date (à 00:00 UTC, la journée elle-même est donc exclue) et l'enregistre dans `execution_end_time`. Le prochain lancement reprendra à partir de cette date.
+
+`pnpm run connect-sync --delay=500 --end-date=2026-10-15`
+
 ### [csm-mail-batch](csm-mail-batch.ts)
 
 Envoie des mails CSM via Brevo (création de projets, inactivité au bout de 10 jours, etc...).  
