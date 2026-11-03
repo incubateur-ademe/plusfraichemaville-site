@@ -2,38 +2,61 @@ import Image from "next/image";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 
-export const HomepageIdeeAction = () => {
+type HomepageIdeeActionProps = {
+  displayTitle?: boolean;
+  displayAllServices?: boolean;
+};
+
+export const HomepageIdeeAction = ({ displayTitle = true, displayAllServices = true }: HomepageIdeeActionProps) => {
   const data = {
     blocs: [
       {
         title: "Sachez où agir en premier",
         description: "Un coefficient de rafraîchissement calculé en quelques clics et des méthodes de diagnostic",
         picto: "diagnostic",
+        mainService: true,
       },
       {
         title: "Un budget maîtrisé",
         description: "Simulation des coûts d’investissement et de fonctionnement pour cadrer votre enveloppe",
         picto: "estimation",
+        mainService: true,
       },
       {
         title: "Evitez les faux pas",
         description: "45 solutions éprouvées avec les bonnes pratiques et les erreurs à éviter",
         picto: "solutions",
+        mainService: true,
       },
       {
         title: "Les aides à portée de main",
         description: "Opportunités de financements et contacts pour concrétiser votre projet",
         picto: "financement",
+        mainService: true,
+      },
+      {
+        title: "Invitez des membres à collaborer sur votre projet",
+        description: "Partagez la conception de votre projet au sein de votre collectivité",
+        picto: "collaborer",
+        mainService: false,
+      },
+      {
+        title: "Annuaire des projets Plus fraîche ma ville",
+        description: "Trouvez les contacts utiles à votre projet : collectivités, bureaux d'étude, AMO, entreprises",
+        picto: "annuaire",
+        mainService: false,
       },
     ],
   };
 
+  const blocs = displayAllServices ? data.blocs : data.blocs.filter((bloc) => bloc.mainService);
+
   return (
-    <section className="fr-my-8w fr-container mx-auto w-full text-center">
-      <h2 className="fr-h2 fr-mb-6w">De l'idée à l'action sans partir de zéro</h2>
+    <section className="fr-mb-8w fr-container mx-auto w-full text-center">
+      {displayTitle && <h2 className="fr-h2 fr-mt-8w fr-mb-6w">De l'idée à l'action sans partir de zéro</h2>}
       <div className="fr-py-6w fr-px-3w md:fr-p-6w bg-dsfr-beige-galet text-left">
         <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
-          {data.blocs.map((bloc, index) => (
+          {blocs.map((bloc, index) => (
             <div className="flex flex-col gap-3 self-center md:flex-row md:gap-6" key={index}>
               <Image
                 className="size-16 h-full shrink-0 md:size-28"

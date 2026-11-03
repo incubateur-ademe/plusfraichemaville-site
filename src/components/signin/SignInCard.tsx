@@ -8,7 +8,7 @@ import ProConnectButton from "@codegouvfr/react-dsfr/ProConnectButton";
 const messages = {
   connect:
     // eslint-disable-next-line max-len
-    "Vous êtes agent ou élu(e) d’une collectivité ? Connectez-vous, créez votre projet et accédez à de nombreuses recommandations !",
+    "Vous êtes agent ou élu(e) d’une collectivité ? Connectez-vous et créez votre projet pour accéder à de nombreux outils et recommandations !",
   // eslint-disable-next-line max-len
   save: "Vous êtes agent ou élu(e) d’une collectivité ? Connectez-vous pour sauvegarder vos solutions et accéder à de nombreuses recommandations.",
 };

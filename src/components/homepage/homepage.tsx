@@ -29,7 +29,7 @@ export const Homepage = () => {
         className="absolute right-0 top-[52rem] -z-50 hidden md:block"
       />
       <HomepageIntro />
-      <HomepageIdeeAction />
+      <HomepageIdeeAction displayAllServices={false} />
       <HomepageCitations />
       <HomepageInspirer />
       <HomepageSurchauffeUrbaine />
