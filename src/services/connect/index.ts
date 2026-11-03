@@ -5,6 +5,11 @@ import { mapProjetToConnectProjet, mapUserToConnectContact } from "@/src/service
 import { flattenUsersProjectsToProjects } from "@/src/components/liste-projets/helpers";
 
 const CONNECT_API_BASE_URL = process.env.CONNECT_API_BASE_URL;
+const CONNECT_BATCH_DEFAULT_DELAY_MS = 300;
+const CONNECT_BATCH_MAX_ATTEMPTS = 3;
+const CONNECT_RETRY_BASE_DELAY_MS = 1000;
+
+const wait = (delayMs: number) => new Promise((resolve) => setTimeout(resolve, delayMs));
 
 const config = {
   headers: {
@@ -14,13 +19,30 @@ const config = {
   },
 };
 
-export const createConnectContact = async (contact: ConnectContact): Promise<ConnectResponse | undefined> => {
-  try {
-    const response = await fetch(`${CONNECT_API_BASE_URL}/personnes`, {
+const postToConnect = async (path: string, body: ConnectContact | ConnectProjet, maxAttempts: number) => {
+  const post = () =>
+    fetch(`${CONNECT_API_BASE_URL}${path}`, {
       method: "POST",
       headers: config.headers,
-      body: JSON.stringify(contact),
+      body: JSON.stringify(body),
     });
+
+  let response = await post();
+  for (let attempt = 1; response.status >= 500 && attempt < maxAttempts; attempt++) {
+    console.log(`Connect ${path} : HTTP ${response.status}, tentative ${attempt + 1}/${maxAttempts} à venir...`);
+    await response.body?.cancel();
+    await wait(CONNECT_RETRY_BASE_DELAY_MS * attempt);
+    response = await post();
+  }
+  return response;
+};
+
+export const createConnectContact = async (
+  contact: ConnectContact,
+  maxAttempts = 1,
+): Promise<ConnectResponse | undefined> => {
+  try {
+    const response = await postToConnect("/personnes", contact, maxAttempts);
 
     if (!response.ok) {
       captureError(`Erreur lors de la création du contact dans Connect: ${response.statusText}`);
@@ -32,13 +54,12 @@ export const createConnectContact = async (contact: ConnectContact): Promise<Con
   }
 };
 
-export const createConnectProjet = async (projet: ConnectProjet): Promise<ConnectResponse | undefined> => {
+export const createConnectProjet = async (
+  projet: ConnectProjet,
+  maxAttempts = 1,
+): Promise<ConnectResponse | undefined> => {
   try {
-    const response = await fetch(`${CONNECT_API_BASE_URL}/projets`, {
-      method: "POST",
-      headers: config.headers,
-      body: JSON.stringify(projet),
-    });
+    const response = await postToConnect("/projets", projet, maxAttempts);
 
     if (!response.ok) {
       captureError(`Erreur lors de la création du projet ${projet.idProjet} dans Connect: ${response.statusText}`);
@@ -52,6 +73,7 @@ export const createConnectProjet = async (projet: ConnectProjet): Promise<Connec
 
 export const connectBatchSync = async (
   usersWithAdminProjets: UserWithAdminProjets[],
+  delayMs = CONNECT_BATCH_DEFAULT_DELAY_MS,
 ): Promise<{
   success: boolean;
   errors: ({ email: string; error: string } | { idProjet: string; error: string })[];
@@ -64,7 +86,7 @@ export const connectBatchSync = async (
 
   for (const contact of contacts) {
     try {
-      const connectResult = await createConnectContact(contact);
+      const connectResult = await createConnectContact(contact, CONNECT_BATCH_MAX_ATTEMPTS);
       if (!connectResult?.success) {
         errors.push({ email: contact.email, error: `${connectResult?.message} - ${connectResult?.errorMessage}` });
       } else {
@@ -75,12 +97,13 @@ export const connectBatchSync = async (
         errors.push({ email: contact.email, error: error.message });
       }
     }
+    await wait(delayMs);
   }
 
   const allProjets = flattenUsersProjectsToProjects(usersWithAdminProjets).map(mapProjetToConnectProjet);
   for (const projet of allProjets) {
     try {
-      const connectResult = await createConnectProjet(projet);
+      const connectResult = await createConnectProjet(projet, CONNECT_BATCH_MAX_ATTEMPTS);
       if (!connectResult?.success) {
         errors.push({ idProjet: projet.idProjet, error: `${connectResult?.message} - ${connectResult?.errorMessage}` });
       } else {
@@ -91,6 +114,7 @@ export const connectBatchSync = async (
         errors.push({ idProjet: projet.idProjet, error: error.message });
       }
     }
+    await wait(delayMs);
   }
 
   return {
