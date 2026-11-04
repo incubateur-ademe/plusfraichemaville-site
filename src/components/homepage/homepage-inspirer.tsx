@@ -18,7 +18,7 @@ export const HomepageInspirer = () => {
     {
       slug: "verdissons-nos-murs-lille",
       climat_actuel: "oceanique",
-      climat_futur: "mediterraneen",
+      climat_futur: "tempere",
       titre: "“Verdissons nos murs”, le programme de Lille pour végétaliser ses façades",
       image_principale: "/images/homepage/rex/verdissons-nos-murs-lille.jpeg",
       region: {

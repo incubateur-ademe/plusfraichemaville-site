@@ -43,7 +43,7 @@ export const HomepagePartenaires = () => {
               href={partenaire.url}
               target="_blank"
             >
-              <Image src={partenaire.image} alt={partenaire.alt} fill className="object-contain" />
+              <Image src={partenaire.image} alt={partenaire.alt} fill className="object-contain" sizes="128px" />
             </a>
           </li>
         ))}
