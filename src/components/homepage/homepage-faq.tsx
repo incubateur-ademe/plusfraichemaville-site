@@ -197,7 +197,12 @@ export const HomepageFAQ = () => {
           </Accordion>
         ))}
       </div>
-      <LinkWithoutPrefetch className="fr-link fr-link--icon-right fr-icon-arrow-right-line" href={PFMV_ROUTES.ESPACE_PROJET}>Créer mon projet</LinkWithoutPrefetch>
+      <LinkWithoutPrefetch
+        className="fr-link fr-link--icon-right fr-icon-arrow-right-line"
+        href={PFMV_ROUTES.ESPACE_PROJET}
+      >
+        Créer mon projet
+      </LinkWithoutPrefetch>
     </section>
   );
 };

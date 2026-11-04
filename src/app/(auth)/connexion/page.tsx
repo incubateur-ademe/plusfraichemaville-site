@@ -34,7 +34,7 @@ export default async function Connexion(props: { searchParams: Promise<{ callbac
           <Image src="/images/espace-projet/connexion-espace-projet.svg" width={332} height={289} alt="" />
         </div>
       </div>
-      <h2 className="mx-auto mt-16 mb-8 text-center text-2xl font-bold leading-7">
+      <h2 className="mx-auto mb-8 mt-16 text-center text-2xl font-bold leading-7">
         Une fois connecté, créez votre projet, et accédez à tous ces services
       </h2>
       <HomepageIdeeAction displayTitle={false} />
