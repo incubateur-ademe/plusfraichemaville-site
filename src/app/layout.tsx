@@ -60,7 +60,7 @@ export default async function RootLayout(props: PropsWithChildren) {
           <CommonSkipLinks />
           <AppHeader />
           <Toaster position="bottom-left" />
-          <main id="contenu" className="mb-40">
+          <main id="contenu" className="mb-12">
             {children}
           </main>
           <AppFooter />

@@ -3,20 +3,25 @@ import { HomepageCitation, HomepageCitationsSlider } from "@/src/components/home
 export const HomepageCitations = () => {
   const citationsInHome: HomepageCitation[] = [
     {
-      image: "/images/homepage/citations/cuers.jpg",
+      image: "/images/homepage/citations/chanos-curson.jpg",
       citation:
-        "Nous avons modifié le Plan Local d’Urbanisme pour préconiser, voire pour imposer de nouvelles manières " +
-        "de construire avec des obligations plus draconiennes en matière d’arborisation, de non-artificialisation " +
-        "des sols dédiés au stationnement ou de choix de traitement des façades.",
-      auteur: "Bernard Mouttet, Maire de la ville de Cuers",
+        "Avec cet outil, nous avons pris conscience de l’impact de chaque solution. Il permet de " +
+        "dire “il faut travailler sur certains aspects plutôt que d’autres, car il y a des actions" +
+        " qui payent plus que d’autres.",
+      auteur: "Pascal BAUDE, Maire de Chanos-Curson",
     },
     {
-      image: "/images/homepage/citations/cuers.jpg",
+      image: "/images/homepage/citations/chantemerle-les-bles.webp",
       citation:
-        "Nous avons modifié le Plan Local d’Urbanisme pour préconiser, voire pour imposer de nouvelles manières " +
-        "de construire avec des obligations plus draconiennes en matière d’arborisation, de non-artificialisation " +
-        "des sols dédiés au stationnement ou de choix de traitement des façades.",
-      auteur: "Bernard Mouttet, Maire de la ville de Cuers",
+        "Plus fraîche ma ville nous a permis de ne pas passer à côté de sujets essentiels" +
+        " avant de prévoir l’aménagement.",
+      auteur: "Ludovic COSTE, Contrôleur du recouvrement à Chantemerle-les-Blés",
+    },
+    {
+      image: "/images/homepage/citations/crapone-sur-arzon.png",
+      citation:
+        "Plus fraîche ma ville me donne les arguments pour convaincre et sensibiliser les élus comme les habitants.",
+      auteur: "Charlène IMBERT, Cheffe de projet PVD à Craponne-sur-Arzon",
     },
   ];
 

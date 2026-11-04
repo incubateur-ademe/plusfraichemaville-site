@@ -53,7 +53,7 @@ export const HomepageCitationsSlider = ({ citations }: { citations: HomepageCita
                     width={184}
                     height={184}
                     alt=""
-                    className="size-32 shrink-0 rounded-full object-cover md:size-48"
+                    className="size-32 shrink-0 object-contain md:size-40"
                   />
                   <Quote
                     text={citation.citation}
