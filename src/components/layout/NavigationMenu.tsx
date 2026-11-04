@@ -31,6 +31,7 @@ export default function NavigationMenu() {
                 prefetch: false,
               },
               text: "La ville dans une France à +4°C",
+              isActive: pathname === PFMV_ROUTES.SURCHAUFFE_URBAINE_INTRODUCTION,
             },
             {
               linkProps: {
@@ -40,6 +41,7 @@ export default function NavigationMenu() {
                 prefetch: false,
               },
               text: "Les notions clés de la surchauffe urbaine",
+              isActive: pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_COMPRENDRE),
             },
             {
               linkProps: {
@@ -49,6 +51,7 @@ export default function NavigationMenu() {
                 prefetch: false,
               },
               text: "Connaître la sensibilité actuelle et future de ma ville à la surchauffe urbaine",
+              isActive: pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_TERRITOIRE),
             },
             {
               linkProps: {
@@ -58,6 +61,7 @@ export default function NavigationMenu() {
                 prefetch: false,
               },
               text: "Surchauffe urbaine : quels risques pour la santé ?",
+              isActive: pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_RISQUES_SANTE),
             },
           ],
         },
@@ -84,7 +88,7 @@ export default function NavigationMenu() {
                 onClick: cancelCurrentProjet,
                 prefetch: false,
               },
-              text: "Solutions mises en place par les collectivités",
+              text: "Projets réalisés par les collectivités",
               isActive: pathname?.startsWith(PFMV_ROUTES.RETOURS_EXPERIENCE_PROJET),
             },
           ],
@@ -139,6 +143,7 @@ export default function NavigationMenu() {
                 prefetch: false,
               },
               text: "Vague de chaleur : répondre à l'urgence, rafraîchir durablement son territoire",
+              isActive: pathname?.startsWith(PFMV_ROUTES.SURCHAUFFE_URBAINE_REPONDRE_URGENCE),
             },
           ],
         },
