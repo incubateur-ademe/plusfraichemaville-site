@@ -9,7 +9,8 @@ export const HomepageInspirer = () => {
       slug: "toulouse-plus-fraiche",
       climat_actuel: "oceanique",
       climat_futur: "mediterraneen",
-      titre: "Toulouse Plus Fraîche : un plan d’adaptation en 30 actions ",
+      titre:
+        "Cap Toulouse + Fraîche 2050 : faire évoluer la fabrique de la ville pour s'adapter à une trajectoire à +4°C",
       image_principale: "/images/homepage/rex/toulouse-plus-fraiche.jpg",
       region: {
         code: "FR-OCC",
