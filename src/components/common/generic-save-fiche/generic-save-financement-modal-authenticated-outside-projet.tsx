@@ -53,7 +53,7 @@ export const ModalSaveFinancementAuthenticatedOutsideProjet = ({
           <div className="mb-12">Vous devez créer un projet pour découvrir les aides mobilisables.</div>
           <Button
             priority="primary"
-            className="mb-4 mr-4 rounded-3xl md:mb-0"
+            className="mb-4 mr-4 md:mb-0"
             onClick={() => {
               modal.close();
               router.push(
@@ -67,7 +67,7 @@ export const ModalSaveFinancementAuthenticatedOutsideProjet = ({
           >
             Créer un projet
           </Button>
-          <Button onClick={modal.close} priority="secondary" className="rounded-3xl">
+          <Button onClick={modal.close} priority="secondary">
             Continuer ma lecture
           </Button>
         </>
@@ -94,13 +94,13 @@ export const ModalSaveFinancementAuthenticatedOutsideProjet = ({
             </Select>
           </div>
           <Button
-            className="mb-4 mr-4 rounded-3xl !text-sm md:mb-0"
+            className="mb-4 mr-4 !text-sm md:mb-0"
             disabled={selectedProjetId < 1 || isSubmitting}
             onClick={validate}
           >
             Découvrir les aides
           </Button>
-          <Button onClick={modal.close} priority="secondary" className="rounded-3xl !text-sm">
+          <Button onClick={modal.close} priority="secondary" className="!text-sm">
             Annuler
           </Button>
         </>

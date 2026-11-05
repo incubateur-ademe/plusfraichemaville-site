@@ -16,7 +16,7 @@ export const StatutActionUserQuestionnaireSatisfaction = () => {
       <LinkWithoutPrefetch
         href="https://tally.so/r/w8vbRY"
         target="_blank"
-        className="fr-btn rounded-3xl bg-pfmv-navy text-white hover:!bg-dsfr-hover-blue-sun"
+        className="fr-btn bg-pfmv-navy text-white hover:!bg-dsfr-hover-blue-sun"
       >
         Remplir le questionnaire
       </LinkWithoutPrefetch>

@@ -13,7 +13,7 @@ const SignoutButton = () => {
   };
 
   return (
-    <Button className="rounded-3xl" type="button" onClick={() => onLogout()}>
+    <Button type="button" onClick={() => onLogout()}>
       Se déconnecter
     </Button>
   );

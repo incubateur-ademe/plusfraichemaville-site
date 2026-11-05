@@ -49,7 +49,7 @@ export const AideSolutionsFilter = ({
       </p>
       <LinkWithoutPrefetch
         href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(currentProjetId || 0)}
-        className="fr-btn fr-btn--secondary fr-btn--sm shrink-0 rounded-3xl"
+        className="fr-btn fr-btn--secondary fr-btn--sm shrink-0"
       >
         Ajouter des solutions
       </LinkWithoutPrefetch>

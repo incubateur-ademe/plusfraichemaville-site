@@ -174,7 +174,6 @@ Create one component per file.
 - Tailwind utility classes primarily
 - DSFR classes prefixed with `fr-` (French Design System)
 - Use `clsx` for conditional classes
-- Buttons should include `rounded-3xl` class
 
 ### Forms
 

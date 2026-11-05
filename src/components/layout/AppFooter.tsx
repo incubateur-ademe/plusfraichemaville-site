@@ -87,37 +87,6 @@ export default function AppFooter() {
             </ul>
           </div>
         </div>
-        <div className="fr-footer__partners">
-          <h2 className="fr-footer__partners-title !mb-2">Nos partenaires</h2>
-          <div className="fr-footer__partners-logos">
-            <div className="fr-footer__partners-sub">
-              <ul>
-                <li>
-                  <a className="fr-footer__partners-link" href="https://www.amf.asso.fr/" target="_blank">
-                    <Image
-                      className="fr-footer__logo mt-2 max-w-[8rem] object-contain"
-                      height={290}
-                      width={548}
-                      src={"/images/logo-amf.webp"}
-                      alt={"Association des maires de France (AMF)"}
-                    />
-                  </a>
-                </li>
-                <li>
-                  <a className="fr-footer__partners-link" href="https://anru.fr" target="_blank">
-                    <Image
-                      className="fr-footer__logo mt-7 max-w-[8rem] object-contain"
-                      height={259}
-                      width={500}
-                      src={"/images/logo-anru.webp"}
-                      alt={"Agence nationale de l'urbanisme (ANRU)"}
-                    />
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
         <div className="fr-footer__bottom">
           <ul className="fr-footer__bottom-list">
             <li className="fr-footer__bottom-item">

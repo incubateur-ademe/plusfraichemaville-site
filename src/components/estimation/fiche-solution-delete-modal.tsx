@@ -33,7 +33,7 @@ export function FicheSolutionDeleteModal({
 
   return (
     <>
-      <Button priority="secondary" size="small" nativeButtonProps={modal.buttonProps} className="rounded-3xl">
+      <Button priority="secondary" size="small" nativeButtonProps={modal.buttonProps}>
         Supprimer
       </Button>
       <modal.Component
@@ -44,7 +44,7 @@ export function FicheSolutionDeleteModal({
             doClosesModal: false,
             children: "Supprimer",
             priority: "primary",
-            className: "rounded-3xl !min-h-fit !text-sm mr-4",
+            className: "!min-h-fit !text-sm mr-4",
 
             onClick: async () => {
               trackEvent(ESTIMATION_SUPPRESSION_SOLUTION);
@@ -79,7 +79,7 @@ export function FicheSolutionDeleteModal({
             doClosesModal: true,
             children: "Annuler",
             priority: "secondary",
-            className: "rounded-3xl !min-h-fit !text-sm mr-4",
+            className: "!min-h-fit !text-sm mr-4",
           },
         ]}
       >

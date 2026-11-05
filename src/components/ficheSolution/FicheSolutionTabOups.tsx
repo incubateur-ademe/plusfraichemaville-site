@@ -28,7 +28,7 @@ export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttribu
           <br />
           <div className="flex flex-row flex-wrap items-center gap-4">
             <div>{"Vous avez un retour d’expérience à nous partager ? Contactez nous !"}</div>
-            <LinkWithoutPrefetch className="fr-btn fr-btn--tertiary rounded-3xl" href={`/contact`}>
+            <LinkWithoutPrefetch className="fr-btn fr-btn--tertiary" href={`/contact`}>
               Nous contacter
             </LinkWithoutPrefetch>
           </div>

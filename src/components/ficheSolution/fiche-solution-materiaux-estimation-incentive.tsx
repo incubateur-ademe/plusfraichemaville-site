@@ -58,7 +58,7 @@ export default function FicheSolutionMateriauxEstimationIncentive({ ficheId }: {
     <>
       <p>Estimez le coût des solutions choisies pour votre projet directement dans votre espace :</p>
       <div className="flex justify-center">
-        <Button className="mb-8 rounded-3xl" onClick={handleEstimerClick} disabled={isSubmitting}>
+        <Button className="mb-8" onClick={handleEstimerClick} disabled={isSubmitting}>
           {"Estimer le budget pour mon projet"}
         </Button>
       </div>

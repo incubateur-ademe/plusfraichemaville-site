@@ -22,7 +22,7 @@ export default function IndienReminderModal({ projetId }: { projetId: number }) 
 
   return (
     <div>
-      <Button className="fr-btn mb-4 rounded-3xl" nativeButtonProps={modal.buttonProps}>
+      <Button className="fr-btn mb-4" nativeButtonProps={modal.buttonProps}>
         Commencer le calcul
       </Button>
       <div>
@@ -80,12 +80,12 @@ export default function IndienReminderModal({ projetId }: { projetId: number }) 
         </div>
         <div>
           <LinkWithoutPrefetch
-            className="fr-btn mb-6 mr-6 mt-6 rounded-3xl"
+            className="fr-btn mb-6 mr-6 mt-6"
             href={PFMV_ROUTES.ESPACE_PROJET_DIAGNOSTIC_INDICATEURS_QUESTIONS(projetId)}
           >
             C’est parti !
           </LinkWithoutPrefetch>
-          <Button onClick={() => onComebackLater()} priority="secondary" className="rounded-3xl">
+          <Button onClick={() => onComebackLater()} priority="secondary">
             Revenir plus tard
           </Button>
         </div>

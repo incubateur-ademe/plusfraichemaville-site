@@ -22,7 +22,7 @@ export const GenericSaveButtonElement = ({
       {isSaved ? (
         <Button
           onClick={update}
-          className={clsx("rounded-3xl")}
+          className="rounded-3xl"
           iconId="fr-icon-check-line"
           iconPosition="right"
           priority="primary"
@@ -33,7 +33,7 @@ export const GenericSaveButtonElement = ({
       ) : (
         <Button
           onClick={update}
-          className={clsx("rounded-3xl")}
+          className="rounded-3xl"
           iconId="fr-icon-add-line"
           iconPosition="right"
           priority="secondary"

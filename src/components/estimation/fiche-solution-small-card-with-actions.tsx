@@ -42,7 +42,7 @@ export const FicheSolutionSmallCardWithActions = ({
         <EstimationCardPriceInfo estimationInfo={estimationFicheSolution} />
         {isEditMode && (
           <div className="mt-4 flex flex-row gap-2">
-            <Button priority="primary" size="small" onClick={() => onEdit(ficheSolutionId)} className="rounded-3xl">
+            <Button priority="primary" size="small" onClick={() => onEdit(ficheSolutionId)}>
               {isEstimated ? "Modifier" : "Estimer"}
             </Button>
             <FicheSolutionDeleteModal
