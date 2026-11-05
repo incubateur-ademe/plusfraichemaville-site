@@ -128,7 +128,6 @@ export default function BannerProjet({ className }: { className?: string }) {
                               <Button
                                 iconId="ri-download-2-line"
                                 iconPosition="left"
-                                className={clsx("rounded-3xl")}
                                 onClick={handleSyntheseClick}
                                 priority="secondary"
                               >
@@ -137,7 +136,6 @@ export default function BannerProjet({ className }: { className?: string }) {
                             )}
                             <Button
                               iconId="fr-icon-user-add-line"
-                              className={clsx("rounded-3xl")}
                               linkProps={{
                                 href: PFMV_ROUTES.ESPACE_PROJET_UTILISATEURS_PROJET(currentProjet.id),
                               }}

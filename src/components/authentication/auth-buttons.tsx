@@ -20,7 +20,7 @@ export const AuthButtons = () => {
       <LinkWithoutPrefetch
         href={PFMV_ROUTES.RECHERCHE_GLOBALE()}
         className={clsx(
-          "fr-btn fr-btn--tertiary fr-icon-search-line fr-btn--icon-left relative z-10 rounded-3xl",
+          "fr-btn fr-btn--tertiary fr-icon-search-line fr-btn--icon-left relative z-10",
           isSearchPage && "!bg-dsfr-background-action-low-blue-france",
         )}
       >
@@ -31,7 +31,7 @@ export const AuthButtons = () => {
           <AuthButtonEspaceProjet /> <AuthButtonUser />
         </Case>
         <Case condition={status === "loading"}>
-          <div className="h-10 w-40 animate-pulse rounded-3xl bg-dsfr-background-alt-grey" />
+          <div className="h-10 w-40 animate-pulse bg-dsfr-background-alt-grey" />
         </Case>
         <Default>
           <Button
@@ -39,7 +39,6 @@ export const AuthButtons = () => {
             priority="tertiary no outline"
             iconId="fr-icon-user-line"
             iconPosition="left"
-            className="rounded-3xl"
           >
             Se connecter
           </Button>

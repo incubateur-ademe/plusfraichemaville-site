@@ -117,11 +117,11 @@ export const PartageMemberModificationRoleModale = () => {
                   onClick={modal.close}
                   nativeButtonProps={modal.buttonProps}
                   type="button"
-                  className="mr-4 rounded-3xl"
+                  className="mr-4"
                 >
                   Annuler
                 </Button>
-                <Button priority="primary" type="submit" onClick={modal.close} className="rounded-3xl">
+                <Button priority="primary" type="submit" onClick={modal.close}>
                   Sauvegarder
                 </Button>
               </div>

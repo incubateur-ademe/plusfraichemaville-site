@@ -50,7 +50,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
           <div className="mb-12">Vous devez créer un projet pour pouvoir sauvegarder des solutions.</div>
           <Button
             priority="primary"
-            className="mb-4 mr-4 rounded-3xl md:mb-0"
+            className="mb-4 mr-4 md:mb-0"
             onClick={() => {
               modal.close();
               router.push(PFMV_ROUTES.CREATE_PROJET);
@@ -58,7 +58,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
           >
             Créer un projet
           </Button>
-          <Button onClick={modal.close} priority="secondary" className="rounded-3xl">
+          <Button onClick={modal.close} priority="secondary">
             Continuer ma lecture
           </Button>
         </>
@@ -83,17 +83,13 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
                 );
               })}
             </Select>
-            <Button
-              className="!mb-3 !h-fit !min-h-fit rounded-3xl !text-sm"
-              disabled={selectedProjetId < 1}
-              onClick={validate}
-            >
+            <Button className="!mb-3 !h-fit !min-h-fit !text-sm" disabled={selectedProjetId < 1} onClick={validate}>
               Ajouter au projet
             </Button>
           </div>
           <Button
             priority="primary"
-            className="mb-4 mr-4 rounded-3xl !text-sm md:mb-0"
+            className="mb-4 mr-4 !text-sm md:mb-0"
             onClick={modal.close}
             disabled={selectedProjetId < 1 || !enableTdbButton}
           >
@@ -106,7 +102,7 @@ export const ModalSaveModalAuthenticatedOutsideProjet = ({
             }}
             disabled={selectedProjetId < 1 || !enableTdbButton}
             priority="secondary"
-            className="rounded-3xl !text-sm"
+            className="!text-sm"
           >
             Aller au tableau de bord du projet
           </Button>

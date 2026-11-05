@@ -38,7 +38,7 @@ export default function CreateEstimationPageClient() {
                 "vous n'avez pas sélectionné de fiches solutions."}
             </div>
             <Button
-              className="mt-4 rounded-3xl"
+              className="mt-4"
               linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(currentProjet.id), target: "_self" }}
             >
               Sélectionner des fiches solutions

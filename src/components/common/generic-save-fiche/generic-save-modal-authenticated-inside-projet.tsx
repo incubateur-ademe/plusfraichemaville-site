@@ -36,7 +36,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
     >
       <div className="mb-10 text-2xl font-bold">{projet?.nom}</div>
       <Button
-        className="mb-4 mr-4 !min-h-fit rounded-3xl !text-sm before:!content-none"
+        className="mb-4 mr-4 !min-h-fit !text-sm before:!content-none"
         onClick={clickAddMoreCard}
         priority="secondary"
       >
@@ -54,7 +54,7 @@ export const ModalSaveModalAuthenticatedInsideProjet = ({ modal, type }: Generic
             );
           }
         }}
-        className="rounded-3xl !text-sm before:!content-none"
+        className="!text-sm before:!content-none"
       >
         {type === TypeFiche.diagnostic ? "Valider mes méthodes" : "Aller au tableau de bord"}
       </Button>

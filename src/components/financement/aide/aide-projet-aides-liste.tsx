@@ -40,7 +40,7 @@ export const AideProjetAidesListe = () => {
         >
           {canEditProjet && (
             <LinkWithoutPrefetch
-              className="fr-btn !ml-auto !block rounded-3xl"
+              className="fr-btn !ml-auto !block"
               href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES(projet?.id ?? 0)}
             >
               Modifier
@@ -49,10 +49,7 @@ export const AideProjetAidesListe = () => {
         </AideProjetRecap>
         {hasSubmissionDeadline && <AideProjetCardDeadline aides={projetAides} ariaId={`projet-${projet?.id}`} />}
       </div>
-      <GenericFicheLink
-        href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
-        className="fr-btn fr-btn--secondary rounded-3xl"
-      >
+      <GenericFicheLink href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD} className="fr-btn fr-btn--secondary">
         Revenir au tableau de bord
       </GenericFicheLink>
     </div>

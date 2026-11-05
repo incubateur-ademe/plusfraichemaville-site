@@ -95,7 +95,7 @@ export const EstimationInfoForm = ({ projet }: { projet: ProjetWithRelations; es
           ))}
         </div>
 
-        <Button className={`rounded-3xl bg-pfmv-navy`} type="submit" disabled={disabled}>
+        <Button className="bg-pfmv-navy" type="submit" disabled={disabled}>
           {"Faire une estimation"}
         </Button>
         {error && <p className="fr-error-text mb-4 !text-base">{error.message}</p>}
