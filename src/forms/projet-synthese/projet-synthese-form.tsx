@@ -9,7 +9,7 @@ import RadioButtons from "@codegouvfr/react-dsfr/RadioButtons";
 import { ProjetWithRelations } from "@/src/lib/prisma/prismaCustomTypes";
 import { getProjetFichesIdsByType } from "@/src/components/common/generic-save-fiche/helpers";
 import { TypeFiche } from "@/src/helpers/common";
-import { useImmutableSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
+import { useImmutableSwrWithFetcher, useSwrWithFetcher } from "@/src/hooks/use-swr-with-fetcher";
 import { makeFicheSolutionUrlApi } from "@/src/components/ficheSolution/helpers";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { notifications } from "@/src/components/common/notifications";
@@ -22,9 +22,12 @@ import { Spinner } from "@/src/components/common/spinner";
 import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
 import { POSTHOG_EVENTS } from "@/src/helpers/posthog/posthog-events";
 import { useCapturePostHogEvent } from "@/src/hooks/useCapturePostHogEvent";
-import { GET_FICHE_DIAGNOSTIC_BY_IDS } from "@/src/helpers/routes";
+import { GET_CLIMADIAG_INFO_FOR_USER_PROJECTS, GET_FICHE_DIAGNOSTIC_BY_IDS } from "@/src/helpers/routes";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { getValidatedIndiEnSimulationResults } from "@/src/helpers/indicateurs-environnementaux/indi-en-helpers";
+import { useUserStore } from "@/src/stores/user/provider";
+import { Climadiag } from "@/src/components/climadiag/types";
+import { hasLczCoverage } from "@/src/components/climadiag/helpers";
 
 const GENERATION_IN_PROGRESS_MESSAGE =
   "La génération de votre synthèse est en cours, si vous quittez la page maintenant vous annulerez son téléchargement.";
@@ -60,9 +63,19 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
 
   const hasValidatedAnalyseSimplifiee = Boolean(getValidatedIndiEnSimulationResults(currentProjet));
 
+  const userId = useUserStore((state) => state.userInfos?.id);
+  const { data: climadiagInfos } = useSwrWithFetcher<Climadiag[] | null>(
+    userId ? GET_CLIMADIAG_INFO_FOR_USER_PROJECTS(userId) : null,
+  );
+  const climadiagInfo = climadiagInfos?.find((info) => info.code_insee === currentProjet?.collectivite?.code_insee);
+  const hasClimadiag = Boolean(climadiagInfo);
+  const hasCarteLcz = Boolean(climadiagInfo && hasLczCoverage(climadiagInfo));
+
   const form = useForm<ProjetSyntheseFormData>({
     resolver: zodResolver(ProjetSyntheseFormSchema),
     defaultValues: {
+      includeCarteLcz: false,
+      includeClimadiag: false,
       diagnosticIds: [],
       includeAnalyseSimplifiee: hasValidatedAnalyseSimplifiee,
       solutionIds: [],
@@ -73,11 +86,21 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
 
   useUnsavedChanges(form.formState.isSubmitting, GENERATION_IN_PROGRESS_MESSAGE);
 
+  const includeCarteLcz = form.watch("includeCarteLcz");
+  const includeClimadiag = form.watch("includeClimadiag");
   const selectedDiagnosticIds = form.watch("diagnosticIds") || [];
   const includeAnalyseSimplifiee = form.watch("includeAnalyseSimplifiee");
   const selectedSolutionIds = form.watch("solutionIds") || [];
   const selectedEstimationId = form.watch("estimationId");
   const selectedAideIds = form.watch("aideIds") || [];
+
+  useEffect(() => {
+    form.setValue("includeCarteLcz", hasCarteLcz);
+  }, [hasCarteLcz, form]);
+
+  useEffect(() => {
+    form.setValue("includeClimadiag", hasClimadiag);
+  }, [hasClimadiag, form]);
 
   useEffect(() => {
     if (fichesDiagnostic && fichesDiagnostic.length > 0) {
@@ -199,10 +222,36 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
       <div className="mt-8">
         <h2 className="text-lg font-bold">Sélectionnez les informations que vous souhaitez dans la synthèse.</h2>
         <ol className="mt-4 list-inside !pl-0">
-          <li className="fr-h4">
-            <span>Contexte et enjeux climatiques</span>
-            <p className="mt-4 pl-12 text-base font-normal text-dsfr-text-mention-grey">Bientôt disponible</p>
-          </li>
+          {hasClimadiag && (
+            <li className="fr-h4">
+              <span>Contexte et enjeux climatiques</span>
+              <div className="mt-4 pl-12 text-base font-normal">
+                <Checkbox
+                  className="mb-0"
+                  options={[
+                    ...(hasCarteLcz
+                      ? [
+                          {
+                            label: "Cartographies des zones climatiques locales (LCZ)",
+                            nativeInputProps: {
+                              checked: includeCarteLcz,
+                              onChange: () => form.setValue("includeCarteLcz", !includeCarteLcz),
+                            },
+                          },
+                        ]
+                      : []),
+                    {
+                      label: "Climadiag (climat futur)",
+                      nativeInputProps: {
+                        checked: includeClimadiag,
+                        onChange: () => form.setValue("includeClimadiag", !includeClimadiag),
+                      },
+                    },
+                  ]}
+                />
+              </div>
+            </li>
+          )}
           <li className="fr-h4">
             <span>Diagnostic de l’espace</span>
             <div className="mt-4 pl-12 text-base font-normal">

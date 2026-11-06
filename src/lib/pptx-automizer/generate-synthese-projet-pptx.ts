@@ -22,9 +22,17 @@ import { getFicheDiagnosticById } from "@/src/lib/strapi/queries/fiches-diagnost
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { getValidatedIndiEnSimulationResults } from "@/src/helpers/indicateurs-environnementaux/indi-en-helpers";
 import { addAnalyseSimplifieeIntroSlide } from "@/src/lib/pptx-automizer/slides/analyse-simplifiee-intro";
+import { addEnjeuxClimatiquesIntroSlide } from "./slides/enjeux-climatiques-intro";
+import { addCarteLczSlide, loadCarteLczImage } from "./slides/carte-lcz";
+import { addClimadiagSlide } from "./slides/climadiag";
+import { getClimadiagInfoFromCodeInsee } from "@/src/lib/prisma/prisma-climadiag-queries";
+import { Climadiag } from "@/src/components/climadiag/types";
+import { hasLczCoverage } from "@/src/components/climadiag/helpers";
 
 export const generateSyntheseProjetPptx = async ({
   projet,
+  includeCarteLcz = false,
+  includeClimadiag = false,
   diagnosticIds = [],
   includeAnalyseSimplifiee = false,
   solutionIds = [],
@@ -44,6 +52,27 @@ export const generateSyntheseProjetPptx = async ({
 
   const info = await pres.getInfo();
   const slides = info.slidesByTemplate("template");
+
+  const codeInsee = projet.collectivite?.code_insee;
+  const climadiagInfo =
+    codeInsee && (includeCarteLcz || includeClimadiag)
+      ? ((await getClimadiagInfoFromCodeInsee([codeInsee]))[0] as Climadiag | undefined)
+      : undefined;
+  const showClimadiag = includeClimadiag && !!climadiagInfo;
+  // The commune's map is rendered upfront: if a map service fails, the carte LCZ slide is left out
+  // as if it had not been requested, its subtitle on the climate section intro included.
+  const carteLczSlideInfo = slides.find((slideInfo) => slideInfo.number === PptxSlide.CARTE_LCZ);
+  const showCarteLcz =
+    includeCarteLcz &&
+    !!codeInsee &&
+    !!climadiagInfo &&
+    hasLczCoverage(climadiagInfo) &&
+    !!carteLczSlideInfo &&
+    (await loadCarteLczImage(pres, carteLczSlideInfo, codeInsee, climadiagInfo));
+  const sousTitresEnjeuxClimatiques = [
+    ...(showClimadiag ? ["Projections TRACC · Climadiag Commune"] : []),
+    ...(showCarteLcz ? ["Cartographies des zones climatiques locales (LCZ)"] : []),
+  ];
 
   const orderedFichesDiagnostic = (await Promise.all(diagnosticIds.map((id) => getFicheDiagnosticById(id)))).filter(
     (ficheDiagnostic): ficheDiagnostic is FicheDiagnostic => Boolean(ficheDiagnostic),
@@ -115,6 +144,8 @@ export const generateSyntheseProjetPptx = async ({
           slide.modifyElement({ name: element.name, nameIdx: element.nameIdx }, [
             mergeTextRunsInElement,
             (el: XmlElement) =>
+              replaceTagWithBulletList(el, PptxTemplateTag.SOUS_TITRE_ENJEUX_CLIMATIQUES, sousTitresEnjeuxClimatiques),
+            (el: XmlElement) =>
               replaceTagWithBulletList(el, PptxTemplateTag.TITRE_FICHES_DIAGNOSTIC, titresFichesDiagnostic),
             (el: XmlElement) =>
               replaceTagWithBulletList(el, PptxTemplateTag.TITRE_FICHES_SOLUTION, titresFichesSolutions),
@@ -135,6 +166,17 @@ export const generateSyntheseProjetPptx = async ({
 
   for (const slideInfo of slides) {
     if (slideInfo.number === PptxSlide.FICHE_SOLUTION_MATERIAUX) {
+      continue;
+    }
+    // The climate section intro lists the slides that follow it: with none, the whole section
+    // is left out.
+    if (slideInfo.number === PptxSlide.ENJEUX_CLIMATIQUES_INTRO && sousTitresEnjeuxClimatiques.length === 0) {
+      continue;
+    }
+    if (slideInfo.number === PptxSlide.CARTE_LCZ && !showCarteLcz) {
+      continue;
+    }
+    if (slideInfo.number === PptxSlide.CLIMADIAG && !showClimadiag) {
       continue;
     }
     if (
@@ -174,6 +216,16 @@ export const generateSyntheseProjetPptx = async ({
     }
 
     switch (slideInfo.number) {
+      case PptxSlide.ENJEUX_CLIMATIQUES_INTRO:
+        addEnjeuxClimatiquesIntroSlide(addTemplateSlide, slideInfo);
+        break;
+      case PptxSlide.CARTE_LCZ:
+        // showCarteLcz guarantees a code INSEE whose map is already loaded.
+        addCarteLczSlide(addTemplateSlide, slideInfo, codeInsee!);
+        break;
+      case PptxSlide.CLIMADIAG:
+        addClimadiagSlide(addTemplateSlide, slideInfo, climadiagInfo!);
+        break;
       case PptxSlide.FICHES_DIAGNOSTIC_INTRO:
         addFichesDiagnosticIntroSlide(addTemplateSlide, slideInfo);
         break;
