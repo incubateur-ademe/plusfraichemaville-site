@@ -124,6 +124,14 @@ export enum PptxSlideElement {
   SHP_NUITS_CHAUDES = "shp_nuits_chaudes",
   SHP_VDC = "shp_vdc",
   SHP_LEGENDE_CLIMADIAG = "shp_legende_climadiag",
+  // Climadiag slide (4): shapes laid out on top of shp_vdc and shp_legende_climadiag.
+  VDC_PICTO = "vdc_picto",
+  VDC_TITRE = "vdc_titre",
+  VDC_REFERENCE = "vdc_reference",
+  VDC_2030 = "vdc_2030",
+  VDC_2050 = "vdc_2050",
+  VDC_2100 = "vdc_2100",
+  LEGENDE_TEXTE = "legende_texte",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and

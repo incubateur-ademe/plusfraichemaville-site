@@ -28,29 +28,22 @@ const getRowValues = ({ row, reference, projections }: IndicateurRow) => [
   })),
 ];
 
+// The template doesn't group a background with what is laid out on top of it, so each block is
+// listed as its background followed by the shapes on top of it.
+const VDC_ELEMENTS = [
+  PptxSlideElement.SHP_VDC,
+  PptxSlideElement.VDC_PICTO,
+  PptxSlideElement.VDC_TITRE,
+  PptxSlideElement.VDC_REFERENCE,
+  PptxSlideElement.VDC_2030,
+  PptxSlideElement.VDC_2050,
+  PptxSlideElement.VDC_2100,
+];
+
+const LEGENDE_ELEMENTS = [PptxSlideElement.SHP_LEGENDE_CLIMADIAG, PptxSlideElement.LEGENDE_TEXTE];
+
 const getElementPosition = (slideInfo: PptxSlideInfo, name: string) =>
   slideInfo.elements?.find((element) => element.name === name)?.position;
-
-/**
- * The given shape and every shape whose center lies within it, read off the template slide: the
- * template doesn't group a background with what is laid out on top of it.
- */
-const getElementsInside = (slideInfo: PptxSlideInfo, containerName: string) => {
-  const container = getElementPosition(slideInfo, containerName);
-  if (!container) return [];
-
-  return (slideInfo.elements ?? []).flatMap(({ name, nameIdx, position }) => {
-    if (!position) return [];
-    const centerX = position.x + position.cx / 2;
-    const centerY = position.y + position.cy / 2;
-    const isInside =
-      centerX >= container.x &&
-      centerX <= container.x + container.cx &&
-      centerY >= container.y &&
-      centerY <= container.y + container.cy;
-    return isInside ? [{ name, nameIdx, position }] : [];
-  });
-};
 
 /**
  * Moves the legend up by one row, into the space freed by the vague de chaleur row, which keeps
@@ -62,8 +55,10 @@ const moveLegendeUpOneRow = (slide: ISlide, slideInfo: PptxSlideInfo) => {
   if (!nuitsChaudes || !vdc) return;
 
   const rowHeight = vdc.y - nuitsChaudes.y;
-  getElementsInside(slideInfo, PptxSlideElement.SHP_LEGENDE_CLIMADIAG).forEach(({ name, nameIdx, position }) => {
-    slide.modifyElement({ name, nameIdx }, [modify.setPosition({ y: position.y - rowHeight })]);
+  LEGENDE_ELEMENTS.forEach((name) => {
+    const position = getElementPosition(slideInfo, name);
+    if (!position) return;
+    slide.modifyElement({ name }, [modify.setPosition({ y: position.y - rowHeight })]);
   });
 };
 
@@ -100,9 +95,7 @@ export const addClimadiagSlide = (addTemplateSlide: AddTemplateSlide, slideInfo:
     .filter(({ value }) => value != null)
     .map(({ tag, value }) => ({ replace: tag, by: { text: `${value}` } }));
 
-  const vdcElementsToRemove = hasVdc
-    ? []
-    : getElementsInside(slideInfo, PptxSlideElement.SHP_VDC).map((element) => element.name);
+  const vdcElementsToRemove: string[] = hasVdc ? [] : VDC_ELEMENTS;
 
   addTemplateSlide(
     slideInfo,
