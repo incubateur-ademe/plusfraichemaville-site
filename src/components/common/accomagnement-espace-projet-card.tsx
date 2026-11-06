@@ -18,7 +18,7 @@ export default async function AccomagnementEspaceProjetCard() {
           jusqu’à la mise en œuvre des solutions.
         </div>
       </div>
-      <Button linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }} className="my-auto text-nowrap rounded-3xl">
+      <Button linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }} className="my-auto text-nowrap">
         {"Démarrer sur l'espace projet !"}
       </Button>
     </div>

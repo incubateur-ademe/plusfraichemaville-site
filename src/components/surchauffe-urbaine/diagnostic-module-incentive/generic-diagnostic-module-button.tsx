@@ -4,7 +4,6 @@ import { useSession } from "next-auth/react";
 import Button from "@codegouvfr/react-dsfr/Button";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import React from "react";
-import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import { DSFRModal } from "@/src/types/global";
 import { trackEvent } from "@/src/helpers/matomo/track-matomo";
@@ -23,7 +22,7 @@ export const GenericDiagnosticModuleButton = ({ modal, className }: { className?
   };
   return (
     <>
-      <Button className={clsx("rounded-3xl", className)} onClick={handleButtonClick}>
+      <Button className={className} onClick={handleButtonClick}>
         {status != "authenticated" ? "Démarrer sur l'espace projet !" : "Allez au module diagnostic de votre projet"}
       </Button>
     </>

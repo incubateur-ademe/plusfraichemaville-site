@@ -17,7 +17,7 @@ export const StatutActionProjetAnnuaire = () => {
       </div>
       <GenericFicheLink
         href={PFMV_ROUTES.ESPACE_PROJET_ANNUAIRE_MAP_CONTACT}
-        className="fr-btn rounded-3xl bg-pfmv-navy text-white hover:!bg-dsfr-hover-blue-sun"
+        className="fr-btn bg-pfmv-navy text-white hover:!bg-dsfr-hover-blue-sun"
       >
         Voir l’annuaire des projets
       </GenericFicheLink>

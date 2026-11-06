@@ -28,7 +28,6 @@ export const AnnuaireTitle = () => {
             priority="secondary"
             iconId="ri-arrow-down-line"
             iconPosition="right"
-            className=" rounded-3xl"
           >
             Voir mes contacts sauvegardés ({nbContacts})
           </Button>

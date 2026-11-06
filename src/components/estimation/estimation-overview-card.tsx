@@ -141,11 +141,11 @@ export const EstimationOverviewCard = ({
       {canEditEstimation && (
         <div className="float-right mt-12 flex flex-row gap-6">
           {!isEditMode ? (
-            <Button priority="primary" onClick={() => setIsEditMode(true)} className="rounded-3xl">
+            <Button priority="primary" onClick={() => setIsEditMode(true)}>
               Modifier
             </Button>
           ) : (
-            <Button priority="primary" onClick={() => setIsEditMode(false)} className="rounded-3xl">
+            <Button priority="primary" onClick={() => setIsEditMode(false)}>
               Valider
             </Button>
           )}

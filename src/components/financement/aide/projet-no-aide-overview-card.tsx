@@ -37,7 +37,7 @@ export const ProjetNoAideOverviewCard = () => {
             </p>
             <LinkWithoutPrefetch
               href={PFMV_ROUTES.ESPACE_PROJET_FICHES_SOLUTIONS(currentProjet.id)}
-              className="fr-btn fr-btn--secondary shrink-0 rounded-3xl"
+              className="fr-btn fr-btn--secondary shrink-0"
             >
               Ajouter des solutions
             </LinkWithoutPrefetch>
@@ -57,16 +57,13 @@ export const ProjetNoAideOverviewCard = () => {
         <AideProjetRecap isLoading={isLoading} countAides={{ ...countAides, verb: "trouvé" }}>
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_SELECTIONNER_AIDES(currentProjet.id)}
-            className="fr-btn rounded-3xl"
+            className="fr-btn"
           >
             Sélectionner des aides
           </GenericFicheLink>
         </AideProjetRecap>
       </div>
-      <GenericFicheLink
-        href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD}
-        className="fr-btn fr-btn--secondary rounded-3xl"
-      >
+      <GenericFicheLink href={PFMV_ROUTES.ESPACE_PROJET_TABLEAU_DE_BORD} className="fr-btn fr-btn--secondary">
         Revenir au tableau de bord
       </GenericFicheLink>
     </div>

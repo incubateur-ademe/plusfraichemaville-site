@@ -57,7 +57,7 @@ export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
           <div className="mb-12">Vous devez créer un projet pour pouvoir estimer des solutions.</div>
           <Button
             priority="primary"
-            className="mb-4 mr-4 rounded-3xl md:mb-0"
+            className="mb-4 mr-4 md:mb-0"
             onClick={() => {
               modal.close();
               router.push(
@@ -71,7 +71,7 @@ export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
           >
             Créer un projet
           </Button>
-          <Button onClick={modal.close} priority="secondary" className="rounded-3xl">
+          <Button onClick={modal.close} priority="secondary">
             Continuer ma lecture
           </Button>
         </>
@@ -98,13 +98,13 @@ export const ModalSaveEstimationAuthenticatedOutsideProjet = ({
             </Select>
           </div>
           <Button
-            className="mb-4 mr-4 rounded-3xl !text-sm md:mb-0"
+            className="mb-4 mr-4 !text-sm md:mb-0"
             disabled={selectedProjetId < 1 || isSubmitting}
             onClick={validate}
           >
             Estimer la solution
           </Button>
-          <Button onClick={modal.close} priority="secondary" className="rounded-3xl !text-sm">
+          <Button onClick={modal.close} priority="secondary" className="!text-sm">
             Annuler
           </Button>
         </>

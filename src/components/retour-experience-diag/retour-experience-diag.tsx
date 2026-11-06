@@ -74,7 +74,7 @@ export const RetourExperienceDiag = ({ rex, showContacts }: RetourExperienceDiag
                 </div>
                 <Button
                   linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}
-                  className="mt-4 rounded-3xl text-center"
+                  className="mt-4 text-center"
                   priority="secondary"
                 >
                   {"Démarrer sur l'espace projet !"}

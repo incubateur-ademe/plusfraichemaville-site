@@ -60,7 +60,6 @@ export const AnnuaireSavedContacts = () => {
             <AnnuaireContactsDownloader projetId={currentProjet?.id} />
             <Button
               title="Filtrer"
-              className="rounded-3xl"
               iconPosition="left"
               priority={showFilters ? "primary" : "secondary"}
               iconId={showFilters ? "ri-filter-off-fill" : "ri-filter-fill"}

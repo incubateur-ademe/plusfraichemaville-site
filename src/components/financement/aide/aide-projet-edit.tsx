@@ -148,7 +148,7 @@ export const AideProjetEdit = memo(() => {
         <div className="flex items-center justify-between">
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
-            className="fr-btn fr-btn--secondary h-fit rounded-3xl"
+            className="fr-btn fr-btn--secondary h-fit"
           >
             Précédent
           </GenericFicheLink>
@@ -161,7 +161,7 @@ export const AideProjetEdit = memo(() => {
           )}
           <GenericFicheLink
             href={PFMV_ROUTES.ESPACE_PROJET_FINANCEMENT_LISTE_ESTIMATION}
-            className="fr-btn fr-btn--primary h-fit rounded-3xl"
+            className="fr-btn fr-btn--primary h-fit"
             onClick={() => notifications("success", "AIDE_SELECTION_VALIDATED")}
           >
             Valider

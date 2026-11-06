@@ -53,7 +53,7 @@ export const SurchauffeUrbaineMapLczExplanation = ({ className }: { className?: 
       rounded-2xl bg-dsfr-background-default-grey-hover px-6 py-4 text-xl font-bold text-black"
       >
         <div>Pour aller plus loin, découvrez les méthodes de diagnostics dont vous avez besoin</div>
-        <Button className="rounded-3xl text-center" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
+        <Button className="text-center" linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET }}>
           {"Accéder à l'espace projet !"}
         </Button>
       </div>

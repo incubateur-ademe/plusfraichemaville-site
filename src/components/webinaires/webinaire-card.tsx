@@ -57,7 +57,7 @@ export const WebinaireCard = ({ webinaire, className }: { webinaire: Webinaire; 
             <div className="mt-4 flex flex-col items-center gap-4 text-center">
               {webinaire.lien_replay && (
                 <Button
-                  className=" !w-36 !justify-center rounded-3xl"
+                  className=" !w-36 !justify-center"
                   linkProps={{ href: webinaire.lien_replay, target: "_blank" }}
                 >
                   {"Replay"}
@@ -65,7 +65,7 @@ export const WebinaireCard = ({ webinaire, className }: { webinaire: Webinaire; 
               )}
               {webinaire.lien_btn_secondaire && (
                 <Button
-                  className=" !w-36 !justify-center rounded-3xl"
+                  className=" !w-36 !justify-center"
                   linkProps={{ href: webinaire.lien_btn_secondaire, target: "_blank" }}
                   priority={webinaire.lien_replay ? "secondary" : "primary"}
                 >

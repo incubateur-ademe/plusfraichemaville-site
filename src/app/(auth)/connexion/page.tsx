@@ -6,48 +6,9 @@ import Image from "next/image";
 import clsx from "clsx";
 import { Metadata } from "next";
 import { computeMetadata } from "@/src/helpers/metadata/helpers";
+import { HomepageIdeeAction } from "@/src/components/homepage/homepage-idee-action";
 
 export const metadata: Metadata = computeMetadata("Connectez-vous à l'espace projet");
-
-const data = {
-  mainTitle: "Mon espace projet",
-  title: "Une fois connecté, créez votre projet, et accédez à tous ces services",
-  blocs: [
-    {
-      title: "Faites un diagnostic de surchauffe urbaine",
-      description: "Faites une analyse simplifiée, et trouvez des prestations pour un diagnostic approfondi",
-      picto: "diagnostic",
-    },
-    {
-      title: "Trouvez la bonne combinaison de solutions",
-      description:
-        "Trouvez les solutions adaptées à votre espace, et accédez à des recommandations pour combiner " +
-        "les types de solution",
-      picto: "solutions",
-    },
-    {
-      title: "Faites une estimation de budget de votre projet",
-      description: "Sélectionnez des matériaux et estimez le coût des solutions",
-      picto: "estimation",
-    },
-    {
-      title: "Invitez des membres à collaborer sur votre projet",
-      description: "Partagez la conception de votre projet au sein de votre collectivité",
-      picto: "collaborer",
-    },
-    {
-      title: "Trouvez des financements adaptés à votre projet",
-      description: "Identifiez les aides et les contacts nécessaires pour préparer un dossier de financement.",
-      picto: "financement",
-    },
-    {
-      title: "Annuaire des projets Plus fraîche ma ville",
-      description:
-        "Trouvez les contacts utiles à votre projet : agents de collectivités, bureaux d'étude, AMO, entreprises.",
-      picto: "annuaire",
-    },
-  ],
-};
 
 export default async function Connexion(props: { searchParams: Promise<{ callbackUrl: string | undefined }> }) {
   const searchParams = await props.searchParams;
@@ -58,7 +19,7 @@ export default async function Connexion(props: { searchParams: Promise<{ callbac
 
   return (
     <div className="fr-container pt-8">
-      <h1 className="fr-h3 !mb-9">{data.mainTitle}</h1>
+      <h1 className="fr-h3 !mb-9">Mon espace projet</h1>
       <div className="flex">
         <SignInCard
           message="connect"
@@ -73,24 +34,10 @@ export default async function Connexion(props: { searchParams: Promise<{ callbac
           <Image src="/images/espace-projet/connexion-espace-projet.svg" width={332} height={289} alt="" />
         </div>
       </div>
-      <h2 className="mx-auto mb-20 mt-16 w-[420px] text-center text-[22px] font-bold leading-7">{data.title}</h2>
-      <div className="flex flex-wrap items-start justify-center gap-x-12 gap-y-[90px]">
-        {data.blocs.map((bloc, index) => (
-          <div className="flex w-full max-w-[500px] justify-start gap-8" key={index}>
-            <Image
-              className="h-full shrink-0"
-              src={`/images/espace-projet/${bloc.picto}.svg`}
-              width={134}
-              height={134}
-              alt=""
-            />
-            <div>
-              <h3 className="mb-3 text-[22px] font-bold leading-7">{bloc.title}</h3>
-              <p className="mb-4 text-lg">{bloc.description}</p>
-            </div>
-          </div>
-        ))}
-      </div>
+      <h2 className="mx-auto mb-8 mt-16 text-center text-2xl font-bold leading-7">
+        Une fois connecté, créez votre projet, et accédez à tous ces services
+      </h2>
+      <HomepageIdeeAction displayTitle={false} />
     </div>
   );
 }

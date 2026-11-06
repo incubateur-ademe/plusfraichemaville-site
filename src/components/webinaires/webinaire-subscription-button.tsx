@@ -7,7 +7,7 @@ export const WebinaireSubscriptionButton = ({ lienInscription }: { lienInscripti
     <a
       href={lienInscription}
       target={"_blank"}
-      className="fr-btn !w-36 !justify-center rounded-3xl"
+      className="fr-btn !w-36 !justify-center"
       onClick={() => trackEvent(WEBINAIRE_SUBSCRIPTION)}
     >
       {"Je m'inscris"}

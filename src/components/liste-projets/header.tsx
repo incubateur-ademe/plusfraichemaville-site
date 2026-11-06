@@ -18,11 +18,11 @@ export const ListeProjetsHeader = ({ isListEmpty }: { isListEmpty: boolean }) =>
           </p>
         </hgroup>
         <div className="align-items-center flex flex-wrap-reverse items-center gap-4">
-          <AvailableProjetsForCollectiviteButton className="rounded-3xl" />
+          <AvailableProjetsForCollectiviteButton />
           {!isListEmpty && (
             <LinkWithoutPrefetch
               href={PFMV_ROUTES.CREATE_PROJET}
-              className="fr-btn ri-add-circle-fill fr-btn--icon-left rounded-3xl"
+              className="fr-btn ri-add-circle-fill fr-btn--icon-left"
             >
               Créer un projet
             </LinkWithoutPrefetch>
