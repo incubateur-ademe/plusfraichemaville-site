@@ -10,7 +10,7 @@ export default function TableauDeBordPageClient() {
   return (
     <>
       <BannerProjetBreadcrumb step={BREADCRUMB_TABLEAU_DE_BORD(currentProjet?.nom || "Projet en cours")} />
-      <div className={clsx("-mb-40 min-h-[40rem] bg-dsfr-border-action-low-blue-france pb-40 pt-10")}>
+      <div className={clsx("-mb-12 min-h-[40rem] bg-dsfr-border-action-low-blue-france pb-40 pt-10")}>
         <div className="fr-container">
           <TableauDeBordSuivi />
         </div>
