@@ -70,8 +70,8 @@ export const generateSyntheseProjetPptx = async ({
     !!carteLczSlideInfo &&
     (await loadCarteLczImage(pres, carteLczSlideInfo, codeInsee, climadiagInfo));
   const sousTitresEnjeuxClimatiques = [
-    ...(showClimadiag ? ["Projections TRACC · Climadiag Commune"] : []),
     ...(showCarteLcz ? ["Cartographies des zones climatiques locales (LCZ)"] : []),
+    ...(showClimadiag ? ["Projections TRACC · Climadiag Commune"] : []),
   ];
 
   const orderedFichesDiagnostic = (await Promise.all(diagnosticIds.map((id) => getFicheDiagnosticById(id)))).filter(
@@ -140,7 +140,11 @@ export const generateSyntheseProjetPptx = async ({
     pres.addSlide("template", slideInfo.number, (slide) => {
       elementsToRemove.forEach((name) => slide.removeElement({ name }));
       slideInfo.elements?.forEach((element) => {
-        if (element.hasTextBody && !elementsToRemove.includes(element.name)) {
+        // Only shapes holding a tag need their text modified. Skipping the others also skips the
+        // empty text bodies of a group's shapes (e.g. picto_thermometre_baisse_temperature): once
+        // their group is removed, pptx-automizer can't find them and logs "Can't modify slide tree".
+        const hasTag = element.getText?.().join("").includes("{{") ?? true;
+        if (element.hasTextBody && hasTag && !elementsToRemove.includes(element.name)) {
           slide.modifyElement({ name: element.name, nameIdx: element.nameIdx }, [
             mergeTextRunsInElement,
             (el: XmlElement) =>
