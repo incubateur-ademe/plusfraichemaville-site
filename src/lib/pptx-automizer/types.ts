@@ -132,6 +132,8 @@ export enum PptxSlideElement {
   VDC_2050 = "vdc_2050",
   VDC_2100 = "vdc_2100",
   LEGENDE_TEXTE = "legende_texte",
+  // Carte LCZ slide (3): the map picture, swapped for the commune's own map.
+  CARTE_LCZ = "carte_lcz",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and

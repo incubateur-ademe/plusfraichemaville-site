@@ -23,7 +23,7 @@ import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
 import { getValidatedIndiEnSimulationResults } from "@/src/helpers/indicateurs-environnementaux/indi-en-helpers";
 import { addAnalyseSimplifieeIntroSlide } from "@/src/lib/pptx-automizer/slides/analyse-simplifiee-intro";
 import { addEnjeuxClimatiquesIntroSlide } from "./slides/enjeux-climatiques-intro";
-import { addCarteLczSlide } from "./slides/carte-lcz";
+import { addCarteLczSlide, loadCarteLczImage } from "./slides/carte-lcz";
 import { addClimadiagSlide } from "./slides/climadiag";
 import { getClimadiagInfoFromCodeInsee } from "@/src/lib/prisma/prisma-climadiag-queries";
 import { Climadiag } from "@/src/components/climadiag/types";
@@ -59,7 +59,16 @@ export const generateSyntheseProjetPptx = async ({
       ? ((await getClimadiagInfoFromCodeInsee([codeInsee]))[0] as Climadiag | undefined)
       : undefined;
   const showClimadiag = includeClimadiag && !!climadiagInfo;
-  const showCarteLcz = includeCarteLcz && !!climadiagInfo && hasLczCoverage(climadiagInfo);
+  // The commune's map is rendered upfront: if a map service fails, the carte LCZ slide is left out
+  // as if it had not been requested, its subtitle on the climate section intro included.
+  const carteLczSlideInfo = slides.find((slideInfo) => slideInfo.number === PptxSlide.CARTE_LCZ);
+  const showCarteLcz =
+    includeCarteLcz &&
+    !!codeInsee &&
+    !!climadiagInfo &&
+    hasLczCoverage(climadiagInfo) &&
+    !!carteLczSlideInfo &&
+    (await loadCarteLczImage(pres, carteLczSlideInfo, codeInsee, climadiagInfo));
   const sousTitresEnjeuxClimatiques = [
     ...(showClimadiag ? ["Projections TRACC · Climadiag Commune"] : []),
     ...(showCarteLcz ? ["Cartographies des zones climatiques locales (LCZ)"] : []),
@@ -211,7 +220,8 @@ export const generateSyntheseProjetPptx = async ({
         addEnjeuxClimatiquesIntroSlide(addTemplateSlide, slideInfo);
         break;
       case PptxSlide.CARTE_LCZ:
-        addCarteLczSlide(addTemplateSlide, slideInfo);
+        // showCarteLcz guarantees a code INSEE whose map is already loaded.
+        addCarteLczSlide(addTemplateSlide, slideInfo, codeInsee!);
         break;
       case PptxSlide.CLIMADIAG:
         addClimadiagSlide(addTemplateSlide, slideInfo, climadiagInfo!);
