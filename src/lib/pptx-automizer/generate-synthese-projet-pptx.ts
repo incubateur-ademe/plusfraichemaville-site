@@ -28,6 +28,13 @@ import { addClimadiagSlide } from "./slides/climadiag";
 import { getClimadiagInfoFromCodeInsee } from "@/src/lib/prisma/prisma-climadiag-queries";
 import { Climadiag } from "@/src/components/climadiag/types";
 import { hasLczCoverage } from "@/src/components/climadiag/helpers";
+import {
+  addSommaireSlide,
+  getSommaireSectionOfTemplateSlide,
+  SOMMAIRE_SECTIONS,
+  SommaireSection,
+  SommaireSectionRange,
+} from "./slides/sommaire";
 
 export const generateSyntheseProjetPptx = async ({
   projet,
@@ -129,6 +136,11 @@ export const generateSyntheseProjetPptx = async ({
     },
   ];
 
+  // First and last slide numbers of each section in the generated presentation, filled as slides
+  // are added, for the sommaire slide.
+  let generatedSlidesCount = 0;
+  const sommaireSectionRanges = new Map<SommaireSection, SommaireSectionRange>();
+
   // Shared by every slide module: applies the tags common to all slides (above) plus any
   // slide-specific ones, and duplicates the template slide into the output presentation.
   const addTemplateSlide: AddTemplateSlide = (
@@ -137,6 +149,16 @@ export const generateSyntheseProjetPptx = async ({
     onSlideCreated,
     elementsToRemove = [],
   ) => {
+    generatedSlidesCount++;
+    const sommaireSection = getSommaireSectionOfTemplateSlide(slideInfo.number);
+    if (sommaireSection) {
+      const range = sommaireSectionRanges.get(sommaireSection);
+      sommaireSectionRanges.set(sommaireSection, {
+        debut: range?.debut ?? generatedSlidesCount,
+        fin: generatedSlidesCount,
+      });
+    }
+
     pres.addSlide("template", slideInfo.number, (slide) => {
       elementsToRemove.forEach((name) => slide.removeElement({ name }));
       slideInfo.elements?.forEach((element) => {
@@ -166,56 +188,75 @@ export const generateSyntheseProjetPptx = async ({
   // slide, instead of every detail slide followed by every materiaux slide.
   const materiauxSlideInfo = slides.find((slideInfo) => slideInfo.number === PptxSlide.FICHE_SOLUTION_MATERIAUX);
 
-  const slidesNeedingFichesSolutions: number[] = [PptxSlide.FICHES_SOLUTION_INTRO, PptxSlide.FICHE_SOLUTION_DETAIL];
+  const slidesNeedingFichesSolutions: number[] = [
+    PptxSlide.FICHES_SOLUTION_INTRO,
+    PptxSlide.FICHE_SOLUTION_DETAIL,
+    PptxSlide.FICHE_SOLUTION_MATERIAUX,
+  ];
+
+  // Whether a template slide makes it into the presentation, given what was requested and what
+  // data is available.
+  const isTemplateSlideIncluded = (slideNumber: number): boolean => {
+    // The climate section intro lists the slides that follow it: with none, the whole section
+    // is left out.
+    if (slideNumber === PptxSlide.ENJEUX_CLIMATIQUES_INTRO && sousTitresEnjeuxClimatiques.length === 0) {
+      return false;
+    }
+    if (slideNumber === PptxSlide.CARTE_LCZ && !showCarteLcz) {
+      return false;
+    }
+    if (slideNumber === PptxSlide.CLIMADIAG && !showClimadiag) {
+      return false;
+    }
+    if (
+      [PptxSlide.FICHES_DIAGNOSTIC_INTRO, PptxSlide.FICHE_DIAGNOSTIC_DETAIL].includes(slideNumber) &&
+      orderedFichesDiagnostic.length === 0
+    ) {
+      return false;
+    }
+    if (slidesNeedingFichesSolutions.includes(slideNumber) && orderedFichesSolutions.length === 0) {
+      return false;
+    }
+    // The analyse simplifiée intro and content slides are only relevant when a validated
+    // analyse simplifiée was requested in the export.
+    if ([PptxSlide.ANALYSE_SIMPLIFIEE_INTRO, PptxSlide.ANALYSE_SIMPLIFIEE].includes(slideNumber) && !indiEnResults) {
+      return false;
+    }
+    // The estimation intro and recap slides are only relevant when an estimation was
+    // actually passed to the export.
+    if ([PptxSlide.ESTIMATION_INTRO, PptxSlide.ESTIMATION_RECAP].includes(slideNumber) && !estimation) {
+      return false;
+    }
+    // The ressources utiles intro and content slides are only relevant when at least one
+    // selected fiche solution actually has ressources utiles content.
+    if (
+      [PptxSlide.RESSOURCES_UTILES_INTRO, PptxSlide.RESSOURCES_UTILES].includes(slideNumber) &&
+      fichesSolutionsAvecRessourcesUtiles.length === 0
+    ) {
+      return false;
+    }
+    // The aides intro and content slides are only relevant when at least one aide was passed
+    // to the export.
+    if ([PptxSlide.AIDES_INTRO, PptxSlide.AIDES].includes(slideNumber) && aidesCardData.length === 0) {
+      return false;
+    }
+    return true;
+  };
+
+  // The sommaire lists the sections with at least one slide in the presentation.
+  const sommaireSections = SOMMAIRE_SECTIONS.filter((section) =>
+    section.templateSlides.some((slideNumber) => isTemplateSlideIncluded(slideNumber)),
+  );
 
   for (const slideInfo of slides) {
     if (slideInfo.number === PptxSlide.FICHE_SOLUTION_MATERIAUX) {
       continue;
     }
-    // The climate section intro lists the slides that follow it: with none, the whole section
-    // is left out.
-    if (slideInfo.number === PptxSlide.ENJEUX_CLIMATIQUES_INTRO && sousTitresEnjeuxClimatiques.length === 0) {
+    if (!isTemplateSlideIncluded(slideInfo.number)) {
       continue;
     }
-    if (slideInfo.number === PptxSlide.CARTE_LCZ && !showCarteLcz) {
-      continue;
-    }
-    if (slideInfo.number === PptxSlide.CLIMADIAG && !showClimadiag) {
-      continue;
-    }
-    if (
-      [PptxSlide.FICHES_DIAGNOSTIC_INTRO, PptxSlide.FICHE_DIAGNOSTIC_DETAIL].includes(slideInfo.number) &&
-      orderedFichesDiagnostic.length === 0
-    ) {
-      continue;
-    }
-    if (slidesNeedingFichesSolutions.includes(slideInfo.number) && orderedFichesSolutions.length === 0) {
-      continue;
-    }
-    // The analyse simplifiée intro and content slides are only relevant when a validated
-    // analyse simplifiée was requested in the export.
-    if (
-      [PptxSlide.ANALYSE_SIMPLIFIEE_INTRO, PptxSlide.ANALYSE_SIMPLIFIEE].includes(slideInfo.number) &&
-      !indiEnResults
-    ) {
-      continue;
-    }
-    // The estimation intro and recap slides are only relevant when an estimation was
-    // actually passed to the export.
-    if ([PptxSlide.ESTIMATION_INTRO, PptxSlide.ESTIMATION_RECAP].includes(slideInfo.number) && !estimation) {
-      continue;
-    }
-    // The ressources utiles intro and content slides are only relevant when at least one
-    // selected fiche solution actually has ressources utiles content.
-    if (
-      [PptxSlide.RESSOURCES_UTILES_INTRO, PptxSlide.RESSOURCES_UTILES].includes(slideInfo.number) &&
-      fichesSolutionsAvecRessourcesUtiles.length === 0
-    ) {
-      continue;
-    }
-    // The aides intro and content slides are only relevant when at least one aide was passed
-    // to the export.
-    if ([PptxSlide.AIDES_INTRO, PptxSlide.AIDES].includes(slideInfo.number) && aidesCardData.length === 0) {
+    // With no section to list, the sommaire is left out.
+    if (slideInfo.number === PptxSlide.SOMMAIRE && sommaireSections.length === 0) {
       continue;
     }
 
@@ -275,6 +316,14 @@ export const generateSyntheseProjetPptx = async ({
         break;
       case PptxSlide.PAGE_DE_GARDE:
         addPageDeGardeSlide(addTemplateSlide, slideInfo);
+        break;
+      case PptxSlide.SOMMAIRE:
+        addSommaireSlide({
+          addTemplateSlide,
+          slideInfo,
+          sections: sommaireSections,
+          getSectionRange: (section) => sommaireSectionRanges.get(section),
+        });
         break;
       case PptxSlide.ESTIMATION_INTRO:
         addEstimationIntroSlide(addTemplateSlide, slideInfo);

@@ -58,26 +58,31 @@ export enum PptxTemplateTag {
   AIDE_ECHEANCE = "aide_echeance",
   AIDE_LIEN = "aide_lien",
   PAGINATION_AIDES = "pagination_aides",
+  // Sommaire slide (2): one card per section, see slides/sommaire.ts.
+  SOMMAIRE_TITRE_SECTION = "chapitre_titre",
+  SOMMAIRE_DEBUT_SECTION = "debut",
+  SOMMAIRE_FIN_SECTION = "fin",
 }
 
 export enum PptxSlide {
   PAGE_DE_GARDE = 1,
-  ENJEUX_CLIMATIQUES_INTRO = 2,
-  CARTE_LCZ = 3,
-  CLIMADIAG = 4,
-  ANALYSE_SIMPLIFIEE_INTRO = 5,
-  ANALYSE_SIMPLIFIEE = 6,
-  FICHES_DIAGNOSTIC_INTRO = 7,
-  FICHE_DIAGNOSTIC_DETAIL = 8,
-  FICHES_SOLUTION_INTRO = 9,
-  FICHE_SOLUTION_DETAIL = 10,
-  FICHE_SOLUTION_MATERIAUX = 11,
-  ESTIMATION_INTRO = 12,
-  ESTIMATION_RECAP = 13,
-  AIDES_INTRO = 14,
-  AIDES = 15,
-  RESSOURCES_UTILES_INTRO = 16,
-  RESSOURCES_UTILES = 17,
+  SOMMAIRE = 2,
+  ENJEUX_CLIMATIQUES_INTRO = 3,
+  CARTE_LCZ = 4,
+  CLIMADIAG = 5,
+  ANALYSE_SIMPLIFIEE_INTRO = 6,
+  ANALYSE_SIMPLIFIEE = 7,
+  FICHES_DIAGNOSTIC_INTRO = 8,
+  FICHE_DIAGNOSTIC_DETAIL = 9,
+  FICHES_SOLUTION_INTRO = 10,
+  FICHE_SOLUTION_DETAIL = 11,
+  FICHE_SOLUTION_MATERIAUX = 12,
+  ESTIMATION_INTRO = 13,
+  ESTIMATION_RECAP = 14,
+  AIDES_INTRO = 15,
+  AIDES = 16,
+  RESSOURCES_UTILES_INTRO = 17,
+  RESSOURCES_UTILES = 18,
 }
 
 // Names of non-text shapes on the template slides, targeted via slide.removeElement().
@@ -134,6 +139,11 @@ export enum PptxSlideElement {
   LEGENDE_TEXTE = "legende_texte",
   // Carte LCZ slide (3): the map picture, swapped for the commune's own map.
   CARTE_LCZ = "carte_lcz",
+  // Sommaire slide (2): one section's card, duplicated once per section included in the export.
+  SOMMAIRE_CARTE = "sommaire_shp",
+  SOMMAIRE_TITRE = "sommaire_titre",
+  SOMMAIRE_PLAN = "sommaire_plan",
+  SOMMAIRE_NUMERO = "sommaire_numero",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and
