@@ -16,6 +16,7 @@ import { notifications } from "@/src/components/common/notifications";
 import { exportSyntheseProjetAction } from "@/src/actions/projets/export-synthese-projet-action";
 import { ProjetSyntheseFormData, ProjetSyntheseFormSchema } from "./projet-synthese-form-schema";
 import { EstimationRadioOptionLabel } from "./estimation-radio-option-label";
+import { ProjetSyntheseFormSkeleton } from "./projet-synthese-form-skeleton";
 import { isEmpty } from "@/src/helpers/listUtils";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { Spinner } from "@/src/components/common/spinner";
@@ -64,9 +65,12 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
   const hasValidatedAnalyseSimplifiee = Boolean(getValidatedIndiEnSimulationResults(currentProjet));
 
   const userId = useUserStore((state) => state.userInfos?.id);
-  const { data: climadiagInfos } = useSwrWithFetcher<Climadiag[] | null>(
+  const { data: climadiagInfos, isLoading: isLoadingClimadiag } = useSwrWithFetcher<Climadiag[] | null>(
     userId ? GET_CLIMADIAG_INFO_FOR_USER_PROJECTS(userId) : null,
   );
+  // Until the climadiag infos are known, the climate section may still appear above the others:
+  // only skeletons are shown meanwhile.
+  const isClimadiagAvailabilityPending = !userId || isLoadingClimadiag;
   const climadiagInfo = climadiagInfos?.find((info) => info.code_insee === currentProjet?.collectivite?.code_insee);
   const hasClimadiag = Boolean(climadiagInfo);
   const hasCarteLcz = Boolean(climadiagInfo && hasLczCoverage(climadiagInfo));
@@ -221,148 +225,154 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <div className="mt-8">
         <h2 className="text-lg font-bold">Sélectionnez les informations que vous souhaitez dans la synthèse.</h2>
-        <ol className="mt-4 list-inside !pl-0">
-          {hasClimadiag && (
-            <li className="fr-h4">
-              <span>Contexte et enjeux climatiques</span>
-              <div className="mt-4 pl-12 text-base font-normal">
-                <Checkbox
-                  className="mb-0"
-                  options={[
-                    ...(hasCarteLcz
-                      ? [
-                          {
-                            label: "Cartographies des zones climatiques locales (LCZ)",
-                            nativeInputProps: {
-                              checked: includeCarteLcz,
-                              onChange: () => form.setValue("includeCarteLcz", !includeCarteLcz),
+        {isClimadiagAvailabilityPending ? (
+          <ProjetSyntheseFormSkeleton />
+        ) : (
+          <ol className="mt-4 list-inside !pl-0">
+            {hasClimadiag && (
+              <li className="fr-h4">
+                <span>Contexte et enjeux climatiques</span>
+                <div className="mt-4 pl-12 text-base font-normal">
+                  <Checkbox
+                    className="mb-0"
+                    options={[
+                      ...(hasCarteLcz
+                        ? [
+                            {
+                              label: "Cartographies des zones climatiques locales (LCZ)",
+                              nativeInputProps: {
+                                checked: includeCarteLcz,
+                                onChange: () => form.setValue("includeCarteLcz", !includeCarteLcz),
+                              },
                             },
-                          },
-                        ]
-                      : []),
-                    {
-                      label: "Climadiag (climat futur)",
-                      nativeInputProps: {
-                        checked: includeClimadiag,
-                        onChange: () => form.setValue("includeClimadiag", !includeClimadiag),
+                          ]
+                        : []),
+                      {
+                        label: "Climadiag (climat futur)",
+                        nativeInputProps: {
+                          checked: includeClimadiag,
+                          onChange: () => form.setValue("includeClimadiag", !includeClimadiag),
+                        },
                       },
-                    },
-                  ]}
-                />
+                    ]}
+                  />
+                </div>
+              </li>
+            )}
+            <li className="fr-h4">
+              <span>Diagnostic de l’espace</span>
+              <div className="mt-4 pl-12 text-base font-normal">
+                {hasValidatedAnalyseSimplifiee ? (
+                  <Checkbox
+                    className="mb-4"
+                    options={[
+                      {
+                        label: "Analyse simplifiée de la surchauffe de mon espace",
+                        nativeInputProps: {
+                          checked: includeAnalyseSimplifiee,
+                          onChange: () => form.setValue("includeAnalyseSimplifiee", !includeAnalyseSimplifiee),
+                        },
+                      },
+                    ]}
+                  />
+                ) : (
+                  <p className="mb-4 text-base text-dsfr-text-mention-grey">
+                    Analyse simplifiée de la surchauffe de mon espace pas encore réalisée.
+                  </p>
+                )}
+                {!hasDiagnostics || (!isLoadingDiagnostic && (!fichesDiagnostic || fichesDiagnostic.length === 0)) ? (
+                  <p className="text-base text-dsfr-text-mention-grey">
+                    Aucune méthode de diagnostic ajoutée au projet
+                  </p>
+                ) : (
+                  <Checkbox
+                    classes={{ content: "ml-10" }}
+                    legend="Méthodes de diagnostic approfondi retenues"
+                    options={(fichesDiagnostic || []).map((fd) => ({
+                      label: fd.titre,
+                      nativeInputProps: {
+                        checked: selectedDiagnosticIds.includes(fd.documentId),
+                        onChange: () => handleToggleDiagnostic(fd.documentId),
+                      },
+                    }))}
+                  />
+                )}
               </div>
             </li>
-          )}
-          <li className="fr-h4">
-            <span>Diagnostic de l’espace</span>
-            <div className="mt-4 pl-12 text-base font-normal">
-              {hasValidatedAnalyseSimplifiee ? (
-                <Checkbox
-                  className="mb-4"
-                  options={[
-                    {
-                      label: "Analyse simplifiée de la surchauffe de mon espace",
+            <li className="fr-h4">
+              <span>Solutions de rafraîchissement retenues</span>
+              <div className="mt-4 pl-12 text-base font-normal">
+                {!hasSolutions || (!isLoading && (!fichesSolutions || fichesSolutions.length === 0)) ? (
+                  <p className="text-base text-dsfr-text-mention-grey">
+                    Aucune solution de rafraîchissement ajoutée au projet
+                  </p>
+                ) : (
+                  <Checkbox
+                    className="mb-0"
+                    options={(fichesSolutions || []).map((fs) => ({
+                      label: fs.titre,
                       nativeInputProps: {
-                        checked: includeAnalyseSimplifiee,
-                        onChange: () => form.setValue("includeAnalyseSimplifiee", !includeAnalyseSimplifiee),
+                        checked: selectedSolutionIds.includes(fs.documentId),
+                        onChange: () => handleToggleSolution(fs.documentId),
                       },
-                    },
-                  ]}
-                />
-              ) : (
-                <p className="mb-4 text-base text-dsfr-text-mention-grey">
-                  Analyse simplifiée de la surchauffe de mon espace pas encore réalisée.
-                </p>
-              )}
-              {!hasDiagnostics || (!isLoadingDiagnostic && (!fichesDiagnostic || fichesDiagnostic.length === 0)) ? (
-                <p className="text-base text-dsfr-text-mention-grey">Aucune méthode de diagnostic ajoutée au projet</p>
-              ) : (
-                <Checkbox
-                  classes={{ content: "ml-10" }}
-                  legend="Méthodes de diagnostic approfondi retenues"
-                  options={(fichesDiagnostic || []).map((fd) => ({
-                    label: fd.titre,
-                    nativeInputProps: {
-                      checked: selectedDiagnosticIds.includes(fd.documentId),
-                      onChange: () => handleToggleDiagnostic(fd.documentId),
-                    },
-                  }))}
-                />
-              )}
-            </div>
-          </li>
-          <li className="fr-h4">
-            <span>Solutions de rafraîchissement retenues</span>
-            <div className="mt-4 pl-12 text-base font-normal">
-              {!hasSolutions || (!isLoading && (!fichesSolutions || fichesSolutions.length === 0)) ? (
-                <p className="text-base text-dsfr-text-mention-grey">
-                  Aucune solution de rafraîchissement ajoutée au projet
-                </p>
-              ) : (
-                <Checkbox
-                  className="mb-0"
-                  options={(fichesSolutions || []).map((fs) => ({
-                    label: fs.titre,
-                    nativeInputProps: {
-                      checked: selectedSolutionIds.includes(fs.documentId),
-                      onChange: () => handleToggleSolution(fs.documentId),
-                    },
-                  }))}
-                />
-              )}
-            </div>
-          </li>
-          <li className="fr-h4">
-            <span>Estimation budgétaire</span>
-            <div className="mt-4 pl-12 text-base font-normal">
-              {estimations.length === 0 ? (
-                <p className="text-base text-dsfr-text-mention-grey">Aucune estimation ajoutée au projet</p>
-              ) : (
-                <RadioButtons
-                  className="mb-0"
-                  options={[
-                    {
-                      label: "Aucune estimation",
+                    }))}
+                  />
+                )}
+              </div>
+            </li>
+            <li className="fr-h4">
+              <span>Estimation budgétaire</span>
+              <div className="mt-4 pl-12 text-base font-normal">
+                {estimations.length === 0 ? (
+                  <p className="text-base text-dsfr-text-mention-grey">Aucune estimation ajoutée au projet</p>
+                ) : (
+                  <RadioButtons
+                    className="mb-0"
+                    options={[
+                      {
+                        label: "Aucune estimation",
+                        nativeInputProps: {
+                          name: "estimationId",
+                          value: "",
+                          checked: !selectedEstimationId,
+                          onChange: () => form.setValue("estimationId", null),
+                        },
+                      },
+                      ...estimations.map((estimation) => ({
+                        label: <EstimationRadioOptionLabel estimation={estimation} />,
+                        nativeInputProps: {
+                          name: "estimationId",
+                          value: estimation.id,
+                          checked: selectedEstimationId === estimation.id,
+                          onChange: () => form.setValue("estimationId", estimation.id),
+                        },
+                      })),
+                    ]}
+                  />
+                )}
+              </div>
+            </li>
+            <li className="fr-h4">
+              <span>Aides retenues</span>
+              <div className="mt-4 pl-12 text-base font-normal">
+                {projetAides.length === 0 ? (
+                  <p className="text-base text-dsfr-text-mention-grey">Aucune aide ajoutée au projet</p>
+                ) : (
+                  <Checkbox
+                    className="mb-0"
+                    options={projetAides.map((projetAide) => ({
+                      label: projetAide.aide.name ?? "",
                       nativeInputProps: {
-                        name: "estimationId",
-                        value: "",
-                        checked: !selectedEstimationId,
-                        onChange: () => form.setValue("estimationId", null),
+                        checked: selectedAideIds.includes(projetAide.aideId),
+                        onChange: () => handleToggleAide(projetAide.aideId),
                       },
-                    },
-                    ...estimations.map((estimation) => ({
-                      label: <EstimationRadioOptionLabel estimation={estimation} />,
-                      nativeInputProps: {
-                        name: "estimationId",
-                        value: estimation.id,
-                        checked: selectedEstimationId === estimation.id,
-                        onChange: () => form.setValue("estimationId", estimation.id),
-                      },
-                    })),
-                  ]}
-                />
-              )}
-            </div>
-          </li>
-          <li className="fr-h4">
-            <span>Aides retenues</span>
-            <div className="mt-4 pl-12 text-base font-normal">
-              {projetAides.length === 0 ? (
-                <p className="text-base text-dsfr-text-mention-grey">Aucune aide ajoutée au projet</p>
-              ) : (
-                <Checkbox
-                  className="mb-0"
-                  options={projetAides.map((projetAide) => ({
-                    label: projetAide.aide.name ?? "",
-                    nativeInputProps: {
-                      checked: selectedAideIds.includes(projetAide.aideId),
-                      onChange: () => handleToggleAide(projetAide.aideId),
-                    },
-                  }))}
-                />
-              )}
-            </div>
-          </li>
-        </ol>
+                    }))}
+                  />
+                )}
+              </div>
+            </li>
+          </ol>
+        )}
       </div>
 
       <div className="mt-10">
@@ -374,7 +384,12 @@ export const ProjetSyntheseForm = ({ currentProjet }: ProjetSyntheseFormProps) =
             </span>
           </Button>
         ) : (
-          <Button iconId="ri-download-2-line" iconPosition="right" type="submit" disabled={!currentProjet}>
+          <Button
+            iconId="ri-download-2-line"
+            iconPosition="right"
+            type="submit"
+            disabled={!currentProjet || isClimadiagAvailabilityPending}
+          >
             Télécharger la synthèse
           </Button>
         )}
