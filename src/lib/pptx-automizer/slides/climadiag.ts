@@ -1,7 +1,7 @@
 import { ISlide, modify, ReplaceText, XmlElement } from "pptx-automizer";
 import { AddTemplateSlide, PptxSlideInfo } from "./types";
 import { PptxSlideElement, PptxTemplateTag } from "../types";
-import { replaceTagWithBulletList, setElementText } from "../helpers";
+import { replaceTagWithBulletList, setElementTextRuns } from "../helpers";
 import { Climadiag, ClimadiagYear } from "@/src/components/climadiag/types";
 import { ProjectionsIndicateurClimadiag } from "@/src/lib/prisma/prismaCustomTypes";
 
@@ -13,18 +13,19 @@ type IndicateurRow = {
   projections: ProjectionsIndicateurClimadiag;
 };
 
-// Same display rules as ClimadiagIndicateursLineJour.
-const formatNombreJours = (jour: number | null) => {
-  if (jour == null) return "N.R.";
+// Same display rules as ClimadiagIndicateursLineJour. The number and the unit are returned
+// apart, as the template shows them in two runs of different sizes.
+const formatNombreJours = (jour: number | null): string[] => {
+  if (jour == null) return ["N.R."];
   const roundedJour = Math.round(jour);
-  return `${roundedJour} ${roundedJour > 1 ? "jours" : "jour"}`;
+  return [`${roundedJour} `, roundedJour > 1 ? "jours" : "jour"];
 };
 
 const getRowValues = ({ row, reference, projections }: IndicateurRow) => [
-  { elementName: `${row}_reference`, text: formatNombreJours(reference) },
+  { elementName: `${row}_reference`, texts: formatNombreJours(reference) },
   ...CLIMADIAG_YEARS.map((year) => ({
     elementName: `${row}_${year}`,
-    text: formatNombreJours(projections[year].max),
+    texts: formatNombreJours(projections[year].max),
   })),
 ];
 
@@ -101,8 +102,8 @@ export const addClimadiagSlide = (addTemplateSlide: AddTemplateSlide, slideInfo:
     slideInfo,
     replacements,
     (slide) => {
-      rows.flatMap(getRowValues).forEach(({ elementName, text }) => {
-        slide.modifyElement({ name: elementName }, [(element: XmlElement) => setElementText(element, text)]);
+      rows.flatMap(getRowValues).forEach(({ elementName, texts }) => {
+        slide.modifyElement({ name: elementName }, [(element: XmlElement) => setElementTextRuns(element, texts)]);
       });
       seuils
         .filter(({ value }) => value == null)

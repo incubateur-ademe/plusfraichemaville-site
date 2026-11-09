@@ -119,16 +119,23 @@ export const replaceTagWithBulletList = (element: XmlElement, tag: string, items
 };
 
 /**
- * Replaces the whole text of a single-paragraph shape holding a sample value rather than a tag,
- * keeping the formatting of its first run.
+ * Replaces the text of a single-paragraph shape holding a sample value rather than a tag, split
+ * into runs formatted differently (e.g. a number then its unit in a smaller size): each text goes
+ * into the run at the same position, keeping its formatting. Runs without a text are removed,
+ * texts without a run are appended to the last one.
  */
-export const setElementText = (element: XmlElement, text: string) => {
-  const [firstRun, ...otherRuns] = Array.from(element.getElementsByTagName("a:r"));
-  const firstT = firstRun?.getElementsByTagName("a:t")[0];
-  if (!firstT) return;
+export const setElementTextRuns = (element: XmlElement, texts: string[]) => {
+  const runs = Array.from(element.getElementsByTagName("a:r"));
+  if (!runs.length) return;
 
-  firstT.textContent = text;
-  otherRuns.forEach((run) => run.parentNode?.removeChild(run));
+  runs.forEach((run, index) => {
+    const t = run.getElementsByTagName("a:t")[0];
+    if (index >= texts.length || !t) {
+      run.parentNode?.removeChild(run);
+      return;
+    }
+    t.textContent = index === runs.length - 1 ? texts.slice(index).join("") : texts[index];
+  });
 };
 
 /**
