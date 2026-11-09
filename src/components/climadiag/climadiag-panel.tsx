@@ -6,6 +6,7 @@ import AsyncSelect from "react-select/async";
 import { climadiagToOptions, computeSearchResultGroup, NO_RESULT_OPTION } from "@/src/components/climadiag/helpers";
 import debounce from "lodash/debounce";
 import { Climadiag, GroupedOptions } from "./types";
+import { GET_CLIMADIAG_INFO_FOR_USER_PROJECTS } from "@/src/helpers/routes";
 
 export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   const [selectedClimadiagInfo, setSelectedClimadiagInfo] = useState<Climadiag>();
@@ -13,7 +14,7 @@ export const ClimadiagPanel = ({ userId }: { userId: string }) => {
   const [searchClimadiagData, setSearchClimadiagData] = useState<Climadiag[]>([]);
 
   const { data: userClimadiagInfos, isLoading } = useSwrWithFetcher<Climadiag[]>(
-    `/api/get-climadiag-info-for-user-projects?userId=${userId}`,
+    GET_CLIMADIAG_INFO_FOR_USER_PROJECTS(userId),
   );
 
   const searchClimadiagInfos = (inputValue: string, callback: (_: any) => void) => {
