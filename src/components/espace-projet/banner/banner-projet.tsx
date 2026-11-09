@@ -35,7 +35,7 @@ export default function BannerProjet({ className }: { className?: string }) {
   };
 
   return (
-    <div className={`bg-dsfr-background-alt-blue-france py-3  ${className} min-h-[6rem]`}>
+    <div className={clsx("min-h-[6rem] bg-dsfr-background-alt-blue-france py-3", className)}>
       {!currentProjet ? (
         <BannerProjetSkeleton />
       ) : (
@@ -50,7 +50,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                   pictoClassName="svg-blue"
                 />
               </div>
-              <div className="flex w-full flex-wrap items-center justify-between gap-3">
+              <div className="flex w-full flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
                 <div className="flex flex-col justify-between py-1 md:h-full">
                   <div className="flex items-center gap-6">
                     <h1 className="mb-1 w-fit max-w-2xl text-[1.375rem] !leading-6 hover:underline">
@@ -108,7 +108,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                     </LinkWithoutPrefetch>
                   )}
                 </div>
-                <section>
+                <section className="xl:ml-auto">
                   {isLecteur ? (
                     <>
                       <div className="flex rounded-xl bg-white px-4 py-2">
@@ -123,7 +123,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                     <>
                       {isBannerExpanded && (
                         <Suspense>
-                          <div className="flex flex-wrap items-center gap-3">
+                          <div className="flex flex-wrap items-center gap-3 xl:justify-end">
                             {shouldDispplayExportButton && (
                               <Button
                                 iconId="ri-download-2-line"
