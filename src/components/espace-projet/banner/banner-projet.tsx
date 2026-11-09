@@ -66,7 +66,7 @@ export default function BannerProjet({ className }: { className?: string }) {
                         href={PFMV_ROUTES.ESPACE_PROJET_INFO_PROJET(currentProjet.id)}
                         className={clsx(
                           "!bg-none text-sm text-pfmv-navy hover:underline",
-                          isBannerExpanded ? "flex" : "collapse",
+                          isBannerExpanded ? "flex md:flex-none" : "collapse",
                         )}
                       >
                         <i className="ri-edit-box-line fr-icon--sm mr-1" />
