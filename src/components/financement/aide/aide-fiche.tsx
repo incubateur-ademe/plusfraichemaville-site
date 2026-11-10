@@ -79,7 +79,7 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
         {aide.eligibility && (
           <hgroup className="mb-8">
             <h2 className="mb-2 text-xl text-dsfr-background-flat-info">{"Critères d'éligibilité"}</h2>
-            <CmsRichText label={aide.eligibility.replace(/href/g, "target='_blank' href")} />
+            <CmsRichText label={aide.eligibility} />
           </hgroup>
         )}
         {aide.contact && (
@@ -91,7 +91,6 @@ export const AideFiche = ({ aide }: AideFicheProps) => {
         <div className="flex justify-end gap-8">
           {aide.origin_url && (
             <Button
-              className="rounded-3xl"
               size="small"
               linkProps={{
                 target: "_blank",
