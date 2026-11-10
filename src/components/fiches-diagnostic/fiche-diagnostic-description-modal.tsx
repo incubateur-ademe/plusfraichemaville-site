@@ -17,7 +17,6 @@ import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { Separator } from "@/src/components/common/separator";
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
-import { notifications } from "@/src/components/common/notifications";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import { SplideController, SplideFrTranslation } from "../common/splide-controllers";
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
@@ -92,7 +91,6 @@ export const FicheDiagnosticDescriptionModal = () => {
                   <GenericSaveAuthenticatedInsideProjet
                     type={TypeFiche.diagnostic}
                     id={ficheDiagnostic?.documentId}
-                    opener={() => notifications("success", "FICHE_DIAGNOSTIC_ADDED_TO_PROJET")}
                     className="!absolute right-8 top-8"
                   />
                 )}
