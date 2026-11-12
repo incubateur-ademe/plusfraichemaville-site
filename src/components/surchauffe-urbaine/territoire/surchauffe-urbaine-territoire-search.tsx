@@ -57,8 +57,12 @@ export const SurchauffeUrbaineTerritoireSearch = ({
       <h1 className="text-center text-[1.375rem] font-bold">
         Connaître la sensibilité actuelle et future de ma ville à la surchauffe urbaine
       </h1>
+      <label htmlFor="climadiag-search-input" className="fr-sr-only">
+        Rechercher une commune ou un EPCI (nom ou code)
+      </label>
       <div className="mx-auto mt-4 flex max-w-[30rem] flex-row">
         <AsyncSelect
+          inputId="climadiag-search-input"
           components={{ DropdownIndicator: null }}
           classNames={{
             control: () =>
@@ -84,8 +88,9 @@ export const SurchauffeUrbaineTerritoireSearch = ({
               "ri-search-line fr-icon--lg",
               selectedAddress ? "text-white" : "text-dsfr-text-disabled-grey",
             )}
-            aria-label="Rechercher"
+            aria-hidden="true"
           />
+          <span className="fr-sr-only">Rechercher</span>
         </Button>
       </div>
     </section>
