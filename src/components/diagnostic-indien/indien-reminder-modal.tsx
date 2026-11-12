@@ -35,11 +35,12 @@ export default function IndienReminderModal({ projetId }: { projetId: number }) 
         </span>
       </div>
 
-      <modal.Component title="" className="custom-modal md-modal">
-        <h1 className="!text-xl !text-pfmv-navy">
-          Pour calculer vos indicateurs, vous aurez besoin d’observer l’espace à rafraîchir et d’en connaître le métré
-          suivant :
-        </h1>
+      <modal.Component
+        title="Pour calculer vos indicateurs, vous aurez besoin d’observer l’espace à rafraîchir et d’en connaître le métré
+          suivant :"
+        className="custom-modal md-modal"
+        titleProps={{ className: "text-pfmv-navy" }}
+      >
         <div className="flex flex-row flex-wrap gap-6">
           <div>
             <Image

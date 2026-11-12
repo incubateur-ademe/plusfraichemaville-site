@@ -73,13 +73,10 @@ export const FicheDiagnosticDescriptionModal = () => {
   return (
     <>
       <modal.Component
-        title={
-          <span aria-hidden className="hidden">
-            {ficheDiagData?.titre}
-          </span>
-        }
+        title={<span aria-hidden>{ficheDiagData?.titre}</span>}
         size={isEmpty(rex) ? "medium" : "large"}
         className={clsx("custom-modal fiche-diagnostic-modal", !isEmpty(rex) && "l-modal")}
+        titleProps={{ className: "hidden", "aria-hidden": true }}
       >
         <div className="pb-4">
           {ficheDiagnostic && (
