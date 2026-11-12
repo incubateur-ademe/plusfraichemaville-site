@@ -49,7 +49,7 @@ export const FicheDiagnosticChoixWithFilters = ({
         <ToggleSwitch
           labelPosition="right"
           classes={{ label: "before:!mr-4" }}
-          label=""
+          label="Petit budget"
           showCheckedHint={false}
           checked={onlyCheapDiagnostic}
           className="w-52"
