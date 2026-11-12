@@ -14,7 +14,6 @@ import { ProjetWithPublicRelations, ProjetWithRelations } from "./prismaCustomTy
 import { generateRandomId } from "@/src/helpers/common";
 import { GeoJsonProperties } from "geojson";
 import { RexContactId } from "@/src/components/annuaire/types";
-import { NiveauMaturiteCode } from "@/src/helpers/maturite-projet";
 import { getCommuneSirensForEpci } from "@/src/lib/prisma/prisma-commune-queries";
 
 export const projetWithoutFicheSolution = {
@@ -86,7 +85,6 @@ export const projetIncludes = {
               collectivite: true,
               nom: true,
               type_espace: true,
-              niveau_maturite: true,
               adresse_all_infos: true,
             },
           },
@@ -103,7 +101,6 @@ export const projetPublicSelect = {
   collectiviteId: true,
   type_espace: true,
   collectivite: true,
-  niveau_maturite: true,
   adresse_all_infos: true,
   users: {
     select: {
@@ -114,7 +111,6 @@ export const projetPublicSelect = {
           collectivite: true,
           nom: true,
           type_espace: true,
-          niveau_maturite: true,
           adresse_all_infos: true,
         },
       },
@@ -198,7 +194,6 @@ export const createOrUpdateProjet = async ({
   adresse,
   adresse_all_infos,
   typeEspace,
-  niveauMaturite,
   userId,
   collectiviteId,
   isPublic,
@@ -208,7 +203,6 @@ export const createOrUpdateProjet = async ({
   typeEspace: string;
   adresse?: string;
   adresse_all_infos?: GeoJsonProperties;
-  niveauMaturite: string;
   userId: string;
   collectiviteId: number;
   isPublic: boolean;
@@ -225,7 +219,6 @@ export const createOrUpdateProjet = async ({
       type_espace: typeEspace,
       adresse,
       adresse_all_infos: adresse_all_infos as unknown as Prisma.JsonObject,
-      niveau_maturite: niveauMaturite,
       collectiviteId: collectiviteId,
       is_public: isPublic,
       users: {
@@ -244,7 +237,6 @@ export const createOrUpdateProjet = async ({
       type_espace: typeEspace,
       adresse: adresse ?? null,
       adresse_all_infos: (adresse_all_infos as unknown as Prisma.JsonObject) ?? null,
-      niveau_maturite: niveauMaturite,
       collectiviteId: collectiviteId,
       is_public: isPublic,
     },
@@ -382,18 +374,6 @@ export const getAvailableProjetsForEpci = async (
   });
 };
 
-export const updateMaturiteProjet = (projetId: number, niveauMaturite: string) => {
-  return prismaClient.projet.update({
-    where: {
-      id: projetId,
-    },
-    data: {
-      niveau_maturite: niveauMaturite,
-    },
-    include: projetIncludes,
-  });
-};
-
 export const projetUpdated = async (projetId: number): Promise<projet | null> => {
   return prismaClient.projet.update({
     where: {
@@ -521,13 +501,6 @@ export const getProjetsForRemindDiagnostic = async (
       created_at: {
         gte: afterDate,
         lte: beforeDate,
-      },
-      niveau_maturite: {
-        in: [
-          NiveauMaturiteCode.questionnement,
-          NiveauMaturiteCode.priorisationSolutions,
-          NiveauMaturiteCode.redactionCDC,
-        ],
       },
       ...projetWithoutFiche,
       ...projetWithoutDiagnosticSimulation,

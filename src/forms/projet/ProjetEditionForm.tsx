@@ -8,7 +8,6 @@ import { notifications } from "@/src/components/common/notifications";
 import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
 import SelectFormField from "@/src/components/common/SelectFormField";
 import { ProjetInfoFormData, ProjetInfoFormSchema } from "@/src/forms/projet/ProjetInfoFormSchema";
-import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
 import { useUnsavedChanges } from "@/src/hooks/use-unsaved-changes";
@@ -48,7 +47,6 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
       projetId: projet?.id,
       nom: projet?.nom ?? "",
       typeEspace: projet?.type_espace ?? "",
-      niveauMaturite: projet?.niveau_maturite ?? "",
       adresse: mapDBProjetToProjetAddress(projet),
       collectivite: mapDBCollectiviteToCollectiviteAddress(projet?.collectivite) ?? undefined,
       isPublic: projet?.is_public ?? true,
@@ -103,15 +101,6 @@ export const ProjetInfoForm = ({ projet, readOnly }: ProjetInfoFormProps) => {
           control={form.control}
           path="adresse"
           label="Si je la connais, adresse du lieu de l'intervention"
-          disabled={disabled}
-        />
-        <SelectFormField
-          control={form.control}
-          path="niveauMaturite"
-          label="Niveau de maturité du projet"
-          asterisk={true}
-          options={niveauxMaturiteProjetOptions}
-          placeholder="Selectionnez un niveau de maturité"
           disabled={disabled}
         />
         <CommuneInputFormField

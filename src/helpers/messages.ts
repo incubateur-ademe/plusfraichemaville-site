@@ -27,7 +27,6 @@ export const success = {
   DECLINE_REQUEST_PROJECT_ACCESS: "Vous avez refusé la demande d'accès au projet.",
   REQUEST_SENT: "Votre demande a bien été envoyée.",
   QUIT_PROJET: "Vous avez quitté le projet.",
-  MATURITE_PROJET_UPDATED: "Le niveau de maturité de votre projet a été mis à jour.",
   VISIBILITY_UPDATED: "La visibilité du projet a été mis à jour.",
   PROJET_STATUT_UPDATED: "Le statut du projet a été mis à jour.",
   CSV_GENERATED: "Le fichier CSV a été généré.",

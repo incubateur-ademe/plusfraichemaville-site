@@ -14,7 +14,6 @@ import { PartageOverviewPopupMenu } from "@/src/components/espace-projet/utilisa
 import { useModalStore } from "@/src/stores/modal/provider";
 import { hasDiscardedInformation } from "@/src/helpers/user";
 import { MODE_LECTEUR_MODAL_ID } from "@/src/components/tableau-de-bord/viewer-mode-modal";
-import { Maturite } from "../maturite/maturite";
 import { getUserRoleFromCode } from "@/src/helpers/user-role";
 import { useIsLecteur } from "@/src/hooks/use-is-lecteur";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
@@ -162,31 +161,19 @@ export const ProjetCard = ({ projet, invitationStatus, isBrowsing, updateProjet 
 
           <div className="mt-auto">
             {invitationStatus === InvitationStatus.ACCEPTED && (
-              <div className="flex w-full flex-row justify-between gap-4">
-                <div className="hidden items-center justify-end gap-2 md:flex">
-                  <label htmlFor="maturite-select" className="mt-1 text-sm font-bold text-pfmv-navy">
-                    Maturité du projet :{" "}
-                  </label>
-                  <Maturite
-                    id={"maturite-select-" + updatedProjet.id}
-                    niveau={updatedProjet.niveau_maturite}
-                    projetId={updatedProjet.id}
-                  />
-                </div>
-                <div className={clsx("flex gap-4 text-sm")}>
-                  <LinkWithoutPrefetch
-                    className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
-                    onClick={openProjet}
-                    href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}
-                  >
-                    Accéder au projet
-                  </LinkWithoutPrefetch>
-                  <PartageOverviewPopupMenu
-                    members={members}
-                    projectId={updatedProjet.id}
-                    currentUserInfo={currentUserInfo}
-                  />
-                </div>
+              <div className="flex w-full flex-row justify-end gap-4">
+                <LinkWithoutPrefetch
+                  className="fr-btn--tertiary fr-btn--sm fr-btn fr-btn--icon-left rounded-3xl"
+                  onClick={openProjet}
+                  href={PFMV_ROUTES.TABLEAU_DE_BORD(updatedProjet.id)}
+                >
+                  Accéder au projet
+                </LinkWithoutPrefetch>
+                <PartageOverviewPopupMenu
+                  members={members}
+                  projectId={updatedProjet.id}
+                  currentUserInfo={currentUserInfo}
+                />
               </div>
             )}
             {invitationStatus === InvitationStatus.INVITED && (

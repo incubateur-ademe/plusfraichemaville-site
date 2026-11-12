@@ -53,7 +53,6 @@ export const upsertProjetAction = async (
         typeEspace: data.typeEspace,
         adresse: data.adresse?.label || undefined,
         adresse_all_infos: data.adresse?.banInfo || undefined,
-        niveauMaturite: data.niveauMaturite,
         collectiviteId: collectiviteId,
         userId: user.id,
         isPublic: data.isPublic,
@@ -70,18 +69,6 @@ export const upsertProjetAction = async (
         reference_type: ReferenceType.PROJET,
         user_id: session.user.id,
       });
-
-      if (updatedProjet && projetToEdit?.niveau_maturite !== updatedProjet.niveau_maturite) {
-        await createAnalytic({
-          context: {
-            maturite: updatedProjet.niveau_maturite,
-          },
-          event_type: EventType.UPDATE_MATURITE,
-          reference_id: updatedProjet?.id.toString(),
-          reference_type: ReferenceType.PROJET,
-          user_id: session.user.id,
-        });
-      }
 
       const isUpdatingExistingProjet = !!data.projetId;
       if (
