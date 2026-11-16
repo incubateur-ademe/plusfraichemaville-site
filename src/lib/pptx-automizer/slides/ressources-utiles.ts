@@ -1,41 +1,77 @@
-import { ISlide, modify, ShapeModificationCallback } from "pptx-automizer";
+import { modify, ShapeModificationCallback, XmlElement } from "pptx-automizer";
 import { AddTemplateSlide, PptxSlideInfo } from "./types";
 import { PptxSlideElement, PptxTemplateTag } from "../types";
-import { getPlainTextFromHtml, mergeTextRunsInElement } from "../helpers";
+import { getPlainTextFromHtml } from "../helpers";
 import { FicheSolution } from "@/src/lib/strapi/types/api/fiche-solution";
 import { customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 
-// The source template's "template" alias, as loaded in generate-synthese-projet-pptx.ts.
-const TEMPLATE_PRES_NAME = "template";
+// ---------------------------------------------------------------------------------------
+// Every fiche solution shown on a slide flows in the template's single
+// zone_ressources_fiche_solution text box: for each fiche, a bold title paragraph followed by
+// its en_savoir_plus content paragraphs. PowerPoint itself lays the text out, so the spacing
+// between two fiches is a real paragraph spacing (spcBef) and stays exact whatever the
+// platform's font rendering — unlike absolutely positioned boxes, which relied on an estimate
+// of each block's rendered height and could end up touching or overlapping (seen on PowerPoint
+// for Mac). The template's zone_titre_fiche_solution shape is only kept as a visual reference
+// in the template and removed from every generated slide.
+//
+// Only pagination (how many fiches fit on one slide) still relies on an estimate (see
+// buildSlidePlans): a misestimate can at worst make the last fiche run slightly past the
+// bottom of the slide, never overlap another fiche.
+// ---------------------------------------------------------------------------------------
 
-// Layout constants (EMU), read off the pristine template slide (8)'s own shapes: a fiche
-// solution's title (zone_titre_fiche_solution) directly above its ressources content
-// (zone_ressources_fiche_solution). Reused to flow every selected fiche solution's title +
-// content one below another, as many as fit per slide (see buildSlidePlans below), the same
-// read-off-the-template approach as estimation-recap.ts.
-const TITLE_TOP_EMU = 1093598; // zone_titre_fiche_solution's own y
-const TITLE_HEIGHT_EMU = 400110; // zone_titre_fiche_solution's cy (single line, sz 2000, bold)
-const CONTENT_TOP_EMU = 1626616; // zone_ressources_fiche_solution's own y
-// The template's own title-to-content gap; reused between two different fiches' blocks too.
-const BLOCK_GAP_EMU = CONTENT_TOP_EMU - (TITLE_TOP_EMU + TITLE_HEIGHT_EMU);
-const CONTENT_WIDTH_EMU = 9706988; // zone_ressources_fiche_solution's cx
-// PowerPoint's default text box insets (top 45720 + bottom 45720 EMU), left unset by the
-// template's bodyPr, and the resulting line height derived from the template's own
-// single-line content box height (cy 276999, at the content's sz 1200 = 12pt).
-const CONTENT_BOX_VERTICAL_INSETS_EMU = 91440;
-const CONTENT_LINE_HEIGHT_EMU = 276999 - CONTENT_BOX_VERTICAL_INSETS_EMU;
-// Average glyph width for Calibri at the content's font size, used to estimate line-wrapping
-// since no actual text-layout engine runs at generation time — PowerPoint only lays out the
-// real text once the file is opened. Deliberately narrower than a typical measured average
-// (~0.5em) to avoid underestimating a block's height and overflowing past the next block.
-const CONTENT_AVG_CHAR_WIDTH_EMU = 0.55 * 12 * 12700;
-const CONTENT_CHARS_PER_LINE = Math.floor(CONTENT_WIDTH_EMU / CONTENT_AVG_CHAR_WIDTH_EMU);
-// The footer divider's own y, minus a small safety margin, is the lowest a block may extend to.
+const EMU_PER_POINT = 12700;
+
+// Geometry read off the pristine template slide's own shapes: the title box
+// (zone_titre_fiche_solution, x 576262 / y 1093598) and the content box
+// (zone_ressources_fiche_solution, x 839464 / cx 9706988), indented relative to the title.
+// The shared box starts where the title box was and ends where the content box ended; content
+// paragraphs are indented by the template's own title-to-content x offset.
+const TITLE_X_EMU = 576262;
+const TITLE_Y_EMU = 1093598;
+const CONTENT_X_EMU = 839464;
+const CONTENT_RIGHT_EMU = CONTENT_X_EMU + 9706988;
+const BOX_WIDTH_EMU = CONTENT_RIGHT_EMU - TITLE_X_EMU;
+const CONTENT_INDENT_EMU = CONTENT_X_EMU - TITLE_X_EMU;
+// PowerPoint's default text box insets (top/bottom 45720, left/right 91440 EMU), left unset by
+// the template's bodyPr.
+const BOX_VERTICAL_INSETS_EMU = 2 * 45720;
+const BOX_HORIZONTAL_INSETS_EMU = 2 * 91440;
+// The footer divider's own y, minus a small safety margin, is the lowest the text may extend to.
 const MAX_CONTENT_BOTTOM_EMU = 6512991 - 200000;
+const BOX_HEIGHT_EMU = MAX_CONTENT_BOTTOM_EMU - TITLE_Y_EMU;
+const AVAILABLE_TEXT_HEIGHT_EMU = BOX_HEIGHT_EMU - BOX_VERTICAL_INSETS_EMU;
+
+// Text sizes, as on the template's own title (sz 2000, bold) and content (sz 1200) shapes.
+const TITLE_FONT_SIZE_PT = 20;
+// Line heights derived from the template's own single-line box heights (title cy 400110,
+// content cy 276999), minus the box insets.
+const TITLE_LINE_HEIGHT_EMU = 400110 - BOX_VERTICAL_INSETS_EMU;
+const CONTENT_LINE_HEIGHT_EMU = 276999 - BOX_VERTICAL_INSETS_EMU;
+
+// Space above a fiche's first content paragraph: the gap the template shows between the title
+// box's text and the content box's text (≈ 17.7pt).
+const TITLE_TO_CONTENT_SPACING_PT = 18;
+// Space above every fiche's title but the slide's first one — what separates two fiches.
+const BETWEEN_FICHES_SPACING_PT = 24;
+
+// Average glyph width (as a fraction of the font size), used to estimate line-wrapping for
+// pagination only, since no actual text-layout engine runs at generation time.
+const AVG_CHAR_WIDTH_FACTOR = 0.55;
+const TITLE_CHARS_PER_LINE = Math.floor(
+  (BOX_WIDTH_EMU - BOX_HORIZONTAL_INSETS_EMU) / (AVG_CHAR_WIDTH_FACTOR * TITLE_FONT_SIZE_PT * EMU_PER_POINT),
+);
+const CONTENT_CHARS_PER_LINE = Math.floor(
+  (BOX_WIDTH_EMU - BOX_HORIZONTAL_INSETS_EMU - CONTENT_INDENT_EMU) / (AVG_CHAR_WIDTH_FACTOR * 12 * EMU_PER_POINT),
+);
 
 // Paragraph/line-break boundaries considered when estimating how many lines a fiche
 // solution's en_savoir_plus HTML will wrap to (see estimateContentLineCount).
 const BLOCK_BOUNDARY_REGEX = /<\/(?:p|li|h[1-6]|div|blockquote)>|<br\s*\/?>/gi;
+// Blocks htmlToMultiText separates from their neighbours by a one-line spaceBefore (the
+// projection of the browser's default `margin: 1em 0`); lists get one on both edges.
+const MARGIN_BLOCK_OPENING_REGEX = /<(?:p|h[1-6]|blockquote)[\s>]/gi;
+const LIST_OPENING_REGEX = /<(?:ul|ol)[\s>]/gi;
 
 // HTML void elements that WYSIWYG editors commonly leave unclosed (`<br>` instead of
 // `<br/>`), which the strict-ish XML parser behind modify.htmlToMultiText cannot read.
@@ -57,6 +93,8 @@ const RESSOURCES_UTILES_FONT_FAMILY = "Marianne";
 export const getFichesSolutionsAvecRessourcesUtiles = (fichesSolutions: FicheSolution[]): FicheSolution[] =>
   fichesSolutions.filter((ficheSolution) => Boolean(getPlainTextFromHtml(ficheSolution.en_savoir_plus)));
 
+const escapeXmlText = (text: string): string => text.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
 /**
  * Best-effort normalization of a fiche solution's en_savoir_plus HTML before handing it to
  * modify.htmlToMultiText, whose XML-based parser expects closed tags: self-closes void
@@ -72,49 +110,106 @@ const sanitizeHtmlForMultiText = (html: string): string => {
   );
 };
 
+const wrapForMultiText = (html: string): string =>
+  `<body><div style="font-family: ${RESSOURCES_UTILES_FONT_FAMILY}">${html}</div></body>`;
+
 /**
- * Converts a fiche solution's en_savoir_plus HTML (paragraphs, bullet lists, links) into the
- * ressources content shape's real pptx paragraphs — bullet lists and clickable hyperlinks
- * included — via pptx-automizer's own HTML-to-multitext conversion, which also takes care of
- * decoding HTML entities (e.g. `&amp;`) correctly. Falls back to plain text if the content
- * still doesn't parse (malformed markup), rather than failing the whole export.
+ * Runs pptx-automizer's own HTML-to-multitext conversion (bullet lists, clickable hyperlinks,
+ * entity decoding) on a detached clone of the template text box, and returns the generated
+ * paragraphs, still detached, ready to be appended to the real text body. The clone carries the
+ * template's own placeholder run, so the generated runs inherit its size and color. Hyperlink
+ * relationships are added to the slide's real relations, so they stay valid once moved.
  */
-const applyRessourcesUtilesContent = (html: string): ShapeModificationCallback => {
-  return (element, relation) => {
-    try {
-      modify.htmlToMultiText(
-        `<body><div style="font-family: ${RESSOURCES_UTILES_FONT_FAMILY}">${sanitizeHtmlForMultiText(
-          html,
-        )}</div></body>`,
-      )(element, relation);
-    } catch (e) {
-      customCaptureException("Error converting en_savoir_plus HTML to pptx multi-text, falling back to plain text", e);
-      modify.setText(getPlainTextFromHtml(html))(element);
-    }
-  };
+const convertHtmlToParagraphs = (
+  templateElement: XmlElement,
+  relation: XmlElement | undefined,
+  html: string,
+): XmlElement[] => {
+  const scratch = templateElement.cloneNode(true) as XmlElement;
+  modify.htmlToMultiText(wrapForMultiText(html))(scratch, relation);
+  return Array.from(scratch.getElementsByTagName("a:p"));
 };
 
 /**
- * Best-effort line-count estimate for a fiche solution's ressources content: no actual
- * text-layout engine runs at generation time, so wrapping is approximated per paragraph/list
- * item/heading boundary, from its plain-text length and the content box's own known width and
- * font size (see CONTENT_CHARS_PER_LINE above).
+ * A fiche solution's en_savoir_plus content as paragraphs. Falls back to plain text if the
+ * content still doesn't parse (malformed markup), rather than failing the whole export.
+ */
+const convertContentToParagraphs = (
+  templateElement: XmlElement,
+  relation: XmlElement | undefined,
+  html: string,
+): XmlElement[] => {
+  try {
+    return convertHtmlToParagraphs(templateElement, relation, sanitizeHtmlForMultiText(html));
+  } catch (e) {
+    customCaptureException("Error converting en_savoir_plus HTML to pptx multi-text, falling back to plain text", e);
+    return convertHtmlToParagraphs(templateElement, relation, `<p>${escapeXmlText(getPlainTextFromHtml(html))}</p>`);
+  }
+};
+
+const getParagraphProperties = (paragraph: XmlElement): XmlElement | undefined => {
+  const pPr = paragraph.getElementsByTagName("a:pPr")[0];
+  if (pPr) return pPr;
+  const ownerDocument = paragraph.ownerDocument;
+  if (!ownerDocument) return undefined;
+  const created = ownerDocument.createElement("a:pPr");
+  paragraph.insertBefore(created, paragraph.firstChild);
+  return created;
+};
+
+/** Sets a paragraph's space before to a fixed number of points, replacing any existing one. */
+const setParagraphSpaceBefore = (paragraph: XmlElement, points: number) => {
+  const pPr = getParagraphProperties(paragraph);
+  const ownerDocument = paragraph.ownerDocument;
+  if (!pPr || !ownerDocument) return;
+
+  Array.from(pPr.getElementsByTagName("a:spcBef")).forEach((existing) => pPr.removeChild(existing));
+  const spcBef = ownerDocument.createElement("a:spcBef");
+  const spcPts = ownerDocument.createElement("a:spcPts");
+  spcPts.setAttribute("val", String(Math.round(points * 100)));
+  spcBef.appendChild(spcPts);
+
+  // a:spcBef must directly follow a:lnSpc when present (CT_TextParagraphProperties order).
+  const lnSpc = pPr.getElementsByTagName("a:lnSpc")[0];
+  pPr.insertBefore(spcBef, lnSpc ? lnSpc.nextSibling : pPr.firstChild);
+};
+
+/** Shifts a paragraph's left margin (bullet lists included) by `offsetEmu`. */
+const indentParagraph = (paragraph: XmlElement, offsetEmu: number) => {
+  const pPr = getParagraphProperties(paragraph);
+  if (!pPr) return;
+  const currentMarL = parseInt(pPr.getAttribute("marL") || "0", 10) || 0;
+  pPr.setAttribute("marL", String(currentMarL + offsetEmu));
+};
+
+/**
+ * Best-effort line-count estimate for a fiche solution's ressources content, approximated per
+ * paragraph/list item/heading boundary from its plain-text length (see CONTENT_CHARS_PER_LINE),
+ * plus the one-line gaps htmlToMultiText puts between paragraphs and around lists.
  */
 const estimateContentLineCount = (html: string): number => {
   const segments = html
     .split(BLOCK_BOUNDARY_REGEX)
     .map((segment) => getPlainTextFromHtml(segment))
     .filter(Boolean);
-  if (segments.length === 0) return 1;
-  return segments.reduce(
-    (total, segment) => total + Math.max(1, Math.ceil(segment.length / CONTENT_CHARS_PER_LINE)),
-    0,
-  );
+  const textLines =
+    segments.length === 0
+      ? 1
+      : segments.reduce((total, segment) => total + Math.max(1, Math.ceil(segment.length / CONTENT_CHARS_PER_LINE)), 0);
+  const marginBlockCount = (html.match(MARGIN_BLOCK_OPENING_REGEX) ?? []).length;
+  const listCount = (html.match(LIST_OPENING_REGEX) ?? []).length;
+  const marginLines = Math.max(0, marginBlockCount + 2 * listCount - 1);
+  return textLines + marginLines;
 };
 
-const estimateBlockHeightEmu = (html: string): number => {
-  const contentHeightEmu = CONTENT_BOX_VERTICAL_INSETS_EMU + estimateContentLineCount(html) * CONTENT_LINE_HEIGHT_EMU;
-  return TITLE_HEIGHT_EMU + BLOCK_GAP_EMU + contentHeightEmu;
+/** Estimated height of one fiche's title + content, without the spacing above its title. */
+const estimateBlockHeightEmu = (ficheSolution: FicheSolution, html: string): number => {
+  const titleLines = Math.max(1, Math.ceil((ficheSolution.titre ?? "").length / TITLE_CHARS_PER_LINE));
+  return (
+    titleLines * TITLE_LINE_HEIGHT_EMU +
+    TITLE_TO_CONTENT_SPACING_PT * EMU_PER_POINT +
+    estimateContentLineCount(html) * CONTENT_LINE_HEIGHT_EMU
+  );
 };
 
 type RessourceBlock = {
@@ -123,36 +218,31 @@ type RessourceBlock = {
   estimatedHeightEmu: number;
 };
 
-type RessourceBlockPlacement = {
-  ficheSolution: FicheSolution;
-  html: string;
-  titleY: number;
-  contentY: number;
-};
-
 /**
  * Groups fiche solutions' title+content blocks into slide pages: a block is never split
  * across two slides (its title is never separated from its content) — if it doesn't fit in
  * what's left of the current slide, the whole block moves to a fresh one, which always fits
  * at least one block even if that block's own estimated height alone exceeds the page.
  */
-const buildSlidePlans = (blocks: RessourceBlock[]): RessourceBlockPlacement[][] => {
-  const slidePlans: RessourceBlockPlacement[][] = [];
-  let currentPlan: RessourceBlockPlacement[] = [];
-  let cursorY = TITLE_TOP_EMU;
+const buildSlidePlans = (blocks: RessourceBlock[]): RessourceBlock[][] => {
+  const slidePlans: RessourceBlock[][] = [];
+  let currentPlan: RessourceBlock[] = [];
+  let usedHeightEmu = 0;
 
   blocks.forEach((block) => {
-    const wouldOverflow = currentPlan.length > 0 && cursorY + block.estimatedHeightEmu > MAX_CONTENT_BOTTOM_EMU;
+    const spacingAboveEmu = currentPlan.length > 0 ? BETWEEN_FICHES_SPACING_PT * EMU_PER_POINT : 0;
+    const wouldOverflow =
+      currentPlan.length > 0 && usedHeightEmu + spacingAboveEmu + block.estimatedHeightEmu > AVAILABLE_TEXT_HEIGHT_EMU;
     if (wouldOverflow) {
       slidePlans.push(currentPlan);
       currentPlan = [];
-      cursorY = TITLE_TOP_EMU;
+      usedHeightEmu = 0;
+    } else {
+      usedHeightEmu += spacingAboveEmu;
     }
 
-    const titleY = cursorY;
-    const contentY = titleY + TITLE_HEIGHT_EMU + BLOCK_GAP_EMU;
-    currentPlan.push({ ficheSolution: block.ficheSolution, html: block.html, titleY, contentY });
-    cursorY += block.estimatedHeightEmu + BLOCK_GAP_EMU;
+    currentPlan.push(block);
+    usedHeightEmu += block.estimatedHeightEmu;
   });
 
   if (currentPlan.length > 0) slidePlans.push(currentPlan);
@@ -160,52 +250,45 @@ const buildSlidePlans = (blocks: RessourceBlock[]): RessourceBlockPlacement[][] 
 };
 
 /**
- * Places one fiche solution's title+content block at its computed absolute Y. The first block
- * on a slide reuses the template's own pristine shapes (useTemplateShape); every subsequent
- * one is cloned from the pristine template slide, same pattern as estimation-recap.ts.
+ * Fills the template's zone_ressources_fiche_solution box with every fiche of the slide, one
+ * title paragraph + its content paragraphs after another, then drops the template's own
+ * placeholder paragraph. The box is moved to where the template's title box was, and stretched
+ * to the full available height.
  */
-const placeBlock = (
-  slide: ISlide,
-  slideNumber: number,
-  placement: RessourceBlockPlacement,
-  useTemplateShape: boolean,
-) => {
-  const titleCallbacks: ShapeModificationCallback[] = [
-    mergeTextRunsInElement,
-    modify.replaceText([
-      { replace: PptxTemplateTag.TITRE_FICHE_SOLUTION, by: { text: placement.ficheSolution.titre ?? "" } },
-    ]),
-    modify.setPosition({ y: placement.titleY }),
-  ];
-  const contentCallbacks: ShapeModificationCallback[] = [
-    applyRessourcesUtilesContent(placement.html),
-    modify.setPosition({ y: placement.contentY }),
-  ];
+const applyRessourcesUtilesBlocks = (blocks: RessourceBlock[]): ShapeModificationCallback => {
+  return (element, relation) => {
+    const txBody = element.getElementsByTagName("p:txBody")[0];
+    if (!txBody) return;
+    const placeholderParagraphs = Array.from(txBody.getElementsByTagName("a:p"));
 
-  if (useTemplateShape) {
-    slide.modifyElement({ name: PptxSlideElement.ZONE_TITRE_FICHE_SOLUTION_RESSOURCES_UTILES }, titleCallbacks);
-    slide.modifyElement({ name: PptxSlideElement.ZONE_RESSOURCES_UTILES_FICHE_SOLUTION }, contentCallbacks);
-  } else {
-    slide.addElement(
-      TEMPLATE_PRES_NAME,
-      slideNumber,
-      { name: PptxSlideElement.ZONE_TITRE_FICHE_SOLUTION_RESSOURCES_UTILES },
-      titleCallbacks,
-    );
-    slide.addElement(
-      TEMPLATE_PRES_NAME,
-      slideNumber,
-      { name: PptxSlideElement.ZONE_RESSOURCES_UTILES_FICHE_SOLUTION },
-      contentCallbacks,
-    );
-  }
+    blocks.forEach((block, index) => {
+      const titleHtml = `<p style="font-size: ${TITLE_FONT_SIZE_PT}pt"><b>${escapeXmlText(
+        block.ficheSolution.titre ?? "",
+      )}</b></p>`;
+      const titleParagraphs = convertHtmlToParagraphs(element, relation, titleHtml);
+      const contentParagraphs = convertContentToParagraphs(element, relation, block.html);
+
+      titleParagraphs.forEach((paragraph, paragraphIndex) => {
+        if (paragraphIndex === 0) setParagraphSpaceBefore(paragraph, index === 0 ? 0 : BETWEEN_FICHES_SPACING_PT);
+        txBody.appendChild(paragraph);
+      });
+      contentParagraphs.forEach((paragraph, paragraphIndex) => {
+        indentParagraph(paragraph, CONTENT_INDENT_EMU);
+        if (paragraphIndex === 0) setParagraphSpaceBefore(paragraph, TITLE_TO_CONTENT_SPACING_PT);
+        txBody.appendChild(paragraph);
+      });
+    });
+
+    placeholderParagraphs.forEach((paragraph) => paragraph.parentNode?.removeChild(paragraph));
+    modify.setPosition({ x: TITLE_X_EMU, y: TITLE_Y_EMU, w: BOX_WIDTH_EMU, h: BOX_HEIGHT_EMU })(element);
+  };
 };
 
 /**
  * Slide 8: every selected fiche solution's ressources utiles (its en_savoir_plus field),
- * flowing one title+content block below another — as many as fit per slide (see
- * buildSlidePlans). The pagination tag shows "i/N" once more than one slide was needed, and
- * is left empty otherwise.
+ * flowing one title+content block below another in a single text box — as many as estimated
+ * to fit per slide (see buildSlidePlans). The pagination tag shows "i/N" once more than one
+ * slide was needed, and is left empty otherwise.
  */
 export const addRessourcesUtilesSlides = (
   addTemplateSlide: AddTemplateSlide,
@@ -214,7 +297,7 @@ export const addRessourcesUtilesSlides = (
 ) => {
   const blocks: RessourceBlock[] = fichesSolutionsAvecRessourcesUtiles.map((ficheSolution) => {
     const html = getPlainTextFromHtml(ficheSolution.en_savoir_plus) ? (ficheSolution.en_savoir_plus as string) : "";
-    return { ficheSolution, html, estimatedHeightEmu: estimateBlockHeightEmu(html) };
+    return { ficheSolution, html, estimatedHeightEmu: estimateBlockHeightEmu(ficheSolution, html) };
   });
 
   const slidePlans = buildSlidePlans(blocks);
@@ -229,8 +312,12 @@ export const addRessourcesUtilesSlides = (
         },
       ],
       (slide) => {
-        slidePlan.forEach((placement, index) => placeBlock(slide, slideInfo.number, placement, index === 0));
+        slide.modifyElement(
+          { name: PptxSlideElement.ZONE_RESSOURCES_UTILES_FICHE_SOLUTION },
+          applyRessourcesUtilesBlocks(slidePlan),
+        );
       },
+      [PptxSlideElement.ZONE_TITRE_FICHE_SOLUTION_RESSOURCES_UTILES],
     );
   });
 };

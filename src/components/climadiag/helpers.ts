@@ -1,6 +1,11 @@
 import { climadiag } from "@/src/generated/prisma/client";
 import { Climadiag, ClimadiagTemperatureJourMap, ClimadiagYear, GroupedOptions, Option } from "./types";
 
+const LCZ_PERCENTAGE_COVERAGE_THRESHOLD = 5;
+
+export const hasLczCoverage = (climadiagInfo: Pick<climadiag, "couverture_lcz">) =>
+  climadiagInfo.couverture_lcz > LCZ_PERCENTAGE_COVERAGE_THRESHOLD;
+
 export const climadiagInfoLabel = (climadiagInfo: climadiag) =>
   climadiagInfo.type_lieu === "epci"
     ? `${climadiagInfo.nom} - EPCI`

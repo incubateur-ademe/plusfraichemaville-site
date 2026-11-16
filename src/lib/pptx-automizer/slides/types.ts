@@ -10,6 +10,8 @@ export type PptxSlideInfo = {
     nameIdx: number;
     hasTextBody: boolean;
     position?: { x: number; y: number; cx: number; cy: number };
+    // Text fragments of the shape's text body, as on the template slide.
+    getText?: () => string[];
   }[];
 };
 

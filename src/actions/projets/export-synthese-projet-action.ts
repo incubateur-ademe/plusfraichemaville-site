@@ -49,6 +49,8 @@ export const exportSyntheseProjetAction = async (
   try {
     const fileBuffer = await generateSyntheseProjetPptx({
       projet,
+      includeCarteLcz: parse.data.includeCarteLcz,
+      includeClimadiag: parse.data.includeClimadiag,
       diagnosticIds: parse.data.diagnosticIds,
       includeAnalyseSimplifiee: parse.data.includeAnalyseSimplifiee,
       solutionIds: parse.data.solutionIds,
@@ -67,6 +69,8 @@ export const exportSyntheseProjetAction = async (
 
     await createAnalytic({
       context: {
+        carteLczIncluded: parse.data.includeCarteLcz,
+        climadiagIncluded: parse.data.includeClimadiag,
         fichesDiagnosticIncluded: parse.data.diagnosticIds,
         fichesDiagnosticExcluded: allDiagnosticFicheIds.filter(
           (ficheId) => !parse.data.diagnosticIds.includes(ficheId),

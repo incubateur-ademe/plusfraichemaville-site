@@ -119,6 +119,26 @@ export const replaceTagWithBulletList = (element: XmlElement, tag: string, items
 };
 
 /**
+ * Replaces the text of a single-paragraph shape holding a sample value rather than a tag, split
+ * into runs formatted differently (e.g. a number then its unit in a smaller size): each text goes
+ * into the run at the same position, keeping its formatting. Runs without a text are removed,
+ * texts without a run are appended to the last one.
+ */
+export const setElementTextRuns = (element: XmlElement, texts: string[]) => {
+  const runs = Array.from(element.getElementsByTagName("a:r"));
+  if (!runs.length) return;
+
+  runs.forEach((run, index) => {
+    const t = run.getElementsByTagName("a:t")[0];
+    if (index >= texts.length || !t) {
+      run.parentNode?.removeChild(run);
+      return;
+    }
+    t.textContent = index === runs.length - 1 ? texts.slice(index).join("") : texts[index];
+  });
+};
+
+/**
  * Removes the SVG extension (`<asvg:svgBlip>`) from an image element's `<a:blip>`.
  *
  * A picture inserted in PowerPoint from an SVG file keeps two linked images: a PNG

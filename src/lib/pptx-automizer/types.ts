@@ -6,6 +6,9 @@ export enum PptxTemplateTag {
   CODE_POSTAL_PROJET = "code_postal_projet",
   ADRESSE_PROJET = "adresse_projet",
   DATE_GENERATION_SYNTHESE = "date_generation_synthese",
+  SOUS_TITRE_ENJEUX_CLIMATIQUES = "sous_titre_enjeux_climatiques",
+  SEUIL_JOURS_CHAUDS = "seuil_jours_chauds",
+  SEUIL_NUITS_CHAUDES = "seuil_nuits_chaudes",
   TITRE_FICHES_DIAGNOSTIC = "titre_fiches_diagnostic",
   // Analyse simplifiée slide (3): each coefficient's value and its range analysis.
   COEFF_RU = "coeff_ru",
@@ -55,23 +58,31 @@ export enum PptxTemplateTag {
   AIDE_ECHEANCE = "aide_echeance",
   AIDE_LIEN = "aide_lien",
   PAGINATION_AIDES = "pagination_aides",
+  // Sommaire slide (2): one card per section, see slides/sommaire.ts.
+  SOMMAIRE_TITRE_SECTION = "chapitre_titre",
+  SOMMAIRE_DEBUT_SECTION = "debut",
+  SOMMAIRE_FIN_SECTION = "fin",
 }
 
 export enum PptxSlide {
   PAGE_DE_GARDE = 1,
-  ANALYSE_SIMPLIFIEE_INTRO = 2,
-  ANALYSE_SIMPLIFIEE = 3,
-  FICHES_DIAGNOSTIC_INTRO = 4,
-  FICHE_DIAGNOSTIC_DETAIL = 5,
-  FICHES_SOLUTION_INTRO = 6,
-  FICHE_SOLUTION_DETAIL = 7,
-  FICHE_SOLUTION_MATERIAUX = 8,
-  ESTIMATION_INTRO = 9,
-  ESTIMATION_RECAP = 10,
-  AIDES_INTRO = 11,
-  AIDES = 12,
-  RESSOURCES_UTILES_INTRO = 13,
-  RESSOURCES_UTILES = 14,
+  SOMMAIRE = 2,
+  ENJEUX_CLIMATIQUES_INTRO = 3,
+  CARTE_LCZ = 4,
+  CLIMADIAG = 5,
+  ANALYSE_SIMPLIFIEE_INTRO = 6,
+  ANALYSE_SIMPLIFIEE = 7,
+  FICHES_DIAGNOSTIC_INTRO = 8,
+  FICHE_DIAGNOSTIC_DETAIL = 9,
+  FICHES_SOLUTION_INTRO = 10,
+  FICHE_SOLUTION_DETAIL = 11,
+  FICHE_SOLUTION_MATERIAUX = 12,
+  ESTIMATION_INTRO = 13,
+  ESTIMATION_RECAP = 14,
+  AIDES_INTRO = 15,
+  AIDES = 16,
+  RESSOURCES_UTILES_INTRO = 17,
+  RESSOURCES_UTILES = 18,
 }
 
 // Names of non-text shapes on the template slides, targeted via slide.removeElement().
@@ -109,6 +120,30 @@ export enum PptxSlideElement {
   // Analyse simplifiée slide (3): pie chart of the surface's répartition, like
   // IndienResultPieChartSurface.
   GRAPH_REPARTITION_SOLS = "graph_repartition_sols",
+  // Climadiag slide (4): the row title of each indicator. Its values live in shapes named
+  // `<row>_reference`, `<row>_2030`, `<row>_2050` and `<row>_2100`.
+  JOURS_CHAUDS_TITRE = "jours_chauds_titre",
+  NUITS_CHAUDES_TITRE = "nuits_chaudes_titre",
+  // Climadiag slide (4): backgrounds of the rows and of the legend. The shapes of a row are not
+  // grouped with its background, they are only laid out on top of it.
+  SHP_NUITS_CHAUDES = "shp_nuits_chaudes",
+  SHP_VDC = "shp_vdc",
+  SHP_LEGENDE_CLIMADIAG = "shp_legende_climadiag",
+  // Climadiag slide (4): shapes laid out on top of shp_vdc and shp_legende_climadiag.
+  VDC_PICTO = "vdc_picto",
+  VDC_TITRE = "vdc_titre",
+  VDC_REFERENCE = "vdc_reference",
+  VDC_2030 = "vdc_2030",
+  VDC_2050 = "vdc_2050",
+  VDC_2100 = "vdc_2100",
+  LEGENDE_TEXTE = "legende_texte",
+  // Carte LCZ slide (3): the map picture, swapped for the commune's own map.
+  CARTE_LCZ = "carte_lcz",
+  // Sommaire slide (2): one section's card, duplicated once per section included in the export.
+  SOMMAIRE_CARTE = "sommaire_shp",
+  SOMMAIRE_TITRE = "sommaire_titre",
+  SOMMAIRE_PLAN = "sommaire_plan",
+  SOMMAIRE_NUMERO = "sommaire_numero",
 }
 
 // The materiau row (contour_materiau + its texts and image) is duplicated for the 2nd and
@@ -128,6 +163,8 @@ export const getPictoCobeneficeElementName = (slotIndex: number) => `picto_coben
 
 export type GenerateSyntheseProjetPptxParams = {
   projet: ProjetWithRelations;
+  includeCarteLcz?: boolean;
+  includeClimadiag?: boolean;
   diagnosticIds?: string[];
   includeAnalyseSimplifiee?: boolean;
   solutionIds?: string[];
