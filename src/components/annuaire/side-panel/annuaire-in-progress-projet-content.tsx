@@ -4,7 +4,6 @@ import Badge from "@codegouvfr/react-dsfr/Badge";
 import { getRegionLabelForProjet } from "@/src/helpers/regions";
 import { AnnuaireContact } from "@/src/components/annuaire/types";
 import Tag from "@codegouvfr/react-dsfr/Tag";
-import { Maturite } from "@/src/components/maturite/maturite";
 import { getOldestAdmin } from "../../liste-projets/helpers";
 import { AnnuaireContactCard } from "../contacts/annuaire-contact-card";
 import { useProjetsStore } from "@/src/stores/projets/provider";
@@ -47,18 +46,6 @@ export const AnnuaireInProgressProjetContent = ({ data }: { data: ProjetWithPubl
           <Tag small className="!m-0 h-fit">
             {regionLabel}
           </Tag>
-          <div className="flex flex-row items-center gap-2">
-            <label htmlFor="maturite-select" className="text-nowrap text-sm text-dsfr-text-mention-grey">
-              Maturité du projet
-            </label>
-            <Maturite
-              id="maturite-select"
-              niveau={data.niveau_maturite}
-              projetId={data.id}
-              editable={false}
-              buttonBgHoverColor="!bg-dsfr-background-alt-blue-france"
-            />
-          </div>
         </div>
       </div>
       {contact && (

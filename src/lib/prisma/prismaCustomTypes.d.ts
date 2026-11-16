@@ -91,7 +91,6 @@ export type UserProjetWithPublicInfos = Prisma.user_projetGetPayload<{
         collectivite: true;
         nom: true;
         type_espace: true;
-        niveau_maturite: true;
         adresse_all_infos: true;
       };
     };
@@ -135,7 +134,6 @@ export type ProjetSourcingContact = Prisma.projet_sourcing_contactGetPayload<{
             collectivite: true;
             nom: true;
             type_espace: true;
-            niveau_maturite: true;
             adresse_all_infos: true;
           };
         };
@@ -162,7 +160,7 @@ export interface ProjetWithRelations extends projet {
 }
 
 export interface ProjetWithPublicRelations
-  extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace" | "niveau_maturite" | "adresse_all_infos"> {
+  extends Pick<projet, "id" | "nom" | "collectiviteId" | "type_espace" | "adresse_all_infos"> {
   collectivite: collectivite;
   users: UserProjetWithUserInfos[];
 }

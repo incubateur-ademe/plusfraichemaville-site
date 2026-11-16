@@ -34,8 +34,15 @@ export const updateFichesProjetAction = async ({
     return { type: "error", message: "UNAUTHORIZED", projet: null };
   }
 
+  const isAdd = typeUpdate === TypeUpdate.add;
   const message =
-    typeFiche === TypeFiche.solution ? "FICHE_SOLUTION_ADDED_TO_PROJET" : "FICHE_DIAGNOSTIC_ADDED_TO_PROJET";
+    typeFiche === TypeFiche.solution
+      ? isAdd
+        ? "FICHE_SOLUTION_ADDED_TO_PROJET"
+        : "FICHE_SOLUTION_REMOVED_FROM_PROJET"
+      : isAdd
+        ? "FICHE_DIAGNOSTIC_ADDED_TO_PROJET"
+        : "FICHE_DIAGNOSTIC_REMOVED_FROM_PROJET";
 
   try {
     const dataUpdate: ProjetFicheUpdater = {
@@ -45,7 +52,7 @@ export const updateFichesProjetAction = async ({
       userId: session.user.id,
     };
 
-    if (typeUpdate === TypeUpdate.add) {
+    if (isAdd) {
       await addProjetFiche(dataUpdate);
       await createAnalytic({
         context: {

@@ -16,7 +16,6 @@ export const ProjetInfoFormSchema = z.object({
       { invalid_type_error: "Le format de votre adresse est invalide." },
     )
     .optional(),
-  niveauMaturite: z.string().min(1, { message: "Veuillez sélectionner le niveau de maturité de votre projet" }),
   collectivite: CollectiviteFormSchema,
   statut: z.nativeEnum(StatutProjet).optional(),
 });

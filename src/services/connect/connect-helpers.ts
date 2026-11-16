@@ -2,7 +2,6 @@ import { ProjetWithAdminUser, UserWithAdminProjets, UserWithCollectivite } from 
 import { ConnectContact, ConnectProjet } from "./types";
 import { dateToStringWithoutTime } from "@/src/helpers/dateUtils";
 import { selectEspaceLabelByCode } from "@/src/helpers/type-espace-filter";
-import { getNiveauMaturiteByCode } from "@/src/helpers/maturite-projet";
 
 const PFMV_SOURCE = "PFMV";
 export const mapUserToConnectContact = (
@@ -32,7 +31,6 @@ export const mapProjetToConnectProjet = (projet: ProjetWithAdminUser): ConnectPr
   idProjet: `${projet.id}`,
   typeProjet: PFMV_SOURCE,
   nomProjet: projet.nom,
-  etape: getNiveauMaturiteByCode(projet.niveau_maturite)?.crmConnectLabel ?? "",
   dateCloture: dateToStringWithoutTime(projet.date_echeance, "iso") ?? "2100-01-01",
   codeCommuneInsee: mapCodeInseeForConnect(projet.collectivite.code_insee),
   typeEspace: selectEspaceLabelByCode(projet.type_espace) ?? "",

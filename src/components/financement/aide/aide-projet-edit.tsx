@@ -96,7 +96,7 @@ export const AideProjetEdit = memo(() => {
   );
   const { paginatedResults, currentPage, handlePageChange, itemsPerPage } = usePagination({
     data: filteredResults,
-    itemsPerPage: 9,
+    itemsPerPage: 12,
   });
 
   const handleFiltersChange = (key: FichesDiagnosticFiltersKey) => {
