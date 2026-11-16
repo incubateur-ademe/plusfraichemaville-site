@@ -44,7 +44,7 @@ export default function RetourExperienceCard({
               ? selectRex.image_principale
               : getStrapiImageUrl(selectRex.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)
           }
-          alt={selectRex.titre}
+          alt=""
           className={"w-full rounded-t-2xl object-cover"}
           unoptimized={!(typeof selectRex.image_principale === "string")}
         />

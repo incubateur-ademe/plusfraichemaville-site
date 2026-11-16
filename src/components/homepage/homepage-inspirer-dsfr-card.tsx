@@ -34,7 +34,7 @@ export const HomepageInspirerDSFRCard = ({ rex }: { rex: RexInHome }) => {
       imageComponent={
         <Image
           src={rex.image_principale}
-          alt={rex.titre}
+          alt=""
           className="h-40 w-full object-cover"
           sizes="50vw"
           width={0}

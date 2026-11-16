@@ -20,9 +20,9 @@ export const ClimadiagIndicateursTabButtons = ({ children }: PropsWithChildren) 
           src="/images/climadiag/climadiag-meteo-france.png"
           width={136}
           height={48}
-          alt="Logo Météo France Climadiag"
+          alt="Météo France Climadiag"
         />
-        <Image src="/images/climadiag/meteo-france.svg" width={48} height={48} alt="Logo Météo France" />
+        <Image src="/images/climadiag/meteo-france.svg" width={48} height={48} alt="Météo France" />
       </LinkWithoutPrefetch>
     </div>
   );

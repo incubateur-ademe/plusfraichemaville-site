@@ -13,7 +13,7 @@ export default function FicheSolutionTabOups({ ficheAttributes }: { ficheAttribu
       <div className="mt-10 rounded-2xl bg-dsfr-background-action-low-blue-france p-6 md:p-0">
         <div className="flex flex-row gap-6">
           <div className="ml-8 hidden w-56 rounded-xl md:flex">
-            <Image src={oupsImage} alt="Logo Oups" width={300} height={300} />
+            <Image src={oupsImage} alt="" width={300} height={300} />
           </div>
           <div className="mb-2 mr-10 text-[1.375rem] md:mt-8">
             Oups ! La solution que vous avez déployée ne fonctionne pas comme prévu ? Pas de panique !

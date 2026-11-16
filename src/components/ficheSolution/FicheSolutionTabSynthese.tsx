@@ -62,7 +62,7 @@ export default function FicheSolutionTabSynthese({
                 height={50}
                 src={`/images/cobenefices/${cobenefice.icone || "cobenefice-blank"}.svg`}
                 className="mr-4 flex-none"
-                alt={cobenefice.description}
+                alt=""
               />
               <div className="flex items-center text-dsfr-text-mention-grey">{cobenefice.description}</div>
             </div>

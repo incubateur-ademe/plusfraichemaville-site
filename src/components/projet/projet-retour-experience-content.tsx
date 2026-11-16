@@ -35,7 +35,7 @@ export const RetourExperienceContent = ({ retourExperience, isModal }: RetourExp
           height={384}
           className="block max-h-40 min-h-96 w-full object-cover md:max-h-96"
           src={getStrapiImageUrl(retourExperience.image_principale, STRAPI_IMAGE_KEY_SIZE.large)}
-          alt={retourExperience.titre || "image titre"}
+          alt=""
           unoptimized
         />
       </div>

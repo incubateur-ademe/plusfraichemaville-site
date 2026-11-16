@@ -24,7 +24,7 @@ export const EstimationMateriauFieldUnique = ({
             fill
             sizes="30vw md:5vw"
             src={getStrapiImageUrl(ficheSolutionAttributes.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
-            alt={""}
+            alt=""
             className={"rounded-2xl object-cover"}
             unoptimized
           />

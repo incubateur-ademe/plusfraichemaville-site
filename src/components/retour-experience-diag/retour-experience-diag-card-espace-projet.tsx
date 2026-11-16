@@ -35,7 +35,7 @@ export const RetourExperienceDiagCardEspaceProjet = ({
           height={267}
           className="h-full w-full rounded-t-2xl object-cover"
           src={getStrapiImageUrl(image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={titre || "image titre"}
+          alt=""
           unoptimized
         />
         <div className="absolute bottom-2 left-4 flex  gap-2 text-white">

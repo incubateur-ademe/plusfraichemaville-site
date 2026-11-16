@@ -70,7 +70,7 @@ export function EstimationMateriauxFicheSolutionRecap({
                       fill
                       sizes="(max-width: 768px) 80vw, 20vw"
                       src={getStrapiImageUrl(materiau.image, STRAPI_IMAGE_KEY_SIZE.small)}
-                      alt={materiau.titre}
+                      alt=""
                       className={"rounded-xl object-cover"}
                       unoptimized
                     />

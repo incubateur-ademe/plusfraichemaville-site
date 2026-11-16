@@ -32,7 +32,7 @@ export function FicheSolutionSmallCard({
           width={450}
           height={300}
           src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={ficheSolution.titre}
+          alt=""
           className={"h-full w-full rounded-t-2xl object-cover"}
           unoptimized
         />

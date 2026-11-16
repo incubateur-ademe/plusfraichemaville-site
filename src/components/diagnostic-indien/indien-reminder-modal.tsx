@@ -36,8 +36,8 @@ export default function IndienReminderModal({ projetId }: { projetId: number }) 
       </div>
 
       <modal.Component
-        title="Pour calculer vos indicateurs, vous aurez besoin d’observer l’espace à rafraîchir et d’en connaître le métré
-          suivant :"
+        title="Pour calculer vos indicateurs, vous aurez besoin d’observer l’espace à rafraîchir
+        et d’en connaître le métré suivant :"
         className="custom-modal md-modal"
         titleProps={{ className: "text-pfmv-navy" }}
       >
