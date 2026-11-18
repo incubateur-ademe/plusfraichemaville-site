@@ -49,11 +49,7 @@ export default function FicheSolutionInfoComparatif({
         <div className="mb-2 mt-6 flex w-full flex-row justify-between">
           <div className="mr-4 mt-auto text-dsfr-text-mention-grey">{ficheAttributes.libelle_avantage_solution}</div>
           <div className="float-right flex-none text-right">
-            <Image
-              className={temperatureFormat === "large" ? "h-12 w-12" : "h-10 w-10"}
-              src={baisseICUIcon}
-              alt="Baisse de l'ICU"
-            />
+            <Image className={temperatureFormat === "large" ? "h-12 w-12" : "h-10 w-10"} src={baisseICUIcon} alt="" />
           </div>
         </div>
       )}

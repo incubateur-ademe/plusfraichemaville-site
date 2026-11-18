@@ -47,7 +47,7 @@ export default function FicheSolutionCard({
           width={450}
           height={300}
           src={getStrapiImageUrl(ficheAttributes.image_principale, STRAPI_IMAGE_KEY_SIZE.medium)}
-          alt={ficheAttributes.titre}
+          alt=""
           className={"h-full w-full rounded-t-2xl object-cover"}
           unoptimized
         />

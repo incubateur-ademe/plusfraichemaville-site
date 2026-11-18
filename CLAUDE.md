@@ -216,7 +216,7 @@ Create one component per file.
 - **Strapi cache** TTL configured via `CMS_CACHE_TTL` env var
 - **Server Actions** are the primary data mutation pattern (not API routes)
 - **Middleware** handles both authentication and CSP headers
-- Always run icon updates before build: `react-dsfr update-icons`
+- Always run icon updates before build: `react-dsfr optimize-css`
 
 ## Testing Locally
 

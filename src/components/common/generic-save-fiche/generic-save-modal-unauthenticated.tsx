@@ -7,8 +7,7 @@ export const unauthenticatedSaveModal = createModal({
 });
 export const GenericSaveModalUnauthenticated = () => {
   return (
-    <unauthenticatedSaveModal.Component title="" className="custom-modal">
-      <h1 className="fr-h4">{"Connexion à l'espace projet"}</h1>
+    <unauthenticatedSaveModal.Component title="Connexion à l'espace projet" className="custom-modal">
       <SignInCard message="save" />
     </unauthenticatedSaveModal.Component>
   );

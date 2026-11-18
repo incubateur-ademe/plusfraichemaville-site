@@ -37,7 +37,7 @@ export default function FicheSolutionSmallHorizontalCard({
           width={450}
           height={300}
           src={getStrapiImageUrl(ficheSolution.image_principale, STRAPI_IMAGE_KEY_SIZE.small)}
-          alt={ficheSolution.titre}
+          alt=""
           className={"w-full rounded-l-2xl object-cover"}
           unoptimized
         />
