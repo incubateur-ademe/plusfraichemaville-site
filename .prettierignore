@@ -37,3 +37,5 @@ pnpm-lock.yaml
 yarn.lock
 
 src/generated/prisma/client/*
+src/generated/strapi/*
+src/lib/strapi/types/schema.graphql
