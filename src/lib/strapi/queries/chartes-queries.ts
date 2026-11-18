@@ -12,7 +12,7 @@ import { Charte } from "@/src/lib/strapi/types/api/charte";
 // Après toute modification d'une requête de ce fichier : `pnpm run strapi:codegen`.
 const GET_ALL_CHARTES = graphql(`
   query GetAllChartes($status: PublicationStatus, $retourExperienceFilters: RetourExperienceFiltersInput) {
-    chartes(status: $status, sort: ["annee_signature:desc", "nom_collectivite:asc"]) {
+    chartes(status: $status) {
       documentId
       nom_collectivite
       annee_signature
