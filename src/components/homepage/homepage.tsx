@@ -10,6 +10,7 @@ import { HomepageCitations } from "@/src/components/homepage/homepage-citations"
 import Image from "next/image";
 import { HomepagePartenaires } from "@/src/components/homepage/homepage-partenaires";
 import { HomepageFAQ } from "@/src/components/homepage/homepage-faq";
+import { HomepageCharte } from "@/src/components/homepage/homepage-charte";
 
 export const Homepage = () => {
   return (
@@ -34,7 +35,7 @@ export const Homepage = () => {
       <HomepageInspirer />
       <HomepageSurchauffeUrbaine />
       <HomepagePartenaires />
-      <Separator />
+      <HomepageCharte/>
       <HomepageFAQ />
       <HomepageNewsletter />
       <HomepageLinkedin />
