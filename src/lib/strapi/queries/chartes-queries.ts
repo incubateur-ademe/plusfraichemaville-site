@@ -17,12 +17,10 @@ const GET_ALL_CHARTES = graphql(`
       nom_collectivite
       annee_signature
       departement {
-        documentId
         code
         nom
       }
       retour_experiences(filters: $retourExperienceFilters) {
-        documentId
         slug
         titre
       }
