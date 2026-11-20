@@ -35,3 +35,27 @@ export const chartePourquoiSignerData = {
     },
   ],
 };
+
+export const charteEngagementCollectivite = [
+  {
+    numero: "1",
+    titre: "Passer rapidement à l'action",
+    description:
+      "Lancer ses projets de rafraîchissement urbain sans attendre, avec l'aide de Plus fraîche ma ville" +
+      " pour concevoir des aménagements adaptés à son territoire.",
+  },
+  {
+    numero: "2",
+    titre: "S'inscrire dans une démarche de long terme",
+    description:
+      "Faire du rafraîchissement urbain un sujet transversal au sein de la collectivité qui dépasse les" +
+      " projets ponctuels.",
+  },
+  {
+    numero: "3",
+    titre: "Partager son expérience",
+    description:
+      "Valoriser ses projets pour diffuser les bonnes pratiques entre collectivités, faire remonter ses" +
+      " retours pour améliorer Plus fraîche ma ville, et le faire connaître au sein de ses équipes.",
+  },
+];
