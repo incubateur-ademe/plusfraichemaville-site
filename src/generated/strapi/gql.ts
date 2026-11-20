@@ -1,6 +1,5 @@
 /* eslint-disable */
 import * as types from './graphql';
-import { GetAllChartesDocument } from "./graphql";
 
 
 
@@ -16,16 +15,16 @@ import { GetAllChartesDocument } from "./graphql";
  * Learn more about it here: https://the-guild.dev/graphql/codegen/plugins/presets/preset-client#reducing-bundle-size
  */
 type Documents = {
-    "\n  query GetAllChartes($status: PublicationStatus, $retourExperienceFilters: RetourExperienceFiltersInput) {\n    chartes(status: $status) {\n      documentId\n      nom_collectivite\n      annee_signature\n      departement {\n        documentId\n        code\n        nom\n      }\n      retour_experiences(filters: $retourExperienceFilters) {\n        documentId\n        slug\n        titre\n      }\n    }\n  }\n": typeof types.GetAllChartesDocument,
+    "\n  query GetAllChartes($status: PublicationStatus, $retourExperienceFilters: RetourExperienceFiltersInput) {\n    chartes(status: $status) {\n      documentId\n      nom_collectivite\n      annee_signature\n      departement {\n        code\n        nom\n      }\n      retour_experiences(filters: $retourExperienceFilters) {\n        slug\n        titre\n      }\n    }\n  }\n": typeof types.GetAllChartesDocument,
 };
 const documents: Documents = {
-    "\n  query GetAllChartes($status: PublicationStatus, $retourExperienceFilters: RetourExperienceFiltersInput) {\n    chartes(status: $status) {\n      documentId\n      nom_collectivite\n      annee_signature\n      departement {\n        documentId\n        code\n        nom\n      }\n      retour_experiences(filters: $retourExperienceFilters) {\n        documentId\n        slug\n        titre\n      }\n    }\n  }\n": types.GetAllChartesDocument,
+    "\n  query GetAllChartes($status: PublicationStatus, $retourExperienceFilters: RetourExperienceFiltersInput) {\n    chartes(status: $status) {\n      documentId\n      nom_collectivite\n      annee_signature\n      departement {\n        code\n        nom\n      }\n      retour_experiences(filters: $retourExperienceFilters) {\n        slug\n        titre\n      }\n    }\n  }\n": types.GetAllChartesDocument,
 };
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: string): typeof import('./graphql').GetAllChartesDocument;
+export function graphql(source: "\n  query GetAllChartes($status: PublicationStatus, $retourExperienceFilters: RetourExperienceFiltersInput) {\n    chartes(status: $status) {\n      documentId\n      nom_collectivite\n      annee_signature\n      departement {\n        code\n        nom\n      }\n      retour_experiences(filters: $retourExperienceFilters) {\n        slug\n        titre\n      }\n    }\n  }\n"): typeof import('./graphql').GetAllChartesDocument;
 
 
 export function graphql(source: string) {

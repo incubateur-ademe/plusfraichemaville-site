@@ -50,7 +50,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     },
     disabled: () => false,
     type: "diagnostic",
-    picto: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
+    className: <PictoTableauDeBordSelector pictoId="diagnostic" className="w-24" />,
     children: (
       <TableauDeBordSuiviWithText>
         Faire une analyse simplifiée ou un diagnostic approfondi de la surchauffe
@@ -63,7 +63,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
       projet?.fiches.filter((f) => f.type === FicheType.SOLUTION).length ? "100" : "0",
     disabled: () => false,
     type: "solution",
-    picto: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,
+    className: <PictoTableauDeBordSelector pictoId="solution" className="w-44" />,
     children: <TableauDeBordFichesSolutionImages />,
   },
   {
@@ -79,7 +79,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
       return !hasFichesSolutions(projet) && isEmpty(projet?.estimations);
     },
     type: "estimation",
-    picto: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,
+    className: <PictoTableauDeBordSelector pictoId="estimation" className="w-28" />,
     children: <TableauDeBordSuiviWithEstimation />,
     disabledChildren: <TableauDeBordSuiviEstimationDisabled />,
   },
@@ -88,7 +88,7 @@ const cards: TableauDeBordSuiviCardProps[] = [
     progress: (projet: ProjetWithRelations | undefined) => (!isEmpty(projet?.projetAides) ? "100" : "0"),
     disabled: () => false,
     type: "financement",
-    picto: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
+    className: <PictoTableauDeBordSelector pictoId="financement" className="w-24" />,
     children: (
       <TableauDeBordSuiviWithText>
         Identifier les aides et contacts nécessaires pour soutenir mon projet.

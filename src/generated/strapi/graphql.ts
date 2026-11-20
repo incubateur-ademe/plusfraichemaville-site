@@ -441,7 +441,7 @@ export type GetAllChartesQueryVariables = Exact<{
 }>;
 
 
-export type GetAllChartesQuery = { chartes: Array<{ documentId: string, nom_collectivite: string | null, annee_signature: string, departement: { documentId: string, code: string, nom: string | null }, retour_experiences: Array<{ documentId: string, slug: string, titre: string } | null> } | null> };
+export type GetAllChartesQuery = { chartes: Array<{ documentId: string, nom_collectivite: string | null, annee_signature: string, departement: { code: string, nom: string | null }, retour_experiences: Array<{ slug: string, titre: string } | null> } | null> };
 
 export class TypedDocumentString<TResult, TVariables>
   extends String
@@ -469,12 +469,10 @@ export const GetAllChartesDocument = new TypedDocumentString(`
     nom_collectivite
     annee_signature
     departement {
-      documentId
       code
       nom
     }
     retour_experiences(filters: $retourExperienceFilters) {
-      documentId
       slug
       titre
     }

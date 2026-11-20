@@ -13,14 +13,14 @@ export type AidesTerritoiresAideLine = {
 
 const AideLinePorteurAide = (aide: AidesTerritoiresAide, showMore?: boolean): AidesTerritoiresAideLine => ({
   title: "Porteur(s) d'aide",
-  picto: "ri-hand-coin-line",
+  className: "ri-hand-coin-line",
   description: aide.financers,
   showMore,
 });
 
 const AideLineSubvention = (aide: AidesTerritoiresAide, showMore?: boolean): AidesTerritoiresAideLine => ({
   title: "Subvention",
-  picto: "ri-percent-line",
+  className: "ri-percent-line",
   description: [
     `${aide.subvention_rate_lower_bound ? `Min: ${aide.subvention_rate_lower_bound}% - ` : ""}${
       aide.subvention_rate_upper_bound ? `Max: ${aide.subvention_rate_upper_bound}%` : ""
@@ -32,32 +32,32 @@ const AideLineSubvention = (aide: AidesTerritoiresAide, showMore?: boolean): Aid
 
 const AideLineRecurrence = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
   title: "Récurrence",
-  picto: "ri-loop-left-line",
+  className: "ri-loop-left-line",
   description: aide.recurrence,
 });
 
 const AideLineBeneficiaire = (aide: AidesTerritoiresAide, showMore?: boolean): AidesTerritoiresAideLine => ({
   title: "Bénéficiaires",
-  picto: "ri-user-add-line",
+  className: "ri-user-add-line",
   description: aide.targeted_audiences,
   showMore,
 });
 
 const AideLineZone = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
   title: "Zone géographique couverte par l'aide",
-  picto: "ri-map-pin-line",
+  className: "ri-map-pin-line",
   description: aide.perimeter,
 });
 
 const AideLineDateMaj = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
   title: "Dernières mises à jour",
-  picto: "ri-flashlight-line",
+  className: "ri-flashlight-line",
   description: aide.date_updated && dateToStringWithoutTime(new Date(aide.date_updated)),
 });
 
 const AideLineCalendrier = (aide: AidesTerritoiresAide): AidesTerritoiresAideLine => ({
   title: "Calendrier",
-  picto: "ri-calendar-2-line",
+  className: "ri-calendar-2-line",
   description: (
     <div className="flex items-center gap-3">
       {aide.submission_deadline && (

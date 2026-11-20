@@ -40,7 +40,14 @@ type StrapiTypedGraphQLCallConfig<TVariables> = Omit<StrapiGraphQLCallConfig, "v
 export const strapiTypedGraphQLCall = async <TResult, TVariables>(
   document: TypedDocumentString<TResult, TVariables>,
   config: StrapiTypedGraphQLCallConfig<TVariables>,
-): Promise<TResult | undefined> => (await strapiGraphQLCall(document.toString(), config)) as TResult | undefined;
+): Promise<TResult | undefined> => {
+  // Si une requête est modifiée sans relancer le codegen, `graphql(...)` ne la trouve pas et renvoie `{}`.
+  if (!(document instanceof String)) {
+    captureError(`Strapi query not found in generated documents, run \`pnpm run strapi:codegen\`. Tag: ${config.tag}.`);
+    return undefined;
+  }
+  return (await strapiGraphQLCall(document.toString(), config)) as TResult | undefined;
+};
 
 export const strapiGraphQLCall = async (query: string, config: StrapiGraphQLCallConfig) => {
   const defaultTag = "strapi";
