@@ -11,7 +11,8 @@ import Image from "next/image";
 import { getAllChartes } from "@/src/lib/strapi/queries/chartes-queries";
 import { getRegionCodeFromDepartementCode } from "@/src/helpers/departements-regions";
 import clsx from "clsx";
-import { CharteSignataires } from "@/src/components/charte/charte-signataires";
+import { CharteSignatairesSection } from "@/src/components/charte/charte-signataires-section";
+import Button from "@codegouvfr/react-dsfr/Button";
 
 export const metadata: Metadata = computeMetadata("Charte d'engagement pour le rafraîchissement urbain");
 
@@ -24,12 +25,12 @@ export default async function CharteEngagementIntroPage() {
 
   return (
     <>
-      <div className="fr-container">
+      <div className="fr-container--fluid">
         <h1 className="fr-h1 mx-auto mb-12 mt-8 max-w-xl text-center font-bold text-dsfr-text-title-grey">
           Charte d'engagement pour le rafraîchissement urbain
         </h1>
         <section className="fr-text--lg fr-mb-7w bg-dsfr-background-alt-blue-france ">
-          <div className="ml-12 flex flex-row gap-12">
+          <div className="fr-container mx-auto flex w-full flex-row gap-12">
             <div>
               <p className="mb-12 mt-12">
                 Engagez votre collectivité pour lutter durablement contre la surchauffe urbaine, aux côtés de l'ADEME
@@ -74,7 +75,7 @@ export default async function CharteEngagementIntroPage() {
             />
           </div>
         </section>
-        <section className="fr-text--lg fr-mb-7w ">
+        <section className="fr-text--lg fr-mb-7w fr-container mx-auto">
           <h2 className="fr-h2">Qu'est ce que la charte ?</h2>
           <p>
             La charte d'engagement pour le rafraîchissement urbain est un acte signé entre une collectivité et l'ADEME,
@@ -84,7 +85,7 @@ export default async function CharteEngagementIntroPage() {
             fraîche ma ville de l'ADEME.
           </p>
         </section>
-        <section className="fr-text--lg fr-mb-7w">
+        <section className="fr-text--lg fr-mb-7w fr-container">
           <h2 className="fr-h2">Pourquoi signer ?</h2>
           <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
             {chartePourquoiSignerData.blocs.map((bloc, index) => (
@@ -101,9 +102,9 @@ export default async function CharteEngagementIntroPage() {
             ))}
           </div>
         </section>
-        <section className="fr-text--lg fr-mb-7w">
+        <section className="fr-text--lg fr-mb-7w fr-container">
           <h2 className="fr-h2">À quoi s'engage la collectivité ?</h2>
-          <p>Par la signature de la charte, la collectivité s'engage à :</p>
+          <p className="mb-6">Par la signature de la charte, la collectivité s'engage à :</p>
           <div className="flex flex-wrap gap-x-12 gap-y-8">
             {charteEngagementCollectivite.map((engagement) => (
               <div className="min-w-64 flex-1" key={engagement.numero}>
@@ -114,7 +115,24 @@ export default async function CharteEngagementIntroPage() {
             ))}
           </div>
         </section>
-        <CharteSignataires chartes={chartes} />
+        <CharteSignatairesSection chartes={chartes} />
+        <section id="comment-signer" className="fr-mb-7w bg-dsfr-background-alt-blue-france py-8">
+          <div className="fr-container">
+            <h2 className="fr-h2">Comment signer ?</h2>
+            <p className="fr-text--lg">
+              Prenez contact avec l'équipe Plus fraîche ma ville : nous vous accompagnons dans toutes les étapes de la
+              signature.
+            </p>
+            <Button
+              linkProps={{ href: PFMV_ROUTES.CONTACT, prefetch: false }}
+              iconId="ri-arrow-right-line"
+              iconPosition="right"
+              size="large"
+            >
+              Contacter l'équipe
+            </Button>
+          </div>
+        </section>
       </div>
     </>
   );
