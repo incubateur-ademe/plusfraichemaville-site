@@ -11,6 +11,7 @@ import Image from "next/image";
 import { getAllChartes } from "@/src/lib/strapi/queries/chartes-queries";
 import { getRegionCodeFromDepartementCode } from "@/src/helpers/departements-regions";
 import clsx from "clsx";
+import { CharteSignataires } from "@/src/components/charte/charte-signataires";
 
 export const metadata: Metadata = computeMetadata("Charte d'engagement pour le rafraîchissement urbain");
 
@@ -113,6 +114,7 @@ export default async function CharteEngagementIntroPage() {
             ))}
           </div>
         </section>
+        <CharteSignataires chartes={chartes} />
       </div>
     </>
   );

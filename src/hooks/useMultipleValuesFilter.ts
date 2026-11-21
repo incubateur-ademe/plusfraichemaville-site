@@ -33,7 +33,9 @@ export const useMultipleValuesFilter = (filterName: string) => {
     router.push(pathname + "?" + params.toString(), { scroll: false });
   }, [filterName, pathname, router, searchParams]);
 
-  const isFilterCodeSelected = (filterCode: string) => searchParams.get(filterName)?.split(",").includes(filterCode);
+  const selectedFilterCodes = searchParams.get(filterName)?.split(",") ?? [];
 
-  return { changeFilter, clearFilter, isFilterCodeSelected };
+  const isFilterCodeSelected = (filterCode: string) => selectedFilterCodes.includes(filterCode);
+
+  return { changeFilter, clearFilter, isFilterCodeSelected, selectedFilterCodes };
 };
