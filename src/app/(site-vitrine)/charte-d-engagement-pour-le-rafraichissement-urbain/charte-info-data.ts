@@ -1,4 +1,4 @@
-export const chartePourquoiSignerData = {
+export const charteInfoData = {
   blocs: [
     {
       title: "Inscrire le rafraîchissement urbain à l'agenda politique",

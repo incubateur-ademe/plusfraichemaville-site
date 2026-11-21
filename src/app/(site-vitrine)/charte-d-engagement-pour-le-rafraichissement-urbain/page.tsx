@@ -5,14 +5,15 @@ import { PFMV_ROUTES } from "@/src/helpers/routes";
 import React from "react";
 import {
   charteEngagementCollectivite,
-  chartePourquoiSignerData,
-} from "@/src/app/(site-vitrine)/charte-d-engagement-pour-le-rafraichissement-urbain/charte-pourquoi-signer-data";
+  charteInfoData,
+} from "@/src/app/(site-vitrine)/charte-d-engagement-pour-le-rafraichissement-urbain/charte-info-data";
 import Image from "next/image";
 import { getAllChartes } from "@/src/lib/strapi/queries/chartes-queries";
 import { getRegionCodeFromDepartementCode } from "@/src/helpers/departements-regions";
 import clsx from "clsx";
 import { CharteSignatairesSection } from "@/src/components/charte/charte-signataires-section";
 import Button from "@codegouvfr/react-dsfr/Button";
+import { CharteFAQ } from "@/src/components/charte/charte-faq";
 
 export const metadata: Metadata = computeMetadata("Charte d'engagement pour le rafraîchissement urbain");
 
@@ -88,7 +89,7 @@ export default async function CharteEngagementIntroPage() {
         <section className="fr-text--lg fr-mb-7w fr-container">
           <h2 className="fr-h2">Pourquoi signer ?</h2>
           <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
-            {chartePourquoiSignerData.blocs.map((bloc, index) => (
+            {charteInfoData.blocs.map((bloc, index) => (
               <div
                 className="flex flex-col gap-3 bg-dsfr-background-alt-blue-france p-6 md:flex-row md:gap-6"
                 key={index}
@@ -133,6 +134,7 @@ export default async function CharteEngagementIntroPage() {
             </Button>
           </div>
         </section>
+        <CharteFAQ />
       </div>
     </>
   );
