@@ -1,6 +1,7 @@
 import { captureError, customCaptureException } from "@/src/lib/sentry/sentryCustomMessage";
 import { Media } from "@/src/lib/strapi/types/common/Media";
 import { customRevalidateTag } from "@/src/helpers/revalidate-tag-call";
+import type { TypedDocumentString } from "@/src/generated/strapi/graphql";
 
 const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL || "";
 const STRAPI_TOKEN = process.env.STRAPI_TOKEN || "";
@@ -29,6 +30,23 @@ type StrapiGraphQLCallConfig = {
   variables?: any;
   signal?: AbortSignal;
   tag: string;
+};
+
+type StrapiTypedGraphQLCallConfig<TVariables> = Omit<StrapiGraphQLCallConfig, "variables"> & {
+  variables?: TVariables;
+};
+
+// Version typée de `strapiGraphQLCall` pour les documents générés par graphql-codegen (`pnpm run strapi:codegen`).
+export const strapiTypedGraphQLCall = async <TResult, TVariables>(
+  document: TypedDocumentString<TResult, TVariables>,
+  config: StrapiTypedGraphQLCallConfig<TVariables>,
+): Promise<TResult | undefined> => {
+  // Si une requête est modifiée sans relancer le codegen, `graphql(...)` ne la trouve pas et renvoie `{}`.
+  if (!(document instanceof String)) {
+    captureError(`Strapi query not found in generated documents, run \`pnpm run strapi:codegen\`. Tag: ${config.tag}.`);
+    return undefined;
+  }
+  return (await strapiGraphQLCall(document.toString(), config)) as TResult | undefined;
 };
 
 export const strapiGraphQLCall = async (query: string, config: StrapiGraphQLCallConfig) => {

@@ -56,6 +56,7 @@ export default defineConfig([
       "postcss.config.js",
       "src/lib/strapi/types/*",
       "src/generated/prisma/client/*",
+      "src/generated/strapi/*",
       "tailwind.config.js",
       "next-env.d.ts",
     ],

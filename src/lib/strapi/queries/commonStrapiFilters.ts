@@ -13,6 +13,13 @@ const strapiShowStatuses = process.env.STRAPI_SHOW_STATUSES || "LIVE";
 // equivalent to the old `PREVIEW` behaviour.
 const strapiStatus = strapiShowStatuses === "LIVE" ? "PUBLISHED" : "DRAFT";
 
+// Helpers pour les requêtes typées (graphql-codegen), qui passent statut et filtres en variables GraphQL.
+export const getStrapiPublicationStatus = () => strapiStatus;
+
+// Équivalent de `StrapiFilter.publicationStateString()` pour les champs relationnels, sous forme de variable.
+export const getStrapiPublishedRelationFilter = () =>
+  strapiShowStatuses === "LIVE" ? { publishedAt: { notNull: true } } : undefined;
+
 export const solutionRetourExperienceFilter = () =>
   strapiShowStatuses === "LIVE"
     ? "(filters:{and: [{fiche_solution: {publishedAt: {notNull: true}}}" +
