@@ -103,17 +103,19 @@ export default async function CharteEngagementIntroPage() {
             ))}
           </div>
         </section>
-        <section className="fr-text--lg fr-mb-7w fr-container">
-          <h2 className="fr-h2">À quoi s'engage la collectivité ?</h2>
-          <p className="mb-6">Par la signature de la charte, la collectivité s'engage à :</p>
-          <div className="flex flex-wrap gap-x-12 gap-y-8">
-            {charteEngagementCollectivite.map((engagement) => (
-              <div className="min-w-64 flex-1" key={engagement.numero}>
-                <div className="mb-4 text-5xl font-extrabold">{engagement.numero}</div>
-                <div className="fr-h5 !mb-3">{engagement.titre}</div>
-                <p className="!mb-0">{engagement.description}</p>
-              </div>
-            ))}
+        <section className="fr-text--lg fr-mb-7w bg-pfmv-navy py-8">
+          <div className="fr-container !text-dsfr-text-inverted-grey">
+            <h2 className="fr-h2 !text-dsfr-text-inverted-grey">À quoi s'engage la collectivité ?</h2>
+            <p className="mb-6">Par la signature de la charte, la collectivité s'engage à :</p>
+            <div className="flex flex-wrap gap-x-12 gap-y-8">
+              {charteEngagementCollectivite.map((engagement) => (
+                <div className="min-w-64 flex-1" key={engagement.numero}>
+                  <div className="mb-4 text-5xl font-extrabold">{engagement.numero}</div>
+                  <div className="fr-h5 !mb-3 !text-dsfr-text-inverted-grey">{engagement.titre}</div>
+                  <p className="!mb-0">{engagement.description}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
         <CharteSignatairesSection chartes={chartes} />
@@ -135,6 +137,24 @@ export default async function CharteEngagementIntroPage() {
           </div>
         </section>
         <CharteFAQ />
+        <section id="comment-signer" className="fr-mb-7w bg-pfmv-navy py-8">
+          <div className="fr-container !text-dsfr-text-inverted-grey">
+            <h2 className="fr-h2 !text-dsfr-text-inverted-grey">Passez à l'action dès aujourd'hui</h2>
+            <p className="fr-text--lg">
+              Données climatiques de votre territoire, méthodes de diagnostic, solutions à mettre en œuvre, budget,
+              aides : concevez votre projet de rafraîchissement dans l'espace projet de Plus fraîche ma ville, service
+              public d'aide à la décision gratuit et accessible.
+            </p>
+            <Button
+              linkProps={{ href: PFMV_ROUTES.ESPACE_PROJET, prefetch: false }}
+              size="large"
+              className="bg-dsfr-text-inverted-grey text-pfmv-navy "
+              priority="secondary"
+            >
+              Créer mon projet
+            </Button>
+          </div>
+        </section>
       </div>
     </>
   );
