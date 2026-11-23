@@ -20,10 +20,16 @@ const PORTEE_INTERIEUR: PorteeBaisseTemperatureFicheSolution = {
   label: "Baisse médiane de la température intérieure",
 };
 
+const PORTEE_RESSENTIE: PorteeBaisseTemperatureFicheSolution = {
+  code: PorteeBaisseTemperature.Ressentie,
+  label: "Baisse maximale attendue de la température ressentie",
+};
+
 export const ALL_PORTEES_BAISSE_TEMPERATURE_FICHE_SOLUTION: PorteeBaisseTemperatureFicheSolution[] = [
   PORTEE_AIR,
   PORTEE_SURFACE,
   PORTEE_INTERIEUR,
+  PORTEE_RESSENTIE,
 ];
 
 export const getPorteeBaisseTemperatureLabelFromCode = (porteeCode?: string) =>
