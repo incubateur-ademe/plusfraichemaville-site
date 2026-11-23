@@ -33,7 +33,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
           >
             <Image
               src={getStrapiImageUrl(ficheDiagnostic.image_icone, STRAPI_IMAGE_KEY_SIZE.medium)}
-              alt={attributes.titre}
+              alt=""
               className="object-contain"
               width={120}
               height={120}

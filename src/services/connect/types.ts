@@ -15,7 +15,6 @@ export type ConnectProjet = {
   idProjet: string;
   typeProjet: string;
   nomProjet: string;
-  etape: string;
   dateCloture: string;
   codeCommuneInsee: string;
   typeEspace: string;

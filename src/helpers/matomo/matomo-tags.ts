@@ -18,7 +18,6 @@ export const MATOMO_ACTIONS = {
   SURCHAUFFE_URBAINE_COMPRENDRE: "surchauffe-urbaine-notions",
   SURCHAUFFE_URBAINE_TIMING: "surchauffe-urbaine-timing",
   SUBSCRIBE_WEBINAIRE: "webinaire-inscription",
-  UPDATE_MATURITE: "update-maturite",
   OPEN_AGENT_BUTTON: "open-agent-button",
   ANNUAIRE_COPY_EMAIL: "annuaire-copy-email",
   ANNUAIRE_COPY_TELEPHONE: "annuaire-copy-telephone",
@@ -91,12 +90,6 @@ export const WEBINAIRE_SUBSCRIPTION: MATOMO_EVENT = {
   category: MATOMO_CATEGORIES.SITE_PUBLIC,
   action: MATOMO_ACTIONS.SUBSCRIBE_WEBINAIRE,
   name: "Clic sur le lien d'inscription à un webinaire",
-};
-
-export const UPDATE_MATURITE: MATOMO_EVENT = {
-  category: MATOMO_CATEGORIES.ESPACE_PROJET,
-  action: MATOMO_ACTIONS.UPDATE_MATURITE,
-  name: "Changment de maturité via l'icone",
 };
 
 export const COPY_EMAIL: MATOMO_EVENT = {

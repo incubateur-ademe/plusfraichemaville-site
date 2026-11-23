@@ -22,7 +22,7 @@ export const GenericSaveButton = ({ modal, ...props }: GenericSaveFicheButtonBas
 
   const buttons = {
     authenticated: currentProjetId ? (
-      <GenericSaveAuthenticatedInsideProjet {...props} opener={modal?.open} />
+      <GenericSaveAuthenticatedInsideProjet {...props} />
     ) : (
       <GenericSaveAuthenticatedOutsideProjet {...props} opener={modal?.open} />
     ),

@@ -27,7 +27,7 @@ export default function FicheSolutionTabMateriaux({ ficheSolution: ficheSolution
                     fill
                     sizes="30vw"
                     src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
-                    alt={mat.titre}
+                    alt=""
                     className={"rounded-2xl object-cover"}
                     unoptimized
                   />
@@ -38,7 +38,7 @@ export default function FicheSolutionTabMateriaux({ ficheSolution: ficheSolution
                       <Image
                         fill
                         src={getStrapiImageUrl(mat.image, STRAPI_IMAGE_KEY_SIZE.small)}
-                        alt={mat.titre}
+                        alt=""
                         sizes="30vw"
                         className={"rounded-2xl object-cover"}
                         unoptimized
@@ -80,12 +80,12 @@ export default function FicheSolutionTabMateriaux({ ficheSolution: ficheSolution
           <hr className="mt-16 h-[1px] p-0" />
           <div className={"flex flex-col gap-1 md:flex-row md:gap-6"}>
             <div className="relative mb-8 mt-8 hidden h-28 w-28 flex-none md:flex">
-              <Image fill src={entretienIcon} alt="Coût d'entretien" sizes="33vw" />
+              <Image fill src={entretienIcon} alt="" sizes="33vw" />
             </div>
             <div className="mb-0 mt-8 flex grow flex-col text-dsfr-text-title-grey md:mb-8">
               <div className="mb-4 flex items-center gap-6">
                 <div className="relative flex h-28 w-28 flex-none md:hidden">
-                  <Image fill src={entretienIcon} alt="Coût d'entretien" sizes="80vw" />
+                  <Image fill src={entretienIcon} alt="" sizes="80vw" />
                 </div>
                 <div className="mb-2 text-2xl font-bold">{"Coût d'entretien"}</div>
               </div>

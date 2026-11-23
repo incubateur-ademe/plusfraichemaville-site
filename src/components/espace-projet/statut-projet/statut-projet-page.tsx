@@ -7,10 +7,10 @@ export const StatutProjetPage = () => {
     <>
       <section className="flex flex-wrap justify-between">
         <div className="max-w-[50rem]">
-          <h2 className="fr-h5 !mb-4">Comment se passe votre projet sur Plus fraîche ma ville ?</h2>
+          <h2 className="fr-h5 !mb-4">Avez-vous terminé d’utiliser Plus fraîche ma ville pour ce projet ?</h2>
           <p>
-            Vos retours sont précieux pour améliorer notre service et vous offrir un accompagnement personnalisé.
-            N'hésitez pas à mettre à jour régulièrement cette information.
+            Vos retours sont précieux pour améliorer notre service et vous offrir un accompagnement personnalisé. Vous
+            pouvez mettre à jour régulièrement cette information.
           </p>
         </div>
         <ProjetLastModification />

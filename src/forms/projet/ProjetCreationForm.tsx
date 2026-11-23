@@ -21,7 +21,6 @@ import AddressInputFormField from "@/src/components/common/address-input-form-fi
 import CommuneInputFormField from "@/src/components/common/CommuneInputFormField";
 import { ProjetVisibilityFormField } from "@/src/components/common/projet-visibility-form-field";
 import { typeEspaceOptions } from "@/src/helpers/type-espace-filter";
-import { niveauxMaturiteProjetOptions } from "@/src/helpers/maturite-projet";
 import MandatoryFieldsMention from "@/src/components/common/mandatory-fields-mention";
 import Tree from "@codegouvfr/react-dsfr/picto/Tree";
 import MapPin from "@codegouvfr/react-dsfr/picto/MapPin";
@@ -62,7 +61,6 @@ export const ProjetCreationForm = ({ showCancelButton = false }: { showCancelBut
       isPublic: true,
       nom: "",
       typeEspace: "",
-      niveauMaturite: "",
     },
     mode: "onTouched",
   });
@@ -81,7 +79,7 @@ export const ProjetCreationForm = ({ showCancelButton = false }: { showCancelBut
         fieldsToValidate = ["collectivite"];
         break;
       case 3:
-        fieldsToValidate = ["nom", "niveauMaturite"];
+        fieldsToValidate = ["nom"];
         break;
       default:
         break;
@@ -223,15 +221,6 @@ export const ProjetCreationForm = ({ showCancelButton = false }: { showCancelBut
                   asterisk={true}
                   disabled={isSubmitting}
                   className="mb-6"
-                />
-                <SelectFormField
-                  control={form.control}
-                  path="niveauMaturite"
-                  label="Où en êtes-vous dans votre projet ?"
-                  asterisk={true}
-                  options={niveauxMaturiteProjetOptions}
-                  placeholder="Sélectionnez un niveau d'avancement"
-                  disabled={isSubmitting}
                 />
               </div>
               <div className={`hidden flex-1 items-center justify-center md:flex`}>

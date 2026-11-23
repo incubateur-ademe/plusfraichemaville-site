@@ -11,7 +11,7 @@ type STATUT_PROJET_TYPE = {
 
 const STATUT_PROJET_TERMINE: STATUT_PROJET_TYPE = {
   statut: StatutProjet.termine,
-  buttonLabel: "J’ai terminé mon projet",
+  buttonLabel: "Oui, j'ai terminé",
   buttonIcon: "/images/espace-projet/statut/statut-projet-termine.svg",
   progressLabel: "Projet complété",
   progressIconId: "fr-icon-success-fill",
@@ -19,7 +19,7 @@ const STATUT_PROJET_TERMINE: STATUT_PROJET_TYPE = {
 
 const STATUT_PROJET_EN_COURS: STATUT_PROJET_TYPE = {
   statut: StatutProjet.en_cours,
-  buttonLabel: "Je n’ai pas fini",
+  buttonLabel: "Non, pas encore",
   buttonIcon: "/images/espace-projet/statut/statut-projet-en-cours.svg",
   progressLabel: "Projet en cours",
   progressIconId: "fr-icon-play-circle-fill",

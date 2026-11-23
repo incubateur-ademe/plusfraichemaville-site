@@ -321,10 +321,6 @@
   @apply rounded-[20px];
 }
 
-.custom-modal .fr-modal__title {
-  display: none;
-}
-
 .custom-modal .fr-container--fluid {
   @apply overflow-visible;
 }

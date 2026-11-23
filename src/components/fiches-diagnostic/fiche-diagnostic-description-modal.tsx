@@ -17,7 +17,6 @@ import { getCoutFiche } from "@/src/helpers/cout/cout-fiche-solution";
 import { getDelaiTravauxFiche } from "@/src/helpers/delaiTravauxFiche";
 import { Separator } from "@/src/components/common/separator";
 import { GenericSaveAuthenticatedInsideProjet } from "@/src/components/common/generic-save-fiche/generic-save-button-authenticated-inside-projet";
-import { notifications } from "@/src/components/common/notifications";
 import { RetourExperienceDiagCard } from "@/src/components/retour-experience-diag/retour-experience-diag-card";
 import { SplideController, SplideFrTranslation } from "../common/splide-controllers";
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
@@ -74,13 +73,10 @@ export const FicheDiagnosticDescriptionModal = () => {
   return (
     <>
       <modal.Component
-        title={
-          <span aria-hidden className="hidden">
-            {ficheDiagData?.titre}
-          </span>
-        }
+        title={<span aria-hidden>{ficheDiagData?.titre}</span>}
         size={isEmpty(rex) ? "medium" : "large"}
         className={clsx("custom-modal fiche-diagnostic-modal", !isEmpty(rex) && "l-modal")}
+        titleProps={{ className: "hidden", "aria-hidden": true }}
       >
         <div className="pb-4">
           {ficheDiagnostic && (
@@ -92,7 +88,6 @@ export const FicheDiagnosticDescriptionModal = () => {
                   <GenericSaveAuthenticatedInsideProjet
                     type={TypeFiche.diagnostic}
                     id={ficheDiagnostic?.documentId}
-                    opener={() => notifications("success", "FICHE_DIAGNOSTIC_ADDED_TO_PROJET")}
                     className="!absolute right-8 top-8"
                   />
                 )}
@@ -105,7 +100,7 @@ export const FicheDiagnosticDescriptionModal = () => {
                     src={getStrapiImageUrl(ficheDiagData?.image_icone, STRAPI_IMAGE_KEY_SIZE.small)}
                     width={55}
                     height={55}
-                    alt={ficheDiagData?.titre ?? ""}
+                    alt=""
                     unoptimized
                   />
                 </div>

@@ -28,7 +28,7 @@ export default function EstimationMateriauField({
             fill
             sizes="30vw md:5vw"
             src={getStrapiImageUrl(materiau.image, STRAPI_IMAGE_KEY_SIZE.small)}
-            alt={materiau.titre}
+            alt=""
             className={"rounded-2xl object-cover"}
             unoptimized
           />
