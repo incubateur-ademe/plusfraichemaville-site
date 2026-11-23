@@ -1,10 +1,8 @@
 import clsx from "clsx";
-import AnnuaireCardAccordion from "@/src/components/common/annuaire-card-accordion";
 import LinkWithoutPrefetch from "@/src/components/common/link-without-prefetch";
 import { CharteSignataire } from "@/src/components/charte/charte-helpers";
 import { PFMV_ROUTES } from "@/src/helpers/routes";
 import CardWithAccordion from "@/src/components/common/card-with-accordion";
-import Badge from "@codegouvfr/react-dsfr/Badge";
 import Tag from "@codegouvfr/react-dsfr/Tag";
 
 type CharteSignataireCardProps = {
@@ -16,7 +14,9 @@ export const CharteSignataireCard = ({ signataire, className }: CharteSignataire
   const retoursExperience = signataire.retour_experiences.filter((rex) => rex !== null);
   const departementLabel = [signataire.departement.nom, `(${signataire.departement.code})`].filter(Boolean).join(" ");
   const accordionTitle =
-    retoursExperience.length === 1 ? "Voir son retour d'expérience" : `Voir ses retours d'expérience (${retoursExperience.length})`;
+    retoursExperience.length === 1
+      ? "Voir son retour d'expérience"
+      : `Voir ses retours d'expérience (${retoursExperience.length})`;
 
   return (
     <div
@@ -26,7 +26,9 @@ export const CharteSignataireCard = ({ signataire, className }: CharteSignataire
       )}
     >
       <div className="p-4">
-        <Tag className="bg-dsfr-background-alt-blue-france text-pfmv-navy font-bold"  iconId="fr-icon-check-line">{signataire.annee_signature}</Tag>
+        <Tag className="bg-dsfr-background-alt-blue-france font-bold text-pfmv-navy" iconId="fr-icon-check-line">
+          {signataire.annee_signature}
+        </Tag>
         <div className="fr-h5 !mb-1">{signataire.nom_collectivite}</div>
         <div>{departementLabel}</div>
         <div>{signataire.regionLabel}</div>

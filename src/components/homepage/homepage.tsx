@@ -35,7 +35,7 @@ export const Homepage = () => {
       <HomepageInspirer />
       <HomepageSurchauffeUrbaine />
       <HomepagePartenaires />
-      <HomepageCharte/>
+      <HomepageCharte />
       <HomepageFAQ />
       <HomepageNewsletter />
       <HomepageLinkedin />

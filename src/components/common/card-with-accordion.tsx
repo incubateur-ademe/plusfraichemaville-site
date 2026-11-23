@@ -27,9 +27,7 @@ export default function CardWithAccordion({
         </button>
       </div>
       <div
-        className={clsx(
-          "fr-collapse !m-0 !mt-[-1rem] w-full !bg-dsfr-background-alt-blue-france !px-6 !pt-0",
-        )}
+        className={clsx("fr-collapse !m-0 !mt-[-1rem] w-full !bg-dsfr-background-alt-blue-france !px-6 !pt-0")}
         id={ariaId}
       >
         {children}
