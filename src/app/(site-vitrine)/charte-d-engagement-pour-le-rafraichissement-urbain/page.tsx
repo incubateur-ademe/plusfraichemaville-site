@@ -45,7 +45,8 @@ export default async function CharteEngagementIntroPage() {
                   <LinkWithoutPrefetch
                     className="fr-link fr-link--download"
                     download
-                    href="https://cdn.plusfraichemaville.fr/Guide_diagnostic_Surchauffe_Urbaine_202406.pdf"
+                    target="_blank"
+                    href="https://cdn.plusfraichemaville.fr/charte-engagement-pfmv-2026-07-16.pdf"
                   >
                     Lire la charte
                     <span className="fr-link__detail">PDF – 0.7 Mo</span>
