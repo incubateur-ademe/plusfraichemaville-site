@@ -19,6 +19,7 @@ export enum PorteeBaisseTemperature {
   Air = "air",
   Surface = "surface",
   Interieur = "interieur",
+  Ressentie = "ressentie",
 }
 export enum CoutEntretienUnite {
   MetreCarre = "metreCarre",
