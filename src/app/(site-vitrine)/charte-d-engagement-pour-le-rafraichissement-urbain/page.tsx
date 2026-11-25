@@ -92,13 +92,13 @@ export default async function CharteEngagementIntroPage() {
           <div className="grid w-full grid-cols-1 gap-10 md:grid-cols-2">
             {charteInfoData.blocs.map((bloc, index) => (
               <div
-                className="flex flex-col gap-3 bg-dsfr-background-alt-blue-france p-6 md:flex-row md:gap-6"
+                className="flex flex-col gap-3 bg-dsfr-background-alt-blue-france px-6 py-8 md:flex-row md:gap-6"
                 key={index}
               >
                 <i className={clsx("fr-icon--lg mr-2 !text-pfmv-navy", bloc.className)} aria-hidden="true" />
                 <div className="items-center">
-                  <div className="fr-h5 !mb-2 text-pfmv-navy">{bloc.title}</div>
-                  <div className="fr-text--xl">{bloc.description}</div>
+                  <h3 className="fr-h5 !mb-2 text-pfmv-navy">{bloc.title}</h3>
+                  <p className="fr-text--xl !mb-0">{bloc.description}</p>
                 </div>
               </div>
             ))}
@@ -112,7 +112,7 @@ export default async function CharteEngagementIntroPage() {
               {charteEngagementCollectivite.map((engagement) => (
                 <div className="min-w-64 flex-1" key={engagement.numero}>
                   <div className="mb-4 text-5xl font-extrabold">{engagement.numero}</div>
-                  <div className="fr-h5 !mb-3 !text-dsfr-text-inverted-grey">{engagement.titre}</div>
+                  <h3 className="fr-h5 !mb-3 !text-dsfr-text-inverted-grey">{engagement.titre}</h3>
                   <p className="!mb-0">{engagement.description}</p>
                 </div>
               ))}

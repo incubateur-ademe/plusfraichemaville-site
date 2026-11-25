@@ -15,7 +15,10 @@ export const CharteRegionFilter = ({ regions, totalCount, className }: CharteReg
     useMultipleValuesFilter(CHARTE_REGION_FILTER_NAME);
   const noRegionSelected = selectedFilterCodes.length === 0;
 
-  const tagStyle = (isSelected: boolean) => clsx("fr-tag whitespace-nowrap", isSelected && "fr-tag--dismiss");
+  const dismissableTagStyle = (isSelected: boolean) =>
+    clsx("fr-tag whitespace-nowrap", isSelected && "fr-tag--dismiss");
+  const tagStyle = (isSelected: boolean) =>
+    clsx("fr-tag whitespace-nowrap", isSelected && "!bg-pfmv-navy !text-dsfr-text-inverted-grey");
 
   return (
     <div className={clsx("flex flex-row flex-wrap gap-3", className)}>
@@ -33,7 +36,7 @@ export const CharteRegionFilter = ({ regions, totalCount, className }: CharteReg
           aria-checked={isFilterCodeSelected(region.code)}
           key={region.code}
           onClick={() => changeFilter(region.code)}
-          className={tagStyle(!!isFilterCodeSelected(region.code))}
+          className={dismissableTagStyle(!!isFilterCodeSelected(region.code))}
         >
           {region.label} ({region.count})
         </button>
