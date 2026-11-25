@@ -16,7 +16,23 @@ export const GenericSaveButtonElement = ({
   isSaved,
   labels,
   size = "medium",
+  variant = "default",
 }: GenericSaveFicheButtonBaseProps & Pick<ButtonProps, "size">) => {
+  if (variant === "primary-square") {
+    return (
+      <div className={clsx(className, "relative z-[1]")}>
+        {isSaved ? (
+          <Button onClick={update} priority="primary" size="large" iconId="fr-icon-check-line" iconPosition="right">
+            {labels?.saved || "Ajoutée au projet"}
+          </Button>
+        ) : (
+          <Button onClick={update} priority="primary" size="large">
+            {labels?.notSaved || "Ajouter au projet"}
+          </Button>
+        )}
+      </div>
+    );
+  }
   return (
     <div className={clsx(className, "relative z-[1]")}>
       {isSaved ? (

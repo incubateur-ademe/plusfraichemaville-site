@@ -12,7 +12,7 @@ import { getEchellesSpatialesByFicheDiagnostic } from "@/src/helpers/ficheDiagno
 import { getEchellesThermiquesByFicheDiagnostic } from "@/src/helpers/ficheDiagnostic/echelle-thermique-diagnostic";
 import { PublishInformation } from "@/src/components/common/publish-information";
 
-export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
+export const FicheDiagnosticHeaderOld = ({ ficheDiagnostic }: { ficheDiagnostic: FicheDiagnostic }) => {
   const attributes = ficheDiagnostic;
   const coutMin = attributes.cout_min;
   const coutMax = attributes.cout_max;

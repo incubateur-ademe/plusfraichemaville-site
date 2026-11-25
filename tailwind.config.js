@@ -32,6 +32,8 @@ module.exports = {
       "dsfr-background-contrast-grey-active": "var(--background-contrast-grey-active)",
       "dsfr-border-action-high-error": "var(--border-action-high-error)",
       "dsfr-background-contrast-yellow-tournesol-hover": "var(--background-contrast-yellow-tournesol-hover)",
+      "dsfr-background-contrast-yellow-tournesol": "var(--background-contrast-yellow-tournesol)",
+      "dsfr-yellow-moutarde-diagnostic": "var(--yellow-moutarde-850-200)",
       "dsfr-warning-425-625-hover": "var(--warning-425-625-hover)",
       "dsfr-background-flat-info": "var(--background-flat-info)",
       "dsfr-background-flat-orange-terre-battue": "var(--background-flat-orange-terre-battue)",

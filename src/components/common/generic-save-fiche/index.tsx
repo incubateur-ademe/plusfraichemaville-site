@@ -14,6 +14,7 @@ export type GenericSaveBaseProps = {
   withoutModal?: boolean;
   classNameButton?: string;
   className?: string;
+  variant?: "default" | "primary-square";
 };
 
 export const GenericSaveFiche = ({ ...props }: GenericSaveBaseProps) => {
