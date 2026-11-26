@@ -17,41 +17,48 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
   }
 
   return (
-    <>
-      <FicheDiagnosticBlocText title="Découvrir les projets de diagnostics réalisés" />
+    <div className="flex flex-col items-center bg-dsfr-background-alt-yellow-tournesol">
+      <FicheDiagnosticBlocText
+        title={
+          rex.length > 1
+            ? `Découvrir les ${rex.length} projets de diagnostic réalisés`
+            : "Découvrir le projet de diagnostic réalisé"
+        }
+      />
       <span className="mb-6 block">
         Consultez les retours d’expériences de collectivités qui ont mis en place cette méthode.
       </span>
 
-      <Splide
-        hasTrack={false}
-        options={{
-          autoWidth: true,
-          focus: 0,
-          omitEnd: true,
-          gap: "1.25rem",
-          drag: false,
-          pagination: false,
-          i18n: SplideFrTranslation,
-        }}
-        className="max-w-[60rem]"
-      >
-        <div className="px-6">
-          <SplideTrack className="py-5 !pl-1">
-            {rex?.map((r, index) => (
-              <SplideSlide key={index}>
-                <RetourExperienceDiagCard
-                  rex={r.retour_experience_diagnostic}
-                  className="h-full max-w-[27rem]"
-                  key={index}
-                />
-              </SplideSlide>
-            ))}
-          </SplideTrack>
-        </div>
-        <SplideController arrow="left" className="!left-0 top-[8.5rem] size-12" />
-        <SplideController arrow="right" className="!right top-[8.5rem] size-12" />
-      </Splide>
-    </>
+      <div className="fr-container">
+        <Splide
+          hasTrack={false}
+          options={{
+            autoWidth: true,
+            focus: 0,
+            omitEnd: true,
+            gap: "1.25rem",
+            drag: false,
+            pagination: false,
+            i18n: SplideFrTranslation,
+          }}
+        >
+          <div className="px-6">
+            <SplideTrack className="py-5 !pl-1">
+              {rex?.map((r, index) => (
+                <SplideSlide key={index}>
+                  <RetourExperienceDiagCard
+                    rex={r.retour_experience_diagnostic}
+                    className="h-full max-w-[27rem]"
+                    key={index}
+                  />
+                </SplideSlide>
+              ))}
+            </SplideTrack>
+          </div>
+          <SplideController arrow="left" className="!left-0 top-[14.5rem] size-12" />
+          <SplideController arrow="right" className="!right-0 top-[14.5rem] size-12" />
+        </Splide>
+      </div>
+    </div>
   );
 };

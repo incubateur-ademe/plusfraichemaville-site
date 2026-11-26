@@ -16,23 +16,31 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
   const attributes = ficheDiagnostic;
   const creditsImage = getCreditsImageForFicheDiagnostic(attributes);
   return (
-    <div className="fr-container">
-      <FicheDiagnosticBlocPresentation ficheDiagnostic={ficheDiagnostic} />
-      <Separator className="my-10 !h-[1px] !opacity-100" />
-      <div id="retour-experience-diag">
-        <FicheDiagnosticBlocRetourExperience ficheDiagnostic={ficheDiagnostic} />
+    <div>
+      <div className="fr-container">
+        <FicheDiagnosticBlocPresentation ficheDiagnostic={ficheDiagnostic} />
       </div>
-      <Separator className="my-10 !h-[1px] !opacity-100" />
-      <div id="mise-en-oeuvre">
+      <FicheDiagnosticBlocRetourExperience ficheDiagnostic={ficheDiagnostic} />
+      <div className="fr-container">
         <FicheDiagnosticMiseEnOeuvreBloc attributes={attributes} />
       </div>
-      <Separator className="my-10 !h-[1px] !opacity-100" />
-      {!!attributes.en_savoir_plus_description && (
-        <>
+      <div className="fr-container">
+        {!!attributes.en_savoir_plus_description && (
           <FicheDiagnosticBlocText title="En savoir plus" text={attributes.en_savoir_plus_description} />
-          <Separator className="my-10 !h-[1px] !opacity-100" />
-        </>
-      )}
+        )}
+        {!!attributes.partenaire && (
+          <div className="pb-12">
+            <FicheDiagnosticBlocText title="Crédits" text={attributes.partenaire} />
+          </div>
+        )}
+        {creditsImage.length > 0 && (
+          <>
+            <FicheDiagnosticBlocText title="Crédits images" />
+            <div>{creditsImage.join(", ")}</div>
+            <Separator className="my-10 !h-[1px] !opacity-100" />
+          </>
+        )}
+      </div>
       {!isEmpty(attributes.fiches_diagnostics_associees) && (
         <>
           <div>
@@ -46,19 +54,6 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
           </div>
           <Separator className="my-10 !h-[1px] !opacity-100" />
         </>
-      )}
-      {creditsImage.length > 0 && (
-        <>
-          <FicheDiagnosticBlocText title="Crédits images" />
-          <div>{creditsImage.join(", ")}</div>
-          <Separator className="my-10 !h-[1px] !opacity-100" />
-        </>
-      )}
-
-      {!!attributes.partenaire && (
-        <div className="pb-12">
-          <FicheDiagnosticBlocText title="Crédits" text={attributes.partenaire} />
-        </div>
       )}
     </div>
   );
