@@ -20,7 +20,7 @@ export const FicheDiagnosticMiseEnOeuvreBloc = ({ attributes }: { attributes: Fi
         >
           {meo?.map((m) => (
             <li key={m.titre} className="!pb-0 fr-text--xl font-bold">
-              <i className="fr-icon-success-fill fr-icon--sm mr-2 text-dsfr-action-high-red-hover" />
+              <i className="ri-checkbox-circle-line mr-2 text-picto-highlight-diagnostic" aria-hidden />
               <span className="fr-text--xl font-bold">{m.titre}</span>
               <CmsRichText label={m.description} className="fr-text--md font-normal mt-4" />
             </li>
