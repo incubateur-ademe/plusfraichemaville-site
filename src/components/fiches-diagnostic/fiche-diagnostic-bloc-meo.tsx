@@ -1,3 +1,5 @@
+import { CSSProperties } from "react";
+import clsx from "clsx";
 import CmsRichText from "../common/CmsRichText";
 import { FicheDiagnosticBlocText } from "./fiche-diagnostic-bloc-text";
 import { FicheDiagnostic } from "@/src/lib/strapi/types/api/fiche-diagnostic";
@@ -9,12 +11,18 @@ export const FicheDiagnosticMiseEnOeuvreBloc = ({ attributes }: { attributes: Fi
     <div>
       <FicheDiagnosticBlocText title="Mise en œuvre" />
       <div className="flex flex-col gap-8">
-        <ol className="list-inside">
+        <ol
+          className={clsx(
+            "grid list-inside grid-cols-1 gap-x-24 gap-y-12",
+            "md:grid-flow-col md:grid-cols-2 md:grid-rows-[repeat(var(--meo-rows),auto)]",
+          )}
+          style={{ "--meo-rows": Math.ceil((meo?.length ?? 0) / 2) } as CSSProperties}
+        >
           {meo?.map((m) => (
-            <li key={m.titre} className="mb-6 last:!mb-0">
-              <i className={"fr-icon-success-fill fr-icon--sm mr-2 text-dsfr-action-high-red-hover "} />
-              <span className="font-bold">{m.titre}</span>
-              <CmsRichText label={m.description} />
+            <li key={m.titre} className="!pb-0 fr-text--xl font-bold">
+              <i className="fr-icon-success-fill fr-icon--sm mr-2 text-dsfr-action-high-red-hover" />
+              <span className="fr-text--xl font-bold">{m.titre}</span>
+              <CmsRichText label={m.description} className="fr-text--md font-normal mt-4" />
             </li>
           ))}
         </ol>
