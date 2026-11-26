@@ -25,7 +25,7 @@ export const FicheDiagnosticHeader = ({ ficheDiagnostic }: { ficheDiagnostic: Fi
   ];
 
   return (
-    <div className="bg-dsfr-background-contrast-yellow-tournesol">
+    <div className="bg-dsfr-background-alt-yellow-tournesol">
       <div className="fr-container fr-pt-4w fr-pb-6w">
         <div className="mb-8 flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-2 text-sm uppercase">
