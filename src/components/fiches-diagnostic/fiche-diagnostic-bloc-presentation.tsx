@@ -30,7 +30,11 @@ export const FicheDiagnosticBlocPresentation = ({ ficheDiagnostic }: { ficheDiag
           iconId="ri-alert-line"
           titleAs="h2"
           className="mt-10"
-          classes={{title: "fr-h4",text: "ml-4", root: "before:text-dsfr-border-default-blue-cumulus bg-dsfr-beige-galet"}}
+          classes={{
+            title: "fr-h4",
+            text: "ml-4",
+            root: "before:text-dsfr-border-default-blue-cumulus bg-dsfr-beige-galet",
+          }}
           colorVariant="blue-cumulus"
           bodyAs="div"
         >
