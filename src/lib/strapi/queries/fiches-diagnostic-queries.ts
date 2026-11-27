@@ -2,7 +2,7 @@
 
 import { safeReturnStrapiEntities, safeReturnStrapiEntity } from "../helpers/strapiArrayUtils";
 import { strapiGraphQLCall } from "../strapiClient";
-import { StrapiFilter } from "./commonStrapiFilters";
+import { ficheDiagnosticRetourExperienceDiagnosticFilter, StrapiFilter } from "./commonStrapiFilters";
 import {
   CONTACT_FRAGMENT,
   FICHE_DIAGNOSTIC_CARD_INFO_FRAGMENT,
@@ -57,7 +57,7 @@ export const GET_FICHE_DIAGNOSTIC_COMPLETE_DATA = async (
     image_icone {
       ...ImageInfo
     }
-    lien_rex_diagnostics {
+    lien_rex_diagnostics ${ficheDiagnosticRetourExperienceDiagnosticFilter()} {
       documentId
       retour_experience_diagnostic {
         ...REXFicheDiagnosticCardInfo

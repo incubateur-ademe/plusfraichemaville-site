@@ -44,7 +44,7 @@ export const FicheDiagnosticBlocs = ({ ficheDiagnostic }: FicheDiagnosticBlocsPr
         )}
       </div>
       {!isEmpty(attributes.fiches_diagnostics_associees) && (
-        <div className="bg-dsfr-background-alt-yellow-tournesol fr-py-7w">
+        <div className="bg-dsfr-background-alt-yellow-tournesol fr-p-7w">
           <div className="fr-container flex flex-col items-center">
             <h2 className="fr-h2 !mb-0">
               {attributes.fiches_diagnostics_associees.length > 1

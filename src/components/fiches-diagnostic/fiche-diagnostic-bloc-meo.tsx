@@ -32,7 +32,7 @@ export const FicheDiagnosticMiseEnOeuvreBloc = ({ attributes }: { attributes: Fi
       </div>
       {attributes.materiel && (
         <div className="h-fit rounded-2xl bg-dsfr-beige-galet pb-8 pl-6 pr-4 pt-8">
-          <h2 className="text-lg font-bold">Matériel et données nécessaires</h2>
+          <h2 className="fr-h4">Matériel et données nécessaires</h2>
           <CmsRichText label={attributes.materiel} />
         </div>
       )}

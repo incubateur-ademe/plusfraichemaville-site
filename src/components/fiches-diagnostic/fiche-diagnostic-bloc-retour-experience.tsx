@@ -49,15 +49,15 @@ export const FicheDiagnosticBlocRetourExperience = ({ ficheDiagnostic }: { fiche
                   <SplideSlide key={index}>
                     <RetourExperienceDiagCard
                       rex={r.retour_experience_diagnostic}
-                      className="h-full max-w-[27rem]"
+                      className="h-full !w-[27rem]"
                       key={index}
                     />
                   </SplideSlide>
                 ))}
               </SplideTrack>
             </div>
-            <SplideController arrow="left" className="!left-0 size-12" />
-            <SplideController arrow="right" className="!right-0 size-12" />
+            <SplideController arrow="left" className="!left-0 top-1/2 size-12" />
+            <SplideController arrow="right" className="!right-0 top-1/2 size-12" />
           </div>
         </Splide>
       </div>
